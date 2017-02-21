@@ -56,10 +56,6 @@ void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) con
 	target.setView(view);
 }
 
-const MapData* Map::getWorldData() const {
-	return &m_mapData;
-}
-
 bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	World::collides(rec);
 	// additional : check for collision with map rect (y axis)

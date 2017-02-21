@@ -5,21 +5,9 @@
 #include "ResourceManager.h"
 #include "GUI/BitmapText.h"
 
-enum class GUIElement : int {
-	VOID = -1,
-	Character = 0,
-	Inventory,
-	Spellbook,
-	Journal,
-	Map
-};
-
 class GUITabButton : public GameObject {
 public:
-	GUITabButton(GUIElement element);
-
-	void setActive(bool active);
-	bool isActive() const;
+	GUITabButton();
 
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
@@ -29,24 +17,25 @@ public:
 
 	void setOnClick(const std::function<void()>& agent);
 	void setPosition(const sf::Vector2f& position) override;
+	void setActive(bool active);
+	void setTexture(const sf::Texture* tex, int x);
+	void setText(const std::string& text);
 	
 	bool isClicked() const;
-
-	GUIElement getElement() const;
+	bool isActive() const;
 
 	GameObjectType getConfiguredType() const override;
 
 public:
-	static const float SIZE;
-	static const float OFFSET;
+	static const int ICON_SIZE;
+	static const int SIZE;
+	static const int OFFSET;
 
 protected:
 	bool m_isActive = false;
 	bool m_isMouseOver = false;
 	bool m_isPressed = false;
 	bool m_isClicked = false;
-
-	GUIElement m_element;
 
 	sf::Sprite m_border;
 	sf::Sprite m_icon;

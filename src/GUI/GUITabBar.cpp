@@ -1,20 +1,15 @@
 #include "GUI/GUITabBar.h"
 
-#include "Level/LevelInterface.h"
-#include "Map/MapInterface.h"
 #include "GUI/WorldInterface.h"
 #include "GUI/GUIConstants.h"
 #include "GlobalResource.h"
 
-const float GUITabBar::BUTTON_MARGIN = 24.f;
+const int GUITabBar::BUTTON_MARGIN = 24;
+const int GUITabBar::WIDTH = 80;
 
-GUITabBar::GUITabBar(LevelInterface* _interface) {
-	m_levelInterface = _interface;
-	init();
-}
-
-GUITabBar::GUITabBar(MapInterface* _interface) {
-	m_mapInterface = _interface;
+GUITabBar::GUITabBar(WorldInterface* _interface, int size) {
+	m_worldInterface = _interface;
+	m_size = std::max(0, size);
 	init();
 }
 
@@ -26,29 +21,41 @@ GUITabBar::~GUITabBar() {
 }
 
 void GUITabBar::init() {
-	int n = 4;
-	if (m_mapInterface) {
-		n = 5;
-	}
-
-	WIDTH = 80.f;
-	HEIGHT = n * GUITabButton::SIZE + (n - 1) * BUTTON_MARGIN + 4 * GUIConstants::TEXT_OFFSET;
-	LEFT = GUIConstants::LEFT_BAR;
-	TOP = GUIConstants::TOP + 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - HEIGHT);
-
-	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
+	float height = m_size * GUITabButton::SIZE + (m_size - 1) * BUTTON_MARGIN + 4 * GUIConstants::TEXT_OFFSET;
+	
+	sf::FloatRect box(0, 0, static_cast<float>(WIDTH), height);
 	m_window = new Window(box, GUIOrnamentStyle::LARGE, GUIConstants::MAIN_COLOR, GUIConstants::ORNAMENT_COLOR);
-
-	float x = LEFT + 0.5f * (WIDTH - GUITabButton::SIZE);
-	float y = TOP + 2 * GUIConstants::TEXT_OFFSET;
-
-	for (int i = 0; i < n; ++i) {
-		GUITabButton *button = new GUITabButton(static_cast<GUIElement>(i));
-		button->setPosition(sf::Vector2f(x, y));
+	
+	for (int i = 0; i < m_size; ++i) {
+		GUITabButton* button = new GUITabButton();
 		m_buttons.push_back(button);
-
-		y += GUITabButton::SIZE + BUTTON_MARGIN;
 	}
+
+	setPosition(sf::Vector2f(0.f, 0.f));
+}
+
+void GUITabBar::setPosition(const sf::Vector2f& pos) {
+	m_window->setPosition(pos);
+
+	sf::Vector2f buttonPos;
+	buttonPos.x = pos.x + 0.5f * (WIDTH - GUITabButton::SIZE);
+	buttonPos.y = pos.y + 2 * GUIConstants::TEXT_OFFSET;
+	for (int i = 0; i < m_size; ++i) {
+		m_buttons[i]->setPosition(buttonPos);
+		buttonPos.y += GUITabButton::SIZE + BUTTON_MARGIN;
+	}
+}
+
+void GUITabBar::setButtonTexture(int index, const sf::Texture* tex, int x) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+
+	m_buttons[index]->setTexture(tex, x);
+}
+
+void GUITabBar::setButtonText(int index, const std::string& text) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+
+	m_buttons[index]->setText(text);
 }
 
 void GUITabBar::update(const sf::Time& frameTime) {
@@ -75,13 +82,13 @@ void GUITabBar::update(const sf::Time& frameTime) {
 	}
 }
 
-GUIElement GUITabBar::getActiveElement() const {
+int GUITabBar::getActiveElement() const {
 	for (size_t i = 0; i < m_buttons.size(); ++i) {
 		if (m_buttons[i]->isActive()) {
-			return static_cast<GUIElement>(i);
+			return static_cast<int>(i);
 		}
 	}
-	return GUIElement::VOID;
+	return -1;
 }
 
 void GUITabBar::render(sf::RenderTarget& target) {
@@ -93,14 +100,15 @@ void GUITabBar::render(sf::RenderTarget& target) {
 	}
 }
 
-void GUITabBar::show(GUIElement activeElement) {
+void GUITabBar::show(int index) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+
 	m_isVisible = true;
 
 	for (size_t i = 0; i < m_buttons.size(); ++i) {
 		m_buttons[i]->setActive(false);
 	}
-
-	int index = static_cast<int>(activeElement);
+	
 	m_buttons[index]->setActive(true);	
 }
 
@@ -117,8 +125,5 @@ bool GUITabBar::isVisible() const {
 }
 
 WorldInterface* GUITabBar::getInterface() const {
-	if (m_mapInterface == nullptr) {
-		return m_levelInterface;
-	}
-	return m_mapInterface;
+	return m_worldInterface;
 }

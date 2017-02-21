@@ -270,10 +270,6 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 	return m_dynamicTiles;
 }
 
-const LevelData* Level::getWorldData() const {
-	return &m_levelData;
-}
-
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);

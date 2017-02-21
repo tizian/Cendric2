@@ -1,52 +1,43 @@
 #include "GUI/GUITabButton.h"
 
 #include "GlobalResource.h"
-#include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
 
-const float GUITabButton::SIZE = 58.f;
-const float GUITabButton::OFFSET = 4.f;
+const int GUITabButton::ICON_SIZE = 50;
+const int GUITabButton::OFFSET = 4;
+const int GUITabButton::SIZE = ICON_SIZE + 2 * OFFSET;
 
-GUITabButton::GUITabButton(GUIElement element) {
+GUITabButton::GUITabButton() {
 	m_border.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND));
-	m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS));
-
-	m_background.setRadius(29.f);
+	
+	m_background.setRadius(0.5f * SIZE);
 	m_background.setFillColor(m_backgroundColor);
 	
-	int x = 50 * static_cast<int>(element);
-	m_icon.setTextureRect(sf::IntRect(x, 0, 50, 50));
+	m_icon.setTextureRect(sf::IntRect(0, 0, ICON_SIZE, ICON_SIZE));
 
 	setDebugBoundingBox(sf::Color::Blue);
 	setInputInDefaultView(true);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE - 2 * OFFSET, SIZE - 2 * OFFSET));
-
-	Key key;
-	if (element == GUIElement::Character) {
-		key = Key::CharacterInfo;
-	}
-	else if (element == GUIElement::Inventory) {
-		key = Key::Inventory;
-	}
-	else if (element == GUIElement::Spellbook) {
-		key = Key::Spellbook;
-	}
-	else if (element == GUIElement::Journal) {
-		key = Key::Journal;
-	}
-	else if (element == GUIElement::Map) {
-		key = Key::Map;
-	}
-	m_element = element;
-
-	m_inputKey.setString(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]));
+	
 	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ? 
 		GUIConstants::CHARACTER_SIZE_S :
 		GUIConstants::CHARACTER_SIZE_L);
 }
 
+void GUITabButton::setText(const std::string& text) {
+	m_inputKey.setString(text);
+}
+
+void GUITabButton::setTexture(const sf::Texture* tex, int x) {
+	if (tex == nullptr) return;
+	m_icon.setTexture(*tex);
+	sf::IntRect rect = m_icon.getTextureRect();
+	rect.left = x;
+	m_icon.setTextureRect(rect);
+}
+
 void GUITabButton::setPosition(const sf::Vector2f& position) {
-	sf::Vector2f innerPosition = position + sf::Vector2f(OFFSET, OFFSET);
+	sf::Vector2f innerPosition = position + sf::Vector2f(static_cast<float>(OFFSET), static_cast<float>(OFFSET));
 	m_border.setPosition(position);
 	m_icon.setPosition(innerPosition);
 	m_background.setPosition(position);
@@ -64,7 +55,9 @@ void GUITabButton::update(const sf::Time& frameTime) {
 		m_isPressed = false;
 		if (!m_isActive) {
 			m_background.setFillColor(m_backgroundColor);
-			m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS));
+			sf::IntRect rec = m_icon.getTextureRect();
+			rec.top = 0;
+			m_icon.setTextureRect(rec);
 		}
 	}
 	m_isClicked = false;
@@ -83,16 +76,18 @@ void GUITabButton::render(sf::RenderTarget& renderTarget) {
 
 void GUITabButton::setActive(bool active) {
 	m_isActive = active;
+	sf::IntRect rec = m_icon.getTextureRect();
 	if (m_isActive) {
 		m_background.setFillColor(m_activeColor);
 		m_border.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND_SELECTED));
-		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS_SELECTED));
+		rec.top = ICON_SIZE;
 	}
 	else {
 		m_background.setFillColor(m_backgroundColor);
 		m_border.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND));
-		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS));
+		rec.top = 0;
 	}
+	m_icon.setTextureRect(rec);
 }
 
 bool GUITabButton::isActive() const {
@@ -116,11 +111,13 @@ void GUITabButton::onLeftClick() {
 }
 
 void GUITabButton::onMouseOver() {
-	m_isMouseOver = true;
-	if (!m_isActive) {
+	if (!m_isActive && !m_isMouseOver) {
 		m_background.setFillColor(m_highlightColor);
-		m_icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS_SELECTED));
+		sf::IntRect rec = m_icon.getTextureRect();
+		rec.top = ICON_SIZE;
+		m_icon.setTextureRect(rec);
 	}
+	m_isMouseOver = true;
 }
 
 bool GUITabButton::isClicked() const {
@@ -129,10 +126,6 @@ bool GUITabButton::isClicked() const {
 
 void GUITabButton::setOnClick(const std::function<void()>& agent) {
 	m_executeOnClick = agent;
-}
-
-GUIElement GUITabButton::getElement() const {
-	return m_element;
 }
 
 GameObjectType GUITabButton::getConfiguredType() const {

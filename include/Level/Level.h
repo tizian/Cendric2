@@ -45,7 +45,7 @@ public:
 
 	const std::vector<GameObject*>* getMovableTiles() const;
 	const std::vector<GameObject*>* getDynamicTiles() const;
-	const LevelData* getWorldData() const;
+	const LevelData* getWorldData() const override { return &m_levelData; };
 
 	// executes the boss ending, either win=true or else if the player loses.
 	void executeBossEnding(bool win);

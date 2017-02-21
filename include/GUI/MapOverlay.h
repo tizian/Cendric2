@@ -6,14 +6,14 @@
 #include "TileMap.h"
 #include "BitmapText.h"
 
-class MapScreen;
-class MapMainCharacter;
+class WorldScreen;
+class MainCharacter;
 class MapOverlay;
 class Window;
 
 class WaypointMarker : public virtual AnimatedGameObject {
 public:
-	WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
+	WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -28,7 +28,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 private:
-	MapMainCharacter* m_mainChar;
+	MainCharacter* m_mainChar = nullptr;
 	MapOverlay* m_parent;
 	bool m_isMouseOver = false;
 	sf::Vector2f m_waypointPosition;
@@ -36,10 +36,10 @@ private:
 };
 
 // the map overlay, as displayed in a map
-// it takes its information from the corresponding map screen.
+// it takes its information from the corresponding world screen.
 class MapOverlay {
 public:
-	MapOverlay(MapScreen* screen);
+	MapOverlay(WorldScreen* screen);
 	~MapOverlay();
 
 	void show();
@@ -56,11 +56,9 @@ public:
 	static float LEFT;
 
 private:
-	MapScreen* m_screen;
+	WorldScreen* m_screen;
 
-	TileMap m_backgroundTileMap;
-	TileMap m_lightedForegroundTileMap;
-	TileMap m_foregroundTileMap;
+	sf::Sprite m_map;
 	TileMap m_fogOfWarTileMap;
 	bool m_explorable = false;
 

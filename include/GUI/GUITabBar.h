@@ -6,17 +6,14 @@
 #include "Window.h"
 #include "GUI/GUITabButton.h"
 
-class LevelInterface;
-class MapInterface;
 class WorldInterface;
 
 class GUITabBar {
 public:
-	GUITabBar(LevelInterface* _interface);
-	GUITabBar(MapInterface* _interface);
+	GUITabBar(WorldInterface* _interface, int size);
 	~GUITabBar();
 
-	void show(GUIElement activeElement);
+	void show(int index);
 	void hide();
 
 	bool isVisible() const;
@@ -24,7 +21,11 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	GUIElement getActiveElement() const;
+	void setPosition(const sf::Vector2f& pos);
+	void setButtonTexture(int index, const sf::Texture* tex, int x);
+	void setButtonText(int index, const std::string& text);
+
+	int getActiveElement() const;
 
 private:
 	WorldInterface* getInterface() const;
@@ -32,20 +33,15 @@ private:
 
 private:
 	bool m_isVisible = false;
+	int m_size = 0;
 
-	LevelInterface* m_levelInterface = nullptr;
-	MapInterface* m_mapInterface = nullptr;
-
+	WorldInterface* m_worldInterface;
 	std::vector<GUITabButton*> m_buttons;
-	
 	sf::Vector2f m_position;
 
 	Window* m_window = nullptr;
 
-	float LEFT;
-	float TOP;
-	float WIDTH;
-	float HEIGHT;
-
-	static const float BUTTON_MARGIN;
+public:
+	static const int WIDTH;
+	static const int BUTTON_MARGIN;
 };

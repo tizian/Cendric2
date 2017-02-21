@@ -10,8 +10,18 @@
 #include "GUI/Spellbook.h"
 #include "GUI/QuestLog.h"
 #include "GUI/GUITabBar.h"
+#include "GUI/MapOverlay.h"
 
 class WorldScreen;
+
+enum class GUIElement {
+	VOID = -1,
+	Character = 0,
+	Inventory,
+	Spellbook,
+	Journal,
+	Map
+};
 
 // abstract class for an interface in level or map
 class WorldInterface {
@@ -41,26 +51,23 @@ public:
 	Inventory* getInventory() const;
 
 protected:
+	void loadGuiSidebar();
+	void loadMapSidebar();
+
+protected:
 	WorldScreen* m_screen;
 	CharacterCore* m_core;
 
-	// <<< GUI TAB SIDEBAR >>>
-	GUITabBar* m_sidebar = nullptr;
-	void updateSidebar(const sf::Time& frameTime);
-
-	// <<< INVENTORY >>>
+	GUITabBar* m_guiSidebar = nullptr;
+	GUITabBar* m_mapSidebar = nullptr;
 	Inventory* m_inventory = nullptr;
-	void updateInventory(const sf::Time& frameTime);
-
-	// <<< CHARCTER INFO >>>
 	CharacterInfo* m_characterInfo = nullptr;
-	void updateCharacterInfo(const sf::Time& frameTime);
-	
-	// <<< SPELLBOOK >>>
 	Spellbook* m_spellbook = nullptr;
-	void updateSpellbook(const sf::Time& frameTime);
-
-	// <<< QUEST LOG >>>
 	QuestLog* m_questLog = nullptr;
-	void updateQuestLog(const sf::Time& frameTime);
+	MapOverlay* m_mapOverlay = nullptr;
+
+	template<typename G>
+	void updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type);
+
+	static Key getKeyFromGuiElement(GUIElement e);
 };

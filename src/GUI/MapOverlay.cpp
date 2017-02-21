@@ -1,22 +1,18 @@
 #include "GUI/MapOverlay.h"
 #include "GUI/Window.h"
-#include "Screens/MapScreen.h"
+#include "Screens/WorldScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
-#include "Map/MapMainCharacter.h"
+#include "MainCharacter.h"
 #include "GlobalResource.h"
 
 float MapOverlay::TOP = 30.f;
 float MapOverlay::LEFT = GUIConstants::LEFT;
 
-MapOverlay::MapOverlay(MapScreen* screen) :
+MapOverlay::MapOverlay(WorldScreen* screen) {
 	// copy those maps
-	m_backgroundTileMap(*screen->getWorld()->getBackgroundTileMap()),
-	m_lightedForegroundTileMap(*screen->getWorld()->getLightedForegroundTileMap()),
-	m_foregroundTileMap(*screen->getWorld()->getForegroundTileMap()) {
-
 	m_screen = screen;
 
-	const Map& map = *m_screen->getWorld();
+	const World& map = *m_screen->getWorld();
 
 	const float MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
 	const float MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
@@ -41,20 +37,14 @@ MapOverlay::MapOverlay(MapScreen* screen) :
 	m_position.x = m_boundingBox.left;
 	m_position.y = m_boundingBox.top;
 
-	m_backgroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
-	m_lightedForegroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
-	m_foregroundTileMap.setScale(sf::Vector2f(m_scale, m_scale));
+	m_map.setScale(m_scale, m_scale);
 
-	m_backgroundTileMap.setPosition(m_position);
-	m_lightedForegroundTileMap.setPosition(m_position);
-	m_foregroundTileMap.setPosition(m_position);
+	m_map.setPosition(m_position);
 
-	if (map.getWorldData()->explorable) {
-		m_fogOfWarTileMap.initFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
-		m_fogOfWarTileMap.setScale(sf::Vector2f(m_scale, m_scale));
-		m_fogOfWarTileMap.setPosition(m_position);
-		m_explorable = true;
-	}
+	m_fogOfWarTileMap.initFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
+	m_fogOfWarTileMap.setScale(sf::Vector2f(m_scale, m_scale));
+	m_fogOfWarTileMap.setPosition(m_position);
+	m_explorable = true;
 
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
@@ -83,20 +73,18 @@ MapOverlay::~MapOverlay() {
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	if (m_explorable) {
-		const Map& map = *m_screen->getWorld();
-		m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
-	}
+	const World& map = *m_screen->getWorld();
+	m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
 
-	m_mainCharMarker.setPosition(m_position + 
+	m_mainCharMarker.setPosition(m_position +
 		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
 
 	for (auto& wp : m_waypoints) {
 		wp->update(frameTime);
 	}
-	
+
 	m_window->update(frameTime);
-} 
+}
 
 void MapOverlay::reloadWaypoints() {
 	for (auto& wp : m_waypoints) {
@@ -116,7 +104,7 @@ void MapOverlay::reloadWaypoints() {
 			m_waypoints.push_back(marker);
 		}
 	}
-} 
+}
 
 bool MapOverlay::isVisible() const {
 	return m_isVisible;
@@ -125,13 +113,8 @@ bool MapOverlay::isVisible() const {
 void MapOverlay::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
-	target.draw(m_backgroundTileMap);
-	target.draw(m_lightedForegroundTileMap);
-	target.draw(m_foregroundTileMap);
-
-	if (m_explorable) {
-		target.draw(m_fogOfWarTileMap);
-	}
+	target.draw(m_map);
+	target.draw(m_fogOfWarTileMap);
 
 	for (auto& wp : m_waypoints) {
 		wp->render(target);
@@ -154,7 +137,7 @@ void MapOverlay::hide() {
 
 /////////// WAYPOINT MARKER /////////////
 
-WaypointMarker::WaypointMarker(MapMainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent) {
+WaypointMarker::WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent) {
 	m_parent = parent;
 	m_mainChar = mainChar;
 	m_waypointPosition = waypointPosition;
@@ -221,7 +204,7 @@ void WaypointMarker::onRightClick() {
 	m_mainChar->setPosition(sf::Vector2f(
 		m_waypointPosition.x + TILE_SIZE_F / 2.f - bb.width / 2.f,
 		m_waypointPosition.y - bb.height + TILE_SIZE_F / 2.f
-		));
+	));
 	g_resourceManager->playSound(GlobalResource::SOUND_TELEPORT);
 	m_parent->hide();
 }

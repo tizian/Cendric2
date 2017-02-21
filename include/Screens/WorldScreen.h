@@ -66,7 +66,7 @@ public:
 	// getter for the progress log of the interface
 	ProgressLog* getProgressLog();
 	// and for the main character
-	virtual GameObject* getMainCharacter() const = 0;
+	virtual MainCharacter* getMainCharacter() const = 0;
 	// and for the world
 	virtual const World* getWorld() const = 0;
 	// and for the world data

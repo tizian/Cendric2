@@ -16,9 +16,7 @@ public:
 	void loadForRenderTexture() override;
 	void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const override;
 
-	void drawFogOfWar(sf::RenderTarget& target, const sf::RenderStates& states) const;
-
-	const MapData* getWorldData() const;
+	const MapData* getWorldData() const override { return &m_mapData; };
 	
 	// checks collision with the collidable grid of that map
 	bool collides(WorldCollisionQueryRecord& rec) const override;

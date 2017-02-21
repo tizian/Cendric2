@@ -45,6 +45,8 @@ public:
 	const std::string& getMusicPath() const;
 	const std::string& getName() const;
 
+	virtual const WorldData* getWorldData() const = 0;
+
 protected:
 	// this pointer is set by the descendants (map and level)
 	WorldData* m_worldData;
