@@ -5,7 +5,6 @@
   <property name="bosslevel" value="res/level/boss_elysia/boss_elysia.lua"/>
   <property name="dimming" value="0.6"/>
   <property name="musicpath" value="res/music/boss_zeff.ogg"/>
-  <property name="name" value="BossElysia"/>
   <property name="tilesetpath" value="res/level/jacklighthouse/tileset_level_jacklighthouse.png"/>
   <property name="weather" value="rain"/>
  </properties>

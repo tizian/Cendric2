@@ -212,11 +212,11 @@ void CharacterCore::initializeLevelMaps(const std::string& level) {
 
 void CharacterCore::initializeMapMaps(const std::string& map) {
 	// if these entries for the given map already exist, an insert will do nothing.
-	m_data.waypointsUnlocked.insert({ map, std::set<int>() });
+	m_data.waypointsUnlocked.insert({ map, std::map<int, sf::Vector2f>() });
 	m_data.triggersTriggered.insert({ map, std::set<int>() });
 }
 
-std::map<std::string, std::vector<bool>>& CharacterCore::getExploredTiles() {
+const ExploredTiles& CharacterCore::getExploredTiles() const {
 	return m_data.tilesExplored;
 }
 
@@ -240,8 +240,8 @@ void CharacterCore::setTriggerTriggered(const std::string& world, int pos) {
 	m_data.triggersTriggered.at(world).insert(pos);
 }
 
-void CharacterCore::setWaypointUnlocked(const std::string& map, int pos) {
-	m_data.waypointsUnlocked.at(map).insert(pos);
+void CharacterCore::setWaypointUnlocked(const std::string& map, int id, const sf::Vector2f& pos) {
+	m_data.waypointsUnlocked.at(map).insert({ id, pos });
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {

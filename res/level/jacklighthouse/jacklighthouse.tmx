@@ -4,7 +4,6 @@
   <property name="backgroundlayers" value="-1.0,res/level/jacklighthouse/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/lighthouse.ogg"/>
-  <property name="name" value="JackLighthouse"/>
   <property name="tilesetpath" value="res/level/jacklighthouse/tileset_level_jacklighthouse.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_jacklighthouse" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">

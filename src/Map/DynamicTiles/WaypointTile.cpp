@@ -9,6 +9,12 @@ REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
 WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(new TooltipComponent(g_textProvider->getText("Waypoint"), this));
+
+	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
+	m_portPosition = sf::Vector2f(
+		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
+		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
+	);
 }
 
 void WaypointTile::init() {
@@ -45,7 +51,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 	MapDynamicTile::update(frameTime);
 	if (m_state == GameObjectState::Active) return;
 	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition);
+		m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition, m_portPosition);
 		m_screen->setTooltipText("WaypointActivated", COLOR_GOOD, true);
 		g_resourceManager->playSound(getSoundPath());
 		setActive();
@@ -61,11 +67,8 @@ void WaypointTile::onRightClick() {
 		m_screen->setNegativeTooltip("WaypointNotActive");
 		return;
 	}
-	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
-	m_mainChar->setPosition(sf::Vector2f(
-		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
-		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
-		));
+	
+	m_mainChar->setPosition(m_portPosition);
 	g_resourceManager->playSound(getSoundPath());
 }
 

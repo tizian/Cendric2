@@ -5,7 +5,6 @@
   <property name="bosslevel" value="res/level/boss_zeff/boss_zeff.lua"/>
   <property name="dimming" value="0.5"/>
   <property name="musicpath" value="res/music/boss_zeff.ogg"/>
-  <property name="name" value="BossZeff"/>
   <property name="tilesetpath" value="res/level/boss_zeff/tileset_level_boss_zeff.png"/>
   <property name="weather" value="rain"/>
  </properties>

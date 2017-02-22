@@ -5,7 +5,6 @@
   <property name="bosslevel" value="res/level/boss_khajag/boss_khajag.lua"/>
   <property name="dimming" value="0.6"/>
   <property name="musicpath" value="res/music/boss_khajag.ogg"/>
-  <property name="name" value="BossKhajag"/>
   <property name="tilesetpath" value="res/level/boss_khajag/tileset_level_boss_khajag.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_boss_khajag" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">

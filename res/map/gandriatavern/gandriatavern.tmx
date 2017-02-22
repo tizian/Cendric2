@@ -3,7 +3,6 @@
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
-  <property name="name" value="GandriaTavern"/>
   <property name="tilesetpath" value="res/map/gandriatavern/tileset_map_gandriatavern.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_gandriatavern" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">

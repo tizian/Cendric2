@@ -155,11 +155,14 @@ std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData&
 		waypointUnlocked.append(":");
 		waypointUnlocked.append(it.first);
 		for (auto it2 : it.second) {
-			waypointUnlocked.append("," + std::to_string(it2));
-		}
+			waypointUnlocked.append("," + std::to_string(it2.first));
+			waypointUnlocked.append("," + std::to_string(it2.second.x));
+			waypointUnlocked.append("," + std::to_string(it2.second.y));
+		}    
 		waypointUnlocked.append("\n");
 		waypointsUnlocked.append(waypointUnlocked);
 	}
+
 	return waypointsUnlocked;
 }
 
@@ -187,26 +190,30 @@ std::string CharacterCoreWriter::writeTilesExplored(const CharacterCoreData& dat
 		tiles.append(":");
 		tiles.append(it.first);
 		tiles.append(",");
+		tiles.append(std::to_string(it.second.first.x));
+		tiles.append(",");
+		tiles.append(std::to_string(it.second.first.y));
+		tiles.append(",");
 		CBits byte;
-		int iterations = static_cast<int>(std::floor(it.second.size() / 8.f) * 8);
+		int iterations = static_cast<int>(std::floor(it.second.second.size() / 8.f) * 8);
 		int i = 0;
 
 		for (; i < iterations; i += 8) {
-			byte.bits.b0 = it.second[i + 0];
-			byte.bits.b1 = it.second[i + 1];
-			byte.bits.b2 = it.second[i + 2];
-			byte.bits.b3 = it.second[i + 3];
-			byte.bits.b4 = it.second[i + 4];
-			byte.bits.b5 = it.second[i + 5];
-			byte.bits.b6 = it.second[i + 6];
-			byte.bits.b7 = it.second[i + 7];
+			byte.bits.b0 = it.second.second[i + 0];
+			byte.bits.b1 = it.second.second[i + 1];
+			byte.bits.b2 = it.second.second[i + 2];
+			byte.bits.b3 = it.second.second[i + 3];
+			byte.bits.b4 = it.second.second[i + 4];
+			byte.bits.b5 = it.second.second[i + 5];
+			byte.bits.b6 = it.second.second[i + 6];
+			byte.bits.b7 = it.second.second[i + 7];
 			tiles += byte.byte;
 		}
 
 		tiles.append(",");
 
-		for (; i < it.second.size(); ++i) {
-			tiles.append(std::to_string(it.second[i]));
+		for (; i < it.second.second.size(); ++i) {
+			tiles.append(std::to_string(it.second.second[i]));
 		}
 
 		tiles.append("\n");

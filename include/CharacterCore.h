@@ -81,7 +81,7 @@ public:
 	// initializes an empty boolean maps (waypoint unlocked) for a given map
 	void initializeMapMaps(const std::string& map);
 	// get explored tiles information
-	std::map<std::string, std::vector<bool>>& getExploredTiles();
+	const ExploredTiles& getExploredTiles() const;
 	// signal enemy kill
 	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted
@@ -91,7 +91,7 @@ public:
 	// signal chest looted
 	void setChestLooted(const std::string& level, int pos);
 	// signal waypoint unlocked
-	void setWaypointUnlocked(const std::string& map, int pos);
+	void setWaypointUnlocked(const std::string& map, int id, const sf::Vector2f& pos);
 	// signal trigger triggered
 	void setTriggerTriggered(const std::string& world, int pos);
 	// getter for quest data. If there is none for that id, returns nullptr

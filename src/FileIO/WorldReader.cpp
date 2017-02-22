@@ -16,10 +16,6 @@ bool WorldReader::checkData(WorldData& data) const {
 		logError("map size not set / invalid");
 		return false;
 	}
-	if (data.name.empty()) {
-		logError("map name not set / empty");
-		return false;
-	}
 	if (data.tileSetPath.empty()) {
 		logError("tileset path not set / empty");
 		return false;
@@ -619,18 +615,6 @@ bool WorldReader::readLightedForegroundTileLayer(const std::string& layer, World
 	foregroundLayer.push_back(std::stoi(layerData));
 
 	data.lightedForegroundTileLayers.push_back(foregroundLayer);
-	return true;
-}
-
-bool WorldReader::readMapName(tinyxml2::XMLElement* _property, WorldData& data) const {
-	// we've found the property "name"
-	const char* textAttr = nullptr;
-	textAttr = _property->Attribute("value");
-	if (textAttr == nullptr) {
-		logError("XML file could not be read, no value attribute found (map->properties->property->name=name).");
-		return false;
-	}
-	data.name = textAttr;
 	return true;
 }
 

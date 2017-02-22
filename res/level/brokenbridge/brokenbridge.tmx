@@ -4,7 +4,6 @@
   <property name="backgroundlayers" value="-1.0,res/level/brokenbridge/layer_inf.png,3.0,res/level/brokenbridge/layer_3.png,2.0,res/level/brokenbridge/layer_2.png"/>
   <property name="dimming" value="0.2"/>
   <property name="musicpath" value="res/music/brokenbridge.ogg"/>
-  <property name="name" value="BrokenBridge"/>
   <property name="tilesetpath" value="res/level/brokenbridge/tileset_level_brokenbridge.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_brokenbridge" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="399" columns="21">

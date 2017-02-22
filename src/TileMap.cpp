@@ -9,9 +9,8 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 	g_resourceManager->loadTexture(m_tilesetPath, ResourceType::Unique, this);
 	m_tileset = g_resourceManager->getTexture(data.tileSetPath);
 	if (m_tileset->getSize().x == 0 || m_tileset->getSize().y == 0) return false;
-	m_tilesize = sf::Vector2i(TILE_SIZE, TILE_SIZE);
-	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
-	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
+	m_size.x = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
+	m_size.y = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
 
 	// animated tileIDs
 	std::set<int> animatedTileIDs;
@@ -25,13 +24,13 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 		sf::VertexArray layer;
 
 		layer.setPrimitiveType(sf::Quads);
-		layer.resize(width * height * 4);
+		layer.resize(m_size.x * m_size.y * 4);
 
 		m_animatedTiles.insert({ count, std::vector<AnimatedTile*>() });
 
-		for (int i = 0; i < width; ++i) {
-			for (int j = 0; j < height; ++j) {
-				int tileNumber = layers[count][i + j * width];
+		for (int i = 0; i < m_size.x; ++i) {
+			for (int j = 0; j < m_size.y; ++j) {
+				int tileNumber = layers[count][i + j * m_size.x];
 
 				if (tileNumber == 0) {
 					// there is no tile
@@ -48,7 +47,7 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 				int tu = tileNumber % (m_tileset->getSize().x / (TILE_SIZE + 2 * TILE_BORDER));
 				int tv = tileNumber / (m_tileset->getSize().x / (TILE_SIZE + 2 * TILE_BORDER));
 
-				sf::Vertex *quad = &layer[(i + j * width) * 4];
+				sf::Vertex* quad = &layer[(i + j * m_size.x) * 4];
 
 				quad[0].position = sf::Vector2f(i * TILE_SIZE_F, j * TILE_SIZE_F);
 				quad[1].position = sf::Vector2f((i + 1) * TILE_SIZE_F, j * TILE_SIZE_F);
@@ -68,35 +67,30 @@ bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& 
 	return true;
 }
 
-void TileMap::initFogOfWar(const WorldData& data, CharacterCore* core) {
+void TileMap::initFogOfWar(const sf::Vector2i& mapSize) {
 	m_tilesetPath = "";
 	m_tileset = nullptr;
 
-	m_tilesize = sf::Vector2i(TILE_SIZE, TILE_SIZE);
-	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
-	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
+	m_size.x = static_cast<int>(mapSize.x / TILE_SIZE_F);
+	m_size.y = static_cast<int>(mapSize.y / TILE_SIZE_F);
 
 	m_layers.clear();
 	sf::VertexArray layer;
 	layer.setPrimitiveType(sf::Quads);
-	layer.resize(width * height * 4);
+	layer.resize(m_size.x * m_size.y * 4);
 	m_layers.push_back(layer);
 
 	m_animatedTiles.insert({ 0, std::vector<AnimatedTile*>() });	
 }
 
-void TileMap::updateFogOfWar(const WorldData& data, CharacterCore* core) {
-	int width = static_cast<int>(data.mapRect.width / TILE_SIZE_F);
-	int height = static_cast<int>(data.mapRect.height / TILE_SIZE_F);
+void TileMap::updateFogOfWar(const std::vector<bool>& tilesExplored) {
+	for (int k = 0; k < m_size.x * m_size.y; ++k) {
+		int i = k % m_size.x;
+		int j = k / m_size.y;
+		
+		bool discovered = tilesExplored[i + j * m_size.x];
 
-	for (int k = 0; k < width * height; ++k) {
-		int i = k % width;
-		int j = k / width;
-
-		std::vector<bool>& tilesExplored = core->getExploredTiles().at(data.id);
-		bool discovered = tilesExplored[i + j * width];
-
-		sf::Vertex *quad = &m_layers[0][(i + j * width) * 4];
+		sf::Vertex *quad = &m_layers[0][(i + j * m_size.x) * 4];
 		sf::Color color = discovered ? sf::Color::Transparent : sf::Color::Black;
 
 		quad[0].position = sf::Vector2f(i * TILE_SIZE_F, j * TILE_SIZE_F);
@@ -177,8 +171,3 @@ void TileMap::dispose() {
 		it.second.clear();
 	}
 }
-
-const sf::Vector2i& TileMap::getTilesize() const {
-	return m_tilesize;
-}
-

@@ -103,13 +103,17 @@ void GUITabBar::render(sf::RenderTarget& target) {
 void GUITabBar::show(int index) {
 	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
 
-	m_isVisible = true;
-
 	for (size_t i = 0; i < m_buttons.size(); ++i) {
 		m_buttons[i]->setActive(false);
 	}
 	
 	m_buttons[index]->setActive(true);	
+
+	show();
+}
+
+void GUITabBar::show() {
+	m_isVisible = true;
 }
 
 void GUITabBar::hide() {

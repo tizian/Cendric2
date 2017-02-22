@@ -1062,10 +1062,7 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 			return false;
 		}
 		std::string name = textAttr;
-		if (name.compare("name") == 0) {
-			if (!readMapName(_property, data)) return false;
-		}
-		else if (name.compare("backgroundlayers") == 0) {
+		if (name.compare("backgroundlayers") == 0) {
 			if (!readBackgroundLayers(_property, data)) return false;
 		}
 		else if (name.compare("tilesetpath") == 0) {

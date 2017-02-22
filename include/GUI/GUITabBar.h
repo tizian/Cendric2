@@ -14,6 +14,7 @@ public:
 	~GUITabBar();
 
 	void show(int index);
+	void show();
 	void hide();
 
 	bool isVisible() const;

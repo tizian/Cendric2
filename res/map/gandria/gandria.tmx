@@ -4,7 +4,6 @@
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
   <property name="musicpath" value="res/music/meadows.ogg"/>
-  <property name="name" value="Gandria"/>
   <property name="tilesetpath" value="res/map/gandria/tileset_map_gandria.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_gandria" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304" columns="48">

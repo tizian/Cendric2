@@ -183,7 +183,7 @@ bool CharacterCoreReader::readWeaponConfigurations(std::string& line, CharacterC
 		pos = line.find(';');
 
 		if (pos == std::string::npos || line.size() == 1) break;
-		
+
 		SpellID spell = static_cast<SpellID>(stoi(line));
 		if (spell < SpellID::VOID || spell >= SpellID::MAX) {
 			g_logger->logError("CharacterCoreReader", "Spell ID not recognized: " + std::to_string(static_cast<int>(spell)));
@@ -634,7 +634,7 @@ bool CharacterCoreReader::readEquippedNeck(std::string& line, CharacterCoreData&
 	data.equippedItems.at(ItemType::Equipment_neck) = line;
 	return true;
 }
-	
+
 bool CharacterCoreReader::readEquippedBody(std::string& line, CharacterCoreData& data) const {
 	data.equippedItems.at(ItemType::Equipment_body) = line;
 	return true;
@@ -750,9 +750,35 @@ bool CharacterCoreReader::readChestsLooted(std::string& line, CharacterCoreData&
 }
 
 bool CharacterCoreReader::readWaypointsUnlocked(std::string& line, CharacterCoreData& data) const {
-	std::set<int> layer;
+	std::map<int, sf::Vector2f> layer;
 	std::string id;
-	if (!readLevelStateLayer(line, layer, id)) return false;
+
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos) {
+		id = line;
+		layer.clear();
+		return true;
+	}
+
+	id = line.substr(0, pos);
+
+	while (pos != std::string::npos) {
+		line = line.substr(pos + 1);
+		sf::Vector2f v;
+		int id;
+		id = std::stoi(line);
+		pos = line.find(',');
+		if (pos == std::string::npos) return false;
+		line = line.substr(pos + 1);
+		v.x = std::stof(line);
+		pos = line.find(',');
+		if (pos == std::string::npos) return false;
+		line = line.substr(pos + 1);
+		v.y = std::stof(line);
+		pos = line.find(',');
+		layer[id] = v;
+	}
+
 	data.waypointsUnlocked.insert({ id, layer });
 	return true;
 }
@@ -767,12 +793,16 @@ bool CharacterCoreReader::readTriggersTriggered(std::string& line, CharacterCore
 
 bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData& data) const {
 	std::vector<bool> tiles;
+	sf::Vector2i mapSize;
 
 	std::size_t pos = line.find(',');
 	if (pos == std::string::npos || pos == 0) return false;
 
 	std::string levelID = line.substr(0, pos);
 	line = line.substr(pos + 1);
+
+	INT_AFTER_COMMA(line, mapSize.x);
+	INT_AFTER_COMMA(line, mapSize.y);
 
 	pos = line.find(',');
 	if (pos == std::string::npos) return false;
@@ -799,6 +829,6 @@ bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData
 		line.erase(0, 1);
 	}
 
-	data.tilesExplored.insert({ levelID, tiles });
+	data.tilesExplored.insert({ levelID, {mapSize, tiles} });
 	return true;
-}
+	}

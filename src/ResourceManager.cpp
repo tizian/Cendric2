@@ -64,6 +64,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_PARTICLE_CONFETTI, ResourceType::Global);
 
 	// load global miscanellous resources
+	loadTexture(GlobalResource::TEX_MAPMARKERS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_ITEMS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_LEVELITEMS, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPELLICONS, ResourceType::Global);
@@ -198,7 +199,10 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	const auto& it = m_textures.find(filename);
-	if (it == m_textures.end()) return nullptr;
+	if (it == m_textures.end()) {
+		g_logger->logError("ResourceManager", "Texture not found, try loading first: " + filename);
+		return nullptr;
+	}
 	return it->second;
 }
 
@@ -352,7 +356,6 @@ void ResourceManager::deleteLevelResources() {
 }
 
 void ResourceManager::loadMapResources() {
-	loadTexture(GlobalResource::TEX_MAPMARKERS, ResourceType::Map);
 	loadTexture(GlobalResource::TEX_DIALOGUE, ResourceType::Map);
 	loadTexture(GlobalResource::TEX_COOKING, ResourceType::Map);
 	loadSoundbuffer(GlobalResource::SOUND_TELEPORT, ResourceType::Map);

@@ -12,6 +12,8 @@
 #include "Structs/MerchantData.h"
 #include "Structs/WeatherData.h"
 
+typedef std::map<std::string, std::pair<sf::Vector2i, std::vector<bool>>> ExploredTiles;
+
 struct CharacterCoreData {
 	// savegame attributes
 	sf::Time timePlayed;
@@ -29,9 +31,9 @@ struct CharacterCoreData {
 	std::map<std::string, std::set<int>> enemiesKilled;
 	std::map<std::string, std::set<int>> itemsLooted;
 	std::map<std::string, std::set<int>> chestsLooted;
-	std::map<std::string, std::set<int>> waypointsUnlocked;
+	std::map<std::string, std::map<int, sf::Vector2f>> waypointsUnlocked;
 	std::map<std::string, std::set<int>> triggersTriggered;
-	std::map<std::string, std::vector<bool>> tilesExplored;
+	ExploredTiles tilesExplored;
 
 	// quest & npc progress
 	std::map<std::string, std::set<std::string>> conditionProgress;
@@ -89,9 +91,9 @@ const CharacterCoreData DEFAULT_CORE
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
 	std::map<std::string, std::set<int>>(),
+	std::map<std::string, std::map<int, sf::Vector2f>>(),
 	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::vector<bool>>(),
+	ExploredTiles(),
 	std::map<std::string, std::set<std::string>>(),
 	std::map<std::string, std::map<std::string, int>>(),
 	std::map<std::string, QuestState>(),

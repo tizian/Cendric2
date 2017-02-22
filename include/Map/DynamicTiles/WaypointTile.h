@@ -21,5 +21,6 @@ public:
 private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
+	sf::Vector2f m_portPosition;
 	int m_spawnPosition = -1;
 };

@@ -1,60 +1,29 @@
 #include "GUI/MapOverlay.h"
 #include "GUI/Window.h"
+#include "GUI/GUITabBar.h"
 #include "Screens/WorldScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "MainCharacter.h"
 #include "GlobalResource.h"
+#include "GUI/GUIConstants.h"
 
-float MapOverlay::TOP = 30.f;
-float MapOverlay::LEFT = GUIConstants::LEFT;
+const float MapOverlay::TOP = 30.f;
+const float MapOverlay::LEFT = GUIConstants::LEFT;
+const float MapOverlay::MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
+const float MapOverlay::MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
 
-MapOverlay::MapOverlay(WorldScreen* screen) {
-	// copy those maps
+MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	m_screen = screen;
+	m_mapTabBar = mapTabBar;
 
 	const World& map = *m_screen->getWorld();
-
-	const float MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
-	const float MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
-
-	sf::Vector2f mapSize(map.getWorldRect().width, map.getWorldRect().height);
-	// check out the limiting factor for our scale
-	if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
-		m_boundingBox.width = MAX_WIDTH;
-		m_scale = m_boundingBox.width / mapSize.x;
-		m_boundingBox.height = m_scale * mapSize.y;
-		m_boundingBox.left = LEFT;
-		m_boundingBox.top = (WINDOW_HEIGHT - m_boundingBox.height) / 2.f;
-	}
-	else {
-		m_boundingBox.height = MAX_HEIGHT;
-		m_scale = m_boundingBox.height / mapSize.y;
-		m_boundingBox.width = m_scale * mapSize.x;
-		m_boundingBox.top = TOP;
-		m_boundingBox.left = (WINDOW_WIDTH - m_boundingBox.width) / 2.f;
-	}
-
-	m_position.x = m_boundingBox.left;
-	m_position.y = m_boundingBox.top;
-
-	m_map.setScale(m_scale, m_scale);
-
-	m_map.setPosition(m_position);
-
-	m_fogOfWarTileMap.initFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
-	m_fogOfWarTileMap.setScale(sf::Vector2f(m_scale, m_scale));
-	m_fogOfWarTileMap.setPosition(m_position);
-	m_explorable = true;
 
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
 
-	m_title.setString(g_textProvider->getText(map.getName(), "location"));
-	m_title.setCharacterSize(16);
-	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
-
-	sf::FloatRect box(m_position.x - 1.f, m_position.y - 1.f, m_boundingBox.width + 2.f, m_boundingBox.height + 2.f);
-	m_window = new Window(box,
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	
+	m_window = new Window(sf::FloatRect(),
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANSPARENT,
 		GUIConstants::ORNAMENT_COLOR);
@@ -67,17 +36,25 @@ MapOverlay::~MapOverlay() {
 		delete wp;
 	}
 	m_waypoints.clear();
+
+	for (auto& m : m_maps) {
+		delete m;
+	}
+	m_maps.clear();
+
 	delete m_window;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+	auto* map = getCurrentMap();
+	if (map == nullptr) return;
 
-	const World& map = *m_screen->getWorld();
-	m_fogOfWarTileMap.updateFogOfWar(*map.getWorldData(), m_screen->getCharacterCore());
-
-	m_mainCharMarker.setPosition(m_position +
-		m_screen->getMainCharacter()->getCenter() * m_scale - sf::Vector2f(12.5f, 12.5f));
+	if (m_isOnCurrentMap) {
+		map->fogOfWarTileMap.updateFogOfWar(m_screen->getCharacterCore()->getExploredTiles().at(map->mapId).second);
+		m_mainCharMarker.setPosition(m_position +
+			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
+	}
 
 	for (auto& wp : m_waypoints) {
 		wp->update(frameTime);
@@ -86,23 +63,114 @@ void MapOverlay::update(const sf::Time& frameTime) {
 	m_window->update(frameTime);
 }
 
+
+void MapOverlay::setMap(const std::string& mapID) {
+	int index = 0;
+
+	for (auto& it : m_maps) {
+		if (it->mapId.compare(mapID) == 0) {
+			setMapIndex(index);
+			break;
+		}
+		index++;
+	}
+}
+
+void MapOverlay::setMapIndex(int index) {
+	if (index < 0 || index > static_cast<int>(m_maps.size()) - 1) return;
+
+	auto const& map = m_maps[index];
+
+	m_boundingBox = map->windowSize;
+	m_position.x = m_boundingBox.left;
+	m_position.y = m_boundingBox.top;
+
+	m_window->setSize(sf::Vector2f(m_boundingBox.width + 1.f, m_boundingBox.height + 1.f));
+	m_window->setPosition(sf::Vector2f(m_position.x - 1.f, m_position.y - 1.f));
+
+	map->map.setPosition(m_position);
+	map->fogOfWarTileMap.setPosition(m_position);
+	map->fogOfWarTileMap.updateFogOfWar(m_screen->getCharacterCore()->getExploredTiles().at(map->mapId).second);
+
+	m_title.setString(g_textProvider->getText(getMapName(map->mapId), "location"));
+	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
+
+	m_isOnCurrentMap = (m_screen->getWorldData()->id.compare(map->mapId) == 0);
+}
+
+void MapOverlay::reloadMaps() {
+	for (auto& m : m_maps) {
+		delete m;
+	}
+	m_maps.clear();
+
+	for (auto& explored : m_screen->getCharacterCore()->getData().tilesExplored) {
+		// load map textures
+		const std::string iconFilename = getMapIconFilename(explored.first);
+		const std::string mapFilename = getMapSpriteFilename(explored.first);
+
+		g_resourceManager->loadTexture(iconFilename, ResourceType::Global);
+		g_resourceManager->loadTexture(mapFilename, ResourceType::Global);
+
+		if (g_resourceManager->getTexture(iconFilename) == nullptr) continue;
+		if (g_resourceManager->getTexture(mapFilename) == nullptr) continue;
+
+		MapOverlayData* data = new MapOverlayData();
+		data->mapId = explored.first;
+		data->map = sf::Sprite(*g_resourceManager->getTexture(mapFilename));
+
+		sf::Vector2i mapSize = explored.second.first;
+		sf::Vector2f spriteSize = sf::Vector2f(data->map.getTextureRect().width, data->map.getTextureRect().height);
+
+		// check out the limiting factor for our scale
+		if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
+			data->windowSize.width = MAX_WIDTH;
+			data->scale = data->windowSize.width / mapSize.x;
+			data->windowSize.height = data->scale * mapSize.y;
+			data->windowSize.left = LEFT;
+			data->windowSize.top = (WINDOW_HEIGHT - data->windowSize.height) / 2.f;
+		}
+		else {
+			data->windowSize.height = MAX_HEIGHT;
+			data->scale = data->windowSize.height / mapSize.y;
+			data->windowSize.width = data->scale * mapSize.x;
+			data->windowSize.top = TOP;
+			data->windowSize.left = (WINDOW_WIDTH - data->windowSize.width) / 2.f;
+		}
+
+		m_position.x = m_boundingBox.left;
+		m_position.y = m_boundingBox.top;
+
+		data->fogOfWarTileMap.initFogOfWar(mapSize);
+		data->fogOfWarTileMap.setScale(data->scale, data->scale);
+		data->map.setScale(data->mapSize.x / data->windowSize.width, data->mapSize.y / data->windowSize.width);
+	}
+}
+
+MapOverlayData* MapOverlay::getCurrentMap() const {
+	if (m_currentMap < 0 || m_currentMap > static_cast<int>(m_maps.size())) return nullptr;
+	return m_maps[m_currentMap];
+}
+
+WorldScreen* MapOverlay::getScreen() const {
+	return m_screen;
+}
+
 void MapOverlay::reloadWaypoints() {
 	for (auto& wp : m_waypoints) {
 		delete wp;
 	}
 	m_waypoints.clear();
 
-	const std::vector<GameObject*>* tiles = m_screen->getObjects(GameObjectType::_DynamicTile);
-	for (auto& go : *tiles) {
-		if (WaypointTile* tile = dynamic_cast<WaypointTile*>(go)) {
-			if (tile->getGameObjectState() == GameObjectState::Idle) continue;
+	auto* map = getCurrentMap();
+	if (map == nullptr) return;
 
-			WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), tile->getPosition(), this);
-			marker->loadAnimation();
-			marker->setPosition(m_position + tile->getCenter() * m_scale -
-				sf::Vector2f(12.5f, 12.5f));
-			m_waypoints.push_back(marker);
-		}
+	for (auto& it : map->portPositions) {
+		WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), it, this);
+		marker->loadAnimation();
+		marker->setPosition(m_position + it * map->scale -
+			sf::Vector2f(12.5f, 12.5f));
+		m_waypoints.push_back(marker);
 	}
 }
 
@@ -110,17 +178,24 @@ bool MapOverlay::isVisible() const {
 	return m_isVisible;
 }
 
+bool MapOverlay::isOnCurrentMap() const {
+	return m_isOnCurrentMap;
+}
+
 void MapOverlay::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
+	auto* map = getCurrentMap();
+	if (map == nullptr) return;
 
-	target.draw(m_map);
-	target.draw(m_fogOfWarTileMap);
+	target.draw(map->map);
+	target.draw(map->fogOfWarTileMap);
 
 	for (auto& wp : m_waypoints) {
 		wp->render(target);
 	}
 
-	target.draw(m_mainCharMarker);
+	if (m_isOnCurrentMap)
+		target.draw(m_mainCharMarker);
 	target.draw(m_title);
 
 	m_window->render(target);
@@ -128,11 +203,35 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 void MapOverlay::show() {
 	reloadWaypoints();
+	m_mapTabBar->show();
 	m_isVisible = true;
 }
 
 void MapOverlay::hide() {
+	m_mapTabBar->hide();
 	m_isVisible = false;
+}
+
+std::string MapOverlay::getMapSpriteFilename(const std::string& mapID) {
+	std::string filename = mapID;
+	if (filename.size() < 4) return "";
+	return filename.substr(0, filename.size() - 4) + ".png";
+}
+
+std::string MapOverlay::getMapIconFilename(const std::string& mapID) {
+	std::string filename = mapID;
+	if (filename.size() < 4) return "";
+	return filename.substr(0, filename.size() - 4) + "_icon.png";
+}
+
+std::string MapOverlay::getMapName(const std::string& mapID) {
+	std::string name = mapID;
+	if (mapID.size() < 4) return "";
+	name = name.substr(0, name.size() - 4);
+
+	std::size_t pos = name.find_last_of('/');
+	if (pos == std::string::npos) return "";
+	return name.substr(pos + 1);
 }
 
 /////////// WAYPOINT MARKER /////////////
@@ -200,11 +299,19 @@ void WaypointMarker::render(sf::RenderTarget& target) {
 }
 
 void WaypointMarker::onRightClick() {
-	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
-	m_mainChar->setPosition(sf::Vector2f(
-		m_waypointPosition.x + TILE_SIZE_F / 2.f - bb.width / 2.f,
-		m_waypointPosition.y - bb.height + TILE_SIZE_F / 2.f
-	));
+	if (m_parent->isOnCurrentMap) {
+		m_mainChar->setPosition(m_waypointPosition);
+	}
+	else {
+		TriggerContent tc;
+		tc.type = TriggerContentType::MapEntry;
+		tc.s1 = m_parent->getCurrentMap()->mapId;
+		tc.i1 = m_waypointPosition.x;
+		tc.i2 = m_waypointPosition.y;
+
+		TriggerContent::executeTrigger(tc, m_parent->getScreen());
+	}
+	
 	g_resourceManager->playSound(GlobalResource::SOUND_TELEPORT);
 	m_parent->hide();
 }

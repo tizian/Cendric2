@@ -5,8 +5,6 @@
 #include "Structs/WorldData.h"
 #include "AnimatedTile.h"
 
-class CharacterCore;
-
 class TileMap : public sf::Drawable, public sf::Transformable {
 public:
 	bool load(const WorldData& data, const std::vector<std::vector<int> >& layers);
@@ -15,10 +13,8 @@ public:
 	void update(const sf::Time& frameTime);
 	void dispose();
 
-	void initFogOfWar(const WorldData& data, CharacterCore* core);
-	void updateFogOfWar(const WorldData& data, CharacterCore* core);
-
-	const sf::Vector2i& getTilesize() const;
+	void initFogOfWar(const sf::Vector2i& mapSize);
+	void updateFogOfWar(const std::vector<bool>& tilesExplored);
 
 private:
 	// there is a border around each tile of size 1, to avoid rounding problems
@@ -27,7 +23,7 @@ private:
 	std::map<int, std::vector<AnimatedTile*>> m_animatedTiles;
 	sf::Texture* m_tileset = nullptr;
 	sf::String m_tilesetPath;
-	sf::Vector2i m_tilesize;
+	sf::Vector2i m_size;
 
 	void readAnimatedTile(int tileNumber, int layerNr, int i, int j, const WorldData& data);
 };

@@ -3,7 +3,6 @@
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
-  <property name="name" value="JonathanHome"/>
   <property name="tilesetpath" value="res/map/jonathanhome/tileset_map_jonathanhome.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_jonathanhome" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">
@@ -54,10 +53,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="35" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="260"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="397" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
+ <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
@@ -249,7 +248,7 @@
   <object id="176" x="829" y="355" width="40" height="193"/>
  </objectgroup>
  <objectgroup name="door">
-  <object id="152" gid="421" x="450" y="550" width="50" height="50">
+  <object id="152" gid="456" x="450" y="550" width="50" height="50">
    <properties>
     <property name="key" value="ke_jonathanbasement"/>
    </properties>
@@ -270,7 +269,7 @@
   </object>
  </objectgroup>
  <objectgroup name="book">
-  <object id="177" gid="399" x="500" y="310" width="50" height="50">
+  <object id="177" gid="434" x="500" y="310" width="50" height="50">
    <properties>
     <property name="id" value="bo_schoolsofmagic"/>
    </properties>

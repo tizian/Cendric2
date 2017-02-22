@@ -16,7 +16,6 @@ protected:
 
 	// reads properties name, tile size, map size, tileset, dimming starting @map node
 	virtual bool readMapProperties(tinyxml2::XMLElement* map, WorldData& data) const;
-	bool readMapName(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readTilesetPath(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readMusicPath(tinyxml2::XMLElement* _property, WorldData& data) const;
 	bool readDimming(tinyxml2::XMLElement* _property, WorldData& data) const;
