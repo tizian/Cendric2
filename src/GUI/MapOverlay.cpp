@@ -6,6 +6,7 @@
 #include "MainCharacter.h"
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
+#include "Structs/LevelData.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -183,6 +184,11 @@ void MapOverlay::reloadWaypoints() {
 	}
 	m_waypoints.clear();
 
+	const LevelData* lData;
+	if (lData = dynamic_cast<const LevelData*>(m_screen->getWorldData())) {
+		if (lData->isBossLevel) return;
+	}
+
 	auto* map = getCurrentMap();
 	if (map == nullptr) return;
 
@@ -191,8 +197,8 @@ void MapOverlay::reloadWaypoints() {
 	for (auto& it : m_screen->getCharacterCore()->getData().waypointsUnlocked.at(map->mapId)) {
 		WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), it.second, this);
 		marker->loadAnimation();
-		marker->setPosition(m_position + it.second * map->scale - 
-			sf::Vector2f(10.f, 10.f));
+		marker->setPosition(m_position + (it.second + sf::Vector2f(TILE_SIZE_F * 0.19f, TILE_SIZE_F * 0.23f)) * map->scale -
+			sf::Vector2f(12.5f, 12.5f));
 		m_waypoints.push_back(marker);
 	}
 }
@@ -213,15 +219,15 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	target.draw(map->map);
 	target.draw(map->fogOfWarTileMap);
 
-	for (auto& wp : m_waypoints) {
-		wp->render(target);
-	}
-
 	if (m_isOnCurrentMap)
 		target.draw(m_mainCharMarker);
 	target.draw(m_title);
 
 	m_window->render(target);
+
+	for (auto& wp : m_waypoints) {
+		wp->render(target);
+	}
 }
 
 void MapOverlay::show() {

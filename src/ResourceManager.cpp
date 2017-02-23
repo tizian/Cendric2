@@ -114,6 +114,7 @@ void ResourceManager::init() {
 	loadSoundbuffer(GlobalResource::SOUND_GUI_QUESTPROGRESS, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_NEGATIVE, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_MISC_UNLOCK, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_TELEPORT, ResourceType::Global);
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {
@@ -358,7 +359,6 @@ void ResourceManager::deleteLevelResources() {
 void ResourceManager::loadMapResources() {
 	loadTexture(GlobalResource::TEX_DIALOGUE, ResourceType::Map);
 	loadTexture(GlobalResource::TEX_COOKING, ResourceType::Map);
-	loadSoundbuffer(GlobalResource::SOUND_TELEPORT, ResourceType::Map);
 }
 
 void ResourceManager::deleteMapResources() {

@@ -70,6 +70,14 @@ void MapScreen::load() {
 	m_currentMap.loadAfterMainChar();
 	MapMainCharacterLoader::loadEquipment(this);
 
+	if (m_currentMap.getWorldData()->explorable) {
+		ExploredTiles& tilesExplored = m_characterCore->getExploredTiles();
+		if (!contains(tilesExplored, m_mapID)) {
+			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
+			tilesExplored[m_mapID] = { size, std::vector<bool>(size.x * size.y, false) };
+		}
+	}
+
 	m_interface = new MapInterface(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	updateMonitoredQuestItems();
@@ -82,14 +90,6 @@ void MapScreen::load() {
 
 void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
-
-	if (m_currentMap.getWorldData()->explorable) {
-		ExploredTiles& tilesExplored = m_characterCore->getExploredTiles();
-		if (!contains(tilesExplored, m_mapID)) {
-			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-			tilesExplored[m_mapID] = { size, std::vector<bool>(size.x * size.y, false) };
-		}
-	}
 }
 
 void MapScreen::notifyConditionAdded(const Condition& condition) {
