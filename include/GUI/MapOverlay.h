@@ -19,7 +19,6 @@ struct MapOverlayData {
 	float scale;
 	sf::Sprite map;
 	TileMap fogOfWarTileMap;
-	std::vector<sf::Vector2f> portPositions;
 };
 
 class WaypointMarker : public virtual AnimatedGameObject {
@@ -71,7 +70,6 @@ public:
 
 	static std::string getMapSpriteFilename(const std::string& mapID);
 	static std::string getMapIconFilename(const std::string& mapID);
-	static std::string getMapName(const std::string& mapID);
 
 private:
 	void setMapIndex(int index);

@@ -158,19 +158,6 @@ items.looted:res/level/stonegarden/stonegarden.tmx,904,906,1034,1077,1151,1301,1
 items.looted:res/level/syrahbasement/syrahbasement.tmx,58,64,97,121,122,179,206,224,384,681,1001,1018,1021
 # chests looted in level:
 chests.looted:res/level/smallcrypt/smallcrypt.tmx
-# waypoints unlocked in map:
-waypoints.unlocked:res/map/elderhome/elderhome.tmx
-waypoints.unlocked:res/map/gandria/gandria.tmx,3367,4167,4188,4294,4308,4739,4772,5074,5124
-waypoints.unlocked:res/map/gandriabarracks/gandriabarracks.tmx
-waypoints.unlocked:res/map/gandriaprison/gandriaprison.tmx
-waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,983,996
-waypoints.unlocked:res/map/gandriatavern/gandriatavern.tmx
-waypoints.unlocked:res/map/jonathanhome/jonathanhome.tmx
-waypoints.unlocked:res/map/marshland/marshland.tmx,267
-waypoints.unlocked:res/map/meadows/meadows.tmx,748,1002,1387,2327,2496,3872,3893,4337
-waypoints.unlocked:res/map/necrohall/necrohall.tmx
-waypoints.unlocked:res/map/syrahhome/syrahhome.tmx
-waypoints.unlocked:res/map/tavern_1/tavern_1.tmx
 # triggers triggered in world:
 triggers.triggered:res/level/boss_khajag/boss_khajag.tmx
 triggers.triggered:res/level/brokenbridge/brokenbridge.tmx,104,112
@@ -199,11 +186,6 @@ triggers.triggered:res/map/meadows/meadows.tmx,107,130
 triggers.triggered:res/map/necrohall/necrohall.tmx
 triggers.triggered:res/map/syrahhome/syrahhome.tmx
 triggers.triggered:res/map/tavern_1/tavern_1.tmx
-# tiles explored in world:
-tiles.explored:res/map/gandria/gandria.tmx,                                                                                                                                                                                     ü        ‏        ÿÿ        ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ‏ÿ       üÿ       ‏ÿ       ‏ÿ       ‏ÿ      רÿÿ      üÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ      ‏ÿÿ‡?     ‏ÿÿÿÿ    ‏ÿÿÿÿ  üÿÿÿÿÿÿ ‏ÿÿÿÿÿÿÿÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿר?ÿÿÿÿÿÿÿנÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿ‏ÿ   ÿÿÿÿ     ÿרÿÿ     ÿנÿÿ     ÿ אÿ     ÿ ְ     ,
-tiles.explored:res/map/gandriasewers/gandriasewers.tmx,                                                                                  €ÿ נקÿÿ רÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ רÿÿÿ נÿ¿ÿ,
-tiles.explored:res/map/marshland/marshland.tmx,  רÿ    ְÿ     ‏ÿ   נÿÿ   €ÿÿÿ   üÿÿ   אÿÿÿ   ‏ÿÿ   אÿÿÿ   ‏ÿÿ   אÿÿÿ   ‏ÿÿ   אÿÿÿ    üÿÿ   €ÿ     נ                                                                                                                                                                                                                                                                    ,
-tiles.explored:res/map/meadows/meadows.tmx,  ü?  €?  €ÿ  נ  נÿ  ‏  üÿ ÿÿ  ÿ אÿÿ  ְÿ üÿ?  נÿ€ÿÿ  üÿאÿÿÿ  ÿ רÿÿ? ְÿÿ‏ÿÿ נÿחÿÿÿÿ üÿ‎ÿÿÿÿ  ÿ?ÿÿÿÿ?€ÿÿַÿÿÿÿנÿÿסÿÿÿÿ‏ÿüÿÿÿÿ€ÿÿÿÿÿÿ?אÿÿַÿÿÿÿרÿÿבÿÿÿÿ ‏ÿרÿÿÿאÿÿ‏ÿÿÿüÿÿ‡ÿÿÿÿ€ÿÿÿֱÿÿÿאÿÿ?אÿÿÿרÿÿ  ÿ? ‏ÿÿ אÿ€ÿÿÿ  üÿאÿÿ €ÿ רÿÿÿ‏ÿ ‏ÿÿÿֳÿÿûƒÿÿÿÿÿÿÿÿבÿÿÿÿÿÿÿÿרÿÿÿÿÿÿÿ?üÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿֳÿÿÿÿÿÿÿÿאÿÿÿÿÿÿÿ?רÿÿÿÿÿÿÿ‏ÿÿÿÿÿÿÿƒÿÿאÿÿÿÿÿאÿ?נÿÿÿÿ?רÿüÿÿÿÿ‏ÿÿÿ?אÿ€ÿנÿÿƒ? אÿüÿנ רÿÿÿ‏? ‏ÿֱÿ?€ÿ€ÿÿקÿÿןÿאÿÿÿÿÿÿÿרÿÿÿÿÿÿ ‏ÿÿÿÿÿÿ€ÿÿÿÿÿÿÿאÿÿÿÿÿÿÿנÿÿÿÿÿÿ üÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ€ÿÿÿÿÿÿÿ?ְÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿףÿÿÿÿÿÿÿÿ‏ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ אÿÿÿÿÿÿ? נÿÿÿÿÿÿ נÿÿÿÿÿÿ  רÿÿÿÿ?   üÿÿÿÿ   ר‏ÿÿ     ÿÿ?     ,0000
 # quest states:
 quest.state:a_new_trace,2
 quest.state:broken_bridge,3

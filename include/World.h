@@ -43,7 +43,8 @@ public:
 	const std::string& getID() const;
 	float getDimming() const;
 	const std::string& getMusicPath() const;
-	const std::string& getName() const;
+	std::string getName() const;
+	static std::string getNameFromId(const std::string id);
 
 	virtual const WorldData* getWorldData() const = 0;
 

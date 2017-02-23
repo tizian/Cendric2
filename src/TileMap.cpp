@@ -71,8 +71,7 @@ void TileMap::initFogOfWar(const sf::Vector2i& mapSize) {
 	m_tilesetPath = "";
 	m_tileset = nullptr;
 
-	m_size.x = static_cast<int>(mapSize.x / TILE_SIZE_F);
-	m_size.y = static_cast<int>(mapSize.y / TILE_SIZE_F);
+	m_size = mapSize;
 
 	m_layers.clear();
 	sf::VertexArray layer;
@@ -86,7 +85,7 @@ void TileMap::initFogOfWar(const sf::Vector2i& mapSize) {
 void TileMap::updateFogOfWar(const std::vector<bool>& tilesExplored) {
 	for (int k = 0; k < m_size.x * m_size.y; ++k) {
 		int i = k % m_size.x;
-		int j = k / m_size.y;
+		int j = k / m_size.x;
 		
 		bool discovered = tilesExplored[i + j * m_size.x];
 

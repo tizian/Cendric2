@@ -24,7 +24,9 @@ public:
 
 	void setPosition(const sf::Vector2f& pos);
 	void setButtonTexture(int index, const sf::Texture* tex, int x);
+	void setButtonOnClick(int index, const std::function<void()>& agent);
 	void setButtonText(int index, const std::string& text);
+	void setActiveElement(int index);
 
 	int getActiveElement() const;
 

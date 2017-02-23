@@ -22,13 +22,19 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
-	
+
 	m_window = new Window(sf::FloatRect(),
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANSPARENT,
 		GUIConstants::ORNAMENT_COLOR);
 
 	m_window->addCloseButton(std::bind(&MapOverlay::hide, this));
+
+	reloadMaps();
+
+	const std::string mapName = m_screen->getCharacterCore()->getData().currentMap;
+
+	setMap(mapName);
 }
 
 MapOverlay::~MapOverlay() {
@@ -92,10 +98,13 @@ void MapOverlay::setMapIndex(int index) {
 	map->fogOfWarTileMap.setPosition(m_position);
 	map->fogOfWarTileMap.updateFogOfWar(m_screen->getCharacterCore()->getExploredTiles().at(map->mapId).second);
 
-	m_title.setString(g_textProvider->getText(getMapName(map->mapId), "location"));
+	m_title.setString(g_textProvider->getText(World::getNameFromId(map->mapId), "location"));
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
 	m_isOnCurrentMap = (m_screen->getWorldData()->id.compare(map->mapId) == 0);
+	m_currentMap = index;
+
+	reloadWaypoints();
 }
 
 void MapOverlay::reloadMaps() {
@@ -104,26 +113,29 @@ void MapOverlay::reloadMaps() {
 	}
 	m_maps.clear();
 
+	int buttonIndex = 0;
+
 	for (auto& explored : m_screen->getCharacterCore()->getData().tilesExplored) {
-		// load map textures
-		const std::string iconFilename = getMapIconFilename(explored.first);
+		// load map texture
 		const std::string mapFilename = getMapSpriteFilename(explored.first);
+		const std::string iconFilename = getMapIconFilename(explored.first);
 
-		g_resourceManager->loadTexture(iconFilename, ResourceType::Global);
 		g_resourceManager->loadTexture(mapFilename, ResourceType::Global);
+		g_resourceManager->loadTexture(iconFilename, ResourceType::Global);
 
-		if (g_resourceManager->getTexture(iconFilename) == nullptr) continue;
 		if (g_resourceManager->getTexture(mapFilename) == nullptr) continue;
+		if (g_resourceManager->getTexture(iconFilename) == nullptr) continue;
 
 		MapOverlayData* data = new MapOverlayData();
 		data->mapId = explored.first;
 		data->map = sf::Sprite(*g_resourceManager->getTexture(mapFilename));
 
-		sf::Vector2i mapSize = explored.second.first;
-		sf::Vector2f spriteSize = sf::Vector2f(data->map.getTextureRect().width, data->map.getTextureRect().height);
-
+		data->mapSize = explored.second.first;
+		sf::Vector2f mapSize = sf::Vector2f(data->mapSize.x * TILE_SIZE_F, data->mapSize.y * TILE_SIZE_F);
+		sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map.getTextureRect().width), static_cast<float>(data->map.getTextureRect().height));
+		
 		// check out the limiting factor for our scale
-		if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
+		if (data->mapSize.x / MAX_WIDTH > data->mapSize.y / MAX_HEIGHT) {
 			data->windowSize.width = MAX_WIDTH;
 			data->scale = data->windowSize.width / mapSize.x;
 			data->windowSize.height = data->scale * mapSize.y;
@@ -141,9 +153,18 @@ void MapOverlay::reloadMaps() {
 		m_position.x = m_boundingBox.left;
 		m_position.y = m_boundingBox.top;
 
-		data->fogOfWarTileMap.initFogOfWar(mapSize);
+		data->fogOfWarTileMap.initFogOfWar(data->mapSize);
 		data->fogOfWarTileMap.setScale(data->scale, data->scale);
-		data->map.setScale(data->mapSize.x / data->windowSize.width, data->mapSize.y / data->windowSize.width);
+		data->map.setScale(data->windowSize.width / spriteSize.x, data->windowSize.height / spriteSize.y);
+
+		// load buttons
+		sf::Texture* tex = g_resourceManager->getTexture(iconFilename);
+		m_mapTabBar->setButtonTexture(buttonIndex, tex, 0);
+		m_mapTabBar->setButtonOnClick(buttonIndex, std::bind(&MapOverlay::setMap, this, data->mapId));
+
+		m_maps.push_back(data);
+
+		buttonIndex++;
 	}
 }
 
@@ -165,11 +186,13 @@ void MapOverlay::reloadWaypoints() {
 	auto* map = getCurrentMap();
 	if (map == nullptr) return;
 
-	for (auto& it : map->portPositions) {
-		WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), it, this);
+	if (!contains(m_screen->getCharacterCore()->getData().waypointsUnlocked, map->mapId)) return;
+
+	for (auto& it : m_screen->getCharacterCore()->getData().waypointsUnlocked.at(map->mapId)) {
+		WaypointMarker* marker = new WaypointMarker(m_screen->getMainCharacter(), it.second, this);
 		marker->loadAnimation();
-		marker->setPosition(m_position + it * map->scale -
-			sf::Vector2f(12.5f, 12.5f));
+		marker->setPosition(m_position + it.second * map->scale - 
+			sf::Vector2f(10.f, 10.f));
 		m_waypoints.push_back(marker);
 	}
 }
@@ -203,7 +226,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 void MapOverlay::show() {
 	reloadWaypoints();
-	m_mapTabBar->show();
+	m_mapTabBar->show(m_currentMap);
 	m_isVisible = true;
 }
 
@@ -222,16 +245,6 @@ std::string MapOverlay::getMapIconFilename(const std::string& mapID) {
 	std::string filename = mapID;
 	if (filename.size() < 4) return "";
 	return filename.substr(0, filename.size() - 4) + "_icon.png";
-}
-
-std::string MapOverlay::getMapName(const std::string& mapID) {
-	std::string name = mapID;
-	if (mapID.size() < 4) return "";
-	name = name.substr(0, name.size() - 4);
-
-	std::size_t pos = name.find_last_of('/');
-	if (pos == std::string::npos) return "";
-	return name.substr(pos + 1);
 }
 
 /////////// WAYPOINT MARKER /////////////
@@ -299,15 +312,15 @@ void WaypointMarker::render(sf::RenderTarget& target) {
 }
 
 void WaypointMarker::onRightClick() {
-	if (m_parent->isOnCurrentMap) {
+	if (m_parent->isOnCurrentMap()) {
 		m_mainChar->setPosition(m_waypointPosition);
 	}
 	else {
 		TriggerContent tc;
 		tc.type = TriggerContentType::MapEntry;
 		tc.s1 = m_parent->getCurrentMap()->mapId;
-		tc.i1 = m_waypointPosition.x;
-		tc.i2 = m_waypointPosition.y;
+		tc.i1 = static_cast<int>(m_waypointPosition.x);
+		tc.i2 = static_cast<int>(m_waypointPosition.y);
 
 		TriggerContent::executeTrigger(tc, m_parent->getScreen());
 	}

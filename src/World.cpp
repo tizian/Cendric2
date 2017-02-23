@@ -57,7 +57,7 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
 		if (rec.collisionDirection == CollisionDirection::Right) {
 			rec.safeLeft = std::min(rec.safeLeft, m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width);
-		} 
+		}
 		if (rec.collisionDirection == CollisionDirection::Left) {
 			rec.safeLeft = std::max(rec.safeLeft, m_worldData->mapRect.left);
 		}
@@ -129,6 +129,16 @@ const std::string& World::getMusicPath() const {
 	return m_worldData->musicPath;
 }
 
-const std::string& World::getName() const {
-	return m_worldData->name;
+std::string World::getName() const {
+	return getNameFromId(m_worldData->id);
+}
+
+std::string World::getNameFromId(const std::string id) {
+	if (id.size() < 4) return "";
+	std::string name = id;
+	name = name.substr(0, name.size() - 4);
+
+	std::size_t pos = name.find_last_of('/');
+	if (pos == std::string::npos) return "";
+	return name.substr(pos + 1);
 }

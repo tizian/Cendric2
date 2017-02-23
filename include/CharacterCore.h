@@ -81,7 +81,7 @@ public:
 	// initializes an empty boolean maps (waypoint unlocked) for a given map
 	void initializeMapMaps(const std::string& map);
 	// get explored tiles information
-	const ExploredTiles& getExploredTiles() const;
+	ExploredTiles& getExploredTiles();
 	// signal enemy kill
 	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted

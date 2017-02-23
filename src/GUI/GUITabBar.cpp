@@ -58,6 +58,12 @@ void GUITabBar::setButtonText(int index, const std::string& text) {
 	m_buttons[index]->setText(text);
 }
 
+void GUITabBar::setButtonOnClick(int index, const std::function<void()>& agent) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+
+	m_buttons[index]->setOnClick(agent);
+}
+
 void GUITabBar::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
@@ -80,6 +86,15 @@ void GUITabBar::update(const sf::Time& frameTime) {
 		}
 		m_buttons[nextActiveIndex]->setActive(true);
 	}
+}
+
+void GUITabBar::setActiveElement(int index) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+
+	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		m_buttons[i]->setActive(false);
+	}
+	m_buttons[index]->setActive(true);
 }
 
 int GUITabBar::getActiveElement() const {

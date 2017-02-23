@@ -34,6 +34,7 @@ public:
 	MapMainCharacter* getMainCharacter() const override;
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
+	void notifyWaypointUnlocked();
 
 private:
 	// deletes all overlays and sets them null

@@ -799,12 +799,17 @@ bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData
 	if (pos == std::string::npos || pos == 0) return false;
 
 	std::string levelID = line.substr(0, pos);
-	line = line.substr(pos + 1);
 
 	INT_AFTER_COMMA(line, mapSize.x);
 	INT_AFTER_COMMA(line, mapSize.y);
 
 	pos = line.find(',');
+
+	if (pos == std::string::npos) return false;
+	line = line.substr(pos + 1);
+
+	pos = line.find(',');
+
 	if (pos == std::string::npos) return false;
 
 	CBits byte;

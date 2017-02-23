@@ -84,10 +84,10 @@ void MapScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
 
 	if (m_currentMap.getWorldData()->explorable) {
-		std::map<std::string, std::vector<bool>>& tilesExplored = m_characterCore->getExploredTiles();
+		ExploredTiles& tilesExplored = m_characterCore->getExploredTiles();
 		if (!contains(tilesExplored, m_mapID)) {
 			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-			tilesExplored[m_mapID] = std::vector<bool>(size.x * size.y, false);
+			tilesExplored[m_mapID] = { size, std::vector<bool>(size.x * size.y, false) };
 		}
 	}
 }
@@ -137,6 +137,10 @@ bool MapScreen::exitWorld() {
 
 void MapScreen::notifyBackFromMenu() {
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
+}
+
+void MapScreen::notifyWaypointUnlocked() {
+	m_interface->reloadMapWaypoints();
 }
 
 void MapScreen::quicksave() {
@@ -269,7 +273,7 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 }
 
 void MapScreen::updateFogOfWar() {
-	std::vector<bool>& tilesExplored = m_characterCore->getExploredTiles().at(m_mapID);
+	auto& tilesExplored = m_characterCore->getExploredTiles().at(m_mapID);
 
 	int range = 6;
 
@@ -284,7 +288,7 @@ void MapScreen::updateFogOfWar() {
 			if (i < 0 || i >= size.x || j < 0 || j >= size.y) continue;
 
 			if ((x - i) * (x - i) + (y - j) * (y - j) < range * range) {
-				tilesExplored[i + j * size.x] = true;
+				tilesExplored.second[i + j * size.x] = true;
 			}
 		}
 	}

@@ -216,7 +216,7 @@ void CharacterCore::initializeMapMaps(const std::string& map) {
 	m_data.triggersTriggered.insert({ map, std::set<int>() });
 }
 
-const ExploredTiles& CharacterCore::getExploredTiles() const {
+ExploredTiles& CharacterCore::getExploredTiles() {
 	return m_data.tilesExplored;
 }
 

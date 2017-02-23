@@ -78,6 +78,10 @@ void WorldInterface::reloadSpellBook() {
 	m_spellbook->reload();
 }
 
+void WorldInterface::reloadMapWaypoints() {
+	m_mapOverlay->reloadWaypoints();
+}
+
 template<typename G>
 void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type) {
 	if (g_inputController->isKeyJustPressed(getKeyFromGuiElement(type))) {
@@ -139,7 +143,10 @@ void WorldInterface::loadGuiSidebar() {
 
 void WorldInterface::loadMapSidebar() {
 	delete m_mapSidebar;
-	int n = static_cast<int>(m_core->getData().tilesExplored.size());
+
+	auto const& tilesExplored = m_core->getData().tilesExplored;
+
+	int n = static_cast<int>(tilesExplored.size());
 	m_mapSidebar = new GUITabBar(this, n);
 
 	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);

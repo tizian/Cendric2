@@ -38,6 +38,8 @@ public:
 	virtual void reloadCharacterInfo();
 	// reload the spellbook
 	virtual void reloadSpellBook();
+	// reload the map overlay (waypoints)
+	virtual void reloadMapWaypoints();
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void renderAfterForeground(sf::RenderTarget& target);

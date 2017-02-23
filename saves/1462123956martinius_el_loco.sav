@@ -164,19 +164,6 @@ chests.looted:res/level/crystalcrypt/crystalcrypt.tmx
 chests.looted:res/level/forgottenpassage/forgottenpassage.tmx
 chests.looted:res/level/howlingcaverns/howlingcaverns.tmx
 chests.looted:res/level/jacklighthouse/jacklighthouse.tmx,147,155
-# waypoints unlocked in map:
-waypoints.unlocked:res/map/elderhome/elderhome.tmx
-waypoints.unlocked:res/map/gandria/gandria.tmx,685,705,1724,1859,3148,3367,3749,4167,4188,4198,4294,4308,4739,4772,5074,5124
-waypoints.unlocked:res/map/gandriabarracks/gandriabarracks.tmx
-waypoints.unlocked:res/map/gandriabrothel/gandriabrothel.tmx
-waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,226,633,646,983,996
-waypoints.unlocked:res/map/gandriatavern/gandriatavern.tmx
-waypoints.unlocked:res/map/jonathanhome/jonathanhome.tmx
-waypoints.unlocked:res/map/marshland/marshland.tmx,267
-waypoints.unlocked:res/map/meadows/meadows.tmx,1002,1387,2327,2496,3556,3872,3893,4337
-waypoints.unlocked:res/map/necrohall/necrohall.tmx
-waypoints.unlocked:res/map/syrahhome/syrahhome.tmx
-waypoints.unlocked:res/map/tavern_1/tavern_1.tmx
 # triggers triggered in world:
 triggers.triggered:res/level/boss_elysia/boss_elysia.tmx
 triggers.triggered:res/level/boss_khajag/boss_khajag.tmx
@@ -208,11 +195,6 @@ triggers.triggered:res/map/meadows/meadows.tmx,107,130
 triggers.triggered:res/map/necrohall/necrohall.tmx
 triggers.triggered:res/map/syrahhome/syrahhome.tmx
 triggers.triggered:res/map/tavern_1/tavern_1.tmx
-# tiles explored in world:
-tiles.explored:res/map/gandria/gandria.tmx,     üğÿ    ğÿğÿ    øÿÿ÷ÿ    şÿÿÿÿ    ÿÿÿÿÿ   €ÿÿÿÿÿ   €ÿÿÿÿÿ   €ÿÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ    €ÿÿÿÿ   Àÿÿÿÿ  üÿÀÿÿÿÿ  şÿÁÿÿÿÿ  ÿÿÁÿÿÿÿ  ÿÿıÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ?  ÿÿÿÿÿÿÿ?  ÿÿÿÿÿÿÿ  şÿÿÿÿÿÿ  üÿÿÿÿÿÿ  üÿÿÿÿÿÿ  şÿÿÿÿÿÿ  şÿÿÿÿÿ  ğÿÿÿÿÿÿÿ  øÿÿÿÿÿÿÿ üÿÿÿÿÿÿÿ üÿÿÿÿÿÿÿ üÿÿÿÿÿÿÿ üÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿÿ?üÿÿÿÿÿÿÿÿüÿÿÿÿàÿÿüÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿÿøÿÿÿÿÿÿÿÿşÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ?ş ÿÿÿÿÿÿÿ  ÿ€ÿÿÿ?   ÿ àÿ     ÿ àÿ     ÿ àÿ     ÿ À     ,
-tiles.explored:res/map/gandriasewers/gandriasewers.tmx,  şÿ  ÿÿ €ÿÿ? €ÿÿ €ÿÿ şÿÿ ÿÿÿ€ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿûÿÿÿÿñÿÿÿ,
-tiles.explored:res/map/marshland/marshland.tmx, Àÿÿ    şÿÿ   ğÿÿÿ   ğÿÿÿ  €ÿÿÿÿ   üÿÿÿ  Àÿÿÿÿ   üÿÿÿ  Àÿÿÿÿ   üÿÿÿ  Àÿÿÿ   üÿÿÿ  Àÿÿÿ   üÿÿ   €ÿ     ğ                                                                                                                                                                                                                                                                    ,
-tiles.explored:res/map/meadows/meadows.tmx,           ÿ      ÿÿ     àÿÿ     üÿ     €ÿÿ?     ğÿÿ     şÿÿ    €ÿÿÿ     ğÿÿ?     üÿÿ     ÿÿÿ    Àÿÿÿ    ğÿÿ?  ğ? üÿÿ  ş ÿÿÿ ÀÿÀÿÿÿ  ğÿğÿÿ?  ü üÿÿ  ÿ ÿÿÿ ÀÿÀÿÿÿ ğÿğÿÿ  ü üÿÿ  ÿ ÿÿÿ €ÿÀÿÿÿ À ğÿÿ     üÿÿ     ÿÿÿ    Àÿÿÿş  ğÿÿÀÿ øüÿÿøÿ?ÿÿÿÿ‡ÿÿÿÿÀÿÿÿÿÿÿÿ?ğÿÿÿÿÿÿÿüÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÀÿÿÿÿÿÿÿ?ğÿÿïÿÿÿÿüÿÿùÿÿÿÿÿÿşÿÿÿÿÀÿÿ‡ÿÿÿÿ?ğÿÿùÿÿÿÿüÿÿÿÿ?àÿ ÿÿÿÿÿ‡ Àÿÿÿÿğ? ğÿÿÿÿş üÿÿÿÿÿÿ ÿÿÿÿÿÿÿÀÿÿÿÿÿÿÿğÿÿÿÿÿÿÿ üÿÿÿÿÿÿ? ÿÿÿÿÿÿÿÀÿÿÿÿÿÿÿğÿÿÿÿÿÿÿüÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÀÿÿÿÿÿÿÿ?ğÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿóÿÿÿÿÿÿÿÿşÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ€ÿÿÿÿÿÿÿ?àÿÿÿÿÿÿÿğÿÿÿÿÿÿÿ øÿÿÿÿÿÿ  €ÿÿÿÿÿ     şÿ      ÿÿ     ,0000
 # quest states:
 quest.state:a_new_trace,2
 quest.state:broken_bridge,3
