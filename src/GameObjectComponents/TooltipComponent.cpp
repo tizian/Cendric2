@@ -15,6 +15,18 @@ TooltipComponent::TooltipComponent(const std::string& tooltip, AnimatedGameObjec
 	m_tooltipHeight = 10.f;
 }
 
+TooltipComponent::TooltipComponent(const std::string& tooltip, GameObject* parent) : GameObjectComponent(parent) {
+	m_useInteractiveColor = false;
+	m_animatedParent = nullptr;
+
+	m_tooltipText.setString(tooltip);
+	m_tooltipText.setTextStyle(TextStyle::Shadowed);
+	m_tooltipText.setColor(COLOR_WHITE);
+	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+
+	m_tooltipHeight = 10.f;
+}
+
 void TooltipComponent::update(const sf::Time& frameTime) {
 	updateTime(m_tooltipTime, frameTime);
 }

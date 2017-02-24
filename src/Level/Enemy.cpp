@@ -362,10 +362,6 @@ void Enemy::setScriptedBehavior(const std::string& luaPath) {
 	}
 }
 
-void Enemy::setBoss(bool value) {
-	m_isBoss = value;
-}
-
 void Enemy::setDead() {
 	if (m_isImmortal || m_mainChar->isDead()) return;
 	LevelMovableGameObject::setDead();

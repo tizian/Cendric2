@@ -152,7 +152,6 @@
  <objectgroup name="enemy">
   <object id="20" gid="793" x="650" y="593" width="50" height="50">
    <properties>
-    <property name="boss" value=""/>
     <property name="fo_ham" value="1"/>
     <property name="gold" value="20"/>
     <property name="luapath" value="res/level/boss_zeff/zeff.lua"/>

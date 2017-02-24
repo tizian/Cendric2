@@ -1,27 +1,26 @@
-#include "Level/Enemies/ElysiaBoss.h"
+#include "Level/Enemies/JanusBoss.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/ElysiaBossMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 
-REGISTER_ENEMY(EnemyID::Boss_Elysia, ElysiaBoss)
+REGISTER_ENEMY(EnemyID::Boss_Janus, JanusBoss)
 
-float ElysiaBoss::getConfiguredDistanceToHPBar() const {
+float JanusBoss::getConfiguredDistanceToHPBar() const {
 	return 50.f;
 }
 
-ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
+JanusBoss::JanusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
 	
 	m_isAlwaysUpdate = true;
-	m_bossState = ElysiaBossState::Projectile;
 }
 
-void ElysiaBoss::loadAttributes() {
+void JanusBoss::loadAttributes() {
 	m_attributes.setHealth(800);
 	m_attributes.resistanceIce = 200;
 	m_attributes.resistanceFire = 50;
@@ -29,40 +28,7 @@ void ElysiaBoss::loadAttributes() {
 	m_attributes.calculateAttributes();
 }
 
-void ElysiaBoss::loadSpells() {
-	SpellData projectile = SpellData::getSpellData(SpellID::TargetingProjectile);
-	projectile.cooldown = sf::seconds(5);
-	projectile.activeDuration = sf::seconds(10.f);
-	projectile.damageType = DamageType::Ice;
-	projectile.damage = 20;
-	projectile.damagePerSecond = 5;
-	projectile.speed = 400;
-	projectile.count = 3;
-	projectile.strength = 1;
-	projectile.divergenceAngle = 0.4f;
-	projectile.duration = sf::seconds(2.f);
-	projectile.fightingTime = sf::seconds(0.f);
-	projectile.castingTime = sf::milliseconds(12 * 100);
-	projectile.spellOffset = sf::Vector2f(40.f, -40.f);
-
-	m_spellManager->addSpell(projectile);
-
-	projectile.cooldown = sf::seconds(8);
-	projectile.activeDuration = sf::seconds(10.f);
-	projectile.damageType = DamageType::Shadow;
-	projectile.damage = 10;
-	projectile.damagePerSecond = 4;
-	projectile.speed = 400;
-	projectile.count = 1;
-	projectile.strength = 2;
-	projectile.duration = sf::seconds(3.f);
-	projectile.isStunning = true;
-	projectile.skinNr = 1;
-	projectile.castingTime = sf::milliseconds(6 * 100);
-	projectile.castingAnimation = GameObjectState::Casting2;
-
-	m_spellManager->addSpell(projectile);
-
+void JanusBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 80;
 	chopSpell.activeDuration = sf::seconds(1.5f);
@@ -73,27 +39,16 @@ void ElysiaBoss::loadSpells() {
 
 	m_spellManager->addSpell(chopSpell);
 
-	m_spellManager->setCurrentSpell(0); // targeting projectile
+	m_spellManager->setCurrentSpell(0); // chop
 
 	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
 }
 
-void ElysiaBoss::handleAttackInput() {
-	switch (m_bossState) {
-	case ElysiaBossState::Projectile:
-		m_spellManager->setCurrentSpell(rand() % 2); // stun or projectile
-		break;
-	case ElysiaBossState::Nosedive:
-		m_spellManager->setCurrentSpell(2); // chop
-		break;
-	default:
-		return;
-	}
-	
+void JanusBoss::handleAttackInput() {
 	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 }
 
-void ElysiaBoss::loadAnimation(int skinNr) {
+void JanusBoss::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 80.f, 50.f));
 	setSpriteOffset(sf::Vector2f(-50.f, -50.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -169,10 +124,10 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	addComponent(new LightComponent(data, this));
 }
 
-MovingBehavior* ElysiaBoss::createMovingBehavior(bool asAlly) {
-	FlyingBehavior* behavior;
+MovingBehavior* JanusBoss::createMovingBehavior(bool asAlly) {
+	WalkingBehavior* behavior;
 
-	behavior = new ElysiaBossMovingBehavior(this);
+	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(200.f);
@@ -180,23 +135,18 @@ MovingBehavior* ElysiaBoss::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* ElysiaBoss::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* JanusBoss::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 	behavior = new AggressiveBehavior(this);
 	behavior->setAggroRange(10000.f);
-	behavior->setAttackInput(std::bind(&ElysiaBoss::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&JanusBoss::handleAttackInput, this));
 	return behavior;
 }
 
-sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
-	if (m_bossState == ElysiaBossState::Projectile) {
-		return sf::seconds(1);
-	}
-
+sf::Time JanusBoss::getConfiguredWaitingTime() const {
 	return sf::seconds(0);
 }
 
-std::string ElysiaBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_elysia.png";
+std::string JanusBoss::getSpritePath() const {
+	return "res/assets/bosses/spritesheet_boss_janus.png";
 }
-

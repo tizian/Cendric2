@@ -579,9 +579,6 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				else if (itemText.compare("unique") == 0) {
 					enemyData.isUnique = true;
 				}
-				else if (itemText.compare("boss") == 0) {
-					enemyData.isBoss = true;
-				}
 				else if (itemText.compare("skinnr") == 0) {
 					int skinNr;
 					result = item->QueryIntAttribute("value", &skinNr);

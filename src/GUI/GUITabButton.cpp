@@ -47,6 +47,8 @@ void GUITabButton::setPosition(const sf::Vector2f& position) {
 
 	sf::Vector2f positionOffset(0.5f * (SIZE - m_inputKey.getLocalBounds().width), SIZE + 2.f);
 	m_inputKey.setPosition(position + positionOffset);
+
+	GameObject::setPosition(position);
 }
 
 void GUITabButton::update(const sf::Time& frameTime) {

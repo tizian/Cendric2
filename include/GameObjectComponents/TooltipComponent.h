@@ -9,6 +9,7 @@
 class TooltipComponent : public virtual GameObjectComponent {
 public:
 	TooltipComponent(const std::string& tooltip, AnimatedGameObject* parent, bool useInteractiveColor = true);
+	TooltipComponent(const std::string& tooltip, GameObject* parent);
 	virtual ~TooltipComponent() {}
 
 	void update(const sf::Time& frameTime) override;

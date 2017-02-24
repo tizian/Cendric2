@@ -296,10 +296,13 @@ public:
 			return "SkeletonWarrior";
 		case EnemyID::Elysia_Fledgling:
 			return "ElysiaFledgling";
+		case EnemyID::Elysia_Clone:
 		case EnemyID::Boss_Elysia:
 			return "BossElysia";
 		case EnemyID::Dragonwhelp:
 			return "DragonWhelp";
+		case EnemyID::Boss_Janus:
+			return "BossJanus";
 		}
 	}
 

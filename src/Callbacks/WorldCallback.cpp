@@ -311,7 +311,6 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 	enemy->setPosition(sf::Vector2f(posXRef.cast<float>(), posYRef.cast<float>()));
 	enemy->setObjectID(-1);
 	enemy->setUnique(false);
-	enemy->setBoss(false);
 	enemy->setDebugBoundingBox(sf::Color::Magenta);
 
 	if (lpath.isString()) {

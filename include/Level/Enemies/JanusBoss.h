@@ -6,16 +6,17 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class ZeffBoss : virtual public Boss {
+class JanusBoss : virtual public Boss {
 public:
-	ZeffBoss(const Level* level, Screen* screen);
+	JanusBoss(const Level* level, Screen* screen);
 
+	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
-	EnemyID getEnemyID() const override { return EnemyID::Boss_Zeff; }
+
+	EnemyID getEnemyID() const override { return EnemyID::Boss_Janus; }
 
 protected:
 	std::string getSpritePath() const override;
-	
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void handleAttackInput();

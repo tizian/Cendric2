@@ -306,7 +306,6 @@
  <objectgroup name="enemy">
   <object id="21" gid="962" x="1100" y="750" width="50" height="50">
    <properties>
-    <property name="boss" value=""/>
     <property name="fo_ham" value="2"/>
     <property name="gold" value="50"/>
     <property name="mi_firstguardianheart" value="1"/>

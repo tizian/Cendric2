@@ -54,7 +54,6 @@ public:
 	void addQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void addQuestCondition(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
-	void setBoss(bool value);
 	void setScriptedBehavior(const std::string& luaPath);
 	void notifyKilled();
 	void notifyLooted();
@@ -119,6 +118,7 @@ protected:
 
 	int m_objectID = -1;
 	bool m_isUnique = false;
+	bool m_isBoss = false;
 	bool m_isLooted = false;
 	bool m_isHPBarVisible = true;
 
@@ -162,7 +162,6 @@ private:
 	EnemyBuffBar* m_buffBar = nullptr;
 
 	bool m_isAlly = false;
-	bool m_isBoss = false;
 	// is this enemy currently targeted by the main character
 	bool m_isTargetedEnemy = false;
 	sf::Sprite m_targetSprite;

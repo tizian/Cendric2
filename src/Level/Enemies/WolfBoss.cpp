@@ -10,17 +10,14 @@ REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 
 const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
 
-WolfBoss::~WolfBoss() {
-	delete m_ps;
-}
-
 float WolfBoss::getConfiguredDistanceToHPBar() const {
 	return 60.f;
 }
 
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-	Enemy(level, screen) {
+	Enemy(level, screen),
+	Boss(level, screen) {
 	
 	m_isInvincible = true;
 	m_isAlwaysUpdate = true;
@@ -120,19 +117,6 @@ void WolfBoss::handleAttackInput() {
 	}
 	
 	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
-}
-
-void WolfBoss::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-	if (m_isDead) {
-		m_ps->update(frameTime);
-		updateTime(m_fadingTime, frameTime);
-		updateTime(m_particleTime, frameTime);
-		if (m_particleTime == sf::Time::Zero) {
-			m_ps->emitRate = 0;
-		}
-		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
-	}
 }
 
 void WolfBoss::loadAnimation(int skinNr) {
@@ -247,7 +231,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadParticleSystem();
+	loadDeathParticleSystem();
 }
 
 MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
@@ -271,76 +255,10 @@ AttackingBehavior* WolfBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
-void WolfBoss::render(sf::RenderTarget& target) {
-	Enemy::render(target);
-	if (m_isDead) m_ps->render(target);
-}
-
-void WolfBoss::setDead() {
-	if (m_isDead) return;
-	Enemy::setDead();
-	updateParticleSystemPosition();
-}
-
-int WolfBoss::getMentalStrength() const {
-	return 4;
-}
-
 sf::Time WolfBoss::getConfiguredWaitingTime() const {
 	return sf::Time::Zero;
-}
-
-void WolfBoss::updateParticleSystemPosition() {
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * (2.f / 3.f);
-}
-
-void WolfBoss::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 100.f;
-
-	// Generators
-	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->radius = 20.f;
-	m_particleSpawner = spawner;
-
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 20.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 2.f;
-
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(255, 255, 255, 255);
-	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
-	colGen->minEndCol = sf::Color(255, 255, 255, 0);
-	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
-
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = -45.f;
-	velGen->maxAngle = 45.f;
-	velGen->minStartSpeed = 50.f;
-	velGen->maxStartSpeed = 70.f;
-
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 2.f;
-	timeGen->maxTime = 3.f;
-
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
 std::string WolfBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_wolfmonster.png";
 }
-
-std::string WolfBoss::getDeathSoundPath() const {
-	return "res/sound/mob/cendric_death.ogg";
-}
-
-
