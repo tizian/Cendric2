@@ -20,7 +20,6 @@ WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	Boss(level, screen) {
 	
 	m_isInvincible = true;
-	m_isAlwaysUpdate = true;
 }
 
 void WolfBoss::loadAttributes() {

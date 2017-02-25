@@ -17,7 +17,6 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 	Enemy(level, screen),
 	Boss(level, screen) {
 	
-	m_isAlwaysUpdate = true;
 	m_bossState = ElysiaBossState::Projectile;
 }
 
