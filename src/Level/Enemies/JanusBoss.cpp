@@ -49,19 +49,19 @@ void JanusBoss::handleAttackInput() {
 }
 
 void JanusBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 80.f, 50.f));
-	setSpriteOffset(sf::Vector2f(-50.f, -50.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 135.f));
+	setSpriteOffset(sf::Vector2f(-70.f, -65.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	int width = 180;
-	int height = 150;
+	int width = 200;
+	int height = 200;
 
-	Animation* flyingAnimation = new Animation();
-	flyingAnimation->setSpriteSheet(tex);
+	Animation* walkingAnimation = new Animation();
+	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 
-	addAnimation(GameObjectState::Flying, flyingAnimation);
+	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
