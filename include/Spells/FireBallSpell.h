@@ -10,6 +10,8 @@ the following skins are available:
 1: icy fireball
 2: shadow fireball
 3: light fireball
+4: energy fireball (from cairns)
+5: janus' fireball
 */
 class FireBallSpell : public Spell {
 public:
