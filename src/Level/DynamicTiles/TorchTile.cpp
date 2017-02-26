@@ -42,10 +42,6 @@ void TorchTile::loadAnimation(int skinNr) {
 
 void TorchTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
-	case SpellID::Chop:
-		spell->setDisposed();
-		setDisposed();
-		break;
 	case SpellID::IceBall:
 		if (m_state == GameObjectState::Burning) {
 			setState(GameObjectState::Idle);

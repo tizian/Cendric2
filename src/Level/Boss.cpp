@@ -4,6 +4,7 @@ Boss::Boss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 	
+	m_isAlwaysUpdate = true;
 	m_isBoss = true;
 }
 
