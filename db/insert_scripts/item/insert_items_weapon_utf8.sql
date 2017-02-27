@@ -253,19 +253,18 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 4, 'twilight', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 5, 'divine', 3);
 
--- Janus's Glaive
+-- Alastor's Sickles
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item', 'Janus'' Glaive','Janus Gleve','Janus Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item_desc', '...','...','...');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_janusglaive', 'eq_weapon', 650, 150, 200);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, haste) values ('we_janusglaive', 20, 10, 15, 10);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item', 'Alastor''s Sickles','Alastor''s Sicheln','Sichle vom Alastor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item_desc', 'This weapon was once used against me, now it''s mine.','Diese Waffe wurde einst gegen mich verwendet, jetzt gehört sie mir.','Die Waffe isch mal gege mich brucht worde, jetz ghört si mir.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_janusglaive', 'eq_weapon', 650, 150, 80);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, dmg_ice, critical, haste) values ('we_janusglaive', 5, 8, 8, 3, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_janusglaive', 'res/assets/equipment/weapon/spritesheet_weapon_janusglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_janusglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_janusglaive', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_janusglaive', 500, 80, 80, -40, 15);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 2, 'divine', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 3, 'necromancy', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 4, 'twilight', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 5, 'divine', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 3, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 4, 'meta', 2);
 
 -- Torch
 

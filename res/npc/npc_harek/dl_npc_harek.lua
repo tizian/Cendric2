@@ -135,6 +135,9 @@ loadDialogue = function(DL)
 		if (DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)) then 
 			DL:addChoice(21, "DL_Choice_LightningPike") -- 1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
 		end
+		if (DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)) then 
+			DL:addChoice(22, "DL_Choice_JanusGlaive") -- 1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()
 
@@ -164,6 +167,20 @@ loadDialogue = function(DL)
 			DL:removeItem("mi_ironore", 5)
 			DL:removeItem("mi_elysiatail", 1)
 			DL:addItem("we_lightningpike", 1)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)) then 
+
+			DL:createNPCNode(22, 23, "DL_Harek_JanusGlaive") -- Hm, I really start to wonder where you get this stuff from.
+			DL:removeItem("mi_ironore", 4)
+			DL:removeItem("mi_janusglaive", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon but I can only restore a part of its magical power.
+			DL:addItem("we_janusglaive", 1)
 			DL:addNode()
 
 		end

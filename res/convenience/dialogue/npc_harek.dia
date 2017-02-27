@@ -368,6 +368,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:22
+		condition:DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)
+		# translation: 
+		translation.tag:DL_Choice_JanusGlaive
+		translation.en:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+		translation.de:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+		translation.ch:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_NoMaterial
@@ -422,6 +432,37 @@ npc.id:npc_harek
 	translation.en:The tail feathers of a storm bird? Great material for a magical lightning pike.
 	translation.de:Die Schwanzfedern eines Sturmvogels? Ein hervorragendes Material für einen magischen Blitzspeer.
 	translation.ch:D'Schwanzfedere vomne Sturmvogel? Es usgzeichnets Material für en magische Blitzspeer.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:removeItem("mi_ironore", 4)
+	trigger:DL:removeItem("mi_janusglaive", 1)
+	# translation: 
+	translation.tag:DL_Harek_JanusGlaive
+	translation.en:Hm, I really start to wonder where you get this stuff from.
+	translation.de:Hm, langsam frage ich mich wirklich woher du diese Dinge bekommst die du mir bringst.
+	translation.ch:Hm, langsam frögi mi würkli woher du die Sache bechunsch wod mer bringsch.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:addItem("we_janusglaive", 1)
+	# translation: 
+	translation.tag:DL_Harek_JanusGlaive2
+	translation.en:I can fix this broken weapon but I can only restore a part of its magical power.
+	translation.de:Ich kann diese zerbrochene Waffe flicken, allerdings kann ich nur einen Teil ihrer magischen Kraft retten.
+	translation.ch:Ich cha die verbroche Waffe flicke, allerdings chani nur en Teil vo ihrere magische Chraft rette.
 	[
 		# Link node, tag is next tag
 		tag:-2

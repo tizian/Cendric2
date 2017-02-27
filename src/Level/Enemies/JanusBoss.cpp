@@ -72,7 +72,7 @@ void JanusBoss::loadSpells() {
 	m_spellManager->addSpell(iceSpell);
 
 	fireSpell.damage = 30;
-	fireSpell.count = 2;
+	fireSpell.count = 1;
 	fireSpell.cooldown = sf::seconds(5.f);
 	fireSpell.isDynamicTileEffect = false;
 
@@ -101,7 +101,7 @@ void JanusBoss::handleAttackInput() {
 	default:
 		m_spellManager->setCurrentSpell(3);
 
-		if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
+		if (m_enemyAttackingBehavior->distToTarget() < 120.f) {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
@@ -264,7 +264,7 @@ MovingBehavior* JanusBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 
 	behavior = new AggressiveWalkingBehavior(this);
-	behavior->setApproachingDistance(100.f);
+	behavior->setApproachingDistance(80.f);
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(400.f);
 	behavior->setMaxVelocityX(70.f);

@@ -114,6 +114,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item_desc', 'Maybe someone could use these pearls to craft something.','Vielleicht könnte jemand aus diesen Perlen etwas herstellen.','Vilicht chönt öpper us dene Perle öppis herstelle.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearlpile', 'misc', 300, 650, 50);
 
+-- Broken Sickles
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item', 'Broken Sickles','Zerbrochene Sicheln','Verbrocheni Sichle');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item_desc', 'The broken remains of Arastor''s weapon. Maybe someone could fix it.','Die zerbrochenen Überreste von Arastor''s Waffe. Vielleicht könnte sie jemand wieder zusammensetzen.','Di verbrochene Überreste vom Arastor sinere Waffe. Vilicht chönt si öppert wieder zemesetze.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_janusglaive', 'misc', 300, 650, 200);
+
 -- Iron Ore
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item', 'Iron Ore','Eisenerz','Iseerz');
