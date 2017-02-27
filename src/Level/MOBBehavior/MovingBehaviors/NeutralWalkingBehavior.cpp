@@ -28,10 +28,5 @@ void NeutralWalkingBehavior::execHandleMovementInput() {
 	else if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 		m_movingDirectionX = 0;
 	}
-
-	if (m_jumps && m_isGrounded) {
-		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-		m_jumps = false;
-	}
 }
 

@@ -20,10 +20,14 @@ void TrampolineTile::init() {
 }
 
 void TrampolineTile::loadAnimation(int skinNr) {
-	if (skinNr == 1) {
+	if (skinNr % 2 == 1) {
 		setPositionOffset(sf::Vector2f(5.f + TILE_SIZE_F * 0.5f, 15.f));
-		skinNr = 0;
+		skinNr--;
 	}
+
+	skinNr /= 2;
+
+	m_isShiftable = skinNr == 0;
 
 	m_isCollidable = true;
 	std::string destructibleTileTex = "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
@@ -123,6 +127,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 }
 
 void TrampolineTile::onHit(Spell* spell) {
+	if (!m_isShiftable) return;
 	switch (spell->getSpellID()) {
 	case SpellID::WindGust: {
 		float pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();

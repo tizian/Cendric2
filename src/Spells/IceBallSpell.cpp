@@ -17,9 +17,9 @@ void IceBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
 	playCurrentAnimation(true);
 
+	Spell::load(data, mob, target);
+
 	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.4f);
 	addComponent(new LightComponent(lightData, this));
-
-	Spell::load(data, mob, target);
 }
 

@@ -28,6 +28,7 @@ private:
 	const float DAMPING_GROUND = 0.999f;
 
 	float m_pushAcceleration = 0.f;
+	bool m_isShiftable;
 
 	sf::Time m_crumblingTime;
 	sf::Time m_jumpingTime;

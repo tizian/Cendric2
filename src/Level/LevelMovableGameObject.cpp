@@ -254,6 +254,7 @@ const Level* LevelMovableGameObject::getLevel() const {
 }
 
 bool LevelMovableGameObject::isFacingRight() const {
+	if (m_movingBehavior == nullptr) return true;
 	return m_movingBehavior->isFacingRight();
 }
 

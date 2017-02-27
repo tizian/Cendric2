@@ -21,7 +21,8 @@ public:
 	// sets the current spell to spellNr and, if it doesn't need a target, executes it.
 	void setAndExecuteSpell(int spellNr);
 	// triggers the spell creator & executes the current spell if it are not on cooldown
-	void executeCurrentSpell(const sf::Vector2f& target);
+	// if force is set to true, it will execute it anyway.
+	void executeCurrentSpell(const sf::Vector2f& target, bool force = false);
 
 	// used by the spell interface
 	std::vector<SpellCreator*>& getSpellMap();

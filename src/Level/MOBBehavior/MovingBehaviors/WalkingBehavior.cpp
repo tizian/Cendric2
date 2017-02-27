@@ -116,6 +116,11 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 void WalkingBehavior::handleTrueAcceleration() {
+	if (m_jumps && m_isGrounded) {
+		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
+		m_jumps = false;
+	}
+
 	float newAccelerationY = m_isFlippedGravity ? -m_gravity : m_gravity;
 	float newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
 	

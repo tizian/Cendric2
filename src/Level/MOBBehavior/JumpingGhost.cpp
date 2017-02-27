@@ -50,7 +50,7 @@ float JumpingGhost::calculateJump() {
 					return -1.f;
 				}
 				// does this position differ enough from the one we started?
-				if (dist(getPosition(), sf::Vector2f(m_aiRec.boundingBox.left, m_aiRec.boundingBox.top)) < TILE_SIZE_F) {
+				if (dist(getPosition(), sf::Vector2f(m_aiRec.boundingBox.left, m_aiRec.boundingBox.top)) < TILE_SIZE_F * 0.5f) {
 					return -1.f;
 				}
 				else if (m_debugger != nullptr) {

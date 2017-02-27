@@ -6,6 +6,9 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
+class TorchTile;
+class JanusBossMovingBehavior;
+
 class JanusBossMask {
 public:
 	JanusBossMask();
@@ -21,6 +24,14 @@ private:
 private:
 	sf::Sprite m_sprite;
 };
+
+enum JanusBossPhase {
+	Chop,
+	Vulnerable,
+	ToTorch,
+	TorchSpell1,
+	TorchSpell2
+}; 
 
 class JanusBoss : virtual public Boss {
 public:
@@ -46,6 +57,7 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+	void setEvil(bool evil);
 
 	// particles
 	void loadCloudParticles();
@@ -53,6 +65,24 @@ protected:
 	
 	particles::TextureParticleSystem* m_cloudPs = nullptr;
 	particles::ParticleSpawner* m_cloudSpawner = nullptr;
+
+private:
+	sf::Time m_timeUntilPhase;
+	static const sf::Time PHASE_TIME;
+	bool m_hasLitTorches;
+
+	void updateTorchStatus(const sf::Time& frameTime);
+	bool m_isBlueTorchesFine;
+	bool m_isRedTorchesFine;
+
+	std::vector<TorchTile*> m_blueTorchTiles;
+	std::vector<TorchTile*> m_redTorchTiles;
+
+	bool m_torchesLoaded = false;
+	void loadTorches();
+	sf::Vector2f m_torchSpellPosition;
+
+	JanusBossPhase m_phase;
 
 private:
 	JanusBossMask m_mask;

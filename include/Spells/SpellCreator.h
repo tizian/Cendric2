@@ -59,5 +59,5 @@ protected:
 private:
 	bool m_isReady = true;
 	sf::Time m_currentCastingTime = sf::Time::Zero;
-	sf::Vector2f m_currentTarget;
+	std::vector<sf::Vector2f> m_futureTargets;
 };

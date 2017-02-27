@@ -17,6 +17,7 @@ void TorchTile::init() {
 }
 
 void TorchTile::loadAnimation(int skinNr) {
+	m_skinNr = skinNr;
 	int textureHeight = 2 * TILE_SIZE;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
@@ -43,6 +44,7 @@ void TorchTile::loadAnimation(int skinNr) {
 void TorchTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::IceBall:
+	case SpellID::Chop:
 		if (m_state == GameObjectState::Burning) {
 			setState(GameObjectState::Idle);
 			m_lightComponent->setVisible(false);
@@ -65,6 +67,10 @@ void TorchTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+int TorchTile::getSkinNr() const {
+	return m_skinNr;
 }
 
 std::string TorchTile::getSpritePath() const {

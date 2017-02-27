@@ -4,11 +4,13 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "Level/DynamicTiles/TorchTile.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Janus, JanusBoss)
 
 const std::string JanusBoss::PARTICLE_TEX_PATH = "res/assets/particles/cloud.png";
+const sf::Time JanusBoss::PHASE_TIME = sf::seconds(10.f);
 
 JanusBoss::JanusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
@@ -30,22 +32,60 @@ void JanusBoss::loadAttributes() {
 
 void JanusBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 80;
-	chopSpell.activeDuration = sf::seconds(1.5f);
-	chopSpell.cooldown = sf::seconds(4.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 80, 50);
-	chopSpell.spellOffset = sf::Vector2f(-40.f, 0.f);
-	chopSpell.fightingTime = sf::seconds(0);
+	chopSpell.damage = 50;
+	chopSpell.activeDuration = sf::milliseconds(17 * 50);
+	chopSpell.cooldown = 2.f * chopSpell.activeDuration;
+	chopSpell.boundingBox = sf::FloatRect(0, 0, 150, 150);
+	chopSpell.spellOffset = sf::Vector2f(-75.f, 0.f);
+	chopSpell.fightingTime = chopSpell.activeDuration;
 
 	m_spellManager->addSpell(chopSpell);
 
-	m_spellManager->setCurrentSpell(0); // chop
+	SpellData fireSpell = SpellData::getSpellData(SpellID::FireBall);
+	fireSpell.damage = 20;
+	fireSpell.skinNr = 5;
+	fireSpell.cooldown = sf::seconds(0);
+	fireSpell.spellOffset = sf::Vector2f(0.f, -20.f);
+	fireSpell.count = 1;
+	fireSpell.speed = 300;
+	fireSpell.castingAnimation = GameObjectState::Casting2;
+	fireSpell.fightAnimation = GameObjectState::Fighting2;
+	fireSpell.castingTime = sf::milliseconds(12 * 80);
+	fireSpell.fightingTime = sf::milliseconds(500);
+	fireSpell.isBlocking = true;
 
-	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
+	m_spellManager->addSpell(fireSpell);
+
+	SpellData iceSpell = SpellData::getSpellData(SpellID::IceBall);
+	iceSpell.damage = 20;
+	iceSpell.skinNr = 1;
+	iceSpell.cooldown = sf::seconds(0);
+	iceSpell.spellOffset = sf::Vector2f(0.f, -20.f);
+	iceSpell.count = 1;
+	iceSpell.speed = 300;
+	iceSpell.castingAnimation = GameObjectState::Casting3;
+	iceSpell.fightAnimation = GameObjectState::Fighting3;
+	iceSpell.castingTime = sf::milliseconds(12 * 80);
+	iceSpell.fightingTime = sf::milliseconds(500);
+	iceSpell.isBlocking = true;
+
+	m_spellManager->addSpell(iceSpell);
+
+	fireSpell.damage = 30;
+	fireSpell.count = 2;
+	fireSpell.cooldown = sf::seconds(5.f);
+	fireSpell.isDynamicTileEffect = false;
+
+	m_spellManager->addSpell(fireSpell);
+
+	m_spellManager->setCurrentSpell(0); // chop
 }
 
 void JanusBoss::update(const sf::Time& frameTime) {
+	loadTorches();
 	m_cloudPs->update(frameTime);
+	updateTime(m_timeUntilPhase, frameTime);
+	updateTorchStatus(frameTime);
 	Boss::update(frameTime);
 }
 
@@ -56,7 +96,48 @@ void JanusBoss::render(sf::RenderTarget& target) {
 }
 
 void JanusBoss::handleAttackInput() {
-	//m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+	switch (m_phase) {
+	case Chop:
+	default:
+		m_spellManager->setCurrentSpell(3);
+
+		if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
+			m_spellManager->setCurrentSpell(0); // chop
+		}
+
+		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+		return;
+	case ToTorch:
+		return;
+	case TorchSpell1:
+		m_spellManager->setCurrentSpell(2);
+		for (auto t : m_blueTorchTiles) {
+			m_spellManager->executeCurrentSpell(t->getCenter(), true);
+		}
+		m_phase = JanusBossPhase::TorchSpell2;
+		m_hasLitTorches = false;
+		return;
+	case TorchSpell2:
+		if (!isReady()) return;
+
+		if (m_hasLitTorches) {
+			m_phase = JanusBossPhase::Chop;
+			setEvil(true);
+			return;
+		}
+
+		m_spellManager->setCurrentSpell(1);
+		for (auto t : m_redTorchTiles) {
+			m_spellManager->executeCurrentSpell(t->getCenter(), true);
+		}
+		m_hasLitTorches = true;
+		return;
+	}
+}
+
+void JanusBoss::setEvil(bool evil) {
+	m_mask.setEvil(evil);
+	m_isInvincible = evil;
 }
 
 void JanusBoss::loadAnimation(int skinNr) {
@@ -66,7 +147,7 @@ void JanusBoss::loadAnimation(int skinNr) {
 	int width = 200;
 	int height = 200;
 
-	Animation* walkingAnimation = new Animation();
+	Animation* walkingAnimation = new Animation(sf::milliseconds(80));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 6; ++i) {
 		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
@@ -77,7 +158,7 @@ void JanusBoss::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
-	Animation* idleAnimation = new Animation();
+	Animation* idleAnimation = new Animation(sf::milliseconds(80));
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
 		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
@@ -98,6 +179,50 @@ void JanusBoss::loadAnimation(int skinNr) {
 	deadAnimation->setSpriteSheet(tex);
 	deadAnimation->addFrame(sf::IntRect(0, 0, width, height));
 
+	Animation* fightingAnimation = new Animation(sf::milliseconds(50));
+	fightingAnimation->setSpriteSheet(tex);
+	for (int i = 4; i < 9; ++i) {
+		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
+	for (int i = 7; i > 0; --i) {
+		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
+	for (int i = 0; i < 5; ++i) {
+		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
+
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
+	// fire!
+	Animation* castingFireAnimation = new Animation(sf::milliseconds(80));
+	castingFireAnimation->setSpriteSheet(tex);
+	for (int i = 0; i < 12; ++i) {
+		castingFireAnimation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+	}
+
+	addAnimation(GameObjectState::Casting2, castingFireAnimation);
+
+	Animation* afterFireAnimation = new Animation();
+	afterFireAnimation->setSpriteSheet(tex);
+	afterFireAnimation->addFrame(sf::IntRect(11 * width, 3 * height, width, height));
+
+	addAnimation(GameObjectState::Fighting2, afterFireAnimation);
+
+	// ice!
+	Animation* castingIceAnimation = new Animation(sf::milliseconds(80));
+	castingIceAnimation->setSpriteSheet(tex);
+	for (int i = 0; i < 12; ++i) {
+		castingIceAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+	}
+
+	addAnimation(GameObjectState::Casting3, castingIceAnimation);
+
+	Animation* afterIceAnimation = new Animation();
+	afterIceAnimation->setSpriteSheet(tex);
+	afterIceAnimation->addFrame(sf::IntRect(11 * width, 2 * height, width, height));
+
+	addAnimation(GameObjectState::Fighting3, afterIceAnimation);
+
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
@@ -109,14 +234,41 @@ void JanusBoss::loadAnimation(int skinNr) {
 	addComponent(new LightComponent(data, this));
 }
 
+void JanusBoss::loadTorches() {
+	if (m_torchesLoaded) return;
+
+	m_redTorchTiles.clear();
+	m_blueTorchTiles.clear();
+	for (GameObject* obj : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		if (TorchTile* t = dynamic_cast<TorchTile*>(obj)) {
+			if (t->getSkinNr() == 0) {
+				m_redTorchTiles.push_back(t);
+				t->setState(GameObjectState::Idle);
+			}
+			else {
+				m_blueTorchTiles.push_back(t);
+			}
+		}
+	}
+
+	m_torchSpellPosition = getPosition();
+	m_torchesLoaded = true;
+
+	// initial values for janus
+	m_phase = JanusBossPhase::Vulnerable;
+	m_timeUntilPhase = sf::seconds(3.f);
+	setEvil(false);
+}
+
 MovingBehavior* JanusBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(200.f);
-	behavior->setMaxVelocityYUp(200.f);
+	behavior->setMaxVelocityYUp(400.f);
 	behavior->setMaxVelocityX(70.f);
+	behavior->calculateJumpHeight();
 	return behavior;
 }
 
@@ -128,9 +280,57 @@ AttackingBehavior* JanusBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+void JanusBoss::updateTorchStatus(const sf::Time& frameTime) {
+	switch (m_phase) {
+	case Chop: {
+		m_isBlueTorchesFine = true;
+		m_isRedTorchesFine = true;
+
+		for (auto t : m_blueTorchTiles) {
+			if (t->getGameObjectState() == GameObjectState::Idle) {
+				m_isBlueTorchesFine = false;
+				break;
+			}
+		}
+
+		for (auto t : m_redTorchTiles) {
+			if (t->getGameObjectState() == GameObjectState::Burning) {
+				m_isRedTorchesFine = false;
+				break;
+			}
+		}
+
+		if (m_isBlueTorchesFine && m_isRedTorchesFine) {
+			setEvil(false);
+			// phase start
+			m_phase = JanusBossPhase::Vulnerable;
+			m_timeUntilPhase = PHASE_TIME;
+			return;
+		}
+		break;
+	}
+	case Vulnerable:
+		if (m_timeUntilPhase == sf::Time::Zero) {
+			m_enemyMovingBehavior->setMovingTarget(static_cast<int>(m_torchSpellPosition.x), static_cast<int>(m_torchSpellPosition.y));
+			m_phase = JanusBossPhase::ToTorch;
+		}
+		break;
+	case ToTorch:
+		if (std::abs(getCenter().x - m_torchSpellPosition.x) < 10.f) {
+			m_phase = JanusBossPhase::TorchSpell1;
+			m_enemyMovingBehavior->resetMovingTarget();
+		}
+		break;
+	case TorchSpell1:
+	case TorchSpell2:
+	default:
+		break;
+	}
+}
+
 void JanusBoss::setPosition(const sf::Vector2f& pos) {
 	Boss::setPosition(pos);
-	m_mask.setPosition(pos);
+	m_mask.setPosition(pos + sf::Vector2f(isFacingRight() ? 10.f : 9.f, -5.f));
 	if (m_cloudSpawner) m_cloudSpawner->center = pos + sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height - 30.f);
 }
 
@@ -199,7 +399,7 @@ JanusBossMask::JanusBossMask() {
 }
 
 void JanusBossMask::setPosition(const sf::Vector2f& pos) {
-	m_sprite.setPosition(pos + sf::Vector2f(10.f, -5.f));
+	m_sprite.setPosition(pos);
 }
 
 void JanusBossMask::setEvil(bool isEvil) {

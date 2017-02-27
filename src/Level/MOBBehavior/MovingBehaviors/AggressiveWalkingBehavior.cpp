@@ -29,10 +29,5 @@ void AggressiveWalkingBehavior::execHandleMovementInput() {
 		// the enemy tries to get away from its target
 		m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
 	}
-
-	if (m_jumps && m_isGrounded) {
-		m_enemy->setVelocityY(-m_enemy->getConfiguredMaxVelocityYUp()); // first jump vel will always be max y vel. 
-		m_jumps = false;
-	}
 }
 
