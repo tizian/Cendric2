@@ -79,9 +79,9 @@ npc.id:npc_leeroy
 		condition:DL:isConditionFulfilled("npc_leeroy", "cross_bridge") and DL:isQuestState("leeroy_chicken", "void")
 		# translation: 
 		translation.tag:DL_Choice_LeeroyChicken
-		translation.en:I could easily kill a dragon...
-		translation.de:Ich könnte bestimmt einen Drachen töten...
-		translation.ch:Ich chönt sicher en Drache töte...
+		translation.en:I could get you some chicken.
+		translation.de:Ich könnte dir ein Hühnchen bringen.
+		translation.ch:Ich chönt der es Güggeli bringe.
 	]
 	[
 		# Link node, tag is next tag
@@ -92,6 +92,16 @@ npc.id:npc_leeroy
 		translation.en:You're not the sharpest knife in the drawer, are you.
 		translation.de:Du bist schon nicht gerade der hellste, was?
 		translation.ch:Du hesch scho chli en Schade, gell?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestState("leeroy_chicken", "started") and DL:isQuestComplete("leeroy_chicken")
+		# translation: 
+		translation.tag:DL_Choice_ChickenDone
+		translation.en:I got your chicken.
+		translation.de:Ich habe dein Hühnchen.
+		translation.ch:Ich ha dis Güggeli.
 	]
 	[
 		# Link node, tag is next tag
@@ -194,12 +204,26 @@ npc.id:npc_leeroy
 	# [9] NPC Node
 	tag:9
 	# triggers: 
-	trigger:DL:addConditionProgress("npc_leeroy", "cross_bridge")
 	# translation: 
 	translation.tag:DL_Leeroy_CrossBridge2
-	translation.en:And if you want to join me, you only can do so if you're able to kill a dragon.
-	translation.de:Und wenn du mir dabei helfen willst, kannst du das nur wenn du auch fähig bist, einen Drachen zu töten.
-	translation.ch:Und wenn du mir debii helfe wetsch, chasch das nur wend au fähig bisch, en Drache z'töte.
+	translation.en:But I can't fight with an empty stomach - I need some tasty chicken first.
+	translation.de:Aber ich kann nicht mit einem leeren Magen kämpfen - zuerst brauch ich ein leckeres Hühnchen.
+	translation.ch:Aber ich cha nid mitme leere Mage kämpfe - zersch bruchi es feins Güggeli.
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_leeroy", "cross_bridge")
+	# translation: 
+	translation.tag:DL_Leeroy_CrossBridge3
+	translation.en:Unfortunately, I need to hold the line here. I can't let some other guy steal my DRAGONS.
+	translation.de:Leider muss ich hier die Stellung halten. Ich kann es nicht zulassen, dass ein anderer meine DRACHEN klaut.
+	translation.ch:Leider muni do d'Stellig halte. Ich chas eifach nid zuelah das en andere mini DRACHE chlaut.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -209,12 +233,11 @@ npc.id:npc_leeroy
 	# [10] NPC Node
 	tag:10
 	# triggers: 
-	trigger:DL:changeQuestState("leeroy_chicken", "started")
 	# translation: 
 	translation.tag:DL_Leeroy_LeeroyChicken
-	translation.en:Oh yeah? Well you have to prove it. Bring me a skull of a dragon and I'll let you on that bridge.
-	translation.de:Ach ja? Das musst du aber beweisen. Bring mir den Schädel eines Drachen und dann lass ich dich auf diese Brücke.
-	translation.ch:Ahja? Da muesch mer aber bewiise. Bring mer de Schädel vomne Drache und ich lah dich uf die Brugg.
+	translation.en:That would be great. But I only eat the finest chicken.
+	translation.de:Das wäre toll. Aber ich esse nur die besten Hühnchen.
+	translation.ch:Das wär toll. Aber ich iss nur di beste Güggeli.
 	[
 		# Link node, tag is next tag
 		tag:11
@@ -224,11 +247,12 @@ npc.id:npc_leeroy
 	# [11] NPC Node
 	tag:11
 	# triggers: 
+	trigger:DL:changeQuestState("leeroy_chicken", "started")
 	# translation: 
 	translation.tag:DL_Leeroy_LeeroyChicken2
-	translation.en:Oh, and get me some roasted chicken, fighting with an empty stomach is never a good idea.
-	translation.de:Oh, und bring mir ein gebratenes Hähnchen, mit leerem Magen zu kämpfen ist keine gute Idee.
-	translation.ch:Oh, und bring mer es brotes Güggeli, mit leerem Mage kämpfe isch nie guet.
+	translation.en:You know the innkeeper Helena in Gandria? Her special grilled chicken is second to none. Bring me one of those and I'll slay those DRAGONS for you.
+	translation.de:Kennst du die Wirtin Helena in Gandria? Ihr Brathühnchen Spezial ist unübertroffen. Bring mir so eins und ich töte diese DRACHEN für dich.
+	translation.ch:Kensch d'Wirtin Helena in Gandra? Ihres brötlet Spezial-Güggeli isch eifach unübertroffe. Bring mer das und ich kill die DRACHE für dich.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -244,6 +268,38 @@ npc.id:npc_leeroy
 	translation.en:I prefer swords over knives, you know.
 	translation.de:Dunkel bin ich aber auch nicht.
 	translation.ch:Ich ha ken Schade, ich mach Schade!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("mi_leeroychicken", 1)
+	trigger:DL:changeQuestState("leeroy_chicken", "completed")
+	# translation: 
+	translation.tag:DL_Leeroy_ChickenDone
+	translation.en:And why did it take you so long? I nearly starved! (Leeroy takes the chicken and devours it hastily)
+	translation.de:Und wieso hat das so lange gedauert? Ich wäre fast verhungert! (Leeroy nimmt das Hühnchen und verschlingt es hastig)
+	translation.ch:Und wieso het das so lang duuret? Ich wär schier verhungeret! (De Leeroy nimmts Güggeli und druckts schnell abe)
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("default", "swampbridge_open")
+	trigger:DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
+	# translation: 
+	translation.tag:DL_Leeroy_ChickenDone2
+	translation.en:But now I'm ready. Let's do this!
+	translation.de:Aber jetzt bin ich bereit. Los geht's!
+	translation.ch:Aber jetz bini recht parat du. Jetzt gohts los!
 	[
 		# Link node, tag is next tag
 		tag:-2

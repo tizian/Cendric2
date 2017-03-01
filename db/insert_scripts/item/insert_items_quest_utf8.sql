@@ -103,3 +103,9 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item', 'Frying Pan','Bratpfanne','Bratpfanne');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item_desc', 'Jack''s beloved frying pan.','Jack''s geliebte Bratpfanne.', 'Em Jack sini gliebt Bratpfanne.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_jackpan', 'quest', 600, 650, -1);
+
+-- Helena's Special Chicken
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item', 'Helena''s Special Chicken','Helena''s Hühnchen Spezial','Helena''s Spezialgüggeli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item_desc', 'Helena''s famous grilled chicken.','Helena''s berühmtes Brathühnchen.', 'De Helena ihres berüemt Güggeli.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_leeroychicken', 'quest', 650, 250, -1);

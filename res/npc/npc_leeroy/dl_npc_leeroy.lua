@@ -30,10 +30,13 @@ loadDialogue = function(DL)
 		DL:addChoice(8, "DL_Choice_CrossBridge") -- But I want to cross the bridge!
 	end
 	if (DL:isConditionFulfilled("npc_leeroy", "cross_bridge") and DL:isQuestState("leeroy_chicken", "void")) then 
-		DL:addChoice(10, "DL_Choice_LeeroyChicken") -- I could easily kill a dragon...
+		DL:addChoice(10, "DL_Choice_LeeroyChicken") -- I could get you some chicken.
 	end
 	if (DL:isConditionFulfilled("npc_leeroy", "why_stop") and not DL:isConditionFulfilled("npc_leeroy", "not_bright")) then 
 		DL:addChoice(13, "DL_Choice_NotBright") -- You're not the sharpest knife in the drawer, are you.
+	end
+	if (DL:isQuestState("leeroy_chicken", "started") and DL:isQuestComplete("leeroy_chicken")) then 
+		DL:addChoice(14, "DL_Choice_ChickenDone") -- I got your chicken.
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -76,7 +79,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(9, -2, "DL_Leeroy_CrossBridge2") -- And if you want to join me, you only can do so if you're able to kill a dragon.
+		DL:createNPCNode(9, 12, "DL_Leeroy_CrossBridge2") -- But I can't fight with an empty stomach - I need some tasty chicken first.
+		DL:addNode()
+
+
+		DL:createNPCNode(12, -2, "DL_Leeroy_CrossBridge3") -- Unfortunately, I need to hold the line here. I can't let some other guy steal my DRAGONS.
 		DL:addConditionProgress("npc_leeroy", "cross_bridge")
 		DL:addNode()
 
@@ -84,12 +91,12 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_leeroy", "cross_bridge") and DL:isQuestState("leeroy_chicken", "void")) then 
 
-		DL:createNPCNode(10, 11, "DL_Leeroy_LeeroyChicken") -- Oh yeah? Well you have to prove it. Bring me a skull of a dragon and I'll let you on that bridge.
-		DL:changeQuestState("leeroy_chicken", "started")
+		DL:createNPCNode(10, 11, "DL_Leeroy_LeeroyChicken") -- That would be great. But I only eat the finest chicken.
 		DL:addNode()
 
 
-		DL:createNPCNode(11, -2, "DL_Leeroy_LeeroyChicken2") -- Oh, and get me some roasted chicken, fighting with an empty stomach is never a good idea.
+		DL:createNPCNode(11, -2, "DL_Leeroy_LeeroyChicken2") -- You know the innkeeper Helena in Gandria? Her special grilled chicken is second to none. Bring me one of those and I'll slay those DRAGONS for you.
+		DL:changeQuestState("leeroy_chicken", "started")
 		DL:addNode()
 
 	end
@@ -98,6 +105,21 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(13, -2, "DL_Leeroy_NotBright") -- I prefer swords over knives, you know.
 		DL:addConditionProgress("npc_leeroy", "not_bright")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("leeroy_chicken", "started") and DL:isQuestComplete("leeroy_chicken")) then 
+
+		DL:createNPCNode(14, 15, "DL_Leeroy_ChickenDone") -- And why did it take you so long? I nearly starved! (Leeroy takes the chicken and devours it hastily)
+		DL:removeItem("mi_leeroychicken", 1)
+		DL:changeQuestState("leeroy_chicken", "completed")
+		DL:addNode()
+
+
+		DL:createNPCNode(15, -2, "DL_Leeroy_ChickenDone2") -- But now I'm ready. Let's do this!
+		DL:addConditionProgress("default", "swampbridge_open")
+		DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
 		DL:addNode()
 
 	end
