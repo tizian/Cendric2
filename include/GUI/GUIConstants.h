@@ -22,6 +22,7 @@ public:
 	static int CHARACTER_SIZE_XL;
 	static int CHARACTER_SIZE_XXL;
 	static int CHARACTER_SIZE_XXXL;
+	static int CHARACTER_SIZE_DIALOGUE;
 
 	// colors for windows
 	static sf::Color MAIN_COLOR;

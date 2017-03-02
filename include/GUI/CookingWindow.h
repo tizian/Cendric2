@@ -31,7 +31,7 @@ private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
 	std::string m_itemID;
-	BitmapText m_text;
+	sf::Text m_text;
 };
 
 class MapScreen;

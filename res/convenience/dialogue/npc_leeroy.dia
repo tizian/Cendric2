@@ -294,7 +294,6 @@ npc.id:npc_leeroy
 	tag:15
 	# triggers: 
 	trigger:DL:addConditionProgress("default", "swampbridge_open")
-	trigger:DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
 	# translation: 
 	translation.tag:DL_Leeroy_ChickenDone2
 	translation.en:But now I'm ready. Let's do this!
@@ -302,6 +301,21 @@ npc.id:npc_leeroy
 	translation.ch:Aber jetz bini recht parat du. Jetzt gohts los!
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }

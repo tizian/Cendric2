@@ -116,6 +116,8 @@ void ResourceManager::init() {
 	loadSoundbuffer(GlobalResource::SOUND_MISC_UNLOCK, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_TELEPORT, ResourceType::Global);
 
+	loadFont(GlobalResource::FONT_TTF_DIALOGUE, ResourceType::Global);
+
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {
 		m_configuration = DEFAULT_CONFIGURATION;

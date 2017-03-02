@@ -64,9 +64,8 @@ void ArrowSelector::addOption(const std::string& optionKey) {
 }
 
 void ArrowSelector::addOptionRaw(const std::string& rawOption) {
-	std::string option = BitmapText::transform(rawOption);
-	m_options.push_back(option);
-	float usedWidth = GUIConstants::CHARACTER_SIZE_M * static_cast<int>(option.length()) + 30.f;
+	m_options.push_back(rawOption);
+	float usedWidth = GUIConstants::CHARACTER_SIZE_M * static_cast<int>(rawOption.length()) + 30.f;
 	if (usedWidth > m_button.getBoundingBox()->width) {
 		m_button.setSize(sf::Vector2f(usedWidth, m_button.getBoundingBox()->height));
 		recalculatePosition();

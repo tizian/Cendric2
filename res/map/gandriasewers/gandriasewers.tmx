@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="307">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="308">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="explorable" value=""/>
@@ -619,15 +619,25 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup name="npc inina">
   <properties>
-   <property name="condition" value="default,thieves_open"/>
+   <property name="conditions" value="default,second_boss_open"/>
+   <property name="not conditions" value="boss,BossJanus"/>
   </properties>
   <object id="290" gid="447" x="300" y="900" width="50" height="50">
    <properties>
     <property name="dialoguetexture" value="res/npc/npc_inina/npc_inina.png"/>
     <property name="id" value="npc_inina2"/>
     <property name="spritesheetpath" value="res/npc/npc_inina/spritesheet_npc_inina.png"/>
+   </properties>
+  </object>
+  <object id="307" gid="448" x="100" y="750" width="50" height="50">
+   <properties>
+    <property name="dialogueid" value="res/npc/npc_paladin1/dl_npc_paladin1.lua"/>
+    <property name="dialoguetexture" value="res/npc/npc_paladin1/npc_paladin1.png"/>
+    <property name="id" value="npc_paladin3"/>
+    <property name="spritesheetpath" value="res/npc/npc_paladin1/spritesheet_npc_paladin1.png"/>
+    <property name="texttype" value="dl_npc_paladin1"/>
    </properties>
   </object>
  </objectgroup>

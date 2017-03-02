@@ -36,7 +36,7 @@ public:
 private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
-	BitmapText m_text;
+	sf::Text m_text;
 };
 
 class DialogueWindow : public Window {
@@ -79,7 +79,7 @@ private:
 	std::string m_dialogueTextID;
 
 	Dialogue* m_dialogue = nullptr;
-	BitmapText* m_dialogueText = nullptr;
+	sf::Text* m_dialogueText = nullptr;
 	BitmapText* m_speakerText = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 

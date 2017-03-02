@@ -36,9 +36,10 @@ DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT
 	m_speakerText->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_speakerText->setColor(COLOR_LIGHT_PURPLE);
 
-	m_dialogueText = new BitmapText("");
-	m_dialogueText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_dialogueText->setColor(COLOR_WHITE);
+	m_dialogueText = new sf::Text();
+	m_dialogueText->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_dialogueText->setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
+	m_dialogueText->setFillColor(COLOR_WHITE);
 
 	setPosition(sf::Vector2f(LEFT, TOP));
 
@@ -253,7 +254,7 @@ void DialogueWindow::calculateEntryPositions() {
 	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
 
 	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset;
+	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset - 0.5f * GUIConstants::CHARACTER_SIZE_M;
 
 	for (auto& it : m_options) {
 		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
@@ -371,9 +372,11 @@ DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string
 		break;
 	}
 
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setString(textString);
-	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text.setColor(COLOR_WHITE);
+	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
+	m_text.setFillColor(COLOR_WHITE);
+	m_text.setOutlineColor(COLOR_BAD);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setInputInDefaultView(true);
 }
@@ -388,7 +391,7 @@ void DialogueOption::render(sf::RenderTarget& renderTarget) {
 }
 
 void DialogueOption::setColor(const sf::Color& color) {
-	m_text.setColor(color);
+	m_text.setFillColor(color);
 }
 
 void DialogueOption::onLeftClick() {
@@ -402,7 +405,7 @@ bool DialogueOption::isClicked() {
 }
 
 void DialogueOption::select() {
-	m_text.setColor(COLOR_WHITE);
+	m_text.setFillColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -411,7 +414,7 @@ GameObjectType DialogueOption::getConfiguredType() const {
 }
 
 void DialogueOption::deselect() {
-	m_text.setColor(COLOR_GREY);
+	m_text.setFillColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

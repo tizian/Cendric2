@@ -24,4 +24,8 @@ private:
 	std::string m_language = "english";
 	// replaces the item variables marked with $item_id$ in the text
 	void replaceItemVariables(std::string& text);
+	// transforms the special characters of a string to characters that can be used in the bitmap text
+	static std::string transform(const std::string& in);
+
+	static const int TAB_TO_SPACES;
 };

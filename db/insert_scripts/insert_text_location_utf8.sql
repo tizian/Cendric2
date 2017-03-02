@@ -45,3 +45,4 @@ Guardian of the Sewers','Boss: Alastor,
 Wächter der Kanalisation','Boss: Alastor, 
 Wächter vode Kanalisation');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('janusroom','location','Alastor''s Grave','Alastor''s Grab','Es Grab vom Alastor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacrypt','location','Crypt of Gandria','Krypta von Gandria','Krypta vo Gandria');

@@ -165,7 +165,7 @@ void CookingWindow::calculateEntryPositions() {
 	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
 
 	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset;
+	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset - 0.5f * GUIConstants::CHARACTER_SIZE_M;
 
 	for (auto& it : m_options) {
 		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
@@ -277,15 +277,16 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		if (nr == 0) {
 			text += g_textProvider->getText("NothingToCook") + " ";
 		}
-		m_text.setString(text + "[" + g_textProvider->getText("Cancel") + "]");
+		m_text.setString(text + g_textProvider->getText("DialogueEnd"));
 	}
 	else {
 		std::string textString = g_textProvider->getText(cookedItemID, "item");
 		textString += " (" + g_textProvider->getText(itemID, "item") + " " + std::to_string(count)  + ")";
 		m_text.setString(textString);
 	}
-	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_text.setColor(COLOR_WHITE);
+	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
+	m_text.setFillColor(COLOR_WHITE);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setInputInDefaultView(true);
 }

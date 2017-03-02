@@ -17,6 +17,11 @@ npc.id:npc_helena
 	]
 	[
 		# Link node, tag is next tag
+		tag:16
+		condition:DL:isConditionFulfilled("npc_helena", "leeroy_chicken") and DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("boss", "BossMercenaries") and not DL:isConditionFulfilled("npc_helena", "cooked_chicken")
+	]
+	[
+		# Link node, tag is next tag
 		tag:7
 	]
 }
@@ -154,6 +159,36 @@ npc.id:npc_helena
 		tag:-2
 	]
 }
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Helena_KilledMercenaries
+	translation.en:Well... I didn't expect you to kill them but... It's also a way of getting rid of them. You'll get your chicken, of course...
+	translation.de:Nun... Ich hätte nicht gerade erwartet, dass du sie tötest aber es ist auch ein Weg, sie loszuwerden. Du kriegst dein Hühnchen natürlich...
+	translation.ch:Naja... Ich hätt nid grad erwarted dass du si umbringsch, aber das isch au e Möglichkeit, si loszwerde. Dis Güggeli bechunsch natürlich...
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:addItem("qe_leeroychicken", 1)
+	trigger:DL:addConditionProgress("npc_helena", "cooked_chicken")
+	# translation: 
+	translation.tag:DL_Helena_LeeroyMercenaries2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
 {2
 	# [7] Choice Node
 	tag:7
@@ -166,6 +201,26 @@ npc.id:npc_helena
 		translation.en:Whom did you sell my stuff?
 		translation.de:An wen hast du meine Sachen verkauft?
 		translation.ch:Wem hesch mini Sache verchauft?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_helena", "leeroy_chicken") and DL:isQuestState("leeroy_chicken", "started") and not DL:isConditionFulfilled("boss", "BossMercenaries")
+		# translation: 
+		translation.tag:DL_Choice_LeeroyChicken
+		translation.en:I've heard of your famous special chicken...
+		translation.de:Ich habe von deinem berühmten Hühnchen Spezial gehört...
+		translation.ch:Ich ha vo dim berüemte Güggeli Spezial ghört...
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:not DL:isConditionFulfilled("npc_helena", "leeroy_chicken") and DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("boss", "BossMercenaries") and not DL:isConditionFulfilled("npc_helena", "cooked_chicken")
+		# translation: 
+		translation.tag:DL_Choice_LeeroyChicken
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -199,6 +254,66 @@ npc.id:npc_helena
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Helena_LeeroyChicken
+	translation.en:And now you want some. Of course. But I can't cook for you at the moment.
+	translation.de:Und jetzt willst du auch davon. Natürlich. Ich kann aber momentan nicht für dich kochen.
+	translation.ch:Und jetz wesch au chli. Natürlich. Ich chan aber grad nid für dich choche.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addQuestDescription("leeroy_chicken", 1)
+	trigger:DL:addConditionProgress("npc_helena", "leeroy_chicken")
+	# translation: 
+	translation.tag:DL_Helena_LeeroyChicken2
+	translation.en:Those mercenaries just won't leave and they scare off my guests. If you manage to make them leave my inn, I'll cook a chicken for you.
+	translation.de:Diese Söldner wollen einfach nicht gehen, sie vertreiben mir meine ganze Kundschaft. Wenn du sie dazu bringst, meine Taverne zu verlassen, koche ich ein Hühnchen für dich.
+	translation.ch:Die Söldner wend eifach nid go, si vertriibed mir mini ganz Chundschaft. Wenn du ihne zeigsch, wo d'Türe isch, chochi es Güggeli für dich.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Helena_LeeroyMercenaries
+	translation.en:You're lucky. I'll cook one for you because you helped me to get rid of those nasty mercenaries who scared off my customers.
+	translation.de:Du hast Glück. Ich werde dir eins kochen, da du mir mit diesen üblen Söldnern geholfen hast, die meine Kunden vertrieben haben.
+	translation.ch:Du hesch Glück. Ich wird der eis choche well du die üble Söldner losworde bisch wo mini Chunde verschüücht hend.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_helena", "cooked_chicken")
+	trigger:DL:addItem("qe_leeroychicken", 1)
+	# translation: 
+	translation.tag:DL_Helena_LeeroyMercenaries2
+	translation.en:(Helena grills a chicken and it smells delicious) Here, for you. Enjoy your meal.
+	translation.de:(Helena grilliert ein Hühnchen und es duftet vorzüglich) Hier, für dich. Guten Appetit.
+	translation.ch:(D'Helena grilliert es Güggeli, es dufted vorzüglich) Do, für dich. En guete!
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {4

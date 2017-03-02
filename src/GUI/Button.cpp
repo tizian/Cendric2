@@ -119,7 +119,7 @@ void Button::setText(const std::string& text, int charSize) {
 
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
 	m_text = BitmapText(text);
-	float usedWidth = charSize * static_cast<int>(BitmapText::transform(text).length()) + 30.f;
+	float usedWidth = charSize * static_cast<int>(text.length()) + 30.f;
 	if (usedWidth > m_boundingBox.width) {
 		setSize(sf::Vector2f(usedWidth, m_boundingBox.height));
 	}

@@ -18,6 +18,7 @@ public:
 	static const std::string FONT_8_SHADOWED;
 	static const std::string FONT_12;
 	static const std::string FONT_12_SHADOWED;
+	static const std::string FONT_TTF_DIALOGUE;
 
 	static const std::string TEX_SPLASH_BG;
 	static const std::string TEX_SPLASH_FG;

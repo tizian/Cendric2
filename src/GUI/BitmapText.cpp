@@ -12,33 +12,6 @@ const int NUM_GLYPHS_V = 14;
 
 const int TAB_TO_SPACES = 4;
 
-std::string BitmapText::transform(const std::string& str) {
-	std::string out;
-	for (size_t i = 0; i < str.length(); ++i) {
-		unsigned char c = str.at(i);
-		if (c == 0xc3u) {
-			unsigned char c2 = str.at(i + 1);
-			out.push_back(c2 + 0x40u);
-			++i;
-		}
-		else if (c == 0xc2u) {
-			unsigned char c2 = str.at(i + 1);
-			out.push_back(c2);
-			++i;
-		}
-		else if (c == 0x09u) {
-			// convert tabs to spaces
-			for (int j = 0; j < TAB_TO_SPACES; ++j) {
-				out.push_back(0x20u);
-			}
-		}
-		else {
-			out.push_back(c);
-		}
-	}
-	return out;
-}
-
 BitmapText::BitmapText() {
 	m_vertices = sf::VertexArray(sf::Quads);
 	m_color = COLOR_WHITE;
@@ -51,8 +24,8 @@ BitmapText::BitmapText() {
 
 BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment alignment) {
 	m_style = style;
+	m_string = string;
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = transform(string);
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.2f;
@@ -63,7 +36,7 @@ BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment
 BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_style = TextStyle::Default;
 	m_vertices = sf::VertexArray(sf::Quads);
-	m_string = transform(string);
+	m_string = string;
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.2f;
@@ -72,7 +45,7 @@ BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 }
 
 void BitmapText::setString(const std::string& string) {
-	m_string = transform(string);
+	m_string = string;
 	init();
 }
 

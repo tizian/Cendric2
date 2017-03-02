@@ -99,7 +99,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Stone
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item', 'Stone','Stein','Stei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item_desc', 'A small stone.','Ein kleiner Stein.','En chline stei.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item_desc', 'A small stone.','Ein kleiner Stein.','En chliine Stei.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_stone', 'misc', 250, 350, 4);
 
 -- Corrupt stone

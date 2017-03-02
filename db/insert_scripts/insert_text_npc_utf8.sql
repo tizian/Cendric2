@@ -38,7 +38,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_citizen','npc','Citizen','Bürger','Bürger');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_citizenf','npc','Citizen','Bürgerin','Bürgerin');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jack','npc','Jack','Jack','Jack');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lee','npc','Lee','Lee','Lee');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_luv','npc','Luv','Luv','Luv');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lee','npc','Lee','Lee','Sota');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_luv','npc','Luv','Luv','Barlo');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_adelya','npc','Adelya','Adelya','Adelya');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_mona','npc','Mona','Mona','Mona');

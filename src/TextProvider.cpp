@@ -7,6 +7,8 @@ using namespace std;
 
 TextProvider* g_textProvider;
 
+const int TextProvider::TAB_TO_SPACES = 4;
+
 TextProvider::TextProvider() {
 	reload();
 }
@@ -33,7 +35,7 @@ std::string TextProvider::getText(const std::string& key, const std::string& typ
 	if (isReplaceItemVariables) {
 		replaceItemVariables(rs[0][0]);
 	}
-	return rs[0][0];
+	return transform(rs[0][0]);
 }
 
 void TextProvider::replaceItemVariables(std::string& text) {
@@ -75,7 +77,7 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 	}
 
 	size_t maxLineChars = static_cast<size_t>(maxWidth / characterSize);
-	std::string uncroppedText = BitmapText::transform(string);
+	std::string uncroppedText = string;
 	std::string text = "";
 	while (static_cast<int>(uncroppedText.size()) * characterSize > maxWidth) {
 		// check for forced newlines
@@ -109,6 +111,33 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 		}
 	}
 	return text.append(uncroppedText);
+}
+
+std::string TextProvider::transform(const std::string& str) {
+	std::string out;
+	for (size_t i = 0; i < str.length(); ++i) {
+		unsigned char c = str.at(i);
+		if (c == 0xc3u) {
+			unsigned char c2 = str.at(i + 1);
+			out.push_back(c2 + 0x40u);
+			++i;
+		}
+		else if (c == 0xc2u) {
+			unsigned char c2 = str.at(i + 1);
+			out.push_back(c2);
+			++i;
+		}
+		else if (c == 0x09u) {
+			// convert tabs to spaces
+			for (int j = 0; j < TAB_TO_SPACES; ++j) {
+				out.push_back(0x20u);
+			}
+		}
+		else {
+			out.push_back(c);
+		}
+	}
+	return out;
 }
 
 void TextProvider::setLanguage(Language lang) {

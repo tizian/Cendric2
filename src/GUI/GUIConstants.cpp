@@ -17,6 +17,7 @@ int GUIConstants::CHARACTER_SIZE_L = 16;
 int GUIConstants::CHARACTER_SIZE_XL = 24;
 int GUIConstants::CHARACTER_SIZE_XXL = 36;
 int GUIConstants::CHARACTER_SIZE_XXXL = 48;
+int GUIConstants::CHARACTER_SIZE_DIALOGUE = 20;
 
 sf::Color GUIConstants::MAIN_COLOR = sf::Color(0, 0, 0, 130);
 sf::Color GUIConstants::BACK_COLOR = sf::Color(0, 0, 0, 0);

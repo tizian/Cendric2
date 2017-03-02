@@ -117,8 +117,12 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, -2, "DL_Leeroy_ChickenDone2") -- But now I'm ready. Let's do this!
+		DL:createNPCNode(15, 16, "DL_Leeroy_ChickenDone2") -- But now I'm ready. Let's do this!
 		DL:addConditionProgress("default", "swampbridge_open")
+		DL:addNode()
+
+
+		DL:createNPCNode(16, -1, "") -- 
 		DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
 		DL:addNode()
 
