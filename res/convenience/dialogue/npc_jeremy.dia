@@ -30,6 +30,16 @@ npc.id:npc_jeremy
 	]
 	[
 		# Link node, tag is next tag
+		tag:7
+		condition:DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("npc_helena","leeroy_chicken") and not DL:isConditionFulfilled("npc_jeremy", "leeroy_chicken")
+		# translation: 
+		translation.tag:DL_Choice_LeeroyChicken
+		translation.en:Helena wants you to leave her inn. Get out.
+		translation.de:Helena will, dass ihr ihre Taverne verlässt. Raus mit euch.
+		translation.ch:D'Helena wett eu nüm do ha. Ihr sötted besser go.
+	]
+	[
+		# Link node, tag is next tag
 		tag:3
 		condition:not DL:isConditionFulfilled("npc_jeremy", "who_are_you")
 		# translation: 
@@ -73,6 +83,36 @@ npc.id:npc_jeremy
 	translation.en:We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and oozes...
 	translation.de:Wir haben ihn irgendwo in der Kanalisation von Gandria verloren. Viel Spass, wenn du ihn dort finden willst, zwischen all den hässlichen Ratten und Schleimen.
 	translation.ch:Mir henden irgendwo ide Kanalisation vo Gandria verlore. Viel Spass wenden det finde wetsch, zwüsched all de grusige Ratte und Schleimlis.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_LeeroyChicken
+	translation.en:(Chuckles) And why exactly should we leave? We like it here.  
+	translation.de:(Lacht) Und wieso genau sollten wir gehen? Uns gefällt es hier.
+	translation.ch:(Gigglet) Und wieso genau söttemer go? Es gfallt üs do.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jeremy", "leeroy_chicken")
+	trigger:DL:addQuestDescription("leeroy_chicken", 2)
+	# translation: 
+	translation.tag:DL_Jeremy_LeeroyChicken2
+	translation.en:You should have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
+	translation.de:Du solltest einen wirklich guten Grund für uns haben, wenn wir hier raus sollen - und den scheinst du nicht zu haben. Geh jetzt besser, Kleiner.
+	translation.ch:Du söttsch en würkli guete Grund für üs ha, dasmer vo do weg gönd - und de hesch definitiv nid. Gang ez besser, Chliine.
 	[
 		# Link node, tag is next tag
 		tag:-2

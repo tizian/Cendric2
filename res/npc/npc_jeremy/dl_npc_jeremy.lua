@@ -13,6 +13,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("stephens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")) then 
 			DL:addChoice(2, "DL_Choice_Helmet") -- Do you know something about the helmet of a certain paladin?
 		end
+		if (DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("npc_helena","leeroy_chicken") and not DL:isConditionFulfilled("npc_jeremy", "leeroy_chicken")) then 
+			DL:addChoice(7, "DL_Choice_LeeroyChicken") -- Helena wants you to leave her inn. Get out.
+		end
 		if (not DL:isConditionFulfilled("npc_jeremy", "who_are_you")) then 
 			DL:addChoice(3, "DL_Choice_WhoAreYou") -- Who are you guys?
 		end
@@ -28,6 +31,19 @@ loadDialogue = function(DL)
 			DL:createNPCNode(8, -2, "DL_Jeremy_Helmet2") -- We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and oozes...
 			DL:addQuestDescription("stephens_helmet", 1)
 			DL:addConditionProgress("npc_jeremy", "helmet")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("npc_helena","leeroy_chicken") and not DL:isConditionFulfilled("npc_jeremy", "leeroy_chicken")) then 
+
+			DL:createNPCNode(7, 15, "DL_Jeremy_LeeroyChicken") -- (Chuckles) And why exactly should we leave? We like it here.  
+			DL:addNode()
+
+
+			DL:createNPCNode(15, -2, "DL_Jeremy_LeeroyChicken2") -- You should have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
+			DL:addConditionProgress("npc_jeremy", "leeroy_chicken")
+			DL:addQuestDescription("leeroy_chicken", 2)
 			DL:addNode()
 
 		end
