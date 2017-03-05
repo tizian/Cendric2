@@ -27,6 +27,8 @@ struct CharacterCoreData {
 	sf::Vector2f currentMapPosition;
 	std::string currentLevel;
 	sf::Vector2f currentLevelPosition;
+	std::string forcedMap;
+	sf::Vector2f forcedMapPosition;
 	std::map<std::string, std::set<int>> enemiesLooted;
 	std::map<std::string, std::set<int>> enemiesKilled;
 	std::map<std::string, std::set<int>> itemsLooted;
@@ -83,6 +85,8 @@ const CharacterCoreData DEFAULT_CORE
 	time(nullptr),
 	FractionID::VOID,
 	false,
+	"",
+	sf::Vector2f(),
 	"",
 	sf::Vector2f(),
 	"",

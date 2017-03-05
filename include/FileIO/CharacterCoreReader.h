@@ -24,6 +24,8 @@ private:
 	bool readIsInLevel(std::string& line, CharacterCoreData& data) const;
 	bool readMapID(std::string& line, CharacterCoreData& data) const;
 	bool readMapPosition(std::string& line, CharacterCoreData& data) const;
+	bool readForcedMapID(std::string& line, CharacterCoreData& data) const;
+	bool readForcedMapPosition(std::string& line, CharacterCoreData& data) const;
 	bool readLevelID(std::string& line, CharacterCoreData& data) const;
 	bool readLevelPosition(std::string& line, CharacterCoreData& data) const;
 	bool readEnemiesKilled(std::string& line, CharacterCoreData& data) const;

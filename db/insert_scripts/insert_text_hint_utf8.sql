@@ -22,9 +22,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('MapMove', 'hint_desc','to move.','um dich zu bewegen.','zum dich bewege.','para moverse.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint','Item pickup','Gegenstände aufnehmen','Gegeständ ufnä','Levantar objeto');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint_desc','Click on an item with the right mouse key to pickup.','Klicke einen Gegenstand mit der rechten Maustaste an, um ihn aufzuheben.','Klick en Gegestand mit de rechte Muustaschte ah zum ihn neh.','Haz clic con el botón derecho del mouse para levantar.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint_desc','Click on an item with the right mouse key to pickup.','Klicke einen Gegenstand mit der rechten Maustaste an, um ihn aufzuheben.','Klick en Gegestand mit de rechte Muustaschte ah zum ihn neh.','Haz clic con el botón derecho del  mouse para levanter un objeto.');
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Highlight', 'hint','Highlight items','Gegenstände markieren','Gegeständ markiere','Objetos resaltados');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Highlight', 'hint','Highlight items','Gegenstände markieren','Gegeständ markiere','Resaltar objetos');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Highlight', 'hint_desc','to highlight items that can be picked up.','um aufhebbare Gegenstände zu markieren.','zum ufhebbari Gegeständ markiere.','para resaltar objetos que se pueden levantar.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Reload', 'hint','Reload level','Level neu laden','Level neu lade','Recargar nivel');

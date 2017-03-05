@@ -8,6 +8,7 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 		m_levelToLoad = new LevelScreen(core->getData().currentLevel, getCharacterCore());
 	}
 	else {
+		core->replaceForcedMap();
 		m_mapToLoad = new MapScreen(core->getData().currentMap, getCharacterCore());
 	}
 }

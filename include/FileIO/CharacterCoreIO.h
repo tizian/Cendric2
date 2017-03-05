@@ -17,6 +17,8 @@ protected:
 	const char* IS_IN_LEVEL = "is.in.level";
 	const char* MAP_ID = "map.id";
 	const char* MAP_POSITION = "map.position";
+	const char* FORCED_MAP_ID = "forced.map.id";
+	const char* FORCED_MAP_POSITION = "forced.map.position";
 	const char* LEVEL_ID = "level.id";
 	const char* LEVEL_POSITION = "level.position";
 	const char* ENEMIES_KILLED = "enemies.killed";

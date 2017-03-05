@@ -59,6 +59,10 @@ public:
 	void setMap(const sf::Vector2f& position, const std::string& map);
 	// save the position and level id  also sets "isInLevel" = true
 	void setLevel(const sf::Vector2f& position, const std::string& level);
+	// sets the position and map id of the forced map.
+	void setForcedMap(const sf::Vector2f& position, const std::string& map);
+	// replaces the map with the currently forced map and cleares the forced one.
+	void replaceForcedMap();
 	// sets the "in level" property of the character core data
 	void setInLevel(bool inLevel);
 	// equips an item at the given position and adds the former equipment part into the inventory. To deequip an item, use this method with an empty string as item id.

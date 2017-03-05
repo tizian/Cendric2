@@ -28,6 +28,8 @@ private:
 	std::string writeMapPosition(const CharacterCoreData& data) const;
 	std::string writeLevelID(const CharacterCoreData& data) const;
 	std::string writeLevelPosition(const CharacterCoreData& data) const;
+	std::string writeForcedMapID(const CharacterCoreData& data) const;
+	std::string writeForcedMapPosition(const CharacterCoreData& data) const;
 	std::string writeEnemiesKilled(const CharacterCoreData& data) const;
 	std::string writeEnemiesLooted(const CharacterCoreData& data) const;
 	std::string writeItemsLooted(const CharacterCoreData& data) const;

@@ -490,11 +490,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(66, 67, "DL_Jonathan_BirdSlain3") -- If I remember correctly, there was an old swamp hag who knew some earth spells.
+		DL:createNPCNode(66, 67, "DL_Jonathan_BirdSlain3") -- The only mage in Gandria who knows some earth magic is a guy called Koray.
 		DL:addNode()
 
 
-		DL:createNPCNode(67, -2, "DL_Jonathan_BirdSlain4") -- You should go to the marshlands in the South and talk to her.
+		DL:createNPCNode(67, -2, "DL_Jonathan_BirdSlain4") -- He went to the marshlands in the South of Gandria lately. Maybe he'll teach you what he knows.
 		DL:addQuestDescription("element_master", 4)
 		DL:addConditionProgress("npc_jonathan", "bird_slain")
 		DL:addNode()

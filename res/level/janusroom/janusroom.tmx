@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="92">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="93">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/janusroom/layer_inf.png,3.0,res/level/janusroom/layer_3.png,2.0,res/level/janusroom/layer_2.png"/>
   <property name="dimming" value="0.7"/>
@@ -473,6 +473,11 @@
     <property name="keyguarded" value=""/>
     <property name="level entry" value="res/level/gandriacrypt/gandriacrypt.tmx,2160,1710"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="92" x="350" y="450" width="550" height="350">
+   <properties>
+    <property name="forced map" value="res/map/gandria/gandria.tmx,2260,300"/>
    </properties>
   </object>
  </objectgroup>

@@ -621,6 +621,20 @@ void CharacterCore::setLevel(const sf::Vector2f& position, const std::string& le
 	m_data.isInLevel = true;
 }
 
+void CharacterCore::setForcedMap(const sf::Vector2f& position, const std::string& map) {
+	m_data.forcedMap = map;
+	m_data.forcedMapPosition = position;
+}
+
+void CharacterCore::replaceForcedMap() {
+	if (m_data.forcedMap.empty()) return;
+
+	m_data.currentMap = m_data.forcedMap;
+	m_data.currentMapPosition = m_data.forcedMapPosition;
+
+	m_data.forcedMap.clear();
+}
+
 void CharacterCore::setInLevel(bool inLevel) {
 	m_data.isInLevel = inLevel;
 }

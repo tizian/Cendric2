@@ -17,6 +17,8 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ ATTRIBUTES,  &CharacterCoreReader::readAttributes });
 	m_readMap.insert({ MAP_ID,  &CharacterCoreReader::readMapID });
 	m_readMap.insert({ MAP_POSITION,  &CharacterCoreReader::readMapPosition });
+	m_readMap.insert({ FORCED_MAP_ID,  &CharacterCoreReader::readForcedMapID });
+	m_readMap.insert({ FORCED_MAP_POSITION,  &CharacterCoreReader::readForcedMapPosition });
 	m_readMap.insert({ LEVEL_ID,  &CharacterCoreReader::readLevelID });
 	m_readMap.insert({ LEVEL_POSITION,  &CharacterCoreReader::readLevelPosition });
 	m_readMap.insert({ ENEMIES_KILLED,  &CharacterCoreReader::readEnemiesKilled });
@@ -280,6 +282,17 @@ bool CharacterCoreReader::readMapID(std::string& line, CharacterCoreData& data) 
 bool CharacterCoreReader::readMapPosition(std::string& line, CharacterCoreData& data) const {
 	data.currentMapPosition.x = static_cast<float>(std::stof(line));
 	FLOAT_AFTER_COMMA(line, data.currentMapPosition.y);
+	return true;
+}
+
+bool CharacterCoreReader::readForcedMapID(std::string& line, CharacterCoreData& data) const {
+	data.forcedMap = line;
+	return true;
+}
+
+bool CharacterCoreReader::readForcedMapPosition(std::string& line, CharacterCoreData& data) const {
+	data.forcedMapPosition.x = static_cast<float>(std::stof(line));
+	FLOAT_AFTER_COMMA(line, data.forcedMapPosition.y);
 	return true;
 }
 

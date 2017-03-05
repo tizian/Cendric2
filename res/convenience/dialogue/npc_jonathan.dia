@@ -1226,9 +1226,9 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_BirdSlain3
-	translation.en:If I remember correctly, there was an old swamp hag who knew some earth spells.
-	translation.de:Wenn ich mich richtig erinnere, gibt eine alte Sumpfhexe die ein paar Erdzauber kennt.
-	translation.ch:Wenich mich richtig erinnere, gits e alti Sumpfhex wo es paar Erdzauber kennt.
+	translation.en:The only mage in Gandria who knows some earth magic is a guy called Koray.
+	translation.de:Der einzige Magier in Gandria der sich mit Erdmagie auskennt ist ein Typ names Koray.
+	translation.ch:De einzig Magier i Gandria wo sich chli mit Erdmagie uskennt isch en Typ namens Koray.
 	[
 		# Link node, tag is next tag
 		tag:67
@@ -1242,9 +1242,9 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "bird_slain")
 	# translation: 
 	translation.tag:DL_Jonathan_BirdSlain4
-	translation.en:You should go to the marshlands in the South and talk to her.
-	translation.de:Du solltest in die Marschen im Süden gehen und mit ihr sprechen.
-	translation.ch:Du sötsch is Sumpfland im Süde goh und mit ihre rede.
+	translation.en:He went to the marshlands in the South of Gandria lately. Maybe he'll teach you what he knows.
+	translation.de:Er ging kürzlich in die Marschen im Süden von Gandria. Vielleicht bringt er dir ja sein Wissen bei.
+	translation.ch:Er isch letztins is Sumpfland im Süde vo Gandria gange. Vilicht bringter dir jo bi waner weiss.
 	[
 		# Link node, tag is next tag
 		tag:-2

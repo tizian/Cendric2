@@ -25,6 +25,7 @@ enum class TriggerContentType {
 	SetGuild,
 	SetLevel,
 	SetMap,
+	SetForcedMap,
 	MAX,
 };
 
@@ -63,5 +64,6 @@ struct TriggerContent {
 	static TriggerContent startMap(const std::string& mapID, int x, int y);
 	static TriggerContent setLevel(const std::string& levelID, int x, int y);
 	static TriggerContent setMap(const std::string& mapID, int x, int y);
+	static TriggerContent setForcedMap(const std::string& mapID, int x, int y);
 	static TriggerContent startCutscene(const std::string& cutsceneID);
 };

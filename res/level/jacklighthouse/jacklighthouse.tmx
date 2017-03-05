@@ -1367,6 +1367,7 @@
   <object id="159" x="1400" y="500" width="250" height="200">
    <properties>
     <property name="forced" value=""/>
+    <property name="forced map" value="res/map/gandria/gandria.tmx,3465,2260"/>
     <property name="learn spell" value="4"/>
     <property name="weather" value="res/map/gandria/gandria.tmx,30,"/>
     <property name="weather 2" value="res/map/meadows/meadows.tmx,30,"/>

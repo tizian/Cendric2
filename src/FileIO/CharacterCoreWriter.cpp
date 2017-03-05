@@ -27,6 +27,8 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeIsInLevel(data);
 		savefile << writeMapID(data);
 		savefile << writeMapPosition(data);
+		savefile << writeForcedMapID(data);
+		savefile << writeForcedMapPosition(data);
 		savefile << writeAttributes(data);
 		savefile << writeGold(data);
 		savefile << writeItemID(data);
@@ -83,12 +85,20 @@ std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const
 	return std::string(MAP_ID) + ":" + data.currentMap + "\n";
 }
 
-std::string CharacterCoreWriter::writeIsInLevel(const CharacterCoreData& data) const {
-	return std::string(IS_IN_LEVEL) + ":" + (data.isInLevel ? "1" : "0") + "\n";
-}
-
 std::string CharacterCoreWriter::writeMapPosition(const CharacterCoreData& data) const {
 	return std::string(MAP_POSITION) + ":" + std::to_string(data.currentMapPosition.x) + "," + std::to_string(data.currentMapPosition.y) + "\n";
+}
+
+std::string CharacterCoreWriter::writeForcedMapID(const CharacterCoreData& data) const {
+	return std::string(FORCED_MAP_ID) + ":" + data.forcedMap + "\n";
+}
+
+std::string CharacterCoreWriter::writeForcedMapPosition(const CharacterCoreData& data) const {
+	return std::string(FORCED_MAP_POSITION) + ":" + std::to_string(data.forcedMapPosition.x) + "," + std::to_string(data.forcedMapPosition.y) + "\n";
+}
+
+std::string CharacterCoreWriter::writeIsInLevel(const CharacterCoreData& data) const {
+	return std::string(IS_IN_LEVEL) + ":" + (data.isInLevel ? "1" : "0") + "\n";
 }
 
 std::string CharacterCoreWriter::writeLevelID(const CharacterCoreData& data) const {

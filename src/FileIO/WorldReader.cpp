@@ -276,6 +276,35 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("forced map") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, map entry value property not found.");
+						return false;
+					}
+
+					std::string forcedMap = textAttr;
+
+					size_t pos = 0;
+					if ((pos = forcedMap.find(",")) == std::string::npos) {
+						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::SetForcedMap);
+					content.s1 = forcedMap.substr(0, pos);
+					forcedMap.erase(0, pos + 1);
+
+					if ((pos = forcedMap.find(",")) == std::string::npos) {
+						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(forcedMap.substr(0, pos).c_str());
+					forcedMap.erase(0, pos + 1);
+
+					content.i2 = std::atoi(forcedMap.c_str());
+					trigger.content.push_back(content);
+				}
 				else if (name.find("weather") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
