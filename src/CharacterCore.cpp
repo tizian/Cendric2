@@ -8,8 +8,6 @@
 using namespace std;
 
 CharacterCore::CharacterCore() {
-	m_data = DEFAULT_CORE;
-
 	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
 		m_data.equippedItems.insert({ type, "" });
 	}

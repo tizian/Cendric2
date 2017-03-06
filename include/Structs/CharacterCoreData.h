@@ -18,11 +18,11 @@ struct CharacterCoreData {
 	// savegame attributes
 	sf::Time timePlayed;
 	std::string saveGameName;
-	std::time_t dateSaved;
+	std::time_t dateSaved = time(nullptr);
 
 	// position & progress
-	FractionID guild;
-	bool isInLevel;
+	FractionID guild = FractionID::VOID;
+	bool isInLevel = false;
 	std::string currentMap;
 	sf::Vector2f currentMapPosition;
 	std::string currentLevel;
@@ -59,11 +59,11 @@ struct CharacterCoreData {
 	std::map<std::string, WeatherData> currentWeather;
 
 	// base attributes
-	AttributeData attributes;
+	AttributeData attributes = ZERO_ATTRIBUTES;
 
 	// items & equipment
-	int gold;
-	int storedGold;
+	int gold = 0;
+	int storedGold = 0;
 	std::vector<WeaponSlot> equippedWeaponSlots;
 	std::map<ItemType, std::string> equippedItems;
 	std::map<std::string, int> items;
@@ -71,53 +71,9 @@ struct CharacterCoreData {
 
 	// weapon configurations
 	std::map<std::string, std::vector<WeaponSlot>> weaponConfigurations;
-	Key weaponSpell;
+	Key weaponSpell = Key::Chop;
 
 	// quickslot assignment
 	std::string quickSlot1;
 	std::string quickSlot2;
-};
-
-const CharacterCoreData DEFAULT_CORE
-{
-	sf::Time::Zero,
-	"",
-	time(nullptr),
-	FractionID::VOID,
-	false,
-	"",
-	sf::Vector2f(),
-	"",
-	sf::Vector2f(),
-	"",
-	sf::Vector2f(),
-	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::set<int>>(),
-	std::map<std::string, std::map<int, sf::Vector2f>>(),
-	std::map<std::string, std::set<int>>(),
-	ExploredTiles(),
-	std::map<std::string, std::set<std::string>>(),
-	std::map<std::string, std::map<std::string, int>>(),
-	std::map<std::string, QuestState>(),
-	std::map<std::string, std::map<std::string, int>>(),
-	std::map<std::string, std::set<std::string>>(),
-	std::map<std::string, std::set<int>>(),
-	std::map<FractionID, int>(),
-	std::map<SpellType, std::set<SpellID>>(),
-	std::map<SpellModifierType, int>(),
-	std::vector<std::string>(),
-	std::map<std::string, WeatherData>(),
-	ZERO_ATTRIBUTES,
-	0,
-	0,
-	std::vector<WeaponSlot>(),
-	std::map<ItemType, std::string>(),
-	std::map<std::string, int>(),
-	std::map<std::string, int>(),
-	std::map<std::string, std::vector<WeaponSlot>>(),
-	Key::Chop,
-	"",
-	""
 };

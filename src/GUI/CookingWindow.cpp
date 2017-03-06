@@ -301,7 +301,7 @@ void CookingOption::render(sf::RenderTarget& renderTarget) {
 }
 
 void CookingOption::setColor(const sf::Color& color) {
-	m_text.setColor(color);
+	m_text.setFillColor(color);
 }
 
 void CookingOption::onLeftClick() {
@@ -315,7 +315,7 @@ bool CookingOption::isClicked() {
 }
 
 void CookingOption::select() {
-	m_text.setColor(COLOR_WHITE);
+	m_text.setFillColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -324,7 +324,7 @@ GameObjectType CookingOption::getConfiguredType() const {
 }
 
 void CookingOption::deselect() {
-	m_text.setColor(COLOR_GREY);
+	m_text.setFillColor(COLOR_GREY);
 	m_isSelected = false;
 }
 
