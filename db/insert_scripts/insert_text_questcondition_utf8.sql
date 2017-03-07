@@ -3,4 +3,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('guards_convinced', 'quest_condition', 'Guards convinced','Wachen überzeugt','Wache überzüügt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('master_air', 'quest_condition', 'Air spell learned','Luftzauber erlernt','Luftzauber glernt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('master_earth', 'quest_condition', 'Earth spell learned','Erdzauber erlernt','Erdzauber glernt');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('abductors_found', 'quest_condition', 'Abductors found','Entführer gefunden','Entführer gfunde');
 

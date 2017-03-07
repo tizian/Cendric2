@@ -1,0 +1,27 @@
+# dia file for dialogue for npc: npc_lloyd3
+
+npc.id:npc_lloyd3
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd3", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_Talk
+	translation.en:Ah, what a coincidence. I was looking for you.
+	translation.de:Ah, was für ein Zufall. Nach dir habe ich gerade gesucht.
+	translation.ch:Ah, was füren Zuefall. Noch dir hani grad gsuecht.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
