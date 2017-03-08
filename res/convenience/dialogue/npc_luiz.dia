@@ -406,6 +406,26 @@ npc.id:npc_luiz
 	]
 	[
 		# Link node, tag is next tag
+		tag:24
+		condition:DL:isQuestState("lloyds_plan", "void")
+		# translation: 
+		translation.tag:DL_Choice_HowCanIHelp
+		translation.en:How can I help you?
+		translation.de:Wie kann ich euch helfen?
+		translation.ch:Wie chani eu helfe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:26
+		condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")
+		# translation: 
+		translation.tag:DL_Choice_WhatElseHelp
+		translation.en:What else can I do for you?
+		translation.de:Was kann ich sonst noch für euch tun?
+		translation.ch:Was chani susch na für eu mache?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -455,6 +475,49 @@ npc.id:npc_luiz
 	translation.en:Yes, you've earned the experience to learn how to raise the dead...
 	translation.de:Ja, du hast nun die nötige Erfahrung um zu erlernen, wie man die Toten erweckt...
 	translation.ch:Jo, du hesch ez di nötig Erfahrig zum lerne, weme di Tote erweckt...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_LloydsPlan
+	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
+	translation.ch:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:changeQuestState("lloyds_plan", "started")
+	# translation: 
+	translation.tag:DL_Luiz_LloydsPlan2
+	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
+	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
+	translation.ch:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_CathedralNecro
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -15,4 +15,5 @@ struct EnemyData {
 	std::pair<std::map<std::string, int>, int> customizedLoot;
 	bool isUnique = false; // marker for enemies that don't respawn with the level reset when killed once
 	std::string luaPath = ""; // the path to a possible lua script for behavior, mostly empty
+	std::string name = ""; // if set, this enemy has not the default name, but this special one.
 };

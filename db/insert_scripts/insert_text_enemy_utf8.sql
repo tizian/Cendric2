@@ -29,3 +29,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Elysia','enemy','Huge Bird','Riesiger Vogel','Riesige Vogel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('DragonWhelp','enemy','Dragon Whelp','Drachenwelpe','Drächeli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossJanus','enemy','Alastor, Guardian of the Sewers','Alastor, Wächter der Kanalisation','Alastor, Wächter vode Kanalisation');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyFireRat','enemy','Nasty Fire Rat','Garstige Feuerratte','Rüüdigi Füürratte');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyOoze','enemy','Nasty Ooze','Garstiger Schleim','Rüüdige Schleim');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyBat','enemy','Nasty Bat','Garstige Fledermaus','Rüüdigi Flädermuus');

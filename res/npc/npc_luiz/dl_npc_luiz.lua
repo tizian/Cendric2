@@ -161,6 +161,12 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") >= 50) then 
 			DL:addChoice(23, "DL_Choice_TeachMore") -- 
 		end
+		if (DL:isQuestState("lloyds_plan", "void")) then 
+			DL:addChoice(24, "DL_Choice_HowCanIHelp") -- How can I help you?
+		end
+		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
+			DL:addChoice(26, "DL_Choice_WhatElseHelp") -- What else can I do for you?
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -185,6 +191,25 @@ loadDialogue = function(DL)
 			DL:createNPCNode(23, -2, "DL_Luiz_SecondSpell") -- Yes, you've earned the experience to learn how to raise the dead...
 			DL:addItem("sp_raisethedead", 1)
 			DL:addConditionProgress("npc_luiz", "second_spell")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("lloyds_plan", "void")) then 
+
+			DL:createNPCNode(24, 25, "DL_Luiz_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+			DL:addNode()
+
+
+			DL:createNPCNode(25, -2, "DL_Luiz_LloydsPlan2") -- We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
+			DL:changeQuestState("lloyds_plan", "started")
+			DL:addNode()
+
+		end
+
+		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
+
+			DL:createNPCNode(26, -2, "DL_Luiz_CathedralNecro") -- 
 			DL:addNode()
 
 		end

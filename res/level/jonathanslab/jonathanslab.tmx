@@ -766,7 +766,6 @@
   <object id="143" gid="951" x="450" y="1200" width="50" height="50">
    <properties>
     <property name="qe_fireessence" value="2"/>
-    <property name="qe_fireratheart" value="1"/>
     <property name="skinnr" value="1"/>
     <property name="unique" value=""/>
    </properties>

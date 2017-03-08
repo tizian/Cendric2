@@ -67,6 +67,7 @@ public:
 	void setObjectID(int id);
 	// sets the enemy as ally. The enemy dies after the time to live has run out.
 	void setAlly(const sf::Time& ttl);
+	void setEnemyName(const std::string& name);
 
 	GameObjectType getConfiguredType() const override;
 	
@@ -100,6 +101,7 @@ public:
 	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {};
 
 	virtual EnemyID getEnemyID() const = 0;
+	const std::string& getEnemyName() const;
 
 protected:
 	LevelMainCharacter* m_mainChar;
@@ -158,6 +160,7 @@ private:
 	// the enemy can only be looted if the main char is in this range
 	static const float PICKUP_RANGE;
 	EnemyReward m_reward;
+	std::string m_name = "";
 
 	EnemyBuffBar* m_buffBar = nullptr;
 

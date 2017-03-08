@@ -283,6 +283,8 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 			g_logger->logError("LevelLoader", "Enemy was not loaded, unknown id.");
 			return;
 		}
+
+		enemy->setEnemyName(it.name);
 		enemy->load(it.skinNr);
 
 		// set quest targets

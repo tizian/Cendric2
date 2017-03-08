@@ -82,7 +82,7 @@ void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {
 		m_enemyHealthBar->setAttributes(nullptr);
 		return;
 	}
-	m_enemyHealthBar->setName(g_textProvider->getText(EnumNames::getEnemyName(enemy->getEnemyID()), "enemy"));
+	m_enemyHealthBar->setName(g_textProvider->getText(enemy->getEnemyName(), "enemy"));
 	m_enemyHealthBar->setAttributes(enemy->getAttributes());
 	m_enemyHealthBar->setVisible(true);
 }

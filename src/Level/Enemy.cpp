@@ -38,6 +38,9 @@ Enemy::~Enemy() {
 }
 
 void Enemy::load(int skinNr) {
+	if (m_name.empty())
+		m_name = EnumNames::getEnemyName(getEnemyID());
+
 	loadResources();
 	loadAnimation(skinNr);
 	loadAttributes();
@@ -45,7 +48,7 @@ void Enemy::load(int skinNr) {
 	loadBehavior();
 	m_spellManager->setSpellsAllied(m_isAlly);
 
-	m_interactComponent = new InteractComponent(g_textProvider->getText(EnumNames::getEnemyName(getEnemyID()), "enemy"), this, m_mainChar);
+	m_interactComponent = new InteractComponent(g_textProvider->getText(m_name, "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToLoot");
 	m_interactComponent->setOnInteract(std::bind(&Enemy::loot, this));
@@ -236,6 +239,10 @@ EnemyState Enemy::getEnemyState() const {
 	return m_enemyState;
 }
 
+const std::string& Enemy::getEnemyName() const {
+	return m_name;
+}
+
 void Enemy::setWaiting() {
 	m_waitingTime = getConfiguredWaitingTime();
 }
@@ -268,6 +275,11 @@ void Enemy::addQuestCondition(const std::pair<std::string, std::string>& questco
 
 void Enemy::setObjectID(int id) {
 	m_objectID = id;
+}
+
+void Enemy::setEnemyName(const std::string& name) {
+	if (name.empty()) return;
+	m_name = name;
 }
 
 void Enemy::setAlly(const sf::Time& ttl) {

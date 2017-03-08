@@ -17,7 +17,7 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const 
 	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(getResourcePath(fileName).c_str());
-		XMLCheckResult(result);
+	XMLCheckResult(result);
 
 	tinyxml2::XMLElement* map = xmlDoc.FirstChildElement("map");
 	if (map == nullptr) {
@@ -105,7 +105,7 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 				property_ = property_->NextSiblingElement("property");
 			}
 		}
-		
+
 		data.modifiers.push_back(modifierData);
 
 		object = object->NextSiblingElement("object");
@@ -194,7 +194,7 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 						property_ = property_->NextSiblingElement("property");
 						continue;
 					}
-					catch (const std::exception& e) { 
+					catch (const std::exception& e) {
 						logError("Invalid moving tile direction, conversion to integer failed: " + std::string(e.what()) + " Direction attribute: " + initialDirectionString);
 						return false;
 					}
@@ -285,7 +285,7 @@ bool LevelReader::readDoorTiles(tinyxml2::XMLElement* objectgroup, LevelData& da
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
-				
+
 				if (propertyText.compare("key") == 0) {
 					std::string keyItemID = property_->Attribute("value");
 					if (keyItemID.empty()) {
@@ -315,7 +315,7 @@ bool LevelReader::readDoorTiles(tinyxml2::XMLElement* objectgroup, LevelData& da
 					}
 					doorData.strength = amount;
 				}
-				
+
 				property_ = property_->NextSiblingElement("property");
 			}
 		}
@@ -416,7 +416,7 @@ bool LevelReader::readJumpingTiles(tinyxml2::XMLElement* objectgroup, LevelData&
 					}
 					jumpingTileData.waitingTime = amount;
 				}
-				
+
 
 				property_ = property_->NextSiblingElement("property");
 			}
@@ -499,7 +499,7 @@ bool LevelReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) 
 	for (auto& sign : data.signs) {
 		sign.skinNr = (sign.skinNr == 0) ? 0 : ((sign.skinNr - offset) / DYNAMIC_TILE_COUNT);
 	}
-	
+
 	return true;
 }
 
@@ -534,14 +534,14 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 		enemyData.objectID = id;
 		enemyData.id = enemyId;
 		enemyData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-		
+
 		// enemy loot
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		std::pair<std::map<std::string, int>, int> items;
 		items.second = 0;
 
 		if (properties != nullptr) {
-			
+
 			tinyxml2::XMLElement* item = properties->FirstChildElement("property");
 			while (item != nullptr) {
 				const char* textAttr = nullptr;
@@ -592,8 +592,17 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 						logError("XML file could not be read, luapath value attribute is empty.");
 						return false;
 					}
-					
+
 					enemyData.luaPath = textAttr;
+				}
+				else if (itemText.compare("name") == 0) {
+					textAttr = item->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, name value attribute is empty.");
+						return false;
+					}
+
+					enemyData.name = textAttr;
 				}
 				else {
 					int amount;
@@ -609,7 +618,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 				}
 
 				item = item->NextSiblingElement("property");
-			}	
+			}
 		}
 		enemyData.customizedLoot = items;
 
@@ -694,7 +703,7 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 		}
 
 		id = id - m_firstGidItems;
-		
+
 		if (!contains(m_levelItemMap, id)) {
 			logError("Level item ID not recognized: " + std::to_string(id));
 			return false;
@@ -750,7 +759,7 @@ bool LevelReader::readDynamicTileLayer(const std::string& layer, LevelData& data
 
 			data.dynamicTiles.push_back(tileData);
 		}
-		
+
 		++position;
 	}
 
@@ -879,7 +888,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 			x++;
 		}
 	}
-	
+
 	data.levers.push_back(leData);
 
 	return true;

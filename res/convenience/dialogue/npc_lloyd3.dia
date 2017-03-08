@@ -8,6 +8,16 @@ npc.id:npc_lloyd3
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:not DL:isConditionFulfilled("npc_lloyd3", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:DL:isQuestState("ininas_abduction", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
 	]
 }
 {1
@@ -15,11 +25,173 @@ npc.id:npc_lloyd3
 	tag:1
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lloyd3", "talked")
+	trigger:DL:changeQuestState("further_investigation", "completed")
 	# translation: 
 	translation.tag:DL_Lloyd_Talk
 	translation.en:Ah, what a coincidence. I was looking for you.
 	translation.de:Ah, was für ein Zufall. Nach dir habe ich gerade gesucht.
 	translation.ch:Ah, was füren Zuefall. Noch dir hani grad gsuecht.
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_Talk2
+	translation.en:It's good that you made it through that passage - at least one of you.
+	translation.de:Es ist gut, hast du es durch diesen Durchgang geschafft - wenigstens einer von euch.
+	translation.ch:Isch guet, dass du's dur de Durchgang gschafft hesch - wenigstens eine vo eu.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_Talk3
+	translation.en:I don't think you already know it, but Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
+	translation.de:Ich denke nicht, dass du es bereits weisst: Inina wurde entführt, während du die Kanalisation erkundet hast. Du hättest sie nicht alleine lassen dürfen!
+	translation.ch:Ich denk nid, dases scho weisch: D'Inina isch entführt worde, während du d'Kanalisation erkundet hesch! Du hetsch si nid elei loh dörfe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_lloyd3", "paladin")
+		# translation: 
+		translation.tag:DL_Choice_Paladin
+		translation.en:She wasn't alone, there was some paladin guarding her.
+		translation.de:Sie war nicht alleine, sie wurde von einem Paladin bewacht.
+		translation.ch:Si isch nid allei gsi, en Paladin het si bewacht.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_WhoAbducted
+		translation.en:Who abduced her?
+		translation.de:Wer hat sie entführt?
+		translation.ch:Wer het si entführt?
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd3", "paladin")
+	# translation: 
+	translation.tag:DL_Lloyd_Paladin
+	translation.en:Yes, I'm well aware of this. He was knocked out by her abductors though.
+	translation.de:Ja, das ist mir bekannt. Er wurde jedoch von ihren Entführern bewusstlos geschlagen.
+	translation.ch:Ja, das ischmer bekannt. Er isch aber vo ihrne Entführer bewusstlos gschlage worde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_WhoAbducted
+	translation.en:I'd like to know that too. I already talked to the paladin who was accompanying her.
+	translation.de:Das würde ich auch gerne wissen. Ich habe bereits mit dem Paladin geredet, der sie begleitet hat.
+	translation.ch:Das würi au gern wüsse. Ich ha scho mitem Paladin gredt wo si begleitet het.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_WhoAbducted2
+	translation.en:Before he was knocked out, he could see three hooded people.
+	translation.de:Bevor er bewusstlos geschlagen wurde, konnte er drei vermummte Gestalten erkennen.
+	translation.ch:Bevor er bewusstlos gschlage worde isch, heter drü vermummti Gstalte chöne erkenne.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:changeQuestState("ininas_abduction", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_WhoAbducted3
+	translation.en:I've recently heard that three mercenaries are currently in the Basilisk Inn - they are our primary suspects. Go and see if they're still there.
+	translation.de:Ich habe kürzlich vernommen, dass drei Söldner im Gasthaus zum Basilisken weilen - sie sind unsere Hauptverdächtigen. Geh und sieh nach, ob sie immer noch dort sind.
+	translation.ch:Ich ha chürzlich ghört, dass drei Söldner grad im Gasthuus zum Basilisk höcklet - si sind üsi Hauptverdächtige. Gang und lueg nah, obs immer na det sind.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_WhoAbducted4
+	translation.en:But be careful when questionning them - we don't want to cause a stir.
+	translation.de:Aber sei vorsichtig wenn du sie befragst - wir wollen kein grosses Aufsehen erregen.
+	translation.ch:Aber sig vorsichtig wend si befrögsch - mer wend kes grosses Tamtam mache.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [10] Choice Node
+	tag:10
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_lloyd3", "why_paladin")
+		# translation: 
+		translation.tag:DL_Choice_WhyPaladin
+		translation.en:Why can't you send her guard? It's his mistake, after all.
+		translation.de:Wieso kannst du nicht ihre Wache schicken? Es ist eigentlich sein Fehler.
+		translation.ch:Weso chasch nid ihri Wach schicke? Es isch eigentlich sin Fähler.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_Okay
+		translation.en:Yes, Commander Lloyd.
+		translation.de:Verstanden, Kommandant Lloyd.
+		translation.ch:Verstande, Kommandant Lloyd.
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd3", "why_paladin")
+	# translation: 
+	translation.tag:DL_Choice_WhyPaladin
+	translation.en:He's still not very well. Furthermore, they would certainly recognise him.
+	translation.de:Er ist noch nicht genesen. Ausserdem würden sie ihn erkennen.
+	translation.ch:Er isch nonid ganz uf de Bei. Usserdem würded si ihn erkenne.
 	[
 		# Link node, tag is next tag
 		tag:-2

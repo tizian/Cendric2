@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="72" height="30" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="66">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="72" height="30" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="67">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/gandriasewers/layer_inf.png,3.0,res/level/gandriasewers/layer_3.png,2.0,res/level/gandriasewers/layer_2.png"/>
   <property name="dimming" value="0.4"/>
@@ -616,6 +616,7 @@
    <properties>
     <property name="fo_rawmeat" value="1"/>
     <property name="gold" value="1"/>
+    <property name="name" value="NastyOoze"/>
     <property name="qe_bone" value="1"/>
     <property name="unique" value=""/>
    </properties>
@@ -623,6 +624,7 @@
   <object id="53" gid="967" x="2650" y="600" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
+    <property name="name" value="NastyOoze"/>
     <property name="qe_bone" value="1"/>
     <property name="unique" value=""/>
    </properties>
@@ -630,19 +632,24 @@
   <object id="54" gid="967" x="850" y="1350" width="50" height="50">
    <properties>
     <property name="fo_lesserhealingpotion" value="1"/>
+    <property name="name" value="NastyOoze"/>
     <property name="qe_bone" value="1"/>
     <property name="unique" value=""/>
    </properties>
   </object>
   <object id="55" gid="968" x="3400" y="500" width="50" height="50">
    <properties>
+    <property name="name" value="NastyBat"/>
     <property name="qe_batblood" value="1"/>
+    <property name="unique" value=""/>
    </properties>
   </object>
   <object id="57" gid="968" x="1150" y="100" width="50" height="50">
    <properties>
     <property name="fo_rawmeat" value="1"/>
+    <property name="name" value="NastyBat"/>
     <property name="qe_batblood" value="1"/>
+    <property name="unique" value=""/>
    </properties>
   </object>
   <object id="58" gid="950" x="1450" y="1350" width="50" height="50"/>
@@ -659,6 +666,13 @@
   <object id="62" gid="968" x="300" y="100" width="50" height="50"/>
   <object id="63" gid="967" x="1600" y="250" width="50" height="50"/>
   <object id="64" gid="967" x="2150" y="300" width="50" height="50"/>
+  <object id="66" gid="951" x="2850" y="1000" width="50" height="50">
+   <properties>
+    <property name="name" value="NastyFireRat"/>
+    <property name="qe_fireratheart" value="1"/>
+    <property name="unique" value=""/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="jumping">
   <object id="41" gid="636" x="1950" y="1549" width="50" height="50">
