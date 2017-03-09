@@ -1,5 +1,5 @@
 collectibles = 
 {
-	{"qe_thiefamulet", 1},
+	{"qe_divinecandleholder", 3},
 }
 

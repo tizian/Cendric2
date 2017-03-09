@@ -515,9 +515,52 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_CathedralNecro
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:Although the clerics do not know our hideout, they managed to get their hands on one of our grimoires about necromancy.
+	translation.de:Obwohl die Kleriker unser Versteck nicht kennen, haben sie eins unserer Bücher über Nekromantie in die Hände bekommen.
+	translation.ch:Obwohl d'Kleriker üses Versteck nid kenned, hends eis vo üsne Büecher über Nekromantie id Händ becho.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_CathedralNecro2
+	translation.en:The problem is, it was a particulary dangerous and headstrong book about summoning creatures from the underworld. 
+	translation.de:Es handelte sich dabei aber um ein ziemlich gefährliches und eigenwilliges Buch darüber, wie man Kreaturen aus der Unterwelt beschwört.
+	translation.ch:Es handlet sich debii aber um es zimli eigewilligs und gföhrlichs Buech drüber, we me Kreature us de Unterwelt beschwört.
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_CathedralNecro3
+	translation.en:They've brought it into their cathedral to purify it, but this would do even more harm.
+	translation.de:Sie haben es in ihre Kathedrale gebracht, um es zu läutern, doch das würde noch mehr Schaden anrichten.
+	translation.ch:Si hends i ihri Kathedrale brocht zums läutere, aber das wür no meh Schade arichte.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:changeQuestState("cathedral_necro", "started")
+	# translation: 
+	translation.tag:DL_Luiz_CathedralNecro4
+	translation.en:Go and bring that book back to our library. I just hope it's not already too late.
+	translation.de:Geh und bring dieses Buch zurück in unsere Bibliothek. Ich hoffe einfach, es ist nicht schon zu spät...
+	translation.ch:Gang und bring das Buech zrugg i üsi Bibliothek. Ich hoff eifach es isch nonig z'spat...
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -28,6 +28,11 @@ npc.id:npc_lloyd
 	[
 		# Link node, tag is next tag
 		tag:17
+		condition:DL:getGuild() == "cleric"
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
 	]
 }
 {2
@@ -372,6 +377,72 @@ npc.id:npc_lloyd
 {2
 	# [17] Choice Node
 	tag:17
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:isQuestState("cathedral_cleric", "void")
+		# translation: 
+		translation.tag:DL_Choice_HowCanIHelp
+		translation.en:What needs to be done?
+		translation.de:Was gibt es zu tun?
+		translation.ch:Was gits z'tue?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_CathedralCleric
+	translation.en:We have found a dangerous grimoire about necromancy and brought it into our cathedral.
+	translation.de:Wir haben ein gefährliches Buch über Nekromantie gefunden und es in unsere Kathedrale gebracht.
+	translation.ch:Mir hend es gföhrlichs Buech über Nekromantie gfunde unds i üsi Kathedrale brocht.
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_CathedralCleric2
+	translation.en:But the book seems to have its own will - we couldn't destroy it yet.
+	translation.de:Aber das Buch scheint seinen eigenen Willen zu haben - wir konnten es noch nicht vernichten.
+	translation.ch:Aber es Buech schiint sin eigene Wille z'ha - mer hends nanig vernichte chöne.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:changeQuestState("cathedral_cleric", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_CathedralCleric3
+	translation.en:I want you to go to our cathedral. Kindle the divine candles with your light magic and purify that deviant book. 
+	translation.de:Ich will, dass du in unsere Kathedrale gehst. Entzünde die heiligen Kerzen mit deiner Lichtmagie und läutere dieses abartige Buch.
+	translation.ch:Ich will, dass du i üsi Kathedrale gosch. Entzünd di heilige Chärze mit dinere Liechtmagie und läutere das abartig Buech.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [11] Choice Node
+	tag:11
 	[
 		# Link node, tag is next tag
 		tag:-1

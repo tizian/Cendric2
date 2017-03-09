@@ -367,6 +367,26 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
+		tag:12
+		condition:condition:DL:isQuestState("lloyds_plan", "void")
+		# translation: 
+		translation.tag:DL_Choice_HowCanIHelp
+		translation.en:How can I support you?
+		translation.de:Wie kann ich euch unterstützen?
+		translation.ch:Wie chani eu unterstütze?
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")
+		# translation: 
+		translation.tag:DL_Choice_HowElseHelp
+		translation.en:What else can I do to demonstrate my skills?
+		translation.de:Was kann ich sonst noch tun um meine Fähigkeiten unter Beweis zu stellen?
+		translation.ch:Was chani susch na mache zum mini Fähigkeite unter Bewiis stelle?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -416,6 +436,92 @@ npc.id:npc_vincent3
 	translation.en:Yes. You've proven yourself useful enough to learn how to be one with the shadows...
 	translation.de:Ja. Du hast dich als nützlich genug erwiesen um zu lernen, wie man mit den Schatten verschmilzt...
 	translation.ch:Ja. Du hesch dich als nützlich gnueg erwise zum lerne, weme mit de Schatte verschmilzt...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_LloydsPlan
+	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
+	translation.ch:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:changeQuestState("lloyds_plan", "started")
+	# translation: 
+	translation.tag:DL_Vincent_LloydsPlan2
+	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
+	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
+	translation.ch:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_CathedralThief
+	translation.en:The clerics have made a big mistake when they tried to exorcise a dangerous grimoire about necromancy.
+	translation.de:Die Kleriker haben einen grossen Fehler gemacht, als sie ein gefährliches Buch über Nekromantie bannen wollten.
+	translation.ch:D'Kleriker hend en grosse Fähler gmacht wo si es gföhrlichs Buech über Nekromantie hend wele banne.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_CathedralThief2
+	translation.en:The book is running amok in their cathedral. A great opportunity for us though.
+	translation.de:Das Buch läuft in ihrer Kathedrale Amok. Das ist allerdings eine gute Chance für uns.
+	translation.ch:Es Buech lauft i ihrere Kathedrale Amok. Das isch allerdings e gueti Chance für üs.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_CathedralThief3
+	translation.en:While they're distracted, it should be mere child's play to steal the precious candleholders from their cathedral.
+	translation.de:Während sie abgelenkt sind, sollte es ein Kinderspiel sein, die wertvollen Kerzenständer aus ihrer Kathedrale zu stehlen.
+	translation.ch:Während si abglenkt sind, söts es Chinderspiel si, di wertvolle Chärzeständer us ihrere Kathedrale z'chluppe.
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:changeQuestState("cathedral_thief", "started")
+	# translation: 
+	translation.tag:DL_Vincent_CathedralThief4
+	translation.en:Bring us those golden candleholders and I'll teach you more about our magic.
+	translation.de:Bring uns diese goldenen Kerzenständer und ich werde dich mehr über unsere Magie lehren.
+	translation.ch:Bring üs die goldige Cherzeständer und ich wird der meh vo üsere Magie biibringe.
 	[
 		# Link node, tag is next tag
 		tag:-2

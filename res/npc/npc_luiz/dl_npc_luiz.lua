@@ -209,7 +209,20 @@ loadDialogue = function(DL)
 
 		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
 
-			DL:createNPCNode(26, -2, "DL_Luiz_CathedralNecro") -- 
+			DL:createNPCNode(26, 27, "DL_Luiz_CathedralNecro") -- Although the clerics do not know our hideout, they managed to get their hands on one of our grimoires about necromancy.
+			DL:addNode()
+
+
+			DL:createNPCNode(27, 28, "DL_Luiz_CathedralNecro2") -- The problem is, it was a particulary dangerous and headstrong book about summoning creatures from the underworld. 
+			DL:addNode()
+
+
+			DL:createNPCNode(28, 29, "DL_Luiz_CathedralNecro3") -- They've brought it into their cathedral to purify it, but this would do even more harm.
+			DL:addNode()
+
+
+			DL:createNPCNode(29, -2, "DL_Luiz_CathedralNecro4") -- Go and bring that book back to our library. I just hope it's not already too late.
+			DL:changeQuestState("cathedral_necro", "started")
 			DL:addNode()
 
 		end

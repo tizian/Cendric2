@@ -1,1 +1,4 @@
-
+targets = 
+{
+	{"NecroticGrimoire", 1}
+}

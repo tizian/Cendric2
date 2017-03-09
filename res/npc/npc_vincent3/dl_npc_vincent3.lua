@@ -154,6 +154,12 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50) then 
 			DL:addChoice(20, "DL_Choice_TeachMore") -- 
 		end
+		if (condition:DL:isQuestState("lloyds_plan", "void")) then 
+			DL:addChoice(12, "DL_Choice_HowCanIHelp") -- How can I support you?
+		end
+		if (condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+			DL:addChoice(22, "DL_Choice_HowElseHelp") -- What else can I do to demonstrate my skills?
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -178,6 +184,38 @@ loadDialogue = function(DL)
 			DL:createNPCNode(20, -2, "DL_Vincent_SecondSpell") -- Yes. You've proven yourself useful enough to learn how to be one with the shadows...
 			DL:addItem("sp_invisibility", 1)
 			DL:addConditionProgress("npc_vincent3", "second_spell")
+			DL:addNode()
+
+		end
+
+		if (condition:DL:isQuestState("lloyds_plan", "void")) then 
+
+			DL:createNPCNode(12, 26, "DL_Vincent_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+			DL:addNode()
+
+
+			DL:createNPCNode(26, -2, "DL_Vincent_LloydsPlan2") -- We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
+			DL:changeQuestState("lloyds_plan", "started")
+			DL:addNode()
+
+		end
+
+		if (condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+
+			DL:createNPCNode(22, 23, "DL_Vincent_CathedralThief") -- The clerics have made a big mistake when they tried to exorcise a dangerous grimoire about necromancy.
+			DL:addNode()
+
+
+			DL:createNPCNode(23, 24, "DL_Vincent_CathedralThief2") -- The book is running amok in their cathedral. A great opportunity for us though.
+			DL:addNode()
+
+
+			DL:createNPCNode(24, 25, "DL_Vincent_CathedralThief3") -- While they're distracted, it should be mere child's play to steal the precious candleholders from their cathedral.
+			DL:addNode()
+
+
+			DL:createNPCNode(25, -2, "DL_Vincent_CathedralThief4") -- Bring us those golden candleholders and I'll teach you more about our magic.
+			DL:changeQuestState("cathedral_thief", "started")
 			DL:addNode()
 
 		end

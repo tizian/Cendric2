@@ -109,3 +109,15 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item', 'Helena''s Special Chicken','Helena''s Hühnchen Spezial','Helena''s Spezialgüggeli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item_desc', 'Helena''s famous grilled chicken.','Helena''s berühmtes Brathühnchen.', 'De Helena ihres berüemt Güggeli.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_leeroychicken', 'quest', 650, 250, -1);
+
+-- Precious Candleholder
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_divinecandleholder', 'item', 'Precious Candleholder','Wertvoller Kerzenständer','Wertvolle Cherzeständer');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_divinecandleholder', 'item_desc', 'An extraordinary candleholder, endowed with precious jewels.','Ein aussergewöhnlicher Kerzenständer, mit wertvollen Juwelen besetzt.', 'En ussergwöhnliche Cherzeständer, mit wertvolle Juwele gschmückt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_divinecandleholder', 'quest', 650, 300, -1);
+
+-- Necrotic Grimoire
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item', 'Necrotic Grimoire','Nekrotisches Zauberbuch','Nekrotischs Zauberbuech');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item_desc', 'I hope it won''t come to live again.','Ich hoffe, es erwacht nicht wieder zum Leben.', 'Ich hoff, es wird nid wieder lebendig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_necrobook', 'quest', 650, 350, -1);

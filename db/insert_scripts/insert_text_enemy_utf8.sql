@@ -32,3 +32,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyFireRat','enemy','Nasty Fire Rat','Garstige Feuerratte','Rüüdigi Füürratte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyOoze','enemy','Nasty Ooze','Garstiger Schleim','Rüüdige Schleim');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyBat','enemy','Nasty Bat','Garstige Fledermaus','Rüüdigi Flädermuus');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NecroticGrimoire','enemy','Necrotic Grimoire','Nekrotisches Zauberbuch','Nekrotischs Zauberbuech');

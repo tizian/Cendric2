@@ -9,8 +9,10 @@ loadDialogue = function(DL)
 		DL:setRoot(19) 
 	elseif (not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
 		DL:setRoot(10) 
-	else 
+	elseif (DL:getGuild() == "cleric") then 
 		DL:setRoot(17) 
+	else 
+		DL:setRoot(11) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_lloyd", "talked")) then 
@@ -146,8 +148,35 @@ loadDialogue = function(DL)
 
 	end
 
+	if (DL:getGuild() == "cleric") then 
 
-	DL:createChoiceNode(17)
+		DL:createChoiceNode(17)
+		if (DL:isQuestState("cathedral_cleric", "void")) then 
+			DL:addChoice(20, "DL_Choice_HowCanIHelp") -- What needs to be done?
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestState("cathedral_cleric", "void")) then 
+
+			DL:createNPCNode(20, 21, "DL_Lloyd_CathedralCleric") -- We have found a dangerous grimoire about necromancy and brought it into our cathedral.
+			DL:addNode()
+
+
+			DL:createNPCNode(21, 22, "DL_Lloyd_CathedralCleric2") -- But the book seems to have its own will - we couldn't destroy it yet.
+			DL:addNode()
+
+
+			DL:createNPCNode(22, -2, "DL_Lloyd_CathedralCleric3") -- I want you to go to our cathedral. Kindle the divine candles with your light magic and purify that deviant book. 
+			DL:changeQuestState("cathedral_cleric", "started")
+			DL:addNode()
+
+		end
+
+	end
+
+
+	DL:createChoiceNode(11)
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
