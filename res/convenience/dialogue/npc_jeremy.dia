@@ -50,6 +50,16 @@ npc.id:npc_jeremy
 	]
 	[
 		# Link node, tag is next tag
+		tag:16
+		condition:not DL:isConditionFulfilled("npc_jeremy", "confront_inina") and DL:isQuestState("ininas_abduction", "started")
+		# translation: 
+		translation.tag:DL_Choice_ConfrontInina
+		translation.en:(Confront Jeremy about Inina)
+		translation.de:(Jeremy auf Inina ansprechen)
+		translation.ch:(De Jeremy uf d'Inina aspreche)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -131,6 +141,101 @@ npc.id:npc_jeremy
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [16] Choice Node
+	tag:16
+	[
+		# Link node, tag is next tag
+		tag:17
+		# translation: 
+		translation.tag:DL_Choice_ConfrontDirect
+		translation.en:Have you heard, the High Priestess Inina was abducted!
+		translation.de:Habt ihr's schon gehört? Die Hohepriesterin Inina wurde entführt!
+		translation.ch:Henders scho ghört? D'Hohepriesterin Inina isch entführt worde!
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_ConfrontNicely
+		translation.en:Have you seen the High Priestess Inina lately?
+		translation.de:Habt ihr die Hohepriesterin Inina in letzter Zeit gesehen?
+		translation.ch:Hend ihr d'Hohepriesterin Inina letzins gse?
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		# translation: 
+		translation.tag:DL_Choice_ConfrontHarsh
+		translation.en:We know that you abducted Inina. Confess!
+		translation.de:Wir wissen, dass ihr Inina entführt habt. Gesteht!
+		translation.ch:Mir wüssed, dass ihr d'Inina entführt hend. Gends zue!
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_ConfrontDirect
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_ConfrontNicely
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jeremy_ConfrontHarsh
+	translation.en:(Glances at you) And what would you do if we did, huh?
+	translation.de:(Starrt dich an) Und was würdest du tun wenn's so wär, he?
+	translation.ch:(Starrt dich ah) Und was würsch mache wens so wär, he?
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{2
+	# [20] Choice Node
+	tag:20
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_IninaHarsh1
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }
 {2
