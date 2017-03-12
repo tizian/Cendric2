@@ -188,7 +188,7 @@ npc.id:npc_lloyd3
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lloyd3", "why_paladin")
 	# translation: 
-	translation.tag:DL_Choice_WhyPaladin
+	translation.tag:DL_Lloyd_WhyPaladin
 	translation.en:He's still not very well. Furthermore, they would certainly recognise him.
 	translation.de:Er ist noch nicht genesen. Ausserdem würden sie ihn erkennen.
 	translation.ch:Er isch nonid ganz uf de Bei. Usserdem würded si ihn erkenne.

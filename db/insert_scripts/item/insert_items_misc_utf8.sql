@@ -118,7 +118,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item', 'Broken Sickles','Zerbrochene Sicheln','Verbrocheni Sichle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item_desc', 'The broken remains of Arastor''s weapon. Maybe someone could fix it.','Die zerbrochenen Überreste von Arastor''s Waffe. Vielleicht könnte sie jemand wieder zusammensetzen.','Di verbrochene Überreste vom Arastor sinere Waffe. Vilicht chönt si öppert wieder zemesetze.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_janusglaive', 'misc', 300, 650, 200);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_janusglaive', 'misc', 650, 200, 10);
 
 -- Iron Ore
 

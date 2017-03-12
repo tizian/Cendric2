@@ -72,7 +72,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_lloyd3", "why_paladin")) then 
 
-		DL:createNPCNode(11, -2, "DL_Choice_WhyPaladin") -- He's still not very well. Furthermore, they would certainly recognise him.
+		DL:createNPCNode(11, -2, "DL_Lloyd_WhyPaladin") -- He's still not very well. Furthermore, they would certainly recognise him.
 		DL:addConditionProgress("npc_lloyd3", "why_paladin")
 		DL:addNode()
 

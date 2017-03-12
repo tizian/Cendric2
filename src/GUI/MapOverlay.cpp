@@ -36,6 +36,9 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	const std::string mapName = m_screen->getCharacterCore()->getData().currentMap;
 
 	setMap(mapName);
+	if (m_currentMap == -1) {
+		setMapIndex(0);
+	}
 }
 
 MapOverlay::~MapOverlay() {
