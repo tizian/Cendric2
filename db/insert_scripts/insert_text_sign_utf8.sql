@@ -27,3 +27,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Da
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('UnderConstruction','sign','This level is under construction!','Dieses Level ist im Bau!','Da Level isch im Bau!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TurnBack','sign','Turn back!','Kehr um!','Cher um!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedPicklock','sign','A picklock might help...','Ein Dietrich könnte helfen...','En Dietrich chönt helfe...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedAntiGravity','sign','Upside down...?','Verkehrte Welt...?','Vercherti Wält...?');

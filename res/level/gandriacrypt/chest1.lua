@@ -2,12 +2,12 @@
 
 onLoot = function(W) 
 	local enemyData = {
-		id = 5,
+		id = 22,
 		loot = {
 				{id="gold", amount=2},
+                {id="mi_goldengoblet", amount=1},
 			},
-		position = {x=1310, y=610}
+		position = {x=2410, y=2160}
 	}
 	W:spawnEnemy(enemyData)
 end
-
