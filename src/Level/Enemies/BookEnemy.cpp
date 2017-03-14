@@ -126,31 +126,34 @@ void BookEnemy::loadAnimation(int skinNr) {
 	setSpriteOffset(sf::Vector2f(-20.f, -7.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
+	int width = 100;
+	int height = 64;
+
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
-	flyingAnimation->addFrame(sf::IntRect(0, 0, 100, 64));
-	flyingAnimation->addFrame(sf::IntRect(100, 0, 100, 64));
-	flyingAnimation->addFrame(sf::IntRect(200, 0, 100, 64));
-	flyingAnimation->addFrame(sf::IntRect(300, 0, 100, 64));
-	flyingAnimation->addFrame(sf::IntRect(200, 0, 100, 64));
-	flyingAnimation->addFrame(sf::IntRect(100, 0, 100, 64));
+	flyingAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 0, 100, 64));
-	idleAnimation->addFrame(sf::IntRect(100, 0, 100, 64));
-	idleAnimation->addFrame(sf::IntRect(200, 0, 100, 64));
-	idleAnimation->addFrame(sf::IntRect(300, 0, 100, 64));
-	idleAnimation->addFrame(sf::IntRect(200, 0, 100, 64));
-	idleAnimation->addFrame(sf::IntRect(100, 0, 100, 64));
+	idleAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(300, 0, 100, 64));
+	deadAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

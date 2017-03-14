@@ -115,6 +115,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_divinecandleholder', 'item', 'Precious Candleholder','Wertvoller Kerzenständer','Wertvolle Cherzeständer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_divinecandleholder', 'item_desc', 'An extraordinary candleholder, endowed with precious jewels.','Ein aussergewöhnlicher Kerzenständer, mit wertvollen Juwelen besetzt.', 'En ussergwöhnliche Cherzeständer, mit wertvolle Juwele gschmückt.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_divinecandleholder', 'quest', 650, 300, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_divinecandleholder', -4, -7, 37, 43);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_divinecandleholder', 1, 600, 00, 50, 50);
 
 -- Necrotic Grimoire
 
