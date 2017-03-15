@@ -1046,7 +1046,7 @@
   </object>
   <object id="296" x="2200" y="880" width="50" height="40">
    <properties>
-    <property name="level entry" value="res/level/gandriacathedral/gandriacathedral.tmx,1860,1460"/>
+    <property name="level entry" value="res/level/gandriacathedral/gandriacathedral.tmx,1860,1510"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

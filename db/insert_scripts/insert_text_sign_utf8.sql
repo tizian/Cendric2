@@ -28,7 +28,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Un
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TurnBack','sign','Turn back!','Kehr um!','Cher um!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedPicklock','sign','A picklock might help...','Ein Dietrich könnte helfen...','En Dietrich chönt helfe...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedAntiGravity','sign','Upside down...?','Verkehrte Welt...?','Vercherti Wält...?');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CathedralClosed','sign','The cathedral is
-closed for visitors.','Die Kathedrale ist 
-für Besucher geschlossen.','D''Kathedrale isch für
-Bsuecher gschlosse.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CathedralClosed','sign','The cathedral is closed for visitors.','Die Kathedrale ist für Besucher geschlossen.','D''Kathedrale isch für Bsuecher gschlosse.');

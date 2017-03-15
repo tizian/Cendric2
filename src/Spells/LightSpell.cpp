@@ -31,7 +31,7 @@ void LightSpell::update(const sf::Time& frameTime) {
 	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
 
-	MovableGameObject::update(frameTime);
+	Spell::update(frameTime);
 
 	updateTime(m_data.activeDuration, frameTime);
 	if (m_data.activeDuration == sf::Time::Zero) {

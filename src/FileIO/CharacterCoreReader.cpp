@@ -196,8 +196,7 @@ bool CharacterCoreReader::readWeaponConfigurations(std::string& line, CharacterC
 		size_t endSpellData = line.find(';');
 
 		if (endSpellData == std::string::npos) return false;
-		if (startSpellData == std::string::npos || startSpellData > endSpellData) continue;
-
+	
 		std::vector<SpellModifier> modifiers;
 
 		while (startSpellData != std::string::npos && startSpellData < endSpellData) {
