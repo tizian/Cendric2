@@ -699,6 +699,7 @@ SpellData SpellData::getLightSpellData() {
 	light.range = 400.f;
 	light.attachedToMob = true;
 	light.fightAnimation = GameObjectState::VOID;
+	light.isDynamicTileEffect = true;
 
 	light.durationModifierAddition = sf::seconds(60);
 	light.rangeModifierAddition = 200.f;
