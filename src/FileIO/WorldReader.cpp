@@ -793,7 +793,7 @@ bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data)
 						m_lightTiles.insert({ tileData.tileID, lightData });
 					}
 					else {
-						logError("XML file could not be read, unknown name attribute found in tile properties (tile->properties->property->name).");
+						logError("XML file could not be read, unknown name attribute found in tile properties: " + name);
 						return false;
 					}
 
