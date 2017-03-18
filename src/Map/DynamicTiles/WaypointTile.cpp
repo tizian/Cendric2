@@ -9,6 +9,8 @@ REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
 WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(new TooltipComponent(g_textProvider->getText("Waypoint"), this));
+	// TODO remove
+	m_isAlwaysUpdate = true;
 }
 
 void WaypointTile::init() {
@@ -44,9 +46,8 @@ void WaypointTile::loadAnimation(int skinNr) {
 void WaypointTile::update(const sf::Time& frameTime) {
 	MapDynamicTile::update(frameTime);
 	if (m_state == GameObjectState::Active) return;
-	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-		activateWaypoint();
-	}
+	//if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
+	activateWaypoint();
 }
 
 void WaypointTile::activateWaypoint() {

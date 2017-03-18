@@ -12,4 +12,6 @@ struct MovingTileData {
 	bool isFrozen = false;
 	bool isActive = true;
 	bool isOneWay = false;
+	bool spikesTop = false;
+	bool spikesBottom = false;
 };
