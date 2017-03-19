@@ -1,4 +1,5 @@
 #include "Level/DynamicTiles/MovingTile.h"
+#include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
 
@@ -6,6 +7,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 const sf::Time MovingTile::FROZEN_TIME = sf::seconds(10.f);
 const sf::Time MovingTile::FROZEN_FADING_TIME = sf::seconds(2.f);
+const std::string MovingTile::SPRITE_PATH = "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png";
 
 MovingTile::MovingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
@@ -14,6 +16,10 @@ MovingTile::MovingTile(LevelScreen* levelScreen) :
 	m_movingParent = this;
 	m_relativeVelocity.x = 0.f;
 	m_relativeVelocity.y = 0.f;
+}
+
+MovingTile::~MovingTile() {
+	delete m_spikes;
 }
 
 void MovingTile::setMovingTileData(const MovingTileData& data) {
@@ -30,6 +36,11 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	setInitialState(data.isActive);
 
 	m_isOneWay = data.isOneWay;
+
+	if (data.spikesTop || data.spikesBottom) {
+		delete m_spikes;
+		m_spikes = new MovingTileSpikes(data.spikesTop, data.spikesBottom, data.length, m_mainChar);
+	}
 }
 
 void MovingTile::init() {
@@ -40,39 +51,41 @@ void MovingTile::init() {
 void MovingTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	int length = static_cast<int>(m_boundingBox.width / TILE_SIZE_F);
+	int frozenTileY = 3 * TILE_SIZE;
+	int tileY = 5 * TILE_SIZE + skinNr * 2 * TILE_SIZE;
 
 	sf::Sprite sprite;
 	sprite.setTexture(*tex);
 
 	if (length == 1) {
-		sprite.setTextureRect(sf::IntRect(150, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(150, tileY, TILE_SIZE, 2 * TILE_SIZE));
 		m_normalSprites.push_back(sprite);
 
-		sprite.setTextureRect(sf::IntRect(150, 0, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(150, frozenTileY, TILE_SIZE, 2 * TILE_SIZE));
 		m_frozenSprites.push_back(sprite);
 		return;
 	}
 
-	sprite.setTextureRect(sf::IntRect(0, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(0, tileY, TILE_SIZE, 2 * TILE_SIZE));
 	m_normalSprites.push_back(sprite);
 
-	sprite.setTextureRect(sf::IntRect(0, 0, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(0, frozenTileY, TILE_SIZE, 2 * TILE_SIZE));
 	m_frozenSprites.push_back(sprite);
 	length--;
 
 	while (length > 1) {
-		sprite.setTextureRect(sf::IntRect(50, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(50, tileY, TILE_SIZE, 2 * TILE_SIZE));
 		m_normalSprites.push_back(sprite);
 
-		sprite.setTextureRect(sf::IntRect(50, 0, TILE_SIZE, 2 * TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect(50, frozenTileY, TILE_SIZE, 2 * TILE_SIZE));
 		m_frozenSprites.push_back(sprite);
 		length--;
 	}
 
-	sprite.setTextureRect(sf::IntRect(100, (skinNr + 1) * 2 * TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(100, tileY, TILE_SIZE, 2 * TILE_SIZE));
 	m_normalSprites.push_back(sprite);
 
-	sprite.setTextureRect(sf::IntRect(100, 0, TILE_SIZE, 2 * TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect(100, frozenTileY, TILE_SIZE, 2 * TILE_SIZE));
 	m_frozenSprites.push_back(sprite);
 }
 
@@ -102,6 +115,10 @@ void MovingTile::update(const sf::Time& frameTime) {
 		}
 		MovableGameObject::update(frameTime);
 	}
+
+	if (m_spikes) {
+		m_spikes->update(frameTime);
+	}
 }
 
 void MovingTile::updateRelativeVelocity(const sf::Time& frameTime) {
@@ -115,6 +132,9 @@ void MovingTile::updateRelativeVelocity(const sf::Time& frameTime) {
 }
 
 void MovingTile::render(sf::RenderTarget& target) {
+	if (m_spikes) {
+		m_spikes->renderBottom(target);
+	}
 	for (auto& sprite : m_normalSprites) {
 		target.draw(sprite);
 	}
@@ -122,6 +142,9 @@ void MovingTile::render(sf::RenderTarget& target) {
 		for (auto& sprite : m_frozenSprites) {
 			target.draw(sprite);
 		}
+	}
+	if (m_spikes) {
+		m_spikes->renderTop(target);
 	}
 }
 
@@ -138,6 +161,9 @@ void MovingTile::setPosition(const sf::Vector2f& position) {
 			sprite.setPosition(getPosition().x + offset, getPosition().y - TILE_SIZE);
 			offset += TILE_SIZE;
 		}
+	}
+	if (m_spikes) {
+		m_spikes->setPosition(position);
 	}
 }
 
@@ -185,5 +211,118 @@ bool MovingTile::isSwitchable() const {
 }
 
 std::string MovingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png";
+	return SPRITE_PATH;
+}
+
+/////////////////////////////////////////////////////////////////////
+//// MOVING TILE SPIKES /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+MovingTileSpikes::MovingTileSpikes(bool top, bool bottom, int size, LevelMainCharacter* mainChar) {
+	m_mainChar = mainChar;
+
+	float bbHeight;
+	if (top && bottom) {
+		bbHeight = TILE_SIZE_F + 2 * 20.f;
+		m_boundingBoxOffset = -20.f;
+	}
+	else {
+		bbHeight = 20.f;
+		m_boundingBoxOffset = bottom ? TILE_SIZE_F : -20.f;
+	}
+
+	m_boundingBox = sf::FloatRect(0.f, 0.f, size * TILE_SIZE_F, bbHeight);
+
+	loadAnimation(top, bottom, size);
+}
+
+void MovingTileSpikes::loadAnimation(bool top, bool bottom, int size) {
+	sf::Texture& tex = *g_resourceManager->getTexture(MovingTile::SPRITE_PATH);
+	sf::Sprite sprite;
+
+	sprite.setTexture(tex);
+
+	if (size == 1) {
+		if (top) {
+			sprite.setTextureRect(sf::IntRect(3 * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+			m_topSprites.push_back(sprite);
+		}
+
+		if (bottom) {
+			sprite.setTextureRect(sf::IntRect(3 * TILE_SIZE, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+			m_bottomSprites.push_back(sprite);
+		}
+		return;
+	}
+
+	if (top) {
+		sprite.setTextureRect(sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+		m_topSprites.push_back(sprite);
+	}
+
+	if (bottom) {
+		sprite.setTextureRect(sf::IntRect(0, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		m_bottomSprites.push_back(sprite);
+	}
+
+	size--;
+
+	while (size > 1) {
+		if (top) {
+			sprite.setTextureRect(sf::IntRect(50, 0, TILE_SIZE, TILE_SIZE));
+			m_topSprites.push_back(sprite);
+		}
+
+		if (bottom) {
+			sprite.setTextureRect(sf::IntRect(50, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+			m_bottomSprites.push_back(sprite);
+		}
+		size--;
+	}
+
+	if (top) {
+		sprite.setTextureRect(sf::IntRect(100, 0, TILE_SIZE, TILE_SIZE));
+		m_topSprites.push_back(sprite);
+	}
+
+	if (bottom) {
+		sprite.setTextureRect(sf::IntRect(100, TILE_SIZE, TILE_SIZE, 2 * TILE_SIZE));
+		m_bottomSprites.push_back(sprite);
+	}
+}
+
+void MovingTileSpikes::update(const sf::Time& frameTime) {
+	if (m_mainChar->isDead()) return;
+	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
+		m_mainChar->setDead();
+	}
+}
+
+void MovingTileSpikes::renderTop(sf::RenderTarget& target) {
+	for (auto& sprite : m_topSprites) {
+		target.draw(sprite);
+	}
+}
+
+void MovingTileSpikes::renderBottom(sf::RenderTarget& target) {
+	for (auto& sprite : m_bottomSprites) {
+		target.draw(sprite);
+	}
+}
+
+void MovingTileSpikes::setPosition(const sf::Vector2f& position) {
+	float x = 0.f;
+	for (auto& sprite : m_topSprites) {
+		sprite.setPosition(sf::Vector2f(position.x + x, position.y -TILE_SIZE_F));
+		x += TILE_SIZE_F;
+	}
+
+	x = 0.f;
+	for (auto& sprite : m_bottomSprites) {
+		sprite.setPosition(sf::Vector2f(position.x + x, position.y));
+		x += TILE_SIZE_F;
+	}
+
+	m_boundingBox.left = position.x;
+	m_boundingBox.top = position.y + m_boundingBoxOffset;
 }

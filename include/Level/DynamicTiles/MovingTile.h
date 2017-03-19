@@ -5,14 +5,39 @@
 #include "Level/DynamicTiles/LeverDependentTile.h"
 #include "Structs/MovingTileData.h"
 
+class MovingTile;
+
+class MovingTileSpikes {
+public:
+	MovingTileSpikes(bool top, bool bottom, int size, LevelMainCharacter* mainChar);
+
+	void update(const sf::Time& frameTime);
+	void renderTop(sf::RenderTarget& target);
+	void renderBottom(sf::RenderTarget& target);
+	void setPosition(const sf::Vector2f& position);
+
+private:
+	void loadAnimation(bool top, bool bottom, int size);
+
+private:
+	std::vector<sf::Sprite> m_topSprites;
+	std::vector<sf::Sprite> m_bottomSprites;
+	sf::FloatRect m_boundingBox;
+	float m_boundingBoxOffset;
+
+	LevelMainCharacter* m_mainChar;
+};
+
 class MovingTile : public virtual LevelMovableTile, public virtual LeverDependentTile {
 public:
 	MovingTile(LevelScreen* levelScreen);
+	~MovingTile();
+
 	void setMovingTileData(const MovingTileData& data);
 	void init() override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
-	
+
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 	void setPosition(const sf::Vector2f& position) override;
@@ -28,7 +53,9 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableTile::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
-	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; } 
+	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; }
+
+	static const std::string SPRITE_PATH;
 
 protected:
 	bool collides(const sf::Vector2f& nextPos) const override { return false; }
@@ -52,4 +79,5 @@ private:
 	std::vector<sf::Sprite> m_frozenSprites;
 
 	sf::Vector2f m_relativeVelocity;
+	MovingTileSpikes* m_spikes = nullptr;
 };

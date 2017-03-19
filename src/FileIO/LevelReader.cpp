@@ -181,6 +181,16 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
+				if (propertyText.compare("spikestop") == 0) {
+					movingTileData.spikesTop = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
+				if (propertyText.compare("spikesbottom") == 0) {
+					movingTileData.spikesBottom = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
 				if (propertyText.compare("direction") == 0) {
 					textAttr = property_->Attribute("value");
 					if (textAttr == nullptr) {
