@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/gandriacathedral/layer_inf.png,3.0,res/level/gandriacathedral/layer_3.png,2.0,res/level/gandriacathedral/layer_2.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/music/lighthouse.ogg"/>
+  <property name="musicpath" value="res/music/cathedral.ogg"/>
   <property name="tilesetpath" value="res/level/gandriacathedral/tileset_level_gandriacathedral.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_gandriacathedral" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1444" columns="38">
