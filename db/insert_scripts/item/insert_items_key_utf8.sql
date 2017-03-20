@@ -77,3 +77,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_forgottenpassage', 'item_desc', 'I found this key in the forgotten passage in the sewers.','Diesen Schlüssel habe ich im vergessenen Durchgang in der Kanalisation gefunden','De Schlüssel hani im vergessene Durchgang ide Kanalisation gfunde.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_forgottenpassage', -6, -38, 32, 12);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_forgottenpassage', 1, 500, 200, 50, 50);
+
+-- Organist's Key (Opens shortpaths in the cathedral)
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_cathedral', 'key', 650, 400, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_cathedral', 'item', 'Organist''s Key','Schlüssel des Organisten','Schlüssel vom Organist');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_cathedral', 'item_desc', 'A small organ pipe. It must have belonged to the organist of the cathedral.','Eine kleine Orgelpfeife. Sie wird wohl dem Organisten der Kathedrale gehört haben.', 'Es chlises Orgelpfiifli. Es het glaub em Organist vode Kathedrale ghört.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_cathedral', -2, -38, 48, 12);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_cathedral', 1, 600, 50, 50, 50);
