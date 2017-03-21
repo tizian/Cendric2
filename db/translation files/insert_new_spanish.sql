@@ -13,3 +13,6 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotE
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickLearn','Right click to learn','Rechtsklicken zum Lernen','Rechtsklicke zum lerne','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickRead','Right click to read','Rechtsklicken zum Lesen','Rechtsklicke zum läse','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKey','Is locked! (Key needed)','Ist verschlossen! (Schlüssel benötigt)','Da isch abgschlosse! (Brucht en Schlüssel)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedPicklock','Is locked! (Picklock needed)','Ist verschlossen! (Dietrich benötigt)','Da isch abgschlosse! (Brucht en Dietrich)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKeyPicklock','Is locked! (Key/Picklock needed)','Ist verschlossen! (Schlüssel/Dietrich benötigt)','Da isch abgschlosse! (Brucht en Schlüssel/Dietrich)','¡Está cerrado!');

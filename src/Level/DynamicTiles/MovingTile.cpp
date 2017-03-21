@@ -32,6 +32,7 @@ void MovingTile::setMovingTileData(const MovingTileData& data) {
 	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
 	m_timeUntilTurn = m_distanceTime;
 
+	m_isFreezable = !data.isUnfreezable;
 	setFrozen(data.isFrozen, true);
 	setInitialState(data.isActive);
 
@@ -148,6 +149,14 @@ void MovingTile::render(sf::RenderTarget& target) {
 	}
 }
 
+void MovingTile::renderAfterForeground(sf::RenderTarget& target) {
+	if (!m_isDebugRendering) return;
+	LevelMovableTile::renderAfterForeground(target);
+	if (m_spikes) {
+		m_spikes->renderDebug(target);
+	}
+}
+
 void MovingTile::setPosition(const sf::Vector2f& position) {
 	MovableGameObject::setPosition(position);
 	float offset = 0.f;
@@ -187,6 +196,7 @@ void MovingTile::onHit(Spell* spell) {
 }
 
 void MovingTile::setFrozen(bool frozen, bool permanent) {
+	if (!m_isFreezable && frozen) return;
 	m_isFrozen = frozen;
 	m_isPermanentlyFrozen = permanent;
 	m_relativeVelocity = m_isFrozen || !m_isActive ? sf::Vector2f() : m_currentVelocity;
@@ -231,9 +241,14 @@ MovingTileSpikes::MovingTileSpikes(bool top, bool bottom, int size, LevelMainCha
 		m_boundingBoxOffset = bottom ? TILE_SIZE_F : -20.f;
 	}
 
-	m_boundingBox = sf::FloatRect(0.f, 0.f, size * TILE_SIZE_F, bbHeight);
+	m_boundingBox = sf::FloatRect(0.f, 0.f, size * TILE_SIZE_F - (TILE_SIZE_F * 0.5f), bbHeight);
 
 	loadAnimation(top, bottom, size);
+
+	m_debugBox = sf::RectangleShape(sf::Vector2f(m_boundingBox.width, m_boundingBox.height));
+	m_debugBox.setOutlineThickness(1.f);
+	m_debugBox.setFillColor(COLOR_TRANSPARENT);
+	m_debugBox.setOutlineColor(COLOR_BAD);
 }
 
 void MovingTileSpikes::loadAnimation(bool top, bool bottom, int size) {
@@ -310,6 +325,10 @@ void MovingTileSpikes::renderBottom(sf::RenderTarget& target) {
 	}
 }
 
+void MovingTileSpikes::renderDebug(sf::RenderTarget& target) {
+	target.draw(m_debugBox);
+}
+
 void MovingTileSpikes::setPosition(const sf::Vector2f& position) {
 	float x = 0.f;
 	for (auto& sprite : m_topSprites) {
@@ -323,6 +342,7 @@ void MovingTileSpikes::setPosition(const sf::Vector2f& position) {
 		x += TILE_SIZE_F;
 	}
 
-	m_boundingBox.left = position.x;
+	m_boundingBox.left = position.x + TILE_SIZE_F * 0.25f;
 	m_boundingBox.top = position.y + m_boundingBoxOffset;
+	m_debugBox.setPosition(m_boundingBox.left, m_boundingBox.top);
 }

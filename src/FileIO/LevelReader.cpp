@@ -191,6 +191,11 @@ bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& 
 					property_ = property_->NextSiblingElement("property");
 					continue;
 				}
+				if (propertyText.compare("unfreezable") == 0) {
+					movingTileData.isUnfreezable = true;
+					property_ = property_->NextSiblingElement("property");
+					continue;
+				}
 				if (propertyText.compare("direction") == 0) {
 					textAttr = property_->Attribute("value");
 					if (textAttr == nullptr) {
@@ -1191,6 +1196,29 @@ bool LevelReader::checkData(LevelData& data) const {
 				logError("enemy quest target quest and name must be filled.");
 				return false;
 			}
+		}
+	}
+	for (auto& it : data.chests) {
+		if (it.chestStrength == 0 && !it.keyItemID.empty()) {
+			logError("cannot add chest that requires key but lock strength is 0");
+			return false;
+		}
+		if (it.chestStrength > 4 && it.keyItemID.empty()) {
+			logError("cannot add chest with strength > 4 that has no key");
+			return false;
+		}
+	}
+	for (auto& it : data.doors) {
+		if (it.strength == 0 && it.keyItemID.empty()) {
+			g_logger->logWarning("LevelReader", "door with strength 0 and no key is not recommended");
+		}
+		if (it.strength == 0 && !it.keyItemID.empty()) {
+			logError("cannot add door that requires key but lock strength is 0");
+			return false;
+		}
+		if (it.strength > 4 && it.keyItemID.empty()) {
+			logError("cannot add door with strength > 4 that has no key");
+			return false;
 		}
 	}
 	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {

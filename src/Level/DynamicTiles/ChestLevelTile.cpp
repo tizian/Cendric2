@@ -82,7 +82,12 @@ void ChestLevelTile::onHit(Spell* spell) {
 				unlock(true);
 			}
 			else {
-				m_screen->setNegativeTooltip("NotEnoughStrength");
+				if (m_data.chestStrength > 4) {
+					m_screen->setNegativeTooltip("IsLockedKey");
+				}
+				else {
+					m_screen->setNegativeTooltip("NotEnoughStrength");
+				}
 			}
 			spell->setDisposed();
 		}
@@ -239,7 +244,15 @@ void ChestLevelTile::onRightClick() {
 		g_inputController->lockAction();
 	}
 	else {
-		m_screen->setNegativeTooltip("IsLocked");
+		if (!m_data.keyItemID.empty() && m_data.chestStrength < 5) {
+			m_screen->setNegativeTooltip("IsLockedKeyPicklock");
+		}
+		else if (!m_data.keyItemID.empty()) {
+			m_screen->setNegativeTooltip("IsLockedKey");
+		}
+		else if (m_data.chestStrength < 5) {
+			m_screen->setNegativeTooltip("Picklock");
+		}
 	}
 }
 

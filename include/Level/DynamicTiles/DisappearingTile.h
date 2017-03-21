@@ -47,4 +47,6 @@ private:
 	static const sf::Time RESPAWN_TIME;
 	sf::Time m_respawnTime = sf::Time::Zero;
 	void respawn();
+
+	void touch();
 };

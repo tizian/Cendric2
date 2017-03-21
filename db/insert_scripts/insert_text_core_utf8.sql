@@ -92,7 +92,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IceR
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Immune','Immune','Immun','Immun','Inmune');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Interact','Interact','Interagieren','Interagiere','Interactuar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Inventory','Inventory','Inventar','Inventar','Inventario');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLocked','Is locked!','Ist verschlossen!','Da isch abgschlosse!','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKey','Is locked! (Key needed)','Ist verschlossen! (Schlüssel benötigt)','Da isch abgschlosse! (Brucht en Schlüssel)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedPicklock','Is locked! (Picklock needed)','Ist verschlossen! (Dietrich benötigt)','Da isch abgschlosse! (Brucht en Dietrich)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKeyPicklock','Is locked! (Key/Picklock needed)','Ist verschlossen! (Schlüssel/Dietrich benötigt)','Da isch abgschlosse! (Brucht en Schlüssel/Dietrich)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Journal','Journal','Tagebuch','Tagebuech','Diario');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Jump','Jump','Springen','Springe','Saltar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('KeyBindings','Key Bindings','Tastaturbelegung','Tastaturbelegig','Teclas configurables');

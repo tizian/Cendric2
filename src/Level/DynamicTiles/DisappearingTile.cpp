@@ -88,6 +88,12 @@ void DisappearingTile::update(const sf::Time& frameTime) {
 	m_ps->update(frameTime);
 }
 
+void DisappearingTile::touch() {
+	m_isTouched = true;
+	m_ps->emitRate = 0.f;
+	m_colorUpdater->setFading(m_criticalTime.asSeconds());
+}
+
 void DisappearingTile::respawn() {
 	// check for collidable
 	WorldCollisionQueryRecord rec;
@@ -114,9 +120,7 @@ void DisappearingTile::render(sf::RenderTarget& target) {
 void DisappearingTile::checkForMainCharacter() {
 	if (m_isTouched) return;
 	if (m_mainChar->getBoundingBox()->intersects(m_checkBoundingBox)) {
-		m_isTouched = true;
-		m_ps->emitRate = 0.f;
-		m_colorUpdater->setFading(m_criticalTime.asSeconds());
+		touch();
 	}
 }
 
@@ -135,7 +139,7 @@ void DisappearingTile::onHit(Spell* spell) {
 	case SpellID::WindGust:
 	case SpellID::Chop:
 	case SpellID::Telekinesis:
-		m_isTouched = true;
+		touch();
 		break;
 	default:
 		break;

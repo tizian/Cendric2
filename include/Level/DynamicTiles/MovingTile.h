@@ -14,6 +14,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void renderTop(sf::RenderTarget& target);
 	void renderBottom(sf::RenderTarget& target);
+	void renderDebug(sf::RenderTarget& target);
 	void setPosition(const sf::Vector2f& position);
 
 private:
@@ -23,6 +24,7 @@ private:
 	std::vector<sf::Sprite> m_topSprites;
 	std::vector<sf::Sprite> m_bottomSprites;
 	sf::FloatRect m_boundingBox;
+	sf::RectangleShape m_debugBox;
 	float m_boundingBoxOffset;
 
 	LevelMainCharacter* m_mainChar;
@@ -40,6 +42,7 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 	void setPosition(const sf::Vector2f& position) override;
 
 	const sf::Vector2f& getRelativeVelocity() const;
@@ -50,7 +53,6 @@ public:
 
 	// those methods are overridden to resolve the MI diamond of death:
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
-	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableTile::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; }
@@ -66,6 +68,7 @@ private:
 	void setFrozen(bool frozen, bool permanent = false);
 	bool m_isFrozen;
 	bool m_isPermanentlyFrozen;
+	bool m_isFreezable;
 	bool m_isActive;
 	sf::Vector2f m_currentVelocity;
 	sf::Time m_distanceTime;
