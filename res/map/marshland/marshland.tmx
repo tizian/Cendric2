@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="284">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="285">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -853,7 +853,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc" visible="0">
+ <objectgroup name="npc">
   <object id="277" gid="2341" x="550" y="500" width="50" height="50">
    <properties>
     <property name="id" value="npc_morton"/>
@@ -863,6 +863,11 @@
   <object id="283" gid="2354" x="1350" y="500" width="50" height="50">
    <properties>
     <property name="id" value="npc_leeroy"/>
+   </properties>
+  </object>
+  <object id="284" gid="2355" x="1150" y="950" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_koray"/>
    </properties>
   </object>
  </objectgroup>
