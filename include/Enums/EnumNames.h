@@ -303,6 +303,8 @@ public:
 			return "DragonWhelp";
 		case EnemyID::Boss_Janus:
 			return "BossJanus";
+		case EnemyID::NecroticGrimoire:
+			return "NecroticGrimoire";
 		}
 	}
 

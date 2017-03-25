@@ -17,6 +17,7 @@ public:
 	void render(sf::RenderTarget& target) override;
 
 	void setPosition(const sf::Vector2f& position) override;
+	void setTarget(GameObject* target, bool force = false);
 
 	void init() override;
 	void loadAnimation(int skinNr) override;
@@ -26,9 +27,11 @@ public:
 private:
 	std::string getSpritePath() const override;
 	LightComponent* m_lightComponent;
+	GameObject* m_target = nullptr;
 
 	particles::TextureParticleSystem* m_ps = nullptr;
 	particles::ParticleSpawner* m_particleSpawner = nullptr;
+	particles::AimedVelocityGenerator* m_velGen = nullptr;
 
 	void loadParticleSystem();
 
