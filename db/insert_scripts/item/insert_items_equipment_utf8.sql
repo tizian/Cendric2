@@ -470,6 +470,13 @@ INSERT INTO item_attribute (item_id, max_health, dmg_shadow) values ('eq_bonerin
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_bonering', -3, -39, 19, 14);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_bonering', 1, 250, 300, 50, 50);
 
+-- Holy Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_holyring', 'item', 'Holy Ring','Heiliger Ring','Heilige Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_holyring', 'item_desc', 'I found this shiny ring in the cathedral of Gandria.','Diesen glänzenden Ring habe ich in der Kathedrale von Gandria gefunden.','De glänzig Ring hani ide Kathedrale vo Gandria gfunde.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_holyring', 'eq_ring', 650, 450, 30);
+INSERT INTO item_attribute (item_id, dmg_light, res_shadow) values ('eq_holyring', 6, 3);
+
 -- Eye of the Moon
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item', 'The Eye of the Moon','Das Auge des Mondes','Es Mondaug');

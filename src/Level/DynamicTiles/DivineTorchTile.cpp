@@ -63,6 +63,43 @@ void DivineTorchTile::setPosition(const sf::Vector2f& pos) {
 	updateParticleSystemPosition();
 }
 
+void DivineTorchTile::setTarget(GameObject* target, bool force) {
+	if (!force && m_target == target) return;
+	m_target = target;
+	m_ps->clearGenerators();
+
+	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 30.f;
+	sizeGen->minEndSize = 5.f;
+	sizeGen->maxEndSize = 10.f;
+
+	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	colGen->minStartCol = sf::Color(255, 255, 204, 100);
+	colGen->maxStartCol = sf::Color(255, 255, 255, 150);
+	colGen->minEndCol = sf::Color(255, 255, 0, 0);
+	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+
+	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	timeGen->minTime = 2.0f;
+	timeGen->maxTime = 4.0f;
+
+	if (m_target) {
+		m_velGen = m_ps->addGenerator<particles::AimedVelocityGenerator>();
+		m_velGen->goal = m_target->getCenter();
+		m_velGen->minStartSpeed = 100.f;
+		m_velGen->maxStartSpeed = 120.f;
+	}
+	else {
+		m_velGen = nullptr;
+		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+		velGen->minAngle = 90.f;
+		velGen->maxAngle = 270.f;
+		velGen->minStartSpeed = 10.f;
+		velGen->maxStartSpeed = 20.f;
+	}
+}
+
 void DivineTorchTile::render(sf::RenderTarget& target) {
 	LevelDynamicTile::render(target);
 	if (m_state == GameObjectState::Burning) {
@@ -73,6 +110,9 @@ void DivineTorchTile::render(sf::RenderTarget& target) {
 void DivineTorchTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	if (m_state == GameObjectState::Burning) {
+		if (m_target) {
+			m_velGen->goal = m_target->getCenter();
+		}
 		m_ps->update(frameTime);
 	}
 }
@@ -88,33 +128,13 @@ void DivineTorchTile::loadParticleSystem() {
 	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
 	m_particleSpawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 30.f;
-	sizeGen->minEndSize = 5.f;
-	sizeGen->maxEndSize = 10.f;
-
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-	colGen->minStartCol = sf::Color(255, 255, 204, 100);
-	colGen->maxStartCol = sf::Color(255, 255, 255, 150);
-	colGen->minEndCol = sf::Color(255, 255, 0, 0);
-	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
-
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = 90.f;
-	velGen->maxAngle = 270.f;
-	velGen->minStartSpeed = 10.f;
-	velGen->maxStartSpeed = 20.f;
-
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 2.0f;
-	timeGen->maxTime = 4.0f;
-
 	// Updaters
 	m_ps->addUpdater<particles::TimeUpdater>();
 	m_ps->addUpdater<particles::ColorUpdater>();
 	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+
+	setTarget(nullptr, true);
 }
 
 void DivineTorchTile::updateParticleSystemPosition() {

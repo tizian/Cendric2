@@ -7,10 +7,10 @@
 #include "Particles/ParticleSystem.h"
 
 // A flying book
-class BookEnemy : public Enemy {
+class BookEnemy : public virtual Enemy {
 public:
 	BookEnemy(const Level* level, Screen* screen);
-	~BookEnemy() {}
+	virtual ~BookEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;

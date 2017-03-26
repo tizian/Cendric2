@@ -40,6 +40,9 @@ Gesandte des Sturms','Boss: Elysia,
 Gsandti vom Sturm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('swampbridge','location','The Bridge in the Swamp','Die Brücke im Sumpf','D''Brugg im Sumpf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacathedral','location','Cathedral','Kathedrale','Kathedrale');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacathedral_necro','location','Cathedral','Kathedrale','Kathedrale');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacathedral_cleric','location','Cathedral','Kathedrale','Kathedrale');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacathedral_thief','location','Cathedral','Kathedrale','Kathedrale');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_janus','location','Boss: Alastor,
 Guardian of the Sewers','Boss: Alastor,
 Wächter der Kanalisation','Boss: Alastor, 

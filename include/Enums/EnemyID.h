@@ -32,5 +32,6 @@ enum class EnemyID {
 	Elysia_Clone,
 	Dragonwhelp,
 	Boss_Janus,
+	NecroticGrimoire,
 	MAX
 };
