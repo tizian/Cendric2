@@ -348,22 +348,12 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:19
-		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") < 50
+		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:Can you teach me more spells?
 		translation.de:Kannst du mir noch mehr Zauber beibringen?
 		translation.ch:Chasch mer na me Zauber bibringe?
-	]
-	[
-		# Link node, tag is next tag
-		tag:20
-		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50
-		# translation: 
-		translation.tag:DL_Choice_TeachMore
-		translation.en:
-		translation.de:
-		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -378,12 +368,22 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")
+		condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")
 		# translation: 
 		translation.tag:DL_Choice_HowElseHelp
 		translation.en:What else can I do to demonstrate my skills?
 		translation.de:Was kann ich sonst noch tun um meine Fähigkeiten unter Beweis zu stellen?
 		translation.ch:Was chani susch na mache zum mini Fähigkeite unter Bewiis stelle?
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
+		condition:DL:isQuestState("cathedral_thief", "started") and DL:isQuestComplete("cathedral_thief")
+		# translation: 
+		translation.tag:DL_Choice_CathedralFinished
+		translation.en:I got the candleholders.
+		translation.de:Ich habe die Kerzenständer.
+		translation.ch:Ich han d'Chärzeständer.
 	]
 	[
 		# Link node, tag is next tag
@@ -420,22 +420,6 @@ npc.id:npc_vincent3
 	translation.en:Maybe later. First, you need to show us that you can handle this kind of magic.
 	translation.de:Vielleicht später. Erst musst du uns zeigen, dass du auch mit dieser Magie umgehen kannst.
 	translation.ch:Vilicht spöter. Zersch muesch üs mal zeige das au öppis chasch demit afange.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [20] NPC Node
-	tag:20
-	# triggers: 
-	trigger:DL:addItem("sp_invisibility", 1)
-	trigger:DL:addConditionProgress("npc_vincent3", "second_spell")
-	# translation: 
-	translation.tag:DL_Vincent_SecondSpell
-	translation.en:Yes. You've proven yourself useful enough to learn how to be one with the shadows...
-	translation.de:Ja. Du hast dich als nützlich genug erwiesen um zu lernen, wie man mit den Schatten verschmilzt...
-	translation.ch:Ja. Du hesch dich als nützlich gnueg erwise zum lerne, weme mit de Schatte verschmilzt...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -522,6 +506,38 @@ npc.id:npc_vincent3
 	translation.en:Bring us those golden candleholders and I'll teach you more about our magic.
 	translation.de:Bring uns diese goldenen Kerzenständer und ich werde dich mehr über unsere Magie lehren.
 	translation.ch:Bring üs die goldige Cherzeständer und ich wird der meh vo üsere Magie biibringe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:removeItem("qe_divinecandleholder", 3)
+	trigger:DL:changeQuestState("cathedral_thief", "completed")
+	# translation: 
+	translation.tag:DL_Vincent_CathedralFinished
+	translation.en:Well done. Taking them when everyone else was distracted was a well-thought-out idea, wasn't it.
+	translation.de:Gut gemacht. Sie dann zu nehmen, während alle anderen abgelenkt waren, war eine gut durchdachte Idee, nicht wahr.
+	translation.ch:Guet gmacht. Si denn z'neh wenn all andere abglenkt sind isch scho e saumässig gueti Idee gsi, gell.
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:addReputationProgress("thief", 10)
+	trigger:DL:addItem("sp_invisibility", 1)
+	# translation: 
+	translation.tag:DL_Vincent_CathedralFinished2
+	translation.en:You've shown me that you are able to use our magic. Take this scroll as a reward and learn how to be one with the shadows.
+	translation.de:Du hast mir gezeigt, dass du fähig bist, unsere Magie zu benutzen. Nimm diese Spruchrolle als Belohnung und lerne, wie man eins mit den Schatten wird.
+	translation.ch:Du hesch mer zeigt, dassd fähig bisch, üsi Magie z'bruuche. Nimm die Schriftrolle als Belohnig und lern, weme eis mit de Schatte wird.
 	[
 		# Link node, tag is next tag
 		tag:-2

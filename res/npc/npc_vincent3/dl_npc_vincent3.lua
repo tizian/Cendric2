@@ -148,17 +148,17 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_vincent3", "first_spell")) then 
 			DL:addChoice(18, "DL_Choice_TeachSpells") -- Can you teach me some spells?
 		end
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") < 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100) then 
 			DL:addChoice(19, "DL_Choice_TeachMore") -- Can you teach me more spells?
-		end
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50) then 
-			DL:addChoice(20, "DL_Choice_TeachMore") -- 
 		end
 		if (condition:DL:isQuestState("lloyds_plan", "void")) then 
 			DL:addChoice(12, "DL_Choice_HowCanIHelp") -- How can I support you?
 		end
-		if (condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
 			DL:addChoice(22, "DL_Choice_HowElseHelp") -- What else can I do to demonstrate my skills?
+		end
+		if (DL:isQuestState("cathedral_thief", "started") and DL:isQuestComplete("cathedral_thief")) then 
+			DL:addChoice(27, "DL_Choice_CathedralFinished") -- I got the candleholders.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
@@ -172,18 +172,9 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") < 50) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100) then 
 
 			DL:createNPCNode(19, -2, "DL_Vincent_NoSpellReputation") -- Maybe later. First, you need to show us that you can handle this kind of magic.
-			DL:addNode()
-
-		end
-
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isConditionFulfilled("npc_vincent3", "second_spell") and DL:getReputation("thief") >= 50) then 
-
-			DL:createNPCNode(20, -2, "DL_Vincent_SecondSpell") -- Yes. You've proven yourself useful enough to learn how to be one with the shadows...
-			DL:addItem("sp_invisibility", 1)
-			DL:addConditionProgress("npc_vincent3", "second_spell")
 			DL:addNode()
 
 		end
@@ -200,7 +191,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
 
 			DL:createNPCNode(22, 23, "DL_Vincent_CathedralThief") -- The clerics have made a big mistake when they tried to exorcise a dangerous grimoire about necromancy.
 			DL:addNode()
@@ -216,6 +207,21 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(25, -2, "DL_Vincent_CathedralThief4") -- Bring us those golden candleholders and I'll teach you more about our magic.
 			DL:changeQuestState("cathedral_thief", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("cathedral_thief", "started") and DL:isQuestComplete("cathedral_thief")) then 
+
+			DL:createNPCNode(27, 28, "DL_Vincent_CathedralFinished") -- Well done. Taking them when everyone else was distracted was a well-thought-out idea, wasn't it.
+			DL:removeItem("qe_divinecandleholder", 3)
+			DL:changeQuestState("cathedral_thief", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(28, -2, "DL_Vincent_CathedralFinished2") -- You've shown me that you are able to use our magic. Take this scroll as a reward and learn how to be one with the shadows.
+			DL:addReputationProgress("thief", 10)
+			DL:addItem("sp_invisibility", 1)
 			DL:addNode()
 
 		end

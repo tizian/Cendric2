@@ -87,22 +87,12 @@ npc.id:npc_thiran
 	[
 		# Link node, tag is next tag
 		tag:7
-		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
+		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 100
 		# translation: 
 		translation.tag:DL_Choice_SecondSpell
 		translation.en:Can you teach me more spells?
 		translation.de:Kannst du mir noch mehr Zauber beibringen?
 		translation.ch:Chasch mer na me Zauber bibringe?
-	]
-	[
-		# Link node, tag is next tag
-		tag:8
-		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") >= 50 and not DL:isConditionFulfilled("npc_thiran", "second_spell")
-		# translation: 
-		translation.tag:DL_Choice_SecondSpell
-		translation.en:
-		translation.de:
-		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -161,22 +151,6 @@ npc.id:npc_thiran
 	translation.en:Not yet. I'm going to teach you another spell when you've worked for us.
 	translation.de:Noch nicht. Ich werde dir einen weiteren Zauber beibringen, wenn du für uns gearbeitet hast.
 	translation.ch:Nonid. Ich cha der en negste Zauber zeige wennd chli für üs gschaffet hesch.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [8] NPC Node
-	tag:8
-	# triggers: 
-	trigger:DL:addItem("sp_divineshield", 1)
-	trigger:DL:addConditionProgress("npc_thiran", "second_spell")
-	# translation: 
-	translation.tag:DL_Thiran_SecondSpell
-	translation.en:Yes, you've proven yourself worthy to learn more divine magic. Here you go.
-	translation.de:Ja, du hast dich als würdig erwiesen um mehr heilige Magie zu erlernen. Hier, nimm.
-	translation.ch:Ja, du hesch dich als würdig erwise zum me heiligi Magie lerne. Da, nimm.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -155,17 +155,17 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_luiz", "first_spell")) then 
 			DL:addChoice(21, "DL_Choice_TeachSpells") -- Can you teach me some spells?
 		end
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 50) then 
+		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100) then 
 			DL:addChoice(22, "DL_Choice_TeachMore") -- Can you teach me more spells?
-		end
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") >= 50) then 
-			DL:addChoice(23, "DL_Choice_TeachMore") -- 
 		end
 		if (DL:isQuestState("lloyds_plan", "void")) then 
 			DL:addChoice(24, "DL_Choice_HowCanIHelp") -- How can I help you?
 		end
 		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
 			DL:addChoice(26, "DL_Choice_WhatElseHelp") -- What else can I do for you?
+		end
+		if (DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")) then 
+			DL:addChoice(30, "DL_Choice_FinishedCathedral") -- I got the necrotic grimoire.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
@@ -179,18 +179,9 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 50) then 
+		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100) then 
 
 			DL:createNPCNode(22, -2, "DL_Luiz_NoSpellReputation") -- You're not ready for that. Help us with our studies, and you will get the experience needed for more powerful spells.
-			DL:addNode()
-
-		end
-
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") >= 50) then 
-
-			DL:createNPCNode(23, -2, "DL_Luiz_SecondSpell") -- Yes, you've earned the experience to learn how to raise the dead...
-			DL:addItem("sp_raisethedead", 1)
-			DL:addConditionProgress("npc_luiz", "second_spell")
 			DL:addNode()
 
 		end
@@ -223,6 +214,21 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(29, -2, "DL_Luiz_CathedralNecro4") -- Go and bring that book back to our library. I just hope it's not already too late.
 			DL:changeQuestState("cathedral_necro", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")) then 
+
+			DL:createNPCNode(30, 31, "DL_Luiz_FinishedCathedral") -- Good job. I'll put it back into our library where it belongs.
+			DL:removeItem("qe_necrobook", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(31, -2, "DL_Luiz_FinishedCathedral2") -- I'm slowly starting to trust you. I think you've gained the experience to learn how to raise the dead...
+			DL:addItem("sp_raisethedead", 1)
+			DL:addReputationProgress("necromancer", 10)
+			DL:changeQuestState("cathedral_necro", "completed")
 			DL:addNode()
 
 		end

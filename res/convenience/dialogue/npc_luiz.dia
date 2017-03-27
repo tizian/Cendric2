@@ -387,22 +387,12 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 50
+		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:Can you teach me more spells?
 		translation.de:Kannst du mir noch mehr Zauber beibringen?
 		translation.ch:Chasch mer na me Zauber bibringe?
-	]
-	[
-		# Link node, tag is next tag
-		tag:23
-		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") >= 50
-		# translation: 
-		translation.tag:DL_Choice_TeachMore
-		translation.en:
-		translation.de:
-		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -423,6 +413,16 @@ npc.id:npc_luiz
 		translation.en:What else can I do for you?
 		translation.de:Was kann ich sonst noch für euch tun?
 		translation.ch:Was chani susch na für eu mache?
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")
+		# translation: 
+		translation.tag:DL_Choice_FinishedCathedral
+		translation.en:I got the necrotic grimoire.
+		translation.de:Ich habe das nekrotische Zauberbuch.
+		translation.ch:Ich hans nekrotisch Zauberbuech.
 	]
 	[
 		# Link node, tag is next tag
@@ -459,22 +459,6 @@ npc.id:npc_luiz
 	translation.en:You're not ready for that. Help us with our studies, and you will get the experience needed for more powerful spells.
 	translation.de:Du bist dazu noch nicht bereit. Hilf uns mit unseren Forschungen und du wirst die Erfahrung erlangen, die für die mächtigeren Zauber nötig ist.
 	translation.ch:Da bisch nanig parat defür. Hilf üs mit üsne Forschige und du wirsch die Erfahrig becho wod bruchsch zum mit de mächtigere Zauber umga.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [23] NPC Node
-	tag:23
-	# triggers: 
-	trigger:DL:addItem("sp_raisethedead", 1)
-	trigger:DL:addConditionProgress("npc_luiz", "second_spell")
-	# translation: 
-	translation.tag:DL_Luiz_SecondSpell
-	translation.en:Yes, you've earned the experience to learn how to raise the dead...
-	translation.de:Ja, du hast nun die nötige Erfahrung um zu erlernen, wie man die Toten erweckt...
-	translation.ch:Jo, du hesch ez di nötig Erfahrig zum lerne, weme di Tote erweckt...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -561,6 +545,38 @@ npc.id:npc_luiz
 	translation.en:Go and bring that book back to our library. I just hope it's not already too late.
 	translation.de:Geh und bring dieses Buch zurück in unsere Bibliothek. Ich hoffe einfach, es ist nicht schon zu spät...
 	translation.ch:Gang und bring das Buech zrugg i üsi Bibliothek. Ich hoff eifach es isch nonig z'spat...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:removeItem("qe_necrobook", 1)
+	# translation: 
+	translation.tag:DL_Luiz_FinishedCathedral
+	translation.en:Good job. I'll put it back into our library where it belongs.
+	translation.de:Gut gemacht. Ich werde es in unsere Bibliothek zurückstellen, wo es auch hingehört.
+	translation.ch:Guet gmacht. Ich wird's i üsi Bibliothek zruggtue wos au aneghört.
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	trigger:DL:addItem("sp_raisethedead", 1)
+	trigger:DL:addReputationProgress("necromancer", 10)
+	trigger:DL:changeQuestState("cathedral_necro", "completed")
+	# translation: 
+	translation.tag:DL_Luiz_FinishedCathedral2
+	translation.en:I'm slowly starting to trust you. I think you've gained the experience to learn how to raise the dead...
+	translation.de:Ich beginne langsam, dir zu vertrauen. Ich denke, du hast nun die nötige Erfahrung, um zu erlernen, wie man die Toten erweckt...
+	translation.ch:Ich fang langsam ah, dir z'traue. Ich denke, du hesch ez di nötig Erfahrig, zum lerne, weme di Tote erweckt...
 	[
 		# Link node, tag is next tag
 		tag:-2

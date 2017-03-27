@@ -71,6 +71,7 @@ npc.id:npc_lua
 	tag:4
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lua", "flirt")
+	trigger:DL:addReputationProgress("necromancer", 5)
 	# translation: 
 	translation.tag:DL_Lua_Flirt
 	translation.en:(Blushes) Oh, thank you. What a pity, my skills as a clairvoyant only show me your aura, not your thoughts.

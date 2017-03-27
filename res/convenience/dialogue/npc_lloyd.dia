@@ -389,6 +389,16 @@ npc.id:npc_lloyd
 	]
 	[
 		# Link node, tag is next tag
+		tag:23
+		condition:DL:isQuestState("cathedral_cleric", "started") and DL:isQuestComplete("cathedral_cleric")
+		# translation: 
+		translation.tag:DL_Choice_CathedralFinished
+		translation.en:I've purified the necrotic grimoire.
+		translation.de:Ich habe das nekrotische Zauberbuch geläutert.
+		translation.ch:Ich has nekrotisch Zauberbuech g'lüüteret.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -435,6 +445,37 @@ npc.id:npc_lloyd
 	translation.en:I want you to go to our cathedral. Kindle the divine candles with your light magic and purify that deviant book. 
 	translation.de:Ich will, dass du in unsere Kathedrale gehst. Entzünde die heiligen Kerzen mit deiner Lichtmagie und läutere dieses abartige Buch.
 	translation.ch:Ich will, dass du i üsi Kathedrale gosch. Entzünd di heilige Chärze mit dinere Liechtmagie und läutere das abartig Buech.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_CathedralFinished
+	translation.en:Well done. It's twisted magic is no longer besmirching our cathedral.
+	translation.de:Gut gemacht. Seine verdorbene Magie besudelt unsere Kathedrale nicht mehr.
+	translation.ch:Guet gmacht. Sini verdorbe Magie besudled üsi Kathedrale nümm.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	trigger:DL:changeQuestState("cathedral_cleric", "completed")
+	trigger:DL:addItem("sp_divineshield", 1)
+	trigger:DL:addReputationProgress("cleric", 10)
+	# translation: 
+	translation.tag:DL_Lloyd_CathedralFinished2
+	translation.en:I think you've gained enough experience to learn how to shield yourself against evil magic. Take this scroll as a reward for your help.
+	translation.de:Ich denke, du hast nun genug Erfahrung um zu lernen, wie man sich gegen solch bösartige Magie schützt. Nimm diese Schriftrolle als Belohnung für deine Hilfe.
+	translation.ch:Ich denk, du hesch ez gnueg Erfahrig zum lerne, we me sich geg so bösi Magie schützt. Do, nimm die Schriftrolle als Belohnig für dini Hilf.
 	[
 		# Link node, tag is next tag
 		tag:-2

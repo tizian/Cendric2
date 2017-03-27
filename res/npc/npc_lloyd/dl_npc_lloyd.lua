@@ -154,6 +154,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("cathedral_cleric", "void")) then 
 			DL:addChoice(20, "DL_Choice_HowCanIHelp") -- What needs to be done?
 		end
+		if (DL:isQuestState("cathedral_cleric", "started") and DL:isQuestComplete("cathedral_cleric")) then 
+			DL:addChoice(23, "DL_Choice_CathedralFinished") -- I've purified the necrotic grimoire.
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -169,6 +172,20 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(22, -2, "DL_Lloyd_CathedralCleric3") -- I want you to go to our cathedral. Kindle the divine candles with your light magic and purify that deviant book. 
 			DL:changeQuestState("cathedral_cleric", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("cathedral_cleric", "started") and DL:isQuestComplete("cathedral_cleric")) then 
+
+			DL:createNPCNode(23, 24, "DL_Lloyd_CathedralFinished") -- Well done. It's twisted magic is no longer besmirching our cathedral.
+			DL:addNode()
+
+
+			DL:createNPCNode(24, -2, "DL_Lloyd_CathedralFinished2") -- I think you've gained enough experience to learn how to shield yourself against evil magic. Take this scroll as a reward for your help.
+			DL:changeQuestState("cathedral_cleric", "completed")
+			DL:addItem("sp_divineshield", 1)
+			DL:addReputationProgress("cleric", 10)
 			DL:addNode()
 
 		end

@@ -26,6 +26,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(4, -2, "DL_Lua_Flirt") -- (Blushes) Oh, thank you. What a pity, my skills as a clairvoyant only show me your aura, not your thoughts.
 		DL:addConditionProgress("npc_lua", "flirt")
+		DL:addReputationProgress("necromancer", 5)
 		DL:addNode()
 
 	end
