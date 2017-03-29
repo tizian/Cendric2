@@ -33,3 +33,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Na
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyOoze','enemy','Nasty Ooze','Garstiger Schleim','Rüüdige Schleim');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NastyBat','enemy','Nasty Bat','Garstige Fledermaus','Rüüdigi Flädermuus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NecroticGrimoire','enemy','Necrotic Grimoire','Nekrotisches Zauberbuch','Nekrotischs Zauberbuech');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossMorgiana','npc','Morgiana "The Butcher"','Morgiana "Die Metzgerin"','"Metzgerin" Morgiana');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossRoy','npc','Roy "The Demon"','Roy "Der Dämon"','"Dämon" Roy');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossJeremy','npc','Jeremy "The Fox" Siek','Jeremy "Der Fuchs" Siek','Jeremy "De Fuchs" Siek');

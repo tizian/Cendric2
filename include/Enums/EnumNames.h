@@ -305,6 +305,12 @@ public:
 			return "BossJanus";
 		case EnemyID::NecroticGrimoire:
 			return "NecroticGrimoire";
+		case EnemyID::Boss_Morgiana:
+			return "BossMorgiana";
+		case EnemyID::Boss_Roy:
+			return "BossRoy";
+		case EnemyID::Boss_Jeremy:
+			return "BossJeremy";
 		}
 	}
 

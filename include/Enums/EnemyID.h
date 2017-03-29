@@ -33,5 +33,8 @@ enum class EnemyID {
 	Dragonwhelp,
 	Boss_Janus,
 	NecroticGrimoire,
+	Boss_Morgiana,
+	Boss_Roy,
+	Boss_Jeremy,
 	MAX
 };
