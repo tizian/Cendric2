@@ -178,7 +178,7 @@ AttackingBehavior* RoyBoss::createAttackingBehavior(bool asAlly) {
 		behavior = new AggressiveBehavior(this);
 	}
 	behavior->setAggroRange(10000.f);
-	behavior->setAttackInput(std::bind(&ZeffBoss::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&RoyBoss::handleAttackInput, this));
 	return behavior;
 }
 
