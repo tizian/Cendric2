@@ -266,7 +266,7 @@ npc.id:npc_leeroy
 	# translation: 
 	translation.tag:DL_Leeroy_NotBright
 	translation.en:I prefer swords over knives, you know.
-	translation.de:Dunkel bin ich aber auch nicht.
+	translation.de:Schwerter statt Wörter!
 	translation.ch:Ich ha ken Schade, ich mach Schade!
 	[
 		# Link node, tag is next tag

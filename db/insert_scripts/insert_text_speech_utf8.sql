@@ -16,3 +16,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 a break...','Ich brauche
 eine Pause...','Ich bruuch
 e Pause...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaEngage', 'speech','Now I''m gonna teach you a lesson!','Jetzt gibt''s was mit der groben Kelle!',  'Jetz chnüppli di abe!');
