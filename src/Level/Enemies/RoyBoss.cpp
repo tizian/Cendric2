@@ -11,8 +11,10 @@ REGISTER_ENEMY(EnemyID::Boss_Roy, RoyBoss)
 
 RoyBoss::RoyBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-	Enemy(level, screen),
-	Boss(level, screen) {
+	Enemy(level, screen) {
+
+	m_isAlwaysUpdate = true;
+	m_isBoss = true;
 }
 
 void RoyBoss::loadAttributes() {
