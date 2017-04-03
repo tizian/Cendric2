@@ -6,12 +6,12 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class RoyBoss : virtual public Enemy {
+class JeremyBoss : virtual public Enemy {
 public:
-	RoyBoss(const Level* level, Screen* screen);
+	JeremyBoss(const Level* level, Screen* screen);
 
 	sf::Time getConfiguredWaitingTime() const override;
-	EnemyID getEnemyID() const override { return EnemyID::Boss_Roy; }
+	EnemyID getEnemyID() const override { return EnemyID::Boss_Jeremy; }
 
 	int getMentalStrength() const override { return 4; };
 	float getConfiguredDistanceToHPBar() const override;

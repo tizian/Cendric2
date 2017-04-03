@@ -1,4 +1,4 @@
-#include "Level/Enemies/RoyBoss.h"
+#include "Level/Enemies/JeremyBoss.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
@@ -7,9 +7,9 @@
 #include "Registrar.h"
 #include "GlobalResource.h"
 
-REGISTER_ENEMY(EnemyID::Boss_Roy, RoyBoss)
+REGISTER_ENEMY(EnemyID::Boss_Jeremy, JeremyBoss)
 
-RoyBoss::RoyBoss(const Level* level, Screen* screen) :
+JeremyBoss::JeremyBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 
@@ -17,63 +17,87 @@ RoyBoss::RoyBoss(const Level* level, Screen* screen) :
 	m_isBoss = true;
 }
 
-void RoyBoss::loadAttributes() {
+void JeremyBoss::loadAttributes() {
 	m_attributes.setHealth(300);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistanceLight = -20;
 	m_attributes.resistanceFire = 50;
 	m_attributes.resistanceShadow = 10000;
-	m_attributes.critical = 100;
+	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
 }
 
-void RoyBoss::loadSpells() {
-	// this is the stunning projectile
-	SpellData projectile = SpellData::getSpellData(SpellID::Projectile);
-	projectile.skinNr = 2;
-	projectile.damage = 25;
-	projectile.damagePerSecond = 6;
-	projectile.isStunning = true;
-	projectile.duration = sf::seconds(2.f);
-	projectile.cooldown = sf::seconds(5.f);
-	projectile.isBlocking = true;
-	projectile.fightingTime = sf::seconds(1.f);
-	projectile.fightAnimation = GameObjectState::Fighting;
-	projectile.castingTime = sf::seconds(1.f);
-	projectile.castingAnimation = GameObjectState::Casting;
-	projectile.speed = 400;
+void JeremyBoss::loadSpells() {
+	// this is the shadow fireball
+	SpellData fireball = SpellData::getSpellData(SpellID::FireBall);
+	fireball.damageType = DamageType::Shadow;
+	fireball.skinNr = 2;
+	fireball.count = 2;
+	fireball.damage = 10;
+	fireball.damagePerSecond = 2;
+	fireball.isStunning = true;
+	fireball.duration = sf::seconds(2.f);
+	fireball.cooldown = sf::seconds(5.f);
+	fireball.fightingTime = sf::seconds(0.f);
+	fireball.castingTime = sf::seconds(0.f);
+	fireball.speed = 400;
 
-	m_spellManager->addSpell(projectile);
+	m_spellManager->addSpell(fireball);
 
-	// these are the shadow projectiles
-	projectile = SpellData::getSpellData(SpellID::Projectile);
-	projectile.damageType = DamageType::Shadow;
-	projectile.skinNr = 1;
-	projectile.damage = 25;
-	projectile.damagePerSecond = 6;
-	projectile.count = 3;
-	projectile.cooldown = sf::seconds(5.f);
-	projectile.isBlocking = true;
-	projectile.fightingTime = sf::seconds(1.f);
-	projectile.fightAnimation = GameObjectState::Fighting;
-	projectile.castingTime = sf::seconds(1.f);
-	projectile.castingAnimation = GameObjectState::Casting2;
-	projectile.speed = 500;
-	
-	m_spellManager->addSpell(projectile);
+	// the trap
+	SpellData trap = SpellData::getSpellData(SpellID::ShadowTrap);
+	trap.damageType = DamageType::Shadow;
+	trap.damage = 25;
+	trap.damagePerSecond = 6;
+	trap.count = 3;
+	trap.cooldown = sf::seconds(5.f);
+	trap.isBlocking = true;
+	trap.isStunning = true;
+	trap.duration = sf::seconds(2.f);
+	trap.activeDuration = sf::seconds(10.f);
+	trap.fightingTime = sf::seconds(1.f);
+	trap.fightAnimation = GameObjectState::Fighting;
+	trap.castingTime = sf::seconds(0.6f);
+	trap.castingAnimation = GameObjectState::Casting;
+
+	m_spellManager->addSpell(trap);
+
+	// the shadow step ninja icy ambush
+	SpellData icyAmbush = SpellData::getSpellData(SpellID::IcyAmbush);
+	icyAmbush.damageType = DamageType::Shadow;
+	icyAmbush.skinNr = 1;
+	icyAmbush.damage = 40;
+	icyAmbush.damagePerSecond = 6;
+	icyAmbush.cooldown = sf::seconds(10.f);
+	icyAmbush.isBlocking = true;
+	icyAmbush.isStunning = true;
+	icyAmbush.duration = sf::seconds(2.f);
+	icyAmbush.activeDuration = sf::seconds(10.f);
+	icyAmbush.fightingTime = sf::seconds(0.f);
+	icyAmbush.castingTime = sf::seconds(2.f);
+	icyAmbush.castingAnimation = GameObjectState::Casting2;
+	icyAmbush.speed = 500.f;
+	icyAmbush.range = 500.f;
+
+	m_spellManager->addSpell(icyAmbush);
 
 	m_spellManager->setCurrentSpell(0); // stun
 	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
 }
 
-void RoyBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(rand() % 2); 
+void JeremyBoss::handleAttackInput() {
+	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
+		m_spellManager->setCurrentSpell(1); // trap
+	}
+	else {
+		m_spellManager->setCurrentSpell(rand() % 2 == 0 ? 2 : 0);
+	}
 
 	if (getCurrentTarget() != nullptr)
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
-void RoyBoss::loadAnimation(int skinNr) {
+void JeremyBoss::loadAnimation(int skinNr) {
 	int size = 120;
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
@@ -102,30 +126,30 @@ void RoyBoss::loadAnimation(int skinNr) {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(17 * size, 0, size, size));
+	deadAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
-	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(16 * size, 0, size, size));
-	fightingAnimation->setLooped(false);
-
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
-	
 	Animation* castingAnimation = new Animation(sf::seconds(0.2f));
 	castingAnimation->setSpriteSheet(tex);
-	for (int i = 13; i < 16; ++i) {
+	for (int i = 16; i < 19; ++i) {
 		castingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
 	}
 	castingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
+	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
+	fightingAnimation->setSpriteSheet(tex);
+	fightingAnimation->addFrame(sf::IntRect(19 * size, 0, size, size));
+	fightingAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
+
 	Animation* casting2Animation = new Animation(sf::seconds(0.2f));
 	casting2Animation->setSpriteSheet(tex);
-	for (int i = 10; i < 13; ++i) {
+	for (int i = 11; i < 16; ++i) {
 		casting2Animation->addFrame(sf::IntRect(i * size, 0, size, size));
 	}
 	casting2Animation->setLooped(false);
@@ -137,7 +161,7 @@ void RoyBoss::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* RoyBoss::createMovingBehavior(bool asAlly) {
+MovingBehavior* JeremyBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
@@ -149,22 +173,22 @@ MovingBehavior* RoyBoss::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* RoyBoss::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* JeremyBoss::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 	behavior = new AggressiveBehavior(this);
 	behavior->setAggroRange(10000.f);
-	behavior->setAttackInput(std::bind(&RoyBoss::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&JeremyBoss::handleAttackInput, this));
 	return behavior;
 }
 
-sf::Time RoyBoss::getConfiguredWaitingTime() const {
+sf::Time JeremyBoss::getConfiguredWaitingTime() const {
 	return sf::Time::Zero;
 }
 
-float RoyBoss::getConfiguredDistanceToHPBar() const {
+float JeremyBoss::getConfiguredDistanceToHPBar() const {
 	return 30.f;
 }
 
-std::string RoyBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_roy.png";
+std::string JeremyBoss::getSpritePath() const {
+	return "res/assets/bosses/spritesheet_boss_jeremy.png";
 }

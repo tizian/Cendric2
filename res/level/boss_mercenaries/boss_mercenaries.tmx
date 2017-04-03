@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="178">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="183">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_mercenaries/layer_inf.png"/>
+  <property name="bosslevel" value="res/level/boss_mercenaries/boss_mercenaries.lua"/>
   <property name="dimming" value="0.5"/>
   <property name="musicpath" value="res/music/house.ogg"/>
-  <property name="observed" value=""/>
   <property name="tilesetpath" value="res/level/boss_mercenaries/tileset_level_boss_mercenaries.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_boss_mercenaries" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
@@ -480,5 +480,13 @@
 78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76
 </data>
  </layer>
- <objectgroup name="enemy"/>
+ <objectgroup name="enemy">
+  <object id="180" gid="981" x="605" y="774" width="50" height="50"/>
+  <object id="181" gid="982" x="1045" y="750" width="50" height="50">
+   <properties>
+    <property name="eq_mercenarybandana" value="1"/>
+   </properties>
+  </object>
+  <object id="182" gid="980" x="874" y="743" width="50" height="50"/>
+ </objectgroup>
 </map>

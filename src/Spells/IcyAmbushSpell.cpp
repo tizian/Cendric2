@@ -10,7 +10,7 @@ void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, 0, 40, 30 * bean.skinNr));
+	spellAnimation->addFrame(sf::IntRect(0, 30 * bean.skinNr, 40, 30));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
