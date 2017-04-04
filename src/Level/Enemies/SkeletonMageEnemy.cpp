@@ -117,7 +117,7 @@ void SkeletonMageEnemy::loadAnimation(int skinNr) {
 
 void SkeletonMageEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
-	m_lightComponent->flipLightOffsetX(!m_enemyMovingBehavior->isFacingRight());
+	m_lightComponent->flipOffsetX(!m_enemyMovingBehavior->isFacingRight());
 }
 
 void SkeletonMageEnemy::setDead() {

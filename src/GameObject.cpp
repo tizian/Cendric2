@@ -10,7 +10,9 @@ GameObject::~GameObject() {
 }
 
 void GameObject::render(sf::RenderTarget& renderTarget) {
-	// nop
+	for (auto& component : m_components) {
+		component->render(renderTarget);
+	}
 }
 
 void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {

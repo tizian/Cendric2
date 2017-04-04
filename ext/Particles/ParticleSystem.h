@@ -24,6 +24,21 @@ public:
 
 	virtual void reset();
 
+	inline void addGenerator(ParticleGenerator *generator) {
+		if (!generator) return;
+		m_generators.push_back(generator);
+	}
+
+	inline void addSpawner(ParticleSpawner *spawner) {
+		if (!spawner) return;
+		m_spawners.push_back(spawner);
+	}
+
+	inline void addUpdater(ParticleUpdater *updater) {
+		if (!updater) return;
+		m_updaters.push_back(updater);
+	}
+
 	template<typename T>
 	inline T *addGenerator() {
 		T *g = new T();
@@ -76,7 +91,7 @@ protected:
 	void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
 
 public:
-	float	emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
+	float emitRate;	// Note: For a constant particle stream, it should hold that: emitRate <= (maximalParticleCount / averageParticleLifetime)
 
 protected:
 	float m_dt;

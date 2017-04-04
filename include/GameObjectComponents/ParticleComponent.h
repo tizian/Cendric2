@@ -1,0 +1,47 @@
+#pragma once
+
+#include "global.h"
+#include "GameObjectComponents/GameObjectComponent.h"
+#include "Particles/ParticleSystem.h"
+
+struct ParticleComponentData {
+	int particleCount = 0;
+	float emitRate = 0;
+	std::string texturePath;
+	bool isAdditiveBlendMode = false;
+	particles::SizeGenerator* sizeGen = nullptr;
+	particles::ColorGenerator* colorGen = nullptr;
+	particles::ParticleGenerator* velGen = nullptr;
+	particles::ParticleSpawner* spawner = nullptr;
+	particles::TimeGenerator* timeGen = nullptr;
+};
+
+// A game object component that holds a particle system
+class ParticleComponent : public GameObjectComponent {
+public:
+	ParticleComponent(const ParticleComponentData& data, GameObject* parent);
+	~ParticleComponent();
+
+	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& renderTarget) override;
+
+	void flipOffsetX(bool flipped);
+	void flipOffsetY(bool flipped);
+	void setOffset(const sf::Vector2f& offset);
+	void setVisible(bool visible);
+	void setEmitRate(bool emitRate);
+	void setPosition(const sf::Vector2f& pos) override;
+
+private:
+	void loadParticleSystem();
+
+private:
+	ParticleComponentData m_data;
+	particles::TextureParticleSystem* m_ps = nullptr;
+	
+	sf::Vector2f m_offset;
+	bool m_isOffsetFlippedX = false;
+	bool m_isOffsetFlippedY = false;
+
+	bool m_isVisible = true;
+};

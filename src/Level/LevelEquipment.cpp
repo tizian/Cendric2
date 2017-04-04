@@ -90,7 +90,7 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 
 void LevelEquipment::setPosition(const sf::Vector2f& position) {
 	if (m_lightComponent != nullptr) {
-		m_lightComponent->flipLightOffsetX(m_isFacingRight);
+		m_lightComponent->flipOffsetX(m_isFacingRight);
 	}
 	AnimatedGameObject::setPosition(position);
 }
@@ -118,7 +118,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
-		if (m_lightComponent != nullptr) m_lightComponent->flipLightOffsetY(m_mainChar->isUpsideDown());
+		if (m_lightComponent != nullptr) m_lightComponent->flipOffsetY(m_mainChar->isUpsideDown());
 	}
 
 	sf::Vector2f newPosition;

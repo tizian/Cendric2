@@ -46,6 +46,7 @@ bool AnimatedGameObject::isAnimationLocked() const {
 
 void AnimatedGameObject::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_animatedSprite);
+	GameObject::render(renderTarget);
 }
 
 void AnimatedGameObject::update(const sf::Time& frameTime) {

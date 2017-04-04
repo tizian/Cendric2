@@ -12,6 +12,7 @@ public:
 
 	virtual void update(const sf::Time& frameTime) {};
 	virtual void setPosition(const sf::Vector2f& pos) {};
+	virtual void render(sf::RenderTarget& renderTarget) {};
 	virtual void renderAfterForeground(sf::RenderTarget& renderTarget) {};
 	virtual void onParentMouseOver() {};
 	virtual void onDisposed() {};

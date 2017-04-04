@@ -146,7 +146,7 @@ MovingBehavior* MorgianaBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(200.f);
+	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(500.f);
 	behavior->setMaxVelocityX(200.f);

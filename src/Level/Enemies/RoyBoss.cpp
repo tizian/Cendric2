@@ -63,7 +63,7 @@ void RoyBoss::loadSpells() {
 	m_spellManager->addSpell(projectile);
 
 	m_spellManager->setCurrentSpell(0); // stun
-	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
+	m_spellManager->setGlobalCooldown(sf::seconds(3.f));
 }
 
 void RoyBoss::handleAttackInput() {
@@ -141,7 +141,7 @@ MovingBehavior* RoyBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(200.f);
+	behavior->setApproachingDistance(300.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(500.f);
 	behavior->setMaxVelocityX(200.f);

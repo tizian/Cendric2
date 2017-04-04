@@ -4,6 +4,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -15,6 +17,12 @@ JeremyBoss::JeremyBoss(const Level* level, Screen* screen) :
 
 	m_isAlwaysUpdate = true;
 	m_isBoss = true;
+}
+
+void JeremyBoss::update(const sf::Time& frameTime) {
+	m_ps->flipOffsetX(!m_movingBehavior->isFacingRight());
+	m_light->flipOffsetX(!m_movingBehavior->isFacingRight());
+	Enemy::update(frameTime);
 }
 
 void JeremyBoss::loadAttributes() {
@@ -82,7 +90,7 @@ void JeremyBoss::loadSpells() {
 	m_spellManager->addSpell(icyAmbush);
 
 	m_spellManager->setCurrentSpell(0); // stun
-	m_spellManager->setGlobalCooldown(sf::seconds(2.f));
+	m_spellManager->setGlobalCooldown(sf::seconds(3.f));
 }
 
 void JeremyBoss::handleAttackInput() {
@@ -159,13 +167,15 @@ void JeremyBoss::loadAnimation(int skinNr) {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+
+	loadParticleSystem();
 }
 
 MovingBehavior* JeremyBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(200.f);
+	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(500.f);
 	behavior->setMaxVelocityX(200.f);
@@ -179,6 +189,54 @@ AttackingBehavior* JeremyBoss::createAttackingBehavior(bool asAlly) {
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&JeremyBoss::handleAttackInput, this));
 	return behavior;
+}
+
+void JeremyBoss::loadParticleSystem() {
+	// add particles
+	ParticleComponentData data;
+	data.emitRate = 30.f;
+	data.particleCount = 60;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+
+	auto spawner = new particles::DiskSpawner();
+	spawner->radius = 5.f;
+	data.spawner = spawner;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 5.f;
+	sizeGen->maxStartSize = 10.f;
+	sizeGen->minEndSize = 2.f;
+	sizeGen->maxEndSize = 5.f;
+	data.sizeGen = sizeGen;
+	
+	auto colGen = new particles::ColorGenerator();
+	colGen->minStartCol = sf::Color(113, 128, 186, 100);
+	colGen->maxStartCol = sf::Color(230, 230, 255, 255);
+	colGen->minEndCol = sf::Color(69, 95, 122, 0);
+	colGen->maxEndCol = sf::Color(170, 179, 239, 0);
+	data.colorGen = colGen;
+
+	auto velGen = new particles::AngledVelocityGenerator();
+	velGen->minAngle = -45.f;
+	velGen->maxAngle = 45.f;
+	velGen->minStartSpeed = 20.f;
+	velGen->maxStartSpeed = 40.f;
+	data.velGen = velGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 1.f;
+	timeGen->maxTime = 2.f;
+	data.timeGen = timeGen;
+
+	m_ps = new ParticleComponent(data, this);
+	m_ps->setOffset(sf::Vector2f(30.f, 10.f));
+	addComponent(m_ps);
+
+	// add light
+	LightData lightData(sf::Vector2f(30.f, 0.f), sf::Vector2f(100.f, 100.f), 0.9f);
+	m_light = new LightComponent(lightData, this);
+	addComponent(m_light);
 }
 
 sf::Time JeremyBoss::getConfiguredWaitingTime() const {

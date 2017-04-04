@@ -3,7 +3,7 @@
 
 LightComponent::LightComponent(LightData lightData, GameObject* parent) : GameObjectComponent(parent) {
 	m_lightObject = new LightObject(lightData);
-	m_lightOffset = lightData.center;
+	m_offset = lightData.center;
 	parent->getScreen()->addObject(m_lightObject);
 }
 
@@ -15,17 +15,17 @@ void LightComponent::setVisible(bool visible) {
 	m_lightObject->setVisible(visible);
 }
 
-void LightComponent::flipLightOffsetX(bool flipped) {
-	m_isLightOffsetFlippedX = flipped;
+void LightComponent::flipOffsetX(bool flipped) {
+	m_isOffsetFlippedX = flipped;
 }
 
-void LightComponent::flipLightOffsetY(bool flipped) {
-	m_isLightOffsetFlippedY = flipped;
+void LightComponent::flipOffsetY(bool flipped) {
+	m_isOffsetFlippedY = flipped;
 }
 
 void LightComponent::setPosition(const sf::Vector2f& pos) {
 	m_lightObject->setPosition(m_parent->getPosition() + 
 		sf::Vector2f(
-			m_isLightOffsetFlippedX ? -m_lightOffset.x + m_parent->getBoundingBox()->width : m_lightOffset.x, 
-			m_isLightOffsetFlippedY ? -m_lightOffset.y + m_parent->getBoundingBox()->height : m_lightOffset.y));
+			m_isOffsetFlippedX ? -m_offset.x + m_parent->getBoundingBox()->width : m_offset.x,
+			m_isOffsetFlippedY ? -m_offset.y + m_parent->getBoundingBox()->height : m_offset.y));
 }

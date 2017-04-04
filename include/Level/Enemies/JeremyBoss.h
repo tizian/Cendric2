@@ -6,10 +6,15 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
+class ParticleComponent;
+class LightComponent;
+
 class JeremyBoss : virtual public Enemy {
 public:
 	JeremyBoss(const Level* level, Screen* screen);
 
+	void update(const sf::Time& frameTime) override;
+	
 	sf::Time getConfiguredWaitingTime() const override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Jeremy; }
 
@@ -25,4 +30,9 @@ protected:
 	void loadAttributes() override;
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+	// particles
+	void loadParticleSystem();
+	ParticleComponent* m_ps;
+	LightComponent* m_light;
 };

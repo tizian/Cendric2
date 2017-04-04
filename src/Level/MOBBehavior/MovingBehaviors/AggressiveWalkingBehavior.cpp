@@ -14,11 +14,12 @@ void AggressiveWalkingBehavior::execHandleMovementInput() {
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 	if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Chasing) {
+		float approachingDistance = (std::abs(m_enemy->getVelocity().x) > 0.f) ? (m_approachingDistance - 5.f) : m_approachingDistance;
 		// the enemy tries to get near its target
-		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
+		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > approachingDistance) {
 			m_movingDirectionX = -1;
 		}
-		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
+		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > approachingDistance) {
 			m_movingDirectionX = 1;
 		}
 		else {
