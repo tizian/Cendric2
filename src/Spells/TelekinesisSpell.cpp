@@ -1,11 +1,8 @@
 #include "Spells/TelekinesisSpell.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
 
 TelekinesisSpell::TelekinesisSpell() : Spell() {
-}
-
-TelekinesisSpell::~TelekinesisSpell() {
-	delete m_ps;
 }
 
 void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -22,13 +19,11 @@ void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 	playCurrentAnimation(true);
 
 	Spell::load(bean, mob, target);
-	loadParticleSystem();
+	loadComponents();
 }
 
 void TelekinesisSpell::update(const sf::Time& frameTime) {
-	m_ps->update(frameTime);
 	Spell::update(frameTime);
-	updateParticleSystemPosition();
 	checkCollisionsWithItems();
 }
 
@@ -49,52 +44,46 @@ void TelekinesisSpell::setItemVector(const std::vector<GameObject*>* items) {
 	m_items = items;
 }
 
-void TelekinesisSpell::render(sf::RenderTarget& target) {
-	Spell::render(target);
-	m_ps->render(target);
-}
-
-void TelekinesisSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 50.0f / 2.0f;
-
+void TelekinesisSpell::loadComponents() {
+	ParticleComponentData data;
+	data.particleCount = 50;
+	data.emitRate = 25.f;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+	data.isAdditiveBlendMode = true;
+	
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	auto spawner = new particles::BoxSpawner();
 	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 2.f;
 	sizeGen->maxEndSize = 6.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(31, 86, 28, 100);
 	colGen->maxStartCol = sf::Color(44, 132, 57, 150);
 	colGen->minEndCol = sf::Color(0, 255, 0, 0);
 	colGen->maxEndCol = sf::Color(200, 255, 200, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
 	velGen->minStartSpeed = 5.f;
 	velGen->maxStartSpeed = 10.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.3f;
 	timeGen->maxTime = 0.3f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
-}
-
-void TelekinesisSpell::updateParticleSystemPosition() {
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	auto pc = new ParticleComponent(data, this);
+	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(pc);
 }

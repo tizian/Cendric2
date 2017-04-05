@@ -18,12 +18,12 @@ void BookEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) c
 
 BookEnemy::BookEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-    Enemy(level, screen) {
+	Enemy(level, screen) {
 }
 
 void BookEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
-	
+
 	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
 	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 	m_ps->update(frameTime);
@@ -106,7 +106,7 @@ void BookEnemy::handleAttackInput() {
 		m_chasingTime = sf::Time::Zero;
 		if (isAlly()) {
 			m_waitingTime = sf::seconds(1);
-		} 
+		}
 		else {
 			m_waitingTime = sf::seconds(static_cast<float>(rand() % 8 + 3));
 		}
@@ -227,4 +227,3 @@ void BookEnemy::loadParticleSystem() {
 std::string BookEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_book.png";
 }
-

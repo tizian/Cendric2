@@ -1,40 +1,23 @@
 #include "Spells/HolyFireSpell.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
-
-HolyFireSpell::~HolyFireSpell() {
-	delete m_ps;
-}
 
 void HolyFireSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
-
-	LightData lightData(sf::Vector2f(bean.range, bean.range), bean.range * 2.f, 0.5f);
-	addComponent(new LightComponent(lightData, this));
-	loadParticleSystem();
+	loadComponents();
 }
 
 void HolyFireSpell::execOnHit(LevelMovableGameObject* target) {
 	m_hasDamaged = true;
 }
 
-void HolyFireSpell::setPosition(const sf::Vector2f& pos) {
-	Spell::setPosition(pos);
-	updateParticleSystemPosition();
-}
-
-void HolyFireSpell::render(sf::RenderTarget& target) {
-	Spell::render(target);
-	m_ps->render(target);
-}
-
 void HolyFireSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	m_ps->update(frameTime);
 	if (m_emitTime > sf::Time::Zero) {
 		updateTime(m_emitTime, frameTime);
 		if (m_emitTime == sf::Time::Zero) {
-			m_ps->emitRate = 0.f;
+			m_pc->setEmitRate(0.f);
 		}
 	}
 	if (m_hasDamaged) {
@@ -42,25 +25,31 @@ void HolyFireSpell::update(const sf::Time& frameTime) {
 	}
 }
 
-void HolyFireSpell::loadParticleSystem() {
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(static_cast<int>(m_data.range), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = m_data.range;
+void HolyFireSpell::loadComponents() {
+	// light
+	LightData lightData(sf::Vector2f(m_data.range, m_data.range), m_data.range * 2.f, 0.5f);
+	addComponent(new LightComponent(lightData, this));
+
+	// particles
+	ParticleComponentData data;
+	data.particleCount = static_cast<int>(m_data.range);
+	data.isAdditiveBlendMode = true;
+	data.emitRate = m_data.range;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
 
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	auto spawner = new particles::DiskSpawner();
 	spawner->radius = m_data.range;
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 20.f;
 	sizeGen->maxEndSize = 60.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	if (m_data.skinNr == 1) {
 		// shadow fire
 		colGen->minStartCol = sf::Color(78, 60, 122, 50);
@@ -75,28 +64,21 @@ void HolyFireSpell::loadParticleSystem() {
 		colGen->minEndCol = sf::Color(255, 244, 127, 30);
 		colGen->maxEndCol = sf::Color(255, 255, 255, 50);
 	}
-	
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = -20.f;
 	velGen->maxAngle = 20.f;
 	velGen->minStartSpeed = 10.f;
 	velGen->maxStartSpeed = 30.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 1.f;
 	timeGen->maxTime = 1.2f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(m_pc);
 }
-
-void HolyFireSpell::updateParticleSystemPosition() {
-	if (m_particleSpawner == nullptr) return;
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
-}
-

@@ -18,6 +18,7 @@ public:
 
 protected:
 	std::string getSpritePath() const override;
+	std::string getDeathSoundPath() const override;
 	
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

@@ -3,10 +3,11 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+class ParticleComponent;
+
 class InvisibilitySpell : public Spell {
 public:
 	InvisibilitySpell();
-	virtual ~InvisibilitySpell();
 	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
@@ -20,11 +21,6 @@ public:
 private:
 	sf::Time m_smokeDuration;
 	static const sf::Time SMOKE_DURATION;
-
-	particles::TextureParticleSystem* m_ps;
-	particles::ParticleSpawner* m_particleSpawner;
-
-	void loadParticleSystem();
-
-	void updateParticleSystemPosition();
+	ParticleComponent* m_pc;
+	void loadComponents();
 };

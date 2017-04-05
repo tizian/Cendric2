@@ -1,18 +1,12 @@
 #include "Spells/TargetingProjectileSpell.h"
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/LightComponent.h"
-
-TargetingProjectileSpell::~TargetingProjectileSpell() {
-	delete m_ps;
-}
+#include "GameObjectComponents/ParticleComponent.h"
 
 void TargetingProjectileSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	init(data);
 	Spell::load(data, mob, target);
-	loadParticleSystem();
-
-	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.5f);
-	addComponent(new LightComponent(lightData, this));
+	loadComponents();
 }
 
 void TargetingProjectileSpell::init(const SpellData& data) {
@@ -31,8 +25,6 @@ void TargetingProjectileSpell::init(const SpellData& data) {
 
 void TargetingProjectileSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	m_ps->update(frameTime);
-	updateParticleSystemPosition();
 
 	sf::Vector2f dir = m_mainChar->getCenter() - getPosition();
 	float abs = norm(dir);
@@ -42,52 +34,51 @@ void TargetingProjectileSpell::update(const sf::Time& frameTime) {
 	setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 }
 
-void TargetingProjectileSpell::render(sf::RenderTarget& target) {
-	Spell::render(target);
-	m_ps->render(target);
-}
+void TargetingProjectileSpell::loadComponents() {
+	// light
+	LightData lightData(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 80.f, 0.5f);
+	addComponent(new LightComponent(lightData, this));
 
-void TargetingProjectileSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 100.f / 4.f;
-
+	// particles
+	ParticleComponentData data;
+	data.particleCount = 100;
+	data.emitRate = 25.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+	
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	auto spawner = new particles::BoxSpawner();
 	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 2.f;
 	sizeGen->maxStartSize = 4.f;
 	sizeGen->minEndSize = 10.f;
 	sizeGen->maxEndSize = 20.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(210, 230, 250, 255);
 	colGen->maxStartCol = sf::Color(170, 180, 230, 255);
 	colGen->minEndCol = sf::Color(100, 100, 108, 0);
 	colGen->maxEndCol = sf::Color(90, 160, 170, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
 	velGen->minStartSpeed = 50.f;
 	velGen->maxStartSpeed = 100.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.5f;
 	timeGen->maxTime = 1.5f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
-}
-
-void TargetingProjectileSpell::updateParticleSystemPosition() {
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	auto pc = new ParticleComponent(data, this);
+	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(pc);
 }

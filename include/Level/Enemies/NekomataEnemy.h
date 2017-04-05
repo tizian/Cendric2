@@ -5,16 +5,13 @@
 #include "Level/Level.h"
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
-#include "Particles/ParticleSystem.h"
+
+class ParticleComponent;
 
 // A spooky Nekomata in a level
 class NekomataEnemy : public Enemy {
 public:
 	NekomataEnemy(const Level* level, Screen* screen);
-	virtual ~NekomataEnemy();
-
-	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
@@ -35,10 +32,6 @@ protected:
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
 
-	particles::TextureParticleSystem* m_ps;
-	particles::ParticleSpawner* m_particleSpawner;
-
-	void loadParticleSystem();
-
-	void updateParticleSystemPosition();
+	ParticleComponent* m_pc;
+	void loadComponents();
 };

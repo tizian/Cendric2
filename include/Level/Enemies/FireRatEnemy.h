@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class WalkingBehavior;
+class ParticleComponent;
 
 // A nasty fiery rat in a level
 
@@ -16,13 +16,10 @@ class WalkingBehavior;
 class FireRatEnemy : public Enemy {
 public:
 	FireRatEnemy(const Level* level, Screen* screen);
-	virtual ~FireRatEnemy();
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void onHit(Spell* spell) override;
-	void render(sf::RenderTarget& target) override;
-	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
 
 	int getMentalStrength() const override;
@@ -44,10 +41,9 @@ protected:
 	bool m_isBurning = false;
 
 	// particle system, only active if we got a hidden fire rat
-	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::AimedVelocityGenerator* m_velGenerator = nullptr;
-	particles::ParticleSpawner* m_particleSpawner = nullptr;
+	ParticleComponent* m_pc;
+	particles::AimedVelocityGenerator* m_velGen = nullptr;
 	LightComponent* m_lightComponent = nullptr;
 
-	void loadParticleSystem();
+	void loadComponents();
 };

@@ -10,7 +10,7 @@
 class BookEnemy : public virtual Enemy {
 public:
 	BookEnemy(const Level* level, Screen* screen);
-	virtual ~BookEnemy() {}
+	virtual ~BookEnemy() { delete m_ps; }
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
@@ -29,7 +29,7 @@ public:
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Book; }
-	
+
 protected:
 	std::string getSpritePath() const override;
 	void handleAttackInput();

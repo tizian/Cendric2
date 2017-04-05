@@ -230,7 +230,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadDeathParticleSystem();
+	loadDeathParticles();
 }
 
 MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {

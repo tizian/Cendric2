@@ -311,6 +311,8 @@ SpellData SpellData::getProjectileSpellData() {
 	SpellData projectile = EMPTY_SPELL;
 	projectile.id = SpellID::Projectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_projectile.png";
+	projectile.soundPath = "res/sound/spell/arrow.ogg";
+	projectile.isSoundLooping = false;
 
 	projectile.cooldown = sf::seconds(1);
 	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);

@@ -11,18 +11,34 @@ ParticleComponent::~ParticleComponent() {
 }
 
 void ParticleComponent::update(const sf::Time& frameTime) {
+	if (!m_isVisible) return;
 	m_ps->update(frameTime);
 }
 
 void ParticleComponent::render(sf::RenderTarget& renderTarget) {
-	m_ps->render(renderTarget);
+	if (!m_isVisible) return;
+	if (m_data.particleTexture) {
+		m_data.particleTexture->setView(renderTarget.getView());
+		m_ps->render(*m_data.particleTexture);
+	}
+	else {
+		m_ps->render(renderTarget);
+	}
+}
+
+void ParticleComponent::emitParticles(int particles) {
+	m_ps->emitParticles(particles);
 }
 
 void ParticleComponent::setVisible(bool visible) {
 	m_isVisible = visible;
 }
 
-void ParticleComponent::setEmitRate(bool emitRate) {
+void ParticleComponent::setStatic(bool isStatic) {
+	m_isStatic = isStatic;
+}
+
+void ParticleComponent::setEmitRate(float emitRate) {
 	m_data.emitRate = emitRate;
 	m_ps->emitRate = emitRate;
 }
@@ -39,7 +55,15 @@ void ParticleComponent::setOffset(const sf::Vector2f& offset) {
 	m_offset = offset;
 }
 
+void ParticleComponent::setTexturePath(const std::string& texturePath) {
+	auto tex = g_resourceManager->getTexture(m_data.texturePath);
+	tex->setSmooth(true);
+	m_ps->setTexture(tex);
+	m_data.texturePath = texturePath;
+}
+
 void ParticleComponent::setPosition(const sf::Vector2f& pos) {
+	if (m_isStatic) return;
 	m_data.spawner->center = (m_parent->getPosition() + 
 		sf::Vector2f(
 			m_isOffsetFlippedX ? -m_offset.x + m_parent->getBoundingBox()->width : m_offset.x,
@@ -47,7 +71,9 @@ void ParticleComponent::setPosition(const sf::Vector2f& pos) {
 }
 
 void ParticleComponent::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(m_data.particleCount, g_resourceManager->getTexture(m_data.texturePath));
+	auto tex = g_resourceManager->getTexture(m_data.texturePath);
+	tex->setSmooth(true);
+	m_ps = new particles::TextureParticleSystem(m_data.particleCount, tex);
 	m_ps->additiveBlendMode = m_data.isAdditiveBlendMode;
 	m_ps->emitRate = m_data.emitRate;
 	m_ps->addSpawner(m_data.spawner);
@@ -56,8 +82,21 @@ void ParticleComponent::loadParticleSystem() {
 	m_ps->addGenerator(m_data.velGen);
 	m_ps->addGenerator(m_data.timeGen);
 
+	m_ps->addUpdater(m_data.colorUpdater ? m_data.colorUpdater : new particles::ColorUpdater());
+	m_ps->addUpdater(m_data.eulerUpdater ? m_data.eulerUpdater : new particles::EulerUpdater());
+
 	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
 	m_ps->addUpdater<particles::SizeUpdater>();
+}
+
+particles::ColorUpdater* ParticleComponent::getColorUpdater() const {
+	return m_data.colorUpdater;
+}
+
+particles::ColorGenerator* ParticleComponent::getColorGenerator() const {
+	return m_data.colorGen;
+}
+
+particles::TextureParticleSystem* ParticleComponent::getParticleSystem() const {
+	return m_ps;
 }

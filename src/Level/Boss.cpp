@@ -1,4 +1,5 @@
 #include "Level/Boss.h"
+#include "GameObjectComponents/ParticleComponent.h"
 
 Boss::Boss(const Level* level, Screen* screen) : 
 	LevelMovableGameObject(level),
@@ -8,77 +9,66 @@ Boss::Boss(const Level* level, Screen* screen) :
 	m_isBoss = true;
 }
 
-Boss::~Boss() {
-	delete m_deathPs;
-}
-
 void Boss::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 	if (m_isDead) {
-		m_deathPs->update(frameTime);
 		updateTime(m_fadingTime, frameTime);
 		updateTime(m_particleTime, frameTime);
 		if (m_particleTime == sf::Time::Zero) {
-			m_deathPs->emitRate = 0;
+			m_deathPc->setEmitRate(0.f);
 		}
 		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 	}
 }
 
-void Boss::render(sf::RenderTarget& target) {
-	Enemy::render(target);
-	if (m_isDead) m_deathPs->render(target);
-}
-
 void Boss::setDead() {
 	if (m_isDead) return;
 	Enemy::setDead();
-	updateDeathParticleSystemPosition();
+	m_deathPc->setVisible(true);
 }
 
-void Boss::updateDeathParticleSystemPosition() {
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * (2.f / 3.f);
-}
-
-void Boss::loadDeathParticleSystem() {
-	m_deathPs = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_deathPs->additiveBlendMode = true;
-	m_deathPs->emitRate = 100.f;
-
+void Boss::loadDeathParticles() {
+	ParticleComponentData data;
+	data.particleCount = 300;
+	data.emitRate = 100.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
+	
 	// Generators
-	auto spawner = m_deathPs->addSpawner<particles::DiskSpawner>();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	auto spawner = new particles::DiskSpawner();
 	spawner->radius = 20.f;
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_deathPs->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_deathPs->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(255, 255, 255, 255);
 	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
 	colGen->minEndCol = sf::Color(255, 255, 255, 0);
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_deathPs->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
 	velGen->minStartSpeed = 50.f;
 	velGen->maxStartSpeed = 70.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_deathPs->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 2.f;
 	timeGen->maxTime = 3.f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_deathPs->addUpdater<particles::TimeUpdater>();
-	m_deathPs->addUpdater<particles::ColorUpdater>();
-	m_deathPs->addUpdater<particles::EulerUpdater>();
-	m_deathPs->addUpdater<particles::SizeUpdater>();
+	m_deathPc = new ParticleComponent(data, this);
+	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.8f));
+	m_deathPc->setVisible(false);
+	addComponent(m_deathPc);
 }
 
 std::string Boss::getDeathSoundPath() const {

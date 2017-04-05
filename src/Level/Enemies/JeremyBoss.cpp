@@ -4,6 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Screens/LevelScreen.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "Registrar.h"
@@ -20,7 +21,7 @@ JeremyBoss::JeremyBoss(const Level* level, Screen* screen) :
 }
 
 void JeremyBoss::update(const sf::Time& frameTime) {
-	m_ps->flipOffsetX(!m_movingBehavior->isFacingRight());
+	m_pc->flipOffsetX(!m_movingBehavior->isFacingRight());
 	m_light->flipOffsetX(!m_movingBehavior->isFacingRight());
 	Enemy::update(frameTime);
 }
@@ -168,7 +169,7 @@ void JeremyBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadParticleSystem();
+	loadComponents();
 }
 
 MovingBehavior* JeremyBoss::createMovingBehavior(bool asAlly) {
@@ -191,9 +192,10 @@ AttackingBehavior* JeremyBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
-void JeremyBoss::loadParticleSystem() {
+void JeremyBoss::loadComponents() {
 	// add particles
 	ParticleComponentData data;
+	data.particleTexture = &(dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture());
 	data.emitRate = 30.f;
 	data.particleCount = 60;
 	data.isAdditiveBlendMode = true;
@@ -229,9 +231,9 @@ void JeremyBoss::loadParticleSystem() {
 	timeGen->maxTime = 2.f;
 	data.timeGen = timeGen;
 
-	m_ps = new ParticleComponent(data, this);
-	m_ps->setOffset(sf::Vector2f(30.f, 10.f));
-	addComponent(m_ps);
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(30.f, 10.f));
+	addComponent(m_pc);
 
 	// add light
 	LightData lightData(sf::Vector2f(30.f, 0.f), sf::Vector2f(100.f, 100.f), 0.9f);
@@ -249,4 +251,8 @@ float JeremyBoss::getConfiguredDistanceToHPBar() const {
 
 std::string JeremyBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_jeremy.png";
+}
+
+std::string JeremyBoss::getDeathSoundPath() const {
+	return "res/sound/mob/jeremy_death.ogg";
 }

@@ -4,6 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -22,10 +23,6 @@ void NekomataEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gol
 NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-}
-
-NekomataEnemy::~NekomataEnemy() {
-	delete m_ps;
 }
 
 void NekomataEnemy::loadAttributes() {
@@ -163,67 +160,54 @@ void NekomataEnemy::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadParticleSystem();
+	loadComponents();
 }
 
 int NekomataEnemy::getMentalStrength() const {
 	return 3;
 }
 
-void NekomataEnemy::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-	m_ps->update(frameTime);
-	updateParticleSystemPosition();
-}
-
-void NekomataEnemy::render(sf::RenderTarget& target) {
-	Enemy::render(target);
-	m_ps->render(target);
-}
-
-void NekomataEnemy::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(80, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 40.f;
-
-	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
+void NekomataEnemy::loadComponents() {
+	ParticleComponentData data;
+	data.particleCount = 80;
+	data.emitRate = 40.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+	
+	auto posGen = new particles::BoxSpawner();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	posGen->size = sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height);
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 40.f;
 	sizeGen->minEndSize = 40.f;
 	sizeGen->maxEndSize = 80.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(24, 21, 57, 80);
 	colGen->maxStartCol = sf::Color(51, 51, 71, 100);
 	colGen->minEndCol = sf::Color(166, 167, 198, 0);
 	colGen->maxEndCol = sf::Color(198, 199, 210, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
 	velGen->minStartSpeed = 50.f;
 	velGen->maxStartSpeed = 70.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 2.f;
 	timeGen->maxTime = 2.f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
-}
-
-void NekomataEnemy::updateParticleSystemPosition() {
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(m_pc);
 }
 
 std::string NekomataEnemy::getSpritePath() const {

@@ -10,12 +10,16 @@
 REGISTER_ENEMY(EnemyID::Boss_Janus, JanusBoss)
 
 const std::string JanusBoss::PARTICLE_TEX_PATH = "res/assets/particles/cloud.png";
+const std::string JanusBoss::RED_SOUND = "res/sound/mob/janus_red.ogg";
+const std::string JanusBoss::BLUE_SOUND = "res/sound/mob/janus_blue.ogg";
 const sf::Time JanusBoss::PHASE_TIME = sf::seconds(10.f);
 
 JanusBoss::JanusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
+	g_resourceManager->loadSoundbuffer(JanusBoss::RED_SOUND, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(JanusBoss::BLUE_SOUND, ResourceType::Level);
 }
 
 JanusBoss::~JanusBoss() {
@@ -137,6 +141,7 @@ void JanusBoss::handleAttackInput() {
 
 void JanusBoss::setEvil(bool evil) {
 	m_mask.setEvil(evil);
+	g_resourceManager->playSound(evil ? JanusBoss::RED_SOUND : JanusBoss::BLUE_SOUND);
 	m_isInvincible = evil;
 }
 
@@ -227,7 +232,7 @@ void JanusBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadDeathParticleSystem();
+	loadDeathParticles();
 	loadCloudParticles();
 
 	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.2f), sf::Vector2f(150.f, 200.f), 0.9f);
@@ -352,7 +357,6 @@ void JanusBoss::loadCloudParticles() {
 	sf::Texture* tex = g_resourceManager->getTexture(PARTICLE_TEX_PATH);
 	if (tex == nullptr) return;
 
-	tex->setSmooth(true);
 	m_cloudPs = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(PARTICLE_TEX_PATH));
 	m_cloudPs->emitRate = 40.f;
 

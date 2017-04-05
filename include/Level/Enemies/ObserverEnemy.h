@@ -14,7 +14,6 @@ public:
 	~ObserverEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 
 	// returns whether this observer sees the main char. (called at time of stealing)
 	// if it's the first time he was caught stealing, the observer will react with a warning
@@ -27,10 +26,10 @@ public:
 	
 protected:
 	std::string getSpritePath() const override;
+	std::string getParticleTexture() const override;
 
 	void loadAnimation(int skinNr) override;
-	void loadParticleSystem() override;
-	void updateParticleSystem(const sf::Time& frameTime) override;
+	void updateColors();
 
 private:
 	void setAnimationTextureY(int y);

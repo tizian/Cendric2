@@ -6,6 +6,8 @@
 #include "LightObject.h"
 #include "Particles/ParticleSystem.h"
 
+class ParticleComponent;
+
 // available skins:
 // 1: fire
 // 2: blue fire
@@ -16,7 +18,6 @@
 class ParticleTile : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
-	virtual ~ParticleTile();
 
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
@@ -31,10 +32,9 @@ public:
 
 private:
 	bool m_isForegroundTile = false;
-	sf::Vector2f m_particlePosOffset;
-	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::ParticleGenerator* m_velGenerator = nullptr;
-	particles::ParticleSpawner* m_particleSpawner = nullptr;
+	ParticleComponent* m_pc;
+	particles::AimedVelocityGenerator* m_velGen = nullptr;
+	sf::RenderTexture* getParticleTexture();
 
 	void loadFlameParticles(int skinNr);
 	void loadWaterParticles(int skinNr);

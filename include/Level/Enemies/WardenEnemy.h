@@ -6,6 +6,8 @@
 #include "Screens/Screen.h"
 #include "Particles/ParticleSystem.h"
 
+class ParticleComponent;
+
 enum class WardenState {
 	Idle,
 	Observing,
@@ -19,7 +21,6 @@ public:
 	virtual ~WardenEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
@@ -33,19 +34,18 @@ public:
 	
 protected:
 	std::string getSpritePath() const override;
+	virtual std::string getParticleTexture() const;
 
 	void loadAttributes() override;
 	void loadSpells() override {};
 	void loadAnimation(int skinNr) override;
 
-	virtual void loadParticleSystem();
-	virtual void updateParticleSystem(const sf::Time& frameTime);
+	virtual void loadComponents();
 
 	float m_observedRange;
 	WardenState m_wardenState = WardenState::Idle;
 
-	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::ParticleSpawner* m_particleSpawner;
+	ParticleComponent* m_pc;
 	particles::ColorGenerator* m_colGen;
 
 	static const float SPEED_IDLE;

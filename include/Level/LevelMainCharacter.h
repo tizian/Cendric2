@@ -10,6 +10,8 @@
 #include "MainCharacter.h"
 #include "TargetManager.h"
 
+class ParticleComponent;
+
 // Cendric in a level
 class LevelMainCharacter : public virtual LevelMovableGameObject, public virtual MainCharacter {
 	friend class UserMovingBehavior;
@@ -19,9 +21,10 @@ public:
 
 	void load();
 	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 	void onHit(Spell* spell) override;
 
+	void render(sf::RenderTarget& target) override { LevelMovableGameObject::render(target); }
+	void setPosition(const sf::Vector2f& pos) override { LevelMovableGameObject::setPosition(pos); }
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableGameObject::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& color) override { LevelMovableGameObject::setDebugBoundingBox(color); }
@@ -31,7 +34,6 @@ public:
 	MovingBehavior* createMovingBehavior(bool asAlly = false) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
 
-	void setPosition(const sf::Vector2f& pos) override;
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
 	void addDamage(int damage, DamageType damageType, bool overTime, bool critical) override;
@@ -67,7 +69,7 @@ private:
 
 	void handleAttackInput();
 
-	void loadParticleSystem();
+	void loadComponents();
 	void updateDamagedOverlay();
 	int getSpellFromKey(Key key);
 
@@ -80,9 +82,7 @@ private:
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
 
+	ParticleComponent* m_deathPc;
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
-
-	particles::TextureParticleSystem* m_ps = nullptr;
-	particles::ParticleSpawner* m_particleSpawner = nullptr;
 };

@@ -9,11 +9,14 @@ struct ParticleComponentData {
 	float emitRate = 0;
 	std::string texturePath;
 	bool isAdditiveBlendMode = false;
+	sf::RenderTexture* particleTexture = nullptr;
 	particles::SizeGenerator* sizeGen = nullptr;
 	particles::ColorGenerator* colorGen = nullptr;
 	particles::ParticleGenerator* velGen = nullptr;
 	particles::ParticleSpawner* spawner = nullptr;
 	particles::TimeGenerator* timeGen = nullptr;
+	particles::ColorUpdater* colorUpdater = nullptr;
+	particles::EulerUpdater* eulerUpdater = nullptr;
 };
 
 // A game object component that holds a particle system
@@ -24,13 +27,21 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
+	void emitParticles(int particles);
 
 	void flipOffsetX(bool flipped);
 	void flipOffsetY(bool flipped);
 	void setOffset(const sf::Vector2f& offset);
 	void setVisible(bool visible);
-	void setEmitRate(bool emitRate);
+	void setStatic(bool isStatic);
+	void setEmitRate(float emitRate);
 	void setPosition(const sf::Vector2f& pos) override;
+	void setTexturePath(const std::string& texturePath);
+
+	particles::ColorUpdater* getColorUpdater() const;
+	particles::ColorGenerator* getColorGenerator() const;
+
+	particles::TextureParticleSystem* getParticleSystem() const;
 
 private:
 	void loadParticleSystem();
@@ -44,4 +55,5 @@ private:
 	bool m_isOffsetFlippedY = false;
 
 	bool m_isVisible = true;
+	bool m_isStatic = false;
 };

@@ -162,7 +162,7 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadDeathParticleSystem();
+	loadDeathParticles();
 
 	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 150.f, 0.5f);
 	addComponent(new LightComponent(data, this));

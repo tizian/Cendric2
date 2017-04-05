@@ -34,7 +34,7 @@ void RoyBoss::loadSpells() {
 	projectile.damage = 25;
 	projectile.damagePerSecond = 6;
 	projectile.isStunning = true;
-	projectile.duration = sf::seconds(2.f);
+	projectile.duration = sf::seconds(1.f);
 	projectile.cooldown = sf::seconds(5.f);
 	projectile.isBlocking = true;
 	projectile.fightingTime = sf::seconds(1.f);
@@ -167,4 +167,8 @@ float RoyBoss::getConfiguredDistanceToHPBar() const {
 
 std::string RoyBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_roy.png";
+}
+
+std::string RoyBoss::getDeathSoundPath() const {
+	return "res/sound/mob/roy_death.ogg";
 }

@@ -86,4 +86,6 @@ private:
 
 private:
 	JanusBossMask m_mask;
+	static const std::string RED_SOUND;
+	static const std::string BLUE_SOUND;
 };

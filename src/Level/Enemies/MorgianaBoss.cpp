@@ -38,6 +38,8 @@ void MorgianaBoss::loadSpells() {
 	chopSpell.fightAnimation = GameObjectState::Fighting;
 	chopSpell.castingTime = sf::seconds(0.6f);
 	chopSpell.castingAnimation = GameObjectState::Casting;
+	chopSpell.soundPath = "res/sound/mob/morgiana_hammer.ogg";
+	chopSpell.isSoundLooping = false;
 
 	m_spellManager->addSpell(chopSpell);
 
@@ -172,4 +174,8 @@ float MorgianaBoss::getConfiguredDistanceToHPBar() const {
 
 std::string MorgianaBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_morgiana.png";
+}
+
+std::string MorgianaBoss::getDeathSoundPath() const {
+	return "res/sound/mob/morgiana_death.ogg";
 }

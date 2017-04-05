@@ -2,6 +2,7 @@
 #include "Screens/LevelScreen.h"
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "ScreenOverlays/TextureScreenOverlay.h"
 #include "Level/DamageNumbers.h"
 #include "GlobalResource.h"
@@ -15,7 +16,6 @@ LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(le
 
 LevelMainCharacter::~LevelMainCharacter() {
 	m_spellKeyMap.clear();
-	delete m_ps;
 	delete m_targetManager;
 }
 
@@ -47,11 +47,10 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
 	updateDamagedOverlay();
 	if (m_isDead) {
-		m_ps->update(frameTime);
 		updateTime(m_fadingTime, frameTime);
 		updateTime(m_particleTime, frameTime);
 		if (m_particleTime == sf::Time::Zero) {
-			m_ps->emitRate = 0;
+			m_deathPc->setEmitRate(0.f);
 		}
 		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 		return;
@@ -66,11 +65,6 @@ void LevelMainCharacter::onHit(Spell* spell) {
 	if (!m_targetManager->getCurrentTargetEnemy()) {
 		m_targetManager->setTargetEnemy(const_cast<Enemy*>(dynamic_cast<const Enemy*>(spell->getOwner())));
 	}
-}
-
-void LevelMainCharacter::render(sf::RenderTarget& target) {
-	LevelMovableGameObject::render(target);
-	if (m_isDead) m_ps->render(target);
 }
 
 MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
@@ -208,13 +202,6 @@ void LevelMainCharacter::loadWeapon() {
 	}
 }
 
-void LevelMainCharacter::setPosition(const sf::Vector2f& pos) {
-	LevelMovableGameObject::setPosition(pos);
-	if (!m_isDead) return;
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2.f;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * (2.f/3.f);
-}
-
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
 	m_core = core;
 	m_attributes = core->getTotalAttributes();
@@ -242,6 +229,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 void LevelMainCharacter::setDead() {
 	if (m_isDead) return;
 	LevelMovableGameObject::setDead();
+	m_deathPc->setVisible(true);
 }
 
 void LevelMainCharacter::setQuickcast(bool quickcast) {
@@ -338,7 +326,7 @@ void LevelMainCharacter::loadAnimation() {
 	playCurrentAnimation(true);
 
 	setDebugBoundingBox(COLOR_WHITE);
-	loadParticleSystem();
+	loadComponents();
 }
 
 TargetManager& LevelMainCharacter::getTargetManager() const {
@@ -398,44 +386,48 @@ bool LevelMainCharacter::isClimbing() const {
 		getState() == GameObjectState::Climbing_2;
 }
 
-void LevelMainCharacter::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(300, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 100.f;
+void LevelMainCharacter::loadComponents() {
+	ParticleComponentData data;
+	data.particleCount = 300;
+	data.emitRate = 100.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
 
 	// Generators
-	auto posSpawner = m_ps->addSpawner<particles::DiskSpawner>();
-	posSpawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posSpawner->radius = 20.f;
-	m_particleSpawner = posSpawner;
+	auto spawner = new particles::DiskSpawner();
+	spawner->radius = 20.f;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(255, 255, 255, 255);
 	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
 	colGen->minEndCol = sf::Color(255, 255, 255, 0);
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = -45.f;
 	velGen->maxAngle = 45.f;
 	velGen->minStartSpeed = 50.f;
 	velGen->maxStartSpeed = 70.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 2.f;
 	timeGen->maxTime = 3.f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_deathPc = new ParticleComponent(data, this);
+	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.8f));
+	m_deathPc->setVisible(false);
+	addComponent(m_deathPc);
 }
 
 int LevelMainCharacter::getSpellFromKey(Key key) {

@@ -149,7 +149,7 @@ void ZeffBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadDeathParticleSystem();
+	loadDeathParticles();
 }
 
 MovingBehavior* ZeffBoss::createMovingBehavior(bool asAlly) {

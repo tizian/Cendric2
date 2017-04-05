@@ -1,9 +1,6 @@
 #include "Spells/WindGustSpell.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
-
-WindGustSpell::~WindGustSpell() {
-	delete m_ps;
-}
 
 void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
@@ -15,8 +12,6 @@ void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, con
 
 void WindGustSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	updateParticleSystemPosition();
-	m_ps->update(frameTime);
 	updateTime(m_timeUntilDamage, frameTime);
 	if (m_timeUntilDamage == sf::Time::Zero) {
 		m_data.damageType = m_damageType;
@@ -27,9 +22,9 @@ void WindGustSpell::update(const sf::Time& frameTime) {
 	}
 }
 
-void WindGustSpell::render(sf::RenderTarget& target) {
-	Spell::render(target);
-	m_ps->render(target);
+void WindGustSpell::setPosition(const sf::Vector2f& pos) {
+	Spell::setPosition(pos);
+	updateParticleSystemPosition();
 }
 
 void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
@@ -52,57 +47,60 @@ float WindGustSpell::getPushAcceleration() const {
 }
 
 void WindGustSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 400.f * m_data.strength), g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = getBoundingBox()->width / 5.f * m_data.strength;
-
+	ParticleComponentData data;
+	data.particleCount = static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 400.f * m_data.strength);
+	data.emitRate = getBoundingBox()->width / 5.f * m_data.strength;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+	
 	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 10.f, getPosition().y + getBoundingBox()->height / 2);
-	posGen->size = sf::Vector2f(getBoundingBox()->width / 5.f, getBoundingBox()->height * 0.5f);
-	m_particleSpawner = posGen;
+	m_particleSpawner = new particles::BoxSpawner();
+	m_particleSpawner->size = sf::Vector2f(getBoundingBox()->width * 0.1f, getBoundingBox()->height * 0.5f);
+	data.spawner = m_particleSpawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 4.f;
 	sizeGen->maxStartSize = 12.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(210, 230, 250, 255);
 	colGen->maxStartCol = sf::Color(170, 180, 230, 255);
 	colGen->minEndCol = sf::Color(100, 100, 108, 0);
 	colGen->maxEndCol = sf::Color(90, 160, 170, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minAngle = 90 + -20.f;
-	velGen->maxAngle = 90 + 20.f;
-	velGen->minStartSpeed = m_pushAcceleration * 1.5f;
-	velGen->maxStartSpeed = m_pushAcceleration * 1.5f;
-	m_velGenerator = velGen;
+	m_velGenerator = new particles::AngledVelocityGenerator();
+	m_velGenerator->minAngle = 90 + -20.f;
+	m_velGenerator->maxAngle = 90 + 20.f;
+	m_velGenerator->minStartSpeed = m_pushAcceleration * 1.5f;
+	m_velGenerator->maxStartSpeed = m_pushAcceleration * 1.5f;
+	data.velGen = m_velGenerator;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = getBoundingBox()->width / (velGen->maxStartSpeed * 3.f);
-	timeGen->maxTime = getBoundingBox()->width / velGen->maxStartSpeed;
+	auto timeGen =  new particles::TimeGenerator();
+	timeGen->minTime = getBoundingBox()->width / (m_velGenerator->maxStartSpeed * 3.f);
+	timeGen->maxTime = getBoundingBox()->width / m_velGenerator->maxStartSpeed;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	addComponent(m_pc);
 }
 
 void WindGustSpell::updateParticleSystemPosition() {
 	if (m_mob == nullptr) return;
+	if (m_pc == nullptr) return;
 	if (!m_mob->isFacingRight()) {
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - getBoundingBox()->width / 10.f;
-		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - getBoundingBox()->width * 0.1f;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * 0.5f;
 	}
 	else {
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 10.f;
-		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width * 0.1f;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * 0.5f;
 	}
 }

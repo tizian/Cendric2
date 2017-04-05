@@ -4,15 +4,12 @@
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Particle, ParticleTile)
 
 ParticleTile::ParticleTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-}
-
-ParticleTile::~ParticleTile() {
-	delete m_ps;
 }
 
 void ParticleTile::init() {
@@ -32,26 +29,17 @@ void ParticleTile::loadAnimation(int skinNr_) {
 void ParticleTile::update(const sf::Time& frameTime) {
 	// skip animation update, using game object only
 	GameObject::update(frameTime);
-	m_ps->update(frameTime);
 }
 
 void ParticleTile::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-
-	if (m_particleSpawner == nullptr) return;
-	m_particleSpawner->center = getPosition() + m_particlePosOffset;
-	if (auto velGen = dynamic_cast<particles::AimedVelocityGenerator*>(m_velGenerator)) {
-		velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	if (m_velGen) {
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
 	}
 }
 
 void ParticleTile::render(sf::RenderTarget& target) {
 	if (m_isFirstRenderIteration) {
-		sf::RenderTarget& particleTarget = m_isForegroundTile ?
-			dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture() :
-			dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
-		particleTarget.setView(target.getView());
-		m_ps->render(particleTarget);
 		GameObject::render(target);
 		m_isFirstRenderIteration = false;
 	}
@@ -69,70 +57,70 @@ void ParticleTile::onHit(Spell* spell) {
 }
 
 void ParticleTile::loadWaterParticles(int skinNr) {
-	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height);
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP)->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP));
-	m_ps->additiveBlendMode = false;
-	m_ps->emitRate = 100.f;
+	ParticleComponentData data;
+	data.particleCount = 1000;
+	data.emitRate = 100.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_DROP;
+	data.particleTexture = getParticleTexture();
 
 	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = getPosition() + m_particlePosOffset;
+	auto posGen = new particles::BoxSpawner();
 	posGen->size = sf::Vector2f(30.f, 20.f);
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 5.f;
 	sizeGen->maxStartSize = 10.f;
 	sizeGen->minEndSize = 10.f;
 	sizeGen->maxEndSize = 20.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(60, 110, 40);
 	colGen->maxStartCol = sf::Color(80, 100, 50);
 	colGen->minEndCol = sf::Color(60, 80, 40, 100);
 	colGen->maxEndCol = sf::Color(110, 140, 80, 100);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minStartSpeed = 30.f;
 	velGen->maxStartSpeed = 50.f;
 	velGen->minAngle = 180.f;
 	velGen->maxAngle = 180.f;
-	m_velGenerator = velGen;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 1.0f;
 	timeGen->maxTime = 2.0f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height));
+	addComponent(m_pc);
 }
 
 void ParticleTile::loadEmberParticles(int skinNr) {
-	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height);
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_DROP)->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 5.f;
+	ParticleComponentData data;
+	data.particleCount = 50;
+	data.emitRate = 5.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
+	data.particleTexture = getParticleTexture();
 
 	// Generators
-	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
-	posGen->center = getPosition() + m_particlePosOffset;
+	auto posGen = new particles::DiskSpawner();
 	posGen->radius = 30.f;
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 5.f;
 	sizeGen->maxStartSize = 10.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 0.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-
+	auto colGen = new particles::ColorGenerator();
 	switch (skinNr) {
 	default:
 	case 4:
@@ -148,23 +136,23 @@ void ParticleTile::loadEmberParticles(int skinNr) {
 		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
 		break;
 	}
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minStartSpeed = 20.f;
 	velGen->maxStartSpeed = 30.f;
 	velGen->minAngle = -10.f;
 	velGen->maxAngle = 10.f;
-	m_velGenerator = velGen;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 4.0f;
 	timeGen->maxTime = 6.0f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height));
+	addComponent(m_pc);
 
 	// light
 	addComponent(new LightComponent(LightData(
@@ -173,26 +161,26 @@ void ParticleTile::loadEmberParticles(int skinNr) {
 }
 
 void ParticleTile::loadFlameParticles(int skinNr) {
-	m_particlePosOffset = sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height);
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 60.f;
+	ParticleComponentData data;
+	data.particleCount = 1000;
+	data.emitRate = 60.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.particleTexture = getParticleTexture();
 
 	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = getPosition() + m_particlePosOffset;
+	auto posGen = new particles::BoxSpawner();
 	posGen->size = sf::Vector2f(40.f, 0.f);
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 30.f;
 	sizeGen->maxStartSize = 50.f;
 	sizeGen->minEndSize = 30.f;
 	sizeGen->maxEndSize = 50.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-
+	auto colGen = new particles::ColorGenerator();
 	switch (skinNr) {
 	default:
 	case 0:
@@ -214,22 +202,22 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 		colGen->maxEndCol = sf::Color(20, 150, 10, 200);
 		break;
 	}
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AimedVelocityGenerator>();
-	velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
-	velGen->minStartSpeed = 40.f;
-	velGen->maxStartSpeed = 80.f;
-	m_velGenerator = velGen;
+	m_velGen = new particles::AimedVelocityGenerator();
+	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_velGen->minStartSpeed = 40.f;
+	m_velGen->maxStartSpeed = 80.f;
+	data.velGen = m_velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.3f;
 	timeGen->maxTime = 0.8f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height));
+	addComponent(m_pc);
 
 	// light
 	addComponent(new LightComponent(LightData(
@@ -253,4 +241,9 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 		loadEmberParticles(skinNr);
 		break;
 	}
+}
+
+sf::RenderTexture* ParticleTile::getParticleTexture() {
+	return m_isForegroundTile ? &dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture()	:
+		&dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 }

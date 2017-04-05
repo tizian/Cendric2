@@ -18,12 +18,12 @@ namespace particles
 		FluidTile* fluidTile = nullptr;
 	};
 
-	class FadingColorUpdater : public ParticleUpdater {
+	class FadingColorUpdater : public ColorUpdater {
 	public:
 		FadingColorUpdater() {}
 		~FadingColorUpdater() {}
 
-		void update(ParticleData* data, float dt);
+		void update(ParticleData* data, float dt) override;
 
 		// start the fading timer (in seconds)
 		void setFading(float timeToFade);

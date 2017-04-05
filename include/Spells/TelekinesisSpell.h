@@ -6,23 +6,14 @@
 class TelekinesisSpell : public Spell {
 public:
 	TelekinesisSpell();
-	virtual ~TelekinesisSpell();
 	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
-	void render(sf::RenderTarget& target) override;
 	
 	void setItemVector(const std::vector<GameObject*>* items);
 
 private:
-	particles::TextureParticleSystem* m_ps;
-	particles::ParticleSpawner* m_particleSpawner;
-	// collisions with levelitems
 	void checkCollisionsWithItems();
-
-	void loadParticleSystem();
-
-	void updateParticleSystemPosition();
-
+	void loadComponents();
 	const std::vector<GameObject*>* m_items;
 };

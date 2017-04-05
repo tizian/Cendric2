@@ -3,16 +3,13 @@
 #include "Screens/LevelScreen.h"
 #include "Level/LevelEquipment.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
 
 const sf::Color GhostFormSpell::GHOST_COLOR = sf::Color(100, 200, 255, 150);
 
 GhostFormSpell::GhostFormSpell(const AttributeData& additionalDamage) : Spell() {
 	m_additionalDamage = additionalDamage;
-}
-
-GhostFormSpell::~GhostFormSpell() {
-	delete m_ps;
 }
 
 void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -22,7 +19,7 @@ void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	data.speed = 0.f;
 	data.boundingBox = *mob->getBoundingBox();
 	Spell::load(data, mob, target);
-	loadParticleSystem(bean.speed);
+	loadComponents(bean.speed);
 
 	mb->setMaxXVelocityScale(velocityScale);
 	mb->setIgnoreDynamicTiles(true);
@@ -37,7 +34,6 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 	m_mob->setSpriteColor(GHOST_COLOR, sf::milliseconds(100));
 
 	MovableGameObject::update(frameTime);
-	m_ps->update(frameTime);
 	updateParticleSystemPosition();
 
 	updateTime(m_data.activeDuration, frameTime);
@@ -64,7 +60,7 @@ void GhostFormSpell::setDisposed() {
 }
 
 void GhostFormSpell::render(sf::RenderTarget& target) {
-	m_ps->render(target);
+	GameObject::render(target);
 }
 
 void GhostFormSpell::execOnHit(LevelMovableGameObject* target) {
@@ -75,57 +71,58 @@ bool GhostFormSpell::getConfiguredRotateSprite() const {
 	return false;
 }
 
-void GhostFormSpell::loadParticleSystem(float startSpeed) {
-	m_ps = new particles::TextureParticleSystem(100, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LONGBLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 50.0f;
+void GhostFormSpell::loadComponents(float startSpeed) {
+	ParticleComponentData data;
+	data.isAdditiveBlendMode = true;
+	data.emitRate = 50.f;
+	data.particleCount = 100;
+	data.texturePath = GlobalResource::TEX_PARTICLE_LONGBLOB;
 
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	auto spawner = new particles::BoxSpawner();
 	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	spawner->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->height);
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 20.f;
 	sizeGen->minEndSize = 10.f;
 	sizeGen->maxEndSize = 20.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(89, 222, 100, 200);
 	colGen->maxStartCol = sf::Color(157, 254, 167, 250);
 	colGen->minEndCol = sf::Color(200, 255, 200, 0);
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
-	velGen->minStartSpeed = startSpeed / 2.f - 10.f;
-	velGen->maxStartSpeed = startSpeed / 2.f + 10.f;
-	m_velGenerator = velGen;
+	m_velGen = new particles::AngledVelocityGenerator();
+	m_velGen->minStartSpeed = startSpeed / 2.f - 10.f;
+	m_velGen->maxStartSpeed = startSpeed / 2.f + 10.f;
+	data.velGen = m_velGen;
 
-	m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();
-
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.5f;
 	timeGen->maxTime = 1.f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	auto pc = new ParticleComponent(data, this);
+	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
+	addComponent(pc);
 }
 
 void GhostFormSpell::updateParticleSystemPosition() {
 	if (m_mob->isFacingRight()) {
-		m_velGenerator->minAngle = 260.f;
-		m_velGenerator->maxAngle = 280.f;
+		m_velGen->minAngle = 260.f;
+		m_velGen->maxAngle = 280.f;
 	}
 	else {
-		m_velGenerator->minAngle = 80.f;
-		m_velGenerator->maxAngle = 100.f;
+		m_velGen->minAngle = 80.f;
+		m_velGen->maxAngle = 100.f;
 	}
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
 }
 
 void GhostFormSpell::loadMask() {

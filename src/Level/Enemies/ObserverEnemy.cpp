@@ -44,7 +44,7 @@ void ObserverEnemy::update(const sf::Time& frameTime) {
 			setObserverChasing();
 		}
 	}
-	updateParticleSystem(frameTime);
+	updateColors();
 }
 
 void ObserverEnemy::setObserverChasing() {
@@ -75,11 +75,6 @@ void ObserverEnemy::setObserverIdle() {
 	m_wardenState = WardenState::Idle;
 	
 	m_scriptedBehavior->setCurrentRoutineStep();
-}
-
-void ObserverEnemy::render(sf::RenderTarget& target) {
-	m_ps->render(target);
-	Enemy::render(target);
 }
 
 bool ObserverEnemy::notifyStealing(bool isFirstTime) {
@@ -158,11 +153,7 @@ void ObserverEnemy::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	loadParticleSystem();
-
-	LightComponent* lightComponent = new LightComponent(LightData(
-		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), m_observedRange * 2, 1.0f), this);
-	addComponent(lightComponent);
+	loadComponents();
 }
 
 void ObserverEnemy::setAnimationTextureY(int y) {
@@ -186,7 +177,7 @@ void ObserverEnemy::setAnimationTextureY(int y) {
 	}
 }
 
-void ObserverEnemy::updateParticleSystem(const sf::Time& frameTime) {
+void ObserverEnemy::updateColors() {
 	m_colGen->minStartCol = m_wardenState == WardenState::Idle ?
 		sf::Color(40, 40, 200, 200) : m_wardenState == WardenState::Observing ?
 		sf::Color(200, 100, 50, 200) :
@@ -201,13 +192,10 @@ void ObserverEnemy::updateParticleSystem(const sf::Time& frameTime) {
 		sf::Color(100, 100, 200, 0) : m_wardenState == WardenState::Observing ?
 		sf::Color(150, 100, 50, 0) :
 		sf::Color(200, 100, 100, 0);
-
-	WardenEnemy::updateParticleSystem(frameTime);
 }
 
-void ObserverEnemy::loadParticleSystem() {
-	WardenEnemy::loadParticleSystem();
-	m_ps->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR));
+std::string ObserverEnemy::getParticleTexture() const {
+	return GlobalResource::TEX_PARTICLE_STAR;
 }
 
 std::string ObserverEnemy::getSpritePath() const {

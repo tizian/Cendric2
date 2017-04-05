@@ -1,29 +1,15 @@
 #include "Spells/LightSpell.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
 
 void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
 	Spell::load(bean, mob, target);
-	addComponent(new LightComponent(LightData(sf::Vector2f(), bean.range), this));
-	loadParticleSystem();
-}
-
-LightSpell::~LightSpell() {
-	delete m_ps;
+	loadComponents();
 }
 
 void LightSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
-}
-
-void LightSpell::setPosition(const sf::Vector2f& pos) {
-	Spell::setPosition(pos);
-	updateParticleSystemPosition();
-}
-
-void LightSpell::render(sf::RenderTarget& target) {
-	Spell::render(target);
-	m_ps->render(target);
 }
 
 void LightSpell::update(const sf::Time& frameTime) {
@@ -37,52 +23,52 @@ void LightSpell::update(const sf::Time& frameTime) {
 	if (m_data.activeDuration == sf::Time::Zero) {
 		setDisposed();
 	}
-	m_ps->update(frameTime);
 }
 
-void LightSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_BLOB));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 50.0f / 2.0f;
+void LightSpell::loadComponents() {
+	// light
+	addComponent(new LightComponent(LightData(sf::Vector2f(), m_data.range), this));
 
+	// particles
+	ParticleComponentData data;
+	data.particleCount = 50;
+	data.isAdditiveBlendMode = true;
+	data.emitRate = 25.f;
+	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
+	
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	auto spawner = new particles::BoxSpawner();
 	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
-	m_particleSpawner = spawner;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 30.f;
 	sizeGen->maxStartSize = 40.f;
 	sizeGen->minEndSize = 20.f;
 	sizeGen->maxEndSize = 30.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(255, 255, 204, 100);
 	colGen->maxStartCol = sf::Color(255, 255, 255, 150);
 	colGen->minEndCol = sf::Color(255, 255, 0, 0);
 	colGen->maxEndCol = sf::Color(255, 255, 255, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
 	velGen->minStartSpeed = 5.f;
 	velGen->maxStartSpeed = 10.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.3f;
 	timeGen->maxTime = 0.3f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
-}
-
-void LightSpell::updateParticleSystemPosition() {
-	if (m_particleSpawner == nullptr) return;
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	auto pc = new ParticleComponent(data, this);
+	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(pc);
 }
 

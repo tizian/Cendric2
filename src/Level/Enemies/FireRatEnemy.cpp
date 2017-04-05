@@ -6,6 +6,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Screens/LevelScreen.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::FireRat, FireRatEnemy)
@@ -24,10 +25,6 @@ void FireRatEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold
 FireRatEnemy::FireRatEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
-}
-
-FireRatEnemy::~FireRatEnemy() {
-	delete m_ps;
 }
 
 void FireRatEnemy::loadAttributes() {
@@ -115,11 +112,7 @@ void FireRatEnemy::loadAnimation(int skinNr) {
 	// initial values
 	switch (skinNr) {
 	case 1:
-		loadParticleSystem();
-		m_lightComponent = new LightComponent(LightData(
-			sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f),
-			sf::Vector2f(200.f, 250.f), 0.6f), this);
-		addComponent(m_lightComponent);
+		loadComponents();
 		m_isInvincible = true;
 		m_isBurning = true;
 		break;
@@ -185,36 +178,14 @@ void FireRatEnemy::onHit(Spell* spell) {
 	m_movingBehavior->setMaxVelocityX(50.f);
 	dynamic_cast<WalkingBehavior*>(m_movingBehavior)->calculateJumpHeight();
 	m_isBurning = false;
-	delete m_ps;
-	m_ps = nullptr;
+	m_pc->setVisible(false);
 	m_lightComponent->setVisible(false);
-}
-
-void FireRatEnemy::render(sf::RenderTarget& target) {
-	if (m_ps != nullptr) {
-		sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
-		particleTarget.setView(target.getView());
-		m_ps->render(particleTarget);
-		GameObject::render(target);
-	}
-	else {
-		Enemy::render(target);
-	}
-}
-
-void FireRatEnemy::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-	if (m_ps != nullptr) {
-		m_ps->update(frameTime);
-	}
 }
 
 void FireRatEnemy::setPosition(const sf::Vector2f& pos) {
 	Enemy::setPosition(pos);
-	if (m_ps != nullptr) {
-		m_particleSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
-		m_particleSpawner->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
-		m_velGenerator->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	if (m_velGen) {
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
 	}
 }
 
@@ -226,45 +197,51 @@ std::string FireRatEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_firerat.png";
 }
 
-void FireRatEnemy::loadParticleSystem() {
-	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
-	delete m_ps;
-	m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 60.f;
+void FireRatEnemy::loadComponents() {
+	// light
+	m_lightComponent = new LightComponent(LightData(
+		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f),
+		sf::Vector2f(200.f, 250.f), 0.6f), this);
+	addComponent(m_lightComponent);
 
-	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
+	// particles
+	ParticleComponentData data;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
+	data.particleCount = 1000;
+	data.emitRate = 60.f;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.isAdditiveBlendMode = true;
+
+	auto posGen = new particles::BoxSpawner();
 	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
 	posGen->size = sf::Vector2f(40.f, 0.f);
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 30.f;
 	sizeGen->maxStartSize = 50.f;
 	sizeGen->minEndSize = 30.f;
 	sizeGen->maxEndSize = 50.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
-
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(255, 160, 64);
 	colGen->maxStartCol = sf::Color(255, 160, 64);
 	colGen->minEndCol = sf::Color(255, 0, 0, 200);
 	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AimedVelocityGenerator>();
-	velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
-	velGen->minStartSpeed = 40.f;
-	velGen->maxStartSpeed = 80.f;
-	m_velGenerator = velGen;
+	m_velGen = new particles::AimedVelocityGenerator();
+	m_velGen->minStartSpeed = 40.f;
+	m_velGen->maxStartSpeed = 80.f;
+	data.velGen = m_velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 0.3f;
 	timeGen->maxTime = 0.8f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(m_pc);
 }

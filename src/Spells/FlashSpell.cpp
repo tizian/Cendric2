@@ -1,11 +1,8 @@
 #include "Spells/FlashSpell.h"
 #include "GlobalResource.h"
+#include "GameObjectComponents/ParticleComponent.h"
 
 FlashSpell::FlashSpell() : Spell() {
-}
-
-FlashSpell::~FlashSpell() {
-	delete m_ps;
 }
 
 void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -30,12 +27,7 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 	m_flashingTime = FLASHING_TIME;
 	m_flashDuration = FLASH_DURATION;
 
-	sf::Vector2f position(m_mob->getPosition());
-	position.x += (m_mob->getBoundingBox()->width / 2.f);
-	position.y += m_mob->getBoundingBox()->height - 20;
-	position.x = m_isFlashingRight ? position.x - data.range : position.x + data.range;
-	loadParticleSystem();
-	m_particleSpawner->center = position;
+	loadComponents();
 }
 
 void FlashSpell::update(const sf::Time& frameTime) {
@@ -52,17 +44,16 @@ void FlashSpell::update(const sf::Time& frameTime) {
 		m_isVisible = !m_isVisible;
 		m_flashingTime = FLASHING_TIME;
 	}
-	m_ps->update(frameTime);
-	if (m_ps->emitRate > 0 && m_data.activeDuration < sf::seconds(1.f)) {
-		m_ps->emitRate = 0;
+	if (m_data.activeDuration < sf::seconds(1.f)) {
+		m_pc->setEmitRate(0.f);
 	}
 }
 
 void FlashSpell::render(sf::RenderTarget& target) {
 	if (m_isVisible && m_flashDuration > sf::Time::Zero) {
-		Spell::render(target);
+		target.draw(m_animatedSprite);
 	}
-	m_ps->render(target);
+	GameObject::render(target);
 }
 
 void FlashSpell::execOnHit(LevelMovableGameObject* target) {
@@ -79,41 +70,51 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 	return false;
 }
 
-void FlashSpell::loadParticleSystem() {
-	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SMOKE));
-	m_ps->additiveBlendMode = true;
-	m_ps->emitRate = 50.f;
+void FlashSpell::loadComponents() {
+	sf::Vector2f position(m_mob->getPosition());
+	position.x += (m_mob->getBoundingBox()->width / 2.f);
+	position.y += m_mob->getBoundingBox()->height - 20;
+	position.x = m_isFlashingRight ? position.x - m_data.range : position.x + m_data.range;
+
+	ParticleComponentData data;
+	data.particleCount = 50;
+	data.emitRate = 50.f;
+	data.texturePath = GlobalResource::TEX_PARTICLE_SMOKE;
+	data.isAdditiveBlendMode = true;
 
 	// Generators
-	auto spawner = m_ps->addSpawner<particles::DiskSpawner>();
+	auto spawner = new particles::DiskSpawner();
 	spawner->radius = 20.f;
-	m_particleSpawner = spawner;
+	spawner->center = position;
+	data.spawner = spawner;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 10.f;
 	sizeGen->maxStartSize = 80.f;
 	sizeGen->minEndSize = 60.f;
 	sizeGen->maxEndSize = 120.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(24, 21, 57, 100);
 	colGen->maxStartCol = sf::Color(51, 51, 71, 150);
 	colGen->minEndCol = sf::Color(166, 167, 198, 0);
 	colGen->maxEndCol = sf::Color(198, 199, 210, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = -30.f;
 	velGen->maxAngle = 30.f;
 	velGen->minStartSpeed = 70.f;
 	velGen->maxStartSpeed = 100.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 1.f;
 	timeGen->maxTime = 1.2f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_ps->addUpdater<particles::ColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setStatic(true);
+	addComponent(m_pc);
 }

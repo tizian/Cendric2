@@ -52,22 +52,27 @@ Haab
 
 "Menu Theme"
 
+"Khajag''s Theme"
+
+"Elysia''s Theme"
+
+"Cathedral Theme"
+
+"Lighthouse Theme"
+
+"Swamp Theme"
+
 ---
 
 -- Eric Matyas --
-"Magical Discovery"
 
-"Dusk"
+"Young Heroes" (Rockfall Theme)
 
-"Stage Door"
+"The Castle Beyond the Forest" (Cutscene)
 
-"Young Heroes"
+"Eerie Techno Game Open" (Crypt Theme)
 
-"The Castle Beyond the Forest"
-
-"Eerie Techno Game Open"
-
-"Leaving Port"
+"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 
@@ -75,7 +80,14 @@ www.soundimage.org
 
 ---
 
+-- Juhani Junkula --
+
+"Epic Boss Battle" (Mercenaries Theme)
+
+---
+
 -- Matthew Pablo --
+
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
 
@@ -193,22 +205,27 @@ Haab
 
 "Menu Theme"
 
+"Khajag''s Theme"
+
+"Elysia''s Theme"
+
+"Cathedral Theme"
+
+"Lighthouse Theme"
+
+"Swamp Theme"
+
 ---
 
 -- Eric Matyas --
-"Magical Discovery"
 
-"Dusk"
+"Young Heroes" (Rockfall Theme)
 
-"Stage Door"
+"The Castle Beyond the Forest" (Cutscene)
 
-"Young Heroes"
+"Eerie Techno Game Open" (Crypt Theme)
 
-"The Castle Beyond the Forest"
-
-"Eerie Techno Game Open"
-
-"Leaving Port"
+"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 
@@ -216,7 +233,14 @@ www.soundimage.org
 
 ---
 
+-- Juhani Junkula --
+
+"Epic Boss Battle" (Mercenaries Theme)
+
+---
+
 -- Matthew Pablo --
+
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
 
@@ -323,7 +347,7 @@ Haab
 
 -- Isa --
 
-"Ratcave"
+""Ratcave"
 
 "Howling Caverns"
 
@@ -331,21 +355,27 @@ Haab
 
 "Menu Theme"
 
+"Khajag''s Theme"
+
+"Elysia''s Theme"
+
+"Cathedral Theme"
+
+"Lighthouse Theme"
+
+"Swamp Theme"
+
+---
+
 -- Eric Matyas --
 
-"Magical Discovery"
+"Young Heroes" (Rockfall Theme)
 
-"Dusk"
+"The Castle Beyond the Forest" (Cutscene)
 
-"Stage Door"
+"Eerie Techno Game Open" (Crypt Theme)
 
-"Young Heroes"
-
-"The Castle Beyond the Forest"
-
-"Eerie Techno Game Open"
-
-"Leaving Port"
+"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 
@@ -353,7 +383,14 @@ www.soundimage.org
 
 ---
 
+-- Juhani Junkula --
+
+"Epic Boss Battle" (Mercenaries Theme)
+
+---
+
 -- Matthew Pablo --
+
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
 

@@ -23,6 +23,7 @@ public:
 
 protected:
 	std::string getSpritePath() const override;
+	std::string getDeathSoundPath() const override;
 	
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
@@ -31,8 +32,8 @@ protected:
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
 
-	// particles
-	void loadParticleSystem();
-	ParticleComponent* m_ps;
+	// components
+	void loadComponents();
+	ParticleComponent* m_pc;
 	LightComponent* m_light;
 };

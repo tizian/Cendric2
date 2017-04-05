@@ -1,6 +1,8 @@
 #include "Level/DynamicTiles/DisappearingTile.h"
 #include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
+#include "GameObjectComponents/ParticleComponent.h"
+#include "CustomParticleUpdaters.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 
@@ -37,7 +39,7 @@ void DisappearingTile::loadAnimation(int skinNr) {
 
 	m_skinNr = skinNr;
 	initForSkinNr();
-	loadParticleSystem();
+	loadComponents();
 }
 
 void DisappearingTile::initForSkinNr() {
@@ -85,13 +87,12 @@ void DisappearingTile::update(const sf::Time& frameTime) {
 
 	checkForMainCharacter();
 	LevelDynamicTile::update(frameTime);
-	m_ps->update(frameTime);
 }
 
 void DisappearingTile::touch() {
 	m_isTouched = true;
-	m_ps->emitRate = 0.f;
-	m_colorUpdater->setFading(m_criticalTime.asSeconds());
+	m_pc->setEmitRate(0.f);
+	dynamic_cast<particles::FadingColorUpdater*>(m_pc->getColorUpdater())->setFading(m_criticalTime.asSeconds());
 }
 
 void DisappearingTile::respawn() {
@@ -105,16 +106,9 @@ void DisappearingTile::respawn() {
 	}
 
 	m_isCollidable = true;
-	m_ps->emitRate = 10.f;
-	m_colorUpdater->resetColor();
+	m_pc->setEmitRate(10.f);
+	dynamic_cast<particles::FadingColorUpdater*>(m_pc->getColorUpdater())->resetColor();
 	initForSkinNr();
-}
-
-void DisappearingTile::render(sf::RenderTarget& target) {
-	LevelDynamicTile::render(target);
-	sf::RenderTarget& particleTarget = dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture();
-	particleTarget.setView(target.getView());
-	m_ps->render(particleTarget);
 }
 
 void DisappearingTile::checkForMainCharacter() {
@@ -128,10 +122,6 @@ void DisappearingTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
 	m_checkBoundingBox.left = pos.x - 1.f;
 	m_checkBoundingBox.top = pos.y - 1.f;
-
-	if (m_particleSpawner == nullptr) return;
-	m_particleSpawner->center.x = getPosition().x + 0.5f * getBoundingBox()->width;
-	m_particleSpawner->center.y = getPosition().y + 0.5f * getBoundingBox()->height;
 }
 
 void DisappearingTile::onHit(Spell* spell) {
@@ -150,42 +140,46 @@ std::string DisappearingTile::getSpritePath() const {
 	return "res/assets/particles/cloud.png";
 }
 
-void DisappearingTile::loadParticleSystem() {
-	g_resourceManager->getTexture(getSpritePath())->setSmooth(true);
-	m_ps = new particles::TextureParticleSystem(50, g_resourceManager->getTexture(getSpritePath()));
-	m_ps->emitRate = 10.f;
-
+void DisappearingTile::loadComponents() {
+	ParticleComponentData data;
+	data.particleTexture = &(dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture());
+	data.particleCount = 50;
+	data.texturePath = getSpritePath();
+	data.emitRate = 10.f;
+	
 	// Generators
-	auto posGen = m_ps->addSpawner<particles::BoxSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y + 0.5f * getBoundingBox()->height);
+	auto posGen = new particles::BoxSpawner();
 	posGen->size = sf::Vector2f(TILE_SIZE_F, TILE_SIZE_F);
-	m_particleSpawner = posGen;
+	data.spawner = posGen;
 
-	auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 5.f;
 	sizeGen->maxStartSize = 10.f;
 	sizeGen->minEndSize = 30.f;
 	sizeGen->maxEndSize = 40.f;
+	data.sizeGen = sizeGen;
 
-	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = m_skinColor;
 	colGen->maxStartCol = m_skinColor;
 	colGen->minEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
 	colGen->maxEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
+	data.colorGen = colGen;
 
-	auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
 	velGen->minStartSpeed = 0.f;
 	velGen->maxStartSpeed = 2.f;
+	data.velGen = velGen;
 
-	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = new particles::TimeGenerator();
 	timeGen->minTime = 4.f;
 	timeGen->maxTime = 6.f;
+	data.timeGen = timeGen;
 
-	// Updaters
-	m_ps->addUpdater<particles::TimeUpdater>();
-	m_colorUpdater = m_ps->addUpdater<particles::FadingColorUpdater>();
-	m_ps->addUpdater<particles::EulerUpdater>();
-	m_ps->addUpdater<particles::SizeUpdater>();
+	data.colorUpdater = new particles::FadingColorUpdater();
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(m_pc);
 }

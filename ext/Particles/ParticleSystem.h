@@ -87,6 +87,42 @@ public:
 		m_updaters.clear();
 	}
 
+	template<typename T>
+	inline void removeUpdaters() {
+		for (auto u : m_updaters) {
+			if (dynamic_cast<T *>(u)) {
+				delete u;
+				u = nullptr;
+			}
+		}
+		m_updaters.erase(std::remove_if(m_updaters.begin(), m_updaters.end(),
+			[](ParticleUpdater *p) { return !p; }), m_updaters.end());
+	}
+
+	template<typename T>
+	inline void removeSpawners() {
+		for (auto u : m_spawners) {
+			if (dynamic_cast<T *>(u)) {
+				delete u;
+				u = nullptr;
+			}
+		}
+		m_spawners.erase(std::remove_if(m_spawners.begin(), m_spawners.end(),
+			[](ParticleSpawner *p) { return !p; }), m_spawners.end());
+	}
+
+	template<typename T>
+	inline void removeGenerators() {
+		for (auto u : m_generators) {
+			if (dynamic_cast<T *>(u)) {
+				delete u;
+				u = nullptr;
+			}
+		}
+		m_generators.erase(std::remove_if(m_generators.begin(), m_generators.end(),
+			[](ParticleGenerator *p) { return !p; }), m_generators.end());
+	}
+
 protected:
 	void emitWithRate(float dt);	// emit a stream of particles defined by emitRate and dt
 
