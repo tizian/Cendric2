@@ -218,6 +218,16 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 }
 
+void Spell::reflect() {
+	if (isAttachedToMob()) return;
+	setAcceleration(sf::Vector2f(0.f, 0.f));
+	setVelocityY(-getVelocity().y);
+	setVelocityX(-getVelocity().x);
+	if (getConfiguredRotateSprite()) {
+		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
+	}
+}
+
 bool Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
 	bool collided = false;
 	if (m_mainChar->getBoundingBox()->intersects(*boundingBox)) {
@@ -310,5 +320,9 @@ sf::Vector2f Spell::rotateVector(const sf::Vector2f& vec, float angle) {
 	float newX = vec.x * cos(angle) - vec.y * sin(angle);
 	float newY = vec.x * sin(angle) + vec.y * cos(angle);
 	return sf::Vector2f(newX, newY);
+}
+
+void Spell::setOwner(LevelMovableGameObject* newOwner) {
+	m_mob = newOwner;
 }
 

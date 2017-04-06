@@ -32,6 +32,8 @@ public:
 	virtual void setViewable(bool value) override;
 
 	virtual void checkCollisions(const sf::Vector2f& nextPosition);
+	void setOwner(LevelMovableGameObject* newOwner);
+	void reflect();
 
 	// if true, the spell sprite will be rotated accordingly. default is true.
 	virtual bool getConfiguredRotateSprite() const;
@@ -56,6 +58,7 @@ public:
 	const sf::Time& getDuration() const;
 	const MovableGameObject* getOwner() const;
 	bool isAttachedToMob() const;
+	
 
 protected:
 	SpellData m_data;

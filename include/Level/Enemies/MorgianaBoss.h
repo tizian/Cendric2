@@ -10,11 +10,16 @@ class MorgianaBoss : virtual public Enemy {
 public:
 	MorgianaBoss(const Level* level, Screen* screen);
 
+	void onHit(Spell* spell) override;
+
 	sf::Time getConfiguredWaitingTime() const override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Morgiana; }
 
 	int getMentalStrength() const override { return 4; };
 	float getConfiguredDistanceToHPBar() const override;
+	
+	void notifyJeremyDeath();
+	void notifyRoyDeath();
 
 protected:
 	std::string getSpritePath() const override;
@@ -26,4 +31,6 @@ protected:
 	void loadAttributes() override;
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+	bool m_isBlocking = false;
 };

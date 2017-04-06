@@ -46,6 +46,37 @@ void MorgianaBoss::loadSpells() {
 	m_spellManager->setCurrentSpell(0); // ultimative chop
 }
 
+void MorgianaBoss::onHit(Spell* spell) {
+	if (m_isDead) return;
+	if (!m_isBlocking) {
+		Enemy::onHit(spell);
+		return;
+	}
+
+	if (spell->isAttachedToMob()) {
+		// pha! You can't damage me
+		spell->setDisposed();
+		return;
+	}
+
+	// we'll send you right back!
+	spell->setOwner(this);
+	spell->reflect();
+}
+
+void  MorgianaBoss::notifyJeremyDeath() {
+	// got your teleport!
+	// TODO
+}
+
+void  MorgianaBoss::notifyRoyDeath() {
+	if (m_isDead) return;
+	// got your crit!
+	m_attributes.critical = 100;
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.calculateAttributes();
+}
+
 void MorgianaBoss::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
@@ -74,7 +105,7 @@ void MorgianaBoss::loadAnimation(int skinNr) {
 	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	
+
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
@@ -87,7 +118,7 @@ void MorgianaBoss::loadAnimation(int skinNr) {
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
-	
+
 	Animation* castingAnimation = new Animation(sf::seconds(0.1f));
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 17; ++i) {
