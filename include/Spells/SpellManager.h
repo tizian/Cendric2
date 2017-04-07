@@ -22,7 +22,8 @@ public:
 	void setAndExecuteSpell(int spellNr);
 	// triggers the spell creator & executes the current spell if it are not on cooldown
 	// if force is set to true, it will execute it anyway.
-	void executeCurrentSpell(const sf::Vector2f& target, bool force = false);
+	// returns whether it has been executed
+	bool executeCurrentSpell(const sf::Vector2f& target, bool force = false);
 
 	// used by the spell interface
 	std::vector<SpellCreator*>& getSpellMap();

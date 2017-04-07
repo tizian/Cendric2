@@ -9,12 +9,23 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Morgiana, MorgianaBoss)
 
+const sf::Time MorgianaBoss::BLOCKING_TIME = sf::seconds(3.f);
+
 MorgianaBoss::MorgianaBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
 
 	m_isAlwaysUpdate = true;
 	m_isBoss = true;
+}
+
+void MorgianaBoss::update(const sf::Time& frameTime) {
+	Enemy::update(frameTime);
+	if (!m_isBlocking) return;
+	updateTime(m_blockingTime, frameTime);
+	if (m_blockingTime == sf::Time::Zero) {
+		m_isBlocking = false;
+	}
 }
 
 void MorgianaBoss::loadAttributes() {
@@ -43,6 +54,20 @@ void MorgianaBoss::loadSpells() {
 
 	m_spellManager->addSpell(chopSpell);
 
+	// block
+	SpellData blockSpell = SpellData::getSpellData(SpellID::Chop);
+	blockSpell.damage = 0;
+	blockSpell.damageType = DamageType::VOID;
+	blockSpell.isDynamicTileEffect = false;
+	blockSpell.cooldown = sf::seconds(10.f);
+	blockSpell.isBlocking = true;
+	blockSpell.fightingTime = BLOCKING_TIME;
+	blockSpell.fightAnimation = GameObjectState::Fighting2;
+	blockSpell.castingTime = sf::seconds(0.6f);
+	blockSpell.castingAnimation = GameObjectState::Casting2;
+
+	m_spellManager->addSpell(blockSpell);
+
 	m_spellManager->setCurrentSpell(0); // ultimative chop
 }
 
@@ -66,7 +91,9 @@ void MorgianaBoss::onHit(Spell* spell) {
 
 void  MorgianaBoss::notifyJeremyDeath() {
 	// got your teleport!
-	// TODO
+	if (m_isDead) return;
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.calculateAttributes();
 }
 
 void  MorgianaBoss::notifyRoyDeath() {
@@ -79,8 +106,18 @@ void  MorgianaBoss::notifyRoyDeath() {
 
 void MorgianaBoss::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
+		m_spellManager->setCurrentSpell(0);
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
+	else {
+		if (m_isBlocking) return;
+		m_spellManager->setCurrentSpell(1);
+		if (m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter())) {
+			m_isBlocking = true;
+			m_blockingTime = BLOCKING_TIME;
+		}
+	}
+	
 }
 
 void MorgianaBoss::loadAnimation(int skinNr) {

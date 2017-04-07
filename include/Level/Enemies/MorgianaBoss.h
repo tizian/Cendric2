@@ -11,6 +11,7 @@ public:
 	MorgianaBoss(const Level* level, Screen* screen);
 
 	void onHit(Spell* spell) override;
+	void update(const sf::Time& frameTime) override;
 
 	sf::Time getConfiguredWaitingTime() const override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Morgiana; }
@@ -33,4 +34,6 @@ protected:
 	void loadAnimation(int skinNr) override;
 
 	bool m_isBlocking = false;
+	sf::Time m_blockingTime = sf::Time::Zero;
+	static const sf::Time BLOCKING_TIME;
 };

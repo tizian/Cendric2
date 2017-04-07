@@ -47,7 +47,7 @@ void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModif
 	m_coolDownMap.push_back(sf::Time::Zero);
 }
 
-void SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
+bool SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
 	if (!force) {
 		// check if execution is ready.
 		if (m_remainingGlobalCooldown.asMilliseconds() != 0) return;
@@ -55,7 +55,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
 		if (!m_owner->isReady()) return;
 		for (auto& spellcreator : m_spellMap) {
 			if (!spellcreator->isReady())
-				return;
+				return false;
 		}
 	}
 
@@ -67,6 +67,7 @@ void SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
 	if (m_spellSelection != nullptr) {
 		m_spellSelection->activateSlot(m_currentSpell, cooldown);
 	}
+	return true;
 }
 
 void SpellManager::update(sf::Time frameTime) {
