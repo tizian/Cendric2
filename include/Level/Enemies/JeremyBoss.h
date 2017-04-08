@@ -14,12 +14,16 @@ public:
 	JeremyBoss(const Level* level, Screen* screen);
 
 	void update(const sf::Time& frameTime) override;
+	void setDead() override;
 	
 	sf::Time getConfiguredWaitingTime() const override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Jeremy; }
 
 	int getMentalStrength() const override { return 4; };
 	float getConfiguredDistanceToHPBar() const override;
+
+	void notifyMorgianaDeath(const sf::Vector2f& newPos);
+	void notifyRoyDeath(const sf::Vector2f& newPos);
 
 protected:
 	std::string getSpritePath() const override;

@@ -1,9 +1,10 @@
+#include "Level/Enemies/JeremyBoss.h"
+#include "Level/Enemies/RoyBoss.h"
 #include "Level/Enemies/MorgianaBoss.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -68,6 +69,26 @@ void MorgianaBoss::loadSpells() {
 
 	m_spellManager->addSpell(blockSpell);
 
+	// the shadow step ninja icy ambush from jeremy
+	SpellData icyAmbush = SpellData::getSpellData(SpellID::IcyAmbush);
+	icyAmbush.damageType = DamageType::Shadow;
+	icyAmbush.skinNr = 1;
+	icyAmbush.damage = 40;
+	icyAmbush.damagePerSecond = 6;
+	icyAmbush.cooldown = sf::seconds(10.f);
+	icyAmbush.isBlocking = true;
+	icyAmbush.isStunning = true;
+	icyAmbush.duration = sf::seconds(2.f);
+	icyAmbush.activeDuration = sf::seconds(10.f);
+	icyAmbush.fightingTime = sf::seconds(1.f);
+	icyAmbush.castingTime = sf::seconds(2.f);
+	icyAmbush.fightAnimation = GameObjectState::Fighting3;
+	icyAmbush.castingAnimation = GameObjectState::Casting3;
+	icyAmbush.speed = 500.f;
+	icyAmbush.range = 500.f;
+
+	m_spellManager->addSpell(icyAmbush);
+
 	m_spellManager->setCurrentSpell(0); // ultimative chop
 }
 
@@ -89,35 +110,66 @@ void MorgianaBoss::onHit(Spell* spell) {
 	spell->reflect();
 }
 
-void  MorgianaBoss::notifyJeremyDeath() {
+void MorgianaBoss::setDead() {
+	if (m_isDead) return;
+	Enemy::setDead();
+	m_mainChar->setStunned(sf::seconds(4.f));
+
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *getBoundingBox();
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		if (auto* jeremy = dynamic_cast<JeremyBoss*>(go)) {
+			rec.boundingBox.left += 20.f;
+			jeremy->notifyMorgianaDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
+			rec.boundingBox.left -= 20.f;
+		}
+		if (auto* roy = dynamic_cast<RoyBoss*>(go)) {
+			rec.boundingBox.left -= 20.f;
+			roy->notifyMorgianaDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(-20.f, 0.f)));
+			rec.boundingBox.left += 20.f;
+		}
+	}
+}
+
+void MorgianaBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {
 	// got your teleport!
 	if (m_isDead) return;
+	setPosition(newPos);
+	setStunned(sf::seconds(5.f));
+	m_scriptedBehavior->say("MorgianaJeremyDead", 5);
+	m_isJeremyDead = true;
 	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 	m_attributes.calculateAttributes();
 }
 
-void  MorgianaBoss::notifyRoyDeath() {
+void MorgianaBoss::notifyRoyDeath(const sf::Vector2f& newPos) {
 	if (m_isDead) return;
 	// got your crit!
+	setPosition(newPos);
+	setStunned(sf::seconds(5.f));
+	m_scriptedBehavior->say("MorgianaRoyDead", 5);
 	m_attributes.critical = 100;
 	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 	m_attributes.calculateAttributes();
 }
 
 void MorgianaBoss::handleAttackInput() {
+	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
 		m_spellManager->setCurrentSpell(0);
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
 	else {
 		if (m_isBlocking) return;
-		m_spellManager->setCurrentSpell(1);
-		if (m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter())) {
+		int spell = m_isJeremyDead ? rand() % 2 + 1 : 1;
+		m_spellManager->setCurrentSpell(spell);
+		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		if (spell == 1 && executed) {
 			m_isBlocking = true;
 			m_blockingTime = BLOCKING_TIME;
 		}
 	}
-	
 }
 
 void MorgianaBoss::loadAnimation(int skinNr) {
@@ -218,8 +270,9 @@ MovingBehavior* MorgianaBoss::createMovingBehavior(bool asAlly) {
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(500.f);
+	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(200.f);
+	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;
 }

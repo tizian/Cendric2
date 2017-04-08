@@ -16,4 +16,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 a break...','Ich brauche
 eine Pause...','Ich bruuch
 e Pause...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaEngage', 'speech','Now I''m gonna teach you a lesson!','Jetzt gibt''s was mit der groben Kelle!',  'Jetz chnüppli di abe!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaStart', 'speech','Now I''m gonna teach you a lesson!','Jetzt gibt''s was mit der groben Kelle!',  'Jetz chnüppli di abe!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyStart', 'speech','Die.','Stirb.', 'Stirb.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyJeremyDead', 'speech','*laughs*','*lacht*', '*lacht*');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyMorgianaDead', 'speech','*laughs*','*lacht*', '*lacht*');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaJeremyDead', 'speech','Your shuriken will be useful!','Dein Wurfstern wird nützlich sein!', 'Din Wurfstern wird nützlich sii!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaRoyDead', 'speech','I will avenge you!','Ich werde dich rächen!', 'Ich wird dich räche!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JeremyRoyDead', 'speech','Finally.','Endlich.', 'Entlich.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JeremyMorgianaDead', 'speech','I always wanted your amulet.','Dein Amulett wollte ich schon immer.', 'Dis Amulett hani scho immer wele.');

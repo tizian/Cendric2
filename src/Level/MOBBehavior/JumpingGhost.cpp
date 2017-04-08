@@ -45,7 +45,7 @@ float JumpingGhost::calculateJump() {
 				(m_record.direction == CollisionDirection::Up && m_aiRec.isFlippedGravity))) {
 				landingPosY = m_record.savePosY;
 				// is this position feasible?
-				if (std::abs(landingPosY - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight - 5.f) {
+				if (!m_aiRec.isDropAlways && std::abs(landingPosY - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight - 5.f) {
 					// not feasible, sorry.
 					return -1.f;
 				}
@@ -60,7 +60,7 @@ float JumpingGhost::calculateJump() {
 			// bad collision. 
 			break;
 		}
-		if (std::abs(getPosition().y - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight) {
+		if (!m_aiRec.isDropAlways && std::abs(getPosition().y - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight) {
 			break;
 		}
 	}

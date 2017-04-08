@@ -1,9 +1,10 @@
 #include "Level/Enemies/JeremyBoss.h"
+#include "Level/Enemies/RoyBoss.h"
+#include "Level/Enemies/MorgianaBoss.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Screens/LevelScreen.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
@@ -24,6 +25,30 @@ void JeremyBoss::update(const sf::Time& frameTime) {
 	m_pc->flipOffsetX(!m_movingBehavior->isFacingRight());
 	m_light->flipOffsetX(!m_movingBehavior->isFacingRight());
 	Enemy::update(frameTime);
+}
+
+void JeremyBoss::setDead() {
+	if (m_isDead) return;
+	Enemy::setDead();
+	m_pc->setVisible(false);
+	m_light->setVisible(false);
+	m_mainChar->setStunned(sf::seconds(4.f));
+
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *getBoundingBox();
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		if (auto* roy = dynamic_cast<RoyBoss*>(go)) {
+			rec.boundingBox.left += 20.f;
+			roy->notifyJeremyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
+			rec.boundingBox.left -= 20.f;
+		}
+		if (auto* morgiana = dynamic_cast<MorgianaBoss*>(go)) {
+			rec.boundingBox.left -= 20.f;
+			morgiana->notifyJeremyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(-20.f, 0.f)));
+			rec.boundingBox.left += 20.f;
+		}
+	}
 }
 
 void JeremyBoss::loadAttributes() {
@@ -95,15 +120,14 @@ void JeremyBoss::loadSpells() {
 }
 
 void JeremyBoss::handleAttackInput() {
-	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
-		m_spellManager->setCurrentSpell(1); // trap
-	}
-	else {
+	if (getCurrentTarget() == nullptr) return;
+	int spell = 1;
+	if (m_enemyAttackingBehavior->distToTarget() > 150.f) {
 		m_spellManager->setCurrentSpell(rand() % 2 == 0 ? 2 : 0);
 	}
 
-	if (getCurrentTarget() != nullptr)
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->setCurrentSpell(spell);
+	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
 void JeremyBoss::loadAnimation(int skinNr) {
@@ -126,7 +150,7 @@ void JeremyBoss::loadAnimation(int skinNr) {
 	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	
+
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
@@ -178,8 +202,9 @@ MovingBehavior* JeremyBoss::createMovingBehavior(bool asAlly) {
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(500.f);
+	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(200.f);
+	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -190,6 +215,28 @@ AttackingBehavior* JeremyBoss::createAttackingBehavior(bool asAlly) {
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&JeremyBoss::handleAttackInput, this));
 	return behavior;
+}
+
+void JeremyBoss::notifyMorgianaDeath(const sf::Vector2f& newPos) {
+	// got your health!
+	if (m_isDead) return;
+	setPosition(newPos);
+	setStunned(sf::seconds(5.f));
+	m_scriptedBehavior->say("JeremyMorgianaDead", 5);
+	m_attributes.maxHealthPoints = 800;
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.calculateAttributes();
+}
+
+void  JeremyBoss::notifyRoyDeath(const sf::Vector2f& newPos) {
+	if (m_isDead) return;
+	// got your crit!
+	setPosition(newPos);
+	m_scriptedBehavior->say("JeremyRoyDead", 5);
+	setStunned(sf::seconds(5.f));
+	m_attributes.critical = 100;
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.calculateAttributes();
 }
 
 void JeremyBoss::loadComponents() {
@@ -211,7 +258,7 @@ void JeremyBoss::loadComponents() {
 	sizeGen->minEndSize = 2.f;
 	sizeGen->maxEndSize = 5.f;
 	data.sizeGen = sizeGen;
-	
+
 	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = sf::Color(113, 128, 186, 100);
 	colGen->maxStartCol = sf::Color(230, 230, 255, 255);

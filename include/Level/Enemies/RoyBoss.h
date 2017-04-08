@@ -10,11 +10,16 @@ class RoyBoss : virtual public Enemy {
 public:
 	RoyBoss(const Level* level, Screen* screen);
 
+	void setDead() override;
+
 	sf::Time getConfiguredWaitingTime() const override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Roy; }
 
 	int getMentalStrength() const override { return 4; };
 	float getConfiguredDistanceToHPBar() const override;
+
+	void notifyJeremyDeath(const sf::Vector2f& newPos);
+	void notifyMorgianaDeath(const sf::Vector2f& newPos);
 
 protected:
 	std::string getSpritePath() const override;

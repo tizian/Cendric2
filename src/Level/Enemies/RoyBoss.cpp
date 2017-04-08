@@ -1,9 +1,10 @@
+#include "Level/Enemies/JeremyBoss.h"
 #include "Level/Enemies/RoyBoss.h"
+#include "Level/Enemies/MorgianaBoss.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -49,8 +50,8 @@ void RoyBoss::loadSpells() {
 	projectile = SpellData::getSpellData(SpellID::Projectile);
 	projectile.damageType = DamageType::Shadow;
 	projectile.skinNr = 1;
-	projectile.damage = 25;
-	projectile.damagePerSecond = 6;
+	projectile.damage = 15;
+	projectile.damagePerSecond = 4;
 	projectile.count = 3;
 	projectile.cooldown = sf::seconds(5.f);
 	projectile.isBlocking = true;
@@ -59,7 +60,7 @@ void RoyBoss::loadSpells() {
 	projectile.castingTime = sf::seconds(1.f);
 	projectile.castingAnimation = GameObjectState::Casting2;
 	projectile.speed = 500;
-	
+
 	m_spellManager->addSpell(projectile);
 
 	m_spellManager->setCurrentSpell(0); // stun
@@ -67,10 +68,54 @@ void RoyBoss::loadSpells() {
 }
 
 void RoyBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(rand() % 2); 
+	m_spellManager->setCurrentSpell(rand() % 2);
 
 	if (getCurrentTarget() != nullptr)
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+}
+
+void RoyBoss::setDead() {
+	if (m_isDead) return;
+	Enemy::setDead();
+	m_mainChar->setStunned(sf::seconds(4.f));
+
+	WorldCollisionQueryRecord rec;
+	rec.boundingBox = *getBoundingBox();
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		if (auto* jeremy = dynamic_cast<JeremyBoss*>(go)) {
+			rec.boundingBox.left += 20.f;
+			jeremy->notifyRoyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
+			rec.boundingBox.left -= 20.f;
+		}
+		if (auto* morgiana = dynamic_cast<MorgianaBoss*>(go)) {
+			rec.boundingBox.left -= 20.f;
+			morgiana->notifyRoyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(-20.f, 0.f)));
+			rec.boundingBox.left += 20.f;
+		}
+	}
+}
+
+void RoyBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {
+	// got your shadow damage!
+	if (m_isDead) return;
+	setPosition(newPos);
+	m_scriptedBehavior->say("RoyJeremyDead", 5);
+	setStunned(sf::seconds(5.f));
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.damageShadow = 10;
+	m_attributes.calculateAttributes();
+}
+
+void RoyBoss::notifyMorgianaDeath(const sf::Vector2f& newPos) {
+	// got your health!
+	if (m_isDead) return;
+	setPosition(newPos);
+	m_scriptedBehavior->say("RoyMorgianaDead", 5);
+	setStunned(sf::seconds(5.f));
+	m_attributes.maxHealthPoints = 800;
+	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.calculateAttributes();
 }
 
 void RoyBoss::loadAnimation(int skinNr) {
@@ -93,7 +138,7 @@ void RoyBoss::loadAnimation(int skinNr) {
 	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-	
+
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
 	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
@@ -113,7 +158,7 @@ void RoyBoss::loadAnimation(int skinNr) {
 	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
-	
+
 	Animation* castingAnimation = new Animation(sf::seconds(0.2f));
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 13; i < 16; ++i) {
@@ -141,10 +186,11 @@ MovingBehavior* RoyBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new AggressiveWalkingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(300.f);
+	behavior->setApproachingDistance(600.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(500.f);
+	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(200.f);
+	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;
 }

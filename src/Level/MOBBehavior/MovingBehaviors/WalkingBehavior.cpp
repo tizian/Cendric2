@@ -10,7 +10,7 @@ WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
-	if (m_enemy->isDead() || m_movingDirectionX == 0) {
+	if (!m_enemy->isReady() || m_movingDirectionX == 0) {
 		return false;
 	}
 	sf::FloatRect bb = *m_enemy->getBoundingBox();
@@ -38,6 +38,7 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 	m_aiRecord.maxVelYUp = m_maxVelocityYUp;
 	m_aiRecord.dampingAirPerS = m_dampingAirPerS;
 	m_aiRecord.dampingGroundPerS = m_dampingGroundPerS;
+	m_aiRecord.isDropAlways = m_dropAlways;
 
 	float landingYPosJump = -1.f;
 	float landingYPosWalk = -1.f;
@@ -55,7 +56,7 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 		delete ghost;
 	}
 
-	if (landingYPosJump > landingYPosWalk) {
+	if (landingYPosJump < landingYPosWalk) {
 		// we can do a jump.
 		m_aiRecord.shouldJump = true;
 	}
@@ -71,6 +72,10 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	if (m_walksBlindly && !m_isGrounded) {
 		m_walksBlindly = false;
+	}
+
+	if (m_jumpsBlindly && m_isGrounded) {
+		m_jumpsBlindly = false;
 	}
 	
 	bool collidesY;
@@ -112,6 +117,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 	if (m_jumps && m_movingDirectionX == 0) {
 		m_movingDirectionX = m_isFacingRight ? 1 : -1;
+		m_jumpsBlindly = true;
 	}
 }
 
@@ -123,7 +129,7 @@ void WalkingBehavior::handleTrueAcceleration() {
 
 	float newAccelerationY = m_isFlippedGravity ? -m_gravity : m_gravity;
 	float newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
-	
+
 	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
 
 	m_enemy->setAcceleration(sf::Vector2f(newAccelerationX, newAccelerationY));
@@ -135,6 +141,10 @@ void WalkingBehavior::calculateJumpHeight() {
 
 void WalkingBehavior::setDistanceToAbyss(float distance) {
 	m_aiRecord.distanceToAbyss = distance;
+}
+
+void WalkingBehavior::setDropAlways(bool dropAlways) {
+	m_dropAlways = dropAlways;
 }
 
 void WalkingBehavior::setIgnoreDynamicTiles(bool value) {

@@ -16,6 +16,7 @@ public:
 	void calculateJumpHeight();
 
 	void setDistanceToAbyss(float distance);
+	void setDropAlways(bool dropAlways);
 	void setIgnoreDynamicTiles(bool value) override;
 
 	float getDistanceToAbyss() const;
@@ -31,6 +32,8 @@ protected:
 	bool doAIJump(bool onlyJump);
 
 	bool m_jumps = false;
+	bool m_jumpsBlindly = false;
 	bool m_walksBlindly = false;
 	bool m_collidesX = false;
+	bool m_dropAlways = false;
 };

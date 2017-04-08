@@ -50,9 +50,9 @@ void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModif
 bool SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
 	if (!force) {
 		// check if execution is ready.
-		if (m_remainingGlobalCooldown.asMilliseconds() != 0) return;
-		if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return;
-		if (!m_owner->isReady()) return;
+		if (m_remainingGlobalCooldown.asMilliseconds() != 0) return false;
+		if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return false;
+		if (!m_owner->isReady()) return false;
 		for (auto& spellcreator : m_spellMap) {
 			if (!spellcreator->isReady())
 				return false;

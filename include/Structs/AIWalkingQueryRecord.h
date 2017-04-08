@@ -12,6 +12,7 @@ struct AIWalkingQueryRecord {
 	// (but strictly collidable dynamic tiles). Default is false
 	bool ignoreDynamicTiles = false;
 	bool isFlippedGravity = false;
+	bool isDropAlways = false;
 	// the acceleration in x direction (walking)
 	float accelerationX = 0.f;
 	// the gravity acceleration (must  be mirrored if the mob is upside down)

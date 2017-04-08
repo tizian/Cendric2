@@ -324,5 +324,6 @@ sf::Vector2f Spell::rotateVector(const sf::Vector2f& vec, float angle) {
 
 void Spell::setOwner(LevelMovableGameObject* newOwner) {
 	m_mob = newOwner;
+	m_data.isAlly = newOwner->isAlly();
 }
 
