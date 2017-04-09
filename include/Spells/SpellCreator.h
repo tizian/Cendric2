@@ -21,7 +21,7 @@ public:
 	void executeSpell(const sf::Vector2f& target);
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
 	virtual void execExecuteSpell(const sf::Vector2f& target) = 0;
-	const SpellData& getSpellData() const;
+	SpellData& getSpellData();
 	void setSpellAllied(bool allied);
 	
 

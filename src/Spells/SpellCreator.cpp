@@ -113,7 +113,7 @@ void SpellCreator::addStrengthModifier(int level) {
 	m_spellData.ccStrength += level;
 }
 
-const SpellData& SpellCreator::getSpellData() const {
+SpellData& SpellCreator::getSpellData() {
 	return m_spellData;
 }
 

@@ -33,8 +33,9 @@ void MorgianaBoss::loadAttributes() {
 	m_attributes.setHealth(800);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistanceLight = -20;
-	m_attributes.resistancePhysical = 10000;
-	m_attributes.resistanceFire = 10000;
+	m_attributes.resistanceShadow = -20;
+	m_attributes.resistancePhysical = 100;
+	m_attributes.resistanceFire = 100;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
 }
@@ -44,7 +45,8 @@ void MorgianaBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 100;
 	chopSpell.damagePerSecond = 1;
-	chopSpell.cooldown = sf::seconds(5.f);
+	chopSpell.cooldown = sf::seconds(3.f);
+	chopSpell.boundingBox = sf::FloatRect(0.f, 0.f, 60.f, 80.f);
 	chopSpell.isBlocking = true;
 	chopSpell.fightingTime = sf::seconds(1.f);
 	chopSpell.fightAnimation = GameObjectState::Fighting;
@@ -75,7 +77,7 @@ void MorgianaBoss::loadSpells() {
 	icyAmbush.skinNr = 1;
 	icyAmbush.damage = 40;
 	icyAmbush.damagePerSecond = 6;
-	icyAmbush.cooldown = sf::seconds(10.f);
+	icyAmbush.cooldown = sf::seconds(8.f);
 	icyAmbush.isBlocking = true;
 	icyAmbush.isStunning = true;
 	icyAmbush.duration = sf::seconds(2.f);
@@ -86,6 +88,7 @@ void MorgianaBoss::loadSpells() {
 	icyAmbush.castingAnimation = GameObjectState::Casting3;
 	icyAmbush.speed = 500.f;
 	icyAmbush.range = 500.f;
+	icyAmbush.isColliding = false;
 
 	m_spellManager->addSpell(icyAmbush);
 
@@ -156,7 +159,7 @@ void MorgianaBoss::notifyRoyDeath(const sf::Vector2f& newPos) {
 
 void MorgianaBoss::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
-	if (m_enemyAttackingBehavior->distToTarget() < 150.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 100.f) {
 		m_spellManager->setCurrentSpell(0);
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
@@ -167,7 +170,7 @@ void MorgianaBoss::handleAttackInput() {
 		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 		if (spell == 1 && executed) {
 			m_isBlocking = true;
-			m_blockingTime = BLOCKING_TIME;
+			m_blockingTime = BLOCKING_TIME + sf::seconds(1.f);
 		}
 	}
 }

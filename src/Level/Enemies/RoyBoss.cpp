@@ -97,7 +97,7 @@ void RoyBoss::setDead() {
 }
 
 void RoyBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {
-	// got your shadow damage!
+	// got your shadow damage and your piercing spells!
 	if (m_isDead) return;
 	setPosition(newPos);
 	m_scriptedBehavior->say("RoyJeremyDead", 5);
@@ -105,6 +105,12 @@ void RoyBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {
 	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 	m_attributes.damageShadow = 10;
 	m_attributes.calculateAttributes();
+
+	auto& spellData = m_spellManager->getSpellMap()[0]->getSpellData();
+	spellData.isColliding = false;
+
+	spellData = m_spellManager->getSpellMap()[1]->getSpellData();
+	spellData.isColliding = false;
 }
 
 void RoyBoss::notifyMorgianaDeath(const sf::Vector2f& newPos) {

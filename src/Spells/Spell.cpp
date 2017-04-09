@@ -179,6 +179,7 @@ void Spell::setViewable(bool value) {
 }
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
+	if (!m_data.isColliding) return;
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
 	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
 	WorldCollisionQueryRecord rec;

@@ -53,7 +53,8 @@ void ModifierTile::update(const sf::Time& frameTime) {
 
 void ModifierTile::render(sf::RenderTarget& target) {
 	if (m_isFirstRenderIteration) {
-		AnimatedGameObject::render(target);
+		GameObject::render(target);
+		target.draw(m_animatedSprite);
 		m_isFirstRenderIteration = false;
 	}
 	else {

@@ -56,6 +56,13 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_leech', 13);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_leech', 'item','Scroll - Leech','Schriftrolle - Lebensraub','Schriftrolle - Lebensraub', 'Pergamino - Sanguijuela');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_leech', 'item_desc','Sends out leeching spells that damage enemies and return to Cendric to heal him if they hit an enemy.','Schickt lebensraubende Zauber aus, die zu Cendric zurückkehren, um ihn zu heilen, falls sie einen Gegner getroffen haben.','Schickt lebensraubendi Zauber uus wo zum Cendric zruggchömed zum ihn heile falls si en Gegner troffe hend.','Envía un hechizo de sanguijuelas que dañan a los enemigos y regresan a Cendric para curarlo cuando golpean a un enemigo.');
 
+-- Raise the Dead
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_raisethedead', 'spell', 250, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_raisethedead', 14);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_raisethedead', 'item','Scroll - Raise The Dead','Schriftrolle - Tote Erwecken','Schriftrolle - Toti Erwecke', 'Pergamino - Resurreción de los muertos');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_raisethedead', 'item_desc','Raises fallen enemies that will fight for Cendric for a certain duration, if the spell is strong enough.','Erweckt gefallene Gegner wieder, die für eine gewisse Zeit für Cendric kämpfen, falls der Zauber genügend stark ist.','Erweckt toti Gegner wider und laht si für e gwüssi Ziit für de Cendric kämpfe, falls de Zauber gnueg starch isch.','Resucita enemigos caídos que lucharán por Cendric durante cierto tiempo, si el hechizo es suficientemente fuerte.');
+
 -- Fireball
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_fireball', 'spell', 150, 400, -1);

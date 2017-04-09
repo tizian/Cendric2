@@ -1070,7 +1070,7 @@
  </objectgroup>
  <objectgroup name="trigger necro">
   <properties>
-   <property name="conditions" value="default,necro"/>
+   <property name="conditions" value="default,necromancer"/>
   </properties>
   <object id="304" x="2200" y="880" width="50" height="50">
    <properties>

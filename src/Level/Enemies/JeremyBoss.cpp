@@ -112,6 +112,7 @@ void JeremyBoss::loadSpells() {
 	icyAmbush.castingAnimation = GameObjectState::Casting2;
 	icyAmbush.speed = 500.f;
 	icyAmbush.range = 500.f;
+	icyAmbush.isColliding = false;
 
 	m_spellManager->addSpell(icyAmbush);
 

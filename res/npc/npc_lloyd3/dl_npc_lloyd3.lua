@@ -68,6 +68,9 @@ loadDialogue = function(DL)
 		DL:addChoice(11, "DL_Choice_WhyPaladin") -- Why can't you send her guard? It's his mistake, after all.
 	end
 	DL:addChoice(-1, "DL_Choice_Okay") -- Yes, Commander Lloyd.
+	if (not DL:isConditionFulfilled("npc_lloyd3", "Choice-2")) then 
+		DL:addChoice(-1, "DL_Choice_Okay2") -- I'll see what I can do.
+	end
 	DL:addNode()
 
 	if (not DL:isConditionFulfilled("npc_lloyd3", "why_paladin")) then 
@@ -76,6 +79,9 @@ loadDialogue = function(DL)
 		DL:addConditionProgress("npc_lloyd3", "why_paladin")
 		DL:addNode()
 
+	end
+
+	if (not DL:isConditionFulfilled("npc_lloyd3", "Choice-2")) then 
 	end
 
 end

@@ -286,12 +286,12 @@ SpellData SpellData::getSpellData(SpellID id) {
 	case SpellID::TargetingProjectile:
 		return getTargetingProjectileData();
 	default:
-		return EMPTY_SPELL;
+		return SpellData();
 	}
 }
 
 SpellData SpellData::getChopSpellData() {
-	SpellData chop = EMPTY_SPELL;
+	SpellData chop;
 	chop.id = SpellID::Chop;
 
 	chop.cooldown = sf::milliseconds(400);
@@ -308,7 +308,7 @@ SpellData SpellData::getChopSpellData() {
 }
 
 SpellData SpellData::getProjectileSpellData() {
-	SpellData projectile = EMPTY_SPELL;
+	SpellData projectile;
 	projectile.id = SpellID::Projectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_projectile.png";
 	projectile.soundPath = "res/sound/spell/arrow.ogg";
@@ -332,7 +332,7 @@ SpellData SpellData::getProjectileSpellData() {
 }
 
 SpellData SpellData::getReturningProjectileSpellData() {
-	SpellData projectile = EMPTY_SPELL;
+	SpellData projectile;
 	projectile.id = SpellID::ReturningProjectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_returningprojectile.png";
 
@@ -352,7 +352,7 @@ SpellData SpellData::getReturningProjectileSpellData() {
 }
 
 SpellData SpellData::getRotatingProjectileData() {
-	SpellData projectile = EMPTY_SPELL;
+	SpellData projectile;
 	projectile.id = SpellID::RotatingProjectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_rotating_projectile.png";
 
@@ -370,7 +370,7 @@ SpellData SpellData::getRotatingProjectileData() {
 }
 
 SpellData SpellData::getTargetingProjectileData() {
-	SpellData projectile = EMPTY_SPELL;
+	SpellData projectile;
 	projectile.id = SpellID::TargetingProjectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_targetingprojectile.png";
 
@@ -388,7 +388,7 @@ SpellData SpellData::getTargetingProjectileData() {
 }
 
 SpellData SpellData::getBoomerangSpellData() {
-	SpellData projectile = EMPTY_SPELL;
+	SpellData projectile;
 	projectile.id = SpellID::Boomerang;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_boomerang.png";
 
@@ -408,7 +408,7 @@ SpellData SpellData::getBoomerangSpellData() {
 }
 
 SpellData SpellData::getFireBallSpellData() {
-	SpellData fireBall = EMPTY_SPELL;
+	SpellData fireBall;
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.spritesheetPath = "res/assets/spells/spritesheet_spell_fireball.png";
@@ -435,7 +435,7 @@ SpellData SpellData::getFireBallSpellData() {
 }
 
 SpellData SpellData::getIceBallSpellData() {
-	SpellData iceBall = EMPTY_SPELL;
+	SpellData iceBall;
 	iceBall.id = SpellID::IceBall;
 	iceBall.spellType = SpellType::Elemental;
 	iceBall.spritesheetPath = "res/assets/spells/spritesheet_spell_iceball.png";
@@ -459,7 +459,7 @@ SpellData SpellData::getIceBallSpellData() {
 }
 
 SpellData SpellData::getDivineShieldSpellData() {
-	SpellData divineShield = EMPTY_SPELL;
+	SpellData divineShield;
 	divineShield.id = SpellID::DivineShield;
 	divineShield.spellType = SpellType::Divine;
 	divineShield.spritesheetPath = "res/assets/spells/spritesheet_spell_divineshield.png";
@@ -480,7 +480,7 @@ SpellData SpellData::getDivineShieldSpellData() {
 }
 
 SpellData SpellData::getBuffSpellData() {
-	SpellData buffSpell = EMPTY_SPELL;
+	SpellData buffSpell;
 	buffSpell.id = SpellID::Buff;
 	buffSpell.spellType = SpellType::VOID;
 
@@ -496,7 +496,7 @@ SpellData SpellData::getBuffSpellData() {
 }
 
 SpellData SpellData::getAureolaSpellData() {
-	SpellData aureola = EMPTY_SPELL;
+	SpellData aureola;
 	aureola.id = SpellID::Aureola;
 	aureola.spellType = SpellType::Divine;
 	aureola.spritesheetPath = "res/assets/spells/spritesheet_spell_aureola.png";
@@ -527,7 +527,7 @@ SpellData SpellData::getAureolaSpellData() {
 }
 
 SpellData SpellData::getFearSpellData() {
-	SpellData fear = EMPTY_SPELL;
+	SpellData fear;
 	fear.id = SpellID::Fear;
 	fear.spellType = SpellType::Necromancy;
 	fear.spritesheetPath = "res/assets/spells/spritesheet_spell_fear.png";
@@ -552,7 +552,7 @@ SpellData SpellData::getFearSpellData() {
 }
 
 SpellData SpellData::getAntiGravitySpellData() {
-	SpellData antiGravity = EMPTY_SPELL;
+	SpellData antiGravity;
 	antiGravity.id = SpellID::AntiGravity;
 	antiGravity.spellType = SpellType::Elemental;
 	antiGravity.iconTextureRect = sf::IntRect(200, 0, 50, 50);
@@ -571,7 +571,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 }
 
 SpellData SpellData::getTelekinesisSpellData() {
-	SpellData telekinesis = EMPTY_SPELL;
+	SpellData telekinesis;
 	telekinesis.id = SpellID::Telekinesis;
 	telekinesis.spellType = SpellType::Elemental;
 
@@ -592,7 +592,7 @@ SpellData SpellData::getTelekinesisSpellData() {
 }
 
 SpellData SpellData::getWindGustSpellData() {
-	SpellData windGust = EMPTY_SPELL;
+	SpellData windGust;
 	windGust.id = SpellID::WindGust;
 	windGust.spellType = SpellType::Elemental;
 
@@ -617,7 +617,7 @@ SpellData SpellData::getWindGustSpellData() {
 }
 
 SpellData SpellData::getLeechSpellData() {
-	SpellData leech = EMPTY_SPELL;
+	SpellData leech;
 	leech.id = SpellID::Leech;
 	leech.spellType = SpellType::Necromancy;
 	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
@@ -640,7 +640,7 @@ SpellData SpellData::getLeechSpellData() {
 }
 
 SpellData SpellData::getIcyAmbushSpellData() {
-	SpellData icyAmbush = EMPTY_SPELL;
+	SpellData icyAmbush;
 	icyAmbush.id = SpellID::IcyAmbush;
 	icyAmbush.spellType = SpellType::Twilight;
 	icyAmbush.spritesheetPath = "res/assets/spells/spritesheet_spell_icyambush.png";
@@ -666,7 +666,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 }
 
 SpellData SpellData::getFlashSpellData() {
-	SpellData flash = EMPTY_SPELL;
+	SpellData flash;
 	flash.id = SpellID::Flash;
 	flash.spellType = SpellType::Twilight;
 	flash.spritesheetPath = "res/assets/spells/spritesheet_spell_flash.png";
@@ -688,7 +688,7 @@ SpellData SpellData::getFlashSpellData() {
 }
 
 SpellData SpellData::getLightSpellData() {
-	SpellData light = EMPTY_SPELL;
+	SpellData light;
 	light.id = SpellID::Light;
 	light.spellType = SpellType::Divine;
 	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
@@ -710,7 +710,7 @@ SpellData SpellData::getLightSpellData() {
 }
 
 SpellData SpellData::getHolyFireSpellData() {
-	SpellData holyFire = EMPTY_SPELL;
+	SpellData holyFire;
 	holyFire.id = SpellID::HolyFire;
 	holyFire.spellType = SpellType::Divine;
 	holyFire.iconTextureRect = sf::IntRect(50, 150, 50, 50);
@@ -733,7 +733,7 @@ SpellData SpellData::getHolyFireSpellData() {
 }
 
 SpellData SpellData::getLeapOfFaithSpellData() {
-	SpellData leapOfFaith = EMPTY_SPELL;
+	SpellData leapOfFaith;
 	leapOfFaith.id = SpellID::LeapOfFaith;
 	leapOfFaith.spellType = SpellType::Divine;
 	leapOfFaith.spritesheetPath = "res/assets/spells/spritesheet_spell_leapoffaith.png";
@@ -754,7 +754,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 }
 
 SpellData SpellData::getUnlockSpellData() {
-	SpellData unlock = EMPTY_SPELL;
+	SpellData unlock;
 	unlock.id = SpellID::Unlock;
 	unlock.spellType = SpellType::Twilight;
 	unlock.spritesheetPath = "res/assets/spells/spritesheet_spell_unlock.png";
@@ -772,7 +772,7 @@ SpellData SpellData::getUnlockSpellData() {
 }
 
 SpellData SpellData::getInvisibilitySpellData() {
-	SpellData invisibility = EMPTY_SPELL;
+	SpellData invisibility;
 	invisibility.id = SpellID::Invisibility;
 	invisibility.spellType = SpellType::Twilight;
 	invisibility.iconTextureRect = sf::IntRect(100, 50, 50, 50);
@@ -792,7 +792,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 }
 
 SpellData SpellData::getGhostFormSpellData() {
-	SpellData ghostForm = EMPTY_SPELL;
+	SpellData ghostForm;
 	ghostForm.id = SpellID::GhostForm;
 	ghostForm.spellType = SpellType::Necromancy;
 
@@ -815,7 +815,7 @@ SpellData SpellData::getGhostFormSpellData() {
 }
 
 SpellData SpellData::getShadowTrapSpellData() {
-	SpellData shadowTrap = EMPTY_SPELL;
+	SpellData shadowTrap;
 	shadowTrap.id = SpellID::ShadowTrap;
 	shadowTrap.spellType = SpellType::Twilight;
 	shadowTrap.spritesheetPath = "res/assets/spells/spritesheet_spell_shadowtrap.png";
@@ -841,7 +841,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 }
 
 SpellData SpellData::getSummonGargoyleSpellData() {
-	SpellData summonGargoyle = EMPTY_SPELL;
+	SpellData summonGargoyle;
 	summonGargoyle.id = SpellID::SummonGargoyle;
 	summonGargoyle.spellType = SpellType::Necromancy;
 	summonGargoyle.spritesheetPath = "res/assets/enemies/spritesheet_enemy_gargoyle.png";
@@ -861,7 +861,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 }
 
 SpellData SpellData::getRaiseTheDeadSpellData() {
-	SpellData raiseTheDead = EMPTY_SPELL;
+	SpellData raiseTheDead;
 	raiseTheDead.id = SpellID::RaiseTheDead;
 	raiseTheDead.spellType = SpellType::Necromancy;
 

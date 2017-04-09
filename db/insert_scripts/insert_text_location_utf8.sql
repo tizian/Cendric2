@@ -21,7 +21,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ga
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriamines','location','Mines of Gandria','Minen von Gandria','Mine vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriabarracks','location','Barracks','Kaserne','Kaserne');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriatavern','location','Basilisk Inn','Gasthaus zum Basilisken','Gaschthuus zum Basilisk');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gonathanhome','location','Jonathan''s House','Jonathan''s Haus','Huus vom Jonathan');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('jonathanhome','location','Jonathan''s House','Jonathan''s Haus','Huus vom Jonathan');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('syrahhome','location','Syrah''s House','Syrah''s Haus','Huus vode Syrah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('jonathanslab','location','Jonathan''s Laboratory','Jonathan''s Laboratorium','Laboratorium vom Jonathan');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('well','location','Well','Ziehbrunnen','Ziebrunne');

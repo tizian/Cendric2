@@ -311,7 +311,7 @@ npc.id:npc_jeremy
 	# [24] NPC Node
 	tag:24
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_mercenaries/boss_mercenaries.tmx", 660, 760)
+	trigger:DL:startLevel("res/level/boss_mercenaries/boss_mercenaries.tmx", 350, 410)
 	# translation: 
 	translation.tag:
 	translation.en:

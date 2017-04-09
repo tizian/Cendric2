@@ -15,52 +15,53 @@ class LevelMovableGameObject;
 
 /* describes the attributes of a spell */
 struct SpellData {
-	SpellID id;
-	SpellType spellType;
+	SpellID id = SpellID::VOID;
+	SpellType spellType = SpellType::VOID;
 	std::string spritesheetPath;
 	std::string soundPath;
-	bool isSoundLooping;
+	bool isSoundLooping = false;
 	sf::IntRect iconTextureRect;
-	sf::Time cooldown;
+	sf::Time cooldown = sf::seconds(1.f);
 	sf::FloatRect boundingBox;
 	sf::Vector2f spellOffset; // as seen from the upper mid of the owners bounding box.
-	DamageType damageType;
-	GameObjectState castingAnimation;
-	GameObjectState fightAnimation;
+	DamageType damageType = DamageType::VOID;
+	GameObjectState castingAnimation = GameObjectState::Casting;
+	GameObjectState fightAnimation = GameObjectState::Fighting;
 	sf::Time castingTime;
-	sf::Time fightingTime;
-	bool needsTarget;
-	bool attachedToMob;
-	bool isDynamicTileEffect;
-	bool isStunning;
-	bool isFearing;
-	bool isBlocking;
-	bool isAlly; // all spells sent by Cendric and allied mobs are "allied" spells that will hurt non-allied enemies and vice versa.
-	int skinNr; // can be used to change the skin of the spell. Must be implemented by the spell itself.
-	bool critical;
+	sf::Time fightingTime = sf::milliseconds(5 * 70); // cendric's default fighting time
+	bool needsTarget = false;
+	bool attachedToMob = false;
+	bool isDynamicTileEffect = false;
+	bool isColliding = true;
+	bool isStunning = false;
+	bool isFearing = false;
+	bool isBlocking = false;
+	bool isAlly = true; // all spells sent by Cendric and allied mobs are "allied" spells that will hurt non-allied enemies and vice versa.
+	int skinNr = 0; // can be used to change the skin of the spell. Must be implemented by the spell itself.
+	bool critical = false;
 
 	// modifiable by crystal modifiers
-	int damage;
-	int damagePerSecond;
-	int heal;
-	int reflectCount;
-	float speed;
-	int count;
-	float range;
-	int strength; // used for special values, such as wind force or lockpick strength.
-	int ccStrength; // used for the isStunning and isFearing variables. (crowd control)
+	int damage = 0;
+	int damagePerSecond = 0;
+	int heal = 0;
+	int reflectCount = 0;
+	float speed = 0.f;
+	int count = 1;
+	float range = 0.f;
+	int strength = 1; // used for special values, such as wind force or lockpick strength.
+	int ccStrength = -1; // used for the isStunning and isFearing variables. (crowd control)
 	sf::Time duration; // duration of an effect of a spell, for example the fear duration (fear spell)
 	sf::Time activeDuration;	// the duration for which a spell is active before it gets disposed. 
 								//This value is not displayed to the user in contrast to the duration.
 
-	float divergenceAngle;
-	float rangeModifierAddition;
-	float speedModifierAddition;
-	int countModifierAddition;
-	int reflectModifierAddition;
+	float divergenceAngle = 0.f;
+	float rangeModifierAddition = 0.f;
+	float speedModifierAddition = 0.f;
+	int countModifierAddition = 0;
+	int reflectModifierAddition = 0;
 	sf::Time durationModifierAddition;
 
-	Key inputKey;
+	Key inputKey = Key::VOID;
 
 	static SpellData getSpellData(SpellID id);
 	static std::vector<SpellModifierType> getAllowedModifiers(SpellID id);
@@ -99,52 +100,4 @@ private:
 	static SpellData getBoomerangSpellData();
 	static SpellData getRotatingProjectileData();
 	static SpellData getTargetingProjectileData();
-};
-
-const struct SpellData EMPTY_SPELL =
-{
-	SpellID::VOID,
-	SpellType::VOID,
-	"",
-	"",
-	false,
-	sf::IntRect(0, 0, 0, 0),
-	sf::seconds(1),
-	sf::FloatRect(0, 0, 0, 0),
-	sf::Vector2f(30.f, 0.f), // cendrics staff position
-	DamageType::VOID,
-	GameObjectState::Casting,
-	GameObjectState::Fighting,
-	sf::Time::Zero,
-	sf::milliseconds(5 * 70), // cendric's default fighting time
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	true,
-	0,
-	false,
-
-	0,
-	0,
-	0,
-	0,
-	0.f,
-	1,
-	0.f,
-	1,
-	-1,
-	sf::Time::Zero,
-	sf::Time::Zero,
-
-	0.f,
-	0.f,
-	0,
-	0,
-	0,
-	sf::Time::Zero,
-
-	Key::VOID
 };
