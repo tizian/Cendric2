@@ -505,6 +505,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_startalisman', 'eq_neck', 550, 250, 50);
 INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_startalisman', 7, 1);
 
+-- Morgiana's Bloodstone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item', 'Morgiana''s Bloodstone','Morgiana''s Blutstein','Bluetstei vode Morgiana');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item_desc', 'This amulet belonged to the mercenary Morgiana and gave her incredible stamina.','Dieses Amulett gehörte der Söldnerin Morgiana und hat ihr unglaubliche Ausdauer verliehen.','Das Amulett het de Morgiana ghört und het ihre unglaublichi Usduur gä.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 50);
+INSERT INTO item_attribute (item_id, max_health) values ('eq_bloodstone', 20);
+
 -- Light-Touched Pendant
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lightpendant', 'item', 'Light-Touched Pendant','Lichtberührter Anhänger','Vom Liecht berührte Ahänger');

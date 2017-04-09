@@ -504,6 +504,7 @@
   <object id="180" gid="981" x="1000" y="450" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/boss_mercenaries/roy.lua"/>
+    <property name="qe_veliusletter" value="1"/>
    </properties>
   </object>
   <object id="181" gid="982" x="600" y="750" width="50" height="50">
@@ -514,6 +515,7 @@
   </object>
   <object id="182" gid="980" x="850" y="600" width="50" height="50">
    <properties>
+    <property name="eq_bloodstone" value="1"/>
     <property name="luapath" value="res/level/boss_mercenaries/morgiana.lua"/>
    </properties>
   </object>

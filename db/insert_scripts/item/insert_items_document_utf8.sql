@@ -117,3 +117,14 @@ Ich kann sie also nicht mit ihrem Stab begraben, wie es die Tradition will, sond
 
 Ich cha si also nid mit ihrem Stab begrabe - wes Tradition wer - nur mitme Teil devo. De magisch Stei vom Stab wirdi aber bi mir phalte, als Erinnerig a si.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elderdiary', 'document', 500, 500, -1);
+
+-- Mysterious Letter (From velius to mercenaries)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_veliusletter', 'item', 'Mysterious Letter','Mysteriöser Brief','Mysteriöse Brief');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_veliusletter', 'item_desc', 'The mercenaries carried this letter with them.','Diesen Brief habe ich bei den Söldnern gefunden.','De Brief hani bide Söldner gfunde.');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_veliusletter', 0, 'VeliusLetter');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusLetter', 'document', 'I don''t want to wait longer! Get them.
+ - V.','Ich will nicht mehr warten!
+ - V.', 'Ich verlür ez denn d''Geduld!
+ - V.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_veliusletter', 'document', 650, 550, -1);

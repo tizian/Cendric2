@@ -123,7 +123,7 @@ void JeremyBoss::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	int spell = 1;
 	if (m_enemyAttackingBehavior->distToTarget() > 150.f) {
-		m_spellManager->setCurrentSpell(rand() % 2 == 0 ? 2 : 0);
+		spell = rand() % 2 == 0 ? 2 : 0;
 	}
 
 	m_spellManager->setCurrentSpell(spell);

@@ -25,10 +25,12 @@ void AggressiveWalkingBehavior::execHandleMovementInput() {
 		else {
 			m_movingDirectionX = 0;
 		}
+		m_movingDirectionY = targetCenter.y < center.y ? -1 : 1;
 	}
 	else if (m_isGrounded && hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
 		// the enemy tries to get away from its target
 		m_movingDirectionX = targetCenter.x < center.x ? 1 : -1;
+		m_movingDirectionY = targetCenter.y < center.y ? 1 : -1;
 	}
 }
 

@@ -16,7 +16,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 a break...','Ich brauche
 eine Pause...','Ich bruuch
 e Pause...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaStart', 'speech','Now I''m gonna teach you a lesson!','Jetzt gibt''s was mit der groben Kelle!',  'Jetz chnüppli di abe!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MorgianaStart', 'speech','Now I''ll beat you up!','Jetzt gibt''s was mit der groben Kelle!',  'Jetz chnüppli di abe!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyStart', 'speech','Die.','Stirb.', 'Stirb.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyJeremyDead', 'speech','*laughs*','*lacht*', '*lacht*');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RoyMorgianaDead', 'speech','*laughs*','*lacht*', '*lacht*');

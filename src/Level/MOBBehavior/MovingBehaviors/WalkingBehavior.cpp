@@ -56,11 +56,11 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 		delete ghost;
 	}
 
-	if (landingYPosJump < landingYPosWalk) {
+	if (landingYPosJump > 0.f && (landingYPosJump < landingYPosWalk || landingYPosWalk < 0.f)) {
 		// we can do a jump.
 		m_aiRecord.shouldJump = true;
 	}
-	else if (landingYPosWalk > 0.f) {
+	if (landingYPosWalk > 0.f) {
 		m_aiRecord.shouldWalk = true;
 	}
 
@@ -100,11 +100,24 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_enemy->setPositionX(oldPositionX);
 			m_collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
 		}
+		else if (m_aiRecord.shouldJump && m_aiRecord.shouldWalk) {
+			// both would work. where is our target?
+			if (m_movingDirectionY >= 0) {
+				m_walksBlindly = true;
+				m_movingDirectionX = m_isFacingRight ? 1 : -1;
+			}
+			else {
+				m_jumps = true;
+				m_jumpsBlindly = true;
+				m_movingDirectionX = m_isFacingRight ? 1 : -1;
+			}
+		}
 		else if (m_aiRecord.shouldJump) {
 			m_jumps = true;
+			m_jumpsBlindly = true;
+			m_movingDirectionX = m_isFacingRight ? 1 : -1;
 		}
 		else {
-			// only walk
 			m_walksBlindly = true;
 			m_movingDirectionX = m_isFacingRight ? 1 : -1;
 		}
@@ -114,10 +127,6 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (m_collidesX && m_isGrounded && !m_jumps) {
 		m_enemy->setWaiting();
 		m_movingDirectionX = m_isFacingRight ? -1 : 1;
-	}
-	if (m_jumps && m_movingDirectionX == 0) {
-		m_movingDirectionX = m_isFacingRight ? 1 : -1;
-		m_jumpsBlindly = true;
 	}
 }
 
