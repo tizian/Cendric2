@@ -13,11 +13,16 @@ npc.id:npc_lloyd4
 	[
 		# Link node, tag is next tag
 		tag:8
-		condition:DL:isConditionFulfilled("", "")
+		condition:DL:isQuestState("find_velius", "void")
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:15
+		condition:not DL:isConditionFulfilled("npc_lloyd4", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -196,6 +201,183 @@ npc.id:npc_lloyd4
 	translation.en:I didn't read the letter yet...
 	translation.de:Ich habe den Brief noch nicht gelesen...
 	translation.ch:Ich ha de Brief nanig glese...
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addItem("do_veliusletter", 1)
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter3
+	translation.en:Here, take it back. Somebody is abducting mages. Inina is not the only one who's missing.
+	translation.de:Hier, nimm ihn wieder. Jemand verschleppt Magier. Inina ist nicht die einzige, die vermisst wird.
+	translation.ch:Do, nimmen wieder. Öppert verschleppt Magier. D'Inina isch nid di einzig, wo vermisst wird.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addQuestProgress("lloyds_plan", "information_gathered")
+	trigger:DL:changeQuestState("ininas_abduction", "completed")
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter4
+	translation.en:I've heard from other cases. We must do something! 
+	translation.de:Ich habe bereits von anderen Fällen gehört. Wir müssen etwas dagegen unternehmen!
+	translation.ch:Ich ha scho vo anderne Fäll ghört. Mer mönd öppis degege mache!
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:changeQuestState("find_velius", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter5
+	translation.en:The letter's author is a certain "V." and he mentions "ruins". Go and find those while I'm going to find out who that "V." is.
+	translation.de:Der Author des Briefs ist ein gewisser "V.", und er schreibt von "Ruinen". Geh und finde diese, währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
+	translation.ch:De Author vom Brief isch en gwüsse "V." und er schriibt öppis vo Ruine. Gang und suech die, währenddesse findi use, wer de "V." sii chönt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [15] Choice Node
+	tag:15
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:not DL:isConditionFulfilled("npc_lloyd4", "where_search")
+		# translation: 
+		translation.tag:DL_Choice_WhereSearch
+		translation.en:Where should I search for those ruins?
+		translation.de:Wo soll ich nach den Ruinen suchen?
+		translation.ch:Wo sötti nach de Ruine sueche?
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		condition:not DL:isConditionFulfilled("npc_lloyd4", "why_work") and not DL:getGuild() == "cleric"
+		# translation: 
+		translation.tag:DL_Choice_WhyWork
+		translation.en:And why exactly should I still work for you?
+		translation.de:Und wieso genau soll ich noch für dich arbeiten?
+		translation.ch:Und weso gnau söli na für dich schaffe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		# translation: 
+		translation.tag:DL_Choice_Bye
+		translation.en:I'll see what I can do.
+		translation.de:Ich werde sehen, was ich tun kann.
+		translation.ch:Mal luege wani cha mache.
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd4", "where_search")
+	# translation: 
+	translation.tag:DL_Lloyd_WhereSearch
+	translation.en:The only ruins that come to my mind are the ones in the mountains, to the West of the marshlands.
+	translation.de:Die einzigen Ruinen die mir in den Sinn kommen sind diejenigen in den Bergen westlich des Sumpflands.
+	translation.ch:Di einzige Ruine womer in Sinn chömed sind die ide Berge, westlich vom Sumpfland.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_WhyWork
+	translation.en:Admantris is in danger. Gandria is in danger. And you probably are, too. Why would you stop helping me?
+	translation.de:Admantris ist in Gefahr. Gandria ist in Gefahr. Und du bist wahrscheinlich auch in Gefahr. Wieso solltest du mir nicht helfen?
+	translation.ch:Admantris isch in Gfohr. Gandria isch in Gfohr. Und du bisch wahrschindli au in Gfohr. Weso sötsch mer nid helfe?
+	[
+		# Link node, tag is next tag
+		tag:18
+	]
+}
+{2
+	# [18] Choice Node
+	tag:18
+	[
+		# Link node, tag is next tag
+		tag:19
+		# translation: 
+		translation.tag:DL_Choice_KeepWorking
+		translation.en:Alright I'll help you.
+		translation.de:Gut, ich werde dir helfen.
+		translation.ch:Guet, ich wird der helfe.
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		# translation: 
+		translation.tag:DL_Choice_StopWorking
+		translation.en:You can start looking for another idiot to do your job.
+		translation.de:Du kannst dir einen anderen Idioten suchen, der deinen Job macht.
+		translation.ch:Du chasch der en andere Tubel sueche wo din Job macht.
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd4", "why_work")
+	# translation: 
+	translation.tag:DL_Lloyd_KeepWorking
+	translation.en:(Lloyd nods acknowledging)
+	translation.de:(Lloyd nickt anerkennend)
+	translation.ch:(De Lloyd nickt anerkennend)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:changeQuestState("find_velius", "failed")
+	trigger:DL:addConditionProgress("npc_lloyd4", "why_work")
+	trigger:DL:addConditionProgress("npc_lloyd4", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_StopWorking
+	translation.en:I don't need you.
+	translation.de:Ich brauche dich nicht.
+	translation.ch:Ich bruch dich nid.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd4", "talked")
+	# translation: 
+	translation.tag:DL_Lloyd_Bye
+	translation.en:Be safe.
+	translation.de:Pass auf dich auf.
+	translation.ch:Pass uf dich uf.
 	[
 		# Link node, tag is next tag
 		tag:-2
