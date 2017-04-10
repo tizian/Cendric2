@@ -77,7 +77,7 @@ public:
 	// a return from the menu. reload a part of the configuration, restart music, etc.
 	virtual void notifyBackFromMenu() = 0;
 	// add an overlay to the overlay queue they will be displayed within the next world screen
-	void addScreenOverlay(ScreenOverlay* overlay);
+	void addScreenOverlay(ScreenOverlay* overlay, bool force = false);
 
 protected:
 	// handle quicksave
@@ -92,7 +92,7 @@ protected:
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;
-    sf::RenderTexture m_renderTexture2;
+	sf::RenderTexture m_renderTexture2;
 	sf::Sprite m_sprite;
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
@@ -114,4 +114,5 @@ protected:
 
 private:
 	void updateOverlayQueue();
+	void clearOverlayQueue();
 };

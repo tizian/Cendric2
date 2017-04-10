@@ -96,7 +96,7 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 			m_guiSidebar->hide();
 		}
 	}
-	else if (m_characterInfo->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
+	else if (guiElement->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
 		guiElement->hide();
 		m_guiSidebar->hide();
 		g_inputController->lockAction();

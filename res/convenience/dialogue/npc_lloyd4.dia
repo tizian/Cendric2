@@ -1,0 +1,203 @@
+# dia file for dialogue for npc: npc_lloyd4
+
+npc.id:npc_lloyd4
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_lloyd4", "first")
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("", "")
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd4", "first")
+	# translation: 
+	translation.tag:DL_Lloyd_Hello
+	translation.en:What... what happened here?! What did you...
+	translation.de:Was... was ist denn hier passiert?! Was hast du...
+	translation.ch:Was... was isch denn do passiert?! Was hesch du...
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_Hello2
+	translation.en:(Shocked) You killed them? I told you to interrogate them and to be careful! They were our only suspects!
+	translation.de:(Schockiert) Du hast sie getötet? Ich hab dir doch gesagt du sollst sie befragen, und zwar vorsichtig! Sie waren unsere einzigen Verdächtigen!
+	translation.ch:(Schockiert) Du hesch si killt? Ich ha der doch gseit du sölsch si befröge, und zwar vorsichthig! Si sind üsi einzige Verdächtige gsi!
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_IDidntMean
+		translation.en:I didn't mean to!
+		translation.de:Das wollte ich nicht!
+		translation.ch:Das hani nid wele!
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_CalmDown
+		translation.en:Calm down, we'll find a solution.
+		translation.de:Beruhig dich, wir finden eine Lösung.
+		translation.ch:Chill mal, mer finded scho e Lösig.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_TheyAttacked
+		translation.en:They attacked me! It was self-defence.
+		translation.de:Sie haben mich angegriffen! Es war Selbstverteidigung.
+		translation.ch:Sie hend mich agriffe! Es isch Selbstverteidigung gsi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_TheyDeserved
+		translation.en:They deserved it.
+		translation.de:Sie haben es verdient.
+		translation.ch:Si hends verdient.
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_IDidntMean
+	translation.en:(Sighs) Throwing your magic at people kills them apparently. Anyway, we've got to find a solution now.
+	translation.de:(Seufzt) Wenn du Leuten deine Magie um die Ohren haust, sterben sie offensichtlich. Egal, nun müssen wir eine Lösung finden.
+	translation.ch:(Süüfzt) Wenn du dini Magie de Lüüt an Grind wirfsch, sterbeds offsichtlich. Egal, mer mönd ez e Lösig finde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_CalmDown
+	translation.en:Do you have a suggestion?
+	translation.de:Hast du einen Vorschlag?
+	translation.ch:Hesch denn en Vorschlag?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_TheyAttacked
+	translation.en:Hrr. I'll believe you. But this was the last time I asked you to interrogate someone. Anyway, what should we do now?
+	translation.de:Hrr. Ich werde dir glauben. Aber das war das letzte mal, dass ich dich jemanden befragen lasse. Wie soll es denn jetzt weitergehen?
+	translation.ch:Hrr. Ich mue dir wohl glaube. Aber da isch s'letzt mal gsi woni dich öpper befroge lah. Egal, we sölls ez wiitergo?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_TheyDeserved
+	translation.en:Maybe they did. But it's not yours to decide about their fate. Anyway, what should we do now?
+	translation.de:Vielleicht haben sie das. Dennoch solltest du nicht einfach über ihr Schicksal entscheiden. Nun, wie soll es jetzt weitergehen?
+	translation.ch:Vilicht hends das ja. Trotzdem chasch nid eifach über ihres Schicksal entscheide. Egal, we sölls ez wiitergo?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [8] Choice Node
+	tag:8
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_FoundLetter
+		translation.en:I've found this letter in their pockets. (Give letter)
+		translation.de:Ich habe diesen Brief in ihren Taschen gefunden. (Brief geben)
+		translation.ch:Ich ha de Brief i ihre Täsche gfunde. (Brief gä)
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:removeItem("do_veliusletter", 1)
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter
+	translation.en:Interesting. Let me have a look at it.
+	translation.de:Interessant. Zeig mal her.
+	translation.ch:Interessant. Zeig mol.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter2
+	translation.en:It seems to be from their boss. (Mumbles) mages... mark... Who is that "V."?
+	translation.de:Er scheint von ihrem Auftraggeber zu kommen. (Murmelt) Magier... Mal... Wer ist dieser "V."?
+	translation.ch:Es schiint vo ihrem Uftraggeber z'sii. (Murmlet) Magier... Zeiche... Wer isch de "V."?
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{3
+	# [11] Cendric Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_tldr
+	translation.en:I didn't read the letter yet...
+	translation.de:Ich habe den Brief noch nicht gelesen...
+	translation.ch:Ich ha de Brief nanig glese...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

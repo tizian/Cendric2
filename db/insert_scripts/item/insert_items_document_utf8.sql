@@ -123,8 +123,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_veliusletter', 'item', 'Mysterious Letter','Mysteriöser Brief','Mysteriöse Brief');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_veliusletter', 'item_desc', 'The mercenaries carried this letter with them.','Diesen Brief habe ich bei den Söldnern gefunden.','De Brief hani bide Söldner gfunde.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_veliusletter', 0, 'VeliusLetter');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusLetter', 'document', 'I don''t want to wait longer! Get them.
- - V.','Ich will nicht mehr warten!
- - V.', 'Ich verlür ez denn d''Geduld!
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusLetter', 'document', 'If you keep bringing me miserable weaklings, your pay will be equally miserable! Only AFFINE mages. I still need all types, preferably elementalists. And keep an eye out for the mark! Don''t make me wait any longer - I need them as soon as I''m done with these ruins.
+ - V.','Wenn ihr mir weiterhin diese armseligen Schwächlinge anschleppt, wird euer Sold genauso armselig sein! Nur AFFINE Magier. Ich brauche immer noch alle Typen, vor allem Elementarmagier. Und haltet nach dem Mal Ausschau! Lasst mich bloss nicht noch länger warten - ich brauche sie, sobald ich mit diesen Ruinen hier fertig bin.
+ - V.', 'Wenn ihr mir immer so armseligi Schwächling aschlepped, wird eure Sold genau so armselig sii! Nur AFFINI Magier. Ich bruch immer na alli Arte, vor allem Elementarmagier. Und lueged ober es Zeiche irgendwo gsehnd! Wehe ich mun na länger warte - ich bruuch si weni mit dene Ruine do fertig bin.
  - V.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_veliusletter', 'document', 650, 550, -1);

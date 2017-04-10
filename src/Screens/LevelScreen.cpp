@@ -130,7 +130,7 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 
 	notifyItemChange("gold", m_bossRewards.lootableGold);
 
-	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(m_bossRewards.lootableItems, m_bossRewards.lootableGold));
+	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(m_bossRewards.lootableItems, m_bossRewards.lootableGold), true);
 	m_currentLevel.executeBossEnding(true);
 
 	m_interface->hideAll();
@@ -146,7 +146,7 @@ void LevelScreen::clearConsumedFood() {
 }
 
 void LevelScreen::quicksave() {
-	if (m_isGameOver) return;
+	if (m_isGameOver || m_isBossDefeated) return;
 	WorldScreen::quicksave();
 }
 
@@ -262,7 +262,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_MovableTile, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
-		updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
+		if (!m_isBossDefeated) updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 		updateObjects(GameObjectType::_Equipment, frameTime);
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_Overlay, frameTime);

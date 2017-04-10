@@ -53,10 +53,7 @@ WorldScreen::~WorldScreen() {
 	delete m_interface;
 	delete m_progressLog;
 	delete m_bookWindow;
-	for (auto& overlay : m_overlayQueue) {
-		delete overlay;
-	}
-	m_overlayQueue.clear();
+	clearOverlayQueue();
 }
 
 void WorldScreen::notifyPermanentItemConsumed(const Item* item) {
@@ -217,6 +214,13 @@ void WorldScreen::updateOverlayQueue() {
 	m_overlayQueue.erase(m_overlayQueue.begin());
 }
 
+void WorldScreen::clearOverlayQueue() {
+	for (auto& overlay : m_overlayQueue) {
+		delete overlay;
+	}
+	m_overlayQueue.clear();
+}
+
 Inventory* WorldScreen::getInventory() {
 	if (m_interface == nullptr) return nullptr;
 	return m_interface->getInventory();
@@ -312,8 +316,11 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void WorldScreen::addScreenOverlay(ScreenOverlay* overlay) {
+void WorldScreen::addScreenOverlay(ScreenOverlay* overlay, bool force = false) {
 	if (overlay == nullptr) return;
+	if (force) {
+		clearOverlayQueue();
+	}
 	m_overlayQueue.push_back(overlay);
 }
 
