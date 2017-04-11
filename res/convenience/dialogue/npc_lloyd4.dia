@@ -156,11 +156,22 @@ npc.id:npc_lloyd4
 	[
 		# Link node, tag is next tag
 		tag:9
+		condition:DL:getGuild() ~= "cleric"
 		# translation: 
 		translation.tag:DL_Choice_FoundLetter
 		translation.en:I've found this letter in their pockets. (Give letter)
 		translation.de:Ich habe diesen Brief in ihren Taschen gefunden. (Brief geben)
 		translation.ch:Ich ha de Brief i ihre Täsche gfunde. (Brief gä)
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:DL:getGuild() == "cleric"
+		# translation: 
+		translation.tag:DL_Choice_FoundLetter
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }
 {1
@@ -213,9 +224,9 @@ npc.id:npc_lloyd4
 	trigger:DL:addItem("do_veliusletter", 1)
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter3
-	translation.en:Here, take it back. Somebody is abducting mages. Inina is not the only one who's missing.
-	translation.de:Hier, nimm ihn wieder. Jemand verschleppt Magier. Inina ist nicht die einzige, die vermisst wird.
-	translation.ch:Do, nimmen wieder. Öppert verschleppt Magier. D'Inina isch nid di einzig, wo vermisst wird.
+	translation.en:Here, take it back. Somebody is still abducting mages. Inina is not the only one who's missing.
+	translation.de:Hier, nimm ihn wieder. Jemand verschleppt immer noch Magier. Inina ist nicht die einzige, die vermisst wird.
+	translation.ch:Do, nimmen wieder. Öppert verschleppt immerno Magier. D'Inina isch nid di einzig, wo vermisst wird.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -244,9 +255,113 @@ npc.id:npc_lloyd4
 	trigger:DL:changeQuestState("find_velius", "started")
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter5
-	translation.en:The letter's author is a certain "V." and he mentions "ruins". Go and find those while I'm going to find out who that "V." is.
-	translation.de:Der Author des Briefs ist ein gewisser "V.", und er schreibt von "Ruinen". Geh und finde diese, währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
-	translation.ch:De Author vom Brief isch en gwüsse "V." und er schriibt öppis vo Ruine. Gang und suech die, währenddesse findi use, wer de "V." sii chönt.
+	translation.en:The letter's author is a certain "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
+	translation.de:Der Author des Briefs ist ein gewisser "V.", und er schreibt vom Hochland. Geh und finde heraus, ob es dort weitere Hinweise gibt. Währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
+	translation.ch:De Author vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:removeItem("do_veliusletter", 1)
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{3
+	# [24] Cendric Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_tldr
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:addItem("do_veliusletter", 1)
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter3
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:changeQuestState("ininas_abduction", "completed")
+	trigger:DL:addReputationProgress("cleric", 5)
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter4
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:changeQuestState("find_velius", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter5
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:changeQuestState("missing_inina", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_FoundLetter6
+	translation.en:Oh and still keep an eye open for any hints regarding Inina.
+	translation.de:Oh und falls du irgendwelche Hinweise siehst  was Inina betrifft... lass es mich wissen.
+	translation.ch:Oh und wennd irgendwelchi Hiiwis vo wege de Inina findsch - verzell mer devo.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -261,9 +376,9 @@ npc.id:npc_lloyd4
 		condition:not DL:isConditionFulfilled("npc_lloyd4", "where_search")
 		# translation: 
 		translation.tag:DL_Choice_WhereSearch
-		translation.en:Where should I search for those ruins?
-		translation.de:Wo soll ich nach den Ruinen suchen?
-		translation.ch:Wo sötti nach de Ruine sueche?
+		translation.en:Where are those highlands?
+		translation.de:Wo ist dieses Hochland?
+		translation.ch:Wo isch das Hochland?
 	]
 	[
 		# Link node, tag is next tag
@@ -292,9 +407,9 @@ npc.id:npc_lloyd4
 	trigger:DL:addConditionProgress("npc_lloyd4", "where_search")
 	# translation: 
 	translation.tag:DL_Lloyd_WhereSearch
-	translation.en:The only ruins that come to my mind are the ones in the mountains, to the West of the marshlands.
-	translation.de:Die einzigen Ruinen die mir in den Sinn kommen sind diejenigen in den Bergen westlich des Sumpflands.
-	translation.ch:Di einzige Ruine womer in Sinn chömed sind die ide Berge, westlich vom Sumpfland.
+	translation.en:I think he's talking about the highlands of Admantris, to the West of the marshlands.
+	translation.de:Ich glaub er meint das Hochland von Admantris, westlich des Sumpflands.
+	translation.ch:Ich glaub er meint s'Hochland vo Admantris, westlich vom Sumpfland.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -360,9 +475,9 @@ npc.id:npc_lloyd4
 	trigger:DL:addConditionProgress("npc_lloyd4", "talked")
 	# translation: 
 	translation.tag:DL_Lloyd_StopWorking
-	translation.en:I don't need you.
-	translation.de:Ich brauche dich nicht.
-	translation.ch:Ich bruch dich nid.
+	translation.en:(Disdainfully) I don't need you.
+	translation.de:(Verächtlich) Ich brauche dich nicht.
+	translation.ch:(Verächtlich) Ich bruch dich nid.
 	[
 		# Link node, tag is next tag
 		tag:-1

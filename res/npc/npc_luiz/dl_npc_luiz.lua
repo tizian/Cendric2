@@ -167,6 +167,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")) then 
 			DL:addChoice(30, "DL_Choice_FinishedCathedral") -- I got the necrotic grimoire.
 		end
+		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+			DL:addChoice(23, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -229,6 +232,28 @@ loadDialogue = function(DL)
 			DL:addItem("sp_raisethedead", 1)
 			DL:addReputationProgress("necromancer", 10)
 			DL:changeQuestState("cathedral_necro", "completed")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+
+			DL:createCendricNode(23, 32, "DL_Choice_CompleteLloydsPlan2") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
+			DL:addNode()
+
+
+			DL:createNPCNode(32, 33, "DL_Luiz_CompleteLloydsPlan") -- That's interesting, thank you for the report.
+			DL:changeQuestState("lloyds_plan", "completed")
+			DL:addReputationProgress("necromancer", 5)
+			DL:addNode()
+
+
+			DL:createNPCNode(33, 34, "DL_Luiz_CompleteLloydsPlan2") -- But now I'm a bit worried about our Robert. He didn't return from his last trip to the marshlands.
+			DL:addNode()
+
+
+			DL:createNPCNode(34, -2, "DL_Luiz_CompleteLloydsPlan3") -- Keep an eye open and tell me if you see him.
+			DL:changeQuestState("missing_bob", "started")
 			DL:addNode()
 
 		end

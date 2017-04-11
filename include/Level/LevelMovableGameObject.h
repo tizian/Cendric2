@@ -71,7 +71,7 @@ public:
 	bool isImmortal() const;
 	bool isStunned() const;
 	bool isFeared() const;
-	bool isReady() const;
+	virtual bool isReady() const;
 	bool isEating() const;
 	GameObjectState getState() const;
 

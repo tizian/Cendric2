@@ -1,12 +1,12 @@
--- Routine for NPC "Lloyd" in 
+-- Routine for NPC "Lloyd" in the tavern
 
 velocity = 60
 
 loadRoutine = function(R, W)
 
-	R:setTilePosition(45,6)
+	R:setTilePosition(18,8)
 	
-	if (W:isConditionFulfilled("boss", "BossJanus") and not W:isConditionFulfilled("npc_lloyd3", "talked")) then
+	if (W:isConditionFulfilled("boss", "BossMercenaries") and not W:isConditionFulfilled("npc_lloyd4", "talked")) then
 		R:setReloadEnabled(true)
 		R:setLooped(false)
 		R:setTalkingActive(true)
@@ -16,17 +16,11 @@ loadRoutine = function(R, W)
 	
 	R:setTalkingEnabled(false)
 	R:setReloadEnabled(false)
-	R:goToTile(45,8)
-	R:goToTile(36,8)
-	R:goToTile(36,21)
-	R:goToTile(42,21)
-	R:goToTile(42,26)
-	R:goToTile(29.5,26)
-    R:goToTile(29.5,35)
-    R:goToTile(19,35)
-    R:goToTile(19,24.5)
-	R:goToTile(13,24.5)
-	R:goToTile(13,23.5)
+	R:goToTile(18,7)
+	R:goToTile(10,7)
+	R:goToTile(10,11)
+	R:goToTile(9,11)
+	R:goToTile(9,15)
 	R:setDisposed()
 
 end	

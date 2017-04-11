@@ -160,6 +160,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("cathedral_thief", "started") and DL:isQuestComplete("cathedral_thief")) then 
 			DL:addChoice(27, "DL_Choice_CathedralFinished") -- I got the candleholders.
 		end
+		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+			DL:addChoice(20, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -222,6 +225,28 @@ loadDialogue = function(DL)
 			DL:createNPCNode(28, -2, "DL_Vincent_CathedralFinished2") -- You've shown me that you are able to use our magic. Take this scroll as a reward and learn how to be one with the shadows.
 			DL:addReputationProgress("thief", 10)
 			DL:addItem("sp_invisibility", 1)
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+
+			DL:createCendricNode(20, 29, "DL_Choice_CompleteLloydsPlan2") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
+			DL:addNode()
+
+
+			DL:createNPCNode(29, 30, "DL_Vincent_CompleteLloydsPlan") -- Some "V.", eh. (Grins) Well, it's not me, I can assure you that. Thank you for the report.
+			DL:changeQuestState("lloyds_plan", "completed")
+			DL:addReputationProgress("thief", 5)
+			DL:addNode()
+
+
+			DL:createNPCNode(30, 31, "DL_Vincent_CompleteLloydsPlan2") -- We'll be a lot more vigilantly now. I'm only worried about Koray, Nuray's brother.
+			DL:addNode()
+
+
+			DL:createNPCNode(31, -2, "DL_Vincent_CompleteLloydsPlan3") -- He went to the marshlands recently. If you see him, tell Nuray.
+			DL:changeQuestState("missing_koray", "started")
 			DL:addNode()
 
 		end

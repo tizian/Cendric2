@@ -215,6 +215,9 @@ void WorldScreen::updateOverlayQueue() {
 }
 
 void WorldScreen::clearOverlayQueue() {
+	for (auto go : *getObjects(GameObjectType::_ScreenOverlay)) {
+		go->setDisposed();
+	}
 	for (auto& overlay : m_overlayQueue) {
 		delete overlay;
 	}
@@ -316,7 +319,7 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void WorldScreen::addScreenOverlay(ScreenOverlay* overlay, bool force = false) {
+void WorldScreen::addScreenOverlay(ScreenOverlay* overlay, bool force) {
 	if (overlay == nullptr) return;
 	if (force) {
 		clearOverlayQueue();

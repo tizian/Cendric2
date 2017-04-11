@@ -2,6 +2,11 @@
 
 loadRoutine = function(R, W)
 
+    if (W:isConditionFulfilled("boss", "BossMercenaries"))
+        setDisposed()
+        return
+    end
+
 	R:setTilePosition(7,15)
 
 	R:goToTile(8, 15)

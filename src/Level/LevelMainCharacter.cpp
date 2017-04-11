@@ -53,8 +53,8 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 			m_deathPc->setEmitRate(0.f);
 		}
 		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
-		return;
 	}
+	if (!isReady()) return;
 
 	m_targetManager->update(frameTime);
 	MainCharacter::handleInteraction();
@@ -84,13 +84,13 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 }
 
 void LevelMainCharacter::handleAttackInput() {
-	if (isDead() || isClimbing()) return;
+	if (m_isInputLock || isClimbing()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
 	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
 
-	sf::Vector2f target = !isMousePressed && m_targetManager->getCurrentTargetEnemy() != nullptr ? 
+	sf::Vector2f target = !isMousePressed && m_targetManager->getCurrentTargetEnemy() != nullptr ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		g_inputController->getMousePosition();
@@ -230,6 +230,7 @@ void LevelMainCharacter::setDead() {
 	if (m_isDead) return;
 	LevelMovableGameObject::setDead();
 	m_deathPc->setVisible(true);
+	setInputLock();
 }
 
 void LevelMainCharacter::setQuickcast(bool quickcast) {
@@ -243,7 +244,7 @@ void LevelMainCharacter::setGodmode(bool godmode) {
 
 void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {
 	if (m_isDead || data.damageType == DamageType::VOID) return;
-	sf::IntRect textureLocation((static_cast<int>(data.damageType)-1) * 50, 0, 50, 50);
+	sf::IntRect textureLocation((static_cast<int>(data.damageType) - 1) * 50, 0, 50, 50);
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, data.duration, data);
 	LevelMovableGameObject::addDamageOverTime(data);
 }
@@ -282,7 +283,7 @@ void LevelMainCharacter::loadAnimation() {
 	for (int i = 0; i < 8; ++i) {
 		walkingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
 	}
-	
+
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
@@ -345,6 +346,10 @@ std::string LevelMainCharacter::getDeathSoundPath() const {
 	return "res/sound/mob/cendric_death.ogg";
 }
 
+void LevelMainCharacter::setInputLock() {
+	m_isInputLock = true;
+}
+
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange(item, quantity);
@@ -379,6 +384,10 @@ void LevelMainCharacter::removeGold(int gold) const {
 
 bool LevelMainCharacter::isAlly() const {
 	return true;
+}
+
+bool LevelMainCharacter::isReady() const {
+	return LevelMovableGameObject::isReady() && !m_isInputLock;
 }
 
 bool LevelMainCharacter::isClimbing() const {

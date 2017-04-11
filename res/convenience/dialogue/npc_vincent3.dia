@@ -387,6 +387,16 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
+		tag:20
+		condition:DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")
+		# translation: 
+		translation.tag:DL_Choice_CompleteLloydsPlan
+		translation.en:I've talked to Lloyd...
+		translation.de:Ich habe mit Lloyd gesprochen...
+		translation.ch:Ich ha mitem Lloyd gredt...
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -538,6 +548,65 @@ npc.id:npc_vincent3
 	translation.en:You've shown me that you are able to use our magic. Take this scroll as a reward and learn how to be one with the shadows.
 	translation.de:Du hast mir gezeigt, dass du fähig bist, unsere Magie zu benutzen. Nimm diese Spruchrolle als Belohnung und lerne, wie man eins mit den Schatten wird.
 	translation.ch:Du hesch mer zeigt, dassd fähig bisch, üsi Magie z'bruuche. Nimm die Schriftrolle als Belohnig und lern, weme eis mit de Schatte wird.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [20] Cendric Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Choice_CompleteLloydsPlan2
+	translation.en:... Some "V." is abducting mages. Lloyd is trying to find out who that is.
+	translation.de:... Ein gewisser "V." entführt Magier. Lloyd versucht herauszufinden, wer das ist.
+	translation.ch:... En gwüsse "V." entführt Magier. De Lloyd probiert usezfinde, wer das isch.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:changeQuestState("lloyds_plan", "completed")
+	trigger:DL:addReputationProgress("thief", 5)
+	# translation: 
+	translation.tag:DL_Vincent_CompleteLloydsPlan
+	translation.en:Some "V.", eh. (Grins) Well, it's not me, I can assure you that. Thank you for the report.
+	translation.de:Ein "V.", he. (Grinst) Nun, ich bin es nicht, das kann ich dir sagen. Danke für den Bericht.
+	translation.ch:En "V.", he. (Grinst) Ich bis aber nid, das chani der sege. Danke für de Bricht.
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_CompleteLloydsPlan2
+	translation.en:We'll be a lot more vigilantly now. I'm only worried about Koray, Nuray's brother.
+	translation.de:Wir werden nun um einiges wachsamer sein. Ich mache mir nur Sorgen um Koray, Nuray's Bruder.
+	translation.ch:Mir werded um einiges wachsamer sii. Ich mach mer bloss chli Sorge um de Koray, de Nuray ihre Brüeder.
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	trigger:DL:changeQuestState("missing_koray", "started")
+	# translation: 
+	translation.tag:DL_Vincent_CompleteLloydsPlan3
+	translation.en:He went to the marshlands recently. If you see him, tell Nuray.
+	translation.de:Er ist kürzlich ins Sumpfland gegangen. Berichte Nuray davon, falls du ihn sehen solltest.
+	translation.ch:Er isch letztins is Sumpfland gange. Verzell doch de Nuray devo, fallsen gse sötsch.
 	[
 		# Link node, tag is next tag
 		tag:-2

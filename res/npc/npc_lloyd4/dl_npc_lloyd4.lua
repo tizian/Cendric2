@@ -50,37 +50,82 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("find_velius", "void")) then 
 
 		DL:createChoiceNode(8)
-		DL:addChoice(9, "DL_Choice_FoundLetter") -- I've found this letter in their pockets. (Give letter)
+		if (DL:getGuild() ~= "cleric") then 
+			DL:addChoice(9, "DL_Choice_FoundLetter") -- I've found this letter in their pockets. (Give letter)
+		end
+		if (DL:getGuild() == "cleric") then 
+			DL:addChoice(22, "DL_Choice_FoundLetter") -- 
+		end
 		DL:addNode()
 
+		if (DL:getGuild() ~= "cleric") then 
 
-		DL:createNPCNode(9, 10, "DL_Lloyd_FoundLetter") -- Interesting. Let me have a look at it.
-		DL:removeItem("do_veliusletter", 1)
-		DL:addNode()
-
-
-		DL:createNPCNode(10, 11, "DL_Lloyd_FoundLetter2") -- It seems to be from their boss. (Mumbles) mages... mark... Who is that "V."?
-		DL:addNode()
+			DL:createNPCNode(9, 10, "DL_Lloyd_FoundLetter") -- Interesting. Let me have a look at it.
+			DL:removeItem("do_veliusletter", 1)
+			DL:addNode()
 
 
-		DL:createCendricNode(11, 12, "DL_Cendric_tldr") -- I didn't read the letter yet...
-		DL:addNode()
+			DL:createNPCNode(10, 11, "DL_Lloyd_FoundLetter2") -- It seems to be from their boss. (Mumbles) mages... mark... Who is that "V."?
+			DL:addNode()
 
 
-		DL:createNPCNode(12, 13, "DL_Lloyd_FoundLetter3") -- Here, take it back. Somebody is abducting mages. Inina is not the only one who's missing.
-		DL:addItem("do_veliusletter", 1)
-		DL:addNode()
+			DL:createCendricNode(11, 12, "DL_Cendric_tldr") -- I didn't read the letter yet...
+			DL:addNode()
 
 
-		DL:createNPCNode(13, 14, "DL_Lloyd_FoundLetter4") -- I've heard from other cases. We must do something! 
-		DL:addQuestProgress("lloyds_plan", "information_gathered")
-		DL:changeQuestState("ininas_abduction", "completed")
-		DL:addNode()
+			DL:createNPCNode(12, 13, "DL_Lloyd_FoundLetter3") -- Here, take it back. Somebody is still abducting mages. Inina is not the only one who's missing.
+			DL:addItem("do_veliusletter", 1)
+			DL:addNode()
 
 
-		DL:createNPCNode(14, -2, "DL_Lloyd_FoundLetter5") -- The letter's author is a certain "V." and he mentions "ruins". Go and find those while I'm going to find out who that "V." is.
-		DL:changeQuestState("find_velius", "started")
-		DL:addNode()
+			DL:createNPCNode(13, 14, "DL_Lloyd_FoundLetter4") -- I've heard from other cases. We must do something! 
+			DL:addQuestProgress("lloyds_plan", "information_gathered")
+			DL:changeQuestState("ininas_abduction", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(14, -2, "DL_Lloyd_FoundLetter5") -- The letter's author is a certain "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
+			DL:changeQuestState("find_velius", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:getGuild() == "cleric") then 
+
+			DL:createNPCNode(22, 23, "DL_Lloyd_FoundLetter") -- 
+			DL:removeItem("do_veliusletter", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(23, 24, "DL_Lloyd_FoundLetter2") -- 
+			DL:addNode()
+
+
+			DL:createCendricNode(24, 25, "DL_Cendric_tldr") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(25, 26, "DL_Lloyd_FoundLetter3") -- 
+			DL:addItem("do_veliusletter", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(26, 27, "DL_Lloyd_FoundLetter4") -- 
+			DL:changeQuestState("ininas_abduction", "completed")
+			DL:addReputationProgress("cleric", 5)
+			DL:addNode()
+
+
+			DL:createNPCNode(27, 28, "DL_Lloyd_FoundLetter5") -- 
+			DL:changeQuestState("find_velius", "started")
+			DL:addNode()
+
+
+			DL:createNPCNode(28, -2, "DL_Lloyd_FoundLetter6") -- Oh and still keep an eye open for any hints regarding Inina.
+			DL:changeQuestState("missing_inina", "started")
+			DL:addNode()
+
+		end
 
 	end
 
@@ -88,7 +133,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(15)
 		if (not DL:isConditionFulfilled("npc_lloyd4", "where_search")) then 
-			DL:addChoice(16, "DL_Choice_WhereSearch") -- Where should I search for those ruins?
+			DL:addChoice(16, "DL_Choice_WhereSearch") -- Where are those highlands?
 		end
 		if (not DL:isConditionFulfilled("npc_lloyd4", "why_work") and not DL:getGuild() == "cleric") then 
 			DL:addChoice(17, "DL_Choice_WhyWork") -- And why exactly should I still work for you?
@@ -98,7 +143,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lloyd4", "where_search")) then 
 
-			DL:createNPCNode(16, -2, "DL_Lloyd_WhereSearch") -- The only ruins that come to my mind are the ones in the mountains, to the West of the marshlands.
+			DL:createNPCNode(16, -2, "DL_Lloyd_WhereSearch") -- I think he's talking about the highlands of Admantris, to the West of the marshlands.
 			DL:addConditionProgress("npc_lloyd4", "where_search")
 			DL:addNode()
 
@@ -121,7 +166,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(20, -1, "DL_Lloyd_StopWorking") -- I don't need you.
+			DL:createNPCNode(20, -1, "DL_Lloyd_StopWorking") -- (Disdainfully) I don't need you.
 			DL:changeQuestState("find_velius", "failed")
 			DL:addConditionProgress("npc_lloyd4", "why_work")
 			DL:addConditionProgress("npc_lloyd4", "talked")

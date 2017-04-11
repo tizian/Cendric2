@@ -135,6 +135,8 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 
 	m_interface->hideAll();
 	m_isBossDefeated = true;
+	m_mainChar->setInputLock();
+	m_mainChar->setInvincible(true);
 }
 
 void LevelScreen::setEnemyForHealthBar(const Enemy* enemy) {
@@ -262,7 +264,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(GameObjectType::_MovableTile, frameTime);
 		updateObjects(GameObjectType::_DynamicTile, frameTime);
 		updateObjects(GameObjectType::_Enemy, frameTime);
-		if (!m_isBossDefeated) updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
+		updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
 		updateObjects(GameObjectType::_Equipment, frameTime);
 		updateObjects(GameObjectType::_Spell, frameTime);
 		updateObjects(GameObjectType::_Overlay, frameTime);

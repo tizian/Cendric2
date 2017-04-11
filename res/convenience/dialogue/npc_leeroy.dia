@@ -308,7 +308,7 @@ npc.id:npc_leeroy
 	# [16] NPC Node
 	tag:16
 	# triggers: 
-	trigger:DL:startLevel("res/level/swampbridge/swampbridgte.tmx", 1, 1)
+	trigger:DL:startLevel("res/level/swampbridge/swampbridge.tmx", 1, 1)
 	# translation: 
 	translation.tag:
 	translation.en:
