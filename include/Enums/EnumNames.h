@@ -311,6 +311,8 @@ public:
 			return "BossRoy";
 		case EnemyID::Boss_Jeremy:
 			return "BossJeremy";
+		case EnemyID::Leeroy:
+			return "Leeroy";
 		}
 	}
 

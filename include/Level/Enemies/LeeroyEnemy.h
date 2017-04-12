@@ -6,9 +6,9 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class HunterEnemy final : public Enemy {
+class LeeroyEnemy final : public Enemy {
 public:
-	HunterEnemy(const Level* level, Screen* screen);
+	LeeroyEnemy(const Level* level, Screen* screen);
 
 	int getMentalStrength() const override;
 
@@ -17,7 +17,7 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {}
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {}
 
-	EnemyID getEnemyID() const override { return EnemyID::Hunter; }
+	EnemyID getEnemyID() const override { return EnemyID::Leeroy; }
 
 protected:
 	std::string getSpritePath() const override;

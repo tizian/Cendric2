@@ -1,18 +1,16 @@
-#include "Level/Enemies/HunterEnemy.h"
+#include "Level/Enemies/LeeroyEnemy.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
 
-REGISTER_ENEMY(EnemyID::Hunter, HunterEnemy)
+REGISTER_ENEMY(EnemyID::Leeroy, LeeroyEnemy)
 
-HunterEnemy::HunterEnemy(const Level* level, Screen* screen) :
+LeeroyEnemy::LeeroyEnemy(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
     Enemy(level, screen) {
-
-	m_isImmortal = true;
 }
 
-void HunterEnemy::loadAttributes() {
+void LeeroyEnemy::loadAttributes() {
 	m_attributes.setHealth(400);
 	m_attributes.resistanceIce = 30;
 	m_attributes.resistanceFire = 30;
@@ -20,32 +18,30 @@ void HunterEnemy::loadAttributes() {
 	m_attributes.calculateAttributes();
 }
 
-void HunterEnemy::loadSpells() {
-	SpellData arrow = SpellData::getSpellData(SpellID::Projectile);
-	arrow.damage = 10;
-	arrow.duration = sf::seconds(2.f);
-	arrow.damagePerSecond = 2;
-	arrow.cooldown = sf::milliseconds(2000);
-	arrow.fightingTime = sf::milliseconds(4 * 70);
-	arrow.spellOffset = sf::Vector2f(10.f, 20.f);
-
-	m_spellManager->addSpell(arrow);
-
-	m_spellManager->setCurrentSpell(0); // projectile
+void LeeroyEnemy::loadSpells() {
+	SpellData chop = SpellData::getSpellData(SpellID::Chop);
+	chop.damage = 10;
+	chop.duration = sf::seconds(2.f);
+	chop.damagePerSecond = 2;
+	chop.cooldown = sf::milliseconds(2000);
+	chop.fightingTime = sf::milliseconds(4 * 70);
+	
+	m_spellManager->addSpell(chop);
+	m_spellManager->setCurrentSpell(0); // chop
 
 	setAlly(sf::Time::Zero);
 }
 
-float HunterEnemy::getConfiguredDistanceToHPBar() const {
+float LeeroyEnemy::getConfiguredDistanceToHPBar() const {
 	return 30.f;
 }
 
-void HunterEnemy::handleAttackInput() {
+void LeeroyEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 }
 
-void HunterEnemy::loadAnimation(int skinNr) {
+void LeeroyEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-35.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -89,7 +85,7 @@ void HunterEnemy::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
-MovingBehavior* HunterEnemy::createMovingBehavior(bool asAlly) {
+MovingBehavior* LeeroyEnemy::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 
 	behavior = new AllyWalkingBehavior(this);
@@ -103,19 +99,19 @@ MovingBehavior* HunterEnemy::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* HunterEnemy::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* LeeroyEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
 	behavior = new AllyBehavior(this);
 	behavior->setAggroRange(200.f);
-	behavior->setAttackInput(std::bind(&HunterEnemy::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&LeeroyEnemy::handleAttackInput, this));
 	return behavior;
 }
 
-int HunterEnemy::getMentalStrength() const {
+int LeeroyEnemy::getMentalStrength() const {
 	return 4;
 }
 
-std::string HunterEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_hunter.png";
+std::string LeeroyEnemy::getSpritePath() const {
+	return "res/assets/enemies/spritesheet_enemy_leeroy.png";
 }
