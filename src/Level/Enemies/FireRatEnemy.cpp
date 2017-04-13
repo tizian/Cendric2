@@ -189,6 +189,14 @@ void FireRatEnemy::setPosition(const sf::Vector2f& pos) {
 	}
 }
 
+void FireRatEnemy::render(sf::RenderTarget& target) {
+	if (m_isBurning) {
+		GameObject::render(target);
+		return;
+	}
+	Enemy::render(target);
+}
+
 int FireRatEnemy::getMentalStrength() const {
 	return 1;
 }

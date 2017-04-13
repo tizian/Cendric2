@@ -251,7 +251,7 @@ void ChestLevelTile::onRightClick() {
 			m_screen->setNegativeTooltip("IsLockedKey");
 		}
 		else if (m_data.chestStrength < 5) {
-			m_screen->setNegativeTooltip("Picklock");
+			m_screen->setNegativeTooltip("IsLockedPicklock");
 		}
 	}
 }

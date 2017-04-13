@@ -1193,13 +1193,13 @@
   </object>
   <object id="1" x="2908" y="213" width="85" height="45">
    <properties>
-    <property name="level entry" value="res/level/ratcave/ratcave.tmx,525,1175"/>
+    <property name="level entry" value="res/level/ratcave/ratcave.tmx,535,1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="46" x="2455.5" y="361.5" width="85" height="45">
    <properties>
-    <property name="level entry" value="res/level/ratcave/ratcave.tmx,725,275"/>
+    <property name="level entry" value="res/level/ratcave/ratcave.tmx,735,310"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

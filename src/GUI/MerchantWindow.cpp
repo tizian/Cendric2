@@ -114,13 +114,12 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
 			pos.y + InventorySlot::SIZE > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		slot.second.update(frameTime);
-		if (slot.second.isClicked()) {
+		if (slot.second.isMousedOver()) {
 			selectSlot(slot.second.getItemID());
-			return;
-		}
-		if (slot.second.isRightClicked()) {
-			m_interface->buyItem(slot.second.getItem());
-			break;
+			if (slot.second.isRightClicked()) {
+				m_interface->buyItem(slot.second.getItem());
+				break;
+			}
 		}
 	}
 

@@ -151,7 +151,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100) then 
 			DL:addChoice(19, "DL_Choice_TeachMore") -- Can you teach me more spells?
 		end
-		if (condition:DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan", "void")) then 
 			DL:addChoice(12, "DL_Choice_HowCanIHelp") -- How can I support you?
 		end
 		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
@@ -182,7 +182,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (condition:DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan", "void")) then 
 
 			DL:createNPCNode(12, 26, "DL_Vincent_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
 			DL:addNode()

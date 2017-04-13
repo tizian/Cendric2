@@ -1,5 +1,4 @@
 #include "Level/Enemies/DragonWhelpEnemy.h"
-#include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
@@ -53,6 +52,12 @@ void DragonWhelpEnemy::update(const sf::Time& frameTime) {
 		if (m_isEgg) {
 			if (m_boundingBox.intersects(*m_mainChar->getBoundingBox())) {
 				setActive();
+			}
+			for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+				auto e = dynamic_cast<Enemy*>(go);
+				if (e->isAlly() && m_boundingBox.intersects(*e->getBoundingBox())) {
+					setActive();
+				}
 			}
 		}
 

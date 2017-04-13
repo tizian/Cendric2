@@ -87,6 +87,7 @@ void Slot::update(const sf::Time& frameTime) {
 	m_isClicked = false;
 	m_isRightClicked = false;
 	m_isDoubleClicked = false;
+	m_isMousedOver = false;
 	updateTime(m_doubleClickTime, frameTime);
 	GameObject::update(frameTime);
 }
@@ -108,6 +109,7 @@ void Slot::renderAfterForeground(sf::RenderTarget& renderTarget) {
 
 void Slot::onMouseOver() {
 	m_showTooltip = true;
+	m_isMousedOver = true;
 }
 
 void Slot::onLeftJustPressed() {

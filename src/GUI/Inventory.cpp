@@ -301,18 +301,18 @@ void Inventory::update(const sf::Time& frameTime) {
 		if (pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
 			pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		it.second.update(frameTime);
-		if (it.second.isClicked()) {
+		if (it.second.isMousedOver()) {
 			selectSlot(it.second.getItemID(), ItemType::VOID);
 			if (it.second.isDoubleClicked()) {
 				handleLevelDoubleClick(&it.second);
 				handleMapDoubleClick(&it.second);
+				break;
 			}
-			return;
-		}
-		if (it.second.isRightClicked()) {
-			handleLevelRightClick(&it.second);
-			handleMapRightClick(&it.second);
-			break;
+			if (it.second.isRightClicked()) {
+				handleLevelRightClick(&it.second);
+				handleMapRightClick(&it.second);
+				break;
+			}
 		}
 	}
 

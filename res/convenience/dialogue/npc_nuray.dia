@@ -45,7 +45,7 @@ npc.id:npc_nuray
 		translation.tag:DL_Choice_WhoAreYou
 		translation.en:Who are you?
 		translation.de:Wer bisch du?
-		translation.ch:Wer bisch du?
+		translation.ch:Wer bist du?
 	]
 	[
 		# Link node, tag is next tag

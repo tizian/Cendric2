@@ -23,7 +23,7 @@ npc.id:npc_helena2
 	# translation: 
 	translation.tag:DL_Helena_Hello
 	translation.en:Hey, hey you! You're back? I thought you'll never return and pay for your room.
-	translation.de:Hey, hey du! Du bist zurück? Ich dachte, du würdest nicht mehr auftauchen und dein Zimmer bezahlen
+	translation.de:Hey, hey du! Du bist zurück? Ich dachte, du würdest nicht mehr auftauchen und dein Zimmer bezahlen.
 	translation.ch:Hey, hey du! Du bisch zrugg? Ich ha denkt du würsch nümme uftauche und dis Zimmer zale.
 	[
 		# Link node, tag is next tag

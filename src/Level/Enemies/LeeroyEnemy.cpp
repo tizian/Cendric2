@@ -43,40 +43,52 @@ void LeeroyEnemy::handleAttackInput() {
 
 void LeeroyEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
-	setSpriteOffset(sf::Vector2f(-35.f, -30.f));
+	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
+	int size = 120;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
+		walkingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(900, 0, 100, 120));
+	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
+	Animation* castingAnimation = new Animation();
+	castingAnimation->setSpriteSheet(tex);
+	castingAnimation->addFrame(sf::IntRect(11 * size, 0, size, size));
+	castingAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
+	castingAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::Casting, castingAnimation);
+
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 10; i < 14; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
-	}
+	fightingAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect(11 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect(14 * size, 0, size, 2 * size));
+	fightingAnimation->addFrame(sf::IntRect(12 * size, 0, size, size));
+	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(1400, 0, 100, 120));
+	deadAnimation->addFrame(sf::IntRect(13 * size, 0, size, size));
+	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -94,7 +106,7 @@ MovingBehavior* LeeroyEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setMaxVelocityX(400.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -103,7 +115,7 @@ AttackingBehavior* LeeroyEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
 	behavior = new AllyBehavior(this);
-	behavior->setAggroRange(200.f);
+	behavior->setAggroRange(500.f);
 	behavior->setAttackInput(std::bind(&LeeroyEnemy::handleAttackInput, this));
 	return behavior;
 }

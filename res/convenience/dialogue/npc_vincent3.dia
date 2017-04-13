@@ -358,7 +358,7 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:condition:DL:isQuestState("lloyds_plan", "void")
+		condition:DL:isQuestState("lloyds_plan", "void")
 		# translation: 
 		translation.tag:DL_Choice_HowCanIHelp
 		translation.en:How can I support you?

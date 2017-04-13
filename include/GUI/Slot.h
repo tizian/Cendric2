@@ -37,6 +37,7 @@ public:
 	inline bool isClicked() const { return m_isClicked; }
 	inline bool isRightClicked() const { return m_isRightClicked; }
 	inline bool isDoubleClicked() const { return m_isDoubleClicked; }
+	inline bool isMousedOver() const { return m_isMousedOver; }
 
 	inline bool isEmpty() const { return m_isEmpty; }
 
@@ -51,6 +52,7 @@ public:
 protected:
 	bool m_isClicked = false;
 	bool m_isRightClicked = false;
+	bool m_isMousedOver = false;
 
 	bool m_isDoubleClicked = false;
 	sf::Time m_doubleClickTime = sf::Time::Zero;

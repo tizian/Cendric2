@@ -201,6 +201,7 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& filename) {
+	if (filename.empty()) return nullptr;
 	const auto& it = m_textures.find(filename);
 	if (it == m_textures.end()) {
 		g_logger->logError("ResourceManager", "Texture not found, try loading first: " + filename);

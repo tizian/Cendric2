@@ -21,6 +21,7 @@ public:
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 	void onHit(Spell* spell) override;
 	void setPosition(const sf::Vector2f& pos) override;
+	void render(sf::RenderTarget& target) override;
 
 	int getMentalStrength() const override;
 

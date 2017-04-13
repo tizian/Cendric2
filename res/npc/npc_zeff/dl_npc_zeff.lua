@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("monster_problem","started") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "sheep")) then
 		DL:addChoice(60, "DL_Choice_Sheep") -- There went a few sheep missing...
 	end
-	if (DL:isQuestState("monster_problem","started") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isConditionFulfilled("npc_zeff", "sheep")) then
+	if (DL:isQuestState("monster_problem","started") and not DL:isQuestComplete("monster_problem") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and DL:isConditionFulfilled("npc_zeff", "sheep")) then
 	
 		if (DL:isQuestState("hungry_wolf", "void")) then
 			DL:addChoice(80, "DL_Choice_SheepWhatDo") -- What can I do to convince you to stop stealing sheep?
@@ -193,10 +193,10 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("monster_problem","started") and DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "sheep")) then
 		
 		DL:createNPCNode(60, 61, "DL_Zeff_YouSuspect") -- Yes... yes... and now, only because I look like a wolf, I'm your first suspect.
-		DL:addConditionProgress("npc_zeff", "sheep")
 		DL:addNode()
 		
 		DL:createNPCNode(61, 62, "DL_Zeff_YoureRight") -- Well, to be honest, you're totally right. I was the one who stole the sheep. But I can't just walk into the tavern and buy some meat, can I?
+        DL:addConditionProgress("npc_zeff", "sheep")
 		DL:addNode()
 		
 		DL:createChoiceNode(62)

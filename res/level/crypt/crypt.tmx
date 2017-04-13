@@ -640,7 +640,7 @@
    <properties>
     <property name="eq_silvernecklace" value="1"/>
     <property name="fo_lesserhealingpotion" value="1"/>
-    <property name="gold" value="50"/>
+    <property name="gold" value="10"/>
    </properties>
   </object>
   <object id="23" gid="564" x="100" y="1651" width="50" height="50">
@@ -704,7 +704,7 @@
   </object>
   <object id="26" gid="758" x="950" y="1974" width="50" height="50">
    <properties>
-    <property name="text" value="TryIceMagic"/>
+    <property name="text" value="NeedIce"/>
    </properties>
   </object>
  </objectgroup>

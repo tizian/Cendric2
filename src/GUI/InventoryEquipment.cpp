@@ -144,7 +144,7 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 
 InventorySlot* InventoryEquipment::getSelectedSlot() {
 	for (auto& it : m_slots) {
-		if (it.second.isClicked()) {
+		if (it.second.isMousedOver()) {
 			return &it.second;
 		}
 	}
