@@ -13,6 +13,7 @@ public:
 	int getMentalStrength() const override;
 
 	float getConfiguredDistanceToHPBar() const override;
+	sf::Time getConfiguredWaitingTime() const override { return sf::Time::Zero; }
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {}
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {}

@@ -277,7 +277,7 @@ npc.id:npc_leeroy
 	# [14] NPC Node
 	tag:14
 	# triggers: 
-	trigger:DL:removeItem("mi_leeroychicken", 1)
+	trigger:DL:removeItem("qe_leeroychicken", 1)
 	trigger:DL:changeQuestState("leeroy_chicken", "completed")
 	# translation: 
 	translation.tag:DL_Leeroy_ChickenDone
@@ -308,7 +308,8 @@ npc.id:npc_leeroy
 	# [16] NPC Node
 	tag:16
 	# triggers: 
-	trigger:DL:startLevel("res/level/swampbridge/swampbridge.tmx", 100, 100)
+	trigger:DL:startLevel("res/level/swampbridge/swampbridge.tmx", 160, 1210)
+	trigger:DL:addConditionProgress("trigger", "swampbridge_open")
 	# translation: 
 	translation.tag:
 	translation.en:

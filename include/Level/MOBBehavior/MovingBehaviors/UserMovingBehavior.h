@@ -5,7 +5,7 @@
 #include "Level/MOBBehavior/MovingBehavior.h"
 
 // A moving behavior for the level main character
-class UserMovingBehavior : public MovingBehavior {
+class UserMovingBehavior final : public MovingBehavior {
 public:
 	UserMovingBehavior(LevelMainCharacter* mainChar);
 	~UserMovingBehavior() {};
@@ -17,6 +17,8 @@ public:
 	void handleDefaultAcceleration() override;
 	void updateAnimation(const sf::Time& frameTime) override;
 	void setJumpVelocity(float velocity);
+
+	void setEnabled(bool enabled) override;
 
 private:
 	float m_jumpVelocity = 0.f;

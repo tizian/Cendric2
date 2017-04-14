@@ -1070,7 +1070,7 @@
   <object id="78" gid="542" x="200" y="200" width="50" height="50">
    <properties>
     <property name="level" value="2"/>
-    <property name="type" value="range"/>
+    <property name="type" value="duration"/>
    </properties>
   </object>
  </objectgroup>

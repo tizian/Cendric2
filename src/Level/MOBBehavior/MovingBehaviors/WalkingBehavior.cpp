@@ -166,7 +166,7 @@ float WalkingBehavior::getDistanceToAbyss() const {
 }
 
 void WalkingBehavior::makeRandomDecision() {
-	if (!m_isGrounded || m_walksBlindly) return;
+	if (!m_isGrounded || m_walksBlindly || !isReady()) return;
 	m_movingDirectionX = rand() % 3 - 1;
 }
 

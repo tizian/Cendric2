@@ -112,7 +112,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("leeroy_chicken", "started") and DL:isQuestComplete("leeroy_chicken")) then 
 
 		DL:createNPCNode(14, 15, "DL_Leeroy_ChickenDone") -- And why did it take you so long? I nearly starved! (Leeroy takes the chicken and devours it hastily)
-		DL:removeItem("mi_leeroychicken", 1)
+		DL:removeItem("qe_leeroychicken", 1)
 		DL:changeQuestState("leeroy_chicken", "completed")
 		DL:addNode()
 
@@ -123,7 +123,8 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(16, -1, "") -- 
-		DL:startLevel("res/level/swampbridge/swampbridge.tmx", 100, 100)
+		DL:startLevel("res/level/swampbridge/swampbridge.tmx", 160, 1210)
+		DL:addConditionProgress("trigger", "swampbridge_open")
 		DL:addNode()
 
 	end

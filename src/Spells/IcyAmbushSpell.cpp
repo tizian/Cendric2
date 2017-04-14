@@ -22,6 +22,7 @@ void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 
 void IcyAmbushSpell::execOnHit(LevelMovableGameObject* target) {
 	Spell::execOnHit(target);
+	if (!m_mob) return;
 
 	// check if port of owner is possible
 	WorldCollisionQueryRecord rec;

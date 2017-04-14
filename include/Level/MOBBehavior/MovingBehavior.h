@@ -33,7 +33,7 @@ public:
 	// recovers from all fighting animations/fighting times/casting times and is ready again (cooldowns don't recover and climbing properties don't, too)
 	void setReady();
 	// set enabled/disabled
-	void setEnabled(bool enabled);
+	virtual void setEnabled(bool enabled);
 	// set collisions enabled/disabled
 	void setCollisionsEnabled(bool enabled);
 

@@ -149,6 +149,15 @@ void UserMovingBehavior::handleMovementInput() {
 	m_mainChar->setAcceleration(sf::Vector2f(newAccelerationX, m_isClimbing ? 0.f : (m_isFlippedGravity ? -m_gravity : m_gravity)));
 }
 
+void UserMovingBehavior::setEnabled(bool enabled) {
+	MovingBehavior::setEnabled(enabled);
+	if (!enabled) {
+		m_mainChar->loopCurrentAnimation(false);
+		m_mainChar->setAcceleration(sf::Vector2f(0.f, 0.f));
+		m_mainChar->setVelocity(sf::Vector2f(0.f, 0.f));
+	}
+}
+
 void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	// calculate new game state and set animation.
 

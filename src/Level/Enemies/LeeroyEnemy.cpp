@@ -20,11 +20,14 @@ void LeeroyEnemy::loadAttributes() {
 
 void LeeroyEnemy::loadSpells() {
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
+	chop.boundingBox = sf::FloatRect(0.f, 0.f, 60.f, 80.f);
 	chop.damage = 10;
-	chop.duration = sf::seconds(2.f);
 	chop.damagePerSecond = 2;
+	chop.cooldown = sf::seconds(2.f);
 	chop.cooldown = sf::milliseconds(2000);
-	chop.fightingTime = sf::milliseconds(4 * 70);
+	chop.fightingTime = sf::milliseconds(500);
+	chop.castingTime = sf::milliseconds(300);
+	chop.isBlocking = true;
 	
 	m_spellManager->addSpell(chop);
 	m_spellManager->setCurrentSpell(0); // chop
@@ -38,7 +41,10 @@ float LeeroyEnemy::getConfiguredDistanceToHPBar() const {
 
 void LeeroyEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	if (m_enemyAttackingBehavior->distToTarget() < 80.f) {
+		m_movingBehavior->setFacingRight(getCurrentTarget()->getCenter().x > getCenter().x);
+		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	}
 }
 
 void LeeroyEnemy::loadAnimation(int skinNr) {
@@ -77,17 +83,17 @@ void LeeroyEnemy::loadAnimation(int skinNr) {
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
 	fightingAnimation->addFrame(sf::IntRect(11 * size, 0, size, size));
-	fightingAnimation->addFrame(sf::IntRect(14 * size, 0, size, 2 * size));
 	fightingAnimation->addFrame(sf::IntRect(12 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect(15 * size, 0, 2 * size, size));
+	fightingAnimation->addFrame(sf::IntRect(13 * size, 0, size, size));
 	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(13 * size, 0, size, size));
+	deadAnimation->addFrame(sf::IntRect(14 * size, 0, size, size));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -103,10 +109,10 @@ MovingBehavior* LeeroyEnemy::createMovingBehavior(bool asAlly) {
 	behavior = new AllyWalkingBehavior(this);
 
 	behavior->setDistanceToAbyss(10.f);
-	behavior->setApproachingDistance(100.f);
+	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityX(400.f);
+	behavior->setMaxVelocityX(300.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -115,7 +121,7 @@ AttackingBehavior* LeeroyEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
 	behavior = new AllyBehavior(this);
-	behavior->setAggroRange(500.f);
+	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&LeeroyEnemy::handleAttackInput, this));
 	return behavior;
 }

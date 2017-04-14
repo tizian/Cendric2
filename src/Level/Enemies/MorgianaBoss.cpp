@@ -26,6 +26,7 @@ void MorgianaBoss::update(const sf::Time& frameTime) {
 	updateTime(m_blockingTime, frameTime);
 	if (m_blockingTime == sf::Time::Zero) {
 		m_isBlocking = false;
+		m_isInvincible = false;
 	}
 }
 
@@ -102,15 +103,11 @@ void MorgianaBoss::onHit(Spell* spell) {
 		return;
 	}
 
-	if (spell->isAttachedToMob()) {
-		// pha! You can't damage me
-		spell->setDisposed();
-		return;
+	if (!spell->isAttachedToMob()) {
+		// we'll send you right back!
+		spell->setOwner(this);
+		spell->reflect();
 	}
-
-	// we'll send you right back!
-	spell->setOwner(this);
-	spell->reflect();
 }
 
 void MorgianaBoss::setDead() {
@@ -159,7 +156,8 @@ void MorgianaBoss::notifyRoyDeath(const sf::Vector2f& newPos) {
 
 void MorgianaBoss::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
-	if (m_enemyAttackingBehavior->distToTarget() < 100.f) {
+	if (m_enemyAttackingBehavior->distToTarget() < 80.f) {
+		m_movingBehavior->setFacingRight(getCurrentTarget()->getCenter().x > getCenter().x);
 		m_spellManager->setCurrentSpell(0);
 		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 	}
@@ -170,7 +168,8 @@ void MorgianaBoss::handleAttackInput() {
 		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
 		if (spell == 1 && executed) {
 			m_isBlocking = true;
-			m_blockingTime = BLOCKING_TIME + sf::seconds(1.f);
+			m_isInvincible = true;
+			m_blockingTime = BLOCKING_TIME + sf::seconds(0.5f);
 		}
 	}
 }

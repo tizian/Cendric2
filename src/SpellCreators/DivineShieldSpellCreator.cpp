@@ -28,8 +28,6 @@ void DivineShieldSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	if (dynamic_cast<LevelMainCharacter*>(m_owner)) {
 		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, resistance);
 	}
-	
-	m_owner->addHeal(newSpell->getHeal(), false, newSpell->isCritical());
 }
 
 void DivineShieldSpellCreator::addStrengthModifier(int level) {

@@ -15,13 +15,38 @@ void AggressiveBehavior::updateAggro() {
 		m_enemy->setFleeing();
 		return;
 	}
-	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
+	if (m_currentTarget != nullptr && (m_currentTarget->isDead() || m_currentTarget->isDisposed() || distToTarget() > getAggroRange()) ) {
+ 		m_currentTarget = nullptr;
+	}
+	if (m_enemy->getEnemyState() == EnemyState::Idle) {
 		m_currentTarget = nullptr;
 	}
-	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
+	if (m_currentTarget) return;
 
+	// search for new target
+	LevelMovableGameObject* nearest = nullptr;
+	float nearestDistance = 10000.f;
 	if (AttackingBehavior::isInAggroRange(m_mainChar, m_enemy, m_aggroRange)) {
-		m_enemy->setChasing();
+		nearest = m_mainChar;
+		nearestDistance = dist(m_mainChar->getCenter(), m_enemy->getCenter());
+	}
+
+	// search for new target
+	for (auto& go : *m_enemies) {
+		if (!go->isViewable()) continue;
+		Enemy* enemy = dynamic_cast<Enemy*>(go);
+		if (enemy->isDead() || !enemy->isAlly()) continue;
+		float distance = dist(go->getCenter(), m_enemy->getCenter());
+		if (distance < nearestDistance) {
+			nearestDistance = distance;
+			nearest = enemy;
+		}
+	}
+	if (nearest == nullptr || nearestDistance > m_aggroRange) {
+		m_currentTarget = nullptr;
+		m_enemy->setWaiting();
 		return;
 	}
+	m_currentTarget = nearest;
+	m_enemy->setChasing();
 }

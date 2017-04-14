@@ -348,6 +348,7 @@ std::string LevelMainCharacter::getDeathSoundPath() const {
 
 void LevelMainCharacter::setInputLock() {
 	m_isInputLock = true;
+	m_movingBehavior->setEnabled(false);
 }
 
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {

@@ -196,7 +196,6 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	// the state must have been chasing a frame before. Wait now.
 	if (m_enemyState == EnemyState::Chasing) {
 		m_waitingTime = getConfiguredWaitingTime();
-		if (m_waitingTime == sf::Time::Zero) return;
 	}
 
 	// handle waiting

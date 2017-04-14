@@ -826,7 +826,7 @@
   </object>
  </objectgroup>
  <objectgroup name="collidable" visible="0"/>
- <objectgroup name="trigger" visible="0">
+ <objectgroup name="trigger">
   <object id="235" x="1350" y="80" width="50" height="30">
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,1715,3222"/>
@@ -848,12 +848,12 @@
   <object id="281" x="1350" y="470" width="50" height="30">
    <properties>
     <property name="condition" value="swampbridge_open"/>
-    <property name="level entry" value="res/level/swampbridge/swampbridge.tmx,160,1710"/>
+    <property name="level entry" value="res/level/swampbridge/swampbridge.tmx,160,1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup name="npc" visible="0">
   <object id="277" gid="2341" x="550" y="500" width="50" height="50">
    <properties>
     <property name="id" value="npc_morton"/>

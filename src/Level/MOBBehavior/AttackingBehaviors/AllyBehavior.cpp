@@ -36,10 +36,13 @@ void AllyBehavior::updateAggro() {
 		m_enemy->setFleeing();
 		return;
 	}
-	if (m_currentTarget == nullptr || m_currentTarget->isDead() || m_currentTarget->isDisposed()) {
+	if (m_currentTarget != nullptr && (m_currentTarget->isDead() || m_currentTarget->isDisposed() || distToTarget() > getAggroRange())) {
 		m_currentTarget = nullptr;
 	}
-	if (m_enemy->getEnemyState() != EnemyState::Idle) return;
+	if (m_enemy->getEnemyState() == EnemyState::Idle) {
+		m_currentTarget = nullptr;
+	}
+	if (m_currentTarget) return;
 
 	// search for new target
 	Enemy* nearest = nullptr;

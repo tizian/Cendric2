@@ -301,7 +301,7 @@ void Inventory::update(const sf::Time& frameTime) {
 		if (pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
 			pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		it.second.update(frameTime);
-		if (it.second.isMousedOver()) {
+		if (it.second.isMousedOver() && !m_hasDraggingStarted) {
 			selectSlot(it.second.getItemID(), ItemType::VOID);
 			if (it.second.isDoubleClicked()) {
 				handleLevelDoubleClick(&it.second);
@@ -346,9 +346,11 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	// update equipment part
 	m_equipment->update(frameTime);
-	InventorySlot* eqSlot = m_equipment->getSelectedSlot();
-	if (eqSlot != nullptr) {
-		selectSlot(eqSlot->getItemID(), eqSlot->getItemType());
+	if (!m_hasDraggingStarted) {
+		InventorySlot* eqSlot = m_equipment->getSelectedSlot();
+		if (eqSlot != nullptr) {
+			selectSlot(eqSlot->getItemID(), eqSlot->getItemType());
+		}
 	}
 
 	handleDragAndDrop();
@@ -361,9 +363,12 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		deselectCurrentSlot();
 		return;
 	}
-	m_hasDraggingStarted = true;
-	m_isEquipmentSlotDragged = type != ItemType::VOID;
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+
+	if (g_inputController->isMousePressedLeft()) {
+		m_hasDraggingStarted = true;
+		m_isEquipmentSlotDragged = type != ItemType::VOID;
+		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	}
 
 	if (selectedSlotId.compare(m_selectedSlotId.first) == 0) return;
 
