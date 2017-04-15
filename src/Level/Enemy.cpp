@@ -13,8 +13,6 @@
 #include "Level/DamageNumbers.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const float Enemy::HP_BAR_HEIGHT = 3.f;
 const float Enemy::PICKUP_RANGE = 100.f;
 
@@ -83,7 +81,7 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	LevelMovableGameObject::onHit(spell);
-	m_chasingTime = getConfiguredChasingTime();
+	setChasing();
 	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
@@ -244,17 +242,20 @@ const std::string& Enemy::getEnemyName() const {
 
 void Enemy::setWaiting() {
 	m_waitingTime = getConfiguredWaitingTime();
+	m_enemyState = EnemyState::Waiting;
 }
 
 void Enemy::setChasing() {
 	m_chasingTime = getConfiguredChasingTime();
+	m_enemyState = EnemyState::Chasing;
 }
 
 void Enemy::setFleeing() {
 	m_fearedTime = getConfiguredFearedTime();
+	m_enemyState = EnemyState::Fleeing;
 }
 
-void Enemy::setLoot(const std::map<string, int>& items, int gold) {
+void Enemy::setLoot(const std::map<std::string, int>& items, int gold) {
 	m_reward.lootableItems = items;
 	m_reward.lootableGold = gold;
 	delete m_lootWindow;
@@ -382,17 +383,18 @@ void Enemy::setDead() {
 		m_mainChar->getTargetManager().setTargetEnemy(nullptr);
 	}
 
+	if (m_scriptedBehavior != nullptr) {
+		m_scriptedBehavior->onDeath();
+	}
+
 	if (isAlly()) {
-		setDisposed();
+		m_isLooted = true;
+		m_interactComponent->setInteractable(false);
 		return;
 	}
 
 	if (m_isUnique && !m_isBoss) {
 		notifyKilled();
-	}
-
-	if (m_scriptedBehavior != nullptr) {
-		m_scriptedBehavior->onDeath();
 	}
 
 	if (m_isBoss) {

@@ -4,13 +4,14 @@ AllyWalkingBehavior::AllyWalkingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy),
 	WalkingBehavior(enemy) {
+	m_replaceDistance = 600.f;
 }
 
 void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WalkingBehavior::checkCollisions(nextPosition);
 	// if the enemy collidesX but can't jump and is ally and idle, teleports to its owner.
 	EnemyState state = m_enemy->getEnemyState();
-	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > 600.f) {
+	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > m_replaceDistance) {
 		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height);
 		WorldCollisionQueryRecord rec;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
@@ -21,6 +22,10 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_enemy->setPosition(newPos);
 		m_isCollisionTiltSuppressed = true;
 	}
+}
+
+void AllyWalkingBehavior::setReplaceDistance(float replaceDistance) {
+	m_replaceDistance = replaceDistance;
 }
 
 void AllyWalkingBehavior::execHandleMovementInput() {

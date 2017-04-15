@@ -23,8 +23,8 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	updateTime(m_stunnedTime, frameTime);
 	updateTime(m_fearedTime, frameTime);
 
-	if (m_movingBehavior) m_movingBehavior->update(frameTime);
 	if (m_attackingBehavior && !m_isDead) m_attackingBehavior->update(frameTime);
+	if (m_movingBehavior) m_movingBehavior->update(frameTime);
 
 	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);

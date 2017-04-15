@@ -18,10 +18,10 @@ void AggressiveBehavior::updateAggro() {
 	if (m_currentTarget != nullptr && (m_currentTarget->isDead() || m_currentTarget->isDisposed() || distToTarget() > getAggroRange()) ) {
  		m_currentTarget = nullptr;
 	}
-	if (m_enemy->getEnemyState() == EnemyState::Idle) {
+	if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 		m_currentTarget = nullptr;
 	}
-	if (m_currentTarget) return;
+	if (m_currentTarget || m_enemy->getEnemyState() != EnemyState::Idle) return;
 
 	// search for new target
 	LevelMovableGameObject* nearest = nullptr;

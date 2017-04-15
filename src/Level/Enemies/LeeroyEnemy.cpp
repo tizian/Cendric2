@@ -11,16 +11,16 @@ LeeroyEnemy::LeeroyEnemy(const Level* level, Screen* screen) :
 }
 
 void LeeroyEnemy::loadAttributes() {
-	m_attributes.setHealth(400);
+	m_attributes.setHealth(200);
 	m_attributes.resistanceIce = 30;
-	m_attributes.resistanceFire = 30;
+	m_attributes.resistanceFire = -50;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.calculateAttributes();
 }
 
 void LeeroyEnemy::loadSpells() {
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
-	chop.boundingBox = sf::FloatRect(0.f, 0.f, 60.f, 80.f);
+	chop.boundingBox = sf::FloatRect(0.f, 0.f, 120.f, 80.f);
 	chop.damage = 10;
 	chop.damagePerSecond = 2;
 	chop.cooldown = sf::seconds(2.f);
@@ -104,9 +104,7 @@ void LeeroyEnemy::loadAnimation(int skinNr) {
 }
 
 MovingBehavior* LeeroyEnemy::createMovingBehavior(bool asAlly) {
-	WalkingBehavior* behavior;
-
-	behavior = new AllyWalkingBehavior(this);
+	auto behavior = new AllyWalkingBehavior(this);
 
 	behavior->setDistanceToAbyss(10.f);
 	behavior->setApproachingDistance(50.f);
@@ -114,6 +112,7 @@ MovingBehavior* LeeroyEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(300.f);
 	behavior->calculateJumpHeight();
+	behavior->setReplaceDistance(10000.f);
 	return behavior;
 }
 
