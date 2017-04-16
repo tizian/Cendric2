@@ -3,8 +3,6 @@
 #include "GlobalResource.h"
 #include "Item.h"
 
-using namespace std;
-
 const size_t ResourceManager::SOUND_POOL_SIZE = 5;
 
 ResourceManager* g_resourceManager;
@@ -280,9 +278,12 @@ void ResourceManager::deleteResource(const std::string& filename) {
 
 void ResourceManager::playSound(const std::string& filename, bool loop, float scale) {
 	if (!m_configuration.isSoundOn || filename.empty()) return;
+	if (contains(m_frameSounds, filename)) return;
+	m_frameSounds.insert(filename);
 
 	sf::Sound& sound = m_soundPool[m_nextSoundIndex];
 	m_nextSoundIndex = (m_nextSoundIndex + 1) % SOUND_POOL_SIZE;
+
 
 	playSound(sound, filename, true, loop, scale);
 }
@@ -332,6 +333,7 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 	float newScale = m_music.fadingTime / m_music.FADING_TIME;
 	m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
 	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
+	m_frameSounds.clear();
 }
 
 void ResourceManager::notifyVolumeChanged() {
@@ -343,7 +345,7 @@ const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {
 	return &m_currentError;
 }
 
-void ResourceManager::setError(ErrorID id, const string& description) {
+void ResourceManager::setError(ErrorID id, const std::string& description) {
 	m_currentError.first = id;
 	m_currentError.second = description;
 }

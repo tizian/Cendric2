@@ -40,6 +40,8 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
+	void update(const sf::Time& frameTime);
+
 	// deletes unique resources for a specific owner
 	void deleteUniqueResources(void* owner);
 
@@ -104,6 +106,7 @@ private:
 
 	// a pool with sound buffers
 	std::vector<sf::Sound> m_soundPool;
+	std::set<std::string> m_frameSounds;
 	size_t m_nextSoundIndex;
 	static const size_t SOUND_POOL_SIZE;
 	// the current background music and its path

@@ -86,8 +86,8 @@ void Enemy::onHit(Spell* spell) {
 }
 
 void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	LevelMovableGameObject::renderAfterForeground(renderTarget);
 	m_buffBar->render(renderTarget);
+	LevelMovableGameObject::renderAfterForeground(renderTarget);
 	if (m_isHPBarVisible) {
 		renderTarget.draw(m_hpBar);
 	}

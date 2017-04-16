@@ -252,7 +252,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_LeeroyChicken2
 	translation.en:You know the innkeeper Helena in Gandria? Her special grilled chicken is second to none. Bring me one of those and I'll slay those DRAGONS for you.
 	translation.de:Kennst du die Wirtin Helena in Gandria? Ihr Brathühnchen Spezial ist unübertroffen. Bring mir so eins und ich töte diese DRACHEN für dich.
-	translation.ch:Kensch d'Wirtin Helena in Gandra? Ihres brötlet Spezial-Güggeli isch eifach unübertroffe. Bring mer das und ich kill die DRACHE für dich.
+	translation.ch:Kensch d'Wirtin Helena in Gandria? Ihres brötlet Spezial-Güggeli isch eifach unübertroffe. Bring mer das und ich kill die DRACHE für dich.
 	[
 		# Link node, tag is next tag
 		tag:-2
