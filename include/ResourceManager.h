@@ -40,8 +40,6 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	void update(const sf::Time& frameTime);
-
 	// deletes unique resources for a specific owner
 	void deleteUniqueResources(void* owner);
 
