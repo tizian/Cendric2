@@ -26,7 +26,8 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipment
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_jump; ++i) {
-		texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::JumpingUp].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::JumpingDown].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_fight; ++i) {

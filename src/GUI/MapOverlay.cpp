@@ -187,9 +187,9 @@ void MapOverlay::reloadWaypoints() {
 	}
 	m_waypoints.clear();
 
-	const LevelData* lData;
-	if (lData = dynamic_cast<const LevelData*>(m_screen->getWorldData())) {
-		if (lData->isBossLevel) return;
+	const LevelData* lData = dynamic_cast<const LevelData*>(m_screen->getWorldData());
+	if (lData && lData->isBossLevel) {
+		return;
 	}
 
 	auto* map = getCurrentMap();

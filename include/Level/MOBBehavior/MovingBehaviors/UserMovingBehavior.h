@@ -20,7 +20,6 @@ public:
 	void setEnabled(bool enabled) override;
 
 private:
-	float m_jumpVelocity = 0.f;
 	// makes it easier to jump
 	static const sf::Time JUMP_GRACE_TIME;
 	static const float MAX_JUMP_VELOCITY;

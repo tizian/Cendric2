@@ -196,7 +196,7 @@ bool CharacterCoreReader::readWeaponConfigurations(std::string& line, CharacterC
 		size_t endSpellData = line.find(';');
 
 		if (endSpellData == std::string::npos) return false;
-	
+
 		std::vector<SpellModifier> modifiers;
 
 		while (startSpellData != std::string::npos && startSpellData < endSpellData) {
@@ -499,7 +499,7 @@ bool CharacterCoreReader::readQuestProgressDescription(std::string& line, Charac
 
 		int desc = std::stoi(line);
 		if (desc < 1) {
-			g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + desc);
+			g_logger->logError("CharacterCoreReader", "Cannot insert quest description id:" + std::to_string(desc));
 			return false;
 		}
 
@@ -842,10 +842,10 @@ bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData
 	line = line.substr(pos + 1);
 
 	while (!line.empty()) {
-		tiles.push_back(std::stoi(line) == 1);
+		tiles.push_back(std::atoi(line.c_str()) == 1);
 		line.erase(0, 1);
 	}
 
 	data.tilesExplored.insert({ levelID, {mapSize, tiles} });
 	return true;
-	}
+}

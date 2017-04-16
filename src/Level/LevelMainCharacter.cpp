@@ -273,6 +273,8 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType, bool overT
 }
 
 void LevelMainCharacter::loadAnimation() {
+	int width = 80;
+	int height = 120;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
 	sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -280,44 +282,50 @@ void LevelMainCharacter::loadAnimation() {
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
+		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(640, 0, 80, 120));
+	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(720, 0, 80, 120));
+	Animation* jumpingUpAnimation = new Animation();
+	jumpingUpAnimation->setSpriteSheet(tex);
+	jumpingUpAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
 
-	addAnimation(GameObjectState::Jumping, jumpingAnimation);
+	addAnimation(GameObjectState::JumpingUp, jumpingUpAnimation);
+
+	Animation* jumpingDownAnimation = new Animation();
+	jumpingDownAnimation->setSpriteSheet(tex);
+	jumpingDownAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
+
+	addAnimation(GameObjectState::JumpingDown, jumpingDownAnimation);
 
 	Animation* climbing1Animation = new Animation();
 	climbing1Animation->setSpriteSheet(tex);
-	climbing1Animation->addFrame(sf::IntRect(14 * 80, 0, 80, 120));
+	climbing1Animation->addFrame(sf::IntRect(15 * width, 0, width, height));
 	climbing1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_1, climbing1Animation);
 
 	Animation* climbing2Animation = new Animation();
 	climbing2Animation->setSpriteSheet(tex);
-	climbing2Animation->addFrame(sf::IntRect(15 * 80, 0, 80, 120));
+	climbing2Animation->addFrame(sf::IntRect(16 * width, 0, width, height));
 	climbing2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_2, climbing2Animation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 10; i < 14; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 80, 0, 80, 120));
+	for (int i = 11; i < 15; ++i) {
+		fightingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 	// duplicate last frame because of level equipment
-	fightingAnimation->addFrame(sf::IntRect(1040, 0, 80, 120));
+	fightingAnimation->addFrame(sf::IntRect(14 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 

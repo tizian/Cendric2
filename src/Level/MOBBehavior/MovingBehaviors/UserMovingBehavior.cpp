@@ -11,7 +11,6 @@ const float UserMovingBehavior::MIN_JUMP_VELOCITY = 200.f;
 UserMovingBehavior::UserMovingBehavior(LevelMainCharacter* mainChar) : MovingBehavior(mainChar) {
 	// use this assignment because the "normal" assigner in moving behavior can't get this yet.
 	m_mainChar = mainChar;
-	m_jumpVelocity = MAX_JUMP_VELOCITY;
 }
 
 void UserMovingBehavior::update(const sf::Time& frameTime) {
@@ -146,7 +145,7 @@ void UserMovingBehavior::handleMovementInput() {
 		if (!m_isClimbing) {
 			if (g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
 				m_jumpGraceTime = sf::Time::Zero;
-				m_mainChar->setVelocityY(m_isFlippedGravity ? m_jumpVelocity : -m_jumpVelocity);
+				m_mainChar->setVelocityY(m_isFlippedGravity ? MAX_JUMP_VELOCITY : -MAX_JUMP_VELOCITY);
 			}
 			else if (((m_mainChar->getVelocity().y > MIN_JUMP_VELOCITY && m_isFlippedGravity) ||
 				(m_mainChar->getVelocity().y < -MIN_JUMP_VELOCITY && !m_isFlippedGravity)) && !g_inputController->isKeyActive(Key::Jump)) {
@@ -181,7 +180,8 @@ void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 		newState = m_fightAnimationState;
 	}
 	else if (!m_isGrounded) {
-		newState = GameObjectState::Jumping;
+		bool goingDown = m_mainChar->isUpsideDown() ? m_mainChar->getVelocity().y < 0.f : m_mainChar->getVelocity().y > 0.f;
+		newState = goingDown ? GameObjectState::JumpingDown : GameObjectState::JumpingUp;
 	}
 	else if (std::abs(m_mainChar->getVelocity().x) > 20.0f) {
 		newState = GameObjectState::Walking;
