@@ -16,7 +16,6 @@ public:
 	void handleMovementInput() override;
 	void handleDefaultAcceleration() override;
 	void updateAnimation(const sf::Time& frameTime) override;
-	void setJumpVelocity(float velocity);
 
 	void setEnabled(bool enabled) override;
 
@@ -24,6 +23,8 @@ private:
 	float m_jumpVelocity = 0.f;
 	// makes it easier to jump
 	static const sf::Time JUMP_GRACE_TIME;
+	static const float MAX_JUMP_VELOCITY;
+	static const float MIN_JUMP_VELOCITY;
 	sf::Time m_jumpGraceTime = sf::Time::Zero;
 	// the time the up or down key must be pressed such that the mainchar climbs one step
 	static const sf::Time CLIMB_STEP_TIME;

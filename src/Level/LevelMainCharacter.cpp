@@ -69,7 +69,6 @@ void LevelMainCharacter::onHit(Spell* spell) {
 
 MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	UserMovingBehavior* behavior = new UserMovingBehavior(this);
-	behavior->setJumpVelocity(600.f);
 	behavior->setMaxVelocityYUp(800.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(200.f);

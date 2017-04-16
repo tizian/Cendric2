@@ -5,10 +5,13 @@
 
 const sf::Time UserMovingBehavior::JUMP_GRACE_TIME = sf::milliseconds(100);
 const sf::Time UserMovingBehavior::CLIMB_STEP_TIME = sf::milliseconds(200);
+const float UserMovingBehavior::MAX_JUMP_VELOCITY = 600.f;
+const float UserMovingBehavior::MIN_JUMP_VELOCITY = 200.f;
 
 UserMovingBehavior::UserMovingBehavior(LevelMainCharacter* mainChar) : MovingBehavior(mainChar) {
 	// use this assignment because the "normal" assigner in moving behavior can't get this yet.
 	m_mainChar = mainChar;
+	m_jumpVelocity = MAX_JUMP_VELOCITY;
 }
 
 void UserMovingBehavior::update(const sf::Time& frameTime) {
@@ -140,9 +143,15 @@ void UserMovingBehavior::handleMovementInput() {
 			if (!m_isClimbing) m_nextIsFacingRight = true;
 			newAccelerationX += m_isClimbing ? m_walkAcceleration * 0.2f : m_walkAcceleration;
 		}
-		if (!m_isClimbing && g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
-			m_jumpGraceTime = sf::Time::Zero;
-			m_mainChar->setVelocityY(m_isFlippedGravity ? m_jumpVelocity : -m_jumpVelocity);
+		if (!m_isClimbing) {
+			if (g_inputController->isKeyJustPressed(Key::Jump) && (m_isGrounded || m_jumpGraceTime > sf::Time::Zero)) {
+				m_jumpGraceTime = sf::Time::Zero;
+				m_mainChar->setVelocityY(m_isFlippedGravity ? m_jumpVelocity : -m_jumpVelocity);
+			}
+			else if (((m_mainChar->getVelocity().y > MIN_JUMP_VELOCITY && m_isFlippedGravity) ||
+				(m_mainChar->getVelocity().y < -MIN_JUMP_VELOCITY && !m_isFlippedGravity)) && !g_inputController->isKeyActive(Key::Jump)) {
+				m_mainChar->setVelocityY(m_isFlippedGravity ? MIN_JUMP_VELOCITY : -MIN_JUMP_VELOCITY);
+			}
 		}
 	}
 
@@ -189,6 +198,3 @@ void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	}
 }
 
-void UserMovingBehavior::setJumpVelocity(float velocity) {
-	m_jumpVelocity = velocity;
-}
