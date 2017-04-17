@@ -10,7 +10,7 @@ Game::Game() {
 
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
 	m_cursor.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
-	
+
 	m_running = true;
 
 	m_screenManager = new ScreenManager(new SplashScreen());
@@ -108,8 +108,8 @@ void Game::run() {
 
 		// render
 		m_mainWindow.clear();
-		m_renderTexture.clear(),
-			m_screenManager->render(m_renderTexture);
+		m_renderTexture.clear();
+		m_screenManager->render(m_renderTexture);
 		if (g_resourceManager->getConfiguration().isDebugRendering) {
 			showFPSText(m_renderTexture, frameTime.asSeconds());
 		}

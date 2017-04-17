@@ -15,6 +15,7 @@ public:
 	// reads the whole character core when onlySaveGame is false and
 	// only reads the attributes relevant for a savegame (name, time played and date) if its true
 	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data, bool onlySaveGame = false);
+	
 
 private:
 	bool readTimePlayed(std::string& line, CharacterCoreData& data) const;
@@ -74,6 +75,7 @@ private:
 
 private:
 	typedef bool (CharacterCoreReader::*ReadFunction)(std::string&, CharacterCoreData&) const;
+	static std::istream& safeGetline(std::istream& is, std::string& t);
 
 	std::map<std::string, ReadFunction> m_readMap;
 	void initReadMap();

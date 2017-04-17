@@ -71,7 +71,7 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	std::string tag;
 	bool noError = true;
 
-	while (std::getline(saveFile, line)) {
+	while (!safeGetline(saveFile, line).eof()) {
 		if (line.empty() || line.at(0) == COMMENT_MARKER) continue;
 
 		colonPos = line.find(':');
@@ -110,6 +110,32 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	}
 
 	return true;
+}
+
+std::istream& CharacterCoreReader::safeGetline(std::istream& is, std::string& t) {
+	t.clear();
+
+	std::istream::sentry se(is, true);
+	std::streambuf* sb = is.rdbuf();
+
+	for (;;) {
+		int c = sb->sbumpc();
+		switch (c) {
+		case '\n':
+			return is;
+		case '\r':
+			if (sb->sgetc() == '\n')
+				sb->sbumpc();
+			return is;
+		case EOF:
+			// Also handle the case when the last line has no line ending
+			if (t.empty())
+				is.setstate(std::ios::eofbit);
+			return is;
+		default:
+			t += (char)c;
+		}
+	}
 }
 
 bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
