@@ -70,6 +70,7 @@ private:
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);
 	void equipSpell(SpellSlot* selectedSlot);
+	void deselectCurrentSlot();
 	std::map<SpellType, std::vector<std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>>*> m_typeMap;
 
 	// used for drag & drop handling

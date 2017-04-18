@@ -133,22 +133,25 @@ void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 
 void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
-	if (selectedSlot->isEmpty()) {
-		deselectCurrentSlot();
-		return;
+
+	if (g_inputController->isMousePressedLeft()) {
+		m_hasDraggingStarted = true;
+		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	}
 
-	m_hasDraggingStarted = true;
-
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	if (selectedSlot == m_weaponWindow->m_selectedSpellSlot) return;
-	if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
-		m_weaponWindow->m_selectedSpellSlot->deselect();
-	}
+	deselectCurrentSlot();
+
 	m_weaponWindow->m_selectedSpellSlot = selectedSlot;
 	m_weaponWindow->m_selectedSpellSlot->select();
 
 	m_weaponWindow->reloadSpellDesc();
+}
+
+void Spellbook::deselectCurrentSlot() {
+	if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
+		m_weaponWindow->m_selectedSpellSlot->deselect();
+	}
 }
 
 void Spellbook::equipSpell(SpellSlot* selectedSlot) {

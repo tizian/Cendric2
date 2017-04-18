@@ -137,19 +137,20 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 
 	for (auto& it : m_weaponSlots) {
 		it.first.update(frameTime);
-		if (it.first.isClicked()) {
+		if (it.first.isMousedOver()) {
 			selectSpellSlot(&it.first);
 			if (m_isModifiable && it.first.isDoubleClicked()) {
 				m_core->removeSpell(it.first.getNr());
 				m_requireReload = true;
+				return;
 			}
-			return;
+			if (m_isModifiable && it.first.isRightClicked()) {
+				m_core->removeSpell(it.first.getNr());
+				m_requireReload = true;
+				return;
+			}
 		}
-		else if (m_isModifiable && it.first.isRightClicked()) {
-			m_core->removeSpell(it.first.getNr());
-			m_requireReload = true;
-			return;
-		}
+		
 		for (auto& it2 : it.second) {
 			it2.update(frameTime);
 			if (it2.isClicked()) {
@@ -194,6 +195,7 @@ void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {
 
 void WeaponWindow::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
+	if (selectedSlot->isEmpty()) return;
 	m_hasDraggingStarted = true;
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
