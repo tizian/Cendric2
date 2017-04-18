@@ -180,8 +180,7 @@ void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 		newState = m_fightAnimationState;
 	}
 	else if (!m_isGrounded) {
-		bool goingDown = m_mainChar->isUpsideDown() ? m_mainChar->getVelocity().y < 0.f : m_mainChar->getVelocity().y > 0.f;
-		newState = goingDown ? GameObjectState::JumpingDown : GameObjectState::JumpingUp;
+		newState = GameObjectState::Jumping;
 	}
 	else if (std::abs(m_mainChar->getVelocity().x) > 20.0f) {
 		newState = GameObjectState::Walking;

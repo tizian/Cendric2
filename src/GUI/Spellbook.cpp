@@ -99,7 +99,7 @@ void Spellbook::update(const sf::Time& frameTime) {
 			// handle spells
 			for (auto& it : *(m_typeMap[m_currentTab])) {
 				it.first.update(frameTime);
-				if (it.first.isClicked()) {
+				if (it.first.isMousedOver() && !m_hasDraggingStarted) {
 					selectSpellSlot(&it.first);
 					if (it.first.isDoubleClicked() && m_isModifiable) {
 						equipSpell(&it.first);
@@ -133,6 +133,11 @@ void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 
 void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
+	if (selectedSlot->isEmpty()) {
+		deselectCurrentSlot();
+		return;
+	}
+
 	m_hasDraggingStarted = true;
 
 	m_startMousePosition = g_inputController->getDefaultViewMousePosition();

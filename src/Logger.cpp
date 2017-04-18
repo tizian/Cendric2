@@ -1,7 +1,5 @@
 #include "Logger.h"
 
-using namespace std;
-
 Logger* g_logger;
 
 Logger::Logger() {
@@ -10,8 +8,8 @@ Logger::Logger() {
 
 void Logger::log(LogLevel level, const std::string& source, const std::string& message) const {
 	if (level <= m_logLevel && level != LogLevel::None) {
-		string levelString;
-		string color;
+		std::string levelString;
+		std::string color;
 		switch (level) {
 		case LogLevel::Debug:
 			levelString = "[DEBUG]";
@@ -37,7 +35,7 @@ void Logger::log(LogLevel level, const std::string& source, const std::string& m
 			return;
 		}
 
-		cout << color << levelString << "-[" << source << "]: " << message << DEFAULT << endl;
+		std::cout << color << levelString << "-[" << source << "]: " << message << DEFAULT << std::endl;
 	}
 }
 

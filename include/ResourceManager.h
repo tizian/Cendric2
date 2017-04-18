@@ -35,7 +35,7 @@ struct BackgroundMusic {
 	const sf::Time FADING_TIME = sf::seconds(1.5f);
 };
 
-class ResourceManager {
+class ResourceManager final {
 public:
 	ResourceManager();
 	~ResourceManager();

@@ -293,35 +293,29 @@ void LevelMainCharacter::loadAnimation() {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	Animation* jumpingUpAnimation = new Animation();
-	jumpingUpAnimation->setSpriteSheet(tex);
-	jumpingUpAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	Animation* jumpingAnimation = new Animation();
+	jumpingAnimation->setSpriteSheet(tex);
+	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
 
-	addAnimation(GameObjectState::JumpingUp, jumpingUpAnimation);
-
-	Animation* jumpingDownAnimation = new Animation();
-	jumpingDownAnimation->setSpriteSheet(tex);
-	jumpingDownAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
-
-	addAnimation(GameObjectState::JumpingDown, jumpingDownAnimation);
+	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* climbing1Animation = new Animation();
 	climbing1Animation->setSpriteSheet(tex);
-	climbing1Animation->addFrame(sf::IntRect(15 * width, 0, width, height));
+	climbing1Animation->addFrame(sf::IntRect(14 * width, 0, width, height));
 	climbing1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_1, climbing1Animation);
 
 	Animation* climbing2Animation = new Animation();
 	climbing2Animation->setSpriteSheet(tex);
-	climbing2Animation->addFrame(sf::IntRect(16 * width, 0, width, height));
+	climbing2Animation->addFrame(sf::IntRect(15 * width, 0, width, height));
 	climbing2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_2, climbing2Animation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 11; i < 15; ++i) {
+	for (int i = 10; i < 14; ++i) {
 		fightingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 	// duplicate last frame because of level equipment

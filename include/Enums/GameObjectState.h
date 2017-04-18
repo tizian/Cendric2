@@ -16,9 +16,7 @@ enum class GameObjectState {
 	Climbing_1, // used by level main character and equipment
 	Climbing_2, // used by level main character and equipment
 	Flying, // used by flying mobs
-	Jumping, // used by mobs
-	JumpingUp, // used by mainchar and his weapons
-	JumpingDown, // used by mainchar and his weapons
+	Jumping, // used by mobs and its weapons
 	Casting, // used by mobs and its weapons
 	Casting2, // used by mobs and its weapons
 	Casting3, // used by mobs and its weapons
