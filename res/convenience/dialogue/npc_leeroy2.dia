@@ -1,0 +1,89 @@
+# dia file for dialogue for npc: npc_leeroy2
+
+npc.id:npc_leeroy2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:DL:isQuestState("save_leeroy", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Leeroy_Thanks
+	translation.en:Thank you.
+	translation.de:Danke.
+	translation.ch:Danke.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:changeQuestState("save_leeroy", "completed")
+	# translation: 
+	translation.tag:DL_Leeroy_DidIt
+	translation.en:I did it! See, I was not wrong about those DRAGONS after all.
+	translation.de:Ich habe es geschafft! Mit diesen DRACHEN hatte ich also doch Recht.
+	translation.ch:Ich has gschafft! Ha, gsesch! Ha doch Recht gha mit dene DRACHE.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Leeroy_DidIt2
+	translation.en:But what if they come back and you need to fight them all alone?
+	translation.de:Aber was, wenn sie zurückkommen und du musst ganz alleine gegen sie kämpfen?
+	translation.ch:Aber was isch wenn si zrugg chömed und du muesch ganz elei gege si kämpfe?
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addItem("we_leeroysword", 1)
+	# translation: 
+	translation.tag:DL_Leeroy_DidIt3
+	translation.en:Here, you'd better take my sword. I don't need it anymore.
+	translation.de:Hier, nimm besser mein Schwert. Ich brauche es nicht mehr.
+	translation.ch:Do, nimm besser mis Schwert. Ich bruchs nümme.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Leeroy_DidIt4
+	translation.en:And now, I'm off to a new adventure! See ya.
+	translation.de:Und jetzt geht's auf zu neuen Abenteuern! Bis bald.
+	translation.ch:Und jetz gangi go neui Abentüür erlebe! Bis irgendwenn.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

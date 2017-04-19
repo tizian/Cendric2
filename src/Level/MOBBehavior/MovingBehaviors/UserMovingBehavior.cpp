@@ -20,6 +20,9 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 	if (wasGrounded && !m_isGrounded) {
 		m_jumpGraceTime = JUMP_GRACE_TIME;
 	}
+	if (m_isJumpLocked && m_isGrounded) {
+		m_isJumpLocked = false;
+	}
 	handleClimbing(frameTime);
 }
 
@@ -147,7 +150,7 @@ void UserMovingBehavior::handleMovementInput() {
 				m_jumpGraceTime = sf::Time::Zero;
 				m_mainChar->setVelocityY(m_isFlippedGravity ? MAX_JUMP_VELOCITY : -MAX_JUMP_VELOCITY);
 			}
-			else if (((m_mainChar->getVelocity().y > MIN_JUMP_VELOCITY && m_isFlippedGravity) ||
+			else if (!m_isJumpLocked && ((m_mainChar->getVelocity().y > MIN_JUMP_VELOCITY && m_isFlippedGravity) ||
 				(m_mainChar->getVelocity().y < -MIN_JUMP_VELOCITY && !m_isFlippedGravity)) && !g_inputController->isKeyActive(Key::Jump)) {
 				m_mainChar->setVelocityY(m_isFlippedGravity ? MIN_JUMP_VELOCITY : -MIN_JUMP_VELOCITY);
 			}
@@ -164,6 +167,10 @@ void UserMovingBehavior::setEnabled(bool enabled) {
 		m_mainChar->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mainChar->setVelocity(sf::Vector2f(0.f, 0.f));
 	}
+}
+
+void UserMovingBehavior::setJumpLock() {
+	m_isJumpLocked = true;
 }
 
 void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {

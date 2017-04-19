@@ -26,3 +26,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Je
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JeremyMorgianaDead', 'speech','I always wanted your amulet.','Dein Amulett wollte ich schon immer.', 'Dis Amulett hani scho immer wele.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Leeroy', 'speech','LEEEEEEEEROY!','LEEEEEEEEROY!', 'LEEEEEEEEROY!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Chicken', 'speech','At least I got chicken...','Wenigstens hab ich ein Hühnchen gehabt...', 'Wenigstens hani es Güggeli gha...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LeeroyDidIt', 'speech','We did it! Unbelievable!','Wir haben es geschafft! Unglaublich!', 'Mir hends gschafft! Unglaublich!');

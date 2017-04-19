@@ -116,6 +116,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 			m_mainChar->setVelocityY(-800.f);
 			m_mainChar->setAccelerationY(0.f);
 			m_mainChar->setPositionY(nextBB.top);
+			m_mainChar->setJumpLock();
 			setState(GameObjectState::Jumping);
 			m_jumpingTime = getAnimation(GameObjectState::Jumping)->getAnimationTime();
 		}

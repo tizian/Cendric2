@@ -352,6 +352,10 @@ void LevelMainCharacter::setInputLock() {
 	m_movingBehavior->setEnabled(false);
 }
 
+void LevelMainCharacter::setJumpLock() {
+	dynamic_cast<UserMovingBehavior*>(m_movingBehavior)->setJumpLock();
+}
+
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange(item, quantity);

@@ -325,6 +325,7 @@ void ResourceManager::playMusic(const std::string& filename, bool looping) {
 }
 
 void ResourceManager::updateMusic(const sf::Time& frameTime) {
+	m_frameSounds.clear();
 	updateTime(m_music.fadingTime, frameTime);
 	if (!m_configuration.isSoundOn || !m_music.isFading) return;
 	if (m_music.fadingTime == sf::Time::Zero) {
@@ -333,7 +334,6 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 	float newScale = m_music.fadingTime / m_music.FADING_TIME;
 	m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
 	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
-	m_frameSounds.clear();
 }
 
 void ResourceManager::notifyVolumeChanged() {

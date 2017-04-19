@@ -50,6 +50,7 @@ public:
 	void removeGold(int gold) const;
 	void removeItems(const std::string& item, int quantity) const;
 	void setInputLock();
+	void setJumpLock();
 
 	bool isAlly() const override;
 	bool isReady() const override;

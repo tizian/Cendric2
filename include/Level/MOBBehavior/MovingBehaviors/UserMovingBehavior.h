@@ -18,6 +18,7 @@ public:
 	void updateAnimation(const sf::Time& frameTime) override;
 
 	void setEnabled(bool enabled) override;
+	void setJumpLock();
 
 private:
 	// makes it easier to jump
@@ -35,4 +36,6 @@ private:
 	void checkLadders();
 	void stopClimbing();
 	void startClimbing(GameObject* ladder, float yPos);
+
+	bool m_isJumpLocked = false;
 };

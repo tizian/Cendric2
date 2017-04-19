@@ -11,9 +11,9 @@ LeeroyEnemy::LeeroyEnemy(const Level* level, Screen* screen) :
 }
 
 void LeeroyEnemy::loadAttributes() {
-	m_attributes.setHealth(200);
+	m_attributes.setHealth(300);
 	m_attributes.resistanceIce = 30;
-	m_attributes.resistanceFire = -50;
+	m_attributes.resistanceFire = -10;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.calculateAttributes();
 }

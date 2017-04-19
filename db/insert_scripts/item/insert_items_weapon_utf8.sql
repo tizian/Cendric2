@@ -196,18 +196,29 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_zeffssword', 'item', 'Zeff''s Skinning Knife','Zeffs Kürschnermesser','Zeffs Kürschnermesser');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_zeffssword', 'item_desc', 'This oversized knife belonged to the leatherworker Zeff.','Dieses übergrosse Messer gehörte dem Lederer Zeff.','Da übergrosse Messer het em Lederer Zeff ghört.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_zeffssword', 'eq_weapon', 350, 350, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_zeffssword', 'eq_weapon', 350, 350, 40);
 INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_zeffssword', 7, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_zeffssword', 'res/assets/equipment/weapon/spritesheet_weapon_zeffssword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_zeffssword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_zeffssword', 1000, 10, 50, 80, 15);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_zeffssword', 1, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_zeffssword', 2, 'meta', 1);
 
+-- Leeroy's Sword
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item', 'Leeroy''s Sword','Leeroy''s Schwert','Leeroy''s Schwertli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item_desc', 'The sword of a legend... or merely a fool?','Das Schwert einer Legende... oder bloss eines Narren?','Es Schwert vonere Legende... oder eifach vomne Tubel?');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_leeroysword', 'eq_weapon', 650, 600, 50);
+INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_leeroysword', 10, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_leeroysword', 'res/assets/equipment/weapon/spritesheet_weapon_leeroysword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_leeroysword.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_leeroysword', 1000, 10, 50, 80, 15);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_leeroysword', 1, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_leeroysword', 2, 'meta', 2);
+
 -- Mace of the Order
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item', 'Mace of the Order','Streitkolben des Ordens','Striitcholbe vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item_desc', 'This weapon is mostly used by paladins of the Order.','Diese Waffe wird meistens von den Paladinen des Ordens getragen.', 'Die Waffe wird meistens vo de Paladin vom Orde treit.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_ordermace', 'eq_weapon', 400, 350, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_ordermace', 'eq_weapon', 400, 350, 30);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, critical) values ('we_ordermace', 2, 3, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_ordermace', 'res/assets/equipment/weapon/spritesheet_weapon_ordermace.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_ordermace.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_ordermace', 1000, 10, 35, 70, 8);
