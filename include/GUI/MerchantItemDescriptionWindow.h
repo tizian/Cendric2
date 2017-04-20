@@ -6,7 +6,7 @@
 #include "GUI/ItemDescriptionWindow.h"
 #include "Structs/MerchantData.h"
 
-class MerchantItemDescriptionWindow : public ItemDescriptionWindow {
+class MerchantItemDescriptionWindow final : public ItemDescriptionWindow {
 public:
 	MerchantItemDescriptionWindow(const MerchantData& data);
 	void setReputation(int reputation, bool isReached);

@@ -9,7 +9,6 @@ const float UserMovingBehavior::MAX_JUMP_VELOCITY = 600.f;
 const float UserMovingBehavior::MIN_JUMP_VELOCITY = 200.f;
 
 UserMovingBehavior::UserMovingBehavior(LevelMainCharacter* mainChar) : MovingBehavior(mainChar) {
-	// use this assignment because the "normal" assigner in moving behavior can't get this yet.
 	m_mainChar = mainChar;
 }
 

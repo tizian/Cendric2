@@ -24,9 +24,9 @@ public:
 	CharacterCore* createFromThis();
 
 	// returns the currently equipped item of type 'type'
-	const std::string& getEquippedItem(ItemType type);
+	const std::string& getEquippedItem(ItemType type) const;
 	// getter for currently equipped weapon. 
-	const Weapon* getWeapon();
+	const Weapon* getWeapon() const;
 
 	QuestState getQuestState(const std::string& id) const;
 	// sets the quest state of a certain quest. Returns whether the operation was successful.

@@ -82,11 +82,11 @@ void CharacterCore::loadNew() {
 	reloadAttributes();
 }
 
-const std::string& CharacterCore::getEquippedItem(ItemType type) {
+const std::string& CharacterCore::getEquippedItem(ItemType type) const {
 	return m_data.equippedItems.at(type);
 }
 
-const Weapon* CharacterCore::getWeapon() {
+const Weapon* CharacterCore::getWeapon() const {
 	return m_weapon;
 }
 

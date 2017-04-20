@@ -8,13 +8,16 @@
 #include "Weapon.h"
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/BitmapTextHolder.h"
 
-class ItemDescriptionWindow : public Window {
+class CharacterCore;
+
+class ItemDescriptionWindow : virtual public Window {
 public:
 	ItemDescriptionWindow();
 	virtual ~ItemDescriptionWindow();
 
-	void load(const Item& item);
+	void load(const Item& item, const CharacterCore* core);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
@@ -27,18 +30,27 @@ public:
 	static const float ICON_OFFSET;
 
 protected:
+	void clearTexts();
 	virtual std::string getGoldText(const Item& item) const;
 	virtual std::string getReputationText(const Item& item) const;
 	virtual std::string getInteractionText(const Item& item) const;
+
 	bool m_isReputationReached = false;
 
 private:
-	BitmapText m_titleText;
-	BitmapText m_descriptionText;
-	BitmapText m_whiteText;
-	BitmapText m_coloredText;
-	BitmapText m_reputationText;
-	BitmapText m_interactionText;
+	void addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines = 0);
+	void addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines, int characterSize);
+	void addIntComparision(int this_, int other);
+	
+	void loadAttributes(const Item& item, const CharacterCore* core, sf::Vector2f& offset);
+	void loadDefaultAttributes(const Item& item, sf::Vector2f& offset);
+	void loadWeaponAttributes(const Weapon& item, sf::Vector2f& offset);
+
+	void compareAttributes(const Item& item, const Item& comp, sf::Vector2f& offset);
+	void compareWeaponAttributes(const Weapon& item, const Weapon& comp, sf::Vector2f& offset);
+
+private:
+	std::vector<BitmapTextHolder*> m_texts;
 
 	bool m_isVisible = false;
 };

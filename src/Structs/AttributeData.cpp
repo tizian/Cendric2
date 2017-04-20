@@ -1,8 +1,8 @@
 #include "Structs/AttributeData.h"
 #include "TextProvider.h"
 
-inline std::string getAttributeText(const std::string& name, int value) {
-	if (value == 0) return "";
+std::string AttributeData::getAttributeText(const std::string& name, int value, bool forced) {
+	if (value == 0 && !forced) return "";
 	std::string s;
 	if (value > 0) {
 		// these are boni on stats and should be signed
@@ -15,7 +15,7 @@ inline std::string getAttributeText(const std::string& name, int value) {
 	return s;
 }
 
-inline std::string getItemDescriptionAttributeText(const std::string& name, int value, int& number) {
+std::string AttributeData::getItemDescriptionAttributeText(const std::string& name, int value, int& number) {
 	if (value == 0) return "";
 	number++;
 

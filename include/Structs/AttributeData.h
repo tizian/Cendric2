@@ -127,6 +127,8 @@ struct AttributeData {
 	}
 
 	// appends the attributes to the string, seperated with \n and prefixed with + or -
+	static std::string getAttributeText(const std::string& name, int value, bool forced = false);
+	static std::string getItemDescriptionAttributeText(const std::string& name, int value, int& number);
 	static void appendAttributes(std::string& string, const AttributeData& attr);
 	static void appendItemDescriptionAttributes(std::string& string, const AttributeData& attr, int& number);
 };

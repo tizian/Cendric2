@@ -1,6 +1,11 @@
 #include "GUI/MerchantItemDescriptionWindow.h"
 
-MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData& data) {
+MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData& data)
+: ItemDescriptionWindow(), Window(
+	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
+	GUIOrnamentStyle::LARGE,
+	GUIConstants::MAIN_COLOR,
+	GUIConstants::ORNAMENT_COLOR) {
 	m_goldMultiplier = data.multiplier;
 	m_fraction = data.fraction;
 	m_reputation = 0;

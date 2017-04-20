@@ -2,8 +2,7 @@
 #include <sstream>
 
 #include "GUI/ItemDescriptionWindow.h"
-
-using namespace std;
+#include "CharacterCore.h"
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 const float ItemDescriptionWindow::ICON_OFFSET = 24 * 8.f;
@@ -18,31 +17,29 @@ inline std::string toStrMaxDecimals(float value, int decimals) {
 	return std::string(s.begin(), s.end());
 }
 
+void ItemDescriptionWindow::clearTexts() {
+	for (auto t : m_texts) {
+		delete t;
+	}
+	m_texts.clear();
+}
+
 ItemDescriptionWindow::ItemDescriptionWindow() : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
-	m_titleText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_titleText.setColor(COLOR_WHITE);
-
-	m_descriptionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_descriptionText.setColor(COLOR_LIGHT_GREY);
-
-	m_whiteText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	
-	m_interactionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
-	m_interactionText.setColor(COLOR_NEUTRAL);
 }
 
-ItemDescriptionWindow::~ItemDescriptionWindow() {}
+ItemDescriptionWindow::~ItemDescriptionWindow() {
+	clearTexts();
+}
 
 std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
 	std::string text;
 	text.append(g_textProvider->getText("GoldValue"));
 	text.append(": ");
-	text.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : to_string(item.getValue()));
+	text.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : std::to_string(item.getValue()));
 	return text;
 }
 
@@ -66,6 +63,178 @@ std::string ItemDescriptionWindow::getInteractionText(const Item& item) const {
 	return interactionText;
 }
 
+void ItemDescriptionWindow::addIntComparision(int this_, int other) {
+	if (this_ == other) return;
+	int diff = this_ - other;
+	std::string text = " (" + ((diff > 0) ? std::string("+") : std::string("")) + std::to_string(diff) + ")";
+	sf::Vector2f offset = m_texts.at(m_texts.size() - 1)->getPositionOffset();
+	offset.x += m_texts.at(m_texts.size() - 1)->getSize().x;
+	
+	auto btext = new BitmapTextHolder(text, diff > 0 ? COLOR_GOOD : COLOR_BAD, offset);
+	m_texts.push_back(btext);
+}
+
+void ItemDescriptionWindow::addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines) {
+	if (text.empty()) return;
+	auto btext = new BitmapTextHolder(text, COLOR_WHITE, offset);
+	m_texts.push_back(btext);
+	offset.y += btext->getSize().y;
+	offset.y += lines * GUIConstants::CHARACTER_SIZE_S;
+}
+
+void ItemDescriptionWindow::addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines, int characterSize) {
+	if (text.empty()) return;
+	auto btext = new BitmapTextHolder(text, COLOR_WHITE, offset);
+	btext->setCharacterSize(characterSize);
+	offset.y += btext->getSize().y;
+	offset.y += lines * GUIConstants::CHARACTER_SIZE_S;
+}
+
+void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore* core, sf::Vector2f& offset) {
+	// check item type and maybe redirect
+	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
+		auto const weapon = core->getWeapon();
+		if (weapon && weapon->getID().compare(item.getID()) != 0) {
+			compareWeaponAttributes(Weapon(item.getID()), *weapon, offset);
+		}
+		else {
+			loadWeaponAttributes(Weapon(item.getID()), offset);
+		}
+		return;
+	}
+
+	if (item.getType() == ItemType::Equipment_ring_1 || item.getType() == ItemType::Equipment_ring_2) {
+		// TODO
+		return;
+	}
+	else if (item.isEquipmentItem()) {
+		auto const eqId = core->getEquippedItem(item.getType());
+		if (!eqId.empty() && eqId.compare(item.getID()) != 0) {
+			compareAttributes(item, *g_resourceManager->getItem(eqId), offset);
+			return;
+		}
+	}
+
+	loadDefaultAttributes(item, offset);
+}
+
+void ItemDescriptionWindow::loadWeaponAttributes(const Weapon& item, sf::Vector2f& offset) {
+	addText(g_textProvider->getText("WeaponDamage") + ": " + std::to_string(item.getWeaponChopDamage()),
+		COLOR_WHITE, offset);
+
+	addText(g_textProvider->getText("Cooldown") + ": " + toStrMaxDecimals(item.getWeaponCooldown().asSeconds(), 1) + "s",
+		COLOR_WHITE, offset, 1);
+
+	loadDefaultAttributes(item, offset);
+
+	if (item.getWeaponSlots().size() > 0) {
+		offset.y += GUIConstants::CHARACTER_SIZE_S;
+
+		addText("<<< " + g_textProvider->getText("SpellSlots") + " >>>",
+			COLOR_WHITE, offset, 1);
+
+		for (auto& it : item.getWeaponSlots()) {
+			std::string str;
+			str.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
+			str.append(": ");
+			size_t numberSlots = it.spellModifiers.size();
+			str.append(std::to_string(numberSlots));
+			str.append(" ");
+			if (numberSlots > 1) {
+				str.append(g_textProvider->getText("GemSockets"));
+			}
+			else {
+				str.append(g_textProvider->getText("GemSocket"));
+			}
+			
+			addText(str, COLOR_WHITE, offset);
+		}
+	}
+}
+
+void ItemDescriptionWindow::loadDefaultAttributes(const Item& item, sf::Vector2f& offset) {
+	auto const attributeColor = item.getType() == ItemType::Permanent ? COLOR_GOOD : COLOR_LIGHT_PURPLE;
+
+	if (item.getFoodDuration() > sf::Time::Zero) {
+		addText(g_textProvider->getText("Duration") + ": " + std::to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))) + "s",
+			COLOR_WHITE, offset, 1);
+	}
+
+	const AttributeData& attr = item.getAttributes();
+
+	addText(AttributeData::getAttributeText("Health", attr.maxHealthPoints), attributeColor, offset);
+	addText(AttributeData::getAttributeText("Haste", attr.haste), attributeColor, offset);
+	addText(AttributeData::getAttributeText("Critical", attr.critical), attributeColor, offset);
+	addText(AttributeData::getAttributeText("Heal", attr.heal), attributeColor, offset);
+	addText(AttributeData::getAttributeText("PhysicalDamage", attr.damagePhysical), attributeColor, offset);
+	addText(AttributeData::getAttributeText("FireDamage", attr.damageFire), attributeColor, offset);
+	addText(AttributeData::getAttributeText("IceDamage", attr.damageIce), attributeColor, offset);
+	addText(AttributeData::getAttributeText("LightDamage", attr.damageLight), attributeColor, offset);
+	addText(AttributeData::getAttributeText("ShadowDamage", attr.damageShadow), attributeColor, offset);
+	addText(AttributeData::getAttributeText("Armor", attr.resistancePhysical), attributeColor, offset);
+	addText(AttributeData::getAttributeText("FireResistance", attr.resistanceFire), attributeColor, offset);
+	addText(AttributeData::getAttributeText("IceResistance", attr.resistanceIce), attributeColor, offset);
+	addText(AttributeData::getAttributeText("LightResistance", attr.resistanceLight), attributeColor, offset);
+	addText(AttributeData::getAttributeText("ShadowResistance", attr.resistanceShadow), attributeColor, offset);
+
+	offset.y += GUIConstants::CHARACTER_SIZE_S;
+}
+
+void ItemDescriptionWindow::compareAttributes(const Item& item, const Item& comp, sf::Vector2f& offset) {
+	const AttributeData& attr = item.getAttributes();
+	const AttributeData& attr2 = comp.getAttributes();
+
+	addText(AttributeData::getAttributeText("Health", attr.maxHealthPoints, attr2.maxHealthPoints != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.maxHealthPoints, attr2.maxHealthPoints);
+
+	addText(AttributeData::getAttributeText("Haste", attr.haste, attr2.haste != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.haste, attr2.haste);
+
+	addText(AttributeData::getAttributeText("Critical", attr.critical, attr2.critical != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.critical, attr2.critical);
+
+	addText(AttributeData::getAttributeText("Heal", attr.heal, attr2.heal != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("PhysicalDamage", attr.damagePhysical, attr2.damagePhysical != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("FireDamage", attr.damageFire, attr2.damageFire != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("IceDamage", attr.damageIce, attr2.damageIce != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("LightDamage", attr.damageLight, attr2.damageLight != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("ShadowDamage", attr.damageShadow, attr2.damageShadow != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("Armor", attr.resistancePhysical, attr2.resistancePhysical != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("FireResistance", attr.resistanceFire, attr2.resistanceFire != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("IceResistance", attr.resistanceIce, attr2.resistanceIce != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("LightResistance", attr.resistanceLight, attr2.resistanceLight != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	addText(AttributeData::getAttributeText("ShadowResistance", attr.resistanceShadow, attr2.resistanceShadow != 0), COLOR_WHITE, offset);
+	addIntComparision(attr.heal, attr2.heal);
+
+	offset.y += GUIConstants::CHARACTER_SIZE_S;
+}
+
+void ItemDescriptionWindow::compareWeaponAttributes(const Weapon& item, const Weapon& comp, sf::Vector2f& offset) {
+
+
+	compareAttributes(item, comp, offset);
+}
+
 void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	Window::setPosition(position);
 
@@ -73,151 +242,46 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	pos.x += GUIConstants::TEXT_OFFSET;
 	pos.y += GUIConstants::TEXT_OFFSET;
 
-	m_titleText.setPosition(pos);
-
-	pos.y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-
-	m_descriptionText.setPosition(pos);
-
-	pos.y += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
-
-	m_whiteText.setPosition(pos);
-	m_coloredText.setPosition(pos);
-	m_reputationText.setPosition(pos);
-	m_interactionText.setPosition(pos);
+	for (auto text : m_texts) {
+		text->setPosition(pos);
+	}
 }
 
-void ItemDescriptionWindow::load(const Item& item) {
-	m_titleText.setString(g_textProvider->getCroppedText(item.getID(), "item", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
-	m_descriptionText.setString(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET)));
+void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core) {
+	clearTexts();
+	int maxWidth = static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET);
+	sf::Vector2f currentOffset;
 
-	int lines = 0;
-	std::string white = "";
-	std::string colored = "";
-	std::string reputation = "";
-	std::string interaction = "";
+	// load title
+	addText(g_textProvider->getCroppedText(item.getID(), "item", GUIConstants::CHARACTER_SIZE_M,
+		maxWidth), COLOR_WHITE, currentOffset, 1, GUIConstants::CHARACTER_SIZE_M);
 
+	// load description
+	addText(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S,
+		maxWidth), COLOR_WHITE, currentOffset, 2);
+
+	// load attributes
 	if (item.getType() == ItemType::Permanent) {
-		colored.append(g_textProvider->getText("Permanent"));
-		colored.append("\n\n");
-		white.append("\n\n");
-		lines += 2;
-
-		m_coloredText.setColor(COLOR_GOOD);
-	}
-	else {
-		m_coloredText.setColor(COLOR_LIGHT_PURPLE);
+		addText(g_textProvider->getText("Permanent"), COLOR_GOOD, currentOffset, 2);
 	}
 
-	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
-		Weapon weapon(item.getID());
+	loadAttributes(item, core, currentOffset);
+	currentOffset.y += GUIConstants::CHARACTER_SIZE_S;
 
-		white.append(g_textProvider->getText("WeaponDamage"));
-		white.append(": ");
-		white.append(to_string(weapon.getWeaponChopDamage()));
-		white.append("\n");
+	addText(getGoldText(item), COLOR_WHITE, currentOffset);
+	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL, currentOffset);
+	addText(getInteractionText(item), COLOR_NEUTRAL, currentOffset);
 
-		white.append(g_textProvider->getText("Cooldown"));
-		white.append(": ");
-		white.append(toStrMaxDecimals(weapon.getWeaponCooldown().asSeconds(), 1));
-		white.append("s\n\n");
-
-		colored.append("\n\n\n");
-		lines += 3;
-	}
-
-	if (item.getFoodDuration() > sf::Time::Zero) {
-		white.append(g_textProvider->getText("Duration"));
-		white.append(": ");
-		white.append(to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))));
-		white.append(" s\n\n");
-
-		colored.append("\n\n");
-		lines += 2;
-	}
-
-	const AttributeData& attr = item.getAttributes();
-
-	int numberAttributes;
-	AttributeData::appendItemDescriptionAttributes(colored, attr, numberAttributes);
-	white.append(std::string(numberAttributes, '\n'));
-	lines += numberAttributes;
-
-	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
-		Weapon weapon(item.getID());
-		if (weapon.getWeaponSlots().size() > 0) {
-			white.append("\n");
-			white.append("<<< " + g_textProvider->getText("SpellSlots") + " >>>\n");
-			lines += 2;
-			for (auto& it : weapon.getWeaponSlots()) {
-				white.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
-				white.append(": ");
-				size_t numberSlots = it.spellModifiers.size();
-				white.append(to_string(numberSlots));
-				white.append(" ");
-				if (numberSlots > 1) {
-					white.append(g_textProvider->getText("GemSockets"));
-				}
-				else {
-					white.append(g_textProvider->getText("GemSocket"));
-				}
-				white.append("\n");
-				lines++;
-			}
-		}
-	}
-
-	if (lines > 0) {
-		white.append("\n");
-		colored.append("\n");
-		lines++;
-	}
-	
-	white.append(getGoldText(item));
-	lines++;
-
-	std::string repText = getReputationText(item);
-	if (!repText.empty()) {
-		for (int i = 0; i < lines; ++i) {
-			reputation.append("\n");
-		}
-		reputation.append(repText);
-		m_reputationText.setColor(m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL);
-		lines++;
-	}
-
-	std::string intText = getInteractionText(item);
-	if (!intText.empty()) {
-		for (int i = 0; i < lines; ++i) {
-			interaction.append("\n");
-		}
-		interaction.append(intText);
-		lines++;
-	}
-
-	m_interactionText.setString(interaction);
-	m_reputationText.setString(reputation);
-	m_whiteText.setString(white);
-	m_coloredText.setString(colored);
-
-	float height = GUIConstants::TEXT_OFFSET;
-	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	height += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
-	height += lines * GUIConstants::CHARACTER_SIZE_S + (lines - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_S;
-	height += GUIConstants::TEXT_OFFSET;
-
+	float height = 2 * GUIConstants::TEXT_OFFSET + currentOffset.y;
 	setHeight(height);
 }
 
 void ItemDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	if (!m_isVisible) return;
 	Window::render(renderTarget);
-	renderTarget.draw(m_titleText);
-	renderTarget.draw(m_descriptionText);
-	renderTarget.draw(m_whiteText);
-	renderTarget.draw(m_coloredText);
-	renderTarget.draw(m_reputationText);
-	renderTarget.draw(m_interactionText);
+	for (auto t : m_texts) {
+		t->render(renderTarget);
+	}
 }
 
 void ItemDescriptionWindow::show() {
@@ -231,5 +295,3 @@ void ItemDescriptionWindow::hide() {
 bool ItemDescriptionWindow::isVisible() const {
 	return m_isVisible;
 }
-
-
