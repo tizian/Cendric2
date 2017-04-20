@@ -41,6 +41,7 @@ private:
 	void addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines = 0);
 	void addText(const std::string& text, const sf::Color& color, sf::Vector2f& offset, int lines, int characterSize);
 	void addIntComparision(int this_, int other);
+	void addCooldownComparision(float this_, float other);
 	
 	void loadAttributes(const Item& item, const CharacterCore* core, sf::Vector2f& offset);
 	void loadDefaultAttributes(const Item& item, sf::Vector2f& offset);
@@ -48,6 +49,7 @@ private:
 
 	void compareAttributes(const Item& item, const Item& comp, sf::Vector2f& offset);
 	void compareWeaponAttributes(const Weapon& item, const Weapon& comp, sf::Vector2f& offset);
+	void compareDoubleAttributes(const Item& item, const Item& comp1, const Item& comp2, sf::Vector2f& offset);
 
 private:
 	std::vector<BitmapTextHolder*> m_texts;

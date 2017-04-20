@@ -7,7 +7,7 @@ BuffSpellCreator::BuffSpellCreator(const SpellData& spellData, LevelMovableGameO
 void BuffSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
 	updateDamageAndHeal(spellData);
-	AttributeData damage = ZERO_ATTRIBUTES;
+	AttributeData damage;
 	damage.damageFire = spellData.damage;
 	damage.damageIce = spellData.damage;
 	damage.damageLight = spellData.damage;

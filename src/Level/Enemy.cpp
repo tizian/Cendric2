@@ -18,7 +18,6 @@ const float Enemy::PICKUP_RANGE = 100.f;
 
 Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level) {
 	m_mainChar = dynamic_cast<LevelScreen*>(screen)->getMainCharacter();
-	m_attributes = ZERO_ATTRIBUTES;
 	m_screen = screen;
 	m_spellManager = new SpellManager(this);
 

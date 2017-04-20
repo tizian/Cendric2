@@ -14,7 +14,7 @@ std::string GhostFormSpellCreator::getStrengthModifierName() const {
 
 void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	SpellData spellData = m_spellData;
-	AttributeData additionalDamage = ZERO_ATTRIBUTES;
+	AttributeData additionalDamage;
 	additionalDamage.damagePhysical = m_spellData.strength;
 	GhostFormSpell* newSpell = new GhostFormSpell(additionalDamage);
 	newSpell->load(spellData, m_owner, target);

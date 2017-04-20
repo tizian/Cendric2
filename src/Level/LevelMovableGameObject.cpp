@@ -8,7 +8,6 @@
 LevelMovableGameObject::LevelMovableGameObject(const Level* level) : MovableGameObject() {
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
-	m_foodAttributes.second = ZERO_ATTRIBUTES;
 }
 
 LevelMovableGameObject::~LevelMovableGameObject() {

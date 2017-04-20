@@ -19,7 +19,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 		return;
 	}
 
-	AttributeData attributes = ZERO_ATTRIBUTES;
+	AttributeData attributes;
 	attributes.damagePhysical = m_data.damage;
 	attributes.damageFire = m_data.damage;
 	attributes.damageIce = m_data.damage;

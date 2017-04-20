@@ -12,7 +12,7 @@ void AntiGravitySpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	m_screen->addObject(newSpell);
 	if (dynamic_cast<LevelMainCharacter*>(m_owner)) {
 		m_screen->removeTypedBuffs(SpellID::AntiGravity);
-		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, ZERO_ATTRIBUTES);
+		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, AttributeData());
 	}
 		
 }

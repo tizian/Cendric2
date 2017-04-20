@@ -17,7 +17,6 @@ void Item::initBeans(const std::string& itemID) {
 	m_levelItemBean = g_databaseManager->getLevelitemBean(itemID);
 	m_levelItemFrameBeans = g_databaseManager->getLevelitemFrameBeans(itemID);
 	m_levelitemLightBean = g_databaseManager->getLevelitemLightBean(itemID);
-	m_attributeData = ZERO_ATTRIBUTES;
 	m_attributeData.create(g_databaseManager->getItemAttributeBean(itemID));
 	m_itemWeaponBean = g_databaseManager->getItemWeaponBean(itemID);
 	m_itemWeaponSlotBeans = g_databaseManager->getItemWeaponSlotBeans(itemID);

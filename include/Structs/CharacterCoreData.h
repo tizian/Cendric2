@@ -59,7 +59,7 @@ struct CharacterCoreData {
 	std::map<std::string, WeatherData> currentWeather;
 
 	// base attributes
-	AttributeData attributes = ZERO_ATTRIBUTES;
+	AttributeData attributes;
 
 	// items & equipment
 	int gold = 0;

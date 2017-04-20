@@ -14,7 +14,7 @@ void LeapOfFaithSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 
 	if (dynamic_cast<LevelMainCharacter*>(m_owner)) {
 		m_screen->removeTypedBuffs(SpellID::LeapOfFaith);
-		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, ZERO_ATTRIBUTES);
+		m_screen->addSpellBuffToInterface(spellData.iconTextureRect, spellData.duration, newSpell, AttributeData());
 	}
 }
 

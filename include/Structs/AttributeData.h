@@ -1,35 +1,36 @@
 #pragma once
 
 #include "Beans/ItemAttributeBean.h"
+#include "global.h"
 
 struct AttributeData {
-	int currentHealthPoints;
+	int currentHealthPoints = 0;
 
 	// total attributes
-	int maxHealthPoints;
-	int healthRegenerationPerS;
-	int haste;
-	int critical;
-	int heal;
-	int damagePhysical;
-	int damageFire;
-	int damageIce;
-	int damageShadow;
-	int damageLight;
-	int resistancePhysical;
-	int resistanceFire;
-	int resistanceIce;
-	int resistanceShadow;
-	int resistanceLight;
+	int maxHealthPoints = 0;
+	int healthRegenerationPerS = 0;
+	int haste = 0;
+	int critical = 0;
+	int heal = 0;
+	int damagePhysical = 0;
+	int damageFire = 0;
+	int damageIce = 0;
+	int damageShadow = 0;
+	int damageLight = 0;
+	int resistancePhysical = 0;
+	int resistanceFire = 0;
+	int resistanceIce = 0;
+	int resistanceShadow = 0;
+	int resistanceLight = 0;
 
 	// calculated attributes
-	float cooldownMultiplier;
-	float physicalMultiplier;
-	float fireMultiplier;
-	float iceMultiplier;
-	float shadowMultiplier;
-	float lightMultiplier;
-	int criticalHitChance;
+	float cooldownMultiplier = 1.f;
+	float physicalMultiplier = 1.f;
+	float fireMultiplier = 1.f;
+	float iceMultiplier = 1.f;
+	float shadowMultiplier = 1.f;
+	float lightMultiplier = 1.f;
+	int criticalHitChance = 0;
 
 	// helper function
 	float calculateDamageReduction(int resistance) const {
@@ -131,31 +132,6 @@ struct AttributeData {
 	static std::string getItemDescriptionAttributeText(const std::string& name, int value, int& number);
 	static void appendAttributes(std::string& string, const AttributeData& attr);
 	static void appendItemDescriptionAttributes(std::string& string, const AttributeData& attr, int& number);
-};
 
-const struct AttributeData ZERO_ATTRIBUTES =
-{
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	1.f,
-	1.f,
-	1.f,
-	1.f,
-	1.f,
-	1.f,
-	0
+	static const std::vector<std::pair<std::string, std::function<int(const AttributeData&)>>> ATTR_MAP;
 };
