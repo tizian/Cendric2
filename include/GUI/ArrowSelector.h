@@ -10,7 +10,7 @@
 #include "GUI/ArrowButton.h"
 
 // An arrow selector gui element, where different elements can be chosen (one is always active)
-class ArrowSelector : public GameObject {
+class ArrowSelector final : virtual public GameObject {
 public:
 	ArrowSelector();
 	

@@ -6,7 +6,7 @@
 #include "Spells/AntiGravitySpell.h"
 
 // a class that creates anti gravity spells
-class AntiGravitySpellCreator : public SpellCreator {
+class AntiGravitySpellCreator final : public SpellCreator {
 public:
 	AntiGravitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 

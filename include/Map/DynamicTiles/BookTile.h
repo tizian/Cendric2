@@ -6,7 +6,7 @@
 #include "Structs/BookData.h"
 
 // a readable book, starting the book interface when clicked
-class BookTile : public MapDynamicTile {
+class BookTile final : virtual public MapDynamicTile {
 public:
 	BookTile(const BookData& data, MapScreen* mapScreen);
 	void init() override;

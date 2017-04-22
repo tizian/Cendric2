@@ -8,7 +8,7 @@
 
 class MapScreen;
 
-class BookWindow : public Window {
+class BookWindow final : public Window {
 public:
 	BookWindow(const Item& item);
 	~BookWindow();

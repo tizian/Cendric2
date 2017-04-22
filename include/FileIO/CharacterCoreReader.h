@@ -9,7 +9,7 @@
 #include "FileIO/CharacterCoreIO.h"
 
 // a reader to read a savegame.
-class CharacterCoreReader : public Reader, public CharacterCoreIO {
+class CharacterCoreReader final : virtual public Reader, virtual public CharacterCoreIO {
 public:
 	CharacterCoreReader();
 	// reads the whole character core when onlySaveGame is false and

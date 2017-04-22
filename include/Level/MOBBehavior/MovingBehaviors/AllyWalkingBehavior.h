@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 
 // A moving behavior for allied walking enemies.
-class AllyWalkingBehavior : public virtual WalkingBehavior {
+class AllyWalkingBehavior final : public virtual WalkingBehavior {
 public:
 	AllyWalkingBehavior(Enemy* enemy);
 

@@ -15,7 +15,7 @@
 
 class ScreenManager;
 
-class CharacterCore {
+class CharacterCore final {
 public:
 	CharacterCore();
 	~CharacterCore();

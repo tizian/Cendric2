@@ -6,7 +6,7 @@
 #include "Spells/AureolaSpell.h"
 
 // a class that creates aureola spells
-class AureolaSpellCreator : public SpellCreator {
+class AureolaSpellCreator final : virtual public SpellCreator {
 public:
 	AureolaSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

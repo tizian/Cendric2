@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 
 // A moving behavior for aggressive walking enemies.
-class AggressiveWalkingBehavior : public virtual WalkingBehavior {
+class AggressiveWalkingBehavior final : public virtual WalkingBehavior {
 public:
 	AggressiveWalkingBehavior(Enemy* enemy);
 

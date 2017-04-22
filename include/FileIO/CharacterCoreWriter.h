@@ -10,7 +10,7 @@
 #include "FileIO/CharacterCoreIO.h"
 
 // a writer to write a savefile.
-class CharacterCoreWriter : public CharacterCoreIO {
+class CharacterCoreWriter final : virtual public CharacterCoreIO {
 public:
 	bool saveToFile(const std::string& filename, const CharacterCoreData& data) const;
 

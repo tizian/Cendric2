@@ -13,7 +13,7 @@ class ScrollHelper;
 class WorldScreen;
 
 // a hint entry in the hints tab
-class HintEntry : public GameObject {
+class HintEntry final : virtual public GameObject {
 public:
 	HintEntry(const std::string& hintKey);
 

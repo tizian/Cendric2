@@ -10,7 +10,7 @@
 #include "GUI/OrnamentStyle.h"
 
 // A not so ugly button to click
-class Button : public GameObject {
+class Button final : virtual public GameObject {
 public:
 	Button(const sf::FloatRect& box, GUIOrnamentStyle style = GUIOrnamentStyle::NONE);
 

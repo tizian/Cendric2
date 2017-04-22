@@ -8,7 +8,7 @@
 // 1: shadow wisp skin 
 // 2: fiery wisp skin
 // 3: toxic wisp skin
-class AureolaSpell : public Spell {
+class AureolaSpell final : virtual public Spell {
 public:
 	AureolaSpell() {}
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

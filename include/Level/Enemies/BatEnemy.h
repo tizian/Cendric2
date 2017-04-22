@@ -6,7 +6,7 @@
 #include "Screens/Screen.h"
 
 // A flying bat
-class BatEnemy : public Enemy {
+class BatEnemy final : virtual public Enemy {
 public:
 	BatEnemy(const Level* level, Screen* screen);
 	~BatEnemy() {}

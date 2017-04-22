@@ -9,6 +9,7 @@ class ParticleComponent;
 class Boss : public virtual Enemy {
 public:
 	Boss(const Level* level, Screen* screen);
+	~Boss() {};
 
 	void update(const sf::Time& frameTime) override;
 	void setDead() override;

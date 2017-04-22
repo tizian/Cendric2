@@ -124,8 +124,8 @@ void ResourceManager::init() {
 	// init sound pool
 	for (int i = 0; i < SOUND_POOL_SIZE; ++i) {
 		m_soundPool.push_back(sf::Sound());
-		m_nextSoundIndex = 0;
 	}
+	m_nextSoundIndex = 0;
 }
 
 template<typename T> void ResourceManager::loadResource(std::map<std::string, T*>& holder, const std::string& typeName, const std::string& filename, ResourceType type, void* owner) {
@@ -198,7 +198,7 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 	return m_items.at(itemID);
 }
 
-sf::Texture* ResourceManager::getTexture(const std::string& filename) {
+sf::Texture* ResourceManager::getTexture(const std::string& filename) const {
 	if (filename.empty()) return nullptr;
 	const auto& it = m_textures.find(filename);
 	if (it == m_textures.end()) {
@@ -208,19 +208,19 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename) {
 	return it->second;
 }
 
-sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) {
+sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& filename) const {
 	const auto& it = m_soundBuffers.find(filename);
 	if (it == m_soundBuffers.end()) return nullptr;
 	return it->second;
 }
 
-sf::Font* ResourceManager::getFont(const std::string& filename) {
+sf::Font* ResourceManager::getFont(const std::string& filename) const {
 	const auto& it = m_fonts.find(filename);
 	if (it == m_fonts.end()) return nullptr;
 	return it->second;
 }
 
-BitmapFont* ResourceManager::getBitmapFont(const std::string& filename) {
+BitmapFont* ResourceManager::getBitmapFont(const std::string& filename) const {
 	const auto& it = m_bitmapFonts.find(filename);
 	if (it == m_bitmapFonts.end()) return nullptr;
 	return it->second;

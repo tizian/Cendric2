@@ -4,7 +4,7 @@
 #include "AnimatedGameObject.h"
 
 // a animated tile in level or map
-class AnimatedTile : public virtual AnimatedGameObject {
+class AnimatedTile final : public virtual AnimatedGameObject {
 public:
 	AnimatedTile() : AnimatedGameObject() {};
 

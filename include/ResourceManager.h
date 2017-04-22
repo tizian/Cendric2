@@ -74,10 +74,10 @@ public:
 	// loads a bitmap font found at filename. If the resource type is Unique, the owner must be specified.
 	void loadBitmapFont(const std::string& filename, ResourceType type, void* owner = nullptr);
 	
-	sf::Texture* getTexture(const std::string& filename);
-	sf::SoundBuffer* getSoundBuffer(const std::string& filename);
-	sf::Font* getFont(const std::string& filename);
-	BitmapFont* getBitmapFont(const std::string& filename);
+	sf::Texture* getTexture(const std::string& filename) const;
+	sf::SoundBuffer* getSoundBuffer(const std::string& filename) const;
+	sf::Font* getFont(const std::string& filename) const;
+	BitmapFont* getBitmapFont(const std::string& filename) const;
 	// be aware that this will return nullptr in case of an invalid item.
 	Item* getItem(const std::string& itemID);
 

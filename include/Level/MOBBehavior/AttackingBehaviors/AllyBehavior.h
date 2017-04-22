@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 
 // An allied enemy attacking behavior. These enemies help cendric and attack unfriendly enemies
-class AllyBehavior : public EnemyAttackingBehavior {
+class AllyBehavior final : public EnemyAttackingBehavior {
 public:
 	AllyBehavior(Enemy* enemy);
 	~AllyBehavior() {};

@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class BuffSpell : public Spell {
+class BuffSpell final : public virtual Spell {
 public:
 	BuffSpell(const AttributeData& buff);
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
