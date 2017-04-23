@@ -6,7 +6,7 @@
 #include "Spells/TelekinesisSpell.h"
 
 // a class that creates telekinesis spells
-class TelekinesisSpellCreator : public SpellCreator {
+class TelekinesisSpellCreator final : public SpellCreator {
 public:
 	TelekinesisSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 

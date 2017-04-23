@@ -15,10 +15,10 @@ enum class SpellModifierType {
 };
 
 /* a simple spell modifier */
-struct SpellModifier {
-	SpellModifierType type;
-	// level ranges from 1 to 3
-	int level;
+struct SpellModifier final {
+	SpellModifierType type = SpellModifierType::VOID;
+	// level, if initialized, ranges from 1 to 3
+	int level = 0;
 
 	static SpellModifierType resolveType(const std::string& name) {
 		 if (name.compare("duration") == 0) {
@@ -63,12 +63,6 @@ struct SpellModifier {
 			return COLOR_TRANSPARENT;
 		}
 	}
-};
-
-const SpellModifier EMPTY_SPELLMODIFIER
-{
-	SpellModifierType::VOID,
-	0
 };
 
 typedef std::pair<SpellID, std::vector<SpellModifier>> WeaponSlot;

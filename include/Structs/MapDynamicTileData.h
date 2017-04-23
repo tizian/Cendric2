@@ -4,7 +4,7 @@
 
 #include "Enums/MapDynamicTileID.h"
 
-struct MapDynamicTileData {
+struct MapDynamicTileData final {
 	MapDynamicTileID id;
 	int spawnPosition;
 	int skinNr;

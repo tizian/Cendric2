@@ -6,10 +6,9 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class PrisonerEnemy : public Enemy {
+class PrisonerEnemy final : public Enemy {
 public:
 	PrisonerEnemy(const Level* level, Screen* screen);
-	~PrisonerEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 	float getConfiguredDistanceToHPBar() const override;

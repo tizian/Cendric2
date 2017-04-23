@@ -5,7 +5,7 @@
 #include "LightObject.h"
 #include "GUI/BitmapText.h"
 
-class WaypointTile : public MapDynamicTile {
+class WaypointTile final : public MapDynamicTile {
 public:
 	WaypointTile(MapScreen* mapScreen);
 	void init() override;

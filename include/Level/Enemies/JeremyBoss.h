@@ -9,7 +9,7 @@
 class ParticleComponent;
 class LightComponent;
 
-class JeremyBoss : virtual public Enemy {
+class JeremyBoss final : public Enemy {
 public:
 	JeremyBoss(const Level* level, Screen* screen);
 

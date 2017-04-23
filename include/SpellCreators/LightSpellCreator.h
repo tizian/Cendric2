@@ -6,7 +6,7 @@
 #include "Spells/LightSpell.h"
 
 // a class that creates light spells
-class LightSpellCreator : public SpellCreator {
+class LightSpellCreator final : public SpellCreator {
 public:
 	LightSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	void execExecuteSpell(const sf::Vector2f& target) override;

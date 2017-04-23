@@ -10,7 +10,7 @@ the range from the spell data is the max range
 the absolute range of the projectile is min(dist to target, max range) = 2*a value of the ellipse
 b is a/2
 */
-class BoomerangSpell final : virtual public Spell {
+class BoomerangSpell final : public Spell {
 public:
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;

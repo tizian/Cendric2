@@ -10,7 +10,7 @@
 #include "Cutscene/CutsceneLoader.h"
 
 // a cutscene, displayed in a cutscene screen
-class Cutscene {
+class Cutscene final {
 public:
 	Cutscene(std::string& id);
 	~Cutscene();

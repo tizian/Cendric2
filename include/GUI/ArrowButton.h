@@ -5,7 +5,7 @@
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
-class ArrowButton final : virtual public GameObject {
+class ArrowButton final : public GameObject {
 public:
 	ArrowButton(bool pointRight);
 

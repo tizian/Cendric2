@@ -5,7 +5,7 @@
 
 class ParticleComponent;
 
-class FlashSpell : public Spell {
+class FlashSpell final : public Spell {
 public:
 	FlashSpell();
 

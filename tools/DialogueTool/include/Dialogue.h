@@ -7,7 +7,7 @@ class StartNode;
 class DialogueNode;
 
 // A dialogue with conditions, choices and text
-class Dialogue {
+class Dialogue final {
 public:
 	Dialogue(const std::string& npcID);
 	Dialogue(const std::string& npcID, const std::string& dialogueName, StartNode* startNode);

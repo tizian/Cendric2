@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Enums/Key.h"
 
-class InputController {
+class InputController final {
 public:
 	InputController();
 	~InputController();

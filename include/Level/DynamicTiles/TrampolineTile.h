@@ -6,7 +6,9 @@
 // available skins:
 // 0: default mushroom
 // 1: default mushroom, shifted half a tile
-class TrampolineTile : public virtual LevelMovableTile {
+// 2: unshiftable mushroom
+// 3: unshiftable mushroom, shifted half a tile
+class TrampolineTile final : public LevelMovableTile {
 public:
 	TrampolineTile(LevelScreen* levelScreen);
 	void init() override;

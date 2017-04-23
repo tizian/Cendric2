@@ -6,10 +6,9 @@
 #include "Screens/Screen.h"
 
 // A flying crow
-class CrowEnemy : public Enemy {
+class CrowEnemy final : public Enemy {
 public:
 	CrowEnemy(const Level* level, Screen* screen);
-	~CrowEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

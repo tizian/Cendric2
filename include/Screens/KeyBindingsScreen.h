@@ -12,7 +12,7 @@
 class ScrollBar;
 class ScrollHelper;
 
-class KeyBindingsScreen : public Screen {
+class KeyBindingsScreen final : public Screen {
 public:
 	KeyBindingsScreen(CharacterCore* core);
 

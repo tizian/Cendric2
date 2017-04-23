@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/DynamicTiles/LeverDependentTile.h"
 
-class SwitchableTile : public virtual LeverDependentTile {
+class SwitchableTile final : public LeverDependentTile {
 public:
 	SwitchableTile(LevelScreen* levelScreen) : 
 		LevelDynamicTile(levelScreen), 

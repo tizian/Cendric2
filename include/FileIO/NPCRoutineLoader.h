@@ -9,7 +9,7 @@ class WorldCallback;
 class WorldScreen;
 
 // helper class to load lua files for npc routines
-class NPCRoutineLoader {
+class NPCRoutineLoader final {
 public:
 	NPCRoutineLoader(NPCRoutine& routine, WorldScreen* screen);
 	~NPCRoutineLoader();

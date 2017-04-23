@@ -9,7 +9,7 @@
 class TorchTile;
 class JanusBossMovingBehavior;
 
-class JanusBossMask {
+class JanusBossMask final {
 public:
 	JanusBossMask();
 

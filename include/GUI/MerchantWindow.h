@@ -13,7 +13,7 @@ class ScrollBar;
 class ScrollHelper;
 
 // the merchant window, operating on a merchant interface
-class MerchantWindow {
+class MerchantWindow final {
 public:
 	MerchantWindow(MerchantInterface* _interface);
 	~MerchantWindow();

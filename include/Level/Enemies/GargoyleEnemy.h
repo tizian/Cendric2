@@ -7,10 +7,9 @@
 
 // A flying Gargoyle that is mainly used for the necro spell "summon gargoyle"
 // but can also appear as a normal enemy.
-class GargoyleEnemy : public Enemy {
+class GargoyleEnemy final : public Enemy {
 public:
 	GargoyleEnemy(const Level* level, Screen* screen);
-	~GargoyleEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 	void setDead() override;

@@ -10,5 +10,6 @@ enum class BeanStatus {
 
 // super struct for all database beans, initializes with not set.
 struct DatabaseBean {
+	virtual ~DatabaseBean() {}
 	BeanStatus status = BeanStatus::NotSet;
 };

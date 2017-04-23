@@ -12,7 +12,7 @@
 class MapScreen;
 
 // static helper class used by the map to load npcs
-class MapLoader {
+class MapLoader final {
 public:
 	static void loadAfterMainChar(MapData& data, MapScreen* screen);
 	static void loadForRenderTexture(MapData& data, MapScreen* screen);

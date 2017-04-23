@@ -7,7 +7,7 @@
 
 class ParticleComponent;
 
-class ModifierTile : public LevelDynamicTile {
+class ModifierTile final : public LevelDynamicTile {
 public:
 	ModifierTile(LevelScreen* levelScreen);
 

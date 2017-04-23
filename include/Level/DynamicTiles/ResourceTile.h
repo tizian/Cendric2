@@ -7,7 +7,7 @@
 class LevelMainCharacter;
 class InteractComponent;
 
-class ResourceTile : public LevelDynamicTile {
+class ResourceTile final : public LevelDynamicTile {
 public:
 	ResourceTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void update(const sf::Time& frameTime) override;

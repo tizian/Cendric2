@@ -691,7 +691,7 @@ void CharacterCore::addModifier(const SpellModifier& modifier, int slotNr, int m
 		if (static_cast<int>(slot.second.size()) < modifierNr + 1) {
 			g_logger->logInfo("CharacterCore", "Adding empty modifier slots slots to the weapon!");
 			for (size_t i = slot.second.size(); static_cast<int>(i) < modifierNr + 1; ++i) {
-				slot.second.push_back(EMPTY_SPELLMODIFIER);
+				slot.second.push_back(SpellModifier());
 			}
 		}
 		for (auto& it : slot.second) {

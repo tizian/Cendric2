@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 
 // A moving behavior for neutral walking enemies.
-class NeutralWalkingBehavior : public virtual WalkingBehavior {
+class NeutralWalkingBehavior final : public WalkingBehavior {
 public:
 	NeutralWalkingBehavior(Enemy* enemy);
 

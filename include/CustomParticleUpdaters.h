@@ -18,10 +18,9 @@ namespace particles
 		FluidTile* fluidTile = nullptr;
 	};
 
-	class FadingColorUpdater : public ColorUpdater {
+	class FadingColorUpdater final : public ColorUpdater {
 	public:
 		FadingColorUpdater() {}
-		~FadingColorUpdater() {}
 
 		void update(ParticleData* data, float dt) override;
 

@@ -29,7 +29,7 @@
 //
 ////////////////////////////////////////////////////////////
 
-class Animation {
+class Animation final {
 public:
 	Animation(const sf::Time& frameTime) { m_frameTime = frameTime; };
 	Animation() { m_frameTime = sf::milliseconds(100); };

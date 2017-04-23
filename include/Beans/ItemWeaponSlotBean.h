@@ -5,7 +5,7 @@
 #include "Enums/SpellType.h"
 
 // an item weapon slot bean, directly from the database
-struct ItemWeaponSlotBean : DatabaseBean {
+struct ItemWeaponSlotBean final : DatabaseBean {
 	std::string item_id;
 	int slot_nr;
 	SpellType slot_type;

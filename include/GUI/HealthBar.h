@@ -12,7 +12,7 @@ enum class HealthBarStyle {
 };
 
 // The health bar, as displayed in a level. It takes its data from an attribute struct
-class HealthBar {
+class HealthBar final {
 public:
 	HealthBar(const AttributeData* attributes, HealthBarStyle style);
 	~HealthBar();

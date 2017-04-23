@@ -13,7 +13,7 @@ the following skins are available:
 4: energy fireball (from cairns)
 5: janus' fireball
 */
-class FireBallSpell : public Spell {
+class FireBallSpell final : public Spell {
 public:
 	FireBallSpell() {};
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

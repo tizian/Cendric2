@@ -6,7 +6,7 @@
 class WardenEnemy;
 
 // A moving behavior for observing spell enemies (observers and warden).
-class WardenBehavior : public virtual EnemyMovingBehavior {
+class WardenBehavior final : public EnemyMovingBehavior {
 public:
 	WardenBehavior(WardenEnemy* enemy);
 	~WardenBehavior() {};

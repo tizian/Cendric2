@@ -5,10 +5,9 @@
 class MainCharacter;
 
 // Used for objects which Cendric can interact with. These include a tooltip, as well.
-class InteractComponent : public virtual TooltipComponent {
+class InteractComponent final : public TooltipComponent {
 public:
 	InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar);
-	~InteractComponent() {}
 
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;

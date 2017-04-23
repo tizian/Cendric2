@@ -9,7 +9,7 @@
 class SpellSelection;
 
 // a class that decides whether a spell can be cast or not and holds the creators for the corresponding spells
-class SpellManager {
+class SpellManager final {
 public:
 	SpellManager(LevelMovableGameObject* owner);
 	~SpellManager();

@@ -11,7 +11,7 @@
 #include "GUI/ArrowSelector.h"
 #include "GUI/BitmapText.h"
 
-class OptionsScreen : public Screen {
+class OptionsScreen final : public Screen {
 public:
 	OptionsScreen(CharacterCore* core);
 

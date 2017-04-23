@@ -4,6 +4,8 @@
 
 // some constants used by configuration reader & writer
 class ConfigurationIO {
+public:
+	virtual ~ConfigurationIO() {}
 protected:
 	const char* LANGUAGE = "language";
 	const char* DISPLAYMODE = "displaymode";

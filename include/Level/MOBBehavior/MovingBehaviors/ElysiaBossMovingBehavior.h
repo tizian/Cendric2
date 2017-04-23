@@ -6,7 +6,7 @@
 class ElysiaBoss;
 
 // A moving behavior for the mob "ElysiaBoss"
-class ElysiaBossMovingBehavior : public virtual FlyingBehavior {
+class ElysiaBossMovingBehavior final : public FlyingBehavior {
 public:
 	ElysiaBossMovingBehavior(ElysiaBoss* enemy);
 	~ElysiaBossMovingBehavior();

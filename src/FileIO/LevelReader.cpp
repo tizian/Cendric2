@@ -66,7 +66,6 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 
 		ModifierTileData modifierData;
 		modifierData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-		modifierData.modifier = EMPTY_SPELLMODIFIER;
 
 		// modifier type and level
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");

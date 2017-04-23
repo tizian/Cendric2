@@ -6,7 +6,7 @@
 class LevelEquipment;
 class ParticleComponent;
 
-class GhostFormSpell : public Spell {
+class GhostFormSpell final : public Spell {
 public:
 	GhostFormSpell(const AttributeData& additionalDamage);
 	

@@ -4,7 +4,7 @@
 #include "Beans/DatabaseBean.h"
 
 // an item equipment bean, directly from the database
-struct ItemEquipmentBean : DatabaseBean {
+struct ItemEquipmentBean final : DatabaseBean {
 	std::string item_id;
 	std::string texture_path;
 	std::string map_texture_path;

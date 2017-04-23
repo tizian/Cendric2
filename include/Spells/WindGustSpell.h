@@ -6,10 +6,8 @@
 
 class ParticleComponent;
 
-class WindGustSpell : public Spell {
+class WindGustSpell final : public Spell {
 public:
-	WindGustSpell() : Spell() {};
-	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void execOnHit(LevelMovableGameObject* target) override;

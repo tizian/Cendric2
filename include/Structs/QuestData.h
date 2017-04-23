@@ -2,7 +2,7 @@
 
 #include "global.h"
 
-struct QuestData {
+struct QuestData final {
 	std::string id;
 	bool isMainQuest = false;
 

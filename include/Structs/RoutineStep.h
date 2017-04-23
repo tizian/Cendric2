@@ -14,7 +14,7 @@ enum class RoutineState {
 	FacingDirection
 };
 
-struct RoutineStep {
+struct RoutineStep final {
 	RoutineState state;
 	sf::Time time;
 	sf::Vector2f goal;

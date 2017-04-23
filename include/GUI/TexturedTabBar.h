@@ -5,7 +5,7 @@
 #include "ResourceManager.h"
 #include "GUI/TexturedTabButton.h"
 
-class TexturedTabBar : public GameObject {
+class TexturedTabBar final : public GameObject {
 public:
 	TexturedTabBar(const sf::FloatRect& box, int numberTabs);
 	~TexturedTabBar();

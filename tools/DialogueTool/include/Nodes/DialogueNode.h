@@ -16,7 +16,7 @@ class NodeCondition;
 struct NodeTranslation;
 
 // This node acts as a link between nodes and their children.
-struct LinkNode {
+struct LinkNode final {
 	~LinkNode();
 
 	// exports the link node to part of a dia file

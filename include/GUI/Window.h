@@ -10,7 +10,7 @@
 #include "GUI/SlicedSprite.h"
 #include "GUI/OrnamentStyle.h"
 
-class Window : public GameObject {
+class Window : public virtual GameObject {
 public:
 	Window(const sf::FloatRect& box, GUIOrnamentStyle style);
 	Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor);

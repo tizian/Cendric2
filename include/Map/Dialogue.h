@@ -9,7 +9,7 @@ class WorldScreen;
 class DialogueWindow;
 
 // A dialogue with conditions, choices and text
-class Dialogue {
+class Dialogue final {
 public:
 	void reload(const std::string& id, WorldScreen* screen, DialogueWindow* window);
 	const std::string& getID() const;

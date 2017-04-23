@@ -16,7 +16,7 @@ enum class ConditionType {
 
 // a condition that can be evaluated in lua.
 // its type determines which members need to be evaluated.
-struct Condition {
+struct Condition final {
 	ConditionType type;
 	std::string s1;
 	std::string s2;

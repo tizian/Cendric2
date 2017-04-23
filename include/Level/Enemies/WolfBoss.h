@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class WolfBoss : virtual public Boss {
+class WolfBoss final : public Boss {
 public:
 	WolfBoss(const Level* level, Screen* screen);
 

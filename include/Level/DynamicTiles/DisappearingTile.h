@@ -14,7 +14,7 @@ class ParticleComponent;
 
 // a tile that disappears after a certain time as soon as cendric touches it.
 // these tiles respawn.
-class DisappearingTile : public virtual LevelDynamicTile {
+class DisappearingTile final : public LevelDynamicTile {
 public:
 	DisappearingTile(LevelScreen* levelScreen);
 	void init() override;

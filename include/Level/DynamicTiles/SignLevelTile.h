@@ -7,7 +7,7 @@
 
 class InteractComponent;
 
-class SignLevelTile : public virtual LevelDynamicTile {
+class SignLevelTile final : public LevelDynamicTile {
 public:
 	SignLevelTile(const SignData& data, LevelScreen* levelScreen);
 

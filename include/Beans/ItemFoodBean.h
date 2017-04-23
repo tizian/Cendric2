@@ -4,7 +4,7 @@
 #include "Beans/DatabaseBean.h"
 
 // an item food bean, directly from the database
-struct ItemFoodBean : DatabaseBean {
+struct ItemFoodBean final : DatabaseBean {
 	std::string item_id;
 	sf::Time food_duration;
 	bool is_cookable;

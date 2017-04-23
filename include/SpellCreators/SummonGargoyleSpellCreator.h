@@ -4,7 +4,7 @@
 #include "Spells/SpellCreator.h"
 
 // a spell creator that summons a mighty gargoyle
-class SummonGargoyleSpellCreator : public SpellCreator {
+class SummonGargoyleSpellCreator final : public SpellCreator {
 public:
 	SummonGargoyleSpellCreator(const SpellData &spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

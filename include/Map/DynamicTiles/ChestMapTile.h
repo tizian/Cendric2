@@ -7,7 +7,7 @@
 class InteractComponent;
 
 // a chest/chest like object that can be looted on the map, it is currently only used to retrieve stored data.
-class ChestMapTile : public MapDynamicTile {
+class ChestMapTile final : public MapDynamicTile {
 public:
 	ChestMapTile(MapScreen* mapScreen);
 	void init() override;

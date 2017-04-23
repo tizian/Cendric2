@@ -10,7 +10,7 @@
 
 class Window;
 
-class ScrollBarKnob : public GameObject {
+class ScrollBarKnob final : public GameObject {
 public:
 	ScrollBarKnob();
 

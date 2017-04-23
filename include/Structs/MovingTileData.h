@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct MovingTileData {
+struct MovingTileData final {
 	sf::Vector2f spawnPosition;
 	int length = 1; // in tiles
 	int distance; // in tiles

@@ -14,7 +14,7 @@ class SpellCreator;
 class LevelMovableGameObject;
 
 /* describes the attributes of a spell */
-struct SpellData {
+struct SpellData final {
 	SpellID id = SpellID::VOID;
 	SpellType spellType = SpellType::VOID;
 	std::string spritesheetPath;

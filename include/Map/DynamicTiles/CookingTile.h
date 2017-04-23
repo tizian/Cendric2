@@ -5,7 +5,7 @@
 #include "LightObject.h"
 #include "GUI/BitmapText.h"
 
-class CookingTile : public MapDynamicTile {
+class CookingTile final : public MapDynamicTile {
 public:
 	CookingTile(MapScreen* mapScreen);
 	void init() override;

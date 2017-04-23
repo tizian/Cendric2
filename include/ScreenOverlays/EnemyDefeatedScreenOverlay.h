@@ -4,7 +4,7 @@
 #include "GUI/BitmapText.h"
 #include "GUI/InventorySlot.h"
 
-class EnemyDefeatedScreenOverlay : public virtual TextureScreenOverlay {
+class EnemyDefeatedScreenOverlay final : public TextureScreenOverlay {
 public:
 	EnemyDefeatedScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
 	~EnemyDefeatedScreenOverlay();

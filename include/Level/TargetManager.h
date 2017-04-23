@@ -6,7 +6,7 @@ class LevelMainCharacter;
 class Enemy;
 class LevelScreen;
 
-class TargetManager {
+class TargetManager final {
 public:
 	TargetManager();
 	~TargetManager();

@@ -8,7 +8,7 @@
 
 class WorldInterface;
 
-class GUITabBar {
+class GUITabBar final {
 public:
 	GUITabBar(WorldInterface* _interface, int size);
 	~GUITabBar();

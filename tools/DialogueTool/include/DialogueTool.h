@@ -2,7 +2,7 @@
 
 #include "global.h"
 
-class DialogueTool {
+class DialogueTool final {
 public:
 	void run();
 };

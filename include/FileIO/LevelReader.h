@@ -13,7 +13,7 @@
 #include "Enums/LevelDynamicTileID.h"
 #include "FileIO/WorldReader.h"
 
-class LevelReader : public WorldReader {
+class LevelReader final : public WorldReader {
 public:
 	LevelReader();
 	~LevelReader();

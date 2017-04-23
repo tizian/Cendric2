@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Structs/Condition.h"
 
-struct DoorData {
+struct DoorData final {
 	int skinNr;
 	sf::Vector2f position;
 	std::string keyItemID = "";

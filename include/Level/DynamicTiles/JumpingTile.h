@@ -11,7 +11,7 @@
 // 1: fireball
 // 2: shadow piranha
 // 3: toxic ball
-class JumpingTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
+class JumpingTile final : public LevelDynamicTile, public MovableGameObject {
 public:
 	JumpingTile(LevelScreen* levelScreen);
 

@@ -9,7 +9,7 @@
 class CharacterCore;
 class Item;
 
-class ProgressLogEntry {
+class ProgressLogEntry final {
 public:
 	ProgressLogEntry();
 	~ProgressLogEntry();
@@ -57,10 +57,11 @@ private:
 
 // a small visual interface to show progress in a screen, such as 
 // item, gold or quest changes
-class ProgressLog {
+class ProgressLog final {
 public:
 	ProgressLog(const CharacterCore* core);
 	~ProgressLog();
+	
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& renderTarget);
 

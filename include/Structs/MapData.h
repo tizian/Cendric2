@@ -9,7 +9,7 @@
 #include "Structs/DoorData.h"
 #include "FloatTriangle.h"
 
-struct MapData : WorldData {
+struct MapData final : WorldData {
 	std::vector<MapDynamicTileData> dynamicTiles;
 
 	std::vector<NPCData> npcs;

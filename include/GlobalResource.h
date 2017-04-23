@@ -4,7 +4,9 @@
 
 // a static class to store the global resource paths
 // to be included in .cpp files, not headers, thanks.
-class GlobalResource {
+class GlobalResource final {
+private:
+	GlobalResource() {}
 public:
 	static const std::string SAVEGAME_FOLDER;
 	static const std::string CONFIGURATION_PATH;

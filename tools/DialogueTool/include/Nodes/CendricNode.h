@@ -4,7 +4,7 @@
 #include "Nodes/TriggerableNode.h"
 
 // Cendric Node, it holds a link to the next node, 0 to n triggers and a translation
-class CendricNode final : public virtual TriggerableNode {
+class CendricNode final : public TriggerableNode {
 public:
 	CendricNode(int tag);
 	CendricNode();

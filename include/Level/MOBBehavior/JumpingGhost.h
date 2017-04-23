@@ -11,7 +11,7 @@
 class Level;
 
 // where and how did our ghost collide?
-struct GhostRecord {
+struct GhostRecord final {
 	CollisionDirection direction = CollisionDirection::VOID;
 	float savePosY = -1.f;
 	bool evilTile = false;
@@ -19,7 +19,7 @@ struct GhostRecord {
 };
 
 // a ghost (dummy) of a movable game object, used to simulate its path.
-class JumpingGhost : public virtual MovableGameObject {
+class JumpingGhost final : public MovableGameObject {
 public:
 	JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, Screen* screen);
 	~JumpingGhost();

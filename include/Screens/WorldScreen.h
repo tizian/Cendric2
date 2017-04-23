@@ -14,7 +14,7 @@ class Trigger;
 class BookWindow;
 
 // ancestor for level or map screen
-class WorldScreen : public Screen {
+class WorldScreen : public virtual Screen {
 public:
 	WorldScreen(CharacterCore* core);
 	virtual ~WorldScreen();

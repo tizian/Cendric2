@@ -8,7 +8,7 @@
 #include "GUI/Button.h"
 
 // the merchant interface, acting as a interface between dialogue and merchant actions
-class MerchantInterface {
+class MerchantInterface final {
 public:
 	MerchantInterface(WorldScreen* screen, std::string merchantID);
 	~MerchantInterface();

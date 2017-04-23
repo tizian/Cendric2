@@ -3,7 +3,7 @@
 #include "global.h"
 
 // The log window shows the latest log output.
-class LogWindow {
+class LogWindow final {
 
 public:
 	LogWindow();

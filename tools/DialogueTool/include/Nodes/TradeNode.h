@@ -4,7 +4,7 @@
 #include "Nodes/DialogueNode.h"
 
 // Trade node, very simple node that allows trading and determines the next node
-class TradeNode : public virtual DialogueNode {
+class TradeNode final : public DialogueNode {
 public:
 	TradeNode(int tag);
 	TradeNode();

@@ -4,7 +4,7 @@
 
 #include "Structs/TriggerContent.h"
 
-struct TriggerData {
+struct TriggerData final {
 	std::string worldID;
 	sf::FloatRect triggerRect;
 	// the object ID, used to save which triggers are already triggered and won't reappear again.

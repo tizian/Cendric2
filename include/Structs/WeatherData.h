@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct WeatherData {
+struct WeatherData final {
 	float dimming = 0.f;
 	std::string weather = "";
 };

@@ -6,7 +6,7 @@
 
 class InteractComponent;
 
-class DoorLevelTile : public LevelDynamicTile {
+class DoorLevelTile final : public LevelDynamicTile {
 public:
 	DoorLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;

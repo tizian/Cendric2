@@ -4,7 +4,7 @@
 #define MAX_DIALOGUE_SIZE 360
 
 // holds a translation for a node (npc, choice or cendric node)
-struct NodeTranslation {
+struct NodeTranslation final {
 	NodeTranslation(int nodeTag, const std::string& tag);
 	char tag[50];
 	char englishTranslation[MAX_DIALOGUE_SIZE];

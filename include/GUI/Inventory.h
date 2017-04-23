@@ -20,7 +20,7 @@ class WorldInterface;
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
 // the inventory also shows item description and equipped items.
-class Inventory {
+class Inventory final {
 public:
 	Inventory(LevelInterface* _interface);
 	Inventory(MapInterface* _interface);

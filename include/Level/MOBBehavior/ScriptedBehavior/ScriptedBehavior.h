@@ -10,7 +10,7 @@ class Enemy;
 
 // a scripted behavior with an update function that uses a lua callback.
 // used for enemies with a special behavior, like talking
-class ScriptedBehavior {
+class ScriptedBehavior final {
 public:
 	ScriptedBehavior(const std::string& luaPath, Enemy* enemy);
 	~ScriptedBehavior();

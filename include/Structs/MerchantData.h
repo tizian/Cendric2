@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Enums/FractionID.h"
 
-struct MerchantData {
+struct MerchantData final {
 	FractionID fraction = FractionID::VOID;
 	// the multiplier for the selling prices (1.5 is the default)
 	float multiplier = 1.5f;

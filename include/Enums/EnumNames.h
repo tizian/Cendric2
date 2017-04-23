@@ -15,7 +15,9 @@
 #include "Enums/DisplayMode.h"
 
 // pure static class used to resolve enum names.
-class EnumNames {
+class EnumNames final {
+private:
+	EnumNames() {}
 public:
 	static std::string getLanguageName(Language lang) {
 		switch (lang) {

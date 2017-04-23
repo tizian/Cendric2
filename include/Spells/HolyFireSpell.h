@@ -10,10 +10,8 @@ the following skins are available:
 0: holy fire (default)
 1: shadow fire
 */
-class HolyFireSpell : public Spell {
+class HolyFireSpell final : public Spell {
 public:
-	HolyFireSpell() {};
-	
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 

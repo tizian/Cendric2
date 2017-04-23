@@ -15,7 +15,7 @@ enum ElysiaBossState {
 	Thunderstorm
 };
 
-class ElysiaBoss : virtual public Boss {
+class ElysiaBoss final : public Boss {
 public:
 	ElysiaBoss(const Level* level, Screen* screen);
 

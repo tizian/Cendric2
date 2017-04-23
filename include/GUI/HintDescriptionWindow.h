@@ -9,7 +9,7 @@
 #include "GUI/CharacterInfo.h"
 #include "GUI/Hints.h"
 
-class HintDescriptionWindow : public Window {
+class HintDescriptionWindow final : public Window {
 public:
 	HintDescriptionWindow(const CharacterCore* core);
 

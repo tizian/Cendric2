@@ -11,7 +11,7 @@
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
 // if the keys for character screen and inventory are pressed, these will display as well.
-class LevelInterface : public WorldInterface {
+class LevelInterface final : public WorldInterface {
 public:
 	LevelInterface(WorldScreen* screen, LevelMainCharacter* character);
 	~LevelInterface();

@@ -4,7 +4,7 @@
 #include "Level/LevelDynamicTile.h"
 #include "Structs/LadderTileData.h"
 
-class LadderTile : public LevelDynamicTile {
+class LadderTile final : public LevelDynamicTile {
 public:
 	LadderTile(const LadderTileData& data, LevelScreen* levelScreen);
 	void init() override;

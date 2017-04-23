@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Structs/LightData.h"
 
-struct NPCData {
+struct NPCData final {
 	// npc on map
 	int objectID;
 	std::string id;

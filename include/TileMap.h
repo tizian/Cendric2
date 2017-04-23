@@ -5,7 +5,7 @@
 #include "Structs/WorldData.h"
 #include "AnimatedTile.h"
 
-class TileMap : public sf::Drawable, public sf::Transformable {
+class TileMap final : public sf::Drawable, public sf::Transformable {
 public:
 	bool load(const WorldData& data, const std::vector<std::vector<int> >& layers);
 	

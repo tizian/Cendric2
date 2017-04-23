@@ -13,7 +13,7 @@ enum class LogLevel {
 	Verbose,
 };
 
-class Logger {
+class Logger final {
 public:
 	Logger();
 	void logError(const std::string& source, const std::string& message) const;

@@ -2,7 +2,7 @@
 
 #include "global.h"
 
-struct Condition {
+struct Condition final {
 	bool negative = false;
 	std::string type;
 	std::string name;

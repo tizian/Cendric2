@@ -5,7 +5,7 @@
 #include "GUI/BitmapText.h"
 
 // an item document page bean, directly from the database
-struct ItemDocumentPageBean : DatabaseBean {
+struct ItemDocumentPageBean final : DatabaseBean {
 	std::string item_id;
 	int page_nr;
 	std::string title;

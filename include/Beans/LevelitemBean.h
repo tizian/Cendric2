@@ -4,7 +4,7 @@
 #include "Beans/DatabaseBean.h"
 
 // a levelitem bean, directly from the database
-struct LevelitemBean : DatabaseBean {
+struct LevelitemBean final : DatabaseBean {
 	std::string item_id;
 	sf::Vector2f sprite_offset;
 	sf::Vector2f bounding_box;

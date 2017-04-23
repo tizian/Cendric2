@@ -11,7 +11,7 @@ enum class FallingTileState {
 	Returning
 };
 
-class FallingTile : public virtual LevelDynamicTile, public virtual MovableGameObject {
+class FallingTile final : public LevelDynamicTile, public MovableGameObject {
 public:
 	FallingTile(LevelScreen* levelScreen);
 

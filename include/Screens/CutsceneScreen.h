@@ -5,7 +5,7 @@
 #include "Screen.h"
 #include "Cutscene/Cutscene.h"
 
-class CutsceneScreen : public Screen {
+class CutsceneScreen final : public Screen {
 public:
 	CutsceneScreen(CharacterCore* core, const std::string& cutsceneID);
 

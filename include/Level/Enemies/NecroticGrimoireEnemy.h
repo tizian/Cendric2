@@ -11,7 +11,7 @@ class DivineTorchTile;
 
 // A flying necrotic grimoire that needs 
 // three burning divine torches to be attackable
-class NecroticGrimoireEnemy : public virtual BookEnemy {
+class NecroticGrimoireEnemy final : public BookEnemy {
 public:
 	NecroticGrimoireEnemy(const Level* level, Screen* screen);
 

@@ -10,7 +10,7 @@
 class Enemy;
 
 // the buff bar that displays debuffs (maybe later buffs too) on an enemy
-class EnemyBuffBar {
+class EnemyBuffBar final {
 public:
 	EnemyBuffBar(Enemy* enemy);
 	~EnemyBuffBar();

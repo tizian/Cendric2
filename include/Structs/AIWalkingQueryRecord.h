@@ -5,7 +5,7 @@
 /*
 used by walking enemies to check whether they should jump and walk or only walk or stop
 */
-struct AIWalkingQueryRecord {
+struct AIWalkingQueryRecord final {
 	// the bounding box to be checked for collision
 	sf::FloatRect boundingBox;
 	// if set to true, the collision check will not check for collidable dynamic tiles 

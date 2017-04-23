@@ -9,7 +9,7 @@
 #include "GUI/SlicedSprite.h"
 #include "GUI/GUIConstants.h"
 
-class SliderKnob : public GameObject {
+class SliderKnob final : public GameObject {
 public:
 	SliderKnob();
 
@@ -33,8 +33,8 @@ private:
 	static const float HEIGHT;
 };
 
-// A simple ugly slider 
-class Slider : public GameObject {
+// A simple slider 
+class Slider final : public GameObject {
 public:
 	Slider(int minPos, int maxPos);
 

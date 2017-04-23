@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 
-class SpikesTopTile : public LevelDynamicTile {
+class SpikesTopTile final : public LevelDynamicTile {
 public:
 	SpikesTopTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void init() override;

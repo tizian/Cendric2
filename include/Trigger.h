@@ -8,10 +8,9 @@ class WorldScreen;
 
 // A trigger, on a map or a level, waiting to get triggered.
 // level and map exits are triggers too.
-class Trigger : public GameObject {
+class Trigger final : public GameObject {
 public:
 	Trigger(WorldScreen* screen, const TriggerData& data);
-	~Trigger() {};
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;

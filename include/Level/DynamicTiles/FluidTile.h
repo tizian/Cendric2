@@ -9,7 +9,7 @@
 class FrozenWaterTile;
 class MovableGameObject;
 
-struct FluidColumn {
+struct FluidColumn final {
 	float targetHeight;
 	float height;
 	float velocity;
@@ -27,7 +27,7 @@ struct FluidColumn {
 	}
 };
 
-class FluidTile : public LevelDynamicTile {
+class FluidTile final : public LevelDynamicTile {
 public:
 	FluidTile(LevelScreen* levelScreen);
 	~FluidTile();

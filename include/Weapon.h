@@ -5,18 +5,18 @@
 #include "Structs/SpellModifier.h"
 #include "Structs/SpellData.h"
 
-struct SpellSlot_s {
+struct SpellSlot_s final {
 	SpellType spellType;
 	SpellID spellID;
 };
 
-struct WeaponSlot_s {
+struct WeaponSlot_s final {
 	SpellSlot_s spellSlot;
 	std::vector<SpellModifier> spellModifiers;
 };
 
 // A weapon in cendrics / a npcs / a mobs inventory
-class Weapon : public virtual Item {
+class Weapon final : public Item {
 public:
 	Weapon(const std::string& itemID);
 

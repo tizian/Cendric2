@@ -7,7 +7,9 @@
 #include "LuaBridge/LuaBridge.h"
 
 // static helper class to load lua files for cutscenes
-class CutsceneLoader {
+class CutsceneLoader final {
+private:
+	CutsceneLoader() {}
 public:
 	static CutsceneData loadCutscene(const std::string& cutsceneID);
 

@@ -5,7 +5,7 @@
 
 #include "Enums/EnemyID.h"
 
-struct EnemyData {
+struct EnemyData final {
 	EnemyID id;
 	int objectID;
 	int skinNr = 0;

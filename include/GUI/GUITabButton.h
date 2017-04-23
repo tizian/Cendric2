@@ -5,7 +5,7 @@
 #include "ResourceManager.h"
 #include "GUI/BitmapText.h"
 
-class GUITabButton : public GameObject {
+class GUITabButton final : public GameObject {
 public:
 	GUITabButton();
 

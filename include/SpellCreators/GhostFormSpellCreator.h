@@ -7,7 +7,7 @@
 #include "Level/LevelEquipment.h"
 
 // a class that creates ghost form spells
-class GhostFormSpellCreator : public SpellCreator {
+class GhostFormSpellCreator final : public SpellCreator {
 public:
 	GhostFormSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

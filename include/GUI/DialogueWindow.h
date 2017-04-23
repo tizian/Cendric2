@@ -20,7 +20,7 @@ enum class DialogueOptionType {
 	Trade
 };
 
-class DialogueOption : public GameObject {
+class DialogueOption final : public GameObject {
 public:
 	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type);
 	void render(sf::RenderTarget& renderTarget) override;
@@ -39,7 +39,7 @@ private:
 	sf::Text m_text;
 };
 
-class DialogueWindow : public Window {
+class DialogueWindow final : public Window {
 public:
 	DialogueWindow();
 	~DialogueWindow();

@@ -6,7 +6,7 @@ class NodeWindow;
 class InsertScriptParser;
 
 // main window toolbar
-class Toolbar {
+class Toolbar final {
 public:
 	Toolbar(NodeWindow* nodeWindow);
 	~Toolbar();

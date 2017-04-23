@@ -4,7 +4,7 @@
 #include "Level/LevelDynamicTile.h"
 #include "Structs/SpellData.h"
 
-class ShootingTile : public virtual LevelDynamicTile {
+class ShootingTile final : public LevelDynamicTile {
 public:
 	ShootingTile(LevelScreen* levelScreen);
 

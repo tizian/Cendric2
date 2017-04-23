@@ -5,7 +5,7 @@
 #include "Nodes/NodeCondition.h"
 
 // Choice Node, splits the flow into multiple children
-class ChoiceNode final : public virtual DialogueNode {
+class ChoiceNode final : public DialogueNode {
 public:
 	ChoiceNode(int tag);
 	ChoiceNode();

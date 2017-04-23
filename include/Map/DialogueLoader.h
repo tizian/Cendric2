@@ -10,7 +10,7 @@
 class WorldScreen;
 
 // helper class to load lua files for dialogues
-class DialogueLoader {
+class DialogueLoader final {
 public:
 	DialogueLoader(Dialogue& dialogue, WorldScreen* screen);
 	~DialogueLoader();

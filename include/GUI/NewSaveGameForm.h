@@ -10,7 +10,7 @@
 
 // A form with two buttons on it, an ok and a cancel button.
 // additionally, it takes text input from the user for the savegame name.
-class NewSaveGameForm : public GameObject {
+class NewSaveGameForm final : public GameObject {
 public:
 	NewSaveGameForm(const sf::FloatRect& box);
 	~NewSaveGameForm();

@@ -8,10 +8,8 @@
 #include "Enums/MapDynamicTileID.h"
 #include "FileIO/WorldReader.h"
 
-class MapReader : public WorldReader {
+class MapReader final : public WorldReader {
 public:
-	MapReader() : WorldReader() {};
-
 	bool readMap(const std::string& filename, MapData& data, const CharacterCore* core);
 
 private:

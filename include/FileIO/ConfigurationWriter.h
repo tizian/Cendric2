@@ -10,7 +10,7 @@
 #include "FileIO/ConfigurationIO.h"
 
 // a writer to write to the configuration file
-class ConfigurationWriter : public ConfigurationIO {
+class ConfigurationWriter final : public ConfigurationIO {
 public:
 	bool saveToFile(const ConfigurationData& data) const;
 

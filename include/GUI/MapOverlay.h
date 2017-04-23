@@ -12,7 +12,7 @@ class MapOverlay;
 class Window;
 class GUITabBar;
 
-struct MapOverlayData {
+struct MapOverlayData final {
 	std::string mapId;
 	sf::FloatRect windowSize;
 	sf::Vector2i mapSize;
@@ -21,7 +21,7 @@ struct MapOverlayData {
 	TileMap fogOfWarTileMap;
 };
 
-class WaypointMarker : public virtual AnimatedGameObject {
+class WaypointMarker final : public AnimatedGameObject {
 public:
 	WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
 

@@ -11,7 +11,7 @@ class InteractComponent;
 class LightComponent;
 class WorldCallback;
 
-class ChestLevelTile : public LevelDynamicTile {
+class ChestLevelTile final : public LevelDynamicTile {
 public:
 	ChestLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	~ChestLevelTile();

@@ -6,7 +6,7 @@
 #include "Spells/HolyFireSpell.h"
 
 // a class that creates holy fire spells
-class HolyFireSpellCreator : public SpellCreator {
+class HolyFireSpellCreator final : public SpellCreator {
 public:
 	HolyFireSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	void execExecuteSpell(const sf::Vector2f& target) override;

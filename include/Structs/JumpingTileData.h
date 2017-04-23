@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct JumpingTileData {
+struct JumpingTileData final {
 	sf::Vector2f spawnPosition;
 	int velocity; // initial velocity
 	int waitingTime = 0; // in milliseconds

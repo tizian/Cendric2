@@ -12,7 +12,7 @@
 #include "GUI/YesOrNoForm.h"
 #include "GUI/ProgressLog.h"
 
-class LevelScreen : public WorldScreen {
+class LevelScreen final : public WorldScreen {
 public:
 	LevelScreen(const std::string& levelID, CharacterCore* core);
 	// called by the loading screen

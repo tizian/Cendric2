@@ -14,7 +14,7 @@ enum class FluidTileType {
 };
 
 // parameters for the behavior of the fluid tile
-struct FluidTileData {
+struct FluidTileData final {
 	FluidTileType type;
 	float tension;
 	float damping;

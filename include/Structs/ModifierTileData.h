@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "SpellModifier.h"
 
-struct ModifierTileData {
+struct ModifierTileData final {
 	sf::Vector2f spawnPosition;
 	SpellModifier modifier;
 };

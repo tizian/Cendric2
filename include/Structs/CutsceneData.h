@@ -5,24 +5,24 @@
 #include <iostream>
 #include <vector>
 
-struct CutsceneImage {
+struct CutsceneImage final {
 	std::string imagePath;
 	sf::Vector2f velocity;
 };
 
-struct CutsceneText {
+struct CutsceneText  final {
 	sf::Time time;
 	std::string text;
 	bool centered;
 };
 
-struct CutsceneStep {
+struct CutsceneStep  final {
 	std::vector<CutsceneImage> images;
 	std::vector<CutsceneText> texts;
 	sf::Time fadeTime;
 };
 
-struct CutsceneData {
+struct CutsceneData final {
 	std::string id = "";
 	std::string musicPath = "";
 	std::string levelID = "";

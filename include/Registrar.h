@@ -13,7 +13,7 @@
     static Registrar registrar(ID, \
         [](MapScreen* m) -> MapDynamicTile* { return new TYPE(m);});
 
-class Registrar {
+class Registrar final {
 public:
 	Registrar(EnemyID id, EnemyConstructor constructor);
 	Registrar(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);

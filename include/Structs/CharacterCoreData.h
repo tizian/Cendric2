@@ -14,7 +14,7 @@
 
 typedef std::map<std::string, std::pair<sf::Vector2i, std::vector<bool>>> ExploredTiles;
 
-struct CharacterCoreData {
+struct CharacterCoreData final {
 	// savegame attributes
 	sf::Time timePlayed;
 	std::string saveGameName;

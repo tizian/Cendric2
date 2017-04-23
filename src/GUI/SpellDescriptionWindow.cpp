@@ -15,7 +15,7 @@ inline std::string toStrMaxDecimals(float value, int decimals) {
 	return std::string(s.begin(), s.end());
 }
 
-SpellDescriptionWindow::SpellDescriptionWindow() : Window(
+SpellDescriptionWindow::SpellDescriptionWindow() : GameObject(), Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,

@@ -13,7 +13,7 @@ class ParticleComponent;
 // skins
 // 1 normal fire rat
 // 2 hidden fire rat that only gets vulnerable when first hit with a ice or windgust spell
-class FireRatEnemy : public Enemy {
+class FireRatEnemy final : public Enemy {
 public:
 	FireRatEnemy(const Level* level, Screen* screen);
 

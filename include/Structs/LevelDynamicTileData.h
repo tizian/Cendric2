@@ -4,7 +4,7 @@
 
 #include "Enums/LevelDynamicTileID.h"
 
-struct LevelDynamicTileData {
+struct LevelDynamicTileData final {
 	LevelDynamicTileID id;
 	sf::Vector2f position;
 	int spawnPosition;

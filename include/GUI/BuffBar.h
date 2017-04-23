@@ -8,7 +8,7 @@
 class LevelInterface;
 
 // the buff bar in a level
-class BuffBar {
+class BuffBar final {
 public:
 	BuffBar(LevelInterface* _interface);
 	~BuffBar();

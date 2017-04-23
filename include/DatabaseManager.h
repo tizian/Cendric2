@@ -25,7 +25,7 @@ struct SpawnBean;
 typedef std::vector<std::vector<std::string>> ResultSet;
 
 /* interface to the SQLite database */
-class DatabaseManager {
+class DatabaseManager final {
 public:
 	DatabaseManager();
 	~DatabaseManager();

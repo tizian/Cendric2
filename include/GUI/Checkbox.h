@@ -9,7 +9,7 @@
 #include "GUI/SlicedSprite.h"
 
 // A simple checkbox 
-class Checkbox final : virtual public GameObject {
+class Checkbox final : public GameObject {
 public:
 	Checkbox();
 

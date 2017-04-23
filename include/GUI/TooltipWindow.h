@@ -8,7 +8,7 @@
 /// A tooltip for each slot. Created by the corresponding slots.
 /// Is rendered on mouseover.
 ///
-class TooltipWindow : public Window {
+class TooltipWindow final : public Window {
 public:
 	TooltipWindow();
 	

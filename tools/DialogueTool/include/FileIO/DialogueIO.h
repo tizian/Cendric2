@@ -8,7 +8,7 @@ class TriggerableNode;
 struct LinkNode;
 
 // static class to load and save a dialogue file
-class DialogueIO {
+class DialogueIO final {
 public:
 	// returns whether the operation was successful
 	static bool loadDialogue(const std::string& filePath, Dialogue** dialogue);

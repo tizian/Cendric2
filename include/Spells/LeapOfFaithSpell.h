@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class LeapOfFaithSpell : public Spell {
+class LeapOfFaithSpell final : public Spell {
 public:
 	LeapOfFaithSpell(float gravityScale);
 	

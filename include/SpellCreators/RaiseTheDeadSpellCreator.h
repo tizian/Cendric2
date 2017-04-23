@@ -6,7 +6,7 @@
 #include "Spells/RaiseTheDeadSpell.h"
 
 // a class that creates raise the dead spells
-class RaiseTheDeadSpellCreator : public SpellCreator {
+class RaiseTheDeadSpellCreator final : public SpellCreator {
 public:
 	RaiseTheDeadSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 

@@ -6,10 +6,9 @@
 #include "Screens/Screen.h"
 
 // A hatching dragon whelp
-class DragonWhelpEnemy : public Enemy {
+class DragonWhelpEnemy final : public Enemy {
 public:
 	DragonWhelpEnemy(const Level* level, Screen* screen);
-	~DragonWhelpEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 

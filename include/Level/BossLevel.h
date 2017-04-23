@@ -8,7 +8,7 @@ class WorldScreen;
 class WorldCallback;
 
 // the bosslevel part of a level, including lua callback
-class BossLevel {
+class BossLevel final {
 public:
 	BossLevel(WorldScreen* screen);
 	~BossLevel();

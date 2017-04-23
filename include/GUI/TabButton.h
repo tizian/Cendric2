@@ -8,9 +8,10 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
-class TabButton : public GameObject {
+class TabButton : public virtual GameObject {
 public:
 	TabButton(const sf::FloatRect& box);
+	virtual ~TabButton() {}
 
 	void setActive(bool active);
 	bool isActive() const;

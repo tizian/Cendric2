@@ -4,7 +4,7 @@
 #include "GUI/Window.h"
 
 /* A screen overlay that supports a window with title and subtitle, rendered on top of the screen (in y direction, not z) */
-class WindowScreenOverlay : public virtual ScreenOverlay {
+class WindowScreenOverlay : public ScreenOverlay {
 public:
 	WindowScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime = sf::Time::Zero);
 	~WindowScreenOverlay();

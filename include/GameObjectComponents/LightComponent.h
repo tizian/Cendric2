@@ -5,7 +5,7 @@
 #include "LightObject.h"
 
 // A game object component that holds a light object.
-class LightComponent : public GameObjectComponent {
+class LightComponent final : public GameObjectComponent {
 public:
 	LightComponent(LightData lightData, GameObject* parent);
 	~LightComponent();

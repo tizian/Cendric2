@@ -3,7 +3,9 @@
 #include "global.h"
 
 // some constants used by the GUI
-class GUIConstants {
+class GUIConstants final {
+private:
+	GUIConstants() {}
 public:
 	static float LEFT;
 	static float TOP;

@@ -5,7 +5,7 @@
 #include "Structs/WeatherData.h"
 #include "Particles/ParticleSystem.h"
 
-class WeatherSystem {
+class WeatherSystem final {
 public:
 	~WeatherSystem();
 

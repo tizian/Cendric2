@@ -8,7 +8,7 @@
 class InteractComponent;
 
 // a door
-class DoorMapTile : public MapDynamicTile {
+class DoorMapTile final : public MapDynamicTile {
 public:
 	DoorMapTile(MapScreen* mapScreen);
 

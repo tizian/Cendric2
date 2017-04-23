@@ -4,7 +4,7 @@
 #include "GameObjectComponents/GameObjectComponent.h"
 #include "Particles/ParticleSystem.h"
 
-struct ParticleComponentData {
+struct ParticleComponentData final {
 	int particleCount = 0;
 	float emitRate = 0;
 	std::string texturePath;
@@ -20,7 +20,7 @@ struct ParticleComponentData {
 };
 
 // A game object component that holds a particle system
-class ParticleComponent : public GameObjectComponent {
+class ParticleComponent final : public GameObjectComponent {
 public:
 	ParticleComponent(const ParticleComponentData& data, GameObject* parent);
 	~ParticleComponent();

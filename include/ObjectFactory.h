@@ -19,7 +19,9 @@ typedef std::function<Enemy*(const Level*, Screen*)> EnemyConstructor;
 typedef std::function<LevelDynamicTile*(LevelScreen*)> LevelDynamicTileConstructor;
 typedef std::function<MapDynamicTile*(MapScreen*)> MapDynamicTileConstructor;
 
-class ObjectFactory {
+class ObjectFactory final {
+private:
+	ObjectFactory() {}
 public:
 	static ObjectFactory* Instance();
 

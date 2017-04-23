@@ -10,7 +10,7 @@
 #include "Structs/AIWalkingQueryRecord.h"
 
 // a sidescroller level
-class Level : public World {
+class Level final : public World {
 public:
 	Level();
 	~Level();

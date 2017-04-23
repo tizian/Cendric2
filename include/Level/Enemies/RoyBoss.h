@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class RoyBoss : virtual public Enemy {
+class RoyBoss final : public Enemy {
 public:
 	RoyBoss(const Level* level, Screen* screen);
 

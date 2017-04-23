@@ -11,7 +11,7 @@ class DialogueWindow;
 class NPC;
 
 // A routine of a npcs behavior
-class NPCRoutine {
+class NPCRoutine final {
 public:
 	void load(const std::string& id, NPC* npc, bool initial = true);
 	const std::string& getID() const;

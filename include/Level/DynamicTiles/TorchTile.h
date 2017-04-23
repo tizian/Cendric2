@@ -5,7 +5,7 @@
 
 class LightComponent;
 
-class TorchTile : public LevelDynamicTile {
+class TorchTile final : public LevelDynamicTile {
 public:
 	TorchTile(LevelScreen* levelScreen);
 	void init() override;

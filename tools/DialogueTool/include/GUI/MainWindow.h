@@ -10,7 +10,7 @@ class TranslationWindow;
 
 // top level controller over the main window
 // holds the toolbar, the tree window and the node windows
-class MainWindow {
+class MainWindow final {
 public:
 	MainWindow();
 	~MainWindow();

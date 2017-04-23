@@ -6,10 +6,9 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class SkeletonArcherEnemy : public Enemy {
+class SkeletonArcherEnemy final : public Enemy {
 public:
 	SkeletonArcherEnemy(const Level* level, Screen* screen);
-	~SkeletonArcherEnemy() {}
 
 	int getMentalStrength() const override;
 

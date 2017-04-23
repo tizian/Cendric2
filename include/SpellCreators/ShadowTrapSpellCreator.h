@@ -6,7 +6,7 @@
 #include "Spells/ShadowTrapSpell.h"
 
 // a class that creates shadow trap spells
-class ShadowTrapSpellCreator : public SpellCreator {
+class ShadowTrapSpellCreator final : public SpellCreator {
 public:
 	ShadowTrapSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

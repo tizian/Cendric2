@@ -8,7 +8,7 @@
 
 // describes the configuration that can be modified by the user.
 // it is loaded every time the game starts and stored in the resource manager.
-struct ConfigurationData {
+struct ConfigurationData final {
 	Language language;
 	bool isSoundOn;
 	// in percent

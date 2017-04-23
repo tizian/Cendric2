@@ -4,7 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/WalkingBehavior.h"
 
 // A moving behavior for the mob "WolfBoss"
-class WolfBossMovingBehavior : public virtual WalkingBehavior {
+class WolfBossMovingBehavior final : public WalkingBehavior {
 public:
 	WolfBossMovingBehavior(Enemy* enemy);
 	~WolfBossMovingBehavior();

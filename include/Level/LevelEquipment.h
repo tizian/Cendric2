@@ -12,10 +12,9 @@ class LevelMainCharacter;
 class LightComponent;
 
 // Equipment for cendric inside a level
-class LevelEquipment : public AnimatedGameObject {
+class LevelEquipment final : public AnimatedGameObject {
 public:
 	LevelEquipment(LevelMainCharacter* mainChar);
-	~LevelEquipment() {};
 
 	void load(const ItemEquipmentBean* itemBean, const ItemEquipmentLightBean* light, ItemType type);
 	void update(const sf::Time& frameTime) override;

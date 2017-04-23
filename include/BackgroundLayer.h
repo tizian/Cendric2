@@ -3,7 +3,7 @@
 #include "global.h"
 #include "ResourceManager.h"
 
-class BackgroundLayer {
+class BackgroundLayer final {
 public:
 	BackgroundLayer();
 	~BackgroundLayer();

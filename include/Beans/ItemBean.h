@@ -4,7 +4,7 @@
 #include "Enums/ItemType.h"
 
 // an item bean, directly from the database
-struct ItemBean : DatabaseBean {
+struct ItemBean final : DatabaseBean {
 	std::string item_id;
 	ItemType item_type;
 	sf::Vector2i icon_location;

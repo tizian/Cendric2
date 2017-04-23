@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class DivineShieldSpell : public Spell {
+class DivineShieldSpell final : public Spell {
 public:
 	DivineShieldSpell(const AttributeData& additionalResistance);
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

@@ -3,7 +3,7 @@
 #include "global.h"
 
 // static class to load and save the configuration file
-class ConfigurationIO {
+class ConfigurationIO final {
 public:
 	// returns whether the operation was successful
 	static bool loadConfiguration();

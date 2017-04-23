@@ -6,7 +6,7 @@
 class Level;
 class Screen;
 
-class CairnEnemy final : virtual public Enemy {
+class CairnEnemy final : public Enemy {
 public:
 	CairnEnemy(const Level* level, Screen* screen);
 	~CairnEnemy() {}

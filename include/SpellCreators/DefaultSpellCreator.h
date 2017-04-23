@@ -6,7 +6,7 @@
 
 // a class that creates all kinds of simple spells that need no special behaviour
 template <class T>
-class DefaultSpellCreator : public SpellCreator {
+class DefaultSpellCreator final : public SpellCreator {
 public:
 	DefaultSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
 		static_assert(std::is_base_of<Spell, T>::value, "type parameter of DefaultSpellCreator must derive from Spell");

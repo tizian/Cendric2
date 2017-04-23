@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct HelperRay {
+struct HelperRay final {
 	sf::Vector2f o, d;
 
 	HelperRay() {}
@@ -12,7 +12,7 @@ struct HelperRay {
 	}
 };
 
-struct HelperRectangle {
+struct HelperRectangle final {
 	sf::Vector2f min, max;
 
 	HelperRectangle() {}
@@ -47,7 +47,7 @@ struct HelperRectangle {
 	}
 };
 
-class CooldownRectangleShape : public sf::Drawable, public::sf::Transformable {
+class CooldownRectangleShape final : public sf::Drawable, public::sf::Transformable {
 public:
 	CooldownRectangleShape();
 

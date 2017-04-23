@@ -6,7 +6,7 @@ class NodeWindow;
 class DialogueNode;
 
 // The tree window shows an overview of the nodes in a dialogue
-class TreeWindow {
+class TreeWindow final {
 
 public:
 	TreeWindow(NodeWindow* nodeWindow);

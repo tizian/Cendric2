@@ -6,7 +6,7 @@
 #include "Spells/InvisibilitySpell.h"
 
 // a class that creates invisibility spells
-class InvisibilitySpellCreator : public SpellCreator {
+class InvisibilitySpellCreator final : public SpellCreator {
 public:
 	InvisibilitySpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

@@ -13,7 +13,7 @@
 
 class Item;
 
-struct BackgroundMusic {
+struct BackgroundMusic final {
 	BackgroundMusic() {
 		currentMusic = new sf::Music();
 		previousMusic = new sf::Music();

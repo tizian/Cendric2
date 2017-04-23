@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/DynamicTiles/LevelMovableTile.h"
 
-class UnstableTile : public virtual LevelMovableTile {
+class UnstableTile final : public LevelMovableTile {
 public:
 	UnstableTile(LevelScreen* levelScreen);
 	void init() override;

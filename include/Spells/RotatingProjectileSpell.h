@@ -6,7 +6,7 @@
 /*
 projectiles that rotate
 */
-class RotatingProjectileSpell : public Spell {
+class RotatingProjectileSpell final : public Spell {
 public:
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector2f& target) override;

@@ -10,7 +10,7 @@
 #include "Structs/AttributeData.h"
 #include "Structs/SpellModifier.h"
 
-class SpellDescriptionWindow : public Window {
+class SpellDescriptionWindow final : public Window {
 public:
 	SpellDescriptionWindow();
 

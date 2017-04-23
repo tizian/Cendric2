@@ -6,7 +6,7 @@
 /*
 projectiles that have a target (the main char) and adjust their trajectory a bit
 */
-class TargetingProjectileSpell : public Spell {
+class TargetingProjectileSpell final : public Spell {
 public:
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;

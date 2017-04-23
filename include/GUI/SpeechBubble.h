@@ -11,10 +11,9 @@
 class LevelMovableGameObject;
 
 // a floating speech bubble for talking mobs in levels
-class SpeechBubble : public GameObject {
+class SpeechBubble final : public GameObject {
 public:
 	SpeechBubble(LevelMovableGameObject* owner);
-	~SpeechBubble() {};
 	
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;

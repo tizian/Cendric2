@@ -6,10 +6,9 @@
 #include "Screens/Screen.h"
 
 // A fledgling of the boss elysia
-class ElysiaFledglingEnemy : public Enemy {
+class ElysiaFledglingEnemy final : public Enemy {
 public:
 	ElysiaFledglingEnemy(const Level* level, Screen* screen);
-	~ElysiaFledglingEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

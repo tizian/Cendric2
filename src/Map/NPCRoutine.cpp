@@ -9,7 +9,7 @@ void NPCRoutine::load(const std::string& id, NPC* npc, bool initial) {
 	m_steps.clear();
 	m_currentStepID = 0;
 
-	NPCRoutineLoader loader(*this, static_cast<WorldScreen*>(m_npc->getScreen()));
+	NPCRoutineLoader loader(*this, dynamic_cast<WorldScreen*>(m_npc->getScreen()));
 	loader.loadRoutine(initial);
 	if (!m_steps.empty()) {
 		if (m_steps[0].state == RoutineState::Waiting) {

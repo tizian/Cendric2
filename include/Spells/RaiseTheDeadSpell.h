@@ -3,12 +3,9 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class RaiseTheDeadSpell : public Spell {
+class RaiseTheDeadSpell final : public Spell {
 public:
-	RaiseTheDeadSpell() : Spell() {};
-
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
-
 	void execOnHit(LevelMovableGameObject* target) override;
 
 protected:

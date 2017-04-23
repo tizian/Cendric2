@@ -9,7 +9,7 @@
 #include "Structs/LevelEquipmentData.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
-class LevelMainCharacterLoader {
+class LevelMainCharacterLoader final {
 public:
 	// loads the main character and adds it directly to the screen
 	static LevelMainCharacter* loadMainCharacter(Screen* screen, Level* level);

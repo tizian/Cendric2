@@ -10,7 +10,7 @@
 #include "GUI/CookingWindow.h"
 #include "Map/MapInterface.h"
 
-class MapScreen : public WorldScreen {
+class MapScreen final : public WorldScreen {
 public:
 	MapScreen(const std::string& mapID, CharacterCore* core);
 	// called by the loadingScreen

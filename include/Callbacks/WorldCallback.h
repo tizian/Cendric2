@@ -9,7 +9,7 @@ class WorldScreen;
 
 // a callback class that holds queries to be executed by lua on the character core.
 // and commands to be executed on a world screen
-class WorldCallback {
+class WorldCallback final {
 public:
 	WorldCallback(WorldScreen* screen);
 	~WorldCallback();

@@ -5,7 +5,7 @@
 struct NodeTranslation;
 
 // The translation window shows translations for npc, cendric and choice nodes
-class TranslationWindow {
+class TranslationWindow final {
 
 public:
 	TranslationWindow();

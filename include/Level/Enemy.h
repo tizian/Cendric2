@@ -23,7 +23,7 @@ class InteractComponent;
 
 // the reward the player gets when this enemy is killed.
 // includes loot and quest conditions.
-struct EnemyReward {
+struct EnemyReward final {
 	// quest targets for this enemy
 	std::vector<std::pair<std::string, std::string>> questTargets;
 	// is this enemies death a condition for a quest?

@@ -9,13 +9,12 @@
 #include "FileIO/CharacterCoreIO.h"
 
 // a reader to read a savegame.
-class CharacterCoreReader final : virtual public Reader, virtual public CharacterCoreIO {
+class CharacterCoreReader final : public Reader, public CharacterCoreIO {
 public:
 	CharacterCoreReader();
 	// reads the whole character core when onlySaveGame is false and
 	// only reads the attributes relevant for a savegame (name, time played and date) if its true
 	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data, bool onlySaveGame = false);
-	
 
 private:
 	bool readTimePlayed(std::string& line, CharacterCoreData& data) const;

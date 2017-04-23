@@ -14,7 +14,7 @@ enum class NodeConditionType {
 };
 
 // a node condition, technically a boolean value. A tree over conditions.
-class NodeCondition { 
+class NodeCondition final { 
 public:
 	NodeCondition(NodeConditionType type);
 	~NodeCondition();

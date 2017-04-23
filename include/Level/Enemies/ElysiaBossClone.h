@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class ElysiaBossClone : public Enemy {
+class ElysiaBossClone final : public Enemy {
 public:
 	ElysiaBossClone(const Level* level, Screen* screen);
 	~ElysiaBossClone();

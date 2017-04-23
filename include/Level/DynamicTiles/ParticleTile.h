@@ -15,7 +15,7 @@ class ParticleComponent;
 // 4: green fire
 // 5: green embers
 // 6: purple embers
-class ParticleTile : public LevelDynamicTile {
+class ParticleTile final : public LevelDynamicTile {
 public:
 	ParticleTile(LevelScreen* levelScreen);
 

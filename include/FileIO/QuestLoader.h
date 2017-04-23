@@ -7,7 +7,9 @@
 #include "LuaBridge/LuaBridge.h"
 
 // static helper class to load lua files for quests
-class QuestLoader {
+class QuestLoader final {
+private:
+	QuestLoader() {}
 public:
 	static QuestData loadQuest(const std::string& questID);
 

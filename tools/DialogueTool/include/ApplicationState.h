@@ -7,7 +7,7 @@ class LogWindow;
 
 // describes the configuration that can be modified by the user via options.
 // it stores mainly paths.
-struct Configuration {
+struct Configuration final {
 	std::string npcFolder;
 	std::string sqlFolder;
 	std::string dialogueFolder;
@@ -23,7 +23,7 @@ const struct Configuration DEFAULT_CONFIGURATION {
 
 // current state of the application. It holds the configuration and the current dialogue.
 // singleton + global
-class ApplicationState {
+class ApplicationState final {
 public:
 	ApplicationState();
 	~ApplicationState();

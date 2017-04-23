@@ -8,7 +8,7 @@ class ParticleComponent;
 
 // this spell is used by the boss: WolfMonster
 // the main char is only hit if he is facing the boss.
-class TransformBeamSpell : public Spell {
+class TransformBeamSpell final : public Spell {
 public:
 	TransformBeamSpell();
 	

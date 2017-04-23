@@ -9,7 +9,7 @@
 
 using namespace std;
 
-MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : WorldScreen(core) {
+MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_mapID = mapID;
 }
 

@@ -3,7 +3,7 @@
 #include "global.h"
 #include "GUI/BitmapText.h"
 
-struct BookData {
+struct BookData final {
 	int skinNr;
 	sf::Vector2f position;
 	std::string id;

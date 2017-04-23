@@ -18,7 +18,7 @@ enum class BuffType {
 
 class Spell;
 
-class BuffSlot : public GameObject {
+class BuffSlot final : public GameObject {
 public:
 	BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
 

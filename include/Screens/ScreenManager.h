@@ -4,7 +4,7 @@
 #include "Screen.h"
 #include "Screens/ErrorScreen.h"
 
-class ScreenManager {
+class ScreenManager final {
 public:
 	ScreenManager(Screen* initialScreen);
 	~ScreenManager();

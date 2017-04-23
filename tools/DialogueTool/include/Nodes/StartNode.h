@@ -5,7 +5,7 @@
 #include "Nodes/NodeCondition.h"
 
 // Start Node, it determines the root of the dialogue
-class StartNode : public virtual DialogueNode {
+class StartNode final : public DialogueNode {
 public:
 	StartNode(int tag);
 	StartNode();

@@ -5,7 +5,7 @@
 
 class InteractComponent;
 
-class CheckpointTile : public LevelDynamicTile {
+class CheckpointTile final : public LevelDynamicTile {
 public:
 	CheckpointTile(LevelScreen* levelScreen);
 	void init() override;

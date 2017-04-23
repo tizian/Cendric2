@@ -6,7 +6,7 @@
 #include "Structs/LightData.h"
 #include "Structs/Condition.h"
 
-struct ChestTileData {
+struct ChestTileData final {
 	int objectID;
 	sf::Vector2f spawnPosition;
 	int skinNr;

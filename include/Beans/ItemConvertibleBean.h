@@ -3,7 +3,7 @@
 #include "Beans/DatabaseBean.h"
 
 // a convertible item bean, directly from the database
-struct ItemConvertibleBean : DatabaseBean {
+struct ItemConvertibleBean final : DatabaseBean {
 	std::string item_id;
 	std::string convertible_item_id;
 	int convertible_amount; // from 1 to max int

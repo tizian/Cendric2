@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class ShadowTrapSpell : public Spell {
+class ShadowTrapSpell final : public Spell {
 public:
 	ShadowTrapSpell();
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;

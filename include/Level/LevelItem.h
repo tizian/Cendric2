@@ -14,7 +14,7 @@ class LevelMainCharacter;
 class LevelScreen;
 
 // A item cendric can collect in a level
-class LevelItem : public AnimatedGameObject {
+class LevelItem final : public AnimatedGameObject {
 public:
 	LevelItem(LevelScreen* levelScreen);
 

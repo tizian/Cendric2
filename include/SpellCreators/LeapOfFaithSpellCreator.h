@@ -6,7 +6,7 @@
 #include "Spells/LeapOfFaithSpell.h"
 
 // a class that creates leap of faith spells
-class LeapOfFaithSpellCreator : public SpellCreator {
+class LeapOfFaithSpellCreator final : public SpellCreator {
 public:
 	LeapOfFaithSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	void execExecuteSpell(const sf::Vector2f& target) override;

@@ -7,7 +7,7 @@ class LevelInterface;
 class SlotClone;
 
 // the quick slot bar in a level. There are two slots in total
-class QuickSlotBar {
+class QuickSlotBar final {
 public:
 	QuickSlotBar(LevelInterface* _interface);
 	~QuickSlotBar();

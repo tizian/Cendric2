@@ -22,7 +22,7 @@ enum class TextStyle {
 	Shadowed
 };
 
-class BitmapText : public sf::Drawable, public::sf::Transformable {
+class BitmapText final : public virtual sf::Drawable, public virtual sf::Transformable {
 public:
 	BitmapText();
 	BitmapText(const std::string& string, TextStyle style, TextAlignment alignment = TextAlignment::Left);

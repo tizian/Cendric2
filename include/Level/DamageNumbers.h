@@ -11,14 +11,14 @@ enum class DamageNumberType {
 
 class BitmapText;
 
-struct DamageNumberData {
+struct DamageNumberData final {
 	bool active;
 	float startPosition;
 	float time;
 	BitmapText* text;
 };
 
-class DamageNumbers {
+class DamageNumbers final {
 public:
 	DamageNumbers(bool isAlly);
 	~DamageNumbers();

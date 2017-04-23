@@ -4,7 +4,7 @@
 #include "Logger.h"
 #include "Enums/Language.h"
 
-class TextProvider {
+class TextProvider final {
 public:
 	TextProvider();
 

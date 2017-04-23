@@ -6,7 +6,7 @@
 #include "Spells/BuffSpell.h"
 
 // a class that creates buff spells. Can only be used by enemies.
-class BuffSpellCreator final : virtual public SpellCreator {
+class BuffSpellCreator final : public SpellCreator {
 public:
 	BuffSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 

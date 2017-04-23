@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class ZeffBoss : virtual public Boss {
+class ZeffBoss final : public Boss {
 public:
 	ZeffBoss(const Level* level, Screen* screen);
 

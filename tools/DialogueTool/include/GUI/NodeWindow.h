@@ -6,7 +6,7 @@ class DialogueNode;
 class TranslationWindow;
 
 // The node window displays a specific node. It can handle all kinds of nodes. 
-class NodeWindow {
+class NodeWindow final {
 
 public:
 	NodeWindow(TranslationWindow* translationWindow);

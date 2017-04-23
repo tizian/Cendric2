@@ -13,14 +13,14 @@ enum class DialogueNodeType {
 	Trade
 };
 
-struct ChoiceTranslation {
+struct ChoiceTranslation final {
 	// the translation of this choice
 	std::string text;
 	// if this is filled, the translation will be added to the translation of the choice.
 	std::pair<std::string, int> item;
 };
 
-struct DialogueNode {
+struct DialogueNode final {
 	// the dialogue tag
 	int tag;
 	// The next tag. It may be 0 to infinity, but 

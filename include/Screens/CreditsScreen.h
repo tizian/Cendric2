@@ -7,7 +7,7 @@
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
 
-class CreditsScreen : public Screen {
+class CreditsScreen final : public Screen {
 public:
 	CreditsScreen(CharacterCore* core);
 

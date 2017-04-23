@@ -6,7 +6,7 @@
 
 class LevelMainCharacter;
 
-class LeverTile : public LevelDynamicTile {
+class LeverTile final : public LevelDynamicTile {
 public:
 	LeverTile(LevelScreen* levelScreen);
 	void init() override;

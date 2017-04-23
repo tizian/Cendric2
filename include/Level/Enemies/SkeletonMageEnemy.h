@@ -7,10 +7,9 @@
 #include "Screens/Screen.h"
 #include "GameObjectComponents/LightComponent.h"
 
-class SkeletonMageEnemy : public Enemy {
+class SkeletonMageEnemy final : public Enemy {
 public:
 	SkeletonMageEnemy(const Level* level, Screen* screen);
-	~SkeletonMageEnemy() {}
 
 	int getMentalStrength() const override;
 

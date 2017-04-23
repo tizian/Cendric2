@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
-class TelekinesisSpell : public Spell {
+class TelekinesisSpell final : public Spell {
 public:
 	TelekinesisSpell();
 	

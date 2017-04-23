@@ -10,7 +10,7 @@ class ScrollBar;
 class ScrollHelper;
 
 // a save game entry in a save game window
-class SaveGameEntry : public GameObject {
+class SaveGameEntry final : public GameObject {
 public:
 	SaveGameEntry();
 

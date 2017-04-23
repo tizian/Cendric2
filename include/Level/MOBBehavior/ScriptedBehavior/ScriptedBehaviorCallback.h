@@ -8,7 +8,7 @@ class Enemy;
 class ScriptedBehavior;
 class WorldCallback;
 
-class ScriptedBehaviorCallback {
+class ScriptedBehaviorCallback final {
 public:
 	ScriptedBehaviorCallback(const std::string& luaPath, Enemy* enemy);
 	~ScriptedBehaviorCallback();

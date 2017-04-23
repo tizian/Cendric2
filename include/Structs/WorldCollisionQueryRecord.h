@@ -16,7 +16,7 @@ enum class CollisionDirection {
 /*
 used by movable game objects to check a collision with the world.
 */
-struct WorldCollisionQueryRecord {
+struct WorldCollisionQueryRecord final {
 	// the bounding box to be checked for collision
 	sf::FloatRect boundingBox; 
 	// if set to true, the collision check will not check for collidable dynamic tiles 

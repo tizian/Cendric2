@@ -9,10 +9,9 @@ class MapMainCharacter;
 class LightComponent;
 
 // Equipment for cendric on the map
-class MapEquipment : public AnimatedGameObject {
+class MapEquipment final : public AnimatedGameObject {
 public:
 	MapEquipment(MapMainCharacter* mainChar);
-	~MapEquipment() {};
 
 	void update(const sf::Time& frameTime) override;
 

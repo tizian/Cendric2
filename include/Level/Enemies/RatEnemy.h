@@ -7,10 +7,9 @@
 #include "Screens/Screen.h"
 
 // A nasty rat in a level
-class RatEnemy : public Enemy {
+class RatEnemy final : public Enemy {
 public:
 	RatEnemy(const Level* level, Screen* screen);
-	~RatEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

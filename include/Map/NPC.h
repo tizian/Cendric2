@@ -13,7 +13,7 @@ class MapScreen;
 class MapMainCharacter;
 
 // A npc on a map
-class NPC : public virtual MapMovableGameObject {
+class NPC final : public MapMovableGameObject {
 public:
 	NPC(MapScreen* mapScreen);
 	void load(const NPCData& data);

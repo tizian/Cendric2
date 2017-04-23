@@ -10,7 +10,7 @@ namespace particles {
 	class AimedVelocityGenerator;
 }
 
-class DivineTorchTile : public LevelDynamicTile {
+class DivineTorchTile final : public LevelDynamicTile {
 public:
 	DivineTorchTile(LevelScreen* levelScreen);
 

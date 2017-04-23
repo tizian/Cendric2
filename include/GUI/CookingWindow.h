@@ -13,7 +13,7 @@ class CharacterCore;
 class ScrollBar;
 class ScrollHelper;
 
-class CookingOption : public virtual GameObject {
+class CookingOption final : public GameObject {
 public:
 	CookingOption(const std::string& itemID, const std::string& cookedItemID, int count, int nr);
 	void render(sf::RenderTarget& renderTarget) override;

@@ -9,7 +9,7 @@
 class ParticleComponent;
 
 // A spooky Nekomata in a level
-class NekomataEnemy : public Enemy {
+class NekomataEnemy final : public Enemy {
 public:
 	NekomataEnemy(const Level* level, Screen* screen);
 

@@ -12,7 +12,7 @@ class SlotClone;
 class WorldScreen;
 
 // the equipment part of the inventory. it shows all equipped items
-class InventoryEquipment {
+class InventoryEquipment final {
 public:
 	InventoryEquipment(WorldScreen* screen);
 	~InventoryEquipment();

@@ -7,10 +7,9 @@
 #include "Screens/Screen.h"
 
 // Oozes can creep on walls...
-class OozeEnemy : public Enemy {
+class OozeEnemy final : public Enemy {
 public:
 	OozeEnemy(const Level* level, Screen* screen);
-	~OozeEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

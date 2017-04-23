@@ -6,7 +6,7 @@
 #include "Spells/IcyAmbushSpell.h"
 
 // a class that creates icy ambush spells
-class IcyAmbushSpellCreator : public SpellCreator {
+class IcyAmbushSpellCreator final : public SpellCreator {
 public:
 	IcyAmbushSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

@@ -18,7 +18,7 @@ class SlotClone;
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
 // is only modifiable when modifiable is true
-class WeaponWindow {
+class WeaponWindow final {
 	friend class Spellbook;
 public:
 	WeaponWindow(CharacterCore* core, bool modifiable);

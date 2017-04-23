@@ -6,6 +6,8 @@
 #include "Logger.h"
 
 class Reader {
+public: 
+	virtual ~Reader() {}
 protected:
 	const char COMMENT_MARKER = '#';
 

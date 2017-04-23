@@ -6,11 +6,10 @@
 #include "Screens/Screen.h"
 
 // A flying seagull
-class SeagullEnemy : public Enemy {
+class SeagullEnemy final : public Enemy {
 public:
 	SeagullEnemy(const Level* level, Screen* screen);
-	~SeagullEnemy() {}
-
+	
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 

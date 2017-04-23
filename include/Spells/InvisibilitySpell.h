@@ -5,7 +5,7 @@
 
 class ParticleComponent;
 
-class InvisibilitySpell : public Spell {
+class InvisibilitySpell final : public Spell {
 public:
 	InvisibilitySpell();
 	

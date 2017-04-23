@@ -10,10 +10,9 @@
 // skins:
 // 0: ghostly wisp
 // 1: fiery wisp
-class WispEnemy : public Enemy {
+class WispEnemy final : public Enemy {
 public:
 	WispEnemy(const Level* level, Screen* screen);
-	~WispEnemy() {}
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;

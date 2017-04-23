@@ -32,7 +32,7 @@ enum class TriggerContentType {
 // holds a part of the trigger content.
 // the trigger content type decides which of 
 // the attributes are used.
-struct TriggerContent {
+struct TriggerContent final {
 	TriggerContent() : type(TriggerContentType::VOID) {};
 	TriggerContent(TriggerContentType type_) : type(type_) {};
 	TriggerContentType type = TriggerContentType::VOID;

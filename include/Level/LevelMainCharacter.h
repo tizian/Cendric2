@@ -13,7 +13,7 @@
 class ParticleComponent;
 
 // Cendric in a level
-class LevelMainCharacter final : public virtual LevelMovableGameObject, public virtual MainCharacter {
+class LevelMainCharacter final : public LevelMovableGameObject, public MainCharacter {
 	friend class UserMovingBehavior;
 public:
 	LevelMainCharacter(Level* level);

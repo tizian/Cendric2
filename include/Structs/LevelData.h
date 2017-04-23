@@ -14,7 +14,7 @@
 #include "Structs/LadderTileData.h"
 #include "Structs/DoorData.h"
 
-struct LevelData : WorldData {
+struct LevelData final : WorldData {
 	std::vector<BackgroundLayer> backgroundLayers;
 	std::vector<LevelDynamicTileData> dynamicTiles;
 	std::vector<AnimatedTileData> animatedTiles;

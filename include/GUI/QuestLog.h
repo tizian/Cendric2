@@ -17,7 +17,7 @@ class ScrollBar;
 class ScrollHelper;
 
 // a quest entry in the quest log
-class QuestEntry : public GameObject {
+class QuestEntry final : public GameObject {
 public:
 	QuestEntry(const std::string& questID, bool isMainQuest);
 
@@ -45,7 +45,7 @@ private:
 
 // the quest log, as displayed in a level or a map
 // it takes its information directly from the character core
-class QuestLog {
+class QuestLog final {
 public:
 	QuestLog(CharacterCore* core);
 	~QuestLog();

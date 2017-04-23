@@ -8,7 +8,7 @@
 class InteractComponent;
 
 // a readable sign
-class SignMapTile : public MapDynamicTile {
+class SignMapTile final : public MapDynamicTile {
 public:
 	SignMapTile(const SignData& data, MapScreen* mapScreen);
 

@@ -11,7 +11,7 @@ class CharacterCore;
 class LevelInterface;
 class LevelScreen;
 
-class QuickSlot : public Slot {
+class QuickSlot final : public Slot {
 public:
 	// an empty slot is initialized with an empty itemID
 	QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key);

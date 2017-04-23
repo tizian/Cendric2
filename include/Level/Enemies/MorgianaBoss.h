@@ -6,7 +6,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class MorgianaBoss : virtual public Enemy {
+class MorgianaBoss final : public Enemy {
 public:
 	MorgianaBoss(const Level* level, Screen* screen);
 

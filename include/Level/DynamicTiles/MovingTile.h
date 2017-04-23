@@ -7,7 +7,7 @@
 
 class MovingTile;
 
-class MovingTileSpikes {
+class MovingTileSpikes final {
 public:
 	MovingTileSpikes(bool top, bool bottom, int size, LevelMainCharacter* mainChar);
 
@@ -30,7 +30,7 @@ private:
 	LevelMainCharacter* m_mainChar;
 };
 
-class MovingTile : public virtual LevelMovableTile, public virtual LeverDependentTile {
+class MovingTile final : public LevelMovableTile, public LeverDependentTile {
 public:
 	MovingTile(LevelScreen* levelScreen);
 	~MovingTile();

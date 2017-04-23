@@ -6,7 +6,7 @@
 /*
 projectiles that return to their owner
 */
-class ReturningProjectileSpell : public Spell {
+class ReturningProjectileSpell final : public Spell {
 public:
 	void load(const SpellData& data, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;

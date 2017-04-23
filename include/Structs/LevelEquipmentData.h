@@ -5,7 +5,7 @@
 
 #include "Enums/GameObjectState.h"
 
-struct LevelEquipmentData {
+struct LevelEquipmentData final {
 	sf::Vector2f spriteOffset;
 	sf::FloatRect boundingBox;
 	std::string texturePath;

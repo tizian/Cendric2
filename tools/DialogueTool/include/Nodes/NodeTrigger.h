@@ -27,7 +27,7 @@ enum class TriggerType {
 };
 
 // a node trigger that can be added and exported to lua
-struct NodeTrigger {
+struct NodeTrigger final {
 	NodeTrigger(TriggerType type);
 
 	TriggerType type;

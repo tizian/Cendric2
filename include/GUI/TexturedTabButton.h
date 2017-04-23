@@ -3,7 +3,7 @@
 #include "global.h"
 #include "TabButton.h"
 
-class TexturedTabButton : public TabButton {
+class TexturedTabButton final : public TabButton {
 public:
 	TexturedTabButton(const sf::FloatRect& box);
 	void render(sf::RenderTarget& renderTarget) override;

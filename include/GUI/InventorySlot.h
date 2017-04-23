@@ -5,7 +5,7 @@
 #include "GUI/BitmapText.h"
 #include "Item.h"
 
-class InventorySlot : public Slot {
+class InventorySlot final : public Slot {
 public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const std::string& itemID, int amount);

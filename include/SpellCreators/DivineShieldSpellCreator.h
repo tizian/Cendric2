@@ -6,7 +6,7 @@
 #include "Spells/DivineShieldSpell.h"
 
 // a class that creates divine shield spells
-class DivineShieldSpellCreator : public SpellCreator {
+class DivineShieldSpellCreator final : public SpellCreator {
 public:
 	DivineShieldSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

@@ -5,7 +5,7 @@
 #include "MapLoader.h"
 
 // a top down level
-class Map : public World {
+class Map final : public World {
 public:
 	Map();
 	~Map();

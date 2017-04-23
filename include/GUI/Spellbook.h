@@ -16,7 +16,7 @@ class SlotClone;
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
 // it is only clickable when in a map.
-class Spellbook {
+class Spellbook final {
 public:
 	Spellbook(CharacterCore* core, bool modifiable);
 	~Spellbook();

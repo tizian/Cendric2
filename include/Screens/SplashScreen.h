@@ -6,7 +6,7 @@
 #include "MenuScreen.h"
 #include "Particles/ParticleSystem.h"
 
-class SplashScreen : public Screen {
+class SplashScreen final : public Screen {
 public:
 	SplashScreen();
 	~SplashScreen();

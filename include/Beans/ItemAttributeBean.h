@@ -4,7 +4,7 @@
 #include "Beans/DatabaseBean.h"
 
 // an item attribute bean, directly from the database
-struct ItemAttributeBean : DatabaseBean {
+struct ItemAttributeBean final : DatabaseBean {
 	std::string item_id;
 	int max_health;
 	int health_regeneration;

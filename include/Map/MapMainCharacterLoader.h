@@ -7,7 +7,9 @@
 #include "Map/MapEquipment.h"
 
 // helper class used by the game screan to load the main character including his weapon / equipment.
-class MapMainCharacterLoader {
+class MapMainCharacterLoader final {
+private:
+	~MapMainCharacterLoader() {}
 public:
 	// loads the main character and adds it directly to the screen
 	static MapMainCharacter* loadMainCharacter(Screen* screen, Map* map);

@@ -6,7 +6,7 @@
 #include "Spells/FearSpell.h"
 
 // a class that creates fear spells
-class FearSpellCreator : public SpellCreator {
+class FearSpellCreator final : public SpellCreator {
 public:
 	FearSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner);
 	std::string getStrengthModifierName() const override;

@@ -6,7 +6,7 @@
 
 #include "Item.h"
 
-class LootWindow : public Window {
+class LootWindow final : public Window {
 public:
 	LootWindow();
 	~LootWindow();

@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-struct LightData {
+struct LightData final {
 	LightData() {};
 	LightData(const sf::Vector2f& center, const sf::Vector2f& radius) : center(center), radius(radius) {};
 	LightData(const sf::Vector2f& center, const sf::Vector2f& radius, float brightness) : center(center), radius(radius), brightness(brightness) {};

@@ -8,10 +8,9 @@
 #include "Level/Enemies/WardenEnemy.h"
 
 // An observer that can put the main character in jail. It is invincible and will only attack Cendric if he steals something
-class ObserverEnemy : public virtual WardenEnemy {
+class ObserverEnemy final : public WardenEnemy {
 public:
 	ObserverEnemy(const Level* level, Screen* screen);
-	~ObserverEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
 

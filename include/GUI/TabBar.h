@@ -5,7 +5,7 @@
 #include "ResourceManager.h"
 #include "GUI/TabButton.h"
 
-class TabBar : public GameObject {
+class TabBar final : public GameObject {
 public:
 	TabBar(const sf::FloatRect& box, int numberTabs);
 	~TabBar();

@@ -7,7 +7,7 @@
 #include "GUI/Slot.h"
 
 // class for clones: used when slots are dragged around
-class SlotClone : public GameObject {
+class SlotClone final : public GameObject {
 public:
 	SlotClone(const Slot* original);
 

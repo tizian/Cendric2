@@ -18,7 +18,7 @@ class LevelDynamicTile;
 class LevelScreen;
 
 // helper class used by the level to load dynamic tiles, level items and enemies
-class LevelLoader {
+class LevelLoader final {
 public:
 	void loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const;
 	// loads lights out of level data and adds them directly to the screen

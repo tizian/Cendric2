@@ -3,7 +3,7 @@
 #include "Beans/ItemAttributeBean.h"
 #include "global.h"
 
-struct AttributeData {
+struct AttributeData final {
 	int currentHealthPoints = 0;
 
 	// total attributes
