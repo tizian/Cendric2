@@ -41,6 +41,22 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 		m_npc->setReloadEnabled(true);
 		updateStep = true;
 	}
+	else if (currentStep.state == RoutineState::TalkingActive) {
+		m_npc->setTalkingActive(true);
+		updateStep = true;
+	}
+	else if (currentStep.state == RoutineState::TalkingInactive) {
+		m_npc->setTalkingActive(false);
+		updateStep = true;
+	}
+	else if (currentStep.state == RoutineState::TalkingEnabled) {
+		m_npc->setTalkingEnabled(true);
+		updateStep = true;
+	}
+	else if (currentStep.state == RoutineState::TalkingDisabled) {
+		m_npc->setTalkingEnabled(false);
+		updateStep = true;
+	}
 	else if (currentStep.state == RoutineState::FacingDirection) {
 		m_npc->setState(
 			currentStep.goal.x < 0 ? GameObjectState::Idle_left :

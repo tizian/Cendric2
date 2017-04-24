@@ -1,0 +1,431 @@
+# dia file for dialogue for npc: npc_koray
+
+npc.id:npc_koray
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:DL:isQuestState("help_koray", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:DL:isQuestState("help_koray", "started")
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_koray", "what_doing")
+		# translation: 
+		translation.tag:DL_Choice_WhatDoing
+		translation.en:What are you doing here?
+		translation.de:Was machst du hier?
+		translation.ch:Was machsch du da?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_koray", "nuray") and DL:isQuestState("missing_koray", "started")
+		# translation: 
+		translation.tag:DL_Choice_Nuray
+		translation.en:Nuray is looking for you.
+		translation.de:Nuray sucht nach dir.
+		translation.ch:D'Nuray suecht dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_koray", "earth")
+		# translation: 
+		translation.tag:DL_Choice_Earth
+		translation.en:Do you know something about earth magic?
+		translation.de:Kennst du dich mit Erdmagie aus?
+		translation.ch:Kennsch dich mit Erdmagie us?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isConditionFulfilled("npc_koray", "what_doing") and not DL:isConditionFulfilled("npc_koray", "business")
+		# translation: 
+		translation.tag:DL_Choice_Business
+		translation.en:Waiting for someone like me?
+		translation.de:Du wartest auf jemanden wie ich?
+		translation.ch:Du wartisch uf öpper we mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("npc_koray", "business") and not DL:isConditionFulfilled("npc_koray", "interested")
+		# translation: 
+		translation.tag:DL_Choice_InterestedAgain
+		translation.en:Tell me more about why you need an escort.
+		translation.de:Erzähl mir mehr davon, wieso du Geleitschutz brauchst.
+		translation.ch:Verzell mer me devo weso du Geleitschutz bruchsch.
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "telekinesis")
+		# translation: 
+		translation.tag:DL_Choice_Telekinesis
+		translation.en:What's this "telekinesis"?
+		translation.de:Was ist diese "Telekinese?"
+		translation.ch:Was isch die "Telekinese?"
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:isConditionFulfilled("npc_koray", "telekinesis") and DL:isQuestState("help_koray", "void")
+		# translation: 
+		translation.tag:DL_Choice_StartQuest
+		translation.en:I'll escort you if you teach me your magic.
+		translation.de:Ich werde dir Geleitschutz geben wenn du mir deine Magie beibringst.
+		translation.ch:Ich wird der Geleitschutz ge wenn du mir dini Magie bibringsch.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "what_doing")
+	# translation: 
+	translation.tag:DL_Koray_WhatDoing
+	translation.en:I'm waiting... for someone like you maybe. 
+	translation.de:Ich warte... vielleicht auf jemanden wie dich.
+	translation.ch:Ich warte... vilicht uf öppert we dich.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_WhatDoing2
+	translation.en:That paladin on the other side of the bridge was quite a weirdo.
+	translation.de:Dieser Paladin auf der anderen Seite der Brücke war ein ziemlicher Spinner.
+	translation.ch:De Paladin uf de andere Siite vode Brugg isch zimli dureknallt gsi.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_WhatDoing3
+	translation.en:But you... you may be the one.
+	translation.de:Aber du... du könntest es sein.
+	translation.ch:Aber du... du chöntsches sii.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "nuray")
+	# translation: 
+	translation.tag:DL_Koray_Nuray
+	translation.en:Oh, she doesn't have to worry. Everything's fine here. 
+	translation.de:Oh, sie muss sich keine Sorgen machen. Es ist alles gut hier.
+	translation.ch:Oh, si mun sich ke Sorge mache. Do isch alles paletti.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addQuestDescription("missing_koray", 1)
+	# translation: 
+	translation.tag:DL_Koray_Nuray2
+	translation.en:I just got unfinished business here. After that, I'll return to Gandria.
+	translation.de:Ich muss hier nur noch etwas erledigen. Danach werde ich nach Gandria zurückkehren.
+	translation.ch:Ich mun da nur na was erledige. Nachene wirdi nach Gandria zrugg gah.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "earth")
+	# translation: 
+	translation.tag:DL_Koray_Earth
+	translation.en:Maybe... (smiles)
+	translation.de:Vielleicht... (lächelt)
+	translation.ch:Vilicht... (lächlet)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Business
+	translation.en:Yes, you look like someone who knows how to handle a weapon.
+	translation.de:Ja, du siehst aus wie jemand, der weiss, wie man mit einer Waffe umgeht.
+	translation.ch:Jo, du gsesch us we öpper wo weiss, weme mit enere Waffe umgaht.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "business")
+	# translation: 
+	translation.tag:DL_Koray_Business2
+	translation.en:I need an escort. Are you interested?
+	translation.de:Ich brauche Geleitschutz. Interessiert?
+	translation.ch:Ich bruche Geleitschutz. Interessiert?
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{2
+	# [10] Choice Node
+	tag:10
+	[
+		# Link node, tag is next tag
+		tag:11
+		# translation: 
+		translation.tag:DL_Choice_Interested
+		translation.en:Tell me more about it.
+		translation.de:Erzähl mir mehr davon.
+		translation.ch:Verzell mer me devo.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_NotInterested
+		translation.en:I don't have time for this at the moment.
+		translation.de:Ich habe momentan keine Zeit.
+		translation.ch:Ich han momentan ke Ziit.
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "interested")
+	# translation: 
+	translation.tag:DL_Koray_Interested
+	translation.en:Well, I lost a very precious necklace, the "Eye of the Moon". 
+	translation.de:Nun, ich habe eine sehr wertvolle Halskette verloren, das "Auge des Mondes".
+	translation.ch:Weisch, ich ha e sehr wertvolli Halschettle verlore, es "Aug vom Mond".
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested2
+	translation.en:I had to run away with it and jumped down from a small hill into the forest.
+	translation.de:Ich musste damit flüchten und bin von einem kleinen Hügel heruntergesprungen.
+	translation.ch:Ich ha möse demit flüchte und bi vomne chliine Hügeli abegumpet.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested3
+	translation.en:Unfortunately, it got caught in the branches of a tree and I can't get near it alone.
+	translation.de:Unglücklicherweise hat es sich in den Ästen eines Baums verfangen und ich komm alleine nicht genügend nah ran.
+	translation.ch:Dummerwiis hets sich ide Äst vomne Baum verfange und ich chum elei nid gnueg nöch ane.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested4
+	translation.en:But if you could get me near that tree, I could get it using some telekinesis.
+	translation.de:Aber wenn du mich in die Nähe dieses Baums bringen könntest, könnte ich es mit Telekinesis runterholen.
+	translation.ch:Aber wenn du mich id Nöchi vo dem Baum bringe chöntsch, chöntis mit Telekinesis abehole.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "interested")
+	# translation: 
+	translation.tag:DL_Koray_Interested
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested3
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:18
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Interested4
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "telekinesis")
+	# translation: 
+	translation.tag:DL_Koray_Telekinesis
+	translation.en:That's a type of earth magic, using the earths magnetism to move objects. Quite handy if you ask me.
+	translation.de:Das ist eine Art Erdmagie. Man benutzt den Erdmagnetismus, um entfernte Objekte zu bewegen. Ist ziemlich nützlich, glaub mir.
+	translation.ch:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z'bewege. Isch zimli nützli, weisch.
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Telekinesis2
+	translation.en:Actually, I'm affine to twilight magic, but this spell kind of complements my skills.
+	translation.de:Eigentlich bin ich zur Dämmerungsmagie affin, aber dieser Zauber ergänzt meine Fähigkeiten einfach gut.
+	translation.ch:Eigentli bini zude Dämmerigsmagie affin, aber de Zauber ergänzt mini Fähigkeite recht guet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:changeQuestState("help_koray", "started")
+	# translation: 
+	translation.tag:DL_Koray_StartQuest
+	translation.en:Alright. Follow me.
+	translation.de:Gut. Folge mir.
+	translation.ch:Guet. Chum mit.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_GoIn
+	translation.en:Let's go.
+	translation.de:Los geht's.
+	translation.ch:Gömmer.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:startLevel("res/level/forest/forest.tmx", 1, 1)
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

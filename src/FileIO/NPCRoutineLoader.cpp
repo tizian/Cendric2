@@ -33,7 +33,9 @@ void NPCRoutineLoader::loadRoutine(bool isInitial) {
 		.addFunction("setDisposedStep", &NPCRoutineLoader::setDisposedStep)
 		.addFunction("setTalkingActive", &NPCRoutineLoader::setTalkingActive)
 		.addFunction("setTalkingActiveForce", &NPCRoutineLoader::setTalkingActiveForce)
+		.addFunction("setTalkingActiveStep", &NPCRoutineLoader::setTalkingActiveStep)
 		.addFunction("setTalkingEnabled", &NPCRoutineLoader::setTalkingEnabled)
+		.addFunction("setTalkingEnabledStep", &NPCRoutineLoader::setTalkingEnabledStep)
 		.addFunction("setReloadEnabled", &NPCRoutineLoader::setReloadEnabled)
 		.endClass();
 
@@ -90,8 +92,20 @@ void NPCRoutineLoader::setTalkingActiveForce(bool active) {
 	m_routine.getNPC()->setTalkingActive(active);
 }
 
+void NPCRoutineLoader::setTalkingActiveStep(bool enabled) {
+	RoutineStep step;
+	step.state = enabled ? RoutineState::TalkingActive : RoutineState::TalkingInactive;
+	m_routine.addStep(step);
+}
+
 void NPCRoutineLoader::setTalkingEnabled(bool enabled) {
 	m_routine.getNPC()->setTalkingEnabled(enabled);
+}
+
+void NPCRoutineLoader::setTalkingEnabledStep(bool enabled) {
+	RoutineStep step;
+	step.state = enabled ? RoutineState::TalkingEnabled : RoutineState::TalkingDisabled;
+	m_routine.addStep(step);
 }
 
 void NPCRoutineLoader::setReloadEnabled(bool enabled) {

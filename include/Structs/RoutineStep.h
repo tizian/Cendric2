@@ -11,6 +11,10 @@ enum class RoutineState {
 	Disappearing,
 	ReloadLock,
 	ReloadUnlock,
+	TalkingEnabled,
+	TalkingDisabled,
+	TalkingActive,
+	TalkingInactive,
 	FacingDirection
 };
 

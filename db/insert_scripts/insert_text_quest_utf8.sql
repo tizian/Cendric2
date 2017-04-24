@@ -150,3 +150,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('save_leeroy','quest','Leeeroy!','Leeeroy!','Leeeroy!','Leeeroy!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('save_leeroy', 'quest_desc','Oh my god, he just ran in. Maybe I can save him from dying...', 'Oh Gott, er ist einfach reingerannt. Vielleicht kann ich ihn noch retten...', 'Ohgott, er isch eifach iegrennt. Vilicht chanin na rette...', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('help_koray','quest','Telekinesis','Telekinese','Telekinese','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('help_koray', 'quest_desc','Koray promised me to teach me telekinesis if I help him to get a necklace in a tree.', 'Koray hat versprochen, mir Telekinese beizubringen wenn ich ihm helfe, eine Halskette aus einem Baum zu holen.', 'De Koray het mer versproche zum mer Telekinese biibringe wenim hilf, e Halschettle usemne Baum z''hole.', '?');

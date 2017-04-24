@@ -28,8 +28,10 @@ public:
 	void goToTile(float x, float y);
 	void setLooped(bool looped);
 	void setTalkingActive(bool active);
+	void setTalkingActiveStep(bool active);
 	void setTalkingActiveForce(bool active);
 	void setTalkingEnabled(bool enabled);
+	void setTalkingEnabledStep(bool enabled);
 	void setReloadEnabled(bool enabled);
 
 private:
