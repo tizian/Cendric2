@@ -11,7 +11,7 @@ Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style) : GameObject() 
 	init(box, style);
 }
 
-Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor) {
+Window::Window(const sf::FloatRect& box, GUIOrnamentStyle style, const sf::Color& backColor, const sf::Color& ornamentColor) : GameObject() {
 	m_backColor = backColor;
 	m_ornamentColor = ornamentColor;
 
