@@ -37,3 +37,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossRoy','enemy','Roy "The Demon"','Roy "Der Dämon"','"Dämon" Roy');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossJeremy','enemy','Jeremy "The Fox" Siek','Jeremy "Der Fuchs" Siek','Jeremy "De Fuchs" Siek');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Leeroy','enemy','Leeroy','Leeroy','Leeroy');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Koray','enemy','Koray','Koray','Koray');

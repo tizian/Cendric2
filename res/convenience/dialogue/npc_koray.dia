@@ -404,6 +404,7 @@ npc.id:npc_koray
 	# [22] NPC Node
 	tag:22
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "level_start")
 	# translation: 
 	translation.tag:DL_Koray_GoIn
 	translation.en:Let's go.
@@ -418,7 +419,7 @@ npc.id:npc_koray
 	# [23] NPC Node
 	tag:23
 	# triggers: 
-	trigger:DL:startLevel("res/level/forest/forest.tmx", 1, 1)
+	trigger:DL:startLevel("res/level/swampforest/swampforest.tmx", 160, 1210)
 	# translation: 
 	translation.tag:
 	translation.en:

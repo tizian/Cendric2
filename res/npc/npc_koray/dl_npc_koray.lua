@@ -153,11 +153,12 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("help_koray", "started")) then 
 
 		DL:createNPCNode(22, 23, "DL_Koray_GoIn") -- Let's go.
+		DL:addConditionProgress("npc_koray", "level_start")
 		DL:addNode()
 
 
 		DL:createNPCNode(23, -1, "") -- 
-		DL:startLevel("res/level/forest/forest.tmx", 1, 1)
+		DL:startLevel("res/level/swampforest/swampforest.tmx", 160, 1210)
 		DL:addNode()
 
 	end
