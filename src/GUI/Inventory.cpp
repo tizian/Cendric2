@@ -273,7 +273,6 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
 }
 
-
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
 	if (m_mapInterface == nullptr || clicked == nullptr) return;
 
@@ -393,25 +392,39 @@ void Inventory::removeEquipmentItem() {
 void Inventory::handleMapDrag() {
 	if (m_mapInterface == nullptr) return;
 	InventorySlot* selectedSlot = getSelectedSlot();
-	if (selectedSlot != nullptr && !m_isEquipmentSlotDragged) {
+	if (selectedSlot == nullptr) return;
+	if (!m_isEquipmentSlotDragged && Item::isEquipmentType(selectedSlot->getItemType())) {
 		m_equipment->highlightEquipmentSlot(selectedSlot->getItemType(), true);
+	}
+	else if (selectedSlot->getItemType() == ItemType::Consumable) {
+		m_mapInterface->highlightQuickslots(true);
 	}
 }
 
 void Inventory::handleLevelDrag() {
 	if (m_levelInterface == nullptr) return;
 	InventorySlot* selectedSlot = getSelectedSlot();
-	if (selectedSlot != nullptr && selectedSlot->getItemType() == ItemType::Consumable) {
+	if (selectedSlot == nullptr) return;
+	if (selectedSlot->getItemType() == ItemType::Consumable) {
 		m_levelInterface->highlightQuickslots(true);
 	}
 }
 
 void Inventory::handleMapDrop() {
 	if (m_mapInterface == nullptr || m_currentClone == nullptr) return;
+	InventorySlot* selectedSlot = getSelectedSlot();
+	if (selectedSlot == nullptr) return;
 	if (m_isEquipmentSlotDragged) {
 		removeEquipmentItem();
+		return;
 	}
-	else {
+
+	ItemType type = selectedSlot->getItemType();
+	if (type == ItemType::Consumable) {
+		m_mapInterface->notifyConsumableDrop(m_currentClone);
+		m_mapInterface->highlightQuickslots(false);
+	}
+	else if (Item::isEquipmentType(type)) {
 		m_equipment->notifyEquipmentDrop(m_currentClone);
 		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
 		m_equipment->highlightEquipmentSlot(is->getItemType(), false);
@@ -612,6 +625,10 @@ void Inventory::selectTab(ItemType type) {
 		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
 
 	m_scrollBar->setScrollPosition(0.f);
+
+	if (m_mapInterface != nullptr) {
+		m_mapInterface->showQuickslotBar(type == ItemType::Consumable);
+	}
 }
 
 void Inventory::reloadGold() {
@@ -701,6 +718,9 @@ void Inventory::hide() {
 	if (m_merchantInterface != nullptr) {
 		m_merchantInterface->completeTrade();
 		m_merchantInterface = nullptr;
+	}
+	if (m_mapInterface != nullptr) {
+		m_mapInterface->showQuickslotBar(false);
 	}
 	m_isVisible = false;
 	m_equipment->hide();

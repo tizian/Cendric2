@@ -10,9 +10,9 @@ using namespace std;
 const float QuickSlot::SIZE = 58.f;
 const float QuickSlot::ICON_OFFSET = 4.f;
 
-QuickSlot::QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key) {
+QuickSlot::QuickSlot(WorldInterface* _interface, const std::string& itemID, Key key) {
 	m_interface = _interface;
-	m_screen = dynamic_cast<LevelScreen*>(_interface->getScreen());
+	m_screen = _interface->getScreen();
 	m_core = _interface->getCore();
 	m_itemID = itemID;
 	m_key = key;
@@ -83,7 +83,9 @@ void QuickSlot::render(sf::RenderTarget& renderTarget) {
 
 void QuickSlot::consume() {
 	if (m_isEmpty) return;
-	m_interface->consumeItem(m_itemID);
+	if (LevelInterface* li = dynamic_cast<LevelInterface*>(m_interface)) {
+		li->consumeItem(m_itemID);
+	}
 }
 
 void QuickSlot::reload() {
@@ -121,6 +123,7 @@ void QuickSlot::reload() {
 	}
 
 	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);
+	setPosition(getPosition());
 }
 
 void QuickSlot::onLeftClick() {

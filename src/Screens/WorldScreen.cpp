@@ -56,6 +56,10 @@ WorldScreen::~WorldScreen() {
 	clearOverlayQueue();
 }
 
+void WorldScreen::notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr) {
+	m_characterCore->setQuickslot(itemId, quickslotNr);
+}
+
 void WorldScreen::notifyPermanentItemConsumed(const Item* item) {
 	if (item == nullptr) return;
 	getCharacterCore()->addPermanentAttributes(item->getAttributes());

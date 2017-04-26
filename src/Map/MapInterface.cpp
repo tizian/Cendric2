@@ -4,11 +4,14 @@
 MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 	loadGuiSidebar();
 	loadMapSidebar();
+	m_quickSlotBar = new QuickSlotBar(this);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, &m_core->getTotalAttributes());
 	m_spellbook = new Spellbook(m_core, true);
 	m_questLog = new QuestLog(m_core);
 	m_mapOverlay = new MapOverlay(screen, m_mapSidebar);
+
+	m_quickSlotBar->hide();
 }
 
 MapInterface::~MapInterface() {
@@ -19,5 +22,15 @@ MapInterface::~MapInterface() {
 	delete m_spellbook;
 	delete m_questLog;
 	delete m_mapOverlay;
+	delete m_quickSlotBar;
+}
+
+void MapInterface::showQuickslotBar(bool show) {
+	if (show) {
+		m_quickSlotBar->show();
+	}
+	else {
+		m_quickSlotBar->hide();
+	}
 }
 

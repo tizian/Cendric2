@@ -11,6 +11,7 @@
 #include "GUI/QuestLog.h"
 #include "GUI/GUITabBar.h"
 #include "GUI/MapOverlay.h"
+#include "GUI/QuickSlotBar.h"
 
 class WorldScreen;
 
@@ -41,6 +42,13 @@ public:
 	// reload the map overlay (waypoints)
 	virtual void reloadMapWaypoints();
 
+	// an consumable item has been dropped. forward to quick slot bar
+	void notifyConsumableDrop(const SlotClone* item);
+	// an item should be equiped in quick slot bar. forward to quick slot bar
+	void equipConsumable(const std::string& itemID);
+	// highlight quickslots
+	void highlightQuickslots(bool highlight);
+
 	virtual void render(sf::RenderTarget& target);
 	virtual void renderAfterForeground(sf::RenderTarget& target);
 	virtual void update(const sf::Time& frameTime);
@@ -67,6 +75,7 @@ protected:
 	Spellbook* m_spellbook = nullptr;
 	QuestLog* m_questLog = nullptr;
 	MapOverlay* m_mapOverlay = nullptr;
+	QuickSlotBar* m_quickSlotBar = nullptr;
 
 	template<typename G>
 	void updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type);

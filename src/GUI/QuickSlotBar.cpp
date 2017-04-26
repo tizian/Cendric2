@@ -2,7 +2,7 @@
 #include "Level/LevelInterface.h"
 #include "GUI/SlotClone.h"
 
-QuickSlotBar::QuickSlotBar(LevelInterface* _interface) {
+QuickSlotBar::QuickSlotBar(WorldInterface* _interface) {
 	m_quickSlot1 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot1, Key::QuickSlot1);
 	m_quickSlot1->setPosition(QUICKSLOT_OFFSET);
 

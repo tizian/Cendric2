@@ -19,6 +19,7 @@ void WorldInterface::render(sf::RenderTarget& target) {
 	m_spellbook->render(target);
 	m_questLog->render(target);
 	m_inventory->render(target);
+	m_quickSlotBar->render(target);
 	m_mapOverlay->render(target);
 }
 
@@ -35,6 +36,7 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateGuiElement(frameTime, m_spellbook, GUIElement::Spellbook);
 	updateGuiElement(frameTime, m_questLog, GUIElement::Journal);
 	updateGuiElement(frameTime, m_mapOverlay, GUIElement::Map);
+	m_quickSlotBar->update(frameTime);
 }
 
 void WorldInterface::hideAll() {
@@ -80,6 +82,18 @@ void WorldInterface::reloadSpellBook() {
 
 void WorldInterface::reloadMapWaypoints() {
 	m_mapOverlay->reloadWaypoints();
+}
+
+void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
+	m_quickSlotBar->notifyConsumableDrop(item);
+}
+
+void WorldInterface::equipConsumable(const std::string& itemID) {
+	m_quickSlotBar->equipConsumable(itemID);
+}
+
+void WorldInterface::highlightQuickslots(bool highlight) {
+	m_quickSlotBar->highlightSlots(highlight);
 }
 
 template<typename G>

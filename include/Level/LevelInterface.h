@@ -6,7 +6,6 @@
 #include "GUI/WorldInterface.h"
 #include "GUI/HealthBar.h"
 #include "GUI/BuffBar.h"
-#include "GUI/QuickSlotBar.h"
 #include "GUI/SpellSelection.h"
 
 // The interface overlay in a level, displaying hp bar, spell cooldowns, buffs, quickslot bar
@@ -22,18 +21,12 @@ public:
 	void setPermanentCore(CharacterCore* permanentCore);
 	// returns the buff bar
 	BuffBar& getBuffBar();
-	// an consumable item has been dropped. forward to quick slot bar
-	void notifyConsumableDrop(const SlotClone* item);
-	// an item should be equiped in quick slot bar. forward to quick slot bar
-	void equipConsumable(const std::string& itemID);
 	// consumes a consumable item
 	void consumeItem(const std::string& itemID);
 	// clears the consumabed food fector
 	void clearConsumedFood();
 	// restores the consumed food
 	void restoreConsumedFood();
-	// highlight quickslots
-	void highlightQuickslots(bool highlight);
 	// reloads inventory and quickslot bar
 	void reloadInventory(const std::string& changeditemID) override;
 	// notifies the character info
@@ -62,9 +55,6 @@ private:
 
 	// <<< SPELL SELECTION >>>
 	SpellSelection* m_spellSelection = nullptr;
-
-	// <<< QUICK SLOTS >>>
-	QuickSlotBar* m_quickSlotBar = nullptr;
 
 	// <<< BUFF BAR >>>
 	BuffBar* m_buffBar = nullptr;

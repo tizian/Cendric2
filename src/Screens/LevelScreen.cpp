@@ -182,10 +182,6 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
 }
 
-void LevelScreen::notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr) {
-	m_characterCore->setQuickslot(itemId, quickslotNr);
-}
-
 bool LevelScreen::notifyObservers() {
 	if (!m_currentLevel.getWorldData()->isObserved) return false;
 

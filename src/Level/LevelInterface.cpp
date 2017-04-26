@@ -48,8 +48,7 @@ void LevelInterface::render(sf::RenderTarget& target) {
 	m_enemyHealthBar->render(target);
 	
 	m_spellSelection->render(target);
-	m_quickSlotBar->render(target);
-
+	
 	WorldInterface::render(target);
 }
 
@@ -73,7 +72,6 @@ void LevelInterface::update(const sf::Time& frameTime) {
 
 	m_buffBar->update(frameTime);
 	m_spellSelection->update(frameTime);
-	m_quickSlotBar->update(frameTime);
 }
 
 void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {
@@ -89,14 +87,6 @@ void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {
 
 BuffBar& LevelInterface::getBuffBar() {
 	return *m_buffBar;
-}
-
-void LevelInterface::notifyConsumableDrop(const SlotClone* item) {
-	m_quickSlotBar->notifyConsumableDrop(item);
-}
-
-void LevelInterface::equipConsumable(const std::string& itemID) {
-	m_quickSlotBar->equipConsumable(itemID);
 }
 
 void LevelInterface::clearConsumedFood() {
@@ -130,10 +120,6 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 
 	m_screen->notifyItemChange(item->getID(), -1);
 	m_quickSlotBar->reload();
-}
-
-void LevelInterface::highlightQuickslots(bool highlight) {
-	m_quickSlotBar->highlightSlots(highlight);
 }
 
 void LevelInterface::reloadInventory(const std::string& changedItemID) {

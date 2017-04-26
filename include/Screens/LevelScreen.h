@@ -28,7 +28,6 @@ public:
 	void addDotBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	void removeTypedBuffs(SpellID id);
 
-	void notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr);
 	// called by level items and chests. It returns true if an observer is near enough and could have seen
 	// how the main char steals something. It will not be looted then and the observer will warn cendric / jail 
 	bool notifyObservers();

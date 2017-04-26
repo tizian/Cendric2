@@ -9,4 +9,6 @@ class MapInterface final : public WorldInterface {
 public:
 	MapInterface(WorldScreen* screen);
 	~MapInterface();
+
+	void showQuickslotBar(bool show);
 };

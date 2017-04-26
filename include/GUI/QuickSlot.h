@@ -8,13 +8,13 @@
 #include "Enums/EnumNames.h"
 
 class CharacterCore;
-class LevelInterface;
-class LevelScreen;
+class WorldInterface;
+class WorldScreen;
 
 class QuickSlot final : public Slot {
 public:
 	// an empty slot is initialized with an empty itemID
-	QuickSlot(LevelInterface* _interface, const std::string& itemID, Key key);
+	QuickSlot(WorldInterface* _interface, const std::string& itemID, Key key);
 
 	void setPosition(const sf::Vector2f& pos) override;
 
@@ -39,8 +39,8 @@ private:
 	// consumes the item
 	void consume();
 
-	LevelScreen* m_screen = nullptr;
-	LevelInterface* m_interface = nullptr;
+	WorldScreen* m_screen = nullptr;
+	WorldInterface* m_interface = nullptr;
 	CharacterCore* m_core = nullptr;
 	std::string m_itemID = "";
 	Key m_key = Key::VOID;
