@@ -158,7 +158,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(23, -1, "") -- 
-		DL:startLevel("res/level/swampforest/swampforest.tmx", 160, 1210)
+		DL:startLevel("res/level/swampforest/swampforest.tmx", 2650, 1210)
 		DL:addNode()
 
 	end

@@ -51,3 +51,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ja
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacrypt','location','Crypt of Gandria','Krypta von Gandria','Krypta vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_mercenaries','location','Boss: Mercenaries','Boss: Söldner','Boss: Söldner');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('highlands','location','Highlands of Admantris','Hochland von Admantris','Hochland vo Admantris');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('swampforest','location','The Rainy Forest','Der Verregnete Wald','De Verregnet Wald');
