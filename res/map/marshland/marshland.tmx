@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="288">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="289">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -858,6 +858,12 @@
    <properties>
     <property name="condition" value="swampbridge_open"/>
     <property name="level entry" value="res/level/swampbridge/swampbridge.tmx,2250,1210"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="288" x="1900" y="1300" width="50" height="30">
+   <properties>
+    <property name="level entry" value="res/level/swampforest/swampforest.tmx,2650, 1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

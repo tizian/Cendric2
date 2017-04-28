@@ -483,6 +483,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item_desc', 'Many legends surround this mysterious necklace.','Viele Legenden ranken sich um diese geheimnisvolle Halskette.','Viel Legende ranked sich um die gheimnisvoll Halschetti');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_eyeofthemoon', 'eq_neck', 350, 50, 20);
 INSERT INTO item_attribute (item_id, dmg_shadow) values ('eq_eyeofthemoon', 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_eyeofthemoon', -13, -26, 20, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_eyeofthemoon', 1, 650, 0, 50, 100);
 
 -- Silver Necklace
 

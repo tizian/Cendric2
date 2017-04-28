@@ -163,6 +163,10 @@ bool InputController::isMouseJustPressedLeft() const {
 	return m_isMouseJustPressedLeft;
 }
 
+bool InputController::isMouseJustPressedLeftRaw() const {
+	return m_isMouseJustPressedLeft;
+}
+
 bool InputController::isMouseJustPressedRight() const {
 	if (m_isActionLocked || !m_isWindowFocused || !m_isMouseInsideView) return false;
 	return m_isMouseJustPressedRight;

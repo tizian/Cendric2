@@ -120,9 +120,11 @@ void Spellbook::update(const sf::Time& frameTime) {
 
 void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
-	m_hasDraggingStarted = true;
 
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	if (g_inputController->isMouseJustPressedLeftRaw()) {
+		m_hasDraggingStarted = true;
+		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	}
 	if (selectedSlot == m_selectedModifierSlot) return;
 	if (m_selectedModifierSlot != nullptr) {
 		m_selectedModifierSlot->deselect();
@@ -134,7 +136,7 @@ void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 void Spellbook::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 
-	if (g_inputController->isMousePressedLeft()) {
+	if (g_inputController->isMouseJustPressedLeftRaw()) {
 		m_hasDraggingStarted = true;
 		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	}
@@ -165,6 +167,9 @@ void Spellbook::handleDragAndDrop() {
 	if (!(g_inputController->isMousePressedLeft())) {
 		if (m_selectedModifierSlot != nullptr) {
 			m_selectedModifierSlot->activate();
+		}
+		if (m_currentSpellClone != nullptr) {
+			const_cast<Slot*>(m_currentSpellClone->getOriginalSlot())->activate();
 		}
 		if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
 			m_weaponWindow->m_selectedSpellSlot->activate();

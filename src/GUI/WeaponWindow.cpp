@@ -137,7 +137,7 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 
 	for (auto& it : m_weaponSlots) {
 		it.first.update(frameTime);
-		if (it.first.isMousedOver()) {
+		if (it.first.isMousedOver() && !m_hasDraggingStarted) {
 			selectSpellSlot(&it.first);
 			if (m_isModifiable && it.first.isDoubleClicked()) {
 				m_core->removeSpell(it.first.getNr());
@@ -178,9 +178,11 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 
 void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
-	m_hasDraggingStarted = true;
 
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	if (g_inputController->isMouseJustPressedLeftRaw()) {
+		m_hasDraggingStarted = true;
+		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	}
 	if (selectedSlot == m_selectedModifierSlot) return;
 	if (m_selectedSpellSlot != nullptr) {
 		m_selectedSpellSlot->deselect();
@@ -196,9 +198,11 @@ void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {
 void WeaponWindow::selectSpellSlot(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 	if (selectedSlot->isEmpty()) return;
-	m_hasDraggingStarted = true;
 
-	m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	if (g_inputController->isMouseJustPressedLeftRaw()) {
+		m_hasDraggingStarted = true;
+		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
+	}
 	if (selectedSlot == m_selectedSpellSlot) return;
 	if (m_selectedModifierSlot != nullptr) {
 		m_selectedModifierSlot->deselect();

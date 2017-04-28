@@ -363,7 +363,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		return;
 	}
 
-	if (g_inputController->isMousePressedLeft()) {
+	if (g_inputController->isMouseJustPressedLeftRaw()) {
 		m_hasDraggingStarted = true;
 		m_isEquipmentSlotDragged = type != ItemType::VOID;
 		m_startMousePosition = g_inputController->getDefaultViewMousePosition();

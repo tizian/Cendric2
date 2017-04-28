@@ -37,6 +37,7 @@ public:
 	bool isMousePressedLeft() const;
 	bool isMousePressedRight() const;
 	bool isMouseJustPressedLeft() const;
+	bool isMouseJustPressedLeftRaw() const;
 	bool isMouseJustPressedRight() const;
 	bool isMouseClickedLeft() const;
 	bool isMouseClickedRight() const;
