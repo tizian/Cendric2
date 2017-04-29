@@ -292,8 +292,8 @@ npc.id:npc_koray
 	# translation: 
 	translation.tag:DL_Koray_Interested4
 	translation.en:But if you could get me near that tree, I could get it using some telekinesis.
-	translation.de:Aber wenn du mich in die Nähe dieses Baums bringen könntest, könnte ich es mit Telekinesis runterholen.
-	translation.ch:Aber wenn du mich id Nöchi vo dem Baum bringe chöntsch, chöntis mit Telekinesis abehole.
+	translation.de:Aber wenn du mich in die Nähe dieses Baums bringen könntest, könnte ich es mit Telekinese runterholen.
+	translation.ch:Aber wenn du mich id Nöchi vo dem Baum bringe chöntsch, chöntis mit Telekinese abehole.
 	[
 		# Link node, tag is next tag
 		tag:-2
