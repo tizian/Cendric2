@@ -37,7 +37,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(8, -2, "DL_Jeremy_Helmet2") -- We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and oozes...
+			DL:createNPCNode(8, -2, "DL_Jeremy_Helmet2") -- We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and ooze...
 			DL:addQuestDescription("stephens_helmet", 1)
 			DL:addConditionProgress("npc_jeremy", "helmet")
 			DL:addNode()
@@ -46,7 +46,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("npc_helena","leeroy_chicken") and not DL:isConditionFulfilled("npc_jeremy", "leeroy_chicken")) then 
 
-			DL:createNPCNode(7, 15, "DL_Jeremy_LeeroyChicken") -- (Chuckles) And why exactly should we leave? We like it here.  
+			DL:createNPCNode(7, 15, "DL_Jeremy_LeeroyChicken") -- (Chuckles) And why exactly should we leave? We like it here.
 			DL:addNode()
 
 

@@ -110,7 +110,7 @@ npc.id:npc_jeremy
 	trigger:DL:addConditionProgress("npc_jeremy", "helmet")
 	# translation: 
 	translation.tag:DL_Jeremy_Helmet2
-	translation.en:We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and oozes...
+	translation.en:We lost it somewhere in the sewers of Gandria. Good luck finding it there, between the nasty rats and ooze...
 	translation.de:Wir haben ihn irgendwo in der Kanalisation von Gandria verloren. Viel Spass, wenn du ihn dort finden willst, zwischen all den hässlichen Ratten und Schleimen.
 	translation.ch:Mir henden irgendwo ide Kanalisation vo Gandria verlore. Viel Spass wenden det finde wetsch, zwüsched all de grusige Ratte und Schleimlis.
 	[
@@ -124,7 +124,7 @@ npc.id:npc_jeremy
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jeremy_LeeroyChicken
-	translation.en:(Chuckles) And why exactly should we leave? We like it here.  
+	translation.en:(Chuckles) And why exactly should we leave? We like it here.
 	translation.de:(Lacht) Und wieso genau sollten wir gehen? Uns gefällt es hier.
 	translation.ch:(Gigglet) Und wieso genau söttemer go? Es gfallt üs do.
 	[

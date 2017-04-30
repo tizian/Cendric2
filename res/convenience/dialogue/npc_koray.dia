@@ -251,7 +251,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Interested
 	translation.en:Well, I lost a very precious necklace, the "Eye of the Moon". 
 	translation.de:Nun, ich habe eine sehr wertvolle Halskette verloren, das "Auge des Mondes".
-	translation.ch:Weisch, ich ha e sehr wertvolli Halschettle verlore, es "Aug vom Mond".
+	translation.ch:Weisch, ich ha e sehr wertvolli Halschettle verlore, es "Mondaug".
 	[
 		# Link node, tag is next tag
 		tag:12
