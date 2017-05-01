@@ -34,6 +34,8 @@ public:
 	void setMovingTarget(int x, int y);
 	// adds a goto step in the routine. Can only be used in the routine function
 	void gotoTile(float x, float y);
+	// sets the position (hard, in pixels)
+	void setPosition(int x, int y);
 	// resets the moving target
 	void resetMovingTarget();
 	// sets the enemy "killed" and "looted" so that it will never appear again in this level

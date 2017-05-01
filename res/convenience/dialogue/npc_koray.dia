@@ -419,7 +419,7 @@ npc.id:npc_koray
 	# [23] NPC Node
 	tag:23
 	# triggers: 
-	trigger:DL:startLevel("res/level/swampforest/swampforest.tmx", 2650, 1210)
+	trigger:DL:startLevel("res/level/swampforest/swampforest.tmx", 1750, 1210)
 	# translation: 
 	translation.tag:
 	translation.en:

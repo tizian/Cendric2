@@ -30,6 +30,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 		.beginClass<ScriptedBehaviorCallback>("Behavior")
 		.addFunction("getPosX", &ScriptedBehaviorCallback::getPosX)
 		.addFunction("getPosY", &ScriptedBehaviorCallback::getPosY)
+		.addFunction("setPosition", &ScriptedBehaviorCallback::setPosition)
 		.addFunction("say", &ScriptedBehaviorCallback::say)
 		.addFunction("wait", &ScriptedBehaviorCallback::wait)
 		.addFunction("setFacingLeft", &ScriptedBehaviorCallback::setFacingLeft)
@@ -67,6 +68,10 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 	}
 
 	return true;
+}
+
+void ScriptedBehaviorCallback::setPosition(int x, int y) {
+	m_enemy->setPosition(sf::Vector2f((float)x, (float)y));
 }
 
 void ScriptedBehaviorCallback::gotoTile(float x, float y) {

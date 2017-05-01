@@ -233,8 +233,7 @@ void Level::collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingB
 }
 
 bool Level::collidesWithAvoidableTiles(const sf::FloatRect& boundingBox) const {
-	sf::FloatRect safeBB(boundingBox.left - 2, boundingBox.top - 2, boundingBox.width + 4, boundingBox.height + 4);
-	return collidesWithSpecificTiles(safeBB, m_avoidableTiles);
+	return collidesWithSpecificTiles(boundingBox, m_avoidableTiles);
 }
 
 bool Level::collidesWithEvilTiles(const sf::FloatRect& boundingBox) const {
