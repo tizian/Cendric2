@@ -24,8 +24,10 @@ CrowEnemy::CrowEnemy(const Level* level, Screen* screen) :
 }
 
 void CrowEnemy::loadAttributes() {
-	m_attributes.setHealth(60);
+	m_attributes.setHealth(200);
 	m_attributes.resistancePhysical = 10;
+	m_attributes.resistanceFire = 100;
+	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
@@ -33,7 +35,7 @@ void CrowEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.damage = 2;
+	chopSpell.damage = 10;
 	chopSpell.damagePerSecond = 10;
 	chopSpell.duration = sf::seconds(3.f);
 	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
