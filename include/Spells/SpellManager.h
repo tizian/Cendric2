@@ -23,6 +23,7 @@ public:
 	// triggers the spell creator & executes the current spell if it are not on cooldown
 	// if force is set to true, it will execute it anyway.
 	// returns whether it has been executed
+	bool executeCurrentSpell(const LevelMovableGameObject* target, bool force = false);
 	bool executeCurrentSpell(const sf::Vector2f& target, bool force = false);
 
 	// used by the spell interface
@@ -42,6 +43,8 @@ public:
 	int getSelectedSpell();
 
 private:
+	template <typename T>
+	bool executeCurrentSpell(T target, bool force);
 
 	int m_currentSpell;
 	std::vector<sf::Time> m_coolDownMap;

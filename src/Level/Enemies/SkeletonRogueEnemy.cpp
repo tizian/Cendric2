@@ -51,7 +51,7 @@ void SkeletonRogueEnemy::loadSpells() {
 
 void SkeletonRogueEnemy::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 120.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

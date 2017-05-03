@@ -46,6 +46,8 @@ public:
 	void leaveLevel();
 	// executes a blocking fight animation (uses the default fight animation) for that mob.
 	void executeFightAnimation();
+	// executes a registered spell at a certain target (in pixels)
+	void executeSpell(int spell, int x, int y);
 	// change animation to facing right
 	void setFacingRight();
 	// change animation to facing left

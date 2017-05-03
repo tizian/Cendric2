@@ -135,7 +135,7 @@ void DragonWhelpEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
 	if (m_hatchingTime > sf::Time::Zero) return;
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 sf::Time DragonWhelpEnemy::getConfiguredWaitingTime() const {

@@ -66,7 +66,7 @@ void WolfEnemy::handleAttackInput() {
 	else {
 		m_spellManager->setCurrentSpell(1);
 	}
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void WolfEnemy::loadAnimation(int skinNr) {

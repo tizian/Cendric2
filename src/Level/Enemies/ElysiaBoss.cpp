@@ -89,7 +89,7 @@ void ElysiaBoss::handleAttackInput() {
 		return;
 	}
 	
-	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+	m_spellManager->executeCurrentSpell(m_mainChar);
 }
 
 void ElysiaBoss::loadAnimation(int skinNr) {

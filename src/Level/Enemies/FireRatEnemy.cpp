@@ -65,7 +65,7 @@ void FireRatEnemy::handleAttackInput() {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

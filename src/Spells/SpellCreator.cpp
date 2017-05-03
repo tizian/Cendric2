@@ -27,21 +27,27 @@ void SpellCreator::update(const sf::Time& frametime) {
 
 		if (!m_owner->isDead()) {
 			for (auto& target : m_futureTargets) {
+				m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 				execExecuteSpell(target);
+			}
+			if (m_target != nullptr) {
+				m_owner->setFacingRight(m_target->getCenter().x - m_owner->getCenter().x > 0);
+				execExecuteSpell(m_target->getCenter());
 			}
 			m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 			m_isReady = true;
 			m_futureTargets.clear();
+			m_target = nullptr;
 		}
 	}
 }
 
 void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	m_isReady = false;
+	m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_futureTargets.push_back(target);
-		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 		m_owner->executeFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
 	}
@@ -49,6 +55,29 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	execExecuteSpell(target);
 	m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 	m_isReady = true;
+}
+
+void SpellCreator::executeSpell(const LevelMovableGameObject* target) {
+	if (target == nullptr) return;
+	m_isReady = false;
+	m_owner->setFacingRight(target->getCenter().x - m_owner->getCenter().x > 0);
+	if (m_spellData.castingTime > sf::Time::Zero) {
+		m_currentCastingTime = m_spellData.castingTime;
+		m_target = target;
+		target->registerSpellCreator(this);
+		m_owner->executeFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
+		return;
+	}
+
+	execExecuteSpell(target->getCenter());
+	m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
+	m_isReady = true;
+}
+
+void SpellCreator::notifyMobDeath(LevelMovableGameObject* mob) {
+	if (mob == m_target) {
+		m_target = nullptr;
+	}
 }
 
 void SpellCreator::addModifiers(const std::vector<SpellModifier>& modifiers) {

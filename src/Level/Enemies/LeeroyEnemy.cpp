@@ -42,8 +42,7 @@ float LeeroyEnemy::getConfiguredDistanceToHPBar() const {
 void LeeroyEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < 80.f) {
-		m_movingBehavior->setFacingRight(getCurrentTarget()->getCenter().x > getCenter().x);
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

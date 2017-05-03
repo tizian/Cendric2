@@ -86,7 +86,7 @@ void NecroticGrimoireEnemy::handleAttackInput() {
 	if (m_enemyState != EnemyState::Chasing) return;
 	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < 600.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 		m_chasingTime = sf::Time::Zero;
 		m_waitingTime = sf::seconds(static_cast<float>(rand() % 4 + 1));
 		if (m_summonTime == sf::Time::Zero) {

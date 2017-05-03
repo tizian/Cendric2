@@ -128,7 +128,7 @@ void JeremyBoss::handleAttackInput() {
 	}
 
 	m_spellManager->setCurrentSpell(spell);
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void JeremyBoss::loadAnimation(int skinNr) {

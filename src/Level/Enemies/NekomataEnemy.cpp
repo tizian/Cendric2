@@ -110,7 +110,7 @@ void NekomataEnemy::handleAttackInput() {
 	else {
 		m_spellManager->setCurrentSpell(2); // shadow fire ball
 	}
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void NekomataEnemy::loadAnimation(int skinNr) {

@@ -157,15 +157,14 @@ void MorgianaBoss::notifyRoyDeath(const sf::Vector2f& newPos) {
 void MorgianaBoss::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	if (m_enemyAttackingBehavior->distToTarget() < 80.f) {
-		m_movingBehavior->setFacingRight(getCurrentTarget()->getCenter().x > getCenter().x);
 		m_spellManager->setCurrentSpell(0);
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 	else {
 		if (m_isBlocking) return;
 		int spell = m_isJeremyDead ? rand() % 2 + 1 : 1;
 		m_spellManager->setCurrentSpell(spell);
-		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget());
 		if (spell == 1 && executed) {
 			m_isBlocking = true;
 			m_isInvincible = true;

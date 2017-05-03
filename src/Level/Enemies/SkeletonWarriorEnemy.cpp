@@ -52,7 +52,7 @@ void SkeletonWarriorEnemy::loadSpells() {
 
 void SkeletonWarriorEnemy::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 140.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

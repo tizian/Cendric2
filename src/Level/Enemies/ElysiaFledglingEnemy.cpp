@@ -109,7 +109,7 @@ void ElysiaFledglingEnemy::handleAttackInput() {
 	else {
 		m_spellManager->setCurrentSpell(1); // targeting projectile
 	}
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 sf::Time ElysiaFledglingEnemy::getConfiguredWaitingTime() const {

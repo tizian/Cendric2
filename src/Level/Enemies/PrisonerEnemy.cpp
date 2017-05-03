@@ -40,7 +40,7 @@ float PrisonerEnemy::getConfiguredDistanceToHPBar() const {
 
 void PrisonerEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void PrisonerEnemy::loadAnimation(int skinNr) {

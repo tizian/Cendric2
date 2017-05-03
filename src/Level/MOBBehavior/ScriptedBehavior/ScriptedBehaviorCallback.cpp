@@ -42,6 +42,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 		.addFunction("resetMovingTarget", &ScriptedBehaviorCallback::resetMovingTarget)
 		.addFunction("executeFightAnimation", &ScriptedBehaviorCallback::executeFightAnimation)
 		.addFunction("gotoTile", &ScriptedBehaviorCallback::gotoTile)
+		.addFunction("executeSpell", &ScriptedBehaviorCallback::executeSpell)
 		.endClass();
 
 	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
@@ -104,6 +105,19 @@ void ScriptedBehaviorCallback::executeFightAnimation() {
 	}
 	else {
 		m_enemy->executeDefaultFightAnimation(true);
+	}
+}
+
+void ScriptedBehaviorCallback::executeSpell(int spell, int x, int y) {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::Spell;
+		step.goal = sf::Vector2f(static_cast<float>(x), static_cast<float>(y));
+		step.text = std::to_string(spell);
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		m_enemy->executeSpell(spell, sf::Vector2f(static_cast<float>(x), static_cast<float>(y)));
 	}
 }
 

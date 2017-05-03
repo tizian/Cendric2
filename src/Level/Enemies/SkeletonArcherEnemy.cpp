@@ -49,7 +49,7 @@ void SkeletonArcherEnemy::loadSpells() {
 
 void SkeletonArcherEnemy::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 600.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

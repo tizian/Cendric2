@@ -42,7 +42,7 @@ float HunterEnemy::getConfiguredDistanceToHPBar() const {
 
 void HunterEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
-	m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+	m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void HunterEnemy::loadAnimation(int skinNr) {

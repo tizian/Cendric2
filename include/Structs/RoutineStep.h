@@ -8,6 +8,7 @@ enum class RoutineState {
 	GoingTo,
 	Saying,
 	Animation,
+	Spell,
 	Disappearing,
 	ReloadLock,
 	ReloadUnlock,

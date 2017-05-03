@@ -71,7 +71,7 @@ void RoyBoss::handleAttackInput() {
 	m_spellManager->setCurrentSpell(rand() % 2);
 
 	if (getCurrentTarget() != nullptr)
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void RoyBoss::setDead() {

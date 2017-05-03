@@ -51,7 +51,7 @@ void SkeletonMageEnemy::loadSpells() {
 
 void SkeletonMageEnemy::handleAttackInput() {
 	if (m_enemyAttackingBehavior->distToTarget() < 500.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

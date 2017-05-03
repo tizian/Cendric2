@@ -8,6 +8,7 @@
 LevelMovableGameObject::LevelMovableGameObject(const Level* level) : MovableGameObject() {
 	m_level = level;
 	m_foodAttributes.first = sf::Time::Zero;
+	m_registeredSpellCreators = new std::set<SpellCreator*>();
 }
 
 LevelMovableGameObject::~LevelMovableGameObject() {
@@ -15,6 +16,7 @@ LevelMovableGameObject::~LevelMovableGameObject() {
 	delete m_movingBehavior;
 	delete m_attackingBehavior;
 	delete m_damageNumbers;
+	delete m_registeredSpellCreators;
 }
 
 void LevelMovableGameObject::update(const sf::Time& frameTime) {
@@ -211,6 +213,9 @@ void LevelMovableGameObject::setDead() {
 	// dispose the spells that this mob is an owner of and that are attached to it
 	// that's how magic works, I guess?
 	clearSpells(false);
+	for (auto sc : *m_registeredSpellCreators) {
+		sc->notifyMobDeath(this);
+	}
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
 	g_resourceManager->playSound(getDeathSoundPath());
@@ -238,6 +243,15 @@ void LevelMovableGameObject::clearSpells(bool clearAll) {
 			}
 		}
 	}
+}
+
+void LevelMovableGameObject::registerSpellCreator(SpellCreator* creator) const {
+	m_registeredSpellCreators->insert(creator);
+}
+
+void LevelMovableGameObject::executeSpell(int spell, const sf::Vector2f& target) {
+	m_spellManager->setCurrentSpell(spell);
+	m_spellManager->executeCurrentSpell(target, true);
 }
 
 sf::Time LevelMovableGameObject::executeDefaultFightAnimation(bool isBlocking, int times) {

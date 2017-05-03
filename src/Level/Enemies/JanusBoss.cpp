@@ -109,7 +109,7 @@ void JanusBoss::handleAttackInput() {
 			m_spellManager->setCurrentSpell(0); // chop
 		}
 
-		m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
+		m_spellManager->executeCurrentSpell(m_mainChar);
 		return;
 	case ToTorch:
 		return;

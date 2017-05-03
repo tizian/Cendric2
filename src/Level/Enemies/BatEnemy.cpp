@@ -103,7 +103,7 @@ void BatEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	setActive();
 	if (m_enemyAttackingBehavior->distToTarget() < 30.f) {
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 		m_chasingTime = sf::Time::Zero;
 		m_waitingTime = sf::seconds(1);
 	}

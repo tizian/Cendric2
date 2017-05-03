@@ -124,7 +124,7 @@ void GargoyleEnemy::handleAttackInput() {
 	if (m_attackWaitTime == sf::Time::Zero) {
 		m_attackWaitTime = sf::seconds(2.f);
 		if (m_maxSpell > 0) m_spellManager->setCurrentSpell(rand() % m_maxSpell); // random
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 

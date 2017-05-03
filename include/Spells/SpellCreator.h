@@ -5,6 +5,7 @@
 
 #include "Structs/SpellModifier.h"
 
+class LevelMovableGameObject;
 class LevelScreen;
 
 // a class that spawns spells of a certain type - directly to the screen
@@ -19,11 +20,12 @@ public:
 
 	// executes the spell and sets the fight animation.
 	void executeSpell(const sf::Vector2f& target);
+	// saves a mob as target to execute the spell.
+	void executeSpell(const LevelMovableGameObject* target);
 	// calculates spells using the owners attributes & the target, and executes their behaviour, adding objects to the screen.
 	virtual void execExecuteSpell(const sf::Vector2f& target) = 0;
 	SpellData& getSpellData();
 	void setSpellAllied(bool allied);
-	
 
 	// used by the descriptions to show what this creator does if it has a strength modifier
 	// default returns empty string
@@ -36,6 +38,8 @@ public:
 
 	// updates the spells damage and heal, using the attribute data. It adds damage/heal and uses some rng and calculates critical hits if told so
 	static void updateDamageAndHeal(SpellData& bean, const AttributeData* attributes, bool includeRngAndCrit);
+	// notifies a death of a mob. if it was the current target, it gets removed.
+	void notifyMobDeath(LevelMovableGameObject* mob);
 
 protected:
 	// filled by the subclasses
@@ -55,6 +59,7 @@ protected:
 	const Level* m_level = nullptr;
 	LevelScreen* m_screen = nullptr;
 	LevelMovableGameObject* m_owner = nullptr;
+	const LevelMovableGameObject* m_target = nullptr;
 
 private:
 	bool m_isReady = true;

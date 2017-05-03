@@ -100,6 +100,11 @@ void ScriptedBehavior::setCurrentRoutineStep() {
 		m_enemy->notifyKilled();
 		m_enemy->notifyLooted();
 		break;
+	case RoutineState::Spell: {
+		int spell = std::atoi(step.text.c_str());
+		m_enemy->executeSpell(spell, step.goal);
+		break;
+	}
 	default:
 		break;
 	}

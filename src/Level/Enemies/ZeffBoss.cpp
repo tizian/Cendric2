@@ -76,7 +76,7 @@ void ZeffBoss::handleAttackInput() {
 	}
 
 	if (getCurrentTarget() != nullptr)
-		m_spellManager->executeCurrentSpell(getCurrentTarget()->getCenter());
+		m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void ZeffBoss::loadAnimation(int skinNr) {

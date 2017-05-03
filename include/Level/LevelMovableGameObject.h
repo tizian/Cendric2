@@ -8,6 +8,7 @@
 class Level;
 class SpellManager;
 class Spell;
+class SpellCreator;
 class MovingBehavior;
 class AttackingBehavior;
 class DamageNumbers;
@@ -56,6 +57,8 @@ public:
 	// argument true clears all spells
 	// argument false clears only the attached spells, as if the enemy died.
 	void clearSpells(bool clearAll);
+	void registerSpellCreator(SpellCreator* creator) const;
+	void executeSpell(int spell, const sf::Vector2f& target);
 	
 	SpellManager* getSpellManager() const;
 	AttackingBehavior* getAttackingBehavior() const;
@@ -115,6 +118,8 @@ protected:
 	sf::Time m_stunnedTime = sf::Time::Zero;
 	// time feared
 	sf::Time m_fearedTime = sf::Time::Zero;
+	// registered spell creators
+	std::set<SpellCreator*>* m_registeredSpellCreators;
 
 	AttributeData m_attributes;
 
