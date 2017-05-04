@@ -42,7 +42,7 @@ void RoyBoss::loadSpells() {
 	projectile.fightAnimation = GameObjectState::Fighting;
 	projectile.castingTime = sf::seconds(1.f);
 	projectile.castingAnimation = GameObjectState::Casting;
-	projectile.speed = 400;
+	projectile.speed = 300;
 
 	m_spellManager->addSpell(projectile);
 
@@ -59,7 +59,7 @@ void RoyBoss::loadSpells() {
 	projectile.fightAnimation = GameObjectState::Fighting;
 	projectile.castingTime = sf::seconds(1.f);
 	projectile.castingAnimation = GameObjectState::Casting2;
-	projectile.speed = 500;
+	projectile.speed = 400;
 
 	m_spellManager->addSpell(projectile);
 

@@ -110,7 +110,7 @@ void JeremyBoss::loadSpells() {
 	icyAmbush.fightingTime = sf::seconds(0.f);
 	icyAmbush.castingTime = sf::seconds(2.f);
 	icyAmbush.castingAnimation = GameObjectState::Casting2;
-	icyAmbush.speed = 500.f;
+	icyAmbush.speed = 300.f;
 	icyAmbush.range = 500.f;
 	icyAmbush.isColliding = false;
 

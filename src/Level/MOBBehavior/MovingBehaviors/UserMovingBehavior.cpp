@@ -162,7 +162,6 @@ void UserMovingBehavior::handleMovementInput() {
 void UserMovingBehavior::setEnabled(bool enabled) {
 	MovingBehavior::setEnabled(enabled);
 	if (!enabled) {
-		m_mainChar->loopCurrentAnimation(false);
 		m_mainChar->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mainChar->setVelocity(sf::Vector2f(0.f, 0.f));
 	}

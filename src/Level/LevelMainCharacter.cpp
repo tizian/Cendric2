@@ -230,6 +230,7 @@ void LevelMainCharacter::setDead() {
 	LevelMovableGameObject::setDead();
 	m_deathPc->setVisible(true);
 	setInputLock();
+	m_animatedSprite.stop();
 }
 
 void LevelMainCharacter::setQuickcast(bool quickcast) {

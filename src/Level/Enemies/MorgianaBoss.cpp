@@ -87,7 +87,7 @@ void MorgianaBoss::loadSpells() {
 	icyAmbush.castingTime = sf::seconds(2.f);
 	icyAmbush.fightAnimation = GameObjectState::Fighting3;
 	icyAmbush.castingAnimation = GameObjectState::Casting3;
-	icyAmbush.speed = 500.f;
+	icyAmbush.speed = 300.f;
 	icyAmbush.range = 500.f;
 	icyAmbush.isColliding = false;
 

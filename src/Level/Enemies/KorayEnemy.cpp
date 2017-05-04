@@ -100,7 +100,7 @@ MovingBehavior* KorayEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(200.f);
 	behavior->setDropAlways(true);
-	behavior->setReplaceDistance(10000.f);
+	behavior->setReplaceDistance(800.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
