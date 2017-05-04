@@ -42,7 +42,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Le
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayStart', 'speech','It''s stuck in this tree, I can already see it.','Es hat sich in diesem Baum verfangen, ich kann es schon sehen.', 'Es het sich i dem Baum verfange, ich gses scho.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayStart2', 'speech','But how can we get up there?','Aber wie kommen wir da rauf?', 'Aber wie chömemer da ue?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayPiranhas', 'speech','Great ice magic! But there are even more piranhas.','Solide Eismagie! Aber da hat''s noch mehr Piranhas.', 'Solidi Iismagie! Aber do hets na me Piranhas.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayPiranhas', 'speech','Great ice magic! But there are even more piranhas.','Solide Eismagie! Aber da hat''s noch mehr Piranhas.', 'Solidi Iismagie! Aber do hets na me Piranhas.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTricky', 'speech','Now it''s getting tricky...','Jetzt wird''s knifflig...', 'Jetz wird''s knifflig...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySoon', 'speech','We''re getting closer...','Bald haben wir''s.', 'Bald hemmers.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayThere', 'speech','There it is! Let''s get it.','Da ist es! Holen wir''s.', 'Do isches! Holemers.');
@@ -50,3 +49,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ko
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayGotIt', 'speech','Got it. Thank you!', 'Ich hab''s. Danke!', 'Ich hans. Mersi!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTelekinesis', 'speech','You''ve seen how it''s done.', 'Du hast gesehen, wie man''s macht.', 'Du hesch gse wemes macht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTelekinesis2', 'speech','That should be enough. See you later!', 'Das sollte genügen. Bis später!', 'Das sött lange. Bis susch mol!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayBye', 'speech','Bye!', 'Tschüss!', 'Tschüssli!');

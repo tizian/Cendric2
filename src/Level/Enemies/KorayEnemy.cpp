@@ -21,6 +21,8 @@ void KorayEnemy::loadSpells() {
 	telekinesis.fightingTime = sf::milliseconds(500);
 	telekinesis.castingTime = sf::milliseconds(300);
 	telekinesis.isBlocking = true;
+	telekinesis.range = 500;
+	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
 	
 	m_spellManager->addSpell(telekinesis);
 	m_spellManager->setCurrentSpell(0);
@@ -100,7 +102,7 @@ MovingBehavior* KorayEnemy::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(200.f);
 	behavior->setDropAlways(true);
-	behavior->setReplaceDistance(800.f);
+	behavior->setReplaceDistance(500.f);
 	behavior->calculateJumpHeight();
 	return behavior;
 }

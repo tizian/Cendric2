@@ -24,9 +24,13 @@ SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 
 void SpeechBubble::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
-	m_mainLayer.setPosition(position);
-	m_ornamentLayer.setPosition(position);
-	m_text.setPosition(position + sf::Vector2f(TEXT_MARGIN, TEXT_MARGIN));
+	sf::Vector2f posOffset;
+	if (m_boundingBox.left - (g_inputController->getMousePosition().x - g_inputController->getDefaultViewMousePosition().x) + m_boundingBox.width > WINDOW_WIDTH) {
+		posOffset.x = -m_boundingBox.width + m_pointer.getLocalBounds().width;
+	}
+	m_mainLayer.setPosition(position + posOffset);
+	m_ornamentLayer.setPosition(position + posOffset);
+	m_text.setPosition(position + sf::Vector2f(TEXT_MARGIN, TEXT_MARGIN) + posOffset);
 	m_pointer.setPosition(sf::Vector2f(position.x, position.y + m_boundingBox.height));
 }
 

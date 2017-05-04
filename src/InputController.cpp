@@ -50,11 +50,11 @@ void InputController::update() {
 	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
 	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT) / m_windowSize.y);
 	sf::Vector2f view = sf::Vector2f(
-		m_renderTexture->getView().getCenter().x - m_renderTexture->getView().getSize().x / 2,
-		m_renderTexture->getView().getCenter().y - m_renderTexture->getView().getSize().y / 2);
+		m_renderTexture->getView().getCenter().x - m_renderTexture->getView().getSize().x * 0.5f,
+		m_renderTexture->getView().getCenter().y - m_renderTexture->getView().getSize().y * 0.5f);
 	sf::Vector2f defaultview = sf::Vector2f(
-		m_renderTexture->getDefaultView().getCenter().x - m_renderTexture->getView().getSize().x / 2,
-		m_renderTexture->getDefaultView().getCenter().y - m_renderTexture->getView().getSize().y / 2);
+		m_renderTexture->getDefaultView().getCenter().x - m_renderTexture->getView().getSize().x * 0.5f,
+		m_renderTexture->getDefaultView().getCenter().y - m_renderTexture->getView().getSize().y * 0.5f);
 	m_mousePosition = pos + view;
 	m_defaultViewMousePosition = pos + defaultview;
 	m_isMouseInsideView = 
