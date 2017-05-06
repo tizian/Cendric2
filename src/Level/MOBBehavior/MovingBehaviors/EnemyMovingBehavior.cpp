@@ -37,7 +37,9 @@ void EnemyMovingBehavior::handleMovementInput() {
 		}
 		else {
 			m_movingDirectionY = 0;
-			m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
+			if (!m_isWalkingBehavior) {
+				m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
+			}
 		}
 	}
 	else {

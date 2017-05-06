@@ -114,6 +114,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		}
 		else {
 			loopCurrentAnimation(false);
+			m_animatedSprite.stop();
 		}
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {

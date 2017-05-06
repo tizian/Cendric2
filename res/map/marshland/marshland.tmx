@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="289">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="290">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -889,6 +889,13 @@
    <properties>
     <property name="dialoguetexture" value="res/npc/npc_leeroy/npc_leeroy.png"/>
     <property name="id" value="npc_leeroy2"/>
+   </properties>
+  </object>
+  <object id="289" gid="2323" x="375" y="1600" width="50" height="50">
+   <properties>
+    <property name="dialoguetexture" value="res/npc/npc_jonathan/npc_jonathan.png"/>
+    <property name="id" value="npc_jonathan2"/>
+    <property name="spritesheetpath" value="res/npc/npc_jonathan/spritesheet_npc_jonathan.png"/>
    </properties>
   </object>
  </objectgroup>

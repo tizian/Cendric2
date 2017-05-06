@@ -31,6 +31,8 @@ protected:
 	int m_movingDirectionX = 0;
 	// 0 means stand still, 1 move down, -1 move up
 	int m_movingDirectionY = 0;
+	// distinguish walking/flying
+	bool m_isWalkingBehavior = true;
 
 	virtual void execHandleMovementInput() = 0;
 	virtual void handleTrueAcceleration() = 0;

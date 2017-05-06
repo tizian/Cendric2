@@ -7,6 +7,7 @@
 WalkingBehavior::WalkingBehavior(Enemy* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy) {
+	m_isWalkingBehavior = true;
 }
 
 bool WalkingBehavior::doAIJump(bool onlyJump) {
