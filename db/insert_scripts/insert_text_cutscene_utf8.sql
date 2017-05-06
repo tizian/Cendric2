@@ -44,6 +44,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jonathan:MapAndRunes', 'cutscene','Another map... and some runes. I think I can read them.','Eine weitere Karte... und ein paar Runen. Ich glaube, die kann ich entziffern.','E wiiteri Chartä... und es paar Rune. Ich glaub, die chani entziffere.','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jonathan:MasterAllElements', 'cutscene','"Only those who master all four elements will find us."','"Nur diejenigen, die alle vier Elemente meistern, werden uns finden."','"Nur die, wo all vier Element meistered, werded üs finde."','?');
 
+-- The Forbidden Spell (Chapt 4)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chapter4', 'cutscene','- The Forbidden Spell -','- Der Verbotene Zauber -','- De Verbote Zauber -', '- ? -');
+
 
 
 

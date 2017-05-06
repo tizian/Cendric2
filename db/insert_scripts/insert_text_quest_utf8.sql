@@ -153,3 +153,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('help_koray','quest','Telekinesis','Telekinese','Telekinese','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('help_koray', 'quest_desc','Koray promised me to teach me telekinesis if I help him to get a necklace in a tree.', 'Koray hat versprochen, mir Telekinese beizubringen wenn ich ihm helfe, eine Halskette aus einem Baum zu holen.', 'De Koray het mer versproche zum mer Telekinese biibringe wenim hilf, e Halschettle usemne Baum z''hole.', '?');
+
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('element_secret','quest','The Forgotten Elementalists','Die Vergessenen Elementarmagier','Di Vergessene Elementarmagier','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('element_secret', 'quest_desc','Although our map was stolen, I should go to the Highlands of Admantris and find the secret of the old elementalists.', 'Obwohl unsere Karte gestohlen wurde, sollte ich ins Hochland von Admantris gehen und das Geheimnis der alten Elementarmagier lüften.', 'Obwohl üsi Charte gstohle worde isch, sötti is Hochland vo Admantris go und s''Gheimnis vode alte Elementarmagier lüfte.', '?');

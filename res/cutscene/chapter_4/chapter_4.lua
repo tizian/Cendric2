@@ -1,6 +1,5 @@
 -- lua script for cutscene chapter_4
 steps = {
-	
 	{
 		texts = {
 			{str="Chapter4", time=2, centered=true}
