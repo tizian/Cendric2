@@ -23,8 +23,25 @@ void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 }
 
 void TelekinesisSpell::update(const sf::Time& frameTime) {
-	Spell::update(frameTime);
+	sf::Vector2f nextPosition;
+
+	calculateNextPosition(frameTime, nextPosition);
+	checkCollisions(nextPosition);
+
+	// check collisions with dynamic tiles
+	if (m_data.isDynamicTileEffect) {
+		sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+		m_level->collideWithDynamicTiles(this, tmp);
+	}
+
 	checkCollisionsWithItems();
+
+	MovableGameObject::update(frameTime);
+
+	updateTime(m_data.activeDuration, frameTime);
+	if (m_data.activeDuration == sf::Time::Zero) {
+		setDisposed();
+	}
 }
 
 void TelekinesisSpell::checkCollisionsWithItems() {
@@ -33,8 +50,14 @@ void TelekinesisSpell::checkCollisionsWithItems() {
 		if (it->getBoundingBox()->intersects(*getBoundingBox())) {
 			LevelItem* item = dynamic_cast<LevelItem*>(it);
 			if (item != nullptr) {
-				item->pickup();
+				if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+					item->pickup();
+				}
+				else {
+					item->setDisposed();
+				}
 				setDisposed();
+				break;
 			}
 		}
 	}
@@ -50,7 +73,7 @@ void TelekinesisSpell::loadComponents() {
 	data.emitRate = 25.f;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
 	data.isAdditiveBlendMode = true;
-	
+
 	// Generators
 	auto spawner = new particles::BoxSpawner();
 	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);

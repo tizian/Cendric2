@@ -105,7 +105,7 @@ std::string ConfigurationWriter::writeFPSMax(const ConfigurationData& data) cons
 }
 
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
-	string language = "# 1 for EN, 2 for DE, 3 for CH\n";
+	string language = "# 1 for EN, 2 for DE, 3 for CH, 4 for ES\n";
 	return language.append(string(LANGUAGE) + ":" + to_string(static_cast<int>(data.language)) + "\n");
 }
 

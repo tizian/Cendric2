@@ -4,7 +4,7 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
-    if (W:isQuestState("element_master", "started") and W:isQuestComplete("element_master")) then
+    if (W:isQuestComplete("element_master")) then
         R:setDisposed()
         return
     end

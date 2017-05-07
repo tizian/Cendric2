@@ -4,7 +4,7 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
-    if (not (W:isQuestState("element_master", "started") and W:isQuestComplete("element_master"))) then
+    if (not W:isQuestComplete("element_master")) then
         R:setDisposed()
         return
     end
@@ -12,7 +12,10 @@ loadRoutine = function(R, W)
 	
 	R:setTilePosition(7.5,31)
     R:setFacingDown()
-	R:setTalkingActive(true)	
+    
+    if (not W:isConditionFulfilled("npc_jonathan2", "talked")) then
+        R:setTalkingActive(true)	
+    end
     R:setLooped(false)
 
 end	

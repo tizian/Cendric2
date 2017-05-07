@@ -288,7 +288,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Element
 	translation.en:That's awesome. You should be able to unveil the secret of the old elementalists then.
 	translation.de:Das ist toll. Du solltest das Geheimnis der alten Elementarmagier nun enthüllen können.
-	translation.ch:Das isch toll Du sötsch es Gheimnis vode alte Elementarmagier ez enthülle chöne.
+	translation.ch:Das isch toll. Du sötsch es Gheimnis vode alte Elementarmagier ez enthülle chöne.
 	[
 		# Link node, tag is next tag
 		tag:17

@@ -267,7 +267,8 @@ int CharacterCore::getNumberOfTotalTargets(const std::string& questID, const std
 }
 
 bool CharacterCore::isQuestComplete(const std::string& questID) const {
-	if (getQuestState(questID) != QuestState::Started) return false;
+	auto state = getQuestState(questID);
+	if (state != QuestState::Started && state != QuestState::Completed) return false;
 	if (!contains(m_quests, questID)) {
 		g_logger->logError("CharacterCore", "Quest: " + questID + " has no quest data!");
 		return false;

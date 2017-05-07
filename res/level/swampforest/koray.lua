@@ -11,8 +11,8 @@ update = function(B, W)
         return
     end
     if (speechBubbleState == 0) then
-        B:say("KorayStart", 5)
-        B:wait(5)
+        B:say("KorayStart", 6)
+        B:wait(6)
         speechBubbleState = 1
         return
     end
@@ -50,12 +50,11 @@ update = function(B, W)
     end
     if (speechBubbleState == 8) then
         B:executeSpell(0, 1920, 430)
-        B:wait(4)
+        B:wait(3)
         speechBubbleState = 9
         return
     end
     if (speechBubbleState == 9) then
-        W:removeItem("eq_eyeofthemoon",1)
         B:say("KorayGotIt", 4)
         B:wait(4)
         speechBubbleState = 10
@@ -85,7 +84,7 @@ update = function(B, W)
     end
     if (speechBubbleState == 13) then
         B:setMovingTarget(1620, 860)
-        B:wait(2)
+        B:wait(1)
         speechBubbleState = 14
         return
     end
@@ -97,13 +96,13 @@ update = function(B, W)
     end
     if (speechBubbleState == 15) then
         B:setMovingTarget(1960, 1210)
-        B:wait(2)
+        B:wait(1)
         speechBubbleState = 16
         return
     end
     if (speechBubbleState == 16) then
         B:setMovingTarget(1780,1210)
-        B:wait(2)
+        B:wait(1)
         speechBubbleState = 17
         return
     end

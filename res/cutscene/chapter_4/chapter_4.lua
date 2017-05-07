@@ -1,5 +1,13 @@
 -- lua script for cutscene chapter_4
 steps = {
+    {
+		texts = {
+			{str="", time=1}
+		},
+		images = {
+			{path="black.png", vel=0, angle=0}
+		}
+	},
 	{
 		texts = {
 			{str="Chapter4", time=2, centered=true}

@@ -321,7 +321,7 @@ void LevelMainCharacter::loadAnimation() {
 		fightingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 	// duplicate last frame because of level equipment
-	fightingAnimation->addFrame(sf::IntRect(14 * width, 0, width, height));
+	fightingAnimation->addFrame(sf::IntRect(13 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
