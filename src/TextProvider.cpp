@@ -17,11 +17,13 @@ void TextProvider::reload() {
 	setLanguage(g_resourceManager->getConfiguration().language);
 }
 
+
+
 std::string TextProvider::getText(const std::string& key) {
 	return getText(key, "core");
 }
 
-std::string TextProvider::getText(const std::string& key, const std::string& type, bool isReplaceItemVariables) {
+std::string TextProvider::getText(const std::string& key, const std::string& type, bool isReplaceItemVariables, bool isRaw) {
 	if (key.empty()) return "";
 
 	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' AND text_type = '" + type + "' LIMIT 1;";
@@ -35,7 +37,13 @@ std::string TextProvider::getText(const std::string& key, const std::string& typ
 	if (isReplaceItemVariables) {
 		replaceItemVariables(rs[0][0]);
 	}
-	return transform(rs[0][0]);
+
+	if (isRaw) {
+		return rs[0][0];
+	}
+	else {
+		return transform(rs[0][0]);
+	}
 }
 
 void TextProvider::replaceItemVariables(std::string& text) {
@@ -62,11 +70,11 @@ void TextProvider::replaceItemVariables(std::string& text) {
 	text.append(remainingText);
 }
 
-std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth) {
-	return getCroppedText(key, "core", characterSize, maxWidth);
+std::string TextProvider::getCroppedText(const std::string& key, int characterSize, int maxWidth, bool isRaw) {
+	return getCroppedText(key, "core", characterSize, maxWidth, isRaw);
 }
 
-std::string TextProvider::getCroppedText(const std::string& key, const std::string& type, int characterSize, int maxWidth) {
+std::string TextProvider::getCroppedText(const std::string& key, const std::string& type, int characterSize, int maxWidth, bool isRaw) {
 	return getCroppedString(getText(key, type), characterSize, maxWidth);
 }
 

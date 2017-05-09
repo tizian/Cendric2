@@ -100,14 +100,22 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
 	m_speakerText->setString(m_npcName);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH)));
+	
+	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
+	std::basic_string<sf::Uint32> utf32line;
+	sf::Utf8::toUtf32(line.begin(), line.end(), std::back_inserter(utf32line));
+	m_dialogueText->setString(utf32line);
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
 	m_speakerText->setString(CENDRIC_NAME);
-	m_dialogueText->setString(g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH)));
+
+	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
+	std::basic_string<sf::Uint32> utf32line;
+	sf::Utf8::toUtf32(line.begin(), line.end(), std::back_inserter(utf32line));
+	m_dialogueText->setString(utf32line);
 }
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
@@ -356,24 +364,31 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 // Dialogue Option
 
 DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type) {
-	std::string textString = g_textProvider->getText(trans.text, dialogueID);
+	std::string textString = g_textProvider->getText(trans.text, dialogueID, true, true);
 	if (!trans.item.first.empty()) {
-		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item") + ")");
+		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item", true, true) + ")");
 	}
 
 	switch (type) {
-	case DialogueOptionType::End:
-		textString.append(textString.empty() ? g_textProvider->getText("DialogueEnd") : " " + g_textProvider->getText("DialogueEnd"));
+	case DialogueOptionType::End: {
+		auto str = g_textProvider->getText("DialogueEnd", "core", true, true);
+		textString.append(textString.empty() ? str : " " + str);
 		break;
-	case DialogueOptionType::Trade:
-		textString.append(textString.empty() ? g_textProvider->getText("DialogueTrade") : " " + g_textProvider->getText("DialogueTrade"));
+	}
+	case DialogueOptionType::Trade: {
+		auto str = g_textProvider->getText("DialogueTrade", "core", true, true);
+		textString.append(textString.empty() ? str : " " + str);
 		break;
+	}
 	default:
 		break;
 	}
 
+	std::basic_string<sf::Uint32> utf32line;
+	sf::Utf8::toUtf32(textString.begin(), textString.end(), std::back_inserter(utf32line));
+
 	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
-	m_text.setString(textString);
+	m_text.setString(utf32line);
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
 	m_text.setFillColor(COLOR_WHITE);
 	m_text.setOutlineColor(COLOR_BAD);
