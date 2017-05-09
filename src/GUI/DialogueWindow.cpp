@@ -371,12 +371,12 @@ DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string
 
 	switch (type) {
 	case DialogueOptionType::End: {
-		auto str = g_textProvider->getText("DialogueEnd", "core", true, true);
+		auto str = g_textProvider->getText("DialogueEnd", "core", false, true);
 		textString.append(textString.empty() ? str : " " + str);
 		break;
 	}
 	case DialogueOptionType::Trade: {
-		auto str = g_textProvider->getText("DialogueTrade", "core", true, true);
+		auto str = g_textProvider->getText("DialogueTrade", "core", false, true);
 		textString.append(textString.empty() ? str : " " + str);
 		break;
 	}
