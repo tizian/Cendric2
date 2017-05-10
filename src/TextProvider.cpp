@@ -75,7 +75,7 @@ std::string TextProvider::getCroppedText(const std::string& key, int characterSi
 }
 
 std::string TextProvider::getCroppedText(const std::string& key, const std::string& type, int characterSize, int maxWidth, bool isRaw) {
-	return getCroppedString(getText(key, type), characterSize, maxWidth);
+	return getCroppedString(getText(key, type, true, isRaw), characterSize, maxWidth);
 }
 
 std::string TextProvider::getCroppedString(const std::string& string, int characterSize, int maxWidth) {
