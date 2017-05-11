@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(Cendric)
 
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
-option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool?" ON)
+option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
     message(FATAL_ERROR
@@ -114,7 +114,7 @@ if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
 	
 endif()
 
-if (CENDRIC_BUILD_DIALOGUE_TOOL)
+if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
 
 	file(GLOB_RECURSE DialogueTool_FILES
 		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"

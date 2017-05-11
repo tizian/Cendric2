@@ -272,18 +272,21 @@ void CookingWindow::render(sf::RenderTarget& renderTarget) {
 CookingOption::CookingOption(const std::string& itemID, const std::string& cookedItemID, int count, int nr) {
 	m_itemID = itemID;
 	// if the itemID is empty, this is a cancel option
+	std::string text = "";
 	if (itemID.empty()) {
-		std::string text = "";
 		if (nr == 0) {
-			text += g_textProvider->getText("NothingToCook") + " ";
+			text += g_textProvider->getText("NothingToCook", "core", false, true) + " ";
 		}
-		m_text.setString(text + g_textProvider->getText("DialogueEnd"));
+		text = text + g_textProvider->getText("DialogueEnd", "core", false, true);
 	}
 	else {
-		std::string textString = g_textProvider->getText(cookedItemID, "item");
-		textString += " (" + g_textProvider->getText(itemID, "item") + " " + std::to_string(count)  + ")";
-		m_text.setString(textString);
+		text = g_textProvider->getText(cookedItemID, "item", false, true);
+		text += " (" + g_textProvider->getText(itemID, "item", false, true) + " " + std::to_string(count)  + ")";
 	}
+
+	std::basic_string<sf::Uint32> utf32line;
+	sf::Utf8::toUtf32(text.begin(), text.end(), std::back_inserter(utf32line));
+	m_text.setString(utf32line);
 	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
 	m_text.setFillColor(COLOR_WHITE);
