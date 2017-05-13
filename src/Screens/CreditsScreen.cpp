@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const float CREDITS_VELOCITY_Y = -40.f;
+const float CREDITS_VELOCITY_Y = -36.f;
 
 const std::string SPRITE_PATH = "res/assets/screens/screen_credits.png";
 
