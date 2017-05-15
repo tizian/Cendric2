@@ -28,6 +28,16 @@ INSERT INTO item_food (item_id, food_duration_s) values ('fo_water', 5);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_water', -16, -20, 18, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_water', 1, 200, 50, 50, 50);
 
+-- Potato
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_potato', 'item', 'Potato','Kartoffel','Herdöpfel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_potato', 'item_desc', 'Sorry for the long post.','Sorry for the long post.','Sorry for the long post.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_potato', 'consumable', 650, 650, 1);
+INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_potato', 1);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_potato', 5);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_potato', -14, -34, 24, 16);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_potato', 1, 650, 100, 50, 50);
+
 -- Apple
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item', 'Apple', 'Apfel', 'Öpfel');
