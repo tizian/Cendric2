@@ -31,7 +31,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Potato
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_potato', 'item', 'Potato','Kartoffel','Herdöpfel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_potato', 'item_desc', 'Sorry for the long post.','Sorry for the long post.','Sorry for the long post.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_potato', 'item_desc', 'Boil ''em, mash ''em, stick ''em in a stew.','Man kocht sie, stampft sie, tut sie in die Suppe.','Me chocht si, stampft si, tuet si is Süppli.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_potato', 'consumable', 650, 650, 1);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_potato', 1);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_potato', 5);
