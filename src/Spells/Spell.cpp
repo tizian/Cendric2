@@ -172,7 +172,7 @@ bool Spell::getConfiguredRotateSprite() const {
 }
 
 void Spell::setViewable(bool value) {
-	if (!value) {
+	if (!value && !isAttachedToMob()) {
 		setDisposed();
 	}
 	MovableGameObject::setViewable(value);

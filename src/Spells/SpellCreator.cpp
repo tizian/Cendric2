@@ -48,7 +48,7 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_futureTargets.push_back(target);
-		m_owner->executeFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
+		m_owner->executeFightAnimation(m_spellData.castingTime + sf::milliseconds(100), m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
 	}
 
@@ -65,7 +65,7 @@ void SpellCreator::executeSpell(const LevelMovableGameObject* target) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_target = target;
 		target->registerSpellCreator(this);
-		m_owner->executeFightAnimation(m_spellData.castingTime, m_spellData.castingAnimation, m_spellData.isBlocking);
+		m_owner->executeFightAnimation(m_spellData.castingTime + sf::milliseconds(100), m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
 	}
 

@@ -73,6 +73,7 @@ MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(200.f);
 	behavior->setDampingGroundPerS(0.999f);
+	behavior->setDampingAirPerS(0.9f);
 	return behavior;
 }
 
