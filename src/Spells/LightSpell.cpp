@@ -18,11 +18,6 @@ void LightSpell::update(const sf::Time& frameTime) {
 	setPosition(nextPosition);
 
 	Spell::update(frameTime);
-
-	updateTime(m_data.activeDuration, frameTime);
-	if (m_data.activeDuration == sf::Time::Zero) {
-		setDisposed();
-	}
 }
 
 void LightSpell::loadComponents() {
