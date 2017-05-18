@@ -245,7 +245,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="book">
+ <objectgroup name="dynamic">
   <object id="127" gid="434" x="550" y="360" width="50" height="50">
    <properties>
     <property name="id" value="bo_rhendalmagic"/>

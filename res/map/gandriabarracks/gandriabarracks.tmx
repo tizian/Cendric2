@@ -267,15 +267,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="chest">
+ <objectgroup name="dynamic">
   <object id="138" gid="437" x="350" y="200" width="50" height="50">
    <properties>
     <property name="permanent" value=""/>
     <property name="storeditems" value=""/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="door">
   <object id="139" gid="456" x="550" y="550" width="50" height="50">
    <properties>
     <property name="conditions" value="default,barracks_open"/>

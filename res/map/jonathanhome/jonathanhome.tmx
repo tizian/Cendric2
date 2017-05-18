@@ -247,10 +247,15 @@
   <object id="174" x="754" y="399" width="45" height="40"/>
   <object id="176" x="829" y="355" width="40" height="193"/>
  </objectgroup>
- <objectgroup name="door">
+ <objectgroup name="dynamic">
   <object id="152" gid="456" x="450" y="550" width="50" height="50">
    <properties>
     <property name="key" value="ke_jonathanbasement"/>
+   </properties>
+  </object>
+  <object id="177" gid="434" x="500" y="310" width="50" height="50">
+   <properties>
+    <property name="id" value="bo_schoolsofmagic"/>
    </properties>
   </object>
  </objectgroup>
@@ -265,13 +270,6 @@
    <properties>
     <property name="level entry" value="res/level/jonathanslab/jonathanslab.tmx,2750,200"/>
     <property name="persistent" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="book">
-  <object id="177" gid="434" x="500" y="310" width="50" height="50">
-   <properties>
-    <property name="id" value="bo_schoolsofmagic"/>
    </properties>
   </object>
  </objectgroup>

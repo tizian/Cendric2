@@ -135,13 +135,6 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="npc">
-  <object id="178" gid="381" x="648" y="600" width="50" height="50">
-   <properties>
-    <property name="id" value="npc_syrah"/>
-   </properties>
-  </object>
- </objectgroup>
  <layer name="LFG 1" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -264,6 +257,25 @@
   <object id="184" x="910" y="573" width="51" height="17"/>
   <object id="185" x="449" y="296" width="31" height="43"/>
  </objectgroup>
+ <objectgroup name="npc">
+  <object id="178" gid="381" x="648" y="600" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_syrah"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic">
+  <object id="152" gid="456" x="800" y="549" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_syrahbasement"/>
+   </properties>
+  </object>
+  <object id="188" gid="434" x="550" y="308" width="50" height="50">
+   <properties>
+    <property name="id" value="bo_potions"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="trigger">
   <object id="126" x="650" y="720" width="50" height="30">
    <properties>
@@ -275,20 +287,6 @@
    <properties>
     <property name="level entry" value="res/level/syrahbasement/syrahbasement.tmx,1810,260"/>
     <property name="persistent" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="door">
-  <object id="152" gid="456" x="800" y="549" width="50" height="50">
-   <properties>
-    <property name="key" value="ke_syrahbasement"/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="book">
-  <object id="188" gid="434" x="550" y="308" width="50" height="50">
-   <properties>
-    <property name="id" value="bo_potions"/>
    </properties>
   </object>
  </objectgroup>

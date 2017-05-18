@@ -313,6 +313,7 @@
  <objectgroup name="collidable">
   <object id="142" x="1100" y="300" width="100" height="38"/>
  </objectgroup>
+ <objectgroup name="dynamic"/>
  <objectgroup name="npc">
   <object id="143" gid="363" x="400" y="800" width="50" height="50">
    <properties>
@@ -349,5 +350,4 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="door"/>
 </map>

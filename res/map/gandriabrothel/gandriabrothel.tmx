@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" nextobjectid="193">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" nextobjectid="195">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -259,28 +259,15 @@
 4,4,4,4,4,4,4,4,0,0,0,77,0,79,0,0,0,4,4,4,4,4,4,4,4
 </data>
  </layer>
- <layer name="dynamic" width="25" height="17">
-  <data encoding="csv">
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,472,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-</data>
- </layer>
- <layer name="collidable" width="25" height="17">
+ <objectgroup name="dynamic">
+  <object id="194" gid="472" x="450" y="650" width="50" height="50"/>
+  <object id="190" gid="476" x="600" y="550" width="50" height="50">
+   <properties>
+    <property name="conditions" value="npc_mona,gate_open"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="collidable" width="25" height="17" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -301,7 +288,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup name="collidable" visible="0">
   <object id="172" x="365" y="248" width="85" height="32"/>
   <object id="174" x="50" y="245" width="85" height="32"/>
   <object id="175" x="915" y="250" width="170" height="32"/>
@@ -315,13 +302,6 @@
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,2715,2550"/>
     <property name="persistent" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="door">
-  <object id="190" gid="476" x="600" y="550" width="50" height="50">
-   <properties>
-    <property name="conditions" value="npc_mona,gate_open"/>
    </properties>
   </object>
  </objectgroup>
