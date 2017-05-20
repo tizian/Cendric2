@@ -1262,12 +1262,6 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="226" x="2334.13" y="1603" width="43.75" height="36">
-   <properties>
-    <property name="level entry" value="res/level/testlevel/testlevel.tmx,1225,2100"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
   <object id="230" x="1825" y="650" width="100" height="100">
    <properties>
     <property name="forced" value=""/>
