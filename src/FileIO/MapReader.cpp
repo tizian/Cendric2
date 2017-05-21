@@ -3,7 +3,7 @@
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
-using namespace std;
+const int MapReader::DYNAMIC_TILE_COUNT = 20;
 
 void MapReader::logError(const std::string& error) const {
 	g_logger->logError("MapReader", "Error in map data : " + error);
@@ -213,17 +213,8 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableObjectLayer(objectgroup, data)) return false;
 		}
-		else if (name.find("book") != std::string::npos) {
-			if (!readBooks(objectgroup, data)) return false;
-		}
-		else if (name.find("door") != std::string::npos) {
-			if (!readDoors(objectgroup, data)) return false;
-		}
-		else if (name.find("sign") != std::string::npos) {
-			if (!readSigns(objectgroup, data)) return false;
-		}
-		else if (name.find("chest") != std::string::npos) {
-			if (!readChests(objectgroup, data)) return false;
+		else if (name.find("dynamic") != std::string::npos) {
+			if (!readDynamicTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("trigger") != std::string::npos) {
 			if (!readTriggers(objectgroup, data)) return false;
@@ -238,7 +229,7 @@ bool MapReader::readObjects(tinyxml2::XMLElement* map, MapData& data) const {
 	return true;
 }
 
-bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
+/*bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
 	if (!WorldReader::readChests(objectgroup, data)) return false;
 
 	int offset = static_cast<int>(MapDynamicTileID::Chest) + m_firstGidDynamicTiles - 1;
@@ -248,9 +239,67 @@ bool MapReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) c
 	}
 
 	return true;
+}*/
+
+bool MapReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int x;
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		MapDynamicTileData tileData;
+
+		int offset = gid - m_firstGidDynamicTiles + 1;
+		tileData.id = static_cast<MapDynamicTileID>(offset % DYNAMIC_TILE_COUNT);
+		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
+		tileData.position.x = static_cast<float>(x);
+		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
+
+		// read properties
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, property key not found (dynamic tiles).");
+					return false;
+				}
+				std::string xmlKey = textAttr;
+
+				textAttr = _property->Attribute("value");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, property value not found (dynamic tiles).");
+					return false;
+				}
+				std::string xmlValue = textAttr;
+
+				tileData.properties.insert({ xmlKey, xmlValue });
+
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+		
+		data.dynamicTiles.push_back(tileData);
+		object = object->NextSiblingElement("object");
+	}
+
+	return true;
 }
 
-bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) const {
+/*bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
@@ -434,7 +483,7 @@ bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) co
 	}
 
 	return true;
-}
+}*/
 
 bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
@@ -573,46 +622,6 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 	return true;
 }
 
-bool MapReader::readDynamicTileLayer(const std::string& layer, MapData& data) const {
-	std::string layerData = layer;
-	size_t pos = layerData.find(",");
-	int id;
-	int position = 0;
-	bool lastIteration = true;
-	while (pos != std::string::npos || lastIteration) {
-		if (pos == std::string::npos) {
-			lastIteration = false;
-			id = std::stoi(layerData);
-		}
-		else {
-			id = std::stoi(layerData.substr(0, pos));
-			layerData.erase(0, pos + 1);
-			pos = layerData.find(",");
-		}
-
-		if (id != 0) {
-			id -= m_firstGidDynamicTiles;
-			MapDynamicTileID tileId = static_cast<MapDynamicTileID>(id % DYNAMIC_TILE_COUNT + 1);
-			int skinNr = id / DYNAMIC_TILE_COUNT;
-			if (tileId <= MapDynamicTileID::VOID || tileId >= MapDynamicTileID::MAX) {
-				logError("Unknown dynamic tile id found on dynamic layer: " + std::to_string(id));
-				return false;
-			}
-
-			MapDynamicTileData tileData;
-			tileData.id = tileId;
-			tileData.skinNr = skinNr;
-			tileData.spawnPosition = position;
-
-			data.dynamicTiles.push_back(tileData);
-		}
-
-		++position;
-	}
-
-	return true;
-}
-
 bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 	tinyxml2::XMLElement* layer = map->FirstChildElement("layer");
 
@@ -649,9 +658,6 @@ bool MapReader::readLayers(tinyxml2::XMLElement* map, MapData& data) const {
 		}
 		else if (name.find("collidable") != std::string::npos) {
 			if (!readCollidableLayer(layerData, data)) return false;
-		}
-		else if (name.find("dynamic") != std::string::npos) {
-			if (!readDynamicTileLayer(layerData, data)) return false;
 		}
 		else {
 			logError("Layer with unknown name found in map.");

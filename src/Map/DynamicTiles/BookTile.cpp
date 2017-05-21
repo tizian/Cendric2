@@ -2,12 +2,13 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Registrar.h"
+
+REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Book, BookTile)
 
 const float BookTile::RANGE = 100.f;
 
-BookTile::BookTile(const BookData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
-	m_data = data;
-	
+BookTile::BookTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Book"), this, m_mainChar);
 	interactComponent->setInteractRange(RANGE);
 	interactComponent->setInteractText("ToRead");
@@ -17,10 +18,16 @@ BookTile::BookTile(const BookData& data, MapScreen* mapScreen) : MapDynamicTile(
 	g_resourceManager->loadSoundbuffer("res/sound/gui/page_turn.ogg", ResourceType::Map);
 }
 
-void BookTile::init() {
+bool BookTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f,
 		TILE_SIZE_F,
 		TILE_SIZE_F));
+
+	if (!contains(properties, std::string("id")))
+		return false;
+
+	m_bookId = properties.at("id");
+	return true;
 }
 
 void BookTile::loadAnimation(int skinNr) {
@@ -51,7 +58,7 @@ void BookTile::onRightClick() {
 }
 
 void BookTile::startReading() {
-	const Item* item = g_resourceManager->getItem(m_data.id);
+	const Item* item = g_resourceManager->getItem(m_bookId);
 	if (item == nullptr || !item->isDocument()) return;
 
 	dynamic_cast<MapScreen*>(m_screen)->setBook(*item);

@@ -1,14 +1,13 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <map>
 
 #include "Enums/LevelDynamicTileID.h"
 
 struct LevelDynamicTileData final {
 	LevelDynamicTileID id;
 	sf::Vector2f position;
-	int spawnPosition;
 	int skinNr;
-	// only used for FluidTile
-	sf::Vector2f size;
+	std::map<std::string, std::string> properties;
 };

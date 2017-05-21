@@ -1,6 +1,9 @@
 #include "FileIO/LevelReader.h"
+#include "Structs/SpellModifier.h"
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
+
+const int LevelReader::DYNAMIC_TILE_COUNT = 30;
 
 LevelReader::LevelReader() : WorldReader() {
 }
@@ -36,6 +39,7 @@ bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const 
 	return true;
 }
 
+/*
 bool LevelReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
 	if (!WorldReader::readChests(objectgroup, data)) return false;
 
@@ -515,7 +519,7 @@ bool LevelReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) 
 	}
 
 	return true;
-}
+}*/
 
 bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
@@ -663,32 +667,14 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 		if (name.find("enemy") != std::string::npos) {
 			if (!readEnemies(objectgroup, data)) return false;
 		}
-		else if (name.find("chest") != std::string::npos) {
-			if (!readChests(objectgroup, data)) return false;
-		}
-		else if (name.find("modifier") != std::string::npos) {
-			if (!readModifierTiles(objectgroup, data)) return false;
-		}
-		else if (name.find("moving platform") != std::string::npos) {
-			if (!readMovingTiles(objectgroup, data)) return false;
-		}
-		else if (name.find("jumping") != std::string::npos) {
-			if (!readJumpingTiles(objectgroup, data)) return false;
-		}
-		else if (name.find("sign") != std::string::npos) {
-			if (!readSigns(objectgroup, data)) return false;
-		}
-		else if (name.find("ladder") != std::string::npos) {
-			if (!readLadderTiles(objectgroup, data)) return false;
+		else if (name.find("dynamic") != std::string::npos) {
+			if (!readDynamicTiles(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
 		}
 		else if (name.find("trigger") != std::string::npos) {
 			if (!readTriggers(objectgroup, data)) return false;
-		}
-		else if (name.find("door") != std::string::npos) {
-			if (!readDoorTiles(objectgroup, data)) return false;
 		}
 		else {
 			g_logger->logError("LevelReader", "Objectgroup with unknown name found in level: " + name);
@@ -697,6 +683,64 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 
 		objectgroup = objectgroup->NextSiblingElement("objectgroup");
 	}
+	return true;
+}
+
+bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
+
+	while (object != nullptr) {
+
+		int x;
+		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
+		XMLCheckResult(result);
+
+		int y;
+		result = object->QueryIntAttribute("y", &y);
+		XMLCheckResult(result);
+
+		int gid;
+		result = object->QueryIntAttribute("gid", &gid);
+		XMLCheckResult(result);
+
+		LevelDynamicTileData tileData;
+
+		int offset = gid - m_firstGidDynamicTiles + 1;
+		tileData.id = static_cast<LevelDynamicTileID>(offset % DYNAMIC_TILE_COUNT);
+		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
+		tileData.position.x = static_cast<float>(x);
+		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
+
+		// read properties
+		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
+		if (properties != nullptr) {
+			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
+			while (_property != nullptr) {
+				const char* textAttr = nullptr;
+				textAttr = _property->Attribute("name");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, property key not found (dynamic tiles).");
+					return false;
+				}
+				std::string xmlKey = textAttr;
+
+				textAttr = _property->Attribute("value");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, property value not found (dynamic tiles).");
+					return false;
+				}
+				std::string xmlValue = textAttr;
+
+				tileData.properties.insert({ xmlKey, xmlValue });
+
+				_property = _property->NextSiblingElement("property");
+			}
+		}
+
+		data.dynamicTiles.push_back(tileData);
+		object = object->NextSiblingElement("object");
+	}
+
 	return true;
 }
 
@@ -737,46 +781,6 @@ bool LevelReader::readLevelItemLayer(const std::string& layer, LevelData& data) 
 		levelItem = m_levelItemMap.at(id);
 		data.levelItems.at(index) = levelItem;
 	}
-	return true;
-}
-
-bool LevelReader::readDynamicTileLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-	size_t pos = layerData.find(",");
-	int id;
-	int position = 0;
-	bool lastIteration = true;
-	while (pos != std::string::npos || lastIteration) {
-		if (pos == std::string::npos) {
-			lastIteration = false;
-			id = std::stoi(layerData);
-		}
-		else {
-			id = std::stoi(layerData.substr(0, pos));
-			layerData.erase(0, pos + 1);
-			pos = layerData.find(",");
-		}
-
-		if (id != 0) {
-			id -= m_firstGidDynamicTiles;
-			LevelDynamicTileID tileId = static_cast<LevelDynamicTileID>(id % DYNAMIC_TILE_COUNT + 1);
-			int skinNr = id / DYNAMIC_TILE_COUNT;
-			if (tileId <= LevelDynamicTileID::VOID || tileId >= LevelDynamicTileID::MAX) {
-				logError("Unknown dynamic tile id found on dynamic layer: " + std::to_string(id));
-				return false;
-			}
-
-			LevelDynamicTileData tileData;
-			tileData.id = tileId;
-			tileData.skinNr = skinNr;
-			tileData.spawnPosition = position;
-
-			data.dynamicTiles.push_back(tileData);
-		}
-
-		++position;
-	}
-
 	return true;
 }
 
@@ -835,8 +839,8 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 				// Fill in info
 				ldtData.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
 				ldtData.skinNr = skinNr - 1;
-				ldtData.spawnPosition = y * data.mapSize.x + x;
-				ldtData.size = sf::Vector2f(width * TILE_SIZE_F, height * TILE_SIZE_F);
+				std::string size = std::to_string(width * TILE_SIZE_F) + "," + std::to_string(height * TILE_SIZE_F);
+				ldtData.properties.insert({ "size", size });
 				data.dynamicTiles.push_back(ldtData);
 			}
 		}
@@ -845,6 +849,7 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 	return true;
 }
 
+/*
 bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) const {
 	std::string layerData = layer;
 	int leverOffset = static_cast<int>(LevelDynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
@@ -906,7 +911,7 @@ bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) cons
 	data.levers.push_back(leData);
 
 	return true;
-}
+}*/
 
 bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 	// pre-load level item layer
@@ -947,12 +952,6 @@ bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 		}
 		else if (name.find("FG") != std::string::npos || name.find("fg") != std::string::npos) {
 			if (!readForegroundTileLayer(layerData, data)) return false;
-		}
-		else if (name.find("lever") != std::string::npos) {
-			if (!readLeverLayer(layerData, data)) return false;
-		}
-		else if (name.find("dynamic") != std::string::npos) {
-			if (!readDynamicTileLayer(layerData, data)) return false;
 		}
 		else if (name.find("fluid") != std::string::npos) {
 			if (!readFluidLayer(layerData, data)) return false;

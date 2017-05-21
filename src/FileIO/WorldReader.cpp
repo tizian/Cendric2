@@ -411,6 +411,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 	return true;
 }
 
+/*
 bool WorldReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
@@ -602,7 +603,7 @@ bool WorldReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data)
 	}
 	return true;
 }
-
+*/
 bool WorldReader::readBackgroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 

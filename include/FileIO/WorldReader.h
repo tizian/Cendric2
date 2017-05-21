@@ -29,9 +29,7 @@ protected:
 	bool readCollidableLayer(const std::string& layer, WorldData& data) const;
 	bool readLights(tinyxml2::XMLElement* objects, WorldData& data) const;
 	bool readTriggers(tinyxml2::XMLElement* objects, WorldData& data) const;
-	virtual bool readSigns(tinyxml2::XMLElement* objects, WorldData& data) const;
-	virtual bool readChests(tinyxml2::XMLElement* objects, WorldData& data) const;
-
+	
 	// check map bean for validity before loading the map
 	bool checkData(WorldData& data) const;
 

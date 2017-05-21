@@ -3,7 +3,7 @@
 #include "global.h"
 #include "AnimatedGameObject.h"
 #include "ResourceManager.h"
-#include "Enums/MapDynamicTileID.h"
+#include "Structs/MapDynamicTileData.h"
 
 class Map;
 class MapScreen;
@@ -15,8 +15,8 @@ public:
 	MapDynamicTile(MapScreen* mapScreen);
 	virtual ~MapDynamicTile() {};
 
-	// loads sprite offset & bounding box. 
-	virtual void init() = 0;
+	// load the dynamic tile, returns whether successful.
+	virtual bool init(const MapTileProperties& properties) = 0;
 	// loads the resources (sprite, sound)
 	virtual void loadResources();
 	// loads the dynamic tile with the specified skin nr

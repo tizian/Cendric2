@@ -30,24 +30,16 @@ private:
 	bool readItemIDs(tinyxml2::XMLElement* firstTile);
 
 	bool readLayers(tinyxml2::XMLElement* map, LevelData& data) const;
-	bool readDynamicTileLayer(const std::string& layer, LevelData& data) const;
 	bool readFluidLayer(const std::string& layer, LevelData& data) const;
-	bool readLeverLayer(const std::string& layer, LevelData& data) const;
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	
 	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
-	bool readDoorTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readChests(tinyxml2::XMLElement* objects, WorldData& data) const override;
-	bool readModifierTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readMovingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readJumpingTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
-	bool readSigns(tinyxml2::XMLElement* objects, WorldData& data) const override;
-	bool readLadderTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readDynamicTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.
-	const int DYNAMIC_TILE_COUNT = 30;
+	static const int DYNAMIC_TILE_COUNT;
 
 	// \brief check level bean for validity before loading the level
 	bool checkData(LevelData& data) const;

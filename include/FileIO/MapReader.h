@@ -20,14 +20,10 @@ private:
 	bool readCollidableTiles(tinyxml2::XMLElement* firstTile);
 	bool readBackgroundTileLayer(const std::string& layer, MapData& data) const;
 	bool readLayers(tinyxml2::XMLElement* map, MapData& data) const;
-	bool readDynamicTileLayer(const std::string& layer, MapData& data) const;
 	
 	bool readObjects(tinyxml2::XMLElement* map, MapData& data) const;
 	bool readNPCs(tinyxml2::XMLElement* objects, MapData& data) const;
-	bool readChests(tinyxml2::XMLElement* objects, WorldData& data) const override;
-	bool readBooks(tinyxml2::XMLElement* objects, MapData& data) const;
-	bool readDoors(tinyxml2::XMLElement* objects, MapData& data) const;
-	bool readSigns(tinyxml2::XMLElement* objects, WorldData& data) const override;
+	bool readDynamicTiles(tinyxml2::XMLElement* objects, MapData& data) const;
 	bool readCollidableObjectLayer(tinyxml2::XMLElement* objects, MapData& data) const;
 
 	// check map bean for validity before loading the map
@@ -35,7 +31,7 @@ private:
 
 	// this is the width in tiles of the dynamic tile tileset
 	// and used to calculate the skin of the dynamic tile.
-	const int DYNAMIC_TILE_COUNT = 20;
+	static const int DYNAMIC_TILE_COUNT;
 
 	int m_firstGidDynamicTiles;
 
