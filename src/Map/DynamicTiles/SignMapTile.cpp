@@ -3,22 +3,15 @@
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GUI/Hints.h"
+#include "Registrar.h"
+
+REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Sign, SignMapTile)
 
 const float SignMapTile::TOOLTIP_TOP = 20.f;
 const float SignMapTile::READ_RANGE = 50.f;
 const sf::Time SignMapTile::TOOLTIP_WINDOW_TIME = sf::seconds(3.f);
 
-SignMapTile::SignMapTile(const SignData& data, MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
-	m_data = data;
-
-	if (m_data.isHint) {
-		m_tooltipWindow.setText(getHintDescription(m_data.text));
-		mapScreen->getCharacterCore()->learnHint(data.text);
-	}
-	else {
-		m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
-	}
-
+SignMapTile::SignMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
@@ -45,10 +38,25 @@ void SignMapTile::update(const sf::Time& frameTime) {
 	MapDynamicTile::update(frameTime);
 }
 
-void SignMapTile::init() {
+bool SignMapTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, 20.f));
 	setPositionOffset(sf::Vector2f(0.f, 15.f));
 	setSpriteOffset(sf::Vector2f(0.f, -15.f));
+
+	if (contains(properties, std::string("hint"))) {
+		std::string text = properties.at("hint");
+		m_tooltipWindow.setText(getHintDescription(text));
+		m_screen->getCharacterCore()->learnHint(text);
+	}
+	else if (contains(properties, std::string("text"))) {
+		std::string text = properties.at("text");
+		m_tooltipWindow.setText(g_textProvider->getText(text, "sign"));
+	}
+	else {
+		return false;
+	}
+
+	return true;
 }
 
 void SignMapTile::loadAnimation(int skinNr) {

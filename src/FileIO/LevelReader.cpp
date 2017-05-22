@@ -703,6 +703,10 @@ bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, LevelData&
 		result = object->QueryIntAttribute("gid", &gid);
 		XMLCheckResult(result);
 
+		int id;
+		result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
 		LevelDynamicTileData tileData;
 
 		int offset = gid - m_firstGidDynamicTiles + 1;
@@ -710,6 +714,7 @@ bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, LevelData&
 		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
 		tileData.position.x = static_cast<float>(x);
 		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
+		tileData.properties.insert({ "id", std::to_string(id) });
 
 		// read properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");

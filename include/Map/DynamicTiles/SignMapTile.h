@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
-#include "Structs/SignData.h"
 #include "GUI/TooltipWindow.h"
 
 class InteractComponent;
@@ -10,12 +9,12 @@ class InteractComponent;
 // a readable sign
 class SignMapTile final : public MapDynamicTile {
 public:
-	SignMapTile(const SignData& data, MapScreen* mapScreen);
+	SignMapTile(MapScreen* mapScreen);
 
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
-	void init() override;
+	bool init(const MapTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onMouseOver() override;
@@ -28,7 +27,6 @@ private:
 	void onInteract();
 
 private:
-	SignData m_data;
 	TooltipWindow m_tooltipWindow;
 	bool m_showTooltip;
 	sf::Time m_tooltipWindowTime = sf::Time::Zero;

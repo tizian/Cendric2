@@ -21,11 +21,13 @@ CookingTile::CookingTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(interactComponent);
 }
 
-void CookingTile::init() {
+bool CookingTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 
 		TILE_SIZE_F, 
 		TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(0.f, -50.f));
+
+	return true;
 }
 
 void CookingTile::loadAnimation(int skinNr) {

@@ -11,10 +11,12 @@ WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(new TooltipComponent(g_textProvider->getText("Waypoint"), this));
 }
 
-void WaypointTile::init() {
+bool WaypointTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f,
 		TILE_SIZE_F,
 		TILE_SIZE_F));
+
+	return true;
 }
 
 void WaypointTile::loadAnimation(int skinNr) {

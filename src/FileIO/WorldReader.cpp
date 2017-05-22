@@ -412,66 +412,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 }
 
 /*
-bool WorldReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
-	while (object != nullptr) {
-
-		int gid;
-		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		SignData sign;
-		sign.skinNr = gid;
-		sign.position.x = static_cast<float>(x);
-		sign.position.y = static_cast<float>(y) - TILE_SIZE_F;
-
-		// modifier type and level
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
-			while (property_ != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = property_->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-				std::string attrText = textAttr;
-				
-				if (attrText.compare("hint") == 0) {
-					sign.isHint = true;
-				}
-				if (attrText.compare("text") == 0 || sign.isHint) {
-					if (attrText.compare("hint"))
-					textAttr = nullptr;
-					textAttr = property_->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					sign.text = textAttr;
-				}
-
-				property_ = property_->NextSiblingElement("property");
-			}
-		}
-
-		data.signs.push_back(sign);
-
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
 
 bool WorldReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");

@@ -8,7 +8,7 @@
 class WaypointTile final : public MapDynamicTile {
 public:
 	WaypointTile(MapScreen* mapScreen);
-	void init() override;
+	bool init(const MapTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void update(const sf::Time& frameTime) override;
 	void onRightClick() override;

@@ -258,6 +258,10 @@ bool MapReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, MapData& dat
 		result = object->QueryIntAttribute("gid", &gid);
 		XMLCheckResult(result);
 
+		int id;
+		result = object->QueryIntAttribute("id", &id);
+		XMLCheckResult(result);
+
 		MapDynamicTileData tileData;
 
 		int offset = gid - m_firstGidDynamicTiles + 1;
@@ -265,6 +269,7 @@ bool MapReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, MapData& dat
 		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
 		tileData.position.x = static_cast<float>(x);
 		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
+		tileData.properties.insert({ "id", std::to_string(id) });
 
 		// read properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -298,192 +303,6 @@ bool MapReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, MapData& dat
 
 	return true;
 }
-
-/*bool MapReader::readBooks(tinyxml2::XMLElement* objectgroup, MapData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(MapDynamicTileID::Book) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		BookData book;
-
-		book.skinNr = skinNr;
-		book.position.x = static_cast<float>(x);
-		book.position.y = static_cast<float>(y) - TILE_SIZE_F;
-
-		// book properties
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-			while (_property != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = _property->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-				std::string attrText = textAttr;
-
-				if (attrText.compare("id") == 0) {
-					textAttr = nullptr;
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, parsing of book id failed.");
-						return false;
-					}
-					book.id = textAttr;
-				}
-
-				_property = _property->NextSiblingElement("property");
-			}
-		}
-
-		data.books.push_back(book);
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
-
-bool MapReader::readDoors(tinyxml2::XMLElement* objectgroup, MapData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-
-		int x;
-		tinyxml2::XMLError result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int offset = static_cast<int>(MapDynamicTileID::Door) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		DoorData door;
-
-		door.skinNr = skinNr;
-		door.position.x = static_cast<float>(x);
-		door.position.y = static_cast<float>(y) - TILE_SIZE_F;
-
-		// sign properties
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
-			while (_property != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = _property->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-
-				std::string attrText = textAttr;
-
-				// Keys
-				if (attrText.compare("key") == 0) {
-					std::string keyItemID = _property->Attribute("value");
-					if (keyItemID.empty()) {
-						logError("XML file could not be read, key itemID is not specified.");
-						return false;
-					}
-					door.keyItemID = keyItemID;
-				}
-
-				// Conditions
-				std::string name = textAttr;
-
-				bool isNotCondition = false;
-				if (name.compare("not conditions") == 0) {
-					isNotCondition = true;
-				}
-				else if (name.compare("conditions") != 0) {
-					_property = _property->NextSiblingElement("property");
-					continue;
-				}
-
-				textAttr = _property->Attribute("value");
-				if (textAttr == nullptr) {
-					g_logger->logWarning("WorldReader", "property 'conditions' or 'not conditions' on door properties has no content.");
-					continue;
-				}
-
-				std::string conditions = textAttr;
-
-				size_t pos = 0;
-
-				while (!conditions.empty()) {
-					if ((pos = conditions.find(",")) == std::string::npos) {
-						logError("Door conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
-						continue;
-					}
-
-					std::string conditionType = conditions.substr(0, pos);
-					conditions.erase(0, pos + 1);
-					std::string conditionName;
-
-					if ((pos = conditions.find(",")) != std::string::npos) {
-						conditionName = conditions.substr(0, pos);
-						conditions.erase(0, pos + 1);
-					}
-					else {
-						conditionName = conditions;
-						conditions.clear();
-					}
-
-					Condition condition;
-					condition.type = conditionType;
-					condition.name = conditionName;
-
-					if (isNotCondition) {
-						condition.negative = true;
-					}
-					else {
-						condition.negative = false;
-					}
-
-					door.conditions.push_back(condition);
-				}
-
-				_property = _property->NextSiblingElement("property");
-			}
-		}
-
-		data.doors.push_back(door);
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
-
-bool MapReader::readSigns(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
-	if (!WorldReader::readSigns(objectgroup, data)) return false;
-
-	int offset = static_cast<int>(MapDynamicTileID::Sign) + m_firstGidDynamicTiles - 1;
-
-	for (auto& sign : data.signs) {
-		sign.skinNr = (sign.skinNr == 0) ? 0 : ((sign.skinNr - offset) / DYNAMIC_TILE_COUNT);
-	}
-
-	return true;
-}*/
 
 bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");

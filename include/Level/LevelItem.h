@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "AnimatedGameObject.h"
+#include "World/AnimatedGameObject.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Item.h"

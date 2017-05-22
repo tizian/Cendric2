@@ -2,6 +2,9 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Registrar.h"
+
+REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Chest, ChestMapTile)
 
 const float ChestMapTile::PICKUP_RANGE = 100.f;
 
@@ -13,8 +16,10 @@ ChestMapTile::ChestMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(m_interactComponent);
 }
 
-void ChestMapTile::init() {
+bool ChestMapTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+
+
 }
 
 void ChestMapTile::loadAnimation(int skinNr) {
@@ -70,7 +75,7 @@ void ChestMapTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (m_data.chestStrength == 0 && m_state == GameObjectState::Locked) {
+	else if (m_chestStrength == 0 && m_state == GameObjectState::Locked) {
 		if (inRange) {
 			unlock();
 		}
@@ -79,11 +84,11 @@ void ChestMapTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+	else if (!m_keyItemId.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemId, 1)) {
 		if (inRange) {
 			unlock();
 			std::string tooltipText = g_textProvider->getText("Used");
-			tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));
+			tooltipText.append(g_textProvider->getText(m_keyItemId, "item"));
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {
@@ -99,7 +104,7 @@ void ChestMapTile::onRightClick() {
 void ChestMapTile::loot() {
 	MapScreen* screen = dynamic_cast<MapScreen*>(m_screen);
 
-	if (m_data.isStoredItems) {
+	if (m_isStoredItems) {
 		auto items = screen->getCharacterCore()->retrieveStoredItems();
 		for (auto& item : items) {
 			screen->notifyItemChange(item.first, item.second);
@@ -108,15 +113,15 @@ void ChestMapTile::loot() {
 		
 	}
 	else {
-		for (auto& item : m_data.loot.first) {
+		for (auto& item : m_lootableItems) {
 			screen->notifyItemChange(item.first, item.second);
 		}
-		screen->notifyItemChange("gold", m_data.loot.second);
+		screen->notifyItemChange("gold", m_lootableGold);
 	}
 
 	m_interactComponent->setInteractable(false);
 
-	if (!m_data.isPermanent) {
+	if (!m_isPermanent) {
 		setDisposed();
 	}
 }

@@ -3,7 +3,7 @@
 #include "global.h"
 #include "GameObjectComponents/GameObjectComponent.h"
 #include "GUI/BitmapText.h"
-#include "AnimatedGameObject.h"
+#include "World/AnimatedGameObject.h"
 
 // A game object component that holds a tooltip text
 class TooltipComponent : public virtual GameObjectComponent {

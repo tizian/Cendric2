@@ -1,4 +1,4 @@
-#include "AnimatedGameObject.h"
+#include "World/AnimatedGameObject.h"
 #include "ResourceManager.h"
 
 AnimatedGameObject::~AnimatedGameObject() {

@@ -5,11 +5,10 @@
 #include "LightObject.h"
 #include "GUI/BitmapText.h"
 
-
 class CookingTile final : public MapDynamicTile {
 public:
 	CookingTile(MapScreen* mapScreen);
-	void init(const MapTileProperties& properties) override;
+	bool init(const MapTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Cooking; }
