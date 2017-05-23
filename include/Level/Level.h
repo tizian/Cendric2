@@ -1,12 +1,12 @@
 #pragma once
 
-#include "World.h"
-#include "BackgroundLayer.h"
+#include "World/World.h"
+#include "World/BackgroundLayer.h"
 #include "FileIO/LevelReader.h"
 #include "Level/LevelDynamicTile.h"
 #include "Level/BossLevel.h"
 #include "LevelLoader.h"
-#include "SpeedupPullCamera.h"
+#include "World/SpeedupPullCamera.h"
 #include "Structs/AIWalkingQueryRecord.h"
 
 // a sidescroller level

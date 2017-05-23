@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "GUI/LootWindow.h"
-#include "Structs/ChestTileData.h"
 #include "LuaBridge/LuaBridge.h"
 
 class LevelMainCharacter;

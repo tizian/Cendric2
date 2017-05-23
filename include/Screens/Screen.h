@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "World/GameObject.h"
 #include "ResourceManager.h"
 #include "CharacterCore.h"
 #include "ScreenOverlays/ScreenOverlay.h"

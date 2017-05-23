@@ -2,7 +2,7 @@
 #include "Map/MapMainCharacter.h"
 #include "Map/Map.h"
 #include "Map/NPC.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "Screens/MapScreen.h"
 #include "ObjectFactory.h"
 #include "Map/DynamicTiles/WaypointTile.h"

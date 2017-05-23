@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "GUI/BitmapText.h"
 
 class WaypointTile final : public MapDynamicTile {

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "Structs/SpellModifier.h"
 #include "Structs/SpellData.h"
 

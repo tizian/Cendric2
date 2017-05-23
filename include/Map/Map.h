@@ -1,6 +1,6 @@
 #pragma once
 
-#include "World.h"
+#include "World/World.h"
 #include "FileIO/MapReader.h"
 #include "MapLoader.h"
 

@@ -2,6 +2,7 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Chest, ChestMapTile)
@@ -19,7 +20,17 @@ ChestMapTile::ChestMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 bool ChestMapTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 
+	ChestTile::init(properties);
 
+	if (m_isOpen) {
+		unlock();
+	}
+	if (!m_tooltipText.empty()) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(m_tooltipText, "chest"));
+	}
+	if (m_lightData.radius.x > 0.f) {
+		addComponent(new LightComponent(m_lightData, this));
+	}
 }
 
 void ChestMapTile::loadAnimation(int skinNr) {
@@ -42,20 +53,6 @@ void ChestMapTile::loadAnimation(int skinNr) {
 	m_state = GameObjectState::Locked;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
-}
-
-void ChestMapTile::setChestData(const ChestTileData& data) {
-	m_data = data;
-	if (m_data.chestStrength < 0 || m_data.chestStrength > 5) {
-		m_data.chestStrength = 0;
-	}
-
-	if (data.isOpen) {
-		unlock();
-	}
-	if (!data.tooltipText.empty()) {
-		m_interactComponent->setTooltipText(g_textProvider->getText(data.tooltipText, "chest"));
-	}
 }
 
 void ChestMapTile::onLeftClick() {
@@ -84,11 +81,11 @@ void ChestMapTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (!m_keyItemId.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemId, 1)) {
+	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		if (inRange) {
 			unlock();
 			std::string tooltipText = g_textProvider->getText("Used");
-			tooltipText.append(g_textProvider->getText(m_keyItemId, "item"));
+			tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {

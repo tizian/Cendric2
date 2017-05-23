@@ -1,6 +1,6 @@
 #include "Level/DynamicTiles/FluidTile.h"
 #include "Spells/Spell.h"
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 #include "Level/LevelMainCharacter.h"
 
 #include "Level/DynamicTiles/FrozenWaterTile.h"

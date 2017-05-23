@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "Structs/SpellModifier.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "Particles/ParticleSystem.h"
 
 class ParticleComponent;

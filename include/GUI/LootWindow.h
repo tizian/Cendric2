@@ -4,7 +4,7 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 
-#include "Item.h"
+#include "World/Item.h"
 
 class LootWindow final : public Window {
 public:

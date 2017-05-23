@@ -1,5 +1,5 @@
 #include "CharacterCore.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "FileIO/MerchantLoader.h"
 #include "Beans/SpawnBean.h"
 #include "DatabaseManager.h"

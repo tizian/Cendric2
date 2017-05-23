@@ -1,6 +1,6 @@
 #include "GUI/ProgressLog.h"
 #include "CharacterCore.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "GlobalResource.h"
 
 /* ProgressLog */

@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Map/MapMovableGameObject.h"
-#include "MainCharacter.h"
+#include "World/MainCharacter.h"
 #include "Map.h"
 #include "InputController.h"
 #include "Screens/Screen.h"

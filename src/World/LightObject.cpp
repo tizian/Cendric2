@@ -1,4 +1,4 @@
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "GlobalResource.h"
 
 LightObject::LightObject(const LightData& data) : GameObject() {

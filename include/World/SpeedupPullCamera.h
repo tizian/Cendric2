@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "BackgroundLayer.h"
+#include "World/BackgroundLayer.h"
 
 class SpeedupPullCamera final {
 public:

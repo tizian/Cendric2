@@ -269,7 +269,7 @@ bool MapReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, MapData& dat
 		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
 		tileData.position.x = static_cast<float>(x);
 		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
-		tileData.properties.insert({ "id", std::to_string(id) });
+		tileData.objectID = id;
 
 		// read properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");

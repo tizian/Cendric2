@@ -5,7 +5,7 @@
 #include "Structs/WorldData.h"
 #include "Structs/NPCData.h"
 #include "Structs/MapDynamicTileData.h"
-#include "FloatTriangle.h"
+#include "World/FloatTriangle.h"
 
 struct MapData final : WorldData {
 	std::vector<MapDynamicTileData> dynamicTiles;

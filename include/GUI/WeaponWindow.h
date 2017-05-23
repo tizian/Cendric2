@@ -10,7 +10,7 @@
 #include "GUI/InventorySlot.h"
 #include "GUI/Spellbook.h"
 #include "GUI/SpellDescriptionWindow.h"
-#include "Weapon.h"
+#include "World/Weapon.h"
 #include "GUI/GUIConstants.h"
 
 class SlotClone;

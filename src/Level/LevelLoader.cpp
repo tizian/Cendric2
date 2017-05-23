@@ -3,7 +3,7 @@
 #include "Level/Level.h"
 #include "Screens/LevelScreen.h"
 #include "Level/Enemy.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "ObjectFactory.h"
 #include "Level/DynamicTiles/ModifierTile.h"
 #include "Level/DynamicTiles/MovingTile.h"

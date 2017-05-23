@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "TextProvider.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "GUI/ItemDescriptionWindow.h"
 #include "Structs/MerchantData.h"
 

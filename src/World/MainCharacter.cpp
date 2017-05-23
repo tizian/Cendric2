@@ -1,4 +1,4 @@
-#include "MainCharacter.h"
+#include "World/MainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
 
 void MainCharacter::handleInteraction() {

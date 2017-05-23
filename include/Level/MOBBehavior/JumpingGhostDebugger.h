@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "GameObject.h"
+#include "World/GameObject.h"
 
 // a game object that gets created by a jumping ghost and added to the screen to be rendered for debug purposes.
 class JumpingGhostDebugger final : public GameObject {

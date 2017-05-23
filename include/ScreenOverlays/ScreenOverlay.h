@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "GUI/BitmapText.h"
-#include "GameObject.h"
+#include "World/GameObject.h"
 #include "ResourceManager.h"
 #include "Enums/FractionID.h"
 #include "Enums/QuestState.h"

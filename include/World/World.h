@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "TileMap.h"
+#include "World/TileMap.h"
 #include "ResourceManager.h"
 #include "Logger.h"
 #include "Structs/WorldData.h"

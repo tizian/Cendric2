@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Spells/Spell.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 
 /*
 this projectile will fly in an ellipse and return to its owner.

@@ -1,7 +1,7 @@
 #include "Screens/WorldScreen.h"
 #include "Screens/LoadingScreen.h"
 #include "GUI/BookWindow.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "Trigger.h"
 
 using namespace std;

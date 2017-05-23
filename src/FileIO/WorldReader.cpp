@@ -730,7 +730,7 @@ bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data)
 					if (name.compare("light") == 0) {
 						// read light
 						LightData lightData;
-						if (!resolveLightString(value, lightData)) return false;
+						if (!LightData::resolveLightString(value, lightData)) return false;
 
 						m_lightTiles.insert({ tileData.tileID, lightData });
 					}
@@ -747,42 +747,6 @@ bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data)
 		}
 		tileset = tileset->NextSiblingElement("tileset");
 	}
-	return true;
-}
-
-bool WorldReader::resolveLightString(const std::string& lightString, LightData& lightData) const {
-	size_t pos = 0;
-	std::string value = lightString;
-
-	if ((pos = value.find(",")) == std::string::npos) {
-		logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
-		return false;
-	}
-	lightData.center.x = (float)std::stof(value.substr(0, pos));
-	value.erase(0, pos + 1);
-
-	if ((pos = value.find(",")) == std::string::npos) {
-		logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
-		return false;
-	}
-	lightData.center.y = (float)std::stof(value.substr(0, pos));
-	value.erase(0, pos + 1);
-
-	if ((pos = value.find(",")) == std::string::npos) {
-		logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
-		return false;
-	}
-	lightData.radius.x = (float)std::stof(value.substr(0, pos));
-	value.erase(0, pos + 1);
-
-	if ((pos = value.find(",")) == std::string::npos) {
-		logError("XML file could not be read, tile light data value has wrong format (must be 'xOffset, yOffset, xRadius, yRadius, brightness'.");
-		return false;
-	}
-	lightData.radius.y = (float)std::stof(value.substr(0, pos));
-	value.erase(0, pos + 1);
-
-	lightData.brightness = (float)std::stof(value);
 	return true;
 }
 

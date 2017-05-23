@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Structs/DamageOverTimeData.h"
-#include "AnimatedSprite.h"
+#include "World/AnimatedSprite.h"
 #include "Enums/DamageType.h"
 #include "ResourceManager.h"
 #include "GlobalResource.h"

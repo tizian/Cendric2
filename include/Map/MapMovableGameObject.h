@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 
 class Map;
 

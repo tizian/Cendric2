@@ -4,7 +4,7 @@
 #include "Slot.h"
 
 #include "GUI/BitmapText.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "Enums/EnumNames.h"
 
 class CharacterCore;

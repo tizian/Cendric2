@@ -1,7 +1,7 @@
 #include "ResourceManager.h"
-#include "AnimatedSprite.h"
+#include "World/AnimatedSprite.h"
 #include "GlobalResource.h"
-#include "Item.h"
+#include "World/Item.h"
 
 const size_t ResourceManager::SOUND_POOL_SIZE = 5;
 

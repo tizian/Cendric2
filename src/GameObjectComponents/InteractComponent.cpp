@@ -1,5 +1,5 @@
 #include "GameObjectComponents/InteractComponent.h"
-#include "MainCharacter.h"
+#include "World/MainCharacter.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"

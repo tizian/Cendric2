@@ -1,5 +1,5 @@
-#include "Item.h"
-#include "Weapon.h"
+#include "World/Item.h"
+#include "World/Weapon.h"
 
 Item::Item(const std::string& itemID) {
 	if (!itemID.empty())

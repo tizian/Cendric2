@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 #include "Structs/WorldCollisionQueryRecord.h"
 
 class LevelMovableTile : public virtual LevelDynamicTile, public virtual MovableGameObject {

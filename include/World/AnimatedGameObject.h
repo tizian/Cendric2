@@ -1,8 +1,8 @@
 #pragma once
 
 #include "global.h"
-#include "AnimatedSprite.h"
-#include "GameObject.h"
+#include "World/AnimatedSprite.h"
+#include "World/GameObject.h"
 
 /* A game object with sprites an animations */
 class AnimatedGameObject : public virtual GameObject {

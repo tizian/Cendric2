@@ -11,5 +11,6 @@ struct MapDynamicTileData final {
 	MapDynamicTileID id;
 	sf::Vector2f position;
 	int skinNr;
+	int objectID;
 	MapTileProperties properties;
 };

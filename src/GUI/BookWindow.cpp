@@ -1,6 +1,6 @@
 #include "GUI/BookWindow.h"
 #include "GUI/GUIConstants.h"
-#include "Item.h"
+#include "World/Item.h"
 
 const float BookWindow::WIDTH = WINDOW_WIDTH / 3.f;
 const float BookWindow::HEIGHT = WINDOW_HEIGHT - 2 * GUIConstants::TOP;

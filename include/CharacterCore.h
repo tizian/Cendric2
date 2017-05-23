@@ -5,8 +5,8 @@
 #include "FileIO/CharacterCoreReader.h"
 #include "FileIO/CharacterCoreWriter.h"
 #include "FileIO/QuestLoader.h"
-#include "Item.h"
-#include "Weapon.h"
+#include "World/Item.h"
+#include "World/Weapon.h"
 
 #include "Structs/AttributeData.h"
 #include "Structs/CharacterCoreData.h"

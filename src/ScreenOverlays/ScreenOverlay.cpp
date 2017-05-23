@@ -5,7 +5,7 @@
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "Enums/Language.h"
-#include "Item.h"
+#include "World/Item.h"
 #include "Structs/SpellData.h"
 #include "GUI/Hints.h"
 #include "GlobalResource.h"

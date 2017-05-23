@@ -3,7 +3,7 @@
 #include "global.h"
 #include "CharacterCore.h"
 #include "InputController.h"
-#include "TileMap.h"
+#include "World/TileMap.h"
 #include "BitmapText.h"
 
 class WorldScreen;

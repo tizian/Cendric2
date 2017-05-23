@@ -1,4 +1,4 @@
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 #include "Level/DynamicTiles/MovingTile.h"
 
 MovableGameObject::MovableGameObject() : AnimatedGameObject() {

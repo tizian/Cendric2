@@ -1,4 +1,4 @@
-#include "Weapon.h"
+#include "World/Weapon.h"
 #include "Logger.h"
 
 Weapon::Weapon(const std::string& itemID) : Item(itemID) {

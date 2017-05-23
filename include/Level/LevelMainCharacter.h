@@ -7,7 +7,7 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 #include "CharacterCore.h"
-#include "MainCharacter.h"
+#include "World/MainCharacter.h"
 #include "TargetManager.h"
 
 class ParticleComponent;

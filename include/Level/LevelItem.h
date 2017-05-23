@@ -4,8 +4,8 @@
 #include "World/AnimatedGameObject.h"
 #include "ResourceManager.h"
 #include "TextProvider.h"
-#include "Item.h"
-#include "LightObject.h"
+#include "World/Item.h"
+#include "World/LightObject.h"
 
 #include "GUI/BitmapText.h"
 #include "Enums/ItemType.h"

@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "World/GameObject.h"
 #include "ResourceManager.h"
 #include "GameObjectComponents/GameObjectComponent.h"
 

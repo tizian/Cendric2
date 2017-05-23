@@ -43,4 +43,5 @@ protected:
 
 private:
 	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);
+	int m_objectId = -1;
 };

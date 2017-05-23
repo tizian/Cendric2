@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 #include "Structs/AttributeData.h"
 #include "Structs/DamageOverTimeData.h"
 

@@ -1,6 +1,6 @@
 #include "Cutscene/Cutscene.h"
 #include "GUI/GUIConstants.h"
-#include "GameObject.h"
+#include "World/GameObject.h"
 
 const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(100.f, 40.f);
 

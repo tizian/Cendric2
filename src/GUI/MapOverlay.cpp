@@ -3,7 +3,7 @@
 #include "GUI/GUITabBar.h"
 #include "Screens/WorldScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
-#include "MainCharacter.h"
+#include "World/MainCharacter.h"
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"

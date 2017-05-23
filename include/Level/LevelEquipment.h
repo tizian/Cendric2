@@ -3,7 +3,7 @@
 #include "global.h"
 #include "World/AnimatedGameObject.h"
 #include "ResourceManager.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 #include "Beans/ItemEquipmentBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
 #include "Enums/ItemType.h"

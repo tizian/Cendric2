@@ -4,7 +4,7 @@
 #include "Logger.h"
 #include "tinyxml2/tinyxml2.h"
 
-#include "BackgroundLayer.h"
+#include "World/BackgroundLayer.h"
 #include "Level/LevelDynamicTile.h"
 #include "Level/LevelItem.h"
 #include "Level/Enemy.h"

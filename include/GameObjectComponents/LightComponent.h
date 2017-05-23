@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "GameObjectComponents/GameObjectComponent.h"
-#include "LightObject.h"
+#include "World/LightObject.h"
 
 // A game object component that holds a light object.
 class LightComponent final : public GameObjectComponent {

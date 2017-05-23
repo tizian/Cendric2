@@ -4,9 +4,8 @@
 #include "Screen.h"
 #include "ResourceManager.h"
 #include "Level/LevelInterface.h"
-#include "WeatherSystem.h"
+#include "World/WeatherSystem.h"
 #include "GUI/ProgressLog.h"
-#include "Structs/BookData.h"
 #include "Structs/Condition.h"
 
 class Item;

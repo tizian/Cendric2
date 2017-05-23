@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "MovableGameObject.h"
+#include "World/MovableGameObject.h"
 #include "ResourceManager.h"
 #include "Level/Level.h"
 
@@ -13,7 +13,7 @@
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleUpdater.h"
 
-#include "LightObject.h"
+#include "World/LightObject.h"
 
 class LevelMovableGameObject;
 class LevelDynamicTile;
