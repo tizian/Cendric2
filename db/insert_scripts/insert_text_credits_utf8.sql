@@ -40,6 +40,8 @@ Haab
 
 "Meadows Theme"
 
+"Gandria Theme"
+
 ---
 
 -- Isa --
@@ -194,6 +196,8 @@ Haab
 
 "Meadows Theme"
 
+"Gandria Theme"
+
 ---
 
 -- Isa --
@@ -344,6 +348,8 @@ Haab
 -- Susanne Aubert --
 
 "Meadows Theme"
+
+"Gandria Theme"
 
 ---
 
