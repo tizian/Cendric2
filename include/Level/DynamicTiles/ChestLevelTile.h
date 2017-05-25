@@ -4,31 +4,30 @@
 #include "Level/LevelDynamicTile.h"
 #include "GUI/LootWindow.h"
 #include "LuaBridge/LuaBridge.h"
+#include "World/ChestTile.h"
 
 class LevelMainCharacter;
 class InteractComponent;
 class LightComponent;
 class WorldCallback;
 
-class ChestLevelTile final : public LevelDynamicTile {
+class ChestLevelTile final : public LevelDynamicTile, public ChestTile {
 public:
-	ChestLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
+	ChestLevelTile(LevelScreen* levelScreen);
 	~ChestLevelTile();
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 	void onMouseOver() override;
 	void loot();
 	
-	void setChestData(const ChestTileData& data);
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Chest; }
 
 private:
 	std::string getSpritePath() const override;
-	ChestTileData m_data;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void unlock(bool soundOn);
 

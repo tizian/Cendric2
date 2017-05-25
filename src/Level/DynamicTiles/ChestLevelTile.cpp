@@ -4,23 +4,41 @@
 #include "GameObjectComponents/LightComponent.h"
 #include "Screens/LevelScreen.h"
 #include "Callbacks/WorldCallback.h"
+#include "Registrar.h"
 
-using namespace std;
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Chest, ChestLevelTile)
+
 using namespace luabridge;
 
-ChestLevelTile::~ChestLevelTile() { 
-	delete m_worldCallback; 
-}
-
-void ChestLevelTile::init() {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
-	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
-
+ChestLevelTile::ChestLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Chest"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&ChestLevelTile::onRightClick, this));
 	addComponent(m_interactComponent);
+}
+
+ChestLevelTile::~ChestLevelTile() { 
+	delete m_worldCallback; 
+}
+
+bool ChestLevelTile::init(const LevelTileProperties& properties) {
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
+
+	ChestTile::init(properties);
+
+	if (m_isOpen) {
+		unlock(false);
+	}
+	if (!m_tooltipText.empty()) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(m_tooltipText, "chest"));
+	}
+	if (m_lightData.radius.x > 0.f) {
+		addComponent(new LightComponent(m_lightData, this));
+	}
+
+	loadLua();
 }
 
 void ChestLevelTile::loadAnimation(int skinNr) {
@@ -46,7 +64,7 @@ void ChestLevelTile::loadAnimation(int skinNr) {
 }
 
 bool ChestLevelTile::loadLua() {
-	if (m_data.luapath.empty()) {
+	if (m_luapath.empty()) {
 		return true;
 	}
 	m_L = luaL_newstate();
@@ -55,8 +73,8 @@ bool ChestLevelTile::loadLua() {
 	m_worldCallback = new WorldCallback(dynamic_cast<WorldScreen*>(m_screen));
 	m_worldCallback->bindFunctions(m_L);
 
-	if (luaL_dofile(m_L, getResourcePath(m_data.luapath).c_str()) != 0) {
-		g_logger->logError("ChestLevelTile", "Cannot read lua script: " + getResourcePath(m_data.luapath));
+	if (luaL_dofile(m_L, getResourcePath(m_luapath).c_str()) != 0) {
+		g_logger->logError("ChestLevelTile", "Cannot read lua script: " + getResourcePath(m_luapath));
 		m_L = nullptr;
 		delete m_worldCallback;
 		m_worldCallback = nullptr;
@@ -78,11 +96,11 @@ void ChestLevelTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::Unlock:
 		if (m_state == GameObjectState::Locked) {
-			if (spell->getStrength() >= m_data.chestStrength) {
+			if (spell->getStrength() >= m_chestStrength) {
 				unlock(true);
 			}
 			else {
-				if (m_data.chestStrength > 4) {
+				if (m_chestStrength > 4) {
 					m_screen->setNegativeTooltip("IsLockedKey");
 				}
 				else {
@@ -97,7 +115,7 @@ void ChestLevelTile::onHit(Spell* spell) {
 			loot();
 			spell->setDisposed();
 		}
-		else if (m_data.chestStrength == 0 && m_state == GameObjectState::Locked) {
+		else if (m_chestStrength == 0 && m_state == GameObjectState::Locked) {
 			setState(GameObjectState::Unlocked);
 			spell->setDisposed();
 		}
@@ -122,28 +140,6 @@ void ChestLevelTile::update(const sf::Time& frameTime) {
 		m_lootWindow->setPosition(pos);
 	}
 	m_showLootWindow = m_interactComponent->isInteractable() && (m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips));
-}
-
-void ChestLevelTile::setChestData(const ChestTileData& data) {
-	m_data = data;
-	if (m_data.chestStrength < 0 || m_data.chestStrength > 5) {
-		m_data.chestStrength = 0;
-	}
-
-	setLoot(data.loot.first, data.loot.second);
-
-	if (data.isOpen) {
-		unlock(false);
-	}
-	if (!data.tooltipText.empty()) {
-		m_interactComponent->setTooltipText(g_textProvider->getText(data.tooltipText, "chest"));
-	}
-	if (data.lightData.radius.x > 0.f && data.lightData.radius.y > 0.f) {
-		m_lightComponent = new LightComponent(data.lightData, this);
-		addComponent(m_lightComponent);
-	}
-
-	loadLua();
 }
 
 void ChestLevelTile::onMouseOver() {
@@ -175,19 +171,19 @@ void ChestLevelTile::loot() {
 	}
 
 	// loot, create the correct items + gold in the players inventory.
-	m_mainChar->lootItems(m_data.loot.first);
-	m_mainChar->addGold(m_data.loot.second);
+	m_mainChar->lootItems(m_lootableItems);
+	m_mainChar->addGold(m_lootableGold);
 
 	// execute the script if it exists
 	executeOnLoot();
 
-	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_data.objectID);
+	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 	m_interactComponent->setInteractable(false);
 
 	if (m_lightComponent != nullptr) {
 		m_lightComponent->setVisible(false);
 	}
-	if (!m_data.isPermanent) {
+	if (!m_isPermanent) {
 		setDisposed();
 	}
 }
@@ -222,7 +218,7 @@ void ChestLevelTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (m_data.chestStrength == 0 && m_state == GameObjectState::Locked) {
+	else if (m_chestStrength == 0 && m_state == GameObjectState::Locked) {
 		if (inRange) {
 			unlock(true);
 		}
@@ -231,7 +227,7 @@ void ChestLevelTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (!m_data.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
 		if (inRange) {
 			unlock(true);
 			std::string tooltipText = g_textProvider->getText("Used");

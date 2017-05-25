@@ -16,6 +16,11 @@ bool WaypointTile::init(const MapTileProperties& properties) {
 		TILE_SIZE_F,
 		TILE_SIZE_F));
 
+	// possibly activate waypoint tile if already unlocked.
+	const CharacterCoreData& coreData = m_screen->getCharacterCore()->getData();
+	if (contains(coreData.waypointsUnlocked.at(m_map->getID()), m_objectID))
+		setActive();
+
 	return true;
 }
 

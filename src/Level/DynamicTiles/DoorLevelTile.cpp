@@ -1,7 +1,7 @@
 #include "Level/DynamicTiles/DoorLevelTile.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Level/LevelMainCharacter.h"
-#include "Trigger.h"
+#include "World/Trigger.h"
 #include "Spells/Spell.h"
 
 const float DoorLevelTile::OPEN_RANGE = 100.f;

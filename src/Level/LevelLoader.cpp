@@ -13,7 +13,7 @@
 #include "Level/DynamicTiles/LadderTile.h"
 #include "Level/DynamicTiles/ResourceTile.h"
 #include "Level/DynamicTiles/DoorLevelTile.h"
-#include "Trigger.h"
+#include "World/Trigger.h"
 
 using namespace std;
 

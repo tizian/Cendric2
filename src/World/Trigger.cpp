@@ -1,4 +1,4 @@
-#include "Trigger.h"
+#include "World/Trigger.h"
 #include "Screens/WorldScreen.h"
 #include "GlobalResource.h"
 

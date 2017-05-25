@@ -18,7 +18,7 @@ public:
 	virtual ~LevelDynamicTile() {};
 
 	// loads sprite offset & bounding box.
-	virtual void init() = 0;
+	virtual bool init(const LevelTileProperties& properties) = 0;
 	// loads the resources (sprite, sound)
 	virtual void loadResources();
 	// loads the dynamic tile with the specified skin nr
@@ -55,6 +55,7 @@ protected:
 	bool m_isOneWay = false;
 	bool m_isRenderAfterObjects = false;
 	bool m_isFirstRenderIteration = true;
+	int m_objectID = -1;
 
 private:
 	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);

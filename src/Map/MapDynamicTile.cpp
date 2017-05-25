@@ -15,6 +15,10 @@ void MapDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }
 
+void MapDynamicTile::setObjectID(int objectID) {
+	m_objectID = objectID;
+}
+
 const sf::Vector2f&  MapDynamicTile::getPositionOffset() const {
 	return m_positionOffset;
 }
