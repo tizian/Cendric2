@@ -187,9 +187,18 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 	for (auto& it : data.dynamicTiles) {
 		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, screen);
 		if (tile == nullptr) {
-			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, unknown id.");
+			g_logger->logError("LevelLoader", "Dynamic tile was not loadeded, id not registered:" + std::to_string(static_cast<int>(it.id)));
 			return;
 		}
+
+		if (!tile->init(it.properties)) {
+			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, initialization failed.");
+			delete tile;
+			continue;
+		}
+
+		tile->setObjectID(it.objectID);
+
 
 		if (it.id != LevelDynamicTileID::Fluid) {
 			it.position = sf::Vector2f(
@@ -209,7 +218,7 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 			break;
 		}
 
-		tile->init();
+		tile->init(it.properties);
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->loadResources();
 		tile->loadAnimation(it.skinNr);

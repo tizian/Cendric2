@@ -6,7 +6,7 @@
 class IceTile final : public LevelDynamicTile {
 public:
 	IceTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Ice; }

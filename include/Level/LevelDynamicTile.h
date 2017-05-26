@@ -34,6 +34,7 @@ public:
 
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);
+	void setObjectID(int objectID);
 
 	const sf::Vector2f& getPositionOffset() const;
 	virtual LevelDynamicTileID getDynamicTileID() const = 0;

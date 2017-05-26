@@ -24,6 +24,10 @@ void LevelDynamicTile::setPositionOffset(const sf::Vector2f& offset) {
 	m_positionOffset = offset;
 }
 
+void LevelDynamicTile::setObjectID(int objectID) {
+	m_objectID = objectID;
+}
+
 const sf::Vector2f& LevelDynamicTile::getPositionOffset() const {
 	return m_positionOffset;
 }

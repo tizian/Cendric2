@@ -4,9 +4,11 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Ice, IceTile)
 
-void IceTile::init() {
+bool IceTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+
+	return true;
 }
 
 void IceTile::loadAnimation(int skinNr) {

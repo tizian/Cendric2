@@ -61,7 +61,12 @@ void MapLoader::loadDynamicTiles(MapData& data, MapScreen* screen) {
 			continue;
 		}
 
-		tile->init(it.properties);
+		if (!tile->init(it.properties)) {
+			g_logger->logError("MapLoader", "Dynamic tile was not loaded, initialization failed.");
+			delete tile;
+			continue;
+		}
+
 		tile->setObjectID(it.objectID);
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
