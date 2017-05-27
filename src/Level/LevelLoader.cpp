@@ -15,8 +15,6 @@
 #include "Level/DynamicTiles/DoorLevelTile.h"
 #include "World/Trigger.h"
 
-using namespace std;
-
 void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const {
 	loadEnemies(data, screen, level);
 	loadLevelItems(data, screen);

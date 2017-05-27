@@ -4,7 +4,7 @@
 #include "Level/LevelMainCharacter.h"
 
 #include "Level/DynamicTiles/FrozenWaterTile.h"
-#include "CustomParticleUpdaters.h"
+#include "World/CustomParticleUpdaters.h"
 #include "GlobalResource.h"
 #include "Registrar.h"
 
@@ -25,8 +25,23 @@ FluidTile::~FluidTile() {
 	delete m_ps;
 }
 
-void FluidTile::init() {
+bool FluidTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
+
+	if (!contains(properties, std::string("size"))) {
+		return false;
+	}
+
+	std::string sizeStr = properties.at("size");
+	sf::Vector2i size;
+	size.x = std::stoi(sizeStr.substr(0, sizeStr.find(',')));
+	size.y = std::stoi(sizeStr.substr(sizeStr.find(',') + 1));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, size.x, size.y));
+	
+	return true;
+}
+
+
 }
 
 void FluidTile::loadAnimation(int skinNr) {

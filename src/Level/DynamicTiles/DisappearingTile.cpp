@@ -2,7 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "GameObjectComponents/ParticleComponent.h"
-#include "CustomParticleUpdaters.h"
+#include "World/CustomParticleUpdaters.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 
