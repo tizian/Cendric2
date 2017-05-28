@@ -1,10 +1,10 @@
 #include "Level/DynamicTiles/SwitchableTile.h"
 #include "Spells/Spell.h"
 
-// this tile is special and is not registered
-void SwitchableTile::init() {
+bool SwitchableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	return true;
 }
 
 void SwitchableTile::setInitialState(bool on) {

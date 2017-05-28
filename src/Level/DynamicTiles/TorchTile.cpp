@@ -10,10 +10,12 @@ TorchTile::TorchTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	addComponent(m_lightComponent);
 }
 
-void TorchTile::init() {
+bool TorchTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-10.f, -TILE_SIZE_F / 2));
 	setPositionOffset(sf::Vector2f(12.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F / 2.f, TILE_SIZE_F));
+
+	return true;
 }
 
 void TorchTile::loadAnimation(int skinNr) {

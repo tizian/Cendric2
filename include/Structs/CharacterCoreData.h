@@ -33,6 +33,7 @@ struct CharacterCoreData final {
 	std::map<std::string, std::set<int>> enemiesKilled;
 	std::map<std::string, std::set<int>> itemsLooted;
 	std::map<std::string, std::set<int>> chestsLooted;
+	std::map<std::string, std::set<int>> modifiersUnlocked;
 	std::map<std::string, std::map<int, sf::Vector2f>> waypointsUnlocked;
 	std::map<std::string, std::set<int>> triggersTriggered;
 	ExploredTiles tilesExplored;

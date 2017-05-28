@@ -18,9 +18,11 @@ CheckpointTile::CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(leve
 	addComponent(m_interactComponent);
 }
 
-void CheckpointTile::init() {
+bool CheckpointTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
+
+	return true;
 }
 
 void CheckpointTile::loadAnimation(int skinNr) {

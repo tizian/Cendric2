@@ -22,31 +22,50 @@ MovingTile::~MovingTile() {
 	delete m_spikes;
 }
 
-void MovingTile::setMovingTileData(const MovingTileData& data) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, data.length * TILE_SIZE_F, 40.f));
-	float phi = degToRad(static_cast<float>(data.initialDirection - 90));
-
-	m_currentVelocity.x = std::round(data.speed * std::cos(phi));
-	m_currentVelocity.y = std::round(data.speed * std::sin(phi));
-
-	m_distanceTime = data.speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(data.distance) / static_cast<float>(data.speed));
-	m_timeUntilTurn = m_distanceTime;
-
-	m_isFreezable = !data.isUnfreezable;
-	setFrozen(data.isFrozen, true);
-	setInitialState(data.isActive);
-
-	m_isOneWay = data.isOneWay;
-
-	if (data.spikesTop || data.spikesBottom) {
-		delete m_spikes;
-		m_spikes = new MovingTileSpikes(data.spikesTop, data.spikesBottom, data.length, m_mainChar);
-	}
-}
-
-void MovingTile::init() {
+bool MovingTile::init(const LevelTileProperties& properties) {
 	m_isCollidable = true;
 	m_isStrictlyCollidable = true;
+
+	if (!contains(properties, std::string("size"))) return false;
+	int size = std::stoi(properties.at(std::string("size")));
+	if (size > 10 || size < 1) return false;
+
+	if (!contains(properties, std::string("direction"))) return false;
+	int direction = std::stoi(properties.at(std::string("direction"))) % 360;
+
+	if (!contains(properties, std::string("speed"))) return false;
+	int speed = std::stoi(properties.at(std::string("speed")));
+	if (speed < 0 || speed > 1000) return false;
+
+	if (!contains(properties, std::string("distance"))) return false;
+	int distance = std::stoi(properties.at(std::string("distance")));
+	if (distance < 0 || distance > 5000) return false;
+
+	m_isFreezable = !contains(properties, std::string("unfreezable"));
+	bool isFrozen = contains(properties, std::string("frozen"));
+	bool isActive = !contains(properties, std::string("inactive"));
+	m_isOneWay = !contains(properties, std::string("oneway"));
+	bool isSpikesTop = contains(properties, std::string("spikestop"));
+	bool isSpikesBottom = contains(properties, std::string("spikesbottom"));
+
+	setBoundingBox(sf::FloatRect(0.f, 0.f, size * TILE_SIZE_F, 40.f));
+	float phi = degToRad(static_cast<float>(direction - 90));
+
+	m_currentVelocity.x = std::round(speed * std::cos(phi));
+	m_currentVelocity.y = std::round(speed * std::sin(phi));
+
+	m_distanceTime = speed == 0 ? sf::Time::Zero : sf::seconds(static_cast<float>(distance) / static_cast<float>(speed));
+	m_timeUntilTurn = m_distanceTime;
+
+	setFrozen(isFrozen, true);
+	setInitialState(isActive);
+
+	if (isSpikesTop || isSpikesBottom) {
+		delete m_spikes;
+		m_spikes = new MovingTileSpikes(isSpikesTop, isSpikesBottom, size, m_mainChar);
+	}
+
+	return true;
 }
 
 void MovingTile::loadAnimation(int skinNr) {

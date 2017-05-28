@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Level/DynamicTiles/LevelMovableTile.h"
 #include "Level/DynamicTiles/LeverDependentTile.h"
-#include "Structs/MovingTileData.h"
 
 class MovingTile;
 
@@ -35,8 +34,7 @@ public:
 	MovingTile(LevelScreen* levelScreen);
 	~MovingTile();
 
-	void setMovingTileData(const MovingTileData& data);
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 

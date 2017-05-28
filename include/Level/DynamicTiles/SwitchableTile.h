@@ -8,7 +8,7 @@ public:
 	SwitchableTile(LevelScreen* levelScreen) : 
 		LevelDynamicTile(levelScreen), 
 		LeverDependentTile(levelScreen) {}
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void setInitialState(bool on) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override { /*nop*/ };

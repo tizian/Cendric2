@@ -189,31 +189,12 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 			return;
 		}
 
+		tile->setObjectID(it.objectID);
+		tile->setPosition(it.position + tile->getPositionOffset());
 		if (!tile->init(it.properties)) {
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, initialization failed.");
 			delete tile;
 			continue;
-		}
-
-		tile->setObjectID(it.objectID);
-
-
-		if (it.id != LevelDynamicTileID::Fluid) {
-			it.position = sf::Vector2f(
-				(it.spawnPosition % data.mapSize.x) * TILE_SIZE_F,
-				(it.spawnPosition / data.mapSize.x) * TILE_SIZE_F);
-		}
-
-		// special behavior
-		switch (it.id) {
-		case LevelDynamicTileID::Fluid:
-			tile->setBoundingBox(sf::FloatRect(0.f, 0.f, it.size.x, it.size.y));
-			break;
-		case LevelDynamicTileID::Falling:
-			(dynamic_cast<FallingTile*>(tile))->setInitialHeight(it.position.y + tile->getPositionOffset().y);
-			break;
-		default:
-			break;
 		}
 
 		tile->init(it.properties);

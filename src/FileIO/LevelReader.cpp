@@ -116,146 +116,6 @@ bool LevelReader::readModifierTiles(tinyxml2::XMLElement* objectgroup, LevelData
 	return true;
 }
 
-bool LevelReader::readMovingTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-	int leverOffset = static_cast<int>(LevelDynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
-	LeverData leData;
-
-	while (object != nullptr) {
-
-		int gid;
-		tinyxml2::XMLError result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		if ((gid - leverOffset) % DYNAMIC_TILE_COUNT == 0) {
-			// this is a lever on a moving tile layer
-			LevelDynamicTileData lever;
-			lever.id = LevelDynamicTileID::Lever;
-			lever.position = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-			lever.skinNr = ((gid - leverOffset) / DYNAMIC_TILE_COUNT);
-			lever.spawnPosition = gid; // its an object now
-			leData.levers.push_back(lever);
-
-			object = object->NextSiblingElement("object");
-			continue;
-		}
-
-		int offset = static_cast<int>(LevelDynamicTileID::Moving) + m_firstGidDynamicTiles - 1;
-		int skinNr = (gid == 0) ? 0 : ((gid - offset) / DYNAMIC_TILE_COUNT);
-
-		MovingTileData movingTileData;
-		movingTileData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-		movingTileData.skinNr = skinNr;
-
-		// modifier type and level
-		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
-
-		if (properties != nullptr) {
-			tinyxml2::XMLElement* property_ = properties->FirstChildElement("property");
-			while (property_ != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = property_->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-				std::string propertyText = textAttr;
-
-				if (propertyText.compare("frozen") == 0) {
-					movingTileData.isFrozen = true;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("inactive") == 0) {
-					movingTileData.isActive = false;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("oneway") == 0) {
-					movingTileData.isOneWay = true;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("spikestop") == 0) {
-					movingTileData.spikesTop = true;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("spikesbottom") == 0) {
-					movingTileData.spikesBottom = true;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("unfreezable") == 0) {
-					movingTileData.isUnfreezable = true;
-					property_ = property_->NextSiblingElement("property");
-					continue;
-				}
-				if (propertyText.compare("direction") == 0) {
-					textAttr = property_->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value (of name 'direction') attribute found.");
-						return false;
-					}
-					std::string initialDirectionString = textAttr;
-					try {
-						int initialDirection = std::stoi(textAttr);
-						movingTileData.initialDirection = initialDirection % 360;
-						property_ = property_->NextSiblingElement("property");
-						continue;
-					}
-					catch (const std::exception& e) {
-						logError("Invalid moving tile direction, conversion to integer failed: " + std::string(e.what()) + " Direction attribute: " + initialDirectionString);
-						return false;
-					}
-				}
-
-				int amount;
-				result = property_->QueryIntAttribute("value", &amount);
-				XMLCheckResult(result);
-
-				if (propertyText.compare("speed") == 0) {
-					if (amount > 1000 || amount < 0) {
-						logError("Moving platform speed must be between 0 and 1000");
-						return false;
-					}
-					movingTileData.speed = amount;
-				}
-				else if (propertyText.compare("size") == 0 || propertyText.compare("length") == 0) {
-					if (amount > 10 || amount < 1) {
-						logError("Moving platform size (length in tiles) must be between 1 and 10");
-						return false;
-					}
-					movingTileData.length = amount;
-				}
-				else if (propertyText.compare("distance") == 0) {
-					if (amount > 5000 || amount < 0) {
-						logError("Moving platform distance (tiles) must be between 0 and 5000");
-						return false;
-					}
-					movingTileData.distance = amount;
-				}
-
-				property_ = property_->NextSiblingElement("property");
-			}
-		}
-
-		leData.dependentMovingTiles.push_back(movingTileData);
-
-		object = object->NextSiblingElement("object");
-	}
-
-	data.levers.push_back(leData);
-	return true;
-}
 
 bool LevelReader::readDoorTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
@@ -1169,49 +1029,13 @@ bool LevelReader::readBosslevel(tinyxml2::XMLElement* _property, WorldData& data
 
 bool LevelReader::checkData(LevelData& data) const {
 	if (!WorldReader::checkData(data)) return false;
-	for (auto& it : data.modifiers) {
-		if (it.modifier.level == 0) {
-			logError("modifier tile level is not set.");
-			return false;
-		}
-		if (it.modifier.type == SpellModifierType::VOID) {
-			logError("modifier tile type is not set.");
-			return false;
-		}
-	}
-	for (auto& lever : data.levers) {
-		for (auto& it : lever.dependentMovingTiles) {
-			if (it.initialDirection == -1) {
-				logError("Moving tile initial direction must be set.");
-				return false;
-			}
-			if (it.speed == 0.f) {
-				g_logger->logWarning("LevelReader", "Moving tile speed is 0.");
-			}
-			if (it.distance == 0) {
-				g_logger->logWarning("LevelReader", "Moving tile distance is 0.");
-			}
-		}
-	}
+	
 	for (auto& it : data.enemies) {
 		for (auto& target : it.questTargets) {
 			if (target.first.empty() || target.second.empty()) {
 				logError("enemy quest target quest and name must be filled.");
 				return false;
 			}
-		}
-	}
-	for (auto& it : data.doors) {
-		if (it.strength == 0 && it.keyItemID.empty()) {
-			g_logger->logWarning("LevelReader", "door with strength 0 and no key is not recommended");
-		}
-		if (it.strength == 0 && !it.keyItemID.empty()) {
-			logError("cannot add door that requires key but lock strength is 0");
-			return false;
-		}
-		if (it.strength > 4 && it.keyItemID.empty()) {
-			logError("cannot add door with strength > 4 that has no key");
-			return false;
 		}
 	}
 	if (static_cast<int>(data.levelItems.size()) != data.mapSize.x * data.mapSize.y) {

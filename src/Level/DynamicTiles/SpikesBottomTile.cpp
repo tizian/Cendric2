@@ -4,10 +4,12 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::SpikesBottom, SpikesBottomTile)
 
-void SpikesBottomTile::init() {
+bool SpikesBottomTile::init(const LevelTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(5.f, 25.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -25.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 25.f));
+
+	return true;
 }
 
 void SpikesBottomTile::loadAnimation(int skinNr) {

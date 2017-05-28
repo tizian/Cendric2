@@ -14,12 +14,11 @@ public:
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onHit(LevelMovableGameObject* mob) override;
 
-	void setModifier(const SpellModifier& modififer);
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Modifier; }
 
 private:

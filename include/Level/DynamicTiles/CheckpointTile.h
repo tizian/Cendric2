@@ -8,7 +8,7 @@ class InteractComponent;
 class CheckpointTile final : public LevelDynamicTile {
 public:
 	CheckpointTile(LevelScreen* levelScreen);
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override; 
 	void onRightClick() override;
 	void onLeftClick() override;

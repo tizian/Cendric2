@@ -20,12 +20,11 @@ public:
 	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onHit(LevelMovableGameObject* mob) override;
-	void setInitialHeight(float height);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Falling; }

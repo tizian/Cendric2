@@ -12,9 +12,14 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Modifier, ModifierTile)
 ModifierTile::ModifierTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 }
 
-void ModifierTile::init() {
+bool ModifierTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 	loadComponents();
+
+	auto& cData = m_screen->getCharacterCore()->getData();
+
+
+	return true;
 }
 
 void ModifierTile::loadAnimation(int skinNr) {
@@ -60,10 +65,6 @@ void ModifierTile::render(sf::RenderTarget& target) {
 	else {
 		m_isFirstRenderIteration = true;
 	}
-}
-
-void ModifierTile::setModifier(const SpellModifier& modififer) {
-	m_modifier = modififer;
 }
 
 void ModifierTile::addModifier() {

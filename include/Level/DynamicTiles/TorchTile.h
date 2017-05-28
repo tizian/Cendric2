@@ -8,7 +8,7 @@ class LightComponent;
 class TorchTile final : public LevelDynamicTile {
 public:
 	TorchTile(LevelScreen* levelScreen);
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	int getSkinNr() const;

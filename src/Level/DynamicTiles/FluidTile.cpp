@@ -41,9 +41,6 @@ bool FluidTile::init(const LevelTileProperties& properties) {
 	return true;
 }
 
-
-}
-
 void FluidTile::loadAnimation(int skinNr) {
 	m_data = FluidTileData::getData(skinNr);
 	g_resourceManager->loadSoundbuffer(m_data.soundPath, ResourceType::Level);

@@ -11,10 +11,13 @@ FallingTile::FallingTile(LevelScreen* levelScreen) :
 	setPositionOffset(sf::Vector2f(3.f, 3.f));
 }
 
-void FallingTile::init() {
+bool FallingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
 	m_tileState = FallingTileState::Idle;
+
+	m_initialHeight = getPosition().y + getPositionOffset().y;
+	return true;
 }
 
 void FallingTile::loadAnimation(int skinNr) {
@@ -35,10 +38,6 @@ void FallingTile::loadAnimation(int skinNr) {
 void FallingTile::onHit(LevelMovableGameObject* mob) {
 	if (mob->getConfiguredType() == GameObjectType::_LevelMainCharacter)
 		mob->setDead();
-}
-
-void FallingTile::setInitialHeight(float height) {
-	m_initialHeight = height;
 }
 
 void FallingTile::update(const sf::Time& frameTime) {
@@ -132,5 +131,3 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 std::string FallingTile::getSpritePath() const {
 	return "res/assets/level_dynamic_tiles/spritesheet_tiles_falling.png";
 }
-
-
