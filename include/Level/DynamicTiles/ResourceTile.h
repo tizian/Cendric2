@@ -11,7 +11,7 @@ class ResourceTile final : public LevelDynamicTile {
 public:
 	ResourceTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	void update(const sf::Time& frameTime) override;
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
 	void onHit(Spell* spell) override {};

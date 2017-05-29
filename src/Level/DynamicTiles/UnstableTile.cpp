@@ -12,9 +12,10 @@ UnstableTile::UnstableTile(LevelScreen* levelScreen) :
 	m_criticalTime = CRITICAL_TIME;
 }
 
-void UnstableTile::init() {
+bool UnstableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 2.f, TILE_SIZE_F));
+	return true;
 }
 
 void UnstableTile::loadAnimation(int skinNr) {

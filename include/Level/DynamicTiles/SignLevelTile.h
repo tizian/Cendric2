@@ -2,19 +2,18 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "Structs/SignData.h"
 #include "GUI/TooltipWindow.h"
 
 class InteractComponent;
 
 class SignLevelTile final : public LevelDynamicTile {
 public:
-	SignLevelTile(const SignData& data, LevelScreen* levelScreen);
+	SignLevelTile(LevelScreen* levelScreen);
 
 	void update(const sf::Time& frameTime) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	void onMouseOver() override;
@@ -28,7 +27,6 @@ private:
 
 private:
 	std::string getSpritePath() const override;
-	SignData m_data;
 	TooltipWindow m_tooltipWindow;
 	bool m_showTooltip;
 	sf::Time m_tooltipWindowTime = sf::Time::Zero;

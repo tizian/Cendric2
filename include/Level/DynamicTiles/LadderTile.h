@@ -2,12 +2,11 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "Structs/LadderTileData.h"
 
 class LadderTile final : public LevelDynamicTile {
 public:
-	LadderTile(const LadderTileData& data, LevelScreen* levelScreen);
-	void init() override;
+	LadderTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void update(const sf::Time& frametime) override;
 	void render(sf::RenderTarget& target) override;

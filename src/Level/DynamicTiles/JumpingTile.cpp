@@ -12,13 +12,37 @@ JumpingTile::JumpingTile(LevelScreen* levelScreen) :
 	m_isAlwaysUpdate = true;
 }
 
-void JumpingTile::init() {
+bool JumpingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 	setPositionOffset(sf::Vector2f(10.f, 10.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 10;
+
+	if (!contains(properties, std::string("direction"))) return false;
+	int direction = std::stoi(properties.at(std::string("direction"))) % 360;
+
+	if (!contains(properties, std::string("velocity"))) return false;
+	int velocity = std::stoi(properties.at(std::string("velocity")));
+	if (velocity > 1000 || velocity < 100) return false;
+
+	if (!contains(properties, std::string("waiting"))) return false;
+	int waiting = std::stoi(properties.at(std::string("waiting")));
+	if (waiting < 100 || waiting > 10000) return false;
+
+	m_isAggro = contains(properties, std::string("aggro"));
+	m_isAlternating = contains(properties, std::string("alternating"));
+
+	float phi = degToRad(static_cast<float>(direction - 90));
+
+	m_initialVelocity.x = std::round(velocity * std::cos(phi));
+	m_initialVelocity.y = std::round(velocity * std::sin(phi));
+
+	m_waitingSpan = sf::milliseconds(waiting);
+	m_initialPosition = getPosition();
+
+	return true;
 }
 
 void JumpingTile::loadAnimation(int skinNr) {
@@ -59,19 +83,6 @@ void JumpingTile::onHit(LevelMovableGameObject* mob) {
 		mob->addDamageOverTime(m_damage);
 		m_damageCooldown = sf::seconds(3.f);
 	}
-}
-
-void JumpingTile::setJumpingTileData(const JumpingTileData& data) {
-	m_isAggro = data.isAggro;
-	m_isAlternating = data.isAlternating;
-
-	float phi = degToRad(static_cast<float>(data.direction - 90));
-
-	m_initialVelocity.x = std::round(data.velocity * std::cos(phi));
-	m_initialVelocity.y = std::round(data.velocity * std::sin(phi));
-
-	m_waitingSpan = sf::milliseconds(data.waitingTime);
-	m_initialPosition = data.spawnPosition;
 }
 
 void JumpingTile::changeDirection() {

@@ -5,11 +5,12 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Damaging, DamagingTile)
 
-void DamagingTile::init() {
+bool DamagingTile::init(const LevelTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(5.f, 5.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 10.f, TILE_SIZE_F - 10.f));
 	addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
+	return true;
 }
 
 void DamagingTile::loadAnimation(int skinNr) {

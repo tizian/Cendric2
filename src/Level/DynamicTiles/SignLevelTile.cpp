@@ -4,21 +4,15 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "Screens/LevelScreen.h"
 #include "GUI/Hints.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Sign, SignLevelTile)
 
 const float SignLevelTile::TOOLTIP_TOP = 20.f;
 const float SignLevelTile::READ_RANGE = 50.f;
 const sf::Time SignLevelTile::TOOLTIP_WINDOW_TIME = sf::seconds(3.f);
 
-SignLevelTile::SignLevelTile(const SignData& data, LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	m_data = data;
-	if (m_data.isHint) {
-		m_tooltipWindow.setText(getHintDescription(m_data.text));
-		levelScreen->getCharacterCore()->learnHint(data.text);
-	}
-	else {
-		m_tooltipWindow.setText(g_textProvider->getText(data.text, "sign"));
-	}
-	
+SignLevelTile::SignLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {	
 	m_tooltipWindow.setTextOffset(sf::Vector2f(30.f, 10.f));
 	m_tooltipWindow.setTextAlignment(TextAlignment::Center);
 	m_showTooltip = false;
@@ -45,10 +39,25 @@ void SignLevelTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 }
 
-void SignLevelTile::init() {
+bool SignLevelTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, 30.f));
 	setPositionOffset(sf::Vector2f(0.f, 10.f));
 	setSpriteOffset(sf::Vector2f(0.f, -10.f));
+
+	if (contains(properties, std::string("hint"))) {
+		std::string text = properties.at("hint");
+		m_tooltipWindow.setText(getHintDescription(text));
+		m_screen->getCharacterCore()->learnHint(text);
+	}
+	else if (contains(properties, std::string("text"))) {
+		std::string text = properties.at("text");
+		m_tooltipWindow.setText(g_textProvider->getText(text, "sign"));
+	}
+	else {
+		return false;
+	}
+
+	return true;
 }
 
 void SignLevelTile::loadAnimation(int skinNr) {

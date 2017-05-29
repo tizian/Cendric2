@@ -3,18 +3,39 @@
 #include "Level/LevelMainCharacter.h"
 #include "World/Trigger.h"
 #include "Spells/Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
 
 const float DoorLevelTile::OPEN_RANGE = 100.f;
 
-void DoorLevelTile::init() {
+bool DoorLevelTile::init(const LevelTileProperties& properties) {
+	m_isInitiallyCollidable = contains(properties, std::string("collidable"));
+
+	if (contains(properties, std::string("key"))) {
+		m_keyItemID = properties.at("key");
+	}
+
+	if (!contains(properties, std::string("width"))) return false;
+	int m_tileWidth = std::stoi(properties.at(std::string("width")));
+	if (m_tileWidth < 1 || m_tileWidth > 2) return false;
+
+	if (!contains(properties, std::string("strength"))) return false;
+	int m_strength = std::stoi(properties.at(std::string("strength")));
+	if (m_strength < 0 || m_strength > 4) return false;
+
+	if (m_strength == 0 && !m_keyItemID.empty()) return false;
+
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_doorData.tileWidth, 3 * TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F));
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
 	m_interactComponent->setInteractRange(OPEN_RANGE);
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&DoorLevelTile::onRightClick, this));
 	addComponent(m_interactComponent);
+
+	return true;
 }
 
 void DoorLevelTile::loadAnimation(int skinNr) {
@@ -23,13 +44,13 @@ void DoorLevelTile::loadAnimation(int skinNr) {
 
 	Animation* closedAnimation = new Animation();
 	closedAnimation->setSpriteSheet(tex);
-	closedAnimation->addFrame(sf::IntRect(0, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_doorData.tileWidth, 3 * TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect(0, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_tileWidth, 3 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Closed, closedAnimation);
 
 	Animation* openAnimation = new Animation();
 	openAnimation->setSpriteSheet(tex);
-	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_doorData.tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_doorData.tileWidth, 3 * TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_tileWidth, 3 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Open, openAnimation);
 }
@@ -49,12 +70,12 @@ void DoorLevelTile::onHit(Spell* spell) {
 		return;
 	}
 	
-	if (spell->getStrength() >= m_doorData.strength) {
+	if (spell->getStrength() >= m_strength) {
 		open();
 		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	}
 	else {
-		if (m_doorData.strength > 4) {
+		if (m_strength > 4) {
 			m_screen->setNegativeTooltip("IsLockedKey");
 		}
 		else {
@@ -73,27 +94,27 @@ void DoorLevelTile::onRightClick() {
 	if (!inRange) {
 		m_screen->setNegativeTooltip("OutOfRange");
 	}
-	else if (m_doorData.strength == 0) {
+	else if (m_strength == 0) {
 		open();
 	}
-	else if (!m_doorData.keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_doorData.keyItemID, 1)) {
+	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		open();
 		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 
 		std::string tooltipText = g_textProvider->getText("Used");
-		tooltipText.append(g_textProvider->getText(m_doorData.keyItemID, "item"));
+		tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
 		m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 
 		g_inputController->lockAction();
 	}
 	else {
-		if (!m_doorData.keyItemID.empty() && m_doorData.strength < 5) {
+		if (!m_keyItemID.empty() && m_strength < 5) {
 			m_screen->setNegativeTooltip("IsLockedKeyPicklock");
 		}
-		else if (!m_doorData.keyItemID.empty()) {
+		else if (!m_keyItemID.empty()) {
 			m_screen->setNegativeTooltip("IsLockedKey");
 		}
-		else if (m_doorData.strength < 5) {
+		else if (m_strength < 5) {
 			m_screen->setNegativeTooltip("IsLockedPicklock");
 		}
 	}
@@ -118,8 +139,8 @@ void DoorLevelTile::open() {
 
 void DoorLevelTile::close() {
 	m_isOpen = false;
-	m_isCollidable = m_doorData.isCollidable;
-	m_isStrictlyCollidable = m_doorData.isCollidable;
+	m_isCollidable = m_isInitiallyCollidable;
+	m_isStrictlyCollidable = m_isInitiallyCollidable;
 	setState(GameObjectState::Closed);
 	m_interactComponent->setInteractable(true);
 
@@ -131,10 +152,6 @@ void DoorLevelTile::close() {
 			}
 		}
 	}
-}
-
-void DoorLevelTile::setDoorData(const DoorData& data) {
-	m_doorData = data;
 }
 
 std::string DoorLevelTile::getSpritePath() const {

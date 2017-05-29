@@ -14,10 +14,11 @@ DisappearingTile::DisappearingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen) {
 }
 
-void DisappearingTile::init() {
+bool DisappearingTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	m_checkBoundingBox.width = TILE_SIZE_F + 2.f;
 	m_checkBoundingBox.height = TILE_SIZE_F + 2.f;
+	return true;
 }
 
 void DisappearingTile::loadAnimation(int skinNr) {

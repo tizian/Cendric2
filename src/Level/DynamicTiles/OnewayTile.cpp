@@ -4,10 +4,11 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Oneway, OnewayTile)
 
-void OnewayTile::init() {
+bool OnewayTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	m_isOneWay = true;
 	m_isCollidable = true;
+	return true;
 }
 
 void OnewayTile::loadAnimation(int skinNr) {

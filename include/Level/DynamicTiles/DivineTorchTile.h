@@ -17,7 +17,7 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void setTarget(GameObject* target, bool force = false);
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::DivineTorch; }

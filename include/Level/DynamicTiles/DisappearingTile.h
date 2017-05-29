@@ -17,7 +17,7 @@ class ParticleComponent;
 class DisappearingTile final : public LevelDynamicTile {
 public:
 	DisappearingTile(LevelScreen* levelScreen);
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;

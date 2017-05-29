@@ -2,19 +2,17 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
-#include "Structs/DoorData.h"
 
 class InteractComponent;
 
 class DoorLevelTile final : public LevelDynamicTile {
 public:
 	DoorLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onRightClick() override;
-	void setDoorData(const DoorData& data);
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Door; }
 
 private:
@@ -23,10 +21,13 @@ private:
 	void close();
 
 private:
-	DoorData m_doorData;
 	InteractComponent* m_interactComponent;
 	bool m_isOpen;
 	bool m_isInitialized = false;
+	int m_tileWidth = 1;
+	int m_strength = 0;
+	std::string m_keyItemID;
+	bool m_isInitiallyCollidable;
 
 	static const float OPEN_RANGE;
 };

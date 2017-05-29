@@ -1,17 +1,22 @@
 #include "Level/DynamicTiles/LadderTile.h"
 #include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Ladder, LadderTile)
 
 const int LadderTile::LADDER_STEP = 15;
 
-LadderTile::LadderTile(const LadderTileData& data, LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	m_size = data.size;
-}
+bool LadderTile::init(const LevelTileProperties& properties) {
+	if (!contains(properties, std::string("size"))) return false;
+	m_size = std::stoi(properties.at(std::string("size")));
+	if (m_size < 2 || m_size > 100) return false;
 
-void LadderTile::init() {
 	setSpriteOffset(sf::Vector2f(-10.f, -TILE_SIZE_F));
 	setPositionOffset(sf::Vector2f(10.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F * m_size));
+
+	return true;
 }
 
 void LadderTile::loadAnimation(int skinNr) {
@@ -114,7 +119,6 @@ float LadderTile::getClimbingPositionY(GameObject* object) const {
 
 	return newBottom - goHeight;
 }
-
 
 std::string LadderTile::getSpritePath() const {
 	return "res/assets/level_dynamic_tiles/spritesheet_tiles_ladder.png";

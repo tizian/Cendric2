@@ -3,7 +3,6 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "World/MovableGameObject.h"
-#include "Structs/JumpingTileData.h"
 #include "Structs/DamageOverTimeData.h"
 
 // skins:
@@ -20,12 +19,11 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onHit(LevelMovableGameObject* mob) override;
-	void setJumpingTileData(const JumpingTileData& data);
 
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Jumping; }

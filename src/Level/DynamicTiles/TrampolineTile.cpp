@@ -11,22 +11,16 @@ TrampolineTile::TrampolineTile(LevelScreen* levelScreen) :
 	LevelMovableTile(levelScreen) {
 }
 
-void TrampolineTile::init() {
+bool TrampolineTile::init(const LevelTileProperties& properties) {
 	m_jumpingRegion.width = 40.f;
 	m_jumpingRegion.height = 2.f;
 	setPositionOffset(sf::Vector2f(5.f, 15.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -15.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_jumpingRegion.width, 35.f));
+	return true;
 }
 
 void TrampolineTile::loadAnimation(int skinNr) {
-	if (skinNr % 2 == 1) {
-		setPositionOffset(sf::Vector2f(5.f + TILE_SIZE_F * 0.5f, 15.f));
-		skinNr--;
-	}
-
-	skinNr /= 2;
-
 	m_isShiftable = skinNr == 0;
 
 	m_isCollidable = true;

@@ -7,15 +7,14 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Resource, ResourceTile)
 
-using namespace std;
-
-void ResourceTile::init() {
+bool ResourceTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText(""), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setOnInteract(std::bind(&ResourceTile::onRightClick, this));
 	addComponent(m_interactComponent);
+	return true;
 }
 
 void ResourceTile::update(const sf::Time& frameTime) {

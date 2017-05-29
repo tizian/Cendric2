@@ -11,9 +11,10 @@ ShootingTile::ShootingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen) {
 }
 
-void ShootingTile::init() {
+bool ShootingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	return true;
 }
 
 void ShootingTile::loadSpells() {
