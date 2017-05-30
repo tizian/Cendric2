@@ -5,14 +5,6 @@
 #include "Level/Enemy.h"
 #include "World/LightObject.h"
 #include "ObjectFactory.h"
-#include "Level/DynamicTiles/ModifierTile.h"
-#include "Level/DynamicTiles/MovingTile.h"
-#include "Level/DynamicTiles/JumpingTile.h"
-#include "Level/DynamicTiles/FallingTile.h"
-#include "Level/DynamicTiles/SignLevelTile.h"
-#include "Level/DynamicTiles/LadderTile.h"
-#include "Level/DynamicTiles/ResourceTile.h"
-#include "Level/DynamicTiles/DoorLevelTile.h"
 #include "World/Trigger.h"
 
 void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const {

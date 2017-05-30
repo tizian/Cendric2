@@ -12,9 +12,20 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Particle, ParticleTile)
 ParticleTile::ParticleTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 }
 
-void ParticleTile::init() {
+bool ParticleTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 	m_isCollidable = false;
+
+	if (contains(properties, std::string("layer"))) {
+		m_isForegroundTile = properties.at("layer").compare("fg") == 0;
+	}
+
+	if (!contains(properties, std::string("color"))) {
+		return false;
+	}
+
+	m_color = properties.at("color");
+	return true;
 }
 
 void ParticleTile::loadAnimation(int skinNr_) {
@@ -56,7 +67,7 @@ void ParticleTile::onHit(Spell* spell) {
 	// nop?
 }
 
-void ParticleTile::loadWaterParticles(int skinNr) {
+void ParticleTile::loadWaterParticles() {
 	ParticleComponentData data;
 	data.particleCount = 1000;
 	data.emitRate = 100.f;
@@ -76,12 +87,7 @@ void ParticleTile::loadWaterParticles(int skinNr) {
 	sizeGen->maxEndSize = 20.f;
 	data.sizeGen = sizeGen;
 
-	auto colGen = new particles::ColorGenerator();
-	colGen->minStartCol = sf::Color(60, 110, 40);
-	colGen->maxStartCol = sf::Color(80, 100, 50);
-	colGen->minEndCol = sf::Color(60, 80, 40, 100);
-	colGen->maxEndCol = sf::Color(110, 140, 80, 100);
-	data.colorGen = colGen;
+	data.colorGen = getWaterColorGenerator(m_color);
 
 	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minStartSpeed = 30.f;
@@ -100,7 +106,7 @@ void ParticleTile::loadWaterParticles(int skinNr) {
 	addComponent(m_pc);
 }
 
-void ParticleTile::loadEmberParticles(int skinNr) {
+void ParticleTile::loadEmberParticles() {
 	ParticleComponentData data;
 	data.particleCount = 50;
 	data.emitRate = 5.f;
@@ -120,23 +126,7 @@ void ParticleTile::loadEmberParticles(int skinNr) {
 	sizeGen->maxEndSize = 0.f;
 	data.sizeGen = sizeGen;
 
-	auto colGen = new particles::ColorGenerator();
-	switch (skinNr) {
-	default:
-	case 4:
-		colGen->minStartCol = sf::Color(110, 255, 100);
-		colGen->maxStartCol = sf::Color(110, 255, 100);
-		colGen->minEndCol = sf::Color(20, 200, 0, 200);
-		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
-		break;
-	case 5:
-		colGen->minStartCol = sf::Color(190, 120, 180);
-		colGen->maxStartCol = sf::Color(200, 140, 190);
-		colGen->minEndCol = sf::Color(230, 140, 200, 200);
-		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
-		break;
-	}
-	data.colorGen = colGen;
+	data.colorGen = getEmberColorGenerator(m_color);
 
 	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minStartSpeed = 20.f;
@@ -160,7 +150,7 @@ void ParticleTile::loadEmberParticles(int skinNr) {
 		sf::Vector2f(200.f, 300.f), 0.3f), this));
 }
 
-void ParticleTile::loadFlameParticles(int skinNr) {
+void ParticleTile::loadFlameParticles() {
 	ParticleComponentData data;
 	data.particleCount = 1000;
 	data.emitRate = 60.f;
@@ -180,29 +170,7 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 	sizeGen->maxEndSize = 50.f;
 	data.sizeGen = sizeGen;
 
-	auto colGen = new particles::ColorGenerator();
-	switch (skinNr) {
-	default:
-	case 0:
-		colGen->minStartCol = sf::Color(255, 160, 64);
-		colGen->maxStartCol = sf::Color(255, 160, 64);
-		colGen->minEndCol = sf::Color(255, 0, 0, 200);
-		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
-		break;
-	case 1:
-		colGen->minStartCol = sf::Color(100, 146, 186);
-		colGen->maxStartCol = sf::Color(100, 146, 186);
-		colGen->minEndCol = sf::Color(20, 83, 255, 200);
-		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
-		break;
-	case 3:
-		colGen->minStartCol = sf::Color(110, 230, 100);
-		colGen->maxStartCol = sf::Color(110, 230, 100);
-		colGen->minEndCol = sf::Color(20, 150, 10, 200);
-		colGen->maxEndCol = sf::Color(20, 150, 10, 200);
-		break;
-	}
-	data.colorGen = colGen;
+	data.colorGen = getFlameColorGenerator(m_color);
 
 	m_velGen = new particles::AimedVelocityGenerator();
 	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
@@ -228,17 +196,14 @@ void ParticleTile::loadFlameParticles(int skinNr) {
 void ParticleTile::loadParticleSystem(int skinNr) {
 	switch (skinNr) {
 	case 0:
+		loadFlameParticles();
+		break;
 	case 1:
-	case 3:
-		loadFlameParticles(skinNr);
+		loadWaterParticles();
 		break;
 	case 2:
-		loadWaterParticles(skinNr);
-		break;
-	case 4:
-	case 5:
 	default:
-		loadEmberParticles(skinNr);
+		loadEmberParticles();
 		break;
 	}
 }
@@ -246,4 +211,73 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 sf::RenderTexture* ParticleTile::getParticleTexture() {
 	return m_isForegroundTile ? &dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture()	:
 		&dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
+}
+
+particles::ColorGenerator* getWaterColorGenerator(const std::string& color) {
+	auto colGen = new particles::ColorGenerator();
+
+	if (color.compare("green") == 0) {
+		colGen->minStartCol = sf::Color(60, 110, 40);
+		colGen->maxStartCol = sf::Color(80, 100, 50);
+		colGen->minEndCol = sf::Color(60, 80, 40, 100);
+		colGen->maxEndCol = sf::Color(110, 140, 80, 100);
+	}
+	else if (color.compare("blue") == 0) {
+		colGen->minStartCol = sf::Color(40, 60, 110);
+		colGen->maxStartCol = sf::Color(60, 80, 100);
+		colGen->minEndCol = sf::Color(50, 60, 80, 100);
+		colGen->maxEndCol = sf::Color(80, 110, 140, 100);
+	}
+	else if (color.compare("red") == 0) {
+		colGen->minStartCol = sf::Color(110, 40, 60);
+		colGen->maxStartCol = sf::Color(120, 50, 60);
+		colGen->minEndCol = sf::Color(80, 40, 50, 100);
+		colGen->maxEndCol = sf::Color(140, 80, 110, 100);
+	}
+
+	return colGen;
+}
+
+particles::ColorGenerator* getEmberColorGenerator(const std::string& color) {
+	auto colGen = new particles::ColorGenerator();
+
+	if (color.compare("green") == 0) {
+		colGen->minStartCol = sf::Color(110, 255, 100);
+		colGen->maxStartCol = sf::Color(110, 255, 100);
+		colGen->minEndCol = sf::Color(20, 200, 0, 200);
+		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
+	}
+	else if (color.compare("purple") == 0) {
+		colGen->minStartCol = sf::Color(190, 120, 180);
+		colGen->maxStartCol = sf::Color(200, 140, 190);
+		colGen->minEndCol = sf::Color(230, 140, 200, 200);
+		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
+	}
+
+	return colGen;
+}
+
+particles::ColorGenerator* getFlameColorGenerator(const std::string& color) {
+	auto colGen = new particles::ColorGenerator();
+
+	if (color.compare("green") == 0) {
+		colGen->minStartCol = sf::Color(110, 230, 100);
+		colGen->maxStartCol = sf::Color(110, 230, 100);
+		colGen->minEndCol = sf::Color(20, 150, 10, 200);
+		colGen->maxEndCol = sf::Color(20, 150, 10, 200);
+	}
+	else if (color.compare("blue") == 0) {
+		colGen->minStartCol = sf::Color(100, 146, 186);
+		colGen->maxStartCol = sf::Color(100, 146, 186);
+		colGen->minEndCol = sf::Color(20, 83, 255, 200);
+		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
+	}
+	else if (color.compare("red") == 0) {
+		colGen->minStartCol = sf::Color(255, 160, 64);
+		colGen->maxStartCol = sf::Color(255, 160, 64);
+		colGen->minEndCol = sf::Color(255, 0, 0, 200);
+		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	}
+
+	return colGen;
 }

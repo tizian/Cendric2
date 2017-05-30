@@ -22,7 +22,7 @@ public:
 	void render(sf::RenderTarget& target) override;
 	void update(const sf::Time& frameTime) override;
 
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onHit(LevelMovableGameObject* mob) override;
@@ -31,13 +31,17 @@ public:
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Particle; }
 
 private:
-	bool m_isForegroundTile = false;
+	bool m_isForegroundTile = true;
+	std::string m_color;
 	ParticleComponent* m_pc;
 	particles::AimedVelocityGenerator* m_velGen = nullptr;
 	sf::RenderTexture* getParticleTexture();
+	particles::ColorGenerator* getWaterColorGenerator(const std::string& color);
+	particles::ColorGenerator* getEmberColorGenerator(const std::string& color);
+	particles::ColorGenerator* getFlameColorGenerator(const std::string& color);
 
-	void loadFlameParticles(int skinNr);
-	void loadWaterParticles(int skinNr);
-	void loadEmberParticles(int skinNr);
+	void loadFlameParticles();
+	void loadWaterParticles();
+	void loadEmberParticles();
 	void loadParticleSystem(int skinNr);
 };

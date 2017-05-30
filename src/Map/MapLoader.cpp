@@ -5,20 +5,11 @@
 #include "World/LightObject.h"
 #include "Screens/MapScreen.h"
 #include "ObjectFactory.h"
-#include "Map/DynamicTiles/WaypointTile.h"
-#include "Map/DynamicTiles/BookTile.h"
-#include "Map/DynamicTiles/DoorMapTile.h"
-#include "Map/DynamicTiles/SignMapTile.h"
-#include "Map/DynamicTiles/ChestMapTile.h"
 #include "World/Trigger.h"
 
 void MapLoader::loadForRenderTexture(MapData& data, MapScreen* screen) {
 	loadLights(data, screen);
 	loadDynamicTiles(data, screen);
-	loadBooks(data, screen);
-	loadDoors(data, screen);
-	loadSigns(data, screen);
-	loadChests(data, screen);
 }
 
 void MapLoader::loadAfterMainChar(MapData& data, MapScreen* screen) {
