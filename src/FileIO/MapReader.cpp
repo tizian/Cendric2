@@ -404,7 +404,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 
 					std::string value = textAttr;
 					LightData lightData;
-					if (!resolveLightString(value, lightData)) {
+					if (!LightData::resolveLightString(value, lightData)) {
 						return false;
 					}
 					npc.lightData = lightData;

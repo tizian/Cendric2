@@ -207,11 +207,12 @@ void ElysiaBossMovingBehavior::handleThunderUp() {
 		m_enemy->setVelocity(sf::Vector2f());
 
 		g_resourceManager->playSound(THUNDER_SOUND);
+		LevelTileProperties properties;
 
 		// create thunder tiles
 		for (auto& it : m_damagingTiles) {
 			LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::Damaging, dynamic_cast<LevelScreen*>(m_boss->getScreen()));
-			tile->init();
+			tile->init(properties);
 			tile->setPosition(sf::Vector2f(it.second, m_thunderStartY) + tile->getPositionOffset());
 			tile->loadResources();
 			tile->loadAnimation(0);
@@ -234,10 +235,12 @@ void ElysiaBossMovingBehavior::handlePreThunder() {
 		m_maxVelocityYUp = 100;
 		m_maxVelocityYDown = 100;
 
+		LevelTileProperties properties;
+
 		// create cloud tiles
 		for (auto& it : m_cloudTiles) {
 			LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::Disappearing, dynamic_cast<LevelScreen*>(m_boss->getScreen()));
-			tile->init();
+			tile->init(properties);
 			tile->setPosition(it.second + tile->getPositionOffset());
 			tile->loadResources();
 			tile->loadAnimation(4);

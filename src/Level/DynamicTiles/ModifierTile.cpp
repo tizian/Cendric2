@@ -13,11 +13,26 @@ ModifierTile::ModifierTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScr
 }
 
 bool ModifierTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
+	LevelScreen* lScreen = dynamic_cast<LevelScreen*>(m_screen);
+	auto& modifiersUnlocked = lScreen->getCharacterCore()->getData().modifiersUnlocked;
+	auto& worldID = lScreen->getWorld()->getID();
+	if (contains(modifiersUnlocked, worldID) && contains(modifiersUnlocked.at(worldID), m_objectID)) {
+		// modifier is already unlocked
+		setDisposed();
+		return true;
+	}
+
+	if (!contains(properties, std::string("type"))) return false;
+	m_modifier.type = SpellModifier::resolveType(properties.at(std::string("type")));
+	if (m_modifier.type == SpellModifierType::VOID) return false;
+
+	auto const& modifiersLearned = lScreen->getCharacterCore()->getData().modfiersLearned;
+
+	m_modifier.level = std::min(3, contains(modifiersLearned, m_modifier.type) ? 
+		modifiersLearned.at(m_modifier.type) + 1 : 1);
+
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	loadComponents();
-
-	auto& cData = m_screen->getCharacterCore()->getData();
-
 
 	return true;
 }
@@ -72,7 +87,7 @@ void ModifierTile::addModifier() {
 	setCurrentAnimation(getAnimation(m_state), false);
 
 	LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen());
-	screen->notifyModifierLearned(m_modifier);
+	screen->notifyModifierLearned(m_modifier.type, m_objectID);
 	m_pc->setEmitRate(0.f);
 }
 

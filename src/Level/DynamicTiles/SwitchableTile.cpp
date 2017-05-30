@@ -1,5 +1,10 @@
 #include "Level/DynamicTiles/SwitchableTile.h"
 #include "Spells/Spell.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::SwitchableOff, SwitchableOffTile)
+static Registrar registrar2(LevelDynamicTileID::SwitchableOn, \
+	[](LevelScreen* l) -> LevelDynamicTile* { return new SwitchableOnTile(l); });
 
 bool SwitchableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));

@@ -31,6 +31,8 @@ bool ChestMapTile::init(const MapTileProperties& properties) {
 	if (m_lightData.radius.x > 0.f) {
 		addComponent(new LightComponent(m_lightData, this));
 	}
+
+	return true;
 }
 
 void ChestMapTile::loadAnimation(int skinNr) {

@@ -142,8 +142,11 @@ void WorldScreen::notifySpellLearned(SpellID id) {
 	m_interface->hideAll();
 }
 
-void WorldScreen::notifyModifierLearned(const SpellModifier& modifier) {
-	getCharacterCore()->learnModifier(modifier);
+void WorldScreen::notifyModifierLearned(SpellModifierType modifierType, int objectID) {
+	getCharacterCore()->learnModifier(modifierType, getWorld()->getID(), objectID);
+	SpellModifier modifier;
+	modifier.type = modifierType;
+	modifier.level = getCharacterCore()->getData().modfiersLearned.at(modifierType);
 	addScreenOverlay(ScreenOverlay::createModifierLearnedScreenOverlay(modifier));
 	m_interface->reloadSpellBook();
 }

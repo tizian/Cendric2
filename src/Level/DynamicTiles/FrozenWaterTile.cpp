@@ -11,9 +11,10 @@ FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : Lev
 	m_isRenderAfterObjects = true;
 }
 
-void FrozenWaterTile::init() {
+bool FrozenWaterTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE), TILE_SIZE_F));
+	return true;
 }
 
 void FrozenWaterTile::loadAnimation(int skinNr) {

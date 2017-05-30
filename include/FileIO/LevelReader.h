@@ -34,7 +34,9 @@ private:
 	bool readLevelItemLayer(const std::string& layer, LevelData& data) const;
 	
 	bool readObjects(tinyxml2::XMLElement* map, LevelData& data) const;
-	bool readDynamicTiles(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readDynamicTileLayer(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readLeverLayer(tinyxml2::XMLElement* objects, LevelData& data) const;
+	bool readDynamicTiles(tinyxml2::XMLElement* objects, std::vector<LevelDynamicTileData>& data) const;
 	bool readEnemies(tinyxml2::XMLElement* objects, LevelData& data) const;
 
 	// this is the width in tiles of the dynamic tile tileset

@@ -49,7 +49,7 @@ public:
 	// notify spell learned -> add overlay and add to core.
 	void notifySpellLearned(SpellID id);
 	// notify modifier learned -> add overlay and add to core.
-	void notifyModifierLearned(const SpellModifier& modifier);
+	void notifyModifierLearned(SpellModifierType modifierType, int objectID);
 	// notify reputation added
 	void notifyReputationAdded(FractionID fraction, int amount);
 	// notify guild joined

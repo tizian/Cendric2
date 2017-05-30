@@ -82,12 +82,7 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		SpellModifierType type = static_cast<SpellModifierType>(content.i1);
 		if (type <= SpellModifierType::VOID || type >= SpellModifierType::MAX)
 			break;
-		if (content.i2 < 1 || content.i2 > 3)
-			break;
-		SpellModifier modifier;
-		modifier.type = type;
-		modifier.level = content.i2;
-		screen->notifyModifierLearned(modifier);
+		screen->notifyModifierLearned(type, -1);
 		break;
 	}
 	default:

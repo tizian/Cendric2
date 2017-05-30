@@ -1,3 +1,5 @@
+#pragma once
+
 #include "global.h"
 #include "ObjectFactory.h"
 

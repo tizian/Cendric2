@@ -3,7 +3,7 @@
 #include "global.h"
 #include "World/AnimatedGameObject.h"
 #include "ResourceManager.h"
-#include "Enums/LevelDynamicTileID.h"
+#include "Structs/LevelDynamicTileData.h"
 
 class Spell;
 class LevelMovableGameObject;
@@ -57,6 +57,7 @@ protected:
 	bool m_isRenderAfterObjects = false;
 	bool m_isFirstRenderIteration = true;
 	int m_objectID = -1;
+	LevelDynamicTileID m_levelDynamicTileID;
 
 private:
 	sf::Vector2f m_positionOffset = sf::Vector2f(0.f, 0.f);

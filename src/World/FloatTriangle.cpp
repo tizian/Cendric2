@@ -1,4 +1,4 @@
-#include "FloatTriangle.h"
+#include "World/FloatTriangle.h"
 
 FloatTriangle::FloatTriangle(const sf::Vector2f& v1, const sf::Vector2f& v2, const sf::Vector2f& v3) {
 	m_vertex1 = v1;

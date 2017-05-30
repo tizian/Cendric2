@@ -8,7 +8,7 @@ class FluidTile;
 class FrozenWaterTile final : public LevelDynamicTile {
 public:
 	FrozenWaterTile(FluidTile* waterTile, int waterTileIndex);
-	void init() override;
+	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void setDisposed() override;

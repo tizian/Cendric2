@@ -143,7 +143,7 @@ public:
 	// learns the spell with id "spellID"
 	void learnSpell(SpellID spellID);
 	// learns this modifier
-	void learnModifier(const SpellModifier& modifier);
+	void learnModifier(SpellModifierType modifier, const std::string& levelID, int objectID);
 	// learns this hint
 	void learnHint(const std::string& hintKey);
 	// sets the weather for this particular world 

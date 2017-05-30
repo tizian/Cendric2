@@ -44,6 +44,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeItemsLooted(data);
 		savefile << writeChestsLooted(data);
 		savefile << writeWaypointsUnlocked(data);
+		savefile << writeModifiersUnlocked(data);
 		savefile << writeTriggersTriggered(data);
 		savefile << writeTilesExplored(data);
 		savefile << writeQuestStates(data);
@@ -276,7 +277,25 @@ std::string CharacterCoreWriter::writeModifiersLearned(const CharacterCoreData& 
 		modifierLearned.append("\n");
 		modifiersLearned.append(modifierLearned);
 	}
+
 	return modifiersLearned;
+}
+
+std::string CharacterCoreWriter::writeModifiersUnlocked(const CharacterCoreData& data) const {
+	std::string modifiersUnlocked = "# modifiers unlocked:\n";
+
+	for (auto& it : data.modifiersUnlocked) {
+		std::string modifierUnlocked = std::string(MODIFIERS_UNLOCKED);
+		modifierUnlocked.append(":");
+		modifierUnlocked.append(it.first);
+		for (auto it2 : it.second) {
+			modifierUnlocked.append("," + std::to_string(it2));
+		}
+		modifierUnlocked.append("\n");
+		modifiersUnlocked.append(modifierUnlocked);
+	}
+
+	return modifiersUnlocked;
 }
 
 std::string CharacterCoreWriter::writeAttributes(const CharacterCoreData& data) const {

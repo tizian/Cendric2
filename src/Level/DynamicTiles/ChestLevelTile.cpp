@@ -23,6 +23,15 @@ ChestLevelTile::~ChestLevelTile() {
 }
 
 bool ChestLevelTile::init(const LevelTileProperties& properties) {
+	LevelScreen* lScreen = dynamic_cast<LevelScreen*>(m_screen);
+	auto& chestsLooted = lScreen->getCharacterCore()->getData().chestsLooted;
+	auto& worldID = lScreen->getWorld()->getID();
+	if (contains(chestsLooted, worldID) && contains(chestsLooted.at(worldID), m_objectID)) {
+		// chest is already looted
+		setDisposed();
+		return true;
+	}
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 
@@ -39,6 +48,7 @@ bool ChestLevelTile::init(const LevelTileProperties& properties) {
 	}
 
 	loadLua();
+	return true;
 }
 
 void ChestLevelTile::loadAnimation(int skinNr) {
@@ -227,11 +237,11 @@ void ChestLevelTile::onRightClick() {
 		}
 		g_inputController->lockAction();
 	}
-	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_data.keyItemID, 1)) {
+	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		if (inRange) {
 			unlock(true);
 			std::string tooltipText = g_textProvider->getText("Used");
-			tooltipText.append(g_textProvider->getText(m_data.keyItemID, "item"));
+			tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
 			m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 		}
 		else {
@@ -240,13 +250,13 @@ void ChestLevelTile::onRightClick() {
 		g_inputController->lockAction();
 	}
 	else {
-		if (!m_data.keyItemID.empty() && m_data.chestStrength < 5) {
+		if (!m_keyItemID.empty() && m_chestStrength < 5) {
 			m_screen->setNegativeTooltip("IsLockedKeyPicklock");
 		}
-		else if (!m_data.keyItemID.empty()) {
+		else if (!m_keyItemID.empty()) {
 			m_screen->setNegativeTooltip("IsLockedKey");
 		}
-		else if (m_data.chestStrength < 5) {
+		else if (m_chestStrength < 5) {
 			m_screen->setNegativeTooltip("IsLockedPicklock");
 		}
 	}

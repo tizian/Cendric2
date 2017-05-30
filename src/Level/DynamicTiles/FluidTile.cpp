@@ -36,7 +36,7 @@ bool FluidTile::init(const LevelTileProperties& properties) {
 	sf::Vector2i size;
 	size.x = std::stoi(sizeStr.substr(0, sizeStr.find(',')));
 	size.y = std::stoi(sizeStr.substr(sizeStr.find(',') + 1));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, size.x, size.y));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(size.x), static_cast<float>(size.y)));
 	
 	return true;
 }
@@ -329,7 +329,7 @@ void FluidTile::freeze(int index) {
 		}
 
 		FrozenWaterTile* frozenTile = new FrozenWaterTile(this, index);
-		frozenTile->init();
+		frozenTile->init(LevelTileProperties());
 		frozenTile->setPosition(sf::Vector2f(m_x + index * TILE_SIZE, m_y));
 		const sf::FloatRect* bb = frozenTile->getBoundingBox();
 		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick

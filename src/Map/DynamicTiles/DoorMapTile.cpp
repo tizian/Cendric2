@@ -57,7 +57,7 @@ bool DoorMapTile::init(const MapTileProperties& properties) {
 	}
 
 	if (contains(properties, std::string("conditions"))) {
-		auto notCond = ParserTools::parseConditions(properties.at("not conditions"), false);
+		auto notCond = ParserTools::parseConditions(properties.at("conditions"), false);
 		for (auto& cond : notCond) {
 			m_conditions.push_back(cond);
 		}

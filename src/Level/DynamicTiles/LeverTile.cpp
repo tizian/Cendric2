@@ -2,6 +2,9 @@
 #include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Registrar.h"
+
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
 
 const float LeverTile::ACTIVATE_RANGE = 80.f;
 

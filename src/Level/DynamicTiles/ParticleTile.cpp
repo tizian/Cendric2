@@ -213,7 +213,7 @@ sf::RenderTexture* ParticleTile::getParticleTexture() {
 		&dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 }
 
-particles::ColorGenerator* getWaterColorGenerator(const std::string& color) {
+particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::string& color) const {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {
@@ -234,11 +234,14 @@ particles::ColorGenerator* getWaterColorGenerator(const std::string& color) {
 		colGen->minEndCol = sf::Color(80, 40, 50, 100);
 		colGen->maxEndCol = sf::Color(140, 80, 110, 100);
 	}
+	else {
+		g_logger->logWarning("ParticleTile", "Unknown water color: " + color);
+	}
 
 	return colGen;
 }
 
-particles::ColorGenerator* getEmberColorGenerator(const std::string& color) {
+particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::string& color) const {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {
@@ -253,11 +256,14 @@ particles::ColorGenerator* getEmberColorGenerator(const std::string& color) {
 		colGen->minEndCol = sf::Color(230, 140, 200, 200);
 		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
 	}
+	else {
+		g_logger->logWarning("ParticleTile", "Unknown ember color: " + color);
+	}
 
 	return colGen;
 }
 
-particles::ColorGenerator* getFlameColorGenerator(const std::string& color) {
+particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::string& color) const {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {
@@ -277,6 +283,9 @@ particles::ColorGenerator* getFlameColorGenerator(const std::string& color) {
 		colGen->maxStartCol = sf::Color(255, 160, 64);
 		colGen->minEndCol = sf::Color(255, 0, 0, 200);
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	}
+	else {
+		g_logger->logWarning("ParticleTile", "Unknown flame color: " + color);
 	}
 
 	return colGen;

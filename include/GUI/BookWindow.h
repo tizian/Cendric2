@@ -4,7 +4,6 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 #include "GUI/ArrowButton.h"
-#include "Structs/BookData.h"
 
 class MapScreen;
 

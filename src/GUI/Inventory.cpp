@@ -7,7 +7,6 @@
 #include "Level/LevelInterface.h"
 #include "Map/MapInterface.h"
 #include "Map/MerchantInterface.h"
-#include "Structs/BookData.h"
 #include "GlobalResource.h"
 
 const int Inventory::SLOT_COUNT_X = 5;

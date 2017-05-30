@@ -186,7 +186,10 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 			if (!readEnemies(objectgroup, data)) return false;
 		}
 		else if (name.find("dynamic") != std::string::npos) {
-			if (!readDynamicTiles(objectgroup, data)) return false;
+			if (!readDynamicTileLayer(objectgroup, data)) return false;
+		}
+		else if (name.find("lever") != std::string::npos) {
+			if (!readLeverLayer(objectgroup, data)) return false;
 		}
 		else if (name.find("light") != std::string::npos) {
 			if (!readLights(objectgroup, data)) return false;
@@ -204,7 +207,16 @@ bool LevelReader::readObjects(tinyxml2::XMLElement* map, LevelData& data) const 
 	return true;
 }
 
-bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, LevelData& data) const {
+bool LevelReader::readDynamicTileLayer(tinyxml2::XMLElement* objects, LevelData& data) const {
+	return readDynamicTiles(objects, data.dynamicTiles);
+}
+
+bool LevelReader::readLeverLayer(tinyxml2::XMLElement* objects, LevelData& data) const {
+	data.levers.push_back(std::vector<LevelDynamicTileData>());
+	return readDynamicTiles(objects, data.levers[data.levers.size() - 1]);
+}
+
+bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, std::vector<LevelDynamicTileData>& data) const {
 	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
 
 	while (object != nullptr) {
@@ -260,7 +272,7 @@ bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, LevelData&
 			}
 		}
 
-		data.dynamicTiles.push_back(tileData);
+		data.push_back(tileData);
 		object = object->NextSiblingElement("object");
 	}
 

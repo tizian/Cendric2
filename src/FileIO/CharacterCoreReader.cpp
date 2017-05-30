@@ -26,6 +26,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ ITEMS_LOOTED,  &CharacterCoreReader::readItemsLooted });
 	m_readMap.insert({ CHESTS_LOOTED,  &CharacterCoreReader::readChestsLooted });
 	m_readMap.insert({ WAYPOINTS_UNLOCKED,  &CharacterCoreReader::readWaypointsUnlocked });
+	m_readMap.insert({ MODIFIERS_UNLOCKED,  &CharacterCoreReader::readModifiersUnlocked });
 	m_readMap.insert({ TRIGGERS_TRIGGERED,  &CharacterCoreReader::readTriggersTriggered });
 	m_readMap.insert({ TILES_EXPLORED,  &CharacterCoreReader::readTilesExplored });
 	m_readMap.insert({ QUEST_STATE,  &CharacterCoreReader::readQuestStates });
@@ -818,6 +819,14 @@ bool CharacterCoreReader::readWaypointsUnlocked(std::string& line, CharacterCore
 	}
 
 	data.waypointsUnlocked.insert({ id, layer });
+	return true;
+}
+
+bool CharacterCoreReader::readModifiersUnlocked(std::string& line, CharacterCoreData& data) const {
+	std::set<int> layer;
+	std::string id;
+	if (!readLevelStateLayer(line, layer, id)) return false;
+	data.modifiersUnlocked.insert({ id, layer });
 	return true;
 }
 

@@ -36,9 +36,9 @@ private:
 	ParticleComponent* m_pc;
 	particles::AimedVelocityGenerator* m_velGen = nullptr;
 	sf::RenderTexture* getParticleTexture();
-	particles::ColorGenerator* getWaterColorGenerator(const std::string& color);
-	particles::ColorGenerator* getEmberColorGenerator(const std::string& color);
-	particles::ColorGenerator* getFlameColorGenerator(const std::string& color);
+	particles::ColorGenerator* getWaterColorGenerator(const std::string& color) const;
+	particles::ColorGenerator* getEmberColorGenerator(const std::string& color) const;
+	particles::ColorGenerator* getFlameColorGenerator(const std::string& color) const;
 
 	void loadFlameParticles();
 	void loadWaterParticles();

@@ -1,4 +1,4 @@
-#include "SpeedupPullCamera.h"
+#include "World/SpeedupPullCamera.h"
 #include "InputController.h"
 
 void SpeedupPullCamera::update(const sf::Time& frameTime) {

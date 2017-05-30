@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Map/MapDynamicTile.h"
 #include "GUI/TooltipWindow.h"
+#include "Structs/Condition.h"
 
 class InteractComponent;
 

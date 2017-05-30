@@ -1,4 +1,4 @@
-#include "Animation.h"
+#include "World/Animation.h"
 
 void Animation::addFrame(const sf::IntRect& rect) {
 	m_frames.push_back(rect);

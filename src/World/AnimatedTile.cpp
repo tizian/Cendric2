@@ -1,4 +1,4 @@
-#include "AnimatedTile.h"
+#include "World/AnimatedTile.h"
 
 GameObjectType AnimatedTile::getConfiguredType() const {
 	return GameObjectType::_AnimatedTile;

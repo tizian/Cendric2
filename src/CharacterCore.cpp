@@ -460,13 +460,15 @@ void CharacterCore::addPermanentAttributes(const AttributeData& attributes) {
 	reloadAttributes();
 }
 
-void CharacterCore::learnModifier(const SpellModifier& modifier) {
-	if (!contains(m_data.modfiersLearned, modifier.type)) {
-		m_data.modfiersLearned.insert({ modifier.type, modifier.level });
+void CharacterCore::learnModifier(SpellModifierType modifierType, const std::string& levelID, int objectID) {
+	if (objectID > -1) {
+		m_data.modifiersUnlocked[levelID].insert(objectID);
 	}
-	else {
-		m_data.modfiersLearned[modifier.type] = std::max(m_data.modfiersLearned[modifier.type], modifier.level);
+		 
+	if (!contains(m_data.modfiersLearned, modifierType)) {
+		m_data.modfiersLearned.insert({ modifierType, 0 });
 	}
+	m_data.modfiersLearned[modifierType] = std::min(3, m_data.modfiersLearned[modifierType] + 1);
 }
 
 void CharacterCore::learnHint(const std::string& hintKey) {

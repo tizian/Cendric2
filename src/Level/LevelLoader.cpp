@@ -13,171 +13,14 @@ void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level*
 	loadTriggers(data, screen);
 }
 
-void LevelLoader::loadChestTiles(LevelData& data, LevelScreen* screen) const {
-	LevelMainCharacter* mainCharacter = screen->getMainCharacter();
-	if (mainCharacter == nullptr) {
-		g_logger->logError("LevelLoader", "Could not find main character of game screen");
-		return;
-	}
+void LevelLoader::loadDynamicTileData(std::vector<LevelDynamicTileData>& data, LevelScreen* screen) const {
+	std::vector<LeverDependentTile*> leverDependentTiles;
+	std::vector<LeverTile*> leverTiles;
 
-	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
-
-	// create chests if they are not looted yet
-	for (auto& it : data.chests) {
-		if (contains(coreData.chestsLooted.at(data.id), it.objectID)) {
-			continue;
-		}
-
-		ChestLevelTile* chestTile = new ChestLevelTile(screen);
-		chestTile->init();	
-		chestTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		chestTile->loadResources();
-		chestTile->loadAnimation(it.skinNr);
-		chestTile->setChestData(it);
-		chestTile->setPosition(it.spawnPosition + chestTile->getPositionOffset());
-		screen->addObject(chestTile);
-	}
-}
-
-void LevelLoader::loadJumpingTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& jumpingData : data.jumpingTiles) {
-
-		JumpingTile* jumpingTile = new JumpingTile(screen);
-
-		jumpingTile->setJumpingTileData(jumpingData);
-		jumpingTile->init();
-		jumpingTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		jumpingTile->loadResources();
-		jumpingTile->loadAnimation(jumpingData.skinNr);
-		jumpingTile->setPosition(jumpingData.spawnPosition);
-
-		screen->addObject(jumpingTile);
-	}
-}
-
-void LevelLoader::loadDoorTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& doorData : data.doors) {
-
-		DoorLevelTile* doorTile = new DoorLevelTile(screen);
-
-		doorTile->setDoorData(doorData);
-		doorTile->init();
-		doorTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		doorTile->loadResources();
-		doorTile->loadAnimation(doorData.skinNr);
-		doorTile->setPosition(doorData.position);
-
-		screen->addObject(doorTile);
-	}
-}
-
-void LevelLoader::loadSignTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& signData : data.signs) {
-
-		SignLevelTile* signTile = new SignLevelTile(signData, screen);
-
-		signTile->init();
-		signTile->setPosition(signData.position + signTile->getPositionOffset());
-		signTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		signTile->loadResources();
-		signTile->loadAnimation(signData.skinNr);
-
-		screen->addObject(signTile);
-	}
-}
-
-void LevelLoader::loadLadderTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& ladderData : data.ladderTiles) {
-
-		LadderTile* ladderTile = new LadderTile(ladderData, screen);
-
-		ladderTile->init();
-		ladderTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		ladderTile->loadResources();
-		ladderTile->loadAnimation(ladderData.skinNr);
-		ladderTile->setPosition(ladderData.position + ladderTile->getPositionOffset());
-
-		screen->addObject(ladderTile);
-	}
-}
-
-void LevelLoader::loadModifierTiles(LevelData& data, LevelScreen* screen) const {
-	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
-
-	// create modifier tiles if they are not learned yet
-	for (auto& modifierData : data.modifiers) {
-		if (contains(coreData.modfiersLearned, modifierData.modifier.type)
-			&& coreData.modfiersLearned.at(modifierData.modifier.type) >= modifierData.modifier.level) {
-			continue;
-		}
-
-		ModifierTile* modifierTile = new ModifierTile(screen);
-
-		modifierTile->setModifier(modifierData.modifier);
-		modifierTile->init();
-		modifierTile->loadResources();
-		modifierTile->loadAnimation(0);
-		modifierTile->setDebugBoundingBox(COLOR_NEUTRAL);
-		modifierTile->setPosition(modifierData.spawnPosition);
-
-		screen->addObject(modifierTile);
-	}
-}
-
-
-void LevelLoader::loadLeverTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& it : data.levers) {
-
-		std::vector<LeverDependentTile*> dependentTiles;
-
-		// create the switch tiles and add them.
-		for (auto& switchBean : it.dependentSwitchableTiles) {
-			SwitchableTile* tile = new SwitchableTile(screen);
-
-			tile->setInitialState(switchBean.id == LevelDynamicTileID::SwitchableOn);
-			tile->init();
-			tile->setPosition(switchBean.position);
-			tile->setDebugBoundingBox(COLOR_NEUTRAL);
-			tile->loadResources();
-			tile->loadAnimation(switchBean.skinNr);
-			screen->addObject(tile);
-			dependentTiles.push_back(tile);
-		}
-
-		// create the moving tiles and add them.
-		for (auto& movingData : it.dependentMovingTiles) {
-			MovingTile* movingTile = new MovingTile(screen);
-
-			movingTile->setMovingTileData(movingData);
-			movingTile->init();
-			movingTile->setDebugBoundingBox(COLOR_NEUTRAL);
-			movingTile->loadResources();
-			movingTile->loadAnimation(movingData.skinNr);
-			movingTile->setPosition(movingData.spawnPosition);
-			screen->addObject(movingTile);
-			dependentTiles.push_back(movingTile);
-		}
-
-		// create the lever tiles and add them.
-		for (auto& leverBean : it.levers) {
-			LeverTile* tile = new LeverTile(screen);
-
-			tile->init();
-			tile->setPosition(leverBean.position);
-			tile->setDebugBoundingBox(COLOR_NEUTRAL);
-			tile->loadResources();
-			tile->loadAnimation(leverBean.skinNr);
-			tile->setDependentTiles(dependentTiles);
-			screen->addObject(tile);
-		}
-	}
-}
-
-void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
-	for (auto& it : data.dynamicTiles) {
+	for (auto& it : data) {
 		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, screen);
 		if (tile == nullptr) {
-			g_logger->logError("LevelLoader", "Dynamic tile was not loadeded, id not registered:" + std::to_string(static_cast<int>(it.id)));
+			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, id not registered:" + std::to_string(static_cast<int>(it.id)));
 			return;
 		}
 
@@ -196,15 +39,26 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		screen->addObject(tile);
+
+		if (LeverDependentTile* dependentTile = dynamic_cast<LeverDependentTile*>(tile)) {
+			leverDependentTiles.push_back(dependentTile);
+		}
+		else if (LeverTile* leverTile = dynamic_cast<LeverTile*>(tile)) {
+			leverTiles.push_back(leverTile);
+		}
 	}
 
-	loadModifierTiles(data, screen);
-	loadChestTiles(data, screen);
-	loadLeverTiles(data, screen);
-	loadJumpingTiles(data, screen);
-	loadSignTiles(data, screen);
-	loadLadderTiles(data, screen);
-	loadDoorTiles(data, screen);
+	// set levers
+	for (auto leverTile : leverTiles) {
+		leverTile->setDependentTiles(leverDependentTiles);
+	}
+}
+
+void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
+	loadDynamicTileData(data.dynamicTiles, screen);
+	for (auto& it : data.levers) {
+		loadDynamicTileData(it, screen);
+	}
 }
 
 void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
@@ -280,7 +134,7 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		}
 
 		// calculate loot.
-		std::map<string, int> loot;
+		std::map<std::string, int> loot;
 		int gold = 0;
 
 		if (core->isEnemyLooted(data.id, it.objectID)) {

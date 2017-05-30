@@ -27,6 +27,7 @@ protected:
 	const char* ENEMIES_LOOTED = "enemies.looted";
 	const char* ITEMS_LOOTED = "items.looted";
 	const char* CHESTS_LOOTED = "chests.looted";
+	const char* MODIFIERS_UNLOCKED = "modifiers.unlocked";
 	const char* WAYPOINTS_UNLOCKED = "waypoints.unlocked";
 	const char* TRIGGERS_TRIGGERED = "triggers.triggered";
 	const char* TILES_EXPLORED = "tiles.explored";
