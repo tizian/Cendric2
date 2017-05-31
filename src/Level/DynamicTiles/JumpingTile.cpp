@@ -20,8 +20,10 @@ bool JumpingTile::init(const LevelTileProperties& properties) {
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 10;
 
-	if (!contains(properties, std::string("direction"))) return false;
-	int direction = std::stoi(properties.at(std::string("direction"))) % 360;
+	int direction = 0;
+	if (contains(properties, std::string("direction"))) {
+		direction = std::stoi(properties.at(std::string("direction"))) % 360;
+	}
 
 	if (!contains(properties, std::string("velocity"))) return false;
 	int velocity = std::stoi(properties.at(std::string("velocity")));

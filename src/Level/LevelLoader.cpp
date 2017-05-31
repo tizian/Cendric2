@@ -32,7 +32,6 @@ void LevelLoader::loadDynamicTileData(std::vector<LevelDynamicTileData>& data, L
 			continue;
 		}
 
-		tile->init(it.properties);
 		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->loadResources();
 		tile->loadAnimation(it.skinNr);
