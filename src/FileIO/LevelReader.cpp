@@ -338,7 +338,6 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 	dynamicTileLayer.push_back(skinNr == 0 ? 0 : ((skinNr - offset) / DYNAMIC_TILE_COUNT) + 1);
 
 	// process layer
-
 	std::vector<bool> processed(dynamicTileLayer.size(), false);
 	LevelDynamicTileData ldtData;
 	ldtData.id = LevelDynamicTileID::Fluid;
@@ -377,76 +376,14 @@ bool LevelReader::readFluidLayer(const std::string& layer, LevelData& data) cons
 				std::string size = std::to_string(width * TILE_SIZE_F) + "," + std::to_string(height * TILE_SIZE_F);
 				ldtData.properties.insert({ "size", size });
 				data.dynamicTiles.push_back(ldtData);
+
+				ldtData.properties.clear();
 			}
 		}
 	}
 
 	return true;
 }
-
-/*
-bool LevelReader::readLeverLayer(const std::string& layer, LevelData& data) const {
-	std::string layerData = layer;
-	int leverOffset = static_cast<int>(LevelDynamicTileID::Lever) + m_firstGidDynamicTiles - 1;
-	int onOffset = static_cast<int>(LevelDynamicTileID::SwitchableOn) + m_firstGidDynamicTiles - 1;
-	int offOffset = static_cast<int>(LevelDynamicTileID::SwitchableOff) + m_firstGidDynamicTiles - 1;
-
-	size_t pos = 0;
-	LeverData leData;
-
-	int skinNr;
-	int x = 0;
-	int y = 0;
-	while ((pos = layerData.find(",")) != std::string::npos) {
-		skinNr = std::stoi(layerData.substr(0, pos));
-		if (skinNr == 0) {
-			// ok, continue
-		}
-		else if ((skinNr - leverOffset) % DYNAMIC_TILE_COUNT == 0) {
-			// we've found a lever!
-			LevelDynamicTileData lever;
-			lever.id = LevelDynamicTileID::Lever;
-			lever.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
-			lever.skinNr = ((skinNr - leverOffset) / DYNAMIC_TILE_COUNT);
-			lever.spawnPosition = y * data.mapSize.x + x;
-			leData.levers.push_back(lever);
-		}
-		else if ((skinNr - onOffset) % DYNAMIC_TILE_COUNT == 0) {
-			LevelDynamicTileData switchTile;
-			switchTile.id = LevelDynamicTileID::SwitchableOn;
-			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
-			switchTile.skinNr = ((skinNr - onOffset) / DYNAMIC_TILE_COUNT);
-			switchTile.spawnPosition = y * data.mapSize.x + x;
-			leData.dependentSwitchableTiles.push_back(switchTile);
-		}
-		else if ((skinNr - offOffset) % DYNAMIC_TILE_COUNT == 0) {
-			LevelDynamicTileData switchTile;
-			switchTile.id = LevelDynamicTileID::SwitchableOff;
-			switchTile.position = sf::Vector2f(x * TILE_SIZE_F, y * TILE_SIZE_F);
-			switchTile.skinNr = ((skinNr - offOffset) / DYNAMIC_TILE_COUNT);
-			switchTile.spawnPosition = y * data.mapSize.x + x;
-			leData.dependentSwitchableTiles.push_back(switchTile);
-		}
-		else {
-			logError("Wrong tile id found on a lever layer, id = " + std::to_string(skinNr));
-			return false;
-		}
-
-		layerData.erase(0, pos + 1);
-
-		if (x + 1 >= data.mapSize.x) {
-			x = 0;
-			y++;
-		}
-		else {
-			x++;
-		}
-	}
-
-	data.levers.push_back(leData);
-
-	return true;
-}*/
 
 bool LevelReader::readLayers(tinyxml2::XMLElement* map, LevelData& data) const {
 	// pre-load level item layer

@@ -8,9 +8,9 @@
 typedef std::map<std::string, std::string> MapTileProperties;
 
 struct MapDynamicTileData final {
-	MapDynamicTileID id;
+	MapDynamicTileID id = MapDynamicTileID::VOID;
 	sf::Vector2f position;
-	int skinNr;
-	int objectID;
+	int skinNr = 0;
+	int objectID = -1;
 	MapTileProperties properties;
 };
