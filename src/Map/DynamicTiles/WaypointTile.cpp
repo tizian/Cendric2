@@ -15,12 +15,7 @@ bool WaypointTile::init(const MapTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f,
 		TILE_SIZE_F,
 		TILE_SIZE_F));
-
-	// possibly activate waypoint tile if already unlocked.
-	const CharacterCoreData& coreData = m_screen->getCharacterCore()->getData();
-	if (contains(coreData.waypointsUnlocked.at(m_map->getID()), m_objectID))
-		setActive();
-
+	
 	return true;
 }
 
@@ -46,6 +41,11 @@ void WaypointTile::loadAnimation(int skinNr) {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+
+	// possibly activate waypoint tile if already unlocked.
+	const CharacterCoreData& coreData = m_screen->getCharacterCore()->getData();
+	if (contains(coreData.waypointsUnlocked.at(m_map->getID()), m_objectID))
+		setActive();
 }
 
 void WaypointTile::update(const sf::Time& frameTime) {
@@ -57,7 +57,7 @@ void WaypointTile::update(const sf::Time& frameTime) {
 }
 
 void WaypointTile::activateWaypoint() {
-	m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_spawnPosition, m_portPosition);
+	m_screen->getCharacterCore()->setWaypointUnlocked(m_map->getID(), m_objectID, m_portPosition);
 	dynamic_cast<MapScreen*>(m_screen)->notifyWaypointUnlocked();
 	m_screen->setTooltipText("WaypointActivated", COLOR_GOOD, true);
 	g_resourceManager->playSound(getSoundPath());
@@ -95,10 +95,7 @@ void WaypointTile::setActive() {
 	addComponent(new LightComponent(LightData(
 		sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f),
 		sf::Vector2f(100.f, 100.f)), this));
-}
-
-void WaypointTile::setSpawnPosition(int spawnPosition) {
-	m_spawnPosition = spawnPosition;
+	setPosition(getPosition());
 }
 
 std::string WaypointTile::getSpritePath() const {

@@ -28,11 +28,9 @@ bool ParticleTile::init(const LevelTileProperties& properties) {
 	return true;
 }
 
-void ParticleTile::loadAnimation(int skinNr_) {
+void ParticleTile::loadAnimation(int skinNr) {
 	// initial values
 	m_state = GameObjectState::Idle;
-	int skinNr = skinNr_ / 2;
-	m_isForegroundTile = skinNr_ % 2 != 0;
 
 	loadParticleSystem(skinNr);
 }

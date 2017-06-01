@@ -238,8 +238,8 @@ void CharacterCore::setTriggerTriggered(const std::string& world, int pos) {
 	m_data.triggersTriggered.at(world).insert(pos);
 }
 
-void CharacterCore::setWaypointUnlocked(const std::string& map, int id, const sf::Vector2f& pos) {
-	m_data.waypointsUnlocked.at(map).insert({ id, pos });
+void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
+	m_data.waypointsUnlocked.at(map).insert({ objectID, pos });
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {

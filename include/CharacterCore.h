@@ -95,7 +95,7 @@ public:
 	// signal chest looted
 	void setChestLooted(const std::string& level, int pos);
 	// signal waypoint unlocked
-	void setWaypointUnlocked(const std::string& map, int id, const sf::Vector2f& pos);
+	void setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos);
 	// signal trigger triggered
 	void setTriggerTriggered(const std::string& world, int pos);
 	// getter for quest data. If there is none for that id, returns nullptr

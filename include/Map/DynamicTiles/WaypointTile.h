@@ -16,7 +16,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 
 	void setActive();
-	void setSpawnPosition(int spawnPosition);
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Waypoint; }
 
 private:
@@ -24,5 +23,4 @@ private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
 	sf::Vector2f m_portPosition;
-	int m_spawnPosition = -1;
 };
