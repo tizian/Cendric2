@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="291">
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="291">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -138,202 +138,6 @@
  <tileset firstgid="2375" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
  </tileset>
- <tileset firstgid="2475" name="tileset_map_meadows" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1311" columns="23">
-  <image source="../meadows/tileset_map_meadows.png" width="1200" height="3000"/>
-  <tile id="25">
-   <objectgroup draworder="index">
-    <object id="0" x="21" y="0" width="13" height="39"/>
-   </objectgroup>
-  </tile>
-  <tile id="48">
-   <objectgroup draworder="index"/>
-  </tile>
-  <tile id="94">
-   <objectgroup draworder="index"/>
-  </tile>
-  <tile id="102">
-   <objectgroup draworder="index">
-    <object id="0" x="-1" y="1" width="49" height="36"/>
-   </objectgroup>
-  </tile>
-  <tile id="167">
-   <properties>
-    <property name="light" value="25,30,100,90,1.0"/>
-   </properties>
-   <objectgroup draworder="index"/>
-   <animation>
-    <frame tileid="167" duration="100"/>
-    <frame tileid="168" duration="100"/>
-    <frame tileid="169" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="208">
-   <objectgroup draworder="index">
-    <object id="0" x="15" y="1" width="23" height="29"/>
-   </objectgroup>
-  </tile>
-  <tile id="234">
-   <objectgroup draworder="index">
-    <object id="0" x="14" y="-1" width="12" height="34"/>
-   </objectgroup>
-  </tile>
-  <tile id="245">
-   <objectgroup draworder="index"/>
-  </tile>
-  <tile id="404">
-   <animation>
-    <frame tileid="404" duration="100"/>
-    <frame tileid="405" duration="100"/>
-    <frame tileid="406" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="427">
-   <animation>
-    <frame tileid="427" duration="100"/>
-    <frame tileid="428" duration="100"/>
-    <frame tileid="429" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="614">
-   <objectgroup draworder="index">
-    <object id="0" x="34" y="-1" width="35" height="33"/>
-   </objectgroup>
-  </tile>
-  <tile id="650">
-   <properties>
-    <property name="light" value="40,40,100,110,1.0"/>
-   </properties>
-  </tile>
-  <tile id="651">
-   <properties>
-    <property name="light" value="10,40,100,110,1.0"/>
-   </properties>
-  </tile>
-  <tile id="673">
-   <objectgroup draworder="index">
-    <object id="0" x="9" y="0" width="7" height="49"/>
-   </objectgroup>
-  </tile>
-  <tile id="674">
-   <objectgroup draworder="index">
-    <object id="0" x="36" y="0" width="8" height="50"/>
-   </objectgroup>
-  </tile>
-  <tile id="676">
-   <objectgroup draworder="index"/>
-  </tile>
-  <tile id="790">
-   <objectgroup draworder="index">
-    <object id="0" x="21.3333" y="-0.333333" width="8" height="42.6667"/>
-   </objectgroup>
-  </tile>
-  <tile id="887">
-   <objectgroup draworder="index">
-    <object id="0" x="41" y="0" width="19" height="41"/>
-   </objectgroup>
-  </tile>
-  <tile id="905">
-   <objectgroup draworder="index">
-    <object id="0" x="4" y="1" width="8" height="26"/>
-   </objectgroup>
-  </tile>
- </tileset>
- <tileset firstgid="3786" name="tileset_map_gandria" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304" columns="48">
-  <image source="../gandria/tileset_map_gandria.png" width="2500" height="2500"/>
-  <tile id="17">
-   <objectgroup draworder="index">
-    <object id="1" x="18" y="3" width="63" height="46"/>
-   </objectgroup>
-  </tile>
-  <tile id="50">
-   <objectgroup draworder="index">
-    <object id="1" x="22" y="-2" width="14" height="49"/>
-   </objectgroup>
-  </tile>
-  <tile id="65">
-   <objectgroup draworder="index">
-    <object id="2" x="18" y="0" width="65" height="48"/>
-   </objectgroup>
-  </tile>
-  <tile id="158">
-   <properties>
-    <property name="light" value="25,25,100,150,0.5"/>
-   </properties>
-  </tile>
-  <tile id="197">
-   <objectgroup draworder="index">
-    <object id="1" x="39" y="-1" width="27" height="35"/>
-   </objectgroup>
-  </tile>
-  <tile id="202">
-   <objectgroup draworder="index">
-    <object id="1" x="0" y="0" width="50" height="38"/>
-   </objectgroup>
-  </tile>
-  <tile id="241">
-   <objectgroup draworder="index">
-    <object id="1" x="9" y="-1" width="27" height="44"/>
-   </objectgroup>
-  </tile>
-  <tile id="396">
-   <properties>
-    <property name="light" value="25,10,150,100,0.8"/>
-   </properties>
-   <animation>
-    <frame tileid="396" duration="100"/>
-    <frame tileid="397" duration="100"/>
-    <frame tileid="398" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="433">
-   <objectgroup draworder="index">
-    <object id="2" x="17" y="-2" width="13" height="38"/>
-   </objectgroup>
-  </tile>
-  <tile id="538">
-   <properties>
-    <property name="light" value="25,20,100,100,0.8"/>
-   </properties>
-  </tile>
-  <tile id="586">
-   <objectgroup draworder="index">
-    <object id="1" x="8" y="21" width="33" height="24"/>
-   </objectgroup>
-  </tile>
-  <tile id="829">
-   <properties>
-    <property name="light" value="27,23,100,100,0.8"/>
-   </properties>
-  </tile>
-  <tile id="1008">
-   <animation>
-    <frame tileid="1008" duration="100"/>
-    <frame tileid="1010" duration="100"/>
-    <frame tileid="1012" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="1009">
-   <animation>
-    <frame tileid="1009" duration="100"/>
-    <frame tileid="1011" duration="100"/>
-    <frame tileid="1013" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="1056">
-   <animation>
-    <frame tileid="1056" duration="100"/>
-    <frame tileid="1058" duration="100"/>
-    <frame tileid="1060" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="1057">
-   <animation>
-    <frame tileid="1057" duration="100"/>
-    <frame tileid="1059" duration="100"/>
-    <frame tileid="1061" duration="100"/>
-   </animation>
-  </tile>
- </tileset>
  <layer name="BG 1" width="50" height="40">
   <data encoding="csv">
 724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,724,
@@ -404,14 +208,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,732,733,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1164,1165,1166,780,781,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1212,1213,1214,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -450,9 +254,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,927,928,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,975,976,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1215,1216,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -732,52 +536,7 @@
 </data>
  </layer>
  <objectgroup name="collidable" visible="0"/>
- <objectgroup name="trigger">
-  <object id="235" x="1350" y="80" width="50" height="30">
-   <properties>
-    <property name="map entry" value="res/map/gandria/gandria.tmx,1715,3222"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="276" x="550" y="390" width="50" height="30">
-   <properties>
-    <property name="level entry" value="res/level/smallcrypt/smallcrypt.tmx,305,460"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="279" x="1400" y="1585" width="50" height="30">
-   <properties>
-    <property name="map entry" value="res/map/necrohall/necrohall.tmx,615,140"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="281" x="1350" y="470" width="50" height="30">
-   <properties>
-    <property name="condition" value="swampbridge_open"/>
-    <property name="level entry" value="res/level/swampbridge/swampbridge.tmx,160,1210"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="285" x="1350" y="740" width="50" height="30">
-   <properties>
-    <property name="condition" value="swampbridge_open"/>
-    <property name="level entry" value="res/level/swampbridge/swampbridge.tmx,2250,1210"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="288" x="1900" y="1300" width="50" height="30">
-   <properties>
-    <property name="level entry" value="res/level/swampforest/swampforest.tmx,1750, 1210"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="290" x="350" y="1450" width="100" height="50">
-   <properties>
-    <property name="level entry" value="res/level/ascent/ascent.tmx,2535,3210"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="trigger"/>
  <objectgroup name="npc"/>
  <objectgroup name="light" visible="0"/>
 </map>
