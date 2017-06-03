@@ -42,6 +42,10 @@ Haab
 
 "Gandria Theme"
 
+"Garden Theme"
+
+"Sewers of Gandria Theme"
+
 ---
 
 -- Isa --
@@ -198,6 +202,10 @@ Haab
 
 "Gandria Theme"
 
+"Garden Theme"
+
+"Sewers of Gandria Theme"
+
 ---
 
 -- Isa --
@@ -350,6 +358,10 @@ Haab
 "Meadows Theme"
 
 "Gandria Theme"
+
+"Garden Theme"
+
+"Sewers of Gandria Theme"
 
 ---
 

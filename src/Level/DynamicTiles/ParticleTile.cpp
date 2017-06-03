@@ -197,11 +197,11 @@ void ParticleTile::loadParticleSystem(int skinNr) {
 		loadFlameParticles();
 		break;
 	case 1:
-		loadWaterParticles();
+		loadEmberParticles();
 		break;
 	case 2:
 	default:
-		loadEmberParticles();
+		loadWaterParticles();
 		break;
 	}
 }
