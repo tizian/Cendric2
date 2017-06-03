@@ -63,7 +63,6 @@ bool DoorMapTile::init(const MapTileProperties& properties) {
 		}
 	}
 
-	reloadConditions();
 	return true;
 }
 
@@ -82,6 +81,7 @@ void DoorMapTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Closed, closedAnimation);
 
 	playCurrentAnimation(false);
+	reloadConditions();
 }
 
 std::string DoorMapTile::getSpritePath() const {

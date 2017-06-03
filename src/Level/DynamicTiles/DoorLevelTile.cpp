@@ -17,7 +17,7 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	}
 
 	if (!contains(properties, std::string("width"))) return false;
-	int m_tileWidth = std::stoi(properties.at(std::string("width")));
+	m_tileWidth = std::stoi(properties.at(std::string("width")));
 	if (m_tileWidth < 1 || m_tileWidth > 2) return false;
 
 	if (!contains(properties, std::string("strength"))) return false;

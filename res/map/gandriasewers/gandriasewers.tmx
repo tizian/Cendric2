@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="315">
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="315">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="explorable" value=""/>
-  <property name="musicpath" value="res/music/meadows.ogg"/>
+  <property name="musicpath" value="res/music/sewers.ogg"/>
   <property name="tilesetpath" value="res/map/gandriasewers/tileset_map_gandriasewers.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_gandriasewers" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="437" columns="23">
