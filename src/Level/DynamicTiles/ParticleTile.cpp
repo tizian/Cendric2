@@ -230,7 +230,7 @@ particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::strin
 		colGen->minStartCol = sf::Color(214, 64, 38);
 		colGen->maxStartCol = sf::Color(237, 102, 26);
 		colGen->minEndCol = sf::Color(163, 29, 6);
-		colGen->maxEndCol = sf::Color((155, 64, 0));
+		colGen->maxEndCol = sf::Color(155, 64, 0);
 	}
 	else {
 		g_logger->logWarning("ParticleTile", "Unknown water color: " + color);
