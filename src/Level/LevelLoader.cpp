@@ -25,6 +25,7 @@ void LevelLoader::loadDynamicTileData(std::vector<LevelDynamicTileData>& data, L
 		}
 
 		tile->setObjectID(it.objectID);
+		tile->setPosition(it.position + tile->getPositionOffset());
 		if (!tile->init(it.properties)) {
 			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, initialization failed.");
 			delete tile;

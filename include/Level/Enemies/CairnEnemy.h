@@ -6,6 +6,9 @@
 class Level;
 class Screen;
 
+// skins:
+// 0 : default (ice cairn)
+// 1 : fire cairn
 class CairnEnemy final : public Enemy {
 public:
 	CairnEnemy(const Level* level, Screen* screen);

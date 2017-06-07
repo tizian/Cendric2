@@ -22,8 +22,8 @@ OozeEnemy::OozeEnemy(const Level* level, Screen* screen) :
 void OozeEnemy::loadAttributes() {
 	m_attributes.setHealth(50);
 	m_attributes.resistancePhysical = 100;
-	m_attributes.resistanceIce = 10;
-	m_attributes.resistanceFire = -20;
+	m_attributes.resistanceIce = m_skinNr == 0 ? 10 : -50;
+	m_attributes.resistanceFire = m_skinNr == 0 ? -20 : 1000;
 	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }
@@ -32,8 +32,8 @@ void OozeEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(500);
-	chopSpell.damage = 5;
-	chopSpell.damageType = DamageType::Shadow;
+	chopSpell.damage = 10;
+	chopSpell.damageType = m_skinNr == 0 ? DamageType::Shadow : DamageType::Fire;
 	chopSpell.damagePerSecond = 5;
 	chopSpell.duration = sf::seconds(1.f);
 	chopSpell.boundingBox = *getBoundingBox();
@@ -81,43 +81,33 @@ void OozeEnemy::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::milliseconds(200));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0 * width, 0, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, 0, width, height));
-	idleAnimation->addFrame(sf::IntRect(2 * width, 0, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect(0 * width, height * skinNr, width, height));
+	idleAnimation->addFrame(sf::IntRect(1 * width, height * skinNr, width, height));
+	idleAnimation->addFrame(sf::IntRect(2 * width, height * skinNr, width, height));
+	idleAnimation->addFrame(sf::IntRect(1 * width, height * skinNr, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* walkingAnimation = new Animation(sf::milliseconds(150));
 	walkingAnimation->setSpriteSheet(tex);
-	walkingAnimation->addFrame(sf::IntRect(3 * width, 0, width, height));
-	walkingAnimation->addFrame(sf::IntRect(4 * width, 0, width, height));
-	walkingAnimation->addFrame(sf::IntRect(5 * width, 0, width, height));
-	walkingAnimation->addFrame(sf::IntRect(6 * width, 0, width, height));
-	walkingAnimation->addFrame(sf::IntRect(7 * width, 0, width, height));
-	walkingAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	for (int i = 3; i < 9; ++i) {
+		walkingAnimation->addFrame(sf::IntRect(i * width, height * skinNr, width, height));
+	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect(9 * width, height * skinNr, width, height));
 	jumpingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(11 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(12 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(13 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(14 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(15 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(16 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(17 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(18 * width, 0, width, height));
-	deadAnimation->addFrame(sf::IntRect(19 * width, 0, width, height));
+	for (int i = 10; i < 20; ++i) {
+		deadAnimation->addFrame(sf::IntRect(i * width, height * skinNr, width, height));
+	}
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);

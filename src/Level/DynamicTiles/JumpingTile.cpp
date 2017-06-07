@@ -6,6 +6,9 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Jumping, JumpingTile)
 
+const float JumpingTile::GRAVITY_ACCELERATION = 1000.f;
+const float JumpingTile::AGGRO_DISTANCE = 200.f;
+
 JumpingTile::JumpingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
 	MovableGameObject() {
@@ -15,6 +18,7 @@ JumpingTile::JumpingTile(LevelScreen* levelScreen) :
 bool JumpingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 	setPositionOffset(sf::Vector2f(10.f, 10.f));
+	m_initialPosition = getPosition();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
@@ -42,7 +46,6 @@ bool JumpingTile::init(const LevelTileProperties& properties) {
 	m_initialVelocity.y = std::round(velocity * std::sin(phi));
 
 	m_waitingSpan = sf::milliseconds(waiting);
-	m_initialPosition = getPosition();
 
 	return true;
 }
@@ -106,10 +109,10 @@ void JumpingTile::update(const sf::Time& frameTime) {
 	updateTime(m_damageCooldown, frameTime);
 
 	if (m_isWaiting) {
-		if (m_isAggro && dist(m_mainChar->getCenter(), getCenter()) > AGGRO_DISTANCE) {
+		updateTime(m_waitingTime, frameTime);
+		if (m_isAggro && std::abs(m_mainChar->getCenter().x - getCenter().x) > AGGRO_DISTANCE) {
 			return;
 		}
-		updateTime(m_waitingTime, frameTime);
 		if (m_waitingTime == sf::Time::Zero) {
 			m_isWaiting = false;
 			changeDirection();
@@ -136,7 +139,6 @@ void JumpingTile::update(const sf::Time& frameTime) {
 	calculateNextPosition(frameTime, nextPosition);
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
-
 
 	// rotate sprite
 	setSpriteRotation(atan2(m_velocity.y, m_velocity.x));

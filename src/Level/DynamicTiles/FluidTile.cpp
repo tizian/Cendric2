@@ -273,6 +273,7 @@ void FluidTile::onHit(Spell* spell) {
 void FluidTile::onHit(LevelMovableGameObject* mob) {
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
+	if (mob->getBoundingBox()->top + mob->getBoundingBox()->height < getBoundingBox()->top + 2.f) return;
 
 	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f, 0.5f);
 

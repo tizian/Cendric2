@@ -33,5 +33,4 @@ private:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
-	int m_skinNr;
 };

@@ -34,8 +34,8 @@ private:
 	std::string getSpritePath() const override;
 
 private:
-	const float GRAVITY_ACCELERATION = 1000.f;
-	const float AGGRO_DISTANCE = 200.f;
+	static const float GRAVITY_ACCELERATION;
+	static const float AGGRO_DISTANCE;
 	
 	sf::Vector2f m_initialVelocity;
 	sf::Time m_waitingSpan = sf::Time::Zero;

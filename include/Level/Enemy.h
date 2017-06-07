@@ -149,6 +149,7 @@ protected:
 
 protected:
 	InteractComponent* m_interactComponent;
+	int m_skinNr;
 
 private:
 	sf::RectangleShape m_hpBar;

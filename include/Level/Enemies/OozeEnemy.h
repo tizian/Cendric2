@@ -7,6 +7,9 @@
 #include "Screens/Screen.h"
 
 // Oozes can creep on walls...
+// skins:
+// 1 : shadowy green slime
+// 2 : lava slime
 class OozeEnemy final : public Enemy {
 public:
 	OozeEnemy(const Level* level, Screen* screen);

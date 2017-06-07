@@ -107,7 +107,6 @@ sf::Time WispEnemy::getConfiguredChasingTime() const {
 }
 
 void WispEnemy::loadAnimation(int skinNr) {
-	m_skinNr = skinNr;
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
 	setSpriteOffset(sf::Vector2f(-30.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
