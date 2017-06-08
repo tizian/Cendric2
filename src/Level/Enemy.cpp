@@ -35,6 +35,7 @@ Enemy::~Enemy() {
 }
 
 void Enemy::load(int skinNr) {
+	m_skinNr = skinNr;
 	if (m_name.empty())
 		m_name = EnumNames::getEnemyName(getEnemyID());
 
@@ -323,7 +324,7 @@ void Enemy::setStunned(const sf::Time& stunnedTime) {
 }
 
 void Enemy::addDamageOverTime(DamageOverTimeData& data) {
-	if (m_isDead || data.damageType == DamageType::VOID) return;
+	if (m_isDead || data.damageType == DamageType::VOID || data.damage <= 0) return;
 	m_buffBar->addDotBuff(data.duration, data.damageType);
 	LevelMovableGameObject::addDamageOverTime(data);
 }

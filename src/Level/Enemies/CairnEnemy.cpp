@@ -16,7 +16,7 @@ void CairnEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& gold) 
 		loot.insert({ "mi_stone", rand() % 3 + 1 });
 	}
 	else {
-		loot.insert({ "mi_corrupt_stone", 1 });
+		loot.insert({ m_skinNr == 0 ? "mi_corrupt_stone_ice" : "mi_corrupt_stone_fire", 1 });
 	}
 }
 
@@ -27,7 +27,7 @@ void CairnEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) 
 		loot.insert({ "mi_stone", 1 });
 	}
 	else {
-		loot.insert({ "mi_corrupt_stone", 1 });
+		loot.insert({ m_skinNr == 0 ? "mi_corrupt_stone_ice" : "mi_corrupt_stone_fire", 1 });
 	}
 }
 
@@ -38,22 +38,22 @@ CairnEnemy::CairnEnemy(const Level* level, Screen* screen) :
 
 void CairnEnemy::loadAttributes() {
 	m_attributes.setHealth(100);
-	m_attributes.resistanceIce = 15;
-	m_attributes.resistanceFire = 10;
+	m_attributes.resistanceIce = m_skinNr == 0 ? 1000 : -10;
+	m_attributes.resistanceFire = m_skinNr == 0 ? -10 : 1000;
 	m_attributes.resistanceShadow = 10;
 	m_attributes.calculateAttributes();
 }
 
 void CairnEnemy::loadSpells() {
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
-	fireBallSpell.damage = 6;
-	fireBallSpell.damagePerSecond = 0;
+	fireBallSpell.damage = m_skinNr == 0 ? 6 : 10;
+	fireBallSpell.damagePerSecond = m_skinNr == 0 ? 0 : 5;
 	fireBallSpell.duration = sf::seconds(2);
 	fireBallSpell.cooldown = sf::milliseconds(3000);
-	fireBallSpell.speed = 400.f;
+	fireBallSpell.speed = m_skinNr == 0 ? 400.f : 200.f;
 	fireBallSpell.isDynamicTileEffect = false;
-	fireBallSpell.damageType = DamageType::Ice;
-	fireBallSpell.skinNr = 4;
+	fireBallSpell.damageType = m_skinNr == 0 ? DamageType::Ice : DamageType::Fire;
+	fireBallSpell.skinNr = m_skinNr == 0 ? 4 : 0;
 	fireBallSpell.isBlocking = true;
 	fireBallSpell.castingTime = sf::milliseconds(7 * 100);
 	fireBallSpell.fightingTime = sf::Time::Zero;
@@ -76,33 +76,36 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
+	int width = 100;
+	int height = 120;
+
 	// Idle
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	idleAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// Walking
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * 100, 0, 100, 120));
+		walkingAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
 	}
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	// Casting
 	Animation* castingAnimation = new Animation(sf::seconds(0.12f));
 	castingAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 7; ++i) {
-		castingAnimation->addFrame(sf::IntRect(1400 + i * 100, 0, 100, 120));
+	for (int i = 14; i < 21; ++i) {
+		castingAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
 	}
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
 	// Death
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 6; ++i) {
-		deadAnimation->addFrame(sf::IntRect(800 + i * 100, 0, 100, 120));
+	for (int i = 8; i < 14; ++i) {
+		deadAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -110,7 +113,7 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	// Jump (not used)
 	Animation* jumpingAnimation = new Animation(sf::seconds(0.12f));
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(800, 0, 100, 120));
+	jumpingAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	// initial values

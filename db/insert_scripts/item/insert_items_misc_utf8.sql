@@ -102,11 +102,17 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_stone', 'item_desc', 'A small stone.','Ein kleiner Stein.','En chliine Stei.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_stone', 'misc', 250, 350, 4);
 
--- Corrupt stone
+-- Corrupt stone (Ice)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item', 'Corrupted Stone','Verdorbener Stein','Verdorbene Stei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone', 'misc', 300, 350, 28);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item', 'Corrupted Ice Stone','Verdorbener Eisstein','Verdorbene Iisstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 28);
+
+-- Corrupt stone (Fire)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item', 'Corrupted Fire Stone','Verdorbener Feuerstein','Verdorbene Füürstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 28);
 
 -- Pile of Magical Pearls
 

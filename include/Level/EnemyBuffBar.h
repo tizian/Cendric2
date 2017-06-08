@@ -9,6 +9,16 @@
 
 class Enemy;
 
+enum class EnemyBuffType {
+	Physical,
+	Fire,
+	Ice,
+	Light,
+	Shadow,
+	Stun,
+	Fear
+};
+
 // the buff bar that displays debuffs (maybe later buffs too) on an enemy
 class EnemyBuffBar final {
 public:
@@ -24,7 +34,7 @@ public:
 	void update(const sf::Time& frameTime);
 
 private:
-	std::vector<std::pair<sf::Time, AnimatedSprite>> m_buffs;
+	std::map<EnemyBuffType, std::pair<sf::Time, AnimatedSprite>> m_buffs;
 	Enemy* m_enemy;
 
 	void calculateBuffPositions();
@@ -34,6 +44,7 @@ private:
 	Animation m_fearAnimation;
 	Animation m_stunAnimation;
 	std::map<DamageType, Animation> m_dotAnimations;
+	void addDebuff(EnemyBuffType debuffType, const Animation* animation, const sf::Time& time);
 
 	// initialize the animations
 	inline void initAnimations() {

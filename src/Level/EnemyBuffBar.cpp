@@ -13,27 +13,54 @@ EnemyBuffBar::~EnemyBuffBar() {
 }
 
 void EnemyBuffBar::addFeared(const sf::Time& duration) {
-	AnimatedSprite sprite;
-	sprite.setAnimation(&m_fearAnimation);
-	m_buffs.push_back(std::pair<sf::Time, AnimatedSprite>(duration, sprite));
+	addDebuff(EnemyBuffType::Fear, &m_fearAnimation, duration);
 }
 
 void EnemyBuffBar::addStunned(const sf::Time& duration) {
-	AnimatedSprite sprite;
-	sprite.setAnimation(&m_stunAnimation);
-	m_buffs.push_back(std::pair<sf::Time, AnimatedSprite>(duration, sprite));
+	addDebuff(EnemyBuffType::Stun, &m_stunAnimation, duration);
 }
 
 void EnemyBuffBar::addDotBuff(const sf::Time& duration, DamageType type) {
-	AnimatedSprite sprite;
-	sprite.setAnimation(&m_dotAnimations.at(type));
-	m_buffs.push_back(std::pair<sf::Time, AnimatedSprite>(duration, sprite));
+	EnemyBuffType buffType;
+	switch (type) {
+	case DamageType::Physical:
+		buffType = EnemyBuffType::Physical;
+		break;
+	case DamageType::Fire:
+		buffType = EnemyBuffType::Fire;
+		break;
+	case DamageType::Ice:
+		buffType = EnemyBuffType::Ice;
+		break;
+	case DamageType::Shadow:
+		buffType = EnemyBuffType::Shadow;
+		break;
+	case DamageType::Light:
+		buffType = EnemyBuffType::Light;
+		break;
+	default:
+		return;
+	}
+
+	addDebuff(buffType, &m_dotAnimations.at(type), duration);
 }
 
 void EnemyBuffBar::render(sf::RenderTarget& target) {
 	for (auto& buff : m_buffs) {
-		target.draw(buff.second);
+		target.draw(buff.second.second);
 	}
+}
+
+void EnemyBuffBar::addDebuff(EnemyBuffType debuffType, const Animation* animation, const sf::Time& time) {
+	if (contains(m_buffs, debuffType)) {
+		m_buffs.at(debuffType).first = sf::seconds(std::max(
+			time.asSeconds(),
+			m_buffs.at(debuffType).first.asSeconds()));
+		return;
+	}
+	AnimatedSprite sprite;
+	sprite.setAnimation(animation);
+	m_buffs.insert({ debuffType, std::pair<sf::Time, AnimatedSprite>(time, sprite) });
 }
 
 void EnemyBuffBar::clear() {
@@ -42,9 +69,9 @@ void EnemyBuffBar::clear() {
 
 void EnemyBuffBar::update(const sf::Time& frameTime) {
 	for (auto buffIt = m_buffs.begin(); buffIt != m_buffs.end(); /*don't increment here*/) {
-		updateTime(buffIt->first, frameTime);
-		buffIt->second.update(frameTime);
-		if (buffIt->first <= sf::Time::Zero) {
+		updateTime(buffIt->second.first, frameTime);
+		buffIt->second.second.update(frameTime);
+		if (buffIt->second.first <= sf::Time::Zero) {
 			buffIt = m_buffs.erase(buffIt);
 		}
 		else {
@@ -62,7 +89,7 @@ void EnemyBuffBar::calculateBuffPositions() {
 		bb->left + bb->width / 2.f - BUFF_SIZE / 2.f,
 		bb->top - m_enemy->getConfiguredDistanceToHPBar() - BUFFBAR_OFFSET_Y - BUFF_SIZE);
 	for (auto& buff : m_buffs) {
-		buff.second.setPosition(position);
+		buff.second.second.setPosition(position);
 		position.y -= BUFF_SIZE;
 	}
 }

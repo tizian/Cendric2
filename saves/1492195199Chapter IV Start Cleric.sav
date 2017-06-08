@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:13409
+time.played:14574
 savegame.name:Chapter IV Start Cleric
-savegame.date:1496785924
-level.id:res/level/swampforest/swampforest.tmx
-level.position:210.000000,760.000000
+savegame.date:1496864764
+level.id:res/level/ascent/ascent.tmx
+level.position:1635.000000,3210.000000
 is.in.level:0
 map.id:res/map/marshland/marshland.tmx
-map.position:382.427673,1661.798950
+map.position:411.709167,1609.952637
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
@@ -57,7 +57,7 @@ item.id:fo_physalis,2
 item.id:fo_rawchicken,4
 item.id:fo_rawfish,1
 item.id:fo_rawmeat,26
-item.id:fo_redhat,2
+item.id:fo_redhat,3
 item.id:fo_roastedmeat,22
 item.id:fo_sausage,2
 item.id:fo_stormweed,1
@@ -100,7 +100,7 @@ stored.gold:0
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:3,1,2,3,1,4,1
 equipped.spellslot:4,5,2,6,1
-equipped.spellslot:2,1,2,4,1
+equipped.spellslot:5,5,2,3,1
 equipped.spellslot:18,2,2,5,2
 # equipment:
 equipped.back:eq_back_divinet1
@@ -114,7 +114,7 @@ equipped.weapon:we_lightningpike
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;
 weapon.configs:we_hawthorn;2;
-weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;2,1,2,4,1;18,2,2,5,2;
+weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;5,5,2,3,1;18,2,2,5,2;
 weapon.configs:we_ordermace;17,2,1;2,1,1;
 weapon.configs:we_simplesword;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;18,5,1;
@@ -125,6 +125,7 @@ weapon.spell:16
 quickslot:1,fo_greaterhealingpotion
 quickslot:2,fo_mediumhealingpotion
 # enemies killed in level:
+enemies.killed:res/level/ascent/ascent.tmx
 enemies.killed:res/level/boss_elysia/boss_elysia.tmx
 enemies.killed:res/level/boss_janus/boss_janus.tmx
 enemies.killed:res/level/boss_khajag/boss_khajag.tmx
@@ -152,6 +153,7 @@ enemies.killed:res/level/swampforest/swampforest.tmx
 enemies.killed:res/level/syrahbasement/syrahbasement.tmx
 enemies.killed:res/level/well/well.tmx
 # enemies looted in level:
+enemies.looted:res/level/ascent/ascent.tmx
 enemies.looted:res/level/boss_elysia/boss_elysia.tmx
 enemies.looted:res/level/boss_janus/boss_janus.tmx
 enemies.looted:res/level/boss_khajag/boss_khajag.tmx
@@ -179,6 +181,7 @@ enemies.looted:res/level/swampforest/swampforest.tmx,157
 enemies.looted:res/level/syrahbasement/syrahbasement.tmx,147,161,162,163,167
 enemies.looted:res/level/well/well.tmx
 # items looted in level:
+items.looted:res/level/ascent/ascent.tmx,2432
 items.looted:res/level/boss_elysia/boss_elysia.tmx
 items.looted:res/level/boss_janus/boss_janus.tmx
 items.looted:res/level/boss_khajag/boss_khajag.tmx
@@ -206,6 +209,7 @@ items.looted:res/level/swampforest/swampforest.tmx,492,917,939,1084
 items.looted:res/level/syrahbasement/syrahbasement.tmx,58,64,121,122,179,1018,1021
 items.looted:res/level/well/well.tmx,744
 # chests looted in level:
+chests.looted:res/level/ascent/ascent.tmx
 chests.looted:res/level/boss_elysia/boss_elysia.tmx
 chests.looted:res/level/boss_janus/boss_janus.tmx
 chests.looted:res/level/boss_khajag/boss_khajag.tmx
@@ -239,6 +243,7 @@ waypoints.unlocked:res/map/marshland/marshland.tmx,227,1366.000000,210.000000,29
 waypoints.unlocked:res/map/meadows/meadows.tmx,748,2416.000000,510.000000,1002,1116.000000,710.000000,1387,2866.000000,960.000000,2327,866.000000,1660.000000,2630,2016.000000,1860.000000,3556,2816.000000,2510.000000,3872,1116.000000,2760.000000,3893,2166.000000,2760.000000,4337,3366.000000,3060.000000
 # modifiers unlocked:
 # triggers triggered in world:
+triggers.triggered:res/level/ascent/ascent.tmx
 triggers.triggered:res/level/boss_elysia/boss_elysia.tmx
 triggers.triggered:res/level/boss_janus/boss_janus.tmx
 triggers.triggered:res/level/boss_khajag/boss_khajag.tmx
@@ -280,7 +285,7 @@ triggers.triggered:res/map/tavern_1/tavern_1.tmx
 # tiles explored in world:
 tiles.explored:res/map/gandria/gandria.tmx,80,70,               ü        þ       þÿ       ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ    ü€ÿÿ    þÿ€ÿÿ    ÿÿýÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    þÿÿÿÿ    üÿÿÿÿ    þÿÿÿÿ     þÿÿ      þÿÿ     øÿÿÿ     üÿÿÿ?     þÿÿÿ     þÿÿÿ     þÿÿÿ     þÿÿÿ   üþÿÿÿ   þþÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿøÿÿÿÿÿÿçÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ ðÿÿÿÿÿÿÿ ðÿÿÿÿÿÿÿ ðÿÿ?ÿÿÿÿÿ ðÿÿÿÿÿÿÿ à?ÿÿÿÿÿÿ Àþ ÿûÿÿÿ     ÿ ðÿ     ÿ àÿ     ÿ àÿ     ÿ àÿ     ÿ À     ,
 tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿ   ÿ   ÿ   ÿ   ÿ   ÿ   ÿ ÿÿÿ‡ÿÿÿÿÏÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ,
-tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü  Àÿÿ  €ÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  þÿÿ  ðþ    ü    øÿ   àÿ   €ÿ?    þÿ?   üÿÿ  øÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ?  ÿÿÿÿ  þÿÿÿðÿÿÿÿàÿÿÿÿ?Àÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿðÿÿÿÿ Àÿÿÿÿ ÿÿÿÿ üÿÿÿ? ðÿü €ÿÿàÿ  üÿ   ,
+tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü  Àÿÿ  €ÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  þÿÿ  ðþ    ü    øÿ   àÿ   €ÿ?    þÿ?   üÿÿ  øÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿÀ?üÿÿ?€ÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿðÿÿÿÿ?Àÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿðÿÿÿÿ Àÿÿÿÿ ÿÿÿÿ üÿÿÿ? ðÿü €ÿÿàÿ  üÿ   ,
 tiles.explored:res/map/meadows/meadows.tmx,70,70,  à? üƒ?   ü€ÿñ   ÿðÿþ  Àÿüÿÿ  ðÿ ÿÿÿ   ü?Àÿÿ?  àÿðÿÿ  üÿüÿÿ €ÿÿ ÿÿÿ  àÿ?ÿÿÿ?  øÿïÿÿÿ  þÿÿÿÿÿ €ÿÿÿÿÿ?  àÿßÿÿÿ  øÿ÷ÿÿÿ €ÿÿýÿÿÿ ðÿÿÿÿ  þÿßÿÿÿ €ÿÿóÿÿÿ àÿüÿÿÿ øÿþÿÿ  þÿÿÿÿ Àÿÿ€ÿÿÿ øÿ?Àÿÿÿ þÿ  þ? €ÿÿ øÿ àÿÿ  ÿÿ øÿ? àÿ  þÿÿøÿ €ÿÿÿ?ÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ þÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ þÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿ þ€ÿÿÿÿ?€ÿüÿÿÿÿàÿƒÿÿÿÿÿ øðÿÿ‡?  þüÿð €ÿÿÿþ àÿÁÿ?€ÿ øðÿÿçÿ þüÿÿûÿ€ÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿ þÿÿÿÿÿÿ€ÿÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ¿ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ àÿÿÿÿÿÿ àÿÿÿÿÿÿ  üÿÿÿÿÿ   þÿÿÿÿ   üÿÿÿ    þÿÿÿ     €ÿ      ,0000
 # quest states:
 quest.state:a_new_trace,2
