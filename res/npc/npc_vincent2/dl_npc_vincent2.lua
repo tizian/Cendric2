@@ -94,19 +94,19 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and DL:hasItem("gold", 50)) then 
 		DL:addItemChoice(5, "DL_Choice_GimmeKey", "gold", 50) -- Give me that key, I'll do it.
 		end
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and not DL:hasItem("gold", 50)) then 
 		DL:addItemChoice(15, "DL_Choice_GimmeKey", "gold", 50) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and DL:hasItem("gold", 100)) then 
 		DL:addItemChoice(16, "DL_Choice_GimmeKey", "gold", 100) -- 
 		end
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and not DL:hasItem("gold", 100)) then 
 		DL:addItemChoice(17, "DL_Choice_GimmeKey", "gold", 100) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and DL:hasItem("gold", 150)) then 
 		DL:addItemChoice(18, "DL_Choice_GimmeKey", "gold", 150) -- 
 		end
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and not DL:hasItem("gold", 150)) then 
 		DL:addItemChoice(19, "DL_Choice_GimmeKey", "gold", 150) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and not (DL:isConditionFulfilled("npc_vincent2", "key_150") or DL:isConditionFulfilled("npc_vincent2", "key_100") or DL:isConditionFulfilled("npc_vincent2", "key_50")) ) then 
@@ -214,7 +214,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and not DL:hasItem("gold", 50)) then 
 
 			DL:createNPCNode(15, -1, "DL_Vincent_NotEnoughGold") -- Come back when you have enough gold.
 			DL:addNode()
@@ -235,7 +235,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and not DL:hasItem("gold", 100)) then 
 
 			DL:createNPCNode(17, -1, "DL_Vincent_NotEnoughGold") -- 
 			DL:addNode()
@@ -256,7 +256,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")) then 
+		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and not DL:hasItem("gold", 150)) then 
 
 			DL:createNPCNode(19, -1, "DL_Vincent_NotEnoughGold") -- 
 			DL:addNode()

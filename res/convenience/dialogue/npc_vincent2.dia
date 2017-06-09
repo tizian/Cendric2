@@ -203,7 +203,7 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:15
-		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50")
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and not DL:hasItem("gold", 50)
 		# translation: 
 		translation.tag:DL_Choice_GimmeKey
 		translation.en:
@@ -227,7 +227,7 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:17
-		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100")
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and not DL:hasItem("gold", 100)
 		# translation: 
 		translation.tag:DL_Choice_GimmeKey
 		translation.en:
@@ -251,7 +251,7 @@ npc.id:npc_vincent2
 	[
 		# Link node, tag is next tag
 		tag:19
-		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150")
+		condition:DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and not DL:hasItem("gold", 150)
 		# translation: 
 		translation.tag:DL_Choice_GimmeKey
 		translation.en:
