@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_cat
+
+npc.id:npc_cat
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cat_Meow
+	translation.en:Meow!
+	translation.de:Miau!
+	translation.ch:Miau!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

@@ -127,9 +127,10 @@ void DisappearingTile::setPosition(const sf::Vector2f& pos) {
 
 void DisappearingTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
+	case SpellID::Telekinesis:
+		spell->setDisposed();
 	case SpellID::WindGust:
 	case SpellID::Chop:
-	case SpellID::Telekinesis:
 		touch();
 		break;
 	default:

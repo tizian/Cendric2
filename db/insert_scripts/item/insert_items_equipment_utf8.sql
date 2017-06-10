@@ -14,7 +14,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item_desc', 'Zeff crafted this hat for me in return for saving him.','Zeff hat diesen Hut für mich gemacht, als Dank für seine Rettung.','De Zeff het de Huet für mich gmacht, als Dank für sini Rettig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavahead', 'eq_head', 700, 50, 50);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavahead', 3, 100, -20, 10);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavahead', 'res/assets/equipment/head/spritesheet_head_eq_lavahead.png', 'res/assets/equipment/head/spritesheet_map_head_eq_lavahead.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavahead', 'res/assets/equipment/head/spritesheet_head_lavahead.png', 'res/assets/equipment/head/spritesheet_map_head_lavahead.png');
 
 -- Lava Armour
 

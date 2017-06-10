@@ -250,6 +250,20 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_oathbreaker', -7, -30, 50, 24);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_oathbreaker', 1, 200, 100, 50, 100);
 
+-- Fire Glaive
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Fire Glaive','Feuergleve','Füür Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon.','Eine sehr mächtige Waffe.','E sehr mächtigi Waffe');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 150);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, critical, haste) values ('we_fireglaive', 10, 20, 15, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 3, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 4, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 5, 'meta', 2);
+
 -- Jason's Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item', 'Jason''s Glaive','Jasons Gleve','Jasons Gleve');
