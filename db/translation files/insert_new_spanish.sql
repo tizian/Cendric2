@@ -8,6 +8,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guil
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoGuild','No Guild','Keine Gilde','Kei Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GuildJoned','Guild joined','Gilde beigetreten','Gilde biitrette','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LimitFPS','Limit FPS','FPS limitieren','FPS limitiere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a teleporter stone to teleport.','Du brauchst einen Teleportstein um dich zu teleportieren.', 'Du bruchsch en Teleportstei zum dich teleportiere.','?');
 -- when trying to open a chest/door or to revive / fear an enemy with a spell.
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughStrength','The spell is not strong enough!','Der Zauber ist nicht genügend stark!','De Zauber isch nid gnueg starch!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');

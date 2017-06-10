@@ -18,6 +18,10 @@ public:
 	void setActive();
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Waypoint; }
 
+public:
+	static const std::string TOOL_ITEM_ID;
+	static const std::string NO_TOOL_MSG;
+
 private:
 	void activateWaypoint();
 	std::string getSpritePath() const override;

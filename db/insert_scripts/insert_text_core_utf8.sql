@@ -128,6 +128,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Move
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveRight','Move right','Nach rechts bewegen','Rechts laufe','Ir a la derecha');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveUp','Move up','Nach oben bewegen','Uelaufe','Subir');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Necromancy','Necromancy','Nekromantie','Nekromantie','Necromancia');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a pickaxe to mine ore.','Du brauchst eine Spitzhacke um Erz abzubauen.', 'Du bruchsch en Pickel zum Erz hacke.','Necesitas una piqueta para minar minerales.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('New','New','Neu','Neu','Nuevo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewGame','New Game','Neues Spiel','Neus Spiel','Nueva partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewJournalEntry','New journal entry','Neuer Tagebucheintrag','Neue Tagebuechiitrag','Nueva entrada en el diario');
@@ -136,6 +137,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoQu
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!','¡No hay suficiente oro!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughStrength','The spell is not strong enough!','Der Zauber ist nicht genügend stark!','De Zauber isch nid gnueg starch!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughReputation','Not enough reputation!','Nicht genügend Ruf!','Nid gnueg Ruef!','¡No hay suficiente reputación!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToGain','Nothing to gain there anymore.','Da ist nichts mehr zu holen.', 'Da gits nüt me z''hole.','Nada que minar.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.','No hay de qué hablar.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoWeapon','No weapon','Keine Waffe','Kei Waffe','Sin arma');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoSpells','No spells learned.','Keine Zauber gelernt.','Kei Zauber glernt.','Sin hechizos aprendidos.');
@@ -272,8 +274,6 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSw
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSteal','to steal','- stehlen','zum chlaue','para robar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOpen','to open','- öffnen', 'zum ufmache','para abrir');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToMine','to mine','- abbauen', 'zum abbaue','para minar');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a pickaxe to mine ore.','Du brauchst eine Spitzhacke um Erz abzubauen.', 'Du bruchsch en Pickel zum Erz hacke.','Necesitas una piqueta para minar minerales.');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToGain','Nothing to gain there anymore.','Da ist nichts mehr zu holen.', 'Da gits nüt me z''hole.','Nada que minar.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz','Transparencia');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Fireplace','Fireplace','Kochstelle','Chochstell','Fogata');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]','[Nada que cocinar...]');
