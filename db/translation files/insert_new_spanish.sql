@@ -1,5 +1,6 @@
 -- core
 
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint_desc','After you''ve activated a waypoint, you can teleport back using a teleport stone.','Nachdem du einen Wegpunkt aktiviert hast, kannst du dich mit einem Teleportstein dorthin zurück teleportieren.','Wenn du en Wägpunkt aktiviert hesch, chasch dich mitme Teleportstei det ane zrugg teleportiere.','Después de activar las coordenadas, puedes teletransportarte de regreso siempre.???');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeActivated','Godmode activated','Godmode aktiviert','Godmode aktiviert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeDeactivated','Godmode deactivated','Godmode deaktiviert','Godmode deaktiviert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Keys','Keys','Schlüssel','Schlüssel');

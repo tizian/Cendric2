@@ -114,6 +114,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 28);
 
+-- Teleport Stone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_portstone', 'item', 'Teleport Stone','Teleportstein','Teleportstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_portstone', 'item_desc', 'I am able to teleport to activated waypoints using this stone.','Mit diesem Stein kann ich mich zu aktivierten Wegpunkten teleportieren.','Mit dem Stei chani mich zu aktivierte Wegpunkt teleportiere.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_portstone', 'misc', 700, 150, -1);
+
 -- Pile of Magical Pearls
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item', 'Pile of Magical Pearls','Haufen Magischer Perlen','Es Hüüfli Magischi Perle');

@@ -8,6 +8,22 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stephenhelmet', -10, -29, 31, 27);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_stephenhelmet', 1, 550, 100, 50, 100);
 
+-- Lava Crown
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item', 'Lava Crown','Lavakrone','Lava Chrone');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item_desc', 'Zeff crafted this hat for me in return for saving him.','Zeff hat diesen Hut für mich gemacht, als Dank für seine Rettung.','De Zeff het de Huet für mich gmacht, als Dank für sini Rettig.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavahead', 'eq_head', 700, 50, 50);
+INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavahead', 3, 100, -20, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavahead', 'res/assets/equipment/head/spritesheet_head_eq_lavahead.png', 'res/assets/equipment/head/spritesheet_map_head_eq_lavahead.png');
+
+-- Lava Armour
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaarmor', 'item', 'Lava Armour','Lavarüstung','Lava Rüschtig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaarmor', 'item_desc', 'A very hot armour made from the remains of lava wraiths. It fights fire with fire.','Eine sehr heisse Rüstung, angefertigt aus den Überresten von Lava Geistern. Sie bekämpft Feuer mit Feuer.','E sehr heissi Rüstig, gmacht us de Überreste vo Lava Geister. Si bekämpft Füür mit Füür.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaarmor', 'eq_body', 700, 100, 100);
+INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavaarmor', 5, 200, -40, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaarmor', 'res/assets/equipment/body/spritesheet_body_lavaarmor.png', 'res/assets/equipment/body/spritesheet_map_body_lavaarmor.png');
+
 -- Ice Hat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icehat', 'item', 'Zeff''s Masterpiece','Zeff''s Meisterwerk','Em Zeff sis Meisterwerk');

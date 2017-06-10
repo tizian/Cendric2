@@ -61,9 +61,11 @@ item.id:eq_head_twilightt2,1
 item.id:eq_head_twilightt3,1
 item.id:eq_huntershat,1
 item.id:eq_icearmor,1
+item.id:eq_lavaarmor,1
 item.id:eq_icehat,1
 item.id:eq_icescarf,1
 item.id:eq_ironring,1
+item.id:eq_lavahead,1
 item.id:eq_leatherarmor,1
 item.id:eq_lightpendant,1
 item.id:eq_mercenarybandana,1
@@ -147,6 +149,7 @@ item.id:mi_teeth,1
 item.id:mi_wolf_fur,1
 item.id:mi_dragonskull,1
 item.id:mi_janusglaive,1
+item.id:mi_portstone,1
 item.id:pe_elixirfire,1
 item.id:pe_elixirice,1
 item.id:pe_elixirlight,1

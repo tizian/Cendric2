@@ -14,6 +14,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Seagull','enemy','Seagull','Möwe','Möwe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wolf','enemy','Wolf','Wolf','Wolf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cairn','enemy','Cairn Wraith','Cairn Geist','Cairn Geist');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LavaCairn','enemy','Lava Wraith','Lava Geist','Lava Geist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MysteriousBeast','enemy','Mysterious Beast','Mysteriöses Biest','Mysteriöses Biescht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CavernBeast','enemy','Cavern Beast','Höhlenmonster','Höhlemonster');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossKhajag','enemy','Khajag, the Cavern Guardian','Khajag, Wächter der Höhlen','Khajag, Wächter vode Höhlene');
@@ -23,6 +24,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ob
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Warden','enemy','Warden Spell','Wächter-Zauber','Wächter-Zauber');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Prisoner','enemy','Prisoner','Gefangener','Gfangene');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ooze','enemy','Ooze','Schleim','Schleim');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LavaOoze','enemy','Liquid Lava','Flüssige Lava','Flüssigi Lava');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bat','enemy','Bat','Fledermaus','Flädermuus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElysiaFledgling','enemy','Elysia''s Fledgling','Elysia''s Küken','Bibeli vode Elysia');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossElysia','enemy','Elysia, Envoy of the Storm','Elysia, Gesandte des Sturms','Elysia, Gsandti vom Sturm');

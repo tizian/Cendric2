@@ -28,6 +28,8 @@ item.id:eq_bloodstone,1
 item.id:eq_defaultarmor,1
 item.id:eq_fireratscarf,1
 item.id:eq_huntershat,1
+item.id:eq_lavaarmor,1
+item.id:eq_lavahead,1
 item.id:eq_icearmor,1
 item.id:eq_icehat,1
 item.id:eq_ironring,1
@@ -82,6 +84,7 @@ item.id:mi_ironore,10
 item.id:mi_janusglaive,1
 item.id:mi_shinystone,2
 item.id:mi_silverplate,2
+item.id:mi_portstone,1
 item.id:mi_teeth,10
 item.id:mi_wolf_fur,3
 item.id:pe_elixirfire,1
