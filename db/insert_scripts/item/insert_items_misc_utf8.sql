@@ -58,7 +58,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item', 'Fur of a Fire Rat','Fell einer Feuerratte','Fell vonere Füürratte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item_desc', 'This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour out of it.','Diese Fell ist aussergewöhnlich gut erhalten. Vielleicht kann es jemand zu einer Rüstung verarbeiten.','Da Fell isch ussergwöhnlich guet erhalte. Vilicht chan öpper da drus e Rüstig mache.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firerat_fur', 'misc', 200, 350, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firerat_fur', 'misc', 200, 350, 15);
 
 -- Fur of a Wolf
 

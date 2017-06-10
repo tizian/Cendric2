@@ -7,6 +7,7 @@
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"
+#include "Map/DynamicTiles/WaypointTile.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -263,6 +264,7 @@ WaypointMarker::WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& wayp
 	m_mainChar = mainChar;
 	m_waypointPosition = waypointPosition;
 	m_isInputInDefaultView = true;
+	m_screen = parent->getScreen();
 }
 
 void WaypointMarker::loadAnimation() {
@@ -291,7 +293,9 @@ void WaypointMarker::loadAnimation() {
 
 	m_tooltip.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_tooltip.setTextStyle(TextStyle::Shadowed);
-	m_tooltip.setString(g_textProvider->getText("ClickToTeleport"));
+	if (m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) {
+		m_tooltip.setString(g_textProvider->getText("ClickToTeleport"));
+	}
 }
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
@@ -321,6 +325,13 @@ void WaypointMarker::render(sf::RenderTarget& target) {
 }
 
 void WaypointMarker::onRightClick() {
+	if (!m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) {
+		m_screen->setTooltipPositionTop(false);
+		m_screen->setNegativeTooltip(WaypointTile::NO_TOOL_MSG);
+		m_screen->setTooltipPositionTop(true);
+		return;
+	}
+
 	if (m_parent->isOnCurrentMap()) {
 		m_mainChar->setPosition(m_waypointPosition);
 	}

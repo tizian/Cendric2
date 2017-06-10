@@ -7,6 +7,9 @@
 
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Waypoint, WaypointTile)
 
+const std::string WaypointTile::TOOL_ITEM_ID = "mi_portstone";
+const std::string WaypointTile::NO_TOOL_MSG = "NeedPortstone";
+
 WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 	addComponent(new TooltipComponent(g_textProvider->getText("Waypoint"), this));
 }
@@ -71,6 +74,10 @@ void WaypointTile::onLeftClick() {
 void WaypointTile::onRightClick() {
 	if (m_state == GameObjectState::Idle) {
 		m_screen->setNegativeTooltip("WaypointNotActive");
+		return;
+	}
+	if (!m_screen->getCharacterCore()->hasItem(TOOL_ITEM_ID, 1)) {
+		m_screen->setNegativeTooltip(NO_TOOL_MSG);
 		return;
 	}
 	
