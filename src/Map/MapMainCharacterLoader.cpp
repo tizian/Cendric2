@@ -1,6 +1,7 @@
 #include "Map/MapMainCharacterLoader.h"
 #include "Map/MapMainCharacter.h"
 #include "Screens/MapScreen.h"
+#include "World/Item.h"
 
 MapMainCharacter* MapMainCharacterLoader::loadMainCharacter(Screen* screen, Map* map) {
 	MapMainCharacter* mainChar = new MapMainCharacter(map);
@@ -44,13 +45,13 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 
 	for (auto& it : gameData) {
 		Item* item_ = g_resourceManager->getItem(it);
-		if (item_ == nullptr || !item_->isValid()) {
+		if (item_ == nullptr || !item_->getCheck().isValid) {
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id: " + it);
 			continue;
 		}
 		Item& item = *item_;
 
-		if (!item.isEquipmentItem()) {
+		if (!item.getCheck().isEquipment) {
 			// this item has no equipment part
 			continue;
 		}
@@ -61,17 +62,18 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 		mapEquipment->setSpriteOffset(mainCharacter->getSpriteOffset());
 		mapEquipment->setDebugBoundingBox(COLOR_WHITE);
 
-		if (item.isEquipmentLightedItem()) {
-			const ItemEquipmentLightBean& lightBean = item.getEquipmentLightBean();
+		if (item.getCheck().isEquipmentLighted) {
+			const ItemEquipmentLightBean& lightBean = *item.getBean<ItemEquipmentLightBean>();
 			if (lightBean.map_light_radius.x > 0.f && lightBean.map_light_radius.y > 0.f) {
 				LightData lightData(LightData(sf::Vector2f(9.f, -30.f), lightBean.map_light_radius, lightBean.brightness));
 				mapEquipment->setLightComponent(lightData);
 			}
 		}
 
-		bool hasTexture = !item.getEquipmentBean().map_texture_path.empty();
+		auto const equipmentBean = item.getBean<ItemEquipmentBean>();
+		bool hasTexture = !equipmentBean->map_texture_path.empty();
 		if (hasTexture) {
-			const std::string& texturePath = item.getEquipmentBean().map_texture_path;
+			const std::string& texturePath = equipmentBean->map_texture_path;
 			g_resourceManager->loadTexture(texturePath, ResourceType::Map);
 			const sf::Texture* tex = g_resourceManager->getTexture(texturePath);
 

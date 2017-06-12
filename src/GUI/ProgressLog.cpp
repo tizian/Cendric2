@@ -12,9 +12,7 @@ ProgressLog::ProgressLog(const CharacterCore* core) : m_core(core) {
 }
 
 ProgressLog::~ProgressLog() {
-	for (auto it : m_logTexts) {
-		delete it;
-	}
+	CLEAR_VECTOR(m_logTexts);
 }
 
 void ProgressLog::update(const sf::Time& frameTime) {

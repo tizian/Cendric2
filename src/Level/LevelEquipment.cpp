@@ -10,7 +10,7 @@ LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObjec
 }
 
 void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipmentLightBean* light, ItemType type) {
-	if (itemBean == nullptr || itemBean->status == BeanStatus::NotSet) return;
+	if (itemBean == nullptr) return;
 	m_itemType = type;
 	const ItemEquipmentBean& eq = *itemBean;
 
@@ -44,9 +44,8 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipment
 
 	setBoundingBox(sf::FloatRect(0, 0, static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE)));
 
-	if (light != nullptr && light->status == BeanStatus::Filled) {
-		const ItemEquipmentLightBean& lightBean = *light;
-		LightData lightData(LightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness));
+	if (light != nullptr) {
+		LightData lightData(LightData(light->light_offset, light->light_radius, light->brightness));
 		setLightComponent(lightData);
 	}
 

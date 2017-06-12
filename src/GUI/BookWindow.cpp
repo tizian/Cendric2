@@ -13,14 +13,14 @@ BookWindow::BookWindow(const Item& item) : Window(
 	COLOR_LIGHT_BROWN, // back
 	COLOR_DARK_BROWN), // ornament 
 	m_item(item) {
-	auto const& pages = m_item.getDocumentPageBeans();
+	auto const pages = m_item.getBeans<ItemDocumentPageBean>();
 	assert(pages.size() > 0 && "A document has to have at least one page!");
 
 	// load resources
 	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);
-	for (auto const& page : pages) {
-		if (page.texture_path.empty()) continue;
-		g_resourceManager->loadTexture(page.texture_path, ResourceType::Unique, this);
+	for (auto const page : pages) {
+		if (page->texture_path.empty()) continue;
+		g_resourceManager->loadTexture(page->texture_path, ResourceType::Unique, this);
 	}
 
 	m_leftArrow = new ArrowButton(false);
@@ -92,30 +92,30 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 
 void BookWindow::setPage(int index) {
 	g_resourceManager->playSound(SOUND_PATH);
-	auto const& pages = m_item.getDocumentPageBeans();
+	auto const pages = m_item.getBeans<ItemDocumentPageBean>();
 	if (index < 0 || index > static_cast<int>(pages.size()) - 1) return;
 
 	m_currentPage = index;
 	auto const& page = pages.at(m_currentPage);
-	if (!page.title.empty() && page.content.empty()) {
+	if (!page->title.empty() && page->content.empty()) {
 		// handle a title page
-		m_bookTitle.setString(g_textProvider->getCroppedText(page.title, "document",
+		m_bookTitle.setString(g_textProvider->getCroppedText(page->title, "document",
 			GUIConstants::CHARACTER_SIZE_XL, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
 		m_title.setString("");
 		m_content.setString("");
 	}
 	else {
 		// handle a normal page
-		m_title.setString(g_textProvider->getCroppedText(page.title, "document",
+		m_title.setString(g_textProvider->getCroppedText(page->title, "document",
 			GUIConstants::CHARACTER_SIZE_L, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_content.setString(g_textProvider->getCroppedText(page.content, "document",
+		m_content.setString(g_textProvider->getCroppedText(page->content, "document",
 			GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH - 2 * MARGIN + 10)));
-		m_content.setTextAlignment(page.content_alignment);
+		m_content.setTextAlignment(page->content_alignment);
 		m_bookTitle.setString("");
 	}
 
 	// handle texture
-	if (sf::Texture* tex = g_resourceManager->getTexture(page.texture_path)) {
+	if (sf::Texture* tex = g_resourceManager->getTexture(page->texture_path)) {
 		m_sprite.setTexture(*tex, true);
 		m_showSprite = true;
 	}

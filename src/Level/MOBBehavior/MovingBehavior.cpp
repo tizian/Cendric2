@@ -94,7 +94,6 @@ sf::Time MovingBehavior::executeDefaultFightAnimation(bool isBlocking, int times
 }
 
 void MovingBehavior::setFacingRight(bool value) {
-	m_isFacingRight = value;
 	m_nextIsFacingRight = value;
 }
 

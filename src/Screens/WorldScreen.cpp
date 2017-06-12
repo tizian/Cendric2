@@ -99,9 +99,9 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 		getCharacterCore()->equipItem(itemID, type);
 	}
 	else {
-		auto bean = g_databaseManager->getItemBean(itemID);
-		if (bean.status != BeanStatus::Filled) return;
-		getCharacterCore()->equipItem(bean.item_id, bean.item_type);
+		auto const item = g_resourceManager->getItem(itemID);
+		if (!item) return;
+		getCharacterCore()->equipItem(item->getID(), item->getType());
 	}
 
 	m_interface->reloadInventory();
@@ -355,10 +355,7 @@ void WorldScreen::quicksave() {
 }
 
 void WorldScreen::execOnExit(const Screen* nextScreen) {
-	for (auto& it : m_overlayQueue) {
-		delete it;
-	}
-	m_overlayQueue.clear();
+	CLEAR_VECTOR(m_overlayQueue);
 }
 
 void WorldScreen::setBook(const Item& document, bool isReopenInventory) {

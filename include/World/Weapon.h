@@ -20,9 +20,6 @@ class Weapon final : public Item {
 public:
 	Weapon(const std::string& itemID);
 
-	const sf::Time& getWeaponCooldown() const;
-	const sf::FloatRect& getWeaponChopRect() const;
-	int getWeaponChopDamage() const;
 	SpellID getCurrentSpellForSlot(int slotNr) const;
 	const std::vector<SpellModifier>* getCurrentModifiersForSlot(int slotNr) const;
 

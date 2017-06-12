@@ -78,21 +78,21 @@ void MerchantWindow::completeTrade() {
 }
 
 void MerchantWindow::notifyChange(const std::string& itemID) {
-	ItemBean bean = g_databaseManager->getItemBean(itemID);
-	if (bean.status != BeanStatus::Filled) return;
+	auto item = g_resourceManager->getItem(itemID);
+	if (!item) return;
 
 	// search for the slot
-	if (contains(m_items, bean.item_id)) {
+	if (contains(m_items, itemID)) {
 		if (!contains(m_interface->getMerchantData().wares, itemID)) {
 			// the item was removed. check if it is selected.
-			if (m_selectedSlotId.compare(bean.item_id) == 0) {
+			if (m_selectedSlotId.compare(itemID) == 0) {
 				deselectCurrentSlot();
 			}
-			m_items.erase(bean.item_id);
+			m_items.erase(itemID);
 			calculateSlotPositions();
 		}
 		else {
-			m_items.at(bean.item_id).setAmount(m_interface->getMerchantData().wares.at(itemID));
+			m_items.at(itemID).setAmount(m_interface->getMerchantData().wares.at(itemID));
 		}
 		return;
 	}
@@ -100,7 +100,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (!contains(m_interface->getMerchantData().wares, itemID)) return;
 
-	m_items.insert({ bean.item_id, InventorySlot(bean.item_id, m_interface->getMerchantData().wares.at(itemID)) });
+	m_items.insert({ itemID, InventorySlot(itemID, m_interface->getMerchantData().wares.at(itemID)) });
 
 	calculateSlotPositions();
 }
@@ -211,13 +211,12 @@ void MerchantWindow::reload() {
 	clearAllSlots();
 	hideDescription();
 	for (auto& it : m_interface->getMerchantData().wares) {
-		ItemBean bean = g_databaseManager->getItemBean(it.first);
-		if (bean.status != BeanStatus::Filled) {
+		if (!g_resourceManager->getItem(it.first)) {
 			g_logger->logError("MerchantWindow", "Item not resolved: " + it.first);
 			continue;
 		}
 		
-		m_items.insert({ bean.item_id, InventorySlot(bean.item_id, it.second) });
+		m_items.insert({ it.first, InventorySlot(it.first, it.second) });
 	}
 }
 

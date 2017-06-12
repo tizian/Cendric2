@@ -24,6 +24,8 @@
 
 #define NOP []() {}
 
+#define CLEAR_VECTOR(V) for (auto it : V) {delete it;}; V.clear();
+
 inline float radToDeg(float rad) {
 	return rad * (180.f / M_PI);
 }

@@ -24,6 +24,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavaarmor', 5, 200, -40, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaarmor', 'res/assets/equipment/body/spritesheet_body_lavaarmor.png', 'res/assets/equipment/body/spritesheet_map_body_lavaarmor.png');
 
+-- Lava Mantle
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaback', 'item', 'Lava Mantle','Lavamantel','Lava Mantel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaback', 'item_desc', 'This magical lava holds great fire powers, but burns its wearer.','Diese magische Lava hat zwar grosse Feuerkräfte, verbrennt jedoch seinen Träger.','Die magisch Lava het zwar grossi Füürchräft, verbrennt aber sin Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaback', 'eq_back', 700, 250, 50);
+INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, health_regeneration) values ('eq_lavaback', 20, 100, -20, -1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaback', 'res/assets/equipment/back/spritesheet_back_lavaback.png', 'res/assets/equipment/back/spritesheet_map_back_lavaback.png');
+
 -- Ice Hat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icehat', 'item', 'Zeff''s Masterpiece','Zeff''s Meisterwerk','Em Zeff sis Meisterwerk');

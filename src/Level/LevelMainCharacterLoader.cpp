@@ -1,6 +1,7 @@
 #include "Level/LevelMainCharacterLoader.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
+#include "World/Item.h"
 #include "GameObjectComponents/LightComponent.h"
 
 using namespace std;
@@ -39,18 +40,18 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 
 	for (auto& it : gameData) {
 		Item* item_ = g_resourceManager->getItem(it);
-		if (item_ == nullptr || !item_->isValid()) {
+		if (item_ == nullptr || !item_->getCheck().isValid) {
 			g_logger->logError("LevelMainCharacterLoader", "Equipment item was not loaded, unknown id: " + it);
 			continue;
 		}
 		Item& item = *item_;
-		if (!item.isEquipmentItem()) {
+		if (!item.getCheck().isEquipment) {
 			// this item has no equipment part
 			continue;
 		}
 
 		LevelEquipment* levelEquipment = new LevelEquipment(mainCharacter);
-		levelEquipment->load(&item.getEquipmentBean(), &item.getEquipmentLightBean(), item.getType());
+		levelEquipment->load(item.getBean<ItemEquipmentBean>(), item.getBean<ItemEquipmentLightBean>(), item.getType());
 		screen->addObject(levelEquipment);
 	}
 }

@@ -13,10 +13,7 @@ SpellManager::~SpellManager() {
 }
 
 void SpellManager::clearSpells() {
-	for (auto& it : m_spellMap) {
-		delete it;
-	}
-	m_spellMap.clear();
+	CLEAR_VECTOR(m_spellMap);
 	m_coolDownMap.clear();
 }
 

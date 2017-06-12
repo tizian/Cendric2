@@ -70,15 +70,14 @@ void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 		auto& it = data.levelItems.at(i);
 		if (!it.empty() && !contains(coreData.itemsLooted.at(data.id), static_cast<int>(i))) {
 			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
-			ItemBean item = g_databaseManager->getItemBean(it);
-			if (item.status == BeanStatus::NotSet) {
+			if (!g_resourceManager->getItem(it)) {
 				// unexpected error
 				g_logger->logError("LevelLoader", "Level item was not loaded, unknown id: " + it);
 				return;
 			}
 
 			LevelItem* levelItem = new LevelItem(screen);
-			levelItem->load(item.item_id, position);
+			levelItem->load(it, position);
 			levelItem->setSpawnPosition(static_cast<int>(i));
 			screen->addObject(levelItem);
 		}

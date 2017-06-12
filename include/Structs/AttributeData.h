@@ -41,26 +41,26 @@ struct AttributeData final {
 	}
 
 	// calculates the data from the database bean
-	void create(const ItemAttributeBean& bean) {
-		if (bean.status != BeanStatus::Filled) {
+	void create(const ItemAttributeBean* bean) {
+		if (bean == nullptr) {
 			return;
 		}
 
-		maxHealthPoints = bean.max_health;
-		healthRegenerationPerS = bean.health_regeneration;
-		haste = bean.haste;
-		critical = bean.critical;
-		heal = bean.heal;
-		damagePhysical = bean.dmg_physical;
-		damageFire = bean.dmg_fire;
-		damageIce = bean.dmg_ice;
-		damageShadow = bean.dmg_shadow;
-		damageLight = bean.dmg_light;
-		resistancePhysical = bean.res_physical;
-		resistanceFire = bean.res_fire;
-		resistanceIce = bean.res_ice;
-		resistanceShadow = bean.res_shadow;
-		resistanceLight = bean.res_light;
+		maxHealthPoints = bean->max_health;
+		healthRegenerationPerS = bean->health_regeneration;
+		haste = bean->haste;
+		critical = bean->critical;
+		heal = bean->heal;
+		damagePhysical = bean->dmg_physical;
+		damageFire = bean->dmg_fire;
+		damageIce = bean->dmg_ice;
+		damageShadow = bean->dmg_shadow;
+		damageLight = bean->dmg_light;
+		resistancePhysical = bean->res_physical;
+		resistanceFire = bean->res_fire;
+		resistanceIce = bean->res_ice;
+		resistanceShadow = bean->res_shadow;
+		resistanceLight = bean->res_light;
 
 		calculateAttributes();
 	}

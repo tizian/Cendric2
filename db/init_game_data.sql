@@ -19,6 +19,7 @@ DROP TABLE item_document_quest;
 DROP TABLE item_weapon_slot;
 DROP TABLE item_weapon;
 DROP TABLE item_equipment_light;
+DROP TABLE item_equipment_particle;
 DROP TABLE item_equipment;
 DROP TABLE item_attribute;
 DROP TABLE item_food;
@@ -139,7 +140,43 @@ CREATE TABLE item_equipment_light(
 	map_light_radius_y INTEGER NOT NULL DEFAULT 0,
 	brightness DOUBLE NOT NULL DEFAULT 1.0,
 	PRIMARY KEY (item_id),
-	FOREIGN KEY(item_id) REFERENCES equipment(item_id)
+	FOREIGN KEY (item_id) REFERENCES equipment(item_id)
+);
+
+CREATE TABLE item_equipment_particle(
+	item_id VARCHAR(50) NOT NULL, 
+    particle_count INTEGER NOT NULL,
+    emit_rate INTEGER NOT NULL,
+    additive_blend_mode INTEGER NOT NULL DEFAULT 0,
+    texture_path VARCHAR(50) NOT NULL,
+    spawner_radius INTEGER NOT NULL,
+    spawner_offset_x INTEGER NOT NULL,
+    spawner_offset_y INTEGER NOT NULL,
+    size_start_min INTEGER NOT NULL,
+    size_start_max INTEGER NOT NULL,
+    size_end_min INTEGER NOT NULL,
+    size_end_max INTEGER NOT NULL,
+    color_start_min_r INTEGER NOT NULL,
+    color_start_min_g INTEGER NOT NULL,
+    color_start_min_b INTEGER NOT NULL,
+    color_start_max_r INTEGER NOT NULL,
+    color_start_max_g INTEGER NOT NULL,
+    color_start_max_b INTEGER NOT NULL, 
+    color_end_min_r INTEGER NOT NULL,
+    color_end_min_g INTEGER NOT NULL,
+    color_end_min_b INTEGER NOT NULL,
+    color_end_max_r INTEGER NOT NULL,
+    color_end_max_g INTEGER NOT NULL,
+    color_end_max_b INTEGER NOT NULL, 
+    goal_offset_x INTEGER NOT NULL,
+    goal_offset_y INTEGER NOT NULL,
+    speed_min INTEGER NOT NULL,
+    speed_max INTEGER NOT NULL,
+    time_min DOUBLE NOT NULL,
+    time_max DOUBLE NOT NULL,
+  
+	PRIMARY KEY (item_id),
+	FOREIGN KEY (item_id) REFERENCES equipment(item_id)
 );
 
 CREATE TABLE item_weapon(

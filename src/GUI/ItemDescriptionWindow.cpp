@@ -3,6 +3,7 @@
 
 #include "GUI/ItemDescriptionWindow.h"
 #include "CharacterCore.h"
+#include "World/Item.h"
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 const float ItemDescriptionWindow::ICON_OFFSET = 24 * 8.f;
@@ -104,7 +105,7 @@ void ItemDescriptionWindow::addText(const std::string& text, const sf::Color& co
 
 void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore* core, sf::Vector2f& offset) {
 	// check item type and maybe redirect
-	if (item.getType() == ItemType::Equipment_weapon && item.isWeapon()) {
+	if (item.getType() == ItemType::Equipment_weapon && item.getCheck().isWeapon) {
 		auto const weapon = core->getWeapon();
 		if (weapon && weapon->getID().compare(item.getID()) != 0) {
 			compareWeaponAttributes(Weapon(item.getID()), *weapon, offset);
@@ -143,10 +144,11 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 }
 
 void ItemDescriptionWindow::loadWeaponAttributes(const Weapon& item, sf::Vector2f& offset) {
-	addText(g_textProvider->getText("WeaponDamage") + ": " + std::to_string(item.getWeaponChopDamage()),
+	auto const weaponBean = item.getBean<ItemWeaponBean>();
+	addText(g_textProvider->getText("WeaponDamage") + ": " + std::to_string(weaponBean->chop_damage),
 		COLOR_WHITE, offset);
 
-	addText(g_textProvider->getText("Cooldown") + ": " + toStrMaxDecimals(item.getWeaponCooldown().asSeconds(), 1) + "s",
+	addText(g_textProvider->getText("Cooldown") + ": " + toStrMaxDecimals(weaponBean->chop_cooldown.asSeconds(), 1) + "s",
 		COLOR_WHITE, offset, 1);
 
 	loadDefaultAttributes(item, offset);
@@ -179,8 +181,9 @@ void ItemDescriptionWindow::loadWeaponAttributes(const Weapon& item, sf::Vector2
 }
 
 void ItemDescriptionWindow::loadDefaultAttributes(const Item& item, sf::Vector2f& offset) {
-	if (item.getFoodDuration() > sf::Time::Zero) {
-		addText(g_textProvider->getText("Duration") + ": " + std::to_string(static_cast<int>(floor(item.getFoodDuration().asSeconds()))) + "s",
+	const ItemFoodBean* food = item.getBean<ItemFoodBean>();
+	if (food && food->food_duration > sf::Time::Zero) {
+		addText(g_textProvider->getText("Duration") + ": " + std::to_string(static_cast<int>(floor(food->food_duration.asSeconds()))) + "s",
 			COLOR_WHITE, offset, 1);
 	}
 
@@ -223,13 +226,14 @@ void ItemDescriptionWindow::compareDoubleAttributes(const Item& item, const Item
 }
 
 void ItemDescriptionWindow::compareWeaponAttributes(const Weapon& item, const Weapon& comp, sf::Vector2f& offset) {
-	addText(g_textProvider->getText("WeaponDamage") + ": " + std::to_string(item.getWeaponChopDamage()),
+	auto const weaponBean = item.getBean<ItemWeaponBean>();
+	addText(g_textProvider->getText("WeaponDamage") + ": " + std::to_string(weaponBean->chop_damage),
 		COLOR_WHITE, offset);
-	addIntComparision(item.getWeaponChopDamage(), comp.getWeaponChopDamage());
+	addIntComparision(weaponBean->chop_damage, weaponBean->chop_damage);
 
-	addText(g_textProvider->getText("Cooldown") + ": " + toStrMaxDecimals(item.getWeaponCooldown().asSeconds(), 1) + "s",
+	addText(g_textProvider->getText("Cooldown") + ": " + toStrMaxDecimals(weaponBean->chop_cooldown.asSeconds(), 1) + "s",
 		COLOR_WHITE, offset, 1);
-	addCooldownComparision(item.getWeaponCooldown().asSeconds(), comp.getWeaponCooldown().asSeconds());
+	addCooldownComparision(weaponBean->chop_cooldown.asSeconds(), weaponBean->chop_cooldown.asSeconds());
 
 	compareAttributes(item, comp, offset);
 

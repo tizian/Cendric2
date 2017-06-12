@@ -3,6 +3,7 @@
 #include "Level/LevelEquipment.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Screens/LevelScreen.h"
+#include "World/Item.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Resource, ResourceTile)
@@ -44,9 +45,9 @@ void ResourceTile::update(const sf::Time& frameTime) {
 	if (equippedItems.find(ItemType::Equipment_weapon) == equippedItems.end()) return;
 	
 	const Item* weapon = g_resourceManager->getItem(equippedItems.at(ItemType::Equipment_weapon));
-	if (weapon != nullptr && weapon->isEquipmentItem()) {
+	if (weapon != nullptr && weapon->getCheck().isEquipment) {
 		LevelEquipment* weaponEquipment = new LevelEquipment(m_mainChar);
-		weaponEquipment->load(&weapon->getEquipmentBean(), &weapon->getEquipmentLightBean(), ItemType::Equipment_weapon);
+		weaponEquipment->load(weapon->getBean<ItemEquipmentBean>(), weapon->getBean<ItemEquipmentLightBean>(), ItemType::Equipment_weapon);
 		m_screen->addObject(weaponEquipment);
 	}
 }
@@ -111,9 +112,9 @@ void ResourceTile::loot() {
 	}
 	// add the visualization for the tool
 	const Item* toolItem = g_resourceManager->getItem(m_toolItemID);
-	if (toolItem != nullptr && toolItem->isEquipmentItem()) {
+	if (toolItem != nullptr && toolItem->getCheck().isEquipment) {
 		LevelEquipment* tool = new LevelEquipment(m_mainChar);
-		tool->load(&toolItem->getEquipmentBean(), &toolItem->getEquipmentLightBean(), ItemType::Equipment_weapon);
+		tool->load(toolItem->getBean<ItemEquipmentBean>(), toolItem->getBean<ItemEquipmentLightBean>(), ItemType::Equipment_weapon);
 		m_screen->addObject(tool);
 	}
 

@@ -59,7 +59,7 @@ void BookTile::onRightClick() {
 
 void BookTile::startReading() {
 	const Item* item = g_resourceManager->getItem(m_bookId);
-	if (item == nullptr || !item->isDocument()) return;
+	if (item == nullptr || !item->getCheck().isDocument) return;
 
 	dynamic_cast<MapScreen*>(m_screen)->setBook(*item);
 }

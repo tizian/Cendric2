@@ -31,6 +31,7 @@ item.id:eq_ironring,1
 item.id:eq_leatherarmor,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
+item.id:eq_lavaback,1
 item.id:fo_apple,7
 item.id:fo_bread,2
 item.id:fo_caveberry,13

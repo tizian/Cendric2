@@ -8,6 +8,7 @@
 #include "Map/MapInterface.h"
 #include "Map/MerchantInterface.h"
 #include "GlobalResource.h"
+#include "World/Item.h"
 
 const int Inventory::SLOT_COUNT_X = 5;
 const int Inventory::SLOT_COUNT_Y = 6;
@@ -206,24 +207,24 @@ void Inventory::notifyChange(const std::string& itemID) {
 		reloadGold();
 		return;
 	}
-	ItemBean bean = g_databaseManager->getItemBean(itemID);
-	if (bean.status != BeanStatus::Filled) return;
-	if (!contains(m_typeMap, bean.item_type)) return;
+	Item* item = g_resourceManager->getItem(itemID);
+	if (!item) return;
+	if (!contains(m_typeMap, item->getType())) return;
 
-	std::map<std::string, InventorySlot>* tab = m_typeMap.at(bean.item_type);
+	std::map<std::string, InventorySlot>* tab = m_typeMap.at(item->getType());
 
 	// search for the slot
-	if (contains(*tab, bean.item_id)) {
+	if (contains(*tab, item->getID())) {
 		if (!contains(m_core->getData().items, itemID)) {
 			// the item was removed. check if it is selected.
-			if (m_selectedSlotId.first.compare(bean.item_id) == 0) {
+			if (m_selectedSlotId.first.compare(item->getID()) == 0) {
 				deselectCurrentSlot();
 			}
-			tab->erase(bean.item_id);
-			calculateSlotPositions(*(m_typeMap.at(bean.item_type)));
+			tab->erase(item->getID());
+			calculateSlotPositions(*(m_typeMap.at(item->getType())));
 		}
 		else {
-			tab->at(bean.item_id).setAmount(m_core->getData().items.at(itemID));
+			tab->at(item->getID()).setAmount(m_core->getData().items.at(itemID));
 		}
 		return;
 	}
@@ -231,7 +232,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (!contains(m_core->getData().items, itemID)) return;
 
-	(*tab).insert({ bean.item_id, InventorySlot(itemID, m_core->getData().items.at(itemID)) });
+	(*tab).insert({ item->getID(), InventorySlot(itemID, m_core->getData().items.at(itemID)) });
 
 	calculateSlotPositions(*tab);
 }
@@ -524,55 +525,55 @@ void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void Inventory::convertItem(const Item* item) {
-	if (item == nullptr || !item->isConvertible()) return;
+	if (item == nullptr || !item->getCheck().isConvertible) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 
-	const std::vector<ItemConvertibleBean>& beans = item->getConvertibleBeans();
+	auto const beans = item->getBeans<ItemConvertibleBean>();
 	worldScreen->notifyItemChange(item->getID(), -1);
 
-	for (auto const& bean : beans) {
-		if (bean.probability == 0) continue;
-		if (bean.probability == 100) {
-			worldScreen->notifyItemChange(bean.convertible_item_id, bean.convertible_amount);
+	for (auto const bean : beans) {
+		if (bean->probability == 0) continue;
+		if (bean->probability == 100) {
+			worldScreen->notifyItemChange(bean->convertible_item_id, bean->convertible_amount);
 			continue;
 		}
 
-		float prob = bean.probability / 100.f;
+		float prob = bean->probability / 100.f;
 		int amount = 0;
-		for (int i = 0; i < bean.convertible_amount; ++i) {
+		for (int i = 0; i < bean->convertible_amount; ++i) {
 			if (prob <= randomFloat(0.f, 1.f)) continue;
 			++amount;
 		}
 
-		worldScreen->notifyItemChange(bean.convertible_item_id, amount);
+		worldScreen->notifyItemChange(bean->convertible_item_id, amount);
 	}
 }
 
 void Inventory::learnSpell(const Item* item) {
-	if (item == nullptr || !item->isSpell()) return;
+	if (item == nullptr || !item->getCheck().isSpell) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 
-	ItemSpellBean bean = item->getSpellBean();
+	auto const bean = item->getBean<ItemSpellBean>();
 	worldScreen->notifyItemChange(item->getID(), -1);
-	worldScreen->notifySpellLearned(static_cast<SpellID>(bean.spell_id));
+	worldScreen->notifySpellLearned(static_cast<SpellID>(bean->spell_id));
 }
 
 void Inventory::showDocument(const Item* item) {
-	if (item == nullptr || !item->isDocument()) return;
+	if (item == nullptr || !item->getCheck().isDocument) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
 	worldScreen->setBook(*item, true);
 
 	// handle possible quest related conditions on this document
-	if (item->getDocumentQuestBean().status == BeanStatus::Filled) {
-		const ItemDocumentQuestBean& bean = item->getDocumentQuestBean();
-		if (bean.quest_desc > 0) {
-			worldScreen->notifyQuestDescriptionAdded(bean.quest_name, bean.quest_desc);
+	 
+	if (auto const bean = item->getBean<ItemDocumentQuestBean>()) {
+		if (bean->quest_desc > 0) {
+			worldScreen->notifyQuestDescriptionAdded(bean->quest_name, bean->quest_desc);
 		}
-		if (!bean.quest_state.empty()) {
-			worldScreen->notifyQuestStateChanged(bean.quest_name, resolveQuestState(bean.quest_state));
+		if (!bean->quest_state.empty()) {
+			worldScreen->notifyQuestStateChanged(bean->quest_name, resolveQuestState(bean->quest_state));
 		}
 	}
 }

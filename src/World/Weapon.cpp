@@ -7,13 +7,14 @@ Weapon::Weapon(const std::string& itemID) : Item(itemID) {
 
 void Weapon::reload() {
 	m_weaponSlots.clear();
-	for (auto& slotBean : m_itemWeaponSlotBeans) {
+	auto slotBeans = getBeans<ItemWeaponSlotBean>();
+	for (auto slotBean : slotBeans) {
 		SpellSlot_s emptySpellSlot;
-		emptySpellSlot.spellType = slotBean.slot_type;
+		emptySpellSlot.spellType = slotBean->slot_type;
 		emptySpellSlot.spellID = SpellID::VOID;
 
 		std::vector<SpellModifier> modifiers;
-		for (int i = 0; i < slotBean.modifier_count; i++) {
+		for (int i = 0; i < slotBean->modifier_count; i++) {
 			SpellModifier modifier;
 			modifier.type = SpellModifierType::VOID;
 			modifier.level = 0;
@@ -30,18 +31,6 @@ void Weapon::reload() {
 
 const std::vector<WeaponSlot_s>& Weapon::getWeaponSlots() const {
 	return m_weaponSlots;
-}
-
-const sf::Time& Weapon::getWeaponCooldown() const {
-	return m_itemWeaponBean.chop_cooldown;
-}
-
-const sf::FloatRect& Weapon::getWeaponChopRect() const {
-	return m_itemWeaponBean.chop_rect;
-}
-
-int Weapon::getWeaponChopDamage() const {
-	return m_itemWeaponBean.chop_damage;
 }
 
 SpellID Weapon::getCurrentSpellForSlot(int slotNr) const {

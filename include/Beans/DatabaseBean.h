@@ -3,13 +3,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-enum class BeanStatus {
-	NotSet,
-	Filled
-};
-
-// super struct for all database beans, initializes with not set.
+// super struct for all database beans
 struct DatabaseBean {
 	virtual ~DatabaseBean() {}
-	BeanStatus status = BeanStatus::NotSet;
 };

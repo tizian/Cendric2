@@ -4,6 +4,7 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GlobalResource.h"
+#include "World/Item.h"
 
 LevelItem::LevelItem(LevelScreen* screen) : AnimatedGameObject() {
 	m_screen = screen;
@@ -20,28 +21,30 @@ void LevelItem::load(const std::string& itemID, const sf::Vector2f& position) {
 	m_itemType = item.getType();
 	m_goldValue = item.getValue();
 
-	if (!item.isLevelitem()) {
+	if (!item.getCheck().isLevelitem) {
 		g_logger->logError("LevelItem", "Tried to instantiate Levelitem that has no frames!");
 		return;
 	}
 
-	Animation* idleAnimation = new Animation(item.getLevelitemBean().frame_time);
-	setSpriteOffset(item.getLevelitemBean().sprite_offset);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, item.getLevelitemBean().bounding_box.x, item.getLevelitemBean().bounding_box.y));
+	auto const levelItemBean = item.getBean<LevelitemBean>();
+	Animation* idleAnimation = new Animation(levelItemBean->frame_time);
+	setSpriteOffset(levelItemBean->sprite_offset);
+	setBoundingBox(sf::FloatRect(0.f, 0.f, levelItemBean->bounding_box.x, levelItemBean->bounding_box.y));
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_LEVELITEMS));
 	// add frames
-	for (auto& frame : item.getFrames()) {
-		idleAnimation->addFrame(frame.texture_location);
+	auto frames = item.getBeans<LevelitemFrameBean>();
+	for (auto frame : frames) {
+		idleAnimation->addFrame(frame->texture_location);
 	}
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// initial values
 	setCurrentAnimation(getAnimation(GameObjectState::Idle), false);
-	playCurrentAnimation(item.getFrames().size() > 1);
+	playCurrentAnimation(frames.size() > 1);
 
-	if (item.isLevelitemLightedItem()) {
-		const LevelitemLightBean& lightBean = item.getLevelitemLightBean();
-		LightData lightData(lightBean.light_offset, lightBean.light_radius, lightBean.brightness);
+	if (item.getCheck().isLevelitemLighted) {
+		auto const lightBean = item.getBean<LevelitemLightBean>();
+		LightData lightData(lightBean->light_offset, lightBean->light_radius, lightBean->brightness);
 		addComponent(new LightComponent(lightData, this));
 	}
 

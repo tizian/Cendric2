@@ -6,6 +6,7 @@
 #include "ScreenOverlays/TextureScreenOverlay.h"
 #include "Level/DamageNumbers.h"
 #include "GlobalResource.h"
+#include "World/Item.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -149,12 +150,13 @@ void LevelMainCharacter::loadWeapon() {
 	m_spellManager->clearSpells();
 
 	// handle chop spell
+	auto const weaponBean = weapon->getBean<ItemWeaponBean>();
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
-	chop.boundingBox = weapon->getWeaponChopRect();
+	chop.boundingBox = weaponBean->chop_rect;
 	chop.spellOffset.x = chop.boundingBox.left;
 	chop.spellOffset.y = chop.boundingBox.top;
-	chop.cooldown = weapon->getWeaponCooldown();
-	chop.damage = weapon->getWeaponChopDamage();
+	chop.cooldown = weaponBean->chop_cooldown;
+	chop.damage = weaponBean->chop_damage;
 	chop.iconTextureRect = sf::IntRect(weapon->getIconTextureLocation().x, weapon->getIconTextureLocation().y, 50, 50);
 	m_spellManager->addSpell(chop);
 

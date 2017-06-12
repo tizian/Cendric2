@@ -10,10 +10,7 @@ BuffBar::BuffBar(LevelInterface* _interface) {
 
 BuffBar::~BuffBar() {
 	delete m_foodBuffSlot;
-	for (auto& it : m_buffSlots) {
-		delete it;
-	}
-	m_buffSlots.clear();
+	CLEAR_VECTOR(m_buffSlots);
 }
 
 void BuffBar::show() {

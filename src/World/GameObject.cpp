@@ -3,10 +3,7 @@
 #include "GameObjectComponents/GameObjectComponent.h"
 
 GameObject::~GameObject() {
-	for (auto& component : m_components) {
-		delete component;
-	}
-	m_components.clear();
+	CLEAR_VECTOR(m_components);
 }
 
 void GameObject::render(sf::RenderTarget& renderTarget) {

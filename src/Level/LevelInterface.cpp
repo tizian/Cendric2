@@ -2,6 +2,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Screens/WorldScreen.h"
 #include "GUI/SlotClone.h"
+#include "World/Item.h"
 
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
@@ -101,15 +102,17 @@ void LevelInterface::restoreConsumedFood() {
 }
 
 void LevelInterface::consumeItem(const std::string& itemID) {
-	Item* item = g_resourceManager->getItem(itemID);
-	if (item == nullptr || item->getType() != ItemType::Consumable) return;
 	if (m_character->isEating()) return;
+	Item* item = g_resourceManager->getItem(itemID);
+	if (item == nullptr || !item->getCheck().isConsumable) return;
+	auto const food = item->getBean<ItemFoodBean>();
+	
 	m_character->consumeFood(
-		item->getFoodDuration(),
+		food->food_duration,
 		item->getAttributes());
 	getBuffBar().addFoodBuff(
 		sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50),
-		item->getFoodDuration(),
+		food->food_duration,
 		item->getID(),
 		item->getAttributes());
 

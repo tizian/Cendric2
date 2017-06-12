@@ -67,19 +67,20 @@ void CharacterCore::loadNew() {
 	m_isNew = true;
 	m_data.isInLevel = false;
 
-	SpawnBean spawn = g_databaseManager->getSpawnBean("start");
-	m_data.currentMap = spawn.map_id;
-	m_data.currentMapPosition = spawn.map_pos;
+	SpawnBean* spawn = g_databaseManager->getSpawnBean("start");
+	m_data.currentMap = spawn->map_id;
+	m_data.currentMapPosition = spawn->map_pos;
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
 	m_data.attributes.critical = 5;
-	addItem(spawn.armor_id, 1);
-	addItem(spawn.weapon_id, 1);
-	equipItem(spawn.armor_id, ItemType::Equipment_body);
-	equipItem(spawn.weapon_id, ItemType::Equipment_weapon);
+	addItem(spawn->armor_id, 1);
+	addItem(spawn->weapon_id, 1);
+	equipItem(spawn->armor_id, ItemType::Equipment_body);
+	equipItem(spawn->weapon_id, ItemType::Equipment_weapon);
 	m_stopwatch.restart();
 	g_resourceManager->deleteItemResources();
 	reloadAttributes();
+	delete spawn;
 }
 
 const std::string& CharacterCore::getEquippedItem(ItemType type) const {
@@ -732,9 +733,11 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 			m_data.equippedWeaponSlots = m_data.weaponConfigurations[m_weapon->getID()];
 		}
 		else if (item.empty()) {
-			std::vector<ItemWeaponSlotBean> wep = g_databaseManager->getItemWeaponSlotBeans(item);
-			for (size_t i = 0; i < wep.size(); ++i) {
-				m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
+			auto realItem = g_resourceManager->getItem(item);
+			if (realItem) {
+				for (size_t i = 0; i < realItem->getBeans<ItemWeaponSlotBean>().size(); ++i) {
+					m_data.equippedWeaponSlots.push_back(std::pair<SpellID, std::vector<SpellModifier>>(SpellID::VOID, std::vector<SpellModifier>()));
+				}
 			}
 		}
 		reloadWeaponSlots();
@@ -765,10 +768,10 @@ void CharacterCore::setAutosave(bool value) {
 }
 
 void CharacterCore::setCharacterJailed() {
-	SpawnBean spawn = g_databaseManager->getSpawnBean("prison");
+	SpawnBean* spawn = g_databaseManager->getSpawnBean("prison");
 	m_data.isInLevel = false;
-	m_data.currentMap = spawn.map_id;
-	m_data.currentMapPosition = spawn.map_pos;
+	m_data.currentMap = spawn->map_id;
+	m_data.currentMapPosition = spawn->map_pos;
 
 	// store the gold
 	m_data.storedGold += m_data.gold;
@@ -792,14 +795,15 @@ void CharacterCore::setCharacterJailed() {
 	}
 
 	// if the items already exists, they will not be given anew.
-	removeStoredItem(spawn.weapon_id, 1);
-	removeStoredItem(spawn.armor_id, 1);
+	removeStoredItem(spawn->weapon_id, 1);
+	removeStoredItem(spawn->armor_id, 1);
 
 	// equip the new armor.
-	addItem(spawn.armor_id, 1);
-	addItem(spawn.weapon_id, 1);
-	equipItem(spawn.armor_id, ItemType::Equipment_body);
-	equipItem(spawn.weapon_id, ItemType::Equipment_weapon);
+	addItem(spawn->armor_id, 1);
+	addItem(spawn->weapon_id, 1);
+	equipItem(spawn->armor_id, ItemType::Equipment_body);
+	equipItem(spawn->weapon_id, ItemType::Equipment_weapon);
+	delete spawn;
 }
 
 std::map<std::string, int> CharacterCore::retrieveStoredItems() {

@@ -137,7 +137,6 @@ void GhostFormSpell::loadMask() {
 	itemBean.frames_fight = 5;
 	itemBean.frames_climb1 = 1;
 	itemBean.frames_climb2 = 1;
-	itemBean.status = BeanStatus::Filled;
 
 	m_mask->load(&itemBean, nullptr, ItemType::VOID);
 	

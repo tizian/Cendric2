@@ -20,6 +20,19 @@
 #include "Beans/LevelitemFrameBean.h"
 #include "Beans/LevelitemLightBean.h"
 
+struct ItemCheck {
+	bool isValid = false;
+	bool isConsumable = false;
+	bool isDocument = false;
+	bool isWeapon = false;
+	bool isLevelitem = false;
+	bool isLevelitemLighted = false;
+	bool isEquipment = false;
+	bool isEquipmentLighted = false;
+	bool isConvertible = false;
+	bool isSpell = false;
+};
+
 // An item in cendrics / a npcs / a mobs inventory
 class Item {
 	friend class ResourceManager;
@@ -33,79 +46,45 @@ public:
 	ItemType getType() const;
 	const sf::Vector2i& getIconTextureLocation() const;
 	const AttributeData& getAttributes() const;
-	const sf::Time& getFoodDuration() const;
 	// the items gold value
 	int getValue() const;
 
-	// getter for levelitem values
-	const LevelitemBean& getLevelitemBean() const;
-	const std::vector<LevelitemFrameBean>& getFrames() const;
-	const LevelitemLightBean& getLevelitemLightBean() const;
+	// returns the first bean of the given type
+	// returns nullptr if there's no bean of this type.
+	template<typename T> const T* getBean() const {
+		for (auto bean : m_beans) {
+			if (const T* tBean = dynamic_cast<const T*>(bean)) {
+				return tBean;
+			}
+		}
+		return nullptr;
+	}
 
-	// getter for equipment values
-	const ItemEquipmentBean& getEquipmentBean() const;
-	const ItemEquipmentLightBean& getEquipmentLightBean() const;
+	// returns all beans of the given type
+	template<typename T> std::vector<const T*> getBeans() const {
+		std::vector<const T*> tBeans;
 
-	// getter for convertible beans
-	const std::vector<ItemConvertibleBean>& getConvertibleBeans() const;
+		for (auto bean : m_beans) {
+			if (const T* tBean = dynamic_cast<const T*>(bean)) {
+				tBeans.push_back(tBean);
+			}
+		}
+		return tBeans;
+	}
 
-	// getter for document beans
-	const std::vector<ItemDocumentPageBean>& getDocumentPageBeans() const;
-	const ItemDocumentQuestBean& getDocumentQuestBean() const;
-
-	// getter for spell bean
-	const ItemSpellBean& getSpellBean() const;
-
-	// returns whether this is a valid item
-	bool isValid() const;
-	// returns whether this item has a food component and is valid
-	bool isConsumable() const;
-	// returns whether this item has a convertible component and is valid
-	bool isConvertible() const;
-	// returns whether this item is a spell
-	bool isSpell() const;
-	// returns whether this item is a weapon and is valid
-	bool isWeapon() const;
-	// returns whether this item has at least one page and is valid
-	bool isDocument() const;
-	// returns whether this item is a levelitem with frames and is valid
-	bool isLevelitem() const;
-	// returns whether this item is an equipment item and is valid
-	bool isEquipmentItem() const;
-	// returns whether this equipment item has a light attached
-	bool isEquipmentLightedItem() const;
-	// returns whether this equipment item has a light attached
-	bool isLevelitemLightedItem() const;
+	const ItemCheck& getCheck() const;
 
 	static bool isEquipmentType(ItemType type);
 
 protected:
+	std::vector<DatabaseBean*> m_beans;
 	ItemBean m_itemBean;
-	ItemFoodBean m_itemFoodBean;
-	std::vector<ItemConvertibleBean> m_itemConvertibleBeans;
-	ItemSpellBean m_itemSpellBean;
-	ItemEquipmentBean m_itemEquipmentBean;
-	ItemEquipmentLightBean m_itemEquipmentLightBean;
-	LevelitemBean m_levelItemBean;
-	std::vector<LevelitemFrameBean> m_levelItemFrameBeans;
-	LevelitemLightBean m_levelitemLightBean;
 	AttributeData m_attributeData;
-	ItemWeaponBean m_itemWeaponBean;
-	std::vector<ItemWeaponSlotBean> m_itemWeaponSlotBeans;
-	std::vector<ItemDocumentPageBean> m_itemDocumentPageBeans;
-	ItemDocumentQuestBean m_itemDocumentQuestBean;
 
 	void checkItem();
 	void initBeans(const std::string& itemID);
+	bool addBean(DatabaseBean* bean);
+	bool addBeans(std::vector<DatabaseBean*> beans);
 
-	bool m_isValid = false;
-	bool m_isConsumable = false;
-	bool m_isDocument = false;
-	bool m_isWeapon = false;
-	bool m_isLevelitem = false;
-	bool m_isLevelitemLighted = false;
-	bool m_isEquipment = false;
-	bool m_isEquipmentLighted = false;
-	bool m_isConvertible = false;
-	bool m_isSpell = false;
+	ItemCheck m_check;
 };

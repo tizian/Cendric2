@@ -188,7 +188,7 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 	if (itemID.empty()) return nullptr;
 	if (!contains(m_items, itemID)) {
 		Item* item = new Item(itemID);
-		if (!item->isValid()) {
+		if (!item->getCheck().isValid) {
 			g_logger->logError("ResourceManager", "Item not loaded, unknown id: " + itemID);
 			delete item;
 			return nullptr;

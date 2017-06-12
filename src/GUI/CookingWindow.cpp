@@ -62,10 +62,12 @@ void CookingWindow::reload() {
 	m_options.clear();
 
 	int nr = 0;
-	for (auto& item : *m_screen->getCharacterCore()->getItems()) {
-		ItemFoodBean food = g_databaseManager->getItemFoodBean(item.first);
-		if (food.status == BeanStatus::Filled && food.is_cookable) {
-			CookingOption option(item.first, food.cooked_item_id, item.second, nr);
+	for (auto& item: *m_screen->getCharacterCore()->getItems()) {
+		auto const dbItem = g_resourceManager->getItem(item.first);
+		if (!dbItem || !dbItem->getCheck().isConsumable) continue;
+		const ItemFoodBean* food = dbItem->getBean<ItemFoodBean>();
+		if (food->is_cookable) {
+			CookingOption option(item.first, food->cooked_item_id, item.second, nr);
 			option.deselect();
 			m_options.push_back(option);
 			nr++;
@@ -244,12 +246,14 @@ void CookingWindow::cookItem(const std::string& itemID) {
 		g_logger->logError("CookingWindow", "Item to cook not found in character core!");
 		return;
 	}
-	ItemFoodBean food = g_databaseManager->getItemFoodBean(itemID);
-	if (food.status == BeanStatus::NotSet || !food.is_cookable || food.cooked_item_id.empty()) {
+	auto const dbItem = g_resourceManager->getItem(itemID);
+	if (!dbItem || !dbItem->getCheck().isConsumable) return;
+	auto food = dbItem->getBean<ItemFoodBean>();
+	if (!food->is_cookable || food->cooked_item_id.empty()) {
 		g_logger->logError("CookingWindow", "Cannot cook item with id " + itemID);
 		return;
 	}
-	m_screen->notifyItemConversion(itemID, food.cooked_item_id, 1);
+	m_screen->notifyItemConversion(itemID, food->cooked_item_id, 1);
 }
 
 void CookingWindow::render(sf::RenderTarget& renderTarget) {
