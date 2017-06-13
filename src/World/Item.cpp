@@ -25,6 +25,7 @@ void Item::initBeans(const std::string& itemID) {
 	m_check.isSpell = addBean(g_databaseManager->getItemSpellBean(itemID));
 	m_check.isEquipment = addBean(g_databaseManager->getItemEquipmentBean(itemID));
 	m_check.isEquipmentLighted = addBean(g_databaseManager->getItemEquipmentLightBean(itemID));
+	m_check.isEquipmentParticle = addBean(g_databaseManager->getItemEquipmentParticleBean(itemID));
 	m_check.isConsumable = addBean(g_databaseManager->getItemFoodBean(itemID));
 	m_check.isLevelitem = addBean(g_databaseManager->getLevelitemBean(itemID));
 	addBeans(g_databaseManager->getLevelitemFrameBeans(itemID));
@@ -82,6 +83,7 @@ void Item::checkItem() {
 	m_check.isLevelitem = m_check.isLevelitem && !getBeans<LevelitemFrameBean>().empty();
 	m_check.isEquipment = m_check.isEquipment && isEquipmentType(m_itemBean.item_type);
 	m_check.isEquipmentLighted = m_check.isEquipment && m_check.isEquipmentLighted;
+	m_check.isEquipmentParticle = m_check.isEquipment && m_check.isEquipmentParticle;
 	m_check.isLevelitemLighted = m_check.isLevelitem && m_check.isLevelitemLighted;
 }
 

@@ -10,6 +10,7 @@
 #include "Beans/ItemConvertibleBean.h"
 #include "Beans/ItemSpellBean.h"
 #include "Beans/ItemEquipmentBean.h"
+#include "Beans/ItemEquipmentParticleBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
 #include "Beans/ItemFoodBean.h"
 #include "Beans/ItemWeaponBean.h"
@@ -28,6 +29,7 @@ struct ItemCheck {
 	bool isLevelitem = false;
 	bool isLevelitemLighted = false;
 	bool isEquipment = false;
+	bool isEquipmentParticle = false;
 	bool isEquipmentLighted = false;
 	bool isConvertible = false;
 	bool isSpell = false;

@@ -138,7 +138,7 @@ void GhostFormSpell::loadMask() {
 	itemBean.frames_climb1 = 1;
 	itemBean.frames_climb2 = 1;
 
-	m_mask->load(&itemBean, nullptr, ItemType::VOID);
+	m_mask->load(&itemBean, ItemType::VOID);
 	
 	m_mask->setCopyingMainCharColor(false);
 	m_screen->addObject(m_mask);

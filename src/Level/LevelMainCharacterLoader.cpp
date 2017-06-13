@@ -51,7 +51,8 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 		}
 
 		LevelEquipment* levelEquipment = new LevelEquipment(mainCharacter);
-		levelEquipment->load(item.getBean<ItemEquipmentBean>(), item.getBean<ItemEquipmentLightBean>(), item.getType());
+		levelEquipment->load(item.getBean<ItemEquipmentBean>(), item.getType());
+		levelEquipment->loadComponents(item.getBean<ItemEquipmentLightBean>(), item.getBean<ItemEquipmentParticleBean>());
 		screen->addObject(levelEquipment);
 	}
 }

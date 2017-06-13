@@ -55,6 +55,10 @@ void ParticleComponent::setOffset(const sf::Vector2f& offset) {
 	m_offset = offset;
 }
 
+void ParticleComponent::setGoalOffset(const sf::Vector2f& offset) {
+	m_goalOffset = offset;
+}
+
 void ParticleComponent::setTexturePath(const std::string& texturePath) {
 	auto tex = g_resourceManager->getTexture(m_data.texturePath);
 	tex->setSmooth(true);
@@ -68,6 +72,13 @@ void ParticleComponent::setPosition(const sf::Vector2f& pos) {
 		sf::Vector2f(
 			m_isOffsetFlippedX ? -m_offset.x + m_parent->getBoundingBox()->width : m_offset.x,
 			m_isOffsetFlippedY ? -m_offset.y + m_parent->getBoundingBox()->height : m_offset.y));
+
+	if (auto aimVel = dynamic_cast<particles::AimedVelocityGenerator*>(m_data.velGen)) {
+		aimVel->goal = (m_parent->getPosition() +
+			sf::Vector2f(
+				m_isOffsetFlippedX ? -m_goalOffset.x + m_parent->getBoundingBox()->width : m_goalOffset.x,
+				m_isOffsetFlippedY ? -m_goalOffset.y + m_parent->getBoundingBox()->height : m_goalOffset.y));
+	}
 }
 
 void ParticleComponent::loadParticleSystem() {

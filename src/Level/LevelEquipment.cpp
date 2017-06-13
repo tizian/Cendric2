@@ -1,6 +1,8 @@
 #include "Level/LevelEquipment.h"
 #include "Level/LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 
 const int LevelEquipment::EQ_SIZE = 120;
 
@@ -9,7 +11,7 @@ LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObjec
 	m_screen = mainChar->getScreen();
 }
 
-void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipmentLightBean* light, ItemType type) {
+void LevelEquipment::load(const ItemEquipmentBean* itemBean, ItemType type) {
 	if (itemBean == nullptr) return;
 	m_itemType = type;
 	const ItemEquipmentBean& eq = *itemBean;
@@ -43,11 +45,7 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipment
 	}
 
 	setBoundingBox(sf::FloatRect(0, 0, static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE)));
-
-	if (light != nullptr) {
-		LightData lightData(LightData(light->light_offset, light->light_radius, light->brightness));
-		setLightComponent(lightData);
-	}
+	
 
 	if (!eq.texture_path.empty()) {
 		g_resourceManager->loadTexture(eq.texture_path, ResourceType::Level);
@@ -68,6 +66,53 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, const ItemEquipment
 		playCurrentAnimation(true);
 
 		m_hasTexture = true;
+	}
+}
+
+void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const ItemEquipmentParticleBean* particles) {
+	if (light != nullptr) {
+		LightData lightData(LightData(light->light_offset, light->light_radius, light->brightness));
+		setLightComponent(lightData);
+	}
+
+	if (particles != nullptr) {
+		ParticleComponentData data;
+		data.particleCount = particles->particle_count;
+		data.emitRate = particles->emit_rate;
+		data.isAdditiveBlendMode = particles->is_additive_blend_mode;
+		data.texturePath = particles->texture_path;
+		data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBGRenderTexture();
+
+		// Generators
+		auto posGen = new particles::DiskSpawner();
+		posGen->radius = particles->spawner_radius;
+		data.spawner = posGen;
+
+		auto sizeGen = new particles::SizeGenerator();
+		sizeGen->minStartSize = particles->size_start_min;
+		sizeGen->maxStartSize = particles->size_start_max;
+		sizeGen->minEndSize = particles->size_end_min;
+		sizeGen->maxEndSize = particles->size_end_max;
+		data.sizeGen = sizeGen;
+
+		auto colGen = new particles::ColorGenerator();
+		colGen->minStartCol = particles->color_start_min;
+		colGen->maxStartCol = particles->color_start_max;
+		colGen->minEndCol = particles->color_end_min;
+		colGen->maxEndCol = particles->color_end_max;
+		data.colorGen = colGen;
+
+		auto velGen = new particles::AimedVelocityGenerator();
+		velGen->minStartSpeed = particles->speed_min;
+		velGen->maxStartSpeed = particles->speed_min;
+		data.velGen = velGen;
+
+		auto timeGen = new particles::TimeGenerator();
+		timeGen->minTime = particles->time_min;
+		timeGen->maxTime = particles->time_max;
+		data.timeGen = timeGen;
+
+		setParticleComponent(data, particles->spawner_offset, particles->goal_offset);
 	}
 
 	sf::Vector2f newPosition;
@@ -90,6 +135,9 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 void LevelEquipment::setPosition(const sf::Vector2f& position) {
 	if (m_lightComponent != nullptr) {
 		m_lightComponent->flipOffsetX(m_isFacingRight);
+	}
+	if (m_particleComponent != nullptr) {
+		m_particleComponent->flipOffsetX(m_isFacingRight);
 	}
 	AnimatedGameObject::setPosition(position);
 }
@@ -119,6 +167,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
 		if (m_lightComponent != nullptr) m_lightComponent->flipOffsetY(m_mainChar->isUpsideDown());
+		if (m_particleComponent != nullptr) m_particleComponent->flipOffsetY(m_mainChar->isUpsideDown());
 	}
 
 	sf::Vector2f newPosition;
@@ -130,8 +179,17 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 }
 
 void LevelEquipment::setLightComponent(const LightData& data) {
+	delete m_lightComponent;
 	m_lightComponent = new LightComponent(data, this);
 	addComponent(m_lightComponent);
+}
+
+void LevelEquipment::setParticleComponent(const ParticleComponentData& data, const sf::Vector2f& offset, const sf::Vector2f& goalOffset) {
+	delete m_particleComponent;
+	m_particleComponent = new ParticleComponent(data, this);
+	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0) + offset);
+	m_particleComponent->setGoalOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0) + goalOffset);
+	addComponent(m_particleComponent);
 }
 
 ItemType LevelEquipment::getItemType() const {

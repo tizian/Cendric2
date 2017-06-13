@@ -30,6 +30,7 @@ item.id:eq_fireratscarf,1
 item.id:eq_huntershat,1
 item.id:eq_lavaarmor,1
 item.id:eq_lavahead,1
+item.id:eq_lavaback,1
 item.id:eq_icearmor,1
 item.id:eq_icehat,1
 item.id:eq_ironring,1

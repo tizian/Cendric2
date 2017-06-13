@@ -47,7 +47,8 @@ void ResourceTile::update(const sf::Time& frameTime) {
 	const Item* weapon = g_resourceManager->getItem(equippedItems.at(ItemType::Equipment_weapon));
 	if (weapon != nullptr && weapon->getCheck().isEquipment) {
 		LevelEquipment* weaponEquipment = new LevelEquipment(m_mainChar);
-		weaponEquipment->load(weapon->getBean<ItemEquipmentBean>(), weapon->getBean<ItemEquipmentLightBean>(), ItemType::Equipment_weapon);
+		weaponEquipment->load(weapon->getBean<ItemEquipmentBean>(), ItemType::Equipment_weapon);
+		weaponEquipment->loadComponents(weapon->getBean<ItemEquipmentLightBean>(), weapon->getBean<ItemEquipmentParticleBean>());
 		m_screen->addObject(weaponEquipment);
 	}
 }
@@ -114,7 +115,8 @@ void ResourceTile::loot() {
 	const Item* toolItem = g_resourceManager->getItem(m_toolItemID);
 	if (toolItem != nullptr && toolItem->getCheck().isEquipment) {
 		LevelEquipment* tool = new LevelEquipment(m_mainChar);
-		tool->load(toolItem->getBean<ItemEquipmentBean>(), toolItem->getBean<ItemEquipmentLightBean>(), ItemType::Equipment_weapon);
+		tool->load(toolItem->getBean<ItemEquipmentBean>(), ItemType::Equipment_weapon);
+		tool->loadComponents(toolItem->getBean<ItemEquipmentLightBean>(), toolItem->getBean<ItemEquipmentParticleBean>());
 		m_screen->addObject(tool);
 	}
 

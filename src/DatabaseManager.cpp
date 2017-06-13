@@ -6,6 +6,7 @@
 #include "Beans/ItemConvertibleBean.h"
 #include "Beans/ItemSpellBean.h"
 #include "Beans/ItemEquipmentLightBean.h"
+#include "Beans/ItemEquipmentParticleBean.h"
 #include "Beans/ItemFoodBean.h"
 #include "Beans/ItemWeaponBean.h"
 #include "Beans/ItemWeaponSlotBean.h"
@@ -259,6 +260,65 @@ ItemEquipmentLightBean* DatabaseManager::getItemEquipmentLightBean(const std::st
 			bean->map_light_radius.x = static_cast<float>(sqlite3_column_int(statement, 5));
 			bean->map_light_radius.y = static_cast<float>(sqlite3_column_int(statement, 6));
 			bean->brightness = static_cast<float>(sqlite3_column_double(statement, 7));
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	checkError();
+
+	return bean;
+}
+
+ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const std::string& item_id) const {
+	ItemEquipmentParticleBean* bean = nullptr;
+	sqlite3_stmt* statement;
+	std::string query = "SELECT * FROM item_equipment_particle WHERE item_id = '" + item_id + "';";
+
+	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
+		int cols = sqlite3_column_count(statement);
+		if (cols != 34) {
+			g_logger->logError("DatabaseManager::getItemEquipmentParticleBean", "number of returned columns must be 34");
+			return bean;
+		}
+
+		if (sqlite3_step(statement) == SQLITE_ROW) {
+			int col = 0;
+			bean = new ItemEquipmentParticleBean();
+			bean->item_id = std::string((char*)sqlite3_column_text(statement, col++));
+			bean->particle_count = sqlite3_column_int(statement, col++);
+			bean->emit_rate = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->is_additive_blend_mode = sqlite3_column_int(statement, col++) == 1;
+			bean->texture_path = std::string((char*)sqlite3_column_text(statement, col++));
+			bean->spawner_radius = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->spawner_offset.x = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->spawner_offset.y = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->size_start_min = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->size_start_max = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->size_end_min = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->size_end_max = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->goal_offset.x = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->goal_offset.y = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->speed_min = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->speed_max = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->time_min = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->time_max = static_cast<float>(sqlite3_column_int(statement, col++));
 		}
 
 		sqlite3_finalize(statement);

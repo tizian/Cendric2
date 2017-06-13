@@ -9,6 +9,7 @@ struct ItemAttributeBean;
 struct ItemBean;
 struct ItemSpellBean;
 struct ItemEquipmentBean;
+struct ItemEquipmentParticleBean;
 struct ItemEquipmentLightBean;
 struct ItemFoodBean;
 struct ItemWeaponBean;
@@ -41,6 +42,7 @@ private:
 	ItemSpellBean* getItemSpellBean(const std::string& item_id) const;
 	ItemEquipmentBean* getItemEquipmentBean(const std::string& item_id) const;
 	ItemEquipmentLightBean* getItemEquipmentLightBean(const std::string& item_id) const;
+	ItemEquipmentParticleBean* getItemEquipmentParticleBean(const std::string& item_id) const;
 	ItemFoodBean* getItemFoodBean(const std::string& item_id) const;
 	ItemWeaponBean* getItemWeaponBean(const std::string& item_id) const;
 	ItemWeaponSlotBean* getItemWeaponslotBean(const std::string& item_id, int slot_nr) const;

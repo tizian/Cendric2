@@ -32,6 +32,7 @@ public:
 	void flipOffsetX(bool flipped);
 	void flipOffsetY(bool flipped);
 	void setOffset(const sf::Vector2f& offset);
+	void setGoalOffset(const sf::Vector2f& goalOffset);
 	void setVisible(bool visible);
 	void setStatic(bool isStatic);
 	void setEmitRate(float emitRate);
@@ -51,6 +52,7 @@ private:
 	particles::TextureParticleSystem* m_ps = nullptr;
 	
 	sf::Vector2f m_offset;
+	sf::Vector2f m_goalOffset;
 	bool m_isOffsetFlippedX = false;
 	bool m_isOffsetFlippedY = false;
 
