@@ -24,7 +24,8 @@ void ShootingTile::loadSpells() {
 	{
 		m_spellData = SpellData::getSpellData(SpellID::Projectile);
 		m_spellData.duration = sf::seconds(3.f);
-		m_spellData.damagePerSecond = 5;
+		m_spellData.damagePerSecond = 10;
+		m_spellData.damage = 10;
 		m_spellData.divergenceAngle = 0.f;
 		m_activeTime = sf::seconds(1.f);
 		m_spellOffsetTime = sf::seconds(0.5f);
