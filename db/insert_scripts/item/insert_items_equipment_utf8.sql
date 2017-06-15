@@ -40,6 +40,9 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 0, -50,
 50, 80,
 1, 1.2);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_lavaback', -35, -3, 40, 18);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_lavaback', 1, 650, 150, 50, 100);
+
 
 -- Ice Hat
 
