@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="242">
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="243">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -114,69 +114,6 @@
  </tileset>
  <tileset firstgid="1382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
- </tileset>
- <tileset firstgid="1482" name="tileset_map_marshland" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="2304" columns="48">
-  <image source="../marshland/tileset_map_marshland.png" width="2500" height="2500"/>
-  <tile id="17">
-   <objectgroup draworder="index">
-    <object id="1" x="18" y="3" width="63" height="46"/>
-   </objectgroup>
-  </tile>
-  <tile id="50">
-   <objectgroup draworder="index">
-    <object id="1" x="22" y="-2" width="14" height="49"/>
-   </objectgroup>
-  </tile>
-  <tile id="65">
-   <objectgroup draworder="index">
-    <object id="2" x="18" y="0" width="65" height="48"/>
-   </objectgroup>
-  </tile>
-  <tile id="158">
-   <properties>
-    <property name="light" value="25,25,100,150,0.5"/>
-   </properties>
-  </tile>
-  <tile id="197">
-   <objectgroup draworder="index">
-    <object id="1" x="39" y="-1" width="27" height="35"/>
-   </objectgroup>
-  </tile>
-  <tile id="202">
-   <objectgroup draworder="index">
-    <object id="1" x="0" y="0" width="50" height="38"/>
-   </objectgroup>
-  </tile>
-  <tile id="241">
-   <objectgroup draworder="index">
-    <object id="1" x="9" y="-1" width="27" height="44"/>
-   </objectgroup>
-  </tile>
-  <tile id="396">
-   <properties>
-    <property name="light" value="25,10,150,100,0.8"/>
-   </properties>
-   <animation>
-    <frame tileid="396" duration="100"/>
-    <frame tileid="397" duration="100"/>
-    <frame tileid="398" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="433">
-   <objectgroup draworder="index">
-    <object id="2" x="17" y="-2" width="13" height="38"/>
-   </objectgroup>
-  </tile>
-  <tile id="538">
-   <properties>
-    <property name="light" value="25,20,100,100,0.8"/>
-   </properties>
-  </tile>
-  <tile id="586">
-   <objectgroup draworder="index">
-    <object id="1" x="8" y="21" width="33" height="24"/>
-   </objectgroup>
-  </tile>
  </tileset>
  <layer name="BG 1" width="70" height="70">
   <data encoding="csv">
@@ -316,9 +253,9 @@
 0,351,0,0,0,0,0,0,0,0,0,0,0,0,0,335,336,337,0,0,125,123,0,4,0,0,0,149,195,262,283,123,0,0,0,0,0,0,11,0,0,0,0,0,0,214,215,216,149,102,0,285,260,196,0,146,127,0,0,0,0,470,471,472,1024,1025,1050,755,1050,1070,
 0,374,35,0,0,0,0,0,0,0,0,0,0,0,0,0,123,0,0,0,125,123,0,0,0,0,0,0,125,285,283,123,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,148,149,102,285,283,100,101,102,146,127,0,35,0,493,494,495,0,0,125,0,123,1070,
 0,351,0,0,0,0,0,0,678,679,680,681,4,0,0,0,146,147,147,147,148,123,0,0,467,468,469,0,125,285,283,123,0,615,616,8,0,12,0,0,0,0,0,8,0,0,0,615,616,0,125,285,283,123,0,125,0,146,147,147,147,147,147,147,147,147,148,0,123,1070,
-104,374,0,0,0,0,0,0,701,702,703,704,0,0,126,147,148,101,101,101,101,150,0,0,0,0,0,0,125,285,283,123,0,0,0,0,0,0,0,0,0,103,104,0,0,0,0,0,753,0,125,285,283,123,730,149,101,101,101,101,101,101,101,101,101,101,101,101,150,2568,
-0,351,0,35,0,0,0,700,0,0,123,0,0,0,125,0,0,0,0,0,0,0,0,0,0,0,0,0,125,285,306,173,127,0,0,0,0,0,0,0,0,0,34,0,0,470,471,472,0,0,125,285,283,123,12,0,0,0,0,0,0,0,0,0,0,0,0,0,5,2616,
-0,0,328,0,0,0,0,0,0,0,146,147,147,147,148,0,0,0,0,4,0,0,0,0,0,0,4,0,125,195,262,283,123,0,11,467,468,469,0,0,0,0,0,0,0,493,494,495,0,126,148,285,283,146,127,470,471,472,0,8,0,0,11,467,468,469,0,10,0,2664,
+104,374,0,0,0,0,0,0,701,702,703,704,0,0,126,147,148,101,101,101,101,150,0,0,0,0,0,0,125,285,283,123,0,0,0,0,0,0,0,0,0,103,104,0,0,0,0,0,753,0,125,285,283,123,730,149,101,101,101,101,101,101,101,101,101,101,101,101,150,0,
+0,351,0,35,0,0,0,700,0,0,123,0,0,0,125,0,0,0,0,0,0,0,0,0,0,0,0,0,125,285,306,173,127,0,0,0,0,0,0,0,0,0,34,0,0,470,471,472,0,0,125,285,283,123,12,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,
+0,0,328,0,0,0,0,0,0,0,146,147,147,147,148,0,0,0,0,4,0,0,0,0,0,0,4,0,125,195,262,283,123,0,11,467,468,469,0,0,0,0,0,0,0,493,494,495,0,126,148,285,283,146,127,470,471,472,0,8,0,0,11,467,468,469,0,10,0,0,
 0,26,351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,125,0,285,283,123,0,0,0,0,0,0,615,616,0,0,0,11,0,0,0,5,0,172,308,306,173,123,493,494,495,729,0,0,0,0,0,0,0,0,33,0,0,
 0,396,397,0,103,104,0,0,4,0,0,615,616,0,0,0,0,126,147,127,0,467,468,469,0,0,126,147,148,172,308,306,173,147,147,147,0,0,0,0,0,0,0,0,0,0,0,0,0,172,308,237,237,306,173,0,0,147,147,147,147,147,147,147,147,147,147,147,147,0,
 0,419,420,0,0,0,0,0,0,0,0,0,0,0,0,0,126,148,0,146,147,147,147,147,147,147,148,172,307,308,237,237,306,307,307,307,307,307,307,307,307,307,307,307,307,307,307,307,307,308,237,237,237,237,306,307,307,307,307,307,307,307,307,307,307,307,307,307,307,307,
@@ -1151,6 +1088,11 @@
     <property name="dialogueid" value="res/npc/npc_cityguard1/dl_npc_cityguard1.lua"/>
     <property name="id" value="npc_cityguard2"/>
     <property name="texttype" value="dl_npc_cityguard1"/>
+   </properties>
+  </object>
+  <object id="242" gid="1353" x="1800" y="650" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_laslo"/>
    </properties>
   </object>
  </objectgroup>
