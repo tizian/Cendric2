@@ -1,6 +1,6 @@
 #!/bin/bash
-sleep 5
+sleep 43200
 git add --all
-git commit -a -m "crypt update 2"
+git commit -a -m "crypt update 3"
 git push
 
