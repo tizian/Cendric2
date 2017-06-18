@@ -100,6 +100,7 @@ item.id:we_simplesword,1
 item.id:we_tearstaff,1
 item.id:we_torch,1
 item.id:we_fireglaive,1
+item.id:we_firesword,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:

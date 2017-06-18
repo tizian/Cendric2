@@ -317,8 +317,8 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 			bean->goal_offset.y = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->speed_min = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->speed_max = static_cast<float>(sqlite3_column_int(statement, col++));
-			bean->time_min = static_cast<float>(sqlite3_column_int(statement, col++));
-			bean->time_max = static_cast<float>(sqlite3_column_int(statement, col++));
+			bean->time_min = static_cast<float>(sqlite3_column_double(statement, col++));
+			bean->time_max = static_cast<float>(sqlite3_column_double(statement, col++));
 		}
 
 		sqlite3_finalize(statement);

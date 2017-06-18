@@ -123,3 +123,15 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item', 'Necrotic Grimoire','Nekrotisches Zauberbuch','Nekrotischs Zauberbuech');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item_desc', 'I hope it won''t come to live again.','Ich hoffe, es erwacht nicht wieder zum Leben.', 'Ich hoff, es wird nid wieder lebendig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_necrobook', 'quest', 650, 350, -1);
+
+-- Inactive Teleport Stone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_inactive', 'item', 'Teleport Stone (Inactive)','Teleportstein (Inaktiv)','Teleportstei (Inaktiv)');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_inactive', 'item_desc', 'This stone has to be activated with the magic of a Cairn Wraith in order to be used.','Dieser Stein muss zuerst mit der Magie eines Cairn Geistes aktiviert werden, damit ich ihn benutzen kann.','De Stei mu zersch mit de Magie vomne Cairn Geist aktiviert werde dasin bruche chan.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_portstone_inactive', 'quest', 700, 350, -1);
+
+-- Robert's Teleport Stone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item', 'Robert''s Teleport Stone','Robert''s Teleportstein','Em Robert sin Teleportstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item_desc', 'A magical teleport stone. I can''t use it as it''s bound to the mage Robert.','Ein magischer Teleportstein. Ich kann ihn nicht benutzen, da er an den Magier Robert gebunden ist.','En magische Teleportstei. Ich chanen nid bruche weler an Magier Robert bunde isch.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_portstone_bob', 'quest', 700, 300, -1);
