@@ -100,6 +100,10 @@ void ParticleComponent::loadParticleSystem() {
 	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
+bool ParticleComponent::isVisible() const {
+	return m_isVisible;
+}
+
 particles::ColorUpdater* ParticleComponent::getColorUpdater() const {
 	return m_data.colorUpdater;
 }

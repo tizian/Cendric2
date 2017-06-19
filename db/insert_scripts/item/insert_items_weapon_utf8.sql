@@ -197,18 +197,24 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Fire Sword', 'Feuerschwert','Füürschwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple.','Ein heiliges Relikt aus Yasha''s Tempel','Es heiligs Relikt us de Yasha ihrem Tempel.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, 100);
-INSERT INTO item_attribute (item_id, dmg_fire, critical) values ('we_firesword', 10, 5);
+INSERT INTO item_attribute (item_id, dmg_fire, dmg_light, critical) values ('we_firesword', 12, 8, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword', 'res/assets/equipment/weapon/spritesheet_weapon_firesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firesword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword', 700, 10, 40, 80, 12);
-INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('we_firesword', 50, 30, 1, 'res/assets/particles/flame.png', 5, -20, 60, 
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('we_firesword', 40, 20, 1, 'res/assets/particles/flame.png', 5, 20, 55, 
 10, 20, 30, 40,
 255, 160, 64, 255,
 255, 160, 64, 255,
 255, 0, 0, 200,
 255, 0, 0, 200,
--50, -100,
-50, 80,
+60, -100,
+70, 100,
 0.4, 0.8);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_firesword', 30, 30, 300, 400, 100, 120, 0.5);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 3, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 4, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 5, 'meta', 2);
 
 -- Zeff's Skinning Knife
 

@@ -42,8 +42,8 @@ private:
 	ParticleComponent* m_particleComponent = nullptr;
 	bool m_isFacingRight;
 
-	// calculates position according to m_mainChar.
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
+	void updateClimbingParticles() const;
 	bool m_isCopyingMainCharColor = true;
 
 	static const int EQ_SIZE;

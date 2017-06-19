@@ -39,9 +39,9 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	void setTexturePath(const std::string& texturePath);
 
+	bool isVisible() const;
 	particles::ColorUpdater* getColorUpdater() const;
 	particles::ColorGenerator* getColorGenerator() const;
-
 	particles::TextureParticleSystem* getParticleSystem() const;
 
 private:
