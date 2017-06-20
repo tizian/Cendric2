@@ -3,6 +3,7 @@
 #include "Screens/LevelScreen.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
+#include "World/CustomParticleUpdaters.h"
 
 const int LevelEquipment::EQ_SIZE = 120;
 
@@ -112,12 +113,15 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 		timeGen->maxTime = particles->time_max;
 		data.timeGen = timeGen;
 
+		calculatePositionAccordingToMainChar(m_position);
+		auto eulerUpdater = new particles::PartialEulerUpdater(&m_position, 1.f);
+		data.eulerUpdater = eulerUpdater;
+
 		setParticleComponent(data, particles->spawner_offset, particles->goal_offset);
 	}
 
-	sf::Vector2f newPosition;
-	calculatePositionAccordingToMainChar(newPosition);
-	setPosition(newPosition);
+	calculatePositionAccordingToMainChar(m_position);
+	setPosition(m_position);
 }
 
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
@@ -149,9 +153,8 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 
 void LevelEquipment::update(const sf::Time& frameTime) {
 	if (!m_hasTexture) {
-		sf::Vector2f newPosition;
-		calculatePositionAccordingToMainChar(newPosition);
-		setPosition(newPosition);
+		calculatePositionAccordingToMainChar(m_position);
+		setPosition(m_position);
 		return;
 	}
 
@@ -176,9 +179,8 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		if (m_particleComponent != nullptr) m_particleComponent->flipOffsetY(m_mainChar->isUpsideDown());
 	}
 
-	sf::Vector2f newPosition;
-	calculatePositionAccordingToMainChar(newPosition);
-	setPosition(newPosition);
+	calculatePositionAccordingToMainChar(m_position);
+	setPosition(m_position);
 	AnimatedGameObject::update(frameTime);
 	if (m_isCopyingMainCharColor)
 		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));

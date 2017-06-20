@@ -33,4 +33,19 @@ namespace particles
 		float m_initialTimeToFade;
 		bool m_isFading = false;
 	};
+
+
+	class PartialEulerUpdater : public EulerUpdater {
+	public:
+		PartialEulerUpdater(const sf::Vector2f* refPos, float fraction = 1.f);
+		~PartialEulerUpdater() {}
+
+		void update(ParticleData *data, float dt) override;
+
+	public:
+		const sf::Vector2f* m_refPos;
+		sf::Vector2f m_oldPos;
+		float m_fraction;
+	};
+
 }

@@ -6,21 +6,12 @@
 namespace particles {
 	
 void EulerUpdater::update(ParticleData *data, float dt) {
-	const int endId = data->countAlive;
-
-	for (int i = 0; i < endId; ++i) {
+	for (int i = 0; i < data->countAlive; ++i) {
 		data->acc[i] += globalAcceleration;
-	}
-
-	for (int i = 0; i < endId; ++i) {
+		data->vel[i] += dt * data->acc[i];
 		data->pos[i] += dt * data->vel[i];
 	}
-
-	for (int i = 0; i < endId; ++i) {
-		data->vel[i] += dt * data->acc[i];
-	}
 }
-
 
 void HorizontalCollisionUpdater::update(ParticleData *data, float dt) {
 	const int endId = data->countAlive;

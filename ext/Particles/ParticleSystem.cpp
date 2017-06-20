@@ -75,7 +75,7 @@ void ParticleSystem::update(const sf::Time &dt) {
 		m_particles->acc[i] = { 0.0f, 0.0f };
 	}
 
-	for (auto & updater : m_updaters) {
+	for (auto& updater : m_updaters) {
 		updater->update(m_particles, dt.asSeconds());
 	}
 }
