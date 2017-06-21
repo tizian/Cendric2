@@ -25,4 +25,5 @@ struct ItemEquipmentParticleBean final : DatabaseBean {
     float speed_max;
     float time_min;
     float time_max;
+	float attract_fraction;
 };

@@ -114,7 +114,7 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 		data.timeGen = timeGen;
 
 		calculatePositionAccordingToMainChar(m_position);
-		auto eulerUpdater = new particles::PartialEulerUpdater(&m_position, 1.f);
+		auto eulerUpdater = new particles::AttractingEulerUpdater(&m_position, particles->attract_fraction);
 		data.eulerUpdater = eulerUpdater;
 
 		setParticleComponent(data, particles->spawner_offset, particles->goal_offset);

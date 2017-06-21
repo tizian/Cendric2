@@ -277,8 +277,8 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 34) {
-			g_logger->logError("DatabaseManager::getItemEquipmentParticleBean", "number of returned columns must be 34");
+		if (cols != 35) {
+			g_logger->logError("DatabaseManager::getItemEquipmentParticleBean", "number of returned columns must be 35");
 			return bean;
 		}
 
@@ -319,6 +319,7 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 			bean->speed_max = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->time_min = static_cast<float>(sqlite3_column_double(statement, col++));
 			bean->time_max = static_cast<float>(sqlite3_column_double(statement, col++));
+			bean->attract_fraction = static_cast<float>(sqlite3_column_double(statement, col++));
 		}
 
 		sqlite3_finalize(statement);

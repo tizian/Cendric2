@@ -49,19 +49,18 @@ namespace particles
 		m_isFading = false;
 	}
 
-	PartialEulerUpdater::PartialEulerUpdater(const sf::Vector2f* refPos, float fraction) {
+	AttractingEulerUpdater::AttractingEulerUpdater(const sf::Vector2f* refPos, float fraction) {
 		assert(refPos);
 		m_refPos = refPos;
 		m_fraction = clamp(fraction, 0.f, 1.f);
 		m_oldPos = *m_refPos;
 	}
 
-	void PartialEulerUpdater::update(ParticleData *data, float dt) {
+	void AttractingEulerUpdater::update(ParticleData *data, float dt) {
 		auto diffPos = *m_refPos - m_oldPos;
 		m_oldPos = *m_refPos;
 
 		for (int i = 0; i < data->countAlive; ++i) {
-			
 			data->acc[i] += globalAcceleration;
 			data->vel[i] += dt * data->acc[i];
 			data->pos[i] += dt * data->vel[i] + m_fraction * diffPos;

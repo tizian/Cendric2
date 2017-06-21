@@ -35,10 +35,10 @@ namespace particles
 	};
 
 
-	class PartialEulerUpdater : public EulerUpdater {
+	class AttractingEulerUpdater : public EulerUpdater {
 	public:
-		PartialEulerUpdater(const sf::Vector2f* refPos, float fraction = 1.f);
-		~PartialEulerUpdater() {}
+		AttractingEulerUpdater(const sf::Vector2f* refPos, float fraction = 1.f);
+		~AttractingEulerUpdater() {}
 
 		void update(ParticleData *data, float dt) override;
 

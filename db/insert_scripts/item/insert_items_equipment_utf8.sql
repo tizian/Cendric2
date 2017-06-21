@@ -31,7 +31,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaback', 'eq_back', 700, 250, 50);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, health_regeneration) values ('eq_lavaback', 20, 100, -20, -1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaback', 'res/assets/equipment/back/spritesheet_back_lavaback.png', 'res/assets/equipment/back/spritesheet_map_back_lavaback.png');
-INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('eq_lavaback', 50, 30, 0, 'res/assets/particles/smoke.png', 20, 0, 30, 
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_lavaback', 50, 30, 0, 'res/assets/particles/smoke.png', 20, 0, 30, 
 20, 100, 80, 120,
 44, 51, 77, 100,
 71, 71, 91, 150,
@@ -39,7 +39,7 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 218, 219, 230, 0,
 0, -50,
 50, 80,
-1, 1.2);
+1, 1.2, 0.9);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_lavaback', -35, -3, 40, 18);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_lavaback', 1, 650, 150, 50, 100);
 
