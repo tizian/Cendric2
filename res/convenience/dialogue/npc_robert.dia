@@ -36,12 +36,22 @@ npc.id:npc_robert
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:not DL:isConditionFulfilled("npc_robert", "who_are_you")
+		condition:not DL:isConditionFulfilled("npc_robert", "who_are_you") and not DL:isConditionFulfilled("npc_robert2", "who_are_you")
 		# translation: 
 		translation.tag:DL_Choice_WhoAreYou
 		translation.en:Who are you?
 		translation.de:Wer bist du?
 		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_robert", "who_are_you") and DL:isConditionFulfilled("npc_robert2", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_HeyBob
+		translation.en:Hey Bob!
+		translation.de:Hey Bob!
+		translation.ch:Hey Bob!
 	]
 	[
 		# Link node, tag is next tag
@@ -129,6 +139,85 @@ npc.id:npc_robert
 	translation.ch:Besser als niemert weni mer dich so alueg...
 	[
 		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert", "who_are_you")
+	# translation: 
+	translation.tag:DL_Robert_HeyBob
+	translation.en:(Surprised) You, here? So you're a mage after all...
+	translation.de:(Überrascht) Du, hier? Du bist also doch ein Magier...
+	translation.ch:(Überrascht) Du, do inne? Du bisch also doch en Magier...
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_WhoAreYou2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{2
+	# [10] Choice Node
+	tag:10
+	[
+		# Link node, tag is next tag
+		tag:11
+		# translation: 
+		translation.tag:DL_Choice_YouHaveTalent
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_NoTalent
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_YouHaveTalent
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_NoTalent
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
