@@ -1095,7 +1095,11 @@
     <property name="id" value="npc_laslo"/>
    </properties>
   </object>
-  <object id="243" gid="1073743137" x="3050" y="1775" width="50" height="50" rotation="180"/>
+  <object id="243" gid="1073743137" x="3050" y="1775" width="50" height="50" rotation="180">
+   <properties>
+    <property name="id" value="npc_robert2"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="107" x="1653" y="780" width="697" height="85">
@@ -1118,7 +1122,7 @@
   <object id="47" x="2308.5" y="876" width="39.5" height="66">
    <properties>
     <property name="condition" value="tutorial_started"/>
-    <property name="level entry" value="res/level/rockfall/rockfall.tmx,300,650"/>
+    <property name="level entry" value="res/level/rockfall/rockfall.tmx,260,760"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
@@ -1130,7 +1134,7 @@
   </object>
   <object id="64" x="3203.12" y="1682" width="43.75" height="36">
    <properties>
-    <property name="level entry" value="res/level/crypt/crypt.tmx,350,400"/>
+    <property name="level entry" value="res/level/crypt/crypt.tmx,355,460"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

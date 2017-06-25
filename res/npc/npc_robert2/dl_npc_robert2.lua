@@ -41,6 +41,9 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("teleport_robert", "started") and DL:isQuestComplete("teleport_robert")) then 
 		DL:addChoice(16, "DL_Choice_FinishRobertQuest") -- I got your stone.
 	end
+	if (not DL:isQuestState("teleport_robert", "void")) then 
+		DL:addChoice(-1, "DL_Choice_CU") -- See you.
+	end
 	DL:addNode()
 
 	if (not DL:isConditionFulfilled("npc_robert2", "cemetery")) then 
@@ -72,7 +75,7 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_robert2", "from_here")) then 
 
 		DL:createNPCNode(5, -2, "DL_Robert_LivingHere") -- No, I'm not from here. I'm just passing through.
-		DL:addConditionProgress("from_here")
+		DL:addConditionProgress("npc_robert2", "from_here")
 		DL:addNode()
 
 	end
@@ -96,6 +99,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_robert2", "crypt") and not DL:isConditionFulfilled("npc_robert2", "teleport_quest")) then 
 
 		DL:createNPCNode(11, 12, "DL_Robert_TeleportQuest") -- You? You look like a mere commoner. I don't think you can help me.
+		DL:addConditionProgress("npc_robert2", "teleport_quest")
 		DL:addNode()
 
 
@@ -127,7 +131,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("teleport_robert", "started") and DL:isQuestComplete("teleport_robert")) then 
 
 		DL:createNPCNode(16, 17, "DL_Robert_FinishRobertQuest") -- Wow. How did you... Well, that doesn't matter now. Thanks.
-		DL:removeItem("qe_portstone_robert", 1)
+		DL:removeItem("qe_portstone_bob", 1)
 		DL:changeQuestState("teleport_robert", "completed")
 		DL:addNode()
 
@@ -150,6 +154,9 @@ loadDialogue = function(DL)
 		DL:addConditionProgress("npc_robert2", "cairn_active")
 		DL:addNode()
 
+	end
+
+	if (not DL:isQuestState("teleport_robert", "void")) then 
 	end
 
 end

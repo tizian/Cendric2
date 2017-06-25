@@ -129,6 +129,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Move
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveUp','Move up','Nach oben bewegen','Uelaufe','Subir');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Necromancy','Necromancy','Nekromantie','Nekromantie','Necromancia');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a pickaxe to mine ore.','Du brauchst eine Spitzhacke um Erz abzubauen.', 'Du bruchsch en Pickel zum Erz hacke.','Necesitas una piqueta para minar minerales.');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPortstone','You need a teleporter stone to teleport.','Du brauchst einen Teleportstein um dich zu teleportieren.', 'Du bruchsch en Teleportstei zum dich teleportiere.','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('New','New','Neu','Neu','Nuevo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewGame','New Game','Neues Spiel','Neus Spiel','Nueva partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewJournalEntry','New journal entry','Neuer Tagebucheintrag','Neue Tagebuechiitrag','Nueva entrada en el diario');

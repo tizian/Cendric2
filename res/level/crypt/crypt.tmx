@@ -587,7 +587,7 @@
   <object id="11" gid="957" x="900" y="800" width="50" height="50"/>
   <object id="15" gid="954" x="1300" y="1950" width="50" height="50">
    <properties>
-    <property name="qe_portstone_robert" value="1"/>
+    <property name="qe_portstone_bob" value="1"/>
     <property name="unique" value=""/>
    </properties>
   </object>

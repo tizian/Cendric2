@@ -113,6 +113,16 @@ npc.id:npc_robert2
 		translation.de:Ich habe deinen Stein.
 		translation.ch:Ich ha din Stei.
 	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		condition:not DL:isQuestState("teleport_robert", "void")
+		# translation: 
+		translation.tag:DL_Choice_CU
+		translation.en:See you.
+		translation.de:Tschüss.
+		translation.ch:Tschüss.
+	]
 }
 {1
 	# [3] NPC Node
@@ -184,7 +194,7 @@ npc.id:npc_robert2
 	# [5] NPC Node
 	tag:5
 	# triggers: 
-	trigger:DL:addConditionProgress("from_here")
+	trigger:DL:addConditionProgress("npc_robert2", "from_here")
 	# translation: 
 	translation.tag:DL_Robert_LivingHere
 	translation.en:No, I'm not from here. I'm just passing through.
@@ -242,6 +252,7 @@ npc.id:npc_robert2
 	# [11] NPC Node
 	tag:11
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "teleport_quest")
 	# translation: 
 	translation.tag:DL_Robert_TeleportQuest
 	translation.en:You? You look like a mere commoner. I don't think you can help me.
@@ -260,7 +271,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_TeleportQuest2
 	translation.en:But if you manage to get my stone back... Well, I have an inactive teleport stone here.
 	translation.de:Aber wenn es dir gelingt, meinen Stein zurückzuholen... Ich habe einen inaktiven Teleporstein hier.
-	translation.ch:Aber wens schaffsch, min Stei zrugg z'hole... Ich han en  inaktive Stei do.
+	translation.ch:Aber wens schaffsch, min Stei zrugg z'hole... Ich han en inaktive Stei do.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -314,7 +325,7 @@ npc.id:npc_robert2
 	# [16] NPC Node
 	tag:16
 	# triggers: 
-	trigger:DL:removeItem("qe_portstone_robert", 1)
+	trigger:DL:removeItem("qe_portstone_bob", 1)
 	trigger:DL:changeQuestState("teleport_robert", "completed")
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest
