@@ -4,7 +4,7 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
-    if (not W:isQuestComplete("teleport_robert")) then
+    if (W:isQuestState("teleport_robert", "completed")) then
         R:setDisposed()
         return
     end
@@ -17,5 +17,6 @@ loadRoutine = function(R, W)
         R:setTalkingActive(true)	
     end
     R:setLooped(false)
+    R:setReloadEnabled(true)
 
 end	

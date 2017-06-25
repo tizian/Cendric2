@@ -5,4 +5,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ma
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('master_earth', 'quest_condition', 'Earth spell learned','Erdzauber erlernt','Erdzauber glernt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('abductors_found', 'quest_condition', 'Abductors found','Entführer gefunden','Entführer gfunde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('save_leeroy', 'quest_condition', 'Leeroy saved','Leeroy gerettet','De Leeroy grettet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('portstone_activated', 'quest_condition', 'Teleport stone activated','Teleportstein aktiviert','Teleportstei aktiviert');
 

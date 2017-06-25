@@ -1,0 +1,387 @@
+# dia file for dialogue for npc: npc_robert2
+
+npc.id:npc_robert2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_robert2", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "talked")
+	# translation: 
+	translation.tag:DL_Robert_Hello
+	translation.en:There's nothing to see here, just walk on.
+	translation.de:Hier gibt's nichts zu sehen, geh einfach weiter.
+	translation.ch:Do gits nüt z'gse, lauf eifach wiiter.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_robert2", "cemetery")
+		# translation: 
+		translation.tag:DL_Choice_WhatDoing
+		translation.en:What are you doing on the cemetery?
+		translation.de:Was machst du auf dem Friedhof?
+		translation.ch:Was machsch du ufem Friedhof?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_robert2", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_robert2", "from_here")
+		# translation: 
+		translation.tag:DL_Choice_FromHere
+		translation.en:Are you living here in this village?
+		translation.de:Lebst du hier im Dorf?
+		translation.ch:Lebsch du do im Dorf?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_robert2", "crypt") and DL:isConditionFulfilled("npc_robert2", "cemetery")
+		# translation: 
+		translation.tag:DL_Choice_Crypt
+		translation.en:Have you been inside the crypt then?
+		translation.de:Warst du denn in der Krypta?
+		translation.ch:Bisch denn ide Krypta gsi?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_robert2", "crypt") and not DL:isConditionFulfilled("npc_robert2", "teleport_quest")
+		# translation: 
+		translation.tag:DL_Choice_TeleportQuest
+		translation.en:What's in for me if I help you get your stone back?
+		translation.de:Was springt für mich raus wenn ich dir helfe, den Stein zu holen?
+		translation.ch:Wa springt für mich use weni der hilf, de Stei z'hole?
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("npc_robert2", "teleport_quest") and not DL:isConditionFulfilled("npc_robert2", "afraid") and not DL:isQuestState("teleport_robert", "completed")
+		# translation: 
+		translation.tag:DL_Choice_Afraid
+		translation.en:Why are you so afraid of that skeleton?
+		translation.de:Wieso hast du solche Angst vor diesem Skelett?
+		translation.ch:Weso hesch so Schiss vor dem Skelett?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isConditionFulfilled("npc_robert2", "teleport_quest") and DL:isQuestState("teleport_robert", "void")
+		# translation: 
+		translation.tag:DL_Choice_StartRobertQuest
+		translation.en:I'll get your stone from the crypt.
+		translation.de:Ich hole deinen Stein aus der Krypta.
+		translation.ch:Ich hole din Stei us de Krypta.
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:isQuestState("teleport_robert", "started") and DL:isQuestComplete("teleport_robert")
+		# translation: 
+		translation.tag:DL_Choice_FinishRobertQuest
+		translation.en:I got your stone.
+		translation.de:Ich habe deinen Stein.
+		translation.ch:Ich ha din Stei.
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "cemetery")
+	# translation: 
+	translation.tag:DL_Robert_WhatDoing
+	translation.en:Hmm, nothing. But I strongly advise you not to go down into the crypt. It's spooky there. 
+	translation.de:Hmm, nichts. Aber ich würde dir davon abraten, in die Krypta hinunter zu gehen. Es spukt dort.
+	translation.ch:Hmm, nüt. Aber ich wür der devo abrote, id Krypta z'go. Es isch gruslig dete.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "who_are_you")
+	# translation: 
+	translation.tag:DL_Robert_WhoAreYou
+	translation.en:I'm Bob and I possess magical powers! Impressive, ain't it.
+	translation.de:Ich bin Bob und ich habe magische Kräfte! Beeindruckend, nicht.
+	translation.ch:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{2
+	# [7] Choice Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_VeryImpressive
+		translation.en:Very impressive, indeed.
+		translation.de:Sehr beeindruckend, wirklich.
+		translation.ch:Sehr beidruckend, würkli.
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_NotVeryImpressed
+		translation.en:Hm. How's that special?
+		translation.de:Hm. Wieso ist das so aussergewöhnlich?
+		translation.ch:Hm. Wieso isch da so speziell?
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_NotVeryImpressed
+	translation.en:Not many are able to wield magic here. You'd better show some respect.
+	translation.de:Nicht viele hier können Magie benutzen. Du solltest besser etwas Respekt zeigen.
+	translation.ch:Nid viel do chönd Magie bruche. Du sötsch besser chli Respekt zeige.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("from_here")
+	# translation: 
+	translation.tag:DL_Robert_LivingHere
+	translation.en:No, I'm not from here. I'm just passing through.
+	translation.de:Nein, ich bin nicht von hier. Nur auf der Durchreise.
+	translation.ch:Nei, ich bi nid vo do. Nur uf de Durchreis.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "crypt")
+	# translation: 
+	translation.tag:DL_Robert_Crypt
+	translation.en:Hm. Yes. Listen, I was just trying out my powers... and then a little mistake happened. 
+	translation.de:Hm. Ja. Hör zu, ich wollte nur meine Kräfte ausprobieren und dann ist ein kleiner Unfall passiert.
+	translation.ch:Hm. Jo. Los, ich ha nur wele mini Chräft usprobiere und denn isch en chliine Unfall passiert.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_Crypt2
+	translation.en:A skeleton in the crypt suddenly started to move! I was so shocked that I ran out of the crypt and then I noticed that my teleport stone was missing. 
+	translation.de:Ein Skelett in der Krypta hat sich plötzlich bewegt! Ich war so geschockt, dass ich hinausgerannt bin. Doch dann habe ich bemerkt, dass ich meinen Teleportstein in der Krypta verloren habe.
+	translation.ch:E Skelett ide Krypta het sich plötzlich bewegt! Ich bi so gschockt gsi dasi us de Krypta grennt bi und denn hani gmerkt dasi min Teleportstei det verlore han.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_Crypt3
+	translation.en:But I really need this stone! I can't get away without it.
+	translation.de:Aber ich brauche diesen  Stein wirklich! Ohne ihn komme ich nicht weg von hier.
+	translation.ch:Aber ich bruch de Stei würkli! Ohni ihn chumi nid weg vo do.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_TeleportQuest
+	translation.en:You? You look like a mere commoner. I don't think you can help me.
+	translation.de:Du? Du siehst aus wie ein Gewöhnlicher. Ich glaube nicht, dass du mir helfen kannst.
+	translation.ch:Du? Du gsesch us wenen Gwöhnliche. Ich glaub nid dasmer helfe chasch.
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_TeleportQuest2
+	translation.en:But if you manage to get my stone back... Well, I have an inactive teleport stone here.
+	translation.de:Aber wenn es dir gelingt, meinen Stein zurückzuholen... Ich habe einen inaktiven Teleporstein hier.
+	translation.ch:Aber wens schaffsch, min Stei zrugg z'hole... Ich han en  inaktive Stei do.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_TeleportQuest3
+	translation.en:You could have it. It's worth a lot to mages, so you could sell it.
+	translation.de:Du könntest ihn haben. Er ist ziemlich wertvoll für Magier. Du könntest ihn verkaufen.
+	translation.ch:De chöntsch ha. Er isch zimli wertvoll für Magier. Du chöntschen ja verchaufe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "afraid")
+	# translation: 
+	translation.tag:DL_Robert_Afraid
+	translation.en:I'm not afraid. Only cautious.
+	translation.de:Ich habe keine Angst, bin nur vorsichtig.
+	translation.ch:Ich ha kei Schiss, bi nur vorsichtig.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:changeQuestState("teleport_robert", "started")
+	# translation: 
+	translation.tag:DL_Robert_StartRobertQuest
+	translation.en:Maybe you're lucky. I'll waith here.
+	translation.de:Vielleicht hast du ja Glück. Ich warte hier.
+	translation.ch:Vilicht hesch ja Glück. Ich warte do.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:removeItem("qe_portstone_robert", 1)
+	trigger:DL:changeQuestState("teleport_robert", "completed")
+	# translation: 
+	translation.tag:DL_Robert_FinishRobertQuest
+	translation.en:Wow. How did you... Well, that doesn't matter now. Thanks.
+	translation.de:Wow. Wie hast du... Nun, das ist jetzt auch egal. Danke.
+	translation.ch:Wow. We hesch du... Eh, das isch ez au egal. Danke.
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:addItem("qe_portstone_inactive", 1)
+	# translation: 
+	translation.tag:DL_Robert_FinishRobertQuest2
+	translation.en:As promised, you get the inactive stone.
+	translation.de:Wie versprochen, hier der inaktive Stein.
+	translation.ch:We versproche, do hesch de inaktiv Stei.
+	[
+		# Link node, tag is next tag
+		tag:18
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_FinishRobertQuest3
+	translation.en:If you'd be a mage, you'd be able to infuse it with magic from a cairn wraith.
+	translation.de:Wenn du ein Magier wärst, könntest du ihn mit der Magie eines Cairn Geistes aufladen.
+	translation.ch:Wennd en Magier wärsch, chöntschen mit de Magie vomne Cairn Geischt uflade.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:changeQuestState("teleport_own", "started")
+	# translation: 
+	translation.tag:DL_Robert_FinishRobertQuest4
+	translation.en:I think I've seen some of them in the Stone Garden in the North. 
+	translation.de:Ich glaube, ich habe ein paar davon im Steingarten im Norden gesehen.
+	translation.ch:Ich glaub, ich ha paar vo dene im Steigarte im Norde gse.
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "cairn_active")
+	# translation: 
+	translation.tag:DL_Robert_FinishRobertQuest5
+	translation.en:Good luck with it. I'm off then. (Robert takes the stone and disappears)
+	translation.de:Viel Glück damit. Ich bin dann mal weg. (Robert nimmt den Stein und verschwindet)
+	translation.ch:Viel Glück demit. Ich bi denn mal weg. (De Robert nimmt de Stei und verschwindet)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
