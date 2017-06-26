@@ -74,7 +74,7 @@ private:
 
 	void loadComponents();
 	void updateDamagedOverlay();
-	int getSpellFromKey(Key key);
+	static int getSpellFromKey(Key key);
 
 private:
 	CharacterCore* m_core;

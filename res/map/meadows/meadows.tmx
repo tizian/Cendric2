@@ -1175,7 +1175,7 @@
   </object>
   <object id="175" x="1905.12" y="159" width="43.75" height="36">
    <properties>
-    <property name="level entry" value="res/level/stonegarden/stonegarden.tmx,4750,700"/>
+    <property name="level entry" value="res/level/stonegarden/stonegarden.tmx,4760,760"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

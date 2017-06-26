@@ -165,7 +165,7 @@ void Screen::setTooltipTextRaw(const std::string& text, const sf::Color& color, 
 		return;
 	}
 	
-	m_tooltipText = BitmapText(g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(0.4f * WINDOW_WIDTH)));
+	m_tooltipText = BitmapText(g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_M, static_cast<int>((m_isTooltipTop ? 0.4f : 0.6f) * WINDOW_WIDTH)));
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setTextAlignment(TextAlignment::Center);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
