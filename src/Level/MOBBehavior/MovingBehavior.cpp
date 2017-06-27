@@ -202,6 +202,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
+	rec.excludedGameObject = m_mob;
 
 	bool isMovingDown = nextPosition.y > bb.top;
 	bool isMovingRight = nextPosition.x > bb.left;

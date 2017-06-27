@@ -187,6 +187,7 @@ void MapOverlay::reloadWaypoints() {
 		delete wp;
 	}
 	m_waypoints.clear();
+	if (!m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) return;
 
 	const LevelData* lData = dynamic_cast<const LevelData*>(m_screen->getWorldData());
 	if (lData && lData->isBossLevel) {
@@ -293,9 +294,6 @@ void WaypointMarker::loadAnimation() {
 
 	m_tooltip.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_tooltip.setTextStyle(TextStyle::Shadowed);
-	if (m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) {
-		m_tooltip.setString(g_textProvider->getText("ClickToTeleport"));
-	}
 }
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
@@ -325,13 +323,6 @@ void WaypointMarker::render(sf::RenderTarget& target) {
 }
 
 void WaypointMarker::onRightClick() {
-	if (!m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) {
-		m_screen->setTooltipPositionTop(false);
-		m_screen->setNegativeTooltip(WaypointTile::NO_TOOL_MSG);
-		m_screen->setTooltipPositionTop(true);
-		return;
-	}
-
 	if (m_parent->isOnCurrentMap()) {
 		m_mainChar->setPosition(m_waypointPosition);
 	}

@@ -314,6 +314,8 @@ bool LevelMovableGameObject::collides(const sf::Vector2f& nextPos) const {
 	nextBoundingBox.left = nextPos.x;
 	nextBoundingBox.top = nextPos.y;
 	rec.boundingBox = nextBoundingBox;
+	auto bb = getBoundingBox();
+	rec.collisionDirection = bb->top < nextBoundingBox.top ? CollisionDirection::Down : CollisionDirection::Up;
 	return m_level->collides(rec);
 }
 

@@ -44,7 +44,7 @@ bool MovingTile::init(const LevelTileProperties& properties) {
 	m_isFreezable = !contains(properties, std::string("unfreezable"));
 	bool isFrozen = contains(properties, std::string("frozen"));
 	bool isActive = !contains(properties, std::string("inactive"));
-	m_isOneWay = !contains(properties, std::string("oneway"));
+	m_isOneWay = contains(properties, std::string("oneway"));
 	bool isSpikesTop = contains(properties, std::string("spikestop"));
 	bool isSpikesBottom = contains(properties, std::string("spikesbottom"));
 

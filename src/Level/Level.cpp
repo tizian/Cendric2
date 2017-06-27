@@ -135,28 +135,33 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// check collidable dynamic tiles
 	for (GameObject* go : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-
+		if (tile == rec.excludedGameObject || !tile->isCollidable()) continue;
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
+
 		if (tile->isOneWay()) {
 			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
-			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
+			if (rec.excludedGameObject) {
+				auto recBB = rec.excludedGameObject->getBoundingBox();
+				if (recBB->top + recBB->height > tile->getPosition().y) continue;
+			}
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+		if (epsIntersect(tileBB, rec.boundingBox)) {
 			calculateCollisionLocations(rec, tileBB);
 		}
 	}
 
 	for (GameObject* go : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(go);
-
+		if (tile == rec.excludedGameObject || !tile->isCollidable()) continue;
 		if (rec.ignoreDynamicTiles && !(tile->isStrictlyCollidable())) continue;
+
 		if (tile->isOneWay()) {
 			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
 			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (tile != rec.excludedGameObject && tile->isCollidable() && epsIntersect(tileBB, rec.boundingBox)) {
+		if (epsIntersect(tileBB, rec.boundingBox)) {
 			MovableGameObject* mob = dynamic_cast<MovableGameObject*>(tile);
 			rec.movingParent = mob->getMovingParent(); // question: should we only take the moving parent if the max collision is this tile?
 			calculateCollisionLocations(rec, tileBB);
