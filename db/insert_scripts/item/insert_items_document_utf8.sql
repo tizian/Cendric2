@@ -140,3 +140,20 @@ And keep an eye out for the mark! Don''t make me wait any longer - I need them a
  Und lueged ober es Zeiche irgendwo gsehnd! Wehe ich mun na länger warte - ich bruuch si weni usem Hochland zrugg bin.
  - V.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_veliusletter', 'document', 650, 550, -1);
+
+-- Note (Koray)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item', 'Note','Notiz','Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item_desc', 'A suspicious note, found in the Ascent.','Eine verdächtige Notiz, gefunden im Aufstieg.','E verdächtigi Notiz, gfunde im Ufstiig.');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notekoray', 0, 'NoteKoray');
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notekoray', 'missing_koray', 3);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteKoray', 'document', 'Turn back. I don''t know if I''ll ever escape. Can''t think properly.
+
+-- Koray','Kehr um. Ich weiss nicht, ob ich jemals entkomme. Kann nicht richtig denken.
+
+-- Koray','Gang zrugg. Ich weiss nid, ob ich flüchte chan. Chan nid richtig denke.
+
+-- Koray');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_notekoray', 'document', 400, 400, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_notekoray', -25, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_notekoray', 1, 450, 0, 100, 50);

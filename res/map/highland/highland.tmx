@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="291">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="291">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -115,6 +115,26 @@
     <frame tileid="879" duration="100"/>
    </animation>
   </tile>
+  <tile id="886">
+   <objectgroup draworder="index">
+    <object id="1" x="19" y="0" width="12" height="42"/>
+   </objectgroup>
+  </tile>
+  <tile id="977">
+   <objectgroup draworder="index">
+    <object id="2" x="18" y="0" width="17" height="42"/>
+   </objectgroup>
+  </tile>
+  <tile id="979">
+   <objectgroup draworder="index">
+    <object id="1" x="42" y="0" width="18" height="38"/>
+   </objectgroup>
+  </tile>
+  <tile id="981">
+   <objectgroup draworder="index">
+    <object id="1" x="36" y="0" width="23" height="48"/>
+   </objectgroup>
+  </tile>
   <tile id="1008">
    <animation>
     <frame tileid="1008" duration="100"/>
@@ -148,6 +168,11 @@
     <property name="light" value="25,35,100,150,0.5"/>
    </properties>
   </tile>
+  <tile id="1073">
+   <objectgroup draworder="index">
+    <object id="1" x="14" y="0" width="22" height="45"/>
+   </objectgroup>
+  </tile>
   <tile id="1110">
    <objectgroup draworder="index">
     <object id="1" x="8" y="0" width="35" height="44"/>
@@ -166,6 +191,16 @@
   <tile id="1159">
    <objectgroup draworder="index">
     <object id="1" x="9" y="17" width="78" height="28"/>
+   </objectgroup>
+  </tile>
+  <tile id="1171">
+   <objectgroup draworder="index">
+    <object id="2" x="24" y="0" width="29" height="45"/>
+   </objectgroup>
+  </tile>
+  <tile id="1173">
+   <objectgroup draworder="index">
+    <object id="1" x="36" y="0" width="20" height="45"/>
    </objectgroup>
   </tile>
   <tile id="1206">

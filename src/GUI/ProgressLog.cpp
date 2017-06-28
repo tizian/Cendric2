@@ -131,6 +131,7 @@ void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState st
 }
 
 void ProgressLog::addQuestDescriptionAdded(const std::string& questID) {
+	if (m_core->getQuestState(questID) != QuestState::Started) return;
 	std::string text = g_textProvider->getText(questID, "quest") + ": ";
 	text.append(g_textProvider->getText("NewJournalEntry"));
 	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, COLOR_NEUTRAL));
