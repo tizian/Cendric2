@@ -23,9 +23,9 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 
 	m_buffBar = new EnemyBuffBar(this);
 
-	sf::Texture* cursorTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR);
-	m_targetSprite.setTexture(*cursorTexture);
-	m_targetSprite.setOrigin(sf::Vector2f(0.5f * cursorTexture->getSize().x, 0.5f * cursorTexture->getSize().y));
+	m_targetSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
+	m_targetSprite.setTextureRect(sf::IntRect(25, 0, 25, 25));
+	m_targetSprite.setOrigin(sf::Vector2f(12.f, 12.f));
 }
 
 Enemy::~Enemy() {
