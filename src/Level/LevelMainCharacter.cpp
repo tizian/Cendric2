@@ -90,8 +90,17 @@ void LevelMainCharacter::handleAttackInput() {
 	if (g_inputController->isActionLocked()) return;
 
 	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
+	bool isEnemyTargeted = m_targetManager->getCurrentTargetEnemy() != nullptr;
+	CursorSkin cursorSkin = isEnemyTargeted ? CursorSkin::TargetInactive : CursorSkin::TargetActive;
 
-	sf::Vector2f target = !isMousePressed && m_targetManager->getCurrentTargetEnemy() != nullptr ?
+	if (isMousePressed) {
+		g_inputController->getCursor().setCursorSkin(CursorSkin::TargetHighlight, sf::seconds(0.2f), cursorSkin);
+	}
+	else {
+		g_inputController->getCursor().setCursorSkin(cursorSkin);
+	}
+
+	sf::Vector2f target = !isMousePressed && isEnemyTargeted ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		g_inputController->getMousePosition();

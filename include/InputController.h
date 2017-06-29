@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Enums/Key.h"
+#include "GUI/Cursor.h"
 
 class InputController final {
 public:
@@ -9,7 +10,7 @@ public:
 	~InputController();
 
 	// refreshes the keymap
-	void update();
+	void update(const sf::Time& frameTime);
 
 	void setWindow(sf::RenderWindow* window, sf::RenderTexture* texture);
 	void setCurrentWindowSize(int width, int height);
@@ -62,6 +63,8 @@ public:
 	// returns the sf::keyboard::key that was pressed in the last frame. If none, returns sf::Keyboard::Unknown
 	sf::Keyboard::Key getLastPressedKey() const;
 
+	Cursor& getCursor();
+
 private:
 	// initializes the keymaps
 	void init();
@@ -70,6 +73,7 @@ private:
 	std::map<Key, bool> m_keyJustPressedMap;
 	sf::RenderWindow* m_mainWindow;
 	sf::RenderTexture* m_renderTexture;
+	Cursor m_cursor;
 
 	// Mouse keys can't be set in this maps. Their functions are fixed
 	const std::map<Key, sf::Keyboard::Key>* m_mainKeyMap;

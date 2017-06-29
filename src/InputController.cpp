@@ -22,7 +22,7 @@ bool InputController::isActionLocked() const {
 	return m_isActionLocked;
 }
 
-void InputController::update() {
+void InputController::update(const sf::Time& frameTime) {
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	m_isActionLocked = false;
 	m_lastPressedKey = sf::Keyboard::Unknown;
@@ -60,6 +60,8 @@ void InputController::update() {
 	m_isMouseInsideView = 
 		pos.x >= 0.f && pos.x <= static_cast<float>(WINDOW_WIDTH) && 
 		pos.y >= 0.f && pos.y <= static_cast<float>(WINDOW_HEIGHT);
+
+	m_cursor.update(frameTime);
 }
 
 void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* texture) {
@@ -238,4 +240,8 @@ bool InputController::isScrolledUp() const {
 
 bool InputController::isScrolledDown() const {
 	return isKeyJustPressed(Key::Down) || isMouseWheelScrolledDown();
+}
+
+Cursor& InputController::getCursor() {
+	return m_cursor;
 }

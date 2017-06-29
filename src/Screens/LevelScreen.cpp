@@ -156,11 +156,13 @@ void LevelScreen::execOnEnter(const Screen* previousScreen) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(),
 		m_currentLevel.getWorldData()->isBossLevel,
 		m_currentLevel.getWorldData()->isObserved));
+	g_inputController->getCursor().setCursorSkin(CursorSkin::TargetActive);
 }
 
 void LevelScreen::execOnExit(const Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
 	cleanUp();
+	g_inputController->getCursor().setCursorSkin(CursorSkin::Pointer);
 }
 
 void LevelScreen::addSpellBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr) {

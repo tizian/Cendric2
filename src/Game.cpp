@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "Misc/icon.h"
-#include "GlobalResource.h"
 
 sf::RenderWindow* g_renderWindow;
 
@@ -9,10 +8,8 @@ Game::Game() {
 	reloadWindow();
 
 	m_mainSprite.setTexture(m_renderTexture.getTexture());
-	m_cursor.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
-
+	
 	m_running = true;
-
 	m_screenManager = new ScreenManager(new SplashScreen());
 }
 
@@ -60,9 +57,8 @@ void Game::run() {
 		sf::Time deltaTime;
 
 		// input
-		g_inputController->update();
-		m_cursor.setPosition(g_inputController->getDefaultViewMousePosition() - sf::Vector2f(9.f, 9.f));
-
+		g_inputController->update(frameTime);
+		
 		// don't count this loop into the frametime!
 		deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e)) {
@@ -116,7 +112,7 @@ void Game::run() {
 
 		m_renderTexture.display();
 		m_mainWindow.draw(m_mainSprite);
-		m_mainWindow.draw(m_cursor);
+		g_inputController->getCursor().render(m_mainWindow);
 		m_mainWindow.display();
 	}
 
