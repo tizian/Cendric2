@@ -1,12 +1,12 @@
--- Stephen's Helmet
+-- Steven's Helmet
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stephenhelmet', 'item', 'Stephen''s Helmet','Stephen''s Helm','Em Stephen sin Helm');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stephenhelmet', 'item_desc', 'This helmet belongs to the paladin Stephen.','Dieser Helm gehört dem Paladin Stephen.','De Helm ghört em Paladin Stephen.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_stephenhelmet', 'eq_head', 200, 550, 50);
-INSERT INTO item_attribute (item_id, res_physical, res_fire, dmg_light) values ('eq_stephenhelmet', 8, 2, 3);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_stephenhelmet', 'res/assets/equipment/head/spritesheet_head_stephenhelmet.png', 'res/assets/equipment/head/spritesheet_map_head_stephenhelmet.png');
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stephenhelmet', -10, -29, 31, 27);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_stephenhelmet', 1, 550, 100, 50, 100);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stevenhelmet', 'item', 'Steven''s Helmet','Steven''s Helm','Em Steven sin Helm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stevenhelmet', 'item_desc', 'This helmet belongs to the paladin Steven.','Dieser Helm gehört dem Paladin Steven.','De Helm ghört em Paladin Steven.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_stevenhelmet', 'eq_head', 200, 550, 50);
+INSERT INTO item_attribute (item_id, res_physical, res_fire, dmg_light) values ('eq_stevenhelmet', 8, 2, 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_stevenhelmet', 'res/assets/equipment/head/spritesheet_head_stevenhelmet.png', 'res/assets/equipment/head/spritesheet_map_head_stevenhelmet.png');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stevenhelmet', -10, -29, 31, 27);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_stevenhelmet', 1, 550, 100, 50, 100);
 
 -- Lava Crown
 

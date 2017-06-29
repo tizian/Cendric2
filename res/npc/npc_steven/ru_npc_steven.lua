@@ -1,8 +1,8 @@
--- Routine for NPC "Stephen"
+-- Routine for NPC "Steven"
 
 loadRoutine = function(R, W)
 
-	if (not W:isConditionFulfilled("npc_stephen", "talked")) then 
+	if (not W:isConditionFulfilled("npc_steven", "talked")) then 
 	
 		R:setTalkingActive(true) 
 		R:setLooped(false)
