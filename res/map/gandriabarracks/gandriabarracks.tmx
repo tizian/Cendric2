@@ -241,11 +241,11 @@
  <objectgroup name="npc">
   <object id="137" gid="383" x="249" y="549" width="50" height="50">
    <properties>
-    <property name="dialogueid" value="res/npc/npc_stephen/dl_npc_stephen.lua"/>
-    <property name="dialoguetexture" value="res/npc/npc_stephen/npc_stephen.png"/>
-    <property name="id" value="npc_stephen2"/>
-    <property name="spritesheetpath" value="res/npc/npc_stephen/spritesheet_npc_stephen.png"/>
-    <property name="texttype" value="dl_npc_stephen"/>
+    <property name="dialogueid" value="res/npc/npc_steven/dl_npc_steven.lua"/>
+    <property name="dialoguetexture" value="res/npc/npc_steven/npc_steven.png"/>
+    <property name="id" value="npc_steven2"/>
+    <property name="spritesheetpath" value="res/npc/npc_steven/spritesheet_npc_steven.png"/>
+    <property name="texttype" value="dl_npc_steven"/>
    </properties>
   </object>
   <object id="140" gid="390" x="950" y="150" width="50" height="50">
