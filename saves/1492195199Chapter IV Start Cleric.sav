@@ -36,7 +36,7 @@ item.id:eq_icehat,1
 item.id:eq_ironring,1
 item.id:eq_leatherarmor,1
 item.id:eq_mercenarybandana,1
-item.id:eq_stephenhelmet,1
+item.id:eq_stevenhelmet,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
 item.id:fo_apple,12
@@ -326,7 +326,7 @@ quest.state:roast_meat_for_ingrid,2
 quest.state:save_leeroy,3
 quest.state:silkweed_potion,2
 quest.state:spoiled_fire,2
-quest.state:stephens_helmet,2
+quest.state:stevens_helmet,2
 quest.state:the_mark,1
 quest.state:the_rats_nest,2
 quest.state:who_am_i,2
@@ -352,7 +352,7 @@ quest.progress.description:gates_of_gandria,1
 quest.progress.description:join_a_guild,1,2,3,4
 quest.progress.description:leeroy_chicken,1,2
 quest.progress.description:monster_problem,1
-quest.progress.description:stephens_helmet,1
+quest.progress.description:stevens_helmet,1
 quest.progress.description:the_mark,1,2,3,4
 quest.progress.description:zeff_returns,1
 # conditions of a certain type fulfilled:
@@ -392,7 +392,7 @@ progress.condition:npc_nuray,who_are_you
 progress.condition:npc_paladin1,armor,paladin,who_are_you
 progress.condition:npc_paladin2,duty,mage,what_doing
 progress.condition:npc_rhendal,hawthorn_staff,potion_drunk,spoiled_schnapps,talked,talked_about_schnapps,the_mark,what_is_a_mage
-progress.condition:npc_stephen,lloyd,rules,talked,who_are_you
+progress.condition:npc_steven,lloyd,rules,talked,who_are_you
 progress.condition:npc_syrah,helper2,mark_seen,necromancers_found,sewers,talked
 progress.condition:npc_thea,gandria,mages,traveling_alone,what_are_you_doing,who_are_you,work_farmers
 progress.condition:npc_thiran,first_spell,talked

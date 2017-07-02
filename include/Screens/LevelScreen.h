@@ -78,6 +78,7 @@ private:
 
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);
+	void handleBackToCheckpoint();
 	void handleBossDefeated(const sf::Time& frameTime);
 	EnemyReward m_bossRewards;
 

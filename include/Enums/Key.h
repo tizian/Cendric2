@@ -29,5 +29,6 @@ enum class Key {
 	SwitchTarget,
 	Screenshot,
 	Debug,
+	BackToCheckpoint,
 	MAX
 };

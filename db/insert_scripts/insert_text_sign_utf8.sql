@@ -30,3 +30,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedAntiGravity','sign','Upside down...?','Verkehrte Welt...?','Vercherti Wält...?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedTelekinesis','sign','Can you reach it?','Kommst du da ran?','Chunsch ane?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CathedralClosed','sign','No access for unauthorised visitors','Zutritt für unbefugte Besucher verboten.','Zuetritt für unbefugti Bsuecher verbote.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Masochist','sign','Masochist','Masochist','Masochist');

@@ -378,6 +378,8 @@ public:
 			return "SwitchTarget";
 		case Key::Screenshot:
 			return "Screenshot";
+		case Key::BackToCheckpoint:
+			return "BackToCheckpoint";
 		}
 	}
 

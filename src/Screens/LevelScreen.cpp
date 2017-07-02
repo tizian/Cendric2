@@ -238,6 +238,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	m_weatherSystem->update(m_mainChar->getPosition(), frameTime);
 	handleGameOver(frameTime);
 	handleBossDefeated(frameTime);
+	handleBackToCheckpoint();
 
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateObjects(GameObjectType::_Form, frameTime);
@@ -404,6 +405,14 @@ void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
 		m_interface->getInventory()->show();
+	}
+}
+
+void LevelScreen::handleBackToCheckpoint() {
+	if (m_isBossDefeated) return;
+
+	if (g_inputController->isKeyJustPressed(Key::BackToCheckpoint)) {
+		onBackToCheckpoint();
 	}
 }
 
