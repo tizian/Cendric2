@@ -18,3 +18,4 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Righ
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKey','Is locked! (Key needed)','Ist verschlossen! (Schlüssel benötigt)','Da isch abgschlosse! (Brucht en Schlüssel)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedPicklock','Is locked! (Picklock needed)','Ist verschlossen! (Dietrich benötigt)','Da isch abgschlosse! (Brucht en Dietrich)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKeyPicklock','Is locked! (Key/Picklock needed)','Ist verschlossen! (Schlüssel/Dietrich benötigt)','Da isch abgschlosse! (Brucht en Schlüssel/Dietrich)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughMaterials','Not enough materials!','Nicht genügend Materialien!','Nid gnueg Mats!','¡No hay suficiente ?!');

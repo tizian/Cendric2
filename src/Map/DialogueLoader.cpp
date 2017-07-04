@@ -73,7 +73,7 @@ void DialogueLoader::loadDialogue() {
 	catch (LuaException const& e) {
 		g_logger->logError("DialogeLoader", "LuaException: " + std::string(e.what()));
 	}
-	
+
 	m_dialogue.setRoot(m_root);
 }
 
@@ -84,6 +84,58 @@ void DialogueLoader::addChoice(int nextTag, const std::string& text) {
 	}
 	ChoiceTranslation trans;
 	trans.text = text;
+	m_currentNode->choices.push_back(std::pair<ChoiceTranslation, int>(trans, nextTag));
+}
+
+void DialogueLoader::addCraftingChoice(int nextTag, const std::string& text) {
+	if (m_currentNode == nullptr || m_currentNode->type != DialogueNodeType::Choice) {
+		g_logger->logError("DialogueLoader", "Cannot add crafting choice: No choice node created.");
+		return;
+	}
+
+	std::string rawText = g_textProvider->getText(text, m_dialogue.getID(), false, true);
+	ChoiceTranslation trans;
+	// resolve the text
+	size_t pos = rawText.find(',');
+	if (pos == std::string::npos) {
+		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+		return;
+	}
+
+	trans.crafting.item = rawText.substr(0, pos);
+	rawText = rawText.substr(pos + 1);
+	pos = rawText.find(',');
+	if (pos == std::string::npos) {
+		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+		return;
+	}
+
+	while (pos != std::string::npos) {
+		std::string item = rawText.substr(0, pos);
+		rawText = rawText.substr(pos + 1);
+		pos = rawText.find(',');
+		std::string amountText = rawText;
+		if (pos == std::string::npos) {
+			if (rawText.empty()) {
+				g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+				return;
+			}
+		}
+		else {
+			amountText = rawText.substr(0, pos);
+			rawText = rawText.substr(pos + 1);
+			pos = rawText.find(',');
+		}
+
+		int amount = std::stoi(amountText);
+		if (amount <= 0) {
+			g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+			return;
+		}
+
+		trans.crafting.materials.push_back(std::make_pair(item, amount));
+	}
+
 	m_currentNode->choices.push_back(std::pair<ChoiceTranslation, int>(trans, nextTag));
 }
 

@@ -206,103 +206,50 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(9)
-	if (DL:hasItem("fo_healingherb", 1) and DL:hasItem("fo_water", 1)) then 
-		DL:addChoice(10, "DL_Choice_LesserHealingPotion") -- $fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
-	end
-	if (DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)) then 
-		DL:addChoice(12, "DL_Choice_MediumHealingPotion") -- $fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
-	end
-	if (DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)) then 
-		DL:addChoice(13, "DL_Choice_GreaterHealingPotion") -- $fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
-	end
-	if (DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-		DL:addChoice(14, "DL_Choice_ElixirFire") -- $pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
-	end
-	if (DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-		DL:addChoice(15, "DL_Choice_ElixirLight") -- $pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
-	end
-	if (DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-		DL:addChoice(16, "DL_Choice_ElixirShadow") -- $pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
-	end
-	if (DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-		DL:addChoice(17, "DL_Choice_ElixirIce") -- $pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
-	end
+	DL:addCraftingChoice(10, "DL_Choice_LesserHealingPotion") -- fo_lesserhealingpotion,fo_healingherb,1,fo_water,1
+	DL:addCraftingChoice(12, "DL_Choice_MediumHealingPotion") -- fo_mediumhealingpotion,fo_healingherb,2,fo_water,1
+	DL:addCraftingChoice(13, "DL_Choice_GreaterHealingPotion") -- fo_greaterhealingpotion,fo_healingherb,3,fo_water,1
+	DL:addCraftingChoice(14, "DL_Choice_ElixirFire") -- pe_elixirfire,fo_redhat,1,fo_stormweed,1,fo_wine,1
+	DL:addCraftingChoice(15, "DL_Choice_ElixirLight") -- pe_elixirlight,fo_glowingshroom,1,fo_stormweed,1,fo_wine,1
+	DL:addCraftingChoice(16, "DL_Choice_ElixirShadow") -- pe_elixirshadow,fo_caveberry,1,fo_stormweed,1fo_wine,1
+	DL:addCraftingChoice(17, "DL_Choice_ElixirIce") -- pe_elixirice,fo_windrose,1,fo_stormweed,1,fo_wine,1
 	DL:addChoice(-2, "DL_Choice_ComeBackLater") -- I'll come back later [BACK]
 	DL:addNode()
 
-	if (DL:hasItem("fo_healingherb", 1) and DL:hasItem("fo_water", 1)) then 
 
-		DL:createNPCNode(10, -2, "DL_Syrah_HereYouGo") -- Thanks. Here you go.
-		DL:removeItem("fo_water", 1)
-		DL:removeItem("fo_healingherb", 1)
-		DL:addItem("fo_lesserhealingpotion", 1)
-		DL:addNode()
+	DL:createNPCNode(10, -2, "DL_Syrah_HereYouGo") -- Thanks. Here you go.
+	DL:gotoNode(9)
+	DL:addNode()
 
-	end
 
-	if (DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)) then 
+	DL:createNPCNode(12, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
-		DL:createNPCNode(12, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_water", 1)
-		DL:removeItem("fo_healingherb", 2)
-		DL:addItem("fo_mediumhealingpotion", 1)
-		DL:addNode()
 
-	end
+	DL:createNPCNode(13, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
-	if (DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)) then 
 
-		DL:createNPCNode(13, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_water", 1)
-		DL:removeItem("fo_healingherb", 3)
-		DL:addItem("fo_greaterhealingpotion", 1)
-		DL:addNode()
+	DL:createNPCNode(14, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
-	end
 
-	if (DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
+	DL:createNPCNode(15, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
-		DL:createNPCNode(14, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_wine", 1)
-		DL:removeItem("fo_stormweed", 1)
-		DL:removeItem("fo_redhat", 1)
-		DL:addItem("pe_elixirfire", 1)
-		DL:addNode()
 
-	end
+	DL:createNPCNode(16, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
-	if (DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
 
-		DL:createNPCNode(15, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_wine", 1)
-		DL:removeItem("fo_stormweed", 1)
-		DL:removeItem("fo_glowingshroom", 1)
-		DL:addItem("pe_elixirlight", 1)
-		DL:addNode()
-
-	end
-
-	if (DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-
-		DL:createNPCNode(16, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_wine", 1)
-		DL:removeItem("fo_stormweed", 1)
-		DL:removeItem("fo_caveberry", 1)
-		DL:addItem("pe_elixirshadow", 1)
-		DL:addNode()
-
-	end
-
-	if (DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)) then 
-
-		DL:createNPCNode(17, -2, "DL_Syrah_HereYouGo") -- 
-		DL:removeItem("fo_wine", 1)
-		DL:removeItem("fo_stormweed", 1)
-		DL:removeItem("fo_windrose", 1)
-		DL:addItem("pe_elixirice", 1)
-		DL:addNode()
-
-	end
+	DL:createNPCNode(17, -2, "DL_Syrah_HereYouGo") -- 
+	DL:gotoNode(9)
+	DL:addNode()
 
 
 	DL:createTradeNode(11, -2)

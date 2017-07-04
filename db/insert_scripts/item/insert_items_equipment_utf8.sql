@@ -43,6 +43,21 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_lavaback', -35, -3, 40, 18);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_lavaback', 1, 650, 150, 50, 100);
 
+-- Stone Crown
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnhead', 'item', 'Stone Crown','Steinkrone','Stei Chrone');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnhead', 'item_desc', 'The crown of a cairn wraith.','Die Krone eines Cairn Geistes.','D''Chrone vomne Cairn Geischt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_cairnhead', 'eq_head', 700, 450, 50);
+INSERT INTO item_attribute (item_id, dmg_ice, res_fire, res_ice, res_physical) values ('eq_cairnhead', 3, -20, 100, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnhead', 'res/assets/equipment/head/spritesheet_head_cairnhead.png', 'res/assets/equipment/head/spritesheet_map_head_cairnhead.png');
+
+-- Cairn Armour
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item', 'Cairn Armour','Cairn-Rüstung','Cairn-Rüschtig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste  vo Cairn Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_cairnarmor', 'eq_body', 700, 500, 100);
+INSERT INTO item_attribute (item_id, dmg_ice, res_fire, res_ice, res_physical) values ('eq_cairnarmor', 5, -40, 200, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnarmor', 'res/assets/equipment/body/spritesheet_body_cairnarmor.png', 'res/assets/equipment/body/spritesheet_map_body_cairnarmor.png');
 
 -- Ice Hat
 
@@ -540,21 +555,39 @@ INSERT INTO item_attribute (item_id, dmg_fire, critical) values ('eq_rubynecklac
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_startalisman', 'item', 'Star Talisman','Sternentalisman','Sterne Talisman');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_startalisman', 'item_desc', 'The small gems that form the star are sharp and spiky.','Die kleinen Edelsteine, die den Stern bilden, sind scharf und spitzig.','Di chliine Edelstei wo de Stern formed sind scharf und spitzig.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_startalisman', 'eq_neck', 550, 250, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_startalisman', 'eq_neck', 550, 250, 30);
 INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_startalisman', 7, 1);
 
 -- Morgiana's Bloodstone
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item', 'Morgiana''s Bloodstone','Morgiana''s Blutstein','Bluetstei vode Morgiana');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item_desc', 'This amulet belonged to the mercenary Morgiana and gave her incredible stamina.','Dieses Amulett gehörte der Söldnerin Morgiana und hat ihr unglaubliche Ausdauer verliehen.','Das Amulett het de Morgiana ghört und het ihre unglaublichi Usduur gä.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 30);
 INSERT INTO item_attribute (item_id, max_health) values ('eq_bloodstone', 20);
 
 -- Light-Touched Pendant
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lightpendant', 'item', 'Light-Touched Pendant','Lichtberührter Anhänger','Vom Liecht berührte Ahänger');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lightpendant', 'item_desc', 'The pendant shines for those who believe in the Eternal Light. This trinket belonged to the High Priestess Inina.','Dieser Anhänger leuchtet für diejenigen, die an das Ewige Licht glauben. Das Schmuckstück gehörte der Hohepriesterin Inina.','De Ahänger lüüchted für die, wo as Ewige Liecht glaubed. Da Schmuckstück het de Hohepriesterin Inina ghört.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lightpendant', 'eq_neck', 450, 0, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lightpendant', 'eq_neck', 450, 0, 30);
 INSERT INTO item_attribute (item_id, dmg_light, res_shadow) values ('eq_lightpendant', 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lightpendant', '', '');
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_lightpendant',60, 30, 300, 300, 100, 100, 0.8);
+
+-- Pendant of Eternal Youth
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lifependant', 'item', 'Pendant of Eternal Youth','Anhänger der Ewigen Jugend','Ahänger vode Ewige Jugend');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lifependant', 'item_desc', 'It is said that people wearing this magical pendant do not age.','Man erzählt sich, dass diejenigen, die diesen magischen Anhänger tragen, nicht altern.','Me verzellt sich, dass die Lüüt wo de magisch Ahänger träged, nid älter werded.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lifependant', 'eq_neck', 700, 550, 70);
+INSERT INTO item_attribute (item_id, health_regeneration, max_health) values ('eq_lifependant', 1, 5);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lifependant', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_lifependant',60, 30, 300, 300, 100, 100, 0.3);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_lifependant', 50, 5, 1, 'res/assets/particles/star.png', 20, 0, 30, 
+5, 10, 0, 0,
+110, 255, 100, 255,
+110, 255, 100, 255,
+20, 200, 0, 200,
+20, 200, 0, 200,
+0, -50,
+20, 30,
+4.0, 6.0, 0.5);

@@ -136,6 +136,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewJ
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('No','No','Nein','Nai','No');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert','No existe guardado rápido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!','¡No hay suficiente oro!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughMaterials','Not enough materials!','Nicht genügend Materialien!','Nid gnueg Mats!','¡No hay suficiente ?!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughStrength','The spell is not strong enough!','Der Zauber ist nicht genügend stark!','De Zauber isch nid gnueg starch!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughReputation','Not enough reputation!','Nicht genügend Ruf!','Nid gnueg Ruef!','¡No hay suficiente reputación!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToGain','Nothing to gain there anymore.','Da ist nichts mehr zu holen.', 'Da gits nüt me z''hole.','Nada que minar.');

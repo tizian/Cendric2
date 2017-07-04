@@ -40,5 +40,6 @@ public:
 	static const std::string TRANSLATION_CH;
 	static const std::string TRANSLATION_ITEM_ID;
 	static const std::string TRANSLATION_ITEM_AMOUNT;
+	static const std::string TRANSLATION_CRAFTING;
 	static const std::string CONDITION;
 };

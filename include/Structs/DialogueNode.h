@@ -13,11 +13,18 @@ enum class DialogueNodeType {
 	Trade
 };
 
+struct ChoiceCrafting final {
+	std::string item;
+	std::vector<std::pair<std::string, int>> materials;
+};
+
 struct ChoiceTranslation final {
 	// the translation of this choice
 	std::string text;
 	// if this is filled, the translation will be added to the translation of the choice.
 	std::pair<std::string, int> item;
+	// if this is filled, this is a crafting choice and will be treated differently.
+	ChoiceCrafting crafting;
 };
 
 struct DialogueNode final {

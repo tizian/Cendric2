@@ -4,16 +4,17 @@
 #include "Beans/SpawnBean.h"
 #include "DatabaseManager.h"
 #include "GlobalResource.h"
-
-using namespace std;
+#include "AchievementManager.h"
 
 CharacterCore::CharacterCore() {
 	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
 		m_data.equippedItems.insert({ type, "" });
 	}
+	m_achievementManager = new AchievementManager();
 }
 
 CharacterCore::CharacterCore(const CharacterCoreData& data) {
+	m_achievementManager = new AchievementManager();
 	m_data = data;
 	m_stopwatch.restart();
 	loadWeapon();
@@ -28,6 +29,7 @@ CharacterCore* CharacterCore::createFromThis() {
 
 CharacterCore::~CharacterCore() {
 	delete m_weapon;
+	delete m_achievementManager;
 }
 
 bool CharacterCore::load(const std::string& fileName) {
@@ -128,7 +130,7 @@ void CharacterCore::setQuickslot(const std::string& item, int nr) {
 	}
 }
 
-bool CharacterCore::save(const std::string& fileName, const string& name) {
+bool CharacterCore::save(const std::string& fileName, const std::string& name) {
 	m_data.timePlayed += m_stopwatch.restart();
 	m_data.dateSaved = time(nullptr);
 	m_data.saveGameName = name;
@@ -815,4 +817,8 @@ int CharacterCore::retrieveStoredGold() {
 	int gold = m_data.storedGold;
 	m_data.storedGold = 0;
 	return gold;
+}
+
+void CharacterCore::notifyAchievementUnlocked(const std::string& achievement) {
+	m_achievementManager->unlockAchievement(achievement);
 }

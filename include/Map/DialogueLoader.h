@@ -55,6 +55,7 @@ public:
 	// special node properties
 	void addChoice(int nextTag, const std::string& text);
 	void addItemChoice(int nextTag, const std::string& text, const std::string& itemID, int amount);
+	void addCraftingChoice(int nextTag, const std::string& text);
 	void gotoNode(int node);
 
 	// finally, adding the node to the dialogue

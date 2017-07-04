@@ -100,7 +100,7 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
 	m_speakerSprite.setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
 	m_speakerText->setString(m_npcName);
-	
+
 	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
 	std::basic_string<sf::Uint32> utf32line;
 	sf::Utf8::toUtf32(line.begin(), line.end(), std::back_inserter(utf32line));
@@ -120,7 +120,7 @@ void DialogueWindow::setCendricTalking(const std::string& text) {
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
 	m_options.clear();
-	
+
 	delete m_merchantInterface;
 	WorldScreen* worldScreen = dynamic_cast<WorldScreen*>(m_screen);
 	m_merchantInterface = new MerchantInterface(worldScreen, m_npcID);
@@ -186,7 +186,9 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 
 		updateScrolling(frameTime);
 
+		// update mouseover colors.
 		for (size_t i = 0; i < m_options.size(); ++i) {
+			if (!m_options[i].isSelectable()) continue;
 			if (i == static_cast<size_t>(m_chosenOption)) {
 				m_options[i].setColor(COLOR_WHITE);
 			}
@@ -230,6 +232,10 @@ bool DialogueWindow::updateDialogue(const sf::Time frameTime) {
 			m_dialogue->setNextNode(-1);
 		}
 		else {
+			if (!m_options[m_chosenOption].executeCrafting()) {
+				m_screen->setNegativeTooltip("NotEnoughMaterials");
+				return true;
+			}
 			m_dialogue->setNextNode(m_chosenOption);
 		}
 		m_dialogueTimeout = DIALOGUE_TIMEOUT;
@@ -364,9 +370,29 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 // Dialogue Option
 
 DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type) {
-	std::string textString = g_textProvider->getText(trans.text, dialogueID, true, true);
-	if (!trans.item.first.empty()) {
-		textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item", true, true) + ")");
+	m_translation = trans;
+	std::string textString;
+	if (trans.crafting.item.empty()) {
+		textString = g_textProvider->getText(trans.text, dialogueID, true, true);
+		if (!trans.item.first.empty()) {
+			textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item", false, false) + ")");
+		}
+	}
+	else {
+		// crafting item, format the text and check whether the items are available.
+		textString.append(g_textProvider->getText(trans.crafting.item, "item", false, false) + " (");
+		for (auto const& mat : trans.crafting.materials) {
+			textString.append(std::to_string(mat.second) + " ");
+			textString.append(g_textProvider->getText(mat.first, "item", false, false) + ",");
+		}
+		textString[trans.text.size() - 1] = ')';
+
+		for (auto const& mat : trans.crafting.materials) {
+			if (!m_screen->getCharacterCore()->hasItem(mat.first, mat.second)) {
+				m_isSelectable = false;
+				break;
+			}
+		}
 	}
 
 	switch (type) {
@@ -390,8 +416,6 @@ DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string
 	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text.setString(utf32line);
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
-	m_text.setFillColor(COLOR_WHITE);
-	m_text.setOutlineColor(COLOR_BAD);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
 	setInputInDefaultView(true);
 }
@@ -409,6 +433,19 @@ void DialogueOption::setColor(const sf::Color& color) {
 	m_text.setFillColor(color);
 }
 
+bool DialogueOption::executeCrafting() {
+	if (m_translation.crafting.item.empty()) return true;
+	if (!m_isSelectable) return false;
+
+	auto wScreen = dynamic_cast<WorldScreen*>(m_screen);
+	for (auto const& mat : m_translation.crafting.materials) {
+		wScreen->notifyItemChange(mat.first, -mat.second);
+	}
+	wScreen->notifyItemChange(m_translation.crafting.item, 1);
+
+	return true;
+}
+
 void DialogueOption::onLeftClick() {
 	m_isClicked = true;
 }
@@ -420,7 +457,7 @@ bool DialogueOption::isClicked() {
 }
 
 void DialogueOption::select() {
-	m_text.setFillColor(COLOR_WHITE);
+	m_text.setFillColor(m_isSelectable ? COLOR_WHITE : COLOR_LIGHT_BAD);
 	m_isSelected = true;
 }
 
@@ -429,10 +466,14 @@ GameObjectType DialogueOption::getConfiguredType() const {
 }
 
 void DialogueOption::deselect() {
-	m_text.setFillColor(COLOR_GREY);
+	m_text.setFillColor(m_isSelectable ? COLOR_GREY : COLOR_BAD);
 	m_isSelected = false;
 }
 
 bool DialogueOption::isSelected() const {
 	return m_isSelected;
+}
+
+bool DialogueOption::isSelectable() const {
+	return m_isSelectable;
 }

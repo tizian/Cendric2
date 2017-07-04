@@ -18,5 +18,6 @@ void TranslationWindow::update() {
 	ImGui::Spacing();
 	ImGui::InputText("Item ID", m_translation->itemID, IM_ARRAYSIZE(m_translation->itemID));
 	ImGui::InputInt("Item Amount", &m_translation->itemAmount);
+	ImGui::Checkbox("Crafting", &m_translation->isCrafting);
 	ImGui::End();
 }

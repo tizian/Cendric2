@@ -27,6 +27,7 @@ const std::string DialogueIO::TRANSLATION_DE = "translation.de";
 const std::string DialogueIO::TRANSLATION_CH = "translation.ch";
 const std::string DialogueIO::TRANSLATION_ITEM_ID = "translation.item.id";
 const std::string DialogueIO::TRANSLATION_ITEM_AMOUNT = "translation.item.amount";
+const std::string DialogueIO::TRANSLATION_CRAFTING = "translation.crafting";
 const std::string DialogueIO::CONDITION = "condition";
 
 static inline void ltrim(std::string& s) {

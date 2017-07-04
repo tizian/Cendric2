@@ -14,6 +14,7 @@
 #include "ScreenOverlays/ScreenOverlay.h"
 
 class ScreenManager;
+class AchievementManager;
 
 class CharacterCore final {
 public:
@@ -164,14 +165,14 @@ public:
 	bool isAutosave();
 	// mark as autosave
 	void setAutosave(bool value);
-
 	// stores all items in the inventory temporarily and leaves the player only with a pickaxe and prisoners clothes
 	void setCharacterJailed();
 	// returns a list with all stored items and clears the corresponding vector
 	std::map<std::string, int> retrieveStoredItems();
 	// returns a the stored gold and sets it to 0
 	int retrieveStoredGold();
-
+	// notifies a steam achievement
+	void notifyAchievementUnlocked(const std::string& achievement);
 
 protected:
 	// protected constructor for copying
@@ -193,6 +194,8 @@ private:
 	// removes item(s) to the stored data
 	void removeStoredItem(const std::string& item, int quantity);
 
+private:
+	AchievementManager* m_achievementManager;
 	// base attributes plus the attributes of all currently equipped items
 	AttributeData m_totalAttributes;
 

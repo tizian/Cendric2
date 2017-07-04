@@ -106,13 +106,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item', 'Corrupted Ice Stone','Verdorbener Eisstein','Verdorbene Iisstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 28);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 15);
 
 -- Corrupt stone (Fire)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item', 'Corrupted Fire Stone','Verdorbener Feuerstein','Verdorbene Füürstei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 28);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Lava Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Lava Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Lava Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 15);
 
 -- Teleport Stone
 

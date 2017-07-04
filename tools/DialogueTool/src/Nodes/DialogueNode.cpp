@@ -96,6 +96,10 @@ std::string LinkNode::exportToDia(int indentationLevel) const {
 			diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_ITEM_ID + ":" + translation->itemID + "\n");
 			diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_ITEM_AMOUNT + ":" + std::to_string(translation->itemAmount) + "\n");
 		}
+
+		if (translation->isCrafting) {
+			diaExport.append(tabs(indentationLevel) + DialogueIO::TRANSLATION_CRAFTING + ":1\n");
+		}
 	}
 	return diaExport;
 }
@@ -106,8 +110,8 @@ std::string LinkNode::exportToSQL() const {
 	std::stringstream ss;
 
 	std::string en = duplicateApostrophs(translation->englishTranslation);
-	std::string de = duplicateApostrophs(translation->germanTranslation);
-	std::string ch = duplicateApostrophs(translation->swissgermanTranslation);
+	std::string de = translation->isCrafting ? en : duplicateApostrophs(translation->germanTranslation);
+	std::string ch = translation->isCrafting ? en : duplicateApostrophs(translation->swissgermanTranslation);
 	ss << "INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('";
 	ss << translation->tag << "', 'dl_" << G_DIA->getNpcID() << "', '" << en + "', '" + de + "', '" + ch + "');\n";
 

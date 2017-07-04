@@ -30,13 +30,17 @@ public:
 	void onLeftClick() override;
 	void select();
 	void deselect();
+	bool executeCrafting();
 	// query with side effects (unclicks automatically) (bertrand would kill me)
 	bool isClicked();
 	bool isSelected() const;
+	bool isSelectable() const;
 private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
+	bool m_isSelectable = true;
 	sf::Text m_text;
+	ChoiceTranslation m_translation;
 };
 
 class DialogueWindow final : public Window {

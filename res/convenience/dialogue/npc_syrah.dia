@@ -535,72 +535,72 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:DL:hasItem("fo_healingherb", 1) and DL:hasItem("fo_water", 1)
 		# translation: 
 		translation.tag:DL_Choice_LesserHealingPotion
-		translation.en:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
-		translation.de:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
-		translation.ch:$fo_lesserhealingpotion$ (1 $fo_healingherb$, 1 $fo_water$)
+		translation.en:fo_lesserhealingpotion,fo_healingherb,1,fo_water,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:DL:hasItem("fo_healingherb", 2) and DL:hasItem("fo_water", 1)
 		# translation: 
 		translation.tag:DL_Choice_MediumHealingPotion
-		translation.en:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
-		translation.de:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
-		translation.ch:$fo_mediumhealingpotion$ (2 $fo_healingherb$, 1 $fo_water$)
+		translation.en:fo_mediumhealingpotion,fo_healingherb,2,fo_water,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:13
-		condition:DL:hasItem("fo_healingherb", 3) and DL:hasItem("fo_water", 1)
 		# translation: 
 		translation.tag:DL_Choice_GreaterHealingPotion
-		translation.en:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
-		translation.de:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
-		translation.ch:$fo_greaterhealingpotion$ (3 $fo_healingherb$, 1 $fo_water$)
+		translation.en:fo_greaterhealingpotion,fo_healingherb,3,fo_water,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:14
-		condition:DL:hasItem("fo_redhat", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
 		# translation: 
 		translation.tag:DL_Choice_ElixirFire
-		translation.en:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.de:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.ch:$pe_elixirfire$ (1 $fo_redhat$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.en:pe_elixirfire,fo_redhat,1,fo_stormweed,1,fo_wine,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:15
-		condition:DL:hasItem("fo_glowingshroom", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
 		# translation: 
 		translation.tag:DL_Choice_ElixirLight
-		translation.en:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.de:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.ch:$pe_elixirlight$ (1 $fo_glowingshroom$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.en:pe_elixirlight,fo_glowingshroom,1,fo_stormweed,1,fo_wine,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:16
-		condition:DL:hasItem("fo_caveberry", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
 		# translation: 
 		translation.tag:DL_Choice_ElixirShadow
-		translation.en:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.de:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.ch:$pe_elixirshadow$ (1 $fo_caveberry$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.en:pe_elixirshadow,fo_caveberry,1,fo_stormweed,1fo_wine,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:17
-		condition:DL:hasItem("fo_windrose", 1) and DL:hasItem("fo_stormweed", 1) and DL:hasItem("fo_wine", 1)
 		# translation: 
 		translation.tag:DL_Choice_ElixirIce
-		translation.en:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.de:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
-		translation.ch:$pe_elixirice$ (1 $fo_windrose$, 1 $fo_stormweed$, 1 $fo_wine$)
+		translation.en:pe_elixirice,fo_windrose,1,fo_stormweed,1,fo_wine,1
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
@@ -616,9 +616,7 @@ npc.id:npc_syrah
 	# [10] NPC Node
 	tag:10
 	# triggers: 
-	trigger:DL:removeItem("fo_water", 1)
-	trigger:DL:removeItem("fo_healingherb", 1)
-	trigger:DL:addItem("fo_lesserhealingpotion", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:Thanks. Here you go.
@@ -633,9 +631,7 @@ npc.id:npc_syrah
 	# [12] NPC Node
 	tag:12
 	# triggers: 
-	trigger:DL:removeItem("fo_water", 1)
-	trigger:DL:removeItem("fo_healingherb", 2)
-	trigger:DL:addItem("fo_mediumhealingpotion", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:
@@ -650,9 +646,7 @@ npc.id:npc_syrah
 	# [13] NPC Node
 	tag:13
 	# triggers: 
-	trigger:DL:removeItem("fo_water", 1)
-	trigger:DL:removeItem("fo_healingherb", 3)
-	trigger:DL:addItem("fo_greaterhealingpotion", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:
@@ -667,10 +661,7 @@ npc.id:npc_syrah
 	# [14] NPC Node
 	tag:14
 	# triggers: 
-	trigger:DL:removeItem("fo_wine", 1)
-	trigger:DL:removeItem("fo_stormweed", 1)
-	trigger:DL:removeItem("fo_redhat", 1)
-	trigger:DL:addItem("pe_elixirfire", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:
@@ -685,10 +676,7 @@ npc.id:npc_syrah
 	# [15] NPC Node
 	tag:15
 	# triggers: 
-	trigger:DL:removeItem("fo_wine", 1)
-	trigger:DL:removeItem("fo_stormweed", 1)
-	trigger:DL:removeItem("fo_glowingshroom", 1)
-	trigger:DL:addItem("pe_elixirlight", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:
@@ -703,10 +691,7 @@ npc.id:npc_syrah
 	# [16] NPC Node
 	tag:16
 	# triggers: 
-	trigger:DL:removeItem("fo_wine", 1)
-	trigger:DL:removeItem("fo_stormweed", 1)
-	trigger:DL:removeItem("fo_caveberry", 1)
-	trigger:DL:addItem("pe_elixirshadow", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:
@@ -721,10 +706,7 @@ npc.id:npc_syrah
 	# [17] NPC Node
 	tag:17
 	# triggers: 
-	trigger:DL:removeItem("fo_wine", 1)
-	trigger:DL:removeItem("fo_stormweed", 1)
-	trigger:DL:removeItem("fo_windrose", 1)
-	trigger:DL:addItem("pe_elixirice", 1)
+	trigger:DL:gotoNode(9)
 	# translation: 
 	translation.tag:DL_Syrah_HereYouGo
 	translation.en:

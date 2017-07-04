@@ -138,6 +138,7 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 
 void LevelEquipment::updateClimbingParticles() const {
 	if (!m_particleComponent) return;
+	if (m_itemType != ItemType::Equipment_weapon) return;
 	m_particleComponent->setVisible(!(m_state == GameObjectState::Climbing_1 || m_state == GameObjectState::Climbing_2));
 }
 

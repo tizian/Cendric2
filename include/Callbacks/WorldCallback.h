@@ -50,6 +50,7 @@ public:
 	void setLevel(const std::string& levelID, int x, int y) const;
 	void setMap(const std::string& mapID, int x, int y) const;
 	void startCutscene(const std::string& cutsceneID) const;
+	void unlockAchievement(const std::string& achievement) const;
 
 	// this works only on a map
 	void spawnNPC(const std::string& npcID, int x, int y) const;

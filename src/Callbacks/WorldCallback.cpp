@@ -50,6 +50,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("startCutscene", &WorldCallback::startCutscene)
 		.addFunction("setGuild", &WorldCallback::setGuild)
 		.addFunction("learnSpell", &WorldCallback::learnSpell)
+		.addFunction("unlockAchievement", &WorldCallback::unlockAchievement)
 		// spawners
 		.addFunction("spawnNPC", &WorldCallback::spawnNPC)
 		.addFunction("spawnEnemy", &WorldCallback::spawnEnemy)
@@ -204,6 +205,10 @@ void WorldCallback::setMap(const std::string& mapID, int x, int y) const {
 
 void WorldCallback::startCutscene(const std::string& cutsceneID) const {
 	TriggerContent::executeTrigger(TriggerContent::startCutscene(cutsceneID), m_screen);
+}
+
+void WorldCallback::unlockAchievement(const std::string& achievement) const {
+	TriggerContent::executeTrigger(TriggerContent::unlockAchievement(achievement), m_screen);
 }
 
 void WorldCallback::spawnNPC(const std::string& npcID, int x, int y) const {

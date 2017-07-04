@@ -46,6 +46,8 @@ item.id:eq_body_twilightt1,1
 item.id:eq_body_twilightt2,1
 item.id:eq_body_twilightt3,1
 item.id:eq_bonering,1
+item.id:eq_cairnarmor,1
+item.id:eq_cairnhead,1
 item.id:eq_crown,1
 item.id:eq_defaultarmor,1
 item.id:eq_demonback,1
@@ -69,6 +71,7 @@ item.id:eq_lavaback,1
 item.id:eq_lavahead,1
 item.id:eq_leatherarmor,1
 item.id:eq_lightpendant,1
+item.id:eq_lifependant,1
 item.id:eq_mercenarybandana,1
 item.id:eq_nekomataback,1
 item.id:eq_nekomatahead,1
