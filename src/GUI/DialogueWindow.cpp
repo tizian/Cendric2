@@ -143,7 +143,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<ChoiceTransla
 		else if (m_dialogue->isTradeNode(choices[i].second)) {
 			optionType = DialogueOptionType::Trade;
 		}
-		DialogueOption option(choices[i].first, m_dialogueTextID, optionType);
+		DialogueOption option(choices[i].first, m_dialogueTextID, optionType, m_screen);
 		option.deselect();
 		m_options.push_back(option);
 	}
@@ -369,23 +369,25 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 
 // Dialogue Option
 
-DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type) {
+DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type, Screen* screen) {
+	m_screen = screen;
 	m_translation = trans;
 	std::string textString;
 	if (trans.crafting.item.empty()) {
 		textString = g_textProvider->getText(trans.text, dialogueID, true, true);
 		if (!trans.item.first.empty()) {
-			textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item", false, false) + ")");
+			textString.append(" (" + std::to_string(trans.item.second) + " " + g_textProvider->getText(trans.item.first, "item", false, true) + ")");
 		}
 	}
 	else {
 		// crafting item, format the text and check whether the items are available.
-		textString.append(g_textProvider->getText(trans.crafting.item, "item", false, false) + " (");
+		textString.append(g_textProvider->getText(trans.crafting.item, "item", false, true) + " (");
 		for (auto const& mat : trans.crafting.materials) {
 			textString.append(std::to_string(mat.second) + " ");
-			textString.append(g_textProvider->getText(mat.first, "item", false, false) + ",");
+			textString.append(g_textProvider->getText(mat.first, "item", false, true) + ", ");
 		}
-		textString[trans.text.size() - 1] = ')';
+		textString = textString.substr(0, textString.size() - 2);
+		textString.append(")");
 
 		for (auto const& mat : trans.crafting.materials) {
 			if (!m_screen->getCharacterCore()->hasItem(mat.first, mat.second)) {

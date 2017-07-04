@@ -30,6 +30,10 @@ const std::string& Dialogue::getID() const {
 	return m_id;
 }
 
+const std::string& Dialogue::getTextType() const {
+	return m_window->getNPC()->getNPCData().textType;
+}
+
 bool Dialogue::updateWindow() {
 	if (m_currentNode == nullptr) {
 		return false;

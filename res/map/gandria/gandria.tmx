@@ -1048,7 +1048,7 @@
   </object>
   <object id="222" gid="2326" x="200" y="3135" width="50" height="50">
    <properties>
-    <property name="id" value="npc_stephen"/>
+    <property name="id" value="npc_steven"/>
    </properties>
   </object>
   <object id="223" gid="2327" x="175" y="2580" width="50" height="50">

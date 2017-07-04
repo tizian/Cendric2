@@ -13,6 +13,7 @@ class Dialogue final {
 public:
 	void reload(const std::string& id, WorldScreen* screen, DialogueWindow* window);
 	const std::string& getID() const;
+	const std::string& getTextType() const;
 	void addNode(int tag, const DialogueNode& node);
 	void setNextNode(int tag);
 	void setRoot(int root);

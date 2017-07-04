@@ -35,6 +35,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("createTradeNode", &DialogueLoader::createTradeNode)
 		.addFunction("addChoice", &DialogueLoader::addChoice)
 		.addFunction("addItemChoice", &DialogueLoader::addItemChoice)
+		.addFunction("addCraftingChoice", &DialogueLoader::addCraftingChoice)
 		.addFunction("changeQuestState", &DialogueLoader::changeQuestState)
 		.addFunction("addQuestProgress", &DialogueLoader::addQuestProgress)
 		.addFunction("addQuestDescription", &DialogueLoader::addQuestDescription)
@@ -93,12 +94,12 @@ void DialogueLoader::addCraftingChoice(int nextTag, const std::string& text) {
 		return;
 	}
 
-	std::string rawText = g_textProvider->getText(text, m_dialogue.getID(), false, true);
+	std::string rawText = g_textProvider->getText(text, m_dialogue.getTextType(), false, true);
 	ChoiceTranslation trans;
 	// resolve the text
 	size_t pos = rawText.find(',');
 	if (pos == std::string::npos) {
-		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + rawText);
 		return;
 	}
 
@@ -106,7 +107,7 @@ void DialogueLoader::addCraftingChoice(int nextTag, const std::string& text) {
 	rawText = rawText.substr(pos + 1);
 	pos = rawText.find(',');
 	if (pos == std::string::npos) {
-		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+		g_logger->logError("DialogueLoader", "Wrong crafting node format: " + rawText);
 		return;
 	}
 
@@ -117,7 +118,7 @@ void DialogueLoader::addCraftingChoice(int nextTag, const std::string& text) {
 		std::string amountText = rawText;
 		if (pos == std::string::npos) {
 			if (rawText.empty()) {
-				g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+				g_logger->logError("DialogueLoader", "Wrong crafting node format: " + rawText);
 				return;
 			}
 		}
@@ -129,7 +130,7 @@ void DialogueLoader::addCraftingChoice(int nextTag, const std::string& text) {
 
 		int amount = std::stoi(amountText);
 		if (amount <= 0) {
-			g_logger->logError("DialogueLoader", "Wrong crafting node format: " + text);
+			g_logger->logError("DialogueLoader", "Wrong crafting node format: " + rawText);
 			return;
 		}
 

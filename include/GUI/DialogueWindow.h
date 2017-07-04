@@ -22,7 +22,7 @@ enum class DialogueOptionType {
 
 class DialogueOption final : public GameObject {
 public:
-	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type);
+	DialogueOption(const ChoiceTranslation& trans, const std::string& dialogueID, DialogueOptionType type, Screen* screen);
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
