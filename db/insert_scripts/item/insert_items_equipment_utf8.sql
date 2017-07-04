@@ -590,4 +590,4 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 20, 200, 0, 200,
 0, -50,
 20, 30,
-4.0, 6.0, 0.5);
+4.0, 6.0, 0.0);

@@ -44,7 +44,7 @@ private:
 	sf::Vector2f m_position;
 
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
-	void updateClimbingParticles() const;
+	void updateParticlesVisibility() const;
 	bool m_isCopyingMainCharColor = true;
 
 	static const int EQ_SIZE;

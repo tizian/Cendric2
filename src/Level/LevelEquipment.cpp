@@ -47,7 +47,6 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, ItemType type) {
 
 	setBoundingBox(sf::FloatRect(0, 0, static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE)));
 
-
 	if (!eq.texture_path.empty()) {
 		g_resourceManager->loadTexture(eq.texture_path, ResourceType::Level);
 		for (auto& ani : texturePositions) {
@@ -136,10 +135,14 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 	position.y = (mainCharPosition + offset).y;
 }
 
-void LevelEquipment::updateClimbingParticles() const {
+void LevelEquipment::updateParticlesVisibility() const {
 	if (!m_particleComponent) return;
-	if (m_itemType != ItemType::Equipment_weapon) return;
-	m_particleComponent->setVisible(!(m_state == GameObjectState::Climbing_1 || m_state == GameObjectState::Climbing_2));
+	if (m_itemType != ItemType::Equipment_weapon) {
+		m_particleComponent->setVisible(m_state != GameObjectState::Dead);
+	}
+	else {
+		m_particleComponent->setVisible(!(m_state == GameObjectState::Dead || m_state == GameObjectState::Climbing_1 || m_state == GameObjectState::Climbing_2));
+	}
 }
 
 void LevelEquipment::setPosition(const sf::Vector2f& position) {
@@ -153,26 +156,22 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
-	if (!m_hasTexture) {
-		calculatePositionAccordingToMainChar(m_position);
-		setPosition(m_position);
-		return;
-	}
-
 	GameObjectState newState = m_mainChar->getState();
 
 	bool newFacingRight = m_mainChar->isFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) {
 		m_state = newState;
 		m_isFacingRight = newFacingRight;
-		if (m_state != GameObjectState::Dead) {
-			setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+		if (m_hasTexture) {
+			if (m_state != GameObjectState::Dead) {
+				setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
+			}
+			else {
+				loopCurrentAnimation(false);
+				m_animatedSprite.stop();
+			}
 		}
-		else {
-			loopCurrentAnimation(false);
-			m_animatedSprite.stop();
-		}
-		updateClimbingParticles();
+		updateParticlesVisibility();
 	}
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
@@ -183,7 +182,7 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	calculatePositionAccordingToMainChar(m_position);
 	setPosition(m_position);
 	AnimatedGameObject::update(frameTime);
-	if (m_isCopyingMainCharColor)
+	if (m_isCopyingMainCharColor && m_hasTexture)
 		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 }
 
