@@ -192,7 +192,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomataback', 'item', 'Nekomata Cloak','Nekomata-Mantel','Nekomata Mantel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomataback', 'item_desc', 'Both an experienced hunter and a skilled leatherworker are involved in the creation of such a cape.','Ein erfahrener Jäger sowie ein geschickter Lederer sind nötig um einen solchen Umhang herzustellen.','Es brucht en erfahrene Jäger und en gschickte Lederer zum sonen Umhang herz''stelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomataback', 'eq_back', 0, 400, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomataback', 'eq_back', 0, 400, 80);
 INSERT INTO item_attribute (item_id, haste, critical, res_physical, res_shadow) values ('eq_nekomataback', 13, 12, 7, 6);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_nekomataback', 'res/assets/equipment/back/spritesheet_back_nekomata.png', 'res/assets/equipment/back/spritesheet_map_back_nekomata.png', 3);
 
@@ -200,7 +200,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomatahead', 'item', 'Nekomata Head','Nekomata-Kopf','Nekomata Chopf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_nekomatahead', 'item_desc', 'Looking in the eyes of a Nekomata can fill the bravest warriors with terror.','In die Augen einer Nekomata zu schauen kann den mutigsten Kriegern Angst einflössen.','I''d Auge vonere Nekomata z''luege cha de muetigste Chrieger Angst ihflösse.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomatahead', 'eq_head', 50, 400, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_nekomatahead', 'eq_head', 50, 400, 80);
 INSERT INTO item_attribute (item_id, critical, dmg_physical, res_physical, res_shadow) values ('eq_nekomatahead', 15, 10, 10, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_nekomatahead', 'res/assets/equipment/head/spritesheet_head_nekomata.png', 'res/assets/equipment/head/spritesheet_map_head_nekomata.png');
 
@@ -582,12 +582,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, health_regeneration, max_health) values ('eq_lifependant', 1, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lifependant', '', '');
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_lifependant',60, 30, 300, 300, 100, 100, 0.3);
-INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_lifependant', 50, 5, 1, 'res/assets/particles/star.png', 20, 0, 30, 
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_lifependant', 50, 5, 1, 'res/assets/particles/star.png', 20, 0, 0, 
 5, 10, 0, 0,
 110, 255, 100, 255,
 110, 255, 100, 255,
 20, 200, 0, 200,
 20, 200, 0, 200,
 0, -50,
-20, 30,
-4.0, 6.0, 0.0);
+40, 60,
+1.0, 2.0, 0.0);

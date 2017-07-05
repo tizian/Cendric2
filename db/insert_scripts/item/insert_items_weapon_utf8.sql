@@ -39,7 +39,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pearlsabre', 'item', 'Pearl Sabre','Perlensäbel','Perlesäbel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pearlsabre', 'item_desc', 'Its nacre blade shines dimly.','Seine aus Perlmutt gefertigte Klinge glimmt schwach.', 'Sini us Perlmutt gmachti Klinge glimmt schwach.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pearlsabre', 'eq_weapon', 350, 650, 60);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pearlsabre', 'eq_weapon', 350, 650, 50);
 INSERT INTO item_attribute (item_id, max_health, critical, dmg_physical, dmg_ice, dmg_light) values ('we_pearlsabre', 5, 2, 2, 3, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pearlsabre', 'res/assets/equipment/weapon/spritesheet_weapon_pearlsabre.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pearlsabre.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pearlsabre', 600, 10, 40, 80, 12);

@@ -373,6 +373,9 @@ bool DialogueIO::addLinkTranslation(LinkNode* node, const std::string& line) {
 	else if (line.compare(0, TRANSLATION_ITEM_ID.size(), TRANSLATION_ITEM_ID) == 0 && translation.size() < 50) {
 		strcpy(node->translation->itemID, translation.c_str());
 	}
+	else if (line.compare(0, TRANSLATION_CRAFTING.size(), TRANSLATION_CRAFTING) == 0) {
+		node->translation->isCrafting = true;
+	}
 	else if (line.compare(0, TRANSLATION_ITEM_AMOUNT.size(), TRANSLATION_ITEM_AMOUNT) == 0) {
 		int amount = atoi(translation.c_str());
 		if (amount > 0) {

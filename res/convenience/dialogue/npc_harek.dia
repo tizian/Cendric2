@@ -339,42 +339,68 @@ npc.id:npc_harek
 	[
 		# Link node, tag is next tag
 		tag:18
-		condition:DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)
+		condition:DL:hasItem("mi_icecrystal", 1)
 		# translation: 
 		translation.tag:DL_Choice_IceScarf
-		translation.en:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
-		translation.de:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
-		translation.ch:1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+		translation.en:eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:20
-		condition:DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)
+		condition:DL:hasItem("mi_pearlpile", 1)
 		# translation: 
 		translation.tag:DL_Choice_PearlSabre
-		translation.en:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
-		translation.de:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
-		translation.ch:1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+		translation.en:we_pearlsabre,mi_pearlpile$,1,mi_ironore,3,gold,50
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:21
-		condition:DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)
+		condition:DL:hasItem("mi_elysiatail", 1)
 		# translation: 
 		translation.tag:DL_Choice_LightningPike
-		translation.en:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
-		translation.de:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
-		translation.ch:1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+		translation.en:we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,60
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)
+		condition:DL:hasItem("mi_janusglaive", 1)
 		# translation: 
 		translation.tag:DL_Choice_JanusGlaive
-		translation.en:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
-		translation.de:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
-		translation.ch:1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+		translation.en:we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,80
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:24
+		condition:DL:hasItem("mi_corrupt_stone_fire", 1)
+		# translation: 
+		translation.tag:DL_Choice_LavaArmor
+		translation.en:eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,100
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		condition:DL:hasItem("mi_corrupt_stone_ice", 1)
+		# translation: 
+		translation.tag:DL_Choice_CairnArmor
+		translation.en:eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,100
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
@@ -390,9 +416,7 @@ npc.id:npc_harek
 	# [18] NPC Node
 	tag:18
 	# triggers: 
-	trigger:DL:removeItem("mi_icecrystal", 1)
-	trigger:DL:removeItem("mi_ironore", 2)
-	trigger:DL:addItem("eq_icescarf", 1)
+	trigger:DL:gotoNode(17)
 	# translation: 
 	translation.tag:DL_Harek_IceScarf
 	translation.en:An exeptionally beautiful stone! I can truly craft something magical from that.
@@ -407,9 +431,7 @@ npc.id:npc_harek
 	# [20] NPC Node
 	tag:20
 	# triggers: 
-	trigger:DL:removeItem("mi_pearlpile", 1)
-	trigger:DL:removeItem("mi_ironore", 3)
-	trigger:DL:addItem("we_pearlsabre", 1)
+	trigger:DL:gotoNode(17)
 	# translation: 
 	translation.tag:DL_Harek_PearlSabre
 	translation.en:Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
@@ -424,9 +446,7 @@ npc.id:npc_harek
 	# [21] NPC Node
 	tag:21
 	# triggers: 
-	trigger:DL:removeItem("mi_ironore", 5)
-	trigger:DL:removeItem("mi_elysiatail", 1)
-	trigger:DL:addItem("we_lightningpike", 1)
+	trigger:DL:gotoNode(17)
 	# translation: 
 	translation.tag:DL_Harek_LightningPike
 	translation.en:The tail feathers of a storm bird? Great material for a magical lightning pike.
@@ -441,8 +461,6 @@ npc.id:npc_harek
 	# [22] NPC Node
 	tag:22
 	# triggers: 
-	trigger:DL:removeItem("mi_ironore", 4)
-	trigger:DL:removeItem("mi_janusglaive", 1)
 	# translation: 
 	translation.tag:DL_Harek_JanusGlaive
 	translation.en:Hm, I really start to wonder where you get this stuff from.
@@ -457,12 +475,42 @@ npc.id:npc_harek
 	# [23] NPC Node
 	tag:23
 	# triggers: 
-	trigger:DL:addItem("we_janusglaive", 1)
+	trigger:DL:gotoNode(17)
 	# translation: 
 	translation.tag:DL_Harek_JanusGlaive2
 	translation.en:I can fix this broken weapon but I can only restore a part of its magical power.
 	translation.de:Ich kann diese zerbrochene Waffe flicken, allerdings kann ich nur einen Teil ihrer magischen Kraft retten.
 	translation.ch:Ich cha die verbroche Waffe flicke, allerdings chani nur en Teil vo ihrere magische Chraft rette.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	trigger:DL:gotoNode(17)
+	# translation: 
+	translation.tag:DL_Harek_LavaArmor
+	translation.en:Lava stones from a lava wraith! These will make a fine, fire-resistant armour.
+	translation.de:Lavasteine von einem Lava Geist! Diese geben eine schöne, feuerresistente Rüstung ab.
+	translation.ch:Lavastei vomne Lava Geischt! Die gend e schöni, füürresistenti Rüstig.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:gotoNode(17)
+	# translation: 
+	translation.tag:DL_Harek_CairnArmor
+	translation.en:Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
+	translation.de:Magie-infundierte Steine von einem Cairn Geist! Diese geben eine schöne, eisresistente Rüstung ab.
+	translation.ch:Magie-infundierti Stei vomne Cairn Geischt! Die gend e schöni, iisresistenti Rüstig.
 	[
 		# Link node, tag is next tag
 		tag:-2

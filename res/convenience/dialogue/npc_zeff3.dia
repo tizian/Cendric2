@@ -107,11 +107,32 @@ npc.id:npc_zeff3
 		condition:DL:hasItem("mi_firerat_fur", 1)
 		# translation: 
 		translation.tag:DL_Choice_FireRatFur
-		translation.en:$eq_fireratscarf$
-		translation.de:$eq_fireratscarf$
-		translation.ch:$eq_fireratscarf$
-		translation.item.id:mi_firerat_fur
-		translation.item.amount:1
+		translation.en:eq_fireratscarf,mi_firerat_fur,1,gold,20
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)
+		# translation: 
+		translation.tag:DL_Choice_NekomataCloak
+		translation.en:eq_nekomataback,mi_neko_fur,3,mi_neko_teeth,2,gold,100
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)
+		# translation: 
+		translation.tag:DL_Choice_NekomataHead
+		translation.en:eq_nekomatahead,mi_neko_fur,1,mi_neko_teeth,6,gold,100
+		translation.de:
+		translation.ch:
+		translation.crafting:1
 	]
 	[
 		# Link node, tag is next tag
@@ -128,13 +149,41 @@ npc.id:npc_zeff3
 	tag:6
 	# triggers: 
 	trigger:DL:gotoNode(5)
-	trigger:DL:removeItem("mi_firerat_fur", 1)
-	trigger:DL:addItem("eq_fireratscarf", 1)
 	# translation: 
 	translation.tag:DL_Zeff_FireRatFur
 	translation.en:The fur of a fire rat, how nice. It has the ability to protect you against fire.
 	translation.de:Das Fell einer Feuerratte, wie hübsch. Es hat die Eigenschaft, dich vor Feuer zu schützen.
 	translation.ch:Es Fell vonere Füürratte, we hübsch. Es het d''Eigeschaft, dich vor Füür z'schütze.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:gotoNode(5)
+	# translation: 
+	translation.tag:DL_Zeff_NekomataCloak
+	translation.en:A fine cloak for a skilled hunter. It's not easy to slay those beasts.
+	translation.de:Ein schöner Umhang für einen fähigen Jäger. Es ist nicht einfach, diese Biester zu erlegen.
+	translation.ch:En schöne Umhang für en fähige Jäger. Es isch nid eifach, die Biester z'erlege.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:gotoNode(5)
+	# translation: 
+	translation.tag:DL_Zeff_NekomataHead
+	translation.en:There you go. A very special headpiece, indeed.
+	translation.de:Hier, nimm. Eine wirklich spezielle Kopfbedeckung.
+	translation.ch:Do, nimm. En würkli spezielli Huet.
 	[
 		# Link node, tag is next tag
 		tag:-2

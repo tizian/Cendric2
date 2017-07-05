@@ -459,7 +459,7 @@ bool DialogueOption::isClicked() {
 }
 
 void DialogueOption::select() {
-	m_text.setFillColor(m_isSelectable ? COLOR_WHITE : COLOR_LIGHT_BAD);
+	m_text.setFillColor(m_isSelectable ? COLOR_WHITE : COLOR_ELEMENTAL);
 	m_isSelected = true;
 }
 
@@ -468,7 +468,7 @@ GameObjectType DialogueOption::getConfiguredType() const {
 }
 
 void DialogueOption::deselect() {
-	m_text.setFillColor(m_isSelectable ? COLOR_GREY : COLOR_BAD);
+	m_text.setFillColor(m_isSelectable ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
 	m_isSelected = false;
 }
 

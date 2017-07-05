@@ -126,61 +126,75 @@ loadDialogue = function(DL)
 
 
 		DL:createChoiceNode(17)
-		if (DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)) then 
-			DL:addChoice(18, "DL_Choice_IceScarf") -- 1 $eq_icescarf$ (1 $mi_icecrystal$, 2 $mi_ironore$)
+		if (DL:hasItem("mi_icecrystal", 1)) then 
+			DL:addCraftingChoice(18, "DL_Choice_IceScarf") -- eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
 		end
-		if (DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)) then 
-			DL:addChoice(20, "DL_Choice_PearlSabre") -- 1 $we_pearlsabre$ (1 $mi_pearlpile$, 3 $mi_ironore$)
+		if (DL:hasItem("mi_pearlpile", 1)) then 
+			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile$,1,mi_ironore,3,gold,50
 		end
-		if (DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)) then 
-			DL:addChoice(21, "DL_Choice_LightningPike") -- 1 $we_lightningpike$ (1 $mi_elysiatail$, 5 $mi_ironore$)
+		if (DL:hasItem("mi_elysiatail", 1)) then 
+			DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,60
 		end
-		if (DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)) then 
-			DL:addChoice(22, "DL_Choice_JanusGlaive") -- 1 $we_janusglaive$ (1 $mi_janusglaive$, 4 $mi_ironore$)
+		if (DL:hasItem("mi_janusglaive", 1)) then 
+			DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,80
+		end
+		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
+			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,100
+		end
+		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
+			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,100
 		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()
 
-		if (DL:hasItem("mi_icecrystal", 1) and DL:hasItem("mi_ironore", 2)) then 
+		if (DL:hasItem("mi_icecrystal", 1)) then 
 
 			DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exeptionally beautiful stone! I can truly craft something magical from that.
-			DL:removeItem("mi_icecrystal", 1)
-			DL:removeItem("mi_ironore", 2)
-			DL:addItem("eq_icescarf", 1)
+			DL:gotoNode(17)
 			DL:addNode()
 
 		end
 
-		if (DL:hasItem("mi_pearlpile", 1) and DL:hasItem("mi_ironore", 3)) then 
+		if (DL:hasItem("mi_pearlpile", 1)) then 
 
 			DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
-			DL:removeItem("mi_pearlpile", 1)
-			DL:removeItem("mi_ironore", 3)
-			DL:addItem("we_pearlsabre", 1)
+			DL:gotoNode(17)
 			DL:addNode()
 
 		end
 
-		if (DL:hasItem("mi_elysiatail", 1) and DL:hasItem("mi_ironore", 5)) then 
+		if (DL:hasItem("mi_elysiatail", 1)) then 
 
 			DL:createNPCNode(21, -2, "DL_Harek_LightningPike") -- The tail feathers of a storm bird? Great material for a magical lightning pike.
-			DL:removeItem("mi_ironore", 5)
-			DL:removeItem("mi_elysiatail", 1)
-			DL:addItem("we_lightningpike", 1)
+			DL:gotoNode(17)
 			DL:addNode()
 
 		end
 
-		if (DL:hasItem("mi_janusglaive", 1) and DL:hasItem("mi_ironore", 4)) then 
+		if (DL:hasItem("mi_janusglaive", 1)) then 
 
 			DL:createNPCNode(22, 23, "DL_Harek_JanusGlaive") -- Hm, I really start to wonder where you get this stuff from.
-			DL:removeItem("mi_ironore", 4)
-			DL:removeItem("mi_janusglaive", 1)
 			DL:addNode()
 
 
 			DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon but I can only restore a part of its magical power.
-			DL:addItem("we_janusglaive", 1)
+			DL:gotoNode(17)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
+
+			DL:createNPCNode(24, -2, "DL_Harek_LavaArmor") -- Lava stones from a lava wraith! These will make a fine, fire-resistant armour.
+			DL:gotoNode(17)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
+
+			DL:createNPCNode(25, -2, "DL_Harek_CairnArmor") -- Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
+			DL:gotoNode(17)
 			DL:addNode()
 
 		end
