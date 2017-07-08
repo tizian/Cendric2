@@ -286,9 +286,9 @@ loadDialogue = function(DL)
 		DL:addNode()
 		
 		DL:createChoiceNode(51)
-		if (DL:hasItem("mi_firerat_fur", 1)) then
-			DL:addItemChoice(52, "DL_Choice_FireRatFur", "mi_firerat_fur", 1) -- Scarf of the Fire Rat
-		end
+		if (DL:hasItem("mi_firerat_fur", 1)) then 
+            DL:addCraftingChoice(52, "DL_Choice_FireRatFur") -- eq_fireratscarf,mi_firerat_fur,1,gold,20
+        end
 		DL:addChoice(-2, "DL_Choice_NothingToCraft") -- I'll come back later. [BACK]
 		DL:addNode()
 		

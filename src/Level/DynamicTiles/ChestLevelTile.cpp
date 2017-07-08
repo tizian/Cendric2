@@ -36,7 +36,7 @@ bool ChestLevelTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 
 	ChestTile::init(properties);
-
+	m_state = GameObjectState::Locked;
 	if (m_isOpen) {
 		unlock(false);
 	}
@@ -68,7 +68,6 @@ void ChestLevelTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Unlocked, openAnimation);
 
 	// initial values
-	m_state = GameObjectState::Locked;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(false);
 }

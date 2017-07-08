@@ -108,7 +108,7 @@ inline void updateTime(sf::Time& time, const sf::Time& frameTime) {
 }
 
 // versioning
-#define CENDRIC_VERSION_NR "0.5.1"
+#define CENDRIC_VERSION_NR "0.5.2"
 
 // const canvas size (window can be rescaled though)
 #define WINDOW_WIDTH 1280
