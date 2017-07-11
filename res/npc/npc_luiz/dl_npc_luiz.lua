@@ -155,7 +155,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_luiz", "first_spell")) then 
 			DL:addChoice(21, "DL_Choice_TeachSpells") -- Can you teach me some spells?
 		end
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100) then 
+		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "third_spell")) then 
 			DL:addChoice(22, "DL_Choice_TeachMore") -- Can you teach me more spells?
 		end
 		if (DL:isQuestState("lloyds_plan", "void")) then 
@@ -170,6 +170,18 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
 			DL:addChoice(23, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
 		end
+		if (DL:isConditionFulfilled("npc_luiz", "third_spell") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")) then 
+			DL:addChoice(35, "DL_Choice_TeachMore") -- 
+		end
+		if ((DL:isQuestState("cathedral_necro", "completed") or DL:isQuestState("lloyds_plan", "completed")) and DL:isQuestState("yasha_necro", "void")) then 
+			DL:addChoice(37, "DL_Choice_WhatElseHelp") -- 
+		end
+		if (not DL:isConditionFulfilled("npc_luiz", "kill_yasha") and DL:isQuestState("yasha_necro", "started")) then 
+			DL:addChoice(40, "DL_Choice_KillYasha") -- Do I have to kill the demon to get the mask?
+		end
+		if (not DL:isConditionFulfilled("npc_luiz", "where_yasha") and DL:isQuestState("yasha_necro", "started")) then 
+			DL:addChoice(41, "DL_Choice_WhereYasha") -- How can I get to the Highland of Admantris?
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -182,7 +194,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100) then 
+		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "third_spell")) then 
 
 			DL:createNPCNode(22, -2, "DL_Luiz_NoSpellReputation") -- You're not ready for that. Help us with our studies, and you will get the experience needed for more powerful spells.
 			DL:addNode()
@@ -254,6 +266,50 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(34, -2, "DL_Luiz_CompleteLloydsPlan3") -- Keep an eye open and tell me if you see him.
 			DL:changeQuestState("missing_bob", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isConditionFulfilled("npc_luiz", "third_spell") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")) then 
+
+			DL:createNPCNode(35, 36, "DL_Luiz_NoMoreSpells") -- No, I'm sorry, I taught you everything I know.
+			DL:addConditionProgress("npc_luiz", "no_more_spells")
+			DL:addNode()
+
+
+			DL:createNPCNode(36, -2, "DL_Luiz_NoMoreSpells2") -- But that doesn't mean that there are no more necromancy spells out there. They just need to be discovered.
+			DL:addNode()
+
+		end
+
+		if ((DL:isQuestState("cathedral_necro", "completed") or DL:isQuestState("lloyds_plan", "completed")) and DL:isQuestState("yasha_necro", "void")) then 
+
+			DL:createNPCNode(37, 38, "DL_Luiz_YashaStart") -- Hm. Indeed, I do have something for you.
+			DL:addNode()
+
+
+			DL:createNPCNode(38, 39, "DL_Luiz_YashaStart2") -- There's a cursed temple in the Highlands of Admantris. It is said that a demon is haunting this place.
+			DL:addNode()
+
+
+			DL:createNPCNode(39, -2, "DL_Luiz_YashaStart3") -- It is also said that this demon uses a necrotic ghostly mask and walks through walls. Find that mask and bring it to me, so we can use its powers too.
+			DL:changeQuestState("yasha_necro", "started")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_luiz", "kill_yasha") and DL:isQuestState("yasha_necro", "started")) then 
+
+			DL:createNPCNode(40, -2, "DL_Luiz_KillYasha") -- You'll have to find out for yourself.
+			DL:addConditionProgress("npc_luiz", "kill_yasha")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_luiz", "where_yasha") and DL:isQuestState("yasha_necro", "started")) then 
+
+			DL:createNPCNode(41, -2, "DL_Luiz_WhereYasha") -- As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
+			DL:addConditionProgress("npc_luiz", "where_yasha")
 			DL:addNode()
 
 		end

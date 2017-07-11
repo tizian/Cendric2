@@ -387,7 +387,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "second_spell") and DL:getReputation("necromancer") < 100
+		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "third_spell")
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:Can you teach me more spells?
@@ -424,7 +424,7 @@ npc.id:npc_luiz
 		translation.de:Ich habe das nekrotische Zauberbuch.
 		translation.ch:Ich hans nekrotisch Zauberbuech.
 	]
-    [
+	[
 		# Link node, tag is next tag
 		tag:23
 		condition:DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")
@@ -433,6 +433,46 @@ npc.id:npc_luiz
 		translation.en:I've talked to Lloyd...
 		translation.de:Ich habe mit Lloyd gesprochen...
 		translation.ch:Ich ha mitem Lloyd gredt...
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+		condition:DL:isConditionFulfilled("npc_luiz", "third_spell") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:37
+		condition:(DL:isQuestState("cathedral_necro", "completed") or DL:isQuestState("lloyds_plan", "completed")) and DL:isQuestState("yasha_necro", "void")
+		# translation: 
+		translation.tag:DL_Choice_WhatElseHelp
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:40
+		condition:not DL:isConditionFulfilled("npc_luiz", "kill_yasha") and DL:isQuestState("yasha_necro", "started")
+		# translation: 
+		translation.tag:DL_Choice_KillYasha
+		translation.en:Do I have to kill the demon to get the mask?
+		translation.de:Muss ich den Dämon töten um die Maske zu kriegen?
+		translation.ch:Mun ich de Dämon kille zum d'Maske z'becho?
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		condition:not DL:isConditionFulfilled("npc_luiz", "where_yasha") and DL:isQuestState("yasha_necro", "started")
+		# translation: 
+		translation.tag:DL_Choice_WhereYasha
+		translation.en:How can I get to the Highland of Admantris?
+		translation.de:Wie komme ich ins Hochland von Admantris?
+		translation.ch:We chumi is Hochland vo Admantris?
 	]
 	[
 		# Link node, tag is next tag
@@ -646,6 +686,108 @@ npc.id:npc_luiz
 	translation.en:Keep an eye open and tell me if you see him.
 	translation.de:Halte ein Auge offen und sag mir, falls er dir über den Weg laufen sollte.
 	translation.ch:Bhalt es Aug offe und segmer, wener dir über de Weg laufe söt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "no_more_spells")
+	# translation: 
+	translation.tag:DL_Luiz_NoMoreSpells
+	translation.en:No, I'm sorry, I taught you everything I know.
+	translation.de:Nein, tut mir leid, ich habe dir alles beigebracht, was ich weiss.
+	translation.ch:Nei, tuet mer leid, ich ha der alles zeigt woni weiss.
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_NoMoreSpells2
+	translation.en:But that doesn't mean that there are no more necromancy spells out there. They just need to be discovered.
+	translation.de:Aber das heisst nicht dass es da draussen keine weiteren Nekromantie-Zauber mehr gibt. Man muss sie nur finden.
+	translation.ch:Aber das will nid heisse dases det usse ke Nekromantie-Zauber me git. Me mu si nur finde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart
+	translation.en:Hm. Indeed, I do have something for you.
+	translation.de:Hm. Ja, ich habe etwas für dich.
+	translation.ch:Hm. Jo, ich han öppis für dich.
+	[
+		# Link node, tag is next tag
+		tag:38
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart2
+	translation.en:There's a cursed temple in the Highlands of Admantris. It is said that a demon is haunting this place.
+	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Man erzählt sich, dass ein Dämon dort sein Unwesen treibt.
+	translation.ch:Es git en verfluechte Tempel im Hochland vo Admantris. Me verzellt sich, dass en Dämon det sis Unwese triibt.
+	[
+		# Link node, tag is next tag
+		tag:39
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_necro", "started")
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart3
+	translation.en:It is also said that this demon uses a necrotic ghostly mask and walks through walls. Find that mask and bring it to me, so we can use its powers too.
+	translation.de:Man erzählt sich auch das dieser Dämon eine nekrotische Maske benutzt, um durch Wände zu gehen. Finde diese Maske und bringe sie mir, damit wir ihre Kräfte nutzen können.
+	translation.ch:Me verzellt sich au dass de Dämon e nekrotischi Maske het mit dere er dur Wänd laufe chan. Bring üs die Maske, so dass mir ihri Chräft nutze chönd.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "kill_yasha")
+	# translation: 
+	translation.tag:DL_Luiz_KillYasha
+	translation.en:You'll have to find out for yourself.
+	translation.de:Das musst du schon selbst herausfinden.
+	translation.ch:Da muesch scho selber usefinde.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "where_yasha")
+	# translation: 
+	translation.tag:DL_Luiz_WhereYasha
+	translation.en:As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
+	translation.de:So weit ich weiss gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
+	translation.ch:Sowiit ich weiss gits en Weg dur en Vulkan ide Marsche, südlich vo Gandria.
 	[
 		# Link node, tag is next tag
 		tag:-2
