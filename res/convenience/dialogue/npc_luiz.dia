@@ -476,6 +476,16 @@ npc.id:npc_luiz
 	]
 	[
 		# Link node, tag is next tag
+		tag:42
+		condition:DL:isQuestState("yasha_necro", "started") and DL:isQuestComplete("yasha_necro")
+		# translation: 
+		translation.tag:DL_Choice_YashaComplete
+		translation.en:I found Yasha's mask.
+		translation.de:Ich habe die Maske von Yasha.
+		translation.ch:Ich han de Yasha ihri Maske.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -788,6 +798,23 @@ npc.id:npc_luiz
 	translation.en:As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
 	translation.de:So weit ich weiss gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
 	translation.ch:Sowiit ich weiss gits en Weg dur en Vulkan ide Marsche, südlich vo Gandria.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	trigger:DL:removeItem("qe_yashamask", 1)
+	trigger:DL:addConditionProgress("npc_luiz", "third_spell")
+	trigger:DL:changeQuestState("yasha_necro", "completed")
+	# translation: 
+	translation.tag:DL_Luiz_YashaComplete
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

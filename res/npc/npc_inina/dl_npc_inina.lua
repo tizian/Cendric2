@@ -212,7 +212,7 @@ loadDialogue = function(DL)
 			DL:createNPCNode(44, 45, "DL_Inina_FoundPaladin") -- Oh no. That's terrible. He was a good man. I'm going to pray for him. Thank you for bringing my pendant back.
 			DL:changeQuestState("missing_paladin", "completed")
 			DL:removeItem("eq_lightpendant", 1)
-			DL:addReputationProgress("cleric", 5)
+			DL:addReputationProgress("cleric", 10)
 			DL:addNode()
 			
 			DL:createNPCNode(45, -2, "DL_Inina_FoundPaladin2") -- We really need to find out what's behind all this.
