@@ -399,6 +399,16 @@ npc.id:npc_lloyd
 	]
 	[
 		# Link node, tag is next tag
+		tag:25
+		condition:(DL:isQuestState("cathedral_cleric", "completed") or DL:isQuestState("ininas_abduction", "completed")) and DL:isQuestState("yasha_cleric", "void")
+		# translation: 
+		translation.tag:DL_Choice_YashaStart
+		translation.en:Is there anything else I can do for you?
+		translation.de:Gibt es sonst noch etwas, was ich für euch tun kann?
+		translation.ch:Gits susch na öppis woni für eu mache chan?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -476,6 +486,62 @@ npc.id:npc_lloyd
 	translation.en:I think you've gained enough experience to learn how to shield yourself against evil magic. Take this scroll as a reward for your help.
 	translation.de:Ich denke, du hast nun genug Erfahrung um zu lernen, wie man sich gegen solch bösartige Magie schützt. Nimm diese Schriftrolle als Belohnung für deine Hilfe.
 	translation.ch:Ich denk, du hesch ez gnueg Erfahrig zum lerne, we me sich geg so bösi Magie schützt. Do, nimm die Schriftrolle als Belohnig für dini Hilf.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_YashaStart
+	translation.en:You've already done a lot for us and showed your skill with staff and magic.
+	translation.de:Du hast schon viel für uns getan und dein Können mit Stab und Schwert gezeigt.
+	translation.ch:Du hesch scho viel für üs gmacht und dis Könne mit Stab und Schild zeigt.
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_YashaStart2
+	translation.en:The time has come to prove your faith in the Eternal Light.
+	translation.de:Die Zeit ist nun gekommen, auch deinen Glauben ans Ewige Licht unter Beweis zu stellen.
+	translation.ch:D'Ziit isch ez cho, zum au din Glaube as Ewige Liecht unter Bewiis z'stelle.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{3
+	# [27] Cendric Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_YashaStart3
+	translation.en:How should I prove my faith?
+	translation.de:Wie soll ich meinen Glauben unter Beweis stellen?
+	translation.ch:We söli min Glaube unter Bewiis stelle?
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart4
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2
