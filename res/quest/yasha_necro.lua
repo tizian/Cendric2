@@ -1,5 +1,5 @@
-collectibles = 
+conditions = 
 {
-	{"qe_yashamask", 1}
+	"find_necro_mask",
 }
 

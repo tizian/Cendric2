@@ -1,5 +1,5 @@
-collectibles = 
+conditions = 
 {
-	{"qe_thunderheart", 1}
+	"found_thunder_heart"
 }
 

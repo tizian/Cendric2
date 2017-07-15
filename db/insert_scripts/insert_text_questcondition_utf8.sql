@@ -6,4 +6,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ma
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('abductors_found', 'quest_condition', 'Abductors found','Entführer gefunden','Entführer gfunde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('save_leeroy', 'quest_condition', 'Leeroy saved','Leeroy gerettet','De Leeroy grettet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('portstone_activated', 'quest_condition', 'Teleport stone activated','Teleportstein aktiviert','Teleportstei aktiviert');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('find_necro_mask', 'quest_condition', 'Ghost mask found','Geistermaske gefunden','Geischtermaske gfunde');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('leap_of_faith', 'quest_condition', 'Leap of faith survived','Glaubenssprung überlebt','Glaubenssprung überlebt');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('found_thunder_heart', 'quest_condition', 'Thunder heart found','Donnerherz gefunden','Donnerherz gfunde');
 
