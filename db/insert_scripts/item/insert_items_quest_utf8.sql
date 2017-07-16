@@ -135,3 +135,15 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item', 'Robert''s Teleport Stone','Robert''s Teleportstein','Em Robert sin Teleportstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item_desc', 'A magical teleport stone. I can''t use it as it''s bound to the mage Robert.','Ein magischer Teleportstein. Ich kann ihn nicht benutzen, da er an den Magier Robert gebunden ist.','En magische Teleportstei. Ich chanen nid bruche weler an Magier Robert bunde isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_portstone_bob', 'quest', 700, 300, -1);
+
+-- Heart of Thunder
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_thunderheart', 'item', 'Heart of Thunder','Donnerherz','Donnerherz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_thunderheart', 'item_desc', 'A precious stone which holds magical powers.','Ein wertvoller Stein mit magischen Kräften.','En wertvolle Stei mit magische Chräft.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_thunderheart', 'quest', 700, 650, -1);
+
+-- Yaslaw's Mask
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashamask', 'item', 'Yaslaw''s Mask','Yaslaw''s Maske','Maske vom Yaslaw');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashamask', 'item_desc', 'This mask granted the necromancer Yaslaw special powers.','Diese Maske hat dem Nekromanten Yaslaw spezielle Kräfte verliehen.','Die Maske het em Yaslaw spezielli Chräft gä.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_yashamask', 'quest', 750, 0, -1);

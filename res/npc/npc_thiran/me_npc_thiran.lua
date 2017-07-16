@@ -10,6 +10,7 @@ wares =
 	{"eq_back_divinet3", 1},
 	{"eq_head_divinet3", 1},
 	{"eq_body_divinet3", 1},
+    {"we_pikeoflight", 1},
 	{"fo_lesserhealingpotion", 20},
 }
 
@@ -24,6 +25,7 @@ reputation =
 	{"eq_back_divinet3", 70},
 	{"eq_head_divinet3", 70},
 	{"eq_body_divinet3", 70},
+    {"we_pikeoflight", 70},
 }
 
 fraction = "cleric"

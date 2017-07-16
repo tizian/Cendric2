@@ -400,12 +400,32 @@ npc.id:npc_lloyd
 	[
 		# Link node, tag is next tag
 		tag:25
-		condition:(DL:isQuestState("cathedral_cleric", "completed") or DL:isQuestState("ininas_abduction", "completed")) and DL:isQuestState("yasha_cleric", "void")
+		condition:DL:isQuestState("cathedral_cleric", "completed") and DL:isQuestState("yasha_cleric", "void")
 		# translation: 
 		translation.tag:DL_Choice_YashaStart
 		translation.en:Is there anything else I can do for you?
 		translation.de:Gibt es sonst noch etwas, was ich für euch tun kann?
 		translation.ch:Gits susch na öppis woni für eu mache chan?
+	]
+	[
+		# Link node, tag is next tag
+		tag:32
+		condition:DL:isQuestState("yasha_cleric", "started") and not DL:isConditionFulfilled("npc_lloyd", "yasha_doubt")
+		# translation: 
+		translation.tag:DL_Choice_YashaDoubt
+		translation.en:What if I don't survive the leap?
+		translation.de:Was, wenn ich den Sprung nicht überlebe?
+		translation.ch:Was, weni de Sprung nid überleb?
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		condition:DL:isQuestState("yasha_cleric", "started") and DL:isQuestComplete("yasha_cleric")
+		# translation: 
+		translation.tag:DL_Choice_YashaComplete
+		translation.en:I survived the leap of faith.
+		translation.de:Ich habe den Glaubenssprung überlebt.
+		translation.ch:Ich ha de Glaubenssprung überlebt.
 	]
 	[
 		# Link node, tag is next tag
@@ -538,10 +558,70 @@ npc.id:npc_lloyd
 	tag:28
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Luiz_YashaStart4
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Lloyd_YashaStart4
+	translation.en:There's an abadoned temple, guarded by a demon in the Highlands of Admantris. Find this temple and face its tests.
+	translation.de:Es gibt einen verlassenen Temel im Hochland von Admantris, der von einem Dämon bewacht wird. Du musst diesen Tempel finden und dich seinen Prüfungen stellen. 
+	translation.ch:Es git en verlassene Tempel im Hochland vo Admantris, wo vomne Dämon bewacht wird. Du muesch de Tempel finde und dich sine Prüefige stelle.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_YashaStart5
+	translation.en:If you find a way through the temple, you'll discover a dark abyss. With the power of the Eternal Light, summon a holy shield and jump.
+	translation.de:Wenn du einen Weg durch den Tempel findest, wirst du an einen dunkeln Abgrund kommen. Mit der Macht des Ewigen Lichts kannst du einen heiligen Schild beschwören und springen.
+	translation.ch:Wenn du en Weg dur de Tempel findsch, wirsch anen dunkle Abgrund cho. Mit de Chraft vom Ewige Liecht chasch en heilige Schild beschwöre und gumpe.
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_cleric", "started")
+	# translation: 
+	translation.tag:DL_Lloyd_YashaStart6
+	translation.en:If your faith is strong, you won't only survive it, but also gain the power to never ever get stuck in a dark abyss again. 
+	translation.de:Wenn dein Glaube stark ist, wirst du es nicht nur überleben, sondern auch die Fähigkeit gewinnen, nie mehr in einem solchen dunkeln Abgrund festzustecken.
+	translation.ch:Wenn din Glaube starch isch, wirsches nid nur überlebe, sondern au d'Fähigkeit becho, nie me i somne dunkle Abgrund stecke z'bliibe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "yasha_doubt")
+	# translation: 
+	translation.tag:DL_Lloyd_YashaDoubt
+	translation.en:That would mean you're unworthy. Nobody would miss you.
+	translation.de:Das würde bedeuten, dass du unwürdig bist. Niemand würde dir nachweinen.
+	translation.ch:Da wür bedüüte, dass du unwürdig bisch. Niemert wür di vermisse.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_cleric", "completed")
+	trigger:DL:addReputationProgress("cleric", 10)
+	# translation: 
+	translation.tag:DL_Lloyd_YashaComplete
+	translation.en:Yes, I can feel the light flow through you. May it always guide you.
+	translation.de:Ja, ich kann spüren, wie das Licht durch dich fliesst. Möge es dich immer leiten.
+	translation.ch:Ja, ich cha gspüre, wes Liecht dur dich flüsst. Uf das es dich immer leite mag.
 	[
 		# Link node, tag is next tag
 		tag:-2

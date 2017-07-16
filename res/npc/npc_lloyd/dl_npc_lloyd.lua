@@ -157,6 +157,15 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("cathedral_cleric", "started") and DL:isQuestComplete("cathedral_cleric")) then 
 			DL:addChoice(23, "DL_Choice_CathedralFinished") -- I've purified the necrotic grimoire.
 		end
+		if (DL:isQuestState("cathedral_cleric", "completed") and DL:isQuestState("yasha_cleric", "void")) then 
+			DL:addChoice(25, "DL_Choice_YashaStart") -- Is there anything else I can do for you?
+		end
+		if (DL:isQuestState("yasha_cleric", "started") and not DL:isConditionFulfilled("npc_lloyd", "yasha_doubt")) then 
+			DL:addChoice(32, "DL_Choice_YashaDoubt") -- What if I don't survive the leap?
+		end
+		if (DL:isQuestState("yasha_cleric", "started") and DL:isQuestComplete("yasha_cleric")) then 
+			DL:addChoice(31, "DL_Choice_YashaComplete") -- I survived the leap of faith.
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -185,6 +194,51 @@ loadDialogue = function(DL)
 			DL:createNPCNode(24, -2, "DL_Lloyd_CathedralFinished2") -- I think you've gained enough experience to learn how to shield yourself against evil magic. Take this scroll as a reward for your help.
 			DL:changeQuestState("cathedral_cleric", "completed")
 			DL:addItem("sp_divineshield", 1)
+			DL:addReputationProgress("cleric", 10)
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("cathedral_cleric", "completed") and DL:isQuestState("yasha_cleric", "void")) then 
+
+			DL:createNPCNode(25, 26, "DL_Lloyd_YashaStart") -- You've already done a lot for us and showed your skill with staff and magic.
+			DL:addNode()
+
+
+			DL:createNPCNode(26, 27, "DL_Lloyd_YashaStart2") -- The time has come to prove your faith in the Eternal Light.
+			DL:addNode()
+
+
+			DL:createCendricNode(27, 28, "DL_Cendric_YashaStart3") -- How should I prove my faith?
+			DL:addNode()
+
+
+			DL:createNPCNode(28, 29, "DL_Lloyd_YashaStart4") -- There's an abadoned temple, guarded by a demon in the Highlands of Admantris. Find this temple and face its tests.
+			DL:addNode()
+
+
+			DL:createNPCNode(29, 30, "DL_Lloyd_YashaStart5") -- If you find a way through the temple, you'll discover a dark abyss. With the power of the Eternal Light, summon a holy shield and jump.
+			DL:addNode()
+
+
+			DL:createNPCNode(30, -2, "DL_Lloyd_YashaStart6") -- If your faith is strong, you won't only survive it, but also gain the power to never ever get stuck in a dark abyss again. 
+			DL:changeQuestState("yasha_cleric", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("yasha_cleric", "started") and not DL:isConditionFulfilled("npc_lloyd", "yasha_doubt")) then 
+
+			DL:createNPCNode(32, -2, "DL_Lloyd_YashaDoubt") -- That would mean you're unworthy. Nobody would miss you.
+			DL:addConditionProgress("npc_lloyd", "yasha_doubt")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("yasha_cleric", "started") and DL:isQuestComplete("yasha_cleric")) then 
+
+			DL:createNPCNode(31, -2, "DL_Lloyd_YashaComplete") -- Yes, I can feel the light flow through you. May it always guide you.
+			DL:changeQuestState("yasha_cleric", "completed")
 			DL:addReputationProgress("cleric", 10)
 			DL:addNode()
 

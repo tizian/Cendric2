@@ -171,6 +171,7 @@ item.id:qe_compass,1
 item.id:qe_fireessence,1
 item.id:qe_fireratheart,1
 item.id:qe_invisrecipe,1
+item.id:qe_thunderheart,1
 item.id:qe_jackpan,1
 item.id:qe_recommendationletter,1
 item.id:qe_rope,1
@@ -180,6 +181,7 @@ item.id:qe_necrobook,1
 item.id:qe_portstone_bob,1
 item.id:qe_portstone_inactive,1
 item.id:qe_divinecandleholder,1
+item.id:qe_yashamask,1
 item.id:sp_divineshield,1
 item.id:sp_fear,1
 item.id:sp_fireball,1
@@ -189,6 +191,7 @@ item.id:sp_leech,1
 item.id:sp_light,1
 item.id:sp_shadowtrap,1
 item.id:sp_unlock,1
+item.id:we_bonescythe,1
 item.id:we_claw,1
 item.id:we_doublesickle,1
 item.id:we_enchanteddagger,1

@@ -10,6 +10,7 @@ wares =
 	{"eq_back_necrot3", 1},
 	{"eq_head_necrot3", 1},
 	{"eq_body_necrot3", 1},
+    {"we_bonescythe", 1},
 	{"fo_lesserhealingpotion", 20},
 }
 
@@ -24,6 +25,7 @@ reputation =
 	{"eq_back_necrot3", 70},
 	{"eq_head_necrot3", 70},
 	{"eq_body_necrot3", 70},
+    {"we_bonescythe", 70},
 }
 
 fraction = "necromancer"

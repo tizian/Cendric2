@@ -387,7 +387,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isConditionFulfilled("npc_luiz", "third_spell")
+		condition:DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isSpellLearned("15")
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:Can you teach me more spells?
@@ -437,7 +437,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:35
-		condition:DL:isConditionFulfilled("npc_luiz", "third_spell") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")
+		condition:DL:isSpellLearned("15") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:
@@ -447,7 +447,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:37
-		condition:(DL:isQuestState("cathedral_necro", "completed") or DL:isQuestState("lloyds_plan", "completed")) and DL:isQuestState("yasha_necro", "void")
+		condition:DL:isQuestState("cathedral_necro", "completed") and DL:isQuestState("yasha_necro", "void")
 		# translation: 
 		translation.tag:DL_Choice_WhatElseHelp
 		translation.en:
@@ -480,9 +480,9 @@ npc.id:npc_luiz
 		condition:DL:isQuestState("yasha_necro", "started") and DL:isQuestComplete("yasha_necro")
 		# translation: 
 		translation.tag:DL_Choice_YashaComplete
-		translation.en:I found Yasha's mask.
-		translation.de:Ich habe die Maske von Yasha.
-		translation.ch:Ich han de Yasha ihri Maske.
+		translation.en:I found Yaslaw's mask.
+		translation.de:Ich habe die Maske von Yaslaw.
+		translation.ch:Ich hanem Yaslaw sini Maske.
 	]
 	[
 		# Link node, tag is next tag
@@ -722,9 +722,9 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_NoMoreSpells2
-	translation.en:But that doesn't mean that there are no more necromancy spells out there. They just need to be discovered.
-	translation.de:Aber das heisst nicht dass es da draussen keine weiteren Nekromantie-Zauber mehr gibt. Man muss sie nur finden.
-	translation.ch:Aber das will nid heisse dases det usse ke Nekromantie-Zauber me git. Me mu si nur finde.
+	translation.en:But a good necromancer is always searching for new spells. There is more out there than I know.
+	translation.de:Aber ein guter Nekromant ist immer auf der Suche nach neuen Zaubern. Es gibt mehr da draussen, als wir kennen.
+	translation.ch:Aber en guete Nekromant isch immer uf de Suechi nach neue Zauber. Es git meh det usse wemer kenned.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -750,9 +750,9 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_YashaStart2
-	translation.en:There's a cursed temple in the Highlands of Admantris. It is said that a demon is haunting this place.
-	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Man erzählt sich, dass ein Dämon dort sein Unwesen treibt.
-	translation.ch:Es git en verfluechte Tempel im Hochland vo Admantris. Me verzellt sich, dass en Dämon det sis Unwese triibt.
+	translation.en:There's a cursed temple in the Highlands of Admantris. A necromancer called Yaslaw once summoned a powerful demon in there.
+	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Ein Nekromant namens Yaslaw hat dort vor langer Zeit einen mächtigen Dämonen beschworen.
+	translation.ch:Es git en verfluechte Tempel im Hochland vo Admantris. En Nekromant namens Yaslaw het det vor langer Ziit en mächtige Dämon beschwore.
 	[
 		# Link node, tag is next tag
 		tag:39
@@ -762,12 +762,40 @@ npc.id:npc_luiz
 	# [39] NPC Node
 	tag:39
 	# triggers: 
-	trigger:DL:changeQuestState("yasha_necro", "started")
 	# translation: 
 	translation.tag:DL_Luiz_YashaStart3
-	translation.en:It is also said that this demon uses a necrotic ghostly mask and walks through walls. Find that mask and bring it to me, so we can use its powers too.
-	translation.de:Man erzählt sich auch das dieser Dämon eine nekrotische Maske benutzt, um durch Wände zu gehen. Finde diese Maske und bringe sie mir, damit wir ihre Kräfte nutzen können.
-	translation.ch:Me verzellt sich au dass de Dämon e nekrotischi Maske het mit dere er dur Wänd laufe chan. Bring üs die Maske, so dass mir ihri Chräft nutze chönd.
+	translation.en:Unfortunately, he got captured by his own creature and never returned. 
+	translation.de:Unglücklicherweise wurde er von seiner eigenen Kreatur eingesperrt und kam nie zurück. 
+	translation.ch:Blöderwiis ischer vo sinere eigene Kreatur gfange ghalte worde und isch nie wieder zruggcho.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart4
+	translation.en:But as far as we know from the old writings, he carried a magical mask with him that granted him great powers.
+	translation.de:Aber so weit wir aus den alten Schriften lesen können, hatte er stets eine magische Maske bei ihm, die ihm grosse Kräfte verliehen hat.
+	translation.ch:Aber wamer us de alte Schrifte lese chönd, isch, daser immer e magischi Maske mit sich treit het wo ihm grossi Chräft verliehe het.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_necro", "started")
+	# translation: 
+	translation.tag:DL_Luiz_YashaStart5
+	translation.en:He has been dead long enough. Find his remains in the temple, let him lead you to his mask and bring it to us.
+	translation.de:Er war nun lange genug tot. Finde seine Überreste im Tempel, lass ihn dich zu seiner Maske führen und bringe sie uns.
+	translation.ch:Er isch ez lang gnueg tot gsi. Find sini Überräschte im Tempel, lah dich vo ihm zu sinere Maske führe und bring si üs.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -808,13 +836,27 @@ npc.id:npc_luiz
 	tag:42
 	# triggers: 
 	trigger:DL:removeItem("qe_yashamask", 1)
-	trigger:DL:addConditionProgress("npc_luiz", "third_spell")
 	trigger:DL:changeQuestState("yasha_necro", "completed")
+	trigger:DL:addReputationProgress("necromancer", 10)
 	# translation: 
 	translation.tag:DL_Luiz_YashaComplete
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:And you got his powers too as I can see. I'm really impressed, well done.
+	translation.de:Und du hast ihre Kräfte auch bekommen wie ich sehe. Ich bin beeindruckt.
+	translation.ch:Und du hesch ihri Chräft au becho we ich gse. Ich bi würkli beidruckt.
+	[
+		# Link node, tag is next tag
+		tag:45
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_YashaComplete2
+	translation.en:Use its powers wisely, necromancer.
+	translation.de:Gebrauche ihre Kraft weise, Nekromant.
+	translation.ch:Bruch ihri Chräft gschiid, Nekromant.
 	[
 		# Link node, tag is next tag
 		tag:-2

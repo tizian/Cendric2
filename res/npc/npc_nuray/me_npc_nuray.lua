@@ -10,6 +10,7 @@ wares =
 	{"eq_back_twilightt3", 1},
 	{"eq_head_twilightt3", 1},
 	{"eq_body_twilightt3", 1},
+    {"we_oathbreaker", 1},
 	{"fo_lesserhealingpotion", 20},
 }
 
@@ -24,6 +25,7 @@ reputation =
 	{"eq_back_twilightt3", 70},
 	{"eq_head_twilightt3", 70},
 	{"eq_body_twilightt3", 70},
+    {"we_oathbreaker", 70},
 }
 
 fraction = "thief"

@@ -148,8 +148,11 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_vincent3", "first_spell")) then 
 			DL:addChoice(18, "DL_Choice_TeachSpells") -- Can you teach me some spells?
 		end
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isSpellLearned("10")) then 
 			DL:addChoice(19, "DL_Choice_TeachMore") -- Can you teach me more spells?
+		end
+		if (DL:isSpellLearned("10") and not DL:isConditionFulfilled("npc_vincent3", "no_more_spells")) then 
+			DL:addChoice(32, "DL_Choice_TeachMore") -- 
 		end
 		if (DL:isQuestState("lloyds_plan", "void")) then 
 			DL:addChoice(12, "DL_Choice_HowCanIHelp") -- How can I support you?
@@ -163,6 +166,12 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
 			DL:addChoice(20, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
 		end
+		if (DL:isQuestState("cathedral_thief", "completed") and DL:isQuestState("yasha_thief", "void")) then 
+			DL:addChoice(34, "DL_Choice_YashaStart") -- Do you have another job for me?
+		end
+		if (DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")) then 
+			DL:addChoice(35, "DL_Choice_YashaComplete") -- I found the heart of thunder.
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -175,9 +184,21 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100) then 
+		if (DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isSpellLearned("10")) then 
 
 			DL:createNPCNode(19, -2, "DL_Vincent_NoSpellReputation") -- Maybe later. First, you need to show us that you can handle this kind of magic.
+			DL:addNode()
+
+		end
+
+		if (DL:isSpellLearned("10") and not DL:isConditionFulfilled("npc_vincent3", "no_more_spells")) then 
+
+			DL:createNPCNode(32, 33, "DL_Vincent_NoMoreSpells") -- No, I've taught you everything I know.
+			DL:addConditionProgress("npc_vincent3", "no_more_spells")
+			DL:addNode()
+
+
+			DL:createNPCNode(33, -2, "DL_Vincent_NoMoreSpells2") -- But that doesn't mean that there are no more twilight spells out there. They just need to be discovered.
 			DL:addNode()
 
 		end
@@ -247,6 +268,44 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(31, -2, "DL_Vincent_CompleteLloydsPlan3") -- He went to the marshlands recently. If you see him, tell Nuray.
 			DL:changeQuestState("missing_koray", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("cathedral_thief", "completed") and DL:isQuestState("yasha_thief", "void")) then 
+
+			DL:createNPCNode(34, 37, "DL_Vincent_YashaStart") -- Yes, actually I do have one for you. A dangerous one, indeed...
+			DL:addNode()
+
+
+			DL:createNPCNode(37, 38, "DL_Vincent_YashaStart2") -- Listen. There's an abandoned temple in the Highlands of Admantris, and they say a demon is haunting it.
+			DL:addNode()
+
+
+			DL:createNPCNode(38, 39, "DL_Vincent_YashaStart3") -- But we also know of a powerful magical stone, the "heart of thunder", which is hidden there.
+			DL:addNode()
+
+
+			DL:createNPCNode(39, 40, "DL_Vincent_YashaStart4") -- It is probably heavily guarded by warden spells that can kill you on sight. But the loot is worth it!
+			DL:addNode()
+
+
+			DL:createNPCNode(40, -2, "DL_Vincent_YashaStart5") -- Using some invisibility, you should get through anyway. Good luck!
+			DL:changeQuestState("yasha_thief", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")) then 
+
+			DL:createNPCNode(35, 36, "DL_Vincent_YashaComplete") -- (Grins) Well, I hope you didn't get in trouble getting this one.
+			DL:removeItem("qe_thunderheart", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(36, -2, "DL_Vincent_YashaComplete2") -- I always knew that you'd make great thief - eh, twilight mage. Enjoy your newly gained powers.
+			DL:changeQuestState("yasha_thief", "completed")
+			DL:addReputationProgress("thief", 10)
 			DL:addNode()
 
 		end

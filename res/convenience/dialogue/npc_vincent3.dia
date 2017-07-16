@@ -348,12 +348,22 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:19
-		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and DL:getReputation("thief") < 100
+		condition:DL:isConditionFulfilled("npc_vincent3", "first_spell") and not DL:isSpellLearned("10")
 		# translation: 
 		translation.tag:DL_Choice_TeachMore
 		translation.en:Can you teach me more spells?
 		translation.de:Kannst du mir noch mehr Zauber beibringen?
 		translation.ch:Chasch mer na me Zauber bibringe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:32
+		condition:DL:isSpellLearned("10") and not DL:isConditionFulfilled("npc_vincent3", "no_more_spells")
+		# translation: 
+		translation.tag:DL_Choice_TeachMore
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -397,6 +407,26 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
+		tag:34
+		condition:DL:isQuestState("cathedral_thief", "completed") and DL:isQuestState("yasha_thief", "void")
+		# translation: 
+		translation.tag:DL_Choice_YashaStart
+		translation.en:Do you have another job for me?
+		translation.de:Hast du noch einen Auftrag für mich?
+		translation.ch:Hesch na en Uftrag für mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+		condition:DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")
+		# translation: 
+		translation.tag:DL_Choice_YashaComplete
+		translation.en:I found the heart of thunder.
+		translation.de:Ich habe das Donnerherz.
+		translation.ch:Ich hans Donnerherz.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -430,6 +460,35 @@ npc.id:npc_vincent3
 	translation.en:Maybe later. First, you need to show us that you can handle this kind of magic.
 	translation.de:Vielleicht später. Erst musst du uns zeigen, dass du auch mit dieser Magie umgehen kannst.
 	translation.ch:Vilicht spöter. Zersch muesch üs mal zeige das au öppis chasch demit afange.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "no_more_spells")
+	# translation: 
+	translation.tag:DL_Vincent_NoMoreSpells
+	translation.en:No, I've taught you everything I know.
+	translation.de:Nein, ich habe dir alles beigebracht, was ich weiss.
+	translation.ch:Nei, ich ha der alles biibrocht, wani weiss.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_NoMoreSpells2
+	translation.en:But that doesn't mean that there are no more twilight spells out there. They just need to be discovered.
+	translation.de:Aber das heisst nicht dass es da draussen keine weiteren Dämmerungs-Zauber mehr gibt. Man muss sie nur finden.
+	translation.ch:Aber das will nid heisse dases det usse ke Dämmerigs-Zauber me git. Me mu si nur finde.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -607,6 +666,108 @@ npc.id:npc_vincent3
 	translation.en:He went to the marshlands recently. If you see him, tell Nuray.
 	translation.de:Er ist kürzlich ins Sumpfland gegangen. Berichte Nuray davon, falls du ihn sehen solltest.
 	translation.ch:Er isch letztins is Sumpfland gange. Verzell doch de Nuray devo, fallsen gse sötsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_YashaStart
+	translation.en:Yes, actually I do have one for you. A dangerous one, indeed...
+	translation.de:Ja, ich habe tatsächlich einen für dich. Allerdings ein ziemlich gefährlicher...
+	translation.ch:Jo, ich han würkli eine für dich. Allerdings en zimli gföhrliche...
+	[
+		# Link node, tag is next tag
+		tag:37
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_YashaStart2
+	translation.en:Listen. There's an abandoned temple in the Highlands of Admantris, and they say a demon is haunting it.
+	translation.de:Hör zu. Es gibt einen verlassenen Tempel im Hochland von Admantris und man erzählt sich, ein Dämon treibe dort sein Unwesen.
+	translation.ch:Los. Es git en verlassene Tempel im Hochland vo Admantris und me verzellt sich, en Dämon triibi det sis Unwese.
+	[
+		# Link node, tag is next tag
+		tag:38
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_YashaStart3
+	translation.en:But we also know of a powerful magical stone, the "heart of thunder", which is hidden there.
+	translation.de:Aber wir wissen auch von einem mächtigen magischen Stein, dem "Donnerherz", das dort versteckt sein soll.
+	translation.ch:Aber mir hend au vomne mächtige magische Stei ghört, em "Donnerherz", wo det versteckt sii set.
+	[
+		# Link node, tag is next tag
+		tag:39
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_YashaStart4
+	translation.en:It is probably heavily guarded by warden spells that can kill you on sight. But the loot is worth it!
+	translation.de:Er ist wahrscheinlich schwer bewacht von Wächterzaubern, die dich sofort töten, wenn sie dich sehen. Doch die Beute lohnt sich!
+	translation.ch:Er isch wohrschinli ufs übelst bewacht vo Wächterzauber, wo dich instantan töted, wenn si dich gsehnd. Aber du, es lohnt sich!
+	[
+		# Link node, tag is next tag
+		tag:40
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_thief", "started")
+	# translation: 
+	translation.tag:DL_Vincent_YashaStart5
+	translation.en:Using some invisibility, you should get through anyway. Good luck!
+	translation.de:Mit ein wenig Unsichtbarkeit solltest du irgendwie durchkommen. Viel Glück!
+	translation.ch:Mit bitz Unsichtbarkeit sötsch scho irgendwie durecho. Viel Glück!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:removeItem("qe_thunderheart", 1)
+	# translation: 
+	translation.tag:DL_Vincent_YashaComplete
+	translation.en:(Grins) Well, I hope you didn't get in trouble getting this one.
+	translation.de:(Grinst) Ich hoffe bloss, du bist nicht in Schwierigkeiten geraten, als du das holen musstest.
+	translation.ch:(Grinst) Ich hoff eifach, du hesch ke Problem becho, das z'hole.
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_thief", "completed")
+	trigger:DL:addReputationProgress("thief", 10)
+	# translation: 
+	translation.tag:DL_Vincent_YashaComplete2
+	translation.en:I always knew that you'd make great thief - eh, twilight mage. Enjoy your newly gained powers.
+	translation.de:Ich wusste schon immer, dass aus dir mal ein guter Dieb - eh, Dämmerungsmagier wird. Viel Spass mit deinen neuen Fähigkeiten.
+	translation.ch:Ich ha scho immer gwüsst, dass us dir mal en guete Dieb - eh, Dämmerigsmagier wird. Vil Spass mit dine neue Fähigkeite.
 	[
 		# Link node, tag is next tag
 		tag:-2
