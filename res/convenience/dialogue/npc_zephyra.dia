@@ -1,0 +1,65 @@
+# dia file for dialogue for npc: npc_zephyra
+
+npc.id:npc_zephyra
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_zephyra", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zephyra", "talked")
+	# translation: 
+	translation.tag:DL_Zephyra_Hello
+	translation.en:Don't come any closer! There's already enough damage done. Go home to where you belong!
+	translation.de:Komm ja nicht näher! Es wurde schon genügend Schaden angerichtet. Geh dorthin zurück, wo du herkommst!
+	translation.ch:Chum jo nid nöcher! Es isch scho gnueg Schade agrichted worde. Gang wieder det ane wod hercho bisch!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-2
+		condition:DL:isConditionFulfilled("", "")
+		# translation: 
+		translation.tag:DL_Choice_WhatsTheMatter
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		condition:not DL:isConditionFulfilled("npc_zephyra", "Choice-2")
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
