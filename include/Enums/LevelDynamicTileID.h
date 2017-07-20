@@ -31,5 +31,6 @@ enum class LevelDynamicTileID {
 	Door,
 	Damaging,
 	DivineTorch,
+	Spell,
 	MAX
 };
