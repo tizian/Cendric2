@@ -17,7 +17,7 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(2)
-	if (DL:isConditionFulfilled("npc_zephyra", "what_matter")) then 
+	if (not DL:isConditionFulfilled("npc_zephyra", "what_matter")) then 
 		DL:addChoice(3, "DL_Choice_WhatsTheMatter") -- What's the matter?
 	end
 	if (not DL:isConditionFulfilled("npc_zephyra", "who_are_you")) then 
@@ -29,7 +29,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_zephyra", "yasha") and not DL:isConditionFulfilled("npc_zephyra", "who_yasha")) then 
 		DL:addChoice(9, "DL_Choice_WhoYasha") -- Tell me more about that "Yasha".
 	end
-	if (not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
+	if (DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
 		DL:addChoice(10, "DL_Choice_WhoDroves") -- Who did pass through here?
 	end
 	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "mages")) then 
@@ -38,7 +38,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("yasha_sanctuary", "completed") and not DL:isConditionFulfilled("npc_zephyra", "yasha_completed")) then 
 		DL:addChoice(18, "DL_Choice_YashaDone") -- I talked to Yasha. She's pacified again.
 	end
-	if (DL:isConditionFulfilled("npc_zephyra", "droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
+	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
 		DL:addChoice(19, "DL_Choice_GottaGo") -- Well, I gotta go now. Thanks for the information.
 	end
 	if (DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
@@ -46,7 +46,7 @@ loadDialogue = function(DL)
 	end
 	DL:addNode()
 
-	if (DL:isConditionFulfilled("npc_zephyra", "what_matter")) then 
+	if (not DL:isConditionFulfilled("npc_zephyra", "what_matter")) then 
 
 		DL:createNPCNode(3, -2, "DL_Zephyra_WhatsTheMatter") -- I haven't seen anyone passing through here in ages. And suddenly, they are coming in droves and destroying this sanctuary. 
 		DL:addConditionProgress("npc_zephyra", "what_matter")
@@ -98,7 +98,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
+	if (DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
 
 		DL:createNPCNode(10, 12, "DL_Zephyra_WhoDroves") -- A group of foolish mages. I wanted to keep their from heading straight for disaster, but they wouldn't listen.
 		DL:addConditionProgress("npc_zephyra", "who_droves")
@@ -135,7 +135,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_zephyra", "droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
+	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
 
 		DL:createNPCNode(19, 16, "DL_Zephyra_GottaGo") -- I see, I can't keep you from going in as well. But, just promise me one thing:
 		DL:addConditionProgress("npc_zephyra", "gotta_go")
@@ -152,12 +152,12 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(20, -2, "DL_Zephyra_YashaOK") -- I was hoping you'd say this. Be careful, and the demon may spare your life.
+		DL:createNPCNode(20, -1, "DL_Zephyra_YashaOK") -- I was hoping you'd say this. Be careful, and the demon may spare your life.
 		DL:changeQuestState("yasha_sanctuary", "started")
 		DL:addNode()
 
 
-		DL:createNPCNode(21, -2, "DL_Zephyra_YashaNOK") -- I hope the demon will rip your soul apart.
+		DL:createNPCNode(21, -1, "DL_Zephyra_YashaNOK") -- I hope the demon will rip your soul apart.
 		DL:addNode()
 
 	end

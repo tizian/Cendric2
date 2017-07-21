@@ -36,7 +36,7 @@ npc.id:npc_zephyra
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:DL:isConditionFulfilled("npc_zephyra", "what_matter")
+		condition:not DL:isConditionFulfilled("npc_zephyra", "what_matter")
 		# translation: 
 		translation.tag:DL_Choice_WhatsTheMatter
 		translation.en:What's the matter?
@@ -76,7 +76,7 @@ npc.id:npc_zephyra
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:not DL:isConditionFulfilled("npc_zephyra", "who_droves")
+		condition:DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")
 		# translation: 
 		translation.tag:DL_Choice_WhoDroves
 		translation.en:Who did pass through here?
@@ -106,7 +106,7 @@ npc.id:npc_zephyra
 	[
 		# Link node, tag is next tag
 		tag:19
-		condition:DL:isConditionFulfilled("npc_zephyra", "droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")
+		condition:DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")
 		# translation: 
 		translation.tag:DL_Choice_GottaGo
 		translation.en:Well, I gotta go now. Thanks for the information.
@@ -401,7 +401,7 @@ npc.id:npc_zephyra
 	translation.ch:Ich ha ghofft, dass das sege würsch. Sig vorsichtig und de Dämon chönt dis Läbe verschone.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
 {1
@@ -415,6 +415,6 @@ npc.id:npc_zephyra
 	translation.ch:Ich hoff de Dämon wird dini Seel verrisse.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
