@@ -88,7 +88,6 @@ bool WorldReader::readLights(tinyxml2::XMLElement* objectgroup, WorldData& data)
 		lightData.center.x = x + lightData.radius.x;
 		lightData.center.y = y + lightData.radius.y;
 
-		// brightness for light bean
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
 		if (properties != nullptr) {
 			tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
@@ -706,7 +705,17 @@ bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data)
 				data.animatedTiles.push_back(tileData);
 			}
 
+			// properties can be on two locations in the tmx file because of versions
+			// tile->objectgroup->properties or just tile->properties. Check where it is.
 			tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
+
+			if (properties == nullptr) {
+				tinyxml2::XMLElement* objectgroup = tile->FirstChildElement("objectgroup");
+				if (objectgroup) {
+					properties = objectgroup->FirstChildElement("properties");
+				}
+			}
+
 			if (properties != nullptr) {
 				const char* textAttr = nullptr;
 				tinyxml2::XMLElement* _property = properties->FirstChildElement("property");

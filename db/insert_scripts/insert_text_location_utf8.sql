@@ -53,3 +53,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('highland','location','Highlands of Admantris','Hochland von Admantris','Hochland vo Admantris');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('swampforest','location','The Rainy Forest','Der Verregnete Wald','De Verregnet Wald');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ascent','location','The Ascent','Der Aufstieg','De Ufstiig');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacastle','location','Castle of Gandria','Schloss von Gandria','Schloss vo Gandria');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashatemple','location','Yasha''s Temple','Yasha''s Tempel','Tempel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashasanctuary','location','Yasha''s Sanctuary','Yasha''s Heiligtum','Heiligtum vode Yasha');
