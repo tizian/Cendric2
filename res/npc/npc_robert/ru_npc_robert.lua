@@ -3,7 +3,7 @@
 loadRoutine = function(R, W)
 
     if (W:isConditionFulfilled("boss", "BossMercenaries")) then
-        setDisposed()
+        R:setDisposed()
         return
     end
 
