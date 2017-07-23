@@ -81,8 +81,12 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	LevelMovableGameObject::onHit(spell);
+
+	if (spell->getDamageType() != DamageType::VOID) {
+		m_recoveringTime = getConfiguredRecoveringTime();
+	}
+	
 	setChasing();
-	m_recoveringTime = getConfiguredRecoveringTime();
 }
 
 void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {

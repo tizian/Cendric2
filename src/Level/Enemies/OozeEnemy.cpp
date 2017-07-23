@@ -59,7 +59,7 @@ MovingBehavior* OozeEnemy::createMovingBehavior(bool asAlly) {
 AttackingBehavior* OozeEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior = new AggressiveBehavior(this);
 
-	behavior->setAggroRange(100.f);
+	behavior->setAggroRange(150.f);
 	behavior->setAttackInput(std::bind(&OozeEnemy::handleAttackInput, this));
 	return behavior;
 }
