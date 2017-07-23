@@ -21,6 +21,47 @@ npc.id:npc_adelya
 	translation.ch:Red nid mit mir! Gsesch nid dasi beschäftigt bin?
 	[
 		# Link node, tag is next tag
+		tag:2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_adelya", "money") and DL:hasItem("gold", 10)
+		# translation: 
+		translation.tag:DL_Choice_Money
+		translation.en:(Slip her some gold)
+		translation.de:(Ihr etwas Gold zustecken)
+		translation.ch:(Ire echli Gold ge)
+		translation.item.id:gold
+		translation.item.amount:10
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:removeGold(10)
+	trigger:DL:addConditionProgress("npc_adelya", "mone")
+	# translation: 
+	translation.tag:DL_Adelya_Money
+	translation.en:(Adelya blows you a kiss)
+	translation.de:(Adelya haucht dir einen Kuss zu)
+	translation.ch:(D'Adelya huucht der es Küssli zue)
+	[
+		# Link node, tag is next tag
 		tag:-1
 	]
 }

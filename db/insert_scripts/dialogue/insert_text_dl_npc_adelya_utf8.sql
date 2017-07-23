@@ -1,1 +1,3 @@
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Adelya_BeGone', 'dl_npc_adelya', 'Don''t talk to me! Can''t you see I''m busy?', 'Sprich mich nicht an! Siehst du nicht dass ich beschäftigt bin?', 'Red nid mit mir! Gsesch nid dasi beschäftigt bin?');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Money', 'dl_npc_adelya', '(Slip her some gold)', '(Ihr etwas Gold zustecken)', '(Ire echli Gold ge)');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Adelya_Money', 'dl_npc_adelya', '(Adelya blows you a kiss)', '(Adelya haucht dir einen Kuss zu)', '(D''Adelya huucht der es Küssli zue)');
