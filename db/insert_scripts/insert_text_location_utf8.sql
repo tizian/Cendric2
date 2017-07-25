@@ -56,3 +56,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('as
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacastle','location','Castle of Gandria','Schloss von Gandria','Schloss vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashatemple','location','Yasha''s Temple','Yasha''s Tempel','Tempel vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashasanctuary','location','Yasha''s Sanctuary','Yasha''s Heiligtum','Heiligtum vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_cleric','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_thief','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_necro','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');

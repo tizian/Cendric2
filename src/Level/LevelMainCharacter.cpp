@@ -238,7 +238,7 @@ int LevelMainCharacter::getInvisibilityLevel() const {
 }
 
 void LevelMainCharacter::setDead() {
-	if (m_isDead) return;
+	if (m_isDead || m_isImmortal) return;
 	LevelMovableGameObject::setDead();
 	m_deathPc->setVisible(true);
 	setInputLock();

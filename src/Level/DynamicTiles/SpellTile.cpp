@@ -15,6 +15,10 @@ SpellTile::SpellTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 bool SpellTile::init(const LevelTileProperties& properties) {
 	LevelScreen* lScreen = dynamic_cast<LevelScreen*>(m_screen);
 
+	if (!contains(properties, std::string("spellid"))) return false;
+	m_spellID = static_cast<SpellID>(std::stoi(properties.at(std::string("spellid"))));
+	if (m_spellID <= SpellID::VOID || m_spellID >= SpellID::MAX) return false;
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	loadComponents();
 	return true;
@@ -65,6 +69,7 @@ void SpellTile::render(sf::RenderTarget& target) {
 void SpellTile::touch() {
 	m_state = GameObjectState::Active;
 	setCurrentAnimation(getAnimation(m_state), false);
+	dynamic_cast<LevelScreen*>(m_screen)->notifySpellLearned(m_spellID);
 
 	m_pc->setEmitRate(0.f);
 }
@@ -101,11 +106,13 @@ void SpellTile::loadComponents() {
 	sizeGen->maxEndSize = 2.f;
 	data.sizeGen = sizeGen;
 
+	sf::Color spellColor = getColorFromSpellType(SpellData::getSpellData(m_spellID).spellType);
+
 	auto colGen = new particles::ColorGenerator();
-	colGen->minStartCol = sf::Color::Red;
-	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
+	colGen->minStartCol = spellColor;
+	colGen->maxStartCol = COLOR_WHITE;
 	colGen->minEndCol = sf::Color(0, 0, 0, 0);
-	colGen->maxEndCol = sf::Color::Red;
+	colGen->maxEndCol = spellColor;
 	colGen->maxEndCol.a = 0;
 	data.colorGen = colGen;
 
@@ -127,5 +134,5 @@ void SpellTile::loadComponents() {
 }
 
 std::string SpellTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_shiftable.png";
+	return "res/assets/level_dynamic_tiles/spritesheet_tiles_spell.png";
 }
