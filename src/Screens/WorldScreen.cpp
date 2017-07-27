@@ -211,7 +211,8 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 		return;
 	}
 
-	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition);
+	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition) ||
+		getCharacterCore()->isConditionFulfilled("default", trigger->getData().condition);
 }
 
 void WorldScreen::updateOverlayQueue() {

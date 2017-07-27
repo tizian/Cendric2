@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="143">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="145">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/yashatemple/layer_inf.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/crypt.ogg"/>
-  <property name="tilesetpath" value="res/level/yashatemple/tileset_level_yashatemple.png"/>
+  <property name="tilesetpath" value="res/level/yashapuzzle/tileset_level_yashapuzzle.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_yashatemple" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
-  <image source="tileset_level_yashatemple.png" width="1200" height="1200"/>
+ <tileset firstgid="1" name="tileset_level_yashapuzzle" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
+  <image source="tileset_level_yashapuzzle.png" width="1200" height="1200"/>
   <tile id="59">
    <properties>
     <property name="light" value="40,30,100,150,0.5"/>
@@ -474,20 +474,26 @@
 213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213,213
 </data>
  </layer>
- <objectgroup name="dynamic"/>
+ <objectgroup name="dynamic">
+  <object id="144" gid="588" x="900" y="1250" width="50" height="50">
+   <properties>
+    <property name="spellid" value="15"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="enemy"/>
  <objectgroup name="trigger">
-  <object id="3" x="700" y="1300" width="50" height="100">
+  <object id="3" x="1050" y="1300" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/highland/highland.tmx,1840,1335"/>
+    <property name="map entry" value="res/map/highland/highland.tmx,490,1740"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="72" x="1050" y="1300" width="50" height="100">
+  <object id="72" x="700" y="1300" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,615,1010"/>
+    <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,815,300"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

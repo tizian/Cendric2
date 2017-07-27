@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="22" tilewidth="50" tileheight="50" nextobjectid="146">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="22" tilewidth="50" tileheight="50" nextobjectid="148">
  <properties>
-  <property name="dimming" value="0.8"/>
+  <property name="dimming" value="0.6"/>
   <property name="musicpath" value="res/music/crypt.ogg"/>
   <property name="tilesetpath" value="res/map/yashasanctuary/tileset_map_yashasanctuary.png"/>
  </properties>
@@ -34,7 +34,7 @@
   <tile id="55">
    <objectgroup draworder="index">
     <properties>
-     <property name="lighit" value="25,15,50,100,1"/>
+     <property name="light" value="25,15,50,100,1"/>
     </properties>
    </objectgroup>
    <animation>
@@ -392,27 +392,38 @@
  <objectgroup name="trigger">
   <object id="128" x="550" y="1050" width="150" height="50">
    <properties>
-    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,515,760"/>
+    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,1060,1310"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="143" x="400" y="230" width="50" height="25">
    <properties>
-    <property name="level entry" value="res/level/yasha_cleric/yasha_cleric.tmx,515,760"/>
+    <property name="level entry" value="res/level/yashapuzzle/yasha_cleric.tmx,710,1310"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="144" x="600" y="230" width="50" height="25">
    <properties>
-    <property name="level entry" value="res/level/yasha_thief/yasha_thief.tmx,515,760"/>
+    <property name="level entry" value="res/level/yashapuzzle/yasha_thief.tmx,710,1310"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="145" x="800" y="230" width="50" height="25">
    <properties>
-    <property name="level entry" value="res/level/yasha_necro/yasha_necro.tmx,515,760"/>
+    <property name="level entry" value="res/level/yashapuzzle/yasha_necro.tmx,710,1310"/>
     <property name="persistent" value=""/>
    </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="light">
+  <object id="146" x="400" y="350" width="450" height="200">
+   <ellipse/>
+  </object>
+  <object id="147" x="500" y="600" width="250" height="200">
+   <properties>
+    <property name="brightness" value="0.6"/>
+   </properties>
+   <ellipse/>
   </object>
  </objectgroup>
  <objectgroup name="dynamic"/>
