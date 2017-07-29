@@ -49,3 +49,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_laslo','npc','Laslo','Laslo','Laslo');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_yasha','npc','Yasha','Yasha','Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_zephyra','npc','Zephyra','Zephyra','Zephyra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lola','npc','Lola','Lola','Lola');
