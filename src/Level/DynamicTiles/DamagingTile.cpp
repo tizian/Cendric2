@@ -10,6 +10,8 @@ bool DamagingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 10.f, TILE_SIZE_F - 10.f));
 	addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
+
+	m_isDivine = contains(properties, std::string("divine"));
 	return true;
 }
 
@@ -31,6 +33,13 @@ void DamagingTile::loadAnimation(int skinNr) {
 
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
 	mob->setDead();
+}
+
+void DamagingTile::onHit(Spell* spell) {
+	if (!m_isDivine || spell->getSpellID() != SpellID::DivineShield) {
+		return;
+	}
+	setDisposed();
 }
 
 std::string DamagingTile::getSpritePath() const {
