@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="322">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="327">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -868,22 +868,46 @@
   </object>
   <object id="314" x="450" y="1650" width="100" height="50">
    <properties>
-    <property name="condition" value="thief"/>
+    <property name="conditions" value="default,thief"/>
     <property name="level entry" value="res/level/yashapuzzle/yasha_thief.tmx,1060,1310"/>
+    <property name="not conditions" value="default,yashapuzzle"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="315" x="450" y="1650" width="100" height="50">
    <properties>
-    <property name="condition" value="cleric"/>
+    <property name="conditions" value="default,cleric"/>
     <property name="level entry" value="res/level/yashapuzzle/yasha_cleric.tmx,1060,1310"/>
+    <property name="not conditions" value="default,yashapuzzle"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="316" x="450" y="1650" width="100" height="50">
+  <object id="323" x="450" y="1650" width="100" height="50">
    <properties>
-    <property name="condition" value="necromancer"/>
+    <property name="conditions" value="default,necromancer"/>
     <property name="level entry" value="res/level/yashapuzzle/yasha_necro.tmx,1060,1310"/>
+    <property name="not conditions" value="default,yashapuzzle"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="324" x="450" y="1650" width="100" height="50">
+   <properties>
+    <property name="conditions" value="default,thief,default,yashapuzzle"/>
+    <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,615,300"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="325" x="450" y="1650" width="100" height="50">
+   <properties>
+    <property name="conditions" value="default,cleric,default,yashapuzzle"/>
+    <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,415,300"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="326" x="450" y="1650" width="100" height="50">
+   <properties>
+    <property name="conditions" value="default,necromancer,default,yashapuzzle"/>
+    <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,815,300"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

@@ -229,14 +229,43 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s2 = conditionProgress;
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("condition") == 0) {
+				else if (name.compare("conditions") == 0 || name.compare("not conditions") == 0) {
+					bool isNotCondition = name.compare("not conditions") == 0;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
-						logError("XML file could not be read, condition value property not found.");
+						logError("XML file could not be read, conditions / not conditions value property not found.");
 						return false;
 					}
 
-					trigger.condition = textAttr;
+					std::string conditions = textAttr;
+
+					size_t pos = 0;
+
+					while (!conditions.empty()) {
+						if ((pos = conditions.find(",")) == std::string::npos) {
+							logError("Trigger conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
+							continue;
+						}
+
+						std::string conditionType = conditions.substr(0, pos);
+						conditions.erase(0, pos + 1);
+						std::string conditionName;
+
+						if ((pos = conditions.find(",")) != std::string::npos) {
+							conditionName = conditions.substr(0, pos);
+							conditions.erase(0, pos + 1);
+						}
+						else {
+							conditionName = conditions;
+							conditions.clear();
+						}
+
+						Condition cond;
+						cond.negative = isNotCondition;
+						cond.name = conditionName;
+						cond.type = conditionType;
+						trigger.conditions.push_back(cond);
+					}
 				}
 				else if (name.compare("map entry") == 0) {
 					textAttr = _property->Attribute("value");
@@ -410,140 +439,6 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 	return true;
 }
 
-/*
-
-
-bool WorldReader::readChests(tinyxml2::XMLElement* objectgroup, WorldData& data) const {
-	tinyxml2::XMLElement* object = objectgroup->FirstChildElement("object");
-
-	while (object != nullptr) {
-		int id;
-		tinyxml2::XMLError result = object->QueryIntAttribute("id", &id);
-		XMLCheckResult(result);
-
-		int gid;
-		result = object->QueryIntAttribute("gid", &gid);
-		XMLCheckResult(result);
-
-		int x;
-		result = object->QueryIntAttribute("x", &x);
-		XMLCheckResult(result);
-
-		int y;
-		result = object->QueryIntAttribute("y", &y);
-		XMLCheckResult(result);
-
-		ChestTileData chestData;
-		chestData.skinNr = gid;
-		chestData.objectID = id;
-		chestData.spawnPosition = sf::Vector2f(static_cast<float>(x), static_cast<float>(y) - TILE_SIZE_F);
-
-		// chest loot
-		tinyxml2::XMLElement* loot = object->FirstChildElement("properties");
-		std::pair<std::map<std::string, int>, int> items;
-		items.second = 0;
-
-		if (loot != nullptr) {
-			tinyxml2::XMLElement* item = loot->FirstChildElement("property");
-			while (item != nullptr) {
-				const char* textAttr = nullptr;
-				textAttr = item->Attribute("name");
-				if (textAttr == nullptr) {
-					logError("XML file could not be read, no objectgroup->object->properties->property->name attribute found.");
-					return false;
-				}
-
-				std::string itemText = textAttr;
-
-				if (itemText.compare("permanent") == 0) {
-					chestData.isPermanent = true;
-				}
-				else if (itemText.compare("open") == 0) {
-					chestData.isOpen = true;
-				}
-				else if (itemText.compare("storeditems") == 0) {
-					chestData.isStoredItems = true;
-				}
-				else if (itemText.compare("text") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-					chestData.tooltipText = textAttr;
-
-				}
-				else if (itemText.compare("light") == 0) {
-
-					textAttr = item->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, no objectgroup->object->properties->property->value attribute found.");
-						return false;
-					}
-
-					std::string value = textAttr;
-					LightData lightData;
-					if (!resolveLightString(value, lightData)) {
-						return false;
-					}
-					chestData.lightData = lightData;
-				}
-				else if (itemText.compare("gold") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.second += amount;
-				}
-				else if (itemText.compare("strength") == 0) {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					if (amount < 0 || amount > 5) {
-						logError("XML file could not be read, strength attribute for chest is out of bounds (must be between 0 and 5).");
-						return false;
-					}
-					chestData.chestStrength = amount;
-				}
-				else if (itemText.compare("key") == 0) {
-					std::string keyItemID = item->Attribute("value");
-					if (keyItemID.empty()) {
-						logError("XML file could not be read, key itemID is not specified.");
-						return false;
-					}
-					chestData.keyItemID = keyItemID;
-				}
-				else if (itemText.compare("luapath") == 0) {
-
-					std::string path = item->Attribute("value");
-					if (path.empty()) {
-						logError("XML file could not be read, luapath is empty.");
-						return false;
-					}
-
-					chestData.luapath = path;
-				}
-				else {
-					int amount;
-					result = item->QueryIntAttribute("value", &amount);
-					XMLCheckResult(result);
-
-					items.first.insert({ itemText, amount });
-				}
-
-				item = item->NextSiblingElement("property");
-			}
-		}
-		chestData.loot = items;
-		data.chests.push_back(chestData);
-
-		object = object->NextSiblingElement("object");
-	}
-	return true;
-}
-*/
 bool WorldReader::readBackgroundTileLayer(const std::string& layer, WorldData& data) const {
 	std::string layerData = layer;
 

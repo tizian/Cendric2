@@ -376,6 +376,20 @@ bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const
 	return contains(m_data.conditionProgress.at(conditionType), condition);
 }
 
+bool CharacterCore::isConditionsFulfilled(const std::vector<Condition>& conditions) const {
+	bool fulfilled = true;
+	for (auto& cond : conditions) {
+		if (cond.negative) {
+			if (isConditionFulfilled(cond.type, cond.name)) return false;
+		}
+		else {
+			if (!isConditionFulfilled(cond.type, cond.name)) return false;
+		}
+	}
+
+	return true;
+}
+
 bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) const {
 	if (!contains(m_data.enemiesKilled, levelID)) return false;
 	if (!contains(m_data.enemiesKilled.at(levelID), objectID)) return false;

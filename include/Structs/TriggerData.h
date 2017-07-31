@@ -17,8 +17,8 @@ struct TriggerData final {
 	bool isTriggerable = false;
 	// is this trigger forced? if true, it gets immediately executed even if the player spawns on it
 	bool isForced = false;
-	// a trigger condition, saved with the conditionkey "trigger". For now, only can be set.
-	std::string condition; 
+	// trigger conditions
+	std::vector<Condition> conditions;
 	// the content of this trigger, will get executed on trigger.
 	std::vector<TriggerContent> content;
 };

@@ -123,6 +123,8 @@ public:
 	bool unlockQuestDescription(const std::string& questID, int descriptionID);
 	// is a condition fulfilled?
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
+	// are all those conditions fulfilled?
+	bool isConditionsFulfilled(const std::vector<Condition>& conditions) const;
 	// is a enemy in a certain level dead?
 	bool isEnemyKilled(const std::string& levelID, int objectID) const;
 	// is a enemy in a certain level looted?

@@ -206,13 +206,7 @@ void WorldScreen::toggleGodmode() {
 }
 
 void WorldScreen::reloadTrigger(Trigger* trigger) const {
-	if (trigger->getData().condition.empty()) {
-		trigger->getData().isTriggerable = true;
-		return;
-	}
-
-	trigger->getData().isTriggerable = getCharacterCore()->isConditionFulfilled("trigger", trigger->getData().condition) ||
-		getCharacterCore()->isConditionFulfilled("default", trigger->getData().condition);
+	trigger->getData().isTriggerable = getCharacterCore()->isConditionsFulfilled(trigger->getData().conditions);
 }
 
 void WorldScreen::updateOverlayQueue() {
