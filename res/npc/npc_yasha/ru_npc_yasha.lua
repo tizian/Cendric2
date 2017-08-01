@@ -10,7 +10,7 @@ loadRoutine = function(R, W)
     end
 
 	
-	R:setTilePosition(12,14.5)
+	R:setTilePosition(12,13.5)
     R:setFacingDown()
     
     if (not W:isConditionFulfilled("yasha", "talked")) then

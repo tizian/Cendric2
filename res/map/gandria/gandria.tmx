@@ -987,7 +987,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="296" x="2200" y="880" width="50" height="40">
+  <object id="296" x="2200" y="900" width="50" height="40">
    <properties>
     <property name="level entry" value="res/level/gandriacathedral/gandriacathedral.tmx,1860,1510"/>
     <property name="persistent" value=""/>
@@ -1011,35 +1011,23 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="trigger cleric">
-  <properties>
-   <property name="conditions" value="default,cleric"/>
-  </properties>
-  <object id="303" x="2200" y="880" width="50" height="50">
+  <object id="303" x="2200" y="900" width="50" height="50">
    <properties>
+    <property name="conditions" value="default,cleric"/>
     <property name="level entry" value="res/level/gandriacathedral/gandriacathedral_cleric.tmx,1860,1510"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="trigger necro">
-  <properties>
-   <property name="conditions" value="default,necromancer"/>
-  </properties>
-  <object id="304" x="2200" y="880" width="50" height="50">
+  <object id="304" x="2200" y="900" width="50" height="50">
    <properties>
+    <property name="conditions" value="default,necromancer"/>
     <property name="level entry" value="res/level/gandriacathedral/gandriacathedral_necro.tmx,1860,1510"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="trigger thief">
-  <properties>
-   <property name="conditions" value="default,thief"/>
-  </properties>
-  <object id="305" x="2200" y="880" width="50" height="50">
+  <object id="305" x="2200" y="900" width="50" height="50">
    <properties>
+    <property name="conditions" value="default,thief"/>
     <property name="level entry" value="res/level/gandriacathedral/gandriacathedral_thief.tmx,1860,1510"/>
     <property name="persistent" value=""/>
    </properties>

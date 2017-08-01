@@ -354,6 +354,64 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(forcedMap.c_str());
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("set map") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, map entry value property not found.");
+						return false;
+					}
+
+					std::string map = textAttr;
+
+					size_t pos = 0;
+					if ((pos = map.find(",")) == std::string::npos) {
+						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::SetMap);
+					content.s1 = map.substr(0, pos);
+					map.erase(0, pos + 1);
+
+					if ((pos = map.find(",")) == std::string::npos) {
+						logError("XML file could not be read, set map value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(map.substr(0, pos).c_str());
+					map.erase(0, pos + 1);
+
+					content.i2 = std::atoi(map.c_str());
+					trigger.content.push_back(content);
+				}
+				else if (name.compare("set level") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, set level value property not found.");
+						return false;
+					}
+
+					std::string level = textAttr;
+
+					size_t pos = 0;
+					if ((pos = level.find(",")) == std::string::npos) {
+						logError("XML file could not be read, level value value must be a string (level id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::SetLevel);
+					content.s1 = level.substr(0, pos);
+					level.erase(0, pos + 1);
+
+					if ((pos = level.find(",")) == std::string::npos) {
+						logError("XML file could not be read, set map value must be a string (map id) and the x and y coords, seperated by commas.");
+						return false;
+					}
+					content.i1 = std::atoi(level.substr(0, pos).c_str());
+					level.erase(0, pos + 1);
+
+					content.i2 = std::atoi(level.c_str());
+					trigger.content.push_back(content);
+				}
 				else if (name.find("weather") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {

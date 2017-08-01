@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Structs/TriggerContent.h"
+#include "Structs/Condition.h"
 
 struct TriggerData final {
 	std::string worldID;
