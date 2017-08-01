@@ -3,6 +3,7 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/ScreenManager.h"
 #include "Level/Enemies/ObserverEnemy.h"
+#include "ObjectFactory.h"
 #include "GUI/BookWindow.h"
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
@@ -137,6 +138,22 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	m_isBossDefeated = true;
 	m_mainChar->setInputLock();
 	m_mainChar->setInvincible(true);
+}
+
+Enemy* LevelScreen::spawnEnemy(EnemyID enemyId, const sf::Vector2f& position) {
+	Enemy* enemy = ObjectFactory::Instance()->createEnemy(enemyId, getWorld(), this);
+	if (enemy == nullptr) {
+		g_logger->logError("LevelScreen", "Enemy could not be spawned, unknown id.");
+		return nullptr;
+	}
+	enemy->load(0);
+
+	enemy->setPosition(position);
+	enemy->setObjectID(-1);
+	enemy->setUnique(false);
+	enemy->setDebugBoundingBox(sf::Color::Magenta);
+
+	addObject(enemy);
 }
 
 void LevelScreen::setEnemyForHealthBar(const Enemy* enemy) {

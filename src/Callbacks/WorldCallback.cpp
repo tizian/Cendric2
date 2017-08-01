@@ -4,7 +4,6 @@
 #include "Screens/MapScreen.h"
 #include "Screens/LevelScreen.h"
 #include "Map/NPC.h"
-#include "ObjectFactory.h"
 #include "GlobalResource.h"
 
 using namespace luabridge;
@@ -303,24 +302,13 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 	// resolve luapath
 	LuaRef lpath = param["luapath"];
 
-	Enemy* enemy = nullptr;
-	enemy = ObjectFactory::Instance()->createEnemy(id, levelScreen->getWorld(), levelScreen);
+	Enemy* enemy = levelScreen->spawnEnemy(id, sf::Vector2f(posXRef.cast<float>(), posYRef.cast<float>()));
 	if (enemy == nullptr) {
 		g_logger->logError("WorldCallback", "Enemy could not be spawned, unknown id.");
 		return;
 	}
-	enemy->load(0);
-
-	enemy->setLoot(loot, gold);
-
-	enemy->setPosition(sf::Vector2f(posXRef.cast<float>(), posYRef.cast<float>()));
-	enemy->setObjectID(-1);
-	enemy->setUnique(false);
-	enemy->setDebugBoundingBox(sf::Color::Magenta);
-
+	
 	if (lpath.isString()) {
 		enemy->setScriptedBehavior(lpath.cast<std::string>());
 	}
-
-	levelScreen->addObject(enemy);
 }

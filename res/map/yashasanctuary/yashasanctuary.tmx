@@ -392,7 +392,7 @@
  <objectgroup name="trigger">
   <object id="128" x="550" y="1050" width="150" height="50">
    <properties>
-    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,1060,1310"/>
+    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,460,1010"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

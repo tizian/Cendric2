@@ -22,6 +22,8 @@ bool CheckpointTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
 
+	m_isMimic = contains(properties, std::string("mimic"));
+
 	return true;
 }
 
@@ -54,15 +56,33 @@ void CheckpointTile::loadAnimation(int skinNr) {
 	}
 }
 
+void CheckpointTile::activateMimic() {
+	Enemy* gargoyle = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::Gargoyle, getPosition() - sf::Vector2f(0.f, 100.f));
+	setDisposed();
+}
+
+void CheckpointTile::onHit(Spell* spell) {
+	if (!m_isMimic || spell->getSpellID() != SpellID::Telekinesis || spell->getDamageType() == DamageType::VOID) return;
+
+	activateMimic();
+}
+
 void CheckpointTile::onRightClick() {
 	onLeftClick();
 }
 
 void CheckpointTile::onLeftClick() {
 	if (m_state == GameObjectState::Active) return;
+	
 	g_inputController->lockAction();
 	if (dist(m_mainChar->getCenter(), getCenter()) > ACTIVATE_RANGE) {
 		m_screen->setNegativeTooltip("OutOfRange");
+		return;
+	}
+
+	if (m_isMimic) {
+		// nobody expects the spanish inquisition
+		activateMimic();
 		return;
 	}
 

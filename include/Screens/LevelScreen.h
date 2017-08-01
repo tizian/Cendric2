@@ -41,6 +41,7 @@ public:
 	void notifyBossKilled(const EnemyReward& reward);
 	void setEnemyForHealthBar(const Enemy* enemy);
 	void clearConsumedFood();
+	Enemy* spawnEnemy(EnemyID enemyId, const sf::Vector2f& position);
 
 	LevelMainCharacter* getMainCharacter() const override;
 	const Level* getWorld() const override;
