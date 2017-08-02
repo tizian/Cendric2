@@ -58,6 +58,7 @@ void CheckpointTile::loadAnimation(int skinNr) {
 
 void CheckpointTile::activateMimic() {
 	Enemy* gargoyle = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::Gargoyle, getPosition() - sf::Vector2f(0.f, 100.f));
+	g_resourceManager->playSound(getSoundPath());
 	setDisposed();
 }
 

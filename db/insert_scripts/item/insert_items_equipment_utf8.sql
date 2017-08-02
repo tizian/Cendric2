@@ -392,7 +392,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Twilight T1 Back
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt1', 'item', 'Scarf of the Prowler','Schal des Herumtreibers','Streuner-Halstuech');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt1', 'item_desc', 'Simple, 	inconspicuous and convenient.','Einfach, unauffällig und praktisch.','Eifach, unuffällig und praktisch.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt1', 'item_desc', 'Simple, inconspicuous and convenient.','Einfach, unauffällig und praktisch.','Eifach, unuffällig und praktisch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_back_twilightt1', 'eq_back', 0, 600, 80);
 INSERT INTO item_attribute (item_id, max_health, haste, critical, dmg_shadow, dmg_physical, res_physical, res_shadow) values ('eq_back_twilightt1', 4, 2, 2, 4, 3, 2, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt1', 'res/assets/equipment/back/spritesheet_back_twilightt1.png', 'res/assets/equipment/back/spritesheet_map_back_twilightt1.png');
