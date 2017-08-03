@@ -239,9 +239,9 @@ bool LevelReader::readDynamicTiles(tinyxml2::XMLElement* objectgroup, std::vecto
 
 		LevelDynamicTileData tileData;
 
-		int offset = gid - m_firstGidDynamicTiles + 1;
-		tileData.id = static_cast<LevelDynamicTileID>(offset % DYNAMIC_TILE_COUNT);
-		tileData.skinNr = offset / DYNAMIC_TILE_COUNT;
+		int offset = gid - m_firstGidDynamicTiles;
+		tileData.id = static_cast<LevelDynamicTileID>(offset % DYNAMIC_TILE_COUNT + 1);
+		tileData.skinNr = (offset - 1) / DYNAMIC_TILE_COUNT;
 		tileData.position.x = static_cast<float>(x);
 		tileData.position.y = static_cast<float>(y) - TILE_SIZE_F;
 		tileData.objectID = id;

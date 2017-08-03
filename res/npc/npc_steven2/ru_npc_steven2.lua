@@ -2,12 +2,12 @@
 
 loadRoutine = function(R, W)
 
-	if (not W:isConditionFulfilled("npc_stephen", "talked")) then 
+	if (not W:isConditionFulfilled("npc_steven", "talked")) then 
 	
 		R:setDisposed()
 		return
 		
-	elseif (W:isQuestState("stephens_helmet", "completed")) then 
+	elseif (W:isQuestState("stevens_helmet", "completed")) then 
 	
 		R:setTalkingEnabled(false)
 	

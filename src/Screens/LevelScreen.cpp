@@ -154,6 +154,7 @@ Enemy* LevelScreen::spawnEnemy(EnemyID enemyId, const sf::Vector2f& position) {
 	enemy->setDebugBoundingBox(sf::Color::Magenta);
 
 	addObject(enemy);
+	return enemy;
 }
 
 void LevelScreen::setEnemyForHealthBar(const Enemy* enemy) {
