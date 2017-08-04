@@ -4,7 +4,7 @@
 #include "Level/LevelDynamicTile.h"
 #include "Structs/SpellData.h"
 
-class ShootingTile final : public LevelDynamicTile {
+class ShootingTile final : public LevelDynamicTile, public LeverDependentTile {
 public:
 	ShootingTile(LevelScreen* levelScreen);
 
@@ -14,14 +14,21 @@ public:
 	void update(const sf::Time& frameTime) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Shooting; }
 
+	void switchTile() override;
+	bool isSwitchable() const override;
+
 private:
 	std::string getSpritePath() const override;
 	void loadSpells();
 	void executeSpells();
+	void setInitialState(bool on) override;
 
 private:
 	int m_skinNr = 0;
 	bool m_isBroken = false;
+	bool m_isInvincible = false;
+	bool m_isInactive = false;
+	bool m_isOnce = false;
 	// animation time of "Active"
 	sf::Time m_activeTime = sf::Time::Zero;
 	sf::Time m_remainingActiveTime = sf::Time::Zero;

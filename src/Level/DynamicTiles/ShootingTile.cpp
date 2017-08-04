@@ -14,6 +14,11 @@ ShootingTile::ShootingTile(LevelScreen* levelScreen) :
 bool ShootingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+
+	m_isInactive = contains(properties, std::string("inactive"));
+	m_isInvincible = contains(properties, std::string("invincible"));
+	m_isOnce = contains(properties, std::string("invincible"));
+
 	return true;
 }
 
@@ -49,6 +54,23 @@ void ShootingTile::loadSpells() {
 		m_recoveringTime = sf::seconds(15.f);
 		break;
 	}
+	case 5:
+	case 6:
+	{
+		m_spellData = SpellData::getSpellData(SpellID::Projectile);
+		m_spellData.duration = sf::seconds(3.f);
+		m_spellData.skinNr = 3;
+		m_spellData.damagePerSecond = 10;
+		m_spellData.damage = 50;
+		m_spellData.divergenceAngle = 0.f;
+		m_activeTime = sf::seconds(1.f);
+		m_spellOffsetTime = sf::seconds(0.5f);
+		m_recoveringTime = sf::seconds(20.f);
+		m_cooldown = sf::seconds(100.f);
+		break;
+	}
+
+
 	}
 	m_spellData.isAlly = false;
 	g_resourceManager->loadTexture(m_spellData.spritesheetPath, ResourceType::Level);
@@ -90,6 +112,12 @@ void ShootingTile::loadAnimation(int skinNr) {
 		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 		activeAnimation->setLooped(false);
 		break;
+	case 5:
+	case 6:
+		// traps
+		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->setLooped(false);
+		break;
 	}
 
 	addAnimation(GameObjectState::Active, activeAnimation);
@@ -111,9 +139,21 @@ void ShootingTile::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
+void ShootingTile::switchTile() {
+	m_isInactive = !m_isInactive;
+}
+
+bool ShootingTile::isSwitchable() const {
+	return true;
+}
+
+void ShootingTile::setInitialState(bool on) {
+	m_isInactive = !on;
+}
+
 void ShootingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
-	if (m_state == GameObjectState::Dead)
+	if (m_state == GameObjectState::Dead || m_isInactive)
 		return;
 
 	if (m_remainingRecoveringTime > sf::Time::Zero) {
@@ -135,6 +175,7 @@ void ShootingTile::update(const sf::Time& frameTime) {
 		updateTime(m_remainingSpellOffsetTime, frameTime);
 		if (m_remainingSpellOffsetTime == sf::Time::Zero) {
 			executeSpells();
+			m_isInactive = m_isOnce;
 		}
 	}
 
@@ -188,12 +229,26 @@ void ShootingTile::executeSpells() {
 		m_screen->addObject(spell);
 		break;
 	}
+	case 5:
+	{
+		ProjectileSpell* spell = new ProjectileSpell();
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
+		m_screen->addObject(spell);
+		break;
+	}
+	case 6:
+	{
+		ProjectileSpell* spell = new ProjectileSpell();
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));
+		m_screen->addObject(spell);
+		break;
+	}
 	}
 }
 
 void ShootingTile::onHit(Spell* spell) {
-	if (spell->getSpellID() != SpellID::Chop) return;
-	
+	if (m_isInvincible || spell->getSpellID() != SpellID::Chop) return;
+
 	if (m_isBroken) {
 		setState(GameObjectState::Dead);
 	}

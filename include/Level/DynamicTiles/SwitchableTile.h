@@ -3,11 +3,9 @@
 #include "global.h"
 #include "Level/DynamicTiles/LeverDependentTile.h"
 
-class SwitchableTile : public virtual LeverDependentTile {
+class SwitchableTile : public virtual LevelDynamicTile, public virtual LeverDependentTile {
 public:
-	SwitchableTile(LevelScreen* levelScreen) : 
-		LevelDynamicTile(levelScreen), 
-		LeverDependentTile(levelScreen) {}
+	SwitchableTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	virtual ~SwitchableTile() {}
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
@@ -27,7 +25,6 @@ class SwitchableOnTile final : public SwitchableTile {
 public:
 	SwitchableOnTile(LevelScreen* levelScreen) :
 		LevelDynamicTile(levelScreen),
-		LeverDependentTile(levelScreen),
 		SwitchableTile(levelScreen) {
 		setInitialState(true);
 	}
@@ -39,7 +36,6 @@ class SwitchableOffTile final : public SwitchableTile {
 public:
 	SwitchableOffTile(LevelScreen* levelScreen) :
 		LevelDynamicTile(levelScreen),
-		LeverDependentTile(levelScreen),
 		SwitchableTile(levelScreen) {
 		setInitialState(false);
 	}

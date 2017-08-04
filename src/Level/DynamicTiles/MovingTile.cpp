@@ -11,8 +11,7 @@ const std::string MovingTile::SPRITE_PATH = "res/assets/level_dynamic_tiles/spri
 
 MovingTile::MovingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
-	LevelMovableTile(levelScreen),
-	LeverDependentTile(levelScreen) {
+	LevelMovableTile(levelScreen) {
 	m_movingParent = this;
 	m_relativeVelocity.x = 0.f;
 	m_relativeVelocity.y = 0.f;

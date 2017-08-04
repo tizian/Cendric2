@@ -9,16 +9,20 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
 const float LeverTile::ACTIVATE_RANGE = 80.f;
 
 LeverTile::LeverTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	InteractComponent* interactComponent = new InteractComponent(g_textProvider->getText("Lever"), this, m_mainChar);
-	interactComponent->setInteractRange(ACTIVATE_RANGE);
-	interactComponent->setInteractText("ToSwitch");
-	interactComponent->setOnInteract(std::bind(&LeverTile::switchLever, this));
-	addComponent(interactComponent);
+	m_interactComponent = new InteractComponent(g_textProvider->getText("Lever"), this, m_mainChar);
+	m_interactComponent->setInteractRange(ACTIVATE_RANGE);
+	m_interactComponent->setInteractText("ToSwitch");
+	m_interactComponent->setOnInteract(std::bind(&LeverTile::switchLever, this));
+	addComponent(m_interactComponent);
 }
 
 bool LeverTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+
+	m_isGround = contains(properties, std::string("ground"));
+	m_interactComponent->setActive(!m_isGround);
+	
 	return true;
 }
 
@@ -61,8 +65,14 @@ void LeverTile::onHit(Spell* spell) {
 	}
 }
 
+void LeverTile::onHit(LevelMovableGameObject* mob) {
+	if (m_state == GameObjectState::On || mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
+
+	switchLever();
+}
+
 void LeverTile::onRightClick() {
-	if (m_mainChar->isDead()) return;
+	if (m_mainChar->isDead() || m_isGround) return;
 	// check if lever is in range
 	if (dist(m_mainChar->getCenter(), getCenter()) <= ACTIVATE_RANGE) {
 		switchLever();

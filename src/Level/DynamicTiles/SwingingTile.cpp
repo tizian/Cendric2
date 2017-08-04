@@ -14,6 +14,19 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	m_size = std::stoi(properties.at(std::string("size")));
 	if (m_size < 2 || m_size > 100) return false;
 
+	if (!contains(properties, std::string("speed"))) return false;
+	m_speed = std::stoi(properties.at(std::string("speed")));
+	if (m_speed < 0 || m_speed > 1000) return false;
+
+	if (!contains(properties, std::string("mode"))) return false;
+	std::string mode = properties.at(std::string("mode"));
+	if (mode.compare("round")) {
+		m_mode = SwingingTileMode::Round;
+	}
+	else {
+		m_mode = SwingingTileMode::Ease;
+	}
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * TILE_SIZE_F * (m_size + 1), 2 * TILE_SIZE_F * (m_size + 1)));
 	setSpriteOffset(sf::Vector2f(TILE_SIZE_F * (m_size - 0.5f), TILE_SIZE_F * (m_size + 0.5f)));
 	setPositionOffset(sf::Vector2f(-TILE_SIZE_F * (m_size + 0.5f), -TILE_SIZE_F * (m_size + 0.5f)));
@@ -23,7 +36,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 
 void SwingingTile::loadAnimation(int skinNr) {
 	// a swinging tile creates its own texture out of several images.
-	
+
 	sf::Image img;
 	img.create(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE, COLOR_TRANSPARENT);
 
@@ -71,12 +84,24 @@ void SwingingTile::loadAnimation(int skinNr) {
 }
 
 void SwingingTile::update(const sf::Time& frametime) {
-	m_currentRotation += (frametime.asSeconds() * 50);
+	m_currentRotation += (frametime.asSeconds() * 100);
 	if (m_currentRotation > 360.f) {
 		m_currentRotation -= 360.f;
 	}
 	m_animatedSprite.setRotation(m_currentRotation);
 	LevelDynamicTile::update(frametime);
+}
+
+void SwingingTile::switchTile() {
+	m_isInactive = !m_isInactive;
+}
+
+bool SwingingTile::isSwitchable() const {
+	return true;
+}
+
+void SwingingTile::setInitialState(bool on) {
+	m_isInactive = !on;
 }
 
 void SwingingTile::render(sf::RenderTarget& target) {

@@ -8,6 +8,7 @@ GameObject::~GameObject() {
 
 void GameObject::render(sf::RenderTarget& renderTarget) {
 	for (auto& component : m_components) {
+		if (!component->isActive()) continue;
 		component->render(renderTarget);
 	}
 }
@@ -17,6 +18,7 @@ void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(m_debugBox);
 	}
 	for (auto& component : m_components) {
+		if (!component->isActive()) continue;
 		component->renderAfterForeground(renderTarget);
 	}
 }
@@ -51,6 +53,7 @@ void GameObject::update(const sf::Time& frameTime) {
 		}
 	}
 	for (auto& component : m_components) {
+		if (!component->isActive()) continue;
 		component->update(frameTime);
 	}
 }
