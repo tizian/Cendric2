@@ -67,8 +67,11 @@ void LeverTile::onHit(Spell* spell) {
 
 void LeverTile::onHit(LevelMovableGameObject* mob) {
 	if (m_state == GameObjectState::On || mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
+	auto const& bb = *getBoundingBox();
+	auto const& mobbb = *mob->getBoundingBox();
 
-	switchLever();
+	if (mobbb.top + mobbb.height > bb.top + 0.8f * bb.height)
+		switchLever();
 }
 
 void LeverTile::onRightClick() {

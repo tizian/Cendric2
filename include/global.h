@@ -33,6 +33,13 @@ inline float radToDeg(float rad) {
 inline float degToRad(float deg) {
 	return deg * (M_PI / 180.f);
 }
+ 
+inline float modAngle(float deg) {
+	deg = fmodf(deg, 360);
+	if (deg < 0)
+		deg += 360.f;
+	return deg;
+}
 
 inline float lerp(float t, float v1, float v2) {
 	return (1.f - t) * v1 + t * v2;

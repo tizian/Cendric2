@@ -17,7 +17,7 @@ bool ShootingTile::init(const LevelTileProperties& properties) {
 
 	m_isInactive = contains(properties, std::string("inactive"));
 	m_isInvincible = contains(properties, std::string("invincible"));
-	m_isOnce = contains(properties, std::string("invincible"));
+	m_isOnce = contains(properties, std::string("once"));
 
 	return true;
 }
@@ -58,11 +58,12 @@ void ShootingTile::loadSpells() {
 	case 6:
 	{
 		m_spellData = SpellData::getSpellData(SpellID::Projectile);
-		m_spellData.duration = sf::seconds(3.f);
+		m_spellData.duration = sf::seconds(2.f);
 		m_spellData.skinNr = 3;
 		m_spellData.damagePerSecond = 10;
 		m_spellData.damage = 50;
 		m_spellData.divergenceAngle = 0.f;
+		m_spellData.isColliding = false;
 		m_activeTime = sf::seconds(1.f);
 		m_spellOffsetTime = sf::seconds(0.5f);
 		m_recoveringTime = sf::seconds(20.f);

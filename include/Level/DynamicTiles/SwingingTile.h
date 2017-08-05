@@ -2,10 +2,11 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include "Level/DynamicTiles/LeverDependentTile.h"
 
 enum class SwingingTileMode {
 	Round,
-	Ease
+	Pendulum,
 };
 
 class SwingingTile final : public LevelDynamicTile, public LeverDependentTile {
@@ -15,7 +16,7 @@ public:
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void update(const sf::Time& frametime) override;
-	void render(sf::RenderTarget& target) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onHit(LevelMovableGameObject* mob) override;
 	void onHit(Spell* spell) override { /*nop*/ }
 	void setPosition(const sf::Vector2f& position) override;
@@ -27,12 +28,22 @@ public:
 private:
 	void setInitialState(bool on) override;
 	std::string getSpritePath() const override;
+	sf::Vector2f getHeadPosition() const;
+
+private:
+	void animatePendulum(const sf::Time& frametime);
+	void animateRound(const sf::Time& frametime);
 
 private:
 	int m_size;
 	int m_speed;
 	bool m_isInactive = false;
+	bool m_isClockwise = true;
+	float m_pendulumVelocity = 0.f;
+	float m_length;
 	SwingingTileMode m_mode;
 	sf::Texture* m_texture = nullptr;
 	float m_currentRotation = 0.f;
+	sf::CircleShape m_debugCircle;
+	static const float DAMAGE_RADIUS;
 };

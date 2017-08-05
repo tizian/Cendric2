@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include "Level/DynamicTiles/LeverDependentTile.h"
 #include "Structs/SpellData.h"
 
 class ShootingTile final : public LevelDynamicTile, public LeverDependentTile {
