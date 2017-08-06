@@ -122,8 +122,7 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position, const LevelM
 		offset.y = mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
 	}
 
-	position.x = (mobPosition + offset).x;
-	position.y = (mobPosition + offset).y;
+	position = mobPosition + offset;
 }
 
 void Spell::update(const sf::Time& frameTime) {

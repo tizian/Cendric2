@@ -19,7 +19,6 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void onHit(LevelMovableGameObject* mob) override;
 	void onHit(Spell* spell) override { /*nop*/ }
-	void setPosition(const sf::Vector2f& position) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Swinging; }
 
 	void switchTile() override;

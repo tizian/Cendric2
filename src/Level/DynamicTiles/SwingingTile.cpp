@@ -103,6 +103,7 @@ void SwingingTile::loadAnimation(int skinNr) {
 	m_debugCircle.setOutlineColor(COLOR_BAD);
 	m_debugCircle.setOutlineThickness(2.f);
 	m_debugCircle.setRadius(DAMAGE_RADIUS);
+	m_debugCircle.setOrigin(sf::Vector2f(DAMAGE_RADIUS, DAMAGE_RADIUS));
 }
 
 void SwingingTile::update(const sf::Time& frametime) {
@@ -175,12 +176,8 @@ void SwingingTile::onHit(LevelMovableGameObject* mob) {
 sf::Vector2f SwingingTile::getHeadPosition() const {
 	float rad = degToRad(m_currentRotation);
 	sf::Vector2f rotation(m_length * std::sin(rad), m_length * -std::cos(rad));
-	float offset = m_length + 0.5f * TILE_SIZE_F;
+	float offset = m_length + TILE_SIZE_F;
 	return getPosition() + sf::Vector2f(offset, offset) + rotation;
-}
-
-void SwingingTile::setPosition(const sf::Vector2f& position) {
-	LevelDynamicTile::setPosition(position);
 }
 
 std::string SwingingTile::getSpritePath() const {
