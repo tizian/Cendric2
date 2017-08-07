@@ -382,17 +382,11 @@
 93,93,93,93,93,93,93,93,93,93,93,0,0,0,93,93,93,93,93,93,93,93,93,93,93
 </data>
  </layer>
- <objectgroup name="npc">
-  <object id="142" gid="585" x="600" y="725" width="50" height="50">
-   <properties>
-    <property name="id" value="npc_yasha"/>
-   </properties>
-  </object>
- </objectgroup>
+ <objectgroup name="npc"/>
  <objectgroup name="trigger">
   <object id="128" x="550" y="1050" width="150" height="50">
    <properties>
-    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,460,1010"/>
+    <property name="level entry" value="res/level/yashatemple/yashatemple.tmx,3210,210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

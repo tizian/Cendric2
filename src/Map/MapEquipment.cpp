@@ -25,6 +25,7 @@ void MapEquipment::update(const sf::Time& frameTime) {
 }
 
 void MapEquipment::setLightComponent(const LightData& data) {
+	delete m_lightComponent;
 	m_lightComponent = new LightComponent(data, this);
 	addComponent(m_lightComponent);
 }

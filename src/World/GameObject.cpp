@@ -7,7 +7,7 @@ GameObject::~GameObject() {
 }
 
 void GameObject::render(sf::RenderTarget& renderTarget) {
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		if (!component->isActive()) continue;
 		component->render(renderTarget);
 	}
@@ -17,7 +17,7 @@ void GameObject::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	if (m_isDebugRendering) {
 		renderTarget.draw(m_debugBox);
 	}
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		if (!component->isActive()) continue;
 		component->renderAfterForeground(renderTarget);
 	}
@@ -52,7 +52,7 @@ void GameObject::update(const sf::Time& frameTime) {
 			onLeftJustPressed();
 		}
 	}
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		if (!component->isActive()) continue;
 		component->update(frameTime);
 	}
@@ -63,7 +63,7 @@ void GameObject::setPosition(const sf::Vector2f& position) {
 	m_boundingBox.top = position.y;
 
 	m_debugBox.setPosition(position);
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		component->setPosition(position);
 	}
 }
@@ -116,7 +116,7 @@ const sf::FloatRect* GameObject::getBoundingBox() const {
 }
 
 void GameObject::onMouseOver() {
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		component->onParentMouseOver();
 	}
 }
@@ -163,7 +163,7 @@ bool GameObject::isDisposed() const {
 
 void GameObject::setDisposed() {
 	m_isDisposed = true;
-	for (auto& component : m_components) {
+	for (auto component : m_components) {
 		component->onDisposed();
 	}
 }

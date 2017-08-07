@@ -26,9 +26,9 @@ NekomataEnemy::NekomataEnemy(const Level* level, Screen* screen) :
 }
 
 void NekomataEnemy::loadAttributes() {
-	m_attributes.setHealth(300);
+	m_attributes.setHealth(500);
 	m_attributes.resistanceLight = -30;
-	m_attributes.resistanceShadow = 1000;
+	m_attributes.resistanceShadow = 10000;
 	m_attributes.resistancePhysical = 20;
 	m_attributes.calculateAttributes();
 }
