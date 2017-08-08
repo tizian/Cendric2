@@ -157,3 +157,20 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('No
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_notekoray', 'document', 400, 400, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_notekoray', -25, 0, 50, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_notekoray', 1, 450, 0, 100, 50);
+
+-- Note (Robert)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item', 'Note','Notiz','Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item_desc', 'A suspicious note, found in the Yasha''s Temple.','Eine verdächtige Notiz, gefunden in Yasha''s Tempel.','E verdächtigi Notiz, gfunde im Tempel vode Yasha.');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notebob', 0, 'NoteBob');
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notebob', 'missing_bob', 2);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteBob', 'document', 'Someone... help us! He''s destroying everything.
+
+-- Bob','Irgendjemand... Hilf uns! Er zerstört alles.
+
+-- Bob','Irgenöpper... Hilf üs! Er zerstört alles.
+
+-- Bob');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_notebob', 'document', 400, 400, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_notebob', -25, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_notebob', 1, 450, 0, 100, 50);

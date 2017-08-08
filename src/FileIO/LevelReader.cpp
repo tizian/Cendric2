@@ -454,11 +454,20 @@ bool LevelReader::readItemIDs(tinyxml2::XMLElement* _tile) {
 		tinyxml2::XMLError result = tile->QueryIntAttribute("id", &tileID);
 		XMLCheckResult(result);
 
+		// properties can be on two locations in the tmx file because of versions
+		// tile->objectgroup->properties or just tile->properties. Check where it is.
 		tinyxml2::XMLElement* properties = tile->FirstChildElement("properties");
+
 		if (properties == nullptr) {
-			logError("Could not read item tile properties, no tileset->tile->properties tag found.");
+			tinyxml2::XMLElement* objectgroup = tile->FirstChildElement("objectgroup");
+			if (objectgroup) {
+				properties = objectgroup->FirstChildElement("properties");
+			}
+		}
+		if (properties == nullptr) {
 			return false;
 		}
+
 		tinyxml2::XMLElement* _property = properties->FirstChildElement("property");
 		if (_property == nullptr) {
 			logError("Could not read item tile properties, no tileset->tile->properties->property tag found.");
