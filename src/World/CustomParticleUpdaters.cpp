@@ -1,6 +1,8 @@
 #include "World/CustomParticleUpdaters.h"
 
 #include "Level/DynamicTiles/FluidTile.h"
+#include "Level/LevelMovableGameObject.h"
+#include "Level/Level.h"
 
 #include "Particles/ParticleData.h"
 
@@ -67,6 +69,37 @@ namespace particles
 		}
 	}
 
+	DamagingUpdater::DamagingUpdater(LevelMovableGameObject* mob, int damage, DamageType damageType) : m_mob(mob) {
+		m_damage = std::max(0, damage);
+		m_damageType = damageType;
+	}
+
+	void DamagingUpdater::update(ParticleData *data, float dt)  {
+		int endId = data->countAlive;
+
+		for (int i = 0; i < endId; ++i) {
+			
+			if (m_mob->getBoundingBox()->contains(data->pos[i])) {
+				m_mob->addDamage(m_damage, m_damageType, false, false);
+				data->kill(i);
+				endId = data->countAlive;
+			}
+		}
+	}
+
+	CollidingUpdater::CollidingUpdater(const Level* level) : m_level(level) {};
+
+	void CollidingUpdater::update(ParticleData *data, float dt) {
+		int endId = data->countAlive;
+
+		for (int i = 0; i < endId; ++i) {
+
+			if (m_level->collidesWithCollidableLayer(data->pos[i])) {
+				data->kill(i);
+				endId = data->countAlive;
+			}
+		}
+	}
 }
 
 

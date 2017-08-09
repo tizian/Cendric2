@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Yasha_Hi', 'dl_npc_yasha', '(Growls) Another mortal dares to trespass into my temple. Any last words?', '(Knurrt) Noch ein Sterblicher wagt es, in meinen Tempel einzudringen. Sprich deine letzten Worte. ', '(Chnurrt) Nomol so en Sterbliche wogts, i min Tempel iezcho. Seg dini letzte Wort.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('Choice_Yasha_Attack', 'dl_npc_yasha', '[ATTACK]', '[ANGREIFEN]', '[AAGRIFE]');

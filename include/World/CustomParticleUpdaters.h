@@ -2,8 +2,11 @@
 
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleHelpers.h"
+#include "Enums/DamageType.h"
 
 class FluidTile;
+class LevelMovableGameObject;
+class Level;
 
 namespace particles
 {
@@ -48,4 +51,27 @@ namespace particles
 		float m_fraction;
 	};
 
+	class DamagingUpdater : public ParticleUpdater {
+	public:
+		DamagingUpdater(LevelMovableGameObject* mob, int damage, DamageType damageType);
+		~DamagingUpdater() {}
+
+		void update(ParticleData *data, float dt) override;
+
+	public:
+		LevelMovableGameObject* m_mob;
+		int m_damage;
+		DamageType m_damageType;
+	};
+
+	class CollidingUpdater : public ParticleUpdater {
+	public:
+		CollidingUpdater(const Level* level);
+		~CollidingUpdater() {}
+
+		void update(ParticleData *data, float dt) override;
+
+	public:
+		const Level* m_level;
+	};
 }

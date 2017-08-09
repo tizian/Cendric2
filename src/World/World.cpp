@@ -47,6 +47,13 @@ const sf::FloatRect& World::getWorldRect() const {
 	return m_worldData->mapRect;
 }
 
+bool World::collidesWithCollidableLayer(const sf::Vector2f& pos) const {
+	int x = static_cast<int>(std::round(pos.x) / TILE_SIZE_F);
+	int y = static_cast<int>(std::round(pos.y) / TILE_SIZE_F);
+
+	return m_worldData->collidableTilePositions[y][x];
+}
+
 bool World::collides(WorldCollisionQueryRecord& rec) const {
 	rec.collides = false;
 	rec.safeLeft = rec.collisionDirection == CollisionDirection::Left ? 0.f : m_worldData->mapRect.width;

@@ -1,0 +1,69 @@
+# dia file for dialogue for npc: npc_yasha
+
+npc.id:npc_yasha
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_yasha", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_yasha", "talked")
+	# translation: 
+	translation.tag:DL_Yasha_Hi
+	translation.en:(Growls) Another mortal dares to trespass into my temple. Any last words?
+	translation.de:(Knurrt) Noch ein Sterblicher wagt es, in meinen Tempel einzudringen. Sprich deine letzten Worte. 
+	translation.ch:(Chnurrt) Nomol so en Sterbliche wogts, i min Tempel iezcho. Seg dini letzte Wort.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:Choice_Yasha_Attack
+		translation.en:[ATTACK]
+		translation.de:[ANGREIFEN]
+		translation.ch:[AAGRIFE]
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 1, 1)
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
