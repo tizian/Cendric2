@@ -6,16 +6,14 @@
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 
-class WolfBoss final : public Boss {
+class YashaBoss final : public Boss {
 public:
-	WolfBoss(const Level* level, Screen* screen);
+	YashaBoss(const Level* level, Screen* screen);
 
 	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
 
-	EnemyID getEnemyID() const override { return EnemyID::Boss_Wolf; }
-
-	static const std::string TRANSFORM_SPRITEPATH;
+	EnemyID getEnemyID() const override { return EnemyID::Boss_Yasha; }
 
 protected:
 	std::string getSpritePath() const override;

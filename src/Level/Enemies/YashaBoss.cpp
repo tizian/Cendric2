@@ -1,4 +1,4 @@
-#include "Level/Enemies/WolfBoss.h"
+#include "Level/Enemies/YashaBoss.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/WolfBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
@@ -6,15 +6,13 @@
 #include "Registrar.h"
 #include "GlobalResource.h"
 
-REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
+REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 
-const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
-
-float WolfBoss::getConfiguredDistanceToHPBar() const {
+float YashaBoss::getConfiguredDistanceToHPBar() const {
 	return 60.f;
 }
 
-WolfBoss::WolfBoss(const Level* level, Screen* screen) :
+YashaBoss::YashaBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
@@ -22,7 +20,7 @@ WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 	m_isInvincible = true;
 }
 
-void WolfBoss::loadAttributes() {
+void YashaBoss::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
@@ -30,7 +28,7 @@ void WolfBoss::loadAttributes() {
 	m_attributes.calculateAttributes();
 }
 
-void WolfBoss::loadSpells() {
+void YashaBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.damage = 50;
 	chopSpell.activeDuration = sf::seconds(1000.f);
@@ -43,30 +41,7 @@ void WolfBoss::loadSpells() {
 	chopSpell.fightAnimation = GameObjectState::Walking;
 
 	m_spellManager->addSpell(chopSpell);
-
-	// transform spell sprite for cendric
-	g_resourceManager->loadTexture(TRANSFORM_SPRITEPATH, ResourceType::Level);
-	Animation* transformedAnimation = new Animation();
-	transformedAnimation->setSpriteSheet(g_resourceManager->getTexture(WolfBoss::TRANSFORM_SPRITEPATH));
-	transformedAnimation->addFrame(sf::IntRect(0, 0, 110, 120));
-	m_mainChar->addAnimation(GameObjectState::Broken, transformedAnimation);
-
-	SpellData transformBeamSpell = SpellData::getSpellData(SpellID::WindGust);
-	transformBeamSpell.id = SpellID::TransformBeam;
-	transformBeamSpell.activeDuration = sf::seconds(2.5f);
-	transformBeamSpell.damagePerSecond = 0;
-	transformBeamSpell.damageType = DamageType::VOID;
-	transformBeamSpell.cooldown = sf::seconds(10.f);
-	transformBeamSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
-	transformBeamSpell.spellOffset = sf::Vector2f(12.f, -120.f);
-	transformBeamSpell.fightingTime = sf::seconds(3.f);
-	transformBeamSpell.castingTime = sf::seconds(2.f);
-	transformBeamSpell.castingAnimation = GameObjectState::Casting2;
-	transformBeamSpell.fightAnimation = GameObjectState::Fighting2;
-	transformBeamSpell.soundPath = "res/sound/spell/transformbeam.ogg";
-
-	m_spellManager->addSpell(transformBeamSpell);
-
+	
 	SpellData windgustSpell = SpellData::getSpellData(SpellID::WindGust);
 	windgustSpell.activeDuration = sf::seconds(1000.f);
 	windgustSpell.damagePerSecond = 8;
@@ -87,7 +62,7 @@ void WolfBoss::loadSpells() {
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
-void WolfBoss::handleAttackInput() {
+void YashaBoss::handleAttackInput() {
 	// Cendric is too far away to attack with any attack
 	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 400.f)
 		return;
@@ -118,7 +93,7 @@ void WolfBoss::handleAttackInput() {
 	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 }
 
-void WolfBoss::loadAnimation(int skinNr) {
+void YashaBoss::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -233,7 +208,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	loadDeathParticles();
 }
 
-MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
+MovingBehavior* YashaBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 
 	behavior = new WolfBossMovingBehavior(this);
@@ -246,18 +221,18 @@ MovingBehavior* WolfBoss::createMovingBehavior(bool asAlly) {
 	return behavior;
 }
 
-AttackingBehavior* WolfBoss::createAttackingBehavior(bool asAlly) {
+AttackingBehavior* YashaBoss::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 	behavior = new AggressiveBehavior(this);
 	behavior->setAggroRange(10000.f);
-	behavior->setAttackInput(std::bind(&WolfBoss::handleAttackInput, this));
+	behavior->setAttackInput(std::bind(&YashaBoss::handleAttackInput, this));
 	return behavior;
 }
 
-sf::Time WolfBoss::getConfiguredWaitingTime() const {
+sf::Time YashaBoss::getConfiguredWaitingTime() const {
 	return sf::Time::Zero;
 }
 
-std::string WolfBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_wolfmonster.png";
+std::string YashaBoss::getSpritePath() const {
+	return "res/assets/bosses/spritesheet_boss_yasha.png";
 }
