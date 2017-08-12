@@ -1,18 +1,29 @@
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveFlyingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/YashaBossMovingBehavior.h"
+#include "Level/Enemies/YashaBoss.h"
+#include "Screens/LevelScreen.h"
+#include "ObjectFactory.h"
 
-AggressiveFlyingBehavior::AggressiveFlyingBehavior(Enemy* enemy) :
+YashaBossMovingBehavior::YashaBossMovingBehavior(YashaBoss* enemy) :
 	MovingBehavior(enemy),
 	EnemyMovingBehavior(enemy),
 	FlyingBehavior(enemy) {
+	m_boss = enemy;
 }
 
-void AggressiveFlyingBehavior::execHandleMovementInput() {
-	// movement AI
-	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
-	sf::Vector2f center = m_enemy->getCenter();
-	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
+YashaBossMovingBehavior::~YashaBossMovingBehavior() {
+	g_resourceManager->deleteUniqueResources(this);
+}
 
-	if (hasTarget && m_enemy->getEnemyState() == EnemyState::Chasing) {
+void YashaBossMovingBehavior::update(const sf::Time& frameTime) {
+	FlyingBehavior::update(frameTime);
+}
+
+void YashaBossMovingBehavior::execHandleMovementInput() {
+	// movement AI
+	sf::Vector2f center = m_enemy->getCenter();
+	sf::Vector2f targetCenter = m_mainChar->getCenter();
+
+	if (m_enemy->getEnemyState() == EnemyState::Chasing) {
 
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
 			m_movingDirectionX = -1;
@@ -34,9 +45,8 @@ void AggressiveFlyingBehavior::execHandleMovementInput() {
 			m_movingDirectionY = 0;
 		}
 	}
-	else if (hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
-		m_movingDirectionX = (targetCenter.x < center.x) ? 1 : -1;
-		m_movingDirectionY = (targetCenter.y < center.y) ? 1 : -1;
-	}
 }
 
+void YashaBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
+	FlyingBehavior::updateAnimation(frameTime);
+}

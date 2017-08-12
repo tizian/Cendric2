@@ -11,7 +11,7 @@ void NeutralWalkingBehavior::execHandleMovementInput() {
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
-	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
+	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing)) {
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
 			m_movingDirectionX = -1;
 		}

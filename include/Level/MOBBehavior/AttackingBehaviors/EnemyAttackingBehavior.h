@@ -10,8 +10,6 @@ public:
 	virtual ~EnemyAttackingBehavior() {};
 
 	virtual void update(const sf::Time& frameTime) override;
-
-	void handleAttackInput() override;
 	virtual void updateAggro() = 0;
 
 	void setAggroRange(float range);

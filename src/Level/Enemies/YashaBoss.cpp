@@ -1,27 +1,30 @@
 #include "Level/Enemies/YashaBoss.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/WolfBossMovingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/YashaBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
+#include "GameObjectComponents/LightComponent.h"
+#include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 
 float YashaBoss::getConfiguredDistanceToHPBar() const {
-	return 60.f;
+	return 80.f;
 }
 
 YashaBoss::YashaBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
-	
+
 	m_isInvincible = true;
 }
 
 void YashaBoss::loadAttributes() {
-	m_attributes.setHealth(200);
+	m_attributes.setHealth(2000);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 50;
 	m_attributes.critical = 0;
@@ -41,183 +44,54 @@ void YashaBoss::loadSpells() {
 	chopSpell.fightAnimation = GameObjectState::Walking;
 
 	m_spellManager->addSpell(chopSpell);
-	
-	SpellData windgustSpell = SpellData::getSpellData(SpellID::WindGust);
-	windgustSpell.activeDuration = sf::seconds(1000.f);
-	windgustSpell.damagePerSecond = 8;
-	windgustSpell.damageType = DamageType::Ice;
-	windgustSpell.cooldown = sf::seconds(0.f);
-	windgustSpell.boundingBox = sf::FloatRect(0, 0, 1200, 350);
-	windgustSpell.spellOffset = sf::Vector2f(10.f, -250.f);
-	windgustSpell.fightingTime = sf::seconds(1000.f);
-	windgustSpell.castingTime = sf::seconds(1.f);
-	windgustSpell.castingAnimation = GameObjectState::Casting3;
-	windgustSpell.fightAnimation = GameObjectState::Fighting3;
-	windgustSpell.strength = 2;
-	windgustSpell.soundPath = "res/sound/spell/windgust.ogg";
-	windgustSpell.isSoundLooping = true;
-
-	m_spellManager->addSpell(windgustSpell);
 
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
 void YashaBoss::handleAttackInput() {
-	// Cendric is too far away to attack with any attack
-	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 400.f)
-		return;
 
-	if (getState() == GameObjectState::Fighting3 && std::abs(m_mainChar->getPosition().y - getPosition().y) < 100.f) {
-		// cendric has come down.
-		setReady();
-		clearSpells(true);
-		return;
-	}
-
-	// We are doing something else
-	if (getState() != GameObjectState::Idle)
-		return;
-
-	// Cendric is standing too high to reach with charge or beam, so we're going to use windgust
-	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 100.f)
-		m_spellManager->setCurrentSpell(2); // windgust
-	else {
-		if (m_mainChar->isStunned() || std::abs(m_mainChar->getPosition().x - getPosition().x) > 1000.f) {
-			m_spellManager->setCurrentSpell(0); // only charge
-		}
-		else {
-			m_spellManager->setCurrentSpell(rand() % 2); // charge or beam
-		}
-	}
-	
-	m_spellManager->executeCurrentSpell(m_mainChar->getCenter());
 }
 
 void YashaBoss::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
 	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
+	const int width = 300;
+	const int height = 250;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
-	Animation* walkingAnimation = new Animation(sf::seconds(0.05f));
-	walkingAnimation->setSpriteSheet(tex);
+	Animation* flyingAnimation = new Animation(sf::seconds(0.08f));
+	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 13; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 300, 0, 300, 250));
+		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 
-	addAnimation(GameObjectState::Walking, walkingAnimation);
+	addAnimation(GameObjectState::Flying, flyingAnimation);
 
-	Animation* idleAnimation = new Animation();
+	Animation* idleAnimation = new Animation(sf::seconds(0.08f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(4 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(6 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
+	idleAnimation->setSpriteSheet(tex);
+	for (int i = 0; i < 13; ++i) {
+		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
-
-	Animation* jumpingAnimation = new Animation();
-	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(3 * 300, 250, 300, 250));
-
-	addAnimation(GameObjectState::Jumping, jumpingAnimation);
-
-	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(9 * 300, 750, 300, 250));
-
-	addAnimation(GameObjectState::Dead, deadAnimation);
-
-	// casting before charge attack
-	Animation* castingAnimation = new Animation();
-	castingAnimation->setSpriteSheet(tex);
-	castingAnimation->addFrame(sf::IntRect(0 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(2 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
-
-	addAnimation(GameObjectState::Casting, castingAnimation);
-
-	// casting before beam attack
-	Animation* casting2Animation = new Animation();
-	casting2Animation->setSpriteSheet(tex);
-	for (int i = 0; i < 12; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
-	}
-	casting2Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Casting2, casting2Animation);
-
-	// beam attack
-	Animation* beamAnimation = new Animation();
-	beamAnimation->setSpriteSheet(tex);
-	beamAnimation->addFrame(sf::IntRect(11 * 300, 500, 300, 250));
-
-	addAnimation(GameObjectState::Fighting2, beamAnimation);
-
-	// casting before windgust attack
-	Animation* casting3Animation = new Animation();
-	casting3Animation->setSpriteSheet(tex);
-	for (int i = 0; i < 4; ++i) {
-		casting3Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
-	}
-	casting3Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Casting3, casting3Animation);
-
-	// windgust attack
-	Animation* windgustAnimation = new Animation();
-	windgustAnimation->setSpriteSheet(tex);
-	windgustAnimation->addFrame(sf::IntRect(7 * 300, 250, 300, 250));
-
-	addAnimation(GameObjectState::Fighting3, windgustAnimation);
-
-	// trip over
-	Animation* tripoverAnimation = new Animation();
-	tripoverAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 5; ++i) {
-		tripoverAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
-	}
-	tripoverAnimation->setLooped(false);
-
-	addAnimation(GameObjectState::TripOver, tripoverAnimation);
-
-	// laying
-	Animation* layingAnimation = new Animation();
-	layingAnimation->setSpriteSheet(tex);
-	layingAnimation->addFrame(sf::IntRect(4 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(6 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
-
-	addAnimation(GameObjectState::Laying, layingAnimation);
-
-	// standup
-	Animation* standupAnimation = new Animation();
-	standupAnimation->setSpriteSheet(tex);
-	for (int i = 8; i < 11; ++i) {
-		standupAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
-	}
-	standupAnimation->setLooped(false);
-
-	addAnimation(GameObjectState::Standup, standupAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
 	loadDeathParticles();
+	loadComponents();
 }
 
 MovingBehavior* YashaBoss::createMovingBehavior(bool asAlly) {
-	WalkingBehavior* behavior;
+	FlyingBehavior* behavior;
 
-	behavior = new WolfBossMovingBehavior(this);
-	behavior->setDistanceToAbyss(100.f);
+	behavior = new YashaBossMovingBehavior(this);
 	behavior->setApproachingDistance(10000.f);
-	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityYUp(300.f);
-	behavior->setMaxVelocityX(700.f);
-	behavior->calculateJumpHeight();
+	behavior->setMaxVelocityYDown(200.f);
+	behavior->setMaxVelocityYUp(200.f);
+	behavior->setMaxVelocityX(200.f);
 	return behavior;
 }
 
@@ -229,6 +103,13 @@ AttackingBehavior* YashaBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+void YashaBoss::setPosition(const sf::Vector2f& pos) {
+	Boss::setPosition(pos);
+	if (m_velGen) {
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - getBoundingBox()->height);
+	}
+}
+
 sf::Time YashaBoss::getConfiguredWaitingTime() const {
 	return sf::Time::Zero;
 }
@@ -236,3 +117,53 @@ sf::Time YashaBoss::getConfiguredWaitingTime() const {
 std::string YashaBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_yasha.png";
 }
+
+void YashaBoss::loadComponents() {
+	ParticleComponentData data;
+	data.particleCount = 300;
+	data.emitRate = 300.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture();
+
+	// Generators
+	auto posGen = new particles::BoxSpawner();
+	posGen->size = sf::Vector2f(m_boundingBox.width, 0.f);
+	data.spawner = posGen;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 30.f;
+	sizeGen->maxStartSize = 50.f;
+	sizeGen->minEndSize = 30.f;
+	sizeGen->maxEndSize = 50.f;
+	data.sizeGen = sizeGen;
+
+	auto colGen = new particles::ColorGenerator();
+
+	colGen->minStartCol = sf::Color(255, 160, 64);
+	colGen->maxStartCol = sf::Color(255, 160, 64);
+	colGen->minEndCol = sf::Color(255, 0, 0, 200);
+	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	data.colorGen = colGen;
+
+	m_velGen = new particles::AimedVelocityGenerator();
+	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_velGen->minStartSpeed = 40.f;
+	m_velGen->maxStartSpeed = 80.f;
+	data.velGen = m_velGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.3f;
+	timeGen->maxTime = 0.8f;
+	data.timeGen = timeGen;
+
+	m_pc = new ParticleComponent(data, this);
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, getBoundingBox()->height));
+	addComponent(m_pc);
+
+	// light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
+		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.height * 2.f), 0.6f), this));
+}
+

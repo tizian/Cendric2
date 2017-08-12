@@ -131,8 +131,6 @@ protected:
 	EnemyMovingBehavior* m_enemyMovingBehavior = nullptr;
 	ScriptedBehavior* m_scriptedBehavior = nullptr;
 	
-	// time until the enemy can attack after it has taken a hit
-	sf::Time m_recoveringTime = sf::Time::Zero;
 	// time while the enemy does nothing because it tried to get to the main char and it failed
 	sf::Time m_waitingTime = sf::Time::Zero;
 	// time until next random desicion in idle state
@@ -140,7 +138,6 @@ protected:
 	// time the enemy will chase the main char anyway (even if it is out of aggro range)
 	sf::Time m_chasingTime = sf::Time::Zero;
 
-	virtual sf::Time getConfiguredRecoveringTime() const;
 	virtual sf::Time getConfiguredRandomDecisionTime() const;
 	// time feared after the fear condition is true (has nothing to do with spells)
 	virtual sf::Time getConfiguredFearedTime() const;

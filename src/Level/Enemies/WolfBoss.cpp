@@ -11,7 +11,7 @@ REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
 
 float WolfBoss::getConfiguredDistanceToHPBar() const {
-	return 60.f;
+	return 80.f;
 }
 
 WolfBoss::WolfBoss(const Level* level, Screen* screen) :

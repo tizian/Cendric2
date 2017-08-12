@@ -7,8 +7,6 @@ AggressiveCreepingBehavior::AggressiveCreepingBehavior(Enemy* enemy) :
 }
 
 void AggressiveCreepingBehavior::execHandleMovementInput() {
-	if (m_enemy->getEnemyState() == EnemyState::Recovering)
-		return;
 	// movement AI
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();

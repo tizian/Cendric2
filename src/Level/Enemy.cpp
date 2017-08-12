@@ -81,11 +81,6 @@ void Enemy::onHit(Spell* spell) {
 	}
 
 	LevelMovableGameObject::onHit(spell);
-
-	if (spell->getDamageType() != DamageType::VOID) {
-		m_recoveringTime = getConfiguredRecoveringTime();
-	}
-	
 	setChasing();
 }
 
@@ -136,10 +131,6 @@ void Enemy::loadBehavior() {
 	updateHpBar();
 }
 
-sf::Time Enemy::getConfiguredRecoveringTime() const {
-	return sf::milliseconds(400);
-}
-
 sf::Time Enemy::getConfiguredWaitingTime() const {
 	return sf::seconds(1.f);
 }
@@ -166,7 +157,6 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	if (m_enemyState == EnemyState::Dead) return;
 
 	// update times
-	updateTime(m_recoveringTime, frameTime);
 	updateTime(m_waitingTime, frameTime);
 	updateTime(m_chasingTime, frameTime);
 	updateTime(m_decisionTime, frameTime);
@@ -180,12 +170,6 @@ void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	// handle fear
 	if (m_fearedTime > sf::Time::Zero) {
 		m_enemyState = EnemyState::Fleeing;
-		return;
-	}
-
-	// handle recovering
-	if (m_recoveringTime > sf::Time::Zero) {
-		m_enemyState = EnemyState::Recovering;
 		return;
 	}
 

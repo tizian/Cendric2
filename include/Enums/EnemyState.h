@@ -6,6 +6,5 @@ enum class EnemyState {
 	Stunned,
 	Fleeing,
 	Waiting,
-	Recovering,
 	Dead
 };

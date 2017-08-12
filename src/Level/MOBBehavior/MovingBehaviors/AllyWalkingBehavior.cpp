@@ -33,7 +33,7 @@ void AllyWalkingBehavior::execHandleMovementInput() {
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
 	sf::Vector2f center = m_enemy->getCenter();
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
-	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing || m_enemy->getEnemyState() == EnemyState::Recovering)) {
+	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing)) {
 
 		float approachingDistance = (std::abs(m_enemy->getVelocity().x) > 0.f) ? (m_approachingDistance - 5.f) : m_approachingDistance;
 

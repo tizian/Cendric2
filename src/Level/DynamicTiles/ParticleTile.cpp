@@ -150,7 +150,7 @@ void ParticleTile::loadEmberParticles() {
 
 void ParticleTile::loadFlameParticles() {
 	ParticleComponentData data;
-	data.particleCount = 1000;
+	data.particleCount = 60;
 	data.emitRate = 60.f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;

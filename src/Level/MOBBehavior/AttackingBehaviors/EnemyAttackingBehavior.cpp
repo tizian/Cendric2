@@ -13,13 +13,6 @@ void EnemyAttackingBehavior::update(const sf::Time& frameTime) {
 	updateAggro();
 }
 
-void EnemyAttackingBehavior::handleAttackInput() {
-	if (m_enemy->getEnemyState() == EnemyState::Recovering)
-		return;
-
-	AttackingBehavior::handleAttackInput();
-}
-
 float EnemyAttackingBehavior::getAggroRange() const {
 	return m_aggroRange;
 }
