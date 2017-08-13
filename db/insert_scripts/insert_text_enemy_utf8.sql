@@ -40,3 +40,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossJeremy','enemy','Jeremy "The Fox" Siek','Jeremy "Der Fuchs" Siek','Jeremy "De Fuchs" Siek');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Leeroy','enemy','Leeroy','Leeroy','Leeroy');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Koray','enemy','Koray','Koray','Koray');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossYasha','enemy','Yasha, Guardian of the Temple','Yasha, Wächterin des Tempels','Yasha, Wächterin vom Tempel');

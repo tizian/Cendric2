@@ -32,8 +32,10 @@ void CircleSpawner::spawn(ParticleData *data, int startId, int endId) {
 void DiskSpawner::spawn(ParticleData *data, int startId, int endId) {
 	for (int i = startId; i < endId; ++i) {
 		float phi = randomFloat(0.0f, M_PI * 2.0f);
-		float r = randomFloat(0.0f, radius);
-		data->pos[i] = { center.x + r * std::sin(phi), center.y + r * std::cos(phi) };
+		float rho = randomFloat(0.0f, 1.0f);
+		float x = std::sqrt(rho) * std::cos(phi) * radius;
+		float y = std::sqrt(rho) * std::sin(phi) * radius;
+		data->pos[i] = { center.x + x, center.y + y };
 	}
 }
 

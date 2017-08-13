@@ -6,6 +6,7 @@
 #include "GameObjectComponents/ParticleComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "Screens/LevelScreen.h"
+#include "World/CustomParticleUpdaters.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -67,12 +68,14 @@ void YashaBoss::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
-	Animation* idleAnimation = new Animation(sf::seconds(0.08f));
+	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	idleAnimation->setSpriteSheet(tex);
-	for (int i = 0; i < 13; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+	for (int i = 0; i < 4; ++i) {
+		idleAnimation->addFrame(sf::IntRect(i * width, height, width, height));
 	}
+	idleAnimation->addFrame(sf::IntRect(2 * width, height, width, height));
+	idleAnimation->addFrame(sf::IntRect(1 * width, height, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -88,7 +91,7 @@ MovingBehavior* YashaBoss::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 
 	behavior = new YashaBossMovingBehavior(this);
-	behavior->setApproachingDistance(10000.f);
+	behavior->setApproachingDistance(120.f);
 	behavior->setMaxVelocityYDown(200.f);
 	behavior->setMaxVelocityYUp(200.f);
 	behavior->setMaxVelocityX(200.f);
@@ -124,26 +127,26 @@ void YashaBoss::loadComponents() {
 	data.emitRate = 300.f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
-	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleFGRenderTexture();
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 
 	// Generators
-	auto posGen = new particles::BoxSpawner();
-	posGen->size = sf::Vector2f(m_boundingBox.width, 0.f);
+	auto posGen = new particles::EllipseSpawner();
+	posGen->radius = sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.25f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
-	sizeGen->minStartSize = 30.f;
-	sizeGen->maxStartSize = 50.f;
-	sizeGen->minEndSize = 30.f;
-	sizeGen->maxEndSize = 50.f;
+	sizeGen->minStartSize = 50.f;
+	sizeGen->maxStartSize = 80.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
 	data.sizeGen = sizeGen;
 
 	auto colGen = new particles::ColorGenerator();
 
-	colGen->minStartCol = sf::Color(255, 160, 64);
-	colGen->maxStartCol = sf::Color(255, 160, 64);
-	colGen->minEndCol = sf::Color(255, 0, 0, 200);
-	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	colGen->minStartCol = sf::Color(255, 160, 64, 0);
+	colGen->maxStartCol = sf::Color(255, 160, 64, 0);
+	colGen->minEndCol = sf::Color(255, 0, 0, 255);
+	colGen->maxEndCol = sf::Color(255, 0, 0, 255);
 	data.colorGen = colGen;
 
 	m_velGen = new particles::AimedVelocityGenerator();
@@ -153,8 +156,8 @@ void YashaBoss::loadComponents() {
 	data.velGen = m_velGen;
 
 	auto timeGen = new particles::TimeGenerator();
-	timeGen->minTime = 0.3f;
-	timeGen->maxTime = 0.8f;
+	timeGen->minTime = 0.5f;
+	timeGen->maxTime = 1.0f;
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
@@ -163,7 +166,7 @@ void YashaBoss::loadComponents() {
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(TILE_SIZE_F * 0.5f, -TILE_SIZE_F * 0.5f),
+		sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height),
 		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.height * 2.f), 0.6f), this));
 }
 

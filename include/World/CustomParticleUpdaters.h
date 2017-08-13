@@ -74,4 +74,15 @@ namespace particles
 	public:
 		const Level* m_level;
 	};
+
+	class EllipseSpawner : public ParticleSpawner {
+	public:
+		EllipseSpawner() {}
+		~EllipseSpawner() {}
+
+		void spawn(ParticleData *data, int startId, int endId);
+
+	public:
+		sf::Vector2f radius;
+	};
 }

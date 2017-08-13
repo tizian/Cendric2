@@ -20,10 +20,10 @@ void YashaBossMovingBehavior::update(const sf::Time& frameTime) {
 
 void YashaBossMovingBehavior::execHandleMovementInput() {
 	// movement AI
-	sf::Vector2f center = m_enemy->getCenter();
-	sf::Vector2f targetCenter = m_mainChar->getCenter();
-
 	if (m_enemy->getEnemyState() == EnemyState::Chasing) {
+
+		sf::Vector2f center = m_enemy->getCenter();
+		sf::Vector2f targetCenter = m_mainChar->getCenter();
 
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
 			m_movingDirectionX = -1;

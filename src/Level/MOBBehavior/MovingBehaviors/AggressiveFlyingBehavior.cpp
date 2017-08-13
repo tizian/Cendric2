@@ -9,10 +9,10 @@ AggressiveFlyingBehavior::AggressiveFlyingBehavior(Enemy* enemy) :
 void AggressiveFlyingBehavior::execHandleMovementInput() {
 	// movement AI
 	bool hasTarget = m_enemy->getCurrentTarget() != nullptr;
-	sf::Vector2f center = m_enemy->getCenter();
-	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 
 	if (hasTarget && m_enemy->getEnemyState() == EnemyState::Chasing) {
+		sf::Vector2f center = m_enemy->getCenter();
+		sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 
 		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
 			m_movingDirectionX = -1;
@@ -35,6 +35,9 @@ void AggressiveFlyingBehavior::execHandleMovementInput() {
 		}
 	}
 	else if (hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
+		sf::Vector2f center = m_enemy->getCenter();
+		sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
+
 		m_movingDirectionX = (targetCenter.x < center.x) ? 1 : -1;
 		m_movingDirectionY = (targetCenter.y < center.y) ? 1 : -1;
 	}

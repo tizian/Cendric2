@@ -78,7 +78,6 @@ namespace particles
 		int endId = data->countAlive;
 
 		for (int i = 0; i < endId; ++i) {
-			
 			if (m_mob->getBoundingBox()->contains(data->pos[i])) {
 				m_mob->addDamage(m_damage, m_damageType, false, false);
 				data->kill(i);
@@ -93,11 +92,20 @@ namespace particles
 		int endId = data->countAlive;
 
 		for (int i = 0; i < endId; ++i) {
-
 			if (m_level->collidesWithCollidableLayer(data->pos[i])) {
 				data->kill(i);
 				endId = data->countAlive;
 			}
+		}
+	}
+
+	void EllipseSpawner::spawn(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			float phi = randomFloat(0.f, M_PI * 2.0f);
+			float rho = randomFloat(0.f, 1.f);
+			float x = std::sqrt(rho) * std::cos(phi) * radius.x;
+			float y = std::sqrt(rho) * std::sin(phi) * radius.y;
+			data->pos[i] = { center.x + x, center.y + y };
 		}
 	}
 }
