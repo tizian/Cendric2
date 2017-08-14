@@ -47,6 +47,7 @@ public:
 	void setFlippedY(bool flipped);
 	void setColor(const sf::Color& color);
 	void setFrame(std::size_t newFrame, bool resetTime = true);
+	void setRandomStartingFrame();
 	// resets color, rotation, scale and flipped property
 	void reset();
 

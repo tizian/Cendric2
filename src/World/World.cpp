@@ -50,6 +50,8 @@ const sf::FloatRect& World::getWorldRect() const {
 bool World::collidesWithCollidableLayer(const sf::Vector2f& pos) const {
 	int x = static_cast<int>(std::round(pos.x) / TILE_SIZE_F);
 	int y = static_cast<int>(std::round(pos.y) / TILE_SIZE_F);
+	if (y < 0 || y > m_worldData->mapSize.y - 1) return true;
+	if (x < 0 || x > m_worldData->mapSize.x - 1) return true;
 
 	return m_worldData->collidableTilePositions[y][x];
 }
@@ -128,8 +130,8 @@ const std::string& World::getID() const {
 	return m_worldData->id;
 }
 
-float World::getDimming() const {
-	return m_worldData->weather.dimming;
+const WeatherData& World::getWeather() const {
+	return m_worldData->weather;
 }
 
 const std::string& World::getMusicPath() const {
@@ -148,4 +150,12 @@ std::string World::getNameFromId(const std::string id) {
 	std::size_t pos = name.find_last_of('/');
 	if (pos == std::string::npos) return "";
 	return name.substr(pos + 1);
+}
+
+void World::setAmbientDimming(float dimming) const {
+	m_worldData->weather.ambientDimming = clamp(dimming, 0.f, 1.f);
+}
+
+void World::setLightDimming(float dimming) const {
+	m_worldData->weather.lightDimming = clamp(dimming, 0.f, 1.f);
 }

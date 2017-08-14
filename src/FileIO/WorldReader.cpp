@@ -609,7 +609,7 @@ bool WorldReader::readDimming(tinyxml2::XMLElement* _property, WorldData& data) 
 		return false;
 	}
 
-	data.weather.dimming = dimming;
+	data.weather.ambientDimming = dimming;
 	return true;
 }
 

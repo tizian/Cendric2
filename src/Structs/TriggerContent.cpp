@@ -28,7 +28,7 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	}
 	case TriggerContentType::Weather: {
 		WeatherData data;
-		data.dimming = content.i1 / 100.f;
+		data.ambientDimming = content.i1 / 100.f;
 		data.weather = content.s2;
 		screen->getCharacterCore()->setWeather(content.s1, data);
 		break;

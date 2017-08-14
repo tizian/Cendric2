@@ -42,12 +42,14 @@ public:
 
 	const sf::FloatRect& getWorldRect() const;
 	const std::string& getID() const;
-	float getDimming() const;
+	const WeatherData& getWeather() const;
 	const std::string& getMusicPath() const;
 	std::string getName() const;
 	static std::string getNameFromId(const std::string id);
-
 	virtual const WorldData* getWorldData() const = 0;
+
+	void setAmbientDimming(float dimming) const;
+	void setLightDimming(float dimming) const;
 
 protected:
 	// this pointer is set by the descendants (map and level)

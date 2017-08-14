@@ -42,6 +42,7 @@ enum class SpellID {
 	TransformBeam,
 	RotatingProjectile,
 	TargetingProjectile,
+	Explosion,
 
 	MAX
 };

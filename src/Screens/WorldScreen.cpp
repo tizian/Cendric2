@@ -4,8 +4,6 @@
 #include "World/Item.h"
 #include "World/Trigger.h"
 
-using namespace std;
-
 static const std::string vertexShader = \
 "void main()" \
 "{" \
@@ -17,11 +15,12 @@ static const std::string vertexShader = \
 static const std::string lightFragmentShader = \
 "uniform sampler2D texture;" \
 "uniform float ambientLevel;" \
+"uniform float lightDimming;"
 "" \
 "void main()" \
 "{" \
 "    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
-"    float lightLevel = max(0.0, ambientLevel - pixel.r);" \
+"    float lightLevel = (1.0 - lightDimming) * max(0.0, ambientLevel - pixel.r);" \
 "    gl_FragColor = vec4(0.0, 0.0, 0.0, lightLevel);" \
 "}";
 
@@ -295,7 +294,7 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 		std::time_t t = time(nullptr);
 		strftime(buff, 20, "%Y-%m-%d %H-%M-%S", localtime(&t));
 
-		std::string file = getDocumentsPath(GlobalResource::SCREENSHOT_FOLDER) + string(buff) + ".png";
+		std::string file = getDocumentsPath(GlobalResource::SCREENSHOT_FOLDER) + std::string(buff) + ".png";
 
 		sf::Texture tex;
 		tex.create(WINDOW_WIDTH, WINDOW_HEIGHT);

@@ -401,7 +401,7 @@ bool CharacterCoreReader::readWeather(std::string& line, CharacterCoreData& data
 	line = line.substr(pos + 1);
 
 	WeatherData weatherData;
-	weatherData.dimming = dimming;
+	weatherData.ambientDimming = dimming;
 	weatherData.weather = line;
 
 	data.currentWeather.insert({ id, weatherData });

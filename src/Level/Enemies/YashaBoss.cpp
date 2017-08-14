@@ -33,24 +33,30 @@ void YashaBoss::loadAttributes() {
 }
 
 void YashaBoss::loadSpells() {
-	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 50;
-	chopSpell.activeDuration = sf::seconds(1000.f);
-	chopSpell.cooldown = sf::seconds(0.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 140);
-	chopSpell.spellOffset = sf::Vector2f(-20.f, -50.f);
-	chopSpell.fightingTime = sf::seconds(1000.f);
-	chopSpell.castingTime = sf::seconds(1.f);
-	chopSpell.castingAnimation = GameObjectState::Casting;
-	chopSpell.fightAnimation = GameObjectState::Walking;
+	SpellData explosionSpell = SpellData::getSpellData(SpellID::WindGust);
+	explosionSpell.id = SpellID::Explosion;
+	explosionSpell.activeDuration = sf::seconds(2.5f);
+	explosionSpell.damagePerSecond = 0;
+	explosionSpell.damageType = DamageType::VOID;
+	explosionSpell.cooldown = sf::seconds(10.f);
+	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	explosionSpell.spellOffset = sf::Vector2f(0.f, 0.f);
+	explosionSpell.fightingTime = sf::seconds(3.f);
+	explosionSpell.castingTime = sf::seconds(2.f);
+	explosionSpell.castingAnimation = GameObjectState::Casting;
+	explosionSpell.fightAnimation = GameObjectState::Fighting;
+	explosionSpell.soundPath = "res/sound/spell/transformbeam.ogg";
 
-	m_spellManager->addSpell(chopSpell);
+	m_spellManager->addSpell(explosionSpell);
 
 	m_spellManager->setCurrentSpell(0); // chop
 }
 
 void YashaBoss::handleAttackInput() {
-
+	if (m_spellManager->executeCurrentSpell(m_mainChar->getCenter())) {
+		m_level->setAmbientDimming(1.f);
+		m_level->setLightDimming(0.f);
+	}
 }
 
 void YashaBoss::loadAnimation(int skinNr) {
@@ -70,7 +76,6 @@ void YashaBoss::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
 		idleAnimation->addFrame(sf::IntRect(i * width, height, width, height));
 	}
@@ -78,6 +83,22 @@ void YashaBoss::loadAnimation(int skinNr) {
 	idleAnimation->addFrame(sf::IntRect(1 * width, height, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
+
+	Animation* castingAnimation = new Animation();
+	castingAnimation->setSpriteSheet(tex);
+	for (int i = 0; i < 7; ++i) {
+		castingAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+	}
+	castingAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::Casting, castingAnimation);
+
+	Animation* fightingAnimation = new Animation();
+	fightingAnimation->setSpriteSheet(tex);
+	fightingAnimation->addFrame(sf::IntRect(6 * width, 2 * height, width, height));
+	fightingAnimation->setLooped(false);
+
+	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);

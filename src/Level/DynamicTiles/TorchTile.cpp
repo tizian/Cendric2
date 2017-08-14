@@ -40,6 +40,7 @@ void TorchTile::loadAnimation(int skinNr) {
 	// initial values
 	m_state = GameObjectState::Burning;
 	setCurrentAnimation(getAnimation(m_state), false);
+	m_animatedSprite.setRandomStartingFrame();
 	playCurrentAnimation(true);
 }
 

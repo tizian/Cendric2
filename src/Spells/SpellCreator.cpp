@@ -44,7 +44,9 @@ void SpellCreator::update(const sf::Time& frametime) {
 
 void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	m_isReady = false;
-	m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
+	if (!m_spellData.attachedToMob) {
+		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
+	}
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_futureTargets.push_back(target);

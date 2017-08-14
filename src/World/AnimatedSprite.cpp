@@ -15,6 +15,12 @@ void AnimatedSprite::setAnimation(const Animation* animation) {
 	play();
 }
 
+void AnimatedSprite::setRandomStartingFrame() {
+	if (!m_animation || m_animation->getSize() < 2) return;
+	m_currentFrame = rand() % m_animation->getSize();
+	setFrame(m_currentFrame);
+}
+
 void AnimatedSprite::setFrameTime(sf::Time time) {
 	m_frameTime = time;
 }

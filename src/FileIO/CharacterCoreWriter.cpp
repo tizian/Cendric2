@@ -394,7 +394,7 @@ std::string CharacterCoreWriter::writeWeather(const CharacterCoreData& data) con
 		weather.append(":");
 		weather.append(it.first);
 		weather.append(",");
-		weather.append(std::to_string(it.second.dimming));
+		weather.append(std::to_string(it.second.ambientDimming));
 		weather.append(",");
 		weather.append(it.second.weather);
 		weather.append("\n");
