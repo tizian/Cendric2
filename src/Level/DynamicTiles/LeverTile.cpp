@@ -66,11 +66,11 @@ void LeverTile::onHit(Spell* spell) {
 }
 
 void LeverTile::onHit(LevelMovableGameObject* mob) {
-	if (m_state == GameObjectState::On || mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
+	if (!m_isGround || m_state == GameObjectState::On || mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
 	auto const& bb = *getBoundingBox();
-	auto const& mobbb = *mob->getBoundingBox();
+	auto const& mobBb = *mob->getBoundingBox();
 
-	if (mobbb.top + mobbb.height > bb.top + 0.8f * bb.height)
+	if (mobBb.top + mobBb.height > bb.top + 0.8f * bb.height)
 		switchLever();
 }
 
@@ -91,6 +91,8 @@ void LeverTile::setDependentTiles(const std::vector<LeverDependentTile*>& depend
 }
 
 void LeverTile::switchLever() {
+	if (m_isGround && m_state == GameObjectState::On) return;
+
 	for (auto& tile : m_dependentTiles) {
 		if (!tile->isSwitchable()) {
 			m_screen->setNegativeTooltip("LeverStuck");
