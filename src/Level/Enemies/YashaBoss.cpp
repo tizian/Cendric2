@@ -35,12 +35,12 @@ void YashaBoss::loadAttributes() {
 void YashaBoss::loadSpells() {
 	SpellData explosionSpell = SpellData::getSpellData(SpellID::WindGust);
 	explosionSpell.id = SpellID::Explosion;
-	explosionSpell.activeDuration = sf::seconds(2.5f);
+	explosionSpell.activeDuration = sf::seconds(6.0f);
 	explosionSpell.damagePerSecond = 0;
 	explosionSpell.damageType = DamageType::VOID;
 	explosionSpell.cooldown = sf::seconds(10.f);
 	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
-	explosionSpell.spellOffset = sf::Vector2f(0.f, 0.f);
+	explosionSpell.spellOffset = sf::Vector2f(-25.f, -120.f);
 	explosionSpell.fightingTime = sf::seconds(3.f);
 	explosionSpell.castingTime = sf::seconds(2.f);
 	explosionSpell.castingAnimation = GameObjectState::Casting;
@@ -54,8 +54,8 @@ void YashaBoss::loadSpells() {
 
 void YashaBoss::handleAttackInput() {
 	if (m_spellManager->executeCurrentSpell(m_mainChar->getCenter())) {
-		m_level->setAmbientDimming(1.f);
-		m_level->setLightDimming(0.f);
+		//m_level->setAmbientDimming(1.f);
+		//m_level->setLightDimming(0.f);
 	}
 }
 

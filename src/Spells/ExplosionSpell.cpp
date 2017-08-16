@@ -12,18 +12,42 @@ void ExplosionSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	Spell::load(bean, mob, target);
 	loadComponents();
 
-	m_particleTime = sf::seconds(5.f);
+	m_particleTime = sf::seconds(0.2f);
+	m_iteration = 0;
 }
 
 void ExplosionSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
 
-	if (m_particleTime == sf::Time::Zero) return;
+	if (m_iteration == 3) return;
 
 	updateTime(m_particleTime, frameTime);
 
 	if (m_particleTime == sf::Time::Zero) {
-		m_pc->setEmitRate(0.f);
+		switch (m_iteration)
+		{
+		case 0:
+		default:
+			m_pc->setEmitRate(0.f);
+			m_particleTime = sf::seconds(0.2f);
+			m_iteration = 1;
+			break;
+		case 1: {
+			m_pc->setEmitRate(2000.f);
+			m_particleTime = sf::seconds(0.2f);
+			auto colGen = m_pc->getColorGenerator();
+			colGen->minStartCol = sf::Color(255, 200, 100, 255);
+			colGen->maxStartCol = sf::Color(255, 150, 100, 255);
+			colGen->minEndCol = sf::Color(200, 0, 0, 200);
+			colGen->maxEndCol = sf::Color(200, 100, 100, 200);
+			m_iteration = 2;
+			break;
+		}
+		case 2:
+			m_pc->setEmitRate(0.f);
+			m_iteration = 3;
+			break;
+		}
 	}
 }
 
@@ -33,44 +57,44 @@ bool ExplosionSpell::getConfiguredRotateSprite() const {
 
 void ExplosionSpell::loadComponents() {
 	// light
-	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 200.f, 0.8f);
+	LightData lightData(sf::Vector2f(m_boundingBox.height * 0.5f, m_boundingBox.height * 0.5f), 1000.f, 1.f);
 	addComponent(new LightComponent(lightData, this));
 
 	// particles
 	ParticleComponentData data;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BEAM;
 	data.isAdditiveBlendMode = true;
-	data.emitRate = 200.f;
-	data.particleCount = 1000;
+	data.emitRate = 2000.f;
+	data.particleCount = 1500;
 
 	auto posGen = new particles::DiskSpawner();
 	posGen->radius = 10.f;
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
-	sizeGen->minStartSize = 200.f;
-	sizeGen->maxStartSize = 500.f;
-	sizeGen->minEndSize = 200.f;
-	sizeGen->maxEndSize = 500.f;
+	sizeGen->minStartSize = 400.f;
+	sizeGen->maxStartSize = 400.f;
+	sizeGen->minEndSize = 800.f;
+	sizeGen->maxEndSize = 800.f;
 	data.sizeGen = sizeGen;
 
 	auto colGen = new particles::ColorGenerator();
-	colGen->minStartCol = sf::Color(255, 160, 64, 0);
-	colGen->maxStartCol = sf::Color(255, 160, 64, 0);
-	colGen->minEndCol = sf::Color(255, 0, 0, 255);
-	colGen->maxEndCol = sf::Color(255, 0, 0, 255);
+	colGen->minStartCol = sf::Color(255, 100, 100, 255);
+	colGen->maxStartCol = sf::Color(255, 100, 100, 255);
+	colGen->minEndCol = sf::Color(255, 0, 0, 200);
+	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
 	data.colorGen = colGen;
 
 	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartSpeed = 200.f;
-	velGen->maxStartSpeed = 500.f;
+	velGen->minStartSpeed = 550.f;
+	velGen->maxStartSpeed = 600.f;
 	data.velGen = velGen;
 
 	auto timeGen = new particles::TimeGenerator();
-	timeGen->minTime = 5.f;
-	timeGen->maxTime = 5.f;
+	timeGen->minTime = 6.f;
+	timeGen->maxTime = 6.f;
 	data.timeGen = timeGen;
 
 	m_pc = new  ParticleComponent(data, this);

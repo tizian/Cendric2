@@ -21,4 +21,5 @@ private:
 	ParticleComponent* m_pc;
 
 	sf::Time m_particleTime;
+	int m_iteration;
 };
