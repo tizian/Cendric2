@@ -29,11 +29,11 @@ void ExplosionSpell::update(const sf::Time& frameTime) {
 		case 0:
 		default:
 			m_pc->setEmitRate(0.f);
-			m_particleTime = sf::seconds(0.2f);
+			m_particleTime = sf::seconds(0.1f);
 			m_iteration = 1;
 			break;
 		case 1: {
-			m_pc->setEmitRate(2000.f);
+			m_pc->setEmitRate(4000.f);
 			m_particleTime = sf::seconds(0.2f);
 			auto colGen = m_pc->getColorGenerator();
 			colGen->minStartCol = sf::Color(255, 200, 100, 255);
@@ -64,18 +64,18 @@ void ExplosionSpell::loadComponents() {
 	ParticleComponentData data;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BEAM;
 	data.isAdditiveBlendMode = true;
-	data.emitRate = 2000.f;
-	data.particleCount = 1500;
+	data.emitRate = 4000.f;
+	data.particleCount = 1000;
 
 	auto posGen = new particles::DiskSpawner();
 	posGen->radius = 10.f;
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
-	sizeGen->minStartSize = 400.f;
-	sizeGen->maxStartSize = 400.f;
-	sizeGen->minEndSize = 800.f;
-	sizeGen->maxEndSize = 800.f;
+	sizeGen->minStartSize = 300.f;
+	sizeGen->maxStartSize = 300.f;
+	sizeGen->minEndSize = 500.f;
+	sizeGen->maxEndSize = 500.f;
 	data.sizeGen = sizeGen;
 
 	auto colGen = new particles::ColorGenerator();
@@ -88,8 +88,8 @@ void ExplosionSpell::loadComponents() {
 	auto velGen = new particles::AngledVelocityGenerator();
 	velGen->minAngle = 0.f;
 	velGen->maxAngle = 360.f;
-	velGen->minStartSpeed = 550.f;
-	velGen->maxStartSpeed = 600.f;
+	velGen->minStartSpeed = 400.f;
+	velGen->maxStartSpeed = 450.f;
 	data.velGen = velGen;
 
 	auto timeGen = new particles::TimeGenerator();

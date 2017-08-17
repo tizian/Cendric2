@@ -35,6 +35,16 @@ npc.id:npc_yasha
 	tag:2
 	[
 		# Link node, tag is next tag
+		tag:4
+		condition:DL:isQuestState("yasha_sanctuary", "completed")
+		# translation: 
+		translation.tag:DL_Choice_YashaSanctuaryDone
+		translation.en:Can we have a peaceful talk, demon?
+		translation.de:Können wir uns friedlich unterhalten, Dämon?
+		translation.ch:Chömmer üs friedlich unterhalte, Dämon?
+	]
+	[
+		# Link node, tag is next tag
 		tag:3
 		# translation: 
 		translation.tag:Choice_Yasha_Attack
@@ -50,6 +60,36 @@ npc.id:npc_yasha
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_yasha", "friendly")
+	# translation: 
+	translation.tag:DL_Yasha_YashaSanctuaryDone
+	translation.en:(Yasha stares at you) Hrr. You did traverse my temple without touching my sacred urns. No human did overcome the temptation to touching them before. 
+	translation.de:(Yasha starrt dich an) Hrr. Du hast meinen Tempel durchquert, ohne meine heiligen Urnen anzufassen. Kein Mensch hat dieser Versuchung je widerstanden.
+	translation.ch:(D'Yasha starrt dich ah) Hrr. Du hesch min Tempel durchquert ohni eini vo mine heilige Urne ahz'lange. Ken Mensch vor dir het je dere Versuechig widerstoh chöne.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_sanctuary", "completed")
+	# translation: 
+	translation.tag:DL_Yasha_YashaSanctuaryDone2
+	translation.en:I will answer all of your questions, human.
+	translation.de:Ich werde all deine Fragen beantworten, Mensch.
+	translation.ch:Ich wird all dini Froge beantworte, Mensch.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1

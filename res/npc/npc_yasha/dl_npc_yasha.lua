@@ -17,9 +17,25 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(2)
+	if (DL:isQuestState("yasha_sanctuary", "completed")) then 
+		DL:addChoice(4, "DL_Choice_YashaSanctuaryDone") -- Can we have a peaceful talk, demon?
+	end
 	DL:addChoice(3, "Choice_Yasha_Attack") -- [ATTACK]
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
+
+	if (DL:isQuestState("yasha_sanctuary", "completed")) then 
+
+		DL:createNPCNode(4, 5, "DL_Yasha_YashaSanctuaryDone") -- (Yasha stares at you) Hrr. You did traverse my temple without touching my sacred urns. No human did overcome the temptation to touching them before. 
+		DL:addConditionProgress("npc_yasha", "friendly")
+		DL:addNode()
+
+
+		DL:createNPCNode(5, -2, "DL_Yasha_YashaSanctuaryDone2") -- I will answer all of your questions, human.
+		DL:changeQuestState("yasha_sanctuary", "completed")
+		DL:addNode()
+
+	end
 
 
 	DL:createNPCNode(3, -1, "") -- 
