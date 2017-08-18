@@ -55,5 +55,8 @@ cmake ..
 
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Game assets (images, and fonts) found in the "res" folder are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Give attribution to Isa Roesch & Tizian Zeltner, if you're going to use them. The sound and music files found in the said folder are licenced under a CC0 (public domain) or a CC by SA licence. See the game's credits for the attribution notice. Tracks created by the composer for the game, Susanne Aubert, can only be used with her explicit permission.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Game assets (images, and fonts) found in the "res" folder are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Give attribution to Isa Roesch & Tizian Zeltner, if you're going to use them. 
+The sound and music files found in the said folder are licenced under a CC0 (public domain) or a CC by SA licence. See the game's credits for the attribution notice. 
+Tracks created by the main composer for the game, Matthew Harnage, can only be used with his explicit permission as well as the permission of Isabelle Roesch.
+Tracks created by Susanne Aubert and Isabelle Roesch can only be used with their explicit permission.
 
