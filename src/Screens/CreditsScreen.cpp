@@ -50,6 +50,8 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	button->setText("Back");
 	button->setOnClick(std::bind(&CreditsScreen::onBack, this));
 	addObject(button);
+
+	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, false);
 }
 
 void CreditsScreen::execOnExit(const Screen *nextScreen) {

@@ -36,27 +36,45 @@ Haab
 
 <<< Music >>>
 
+---
+
+-- Matthew Harnage --
+
+"Cendric Title Theme"
+
+"Gandria (Cendric Main Theme)"
+
+"Clerics Theme"
+
+"Necromancer''s Theme"
+
+"Thieves Theme"
+
+"The Marshland"
+
+"The Castle of Gandria"
+
+"House Theme"
+
+---
+
 -- Susanne Aubert --
 
-"Meadows Theme"
+"The Meadows"
 
-"Gandria Theme"
+"The Stone Garden"
 
-"Garden Theme"
-
-"Sewers of Gandria Theme"
+"The Garden of the Elder"
 
 ---
 
 -- Isa --
 
-"Ratcave"
+"The Rat Cave"
 
-"Howling Caverns"
+"The Howling Caverns"
 
-"House Theme"
-
-"Menu Theme"
+"The Hidden Library"
 
 "Khajag''s Theme"
 
@@ -66,7 +84,7 @@ Haab
 
 "Lighthouse Theme"
 
-"Swamp Theme"
+"Prison Theme"
 
 ---
 
@@ -196,27 +214,45 @@ Haab
 
 <<< Musik >>>
 
+---
+
+-- Matthew Harnage --
+
+"Cendric Title Theme"
+
+"Gandria (Cendric Main Theme)"
+
+"Clerics Theme"
+
+"Necromancer''s Theme"
+
+"Thieves Theme"
+
+"The Marshland"
+
+"The Castle of Gandria"
+
+"House Theme"
+
+---
+
 -- Susanne Aubert --
 
-"Meadows Theme"
+"The Meadows"
 
-"Gandria Theme"
+"The Stone Garden"
 
-"Garden Theme"
-
-"Sewers of Gandria Theme"
+"The Garden of the Elder"
 
 ---
 
 -- Isa --
 
-"Ratcave"
+"The Rat Cave"
 
-"Howling Caverns"
+"The Howling Caverns"
 
-"House Theme"
-
-"Menu Theme"
+"The Hidden Library"
 
 "Khajag''s Theme"
 
@@ -226,7 +262,7 @@ Haab
 
 "Lighthouse Theme"
 
-"Swamp Theme"
+"Prison Theme"
 
 ---
 
@@ -353,27 +389,45 @@ Haab
 
 <<< Musig >>>
 
+---
+
+-- Matthew Harnage --
+
+"Cendric Title Theme"
+
+"Gandria (Cendric Main Theme)"
+
+"Clerics Theme"
+
+"Necromancer''s Theme"
+
+"Thieves Theme"
+
+"The Marshland"
+
+"The Castle of Gandria"
+
+"House Theme"
+
+---
+
 -- Susanne Aubert --
 
-"Meadows Theme"
+"The Meadows"
 
-"Gandria Theme"
+"The Stone Garden"
 
-"Garden Theme"
-
-"Sewers of Gandria Theme"
+"The Garden of the Elder"
 
 ---
 
 -- Isa --
 
-""Ratcave"
+"The Rat Cave"
 
-"Howling Caverns"
+"The Howling Caverns"
 
-"House Theme"
-
-"Menu Theme"
+"The Hidden Library"
 
 "Khajag''s Theme"
 
@@ -383,7 +437,7 @@ Haab
 
 "Lighthouse Theme"
 
-"Swamp Theme"
+"Prison Theme"
 
 ---
 

@@ -13,5 +13,7 @@ onLoot = function(W)
     if (W:isQuestState("yasha_sanctuary", "started")) then
         W:changeQuestState("yasha_sanctuary", "failed")
     end
+    
+    W:addConditionProgress("npc_yasha", "urn_open")
 end
 

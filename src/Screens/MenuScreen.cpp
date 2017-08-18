@@ -144,8 +144,6 @@ void MenuScreen::execOnEnter(const Screen* previousScreen) {
 	button->setText("Exit");
 	button->setOnClick(std::bind(&MenuScreen::onExit, this));
 	addObject(button);
-
-	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, true);
 }
 
 void MenuScreen::loadNewestSave() {

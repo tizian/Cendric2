@@ -2,7 +2,7 @@
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="142">
  <properties>
   <property name="dimming" value="0.3"/>
-  <property name="musicpath" value="res/music/house.ogg"/>
+  <property name="musicpath" value="res/music/castle.ogg"/>
   <property name="tilesetpath" value="res/map/gandriacastle/tileset_map_gandriacastle.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_gandriacastle" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">

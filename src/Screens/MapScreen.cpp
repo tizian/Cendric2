@@ -222,7 +222,6 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
 	m_sprite.setTexture(m_renderTexture2.getTexture());
 	m_foregroundLayerShader.setUniform("ambientLevel", m_currentMap.getWeather().ambientDimming);
-	m_foregroundLayerShader.setUniform("lightDimming", m_currentMap.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
 

@@ -117,7 +117,7 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 		m_data.questStates[id] = state;
 		return true;
 	}
-	g_logger->logError("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
+	g_logger->logWarning("CharacterCore", "Cannot change quest state for quest: " + id + ". Either the quest has already started (and cannot be started again) or the quest has not yet started and needs to be started first.");
 	return false;
 }
 

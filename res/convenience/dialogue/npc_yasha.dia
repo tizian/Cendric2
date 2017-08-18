@@ -36,12 +36,22 @@ npc.id:npc_yasha
 	[
 		# Link node, tag is next tag
 		tag:4
-		condition:DL:isQuestState("yasha_sanctuary", "completed")
+		condition:not DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "questions")
 		# translation: 
 		translation.tag:DL_Choice_YashaSanctuaryDone
 		translation.en:Can we have a peaceful talk, demon?
 		translation.de:Können wir uns friedlich unterhalten, Dämon?
 		translation.ch:Chömmer üs friedlich unterhalte, Dämon?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "questions")
+		# translation: 
+		translation.tag:DL_Choice_YashaSanctuaryDone
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -67,6 +77,7 @@ npc.id:npc_yasha
 	tag:4
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_yasha", "friendly")
+	trigger:DL:addConditionProgress("npc_yasha", "question")
 	# translation: 
 	translation.tag:DL_Yasha_YashaSanctuaryDone
 	translation.en:(Yasha stares at you) Hrr. You did traverse my temple without touching my sacred urns. No human did overcome the temptation to touching them before. 
@@ -87,6 +98,22 @@ npc.id:npc_yasha
 	translation.en:I will answer all of your questions, human.
 	translation.de:Ich werde all deine Fragen beantworten, Mensch.
 	translation.ch:Ich wird all dini Froge beantworte, Mensch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_yasha", "question")
+	trigger:DL:addConditionProgress("npc_yasha", "unfriendly")
+	# translation: 
+	translation.tag:DL_NPC_6
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

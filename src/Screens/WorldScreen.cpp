@@ -15,7 +15,7 @@ static const std::string vertexShader = \
 static const std::string lightFragmentShader = \
 "uniform sampler2D texture;" \
 "uniform float ambientLevel;" \
-"uniform float lightDimming;"
+"uniform float lightDimming;" \
 "" \
 "void main()" \
 "{" \

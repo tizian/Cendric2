@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="140">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="140">
  <properties>
   <property name="dimming" value="0.3"/>
-  <property name="musicpath" value="res/music/cave_try.ogg"/>
+  <property name="musicpath" value="res/music/prison.ogg"/>
   <property name="tilesetpath" value="res/map/gandriaprison/tileset_map_gandriaprison.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_gandriaprison" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">

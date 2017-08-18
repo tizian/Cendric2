@@ -165,8 +165,6 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	button->setText("Apply");
 	button->setOnClick(std::bind(&OptionsScreen::onApply, this));
 	addObject(button);
-
-	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, true);
 }
 
 void OptionsScreen::execOnExit(const Screen *nextScreen) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="196">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="196">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/storeroom/layer_inf.png"/>
   <property name="dimming" value="0.5"/>
-  <property name="musicpath" value="res/music/house.ogg"/>
+  <property name="musicpath" value="res/music/cave.ogg"/>
   <property name="observed" value=""/>
   <property name="tilesetpath" value="res/level/storeroom/tileset_level_storeroom.png"/>
  </properties>

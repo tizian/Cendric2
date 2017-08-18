@@ -34,7 +34,7 @@ void SplashScreen::execOnEnter(const Screen* previousScreen) {
 		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
 		WINDOW_HEIGHT - 18.f);
 
-	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, true);
+	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, false);
 }
 
 void SplashScreen::execUpdate(const sf::Time& frameTime) {

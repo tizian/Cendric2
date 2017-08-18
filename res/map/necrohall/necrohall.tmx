@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" nextobjectid="149">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" nextobjectid="149">
  <properties>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/music/house.ogg"/>
+  <property name="musicpath" value="res/music/necromancers_theme.ogg"/>
   <property name="tilesetpath" value="res/map/necrohall/tileset_map_necrohall.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_necrohall" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="361" columns="19">

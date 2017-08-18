@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="157">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="157">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/elderbackroom/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/music/meadows.ogg"/>
+  <property name="musicpath" value="res/music/hiddenlibrary.ogg"/>
   <property name="observed" value=""/>
   <property name="tilesetpath" value="res/level/elderbackroom/tileset_level_elderbackroom.png"/>
  </properties>

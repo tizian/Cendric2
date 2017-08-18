@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="109">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="109">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/janusroom/layer_inf.png,3.0,res/level/janusroom/layer_3.png,2.0,res/level/janusroom/layer_2.png"/>
   <property name="dimming" value="0.7"/>
-  <property name="musicpath" value="res/music/boss_khajag.ogg"/>
+  <property name="musicpath" value="res/music/cave.ogg"/>
   <property name="tilesetpath" value="res/level/janusroom/tileset_level_janusroom.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_janusroom" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">
