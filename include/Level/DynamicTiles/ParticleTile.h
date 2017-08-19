@@ -30,15 +30,18 @@ public:
 	void setPosition(const sf::Vector2f& pos) override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Particle; }
 
+public:
+	static particles::ColorGenerator* getWaterColorGenerator(const std::string& color);
+	static particles::ColorGenerator* getEmberColorGenerator(const std::string& color);
+	static particles::ColorGenerator* getFlameColorGenerator(const std::string& color);
+
 private:
 	bool m_isForegroundTile = true;
 	std::string m_color;
 	ParticleComponent* m_pc;
 	particles::AimedVelocityGenerator* m_velGen = nullptr;
 	sf::RenderTexture* getParticleTexture();
-	particles::ColorGenerator* getWaterColorGenerator(const std::string& color) const;
-	particles::ColorGenerator* getEmberColorGenerator(const std::string& color) const;
-	particles::ColorGenerator* getFlameColorGenerator(const std::string& color) const;
+	
 
 	void loadFlameParticles();
 	void loadWaterParticles();

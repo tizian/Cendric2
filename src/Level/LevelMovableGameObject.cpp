@@ -118,6 +118,7 @@ void LevelMovableGameObject::addAttributes(const sf::Time& duration, const Attri
 }
 
 void LevelMovableGameObject::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
+	if (!m_movingBehavior) return;
 	m_movingBehavior->calculateUnboundedVelocity(frameTime, nextVel);
 }
 
@@ -383,13 +384,13 @@ bool LevelMovableGameObject::isAlly() const {
 }
 
 float LevelMovableGameObject::getConfiguredMaxVelocityX() const {
-	return m_movingBehavior->getMaxVelocityX();
+	return m_movingBehavior ? m_movingBehavior->getMaxVelocityX() : 0.f;
 }
 
 float LevelMovableGameObject::getConfiguredMaxVelocityYDown() const {
-	return m_movingBehavior->getMaxVelocityYDown();
+	return m_movingBehavior ? m_movingBehavior->getMaxVelocityYDown() : 0.f;
 }
 
 float LevelMovableGameObject::getConfiguredMaxVelocityYUp() const {
-	return m_movingBehavior->getMaxVelocityYUp();
+	return m_movingBehavior ? m_movingBehavior->getMaxVelocityYUp() : 0.f;
 }

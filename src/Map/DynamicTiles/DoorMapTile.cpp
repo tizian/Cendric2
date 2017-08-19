@@ -107,8 +107,11 @@ void DoorMapTile::onRightClick() {
 
 		g_inputController->lockAction();
 	}
-	else {
+	else if (!m_keyItemId.empty()) {
 		m_screen->setNegativeTooltip("IsLockedKey");
+	}
+	else {
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 }
 

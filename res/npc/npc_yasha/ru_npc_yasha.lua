@@ -4,7 +4,7 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
-    if (W:isConditionFulfilled("boss", "yasha")) then
+    if (W:isConditionFulfilled("boss", "BossYasha") and W:isConditionFulfilled("npc_yasha", "unfriendly")) then
         R:setDisposed()
         return
     end
@@ -13,7 +13,7 @@ loadRoutine = function(R, W)
 	R:setTilePosition(12,13.5)
     R:setFacingDown()
     
-    if (not W:isConditionFulfilled("yasha", "talked")) then
+    if (not W:isConditionFulfilled("npc_yasha", "talked")) then
         R:setTalkingActive(true)	
     end
     R:setLooped(false)

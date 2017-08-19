@@ -1,4 +1,5 @@
 #include "Level/Enemies/YashaBoss.h"
+#include "Level/Enemies/YashaBossAdd.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/YashaBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
@@ -11,6 +12,11 @@
 #include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
+
+const sf::Vector2f YashaBoss::ROOM_MID = sf::Vector2f(650.f, 600.f);
+const float YashaBoss::FADE_TIME = 2.f;
+
+const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { sf::Vector2f(365.f, 485.f), sf::Vector2f(865.f, 485.f) };
 
 float YashaBoss::getConfiguredDistanceToHPBar() const {
 	return 80.f;
@@ -35,7 +41,7 @@ void YashaBoss::loadAttributes() {
 void YashaBoss::loadSpells() {
 	SpellData explosionSpell = SpellData::getSpellData(SpellID::WindGust);
 	explosionSpell.id = SpellID::Explosion;
-	explosionSpell.activeDuration = sf::seconds(6.0f);
+	explosionSpell.activeDuration = sf::seconds(3.f);
 	explosionSpell.damagePerSecond = 0;
 	explosionSpell.damageType = DamageType::VOID;
 	explosionSpell.cooldown = sf::seconds(10.f);
@@ -49,19 +55,46 @@ void YashaBoss::loadSpells() {
 
 	m_spellManager->addSpell(explosionSpell);
 
-	m_spellManager->setCurrentSpell(0); // chop
+	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
+	fireBallSpell.damage = 20;
+	fireBallSpell.damagePerSecond = 10;
+	fireBallSpell.duration = sf::seconds(2);
+	fireBallSpell.cooldown = sf::seconds(3.f);
+	fireBallSpell.speed = 300.f;
+	fireBallSpell.count = 2;
+	fireBallSpell.spellOffset = sf::Vector2f(90.f, 0.f);
+	fireBallSpell.fightingTime = sf::seconds(8 * 0.08f);
+	fireBallSpell.castingTime = sf::seconds(5 * 0.08f);
+	fireBallSpell.castingAnimation = GameObjectState::Casting2;
+	fireBallSpell.fightAnimation = GameObjectState::Fighting2;
+
+	m_spellManager->addSpell(fireBallSpell);
+
+	m_spellManager->setCurrentSpell(1); // fireball
 }
 
 void YashaBoss::handleAttackInput() {
-	if (m_spellManager->executeCurrentSpell(m_mainChar->getCenter())) {
-		//m_level->setAmbientDimming(1.f);
-		//m_level->setLightDimming(0.f);
+	switch (m_bossState)
+	{
+	case YashaBossState::Explosion:
+		m_spellManager->setCurrentSpell(0);
+		break;
+	case YashaBossState::Fireballing:
+		m_spellManager->setCurrentSpell(1);
+		break;
+	default:
+	case YashaBossState::GotoStartCat:
+	case YashaBossState::GotoExplosion:
+	case YashaBossState::StartCat:
+		return;
 	}
+
+	m_spellManager->executeCurrentSpell(m_mainChar);
 }
 
 void YashaBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
-	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 100.f, 90.f));
+	setSpriteOffset(sf::Vector2f(-100.f, -160.f));
 	const int width = 300;
 	const int height = 250;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -100,21 +133,45 @@ void YashaBoss::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
+	Animation* casting2Animation = new Animation(sf::seconds(0.08f));
+	casting2Animation->setSpriteSheet(tex);
+	for (int i = 0; i < 5; ++i) {
+		casting2Animation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+	}
+
+	addAnimation(GameObjectState::Casting2, casting2Animation);
+
+	Animation* fighting2Animation = new Animation(sf::seconds(0.08f));
+	fighting2Animation->setSpriteSheet(tex);
+	for (int i = 5; i < 13; ++i) {
+		fighting2Animation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+	}
+
+	addAnimation(GameObjectState::Fighting2, fighting2Animation);
+
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
 	loadDeathParticles();
 	loadComponents();
+
+	// init state
+	m_bossState = YashaBossState::Fireballing;
+	m_timeUntilNextState = sf::seconds(6.f);
+
+	// init eyes
+	m_eyes.setTexture(*tex);
+	m_eyes.setTextureRect(sf::IntRect(7 * width, 2 * height, width, height));
 }
 
 MovingBehavior* YashaBoss::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 
 	behavior = new YashaBossMovingBehavior(this);
-	behavior->setApproachingDistance(120.f);
-	behavior->setMaxVelocityYDown(200.f);
-	behavior->setMaxVelocityYUp(200.f);
+	behavior->setApproachingDistance(200.f);
+	behavior->setMaxVelocityYDown(100.f);
+	behavior->setMaxVelocityYUp(150.f);
 	behavior->setMaxVelocityX(200.f);
 	return behavior;
 }
@@ -127,10 +184,109 @@ AttackingBehavior* YashaBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+void YashaBoss::update(const sf::Time& frameTime) {
+	Boss::update(frameTime);
+	updateBossState(frameTime);
+	updateFading(frameTime);
+}
+
+void YashaBoss::renderAfterForeground(sf::RenderTarget& target) {
+	if (m_bossState == YashaBossState::StartCat || m_bossState == YashaBossState::Cat) {
+		target.draw(m_eyes);
+	}
+	Boss::renderAfterForeground(target);
+}
+
+void YashaBoss::updateBossState(const sf::Time& frameTime) {
+	updateTime(m_timeUntilNextState, frameTime);
+	if (m_timeUntilNextState > sf::Time::Zero) return;
+	switch (m_bossState)
+	{
+	case YashaBossState::Fireballing:
+		startBossState(rand() % 2 == 0 ? YashaBossState::GotoStartCat : YashaBossState::GotoExplosion);
+		break;
+	case YashaBossState::Explosion:
+		startBossState(YashaBossState::Fireballing);
+		break;
+	case YashaBossState::StartCat:
+		spawnCats();
+		startBossState(YashaBossState::Cat);
+		break;
+	default:
+	case YashaBossState::GotoStartCat:
+	case YashaBossState::GotoExplosion:
+	case YashaBossState::Cat:
+		break;
+	}
+}
+
+void YashaBoss::startBossState(YashaBossState state) {
+	m_bossState = state;
+	switch (m_bossState)
+	{
+	default:
+	case YashaBossState::GotoExplosion:
+	case YashaBossState::GotoStartCat:
+		m_movingBehavior->setCollisionsEnabled(false);
+		break;
+	case YashaBossState::Explosion:
+		m_timeUntilNextState = sf::seconds(6.f);
+		break;
+	case YashaBossState::Fireballing:
+		m_timeUntilNextState = sf::seconds(10.f);
+		m_movingBehavior->setCollisionsEnabled(true);
+		break;
+	case YashaBossState::StartCat:
+		m_fadeIn = false;
+		m_timeUntilNextState = sf::seconds(3.f);
+		break;
+	case YashaBossState::Cat:
+		m_fadeIn = true;
+		break;
+	}
+}
+
+void YashaBoss::spawnCats() {
+	int k = static_cast<int>(ADD_LOCATIONS.size());
+
+	std::vector<int> indices;
+	for (int i = 0; i < k; ++i) {
+		indices.push_back(i);
+	}
+
+	for (int i = 0; i < 2; ++i) {
+		int r = rand() % (k - i);
+		sf::Vector2f location = ADD_LOCATIONS[indices[r]];
+		indices.erase(indices.begin() + r);
+
+		auto add = dynamic_cast<YashaBossAdd*>(dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::YashaAdd, location, i));
+		add->setBoss(this);
+	}
+}
+
+void YashaBoss::updateFading(const sf::Time& frameTime) {
+	if (m_fadeIn && m_currentDimming == 0.f) return;
+	if (!m_fadeIn && m_currentDimming == 1.f) return;
+
+	if (m_fadeIn) {
+		m_currentDimming = std::max(0.f, m_currentDimming - frameTime.asSeconds() / FADE_TIME);
+	}
+	else {
+		m_currentDimming = std::min(1.f, m_currentDimming + frameTime.asSeconds() / FADE_TIME);
+	}
+
+	m_level->setAmbientDimming(0.5f + m_currentDimming * 0.5f);
+	m_level->setLightDimming(m_currentDimming);
+}
+
 void YashaBoss::setPosition(const sf::Vector2f& pos) {
 	Boss::setPosition(pos);
 	if (m_velGen) {
 		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - getBoundingBox()->height);
+	}
+	if (m_bossState == YashaBossState::StartCat || m_bossState == YashaBossState::Cat) {
+		m_eyes.setPosition(m_movingBehavior->isFacingRight() ? pos + m_spriteOffset : pos + m_spriteOffset);
+		m_eyes.setScale(m_movingBehavior->isFacingRight() ? 1.f : -1.f, m_eyes.getScale().y);
 	}
 }
 
@@ -152,7 +308,7 @@ void YashaBoss::loadComponents() {
 
 	// Generators
 	auto posGen = new particles::EllipseSpawner();
-	posGen->radius = sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.25f);
+	posGen->radius = sf::Vector2f(m_boundingBox.width, m_boundingBox.height * 0.25f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -187,7 +343,7 @@ void YashaBoss::loadComponents() {
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height),
-		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.height * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height),
+		sf::Vector2f(m_boundingBox.width * 4.f, m_boundingBox.height * 2.f), 0.6f), this));
 }
 

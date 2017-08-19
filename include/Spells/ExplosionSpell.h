@@ -5,6 +5,7 @@
 #include "Particles/ParticleSystem.h"
 
 class ParticleComponent;
+class LightComponent;
 
 // this spell is used by the boss: Yasha
 class ExplosionSpell final : public Spell {
@@ -19,7 +20,9 @@ public:
 private:
 	void loadComponents();
 	ParticleComponent* m_pc;
+	LightComponent* m_lc;
 
 	sf::Time m_particleTime;
+	sf::Time m_lightTime;
 	int m_iteration;
 };

@@ -22,6 +22,9 @@ public:
 	void resetMovingTarget();
 
 protected:
+	void gotoTarget(const sf::Vector2f& target, float approachingDistance, bool hold = false, bool exact = false);
+
+protected:
 	Enemy* m_enemy;
 	float m_approachingDistance = 0.f;
 

@@ -20,7 +20,7 @@ static const std::string lightFragmentShader = \
 "void main()" \
 "{" \
 "    vec4 pixel = texture2D(texture, gl_TexCoord[0].xy);" \
-"    float lightLevel = (1.0 - lightDimming) * max(0.0, ambientLevel - pixel.r);" \
+"    float lightLevel = max(lightDimming, max(0.0, ambientLevel - pixel.r));" \
 "    gl_FragColor = vec4(0.0, 0.0, 0.0, lightLevel);" \
 "}";
 

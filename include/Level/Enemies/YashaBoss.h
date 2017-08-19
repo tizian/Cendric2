@@ -9,14 +9,29 @@
 
 class ParticleComponent;
 class LightComponent;
+class YashaBossMovingBehavior;
+
+enum class YashaBossState {
+	Fireballing,
+	GotoStartCat,
+	StartCat,
+	Cat,
+	GotoExplosion,
+	Explosion
+};
 
 class YashaBoss final : public Boss {
+	friend class YashaBossMovingBehavior;
 public:
 	YashaBoss(const Level* level, Screen* screen);
+
+	void update(const sf::Time& frameTime) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 
 	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
 	void setPosition(const sf::Vector2f& pos) override;
+	
 
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Yasha; }
 
@@ -37,4 +52,20 @@ protected:
 	ParticleComponent* m_pc;
 	particles::AimedVelocityGenerator* m_velGen = nullptr;
 	void loadComponents();
+
+private:
+	void updateBossState(const sf::Time& frameTime);
+	YashaBossState m_bossState;
+	sf::Time m_timeUntilNextState;
+	bool m_fadeIn = true;
+	float m_currentDimming = 0.f;
+	void updateFading(const sf::Time& frameTime);
+	void startBossState(YashaBossState state);
+	void spawnCats();
+	sf::Sprite m_eyes;
+
+private:
+	static const sf::Vector2f ROOM_MID;
+	static const float FADE_TIME;
+	static const std::vector<sf::Vector2f> ADD_LOCATIONS;
 };

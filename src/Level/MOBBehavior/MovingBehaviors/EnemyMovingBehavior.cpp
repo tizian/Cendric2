@@ -15,38 +15,52 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 
 void EnemyMovingBehavior::handleMovementInput() {
 	if (m_movingTarget != nullptr) {
-		sf::Vector2f center = m_enemy->getCenter();
-
-		// the enemy tries to get near its target
-		if (m_movingTarget->x < center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
-			m_movingDirectionX = -1;
-		}
-		else if (m_movingTarget->x > center.x && std::abs(m_movingTarget->x - center.x) > 10.f) {
-			m_movingDirectionX = 1;
-		}
-		else {
-			m_movingDirectionX = 0;
-			m_enemy->setVelocity(sf::Vector2f(0.f , m_enemy->getVelocity().y));
-		}
-
-		if (m_movingTarget->y < center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
-			m_movingDirectionY = -1;
-		}
-		else if (m_movingTarget->y > center.y && std::abs(m_movingTarget->y - center.y) > 10.f) {
-			m_movingDirectionY = 1;
-		}
-		else {
-			m_movingDirectionY = 0;
-			if (!m_isWalkingBehavior) {
-				m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
-			}
-		}
+		gotoTarget(*m_movingTarget, 10.f, true, false);
 	}
 	else {
 		execHandleMovementInput();
 	}
 
 	handleTrueAcceleration();
+}
+
+void EnemyMovingBehavior::gotoTarget(const sf::Vector2f& target, float approachingDistance, bool hold, bool exact) {
+	sf::Vector2f center = m_enemy->getCenter();
+
+	// the enemy tries to get near its target
+	if (target.x < center.x && std::abs(target.x - center.x) > 10.f) {
+		m_movingDirectionX = -1;
+	}
+	else if (target.x > center.x && std::abs(target.x - center.x) > 10.f) {
+		m_movingDirectionX = 1;
+	}
+	else {
+		m_movingDirectionX = 0;
+		if (hold) {
+			m_enemy->setVelocity(sf::Vector2f(0.f, m_enemy->getVelocity().y));
+			m_enemy->setAccelerationX(0.f);
+		}
+		if (exact) {
+			m_enemy->setPositionX(target.x - (center.x - m_enemy->getPosition().x));
+		}
+	}
+
+	if (target.y < center.y && std::abs(target.y - center.y) > 10.f) {
+		m_movingDirectionY = -1;
+	}
+	else if (target.y > center.y && std::abs(target.y - center.y) > 10.f) {
+		m_movingDirectionY = 1;
+	}
+	else {
+		m_movingDirectionY = 0;
+		if (hold && !m_isWalkingBehavior || exact) {
+			m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
+			m_enemy->setAccelerationY(0.f);
+		}
+		if (exact) {
+			m_enemy->setPositionY(target.y - (center.y - m_enemy->getPosition().y));
+		}
+	}
 }
 
 void EnemyMovingBehavior::setApproachingDistance(float distance) {

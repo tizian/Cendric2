@@ -69,19 +69,16 @@ namespace particles
 		}
 	}
 
-	DamagingUpdater::DamagingUpdater(LevelMovableGameObject* mob, int damage, DamageType damageType) : m_mob(mob) {
-		m_damage = std::max(0, damage);
-		m_damageType = damageType;
+	KillingUpdater::KillingUpdater(LevelMovableGameObject* mob) : m_mob(mob) {
+		m_mob = mob;
 	}
 
-	void DamagingUpdater::update(ParticleData *data, float dt)  {
+	void KillingUpdater::update(ParticleData *data, float dt)  {
 		int endId = data->countAlive;
 
 		for (int i = 0; i < endId; ++i) {
 			if (m_mob->getBoundingBox()->contains(data->pos[i])) {
-				m_mob->addDamage(m_damage, m_damageType, false, false);
-				data->kill(i);
-				endId = data->countAlive;
+				m_mob->setDead();
 			}
 		}
 	}
@@ -106,6 +103,14 @@ namespace particles
 			float x = std::sqrt(rho) * std::cos(phi) * radius.x;
 			float y = std::sqrt(rho) * std::sin(phi) * radius.y;
 			data->pos[i] = { center.x + x, center.y + y };
+		}
+	}
+
+	void LineSpawner::spawn(ParticleData *data, int startId, int endId) {
+		const sf::Vector2f a = point2 - point1;
+		for (int i = startId; i < endId; ++i) {
+			float x = randomFloat(0.f, 1.f);
+			data->pos[i] = a * x + point1;
 		}
 	}
 }

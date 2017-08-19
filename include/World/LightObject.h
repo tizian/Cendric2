@@ -18,6 +18,7 @@ public:
 	virtual GameObjectType getConfiguredType() const override;
 
 	void setVisible(bool value);
+	void setBrightness(float brightness);
 
 protected:
 	void init();

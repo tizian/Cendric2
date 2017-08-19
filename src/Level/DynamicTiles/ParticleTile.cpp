@@ -211,7 +211,7 @@ sf::RenderTexture* ParticleTile::getParticleTexture() {
 		&dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 }
 
-particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::string& color) const {
+particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {
@@ -239,7 +239,7 @@ particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::strin
 	return colGen;
 }
 
-particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::string& color) const {
+particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {
@@ -267,7 +267,7 @@ particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::strin
 	return colGen;
 }
 
-particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::string& color) const {
+particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
 	if (color.compare("green") == 0) {

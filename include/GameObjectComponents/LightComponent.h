@@ -14,6 +14,7 @@ public:
 	void flipOffsetY(bool flipped);
 	void setVisible(bool visible);
 	void setPosition(const sf::Vector2f& pos) override;
+	void setBrightness(float brightness);
 
 protected:
 	LightObject* m_lightObject = nullptr;

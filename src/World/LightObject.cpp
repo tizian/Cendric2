@@ -52,3 +52,7 @@ void LightObject::setPosition(const sf::Vector2f& pos) {
 void LightObject::setVisible(bool value) {
 	m_isVisible = value;
 }
+
+void LightObject::setBrightness(float brightness) {
+	m_lightData.brightness = clamp(brightness, 0.f, 1.f);
+}

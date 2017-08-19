@@ -13,11 +13,14 @@ void ExplosionSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	loadComponents();
 
 	m_particleTime = sf::seconds(0.2f);
+	m_lightTime = bean.activeDuration;
 	m_iteration = 0;
 }
 
 void ExplosionSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
+	updateTime(m_lightTime, frameTime);
+	m_lc->setBrightness(m_data.activeDuration.asSeconds() / m_lightTime.asSeconds());
 
 	if (m_iteration == 3) return;
 
@@ -58,7 +61,8 @@ bool ExplosionSpell::getConfiguredRotateSprite() const {
 void ExplosionSpell::loadComponents() {
 	// light
 	LightData lightData(sf::Vector2f(m_boundingBox.height * 0.5f, m_boundingBox.height * 0.5f), 1000.f, 1.f);
-	addComponent(new LightComponent(lightData, this));
+	m_lc = new LightComponent(lightData, this);
+	addComponent(m_lc);
 
 	// particles
 	ParticleComponentData data;

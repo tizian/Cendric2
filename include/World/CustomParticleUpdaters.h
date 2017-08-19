@@ -51,17 +51,15 @@ namespace particles
 		float m_fraction;
 	};
 
-	class DamagingUpdater : public ParticleUpdater {
+	class KillingUpdater : public ParticleUpdater {
 	public:
-		DamagingUpdater(LevelMovableGameObject* mob, int damage, DamageType damageType);
-		~DamagingUpdater() {}
+		KillingUpdater(LevelMovableGameObject* mob);
+		~KillingUpdater() {}
 
 		void update(ParticleData *data, float dt) override;
 
 	public:
 		LevelMovableGameObject* m_mob;
-		int m_damage;
-		DamageType m_damageType;
 	};
 
 	class CollidingUpdater : public ParticleUpdater {
@@ -84,5 +82,17 @@ namespace particles
 
 	public:
 		sf::Vector2f radius;
+	};
+
+	class LineSpawner : public ParticleSpawner {
+	public:
+		LineSpawner() {}
+		~LineSpawner() {}
+
+		void spawn(ParticleData *data, int startId, int endId);
+
+	public:
+		sf::Vector2f point1;
+		sf::Vector2f point2;
 	};
 }

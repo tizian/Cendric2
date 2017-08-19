@@ -140,13 +140,13 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	m_mainChar->setInvincible(true);
 }
 
-Enemy* LevelScreen::spawnEnemy(EnemyID enemyId, const sf::Vector2f& position) {
+Enemy* LevelScreen::spawnEnemy(EnemyID enemyId, const sf::Vector2f& position, int skinNr) {
 	Enemy* enemy = ObjectFactory::Instance()->createEnemy(enemyId, getWorld(), this);
 	if (enemy == nullptr) {
 		g_logger->logError("LevelScreen", "Enemy could not be spawned, unknown id.");
 		return nullptr;
 	}
-	enemy->load(0);
+	enemy->load(skinNr);
 
 	enemy->setPosition(position);
 	enemy->setObjectID(-1);
