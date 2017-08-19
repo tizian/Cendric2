@@ -55,4 +55,5 @@ void LightObject::setVisible(bool value) {
 
 void LightObject::setBrightness(float brightness) {
 	m_lightData.brightness = clamp(brightness, 0.f, 1.f);
+	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
 }

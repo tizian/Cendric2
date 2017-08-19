@@ -26,7 +26,7 @@ void YashaBossAdd::update(const sf::Time& frameTime) {
 	auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
 	dir = dir / norm(dir);
 
-	m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x));
+	m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
 	m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
 
 	updateTime(m_hotDotTick, frameTime);
@@ -62,10 +62,7 @@ void YashaBossAdd::setBoss(LevelMovableGameObject* boss) {
 }
 
 void YashaBossAdd::loadAttributes() {
-	m_attributes.setHealth(2000);
-	m_attributes.resistanceIce = -20;
-	m_attributes.resistancePhysical = 50;
-	m_attributes.critical = 0;
+	m_attributes.setHealth(100);
 	m_attributes.calculateAttributes();
 }
 
@@ -171,8 +168,8 @@ void YashaBossAdd::loadComponents() {
 void YashaBossAdd::loadLineParticles() {
 	// line particles
 	ParticleComponentData data;
-	data.particleCount = 300;
-	data.emitRate = 300.f;
+	data.particleCount = 200;
+	data.emitRate = 400.f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
 	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
@@ -209,8 +206,8 @@ void YashaBossAdd::loadLineParticles() {
 	data.velGen = m_lineVelGen;
 
 	auto timeGen = new particles::TimeGenerator();
-	timeGen->minTime = 0.5f;
-	timeGen->maxTime = 1.0f;
+	timeGen->minTime = 0.4f;
+	timeGen->maxTime = 0.6f;
 	data.timeGen = timeGen;
 
 	m_spellPc = new ParticleComponent(data, this);

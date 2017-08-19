@@ -16,7 +16,16 @@ REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 const sf::Vector2f YashaBoss::ROOM_MID = sf::Vector2f(650.f, 600.f);
 const float YashaBoss::FADE_TIME = 2.f;
 
-const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { sf::Vector2f(365.f, 485.f), sf::Vector2f(865.f, 485.f) };
+const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { 
+	sf::Vector2f(365.f, 485.f), 
+	sf::Vector2f(865.f, 485.f), 
+	sf::Vector2f(415.f, 185.f),
+	sf::Vector2f(815.f, 185.f),
+	sf::Vector2f(65.f, 335.f),
+	sf::Vector2f(1165.f, 335.f),
+	sf::Vector2f(65.f, 685.f),
+	sf::Vector2f(1165.f, 685.f),
+};
 
 float YashaBoss::getConfiguredDistanceToHPBar() const {
 	return 80.f;
@@ -254,7 +263,7 @@ void YashaBoss::spawnCats() {
 		indices.push_back(i);
 	}
 
-	for (int i = 0; i < 2; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		int r = rand() % (k - i);
 		sf::Vector2f location = ADD_LOCATIONS[indices[r]];
 		indices.erase(indices.begin() + r);

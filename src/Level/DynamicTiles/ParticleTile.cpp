@@ -255,10 +255,16 @@ particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::strin
 		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
 	}
 	else if (color.compare("red") == 0) {
-		colGen->minStartCol = sf::Color(214, 64, 38);
-		colGen->maxStartCol = sf::Color(237, 102, 26);
-		colGen->minEndCol = sf::Color(163, 29, 6);
-		colGen->maxEndCol = sf::Color(155, 64, 0);
+		colGen->minStartCol = sf::Color(214, 64, 60);
+		colGen->maxStartCol = sf::Color(237, 102, 80);
+		colGen->minEndCol = sf::Color(163, 29, 30);
+		colGen->maxEndCol = sf::Color(155, 64, 60);
+	}
+	else if (color.compare("blue") == 0) {
+		colGen->minStartCol = sf::Color(85, 90, 150, 200);
+		colGen->maxStartCol = sf::Color(110, 120, 210, 200);
+		colGen->minEndCol = sf::Color(50, 60, 100, 100);
+		colGen->maxEndCol = sf::Color(80, 110, 160, 100);
 	}
 	else {
 		g_logger->logWarning("ParticleTile", "Unknown ember color: " + color);

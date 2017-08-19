@@ -19,7 +19,6 @@ void ExplosionSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 
 void ExplosionSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	updateTime(m_lightTime, frameTime);
 	m_lc->setBrightness(m_data.activeDuration.asSeconds() / m_lightTime.asSeconds());
 
 	if (m_iteration == 3) return;
@@ -106,5 +105,6 @@ void ExplosionSpell::loadComponents() {
 	m_pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
 	
 	m_pc->getParticleSystem()->addUpdater(new particles::CollidingUpdater(m_level));
+	m_pc->getParticleSystem()->addUpdater(new particles::KillingUpdater(m_mainChar));
 	addComponent(m_pc);
 }
