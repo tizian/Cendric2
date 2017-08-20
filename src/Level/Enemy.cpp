@@ -362,6 +362,13 @@ void Enemy::setScriptedBehavior(const std::string& luaPath) {
 	}
 }
 
+void Enemy::setDisposed() {
+	LevelMovableGameObject::setDisposed();
+	if (m_isTargetedEnemy) {
+		m_mainChar->getTargetManager().setTargetEnemy(nullptr);
+	}
+}
+
 void Enemy::setDead() {
 	if (m_isImmortal || m_mainChar->isDead()) return;
 	LevelMovableGameObject::setDead();

@@ -54,6 +54,7 @@ public:
 	void addQuestTarget(const std::pair<std::string, std::string>& questtarget);
 	void addQuestCondition(const std::pair<std::string, std::string>& questtarget);
 	void setDead() override;
+	void setDisposed() override;
 	void setScriptedBehavior(const std::string& luaPath);
 	void notifyKilled();
 	void notifyLooted();

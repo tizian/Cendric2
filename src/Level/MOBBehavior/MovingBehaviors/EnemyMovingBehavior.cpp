@@ -28,10 +28,10 @@ void EnemyMovingBehavior::gotoTarget(const sf::Vector2f& target, float approachi
 	sf::Vector2f center = m_enemy->getCenter();
 
 	// the enemy tries to get near its target
-	if (target.x < center.x && std::abs(target.x - center.x) > 10.f) {
+	if (target.x < center.x && std::abs(target.x - center.x) > approachingDistance) {
 		m_movingDirectionX = -1;
 	}
-	else if (target.x > center.x && std::abs(target.x - center.x) > 10.f) {
+	else if (target.x > center.x && std::abs(target.x - center.x) > approachingDistance) {
 		m_movingDirectionX = 1;
 	}
 	else {
@@ -45,10 +45,10 @@ void EnemyMovingBehavior::gotoTarget(const sf::Vector2f& target, float approachi
 		}
 	}
 
-	if (target.y < center.y && std::abs(target.y - center.y) > 10.f) {
+	if (target.y < center.y && std::abs(target.y - center.y) > approachingDistance) {
 		m_movingDirectionY = -1;
 	}
-	else if (target.y > center.y && std::abs(target.y - center.y) > 10.f) {
+	else if (target.y > center.y && std::abs(target.y - center.y) > approachingDistance) {
 		m_movingDirectionY = 1;
 	}
 	else {

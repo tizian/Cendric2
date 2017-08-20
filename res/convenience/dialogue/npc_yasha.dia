@@ -377,7 +377,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_DieNow
 	translation.en:That's enough. Die now.
 	translation.de:Das ist genug. Stirb jetzt. 
-	translation.ch:Das isch gnueg. Stirb ez.
+	translation.ch:Fertig luschtig. Stirb ez.
 	[
 		# Link node, tag is next tag
 		tag:14

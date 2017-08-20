@@ -3,6 +3,10 @@
 #include "global.h"
 #include "Spells/Spell.h"
 
+namespace particles {
+	class ColorGenerator;
+}
+
 class LeechSpell final : public Spell {
 public:
 	LeechSpell();
@@ -12,8 +16,11 @@ public:
 	void onOwnerDisposed() override;
 
 private:
+	void goReturn();
+	void loadComponents();
 	// is set to true when the spell is returning to its mob. It will follow the mob if this is true.
 	bool m_isReturning = false;
 	// this float is stored so it only needs to be calculated once.
 	float m_absVel = 0.f;
+	particles::ColorGenerator* m_colorGenerator;
 };

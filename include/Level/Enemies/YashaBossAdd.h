@@ -26,11 +26,13 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void setDead() override;
 	void setBoss(LevelMovableGameObject* boss);
+	void revive();
 
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {};
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {};
 
 	EnemyID getEnemyID() const override { return EnemyID::YashaAdd; }
+	int getMentalStrength() const override { return 4; }
 
 private:
 	std::string getSpritePath() const override;

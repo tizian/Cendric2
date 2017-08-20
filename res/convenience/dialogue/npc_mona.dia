@@ -55,7 +55,7 @@ npc.id:npc_mona
 		translation.tag:DL_Choice_UpperFloor
 		translation.en:How can I get to the upper floor?
 		translation.de:Wie komme ich in den oberen Stock?
-		translation.ch:We chumi in obere Stocke?
+		translation.ch:We chumi in obere Stock?
 	]
 	[
 		# Link node, tag is next tag

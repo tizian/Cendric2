@@ -35,10 +35,10 @@ void YashaBossAdd::update(const sf::Time& frameTime) {
 		switch (m_skinNr) {
 		case 0:
 		default:
-			m_mainChar->addDamage(1, DamageType::Fire, false, false);
+			m_mainChar->addDamage(10, DamageType::Fire, false, false);
 			break;
 		case 1:
-			m_boss->addHeal(1, false, false);
+			m_boss->addHeal(10, false, false);
 			break;
 		case 2:
 			m_boss->setInvincible(true);
@@ -49,12 +49,23 @@ void YashaBossAdd::update(const sf::Time& frameTime) {
 
 void YashaBossAdd::setDead() {
 	Enemy::setDead();
+	setState(GameObjectState::Dead, true);
 	m_pc->setEmitRate(0.f);
 	m_spellPc->setEmitRate(0.f);
 
 	if (m_skinNr == 2) {
 		m_boss->setInvincible(false);
 	}
+
+	m_isLooted = true;
+	m_interactComponent->setInteractable(false);
+}
+
+void YashaBossAdd::revive() {
+	m_attributes.currentHealthPoints = 100;
+	m_isDead = false;
+	setState(GameObjectState::Idle);
+	m_spellPc->setEmitRate(400.f);
 }
 
 void YashaBossAdd::setBoss(LevelMovableGameObject* boss) {
@@ -85,7 +96,9 @@ void YashaBossAdd::loadAnimation(int skinNr) {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(7 * width, height, width, height));
+	for (int i = 7; i < 11; ++i) {
+		deadAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

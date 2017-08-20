@@ -3,6 +3,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/YashaBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "Spells/YashaRaiseTheDeadSpell.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "GameObjectComponents/LightComponent.h"
@@ -15,6 +16,8 @@ REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 
 const sf::Vector2f YashaBoss::ROOM_MID = sf::Vector2f(650.f, 600.f);
 const float YashaBoss::FADE_TIME = 2.f;
+const float YashaBoss::REVIVE_CD = 10.f;
+const std::string YashaBoss::SPELL_TEX_PATH = "res/assets/spells/spritesheet_spell_raisethedead.png";
 
 const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { 
 	sf::Vector2f(365.f, 485.f), 
@@ -36,12 +39,12 @@ YashaBoss::YashaBoss(const Level* level, Screen* screen) :
 	Enemy(level, screen),
 	Boss(level, screen) {
 
-	m_isInvincible = true;
+	g_resourceManager->loadTexture(SPELL_TEX_PATH, ResourceType::Level);
 }
 
 void YashaBoss::loadAttributes() {
 	m_attributes.setHealth(2000);
-	m_attributes.resistanceIce = -20;
+	m_attributes.resistanceFire = 10000;
 	m_attributes.resistancePhysical = 50;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
@@ -212,7 +215,8 @@ void YashaBoss::updateBossState(const sf::Time& frameTime) {
 	switch (m_bossState)
 	{
 	case YashaBossState::Fireballing:
-		startBossState(rand() % 2 == 0 ? YashaBossState::GotoStartCat : YashaBossState::GotoExplosion);
+		startBossState(explosionCount >= 2 ? YashaBossState::GotoStartCat :
+			rand() % 2 == 0 ? YashaBossState::GotoStartCat : YashaBossState::GotoExplosion);
 		break;
 	case YashaBossState::Explosion:
 		startBossState(YashaBossState::Fireballing);
@@ -220,11 +224,14 @@ void YashaBoss::updateBossState(const sf::Time& frameTime) {
 	case YashaBossState::StartCat:
 		spawnCats();
 		startBossState(YashaBossState::Cat);
+		m_reviveCD = sf::seconds(REVIVE_CD);
+		break;
+	case YashaBossState::Cat:
+		checkRevive(frameTime);
 		break;
 	default:
 	case YashaBossState::GotoStartCat:
 	case YashaBossState::GotoExplosion:
-	case YashaBossState::Cat:
 		break;
 	}
 }
@@ -240,9 +247,10 @@ void YashaBoss::startBossState(YashaBossState state) {
 		break;
 	case YashaBossState::Explosion:
 		m_timeUntilNextState = sf::seconds(6.f);
+		explosionCount++;
 		break;
 	case YashaBossState::Fireballing:
-		m_timeUntilNextState = sf::seconds(10.f);
+		m_timeUntilNextState = sf::seconds(6.f);
 		m_movingBehavior->setCollisionsEnabled(true);
 		break;
 	case YashaBossState::StartCat:
@@ -250,6 +258,7 @@ void YashaBoss::startBossState(YashaBossState state) {
 		m_timeUntilNextState = sf::seconds(3.f);
 		break;
 	case YashaBossState::Cat:
+		explosionCount = 0;
 		m_fadeIn = true;
 		break;
 	}
@@ -270,7 +279,50 @@ void YashaBoss::spawnCats() {
 
 		auto add = dynamic_cast<YashaBossAdd*>(dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::YashaAdd, location, i));
 		add->setBoss(this);
+		m_cats.push_back(add);
 	}
+}
+
+void YashaBoss::checkRevive(const sf::Time& frameTime) {
+	std::vector<Enemy*> deadCats;
+	for (auto cat : m_cats) {
+		if (cat->isDead()) {
+			deadCats.push_back(cat);
+		}
+	}
+	if (deadCats.empty()) return;
+	if (deadCats.size() == m_cats.size()) {
+		clearSpells(true);
+		for (auto cat : m_cats) {
+			cat->setDisposed();
+		}
+		m_cats.clear();
+		startBossState(YashaBossState::Fireballing);
+		return;
+	}
+
+	updateTime(m_reviveCD, frameTime);
+	if (m_reviveCD > sf::Time::Zero) return;
+
+	// revive a random cat. or at least try to.
+	Enemy* target = deadCats.at(rand() % deadCats.size());
+	SpellData data = SpellData::getSpellData(SpellID::RaiseTheDead);
+	data.damageType = DamageType::Shadow;
+	data.duration = sf::seconds(2.f);
+	data.damage = 20;
+	data.damagePerSecond = 10;
+	data.range = 1000.f;
+	data.activeDuration = sf::seconds(10.f);
+	data.isColliding = false;
+	data.spellOffset = sf::Vector2f(0.f, 0.f);
+	data.skinNr = 1;
+	data.isAlly = false;
+
+	YashaRaiseTheDeadSpell* spell = new YashaRaiseTheDeadSpell();
+	spell->load(data, this, target->getCenter());
+	m_screen->addObject(spell);
+
+	m_reviveCD = sf::seconds(REVIVE_CD);
 }
 
 void YashaBoss::updateFading(const sf::Time& frameTime) {
@@ -294,7 +346,7 @@ void YashaBoss::setPosition(const sf::Vector2f& pos) {
 		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - getBoundingBox()->height);
 	}
 	if (m_bossState == YashaBossState::StartCat || m_bossState == YashaBossState::Cat) {
-		m_eyes.setPosition(m_movingBehavior->isFacingRight() ? pos + m_spriteOffset : pos + m_spriteOffset);
+		m_eyes.setPosition(m_movingBehavior->isFacingRight() ? pos + m_spriteOffset : pos + m_spriteOffset + sf::Vector2f(300.f, 0.f));
 		m_eyes.setScale(m_movingBehavior->isFacingRight() ? 1.f : -1.f, m_eyes.getScale().y);
 	}
 }

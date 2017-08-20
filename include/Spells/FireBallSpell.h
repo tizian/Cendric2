@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "Spells/Spell.h"
-#include "World/LightObject.h"
 
 /*
 the following skins are available:

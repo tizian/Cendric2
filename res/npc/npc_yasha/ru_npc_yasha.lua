@@ -4,7 +4,7 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
-    if (W:isConditionFulfilled("boss", "BossYasha") and W:isConditionFulfilled("npc_yasha", "unfriendly")) then
+    if (W:isConditionFulfilled("boss", "BossYasha") and not W:isConditionFulfilled("npc_yasha", "friendly")) then
         R:setDisposed()
         return
     end

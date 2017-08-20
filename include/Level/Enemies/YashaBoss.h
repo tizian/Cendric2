@@ -31,7 +31,6 @@ public:
 	float getConfiguredDistanceToHPBar() const override;
 	sf::Time getConfiguredWaitingTime() const override;
 	void setPosition(const sf::Vector2f& pos) override;
-	
 
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Yasha; }
 
@@ -57,15 +56,21 @@ private:
 	void updateBossState(const sf::Time& frameTime);
 	YashaBossState m_bossState;
 	sf::Time m_timeUntilNextState;
+	sf::Time m_reviveCD;
 	bool m_fadeIn = true;
 	float m_currentDimming = 0.f;
 	void updateFading(const sf::Time& frameTime);
 	void startBossState(YashaBossState state);
+	std::vector<Enemy*> m_cats;
 	void spawnCats();
+	void checkRevive(const sf::Time& frameTime);
 	sf::Sprite m_eyes;
+	int explosionCount = 0;
 
 private:
 	static const sf::Vector2f ROOM_MID;
 	static const float FADE_TIME;
+	static const float REVIVE_CD;
 	static const std::vector<sf::Vector2f> ADD_LOCATIONS;
+	static const std::string SPELL_TEX_PATH;
 };

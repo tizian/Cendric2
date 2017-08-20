@@ -626,7 +626,6 @@ SpellData SpellData::getLeechSpellData() {
 	leech.spellType = SpellType::Necromancy;
 	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
 
-	leech.spritesheetPath = "res/assets/spells/spritesheet_spell_fear.png";
 	leech.cooldown = sf::seconds(3);
 	leech.boundingBox = sf::FloatRect(0, 0, 10, 10);
 	leech.divergenceAngle = 0.2f;
@@ -869,6 +868,7 @@ SpellData SpellData::getRaiseTheDeadSpellData() {
 	raiseTheDead.id = SpellID::RaiseTheDead;
 	raiseTheDead.spellType = SpellType::Necromancy;
 
+	raiseTheDead.spritesheetPath = "res/assets/spells/spritesheet_spell_raisethedead.png";
 	raiseTheDead.iconTextureRect = sf::IntRect(100, 100, 50, 50);
 	raiseTheDead.cooldown = sf::seconds(10);
 	raiseTheDead.boundingBox = sf::FloatRect(0, 0, 10, 10);
