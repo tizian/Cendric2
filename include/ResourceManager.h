@@ -57,6 +57,8 @@ public:
 	// the scale is the volume scale, has to range from 0 to 1.f.
 	void playSound(const std::string& filename, bool loop = false, float scale = 1.f);
 	void playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop = false, float scale = 1.f);
+	void playSound(const std::string& filename, const sf::Vector2f& source, const sf::Vector2f& listener, bool loop = false);
+	void playSound(sf::Sound& sound, const std::string& filename, const sf::Vector2f& source, const sf::Vector2f& listener, bool force, bool loop = false);
 	// streams a music and applies the current configuration to it (sound on/off, volume), starts and loops it.
 	// if the music is already playing, it won't do anything.
 	// if another music is playing, it will stop that fade in the new one.

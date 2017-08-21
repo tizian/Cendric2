@@ -23,6 +23,7 @@ protected:
 	std::string getSpritePath() const override;
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
+	sf::Time executeDefaultFightAnimation(bool isBlocking, int times = 1) override;
 	void handleAttackInput();
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
 	void loadAttributes() override;
@@ -32,4 +33,7 @@ protected:
 
 private:
 	sf::Time m_timeToSpeech = sf::Time::Zero;
+	sf::Time m_pickCooldown = sf::Time::Zero;
+	int m_pickCount = 0;
+	void updatePicking(const sf::Time& frameTime);
 };

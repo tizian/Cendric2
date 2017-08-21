@@ -9,7 +9,7 @@ public:
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(LevelMovableGameObject* mob) override;
-	void onHit(Spell* spell) override;
+	void onHit(Spell* spell) override {};
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Damaging; }
 
 private:

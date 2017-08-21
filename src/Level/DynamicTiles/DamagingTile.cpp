@@ -32,14 +32,22 @@ void DamagingTile::loadAnimation(int skinNr) {
 }
 
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
-	mob->setDead();
-}
-
-void DamagingTile::onHit(Spell* spell) {
-	if (!m_isDivine || spell->getSpellID() != SpellID::DivineShield) {
+	if (!m_isDivine) {
+		mob->setDead();
 		return;
 	}
-	setDisposed();
+
+	auto gos = *m_screen->getObjects(GameObjectType::_Spell);
+	for (auto go : gos) {
+		Spell* spell = dynamic_cast<Spell*>(go);
+		if (spell && spell->getSpellID() == SpellID::DivineShield &&
+			spell->getBoundingBox()->contains(mob->getCenter())) {
+			setDisposed();
+			return;
+		}
+	}
+
+	mob->setDead();
 }
 
 std::string DamagingTile::getSpritePath() const {

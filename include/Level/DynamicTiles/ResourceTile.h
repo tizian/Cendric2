@@ -19,6 +19,12 @@ public:
 	
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Resource; }
 
+public:
+	static const std::string PICK_SOUND_PATH;
+
+protected:
+	std::string getSoundPath() const override { return PICK_SOUND_PATH;  }
+
 private:
 	void initializeResource(int skinNr);
 	std::string getSpritePath() const override;
@@ -37,4 +43,7 @@ private:
 	
 	// the resource can only be gotten if the main char is in this range
 	const float PICKUP_RANGE = 100.f;
+	sf::Time m_pickCooldown = sf::Time::Zero;
+	int m_pickCount = 0;
+	void updatePicking(const sf::Time& frameTime);
 };

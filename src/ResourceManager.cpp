@@ -297,12 +297,28 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, b
 
 	// don't play the sound if it's already playing and we're not forcing
 	if (!force && sound.getStatus() == sf::SoundSource::Status::Playing) return;
-	
+
 	sound.setBuffer(*getSoundBuffer(filename));
 	scale = clamp(scale, 0.f, 1.f);
 	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
 	sound.setLoop(loop);
 	sound.play();
+}
+
+void ResourceManager::playSound(const std::string& filename, const sf::Vector2f& source, const sf::Vector2f& listener, bool loop) {
+	float distance = dist(source, listener);
+	if (distance <= WINDOW_WIDTH) {
+		float scale = 1.f - distance / WINDOW_WIDTH;
+		playSound(filename, loop, scale);
+	}
+}
+
+void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, const sf::Vector2f& source, const sf::Vector2f& listener, bool force, bool loop) {
+	float distance = dist(source, listener);
+	if (distance <= WINDOW_WIDTH) {
+		float scale = 1.f - distance / WINDOW_WIDTH;
+		g_resourceManager->playSound(sound, filename, force, loop, scale);
+	}
 }
 
 void ResourceManager::playMusic(const std::string& filename, bool looping) {

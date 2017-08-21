@@ -8,6 +8,8 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Resource, ResourceTile)
 
+const std::string ResourceTile::PICK_SOUND_PATH = "res/sound/weapon/pickaxe.ogg";
+
 bool ResourceTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 
@@ -20,6 +22,7 @@ bool ResourceTile::init(const LevelTileProperties& properties) {
 
 void ResourceTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
+	updatePicking(frameTime);
 	if (m_lootTime == sf::Time::Zero) return;
 
 	updateTime(m_lootTime, frameTime);
@@ -103,7 +106,9 @@ void ResourceTile::loot() {
 		return;
 	}
 	// loot, set blocking for that time
-	m_lootTime = m_mainChar->executeDefaultFightAnimation(true, 3);
+	m_pickCount = 3;
+	m_pickCooldown = sf::Time::Zero;
+	m_lootTime = m_mainChar->executeDefaultFightAnimation(true, m_pickCount);
 	// remove the current weapon visualization 
 	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
 		LevelEquipment* levelEquipment = dynamic_cast<LevelEquipment*>(go);
@@ -143,4 +148,15 @@ void ResourceTile::onRightClick() {
 
 std::string ResourceTile::getSpritePath() const {
 	return "res/assets/level_dynamic_tiles/spritesheet_tiles_resource.png";
+}
+
+void ResourceTile::updatePicking(const sf::Time& frameTime) {
+	if (m_pickCount == 0) return;
+	updateTime(m_pickCooldown, frameTime);
+	if (m_pickCooldown > sf::Time::Zero) {
+		return;
+	}
+	m_pickCooldown = sf::milliseconds(5 * 70);
+	g_resourceManager->playSound(PICK_SOUND_PATH, false);
+	m_pickCount--;
 }

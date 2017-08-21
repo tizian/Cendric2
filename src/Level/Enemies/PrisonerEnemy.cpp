@@ -3,6 +3,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/NeutralWalkingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Level/DynamicTiles/ResourceTile.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Prisoner, PrisonerEnemy)
@@ -15,6 +16,7 @@ PrisonerEnemy::PrisonerEnemy(const Level* level, Screen* screen) :
 void PrisonerEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 	updateTime(m_timeToSpeech, frameTime);
+	updatePicking(frameTime);
 }
 
 void PrisonerEnemy::loadAttributes() {
@@ -32,6 +34,17 @@ void PrisonerEnemy::loadSpells() {
 
 	m_spellManager->addSpell(chop);
 	m_spellManager->setCurrentSpell(0);
+}
+
+void PrisonerEnemy::updatePicking(const sf::Time& frameTime) {
+	if (m_pickCount == 0) return;
+	updateTime(m_pickCooldown, frameTime);
+	if (m_pickCooldown > sf::Time::Zero) {
+		return;
+	}
+	m_pickCooldown = sf::milliseconds(5 * 70);
+	g_resourceManager->playSound(ResourceTile::PICK_SOUND_PATH, getCenter(), m_mainChar->getPosition(), false);
+	m_pickCount--;
 }
 
 float PrisonerEnemy::getConfiguredDistanceToHPBar() const {
@@ -108,6 +121,12 @@ AttackingBehavior* PrisonerEnemy::createAttackingBehavior(bool asAlly) {
 	behavior->setAggroRange(20.f);
 	behavior->setAttackInput(std::bind(&PrisonerEnemy::handleAttackInput, this));
 	return behavior;
+}
+
+sf::Time PrisonerEnemy::executeDefaultFightAnimation(bool isBlocking, int times) {
+	m_pickCooldown = sf::Time::Zero;
+	m_pickCount = times;
+	return Enemy::executeDefaultFightAnimation(isBlocking, times);
 }
 
 std::string PrisonerEnemy::getSpritePath() const {
