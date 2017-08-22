@@ -36,6 +36,7 @@ public:
 
 private:
 	std::string getSpritePath() const override;
+	std::string getDeathSoundPath() const override;
 	void handleAttackInput();
 	void loadAttributes() override;
 	void loadComponents();
@@ -49,4 +50,8 @@ private:
 	particles::AngledVelocityGenerator* m_lineVelGen;
 	LevelMovableGameObject* m_boss;
 	sf::Time m_hotDotTick = sf::Time::Zero;
+	sf::Time m_levelUpTick = sf::Time::Zero;
+	int m_level = 0;
+
+	static const sf::Time LEVEL_UP_TIME;
 };

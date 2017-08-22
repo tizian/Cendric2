@@ -11,6 +11,8 @@
 
 REGISTER_ENEMY(EnemyID::YashaAdd, YashaBossAdd)
 
+const sf::Time YashaBossAdd::LEVEL_UP_TIME = sf::seconds(10.f);
+
 YashaBossAdd::YashaBossAdd(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
@@ -30,15 +32,22 @@ void YashaBossAdd::update(const sf::Time& frameTime) {
 	m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
 
 	updateTime(m_hotDotTick, frameTime);
+	updateTime(m_levelUpTick, frameTime);
+
+	if (m_levelUpTick == sf::Time::Zero) {
+		m_levelUpTick = LEVEL_UP_TIME;
+		m_level++;
+	}
+
 	if (m_hotDotTick == sf::Time::Zero) {
 		m_hotDotTick = sf::seconds(1.f);
 		switch (m_skinNr) {
 		case 0:
 		default:
-			m_mainChar->addDamage(10, DamageType::Fire, false, false);
+			m_mainChar->addDamage(m_level * 5, DamageType::Fire, false, false);
 			break;
 		case 1:
-			m_boss->addHeal(10, false, false);
+			m_boss->addHeal(m_level * 5, false, false);
 			break;
 		case 2:
 			m_boss->setInvincible(true);
@@ -66,6 +75,8 @@ void YashaBossAdd::revive() {
 	m_isDead = false;
 	setState(GameObjectState::Idle);
 	m_spellPc->setEmitRate(400.f);
+	m_level = 0;
+	m_levelUpTick = sf::Time::Zero;
 }
 
 void YashaBossAdd::setBoss(LevelMovableGameObject* boss) {
@@ -226,5 +237,9 @@ void YashaBossAdd::loadLineParticles() {
 	m_spellPc = new ParticleComponent(data, this);
 	m_spellPc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.f));
 	addComponent(m_spellPc);
+}
+
+std::string YashaBossAdd::getDeathSoundPath() const {
+	return "res/sound/mob/yashaadd_death.ogg";
 }
 

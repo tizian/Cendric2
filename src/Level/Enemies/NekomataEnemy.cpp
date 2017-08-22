@@ -215,3 +215,7 @@ std::string NekomataEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_nekomata.png";
 }
 
+std::string NekomataEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/nekomata_death.ogg";
+}
+

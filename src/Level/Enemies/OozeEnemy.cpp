@@ -132,3 +132,7 @@ sf::Time OozeEnemy::getConfiguredWaitingTime() const {
 sf::Time OozeEnemy::getConfiguredChasingTime() const {
 	return sf::seconds(static_cast<float>(2));
 }
+
+std::string OozeEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/slime_death.ogg";
+}
