@@ -30,6 +30,6 @@ reputation =
 
 fraction = "necromancer"
 
-multiplier = 1.5
+multiplier = 1.0
 
 

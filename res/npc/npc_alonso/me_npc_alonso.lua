@@ -23,6 +23,6 @@ wares =
 	{"fo_ham", 2},
 }
 
-multiplier = 2.0
+multiplier = 1.2
 
 

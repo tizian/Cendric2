@@ -46,6 +46,9 @@ loadDialogue = function(DL)
 	if (DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)) then 
 		DL:addCraftingChoice(9, "DL_Choice_NekomataHead") -- eq_nekomatahead,mi_neko_fur,1,mi_neko_teeth,6,gold,100
 	end
+	if (DL:hasItem("mi_wolf_fur", 1)) then 
+		DL:addCraftingChoice(10, "DL_Choice_WolfBonnet") -- eq_wolfbonnet,mi_wolf_fur,3,gold,40
+	end
 	DL:addChoice(-2, "DL_Choice_NothingToCraft") -- I'll come back later. [BACK]
 	DL:addNode()
 
@@ -68,6 +71,14 @@ loadDialogue = function(DL)
 	if (DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)) then 
 
 		DL:createNPCNode(9, -2, "DL_Zeff_NekomataHead") -- There you go. A very special headpiece, indeed.
+		DL:gotoNode(5)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("mi_wolf_fur", 1)) then 
+
+		DL:createNPCNode(10, -2, "DL_Zeff_Wolfbonnet") -- Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
 		DL:gotoNode(5)
 		DL:addNode()
 

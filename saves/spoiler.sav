@@ -85,11 +85,14 @@ item.id:eq_scalearmor,1
 item.id:eq_shadowcloak,1
 item.id:eq_startalisman,1
 item.id:eq_stevenhelmet,1
+item.id:eq_sunring,1
+item.id:eq_swordpendant,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
 item.id:eq_wizardhatice,1
 item.id:eq_wizardhatlight,1
 item.id:eq_wizardhatshadow,1
+item.id:eq_wolfbonnet,1
 item.id:fo_beer,1
 item.id:fo_bread,2
 item.id:fo_caveberry,2
@@ -154,6 +157,7 @@ item.id:mi_wolf_fur,1
 item.id:mi_dragonskull,1
 item.id:mi_janusglaive,1
 item.id:mi_portstone,1
+item.id:mi_yashafangs,1
 item.id:pe_elixirfire,1
 item.id:pe_elixirice,1
 item.id:pe_elixirlight,1

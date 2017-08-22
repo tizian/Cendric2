@@ -1,12 +1,12 @@
 # time played, in seconds
-time.played:33691
+time.played:33736
 savegame.name:yasha_sanct
-savegame.date:1502221389
+savegame.date:1503433785
 level.id:res/level/yashatemple/yashatemple.tmx
 level.position:2360.000000,160.000000
 is.in.level:0
 map.id:res/map/yashasanctuary/yashasanctuary.tmx
-map.position:615.000000,1010.000000
+map.position:615.000000,998.249329
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
@@ -23,21 +23,21 @@ item.id:do_eleletter,1
 item.id:do_notekoray,1
 item.id:do_notemarcus,1
 item.id:do_veliusletter,1
-item.id:eq_aquamarinering,1
+item.id:eq_back_divinet1,1
 item.id:eq_bandana,1
 item.id:eq_bloodstone,1
+item.id:eq_body_divinet1,1
 item.id:eq_defaultarmor,1
 item.id:eq_eyeofthemoon,1
-item.id:eq_fireratscarf,1
+item.id:eq_head_divinet1,1
 item.id:eq_huntershat,1
 item.id:eq_icearmor,1
-item.id:eq_icehat,1
 item.id:eq_ironring,1
-item.id:eq_lavaarmor,1
 item.id:eq_lavaback,1
 item.id:eq_lavahead,1
 item.id:eq_leatherarmor,1
 item.id:eq_mercenarybandana,1
+item.id:eq_rubyring,1
 item.id:eq_stevenhelmet,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
@@ -101,26 +101,25 @@ item.id:we_firestaff,1
 item.id:we_firesword,1
 item.id:we_hawthorn,1
 item.id:we_inconspicuousdagger,1
+item.id:we_lightningpike,1
 item.id:we_ordermace,1
 item.id:we_pickaxe,3
 item.id:we_simplesword,1
-item.id:we_tearstaff,1
 item.id:we_torch,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:3,1,2,3,1,4,1
-equipped.spellslot:4,5,2,6,1
-equipped.spellslot:5,5,2,3,1
-equipped.spellslot:18,2,2,5,2
+equipped.spellslot:2,1,1,4,1
+equipped.spellslot:3,1,1,4,1
+equipped.spellslot:18,5,1
 # equipment:
-equipped.back:eq_back_divinet1
-equipped.body:eq_body_divinet1
-equipped.head:eq_head_divinet1
+equipped.back:eq_fireratscarf
+equipped.body:eq_lavaarmor
+equipped.head:eq_icehat
 equipped.neck:eq_silvernecklace
-equipped.ring1:eq_rubyring
+equipped.ring1:eq_aquamarinering
 equipped.ring2:eq_holyring
-equipped.weapon:we_lightningpike
+equipped.weapon:we_tearstaff
 # weapon configurations:
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;

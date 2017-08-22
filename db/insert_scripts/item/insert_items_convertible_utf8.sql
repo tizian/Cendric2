@@ -11,7 +11,7 @@ INSERT INTO item_convertible (item_id, convertible_item_id, probability) values 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_smallpouch', 'item', 'Small Pouch','Schmaler Geldbeutel','Schmale Geldbüütel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_smallpouch', 'item_desc', 'A pouch with a few jingling coins.','Ein paar Münzen klimpern darin.','Es paar Münze klimperet drin.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_smallpouch', 'convertible', 450, 150, 5);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_smallpouch', 'convertible', 450, 150, 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('co_smallpouch', -15, -25, 30, 25);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('co_smallpouch', 1, 400, 100, 50, 50);
 INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) values ('co_smallpouch', 'gold', 25);
@@ -20,7 +20,7 @@ INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item', 'Leather Pouch','Lederbeutel','Lederbüütel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_mediumpouch', 'item_desc', 'The pouch is filled with coins.','Der Beutel ist voller Münzen.','De Büütel isch gfüllt mit Münze.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_mediumpouch', 'convertible', 450, 200, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_mediumpouch', 'convertible', 450, 200, 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('co_mediumpouch', -15, -25, 30, 25);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('co_mediumpouch', 1, 400, 150, 50, 50);
 INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) values ('co_mediumpouch', 'gold', 50);
@@ -29,7 +29,7 @@ INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item', 'Big Pouch','Praller Geldbeutel','Pralle Geldbüütel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_bigpouch', 'item_desc', 'The pouch is bulging with golden coins.','Der Beutel ist prall gefüllt mit goldenen Münzen.','De Büütel isch prall gfüllt mit goldige Münze.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_bigpouch', 'convertible', 450, 250, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_bigpouch', 'convertible', 450, 250, 40);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('co_bigpouch', -10, -25, 40, 25);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('co_bigpouch', 1, 400, 200, 50, 50);
 INSERT INTO item_convertible (item_id, convertible_item_id, convertible_amount) values ('co_bigpouch', 'gold', 100);

@@ -242,7 +242,6 @@ void LevelMainCharacter::setDead() {
 	LevelMovableGameObject::setDead();
 	m_deathPc->setVisible(true);
 	setInputLock();
-	m_animatedSprite.stop();
 	m_state = GameObjectState::Dead;
 }
 
@@ -364,6 +363,15 @@ std::string LevelMainCharacter::getDeathSoundPath() const {
 void LevelMainCharacter::setInputLock() {
 	m_isInputLock = true;
 	m_movingBehavior->setEnabled(false);
+	m_animatedSprite.stop();
+	m_animatedSprite.setLooped(false);
+
+	auto gos = *m_screen->getObjects(GameObjectType::_Equipment);
+	for (auto go : gos) {
+		LevelEquipment* le = dynamic_cast<LevelEquipment*>(go);
+		if (!le) continue;
+		le->lockAnimation(true);
+	}
 }
 
 void LevelMainCharacter::setJumpLock() {

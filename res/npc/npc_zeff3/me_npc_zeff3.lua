@@ -7,6 +7,6 @@ wares =
 	{"fo_sausage", 1},
 }
 
-multiplier = 1.5
+multiplier = 1.0
 
 

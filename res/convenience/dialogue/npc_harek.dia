@@ -386,7 +386,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_corrupt_stone_fire", 1)
 		# translation: 
 		translation.tag:DL_Choice_LavaArmor
-		translation.en:eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,100
+		translation.en:eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,120
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -397,7 +397,18 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_corrupt_stone_ice", 1)
 		# translation: 
 		translation.tag:DL_Choice_CairnArmor
-		translation.en:eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,100
+		translation.en:eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,120
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:26
+		condition:DL:hasItem("mi_yashafangs", 1)
+		# translation: 
+		translation.tag:DL_Choice_FireGlaive
+		translation.en:we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,200
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -511,6 +522,35 @@ npc.id:npc_harek
 	translation.en:Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
 	translation.de:Magie-infundierte Steine von einem Cairn Geist! Diese geben eine schöne, eisresistente Rüstung ab.
 	translation.ch:Magie-infundierti Stei vomne Cairn Geischt! Die gend e schöni, iisresistenti Rüstig.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_FireGlaive
+	translation.en:Huge demonic fangs! And just look at the magical power flowing through them. This will make a powerful weapon.
+	translation.de:Riesige dämonische Fangzähne! Durchtränkt mit magischer Energie. Das gibt eine mächtige Waffe ab.
+	translation.ch:Riesigi dämonischi Fangzäh! Durchtränkt mit magischer Energie. Das git e mächtigi Waffe ab.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:gotoNode(17)
+	# translation: 
+	translation.tag:DL_Harek_FireGlaive2
+	translation.en:I've never worked with something like this before. A truly amazing material.
+	translation.de:Mit sowas habe ich noch nie gearbeitet. Ein wirklich prächtiges Material.
+	translation.ch:Mit sowas hani nonie gschaffet. Es würkli prächtigs Material.
 	[
 		# Link node, tag is next tag
 		tag:-2

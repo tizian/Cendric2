@@ -2,7 +2,7 @@
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item', 'Golden goblet','Goldener Pokal','Goldige Pokal');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_goldengoblet', 'item_desc', 'A golden goblet, some merchants might pay a lot for this.','Ein goldener Pokal, manche Händler würden viel dafür bezahlen.','En goldige Pokal, gwüssi Händler zahled sicher vil defür.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_goldengoblet', 'misc', 0, 50, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_goldengoblet', 'misc', 0, 50, 50);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_goldengoblet', -10, -10, 30, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_goldengoblet', 1, 50, 0, 50, 50);
 
@@ -10,7 +10,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item', 'Silver Plate','Silberner Teller','Silbrige Teller');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item_desc', 'I can see my reflection in the glossy surface.','Ich kann mich darin spiegeln.','Ich chan mich drin spiegle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_silverplate', 'misc', 250, 200, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_silverplate', 'misc', 250, 200, 30);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_silverplate', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_silverplate', 1, 50, 150, 50, 50);
 
@@ -18,7 +18,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item', 'Candleholder','Kerzenleuchter','Cherzeständer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_candleholder', 'item_desc', 'Made of silver, must be worth something.','Aus Silber gefertigt, kann man sicher gut verkaufen.','Us Silber gmacht, cha me sicher guet verkaufe.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_candleholder', 'misc', 300, 200, 18);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_candleholder', 'misc', 300, 200, 40);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_candleholder', 0, -40, 50, 65);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_candleholder', 1, 300, 0, 50, 100);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_candleholder', 2, 350, 0, 50, 100);
@@ -29,7 +29,7 @@ INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radiu
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item', 'Ice Crystal','Eiskristall','Iiskristall');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item_desc', 'An exeptionally beautiful crystal. Maybe someone could craft something from it.','Ein aussergewöhnlich schöner Kristall. Vielleicht könnte jemand etwas daraus anfertigen.','En ussergwöhnlich schöne Kristall. Vilicht chönt öpper öppis drus herstelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_icecrystal', 'misc', 600, 500, 30);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_icecrystal', 'misc', 600, 500, 40);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_icecrystal', -3, -10, 44, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 1, 300, 300, 50, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 3, 350, 300, 50, 50);
@@ -58,13 +58,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item', 'Fur of a Fire Rat','Fell einer Feuerratte','Fell vonere Füürratte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item_desc', 'This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour out of it.','Diese Fell ist aussergewöhnlich gut erhalten. Vielleicht kann es jemand zu einer Rüstung verarbeiten.','Da Fell isch ussergwöhnlich guet erhalte. Vilicht chan öpper da drus e Rüstig mache.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firerat_fur', 'misc', 200, 350, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firerat_fur', 'misc', 200, 350, 20);
 
 -- Fur of a Wolf
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_wolf_fur', 'item', 'Wolf Fur','Wolfsfell','Wolfspelz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_wolf_fur', 'item_desc', 'Fluffy and soft.','Flauschig und weich.','Flauschig und weich.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_wolf_fur', 'misc', 400, 300, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_wolf_fur', 'misc', 400, 300, 25);
 
 -- Pile of gargoyle dust
 
@@ -76,19 +76,19 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item', 'Teeth','Zähne','Zää');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_teeth', 'item_desc', 'Small and pointy.','Klein und spitz.','Chlii und spitzig.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_teeth', 'misc', 150, 0, 5);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_teeth', 'misc', 150, 0, 8);
 
 -- Feather
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_feather', 'item', 'Feather','Feder','Fädere');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_feather', 'item_desc', 'This tail feather is long and well preserved.','Diese Schwanzfeder ist lang und gut erhalten.','Die Schwanzfädere isch lang und guet erhalte.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_feather', 'misc', 450, 100, 2);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_feather', 'misc', 450, 100, 4);
 
 -- Pearl
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item', 'Pearl','Perle','Perle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearl', 'item_desc', 'Can be found in some shells.','Kann man manchmal in Muscheln finden.','Cha me mengsmal in Muschle finde.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearl', 'misc', 400, 250, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearl', 'misc', 400, 250, 20);
 
 -- Heart of the First Guardian
 
@@ -106,13 +106,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item', 'Corrupted Ice Stone','Verdorbener Eisstein','Verdorbene Iisstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Cairn Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 20);
 
 -- Corrupt stone (Fire)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item', 'Corrupted Fire Stone','Verdorbener Feuerstein','Verdorbene Füürstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Lava Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Lava Geist verdorben und ist nun mit magischen Kräften durchzogen.','De stei isch voneme Lava Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 15);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 20);
 
 -- Teleport Stone
 
@@ -144,7 +144,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_shinystone', 'item', 'Shiny Stone','Funkelnder Stein','Funklige Stei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_shinystone', 'item_desc', 'What a beautiful stone. A merchant might pay a lot for this.','Welch schöner Stein. Ein Händler könnte einiges dafür bezahlen.','Wa füren schöne Stei. En Händler chönt einiges defür zahle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_shinystone', 'misc', 150, 550, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_shinystone', 'misc', 150, 550, 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_shinystone', -25, -40, 10, 25);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_shinystone', 1, 500, 150, 50, 50);
 
@@ -160,4 +160,10 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_dragonskull', 'item', 'Dragon Skull','Drachenschädel','Dracheschädel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_dragonskull', 'item_desc', 'This one will no longer breathe fire.','Der spuckt kein Feuer mehr.','De spuckt kei Füür me.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_dragonskull', 'misc', 0, 200, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_dragonskull', 'misc', 0, 200, 20);
+
+-- Yasha''s Fangs
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item', 'Yasha''s Fangs','Yasha''s Fangzähne','Fangzää vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item_desc', 'The huge fangs of the demon Yasha. Maybe someone could craft something with it.','Die riesigen Fangzähne der Dämonin Yasha. Vielleicht könnte jemand etwas daraus herstellen.','Di riesige Fangzää vode Dämonin Yasha. Vilicht chönt öpper öppis drus herstelle.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_yashafangs', 'misc', 750, 200, -1);

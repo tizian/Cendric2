@@ -2,7 +2,7 @@
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stevenhelmet', 'item', 'Steven''s Helmet','Steven''s Helm','Em Steven sin Helm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_stevenhelmet', 'item_desc', 'This helmet belongs to the paladin Steven.','Dieser Helm gehört dem Paladin Steven.','De Helm ghört em Paladin Steven.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_stevenhelmet', 'eq_head', 200, 550, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_stevenhelmet', 'eq_head', 200, 550, 40);
 INSERT INTO item_attribute (item_id, res_physical, res_fire, dmg_light) values ('eq_stevenhelmet', 8, 2, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_stevenhelmet', 'res/assets/equipment/head/spritesheet_head_stevenhelmet.png', 'res/assets/equipment/head/spritesheet_map_head_stevenhelmet.png');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stevenhelmet', -10, -29, 31, 27);
@@ -12,7 +12,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item', 'Lava Crown','Lavakrone','Lava Chrone');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item_desc', 'Keeping cool is required when wearing this hot headpiece.','Man muss einen kühlen Kopf bewahren wenn man dieses heisse Kopfstück trägt.','Me mun en chüele Chopf bewahre wenme das heisse Chopfstück treit.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavahead', 'eq_head', 700, 50, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavahead', 'eq_head', 700, 50, 60);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavahead', 3, 100, -20, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavahead', 'res/assets/equipment/head/spritesheet_head_lavahead.png', 'res/assets/equipment/head/spritesheet_map_head_lavahead.png');
 
@@ -20,7 +20,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaarmor', 'item', 'Lava Armour','Lavarüstung','Lava Rüschtig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaarmor', 'item_desc', 'A very hot armour made from the remains of lava wraiths. It fights fire with fire.','Eine sehr heisse Rüstung, angefertigt aus den Überresten von Lava Geistern. Sie bekämpft Feuer mit Feuer.','E sehr heissi Rüstig, gmacht us de Überreste vo Lava Geister. Si bekämpft Füür mit Füür.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaarmor', 'eq_body', 700, 100, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaarmor', 'eq_body', 700, 100, 120);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, res_physical) values ('eq_lavaarmor', 5, 200, -40, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaarmor', 'res/assets/equipment/body/spritesheet_body_lavaarmor.png', 'res/assets/equipment/body/spritesheet_map_body_lavaarmor.png');
 
@@ -28,7 +28,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaback', 'item', 'Lava Mantle','Lavamantel','Lava Mantel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavaback', 'item_desc', 'This magical lava holds great fire powers, but burns its wearer.','Diese magische Lava hat zwar grosse Feuerkräfte, verbrennt jedoch seinen Träger.','Die magisch Lava het zwar grossi Füürchräft, verbrennt aber sin Träger.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaback', 'eq_back', 700, 250, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_lavaback', 'eq_back', 700, 250, 80);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire, res_ice, health_regeneration) values ('eq_lavaback', 20, 100, -20, -1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavaback', 'res/assets/equipment/back/spritesheet_back_lavaback.png', 'res/assets/equipment/back/spritesheet_map_back_lavaback.png');
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_lavaback', 50, 30, 0, 'res/assets/particles/smoke.png', 20, 0, 30, 
@@ -63,7 +63,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icehat', 'item', 'Zeff''s Masterpiece','Zeff''s Meisterwerk','Em Zeff sis Meisterwerk');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icehat', 'item_desc', 'Zeff crafted this hat for me in return for saving him.','Zeff hat diesen Hut für mich gemacht, als Dank für seine Rettung.','De Zeff het de Huet für mich gmacht, als Dank für sini Rettig.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icehat', 'eq_head', 250, 500, 35);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icehat', 'eq_head', 250, 500, 40);
 INSERT INTO item_attribute (item_id, dmg_ice, res_physical, res_ice) values ('eq_icehat', 6, 2, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_icehat', 'res/assets/equipment/head/spritesheet_head_icehat.png', 'res/assets/equipment/head/spritesheet_map_head_icehat.png');
 
@@ -79,7 +79,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icescarf', 'item', 'Icy Cloak','Eisiger Umhang','Iisige Umhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_icescarf', 'item_desc', 'Shiny fragments of a magical ice crystal decorate this cloak.','Glänzende Fragmente eines magischen Eiskristalls zieren diesen Umhang.','Glänzigi Fragment vomne magische IIskristall ziered de Umhang.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icescarf', 'eq_back', 300, 500, 40);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_icescarf', 'eq_back', 300, 500, 50);
 INSERT INTO item_attribute (item_id, res_ice, res_physical, dmg_ice) values ('eq_icescarf', 3, 1, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump, frames_idle) values ('eq_icescarf', 'res/assets/equipment/back/spritesheet_back_icescarf.png', 'res/assets/equipment/back/spritesheet_map_back_icescarf.png', 6, 6);
 
@@ -154,6 +154,14 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_mercenarybandana', 'eq_head', 600, 50, 40);
 INSERT INTO item_attribute (item_id, max_health, res_physical, res_fire, dmg_shadow) values ('eq_mercenarybandana', 7, 2, 2, 1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_mercenarybandana', 'res/assets/equipment/head/spritesheet_head_mercenarybandana.png', 'res/assets/equipment/head/spritesheet_map_head_mercenarybandana.png');
+
+-- Wolf Bonnet
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wolfbonnet', 'item', 'Wolf Bonnet','Wolfsmütze','Wolfchappe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wolfbonnet', 'item_desc', 'Warm and cuddly. Crafted by the leatherworker Zeff.','Warm und kuschlig. Zeff hat sie für mich genäht.','Warm und kuschlig. De Zeff het si für mich gneiht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_wolfbonnet', 'eq_head', 750, 50, 40);
+INSERT INTO item_attribute (item_id, max_health, res_ice, res_physical) values ('eq_wolfbonnet', 5, 20, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_wolfbonnet', 'res/assets/equipment/head/spritesheet_head_wolfbonnet.png', 'res/assets/equipment/head/spritesheet_map_head_wolfbonnet.png');
 
 -- Scarf of the Fire Rat
 
@@ -528,6 +536,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_holyring', 'eq_ring', 650, 450, 30);
 INSERT INTO item_attribute (item_id, dmg_light, res_shadow) values ('eq_holyring', 6, 3);
 
+-- Ring of the Sunblade
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item', 'Ring of the Sunblade','Ring der Sonnenklinge','Sunneklingering');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item_desc', 'Its spikes look terrifying.','Seine Stacheln sehen füchterlich aus.','Sini Stachle gsehnd fürchterlich us.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sunring', 'eq_ring', 750, 200, 70);
+INSERT INTO item_attribute (item_id, dmg_light, dmg_physical, critical, haste) values ('eq_sunring', 3, 5, 3, 10);
+
 -- Eye of the Moon
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_eyeofthemoon', 'item', 'The Eye of the Moon','Das Auge des Mondes','Es Mondaug');
@@ -564,6 +579,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item_desc', 'This amulet belonged to the mercenary Morgiana and gave her incredible stamina.','Dieses Amulett gehörte der Söldnerin Morgiana und hat ihr unglaubliche Ausdauer verliehen.','Das Amulett het de Morgiana ghört und het ihre unglaublichi Usduur gä.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 30);
 INSERT INTO item_attribute (item_id, max_health) values ('eq_bloodstone', 20);
+
+-- Sword Pendant
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_swordpendant', 'item', 'Sword Pendant','Schwertanhänger','Schwertahänger');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_swordpendant', 'item_desc', 'The small blade is sharp. I don''t know if having this near my throat is a good idea.','Die kleine Klinge ist scharf. Ich weiss nicht, ob es eine gute Idee ist, das Ding an meiner Kehle zu tragen.','Di chlii Klinge isch scharf. Ich weiss nid obs e gueti Idee isch, das Teil a mim Hals z''träge.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_swordpendant', 'eq_neck', 750, 150, 40);
+INSERT INTO item_attribute (item_id, dmg_physical, res_physical, critical, haste) values ('eq_swordpendant', 7, -10, 2, 5);
 
 -- Light-Touched Pendant
 

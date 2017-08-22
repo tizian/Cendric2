@@ -28,6 +28,11 @@ npc.id:npc_yasha
 	[
 		# Link node, tag is next tag
 		tag:17
+		condition:not DL:isConditionFulfilled("npc_yasha", "reward")
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
 	]
 }
 {1
@@ -167,7 +172,7 @@ npc.id:npc_yasha
 	# [8] NPC Node
 	tag:8
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha_bad.tmx", 400, 810)
 	# translation: 
 	translation.tag:
 	translation.en:
@@ -358,7 +363,7 @@ npc.id:npc_yasha
 	# [19] NPC Node
 	tag:19
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha_good.tmx", 400, 810)
 	# translation: 
 	translation.tag:
 	translation.en:
@@ -387,7 +392,7 @@ npc.id:npc_yasha
 	# [14] NPC Node
 	tag:14
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+	trigger:DL:startLevel("res/level/boss_yasha/boss_yasha_bad.tmx", 400, 810)
 	# translation: 
 	translation.tag:
 	translation.en:
@@ -403,10 +408,55 @@ npc.id:npc_yasha
 	tag:17
 	# triggers: 
 	# translation: 
+	translation.tag:DL_Yasha_Reward
+	translation.en:Ahh. I see, your soul is pure and your magic is strong. 
+	translation.de:Ahh. Wie ich sehe ist deine Seele rein und deine Magie stark.
+	translation.ch:Ahh. We ich gse isch dini Seel rein und dini Magie starch.
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Yasha_Reward2
+	translation.en:Maybe you're not as vile as the other humans I met. Maybe you can find that filthy thief and thwart his plans. 
+	translation.de:Vielleicht bist du nicht so wertlos wie die anderen Menschen, die ich getroffen habe. Vielleicht kannst du diesen dreckigen Dieb finden und seine Pläne durchkreuzen.
+	translation.ch:Vilicht bisch du nid so wertlos we di andere Mensche woni troffe ha. Vilicht chasch du de Dieb finde und sini Plän zerstöre.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:addItem("eq_lifependant", 1)
+	trigger:DL:addItem("we_doublesickle", 1)
+	trigger:DL:addConditionProgress("npc_yasha", "reward")
+	# translation: 
+	translation.tag:DL_Yasha_Reward3
+	translation.en:Here, take this weapon and this pendant. May they help you reaching your goals.
+	translation.de:Hier, nimm diese Waffe und diesen Anhänger. Sie sollen dir helfen, deine Ziele zu erreichen.
+	translation.ch:Do, nimm die Waffe und de Schmuck. Si söled der helfe, dini Ziil z'erreiche.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
 	translation.tag:DL_Yasha_BeSafe
-	translation.en:Be safe.
-	translation.de:Pass auf dich auf.
-	translation.ch:Pass uf dich uf.
+	translation.en:Goodbye, and stay safe, human.
+	translation.de:Lebe wohl und pass auf dich auf, Mensch.
+	translation.ch:Leb wohl und pass uf dich uf, Mensch.
 	[
 		# Link node, tag is next tag
 		tag:-1

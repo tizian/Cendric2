@@ -13,6 +13,6 @@ wares =
 	{"eq_leatherarmor", 1},
 }
 
-multiplier = 1.6
+multiplier = 1.2
 
 

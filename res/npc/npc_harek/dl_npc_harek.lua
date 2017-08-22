@@ -139,10 +139,13 @@ loadDialogue = function(DL)
 			DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,80
 		end
 		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
-			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,100
+			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,120
 		end
 		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
-			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,100
+			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,120
+		end
+		if (DL:hasItem("mi_yashafangs", 1)) then 
+			DL:addCraftingChoice(26, "DL_Choice_FireGlaive") -- we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,200
 		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()
@@ -194,6 +197,18 @@ loadDialogue = function(DL)
 		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
 
 			DL:createNPCNode(25, -2, "DL_Harek_CairnArmor") -- Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
+			DL:gotoNode(17)
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("mi_yashafangs", 1)) then 
+
+			DL:createNPCNode(26, 27, "DL_Harek_FireGlaive") -- Huge demonic fangs! And just look at the magical power flowing through them. This will make a powerful weapon.
+			DL:addNode()
+
+
+			DL:createNPCNode(27, -2, "DL_Harek_FireGlaive2") -- I've never worked with something like this before. A truly amazing material.
 			DL:gotoNode(17)
 			DL:addNode()
 

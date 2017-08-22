@@ -9,8 +9,10 @@ loadDialogue = function(DL)
 		DL:setRoot(9) 
 	elseif (DL:isConditionFulfilled("npc_yasha", "attacked") or (DL:isConditionFulfilled("npc_yasha", "unfriendly") and DL:isConditionFulfilled("npc_yasha", "question"))) then 
 		DL:setRoot(13) 
-	else 
+	elseif (not DL:isConditionFulfilled("npc_yasha", "reward")) then 
 		DL:setRoot(17) 
+	else 
+		DL:setRoot(20) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_yasha", "talked")) then 
@@ -68,7 +70,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(8, -1, "") -- 
-		DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+		DL:startLevel("res/level/boss_yasha/boss_yasha_bad.tmx", 400, 810)
 		DL:addNode()
 
 	end
@@ -154,7 +156,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_yasha", "attackable")) then 
 
 			DL:createNPCNode(19, -1, "") -- 
-			DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+			DL:startLevel("res/level/boss_yasha/boss_yasha_good.tmx", 400, 810)
 			DL:addNode()
 
 		end
@@ -168,13 +170,31 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(14, -1, "") -- 
-		DL:startLevel("res/level/boss_yasha/boss_yasha.tmx", 400, 810)
+		DL:startLevel("res/level/boss_yasha/boss_yasha_bad.tmx", 400, 810)
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_yasha", "reward")) then 
+
+		DL:createNPCNode(17, 21, "DL_Yasha_Reward") -- Ahh. I see, your soul is pure and your magic is strong. 
+		DL:addNode()
+
+
+		DL:createNPCNode(21, 22, "DL_Yasha_Reward2") -- Maybe you're not as vile as the other humans I met. Maybe you can find that filthy thief and thwart his plans. 
+		DL:addNode()
+
+
+		DL:createNPCNode(22, -2, "DL_Yasha_Reward3") -- Here, take this weapon and this pendant. May they help you reaching your goals.
+		DL:addItem("eq_lifependant", 1)
+		DL:addItem("we_doublesickle", 1)
+		DL:addConditionProgress("npc_yasha", "reward")
 		DL:addNode()
 
 	end
 
 
-	DL:createNPCNode(17, -1, "DL_Yasha_BeSafe") -- Be safe.
+	DL:createNPCNode(20, -1, "DL_Yasha_BeSafe") -- Goodbye, and stay safe, human.
 	DL:addNode()
 
 end

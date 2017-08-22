@@ -11,8 +11,8 @@ wares =
 	{"eq_aquamarinering", 1},
 }
 
-multiplier = 2.0
+multiplier = 1.0
 receiver_condition = {"default", "receiver_douglas"}
-receiver_multiplier = 1.2
+receiver_multiplier = 0.6
 
 

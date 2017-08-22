@@ -14,8 +14,8 @@ YashaBossMovingBehavior::~YashaBossMovingBehavior() {
 	g_resourceManager->deleteUniqueResources(this);
 }
 
-void YashaBossMovingBehavior::update(const sf::Time& frameTime) {
-	FlyingBehavior::update(frameTime);
+void YashaBossMovingBehavior::handleDefaultAcceleration() {
+	// nop
 }
 
 void YashaBossMovingBehavior::execHandleMovementInput() {

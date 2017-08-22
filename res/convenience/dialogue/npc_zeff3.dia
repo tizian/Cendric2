@@ -136,6 +136,17 @@ npc.id:npc_zeff3
 	]
 	[
 		# Link node, tag is next tag
+		tag:10
+		condition:DL:hasItem("mi_wolf_fur", 1)
+		# translation: 
+		translation.tag:DL_Choice_WolfBonnet
+		translation.en:eq_wolfbonnet,mi_wolf_fur,3,gold,40
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_NothingToCraft
@@ -184,6 +195,21 @@ npc.id:npc_zeff3
 	translation.en:There you go. A very special headpiece, indeed.
 	translation.de:Hier, nimm. Eine wirklich spezielle Kopfbedeckung.
 	translation.ch:Do, nimm. En würkli spezielli Huet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:gotoNode(5)
+	# translation: 
+	translation.tag:DL_Zeff_Wolfbonnet
+	translation.en:Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
+	translation.de:Wolfsfelle? Ich hoffe, das ist nicht irgendein schlechter Scherz. Aber hier, nimm diese Mütze.
+	translation.ch:Wolfsfell? Ich hoff, das isch nid irgenden chranke Scherz. Aber guet, nimm die Chappe.
 	[
 		# Link node, tag is next tag
 		tag:-2

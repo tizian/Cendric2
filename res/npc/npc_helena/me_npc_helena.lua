@@ -18,6 +18,6 @@ wares =
 	{"eq_aquamarinering", 1},
 }
 
-multiplier = 1.7
+multiplier = 1.1
 
 

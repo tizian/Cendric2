@@ -16,6 +16,6 @@ wares =
 	{"fo_caveberry", 2},
 }
 
-multiplier = 1.6
+multiplier = 1.0
 
 

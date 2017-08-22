@@ -289,12 +289,17 @@ loadDialogue = function(DL)
 		if (DL:hasItem("mi_firerat_fur", 1)) then 
             DL:addCraftingChoice(52, "DL_Choice_FireRatFur") -- eq_fireratscarf,mi_firerat_fur,1,gold,20
         end
+        if (DL:hasItem("mi_wolf_fur", 1)) then 
+            DL:addCraftingChoice(53, "DL_Choice_WolfBonnet") -- eq_wolfbonnet,mi_wolf_fur,3,gold,40
+        end
 		DL:addChoice(-2, "DL_Choice_NothingToCraft") -- I'll come back later. [BACK]
 		DL:addNode()
 		
 		DL:createNPCNode(52, -2, "DL_Zeff_FireRatFur") -- The fur of a fire rat, how nice. It has the ability to protect you against fire. 
-		DL:addItem("eq_fireratscarf", 1)
-		DL:removeItem("mi_firerat_fur", 1)
+		DL:gotoNode(51)
+		DL:addNode()
+        
+        DL:createNPCNode(53, -2, "DL_Zeff_Wolfbonnet") -- Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
 		DL:gotoNode(51)
 		DL:addNode()
 		

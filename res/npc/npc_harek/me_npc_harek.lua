@@ -8,6 +8,6 @@ wares =
 	{"eq_ironring", 1},
 }
 
-multiplier = 1.6
+multiplier = 1.0
 
 

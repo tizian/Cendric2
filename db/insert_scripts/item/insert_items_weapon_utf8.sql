@@ -2,7 +2,7 @@
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item', 'Ice Staff','Eisstab','Iisstab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item_desc', 'Feels ice cold.','Fühlt sich eiskalt an.','So chalt we Iis.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_icestaff', 'eq_weapon', 200, 150, 80);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_icestaff', 'eq_weapon', 200, 150, 150);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_ice) values ('we_icestaff', 10, 15, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_icestaff', 'res/assets/equipment/weapon/spritesheet_weapon_icestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_icestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_icestaff', 1000, 10, 45, 80, 8);
@@ -16,7 +16,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item', 'Fire Staff','Feuerstab','Füürstab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firestaff', 'item_desc', 'The ruby stone reflects different shades of red.','Der grosse Rubinkopf leuchtet in warmen Rottönen.', 'De gross Rubinchopf lüüchtet in warme Rottön.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firestaff', 'eq_weapon', 50, 150, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firestaff', 'eq_weapon', 50, 150, 80);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire) values ('we_firestaff', 10, 5, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firestaff', 'res/assets/equipment/weapon/spritesheet_weapon_firestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firestaff', 1000, 10, 45, 80, 8);
@@ -39,7 +39,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pearlsabre', 'item', 'Pearl Sabre','Perlensäbel','Perlesäbel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pearlsabre', 'item_desc', 'Its nacre blade shines dimly.','Seine aus Perlmutt gefertigte Klinge glimmt schwach.', 'Sini us Perlmutt gmachti Klinge glimmt schwach.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pearlsabre', 'eq_weapon', 350, 650, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pearlsabre', 'eq_weapon', 350, 650, 70);
 INSERT INTO item_attribute (item_id, max_health, critical, dmg_physical, dmg_ice, dmg_light) values ('we_pearlsabre', 5, 2, 2, 3, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pearlsabre', 'res/assets/equipment/weapon/spritesheet_weapon_pearlsabre.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pearlsabre.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pearlsabre', 600, 10, 40, 80, 12);
@@ -52,7 +52,7 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_lightningpike', 'item', 'Lightning Pike','Blitzlanze','Blitzlanze');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_lightningpike', 'item_desc', 'Made from the tail of a storm bird.','Aus dem Schwanz eines Sturmvogels gefertigt.', 'Usem Schwanz vomne Sturmvogel gmacht.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_lightningpike', 'eq_weapon', 650, 0, 60);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_lightningpike', 'eq_weapon', 650, 0, 100);
 INSERT INTO item_attribute (item_id, max_health, critical, dmg_physical, dmg_light) values ('we_lightningpike', 8, 4, 4, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_lightningpike', 'res/assets/equipment/weapon/spritesheet_weapon_lightningpike.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_lightningpike.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_lightningpike', 1000, 10, 45, 80, 14);
@@ -66,7 +66,7 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item','Sickle Staff', 'Sichelstab','Sichlestab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item_desc', 'The ruby gem glows and concentrates elemental energy.','Der rubinfarbene Edelstein glimmt und bündelt Elementarenergie.','De rubinfarbig Stei lüchtet schwach und bündlet Elementarenergie.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_sicklestaff', 'eq_weapon', 250, 150, 120);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_sicklestaff', 'eq_weapon', 250, 150, 300);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire, dmg_ice) values ('we_sicklestaff', 10, 15, 15, 15);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_sicklestaff', 'res/assets/equipment/weapon/spritesheet_weapon_sicklestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_sicklestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_sicklestaff', 1000, 10, 45, 80, 10);
@@ -123,16 +123,16 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_herbalistblade', 0, 0, 39, 57);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_herbalistblade', 1, 200, 300, 50, 100);
 
--- Double Sickle (name not final...)
+-- Yasha''s Claws
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Double Sickle', 'Doppelsichel','Doppelsichle');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item_desc', '...','...','...');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle', 'eq_weapon', 600, 350, 250);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, critical) values ('we_doublesickle', 3, 10, 5, 3, 10);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Yasha''s Claws', 'Yasha''s Klauen','Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle', 'eq_weapon', 600, 350, 300);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, critical) values ('we_doublesickle', 5, 5, 5, 10, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle', 350, 90, 80, -45, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 2, 'necromancy', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 3, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 4, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 5, 'meta', 2);
@@ -141,7 +141,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pickaxe', 'item','Pickaxe', 'Spitzhacke','Pickel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pickaxe', 'item_desc', 'Is used to mine ore.','Wird gebraucht, um Erz abzubauen.','Da demit chame Erz abbaue.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pickaxe', 'eq_weapon', 50, 550, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pickaxe', 'eq_weapon', 50, 550, 25);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, critical) values ('we_pickaxe', 3, 1, 1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pickaxe', 'res/assets/equipment/weapon/spritesheet_weapon_pickaxe.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pickaxe.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pickaxe', 1000, 10, 35, 70, 5);
@@ -152,7 +152,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item', 'Oathbreaker','Eidbrecher','Eidbrecher');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item_desc', 'The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.','Die legendären Zwillingsdolche Eid und Brecher. Es wird erzählt, dass die zyanblauen Steine gefangene Seelen beherrbergen.','Di legendäre Zwillingsdolch Eid und Brecher. Me munklet dass ide zyanblaue Stei Seele gfange sind.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_oathbreaker', 'eq_weapon', 150, 100, 400);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_oathbreaker', 'eq_weapon', 150, 100, 500);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_oathbreaker', 10, 10, 10, 15, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_oathbreaker', 'res/assets/equipment/weapon/spritesheet_weapon_oathbreaker.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_oathbreaker.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_oathbreaker', 350, 80, 80, -40, 20);
@@ -168,7 +168,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pikeoflight', 'item','Pike of the Eternal Light', 'Pike des Ewigen Lichts','Lanze vom Ewige Liecht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_pikeoflight', 'item_desc', 'This glorious weapon is only wielded by true warriors of the Eternal Light.','Diese prächtige Waffe wird nur von wahren Kriegern des Ewigen Lichts geführt.','Die prächtig Waffe wird nur vo wohre Chrieger vom Ewige Liecht gführt.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pikeoflight', 'eq_weapon', 300, 250, 400);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_pikeoflight', 'eq_weapon', 300, 250, 500);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_light, dmg_fire, haste) values ('we_pikeoflight', 20, 5, 15, 15, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pikeoflight', 'res/assets/equipment/weapon/spritesheet_weapon_pikeoflight.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pikeoflight.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pikeoflight', 1500, 10, 45, 80, 15);
@@ -182,7 +182,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_bonescythe', 'item','Bone Scythe', 'Knochensense','Chnochesense');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_bonescythe', 'item_desc', 'Perfect for reaping souls.','Perfekt, um Seelen zu sammeln.','Perfekt zum Seele sammle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_bonescythe', 'eq_weapon', 700, 600, 400);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_bonescythe', 'eq_weapon', 700, 600, 500);
 INSERT INTO item_attribute (item_id, max_health, dmg_ice, dmg_shadow, dmg_physical) values ('we_bonescythe', 30, 5, 15, 15);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_bonescythe', 'res/assets/equipment/weapon/spritesheet_weapon_bonescythe.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_bonescythe.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_bonescythe', 1500, 10, 45, 80, 15);
@@ -208,7 +208,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_rustysword', 'item', 'Rusty sword','Rostiges Schwert','Rostigs Schwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_rustysword', 'item_desc', 'This sword has seen better days.','Das Schwert hat schon bessere Tage gesehen.','Da Schwert het glaub scho besseri Täg gse.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_rustysword', 'eq_weapon', 150, 150, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_rustysword', 'eq_weapon', 150, 150, 12);
 INSERT INTO item_attribute (item_id, dmg_physical) values ('we_rustysword', 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_rustysword', 'res/assets/equipment/weapon/spritesheet_weapon_rustysword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_rustysword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_rustysword', 800, 10, 40, 80, 5);
@@ -217,7 +217,7 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_simplesword', 'item','Simple Sword', 'Einfaches Schwert','Eifachs Schwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_simplesword', 'item_desc', 'There''s nothing special about this sword.','Ein ganz normales Schwert.','Es hundskomuns Schwert.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_simplesword', 'eq_weapon', 200, 250, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_simplesword', 'eq_weapon', 200, 250, 30);
 INSERT INTO item_attribute (item_id, dmg_physical) values ('we_simplesword', 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_simplesword', 'res/assets/equipment/weapon/spritesheet_weapon_simplesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_simplesword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_simplesword', 700, 10, 40, 80, 7);
@@ -228,7 +228,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Fire Sword', 'Feuerschwert','Füürschwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple.','Ein heiliges Relikt aus Yasha''s Tempel','Es heiligs Relikt us de Yasha ihrem Tempel.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, 300);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_light, critical) values ('we_firesword', 12, 8, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword', 'res/assets/equipment/weapon/spritesheet_weapon_firesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firesword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword', 700, 10, 40, 80, 12);
@@ -252,7 +252,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_zeffssword', 'item', 'Zeff''s Skinning Knife','Zeffs Kürschnermesser','Zeffs Kürschnermesser');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_zeffssword', 'item_desc', 'This oversized knife belonged to the leatherworker Zeff.','Dieses übergrosse Messer gehörte dem Lederer Zeff.','Da übergrosse Messer het em Lederer Zeff ghört.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_zeffssword', 'eq_weapon', 350, 350, 40);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_zeffssword', 'eq_weapon', 350, 350, 70);
 INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_zeffssword', 7, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_zeffssword', 'res/assets/equipment/weapon/spritesheet_weapon_zeffssword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_zeffssword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_zeffssword', 1000, 10, 50, 80, 15);
@@ -263,7 +263,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item', 'Leeroy''s Sword','Leeroy''s Schwert','Leeroy''s Schwertli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item_desc', 'The sword of a legend... or merely a fool?','Das Schwert einer Legende... oder bloss eines Narren?','Es Schwert vonere Legende... oder eifach vomne Tubel?');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_leeroysword', 'eq_weapon', 650, 600, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_leeroysword', 'eq_weapon', 650, 600, 80);
 INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_leeroysword', 10, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_leeroysword', 'res/assets/equipment/weapon/spritesheet_weapon_leeroysword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_leeroysword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_leeroysword', 1000, 10, 50, 80, 15);
@@ -274,7 +274,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item', 'Mace of the Order','Streitkolben des Ordens','Striitcholbe vom Orde');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_ordermace', 'item_desc', 'This weapon is mostly used by paladins of the Order.','Diese Waffe wird meistens von den Paladinen des Ordens getragen.', 'Die Waffe wird meistens vo de Paladin vom Orde treit.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_ordermace', 'eq_weapon', 400, 350, 30);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_ordermace', 'eq_weapon', 400, 350, 50);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, critical) values ('we_ordermace', 2, 3, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_ordermace', 'res/assets/equipment/weapon/spritesheet_weapon_ordermace.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_ordermace.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_ordermace', 1000, 10, 35, 70, 8);
@@ -285,7 +285,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item','Walking Pole', 'Wanderstab','Wanderstock');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item_desc', 'A simple walking pole, it belonged to the hunter Edmond.','Ein einfacher Wanderstock, er gehörte dem Jäger Edmond.','En eifache Wanderstock, er het em Jäger Edmond ghört.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_walkingpole', 'eq_weapon', 250, 100, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_walkingpole', 'eq_weapon', 250, 100, 15);
 INSERT INTO item_attribute (item_id, max_health) values ('we_walkingpole', 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_walkingpole', 'res/assets/equipment/weapon/spritesheet_weapon_walkingpole.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_walkingpole.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_walkingpole', 800, 10, 40, 80, 5);
@@ -293,8 +293,8 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 -- Fire Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Fire Glaive','Feuergleve','Füür Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon.','Eine sehr mächtige Waffe.','E sehr mächtigi Waffe');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 150);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 300);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, critical, haste) values ('we_fireglaive', 10, 20, 15, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 20);
@@ -308,7 +308,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item', 'Jason''s Glaive','Jasons Gleve','Jasons Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item_desc', 'If you open something, you have to close it again eventually.','Wenn man etwas öffnet, muss man es irgendwann auch wieder schliessen.','Wenn me öppis ufmacht munmes irgendwenn au wider zuemache.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 200);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 300);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, haste) values ('we_jasonsglaive', 20, 10, 15, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive', 500, 80, 80, -40, 20);
@@ -322,7 +322,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item', 'Alastor''s Sickles','Alastor''s Sicheln','Sichle vom Alastor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item_desc', 'This weapon was once used against me, now it''s mine.','Diese Waffe wurde einst gegen mich verwendet, jetzt gehört sie mir.','Die Waffe isch mal gege mich brucht worde, jetz ghört si mir.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_janusglaive', 'eq_weapon', 650, 150, 80);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_janusglaive', 'eq_weapon', 650, 150, 200);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, dmg_ice, critical, haste) values ('we_janusglaive', 5, 8, 8, 3, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_janusglaive', 'res/assets/equipment/weapon/spritesheet_weapon_janusglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_janusglaive.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_janusglaive', 500, 80, 80, -40, 15);
@@ -335,7 +335,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item', 'Torch', 'Fackel', 'Fackle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_torch', 'item_desc', 'Lights the way.','Spendet Licht.','Git Liecht.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_torch', 'eq_weapon', 200, 100, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_torch', 'eq_weapon', 200, 100, 20);
 INSERT INTO item_attribute (item_id, dmg_fire) values ('we_torch', 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_idle, frames_jump, frames_climb1, frames_climb2) values ('we_torch', 'res/assets/equipment/weapon/spritesheet_weapon_torch.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_torch.png', 2, 2, 2, 2);
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_torch', 600, 10, 40, 80, 10);

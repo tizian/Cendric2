@@ -60,7 +60,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ya
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_thief','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_necro','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_death','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_yasha','location','Boss: Yasha,
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_yasha_good','location','Boss: Yasha,
+Guardian of the Temple','Boss: Yasha,
+Wächterin des Tempels','Boss: Yasha, 
+Wächterin vom Tempel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_yasha_bad','location','Boss: Yasha,
 Guardian of the Temple','Boss: Yasha,
 Wächterin des Tempels','Boss: Yasha, 
 Wächterin vom Tempel');

@@ -533,6 +533,12 @@
   <object id="149" gid="968" x="725" y="137.5" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="117" gid="1240" x="650" y="500" width="50" height="50"/>
+  <object id="117" gid="1240" x="650" y="500" width="50" height="50">
+   <properties>
+    <property name="fo_greaterhealingpotion" value="2"/>
+    <property name="gold" value="50"/>
+    <property name="mi_yashafangs" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

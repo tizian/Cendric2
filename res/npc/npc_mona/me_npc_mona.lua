@@ -7,6 +7,6 @@ wares =
 }
 
 -- buying drinks in a brothel can be costly...
-multiplier = 3.0
+multiplier = 2.0
 
 

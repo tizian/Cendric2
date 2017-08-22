@@ -155,21 +155,27 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 	AnimatedGameObject::setPosition(position);
 }
 
+void LevelEquipment::lockAnimation(bool lock) {
+	m_isLocked = lock;
+	if (m_isLocked) {
+		loopCurrentAnimation(false);
+		m_animatedSprite.stop();
+	}
+}
+
 void LevelEquipment::update(const sf::Time& frameTime) {
+	if (m_isLocked) {
+		calculatePositionAccordingToMainChar(m_position);
+		return;
+	}
 	GameObjectState newState = m_mainChar->getState();
 
 	bool newFacingRight = m_mainChar->isFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) {
 		m_state = newState;
 		m_isFacingRight = newFacingRight;
-		if (m_hasTexture) {
-			if (m_state != GameObjectState::Dead) {
-				setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
-			}
-			else {
-				loopCurrentAnimation(false);
-				m_animatedSprite.stop();
-			}
+		if (m_hasTexture && m_state != GameObjectState::Dead) {
+			setCurrentAnimation(getAnimation(m_state), !m_isFacingRight);
 		}
 		updateParticlesVisibility();
 	}
