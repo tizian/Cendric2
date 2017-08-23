@@ -266,6 +266,12 @@ particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::strin
 		colGen->minEndCol = sf::Color(50, 60, 100, 100);
 		colGen->maxEndCol = sf::Color(80, 110, 160, 100);
 	}
+	else if (color.compare("yellow") == 0) {
+		colGen->minStartCol = sf::Color(255, 235, 100);
+		colGen->maxStartCol = sf::Color(255, 255, 200);
+		colGen->minEndCol = sf::Color(200, 200, 200, 200);
+		colGen->maxEndCol = sf::Color(255, 240, 220, 200);
+	}
 	else {
 		g_logger->logWarning("ParticleTile", "Unknown ember color: " + color);
 	}
@@ -293,6 +299,12 @@ particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::strin
 		colGen->maxStartCol = sf::Color(255, 160, 64);
 		colGen->minEndCol = sf::Color(255, 0, 0, 200);
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+	}
+	else if (color.compare("yellow") == 0) {
+		colGen->minStartCol = sf::Color(255, 235, 100, 150);
+		colGen->maxStartCol = sf::Color(255, 255, 150);
+		colGen->minEndCol = sf::Color(200, 200, 200, 100);
+		colGen->maxEndCol = sf::Color(255, 240, 220, 100);
 	}
 	else {
 		g_logger->logWarning("ParticleTile", "Unknown flame color: " + color);

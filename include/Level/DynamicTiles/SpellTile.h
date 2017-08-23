@@ -26,6 +26,8 @@ protected:
 
 private:
 	void touch();
+	void addSpell();
+	void loadLeapOfFaithSpell();
 	SpellID m_spellID;
 	
 	void loadComponents();

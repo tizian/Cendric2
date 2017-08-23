@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:33859
+time.played:33875
 savegame.name:after_yash
-savegame.date:1503345496
+savegame.date:1503519974
 level.id:res/level/boss_yasha/boss_yasha.tmx
 level.position:400.000000,810.000000
 is.in.level:0
@@ -111,7 +111,7 @@ stored.gold:0
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
 equipped.spellslot:2,1,1,4,1
 equipped.spellslot:3,1,1,4,1
-equipped.spellslot:18,5,1
+equipped.spellslot:19,2,2
 # equipment:
 equipped.back:eq_fireratscarf
 equipped.body:eq_lavaarmor
@@ -127,7 +127,7 @@ weapon.configs:we_hawthorn;2;
 weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;5,5,2,3,1;18,2,2,5,2;
 weapon.configs:we_ordermace;17,2,1;2,1,1;
 weapon.configs:we_simplesword;
-weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;18,5,1;
+weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;19,2,2;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
 weapon.spell:17

@@ -6,6 +6,7 @@
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
+#include "Spells/LeapOfFaithSpell.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Spell, SpellTile)
 
@@ -70,8 +71,36 @@ void SpellTile::touch() {
 	m_state = GameObjectState::Active;
 	setCurrentAnimation(getAnimation(m_state), false);
 	dynamic_cast<LevelScreen*>(m_screen)->notifySpellLearned(m_spellID);
+	addSpell();
 
 	m_pc->setEmitRate(0.f);
+}
+
+void SpellTile::addSpell() {
+	switch (m_spellID)
+	{
+	case SpellID::LeapOfFaith: {
+		loadLeapOfFaithSpell();
+		break;
+	}
+	default:
+		break;
+	}
+}
+
+void SpellTile::loadLeapOfFaithSpell() {
+	SpellData data = SpellData::getSpellData(SpellID::LeapOfFaith);
+	data.duration = sf::seconds(999);
+	data.activeDuration = data.duration;
+	data.strength = 3;
+	g_resourceManager->loadTexture(data.spritesheetPath, ResourceType::Level);
+
+	float gravityScale = 1.f / (1.f + 0.4f * data.strength);
+	LeapOfFaithSpell* newSpell = new LeapOfFaithSpell(gravityScale);
+	newSpell->load(data, m_mainChar, sf::Vector2f());
+	m_screen->addObject(newSpell);
+
+	dynamic_cast<LevelScreen*>(m_screen)->addSpellBuffToInterface(data.iconTextureRect, data.duration, newSpell, AttributeData());
 }
 
 void SpellTile::onHit(LevelMovableGameObject* mob) {

@@ -33,3 +33,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ca
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Masochist','sign','Masochist','Masochist','Masochist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GoodLuck','sign','Good luck...','Viel Glück...','Viel Glück...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pointless','sign','Pointless...','Sinnlos...','Sinnlos...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FaithShatter','sign','Faith will shatter them!','Glaube wird sie zerschmettern!','De Glaube wird si zerschmettere!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedShield','sign','A shield may help.','Ein Schild könnte helfen.','En Schild chönt helfe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RiseAgain','sign','Jump and rise again.','Spring und erhebe dich wieder.','Spring und erheb dich wieder.');
