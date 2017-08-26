@@ -5,6 +5,8 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Damaging, DamagingTile)
 
+const std::string  DamagingTile::SHATTER_SOUND = "res/sound/mob/yashaadd_death.ogg";
+
 bool DamagingTile::init(const LevelTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(5.f, 5.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
@@ -12,6 +14,8 @@ bool DamagingTile::init(const LevelTileProperties& properties) {
 	addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
 
 	m_isDivine = contains(properties, std::string("divine"));
+
+	g_resourceManager->loadSoundbuffer(SHATTER_SOUND, ResourceType::Level);
 	return true;
 }
 
@@ -26,9 +30,30 @@ void DamagingTile::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
+	if (m_isDivine) {
+		Animation* shatterAnimation = new Animation();
+		shatterAnimation->setSpriteSheet(tex);
+		for (int i = 0; i < 4; ++i) {
+			shatterAnimation->addFrame(sf::IntRect(4 * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		}
+		shatterAnimation->setLooped(false);
+
+		addAnimation(GameObjectState::Broken, shatterAnimation);
+	}
+
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+}
+
+void DamagingTile::update(const sf::Time& frameTime) {
+	LevelDynamicTile::update(frameTime);
+	if (!(m_isDivine && m_isBroken)) 
+		return;
+	updateTime(m_despawnTime, frameTime);
+	if (m_despawnTime == sf::Time::Zero) {
+		setDisposed();
+	}
 }
 
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
@@ -37,12 +62,18 @@ void DamagingTile::onHit(LevelMovableGameObject* mob) {
 		return;
 	}
 
+	if (m_isBroken) 
+		return;
+
 	auto gos = *m_screen->getObjects(GameObjectType::_Spell);
 	for (auto go : gos) {
 		Spell* spell = dynamic_cast<Spell*>(go);
 		if (spell && spell->getSpellID() == SpellID::DivineShield &&
 			spell->getBoundingBox()->contains(mob->getCenter())) {
-			setDisposed();
+			m_isBroken = true;
+			setState(GameObjectState::Broken);
+			m_despawnTime = m_animatedSprite.getAnimation()->getAnimationTime();
+			g_resourceManager->playSound(SHATTER_SOUND);
 			return;
 		}
 	}
