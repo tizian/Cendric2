@@ -17,7 +17,7 @@ public:
 	ItemDescriptionWindow();
 	virtual ~ItemDescriptionWindow();
 
-	void load(const Item& item, const CharacterCore* core);
+	void load(const Item& item, const CharacterCore* core, float goldMultiplier);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
@@ -31,7 +31,7 @@ public:
 
 protected:
 	void clearTexts();
-	virtual std::string getGoldText(const Item& item) const;
+	virtual std::string getGoldText(const Item& item, float goldMultiplier) const;
 	virtual std::string getReputationText(const Item& item) const;
 	virtual std::string getInteractionText(const Item& item) const;
 

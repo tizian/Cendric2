@@ -36,11 +36,11 @@ ItemDescriptionWindow::~ItemDescriptionWindow() {
 	clearTexts();
 }
 
-std::string ItemDescriptionWindow::getGoldText(const Item& item) const {
+std::string ItemDescriptionWindow::getGoldText(const Item& item, float goldMultiplier) const {
 	std::string text;
 	text.append(g_textProvider->getText("GoldValue"));
 	text.append(": ");
-	text.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : std::to_string(item.getValue()));
+	text.append(item.getValue() < 0 ? g_textProvider->getText("Unsalable") : std::to_string(static_cast<int>(std::ceil(item.getValue() * goldMultiplier))));
 	return text;
 }
 
@@ -276,7 +276,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core) {
+void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, float goldMultiplier) {
 	clearTexts();
 	int maxWidth = static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET);
 	sf::Vector2f currentOffset;
@@ -296,7 +296,7 @@ void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core) {
 
 	loadAttributes(item, core, currentOffset);
 	
-	addText(getGoldText(item), COLOR_WHITE, currentOffset);
+	addText(getGoldText(item, goldMultiplier), COLOR_WHITE, currentOffset);
 	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL, currentOffset);
 	addText(getInteractionText(item), COLOR_NEUTRAL, currentOffset);
 

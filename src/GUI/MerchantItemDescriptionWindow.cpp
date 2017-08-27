@@ -6,7 +6,6 @@ MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData&
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
-	m_goldMultiplier = data.multiplier;
 	m_fraction = data.fraction;
 	m_reputation = 0;
 }
@@ -16,11 +15,11 @@ void MerchantItemDescriptionWindow::setReputation(int reputation, bool isReached
 	m_isReputationReached = isReached;
 }
 
-std::string MerchantItemDescriptionWindow::getGoldText(const Item& item) const {
+std::string MerchantItemDescriptionWindow::getGoldText(const Item& item, float goldMultiplier) const {
 	std::string text;
 	text.append(g_textProvider->getText("Price"));
 	text.append(": ");
-	text.append(std::to_string((int)std::ceil(item.getValue() * m_goldMultiplier)));
+	text.append(std::to_string((int)std::ceil(item.getValue() * goldMultiplier)));
 	return text;
 }
 

@@ -21,7 +21,7 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	if (m_tileWidth < 1 || m_tileWidth > 2) return false;
 
 	if (!contains(properties, std::string("strength"))) return false;
-	int m_strength = std::stoi(properties.at(std::string("strength")));
+	m_strength = std::stoi(properties.at(std::string("strength")));
 	if (m_strength < 0 || m_strength > 4) return false;
 
 	if (m_strength == 0 && !m_keyItemID.empty()) return false;
