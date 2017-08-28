@@ -47,6 +47,15 @@ void LevelMainCharacter::updateDamagedOverlay() {
 void LevelMainCharacter::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
 	updateDamagedOverlay();
+
+	// update the sprite color time
+	if (m_equipmentColoredTime > sf::Time::Zero) {
+		updateTime(m_equipmentColoredTime, frameTime);
+		if (m_equipmentColoredTime == sf::Time::Zero) {
+			setSpriteColor(COLOR_WHITE, sf::Time::Zero);
+		}
+	}
+
 	if (m_isDead) {
 		updateTime(m_fadingTime, frameTime);
 		updateTime(m_particleTime, frameTime);
@@ -235,6 +244,11 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 
 int LevelMainCharacter::getInvisibilityLevel() const {
 	return m_invisibilityLevel;
+}
+
+void LevelMainCharacter::setSpriteColor(const sf::Color& color, const sf::Time& time) {
+	dynamic_cast<LevelScreen*>(m_screen)->setEquipmentColor(color);
+	m_equipmentColoredTime = time;
 }
 
 void LevelMainCharacter::setDead() {

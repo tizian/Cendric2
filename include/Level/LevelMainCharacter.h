@@ -58,6 +58,7 @@ public:
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
+	void setSpriteColor(const sf::Color& color, const sf::Time& time) override;
 
 	GameObjectType getConfiguredType() const override;
 	TargetManager& getTargetManager() const;
@@ -88,5 +89,6 @@ private:
 	ParticleComponent* m_deathPc;
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
+	sf::Time m_equipmentColoredTime = sf::Time::Zero;
 	bool m_isInputLock = false;
 };

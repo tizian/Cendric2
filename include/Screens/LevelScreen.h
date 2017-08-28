@@ -51,6 +51,8 @@ public:
 	sf::RenderTexture& getParticleFGRenderTexture();
 	sf::RenderTexture& getParticleBGRenderTexture();
 
+	void setEquipmentColor(const sf::Color& color);
+
 private:
 	void quicksave() override;
 
@@ -73,9 +75,11 @@ private:
 
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
+	sf::Color m_equipmentColor = COLOR_WHITE;
 	sf::RenderTexture m_particleBGRenderTexture;
 	sf::RenderTexture m_particleFGRenderTexture;
-	void flushParticleTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView);
+	sf::RenderTexture m_equipmentRenderTexture;
+	void flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView);
 
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);

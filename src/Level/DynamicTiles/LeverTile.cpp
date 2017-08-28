@@ -93,7 +93,7 @@ void LeverTile::setDependentTiles(const std::vector<LeverDependentTile*>& depend
 void LeverTile::switchLever() {
 	if (m_isGround && m_state == GameObjectState::On) return;
 
-	for (auto& tile : m_dependentTiles) {
+	for (auto tile : m_dependentTiles) {
 		if (!tile->isSwitchable()) {
 			m_screen->setNegativeTooltip("LeverStuck");
 			return;

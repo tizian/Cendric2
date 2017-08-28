@@ -4,7 +4,7 @@
 #include "World/Item.h"
 #include "World/Trigger.h"
 
-static const std::string vertexShader = \
+const std::string WorldScreen::VERTEX_SHADER = \
 "void main()" \
 "{" \
 "    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;" \
@@ -40,10 +40,10 @@ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 	m_renderTexture2.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
-	m_lightLayerShader.loadFromMemory(vertexShader, lightFragmentShader);
+	m_lightLayerShader.loadFromMemory(VERTEX_SHADER, lightFragmentShader);
 
 	m_foregroundLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
-	m_foregroundLayerShader.loadFromMemory(vertexShader, foregroundFragmentShader);
+	m_foregroundLayerShader.loadFromMemory(VERTEX_SHADER, foregroundFragmentShader);
 
 	setTooltipPositionTop(true);
 }

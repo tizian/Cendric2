@@ -29,9 +29,6 @@ public:
 	void setPosition(const sf::Vector2f& position) override;
 	void lockAnimation(bool lock);
 
-	// this value determines whether the level equipment takes into account the sprite color of the main character
-	void setCopyingMainCharColor(bool value);
-
 private:
 	LevelMainCharacter* m_mainChar;
 	bool m_hasTexture = false;
@@ -46,7 +43,6 @@ private:
 
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 	void updateParticlesVisibility() const;
-	bool m_isCopyingMainCharColor = true;
 	bool m_isLocked = false;
 
 	static const int EQ_SIZE;

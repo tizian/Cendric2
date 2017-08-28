@@ -188,8 +188,6 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 	calculatePositionAccordingToMainChar(m_position);
 	setPosition(m_position);
 	AnimatedGameObject::update(frameTime);
-	if (m_isCopyingMainCharColor && m_hasTexture)
-		setSpriteColor(m_mainChar->getCurrentSpriteColor(), sf::milliseconds(1));
 }
 
 void LevelEquipment::setLightComponent(const LightData& data) {
@@ -212,8 +210,4 @@ ItemType LevelEquipment::getItemType() const {
 
 GameObjectType LevelEquipment::getConfiguredType() const {
 	return GameObjectType::_Equipment;
-}
-
-void LevelEquipment::setCopyingMainCharColor(bool value) {
-	m_isCopyingMainCharColor = value;
 }

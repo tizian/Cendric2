@@ -56,10 +56,9 @@ void AnimatedGameObject::render(sf::RenderTarget& renderTarget) {
 void AnimatedGameObject::update(const sf::Time& frameTime) {
 	m_animatedSprite.update(frameTime);
 	if (m_coloredTime > sf::Time::Zero) {
-		m_coloredTime -= frameTime;
-		if (m_coloredTime <= sf::Time::Zero) {
+		updateTime(m_coloredTime, frameTime);
+		if (m_coloredTime == sf::Time::Zero) {
 			m_animatedSprite.setColor(COLOR_WHITE);
-			m_coloredTime = sf::Time::Zero;
 			m_currentSpriteColor = COLOR_WHITE;
 		}
 	}

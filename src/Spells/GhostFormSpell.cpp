@@ -140,6 +140,5 @@ void GhostFormSpell::loadMask() {
 
 	m_mask->load(&itemBean, ItemType::VOID);
 	
-	m_mask->setCopyingMainCharColor(false);
 	m_screen->addObject(m_mask);
 }
