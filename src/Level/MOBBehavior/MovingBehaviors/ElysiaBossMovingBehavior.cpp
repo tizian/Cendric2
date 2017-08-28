@@ -65,32 +65,8 @@ void ElysiaBossMovingBehavior::execHandleMovementInput() {
 	}
 }
 
-void ElysiaBossMovingBehavior::handleFlyToTarget(float appDist, const sf::Vector2f& target) {
-	sf::Vector2f center = m_enemy->getCenter();
-
-	if (target.x < center.x && std::abs(target.x - center.x) > appDist) {
-		m_movingDirectionX = -1;
-	}
-	else if (target.x > center.x && std::abs(target.x - center.x) > appDist) {
-		m_movingDirectionX = 1;
-	}
-	else {
-		m_movingDirectionX = 0;
-	}
-
-	if (target.y < center.y && std::abs(target.y - center.y) > appDist) {
-		m_movingDirectionY = -1;
-	}
-	else if (target.y > center.y && std::abs(target.y - center.y) > appDist) {
-		m_movingDirectionY = 1;
-	}
-	else {
-		m_movingDirectionY = 0;
-	}
-}
-
 void ElysiaBossMovingBehavior::handleProjectileMovement() {
-	handleFlyToTarget(m_approachingDistance, m_mainChar->getCenter() - sf::Vector2f(0.f, 200.f));
+	gotoTarget(m_mainChar->getCenter() - sf::Vector2f(0.f, 200.f), 10.f);
 
 	updateTime(m_timeUntilTransition, m_frameTime);
 	if (m_timeUntilTransition == sf::Time::Zero) {
@@ -181,7 +157,7 @@ void ElysiaBossMovingBehavior::handleNosediveDown() {
 }
 
 void ElysiaBossMovingBehavior::handleNosediveUp() {
-	handleFlyToTarget(10.f, m_flyingTarget);
+	gotoTarget(m_flyingTarget, 10.f);
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 50.f) {
 		m_boss->setBossState(ElysiaBossState::Nosedive);
@@ -198,7 +174,7 @@ void ElysiaBossMovingBehavior::handleNosediveUp() {
 }
 
 void ElysiaBossMovingBehavior::handleThunderUp() {
-	handleFlyToTarget(10.f, m_flyingTarget);
+	gotoTarget(m_flyingTarget, 10.f);
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 20.f) {
 		m_boss->setBossState(ElysiaBossState::Thunderstorm);
@@ -225,7 +201,7 @@ void ElysiaBossMovingBehavior::handleThunderUp() {
 }
 
 void ElysiaBossMovingBehavior::handlePreThunder() {
-	handleFlyToTarget(10.f, m_flyingTarget);
+	gotoTarget(m_flyingTarget, 10.f);
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 50.f) {
 		m_boss->setPosition(m_flyingTarget - m_bossBoxOffset);

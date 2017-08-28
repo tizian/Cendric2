@@ -15,7 +15,7 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 
 void EnemyMovingBehavior::handleMovementInput() {
 	if (m_movingTarget != nullptr) {
-		gotoTarget(*m_movingTarget, 10.f, true, false);
+		gotoTarget(*m_movingTarget, std::max(m_maxVelocityX, m_maxVelocityYDown) * MAX_FRAME_TIME, true, true);
 	}
 	else {
 		execHandleMovementInput();

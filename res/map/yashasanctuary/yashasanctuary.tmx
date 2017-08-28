@@ -404,15 +404,15 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="144" x="600" y="230" width="50" height="25">
+  <object id="144" x="600" y="237.5" width="50" height="25">
    <properties>
     <property name="conditions" value="default,thief"/>
-    <property name="level entry" value="res/level/yashapuzzle/yasha_thief.tmx,100,100"/>
+    <property name="level entry" value="res/level/yashapuzzle/yasha_thief.tmx,160,210"/>
     <property name="not conditions" value="default,yashapuzzle"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="145" x="800" y="230" width="50" height="25">
+  <object id="145" x="800" y="237.5" width="50" height="25">
    <properties>
     <property name="conditions" value="default,necromancer"/>
     <property name="level entry" value="res/level/yashapuzzle/yasha_necro.tmx,710,1310"/>
@@ -420,14 +420,14 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="148" x="800" y="230" width="50" height="25">
+  <object id="148" x="800" y="237.5" width="50" height="25">
    <properties>
     <property name="level entry" value="res/level/yashapuzzle/yasha_death.tmx,600,100"/>
     <property name="not conditions" value="default,necromancer,default,yashapuzzle"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="149" x="550" y="287.5" width="50" height="25">
+  <object id="149" x="600" y="237.5" width="50" height="25">
    <properties>
     <property name="level entry" value="res/level/yashapuzzle/yasha_death.tmx,600,100"/>
     <property name="not conditions" value="default,thief,default,yashapuzzle"/>
@@ -448,14 +448,14 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="153" x="662.5" y="287.5" width="50" height="25">
+  <object id="153" x="600" y="237.5" width="50" height="25">
    <properties>
     <property name="conditions" value="default,yashapuzzle"/>
     <property name="map entry" value="res/map/highland/highland.tmx,490,1740"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="154" x="800" y="230" width="50" height="25">
+  <object id="154" x="800" y="237.5" width="50" height="25">
    <properties>
     <property name="conditions" value="default,yashapuzzle"/>
     <property name="map entry" value="res/map/highland/highland.tmx,490,1740"/>

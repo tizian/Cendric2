@@ -13,53 +13,14 @@ void AllyFlyingBehavior::execHandleMovementInput() {
 	sf::Vector2f targetCenter = hasTarget ? m_enemy->getCurrentTarget()->getCenter() : center;
 
 	if (hasTarget && (m_enemy->getEnemyState() == EnemyState::Chasing)) {
-
-		if (targetCenter.x < center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_movingDirectionX = -1;
-		}
-		else if (targetCenter.x > center.x && std::abs(targetCenter.x - center.x) > m_approachingDistance) {
-			m_movingDirectionX = 1;
-		}
-		else {
-			m_movingDirectionX = 0;
-		}
-
-		if (targetCenter.y < center.y && std::abs(targetCenter.y - center.y) > m_approachingDistance) {
-			m_movingDirectionY = -1;
-		}
-		else if (targetCenter.y > center.y && std::abs(targetCenter.y - center.y) > m_approachingDistance) {
-			m_movingDirectionY = 1;
-		}
-		else {
-			m_movingDirectionY = 0;
-		}
+		gotoTarget(targetCenter, m_approachingDistance);
 	}
 	else if (hasTarget && m_enemy->getEnemyState() == EnemyState::Fleeing) {
 		m_movingDirectionX = (targetCenter.x < center.x) ? 1 : -1;
 		m_movingDirectionY = (targetCenter.y < center.y) ? 1 : -1;
 	}
 	else if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
-		
-			sf::Vector2f mainCharCenter = m_mainChar->getCenter();
-			if (mainCharCenter.x < center.x && std::abs(mainCharCenter.x - center.x) > m_approachingDistance) {
-				m_movingDirectionX = -1;
-			}
-			else if (mainCharCenter.x > center.x && std::abs(mainCharCenter.x - center.x) > m_approachingDistance) {
-				m_movingDirectionX = 1;
-			}
-			else {
-				m_movingDirectionX = 0;
-			}
-
-			if (mainCharCenter.y < center.y && std::abs(mainCharCenter.y - center.y) > 2 * m_approachingDistance) {
-				m_movingDirectionY = -1;
-			}
-			else if (mainCharCenter.y > center.y && std::abs(mainCharCenter.y - center.y) > 2 * m_approachingDistance) {
-				m_movingDirectionY = 1;
-			}
-			else {
-				m_movingDirectionY = 0;
-			}
+		gotoTarget(m_mainChar->getCenter(), m_approachingDistance);
 	}
 }
 

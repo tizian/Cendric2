@@ -80,10 +80,9 @@ void Game::run() {
 		}
 
 		frameClock.restart();
-		// hard bound: dt should not exeed 50ms (20fps)
-		if (deltaTime.asMilliseconds() > 50) {
-			frameTime = sf::milliseconds(50);
-			g_logger->logInfo("Game Loop", "Frame time just exceeded 50ms and is set down to 50ms. Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
+		if (deltaTime.asSeconds() > MAX_FRAME_TIME) {
+			frameTime = sf::seconds(MAX_FRAME_TIME);
+			g_logger->logInfo("Game Loop", "Frame time just exceeded max frame time (" + std::to_string(MAX_FRAME_TIME) + "s). Its time was (ms): " + std::to_string(deltaTime.asMilliseconds()));
 		}
 		else {
 			frameTime = deltaTime;

@@ -24,7 +24,6 @@ private:
 	void handlePreThunder();
 	void handleThunderUp();
 	void handleThunderstorm();
-	void handleFlyToTarget(float appDist, const sf::Vector2f& target);
 	void initTiles();
 
 	sf::Vector2f m_noseTargetLeft;
