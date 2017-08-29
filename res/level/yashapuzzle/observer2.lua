@@ -2,8 +2,8 @@
 
 routine = function(O) 
 	O:gotoTile(2.5, 9.5)
-	O:gotoTile(11, 9.5)
-    O:gotoTile(11, 11.5)
-    O:wait(3)
-    O:gotoTile(11,9.5)
+	O:gotoTile(12, 9.5)
+    O:gotoTile(12, 12)
+    O:wait(5)
+    O:gotoTile(12,9.5)
 end

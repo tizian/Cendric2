@@ -1,8 +1,8 @@
--- Test Key 1
+-- Yasha Puzzle (Thief) Key
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_test_1', 'key', 50, 450, -1);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_1', 'item', 'Test Key 1','Test Schlüssel 1','Test Schlüssel 1');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_1', 'item_desc', 'A small rusty key.','Ein kleiner rostiger Schlüssel.','En chline rostige Schlüssel.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_yashathief', 'key', 50, 450, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item', 'Test Key 1','Test Schlüssel 1','Test Schlüssel 1');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item_desc', 'A small rusty key.','Ein kleiner rostiger Schlüssel.','En chline rostige Schlüssel.');
 
 -- Test Key 2
 

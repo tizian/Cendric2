@@ -39,11 +39,12 @@ bool WardenEnemy::isMainCharInRange() {
 	if (m_observedRange == 0) return false;
 
 	sf::Vector2f circleDistance;
+	auto const center = m_mainChar->getCenter();
 	auto const& bb = *m_mainChar->getBoundingBox();
 	auto const& circle = m_circleSpawner->center;
 
-	circleDistance.x = std::abs(circle.x - bb.left);
-	circleDistance.y = abs(circle.y - bb.top);
+	circleDistance.x = std::abs(circle.x - center.x);
+	circleDistance.y = abs(circle.y - center.y);
 
 	if (circleDistance.x > (bb.width * 0.5f + m_observedRange))
 		return false;
