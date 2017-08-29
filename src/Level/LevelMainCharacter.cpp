@@ -2,6 +2,7 @@
 #include "Screens/LevelScreen.h"
 #include "Level/MOBBehavior/AttackingBehaviors/UserAttackingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
+#include "Level/Enemies/WardenEnemy.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "ScreenOverlays/TextureScreenOverlay.h"
 #include "Level/DamageNumbers.h"
@@ -238,7 +239,14 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 	}
 	else {
 		// sets the color for a "sufficiently long" time. Other actions will reset invisibility.
-		setSpriteColor(sf::Color(255, 255, 255, 75), sf::seconds(1000));
+		setSpriteColor(sf::Color(255, 255, 255, 55 + level * 25), sf::seconds(1000));
+	}
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		WardenEnemy* warden = dynamic_cast<WardenEnemy*>(go);
+		if (warden) {
+			warden->updateObservedRange();
+		}
 	}
 }
 

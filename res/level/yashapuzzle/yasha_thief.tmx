@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="152">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_thief.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_thief.png,2.0,res/level/yashapuzzle/layer_2.png"/>
   <property name="dimming" value="0.7"/>
   <property name="musicpath" value="res/music/crypt.ogg"/>
   <property name="observed" value=""/>

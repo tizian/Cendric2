@@ -20,8 +20,6 @@ WardenEnemy::WardenEnemy(const Level* level, Screen* screen) :
 	m_isAlwaysUpdate = true;
 	m_isImmortal = true;
 	m_isHPBarVisible = false;
-
-	m_observedRange = 100.f;
 }
 
 void WardenEnemy::update(const sf::Time& frameTime) {
@@ -29,12 +27,26 @@ void WardenEnemy::update(const sf::Time& frameTime) {
 
 	if (m_wardenState == WardenState::Idle && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->update(frameTime);
-		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
+		if (isMainCharInRange()) {
 			m_scriptedBehavior->say("WardenTriggered", 3);
 			m_mainChar->setDead();
 			m_wardenState = WardenState::Triggered;
 		}
 	}
+}
+
+bool WardenEnemy::isMainCharInRange() {
+	if (m_observedRange == 0) return false;
+	auto const& bb = *m_mainChar->getBoundingBox();
+	if (dist(sf::Vector2f(bb.left, bb.top), m_circleSpawner->center) < m_observedRange)
+		return true;
+	if (dist(sf::Vector2f(bb.left + bb.width, bb.top), m_circleSpawner->center) < m_observedRange)
+		return true;
+	if (dist(sf::Vector2f(bb.left, bb.top + bb.height), m_circleSpawner->center) < m_observedRange)
+		return true;
+	if (dist(sf::Vector2f(bb.left + bb.width, bb.top + bb.height), m_circleSpawner->center) < m_observedRange)
+		return true;
+	return false;
 }
 
 void WardenEnemy::loadAttributes() {
@@ -54,6 +66,12 @@ MovingBehavior* WardenEnemy::createMovingBehavior(bool asAlly) {
 AttackingBehavior* WardenEnemy::createAttackingBehavior(bool asAlly) {
 	// wardens can't attack
 	return nullptr;
+}
+
+void WardenEnemy::updateObservedRange() {
+	m_observedRange = (4 - m_mainChar->getInvisibilityLevel()) * 20.f;
+	m_circleSpawner->radius = sf::Vector2f(m_observedRange, m_observedRange);
+	m_pc->setEmitRate(m_observedRange * 1.5f);
 }
 
 void WardenEnemy::loadAnimation(int skinNr) {
@@ -112,21 +130,21 @@ void WardenEnemy::loadAnimation(int skinNr) {
 void WardenEnemy::loadComponents() {
 	// light
 	LightComponent* lightComponent = new LightComponent(LightData(
-		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), m_observedRange * 2, 1.0f), this);
+		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 250.f, 0.8f), this);
 	addComponent(lightComponent);
 
 	// particles
 	ParticleComponentData data;
-	data.particleCount = 200;
+	data.particleCount = 300;
 	data.isAdditiveBlendMode = true;
-	data.emitRate = 80.f;
+	data.emitRate = m_observedRange;
 	data.texturePath = getParticleTexture();
 
 	// Generators
-	auto posGen = new particles::CircleSpawner();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->radius = sf::Vector2f(m_observedRange / 2.f, m_observedRange / 2.f);
-	data.spawner = posGen;
+	m_circleSpawner = new particles::CircleSpawner();
+	m_circleSpawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	m_circleSpawner->radius = sf::Vector2f(m_observedRange, m_observedRange);
+	data.spawner = m_circleSpawner;
 
 	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 15.f;
@@ -157,6 +175,8 @@ void WardenEnemy::loadComponents() {
 	m_pc = new ParticleComponent(data, this);
 	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
 	addComponent(m_pc);
+
+	updateObservedRange();
 }
 
 std::string WardenEnemy::getSpritePath() const {

@@ -28,6 +28,7 @@ public:
 	void insertDefaultLoot(std::map<std::string, int>& loot, int& gold) const override {};
 	void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const override {};
 
+	void updateObservedRange();
 	int getMentalStrength() const override { return 4; }
 	EnemyID getEnemyID() const override { return EnemyID::Warden; }
 	WardenState getWardenState() const { return m_wardenState; }
@@ -39,6 +40,7 @@ protected:
 	void loadAttributes() override;
 	void loadSpells() override {};
 	void loadAnimation(int skinNr) override;
+	bool isMainCharInRange();
 
 	virtual void loadComponents();
 
@@ -47,6 +49,7 @@ protected:
 
 	ParticleComponent* m_pc;
 	particles::ColorGenerator* m_colGen;
+	particles::CircleSpawner* m_circleSpawner;
 
 	static const float SPEED_IDLE;
 	static const float SPEED_CHASING;

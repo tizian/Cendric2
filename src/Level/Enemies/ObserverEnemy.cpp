@@ -17,13 +17,11 @@ ObserverEnemy::ObserverEnemy(const Level* level, Screen* screen) :
 	m_isAlwaysUpdate = true;
 	m_isImmortal = true;
 	m_isHPBarVisible = false;
-
-	m_observedRange = 100.f;
 }
 
 void ObserverEnemy::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
-
+	
 	if (m_wardenState == WardenState::Observing) {
 		updateTime(m_chasingTime, frameTime);
 		m_scriptedBehavior->updateSpeechBubble(frameTime);
