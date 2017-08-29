@@ -122,9 +122,7 @@ void LevelMainCharacter::handleAttackInput() {
 				m_spellManager->setCurrentSpell(it.second);
 				m_core->setWeaponSpell(it.first);
 				m_spellManager->executeCurrentSpell(target);
-				if (m_invisibilityLevel > 0) {
-					setInvisibilityLevel(0);
-				}
+				checkInvisibilityLevel();
 			}
 			else {
 				m_spellManager->setAndExecuteSpell(it.second);
@@ -139,9 +137,14 @@ void LevelMainCharacter::handleAttackInput() {
 	if (isMousePressed) {
 		m_spellManager->executeCurrentSpell(target);
 		g_inputController->lockAction();
-		if (m_invisibilityLevel > 0) {
-			setInvisibilityLevel(0);
-		}
+		checkInvisibilityLevel();
+	}
+}
+
+void LevelMainCharacter::checkInvisibilityLevel() {
+	if (m_invisibilityLevel > 0 && 
+		m_spellManager->getSpellMap()[m_spellManager->getSelectedSpell()]->getSpellData().spellType != SpellType::Twilight) {
+		setInvisibilityLevel(0);
 	}
 }
 

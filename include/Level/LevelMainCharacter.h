@@ -85,6 +85,7 @@ private:
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
+	void checkInvisibilityLevel();
 
 	ParticleComponent* m_deathPc;
 	sf::Time m_fadingTime = sf::seconds(2.f);

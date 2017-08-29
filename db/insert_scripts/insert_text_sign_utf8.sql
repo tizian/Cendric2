@@ -36,3 +36,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Po
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FaithShatter','sign','Faith will shatter them!','Glaube wird sie zerschmettern!','De Glaube wird si zerschmettere!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedShield','sign','A shield may help.','Ein Schild könnte helfen.','En Schild chönt helfe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('RiseAgain','sign','Jump and rise again.','Spring und erhebe dich wieder.','Spring und erheb dich wieder.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedDivine','sign','Powerful divine magic will find a way...','Mächtige heilige Magie wird einen Weg finden...','Mächtigi heiligi Magie wird en Weg finde...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedTwilight','sign','Powerful twilight magic will find a way...','Mächtige Dämmerungsmagie wird einen Weg finden...','Mächtigi Dämmerigsmagie wird en Weg finde...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedNecromancy','sign','Powerful necromancy will find a way...','Mächtige Nekromantie wird einen Weg finden...','Mächtigi Nekromantie wird en Weg finde...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedInvisibility','sign','Be one with the shadows!','Sei eins mit den Schatten!','Verschmilz mit de Schatte!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedRaisethedead','sign','The dead shall raise again.','Die Toten sollen sich wieder erheben.','Di Tote söled wieder ufsta.');

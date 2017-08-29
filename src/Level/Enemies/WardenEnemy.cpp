@@ -37,16 +37,28 @@ void WardenEnemy::update(const sf::Time& frameTime) {
 
 bool WardenEnemy::isMainCharInRange() {
 	if (m_observedRange == 0) return false;
+
+	sf::Vector2f circleDistance;
 	auto const& bb = *m_mainChar->getBoundingBox();
-	if (dist(sf::Vector2f(bb.left, bb.top), m_circleSpawner->center) < m_observedRange)
+	auto const& circle = m_circleSpawner->center;
+
+	circleDistance.x = std::abs(circle.x - bb.left);
+	circleDistance.y = abs(circle.y - bb.top);
+
+	if (circleDistance.x > (bb.width * 0.5f + m_observedRange))
+		return false;
+	if (circleDistance.y > (bb.height * 0.5f + m_observedRange))
+		return false;
+
+	if (circleDistance.x <= bb.width * 0.5f)
 		return true;
-	if (dist(sf::Vector2f(bb.left + bb.width, bb.top), m_circleSpawner->center) < m_observedRange)
+	if (circleDistance.y <= bb.height * 0.5f)
 		return true;
-	if (dist(sf::Vector2f(bb.left, bb.top + bb.height), m_circleSpawner->center) < m_observedRange)
-		return true;
-	if (dist(sf::Vector2f(bb.left + bb.width, bb.top + bb.height), m_circleSpawner->center) < m_observedRange)
-		return true;
-	return false;
+
+	float a = circleDistance.x - bb.width * 0.5f;
+	float b = circleDistance.y - bb.height * 0.5f;
+
+	return (a * a + b * b <= m_observedRange * m_observedRange);
 }
 
 void WardenEnemy::loadAttributes() {
@@ -119,7 +131,7 @@ void WardenEnemy::loadAnimation(int skinNr) {
 	lookingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 50));
 	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 50));
 	addAnimation(GameObjectState::Looking, lookingAnimation);
-	
+
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
