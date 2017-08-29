@@ -344,7 +344,9 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_equipmentRenderTexture.setView(oldView);
 	renderObjects(GameObjectType::_LevelMainCharacter, m_equipmentRenderTexture);
 	renderObjects(GameObjectType::_Equipment, m_equipmentRenderTexture);
+	m_sprite.setColor(m_equipmentColor);
 	flushTexture(renderTarget, m_equipmentRenderTexture, oldView);
+	m_sprite.setColor(COLOR_WHITE);
 	
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);

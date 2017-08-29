@@ -301,10 +301,16 @@ particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::strin
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
 	}
 	else if (color.compare("yellow") == 0) {
-		colGen->minStartCol = sf::Color(255, 235, 100, 150);
-		colGen->maxStartCol = sf::Color(255, 255, 150);
-		colGen->minEndCol = sf::Color(200, 200, 200, 100);
-		colGen->maxEndCol = sf::Color(255, 240, 220, 100);
+		colGen->minStartCol = sf::Color(255, 235, 100, 100);
+		colGen->maxStartCol = sf::Color(255, 255, 150, 100);
+		colGen->minEndCol = sf::Color(200, 200, 200, 50);
+		colGen->maxEndCol = sf::Color(255, 240, 220, 50);
+	}
+	else if (color.compare("purple") == 0) {
+		colGen->minStartCol = sf::Color(171, 105, 243);
+		colGen->maxStartCol = sf::Color(171, 105, 243);
+		colGen->minEndCol = sf::Color(77, 54, 130, 200);
+		colGen->maxEndCol = sf::Color(77, 54, 130, 200);
 	}
 	else {
 		g_logger->logWarning("ParticleTile", "Unknown flame color: " + color);

@@ -4,10 +4,10 @@
   <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_necro.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/crypt.ogg"/>
-  <property name="tilesetpath" value="res/level/yashapuzzle/tileset_level_yashapuzzle.png"/>
+  <property name="tilesetpath" value="res/level/yashapuzzle/tileset_level_yashapuzzle_necro.png"/>
  </properties>
- <tileset firstgid="1" name="tileset_level_yashapuzzle" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">
-  <image source="tileset_level_yashapuzzle.png" width="1500" height="1500"/>
+ <tileset firstgid="1" name="tileset_level_yashapuzzle_necro" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">
+  <image source="tileset_level_yashapuzzle_necro.png" width="1500" height="1500"/>
   <tile id="69">
    <objectgroup draworder="index"/>
   </tile>
