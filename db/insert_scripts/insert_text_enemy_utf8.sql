@@ -42,3 +42,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Le
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Koray','enemy','Koray','Koray','Koray');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossYasha','enemy','Yasha, Guardian of the Temple','Yasha, Wächterin des Tempels','Yasha, Wächterin vom Tempel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('YashaAdd','enemy','Yasha''s Cat','Yasha''s Katze','Yasha-Chätzli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw','enemy','Necromancer Yaslaw','Nekromant Yaslaw','Nekromant Yaslaw');

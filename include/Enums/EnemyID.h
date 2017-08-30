@@ -40,5 +40,6 @@ enum class EnemyID {
 	Koray,
 	Boss_Yasha,
 	YashaAdd,
+	Yaslaw,
 	MAX
 };

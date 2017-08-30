@@ -807,7 +807,7 @@
     <property name="luapath" value="res/level/yashapuzzle/observer4.lua"/>
    </properties>
   </object>
-  <object id="164" gid="1220" x="200" y="1300" width="50" height="50">
+  <object id="164" gid="1220" x="200" y="1325" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer5.lua"/>
    </properties>

@@ -151,7 +151,7 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		enemy->setObjectID(it.objectID);
 		enemy->setUnique(it.isUnique);
 		enemy->setDebugBoundingBox(sf::Color::Magenta);
-		if (it.isUnique && core->isEnemyKilled(data.id, it.objectID)) enemy->setDead();
+		if (it.isUnique && core->isEnemyKilled(data.id, it.objectID) || it.isDead) enemy->setDead();
 		screen->addObject(enemy);
 		if (!it.luaPath.empty()) {
 			enemy->setScriptedBehavior(it.luaPath);

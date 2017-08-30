@@ -39,13 +39,6 @@ void Enemy::load(int skinNr) {
 	if (m_name.empty())
 		m_name = EnumNames::getEnemyName(getEnemyID());
 
-	loadResources();
-	loadAnimation(skinNr);
-	loadAttributes();
-	loadSpells();
-	loadBehavior();
-	m_spellManager->setSpellsAllied(m_isAlly);
-
 	m_interactComponent = new InteractComponent(g_textProvider->getText(m_name, "enemy"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToLoot");
@@ -53,6 +46,13 @@ void Enemy::load(int skinNr) {
 	m_interactComponent->setInteractable(false);
 	m_interactComponent->setTooltipHeight(getConfiguredDistanceToHPBar() - GUIConstants::CHARACTER_SIZE_S);
 	addComponent(m_interactComponent);
+
+	loadResources();
+	loadAnimation(skinNr);
+	loadAttributes();
+	loadSpells();
+	loadBehavior();
+	m_spellManager->setSpellsAllied(m_isAlly);
 
 	delete m_damageNumbers;
 	m_damageNumbers = new DamageNumbers(this->isAlly());
