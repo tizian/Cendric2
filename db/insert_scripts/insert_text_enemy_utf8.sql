@@ -13,7 +13,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Hu
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wisp','enemy','Wisp','Irrlicht','Irrliecht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Seagull','enemy','Seagull','Möwe','Möwe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Wolf','enemy','Wolf','Wolf','Wolf');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cairn','enemy','Cairn Wraith','Cairn Geist','Cairn Geist');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cairn','enemy','Cairn Wraith','Cairn Geist','Steimännli Geist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LavaCairn','enemy','Lava Wraith','Lava Geist','Lava Geist');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MysteriousBeast','enemy','Mysterious Beast','Mysteriöses Biest','Mysteriöses Biescht');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('CavernBeast','enemy','Cavern Beast','Höhlenmonster','Höhlemonster');

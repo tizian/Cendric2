@@ -169,7 +169,7 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("cathedral_thief", "completed") and DL:isQuestState("yasha_thief", "void")) then 
 			DL:addChoice(34, "DL_Choice_YashaStart") -- Do you have another job for me?
 		end
-		if (DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")) then 
+		if (DL:isQuestState("yasha_thief", "started") and DL:isQuestComplete("yasha_thief")) then 
 			DL:addChoice(35, "DL_Choice_YashaComplete") -- I found the heart of thunder.
 		end
 		DL:addChoice(-1, "") -- 
@@ -296,7 +296,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")) then 
+		if (DL:isQuestState("yasha_thief", "started") and DL:isQuestComplete("yasha_thief")) then 
 
 			DL:createNPCNode(35, 36, "DL_Vincent_YashaComplete") -- (Grins) Well, I hope you didn't get in trouble getting this one.
 			DL:removeItem("qe_thunderheart", 1)

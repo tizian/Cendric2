@@ -474,6 +474,29 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
+				else if (name.find("add item") != std::string::npos) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, hint value property not found.");
+						return false;
+					}
+
+					std::string item = textAttr;
+
+					size_t pos = 0;
+					if ((pos = item.find(",")) == std::string::npos) {
+						logError("XML file could not be read, add item trigger value must be two comma separated strings (item id, amount)");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::ItemChange);
+					content.s1 = item.substr(0, pos);
+					item.erase(0, pos + 1);
+
+					content.i1 = static_cast<int>(std::stoi(item));
+
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}

@@ -1,8 +1,10 @@
 -- Yasha Puzzle (Thief) Key
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_yashathief', 'key', 50, 450, -1);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item', 'Test Key 1','Test Schlüssel 1','Test Schlüssel 1');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item_desc', 'A small rusty key.','Ein kleiner rostiger Schlüssel.','En chline rostige Schlüssel.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_yashathief', 'key', 750, 250, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item', 'Blue Key','Blauer Schlüssel','Blaue Schlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item_desc', 'A small blue key. I found it in Yasha''s puzzle.','Ein kleiner blauer Schlüssel. Ich habe ihn in Yasha''s Rätsel gefunden.','En chline blaue Schlüssel. Ich hanen im Rätsel vode Yasha gfunde.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_yashathief', -6, -38, 32, 12);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_yashathief', 1, 650, 300, 50, 50);
 
 -- Test Key 2
 

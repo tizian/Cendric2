@@ -418,7 +418,7 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:35
-		condition:DL:isQuestState("yasha_thief", "completed") and DL:isQuestComplete("yasha_thief")
+		condition:DL:isQuestState("yasha_thief", "started") and DL:isQuestComplete("yasha_thief")
 		# translation: 
 		translation.tag:DL_Choice_YashaComplete
 		translation.en:I found the heart of thunder.

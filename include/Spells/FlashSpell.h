@@ -25,7 +25,7 @@ private:
 	bool m_isHurting = true;
 
 	sf::Time m_flashDuration;
-	const sf::Time FLASH_DURATION = sf::milliseconds(500);
+	const sf::Time FLASH_DURATION = sf::seconds(0.5f);
 
 	void loadComponents();
 	ParticleComponent* m_pc;

@@ -28,9 +28,13 @@ private:
 	void touch();
 	void addSpell();
 	void loadLeapOfFaithSpell();
+	void loadFlashSpell();
+	void loadGhostFormSpell(); 
 	SpellID m_spellID;
 	
 	void loadComponents();
 	ParticleComponent* m_pc;
 	sf::Time m_particleTime = sf::seconds(3.f);
+
+	static const std::string THUNDER_SOUND_PATH;
 };

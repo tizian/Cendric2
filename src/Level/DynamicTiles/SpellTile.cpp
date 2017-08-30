@@ -7,8 +7,12 @@
 #include "GameObjectComponents/ParticleComponent.h"
 #include "GlobalResource.h"
 #include "Spells/LeapOfFaithSpell.h"
+#include "Spells/FlashSpell.h"
+#include "Spells/GhostFormSpell.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Spell, SpellTile)
+
+const std::string SpellTile::THUNDER_SOUND_PATH = "res/sound/mob/thunder.ogg";
 
 SpellTile::SpellTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 }
@@ -83,6 +87,14 @@ void SpellTile::addSpell() {
 		loadLeapOfFaithSpell();
 		break;
 	}
+	case SpellID::Flash: {
+		loadFlashSpell();
+		break;
+	}
+	case SpellID::GhostForm: {
+		loadGhostFormSpell();
+		break;
+	}
 	default:
 		break;
 	}
@@ -101,6 +113,22 @@ void SpellTile::loadLeapOfFaithSpell() {
 	m_screen->addObject(newSpell);
 
 	dynamic_cast<LevelScreen*>(m_screen)->addSpellBuffToInterface(data.iconTextureRect, data.duration, newSpell, AttributeData());
+}
+
+void SpellTile::loadGhostFormSpell() {
+
+}
+
+void SpellTile::loadFlashSpell() {
+	SpellData data = SpellData::getSpellData(SpellID::Flash);
+	g_resourceManager->loadTexture(data.spritesheetPath, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(THUNDER_SOUND_PATH, ResourceType::Level);
+	g_resourceManager->playSound(THUNDER_SOUND_PATH, false);
+
+	m_mainChar->setPosition(m_mainChar->getPosition() + sf::Vector2f(6 * TILE_SIZE_F, 0.f));
+	FlashSpell* newSpell = new FlashSpell();
+	newSpell->load(data, m_mainChar, sf::Vector2f());
+	m_screen->addObject(newSpell);
 }
 
 void SpellTile::onHit(LevelMovableGameObject* mob) {
