@@ -24,8 +24,10 @@ public:
 	void setCurrentRoutineStep();
 
 	bool isError() const;
+	const std::string& getLuaPath() const { return m_luaPath; }
 
 protected:
+	std::string m_luaPath;
 	Enemy* m_enemy;
 	SpeechBubble* m_speechBubble;
 	ScriptedBehaviorCallback m_callback;

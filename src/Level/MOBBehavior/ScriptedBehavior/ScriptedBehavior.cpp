@@ -11,6 +11,7 @@ const sf::Time ScriptedBehavior::SCRIPT_UPDATE_INTERVAL = sf::seconds(0.5f);
 
 ScriptedBehavior::ScriptedBehavior(const std::string& luaPath, Enemy* enemy) : 
 	m_callback(luaPath, enemy) {
+	m_luaPath = luaPath;
 
 	m_speechBubble = new SpeechBubble(enemy);
 	m_speechBubble->setFloatingHeight(enemy->getConfiguredDistanceToHPBar() + 10.f);

@@ -4,6 +4,7 @@
 #include "World/Trigger.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
+#include "FileIO/ParserTools.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
 
@@ -25,6 +26,20 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	if (m_strength < 0 || m_strength > 4) return false;
 
 	if (m_strength == 0 && !m_keyItemID.empty()) return false;
+
+	if (contains(properties, std::string("not conditions"))) {
+		auto notCond = ParserTools::parseConditions(properties.at("not conditions"), true);
+		for (auto& cond : notCond) {
+			m_conditions.push_back(cond);
+		}
+	}
+
+	if (contains(properties, std::string("conditions"))) {
+		auto notCond = ParserTools::parseConditions(properties.at("conditions"), false);
+		for (auto& cond : notCond) {
+			m_conditions.push_back(cond);
+		}
+	}
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F));

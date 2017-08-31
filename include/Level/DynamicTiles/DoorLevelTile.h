@@ -27,6 +27,7 @@ private:
 	int m_tileWidth = 1;
 	int m_strength = 0;
 	std::string m_keyItemID;
+	std::vector<Condition> m_conditions;
 	bool m_isInitiallyCollidable;
 
 	static const float OPEN_RANGE;

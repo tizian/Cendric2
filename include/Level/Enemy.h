@@ -104,6 +104,8 @@ public:
 	virtual EnemyID getEnemyID() const = 0;
 	const std::string& getEnemyName() const;
 
+	const ScriptedBehavior* getScriptedBehavior() const { return m_scriptedBehavior; }
+
 protected:
 	LevelMainCharacter* m_mainChar;
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.

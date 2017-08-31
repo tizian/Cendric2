@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Yaslaw, YaslawEnemy)
@@ -105,12 +106,19 @@ void YaslawEnemy::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 
 	// initializing a yaslaw will delete all other yaslaw so that only one yaslaw exists!!
+	std::string oldLuaPath;
 	for (auto it : *m_screen->getObjects(GameObjectType::_Enemy)) {
 		Enemy* e = dynamic_cast<Enemy*>(it);
 		if (e->getEnemyID() == EnemyID::Yaslaw && e != this) {
+			if (e->getScriptedBehavior()) {
+				oldLuaPath = e->getScriptedBehavior()->getLuaPath();
+			}
+
 			e->setDisposed();
 		}
 	}
+
+	setScriptedBehavior(oldLuaPath);
 }
 
 void YaslawEnemy::update(const sf::Time& frameTime) {
