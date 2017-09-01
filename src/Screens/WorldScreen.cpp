@@ -3,6 +3,7 @@
 #include "GUI/BookWindow.h"
 #include "World/Item.h"
 #include "World/Trigger.h"
+#include "World/DoorTile.h"
 
 const std::string WorldScreen::VERTEX_SHADER = \
 "void main()" \
@@ -160,6 +161,12 @@ void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int de
 void WorldScreen::notifyConditionAdded(const Condition& condition) {
 	if (getCharacterCore()->setConditionFulfilled(condition.type, condition.name)) {
 		reloadTriggers();
+
+		for (auto& it : *getObjects(GameObjectType::_DynamicTile)) {
+			if (DoorTile* door = dynamic_cast<DoorTile*>(it)) {
+				door->notifyReloadNeeded();
+			}
+		}
 	}
 }
 

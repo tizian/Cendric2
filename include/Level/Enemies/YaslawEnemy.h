@@ -18,6 +18,7 @@ public:
 
 	EnemyID getEnemyID() const override { return EnemyID::Yaslaw; }
 	float getConfiguredDistanceToHPBar() const override { return 40.f; }
+	void setAlly(const sf::Time& ttl) override;
 
 protected:
 	std::string getSpritePath() const override;

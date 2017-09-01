@@ -10,6 +10,7 @@ AllyWalkingBehavior::AllyWalkingBehavior(Enemy* enemy) :
 void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	WalkingBehavior::checkCollisions(nextPosition);
 	// if the enemy collidesX but can't jump and is ally and idle, teleports to its owner.
+	if (m_enemy->isDead()) return;
 	EnemyState state = m_enemy->getEnemyState();
 	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > m_replaceDistance) {
 		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height);

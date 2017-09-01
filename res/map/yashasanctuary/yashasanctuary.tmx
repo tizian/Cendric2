@@ -415,7 +415,7 @@
   <object id="145" x="800" y="237.5" width="50" height="25">
    <properties>
     <property name="conditions" value="default,necromancer"/>
-    <property name="level entry" value="res/level/yashapuzzle/yasha_necro.tmx,710,1310"/>
+    <property name="level entry" value="res/level/yashapuzzle/yasha_necro.tmx,210,560"/>
     <property name="not conditions" value="default,yashapuzzle"/>
     <property name="persistent" value=""/>
    </properties>

@@ -8,14 +8,8 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
 
-const float DoorLevelTile::OPEN_RANGE = 100.f;
-
 bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_isInitiallyCollidable = contains(properties, std::string("collidable"));
-
-	if (contains(properties, std::string("key"))) {
-		m_keyItemID = properties.at("key");
-	}
 
 	if (!contains(properties, std::string("width"))) return false;
 	m_tileWidth = std::stoi(properties.at(std::string("width")));
@@ -25,27 +19,14 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_strength = std::stoi(properties.at(std::string("strength")));
 	if (m_strength < 0 || m_strength > 4) return false;
 
+	initConditions(properties);
 	if (m_strength == 0 && !m_keyItemID.empty()) return false;
-
-	if (contains(properties, std::string("not conditions"))) {
-		auto notCond = ParserTools::parseConditions(properties.at("not conditions"), true);
-		for (auto& cond : notCond) {
-			m_conditions.push_back(cond);
-		}
-	}
-
-	if (contains(properties, std::string("conditions"))) {
-		auto notCond = ParserTools::parseConditions(properties.at("conditions"), false);
-		for (auto& cond : notCond) {
-			m_conditions.push_back(cond);
-		}
-	}
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F));
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
-	m_interactComponent->setInteractRange(OPEN_RANGE);
+	m_interactComponent->setInteractRange(getOpenRange());
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&DoorLevelTile::onRightClick, this));
 	addComponent(m_interactComponent);
@@ -68,13 +49,14 @@ void DoorLevelTile::loadAnimation(int skinNr) {
 	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_tileWidth, 3 * TILE_SIZE));
 
 	addAnimation(GameObjectState::Open, openAnimation);
+
+	playCurrentAnimation(false);
+	reloadConditions(m_mainChar);
 }
 
 void DoorLevelTile::update(const sf::Time& frameTime) {
-	if (!m_isInitialized) {
-		close();
-		playCurrentAnimation(false);
-		m_isInitialized = true;
+	if (m_isReloadNeeded) {
+		reloadConditions(m_mainChar);
 	}
 
 	LevelDynamicTile::update(frameTime);
@@ -104,10 +86,13 @@ void DoorLevelTile::onRightClick() {
 	if (m_isOpen) return;
 
 	// check if the door is in range
-	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= getOpenRange();
 
 	if (!inRange) {
 		m_screen->setNegativeTooltip("OutOfRange");
+	}
+	else if (!m_isConditionsFulfilled) {
+		m_screen->setNegativeTooltip("IsLocked");
 	}
 	else if (m_strength == 0) {
 		open();
@@ -167,6 +152,10 @@ void DoorLevelTile::close() {
 			}
 		}
 	}
+}
+
+float DoorLevelTile::getOpenRange() const {
+	return 100.f;
 }
 
 std::string DoorLevelTile::getSpritePath() const {

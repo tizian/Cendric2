@@ -2,17 +2,13 @@
 #include "Map/Map.h"
 #include "Screens/MapScreen.h"
 #include "GameObjectComponents/InteractComponent.h"
-#include "FileIO/ParserTools.h"
 #include "Registrar.h"
 
 REGISTER_MAP_DYNAMIC_TILE(MapDynamicTileID::Door, DoorMapTile)
 
-const float DoorMapTile::OPEN_RANGE = 50.f;
-
 DoorMapTile::DoorMapTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
-
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
-	m_interactComponent->setInteractRange(OPEN_RANGE);
+	m_interactComponent->setInteractRange(getOpenRange());
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&DoorMapTile::onRightClick, this));
 	addComponent(m_interactComponent);
@@ -34,7 +30,7 @@ void DoorMapTile::close() {
 
 void DoorMapTile::update(const sf::Time& frameTime) {
 	if (m_isReloadNeeded) {
-		reloadConditions();
+		reloadConditions(m_mainChar);
 	}
 
 	MapDynamicTile::update(frameTime);
@@ -45,23 +41,7 @@ bool DoorMapTile::init(const MapTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(0.f, 0.f));
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 
-	if (contains(properties, std::string("key"))) {
-		m_keyItemId = properties.at("key");
-	}
-
-	if (contains(properties, std::string("not conditions"))) {
-		auto notCond = ParserTools::parseConditions(properties.at("not conditions"), true);
-		for (auto& cond : notCond) {
-			m_conditions.push_back(cond);
-		}
-	}
-
-	if (contains(properties, std::string("conditions"))) {
-		auto notCond = ParserTools::parseConditions(properties.at("conditions"), false);
-		for (auto& cond : notCond) {
-			m_conditions.push_back(cond);
-		}
-	}
+	initConditions(properties);
 
 	return true;
 }
@@ -81,7 +61,11 @@ void DoorMapTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Closed, closedAnimation);
 
 	playCurrentAnimation(false);
-	reloadConditions();
+	reloadConditions(m_mainChar);
+}
+
+float DoorMapTile::getOpenRange() const {
+	return 50.f;
 }
 
 std::string DoorMapTile::getSpritePath() const {
@@ -92,54 +76,25 @@ void DoorMapTile::onRightClick() {
 	if (m_isOpen) return;
 
 	// check if the door is in range
-	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= OPEN_RANGE;
+	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= getOpenRange();
 
 	if (!inRange) {
 		m_screen->setNegativeTooltip("OutOfRange");
 	}
-	else if (m_isConditionsFulfilled && !m_keyItemId.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemId, 1)) {
+	else if (m_isConditionsFulfilled && !m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		open();
 		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 
 		std::string tooltipText = g_textProvider->getText("Used");
-		tooltipText.append(g_textProvider->getText(m_keyItemId, "item"));
+		tooltipText.append(g_textProvider->getText(m_keyItemID, "item"));
 		m_screen->setTooltipTextRaw(tooltipText, COLOR_GOOD, true);
 
 		g_inputController->lockAction();
 	}
-	else if (!m_keyItemId.empty()) {
+	else if (!m_keyItemID.empty()) {
 		m_screen->setNegativeTooltip("IsLockedKey");
 	}
 	else {
 		m_screen->setNegativeTooltip("IsLocked");
 	}
-}
-
-void DoorMapTile::reloadConditions() {
-	CharacterCore* core = m_screen->getCharacterCore();
-
-	bool conditionsFulfilled = true;
-	for (auto& condition : m_conditions) {
-		if ((condition.negative && core->isConditionFulfilled(condition.type, condition.name))
-			|| (!condition.negative && !core->isConditionFulfilled(condition.type, condition.name))) {
-			conditionsFulfilled = false;
-			break;
-		}
-	}
-
-	m_isConditionsFulfilled = conditionsFulfilled;
-
-	if ((m_isConditionsFulfilled && m_keyItemId.empty())
-		|| m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
-		open();
-	}
-	else {
-		close();
-	}
-
-	m_isReloadNeeded = false;
-}
-
-void DoorMapTile::notifyReloadNeeded() {
-	m_isReloadNeeded = true;
 }

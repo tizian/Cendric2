@@ -1061,6 +1061,7 @@
   <object id="187" x="1250" y="2575" width="50" height="50">
    <properties>
     <property name="condition progress" value="default,yashapuzzle"/>
+    <property name="questcondition progress" value="yasha_cleric,leap_of_faith"/>
    </properties>
   </object>
  </objectgroup>

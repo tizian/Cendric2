@@ -4,11 +4,10 @@
 #include "Map/MapDynamicTile.h"
 #include "GUI/TooltipWindow.h"
 #include "Structs/Condition.h"
-
-class InteractComponent;
+#include "World/DoorTile.h"
 
 // a door
-class DoorMapTile final : public MapDynamicTile {
+class DoorMapTile final : public virtual MapDynamicTile, public virtual DoorTile {
 public:
 	DoorMapTile(MapScreen* mapScreen);
 
@@ -18,25 +17,14 @@ public:
 	void loadAnimation(int skinNr) override;
 	void onRightClick() override;
 
-	void notifyReloadNeeded();
-	
+	// resolving diamond of death
 	MapDynamicTileID getDynamicTileID() const override { return MapDynamicTileID::Door; }
+	GameObjectType getConfiguredType() const override { return MapDynamicTile::getConfiguredType(); }
+	void render(sf::RenderTarget& target) override { MapDynamicTile::render(target); }
 
 private:
+	float getOpenRange() const override;
 	std::string getSpritePath() const override;
-	void reloadConditions();
-	void open();
-	void close();
-
-private:
-	InteractComponent* m_interactComponent;
-	bool m_isOpen;
-	bool m_isReloadNeeded = false;
-	bool m_isConditionsFulfilled;
-
-	static const float OPEN_RANGE;
-
-private:
-	std::string m_keyItemId;
-	std::vector<Condition> m_conditions;
+	void open() override;
+	void close() override;
 };

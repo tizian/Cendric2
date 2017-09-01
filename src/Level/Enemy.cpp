@@ -102,7 +102,7 @@ void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
 	LevelMovableGameObject::update(frameTime);
-	if (m_scriptedBehavior != nullptr) {
+	if (m_scriptedBehavior != nullptr && !m_isDead) {
 		m_scriptedBehavior->update(frameTime);
 	}
 	updateHpBar();

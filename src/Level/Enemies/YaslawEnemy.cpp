@@ -118,12 +118,17 @@ void YaslawEnemy::loadAnimation(int skinNr) {
 		}
 	}
 
-	setScriptedBehavior(oldLuaPath);
+	if (!oldLuaPath.empty())
+		setScriptedBehavior(oldLuaPath);
 }
 
 void YaslawEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 	m_lightComponent->flipOffsetX(!m_enemyMovingBehavior->isFacingRight());
+}
+
+void YaslawEnemy::setAlly(const sf::Time& ttl) {
+	Enemy::setAlly(sf::seconds(20.f));
 }
 
 void YaslawEnemy::setDead() {

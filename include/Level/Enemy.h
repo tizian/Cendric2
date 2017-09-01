@@ -67,7 +67,7 @@ public:
 	// the object ID in the level enemy object layer.
 	void setObjectID(int id);
 	// sets the enemy as ally. The enemy dies after the time to live has run out.
-	void setAlly(const sf::Time& ttl);
+	virtual void setAlly(const sf::Time& ttl);
 	void setEnemyName(const std::string& name);
 
 	GameObjectType getConfiguredType() const override;

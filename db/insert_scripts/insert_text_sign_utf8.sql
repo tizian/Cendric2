@@ -20,7 +20,7 @@ won''t move.','Gefrorene Plattformen
 bewegen sich nicht.','Gfroreni Plattforme
 beweged sich nid.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedFire','sign','Need fire...','Brauchst Feuer...','Bruuchsch es Füürli...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedFear','sign','Afraid?','Zum fürchten...','Hesch Angsch?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedFear','sign','Afraid?','Zum fürchten...','Hesch Angscht?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedWind','sign','Need wind...','Brauchst Wind...','Bruuchsch es Lüftli...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('GetOut','sign','Get out!','Hau ab!','Use mit dir!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Danger','sign','Danger!','Gefahr!','Gföhrlich!');

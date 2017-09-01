@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="72" height="21" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="199">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="72" height="21" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="200">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_necro.png,2.0,res/level/yashapuzzle/layer_2.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/yashapuzzle/layer_necro.png,2.0,res/level/yashapuzzle/layer_2_necro.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/crypt.ogg"/>
   <property name="tilesetpath" value="res/level/yashapuzzle/tileset_level_yashapuzzle_necro.png"/>
@@ -546,11 +546,6 @@
   <object id="190" gid="806" x="1650" y="500" width="50" height="50"/>
   <object id="191" gid="836" x="1700" y="500" width="50" height="50"/>
   <object id="192" gid="866" x="1750" y="500" width="50" height="50"/>
-  <object id="193" gid="1073" x="1500" y="700" width="50" height="50">
-   <properties>
-    <property name="text" value="YaslawGrave"/>
-   </properties>
-  </object>
   <object id="194" gid="1013" x="400" y="625" width="50" height="50">
    <properties>
     <property name="text" value="NeedFear"/>
@@ -570,12 +565,13 @@
    <properties>
     <property name="collidable" value=""/>
     <property name="conditions" value="npc_yaslaw,door_open"/>
+    <property name="strength" value="0"/>
     <property name="width" value="1"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="146" gid="1242" x="1500" y="750" width="50" height="50">
+  <object id="146" gid="1242" x="1700" y="750" width="50" height="50">
    <properties>
     <property name="dead" value=""/>
     <property name="luapath" value="res/level/yashapuzzle/yaslaw.lua"/>
@@ -597,6 +593,12 @@
     <property name="keyguarded" value=""/>
     <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,815,300"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="199" x="2250" y="500" width="50" height="50">
+   <properties>
+    <property name="add item" value="qe_yashamask,1"/>
+    <property name="condition progress" value="default,yashapuzzle"/>
    </properties>
   </object>
  </objectgroup>

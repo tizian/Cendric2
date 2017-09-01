@@ -2,10 +2,9 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include "World/DoorTile.h"
 
-class InteractComponent;
-
-class DoorLevelTile final : public LevelDynamicTile {
+class DoorLevelTile final : public virtual LevelDynamicTile, public virtual DoorTile {
 public:
 	DoorLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	bool init(const LevelTileProperties& properties) override;
@@ -13,22 +12,19 @@ public:
 	void onHit(Spell* spell) override;
 	void update(const sf::Time& frameTime) override;
 	void onRightClick() override;
+
+	// resolving diamond of death
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Door; }
+	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
+	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
 
 private:
 	std::string getSpritePath() const override;
-	void open();
-	void close();
+	void open() override;
+	void close() override;
+	float getOpenRange() const override;
 
 private:
-	InteractComponent* m_interactComponent;
-	bool m_isOpen;
-	bool m_isInitialized = false;
-	int m_tileWidth = 1;
-	int m_strength = 0;
-	std::string m_keyItemID;
-	std::vector<Condition> m_conditions;
 	bool m_isInitiallyCollidable;
-
-	static const float OPEN_RANGE;
+	int m_tileWidth;
 };
