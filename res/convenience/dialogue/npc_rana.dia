@@ -1,0 +1,101 @@
+# dia file for dialogue for npc: npc_rana
+
+npc.id:npc_rana
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_rana", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rana", "talked")
+	# translation: 
+	translation.tag:DL_Rana_Hello
+	translation.en:Hello there! You look like you could use some warm fire to warm you up.
+	translation.de:Hallo du! Du siehst aus, als könntest du ein warmes Feuer gebrauchen, um dich aufzuwärmen.
+	translation.ch:Hoi du! Du gsesch us als chöntsch es warms Füürli bruche zum di chli ufwärme.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rana_Hello2
+	translation.en:It's freezing here in the Highlands.
+	translation.de:Es ist eiskalt hier im Hochland.
+	translation.ch:Es isch iisig chalt do im Hochland.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_UnlockTrade
+		translation.en:Do you sell something?
+		translation.de:Verkaufst du etwas?
+		translation.ch:Verchaufsch du öppis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:DL:isConditionFulfilled("npc_rana", "trade")
+		# translation: 
+		translation.tag:DL_Choice_Trade
+		translation.en:Show me your wares.
+		translation.de:Zeig mir deine Waren.
+		translation.ch:Zeig mer dini Ware.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rana", "trade")
+	# translation: 
+	translation.tag:DL_Rana_UnlockTrade
+	translation.en:Yes, we can trade.
+	translation.de:Ja, wir können handeln.
+	translation.ch:Jo mer chönd handle.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{4
+	# [3] Trade Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

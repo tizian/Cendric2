@@ -50,7 +50,11 @@ Haab
 
 "Thieves Theme"
 
+"Prison Theme"
+
 "The Marshland"
+
+"Highlands of Admantris"
 
 "The Castle of Gandria"
 
@@ -83,8 +87,6 @@ Haab
 "Cathedral Theme"
 
 "Lighthouse Theme"
-
-"Prison Theme"
 
 ---
 
@@ -228,7 +230,11 @@ Haab
 
 "Thieves Theme"
 
+"Prison Theme"
+
 "The Marshland"
+
+"Highlands of Admantris"
 
 "The Castle of Gandria"
 
@@ -261,8 +267,6 @@ Haab
 "Cathedral Theme"
 
 "Lighthouse Theme"
-
-"Prison Theme"
 
 ---
 
@@ -403,7 +407,11 @@ Haab
 
 "Thieves Theme"
 
+"Prison Theme"
+
 "The Marshland"
+
+"Highlands of Admantris"
 
 "The Castle of Gandria"
 
@@ -436,8 +444,6 @@ Haab
 "Cathedral Theme"
 
 "Lighthouse Theme"
-
-"Prison Theme"
 
 ---
 

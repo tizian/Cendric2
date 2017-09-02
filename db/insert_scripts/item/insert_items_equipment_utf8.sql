@@ -175,7 +175,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonback', 'item', 'Demon Cape','Dämonenumhang','Dämone Umhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonback', 'item_desc', 'Cape worn by demon hunters.','Umhang eines Dämonenjägers.','Umhang voneme Dämonejäger.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonback', 'eq_back', 0, 350, 30);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonback', 'eq_back', 0, 350, 100);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow) values ('eq_demonback', 7, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_demonback', 'res/assets/equipment/back/spritesheet_back_demon.png', 'res/assets/equipment/back/spritesheet_map_back_demon.png', 3);
 
@@ -183,7 +183,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonhead', 'item', 'Demon Helmet','Dämonenhelm','Dämone Helm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonhead', 'item_desc', 'Helmet worn by demon hunters.','Helm eines Dämonenjägers.','Helm voneme Dämonejäger.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonhead', 'eq_head', 50, 350, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonhead', 'eq_head', 50, 350, 150);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonhead', 8, 7, 7);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_demonhead', 'res/assets/equipment/head/spritesheet_head_demon.png', 'res/assets/equipment/head/spritesheet_map_head_demon.png');
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_demonhead',65, 25, 25, 25, 0.3);
@@ -192,8 +192,8 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonbody', 'item', 'Demon Armour','Dämonenrüstung','Dämone Rüschtig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_demonbody', 'item_desc', 'Armour worn by demon hunters.','Rüstung eines Dämonenjägers.','Rüschtig voneme Dämonejäger.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonbody', 'eq_body', 100, 350, 100);
-INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonbody', 13, 9, 8);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonbody', 'eq_body', 100, 350, 300);
+INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonbody', 50, 9, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_demonbody', 'res/assets/equipment/body/spritesheet_body_demon.png', 'res/assets/equipment/body/spritesheet_map_body_demon.png');
 
 -- Nekomata Back
@@ -577,14 +577,14 @@ INSERT INTO item_attribute (item_id, dmg_ice, critical) values ('eq_startalisman
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item', 'Morgiana''s Bloodstone','Morgiana''s Blutstein','Bluetstei vode Morgiana');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bloodstone', 'item_desc', 'This amulet belonged to the mercenary Morgiana and gave her incredible stamina.','Dieses Amulett gehörte der Söldnerin Morgiana und hat ihr unglaubliche Ausdauer verliehen.','Das Amulett het de Morgiana ghört und het ihre unglaublichi Usduur gä.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 30);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_bloodstone', 'eq_neck', 650, 500, 40);
 INSERT INTO item_attribute (item_id, max_health) values ('eq_bloodstone', 20);
 
 -- Sword Pendant
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_swordpendant', 'item', 'Sword Pendant','Schwertanhänger','Schwertahänger');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_swordpendant', 'item_desc', 'The small blade is sharp. I don''t know if having this near my throat is a good idea.','Die kleine Klinge ist scharf. Ich weiss nicht, ob es eine gute Idee ist, das Ding an meiner Kehle zu tragen.','Di chlii Klinge isch scharf. Ich weiss nid obs e gueti Idee isch, das Teil a mim Hals z''träge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_swordpendant', 'eq_neck', 750, 150, 40);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_swordpendant', 'eq_neck', 750, 150, 60);
 INSERT INTO item_attribute (item_id, dmg_physical, res_physical, critical, haste) values ('eq_swordpendant', 7, -10, 2, 5);
 
 -- Light-Touched Pendant

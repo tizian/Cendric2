@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Jason_Hello', 'dl_npc_jason', 'Hm? Just because Rana loves to talk does not mean I do.', 'Hm? Nur weil Rana gerne viel redet, heisst das nicht, dass ich das auch tue.', 'Hm? Nur wel d''Rana gern viel reded heisst das nid, dasi das au mach.');

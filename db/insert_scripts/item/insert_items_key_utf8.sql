@@ -6,6 +6,14 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_yashathief', -6, -38, 32, 12);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_yashathief', 1, 650, 300, 50, 50);
 
+-- Tower Key
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower', 'key', 750, 300, -1);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower', 'item', 'Tower Key','Turmschlüssel','Turmschlüssel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower', 'item_desc', 'Key to the towers in Gandria.','Schlüssel zu den Türmen in Gandria.','De Schlüssel für d''Türm in Gandria.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('ke_tower', -6, -38, 32, 12);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('ke_tower', 1, 0, 400, 50, 50);
+
 -- Test Key 2
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_test_2', 'key', 100, 450, -1);

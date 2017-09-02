@@ -1,0 +1,44 @@
+# dia file for dialogue for npc: npc_lola
+
+npc.id:npc_lola
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_mona", "lola")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lola_NotBought
+	translation.en:Talk to Mona first if you want to have some fun, cutie.
+	translation.de:Sprich zuerst mit Mona, wenn du Spass haben willst, Süsser.
+	translation.ch:Red zersch mit de Mona, wend chli Spass ha willsch, Herzige.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_End
+		translation.en:See you.
+		translation.de:Bis bald.
+		translation.ch:Bis bald.
+	]
+}

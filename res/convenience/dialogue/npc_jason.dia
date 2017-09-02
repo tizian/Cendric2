@@ -1,0 +1,45 @@
+# dia file for dialogue for npc: npc_jason
+
+npc.id:npc_jason
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_jason", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jason", "talked")
+	# translation: 
+	translation.tag:DL_Jason_Hello
+	translation.en:Hm? Just because Rana loves to talk does not mean I do.
+	translation.de:Hm? Nur weil Rana gerne viel redet, heisst das nicht, dass ich das auch tue.
+	translation.ch:Hm? Nur wel d'Rana gern viel reded heisst das nid, dasi das au mach.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
