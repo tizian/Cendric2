@@ -50,3 +50,14 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ko
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTelekinesis', 'speech','You''ve seen how it''s done.', 'Du hast gesehen, wie man''s macht.', 'Du hesch gse wemes macht.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTelekinesis2', 'speech','That should be enough. See you later!', 'Das sollte genügen. Bis später!', 'Das sött lange. Bis susch mol!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayBye', 'speech','Bye!', 'Tschüss!', 'Tschüssli!');
+
+-- Yaslaw
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw1', 'speech','Wh... what...','W... was...', 'W... was...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw2', 'speech','(Coughs) I shouldn''t be alive.','(Hustet) Ich sollte nicht leben.', '(Huestet) Ich söt nid lebe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw3', 'speech','...','...', '...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw4', 'speech','I shouldn''t have disgruntled my demon...','Ich hätte meinen Dämon nicht verärgern sollen...', 'Ich het min Dämon nid verärgere söle...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw5', 'speech','I should have fled...','Ich hätte flüchten sollen...', 'Ich het abhaue söle...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw6', 'speech','But I forgot my mask.','Aber ich habe meine Maske vergessen.', 'Aber ich ha mini Maske vergesse.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw7', 'speech','Ah, yes, my fine mask.','Ah, ja, meine herrliche Maske.', 'Ah, ja, mini herrlich Maske.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw8', 'speech','It''s too late now.','Es ist jetzt zu spät.', 'Es isch ez z''spot.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw9', 'speech','(Sighs)','(Seufzt)', '(Süüfzt)');

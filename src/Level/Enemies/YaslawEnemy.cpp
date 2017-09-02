@@ -128,7 +128,7 @@ void YaslawEnemy::update(const sf::Time& frameTime) {
 }
 
 void YaslawEnemy::setAlly(const sf::Time& ttl) {
-	Enemy::setAlly(sf::seconds(20.f));
+	Enemy::setAlly(sf::seconds(46.f));
 }
 
 void YaslawEnemy::setDead() {
@@ -138,13 +138,14 @@ void YaslawEnemy::setDead() {
 }
 
 MovingBehavior* YaslawEnemy::createMovingBehavior(bool asAlly) {
-	WalkingBehavior* behavior = new AllyWalkingBehavior(this);
+	AllyWalkingBehavior* behavior = new AllyWalkingBehavior(this);
 	behavior->setDistanceToAbyss(20.f);
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(150.f);
 	behavior->calculateJumpHeight();
+	behavior->setReplaceDistance(10000.f);
 	return behavior;
 }
 

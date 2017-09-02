@@ -116,7 +116,17 @@ void SpellTile::loadLeapOfFaithSpell() {
 }
 
 void SpellTile::loadGhostFormSpell() {
+	SpellData data = SpellData::getSpellData(SpellID::GhostForm);;
+	data.duration = sf::seconds(999);
+	data.activeDuration = data.duration;
+	data.strength = 3;
+	AttributeData additionalDamage;
+	additionalDamage.damagePhysical = data.strength;
+	GhostFormSpell* newSpell = new GhostFormSpell(additionalDamage);
+	newSpell->load(data, m_mainChar, sf::Vector2f());
+	m_screen->addObject(newSpell);
 
+	dynamic_cast<LevelScreen*>(m_screen)->addSpellBuffToInterface(data.iconTextureRect, data.duration, newSpell, additionalDamage);
 }
 
 void SpellTile::loadFlashSpell() {

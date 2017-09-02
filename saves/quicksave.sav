@@ -1,19 +1,19 @@
 # time played, in seconds
-time.played:36624
+time.played:37608
 savegame.name:Quicksave
-savegame.date:1504030963
-level.id:res/level/yashapuzzle/yasha_thief.tmx
-level.position:160.000000,210.000000
+savegame.date:1504345688
+level.id:res/level/yashapuzzle/yasha_necro.tmx
+level.position:1510.000000,710.000000
 is.in.level:1
 map.id:res/map/yashasanctuary/yashasanctuary.tmx
-map.position:617.526733,258.500305
+map.position:815.000000,260.038544
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:102,0,0,5,0,0,0,0,0,0,2,0,0,0
-gold:392
+gold:461
 # items in inventory:
 item.id:co_shell,7
 item.id:co_smallpouch,5
@@ -28,6 +28,7 @@ item.id:eq_back_divinet1,1
 item.id:eq_bandana,1
 item.id:eq_bloodstone,1
 item.id:eq_body_divinet1,1
+item.id:eq_body_twilightt1,1
 item.id:eq_defaultarmor,1
 item.id:eq_eyeofthemoon,1
 item.id:eq_fireratscarf,1
@@ -44,9 +45,9 @@ item.id:eq_rubyring,1
 item.id:eq_stevenhelmet,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
-item.id:fo_apple,13
+item.id:fo_apple,14
 item.id:fo_beer,1
-item.id:fo_bread,7
+item.id:fo_bread,8
 item.id:fo_caveberry,18
 item.id:fo_cheese,2
 item.id:fo_chicken,4
@@ -55,8 +56,9 @@ item.id:fo_egg,6
 item.id:fo_fishsoup,4
 item.id:fo_glowingshroom,27
 item.id:fo_ham,3
-item.id:fo_healingherb,23
-item.id:fo_lesserhealingpotion,33
+item.id:fo_healingherb,24
+item.id:fo_lesserhealingpotion,34
+item.id:fo_mediumhealingpotion,1
 item.id:fo_milk,2
 item.id:fo_omelette,3
 item.id:fo_physalis,2
@@ -68,7 +70,7 @@ item.id:fo_roastedmeat,22
 item.id:fo_sausage,2
 item.id:fo_stormweed,1
 item.id:fo_ultimatehealingpotion,1
-item.id:fo_water,15
+item.id:fo_water,17
 item.id:fo_windrose,2
 item.id:fo_wine,5
 item.id:ke_cathedral,2
@@ -115,11 +117,11 @@ stored.gold:0
 equipped.spellslot:2,1,2,3,1,4,2
 equipped.spellslot:3,4,2,1,2
 equipped.spellslot:4,2,2,5,2
-equipped.spellslot:7,6,1
-equipped.spellslot:9,6,1,2,2
+equipped.spellslot:12,4,3
+equipped.spellslot:14,5,2,2,2
 # equipment:
 equipped.back:eq_back_twilightt1
-equipped.body:eq_body_twilightt1
+equipped.body:eq_body_necrot1
 equipped.head:eq_head_twilightt1
 equipped.neck:eq_silvernecklace
 equipped.ring1:eq_aquamarinering
@@ -127,7 +129,7 @@ equipped.ring2:eq_holyring
 equipped.weapon:we_fireglaive
 # weapon configurations:
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
-weapon.configs:we_fireglaive;2,1,2,3,1,4,2;3,4,2,1,2;4,2,2,5,2;7,6,1;9,6,1,2,2;
+weapon.configs:we_fireglaive;2,1,2,3,1,4,2;3,4,2,1,2;4,2,2,5,2;12,4,3;14,5,2,2,2;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;
 weapon.configs:we_hawthorn;2;
 weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;5,5,2,3,1;18,2,2,5,2;
@@ -136,7 +138,7 @@ weapon.configs:we_simplesword;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;19,2,2;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
-weapon.spell:21
+weapon.spell:18
 # quickslot assignments:
 quickslot:1,fo_greaterhealingpotion
 quickslot:2,fo_mediumhealingpotion
@@ -154,6 +156,7 @@ enemies.killed:res/level/elderbackroom/elderbackroom.tmx
 enemies.killed:res/level/eldergarden/eldergarden.tmx
 enemies.killed:res/level/forgottenpassage/forgottenpassage.tmx
 enemies.killed:res/level/gandriacathedral/gandriacathedral_cleric.tmx,107
+enemies.killed:res/level/gandriacathedral/gandriacathedral_necro.tmx,107,211,212
 enemies.killed:res/level/gandriacathedral/gandriacathedral_thief.tmx,107
 enemies.killed:res/level/gandriacrypt/gandriacrypt.tmx
 enemies.killed:res/level/gandriamines/gandriamines.tmx
@@ -172,6 +175,7 @@ enemies.killed:res/level/syrahbasement/syrahbasement.tmx
 enemies.killed:res/level/well/well.tmx
 enemies.killed:res/level/yashapuzzle/yasha_cleric.tmx
 enemies.killed:res/level/yashapuzzle/yasha_death.tmx
+enemies.killed:res/level/yashapuzzle/yasha_necro.tmx
 enemies.killed:res/level/yashapuzzle/yasha_thief.tmx
 enemies.killed:res/level/yashatemple/yashatemple.tmx
 # enemies looted in level:
@@ -188,6 +192,7 @@ enemies.looted:res/level/elderbackroom/elderbackroom.tmx,113
 enemies.looted:res/level/eldergarden/eldergarden.tmx,88
 enemies.looted:res/level/forgottenpassage/forgottenpassage.tmx,83,84,85,86,87,88
 enemies.looted:res/level/gandriacathedral/gandriacathedral_cleric.tmx,68,88,99,107,108,109
+enemies.looted:res/level/gandriacathedral/gandriacathedral_necro.tmx,68,87,107,109,211,212
 enemies.looted:res/level/gandriacathedral/gandriacathedral_thief.tmx,107,108,109
 enemies.looted:res/level/gandriacrypt/gandriacrypt.tmx,76
 enemies.looted:res/level/gandriamines/gandriamines.tmx,101,102,103,106
@@ -206,6 +211,7 @@ enemies.looted:res/level/syrahbasement/syrahbasement.tmx,147,161,162,163,167
 enemies.looted:res/level/well/well.tmx
 enemies.looted:res/level/yashapuzzle/yasha_cleric.tmx
 enemies.looted:res/level/yashapuzzle/yasha_death.tmx
+enemies.looted:res/level/yashapuzzle/yasha_necro.tmx,146,147,148
 enemies.looted:res/level/yashapuzzle/yasha_thief.tmx
 enemies.looted:res/level/yashatemple/yashatemple.tmx,182,297,311,317
 # items looted in level:
@@ -222,6 +228,7 @@ items.looted:res/level/elderbackroom/elderbackroom.tmx,127,159,173,243,307,338,4
 items.looted:res/level/eldergarden/eldergarden.tmx,207,248,315,524,535,567,568,571,594
 items.looted:res/level/forgottenpassage/forgottenpassage.tmx,202,207,210,467,540,748,759,782,791,795,1201,1271,1277,1278,1313,1373,1403,1454,1542,1597,1598,1634,1769,1772,1785,1788
 items.looted:res/level/gandriacathedral/gandriacathedral_cleric.tmx,373,587,723,724,827,831,836,933,1436,1438,1686,2091,2105,2133,2139,2235,2250,2266,2281,2285
+items.looted:res/level/gandriacathedral/gandriacathedral_necro.tmx,933,1436,1438,1686,2133,2139,2281,2285
 items.looted:res/level/gandriacathedral/gandriacathedral_thief.tmx,637,641,645,827,831,836,933,1686
 items.looted:res/level/gandriacrypt/gandriacrypt.tmx
 items.looted:res/level/gandriamines/gandriamines.tmx,306,307,627,702,905,1010,1823,2708,2821,2922,3217,3303,3404,3520,3521,3524,4209,4522
@@ -240,6 +247,7 @@ items.looted:res/level/syrahbasement/syrahbasement.tmx,58,64,121,122,179,1018,10
 items.looted:res/level/well/well.tmx,744
 items.looted:res/level/yashapuzzle/yasha_cleric.tmx
 items.looted:res/level/yashapuzzle/yasha_death.tmx
+items.looted:res/level/yashapuzzle/yasha_necro.tmx
 items.looted:res/level/yashapuzzle/yasha_thief.tmx
 items.looted:res/level/yashatemple/yashatemple.tmx,184,185,392,894,965,1181,1245,1495,1805
 # chests looted in level:
@@ -256,6 +264,7 @@ chests.looted:res/level/elderbackroom/elderbackroom.tmx,102
 chests.looted:res/level/eldergarden/eldergarden.tmx
 chests.looted:res/level/forgottenpassage/forgottenpassage.tmx,82
 chests.looted:res/level/gandriacathedral/gandriacathedral_cleric.tmx,97
+chests.looted:res/level/gandriacathedral/gandriacathedral_necro.tmx
 chests.looted:res/level/gandriacathedral/gandriacathedral_thief.tmx
 chests.looted:res/level/gandriacrypt/gandriacrypt.tmx,74,75
 chests.looted:res/level/gandriamines/gandriamines.tmx,98,104
@@ -274,13 +283,14 @@ chests.looted:res/level/syrahbasement/syrahbasement.tmx
 chests.looted:res/level/well/well.tmx
 chests.looted:res/level/yashapuzzle/yasha_cleric.tmx
 chests.looted:res/level/yashapuzzle/yasha_death.tmx
+chests.looted:res/level/yashapuzzle/yasha_necro.tmx
 chests.looted:res/level/yashapuzzle/yasha_thief.tmx
 chests.looted:res/level/yashatemple/yashatemple.tmx,144,291
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/gandria/gandria.tmx,309,2216.000000,1060.000000,321,3566.000000,2810.000000,685,2266.000000,410.000000,1724,2216.000000,1060.000000,1859,966.000000,1160.000000,3148,1416.000000,1960.000000,3367,366.000000,2110.000000,3749,3466.000000,2310.000000,4167,366.000000,2610.000000,4188,1416.000000,2610.000000,4198,1916.000000,2610.000000,4214,2716.000000,2610.000000,4551,3566.000000,2810.000000,4739,966.000000,2960.000000,5074,1716.000000,3160.000000,5124,216.000000,3210.000000
 waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,162,116.000000,210.000000,308,116.000000,210.000000,646,316.000000,810.000000,983,1166.000000,1210.000000,996,1816.000000,1210.000000
 waypoints.unlocked:res/map/highland/highland.tmx,320,1866.000000,1460.000000,327,216.000000,1972.000000
-waypoints.unlocked:res/map/marshland/marshland.tmx,227,1366.000000,210.000000,294,366.000000,1660.000000,415,766.000000,410.000000,1024,1216.000000,1010.000000,1732,1616.000000,1710.000000
+waypoints.unlocked:res/map/marshland/marshland.tmx,227,1366.000000,210.000000,291,1366.000000,210.000000,294,366.000000,1660.000000,295,1616.000000,1710.000000,415,766.000000,410.000000,1024,1216.000000,1010.000000,1732,1616.000000,1710.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,748,2416.000000,510.000000,1002,1116.000000,710.000000,1387,2866.000000,960.000000,2327,866.000000,1660.000000,2630,2016.000000,1860.000000,3556,2816.000000,2510.000000,3872,1116.000000,2760.000000,3893,2166.000000,2760.000000,4337,3366.000000,3060.000000
 # modifiers unlocked:
 modifiers.unlocked:res/level/ascent/ascent.tmx,201
@@ -299,6 +309,7 @@ triggers.triggered:res/level/elderbackroom/elderbackroom.tmx
 triggers.triggered:res/level/eldergarden/eldergarden.tmx,92
 triggers.triggered:res/level/forgottenpassage/forgottenpassage.tmx
 triggers.triggered:res/level/gandriacathedral/gandriacathedral_cleric.tmx
+triggers.triggered:res/level/gandriacathedral/gandriacathedral_necro.tmx
 triggers.triggered:res/level/gandriacathedral/gandriacathedral_thief.tmx
 triggers.triggered:res/level/gandriacrypt/gandriacrypt.tmx
 triggers.triggered:res/level/gandriamines/gandriamines.tmx
@@ -317,6 +328,7 @@ triggers.triggered:res/level/syrahbasement/syrahbasement.tmx
 triggers.triggered:res/level/well/well.tmx
 triggers.triggered:res/level/yashapuzzle/yasha_cleric.tmx
 triggers.triggered:res/level/yashapuzzle/yasha_death.tmx
+triggers.triggered:res/level/yashapuzzle/yasha_necro.tmx
 triggers.triggered:res/level/yashapuzzle/yasha_thief.tmx
 triggers.triggered:res/level/yashatemple/yashatemple.tmx
 triggers.triggered:res/map/elderhome/elderhome.tmx
@@ -337,12 +349,13 @@ triggers.triggered:res/map/yashasanctuary/yashasanctuary.tmx
 tiles.explored:res/map/gandria/gandria.tmx,80,70,               ü        ş       şÿ       ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ    ü€ÿÿ    şÿ€ÿÿ    ÿÿıÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    şÿÿÿÿ    üÿÿÿÿ    şÿÿÿÿ     şÿÿ      şÿÿ     øÿÿÿ     üÿÿÿ?     şÿÿÿ     şÿÿÿ     şÿÿÿ     şÿÿÿ   üşÿÿÿ   şşÿÿÿ   ÿşÿÿÿÿ   ÿşÿÿÿÿ   ÿşÿÿÿÿ   ÿşÿÿÿÿøÿÿÿÿÿÿçÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ ğÿÿÿÿÿÿÿ ğÿÿÿÿÿÿÿ ğÿÿ?ÿÿÿÿÿ ğÿÿÿÿÿÿÿ à?ÿÿÿÿÿÿ Àş ÿûÿÿÿ     ÿ ğÿ     ÿ àÿ     ÿ àÿ     ÿ àÿ     ÿ À     ,
 tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿ   ÿ   ÿ   ÿ   ÿ   ÿ   ÿ ÿÿÿ‡ÿÿÿÿÏÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ,
 tiles.explored:res/map/highland/highland.tmx,50,50,                                                                                                                                       ø    ğ    àÿ    àÿ   Àÿ   €ÿ    şÿ   øÿ   àÿ   €ÿ    şÿş  øÿü Àÿğ?  şÀÿ  Àÿÿ  ÿ?ü  üÿñ?  ğÿÏÿ  Àÿ?ÿ  ÿÿü  üÿó?  ğÿÏ  Àÿ?ş   ÿÿ    üÿ   ğÿ   Àÿ    ÿ    øÿ,0000
-tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü  Àÿÿ  €ÿÿÿ  ÿÿÿ  üÿÿ  ğÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ  ğÿÿ  Àÿÿÿ  şÿÿ  ğş    ü    øÿ   àÿ   €ÿ?    şÿ?   üÿÿ  øÿÿ  ğÿÿ  Àÿÿÿ  ÿÿÿÀ?üÿÿ?€ÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿğÿÿÿÿ?Àÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿğÿÿÿÿ Àÿÿÿÿ ÿÿÿÿ üÿÿÿ? ğÿü €ÿÿàÿ  üÿ   ,
+tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü  Àÿÿ  €ÿÿÿ  ÿÿÿ  üÿÿ  ğÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ  ğÿÿ  Àÿÿÿ  şÿÿ  ğş    ü    øÿ   àÿ   €ÿ?    şÿ?   üÿÿ  øÿÿ  ğÿÿ  Àÿÿÿ  ÿÿÿÀ?üÿÿ?€ÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿğÿÿÿÿ?Àÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿğÿÿÿÿ Àÿÿÿÿ ÿÿÿÿ üÿÿÿ? ğÿşÿ €ÿÿğÿ üÿÿ ,
 tiles.explored:res/map/meadows/meadows.tmx,70,70,  à? üƒ?   ü€ÿñ   ÿğÿş  Àÿüÿÿ  ğÿ ÿÿÿ   ü?Àÿÿ?  àÿğÿÿ  üÿüÿÿ €ÿÿ ÿÿÿ  àÿ?ÿÿÿ?  øÿïÿÿÿ  şÿÿÿÿÿ €ÿÿÿÿÿ?  àÿßÿÿÿ  øÿ÷ÿÿÿ €ÿÿıÿÿÿ ğÿÿÿÿ  şÿßÿÿÿ €ÿÿóÿÿÿ àÿüÿÿÿ øÿşÿÿ  şÿÿÿÿ Àÿÿ€ÿÿÿ øÿ?Àÿÿÿ şÿ  ş? €ÿÿ øÿ àÿÿ  ÿÿ øÿ? àÿ  şÿÿøÿ €ÿÿÿ?ÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ şÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ şÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿ ş€ÿÿÿÿ?€ÿüÿÿÿÿàÿƒÿÿÿÿÿ øğÿÿ‡?  şüÿğ €ÿÿÿş àÿÁÿ?€ÿ øğÿÿçÿ şüÿÿûÿ€ÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿ şÿÿÿÿÿÿ€ÿÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ¿ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ àÿÿÿÿÿÿ àÿÿÿÿÿÿ  üÿÿÿÿÿ   şÿÿÿÿ   üÿÿÿ    şÿÿÿ     €ÿ      ,0000
 # quest states:
 quest.state:a_new_trace,2
 quest.state:broken_bridge,3
 quest.state:broken_staff,2
+quest.state:cathedral_necro,2
 quest.state:cathedral_thief,2
 quest.state:cavern_beast,2
 quest.state:clerics_recommendation,2
@@ -378,6 +391,7 @@ quest.state:stevens_helmet,2
 quest.state:the_mark,1
 quest.state:the_rats_nest,2
 quest.state:who_am_i,2
+quest.state:yasha_necro,1
 quest.state:yasha_sanctuary,3
 quest.state:yasha_thief,1
 quest.state:zeff_returns,2
@@ -408,7 +422,7 @@ quest.progress.description:the_mark,1,2,3,4
 quest.progress.description:zeff_returns,1
 # conditions of a certain type fulfilled:
 progress.condition:boss,BossElysia,BossJanus,BossKhajag,BossMercenaries,BossYasha
-progress.condition:default,barracks_open,bridge_crossed,brothel_open,chapter3,chapter4,elysia_intro,gandria_open,second_boss_open,swampbridge_open,thief,thieves_open,tutorial_complete
+progress.condition:default,barracks_open,bridge_crossed,brothel_open,chapter3,chapter4,elysia_intro,gandria_open,necromancer,second_boss_open,swampbridge_open,thieves_open,tutorial_complete
 progress.condition:npc_alonso,talked
 progress.condition:npc_andrew,bridge,mages,what_are_you_doing,who_are_you
 progress.condition:npc_cityguard,gates_closed,letin_zeff,stranger,talked,zeff
@@ -435,7 +449,7 @@ progress.condition:npc_lloyd,guild,talked
 progress.condition:npc_lloyd2,going_on,hurry_up,talked
 progress.condition:npc_lloyd3,paladin,talked,why_paladin
 progress.condition:npc_lloyd4,first,talked,where_search
-progress.condition:npc_luiz,forbidden,learn,other_guild,talked,what_if_join,who_are_you
+progress.condition:npc_luiz,first_spell,forbidden,guild,kill_yasha,learn,other_guild,talked,what_if_join,where_yasha,who_are_you
 progress.condition:npc_luv,first_rant,who_are_you
 progress.condition:npc_mona,gate_open,talked,upper_floor
 progress.condition:npc_morton,crypt_open,guys_like_me,necromancers,other_guy,talked
@@ -458,10 +472,10 @@ progress.condition:npc_zeff3,talked
 progress.condition:npc_zephyra,dead_cat,gotta_go,talked,what_matter,who_are_you,who_droves,yasha
 progress.condition:trigger,swampbridge_open,tutorial_started
 # guild:
-guild:thief
+guild:necromancer
 # reputation progress:
 reputation.progress:cleric,50
-reputation.progress:necromancer,25
+reputation.progress:necromancer,45
 reputation.progress:thief,50
 # merchant states:
 merchant.state:npc_alonso,fo_apple,5,fo_beer,3,fo_bread,3,fo_caveberry,1,fo_cheese,2,fo_chicken,5,fo_egg,5,fo_fishsoup,2,fo_ham,2,fo_healingherb,3,fo_lesserhealingpotion,1,fo_milk,2,fo_physalis,1,fo_rawfish,3,fo_rawmeat,5,fo_redhat,1,fo_roastedmeat,3,fo_sausage,4,fo_water,2,fo_wine,3
@@ -478,7 +492,7 @@ merchant.state:npc_zeff3,eq_huntershat,1,eq_leatherarmor,1,fo_sausage,1,mi_wolf_
 # spells learned:
 spell.learned:1,2,3,4,5,6
 spell.learned:2,7,8,9
-spell.learned:3,12
+spell.learned:3,12,13,14
 spell.learned:4,17,18,19
 # modifiers learned:
 modifier.learned:1,2

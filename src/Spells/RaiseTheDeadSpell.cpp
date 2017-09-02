@@ -26,7 +26,7 @@ void RaiseTheDeadSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 }
 
 void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
-	if (!target->isDead()) return;
+	if (!target->isDead() || target->isAlly()) return;
 	Enemy* enemy = dynamic_cast<Enemy*>(target);
 	if (enemy == nullptr) return;
 	if (enemy->getMentalStrength() >= m_data.strength) {

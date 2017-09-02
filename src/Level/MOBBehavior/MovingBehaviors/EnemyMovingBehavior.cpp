@@ -15,7 +15,7 @@ void EnemyMovingBehavior::setFacingRight(bool value) {
 
 void EnemyMovingBehavior::handleMovementInput() {
 	if (m_movingTarget != nullptr) {
-		gotoTarget(*m_movingTarget, std::max(m_maxVelocityX, m_maxVelocityYDown) * MAX_FRAME_TIME, true, true);
+		gotoTarget(*m_movingTarget, getMaxVelocityX() * MAX_FRAME_TIME, true, true);
 	}
 	else {
 		execHandleMovementInput();
@@ -53,11 +53,11 @@ void EnemyMovingBehavior::gotoTarget(const sf::Vector2f& target, float approachi
 	}
 	else {
 		m_movingDirectionY = 0;
-		if (hold && !m_isWalkingBehavior || exact) {
+		if (hold && !m_isWalkingBehavior) {
 			m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
 			m_enemy->setAccelerationY(0.f);
 		}
-		if (exact) {
+		if (exact && !m_isWalkingBehavior) {
 			m_enemy->setPositionY(target.y - (center.y - m_enemy->getPosition().y));
 		}
 	}

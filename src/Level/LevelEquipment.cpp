@@ -10,6 +10,7 @@ const int LevelEquipment::EQ_SIZE = 120;
 LevelEquipment::LevelEquipment(LevelMainCharacter* mainChar) : AnimatedGameObject() {
 	m_mainChar = mainChar;
 	m_screen = mainChar->getScreen();
+	m_isAlwaysUpdate = true;
 }
 
 void LevelEquipment::load(const ItemEquipmentBean* itemBean, ItemType type) {

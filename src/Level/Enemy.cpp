@@ -335,6 +335,7 @@ void Enemy::loot() {
 }
 
 void Enemy::onRightClick() {
+	if (!m_interactComponent->isInteractable()) return;
 	if (m_isDead && !isAlly()) {
 		// check if the enemy body is in range
 		if (dist(m_mainChar->getCenter(), getCenter()) <= PICKUP_RANGE) {
