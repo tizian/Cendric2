@@ -41,5 +41,6 @@ enum class EnemyID {
 	Boss_Yasha,
 	YashaAdd,
 	Yaslaw,
+	Skeleton_Elemental,
 	MAX
 };

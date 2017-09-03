@@ -3,14 +3,26 @@
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item', 'Ice Staff','Eisstab','Iisstab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_icestaff', 'item_desc', 'Feels ice cold.','Fühlt sich eiskalt an.','So chalt we Iis.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_icestaff', 'eq_weapon', 200, 150, 150);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_ice) values ('we_icestaff', 10, 15, 30);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_ice) values ('we_icestaff', 10, 5, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_icestaff', 'res/assets/equipment/weapon/spritesheet_weapon_icestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_icestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_icestaff', 1000, 10, 45, 80, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 2, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 3, 'divine', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 4, 'divine', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 5, 'necromancy', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 3, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 4, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_icestaff', 5, 'meta', 3);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_icestaff', -10, -40, 40, 110);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_icestaff', 1, 350, 350, 50, 150);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_icestaff', 30, 20, 100, 100, 80, 100, 0.3);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('we_icestaff', 50, 5, 1, 'res/assets/particles/star.png', 20, 10, -10, 
+5, 10, 0, 0,
+100, 110, 255, 255,
+100, 120, 255, 255,
+20, 200, 0, 200,
+20, 200, 0, 200,
+0, -50,
+40, 60,
+1.0, 2.0, 0.0);
 
 -- Fire Staff
 
@@ -67,14 +79,28 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item','Sickle Staff', 'Sichelstab','Sichlestab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_sicklestaff', 'item_desc', 'The ruby gem glows and concentrates elemental energy.','Der rubinfarbene Edelstein glimmt und bündelt Elementarenergie.','De rubinfarbig Stei lüchtet schwach und bündlet Elementarenergie.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_sicklestaff', 'eq_weapon', 250, 150, 300);
-INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire, dmg_ice) values ('we_sicklestaff', 10, 15, 15, 15);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire, dmg_ice) values ('we_sicklestaff', 10, 5, 10, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_sicklestaff', 'res/assets/equipment/weapon/spritesheet_weapon_sicklestaff.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_sicklestaff.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_sicklestaff', 1000, 10, 45, 80, 10);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 3, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 4, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 5, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_sicklestaff', 5, 'meta', 3);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_sicklestaff', 0, -40, 40, 110);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_sicklestaff', 1, 400, 350, 50, 150);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_sicklestaff', 30, 20, 100, 100, 80, 100, 0.3);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('we_sicklestaff', 50, 5, 1, 'res/assets/particles/star.png', 20, 10, -10, 
+5, 10, 0, 0,
+255, 110, 100, 255,
+255, 120, 100, 255,
+20, 200, 0, 200,
+20, 200, 0, 200,
+0, -50,
+40, 60,
+1.0, 2.0, 0.0);
+
+
 
 -- Claw
 
@@ -227,8 +253,8 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Fire Sword
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Fire Sword', 'Feuerschwert','Füürschwert');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple.','Ein heiliges Relikt aus Yasha''s Tempel','Es heiligs Relikt us de Yasha ihrem Tempel.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, 300);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple. It opens a gate in the Temple of the Ancients.','Ein heiliges Relikt aus Yasha''s Tempel. Es öffnet eine Pforte im Tempel der Ahnen.','Es heiligs Relikt us de Yasha ihrem Tempel. Es macht es Tor uf im Tempel vode Ahne');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, -1);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_light, critical) values ('we_firesword', 12, 8, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword', 'res/assets/equipment/weapon/spritesheet_weapon_firesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firesword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword', 700, 10, 40, 80, 12);
@@ -247,6 +273,21 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 3, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 4, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword', 5, 'meta', 2);
+
+-- Fire Sword (Unkindled)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item','Fire Sword (Unkindled)', 'Feuerschwert (Unentfacht)','Füürschwert (Unentfacht)');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item_desc', 'This sword was stolen from Yasha''s temple. I have to kindle it again.','Dieses Schwert wurde aus Yasha''s Tempel entwendet. Ich muss es wieder entfachen.','Da Schwert isch usde Yasha ihrem Tempel klaut worde. Ich muns wieder entfache.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword_inactive', 'eq_weapon', 750, 350, -1);
+INSERT INTO item_attribute (item_id, critical) values ('we_firesword_inactive', 4);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword_inactive', 'res/assets/equipment/weapon/spritesheet_weapon_firesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firesword.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword_inactive', 700, 10, 40, 80, 9);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_firesword_inactive', 30, 30, 300, 400, 100, 120, 0.5);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 3, 'elemental', 2);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_firesword_inactive', -7, 0, 25, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_firesword_inactive', 1, 50, 400, 50, 50);
 
 -- Zeff's Skinning Knife
 

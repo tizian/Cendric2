@@ -289,6 +289,7 @@ public:
 		case EnemyID::Skeleton_Archer:
 			return "SkeletonArcher";
 		case EnemyID::Skeleton_Mage:
+		case EnemyID::Skeleton_Elemental:
 			return "SkeletonMage";
 		case EnemyID::Skeleton_Rogue:
 			return "SkeletonRogue";
