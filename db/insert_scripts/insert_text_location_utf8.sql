@@ -68,3 +68,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('bo
 Guardian of the Temple','Boss: Yasha,
 Wächterin des Tempels','Boss: Yasha, 
 Wächterin vom Tempel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('icecave','location','Ice Cave','Eishöhle','Iishöhli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('castlegarden','location','The Castle Gardens','Die Schlossgärten','De Schlossgarte');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ancienttemple','location','Temple of the Ancients','Tempel der Ahnen','Tempel vode Ahne');

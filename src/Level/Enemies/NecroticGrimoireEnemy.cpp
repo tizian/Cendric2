@@ -19,6 +19,7 @@ NecroticGrimoireEnemy::NecroticGrimoireEnemy(const Level* level, Screen* screen)
     Enemy(level, screen),
 	BookEnemy(level, screen) {
 	m_isInvincible = true;
+	m_isAlwaysUpdate = true;
 }
 
 void NecroticGrimoireEnemy::update(const sf::Time& frameTime) {

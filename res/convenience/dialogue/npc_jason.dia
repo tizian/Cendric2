@@ -22,9 +22,9 @@ npc.id:npc_jason
 	trigger:DL:addConditionProgress("npc_jason", "talked")
 	# translation: 
 	translation.tag:DL_Jason_Hello
-	translation.en:Hm? Just because Rana loves to talk does not mean I do.
-	translation.de:Hm? Nur weil Rana gerne viel redet, heisst das nicht, dass ich das auch tue.
-	translation.ch:Hm? Nur wel d'Rana gern viel reded heisst das nid, dasi das au mach.
+	translation.en:Hm? Just because Rana loves to talk does not mean I do. Keep it short.
+	translation.de:Hm? Nur weil Rana gerne viel redet, heisst das nicht, dass ich das auch tue. Halte dich kurz.
+	translation.ch:Hm? Nur wel d'Rana gern viel reded heisst das nid, dasi das au mach. Halt dich churz.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -35,11 +35,91 @@ npc.id:npc_jason
 	tag:2
 	[
 		# Link node, tag is next tag
+		tag:3
+		condition:DL:isQuestState("jasons_glaive", "void")
+		# translation: 
+		translation.tag:DL_Choice_JasonQuest
+		translation.en:Can I help you somehow?
+		translation.de:Kann ich dir irgendwie helfen?
+		translation.ch:Chanich dir irgendwie helfe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:isQuestState("jasons_glaive", "started") and DL:isQuestComplete("jasons_glaive")
+		# translation: 
+		translation.tag:DL_Choice_GargoyleDust
+		translation.en:I got some gargoyle dust for you.
+		translation.de:Ich habe etwas Gargoylestaub für dich.
+		translation.ch:Ich ha chli Gargoylestaub für dich.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jason_JasonQuest
+	translation.en:Hrm. Yes, actually, you can. My new weapon broke and it can only be fixed with enough gargoyle dust.
+	translation.de:Hrm. Ja, kannst du eigentlich. Meine neue Waffe ist zerbrochen und sie kann nur mit etwas Gargoylestaub geflickt werden.
+	translation.ch:Hrm. Jo, chasch eigentlich. Mini neu Waffe isch verbroche und si cha nur mit bitz Gargoylestaub gflickt werde.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:changeQuestState("jasons_glaive", "started")
+	# translation: 
+	translation.tag:DL_Jason_JasonQuest2
+	translation.en:Some gargoyles live in the old temple in the North. If you bring me some gargoyle dust, you can have my old glaive in exchange.
+	translation.de:Ein paar Gargoyles leben im alten Tempel im Norden. Wenn du mir etwas Gargoylestaub bringst, kannst du dafür meine alte Gleve haben.
+	translation.ch:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestau bringsch, gibi der mini alt Gleve defür.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:removeItem("mi_gargoyledust", 3)
+	# translation: 
+	translation.tag:DL_Jason_GargoyleDust
+	translation.en:Oh? What a surprise. I never thought you'd be able to kill them.
+	translation.de:Oh? Was für eine Überraschung. Ich hätte nicht gedacht, dass du sie töten kannst.
+	translation.ch:Oh? Was für Überraschig. Ich hett nie denkt, dass du si töte chasch.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:changeQuestState("jasons_glaive", "completed")
+	trigger:DL:addItem("we_jasonsglaive", 1)
+	# translation: 
+	translation.tag:DL_Jason_GargoyleDust2
+	translation.en:Yeah. But promise is promise. Here, take my old glaive. It's still a good weapon.
+	translation.de:Yeah. Aber versprochen ist versprochen. Hier, nimm meine alte Gleve. Es ist immer noch eine gute Waffe.
+	translation.ch:Yeah. Aber versproche isch versproche. Do, nimm mini alt Gleve. Es isch immerno e gueti Waffe.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="334">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="50" tileheight="50" nextobjectid="337">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -922,6 +922,18 @@
   <object id="330" x="200" y="1812.5" width="50" height="50">
    <properties>
     <property name="map entry" value="res/map/yashasanctuary/yashasanctuary.tmx,1015,800"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="335" x="600" y="425" width="50" height="37.5">
+   <properties>
+    <property name="level entry" value="res/level/ancienttemple/ancienttemple.tmx,100,100"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="336" x="1150" y="2012.5" width="100" height="50">
+   <properties>
+    <property name="level entry" value="res/level/icecave/icecave.tmx,100,100"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

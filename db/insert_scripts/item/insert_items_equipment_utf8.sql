@@ -186,7 +186,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_demonhead', 'eq_head', 50, 350, 150);
 INSERT INTO item_attribute (item_id, res_physical, dmg_shadow, dmg_physical) values ('eq_demonhead', 8, 7, 7);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_demonhead', 'res/assets/equipment/head/spritesheet_head_demon.png', 'res/assets/equipment/head/spritesheet_map_head_demon.png');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_demonhead',65, 25, 25, 25, 0.3);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, brightness) values ('eq_demonhead',5, 25, 25, 25, 0.3);
 
 -- Demon Body
 

@@ -146,7 +146,7 @@ loadDialogue = function(DL)
 			
 			DL:createNPCNode(32, -1, "DL_Edmond_GivesReward") -- Wow, that's amazing! I didn't believe you could make it. Here, take all the gold I have with me. And you can keep my walking pole, of course. You really did me a favor. 
 			DL:changeQuestState("the_rats_nest", "completed")
-			DL:addGold(23)
+			DL:addGold(13)
 			DL:addNode()
 			
 			DL:createNPCNode(40, 41, "DL_Edmond_WhoAreYou") -- Yes, that's true. Should I know you?

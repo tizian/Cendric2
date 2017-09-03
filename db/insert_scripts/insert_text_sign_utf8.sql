@@ -41,3 +41,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedNecromancy','sign','Powerful necromancy will find a way...','Mächtige Nekromantie wird einen Weg finden...','Mächtigi Nekromantie wird en Weg finde...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedInvisibility','sign','Be one with the shadows!','Sei eins mit den Schatten!','Verschmilz mit de Schatte!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedRaisethedead','sign','The dead shall raise again.','Die Toten sollen sich wieder erheben.','Di Tote söled wieder ufsta.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedElements','sign','Need elements...','Versuchs mit Elementen...','Probiers mit Element...');

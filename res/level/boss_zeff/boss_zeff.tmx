@@ -139,10 +139,10 @@
 </data>
  </layer>
  <objectgroup name="enemy">
-  <object id="20" gid="793" x="650" y="593" width="50" height="50">
+  <object id="20" gid="793" x="650" y="600" width="50" height="50">
    <properties>
     <property name="fo_ham" value="1"/>
-    <property name="gold" value="20"/>
+    <property name="gold" value="15"/>
     <property name="luapath" value="res/level/boss_zeff/zeff.lua"/>
     <property name="questcondition" value="monster_problem,monster_banished"/>
     <property name="we_zeffssword" value="1"/>
