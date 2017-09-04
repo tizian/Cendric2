@@ -1,19 +1,19 @@
 # time played, in seconds
-time.played:34302
+time.played:35052
 savegame.name:pre_temple
-savegame.date:1504429517
-level.id:res/level/yashapuzzle/yasha_cleric.tmx
-level.position:160.000000,510.000000
+savegame.date:1504550861
+level.id:res/level/ancienttemple/ancienttemple.tmx
+level.position:100.000000,100.000000
 is.in.level:0
 map.id:res/map/highland/highland.tmx
-map.position:616.759399,663.843323
+map.position:615.580627,586.705627
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:102,0,0,5,0,0,0,0,0,0,2,0,0,0
-gold:20
+gold:36
 # items in inventory:
 item.id:do_bloodnotemarcus,1
 item.id:do_elderdiary,1
@@ -26,6 +26,7 @@ item.id:eq_bandana,1
 item.id:eq_bloodstone,1
 item.id:eq_body_divinet1,1
 item.id:eq_defaultarmor,1
+item.id:eq_demonhead,1
 item.id:eq_eyeofthemoon,1
 item.id:eq_fireratscarf,1
 item.id:eq_head_divinet1,1
@@ -56,7 +57,7 @@ item.id:fo_glowingshroom,27
 item.id:fo_ham,3
 item.id:fo_healingherb,12
 item.id:fo_lesserhealingpotion,14
-item.id:fo_mediumhealingpotion,4
+item.id:fo_mediumhealingpotion,1
 item.id:fo_milk,1
 item.id:fo_omelette,3
 item.id:fo_physalis,2
@@ -97,7 +98,6 @@ item.id:mi_wolf_fur,1
 item.id:pe_elixirfire,1
 item.id:qe_compass,1
 item.id:we_claw,1
-item.id:we_fireglaive,1
 item.id:we_firestaff,1
 item.id:we_firesword,1
 item.id:we_hawthorn,1
@@ -106,23 +106,27 @@ item.id:we_lightningpike,1
 item.id:we_ordermace,1
 item.id:we_pickaxe,3
 item.id:we_simplesword,1
+item.id:we_tearstaff,1
 item.id:we_torch,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:2,1,1,4,1
-equipped.spellslot:3,1,1,4,1
-equipped.spellslot:19,2,2
+equipped.spellslot:2,1,2,4,2,3,1
+equipped.spellslot:3,4,2,1,2
+equipped.spellslot:4,2,2,5,3
+equipped.spellslot:5,5,3,3,1
+equipped.spellslot:20,6,1
 # equipment:
 equipped.back:eq_demonback
 equipped.body:eq_demonbody
-equipped.head:eq_demonhead
+equipped.head:eq_oversizedhat
 equipped.neck:eq_swordpendant
 equipped.ring1:eq_aquamarinering
 equipped.ring2:eq_holyring
-equipped.weapon:we_tearstaff
+equipped.weapon:we_fireglaive
 # weapon configurations:
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
+weapon.configs:we_fireglaive;2,1,2,4,2,3,1;3,4,2,1,2;4,2,2,5,3;5,5,3,3,1;20,6,1;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;
 weapon.configs:we_hawthorn;2;
 weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;5,5,2,3,1;18,2,2,5,2;
@@ -131,11 +135,12 @@ weapon.configs:we_simplesword;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;19,2,2;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
-weapon.spell:17
+weapon.spell:16
 # quickslot assignments:
 quickslot:1,fo_greaterhealingpotion
 quickslot:2,fo_mediumhealingpotion
 # enemies killed in level:
+enemies.killed:res/level/ancienttemple/ancienttemple.tmx
 enemies.killed:res/level/ascent/ascent.tmx
 enemies.killed:res/level/boss_elysia/boss_elysia.tmx
 enemies.killed:res/level/boss_janus/boss_janus.tmx
@@ -168,6 +173,7 @@ enemies.killed:res/level/yashapuzzle/yasha_cleric.tmx
 enemies.killed:res/level/yashapuzzle/yasha_death.tmx
 enemies.killed:res/level/yashatemple/yashatemple.tmx
 # enemies looted in level:
+enemies.looted:res/level/ancienttemple/ancienttemple.tmx,320,321
 enemies.looted:res/level/ascent/ascent.tmx,124,125,135,203,234
 enemies.looted:res/level/boss_elysia/boss_elysia.tmx
 enemies.looted:res/level/boss_janus/boss_janus.tmx
@@ -200,6 +206,7 @@ enemies.looted:res/level/yashapuzzle/yasha_cleric.tmx
 enemies.looted:res/level/yashapuzzle/yasha_death.tmx
 enemies.looted:res/level/yashatemple/yashatemple.tmx,182
 # items looted in level:
+items.looted:res/level/ancienttemple/ancienttemple.tmx,1826
 items.looted:res/level/ascent/ascent.tmx,447,453,771,975,1008,1113,1612,1887,2127,2292,2432
 items.looted:res/level/boss_elysia/boss_elysia.tmx
 items.looted:res/level/boss_janus/boss_janus.tmx
@@ -232,6 +239,7 @@ items.looted:res/level/yashapuzzle/yasha_cleric.tmx,837
 items.looted:res/level/yashapuzzle/yasha_death.tmx
 items.looted:res/level/yashatemple/yashatemple.tmx,1181,1245
 # chests looted in level:
+chests.looted:res/level/ancienttemple/ancienttemple.tmx
 chests.looted:res/level/ascent/ascent.tmx
 chests.looted:res/level/boss_elysia/boss_elysia.tmx
 chests.looted:res/level/boss_janus/boss_janus.tmx
@@ -270,8 +278,10 @@ waypoints.unlocked:res/map/highland/highland.tmx,317,616.000000,710.000000,318,4
 waypoints.unlocked:res/map/marshland/marshland.tmx,227,1366.000000,210.000000,294,366.000000,1660.000000,415,766.000000,410.000000,1024,1216.000000,1010.000000,1732,1616.000000,1710.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,748,2416.000000,510.000000,1002,1116.000000,710.000000,1387,2866.000000,960.000000,2327,866.000000,1660.000000,2630,2016.000000,1860.000000,3556,2816.000000,2510.000000,3872,1116.000000,2760.000000,3893,2166.000000,2760.000000,4337,3366.000000,3060.000000
 # modifiers unlocked:
+modifiers.unlocked:res/level/ancienttemple/ancienttemple.tmx,319
 modifiers.unlocked:res/level/ascent/ascent.tmx,201
 # triggers triggered in world:
+triggers.triggered:res/level/ancienttemple/ancienttemple.tmx
 triggers.triggered:res/level/ascent/ascent.tmx
 triggers.triggered:res/level/boss_elysia/boss_elysia.tmx
 triggers.triggered:res/level/boss_janus/boss_janus.tmx
@@ -320,7 +330,7 @@ triggers.triggered:res/map/yashasanctuary/yashasanctuary.tmx
 # tiles explored in world:
 tiles.explored:res/map/gandria/gandria.tmx,80,70,               ü        þ       þÿ       ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ      €ÿÿ    ü€ÿÿ    þÿ€ÿÿ    ÿÿýÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    ÿÿÿÿÿ    þÿÿÿÿ    üÿÿÿÿ    þÿÿÿÿ     þÿÿ      þÿÿ     øÿÿÿ     üÿÿÿ?     þÿÿÿ     þÿÿÿ     þÿÿÿ     þÿÿÿ   üþÿÿÿ   þþÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿ   ÿþÿÿÿÿøÿÿÿÿÿÿçÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ ðÿÿÿÿÿÿÿ ðÿÿÿÿÿÿÿ ðÿÿ?ÿÿÿÿÿ ðÿÿÿÿÿÿÿ à?ÿÿÿÿÿÿ Àþ ÿûÿÿÿ     ÿ ðÿ     ÿ àÿ     ÿ àÿ     ÿ àÿ     ÿ À     ,
 tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿÿ  ÿ   ÿ   ÿ   ÿ   ÿ   ÿ   ÿ ÿÿÿ‡ÿÿÿÿÏÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ,
-tiles.explored:res/map/highland/highland.tmx,50,50,                                                   þ     ü    ø?    àÿ    €ÿ    þ    ø?    àÿ    €ÿ    þ    ø?    àÿ    ðÿ   àÿ øÀÿÿ ð ÿÿàÿ üÿ?€ÿðÿÿ þÀÿÿø ÿÿàÿüÿ?€ÿðÿÿ þÀÿÿø ÿÿÀÿøÿ? ÿÀÿÿ ü ÿÿð üÿÀÿðÿ? ÿ?Àÿÿ üÿÿÿðÿüÿÀÿ?ðÿ? ÿÿ€ÿ üÿüÿ ðÿ   Àÿ?    ÿÿ    üÿ   ðÿ   Àÿ    ÿ    øÿ,0000
+tiles.explored:res/map/highland/highland.tmx,50,50,                          þ     ü    ø?    àÿ    €ÿ    þ    ø?    àÿ    €ÿ    þ    ø?    àÿ    €ÿ    þ    ø?    àÿ    ðÿ   àÿ øÀÿÿ ð ÿÿàÿ üÿ?€ÿðÿÿ þÀÿÿø ÿÿàÿüÿ?€ÿðÿÿ þÀÿÿø ÿÿÀÿøÿ? ÿÀÿÿ ü ÿÿð üÿÀÿðÿ? ÿ?Àÿÿ üÿÿÿðÿüÿÀÿ?ðÿ? ÿÿ€ÿ üÿüÿ ðÿ   Àÿ?    ÿÿ    üÿ   ðÿ   Àÿ    ÿ    øÿ,0000
 tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü  Àÿÿ  €ÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿ  üÿÿ  ðÿÿ  Àÿÿÿ  þÿÿ  ðþ    ü    øÿ   àÿ   €ÿ?    þÿ?   üÿÿ  øÿÿ  ðÿÿ  Àÿÿÿ  ÿÿÿÀ?üÿÿ?€ÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿðÿÿÿÿ?Àÿÿÿÿÿ ÿÿÿÿÿüÿÿÿÿðÿÿÿÿ Àÿÿÿÿ ÿÿÿÿ üÿÿÿ? ðÿü €ÿÿàÿ  üÿ   ,
 tiles.explored:res/map/meadows/meadows.tmx,70,70,  à? üƒ?   ü€ÿñ   ÿðÿþ  Àÿüÿÿ  ðÿ ÿÿÿ   ü?Àÿÿ?  àÿðÿÿ  üÿüÿÿ €ÿÿ ÿÿÿ  àÿ?ÿÿÿ?  øÿïÿÿÿ  þÿÿÿÿÿ €ÿÿÿÿÿ?  àÿßÿÿÿ  øÿ÷ÿÿÿ €ÿÿýÿÿÿ ðÿÿÿÿ  þÿßÿÿÿ €ÿÿóÿÿÿ àÿüÿÿÿ øÿþÿÿ  þÿÿÿÿ Àÿÿ€ÿÿÿ øÿ?Àÿÿÿ þÿ  þ? €ÿÿ øÿ àÿÿ  ÿÿ øÿ? àÿ  þÿÿøÿ €ÿÿÿ?ÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ þÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿÿ þÿÿÿÿÿÿ?€ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿøÿÿÿÿÿÿ þ€ÿÿÿÿ?€ÿüÿÿÿÿàÿƒÿÿÿÿÿ øðÿÿ‡?  þüÿð €ÿÿÿþ àÿÁÿ?€ÿ øðÿÿçÿ þüÿÿûÿ€ÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿ þÿÿÿÿÿÿ€ÿÿÿÿÿÿÿ àÿÿÿÿÿÿ? øÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ¿ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ àÿÿÿÿÿÿ àÿÿÿÿÿÿ  üÿÿÿÿÿ   þÿÿÿÿ   üÿÿÿ    þÿÿÿ     €ÿ      ,0000
 # quest states:
@@ -470,7 +480,7 @@ modifier.learned:1,2
 modifier.learned:2,2
 modifier.learned:3,1
 modifier.learned:4,2
-modifier.learned:5,2
+modifier.learned:5,3
 modifier.learned:6,1
 # hints learned:
 hint.learned:Spellbook

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="70" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="324">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/ancienttemple/layer_inf.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/ancienttemple/layer_inf.png,3.0,res/level/ancienttemple/layer_3.png,2.0,res/level/ancienttemple/layer_2.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/stonegarden.ogg"/>
   <property name="tilesetpath" value="res/level/ancienttemple/tileset_level_ancienttemple.png"/>
@@ -620,7 +620,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="70" height="30">
+ <layer name="collidable" width="70" height="30" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

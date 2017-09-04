@@ -353,7 +353,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_pearlpile", 1)
 		# translation: 
 		translation.tag:DL_Choice_PearlSabre
-		translation.en:we_pearlsabre,mi_pearlpile$,1,mi_ironore,3,gold,50
+		translation.en:we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,50
 		translation.de:
 		translation.ch:
 		translation.crafting:1

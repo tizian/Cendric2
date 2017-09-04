@@ -17,13 +17,16 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(2)
-	if (not DL:isConditionFulfilled("npc_robert", "who_are_you")) then 
+	if (not DL:isConditionFulfilled("npc_robert", "who_are_you") and not DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
 		DL:addChoice(3, "DL_Choice_WhoAreYou") -- Who are you?
+	end
+	if (not DL:isConditionFulfilled("npc_robert", "who_are_you") and DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
+		DL:addChoice(8, "DL_Choice_HeyBob") -- Hey Bob!
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
-	if (not DL:isConditionFulfilled("npc_robert", "who_are_you")) then 
+	if (not DL:isConditionFulfilled("npc_robert", "who_are_you") and not DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
 
 		DL:createNPCNode(3, 4, "DL_Robert_WhoAreYou") -- I'm Robert, you can call me Bob. 
 		DL:addConditionProgress("npc_robert", "who_are_you")
@@ -44,7 +47,33 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(7, -2, "DL_Robert_NoTalent") -- Better than no one. Looking at you...
+		DL:createNPCNode(7, -1, "DL_Robert_NoTalent") -- Better than no one. Looking at you...
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_robert", "who_are_you") and DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
+
+		DL:createNPCNode(8, 9, "DL_Robert_HeyBob") -- (Surprised) You, here? So you're a mage after all...
+		DL:addConditionProgress("npc_robert", "who_are_you")
+		DL:addNode()
+
+
+		DL:createNPCNode(9, 10, "DL_Robert_WhoAreYou2") -- 
+		DL:addNode()
+
+
+		DL:createChoiceNode(10)
+		DL:addChoice(11, "DL_Choice_YouHaveTalent") -- 
+		DL:addChoice(12, "DL_Choice_NoTalent") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(11, -2, "DL_Robert_YouHaveTalent") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(12, -1, "DL_Robert_NoTalent") -- 
 		DL:addNode()
 
 	end

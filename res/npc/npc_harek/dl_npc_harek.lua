@@ -130,7 +130,7 @@ loadDialogue = function(DL)
 			DL:addCraftingChoice(18, "DL_Choice_IceScarf") -- eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
 		end
 		if (DL:hasItem("mi_pearlpile", 1)) then 
-			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile$,1,mi_ironore,3,gold,50
+			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,50
 		end
 		if (DL:hasItem("mi_elysiatail", 1)) then 
 			DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,60
