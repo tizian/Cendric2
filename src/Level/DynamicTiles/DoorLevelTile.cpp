@@ -51,7 +51,7 @@ void DoorLevelTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Open, openAnimation);
 
 	playCurrentAnimation(false);
-	reloadConditions(m_mainChar);
+	m_isReloadNeeded = true;
 }
 
 void DoorLevelTile::update(const sf::Time& frameTime) {

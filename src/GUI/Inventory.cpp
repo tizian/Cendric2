@@ -211,6 +211,10 @@ void Inventory::notifyChange(const std::string& itemID) {
 	if (!item) return;
 	if (!contains(m_typeMap, item->getType())) return;
 
+	if (item->isEquipmentType(item->getType())) {
+		m_equipment->reload();
+	}
+
 	std::map<std::string, InventorySlot>* tab = m_typeMap.at(item->getType());
 
 	// search for the slot

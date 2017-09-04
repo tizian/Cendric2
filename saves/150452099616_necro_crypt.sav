@@ -1,21 +1,21 @@
 # time played, in seconds
-time.played:6429
-savegame.name:Quicksave
-savegame.date:1504520754
+time.played:6591
+savegame.name:16_necro_crypt
+savegame.date:1504520996
 level.id:res/level/gandriamines/gandriamines.tmx
 level.position:1060.000000,610.000000
-is.in.level:1
-map.id:res/map/gandria/gandria.tmx
-map.position:353.084961,1959.308594
+is.in.level:0
+map.id:res/map/marshland/marshland.tmx
+map.position:686.542908,422.572113
 forced.map.id:
 forced.map.position:0.000000,0.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:102,0,0,0,0,0,2,0,0,0,0,0,0,0
-gold:276
+gold:289
 # items in inventory:
-item.id:co_smallpouch,1
+item.id:co_smallpouch,2
 item.id:do_bloodnotemarcus,1
 item.id:do_elderdiary,1
 item.id:do_eleletter,1
@@ -31,24 +31,25 @@ item.id:eq_wizardhatfire,1
 item.id:fo_apple,10
 item.id:fo_beer,1
 item.id:fo_bread,1
-item.id:fo_caveberry,11
+item.id:fo_caveberry,12
 item.id:fo_cheese,1
 item.id:fo_chicken,1
 item.id:fo_devilberry,1
 item.id:fo_fishsoup,2
-item.id:fo_glowingshroom,15
+item.id:fo_glowingshroom,19
 item.id:fo_greaterhealingpotion,1
 item.id:fo_ham,2
 item.id:fo_healingherb,23
-item.id:fo_lesserhealingpotion,5
+item.id:fo_lesserhealingpotion,6
 item.id:fo_mediumhealingpotion,2
 item.id:fo_milk,1
 item.id:fo_physalis,2
-item.id:fo_rawmeat,12
+item.id:fo_rawmeat,14
 item.id:fo_redhat,4
 item.id:fo_roastedmeat,22
 item.id:fo_sausage,3
-item.id:fo_water,5
+item.id:fo_stormweed,1
+item.id:fo_water,6
 item.id:fo_wine,1
 item.id:ke_jonathanbasement,1
 item.id:ke_rhendal,1
@@ -60,13 +61,13 @@ item.id:mi_candleholder,2
 item.id:mi_feather,3
 item.id:mi_firstguardianheart,1
 item.id:mi_goldengoblet,1
-item.id:mi_ironore,5
+item.id:mi_ironore,21
 item.id:mi_pearl,4
 item.id:mi_portstone,1
 item.id:mi_sextant,1
 item.id:mi_silverplate,1
 item.id:mi_stone,2
-item.id:mi_teeth,6
+item.id:mi_teeth,7
 item.id:mi_wolf_fur,2
 item.id:pe_elixirfire,1
 item.id:pe_elixirshadow,1
@@ -76,7 +77,7 @@ item.id:we_hawthorn,1
 item.id:we_herbalistblade,1
 item.id:we_inconspicuousdagger,1
 item.id:we_ordermace,1
-item.id:we_pickaxe,1
+item.id:we_pickaxe,2
 item.id:we_simplesword,1
 item.id:we_torch,1
 stored.gold:0
@@ -99,7 +100,7 @@ weapon.configs:we_ordermace;17,2,1;2,1,1;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;7,6,1;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
-weapon.spell:16
+weapon.spell:17
 # quickslot assignments:
 quickslot:1,fo_lesserhealingpotion
 quickslot:2,fo_omelette
@@ -125,7 +126,7 @@ enemies.looted:res/level/crypt/crypt.tmx,10,11,15
 enemies.looted:res/level/crystalcrypt/crystalcrypt.tmx
 enemies.looted:res/level/elderbackroom/elderbackroom.tmx,113
 enemies.looted:res/level/eldergarden/eldergarden.tmx,88
-enemies.looted:res/level/gandriamines/gandriamines.tmx,103,106
+enemies.looted:res/level/gandriamines/gandriamines.tmx,101,102,103,106
 enemies.looted:res/level/gandriasewers/gandriasewers.tmx,26,52,53,54,55,57,58,62,64,66
 enemies.looted:res/level/howlingcaverns/howlingcaverns.tmx,29,32,33,34,42,43,44,45
 enemies.looted:res/level/jonathanslab/jonathanslab.tmx,123,124,130,131,134,136,139,141,143,145,146,147
@@ -140,7 +141,7 @@ items.looted:res/level/crypt/crypt.tmx,315,316,451,592,625,994
 items.looted:res/level/crystalcrypt/crystalcrypt.tmx
 items.looted:res/level/elderbackroom/elderbackroom.tmx,62,63,102,127,159,173,176,243,307,338,457
 items.looted:res/level/eldergarden/eldergarden.tmx,207,248,315,524,535,567,568,571,594
-items.looted:res/level/gandriamines/gandriamines.tmx,1823,2708,2821,2922,3217,3303,3404,3520,3521,3524
+items.looted:res/level/gandriamines/gandriamines.tmx,306,307,627,702,905,1010,1015,1823,2708,2821,2922,3217,3303,3404,3520,3521,3524,4022,4209
 items.looted:res/level/gandriasewers/gandriasewers.tmx,223,238,264,265,267,268,286,290,293,311,320,396,402,615,841,844,855,856,859,860,861,1288,1413,1426,1428,1930
 items.looted:res/level/howlingcaverns/howlingcaverns.tmx,603,628,753,957,963,1116,1291,1294,1410,1545,1548,1706,1850,2012,2330,2332,2409,2425
 items.looted:res/level/jonathanslab/jonathanslab.tmx,149,163,183,199,404,451,481,597,598,604,777,869,915,1050,1084,1197,1292,1604
@@ -155,7 +156,7 @@ chests.looted:res/level/crypt/crypt.tmx,18,23
 chests.looted:res/level/crystalcrypt/crystalcrypt.tmx
 chests.looted:res/level/elderbackroom/elderbackroom.tmx,102
 chests.looted:res/level/eldergarden/eldergarden.tmx
-chests.looted:res/level/gandriamines/gandriamines.tmx
+chests.looted:res/level/gandriamines/gandriamines.tmx,98,104
 chests.looted:res/level/gandriasewers/gandriasewers.tmx,48
 chests.looted:res/level/howlingcaverns/howlingcaverns.tmx,24,38
 chests.looted:res/level/jonathanslab/jonathanslab.tmx,140
@@ -165,12 +166,12 @@ chests.looted:res/level/stonegarden/stonegarden.tmx,134
 chests.looted:res/level/syrahbasement/syrahbasement.tmx,166
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/gandria/gandria.tmx,308,966.000000,1160.000000,312,366.000000,2110.000000,313,366.000000,2610.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,319,2616.000000,2960.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000
-waypoints.unlocked:res/map/gandriabarracks/gandriabarracks.tmx
 waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,310,1166.000000,1210.000000,311,1816.000000,1210.000000
+waypoints.unlocked:res/map/marshland/marshland.tmx,291,1366.000000,210.000000,292,766.000000,410.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,231,2416.000000,510.000000,232,2866.000000,960.000000,234,866.000000,1660.000000,235,2016.000000,1860.000000,236,2816.000000,2510.000000,237,2166.000000,2760.000000,238,1116.000000,2760.000000,239,3366.000000,3060.000000
-waypoints.unlocked:res/map/syrahhome/syrahhome.tmx
 # modifiers unlocked:
 modifiers.unlocked:res/level/brokenbridge/brokenbridge.tmx,105
+modifiers.unlocked:res/level/gandriamines/gandriamines.tmx,96
 modifiers.unlocked:res/level/howlingcaverns/howlingcaverns.tmx,28
 modifiers.unlocked:res/level/jonathanslab/jonathanslab.tmx,129
 modifiers.unlocked:res/level/stonegarden/stonegarden.tmx,115
@@ -202,7 +203,7 @@ triggers.triggered:res/map/tavern_1/tavern_1.tmx
 # tiles explored in world:
 tiles.explored:res/map/gandria/gandria.tmx,80,70,                                                                                                                                                                           €?        ü        şÿ        ÿÿ        ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       ÿÿ       şÿ       üÿ       Àÿ       Àÿ       Àÿ      ğÇÿ      øÏÿ      üßÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿ      üÿÿÿøø  øÿÿÿı‡ÿ  şÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ?ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿüÿÿÿÿÿÿÿø?ÿÿÿÿÿÿÿğÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ  ÿÿÿÿÿÿÿ   ÿÿÿÿÿ     ÿ àÿ     ÿ àÿ     ÿ àÿ     ş  À     ,
 tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,                                                                                   ÿ ğ÷ÿÿ øÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ üÿÿÿ øÿÿÿ ğÿÿÿ,
-tiles.explored:res/map/marshland/marshland.tmx,50,40,  Àÿ    ÿ    ü    ğ    Àÿ    ÿ    ü    à?                                                                                                                                                                                                         ,
+tiles.explored:res/map/marshland/marshland.tmx,50,40,  øÿ   øÿ   ğÿ   ÿÿ   şÿÿ  üÿÿ  ğÿÿ  Àÿÿ   ÿÿÿ  üÿÿ  ğÿÿ  Àÿÿ    şÿ    ğÿ                                                                                                                                                                     ,
 tiles.explored:res/map/meadows/meadows.tmx,70,70,    ÿÿ?    Àÿÿó    ğÿÿş    üÿÿÿ    ÿÿÿÿ    Àÿÿÿ?    ğÿÿÿ    üÿÿÿ    şÿÿÿ   €ÿÿÿ    ğÿÿÿ    üÿÿÿ    ÿÿÿÿ   Àÿÿÿÿ   ğÿÿÿÿ  øüÿÿÿ? àÿÿÿÿÿ üÿÁÿÿÿÿ€ÿÿàÿÿÿÿ àÿ?øÿÿÿ? üÿşÿÿÿ€ÿÿÿÿÿÿàÿÿ€ÿÿÿÿ øÿ? şÿÿ? şÿ Àÿÿ€ÿÿ øÿÿ àÿÿ  ÿÿ øÿ? Àÿ  şÿÿÿÿÿ €ÿÿÿÿÿÿÿàÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ ÿÿÿÿÿÿÿ?Àÿÿÿÿÿÿÿğÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ ÿÿÿÿÿÿÿ?Àÿÿÿÿÿÿÿğÿÿÿÿÿÿÿüÿàÿÿÿÿ ÿ øÿÿÿ?Àÿøÿÿÿÿğÿÿÿàÿøÿáÿÿ¿? şøÿğ  ÿşÿş Àÿ‡ÿ€ÿ ğÿáÿÿçÿ  øøÿÿû?  üşÿÿÿ  ÿ¿ÿÿÿÿ Àÿÿÿÿÿÿ ğÿÿÿÿÿ  üÿÿÿÿÿ  ÿÿÿÿÿÿ Àÿÿÿÿÿÿ ğÿÿÿÿÿÿ? ÿÿÿÿÿÿÿşÿÿÿÿÿÿÿãÿÿÿÿÿÿÿÿüÿÿÿÿÿÿÿ¿ÿÿÿÿÿÿÿÿïÿÿ ğÿÿÿûÿÿ àÿÿÿşÿÿ ğÿÿ¿ÿÿÿ  Àÿïÿÿ?   àÿûÿÿ     şÿ      ÿ      ,0000
 # quest states:
 quest.state:a_new_trace,2
@@ -297,6 +298,7 @@ spell.learned:4,17
 modifier.learned:1,1
 modifier.learned:2,1
 modifier.learned:4,1
+modifier.learned:5,1
 modifier.learned:6,1
 # hints learned:
 hint.learned:Spellbook

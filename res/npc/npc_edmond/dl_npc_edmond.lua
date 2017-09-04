@@ -13,7 +13,10 @@ loadDialogue = function(DL)
 				DL:addChoice(3, "DL_Choice_WhatIsDangerous") --  What exactly is dangerous?
 				DL:addNode()
 				
-				DL:createNPCNode(3, 5, "DL_Edmond_DangerousIs") -- These woods are not safe for a young man like you on his own. There are creatures out here and, in addition, big rocks have fallen down from the hill in the east that are blocking our way back to the village.
+				DL:createNPCNode(3, 60, "DL_Edmond_DangerousIs") -- These woods are not safe for a young man like you on his own.
+				DL:addNode()
+                
+                DL:createNPCNode(60, 5, "DL_Edmond_DangerousIs2") -- There are creatures out here and, in addition, big rocks have fallen down from the hill in the east that are blocking our way back to the village.
 				DL:addNode()
 				
 				DL:createNPCNode(2, 4, "DL_Edmond_JustExploring") -- So, just exploring? It is unusual that I meet someone out here that I don't know. You are not a citizen of the village, otherwise I would have seen you before.

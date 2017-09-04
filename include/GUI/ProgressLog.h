@@ -21,8 +21,6 @@ public:
 	void setPosition(const sf::Vector2f& position);
 	void setAlpha(float alpha);
 
-	void forceRemove();
-
 	float getHeight() const;
 	sf::Time getScrollTime() const;
 	inline bool isOver() const { return m_scrollTimer <= sf::Time::Zero; }

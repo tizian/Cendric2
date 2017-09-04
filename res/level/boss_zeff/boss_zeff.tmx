@@ -2,9 +2,9 @@
 <map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" nextobjectid="22">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_zeff/layer_inf.png,2,res/level/boss_zeff/layer_2.png"/>
-  <property name="bosslevel" value="res/level/boss_zeff/boss_elysia.lua"/>
+  <property name="bosslevel" value="res/level/boss_zeff/boss_zeff.lua"/>
   <property name="dimming" value="0.5"/>
-  <property name="musicpath" value="res/music/boss_zeff.ogg"/>
+  <property name="musicpath" value="res/music/boss_elysia.ogg"/>
   <property name="tilesetpath" value="res/level/boss_zeff/tileset_level_boss_zeff.png"/>
   <property name="weather" value="rain"/>
  </properties>

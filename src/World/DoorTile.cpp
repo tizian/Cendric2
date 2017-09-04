@@ -42,7 +42,7 @@ void DoorTile::reloadConditions(MainCharacter* mainChar) {
 
 	m_isConditionsFulfilled = conditionsFulfilled;
 
-	if ((m_isConditionsFulfilled && m_keyItemID.empty())
+	if ((m_isConditionsFulfilled && m_keyItemID.empty() && m_strength == 0)
 		|| mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
 		open();
 	}

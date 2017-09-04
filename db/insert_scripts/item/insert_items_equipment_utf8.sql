@@ -46,7 +46,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Stone Crown
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnhead', 'item', 'Stone Crown','Steinkrone','Stei Chrone');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnhead', 'item_desc', 'The crown of a cairn wraith.','Die Krone eines Cairn Geistes.','D''Chrone vomne Cairn Geischt.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnhead', 'item_desc', 'The crown of a cairn wraith.','Die Krone eines Cairn Geistes.','D''Chrone vomne Steimännli Geischt.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_cairnhead', 'eq_head', 700, 450, 50);
 INSERT INTO item_attribute (item_id, dmg_ice, res_fire, res_ice, res_physical) values ('eq_cairnhead', 3, -20, 100, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnhead', 'res/assets/equipment/head/spritesheet_head_cairnhead.png', 'res/assets/equipment/head/spritesheet_map_head_cairnhead.png');
@@ -54,7 +54,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Cairn Armour
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item', 'Cairn Armour','Cairn-Rüstung','Cairn-Rüschtig');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste  vo Cairn Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste  vo Steimännli Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_cairnarmor', 'eq_body', 700, 500, 100);
 INSERT INTO item_attribute (item_id, dmg_ice, res_fire, res_ice, res_physical) values ('eq_cairnarmor', 5, -40, 200, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnarmor', 'res/assets/equipment/body/spritesheet_body_cairnarmor.png', 'res/assets/equipment/body/spritesheet_map_body_cairnarmor.png');

@@ -56,9 +56,9 @@ void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 
 void ProgressLog::addItemConversionProgress(const std::string& oldItemID, const std::string& newItemID) {
 	std::string text = g_textProvider->getText(oldItemID, "item")
-					+ " -> "
-					+ g_textProvider->getText(newItemID, "item");
-	
+		+ " -> "
+		+ g_textProvider->getText(newItemID, "item");
+
 	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_WHITE, newItemID));
 
 	calculatePositions();
@@ -70,7 +70,7 @@ void ProgressLog::addPermanentItemProgress(const Item* item) {
 	text.append(g_textProvider->getText("Consumed"));
 	text.append("\n");
 	AttributeData::appendAttributes(text, item->getAttributes());
-	
+
 	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, COLOR_NEUTRAL, item->getID()));
 
 	calculatePositions();
@@ -122,7 +122,7 @@ void ProgressLog::addQuestTargetKilled(const std::string& questID, const std::st
 }
 
 void ProgressLog::addQuestStateChanged(const std::string& questID, QuestState state) {
-	std::string text = g_textProvider->getText(questID,  "quest") + ": ";
+	std::string text = g_textProvider->getText(questID, "quest") + ": ";
 	text.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	m_logTexts.push_back(ProgressLogEntry::createQuestEntry(text, state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL));
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_QUESTPROGRESS);
@@ -170,6 +170,10 @@ void ProgressLog::setVisible(bool visible) {
 
 void ProgressLog::calculatePositions() {
 	if (m_logTexts.size() == 0) return;
+	while (m_logTexts.size() > MAX_ENTRIES) {
+		delete m_logTexts.at(m_logTexts.size() - 1);
+		m_logTexts.pop_back();
+	}
 
 	float y = WINDOW_HEIGHT - m_yOffset;
 
@@ -186,13 +190,7 @@ void ProgressLog::calculatePositions() {
 		}
 	}
 
-	if (m_logTexts.size() > MAX_ENTRIES) {
-		auto it = m_logTexts.begin();
-		if (it == m_logTexts.end()) return;
 
-		ProgressLogEntry* entry = (*it);
-		entry->forceRemove();
-	}
 }
 
 /* ProgressLogEntry */
@@ -299,7 +297,7 @@ void ProgressLogEntry::update(const sf::Time& frameTime) {
 
 void ProgressLogEntry::updateBottom(const sf::Time& frameTime) {
 	if (m_time > sf::Time::Zero) return;
-	
+
 	if (m_fadeOutTimer > sf::Time::Zero) {
 		updateTime(m_fadeOutTimer, frameTime);
 		float scale = m_fadeOutTimer.asSeconds() / TIME_TO_FADE.asSeconds();
@@ -341,11 +339,6 @@ void ProgressLogEntry::setAlpha(float alpha) {
 
 	const sf::Color &bdc = m_border->getFillColor();
 	m_border->setFillColor(sf::Color(bdc.r, bdc.g, bdc.b, a));
-}
-
-void ProgressLogEntry::forceRemove() {
-	m_fadeInTimer = sf::Time::Zero;
-	m_time = sf::Time::Zero;
 }
 
 sf::Time ProgressLogEntry::getScrollTime() const {

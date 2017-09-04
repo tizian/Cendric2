@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="131">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="131">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -240,7 +240,7 @@
   </object>
   <object id="128" x="249" y="351" width="38.5" height="50">
    <properties>
-    <property name="level entry" value="res/level/elderbackroom/elderbackroom.tmx,1300,1170"/>
+    <property name="level entry" value="res/level/elderbackroom/elderbackroom.tmx,1300,1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

@@ -552,7 +552,7 @@
   </object>
   <object id="288" x="750" y="1090" width="50" height="30">
    <properties>
-    <property name="level entry" value="res/level/syrahbasement/syrahbasement.tmx,1750,1150"/>
+    <property name="level entry" value="res/level/syrahbasement/syrahbasement.tmx,1750,1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

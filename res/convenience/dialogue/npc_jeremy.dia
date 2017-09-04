@@ -21,7 +21,7 @@ npc.id:npc_jeremy
 	[
 		# Link node, tag is next tag
 		tag:2
-		condition:DL:isQuestState("stephens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")
+		condition:DL:isQuestState("stevens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")
 		# translation: 
 		translation.tag:DL_Choice_Helmet
 		translation.en:Do you know something about the helmet of a certain paladin?

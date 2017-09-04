@@ -11,6 +11,7 @@ WardenBehavior::WardenBehavior(WardenEnemy* enemy) :
 	m_dampingAirPerS = 0.5f;
 	m_dampingGroundPerS = 0.7f;
 	m_ignoreDynamicTiles = true;
+	m_isWalkingBehavior = false;
 }
 
 void WardenBehavior::makeRandomDecision() {

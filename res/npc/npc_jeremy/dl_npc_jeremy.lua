@@ -10,7 +10,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_jeremy", "who_are_you") == DL:isConditionFulfilled("npc_jeremy", "buddy_guy")) then 
 
 		DL:createChoiceNode(1)
-		if (DL:isQuestState("stephens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")) then 
+		if (DL:isQuestState("stevens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")) then 
 			DL:addChoice(2, "DL_Choice_Helmet") -- Do you know something about the helmet of a certain paladin?
 		end
 		if (DL:isQuestState("leeroy_chicken", "started") and DL:isConditionFulfilled("npc_helena","leeroy_chicken") and not DL:isConditionFulfilled("npc_jeremy", "leeroy_chicken")) then 
@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
-		if (DL:isQuestState("stephens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")) then 
+		if (DL:isQuestState("stevens_helmet", "started") and not DL:isConditionFulfilled("npc_jeremy", "helmet")) then 
 
 			DL:createNPCNode(2, 8, "DL_Jeremy_Helmet") -- Oh, you mean that pathetic paladin that gambled away everything he had? I'll have to disappoint you, we don't have that helmet anymore.
 			DL:addNode()

@@ -163,6 +163,7 @@ bool MapScreen::isOverlayVisible() {
 
 void MapScreen::setDialogue(NPC* npc) {
 	clearOverlays();
+	m_interface->hideAll();
 
 	m_dialogueWindow = new DialogueWindow();
 	m_dialogueWindow->load(npc, this);

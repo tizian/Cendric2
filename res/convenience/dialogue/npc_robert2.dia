@@ -360,7 +360,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest3
 	translation.en:If you'd be a mage, you'd be able to infuse it with magic from a cairn wraith.
 	translation.de:Wenn du ein Magier wärst, könntest du ihn mit der Magie eines Cairn Geistes aufladen.
-	translation.ch:Wennd en Magier wärsch, chöntschen mit de Magie vomne Cairn Geischt uflade.
+	translation.ch:Wennd en Magier wärsch, chöntschen mit de Magie vomne Steimännli Geischt uflade.
 	[
 		# Link node, tag is next tag
 		tag:19
