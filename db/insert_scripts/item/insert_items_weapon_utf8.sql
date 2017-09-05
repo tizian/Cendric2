@@ -100,8 +100,6 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 40, 60,
 1.0, 2.0, 0.0);
 
-
-
 -- Claw
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item','Iron Claw', 'Eisenklaue','Isechlaue');
@@ -154,7 +152,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Yasha''s Claws', 'Yasha''s Klauen','Yasha''s Klaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle', 'eq_weapon', 600, 350, 300);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, critical) values ('we_doublesickle', 5, 5, 5, 10, 10);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_light, dmg_ice, dmg_fire, critical) values ('we_doublesickle', 10, 5, 5, 5, 5, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle', 350, 90, 80, -45, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 1, 'elemental', 3);
@@ -162,6 +160,119 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 3, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 4, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 5, 'meta', 2);
+
+-- Yasha''s Claws (Fire)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item','Fiery Yasha''s Claws', 'Feurige Yasha''s Klauen','Füürigi Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with fire.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Feuer verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Füür verstärcht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_fire', 'eq_weapon', 750, 600, 400);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, dmg_fire, critical) values ('we_doublesickle_fire', 10, 15, 15, 8);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_fire', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_fire', 350, 90, 80, -45, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 2, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 3, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 4, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 5, 'meta', 3);
+
+-- Yasha''s Claws (Dark)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item','Dark Yasha''s Claws', 'Dunkle Yasha''s Klauen','Dunkli Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with gargoyle dust.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Gargoylestaub verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Gargoylestaub verstärcht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_dark', 'eq_weapon', 750, 650, 400);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical) values ('we_doublesickle_dark', 10, 15, 15, 8);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_dark', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_dark', 350, 90, 80, -45, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 2, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 3, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 4, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 5, 'meta', 3);
+
+-- Jason's Glaive
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item', 'Jason''s Glaive','Jasons Gleve','Jasons Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item_desc', 'Demonhunter Jason''s old weapon.','Dämonenjäger Jason''s alte Waffe','Em Dämonejäger Jason sini alt Waffe.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 200);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, haste) values ('we_jasonsglaive', 20, 5, 3, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 1, 'meta', 1);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 2, 'meta', 1);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 3, 'meta', 1);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 4, 'meta', 1);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 5, 'meta', 1);
+
+-- Jason's Glaive (Fire)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item', 'Jason''s Fiery Glaive','Jason''s Feurige Gleve','Jason''s Füürigi Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_fire', 'eq_weapon', 750, 500, 300);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, dmg_light, critical, haste) values ('we_jasonsglaive_fire', 20, 12, 12, 4, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_fire', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 1, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 2, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 3, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 4, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 5, 'meta', 2);
+
+-- Jason's Glaive (Dark)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item', 'Jason''s Dark Glaive','Jason''s Dunkle Gleve','Jason''s Dunkli Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 300);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_jasonsglaive_dark', 20, 12, 12, 4, 30);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_dark', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 1, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 2, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 3, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 4, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 5, 'meta', 2);
+
+
+-- Yasha's Glaive
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Yasha''s Glaive','Yasha''s Glaive','Yasha''s Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 300);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, critical, haste) values ('we_fireglaive', 10, 10, 5, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 3, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 4, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 5, 'meta', 2);
+
+-- Yasha's Fiery Glaive
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item', 'Yasha''s Fiery Glaive','Yasha''s Feurige Glaive','Yasha''s Füürigi Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_fire', 'eq_weapon', 750, 400, 400);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, dmg_fire, critical, haste) values ('we_fireglaive_fire', 10, 15, 15, 6, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_fire', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 2, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 3, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 4, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 5, 'meta', 3);
+
+-- Yasha's Dark Glaive
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item', 'Yasha''s Dark Glaive','Yasha''s Dunkle Glaive','Yasha''s Dunkli Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_dark', 'eq_weapon', 750, 450, 400);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_fireglaive_dark', 10, 15, 15, 6, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_dark', 500, 80, 80, -40, 20);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 2, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 3, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 4, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 5, 'meta', 3);
 
 -- Pickaxe
 
@@ -182,8 +293,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_oathbreaker', 10, 10, 10, 15, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_oathbreaker', 'res/assets/equipment/weapon/spritesheet_weapon_oathbreaker.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_oathbreaker.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_oathbreaker', 350, 80, 80, -40, 20);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 1, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 1, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 2, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 3, 'twilight', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 4, 'twilight', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 5, 'twilight', 3);
@@ -198,8 +309,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_light, dmg_fire, haste) values ('we_pikeoflight', 20, 5, 15, 15, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_pikeoflight', 'res/assets/equipment/weapon/spritesheet_weapon_pikeoflight.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_pikeoflight.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_pikeoflight', 1500, 10, 45, 80, 15);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 1, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 1, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 2, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 3, 'divine', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 4, 'divine', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_pikeoflight', 5, 'divine', 3);
@@ -212,8 +323,8 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, max_health, dmg_ice, dmg_shadow, dmg_physical) values ('we_bonescythe', 30, 5, 15, 15);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_bonescythe', 'res/assets/equipment/weapon/spritesheet_weapon_bonescythe.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_bonescythe.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_bonescythe', 1500, 10, 45, 80, 15);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 1, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 2, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 1, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 2, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 3, 'necromancy', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 4, 'necromancy', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_bonescythe', 5, 'necromancy', 3);
@@ -252,7 +363,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Fire Sword
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Fire Sword', 'Feuerschwert','Füürschwert');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Yasha''s Fire Sword', 'Yasha''s Feuerschwert','Yasha''s Füürschwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple. It opens a gate in the Temple of the Ancients.','Ein heiliges Relikt aus Yasha''s Tempel. Es öffnet eine Pforte im Tempel der Ahnen.','Es heiligs Relikt us de Yasha ihrem Tempel. Es macht es Tor uf im Tempel vode Ahne');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword', 'eq_weapon', 700, 400, -1);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_light, critical) values ('we_firesword', 12, 8, 4);
@@ -276,16 +387,15 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Fire Sword (Unkindled)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item','Fire Sword (Unkindled)', 'Feuerschwert (Unentfacht)','Füürschwert (Unentfacht)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item_desc', 'This sword was stolen from Yasha''s temple. I have to kindle it again.','Dieses Schwert wurde aus Yasha''s Tempel entwendet. Ich muss es wieder entfachen.','Da Schwert isch usde Yasha ihrem Tempel klaut worde. Ich muns wieder entfache.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item','Yasha''s Sword', 'Yasha''s Schwert','Yasha''s Schwert');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item_desc', 'This sword was stolen from Yasha''s temple. I found it in the Temple of the Ancients, but it was snuffed out.','Dieses Schwert wurde aus Yasha''s Tempel entwendet. Ich habe es im Tempel der Ahnen gefunden, aber es wurde ausgelöscht.','Da Schwert isch usde Yasha ihrem Tempel klaut worde. Ich has im Tempel vode Ahne gfunde, aber es isch usglöscht worde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_firesword_inactive', 'eq_weapon', 750, 350, -1);
 INSERT INTO item_attribute (item_id, critical) values ('we_firesword_inactive', 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword_inactive', 'res/assets/equipment/weapon/spritesheet_weapon_firesword.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_firesword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword_inactive', 700, 10, 40, 80, 9);
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_firesword_inactive', 30, 30, 300, 400, 100, 120, 0.5);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 2, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 3, 'elemental', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 1, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 2, 'meta', 2);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_firesword_inactive', -7, 0, 25, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_firesword_inactive', 1, 50, 400, 50, 50);
 
@@ -331,33 +441,6 @@ INSERT INTO item_attribute (item_id, max_health) values ('we_walkingpole', 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_walkingpole', 'res/assets/equipment/weapon/spritesheet_weapon_walkingpole.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_walkingpole.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_walkingpole', 800, 10, 40, 80, 5);
 
--- Fire Glaive
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Fire Glaive','Feuergleve','Füür Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 300);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, critical, haste) values ('we_fireglaive', 10, 20, 15, 10);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 20);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 2, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 3, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 4, 'meta', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 5, 'meta', 2);
-
--- Jason's Glaive
-
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item', 'Jason''s Glaive','Jasons Gleve','Jasons Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item_desc', 'If you open something, you have to close it again eventually.','Wenn man etwas öffnet, muss man es irgendwann auch wieder schliessen.','Wenn me öppis ufmacht munmes irgendwenn au wider zuemache.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 300);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, haste) values ('we_jasonsglaive', 20, 10, 15, 10);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive', 500, 80, 80, -40, 20);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 2, 'divine', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 3, 'necromancy', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 4, 'twilight', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 5, 'divine', 3);
 
 -- Alastor's Sickles
 

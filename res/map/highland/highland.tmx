@@ -927,7 +927,7 @@
   </object>
   <object id="335" x="600" y="425" width="50" height="37.5">
    <properties>
-    <property name="level entry" value="res/level/ancienttemple/ancienttemple.tmx,100,100"/>
+    <property name="level entry" value="res/level/ancienttemple/ancienttemple.tmx,1710,1260"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

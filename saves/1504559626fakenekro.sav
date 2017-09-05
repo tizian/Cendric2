@@ -1,19 +1,19 @@
 # time played, in seconds
-time.played:15815
+time.played:16733
 savegame.name:fakenekro
-savegame.date:1504560066
-level.id:res/level/yashatemple/yashatemple.tmx
-level.position:2360.000000,160.000000
+savegame.date:1504567564
+level.id:res/level/yashapuzzle/yasha_death.tmx
+level.position:600.000000,100.000000
 is.in.level:0
 map.id:res/map/yashasanctuary/yashasanctuary.tmx
-map.position:613.459595,814.939941
+map.position:814.733154,317.695282
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:102,0,0,5,0,0,0,0,0,0,2,0,0,0
-gold:153
+gold:261
 # items in inventory:
 item.id:co_shell,7
 item.id:co_smallpouch,5
@@ -41,6 +41,7 @@ item.id:eq_lavaback,1
 item.id:eq_lavahead,1
 item.id:eq_leatherarmor,1
 item.id:eq_mercenarybandana,1
+item.id:eq_silvernecklace,1
 item.id:eq_stevenhelmet,1
 item.id:eq_travelhat,1
 item.id:eq_wizardhatfire,1
@@ -54,11 +55,10 @@ item.id:fo_devilberry,4
 item.id:fo_egg,6
 item.id:fo_fishsoup,4
 item.id:fo_glowingshroom,27
-item.id:fo_greaterhealingpotion,1
 item.id:fo_ham,3
 item.id:fo_healingherb,22
 item.id:fo_lesserhealingpotion,33
-item.id:fo_mediumhealingpotion,5
+item.id:fo_mediumhealingpotion,4
 item.id:fo_milk,1
 item.id:fo_omelette,3
 item.id:fo_physalis,2
@@ -69,7 +69,7 @@ item.id:fo_redhat,6
 item.id:fo_roastedmeat,22
 item.id:fo_sausage,2
 item.id:fo_stormweed,1
-item.id:fo_ultimatehealingpotion,1
+item.id:fo_ultimatehealingpotion,2
 item.id:fo_water,13
 item.id:fo_windrose,2
 item.id:fo_wine,3
@@ -102,6 +102,7 @@ item.id:we_claw,1
 item.id:we_firesword,1
 item.id:we_hawthorn,1
 item.id:we_inconspicuousdagger,1
+item.id:we_lightningpike,1
 item.id:we_pickaxe,1
 item.id:we_simplesword,1
 item.id:we_tearstaff,1
@@ -109,29 +110,31 @@ item.id:we_torch,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:3,1,2,3,1,4,1
-equipped.spellslot:4,5,2,6,1
-equipped.spellslot:5,5,2,3,1
-equipped.spellslot:13,1,2,4,2
+equipped.spellslot:2,1,2,4,2,3,1
+equipped.spellslot:3,1,2,4,2,3,1
+equipped.spellslot:13,3,1,1,2
+equipped.spellslot:12,2,2,4,2
+equipped.spellslot:14,5,2,6,1
 # equipment:
 equipped.back:eq_back_necrot2
 equipped.body:eq_body_necrot2
 equipped.head:eq_head_necrot2
-equipped.neck:eq_silvernecklace
+equipped.neck:eq_lifependant
 equipped.ring1:eq_rubyring
 equipped.ring2:eq_holyring
-equipped.weapon:we_lightningpike
+equipped.weapon:we_doublesickle
 # weapon configurations:
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
+weapon.configs:we_doublesickle;2,1,2,4,2,3,1;3,1,2,4,2,3,1;13,3,1,1,2;12,2,2,4,2;14,5,2,6,1;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;
 weapon.configs:we_hawthorn;2;
-weapon.configs:we_lightningpike;3,1,2,3,1,4,1;4,5,2,6,1;5,5,2,3,1;13,1,2,4,2;
+weapon.configs:we_lightningpike;3,1,2,3,1,4,2;2,1,2,3,1;13,1,2,3,1;4,6,1,5,2;
 weapon.configs:we_ordermace;17,2,1;2,1,1;
 weapon.configs:we_simplesword;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;18,5,1;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
-weapon.spell:17
+weapon.spell:20
 # quickslot assignments:
 quickslot:1,fo_greaterhealingpotion
 quickslot:2,fo_mediumhealingpotion
@@ -141,6 +144,7 @@ enemies.killed:res/level/boss_elysia/boss_elysia.tmx
 enemies.killed:res/level/boss_janus/boss_janus.tmx
 enemies.killed:res/level/boss_khajag/boss_khajag.tmx
 enemies.killed:res/level/boss_mercenaries/boss_mercenaries.tmx
+enemies.killed:res/level/boss_yasha/boss_yasha_good.tmx
 enemies.killed:res/level/brokenbridge/brokenbridge.tmx
 enemies.killed:res/level/crypt/crypt.tmx,15
 enemies.killed:res/level/crystalcrypt/crystalcrypt.tmx,28
@@ -163,6 +167,8 @@ enemies.killed:res/level/swampbridge/swampbridge.tmx,121
 enemies.killed:res/level/swampforest/swampforest.tmx
 enemies.killed:res/level/syrahbasement/syrahbasement.tmx
 enemies.killed:res/level/well/well.tmx
+enemies.killed:res/level/yashapuzzle/yasha_death.tmx
+enemies.killed:res/level/yashapuzzle/yasha_necro.tmx
 enemies.killed:res/level/yashatemple/yashatemple.tmx
 # enemies looted in level:
 enemies.looted:res/level/ascent/ascent.tmx,124,125,135,203,234
@@ -170,6 +176,7 @@ enemies.looted:res/level/boss_elysia/boss_elysia.tmx
 enemies.looted:res/level/boss_janus/boss_janus.tmx
 enemies.looted:res/level/boss_khajag/boss_khajag.tmx
 enemies.looted:res/level/boss_mercenaries/boss_mercenaries.tmx
+enemies.looted:res/level/boss_yasha/boss_yasha_good.tmx
 enemies.looted:res/level/brokenbridge/brokenbridge.tmx,106,107,108,111
 enemies.looted:res/level/crypt/crypt.tmx,10,15,17
 enemies.looted:res/level/crystalcrypt/crystalcrypt.tmx,28,29
@@ -192,6 +199,8 @@ enemies.looted:res/level/swampbridge/swampbridge.tmx,121
 enemies.looted:res/level/swampforest/swampforest.tmx,157
 enemies.looted:res/level/syrahbasement/syrahbasement.tmx,147,161,162,163,167
 enemies.looted:res/level/well/well.tmx
+enemies.looted:res/level/yashapuzzle/yasha_death.tmx
+enemies.looted:res/level/yashapuzzle/yasha_necro.tmx,147,148
 enemies.looted:res/level/yashatemple/yashatemple.tmx,297,299,311,317
 # items looted in level:
 items.looted:res/level/ascent/ascent.tmx,447,453,771,975,1008,1113,1612,1887,2127,2292,2432
@@ -199,6 +208,7 @@ items.looted:res/level/boss_elysia/boss_elysia.tmx
 items.looted:res/level/boss_janus/boss_janus.tmx
 items.looted:res/level/boss_khajag/boss_khajag.tmx
 items.looted:res/level/boss_mercenaries/boss_mercenaries.tmx
+items.looted:res/level/boss_yasha/boss_yasha_good.tmx
 items.looted:res/level/brokenbridge/brokenbridge.tmx,343,344,737,738,849,969,1183,1203,1231,1239,1240,1256,1587,1606,1697,1933,2103,2107,2116,2164,2249,2250,2336,2337
 items.looted:res/level/crypt/crypt.tmx,315,316,451,486,528,592,625,994
 items.looted:res/level/crystalcrypt/crystalcrypt.tmx,170,1010,1421,1972,2156,2157
@@ -221,6 +231,8 @@ items.looted:res/level/swampbridge/swampbridge.tmx
 items.looted:res/level/swampforest/swampforest.tmx,492,917,939,1084
 items.looted:res/level/syrahbasement/syrahbasement.tmx,58,64,121,122,179,1018,1021
 items.looted:res/level/well/well.tmx,744
+items.looted:res/level/yashapuzzle/yasha_death.tmx
+items.looted:res/level/yashapuzzle/yasha_necro.tmx,814
 items.looted:res/level/yashatemple/yashatemple.tmx,392,1407,1805
 # chests looted in level:
 chests.looted:res/level/ascent/ascent.tmx
@@ -228,6 +240,7 @@ chests.looted:res/level/boss_elysia/boss_elysia.tmx
 chests.looted:res/level/boss_janus/boss_janus.tmx
 chests.looted:res/level/boss_khajag/boss_khajag.tmx
 chests.looted:res/level/boss_mercenaries/boss_mercenaries.tmx
+chests.looted:res/level/boss_yasha/boss_yasha_good.tmx
 chests.looted:res/level/brokenbridge/brokenbridge.tmx,103
 chests.looted:res/level/crypt/crypt.tmx,18,23
 chests.looted:res/level/crystalcrypt/crystalcrypt.tmx
@@ -250,6 +263,8 @@ chests.looted:res/level/swampbridge/swampbridge.tmx
 chests.looted:res/level/swampforest/swampforest.tmx
 chests.looted:res/level/syrahbasement/syrahbasement.tmx
 chests.looted:res/level/well/well.tmx
+chests.looted:res/level/yashapuzzle/yasha_death.tmx
+chests.looted:res/level/yashapuzzle/yasha_necro.tmx
 chests.looted:res/level/yashatemple/yashatemple.tmx
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/gandria/gandria.tmx,685,2266.000000,410.000000,1724,2216.000000,1060.000000,1859,966.000000,1160.000000,3148,1416.000000,1960.000000,3367,366.000000,2110.000000,3749,3466.000000,2310.000000,4167,366.000000,2610.000000,4188,1416.000000,2610.000000,4198,1916.000000,2610.000000,4214,2716.000000,2610.000000,4551,3566.000000,2810.000000,4739,966.000000,2960.000000,5074,1716.000000,3160.000000,5124,216.000000,3210.000000
@@ -257,7 +272,6 @@ waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,162,116.000000,210.00
 waypoints.unlocked:res/map/highland/highland.tmx,320,1866.000000,1460.000000,327,216.000000,1972.000000
 waypoints.unlocked:res/map/marshland/marshland.tmx,227,1366.000000,210.000000,294,366.000000,1660.000000,295,1616.000000,1710.000000,415,766.000000,410.000000,1024,1216.000000,1010.000000,1732,1616.000000,1710.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,748,2416.000000,510.000000,1002,1116.000000,710.000000,1387,2866.000000,960.000000,2327,866.000000,1660.000000,2630,2016.000000,1860.000000,3556,2816.000000,2510.000000,3872,1116.000000,2760.000000,3893,2166.000000,2760.000000,4337,3366.000000,3060.000000
-waypoints.unlocked:res/map/necrohall/necrohall.tmx
 waypoints.unlocked:res/map/yashasanctuary/yashasanctuary.tmx
 # modifiers unlocked:
 modifiers.unlocked:res/level/ascent/ascent.tmx,201
@@ -267,6 +281,7 @@ triggers.triggered:res/level/boss_elysia/boss_elysia.tmx
 triggers.triggered:res/level/boss_janus/boss_janus.tmx
 triggers.triggered:res/level/boss_khajag/boss_khajag.tmx
 triggers.triggered:res/level/boss_mercenaries/boss_mercenaries.tmx
+triggers.triggered:res/level/boss_yasha/boss_yasha_good.tmx
 triggers.triggered:res/level/brokenbridge/brokenbridge.tmx,104,112
 triggers.triggered:res/level/crypt/crypt.tmx
 triggers.triggered:res/level/crystalcrypt/crystalcrypt.tmx,23,31
@@ -289,6 +304,8 @@ triggers.triggered:res/level/swampbridge/swampbridge.tmx,131
 triggers.triggered:res/level/swampforest/swampforest.tmx,140
 triggers.triggered:res/level/syrahbasement/syrahbasement.tmx
 triggers.triggered:res/level/well/well.tmx
+triggers.triggered:res/level/yashapuzzle/yasha_death.tmx
+triggers.triggered:res/level/yashapuzzle/yasha_necro.tmx
 triggers.triggered:res/level/yashatemple/yashatemple.tmx
 triggers.triggered:res/map/elderhome/elderhome.tmx
 triggers.triggered:res/map/gandria/gandria.tmx
@@ -349,7 +366,7 @@ quest.state:the_mark,1
 quest.state:the_rats_nest,2
 quest.state:who_am_i,2
 quest.state:yasha_necro,1
-quest.state:yasha_sanctuary,1
+quest.state:yasha_sanctuary,2
 quest.state:zeff_returns,2
 quest.state:zeffs_curse,2
 # quest targets killed:
@@ -377,7 +394,7 @@ quest.progress.description:stevens_helmet,1
 quest.progress.description:the_mark,1,2,3,4
 quest.progress.description:zeff_returns,1
 # conditions of a certain type fulfilled:
-progress.condition:boss,BossElysia,BossJanus,BossKhajag,BossMercenaries
+progress.condition:boss,BossElysia,BossJanus,BossKhajag,BossMercenaries,BossYasha
 progress.condition:default,barracks_open,bridge_crossed,brothel_open,chapter3,chapter4,elysia_intro,gandria_open,necromancer,second_boss_open,swampbridge_open,thieves_open,tutorial_complete
 progress.condition:npc_alonso,talked
 progress.condition:npc_andrew,bridge,mages,what_are_you_doing,who_are_you
@@ -422,6 +439,7 @@ progress.condition:npc_vincent,cooperated,quest_done,talked,vincent_gone
 progress.condition:npc_vincent2,job_talked,observer_spells,rhendal_chest_looted,second_quest,talked
 progress.condition:npc_vincent3,shadowstalkers,talked
 progress.condition:npc_waldemar,talked
+progress.condition:npc_yasha,attackable,friendly,key,mages,question,reward,secret,talk,talked,what_guarding,who_summoned
 progress.condition:npc_zeff,beast_slain,curse,curse_stronger,curse_talked,gandria,leatherworker,mark_curse,sheep,what_are_you_doing,who_are_you,zeff_goes,zeff_gone
 progress.condition:npc_zeff3,talked
 progress.condition:npc_zephyra,dead_cat,gotta_go,mages,talked,what_matter,who_are_you,who_droves,who_yasha,yasha
@@ -447,7 +465,7 @@ merchant.state:npc_zeff3,eq_huntershat,1,eq_leatherarmor,1,fo_sausage,1,mi_wolf_
 # spells learned:
 spell.learned:1,2,3,4,5
 spell.learned:2,7
-spell.learned:3,12,13
+spell.learned:3,12,13,14
 spell.learned:4,17,18,19
 # modifiers learned:
 modifier.learned:1,2

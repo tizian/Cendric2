@@ -7,14 +7,16 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Unstable, UnstableTile)
 const sf::Time UnstableTile::CRITICAL_TIME = sf::seconds(0.6f);
 
 UnstableTile::UnstableTile(LevelScreen* levelScreen) :
-    LevelDynamicTile(levelScreen),
-    LevelMovableTile(levelScreen) {
+	LevelDynamicTile(levelScreen),
+	LevelMovableTile(levelScreen) {
 	m_criticalTime = CRITICAL_TIME;
 }
 
 bool UnstableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 2.f, TILE_SIZE_F));
+
+	m_isInactive = contains(properties, std::string("inactive"));
 	return true;
 }
 
@@ -55,17 +57,11 @@ void UnstableTile::loadAnimation(int skinNr) {
 }
 
 void UnstableTile::update(const sf::Time& frameTime) {
+	if (m_isInactive) return;
 	if (m_state == GameObjectState::Crumbling) {
 		updateTime(m_crumblingTime, frameTime);
 		if (m_crumblingTime == sf::Time::Zero) {
 			setDisposed();
-		}
-	}
-	else if (m_isCritical) {
-		updateTime(m_criticalTime, frameTime);
-		if (m_criticalTime == sf::Time::Zero) {
-			m_isFalling = true;
-			setState(GameObjectState::Idle);
 		}
 	}
 	else if (m_isFalling) {
@@ -73,6 +69,13 @@ void UnstableTile::update(const sf::Time& frameTime) {
 		sf::Vector2f nextPosition;
 		calculateNextPosition(frameTime, nextPosition);
 		checkCollisions(nextPosition);
+	}
+	else if (m_isCritical) {
+		updateTime(m_criticalTime, frameTime);
+		if (m_criticalTime == sf::Time::Zero) {
+			m_isFalling = true;
+			setState(GameObjectState::Idle);
+		}
 	}
 	MovableGameObject::update(frameTime);
 	if (m_isCritical && !m_wasCritical) {
@@ -87,6 +90,7 @@ void UnstableTile::update(const sf::Time& frameTime) {
 }
 
 void UnstableTile::onHit(Spell* spell) {
+	if (m_isInactive) return;
 	switch (spell->getSpellID()) {
 	case SpellID::WindGust:
 	case SpellID::Chop:
@@ -103,7 +107,7 @@ void UnstableTile::onHit(Spell* spell) {
 }
 
 void UnstableTile::onHit(LevelMovableGameObject* mob) {
-	if (m_isFalling || m_state == GameObjectState::Crumbling) return;
+	if (m_isInactive || m_isFalling || m_state == GameObjectState::Crumbling) return;
 	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
 	m_wasCritical = true;
 	if (!m_isCritical) {

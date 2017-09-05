@@ -66,11 +66,17 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_wolf_fur', 'item_desc', 'Fluffy and soft.','Flauschig und weich.','Flauschig und weich.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_wolf_fur', 'misc', 400, 300, 25);
 
--- Pile of gargoyle dust
+-- Pile of Gargoyle Dust
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Pile of gargoyle dust','Häufchen von Gargoylestaub','Es Hüüfeli Gargoylestaub');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Gargoyle Dust','Gargoylestaub','Gargoylestaub');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_gargoyle_dust', 'misc', 350, 0, 20);
+
+-- Nekomata Embers
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_ember', 'item', 'Nekomata Embers','Nekomata Funken','Nekomata Funke');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_ember', 'item_desc', 'Magical embers from the fur of a Nekomata.','Magische Funken vom Fell einer Nekomata.','Magischi Funke vom Fell vonere Nekomata.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_neko_ember', 'misc', 800, 0, 20);
 
 -- Teeth
 

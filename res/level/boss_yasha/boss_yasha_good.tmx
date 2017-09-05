@@ -536,7 +536,7 @@
   <object id="117" gid="1240" x="650" y="500" width="50" height="50">
    <properties>
     <property name="fo_ultimatehealingpotion" value="1"/>
-    <property name="gold" value="100"/>
+    <property name="gold" value="50"/>
    </properties>
   </object>
  </objectgroup>

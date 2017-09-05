@@ -149,3 +149,9 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashamask', 'item', 'Yaslaw''s Mask','Yaslaw''s Maske','Maske vom Yaslaw');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashamask', 'item_desc', 'This mask granted the necromancer Yaslaw special powers.','Diese Maske hat dem Nekromanten Yaslaw spezielle Kräfte verliehen.','Die Maske het em Yaslaw spezielli Chräft gä.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_yashamask', 'quest', 750, 0, -1);
+
+-- Yasha's Essence
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashaessence', 'item', 'Yasha''s Essence','Yasha''s Essenz','Yasha''s Essenz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_yashaessence', 'item_desc', 'The fiery essence of the powerful demon Yasha.','Die feurige Essenz der mächtigen Dämonin Yasha.','Di füürig Essenz vode mächtige Dämonin Yasha.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_yashaessence', 'quest', 350, 550, -1);

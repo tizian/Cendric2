@@ -45,6 +45,16 @@ npc.id:npc_jason
 	]
 	[
 		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isQuestState("jasons_glaive", "void") and not DL:isConditionFulfilled("npc_jason", "crafting")
+		# translation: 
+		translation.tag:DL_Choice_StartCrafting
+		translation.en:Reinforce your weapon? Are you a blacksmith then?
+		translation.de:Deine Waffe verstärken? Bist du denn ein Schmied?
+		translation.ch:Dini Waffe verstärche? Bisch du denn en Schmied?
+	]
+	[
+		# Link node, tag is next tag
 		tag:5
 		condition:DL:isQuestState("jasons_glaive", "started") and DL:isQuestComplete("jasons_glaive")
 		# translation: 
@@ -52,6 +62,36 @@ npc.id:npc_jason
 		translation.en:I got some gargoyle dust for you.
 		translation.de:Ich habe etwas Gargoylestaub für dich.
 		translation.ch:Ich ha chli Gargoylestaub für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:isConditionFulfilled("npc_jason", "crafting") and DL:hasItem("we_firesword_inactive", 1) and DL:isQuestState("yasha_sword", "void")
+		# translation: 
+		translation.tag:DL_Choice_YashaSword
+		translation.en:I found this sword in the temple in the North. Do you know what it is?
+		translation.de:Ich habe dieses Schwert im Tempel im Norden gefunden. Weisst du was es ist?
+		translation.ch:Ich ha das Schwert im Tempel im Norde gfunde. Weisch du wases isch?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestState("yasha_sword", "started") and DL:isQuestComplete("yasha_sword")
+		# translation: 
+		translation.tag:DL_Choice_CompleteYashaSword
+		translation.en:I got all you asked for to reignite that sword.
+		translation.de:Ich habe alles was du verlangt hast, um dieses Schwert wieder zu entzünden.
+		translation.ch:Ich ha alles wa du verlangt hesch zum da Schwert wieder azünde.
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:isConditionFulfilled("npc_jason", "crafting")
+		# translation: 
+		translation.tag:DL_Choice_Crafting
+		translation.en:Could you reinforce a Weapon for me?
+		translation.de:Könntest du mir eine Waffe verstärken?
+		translation.ch:Chöntsch mer e Waffe verstärche?
 	]
 	[
 		# Link node, tag is next tag
@@ -69,9 +109,9 @@ npc.id:npc_jason
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jason_JasonQuest
-	translation.en:Hrm. Yes, actually, you can. My new weapon broke and it can only be fixed with enough gargoyle dust.
-	translation.de:Hrm. Ja, kannst du eigentlich. Meine neue Waffe ist zerbrochen und sie kann nur mit etwas Gargoylestaub geflickt werden.
-	translation.ch:Hrm. Jo, chasch eigentlich. Mini neu Waffe isch verbroche und si cha nur mit bitz Gargoylestaub gflickt werde.
+	translation.en:Hrm. Yes, actually, you can. I found a new weapon recently that I want to reinforce with gargoyle dust.
+	translation.de:Hrm. Ja, kannst du eigentlich. Ich habe eine neue Waffe gefunden, die ich mit etwas Gargoylestaub verstärken möchte.
+	translation.ch:Hrm. Jo, chasch eigentlich. Ich ha e neui Waffe gfunde woni mit chli Gargoylestaub verstärche möcht.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -87,6 +127,49 @@ npc.id:npc_jason
 	translation.en:Some gargoyles live in the old temple in the North. If you bring me some gargoyle dust, you can have my old glaive in exchange.
 	translation.de:Ein paar Gargoyles leben im alten Tempel im Norden. Wenn du mir etwas Gargoylestaub bringst, kannst du dafür meine alte Gleve haben.
 	translation.ch:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestau bringsch, gibi der mini alt Gleve defür.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_jason", "crafting")
+	# translation: 
+	translation.tag:DL_Jason_StartCrafting
+	translation.en:No, not exactly a blacksmith. I don't work with hammer and anvil.
+	translation.de:Nein, nicht wirklich ein Schmied. Ich arbeite nicht mit Hammer und Amboss.
+	translation.ch:Nei, chame so nid sege. Ich schaff nid mit Hammer und Amboss.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jason_StartCrafting2
+	translation.en:But I use material that contains magic - like gargoyle dust - to reinforce weapons of demonic origin.
+	translation.de:Aber ich verwende magiedurchtränkte Materialien - wie Gargoylestaub - um dämonische Waffen zu verstärken.
+	translation.ch:Aber ich bruch mageidurchtränkti Materialie - wie Gargoylestaub - zum dämonischi Waffe verstärche.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jason_StartCrafting3
+	translation.en:If you have a demonic weapon and some magic material, I can reinforce it for you as well. But it'll cost you. A lot. (Grins)
+	translation.de:Wenn du eine dämonische Waffe und ein magisches Material hast, kann ich sie für dich auch verstärken. Aber das wird dich einiges Kosten. (Grinst)
+	translation.ch:Wenn du e dämonische Waffe und e magisches Material hesch, chani si für dich au verstärche. Aber das wird nid billig, da chani der sege. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -118,6 +201,251 @@ npc.id:npc_jason
 	translation.en:Yeah. But promise is promise. Here, take my old glaive. It's still a good weapon.
 	translation.de:Yeah. Aber versprochen ist versprochen. Hier, nimm meine alte Gleve. Es ist immer noch eine gute Waffe.
 	translation.ch:Yeah. Aber versproche isch versproche. Do, nimm mini alt Gleve. Es isch immerno e gueti Waffe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jason_YashaSword
+	translation.en:Hm. Looks like a fire sword. But it has been snuffed out.
+	translation.de:Hm. Sieht aus wie ein Feuerschwert. Aber es wurde ausgelöscht.
+	translation.ch:Hm. Gseht us we es Füürschwert. Aber es isch usglöscht worde.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_sword", "started")
+	# translation: 
+	translation.tag:DL_Jason_YashaSword2
+	translation.en:That was a pretty powerful sword. If you can bring me the fiery essence of a very strong demon, I can reignite it for you. Oh and some gold, I need gold.
+	translation.de:Das war ein ziemlich starkes Schwert. Wenn du mir die feurige Essenz eines sehr starken Dämons bringst, kann ich es für dich wieder entzünden. Oh und etwas Gold. Ich brauche Gold.
+	translation.ch:Das isch es zimli starchs Schwert gsi. Wenn du mir di füürig Essenz vomne sehr starche Dämon bringsch, chanis der wieder azünde. Und chli Gold. Ich bruch Gold.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("we_firesword_inactive", 1)
+	trigger:DL:removeItem("qe_yashaessence", 1)
+	trigger:DL:removeGold(50)
+	# translation: 
+	translation.tag:DL_Jason_CompleteYashaSword
+	translation.en:Good. Let me see... (Jason takes the sword and the essence)
+	translation.de:Gut. Lass mal sehen... (Jason nimmt das Schwert und die Essenz)
+	translation.ch:Guet. Denn luegemer mal... (De Jason nimmts Schwert und d'Essenz)
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jason_CompleteYashaSword2
+	translation.en:(After combining them, the sword ignites into a flash of magic fire)
+	translation.de:(Nachdem er sie kombiniert, entzündet sich das Schwert mit einer Stichflamme magischen Feuers)
+	translation.ch:(Nochdem er si kombiniert entzündet sichs Schwert mit enere Stichflamme us magischem Füür)
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:changeQuestState("yasha_sword", "completed")
+	trigger:DL:addItem("we_firesword", 1)
+	# translation: 
+	translation.tag:DL_Jason_CompleteYashaSword3
+	translation.en:Here you go.
+	translation.de:Hier, nimm.
+	translation.ch:Do, nimms.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [10] Choice Node
+	tag:10
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:DL:hasItem("we_doublesickle", 1)
+		# translation: 
+		translation.tag:DL_Choice_DoubleSickleFire
+		translation.en:we_doublesickle_fire,we_doublesickle,1,mi_neko_ember,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:hasItem("we_doublesickle", 1)
+		# translation: 
+		translation.tag:DL_Choice_DoubleSickleDark
+		translation.en:we_doublesickle_dark,we_doublesickle,1,mi_gargoyle_dust,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:hasItem("we_jasonsglaive", 1)
+		# translation: 
+		translation.tag:DL_Choice_JasonsGlaiveFire
+		translation.en:we_jasonsglaive_fire,we_jasonsglaive,1,mi_neko_ember,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:hasItem("we_jasonsglaive", 1)
+		# translation: 
+		translation.tag:DL_Choice_JasonsGlaiveDark
+		translation.en:we_jasonsglaive_dark,we_jasonsglaive,1,mi_gargoyle_dust,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:hasItem("we_fireglaive", 1)
+		# translation: 
+		translation.tag:DL_Choice_FireGlaiveFire
+		translation.en:we_fireglaive_fire,we_fireglaive,1,mi_neko_ember,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:DL:hasItem("we_fireglaive", 1)
+		# translation: 
+		translation.tag:DL_Choice_FireGlaiveDark
+		translation.en:we_fireglaive_dark,we_fireglaive,1,mi_gargoyle_dust,3,gold,200
+		translation.de:
+		translation.ch:
+		translation.crafting:1
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_Back
+		translation.en:I'll come back later. [BACK]
+		translation.de:Ich komme später wieder. [ZURÜCK]
+		translation.ch:Ich chume spöter wieder. [ZRUGG]
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:Here you go.
+	translation.de:Hier, nimm.
+	translation.ch:Do, nimm.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:gotoNode(10)
+	# translation: 
+	translation.tag:DL_Jason_HereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

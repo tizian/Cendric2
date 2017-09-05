@@ -26,6 +26,7 @@ private:
 	bool m_wasCritical = false;
 	// set to true if the critical timer has timed out or a spell has activated the tile.
 	bool m_isFalling = false;
+	bool m_isInactive = false;
 	sf::Time m_criticalTime;
 	sf::Time m_crumblingTime = sf::seconds(0.4f);
 	static const sf::Time CRITICAL_TIME;
