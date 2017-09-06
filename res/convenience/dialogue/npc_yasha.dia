@@ -32,6 +32,11 @@ npc.id:npc_yasha
 	]
 	[
 		# Link node, tag is next tag
+		tag:23
+		condition:DL:hasItem("we_firesword_inactive",1)
+	]
+	[
+		# Link node, tag is next tag
 		tag:20
 	]
 }
@@ -443,6 +448,128 @@ npc.id:npc_yasha
 	translation.en:Here, take this weapon and this pendant. May they help you reaching your goals.
 	translation.de:Hier, nimm diese Waffe und diesen Anhänger. Sie sollen dir helfen, deine Ziele zu erreichen.
 	translation.ch:Do, nimm die Waffe und de Schmuck. Si söled der helfe, dini Ziil z'erreiche.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [23] Choice Node
+	tag:23
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_Sword
+		translation.en:I found this sword. Is it yours?
+		translation.de:Ich habe dieses Schwert gefunden. Gehört es dir?
+		translation.ch:Ich ha da Schwert gfunde. Ghört das dir?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Yasha_Sword
+	translation.en:Hrr. Where did you find that, human? That's my sword, it was stolen.
+	translation.de:Hrr. Wo hast du das gefunden, Mensch? Das ist mein Schwert, es wurde gestohlen.
+	translation.ch:Hrr. Wo hesch das gfunde, Mensch? Das isch mis Schwert, es isch klaut worde.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{2
+	# [24] Choice Node
+	tag:24
+	[
+		# Link node, tag is next tag
+		tag:26
+		# translation: 
+		translation.tag:DL_Choice_TempleFound
+		translation.en:In the temple in the North.
+		translation.de:Im Tempel im Norden.
+		translation.ch:Im Tempel im Norde.
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Yasha_TempleFound
+	translation.en:It's flame went out. That means it has been used to enter the temple's library. It's too late.
+	translation.de:Seine Flamme ist erloschen. Das heisst, es wurde benutzt, um die Bibliothek des Tempels zu betreten. Es ist zu spät.
+	translation.ch:Sini Flamme isch verlosche. Das heisst, es isch brucht worde zum d'Bibliothek im Tempel z'betrette. Es isch z'spot.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Yasha_TempleFound2
+	translation.en:My only purpose was to keep intruders from finding the secrets of the library. I failed.
+	translation.de:Meine einzige Aufgabe war es, Eindringlinge davon abzuhalten, die Geheimnisse der Bibliothek zu finden. Ich habe versagt.
+	translation.ch:Mini einzig Ufgab isch gsi, Iidringling devo abzhalte, d'Gheimnis vode Bibliothek z'finde. Ich ha gfailt.
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:removeItem("we_firesword_inactive", 1)
+	# translation: 
+	translation.tag:DL_Yasha_TempleFound3
+	translation.en:But you, you could find the thief for me and punish him. Give me that sword. (Yasha takes the sword and puts it on the ground)
+	translation.de:Aber du, du könntest den Dieb finden und ihn bestrafen. Gib mir dieses Schwert. (Yasha nimmt das Schwert und legt es auf den Boden)
+	translation.ch:Aber du, du chöntsch de Dieb finde und ihn bestrofe. Gib mer das Schwert. (D'Yasha nimmts Schwert und leits uf de Bode)
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Yasha_TempleFound4
+	translation.en:(Yasha uses her fiery breath to reignite the sword)
+	translation.de:(Yasha braucht ihren feurigen Atem um das Schwert zu entzünden)
+	translation.ch:(D'Yasha brucht ihre füürig Schnuuf zums Schwert azünde)
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:addItem("we_firesword", 1)
+	trigger:DL:changeQuestState("yasha_sword", "completed")
+	# translation: 
+	translation.tag:DL_Yasha_TempleFound5
+	translation.en:Here. Take it and avenge me.
+	translation.de:Hier. Nimm es und räche mich.
+	translation.ch:Do. Nimms und räch mich.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -167,7 +167,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with fire.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Feuer verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_fire', 'eq_weapon', 750, 600, 400);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, dmg_fire, critical) values ('we_doublesickle_fire', 10, 15, 15, 8);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_fire', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_fire', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle_fire.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle_fire.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_fire', 350, 90, 80, -45, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 2, 'elemental', 3);
@@ -181,7 +181,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with gargoyle dust.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Gargoylestaub verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Gargoylestaub verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_dark', 'eq_weapon', 750, 650, 400);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical) values ('we_doublesickle_dark', 10, 15, 15, 8);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_dark', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_dark', 'res/assets/equipment/weapon/spritesheet_weapon_doublesickle_dark.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_doublesickle_dark.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_dark', 350, 90, 80, -45, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 2, 'elemental', 3);
@@ -209,7 +209,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_fire', 'eq_weapon', 750, 500, 300);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_fire, dmg_light, critical, haste) values ('we_jasonsglaive_fire', 20, 12, 12, 4, 30);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive_fire.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive_fire.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_fire', 500, 80, 80, -40, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 1, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 2, 'meta', 2);
@@ -223,7 +223,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 300);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_jasonsglaive_dark', 20, 12, 12, 4, 30);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_jasonsglaive_dark.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_jasonsglaive_dark.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_dark', 500, 80, 80, -40, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 1, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 2, 'meta', 2);
@@ -249,10 +249,10 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Yasha's Fiery Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item', 'Yasha''s Fiery Glaive','Yasha''s Feurige Glaive','Yasha''s Füürigi Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs, reinforced with fire.','Eine sehr mächtige Waffe, geschmiedet aus Yasha''s Fangzähnen und mit Feuer verstärkt.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha und mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_fire', 'eq_weapon', 750, 400, 400);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, dmg_fire, critical, haste) values ('we_fireglaive_fire', 10, 15, 15, 6, 20);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_fire', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive_fire.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive_fire.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_fire', 500, 80, 80, -40, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 2, 'elemental', 3);
@@ -263,10 +263,10 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Yasha's Dark Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item', 'Yasha''s Dark Glaive','Yasha''s Dunkle Glaive','Yasha''s Dunkli Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs, reinforced with gargoyle dust.','Eine sehr mächtige Waffe, geschmiedet aus Yasha''s Fangzähnen und verstärkt mit Gargoylestaub.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha und verstärcht mit Gargoylestaub.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_dark', 'eq_weapon', 750, 450, 400);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, critical, haste) values ('we_fireglaive_dark', 10, 15, 15, 6, 20);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_dark', 'res/assets/equipment/weapon/spritesheet_weapon_fireglaive_dark.png', 'res/assets/equipment/weapon/spritesheet_map_weapon_fireglaive_dark.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_dark', 500, 80, 80, -40, 20);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 2, 'elemental', 3);

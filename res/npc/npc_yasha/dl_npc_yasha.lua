@@ -11,6 +11,8 @@ loadDialogue = function(DL)
 		DL:setRoot(13) 
 	elseif (not DL:isConditionFulfilled("npc_yasha", "reward")) then 
 		DL:setRoot(17) 
+	elseif (DL:hasItem("we_firesword_inactive",1)) then 
+		DL:setRoot(23) 
 	else 
 		DL:setRoot(20) 
 	end 
@@ -189,6 +191,47 @@ loadDialogue = function(DL)
 		DL:addItem("eq_lifependant", 1)
 		DL:addItem("we_doublesickle", 1)
 		DL:addConditionProgress("npc_yasha", "reward")
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("we_firesword_inactive",1)) then 
+
+		DL:createChoiceNode(23)
+		DL:addChoice(25, "DL_Choice_Sword") -- I found this sword. Is it yours?
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(25, 24, "DL_Yasha_Sword") -- Hrr. Where did you find that, human? That's my sword, it was stolen.
+		DL:addNode()
+
+
+		DL:createChoiceNode(24)
+		DL:addChoice(26, "DL_Choice_TempleFound") -- In the temple in the North.
+		DL:addNode()
+
+
+		DL:createNPCNode(26, 27, "DL_Yasha_TempleFound") -- It's flame went out. That means it has been used to enter the temple's library. It's too late.
+		DL:addNode()
+
+
+		DL:createNPCNode(27, 28, "DL_Yasha_TempleFound2") -- My only purpose was to keep intruders from finding the secrets of the library. I failed.
+		DL:addNode()
+
+
+		DL:createNPCNode(28, 29, "DL_Yasha_TempleFound3") -- But you, you could find the thief for me and punish him. Give me that sword. (Yasha takes the sword and puts it on the ground)
+		DL:removeItem("we_firesword_inactive", 1)
+		DL:addNode()
+
+
+		DL:createNPCNode(29, 30, "DL_Yasha_TempleFound4") -- (Yasha uses her fiery breath to reignite the sword)
+		DL:addNode()
+
+
+		DL:createNPCNode(30, -2, "DL_Yasha_TempleFound5") -- Here. Take it and avenge me.
+		DL:addItem("we_firesword", 1)
+		DL:changeQuestState("yasha_sword", "completed")
 		DL:addNode()
 
 	end

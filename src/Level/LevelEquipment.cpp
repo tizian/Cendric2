@@ -166,7 +166,8 @@ void LevelEquipment::lockAnimation(bool lock) {
 
 void LevelEquipment::update(const sf::Time& frameTime) {
 	if (m_isLocked) {
-		calculatePositionAccordingToMainChar(m_position);
+ 		calculatePositionAccordingToMainChar(m_position);
+		setPosition(m_position);
 		return;
 	}
 	GameObjectState newState = m_mainChar->getState();
