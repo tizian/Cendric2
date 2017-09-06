@@ -115,6 +115,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(17, -2, "DL_Rana_Mages2") -- We offered them to escort them but their leader was very unfriendly. I don't know whether they made it.
+		DL:addQuestDescription("find_velius", 2)
 		DL:addNode()
 
 	end

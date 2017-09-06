@@ -298,6 +298,7 @@ npc.id:npc_rana
 	# [17] NPC Node
 	tag:17
 	# triggers: 
+	trigger:DL:addQuestDescription("find_velius", 2)
 	# translation: 
 	translation.tag:DL_Rana_Mages2
 	translation.en:We offered them to escort them but their leader was very unfriendly. I don't know whether they made it.

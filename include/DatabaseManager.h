@@ -48,7 +48,7 @@ private:
 	ItemWeaponSlotBean* getItemWeaponslotBean(const std::string& item_id, int slot_nr) const;
 	std::vector<DatabaseBean*> getItemWeaponSlotBeans(const std::string& item_id) const;
 	std::vector<DatabaseBean*> getItemDocumentPageBeans(const std::string& item_id) const;
-	ItemDocumentQuestBean* getItemDocumentQuestBean(const std::string& item_id) const;
+	std::vector<DatabaseBean*> getItemDocumentQuestBeans(const std::string& item_id) const;
 	LevelitemBean* getLevelitemBean(const std::string& item_id) const;
 	LevelitemFrameBean* getLevelitemFrameBean(const std::string& item_id, int frame_nr) const;
 	std::vector<DatabaseBean*> getLevelitemFrameBeans(const std::string& item_id) const;

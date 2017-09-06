@@ -24,6 +24,11 @@ item.id:do_eleletter,1
 item.id:do_elemap,1
 item.id:do_notemarcus,1
 item.id:do_veliusletter,1
+item.id:do_notekoray,1
+item.id:do_noterobert,1
+item.id:do_noteinina,1
+item.id:do_antigravity,1
+item.id:do_antimagic,1
 item.id:eq_aquamarinering,1
 item.id:eq_bloodstone,1
 item.id:eq_back_divinet1,1
@@ -182,6 +187,7 @@ item.id:qe_jackpan,1
 item.id:qe_recommendationletter,1
 item.id:qe_rope,1
 item.id:qe_spoiledfeudalfire,1
+item.id:qe_dulcimer,1
 item.id:qe_leeroychicken,1
 item.id:qe_necrobook,1
 item.id:qe_portstone_bob,1
@@ -198,6 +204,7 @@ item.id:sp_leech,1
 item.id:sp_light,1
 item.id:sp_shadowtrap,1
 item.id:sp_unlock,1
+item.id:sp_antigravity,1
 item.id:we_bonescythe,1
 item.id:we_claw,1
 item.id:we_doublesickle,1

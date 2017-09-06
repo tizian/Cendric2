@@ -571,8 +571,7 @@ void Inventory::showDocument(const Item* item) {
 	worldScreen->setBook(*item, true);
 
 	// handle possible quest related conditions on this document
-	 
-	if (auto const bean = item->getBean<ItemDocumentQuestBean>()) {
+	for (auto const bean : item->getBeans<ItemDocumentQuestBean>()) {
 		if (bean->quest_desc > 0) {
 			worldScreen->notifyQuestDescriptionAdded(bean->quest_name, bean->quest_desc);
 		}

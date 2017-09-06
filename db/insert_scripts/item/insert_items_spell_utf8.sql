@@ -70,3 +70,12 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_fireball', 3);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fireball', 'item','Scroll - Fireball','Schriftrolle - Feuerball','Schriftrolle - Füürball', 'Pergamino - Bola de fuego');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fireball', 'item_desc','The good old fireball. Burns enemies and melts ice.','Der gute alte Feuerball. Verbrennt Gegner und schmilzt Eis.','De guet alt Füürball. Verbrennt Gegner und schmelzt Iis.','La siempre leal bola de fuego. Quema enemigos y derrite el hielo.');
 
+-- Anti Gravity
+
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('sp_antigravity', 'spell', 150, 400, -1);
+INSERT INTO item_spell (item_id, spell_id) values ('sp_antigravity', 6);
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_antigravity', 'item','Scroll - Anti Gravity','Schriftrolle - Schwerkraft umkehren','Schriftrolle - Schwerchraft umchere', 'Pergamino - Antigravedad');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_antigravity', 'item_desc','Reverses gravity for Cendric for a certain duration.','Dreht Cendrics Schwerkraft für eine gewisse Zeit um.','Drüllt em Cendric sini Schwerchraft für e gwüssi Ziit um.','Invierte la gravedad de Cendric por cierto tiempo.');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_antigravity', 0, -30, 50, 20);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_antigravity', 1, 150, 400, 50, 50);
+

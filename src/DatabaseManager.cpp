@@ -485,8 +485,8 @@ std::vector<DatabaseBean*> DatabaseManager::getItemDocumentPageBeans(const std::
 	return beans;
 }
 
-ItemDocumentQuestBean* DatabaseManager::getItemDocumentQuestBean(const std::string& item_id) const {
-	ItemDocumentQuestBean* bean = nullptr;
+std::vector<DatabaseBean*> DatabaseManager::getItemDocumentQuestBeans(const std::string& item_id) const {
+	std::vector<DatabaseBean*> beans;
 	sqlite3_stmt* statement;
 	std::string query = "SELECT * FROM item_document_quest WHERE item_id = '" + item_id + "';";
 
@@ -494,14 +494,20 @@ ItemDocumentQuestBean* DatabaseManager::getItemDocumentQuestBean(const std::stri
 		int cols = sqlite3_column_count(statement);
 		if (cols != 4) {
 			g_logger->logError("DatabaseManager::getItemDocumentQuestBean", "number of returned columns must be 4");
-			return bean;
+			return beans;
 		}
-		if (sqlite3_step(statement) == SQLITE_ROW) {
-			bean = new ItemDocumentQuestBean();
-			bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
-			bean->quest_name = std::string((char*)sqlite3_column_text(statement, 1));
-			bean->quest_state = std::string((char*)sqlite3_column_text(statement, 2));
-			bean->quest_desc = sqlite3_column_int(statement, 3);
+		while (true) {
+			if (sqlite3_step(statement) == SQLITE_ROW) {
+				ItemDocumentQuestBean* bean = new ItemDocumentQuestBean();
+				bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
+				bean->quest_name = std::string((char*)sqlite3_column_text(statement, 1));
+				bean->quest_state = std::string((char*)sqlite3_column_text(statement, 2));
+				bean->quest_desc = sqlite3_column_int(statement, 3);
+				beans.push_back(bean);
+			}
+			else {
+				break;
+			}
 		}
 
 		sqlite3_finalize(statement);
@@ -509,7 +515,7 @@ ItemDocumentQuestBean* DatabaseManager::getItemDocumentQuestBean(const std::stri
 
 	checkError();
 
-	return bean;
+	return beans;
 }
 
 std::vector<DatabaseBean*> DatabaseManager::getItemWeaponSlotBeans(const std::string& item_id) const {

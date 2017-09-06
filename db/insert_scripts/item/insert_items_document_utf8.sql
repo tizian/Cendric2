@@ -143,7 +143,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 -- Note (Koray)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item', 'Note','Notiz','Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item', 'Koray''s Note','Koray''s Notiz','Koray''s Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item_desc', 'A suspicious note, found in the Ascent.','Eine verdächtige Notiz, gefunden im Aufstieg.','E verdächtigi Notiz, gfunde im Ufstiig.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notekoray', 0, 'NoteKoray');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notekoray', 'missing_koray', 3);
@@ -160,10 +160,10 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Note (Robert)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item', 'Note','Notiz','Notiz');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item_desc', 'A suspicious note, found in the Yasha''s Temple.','Eine verdächtige Notiz, gefunden in Yasha''s Tempel.','E verdächtigi Notiz, gfunde im Tempel vode Yasha.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item', 'Bob''s Note','Bob''s Notiz','Bob''s Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item_desc', 'A suspicious note, found in Yasha''s Temple.','Eine verdächtige Notiz, gefunden in Yasha''s Tempel.','E verdächtigi Notiz, gfunde im Tempel vode Yasha.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notebob', 0, 'NoteBob');
-INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notebob', 'missing_bob', 2);
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notebob', 'missing_bob', 1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteBob', 'document', 'Someone... help us! He''s destroying everything.
 
 -- Bob','Irgendjemand... Hilf uns! Er zerstört alles.
@@ -174,3 +174,84 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('No
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_notebob', 'document', 400, 400, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_notebob', -25, 0, 50, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_notebob', 1, 450, 0, 100, 50);
+
+-- Note (Inina)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item', 'Inina''s Note','Inina''s Notiz','Inina''s Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item_desc', 'A suspicious note, found in the Temple of the Elementalists.','Eine verdächtige Notiz, gefunden im Tempel der Elementarmagier.','E verdächtigi Notiz, gfunde im Tempel vode Elementarmagier.');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_noteinina', 0, 'NoteInina');
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'missing_inina', 1);
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'find_velius', 3);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteInina', 'document', 'Anyone who reads this: I was abducted with two other mages by a mage called Velius. He used our magic to break into this temple. He talks about killing us to fuel his magical crystals. Please!
+
+Crypt of Gandria!
+
+-- Inina','Wer auch immer das liest: Ich wurde mit zwei anderen Magiern entführt von einem Magier namens Velius. Er hat unsere Magie benutzt um in diesen Tempel zu kommen. Er redet davon, uns zu töten um seine magischen Kristalle zu füllen. Bitte!
+
+Krypta von Gandria!
+
+-- Inina','Wer au immer das list: Ich bi mit zwei andere Magier entführt worde vomne Magier namens Velius. Er het üsi Magie brucht zum i de Tempel z''cho. Er reded devo, üs z''töte zum sini magische Kristall z''fülle. Bitte!
+
+Krypta vo Gandria!
+
+-- Inina');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_noteinina', 'document', 800, 100, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_noteinina', -25, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_noteinina', 1, 450, 0, 100, 50);
+
+-- Old Pergament
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item', 'Old Pergament','Altes Pergament','Alts Pergament');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item_desc', 'An old pergament from the library of the elementalists.','Ein altes Pergament aus der Bibliothek der Elementarmagier.','Es alts Pergament us de Bibliothek vode Elementarmagier');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_antigravity', 1, 'AntiGravityTitle', 'AntiGravityContent');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityTitle', 'document', 'Antigravity', 'Antigravitation', 'Antigravitation');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityContent', 'document', 'Gravity is a mere form of elemental (earth) magic. Using its inversed form in an area will weaken it, objects will appear lighter.
+
+If enough anti-energy is used, objects will float. Going even further, objects will be lifted into the sky. 
+
+Using it on a human should be avoided outside and only practised in buildings with a strong roof.','Gravitation ist eine einfache Form der Erd-Elementarmagie. Wenn man ihre invertierte Form in einem Bereich anwendet, wird sie geschwächt und Objekte werden leichter erscheinen.
+
+Wenn genügend Antigravitation benutzt wird, werden Objekte schweben oder sich sogar in den Himmel bewegen.
+
+Man sollte diese Art von Magie nicht auf Menschen anwenden, ausser, man befindet sich in einem Gebäude mit einem starken Dach.
+','Gravitation isch au bloss e Form vode Erd-Elementarmagie. Wennme ihri invertiert Form imne Bereich awendet, wird si gschwächt und Objekt werded liechter si.
+
+Wenn me gnueg Antigravitation brucht, werded Objekt schwebe oder sich sogar in Himmel bewege.
+
+Me söt die Art vo Magie nid uf Mensche awende, ussert, me isch grad imne Gebäude mitme starche Dach.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_antigravity', 'document', 800, 150, 10);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_antigravity', 0, -30, 50, 20);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_antigravity', 1, 200, 400, 50, 50);
+
+-- Book about Anti Magic
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antimagic', 'item', 'Anti Magic','Antimagie','Antimagie');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antimagic', 'item_desc', 'An old book from the library of the elementalists.','Ein altes Buch aus der Bibliothek der Elementarmagier.','Es alts Buech us de Bibliothek vode Elementarmagier.');
+INSERT INTO item_document_page(item_id, page_nr, title) values ('do_antimagic', 0, 'AntiMagicTitle');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_antimagic', 1, 'AntiMagicTitle1', 'AntiMagicContent1');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic', 2, 'AntiMagicContent2');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic', 3, 'AntiMagicContent3');
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic', 4, 'AntiMagicContent4');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicTitle', 'document', 'Anti Magic', 'Antimagie', 'Antimagie');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicTitle1', 'document', 'The Magic Spectrum', 'Das Magiespektrum', 'Es Magiespektrum');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent1', 'document', 'Different types of magic exist, but all belong to the same energy. The first magic that was discovered was the elemental magic, but it can be split into other magic types, that cover a smaller, more specific part of the spectrum.
+', 'Verschiedene Arten von Magie existieren, doch alle gehören zu der selben Energie. Die erste Magie, die entdeckt wurde, war Elementarmagie. Sie kann in alle anderen Arten der Magie gespalten werden, die einen kleineren, spezifischen Teil des Spektrums.', 'Verschideni Arte vo Magie existiered, aber alli ghöred zude gliche Energie. Di erst Magie, wo entdeckt worde isch, isch d''Elementarmagie gsi. Si chan i alli andere Arte vode Magie gspalte werde, wo en chlinnere, spezifische Teil vom Spektrum abdecked.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent2', 'document', 'As all energy, magic can not be created or destroyed, it simply exists. However, very recent research has shown that a form of dark magic, also called anti magic, exists and can be used to eliminate the magic energy. This will not result in a loss of the energy, but in annihilation, transforming the magic energy into light and heat.
+
+Anti magic can be produced by
+', 'Wie alle Energie kann Magie weder erschaffen noch zerstört werden, sie existiert einfach. Allerdings haben jüngste Forschungen gezeigt, dass eine Art dunkle Magie, sogenannte Antimagie, existiert und benutzt werden kann, um die magische Energie zu eliminieren. Bei diesem Prozess geht keine Energie verloren. Die magische Energie wird aber ausgelöscht und zu Wärme und Licht transformiert.
+
+Man kann Antimagie erschaffen, indem man', 'We alli Energie cha Magie weder erschaffe no zerstört werde, si existiert eifach. Allerdings hend neusti Forschige zeigt, dass es e Art dunkli Magie, sognannti Antimagie, git und dass si brucht werde cha, zum di magisch Energie eliminiere. Bi dem Prozess gaht ke Energie verlore. Di magisch Energie wird aber usglöscht und zu Wärmi und Liecht transformiert.
+
+Me cha Antimagie erschaffe, indem me');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent3', 'document', '(Here, some pages have been ripped out!)', '(Hier wurden ein paar Seiten herausgerissen!)', '(Do sind es paar Siite usegrisse worde!)');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent4', 'document', 'These experiments have shown that the annihilation of magic is hazardous.
+
+Further experiments have been prohibited.', 'Diese Experimente haben gezeigt, dass die Annihilation von Magie äusserst gefährlich ist.
+
+Weitere Experimente wurden untersagt.','Die Experiment hend zeigt, dass d''Annihilation vo Magie üsserscht gföhrlich isch.
+
+Wiiteri Experiment sind verbotte worde.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_antimagic', 'document', 800, 50, 50);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_antimagic', 0, -30, 50, 20);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_antimagic', 1, 100, 400, 50, 50);

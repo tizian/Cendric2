@@ -95,7 +95,7 @@ CREATE TABLE item_document_quest(
 	quest_name VARCHAR(50) NOT NULL, 
 	quest_state VARCHAR(50) NOT NULL DEFAULT "",
 	quest_desc INTEGER NOT NULL DEFAULT -1,
-	PRIMARY KEY (item_id),
+	PRIMARY KEY (item_id, quest_name),
 	FOREIGN KEY(item_id) REFERENCES item(item_id)
 );
 

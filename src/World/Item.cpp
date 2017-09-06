@@ -33,7 +33,7 @@ void Item::initBeans(const std::string& itemID) {
 	m_check.isWeapon = addBean(g_databaseManager->getItemWeaponBean(itemID));
 	addBeans(g_databaseManager->getItemWeaponSlotBeans(itemID));
 	m_check.isDocument = addBeans(g_databaseManager->getItemDocumentPageBeans(itemID));
-	addBean(g_databaseManager->getItemDocumentQuestBean(itemID));
+	addBeans(g_databaseManager->getItemDocumentQuestBeans(itemID));
 
 	checkItem();
 }

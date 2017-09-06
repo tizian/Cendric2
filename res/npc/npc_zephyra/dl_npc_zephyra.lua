@@ -122,6 +122,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(15, -2, "DL_Zephyra_WhoMages3") -- Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't react. But they're probably all dead now anyway.
+		DL:addQuestDescription("find_velius", 1)
 		DL:addNode()
 
 	end

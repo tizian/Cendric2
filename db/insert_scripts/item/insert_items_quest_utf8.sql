@@ -98,6 +98,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_invisrecipe', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_invisrecipe', 1, 150, 0, 50, 50);
 
+-- Graham's Dulcimer 
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item', 'Graham''s Dulcimer','Graham''s Dulcimer', 'Em Graham sini Dulcimer');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item_desc', 'What a beautiful instrument! It belongs to the bard Graham.','Was für ein schönes Instrument! Es gehört dem Barden Graham.','Was füres schöns Instrument! Es ghört em Bard Graham.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_dulcimer', 'quest', 800, 200, -1);
+
 -- Frying Pan
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item', 'Frying Pan','Bratpfanne','Bratpfanne');

@@ -312,6 +312,7 @@ npc.id:npc_zephyra
 	# [15] NPC Node
 	tag:15
 	# triggers: 
+	trigger:DL:addQuestDescription("find_velius", 1)
 	# translation: 
 	translation.tag:DL_Zephyra_WhoMages3
 	translation.en:Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't react. But they're probably all dead now anyway.
