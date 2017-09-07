@@ -3,7 +3,7 @@
 
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("LevelReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 
-const int LevelReader::DYNAMIC_TILE_COUNT = 30;
+const int LevelReader::DYNAMIC_TILE_COUNT = 40;
 
 LevelReader::LevelReader() : WorldReader() {
 }
