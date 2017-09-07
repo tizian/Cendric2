@@ -100,15 +100,7 @@ void ModifierTile::onHit(LevelMovableGameObject* mob) {
 }
 
 void ModifierTile::onHit(Spell* spell) {
-	if (m_state == GameObjectState::Active) return;
-	switch (spell->getSpellID()) {
-	case SpellID::Telekinesis:
-		addModifier();
-		spell->setDisposed();
-		break;
-	default:
-		break;
-	}
+	// nop
 }
 
 void ModifierTile::loadComponents() {

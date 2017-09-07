@@ -10,6 +10,8 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
 
 bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_isInitiallyCollidable = contains(properties, std::string("collidable"));
+	m_isOnewayLeft = contains(properties, std::string("oneway_left"));
+	m_isOnewayRight = contains(properties, std::string("oneway_right"));
 
 	if (!contains(properties, std::string("width"))) return false;
 	m_tileWidth = std::stoi(properties.at(std::string("width")));
@@ -17,7 +19,11 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 
 	if (!contains(properties, std::string("strength"))) return false;
 	m_strength = std::stoi(properties.at(std::string("strength")));
-	if (m_strength < 0 || m_strength > 4) return false;
+	if (m_strength < 0 || m_strength > 5) return false;
+
+	if (!contains(properties, std::string("strength"))) return false;
+	m_strength = std::stoi(properties.at(std::string("strength")));
+	if (m_strength < 0 || m_strength > 5) return false;
 
 	initConditions(properties);
 	if (m_strength == 0 && !m_keyItemID.empty()) return false;
@@ -93,6 +99,15 @@ void DoorLevelTile::onRightClick() {
 	}
 	else if (!m_isConditionsFulfilled) {
 		m_screen->setNegativeTooltip("IsLocked");
+	}
+	else if (m_isOnewayLeft || m_isOnewayRight) {
+		if ((m_isOnewayLeft && getCenter().x > m_mainChar->getCenter().x) ||
+			(m_isOnewayRight && getCenter().x < m_mainChar->getCenter().x)) {
+			open();
+		}
+		else {
+			m_screen->setNegativeTooltip("IsLockedOneway");
+		}
 	}
 	else if (m_strength == 0) {
 		open();

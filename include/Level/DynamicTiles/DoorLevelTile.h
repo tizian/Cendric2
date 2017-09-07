@@ -27,4 +27,6 @@ private:
 private:
 	bool m_isInitiallyCollidable;
 	int m_tileWidth;
+	bool m_isOnewayLeft;
+	bool m_isOnewayRight;
 };

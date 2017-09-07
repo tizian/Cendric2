@@ -18,6 +18,7 @@ public:
 	bool getConfiguredRotateSprite() const override;
 
 	void setDisposed() override;
+	void onOwnerDisposed() override;
 
 private:
 	LevelEquipment* m_mask = nullptr;

@@ -94,6 +94,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Inte
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Inventory','Inventory','Inventar','Inventar','Inventario');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLocked','Is locked!','Ist verschlossen!','Da isch abgschlosse!','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKey','Is locked! (Key needed)','Ist verschlossen! (Schlüssel benötigt)','Da isch abgschlosse! (Brucht en Schlüssel)','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedOneway','Does not open from this side!','Lässt sich von dieser Seite nicht öffnen!','Chame vo dere Siite nid ufmache!','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedPicklock','Is locked! (Picklock needed)','Ist verschlossen! (Dietrich benötigt)','Da isch abgschlosse! (Brucht en Dietrich)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKeyPicklock','Is locked! (Key/Picklock needed)','Ist verschlossen! (Schlüssel/Dietrich benötigt)','Da isch abgschlosse! (Brucht en Schlüssel/Dietrich)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Journal','Journal','Tagebuch','Tagebuech','Diario');

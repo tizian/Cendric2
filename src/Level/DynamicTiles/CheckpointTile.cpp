@@ -58,12 +58,15 @@ void CheckpointTile::loadAnimation(int skinNr) {
 
 void CheckpointTile::activateMimic() {
 	Enemy* gargoyle = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::Gargoyle, getPosition() - sf::Vector2f(0.f, 100.f));
+	std::map<std::string, int> items;
+	items.insert({ "mi_gargoyle_dust", 1 });
+	gargoyle->setLoot(items, 2);
 	g_resourceManager->playSound(getSoundPath());
 	setDisposed();
 }
 
 void CheckpointTile::onHit(Spell* spell) {
-	if (!m_isMimic || spell->getSpellID() != SpellID::Telekinesis || spell->getDamageType() == DamageType::VOID) return;
+	if (!m_isMimic || spell->getSpellID() != SpellID::Telekinesis || spell->getSpellID() != SpellID::Chop) return;
 
 	activateMimic();
 }

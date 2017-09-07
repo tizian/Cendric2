@@ -52,7 +52,7 @@ void GargoyleEnemy::loadSpells() {
 	m_spellManager->clearSpells();
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
-	fireBallSpell.damage = 10 + m_spellAdditionalDamage / 2;
+	fireBallSpell.damage = 30 + m_spellAdditionalDamage / 2;
 	fireBallSpell.damagePerSecond = 10 + m_spellAdditionalDamage / 2;
 	fireBallSpell.duration = sf::seconds(1.f);
 	fireBallSpell.cooldown = sf::seconds(1.f);
@@ -112,7 +112,7 @@ AttackingBehavior* GargoyleEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
-	behavior->setAggroRange(400.f);
+	behavior->setAggroRange(1000.f);
 	behavior->setAttackInput(std::bind(&GargoyleEnemy::handleAttackInput, this));
 	return behavior;
 }
@@ -122,14 +122,14 @@ void GargoyleEnemy::handleAttackInput() {
 	if (getCurrentTarget() == nullptr) return;
 	
 	if (m_attackWaitTime == sf::Time::Zero) {
-		m_attackWaitTime = sf::seconds(2.f);
+		m_attackWaitTime = sf::seconds(3.f);
 		if (m_maxSpell > 0) m_spellManager->setCurrentSpell(rand() % m_maxSpell); // random
 		m_spellManager->executeCurrentSpell(getCurrentTarget());
 	}
 }
 
 sf::Time GargoyleEnemy::getConfiguredWaitingTime() const {
-	return sf::seconds(static_cast<float>(rand() % 4));
+	return sf::seconds(static_cast<float>(rand() % 2));
 }
 
 sf::Time GargoyleEnemy::getConfiguredChasingTime() const {

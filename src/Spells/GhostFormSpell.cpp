@@ -28,6 +28,10 @@ void GhostFormSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 }
 
 void GhostFormSpell::update(const sf::Time& frameTime) {
+	if (m_mob == nullptr) {
+		setDisposed();
+		return;
+	}
 	sf::Vector2f nextPosition;
 	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
@@ -42,11 +46,18 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 	}
 }
 
+void GhostFormSpell::onOwnerDisposed() {
+	setDisposed();
+	m_mob = nullptr;
+}
+
 void GhostFormSpell::setDisposed() {
 	Spell::setDisposed();
 	if (m_mask != nullptr) {
 		m_mask->setDisposed();
 	}
+
+	if (!m_mob) return;
 		
 	MovingBehavior* mb = m_mob->getMovingBehavior();
 	mb->setMaxXVelocityScale(1.f);
