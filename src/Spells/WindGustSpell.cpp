@@ -6,7 +6,8 @@ void WindGustSpell::load(const SpellData& bean, LevelMovableGameObject* mob, con
 	Spell::load(bean, mob, target);
 	m_damageType = m_data.damageType;
 	m_data.damageType = DamageType::VOID;
-	m_pushAcceleration = 100.f * m_data.strength;
+	m_absPushAcceleration = 100.f * m_data.strength;
+	m_pushAcceleration = m_absPushAcceleration;
 	loadParticleSystem();
 }
 
@@ -30,11 +31,8 @@ void WindGustSpell::setPosition(const sf::Vector2f& pos) {
 void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
 		if (enemy->getMentalStrength() < m_data.ccStrength) {
-			enemy->addAccelerationX(m_mob->isFacingRight() ? 4 * m_pushAcceleration : -4 * m_pushAcceleration);
+			enemy->addAccelerationX(4 * m_pushAcceleration);
 		}
-	}
-	else {
-		target->addAccelerationX(m_mob->isFacingRight() ? m_pushAcceleration : -m_pushAcceleration);
 	}
 }
 
@@ -92,12 +90,14 @@ void WindGustSpell::updateParticleSystemPosition() {
 	if (m_mob == nullptr) return;
 	if (m_pc == nullptr) return;
 	if (!m_mob->isFacingRight()) {
+		m_pushAcceleration = -m_absPushAcceleration;
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
 		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - getBoundingBox()->width * 0.1f;
 		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * 0.5f;
 	}
 	else {
+		m_pushAcceleration = m_absPushAcceleration;
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
 		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width * 0.1f;

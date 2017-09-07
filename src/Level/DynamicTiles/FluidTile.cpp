@@ -212,7 +212,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	}
 
 	// Create particle splashes
-	float particleVelocity = particleVelocityScale * std::abs(velocity.y);
+	float particleVelocity = particleVelocityScale * std::max(std::abs(velocity.x), std::abs(velocity.y));
 	float waterHeight = getHeight(xPosition + 0.5f * width);
 	const sf::FloatRect* bb = getBoundingBox();
 

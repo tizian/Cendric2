@@ -3,6 +3,7 @@
 #include "Registrar.h"
 #include "Screens/WorldScreen.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "Level/DynamicTiles/BoatTile.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Jumping, JumpingTile)
 
@@ -76,8 +77,8 @@ void JumpingTile::loadAnimation(int skinNr) {
 	else if (skinNr == 2 || skinNr == 3) { // glowing magic-infused shadow piranha or toxic ball
 		m_damage.damageType = DamageType::Shadow;
 		addComponent(new LightComponent(LightData(
-			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f), 
-			sf::Vector2f(100.f, 100.f), 
+			sf::Vector2f(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f),
+			sf::Vector2f(100.f, 100.f),
 			0.3f), this));
 	}
 }
@@ -132,9 +133,9 @@ void JumpingTile::update(const sf::Time& frameTime) {
 			changeDirection();
 		}
 	}
-	
+
 	setAcceleration(sf::Vector2f(0.f, GRAVITY_ACCELERATION));
-	
+
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
 	checkCollisions(nextPosition);
@@ -171,11 +172,23 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	if (collidesY && m_isMelting) {
 		for (auto& it : *m_level->getDynamicTiles()) {
-			LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-			if (tile == nullptr || tile->getDynamicTileID() != LevelDynamicTileID::Ice) continue;
-			const sf::FloatRect& tileBB = *tile->getBoundingBox();
-			if (nextBoundingBoxY.intersects(tileBB)) {
-				tile->setDisposed();
+			if (LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it)) {
+				if (m_isMelting && tile->getDynamicTileID() == LevelDynamicTileID::Ice && tile->isViewable()) {
+					const sf::FloatRect& tileBB = *tile->getBoundingBox();
+					if (nextBoundingBoxY.intersects(tileBB)) {
+						tile->setDisposed();
+					}
+				}
+			}
+		}
+		for (auto& it : *m_level->getMovableTiles()) {
+			if (LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it)) {
+				if (tile->getDynamicTileID() == LevelDynamicTileID::Boat && tile->isViewable()) {
+					const sf::FloatRect& tileBB = *tile->getBoundingBox();
+					if (nextBoundingBoxY.intersects(tileBB)) {
+						dynamic_cast<BoatTile*>(tile)->destroy();
+					}
+				}
 			}
 		}
 	}

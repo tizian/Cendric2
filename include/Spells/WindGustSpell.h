@@ -18,6 +18,7 @@ public:
 
 private:
 	float m_pushAcceleration;
+	float m_absPushAcceleration;
 	DamageType m_damageType;
 	sf::Time m_timeUntilDamage = sf::Time::Zero; // this spell only applies its dot once per second
 

@@ -265,7 +265,7 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 	}
 
 	// check for wrong parent
-	if (MovingTile* mt = m_mob->getMovingParent()) {
+	if (MovingParent* mt = m_mob->getMovingParent()) {
 		if (m_creepingDirection == CreepingDirection::Bottom) {
 			if (mt->getBoundingBox()->top + Epsilon < m_mob->getBoundingBox()->top + m_mob->getBoundingBox()->height) {
 				m_mob->setMovingParent(nullptr);

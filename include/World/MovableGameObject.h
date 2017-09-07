@@ -5,7 +5,7 @@
 #include "GUI/BitmapText.h"
 #include "ResourceManager.h"
 
-class MovingTile;
+class MovingParent;
 
 // A movable game object with physics. Abstract class
 class MovableGameObject : public virtual AnimatedGameObject {
@@ -32,13 +32,13 @@ public:
 	void setVelocityX(float velocityX);
 	void setVelocityY(float velocityY);
 	// the moving parent of a movable game object is used to update the relative velocity
-	// it is used by moving platforms (which are parent to themselves)
-	void setMovingParent(MovingTile* parent);
+	// it is used by moving parents (platforms, boats -> which are parent to themselves)
+	virtual void setMovingParent(MovingParent* parent);
 	
 	const sf::Vector2f& getVelocity() const;
 	const sf::Vector2f& getAcceleration() const;
 
-	MovingTile* getMovingParent() const;
+	MovingParent* getMovingParent() const;
 	void lockRelativeVelocityX();
 	void lockRelativeVelocityY();
 
@@ -51,7 +51,7 @@ protected:
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_acceleration;
 	void boundVelocity(sf::Vector2f& vel) const;
-	MovingTile* m_movingParent = nullptr;
+	MovingParent* m_movingParent = nullptr;
 	bool m_isLockedRelativeVelocityX = false;
 	bool m_isLockedRelativeVelocityY = false;
 

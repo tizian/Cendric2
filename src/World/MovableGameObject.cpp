@@ -1,5 +1,5 @@
 #include "World/MovableGameObject.h"
-#include "Level/DynamicTiles/MovingTile.h"
+#include "Level/DynamicTiles/MovingParent.h"
 
 MovableGameObject::MovableGameObject() : AnimatedGameObject() {
 }
@@ -108,7 +108,7 @@ void MovableGameObject::setVelocity(const sf::Vector2f& velocity) {
 	m_velocity = velocity;
 }
 
-void MovableGameObject::setMovingParent(MovingTile* parent) {
+void MovableGameObject::setMovingParent(MovingParent* parent) {
 	m_movingParent = parent;
 }
 
@@ -140,6 +140,6 @@ const sf::Vector2f& MovableGameObject::getAcceleration() const {
 	return m_acceleration;
 }
 
-MovingTile* MovableGameObject::getMovingParent() const {
+MovingParent* MovableGameObject::getMovingParent() const {
 	return m_movingParent;
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 class GameObject;
-class MovingTile;
+class MovingParent;
 
 enum class CollisionDirection {
 	VOID,
@@ -28,7 +28,7 @@ struct WorldCollisionQueryRecord final {
 	// if this is set to true, the collision check will not include oneway tiles
 	bool ignoreOnewayTiles = false;
 	// this is set to the moving platform parent of a movable game object if it hits one.
-	MovingTile* movingParent = nullptr;
+	MovingParent* movingParent = nullptr;
 	// this game object will not be checked for collision
 	// used to avoid self-intersections
 	GameObject* excludedGameObject = nullptr;

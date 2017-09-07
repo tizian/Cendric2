@@ -33,5 +33,6 @@ enum class LevelDynamicTileID {
 	DivineTorch,
 	Spell,
 	Swinging,
+	Boat,
 	MAX
 };

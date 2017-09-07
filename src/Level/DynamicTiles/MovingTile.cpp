@@ -194,10 +194,6 @@ void MovingTile::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-const sf::Vector2f& MovingTile::getRelativeVelocity() const {
-	return m_relativeVelocity;
-}
-
 void MovingTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::IceBall:
@@ -350,7 +346,7 @@ void MovingTileSpikes::renderDebug(sf::RenderTarget& target) {
 void MovingTileSpikes::setPosition(const sf::Vector2f& position) {
 	float x = 0.f;
 	for (auto& sprite : m_topSprites) {
-		sprite.setPosition(sf::Vector2f(position.x + x, position.y -TILE_SIZE_F));
+		sprite.setPosition(sf::Vector2f(position.x + x, position.y - TILE_SIZE_F));
 		x += TILE_SIZE_F;
 	}
 

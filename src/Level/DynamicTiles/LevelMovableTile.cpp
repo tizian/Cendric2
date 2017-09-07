@@ -169,7 +169,7 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// check for wrong parent
-	if (MovingTile* mt = getMovingParent()) {
+	if (MovingParent* mt = getMovingParent()) {
 		if (mt->getBoundingBox()->top + Epsilon < getBoundingBox()->top + getBoundingBox()->height) {
 			setMovingParent(nullptr);
 		}

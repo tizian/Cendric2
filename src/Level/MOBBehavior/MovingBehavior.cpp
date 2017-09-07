@@ -295,7 +295,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	}
 
 	// check for wrong parent
-	if (MovingTile* mt = m_mob->getMovingParent()) {
+	if (MovingParent* mt = m_mob->getMovingParent()) {
 		if (!isUpsideDown()) {
 			if (mt->getBoundingBox()->top + Epsilon < m_mob->getBoundingBox()->top + m_mob->getBoundingBox()->height) {
 				m_mob->setMovingParent(nullptr);

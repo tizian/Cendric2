@@ -20,7 +20,7 @@ CheckpointTile::CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(leve
 
 bool CheckpointTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 
 	m_isMimic = contains(properties, std::string("mimic"));
 

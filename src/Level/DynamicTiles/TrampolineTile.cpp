@@ -125,14 +125,7 @@ void TrampolineTile::onHit(Spell* spell) {
 	if (!m_isShiftable) return;
 	switch (spell->getSpellID()) {
 	case SpellID::WindGust: {
-		float pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();
-		// determine the direction of the windgust by the position of its owner.
-		if (spell->getOwner()->getPosition().x < getPosition().x) {
-			m_pushAcceleration = pushAcceleration;
-		}
-		else {
-			m_pushAcceleration = -pushAcceleration;
-		}
+		m_pushAcceleration = dynamic_cast<WindGustSpell*>(spell)->getPushAcceleration();
 		break;
 	}
 	default:

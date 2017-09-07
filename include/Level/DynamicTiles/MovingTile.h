@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Level/DynamicTiles/LevelMovableTile.h"
 #include "Level/DynamicTiles/LeverDependentTile.h"
+#include "Level/DynamicTiles/MovingParent.h"
 
 class MovingTile;
 
@@ -29,7 +30,7 @@ private:
 	LevelMainCharacter* m_mainChar;
 };
 
-class MovingTile final : public LevelMovableTile, public LeverDependentTile {
+class MovingTile final : public LevelMovableTile, public LeverDependentTile, public MovingParent {
 public:
 	MovingTile(LevelScreen* levelScreen);
 	~MovingTile();
@@ -43,8 +44,6 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	void setPosition(const sf::Vector2f& position) override;
 
-	const sf::Vector2f& getRelativeVelocity() const;
-
 	void setInitialState(bool on) override;
 	void switchTile() override;
 	bool isSwitchable() const override;
@@ -52,6 +51,7 @@ public:
 	// those methods are overridden to resolve the MI diamond of death:
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
 	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
+	void setState(GameObjectState state) override { LevelMovableTile::setState(state); }
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; }
 
@@ -79,6 +79,5 @@ private:
 	std::vector<sf::Sprite> m_normalSprites;
 	std::vector<sf::Sprite> m_frozenSprites;
 
-	sf::Vector2f m_relativeVelocity;
 	MovingTileSpikes* m_spikes = nullptr;
 };
