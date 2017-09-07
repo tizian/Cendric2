@@ -23,13 +23,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="420" columns="30">
-  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1560" height="728"/>
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
+  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="2080" height="728"/>
  </tileset>
- <tileset firstgid="950" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
+ <tileset firstgid="1090" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="520"/>
  </tileset>
- <tileset firstgid="1000" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="1140" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -294,29 +294,29 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1050,1002,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1190,1142,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,1002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,1000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1006,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,1142,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,1140,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1146,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1025,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1072,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1027,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1165,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1212,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1167,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1058,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -482,26 +482,26 @@
  <objectgroup name="lever 2">
   <object id="64" gid="539" x="700" y="1000" width="50" height="50"/>
   <object id="65" gid="539" x="250" y="800" width="50" height="50"/>
-  <object id="66" gid="601" x="400" y="1000" width="50" height="50"/>
-  <object id="67" gid="601" x="600" y="900" width="50" height="50"/>
-  <object id="68" gid="601" x="50" y="650" width="50" height="50"/>
+  <object id="66" gid="621" x="400" y="1000" width="50" height="50"/>
+  <object id="67" gid="621" x="600" y="900" width="50" height="50"/>
+  <object id="68" gid="621" x="50" y="650" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 1">
   <object id="63" gid="539" x="750" y="1500" width="50" height="50"/>
-  <object id="72" gid="631" x="850" y="1500" width="50" height="50"/>
-  <object id="73" gid="631" x="950" y="1500" width="50" height="50"/>
-  <object id="74" gid="630" x="850" y="1600" width="50" height="50"/>
-  <object id="75" gid="630" x="950" y="1600" width="50" height="50"/>
+  <object id="72" gid="661" x="850" y="1500" width="50" height="50"/>
+  <object id="73" gid="661" x="950" y="1500" width="50" height="50"/>
+  <object id="74" gid="660" x="850" y="1600" width="50" height="50"/>
+  <object id="75" gid="660" x="950" y="1600" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="dynamic">
-  <object id="18" gid="564" x="1349" y="1549" width="50" height="50">
+  <object id="18" gid="574" x="1349" y="1549" width="50" height="50">
    <properties>
     <property name="eq_silvernecklace" value="1"/>
     <property name="fo_lesserhealingpotion" value="1"/>
     <property name="gold" value="10"/>
    </properties>
   </object>
-  <object id="23" gid="564" x="100" y="1651" width="50" height="50">
+  <object id="23" gid="574" x="100" y="1651" width="50" height="50">
    <properties>
     <property name="gold" value="10"/>
     <property name="key" value="ke_smallsilver"/>
@@ -509,30 +509,30 @@
     <property name="strength" value="2"/>
    </properties>
   </object>
-  <object id="24" gid="818" x="200" y="1650" width="50" height="50">
+  <object id="24" gid="908" x="200" y="1650" width="50" height="50">
    <properties>
     <property name="text" value="ElonaGrave"/>
    </properties>
   </object>
-  <object id="25" gid="848" x="1249" y="1577" width="50" height="50">
+  <object id="25" gid="948" x="1249" y="1577" width="50" height="50">
    <properties>
     <property name="text" value="Danger"/>
    </properties>
   </object>
-  <object id="26" gid="758" x="950" y="1974" width="50" height="50">
+  <object id="26" gid="828" x="950" y="1974" width="50" height="50">
    <properties>
     <property name="text" value="NeedIce"/>
    </properties>
   </object>
   <object id="27" gid="530" x="1250" y="600" width="50" height="50"/>
-  <object id="28" gid="623" x="1400" y="700" width="50" height="50"/>
-  <object id="29" gid="623" x="550" y="850" width="50" height="50"/>
-  <object id="30" gid="623" x="500" y="350" width="50" height="50"/>
-  <object id="31" gid="623" x="200" y="350" width="50" height="50"/>
-  <object id="32" gid="623" x="1250" y="1250" width="50" height="50"/>
-  <object id="33" gid="623" x="1050" y="1450" width="50" height="50"/>
-  <object id="34" gid="623" x="1050" y="1800" width="50" height="50"/>
-  <object id="35" gid="623" x="550" y="1850" width="50" height="50"/>
+  <object id="28" gid="653" x="1400" y="700" width="50" height="50"/>
+  <object id="29" gid="653" x="550" y="850" width="50" height="50"/>
+  <object id="30" gid="653" x="500" y="350" width="50" height="50"/>
+  <object id="31" gid="653" x="200" y="350" width="50" height="50"/>
+  <object id="32" gid="653" x="1250" y="1250" width="50" height="50"/>
+  <object id="33" gid="653" x="1050" y="1450" width="50" height="50"/>
+  <object id="34" gid="653" x="1050" y="1800" width="50" height="50"/>
+  <object id="35" gid="653" x="550" y="1850" width="50" height="50"/>
   <object id="36" gid="545" x="600" y="750" width="50" height="50"/>
   <object id="37" gid="545" x="1150" y="750" width="50" height="50"/>
   <object id="38" gid="545" x="1100" y="350" width="50" height="50"/>
@@ -542,24 +542,24 @@
   <object id="42" gid="545" x="650" y="1700" width="50" height="50"/>
   <object id="43" gid="535" x="800" y="2100" width="50" height="50"/>
   <object id="44" gid="535" x="900" y="1650" width="50" height="50"/>
-  <object id="45" gid="595" x="650" y="2100" width="50" height="50"/>
-  <object id="46" gid="565" x="550" y="650" width="50" height="50"/>
+  <object id="45" gid="615" x="650" y="2100" width="50" height="50"/>
+  <object id="46" gid="575" x="550" y="650" width="50" height="50"/>
   <object id="47" gid="533" x="1000" y="1200" width="50" height="50"/>
   <object id="48" gid="538" x="700" y="1550" width="50" height="50"/>
-  <object id="49" gid="565" x="300" y="1050" width="50" height="50"/>
-  <object id="50" gid="565" x="150" y="1050" width="50" height="50"/>
-  <object id="51" gid="565" x="500" y="1600" width="50" height="50"/>
+  <object id="49" gid="575" x="300" y="1050" width="50" height="50"/>
+  <object id="50" gid="575" x="150" y="1050" width="50" height="50"/>
+  <object id="51" gid="575" x="500" y="1600" width="50" height="50"/>
   <object id="52" gid="535" x="550" y="1600" width="50" height="50"/>
   <object id="53" gid="535" x="400" y="1600" width="50" height="50"/>
   <object id="54" gid="535" x="200" y="1050" width="50" height="50"/>
-  <object id="55" gid="565" x="250" y="1050" width="50" height="50"/>
-  <object id="56" gid="565" x="50" y="1050" width="50" height="50"/>
-  <object id="57" gid="595" x="100" y="1050" width="50" height="50"/>
-  <object id="58" gid="595" x="450" y="1600" width="50" height="50"/>
-  <object id="69" gid="641" x="1500" y="1650" width="50" height="50"/>
-  <object id="70" gid="641" x="1500" y="1150" width="50" height="50"/>
-  <object id="71" gid="641" x="1500" y="550" width="50" height="50"/>
-  <object id="76" gid="723" x="1500" y="1900" width="50" height="50">
+  <object id="55" gid="575" x="250" y="1050" width="50" height="50"/>
+  <object id="56" gid="575" x="50" y="1050" width="50" height="50"/>
+  <object id="57" gid="615" x="100" y="1050" width="50" height="50"/>
+  <object id="58" gid="615" x="450" y="1600" width="50" height="50"/>
+  <object id="69" gid="671" x="1500" y="1650" width="50" height="50"/>
+  <object id="70" gid="671" x="1500" y="1150" width="50" height="50"/>
+  <object id="71" gid="671" x="1500" y="550" width="50" height="50"/>
+  <object id="76" gid="783" x="1500" y="1900" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="1400"/>
@@ -570,8 +570,8 @@
   </object>
   <object id="77" gid="538" x="1050" y="1600" width="50" height="50"/>
   <object id="78" gid="535" x="1100" y="1350" width="50" height="50"/>
-  <object id="79" gid="565" x="1150" y="1350" width="50" height="50"/>
-  <object id="81" gid="586" x="1150" y="1150" width="50" height="50"/>
+  <object id="79" gid="575" x="1150" y="1350" width="50" height="50"/>
+  <object id="81" gid="596" x="1150" y="1150" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="3" x="338" y="412" width="69" height="135">
@@ -583,15 +583,15 @@
   </object>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="10" gid="957" x="900" y="400" width="50" height="50"/>
-  <object id="11" gid="957" x="900" y="800" width="50" height="50"/>
-  <object id="15" gid="954" x="1300" y="1950" width="50" height="50">
+  <object id="10" gid="1097" x="900" y="400" width="50" height="50"/>
+  <object id="11" gid="1097" x="900" y="800" width="50" height="50"/>
+  <object id="15" gid="1094" x="1300" y="1950" width="50" height="50">
    <properties>
     <property name="qe_portstone_bob" value="1"/>
     <property name="unique" value=""/>
    </properties>
   </object>
-  <object id="17" gid="957" x="1350" y="1300" width="50" height="50"/>
+  <object id="17" gid="1097" x="1350" y="1300" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="8" x="628" y="269" width="300" height="308">

@@ -487,14 +487,14 @@ merchant.state:npc_zeff3,eq_huntershat,1,eq_leatherarmor,1,fo_sausage,1,mi_wolf_
 spell.learned:1,2,3,4,5
 spell.learned:2,7
 spell.learned:3,12,13,14,15
-spell.learned:4,17,18,19
+spell.learned:4,17,18,19,20
 # modifiers learned:
-modifier.learned:1,2
-modifier.learned:2,2
-modifier.learned:3,1
-modifier.learned:4,2
-modifier.learned:5,2
-modifier.learned:6,1
+modifier.learned:1,3
+modifier.learned:2,3
+modifier.learned:3,3
+modifier.learned:4,3
+modifier.learned:5,3
+modifier.learned:6,3
 # hints learned:
 hint.learned:Spellbook
 hint.learned:MapMove

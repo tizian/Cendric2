@@ -74,13 +74,13 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="420" columns="30">
-  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1560" height="728"/>
+ <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
+  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="2080" height="728"/>
  </tileset>
- <tileset firstgid="950" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
+ <tileset firstgid="1090" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="520"/>
  </tileset>
- <tileset firstgid="1000" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="1140" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -580,7 +580,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -599,8 +599,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,562,562,562,562,562,562,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,562,562,562,562,562,562,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,572,572,572,572,572,572,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,572,572,572,572,572,572,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -618,9 +618,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,562,562,0,0,0,0,0,0,562,562,562,562,0,0,0,0,0,562,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,0,
-0,562,562,0,0,0,0,0,0,562,562,562,562,0,0,0,0,0,562,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,0,
-0,562,562,0,0,0,0,0,0,562,562,562,562,0,0,0,0,0,562,562,562,562,562,562,0,0,0,0,0,0,0,0,0,0,0
+0,572,572,0,0,0,0,0,0,572,572,572,572,0,0,0,0,0,572,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,0,
+0,572,572,0,0,0,0,0,0,572,572,572,572,0,0,0,0,0,572,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,0,
+0,572,572,0,0,0,0,0,0,572,572,572,572,0,0,0,0,0,572,572,572,572,572,572,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="item" width="35" height="70">
@@ -632,34 +632,12 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1028,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1120,1002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1168,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1260,1142,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1105,0,0,0,0,0,1099,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1056,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,1026,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1026,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1013,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,1123,0,0,0,0,0,1085,0,0,0,0,0,0,0,0,0,0,0,1072,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1009,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1034,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1245,0,0,0,0,0,1239,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -667,30 +645,52 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1196,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,1166,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1166,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1153,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,1263,0,0,0,0,0,1225,0,0,0,0,0,0,0,0,0,0,0,1212,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1149,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1174,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1034,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1027,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1105,0,0,0,0,0,0,0,
+0,0,1142,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1002,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1174,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1167,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1245,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1142,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -994,7 +994,7 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="111" gid="609" x="1050" y="3150" width="50" height="50">
+  <object id="111" gid="629" x="1050" y="3150" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
@@ -1003,50 +1003,50 @@
   <object id="114" gid="537" x="1300" y="2750" width="50" height="50"/>
   <object id="117" gid="537" x="1200" y="2800" width="50" height="50"/>
   <object id="118" gid="537" x="1100" y="2900" width="50" height="50"/>
-  <object id="119" gid="758" x="1300" y="3025" width="50" height="50">
+  <object id="119" gid="828" x="1300" y="3025" width="50" height="50">
    <properties>
     <property name="text" value="NeedTelekinesis"/>
    </properties>
   </object>
-  <object id="121" gid="609" x="1000" y="3250" width="50" height="50">
+  <object id="121" gid="629" x="1000" y="3250" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="123" gid="609" x="1550" y="2750" width="50" height="50">
+  <object id="123" gid="629" x="1550" y="2750" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
    </properties>
   </object>
-  <object id="126" gid="584" x="1300" y="2800" width="50" height="50"/>
-  <object id="127" gid="584" x="1200" y="2850" width="50" height="50"/>
-  <object id="128" gid="584" x="1100" y="2950" width="50" height="50"/>
-  <object id="129" gid="586" x="1200" y="2900" width="50" height="50"/>
-  <object id="130" gid="586" x="1250" y="2850" width="50" height="50"/>
-  <object id="131" gid="586" x="1150" y="2950" width="50" height="50"/>
+  <object id="126" gid="594" x="1300" y="2800" width="50" height="50"/>
+  <object id="127" gid="594" x="1200" y="2850" width="50" height="50"/>
+  <object id="128" gid="594" x="1100" y="2950" width="50" height="50"/>
+  <object id="129" gid="596" x="1200" y="2900" width="50" height="50"/>
+  <object id="130" gid="596" x="1250" y="2850" width="50" height="50"/>
+  <object id="131" gid="596" x="1150" y="2950" width="50" height="50"/>
   <object id="132" gid="549" x="1550" y="3300" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="133" gid="576" x="550" y="3549" width="50" height="50">
+  <object id="133" gid="586" x="550" y="3549" width="50" height="50">
    <properties>
     <property name="aggro" value=""/>
     <property name="velocity" value="1000"/>
     <property name="waiting" value="100"/>
    </properties>
   </object>
-  <object id="134" gid="576" x="500" y="3549" width="50" height="50">
+  <object id="134" gid="586" x="500" y="3549" width="50" height="50">
    <properties>
     <property name="aggro" value=""/>
     <property name="velocity" value="1000"/>
     <property name="waiting" value="100"/>
    </properties>
   </object>
-  <object id="136" gid="641" x="250" y="3100" width="50" height="50"/>
-  <object id="137" gid="611" x="100" y="3100" width="50" height="50"/>
+  <object id="136" gid="671" x="250" y="3100" width="50" height="50"/>
+  <object id="137" gid="631" x="100" y="3100" width="50" height="50"/>
   <object id="138" gid="551" x="50" y="3100" width="50" height="50"/>
   <object id="139" gid="550" x="75" y="3099" width="50" height="50">
    <properties>
@@ -1055,7 +1055,7 @@
   </object>
   <object id="143" gid="538" x="1350" y="2450" width="50" height="50"/>
   <object id="144" gid="537" x="250" y="3050" width="50" height="50"/>
-  <object id="145" gid="609" x="500" y="2900" width="50" height="50">
+  <object id="145" gid="629" x="500" y="2900" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
@@ -1068,7 +1068,7 @@
     <property name="width" value="1"/>
    </properties>
   </object>
-  <object id="148" gid="609" x="950" y="2750" width="50" height="50">
+  <object id="148" gid="629" x="950" y="2750" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
@@ -1079,7 +1079,7 @@
     <property name="size" value="3"/>
    </properties>
   </object>
-  <object id="150" gid="609" x="700" y="2550" width="50" height="50">
+  <object id="150" gid="629" x="700" y="2550" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
@@ -1090,51 +1090,51 @@
     <property name="size" value="4"/>
    </properties>
   </object>
-  <object id="152" gid="586" x="1250" y="2000" width="50" height="50"/>
-  <object id="153" gid="584" x="1250" y="2150" width="50" height="50"/>
-  <object id="157" gid="584" x="1100" y="2350" width="50" height="50"/>
-  <object id="158" gid="586" x="1150" y="2100" width="50" height="50"/>
-  <object id="160" gid="586" x="950" y="2050" width="50" height="50"/>
-  <object id="162" gid="612" x="50" y="3000" width="50" height="50"/>
-  <object id="165" gid="584" x="850" y="2250" width="50" height="50"/>
-  <object id="166" gid="586" x="800" y="2000" width="50" height="50"/>
-  <object id="167" gid="586" x="800" y="2100" width="50" height="50"/>
-  <object id="168" gid="586" x="800" y="2250" width="50" height="50"/>
-  <object id="169" gid="584" x="850" y="2400" width="50" height="50"/>
-  <object id="170" gid="584" x="800" y="2400" width="50" height="50"/>
-  <object id="171" gid="584" x="750" y="2400" width="50" height="50"/>
-  <object id="172" gid="609" x="1150" y="2000" width="50" height="50">
+  <object id="152" gid="596" x="1250" y="2000" width="50" height="50"/>
+  <object id="153" gid="594" x="1250" y="2150" width="50" height="50"/>
+  <object id="157" gid="594" x="1100" y="2350" width="50" height="50"/>
+  <object id="158" gid="596" x="1150" y="2100" width="50" height="50"/>
+  <object id="160" gid="596" x="950" y="2050" width="50" height="50"/>
+  <object id="162" gid="632" x="50" y="3000" width="50" height="50"/>
+  <object id="165" gid="594" x="850" y="2250" width="50" height="50"/>
+  <object id="166" gid="596" x="800" y="2000" width="50" height="50"/>
+  <object id="167" gid="596" x="800" y="2100" width="50" height="50"/>
+  <object id="168" gid="596" x="800" y="2250" width="50" height="50"/>
+  <object id="169" gid="594" x="850" y="2400" width="50" height="50"/>
+  <object id="170" gid="594" x="800" y="2400" width="50" height="50"/>
+  <object id="171" gid="594" x="750" y="2400" width="50" height="50"/>
+  <object id="172" gid="629" x="1150" y="2000" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="173" gid="611" x="100" y="2600" width="50" height="50"/>
+  <object id="173" gid="631" x="100" y="2600" width="50" height="50"/>
   <object id="174" gid="551" x="50" y="2600" width="50" height="50"/>
   <object id="175" gid="534" x="75" y="2550" width="50" height="50">
    <properties>
     <property name="eq_lavahead" value="1"/>
    </properties>
   </object>
-  <object id="176" gid="586" x="1500" y="2200" width="50" height="50"/>
-  <object id="177" gid="586" x="1500" y="2000" width="50" height="50"/>
-  <object id="178" gid="584" x="100" y="2100" width="50" height="50"/>
+  <object id="176" gid="596" x="1500" y="2200" width="50" height="50"/>
+  <object id="177" gid="596" x="1500" y="2000" width="50" height="50"/>
+  <object id="178" gid="594" x="100" y="2100" width="50" height="50"/>
   <object id="179" gid="553" x="100" y="2050" width="50" height="50"/>
   <object id="181" gid="538" x="550" y="1800" width="50" height="50"/>
-  <object id="182" gid="575" x="450" y="2100" width="50" height="50"/>
-  <object id="190" gid="667" x="1200" y="1850" width="50" height="50"/>
-  <object id="192" gid="586" x="300" y="1400" width="50" height="50"/>
-  <object id="194" gid="586" x="300" y="1200" width="50" height="50"/>
-  <object id="195" gid="586" x="300" y="1700" width="50" height="50"/>
-  <object id="196" gid="586" x="300" y="1500" width="50" height="50"/>
-  <object id="197" gid="584" x="650" y="1500" width="50" height="50"/>
-  <object id="198" gid="609" x="800" y="1250" width="50" height="50">
+  <object id="182" gid="585" x="450" y="2100" width="50" height="50"/>
+  <object id="190" gid="707" x="1200" y="1850" width="50" height="50"/>
+  <object id="192" gid="596" x="300" y="1400" width="50" height="50"/>
+  <object id="194" gid="596" x="300" y="1200" width="50" height="50"/>
+  <object id="195" gid="596" x="300" y="1700" width="50" height="50"/>
+  <object id="196" gid="596" x="300" y="1500" width="50" height="50"/>
+  <object id="197" gid="594" x="650" y="1500" width="50" height="50"/>
+  <object id="198" gid="629" x="800" y="1250" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="199" gid="586" x="1100" y="1600" width="50" height="50"/>
+  <object id="199" gid="596" x="1100" y="1600" width="50" height="50"/>
   <object id="200" gid="550" x="1050" y="1200" width="50" height="50">
    <properties>
     <property name="size" value="7"/>
@@ -1145,7 +1145,7 @@
     <property name="type" value="speed"/>
    </properties>
   </object>
-  <object id="202" gid="584" x="1000" y="1350" width="50" height="50"/>
+  <object id="202" gid="594" x="1000" y="1350" width="50" height="50"/>
   <object id="205" gid="549" x="1500" y="1650" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
@@ -1154,14 +1154,14 @@
   </object>
   <object id="206" gid="538" x="300" y="1100" width="50" height="50"/>
   <object id="207" gid="536" x="50" y="550" width="50" height="50"/>
-  <object id="208" gid="566" x="100" y="550" width="50" height="50"/>
-  <object id="209" gid="566" x="150" y="550" width="50" height="50"/>
-  <object id="210" gid="596" x="200" y="550" width="50" height="50"/>
-  <object id="211" gid="567" x="400" y="500" width="50" height="50"/>
-  <object id="212" gid="584" x="400" y="550" width="50" height="50"/>
-  <object id="213" gid="584" x="700" y="550" width="50" height="50"/>
-  <object id="214" gid="567" x="700" y="500" width="50" height="50"/>
-  <object id="216" gid="633" x="250" y="900" width="50" height="50">
+  <object id="208" gid="576" x="100" y="550" width="50" height="50"/>
+  <object id="209" gid="576" x="150" y="550" width="50" height="50"/>
+  <object id="210" gid="616" x="200" y="550" width="50" height="50"/>
+  <object id="211" gid="577" x="400" y="500" width="50" height="50"/>
+  <object id="212" gid="594" x="400" y="550" width="50" height="50"/>
+  <object id="213" gid="594" x="700" y="550" width="50" height="50"/>
+  <object id="214" gid="577" x="700" y="500" width="50" height="50"/>
+  <object id="216" gid="663" x="250" y="900" width="50" height="50">
    <properties>
     <property name="direction" value="90"/>
     <property name="distance" value="150"/>
@@ -1170,7 +1170,7 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="217" gid="633" x="800" y="900" width="50" height="50">
+  <object id="217" gid="663" x="800" y="900" width="50" height="50">
    <properties>
     <property name="direction" value="270"/>
     <property name="distance" value="150"/>
@@ -1179,7 +1179,7 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="218" gid="633" x="100" y="1050" width="50" height="50">
+  <object id="218" gid="663" x="100" y="1050" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="400"/>
@@ -1188,7 +1188,7 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="219" gid="633" x="950" y="900" width="50" height="50">
+  <object id="219" gid="663" x="950" y="900" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="300"/>
@@ -1198,14 +1198,14 @@
    </properties>
   </object>
   <object id="220" gid="536" x="900" y="550" width="50" height="50"/>
-  <object id="221" gid="566" x="1000" y="550" width="50" height="50"/>
-  <object id="222" gid="596" x="1050" y="550" width="50" height="50"/>
-  <object id="223" gid="566" x="950" y="550" width="50" height="50"/>
+  <object id="221" gid="576" x="1000" y="550" width="50" height="50"/>
+  <object id="222" gid="616" x="1050" y="550" width="50" height="50"/>
+  <object id="223" gid="576" x="950" y="550" width="50" height="50"/>
   <object id="224" gid="535" x="750" y="650" width="50" height="50"/>
   <object id="225" gid="535" x="350" y="650" width="50" height="50"/>
-  <object id="226" gid="565" x="800" y="650" width="50" height="50"/>
-  <object id="227" gid="595" x="300" y="650" width="50" height="50"/>
-  <object id="229" gid="633" x="500" y="950" width="50" height="50">
+  <object id="226" gid="575" x="800" y="650" width="50" height="50"/>
+  <object id="227" gid="615" x="300" y="650" width="50" height="50"/>
+  <object id="229" gid="663" x="500" y="950" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="200"/>
@@ -1214,16 +1214,16 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="230" gid="637" x="1200" y="1100" width="50" height="50"/>
-  <object id="232" gid="609" x="1400" y="1250" width="50" height="50">
+  <object id="230" gid="667" x="1200" y="1100" width="50" height="50"/>
+  <object id="232" gid="629" x="1400" y="1250" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
    </properties>
   </object>
-  <object id="237" gid="584" x="850" y="2150" width="50" height="50"/>
-  <object id="238" gid="584" x="1200" y="2350" width="50" height="50"/>
-  <object id="239" gid="584" x="1400" y="2350" width="50" height="50"/>
-  <object id="240" gid="565" x="1250" y="2350" width="50" height="50"/>
+  <object id="237" gid="594" x="850" y="2150" width="50" height="50"/>
+  <object id="238" gid="594" x="1200" y="2350" width="50" height="50"/>
+  <object id="239" gid="594" x="1400" y="2350" width="50" height="50"/>
+  <object id="240" gid="575" x="1250" y="2350" width="50" height="50"/>
   <object id="241" gid="548" x="500" y="1775" width="50" height="50">
    <properties>
     <property name="text" value="Masochist"/>
@@ -1231,8 +1231,8 @@
   </object>
  </objectgroup>
  <objectgroup name="lever 1">
-  <object id="140" gid="659" x="250" y="3000" width="50" height="50"/>
-  <object id="142" gid="633" x="650" y="2950" width="50" height="50">
+  <object id="140" gid="699" x="250" y="3000" width="50" height="50"/>
+  <object id="142" gid="663" x="650" y="2950" width="50" height="50">
    <properties>
     <property name="direction" value="180"/>
     <property name="distance" value="300"/>
@@ -1244,7 +1244,7 @@
   </object>
  </objectgroup>
  <objectgroup name="lever 2">
-  <object id="184" gid="633" x="200" y="1750" width="50" height="50">
+  <object id="184" gid="663" x="200" y="1750" width="50" height="50">
    <properties>
     <property name="direction" value="90"/>
     <property name="distance" value="150"/>
@@ -1254,8 +1254,8 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="185" gid="659" x="200" y="1700" width="50" height="50"/>
-  <object id="191" gid="633" x="200" y="1450" width="50" height="50">
+  <object id="185" gid="699" x="200" y="1700" width="50" height="50"/>
+  <object id="191" gid="663" x="200" y="1450" width="50" height="50">
    <properties>
     <property name="direction" value="90"/>
     <property name="distance" value="150"/>
@@ -1267,7 +1267,7 @@
   </object>
  </objectgroup>
  <objectgroup name="lever 3">
-  <object id="188" gid="633" x="50" y="1450" width="50" height="50">
+  <object id="188" gid="663" x="50" y="1450" width="50" height="50">
    <properties>
     <property name="direction" value="180"/>
     <property name="distance" value="300"/>
@@ -1277,43 +1277,43 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="189" gid="659" x="50" y="1500" width="50" height="50"/>
+  <object id="189" gid="699" x="50" y="1500" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="124" gid="957" x="800" y="2650" width="50" height="50">
+  <object id="124" gid="1097" x="800" y="2650" width="50" height="50">
    <properties>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="125" gid="960" x="800" y="3250" width="50" height="50">
+  <object id="125" gid="1100" x="800" y="3250" width="50" height="50">
    <properties>
     <property name="name" value="LavaCairn"/>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="135" gid="967" x="400" y="3300" width="50" height="50">
+  <object id="135" gid="1107" x="400" y="3300" width="50" height="50">
    <properties>
     <property name="name" value="LavaOoze"/>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="203" gid="960" x="1400" y="1600" width="50" height="50">
+  <object id="203" gid="1100" x="1400" y="1600" width="50" height="50">
    <properties>
     <property name="name" value="LavaCairn"/>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="234" gid="957" x="1300" y="1450" width="50" height="50">
+  <object id="234" gid="1097" x="1300" y="1450" width="50" height="50">
    <properties>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="235" gid="957" x="550" y="700" width="50" height="50">
+  <object id="235" gid="1097" x="550" y="700" width="50" height="50">
    <properties>
     <property name="skinnr" value="1"/>
    </properties>
   </object>
-  <object id="236" gid="957" x="800" y="250" width="50" height="50">
+  <object id="236" gid="1097" x="800" y="250" width="50" height="50">
    <properties>
     <property name="skinnr" value="1"/>
    </properties>

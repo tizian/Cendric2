@@ -107,7 +107,7 @@ void SpellTile::loadLeapOfFaithSpell() {
 	data.strength = 3;
 	g_resourceManager->loadTexture(data.spritesheetPath, ResourceType::Level);
 
-	float gravityScale = 1.f / (1.f + 0.4f * data.strength);
+	float gravityScale = 1.f / (1.f + 0.2f * data.strength);
 	LeapOfFaithSpell* newSpell = new LeapOfFaithSpell(gravityScale);
 	newSpell->load(data, m_mainChar, sf::Vector2f());
 	m_screen->addObject(newSpell);

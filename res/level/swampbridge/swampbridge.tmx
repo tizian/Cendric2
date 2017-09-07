@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="154">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="50" height="32" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="154">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/swampbridge/layer_inf.png,3.0,res/level/swampbridge/layer_3.png,2.0,res/level/swampbridge/layer_2.png"/>
   <property name="dimming" value="0.5"/>
@@ -64,13 +64,13 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="420" columns="30">
-  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1560" height="728"/>
+ <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
+  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="2080" height="728"/>
  </tileset>
- <tileset firstgid="1205" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
+ <tileset firstgid="1345" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="520"/>
  </tileset>
- <tileset firstgid="1255" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="1395" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -443,20 +443,20 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,1336,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,1476,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1281,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,1327,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,1421,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,1467,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1283,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,1377,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1423,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,1517,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1354,0,0,0,0,0,1410,0,0,0,0,0,1360,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,1360,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1494,0,0,0,0,0,1550,0,0,0,0,0,1500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,1500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -574,7 +574,7 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="135" gid="888" x="1000" y="1000" width="50" height="50">
+  <object id="135" gid="918" x="1000" y="1000" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="200"/>
@@ -588,38 +588,38 @@
     <property name="type" value="speed"/>
    </properties>
   </object>
-  <object id="136" gid="841" x="1100" y="500" width="50" height="50"/>
-  <object id="137" gid="841" x="1100" y="600" width="50" height="50"/>
-  <object id="138" gid="841" x="1100" y="650" width="50" height="50"/>
-  <object id="139" gid="841" x="1500" y="750" width="50" height="50"/>
-  <object id="141" gid="841" x="1500" y="550" width="50" height="50"/>
-  <object id="142" gid="841" x="1750" y="700" width="50" height="50"/>
-  <object id="143" gid="841" x="2000" y="700" width="50" height="50"/>
-  <object id="144" gid="841" x="2200" y="700" width="50" height="50"/>
-  <object id="145" gid="892" x="1900" y="850" width="50" height="50"/>
-  <object id="146" gid="892" x="950" y="950" width="50" height="50"/>
-  <object id="147" gid="922" x="1750" y="850" width="50" height="50"/>
-  <object id="148" gid="922" x="700" y="950" width="50" height="50"/>
+  <object id="136" gid="851" x="1100" y="500" width="50" height="50"/>
+  <object id="137" gid="851" x="1100" y="600" width="50" height="50"/>
+  <object id="138" gid="851" x="1100" y="650" width="50" height="50"/>
+  <object id="139" gid="851" x="1500" y="750" width="50" height="50"/>
+  <object id="141" gid="851" x="1500" y="550" width="50" height="50"/>
+  <object id="142" gid="851" x="1750" y="700" width="50" height="50"/>
+  <object id="143" gid="851" x="2000" y="700" width="50" height="50"/>
+  <object id="144" gid="851" x="2200" y="700" width="50" height="50"/>
+  <object id="145" gid="922" x="1900" y="850" width="50" height="50"/>
+  <object id="146" gid="922" x="950" y="950" width="50" height="50"/>
+  <object id="147" gid="962" x="1750" y="850" width="50" height="50"/>
+  <object id="148" gid="962" x="700" y="950" width="50" height="50"/>
   <object id="149" gid="808" x="1350" y="850" width="50" height="50"/>
   <object id="150" gid="793" x="1300" y="850" width="50" height="50"/>
-  <object id="151" gid="899" x="1600" y="800" width="50" height="50"/>
-  <object id="152" gid="899" x="1750" y="950" width="50" height="50"/>
-  <object id="153" gid="899" x="2000" y="950" width="50" height="50"/>
+  <object id="151" gid="929" x="1600" y="800" width="50" height="50"/>
+  <object id="152" gid="929" x="1750" y="950" width="50" height="50"/>
+  <object id="153" gid="929" x="2000" y="950" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="119" gid="1232" x="770" y="1200" width="50" height="50"/>
-  <object id="121" gid="1238" x="300" y="1260" width="50" height="50">
+  <object id="119" gid="1372" x="770" y="1200" width="50" height="50"/>
+  <object id="121" gid="1378" x="300" y="1260" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/swampbridge/leeroy.lua"/>
     <property name="unique" value=""/>
    </properties>
   </object>
-  <object id="122" gid="1232" x="790" y="1200" width="50" height="50"/>
-  <object id="128" gid="1232" x="850" y="1200" width="50" height="50"/>
-  <object id="129" gid="1232" x="1150" y="1200" width="50" height="50"/>
-  <object id="130" gid="1232" x="1120" y="1200" width="50" height="50"/>
-  <object id="132" gid="1232" x="1550" y="1200" width="50" height="50"/>
-  <object id="133" gid="1232" x="1525" y="1200" width="50" height="50"/>
+  <object id="122" gid="1372" x="790" y="1200" width="50" height="50"/>
+  <object id="128" gid="1372" x="850" y="1200" width="50" height="50"/>
+  <object id="129" gid="1372" x="1150" y="1200" width="50" height="50"/>
+  <object id="130" gid="1372" x="1120" y="1200" width="50" height="50"/>
+  <object id="132" gid="1372" x="1550" y="1200" width="50" height="50"/>
+  <object id="133" gid="1372" x="1525" y="1200" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="117" x="150" y="1200" width="50" height="100">

@@ -7,7 +7,7 @@ LeapOfFaithSpellCreator::LeapOfFaithSpellCreator(const SpellData& spellData, Lev
 void LeapOfFaithSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	removeOldSpell();
 	SpellData spellData = m_spellData;
-	float gravityScale = 1.f / (1.f + 0.4f * m_spellData.strength);
+	float gravityScale = 1.f / (1.f + 0.2f * m_spellData.strength);
 	LeapOfFaithSpell* newSpell = new LeapOfFaithSpell(gravityScale);
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);

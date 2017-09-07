@@ -174,13 +174,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="420" columns="30">
-  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="1560" height="728"/>
+ <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
+  <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="2080" height="728"/>
  </tileset>
- <tileset firstgid="1205" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
+ <tileset firstgid="1345" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="520"/>
  </tileset>
- <tileset firstgid="1255" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
+ <tileset firstgid="1395" name="spritesheet_levelitems" tilewidth="50" tileheight="50" tilecount="576" columns="24">
   <image source="../../convenience/tilesets/spritesheet_levelitems.png" width="1200" height="1200"/>
   <tile id="0">
    <properties>
@@ -453,7 +453,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,1361,0,0,0,0,0,1402,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,1501,0,0,0,0,0,1542,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -504,9 +504,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,817,817,817,817,817,817,817,817,817,817,817,817,817,817,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,817,817,817,817,817,817,817,817,817,817,817,817,817,817,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,817,817,817,817,817,817,817,817,817,817,817,817,817,817,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,827,827,827,827,827,827,827,827,827,827,827,827,827,827,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,827,827,827,827,827,827,827,827,827,827,827,827,827,827,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,827,827,827,827,827,827,827,827,827,827,827,827,827,827,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="LFG 1" width="34" height="33">
@@ -583,7 +583,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="34" height="33">
+ <layer name="collidable" width="34" height="33" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -621,12 +621,12 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="145" gid="1013" x="300" y="275" width="50" height="50">
+  <object id="145" gid="1083" x="300" y="275" width="50" height="50">
    <properties>
     <property name="text" value="NeedPicklock"/>
    </properties>
   </object>
-  <object id="146" gid="834" x="250" y="200" width="50" height="50">
+  <object id="146" gid="844" x="250" y="200" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
    </properties>
@@ -638,7 +638,7 @@
     <property name="width" value="1"/>
    </properties>
   </object>
-  <object id="151" gid="834" x="50" y="200" width="50" height="50">
+  <object id="151" gid="844" x="50" y="200" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
    </properties>
@@ -652,36 +652,36 @@
    </properties>
   </object>
   <object id="156" gid="808" x="600" y="650" width="50" height="50"/>
-  <object id="157" gid="820" x="500" y="650" width="50" height="50"/>
-  <object id="159" gid="863" x="450" y="275" width="50" height="50">
+  <object id="157" gid="830" x="500" y="650" width="50" height="50"/>
+  <object id="159" gid="883" x="450" y="275" width="50" height="50">
    <properties>
     <property name="text" value="NeedInvisibility"/>
    </properties>
   </object>
-  <object id="161" gid="833" x="350" y="175" width="50" height="50">
+  <object id="161" gid="843" x="350" y="175" width="50" height="50">
    <properties>
     <property name="text" value="NeedTwilight"/>
    </properties>
   </object>
-  <object id="162" gid="896" x="800" y="500" width="50" height="50"/>
-  <object id="167" gid="873" x="1100" y="550" width="50" height="50">
+  <object id="162" gid="926" x="800" y="500" width="50" height="50"/>
+  <object id="167" gid="893" x="1100" y="550" width="50" height="50">
    <properties>
     <property name="spellid" value="10"/>
    </properties>
   </object>
-  <object id="168" gid="841" x="1300" y="400" width="50" height="50"/>
-  <object id="169" gid="841" x="1300" y="500" width="50" height="50"/>
-  <object id="170" gid="841" x="1300" y="600" width="50" height="50"/>
-  <object id="172" gid="850" x="550" y="650" width="50" height="50"/>
+  <object id="168" gid="851" x="1300" y="400" width="50" height="50"/>
+  <object id="169" gid="851" x="1300" y="500" width="50" height="50"/>
+  <object id="170" gid="851" x="1300" y="600" width="50" height="50"/>
+  <object id="172" gid="870" x="550" y="650" width="50" height="50"/>
   <object id="173" gid="805" x="800" y="599" width="50" height="50">
    <properties>
     <property name="size" value="7"/>
    </properties>
   </object>
-  <object id="175" gid="896" x="800" y="600" width="50" height="50"/>
-  <object id="181" gid="836" x="800" y="900" width="50" height="50"/>
-  <object id="182" gid="836" x="850" y="900" width="50" height="50"/>
-  <object id="183" gid="836" x="900" y="900" width="50" height="50"/>
+  <object id="175" gid="926" x="800" y="600" width="50" height="50"/>
+  <object id="181" gid="846" x="800" y="900" width="50" height="50"/>
+  <object id="182" gid="846" x="850" y="900" width="50" height="50"/>
+  <object id="183" gid="846" x="900" y="900" width="50" height="50"/>
   <object id="185" gid="810" x="950" y="750" width="50" height="50">
    <properties>
     <property name="collidable" value=""/>
@@ -699,61 +699,61 @@
     <property name="color" value="blue"/>
    </properties>
   </object>
-  <object id="188" gid="834" x="1100" y="400" width="50" height="50">
+  <object id="188" gid="844" x="1100" y="400" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="189" gid="834" x="950" y="600" width="50" height="50">
+  <object id="189" gid="844" x="950" y="600" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="190" gid="834" x="1250" y="600" width="50" height="50">
+  <object id="190" gid="844" x="1250" y="600" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="191" gid="834" x="1400" y="500" width="50" height="50">
+  <object id="191" gid="844" x="1400" y="500" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
    </properties>
   </object>
-  <object id="192" gid="834" x="1600" y="500" width="50" height="50">
+  <object id="192" gid="844" x="1600" y="500" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
    </properties>
   </object>
-  <object id="193" gid="818" x="1500" y="425" width="50" height="50"/>
-  <object id="194" gid="818" x="625" y="775" width="50" height="50"/>
-  <object id="195" gid="834" x="450" y="150" width="50" height="50">
-   <properties>
-    <property name="color" value="blue"/>
-    <property name="layer" value="bg"/>
-   </properties>
-  </object>
-  <object id="196" gid="834" x="850" y="150" width="50" height="50">
+  <object id="193" gid="828" x="1500" y="425" width="50" height="50"/>
+  <object id="194" gid="828" x="625" y="775" width="50" height="50"/>
+  <object id="195" gid="844" x="450" y="150" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="197" gid="834" x="50" y="700" width="50" height="50">
+  <object id="196" gid="844" x="850" y="150" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="198" gid="834" x="200" y="1250" width="50" height="50">
+  <object id="197" gid="844" x="50" y="700" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
-  <object id="199" gid="834" x="550" y="1250" width="50" height="50">
+  <object id="198" gid="844" x="200" y="1250" width="50" height="50">
+   <properties>
+    <property name="color" value="blue"/>
+    <property name="layer" value="bg"/>
+   </properties>
+  </object>
+  <object id="199" gid="844" x="550" y="1250" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
     <property name="layer" value="bg"/>
@@ -761,7 +761,7 @@
   </object>
  </objectgroup>
  <objectgroup name="lever 1">
-  <object id="163" gid="978" x="50" y="1350" width="50" height="50">
+  <object id="163" gid="1038" x="50" y="1350" width="50" height="50">
    <properties>
     <property name="direction" value="90"/>
     <property name="distance" value="600"/>
@@ -770,10 +770,10 @@
     <property name="speed" value="100"/>
    </properties>
   </object>
-  <object id="171" gid="914" x="50" y="1250" width="50" height="50"/>
+  <object id="171" gid="954" x="50" y="1250" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 2">
-  <object id="174" gid="978" x="800" y="1350" width="50" height="50">
+  <object id="174" gid="1038" x="800" y="1350" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
     <property name="distance" value="350"/>
@@ -783,45 +783,45 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="176" gid="884" x="1000" y="1350" width="50" height="50"/>
+  <object id="176" gid="914" x="1000" y="1350" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="149" gid="1220" x="525" y="225" width="50" height="50">
+  <object id="149" gid="1360" x="525" y="225" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer1.lua"/>
    </properties>
   </object>
-  <object id="152" gid="1220" x="100" y="550" width="50" height="50">
+  <object id="152" gid="1360" x="100" y="550" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer2.lua"/>
    </properties>
   </object>
-  <object id="154" gid="1220" x="150" y="800" width="50" height="50">
+  <object id="154" gid="1360" x="150" y="800" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer3.lua"/>
    </properties>
   </object>
-  <object id="155" gid="1220" x="400" y="1050" width="50" height="50">
+  <object id="155" gid="1360" x="400" y="1050" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer4.lua"/>
    </properties>
   </object>
-  <object id="164" gid="1220" x="200" y="1325" width="50" height="50">
+  <object id="164" gid="1360" x="200" y="1325" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer5.lua"/>
    </properties>
   </object>
-  <object id="165" gid="1220" x="750" y="1200" width="50" height="50">
+  <object id="165" gid="1360" x="750" y="1200" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer6.lua"/>
    </properties>
   </object>
-  <object id="166" gid="1220" x="950" y="1200" width="50" height="50">
+  <object id="166" gid="1360" x="950" y="1200" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer7.lua"/>
    </properties>
   </object>
-  <object id="200" gid="1220" x="600" y="225" width="50" height="50">
+  <object id="200" gid="1360" x="600" y="225" width="50" height="50">
    <properties>
     <property name="luapath" value="res/level/yashapuzzle/observer8.lua"/>
    </properties>
