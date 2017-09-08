@@ -57,6 +57,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ GUILD,  &CharacterCoreReader::readGuild });
 	m_readMap.insert({ REPUTATION_PROGRESS,  &CharacterCoreReader::readReputationProgress });
 	m_readMap.insert({ WEATHER,  &CharacterCoreReader::readWeather });
+	m_readMap.insert({ DEATH_COUNT,  &CharacterCoreReader::readDeaths });
 }
 
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
@@ -380,6 +381,10 @@ bool CharacterCoreReader::readStoredItemID(std::string& line, CharacterCoreData&
 bool CharacterCoreReader::readIsInLevel(std::string& line, CharacterCoreData& data) const {
 	data.isInLevel = std::stoi(line) == 1;
 	return true;
+}
+
+bool CharacterCoreReader::readDeaths(std::string& line, CharacterCoreData& data) const {
+	data.deaths = std::max(0, std::stoi(line));
 }
 
 bool CharacterCoreReader::readWeather(std::string& line, CharacterCoreData& data) const {

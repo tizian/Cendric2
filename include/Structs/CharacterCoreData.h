@@ -37,6 +37,7 @@ struct CharacterCoreData final {
 	std::map<std::string, std::map<int, sf::Vector2f>> waypointsUnlocked;
 	std::map<std::string, std::set<int>> triggersTriggered;
 	ExploredTiles tilesExplored;
+	int deaths;
 
 	// quest & npc progress
 	std::map<std::string, std::set<std::string>> conditionProgress;

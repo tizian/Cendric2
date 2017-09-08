@@ -836,3 +836,7 @@ int CharacterCore::retrieveStoredGold() {
 void CharacterCore::notifyAchievementUnlocked(const std::string& achievement) {
 	m_achievementManager->unlockAchievement(achievement);
 }
+
+void CharacterCore::increaseDeathCount() {
+	m_data.deaths++;
+}

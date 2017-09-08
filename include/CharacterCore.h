@@ -175,6 +175,8 @@ public:
 	int retrieveStoredGold();
 	// notifies a steam achievement
 	void notifyAchievementUnlocked(const std::string& achievement);
+	// increase death count by one
+	void increaseDeathCount();
 
 protected:
 	// protected constructor for copying

@@ -54,6 +54,7 @@ private:
 	std::string writeAttributes(const CharacterCoreData& data) const;
 
 	std::string writeGold(const CharacterCoreData& data) const;
+	std::string writeDeaths(const CharacterCoreData& data) const;
 	std::string writeStoredGold(const CharacterCoreData& data) const;
 	std::string writeItemID(const CharacterCoreData& data) const;
 	std::string writeStoredItemID(const CharacterCoreData& data) const;

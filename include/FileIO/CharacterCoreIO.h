@@ -43,6 +43,7 @@ protected:
 	const char* GUILD = "guild";
 	const char* REPUTATION_PROGRESS = "reputation.progress";
 	const char* WEATHER = "weather";
+	const char* DEATH_COUNT = "deaths";
 
 	// equipment & items
 	const char* GOLD = "gold";
