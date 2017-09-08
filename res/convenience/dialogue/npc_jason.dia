@@ -126,7 +126,7 @@ npc.id:npc_jason
 	translation.tag:DL_Jason_JasonQuest2
 	translation.en:Some gargoyles live in the old temple in the North. If you bring me some gargoyle dust, you can have my old glaive in exchange.
 	translation.de:Ein paar Gargoyles leben im alten Tempel im Norden. Wenn du mir etwas Gargoylestaub bringst, kannst du dafür meine alte Gleve haben.
-	translation.ch:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestau bringsch, gibi der mini alt Gleve defür.
+	translation.ch:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestaub bringsch, gibi der mini alt Gleve defür.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -329,7 +329,7 @@ std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const 
 }
 
 std::string CharacterCoreWriter::writeDeaths(const CharacterCoreData& data) const {
-	return std::string(DEATH_COUNT + ":" + std::to_string(data.deaths) + "\n";
+	return std::string(DEATH_COUNT) + ":" + std::to_string(data.deaths) + "\n";
 }
 
 std::string CharacterCoreWriter::writeStoredGold(const CharacterCoreData& data) const {

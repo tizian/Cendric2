@@ -385,6 +385,7 @@ bool CharacterCoreReader::readIsInLevel(std::string& line, CharacterCoreData& da
 
 bool CharacterCoreReader::readDeaths(std::string& line, CharacterCoreData& data) const {
 	data.deaths = std::max(0, std::stoi(line));
+	return true;
 }
 
 bool CharacterCoreReader::readWeather(std::string& line, CharacterCoreData& data) const {

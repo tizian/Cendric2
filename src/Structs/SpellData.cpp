@@ -564,7 +564,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.cooldown = sf::seconds(15);
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
-	antiGravity.duration = sf::seconds(5);
+	antiGravity.duration = sf::seconds(7);
 	antiGravity.activeDuration = antiGravity.duration;
 	antiGravity.attachedToMob = true;
 	antiGravity.fightAnimation = GameObjectState::VOID;
@@ -675,7 +675,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.spritesheetPath = "res/assets/spells/spritesheet_spell_flash.png";
 	flash.iconTextureRect = sf::IntRect(150, 50, 50, 50);
 
-	flash.cooldown = sf::seconds(5);
+	flash.cooldown = sf::seconds(7);
 	flash.damageType = DamageType::Light;
 	flash.activeDuration = sf::seconds(2.0);
 	flash.attachedToMob = true;
@@ -801,7 +801,7 @@ SpellData SpellData::getGhostFormSpellData() {
 
 	ghostForm.spritesheetPath = "res/assets/spells/spritesheet_spell_ghost.png";
 	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
-	ghostForm.cooldown = sf::seconds(30);
+	ghostForm.cooldown = sf::seconds(20);
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
 	ghostForm.spellOffset = sf::Vector2f(-20.f, 0.f);
 	ghostForm.activeDuration = sf::seconds(5);

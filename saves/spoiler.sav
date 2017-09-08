@@ -205,6 +205,9 @@ item.id:sp_light,1
 item.id:sp_shadowtrap,1
 item.id:sp_unlock,1
 item.id:sp_antigravity,1
+item.id:sp_icyambush,1
+item.id:sp_aureola,1
+item.id:sp_summongargoyle,1
 item.id:we_bonescythe,1
 item.id:we_claw,1
 item.id:we_doublesickle,1

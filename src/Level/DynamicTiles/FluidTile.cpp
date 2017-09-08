@@ -37,7 +37,7 @@ bool FluidTile::init(const LevelTileProperties& properties) {
 	size.x = std::stoi(sizeStr.substr(0, sizeStr.find(',')));
 	size.y = std::stoi(sizeStr.substr(sizeStr.find(',') + 1));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(size.x), static_cast<float>(size.y)));
-	
+
 	return true;
 }
 
@@ -201,7 +201,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	float velocityNorm = norm(velocity);
 
 	if (velocityNorm < Epsilon) return;
-	
+
 	// Adjust velocity of water surface
 	int startIndex = static_cast<int>((xPosition - m_x) / (m_width / (m_nColumns - 1)));
 	int endIndex = static_cast<int>((xPosition + width - m_x) / (m_width / (m_nColumns - 1)));

@@ -9,6 +9,7 @@ namespace particles {
 
 ParticleSystem::ParticleSystem(int maxCount) : emitRate(0.f), m_dt(0.f) {
 	m_particles = new ParticleData(maxCount);
+	reset();
 }
 
 ParticleSystem::~ParticleSystem() {
