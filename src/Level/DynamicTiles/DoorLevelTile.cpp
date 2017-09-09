@@ -1,6 +1,7 @@
 #include "Level/DynamicTiles/DoorLevelTile.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Level/LevelMainCharacter.h"
+#include "Screens/LevelScreen.h"
 #include "World/Trigger.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
@@ -9,6 +10,11 @@
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Door, DoorLevelTile)
 
 bool DoorLevelTile::init(const LevelTileProperties& properties) {
+	if (m_screen->getCharacterCore()->isDoorOpen(dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->id, m_objectID)) {
+		setDisposed();
+		return true;
+	}
+
 	m_isInitiallyCollidable = contains(properties, std::string("collidable"));
 	m_isOnewayLeft = contains(properties, std::string("oneway_left"));
 	m_isOnewayRight = contains(properties, std::string("oneway_right"));
@@ -36,7 +42,6 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&DoorLevelTile::onRightClick, this));
 	addComponent(m_interactComponent);
-
 	return true;
 }
 
@@ -103,6 +108,7 @@ void DoorLevelTile::onRightClick() {
 	else if (m_isOnewayLeft || m_isOnewayRight) {
 		if ((m_isOnewayLeft && getCenter().x > m_mainChar->getCenter().x) ||
 			(m_isOnewayRight && getCenter().x < m_mainChar->getCenter().x)) {
+			m_screen->getCharacterCore()->setDoorOpen(dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->id, m_objectID);
 			open();
 		}
 		else {

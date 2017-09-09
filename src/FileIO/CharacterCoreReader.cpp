@@ -28,6 +28,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ WAYPOINTS_UNLOCKED,  &CharacterCoreReader::readWaypointsUnlocked });
 	m_readMap.insert({ MODIFIERS_UNLOCKED,  &CharacterCoreReader::readModifiersUnlocked });
 	m_readMap.insert({ TRIGGERS_TRIGGERED,  &CharacterCoreReader::readTriggersTriggered });
+	m_readMap.insert({ DOORS_OPEN,  &CharacterCoreReader::readDoorsOpen });
 	m_readMap.insert({ TILES_EXPLORED,  &CharacterCoreReader::readTilesExplored });
 	m_readMap.insert({ QUEST_STATE,  &CharacterCoreReader::readQuestStates });
 	m_readMap.insert({ QUEST_PROGRESS_TARGET,  &CharacterCoreReader::readQuestProgressTargets });
@@ -841,6 +842,14 @@ bool CharacterCoreReader::readTriggersTriggered(std::string& line, CharacterCore
 	std::string id;
 	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.triggersTriggered.insert({ id, layer });
+	return true;
+}
+
+bool CharacterCoreReader::readDoorsOpen(std::string& line, CharacterCoreData& data) const {
+	std::set<int> layer;
+	std::string id;
+	if (!readLevelStateLayer(line, layer, id)) return false;
+	data.doorsOpen.insert({ id, layer });
 	return true;
 }
 

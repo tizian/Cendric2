@@ -98,7 +98,9 @@ public:
 	// signal waypoint unlocked
 	void setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos);
 	// signal trigger triggered
-	void setTriggerTriggered(const std::string& world, int pos);
+	void setTriggerTriggered(const std::string& world, int objectID);
+	// signal door opened
+	void setDoorOpen(const std::string& world, int objectID);
 	// getter for quest data. If there is none for that id, returns nullptr
 	const QuestData* getQuestData(const std::string& questID) const;
 	// getter for number of targets with name "name" killed for quest with id "questID"
@@ -129,6 +131,8 @@ public:
 	bool isEnemyKilled(const std::string& levelID, int objectID) const;
 	// is a enemy in a certain level looted?
 	bool isEnemyLooted(const std::string& levelID, int objectID) const;
+	// was a oneway door already opened?
+	bool isDoorOpen(const std::string& world, int objectID);
 	// was a trigger already triggered?
 	bool isTriggerTriggered(const std::string& world, int triggerID);
 	// returns the amount of items of this key in his inventory and/or equipped. Also works for gold with itemID "gold".

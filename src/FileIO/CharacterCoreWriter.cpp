@@ -46,6 +46,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		savefile << writeWaypointsUnlocked(data);
 		savefile << writeModifiersUnlocked(data);
 		savefile << writeTriggersTriggered(data);
+		savefile << writeDoorsOpen(data);
 		savefile << writeTilesExplored(data);
 		savefile << writeQuestStates(data);
 		savefile << writeQuestProgressTargets(data);
@@ -192,6 +193,22 @@ std::string CharacterCoreWriter::writeTriggersTriggered(const CharacterCoreData&
 		triggersTriggered.append(triggerTriggered);
 	}
 	return triggersTriggered;
+}
+
+std::string CharacterCoreWriter::writeDoorsOpen(const CharacterCoreData& data) const {
+	std::string doorsOpen = "# doors open in world:\n";
+
+	for (auto& it : data.doorsOpen) {
+		std::string doorOpen = std::string(DOORS_OPEN);
+		doorOpen.append(":");
+		doorOpen.append(it.first);
+		for (auto it2 : it.second) {
+			doorOpen.append("," + std::to_string(it2));
+		}
+		doorOpen.append("\n");
+		doorsOpen.append(doorOpen);
+	}
+	return doorsOpen;
 }
 
 std::string CharacterCoreWriter::writeTilesExplored(const CharacterCoreData& data) const {

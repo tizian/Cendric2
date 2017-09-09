@@ -30,6 +30,7 @@ protected:
 	const char* MODIFIERS_UNLOCKED = "modifiers.unlocked";
 	const char* WAYPOINTS_UNLOCKED = "waypoints.unlocked";
 	const char* TRIGGERS_TRIGGERED = "triggers.triggered";
+	const char* DOORS_OPEN = "doors.open";
 	const char* TILES_EXPLORED = "tiles.explored";
 	const char* MERCHANT_STATE = "merchant.state";
 	const char* QUEST_STATE = "quest.state";

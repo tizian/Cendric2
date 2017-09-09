@@ -236,8 +236,12 @@ void CharacterCore::setChestLooted(const std::string& level, int pos) {
 	m_data.chestsLooted.at(level).insert(pos);
 }
 
-void CharacterCore::setTriggerTriggered(const std::string& world, int pos) {
-	m_data.triggersTriggered.at(world).insert(pos);
+void CharacterCore::setTriggerTriggered(const std::string& world, int objectID) {
+	m_data.triggersTriggered.at(world).insert(objectID);
+}
+
+void CharacterCore::setDoorOpen(const std::string& world, int objectID) {
+	m_data.doorsOpen.at(world).insert(objectID);
 }
 
 void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
@@ -399,6 +403,12 @@ bool CharacterCore::isEnemyKilled(const std::string& levelID, int objectID) cons
 bool CharacterCore::isEnemyLooted(const std::string& levelID, int objectID) const {
 	if (!contains(m_data.enemiesLooted, levelID)) return false;
 	if (!contains(m_data.enemiesLooted.at(levelID), objectID)) return false;
+	return true;
+}
+
+bool CharacterCore::isDoorOpen(const std::string& world, int objectID) {
+	if (!contains(m_data.doorsOpen, world)) return false;
+	if (!contains(m_data.doorsOpen.at(world), objectID)) return false;
 	return true;
 }
 

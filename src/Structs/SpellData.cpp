@@ -804,15 +804,15 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.cooldown = sf::seconds(20);
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
 	ghostForm.spellOffset = sf::Vector2f(-20.f, 0.f);
-	ghostForm.activeDuration = sf::seconds(5);
+	ghostForm.activeDuration = sf::seconds(4);
 	ghostForm.duration = ghostForm.activeDuration;
 	ghostForm.speed = 50.f;
 	ghostForm.attachedToMob = true;
 	ghostForm.fightAnimation = GameObjectState::VOID;
-	ghostForm.strength = 10; // additional chop damage
+	ghostForm.strength = 20; // additional physical resistance
 
-	ghostForm.durationModifierAddition = sf::seconds(5);
-	ghostForm.speedModifierAddition = 50.f;
+	ghostForm.durationModifierAddition = sf::seconds(2);
+	ghostForm.speedModifierAddition = 25.f;
 
 	return ghostForm;
 }

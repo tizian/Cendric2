@@ -37,6 +37,7 @@ private:
 	std::string writeWaypointsUnlocked(const CharacterCoreData& data) const;
 	std::string writeModifiersUnlocked(const CharacterCoreData& data) const;
 	std::string writeTriggersTriggered(const CharacterCoreData& data) const;
+	std::string writeDoorsOpen(const CharacterCoreData& data) const;
 	std::string writeTilesExplored(const CharacterCoreData& data) const;
 	std::string writeQuestStates(const CharacterCoreData& data) const;
 	std::string writeMerchantStates(const CharacterCoreData& data) const;
