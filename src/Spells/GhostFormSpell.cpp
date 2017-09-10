@@ -47,8 +47,8 @@ void GhostFormSpell::update(const sf::Time& frameTime) {
 }
 
 void GhostFormSpell::onOwnerDisposed() {
-	setDisposed();
 	m_mob = nullptr;
+	setDisposed();
 }
 
 void GhostFormSpell::setDisposed() {

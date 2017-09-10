@@ -933,7 +933,7 @@
   </object>
   <object id="336" x="1150" y="2012.5" width="100" height="50">
    <properties>
-    <property name="level entry" value="res/level/icecave/icecave.tmx,100,100"/>
+    <property name="level entry" value="res/level/icecave/icecave.tmx,3135,510"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
