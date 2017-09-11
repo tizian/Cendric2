@@ -110,7 +110,6 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	rec.movingParent = nullptr;
 	rec.ignoreOnewayTiles = true;
 	bool collidesY = m_level->collides(rec);
-	setMovingParent(rec.movingParent);
 	if (collidesY) {
 		for (auto& it : *m_level->getDynamicTiles()) {
 			LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
