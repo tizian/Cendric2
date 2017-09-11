@@ -787,6 +787,7 @@
     <property name="collidable" value=""/>
     <property name="key" value="ke_forgottenpassage"/>
     <property name="strength" value="3"/>
+    <property name="width" value="1"/>
    </properties>
   </object>
   <object id="67" gid="828" x="400" y="1775" width="50" height="50">
