@@ -66,7 +66,7 @@ void CheckpointTile::activateMimic() {
 }
 
 void CheckpointTile::onHit(Spell* spell) {
-	if (!m_isMimic || spell->getSpellID() != SpellID::Telekinesis || spell->getSpellID() != SpellID::Chop) return;
+	if (!m_isMimic || (spell->getSpellID() != SpellID::Telekinesis && spell->getSpellID() != SpellID::Chop)) return;
 
 	activateMimic();
 }

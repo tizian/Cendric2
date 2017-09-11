@@ -60,6 +60,8 @@ Haab
 
 "House Theme"
 
+"Lava Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -240,6 +242,8 @@ Haab
 
 "House Theme"
 
+"Lava Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -416,6 +420,8 @@ Haab
 "The Castle of Gandria"
 
 "House Theme"
+
+"Lava Theme"
 
 ---
 

@@ -132,7 +132,7 @@ void Enemy::loadBehavior() {
 }
 
 sf::Time Enemy::getConfiguredWaitingTime() const {
-	return sf::seconds(1.f);
+	return sf::Time::Zero;
 }
 
 sf::Time Enemy::getConfiguredRandomDecisionTime() const {

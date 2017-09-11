@@ -1172,7 +1172,7 @@
     <property name="spritesheetpath" value="res/npc/npc_lloyd/spritesheet_npc_lloyd.png"/>
    </properties>
   </object>
-  <object id="334" gid="2364" x="750" y="225" width="50" height="50">
+  <object id="334" gid="2364" x="800" y="200" width="50" height="50">
    <properties>
     <property name="id" value="npc_graham"/>
    </properties>
