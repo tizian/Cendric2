@@ -102,6 +102,7 @@ CREATE TABLE item_document_quest(
 CREATE TABLE item_food(
 	item_id VARCHAR(50) NOT NULL, 
 	food_duration_s INTEGER NOT NULL,
+    is_drink BOOLEAN NOT NULL DEFAULT FALSE,
 	is_cookable BOOLEAN NOT NULL DEFAULT FALSE,
 	cooked_item_id VARCHAR(50),
 	PRIMARY KEY (item_id),

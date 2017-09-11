@@ -63,7 +63,7 @@ void WolfBoss::loadSpells() {
 	transformBeamSpell.castingTime = sf::seconds(2.f);
 	transformBeamSpell.castingAnimation = GameObjectState::Casting2;
 	transformBeamSpell.fightAnimation = GameObjectState::Fighting2;
-	transformBeamSpell.soundPath = "res/sound/spell/transformbeam.ogg";
+	transformBeamSpell.soundPaths.push_back("res/sound/spell/transformbeam.ogg");
 
 	m_spellManager->addSpell(transformBeamSpell);
 
@@ -79,7 +79,7 @@ void WolfBoss::loadSpells() {
 	windgustSpell.castingAnimation = GameObjectState::Casting3;
 	windgustSpell.fightAnimation = GameObjectState::Fighting3;
 	windgustSpell.strength = 2;
-	windgustSpell.soundPath = "res/sound/spell/windgust.ogg";
+	windgustSpell.soundPaths.push_back("res/sound/spell/windgust.ogg");
 	windgustSpell.isSoundLooping = true;
 
 	m_spellManager->addSpell(windgustSpell);

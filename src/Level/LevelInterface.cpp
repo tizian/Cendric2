@@ -121,6 +121,11 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 	}
 	m_consumedFood[item->getID()] += 1;
 
+	g_resourceManager->playSound(food->is_drink ?
+		GlobalResource::SOUND_GUI_DRINK :
+		GlobalResource::SOUND_GUI_EAT
+	);
+
 	m_screen->notifyItemChange(item->getID(), -1);
 	m_quickSlotBar->reload();
 }

@@ -7,6 +7,7 @@
 struct ItemFoodBean final : DatabaseBean {
 	std::string item_id;
 	sf::Time food_duration;
+	bool is_drink;
 	bool is_cookable;
 	std::string cooked_item_id;
 };

@@ -104,7 +104,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item_desc', 'Milk is good for your bones.', 'Milch ist gut für die Knochen.', 'Milch isch guet für d''Chnoche.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_milk', 'consumable', 500, 50, 6);
 INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical) values ('fo_milk', 2, 2, 5, 3);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_milk', 20);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_milk', 20, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_milk', -7, -20, 35, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_milk', 1, 350, 150, 50, 100);
 
@@ -145,7 +145,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_lesserhealingpotion', 'item_desc', 'Heals small wounds and scratches.','Heilt kleine Wunden und Kratzer.','Heilt chliini Wunde und Chratzer.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_lesserhealingpotion', 'consumable', 200, 450, 10);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_lesserhealingpotion', 10);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_lesserhealingpotion', 5);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_lesserhealingpotion', 5, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_lesserhealingpotion', -15, -4, 20, 46);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_lesserhealingpotion', 1, 100, 100, 50, 50);
 
@@ -155,7 +155,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item_desc', 'Heals most moderate injuries.','Heilt die meisten mittelschweren Verletzungen.','Heilt di meiste mittleschwere Verletzige.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_mediumhealingpotion', 'consumable', 250, 450, 20);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_mediumhealingpotion', 20);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_mediumhealingpotion', 5);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_mediumhealingpotion', 5, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_mediumhealingpotion', -15, -4, 20, 46);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_mediumhealingpotion', 1, 0, 250, 50, 50);
 
@@ -165,7 +165,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_greaterhealingpotion', 'item_desc', 'Heals nearly everything.','Heilt fast alles.','Heilt fascht alles.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_greaterhealingpotion', 'consumable', 300, 450, 30);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_greaterhealingpotion', 30);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_greaterhealingpotion', 5);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_greaterhealingpotion', 5, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_greaterhealingpotion', -15, -4, 20, 46);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_greaterhealingpotion', 1, 100, 250, 50, 50);
 
@@ -175,7 +175,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ultimatehealingpotion', 'item_desc', 'Ultimate healing power!','Ultimative Heilkraft!','Ultimativi Heilchraft!');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_ultimatehealingpotion', 'consumable', 350, 450, 50);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_ultimatehealingpotion', 50);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_ultimatehealingpotion', 5);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_ultimatehealingpotion', 5, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_ultimatehealingpotion', -15, -4, 20, 46);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_ultimatehealingpotion', 1, 150, 250, 50, 50);
 
@@ -243,7 +243,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item_desc', 'Hot and delicious.', 'Heiss und lecker.', 'Heiss und gluschtig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_fishsoup', 'consumable', 400, 100, 5);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_fishsoup', 6, 8);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_fishsoup', 10);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_fishsoup', 10, 1);
 
 -- Raw Fish
 
@@ -255,14 +255,13 @@ INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) va
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rawfish', 0, -30, 50, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rawfish', 1, 50, 200, 50, 100);
 
-
 -- Wine
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item', 'Wine', 'Wein', 'Wii');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item_desc', 'A noble wine.', 'Ein edler Wein.', 'En guete Tropfe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_wine', 'consumable', 400, 50, 10);
 INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_ice, dmg_light, dmg_fire, dmg_shadow) values ('fo_wine', -1, 10, 5, 5, 5, 5);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_wine', 15);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_wine', 15, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_wine', -15, -10, 20, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_wine', 1, 450, 250, 50, 50);
 
@@ -272,7 +271,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item_desc', 'Should be consumed in moderation.', 'Zu viel davon sollte man besser nicht geniessen.', 'Z''viel devo söt me besser nid trinke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_beer', 'consumable', 400, 150, 6);
 INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_physical) values ('fo_beer', -1, 10, 10);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_beer', 10);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_beer', 10, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_beer', -15, -10, 20, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_beer', 1, 600, 100, 50, 50);
 

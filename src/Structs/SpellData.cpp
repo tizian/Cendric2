@@ -315,7 +315,7 @@ SpellData SpellData::getProjectileSpellData() {
 	SpellData projectile;
 	projectile.id = SpellID::Projectile;
 	projectile.spritesheetPath = "res/assets/spells/spritesheet_spell_projectile.png";
-	projectile.soundPath = "res/sound/spell/arrow.ogg";
+	projectile.soundPaths.push_back("res/sound/spell/arrow.ogg");
 	projectile.isSoundLooping = false;
 
 	projectile.cooldown = sf::seconds(1);
@@ -416,7 +416,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.spritesheetPath = "res/assets/spells/spritesheet_spell_fireball.png";
-	fireBall.soundPath = "res/sound/spell/fireball.ogg";
+	fireBall.soundPaths.push_back("res/sound/spell/fireball.ogg");
 	fireBall.iconTextureRect = sf::IntRect(0, 0, 50, 50);
 
 	fireBall.cooldown = sf::seconds(1);
@@ -822,7 +822,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.id = SpellID::ShadowTrap;
 	shadowTrap.spellType = SpellType::Twilight;
 	shadowTrap.spritesheetPath = "res/assets/spells/spritesheet_spell_shadowtrap.png";
-	shadowTrap.soundPath = "res/sound/spell/trap.ogg";
+	shadowTrap.soundPaths.push_back("res/sound/spell/trap.ogg");
 	shadowTrap.isSoundLooping = false;
 	shadowTrap.iconTextureRect = sf::IntRect(50, 50, 50, 50);
 

@@ -118,6 +118,8 @@ public:
 	// sound
 	static const std::string SOUND_GUI_MENUCURSOR;
 	static const std::string SOUND_GUI_PICKUP;
+	static const std::string SOUND_GUI_EAT;
+	static const std::string SOUND_GUI_DRINK;
 	static const std::string SOUND_GUI_OPENWINDOW;
 	static const std::string SOUND_GUI_QUESTPROGRESS;
 	static const std::string SOUND_GUI_NEGATIVE;

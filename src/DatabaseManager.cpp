@@ -368,8 +368,8 @@ ItemFoodBean* DatabaseManager::getItemFoodBean(const std::string& item_id) const
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 4) {
-			g_logger->logError("DatabaseManager::getItemFoodBean", "number of returned columns must be 4");
+		if (cols != 5) {
+			g_logger->logError("DatabaseManager::getItemFoodBean", "number of returned columns must be 5");
 			return bean;
 		}
 
@@ -377,8 +377,9 @@ ItemFoodBean* DatabaseManager::getItemFoodBean(const std::string& item_id) const
 			bean = new ItemFoodBean();
 			bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
 			bean->food_duration = sf::seconds(static_cast<float>(sqlite3_column_int(statement, 1)));
-			bean->is_cookable = sqlite3_column_int(statement, 2) == 1;
-			char* cookedItemId = (char*)sqlite3_column_text(statement, 3);
+			bean->is_drink = sqlite3_column_int(statement, 2) == 1;
+			bean->is_cookable = sqlite3_column_int(statement, 3) == 1;
+			char* cookedItemId = (char*)sqlite3_column_text(statement, 4);
 			if (cookedItemId != nullptr) {
 				bean->cooked_item_id = std::string(cookedItemId);
 			}

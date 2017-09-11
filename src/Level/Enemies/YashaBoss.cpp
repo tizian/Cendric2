@@ -63,7 +63,7 @@ void YashaBoss::loadSpells() {
 	explosionSpell.castingTime = sf::seconds(2.f);
 	explosionSpell.castingAnimation = GameObjectState::Casting;
 	explosionSpell.fightAnimation = GameObjectState::Fighting;
-	explosionSpell.soundPath = "res/sound/spell/transformbeam.ogg";
+	explosionSpell.soundPaths.push_back("res/sound/spell/transformbeam.ogg");
 
 	m_spellManager->addSpell(explosionSpell);
 

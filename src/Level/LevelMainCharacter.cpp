@@ -174,6 +174,9 @@ void LevelMainCharacter::loadWeapon() {
 	// handle chop spell
 	auto const weaponBean = weapon->getBean<ItemWeaponBean>();
 	SpellData chop = SpellData::getSpellData(SpellID::Chop);
+	chop.soundPaths.push_back("res/sound/weapon/swing1.ogg");
+	chop.soundPaths.push_back("res/sound/weapon/swing2.ogg");
+	chop.soundPaths.push_back("res/sound/weapon/swing3.ogg");
 	chop.boundingBox = weaponBean->chop_rect;
 	chop.spellOffset.x = chop.boundingBox.left;
 	chop.spellOffset.y = chop.boundingBox.top;

@@ -51,7 +51,7 @@ void WolfEnemy::loadSpells() {
 	howlSpell.fightingTime = sf::seconds(2.f);
 	howlSpell.activeDuration = sf::seconds(2.f);
 	howlSpell.duration = sf::seconds(5.f);
-	howlSpell.soundPath = "res/sound/mob/wolfhowl.ogg";
+	howlSpell.soundPaths.push_back("res/sound/mob/wolfhowl.ogg");
 
 	m_spellManager->addSpell(howlSpell);
 
@@ -163,5 +163,9 @@ int WolfEnemy::getMentalStrength() const {
 
 std::string WolfEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_wolf.png";
+}
+
+std::string WolfEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/wolf_death.ogg";
 }
 

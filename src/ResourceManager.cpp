@@ -108,6 +108,8 @@ void ResourceManager::init() {
 
 	loadSoundbuffer(GlobalResource::SOUND_GUI_MENUCURSOR, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_PICKUP, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_EAT, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_DRINK, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_OPENWINDOW, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_QUESTPROGRESS, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_NEGATIVE, ResourceType::Global);
