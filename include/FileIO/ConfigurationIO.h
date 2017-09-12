@@ -18,6 +18,7 @@ protected:
 	const char* MAIN_INPUT_MAPPING = "input.main.key";
 	const char* ALTERNATIVE_INPUT_MAPPING = "input.alternative.key";
 	const char* QUICKCAST_ON = "quickcast.on";
+	const char* AUTOTARGET_ON = "autotarget.on";
 	const char* DEBUGMODE_ON = "debugmode.on";
 	const char* DEBUGRENDERING_ON = "debugrendering.on";
 	const char* SMOOTHING_ON = "smoothing.on";

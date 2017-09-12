@@ -22,6 +22,7 @@ private:
 	std::string writeFPSMax(const ConfigurationData& data) const;
 	std::string writeFPSLimitOn(const ConfigurationData& data) const;
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
+	std::string writeAutotargetOn(const ConfigurationData& data) const;
 	std::string writeHintsOn(const ConfigurationData& data) const;
 	std::string writeDamageNumbersOn(const ConfigurationData& data) const;
 

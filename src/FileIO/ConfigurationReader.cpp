@@ -62,6 +62,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 			else if (line.compare(0, strlen(SMOOTHING_ON), string(SMOOTHING_ON)) == 0) {
 				noError = readSmoothingOn(line, data);
 			}
+			else if (line.compare(0, strlen(AUTOTARGET_ON), string(AUTOTARGET_ON)) == 0) {
+				noError = readSmoothingOn(line, data);
+			}
 			else if (line.compare(0, strlen(DISPLAYMODE), string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
 			}
@@ -199,91 +202,39 @@ bool ConfigurationReader::readFPSMax(const std::string& line, ConfigurationData&
 }
 
 bool ConfigurationReader::readSoundOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after sound on tag or no value after colon.");
-		return false;
-	}
-	bool soundOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isSoundOn = soundOn;
-	return true;
+	return readBoolean(line, data.isSoundOn);
 }
 
 bool ConfigurationReader::readFPSLimitOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after fps limit on tag or no value after colon.");
-		return false;
-	}
-	bool fpsLimitOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isFPSLimited = fpsLimitOn;
-	return true;
+	return readBoolean(line, data.isFPSLimited);
 }
 
 bool ConfigurationReader::readQuickcastOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after quickcast on tag or no value after colon.");
-		return false;
-	}
-	bool quickcastOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isQuickcast = quickcastOn;
-	return true;
+	return readBoolean(line, data.isQuickcast);
 }
 
 bool ConfigurationReader::readHintsOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after hints on tag or no value after colon.");
-		return false;
-	}
-	bool hintsOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isDisplayHints = hintsOn;
-	return true;
+	return readBoolean(line, data.isDisplayHints);
 }
 
 bool ConfigurationReader::readDamageNumbersOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after damage numbers on tag or no value after colon.");
-		return false;
-	}
-	bool damageNumbersOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isDisplayDamageNumbers = damageNumbersOn;
-	return true;
+	return readBoolean(line, data.isDisplayDamageNumbers);
 }
 
 bool ConfigurationReader::readDebugModeOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after debug mode on tag or no value after colon.");
-		return false;
-	}
-	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isDebugMode = debugOn;
-	return true;
+	return readBoolean(line, data.isDebugMode);
 }
 
 bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after debug rendering on tag or no value after colon.");
-		return false;
-	}
-	bool debugOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isDebugRendering = debugOn;
-	return true;
+	return readBoolean(line, data.isDebugRendering);
 }
 
 bool ConfigurationReader::readSmoothingOn(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after smoothing on tag or no value after colon.");
-		return false;
-	}
-	bool smoothingOn = (atoi(line.substr(colon + 1).c_str()) != 0);
-	data.isSmoothing = smoothingOn;
-	return true;
+	return readBoolean(line, data.isSmoothing);
+}
+
+bool ConfigurationReader::readAutotargetOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isAutotarget);
 }
 
 bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const {
@@ -333,6 +284,17 @@ bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, C
 		return false;
 	}
 	data.alternativeKeyMap[key] = keyboardKey;
+	return true;
+}
+
+bool ConfigurationReader::readBoolean(const std::string& line, bool& data) const {
+	size_t colon = line.find(':');
+	if (colon == string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after smoothing on tag or no value after colon.");
+		return false;
+	}
+	bool value = (atoi(line.substr(colon + 1).c_str()) != 0);
+	data = value;
 	return true;
 }
 

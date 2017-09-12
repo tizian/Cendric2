@@ -44,6 +44,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ko
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayPiranhas', 'speech','Great ice magic! But there are even more piranhas.','Solide Eismagie! Aber da hat''s noch mehr Piranhas.', 'Solidi Iismagie! Aber do hets na me Piranhas.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTricky', 'speech','Now it''s getting tricky...','Jetzt wird''s knifflig...', 'Jetz wird''s knifflig...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySoon', 'speech','We''re getting closer...','Bald haben wir''s.', 'Bald hemmers.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayLetMe', 'speech','Heh. Let me handle this.','Heh. Das werde ich übernehmen.', 'Heh. Das übernimm ich.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayThere', 'speech','There it is! Let''s get it.','Da ist es! Holen wir''s.', 'Do isches! Holemers.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySpell', 'speech','Perfect. Now a little bit of magic...', 'Perfekt. Jetzt ein wenig Magie...', 'Perfekt. Jetzt es bitzli Magie...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayGotIt', 'speech','Got it. Thank you!', 'Ich hab''s. Danke!', 'Ich hans. Mersi!');

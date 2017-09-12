@@ -14,6 +14,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeLanguage(data);
 		configuration << writeDisplayMode(data);
 		configuration << writeQuickcastOn(data);
+		configuration << writeAutotargetOn(data);
 		configuration << writeHintsOn(data);
 		configuration << writeDamageNumbersOn(data);
 		configuration << writeMainInputMap(data);
@@ -60,6 +61,11 @@ std::string ConfigurationWriter::writeFPSLimitOn(const ConfigurationData& data) 
 std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const {
 	string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
 	return quickcastOn.append(string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeAutotargetOn(const ConfigurationData& data) const {
+	string autotargetOn = "# 0 means autotarget off, 1 means autotarget on\n";
+	return autotargetOn.append(string(AUTOTARGET_ON) + ":" + (data.isAutotarget ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeHintsOn(const ConfigurationData& data) const {

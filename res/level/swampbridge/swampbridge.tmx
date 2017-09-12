@@ -588,8 +588,6 @@
     <property name="type" value="speed"/>
    </properties>
   </object>
-  <object id="136" gid="851" x="1100" y="500" width="50" height="50"/>
-  <object id="137" gid="851" x="1100" y="600" width="50" height="50"/>
   <object id="138" gid="851" x="1100" y="650" width="50" height="50"/>
   <object id="139" gid="851" x="1500" y="750" width="50" height="50"/>
   <object id="141" gid="851" x="1500" y="550" width="50" height="50"/>
@@ -600,7 +598,6 @@
   <object id="146" gid="922" x="950" y="950" width="50" height="50"/>
   <object id="147" gid="962" x="1750" y="850" width="50" height="50"/>
   <object id="148" gid="962" x="700" y="950" width="50" height="50"/>
-  <object id="149" gid="808" x="1350" y="850" width="50" height="50"/>
   <object id="150" gid="793" x="1300" y="850" width="50" height="50"/>
   <object id="151" gid="929" x="1600" y="800" width="50" height="50"/>
   <object id="152" gid="929" x="1750" y="950" width="50" height="50"/>

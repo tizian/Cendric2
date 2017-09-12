@@ -23,6 +23,7 @@ struct ConfigurationData final {
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
 	DisplayMode displayMode;
 	bool isQuickcast;
+	bool isAutotarget;
 	bool isSmoothing;
 	bool isDebugMode;
 	bool isDebugRendering;
@@ -109,6 +110,7 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	{ Key::BackToCheckpoint, sf::Keyboard::KeyCount }
 }),
 DisplayMode::Window,
+true,
 true,
 true,
 false,
