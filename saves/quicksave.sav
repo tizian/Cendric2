@@ -252,7 +252,6 @@ items.looted:res/level/rockfall/rockfall.tmx,419,420,514,517,518,572,894,1006,10
 items.looted:res/level/smallcrypt/smallcrypt.tmx,126,175,186,209,218,245,260,269,353,430,698,757,774,810,1016,1087,1088,1100,1254,1336,1348,1351,1514,1597,1617
 items.looted:res/level/stonegarden/stonegarden.tmx,493,792,793,904,906,1034,1077,1151,1301,1302,1306,1379,1611,1777,1805,1935,2103,2175,2285,2296,2501,2509,2511,2578,2657
 items.looted:res/level/swampbridge/swampbridge.tmx,609,704,763,867,903
-items.looted:res/level/swampforest/swampforest.tmx,492,917,939,1084
 items.looted:res/level/syrahbasement/syrahbasement.tmx,58,64,121,122,179,1018,1021
 items.looted:res/level/well/well.tmx,435,743,744
 items.looted:res/level/yashapuzzle/yasha_death.tmx
@@ -331,7 +330,6 @@ triggers.triggered:res/level/rockfall/rockfall.tmx,82,83,86
 triggers.triggered:res/level/smallcrypt/smallcrypt.tmx
 triggers.triggered:res/level/stonegarden/stonegarden.tmx
 triggers.triggered:res/level/swampbridge/swampbridge.tmx,131
-triggers.triggered:res/level/swampforest/swampforest.tmx,140
 triggers.triggered:res/level/syrahbasement/syrahbasement.tmx
 triggers.triggered:res/level/well/well.tmx
 triggers.triggered:res/level/yashapuzzle/yasha_death.tmx

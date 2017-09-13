@@ -20,3 +20,4 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedKeyPicklock','Is locked! (Key/Picklock needed)','Ist verschlossen! (Schlüssel/Dietrich benötigt)','Da isch abgschlosse! (Brucht en Schlüssel/Dietrich)','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughMaterials','Not enough materials!','Nicht genügend Materialien!','Nid gnueg Mats!','¡No hay suficiente ?!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedOneway','Cannot be opened from this side!','Kann von dieser Seite nicht geöffnet werden!','Cha vo dere Siite nid ufgmacht werde!','¡Está cerrado!');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');

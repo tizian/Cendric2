@@ -110,7 +110,7 @@ void LevelMainCharacter::handleAttackInput() {
 		g_inputController->getCursor().setCursorSkin(cursorSkin);
 	}
 
-	sf::Vector2f target = !isMousePressed && isEnemyTargeted ?
+	sf::Vector2f target = !isMousePressed && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		g_inputController->getMousePosition();

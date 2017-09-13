@@ -29,6 +29,7 @@ private:
 	Checkbox* m_smoothingCheckbox = nullptr;
 	Checkbox* m_displayHintsCheckbox = nullptr;
 	Checkbox* m_displayDamageNumbersCheckbox = nullptr;
+	Checkbox* m_autotargetCheckbox = nullptr;
 	Checkbox* m_vSyncCheckbox = nullptr;
 	Checkbox* m_limitFPSCheckbox = nullptr;
 

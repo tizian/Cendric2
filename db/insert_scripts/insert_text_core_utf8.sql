@@ -4,6 +4,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Allo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Apply','Apply','Anwenden','Awende','Aplicar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('And','and','und','und','y');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Armor','Armour','Rüstung','Rüschtig','Armadura');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back','Back','Zurück','Zrugg','Regresar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint','Regresar al punto de control');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMap','Leave level','Level verlassen','Usem Level gah','Salir del nivel');

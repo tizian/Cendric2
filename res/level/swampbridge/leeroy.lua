@@ -9,6 +9,7 @@ update = function(B, W)
     end
     if (B:getPosX() > 2100) then
         W:addQuestProgress("save_leeroy", "save_leeroy")
+        W:addConditionProgress("npc_leeroy","finished")
         B:say("LeeroyDidIt", 5)
 		B:setMovingTarget(2250, 0)
 		B:wait(5)
@@ -19,6 +20,7 @@ end
 
 onDeath = function(B, W)
     W:changeQuestState("save_leeroy", "failed")
+    W:addConditionProgress("npc_leeroy","finished")
 	B:say("Chicken", 4)
     B:setDisposed()
 end

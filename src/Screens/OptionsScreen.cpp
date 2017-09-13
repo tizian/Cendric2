@@ -100,6 +100,15 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 
 	distFromTop = distFromTop + 50;
 
+	// autotarget
+	m_autotargetCheckbox = new Checkbox();
+	m_autotargetCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_autotargetCheckbox->setChecked(g_resourceManager->getConfiguration().isAutotarget);
+	m_autotargetCheckbox->setText("Autotarget");
+	addObject(m_autotargetCheckbox);
+
+	distFromTop = distFromTop + 50;
+
 	// display hints
 	m_displayHintsCheckbox = new Checkbox();
 	m_displayHintsCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
@@ -116,7 +125,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	m_displayDamageNumbersCheckbox->setText("DisplayDamageNumbers");
 	addObject(m_displayDamageNumbersCheckbox);
 
-	distFromTop = distFromTop + 100;
+	distFromTop = distFromTop + 50;
 
 	// smoothing
 	m_smoothingCheckbox = new Checkbox();
@@ -198,6 +207,7 @@ void OptionsScreen::onApply() {
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
 	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
+	config.isAutotarget = m_autotargetCheckbox->isChecked();
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
 	config.isFPSLimited = m_limitFPSCheckbox->isChecked();

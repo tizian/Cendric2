@@ -184,12 +184,13 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_MapMovableGameObject, renderTarget);
 	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default);
+	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default);
+	renderObjects(GameObjectType::_ForegroundDynamicTile, renderTarget);
 	sf::View adjustedView = renderTarget.getView();
 
 	// Render ambient light level + light sprites to extra buffer	(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(adjustedView);
-	m_renderTexture2.setView(adjustedView);
 	renderObjects(GameObjectType::_Light, m_renderTexture);
 	m_renderTexture.display();
 
@@ -199,25 +200,6 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	m_lightLayerShader.setUniform("lightDimming", m_currentMap.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_lightLayerShader);
-
-	// Clear extra buffer
-	m_renderTexture2.clear(sf::Color(0, 0, 0, 0));
-
-	// Render foreground layer to extra buffer
-	m_currentMap.drawForeground(m_renderTexture2, sf::RenderStates::Default);
-	renderObjects(GameObjectType::_ForegroundDynamicTile, m_renderTexture2);
-	m_renderTexture2.display();
-
-	// Render buffer to window										(Normal foreground rendered on top)
-	m_sprite.setTexture(m_renderTexture2.getTexture());
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite);
-
-	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
-	m_sprite.setTexture(m_renderTexture2.getTexture());
-	m_foregroundLayerShader.setUniform("ambientLevel", m_currentMap.getWeather().ambientDimming);
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);

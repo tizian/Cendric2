@@ -353,11 +353,11 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	flushTexture(renderTarget, m_particleFGRenderTexture, oldView);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
+	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(oldView);
-	m_renderTexture2.setView(oldView);
 	renderObjects(GameObjectType::_Light, m_renderTexture);
 	m_renderTexture.display();
 
@@ -367,24 +367,6 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_lightLayerShader.setUniform("lightDimming", m_currentLevel.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(m_sprite, &m_lightLayerShader);
-
-	// Clear extra buffer
-	m_renderTexture2.clear(sf::Color(0, 0, 0, 0));
-
-	// Render foreground layer to extra buffer
-	m_currentLevel.drawForeground(m_renderTexture2, sf::RenderStates::Default);
-	m_renderTexture2.display();
-
-	// Render buffer to window										(Normal foreground rendered on top)
-	m_sprite.setTexture(m_renderTexture2.getTexture());
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite);
-
-	// Render extra buffer with foreground shader to window			(Ambient light level added on top of foreground)
-	m_sprite.setTexture(m_renderTexture2.getTexture());
-	m_foregroundLayerShader.setUniform("ambientLevel", m_currentLevel.getWeather().ambientDimming);
-	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite, &m_foregroundLayerShader);
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);

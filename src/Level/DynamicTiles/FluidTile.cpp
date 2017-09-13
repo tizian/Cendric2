@@ -12,6 +12,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Fluid, FluidTile)
 
 const float FluidTile::SURFACE_THICKNESS = 4.f;
 const int FluidTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
+const int FluidTile::FREEZING_DAMAGE_PER_S = 10;
 
 FluidTile::FluidTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_isRenderAfterObjects = true;
@@ -184,6 +185,14 @@ void FluidTile::update(const sf::Time& frameTime) {
 	}
 
 	m_ps->update(frameTime);
+
+	// update freezing tiles
+	if (m_data.isFreezing) {
+		if (m_timeUntilDamage == sf::Time::Zero) {
+			m_timeUntilDamage = sf::seconds(1.f);
+		}
+		updateTime(m_timeUntilDamage, frameTime);
+	}
 }
 
 float FluidTile::getHeight(float xPosition) const {
@@ -271,15 +280,19 @@ void FluidTile::onHit(Spell* spell) {
 }
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
+	if (m_data.isDeadly) {
+		mob->setDead();
+	}
+
+	if (m_data.isFreezing && m_timeUntilDamage == sf::Time::Zero) {
+		mob->addDamage(FREEZING_DAMAGE_PER_S, DamageType::Ice, false, false);
+	}
+
 	// don't splash if the mob is deeper than one tile below the surface
 	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
 	if (mob->getBoundingBox()->top + mob->getBoundingBox()->height < getBoundingBox()->top + 2.f) return;
 
 	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f, 0.5f);
-
-	if (m_data.isDeadly) {
-		mob->setDead();
-	}
 }
 
 void FluidTile::checkForMovableTiles() {

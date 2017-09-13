@@ -73,10 +73,13 @@ private:
 	sf::Vector2f* m_emitterSize = nullptr;
 	float* m_particleMinSpeed = nullptr;
 	float* m_particleMaxSpeed = nullptr;
-
+	
+	sf::Time m_timeUntilDamage;
 	std::map<const MovableGameObject*, sf::Sound*> m_soundMap;
 
 public:
 	static const float	SURFACE_THICKNESS;
 	static const int	NUMBER_COLUMNS_PER_SUBTILE;
+	
+	static const int	FREEZING_DAMAGE_PER_S;
 };
