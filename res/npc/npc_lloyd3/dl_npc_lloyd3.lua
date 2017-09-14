@@ -11,17 +11,17 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_lloyd3", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Lloyd_Talk") -- Ah, what a coincidence. I was looking for you.
+		DL:createNPCNode(1, 2, "DL_Lloyd_Talk") -- Here you are. I was looking for you.
 		DL:addConditionProgress("npc_lloyd3", "talked")
 		DL:changeQuestState("further_investigation", "completed")
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 3, "DL_Lloyd_Talk2") -- It's good that you made it through that passage - at least one of you.
+		DL:createNPCNode(2, 3, "DL_Lloyd_Talk2") -- One of Inina's guards just returned and told me about that secret passage. But - much more urgent now - he returned without her! 
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Lloyd_Talk3") -- I don't think you already know it, but Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
+		DL:createNPCNode(3, -2, "DL_Lloyd_Talk3") -- Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
 		DL:addNode()
 
 	end

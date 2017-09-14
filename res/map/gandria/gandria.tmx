@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="335">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="336">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -776,11 +776,6 @@
   <object id="321" gid="2376" x="3550" y="2850" width="50" height="50"/>
   <object id="322" gid="2376" x="3450" y="2350" width="50" height="50"/>
   <object id="323" gid="2376" x="3250" y="450" width="50" height="50"/>
-  <object id="233" gid="2379" x="950" y="1100" width="50" height="50">
-   <properties>
-    <property name="conditions" value="default,castle_open"/>
-   </properties>
-  </object>
   <object id="239" gid="2399" x="1900" y="2545" width="50" height="50">
    <properties>
     <property name="conditions" value="npc_helena,old_things"/>
@@ -822,8 +817,13 @@
    </properties>
   </object>
   <object id="327" gid="2376" x="675" y="225" width="50" height="50"/>
+  <object id="335" gid="2379" x="950" y="1100" width="50" height="50">
+   <properties>
+    <property name="conditions" value="default,castle_open"/>
+   </properties>
+  </object>
  </objectgroup>
- <layer name="collidable" width="80" height="70">
+ <layer name="collidable" width="80" height="70" visible="0">
   <data encoding="csv">
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,
@@ -1040,13 +1040,13 @@
   </object>
   <object id="331" x="950" y="200" width="50" height="50">
    <properties>
-    <property name="level entry" value="res/level/castlegardens/castlegardens.tmx,860,760"/>
+    <property name="level entry" value="res/level/castlegarden/castlegarden.tmx,210,1160"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="332" x="1050" y="650" width="100" height="25">
    <properties>
-    <property name="level entry" value="res/level/castlegardens/castlegardens.tmx,860,760"/>
+    <property name="level entry" value="res/level/castlegarden/castlegarden.tmx,2710,1160"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

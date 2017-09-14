@@ -28,9 +28,9 @@ npc.id:npc_lloyd3
 	trigger:DL:changeQuestState("further_investigation", "completed")
 	# translation: 
 	translation.tag:DL_Lloyd_Talk
-	translation.en:Ah, what a coincidence. I was looking for you.
-	translation.de:Ah, was für ein Zufall. Nach dir habe ich gerade gesucht.
-	translation.ch:Ah, was füren Zuefall. Noch dir hani grad gsuecht.
+	translation.en:Here you are. I was looking for you.
+	translation.de:Da bist du also. Nach dir habe ich gerade gesucht.
+	translation.ch:Do bisch also. Noch dir hani grad gsuecht.
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -42,9 +42,9 @@ npc.id:npc_lloyd3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lloyd_Talk2
-	translation.en:It's good that you made it through that passage - at least one of you.
-	translation.de:Es ist gut, hast du es durch diesen Durchgang geschafft - wenigstens einer von euch.
-	translation.ch:Isch guet, dass du's dur de Durchgang gschafft hesch - wenigstens eine vo eu.
+	translation.en:One of Inina's guards just returned and told me about that secret passage. But - much more urgent now - he returned without her! 
+	translation.de:Eine Wache von Inina ist gerade zurückgekehrt und hat mir von diesem geheimen Durchgang erzählt. Doch, viel wichtiger ist, dass er ohne sie zurückgekommen ist!
+	translation.ch:E Wach vode Inina isch gradd zruggcho und het mer vo dem gheime Durchgang verzellt. Aber, viel wichtiger isch, daser ohni si zruggcho isch!
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -56,9 +56,9 @@ npc.id:npc_lloyd3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lloyd_Talk3
-	translation.en:I don't think you already know it, but Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
-	translation.de:Ich denke nicht, dass du es bereits weisst: Inina wurde entführt, während du die Kanalisation erkundet hast. Du hättest sie nicht alleine lassen dürfen!
-	translation.ch:Ich denk nid, dases scho weisch: D'Inina isch entführt worde, während du d'Kanalisation erkundet hesch! Du hetsch si nid elei loh dörfe.
+	translation.en:Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
+	translation.de:Inina wurde entführt, während du die Kanalisation erkundet hast. Du hättest sie nicht alleine lassen dürfen!
+	translation.ch:D'Inina isch entführt worde, während du d'Kanalisation erkundet hesch! Du hetsch si nid elei loh dörfe.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -103,6 +103,8 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item', 'Graham''s Dulcimer','Graham''s Dulcimer', 'Em Graham sini Dulcimer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item_desc', 'What a beautiful instrument! It belongs to the bard Graham.','Was für ein schönes Instrument! Es gehört dem Barden Graham.','Was füres schöns Instrument! Es ghört em Bard Graham.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_dulcimer', 'quest', 800, 200, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_dulcimer', 0, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_dulcimer', 1, 550, 350, 50, 50);
 
 -- Frying Pan
 

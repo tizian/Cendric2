@@ -16,5 +16,6 @@ loadRoutine = function(R, W)
     R:wait(7000)
     R:goToTile(16, 3.5)
     R:goToTile(16, 2.75)
+    R:setFacingDown()
 
 end	

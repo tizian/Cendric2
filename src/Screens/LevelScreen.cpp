@@ -350,8 +350,8 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	flushTexture(renderTarget, m_particleFGRenderTexture, oldView);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
+	flushTexture(renderTarget, m_particleFGRenderTexture, oldView);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default);
 
