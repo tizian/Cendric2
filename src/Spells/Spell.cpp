@@ -22,6 +22,7 @@ void Spell::load(const SpellData& data, LevelDynamicTile* tile, const sf::Vector
 }
 
 void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f& target) {
+	m_isAlwaysUpdate = true;
 	m_data = data;
 	setBoundingBox(data.boundingBox);
 	setDebugBoundingBox(COLOR_BAD);
