@@ -55,7 +55,6 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 	float distance = dist(getCenter(), m_mainChar->getPosition());
 	if (distance <= WINDOW_WIDTH) {
 		float scale = 1.f - distance / WINDOW_WIDTH;
-		
 	}
 
 	// if it is attached to mob, its velocity is ignored 

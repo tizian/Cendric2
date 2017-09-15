@@ -30,10 +30,11 @@ void WindGustSpell::setPosition(const sf::Vector2f& pos) {
 
 void WindGustSpell::execOnHit(LevelMovableGameObject* target) {
 	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
-		if (enemy->getMentalStrength() < m_data.ccStrength) {
-			enemy->addAccelerationX(4 * m_pushAcceleration);
+		if (enemy->getMentalStrength() >= m_data.ccStrength) {
+			return;
 		}
 	}
+	target->addAccelerationX(4 * m_pushAcceleration);
 }
 
 bool WindGustSpell::getConfiguredRotateSprite() const {

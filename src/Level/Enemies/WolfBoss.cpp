@@ -78,7 +78,7 @@ void WolfBoss::loadSpells() {
 	windgustSpell.castingTime = sf::seconds(1.f);
 	windgustSpell.castingAnimation = GameObjectState::Casting3;
 	windgustSpell.fightAnimation = GameObjectState::Fighting3;
-	windgustSpell.strength = 2;
+	windgustSpell.strength = 3;
 	windgustSpell.soundPaths.push_back("res/sound/spell/windgust.ogg");
 	windgustSpell.isSoundLooping = true;
 
