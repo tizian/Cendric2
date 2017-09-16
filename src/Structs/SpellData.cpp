@@ -301,7 +301,7 @@ SpellData SpellData::getChopSpellData() {
 	chop.cooldown = sf::milliseconds(400);
 	chop.boundingBox = sf::FloatRect(0, 0, 40, 80);
 	chop.damageType = DamageType::Physical;
-	chop.damage = 3;
+	chop.damage = 1;
 	chop.activeDuration = sf::milliseconds(320);
 	chop.attachedToMob = true;
 	chop.isDynamicTileEffect = true;
@@ -424,11 +424,11 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.divergenceAngle = 0.2f;
 	fireBall.damageType = DamageType::Fire;
 	fireBall.activeDuration = sf::seconds(5);
-	fireBall.damagePerSecond = 2;
+	fireBall.damagePerSecond = 1;
 	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
 	fireBall.isDynamicTileEffect = true;
-	fireBall.damage = 15;
+	fireBall.damage = 10;
 	fireBall.speed = 300.f;
 
 	fireBall.countModifierAddition = 1;
@@ -469,12 +469,12 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.spritesheetPath = "res/assets/spells/spritesheet_spell_divineshield.png";
 	divineShield.iconTextureRect = sf::IntRect(100, 150, 50, 50);
 
-	divineShield.cooldown = sf::milliseconds(10000);
+	divineShield.cooldown = sf::seconds(20);
 	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	divineShield.spellOffset = sf::Vector2f(-49.f, 0.f);
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
-	divineShield.heal = 30;
+	divineShield.heal = 10;
 	divineShield.attachedToMob = true;
 	divineShield.fightAnimation = GameObjectState::VOID;
 
@@ -610,7 +610,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.attachedToMob = true;
 	windGust.isDynamicTileEffect = true;
 	windGust.damageType = DamageType::Ice;
-	windGust.damagePerSecond = 8;
+	windGust.damagePerSecond = 3;
 	windGust.ccStrength = 1;
 	windGust.strength = 1;
 
@@ -632,7 +632,8 @@ SpellData SpellData::getLeechSpellData() {
 	leech.damageType = DamageType::Shadow;
 	leech.activeDuration = sf::seconds(5);
 	leech.needsTarget = true;
-	leech.damage = 15;
+	leech.damage = 10;
+	leech.heal = 5;
 	leech.speed = 150.f;
 
 	leech.countModifierAddition = 1;
@@ -657,7 +658,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.activeDuration = sf::seconds(icyAmbush.range / icyAmbush.speed);
 	icyAmbush.duration = sf::seconds(1.5f); // stun duration;
 	icyAmbush.needsTarget = true;
-	icyAmbush.damage = 100;
+	icyAmbush.damage = 20;
 	icyAmbush.isStunning = true;
 	icyAmbush.ccStrength = 1;
 	
@@ -679,7 +680,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.damageType = DamageType::Light;
 	flash.activeDuration = sf::seconds(2.0);
 	flash.attachedToMob = true;
-	flash.damage = 20;
+	flash.damage = 10;
 	flash.range = 150.f;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
 	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
@@ -721,7 +722,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.cooldown = sf::seconds(10);
 	holyFire.range = 100.f;
 	holyFire.boundingBox = sf::FloatRect(0, 0, 2 * holyFire.range, 2 * holyFire.range);
-	holyFire.damagePerSecond = 10;
+	holyFire.damagePerSecond = 5;
 	holyFire.damageType = DamageType::Light;
 	holyFire.duration = sf::seconds(2);
 	holyFire.activeDuration = sf::seconds(3);
@@ -809,7 +810,7 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.speed = 50.f;
 	ghostForm.attachedToMob = true;
 	ghostForm.fightAnimation = GameObjectState::VOID;
-	ghostForm.strength = 20; // additional physical resistance
+	ghostForm.strength = 40; // additional physical resistance
 
 	ghostForm.durationModifierAddition = sf::seconds(2);
 	ghostForm.speedModifierAddition = 25.f;
@@ -832,7 +833,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
-	shadowTrap.damagePerSecond = 10;
+	shadowTrap.damagePerSecond = 8;
 	shadowTrap.duration = sf::seconds(3);
 	shadowTrap.isStunning = true;
 	shadowTrap.ccStrength = 1;
