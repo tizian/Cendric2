@@ -43,7 +43,7 @@ YashaBoss::YashaBoss(const Level* level, Screen* screen) :
 }
 
 void YashaBoss::loadAttributes() {
-	m_attributes.setHealth(2000);
+	m_attributes.setHealth(1000);
 	m_attributes.resistanceFire = 10000;
 	m_attributes.resistancePhysical = 50;
 	m_attributes.critical = 0;

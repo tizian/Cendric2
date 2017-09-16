@@ -27,7 +27,7 @@ ElysiaFledglingEnemy::ElysiaFledglingEnemy(const Level* level, Screen* screen) :
 }
 
 void ElysiaFledglingEnemy::loadAttributes() {
-	m_attributes.setHealth(100);
+	m_attributes.setHealth(80);
 	m_attributes.resistanceFire = -10;
 	m_attributes.resistanceIce = 1000;
 	m_attributes.resistancePhysical = 200;

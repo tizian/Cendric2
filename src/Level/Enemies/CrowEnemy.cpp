@@ -24,7 +24,7 @@ CrowEnemy::CrowEnemy(const Level* level, Screen* screen) :
 }
 
 void CrowEnemy::loadAttributes() {
-	m_attributes.setHealth(200);
+	m_attributes.setHealth(100);
 	m_attributes.resistancePhysical = 10;
 	m_attributes.resistanceFire = 100;
 	m_attributes.critical = 10;

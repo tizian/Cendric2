@@ -31,7 +31,7 @@ void MorgianaBoss::update(const sf::Time& frameTime) {
 }
 
 void MorgianaBoss::loadAttributes() {
-	m_attributes.setHealth(500);
+	m_attributes.setHealth(400);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistanceLight = -20;
 	m_attributes.resistanceShadow = -20;

@@ -25,7 +25,7 @@ SkeletonWarriorEnemy::SkeletonWarriorEnemy(const Level* level, Screen* screen) :
 }
 
 void SkeletonWarriorEnemy::loadAttributes() {
-	m_attributes.setHealth(150);
+	m_attributes.setHealth(100);
 	m_attributes.resistanceFire = 50;
 	m_attributes.resistanceShadow = 50;
 	m_attributes.resistancePhysical = 50;

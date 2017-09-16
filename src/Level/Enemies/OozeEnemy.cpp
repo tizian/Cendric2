@@ -20,7 +20,7 @@ OozeEnemy::OozeEnemy(const Level* level, Screen* screen) :
 }
 
 void OozeEnemy::loadAttributes() {
-	m_attributes.setHealth(50);
+	m_attributes.setHealth(40);
 	m_attributes.resistancePhysical = 100;
 	m_attributes.resistanceIce = m_skinNr == 0 ? 10 : -50;
 	m_attributes.resistanceFire = m_skinNr == 0 ? -20 : 1000;

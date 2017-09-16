@@ -208,6 +208,7 @@ void CharacterCore::initializeLevelMaps(const std::string& level) {
 	m_data.itemsLooted.insert({ level, std::set<int>() });
 	m_data.chestsLooted.insert({ level, std::set<int>() });
 	m_data.triggersTriggered.insert({ level, std::set<int>() });
+	m_data.doorsOpen.insert({ level, std::set<int>() });
 }
 
 void CharacterCore::initializeMapMaps(const std::string& map) {

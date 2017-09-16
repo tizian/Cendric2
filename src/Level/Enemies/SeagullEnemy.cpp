@@ -28,7 +28,7 @@ SeagullEnemy::SeagullEnemy(const Level* level, Screen* screen) :
 }
 
 void SeagullEnemy::loadAttributes() {
-	m_attributes.setHealth(30);
+	m_attributes.setHealth(20);
 	m_attributes.calculateAttributes();
 }
 

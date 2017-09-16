@@ -47,11 +47,11 @@ void BookEnemy::onHit(Spell* spell) {
 
 void BookEnemy::loadAttributes() {
 	m_attributes.setHealth(30);
-	m_attributes.resistancePhysical = 5;
-	m_attributes.resistanceIce = 10;
-	m_attributes.resistanceShadow = 10;
-	m_attributes.resistanceLight = 10;
-	m_attributes.resistanceFire = -15;
+	m_attributes.resistancePhysical = 50;
+	m_attributes.resistanceIce = 100;
+	m_attributes.resistanceShadow = 100;
+	m_attributes.resistanceLight = 100;
+	m_attributes.resistanceFire = -100;
 	m_attributes.calculateAttributes();
 }
 

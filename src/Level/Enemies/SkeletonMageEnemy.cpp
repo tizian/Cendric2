@@ -25,7 +25,7 @@ SkeletonMageEnemy::SkeletonMageEnemy(const Level* level, Screen* screen) :
 }
 
 void SkeletonMageEnemy::loadAttributes() {
-	m_attributes.setHealth(100);
+	m_attributes.setHealth(60);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.resistanceLight = 30;

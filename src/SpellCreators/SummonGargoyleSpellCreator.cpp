@@ -21,7 +21,7 @@ void SummonGargoyleSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	}
 
 	GargoyleEnemy* gargoyle = new GargoyleEnemy(m_level, m_screen);
-	gargoyle->setSummoned(m_spellData.ccStrength, m_spellData.damage, m_spellData.count, m_spellData.duration);
+	gargoyle->setSummoned(m_spellData.ccStrength, m_spellData.count, m_spellData.duration);
 	gargoyle->setPosition(m_owner->getPosition());
 	m_screen->addObject(gargoyle);
 }

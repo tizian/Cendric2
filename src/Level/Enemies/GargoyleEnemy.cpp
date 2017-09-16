@@ -28,11 +28,10 @@ void GargoyleEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 }
 
-void GargoyleEnemy::setSummoned(int strength, int damage, int count, const sf::Time& ttl) {
+void GargoyleEnemy::setSummoned(int strength, int count, const sf::Time& ttl) {
 	m_isSummoned = true;
 	m_spellStrength = strength;
 	m_spellCount = count;
-	m_spellAdditionalDamage = damage;
 	loadSpells();
 	loadAnimation(m_spellStrength - 1);
 	setAlly(ttl);
@@ -40,11 +39,11 @@ void GargoyleEnemy::setSummoned(int strength, int damage, int count, const sf::T
 
 void GargoyleEnemy::loadAttributes() {
 	m_attributes.setHealth(500);
-	m_attributes.resistancePhysical = 40;
-	m_attributes.resistanceFire = 30;
-	m_attributes.resistanceLight = -10;
-	m_attributes.resistanceIce = 30;
-	m_attributes.resistanceShadow = -10;
+	m_attributes.resistancePhysical = 400;
+	m_attributes.resistanceFire = 200;
+	m_attributes.resistanceLight = -50;
+	m_attributes.resistanceIce = 200;
+	m_attributes.resistanceShadow = -50;
 	m_attributes.calculateAttributes();
 }
 
@@ -52,10 +51,10 @@ void GargoyleEnemy::loadSpells() {
 	m_spellManager->clearSpells();
 
 	SpellData fireBallSpell = SpellData::getSpellData(SpellID::FireBall);
-	fireBallSpell.damage = 30 + m_spellAdditionalDamage / 2;
-	fireBallSpell.damagePerSecond = 10 + m_spellAdditionalDamage / 2;
+	fireBallSpell.damage = 20;
+	fireBallSpell.damagePerSecond = 10;
 	fireBallSpell.duration = sf::seconds(1.f);
-	fireBallSpell.cooldown = sf::seconds(1.f);
+	fireBallSpell.cooldown = sf::seconds(m_isSummoned? 3.f : 1.f);
 	fireBallSpell.speed = 300.f;
 	fireBallSpell.count = m_spellCount;
 	fireBallSpell.isStunning = true;

@@ -27,7 +27,7 @@ public:
 
 	// called from the spell that summons this gargoyle.
 	// the parameters are set by the spell.
-	void setSummoned(int strength, int damage, int count, const sf::Time& ttl);
+	void setSummoned(int strength, int count, const sf::Time& ttl);
 	bool isSummoned() const;
 
 protected:
@@ -40,7 +40,6 @@ protected:
 	void loadAnimation(int skinNr) override;
 
 	int m_spellStrength = 1;
-	int m_spellAdditionalDamage = 0;
 	int m_spellCount = 1;
 	bool m_isSummoned = false;
 	int m_maxSpell = 0;

@@ -84,7 +84,7 @@ void YashaBossAdd::setBoss(LevelMovableGameObject* boss) {
 }
 
 void YashaBossAdd::loadAttributes() {
-	m_attributes.setHealth(100);
+	m_attributes.setHealth(60);
 	m_attributes.calculateAttributes();
 }
 

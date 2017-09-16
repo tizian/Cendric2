@@ -25,7 +25,7 @@ WolfEnemy::WolfEnemy(const Level* level, Screen* screen) :
 }
 
 void WolfEnemy::loadAttributes() {
-	m_attributes.setHealth(60);
+	m_attributes.setHealth(50);
 	m_attributes.resistancePhysical = 10;
 	m_attributes.calculateAttributes();
 }

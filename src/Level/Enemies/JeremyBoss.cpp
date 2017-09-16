@@ -52,7 +52,7 @@ void JeremyBoss::setDead() {
 }
 
 void JeremyBoss::loadAttributes() {
-	m_attributes.setHealth(300);
+	m_attributes.setHealth(200);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistanceLight = -20;
 	m_attributes.resistanceFire = 50;

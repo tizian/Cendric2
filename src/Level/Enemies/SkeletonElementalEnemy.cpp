@@ -25,7 +25,7 @@ SkeletonElementalEnemy::SkeletonElementalEnemy(const Level* level, Screen* scree
 }
 
 void SkeletonElementalEnemy::loadAttributes() {
-	m_attributes.setHealth(200);
+	m_attributes.setHealth(150);
 	m_attributes.resistanceFire = 30;
 	m_attributes.resistanceShadow = 30;
 	m_attributes.resistanceLight = 30;
