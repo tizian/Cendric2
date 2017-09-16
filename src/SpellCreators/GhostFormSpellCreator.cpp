@@ -26,7 +26,7 @@ void GhostFormSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 }
 
 void GhostFormSpellCreator::addStrengthModifier(int level) {
-	m_spellData.strength += level * 10;
+	m_spellData.strength += level * 20;
 }
 
 void GhostFormSpellCreator::addDurationModifier(int level) {

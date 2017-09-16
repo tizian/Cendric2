@@ -1,8 +1,8 @@
 #include "SpellCreators/DivineShieldSpellCreator.h"
 #include "Screens/LevelScreen.h"
 
-DivineShieldSpellCreator::DivineShieldSpellCreator(const SpellData& spellData, LevelMovableGameObject *owner) : SpellCreator(spellData, owner) {
-	m_additionalResistance = 10;
+DivineShieldSpellCreator::DivineShieldSpellCreator(const SpellData& spellData, LevelMovableGameObject* owner) : SpellCreator(spellData, owner) {
+	m_additionalResistance = 40;
 }
 
 int DivineShieldSpellCreator::getStrengthModifierValue() const {
@@ -31,8 +31,8 @@ void DivineShieldSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 }
 
 void DivineShieldSpellCreator::addStrengthModifier(int level) {
-	m_spellData.heal += 10 * level;
-	m_additionalResistance += 10 * level;
+	m_spellData.heal += 3 * level;
+	m_additionalResistance += 20 * level;
 }
 
 void DivineShieldSpellCreator::addDurationModifier(int level) {
