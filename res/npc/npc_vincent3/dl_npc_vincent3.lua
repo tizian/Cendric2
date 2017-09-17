@@ -172,6 +172,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("yasha_thief", "started") and DL:isQuestComplete("yasha_thief")) then 
 			DL:addChoice(35, "DL_Choice_YashaComplete") -- I found the heart of thunder.
 		end
+		if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_vincent3", "velius_found")) then 
+			DL:addChoice(41, "DL_Choice_VeliusFound") -- I found this letter from Koray... (show letter)
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -306,6 +309,26 @@ loadDialogue = function(DL)
 			DL:createNPCNode(36, -2, "DL_Vincent_YashaComplete2") -- I always knew that you'd make great thief - eh, twilight mage. Enjoy your newly gained powers.
 			DL:changeQuestState("yasha_thief", "completed")
 			DL:addReputationProgress("thief", 10)
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_vincent3", "velius_found")) then 
+
+			DL:createCendricNode(41, 42, "DL_Cendric_VeliusFound") -- He was abducted by some mage named Velius alongside with some other mages. I have to go to the crypt in Gandria and find out more.
+			DL:addNode()
+
+
+			DL:createNPCNode(42, 43, "DL_Vincent_VeliusFound") -- Velius? I know a mage named Velius. We did business with him. 
+			DL:addConditionProgress("npc_vincent3", "velius_found")
+			DL:addNode()
+
+
+			DL:createNPCNode(43, 44, "DL_Vincent_VeliusFound2") -- He often wanted potions... or rumours. Still, he's not the kind of guy who abducts people.
+			DL:addNode()
+
+
+			DL:createNPCNode(44, -2, "DL_Vincent_VeliusFound3") -- But you should definitely follow the trace and go into that crypt. Good luck!
 			DL:addNode()
 
 		end

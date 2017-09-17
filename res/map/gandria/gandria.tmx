@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="336">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="337">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -1175,6 +1175,13 @@
   <object id="334" gid="2364" x="800" y="200" width="50" height="50">
    <properties>
     <property name="id" value="npc_graham"/>
+   </properties>
+  </object>
+  <object id="336" gid="2323" x="2250" y="400" width="50" height="50">
+   <properties>
+    <property name="dialoguetexture" value="res/npc/npc_jonathan/npc_jonathan.png"/>
+    <property name="id" value="npc_jonathan3"/>
+    <property name="spritesheetpath" value="res/npc/npc_jonathan/spritesheet_npc_jonathan.png"/>
    </properties>
   </object>
  </objectgroup>

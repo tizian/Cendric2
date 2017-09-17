@@ -486,6 +486,16 @@ npc.id:npc_luiz
 	]
 	[
 		# Link node, tag is next tag
+		tag:46
+		condition:DL:isQuestState("missing_bob", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_bob",1) and not DL:isConditionFulfilled("npc_luiz", "velius_found")
+		# translation: 
+		translation.tag:DL_Choice_FoundVelius
+		translation.en:I found this letter from Bob... (show letter)
+		translation.de:Ich habe diesen Brief von Bob gefunde... (Brief zeigen)
+		translation.ch:Ich ha de Brief vom Bob gfunde... (Brief zeige)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -857,6 +867,49 @@ npc.id:npc_luiz
 	translation.en:Use its powers wisely, necromancer.
 	translation.de:Gebrauche ihre Kraft weise, Nekromant.
 	translation.ch:Bruch ihri Chräft gschiid, Nekromant.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [46] Cendric Node
+	tag:46
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FoundVelius
+	translation.en:A mage named Velius abducted him along with other mages. I need to go to the crypt of Gandria and find out more.
+	translation.de:Ein Magier namens Velius hat ihn zusammen mit anderen Magiern entführt. Ich muss in die Krypta von Gandria gehen und mehr herausfinden.
+	translation.ch:En Magier namens Velius het en zeme mit anderne Magier entführt. Ich mun id Krypta vo Gandria go und me usefinde.
+	[
+		# Link node, tag is next tag
+		tag:47
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_luiz", "velius_found")
+	# translation: 
+	translation.tag:DL_Luiz_FoundVelius
+	translation.en:Hm. Very interesting. I know a mage named Velius, he studied with me a long time ago.
+	translation.de:Hm. Sehr interessant. Ich kenne einen Magier namens Velius, er studierte mit mir vor langer Zeit.
+	translation.ch:Hm. Sehr interessant. Ich kenn en Magier namens Velius, er het mit mir vor langer Ziit studiert.
+	[
+		# Link node, tag is next tag
+		tag:48
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Luiz_FoundVelius2
+	translation.en:He, abducting mages... I don't know. That doesn't fit him. But you should go into the crypt and find out more.
+	translation.de:Aber Magier entführen passt nicht zu ihm. Du solltest aber in die Krypta und mehr herausfinden.
+	translation.ch:Er... und Magier entführe... Ich weiss nid. Das passt nid zu ihm. Aber du sötsch i die Krypta go und me usefinde.
 	[
 		# Link node, tag is next tag
 		tag:-2

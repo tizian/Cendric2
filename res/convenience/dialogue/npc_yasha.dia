@@ -524,7 +524,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound2
 	translation.en:My only purpose was to keep intruders from finding the secrets of the library. I failed.
 	translation.de:Meine einzige Aufgabe war es, Eindringlinge davon abzuhalten, die Geheimnisse der Bibliothek zu finden. Ich habe versagt.
-	translation.ch:Mini einzig Ufgab isch gsi, Iidringling devo abzhalte, d'Gheimnis vode Bibliothek z'finde. Ich ha gfailt.
+	translation.ch:Mini einzig Ufgab isch gsi, Iidringling devo abzhalte, d'Gheimnis vode Bibliothek z'finde. Ich ha verseit.
 	[
 		# Link node, tag is next tag
 		tag:28

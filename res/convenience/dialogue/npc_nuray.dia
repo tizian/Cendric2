@@ -116,6 +116,16 @@ npc.id:npc_nuray
 	]
 	[
 		# Link node, tag is next tag
+		tag:11
+		condition:DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_nuray", "velius_found")
+		# translation: 
+		translation.tag:DL_Choice_VeliusFound
+		translation.en:Your brother was abducted by some mage named Velius.
+		translation.de:Dein Bruder wurde von einem Magier namens Velius entführt.
+		translation.ch:Din Brüeder isch vomne Magier namens Velius entführt worde.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -200,6 +210,21 @@ npc.id:npc_nuray
 	translation.en:Just ask him how much his monocle costs and he'll know what's up.
 	translation.de:Frag ihn einfach wie viel sein Monokel kostet und er weiss, was du möchtest.
 	translation.ch:Frög in eifach wevil sis Monokel chostet und er weiss was Sach isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_nuray","velius_found")
+	# translation: 
+	translation.tag:DL_Nuray_VeliusFound
+	translation.en:What?! Damn mages! Go and find him!
+	translation.de:Was?! Verdammte Magier! Geh und finde ihn!
+	translation.ch:Was?! Verdammti Magier! Gang und finden!
 	[
 		# Link node, tag is next tag
 		tag:-2

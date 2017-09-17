@@ -19,11 +19,12 @@ npc.id:npc_graham
 	# [1] NPC Node
 	tag:1
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_graham", "talked")
 	# translation: 
-	translation.tag:DL_NPC_1
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Graham_Hey
+	translation.en:Oh, hello! You really came from that creepy cave? You know that it's forbidden to go there?
+	translation.de:Oh, hallo! Du bist wirklich aus dieser unheimlichen Höhle gekommen? Du weisst schon, dass es verboten ist, hineinzugehen?
+	translation.ch:Oh, hallo! Du bisch würkli us dere unheimliche Höhli cho? Du weisch scho, dasses verbote isch, det ie z'go?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -35,20 +36,62 @@ npc.id:npc_graham
 	[
 		# Link node, tag is next tag
 		tag:3
+		condition:not DL:isConditionFulfilled("npc_graham", "who_are_you")
 		# translation: 
-		translation.tag:
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_graham", "forbidden_cave")
+		# translation: 
+		translation.tag:DL_Choice_ForbiddenCave
 		translation.en:
 		translation.de:
 		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:12
+		condition:DL:isConditionFulfilled("npc_graham", "who_are_you") and not DL:isConditionFulfilled("npc_graham", "king")
 		# translation: 
-		translation.tag:DL_Choice_-2
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_King
+		translation.en:A royal bard? So do you know the king?
+		translation.de:Ein königlicher Barde? Kennst du denn den König?
+		translation.ch:En königliche Bard? Kennsch also de König?
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:not DL:isConditionFulfilled("npc_graham", "velius") and DL:isQuestDescriptionUnlocked("find_velius",3)
+		# translation: 
+		translation.tag:DL_Choice_Velius
+		translation.en:Do you know someone called "Velius"?
+		translation.de:Sagt dir der Name "Velius" etwas?
+		translation.ch:Seit der de Name "Velius" öppis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:isQuestState("grahams_dulcimer", "void")
+		# translation: 
+		translation.tag:DL_Choice_WhatDoing
+		translation.en:What are you doing here?
+		translation.de:Was machst du hier?
+		translation.ch:Wa machsch du do?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isQuestState("grahams_dulcimer", "started") and DL:isQuestComplete("grahams_dulcimer")
+		# translation: 
+		translation.tag:DL_Choice_GotDulcimer
+		translation.en:I found your instrument. On a tree.
+		translation.de:Ich habe dein Instrument gefunden. Auf einem Baum.
+		translation.ch:Ich ha dis Instrument gfunde. Imne Baum.
 	]
 	[
 		# Link node, tag is next tag
@@ -64,11 +107,187 @@ npc.id:npc_graham
 	# [3] NPC Node
 	tag:3
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_graham", "who_are_you")
 	# translation: 
-	translation.tag:DL_NPC_3
+	translation.tag:DL_Graham_WhoAreYou
+	translation.en:I'm Graham Teawenth, royal bard. Nice to meet you!
+	translation.de:Ich bin Graham Teawenth, köngiglicher Barde. Freut mich!
+	translation.ch:Ich bi de Graham Teawenth, en königliche Bard. Freut mich!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_graham", "forbidden_cave")
+	# translation: 
+	translation.tag:DL_Graham_ForbiddenCave
 	translation.en:
 	translation.de:
 	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_graham", "king")
+	# translation: 
+	translation.tag:DL_Graham_King
+	translation.en:Logan the Second? Yes, yes I know him. But he was recently replaced by his weird son.
+	translation.de:Logan der Zweite? Ja, ja, ich kenne ihn. Aber er wurde kürzlich von seinem seltsamen Sohn ersetzt.
+	translation.ch:De Logan de Zweit? Jojo, ich kennen. Aber er isch chürzlich vo sim komische Sohn ersetzt worde.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_King2
+	translation.en:The old king loved to listen to my songs. But the prince... well, he's not interested in music.
+	translation.de:Der alte König hat meine Lieder sehr gemocht. Aber der Prinz... Nun, er interessiert sich nicht für Musik.
+	translation.ch:De alt König het mini Lieder sehr gern gha. Aber de Prinz... Naja, er interessiert sich nid für Musig.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_King3
+	translation.en:He doesn't seem interested in anything. Really weird kid. So I'm just sitting here in the gardens and play for the court.
+	translation.de:Er interessiert sich sowieso für gar nichts. Ein wirklich seltsames Kind. Also sitze ich einfach hier in den Gärten und spiele für den Hofstaat.
+	translation.ch:Er interessiert sich sowieso für gar nüt. Es würkli komisches Chind. Also sitzi eifach do ide Gärte und spiel für de Hofstaat.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_graham", "velius")
+	# translation: 
+	translation.tag:DL_Graham_Velius
+	translation.en:Hmm... Yep, that's one of the royal mages. I haven't seen him in a while. He's a pretty reserved kind of guy.
+	translation.de:Hmm... Yep, das ist einer der königlichen Magier. Ich habe ihn schon lange nicht mehr gesehen. Er ist eine ziemlich verschlossene Persönlichkeit.
+	translation.ch:Hmm... Yep, das isch eine vode königliche Magier. Hanen scho länger nüm gse. Er isch irgendwie en zimli verschlosse Typ.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_WhatDoing
+	translation.en:I'm looking for my instrument, a dulcimer. 
+	translation.de:Ich suche mein Instrument, eine Dulcimer.
+	translation.ch:Ich suech mis Instrument, e Dulcimer.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_WhatDoing2
+	translation.en:Some big raven stole it and carried it into the castle gardens.
+	translation.de:Eine grosse Krähe hat sie gestohlen und in die Schlossgärten getragen.
+	translation.ch:En grosse Rabevogel het si klaut und id Schlossgärte treit.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_WhatDoing3
+	translation.en:But what's a royal bard without his instrument? *sniff
+	translation.de:Aber was ist ein königlicher Barde ohne sein Instrument? *sniff
+	translation.ch:Aber was isch isch en königliche Bard ohni sis Instrument? *sniff
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:changeQuestState("grahams_dulcimer", "started")
+	# translation: 
+	translation.tag:DL_Graham_WhatDoing4
+	translation.en:So, if you happen to find it and bring it back to me, I'll give you lots of gold!
+	translation.de:Also, wenn du sie zufälligerweise finden solltest, bring sie mir wieder. Ich gebe dir viel Gold dafür!
+	translation.ch:Also, wenn du si per Zuefall finde sötsch, bring si mer wieder. Ich gibder viel Gold defür!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:removeItem("qe_dulcimer", 1)
+	# translation: 
+	translation.tag:DL_Graham_GotDulcimer
+	translation.en:Oooooh! My dulcimer! (Graham takes it and strokes it tenderly)
+	translation.de:Oooooh! Meine Dulcimer! (Graham nimt sie und streicht liebevoll darüber)
+	translation.ch:Oooooh! Mini Dulcimer! (De Graham  nimmt si und stricht liebevoll drüber)
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addGold(40)
+	trigger:DL:changeQuestState("grahams_dulcimer", "completed")
+	# translation: 
+	translation.tag:DL_Graham_GotDulcimer2
+	translation.en:Thank you so much, I really appreciate your help. Here, take this gold.
+	translation.de:Vielen Dank, ich schätze deine Hilfe wirklich sehr. Hier, nimm dieses Gold.
+	translation.ch:Merci tusig, ich schätz dini Hilf würkli sehr. Do, nimm das Gold.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_GotDulcimer3
+	translation.en:Now I can finally play it again!
+	translation.de:Jetzt kann ich endlich wieder auf ihr spielen!
+	translation.ch:Jetz chani endlich wider uf ihre spiele!
 	[
 		# Link node, tag is next tag
 		tag:-2

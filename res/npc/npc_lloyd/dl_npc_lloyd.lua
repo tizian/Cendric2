@@ -166,6 +166,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("yasha_cleric", "started") and DL:isQuestComplete("yasha_cleric")) then 
 			DL:addChoice(31, "DL_Choice_YashaComplete") -- I survived the leap of faith.
 		end
+		if (DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")) then 
+			DL:addChoice(39, "DL_Choice_VeliusFound") -- 
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -244,11 +247,72 @@ loadDialogue = function(DL)
 
 		end
 
+		if (DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")) then 
+
+			DL:createCendricNode(39, 40, "DL_Cendric_VeliusFound") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(40, 41, "DL_Lloyd_VeliusFound") -- 
+			DL:addConditionProgress("npc_lloyd", "velius_found")
+			DL:addNode()
+
+
+			DL:createNPCNode(41, 42, "DL_Lloyd_VeliusFound2") -- 
+			DL:addQuestDescription("find_velius", 4)
+			DL:addNode()
+
+
+			DL:createNPCNode(42, 43, "DL_Lloyd_VeliusFound3") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(43, 44, "DL_Lloyd_VeliusFound4") -- 
+			DL:addNode()
+
+
+			DL:createNPCNode(44, -2, "DL_Lloyd_VeliusFound5") -- 
+			DL:addNode()
+
+		end
+
 	end
 
 
 	DL:createChoiceNode(11)
+	if (DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")) then 
+		DL:addChoice(33, "DL_Choice_VeliusFound") -- I found a letter from Inina... (Show letter)
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
+
+	if (DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")) then 
+
+		DL:createCendricNode(33, 34, "DL_Cendric_VeliusFound") -- That "V." is called Velius. He abducted some mages including Inina and I should go into the crypt of Gandria.
+		DL:addNode()
+
+
+		DL:createNPCNode(34, 35, "DL_Lloyd_VeliusFound") -- Velius is the one who abducted Inina? Interesting.
+		DL:addConditionProgress("npc_lloyd", "velius_found")
+		DL:addNode()
+
+
+		DL:createNPCNode(35, 36, "DL_Lloyd_VeliusFound2") -- The only Velius I know is one of the royal mages. I would never dare to accuse him of something.
+		DL:addQuestDescription("find_velius", 4)
+		DL:addNode()
+
+
+		DL:createNPCNode(36, 37, "DL_Lloyd_VeliusFound3") -- I'm a subordinate of the king and his mages. I'm not allowed to help you.
+		DL:addNode()
+
+
+		DL:createNPCNode(37, 38, "DL_Lloyd_VeliusFound4") -- This letter might be a trap as well...
+		DL:addNode()
+
+
+		DL:createNPCNode(38, -2, "DL_Lloyd_VeliusFound5") -- However, I won't forbid you to go into the crypt and look for yourself.
+		DL:addNode()
+
+	end
 
 end

@@ -8,6 +8,11 @@ loadRoutine = function(R, W)
         R:setDisposed()
         return
     end
+    
+    if (not W:isQuestState("jonathan_knowledge", "void")) then
+        R:setDisposed()
+        return
+    end
 
 	
 	R:setTilePosition(7.5,31)

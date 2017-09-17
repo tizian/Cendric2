@@ -43,6 +43,9 @@ loadDialogue = function(DL)
 	if (DL:getGuild() == "thief" and DL:isQuestState("receiver", "void")) then 
 		DL:addChoice(9, "DL_Choice_Receiver") -- Can I sell you my valuable stuff?
 	end
+	if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_nuray", "velius_found")) then 
+		DL:addChoice(11, "DL_Choice_VeliusFound") -- Your brother was abducted by some mage named Velius.
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -78,6 +81,14 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(10, -2, "DL_Nuray_Receiver2") -- Just ask him how much his monocle costs and he'll know what's up.
 		DL:changeQuestState("receiver", "started")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_nuray", "velius_found")) then 
+
+		DL:createNPCNode(11, -2, "DL_Nuray_VeliusFound") -- What?! Damn mages! Go and find him!
+		DL:addConditionProgress("npc_nuray","velius_found")
 		DL:addNode()
 
 	end

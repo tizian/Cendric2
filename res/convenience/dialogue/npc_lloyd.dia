@@ -429,6 +429,16 @@ npc.id:npc_lloyd
 	]
 	[
 		# Link node, tag is next tag
+		tag:39
+		condition:DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")
+		# translation: 
+		translation.tag:DL_Choice_VeliusFound
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -627,9 +637,105 @@ npc.id:npc_lloyd
 		tag:-2
 	]
 }
+{3
+	# [39] Cendric Node
+	tag:39
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_VeliusFound
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:40
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "velius_found")
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:41
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	trigger:DL:addQuestDescription("find_velius", 4)
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:42
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound3
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound4
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound5
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
 {2
 	# [11] Choice Node
 	tag:11
+	[
+		# Link node, tag is next tag
+		tag:33
+		condition:DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")
+		# translation: 
+		translation.tag:DL_Choice_VeliusFound
+		translation.en:I found a letter from Inina... (Show letter)
+		translation.de:Ich habe einen Brief von Inina gefunden... (Brief zeige)
+		translation.ch:Ich han en Brief vode Inina gfunde... (Brief zeige)
+	]
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -638,5 +744,91 @@ npc.id:npc_lloyd
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{3
+	# [33] Cendric Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_VeliusFound
+	translation.en:That "V." is called Velius. He abducted some mages including Inina and I should go into the crypt of Gandria.
+	translation.de:Dieser "V." heisst Velius. Er hat ein paar Magier samt Inina entführt und ich sollte in die Krypta von Gandria gehen.
+	translation.ch:De "V." heisst Velius. Er het es paar Magier samt Inina entführt und ich sött id Krypta vo Gandria go.
+	[
+		# Link node, tag is next tag
+		tag:34
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lloyd", "velius_found")
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound
+	translation.en:Velius is the one who abducted Inina? Interesting.
+	translation.de:Velius hat also Inina entführt? Interessant.
+	translation.ch:De Velius het also d'Inina entführt? Interessant.
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:addQuestDescription("find_velius", 4)
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound2
+	translation.en:The only Velius I know is one of the royal mages. I would never dare to accuse him of something.
+	translation.de:Der einzige Velius, den ich kenne, ist einer der königlichen Hofmagier. Ich würde es niemals wagen, ihm etwas zu unterstellen.
+	translation.ch:De einzig Velius, wo ich kenn, isch eine vode königliche Hofmagier. Ich würs nie woge, ihm öppis z'unterstelle.
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound3
+	translation.en:I'm a subordinate of the king and his mages. I'm not allowed to help you.
+	translation.de:Ich bin dem König und seinen Magiern unterstellt. Ich darf dir nicht helfen.
+	translation.ch:Ich bi em König und sine Magier unterstellt. Ich dörf der nid helfe.
+	[
+		# Link node, tag is next tag
+		tag:37
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound4
+	translation.en:This letter might be a trap as well...
+	translation.de:Dieser Brief könnte auch ein Falle sein...
+	translation.ch:De Brief chönt au e Falle sii...
+	[
+		# Link node, tag is next tag
+		tag:38
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lloyd_VeliusFound5
+	translation.en:However, I won't forbid you to go into the crypt and look for yourself.
+	translation.de:Allerdings werde ich dir nicht verbieten, in die Krypta zu gehen und es selbst herauszufinden.
+	translation.ch:Allerdings wirdi der nid verbüte, selber id Krypta z'go und es usezfinde.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

@@ -185,6 +185,9 @@ loadDialogue = function(DL)
 		if (DL:isQuestState("yasha_necro", "started") and DL:isQuestComplete("yasha_necro")) then 
 			DL:addChoice(42, "DL_Choice_YashaComplete") -- I found Yaslaw's mask.
 		end
+		if (DL:isQuestState("missing_bob", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_bob",1) and not DL:isConditionFulfilled("npc_luiz", "velius_found")) then 
+			DL:addChoice(46, "DL_Choice_FoundVelius") -- I found this letter from Bob... (show letter)
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -335,6 +338,22 @@ loadDialogue = function(DL)
 
 
 			DL:createNPCNode(45, -2, "DL_Luiz_YashaComplete2") -- Use its powers wisely, necromancer.
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("missing_bob", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_bob",1) and not DL:isConditionFulfilled("npc_luiz", "velius_found")) then 
+
+			DL:createCendricNode(46, 47, "DL_Cendric_FoundVelius") -- A mage named Velius abducted him along with other mages. I need to go to the crypt of Gandria and find out more.
+			DL:addNode()
+
+
+			DL:createNPCNode(47, 48, "DL_Luiz_FoundVelius") -- Hm. Very interesting. I know a mage named Velius, he studied with me a long time ago.
+			DL:addConditionProgress("npc_luiz", "velius_found")
+			DL:addNode()
+
+
+			DL:createNPCNode(48, -2, "DL_Luiz_FoundVelius2") -- He, abducting mages... I don't know. That doesn't fit him. But you should go into the crypt and find out more.
 			DL:addNode()
 
 		end

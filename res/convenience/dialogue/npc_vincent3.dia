@@ -427,6 +427,16 @@ npc.id:npc_vincent3
 	]
 	[
 		# Link node, tag is next tag
+		tag:41
+		condition:DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_vincent3", "velius_found")
+		# translation: 
+		translation.tag:DL_Choice_VeliusFound
+		translation.en:I found this letter from Koray... (show letter)
+		translation.de:Ich habe diesen Brief von Koray gefunden... (Brief zeigen)
+		translation.ch:Ich ha de Brief vom Koray gfunde... (Brief zeige)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -768,6 +778,63 @@ npc.id:npc_vincent3
 	translation.en:I always knew that you'd make great thief - eh, twilight mage. Enjoy your newly gained powers.
 	translation.de:Ich wusste schon immer, dass aus dir mal ein guter Dieb - eh, Dämmerungsmagier wird. Viel Spass mit deinen neuen Fähigkeiten.
 	translation.ch:Ich ha scho immer gwüsst, dass us dir mal en guete Dieb - eh, Dämmerigsmagier wird. Vil Spass mit dine neue Fähigkeite.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [41] Cendric Node
+	tag:41
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_VeliusFound
+	translation.en:He was abducted by some mage named Velius alongside with some other mages. I have to go to the crypt in Gandria and find out more.
+	translation.de:Er wurde von einem Magier namens Velius zusammen mit anderen Magiern entführt. Ich muss in die Krypta von Gandria und mehr herausfinden.
+	translation.ch:Er isch vomne Magier namens Velius zeme mit andere Magier entführt worde. Ich mu id Krypta vo Gandria und me usefinde.
+	[
+		# Link node, tag is next tag
+		tag:42
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_vincent3", "velius_found")
+	# translation: 
+	translation.tag:DL_Vincent_VeliusFound
+	translation.en:Velius? I know a mage named Velius. We did business with him. 
+	translation.de:Velius? Ich kenne einen Magier namens Velius. Wir haben schon Geschäfte mit ihm gemacht.
+	translation.ch:Velius? Ich kenn en Magier namens Velius. Mer hend scho Gschäftli mitem gmacht.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_VeliusFound2
+	translation.en:He often wanted potions... or rumours. Still, he's not the kind of guy who abducts people.
+	translation.de:Er wollte meistens Tränke... oder Gerüchte. Aber er ist nicht so der Typ, um Leute zu entführen.
+	translation.ch:Er het emel Tränk wele... oder Grüchtli. Aber er isch ez echt nid so de Typ wo Lüüt entführt.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_VeliusFound3
+	translation.en:But you should definitely follow the trace and go into that crypt. Good luck!
+	translation.de:Aber du solltest definitiv dieser Spur folgen und in die Krypta gehen. Viel Glück!
+	translation.ch:Aber du sötsch definitiv dere Spur folge und id Krypta go. Viel Glück!
 	[
 		# Link node, tag is next tag
 		tag:-2

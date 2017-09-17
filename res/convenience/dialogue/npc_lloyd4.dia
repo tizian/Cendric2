@@ -360,7 +360,7 @@ npc.id:npc_lloyd4
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter6
 	translation.en:Oh and still keep an eye open for any hints regarding Inina.
-	translation.de:Oh und falls du irgendwelche Hinweise siehst  was Inina betrifft... lass es mich wissen.
+	translation.de:Oh und falls du irgendwelche Hinweise siehst, was Inina betrifft... lass es mich wissen.
 	translation.ch:Oh und wennd irgendwelchi Hiiwis vo wege de Inina findsch - verzell mer devo.
 	[
 		# Link node, tag is next tag
