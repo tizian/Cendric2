@@ -41,7 +41,7 @@ loadDialogue = function(DL)
 		DL:addCraftingChoice(6, "DL_Choice_FireRatFur") -- eq_fireratscarf,mi_firerat_fur,1,gold,20
 	end
 	if (DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)) then 
-		DL:addCraftingChoice(8, "DL_Choice_NekomataCloak") -- eq_nekomataback,mi_neko_fur,3,mi_neko_teeth,2,gold,100
+		DL:addCraftingChoice(8, "DL_Choice_NekomataCloak") -- eq_nekomataback,mi_neko_fur,3,mi_neko_teeth,2,gold,70
 	end
 	if (DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)) then 
 		DL:addCraftingChoice(9, "DL_Choice_NekomataHead") -- eq_nekomatahead,mi_neko_fur,1,mi_neko_teeth,6,gold,100

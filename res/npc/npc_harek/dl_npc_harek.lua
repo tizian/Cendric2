@@ -130,22 +130,22 @@ loadDialogue = function(DL)
 			DL:addCraftingChoice(18, "DL_Choice_IceScarf") -- eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
 		end
 		if (DL:hasItem("mi_pearlpile", 1)) then 
-			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,50
+			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,75
 		end
 		if (DL:hasItem("mi_elysiatail", 1)) then 
-			DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,60
+			DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,100
 		end
 		if (DL:hasItem("mi_janusglaive", 1)) then 
-			DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,80
+			DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,100
 		end
 		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
-			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,120
+			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,110
 		end
 		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
-			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,120
+			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,110
 		end
 		if (DL:hasItem("mi_yashafangs", 1)) then 
-			DL:addCraftingChoice(26, "DL_Choice_FireGlaive") -- we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,200
+			DL:addCraftingChoice(26, "DL_Choice_FireGlaive") -- we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,130
 		end
 		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
 		DL:addNode()

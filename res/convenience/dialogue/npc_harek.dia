@@ -353,7 +353,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_pearlpile", 1)
 		# translation: 
 		translation.tag:DL_Choice_PearlSabre
-		translation.en:we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,50
+		translation.en:we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,75
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -364,7 +364,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_elysiatail", 1)
 		# translation: 
 		translation.tag:DL_Choice_LightningPike
-		translation.en:we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,60
+		translation.en:we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,100
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -375,7 +375,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_janusglaive", 1)
 		# translation: 
 		translation.tag:DL_Choice_JanusGlaive
-		translation.en:we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,80
+		translation.en:we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,100
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -386,7 +386,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_corrupt_stone_fire", 1)
 		# translation: 
 		translation.tag:DL_Choice_LavaArmor
-		translation.en:eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,120
+		translation.en:eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,110
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -397,7 +397,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_corrupt_stone_ice", 1)
 		# translation: 
 		translation.tag:DL_Choice_CairnArmor
-		translation.en:eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,120
+		translation.en:eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,110
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -408,7 +408,7 @@ npc.id:npc_harek
 		condition:DL:hasItem("mi_yashafangs", 1)
 		# translation: 
 		translation.tag:DL_Choice_FireGlaive
-		translation.en:we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,200
+		translation.en:we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,130
 		translation.de:
 		translation.ch:
 		translation.crafting:1

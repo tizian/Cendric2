@@ -118,7 +118,7 @@ npc.id:npc_zeff3
 		condition:DL:hasItem("mi_neko_teeth", 1) or DL:hasItem("mi_neko_fur", 1)
 		# translation: 
 		translation.tag:DL_Choice_NekomataCloak
-		translation.en:eq_nekomataback,mi_neko_fur,3,mi_neko_teeth,2,gold,100
+		translation.en:eq_nekomataback,mi_neko_fur,3,mi_neko_teeth,2,gold,70
 		translation.de:
 		translation.ch:
 		translation.crafting:1

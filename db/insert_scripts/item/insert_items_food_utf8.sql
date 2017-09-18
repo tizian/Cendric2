@@ -3,7 +3,7 @@
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item', 'Cheese','Käse','Chääs');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_cheese', 'item_desc', 'Smelly.','Riecht nicht sonderlich gut.','Er müffelet echli.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_cheese', 'consumable', 0, 100, 3);
-INSERT INTO item_attribute (item_id, health_regeneration, haste) values ('fo_cheese', 2, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, haste) values ('fo_cheese', 4, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_cheese', 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_cheese', -14, -28, 22, 22);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_cheese', 1, 0, 0, 50, 50);
@@ -13,7 +13,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item', 'Bread','Brot','Brot');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_bread', 'item_desc', 'An ordinary loaf of bread.','Ein einfaches Brot.','Es Brot halt.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_bread', 'consumable', 50, 100, 2);
-INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_bread', 2);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical) values ('fo_bread', 3, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_bread', 15);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_bread', -10, -30, 30, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_bread', 1, 50, 100, 50, 50);
@@ -23,8 +23,8 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item', 'Water bottle','Wasserflasche','Wasserfläsche');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item_desc', 'Fresh clear water.','Frisches klares Wasser.','Frischs klars Wasser.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_water', 'consumable', 100, 0, 2);
-INSERT INTO item_attribute (item_id, health_regeneration,  dmg_ice, res_fire) values ('fo_water', 2, 5, 5);
-INSERT INTO item_food (item_id, food_duration_s) values ('fo_water', 5);
+INSERT INTO item_attribute (item_id, health_regeneration,  dmg_ice, res_fire) values ('fo_water', 2, 5, 80);
+INSERT INTO item_food (item_id, food_duration_s) values ('fo_water', 8);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_water', -16, -20, 18, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_water', 1, 200, 50, 50, 50);
 
@@ -43,7 +43,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item', 'Apple', 'Apfel', 'Öpfel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_apple', 'item_desc', 'Fresh and juicy.', 'Frisch und saftig.', 'Frisch und saftig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_apple', 'consumable', 300, 50, 2);
-INSERT INTO item_attribute (item_id, health_regeneration, critical, res_physical, res_shadow) values ('fo_apple', 3, 3, 5, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, res_physical, res_shadow) values ('fo_apple', 3, 4, 50, 50);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_apple', 6);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_apple', -16, -20, 18, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_apple', 1, 0, 150, 50, 50);
@@ -53,7 +53,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item', 'Cave Berries','Höhlenbeeren','Höhlebeeri');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet, but its pip is poisonous.','Süss aber der Kern ist giftig.','Süess aber de Chern isch giftig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_caveberry', 'consumable', 500, 0, 3);
-INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_shadow, res_light) values ('fo_caveberry', -1, 5, 5, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_shadow, res_light) values ('fo_caveberry', -1, 6, 5, 50);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_caveberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_caveberry', 0, -35, 50, 70);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_caveberry', 1, 0, 0, 50, 100);
@@ -63,7 +63,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item', 'Wind Rose','Windrose','Windrose');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item_desc', 'A rare herb that grants incredible reflexes when eaten.','Ein seltenes Kraut das unglaubliche Reflexe gewährt wenn man es verzehrt.','Es seltenigs Chrütli wo eim unglaublichi Reflex git wenmes isst.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_windrose', 'consumable', 550, 100, 20);
-INSERT INTO item_attribute (item_id, haste) values ('fo_windrose', 50);
+INSERT INTO item_attribute (item_id, haste, critical) values ('fo_windrose', 50, 4);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_windrose', 15);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_windrose', -10, -25, 40, 75);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_windrose', 1, 450, 50, 50, 100);
@@ -73,7 +73,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item', 'Devil''s Berry', 'Teufelsbeere', 'Tüüfelsbeeri');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item_desc', 'Eating those will increase all resistances dramatically. But at a price...', 'Erhöht alle Resistenzen dramatisch... aber das hat seinen Preis.', 'Mit dem ischme ziemlich resistent gege alles... Aber das het sin Priis.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_devilberry', 'consumable', 100, 100, 4);
-INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_fire, res_ice, res_shadow, res_light) values ('fo_devilberry', -6, 50, 50, 50, 50, 50);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_fire, res_ice, res_shadow, res_light) values ('fo_devilberry', -6, 100, 100, 100, 100, 100);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_devilberry', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_devilberry', -13, -10, 34, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_devilberry', 1, 150, 200, 50, 50);
@@ -93,7 +93,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_redhat', 'item', 'Red Hat', 'Rotkappe', 'Rotchappe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_redhat', 'item_desc', 'Mildly toxic.', 'Leicht giftig.', 'Liecht giftig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_redhat', 'consumable', 550, 200, 4);
-INSERT INTO item_attribute (item_id, health_regeneration, critical) values ('fo_redhat', -1, 8);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_fire) values ('fo_redhat', -1, 8, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_redhat', 20);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_redhat', -15, -20, 30, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_redhat', 1, 450, 200, 50, 50);
@@ -103,7 +103,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item', 'Milk', 'Milch', 'Milch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item_desc', 'Milk is good for your bones.', 'Milch ist gut für die Knochen.', 'Milch isch guet für d''Chnoche.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_milk', 'consumable', 500, 50, 6);
-INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical) values ('fo_milk', 2, 2, 5, 3);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical, res_physical) values ('fo_milk', 2, 3, 5, 8, 50);
 INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_milk', 20, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_milk', -7, -20, 35, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_milk', 1, 350, 150, 50, 100);
@@ -123,7 +123,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item', 'Glowing shroom','Leuchtpilz','Lüchtpilz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_glowingshroom', 'consumable', 150, 50, 2);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_light, res_shadow) values ('fo_glowingshroom', 1, 5, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_light, res_shadow) values ('fo_glowingshroom', 1, 5, 50);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_glowingshroom', 15);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_glowingshroom', -10, -20, 30, 30);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_glowingshroom', 1, 100, 50, 50, 50);
@@ -234,7 +234,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_omelette', 'item', 'Omelette','Pfannkuchen','Omelette');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_omelette', 'item_desc', 'Delicious taste and strengthening effect.','Schmeckt lecker und hat einen stärkenden Effekt.','Isch fein und het en stärchende Effekt.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_omelette', 'consumable', 550, 650, 3);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, res_physical) values ('fo_omelette', 3, 10, 20);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical, res_physical) values ('fo_omelette', 4, 10, 50);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_omelette', 10);
 
 -- Fish Soup
@@ -242,7 +242,7 @@ INSERT INTO item_food (item_id, food_duration_s) values ('fo_omelette', 10);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item', 'Fish Soup', 'Fischsuppe', 'Fischsuppe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_fishsoup', 'item_desc', 'Hot and delicious.', 'Heiss und lecker.', 'Heiss und gluschtig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_fishsoup', 'consumable', 400, 100, 5);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_fishsoup', 6, 8);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice, res_ice) values ('fo_fishsoup', 6, 8, 50);
 INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_fishsoup', 10, 1);
 
 -- Raw Fish
@@ -260,7 +260,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item', 'Wine', 'Wein', 'Wii');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_wine', 'item_desc', 'A noble wine.', 'Ein edler Wein.', 'En guete Tropfe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_wine', 'consumable', 400, 50, 10);
-INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_ice, dmg_light, dmg_fire, dmg_shadow) values ('fo_wine', -1, 10, 5, 5, 5, 5);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_ice, dmg_light, dmg_fire, dmg_shadow) values ('fo_wine', -1, 100, 5, 5, 5, 5);
 INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_wine', 15, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_wine', -15, -10, 20, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_wine', 1, 450, 250, 50, 50);
@@ -270,7 +270,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item', 'Beer', 'Bier', 'Bier');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_beer', 'item_desc', 'Should be consumed in moderation.', 'Zu viel davon sollte man besser nicht geniessen.', 'Z''viel devo söt me besser nid trinke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_beer', 'consumable', 400, 150, 6);
-INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_physical) values ('fo_beer', -1, 10, 10);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, dmg_physical) values ('fo_beer', -1, 50, 10);
 INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_beer', 10, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_beer', -15, -10, 20, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_beer', 1, 600, 100, 50, 50);
@@ -290,7 +290,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item', 'Ham', 'Schinken', 'Schinke');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_ham', 'item_desc', 'A juicy ham.', 'Ein saftiger Schinken.', 'En saftige Schinke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_ham', 'consumable', 250, 300, 20);
-INSERT INTO item_attribute (item_id, health_regeneration, res_ice, dmg_physical) values ('fo_ham', 20, 10, 10);
+INSERT INTO item_attribute (item_id, health_regeneration, res_ice, dmg_physical) values ('fo_ham', 20, 40, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_ham', 15);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_ham', -12, -15, 23, 47);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_ham', 1, 600, 200, 50, 100);
