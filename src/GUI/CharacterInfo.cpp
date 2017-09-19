@@ -31,6 +31,7 @@ const std::vector<std::string> CharacterInfo::LABELS = {
 	"HealthRegeneration",
 	"CriticalHitChance",
 	"Haste",
+	"Heal",
 	"",
 	"PhysicalDamage",
 	"FireDamage",
@@ -64,7 +65,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 
 	for (size_t i = 0; i < LABELS.size(); ++i) {
 		if (LABELS[i].compare("") == 0) {
-			yOffset += dy;
+			yOffset += dy * 0.8f;
 			continue;
 		}
 
@@ -308,6 +309,8 @@ void CharacterInfo::updateAttributes() {
 	// cooldown reduction
 	attributes.push_back(std::to_string(m_attributes->haste));
 
+	// healing power
+	attributes.push_back(std::to_string(m_attributes->heal));
 	attributes.push_back("");
 
 	// dmg 
@@ -337,7 +340,7 @@ void CharacterInfo::updateAttributes() {
 
 	for (size_t i = 0; i < attributes.size(); ++i) {
 		if (attributes[i].compare("") == 0) {
-			yOffset += dy;
+			yOffset += dy * 0.8f;
 			continue;
 		}
 

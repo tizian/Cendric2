@@ -21,7 +21,7 @@ loadDialogue = function(DL)
 		DL:addChoice(3, "DL_Choice_WhoAreYou") -- Who are you?
 	end
 	if (not DL:isConditionFulfilled("npc_graham", "forbidden_cave")) then 
-		DL:addChoice(4, "DL_Choice_ForbiddenCave") -- 
+		DL:addChoice(4, "DL_Choice_ForbiddenCave") -- Why is it forbitten to go into that cave?
 	end
 	if (DL:isConditionFulfilled("npc_graham", "who_are_you") and not DL:isConditionFulfilled("npc_graham", "king")) then 
 		DL:addChoice(12, "DL_Choice_King") -- A royal bard? So do you know the king?
@@ -48,8 +48,12 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_graham", "forbidden_cave")) then 
 
-		DL:createNPCNode(4, -2, "DL_Graham_ForbiddenCave") -- 
+		DL:createNPCNode(4, 16, "DL_Graham_ForbiddenCave") -- It was an order from the king himself. Apparently, it's dangerous.
 		DL:addConditionProgress("npc_graham", "forbidden_cave")
+		DL:addNode()
+
+
+		DL:createNPCNode(16, -2, "DL_Graham_ForbiddenCave2") -- I don't know why they don't just barricade it.
 		DL:addNode()
 
 	end

@@ -49,9 +49,9 @@ npc.id:npc_graham
 		condition:not DL:isConditionFulfilled("npc_graham", "forbidden_cave")
 		# translation: 
 		translation.tag:DL_Choice_ForbiddenCave
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.en:Why is it forbitten to go into that cave?
+		translation.de:Wieso ist es verboten, in diese Höhle zu gehen?
+		translation.ch:Weso isches verbote, i die Höhli z'go?
 	]
 	[
 		# Link node, tag is next tag
@@ -125,9 +125,23 @@ npc.id:npc_graham
 	trigger:DL:addConditionProgress("npc_graham", "forbidden_cave")
 	# translation: 
 	translation.tag:DL_Graham_ForbiddenCave
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:It was an order from the king himself. Apparently, it's dangerous.
+	translation.de:Es war eine Anweisung des Königs höchstpersönlich. Offensichtlich ist es gefährlich.
+	translation.ch:Es isch e Awisig vom König höchstpersönlich gsi. Offesichtlich isches gföhrlich.
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Graham_ForbiddenCave2
+	translation.en:I don't know why they don't just barricade it.
+	translation.de:Ich weiss nicht, wieso sie sie nicht einfach verbarrikadieren.
+	translation.ch:Ich weiss nid, weso si si nid eifach verbarrikadiered.
 	[
 		# Link node, tag is next tag
 		tag:-2

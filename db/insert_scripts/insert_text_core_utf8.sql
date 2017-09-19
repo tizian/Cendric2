@@ -81,7 +81,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guil
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GuildJoined','Guild joined','Gilde beigetreten','Gilde biitrette','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoGuild','No Guild','Keine Gilde','Kei Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Haste','Haste','Schnelligkeit','Schnelligkeit','Agilidad');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Heal','Heilung','Heilig','Sanar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Healing Power','Heilkraft','Heilchraft','Sanar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Health','Health','Lebensenergie','Lebe','Salud');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('HealthRegeneration','Health Regeneration','Lebensregeneration','Lebensregeneration','Regeneración de salud');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('HealthRegenerationPerS','Health Regeneration / s','Lebensregeneration / s','Lebensregeneration / s','Regeneración de salud / s');
