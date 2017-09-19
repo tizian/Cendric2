@@ -49,12 +49,12 @@ const FluidTileData WATER
 const FluidTileData LAVA
 {
 	FluidTileType::Lava,
-	0.6f,
+	2.2f,
 	0.10f,
-	0.4f,
+	0.2f,
 	40.f,
-	1.f,
-	sf::Color(245, 69, 10, 128),
+	0.4f,
+	sf::Color(245, 69, 10, 180),
 	true,
 	false,
 	false,
