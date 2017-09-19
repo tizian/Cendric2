@@ -74,7 +74,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 	else {
 		// check collisions with owner
 		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
-			m_mob->addHeal(static_cast<int>(std::floor(getDamage() * 0.5f)), false, isCritical());
+			m_mob->addHeal(getHeal(), false, isCritical());
 			setDisposed();
 		}
 	}

@@ -164,8 +164,8 @@ void DisappearingTile::loadComponents() {
 	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = m_skinColor;
 	colGen->maxStartCol = m_skinColor;
-	colGen->minEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
-	colGen->maxEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 0);
+	colGen->minEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 100);
+	colGen->maxEndCol = sf::Color(m_skinColor.r, m_skinColor.g, m_skinColor.b, 100);
 	data.colorGen = colGen;
 
 	auto velGen = new particles::AngledVelocityGenerator();
