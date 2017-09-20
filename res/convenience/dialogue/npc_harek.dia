@@ -80,6 +80,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:28
+		condition:DL:isQuestState("theas_dream", "started") and not DL:isConditionFulfilled("npc_harek", "thea")
+		# translation: 
+		translation.tag:DL_Choice_Thea
+		translation.en:Could you use an apprentice?
+		translation.de:Könntest du einen Lehrling gebrauchen?
+		translation.ch:Chöntsch en Lehrling bruche?
+	]
+	[
+		# Link node, tag is next tag
 		tag:6
 		condition:DL:isQuestState("ice_armor", "void") and DL:hasItem("mi_firstguardianheart", 1)
 		# translation: 
@@ -144,6 +154,63 @@ npc.id:npc_harek
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_harek", "thea")
+	# translation: 
+	translation.tag:DL_Harek_Thea
+	translation.en:You?
+	translation.de:Dich?
+	translation.ch:Dich?
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{3
+	# [29] Cendric Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_Thea
+	translation.en:No, a girl called Thea is looking for a job.
+	translation.de:Nein, ein Mädchen namens Thea sucht Arbeit.
+	translation.ch:Nei, es Meitli namens Thea suecht Arbet.
+	[
+		# Link node, tag is next tag
+		tag:30
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_Thea2
+	translation.en:Hm. No. This isn't a job for a girl.
+	translation.de:Hm. Nein. Das ist keine Arbeit für ein Mädchen.
+	translation.ch:Hm. Nei. Das isch ke Arbet für es Meitli.
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_Thea3
+	translation.en:But you could ask Syrah, the alchemist. She was looking for an apprentice.
+	translation.de:Aber du könntest Syrah, die Alchemistin, fragen. Sie hat einen Lehrling gesucht.
+	translation.ch:Aber du chöntsch d'Syrah, d'Alchemistin, fröge. Si het en Lehrling gsuecht.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1

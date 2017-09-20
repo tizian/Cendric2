@@ -9,9 +9,8 @@ loadRoutine = function(R, W)
         return
     end
     
-    if (W:isQuestState("jonathan_knowledge", "completed")) then
+    if (W:isQuestState("jonathan_knowledge", "completed") and W:isConditionFulfilled("default","gandriacrypt_open")) then
         R:setDisposed()
-        R:setTalkingEnabled(false)
         return
     end
 
@@ -22,6 +21,5 @@ loadRoutine = function(R, W)
         R:setTalkingActive(true)	
     end
     R:setLooped(false)
-    R:setReloadEnabled(true)
 
 end	

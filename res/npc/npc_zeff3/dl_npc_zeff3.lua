@@ -22,13 +22,21 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(3)
-	DL:addChoice(7, "DL_Choice_Trade") -- What do you have to offer?
-	DL:addChoice(4, "DL_Choice_Leatherworking") -- Could you craft something for me?
 	if (not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")) then 
 		DL:addChoice(11, "DL_Choice_Thea") -- Do you happen to need an apprentice?
 	end
+	DL:addChoice(7, "DL_Choice_Trade") -- What do you have to offer?
+	DL:addChoice(4, "DL_Choice_Leatherworking") -- Could you craft something for me?
 	DL:addChoice(-1, "DL_Choice_End") -- See you later.
 	DL:addNode()
+
+	if (not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")) then 
+
+		DL:createNPCNode(11, -2, "DL_Zeff_Thea") -- Hrr. No, I'm sorry, I prefer to work alone.
+		DL:addConditionProgress("npc_zeff3", "thea")
+		DL:addNode()
+
+	end
 
 
 	DL:createTradeNode(7, -2)
@@ -83,13 +91,6 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(10, -2, "DL_Zeff_Wolfbonnet") -- Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
 		DL:gotoNode(5)
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")) then 
-
-		DL:createNPCNode(11, -2, "DL_NPC_11") -- 
 		DL:addNode()
 
 	end

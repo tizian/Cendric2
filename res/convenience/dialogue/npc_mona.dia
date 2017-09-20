@@ -89,6 +89,40 @@ npc.id:npc_mona
 	]
 	[
 		# Link node, tag is next tag
+		tag:11
+		condition:DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun_lock")
+		# translation: 
+		translation.tag:DL_Choice_FunUnlock
+		translation.en:What if I... you know... wanna have some fun?
+		translation.de:Was wenn ich... du weisst... mich amüsieren möchte?
+		translation.ch:Was isch wenn ich... du weisch... mich amüsiere möcht?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_Fun
+		translation.en:I wanna have some fun.
+		translation.de:Ich will mich amüsieren.
+		translation.ch:Ich wett mich chli amüsiere.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_Fun
+		translation.en:
+		translation.de:
+		translation.ch:
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
 		tag:4
 		# translation: 
 		translation.tag:DL_Choice_Trade
@@ -161,6 +195,126 @@ npc.id:npc_mona
 	translation.en:Then you can wait until they leave again. If you go up there, you'll have to pay.
 	translation.de:Dann musst du warten bis sie wieder gehen. Wenn du nach oben willst, musst du zahlen.
 	translation.ch:Denn muesch hald warte bis si wieder gönd. Wend uega wetsch muesch au zahle.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Mona_FunUnlock
+	translation.en:Hmm... (Mona eyeballs you) How old are you?
+	translation.de:Hmm... (Mona mustert dich) Wie alt bist du?
+	translation.ch:Hmm... (d'Mona musteret dich) We alt bisch du?
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{2
+	# [12] Choice Node
+	tag:12
+	[
+		# Link node, tag is next tag
+		tag:13
+		# translation: 
+		translation.tag:DL_Choice_AgeDontKnow
+		translation.en:I don't know. I lost my memory. Old enough?
+		translation.de:Ich weiss nicht. Ich habe meine Erinnerungen verloren. Genug alt?
+		translation.ch:Ich weiss nid. Ich ha mini Erinnerige verlore. Alt gnueg?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_AgeEighteen
+		translation.en:Eighteen.
+		translation.de:Achtzehn.
+		translation.ch:Achzähni.
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		# translation: 
+		translation.tag:DL_Choice_TwentyFive
+		translation.en:Twenty-five. (Lie)
+		translation.de:Fünfundzwanzig. (Lügen)
+		translation.ch:Füfezwanzgi. (Lüge)
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "fun_unlock")
+	# translation: 
+	translation.tag:DL_Mona_AgeDontKnow
+	translation.en:Hm. I guess you may nearly be of age. I tell my girls to be gentle with you. (Smiles)
+	translation.de:Hm. Ich denke mal, du bist fast volljährig. Ich sage meinen Mädchen, dass sie mit dir sanft umgehen sollen. (Lächelt) 
+	translation.ch:Hm. Ich denk mol, du bisch fasch volljöhrig. Ich seg mine Meitli, dass si chli sanft mit dir söled umgo. (Lächlet)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "fun_unlock")
+	# translation: 
+	translation.tag:DL_Mona_AgeEighteen
+	translation.en:Hm. Alright, that may be true. It's okay then. (Smiles)
+	translation.de:Hm. Gut, das könnte stimmen. Also ist es in Ordnung. (Lächelt)
+	translation.ch:Hm. Guet, das chönt stimme. Also isches in Ornig. (Lächlet)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "fun_lock")
+	# translation: 
+	translation.tag:DL_Mona_TwentyFive
+	translation.en:No, never. If you're not old enough to tell the truth, you're not old enough for my girls. Get out.
+	translation.de:Nein, niemals. Wenn du nicht genügend alt bist, die Wahrheit zu sagen, dann bist du auch nicht genügend alt für meine Mädchen. Raus mit dir.
+	translation.ch:Nei, sicher nid. Wennd nid gnueg alt bisch zum d'Wohret sege, bisch au nid gnueg alt für mini Meitli. Use mit dir.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:removeGold(100)
+	trigger:DL:addConditionProgress("npc_mona", "fun")
+	# translation: 
+	translation.tag:DL_Mona_HaveSomeFun
+	translation.en:Alright. Go to Lola, she's already waiting for you. (Winks)
+	translation.de:Gut. Geh zu Lola, sie wartet schon auf dich. (Zwinkert)
+	translation.ch:Guet. Gang zude Lola, sie warted scho uf dich. (Zwinkeret)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Mona_OpenGateNot
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

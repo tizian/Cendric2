@@ -4,6 +4,11 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
+    if (W:isQuestState("theas_dream", "completed")) then
+		R:setDisposed()
+		return
+	end
+
 	R:setTilePosition(7,10.3)
 	
 	R:goToTile(6.5,10.3)

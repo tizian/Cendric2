@@ -50,6 +50,16 @@ npc.id:npc_zeff3
 	tag:3
 	[
 		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")
+		# translation: 
+		translation.tag:DL_Choice_Thea
+		translation.en:Do you happen to need an apprentice?
+		translation.de:Brauchst du zufälligerweise einen Lehrling?
+		translation.ch:Bruchsch du zuefälligerwiis en Lehrling?
+	]
+	[
+		# Link node, tag is next tag
 		tag:7
 		# translation: 
 		translation.tag:DL_Choice_Trade
@@ -68,22 +78,27 @@ npc.id:npc_zeff3
 	]
 	[
 		# Link node, tag is next tag
-		tag:11
-		condition:not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")
-		# translation: 
-		translation.tag:DL_Choice_Thea
-		translation.en:Do you happen to need an apprentice?
-		translation.de:Brauchst du zufälligerweise einen Lehrling?
-		translation.ch:Bruchsch du zuefälligerwiis en Lehrling?
-	]
-	[
-		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:DL_Choice_End
 		translation.en:See you later.
 		translation.de:Bis später.
 		translation.ch:Bis spöter.
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff3", "thea")
+	# translation: 
+	translation.tag:DL_Zeff_Thea
+	translation.en:Hrr. No, I'm sorry, I prefer to work alone.
+	translation.de:Hrr. Nein, tut mir leid. Ich arbeite lieber alleine.
+	translation.ch:Hrr. Nei, tuetmer leid. Ich schaff lieber elei.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {4
@@ -220,20 +235,6 @@ npc.id:npc_zeff3
 	translation.en:Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
 	translation.de:Wolfsfelle? Ich hoffe, das ist nicht irgendein schlechter Scherz. Aber hier, nimm diese Mütze.
 	translation.ch:Wolfsfell? Ich hoff, das isch nid irgenden chranke Scherz. Aber guet, nimm die Chappe.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [11] NPC Node
-	tag:11
-	# triggers: 
-	# translation: 
-	translation.tag:DL_NPC_11
-	translation.en:
-	translation.de:
-	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

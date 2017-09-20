@@ -28,6 +28,9 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(4)
 	DL:addChoice(5, "DL_Choice_Trade") -- Show me your wares.
+	if (DL:isQuestState("theas_dream", "started") and not DL:isConditionFulfilled("npc_harek", "thea")) then 
+		DL:addChoice(28, "DL_Choice_Thea") -- Could you use an apprentice?
+	end
 	if (DL:isQuestState("ice_armor", "void") and DL:hasItem("mi_firstguardianheart", 1)) then 
 		DL:addChoice(6, "DL_Choice_RivetArmor") -- Could you smith me a special armour?
 	end
@@ -49,6 +52,26 @@ loadDialogue = function(DL)
 
 	DL:createTradeNode(5, -1)
 	DL:addNode()
+
+	if (DL:isQuestState("theas_dream", "started") and not DL:isConditionFulfilled("npc_harek", "thea")) then 
+
+		DL:createNPCNode(28, 29, "DL_Harek_Thea") -- You?
+		DL:addConditionProgress("npc_harek", "thea")
+		DL:addNode()
+
+
+		DL:createCendricNode(29, 30, "DL_Cendric_Thea") -- No, a girl called Thea is looking for a job.
+		DL:addNode()
+
+
+		DL:createNPCNode(30, 31, "DL_Harek_Thea2") -- Hm. No. This isn't a job for a girl.
+		DL:addNode()
+
+
+		DL:createNPCNode(31, -2, "DL_Harek_Thea3") -- But you could ask Syrah, the alchemist. She was looking for an apprentice.
+		DL:addNode()
+
+	end
 
 	if (DL:isQuestState("ice_armor", "void") and DL:hasItem("mi_firstguardianheart", 1)) then 
 

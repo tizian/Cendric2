@@ -3,8 +3,6 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jonathan3", "talked")) then 
 		DL:setRoot(1) 
-	elseif (DL:isConditionFulfilled("npc_jonathan3", "no_books")) then 
-		DL:setRoot(11) 
 	else 
 		DL:setRoot(2) 
 	end 
@@ -15,71 +13,21 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Jonathan_Hey2") -- And you, did you find something interesting in the temple?
+		DL:createNPCNode(3, 20, "DL_Jonathan_Hey2") -- But they locked it with a spell. I need the name of the mage who cast the spell to unlock it.
 		DL:addConditionProgress("npc_jonathan3", "talked")
 		DL:addNode()
 
-	end
 
-	if (DL:isConditionFulfilled("npc_jonathan3", "no_books")) then 
-
-		DL:createNPCNode(11, 12, "DL_Jonathan_NoBooks") -- Did you find some books for me?
+		DL:createNPCNode(20, -2, "DL_Jonathan_Hey3") -- And you, did you find something interesting in the temple?
 		DL:addNode()
-
-
-		DL:createChoiceNode(12)
-		if (DL:isQuestState("jonathan_knowledge", "started") and DL:isQuestComplete("jonathan_knowledge")) then 
-			DL:addChoice(13, "DL_Choice_Books") -- 
-		end
-		if (DL:isQuestState("jonathan_knowledge", "started") and not DL:isQuestComplete("jonathan_knowledge")) then 
-			DL:addChoice(14, "DL_Choice_NoBook") -- 
-		end
-		DL:addChoice(-1, "") -- 
-		DL:addNode()
-
-		if (DL:isQuestState("jonathan_knowledge", "started") and DL:isQuestComplete("jonathan_knowledge")) then 
-
-			DL:createNPCNode(13, 15, "DL_Jonathan_Books") -- 
-			DL:removeItem("do_antigravity", 1)
-			DL:removeItem("do_antimagic", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(15, 16, "DL_Jonathan_Books2") -- 
-			DL:changeQuestState("jonathan_knowledge", "completed")
-			DL:addNode()
-
-
-			DL:createNPCNode(16, 17, "DL_Jonathan_Books3") -- 
-			DL:addNode()
-
-
-			DL:createChoiceNode(17)
-			DL:addChoice(18, "DL_Choice_Business") -- 
-			DL:addChoice(19, "DL_Choice_LoveTo") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(18, -1, "DL_Jonathan_Business") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(19, -1, "DL_Jonathan_LoveTo") -- 
-			DL:addNode()
-
-		end
-
-		if (DL:isQuestState("jonathan_knowledge", "started") and not DL:isQuestComplete("jonathan_knowledge")) then 
-
-			DL:createNPCNode(14, -1, "DL_Jonathan_NoBook") -- 
-			DL:addNode()
-
-		end
 
 	end
 
 
 	DL:createChoiceNode(2)
+	if (not DL:isConditionFulfilled("default","gandriacrypt_open")) then 
+		DL:addChoice(11, "DL_Choice_Name") -- I know the name of the mage who cast the spell...
+	end
 	if (DL:isQuestState("jonathan_knowledge", "started") and DL:isQuestComplete("jonathan_knowledge")) then 
 		DL:addChoice(4, "DL_Choice_Books") -- I found some books for you. (Give documents)
 	end
@@ -88,6 +36,54 @@ loadDialogue = function(DL)
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
+
+	if (not DL:isConditionFulfilled("default","gandriacrypt_open")) then 
+
+		DL:createChoiceNode(11)
+		DL:addChoice(13, "DL_Choice_Name1") -- Tarabas.
+		if (DL:isQuestDescriptionUnlocked("find_velius",3)) then 
+			DL:addChoice(14, "DL_Choice_NameVelius") -- Velius.
+		end
+		DL:addChoice(12, "DL_Choice_Name2") -- Inina.
+		DL:addChoice(16, "DL_Choice_Name3") -- Tassadan.
+		DL:addChoice(17, "DL_Choice_Name4") -- Bob.
+		DL:addChoice(18, "DL_Choice_Name5") -- Koray.
+		DL:addChoice(-2, "DL_Choice_DontKnow") -- Erm, never mind.
+		DL:addNode()
+
+
+		DL:createNPCNode(13, -2, "DL_Jonathan_WrongName") -- Okay, let's try it... (Jonathan mumbles a spell) Hm. It didn't work.
+		DL:addNode()
+
+		if (DL:isQuestDescriptionUnlocked("find_velius",3)) then 
+
+			DL:createNPCNode(14, 15, "DL_Jonathan_CorrectName") -- Okay, let's try it... (Jonathan mumbles a spell)
+			DL:addNode()
+
+
+			DL:createNPCNode(15, -2, "DL_Jonathan_CorrectName2") -- Yes. We did it! Now you can follow them.
+			DL:addConditionProgress("default", "gandriacrypt_open")
+			DL:addNode()
+
+		end
+
+
+		DL:createNPCNode(12, -2, "DL_Jonathan_WrongName") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(16, -2, "DL_Jonathan_WrongName") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(17, -2, "DL_Jonathan_WrongName") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(18, -2, "DL_Jonathan_WrongName") -- 
+		DL:addNode()
+
+	end
 
 	if (DL:isQuestState("jonathan_knowledge", "started") and DL:isQuestComplete("jonathan_knowledge")) then 
 

@@ -66,6 +66,9 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_luiz", "talked") and not DL:isConditionFulfilled("npc_syrah", "necromancers_found")) then 
 		DL:addChoice(36, "DL_Choice_NecromancersFound") -- So you're a necromancer.
 	end
+	if (not DL:isConditionFulfilled("npc_syrah", "thea") and DL:isQuestState("theas_dream", "started")) then 
+		DL:addChoice(37, "DL_Choice_Thea") -- Are you looking for an apprentice?
+	end
 	DL:addChoice(8, "DL_Choice_CanYouBrew") -- Can you brew something for me?
 	DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
 	DL:addChoice(-1, "") -- 
@@ -196,6 +199,23 @@ loadDialogue = function(DL)
 		DL:createNPCNode(36, -2, "DL_Syrah_NecromancersFound") -- Hehe. Glad to hear you've found Luiz and his crew. Keep it to yourself and you'll make some really good friends.
 		DL:addConditionProgress("npc_syrah", "necromancers_found")
 		DL:addReputationProgress("necromancer", 5)
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_syrah", "thea") and DL:isQuestState("theas_dream", "started")) then 
+
+		DL:createNPCNode(37, 38, "DL_Syrah_Thea") -- Do you know something about herbs and potions then?
+		DL:addConditionProgress("npc_syrah", "thea")
+		DL:addNode()
+
+
+		DL:createCendricNode(38, 39, "DL_Cendric_Thea") -- No, not me, I'm asking for a girl called Thea. She's looking for a job.
+		DL:addNode()
+
+
+		DL:createNPCNode(39, -2, "DL_Syrah_Thea2") -- Ah ok. Yes, you can tell her she can start here, as long as she's not totally clumsy.
+		DL:addQuestDescription("theas_dream", 1)
 		DL:addNode()
 
 	end

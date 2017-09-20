@@ -8,7 +8,7 @@ npc.id:npc_lola
 	[
 		# Link node, tag is next tag
 		tag:1
-		condition:not DL:isConditionFulfilled("npc_mona", "lola")
+		condition:not DL:isConditionFulfilled("npc_mona", "fun")
 	]
 	[
 		# Link node, tag is next tag
@@ -34,11 +34,36 @@ npc.id:npc_lola
 	tag:2
 	[
 		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_lola", "sex")
+		# translation: 
+		translation.tag:DL_Choice_Hey
+		translation.en:Hey...
+		translation.de:Hey...
+		translation.ch:Hey...
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:DL_Choice_End
 		translation.en:See you.
 		translation.de:Bis bald.
 		translation.ch:Bis bald.
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_lola", "sex")
+	# translation: 
+	translation.tag:DL_Lola_SexyBoy
+	translation.en:Hey, sexy boy.
+	translation.de:Hallo, hübscher Junge.
+	translation.ch:Hoi, hübsche Bueb.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

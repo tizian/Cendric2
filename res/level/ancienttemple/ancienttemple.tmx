@@ -2090,6 +2090,7 @@
   </object>
   <object id="770" x="2150" y="2650" width="100" height="150">
    <properties>
+    <property name="condition progress" value="default,cryptdoor"/>
     <property name="forced" value=""/>
     <property name="quest state" value="jonathan_knowledge,started"/>
    </properties>

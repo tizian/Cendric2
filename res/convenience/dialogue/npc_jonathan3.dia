@@ -12,11 +12,6 @@ npc.id:npc_jonathan3
 	]
 	[
 		# Link node, tag is next tag
-		tag:11
-		condition:DL:isConditionFulfilled("npc_jonathan3", "no_books")
-	]
-	[
-		# Link node, tag is next tag
 		tag:2
 	]
 }
@@ -41,6 +36,20 @@ npc.id:npc_jonathan3
 	trigger:DL:addConditionProgress("npc_jonathan3", "talked")
 	# translation: 
 	translation.tag:DL_Jonathan_Hey2
+	translation.en:But they locked it with a spell. I need the name of the mage who cast the spell to unlock it.
+	translation.de:Aber sie haben sie mit einem Zauber verschlossen. Ich brauche den Namen des Magiers, der den Zauber gewirkt hat, um das Tor aufzuschliessen.
+	translation.ch:Aber si hend si mitme Zauber verschlosse. Ich bruch de Name vom Magier, wos verzauberet het, zums wieder ufmache.
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_Hey3
 	translation.en:And you, did you find something interesting in the temple?
 	translation.de:Und du, hast du etwas Interessantes im Tempel gefunden?
 	translation.ch:Und du, hesch öppis interessants im Tempel gfunde?
@@ -49,165 +58,19 @@ npc.id:npc_jonathan3
 		tag:-2
 	]
 }
-{1
-	# [11] NPC Node
-	tag:11
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Jonathan_NoBooks
-	translation.en:Did you find some books for me?
-	translation.de:Hast du ein paar Bücher für mich gefunden?
-	translation.ch:Hesch es paar Büecher für mich gfunde?
-	[
-		# Link node, tag is next tag
-		tag:12
-	]
-}
-{2
-	# [12] Choice Node
-	tag:12
-	[
-		# Link node, tag is next tag
-		tag:13
-		condition:DL:isQuestState("jonathan_knowledge", "started") and DL:isQuestComplete("jonathan_knowledge")
-		# translation: 
-		translation.tag:DL_Choice_Books
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-	[
-		# Link node, tag is next tag
-		tag:14
-		condition:DL:isQuestState("jonathan_knowledge", "started") and not DL:isQuestComplete("jonathan_knowledge")
-		# translation: 
-		translation.tag:DL_Choice_NoBook
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-	[
-		# Link node, tag is next tag
-		tag:-1
-		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-}
-{1
-	# [13] NPC Node
-	tag:13
-	# triggers: 
-	trigger:DL:removeItem("do_antigravity", 1)
-	trigger:DL:removeItem("do_antimagic", 1)
-	# translation: 
-	translation.tag:DL_Jonathan_Books
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:15
-	]
-}
-{1
-	# [15] NPC Node
-	tag:15
-	# triggers: 
-	trigger:DL:changeQuestState("jonathan_knowledge", "completed")
-	# translation: 
-	translation.tag:DL_Jonathan_Books2
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:16
-	]
-}
-{1
-	# [16] NPC Node
-	tag:16
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Jonathan_Books3
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:17
-	]
-}
-{2
-	# [17] Choice Node
-	tag:17
-	[
-		# Link node, tag is next tag
-		tag:18
-		# translation: 
-		translation.tag:DL_Choice_Business
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-	[
-		# Link node, tag is next tag
-		tag:19
-		# translation: 
-		translation.tag:DL_Choice_LoveTo
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-}
-{1
-	# [18] NPC Node
-	tag:18
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Jonathan_Business
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-1
-	]
-}
-{1
-	# [19] NPC Node
-	tag:19
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Jonathan_LoveTo
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-1
-	]
-}
-{1
-	# [14] NPC Node
-	tag:14
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Jonathan_NoBook
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-1
-	]
-}
 {2
 	# [2] Choice Node
 	tag:2
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("default","gandriacrypt_open")
+		# translation: 
+		translation.tag:DL_Choice_Name
+		translation.en:I know the name of the mage who cast the spell...
+		translation.de:Ich kenne den Namen des Magiers, der diesen Zauber gewirkt hat...
+		translation.ch:Ich kenn de Name vom Magier, wo das Tor verschlosse het...
+	]
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -236,6 +99,173 @@ npc.id:npc_jonathan3
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+}
+{2
+	# [11] Choice Node
+	tag:11
+	[
+		# Link node, tag is next tag
+		tag:13
+		# translation: 
+		translation.tag:DL_Choice_Name1
+		translation.en:Tarabas.
+		translation.de:Tarabas.
+		translation.ch:Tarabas.
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestDescriptionUnlocked("find_velius",3)
+		# translation: 
+		translation.tag:DL_Choice_NameVelius
+		translation.en:Velius.
+		translation.de:Velius.
+		translation.ch:Velius.
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_Name2
+		translation.en:Inina.
+		translation.de:Inina.
+		translation.ch:Inina.
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		# translation: 
+		translation.tag:DL_Choice_Name3
+		translation.en:Tassadan.
+		translation.de:Tassadan.
+		translation.ch:Tassadan.
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		# translation: 
+		translation.tag:DL_Choice_Name4
+		translation.en:Bob.
+		translation.de:Bob.
+		translation.ch:Bob.
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_Name5
+		translation.en:Koray.
+		translation.de:Koray.
+		translation.ch:Koray.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_DontKnow
+		translation.en:Erm, never mind.
+		translation.de:Ehm, egal.
+		translation.ch:Ehm, egal.
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WrongName
+	translation.en:Okay, let's try it... (Jonathan mumbles a spell) Hm. It didn't work.
+	translation.de:Okay, versuchen wirs... (Jonathan murmelt einen Zauber) Hm. Hat nicht funktioniert.
+	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber) Hm. Het nid funktioniert.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_CorrectName
+	translation.en:Okay, let's try it... (Jonathan mumbles a spell)
+	translation.de:Okay, versuchen wirs... (Jonathan murmelt einen Zauber) 
+	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber)
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("default", "gandriacrypt_open")
+	# translation: 
+	translation.tag:DL_Jonathan_CorrectName2
+	translation.en:Yes. We did it! Now you can follow them.
+	translation.de:Ja, geschafft! Jetzt kannst du ihnen folgen.
+	translation.ch:Jo, gschafft! Jetz chasch ihne folge.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WrongName
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WrongName
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WrongName
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WrongName
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1

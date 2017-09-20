@@ -33,6 +33,15 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "only_meet") and not DL:isConditionFulfilled("npc_mona", "gate_open")) then 
 		DL:addChoice(7, "DL_Choice_OnlyMeet") -- I only need to talk to someone briefly.
 	end
+	if (DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun_lock")) then 
+		DL:addChoice(11, "DL_Choice_FunUnlock") -- What if I... you know... wanna have some fun?
+	end
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)) then 
+		DL:addItemChoice(9, "DL_Choice_Fun", "gold", 100) -- I wanna have some fun.
+	end
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)) then 
+		DL:addItemChoice(10, "DL_Choice_Fun", "gold", 100) -- 
+	end
 	DL:addChoice(4, "DL_Choice_Trade") -- Can I get a drink here?
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -65,6 +74,51 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(7, -2, "DL_Mona_OnlyMeet") -- Then you can wait until they leave again. If you go up there, you'll have to pay.
 		DL:addConditionProgress("npc_mona", "only_meet")
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun_lock")) then 
+
+		DL:createNPCNode(11, 12, "DL_Mona_FunUnlock") -- Hmm... (Mona eyeballs you) How old are you?
+		DL:addNode()
+
+
+		DL:createChoiceNode(12)
+		DL:addChoice(13, "DL_Choice_AgeDontKnow") -- I don't know. I lost my memory. Old enough?
+		DL:addChoice(14, "DL_Choice_AgeEighteen") -- Eighteen.
+		DL:addChoice(15, "DL_Choice_TwentyFive") -- Twenty-five. (Lie)
+		DL:addNode()
+
+
+		DL:createNPCNode(13, -2, "DL_Mona_AgeDontKnow") -- Hm. I guess you may nearly be of age. I tell my girls to be gentle with you. (Smiles)
+		DL:addConditionProgress("npc_mona", "fun_unlock")
+		DL:addNode()
+
+
+		DL:createNPCNode(14, -2, "DL_Mona_AgeEighteen") -- Hm. Alright, that may be true. It's okay then. (Smiles)
+		DL:addConditionProgress("npc_mona", "fun_unlock")
+		DL:addNode()
+
+
+		DL:createNPCNode(15, -1, "DL_Mona_TwentyFive") -- No, never. If you're not old enough to tell the truth, you're not old enough for my girls. Get out.
+		DL:addConditionProgress("npc_mona", "fun_lock")
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)) then 
+
+		DL:createNPCNode(9, -2, "DL_Mona_HaveSomeFun") -- Alright. Go to Lola, she's already waiting for you. (Winks)
+		DL:removeGold(100)
+		DL:addConditionProgress("npc_mona", "fun")
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)) then 
+
+		DL:createNPCNode(10, -2, "DL_Mona_OpenGateNot") -- 
 		DL:addNode()
 
 	end
