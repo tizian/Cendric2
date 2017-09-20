@@ -1,5 +1,5 @@
 collectibles = 
 {
-	{"mi_gargoyledust", 3},
+	{"mi_gargoyle_dust", 3},
 }
 

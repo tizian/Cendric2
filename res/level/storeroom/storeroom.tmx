@@ -666,7 +666,6 @@
   </object>
   <object id="176" gid="542" x="1100" y="400" width="50" height="50">
    <properties>
-    <property name="level" value="2"/>
     <property name="type" value="reflection"/>
    </properties>
   </object>
