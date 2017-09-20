@@ -14,6 +14,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_thea", "gandria") and DL:isConditionFulfilled("npc_thea", "what_are_you_doing")) then
 		DL:addChoice(40, "DL_Choice_Gandria") -- What do you know about the city Gandria?
 	end
+    if (DL:isQuestState("theas_dream", "started") and DL:isQuestDescriptionUnlocked("theas_dream", 1)) then
+		DL:addChoice(50, "DL_Choice_Syrah") -- I found a job for you in Gandria.
+	end
 
 	DL:addChoice(-1, "") --  ""
 	DL:addNode()
@@ -58,10 +61,17 @@ loadDialogue = function(DL)
 	
 		DL:createNPCNode(13, 11, "DL_Thea_WorkForFarmers") -- Yes, I'm a maid at Ivo's farm. But I'd rather find work in the city of Gandria. It's safe there, at least.
 		DL:addConditionProgress("npc_thea", "work_farmers");
+        DL:changeQuestState("theas_dream","started")
 		DL:gotoNode(11)
 		DL:addNode()
 		
-		DL:createNPCNode(16, -2, "DL_Thea_Beast") -- There is a beast lurking around, and it must be pretty hungry, as most of our sheeps are gone. Nobody has really seen it so far but I swear, I've seen a huge shadow disappear into the South last night. And in the morning, another sheep was missing.
+		DL:createNPCNode(16, 17, "DL_Thea_Beast") -- There is a beast lurking around, and it must be pretty hungry, as most of our sheeps are gone.
+		DL:addNode()
+        
+        DL:createNPCNode(17, 18, "DL_Thea_Beast2") -- Nobody has really seen it so far but I swear, I've seen a huge shadow disappear into the North last night.
+		DL:addNode()
+        
+        DL:createNPCNode(18, -2, "DL_Thea_Beast3") -- And in the morning, another sheep was missing.
 		if (not DL:isQuestState("monster_problem", "started")) then
 			DL:changeQuestState("monster_problem","started")
 		end
@@ -84,6 +94,22 @@ loadDialogue = function(DL)
 		DL:addConditionProgress("npc_thea", "gandria")
 		DL:addNode()
 
+	end
+    
+    if (DL:isQuestState("theas_dream", "started") and DL:isQuestDescriptionUnlocked("theas_dream", 1)) then
+		DL:createCendricNode(50, 51, "DL_Cendric_Syrah") -- The alchemist Syrah would take you as an apprentice.
+		DL:addNode()
+        
+        DL:createNPCNode(51, 52, "DL_Thea_Syrah") -- Oh, really? I always wanted to work with herbs and potions. Thank you so much!
+		DL:addNode()
+        
+        DL:createNPCNode(52, 53, "DL_Thea_Syrah2") -- I'll tell Ivo and then travel to Gandria as fast as possible.
+		DL:addNode()
+        
+        DL:createNPCNode(53, -2, "DL_Thea_Syrah3") -- Don't forget to visit me when I'm there!
+        DL:addQuestDescription("theas_dream", 2)
+        DL:changeQuestState("theas_dream", "completed")
+		DL:addNode()
 	end
 	
 	DL:setRoot(0)

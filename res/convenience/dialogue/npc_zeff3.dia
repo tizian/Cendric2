@@ -68,6 +68,16 @@ npc.id:npc_zeff3
 	]
 	[
 		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")
+		# translation: 
+		translation.tag:DL_Choice_Thea
+		translation.en:Do you happen to need an apprentice?
+		translation.de:Brauchst du zufälligerweise einen Lehrling?
+		translation.ch:Bruchsch du zuefälligerwiis en Lehrling?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:DL_Choice_End
@@ -210,6 +220,20 @@ npc.id:npc_zeff3
 	translation.en:Wolf fur? I hope this isn't some kind of sick joke. But here, take this bonnet.
 	translation.de:Wolfsfelle? Ich hoffe, das ist nicht irgendein schlechter Scherz. Aber hier, nimm diese Mütze.
 	translation.ch:Wolfsfell? Ich hoff, das isch nid irgenden chranke Scherz. Aber guet, nimm die Chappe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_11
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2
