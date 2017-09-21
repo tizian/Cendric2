@@ -61,8 +61,13 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(15, -2, "DL_Jonathan_CorrectName2") -- Yes. We did it! Now you can follow them.
+			DL:createNPCNode(15, 19, "DL_Jonathan_CorrectName2") -- Yes. We did it! Now you can follow them.
 			DL:addConditionProgress("default", "gandriacrypt_open")
+			DL:addNode()
+
+
+			DL:createNPCNode(19, -1, "") -- 
+			DL:startCutscene("chapter_5")
 			DL:addNode()
 
 		end

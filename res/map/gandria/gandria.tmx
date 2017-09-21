@@ -948,7 +948,7 @@
   </object>
   <object id="301" x="2250" y="230" width="50" height="40">
    <properties>
-    <property name="level entry" value="res/level/gandriacrypt/gandriacrypt.tmx,2720,2160"/>
+    <property name="level entry" value="res/level/gandriacrypt/gandriacrypt.tmx,2220,1560"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

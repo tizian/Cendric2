@@ -493,7 +493,7 @@
   <object id="91" x="125" y="500" width="100" height="100">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="level entry" value="res/level/gandriacrypt/gandriacrypt.tmx,2110,1710"/>
+    <property name="level entry" value="res/level/gandriacrypt/gandriacrypt.tmx,1610,1110"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

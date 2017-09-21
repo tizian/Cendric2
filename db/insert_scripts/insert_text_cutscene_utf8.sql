@@ -48,6 +48,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chapter4', 'cutscene','- The Forbidden Spell -','- Der Verbotene Zauber -','- De Verbote Zauber -', '- ? -');
 
+-- Illusion (Chapt 5)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chapter5', 'cutscene','- Illusion -','- Illusion -','- Illusion -', '- ? -');
+
 
 
 

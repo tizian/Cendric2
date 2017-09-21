@@ -209,7 +209,22 @@ npc.id:npc_jonathan3
 	translation.ch:Jo, gschafft! Jetz chasch ihne folge.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:19
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:startCutscene("chapter_5")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
