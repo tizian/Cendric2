@@ -62,7 +62,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 	if (map == nullptr) return;
 
 	if (m_isOnCurrentMap) {
-		map->fogOfWarTileMap.updateFogOfWar(m_screen->getCharacterCore()->getExploredTiles().at(map->mapId).second);
+		updateFogOfWar(map);
 		m_mainCharMarker.setPosition(m_position +
 			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
 	}
@@ -101,7 +101,7 @@ void MapOverlay::setMapIndex(int index) {
 
 	map->map.setPosition(m_position);
 	map->fogOfWarTileMap.setPosition(m_position);
-	map->fogOfWarTileMap.updateFogOfWar(m_screen->getCharacterCore()->getExploredTiles().at(map->mapId).second);
+	updateFogOfWar(map);
 
 	m_title.setString(g_textProvider->getText(World::getNameFromId(map->mapId), "location"));
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
@@ -110,6 +110,15 @@ void MapOverlay::setMapIndex(int index) {
 	m_currentMap = index;
 
 	reloadWaypoints();
+}
+
+void MapOverlay::updateFogOfWar(MapOverlayData* map) {
+	for (auto& it : m_screen->getCharacterCore()->getExploredTiles()) {
+		if (it.first.compare(map->mapId) == 0) {
+			map->fogOfWarTileMap.updateFogOfWar(it.second.second);
+			break;
+		}
+	}
 }
 
 void MapOverlay::reloadMaps() {

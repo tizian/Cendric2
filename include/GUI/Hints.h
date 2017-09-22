@@ -16,11 +16,23 @@ inline std::string getHintDescription(const std::string& hintKey) {
 	else if (hintKey.compare("Chop") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Chop)) + " ");
 	}
+	else if (hintKey.compare("Jump") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Jump)) + " ");
+	}
 	else if (hintKey.compare("Journal") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
 	}
 	else if (hintKey.compare("Spellbook") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Spellbook)) + " ");
+	}
+	else if (hintKey.compare("CharacterInfo") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::CharacterInfo)) + " ");
+	}
+	else if (hintKey.compare("Map") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
+	}
+	else if (hintKey.compare("Pickup") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)) + " ");
 	}
 	else if (hintKey.compare("LeaveLevel") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
@@ -29,9 +41,6 @@ inline std::string getHintDescription(const std::string& hintKey) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
 		hintText.append(g_textProvider->getText("And") + " ");
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
-	}
-	else if (hintKey.compare("Map") == 0) {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
 	}
 	else if (hintKey.compare("Highlight") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::ToggleTooltips)) + " ");

@@ -12,7 +12,7 @@
 #include "Structs/MerchantData.h"
 #include "Structs/WeatherData.h"
 
-typedef std::map<std::string, std::pair<sf::Vector2i, std::vector<bool>>> ExploredTiles;
+typedef std::vector<std::pair<std::string, std::pair<sf::Vector2i, std::vector<bool>>>> ExploredTiles;
 
 struct CharacterCoreData final {
 	// savegame attributes

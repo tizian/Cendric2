@@ -73,6 +73,7 @@ public:
 
 private:
 	void setMapIndex(int index);
+	void updateFogOfWar(MapOverlayData* map);
 	
 private:
 	static const float TOP;

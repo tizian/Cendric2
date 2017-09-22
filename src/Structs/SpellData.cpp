@@ -561,10 +561,10 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.spellType = SpellType::Elemental;
 	antiGravity.iconTextureRect = sf::IntRect(200, 0, 50, 50);
 
-	antiGravity.cooldown = sf::seconds(15);
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
 	antiGravity.duration = sf::seconds(7);
+	antiGravity.cooldown = antiGravity.duration;
 	antiGravity.activeDuration = antiGravity.duration;
 	antiGravity.attachedToMob = true;
 	antiGravity.fightAnimation = GameObjectState::VOID;

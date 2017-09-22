@@ -79,4 +79,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ha
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius,
 ???','Boss: Velius,
 ???','Boss: Velius,
-???',);
+???');

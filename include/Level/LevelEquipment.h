@@ -43,6 +43,7 @@ private:
 
 	void calculatePositionAccordingToMainChar(sf::Vector2f& position) const;
 	void updateParticlesVisibility() const;
+	void checkAndSetPosition();
 	bool m_isLocked = false;
 
 	static const int EQ_SIZE;

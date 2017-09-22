@@ -59,6 +59,9 @@ bool SpellManager::executeCurrentSpell(T target, bool force) {
 
 	// spell has been cast. set cooldown.
   	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+	if (m_spellMap[m_currentSpell]->getSpellData().attachedToMob) {
+		cooldown = std::max(m_spellMap[m_currentSpell]->getSpellData().activeDuration, cooldown);
+	}
 	m_coolDownMap[m_currentSpell] = cooldown;
 	m_remainingGlobalCooldown = m_globalCooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);

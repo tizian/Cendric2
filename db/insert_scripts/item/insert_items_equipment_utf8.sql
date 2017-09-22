@@ -542,7 +542,7 @@ INSERT INTO item_attribute (item_id, dmg_light, heal, res_shadow, max_health) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item', 'Ring of the Sunblade','Ring der Sonnenklinge','Sunneklingering');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item_desc', 'Its spikes look terrifying.','Seine Stacheln sehen füchterlich aus.','Sini Stachle gsehnd fürchterlich us.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sunring', 'eq_ring', 750, 200, 70);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sunring', 'eq_ring', 750, 100, 70);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, critical, haste, max_health) values ('eq_sunring', 2, 2, 3, 10, 6);
 
 -- Eye of the Moon

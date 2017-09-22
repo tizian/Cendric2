@@ -166,10 +166,10 @@ void LevelEquipment::lockAnimation(bool lock) {
 
 void LevelEquipment::update(const sf::Time& frameTime) {
 	if (m_isLocked) {
- 		calculatePositionAccordingToMainChar(m_position);
-		setPosition(m_position);
+		checkAndSetPosition();
 		return;
 	}
+
 	GameObjectState newState = m_mainChar->getState();
 
 	bool newFacingRight = m_mainChar->isFacingRight();
@@ -181,6 +181,12 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		}
 		updateParticlesVisibility();
 	}
+	
+	checkAndSetPosition();
+	AnimatedGameObject::update(frameTime);
+}
+
+void LevelEquipment::checkAndSetPosition() {
 	if (m_mainChar->isUpsideDown() != m_animatedSprite.isFlippedY()) {
 		m_animatedSprite.setFlippedY(m_mainChar->isUpsideDown());
 		if (m_lightComponent != nullptr) m_lightComponent->flipOffsetY(m_mainChar->isUpsideDown());
@@ -189,7 +195,6 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 
 	calculatePositionAccordingToMainChar(m_position);
 	setPosition(m_position);
-	AnimatedGameObject::update(frameTime);
 }
 
 void LevelEquipment::setLightComponent(const LightData& data) {

@@ -22,3 +22,10 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotE
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedOneway','Cannot be opened from this side!','Kann von dieser Seite nicht geöffnet werden!','Cha vo dere Siite nid ufgmacht werde!','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Healing Power','Heilkraft','Heilchraft','Sanar');
+
+-- hints
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint','Jump','Springen','Springe','Salar');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint_desc','briefly for a small jump, and longer for a high jump.','kurz für einen kleinen Sprung, und länger für einen hohen.','churz für en chline Sprung und länger für en hoche Sprung.','para salar.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint','Remove buffs','Buffs entfernen','Buffs wegne','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint_desc','Use a right click on a spell buff to remove it.','Mit einem Rechtsklick auf einen Zauber-Buff kann man ihn entfernen.','Mitme Rechtsklick ufen Zauber-Buff chamen wegne.','?');

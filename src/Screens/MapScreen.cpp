@@ -71,9 +71,18 @@ void MapScreen::load() {
 
 	if (m_currentMap.getWorldData()->explorable) {
 		ExploredTiles& tilesExplored = m_characterCore->getExploredTiles();
-		if (!contains(tilesExplored, m_mapID)) {
+		bool isContained = false;
+		for (auto& it : tilesExplored) {
+			if (it.first.compare(m_mapID) == 0) {
+				isContained = true;
+				break;
+			}
+		}
+
+
+		if (!isContained) {
 			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-			tilesExplored[m_mapID] = { size, std::vector<bool>(size.x * size.y, false) };
+			tilesExplored.push_back({ m_mapID, { size, std::vector<bool>(size.x * size.y, false)} });
 		}
 	}
 
@@ -250,12 +259,18 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 }
 
 void MapScreen::updateFogOfWar() {
-	auto& tilesExplored = m_characterCore->getExploredTiles().at(m_mapID);
+	std::pair<sf::Vector2i, std::vector<bool>>* tilesExplored = nullptr;
+	for (auto& it : m_characterCore->getExploredTiles()) {
+		if (it.first.compare(m_mapID) == 0) {
+			tilesExplored = &it.second;
+		}
+	}
+	if (!tilesExplored) return;
 
 	int range = 6;
 
 	sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-	
+
 	sf::Vector2f pos = m_mainChar->getPosition();
 	int x = static_cast<int>(pos.x / TILE_SIZE_F);
 	int y = static_cast<int>(pos.y / TILE_SIZE_F);
@@ -265,7 +280,7 @@ void MapScreen::updateFogOfWar() {
 			if (i < 0 || i >= size.x || j < 0 || j >= size.y) continue;
 
 			if ((x - i) * (x - i) + (y - j) * (y - j) < range * range) {
-				tilesExplored.second[i + j * size.x] = true;
+				tilesExplored->second[i + j * size.x] = true;
 			}
 		}
 	}

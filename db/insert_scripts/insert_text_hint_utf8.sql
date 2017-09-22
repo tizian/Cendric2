@@ -21,8 +21,15 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('MapMove', 'hint','Movement on the map','Bewegen auf der Karte','Bewege uf de Charte','Movimiento en el mapa');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('MapMove', 'hint_desc','to move.','um dich zu bewegen.','zum dich bewege.','para moverse.');
 
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint','Remove buffs','Effekte entfernen','Buffs wegne','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint_desc','Use a right click on a spell buff to remove it.','Mit einem Rechtsklick auf einen Zauber-Effekt kann man ihn entfernen.','Mitme Rechtsklick ufen Zauber-Buff chamen wegne.','?');
+
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint','Jump','Springen','Springe','Salar');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint_desc','briefly for a small jump, and longer for a high jump.','kurz für einen kleinen Sprung, und länger für einen hohen.','churz für en chline Sprung und länger für en hoche Sprung.','para salar.');
+
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint','Item pickup','Gegenstände aufnehmen','Gegeständ ufnä','Levantar objeto');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint_desc','Click on an item with the right mouse key to pickup.','Klicke einen Gegenstand mit der rechten Maustaste an, um ihn aufzuheben.','Klick en Gegestand mit de rechte Muustaschte ah zum ihn neh.','Haz clic con el botón derecho del  mouse para levanter un objeto.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint_desc','to pick up an item.','um einen Gegenstand aufzuheben','zum es Item ne.','para levanter un objeto.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Highlight', 'hint','Highlight items','Gegenstände markieren','Gegeständ markiere','Resaltar objetos');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Highlight', 'hint_desc','to highlight items that can be picked up.','um aufhebbare Gegenstände zu markieren.','zum ufhebbari Gegeständ markiere.','para resaltar objetos que se pueden levantar.');
