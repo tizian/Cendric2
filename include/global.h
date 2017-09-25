@@ -66,6 +66,13 @@ inline float norm(const sf::Vector2f& v) {
 	return std::sqrt(v.x * v.x + v.y * v.y);
 }
 
+inline void normalize(sf::Vector2f& v) {
+	float normV = norm(v);
+	if (normV == 0) return;
+	v.x /= normV;
+	v.y /= normV;
+}
+
 inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 	return norm(v1 - v2);
 }

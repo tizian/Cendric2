@@ -5,10 +5,10 @@
 MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
 	load();
 
-	m_inputMap.insert({ Key::Left, sf::Vector2f(-WALK_ACCELERATION, 0.f) });
-	m_inputMap.insert({ Key::Right, sf::Vector2f(WALK_ACCELERATION, 0.f) });
-	m_inputMap.insert({ Key::Down, sf::Vector2f(0.f, WALK_ACCELERATION) });
-	m_inputMap.insert({ Key::Up, sf::Vector2f(0.f, -WALK_ACCELERATION) });
+	m_inputMap.insert({ Key::Left, sf::Vector2f(-1.f, 0.f) });
+	m_inputMap.insert({ Key::Right, sf::Vector2f(1.f, 0.f) });
+	m_inputMap.insert({ Key::Down, sf::Vector2f(0.f, 1.f) });
+	m_inputMap.insert({ Key::Up, sf::Vector2f(0.f, -1.f) });
 
 	m_isAlwaysUpdate = true;
 }
@@ -74,38 +74,21 @@ void MapMainCharacter::render(sf::RenderTarget& target) {
 }
 
 void MapMainCharacter::handleInput() {
+	sf::Vector2f currentAcceleration;
 	for (auto& it : m_inputMap) {
-		if (g_inputController->isKeyJustPressed(it.first)) {
-			m_currentInput = it.first;
-			m_isCurrentInputActive = true;
-			break;
+		if (g_inputController->isKeyActive(it.first)) {
+			currentAcceleration += it.second;
 		}
 	}
-
-	if (m_currentInput != Key::VOID && g_inputController->isKeyActive(m_currentInput)) {
-		setAcceleration(m_inputMap[m_currentInput]);
-	}
-	else {
-		if (m_isCurrentInputActive) {
-			m_isCurrentInputActive = false;
-			for (auto& it : m_inputMap) {
-				if (g_inputController->isKeyActive(it.first)) {
-					m_currentInput = it.first;
-					m_isCurrentInputActive = true;
-					setAcceleration(m_inputMap[m_currentInput]);
-					return;
-				}
-			}
-		}
-		m_currentInput = Key::VOID;
-		setAcceleration(sf::Vector2f(0.f, 0.f));
-	}
+	normalize(currentAcceleration);
+	currentAcceleration *= WALK_ACCELERATION;
+	setAcceleration(currentAcceleration);
 }
 
 void MapMainCharacter::load() {
 	g_resourceManager->loadTexture(getSpritePath(), ResourceType::Map);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	
+
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 18.f, 15.f));
 	setSpriteOffset(sf::Vector2f(-16.f, -35.f));
 

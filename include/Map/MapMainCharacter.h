@@ -39,8 +39,6 @@ public:
 private:
 	std::string getSpritePath() const;
 	const float WALK_ACCELERATION = 1500.0f;
-	Key m_currentInput = Key::VOID;
-	bool m_isCurrentInputActive = false;
 	std::map<Key, sf::Vector2f> m_inputMap;
 	// handle input and calculate the next position
 	void handleInput();
