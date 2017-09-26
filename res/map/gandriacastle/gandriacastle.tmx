@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="144">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="146">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/castle.ogg"/>
@@ -356,6 +356,16 @@
   <object id="142" gid="644" x="1000" y="300" width="50" height="50">
    <properties>
     <property name="conditions" value="default,hallway_open"/>
+   </properties>
+  </object>
+  <object id="144" gid="644" x="600" y="650" width="50" height="50">
+   <properties>
+    <property name="conditions" value="default,king_open"/>
+   </properties>
+  </object>
+  <object id="145" gid="644" x="650" y="650" width="50" height="50">
+   <properties>
+    <property name="conditions" value="default,king_open"/>
    </properties>
   </object>
  </objectgroup>

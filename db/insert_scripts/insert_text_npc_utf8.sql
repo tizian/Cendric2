@@ -56,3 +56,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_patrappa','npc','Patrappa','Patrappa','Patrappa');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_velius','npc','Velius','Velius','Velius');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_loganthird','npc','King Logan III','König Logan III','König Logan III');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_royalguard','npc','Royal Guard','Königswache','Königswach');

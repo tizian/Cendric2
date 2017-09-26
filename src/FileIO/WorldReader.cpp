@@ -208,6 +208,30 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s2 = conditionProgress;
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("reputation progress") == 0) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, reputation progress value property not found.");
+						return false;
+					}
+
+					std::string reputationProgress = textAttr;
+
+					size_t pos = 0;
+					if ((pos = reputationProgress.find(",")) == std::string::npos) {
+						logError("XML file could not be read, reputation progress value must be two strings, seperated by a comma.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::ReputationProgress);
+					content.s1 = reputationProgress.substr(0, pos);
+					FractionID fractionID = resolveFractionID(content.s1);
+					if (fractionID == FractionID::VOID) return false;
+					content.i1 = static_cast<int>(fractionID);
+					reputationProgress.erase(0, pos + 1);
+					content.i2 = std::stoi(reputationProgress);
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("questcondition progress") == 0) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
