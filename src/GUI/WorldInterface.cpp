@@ -84,6 +84,10 @@ void WorldInterface::reloadMapWaypoints() {
 	m_mapOverlay->reloadWaypoints();
 }
 
+void WorldInterface::reloadLevelOverlay() {
+	m_mapOverlay->reloadLevelOverlay();
+}
+
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
@@ -155,13 +159,13 @@ void WorldInterface::loadGuiSidebar() {
 		GUIConstants::TOP + 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - height)));
 }
 
-void WorldInterface::loadMapSidebar() {
+void WorldInterface::loadMapSidebar(bool isLevel) {
 	delete m_mapSidebar;
 
 	auto const& tilesExplored = m_core->getData().tilesExplored;
 
 	int n = static_cast<int>(tilesExplored.size());
-	m_mapSidebar = new GUITabBar(this, n);
+	m_mapSidebar = new GUITabBar(this, isLevel ? n + 1 : n);
 
 	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_mapSidebar->setPosition(sf::Vector2f(WINDOW_WIDTH - (GUIConstants::LEFT_BAR + GUITabBar::WIDTH),

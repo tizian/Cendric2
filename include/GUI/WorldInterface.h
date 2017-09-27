@@ -41,6 +41,8 @@ public:
 	virtual void reloadSpellBook();
 	// reload the map overlay (waypoints)
 	virtual void reloadMapWaypoints();
+	// reload the level overlay
+	virtual void reloadLevelOverlay();
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);
@@ -62,7 +64,7 @@ public:
 
 protected:
 	void loadGuiSidebar();
-	void loadMapSidebar();
+	void loadMapSidebar(bool isLevel);
 
 protected:
 	WorldScreen* m_screen;

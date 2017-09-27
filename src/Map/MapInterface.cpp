@@ -3,7 +3,7 @@
 
 MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 	loadGuiSidebar();
-	loadMapSidebar();
+	loadMapSidebar(false);
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, &m_core->getTotalAttributes());

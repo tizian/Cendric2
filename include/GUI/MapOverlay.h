@@ -11,8 +11,10 @@ class MainCharacter;
 class MapOverlay;
 class Window;
 class GUITabBar;
+class LevelOverlay;
 
 struct MapOverlayData final {
+	bool isLevel;
 	std::string mapId;
 	sf::FloatRect windowSize;
 	sf::Vector2i mapSize;
@@ -65,6 +67,7 @@ public:
 
 	void reloadWaypoints();
 	void reloadMaps();
+	void reloadLevelOverlay();
 
 	void setMap(const std::string& mapID);
 
@@ -74,7 +77,10 @@ public:
 private:
 	void setMapIndex(int index);
 	void updateFogOfWar(MapOverlayData* map);
-	
+	MapOverlayData* createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const;
+	sf::Sprite* renderLevelOverlay(float scale);
+	float getScale(const sf::Vector2f& mapSize) const;
+
 private:
 	static const float TOP;
 	static const float LEFT;
@@ -89,9 +95,11 @@ private:
 	sf::Sprite m_mainCharMarker;
 	std::vector<WaypointMarker*> m_waypoints;
 
+
 	int m_currentMap = -1;
 	bool m_isVisible = false;
 	bool m_isOnCurrentMap = false;
+	bool m_isLevel = false;
 
 	sf::FloatRect m_boundingBox;
 	sf::Vector2f m_position;

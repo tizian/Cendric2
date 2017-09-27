@@ -114,6 +114,7 @@ public:
 	static const std::string TEX_GUI_BUTTON_ROUND;
 	static const std::string TEX_GUI_BUTTON_ROUND_SELECTED;
 	static const std::string TEX_GUI_TAB_ICONS;
+	static const std::string TEX_GUI_LEVELOVERLAY_ICONS;
 
 	// sound
 	static const std::string SOUND_GUI_MENUCURSOR;

@@ -7,7 +7,7 @@
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
 	loadGuiSidebar();
-	loadMapSidebar();
+	loadMapSidebar(true);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);

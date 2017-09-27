@@ -2,12 +2,14 @@
 #include "GUI/Window.h"
 #include "GUI/GUITabBar.h"
 #include "Screens/WorldScreen.h"
+#include "Screens/LevelScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "World/MainCharacter.h"
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "GUI/LevelOverlay.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -37,23 +39,16 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	const std::string mapName = m_screen->getCharacterCore()->getData().currentMap;
 
 	setMap(mapName);
-	if (m_currentMap == -1) {
+	if (m_isLevel || m_currentMap == -1) {
 		setMapIndex(0);
 	}
 }
 
 MapOverlay::~MapOverlay() {
-	for (auto& wp : m_waypoints) {
-		delete wp;
-	}
-	m_waypoints.clear();
+	CLEAR_VECTOR(m_waypoints);
+	CLEAR_VECTOR(m_maps)
 
-	for (auto& m : m_maps) {
-		delete m;
-	}
-	m_maps.clear();
-
-	delete m_window;
+		delete m_window;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
@@ -73,7 +68,6 @@ void MapOverlay::update(const sf::Time& frameTime) {
 
 	m_window->update(frameTime);
 }
-
 
 void MapOverlay::setMap(const std::string& mapID) {
 	int index = 0;
@@ -113,6 +107,7 @@ void MapOverlay::setMapIndex(int index) {
 }
 
 void MapOverlay::updateFogOfWar(MapOverlayData* map) {
+	if (map->isLevel) return;
 	for (auto& it : m_screen->getCharacterCore()->getExploredTiles()) {
 		if (it.first.compare(map->mapId) == 0) {
 			map->fogOfWarTileMap.updateFogOfWar(it.second.second);
@@ -121,16 +116,106 @@ void MapOverlay::updateFogOfWar(MapOverlayData* map) {
 	}
 }
 
-void MapOverlay::reloadMaps() {
-	for (auto& m : m_maps) {
-		delete m;
+float MapOverlay::getScale(const sf::Vector2f& mapSize) const {
+	if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
+		return MAX_WIDTH / mapSize.x;
 	}
-	m_maps.clear();
+	else {
+		return MAX_HEIGHT / mapSize.y;
+	}
+}
+
+MapOverlayData* MapOverlay::createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const {
+	MapOverlayData* data = new MapOverlayData();
+	data->mapId = id;
+	data->mapSize = size;
+	data->map = sprite;
+
+	sf::Vector2f mapSize = sf::Vector2f(data->mapSize.x * TILE_SIZE_F, data->mapSize.y * TILE_SIZE_F);
+	sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map.getTextureRect().width), static_cast<float>(data->map.getTextureRect().height));
+
+	// check out the limiting factor for our scale
+	if (data->mapSize.x / MAX_WIDTH > data->mapSize.y / MAX_HEIGHT) {
+		data->windowSize.width = MAX_WIDTH;
+		data->scale = data->windowSize.width / mapSize.x;
+		data->windowSize.height = data->scale * mapSize.y;
+		data->windowSize.left = LEFT;
+		data->windowSize.top = (WINDOW_HEIGHT - data->windowSize.height) / 2.f;
+	}
+	else {
+		data->windowSize.height = MAX_HEIGHT;
+		data->scale = data->windowSize.height / mapSize.y;
+		data->windowSize.width = data->scale * mapSize.x;
+		data->windowSize.top = TOP;
+		data->windowSize.left = (WINDOW_WIDTH - data->windowSize.width) / 2.f;
+	}
+
+	data->map.setScale(data->windowSize.width / spriteSize.x, data->windowSize.height / spriteSize.y);
+
+	return data;
+}
+
+sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
+	auto lScreen = dynamic_cast<LevelScreen*>(m_screen);
+	auto level = lScreen->getWorld();
+	auto lData = lScreen->getWorldData();
+	sf::Sprite* sprite = new sf::Sprite();
+
+	// background (white)
+	sf::Image img;
+	img.create(
+		static_cast<unsigned int>(std::round(lData->mapSize.x * TILE_SIZE_F * scale)), 
+		static_cast<unsigned int>(std::round(lData->mapSize.y * TILE_SIZE_F * scale)), COLOR_WHITE);
+
+	// draw collidable layer on top of it (simple pixels)
+	for (int i = 0; i < lData->collidableTilePositions.size(); ++i) {
+		for (int j = 0; j < lData->collidableTilePositions[i].size(); ++j) {
+			img.setPixel(i, j, COLOR_BLACK);
+		}
+	}
+
+	// now convert to texture format
+	auto texture = new sf::Texture();
+	texture->loadFromImage(img);
+	
+	// and save as sprite
+	sprite->setTexture(*texture, true);
+
+	return sprite;
+}
+
+void MapOverlay::reloadLevelOverlay() {
+	if (!m_isLevel) return;
+	if (m_maps.size() == 0) {
+		return;
+	}
+	
+	m_maps[0]->map = *renderLevelOverlay(m_maps[0]->scale);
+}
+
+void MapOverlay::reloadMaps() {
+	CLEAR_VECTOR(m_maps);
 
 	int buttonIndex = 0;
 
+	// load level button
+	auto lScreen = dynamic_cast<LevelScreen*>(m_screen);
+	m_isLevel = lScreen != nullptr;
+	
+	if (m_isLevel) {
+		sf::Vector2f mapSize = sf::Vector2f(
+			lScreen->getWorldData()->mapSize.x * TILE_SIZE_F, 
+			lScreen->getWorldData()->mapSize.y * TILE_SIZE_F);
+		MapOverlayData* data = createMapOverlayData(lScreen->getWorldData()->id, lScreen->getWorldData()->mapSize,
+			*renderLevelOverlay(getScale(mapSize)));
+
+		m_mapTabBar->setButtonOnClick(buttonIndex, std::bind(&MapOverlay::setMap, this, data->mapId));
+		buttonIndex++;
+	}
+
+	// load map buttons
 	for (auto& explored : m_screen->getCharacterCore()->getData().tilesExplored) {
-		// load map texture
+
 		const std::string mapFilename = getMapSpriteFilename(explored.first);
 		const std::string iconFilename = getMapIconFilename(explored.first);
 
@@ -140,37 +225,12 @@ void MapOverlay::reloadMaps() {
 		if (g_resourceManager->getTexture(mapFilename) == nullptr) continue;
 		if (g_resourceManager->getTexture(iconFilename) == nullptr) continue;
 
-		MapOverlayData* data = new MapOverlayData();
-		data->mapId = explored.first;
-		data->map = sf::Sprite(*g_resourceManager->getTexture(mapFilename));
-
-		data->mapSize = explored.second.first;
-		sf::Vector2f mapSize = sf::Vector2f(data->mapSize.x * TILE_SIZE_F, data->mapSize.y * TILE_SIZE_F);
-		sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map.getTextureRect().width), static_cast<float>(data->map.getTextureRect().height));
-		
-		// check out the limiting factor for our scale
-		if (data->mapSize.x / MAX_WIDTH > data->mapSize.y / MAX_HEIGHT) {
-			data->windowSize.width = MAX_WIDTH;
-			data->scale = data->windowSize.width / mapSize.x;
-			data->windowSize.height = data->scale * mapSize.y;
-			data->windowSize.left = LEFT;
-			data->windowSize.top = (WINDOW_HEIGHT - data->windowSize.height) / 2.f;
-		}
-		else {
-			data->windowSize.height = MAX_HEIGHT;
-			data->scale = data->windowSize.height / mapSize.y;
-			data->windowSize.width = data->scale * mapSize.x;
-			data->windowSize.top = TOP;
-			data->windowSize.left = (WINDOW_WIDTH - data->windowSize.width) / 2.f;
-		}
-
-		m_position.x = m_boundingBox.left;
-		m_position.y = m_boundingBox.top;
+		MapOverlayData* data = createMapOverlayData(explored.first, explored.second.first,
+			sf::Sprite(*g_resourceManager->getTexture(mapFilename)));
 
 		data->fogOfWarTileMap.initFogOfWar(data->mapSize);
 		data->fogOfWarTileMap.setScale(data->scale, data->scale);
-		data->map.setScale(data->windowSize.width / spriteSize.x, data->windowSize.height / spriteSize.y);
-
+		
 		// load buttons
 		sf::Texture* tex = g_resourceManager->getTexture(iconFilename);
 		m_mapTabBar->setButtonTexture(buttonIndex, tex, 0);
@@ -344,7 +404,7 @@ void WaypointMarker::onRightClick() {
 
 		TriggerContent::executeTrigger(tc, m_parent->getScreen());
 	}
-	
+
 	g_resourceManager->playSound(GlobalResource::SOUND_TELEPORT);
 	m_parent->hide();
 }
