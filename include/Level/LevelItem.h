@@ -25,6 +25,7 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 	void setSpawnPosition(int spawnPosition);
+	const std::string& getID() const { return m_itemID; }
 
 private:
 	LevelMainCharacter* m_mainChar;

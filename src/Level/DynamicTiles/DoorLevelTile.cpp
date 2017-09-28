@@ -156,6 +156,8 @@ void DoorLevelTile::open() {
 			}
 		}
 	}
+
+	dynamic_cast<WorldScreen*>(m_screen)->notifyLeveloverlayReload();
 }
 
 void DoorLevelTile::close() {

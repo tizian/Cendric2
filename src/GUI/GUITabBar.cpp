@@ -119,10 +119,8 @@ void GUITabBar::show(int index) {
 	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
 
 	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		m_buttons[i]->setActive(false);
+		m_buttons[i]->setActive(i == index);
 	}
-	
-	m_buttons[index]->setActive(true);	
 
 	show();
 }

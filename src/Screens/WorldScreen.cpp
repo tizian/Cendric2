@@ -79,6 +79,7 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	m_interface->reloadInventory(itemID);
 	m_interface->reloadQuestLog();
 	m_interface->reloadCharacterInfo();
+	m_interface->reloadLevelOverlay();
 	checkMonitoredQuestItems(itemID, amount);
 }
 
@@ -119,6 +120,7 @@ void WorldScreen::notifyQuestTargetKilled(const std::string& questID, const std:
 	getCharacterCore()->setQuestTargetKilled(questID, name);
 	m_progressLog->addQuestTargetKilled(questID, name);
 	m_interface->reloadQuestLog();
+	m_interface->reloadLevelOverlay();
 }
 
 void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState state) {
@@ -139,6 +141,7 @@ void WorldScreen::notifySpellLearned(SpellID id) {
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
 	m_interface->reloadSpellBook();
 	m_interface->hideAll();
+	m_interface->reloadLevelOverlay();
 }
 
 void WorldScreen::notifyModifierLearned(SpellModifierType modifierType, int objectID) {
@@ -148,6 +151,7 @@ void WorldScreen::notifyModifierLearned(SpellModifierType modifierType, int obje
 	modifier.level = getCharacterCore()->getData().modfiersLearned.at(modifierType);
 	addScreenOverlay(ScreenOverlay::createModifierLearnedScreenOverlay(modifier));
 	m_interface->reloadSpellBook();
+	m_interface->reloadLevelOverlay();
 }
 
 void WorldScreen::notifyQuestDescriptionAdded(const std::string& questID, int descriptionID) {
@@ -174,6 +178,10 @@ void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
 	getCharacterCore()->addReputation(fraction, amount);
 	m_progressLog->addReputationAdded(fraction, amount);
 	m_interface->reloadCharacterInfo();
+}
+
+void WorldScreen::notifyLeveloverlayReload() {
+	m_interface->reloadLevelOverlay();
 }
 
 void WorldScreen::notifyGuildSet(FractionID fraction) {

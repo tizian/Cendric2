@@ -52,6 +52,8 @@ public:
 	void notifyModifierLearned(SpellModifierType modifierType, int objectID);
 	// notify reputation added
 	void notifyReputationAdded(FractionID fraction, int amount);
+	// notifies a level overlay reload
+	void notifyLeveloverlayReload();
 	// notify guild joined
 	void notifyGuildSet(FractionID fraction);
 	// notify reputation added

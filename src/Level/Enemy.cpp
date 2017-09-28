@@ -422,6 +422,22 @@ void Enemy::notifyKilled() {
 	}
 }
 
+bool Enemy::isQuestRelevant() {
+	if (!m_reward.questConditions.empty() && !m_isDead) {
+		return true;
+	}
+	if (!m_reward.questTargets.empty() && !m_isDead) {
+		return true;
+	}
+	if (m_isLooted) return false;
+	for (auto& it : m_reward.lootableItems) {
+		if (it.first.substr(0, 2).compare("qe") == 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void Enemy::setMovingTarget(int x, int y) {
 	m_enemyMovingBehavior->setMovingTarget(x, y);
 }

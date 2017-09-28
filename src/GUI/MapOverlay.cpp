@@ -9,6 +9,7 @@
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "World/Trigger.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -19,12 +20,15 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	m_screen = screen;
 	m_mapTabBar = mapTabBar;
 
+	m_levelOverlayIcons.loadFromFile(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS);
+
 	const World& map = *m_screen->getWorld();
 
 	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	m_title.setTextStyle(TextStyle::Shadowed);
 
 	m_window = new Window(sf::FloatRect(),
 		GUIOrnamentStyle::LARGE,
@@ -45,15 +49,19 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 
 MapOverlay::~MapOverlay() {
 	CLEAR_VECTOR(m_waypoints);
-	CLEAR_VECTOR(m_maps)
+	CLEAR_VECTOR(m_maps);
 
-		delete m_window;
+	delete m_window;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 	auto* map = getCurrentMap();
 	if (map == nullptr) return;
+
+	if (m_needsLevelOverlayReload) {
+		reloadLevelOverlay();
+	}
 
 	if (m_isOnCurrentMap) {
 		updateFogOfWar(map);
@@ -96,7 +104,13 @@ void MapOverlay::setMapIndex(int index) {
 	map->fogOfWarTileMap.setPosition(m_position);
 	updateFogOfWar(map);
 
-	m_title.setString(g_textProvider->getText(World::getNameFromId(map->mapId), "location"));
+	auto worldName = g_textProvider->getText(World::getNameFromId(map->mapId), "location");
+	auto breakPos = worldName.find('\n');
+	while (breakPos != std::string::npos) {
+		worldName.replace(breakPos, 1, " ");
+		breakPos = worldName.find('\n');
+	}
+	m_title.setString(worldName);
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
 	m_isOnCurrentMap = (m_screen->getWorldData()->id.compare(map->mapId) == 0);
@@ -163,24 +177,93 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	// background (white)
 	sf::Image img;
 	img.create(
-		static_cast<unsigned int>(std::round(lData->mapSize.x * TILE_SIZE_F * scale)), 
-		static_cast<unsigned int>(std::round(lData->mapSize.y * TILE_SIZE_F * scale)), COLOR_WHITE);
+		static_cast<unsigned int>(std::round(lData->mapSize.x * TILE_SIZE_F * scale)),
+		static_cast<unsigned int>(std::round(lData->mapSize.y * TILE_SIZE_F * scale)), COLOR_BLACK);
 
-	// draw collidable layer on top of it (simple pixels)
-	for (int i = 0; i < lData->collidableTilePositions.size(); ++i) {
-		for (int j = 0; j < lData->collidableTilePositions[i].size(); ++j) {
-			img.setPixel(i, j, COLOR_BLACK);
+	float pixelSize = TILE_SIZE_F * scale;
+
+	// draw collidable layer on top of it (simple other imgs)
+	for (int i = 0; i < lData->mapSize.x; ++i) {
+		for (int j = 0; j < lData->mapSize.y; ++j) {
+			if (lData->collidableTilePositions[j][i]) continue;
+			sf::Image img2;
+			unsigned int sizeX = static_cast<unsigned int>(std::round((i + 1) * pixelSize)) - static_cast<unsigned int>(std::round(i * pixelSize));
+			unsigned int sizeY = static_cast<unsigned int>(std::round((j + 1) * pixelSize)) - static_cast<unsigned int>(std::round(j * pixelSize));
+			img2.create(sizeX, sizeY, COLOR_TWILIGHT_INACTIVE);
+			img.copy(img2, static_cast<unsigned int>(std::round(i * pixelSize)), static_cast<unsigned int>(std::round(j * pixelSize)));
 		}
 	}
+
+	// draw the important tiles etc
+	/////////////////////////////////
+
+	// dynamic tiles
+	for (auto go : *lScreen->getObjects(GameObjectType::_DynamicTile)) {
+		if (auto dTile = dynamic_cast<LevelDynamicTile*>(go)) {
+			if (dTile->getDynamicTileID() == LevelDynamicTileID::Modifier) {
+				drawOverlayTexture(img, dTile->getCenter() * scale, 0);
+			}
+			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Door && dTile->isCollidable()) {
+				drawOverlayTexture(img, dTile->getCenter() * scale, 3);
+			}
+			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Chest) {
+				drawOverlayTexture(img, dTile->getCenter() * scale, 4);
+			}
+			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Lever) {
+				drawOverlayTexture(img, dTile->getCenter() * scale, 6);
+			}
+		}
+	}
+
+	// triggers
+	for (auto go : *lScreen->getObjects(GameObjectType::_Overlay)) {
+		if (Trigger* trigger = dynamic_cast<Trigger*>(go)) {
+			if (trigger->getData().isKeyGuarded) {
+				drawOverlayTexture(img, trigger->getCenter() * scale, 1);
+			}
+		}
+	}
+
+	// items
+	for (auto go : *lScreen->getObjects(GameObjectType::_LevelItem)) {
+		if (LevelItem* item = dynamic_cast<LevelItem*>(go)) {
+			if (item->getID().substr(0, 2).compare("qe") == 0) {
+				drawOverlayTexture(img, item->getCenter() * scale, 2);
+			}
+			else {
+				drawOverlayTexture(img, item->getCenter() * scale, 5);
+			}
+		}
+	}
+
+	// enemies
+	for (auto go : *lScreen->getObjects(GameObjectType::_Enemy)) {
+		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
+			if (enemy->isQuestRelevant()) {
+				drawOverlayTexture(img, enemy->getCenter() * scale, 2);
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////////
 
 	// now convert to texture format
 	auto texture = new sf::Texture();
 	texture->loadFromImage(img);
-	
+
 	// and save as sprite
 	sprite->setTexture(*texture, true);
 
 	return sprite;
+}
+
+void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int type) {
+	image.copy(m_levelOverlayIcons, static_cast<unsigned int>(std::round(pos.x - 12.5)), static_cast<unsigned int>(std::round(pos.y - 12.5)),
+		sf::IntRect(type * 25, 0, 25, 25), true);
+}
+
+void MapOverlay::notifyLevelOverlayReload() {
+	m_needsLevelOverlayReload = true;
 }
 
 void MapOverlay::reloadLevelOverlay() {
@@ -188,8 +271,10 @@ void MapOverlay::reloadLevelOverlay() {
 	if (m_maps.size() == 0) {
 		return;
 	}
-	
+
 	m_maps[0]->map = *renderLevelOverlay(m_maps[0]->scale);
+	m_maps[0]->map.setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
+	m_needsLevelOverlayReload = false;
 }
 
 void MapOverlay::reloadMaps() {
@@ -199,17 +284,20 @@ void MapOverlay::reloadMaps() {
 
 	// load level button
 	auto lScreen = dynamic_cast<LevelScreen*>(m_screen);
-	m_isLevel = lScreen != nullptr;
-	
+	m_isLevel = lScreen != nullptr && !lScreen->getWorldData()->isBossLevel;
+
 	if (m_isLevel) {
 		sf::Vector2f mapSize = sf::Vector2f(
-			lScreen->getWorldData()->mapSize.x * TILE_SIZE_F, 
+			lScreen->getWorldData()->mapSize.x * TILE_SIZE_F,
 			lScreen->getWorldData()->mapSize.y * TILE_SIZE_F);
 		MapOverlayData* data = createMapOverlayData(lScreen->getWorldData()->id, lScreen->getWorldData()->mapSize,
 			*renderLevelOverlay(getScale(mapSize)));
 
+		m_maps.push_back(data);
+
 		m_mapTabBar->setButtonOnClick(buttonIndex, std::bind(&MapOverlay::setMap, this, data->mapId));
 		buttonIndex++;
+		m_needsLevelOverlayReload = true;
 	}
 
 	// load map buttons
@@ -229,7 +317,7 @@ void MapOverlay::reloadMaps() {
 
 		data->fogOfWarTileMap.initFogOfWar(data->mapSize);
 		data->fogOfWarTileMap.setScale(data->scale, data->scale);
-		
+
 		// load buttons
 		sf::Texture* tex = g_resourceManager->getTexture(iconFilename);
 		m_mapTabBar->setButtonTexture(buttonIndex, tex, 0);

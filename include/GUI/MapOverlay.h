@@ -66,7 +66,7 @@ public:
 
 	void reloadWaypoints();
 	void reloadMaps();
-	void reloadLevelOverlay();
+	void notifyLevelOverlayReload();
 
 	void setMap(const std::string& mapID);
 
@@ -78,7 +78,9 @@ private:
 	void updateFogOfWar(MapOverlayData* map);
 	MapOverlayData* createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const;
 	sf::Sprite* renderLevelOverlay(float scale);
+	void drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int type);
 	float getScale(const sf::Vector2f& mapSize) const;
+	void reloadLevelOverlay();
 
 private:
 	static const float TOP;
@@ -92,6 +94,7 @@ private:
 	std::vector<MapOverlayData*> m_maps;
 
 	sf::Sprite m_mainCharMarker;
+	sf::Image m_levelOverlayIcons;
 	std::vector<WaypointMarker*> m_waypoints;
 
 
@@ -99,6 +102,7 @@ private:
 	bool m_isVisible = false;
 	bool m_isOnCurrentMap = false;
 	bool m_isLevel = false;
+	bool m_needsLevelOverlayReload = false;
 
 	sf::FloatRect m_boundingBox;
 	sf::Vector2f m_position;

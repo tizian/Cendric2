@@ -85,7 +85,7 @@ void WorldInterface::reloadMapWaypoints() {
 }
 
 void WorldInterface::reloadLevelOverlay() {
-	m_mapOverlay->reloadLevelOverlay();
+	m_mapOverlay->notifyLevelOverlayReload();
 }
 
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
@@ -156,7 +156,7 @@ void WorldInterface::loadGuiSidebar() {
 
 	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_guiSidebar->setPosition(sf::Vector2f(GUIConstants::LEFT_BAR,
-		GUIConstants::TOP + 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - height)));
+		0.5f * (WINDOW_HEIGHT - height)));
 }
 
 void WorldInterface::loadMapSidebar(bool isLevel) {
@@ -165,11 +165,12 @@ void WorldInterface::loadMapSidebar(bool isLevel) {
 	auto const& tilesExplored = m_core->getData().tilesExplored;
 
 	int n = static_cast<int>(tilesExplored.size());
-	m_mapSidebar = new GUITabBar(this, isLevel ? n + 1 : n);
+	int size = isLevel ? n + 1 : n;
+	m_mapSidebar = new GUITabBar(this, size);
 
-	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
+	int height = size * GUITabButton::SIZE + (size - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_mapSidebar->setPosition(sf::Vector2f(WINDOW_WIDTH - (GUIConstants::LEFT_BAR + GUITabBar::WIDTH),
-		GUIConstants::TOP + 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - height)));
+		0.5f * (WINDOW_HEIGHT - height)));
 }
 
 Key WorldInterface::getKeyFromGuiElement(GUIElement e) {
