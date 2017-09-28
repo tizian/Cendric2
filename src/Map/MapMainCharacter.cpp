@@ -80,7 +80,6 @@ void MapMainCharacter::handleInput() {
 			currentAcceleration += it.second;
 		}
 	}
-	normalize(currentAcceleration);
 	currentAcceleration *= WALK_ACCELERATION;
 	setAcceleration(currentAcceleration);
 }
@@ -176,12 +175,12 @@ void MapMainCharacter::calculateUnboundedVelocity(const sf::Time& frameTime, sf:
 	}
 }
 
-float MapMainCharacter::getConfiguredMaxVelocityYUp() const {
-	return 200.f;
-}
-
-float MapMainCharacter::getConfiguredMaxVelocityYDown() const {
-	return 200.f;
+void MapMainCharacter::boundVelocity(sf::Vector2f& vel) const {
+	// check bounds
+	if (std::abs(vel.x) > getConfiguredMaxVelocityX() || std::abs(vel.y) > getConfiguredMaxVelocityX()) {
+		normalize(vel);
+		vel *= getConfiguredMaxVelocityX();
+	}
 }
 
 float MapMainCharacter::getConfiguredMaxVelocityX() const {

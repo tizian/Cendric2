@@ -22,6 +22,7 @@ public:
 	void render(sf::RenderTarget& target) override;
 	void checkCollisions(const sf::Vector2f& nextPosition);
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
+	void boundVelocity(sf::Vector2f& vel) const override;
 
 	void updateFirst(const sf::Time& frameTime) override { MapMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MapMovableGameObject::renderAfterForeground(target); }
@@ -31,8 +32,6 @@ public:
 
 	void setCharacterCore(CharacterCore* core);
 
-	float getConfiguredMaxVelocityYUp() const override;
-	float getConfiguredMaxVelocityYDown() const override;
 	float getConfiguredMaxVelocityX() const override;
 	GameObjectType getConfiguredType() const override;
 

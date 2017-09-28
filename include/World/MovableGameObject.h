@@ -50,7 +50,7 @@ protected:
 	virtual float getConfiguredMaxVelocityX() const;
 	sf::Vector2f m_velocity;
 	sf::Vector2f m_acceleration;
-	void boundVelocity(sf::Vector2f& vel) const;
+	virtual void boundVelocity(sf::Vector2f& vel) const;
 	MovingParent* m_movingParent = nullptr;
 	bool m_isLockedRelativeVelocityX = false;
 	bool m_isLockedRelativeVelocityY = false;
