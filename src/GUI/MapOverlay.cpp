@@ -9,7 +9,6 @@
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"
 #include "Map/DynamicTiles/WaypointTile.h"
-#include "GUI/LevelOverlay.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;

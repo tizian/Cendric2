@@ -11,7 +11,6 @@ class MainCharacter;
 class MapOverlay;
 class Window;
 class GUITabBar;
-class LevelOverlay;
 
 struct MapOverlayData final {
 	bool isLevel;
