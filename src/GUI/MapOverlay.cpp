@@ -24,8 +24,8 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 
 	const World& map = *m_screen->getWorld();
 
-	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
-	m_mainCharMarker.setTextureRect(sf::IntRect(0, 0, 25, 25));
+	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
+	m_mainCharMarker.setTextureRect(sf::IntRect(0, 25, 25, 25));
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setTextStyle(TextStyle::Shadowed);
@@ -295,6 +295,8 @@ void MapOverlay::reloadMaps() {
 
 		m_maps.push_back(data);
 
+		sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVEL_ICON);
+		m_mapTabBar->setButtonTexture(buttonIndex, tex, 0);
 		m_mapTabBar->setButtonOnClick(buttonIndex, std::bind(&MapOverlay::setMap, this, data->mapId));
 		buttonIndex++;
 		m_needsLevelOverlayReload = true;

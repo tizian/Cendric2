@@ -97,7 +97,6 @@ private:
 	sf::Image m_levelOverlayIcons;
 	std::vector<WaypointMarker*> m_waypoints;
 
-
 	int m_currentMap = -1;
 	bool m_isVisible = false;
 	bool m_isOnCurrentMap = false;

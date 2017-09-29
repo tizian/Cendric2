@@ -98,6 +98,7 @@ const std::string GlobalResource::TEX_GUI_TAB_ACTIVE = "res/assets/gui/tab_activ
 const std::string GlobalResource::TEX_GUI_CURSOR = "res/assets/gui/cursor.png";
 const std::string GlobalResource::TEX_GUI_PROGRESSLOG_ICONS = "res/assets/gui/progresslog_icons.png";
 const std::string GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS = "res/assets/gui/leveloverlay_icons.png";
+const std::string GlobalResource::TEX_GUI_LEVEL_ICON = "res/assets/gui/level_icon.png";
 const std::string GlobalResource::TEX_GUI_CHARACTERINFO_ICONS = "res/assets/gui/characterinfo_icons.png";
 const std::string GlobalResource::TEX_GUI_STATS_ICONS = "res/assets/gui/stats_icons.png";
 const std::string GlobalResource::TEX_GUI_BUTTON_ROUND = "res/assets/gui/button_round.png";
