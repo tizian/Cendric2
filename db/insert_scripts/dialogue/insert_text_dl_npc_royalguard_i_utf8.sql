@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Royalguard_Trouble', 'dl_npc_royalguard_i', 'Don''t make any trouble. We''re watching you.', 'Mach keinen Ärger. Wir beobachten dich.', 'Mach ken Scheiss. Mer beobachted dich.');

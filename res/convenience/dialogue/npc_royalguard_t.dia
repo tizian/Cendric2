@@ -1,0 +1,212 @@
+# dia file for dialogue for npc: npc_royalguard_t
+
+npc.id:npc_royalguard_t
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_royalguard_t", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_royalguard_t", "talked")
+	# translation: 
+	translation.tag:DL_Royalguard_Hey
+	translation.en:Hey you! How dare you to walk in here without permission!
+	translation.de:Hey du! Wie kannst du es wagen, hier einfach ohne Bewilligung hineinzuspazieren!
+	translation.ch:Hey du! We chasches woge, do eifach iez'spaziere ohni Bewilligung.
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Royalguard_Hey
+	translation.en:I really hope you have a good reason, otherwise I'll have to let you out immediately.
+	translation.de:Ich hoffe wirklich, du hast einen guten Grund. Sonst muss ich dich nämlich wieder hinausbefördern.
+	translation.ch:Ich hoff würkli, du heschen guete Grund. Susch muni di nämli wieder usebefördere.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_royalguard_t", "velius")
+		# translation: 
+		translation.tag:DL_Choice_Velius
+		translation.en:I'm looking for some mage called "Velius".
+		translation.de:Ich suche einen Magier namens "Velius".
+		translation.ch:Ich suech en Magier namens "Velius".
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_royalguard_t", "king")
+		# translation: 
+		translation.tag:DL_Choice_King
+		translation.en:I'd like to have an audience with the king.
+		translation.de:Ich möchte eine Audienz mit dem König haben.
+		translation.ch:Ich het gern a Audienz mitem König.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_royalguard_t", "velius")
+	# translation: 
+	translation.tag:DL_Royalguard_Velius
+	translation.en:The royal highmage is very busy. He does not receive any visitors.
+	translation.de:Der königliche Hochmagier ist äusserst beschäftigt. Er empfängt keine Besucher.
+	translation.ch:De königlich Hochmagier isch üsserst beschäftigt. Er empfangt ke Bsuecher.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Royalguard_King
+	translation.en:And why should our highness King Logan III waste his time talking to you?
+	translation.de:Und wieso sollte unsere Hochheit König Logan III seine Zeit mit dir verschwenden?
+	translation.ch:Und weso söt üseri Hohheit de König Logan III sini Ziit mit dir verschwende?
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{2
+	# [6] Choice Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_royalguard_t", "charming")
+		# translation: 
+		translation.tag:DL_Choice_Charming
+		translation.en:I'd love to get to know the king. 
+		translation.de:Ich würde den König wirklich gerne kennenlernen.
+		translation.ch:Ich wür de König würkli gern kennelerne.
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_royalguard_t", "none_business")
+		# translation: 
+		translation.tag:DL_Choice_NoneBusiness
+		translation.en:That's none of your business. I only talk to the king himself.
+		translation.de:Das geht dich nichts an. Ich rede nur mit dem König persönlich.
+		translation.ch:Das goht di nüt ah. Ich red nur mitem König persönlich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_Mark
+		translation.en:I'm a member. (Show the barely visible mark on your wrist)
+		translation.de:Ich gehöre dazu. (Das verblasste Mal auf dem Handgelenk zeigen)
+		translation.ch:Ich ghör dezue. (Es verblasste Zeiche ufem Handglenk zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_Back
+		translation.en:Ehm... Never mind. [BACK]
+		translation.de:Ehm... Auch egal. [ZURÜCK]
+		translation.ch:Ehm... Au egal. [ZRUGG]
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_royalguard_t", "charming")
+	trigger:DL:gotoNode(6)
+	# translation: 
+	translation.tag:DL_Royalguard_Charming
+	translation.en:Well, I'm pretty sure he doesn't share this intention. Bugger off!
+	translation.de:Nun, ich bin mir ziemlich sicher, dass er diesen Wunsch nicht mit dir teilt. Schwirr ab.
+	translation.ch:Hm, ich bimer zimli sicher, daser de Wunsch nid mit dir teilt. Schwirr ab.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_royalguard_t", "none_business")
+	trigger:DL:gotoNode(6)
+	# translation: 
+	translation.tag:DL_Royalguard_NoneBusiness
+	translation.en:Hn. Everyone could tell that. We don't just let everyone to the king. 
+	translation.de:Hn. Jeder könnte das sagen. Wir lassen nicht einfach jeden zum König.
+	translation.ch:Hn. Jeder chönt das sege. Mir lönd nid eifach jede zum König.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Royalguard_Mark
+	translation.en:If that's so... (he stares at your mark) ...you can have a very short audience.
+	translation.de:Wenn das so ist... (er starrt auf dein Mal) ...kannst du eine sehr kurze Audienz haben.
+	translation.ch:Wenn das so isch... (er starrt uf dis Zeiche) ...chasch e ganz churzi Audienz ha.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("default", "king_open")
+	trigger:DL:addConditionProgress("npc_royalguard_t", "king")
+	# translation: 
+	translation.tag:DL_Royalguard_Mark2
+	translation.en:Follow me.
+	translation.de:Folge mir.
+	translation.ch:Folg mir.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

@@ -142,6 +142,7 @@ void Screen::depthSortObjects(GameObjectType type, bool asc) {
 
 void Screen::renderObjects(GameObjectType type, sf::RenderTarget& renderTarget) {
 	for (auto& obj : m_objects[type]) {
+		if (obj->isDisposed()) continue;
 		obj->setViewable(isInsideView(renderTarget.getView(), *(obj->getBoundingBox())));
 		if (obj->isViewable())
 			obj->render(renderTarget);

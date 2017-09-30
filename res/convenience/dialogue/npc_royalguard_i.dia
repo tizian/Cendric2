@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_royalguard_i
+
+npc.id:npc_royalguard_i
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Royalguard_Trouble
+	translation.en:Don't make any trouble. We're watching you.
+	translation.de:Mach keinen Ärger. Wir beobachten dich.
+	translation.ch:Mach ken Scheiss. Mer beobachted dich.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
