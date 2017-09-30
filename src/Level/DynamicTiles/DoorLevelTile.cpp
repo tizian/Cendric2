@@ -146,7 +146,9 @@ void DoorLevelTile::open() {
 	m_isCollidable = false;
 	m_isStrictlyCollidable = false;
 	setState(GameObjectState::Open);
-	m_interactComponent->setInteractable(false);
+	if (m_interactComponent) {
+		m_interactComponent->setInteractable(false);
+	}
 
 	// unlock keyguarded triggers (which are level exits)
 	for (auto& it : *m_screen->getObjects(GameObjectType::_Overlay)) {

@@ -23,7 +23,7 @@ protected:
 	void initConditions(const std::map<std::string, std::string>& properties);
 
 protected:
-	InteractComponent* m_interactComponent;
+	InteractComponent* m_interactComponent = nullptr;
 	bool m_isOpen;
 	bool m_isInitialized = false;
 	bool m_isReloadNeeded = false;
