@@ -99,8 +99,8 @@ npc.id:npc_royalguard_t
 	# translation: 
 	translation.tag:DL_Royalguard_King
 	translation.en:And why should our highness King Logan III waste his time talking to you?
-	translation.de:Und wieso sollte unsere Hochheit König Logan III seine Zeit mit dir verschwenden?
-	translation.ch:Und weso söt üseri Hohheit de König Logan III sini Ziit mit dir verschwende?
+	translation.de:Und wieso sollte unsere Hoheit König Logan III seine Zeit mit dir verschwenden?
+	translation.ch:Und weso söt üseri Hoheit de König Logan III sini Ziit mit dir verschwende?
 	[
 		# Link node, tag is next tag
 		tag:6

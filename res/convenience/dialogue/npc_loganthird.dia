@@ -1,0 +1,674 @@
+# dia file for dialogue for npc: npc_loganthird
+
+npc.id:npc_loganthird
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_loganthird", "greeting")
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_loganthird", "engage")
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		condition:not DL:isConditionFulfilled("boss", "BossRoyalguards")
+	]
+	[
+		# Link node, tag is next tag
+		tag:34
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_loganthird", "bow")
+		# translation: 
+		translation.tag:DL_Choice_Bow
+		translation.en:(Bow to Logan)
+		translation.de:(Sich vor Logan verbeugen)
+		translation.ch:(Sich vorem Logan verbüüge)
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_loganthird", "highness")
+		# translation: 
+		translation.tag:DL_Choice_Highness
+		translation.en:(Cough) Your highness?
+		translation.de:(Hust) Eure Hoheit?
+		translation.ch:(Hust) Euri Hoheit?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:DL:isConditionFulfilled("npc_loganthird", "highness") or DL:isConditionFulfilled("npc_loganthird", "bow")
+		# translation: 
+		translation.tag:DL_Choice_Mark
+		translation.en:(Show him the mark)
+		translation.de:(Ihm das Mal zeigen)
+		translation.ch:(Ihm es Zeiche zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "bow")
+	# translation: 
+	translation.tag:DL_Logan_Bow
+	translation.en:... (Logan doesn't seem to be present)
+	translation.de:... (Logan scheint nicht anwesend zu sein)
+	translation.ch:... (De Logan isch glaub nid ganz do)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "highness")
+	# translation: 
+	translation.tag:DL_Logan_Highness
+	translation.en:... (Logan stares past you)
+	translation.de:... (Logan starrt an dir vorbei)
+	translation.ch:... (De Logan starrt a dir verbii)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "greeting")
+	# translation: 
+	translation.tag:DL_Logan_Mark
+	translation.en:... (Logan finally turns his head and looks at you) You may speak.
+	translation.de:... (Logan dreht endlich seinen Kopf und schaut dich an) Du darfst sprechen.
+	translation.ch:... (De Logan treiht endli sin Chopf und luegt dich ah) Du derfsch rede.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [5] Choice Node
+	tag:5
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_loganthird", "velius")
+		# translation: 
+		translation.tag:DL_Choice_Velius
+		translation.en:Your royal mage, Velius, we have to talk about him.
+		translation.de:Dein königlicher Magier, Velius, wir müssen über ihn reden.
+		translation.ch:Din königliche Magier, de Velius, mer mönd über ihn rede.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_loganthird", "eyes")
+		# translation: 
+		translation.tag:DL_Choice_Eyes
+		translation.en:What's the matter with your eyes?
+		translation.de:Was ist mit deinen Augen los?
+		translation.ch:Was isch mit dine Auge los?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:not DL:isConditionFulfilled("npc_loganthird", "father")
+		# translation: 
+		translation.tag:DL_Choice_Father
+		translation.en:Where is your father?
+		translation.de:Wo ist dein Vater?
+		translation.ch:Wo isch din Vatter?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:not DL:isConditionFulfilled("npc_loganthird", "young")
+		# translation: 
+		translation.tag:DL_Choice_Young
+		translation.en:Don't you think you're a bit too young to be king?
+		translation.de:Glaubst du nicht, dass du etwas zu jung bist, um König zu sein?
+		translation.ch:Glaubsch nid, dass chli z'jung bisch zum König sii?
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:not DL:isConditionFulfilled("npc_loganthird", "outside")
+		# translation: 
+		translation.tag:DL_Choice_Outside
+		translation.en:Have you ever been outside the castle?
+		translation.de:Warst du jemals ausserhalb des Schlosses?
+		translation.ch:Bisch schomal usem Schloss duss gsi?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		condition:not DL:isConditionFulfilled("npc_loganthird", "mage")
+		# translation: 
+		translation.tag:DL_Choice_Mage
+		translation.en:Are you a mage?
+		translation.de:Bist du ein Magier?
+		translation.ch:Bisch du en Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_loganthird", "know_me")
+		# translation: 
+		translation.tag:DL_Choice_KnowMe
+		translation.en:Do you know me?
+		translation.de:Kennst du mich?
+		translation.ch:Kennsch du mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:DL:isConditionFulfilled("npc_loganthird", "velius")
+		# translation: 
+		translation.tag:DL_Choice_WhatMark
+		translation.en:What does this mark even mean?
+		translation.de:Was bedeutet dieses Mal überhaupt?
+		translation.ch:Was bedüüted das Zeiche überhaupt?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "velius")
+	# translation: 
+	translation.tag:DL_Logan_Velius
+	translation.en:Why don't you talk to him yourself?
+	translation.de:Wieso redest du nicht selbst mit ihm?
+	translation.ch:Weso redsch nid selber mit ihm?
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{2
+	# [14] Choice Node
+	tag:14
+	[
+		# Link node, tag is next tag
+		tag:15
+		# translation: 
+		translation.tag:DL_Choice_WhereVelius
+		translation.en:Where can I find him?
+		translation.de:Wo kann ich ihn finden?
+		translation.ch:Wo ischer denn?
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		# translation: 
+		translation.tag:DL_Choice_Ookay
+		translation.en:Oookay...
+		translation.de:Oookay...
+		translation.ch:Oookay...
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_WhereVelius
+	translation.en:(Points at your mark) You should know.
+	translation.de:(Zeigt auf dein Mal) Das solltest du wissen.
+	translation.ch:(Zeigt uf dis Zeiche) Da sötsch wüsse.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_Oookay
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "eyes")
+	# translation: 
+	translation.tag:DL_Logan_Eyes
+	translation.en:That's no concern of yours. Don't waste my time.
+	translation.de:Das geht dich nichts an. Verschwende meine Zeit nicht.
+	translation.ch:Das goht dich nüt ah. Verschwend mini Ziit nid.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "father")
+	# translation: 
+	translation.tag:DL_Logan_Father
+	translation.en:He's fine.
+	translation.de:Ihm geht's gut.
+	translation.ch:Ihm gohts guet.
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_Father2
+	translation.en:... (Logan's eyes suddenly light up) No, he isn't. Please help me!
+	translation.de:... (Logan's Augen leuchten plötzlich auf)  Nein, ist er nicht. Bitte hilf mir!
+	translation.ch:... (Em Logan sini Auge lüüchted plötzli uf) Nei, ischer nid. Bitte, hilf mir!
+	[
+		# Link node, tag is next tag
+		tag:18
+	]
+}
+{2
+	# [18] Choice Node
+	tag:18
+	[
+		# Link node, tag is next tag
+		tag:19
+		# translation: 
+		translation.tag:DL_Choice_HowHelp
+		translation.en:How can I help you?
+		translation.de:Wie kann ich dir helfen?
+		translation.ch:We chani der helfe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		# translation: 
+		translation.tag:DL_Choice_WhatFather
+		translation.en:So, what exactly happened to him?
+		translation.de:Was ist denn genau mit ihm passiert?
+		translation.ch:Was isch denn gnau mitem passiert?
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_HowHelp
+	translation.en:(Logan is grappling for words, but then falls back into his old, absent state) ...
+	translation.de:(Logan ringt um Worte, fällt dann aber wieder zurück in seinen alten, abwesenden Zustand) ...
+	translation.ch:(De Logan ringt um Wort, fallt denn aber wieder zrugg i sin alte, abwesende Zuestand) ...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_HowHelp
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "young")
+	# translation: 
+	translation.tag:DL_Logan_Young
+	translation.en:... No. Do you have a problem with it?
+	translation.de:... Nein. Hast du ein Problem damit?
+	translation.ch:... Nei. Hesch es Problem demit?
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{2
+	# [22] Choice Node
+	tag:22
+	[
+		# Link node, tag is next tag
+		tag:23
+		# translation: 
+		translation.tag:DL_Choice_NotMyKing
+		translation.en:You're not my king. I didn't vote for you.
+		translation.de:Du bist nicht mein König. Ich habe dich nicht gewählt.
+		translation.ch:Du bisch nid min König. Ich ha dich nid gwählt.
+	]
+	[
+		# Link node, tag is next tag
+		tag:24
+		# translation: 
+		translation.tag:DL_Choice_MyKing
+		translation.en:No, not at all.
+		translation.de:Nein, sicher nicht.
+		translation.ch:Nei, voll nid.
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_NotMyKing
+	translation.en:You don't vote for kings.
+	translation.de:Könige werden nicht gewählt.
+	translation.ch:En König wird nid gwählt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_MyKing
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "outside")
+	# translation: 
+	translation.tag:DL_Logan_Outside
+	translation.en:Why should I.
+	translation.de:Wieso sollte ich.
+	translation.ch:Weso sötti.
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{2
+	# [27] Choice Node
+	tag:27
+	[
+		# Link node, tag is next tag
+		tag:28
+		# translation: 
+		translation.tag:DL_Choice_KingShouldKnow
+		translation.en:A king should know his people.
+		translation.de:Ein König sollte sein Volk kennen.
+		translation.ch:En König sött sis Volk kenne.
+	]
+	[
+		# Link node, tag is next tag
+		tag:29
+		# translation: 
+		translation.tag:DL_Choice_BeautifulOutside
+		translation.en:It's beautiful outside!
+		translation.de:Es ist wunderschön draussen!
+		translation.ch:Es isch wunderschön dusse!
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		# translation: 
+		translation.tag:DL_Choice_NotOutside
+		translation.en:Yeah, you're right. The life outside is nothing for you.
+		translation.de:Ja, du hast Recht. Das Leben da draussen ist nichts für dich.
+		translation.ch:Ja, hesch Recht. Es Lebe det usse isch nüt für dich.
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_KingShouldKnow
+	translation.en:Don't you tell me what a king should.
+	translation.de:Sag mir nicht, was ein König zu tun hat.
+	translation.ch:Seg mer nid, was en König z'tue het.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_BeautifulOutside
+	translation.en:I don't care.
+	translation.de:Ist mir egal.
+	translation.ch:Isch mer egal.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_NotOutside
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "mage")
+	# translation: 
+	translation.tag:DL_Logan_Mage
+	translation.en:... Yes.
+	translation.de:... Ja.
+	translation.ch:... Jo.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "know_me")
+	# translation: 
+	translation.tag:DL_Logan_KnowMe
+	translation.en:... No.
+	translation.de:... Nein.
+	translation.ch:... Nei.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_WhatMark
+	translation.en:You should know that. It's the reason you're here. 
+	translation.de:Du solltest das wissen. Deshalb bist du ja hier.
+	translation.ch:Du sötsch das wüsse. Drum bisch ja do.
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "engage")
+	# translation: 
+	translation.tag:DL_Logan_WhatMark2
+	translation.en:And it's the reason you will *die* here.
+	translation.de:Und es ist der Grund, wieso du hier *sterben* wirst.
+	translation.ch:Und es isch de Grund, weso du do *sterbe* wirsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [25] Choice Node
+	tag:25
+	[
+		# Link node, tag is next tag
+		tag:31
+		# translation: 
+		translation.tag:DL_Choice_BadDecision
+		translation.en:That's a very bad decision, boy. You against me?
+		translation.de:Das ist eine sehr schlechte Entscheidung, Junge. Du gegen mich?
+		translation.ch:Da isch e sehr schlechti Entscheidig, Bueb. Du gege mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:26
+		# translation: 
+		translation.tag:DL_Choice_CantKill
+		translation.en:Why would you do that?
+		translation.de:Wieso willst du das tun?
+		translation.ch:Weso wetsch da mache?
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_BadDecision
+	translation.en:No. Just you and my GUARDS!
+	translation.de:Nein. Nur du und meine WACHEN!
+	translation.ch:Nei. Nur du und mini WACHE!
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	trigger:DL:startLevel("res/level/boss_royalguards/boss_royalguards.tmx", 600, 560)
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_ForcedStay
+	translation.en:I've answered enough questions. Guards, kill him!
+	translation.de:Ich habe genügend Fragen beantwortet. Wachen, tötet ihn!
+	translation.ch:Ich ha ez gnueg Froge beantwortet. Wache, töted ihn!
+	[
+		# Link node, tag is next tag
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	trigger:DL:startLevel("res/level/boss_royalguards/boss_royalguards.tmx", 600, 560)
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_loganthird", "afraid")
+	# translation: 
+	translation.tag:DL_Logan_Afraid
+	translation.en:You... you killed my guards!
+	translation.de:Du... du hast meine Wachen getötet!
+	translation.ch:Du... du hesch mini Wache tötet!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
