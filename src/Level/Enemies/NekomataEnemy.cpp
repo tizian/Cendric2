@@ -38,7 +38,7 @@ void NekomataEnemy::loadAttributes() {
 
 void NekomataEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 50;
+	chopSpell.damage = 30;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 50);
@@ -47,7 +47,7 @@ void NekomataEnemy::loadSpells() {
 
 	SpellData shadowFireSpell = SpellData::getSpellData(SpellID::HolyFire);
 	shadowFireSpell.skinNr = 1;
-	shadowFireSpell.damagePerSecond = 10;
+	shadowFireSpell.damagePerSecond = 7;
 	shadowFireSpell.duration = sf::seconds(3.f);
 	shadowFireSpell.cooldown = sf::seconds(3.f);
 	shadowFireSpell.damageType = DamageType::Shadow;
@@ -57,8 +57,8 @@ void NekomataEnemy::loadSpells() {
 
 	SpellData shadowFireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	shadowFireBallSpell.skinNr = 2;
-	shadowFireBallSpell.damagePerSecond = 15;
-	shadowFireBallSpell.damage = 20;
+	shadowFireBallSpell.damagePerSecond = 10;
+	shadowFireBallSpell.damage = 10;
 	shadowFireBallSpell.count = 2;
 	shadowFireBallSpell.duration = sf::seconds(2.f);
 	shadowFireBallSpell.cooldown = sf::seconds(2.f);

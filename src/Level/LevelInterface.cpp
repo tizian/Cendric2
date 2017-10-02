@@ -6,8 +6,10 @@
 
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
 m_character(character) {
+	const Level* level = dynamic_cast<const Level*>(screen->getWorld());
+
 	loadGuiSidebar();
-	loadMapSidebar(true);
+	loadMapSidebar(level->getWorldData()->isBossLevel);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);
@@ -16,8 +18,6 @@ m_character(character) {
 	m_mapOverlay = new MapOverlay(m_screen, m_mapSidebar);
 	m_buffBar = new BuffBar(this);
 	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
-
-	const Level* level = dynamic_cast<const Level*>(screen->getWorld());
 
 	m_enemyHealthBar = new HealthBar(nullptr, level->getWorldData()->isBossLevel ? 
 		HealthBarStyle::Boss : 

@@ -381,9 +381,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 	target.draw(map->map);
 	target.draw(map->fogOfWarTileMap);
-
-	if (m_isOnCurrentMap)
-		target.draw(m_mainCharMarker);
+	
 	target.draw(m_title);
 
 	m_window->render(target);
@@ -391,6 +389,9 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	for (auto& wp : m_waypoints) {
 		wp->render(target);
 	}
+
+	if (m_isOnCurrentMap)
+		target.draw(m_mainCharMarker);
 }
 
 void MapOverlay::show() {
