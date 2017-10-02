@@ -908,7 +908,7 @@
   <object id="519" gid="810" x="1400" y="1100" width="50" height="50">
    <properties>
     <property name="collidable" value=""/>
-    <property name="oneway_right" value=""/>
+    <property name="oneway_left" value=""/>
     <property name="strength" value="5"/>
     <property name="width" value="1"/>
    </properties>
