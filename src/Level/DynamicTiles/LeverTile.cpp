@@ -21,6 +21,7 @@ bool LeverTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 
 	m_isGround = contains(properties, std::string("ground"));
+	m_isTelekinesisLocked = contains(properties, std::string("lock_telekinesis"));
 	m_interactComponent->setActive(!m_isGround);
 	
 	return true;
@@ -57,7 +58,12 @@ void LeverTile::loadAnimation(int skinNr) {
 void LeverTile::onHit(Spell* spell) {
 	switch (spell->getSpellID()) {
 	case SpellID::Telekinesis:
-		switchLever();
+		if (m_isTelekinesisLocked) {
+			m_screen->setNegativeTooltip("NotEnoughStrength");
+		}
+		else {
+			switchLever();
+		}
 		spell->setDisposed();
 		break;
 	default:

@@ -30,5 +30,6 @@ private:
 	static const float ACTIVATE_RANGE;
 	std::vector<LeverDependentTile*> m_dependentTiles;
 	bool m_isGround = false;
+	bool m_isTelekinesisLocked = false;
 	InteractComponent* m_interactComponent;
 };
