@@ -324,6 +324,9 @@ public:
 			return "YashaAdd";
 		case EnemyID::Yaslaw:
 			return "Yaslaw";
+		case EnemyID::Boss_Royalguard_T:
+		case EnemyID::Boss_Royalguard_I:
+			return "BossRoyalguard";
 		}
 	}
 
