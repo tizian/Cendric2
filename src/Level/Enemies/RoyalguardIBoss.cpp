@@ -10,10 +10,8 @@ REGISTER_ENEMY(EnemyID::Boss_Royalguard_I, RoyalguardIBoss)
 
 RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-	Enemy(level, screen) {
-
-	m_isAlwaysUpdate = true;
-	m_isBoss = true;
+	Enemy(level, screen),
+	RoyalguardBoss(level, screen) {
 }
 
 void RoyalguardIBoss::update(const sf::Time& frameTime) {
@@ -21,69 +19,34 @@ void RoyalguardIBoss::update(const sf::Time& frameTime) {
 }
 
 void RoyalguardIBoss::loadAttributes() {
-	m_attributes.setHealth(400);
+	m_attributes.setHealth(1500);
 	m_attributes.resistanceIce = -20;
-	m_attributes.resistanceLight = -20;
-	m_attributes.resistanceShadow = -20;
 	m_attributes.resistancePhysical = 100;
-	m_attributes.resistanceFire = 100;
+	m_attributes.resistanceFire = 10000;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
 }
 
 void RoyalguardIBoss::loadSpells() {
-	// the ultimate chop
-	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 100;
-	chopSpell.damagePerSecond = 1;
-	chopSpell.cooldown = sf::seconds(3.f);
-	chopSpell.boundingBox = sf::FloatRect(0.f, 0.f, 60.f, 80.f);
-	chopSpell.isBlocking = true;
-	chopSpell.fightingTime = sf::seconds(1.f);
-	chopSpell.fightAnimation = GameObjectState::Fighting;
-	chopSpell.castingTime = sf::seconds(0.6f);
-	chopSpell.castingAnimation = GameObjectState::Casting;
-	chopSpell.soundPaths.push_back("res/sound/mob/morgiana_hammer.ogg");
-	chopSpell.isSoundLooping = false;
+	// fireball
+	SpellData fireball = SpellData::getSpellData(SpellID::FireBall);
+	fireball.damage = 100;
+	fireball.damagePerSecond = 1;
+	fireball.cooldown = sf::seconds(5.f);
+	fireball.isBlocking = true;
+	fireball.castingTime = sf::seconds(2.f);
+	fireball.fightingTime = sf::seconds(0.f);
+	fireball.fightAnimation = GameObjectState::VOID;
+	fireball.castingAnimation = GameObjectState::Fighting3;
 
-	m_spellManager->addSpell(chopSpell);
+	m_spellManager->addSpell(fireball);
 
-	m_spellManager->setCurrentSpell(0); // ultimative chop
-}
-
-void RoyalguardIBoss::setDead() {
-	if (m_isDead) return;
-	Enemy::setDead();
-	
-	WorldCollisionQueryRecord rec;
-	rec.boundingBox = *getBoundingBox();
-
-	/*for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
-		if (auto* jeremy = dynamic_cast<JeremyBoss*>(go)) {
-			rec.boundingBox.left += 20.f;
-			jeremy->notifyMorgianaDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
-			rec.boundingBox.left -= 20.f;
-		}
-		if (auto* roy = dynamic_cast<RoyBoss*>(go)) {
-			rec.boundingBox.left -= 20.f;
-			roy->notifyMorgianaDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(-20.f, 0.f)));
-			rec.boundingBox.left += 20.f;
-		}
-	}*/
-}
-
-void RoyalguardIBoss::notifyOtherDeath(const sf::Vector2f& newPos) {
-	if (m_isDead) return;
-	setPosition(newPos);
-	setStunned(sf::seconds(5.f));
+	m_spellManager->setCurrentSpell(0);
 }
 
 void RoyalguardIBoss::handleAttackInput() {
-	if (getCurrentTarget() == nullptr) return;
-	if (m_enemyAttackingBehavior->distToTarget() < 80.f) {
-		m_spellManager->setCurrentSpell(0);
-		m_spellManager->executeCurrentSpell(getCurrentTarget());
-	}
+	m_spellManager->setCurrentSpell(0);
+	m_spellManager->executeCurrentSpell(m_mainChar);
 }
 
 void RoyalguardIBoss::loadAnimation(int skinNr) {
@@ -105,70 +68,66 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect(7 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(7 * width, 1 * height, width, height));
+	deadAnimation->addFrame(sf::IntRect(9 * width, 1 * height, width, height));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
-	Animation* castingAnimation = new Animation(sf::seconds(0.1f));
-	castingAnimation->setSpriteSheet(tex);
-	for (int i = 10; i < 17; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
-	}
-	for (int i = 0; i < 2; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * wideWidth, 1 * height, wideWidth, height));
-	}
-	castingAnimation->setLooped(false);
+	// chop down
+	Animation* casting1Animation = new Animation(sf::seconds(0.1f));
+	casting1Animation->setSpriteSheet(tex);
+	casting1Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
+	casting1Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
+	casting1Animation->addFrame(sf::IntRect(12 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect(14 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
+	casting1Animation->setLooped(false);
 
-	addAnimation(GameObjectState::Casting, castingAnimation);
+	addAnimation(GameObjectState::Casting, casting1Animation);
 
-	Animation* fightingAnimation = new Animation(sf::seconds(1.f));
-	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(3 * width, 1 * height, width, height));
-	fightingAnimation->setLooped(false);
+	Animation* fighting1Animation = new Animation();
+	fighting1Animation->setSpriteSheet(tex);
+	fighting1Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
+	fighting1Animation->setLooped(false);
 
-	addAnimation(GameObjectState::Fighting, fightingAnimation);
+	addAnimation(GameObjectState::Fighting, fighting1Animation);
 
+	// chop up
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
 	casting2Animation->setSpriteSheet(tex);
-	for (int i = 4; i < 6; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * width, 1 * height, width, height));
-	}
+	casting2Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(14 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(12 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
+	casting2Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
 
-	Animation* fighting2Animation = new Animation(sf::seconds(1.f));
+	Animation* fighting2Animation = new Animation();
 	fighting2Animation->setSpriteSheet(tex);
-	fighting2Animation->addFrame(sf::IntRect(6 * width, 1 * height, width, height));
+	fighting2Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	fighting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting2, fighting2Animation);
 
-	Animation* casting3Animation = new Animation(sf::seconds(0.2f));
-	casting3Animation->setSpriteSheet(tex);
-	for (int i = 8; i < 10; ++i) {
-		casting3Animation->addFrame(sf::IntRect(i * width, 1 * height, width, height));
-	}
-	casting3Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Casting3, casting3Animation);
-
-	Animation* fighting3Animation = new Animation(sf::seconds(1.f));
+	// heal & cast fireball
+	Animation* fighting3Animation = new Animation(sf::seconds(0.1f));
 	fighting3Animation->setSpriteSheet(tex);
-	fighting3Animation->addFrame(sf::IntRect(10 * width, 1 * height, width, height));
+	fighting3Animation->addFrame(sf::IntRect(18 * width, 0, width, height));
+	fighting3Animation->addFrame(sf::IntRect(19 * width, 0, width, height));
 	fighting3Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting3, fighting3Animation);
@@ -185,7 +144,7 @@ MovingBehavior* RoyalguardIBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setMaxVelocityX(0.f);
 	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;
@@ -197,14 +156,6 @@ AttackingBehavior* RoyalguardIBoss::createAttackingBehavior(bool asAlly) {
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&RoyalguardIBoss::handleAttackInput, this));
 	return behavior;
-}
-
-sf::Time RoyalguardIBoss::getConfiguredWaitingTime() const {
-	return sf::Time::Zero;
-}
-
-float RoyalguardIBoss::getConfiguredDistanceToHPBar() const {
-	return 30.f;
 }
 
 std::string RoyalguardIBoss::getSpritePath() const {

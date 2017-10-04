@@ -152,6 +152,8 @@ protected:
 	InteractComponent* m_interactComponent;
 	int m_skinNr;
 
+	void clearReward();
+
 private:
 	sf::RectangleShape m_hpBar;
 	static const float HP_BAR_HEIGHT;

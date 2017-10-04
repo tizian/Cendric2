@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="16" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="116">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="16" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="119">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_royalguards/layer_inf.png,2.0,res/level/boss_royalguards/layer_2.png"/>
   <property name="bosslevel" value="res/level/boss_royalguards/boss_royalguards.lua"/>
@@ -261,5 +261,8 @@
  </layer>
  <objectgroup name="dynamic"/>
  <objectgroup name="trigger"/>
- <objectgroup name="enemy"/>
+ <objectgroup name="enemy">
+  <object id="116" gid="1384" x="50" y="600" width="50" height="50"/>
+  <object id="117" gid="1385" x="1200" y="600" width="50" height="50"/>
+ </objectgroup>
 </map>

@@ -152,6 +152,13 @@ GameObjectType Enemy::getConfiguredType() const {
 	return GameObjectType::_Enemy;
 }
 
+void Enemy::clearReward() {
+	m_reward.lootableGold = 0;
+	m_reward.lootableItems.clear();
+	m_reward.questConditions.clear();
+	m_reward.questTargets.clear();
+}
+
 void Enemy::updateEnemyState(const sf::Time& frameTime) {
 	// handle dead
 	if (m_enemyState == EnemyState::Dead) return;
