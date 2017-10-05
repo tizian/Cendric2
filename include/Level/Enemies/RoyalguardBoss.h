@@ -16,7 +16,11 @@ public:
 	
 	void notifyOtherDeath(const sf::Vector2f& newPos);
 
-protected:
+protected: 
+	void loadWeapon();
+	virtual std::string getWeaponTexturePath() const = 0;
 
+protected:
+	sf::Sprite m_weapon;
 	bool m_isOtherDead = false;
 };

@@ -143,6 +143,10 @@ std::string RoyalguardTBoss::getSpritePath() const {
 	return "res/assets/bosses/spritesheet_boss_royalguard_t.png";
 }
 
+std::string RoyalguardTBoss::getWeaponTexturePath() const {
+	return "res/assets/bosses/pike_t.png";
+}
+
 std::string RoyalguardTBoss::getDeathSoundPath() const {
 	return "res/sound/mob/jeremy_death.ogg";
 }

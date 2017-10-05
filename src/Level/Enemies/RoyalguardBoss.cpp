@@ -34,6 +34,15 @@ void RoyalguardBoss::setDead() {
 	}
 }
 
+void RoyalguardBoss::loadWeapon() {
+	g_resourceManager->loadTexture(getWeaponTexturePath(), ResourceType::Level);
+	auto tex = g_resourceManager->getTexture(getWeaponTexturePath());
+	if (!tex) return;
+	m_weapon.setTexture(*tex);
+
+	m_weapon.setOrigin(sf::Vector2f())
+}
+
 sf::Time RoyalguardBoss::getConfiguredWaitingTime() const {
 	return sf::Time::Zero;
 }
