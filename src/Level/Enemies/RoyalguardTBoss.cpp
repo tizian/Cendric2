@@ -12,6 +12,7 @@ RoyalguardTBoss::RoyalguardTBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	RoyalguardBoss(level, screen) {
+	loadWeapon();
 }
 
 void RoyalguardTBoss::update(const sf::Time& frameTime) {

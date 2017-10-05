@@ -7,8 +7,6 @@ class RoyalguardIBoss final : public virtual RoyalguardBoss {
 public:
 	RoyalguardIBoss(const Level* level, Screen* screen);
 
-	void update(const sf::Time& frameTime) override;
-
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Royalguard_I; }
 
 protected:

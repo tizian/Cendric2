@@ -1,6 +1,8 @@
 #include "Level/Enemies/RoyalguardBoss.h"
 #include "Level/Level.h"
 
+const sf::Vector2f RoyalguardBoss::WEAPON_ORIGIN = sf::Vector2f(80.f, 10.f);
+
 RoyalguardBoss::RoyalguardBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
@@ -34,13 +36,40 @@ void RoyalguardBoss::setDead() {
 	}
 }
 
+void RoyalguardBoss::update(const sf::Time& frameTime) {
+	Enemy::update(frameTime);
+	if (m_isWeaponVisible) {
+		updateWeapon(frameTime);
+	}
+}
+
+void RoyalguardBoss::render(sf::RenderTarget& target) {
+	Enemy::render(target);
+	if (m_isWeaponVisible) {
+		target.draw(m_weapon);
+	}
+}
+
 void RoyalguardBoss::loadWeapon() {
 	g_resourceManager->loadTexture(getWeaponTexturePath(), ResourceType::Level);
 	auto tex = g_resourceManager->getTexture(getWeaponTexturePath());
 	if (!tex) return;
+	
 	m_weapon.setTexture(*tex);
+	m_weapon.setOrigin(WEAPON_ORIGIN);
+}
 
-	m_weapon.setOrigin(sf::Vector2f())
+void RoyalguardBoss::updateWeapon(const sf::Time& frameTime) {
+	switch (m_weaponRotateType)
+	{
+	case WeaponRotateType::ToMainChar:
+		break;
+	case WeaponRotateType::Turn:
+		break;
+	case WeaponRotateType::Fixed:
+	default:
+		break;
+	}
 }
 
 sf::Time RoyalguardBoss::getConfiguredWaitingTime() const {
