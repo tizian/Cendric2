@@ -60,6 +60,7 @@ void RoyalguardBoss::loadWeapon() {
 }
 
 void RoyalguardBoss::updateWeapon(const sf::Time& frameTime) {
+	m_weapon.setPosition(getPosition() + m_weaponOffset);
 	switch (m_weaponRotateType)
 	{
 	case WeaponRotateType::ToMainChar:
