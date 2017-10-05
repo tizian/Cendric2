@@ -1,7 +1,7 @@
 #include "Level/Enemies/RoyalguardBoss.h"
 #include "Level/Level.h"
 
-const sf::Vector2f RoyalguardBoss::WEAPON_ORIGIN = sf::Vector2f(80.f, 10.f);
+const sf::Vector2f RoyalguardBoss::WEAPON_ORIGIN = sf::Vector2f(56.f, 15.f);
 
 RoyalguardBoss::RoyalguardBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),

@@ -26,6 +26,7 @@ public:
 	// other queries
 	bool isConditionFulfilled(const std::string& conditionType, const std::string& condition) const;
 	bool hasItem(const std::string& itemID, int amount) const; // this can also query gold. with item id "gold"
+	bool isItemEquipped(const std::string& itemID) const; 
 	bool isSpellLearned(int spellID);
 	int getItemAmount(const std::string& itemID) const; // this can also query gold. with item id "gold"
 	int getReputation(const std::string& fractionID) const;

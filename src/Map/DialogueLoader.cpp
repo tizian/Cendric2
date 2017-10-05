@@ -26,6 +26,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isQuestDescriptionUnlocked", &DialogueLoader::isQuestDescriptionUnlocked)
 		.addFunction("isSpellLearned", &DialogueLoader::isSpellLearned)
 		.addFunction("hasItem", &DialogueLoader::hasItem)
+		.addFunction("isItemEquipped", &DialogueLoader::isItemEquipped)
 		.addFunction("getItemAmount", &DialogueLoader::getItemAmount)
 		.addFunction("getReputation", &DialogueLoader::getReputation)
 		.addFunction("getGuild", &DialogueLoader::getGuild)

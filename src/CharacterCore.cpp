@@ -465,6 +465,16 @@ bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 	return getItemAmount(itemID) >= amount;
 }
 
+bool CharacterCore::isItemEquipped(const std::string& itemID) const {
+	for (auto& it : m_data.equippedItems) {
+		if (it.second.compare(itemID) == 0) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 const CharacterCoreData& CharacterCore::getData() const {
 	return m_data;
 }

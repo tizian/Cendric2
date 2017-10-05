@@ -24,6 +24,7 @@ public:
 	bool isQuestDescriptionUnlocked(const std::string& quest, int description) const { return m_worldCallback->isQuestDescriptionUnlocked(quest, description); }
 	bool isSpellLearned(int spellID) const { return m_worldCallback->isSpellLearned(spellID); }
 	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
+	bool isItemEquipped(const std::string& item) const { return m_worldCallback->isItemEquipped(item); }
 	int getItemAmount(const std::string& item) const { return m_worldCallback->getItemAmount(item); }
 	int getReputation(const std::string& fractionID) const { return m_worldCallback->getReputation(fractionID); }
 	std::string getGuild() const { return m_worldCallback->getGuild(); }

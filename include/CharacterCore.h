@@ -143,6 +143,8 @@ public:
 	bool hasItem(const std::string& itemID, int amount) const;
 	// returns whether cendric has at least the given amount of items of this key in the stored items. Also works for gold with itemID "gold".
 	bool hasStoredItem(const std::string& itemID, int amount) const;
+	// returns whether cendric has this item currently equipped
+	bool isItemEquipped(const std::string& itemID) const;
 	// returns a copy of the merchant data for that id. If it is not already present, tries to load it.
 	MerchantData getMerchantData(const std::string& merchantID);
 	// sets the merchant wares of this merchant id

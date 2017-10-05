@@ -26,6 +26,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("isQuestConditionFulfilled", &WorldCallback::isQuestConditionFulfilled)
 		.addFunction("isQuestDescriptionUnlocked", &WorldCallback::isQuestDescriptionUnlocked)
 		.addFunction("hasItem", &WorldCallback::hasItem)
+		.addFunction("isItemEquipped", &WorldCallback::isItemEquipped)
 		.addFunction("isSpellLearned", &WorldCallback::isSpellLearned)
 		.addFunction("getItemAmount", &WorldCallback::getItemAmount)
 		.addFunction("getReputation", &WorldCallback::getReputation)
@@ -124,6 +125,15 @@ bool WorldCallback::hasItem(const std::string& itemID, int amount) const {
 	}
 
 	return m_core->hasItem(itemID, amount);
+}
+
+bool WorldCallback::isItemEquipped(const std::string& itemID) const {
+	if (itemID.empty()) {
+		g_logger->logError("WorldCallback", "Item key cannot be empty ");
+		return false;
+	}
+
+	return m_core->isItemEquipped(itemID);
 }
 
 bool WorldCallback::isSpellLearned(int spellID) {

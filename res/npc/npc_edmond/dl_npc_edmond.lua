@@ -47,14 +47,35 @@ loadDialogue = function(DL)
 				DL:addChoice(11, "DL_Choice_IWontHelp") --  No, that's your problem
 				DL:addNode()
 				
-			elseif (not DL:isConditionFulfilled("trigger","tutorial_started")) then
+			elseif (DL:isConditionFulfilled("trigger","tutorial_started")) then
+            
+                -- nop
 				
-				DL:createChoiceNode(50)
+            elseif (not DL:isConditionFulfilled("npc_edmond", "walking_pole")) then
+            
+                DL:createChoiceNode(50)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?
 				DL:addChoice(-1, "DL_Choice_CU") --  See you later
 				DL:addNode()
 				
 				DL:setRoot(50)
+                
+            else 
+            
+                if (DL:isItemEquipped("we_walkingpole")) then
+                
+                    DL:createNPCNode(60, -1, "DL_Edmond_WalkingPoleDone") -- Perfect! Follow me.
+                    DL:addConditionProgress("trigger","tutorial_started")
+                    DL:addNode()
+                    
+                else
+                
+                    DL:createNPCNode(60, -1, "DL_Edmond_WalkingPole") -- We will go crush some rocks as soon as you equip the walking pole.
+                    DL:addNode()
+                    
+                end
+                
+                DL:setRoot(60)
 				
 			end
 				
@@ -68,13 +89,10 @@ loadDialogue = function(DL)
 			
 			DL:createNPCNode(11, -1, "DL_Edmond_YouWontHelp") -- It is not only my problem. Come back to me if you've changed your mind.
 			DL:addNode()
-
 						
-			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole and follow me.
-			DL:addConditionProgress("trigger","tutorial_started")
+			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole and equip it.
+            DL:addConditionProgress("npc_edmond","walking_pole")
 			DL:addItem("we_walkingpole", 1)
-			DL:equipItem("we_walkingpole")
-			DL:addHint("Inventory")
 			DL:addNode()
 				
 		else 
