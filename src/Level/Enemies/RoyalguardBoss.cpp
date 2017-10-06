@@ -1,5 +1,6 @@
 #include "Level/Enemies/RoyalguardBoss.h"
 #include "Level/Level.h"
+#include "Level/LevelMainCharacter.h"
 
 const sf::Vector2f RoyalguardBoss::WEAPON_ORIGIN = sf::Vector2f(56.f, 15.f);
 
@@ -15,6 +16,10 @@ void RoyalguardBoss::notifyOtherDeath(const sf::Vector2f& newPos) {
 	if (m_isDead) return;
 	setPosition(newPos);
 	setStunned(sf::seconds(5.f));
+}
+
+void RoyalguardBoss::revive() {
+
 }
 
 void RoyalguardBoss::setDead() {
@@ -64,8 +69,11 @@ void RoyalguardBoss::updateWeapon(const sf::Time& frameTime) {
 	switch (m_weaponRotateType)
 	{
 	case WeaponRotateType::ToMainChar:
+		sf::Vector2f toMainChar = m_mainChar->getCenter() - m_weapon.getPosition();
+		m_weapon.setRotation(radToDeg(std::atan2(toMainChar.y, toMainChar.x)));
 		break;
 	case WeaponRotateType::Turn:
+		m_weapon.setRotation(m_weapon.getRotation() + frameTime.asSeconds() * 360.f);
 		break;
 	case WeaponRotateType::Fixed:
 	default:

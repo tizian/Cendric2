@@ -23,6 +23,7 @@ public:
 	float getConfiguredDistanceToHPBar() const override;
 	
 	void notifyOtherDeath(const sf::Vector2f& newPos);
+	void revive();
 
 protected: 
 	void loadWeapon();
