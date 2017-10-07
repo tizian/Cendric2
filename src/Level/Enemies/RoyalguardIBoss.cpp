@@ -1,6 +1,6 @@
 #include "Level/Enemies/RoyalguardIBoss.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/RoyalguardIBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
@@ -42,8 +42,54 @@ void RoyalguardIBoss::loadSpells() {
 }
 
 void RoyalguardIBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(0);
-	m_spellManager->executeCurrentSpell(m_mainChar);
+	// nop
+}
+
+void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {
+	if (m_isDead) return;
+	return;
+	updateTime(m_stateTime, frameTime);
+	if (m_stateTime > sf::Time::Zero) return;
+	switch (m_bossState)
+	{
+	default:
+	case RoyalguardBossState::Waiting:
+		if (dist(getCenter(), m_mainChar->getCenter()) > 50.f) {
+			m_bossState = RoyalguardBossState::ChargingStart;
+			m_stateTime = sf::seconds(1.5f);
+			m_weaponRotateType = WeaponRotateType::ToMainChar;
+		}
+		else {
+			m_bossState = RoyalguardBossState::Swirl;
+			m_stateTime = sf::seconds(1.f);
+			m_spellManager->setCurrentSpell(0);
+			m_spellManager->executeCurrentSpell(m_mainChar);
+			m_weaponRotateType = WeaponRotateType::Turn;
+		}
+		m_weaponOffset = sf::Vector2f(72.f, 93.f);
+		m_isWeaponVisible = true;
+		break;
+	case RoyalguardBossState::ChargingStart:
+		m_bossState = RoyalguardBossState::Charging;
+		m_weaponRotateType = WeaponRotateType::Fixed;
+		m_weaponOffset = sf::Vector2f(74.f, 85.f);
+		break;
+	case RoyalguardBossState::Charging:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		m_stateTime = sf::seconds(1.f);
+		break;
+	case RoyalguardBossState::Swirl:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		break;
+	case RoyalguardBossState::Healing:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		m_stateTime = sf::seconds(1.f);
+		m_other->revive();
+		break;
+	}
 }
 
 void RoyalguardIBoss::loadAnimation(int skinNr) {
@@ -136,7 +182,7 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 
 MovingBehavior* RoyalguardIBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
-	behavior = new AggressiveWalkingBehavior(this);
+	behavior = new RoyalguardIBossMovingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
@@ -165,4 +211,28 @@ std::string RoyalguardIBoss::getWeaponTexturePath() const {
 
 std::string RoyalguardIBoss::getDeathSoundPath() const {
 	return "res/sound/mob/morgiana_death.ogg";
+}
+
+/////////////////////
+// ROYALGUARD FIRE //
+/////////////////////
+
+const sf::Time RoyalguardFire::GRACE_TIME = sf::seconds(2.f);
+
+RoyalguardFire::RoyalguardFire(bool isTop, LevelMovableGameObject* mainChar) {
+	m_mainChar = mainChar;
+}
+
+void RoyalguardFire::update(const sf::Time& frameTime) {
+	updateTime(m_graceTime, frameTime);
+	if (m_graceTime > sf::Time::Zero) {
+		return;
+	}
+	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
+		m_mainChar->setDead();
+	}
+}
+
+void RoyalguardFire::loadParticles() {
+
 }

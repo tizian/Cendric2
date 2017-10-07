@@ -73,6 +73,12 @@ inline void normalize(sf::Vector2f& v) {
 	v.y /= normV;
 }
 
+inline sf::Vector2f normalized(const sf::Vector2f& v) {
+	sf::Vector2f n = v;
+	normalize(n);
+	return n;
+}
+
 inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
 	return norm(v1 - v2);
 }

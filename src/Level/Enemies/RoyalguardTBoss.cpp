@@ -1,6 +1,6 @@
 #include "Level/Enemies/RoyalguardTBoss.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/RoyalguardTBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
@@ -15,10 +15,6 @@ RoyalguardTBoss::RoyalguardTBoss(const Level* level, Screen* screen) :
 	loadWeapon();
 }
 
-void RoyalguardTBoss::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-}
-
 void RoyalguardTBoss::loadAttributes() {
 	m_attributes.setHealth(1500);
 	m_attributes.resistanceFire = -20;
@@ -30,11 +26,12 @@ void RoyalguardTBoss::loadAttributes() {
 
 void RoyalguardTBoss::loadSpells() {
 	// swirl
-	SpellData swirl = SpellData::getSpellData(SpellID::FireBall);
+	SpellData swirl = SpellData::getSpellData(SpellID::Chop);
 	swirl.damage = 20;
 	swirl.cooldown = sf::seconds(1.f);
 	swirl.fightingTime = sf::seconds(1.f);
 	swirl.fightAnimation = GameObjectState::Fighting;
+	swirl.isBlocking = true;
 
 	m_spellManager->addSpell(swirl);
 
@@ -42,8 +39,55 @@ void RoyalguardTBoss::loadSpells() {
 }
 
 void RoyalguardTBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(0);
-	m_spellManager->executeCurrentSpell(m_mainChar);
+	// nop, handled over other functions
+}
+
+void RoyalguardTBoss::updateBossState(const sf::Time& frameTime) {
+	if (m_isDead) return;
+	updateTime(m_stateTime, frameTime);
+	if (m_stateTime > sf::Time::Zero) return;
+	switch (m_bossState)
+	{
+	default:
+	case RoyalguardBossState::Waiting:
+		if (dist(getCenter(), m_mainChar->getCenter()) > 50.f) {
+			m_bossState = RoyalguardBossState::ChargingStart;
+			m_stateTime = sf::seconds(1.5f);
+			m_weaponRotateType = WeaponRotateType::ToMainChar;
+		}
+		else {
+			m_bossState = RoyalguardBossState::Swirl;
+			m_stateTime = sf::seconds(1.f);
+			m_spellManager->setCurrentSpell(0);
+			m_spellManager->executeCurrentSpell(m_mainChar);
+			m_weaponRotateType = WeaponRotateType::Turn;
+		}
+		m_weaponOffset = sf::Vector2f(27.f, 33.f);
+		m_isWeaponVisible = true;
+		break;
+	case RoyalguardBossState::ChargingStart:
+		m_bossState = RoyalguardBossState::Charging;
+		m_weaponRotateType = WeaponRotateType::Fixed;
+		m_weaponOffset = sf::Vector2f(29.f, 25.f);
+		dynamic_cast<RoyalguardTBossMovingBehavior*>(getMovingBehavior())->setChargingDirection(normalized(m_mainChar->getCenter() - getCenter()));
+		m_stateTime = sf::seconds(10.f);
+		break;
+	case RoyalguardBossState::Charging:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		m_stateTime = sf::seconds(1.f);
+		break;
+	case RoyalguardBossState::Swirl:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		break;
+	case RoyalguardBossState::Healing:
+		m_isWeaponVisible = false;
+		m_bossState = RoyalguardBossState::Waiting;
+		m_stateTime = sf::seconds(1.f);
+		m_other->revive();
+		break;
+	}
 }
 
 void RoyalguardTBoss::loadAnimation(int skinNr) {
@@ -85,13 +129,14 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	// swirl
 	Animation* fighting1Animation = new Animation();
 	fighting1Animation->setSpriteSheet(tex);
-	fighting1Animation->addFrame(sf::IntRect(20 * width, 0, wideWidth, height));
+	fighting1Animation->addFrame(sf::IntRect(20 * width, 0, width, height));
 	fighting1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fighting1Animation);
 
 	// before charge
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
+	casting2Animation->setSpriteSheet(tex);
 	casting2Animation->addFrame(sf::IntRect(21 * width, 0, width, height));
 	casting2Animation->setLooped(false);
 
@@ -121,12 +166,12 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 
 MovingBehavior* RoyalguardTBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
-	behavior = new AggressiveWalkingBehavior(this);
+	behavior = new RoyalguardTBossMovingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(0.f);
+	behavior->setMaxVelocityX(600.f);
 	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;

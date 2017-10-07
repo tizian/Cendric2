@@ -7,11 +7,11 @@ class RoyalguardTBoss final : public virtual RoyalguardBoss {
 public:
 	RoyalguardTBoss(const Level* level, Screen* screen);
 
-	void update(const sf::Time& frameTime) override;
-
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Royalguard_T; }
 
 protected:
+	void updateBossState(const sf::Time& frameTime) override;
+
 	std::string getSpritePath() const override;
 	std::string getDeathSoundPath() const override;
 	std::string getWeaponTexturePath() const override;
