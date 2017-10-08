@@ -16,9 +16,11 @@ void RoyalguardTBossMovingBehavior::setChargingDirection(const sf::Vector2f& dir
 
 void RoyalguardTBossMovingBehavior::execHandleMovementInput() {
 	if (m_boss->getBossState() == RoyalguardBossState::ChargingStart) {
+		m_nextIsFacingRight = m_mainChar->getCenter().x > m_enemy->getCenter().x;
 		return;
 	}
 	if (m_boss->getBossState() == RoyalguardBossState::Charging) {
+		m_nextIsFacingRight = m_chargingDirection.x >= 0.f;
 		m_boss->setVelocity(m_chargingDirection * CHARGING_SPEED);
 		m_gravity = 0.f;
 		return;

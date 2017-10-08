@@ -53,6 +53,8 @@ void RoyalguardTBoss::updateBossState(const sf::Time& frameTime) {
 		if (dist(getCenter(), m_mainChar->getCenter()) > 50.f) {
 			m_bossState = RoyalguardBossState::ChargingStart;
 			m_stateTime = sf::seconds(1.5f);
+			m_acceleration = sf::Vector2f(0.f, 0.f);
+			m_velocity = sf::Vector2f(0.f, 0.f);
 			m_weaponRotateType = WeaponRotateType::ToMainChar;
 		}
 		else {
@@ -69,12 +71,14 @@ void RoyalguardTBoss::updateBossState(const sf::Time& frameTime) {
 		m_bossState = RoyalguardBossState::Charging;
 		m_weaponRotateType = WeaponRotateType::Fixed;
 		m_weaponOffset = sf::Vector2f(29.f, 25.f);
+		getMovingBehavior()->setMaxVelocityX(1000.f);
 		dynamic_cast<RoyalguardTBossMovingBehavior*>(getMovingBehavior())->setChargingDirection(normalized(m_mainChar->getCenter() - getCenter()));
 		m_stateTime = sf::seconds(10.f);
 		break;
 	case RoyalguardBossState::Charging:
 		m_isWeaponVisible = false;
 		m_bossState = RoyalguardBossState::Waiting;
+		getMovingBehavior()->setMaxVelocityX(200.f);
 		m_stateTime = sf::seconds(1.f);
 		break;
 	case RoyalguardBossState::Swirl:
@@ -171,7 +175,7 @@ MovingBehavior* RoyalguardTBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(600.f);
+	behavior->setMaxVelocityX(200.f);
 	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;

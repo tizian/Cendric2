@@ -55,10 +55,10 @@ void RoyalguardBoss::setDead() {
 
 void RoyalguardBoss::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
+	updateBossState(frameTime);
 	if (m_isWeaponVisible) {
 		updateWeapon(frameTime);
 	}
-	updateBossState(frameTime);
 }
 
 void RoyalguardBoss::render(sf::RenderTarget& target) {
