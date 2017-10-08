@@ -64,9 +64,6 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
 		break;
-	case SpellID::AntiGravity:
-		types.push_back(SpellModifierType::Duration);
-		break;
 	case SpellID::WindGust:
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Range);
@@ -563,13 +560,11 @@ SpellData SpellData::getAntiGravitySpellData() {
 
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
-	antiGravity.duration = sf::seconds(7);
-	antiGravity.cooldown = antiGravity.duration;
+	antiGravity.cooldown = sf::seconds(2.f);
+	antiGravity.duration = sf::seconds(-1);
 	antiGravity.activeDuration = antiGravity.duration;
 	antiGravity.attachedToMob = true;
 	antiGravity.fightAnimation = GameObjectState::VOID;
-
-	antiGravity.durationModifierAddition = sf::seconds(3);
 
 	return antiGravity;
 }

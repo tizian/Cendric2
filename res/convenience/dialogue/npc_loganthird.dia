@@ -662,11 +662,26 @@ npc.id:npc_loganthird
 	tag:34
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_loganthird", "afraid")
+	trigger:DL:addConditionProgress("default", "hallway_open")
 	# translation: 
 	translation.tag:DL_Logan_Afraid
 	translation.en:You... you killed my guards!
 	translation.de:Du... du hast meine Wachen getötet!
 	translation.ch:Du... du hesch mini Wache tötet!
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Logan_Afraid2
+	translation.en:AAAAaaaaaaAAAAAH!
+	translation.de:AAAAaaaaaaAAAAAH!
+	translation.ch:AAAAaaaaaaAAAAAH!
 	[
 		# Link node, tag is next tag
 		tag:-1

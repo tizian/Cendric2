@@ -49,6 +49,9 @@ bool MapReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_) c
 		else if (name.compare("explorable") == 0) {
 			data.explorable = true;
 		}
+		else if (name.compare("lock_teleport") == 0) {
+			data.isTeleportLocked = true;
+		}
 		else {
 			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
 			return false;

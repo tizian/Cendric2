@@ -97,7 +97,6 @@ void DivineTorchTile::loadComponents() {
 
 	// particles
 	ParticleComponentData data;
-	//data.particleTexture = &(dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture());
 	data.particleCount = 20;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
 	data.emitRate = 5.f;

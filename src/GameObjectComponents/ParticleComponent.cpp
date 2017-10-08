@@ -100,6 +100,21 @@ void ParticleComponent::loadParticleSystem() {
 	m_ps->addUpdater<particles::SizeUpdater>();
 }
 
+void ParticleComponent::simulate(const sf::Time& time) {
+	if (time <= sf::Time::Zero) return;
+	sf::Time simulatedTime = sf::Time::Zero;
+	sf::Time timeStep = sf::seconds(0.5f);
+	while (true) {
+		m_ps->update(timeStep);
+		simulatedTime += timeStep;
+		if (simulatedTime >= time) break;
+	}
+}
+
+void ParticleComponent::reset() {
+	m_ps->reset();
+}
+
 bool ParticleComponent::isVisible() const {
 	return m_isVisible;
 }

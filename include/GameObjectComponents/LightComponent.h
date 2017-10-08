@@ -15,6 +15,8 @@ public:
 	void setVisible(bool visible);
 	void setPosition(const sf::Vector2f& pos) override;
 	void setBrightness(float brightness);
+	void setSizeX(float sizeX);
+	void setSizeY(float sizeY);
 
 protected:
 	LightObject* m_lightObject = nullptr;

@@ -245,8 +245,13 @@ loadDialogue = function(DL)
 	end
 
 
-	DL:createNPCNode(34, -1, "DL_Logan_Afraid") -- You... you killed my guards!
+	DL:createNPCNode(34, 35, "DL_Logan_Afraid") -- You... you killed my guards!
 	DL:addConditionProgress("npc_loganthird", "afraid")
+	DL:addConditionProgress("default", "hallway_open")
+	DL:addNode()
+
+
+	DL:createNPCNode(35, -1, "DL_Logan_Afraid2") -- AAAAaaaaaaAAAAAH!
 	DL:addNode()
 
 end

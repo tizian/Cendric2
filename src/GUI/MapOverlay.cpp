@@ -346,6 +346,7 @@ void MapOverlay::reloadWaypoints() {
 	}
 	m_waypoints.clear();
 	if (!m_screen->getCharacterCore()->hasItem(WaypointTile::TOOL_ITEM_ID, 1)) return;
+	if (m_screen->getWorldData()->isTeleportLocked) return;
 
 	const LevelData* lData = dynamic_cast<const LevelData*>(m_screen->getWorldData());
 	if (lData && lData->isBossLevel) {

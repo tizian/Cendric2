@@ -14,6 +14,7 @@ struct WorldData {
 	sf::Vector2i mapSize;
 	std::string tileSetPath;
 	std::string musicPath;
+	bool isTeleportLocked = false;
 	std::vector<std::vector<int>> backgroundTileLayers;
 	std::vector<std::vector<int>> lightedForegroundTileLayers;
 	std::vector<std::vector<int>> foregroundTileLayers;

@@ -586,6 +586,9 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		else if (name.compare("bosslevel") == 0) {
 			if (!readBosslevel(_property, data)) return false;
 		}
+		else if (name.compare("lock_teleport") == 0) {
+			data.isTeleportLocked = true;
+		}
 		else {
 			logError("XML file could not be read, unknown name attribute found in properties (map->properties->property->name).");
 			return false;

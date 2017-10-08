@@ -99,18 +99,24 @@ void BuffSlot::onRightClick() {
 
 void BuffSlot::update(const sf::Time& frameTime) {
 	// update time
-	updateTime(m_duration, frameTime);
+	if (m_duration >= sf::Time::Zero) {
+		updateTime(m_duration, frameTime);
+	}
 	updateTime(m_tooltipTime, frameTime);
 	if (m_duration == sf::Time::Zero) setDisposed();
-	updateTime(m_timeUntilFlash, frameTime);
-	if (m_timeUntilFlash == sf::Time::Zero) {
-		m_isVisible = !m_isVisible;
-		m_timeUntilFlash = FLASHING_INTERVAL;
+	if (m_duration >= sf::Time::Zero) {
+		updateTime(m_timeUntilFlash, frameTime);
+		if (m_timeUntilFlash == sf::Time::Zero) {
+			m_isVisible = !m_isVisible;
+			m_timeUntilFlash = FLASHING_INTERVAL;
+		}
 	}
 
 	// update duration text
-	m_durationText.setString(to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
-	m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
+	if (m_duration >= sf::Time::Zero) {
+		m_durationText.setString(to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
+		m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
+	}
 	GameObject::update(frameTime);
 }
 

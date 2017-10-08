@@ -77,4 +77,4 @@ Elementarmagier');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_royalguards','location','Boss: The Royal Guards','Boss: Die Königswachen','Boss: Königswache');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('hallway','location','The Hallway','Der Korridor','De Korridor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('veliusroom','location','Velius'' Laboratory','Velius'' Laboratorium','Laboratorium vom Velius');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius','Boss: Velius','Boss: Velius','Boss: Velius');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius','Boss: Velius','Boss: Velius');

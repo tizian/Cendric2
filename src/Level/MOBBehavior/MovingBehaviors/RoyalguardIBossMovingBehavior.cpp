@@ -9,37 +9,49 @@ RoyalguardIBossMovingBehavior::RoyalguardIBossMovingBehavior(RoyalguardBoss* ene
 }
 
 void RoyalguardIBossMovingBehavior::execHandleMovementInput() {
-	/*if (m_enemy->getState() == GameObjectState::Walking && m_enemy->getActiveSpellCount() == 0) {
-	// we hit our target.
-	setReady();
-	m_movingDirectionX = 0;
-	m_enemy->setState(GameObjectState::Idle);
-	}*/
-}
-
-void RoyalguardIBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	float oldPositionX = m_enemy->getPosition().x;
-
-	bool collidesY;
-	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
-
-	m_jumps = false;
-	if (m_collidesX) {
-		m_movingDirectionX = 0;
-		m_enemy->setAccelerationX(0.f);
-		m_enemy->setVelocityX(0.f);
-		m_enemy->setPositionX(oldPositionX);
-
-		m_enemy->clearSpells(true);
-		m_fightAnimationTime = sf::Time::Zero;
+	if (m_boss->getBossState() == RoyalguardBossState::FireballStart) {
+		m_nextIsFacingRight = m_mainChar->getCenter().x > m_enemy->getCenter().x;
 	}
-}
+	if (m_boss->getBossState() == RoyalguardBossState::FireballStart ||
+		m_boss->getBossState() == RoyalguardBossState::Healing ||
+		m_boss->getBossState() == RoyalguardBossState::TopFire ||
+		m_boss->getBossState() == RoyalguardBossState::BottomFire) {
+		m_movingDirectionX = 0;
+		m_movingDirectionY = 0;
+		return;
+	}
 
-void RoyalguardIBossMovingBehavior::update(const sf::Time& frameTime) {
-	WalkingBehavior::update(frameTime);
+	gotoTarget(m_mainChar->getCenter(), m_approachingDistance);
 }
 
 void RoyalguardIBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
-	WalkingBehavior::updateAnimation(frameTime);
+	GameObjectState newState = GameObjectState::Idle;
+	if (m_enemy->isDead()) {
+		newState = GameObjectState::Dead;
+	}
+	else if (m_boss->getBossState() == RoyalguardBossState::BottomFire) {
+		newState = GameObjectState::Casting;
+	}
+	else if (m_boss->getBossState() == RoyalguardBossState::TopFire) {
+		newState = GameObjectState::Casting2;
+	}
+	else if (m_boss->getBossState() == RoyalguardBossState::Healing || m_boss->getBossState() == RoyalguardBossState::FireballStart) {
+		newState = GameObjectState::Fighting3;
+	}
+	else if (m_fightAnimationTime > sf::Time::Zero) {
+		newState = m_fightAnimationState;
+	}
+	else if (!m_isGrounded) {
+		newState = GameObjectState::Jumping;
+	}
+	else if (std::abs(m_enemy->getVelocity().x) > 20.f) {
+		newState = GameObjectState::Walking;
+	}
+
+	// only update animation if we need to
+	if (m_enemy->getState() != newState || (m_nextIsFacingRight != m_isFacingRight)) {
+		m_isFacingRight = m_nextIsFacingRight;
+		m_enemy->setState(newState);
+		m_enemy->setCurrentAnimation(m_enemy->getAnimation(m_enemy->getState()), !m_isFacingRight);
+	}
 }

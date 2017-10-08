@@ -22,4 +22,8 @@ protected:
 	void loadAttributes() override;
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+	void loadParticles() override;
+
+protected:
+	ParticleComponent* m_icePc;
 };

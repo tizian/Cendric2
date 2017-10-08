@@ -32,12 +32,14 @@ public:
 	void flipOffsetX(bool flipped);
 	void flipOffsetY(bool flipped);
 	void setOffset(const sf::Vector2f& offset);
+	void simulate(const sf::Time& time);
 	void setGoalOffset(const sf::Vector2f& goalOffset);
 	void setVisible(bool visible);
 	void setStatic(bool isStatic);
 	void setEmitRate(float emitRate);
 	void setPosition(const sf::Vector2f& pos) override;
 	void setTexturePath(const std::string& texturePath);
+	void reset();
 
 	bool isVisible() const;
 	particles::ColorUpdater* getColorUpdater() const;

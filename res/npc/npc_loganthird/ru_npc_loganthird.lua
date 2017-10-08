@@ -1,12 +1,15 @@
 -- Routine for NPC "King Logan III"
 
-velocity = 80
+velocity = 150
 
 loadRoutine = function(R, W)
 
-    if (W:isConditionFulfilled("npc_loganthird","afraid")) then
+    if (W:isConditionFulfilled("npc_loganthird","logan_gone")) then
         R:setDisposed()
-		
+        return
+    end
+
+    if (W:isConditionFulfilled("npc_loganthird","afraid")) then	
         R:setTalkingEnabled(false)
         R:setReloadEnabled(false)
         R:setLooped(false)
@@ -15,6 +18,7 @@ loadRoutine = function(R, W)
         R:goToTile(20, 7)
         R:goToTile(20, 3)
         R:setDisposedStep()
+		W:addConditionProgress("npc_loganthird", "logan_gone")
         return
     end
     

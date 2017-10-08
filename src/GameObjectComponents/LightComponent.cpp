@@ -30,6 +30,14 @@ void LightComponent::setPosition(const sf::Vector2f& pos) {
 			m_isOffsetFlippedY ? -m_offset.y + m_parent->getBoundingBox()->height : m_offset.y));
 }
 
+void LightComponent::setSizeX(float sizeX) {
+	m_lightObject->setSize(sf::Vector2f(sizeX, m_lightObject->getSize().y));
+}
+
+void LightComponent::setSizeY(float sizeY) {
+	m_lightObject->setSize(sf::Vector2f(m_lightObject->getSize().x, sizeY));
+}
+
 void LightComponent::setBrightness(float brightness) {
 	m_lightObject->setBrightness(brightness);
 }

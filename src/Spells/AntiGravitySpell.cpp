@@ -19,12 +19,6 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 	if (m_isDebugRendering) {
 		m_debugBox.setPosition(getPosition());
 	}
-
-	updateTime(m_data.activeDuration, frameTime);
-
-	if (m_data.activeDuration.asMilliseconds() <= 0) {
-		setDisposed();
-	}
 }
 
 void AntiGravitySpell::setDisposed() {

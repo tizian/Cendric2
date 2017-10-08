@@ -1,7 +1,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/RoyalguardTBossMovingBehavior.h"
 #include "Level/Enemies/RoyalguardBoss.h"
 
-const float RoyalguardTBossMovingBehavior::CHARGING_SPEED = 600.f;
+const float RoyalguardTBossMovingBehavior::CHARGING_SPEED = 1000.f;
 
 RoyalguardTBossMovingBehavior::RoyalguardTBossMovingBehavior(RoyalguardBoss* enemy) :
 	MovingBehavior(enemy),
@@ -17,24 +17,26 @@ void RoyalguardTBossMovingBehavior::setChargingDirection(const sf::Vector2f& dir
 void RoyalguardTBossMovingBehavior::execHandleMovementInput() {
 	if (m_boss->getBossState() == RoyalguardBossState::ChargingStart) {
 		m_nextIsFacingRight = m_mainChar->getCenter().x > m_enemy->getCenter().x;
+		m_movingDirectionX = 0;
+		m_movingDirectionY = 0;
 		return;
 	}
 	if (m_boss->getBossState() == RoyalguardBossState::Charging) {
 		m_nextIsFacingRight = m_chargingDirection.x >= 0.f;
+		m_movingDirectionX = m_nextIsFacingRight ? 1 : -1;
+		m_movingDirectionY = m_chargingDirection.y >= 0.f ? 1 : -1;
 		m_boss->setVelocity(m_chargingDirection * CHARGING_SPEED);
 		m_gravity = 0.f;
 		return;
 	}
 	m_gravity = 1000.f;
+	if (m_boss->getBossState() == RoyalguardBossState::Healing) {
+		m_movingDirectionX = 0;
+		m_movingDirectionY = 0;
+		return;
+	}
 
 	gotoTarget(m_mainChar->getCenter(), m_approachingDistance);
-
-	/*if (m_enemy->getState() == GameObjectState::Walking && m_enemy->getActiveSpellCount() == 0) {
-		// we hit our target.
-		setReady();
-		m_movingDirectionX = 0;
-		m_enemy->setState(GameObjectState::Idle);
-	}*/
 }
 
 void RoyalguardTBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
@@ -55,10 +57,6 @@ void RoyalguardTBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosi
 	}
 }
 
-void RoyalguardTBossMovingBehavior::update(const sf::Time& frameTime) {
-	WalkingBehavior::update(frameTime);
-}
-
 void RoyalguardTBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	GameObjectState newState = GameObjectState::Idle;
 	if (m_enemy->isDead()) {
@@ -69,6 +67,9 @@ void RoyalguardTBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	}
 	else if (m_boss->getBossState() == RoyalguardBossState::Charging) {
 		newState = GameObjectState::Fighting2;
+	}
+	else if (m_boss->getBossState() == RoyalguardBossState::Healing) {
+		newState = GameObjectState::Fighting3;
 	}
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = m_fightAnimationState;

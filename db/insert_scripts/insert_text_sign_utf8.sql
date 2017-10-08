@@ -44,3 +44,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NeedElements','sign','Need elements...','Versuchs mit Elementen...','Probiers mit Element...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FlamingSword','sign','Only a flaming sword can open the gate.','Nur ein flammendes Schwert kann die Pforte öffnen.','Nur es flammends Schwert cha die Pforte ufmache.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LaiDaTuma','sign','Lai da Tuma','Lai da Tuma','Lai da Tuma');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('PointOfNoReturn','sign','Point of no return: You can''t teleport inside the castle.','Point of no return: Du kannst innerhalb des Schlosses nicht teleportieren.','Point of no return: Du chasch innerhalb vom Schloss nid teleportiere.');

@@ -11,9 +11,7 @@ public:
 	RoyalguardIBossMovingBehavior(RoyalguardBoss* enemy);
 	~RoyalguardIBossMovingBehavior() {};
 
-	void update(const sf::Time& frameTime) override;
 	void execHandleMovementInput() override;
-	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void updateAnimation(const sf::Time& frameTime) override;
 
 private:

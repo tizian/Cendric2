@@ -1,7 +1,7 @@
 # time played, in seconds
-time.played:32076
+time.played:34368
 savegame.name:Quicksave
-savegame.date:1507231881
+savegame.date:1507487608
 level.id:res/level/boss_royalguards/boss_royalguards.tmx
 level.position:600.000000,560.000000
 is.in.level:0
@@ -124,10 +124,10 @@ item.id:we_torch,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:2
-equipped.spellslot:3
-equipped.spellslot:4
-equipped.spellslot:5
+equipped.spellslot:2,4,3,1,3
+equipped.spellslot:3,4,3,1,3
+equipped.spellslot:4,2,3,5,3
+equipped.spellslot:5,5,3
 equipped.spellslot:6
 # equipment:
 equipped.back:eq_back_necrot2
@@ -140,7 +140,7 @@ equipped.weapon:we_doublesickle_dark
 # weapon configurations:
 weapon.configs:we_claw;3,1,1;2,1,1,4,1;
 weapon.configs:we_doublesickle;2,3,1,4,2,1,2;3,1,2,4,2,3,1;5,5,2,3,1;4,5,2,2,2;15,6,1,2,2;
-weapon.configs:we_doublesickle_dark;2;3;4;5;6;
+weapon.configs:we_doublesickle_dark;2,4,3,1,3;3,4,3,1,3;4,2,3,5,3;5,5,3;6;
 weapon.configs:we_firestaff;2,1,1,4,1;3,1,1,4,1;
 weapon.configs:we_firesword;2;3;4,6,1;6,2,3;15;
 weapon.configs:we_firesword_inactive;
@@ -152,7 +152,7 @@ weapon.configs:we_simplesword;
 weapon.configs:we_tearstaff;2,1,1,4,1;3,1,1,4,1;18,5,1;
 weapon.configs:we_torch;
 weapon.configs:we_walkingpole;
-weapon.spell:16
+weapon.spell:17
 # quickslot assignments:
 quickslot:1,fo_ultimatehealingpotion
 quickslot:2,fo_mediumhealingpotion
@@ -545,4 +545,4 @@ hint.learned:RemoveBuff
 weather:res/level/howlingcaverns/howlingcaverns.tmx,0.900000,
 weather:res/map/gandria/gandria.tmx,0.300000,
 weather:res/map/meadows/meadows.tmx,0.300000,
-deaths:69
+deaths:97

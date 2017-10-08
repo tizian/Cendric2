@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="157">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="159">
  <properties>
   <property name="dimming" value="0.3"/>
+  <property name="lock_teleport" value=""/>
   <property name="musicpath" value="res/music/castle.ogg"/>
   <property name="tilesetpath" value="res/map/gandriacastle/tileset_map_gandriacastle.png"/>
  </properties>
@@ -115,8 +116,8 @@
 0,0,0,78,79,0,236,0,0,236,0,12,18,19,12,0,236,0,0,0,0,0,0,0,0,0,
 0,0,0,101,102,0,259,0,0,259,186,187,41,42,186,187,259,0,0,379,234,381,0,0,0,0,
 0,0,0,0,0,85,0,323,324,0,209,210,64,65,209,210,85,0,0,402,211,404,332,0,0,0,
-0,0,0,0,0,108,0,346,347,0,232,233,87,88,232,233,108,0,0,0,0,0,355,0,0,0,
-0,0,0,0,0,0,0,369,370,0,0,106,0,0,107,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,108,0,346,347,0,232,233,87,88,232,233,108,0,0,312,0,0,355,0,0,0,
+0,0,0,0,0,0,0,369,370,0,0,106,0,0,107,0,0,0,0,106,0,107,0,0,0,0,
 0,0,0,385,386,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,96,0,0,0,
 0,0,0,408,409,0,0,0,0,0,0,106,0,0,107,0,0,0,0,0,0,0,119,0,0,0,
 0,0,0,431,432,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -205,7 +206,7 @@
 4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,0,0,0,188,188,
 4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,235,0,0,0,188,188,
 4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,330,403,331,0,0,188,188,
-4,4,0,0,0,0,0,0,0,0,0,83,0,0,84,0,0,0,0,0,0,0,0,0,188,188,
+4,4,0,0,0,0,0,0,0,0,0,83,0,0,84,0,0,0,0,83,0,84,0,0,188,188,
 4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,188,188,
 4,4,0,385,386,0,0,0,0,0,0,83,0,0,84,0,0,0,0,0,0,0,0,0,188,188,
 4,4,0,408,409,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,188,188,
@@ -378,6 +379,22 @@
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,515,760"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="158" x="1000" y="250" width="50" height="25">
+   <properties>
+    <property name="level entry" value="res/level/hallway/hallway.tmx,100,500"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic guards">
+  <properties>
+   <property name="conditions" value="boss,BossRoyalguards"/>
+  </properties>
+  <object id="157" gid="623" x="950" y="325" width="50" height="50">
+   <properties>
+    <property name="text" value="PointOfNoReturn"/>
    </properties>
   </object>
  </objectgroup>

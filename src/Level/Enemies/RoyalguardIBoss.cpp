@@ -3,20 +3,27 @@
 #include "Level/MOBBehavior/MovingBehaviors/RoyalguardIBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
+#include "World/CustomParticleUpdaters.h"
+#include "Level/DynamicTiles/ParticleTile.h"
+#include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Royalguard_I, RoyalguardIBoss)
 
+const sf::Time RoyalguardIBoss::FIRE_TIME = sf::seconds(10.f);
+
 RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	RoyalguardBoss(level, screen) {
-	loadWeapon();
+	loadBoss();
 }
 
 void RoyalguardIBoss::loadAttributes() {
-	m_attributes.setHealth(1500);
+	m_attributes.setHealth(300);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 100;
 	m_attributes.resistanceFire = 10000;
@@ -27,14 +34,11 @@ void RoyalguardIBoss::loadAttributes() {
 void RoyalguardIBoss::loadSpells() {
 	// fireball
 	SpellData fireball = SpellData::getSpellData(SpellID::FireBall);
-	fireball.damage = 100;
+	fireball.damage = 30;
 	fireball.damagePerSecond = 1;
-	fireball.cooldown = sf::seconds(5.f);
+	fireball.cooldown = sf::seconds(1.f);
+	fireball.fightingTime = sf::Time::Zero;
 	fireball.isBlocking = true;
-	fireball.castingTime = sf::seconds(2.f);
-	fireball.fightingTime = sf::seconds(0.f);
-	fireball.fightAnimation = GameObjectState::VOID;
-	fireball.castingAnimation = GameObjectState::Fighting3;
 
 	m_spellManager->addSpell(fireball);
 
@@ -47,46 +51,57 @@ void RoyalguardIBoss::handleAttackInput() {
 
 void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {
 	if (m_isDead) return;
-	return;
 	updateTime(m_stateTime, frameTime);
+	updateTime(m_fireTime, frameTime);
 	if (m_stateTime > sf::Time::Zero) return;
 	switch (m_bossState)
 	{
 	default:
 	case RoyalguardBossState::Waiting:
-		if (dist(getCenter(), m_mainChar->getCenter()) > 50.f) {
-			m_bossState = RoyalguardBossState::ChargingStart;
-			m_stateTime = sf::seconds(1.5f);
-			m_weaponRotateType = WeaponRotateType::ToMainChar;
+		if (m_fireTime == sf::Time::Zero) {
+			m_isTopFire = !m_isTopFire;
+			m_bossState = m_isTopFire ? RoyalguardBossState::TopFire : RoyalguardBossState::BottomFire;
+			m_stateTime = sf::seconds(2.f);
+			m_fireLinePc->reset();
+			m_fireLinePc->setVisible(true);
+			m_lineSpawner->point1 = getPosition() + sf::Vector2f(m_boundingBox.width * 0.5f, -20.f);
+			m_lineSpawner->point2 = m_isTopFire ? RoyalguardFire::FIRE_POS_TOP : RoyalguardFire::FIRE_POS_BOT;
+			auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
+			m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
+			m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
 		}
 		else {
-			m_bossState = RoyalguardBossState::Swirl;
-			m_stateTime = sf::seconds(1.f);
-			m_spellManager->setCurrentSpell(0);
-			m_spellManager->executeCurrentSpell(m_mainChar);
-			m_weaponRotateType = WeaponRotateType::Turn;
+			m_bossState = RoyalguardBossState::FireballStart;
+			m_stateTime = sf::seconds(2.f);
+			m_weaponOffset = sf::Vector2f(34.f, -5.f);
+			m_isWeaponVisible = true;
+			m_weaponRotateType = WeaponRotateType::ToMainChar;
 		}
-		m_weaponOffset = sf::Vector2f(72.f, 93.f);
-		m_isWeaponVisible = true;
+		m_fireLinePc->reset();
+		m_firePc->setVisible(true);
 		break;
-	case RoyalguardBossState::ChargingStart:
-		m_bossState = RoyalguardBossState::Charging;
-		m_weaponRotateType = WeaponRotateType::Fixed;
-		m_weaponOffset = sf::Vector2f(74.f, 85.f);
-		break;
-	case RoyalguardBossState::Charging:
+	case RoyalguardBossState::FireballStart:
+		m_bossState = RoyalguardBossState::Waiting;
+		m_spellManager->executeCurrentSpell(m_mainChar);
+		m_stateTime = sf::seconds(1.f);
 		m_isWeaponVisible = false;
+		m_firePc->setVisible(false);
+		break;
+	case RoyalguardBossState::TopFire:
+	case RoyalguardBossState::BottomFire: {
 		m_bossState = RoyalguardBossState::Waiting;
 		m_stateTime = sf::seconds(1.f);
+		RoyalguardFire* fire = new RoyalguardFire(m_isTopFire, m_mainChar);
+		m_screen->addObject(fire);
+		m_fireTime = FIRE_TIME;
+		m_fireLinePc->setVisible(false);
 		break;
-	case RoyalguardBossState::Swirl:
-		m_isWeaponVisible = false;
-		m_bossState = RoyalguardBossState::Waiting;
-		break;
+	}
 	case RoyalguardBossState::Healing:
 		m_isWeaponVisible = false;
 		m_bossState = RoyalguardBossState::Waiting;
 		m_stateTime = sf::seconds(1.f);
+		m_healingPc->setVisible(false);
 		m_other->revive();
 		break;
 	}
@@ -111,19 +126,19 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(7 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(9 * width, 1 * height, width, height));
+	deadAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -131,46 +146,31 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	// chop down
 	Animation* casting1Animation = new Animation(sf::seconds(0.1f));
 	casting1Animation->setSpriteSheet(tex);
-	casting1Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	casting1Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
-	casting1Animation->addFrame(sf::IntRect(12 * width, 0, wideWidth, height));
-	casting1Animation->addFrame(sf::IntRect(14 * width, 0, wideWidth, height));
-	casting1Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect(12 * width, 0, width, height));
+	casting1Animation->addFrame(sf::IntRect(13 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect(15 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect(17 * width, 0, wideWidth, height));
 	casting1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, casting1Animation);
 
-	Animation* fighting1Animation = new Animation();
-	fighting1Animation->setSpriteSheet(tex);
-	fighting1Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
-	fighting1Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Fighting, fighting1Animation);
-
 	// chop up
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
 	casting2Animation->setSpriteSheet(tex);
-	casting2Animation->addFrame(sf::IntRect(16 * width, 0, wideWidth, height));
-	casting2Animation->addFrame(sf::IntRect(14 * width, 0, wideWidth, height));
-	casting2Animation->addFrame(sf::IntRect(12 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(17 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(15 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(13 * width, 0, wideWidth, height));
+	casting2Animation->addFrame(sf::IntRect(12 * width, 0, width, height));
 	casting2Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
-	casting2Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
 
-	Animation* fighting2Animation = new Animation();
-	fighting2Animation->setSpriteSheet(tex);
-	fighting2Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
-	fighting2Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Fighting2, fighting2Animation);
-
 	// heal & cast fireball
 	Animation* fighting3Animation = new Animation(sf::seconds(0.1f));
 	fighting3Animation->setSpriteSheet(tex);
-	fighting3Animation->addFrame(sf::IntRect(18 * width, 0, width, height));
-	fighting3Animation->addFrame(sf::IntRect(19 * width, 0, width, height));
+	fighting3Animation->addFrame(sf::IntRect(20 * width, 0, width, height));
 	fighting3Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting3, fighting3Animation);
@@ -180,6 +180,112 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	playCurrentAnimation(true);
 }
 
+void RoyalguardIBoss::loadParticles() {
+	loadFireLineParticles();
+	loadFireParticles();
+}
+
+void RoyalguardIBoss::loadFireParticles() {
+	////////////////////
+	// FIRE PARTICLES //
+	////////////////////
+
+	ParticleComponentData data;
+	data.particleCount = 50;
+	data.emitRate = 50.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
+
+	// Generators
+	auto posGen = new particles::CircleSpawner();
+	posGen->radius = sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.width * m_boundingBox.width * 0.5f);
+	data.spawner = posGen;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 50.f;
+	sizeGen->maxStartSize = 80.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
+	data.sizeGen = sizeGen;
+
+	auto colGen = new particles::ColorGenerator();
+
+	colGen->minStartCol = sf::Color(255, 160, 64, 0);
+	colGen->maxStartCol = sf::Color(255, 160, 64, 0);
+	colGen->minEndCol = sf::Color(255, 0, 0, 255);
+	colGen->maxEndCol = sf::Color(255, 0, 0, 255);
+	data.colorGen = colGen;
+
+	auto velGen = new particles::AngledVelocityGenerator();
+	velGen->minAngle = -10.f;
+	velGen->maxAngle = 10.f;
+	velGen->minStartSpeed = 40.f;
+	velGen->maxStartSpeed = 80.f;
+	data.velGen = velGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.5f;
+	timeGen->maxTime = 1.0f;
+	data.timeGen = timeGen;
+
+	m_firePc = new ParticleComponent(data, this);
+	m_firePc->setOffset(sf::Vector2f(60.f, -20.f));
+	m_firePc->setVisible(false);
+	addComponent(m_firePc);
+	m_pcs.push_back(m_firePc);
+
+	// light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(getBoundingBox()->width, 0.f),
+		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.width * 2.f), 0.6f), this));
+}
+
+void RoyalguardIBoss::loadFireLineParticles() {
+	////////////////////
+	// LINE PARTICLES //
+	////////////////////
+
+	// line particles
+	ParticleComponentData data;
+	data.particleCount = 200;
+	data.emitRate = 400.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
+
+	// Generators
+	m_lineSpawner = new particles::LineSpawner();
+	data.spawner = m_lineSpawner;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 40.f;
+	sizeGen->maxStartSize = 60.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 20.f;
+	data.sizeGen = sizeGen;
+
+	data.colorGen = ParticleTile::getFlameColorGenerator("red");
+
+	m_lineVelGen = new particles::AngledVelocityGenerator();
+	m_lineVelGen->minStartSpeed = 20.f;
+	m_lineVelGen->maxStartSpeed = 50.f;
+	m_lineVelGen->minAngle = -90.f;
+	m_lineVelGen->maxAngle = 90.f;
+	data.velGen = m_lineVelGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.4f;
+	timeGen->maxTime = 0.6f;
+	data.timeGen = timeGen;
+
+	m_fireLinePc = new ParticleComponent(data, this);
+	m_fireLinePc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, -40.f));
+	m_fireLinePc->setVisible(false);
+	addComponent(m_fireLinePc);
+	m_pcs.push_back(m_fireLinePc);
+}
+
 MovingBehavior* RoyalguardIBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new RoyalguardIBossMovingBehavior(this);
@@ -187,7 +293,7 @@ MovingBehavior* RoyalguardIBoss::createMovingBehavior(bool asAlly) {
 	behavior->setApproachingDistance(50.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
-	behavior->setMaxVelocityX(0.f);
+	behavior->setMaxVelocityX(200.f);
 	behavior->setDropAlways(true);
 	behavior->calculateJumpHeight();
 	return behavior;
@@ -219,14 +325,38 @@ std::string RoyalguardIBoss::getDeathSoundPath() const {
 
 const sf::Time RoyalguardFire::GRACE_TIME = sf::seconds(2.f);
 
+const sf::Vector2f RoyalguardFire::FIRE_POS_TOP = sf::Vector2f(650.f, 160.f);
+const sf::Vector2f RoyalguardFire::FIRE_POS_BOT = sf::Vector2f(650.f, 640.f);
+const sf::Vector2f RoyalguardFire::FIRE_EXTENTS = sf::Vector2f(1200.f, 20.f);
+
 RoyalguardFire::RoyalguardFire(bool isTop, LevelMovableGameObject* mainChar) {
+	m_isAlwaysUpdate = true;
 	m_mainChar = mainChar;
+	m_screen = m_mainChar->getScreen();
+	m_isTop = isTop;
+	m_ttl = RoyalguardIBoss::FIRE_TIME;
+
+	m_boundingBox.height = FIRE_EXTENTS.y;
+	m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x;
+	m_boundingBox.top = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).y - FIRE_EXTENTS.y * 0.5f;
+	m_graceTime = GRACE_TIME;
+
+	loadParticles();
 }
 
 void RoyalguardFire::update(const sf::Time& frameTime) {
+	GameObject::update(frameTime);
 	updateTime(m_graceTime, frameTime);
-	if (m_graceTime > sf::Time::Zero) {
+	updateTime(m_ttl, frameTime);
+	if (m_ttl == sf::Time::Zero) {
+		setDisposed();
 		return;
+	}
+	if (m_graceTime > sf::Time::Zero) {
+		m_boundingBox.width = (1.f - m_graceTime.asSeconds() / GRACE_TIME.asSeconds()) * FIRE_EXTENTS.x;
+		m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x - m_boundingBox.width * 0.5f;
+		m_posGen->size.x = m_boundingBox.width;
+		m_lightComponent->setSizeX(m_boundingBox.width * 1.5f);
 	}
 	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
 		m_mainChar->setDead();
@@ -234,5 +364,54 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 }
 
 void RoyalguardFire::loadParticles() {
+	ParticleComponentData data;
+	data.particleCount = 1000;
+	data.emitRate = 1000.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
 
+	// Generators
+	m_posGen = new particles::BoxSpawner();
+	m_posGen->center = m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT;
+	m_posGen->size = sf::Vector2f(0.f, FIRE_EXTENTS.y);
+	data.spawner = m_posGen;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 60.f;
+	sizeGen->maxStartSize = 100.f;
+	sizeGen->minEndSize = 20.f;
+	sizeGen->maxEndSize = 40.f;
+	data.sizeGen = sizeGen;
+
+	auto colGen = new particles::ColorGenerator();
+
+	colGen->minStartCol = sf::Color(255, 160, 64, 0);
+	colGen->maxStartCol = sf::Color(255, 160, 64, 0);
+	colGen->minEndCol = sf::Color(255, 0, 0, 255);
+	colGen->maxEndCol = sf::Color(255, 0, 0, 255);
+	data.colorGen = colGen;
+
+	auto velGen = new particles::AngledVelocityGenerator();
+	velGen->minAngle = m_isTop ? 180.f : 0.f;
+	velGen->maxAngle = velGen->minAngle;
+	velGen->minStartSpeed = 30.f;
+	velGen->maxStartSpeed = 60.f;
+	data.velGen = velGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.5f;
+	timeGen->maxTime = 1.0f;
+	data.timeGen = timeGen;
+
+	auto pc = new ParticleComponent(data, this);
+	pc->setOffset(sf::Vector2f(0.f, 0.f));
+	pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
+	addComponent(pc);
+
+	// light
+	m_lightComponent = new LightComponent(LightData(
+		sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height),
+		sf::Vector2f(m_boundingBox.width * 4.f, m_boundingBox.height * 2.f), 0.6f), this);
+	addComponent(m_lightComponent);
 }

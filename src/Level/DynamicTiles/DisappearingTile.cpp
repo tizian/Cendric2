@@ -183,5 +183,9 @@ void DisappearingTile::loadComponents() {
 	data.colorUpdater = new particles::FadingColorUpdater();
 	m_pc = new ParticleComponent(data, this);
 	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	
 	addComponent(m_pc);
+
+	setPosition(getPosition());
+	m_pc->simulate(sf::seconds(6.f));
 }
