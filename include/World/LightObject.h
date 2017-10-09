@@ -15,6 +15,7 @@ public:
 	virtual void update(const sf::Time& frameTime) override;
 
 	virtual void setPosition(const sf::Vector2f& pos) override;
+	virtual void setSize(const sf::Vector2f& size) override;
 	virtual GameObjectType getConfiguredType() const override;
 
 	void setVisible(bool value);

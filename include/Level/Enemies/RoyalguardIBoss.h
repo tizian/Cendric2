@@ -4,7 +4,7 @@
 #include "Level/Enemies/RoyalguardBoss.h"
 #include "Structs/SpellData.h"
 
-class LightComponent;
+class LightObject;
 
 namespace particles {
 	class LineSpawner;
@@ -64,7 +64,7 @@ private:
 
 	bool m_isTop;
 	particles::BoxSpawner* m_posGen;
-	LightComponent* m_lightComponent;
+	LightObject* m_lightObject = nullptr;
 	sf::Time m_ttl;
 
 public:

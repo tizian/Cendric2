@@ -356,7 +356,7 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 		m_boundingBox.width = (1.f - m_graceTime.asSeconds() / GRACE_TIME.asSeconds()) * FIRE_EXTENTS.x;
 		m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x - m_boundingBox.width * 0.5f;
 		m_posGen->size.x = m_boundingBox.width;
-		m_lightComponent->setSizeX(m_boundingBox.width * 1.5f);
+		m_lightObject->setSize(sf::Vector2f(m_boundingBox.width * 1.5f, m_lightObject->getSize().y));
 	}
 	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
 		m_mainChar->setDead();
@@ -410,8 +410,8 @@ void RoyalguardFire::loadParticles() {
 	addComponent(pc);
 
 	// light
-	m_lightComponent = new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height),
-		sf::Vector2f(m_boundingBox.width * 4.f, m_boundingBox.height * 2.f), 0.6f), this);
-	addComponent(m_lightComponent);
+	m_lightObject = new LightObject(LightData(
+		m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT,
+		sf::Vector2f(20.f, m_boundingBox.height * 2.f), 1.0f));
+	m_screen->addObject(m_lightObject);
 }

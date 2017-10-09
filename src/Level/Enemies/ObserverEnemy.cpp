@@ -199,4 +199,3 @@ std::string ObserverEnemy::getParticleTexture() const {
 std::string ObserverEnemy::getSpritePath() const {
 	return "res/assets/enemies/spritesheet_enemy_observer.png";
 }
-

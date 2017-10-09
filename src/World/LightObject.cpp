@@ -49,6 +49,11 @@ void LightObject::setPosition(const sf::Vector2f& pos) {
 	m_sprite.setPosition(pos);
 }
 
+void LightObject::setSize(const sf::Vector2f& size) {
+	m_lightData.radius.x = size.x * 0.5f;
+	m_lightData.radius.y = size.y * 0.5f;
+}
+
 void LightObject::setVisible(bool value) {
 	m_isVisible = value;
 }
