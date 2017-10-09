@@ -21,6 +21,7 @@ public:
 	virtual ~WardenEnemy() {}
 
 	void update(const sf::Time& frameTime) override;
+	void renderAfterForeground(sf::RenderTarget& target) override;
 
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
@@ -45,6 +46,7 @@ protected:
 	virtual void loadComponents();
 
 	float m_observedRange;
+	sf::CircleShape m_debugCircle;
 	WardenState m_wardenState = WardenState::Idle;
 
 	ParticleComponent* m_pc;

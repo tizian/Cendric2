@@ -201,16 +201,19 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	for (auto go : *lScreen->getObjects(GameObjectType::_DynamicTile)) {
 		if (auto dTile = dynamic_cast<LevelDynamicTile*>(go)) {
 			if (dTile->getDynamicTileID() == LevelDynamicTileID::Modifier) {
-				drawOverlayTexture(img, dTile->getCenter() * scale, 0);
+				drawOverlayTexture(img, dTile->getCenter() * scale, 0, 0);
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Door && dTile->isCollidable()) {
-				drawOverlayTexture(img, dTile->getCenter() * scale, 3);
+				drawOverlayTexture(img, dTile->getCenter() * scale, 3, 0);
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Chest) {
-				drawOverlayTexture(img, dTile->getCenter() * scale, 4);
+				drawOverlayTexture(img, dTile->getCenter() * scale, 1, 1);
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Lever) {
-				drawOverlayTexture(img, dTile->getCenter() * scale, 6);
+				drawOverlayTexture(img, dTile->getCenter() * scale, 3, 1);
+			}
+			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Checkpoint && dTile->getGameObjectState() == GameObjectState::Active) {
+				drawOverlayTexture(img, dTile->getCenter() * scale, 4, 0);
 			}
 		}
 	}
@@ -219,7 +222,7 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	for (auto go : *lScreen->getObjects(GameObjectType::_Overlay)) {
 		if (Trigger* trigger = dynamic_cast<Trigger*>(go)) {
 			if (trigger->getData().isKeyGuarded) {
-				drawOverlayTexture(img, trigger->getCenter() * scale, 1);
+				drawOverlayTexture(img, trigger->getCenter() * scale, 1, 0);
 			}
 		}
 	}
@@ -228,10 +231,10 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	for (auto go : *lScreen->getObjects(GameObjectType::_LevelItem)) {
 		if (LevelItem* item = dynamic_cast<LevelItem*>(go)) {
 			if (item->getID().substr(0, 2).compare("qe") == 0) {
-				drawOverlayTexture(img, item->getCenter() * scale, 2);
+				drawOverlayTexture(img, item->getCenter() * scale, 2, 0);
 			}
 			else {
-				drawOverlayTexture(img, item->getCenter() * scale, 5);
+				drawOverlayTexture(img, item->getCenter() * scale, 2, 1);
 			}
 		}
 	}
@@ -240,7 +243,7 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	for (auto go : *lScreen->getObjects(GameObjectType::_Enemy)) {
 		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
 			if (enemy->isQuestRelevant()) {
-				drawOverlayTexture(img, enemy->getCenter() * scale, 2);
+				drawOverlayTexture(img, enemy->getCenter() * scale, 2, 0);
 			}
 		}
 	}
@@ -257,9 +260,9 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	return sprite;
 }
 
-void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int type) {
+void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY) {
 	image.copy(m_levelOverlayIcons, static_cast<unsigned int>(std::round(pos.x - 12.5)), static_cast<unsigned int>(std::round(pos.y - 12.5)),
-		sf::IntRect(type * 25, 0, 25, 25), true);
+		sf::IntRect(posX * 25, posY * 25, 25, 25), true);
 }
 
 void MapOverlay::notifyLevelOverlayReload() {

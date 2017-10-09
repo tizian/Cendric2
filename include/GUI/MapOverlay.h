@@ -78,7 +78,7 @@ private:
 	void updateFogOfWar(MapOverlayData* map);
 	MapOverlayData* createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const;
 	sf::Sprite* renderLevelOverlay(float scale);
-	void drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int type);
+	void drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY);
 	float getScale(const sf::Vector2f& mapSize) const;
 	void reloadLevelOverlay();
 

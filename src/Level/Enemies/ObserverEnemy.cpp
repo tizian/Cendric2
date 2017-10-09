@@ -38,7 +38,7 @@ void ObserverEnemy::update(const sf::Time& frameTime) {
 	}
 	else if (m_wardenState == WardenState::Idle && m_scriptedBehavior != nullptr) {
 		m_scriptedBehavior->update(frameTime);
-		if (AttackingBehavior::isInAggroRange(m_mainChar, this, m_observedRange)) {
+		if (isMainCharInRange()) {
 			setObserverChasing();
 		}
 	}

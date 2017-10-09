@@ -9,7 +9,7 @@ m_character(character) {
 	const Level* level = dynamic_cast<const Level*>(screen->getWorld());
 
 	loadGuiSidebar();
-	loadMapSidebar(level->getWorldData()->isBossLevel);
+	loadMapSidebar(!level->getWorldData()->isBossLevel);
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);

@@ -124,6 +124,9 @@ void CheckpointTile::setActive(bool active, bool playSound) {
 		g_resourceManager->playSound(getSoundPath());
 	} 
 	m_interactComponent->setInteractable(!active);
+	if (active) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyLeveloverlayReload();
+	}
 }
 
 std::string CheckpointTile::getSpritePath() const {

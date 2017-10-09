@@ -20,6 +20,10 @@ WardenEnemy::WardenEnemy(const Level* level, Screen* screen) :
 	m_isAlwaysUpdate = true;
 	m_isImmortal = true;
 	m_isHPBarVisible = false;
+
+	m_debugCircle.setFillColor(COLOR_TRANSPARENT);
+	m_debugCircle.setOutlineColor(COLOR_BAD);
+	m_debugCircle.setOutlineThickness(1.f);
 }
 
 void WardenEnemy::update(const sf::Time& frameTime) {
@@ -35,31 +39,24 @@ void WardenEnemy::update(const sf::Time& frameTime) {
 	}
 }
 
+void WardenEnemy::renderAfterForeground(sf::RenderTarget& target) {
+	Enemy::renderAfterForeground(target);
+	if (m_isDebugRendering) {
+		m_debugCircle.setPosition(m_circleSpawner->center - sf::Vector2f(m_observedRange, m_observedRange));
+		target.draw(m_debugCircle);
+	}
+}
+
 bool WardenEnemy::isMainCharInRange() {
 	if (m_observedRange == 0) return false;
 
-	sf::Vector2f circleDistance;
-	auto const center = m_mainChar->getCenter();
+	// do some neat circle/rectangle collision
 	auto const& bb = *m_mainChar->getBoundingBox();
 	auto const& circle = m_circleSpawner->center;
 
-	circleDistance.x = std::abs(circle.x - center.x);
-	circleDistance.y = abs(circle.y - center.y);
-
-	if (circleDistance.x > (bb.width * 0.5f + m_observedRange))
-		return false;
-	if (circleDistance.y > (bb.height * 0.5f + m_observedRange))
-		return false;
-
-	if (circleDistance.x <= bb.width * 0.5f)
-		return true;
-	if (circleDistance.y <= bb.height * 0.5f)
-		return true;
-
-	float a = circleDistance.x - bb.width * 0.5f;
-	float b = circleDistance.y - bb.height * 0.5f;
-
-	return (a * a + b * b <= m_observedRange * m_observedRange);
+	float deltaX = circle.x - std::max(bb.left, std::min(circle.x, bb.left + bb.width));;
+	float deltaY = circle.y - std::max(bb.top, std::min(circle.y, bb.top + bb.top));;
+	return (deltaX * deltaX + deltaY * deltaY) < (m_observedRange * m_observedRange);
 }
 
 void WardenEnemy::loadAttributes() {
@@ -85,6 +82,7 @@ void WardenEnemy::updateObservedRange() {
 	m_observedRange = (4 - m_mainChar->getInvisibilityLevel()) * 20.f;
 	m_circleSpawner->radius = sf::Vector2f(m_observedRange, m_observedRange);
 	m_pc->setEmitRate(m_observedRange * 1.5f);
+	m_debugCircle.setRadius(m_observedRange);
 }
 
 void WardenEnemy::loadAnimation(int skinNr) {
