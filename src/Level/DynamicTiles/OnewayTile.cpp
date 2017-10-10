@@ -26,5 +26,5 @@ void OnewayTile::loadAnimation(int skinNr) {
 }
 
 std::string OnewayTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_oneway.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_oneway.png";
 }

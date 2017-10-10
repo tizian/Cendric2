@@ -132,5 +132,5 @@ void DivineTorchTile::loadComponents() {
 }
 
 std::string DivineTorchTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_divinetorch.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_divinetorch.png";
 }

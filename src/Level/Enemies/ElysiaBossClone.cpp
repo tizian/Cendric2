@@ -150,5 +150,5 @@ sf::Time ElysiaBossClone::getConfiguredWaitingTime() const {
 }
 
 std::string ElysiaBossClone::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_elysia.png";
+	return "res/texture/bosses/spritesheet_boss_elysia.png";
 }

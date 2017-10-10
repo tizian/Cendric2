@@ -17,7 +17,7 @@ REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 const sf::Vector2f YashaBoss::ROOM_MID = sf::Vector2f(650.f, 600.f);
 const float YashaBoss::FADE_TIME = 2.f;
 const float YashaBoss::REVIVE_CD = 10.f;
-const std::string YashaBoss::SPELL_TEX_PATH = "res/assets/spells/spritesheet_spell_raisethedead.png";
+const std::string YashaBoss::SPELL_TEX_PATH = "res/texture/spells/spritesheet_spell_raisethedead.png";
 
 const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { 
 	sf::Vector2f(365.f, 485.f), 
@@ -356,7 +356,7 @@ sf::Time YashaBoss::getConfiguredWaitingTime() const {
 }
 
 std::string YashaBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_yasha.png";
+	return "res/texture/bosses/spritesheet_boss_yasha.png";
 }
 
 void YashaBoss::loadComponents() {

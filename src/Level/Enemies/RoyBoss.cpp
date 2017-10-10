@@ -218,7 +218,7 @@ float RoyBoss::getConfiguredDistanceToHPBar() const {
 }
 
 std::string RoyBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_roy.png";
+	return "res/texture/bosses/spritesheet_boss_roy.png";
 }
 
 std::string RoyBoss::getDeathSoundPath() const {

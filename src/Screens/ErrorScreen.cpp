@@ -7,15 +7,15 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	ErrorID error = g_resourceManager->pollError()->first;
 	switch (error) {
 	case ErrorID::Error_fileNotFound:
-		m_screenResource = "res/assets/screens/screen_error_filenotfound.png";
+		m_screenResource = "res/texture/screens/screen_error_filenotfound.png";
 		break;
 	case ErrorID::Error_dataCorrupted:
-		m_screenResource = "res/assets/screens/screen_error_datacorrupted.png";
+		m_screenResource = "res/texture/screens/screen_error_datacorrupted.png";
 		break;
 	default:
 		// unexpected
 		g_logger->logError("ErrorScreen", "Error screen has been set without an error occurring");
-		m_screenResource = "res/assets/screens/screen_error_datacorrupted.png";
+		m_screenResource = "res/texture/screens/screen_error_datacorrupted.png";
 		break;
 	}
 	g_resourceManager->loadTexture(m_screenResource, ResourceType::Unique, this);

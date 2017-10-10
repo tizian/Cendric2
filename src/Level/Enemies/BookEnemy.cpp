@@ -225,5 +225,5 @@ void BookEnemy::loadParticleSystem() {
 }
 
 std::string BookEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_book.png";
+	return "res/texture/enemies/spritesheet_enemy_book.png";
 }

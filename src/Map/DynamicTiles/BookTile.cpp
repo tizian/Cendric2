@@ -65,6 +65,6 @@ void BookTile::startReading() {
 }
 
 std::string BookTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_book.png";
+	return "res/texture/map_dynamic_tiles/spritesheet_tiles_book.png";
 }
 

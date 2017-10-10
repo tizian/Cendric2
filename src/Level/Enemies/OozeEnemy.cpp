@@ -118,7 +118,7 @@ void OozeEnemy::loadAnimation(int skinNr) {
 }
 
 std::string OozeEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_ooze.png";
+	return "res/texture/enemies/spritesheet_enemy_ooze.png";
 }
 
 sf::Time OozeEnemy::getConfiguredRandomDecisionTime() const {

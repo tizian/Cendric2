@@ -187,5 +187,5 @@ sf::Time ZeffBoss::getConfiguredWaitingTime() const {
 }
 
 std::string ZeffBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_zeff.png";
+	return "res/texture/bosses/spritesheet_boss_zeff.png";
 }

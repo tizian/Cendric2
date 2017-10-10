@@ -118,7 +118,7 @@ void LeverTile::switchLever() {
 }
 
 std::string LeverTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_lever.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_lever.png";
 }
 
 std::string LeverTile::getSoundPath() const {

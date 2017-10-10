@@ -130,7 +130,7 @@ sf::Time PrisonerEnemy::executeDefaultFightAnimation(bool isBlocking, int times)
 }
 
 std::string PrisonerEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_prisoner.png";
+	return "res/texture/enemies/spritesheet_enemy_prisoner.png";
 }
 
 void PrisonerEnemy::onHit(Spell* spell) {

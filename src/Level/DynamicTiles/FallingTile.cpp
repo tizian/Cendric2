@@ -128,5 +128,5 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 std::string FallingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_falling.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_falling.png";
 }

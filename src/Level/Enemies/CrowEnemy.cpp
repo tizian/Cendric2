@@ -140,6 +140,6 @@ void CrowEnemy::loadAnimation(int skinNr) {
 }
 
 std::string CrowEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_crow.png";
+	return "res/texture/enemies/spritesheet_enemy_crow.png";
 }
 

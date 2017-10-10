@@ -130,7 +130,7 @@ void CheckpointTile::setActive(bool active, bool playSound) {
 }
 
 std::string CheckpointTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_checkpoint.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_checkpoint.png";
 }
 
 std::string CheckpointTile::getSoundPath() const {

@@ -194,6 +194,6 @@ bool GargoyleEnemy::isSummoned() const {
 }
 
 std::string GargoyleEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_gargoyle.png";
+	return "res/texture/enemies/spritesheet_enemy_gargoyle.png";
 }
 

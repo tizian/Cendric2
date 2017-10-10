@@ -141,7 +141,7 @@ void SeagullEnemy::loadAnimation(int skinNr) {
 }
 
 std::string SeagullEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_seagull.png";
+	return "res/texture/enemies/spritesheet_enemy_seagull.png";
 }
 
 

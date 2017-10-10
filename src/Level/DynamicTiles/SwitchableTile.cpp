@@ -63,5 +63,5 @@ bool SwitchableTile::isSwitchable() const {
 }
 
 std::string SwitchableTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_switchable.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_switchable.png";
 }

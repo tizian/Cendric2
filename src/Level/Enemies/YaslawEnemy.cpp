@@ -158,6 +158,6 @@ AttackingBehavior* YaslawEnemy::createAttackingBehavior(bool asAlly) {
 }
 
 std::string YaslawEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_yaslaw.png";
+	return "res/texture/enemies/spritesheet_enemy_yaslaw.png";
 }
 

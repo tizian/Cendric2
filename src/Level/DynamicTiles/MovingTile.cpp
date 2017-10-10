@@ -7,7 +7,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Moving, MovingTile)
 
 const sf::Time MovingTile::FROZEN_TIME = sf::seconds(10.f);
 const sf::Time MovingTile::FROZEN_FADING_TIME = sf::seconds(2.f);
-const std::string MovingTile::SPRITE_PATH = "res/assets/level_dynamic_tiles/spritesheet_tiles_moving.png";
+const std::string MovingTile::SPRITE_PATH = "res/texture/level_dynamic_tiles/spritesheet_tiles_moving.png";
 
 MovingTile::MovingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),

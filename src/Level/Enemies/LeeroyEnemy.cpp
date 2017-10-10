@@ -129,5 +129,5 @@ int LeeroyEnemy::getMentalStrength() const {
 }
 
 std::string LeeroyEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_leeroy.png";
+	return "res/texture/enemies/spritesheet_enemy_leeroy.png";
 }

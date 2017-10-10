@@ -129,5 +129,5 @@ void RatEnemy::loadAnimation(int skinNr) {
 }
 
 std::string RatEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_rat.png";
+	return "res/texture/enemies/spritesheet_enemy_rat.png";
 }

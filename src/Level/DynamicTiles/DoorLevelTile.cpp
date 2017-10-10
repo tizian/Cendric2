@@ -184,5 +184,5 @@ float DoorLevelTile::getOpenRange() const {
 }
 
 std::string DoorLevelTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_door.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_door.png";
 }

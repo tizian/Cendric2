@@ -8,7 +8,7 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Wolf, WolfBoss)
 
-const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/assets/cendric/cendric_transform_wolf.png";
+const std::string WolfBoss::TRANSFORM_SPRITEPATH = "res/texture/cendric/cendric_transform_wolf.png";
 
 float WolfBoss::getConfiguredDistanceToHPBar() const {
 	return 80.f;
@@ -259,5 +259,5 @@ sf::Time WolfBoss::getConfiguredWaitingTime() const {
 }
 
 std::string WolfBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_wolfmonster.png";
+	return "res/texture/bosses/spritesheet_boss_wolfmonster.png";
 }

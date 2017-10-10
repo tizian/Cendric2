@@ -222,6 +222,6 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 }
 
 std::string DragonWhelpEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_dragonwhelp.png";
+	return "res/texture/enemies/spritesheet_enemy_dragonwhelp.png";
 }
 

@@ -191,7 +191,7 @@ void WardenEnemy::loadComponents() {
 }
 
 std::string WardenEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_warden.png";
+	return "res/texture/enemies/spritesheet_enemy_warden.png";
 }
 
 std::string WardenEnemy::getParticleTexture() const {

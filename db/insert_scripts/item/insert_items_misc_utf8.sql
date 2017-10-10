@@ -173,3 +173,9 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item', 'Yasha''s Fangs','Yasha''s Fangzähne','Fangzää vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item_desc', 'The huge fangs of the demon Yasha. Maybe someone could craft something with it.','Die riesigen Fangzähne der Dämonin Yasha. Vielleicht könnte jemand etwas daraus herstellen.','Di riesige Fangzää vode Dämonin Yasha. Vilicht chönt öpper öppis drus herstelle.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_yashafangs', 'misc', 750, 200, -1);
+
+-- Prisma Stone
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item', 'Prisma Stone','Prismastein','Prismastei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item_desc', 'It shines in all colors of the rainbow. The blacksmith Harek would certainly be interested in this material.','Er leuchtet in allen Farben des Regenbogens. Der Schmied Harek wäre sicherlich an diesem Material interessiert.','Er lüchtet i allne Farbe vom Rägeboge. De Schmied Harek wer sicher a dem Material interessiert.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_prismastone', 'misc', 750, 200, -1);

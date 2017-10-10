@@ -6,7 +6,7 @@ using namespace std;
 
 const float CREDITS_VELOCITY_Y = -36.f;
 
-const std::string SPRITE_PATH = "res/assets/screens/screen_credits.png";
+const std::string SPRITE_PATH = "res/texture/screens/screen_credits.png";
 
 CreditsScreen::CreditsScreen(CharacterCore* core) : Screen(core) {
 	g_resourceManager->loadTexture(SPRITE_PATH, ResourceType::Unique, this);

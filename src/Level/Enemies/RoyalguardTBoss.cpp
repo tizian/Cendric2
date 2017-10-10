@@ -273,11 +273,11 @@ AttackingBehavior* RoyalguardTBoss::createAttackingBehavior(bool asAlly) {
 }
 
 std::string RoyalguardTBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_royalguard_t.png";
+	return "res/texture/bosses/spritesheet_boss_royalguard_t.png";
 }
 
 std::string RoyalguardTBoss::getWeaponTexturePath() const {
-	return "res/assets/bosses/pike_t.png";
+	return "res/texture/bosses/pike_t.png";
 }
 
 std::string RoyalguardTBoss::getDeathSoundPath() const {

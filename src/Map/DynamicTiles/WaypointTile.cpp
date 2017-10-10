@@ -106,7 +106,7 @@ void WaypointTile::setActive() {
 }
 
 std::string WaypointTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_waypoint.png";
+	return "res/texture/map_dynamic_tiles/spritesheet_tiles_waypoint.png";
 }
 
 std::string WaypointTile::getSoundPath() const {

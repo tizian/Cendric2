@@ -181,5 +181,5 @@ sf::Vector2f SwingingTile::getHeadPosition() const {
 }
 
 std::string SwingingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_swinging.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_swinging.png";
 }

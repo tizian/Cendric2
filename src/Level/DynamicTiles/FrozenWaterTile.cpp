@@ -50,5 +50,5 @@ void FrozenWaterTile::onHit(Spell* spell) {
 }
 
 std::string FrozenWaterTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_frozenwater.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_frozenwater.png";
 }

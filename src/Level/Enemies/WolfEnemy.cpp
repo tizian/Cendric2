@@ -162,7 +162,7 @@ int WolfEnemy::getMentalStrength() const {
 }
 
 std::string WolfEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_wolf.png";
+	return "res/texture/enemies/spritesheet_enemy_wolf.png";
 }
 
 std::string WolfEnemy::getDeathSoundPath() const {

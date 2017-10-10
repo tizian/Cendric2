@@ -184,6 +184,6 @@ void BatEnemy::loadAnimation(int skinNr) {
 }
 
 std::string BatEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_bat.png";
+	return "res/texture/enemies/spritesheet_enemy_bat.png";
 }
 

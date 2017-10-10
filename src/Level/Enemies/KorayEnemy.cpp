@@ -121,5 +121,5 @@ int KorayEnemy::getMentalStrength() const {
 }
 
 std::string KorayEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_koray.png";
+	return "res/texture/enemies/spritesheet_enemy_koray.png";
 }

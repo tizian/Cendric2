@@ -68,7 +68,7 @@ void DestructibleTile::onHit(Spell* spell) {
 }
 
 std::string DestructibleTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_destructible.png";
 }
 
 std::string DestructibleTile::getSoundPath() const {

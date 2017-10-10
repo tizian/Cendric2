@@ -69,7 +69,7 @@ float DoorMapTile::getOpenRange() const {
 }
 
 std::string DoorMapTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_door.png";
+	return "res/texture/map_dynamic_tiles/spritesheet_tiles_door.png";
 }
 
 void DoorMapTile::onRightClick() {

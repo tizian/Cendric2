@@ -139,7 +139,7 @@ void DisappearingTile::onHit(Spell* spell) {
 }
 
 std::string DisappearingTile::getSpritePath() const {
-	return "res/assets/particles/cloud.png";
+	return "res/texture/particles/cloud.png";
 }
 
 void DisappearingTile::loadComponents() {

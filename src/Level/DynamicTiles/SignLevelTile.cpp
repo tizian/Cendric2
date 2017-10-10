@@ -97,5 +97,5 @@ void SignLevelTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 }
 
 std::string SignLevelTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_sign.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_sign.png";
 }

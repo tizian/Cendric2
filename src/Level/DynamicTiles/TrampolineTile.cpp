@@ -24,7 +24,7 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	m_isShiftable = skinNr == 0;
 
 	m_isCollidable = true;
-	std::string destructibleTileTex = "res/assets/level_dynamic_tiles/spritesheet_tiles_destructible.png";
+	std::string destructibleTileTex = "res/texture/level_dynamic_tiles/spritesheet_tiles_destructible.png";
 	g_resourceManager->loadTexture(destructibleTileTex, ResourceType::Level);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
@@ -143,7 +143,7 @@ void TrampolineTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::V
 }
 
 std::string TrampolineTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_trampoline.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_trampoline.png";
 }
 
 std::string TrampolineTile::getSoundPath() const {

@@ -121,5 +121,5 @@ float LadderTile::getClimbingPositionY(GameObject* object) const {
 }
 
 std::string LadderTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_ladder.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_ladder.png";
 }

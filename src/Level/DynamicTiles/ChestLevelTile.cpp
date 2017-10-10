@@ -262,5 +262,5 @@ void ChestLevelTile::onRightClick() {
 }
 
 std::string ChestLevelTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_chest.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_chest.png";
 }

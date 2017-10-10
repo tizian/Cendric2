@@ -381,7 +381,7 @@ GameObjectType LevelMainCharacter::getConfiguredType() const {
 }
 
 std::string LevelMainCharacter::getSpritePath() const {
-	return "res/assets/cendric/spritesheet_cendric_level.png";
+	return "res/texture/cendric/spritesheet_cendric_level.png";
 }
 
 std::string LevelMainCharacter::getDeathSoundPath() const {

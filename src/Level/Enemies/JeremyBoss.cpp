@@ -298,7 +298,7 @@ float JeremyBoss::getConfiguredDistanceToHPBar() const {
 }
 
 std::string JeremyBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_jeremy.png";
+	return "res/texture/bosses/spritesheet_boss_jeremy.png";
 }
 
 std::string JeremyBoss::getDeathSoundPath() const {

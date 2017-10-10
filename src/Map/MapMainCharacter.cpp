@@ -192,5 +192,5 @@ GameObjectType MapMainCharacter::getConfiguredType() const {
 }
 
 std::string MapMainCharacter::getSpritePath() const {
-	return "res/assets/cendric/spritesheet_cendric_map.png";
+	return "res/texture/cendric/spritesheet_cendric_map.png";
 }

@@ -131,6 +131,6 @@ void ChestMapTile::unlock() {
 }
 
 std::string ChestMapTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_chest.png";
+	return "res/texture/map_dynamic_tiles/spritesheet_tiles_chest.png";
 }
 

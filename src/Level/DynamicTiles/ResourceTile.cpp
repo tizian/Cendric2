@@ -147,7 +147,7 @@ void ResourceTile::onRightClick() {
 }
 
 std::string ResourceTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_resource.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_resource.png";
 }
 
 void ResourceTile::updatePicking(const sf::Time& frameTime) {

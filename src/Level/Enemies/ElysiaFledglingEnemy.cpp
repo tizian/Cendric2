@@ -171,7 +171,7 @@ void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
 }
 
 std::string ElysiaFledglingEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_elysiafledgling.png";
+	return "res/texture/enemies/spritesheet_enemy_elysiafledgling.png";
 }
 
 

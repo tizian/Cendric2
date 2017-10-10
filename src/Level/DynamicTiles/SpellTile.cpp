@@ -201,5 +201,5 @@ void SpellTile::loadComponents() {
 }
 
 std::string SpellTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_spell.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_spell.png";
 }

@@ -117,5 +117,5 @@ int HunterEnemy::getMentalStrength() const {
 }
 
 std::string HunterEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_hunter.png";
+	return "res/texture/enemies/spritesheet_enemy_hunter.png";
 }

@@ -160,6 +160,6 @@ int SkeletonMageEnemy::getMentalStrength() const {
 }
 
 std::string SkeletonMageEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_skeletonmage.png";
+	return "res/texture/enemies/spritesheet_enemy_skeletonmage.png";
 }
 

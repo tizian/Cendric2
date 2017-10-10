@@ -158,6 +158,6 @@ void WispEnemy::loadAnimation(int skinNr) {
 }
 
 std::string WispEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_wisp.png";
+	return "res/texture/enemies/spritesheet_enemy_wisp.png";
 }
 

@@ -73,7 +73,7 @@ void SignMapTile::loadAnimation(int skinNr) {
 }
 
 std::string SignMapTile::getSpritePath() const {
-	return "res/assets/map_dynamic_tiles/spritesheet_tiles_sign.png";
+	return "res/texture/map_dynamic_tiles/spritesheet_tiles_sign.png";
 }
 
 void SignMapTile::setPosition(const sf::Vector2f& pos) {

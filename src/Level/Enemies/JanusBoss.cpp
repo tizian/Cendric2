@@ -9,7 +9,7 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Janus, JanusBoss)
 
-const std::string JanusBoss::PARTICLE_TEX_PATH = "res/assets/particles/cloud.png";
+const std::string JanusBoss::PARTICLE_TEX_PATH = "res/texture/particles/cloud.png";
 const std::string JanusBoss::RED_SOUND = "res/sound/mob/janus_red.ogg";
 const std::string JanusBoss::BLUE_SOUND = "res/sound/mob/janus_blue.ogg";
 const sf::Time JanusBoss::PHASE_TIME = sf::seconds(10.f);
@@ -348,7 +348,7 @@ float JanusBoss::getConfiguredDistanceToHPBar() const {
 }
 
 std::string JanusBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_janus.png";
+	return "res/texture/bosses/spritesheet_boss_janus.png";
 }
 
 void JanusBoss::loadCloudParticles() {
@@ -425,5 +425,5 @@ void JanusBossMask::load() {
 }
 
 std::string JanusBossMask::getSpritesheetPath() const {
-	return "res/assets/bosses/spritesheet_janus_mask.png";
+	return "res/texture/bosses/spritesheet_janus_mask.png";
 }

@@ -295,7 +295,7 @@ float MorgianaBoss::getConfiguredDistanceToHPBar() const {
 }
 
 std::string MorgianaBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_morgiana.png";
+	return "res/texture/bosses/spritesheet_boss_morgiana.png";
 }
 
 std::string MorgianaBoss::getDeathSoundPath() const {

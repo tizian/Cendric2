@@ -126,7 +126,7 @@ void UnstableTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 }
 
 std::string UnstableTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_unstable.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_unstable.png";
 }
 
 

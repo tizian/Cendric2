@@ -265,7 +265,7 @@ void ShootingTile::onHit(Spell* spell) {
 }
 
 std::string ShootingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_shooting.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_shooting.png";
 }
 
 

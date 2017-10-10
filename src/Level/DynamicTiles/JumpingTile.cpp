@@ -195,5 +195,5 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 std::string JumpingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_jumping.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_jumping.png";
 }

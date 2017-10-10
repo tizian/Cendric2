@@ -31,5 +31,5 @@ void SpikesBottomTile::onHit(LevelMovableGameObject* mob) {
 }
 
 std::string SpikesBottomTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_spikesbottom.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_spikesbottom.png";
 }

@@ -140,7 +140,7 @@ void BoatTile::onHit(Spell* spell) {
 }
 
 std::string BoatTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_boat.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_boat.png";
 }
 
 void BoatTile::checkForWind() {

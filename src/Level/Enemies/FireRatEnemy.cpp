@@ -202,7 +202,7 @@ int FireRatEnemy::getMentalStrength() const {
 }
 
 std::string FireRatEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_firerat.png";
+	return "res/texture/enemies/spritesheet_enemy_firerat.png";
 }
 
 void FireRatEnemy::loadComponents() {

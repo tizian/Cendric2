@@ -77,5 +77,5 @@ int TorchTile::getSkinNr() const {
 }
 
 std::string TorchTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_torch.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_torch.png";
 }

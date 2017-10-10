@@ -308,11 +308,11 @@ AttackingBehavior* RoyalguardIBoss::createAttackingBehavior(bool asAlly) {
 }
 
 std::string RoyalguardIBoss::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_royalguard_i.png";
+	return "res/texture/bosses/spritesheet_boss_royalguard_i.png";
 }
 
 std::string RoyalguardIBoss::getWeaponTexturePath() const {
-	return "res/assets/bosses/pike_i.png";
+	return "res/texture/bosses/pike_i.png";
 }
 
 std::string RoyalguardIBoss::getDeathSoundPath() const {

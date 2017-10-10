@@ -156,6 +156,6 @@ int CairnEnemy::getMentalStrength() const {
 }
 
 std::string CairnEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_cairn.png";
+	return "res/texture/enemies/spritesheet_enemy_cairn.png";
 }
 

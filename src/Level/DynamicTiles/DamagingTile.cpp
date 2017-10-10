@@ -82,5 +82,5 @@ void DamagingTile::onHit(LevelMovableGameObject* mob) {
 }
 
 std::string DamagingTile::getSpritePath() const {
-	return "res/assets/level_dynamic_tiles/spritesheet_tiles_damaging.png";
+	return "res/texture/level_dynamic_tiles/spritesheet_tiles_damaging.png";
 }

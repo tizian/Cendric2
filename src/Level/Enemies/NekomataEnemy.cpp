@@ -215,7 +215,7 @@ void NekomataEnemy::loadComponents() {
 }
 
 std::string NekomataEnemy::getSpritePath() const {
-	return "res/assets/enemies/spritesheet_enemy_nekomata.png";
+	return "res/texture/enemies/spritesheet_enemy_nekomata.png";
 }
 
 std::string NekomataEnemy::getDeathSoundPath() const {

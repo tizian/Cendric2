@@ -129,7 +129,7 @@ AttackingBehavior* YashaBossAdd::createAttackingBehavior(bool asAlly) {
 }
 
 std::string YashaBossAdd::getSpritePath() const {
-	return "res/assets/bosses/spritesheet_boss_yasha.png";
+	return "res/texture/bosses/spritesheet_boss_yasha.png";
 }
 
 void YashaBossAdd::loadComponents() {
