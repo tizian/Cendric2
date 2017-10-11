@@ -619,12 +619,12 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 40, 60,
 1.0, 2.0, 0.0);
 
--- Green Sparkling Ring
+-- Sparkling Green Ring
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_green', 'item', 'Sparkling Green Ring','Grüner Funkenring','Grüene Funkering');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_green', 'item', 'Sparkling Green Ring','Funkelnder Grüner Ring','Funkelnde Grüene Ring');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_green', 'item_desc', 'The green magic rejuvenates its wearer.','Die grüne Magie verjüngt seinen Träger.','Di grüen Magie verjüngt ihren Träger.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_green', 'eq_ring', 700, 550, 250);
-INSERT INTO item_attribute (item_id, max_health, health_regeneration) values ('eq_sparkling_green', 20, 1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_green', 'eq_ring', 800, 300, 200);
+INSERT INTO item_attribute (item_id, max_health, heal) values ('eq_sparkling_green', 30, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_green', '', '');
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_green', 30, 40, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_green', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
@@ -633,6 +633,132 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 110, 255, 100, 255,
 210, 255, 200, 200,
 210, 255, 200, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Purple Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_purple', 'item', 'Sparkling Purple Ring','Funkelnder Violetter Ring','Funkelnde Violette Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_purple', 'item_desc', 'The purple stone reinforces the agility of its wearer.','Der blaue Stein verstärkt die Beweglichkeit seines Trägers.','De blau Stei verstärcht d''Beweglichkeit vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_purple', 'eq_ring', 800, 350, 200);
+INSERT INTO item_attribute (item_id, haste, critical) values ('eq_sparkling_purple', 10, 3);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_purple', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_purple', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_purple', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+170, 100, 255, 255,
+170, 100, 255, 255,
+230, 200, 255, 200,
+230, 200, 255, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Yellow Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_yellow', 'item', 'Sparkling Yellow Ring','Funkelnder Gelber Ring','Funkelnde Gäle Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_yellow', 'item_desc', 'The yellow stone reinforces the divine magic of its wearer.','Der gelbe Stein verstärkt die heilige Magie seines Trägers.','De blau Stei verstärcht di heilig Magie vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_yellow', 'eq_ring', 800, 400, 200);
+INSERT INTO item_attribute (item_id, dmg_light, res_light) values ('eq_sparkling_yellow', 5, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_yellow', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_yellow', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_yellow', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+255, 255, 100, 255,
+255, 255, 100, 255,
+255, 255, 200, 200,
+255, 255, 200, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Orange Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_orange', 'item', 'Sparkling Orange Ring','Funkelnder Oranger Ring','Funkelnde Orange Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_orange', 'item_desc', 'The orange stone reinforces the physical strenght of its wearer.','Der blaue Stein verstärkt die physische Stärke seines Trägers.','De blau Stei verstärcht di physisch Stärchi vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_orange', 'eq_ring', 800, 450, 200);
+INSERT INTO item_attribute (item_id, dmg_physical, res_physical) values ('eq_sparkling_orange', 5, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_orange', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_orange', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_orange', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+255, 170, 100, 255,
+255, 170, 100, 255,
+255, 230, 200, 200,
+255, 230, 200, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Red Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_red', 'item', 'Sparkling Red Ring','Funkelnder Roter Ring','Funkelnde Rote Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_red', 'item_desc', 'The red stone reinforces the fire magic of its wearer.','Der rote Stein verstärkt die Feuermagie seines Trägers.','De rot Stei verstärcht d''Füürmagie vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_red', 'eq_ring', 800, 500, 200);
+INSERT INTO item_attribute (item_id, dmg_fire, res_fire) values ('eq_sparkling_red', 5, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_red', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_red', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_red', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+255, 120, 120, 255,
+255, 120, 120, 255,
+255, 210, 210, 200,
+255, 210, 210, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Cyan Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_cyan', 'item', 'Sparkling Cyan Ring','Funkelnder Cyanfarbener Ring','Funkelnde Cyanfarbige Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_cyan', 'item_desc', 'The cyan stone reinforces the ice magic of its wearer.','Der cyanfarbene Stein verstärkt die Eismagie seines Trägers.','De cyanfarbig Stei verstärcht d''Iismagie vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_cyan', 'eq_ring', 800, 550, 200);
+INSERT INTO item_attribute (item_id, dmg_ice, res_ice) values ('eq_sparkling_cyan', 5, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_cyan', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_cyan', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_cyan', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+100, 255, 255, 255,
+100, 255, 255, 255,
+200, 255, 255, 200,
+200, 255, 255, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Blue Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_blue', 'item', 'Sparkling Blue Ring','Funkelnder Blauer Ring','Funkelnde Blaue Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_blue', 'item_desc', 'The blue stone reinforces the shadow magic of its wearer.','Der blaue Stein verstärkt die Schattenmagie seines Trägers.','De blau Stei verstärcht d''Schattemagie vo sim Träger.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_blue', 'eq_ring', 800, 600, 200);
+INSERT INTO item_attribute (item_id, dmg_shadow, res_shadow) values ('eq_sparkling_blue', 5, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_blue', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_blue', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_blue', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+120, 120, 255, 255,
+120, 120, 255, 255,
+210, 210, 255, 200,
+210, 210, 255, 200,
+0, -50,
+0, 5,
+0.5, 1.0, 0.0);
+
+-- Sparkling Rainbow Ring
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_rainbow', 'item', 'Sparkling Rainbow Ring','Funkelnder Regenbogen Ring','Funkelnde Rägeboge Ring');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_rainbow', 'item_desc', 'To each his own, and I take everything.','Jedem das seine und mir das meiste.','Jedem das seine und mir es meiste.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_rainbow', 'eq_ring', 800, 650, 200);
+INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire, dmg_ice, dmg_light, dmg_shadow, res_physical, res_fire, res_ice, res_light, res_shadow, haste) values ('eq_sparkling_rainbow', 5, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_rainbow', '', '');
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_rainbow', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_rainbow', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
+10, 20, 0, 0,
+100, 100, 100, 255,
+200, 200, 200, 255,
+200, 200, 200, 200,
+255, 255, 255, 200,
 0, -50,
 0, 5,
 0.5, 1.0, 0.0);

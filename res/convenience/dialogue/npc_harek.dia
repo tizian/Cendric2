@@ -482,6 +482,16 @@ npc.id:npc_harek
 	]
 	[
 		# Link node, tag is next tag
+		tag:32
+		condition:DL:hasItem("mi_prismastone", 1)
+		# translation: 
+		translation.tag:DL_Choice_PrismaStone
+		translation.en:I found this rainbow stone. Can you craft something from it?
+		translation.de:Ich habe diesen Regenbogenstein gefunden. Kannst du etwas daraus herstellen?
+		translation.ch:Ich ha de Rägebogestei gfunde. Chasch öppis drus herstelle?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_NoMaterial
@@ -618,6 +628,496 @@ npc.id:npc_harek
 	translation.en:I've never worked with something like this before. A truly amazing material.
 	translation.de:Mit sowas habe ich noch nie gearbeitet. Ein wirklich prächtiges Material.
 	translation.ch:Mit sowas hani nonie gschaffet. Es würkli prächtigs Material.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_PrismaStone
+	translation.en:Hmm. Very interesting, indeed. It looks like condensed magic. I'll cut that stone for free.
+	translation.de:Hmm. Sehr interessant, wirklich. Sieht mir ganz nach konzentrierter Magie aus. Ich würde diesen Stein umsonst schleifen.
+	translation.ch:Hmm. Sehr interessant, würkli. Gseht mer ganz noch konzentrierter Magie us. Ich wür de Stei gratis schliffe.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_PrismaStone2
+	translation.en:I could cut the stone to focus one color or we could keep all colors, but they'll shine less.
+	translation.de:Ich könnte den Stein so schleifen, dass er eine Farbe fokussiert, oder wir könnten alle Farben lassen, allerdings wären sie dann weniger kräftig.
+	translation.ch:Ich chönt de Stei so schliffe, daser ei Farb fokussiert, oder mer chönd au all Farbe lah,a ber si wäred weniger chräftig.
+	[
+		# Link node, tag is next tag
+		tag:34
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Harek_PrismaStone3
+	translation.en:Which magic types or colours do you prefer?
+	translation.de:Welche Magieart oder Farbe magst du denn haben?
+	translation.ch:Weli Magieart oder Farb wetsch denn ha?
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{2
+	# [35] Choice Node
+	tag:35
+	[
+		# Link node, tag is next tag
+		tag:36
+		# translation: 
+		translation.tag:DL_Choice_RingColor
+		translation.en:Let me choose by colour.
+		translation.de:Lass mich die Farbe auswählen.
+		translation.ch:Ich wür gern d'Farb uswähle.
+	]
+	[
+		# Link node, tag is next tag
+		tag:37
+		# translation: 
+		translation.tag:DL_Choice_RingMagic
+		translation.en:Let me choose by magic type.
+		translation.de:Lass mich die Art der Magie auswählen.
+		translation.ch:Ich wür gern d'Art vode Magie uswähle.
+	]
+}
+{2
+	# [36] Choice Node
+	tag:36
+	[
+		# Link node, tag is next tag
+		tag:38
+		# translation: 
+		translation.tag:DL_Choice_RingGreen
+		translation.en:Green.
+		translation.de:Grün.
+		translation.ch:Grüen.
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		# translation: 
+		translation.tag:DL_Choice_RingPurple
+		translation.en:Purple.
+		translation.de:Violett.
+		translation.ch:Violett.
+	]
+	[
+		# Link node, tag is next tag
+		tag:40
+		# translation: 
+		translation.tag:DL_Choice_RingYellow
+		translation.en:Yellow.
+		translation.de:Gelb.
+		translation.ch:Gäl.
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		# translation: 
+		translation.tag:DL_Choice_RingOrange
+		translation.en:Orange.
+		translation.de:Orange.
+		translation.ch:Orange.
+	]
+	[
+		# Link node, tag is next tag
+		tag:42
+		# translation: 
+		translation.tag:DL_Choice_RingRed
+		translation.en:Red.
+		translation.de:Rot.
+		translation.ch:Rot.
+	]
+	[
+		# Link node, tag is next tag
+		tag:43
+		# translation: 
+		translation.tag:DL_Choice_RingCyan
+		translation.en:Cyan.
+		translation.de:Cyan.
+		translation.ch:Cyan.
+	]
+	[
+		# Link node, tag is next tag
+		tag:45
+		# translation: 
+		translation.tag:DL_Choice_RingBlue
+		translation.en:Blue.
+		translation.de:Blau.
+		translation.ch:Blau.
+	]
+	[
+		# Link node, tag is next tag
+		tag:44
+		# translation: 
+		translation.tag:DL_Choice_RingRainbow.
+		translation.en:Give me all colours.
+		translation.de:Gib mir alle Farben.
+		translation.ch:Gib mer alli Farbe.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_ChooseLater
+		translation.en:I'll choose later.
+		translation.de:Ich wähle später.
+		translation.ch:Ich wähle spöter.
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_green", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:Alright. Here you go.
+	translation.de:Gut. Hier, nimm.
+	translation.ch:Guet. Do, nimm.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_purple", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_yellow", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_orange", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_red", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_cyan", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_blue", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_rainbow", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingHereYouGo
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [37] Choice Node
+	tag:37
+	[
+		# Link node, tag is next tag
+		tag:46
+		# translation: 
+		translation.tag:DL_Choice_RingHeal
+		translation.en:I need something that improves my health.
+		translation.de:Ich brauche etwas, das meine Lebensenergie erhöht.
+		translation.ch:Ich bruch öppis, wo mini Lebensenergie erhöht.
+	]
+	[
+		# Link node, tag is next tag
+		tag:47
+		# translation: 
+		translation.tag:DL_Choice_RingHaste
+		translation.en:I like fast and critical attacks.
+		translation.de:Ich mag schnelle und kritische Attacken.
+		translation.ch:Ich mag schnelli und kritischi Attacke.
+	]
+	[
+		# Link node, tag is next tag
+		tag:48
+		# translation: 
+		translation.tag:DL_Choice_RingDivine
+		translation.en:I commited myself to the divine magic.
+		translation.de:Ich habe mich der heiligen Magie verschrieben.
+		translation.ch:Ich ha mich de heilige Magie verschriebe.
+	]
+	[
+		# Link node, tag is next tag
+		tag:49
+		# translation: 
+		translation.tag:DL_Choice_RingPhysical
+		translation.en:I like to beat people without magic.
+		translation.de:Ich mag es eigentlich, Leute ohne Magie zu verprügeln.
+		translation.ch:Ich mags eigentlich, Lüt ohni Magie z'verprügle.
+	]
+	[
+		# Link node, tag is next tag
+		tag:50
+		# translation: 
+		translation.tag:DL_Choice_RingFire
+		translation.en:I like to play with fire.
+		translation.de:Ich spiele gerne mit Feuer.
+		translation.ch:Ich spiel gern mit Füür.
+	]
+	[
+		# Link node, tag is next tag
+		tag:51
+		# translation: 
+		translation.tag:DL_Choice_RingIce
+		translation.en:Ice magic suits me.
+		translation.de:Eismagie gefällt mir.
+		translation.ch:Ich ha gern Iismagie.
+	]
+	[
+		# Link node, tag is next tag
+		tag:52
+		# translation: 
+		translation.tag:DL_Choice_RingShadow
+		translation.en:Nothing beats shadow magic.
+		translation.de:Es geht nichts über Schattenmagie.
+		translation.ch:Es gaht nüt über Schattemagie.
+	]
+	[
+		# Link node, tag is next tag
+		tag:53
+		# translation: 
+		translation.tag:DL_Choice_RingEverything
+		translation.en:I like everything.
+		translation.de:Ich mag alles.
+		translation.ch:Ich mag alles.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_ChooseLater
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_green", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:Alright. This ring should fit you best.
+	translation.de:Gut. Dieser Ring passt am besten zu dir.
+	translation.ch:Guet. De Ring passt am beste zu dir.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_purple", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_yellow", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_orange", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_red", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_cyan", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [52] NPC Node
+	tag:52
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_blue", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:removeItem("mi_prismastone", 1)
+	trigger:DL:addItem("eq_sparkling_rainbow", 1)
+	# translation: 
+	translation.tag:DL_NPC_RingThis
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

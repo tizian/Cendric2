@@ -89,6 +89,13 @@ item.id:eq_holyring,1
 item.id:eq_scalearmor,1
 item.id:eq_shadowcloak,1
 item.id:eq_sparkling_green,1
+item.id:eq_sparkling_yellow,1
+item.id:eq_sparkling_orange,1
+item.id:eq_sparkling_red,1
+item.id:eq_sparkling_purple,1
+item.id:eq_sparkling_blue,1
+item.id:eq_sparkling_cyan,1
+item.id:eq_sparkling_rainbow,1
 item.id:eq_startalisman,1
 item.id:eq_stevenhelmet,1
 item.id:eq_sunring,1
