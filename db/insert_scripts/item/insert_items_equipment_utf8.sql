@@ -626,7 +626,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_green', 'eq_ring', 800, 300, 200);
 INSERT INTO item_attribute (item_id, max_health, heal) values ('eq_sparkling_green', 30, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_green', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_green', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_green', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_green', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 110, 255, 100, 255,
@@ -644,7 +644,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_purple', 'eq_ring', 800, 350, 200);
 INSERT INTO item_attribute (item_id, haste, critical) values ('eq_sparkling_purple', 10, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_purple', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_purple', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_purple', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_purple', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 170, 100, 255, 255,
@@ -662,7 +662,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_yellow', 'eq_ring', 800, 400, 200);
 INSERT INTO item_attribute (item_id, dmg_light, res_light) values ('eq_sparkling_yellow', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_yellow', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_yellow', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_yellow', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_yellow', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 255, 255, 100, 255,
@@ -680,7 +680,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_orange', 'eq_ring', 800, 450, 200);
 INSERT INTO item_attribute (item_id, dmg_physical, res_physical) values ('eq_sparkling_orange', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_orange', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_orange', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_orange', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_orange', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 255, 170, 100, 255,
@@ -698,7 +698,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_red', 'eq_ring', 800, 500, 200);
 INSERT INTO item_attribute (item_id, dmg_fire, res_fire) values ('eq_sparkling_red', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_red', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_red', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_red', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_red', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 255, 120, 120, 255,
@@ -716,7 +716,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_cyan', 'eq_ring', 800, 550, 200);
 INSERT INTO item_attribute (item_id, dmg_ice, res_ice) values ('eq_sparkling_cyan', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_cyan', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_cyan', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_cyan', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_cyan', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 100, 255, 255, 255,
@@ -734,7 +734,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_blue', 'eq_ring', 800, 600, 200);
 INSERT INTO item_attribute (item_id, dmg_shadow, res_shadow) values ('eq_sparkling_blue', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_blue', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_blue', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_blue', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_blue', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 120, 120, 255, 255,
@@ -752,7 +752,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sparkling_rainbow', 'eq_ring', 800, 650, 200);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical, dmg_fire, dmg_ice, dmg_light, dmg_shadow, res_physical, res_fire, res_ice, res_light, res_shadow, haste) values ('eq_sparkling_rainbow', 5, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_rainbow', '', '');
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_rainbow', 30, 40, 50, 50, 20, 20, 1.0);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('eq_sparkling_rainbow', 17, 70, 50, 50, 20, 20, 1.0);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_sparkling_rainbow', 10, 10, 1, 'res/texture/particles/star.png', 5, 17, 70, 
 10, 20, 0, 0,
 100, 100, 100, 255,

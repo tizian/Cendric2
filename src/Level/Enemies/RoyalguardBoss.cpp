@@ -56,6 +56,7 @@ void RoyalguardBoss::setDead() {
 	Enemy::setDead();
 	clearReward();
 
+	m_isWeaponVisible = false;
 	for (auto pc : m_pcs) {
 		pc->setVisible(false);
 	}

@@ -287,7 +287,16 @@
  </objectgroup>
  <objectgroup name="trigger"/>
  <objectgroup name="enemy">
-  <object id="116" gid="1384" x="50" y="600" width="50" height="50"/>
-  <object id="117" gid="1385" x="1200" y="600" width="50" height="50"/>
+  <object id="116" gid="1384" x="50" y="600" width="50" height="50">
+   <properties>
+    <property name="fo_greaterhealingpotion" value="2"/>
+    <property name="gold" value="100"/>
+   </properties>
+  </object>
+  <object id="117" gid="1385" x="1200" y="600" width="50" height="50">
+   <properties>
+    <property name="mi_prismastone" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
