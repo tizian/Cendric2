@@ -1,8 +1,6 @@
 #include "Screens/LoadingScreen.h"
 #include "Screens/ScreenManager.h"
 
-using namespace std;
-
 LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 	if (core->getData().isInLevel) {
 		m_levelToLoad = new LevelScreen(core->getData().currentLevel, getCharacterCore());
@@ -18,15 +16,21 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	if (!m_isRendered) {
 		m_isRendered = true;
 		m_screenManager->clearBackupScreen();
+		
+		// start async thread
+		m_threadDone = false;
+		m_thread = new std::thread([ this] {
+			this->loadAsync();
+			this->m_threadDone = true;
+		});
+	}
+
+	if (!m_threadDone) {
 		return;
 	}
 
-	if (m_levelToLoad != nullptr) {
-		m_levelToLoad->load();
-	}
-	else if (m_mapToLoad != nullptr) {
-		m_mapToLoad->load();
-	}
+	m_thread->join();
+	delete m_thread;
 
 	if (m_mapToLoad != nullptr) {
 		if (g_resourceManager->pollError()->first == ErrorID::VOID) m_mapToLoad->loadForRenderTexture();
@@ -45,6 +49,15 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	}
 
 	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
+}
+
+void LoadingScreen::loadAsync() {
+	if (m_levelToLoad != nullptr) {
+		m_levelToLoad->load();
+	}
+	else if (m_mapToLoad != nullptr) {
+		m_mapToLoad->load();
+	}
 }
 
 void LoadingScreen::render(sf::RenderTarget& renderTarget) {

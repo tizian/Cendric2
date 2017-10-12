@@ -1,6 +1,7 @@
 #pragma once
 
 #include <thread> 
+#include <atomic>
 
 #include "global.h"
 #include "ResourceManager.h"
@@ -18,10 +19,15 @@ public:
 	virtual void execOnExit(const Screen *nextScreen) override;
 
 private:
+	void loadAsync();
+
 	bool m_isRendered = false;
 	BitmapText* m_title = nullptr;
 	sf::Sprite m_screenSprite;
 
 	LevelScreen* m_levelToLoad = nullptr;
 	MapScreen* m_mapToLoad = nullptr;
+
+	std::atomic<bool> m_threadDone;
+	std::thread* m_thread;
 };
