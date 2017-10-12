@@ -26,7 +26,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	m_currentRotation = 0.f;
 	if (contains(properties, std::string("angle"))) {
 		m_currentRotation = static_cast<float>(std::stoi(properties.at(std::string("angle"))));
-		m_currentRotation = std::fmodf(m_currentRotation, 360.f);
+		m_currentRotation = std::fmod(m_currentRotation, 360.f);
 	}
 	
 	if (!contains(properties, std::string("mode"))) return false;
