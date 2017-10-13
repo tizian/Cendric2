@@ -93,7 +93,7 @@ npc.id:npc_rana
 		condition:not DL:isConditionFulfilled("npc_rana", "trade")
 		# translation: 
 		translation.tag:DL_Choice_UnlockTrade
-		translation.en:Dou you sell something?
+		translation.en:Do you sell something?
 		translation.de:Verkaufst du etwas?
 		translation.ch:Verchaufsch öppis?
 	]

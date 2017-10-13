@@ -18,6 +18,11 @@ public:
 	WorldScreen(CharacterCore* core);
 	virtual ~WorldScreen();
 
+	// the part of the world that can be loaded safely async.
+	virtual void loadAsync() = 0;
+	// the rest, that cannot be loaded async
+	virtual void loadSync() = 0;
+
 	void execUpdate(const sf::Time& frameTime) override;
 	void execOnExit(Screen* nextScreen) override;
 	void render(sf::RenderTarget& renderTarget) override;

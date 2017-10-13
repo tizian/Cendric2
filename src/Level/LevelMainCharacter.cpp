@@ -8,6 +8,7 @@
 #include "Level/DamageNumbers.h"
 #include "GlobalResource.h"
 #include "World/Item.h"
+#include "Level/LevelEquipment.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);

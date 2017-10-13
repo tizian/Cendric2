@@ -4,20 +4,15 @@
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "WorldScreen.h"
-#include "ResourceManager.h"
-#include "Level/LevelMainCharacterLoader.h"
 #include "Level/LevelInterface.h"
 
 #include "GUI/Button.h"
 #include "GUI/YesOrNoForm.h"
-#include "GUI/ProgressLog.h"
 
 class LevelScreen final : public WorldScreen {
 public:
 	LevelScreen(const std::string& levelID, CharacterCore* core);
-	// called by the loading screen
-	void load();
-
+	
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void execOnEnter(Screen* previousScreen) override;
@@ -32,9 +27,6 @@ public:
 	// how the main char steals something. It will not be looted then and the observer will warn cendric / jail 
 	bool notifyObservers();
 	void toggleGodmode() override;
-
-	// called by the loading screen. the dynamic tiles & light in level
-	void loadForRenderTexture();
 
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
@@ -52,6 +44,11 @@ public:
 	sf::RenderTexture& getParticleBGRenderTexture();
 
 	void setEquipmentColor(const sf::Color& color);
+
+	// the part of the world that can be loaded safely async.
+	void loadAsync() override;
+	// the rest, that cannot be loaded async
+	void loadSync() override;
 
 private:
 	void quicksave() override;

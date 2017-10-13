@@ -2,11 +2,9 @@
 #include "Screens/MenuScreen.h"
 #include "Map/NPC.h"
 #include "Map/MapMainCharacterLoader.h"
-#include "Screens/ScreenManager.h"
 #include "ScreenOverlays/ScreenOverlay.h"
+#include "Map/MapInterface.h"
 #include "GUI/BookWindow.h"
-
-using namespace std;
 
 MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_mapID = mapID;
@@ -52,13 +50,17 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	updateTooltipText(frameTime);
 }
 
-void MapScreen::loadForRenderTexture() {
+void MapScreen::loadSync() {
 	m_currentMap.loadForRenderTexture();
+
+	m_interface = new MapInterface(this);
+	m_progressLog = new ProgressLog(getCharacterCore());
+	updateMonitoredQuestItems();
 }
 
-void MapScreen::load() {
+void MapScreen::loadAsync() {
 	if (!(m_currentMap.load(m_mapID, this))) {
-		string errormsg = m_mapID + ": file corrupted!";
+		std::string errormsg = m_mapID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
@@ -79,16 +81,11 @@ void MapScreen::load() {
 			}
 		}
 
-
 		if (!isContained) {
 			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
 			tilesExplored.push_back({ m_mapID, { size, std::vector<bool>(size.x * size.y, false)} });
 		}
 	}
-
-	m_interface = new MapInterface(this);
-	m_progressLog = new ProgressLog(getCharacterCore());
-	updateMonitoredQuestItems();
 
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 
@@ -141,7 +138,7 @@ void MapScreen::notifyBackFromMenu() {
 	g_resourceManager->playMusic(m_currentMap.getMusicPath());
 }
 
-void MapScreen::notifyWaypointUnlocked() {
+void MapScreen::notifyWaypointUnlocked() const {
 	m_interface->reloadMapWaypoints();
 }
 
@@ -159,13 +156,13 @@ void MapScreen::clearOverlays() {
 	m_bookWindow = nullptr;
 }
 
-bool MapScreen::isOverlayActive() {
+bool MapScreen::isOverlayActive() const {
 	return (m_cookingWindow != nullptr ||
 		m_dialogueWindow != nullptr ||
 		m_bookWindow != nullptr);
 }
 
-bool MapScreen::isOverlayVisible() {
+bool MapScreen::isOverlayVisible() const {
 	return isOverlayActive() ||
 		m_interface->isGuiOverlayVisible();
 }

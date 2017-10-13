@@ -26,8 +26,7 @@ private:
 	sf::RectangleShape m_blackRect;
 	sf::Texture m_texture;
 
-	LevelScreen* m_levelToLoad = nullptr;
-	MapScreen* m_mapToLoad = nullptr;
+	WorldScreen* m_worldToLoad = nullptr;
 
 	std::atomic<bool> m_threadDone;
 	std::thread* m_thread;

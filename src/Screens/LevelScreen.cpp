@@ -5,6 +5,7 @@
 #include "Level/Enemies/ObserverEnemy.h"
 #include "ObjectFactory.h"
 #include "GUI/BookWindow.h"
+#include "Level/LevelMainCharacterLoader.h"
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_levelID = levelID;
@@ -13,11 +14,16 @@ LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Scre
 	m_equipmentRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
-void LevelScreen::loadForRenderTexture() {
+void LevelScreen::loadSync() {
 	m_currentLevel.loadForRenderTexture();
+
+	m_interface = new LevelInterface(this, m_mainChar);
+	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
+	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
+	updateMonitoredQuestItems();
 }
 
-void LevelScreen::load() {
+void LevelScreen::loadAsync() {
 	if (!(m_currentLevel.load(m_levelID, this))) {
 		std::string errormsg = m_levelID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
@@ -31,11 +37,8 @@ void LevelScreen::load() {
 	LevelMainCharacterLoader::loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
-	m_interface = new LevelInterface(this, m_mainChar);
-	dynamic_cast<LevelInterface*>(m_interface)->setSpellManager(m_mainChar->getSpellManager());
-	dynamic_cast<LevelInterface*>(m_interface)->setPermanentCore(m_characterCore);
-	updateMonitoredQuestItems();
-
+	
+	// load screen
 	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
