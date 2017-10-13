@@ -24,8 +24,8 @@ public:
 	void setDialogue(NPC* npc);
 	void setCooking();
 
-	void execOnEnter(const Screen* previousScreen) override;
-	void execOnExit(const Screen* nextScreen) override;
+	void execOnEnter(Screen* previousScreen) override;
+	void execOnExit(Screen* nextScreen) override;
 	void notifyConditionAdded(const Condition& condition) override;
 	void notifyItemEquip(const std::string& itemID, ItemType type) override;
 

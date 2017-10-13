@@ -25,7 +25,7 @@ void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 	renderTooltipText(renderTarget);
 }
 
-void OptionsScreen::execOnEnter(const Screen *previousScreen) {
+void OptionsScreen::execOnEnter(Screen*) {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
@@ -176,7 +176,7 @@ void OptionsScreen::execOnEnter(const Screen *previousScreen) {
 	addObject(button);
 }
 
-void OptionsScreen::execOnExit(const Screen *nextScreen) {
+void OptionsScreen::execOnExit(Screen*) {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 }

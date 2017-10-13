@@ -67,7 +67,7 @@ void MenuScreen::render(sf::RenderTarget& renderTarget) {
 	renderTooltipText(renderTarget);
 }
 
-void MenuScreen::execOnEnter(const Screen* previousScreen) {
+void MenuScreen::execOnEnter(Screen*) {
 	loadNewestSave();
 
 	// add fire particles
@@ -171,7 +171,7 @@ void MenuScreen::loadNewestSave() {
 	m_characterCore->setAutosave(true);
 }
 
-void MenuScreen::execOnExit(const Screen *nextScreen) {
+void MenuScreen::execOnExit(Screen*) {
 	g_resourceManager->deleteUniqueResources(this);
 }
 

@@ -362,7 +362,7 @@ void WorldScreen::quicksave() {
 	setTooltipText("GameSaved", COLOR_GOOD, true);
 }
 
-void WorldScreen::execOnExit(const Screen* nextScreen) {
+void WorldScreen::execOnExit(Screen*) {
 	CLEAR_VECTOR(m_overlayQueue);
 }
 

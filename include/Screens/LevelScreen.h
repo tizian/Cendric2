@@ -20,8 +20,8 @@ public:
 
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
-	void execOnEnter(const Screen* previousScreen) override;
-	void execOnExit(const Screen* nextScreen) override;
+	void execOnEnter(Screen* previousScreen) override;
+	void execOnExit(Screen* nextScreen) override;
 
 	void addSpellBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr);
 	void addFoodBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr);

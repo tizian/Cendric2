@@ -15,19 +15,21 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	virtual void execOnEnter(const Screen *previousScreen) override;
-	virtual void execOnExit(const Screen *nextScreen) override;
+	void execOnEnter(Screen *previousScreen) override;
+	void execOnExit(Screen *nextScreen) override;
 
 private:
-	void loadAsync();
+	void loadAsync() const;
 
 	bool m_isRendered = false;
-	BitmapText* m_title = nullptr;
 	sf::Sprite m_screenSprite;
+	sf::RectangleShape m_blackRect;
+	sf::Texture m_texture;
 
 	LevelScreen* m_levelToLoad = nullptr;
 	MapScreen* m_mapToLoad = nullptr;
 
 	std::atomic<bool> m_threadDone;
 	std::thread* m_thread;
+	sf::Time m_timeToBlack;
 };

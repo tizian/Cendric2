@@ -7,7 +7,7 @@ CutsceneScreen::CutsceneScreen(CharacterCore* core, const std::string& cutsceneI
 	m_cutsceneID = cutsceneID;
 }
 
-void CutsceneScreen::execOnEnter(const Screen* previousScreen) {
+void CutsceneScreen::execOnEnter(Screen*) {
 	m_cutscene = new Cutscene(m_cutsceneID);
 	if (!m_cutscene->isLoaded()) {
 		delete m_cutscene;
@@ -42,6 +42,6 @@ void CutsceneScreen::render(sf::RenderTarget& renderTarget) {
 	m_cutscene->render(renderTarget);
 }
 
-void CutsceneScreen::execOnExit(const Screen *nextScreen) {
+void CutsceneScreen::execOnExit(Screen*) {
 	delete m_cutscene;
 }

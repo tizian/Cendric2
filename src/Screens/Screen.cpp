@@ -57,7 +57,7 @@ void Screen::onEnter(Screen* previousScreen) {
 	m_toAdd.clear();
 }
 
-void Screen::execOnEnter(const Screen* previousScreen) {
+void Screen::execOnEnter(Screen*) {
 	// nop
 }
 
@@ -66,7 +66,7 @@ void Screen::onExit(Screen* nextScreen) {
 	execOnExit(nextScreen);
 }
 
-void Screen::execOnExit(const Screen* nextScreen) {
+void Screen::execOnExit(Screen*) {
 	// nop
 }
 

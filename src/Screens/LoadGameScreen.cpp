@@ -1,8 +1,6 @@
 #include "Screens/LoadGameScreen.h"
 #include "Screens/MenuScreen.h"
 
-using namespace std;
-
 LoadGameScreen::LoadGameScreen(CharacterCore* core) : Screen(core) {
 }
 
@@ -15,7 +13,7 @@ void LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 		onBack();
 		return;
 	}
-	else if (m_loadGame) {
+	if (m_loadGame) {
 		setNextScreen(new LoadingScreen(m_characterCore));
 		return;
 	}
@@ -29,7 +27,7 @@ void LoadGameScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void LoadGameScreen::render(sf::RenderTarget &renderTarget) {
+void LoadGameScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
 	renderTooltipText(renderTarget);
@@ -38,7 +36,7 @@ void LoadGameScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_Form, renderTarget);
 }
 
-void LoadGameScreen::execOnEnter(const Screen *previousScreen) {
+void LoadGameScreen::execOnEnter(Screen*) {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("LoadGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -72,7 +70,7 @@ void LoadGameScreen::execOnEnter(const Screen *previousScreen) {
 	setAllButtonsEnabled(true);
 }
 
-void LoadGameScreen::execOnExit(const Screen *nextScreen) {
+void LoadGameScreen::execOnExit(Screen*) {
 	delete m_title;
 	delete m_newCharacterCore;
 }
@@ -132,16 +130,15 @@ void LoadGameScreen::onLoadSaveGame() {
 		// load a savegame
 		m_characterCore = new CharacterCore();
 		if (!(m_characterCore->load(m_saveGameWindow->getChosenFilename()))) {
-			string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
+			std::string errormsg = std::string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
 			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		}
 		setNextScreen(new LoadingScreen(m_characterCore));
-		return;
 	}
 	else {
 		m_newCharacterCore = new CharacterCore();
 		if (!(m_newCharacterCore->load(m_saveGameWindow->getChosenFilename()))) {
-			string errormsg = string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
+			std::string errormsg = std::string(m_saveGameWindow->getChosenFilename()) + ": save file corrupted!";
 			g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		}
 		float width = 450;

@@ -14,13 +14,13 @@ public:
 	Cursor();
 
 	void update(const sf::Time& frameTime);
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target) const;
 
 	// cursor skins
 	void setCursorSkin(CursorSkin skin);
 	// param duration: for how long this cursor skin should be displayed
 	// until it changes to nextSkin
-	void setCursorSkin(CursorSkin skin, sf::Time duration, CursorSkin nextSkin);
+	void setCursorSkin(CursorSkin skin, const sf::Time& duration, CursorSkin nextSkin);
 
 private:
 	sf::Sprite m_cursorSprite;

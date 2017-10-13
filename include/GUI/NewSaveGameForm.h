@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "World/GameObject.h"
-#include "TextProvider.h"
 #include "ResourceManager.h"
 #include "GUI/Button.h"
 #include "GUI/Window.h"

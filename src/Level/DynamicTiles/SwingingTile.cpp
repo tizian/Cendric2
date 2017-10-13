@@ -30,7 +30,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	}
 	
 	if (!contains(properties, std::string("mode"))) return false;
-	std::string mode = properties.at(std::string("mode"));
+	auto mode = properties.at(std::string("mode"));
 	if (mode.compare("round") == 0) {
 		m_mode = SwingingTileMode::Round;
 	}
@@ -39,7 +39,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	}
 
 	if (contains(properties, std::string("direction"))) {
-		std::string mode = properties.at(std::string("direction"));
+		auto mode = properties.at(std::string("direction"));
 		m_isClockwise = mode.compare("ccw") != 0;
 	}
 
@@ -50,7 +50,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	return true;
 }
 
-void SwingingTile::loadAnimation(int skinNr) {
+void SwingingTile::loadAnimation(const int skinNr) {
 	// a swinging tile creates its own texture out of several images.
 
 	sf::Image img;

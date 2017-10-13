@@ -38,9 +38,9 @@ void ErrorScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void ErrorScreen::execOnEnter(const Screen *previousScreen) {
+void ErrorScreen::execOnEnter(Screen*) {
 }
 
-void ErrorScreen::execOnExit(const Screen *nextScreen) {
+void ErrorScreen::execOnExit(Screen*) {
 	g_resourceManager->deleteUniqueResources(this);
 }

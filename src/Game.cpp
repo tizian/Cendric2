@@ -49,18 +49,16 @@ void Game::reloadWindow() {
 
 void Game::run() {
 	sf::Clock frameClock;
-	sf::Time frameTime;
-	frameTime = frameClock.restart();
+	sf::Time frameTime = frameClock.restart();
 
 	while (m_running) {
 		sf::Event e;
-		sf::Time deltaTime;
 
 		// input
 		g_inputController->update(frameTime);
 		
 		// don't count this loop into the frametime!
-		deltaTime = frameClock.restart();
+		sf::Time deltaTime = frameClock.restart();
 		while (m_mainWindow.pollEvent(e)) {
 			if (e.type == sf::Event::Closed) {
 				m_screenManager->requestQuit();
@@ -130,7 +128,7 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {
 	for (float f : m_fpsList) {
 		sum += f;
 	}
-	int fps = static_cast<int>(1.f / (sum / FPS_AVERAGE_NR));
+	auto const fps = static_cast<int>(1.f / (sum / FPS_AVERAGE_NR));
 
 	BitmapText fpsText = BitmapText(
 		"FPS: " + std::to_string(fps));

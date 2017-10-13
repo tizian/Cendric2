@@ -96,7 +96,7 @@ void MapScreen::load() {
 	loadWeather();
 }
 
-void MapScreen::execOnEnter(const Screen* previousScreen) {
+void MapScreen::execOnEnter(Screen*) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
 }
 
@@ -114,7 +114,7 @@ void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	MapMainCharacterLoader::loadEquipment(this);
 }
 
-void MapScreen::execOnExit(const Screen* nextScreen) {
+void MapScreen::execOnExit(Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
 	m_currentMap.dispose();
 	clearOverlays();

@@ -18,7 +18,7 @@ void Cursor::update(const sf::Time& frameTime) {
 	}
 }
 
-void Cursor::render(sf::RenderTarget& target) {
+void Cursor::render(sf::RenderTarget& target) const {
 	target.draw(m_cursorSprite);
 }
 
@@ -27,7 +27,7 @@ void Cursor::setCursorSkin(CursorSkin skin) {
 	m_cursorSprite.setTextureRect(sf::IntRect(static_cast<int>(skin) * 25, 0, 25, 40));
 }
 
-void Cursor::setCursorSkin(CursorSkin skin, sf::Time duration, CursorSkin nextSkin) {
+void Cursor::setCursorSkin(CursorSkin skin, const sf::Time& duration, CursorSkin nextSkin) {
 	setCursorSkin(skin);
 	m_timeUntilNextSkin = duration;
 	m_nextSkin = nextSkin;

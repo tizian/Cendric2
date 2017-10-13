@@ -17,7 +17,6 @@ const std::string GlobalResource::FONT_TTF_DIALOGUE = "res/font/UbuntuMono-B.ttf
 const std::string GlobalResource::TEX_SPLASH_BG = "res/texture/screens/screen_menu_bg.png";
 const std::string GlobalResource::TEX_SPLASH_FG = "res/texture/screens/screen_menu_fg.png";
 const std::string GlobalResource::TEX_SPLASH_LOGO = "res/texture/screens/logo.png";
-const std::string GlobalResource::TEX_SCREEN_LOADING = "res/texture/screens/screen_loading.png";
 
 const std::string GlobalResource::TEX_PARTICLE_CIRCLE = "res/texture/particles/circle.png";
 const std::string GlobalResource::TEX_PARTICLE_BLOB = "res/texture/particles/blob.png";

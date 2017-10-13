@@ -171,14 +171,14 @@ void LevelScreen::quicksave() {
 	WorldScreen::quicksave();
 }
 
-void LevelScreen::execOnEnter(const Screen* previousScreen) {
+void LevelScreen::execOnEnter(Screen*) {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(),
 		m_currentLevel.getWorldData()->isBossLevel,
 		m_currentLevel.getWorldData()->isObserved));
 	g_inputController->getCursor().setCursorSkin(CursorSkin::TargetActive);
 }
 
-void LevelScreen::execOnExit(const Screen* nextScreen) {
+void LevelScreen::execOnExit(Screen* nextScreen) {
 	WorldScreen::execOnExit(nextScreen);
 	cleanUp();
 	g_inputController->getCursor().setCursorSkin(CursorSkin::Pointer);

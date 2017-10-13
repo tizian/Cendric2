@@ -25,7 +25,7 @@ SplashScreen::~SplashScreen() {
 	delete m_ps_right;
 }
 
-void SplashScreen::execOnEnter(const Screen* previousScreen) {
+void SplashScreen::execOnEnter(Screen*) {
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -66,7 +66,7 @@ void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_versionText);
 }
 
-void SplashScreen::execOnExit(const Screen* nextScreen) {
+void SplashScreen::execOnExit(Screen*) {
 	g_resourceManager->deleteUniqueResources(this);
 }
 

@@ -43,7 +43,6 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_SPLASH_BG, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPLASH_FG, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_SPLASH_LOGO, ResourceType::Global);
-	loadTexture(GlobalResource::TEX_SCREEN_LOADING, ResourceType::Global);
 
 	// load particle resources
 	loadTexture(GlobalResource::TEX_PARTICLE_CIRCLE, ResourceType::Global);

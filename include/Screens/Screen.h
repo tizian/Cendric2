@@ -4,7 +4,6 @@
 #include "World/GameObject.h"
 #include "ResourceManager.h"
 #include "CharacterCore.h"
-#include "ScreenOverlays/ScreenOverlay.h"
 
 #include "GUI/BitmapText.h"
 
@@ -20,10 +19,10 @@ public:
 
 	// initializes the m_object vector. called by ALL subclasses
 	void onEnter(Screen* previousScreen);
-	virtual void execOnEnter(const Screen* previousScreen);
+	virtual void execOnEnter(Screen* previousScreen);
 	// deletes all objects. called by ALL subclasses (screen manager)
 	void onExit(Screen* nextScreen);
-	virtual void execOnExit(const Screen* nextScreen);
+	virtual void execOnExit(Screen* nextScreen);
 
 	// adds a gameobject to the screen. This object is only added to the vector in the next iteration
 	// to avoid invalidation of vector iterators.

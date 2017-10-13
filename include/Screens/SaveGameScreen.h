@@ -18,8 +18,8 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	void execOnEnter(const Screen *previousScreen) override;
-	void execOnExit(const Screen *nextScreen) override;
+	void execOnEnter(Screen *previousScreen) override;
+	void execOnExit(Screen *nextScreen) override;
 
 private:
 	void setAllButtonsEnabled(bool value) override;

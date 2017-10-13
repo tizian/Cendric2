@@ -9,6 +9,9 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 		core->replaceForcedMap();
 		m_mapToLoad = new MapScreen(core->getData().currentMap, getCharacterCore());
 	}
+	m_blackRect.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+	m_blackRect.setFillColor(COLOR_TRANSPARENT);
+	m_timeToBlack = sf::seconds(0.5f);
 }
 
 void LoadingScreen::execUpdate(const sf::Time& frameTime) {
@@ -19,13 +22,15 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 		
 		// start async thread
 		m_threadDone = false;
-		m_thread = new std::thread([ this] {
+		m_thread = new std::thread([this] {
 			this->loadAsync();
 			this->m_threadDone = true;
 		});
 	}
 
 	if (!m_threadDone) {
+		updateTime(m_timeToBlack, frameTime);
+		m_blackRect.setFillColor(sf::Color(0, 0, 0, 255 - static_cast<sf::Uint8>(std::floor(m_timeToBlack.asMilliseconds() / 500.f * 255.f))));
 		return;
 	}
 
@@ -51,7 +56,7 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 	g_resourceManager->setError(ErrorID::Error_dataCorrupted, "No level or map to load. Aborting.");
 }
 
-void LoadingScreen::loadAsync() {
+void LoadingScreen::loadAsync() const {
 	if (m_levelToLoad != nullptr) {
 		m_levelToLoad->load();
 	}
@@ -62,20 +67,20 @@ void LoadingScreen::loadAsync() {
 
 void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSprite);
-	renderTarget.draw(*m_title);
+	//renderTarget.draw(m_screenSprite);
+	//renderTarget.draw(m_blackRect);
 }
 
-void LoadingScreen::execOnEnter(const Screen *previousScreen) {
-	// background
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_LOADING)));
-	// title
-	m_title = new BitmapText(g_textProvider->getText("Loading"));
-	m_title->setTextStyle(TextStyle::Shadowed);
-	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
+void LoadingScreen::execOnEnter(Screen* previousScreen) {
+	auto texture = new sf::Texture();
+	texture->create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	//texture->update(*g_renderWindow);
+	auto image = texture->copyToImage();
+	delete texture;
+	m_texture.loadFromImage(image);
+	m_screenSprite.setTexture(m_texture);
 }
 
-void LoadingScreen::execOnExit(const Screen *nextScreen) {
-	delete m_title;
+void LoadingScreen::execOnExit(Screen*)
+{
 }

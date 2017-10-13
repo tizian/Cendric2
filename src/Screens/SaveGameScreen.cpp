@@ -44,7 +44,7 @@ void SaveGameScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_Form, renderTarget);
 }
 
-void SaveGameScreen::execOnEnter(const Screen *previousScreen) {
+void SaveGameScreen::execOnEnter(Screen*) {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("SaveGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -83,7 +83,7 @@ void SaveGameScreen::execOnEnter(const Screen *previousScreen) {
 	setAllButtonsEnabled(true);
 }
 
-void SaveGameScreen::execOnExit(const Screen *nextScreen) {
+void SaveGameScreen::execOnExit(Screen*) {
 	delete m_title;
 }
 

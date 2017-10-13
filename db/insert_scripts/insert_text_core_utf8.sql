@@ -116,7 +116,6 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Ligh
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LimitFPS','Limit FPS','FPS limitieren','FPS limitiere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Load','Load','Laden','Lade','Cargar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LoadGame','Load Game','Spiel laden','Spiel lade','Cargar partida');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Loading','Loading...','Lädt...','Es ladet...','Cargando...');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LockpickLevel','Lockpick Level','Dietrich Stufe','Dietrich Level','Nivel de ganzúa');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Map','Map','Karte','Charte','Mapa');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS','FPS máximos');

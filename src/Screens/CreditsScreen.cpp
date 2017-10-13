@@ -34,7 +34,7 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_Button, renderTarget);
 }
 
-void CreditsScreen::execOnEnter(const Screen *previousScreen) {
+void CreditsScreen::execOnEnter(Screen*) {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("Credits"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
@@ -54,7 +54,7 @@ void CreditsScreen::execOnEnter(const Screen *previousScreen) {
 	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, false);
 }
 
-void CreditsScreen::execOnExit(const Screen *nextScreen) {
+void CreditsScreen::execOnExit(Screen*) {
 	g_resourceManager->deleteUniqueResources(this);
 	delete m_title;
 	delete m_credits;

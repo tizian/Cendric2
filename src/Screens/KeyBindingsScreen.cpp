@@ -135,7 +135,7 @@ void KeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 	m_scrollBar->render(renderTarget);
 }
 
-void KeyBindingsScreen::execOnEnter(const Screen *previousScreen) {
+void KeyBindingsScreen::execOnEnter(Screen*) {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -234,7 +234,7 @@ void KeyBindingsScreen::reload() {
 }
 
 
-void KeyBindingsScreen::execOnExit(const Screen *nextScreen) {
+void KeyBindingsScreen::execOnExit(Screen*) {
 	// delete texts
 	for (auto& it : m_keyTexts) {
 		delete it.second;

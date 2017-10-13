@@ -2,12 +2,8 @@
 
 #include <list>
 
-#include "global.h"
 #include "Screens/ScreenManager.h"
 #include "Screens/SplashScreen.h"
-#include "InputController.h"
-
-#include "CharacterCore.h"
 
 class Game final {
 public:
