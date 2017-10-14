@@ -62,6 +62,7 @@ void CookingWindow::reload() {
 	m_options.clear();
 
 	int nr = 0;
+	m_chosenOption = 0;
 	for (auto& item: *m_screen->getCharacterCore()->getItems()) {
 		auto const dbItem = g_resourceManager->getItem(item.first);
 		if (!dbItem || !dbItem->getCheck().isConsumable) continue;
@@ -70,6 +71,9 @@ void CookingWindow::reload() {
 			CookingOption option(item.first, food->cooked_item_id, item.second, nr);
 			option.deselect();
 			m_options.push_back(option);
+			if (option.getItemID().compare(m_oldItemID) == 0) {
+				m_chosenOption = nr;
+			}
 			nr++;
 		}
 	}
@@ -77,8 +81,6 @@ void CookingWindow::reload() {
 	CookingOption cancelOption("", "", -1, nr);
 	cancelOption.deselect();
 	m_options.push_back(cancelOption);
-
-	m_chosenOption = 0;
 	m_options[m_chosenOption].select();
 }
 
@@ -138,6 +140,7 @@ bool CookingWindow::updateWindow(const sf::Time frameTime) {
 		}
 		
 		cookItem(itemID);
+		m_oldItemID = itemID;
 		reload();
 	}
 

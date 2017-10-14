@@ -167,8 +167,6 @@ public:
 	void setWeaponSpell(Key key);
 	// queries the reputation for the corresponding fraction
 	int getReputation(FractionID fraction) const;
-	// is this a new character core? (new game)
-	bool isNewGame();
 	// is this an autosave?
 	bool isAutosave();
 	// mark as autosave

@@ -277,6 +277,10 @@ void Enemy::setEnemyName(const std::string& name) {
 	m_name = name;
 }
 
+void Enemy::setQuestRelevant(bool relevant) {
+	m_isQuestRelevant = relevant;
+}
+
 void Enemy::setAlly(const sf::Time& ttl) {
 	m_isAlly = true;
 	delete m_movingBehavior;
@@ -430,6 +434,9 @@ void Enemy::notifyKilled() {
 }
 
 bool Enemy::isQuestRelevant() {
+	if (m_isQuestRelevant) {
+		return true;
+	}
 	if (!m_reward.questConditions.empty() && !m_isDead) {
 		return true;
 	}

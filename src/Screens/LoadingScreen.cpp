@@ -39,9 +39,6 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 	if (g_resourceManager->pollError()->first == ErrorID::VOID) m_worldToLoad->loadSync();
 	setNextScreen(m_worldToLoad);
-	if (m_worldToLoad->getCharacterCore()->isNewGame()) {
-		m_worldToLoad->addScreenOverlay(ScreenOverlay::createQuestScreenOverlay("who_am_i", QuestState::Started));
-	}
 	m_characterCore->autosave();
 }
 

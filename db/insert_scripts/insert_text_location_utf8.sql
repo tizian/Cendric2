@@ -78,3 +78,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('hallway','location','The Hallway','Der Korridor','De Korridor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('veliusroom','location','Velius'' Laboratory','Velius'' Laboratorium','Laboratorium vom Velius');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius','Boss: Velius','Boss: Velius');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('windyplateau','location','Windy Plateau','Windige Hochebene','Windigi Hochebeni');

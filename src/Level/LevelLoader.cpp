@@ -150,6 +150,7 @@ void LevelLoader::loadEnemies(LevelData& data, LevelScreen* screen, Level* level
 		enemy->setPosition(it.spawnPosition);
 		enemy->setObjectID(it.objectID);
 		enemy->setUnique(it.isUnique);
+		enemy->setQuestRelevant(it.isQuestRelevant);
 		enemy->setDebugBoundingBox(sf::Color::Magenta);
 		if ((it.isUnique && core->isEnemyKilled(data.id, it.objectID)) || it.isDead) enemy->setDead();
 		screen->addObject(enemy);

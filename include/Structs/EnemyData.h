@@ -17,4 +17,5 @@ struct EnemyData final {
 	std::string luaPath = ""; // the path to a possible lua script for behavior, mostly empty
 	std::string name = ""; // if set, this enemy has not the default name, but this special one.
 	bool isDead = false;
+	bool isQuestRelevant = false;
 };

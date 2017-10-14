@@ -373,9 +373,9 @@ npc.id:npc_robert2
 	trigger:DL:changeQuestState("teleport_own", "started")
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest4
-	translation.en:I think I've seen some of them in the Stone Garden in the North. 
-	translation.de:Ich glaube, ich habe ein paar davon im Steingarten im Norden gesehen.
-	translation.ch:Ich glaub, ich ha paar vo dene im Steigarte im Norde gse.
+	translation.en:I think I've just seen one on the windy plateau behind the crypt. 
+	translation.de:Ich glaube, ich habe gerade einen auf der windigen Ebene hinter der Krypta gesehen.
+	translation.ch:Ich glaub, ich ha grad eine uf de windige Ebeni hinter de Krypta gse.
 	[
 		# Link node, tag is next tag
 		tag:20

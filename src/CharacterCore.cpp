@@ -787,14 +787,6 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	reloadAttributes();
 }
 
-bool CharacterCore::isNewGame() {
-	if (m_isNew) {
-		m_isNew = false;
-		return true;
-	}
-	return m_isNew;
-}
-
 bool CharacterCore::isAutosave() {
 	return m_isAutosave;
 }

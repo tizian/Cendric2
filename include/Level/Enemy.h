@@ -70,6 +70,7 @@ public:
 	// sets the enemy as ally. The enemy dies after the time to live has run out.
 	virtual void setAlly(const sf::Time& ttl);
 	void setEnemyName(const std::string& name);
+	void setQuestRelevant(bool relevant);
 
 	GameObjectType getConfiguredType() const override;
 	
@@ -127,6 +128,7 @@ protected:
 	bool m_isBoss = false;
 	bool m_isLooted = false;
 	bool m_isHPBarVisible = true;
+	bool m_isQuestRelevant = false; // marked as quest relevant
 
 	// AI
 	EnemyState m_enemyState = EnemyState::Idle;

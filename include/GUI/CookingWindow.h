@@ -64,6 +64,7 @@ private:
 
 	sf::Sprite m_cookingSprite;
 	BitmapText m_title;
+	std::string m_oldItemID;
 	
 	MapScreen* m_screen = nullptr;
 	

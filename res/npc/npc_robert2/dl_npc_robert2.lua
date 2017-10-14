@@ -145,7 +145,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(19, 20, "DL_Robert_FinishRobertQuest4") -- I think I've seen some of them in the Stone Garden in the North. 
+		DL:createNPCNode(19, 20, "DL_Robert_FinishRobertQuest4") -- I think I've just seen one on the windy plateau behind the crypt. 
 		DL:changeQuestState("teleport_own", "started")
 		DL:addNode()
 
