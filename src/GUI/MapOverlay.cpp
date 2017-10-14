@@ -20,7 +20,7 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 	m_screen = screen;
 	m_mapTabBar = mapTabBar;
 
-	m_levelOverlayIcons.loadFromFile(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS);
+	m_levelOverlayIcons.loadFromFile(getResourcePath(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
 
 	const World& map = *m_screen->getWorld();
 
@@ -385,7 +385,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 	target.draw(map->map);
 	target.draw(map->fogOfWarTileMap);
-	
+
 	target.draw(m_title);
 
 	m_window->render(target);
