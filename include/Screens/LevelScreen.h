@@ -39,9 +39,11 @@ public:
 	const Level* getWorld() const override;
 	const LevelData* getWorldData() const override;
 
-	// extra render textures for particles using additive blend
+	// extra render textures for particles using special blend
+	sf::RenderTexture& getParticleBTRenderTexture();
 	sf::RenderTexture& getParticleFGRenderTexture();
 	sf::RenderTexture& getParticleBGRenderTexture();
+	sf::RenderTexture& getParticleEQRenderTexture();
 
 	void setEquipmentColor(const sf::Color& color);
 
@@ -73,10 +75,13 @@ private:
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
 	sf::Color m_equipmentColor = COLOR_WHITE;
+	sf::RenderTexture m_particleBTRenderTexture;
 	sf::RenderTexture m_particleBGRenderTexture;
 	sf::RenderTexture m_particleFGRenderTexture;
+	sf::RenderTexture m_particleEQRenderTexture;
 	sf::RenderTexture m_equipmentRenderTexture;
-	void flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView);
+	sf::BlendMode m_particleBlendMode;
+	void flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView, const sf::BlendMode& mode);
 
 	void handleBookWindow(const sf::Time& frameTime);
 	void handleGameOver(const sf::Time& frameTime);

@@ -115,14 +115,15 @@ void ModifierTile::loadComponents() {
 	data.emitRate = 100.f * m_modifier.level / 3.0f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBTRenderTexture();
 	
 	auto posGen = new particles::PointSpawner();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
-	sizeGen->minStartSize = 10.f;
-	sizeGen->maxStartSize = 20.f;
+	sizeGen->minStartSize = 20.f;
+	sizeGen->maxStartSize = 30.f;
 	sizeGen->minEndSize = 0.f;
 	sizeGen->maxEndSize = 2.f;
 	data.sizeGen = sizeGen;
@@ -130,7 +131,7 @@ void ModifierTile::loadComponents() {
 	auto colGen = new particles::ColorGenerator();
 	colGen->minStartCol = SpellModifier::getSpellModifierColor(m_modifier.type);
 	colGen->maxStartCol = sf::Color(255, 255, 255, 255);
-	colGen->minEndCol = sf::Color(0, 0, 0, 0);
+	colGen->minEndCol = SpellModifier::getSpellModifierColor(m_modifier.type);
 	colGen->maxEndCol = SpellModifier::getSpellModifierColor(m_modifier.type);
 	colGen->maxEndCol.a = 0;
 	data.colorGen = colGen;

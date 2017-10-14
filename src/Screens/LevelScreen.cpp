@@ -9,9 +9,14 @@
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_levelID = levelID;
+	m_particleBTRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleBGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleFGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_particleEQRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_equipmentRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+	m_particleBlendMode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add,
+		sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add);
 }
 
 void LevelScreen::loadSync() {
@@ -37,7 +42,7 @@ void LevelScreen::loadAsync() {
 	LevelMainCharacterLoader::loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
-	
+
 	// load screen
 	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
@@ -88,9 +93,7 @@ void LevelScreen::cleanUp() {
 }
 
 bool LevelScreen::exitWorld() {
-	if (m_isGameOver) return false;
-
-	return true;
+	return !m_isGameOver;
 }
 
 void LevelScreen::notifyBackFromMenu() {
@@ -112,7 +115,7 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	for (auto& it : reward.questTargets) {
 		m_bossRewards.questTargets.push_back(it);
 	}
-	
+
 	// was this the last boss?
 	for (auto* go : *getObjects(GameObjectType::_Enemy)) {
 		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
@@ -248,8 +251,16 @@ const LevelData* LevelScreen::getWorldData() const {
 	return m_currentLevel.getWorldData();
 }
 
+sf::RenderTexture& LevelScreen::getParticleBTRenderTexture() {
+	return m_particleBTRenderTexture;
+}
+
 sf::RenderTexture& LevelScreen::getParticleBGRenderTexture() {
 	return m_particleBGRenderTexture;
+}
+
+sf::RenderTexture& LevelScreen::getParticleEQRenderTexture() {
+	return m_particleEQRenderTexture;
 }
 
 sf::RenderTexture& LevelScreen::getParticleFGRenderTexture() {
@@ -321,11 +332,14 @@ void LevelScreen::setEquipmentColor(const sf::Color& color) {
 	m_equipmentColor = color;
 }
 
-void LevelScreen::flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView) {
+void LevelScreen::flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture& renderTexture, const sf::View& oldView, const sf::BlendMode& mode = sf::BlendAlpha) {
+	sf::RenderStates renderStates = sf::RenderStates::Default;
+	renderStates.blendMode = mode;
+
 	renderTexture.display();
 	m_sprite.setTexture(renderTexture.getTexture());
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite);
+	renderTarget.draw(m_sprite, renderStates);
 	renderTarget.setView(oldView);
 	renderTexture.clear(sf::Color(0, 0, 0, 0));
 }
@@ -338,9 +352,10 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
+	flushTexture(renderTarget, m_particleBTRenderTexture, oldView, m_particleBlendMode);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_MovableTile, renderTarget);
-	flushTexture(renderTarget, m_particleBGRenderTexture, oldView);
+	flushTexture(renderTarget, m_particleBGRenderTexture, oldView, m_particleBlendMode);
 	renderObjects(GameObjectType::_LevelItem, renderTarget);
 
 	// the main character and the equipment are rendered on one texture
@@ -348,12 +363,13 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_LevelMainCharacter, m_equipmentRenderTexture);
 	renderObjects(GameObjectType::_Equipment, m_equipmentRenderTexture);
 	m_sprite.setColor(m_equipmentColor);
-	flushTexture(renderTarget, m_equipmentRenderTexture, oldView);
+	flushTexture(renderTarget, m_equipmentRenderTexture, oldView, sf::BlendAlpha);
+	flushTexture(renderTarget, m_particleEQRenderTexture, oldView, m_particleBlendMode);
 	m_sprite.setColor(COLOR_WHITE);
-	
+
 	renderObjects(GameObjectType::_Enemy, renderTarget);
 	renderObjects(GameObjectType::_Spell, renderTarget);
-	flushTexture(renderTarget, m_particleFGRenderTexture, oldView);
+	flushTexture(renderTarget, m_particleFGRenderTexture, oldView, m_particleBlendMode);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default);

@@ -82,7 +82,7 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 		data.emitRate = particles->emit_rate;
 		data.isAdditiveBlendMode = particles->is_additive_blend_mode;
 		data.texturePath = particles->texture_path;
-		data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleFGRenderTexture();
+		data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleEQRenderTexture();
 
 		// Generators
 		auto posGen = new particles::DiskSpawner();

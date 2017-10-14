@@ -412,6 +412,6 @@ void RoyalguardFire::loadParticles() {
 	// light
 	m_lightObject = new LightObject(LightData(
 		m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT,
-		sf::Vector2f(20.f, m_boundingBox.height * 2.f), 1.0f));
+		sf::Vector2f(20.f, m_boundingBox.height * 4.f), 1.0f));
 	m_screen->addObject(m_lightObject);
 }
