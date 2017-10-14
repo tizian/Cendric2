@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="188">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="190">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_mercenaries/layer_inf.png"/>
   <property name="bosslevel" value="res/level/boss_mercenaries/boss_mercenaries.lua"/>
@@ -72,6 +72,11 @@
  </tileset>
  <tileset firstgid="530" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
   <image source="../../convenience/tilesets/tileset_level_dynamic_tiles.png" width="2080" height="728"/>
+  <tile id="3">
+   <properties>
+    <property name="light" value="25,30,50,70,1.0"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="1090" name="tileset_enemies" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="50" columns="5">
   <image source="../../convenience/tilesets/tileset_enemies.png" width="260" height="520"/>
@@ -405,8 +410,6 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="183" gid="533" x="1050" y="300" width="50" height="50"/>
-  <object id="184" gid="533" x="200" y="300" width="50" height="50"/>
   <object id="186" gid="549" x="400" y="200" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
@@ -417,6 +420,8 @@
     <property name="color" value="red"/>
    </properties>
   </object>
+  <object id="188" gid="613" x="200" y="300" width="50" height="50"/>
+  <object id="189" gid="613" x="1050" y="300" width="50" height="50"/>
  </objectgroup>
  <layer name="collidable" width="26" height="20">
   <data encoding="csv">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="72" height="30" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="157">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="72" height="30" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="162">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/gandriasewers/layer_inf.png,3.0,res/level/gandriasewers/layer_3.png,2.0,res/level/gandriasewers/layer_2.png"/>
   <property name="dimming" value="0.4"/>
@@ -702,9 +702,6 @@
   <object id="110" gid="547" x="2200" y="600" width="50" height="50"/>
   <object id="111" gid="530" x="2000" y="600" width="50" height="50"/>
   <object id="112" gid="671" x="2200" y="1050" width="50" height="50"/>
-  <object id="113" gid="533" x="3400" y="1200" width="50" height="50"/>
-  <object id="114" gid="533" x="2850" y="1200" width="50" height="50"/>
-  <object id="115" gid="533" x="1500" y="1200" width="50" height="50"/>
   <object id="116" gid="674" x="250" y="700" width="50" height="50"/>
   <object id="117" gid="674" x="350" y="700" width="50" height="50"/>
   <object id="118" gid="674" x="800" y="600" width="50" height="50"/>
@@ -720,8 +717,6 @@
   <object id="128" gid="674" x="2300" y="900" width="50" height="50"/>
   <object id="129" gid="674" x="3150" y="1350" width="50" height="50"/>
   <object id="130" gid="674" x="2750" y="350" width="50" height="50"/>
-  <object id="131" gid="533" x="3200" y="150" width="50" height="50"/>
-  <object id="132" gid="533" x="3400" y="150" width="50" height="50"/>
   <object id="133" gid="535" x="150" y="950" width="50" height="50"/>
   <object id="134" gid="535" x="550" y="950" width="50" height="50"/>
   <object id="135" gid="535" x="800" y="950" width="50" height="50"/>
@@ -807,6 +802,11 @@
     <property name="layer" value="bg"/>
    </properties>
   </object>
+  <object id="157" gid="613" x="3400" y="1200" width="50" height="50"/>
+  <object id="158" gid="613" x="2850" y="1200" width="50" height="50"/>
+  <object id="159" gid="613" x="3200" y="150" width="50" height="50"/>
+  <object id="160" gid="613" x="3400" y="150" width="50" height="50"/>
+  <object id="161" gid="613" x="1500" y="1200" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 1">
   <object id="32" gid="783" x="3000" y="900" width="50" height="50">

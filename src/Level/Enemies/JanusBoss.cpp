@@ -246,7 +246,7 @@ void JanusBoss::loadTorches() {
 	m_blueTorchTiles.clear();
 	for (GameObject* obj : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
 		if (TorchTile* t = dynamic_cast<TorchTile*>(obj)) {
-			if (t->getSkinNr() == 0) {
+			if (t->getColor().compare("red") == 0) {
 				m_redTorchTiles.push_back(t);
 				t->setState(GameObjectState::Idle);
 			}

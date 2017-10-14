@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="109">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="20" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="114">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/janusroom/layer_inf.png,3.0,res/level/janusroom/layer_3.png,2.0,res/level/janusroom/layer_2.png"/>
   <property name="dimming" value="0.7"/>
@@ -476,13 +476,33 @@
   <object id="101" gid="593" x="700" y="800" width="50" height="50"/>
   <object id="102" gid="593" x="1000" y="800" width="50" height="50"/>
   <object id="103" gid="593" x="1250" y="800" width="50" height="50"/>
-  <object id="104" gid="573" x="500" y="650" width="50" height="50"/>
-  <object id="105" gid="573" x="850" y="400" width="50" height="50"/>
-  <object id="106" gid="573" x="1200" y="650" width="50" height="50"/>
-  <object id="107" gid="533" x="650" y="500" width="50" height="50"/>
-  <object id="108" gid="533" x="1050" y="500" width="50" height="50"/>
+  <object id="109" gid="613" x="500" y="650" width="50" height="50">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+  <object id="110" gid="613" x="850" y="400" width="50" height="50">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
+  <object id="111" gid="613" x="1050" y="500" width="50" height="50">
+   <properties>
+    <property name="color" value="red"/>
+   </properties>
+  </object>
+  <object id="112" gid="613" x="650" y="500" width="50" height="50">
+   <properties>
+    <property name="color" value="red"/>
+   </properties>
+  </object>
+  <object id="113" gid="613" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="color" value="blue"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup name="trigger" visible="0">
   <object id="89" x="1550" y="500" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>

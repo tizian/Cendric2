@@ -101,6 +101,7 @@ void DivineTorchTile::loadComponents() {
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
 	data.emitRate = 5.f;
 	data.isAdditiveBlendMode = true;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBGRenderTexture();
 
 	auto spawner = new particles::BoxSpawner();
 	spawner->size = sf::Vector2f(getBoundingBox()->width * 0.2f, 0.f);
