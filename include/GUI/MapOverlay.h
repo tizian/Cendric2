@@ -107,7 +107,7 @@ private:
 	sf::Vector2f m_position;
 
 	BitmapText m_title;
-	
+
 	Window* m_window;
 	GUITabBar* m_mapTabBar;
 };
