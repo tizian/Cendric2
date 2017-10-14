@@ -82,7 +82,7 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// that's the uppermost thingy that holds to the ceiling.
 	img.copy(texImg, TILE_SIZE, TILE_SIZE * length, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
 
-	// now cconvert to texture format
+	// now convert to texture format
 	delete m_texture;
 	m_texture = new sf::Texture();
 	m_texture->loadFromImage(img);

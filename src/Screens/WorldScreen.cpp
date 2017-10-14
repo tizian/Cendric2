@@ -181,7 +181,8 @@ void WorldScreen::notifyReputationAdded(FractionID fraction, int amount) {
 }
 
 void WorldScreen::notifyLeveloverlayReload() {
-	m_interface->reloadLevelOverlay();
+	if (m_interface)
+		m_interface->reloadLevelOverlay();
 }
 
 void WorldScreen::notifyGuildSet(FractionID fraction) {
