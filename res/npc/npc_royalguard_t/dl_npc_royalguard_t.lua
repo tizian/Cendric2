@@ -14,7 +14,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(2, -2, "DL_Royalguard_Hey") -- I really hope you have a good reason, otherwise I'll have to let you out immediately.
+		DL:createNPCNode(2, -2, "DL_Royalguard_Hey2") -- I really hope you have a good reason, otherwise I'll have to let you out immediately.
 		DL:addNode()
 
 	end

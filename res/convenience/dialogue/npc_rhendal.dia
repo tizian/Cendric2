@@ -28,6 +28,11 @@ npc.id:npc_rhendal
 	[
 		# Link node, tag is next tag
 		tag:25
+		condition:not DL:isConditionFulfilled("npc_rhendal", "mark")
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
 	]
 }
 {1
@@ -433,8 +438,8 @@ npc.id:npc_rhendal
 	trigger:DL:learnSpell(2)
 	trigger:DL:addQuestProgress("who_am_i", "information_gathered")
 	trigger:DL:changeQuestState("who_am_i", "completed")
-	trigger:DL:addHint("Spellbook")
 	trigger:DL:setWeather("res/map/elderhome/elderhome.tmx", "", 30)
+	trigger:DL:changeQuestState("the_mark", "started")
 	# translation: 
 	translation.tag:DL_Rhendal_Snowing
 	translation.en:(Shivers) What... it's snowing? 
@@ -500,10 +505,10 @@ npc.id:npc_rhendal
 		# Link node, tag is next tag
 		tag:31
 		# translation: 
-		translation.tag:DL_Choice_VisionCold
-		translation.en:It was very cold...
-		translation.de:Es war sehr kalt... 
-		translation.ch:Es isch sehr chalt gsi... 
+		translation.tag:DL_Choice_VisionMark
+		translation.en:This mark appeared on my wrist. What does it mean?
+		translation.de:Dieses Mal ist auf meinem Handgelenk erschienen. Was bedeutet das?
+		translation.ch:Das Zeiche isch uf mim Handglänk erschine. Was heisst das?
 	]
 }
 {1
@@ -540,8 +545,522 @@ npc.id:npc_rhendal
 	# [31] NPC Node
 	tag:31
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "vision")
 	# translation: 
-	translation.tag:DL_NPC_31
+	translation.tag:DL_Rhendal_VisionMark
+	translation.en:Hmm, let me see... Interesting.
+	translation.de:Hmm, lass mich mal sehen... Interessant.
+	translation.ch:Hmm, zeig mal... Interessant.
+	[
+		# Link node, tag is next tag
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_VisionMark2
+	translation.en:It seems like the potion has not only brought you back some memories, but has also revealed this mark.
+	translation.de:Es scheint, als hätte die Vision nicht nur ein paar Erinnerungen zurückgebracht, sondern auch dieses Mal zum Vorschein gebracht.
+	translation.ch:Es schiint, als het d'Vision nid nur es paar Erinnerige zruggbrocht, sondern au das Zeiche zum Vorschi brocht.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{2
+	# [33] Choice Node
+	tag:33
+	[
+		# Link node, tag is next tag
+		tag:34
+		# translation: 
+		translation.tag:DL_Choice_SideEffect
+		translation.en:Could it be some side-effect of the potion?
+		translation.de:Könnte es eine Nebenwirkung des Trankes sein?
+		translation.ch:Chönts e Nebedwürkig vom Trank sii?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_KnowAnythingMark
+		translation.en:Do you know anything about this mark?
+		translation.de:Weisst du irgendetwas über dieses Mal?
+		translation.ch:Weisch du irgendwas über das Zeiche?
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_SideEffect
+	translation.en:No, the Silkweed potion doesn't create this kind of marks. It only reveals what's hidden.
+	translation.de:Nein, der Seidenkraut-Trank hinterlässt keine Spuren. Er deckt nur auf, was verborgen war.
+	translation.ch:Nei, de Siidechrütli-Trank hinterloht ke so Spure. Er deckt nur uf, was verborge gsi isch.
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{2
+	# [36] Choice Node
+	tag:36
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_KnowAnythingMark
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "mark")
+	# translation: 
+	translation.tag:DL_Rhendal_KnowAnythingMark
+	translation.en:I don't recognize the symbol... it's definitely magic but doesn't have a friendly aura, no, not at all...
+	translation.de:Ich kenne das Symbol nicht... es ist aber definitiv Magie, die allerdings keine gute Aura hat, nein, nein, gar nicht...
+	translation.ch:Ich kenns Symbol nid... es isch aber definitiv Magie, allerdings het si kei gueti Aura, nei, nei, gar nid...
+	[
+		# Link node, tag is next tag
+		tag:42
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_KnowAnythingMark2
+	translation.en:I think it's some kind of curse, and it's getting stronger.
+	translation.de:Ich nehme an, es ist eine Art Fluch, und er wird stärker.
+	translation.ch:Ich nimm ah, es isch enart Fluech, und er wird stärcher.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	trigger:DL:addQuestDescription("the_mark", 1)
+	# translation: 
+	translation.tag:DL_Rhendal_KnowAnythingMark3
+	translation.en:You'd be better off with finding someone who knows more about it than me and can break it.
+	translation.de:Du solltest besser jemanden finden, der mehr darüber weiss als ich und ihn brechen kann.
+	translation.ch:Du sötsch besser öppert finde, wo me drüber weiss we ich und en breche chan.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [35] Choice Node
+	tag:35
+	[
+		# Link node, tag is next tag
+		tag:37
+		condition:not DL:isConditionFulfilled("npc_rhendal", "mage")
+		# translation: 
+		translation.tag:DL_Choice_Mage
+		translation.en:What exactly is a mage?
+		translation.de:Was genau ist ein Magier?
+		translation.ch:Was gnau isch en Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		condition:not DL:isConditionFulfilled("npc_rhendal", "you_mage")
+		# translation: 
+		translation.tag:DL_Choice_YouMage
+		translation.en:Are you a mage?
+		translation.de:Bist du ein Magier?
+		translation.ch:Bisch du en Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:38
+		condition:not DL:isConditionFulfilled("npc_rhendal", "magic")
+		# translation: 
+		translation.tag:DL_Choice_Magic
+		translation.en:How can I use my magic?
+		translation.de:Wie kann ich meine Magie benutzen?
+		translation.ch:We chani mini Magie bruche?
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		condition:not DL:isConditionFulfilled("npc_rhendal", "job")
+		# translation: 
+		translation.tag:DL_Choice_Job
+		translation.en:Do you have a job for me?
+		translation.de:Hast du Arbeit für mich?
+		translation.ch:Hesch Arbet für mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:47
+		condition:DL:isConditionFulfilled("npc_rhendal", "job") and DL:isQuestState("broken_bridge", "void") and DL:isSpellEquipped(2)
+		# translation: 
+		translation.tag:DL_Choice_BrokenBridge
+		translation.en:I'm ready for your job.
+		translation.de:Ich bin bereit für deinen Auftrag.
+		translation.ch:Ich bin parat für din Job.
+	]
+	[
+		# Link node, tag is next tag
+		tag:53
+		condition:DL:isQuestState("broken_bridge", "started") and DL:isQuestComplete("broken_bridge")
+		# translation: 
+		translation.tag:DL_Choice_GotSchnapps
+		translation.en:I got the schnapps for you.
+		translation.de:Ich habe den Schnaps für dich.
+		translation.ch:Ich han de Schnaps für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:57
+		condition:DL:hasItem("qe_spoiledfeudalfire", 1)
+		# translation: 
+		translation.tag:DL_Choice_GotSchnapps
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:60
+		condition:DL:isQuestState("broken_bridge", "started") and not (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1)) and DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire")
+		# translation: 
+		translation.tag:DL_Choice_IDrankSchnaps
+		translation.en:I got the schnapps for you... and it was delicious.
+		translation.de:Ich habe den Schnaps für dich gekauft... und er war köstlich.
+		translation.ch:Ich han de Schnaps für dich kauft... und er isch fein gsi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_Bye
+		translation.en:That's everything I needed to know. Bye.
+		translation.de:Das ist alles, was ich wissen wollte. Tschüss.
+		translation.ch:Da isch alles, wani ha wele wüsse. Tschüss.
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "mage")
+	# translation: 
+	translation.tag:DL_Rhendal_Mage
+	translation.en:Mages are able to control the magic energy that flows through this world.
+	translation.de:Magier können die magische Energie kontrollieren, die durch diese Welt fliesst.
+	translation.ch:Magier chönd di magisch Energie kontrolliere, wo dur die Welt flüsst.
+	[
+		# Link node, tag is next tag
+		tag:40
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Mage2
+	translation.en:It's a special gift - not all people in Admantris have it.
+	translation.de:Es ist ein seltenes Talent - nicht alle Menschen von Admantris sind dazu fähig.
+	translation.ch:Es isch es seltenigs Talent... nid all Lüüt vo Admantris chönd das.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "you_mage")
+	# translation: 
+	translation.tag:DL_Rhendal_YouMage
+	translation.en:No. I'm "only" an alchemist. I use the magical energy contained in some plants, but I can't control it myself.
+	translation.de:Nein. Ich bin "nur" ein Alchemist. Ich nutze die magische Energie, die in Pflanzen enthalten ist, kann sie aber selbst nicht kontrollieren.
+	translation.ch:Nei. Ich bi "nur" en Alchemist. Ich bruch di magisch Energie wo i Pflanze drin isch, chan si selber aber nid kontrolliere.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Magic
+	translation.en:First, you need a staff that is able to focus magical energy.
+	translation.de:Zuerst brauchst du einen Stab, der magische Energie fokussieren kann.
+	translation.ch:Zersch mal bruchsch en Stab, wo magischi Energie fokussiere chan. 
+	[
+		# Link node, tag is next tag
+		tag:45
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Magic2
+	translation.en:I grow a magical Hawthorn tree in my garden. Just take a branch from there and you will have what you need.
+	translation.de:Ich züchte einen magischen Weissdornbaum in meinem Garten. Brich dir einen Ast davon ab und du wirst haben, was du brauchst.
+	translation.ch:Ich züchte es magisches Wissdorn-Bäumli i mim Garte. Brich der en Ast devo ab und du wirsch ha was du bruchsch.
+	[
+		# Link node, tag is next tag
+		tag:46
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	trigger:DL:addHint("Spellbook")
+	# translation: 
+	translation.tag:DL_Rhendal_Magic3
+	translation.en:Equip the staff and open your spellbook to equip your iceball spell.
+	translation.de:Rüste den Stab aus und öffne dein Zauberbuch, um deinen Eisball-Zauber auszurüsten.
+	translation.ch:Leg de Stab ah und mach dis Zauberbuech uf, zum din Iisball-Zauber uusrüste.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "job")
+	# translation: 
+	translation.tag:DL_Rhendal_Job
+	translation.en:Yes, I would have a job for an ice mage.
+	translation.de:Ja, für einen Eismagier habe ich eine Arbeit.
+	translation.ch:Ja, für en Iismagier hani en Arbet.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Job2
+	translation.en:I will tell you more about it, after you've equipped a staff with an iceball spell.
+	translation.de:Ich werde dir mehr davon erzählen, wenn du einen Stab mit einem Eisball-Zauber ausgerüstet hast.
+	translation.ch:Ich wird der me devo verzelle, wend en Stab mitme Iisball-Zauber usgrüstet hesch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "magic")
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge
+	translation.en:Perfect, the staff suits you well.
+	translation.de:Perfekt, der Stab steht dir gut.
+	translation.ch:Perfekt, de Stab stoht der guet.
+	[
+		# Link node, tag is next tag
+		tag:48
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge2
+	translation.en:Well. I need some special schnapps for my potions. The only one who brews it is the innkeeper of the tavern in the West.
+	translation.de:Nun. Ich brauche einen speziellen Schnaps für meine Tränke. Der einzige, der ihn braut, ist der Wirt der Taverne im Westen.
+	translation.ch:Guet. Ich bruch en spezielle Schnaps für mini Tränk. De einzig, wonen braut, isch de Wirt vode Taverne im Weste.
+	[
+		# Link node, tag is next tag
+		tag:49
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge3
+	translation.en:The problem is now, that the bridge that connects this village and the tavern, is broken.
+	translation.de:Das Problem hierbei ist, dass die Brücke, die das Dorf und die Taverne verbindet, eingestürzt ist.
+	translation.ch:Es Problem isch aber, dass d'Brugg, wo das Dorf und d'Taverne verbindet, iigstürzt isch.
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge4
+	translation.en:We would need some time to rebuild it, but I need the schnapps as soon as possible.
+	translation.de:Wir würden eine Weile brauchen um sie wieder aufzubauen, aber ich brauche den Schnaps so schnell wie möglich.
+	translation.ch:Mir würded es Ziitli bruche, zum sie wieder ufbaue, aber ich bruch de Schnaps so schnell we mögli.
+	[
+		# Link node, tag is next tag
+		tag:51
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	trigger:DL:changeQuestState("broken_bridge", "started")
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge5
+	translation.en:Use your ice magic to freeze the river and get to the other side.
+	translation.de:Nutze deine Eismagie, um den Fluss zu gefrieren und auf die andere Seite zu gelangen.
+	translation.ch:Bruch dini Iismagie, zum de Fluss gführe und uf di ander Siite z'go.
+	[
+		# Link node, tag is next tag
+		tag:52
+	]
+}
+{1
+	# [52] NPC Node
+	tag:52
+	# triggers: 
+	trigger:DL:addGold(20)
+	# translation: 
+	translation.tag:DL_Rhendal_BrokenBridge6
+	translation.en:Ask the innkeeper for a "Feudal Fire". Here, this gold should be enough. Hurry!
+	translation.de:Frage den Wirt nach einem "Feudalen Feuer". Hier, dieses Gold sollte genug sein. Beeil dich!
+	translation.ch:Frög de Wirt nochme "Feudale Füür". Do, das Gold sött gnueg si. Mach schnell!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:removeItem("pe_feudalfire", 1)
+	trigger:DL:changeQuestState("broken_bridge", "completed")
+	# translation: 
+	translation.tag:DL_Rhendal_GotSchnapps
+	translation.en:Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some?
+	translation.de:Oh, perfekt, vielen Dank. Du hast es also geschafft, den Fluss zu überqueren. Hmm, ein wahrlich spezielles Getränk. Willst du auch ein bisschen?
+	translation.ch:Oh, perfekt, viele Dank. Du heschs also gschafft, de Fluss z''überquere. Hmm, würkli es speziells Getränk. Wetsch nid au chli?
+	[
+		# Link node, tag is next tag
+		tag:54
+	]
+}
+{2
+	# [54] Choice Node
+	tag:54
+	[
+		# Link node, tag is next tag
+		tag:55
+		# translation: 
+		translation.tag:DL_Choice_IWantDrink
+		translation.en:Yes, why not.
+		translation.de:Gern, wieso nicht.
+		translation.ch:Gern, weso nid.
+	]
+	[
+		# Link node, tag is next tag
+		tag:56
+		# translation: 
+		translation.tag:DL_Choice_IDontWantDrink
+		translation.en:No, thank you.
+		translation.de:Nein, danke.
+		translation.ch:Nei danke.
+	]
+}
+{1
+	# [55] NPC Node
+	tag:55
+	# triggers: 
+	trigger:DL:addItem("pe_glassoffeudalfire", 1)
+	# translation: 
+	translation.tag:DL_Rhendal_GivesSchnapps
+	translation.en:Yes, that's the right decision. Here, take a glass.
+	translation.de:Ja, das ist die richtige Entscheidung. Hier, nimm einen Schluck.
+	translation.ch:Ja, das isch di richtig Entscheidig. Da, nimm en Schluck.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [56] NPC Node
+	tag:56
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_NoSchnappsPity
+	translation.en:Oh, what a pity. You don't know what you''re missing.
+	translation.de:Sehr schade. Du weisst ja nicht, was dir entgeht.
+	translation.ch:Sehr schad. Du weisch ja nid, was der entgoht.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [57] NPC Node
+	tag:57
+	# triggers: 
+	trigger:DL:removeItem("qe_spoiledfeudalfire", 1)
+	trigger:DL:addConditionProgress("npc_rhendal", "spoiled_schnapps")
+	# translation: 
+	translation.tag:DL_Rhendal_GotSchnapps
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:58
+	]
+}
+{2
+	# [58] Choice Node
+	tag:58
+	[
+		# Link node, tag is next tag
+		tag:59
+		# translation: 
+		translation.tag:DL_Choice_IDontWantDrink
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [59] NPC Node
+	tag:59
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_NoSchnappsPity
 	translation.en:
 	translation.de:
 	translation.ch:
@@ -550,16 +1069,18 @@ npc.id:npc_rhendal
 		tag:-2
 	]
 }
-{2
-	# [25] Choice Node
-	tag:25
+{1
+	# [60] NPC Node
+	tag:60
+	# triggers: 
+	trigger:DL:changeQuestState("broken_bridge", "failed")
+	# translation: 
+	translation.tag:DL_Rhendal_YouDrankSchnaps
+	translation.en:What? Oh you silly boy! You drank it yourself? You're not the sharpest knife in the drawer, are you?!
+	translation.de:Was? Oh du einfältiger Junge! Du bist wirklich nicht der Hellste, was?!
+	translation.ch:Waaa? Oh du dumme Bueb. Du bisch würkli dumm wenes Brot, oder?
 	[
 		# Link node, tag is next tag
-		tag:-2
-		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
+		tag:-1
 	]
 }

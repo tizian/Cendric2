@@ -35,7 +35,7 @@ npc.id:npc_royalguard_t
 	tag:2
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Royalguard_Hey
+	translation.tag:DL_Royalguard_Hey2
 	translation.en:I really hope you have a good reason, otherwise I'll have to let you out immediately.
 	translation.de:Ich hoffe wirklich, du hast einen guten Grund. Sonst muss ich dich nämlich wieder hinausbefördern.
 	translation.ch:Ich hoff würkli, du heschen guete Grund. Susch muni di nämli wieder usebefördere.
