@@ -118,7 +118,9 @@ public:
 	// is a quest description for a certain quest unlocked?
 	bool isQuestDescriptionUnlocked(const std::string& questID, int description) const;
 	// is a spell learned?
-	bool isSpellLearned(SpellID id);
+	bool isSpellLearned(SpellID id) const;
+	// is a spell equipped?
+	bool isSpellEquipped(SpellID id) const;
 	// set a condition fulfilled. Returns whether the operation was successful.
 	bool setConditionFulfilled(const std::string& conditionType, const std::string& condition);
 	// unlock a certain quest description. Returns whether the operation was successful.

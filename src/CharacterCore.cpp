@@ -346,7 +346,7 @@ bool CharacterCore::isQuestDescriptionUnlocked(const std::string& questID, int d
 	return contains(m_data.questDescriptionProgress.at(questID), description);
 }
 
-bool CharacterCore::isSpellLearned(SpellID id) {
+bool CharacterCore::isSpellLearned(SpellID id) const {
 	for (auto& type : m_data.spellsLearned) {
 		for (auto spell : type.second) {
 			if (spell == id) {
@@ -355,7 +355,16 @@ bool CharacterCore::isSpellLearned(SpellID id) {
 		}
 	}
 	return false;
-} 
+}
+
+bool CharacterCore::isSpellEquipped(SpellID id) const {
+	for (auto& slot : m_data.equippedWeaponSlots) {
+		if (slot.first == id) {
+			return true;
+		}
+	}
+	return false;
+}
 
 bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
 	if (!contains(m_data.conditionProgress, conditionType)) {
@@ -471,7 +480,7 @@ bool CharacterCore::isItemEquipped(const std::string& itemID) const {
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 
@@ -501,7 +510,7 @@ void CharacterCore::learnModifier(SpellModifierType modifierType, const std::str
 	if (objectID > -1) {
 		m_data.modifiersUnlocked[levelID].insert(objectID);
 	}
-		 
+
 	if (!contains(m_data.modfiersLearned, modifierType)) {
 		m_data.modfiersLearned.insert({ modifierType, 0 });
 	}

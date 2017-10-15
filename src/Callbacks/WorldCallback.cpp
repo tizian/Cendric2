@@ -140,6 +140,10 @@ bool WorldCallback::isSpellLearned(int spellID) {
 	return m_core->isSpellLearned(static_cast<SpellID>(spellID));
 }
 
+bool WorldCallback::isSpellEquipped(int spellID) {
+	return m_core->isSpellEquipped(static_cast<SpellID>(spellID));
+}
+
 int WorldCallback::getItemAmount(const std::string& itemID) const {
 	return m_core->getItemAmount(itemID);
 }

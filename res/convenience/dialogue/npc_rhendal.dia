@@ -1,0 +1,210 @@
+# dia file for dialogue for npc: npc_rhendal
+
+npc.id:npc_rhendal
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_rhendal", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:DL:isQuestState("silkweed_potion", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "talked")
+	# translation: 
+	translation.tag:DL_Rhendal_Hello
+	translation.en:Hello, young man. What brings you into my humble home?
+	translation.de:Hallo, junger Mann. Was führt dich in mein bescheidenes Heim?
+	translation.ch:Hallo, junge Ma. Was führt dich i mis bescheidene Heim?
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_IGotProblem
+		translation.en:I have a problem.
+		translation.de:Ich habe ein Problem.
+		translation.ch:Ich han es Problem.
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:DL:isConditionFulfilled("npc_edmond", "who_am_i")
+		# translation: 
+		translation.tag:DL_Choice_EdmondSentMe
+		translation.en:The hunter Edmond sent me to you.
+		translation.de:Der Jäger Edmond hat mich zu dir geschickt.
+		translation.ch:De Jäger Edmond het mich zu dir gschickt.
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("npc_ingrid", "who_am_i")
+		# translation: 
+		translation.tag:DL_Choice_IngridSentMe
+		translation.en:Ingrid told me you can help me.
+		translation.de:Ingrid hat mir gesagt, du könntest mir helfen.
+		translation.ch:D'Ingrid het gseit du chöntsch mer helfe.
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_EdmondSentYou
+	translation.en:Ah, Edmond. Our talented hunter.
+	translation.de:Ah, Edmond, unser begabter Jäger.
+	translation.ch:Ah, de Emond, üse begabti Jäger.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_IngridSentYou
+	translation.en:Ah, Ingrid. Our talented cook.
+	translation.de:Ah, Ingrid, unsere begabte Köchin.
+	translation.ch:Ah, d'Ingrid, üsi begabt Chöchin.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_WhatIsProblem
+	translation.en:So, what exactly is your problem?
+	translation.de:Was hast du denn genau für ein Problem?
+	translation.ch:Was isch den dis Problem gnau?
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{3
+	# [6] Cendric Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_Problem
+	translation.en:I've awoken in some forest and I can't remember anything. I have no clue who I am and how I got there.
+	translation.de:Ich bin in einem Wald aufgewacht und kann mich an nichts erinnern. Ich habe keine Ahnung wer ich bin und wie ich dort hin gekommen bin.
+	translation.ch:Ich bin imne Wald ufgwacht und cha mich a nüt erinnere. Ich han ken Plan wer ich bin und we ich döt hi cho bi.
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Problem
+	translation.en:Hm. That doesn't sound good.
+	translation.de:Hm. Das hört sich gar nicht gut an.
+	translation.ch:Hm. Das tönt gar nid guet.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Problem2
+	translation.en:But you're in luck, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
+	translation.de:Aber du kannst dich glücklich schätzen, ich verstehe etwas von der Kunst der Alchemie und kenne einen Trank, der dir helfen könnte.
+	translation.ch:Aber du chasch dich glücklich schätze, ich verstand chli was vo de Kunst vode Alchemie und kenn en Trank, wo dir hälfe chönt.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_BringMe
+	translation.en:I have most ingredients for it right here.
+	translation.de:Ich habe die meisten Zutaten dafür schon hier.
+	translation.ch:Ich han di meiste Zuetate defür scho da.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_BringMe2
+	translation.en:I still need some fresh leaves from a Silkweed and a magical stone from a Cairn Wraith though.
+	translation.de:Ich brauche jedoch noch ein paar frische Blätter eines Seidenkrauts und den magischen Stein eines Cairn Geistes.
+	translation.ch:Ich bruch aber no es paar frischi Blätter vomne Sidechrüütli und en magische Stei vomne Steimännli Geist.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:changeQuestState("silkweed_potion", "started")
+	# translation: 
+	translation.tag:DL_Rhendal_BringMe3
+	translation.en:If you could bring me those, I will brew the potion for you.
+	translation.de:Wenn du mir diese bringst, werde ich dir den Trank brauen.
+	translation.ch:Wenn du mer die bringsch, wirdi der de Trank braue.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [12] Choice Node
+	tag:12
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
