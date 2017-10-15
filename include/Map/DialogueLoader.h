@@ -2,9 +2,7 @@
 
 #include "global.h"
 #include "Map/Dialogue.h"
-#include "Enums/QuestState.h"
 
-#include "LuaBridge/LuaBridge.h"
 #include "Callbacks/WorldCallback.h"
 
 class WorldScreen;
@@ -52,6 +50,8 @@ public:
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);
+	void unlockAchievement(const std::string& achievement) { m_worldCallback->unlockAchievement(achievement); }
+	void setWeather(const std::string& mapId, const std::string& weather, int dimming) { m_worldCallback->setWeather(mapId, weather, dimming); }
 
 	// special node properties
 	void addChoice(int nextTag, const std::string& text);

@@ -18,6 +18,16 @@ npc.id:npc_rhendal
 	[
 		# Link node, tag is next tag
 		tag:12
+		condition:not DL:isQuestState("silkweed_potion", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:24
+		condition:not DL:isConditionFulfilled("npc_rhendal", "vision")
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
 	]
 }
 {1
@@ -198,6 +208,351 @@ npc.id:npc_rhendal
 {2
 	# [12] Choice Node
 	tag:12
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isQuestComplete("silkweed_potion")
+		# translation: 
+		translation.tag:DL_Choice_FoundIngredients
+		translation.en:I found the ingredients for the potion.
+		translation.de:Ich habe die Zutaten für den Trank gefunden.
+		translation.ch:Ich ha d'Zuetate für de Trank gfunde.
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		# translation: 
+		translation.tag:DL_Choice_WhereSilkweed
+		translation.en:Where can I find the Silkweed?
+		translation.de:Wo kann ich das Seidenkraut finden?
+		translation.ch:Wo chanis Siidechrütli finde?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_WhereCairn
+		translation.en:Where do Cairn Wraiths live?
+		translation.de:Wo leben denn Cairn Geister?
+		translation.ch:Wo lebed denn Steimännli Geister?
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:not DL:isConditionFulfilled("npc_rhendal", "trust_you")
+		# translation: 
+		translation.tag:DL_Choice_TrustYou
+		translation.en:Why should I trust you? What if that potion is going to poison me?
+		translation.de:Wieso sollte ich dir vertrauen? Was, wenn dieser Trank mich vergiftet?
+		translation.ch:Weso sötti dir traue? Was, wenn de Trank mich vergiftet?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:removeItem("qe_silkweed", 1)
+	trigger:DL:removeItem("mi_corrupt_stone_ice", 1)
+	trigger:DL:setWeather("res/map/elderhome/elderhome.tmx", "snow", 30)
+	# translation: 
+	translation.tag:DL_Rhendal_FoundIngredients
+	translation.en:Very good. I just completed the other preparations. Now let''s add the Silkweed and the stone...
+	translation.de:ehr gut, ich bin gerade mit den anderen Vorbereitungen fertig geworden. Jetzt fügen wir noch das Seidenkraut und den Stein hinzu...
+	translation.ch:Sehr guet. Ich bi grad mit de andere Vorbereitige fertig worde. Jetz tömmer no es Siidechrütli und de Stei dri...
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:changeQuestState("silkweed_potion", "completed")
+	# translation: 
+	translation.tag:DL_Rhendal_FoundIngredients2
+	translation.en:... and it's done. You can drink it now.
+	translation.de:... und er ist fertig. Du kannst ihn jetzt trinken.
+	translation.ch:... und er isch fertig. Du chaschen jetz trinke.
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:20
+		# translation: 
+		translation.tag:DL_Choice_DrinkOkay
+		translation.en:Okay...
+		translation.de:Okay...
+		translation.ch:Okay...
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:not DL:isConditionFulfilled("npc_rhendal", "Choice-2")
+		# translation: 
+		translation.tag:DL_Choice_DrinkBut
+		translation.en:But...
+		translation.de:Aber...
+		translation.ch:Aber...
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:startCutscene("silkweed_potion")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_DrinkBut
+	translation.en:No "but"! Drink it.
+	translation.de:Kein "aber"! Trink jetzt.
+	translation.ch:Nüt "aber"! Trink jetz.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{3
+	# [22] Cendric Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Choice_DrinkOkay
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:startCutscene("silkweed_potion")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_WhereSilkweed
+	translation.en:I grow some Silkweed in my garden, just in front of my house.
+	translation.de:Ich züchte Seidenkraut in meinem Garten vor meinem Haus.
+	translation.ch:Ich züchte Siidechrütli i mim Garte, grad vor mim Hüsli.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_WhereCairn
+	translation.en:Usually in the mountains. I think I've seen some on the windy plateau, right behind the crypt of our village.
+	translation.de:Normalerweise in den Bergen. Ich glaube, ich habe einige auf der windigen Ebene hinter der Krypta unseres Dorfes gesehen.
+	translation.ch:Normalerwiis ide Berge. Ich ha glaub es paar uf de windige Ebeni hinter de Krypta vo üsem Dorf gse.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "trust_you")
+	# translation: 
+	translation.tag:DL_Rhendal_TrustYou
+	translation.en:Do you have another choice?
+	translation.de:Hast du denn eine andere Wahl?
+	translation.ch:Hesch denn en anderi Wahl?
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{3
+	# [19] Cendric Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_TrustYou
+	translation.en:...
+	translation.de:...
+	translation.ch:...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	trigger:DL:learnSpell(2)
+	trigger:DL:addQuestProgress("who_am_i", "information_gathered")
+	trigger:DL:changeQuestState("who_am_i", "completed")
+	trigger:DL:addHint("Spellbook")
+	trigger:DL:setWeather("res/map/elderhome/elderhome.tmx", "", 30)
+	# translation: 
+	translation.tag:DL_Rhendal_Snowing
+	translation.en:(Shivers) What... it's snowing? 
+	translation.de:(Fröstelt) Was... Es schneit?
+	translation.ch:(Fröstlet) Was... Es schneit?
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Snowing2
+	translation.en:So you're an elementalist? A mage that controls the elements?
+	translation.de:Dann bist du also ein Elementarmagier? Ein Magier, der die Elemente kontrolliert?
+	translation.ch:Denn bisch also en Elementarmagier? En Magier, wo d'Element kontrolliert?
+	[
+		# Link node, tag is next tag
+		tag:27
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rhendal_Snowing3
+	translation.en:Fascinating! What did you see in your vision?
+	translation.de:Faszinierend! Was hast du denn in deiner Vision gesehen?
+	translation.ch:Faszinierend! Was hesch denn i dinee Vision gse?
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{2
+	# [28] Choice Node
+	tag:28
+	[
+		# Link node, tag is next tag
+		tag:29
+		condition:not DL:isConditionFulfilled("npc_rhendal", "vision_dungeon")
+		# translation: 
+		translation.tag:DL_Choice_VisionDungeon
+		translation.en:I was imprisoned in some dungeon.
+		translation.de:Ich war in einem Verlies eingesperrt.
+		translation.ch:Ich bi imne Verlies igsperrt gsi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:not DL:isConditionFulfilled("npc_rhendal", "vision_flames")
+		# translation: 
+		translation.tag:DL_Choice_VisionFlames
+		translation.en:There were... purple flames.
+		translation.de:Da waren... violette Flammen.
+		translation.ch:Do sind... violetti Flamme gsi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		# translation: 
+		translation.tag:DL_Choice_VisionCold
+		translation.en:It was very cold...
+		translation.de:Es war sehr kalt... 
+		translation.ch:Es isch sehr chalt gsi... 
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "vision_dungeon")
+	# translation: 
+	translation.tag:DL_Rhendal_VisionDungeon
+	translation.en:Hm. Not everything that appears in your vision has to be true. What else did you see?
+	translation.de:Hm. Nicht alles, was in deiner Vision erscheint, muss auch wahr sein. Was hast du sonst noch gesehen?
+	translation.ch:Hm. Nid alles, wa i dinere Vision erschiint, mu au wohr si. Wa hesch susch na gse?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rhendal", "vision_flames")
+	# translation: 
+	translation.tag:DL_Rhendal_VisionFlames
+	translation.en:Maybe some kind of magic. I've never heard of purple magic, though.
+	translation.de:Vielleicht eine Art von Magie. Ich habe aber noch nie von violetter Magie gehört.
+	translation.ch:Vilicht enart Magie. Ich ha aber nonie was vo violetter Magie ghört.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_31
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [25] Choice Node
+	tag:25
 	[
 		# Link node, tag is next tag
 		tag:-2

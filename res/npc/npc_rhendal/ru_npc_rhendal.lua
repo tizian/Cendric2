@@ -10,7 +10,7 @@ loadRoutine = function(R, W)
 	
 	if (not W:isConditionFulfilled("npc_rhendal", "talked")) then
 		R:setTalkingActive(true)
-	elseif (W:isQuestState("silkweed_potion", "started") and W:isConditionFulfilled("npc_rhendal", "potion_drunk")) then
+	elseif (W:isQuestState("silkweed_potion", "completed") and not W:isConditionFulfilled("npc_rhendal", "vision")) then
 		R:setTalkingActive(true)
 	end
 	

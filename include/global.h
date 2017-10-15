@@ -51,6 +51,12 @@ inline float clamp(float v, float low, float high) {
 	return v;
 }
 
+inline int clamp(int v, int low, int high) {
+	if (v < low) return low;
+	if (v > high) return high;
+	return v;
+}
+
 inline float linearTween(float t, float b, float c, float d) {
 	return c * t / d + b;
 }

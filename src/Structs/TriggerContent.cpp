@@ -331,6 +331,18 @@ TriggerContent TriggerContent::unlockAchievement(const std::string& achievement)
 	return content;
 }
 
+TriggerContent TriggerContent::setWeather(const std::string& worldId, const std::string& weather, int dimming) {
+	if (worldId.empty() || weather.empty()) {
+		g_logger->logError("TriggerContent", "World Id and Weather cannot be empty");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::Weather);
+	content.i1 = clamp(dimming, 0, 100);
+	content.s1 = worldId;
+	content.s2 = weather;
+	return content;
+}
+
 bool TriggerContent::isValid() const {
 	return type > TriggerContentType::VOID && type < TriggerContentType::MAX;
 }

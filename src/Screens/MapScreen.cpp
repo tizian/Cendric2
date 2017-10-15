@@ -6,8 +6,8 @@
 #include "Map/MapInterface.h"
 #include "GUI/BookWindow.h"
 
-MapScreen::MapScreen(const std::string& mapID, CharacterCore* core) : Screen(core), WorldScreen(core) {
-	m_mapID = mapID;
+MapScreen::MapScreen(const std::string& mapId, CharacterCore* core) : Screen(core), WorldScreen(core) {
+	m_mapID = mapId;
 }
 
 void MapScreen::execUpdate(const sf::Time& frameTime) {

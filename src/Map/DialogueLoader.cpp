@@ -53,6 +53,8 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("startCutscene", &DialogueLoader::startCutscene)
 		.addFunction("learnSpell", &DialogueLoader::learnSpell)
 		.addFunction("setGuild", &DialogueLoader::setGuild)
+		.addFunction("unlockAchievement", &DialogueLoader::unlockAchievement)
+		.addFunction("setWeather", &DialogueLoader::setWeather)
 		.addFunction("gotoNode", &DialogueLoader::gotoNode)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
 		.addFunction("addNode", &DialogueLoader::addNode)

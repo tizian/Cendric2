@@ -68,4 +68,5 @@ struct TriggerContent final {
 	static TriggerContent setForcedMap(const std::string& mapID, int x, int y);
 	static TriggerContent startCutscene(const std::string& cutsceneID);
 	static TriggerContent unlockAchievement(const std::string& achievement);
+	static TriggerContent setWeather(const std::string& worldId, const std::string& weather, int dimming);
 };
