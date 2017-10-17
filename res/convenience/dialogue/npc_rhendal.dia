@@ -308,7 +308,6 @@ npc.id:npc_rhendal
 	[
 		# Link node, tag is next tag
 		tag:21
-		condition:not DL:isConditionFulfilled("npc_rhendal", "Choice-2")
 		# translation: 
 		translation.tag:DL_Choice_DrinkBut
 		translation.en:But...

@@ -298,7 +298,6 @@ void YashaBoss::checkRevive(const sf::Time& frameTime) {
 		}
 		m_cats.clear();
 		startBossState(YashaBossState::Fireballing);
-		return;
 	}
 
 	updateTime(m_reviveCD, frameTime);

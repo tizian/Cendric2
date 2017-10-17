@@ -155,18 +155,18 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 
-	if (m_record.collides) return;
-
-	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
-		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+	nextBoundingBox.left = nextBoundingBoxX.left;
+	nextBoundingBox.top = nextBoundingBoxY.top;
+	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;
 	}
 
-	nextBoundingBox.left = nextBoundingBoxX.left;
-	nextBoundingBox.top = nextBoundingBoxY.top;
-	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
+	if (m_record.collides) return;
+
+	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
+		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;

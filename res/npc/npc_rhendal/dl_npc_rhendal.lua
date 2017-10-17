@@ -110,9 +110,7 @@ loadDialogue = function(DL)
 
 			DL:createChoiceNode(17)
 			DL:addChoice(20, "DL_Choice_DrinkOkay") -- Okay...
-			if (not DL:isConditionFulfilled("npc_rhendal", "Choice-2")) then 
-				DL:addChoice(21, "DL_Choice_DrinkBut") -- But...
-			end
+			DL:addChoice(21, "DL_Choice_DrinkBut") -- But...
 			DL:addNode()
 
 
@@ -120,21 +118,18 @@ loadDialogue = function(DL)
 			DL:startCutscene("silkweed_potion")
 			DL:addNode()
 
-			if (not DL:isConditionFulfilled("npc_rhendal", "Choice-2")) then 
 
-				DL:createNPCNode(21, 22, "DL_Rhendal_DrinkBut") -- No "but"! Drink it.
-				DL:addNode()
-
-
-				DL:createCendricNode(22, 23, "DL_Choice_DrinkOkay") -- 
-				DL:addNode()
+			DL:createNPCNode(21, 22, "DL_Rhendal_DrinkBut") -- No "but"! Drink it.
+			DL:addNode()
 
 
-				DL:createNPCNode(23, -2, "") -- 
-				DL:startCutscene("silkweed_potion")
-				DL:addNode()
+			DL:createCendricNode(22, 23, "DL_Choice_DrinkOkay") -- 
+			DL:addNode()
 
-			end
+
+			DL:createNPCNode(23, -2, "") -- 
+			DL:startCutscene("silkweed_potion")
+			DL:addNode()
 
 		end
 

@@ -332,8 +332,8 @@ TriggerContent TriggerContent::unlockAchievement(const std::string& achievement)
 }
 
 TriggerContent TriggerContent::setWeather(const std::string& worldId, const std::string& weather, int dimming) {
-	if (worldId.empty() || weather.empty()) {
-		g_logger->logError("TriggerContent", "World Id and Weather cannot be empty");
+	if (worldId.empty()) {
+		g_logger->logError("TriggerContent", "World Id cannot be empty");
 		return TriggerContent();
 	}
 	TriggerContent content(TriggerContentType::Weather);
