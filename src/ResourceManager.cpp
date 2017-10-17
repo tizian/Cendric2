@@ -59,6 +59,7 @@ void ResourceManager::init() {
 	loadTexture(GlobalResource::TEX_PARTICLE_DROP, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_FIRE, ResourceType::Global);
 	loadTexture(GlobalResource::TEX_PARTICLE_CONFETTI, ResourceType::Global);
+	loadTexture(GlobalResource::TEX_PARTICLE_WIND, ResourceType::Global);
 
 	// load global miscanellous resources
 	loadTexture(GlobalResource::TEX_MAPMARKERS, ResourceType::Global);

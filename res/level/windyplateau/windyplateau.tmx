@@ -5,6 +5,7 @@
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/stonegarden.ogg"/>
   <property name="tilesetpath" value="res/level/windyplateau/tileset_level_windyplateau.png"/>
+  <property name="weather" value="wind"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_windyplateau" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="722" columns="19">
   <image source="tileset_level_windyplateau.png" width="1000" height="2000"/>
@@ -506,7 +507,7 @@
  </objectgroup>
  <objectgroup name="enemy cairn">
   <properties>
-   <property name="condition" value="npc_robert2,cairn_active"/>
+   <property name="conditions" value="npc_robert2,cairn_active"/>
   </properties>
   <object id="216" gid="1293" x="1600" y="1100" width="50" height="50">
    <properties>

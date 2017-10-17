@@ -40,6 +40,7 @@ public:
 	static const std::string TEX_PARTICLE_DROP;
 	static const std::string TEX_PARTICLE_FIRE;
 	static const std::string TEX_PARTICLE_CONFETTI;
+	static const std::string TEX_PARTICLE_WIND;
 
 	static const std::string TEX_ITEMS;
 	static const std::string TEX_LEVELITEMS;

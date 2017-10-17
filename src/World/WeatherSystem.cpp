@@ -13,16 +13,13 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 	}
 
 	if (data->weather.compare("rain") == 0) {
-		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_RAIN));
+		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_RAIN));
 
 		m_ps->emitRate = 200.f;
-		
-		float minSize = 10.f;
-		float maxSize = 30.f;
-		if (isLevel) {
-			minSize = 16.f;
-			maxSize = 40.f;
-		}
+
+		float minSize = isLevel ? 16.f : 10.f;
+		float maxSize = isLevel ? 40.f : 30.f;
+
 		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
 		sizeGen->minStartSize = minSize;
 		sizeGen->maxStartSize = maxSize;
@@ -36,7 +33,7 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		velGen->maxStartSpeed = 500.f;
 	}
 	else if (data->weather.compare("snow") == 0) {
-		m_ps = new particles::TextureParticleSystem(2500, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOW));
+		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOW));
 
 		m_ps->emitRate = 100.f;
 
@@ -52,17 +49,36 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		velGen->minStartSpeed = 100.f;
 		velGen->maxStartSpeed = 250.f;
 	}
+	else if (data->weather.compare("wind") == 0) {
+		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_WIND));
+
+		m_ps->emitRate = 100.f;
+
+		auto sizeGen = m_ps->addGenerator<particles::SizeGenerator>();
+		sizeGen->minStartSize = 0.f;
+		sizeGen->maxStartSize = 0.f;
+		sizeGen->minEndSize = 100.f;
+		sizeGen->maxEndSize = 200.f;
+
+		auto velGen = m_ps->addGenerator<particles::AngledVelocityGenerator>();
+		velGen->minAngle = 90.f;
+		velGen->maxAngle = 90.f;
+		velGen->minStartSpeed = 100.f;
+		velGen->maxStartSpeed = 250.f;
+
+		m_ps->addGenerator<particles::DirectionDefinedRotationGenerator>();
+	}
 	else {
 		return;
 	}
 
-	auto spwaner = m_ps->addSpawner<particles::BoxSpawner>();
-	spwaner->size = sf::Vector2f(4.f * WINDOW_WIDTH, 2.f * WINDOW_HEIGHT);
-	m_center = &spwaner->center;
+	auto spawner = m_ps->addSpawner<particles::BoxSpawner>();
+	spawner->size = sf::Vector2f(4.f * WINDOW_WIDTH, 2.f * WINDOW_HEIGHT);
+	m_center = &spawner->center;
 
 	auto timeGen = m_ps->addGenerator<particles::TimeGenerator>();
-	timeGen->minTime = 10.f;
-	timeGen->maxTime = 10.f;
+	timeGen->minTime = 5.f;
+	timeGen->maxTime = 5.f;
 
 	auto colGen = m_ps->addGenerator<particles::ColorGenerator>();
 	colGen->minStartCol = sf::Color(255, 255, 255, 255);
@@ -77,20 +93,18 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 }
 
 WeatherSystem::~WeatherSystem() {
-	if (m_ps) {
-		delete m_ps;
-	}
+	delete m_ps;
 }
 
 void WeatherSystem::update(const sf::Vector2f& center, const sf::Time& frameTime) {
-	if (m_ps == nullptr) return;
+	if (!m_ps) return;
 
 	*m_center = center;
 	m_ps->update(frameTime);
 }
 
 void WeatherSystem::render(sf::RenderTarget& renderTarget) {
-	if (m_ps == nullptr) return;
+	if (!m_ps) return;
 
 	m_ps->render(renderTarget);
 }
