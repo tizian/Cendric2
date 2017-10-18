@@ -5,15 +5,13 @@ worldy = 440
 steps = {
 	{
 		texts = {
-			{str="Elder:HereDrink", 	time=4},
-			{str="Elder:ItWillReveal", time=5},
-			{str="Elder:TakeWater", time=5}
-
+			{str="Elder:HereDrink", 	time=5},
+			{str="Elder:ItWillReveal", time=6}
 		},
 		images = {
 			{path="1_i_1.png", vel=0,  angle=0},
-			{path="1_i_2.png", vel=5, angle=90},
-			{path="1_i_3.png", vel=8, angle=90},
+			{path="1_i_2.png", vel=10, angle=90},
+			{path="1_i_3.png", vel=15, angle=90},
 		}
 	},
 	{
@@ -87,15 +85,15 @@ steps = {
 	},
 	{	
 		texts = {
-			{str="Cendric:TheVisionOver", 	time=3},
-			{str="Cendric:TheWaterFrozen", time=4},
-			{str="Cendric:IDidThat", 		time=4},
+			{str="Cendric:TheVisionOver", 	time=4},
+			{str="Cendric:ItsSnowing",      time=5},
 			{str="Cendric:WhatsThis", 		time=3}
 
 		},
 		images = {
 			{path="7_i_1.png", vel=0, angle=0},
-			{path="7_i_2.png", vel=10, angle=0},
+			{path="7_i_2.png", vel=30, angle=170},
+            {path="7_i_4.png", vel=30, angle=190},
 			{path="5_i_3.png", vel=150, angle=0}
 		}
 	},

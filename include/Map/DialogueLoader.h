@@ -21,6 +21,7 @@ public:
 	bool isQuestConditionFulfilled(const std::string& quest, const std::string& condition) const { return m_worldCallback->isQuestConditionFulfilled(quest, condition); }
 	bool isQuestDescriptionUnlocked(const std::string& quest, int description) const { return m_worldCallback->isQuestDescriptionUnlocked(quest, description); }
 	bool isSpellLearned(int spellID) const { return m_worldCallback->isSpellLearned(spellID); }
+	bool isSpellEquipped(int spellID) const { return m_worldCallback->isSpellEquipped(spellID); }
 	bool hasItem(const std::string& item, int amount) const { return m_worldCallback->hasItem(item, amount); }
 	bool isItemEquipped(const std::string& item) const { return m_worldCallback->isItemEquipped(item); }
 	int getItemAmount(const std::string& item) const { return m_worldCallback->getItemAmount(item); }
@@ -50,8 +51,8 @@ public:
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);
-	void unlockAchievement(const std::string& achievement) { m_worldCallback->unlockAchievement(achievement); }
-	void setWeather(const std::string& mapId, const std::string& weather, int dimming) { m_worldCallback->setWeather(mapId, weather, dimming); }
+	void unlockAchievement(const std::string& achievement);
+	void setWeather(const std::string& mapId, const std::string& weather, int dimming);
 
 	// special node properties
 	void addChoice(int nextTag, const std::string& text);

@@ -25,6 +25,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("isQuestConditionFulfilled", &DialogueLoader::isQuestConditionFulfilled)
 		.addFunction("isQuestDescriptionUnlocked", &DialogueLoader::isQuestDescriptionUnlocked)
 		.addFunction("isSpellLearned", &DialogueLoader::isSpellLearned)
+		.addFunction("isSpellEquipped", &DialogueLoader::isSpellEquipped)
 		.addFunction("hasItem", &DialogueLoader::hasItem)
 		.addFunction("isItemEquipped", &DialogueLoader::isItemEquipped)
 		.addFunction("getItemAmount", &DialogueLoader::getItemAmount)
@@ -302,6 +303,24 @@ void DialogueLoader::startCutscene(const std::string& cutsceneID) {
 		return;
 	}
 	TriggerContent content = TriggerContent::startCutscene(cutsceneID);
+	if (content.isValid()) m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::unlockAchievement(const std::string& achievement) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start unlockAchievement: no node created.");
+		return;
+	}
+	TriggerContent content = TriggerContent::unlockAchievement(achievement);
+	if (content.isValid()) m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::setWeather(const std::string& mapId, const std::string& weather, int dimming) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start set Weather: no node created.");
+		return;
+	}
+	TriggerContent content = TriggerContent::setWeather(mapId, weather, dimming);
 	if (content.isValid()) m_currentNode->content.push_back(content);
 }
 

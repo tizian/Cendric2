@@ -187,7 +187,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_BringMe2
-	translation.en:I still need some fresh leaves from a Silkweed and a magical stone from a Cairn Wraith though.
+	translation.en:I still need some fresh leaves from a silkweed and a magical stone from a cairn wraith though.
 	translation.de:Ich brauche jedoch noch ein paar frische Blätter eines Seidenkrauts und den magischen Stein eines Cairn Geistes.
 	translation.ch:Ich bruch aber no es paar frischi Blätter vomne Sidechrüütli und en magische Stei vomne Steimännli Geist.
 	[
@@ -228,7 +228,7 @@ npc.id:npc_rhendal
 		tag:13
 		# translation: 
 		translation.tag:DL_Choice_WhereSilkweed
-		translation.en:Where can I find the Silkweed?
+		translation.en:Where can I find the silkweed?
 		translation.de:Wo kann ich das Seidenkraut finden?
 		translation.ch:Wo chanis Siidechrütli finde?
 	]
@@ -237,7 +237,7 @@ npc.id:npc_rhendal
 		tag:14
 		# translation: 
 		translation.tag:DL_Choice_WhereCairn
-		translation.en:Where do Cairn Wraiths live?
+		translation.en:Where do cairn wraiths live?
 		translation.de:Wo leben denn Cairn Geister?
 		translation.ch:Wo lebed denn Steimännli Geister?
 	]
@@ -270,7 +270,7 @@ npc.id:npc_rhendal
 	trigger:DL:setWeather("res/map/elderhome/elderhome.tmx", "snow", 30)
 	# translation: 
 	translation.tag:DL_Rhendal_FoundIngredients
-	translation.en:Very good. I just completed the other preparations. Now let''s add the Silkweed and the stone...
+	translation.en:Very good. I just completed the other preparations. Now let's add the silkweed and the stone...
 	translation.de:ehr gut, ich bin gerade mit den anderen Vorbereitungen fertig geworden. Jetzt fügen wir noch das Seidenkraut und den Stein hinzu...
 	translation.ch:Sehr guet. Ich bi grad mit de andere Vorbereitige fertig worde. Jetz tömmer no es Siidechrütli und de Stei dri...
 	[
@@ -379,7 +379,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_WhereSilkweed
-	translation.en:I grow some Silkweed in my garden, just in front of my house.
+	translation.en:I grow some silkweed in my garden, just in front of my house.
 	translation.de:Ich züchte Seidenkraut in meinem Garten vor meinem Haus.
 	translation.ch:Ich züchte Siidechrütli i mim Garte, grad vor mim Hüsli.
 	[
@@ -515,6 +515,7 @@ npc.id:npc_rhendal
 	tag:29
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_rhendal", "vision_dungeon")
+	trigger:DL:gotoNode(28)
 	# translation: 
 	translation.tag:DL_Rhendal_VisionDungeon
 	translation.en:Hm. Not everything that appears in your vision has to be true. What else did you see?
@@ -530,6 +531,7 @@ npc.id:npc_rhendal
 	tag:30
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_rhendal", "vision_flames")
+	trigger:DL:gotoNode(28)
 	# translation: 
 	translation.tag:DL_Rhendal_VisionFlames
 	translation.en:Maybe some kind of magic. I've never heard of purple magic, though.
@@ -597,7 +599,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_SideEffect
-	translation.en:No, the Silkweed potion doesn't create this kind of marks. It only reveals what's hidden.
+	translation.en:No, the silkweed potion doesn't create this kind of marks. It only reveals what's hidden.
 	translation.de:Nein, der Seidenkraut-Trank hinterlässt keine Spuren. Er deckt nur auf, was verborgen war.
 	translation.ch:Nei, de Siidechrütli-Trank hinterloht ke so Spure. Er deckt nur uf, was verborge gsi isch.
 	[
@@ -688,7 +690,7 @@ npc.id:npc_rhendal
 	[
 		# Link node, tag is next tag
 		tag:38
-		condition:not DL:isConditionFulfilled("npc_rhendal", "magic")
+		condition:not DL:isConditionFulfilled("npc_rhendal", "magic") and not DL:isSpellEquipped(2)
 		# translation: 
 		translation.tag:DL_Choice_Magic
 		translation.en:How can I use my magic?
@@ -968,7 +970,7 @@ npc.id:npc_rhendal
 	translation.tag:DL_Rhendal_GotSchnapps
 	translation.en:Oh, perfect, thank you. So you managed to cross the river. Hmm, a truly special drink. Do you want some?
 	translation.de:Oh, perfekt, vielen Dank. Du hast es also geschafft, den Fluss zu überqueren. Hmm, ein wahrlich spezielles Getränk. Willst du auch ein bisschen?
-	translation.ch:Oh, perfekt, viele Dank. Du heschs also gschafft, de Fluss z''überquere. Hmm, würkli es speziells Getränk. Wetsch nid au chli?
+	translation.ch:Oh, perfekt, viele Dank. Du heschs also gschafft, de Fluss z'überquere. Hmm, würkli es speziells Getränk. Wetsch nid au chli?
 	[
 		# Link node, tag is next tag
 		tag:54
@@ -1017,7 +1019,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_NoSchnappsPity
-	translation.en:Oh, what a pity. You don't know what you''re missing.
+	translation.en:Oh, what a pity. You don't know what you're missing.
 	translation.de:Sehr schade. Du weisst ja nicht, was dir entgeht.
 	translation.ch:Sehr schad. Du weisch ja nid, was der entgoht.
 	[

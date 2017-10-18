@@ -70,7 +70,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(10, 11, "DL_Rhendal_BringMe2") -- I still need some fresh leaves from a Silkweed and a magical stone from a Cairn Wraith though.
+		DL:createNPCNode(10, 11, "DL_Rhendal_BringMe2") -- I still need some fresh leaves from a silkweed and a magical stone from a cairn wraith though.
 		DL:addNode()
 
 
@@ -86,8 +86,8 @@ loadDialogue = function(DL)
 		if (DL:isQuestComplete("silkweed_potion")) then 
 			DL:addChoice(15, "DL_Choice_FoundIngredients") -- I found the ingredients for the potion.
 		end
-		DL:addChoice(13, "DL_Choice_WhereSilkweed") -- Where can I find the Silkweed?
-		DL:addChoice(14, "DL_Choice_WhereCairn") -- Where do Cairn Wraiths live?
+		DL:addChoice(13, "DL_Choice_WhereSilkweed") -- Where can I find the silkweed?
+		DL:addChoice(14, "DL_Choice_WhereCairn") -- Where do cairn wraiths live?
 		if (not DL:isConditionFulfilled("npc_rhendal", "trust_you")) then 
 			DL:addChoice(18, "DL_Choice_TrustYou") -- Why should I trust you? What if that potion is going to poison me?
 		end
@@ -96,7 +96,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestComplete("silkweed_potion")) then 
 
-			DL:createNPCNode(15, 16, "DL_Rhendal_FoundIngredients") -- Very good. I just completed the other preparations. Now let''s add the Silkweed and the stone...
+			DL:createNPCNode(15, 16, "DL_Rhendal_FoundIngredients") -- Very good. I just completed the other preparations. Now let's add the silkweed and the stone...
 			DL:removeItem("qe_silkweed", 1)
 			DL:removeItem("mi_corrupt_stone_ice", 1)
 			DL:setWeather("res/map/elderhome/elderhome.tmx", "snow", 30)
@@ -134,7 +134,7 @@ loadDialogue = function(DL)
 		end
 
 
-		DL:createNPCNode(13, -2, "DL_Rhendal_WhereSilkweed") -- I grow some Silkweed in my garden, just in front of my house.
+		DL:createNPCNode(13, -2, "DL_Rhendal_WhereSilkweed") -- I grow some silkweed in my garden, just in front of my house.
 		DL:addNode()
 
 
@@ -188,6 +188,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(29, -2, "DL_Rhendal_VisionDungeon") -- Hm. Not everything that appears in your vision has to be true. What else did you see?
 			DL:addConditionProgress("npc_rhendal", "vision_dungeon")
+			DL:gotoNode(28)
 			DL:addNode()
 
 		end
@@ -196,6 +197,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(30, -2, "DL_Rhendal_VisionFlames") -- Maybe some kind of magic. I've never heard of purple magic, though.
 			DL:addConditionProgress("npc_rhendal", "vision_flames")
+			DL:gotoNode(28)
 			DL:addNode()
 
 		end
@@ -216,7 +218,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(34, 36, "DL_Rhendal_SideEffect") -- No, the Silkweed potion doesn't create this kind of marks. It only reveals what's hidden.
+		DL:createNPCNode(34, 36, "DL_Rhendal_SideEffect") -- No, the silkweed potion doesn't create this kind of marks. It only reveals what's hidden.
 		DL:addNode()
 
 
@@ -251,7 +253,7 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_rhendal", "you_mage")) then 
 		DL:addChoice(41, "DL_Choice_YouMage") -- Are you a mage?
 	end
-	if (not DL:isConditionFulfilled("npc_rhendal", "magic")) then 
+	if (not DL:isConditionFulfilled("npc_rhendal", "magic") and not DL:isSpellEquipped(2)) then 
 		DL:addChoice(38, "DL_Choice_Magic") -- How can I use my magic?
 	end
 	if (not DL:isConditionFulfilled("npc_rhendal", "job")) then 
@@ -292,7 +294,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_rhendal", "magic")) then 
+	if (not DL:isConditionFulfilled("npc_rhendal", "magic") and not DL:isSpellEquipped(2)) then 
 
 		DL:createNPCNode(38, 45, "DL_Rhendal_Magic") -- First, you need a staff that is able to focus magical energy.
 		DL:addNode()
@@ -369,7 +371,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(56, -2, "DL_Rhendal_NoSchnappsPity") -- Oh, what a pity. You don't know what you''re missing.
+		DL:createNPCNode(56, -2, "DL_Rhendal_NoSchnappsPity") -- Oh, what a pity. You don't know what you're missing.
 		DL:addNode()
 
 	end
