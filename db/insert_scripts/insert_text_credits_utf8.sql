@@ -62,6 +62,10 @@ Haab
 
 "Lava Theme"
 
+"Secret Lab Theme"
+
+"Crypt Keep"
+
 ---
 
 -- Susanne Aubert --
@@ -97,8 +101,6 @@ Haab
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Eerie Techno Game Open" (Crypt Theme)
 
 "Leaving Port" (Broken Bridge Theme)
 
@@ -145,6 +147,11 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome
+
+<<< Special Thanks >>>
+Matt Sanz for his awesome title art
+Pascal Josephy for the web support
+Mona for her brothel support
 
 ---
 
@@ -244,6 +251,10 @@ Haab
 
 "Lava Theme"
 
+"Secret Lab Theme"
+
+"Crypt Keep"
+
 ---
 
 -- Susanne Aubert --
@@ -279,8 +290,6 @@ Haab
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Eerie Techno Game Open" (Crypt Theme)
 
 "Leaving Port" (Broken Bridge Theme)
 
@@ -327,6 +336,11 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome
+
+<<< Spezielles Dankeschön >>>
+Matt Sanz für sein tolles Titelbild
+Pascal Josephy für den Web-Support
+Mona für ihren Bordell-Support
 
 ---
 
@@ -423,6 +437,10 @@ Haab
 
 "Lava Theme"
 
+"Secret Lab Theme"
+
+"Crypt Keep"
+
 ---
 
 -- Susanne Aubert --
@@ -458,8 +476,6 @@ Haab
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Eerie Techno Game Open" (Crypt Theme)
 
 "Leaving Port" (Broken Bridge Theme)
 
@@ -506,6 +522,11 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome
+
+<<< Speziells Dankä >>>
+Matt Sanz für sis toll Titelbild
+Pascal Josephy für Web-Support
+Mona für ihre Bordell-Support
 
 ---
 
