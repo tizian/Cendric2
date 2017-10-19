@@ -16,8 +16,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:IFeelSomething', 'cutscene','There, I feel something...','Da, ich spüre etwas...','Da, ich gspühr öppis...','Espera. Siento algo...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:SoCold', 'cutscene','So cold...','So kalt...','So chalt...','Mucho frío...');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:AmI', 'cutscene','It''s... me?','Bin das... ich?','Bi das... ich?','¿Soy... yo?');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:AMage', 'cutscene','A mage, that''s what I was.','Ein Magier war ich also.','Ich bin also en Magier gsi.','Un mago. Eso es lo que era.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:TheVisionOver', 'cutscene','The vision is over.','Die Vision ist vorbei.','D''Vision isch verbii.','La visión terminó.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:Prisoner', 'cutscene','Aah! Make it stop!!','Aah! Mach, dass es aufhört!!','Aah! Mach, dases ufhört!!','??');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:TheVisionOver', 'cutscene','Phew... the vision is over.','Uff... die Vision ist vorbei.','Uff.., d''Vision isch verbii.','La visión terminó.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:ItsSnowing', 'cutscene','It''s snowing...','Es schneit...','Es schneit...','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:WhatsThis', 'cutscene','But, what''s this?!','Aber, was ist das?!','Aber, was isch das?!','Pero, ¿qué es esto?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Cendric:AMark', 'cutscene','That mark...','Dieses Zeichen...','Da Zeiche...','Esa marca...');

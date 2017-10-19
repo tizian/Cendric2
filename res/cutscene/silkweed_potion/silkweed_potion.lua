@@ -72,15 +72,15 @@ steps = {
 	{
 		texts = {
 			{str="Cendric:AmI",   time=3},
-			{str="Cendric:AMage", time=7}
+			{str="Cendric:Prisoner", time=7}
 
 		},
 		images = {
 			{path="6_i_1.png", vel=0,  angle=0},
 			{path="6_i_2.png", vel=10, angle=0},
 			{path="6_i_3.png", vel=20, angle=0},
-			{path="6_i_4.png", vel=40, angle=10},
-			{path="6_i_5.png", vel=40, angle=350}
+			{path="6_i_4.png", vel=25, angle=0},
+			{path="6_i_5.png", vel=20, angle=90}
 		}
 	},
 	{	
