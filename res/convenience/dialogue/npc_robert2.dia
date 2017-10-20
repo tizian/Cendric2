@@ -115,6 +115,16 @@ npc.id:npc_robert2
 	]
 	[
 		# Link node, tag is next tag
+		tag:21
+		condition:DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("npc_robert2", "cairn_active")
+		# translation: 
+		translation.tag:DL_Choice_Cairn
+		translation.en:Have you seen any cairn wraiths around here?
+		translation.de:Hast du hier irgendwelche Cairn Geister gesehen?
+		translation.ch:Hesch do irgendwelchi Steimännli Geister gse?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		condition:not DL:isQuestState("teleport_robert", "void")
 		# translation: 
@@ -373,9 +383,9 @@ npc.id:npc_robert2
 	trigger:DL:changeQuestState("teleport_own", "started")
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest4
-	translation.en:I think I've just seen one on the windy plateau behind the crypt. 
-	translation.de:Ich glaube, ich habe gerade einen auf der windigen Ebene hinter der Krypta gesehen.
-	translation.ch:Ich glaub, ich ha grad eine uf de windige Ebeni hinter de Krypta gse.
+	translation.en:I think I've just seen one coming to the windy plateau behind the crypt. 
+	translation.de:Ich glaube, ich habe gerade gesehen, wie einer auf die windige Ebene hinter der Krypta gestiegen ist.
+	translation.ch:Ich glaub, ich ha grad gse, we eine uf di windig Ebeni ide Krypta gstiege isch.
 	[
 		# Link node, tag is next tag
 		tag:20
@@ -394,5 +404,20 @@ npc.id:npc_robert2
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert2", "cairn")
+	# translation: 
+	translation.tag:DL_Robert_Cairn
+	translation.en:Hm, no. They don't seem to like nec... ehr, my kind of magic.
+	translation.de:Hm, nein. Sie mögen irgendwie keine Nek... ähm, meine Art von Magie.
+	translation.ch:Hm, nei. Si hend glaub Nek... äh, mini Magie, nid so gern.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

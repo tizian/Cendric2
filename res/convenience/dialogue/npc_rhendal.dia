@@ -950,6 +950,7 @@ npc.id:npc_rhendal
 	tag:52
 	# triggers: 
 	trigger:DL:addGold(20)
+	trigger:DL:addConditionProgress("npc_rhendal", "talked_about_schnapps")
 	# translation: 
 	translation.tag:DL_Rhendal_BrokenBridge6
 	translation.en:Ask the innkeeper for a "Feudal Fire". Here, this gold should be enough. Hurry!

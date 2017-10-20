@@ -16,9 +16,8 @@ ZeffBoss::ZeffBoss(const Level* level, Screen* screen) :
 }
 
 void ZeffBoss::loadAttributes() {
-	m_attributes.setHealth(120);
-	m_attributes.resistanceIce = -50;
-	m_attributes.resistancePhysical = 100;
+	m_attributes.setHealth(200);
+	m_attributes.resistancePhysical = 200;
 	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }

@@ -348,6 +348,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(52, -1, "DL_Rhendal_BrokenBridge6") -- Ask the innkeeper for a "Feudal Fire". Here, this gold should be enough. Hurry!
 		DL:addGold(20)
+		DL:addConditionProgress("npc_rhendal", "talked_about_schnapps")
 		DL:addNode()
 
 	end
