@@ -66,6 +66,8 @@ Haab
 
 "Crypt Keep"
 
+"Cathedral Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -89,8 +91,6 @@ Haab
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Cathedral Theme"
 
 "Lighthouse Theme"
 
@@ -255,6 +255,8 @@ Haab
 
 "Crypt Keep"
 
+"Cathedral Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -278,8 +280,6 @@ Haab
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Cathedral Theme"
 
 "Lighthouse Theme"
 
@@ -441,6 +441,8 @@ Haab
 
 "Crypt Keep"
 
+"Cathedral Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -464,8 +466,6 @@ Haab
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Cathedral Theme"
 
 "Lighthouse Theme"
 

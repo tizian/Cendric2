@@ -35,7 +35,7 @@ private:
 
 	const float GRAVITY_ACCELERATION = 1000.f;
 	const float RETURN_VELOCITY = 80.f;
-	const float AGGRO_DISTANCE = 200.f;
+	const float AGGRO_DISTANCE = 250.f;
 	const sf::Time WAITING_TIME = sf::seconds(2.f);
 
 	float m_initialHeight = 0.f;

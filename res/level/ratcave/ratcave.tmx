@@ -581,7 +581,7 @@
   <object id="21" x="522" y="1169" width="57" height="117">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/meadows/meadows.tmx,2925,250"/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,2925,300"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

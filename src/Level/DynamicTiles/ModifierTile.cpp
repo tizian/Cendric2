@@ -115,7 +115,6 @@ void ModifierTile::loadComponents() {
 	data.emitRate = 100.f * m_modifier.level / 3.0f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
-	data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBTRenderTexture();
 	
 	auto posGen = new particles::PointSpawner();
 	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);

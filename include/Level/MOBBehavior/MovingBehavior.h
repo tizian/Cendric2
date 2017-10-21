@@ -67,7 +67,7 @@ protected:
 	// helper method used for collision checking
 	void checkXYDirection(const sf::Vector2f& nextPosition, bool& collidesX, bool& collidesY);
 	// if the position delta is too high (> tileSize), the mob is killed and no further collisions are checked.
-	void checkForCollisionTilt(const sf::Vector2f& oldPosition);
+	void checkForCollisionTilt(const sf::Vector2f& oldPosition, float oldVelocity);
 	bool m_isCollisionTilt = false;
 	bool m_isCollisionTiltSuppressed = false;
 

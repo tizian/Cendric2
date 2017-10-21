@@ -9,7 +9,6 @@
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_levelID = levelID;
-	m_particleBTRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleBGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleFGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_particleEQRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -251,10 +250,6 @@ const LevelData* LevelScreen::getWorldData() const {
 	return m_currentLevel.getWorldData();
 }
 
-sf::RenderTexture& LevelScreen::getParticleBTRenderTexture() {
-	return m_particleBTRenderTexture;
-}
-
 sf::RenderTexture& LevelScreen::getParticleBGRenderTexture() {
 	return m_particleBGRenderTexture;
 }
@@ -352,7 +347,6 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
-	flushTexture(renderTarget, m_particleBTRenderTexture, oldView, m_particleBlendMode);
 	renderObjects(GameObjectType::_DynamicTile, renderTarget);
 	renderObjects(GameObjectType::_MovableTile, renderTarget);
 	flushTexture(renderTarget, m_particleBGRenderTexture, oldView, m_particleBlendMode);

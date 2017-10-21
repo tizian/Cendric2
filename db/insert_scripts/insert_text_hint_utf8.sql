@@ -7,7 +7,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Inventory', 'hint_desc','to open the inventory.','um das Inventar zu öffnen.','zums Inventar ufmache.','para abrir el inventario.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chop', 'hint','Attack (Chop)','Attackieren (Schlagen)','Attackiere (Haue)','Ataque (Pegar)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chop', 'hint_desc','to chop with your weapon. You can also use a left mouse click, if that attack is selected.','um mit deiner Waffe zu schlagen. Du kannst auch einen linken Mausklick verwenden, wenn diese Attacke ausgwählt ist.','zum mit dinere Waffe haue. Du chasch au en lingge Muusklick verwende, wenn die Attacke usgwählt isch.','para pegar con el arma. También puedes hacer clic con el botón izquierdo del mouse, si ese ataque está seleccionado.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chop', 'hint_desc','or left click to chop with your weapon.','oder klicke um mit deiner Waffe zu schlagen.','oder klick zum mit dinere Waffe haue.','para pegar con el arma. También puedes hacer clic con el botón izquierdo del mouse, si ese ataque está seleccionado.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('LeaveLevel', 'hint','Leave Level','Level verlassen','Level verlah','Salir del nivel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('LeaveLevel', 'hint_desc','when standing at a level exit to leave the level.','wenn du bei einem Level-Ausgang stehst, um das Level zu verlassen.','wenn du vor emne Level-Usgang stahsch zum use gah.','al estar en la salida de un nivel, para salir del nivel.');
@@ -26,7 +26,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint','Jump','Springen','Springe','Salar');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint_desc','briefly for a small jump, and longer for a high jump.','kurz für einen kleinen Sprung, und länger für einen hohen.','churz für en chline Sprung und länger für en hoche Sprung.','para salar.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint_desc','to jump.','um zu springen.','zum springe.','para salar.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint','Item pickup','Gegenstände aufnehmen','Gegeständ ufnä','Levantar objeto');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Pickup', 'hint_desc','to pick up an item.','um einen Gegenstand aufzuheben','zum es Item ne.','para levanter un objeto.');

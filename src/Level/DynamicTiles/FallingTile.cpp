@@ -12,11 +12,11 @@ FallingTile::FallingTile(LevelScreen* levelScreen) :
 }
 
 bool FallingTile::init(const LevelTileProperties& properties) {
+	m_initialHeight = getPosition().y + getPositionOffset().y;
 	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
 	m_tileState = FallingTileState::Idle;
-
-	m_initialHeight = getPosition().y + getPositionOffset().y;
+	
 	return true;
 }
 
@@ -65,7 +65,7 @@ void FallingTile::update(const sf::Time& frameTime) {
 			m_tileState = FallingTileState::Idle;
 			return;
 		}
-			setVelocity(sf::Vector2f(0.f, -RETURN_VELOCITY));
+		setVelocity(sf::Vector2f(0.f, -RETURN_VELOCITY));
 	}
 
 	sf::Vector2f nextPosition;

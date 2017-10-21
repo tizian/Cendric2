@@ -11,6 +11,10 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Torch, TorchTile)
 TorchTile::TorchTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 }
 
+TorchTile::~TorchTile() {
+	delete m_particleComponent;
+}
+
 bool TorchTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -TILE_SIZE_F / 2.f));
 	setPositionOffset(sf::Vector2f(15.f, 0));
@@ -22,6 +26,22 @@ bool TorchTile::init(const LevelTileProperties& properties) {
 	}
 
 	return true;
+}
+
+void TorchTile::render(sf::RenderTarget& target) {
+	if (m_isFirstRenderIteration) {
+		m_particleComponent->render(target);
+		AnimatedGameObject::render(target);
+		m_isFirstRenderIteration = false;
+	}
+	else {
+		m_isFirstRenderIteration = true;
+	}
+}
+
+void TorchTile::update(const sf::Time& frameTime) {
+	LevelDynamicTile::update(frameTime);
+	m_particleComponent->update(frameTime);
 }
 
 void TorchTile::loadAnimation(int skinNr) {
@@ -59,7 +79,6 @@ void TorchTile::loadComponents() {
 	data.emitRate = 40.f;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_FLAME;
-	data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBTRenderTexture();
 
 	// Generators
 	auto posGen = new particles::BoxSpawner();
@@ -88,12 +107,12 @@ void TorchTile::loadComponents() {
 
 	m_particleComponent = new ParticleComponent(data, this);
 	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height));
-	addComponent(m_particleComponent);
 }
 
 void TorchTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
 	if (m_velGen) {
+		m_particleComponent->setPosition(pos);
 		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
 	}
 }

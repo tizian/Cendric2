@@ -71,6 +71,7 @@ loadDialogue = function(DL)
                 else
                 
                     DL:createNPCNode(60, -1, "DL_Edmond_WalkingPole") -- We will go crush some rocks as soon as you equip the walking pole.
+                    DL:addHint("Inventory")
                     DL:addNode()
                     
                 end
@@ -93,6 +94,7 @@ loadDialogue = function(DL)
 			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole and equip it.
             DL:addConditionProgress("npc_edmond","walking_pole")
 			DL:addItem("we_walkingpole", 1)
+            DL:addHint("Inventory")
 			DL:addNode()
 				
 		else 

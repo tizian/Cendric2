@@ -380,7 +380,7 @@ bool MapOverlay::isOnCurrentMap() const {
 
 void MapOverlay::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
-	auto* map = getCurrentMap();
+	auto map = getCurrentMap();
 	if (map == nullptr) return;
 
 	target.draw(map->map);

@@ -40,7 +40,6 @@ public:
 	const LevelData* getWorldData() const override;
 
 	// extra render textures for particles using special blend
-	sf::RenderTexture& getParticleBTRenderTexture();
 	sf::RenderTexture& getParticleFGRenderTexture();
 	sf::RenderTexture& getParticleBGRenderTexture();
 	sf::RenderTexture& getParticleEQRenderTexture();
@@ -75,7 +74,6 @@ private:
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 
 	sf::Color m_equipmentColor = COLOR_WHITE;
-	sf::RenderTexture m_particleBTRenderTexture;
 	sf::RenderTexture m_particleBGRenderTexture;
 	sf::RenderTexture m_particleFGRenderTexture;
 	sf::RenderTexture m_particleEQRenderTexture;

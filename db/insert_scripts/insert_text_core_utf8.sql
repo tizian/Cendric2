@@ -196,7 +196,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Scre
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SecondSpell','2. Spell','2. Zauber','2. Zauber','2. Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ShadowDamage','Shadow Damage','Schattenschaden','Schatteschade','Daño de sombra');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ShadowResistance','Shadow Resistance','Schattenresistenz','Schatteresistenz','Resistencia a sombra');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Smoothing','Texture Smoothing','Texturen glätten','Texture verschmiere','Suavizado de textura');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Smoothing','Texture Smoothing','Texturen glätten','Texture glätte','Suavizado de textura');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Sound','Sound','Musik','Musig','Sonido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SoundVolume','Sound Volume','Lautstärke Effekte','Effekt-Luutstärchi','Volumen de sonido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MusicVolume','Music Volume','Lautstärke Musik','Musig-Luutstärchi','Volumen de música');

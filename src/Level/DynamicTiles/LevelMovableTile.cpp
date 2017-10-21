@@ -89,6 +89,7 @@ bool LevelMovableTile::collides(const sf::Vector2f& nextPos) const {
 }
 
 void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
+	float velNorm = norm(getVelocity()) / 20.f; // 20 fps max
 	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
@@ -175,7 +176,7 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		}
 	}
 
-	if (dist(oldPosition, getPosition()) > TILE_SIZE_F / 2.f + norm(getVelocity())) {
+	if (dist(oldPosition, getPosition()) > TILE_SIZE_F / 2.f + velNorm) {
 		setPosition(oldPosition);
 		setMovingParent(nullptr);
 		setVelocity(sf::Vector2f(0.f, 0.f));

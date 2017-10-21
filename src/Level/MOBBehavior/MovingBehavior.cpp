@@ -27,8 +27,9 @@ void MovingBehavior::update(const sf::Time& frameTime) {
 		sf::Vector2f oldPosition = m_mob->getPosition();
 
 		if (m_isCollisionEnabled) {
+			auto oldVelocity = norm(m_mob->getVelocity()) / 20.f; // as we have 20fps min
 			checkCollisions(nextPosition);
-			checkForCollisionTilt(oldPosition);
+			checkForCollisionTilt(oldPosition,  oldVelocity);
 		}
 	}
 
@@ -47,13 +48,13 @@ void MovingBehavior::handleDefaultAcceleration() {
 	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, (m_isFlippedGravity ? -m_gravity : m_gravity)));
 }
 
-void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition) {
+void MovingBehavior::checkForCollisionTilt(const sf::Vector2f& oldPosition, float oldVelocity) {
 	if (m_isCollisionTiltSuppressed || m_mob->isImmortal()) {
 		m_isCollisionTiltSuppressed = false;
 		return;
 	}
 
-	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F / 2.f + norm(m_mob->getVelocity())) {
+	if (dist(oldPosition, m_mob->getPosition()) > TILE_SIZE_F / 2.f + oldVelocity) {
 		m_mob->setPosition(oldPosition);
 		m_mob->setMovingParent(nullptr);
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
