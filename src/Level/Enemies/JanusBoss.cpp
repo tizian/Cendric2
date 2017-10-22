@@ -27,9 +27,8 @@ JanusBoss::~JanusBoss() {
 }
 
 void JanusBoss::loadAttributes() {
-	m_attributes.setHealth(600);
+	m_attributes.setHealth(300);
 	m_attributes.resistanceIce = 200;
-	m_attributes.resistanceFire = 50;
 	m_attributes.critical = 20;
 	m_attributes.calculateAttributes();
 }

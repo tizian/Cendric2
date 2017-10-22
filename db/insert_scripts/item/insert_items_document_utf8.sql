@@ -87,7 +87,7 @@ Grossmagister Cyrus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Wrinkled Map','Zerknitterte Karte','Verknittereti Charte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'That''s definitely some kind of map, but the symbols and text are moving in a way that make it impossible to make sense of its content.','Das ist eindeutig eine Art Karte, aber die Symbole und der Text darauf bewegen sich so dass es unmöglich ist, etwas darauf zu erkennen.','Da isch definitiv e Art Charte aber d''Symbol und de Text druf beweged sich so dases unmöglich isch, öppis z''erkenne druf.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elemap', 'document', 550, 400, -1);
-INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 0, 'res/assets/items/elemap.png');
+INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 0, 'res/texture/items/elemap.png');
 
 -- Rhendal's Diary
 
