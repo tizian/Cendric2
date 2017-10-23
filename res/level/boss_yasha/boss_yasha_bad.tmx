@@ -633,8 +633,8 @@
    <properties>
     <property name="fo_greaterhealingpotion" value="2"/>
     <property name="gold" value="100"/>
-    <property name="mi_yashaessence" value="1"/>
     <property name="mi_yashafangs" value="1"/>
+    <property name="qe_yashaessence" value="1"/>
    </properties>
   </object>
  </objectgroup>

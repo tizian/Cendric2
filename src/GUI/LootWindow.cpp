@@ -29,7 +29,7 @@ void LootWindow::setLoot(const std::map<string, int>& loot, int gold) {
 	std::map<std::string, std::string> names;
 	loadItemNames(loot, names);
 	for (auto& it : loot) {
-		if (contains(names, it.first)) continue;
+		if (!contains(names, it.first)) continue;
 		if (!lootText.empty()) lootText.append("\n");
 		lootText.append(names.at(it.first));
 		lootText.append(": ");
