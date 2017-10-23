@@ -79,7 +79,7 @@ AttackingBehavior* WardenEnemy::createAttackingBehavior(bool asAlly) {
 }
 
 void WardenEnemy::updateObservedRange() {
-	m_observedRange = (4 - m_mainChar->getInvisibilityLevel()) * 20.f;
+	m_observedRange = (4 - m_mainChar->getInvisibilityLevel()) * 15.f;
 	m_circleSpawner->radius = sf::Vector2f(m_observedRange, m_observedRange);
 	m_pc->setEmitRate(m_observedRange * 1.5f);
 	m_debugCircle.setRadius(m_observedRange);
