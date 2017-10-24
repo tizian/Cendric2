@@ -1,8 +1,6 @@
 #pragma once
 
 #include "global.h"
-#include "CharacterCore.h"
-#include "InputController.h"
 #include "World/TileMap.h"
 #include "BitmapText.h"
 
@@ -77,7 +75,7 @@ private:
 	void setMapIndex(int index);
 	void updateFogOfWar(MapOverlayData* map);
 	MapOverlayData* createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const;
-	sf::Sprite* renderLevelOverlay(float scale);
+	void renderLevelOverlay(float scale);
 	void drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY);
 	float getScale(const sf::Vector2f& mapSize) const;
 	void reloadLevelOverlay();
@@ -96,6 +94,8 @@ private:
 	sf::Sprite m_mainCharMarker;
 	sf::Image m_levelOverlayIcons;
 	std::vector<WaypointMarker*> m_waypoints;
+	sf::Sprite m_levelOverlaySprite;
+	sf::Texture m_levelOverlayTexture;
 
 	int m_currentMap = -1;
 	bool m_isVisible = false;

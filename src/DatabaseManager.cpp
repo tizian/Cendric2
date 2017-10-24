@@ -331,7 +331,7 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 }
 
 LevelitemLightBean* DatabaseManager::getLevelitemLightBean(const std::string& item_id) const {
-	LevelitemLightBean* bean = new LevelitemLightBean();
+	LevelitemLightBean* bean = nullptr;
 	sqlite3_stmt* statement;
 	std::string query = "SELECT * FROM levelitem_light WHERE item_id = '" + item_id + "';";
 

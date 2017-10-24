@@ -6,8 +6,6 @@
 #include "Map/NPC.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const std::string CENDRIC_NAME = "Cendric";
 
 const float DialogueWindow::LEFT_OFFSET = 270.f;	// offset to have space for sprite
@@ -66,6 +64,7 @@ DialogueWindow::~DialogueWindow() {
 	delete m_speakerText;
 	delete m_scrollBar;
 	delete m_scrollHelper;
+	delete m_dialogue;
 }
 
 void DialogueWindow::load(NPC* npc, WorldScreen* screen) {

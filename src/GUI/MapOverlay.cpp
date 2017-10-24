@@ -8,7 +8,6 @@
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
 #include "Structs/LevelData.h"
-#include "Map/DynamicTiles/WaypointTile.h"
 #include "World/Trigger.h"
 
 const float MapOverlay::TOP = 30.f;
@@ -130,12 +129,9 @@ void MapOverlay::updateFogOfWar(MapOverlayData* map) {
 }
 
 float MapOverlay::getScale(const sf::Vector2f& mapSize) const {
-	if (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) {
-		return MAX_WIDTH / mapSize.x;
-	}
-	else {
-		return MAX_HEIGHT / mapSize.y;
-	}
+	return (mapSize.x / MAX_WIDTH > mapSize.y / MAX_HEIGHT) ?
+		MAX_WIDTH / mapSize.x :
+		MAX_HEIGHT / mapSize.y;
 }
 
 MapOverlayData* MapOverlay::createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const {
@@ -168,11 +164,9 @@ MapOverlayData* MapOverlay::createMapOverlayData(const std::string& id, const sf
 	return data;
 }
 
-sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
+void MapOverlay::renderLevelOverlay(float scale) {
 	auto lScreen = dynamic_cast<LevelScreen*>(m_screen);
-	auto level = lScreen->getWorld();
 	auto lData = lScreen->getWorldData();
-	sf::Sprite* sprite = new sf::Sprite();
 
 	// background (white)
 	sf::Image img;
@@ -251,13 +245,10 @@ sf::Sprite* MapOverlay::renderLevelOverlay(float scale) {
 	/////////////////////////////////////////////////////////////////////
 
 	// now convert to texture format
-	auto texture = new sf::Texture();
-	texture->loadFromImage(img);
+	m_levelOverlayTexture.loadFromImage(img);
 
 	// and save as sprite
-	sprite->setTexture(*texture, true);
-
-	return sprite;
+	m_levelOverlaySprite.setTexture(m_levelOverlayTexture, true);
 }
 
 void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY) {
@@ -275,7 +266,8 @@ void MapOverlay::reloadLevelOverlay() {
 		return;
 	}
 
-	m_maps[0]->map = *renderLevelOverlay(m_maps[0]->scale);
+	renderLevelOverlay(m_maps[0]->scale);
+	m_maps[0]->map = m_levelOverlaySprite;
 	m_maps[0]->map.setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
 	m_needsLevelOverlayReload = false;
 }
@@ -293,8 +285,9 @@ void MapOverlay::reloadMaps() {
 		sf::Vector2f mapSize = sf::Vector2f(
 			lScreen->getWorldData()->mapSize.x * TILE_SIZE_F,
 			lScreen->getWorldData()->mapSize.y * TILE_SIZE_F);
+		renderLevelOverlay(getScale(mapSize));
 		MapOverlayData* data = createMapOverlayData(lScreen->getWorldData()->id, lScreen->getWorldData()->mapSize,
-			*renderLevelOverlay(getScale(mapSize)));
+			m_levelOverlaySprite);
 
 		m_maps.push_back(data);
 

@@ -1,7 +1,6 @@
 #include "Level/LevelInterface.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/WorldScreen.h"
-#include "GUI/SlotClone.h"
 #include "World/Item.h"
 
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
@@ -38,6 +37,7 @@ LevelInterface::~LevelInterface() {
 	delete m_spellbook;
 	delete m_questLog;
 	delete m_buffBar;
+	delete m_mapOverlay;
 }
 
 void LevelInterface::render(sf::RenderTarget& target) {
