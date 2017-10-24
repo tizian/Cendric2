@@ -2,7 +2,6 @@
 #include "ResourceManager.h"
 #include "Enums/Language.h"
 
-using namespace std;
 using namespace luabridge;
 
 const std::string CutsceneLoader::CUTSCENE_FOLDER = "res/cutscene/";
@@ -17,7 +16,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& _cutsceneID) {
 	std::string cutsceneID;
 	std::string cutsceneSubfolder;
 	size_t slashPos = _cutsceneID.find("/");
-	if (slashPos != string::npos) {
+	if (slashPos != std::string::npos) {
 		cutsceneSubfolder = _cutsceneID.substr(0, slashPos);
 		cutsceneID = _cutsceneID.substr(slashPos + 1);
 	}

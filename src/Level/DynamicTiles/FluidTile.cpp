@@ -24,6 +24,8 @@ FluidTile::~FluidTile() {
 	}
 	m_soundMap.clear();
 	delete m_ps;
+	delete[] m_leftDeltas;
+	delete[] m_rightDeltas;
 }
 
 bool FluidTile::init(const LevelTileProperties& properties) {

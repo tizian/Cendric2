@@ -1,6 +1,5 @@
 #include "FileIO/QuestLoader.h"
 
-using namespace std;
 using namespace luabridge;
 
 const std::string QuestLoader::QUEST_FOLDER = "res/quest/";

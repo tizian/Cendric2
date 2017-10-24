@@ -4,7 +4,6 @@
 #include "Screens/MapScreen.h"
 #include "Screens/LevelScreen.h"
 #include "Map/NPC.h"
-#include "GlobalResource.h"
 
 using namespace luabridge;
 

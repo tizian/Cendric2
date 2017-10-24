@@ -29,9 +29,7 @@ void Window::init(const sf::FloatRect& box, GUIOrnamentStyle style) {
 }
 
 Window::~Window() {
-	if (m_closeButton) {
-		delete m_closeButton;
-	}
+	delete m_closeButton;
 }
 
 void Window::addCloseButton(const std::function<void()>& agent) {

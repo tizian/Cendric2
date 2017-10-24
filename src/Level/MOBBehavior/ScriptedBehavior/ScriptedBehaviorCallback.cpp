@@ -15,6 +15,7 @@ ScriptedBehaviorCallback::ScriptedBehaviorCallback(const std::string& luaPath, E
 }
 
 ScriptedBehaviorCallback::~ScriptedBehaviorCallback() {
+	delete m_worldCallback;
 }
 
 void ScriptedBehaviorCallback::setScriptedBehavior(ScriptedBehavior* behavior) {

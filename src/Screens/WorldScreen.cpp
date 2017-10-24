@@ -52,6 +52,7 @@ WorldScreen::~WorldScreen() {
 	delete m_interface;
 	delete m_progressLog;
 	delete m_bookWindow;
+	delete m_weatherSystem;
 	clearOverlayQueue();
 }
 
