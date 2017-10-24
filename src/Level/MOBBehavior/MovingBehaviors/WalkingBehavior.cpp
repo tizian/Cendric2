@@ -25,6 +25,12 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 		rec.collisionDirection = m_isFlippedGravity ? CollisionDirection::Up : CollisionDirection::Down;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 		if (m_enemy->getLevel()->collides(rec)) return false;
+
+		if (m_aiTimeout > sf::Time::Zero) {
+			m_aiRecord.shouldJump = false;
+			m_aiRecord.shouldWalk = false;
+			return true;
+		}
 	} 
 
 	// we did not collide with our ghost rec. check if we can jump or walk on.
@@ -86,6 +92,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_mob->setAccelerationX(0.f);
 		m_mob->setVelocityX(0.f);
 	}
+
 
 	m_jumps = false;
 	if (m_collidesX && m_isGrounded) {
@@ -169,6 +176,14 @@ float WalkingBehavior::getDistanceToAbyss() const {
 void WalkingBehavior::makeRandomDecision() {
 	if (!m_isGrounded || m_walksBlindly || !isReady()) return;
 	m_movingDirectionX = rand() % 3 - 1;
+}
+
+void WalkingBehavior::update(const sf::Time& frameTime) {
+	updateTime(m_aiTimeout, frameTime);
+	EnemyMovingBehavior::update(frameTime);
+	if (m_aiTimeout == sf::Time::Zero) {
+		m_aiTimeout = sf::milliseconds((rand() % 2000) + 500);
+	}
 }
 
 void WalkingBehavior::updateAnimation(const sf::Time& frameTime) {

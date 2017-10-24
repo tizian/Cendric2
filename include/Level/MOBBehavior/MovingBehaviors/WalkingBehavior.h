@@ -13,6 +13,7 @@ public:
 	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	void makeRandomDecision() override;
 	void updateAnimation(const sf::Time& frameTime) override;
+	void update(const sf::Time& frameTime) override;
 	void calculateJumpHeight();
 
 	void setDistanceToAbyss(float distance);
@@ -36,4 +37,6 @@ protected:
 	bool m_walksBlindly = false;
 	bool m_collidesX = false;
 	bool m_dropAlways = false;
+
+	sf::Time m_aiTimeout;
 };
