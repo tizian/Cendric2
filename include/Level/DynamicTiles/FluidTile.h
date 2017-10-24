@@ -63,6 +63,7 @@ private:
 
 	float* m_leftDeltas;
 	float* m_rightDeltas;
+	float m_scale;
 
 	sf::VertexArray m_vertexArray;
 

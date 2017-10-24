@@ -73,6 +73,7 @@ void FluidTile::loadAnimation(int skinNr) {
 
 	m_leftDeltas = new float[m_nColumns];
 	m_rightDeltas = new float[m_nColumns];
+	m_scale = m_width / (float)(m_nColumns - 1);
 
 	m_frozenTiles = std::vector<FrozenWaterTile*>(m_nTiles, nullptr);
 
@@ -155,13 +156,9 @@ void FluidTile::update(const sf::Time& frameTime) {
 		}
 	}
 
-	sf::Color transparent = sf::Color(255, 255, 255, 0);
-
-	float scale = m_width / (float)(m_nColumns - 1);
-
 	for (int i = 0; i < m_nColumns - 1; ++i) {
-		sf::Vector2f p1 = sf::Vector2f(m_x + i * scale, m_y + m_height - m_columns[i].height);
-		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * scale, m_y + m_height - m_columns[i + 1].height);
+		sf::Vector2f p1 = sf::Vector2f(m_x + i * m_scale, m_y + m_height - m_columns[i].height);
+		sf::Vector2f p2 = sf::Vector2f(m_x + (i + 1) * m_scale, m_y + m_height - m_columns[i + 1].height);
 		sf::Vector2f p3 = sf::Vector2f(p2.x, m_y + m_height);
 		sf::Vector2f p4 = sf::Vector2f(p1.x, m_y + m_height);
 		sf::Vector2f p5 = sf::Vector2f(p2.x, p2.y - SURFACE_THICKNESS);
@@ -181,9 +178,9 @@ void FluidTile::update(const sf::Time& frameTime) {
 		m_vertexArray[8 * i + 5].position = p2;
 		m_vertexArray[8 * i + 5].color = m_data.color;
 		m_vertexArray[8 * i + 6].position = p5;
-		m_vertexArray[8 * i + 6].color = transparent;
+		m_vertexArray[8 * i + 6].color = COLOR_TRANSPARENT;
 		m_vertexArray[8 * i + 7].position = p6;
-		m_vertexArray[8 * i + 7].color = transparent;
+		m_vertexArray[8 * i + 7].color = COLOR_TRANSPARENT;
 	}
 
 	m_ps->update(frameTime);
