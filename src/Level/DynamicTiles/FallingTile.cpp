@@ -115,7 +115,7 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 			if (tile == nullptr || tile->getDynamicTileID() != LevelDynamicTileID::Ice) continue;
 			const sf::FloatRect& tileBB = *tile->getBoundingBox();
-			if (nextBoundingBoxY.intersects(tileBB)) {
+			if (fastIntersect(nextBoundingBoxY, tileBB)) {
 				tile->setDisposed();
 				return;
 			}

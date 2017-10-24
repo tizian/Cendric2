@@ -22,7 +22,7 @@ void IceTile::update(const sf::Time& frameTime) {
 
 	for (auto it : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
 		if (auto fluidTile = dynamic_cast<FluidTile*>(it)) {
-			if (fluidTile->getBoundingBox()->intersects(m_boundingBox)) {
+			if (fastIntersect(*fluidTile->getBoundingBox(), m_boundingBox)) {
 				int index = static_cast<int>(std::floor((getCenter().x - fluidTile->getPosition().x) / TILE_SIZE));
 				fluidTile->freeze(index);
 			}

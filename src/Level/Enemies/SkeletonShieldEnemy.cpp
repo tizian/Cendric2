@@ -40,7 +40,7 @@ void SkeletonShieldEnemy::handleAttackInput() {
 	if (isAlly() || m_mainChar->isDead()) return;
 
 	const sf::FloatRect& mainCharBB = *m_mainChar->getBoundingBox();
-	if (!mainCharBB.intersects(m_boundingBox)) return;
+	if (!fastIntersect(mainCharBB, m_boundingBox)) return;
 
 	if (m_isHiding) {
 		m_mainChar->setDead();

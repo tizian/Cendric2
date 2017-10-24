@@ -110,14 +110,14 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	const InventorySlot* slot = static_cast<const InventorySlot* >(item->getOriginalSlot());
 	if (!contains(m_slots, slot->getItemType())) return;
 	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
-		if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
+		if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 		}
-		else if (item->getBoundingBox()->intersects(*(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
+		else if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
 		}
 	}
-	else if (item->getBoundingBox()->intersects(*(m_slots.at(slot->getItemType()).getBoundingBox()))) {
+	else if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(slot->getItemType()).getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
 	}
 }

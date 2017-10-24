@@ -34,7 +34,7 @@ void Trigger::update(const sf::Time& frameTime) {
 
 	if (!m_data.isTriggerable) return;
 
-	bool intersects = m_mainChar->getBoundingBox()->intersects(m_data.triggerRect);
+	bool intersects = fastIntersect(*m_mainChar->getBoundingBox(), m_data.triggerRect);
 	if (m_data.isKeyGuarded && intersects) {
 		m_showSprite = intersects;
 

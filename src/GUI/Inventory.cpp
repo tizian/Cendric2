@@ -386,7 +386,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 }
 
 void Inventory::removeEquipmentItem() {
-	if (m_window->getBoundingBox()->intersects(*m_currentClone->getBoundingBox())) {
+	if (fastIntersect(*m_window->getBoundingBox(), *m_currentClone->getBoundingBox())) {
 		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
 		m_core->equipItem("", is->getItemType());
 		reload();

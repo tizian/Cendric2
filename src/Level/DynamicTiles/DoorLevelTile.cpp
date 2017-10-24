@@ -153,7 +153,7 @@ void DoorLevelTile::open() {
 	// unlock keyguarded triggers (which are level exits)
 	for (auto& it : *m_screen->getObjects(GameObjectType::_Overlay)) {
 		if (Trigger* trigger = dynamic_cast<Trigger*>(it)) {
-			if (trigger->getData().isKeyGuarded && m_boundingBox.intersects(*trigger->getBoundingBox())) {
+			if (trigger->getData().isKeyGuarded && fastIntersect(m_boundingBox, *trigger->getBoundingBox())) {
 				trigger->getData().isTriggerable = true;
 			}
 		}
@@ -172,7 +172,7 @@ void DoorLevelTile::close() {
 	// lock keyguarded triggers (which are level exits)
 	for (auto& it : *m_screen->getObjects(GameObjectType::_Overlay)) {
 		if (Trigger* trigger = dynamic_cast<Trigger*>(it)) {
-			if (trigger->getData().isKeyGuarded && m_boundingBox.intersects(*trigger->getBoundingBox())) {
+			if (trigger->getData().isKeyGuarded && fastIntersect(m_boundingBox, *trigger->getBoundingBox())) {
 				trigger->getData().isTriggerable = false;
 			}
 		}

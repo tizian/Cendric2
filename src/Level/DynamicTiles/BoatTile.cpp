@@ -147,7 +147,7 @@ void BoatTile::checkForWind() {
 	float pushAcceleration = 0.f;
 	for (auto const go : *m_spellVec) {
 		if (auto spell = dynamic_cast<WindGustSpell*>(go)) {
-			if (spell->getBoundingBox()->intersects(m_sailBoundingBox)) {
+			if (fastIntersect(*spell->getBoundingBox(), m_sailBoundingBox)) {
 				setAcceleration(sf::Vector2f(spell->getPushAcceleration(), 0.f));
 				m_newState = GameObjectState::Active;
 				return;
@@ -160,7 +160,7 @@ void BoatTile::checkForWind() {
 
 void BoatTile::checkForEnemies() {
 	for (auto const go : m_dynamicTileVec) {
-		if (go->getBoundingBox()->intersects(*getBoundingBox())) {
+		if (fastIntersect(*go->getBoundingBox(), *getBoundingBox())) {
 			destroy();
 			return;
 		}

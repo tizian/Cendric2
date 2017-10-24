@@ -36,7 +36,7 @@ bool YashaRaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* bou
 	for (auto& go : *m_enemies) {
 		if (!go->isViewable()) continue;
 		YashaBossAdd* enemy = dynamic_cast<YashaBossAdd*>(go);
-		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
+		if (enemy != nullptr && fastIntersect(*enemy->getBoundingBox(), *boundingBox)) {
 			enemy->onHit(this);
 			return true;
 		}

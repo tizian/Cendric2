@@ -358,7 +358,7 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 		m_posGen->size.x = m_boundingBox.width;
 		m_lightObject->setSize(sf::Vector2f(m_boundingBox.width * 1.5f, m_lightObject->getSize().y));
 	}
-	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
+	if (fastIntersect(*m_mainChar->getBoundingBox(), m_boundingBox)) {
 		m_mainChar->setDead();
 	}
 }

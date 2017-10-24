@@ -175,7 +175,7 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			if (LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it)) {
 				if (m_isMelting && tile->getDynamicTileID() == LevelDynamicTileID::Ice && tile->isViewable()) {
 					const sf::FloatRect& tileBB = *tile->getBoundingBox();
-					if (nextBoundingBoxY.intersects(tileBB)) {
+					if (fastIntersect(nextBoundingBoxY, tileBB)) {
 						tile->setDisposed();
 					}
 				}
@@ -185,7 +185,7 @@ void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			if (LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it)) {
 				if (tile->getDynamicTileID() == LevelDynamicTileID::Boat && tile->isViewable()) {
 					const sf::FloatRect& tileBB = *tile->getBoundingBox();
-					if (nextBoundingBoxY.intersects(tileBB)) {
+					if (fastIntersect(nextBoundingBoxY, tileBB)) {
 						dynamic_cast<BoatTile*>(tile)->destroy();
 					}
 				}

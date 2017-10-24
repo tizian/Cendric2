@@ -239,7 +239,7 @@ void Spell::reflect() {
 
 bool Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
 	bool collided = false;
-	if (m_mainChar->getBoundingBox()->intersects(*boundingBox)) {
+	if (fastIntersect(*m_mainChar->getBoundingBox(), *boundingBox)) {
 		m_mainChar->onHit(this);
 		collided = true;
 	}
@@ -247,7 +247,7 @@ bool Spell::checkCollisionsWithAllies(const sf::FloatRect* boundingBox) {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (!enemy->isAlly()) continue;
-		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
+		if (fastIntersect(*enemy->getBoundingBox(), *boundingBox)) {
 			enemy->onHit(this);
 			collided = true;
 		}
@@ -261,7 +261,7 @@ bool Spell::checkCollisionsWithEnemies(const sf::FloatRect* boundingBox) {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
 		if (enemy->isAlly()) continue;
-		if (enemy->getBoundingBox()->intersects(*boundingBox)) {
+		if (fastIntersect(*enemy->getBoundingBox(), *boundingBox)) {
 			enemy->onHit(this);
 			collided = true;
 		}

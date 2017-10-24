@@ -44,7 +44,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 
 		if (!m_data.isAlly) {
 			// check collisions with allies
-			if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
+			if (fastIntersect(*m_mainChar->getBoundingBox(), *getBoundingBox())) {
 				m_mainChar->onHit(this);
 				goReturn();
 			}
@@ -52,7 +52,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 				if (!go->isViewable()) continue;
 				Enemy* enemy = dynamic_cast<Enemy*>(go);
 				if (!enemy->isAlly() || enemy->isDead()) continue;
-				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+				if (fastIntersect(*enemy->getBoundingBox(), *getBoundingBox())) {
 					enemy->onHit(this);
 					goReturn();
 				}
@@ -64,7 +64,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 				if (!go->isViewable()) continue;
 				Enemy* enemy = dynamic_cast<Enemy*>(go);
 				if (enemy->isAlly() || enemy->isDead()) continue;
-				if (enemy->getBoundingBox()->intersects(*getBoundingBox())) {
+				if (fastIntersect(*enemy->getBoundingBox(), *getBoundingBox())) {
 					enemy->onHit(this);
 					goReturn();
 				}
@@ -73,7 +73,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 	}
 	else {
 		// check collisions with owner
-		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
+		if (fastIntersect(*m_mob->getBoundingBox(), *getBoundingBox())) {
 			m_mob->addHeal(getHeal(), false, isCritical());
 			setDisposed();
 		}

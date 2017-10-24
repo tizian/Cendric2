@@ -55,11 +55,11 @@ void QuickSlotBar::update(const sf::Time& frameTime) {
 void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) {
 	if (item == nullptr) return;
 	const InventorySlot *is = static_cast<const InventorySlot *>(item->getOriginalSlot());
-	if (item->getBoundingBox()->intersects(*(m_quickSlot1->getBoundingBox()))) {
+	if (fastIntersect(*item->getBoundingBox(), *(m_quickSlot1->getBoundingBox()))) {
 		m_quickSlot1->setItemID(is->getItemID());
 		return;
 	}
-	if (item->getBoundingBox()->intersects(*(m_quickSlot2->getBoundingBox()))) {
+	if (fastIntersect(*item->getBoundingBox(), *(m_quickSlot2->getBoundingBox()))) {
 		m_quickSlot2->setItemID(is->getItemID());
 		return;
 	}

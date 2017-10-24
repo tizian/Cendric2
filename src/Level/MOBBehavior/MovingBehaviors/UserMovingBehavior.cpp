@@ -87,7 +87,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 		}
 
 		// check if we're still on our ladder
-		if (!m_mob->getBoundingBox()->intersects(*m_currentLadder->getBoundingBox())) {
+		if (!fastIntersect(*m_mob->getBoundingBox(), *m_currentLadder->getBoundingBox())) {
 			stopClimbing();
 			checkLadders();
 		}
@@ -104,7 +104,7 @@ void UserMovingBehavior::checkLadders() {
 	for (auto& go : *(m_mob->getScreen()->getObjects(GameObjectType::_DynamicTile))) {
 		LadderTile* tile = dynamic_cast<LadderTile*>(go);
 		if (tile && tile->isViewable() &&
-			tile->getBoundingBox()->intersects(*m_mob->getBoundingBox())) {
+			fastIntersect(*tile->getBoundingBox(), *m_mob->getBoundingBox())) {
 
 			float climbingY = tile->getClimbingPositionY(m_mob);
 

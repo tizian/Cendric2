@@ -322,7 +322,7 @@ void MovingTileSpikes::loadAnimation(bool top, bool bottom, int size) {
 
 void MovingTileSpikes::update(const sf::Time& frameTime) {
 	if (m_mainChar->isDead()) return;
-	if (m_mainChar->getBoundingBox()->intersects(m_boundingBox)) {
+	if (fastIntersect(*m_mainChar->getBoundingBox(), m_boundingBox)) {
 		m_mainChar->setDead();
 	}
 }

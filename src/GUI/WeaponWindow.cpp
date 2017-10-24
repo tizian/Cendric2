@@ -220,7 +220,7 @@ void WeaponWindow::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
 	if (!(g_inputController->isMousePressedLeft())) {
 		if (m_selectedModifierSlot != nullptr) {
-			if (m_currentModifierClone != nullptr && !(m_currentModifierClone->getBoundingBox()->intersects(*m_selectedModifierSlot->getBoundingBox()))) {
+			if (m_currentModifierClone != nullptr && !fastIntersect(*m_currentModifierClone->getBoundingBox(), *m_selectedModifierSlot->getBoundingBox())) {
 				m_core->removeModifier(m_selectedModifierSlot->getSpellSlotNr(), m_selectedModifierSlot->getNr());
 				m_requireReload = true;
 			}
@@ -229,7 +229,7 @@ void WeaponWindow::handleDragAndDrop() {
 			}
 		}
 		if (m_selectedSpellSlot != nullptr) {
-			if (m_currentSpellClone != nullptr && !(m_currentSpellClone->getBoundingBox()->intersects(*m_selectedSpellSlot->getBoundingBox()))) {
+			if (m_currentSpellClone != nullptr && !fastIntersect(*m_currentSpellClone->getBoundingBox(), *m_selectedSpellSlot->getBoundingBox())) {
 				m_core->removeSpell(m_selectedSpellSlot->getNr());
 				m_requireReload = true;
 			}
@@ -346,7 +346,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
 		if (!contains(allowedMods, modifier.type)) continue;
 		for (auto& modifierSlot : it.second) {
-			if (clone->getBoundingBox()->intersects(*modifierSlot.getBoundingBox())) {
+			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot.getBoundingBox())) {
 				m_core->addModifier(ms->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
 				m_requireReload = true;
 				break;
@@ -361,7 +361,7 @@ void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	SpellType type = ss->getSpellType();
 	for (auto& slot : m_weaponSlots) {
 		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) 
-			&& clone->getBoundingBox()->intersects(*slot.first.getBoundingBox())) 
+			&& fastIntersect(*clone->getBoundingBox(), *slot.first.getBoundingBox())) 
 		{
 			m_core->addSpell(ss->getSpellID(), slot.first.getNr());
 			m_requireReload = true;

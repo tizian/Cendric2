@@ -98,7 +98,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 
 	// check for main character
 	auto const& mbb = *m_mainChar->getBoundingBox();
-	if (m_state == GameObjectState::Idle &&  !m_mainChar->isDead() && !m_mainChar->isIgnoreDynamicTiles() && mbb.intersects(m_jumpingRegion)) {
+	if (m_state == GameObjectState::Idle &&  !m_mainChar->isDead() && !m_mainChar->isIgnoreDynamicTiles() && fastIntersect(mbb, m_jumpingRegion)) {
 		auto nextBB = mbb;
 		nextBB.top = m_jumpingRegion.top - nextBB.height - 10.f;
 		WorldCollisionQueryRecord rec;

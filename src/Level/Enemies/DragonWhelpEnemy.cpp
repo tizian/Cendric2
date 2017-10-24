@@ -50,12 +50,12 @@ void DragonWhelpEnemy::loadSpells() {
 void DragonWhelpEnemy::update(const sf::Time& frameTime) {
 	if (m_hatchingTime == sf::Time::Zero) {
 		if (m_isEgg) {
-			if (m_boundingBox.intersects(*m_mainChar->getBoundingBox())) {
+			if (fastIntersect(m_boundingBox, *m_mainChar->getBoundingBox())) {
 				setActive();
 			}
 			for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
 				auto e = dynamic_cast<Enemy*>(go);
-				if (e->isAlly() && m_boundingBox.intersects(*e->getBoundingBox())) {
+				if (e->isAlly() && fastIntersect(m_boundingBox, *e->getBoundingBox())) {
 					setActive();
 				}
 			}

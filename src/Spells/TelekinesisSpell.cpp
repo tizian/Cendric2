@@ -47,7 +47,7 @@ void TelekinesisSpell::update(const sf::Time& frameTime) {
 void TelekinesisSpell::checkCollisionsWithItems() {
 	for (auto& it : *m_items) {
 		if (!it->isViewable()) continue;
-		if (it->getBoundingBox()->intersects(*getBoundingBox())) {
+		if (fastIntersect(*it->getBoundingBox(), *getBoundingBox())) {
 			LevelItem* item = dynamic_cast<LevelItem*>(it);
 			if (item != nullptr) {
 				if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {

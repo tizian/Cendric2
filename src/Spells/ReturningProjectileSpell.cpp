@@ -123,7 +123,7 @@ void ReturningProjectileSpell::update(const sf::Time& frameTime) {
 	else {
 		setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 		// check collisions with owner
-		if (m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
+		if (fastIntersect(*m_mob->getBoundingBox(), *getBoundingBox())) {
 			setDisposed();
 		}
 	}

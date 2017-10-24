@@ -57,7 +57,7 @@ void AureolaSpell::update(const sf::Time& frameTime) {
 	updateTime(m_data.activeDuration, frameTime);
 
 	// check collisions with owner
-	if (m_isReturning && m_mob->getBoundingBox()->intersects(*getBoundingBox())) {
+	if (m_isReturning && fastIntersect(*m_mob->getBoundingBox(), *getBoundingBox())) {
 		m_mob->addHeal(getHeal(), false, isCritical());
 		setDisposed();
 	}

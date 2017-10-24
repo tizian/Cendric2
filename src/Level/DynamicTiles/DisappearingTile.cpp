@@ -114,7 +114,7 @@ void DisappearingTile::respawn() {
 
 void DisappearingTile::checkForMainCharacter() {
 	if (m_isTouched) return;
-	if (m_mainChar->getBoundingBox()->intersects(m_checkBoundingBox)) {
+	if (fastIntersect(*m_mainChar->getBoundingBox(), m_checkBoundingBox)) {
 		touch();
 	}
 }

@@ -13,7 +13,7 @@ FloatTriangle::FloatTriangle(const sf::Vector2f& v1, const sf::Vector2f& v2, con
 }
 
 bool FloatTriangle::intersects(const sf::FloatRect& rect) const {
-	if (!m_aabb.intersects(rect)) return false;
+	if (!fastIntersect(m_aabb, rect)) return false;
 
 	sf::Vector2f rectCenter(rect.left + 0.5f * rect.width, rect.top + 0.5f * rect.height);
 	if (contains(rectCenter)) return true;

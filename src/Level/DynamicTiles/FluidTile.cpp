@@ -303,7 +303,7 @@ void FluidTile::checkForMovableTiles() {
 		if (tile == nullptr) continue;
 
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (m_boundingBox.intersects(tileBB)) {
+		if (fastIntersect(m_boundingBox, tileBB)) {
 			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
 
 			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));
@@ -317,7 +317,7 @@ void FluidTile::checkForMovableTiles() {
 		if (tile == nullptr) continue;
 
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
-		if (m_boundingBox.intersects(tileBB)) {
+		if (fastIntersect(m_boundingBox, tileBB)) {
 			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
 
 			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));

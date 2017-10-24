@@ -58,7 +58,7 @@ bool RaiseTheDeadSpell::checkCollisionsWithEnemies(const sf::FloatRect* bounding
 	for (auto& go : *m_enemies) {
 		if (!go->isViewable()) continue;
 		Enemy* enemy = dynamic_cast<Enemy*>(go);
-		if (enemy != nullptr && (enemy->getBoundingBox()->intersects(*boundingBox))) {
+		if (enemy != nullptr && fastIntersect(*enemy->getBoundingBox(), *boundingBox)) {
 			enemy->onHit(this);
 			return true;
 		}

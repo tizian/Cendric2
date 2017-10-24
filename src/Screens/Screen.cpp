@@ -15,7 +15,7 @@ inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundi
 	view.top -= VIEW_MARGIN;
 	view.width += 2 * VIEW_MARGIN;
 	view.height += 2 * VIEW_MARGIN;
-	return view.intersects(boundingBox);
+	return fastIntersect(view, boundingBox);
 }
 
 Screen::Screen(CharacterCore* core) {

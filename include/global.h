@@ -103,6 +103,13 @@ inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2)
 	return (intersection.width > Epsilon && intersection.height > Epsilon);
 }
 
+inline bool fastIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
+	return !(rect2.left > rect1.left + rect1.width
+		|| rect2.left + rect2.width < rect1.left
+		|| rect2.top > rect1.top + rect1.height
+		|| rect2.top + rect2.height < rect1.top);
+}
+
 inline std::string removeDigits(const std::string& s) {
 	std::string removed = s;
 	removed.erase(std::remove_if(removed.begin(), removed.end(), [](char c) {return isdigit(c); }), removed.end());

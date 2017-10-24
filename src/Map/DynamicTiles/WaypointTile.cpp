@@ -54,7 +54,7 @@ void WaypointTile::loadAnimation(int skinNr) {
 void WaypointTile::update(const sf::Time& frameTime) {
 	MapDynamicTile::update(frameTime);
 	if (m_state == GameObjectState::Active) return;
-	if (m_mainChar->getBoundingBox()->intersects(*getBoundingBox())) {
+	if (fastIntersect(*m_mainChar->getBoundingBox(), *getBoundingBox())) {
 		activateWaypoint();
 	}
 }
