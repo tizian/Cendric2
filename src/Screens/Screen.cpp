@@ -49,24 +49,24 @@ std::vector<GameObject*>* Screen::getObjects(GameObjectType type) {
 	return &m_objects[type];
 }
 
-void Screen::onEnter(Screen* previousScreen) {
-	execOnEnter(previousScreen);
+void Screen::onEnter() {
+	execOnEnter();
 	for (auto& obj : m_toAdd) {
 		m_objects[obj->getConfiguredType()].push_back(obj);
 	}
 	m_toAdd.clear();
 }
 
-void Screen::execOnEnter(Screen*) {
+void Screen::execOnEnter() {
 	// nop
 }
 
-void Screen::onExit(Screen* nextScreen) {
+void Screen::onExit() {
 	deleteAllObjects();
-	execOnExit(nextScreen);
+	execOnExit();
 }
 
-void Screen::execOnExit(Screen*) {
+void Screen::execOnExit() {
 	// nop
 }
 

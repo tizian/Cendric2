@@ -10,7 +10,7 @@ public:
 	~ScreenManager();
 
 	void update(const sf::Time& frameTime);
-	void render(sf::RenderTarget& renderTarget);
+	void render(sf::RenderTarget& renderTarget) const;
 	void setNextScreen(Screen* nextScreen, bool backupCurrentScreen);
 	void resumeBackupScreen();
 	void clearBackupScreen();

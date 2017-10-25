@@ -1,7 +1,9 @@
 #include "Screens/KeyBindingsScreen.h"
+#include "Screens/OptionsScreen.h"
 #include "Screens/MenuScreen.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
+#include "FileIO/ConfigurationWriter.h"
 #include "GlobalResource.h"
 
 const float KeyBindingsScreen::WINDOW_MARGIN = 6.f;
@@ -135,7 +137,7 @@ void KeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 	m_scrollBar->render(renderTarget);
 }
 
-void KeyBindingsScreen::execOnEnter(Screen*) {
+void KeyBindingsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -234,7 +236,7 @@ void KeyBindingsScreen::reload() {
 }
 
 
-void KeyBindingsScreen::execOnExit(Screen*) {
+void KeyBindingsScreen::execOnExit() {
 	// delete texts
 	for (auto& it : m_keyTexts) {
 		delete it.second;

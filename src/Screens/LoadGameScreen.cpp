@@ -1,5 +1,6 @@
 #include "Screens/LoadGameScreen.h"
 #include "Screens/MenuScreen.h"
+#include "Screens/LoadingScreen.h"
 
 LoadGameScreen::LoadGameScreen(CharacterCore* core) : Screen(core) {
 }
@@ -36,7 +37,7 @@ void LoadGameScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(GameObjectType::_Form, renderTarget);
 }
 
-void LoadGameScreen::execOnEnter(Screen*) {
+void LoadGameScreen::execOnEnter() {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("LoadGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -70,7 +71,7 @@ void LoadGameScreen::execOnEnter(Screen*) {
 	setAllButtonsEnabled(true);
 }
 
-void LoadGameScreen::execOnExit(Screen*) {
+void LoadGameScreen::execOnExit() {
 	delete m_title;
 	delete m_newCharacterCore;
 }

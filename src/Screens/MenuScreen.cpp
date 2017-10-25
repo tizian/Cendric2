@@ -1,10 +1,13 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/CutsceneScreen.h"
 #include "Screens/KeyBindingsScreen.h"
+#include "Screens/OptionsScreen.h"
+#include "Screens/SaveGameScreen.h"
+#include "Screens/LoadGameScreen.h"
+#include "Screens/CreditsScreen.h"
 #include "Screens/ScreenManager.h"
+#include "Particles/ParticleSystem.h"
 #include "GUI/GUIConstants.h"
-
-using namespace std;
 
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
@@ -67,7 +70,7 @@ void MenuScreen::render(sf::RenderTarget& renderTarget) {
 	renderTooltipText(renderTarget);
 }
 
-void MenuScreen::execOnEnter(Screen*) {
+void MenuScreen::execOnEnter() {
 	loadNewestSave();
 
 	// add fire particles
@@ -171,7 +174,7 @@ void MenuScreen::loadNewestSave() {
 	m_characterCore->setAutosave(true);
 }
 
-void MenuScreen::execOnExit(Screen*) {
+void MenuScreen::execOnExit() {
 	g_resourceManager->deleteUniqueResources(this);
 }
 

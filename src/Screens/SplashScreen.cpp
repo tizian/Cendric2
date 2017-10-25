@@ -1,5 +1,6 @@
 #include "Screens/SplashScreen.h"
 #include "Screens/ScreenManager.h"
+#include "GUI/GUIConstants.h"
 
 using namespace particles;
 
@@ -25,7 +26,7 @@ SplashScreen::~SplashScreen() {
 	delete m_ps_right;
 }
 
-void SplashScreen::execOnEnter(Screen*) {
+void SplashScreen::execOnEnter() {
 	// add version nr
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -66,7 +67,7 @@ void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_versionText);
 }
 
-void SplashScreen::execOnExit(Screen*) {
+void SplashScreen::execOnExit() {
 	g_resourceManager->deleteUniqueResources(this);
 }
 

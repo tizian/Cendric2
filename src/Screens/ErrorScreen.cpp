@@ -1,7 +1,6 @@
 #include "Screens/ErrorScreen.h"
 #include "Screens/ScreenManager.h"
-
-using namespace std;
+#include "Logger.h"
 
 ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 	ErrorID error = g_resourceManager->pollError()->first;
@@ -38,9 +37,9 @@ void ErrorScreen::execUpdate(const sf::Time& frameTime) {
 	}
 }
 
-void ErrorScreen::execOnEnter(Screen*) {
+void ErrorScreen::execOnEnter() {
 }
 
-void ErrorScreen::execOnExit(Screen*) {
+void ErrorScreen::execOnExit() {
 	g_resourceManager->deleteUniqueResources(this);
 }

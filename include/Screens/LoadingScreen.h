@@ -15,8 +15,8 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	void execOnEnter(Screen *previousScreen) override;
-	void execOnExit(Screen *nextScreen) override;
+	void execOnEnter() override;
+	void execOnExit() override;
 
 private:
 	void loadAsync() const;

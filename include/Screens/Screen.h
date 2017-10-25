@@ -18,11 +18,11 @@ public:
 	virtual void render(sf::RenderTarget& renderTarget) = 0;
 
 	// initializes the m_object vector. called by ALL subclasses
-	void onEnter(Screen* previousScreen);
-	virtual void execOnEnter(Screen* previousScreen);
+	void onEnter();
+	virtual void execOnEnter();
 	// deletes all objects. called by ALL subclasses (screen manager)
-	void onExit(Screen* nextScreen);
-	virtual void execOnExit(Screen* nextScreen);
+	void onExit();
+	virtual void execOnExit();
 
 	// adds a gameobject to the screen. This object is only added to the vector in the next iteration
 	// to avoid invalidation of vector iterators.

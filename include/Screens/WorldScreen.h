@@ -24,7 +24,7 @@ public:
 	virtual void loadSync() = 0;
 
 	void execUpdate(const sf::Time& frameTime) override;
-	void execOnExit(Screen* nextScreen) override;
+	void execOnExit() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void renderAfterForeground(sf::RenderTarget& renderTarget);
 	void updateProgressLog(const sf::Time& frameTime);

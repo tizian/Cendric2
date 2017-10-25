@@ -2,8 +2,7 @@
 #include "Screens/MenuScreen.h"
 #include "Screens/KeyBindingsScreen.h"
 #include "Screens/ScreenManager.h"
-
-using namespace std;
+#include "FileIO/ConfigurationWriter.h"
 
 OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }
@@ -25,7 +24,7 @@ void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 	renderTooltipText(renderTarget);
 }
 
-void OptionsScreen::execOnEnter(Screen*) {
+void OptionsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
@@ -69,7 +68,7 @@ void OptionsScreen::execOnEnter(Screen*) {
 	distFromTop = distFromTop + 80;
 
 	m_volumeSoundSlider = new Slider(0, 100);
-	string volumeText = g_textProvider->getText("SoundVolume");
+	std::string volumeText = g_textProvider->getText("SoundVolume");
 	m_volumeSoundSlider->setTextRaw(volumeText);
 	m_volumeSoundSlider->setUnit("%");
 	m_volumeSoundSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeSound);
@@ -176,7 +175,7 @@ void OptionsScreen::execOnEnter(Screen*) {
 	addObject(button);
 }
 
-void OptionsScreen::execOnExit(Screen*) {
+void OptionsScreen::execOnExit() {
 	// delete texts (buttons are deleted automatically by the screen)
 	delete m_title;
 }

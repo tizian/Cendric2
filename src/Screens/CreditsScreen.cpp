@@ -1,8 +1,8 @@
 #include "Screens/CreditsScreen.h"
 #include "Screens/MenuScreen.h"
 #include "GlobalResource.h"
-
-using namespace std;
+#include "GUI/Button.h"
+#include "GUI/GUIConstants.h"
 
 const float CREDITS_VELOCITY_Y = -36.f;
 
@@ -34,15 +34,14 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 	renderObjects(GameObjectType::_Button, renderTarget);
 }
 
-void CreditsScreen::execOnEnter(Screen*) {
+void CreditsScreen::execOnEnter() {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("Credits"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	m_title->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_title->getLocalBounds().width), 50.f));
 
-	int creditsCharSize = 12;
 	m_credits = new BitmapText(g_textProvider->getText("CreditsText"), TextAlignment::Center);
-	m_credits->setCharacterSize(creditsCharSize);
+	m_credits->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_credits->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_credits->getLocalBounds().width), 0.5f * WINDOW_HEIGHT));
 
 	// add buttons
@@ -54,7 +53,7 @@ void CreditsScreen::execOnEnter(Screen*) {
 	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, false);
 }
 
-void CreditsScreen::execOnExit(Screen*) {
+void CreditsScreen::execOnExit() {
 	g_resourceManager->deleteUniqueResources(this);
 	delete m_title;
 	delete m_credits;

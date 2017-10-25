@@ -3,16 +3,15 @@
 #include "global.h"
 #include "ResourceManager.h"
 #include "Screen.h"
-#include "Screens/LoadingScreen.h"
 #include "Screens/SplashScreen.h"
-#include "Screens/CreditsScreen.h"
-#include "Screens/OptionsScreen.h"
-#include "Screens/LoadGameScreen.h"
-#include "Screens/SaveGameScreen.h"
 #include "CharacterCore.h"
 #include "GUI/Button.h"
 #include "GUI/BitmapText.h"
 #include "GUI/YesOrNoForm.h"
+
+namespace particles {
+	class TextureParticleSystem;
+}
 
 class MenuScreen final : public Screen {
 public:
@@ -22,8 +21,8 @@ public:
 	void execUpdate(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	void execOnEnter(Screen* previousScreen) override;
-	void execOnExit( Screen* nextScreen) override;
+	void execOnEnter() override;
+	void execOnExit() override;
 
 	void setFireParticles(particles::TextureParticleSystem* ps_left, particles::TextureParticleSystem* ps_right);
 

@@ -52,12 +52,10 @@ void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_blackRect);
 }
 
-void LoadingScreen::execOnEnter(Screen* previousScreen) {
+void LoadingScreen::execOnEnter() {
 	m_texture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 	m_texture.update(*g_renderWindow);
 	m_screenSprite.setTexture(m_texture);
 }
 
-void LoadingScreen::execOnExit(Screen*)
-{
-}
+void LoadingScreen::execOnExit() {}
