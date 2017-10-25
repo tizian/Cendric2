@@ -27,6 +27,7 @@ enum class TriggerContentType {
 	SetMap,
 	SetForcedMap,
 	AchievementUnlocked,
+	Music,
 	MAX,
 };
 
@@ -69,4 +70,5 @@ struct TriggerContent final {
 	static TriggerContent startCutscene(const std::string& cutsceneID);
 	static TriggerContent unlockAchievement(const std::string& achievement);
 	static TriggerContent setWeather(const std::string& worldId, const std::string& weather, int dimming);
+	static TriggerContent setMusic(const std::string& musicPath);
 };

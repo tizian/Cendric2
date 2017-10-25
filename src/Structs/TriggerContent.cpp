@@ -71,6 +71,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->exitWorld();
 		screen->setNextScreen(new CutsceneScreen(screen->getCharacterCore(), content.s1));
 		break;
+	case TriggerContentType::Music:
+		g_resourceManager->playMusic(content.s1);
+		break;
 	case TriggerContentType::AchievementUnlocked:
 		screen->getCharacterCore()->notifyAchievementUnlocked(content.s1);
 		break;
@@ -340,6 +343,16 @@ TriggerContent TriggerContent::setWeather(const std::string& worldId, const std:
 	content.i1 = clamp(dimming, 0, 100);
 	content.s1 = worldId;
 	content.s2 = weather;
+	return content;
+}
+
+TriggerContent TriggerContent::setMusic(const std::string& musicPath) {
+	if (musicPath.empty()) {
+		g_logger->logError("TriggerContent", "Music path cannot be empty");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::Music);
+	content.s1 = musicPath;
 	return content;
 }
 

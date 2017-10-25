@@ -470,6 +470,18 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
+				else if (name.find("music") != std::string::npos) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, hint value property not found.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::Music);
+					content.s1 = textAttr;
+
+					trigger.content.push_back(content);
+				}
 				else if (name.find("quest state") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
