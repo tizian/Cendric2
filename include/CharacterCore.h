@@ -51,7 +51,7 @@ public:
 	// reloads only the weapon slots.
 	void reloadWeaponSlots();
 	// base attributes plus the attributes gotten by equipment
-	const AttributeData& getTotalAttributes() const;
+	AttributeData getTotalAttributes() const;
 	// getter for items
 	std::map<std::string, int>* getItems();
 	// an item was added or removed. if itemID equals "gold", gold is added or removed

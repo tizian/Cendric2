@@ -269,12 +269,18 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 		showDocument(clicked->getItem());
 	else if (clicked->getItemType() == ItemType::Spell)
 		learnSpell(clicked->getItem());
-	else if (clicked->getItemType() == ItemType::Permanent)
-		m_levelInterface->getScreen()->setNegativeTooltip("CannotConsumePermanentInLevel");
 	else if (clicked->getItemType() == ItemType::Convertible)
 		convertItem(clicked->getItem());
-	else if (Item::isEquipmentType(clicked->getItemType()))
-		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+	else if (clicked->getItemType() == ItemType::Permanent)
+		dynamic_cast<WorldScreen*>(m_levelInterface->getScreen())->notifyPermanentItemConsumed(clicked->getItem());
+	else if (Item::isEquipmentType(clicked->getItemType())) {
+		if (m_levelInterface->isBossLevel()) {
+			m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+		}
+		else {
+			m_equipment->equipItem(clicked);
+		}
+	}
 }
 
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
@@ -287,8 +293,14 @@ void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
 void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 
-	if (Item::isEquipmentType(clicked->getItemType()))
-		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+	if (Item::isEquipmentType(clicked->getItemType())) {
+		if (m_levelInterface->isBossLevel()) {
+			m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+		}
+		else {
+			m_equipment->equipItem(clicked);
+		}
+	}
 	else if (clicked->getItemType() == ItemType::Consumable)
 		m_levelInterface->equipConsumable(clicked->getItemID());
 }
@@ -412,6 +424,9 @@ void Inventory::handleLevelDrag() {
 	if (selectedSlot->getItemType() == ItemType::Consumable) {
 		m_levelInterface->highlightQuickslots(true);
 	}
+	if (!m_isEquipmentSlotDragged && Item::isEquipmentType(selectedSlot->getItemType()) && !m_levelInterface->isBossLevel()) {
+		m_equipment->highlightEquipmentSlot(selectedSlot->getItemType(), true);
+	}
 }
 
 void Inventory::handleMapDrop() {
@@ -445,7 +460,12 @@ void Inventory::handleLevelDrop() {
 		m_levelInterface->highlightQuickslots(false);
 	}
 	else if (m_isEquipmentSlotDragged || Item::isEquipmentType(type)) {
-		m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+		if (m_levelInterface->isBossLevel()) {
+			m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+		}
+		else {
+			m_equipment->notifyEquipmentDrop(m_currentClone);
+		}
 	}
 }
 

@@ -34,6 +34,10 @@ public:
 	MovingBehavior* createMovingBehavior(bool asAlly = false) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
 
+	void reloadEquipment();
+	void reloadAttributes();
+	void reloadWeapon();
+
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);
 	void addDamage(int damage, DamageType damageType, bool overTime, bool critical) override;

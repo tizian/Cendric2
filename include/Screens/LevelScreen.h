@@ -31,8 +31,10 @@ public:
 	bool exitWorld() override;
 	void notifyBackFromMenu() override;
 	void notifyBossKilled(const EnemyReward& reward);
+	void notifyItemEquip(const std::string& itemID, ItemType type) override;
 	void setEnemyForHealthBar(const Enemy* enemy);
 	void clearConsumedFood();
+	void notifyPermanentItemConsumed(const Item* item) override;
 	Enemy* spawnEnemy(EnemyID enemyId, const sf::Vector2f& position, int skinNr = 0);
 
 	LevelMainCharacter* getMainCharacter() const override;

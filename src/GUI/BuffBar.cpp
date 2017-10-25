@@ -54,6 +54,11 @@ void BuffBar::removeTypedSpellBuffs(SpellID id) {
 	}
 }
 
+void BuffBar::removeFoodBuff() {
+	delete m_foodBuffSlot;
+	m_foodBuffSlot = nullptr;
+}
+
 void BuffBar::render(sf::RenderTarget& target) {
 	if (m_foodBuffSlot != nullptr) m_foodBuffSlot->render(target);
 	for (int i = 0; i < static_cast<int>(m_buffSlots.size()); i++) {

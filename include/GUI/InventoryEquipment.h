@@ -43,7 +43,7 @@ private:
 	WorldScreen* m_screen;
 
 	bool m_isVisible = false;
-	bool m_isInLevel = false;
+	bool m_isModifiable = false;
 
 	std::vector<ItemType> m_types;
 	std::map<ItemType, InventorySlot> m_slots;
