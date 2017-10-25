@@ -31,12 +31,13 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 			m_aiRecord.shouldWalk = false;
 			return true;
 		}
-	} 
+		m_aiTimeout = sf::milliseconds((rand() % 2000) + 500);
+	}
 
 	// we did not collide with our ghost rec. check if we can jump or walk on.
 	m_aiRecord.shouldJump = false;
 	m_aiRecord.shouldWalk = false;
-	
+
 	m_aiRecord.isFlippedGravity = m_isFlippedGravity;
 	m_aiRecord.accelerationGravity = m_isFlippedGravity ? -m_configuredGravity : m_configuredGravity;
 	m_aiRecord.accelerationX = m_isFacingRight ? m_walkAcceleration : -m_walkAcceleration;
@@ -47,9 +48,9 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 	m_aiRecord.dampingGroundPerS = m_dampingGroundPerS;
 	m_aiRecord.isDropAlways = m_dropAlways;
 
-	float landingYPosJump = -1.f;
+	float landingYPosJump;
 	float landingYPosWalk = -1.f;
- 
+
 	m_aiRecord.boundingBox = *m_enemy->getBoundingBox();
 	JumpingGhost* ghost = new JumpingGhost(m_aiRecord, m_mob->getLevel(), m_mob->getScreen());
 	ghost->setVelocityY(m_isFlippedGravity ? m_configuredMaxVelocityYUp : -m_configuredMaxVelocityYUp);
@@ -84,15 +85,14 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (m_jumpsBlindly && m_isGrounded) {
 		m_jumpsBlindly = false;
 	}
-	
+
 	bool collidesY;
-	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	checkXYDirection(nextPosition, m_collidesX, collidesY);
+	const sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
 	if (m_mob->getLevel()->collidesWithEvilTiles(nextBoundingBox)) {
 		m_mob->setAccelerationX(0.f);
 		m_mob->setVelocityX(0.f);
 	}
-
 
 	m_jumps = false;
 	if (m_collidesX && m_isGrounded) {
@@ -144,8 +144,8 @@ void WalkingBehavior::handleTrueAcceleration() {
 		m_jumps = false;
 	}
 
-	float newAccelerationY = m_isFlippedGravity ? -m_gravity : m_gravity;
-	float newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
+	auto const newAccelerationY = m_isFlippedGravity ? -m_gravity : m_gravity;
+	auto const newAccelerationX = m_enemy->getAcceleration().x + m_movingDirectionX * m_walkAcceleration;
 
 	m_nextIsFacingRight = (m_movingDirectionX == 0) ? m_nextIsFacingRight : (m_movingDirectionX == 1);
 
@@ -181,9 +181,6 @@ void WalkingBehavior::makeRandomDecision() {
 void WalkingBehavior::update(const sf::Time& frameTime) {
 	updateTime(m_aiTimeout, frameTime);
 	EnemyMovingBehavior::update(frameTime);
-	if (m_aiTimeout == sf::Time::Zero) {
-		m_aiTimeout = sf::milliseconds((rand() % 2000) + 500);
-	}
 }
 
 void WalkingBehavior::updateAnimation(const sf::Time& frameTime) {
