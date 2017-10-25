@@ -21,6 +21,7 @@ public:
 	void addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	// removes all buffs with the referenced spell id
 	void removeTypedSpellBuffs(SpellID id);
+	void removeFoodBuff();
 
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);

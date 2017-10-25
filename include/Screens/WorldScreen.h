@@ -33,7 +33,7 @@ public:
 	// a quickslot has been assigned.
 	void notifyQuickSlotAssignment(const std::string& itemId, int quickslotNr);
 	// notify permanent item consumed -> change in core, display overlay and progresslog and reload inventory.
-	void notifyPermanentItemConsumed(const Item* item);
+	virtual void notifyPermanentItemConsumed(const Item* item);
 	// notify item change -> change in core, display text and reload inventory. Also reload quest log and check for monitored quest items.
 	void notifyItemChange(const std::string& itemID, int amount);
 	// notify item conversion -> change in core, display text and reload inventory. Also reload quest log and check for monitored quest items.

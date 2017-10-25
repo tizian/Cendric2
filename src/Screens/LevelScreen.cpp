@@ -146,6 +146,11 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	m_mainChar->setInvincible(true);
 }
 
+void LevelScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
+	WorldScreen::notifyItemEquip(itemID, type);
+	dynamic_cast<LevelInterface*>(m_interface)->notifyReloadEquipment();
+}
+
 Enemy* LevelScreen::spawnEnemy(EnemyID enemyId, const sf::Vector2f& position, int skinNr) {
 	Enemy* enemy = ObjectFactory::Instance()->createEnemy(enemyId, getWorld(), this);
 	if (enemy == nullptr) {
@@ -169,6 +174,12 @@ void LevelScreen::setEnemyForHealthBar(const Enemy* enemy) {
 
 void LevelScreen::clearConsumedFood() {
 	dynamic_cast<LevelInterface*>(m_interface)->clearConsumedFood();
+}
+
+void LevelScreen::notifyPermanentItemConsumed(const Item* item) {
+	WorldScreen::notifyPermanentItemConsumed(item);
+	dynamic_cast<LevelInterface*>(m_interface)->notifyReloadAttributes();
+	m_interface->reloadCharacterInfo();
 }
 
 void LevelScreen::quicksave() {
@@ -205,7 +216,12 @@ void LevelScreen::addDotBuffToInterface(const sf::IntRect& textureLocation, cons
 }
 
 void LevelScreen::removeTypedBuffs(SpellID id) {
-	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
+	if (id == SpellID::VOID) {
+		dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeFoodBuff();
+	}
+	else {
+		dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeTypedSpellBuffs(id);
+	}
 }
 
 bool LevelScreen::notifyObservers() {

@@ -1,6 +1,6 @@
 #include "GUI/Spellbook.h"
-#include "Map/MapInterface.h"
 #include "GUI/WeaponWindow.h"
+#include "GUI/WorldInterface.h"
 #include "GUI/SlotClone.h"
 #include "GlobalResource.h"
 
@@ -8,8 +8,9 @@ float Spellbook::WIDTH = 420.f;
 float Spellbook::SPELL_OFFSET = 115.f;
 const sf::Vector2f Spellbook::BUTTON_SIZE = sf::Vector2f(70.f, 57.f);
 
-Spellbook::Spellbook(CharacterCore* core, bool modifiable) {
-	m_core = core;
+Spellbook::Spellbook(WorldInterface* _interface, bool modifiable) {
+	m_interface = _interface;
+	m_core = m_interface->getCore();
 	m_isModifiable = modifiable;
 
 	init();
@@ -37,7 +38,7 @@ void Spellbook::init() {
 	});
 
 	delete m_weaponWindow;
-	m_weaponWindow = new WeaponWindow(m_core, m_isModifiable);
+	m_weaponWindow = new WeaponWindow(m_interface, m_isModifiable);
 	m_weaponWindow->addCloseButton(std::bind(&Spellbook::hide, this));
 
 	// init empty text

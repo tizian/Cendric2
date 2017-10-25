@@ -23,7 +23,7 @@ public:
 	BuffBar& getBuffBar();
 	// consumes a consumable item
 	void consumeItem(const std::string& itemID);
-	// clears the consumabed food fector
+	// clears the consumabed food vector
 	void clearConsumedFood();
 	// restores the consumed food
 	void restoreConsumedFood();
@@ -31,10 +31,18 @@ public:
 	void reloadInventory(const std::string& changeditemID) override;
 	// notifies the character info
 	void notifyCharacterInfo();
+	// notifies that attributes have to be reloaded
+	void notifyReloadAttributes();
+	// notifies that the equipment has to be reloaded
+	void notifyReloadEquipment();
+	// notifies that the weapon has to be reloaded
+	void notifyReloadWeapon();
 	// returns if an enemy health bar is currently displayed
 	bool isEnemyHealthBarDisplayed();
 	// sets the whose healthbar should be displayed
 	void setEnemyForHealthBar(const Enemy* enemy);
+	// wether this is a boss level
+	bool isBossLevel() const;
 
 	void render(sf::RenderTarget& target) override;
 	void renderAfterForeground(sf::RenderTarget& target) override;

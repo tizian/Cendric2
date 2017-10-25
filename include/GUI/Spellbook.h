@@ -12,13 +12,14 @@
 
 class WeaponWindow;
 class SlotClone;
+class WorldInterface;
 
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
 // it is only clickable when in a map.
 class Spellbook final {
 public:
-	Spellbook(CharacterCore* core, bool modifiable);
+	Spellbook(WorldInterface* _interface, bool modifiable);
 	~Spellbook();
 
 	void show();
@@ -37,6 +38,7 @@ public:
 
 private:
 	CharacterCore* m_core;
+	WorldInterface* m_interface;
 	bool m_isVisible = false;
 	bool m_isModifiable;
 

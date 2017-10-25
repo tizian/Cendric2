@@ -9,6 +9,7 @@
 #include "GlobalResource.h"
 #include "World/Item.h"
 #include "Level/LevelEquipment.h"
+#include "Level/LevelMainCharacterLoader.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
@@ -150,6 +151,7 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 }
 
 void LevelMainCharacter::loadWeapon() {
+	m_spellManager->clearSpells();
 	// chop is always set.
 	m_spellKeyMap.clear();
 	m_spellKeyMap.insert({ Key::Chop, 0 });
@@ -168,9 +170,6 @@ void LevelMainCharacter::loadWeapon() {
 	m_spellKeyMap.insert({ Key::ThirdSpell, weapon->getCurrentSpellForSlot(2) == SpellID::VOID ? -1 : ++spellNr });
 	m_spellKeyMap.insert({ Key::FourthSpell, weapon->getCurrentSpellForSlot(3) == SpellID::VOID ? -1 : ++spellNr });
 	m_spellKeyMap.insert({ Key::FifthSpell, weapon->getCurrentSpellForSlot(4) == SpellID::VOID ? -1 : ++spellNr });
-
-	// get spells and add to spell manager
-	m_spellManager->clearSpells();
 
 	// handle chop spell
 	auto const weaponBean = weapon->getBean<ItemWeaponBean>();
@@ -232,9 +231,34 @@ void LevelMainCharacter::loadWeapon() {
 
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
 	m_core = core;
-	m_attributes = core->getTotalAttributes();
 	setPosition(core->getData().currentLevelPosition);
+	m_attributes = m_core->getTotalAttributes();
 	loadWeapon();
+}
+
+void LevelMainCharacter::reloadEquipment() {
+	// remove all equipment
+	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+		go->setDisposed();
+	}
+	// load new
+	LevelMainCharacterLoader::loadEquipment(m_screen);
+
+	loadWeapon();
+	reloadAttributes();
+}
+
+void LevelMainCharacter::reloadWeapon() {
+	loadWeapon();
+}
+
+void LevelMainCharacter::reloadAttributes() {
+	// reloading attributes won't heal you, my dear.
+	// it will even remove food
+	dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::VOID);
+	auto missingHealth = m_attributes.maxHealthPoints - m_attributes.currentHealthPoints;
+	m_attributes = m_core->getTotalAttributes();
+	m_attributes.currentHealthPoints = std::max(0, m_attributes.currentHealthPoints - missingHealth);
 }
 
 void LevelMainCharacter::setInvisibilityLevel(int level) {

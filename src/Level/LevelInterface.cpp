@@ -1,6 +1,6 @@
 #include "Level/LevelInterface.h"
 #include "Level/LevelMainCharacter.h"
-#include "Screens/WorldScreen.h"
+#include "Screens/LevelScreen.h"
 #include "World/Item.h"
 
 LevelInterface::LevelInterface(WorldScreen* screen, LevelMainCharacter* character) : WorldInterface(screen),
@@ -12,7 +12,7 @@ m_character(character) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen, character->getAttributes());
 	m_quickSlotBar = new QuickSlotBar(this);
-	m_spellbook = new Spellbook(m_core, false);
+	m_spellbook = new Spellbook(this, !level->getWorldData()->isBossLevel);
 	m_questLog = new QuestLog(m_core);
 	m_mapOverlay = new MapOverlay(m_screen, m_mapSidebar);
 	m_buffBar = new BuffBar(this);
@@ -86,6 +86,10 @@ void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {
 	m_enemyHealthBar->setVisible(true);
 }
 
+bool LevelInterface::isBossLevel() const {
+	return dynamic_cast<LevelScreen*>(m_screen)->getWorld()->getWorldData()->isBossLevel;
+}
+
 BuffBar& LevelInterface::getBuffBar() {
 	return *m_buffBar;
 }
@@ -137,6 +141,27 @@ void LevelInterface::reloadInventory(const std::string& changedItemID) {
 
 void LevelInterface::notifyCharacterInfo() {
 	m_characterInfo->notifyChange();
+}
+
+void LevelInterface::notifyReloadAttributes() {
+	m_character->reloadAttributes();
+}
+
+void LevelInterface::notifyReloadEquipment() {
+	m_character->reloadEquipment();
+	if (m_spellSelection) {
+		m_spellSelection->reload();
+	}
+	if (m_mainCharHealthBar) {
+		m_mainCharHealthBar->setAttributes(m_character->getAttributes());
+	}
+}
+
+void LevelInterface::notifyReloadWeapon() {
+	m_character->reloadWeapon();
+	if (m_spellSelection) {
+		m_spellSelection->reload();
+	}
 }
 
 bool LevelInterface::isEnemyHealthBarDisplayed() {

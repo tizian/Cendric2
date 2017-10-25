@@ -14,6 +14,7 @@
 #include "GUI/GUIConstants.h"
 
 class SlotClone;
+class WorldInterface;
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
@@ -21,7 +22,7 @@ class SlotClone;
 class WeaponWindow final {
 	friend class Spellbook;
 public:
-	WeaponWindow(CharacterCore* core, bool modifiable);
+	WeaponWindow(WorldInterface* _interface, bool modifiable);
 	~WeaponWindow();
 
 	void show();
@@ -49,6 +50,7 @@ public:
 	void reload();
 
 private:
+	WorldInterface* m_interface;
 	CharacterCore* m_core;
 	SpellDescriptionWindow* m_spellDesc = nullptr;
 	void reloadSpellDesc();
@@ -58,6 +60,7 @@ private:
 
 	void init();
 	void clearAllSlots();
+	void notifyLevelReload();
 
 	Window* m_window = nullptr;
 	const Weapon* m_weapon;

@@ -559,7 +559,7 @@ int CharacterCore::getReputation(FractionID fraction) const {
 	return m_data.reputationProgress.at(fraction);
 }
 
-const AttributeData& CharacterCore::getTotalAttributes() const {
+AttributeData CharacterCore::getTotalAttributes() const {
 	return m_totalAttributes;
 }
 

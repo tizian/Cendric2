@@ -1,10 +1,11 @@
 #include "GUI/WeaponWindow.h"
-#include "Map/MapInterface.h"
 #include "GUI/SlotClone.h"
+#include "Level/LevelInterface.h"
 #include "ResourceManager.h"
 
-WeaponWindow::WeaponWindow(CharacterCore* core, bool modifiable) {
-	m_core = core;
+WeaponWindow::WeaponWindow(WorldInterface* _interface, bool modifiable) {
+	m_interface = _interface;
+	m_core = m_interface->getCore();
 	m_isModifiable = modifiable;
 
 	init();
@@ -12,6 +13,13 @@ WeaponWindow::WeaponWindow(CharacterCore* core, bool modifiable) {
 
 void WeaponWindow::addCloseButton(const std::function<void()>& agent) {
 	m_window->addCloseButton(agent);
+}
+
+
+void WeaponWindow::notifyLevelReload() {
+	auto levelInterface = dynamic_cast<LevelInterface*>(m_interface);
+	if (!levelInterface) return;
+	levelInterface->notifyReloadWeapon();
 }
 
 void WeaponWindow::reload() {
@@ -33,7 +41,10 @@ void WeaponWindow::reload() {
 
 	clearAllSlots();
 
-	if (m_weapon == nullptr) return;
+	if (m_weapon == nullptr) {
+		notifyLevelReload();
+		return;
+	}
 
 	float xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 	float yOffset = TOP + Spellbook::SPELL_OFFSET;
@@ -76,6 +87,8 @@ void WeaponWindow::reload() {
 	if (m_selectedSpellSlot != nullptr && m_selectedSpellSlot->getNr() != -1) {
 		m_weaponSlots.at(m_selectedSpellSlot->getNr()).first.select();
 	}
+
+	notifyLevelReload();
 }
 
 void WeaponWindow::reloadSpellDesc() {

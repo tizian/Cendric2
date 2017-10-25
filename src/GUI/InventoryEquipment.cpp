@@ -2,7 +2,7 @@
 #include "GUI/SlotClone.h"
 #include "GUI/GUIConstants.h"
 #include "Screens/WorldScreen.h"
-#include "Screens/MapScreen.h"
+#include "Screens/LevelScreen.h"
 #include "GlobalResource.h"
 
 float MARGIN = 10.f;
@@ -12,7 +12,8 @@ float InventoryEquipment::WIDTH = 100.f;
 InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
-	m_isInLevel = (dynamic_cast<MapScreen*>(screen) == nullptr);
+	auto lScreen = dynamic_cast<LevelScreen*>(screen);
+	m_isModifiable = !lScreen || !lScreen->getWorldData()->isBossLevel;
 
 	// init window
 	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
@@ -58,7 +59,7 @@ void InventoryEquipment::update(const sf::Time& frameTime) {
 	// check whether an item was selected
 	for (auto& it : m_slots) {
 		it.second.update(frameTime);
-		if (!m_isInLevel && (it.second.isRightClicked() || it.second.isDoubleClicked())) {
+		if (m_isModifiable && (it.second.isRightClicked() || it.second.isDoubleClicked())) {
 			// unequip item
 			m_screen->notifyItemEquip("", it.first);
 			break;

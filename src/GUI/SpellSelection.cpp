@@ -62,6 +62,7 @@ void SpellSelection::reload() {
 	if (!m_spellSlots.empty()) {
 		selectSlot(0);
 	}
+	m_selectedSlot = 0;
 }
 
 void SpellSelection::show() {

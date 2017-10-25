@@ -4,8 +4,6 @@
 #include "World/Item.h"
 #include "GameObjectComponents/LightComponent.h"
 
-using namespace std;
-
 LevelMainCharacter* LevelMainCharacterLoader::loadMainCharacter(Screen* screen, Level* level) {
 	LevelMainCharacter* mainChar = new LevelMainCharacter(level);
 	screen->addObject(mainChar);
@@ -22,7 +20,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 	}
 
 	// the order of the ids in this vector determine the update and rendering order. 
-	vector<ItemType> equipmentOrder;
+	std::vector<ItemType> equipmentOrder;
 
 	equipmentOrder.push_back(ItemType::Equipment_body);
 	equipmentOrder.push_back(ItemType::Equipment_head);
@@ -32,7 +30,7 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 	equipmentOrder.push_back(ItemType::Equipment_ring_1);
 	equipmentOrder.push_back(ItemType::Equipment_ring_2);
 	
-	vector<string> gameData;
+	std::vector<std::string> gameData;
 	for (auto& it : equipmentOrder) {
 		if (screen->getCharacterCore()->getEquippedItem(it).empty()) continue;
 		gameData.push_back(screen->getCharacterCore()->getEquippedItem(it));

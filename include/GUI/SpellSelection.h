@@ -20,15 +20,13 @@ public:
 	void render(sf::RenderTarget& target);
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
+	void reload();
 
 private:
 	SpellManager* m_spellManager;
 	bool m_isVisible = true;
 
 	std::vector<SpellSlot> m_spellSlots;
-
-	// reloads the spells, depending on the manager
-	void reload();
 
 	// as seen from the bottom left corner
 	const sf::Vector2f SPELLSELECTION_OFFSET = sf::Vector2f(10.f, 20.f);
