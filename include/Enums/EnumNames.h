@@ -327,6 +327,8 @@ public:
 		case EnemyID::Boss_Royalguard_T:
 		case EnemyID::Boss_Royalguard_I:
 			return "BossRoyalguard";
+		case EnemyID::King:
+			return "Yaslaw";
 		}
 	}
 
