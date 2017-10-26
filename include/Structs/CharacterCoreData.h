@@ -6,10 +6,10 @@
 #include "Enums/SpellType.h"
 #include "Enums/FractionID.h"
 #include "Enums/Key.h"
+#include "Enums/ItemType.h"
 
 #include "Structs/SpellModifier.h"
 #include "Structs/AttributeData.h"
-#include "Structs/MerchantData.h"
 #include "Structs/WeatherData.h"
 
 typedef std::vector<std::pair<std::string, std::pair<sf::Vector2i, std::vector<bool>>>> ExploredTiles;
@@ -19,6 +19,7 @@ struct CharacterCoreData final {
 	sf::Time timePlayed;
 	std::string saveGameName;
 	std::time_t dateSaved = time(nullptr);
+	bool hashValid = false;
 
 	// position & progress
 	FractionID guild = FractionID::VOID;

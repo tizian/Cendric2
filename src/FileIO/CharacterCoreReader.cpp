@@ -1,7 +1,8 @@
 #include "FileIO/CharacterCoreReader.h"
 #include "Misc/CBit.h"
+#include "Enums/ItemType.h"
 
-#include <cstring>
+#include <sstream>
 
 #define INT_AFTER_COMMA(s, i) if (!readIntAfterComma(s, &i)) return false;
 #define FLOAT_AFTER_COMMA(s, f) if (!readFloatAfterComma(s, &f)) return false;
@@ -11,6 +12,7 @@ CharacterCoreReader::CharacterCoreReader() {
 }
 
 void CharacterCoreReader::initReadMap() {
+	m_readMap.insert({ HASH,  &CharacterCoreReader::readHash });
 	m_readMap.insert({ TIME_PLAYED,  &CharacterCoreReader::readTimePlayed });
 	m_readMap.insert({ SAVE_GAME_NAME,  &CharacterCoreReader::readSavegameName });
 	m_readMap.insert({ DATE_SAVED,  &CharacterCoreReader::readSavegameDate });
@@ -73,6 +75,13 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	std::size_t colonPos;
 	std::string tag;
 	bool noError = true;
+
+	std::stringstream buffer;
+	buffer << saveFile.rdbuf();
+	std::string allText = buffer.str();
+	allText.erase(0, allText.find("\n") + 1);
+	allText.erase(0, allText.find("\n") + 1);
+	m_correctHash = hashFile(allText);
 
 	while (!safeGetline(saveFile, line).eof()) {
 		if (line.empty() || line.at(0) == COMMENT_MARKER) continue;
@@ -177,6 +186,11 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
 		}
 	}
 
+	return true;
+}
+
+bool CharacterCoreReader::readHash(std::string& line, CharacterCoreData& data) const {
+	data.hashValid = line.compare(m_correctHash) == 0;
 	return true;
 }
 
@@ -811,8 +825,7 @@ bool CharacterCoreReader::readWaypointsUnlocked(std::string& line, CharacterCore
 	while (pos != std::string::npos) {
 		line = line.substr(pos + 1);
 		sf::Vector2f v;
-		int id;
-		id = std::stoi(line);
+		int idInt = std::stoi(line);
 		pos = line.find(',');
 		if (pos == std::string::npos) return false;
 		line = line.substr(pos + 1);
@@ -822,7 +835,7 @@ bool CharacterCoreReader::readWaypointsUnlocked(std::string& line, CharacterCore
 		line = line.substr(pos + 1);
 		v.y = std::stof(line);
 		pos = line.find(',');
-		layer[id] = v;
+		layer[idInt] = v;
 	}
 
 	data.waypointsUnlocked.insert({ id, layer });

@@ -1,6 +1,10 @@
 #include "FileIO/CharacterCoreWriter.h"
 #include "Enums/EnumNames.h"
 #include "Misc/CBit.h"
+#include "Logger.h"
+#include "Enums/ItemType.h"
+
+#include <fstream>
 
 bool CharacterCoreWriter::createFile(const std::string& filename) const {
 	if (std::ifstream(filename)) {
@@ -19,48 +23,53 @@ bool CharacterCoreWriter::createFile(const std::string& filename) const {
 bool CharacterCoreWriter::saveToFile(const std::string& filename, const CharacterCoreData& data) const {
 	std::ofstream savefile(filename, std::ios::trunc);
 	if (savefile.is_open()) {
-		savefile << writeTimePlayed(data);
-		savefile << writeSaveGameName(data);
-		savefile << writeDateSaved(data);
-		savefile << writeLevelID(data);
-		savefile << writeLevelPosition(data);
-		savefile << writeIsInLevel(data);
-		savefile << writeMapID(data);
-		savefile << writeMapPosition(data);
-		savefile << writeForcedMapID(data);
-		savefile << writeForcedMapPosition(data);
-		savefile << writeAttributes(data);
-		savefile << writeGold(data);
-		savefile << writeItemID(data);
-		savefile << writeStoredGold(data);
-		savefile << writeStoredItemID(data);
-		savefile << writeEquippedWeaponSlots(data);
-		savefile << writeEquippedItems(data);
-		savefile << writeWeaponConfigurations(data);
-		savefile << writeWeaponSpell(data);
-		savefile << writeQuickslots(data);
-		savefile << writeEnemiesKilled(data);
-		savefile << writeEnemiesLooted(data);
-		savefile << writeItemsLooted(data);
-		savefile << writeChestsLooted(data);
-		savefile << writeWaypointsUnlocked(data);
-		savefile << writeModifiersUnlocked(data);
-		savefile << writeTriggersTriggered(data);
-		savefile << writeDoorsOpen(data);
-		savefile << writeTilesExplored(data);
-		savefile << writeQuestStates(data);
-		savefile << writeQuestProgressTargets(data);
-		savefile << writeQuestProgressConditions(data);
-		savefile << writeQuestProgressDescription(data);
-		savefile << writeProgressConditions(data);
-		savefile << writeGuild(data);
-		savefile << writeReputationProgress(data);
-		savefile << writeMerchantStates(data);
-		savefile << writeSpellsLearned(data);
-		savefile << writeModifiersLearned(data);
-		savefile << writeHintsLearned(data);
-		savefile << writeWeather(data);
-		savefile << writeDeaths(data);
+		std::string toHash;
+		toHash.append(writeTimePlayed(data));
+		toHash.append(writeTimePlayed(data));
+		toHash.append(writeSaveGameName(data));
+		toHash.append(writeDateSaved(data));
+
+		toHash.append(writeLevelID(data));
+		toHash.append(writeLevelPosition(data));
+		toHash.append(writeIsInLevel(data));
+		toHash.append(writeMapID(data));
+		toHash.append(writeMapPosition(data));
+		toHash.append(writeForcedMapID(data));
+		toHash.append(writeForcedMapPosition(data));
+		toHash.append(writeAttributes(data));
+		toHash.append(writeGold(data));
+		toHash.append(writeItemID(data));
+		toHash.append(writeStoredGold(data));
+		toHash.append(writeStoredItemID(data));
+		toHash.append(writeEquippedWeaponSlots(data));
+		toHash.append(writeEquippedItems(data));
+		toHash.append(writeWeaponConfigurations(data));
+		toHash.append(writeWeaponSpell(data));
+		toHash.append(writeQuickslots(data));
+		toHash.append(writeEnemiesKilled(data));
+		toHash.append(writeEnemiesLooted(data));
+		toHash.append(writeItemsLooted(data));
+		toHash.append(writeChestsLooted(data));
+		toHash.append(writeWaypointsUnlocked(data));
+		toHash.append(writeModifiersUnlocked(data));
+		toHash.append(writeTriggersTriggered(data));
+		toHash.append(writeDoorsOpen(data));
+		toHash.append(writeTilesExplored(data));
+		toHash.append(writeQuestStates(data));
+		toHash.append(writeQuestProgressTargets(data));
+		toHash.append(writeQuestProgressConditions(data));
+		toHash.append(writeQuestProgressDescription(data));
+		toHash.append(writeProgressConditions(data));
+		toHash.append(writeGuild(data));
+		toHash.append(writeReputationProgress(data));
+		toHash.append(writeMerchantStates(data));
+		toHash.append(writeSpellsLearned(data));
+		toHash.append(writeModifiersLearned(data));
+		toHash.append(writeHintsLearned(data));
+		toHash.append(writeWeather(data));
+		toHash.append(writeDeaths(data));
+
+		savefile << writeAndHash(toHash);
 
 		savefile.close();
 	}
@@ -69,6 +78,12 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		return false;
 	}
 	return true;
+}
+
+std::string CharacterCoreWriter::writeAndHash(const std::string& in) const {
+	std::string hash = "# a magical number that stops you from modifying the saved game \n";
+	hash.append(std::string(HASH) + ":" + hashFile(in) + "\n");
+	return hash + in;
 }
 
 std::string CharacterCoreWriter::writeTimePlayed(const CharacterCoreData& data) const {

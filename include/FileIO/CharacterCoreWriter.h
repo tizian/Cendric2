@@ -1,11 +1,7 @@
 #pragma once
 
-#include <fstream>
-
 #include "global.h"
-#include "Logger.h"
 
-#include "Enums/ItemType.h"
 #include "Structs/CharacterCoreData.h"
 #include "FileIO/CharacterCoreIO.h"
 
@@ -19,6 +15,10 @@ public:
 	bool createFile(const std::string& filename) const;
 
 private:
+	std::string writeAndHash(const std::string& in) const;
+
+private:
+
 	std::string writeTimePlayed(const CharacterCoreData& data) const;
 	std::string writeSaveGameName(const CharacterCoreData& data) const;
 	std::string writeDateSaved(const CharacterCoreData& data) const;

@@ -5,6 +5,8 @@
 #include "DatabaseManager.h"
 #include "GlobalResource.h"
 #include "AchievementManager.h"
+#include "FileIO/CharacterCoreReader.h"
+#include "FileIO/CharacterCoreWriter.h"
 
 CharacterCore::CharacterCore() {
 	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {

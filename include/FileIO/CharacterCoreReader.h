@@ -2,9 +2,7 @@
 
 #include "global.h"
 #include "FileIO/Reader.h"
-#include "Logger.h"
 
-#include "Enums/ItemType.h"
 #include "Structs/CharacterCoreData.h"
 #include "FileIO/CharacterCoreIO.h"
 
@@ -17,6 +15,10 @@ public:
 	bool readCharacterCore(const std::string& fileName, CharacterCoreData& data, bool onlySaveGame = false);
 
 private:
+	std::string m_correctHash;
+
+private:
+	bool readHash(std::string& line, CharacterCoreData& data) const;
 	bool readTimePlayed(std::string& line, CharacterCoreData& data) const;
 	bool readSavegameName(std::string& line, CharacterCoreData& data) const;
 	bool readSavegameDate(std::string& line, CharacterCoreData& data) const;

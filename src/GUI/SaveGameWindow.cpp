@@ -30,7 +30,7 @@ inline bool ends_with(const std::string& value, const std::string& ending) {
 }
 
 struct sort_date {
-	inline bool operator() (const SaveGameEntry* save1, const SaveGameEntry* save2) {
+	bool operator() (const SaveGameEntry* save1, const SaveGameEntry* save2) {
 		return (*save1 > *save2);
 	}
 };
@@ -341,6 +341,10 @@ bool SaveGameEntry::load(const std::string& filename) {
 	std::string stringSeconds = std::to_string(secondsPlayed) + " s";
 	std::string formattedTime = stringHours + stringMinutes + stringSeconds;
 	m_timePlayed.setString(formattedTime);
+
+	if (!data.hashValid) {
+		m_name.setColor(COLOR_BAD);
+	}
 	return true;
 }
 

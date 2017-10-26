@@ -2,15 +2,13 @@
 
 #include "global.h"
 #include "ResourceManager.h"
-#include "FileIO/CharacterCoreReader.h"
-#include "FileIO/CharacterCoreWriter.h"
 #include "FileIO/QuestLoader.h"
-#include "World/Item.h"
 #include "World/Weapon.h"
 
 #include "Structs/AttributeData.h"
 #include "Structs/CharacterCoreData.h"
 #include "Structs/Condition.h"
+#include "Structs/MerchantData.h"
 #include "ScreenOverlays/ScreenOverlay.h"
 
 class ScreenManager;

@@ -7,6 +7,8 @@ class CharacterCoreIO {
 public:
 	virtual ~CharacterCoreIO() {};
 protected:
+	std::string hashFile(const std::string& input) const;
+protected:
 	// savegame attributes
 	const char* TIME_PLAYED = "time.played";
 	const char* SAVE_GAME_NAME = "savegame.name";
@@ -66,4 +68,7 @@ protected:
 
 	// quickslot assignment
 	const char* QUICKSLOT = "quickslot";
+
+	// hash
+	const char* HASH = "hash";
 };
