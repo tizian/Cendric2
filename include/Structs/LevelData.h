@@ -18,6 +18,7 @@ struct LevelData final : WorldData {
 	std::vector<EnemyData> enemies;
 
 	std::string bossLevelPath;
+	int autoscrollerSpeed = 0;
 	bool isBossLevel = false;
 	bool isObserved = false;
 };

@@ -589,6 +589,9 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		else if (name.compare("bosslevel") == 0) {
 			if (!readBosslevel(_property, data)) return false;
 		}
+		else if (name.compare("autoscroller") == 0) {
+			if (!readAutoscroller(_property, data)) return false;
+		}
 		else if (name.compare("lock_teleport") == 0) {
 			data.isTeleportLocked = true;
 		}
@@ -648,6 +651,25 @@ bool LevelReader::readBosslevel(tinyxml2::XMLElement* _property, WorldData& data
 	}
 	data->bossLevelPath = textAttr;
 	data->isBossLevel = true;
+
+	return true;
+}
+
+bool LevelReader::readAutoscroller(tinyxml2::XMLElement* _property, WorldData& data_) const {
+	LevelData* data = static_cast<LevelData*>(&data_);
+	if (data == nullptr) return false;
+	const char* textAttr = nullptr;
+	textAttr = _property->Attribute("value");
+	if (textAttr == nullptr) {
+		logError("XML file could not be read, no value attribute found (map->properties->property->name=autoscroller).");
+		return false;
+	}
+	auto speed = std::atoi(textAttr);
+	if (abs(speed) < 1 || abs(speed) > 1000) {
+		logError("autoscroller absolute speed must be between 1 and 1000");
+		return false;
+	}
+	data->autoscrollerSpeed = speed;
 
 	return true;
 }

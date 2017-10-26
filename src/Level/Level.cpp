@@ -5,12 +5,8 @@
 const float Level::CAMERA_WINDOW_HEIGHT = 200.f;
 const float Level::CAMERA_WINDOW_WIDTH = 200.f;
 
-
 Level::Level() : World() {
 	m_worldData = &m_levelData;
-	m_camera = new SpeedupPullCamera();
-	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
-	m_camera->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
 
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesTop);
 	m_avoidableTiles.insert(LevelDynamicTileID::SpikesBottom);
@@ -22,6 +18,22 @@ Level::Level() : World() {
 	m_evilTiles.insert(LevelDynamicTileID::SpikesBottom);
 	m_evilTiles.insert(LevelDynamicTileID::Falling);
 	m_evilTiles.insert(LevelDynamicTileID::Damaging);
+}
+
+void Level::loadCamera() {
+	if (abs(m_levelData.autoscrollerSpeed) > 0) {
+		auto cam = new AutoscrollerCamera();
+		cam->setAutoscrollerSpeed(m_levelData.autoscrollerSpeed);
+		cam->setCameraCenterX(WINDOW_WIDTH * 0.4);
+		cam->setScreen(m_screen);
+		m_camera = cam;
+	}
+	else {
+		auto cam = new SpeedupPullCamera();
+		m_camera = cam;
+	}
+	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
+	m_camera->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
 }
 
 Level::~Level() {
@@ -65,6 +77,7 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	m_backgroundTileMap.load(m_levelData, m_levelData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_levelData, m_levelData.foregroundTileLayers);
+	loadCamera();
 
 	g_resourceManager->loadLevelResources();
 	return true;

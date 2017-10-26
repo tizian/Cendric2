@@ -1,4 +1,4 @@
-#include "World/SpeedupPullCamera.h"
+#include "World/Camera/SpeedupPullCamera.h"
 #include "InputController.h"
 
 void SpeedupPullCamera::update(const sf::Time& frameTime) {
@@ -10,14 +10,6 @@ void SpeedupPullCamera::update(const sf::Time& frameTime) {
 		m_cameraTop += CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
-}
-
-void SpeedupPullCamera::setCameraWindowHeight(float height) {
-	m_cameraWindowHeight = height;
-}
-
-void SpeedupPullCamera::setCameraWindowWidth(float width) {
-	m_cameraWindowWidth = width;
 }
 
 void SpeedupPullCamera::setFocusCenter(const sf::Vector2f& center) {
@@ -40,8 +32,4 @@ void SpeedupPullCamera::setFocusCenter(const sf::Vector2f& center) {
 		m_cameraTop = center.y - m_cameraWindowHeight;
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
-}
-
-const sf::Vector2f& SpeedupPullCamera::getCameraCenter() const {
-	return m_cameraCenter;
 }

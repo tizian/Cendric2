@@ -6,7 +6,8 @@
 #include "Level/LevelDynamicTile.h"
 #include "Level/BossLevel.h"
 #include "LevelLoader.h"
-#include "World/SpeedupPullCamera.h"
+#include "World/Camera/SpeedupPullCamera.h"
+#include "World/Camera/AutoscrollerCamera.h"
 #include "Structs/AIWalkingQueryRecord.h"
 
 // a sidescroller level
@@ -51,6 +52,9 @@ public:
 	void executeBossEnding(bool win);
 
 private:
+	void loadCamera();
+
+private:
 	// data loaded by the level loader
 	LevelData m_levelData;
 	std::vector<GameObject*>* m_dynamicTiles;
@@ -60,7 +64,7 @@ private:
 	// checks for collisions with those specific tiles
 	bool collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 
-	SpeedupPullCamera* m_camera;
+	Camera* m_camera;
 	static const float CAMERA_WINDOW_WIDTH;
 	static const float CAMERA_WINDOW_HEIGHT;
 

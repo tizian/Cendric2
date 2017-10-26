@@ -25,7 +25,6 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 	if (savefile.is_open()) {
 		std::string toHash;
 		toHash.append(writeTimePlayed(data));
-		toHash.append(writeTimePlayed(data));
 		toHash.append(writeSaveGameName(data));
 		toHash.append(writeDateSaved(data));
 
