@@ -21,7 +21,11 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
-	void setColor(const sf::Color& color);
+
+	void setColorSelected();
+	void setColorDeselected();
+	void setColorMouseover();
+	
 	void onLeftClick() override;
 	void select();
 	void deselect();
@@ -35,8 +39,11 @@ public:
 	}
 
 private:
+	void setColor(const sf::Color& color);
+
 	bool m_isSelected = false;
 	bool m_isClicked = false;
+	bool m_isHashValid = false;
 	BitmapText m_dateSaved;
 	BitmapText m_name;
 	BitmapText m_timePlayed;

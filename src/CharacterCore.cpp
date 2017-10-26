@@ -76,6 +76,7 @@ void CharacterCore::loadNew() {
 	m_data.currentMapPosition = spawn->map_pos;
 	m_data.attributes.currentHealthPoints = 100;
 	m_data.attributes.maxHealthPoints = 100;
+	m_data.hashValid = true;
 	addItem(spawn->armor_id, 1);
 	addItem(spawn->weapon_id, 1);
 	equipItem(spawn->armor_id, ItemType::Equipment_body);

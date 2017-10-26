@@ -69,7 +69,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeWeather(data));
 		toHash.append(writeDeaths(data));
 
-		savefile << writeAndHash(toHash);
+		savefile << writeAndHash(toHash, data);
 
 		savefile.close();
 	}
@@ -80,9 +80,11 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 	return true;
 }
 
-std::string CharacterCoreWriter::writeAndHash(const std::string& in) const {
-	std::string hash = "# a magical number that stops you from modifying the saved game \n";
-	hash.append(std::string(HASH) + ":" + hashFile(in) + "\n");
+std::string CharacterCoreWriter::writeAndHash(const std::string& in, const CharacterCoreData& data) const {
+	std::string hash = data.hashValid ? 
+		"# a magical number that stops you from modifying the saved game \n" : 
+		"# you shouldn't have modified that saved game \n";
+	hash.append(std::string(HASH) + ":" + (data.hashValid ? hashFile(in) : "0") + "\n");
 	return hash + in;
 }
 

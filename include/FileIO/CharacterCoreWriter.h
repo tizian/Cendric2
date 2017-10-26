@@ -15,7 +15,7 @@ public:
 	bool createFile(const std::string& filename) const;
 
 private:
-	std::string writeAndHash(const std::string& in) const;
+	std::string writeAndHash(const std::string& in, const CharacterCoreData& data) const;
 
 private:
 

@@ -139,13 +139,13 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 
 	for (size_t i = 0; i < m_entries.size(); ++i) {
 		if (i == static_cast<size_t>(m_chosenEntry)) {
-			m_entries[i]->setColor(COLOR_WHITE);
+			m_entries[i]->setColorSelected();
 		}
 		else if (g_inputController->isMouseOver(m_entries[i]->getBoundingBox(), true)) {
-			m_entries[i]->setColor(COLOR_LIGHT_PURPLE);
+			m_entries[i]->setColorMouseover();
 		}
 		else {
-			m_entries[i]->setColor(COLOR_GREY);
+			m_entries[i]->setColorDeselected();
 		}
 	}
 
@@ -342,9 +342,7 @@ bool SaveGameEntry::load(const std::string& filename) {
 	std::string formattedTime = stringHours + stringMinutes + stringSeconds;
 	m_timePlayed.setString(formattedTime);
 
-	if (!data.hashValid) {
-		m_name.setColor(COLOR_BAD);
-	}
+	m_isHashValid = data.hashValid;
 	return true;
 }
 
@@ -369,6 +367,18 @@ void SaveGameEntry::setColor(const sf::Color& color) {
 	m_dateSaved.setColor(color);
 }
 
+void SaveGameEntry::setColorSelected() {
+	setColor(m_isHashValid ? COLOR_WHITE : COLOR_BAD);
+}
+
+void SaveGameEntry::setColorDeselected() {
+	setColor(m_isHashValid ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
+}
+
+void SaveGameEntry::setColorMouseover() {
+	setColor(m_isHashValid ? COLOR_LIGHT_PURPLE : COLOR_ELEMENTAL);
+}
+
 void SaveGameEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
 	renderTarget.draw(m_timePlayed);
@@ -386,9 +396,6 @@ bool SaveGameEntry::isClicked() {
 }
 
 void SaveGameEntry::select() {
-	m_name.setColor(COLOR_WHITE);
-	m_dateSaved.setColor(COLOR_WHITE);
-	m_timePlayed.setColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -397,9 +404,6 @@ GameObjectType SaveGameEntry::getConfiguredType() const {
 }
 
 void SaveGameEntry::deselect() {
-	m_name.setColor(COLOR_GREY);
-	m_dateSaved.setColor(COLOR_GREY);
-	m_timePlayed.setColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

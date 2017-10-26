@@ -83,6 +83,8 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 	allText.erase(0, allText.find("\n") + 1);
 	m_correctHash = hashFile(allText);
 
+	saveFile.seekg(0, std::ios::beg);
+
 	while (!safeGetline(saveFile, line).eof()) {
 		if (line.empty() || line.at(0) == COMMENT_MARKER) continue;
 
