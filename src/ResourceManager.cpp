@@ -134,7 +134,9 @@ void ResourceManager::init() {
 
 template<typename T> void ResourceManager::loadResource(std::map<std::string, T*>& holder, const std::string& typeName, const std::string& filename, ResourceType type, void* owner) {
 	if (filename.empty()) return;
-	if (contains(holder, filename)) return; // resource already loaded
+	if (contains(holder, filename)) {
+		return; // resource already loaded
+	}
 
 	if (type == ResourceType::Unique && owner == nullptr) {
 		g_logger->logError("ResourceManager", typeName + " could not be registered as unique, owner not set: " + getResourcePath(std::string(filename)));

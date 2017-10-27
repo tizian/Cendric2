@@ -33,6 +33,16 @@ loadRoutine = function(R, W)
 			R:wait(1000)
 			R:goToTile(46,18)
 			R:setLooped(false)
+            
+        elseif (W:isItemEquipped("we_walkingpole") and not W:isConditionFulfilled("trigger","tutorial_started")) then
+            R:setTalkingActive(true)
+			R:setReloadEnabled(true)
+			R:setTilePosition(44, 17)
+			
+			R:wait(1000)
+			R:goToTile(40,17)
+			R:wait(1000)
+			R:goToTile(44,17)
 			
 		else
 			R:setTalkingActive(true)

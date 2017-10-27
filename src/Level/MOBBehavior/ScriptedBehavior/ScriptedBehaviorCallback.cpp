@@ -122,6 +122,17 @@ void ScriptedBehaviorCallback::executeSpell(int spell, int x, int y) {
 	}
 }
 
+void ScriptedBehaviorCallback::switchLever() {
+	if (m_isRoutineFunction) {
+		RoutineStep step;
+		step.state = RoutineState::SwitchLever;
+		m_scriptedBehavior->addRoutineStep(step);
+	}
+	else {
+		// todo
+	}
+}
+
 void ScriptedBehaviorCallback::setFacingLeft() {
 	if (m_isRoutineFunction) {
 		RoutineStep step;

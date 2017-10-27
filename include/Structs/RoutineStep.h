@@ -9,6 +9,7 @@ enum class RoutineState {
 	Saying,
 	Animation,
 	Spell,
+	SwitchLever,
 	Disappearing,
 	ReloadLock,
 	ReloadUnlock,
