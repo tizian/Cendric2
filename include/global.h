@@ -142,7 +142,7 @@ inline void updateTime(sf::Time& time, const sf::Time& frameTime) {
 }
 
 // versioning
-#define CENDRIC_VERSION_NR "0.6.2"
+#define CENDRIC_VERSION_NR "0.6.3 - Peter"
 
 // max frame time (in seconds)
 #define MAX_FRAME_TIME 0.05f

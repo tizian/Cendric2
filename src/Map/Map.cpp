@@ -71,7 +71,7 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 
 	// check collidable rects
 	for (auto& rect  : m_mapData.collidableRects) {
-		if (fastIntersect(rect, rec.boundingBox)) {
+		if (epsIntersect(rect, rec.boundingBox)) {
 			calculateCollisionLocations(rec, rect);
 		}
 	}

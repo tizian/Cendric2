@@ -32,38 +32,76 @@ void MapMainCharacter::update(const sf::Time& frameTime) {
 }
 
 void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	const sf::FloatRect& bb = *getBoundingBox();
+
+	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;
 
-	bool isMovingY = nextPosition.y != getBoundingBox()->top;
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
-	bool isMovingRight = nextPosition.x > getBoundingBox()->left;
-	bool isMovingDown = nextPosition.y > getBoundingBox()->top;
+	bool isMovingY = nextPosition.y != bb.top;
+	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingDown = nextPosition.y > bb.top;
 
-	// check for collision on x axis
+	if (!isMovingX && !isMovingY) return;
+
+	// should we use strategy 2: try y direction first, then x direction?
+	bool tryYfirst = false;
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-	if (isMovingX && m_map->collides(rec)) {
-		setAccelerationX(0.f);
-		setVelocityX(0.f);
-		if (!rec.noSafePos) {
+	if (m_map->collides(rec)) {
+		if (std::abs(nextPosition.x - rec.safeLeft) > 5.f) {
+			tryYfirst = true;
+		}
+	}
+
+	if (!tryYfirst) {
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+		if (isMovingX && m_map->collides(rec)) {
+			setAccelerationX(0.f);
+			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
 			nextBoundingBoxY.left = rec.safeLeft;
 		}
+		else {
+			nextBoundingBoxY.left = nextPosition.x;
+		}
+
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
+
+		if (isMovingY && m_map->collides(rec)) {
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
+			setPositionY(rec.safeTop);
+		}
 	}
 	else {
-		nextBoundingBoxY.left = nextPosition.x;
-	}
+		// check for collision on y axis
+		rec.boundingBox = nextBoundingBoxY;
+		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
 
-	// check for collision on y axis
-	rec.boundingBox = nextBoundingBoxY;
-	rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-	if (isMovingY && m_map->collides(rec)) {
-		setAccelerationY(0.f);
-		setVelocityY(0.f);
-		if (!rec.noSafePos) {
+		if (isMovingY && m_map->collides(rec)) {
+			setAccelerationY(0.f);
+			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
+			nextBoundingBoxX.top = rec.safeTop;
+		}
+		else {
+			nextBoundingBoxX.top = nextPosition.y;
+		}
+
+		// check for collision on x axis
+		rec.boundingBox = nextBoundingBoxX;
+		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+
+		if (isMovingX & m_map->collides(rec)) {
+			setAccelerationX(0.f);
+			setVelocityX(0.f);
+			setPositionX(rec.safeLeft);
 		}
 	}
 }
