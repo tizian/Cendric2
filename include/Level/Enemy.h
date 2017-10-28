@@ -71,6 +71,8 @@ public:
 	virtual void setAlly(const sf::Time& ttl);
 	void setEnemyName(const std::string& name);
 	void setQuestRelevant(bool relevant);
+	// switches the nearest lever
+	void switchLever();
 
 	GameObjectType getConfiguredType() const override;
 	

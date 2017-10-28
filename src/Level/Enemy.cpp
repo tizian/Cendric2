@@ -4,6 +4,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Level/DynamicTiles/LeverTile.h"
 #include "Level/Level.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/LevelScreen.h"
@@ -279,6 +280,24 @@ void Enemy::setEnemyName(const std::string& name) {
 
 void Enemy::setQuestRelevant(bool relevant) {
 	m_isQuestRelevant = relevant;
+}
+
+void Enemy::switchLever() {
+	LeverTile* nearest = nullptr;
+	float nearestDist = 10000.f;
+	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		auto tile = dynamic_cast<LeverTile*>(go);
+		if (!tile) continue;
+		auto distance = dist(tile->getCenter(), getCenter());
+		if (distance < nearestDist) {
+			nearestDist = distance;
+			nearest = tile;
+		}
+	}
+
+	if (nearest) {
+		nearest->switchLever();
+	}
 }
 
 void Enemy::setAlly(const sf::Time& ttl) {

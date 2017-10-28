@@ -44,6 +44,7 @@ bool ScriptedBehaviorCallback::loadLua(const std::string& path, ScriptedBehavior
 		.addFunction("executeFightAnimation", &ScriptedBehaviorCallback::executeFightAnimation)
 		.addFunction("gotoTile", &ScriptedBehaviorCallback::gotoTile)
 		.addFunction("executeSpell", &ScriptedBehaviorCallback::executeSpell)
+		.addFunction("switchLever", &ScriptedBehaviorCallback::switchLever)
 		.endClass();
 
 	if (luaL_dofile(m_L, getResourcePath(path).c_str()) != 0) {
@@ -129,7 +130,7 @@ void ScriptedBehaviorCallback::switchLever() {
 		m_scriptedBehavior->addRoutineStep(step);
 	}
 	else {
-		// todo
+		m_enemy->switchLever();
 	}
 }
 

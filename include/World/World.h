@@ -7,6 +7,8 @@
 #include "Structs/WorldData.h"
 #include "Structs/WorldCollisionQueryRecord.h"
 
+class MainCharacter;
+
 // a level or a map in the cendric world
 class World {
 
@@ -18,7 +20,7 @@ public:
 	virtual void update(const sf::Time& frameTime);
 
 	virtual bool load(const std::string& id, WorldScreen* screen) = 0;
-	virtual void loadAfterMainChar() = 0;
+	virtual void loadAfterMainChar(MainCharacter* mainChar) = 0;
 	// loads lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
 	virtual void loadForRenderTexture() = 0;
 	// sets the target view to the correct world view with the focus center focus.

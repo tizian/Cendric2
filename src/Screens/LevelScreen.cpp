@@ -37,7 +37,7 @@ void LevelScreen::loadAsync() {
 	m_characterCore->initializeLevelMaps(m_levelID);
 
 	m_mainChar = LevelMainCharacterLoader::loadMainCharacter(this, &m_currentLevel);
-	m_currentLevel.loadAfterMainChar();
+	m_currentLevel.loadAfterMainChar(m_mainChar);
 	LevelMainCharacterLoader::loadEquipment(this);
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
@@ -357,7 +357,7 @@ void LevelScreen::flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture
 
 void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	sf::Vector2f focus = m_mainChar->getCenter();
-
+	
 	// Render level background and content to window				(Normal level background rendered)
 	m_currentLevel.drawBackgroundLayers(renderTarget, sf::RenderStates::Default, focus);
 	m_currentLevel.setWorldView(renderTarget, focus);

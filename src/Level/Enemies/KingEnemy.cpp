@@ -1,6 +1,7 @@
 #include "Level/Enemies/KingEnemy.h"
-#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/NeutralWalkingBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::King, KingEnemy)
@@ -17,17 +18,7 @@ void KingEnemy::loadAttributes() {
 }
 
 void KingEnemy::loadSpells() {
-	SpellData telekinesis = SpellData::getSpellData(SpellID::Telekinesis);
-	telekinesis.fightingTime = sf::milliseconds(500);
-	telekinesis.castingTime = sf::milliseconds(300);
-	telekinesis.isBlocking = true;
-	telekinesis.range = 500;
-	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
-	
-	m_spellManager->addSpell(telekinesis);
-	m_spellManager->setCurrentSpell(0);
-
-	setAlly(sf::Time::Zero);
+	// nop, he hasn't got any skillz.
 }
 
 float KingEnemy::getConfiguredDistanceToHPBar() const {
@@ -35,7 +26,7 @@ float KingEnemy::getConfiguredDistanceToHPBar() const {
 }
 
 void KingEnemy::handleAttackInput() {
-	return;
+	// nop, this cowardly king doesn't fight.
 }
 
 void KingEnemy::loadAnimation(int skinNr) {
@@ -54,7 +45,7 @@ void KingEnemy::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
+	idleAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -64,45 +55,32 @@ void KingEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
-	Animation* castingAnimation = new Animation();
-	castingAnimation->setSpriteSheet(tex);
-	for (int i = 10; i < 15; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
-	}
-	castingAnimation->setLooped(false);
-
-	addAnimation(GameObjectState::Casting, castingAnimation);
-
-	Animation* fightingAnimation = new Animation();
+	Animation* fightingAnimation = new Animation(sf::seconds(1.f));
 	fightingAnimation->setSpriteSheet(tex);
-	for (int i = 14; i > 9; --i) {
-		fightingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
-	}
+	fightingAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
 	fightingAnimation->setLooped(false);
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
-
-	Animation* deadAnimation = new Animation();
-	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(14 * size, 0, size, size));
-	deadAnimation->setLooped(false);
-
-	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+
+	// light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(getBoundingBox()->width, 0.f),
+		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.width * 2.f), 0.6f), this));
 }
 
 MovingBehavior* KingEnemy::createMovingBehavior(bool asAlly) {
-	auto behavior = new AllyWalkingBehavior(this);
+	auto behavior = new NeutralWalkingBehavior(this);
 
 	behavior->setDistanceToAbyss(10.f);
-	behavior->setApproachingDistance(50.f);
+	behavior->setApproachingDistance(10.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityYDown(800.f);
-	behavior->setMaxVelocityX(200.f);
+	behavior->setMaxVelocityX(300.f);
 	behavior->setDropAlways(true);
-	behavior->setReplaceDistance(300.f);
+	behavior->setDefaultFightAnimation(sf::seconds(1.f), GameObjectState::Fighting);
 	behavior->calculateJumpHeight();
 	return behavior;
 }
@@ -110,7 +88,7 @@ MovingBehavior* KingEnemy::createMovingBehavior(bool asAlly) {
 AttackingBehavior* KingEnemy::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
 
-	behavior = new AllyBehavior(this);
+	behavior = new NeutralBehavior(this);
 	behavior->setAggroRange(0.f);
 	behavior->setAttackInput(std::bind(&KingEnemy::handleAttackInput, this));
 	return behavior;

@@ -68,7 +68,7 @@ void MapScreen::loadAsync() {
 	m_characterCore->initializeMapMaps(m_mapID);
 
 	m_mainChar = MapMainCharacterLoader::loadMainCharacter(this, &m_currentMap);
-	m_currentMap.loadAfterMainChar();
+	m_currentMap.loadAfterMainChar(m_mainChar);
 	MapMainCharacterLoader::loadEquipment(this);
 
 	if (m_currentMap.getWorldData()->explorable) {

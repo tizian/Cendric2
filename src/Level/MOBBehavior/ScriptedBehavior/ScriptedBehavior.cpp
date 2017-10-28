@@ -106,6 +106,9 @@ void ScriptedBehavior::setCurrentRoutineStep() {
 		m_enemy->executeSpell(spell, step.goal);
 		break;
 	}
+	case RoutineState::SwitchLever: 
+		m_enemy->switchLever();
+		break;
 	default:
 		break;
 	}

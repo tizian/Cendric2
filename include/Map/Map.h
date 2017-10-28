@@ -11,7 +11,7 @@ public:
 	~Map();
 
 	bool load(const std::string& id, WorldScreen* screen) override;
-	void loadAfterMainChar() override;
+	void loadAfterMainChar(MainCharacter* character) override;
 	// loads lights. this happens AFTER everything else and is because of our nice RENDERTEXTURE PROBLEM >:(
 	void loadForRenderTexture() override;
 	void setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const override;

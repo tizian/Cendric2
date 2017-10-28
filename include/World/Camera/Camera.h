@@ -13,6 +13,8 @@ public:
 	virtual void setFocusCenter(const sf::Vector2f& center);
 	const sf::Vector2f& getCameraCenter() const;
 
+	float getCameraLeft() const { return m_cameraLeft; }
+
 protected:
 	sf::Vector2f m_cameraCenter;
 	float m_cameraLeft = 0;

@@ -47,9 +47,22 @@ void LevelMainCharacter::updateDamagedOverlay() {
 	}
 }
 
+void LevelMainCharacter::updateAutoscroller() {
+	if (m_isDead || !m_autoscroller) return;
+
+	auto pos = getPosition();
+	if (pos.x < m_autoscroller->getCameraLeft()) {
+		setPositionX(m_autoscroller->getCameraLeft());
+	}
+	else if (pos.x > m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width) {
+		setPositionX(m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width);
+	}
+}
+
 void LevelMainCharacter::update(const sf::Time& frameTime) {
 	LevelMovableGameObject::update(frameTime);
 	updateDamagedOverlay();
+	updateAutoscroller();
 
 	// update the sprite color time
 	if (m_equipmentColoredTime > sf::Time::Zero) {
@@ -227,6 +240,10 @@ void LevelMainCharacter::loadWeapon() {
 		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
 		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
 	}
+}
+
+void LevelMainCharacter::setAutoscroller(AutoscrollerCamera* camera) {
+	m_autoscroller = camera;
 }
 
 void LevelMainCharacter::setCharacterCore(CharacterCore* core) {

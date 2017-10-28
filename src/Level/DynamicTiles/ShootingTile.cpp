@@ -67,7 +67,7 @@ void ShootingTile::loadSpells() {
 		m_activeTime = sf::seconds(1.f);
 		m_spellOffsetTime = sf::seconds(0.5f);
 		m_recoveringTime = sf::seconds(20.f);
-		m_cooldown = sf::seconds(100.f);
+		m_cooldown = sf::seconds(1.f);
 		break;
 	}
 

@@ -25,7 +25,7 @@ void Level::loadCamera() {
 		auto cam = new AutoscrollerCamera();
 		cam->setAutoscrollerSpeed(m_levelData.autoscrollerSpeed);
 		cam->setCameraCenterX(WINDOW_WIDTH * 0.4);
-		cam->setScreen(m_screen);
+		cam->setLevelSize(sf::Vector2f(m_levelData.mapSize.x * TILE_SIZE_F, m_levelData.mapSize.y * TILE_SIZE_F));
 		m_camera = cam;
 	}
 	else {
@@ -49,9 +49,10 @@ void Level::dispose() {
 	g_resourceManager->deleteLevelResources();
 }
 
-void Level::loadAfterMainChar() {
+void Level::loadAfterMainChar(MainCharacter* mainChar) {
 	LevelLoader loader;
 	loader.loadAfterMainChar(m_levelData, dynamic_cast<LevelScreen*>(m_screen), this);
+	dynamic_cast<LevelMainCharacter*>(mainChar)->setAutoscroller(dynamic_cast<AutoscrollerCamera*>(m_camera));
 }
 
 bool Level::load(const std::string& id, WorldScreen* screen) {

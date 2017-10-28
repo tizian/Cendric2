@@ -3,8 +3,6 @@
 #include "Level/LevelMovableGameObject.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const float SpeechBubble::MIN_SIZE = 20.f;
 const float SpeechBubble::MAX_LENGTH = 250.f;
 const float SpeechBubble::TEXT_MARGIN = 10.f;
@@ -59,6 +57,7 @@ void SpeechBubble::render(sf::RenderTarget& renderTarget) {
 
 void SpeechBubble::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+
 	setPosition(sf::Vector2f(m_owner->getPosition().x, 
 		m_owner->getPosition().y - m_boundingBox.height - m_floatingHeight));
 }

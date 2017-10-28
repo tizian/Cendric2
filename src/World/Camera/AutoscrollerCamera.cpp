@@ -25,18 +25,11 @@ void AutoscrollerCamera::setCameraCenterX(float x) {
 	m_cameraCenter.x = x;
 }
 
-void AutoscrollerCamera::setScreen(Screen* screen) {
-	m_screen = screen;
+void AutoscrollerCamera::setLevelSize(const sf::Vector2f& levelSize) {
+	m_levelSize = levelSize;
 }
 
 void AutoscrollerCamera::setFocusCenter(const sf::Vector2f& center) {
-	// check whether out of view
-	if (center.x < m_cameraLeft || center.x > m_cameraLeft + WINDOW_WIDTH) {
-		auto levelMainChar = (*m_screen->getObjects(GameObjectType::_LevelMainCharacter))[0];
-		if (auto mainChar = dynamic_cast<LevelMainCharacter*>(levelMainChar)) {
-			mainChar->setDead();
-		}
-	}
 	// check vertically
 	if (center.y < m_cameraTop) {
 		m_cameraTop = center.y;
@@ -46,4 +39,6 @@ void AutoscrollerCamera::setFocusCenter(const sf::Vector2f& center) {
 		m_cameraTop = center.y - m_cameraWindowHeight;
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
 	}
+
+	m_cameraLeft = std::min(m_levelSize.x - WINDOW_WIDTH, m_cameraLeft);
 }

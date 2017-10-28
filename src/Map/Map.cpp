@@ -36,7 +36,7 @@ void Map::dispose() {
 	g_resourceManager->deleteMapResources();
 }
 
-void Map::loadAfterMainChar() {
+void Map::loadAfterMainChar(MainCharacter* character) {
 	MapLoader::loadAfterMainChar(m_mapData, dynamic_cast<MapScreen*>(m_screen));
 }
 

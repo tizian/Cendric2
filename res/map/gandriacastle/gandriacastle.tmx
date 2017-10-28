@@ -383,7 +383,7 @@
   </object>
   <object id="158" x="1000" y="250" width="50" height="25">
    <properties>
-    <property name="level entry" value="res/level/hallway/hallway.tmx,100,500"/>
+    <property name="level entry" value="res/level/hallway/hallway.tmx,210,560"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

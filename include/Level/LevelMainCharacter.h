@@ -11,6 +11,7 @@
 #include "TargetManager.h"
 
 class ParticleComponent;
+class AutoscrollerCamera;
 
 // Cendric in a level
 class LevelMainCharacter final : public LevelMovableGameObject, public MainCharacter {
@@ -30,6 +31,7 @@ public:
 	void setDebugBoundingBox(const sf::Color& color) override { LevelMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { LevelMovableGameObject::setState(state); }
 	void setState(GameObjectState state, bool updateAnimation) override { LevelMovableGameObject::setState(state, updateAnimation); }
+	void setAutoscroller(AutoscrollerCamera* camera);
 
 	MovingBehavior* createMovingBehavior(bool asAlly = false) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly = false) override;
@@ -79,6 +81,7 @@ private:
 
 	void loadComponents();
 	void updateDamagedOverlay();
+	void updateAutoscroller();
 	static int getSpellFromKey(Key key);
 
 private:
@@ -96,4 +99,5 @@ private:
 	sf::Time m_particleTime = sf::seconds(2.f);
 	sf::Time m_equipmentColoredTime = sf::Time::Zero;
 	bool m_isInputLock = false;
+	AutoscrollerCamera* m_autoscroller = nullptr;
 };
