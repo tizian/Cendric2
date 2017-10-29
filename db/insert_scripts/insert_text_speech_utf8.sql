@@ -65,7 +65,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ya
 
 -- King Logan III
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King1', 'speech','Aaaaah!','Aaaaah!', 'Aaaaah!');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King2', 'speech','Hah! How''s this?','Hah! Wie schmeckt dir das?', 'Hah! We findsch das?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King2', 'speech','How d''you like this?','Wie schmeckt dir das?', 'We findsch das?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King3', 'speech','Just die already!','Stirb endlich!', 'Stirb endlich!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King4', 'speech','Hahahahah!','Hahahahah!', 'Hahahahah!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King5', 'speech','Kill him!','Tötet ihn!', 'Töted ihn!');

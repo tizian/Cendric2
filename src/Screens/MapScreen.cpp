@@ -109,6 +109,11 @@ void MapScreen::notifyConditionAdded(const Condition& condition) {
 void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	WorldScreen::notifyItemEquip(itemID, type);
 	MapMainCharacterLoader::loadEquipment(this);
+	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
+		if (NPC* npc = dynamic_cast<NPC*>(it)) {
+			npc->notifyReloadNeeded();
+		}
+	}
 }
 
 void MapScreen::execOnExit() {
