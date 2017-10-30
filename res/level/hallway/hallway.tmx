@@ -879,7 +879,7 @@
   <object id="157" x="3700" y="550" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/veliusroom/veliusroom.tmx,500,500"/>
+    <property name="map entry" value="res/map/veliusroom/veliusroom.tmx,640,890"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

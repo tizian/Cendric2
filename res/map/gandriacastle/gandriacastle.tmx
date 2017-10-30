@@ -2,7 +2,6 @@
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="159">
  <properties>
   <property name="dimming" value="0.3"/>
-  <property name="lock_teleport" value=""/>
   <property name="musicpath" value="res/music/castle.ogg"/>
   <property name="tilesetpath" value="res/map/gandriacastle/tileset_map_gandriacastle.png"/>
  </properties>

@@ -14,6 +14,7 @@ public:
 	void load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) override;
 	void update(const sf::Time& frameTime) override;
 	void calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const override;
+	void setViewable(bool value) override;
 
 	void onOwnerDisposed() override;
 

@@ -2,6 +2,8 @@
 #include "GameObjectComponents/LightComponent.h"
 
 void AureolaSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
+	m_isAlwaysUpdate = true;
+
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 
 	Animation* spellAnimation = new Animation(sf::seconds(0.3f));
@@ -35,6 +37,10 @@ void AureolaSpell::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vec
 		nextVel.x = getVelocity().x;
 		nextVel.y = getVelocity().y;
 	}
+}
+
+void AureolaSpell::setViewable(bool value) {
+	MovableGameObject::setViewable(value);
 }
 
 void AureolaSpell::update(const sf::Time& frameTime) {

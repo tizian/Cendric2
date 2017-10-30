@@ -116,7 +116,7 @@ npc.id:npc_robert2
 	[
 		# Link node, tag is next tag
 		tag:21
-		condition:DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("npc_robert2", "cairn_active")
+		condition:DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("default", "plateau_open")
 		# translation: 
 		translation.tag:DL_Choice_Cairn
 		translation.en:Have you seen any cairn wraiths around here?
@@ -413,9 +413,23 @@ npc.id:npc_robert2
 	trigger:DL:addConditionProgress("npc_robert2", "cairn")
 	# translation: 
 	translation.tag:DL_Robert_Cairn
-	translation.en:Hm, no. They don't seem to like nec... ehr, my kind of magic.
-	translation.de:Hm, nein. Sie mögen irgendwie keine Nek... ähm, meine Art von Magie.
-	translation.ch:Hm, nei. Si hend glaub Nek... äh, mini Magie, nid so gern.
+	translation.en:Hm... Maybe on the plateau behind the crypt.
+	translation.de:Hm... Vielleicht auf der Ebene hinter der Krypta.
+	translation.ch:Hm... Vilicht uf de Ebeni hinter de Krypta.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_Cairn2
+	translation.en:But you'd need to go through the crypt for that... (shivers)
+	translation.de:Aber du müsstest durch die Krypta gehen dafür... (schaudert)
+	translation.ch:Aber du möstisch dur d'Krypta go für das... (schauderet)
 	[
 		# Link node, tag is next tag
 		tag:-2

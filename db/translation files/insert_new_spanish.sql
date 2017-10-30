@@ -29,6 +29,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Jump', 'hint_desc','briefly for a small jump, and longer for a high jump.','kurz für einen kleinen Sprung, und länger für einen hohen.','churz für en chline Sprung und länger für en hoche Sprung.','para salar.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint','Remove buffs','Buffs entfernen','Buffs wegne','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint_desc','Use a right click on a spell buff to remove it.','Mit einem Rechtsklick auf einen Zauber-Buff kann man ihn entfernen.','Mitme Rechtsklick ufen Zauber-Buff chamen wegne.','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint_desc','to open the map and teleport to an active waypoint.','um die Karte zu öffnen und zu einem aktiven Wegpunkt zu teleportieren.','zum d''Charte ufmache und zumne aktive Wegpunkt z''teleportiere.','??');
 
 -- quest 
 

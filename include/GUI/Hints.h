@@ -28,11 +28,14 @@ inline std::string getHintDescription(const std::string& hintKey) {
 	else if (hintKey.compare("CharacterInfo") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::CharacterInfo)) + " ");
 	}
-	else if (hintKey.compare("Map") == 0) {
+	else if (hintKey.compare("Map") == 0 || hintKey.compare("Waypoint") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
 	}
 	else if (hintKey.compare("Pickup") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)) + " ");
+	}
+	else if (hintKey.compare("Reload") == 0) {
+		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::BackToCheckpoint)) + " ");
 	}
 	else if (hintKey.compare("LeaveLevel") == 0) {
 		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");

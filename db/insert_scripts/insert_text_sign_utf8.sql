@@ -41,3 +41,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ne
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('FlamingSword','sign','Only a flaming sword can open the gate.','Nur ein flammendes Schwert kann die Pforte öffnen.','Nur es flammends Schwert cha die Pforte ufmache.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('LaiDaTuma','sign','Lai da Tuma','Lai da Tuma','Lai da Tuma');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('PointOfNoReturn','sign','Point of no return.','Point of no return.','Point of no return.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagic','sign','Anti-magic crystal','Antimagiekristall','Antimagiekristall');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('JonathanGone','sign','Meet me at the crypt of Gandria.
+J.','Komm zur Krypta von Gandria.
+J.','Chum zude Krypta vo Gandria.
+J.');

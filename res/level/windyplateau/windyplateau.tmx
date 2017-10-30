@@ -520,7 +520,7 @@
   <object id="87" x="2762.5" y="1200" width="75" height="93.424">
    <properties>
     <property name="keyguarded" value=""/>
-    <property name="map entry" value="res/map/meadows/meadows.tmx,3290,1562"/>
+    <property name="map entry" value="res/map/meadows/meadows.tmx,3140,1400"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
