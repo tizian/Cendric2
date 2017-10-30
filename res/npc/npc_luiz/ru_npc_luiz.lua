@@ -5,10 +5,10 @@ loadRoutine = function(R, W)
 	if (not W:isConditionFulfilled("npc_luiz", "talked")) then 
 	
 		R:setTalkingActive(true) 
-		R:setReloadEnabled(true)
+		R:setReloadEnabled(false)
 		R:setLooped(false)
 		R:setTilePosition(2,14)
-		R:goToTile(2,16)
+		R:goToTile(2,15)
 		
 		R:goToTile(2,11.5)
 		R:goToTile(12,11.5)
