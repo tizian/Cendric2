@@ -9,14 +9,23 @@ loadRoutine = function(R, W)
         return
     end
 
-	
-	R:setTilePosition(60,35.5)
-    R:setFacingLeft()
+	if (W:isConditionFulfilled("default", "plateau_open")) then
+        R:setTilePosition(66,30)
+        
+        R:goToTile(66,30)
+        R:wait(1000)
+        R:goToTile(63,30)
+        R:wait(1000)
+    else
+        R:setTilePosition(60,35.5)
+        R:setFacingLeft()
+        R:setLooped(false)
+    end
     
     if (not W:isConditionFulfilled("npc_robert2", "talked")) then
         R:setTalkingActive(true)	
     end
-    R:setLooped(false)
+    
     R:setReloadEnabled(true)
 
 end	

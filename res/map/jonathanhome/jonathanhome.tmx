@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="181">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="182">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -256,6 +256,16 @@
   <object id="177" gid="434" x="500" y="310" width="50" height="50">
    <properties>
     <property name="id" value="bo_schoolsofmagic"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic cryptdoor">
+  <properties>
+   <property name="conditions" value="default,cryptdoor"/>
+  </properties>
+  <object id="181" gid="495" x="650" y="625" width="50" height="50">
+   <properties>
+    <property name="text" value="JonathanGone"/>
    </properties>
   </object>
  </objectgroup>

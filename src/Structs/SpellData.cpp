@@ -509,7 +509,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.count = 4;
 	aureola.divergenceAngle = 2 * M_PI / aureola.count;
 	aureola.damageType = DamageType::Light;
-	aureola.activeDuration = sf::seconds(10);
+	aureola.activeDuration = sf::seconds(6);
 	aureola.needsTarget = true;
 	aureola.duration = sf::seconds(1.f);
 	aureola.isStunning = true;

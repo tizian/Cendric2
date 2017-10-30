@@ -41,7 +41,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("teleport_robert", "started") and DL:isQuestComplete("teleport_robert")) then 
 		DL:addChoice(16, "DL_Choice_FinishRobertQuest") -- I got your stone.
 	end
-	if (DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("npc_robert2", "cairn_active")) then 
+	if (DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("default", "plateau_open")) then 
 		DL:addChoice(21, "DL_Choice_Cairn") -- Have you seen any cairn wraiths around here?
 	end
 	if (not DL:isQuestState("teleport_robert", "void")) then 
@@ -159,10 +159,14 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("npc_robert2", "cairn_active")) then 
+	if (DL:isQuestState("silkweed_potion", "started") and not DL:isConditionFulfilled("npc_robert2", "cairn") and not DL:isConditionFulfilled("default", "plateau_open")) then 
 
-		DL:createNPCNode(21, -2, "DL_Robert_Cairn") -- Hm, no. They don't seem to like nec... ehr, my kind of magic.
+		DL:createNPCNode(21, 22, "DL_Robert_Cairn") -- Hm... Maybe on the plateau behind the crypt.
 		DL:addConditionProgress("npc_robert2", "cairn")
+		DL:addNode()
+
+
+		DL:createNPCNode(22, -2, "DL_Robert_Cairn2") -- But you'd need to go through the crypt for that... (shivers)
 		DL:addNode()
 
 	end
