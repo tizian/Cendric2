@@ -101,6 +101,7 @@ item.id:eq_stevenhelmet,1
 item.id:eq_sunring,1
 item.id:eq_swordpendant,1
 item.id:eq_travelhat,1
+item.id:eq_betahat,1
 item.id:eq_wizardhatfire,1
 item.id:eq_wizardhatice,1
 item.id:eq_wizardhatlight,1
@@ -217,6 +218,7 @@ item.id:sp_antigravity,1
 item.id:sp_icyambush,1
 item.id:sp_aureola,1
 item.id:sp_summongargoyle,1
+item.id:we_betastaff,1
 item.id:we_bonescythe,1
 item.id:we_claw,1
 item.id:we_doublesickle,1

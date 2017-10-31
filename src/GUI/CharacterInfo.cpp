@@ -286,48 +286,50 @@ void CharacterInfo::reload() {
 }
 
 void CharacterInfo::updateAttributes() {
+	auto currentAttributes = m_attributes == nullptr ? m_core->getTotalAttributes() : *m_attributes;
+
 	m_attributeTexts.clear();
 
 	std::vector<std::string> attributes;
 
 	// health
-	std::string health = std::to_string(m_attributes->currentHealthPoints) +
+	std::string health = std::to_string(currentAttributes.currentHealthPoints) +
 		"/" +
-		std::to_string(m_attributes->maxHealthPoints);
+		std::to_string(currentAttributes.maxHealthPoints);
 	attributes.push_back(health);
 
 	// health regeneration
-	std::string healthRegen = std::to_string(m_attributes->healthRegenerationPerS)
+	std::string healthRegen = std::to_string(currentAttributes.healthRegenerationPerS)
 		+ "/s";
 	attributes.push_back(healthRegen);
 
 	// crit
-	std::string crit = std::to_string(m_attributes->criticalHitChance) +
+	std::string crit = std::to_string(currentAttributes.criticalHitChance) +
 		"%";
 	attributes.push_back(crit);
 
 	// cooldown reduction
-	attributes.push_back(std::to_string(m_attributes->haste));
+	attributes.push_back(std::to_string(currentAttributes.haste));
 
 	// healing power
-	attributes.push_back(std::to_string(m_attributes->heal));
+	attributes.push_back(std::to_string(currentAttributes.heal));
 	attributes.push_back("");
 
 	// dmg 
-	attributes.push_back(std::to_string(m_attributes->damagePhysical));
-	attributes.push_back(std::to_string(m_attributes->damageFire));
-	attributes.push_back(std::to_string(m_attributes->damageIce));
-	attributes.push_back(std::to_string(m_attributes->damageShadow));
-	attributes.push_back(std::to_string(m_attributes->damageLight));
+	attributes.push_back(std::to_string(currentAttributes.damagePhysical));
+	attributes.push_back(std::to_string(currentAttributes.damageFire));
+	attributes.push_back(std::to_string(currentAttributes.damageIce));
+	attributes.push_back(std::to_string(currentAttributes.damageShadow));
+	attributes.push_back(std::to_string(currentAttributes.damageLight));
 
 	attributes.push_back("");
 
 	// resistance
-	attributes.push_back(std::to_string(m_attributes->resistancePhysical));
-	attributes.push_back(std::to_string(m_attributes->resistanceFire));
-	attributes.push_back(std::to_string(m_attributes->resistanceIce));
-	attributes.push_back(std::to_string(m_attributes->resistanceShadow));
-	attributes.push_back(std::to_string(m_attributes->resistanceLight));
+	attributes.push_back(std::to_string(currentAttributes.resistancePhysical));
+	attributes.push_back(std::to_string(currentAttributes.resistanceFire));
+	attributes.push_back(std::to_string(currentAttributes.resistanceIce));
+	attributes.push_back(std::to_string(currentAttributes.resistanceShadow));
+	attributes.push_back(std::to_string(currentAttributes.resistanceLight));
 
 	BitmapText attributeText;
 	attributeText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);

@@ -141,6 +141,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_ice, max_health, res_physical) values ('eq_travelhat', 2, 15, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_travelhat', 'res/texture/equipment/head/spritesheet_head_travelhat.png', 'res/texture/equipment/head/spritesheet_map_head_travelhat.png');
 
+-- Cendric's Hat
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_betahead', 'item', 'Cendric''s Hat','Cendric''s Hut','Em Cendric sin Huet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_betahead', 'item_desc', 'Thanks!','Danke!','Merci!');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_betahead', 'eq_head', 0, 700, 60);
+INSERT INTO item_attribute (item_id, res_physical, res_ice, res_shadow, res_fire, res_light, max_health) values ('eq_betahead', 10, 10, 10, 10, 10, 5);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_betahead', 'res/texture/equipment/head/spritesheet_head_betahat.png', 'res/texture/equipment/head/spritesheet_map_head_betahat.png');
+
 -- Bandana
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_bandana', 'item', 'Green Bandana','Grünes Kopftuch','Grüens Chopftuech');

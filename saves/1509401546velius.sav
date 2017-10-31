@@ -8,7 +8,7 @@ level.id:res/level/hallway/hallway.tmx
 level.position:210.000000,560.000000
 is.in.level:0
 map.id:res/map/veliusroom/veliusroom.tmx
-map.position:641.428223,886.370605
+map.position:640,835
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 

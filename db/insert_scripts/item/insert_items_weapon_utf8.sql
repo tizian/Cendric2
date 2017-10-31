@@ -35,6 +35,17 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firestaff', 1, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firestaff', 2, 'elemental', 2);
 
+-- Cendric's Staff
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_betastaff', 'item', 'Cendric''s Staff','Cendric''s Stab','Em Cendric sin Stab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_betastaff', 'item_desc', 'Thanks!','Danke!', 'Merci!');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_betastaff', 'eq_weapon', 50, 700, 30);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, dmg_light, critical) values ('we_betastaff', 1, 1, 1, 1, 1, 1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_betastaff', 'res/texture/equipment/weapon/spritesheet_weapon_betastaff.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_betastaff.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_betastaff', 1000, 10, 45, 80, 4);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_betastaff', 1, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_betastaff', 2, 'meta', 2);
+
 -- Tear Staff
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_tearstaff', 'item', 'Tear Staff','Tränenstab','Tränestab');

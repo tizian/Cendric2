@@ -41,7 +41,7 @@ private:
 // for the attributes, it takes them directly from the level main character (level) or the core (map)
 class CharacterInfo {
 public:
-	CharacterInfo(WorldScreen* screen, const AttributeData* attributes);
+	CharacterInfo(WorldScreen* screen, const AttributeData* attributes = nullptr);
 	~CharacterInfo();
 
 	void show();
