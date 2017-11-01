@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_inina3
+
+npc.id:npc_inina3
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Inina_Void
+	translation.en:... (Inina stares into the void)
+	translation.de:... (Inina starrt ins Leere)
+	translation.ch:... (D'Inina starrt is Leeri)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

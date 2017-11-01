@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_koray2
+
+npc.id:npc_koray2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Koray_Mumble
+	translation.en:Gra rach gra nti Niam... (Koray mumbles something incomprehensible)
+	translation.de:Gra rach gra nti Niam... (Koray murmelt etwas Unverständliches)
+	translation.ch:Gra rach gra nti Niam... (De Koray murmlet öppis Unverständlichs)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

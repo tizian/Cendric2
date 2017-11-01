@@ -16,6 +16,5 @@ loadRoutine = function(R, W)
     R:setTilePosition(12.5, 15.5)
     R:goToTile(12.5, 9)
     W:addConditionProgress("npc_loganthird2", "dead")
-    R:setFacingDown()
 
 end	

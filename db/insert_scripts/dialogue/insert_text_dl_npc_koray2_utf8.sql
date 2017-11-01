@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Koray_Mumble', 'dl_npc_koray2', 'Gra rach gra nti Niam... (Koray mumbles something incomprehensible)', 'Gra rach gra nti Niam... (Koray murmelt etwas Unverständliches)', 'Gra rach gra nti Niam... (De Koray murmlet öppis Unverständlichs)');

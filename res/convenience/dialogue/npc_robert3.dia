@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_robert3
+
+npc.id:npc_robert3
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_Ah
+	translation.en:Aaaaah!
+	translation.de:Aaaaah!
+	translation.ch:Aaaaah!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
