@@ -50,6 +50,18 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chapter5', 'cutscene','- Illusion -','- Illusion -','- Illusion -', '- ? -');
 
+-- Velius
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Ah', 'cutscene','Aaaah!','Aaaah!','Aaaah!', 'Aaaah!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Tried', 'cutscene','I tried to stop him!','Ich habe versucht, ihn aufzuhalten!','Ich ha probiert, ihn ufz''halte!', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:But', 'cutscene','But, he...','Aber, er...','Aber, er...', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Enough', 'cutscene','Enough!','Genug!','Gnueg!', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Nearly', 'cutscene','Your miserable efforts nearly destroyed my plans.','Deine erbärmlichen Bemühungen haben fast meine Pläne zerstört.','Dini erbärmliche Bemüehige hend fast mini Plän zerstört.', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Now', 'cutscene','But in the end, everything worked out.','Aber am Ende hat alles geklappt.','Aber am End het alles klappt.', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Need', 'cutscene','I don''t need you anymore.','Dich brauche ich nicht mehr.','Dich bruchi nümme.', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Please', 'cutscene','Please, n...','Bitte, n...','Bitte, n...', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Die', 'cutscene','Die.','Stirb.','Stirb.', '?');
+
 
 
 

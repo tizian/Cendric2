@@ -62,8 +62,10 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (isMovingX && m_map->collides(rec)) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
-			setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
+			if (!rec.noSafePos) {
+				setPositionX(rec.safeLeft);
+				nextBoundingBoxY.left = rec.safeLeft;
+			}
 		}
 		else {
 			nextBoundingBoxY.left = nextPosition.x;
@@ -76,7 +78,9 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (isMovingY && m_map->collides(rec)) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
+			if (!rec.noSafePos) {
+				setPositionY(rec.safeTop);
+			}
 		}
 	}
 	else {
@@ -87,8 +91,10 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (isMovingY && m_map->collides(rec)) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
-			setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
+			if (!rec.noSafePos) {
+				setPositionY(rec.safeTop);
+				nextBoundingBoxX.top = rec.safeTop;
+			}
 		}
 		else {
 			nextBoundingBoxX.top = nextPosition.y;
@@ -101,7 +107,9 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 		if (isMovingX & m_map->collides(rec)) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
-			setPositionX(rec.safeLeft);
+			if (!rec.noSafePos) {
+				setPositionX(rec.safeLeft);
+			}
 		}
 	}
 }
