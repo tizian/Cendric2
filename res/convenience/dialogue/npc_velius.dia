@@ -8,19 +8,70 @@ npc.id:npc_velius
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:not DL:isConditionFulfilled("npc_velius", "talked")
 	]
-}
-{2
-	# [1] Choice Node
-	tag:1
 	[
 		# Link node, tag is next tag
 		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "talked")
+	# translation: 
+	translation.tag:DL_NPC_Talked
+	translation.en:Finally. I waited so long for this.
+	translation.de:Endlich. Darauf habe ich lange gewartet.
+	translation.ch:Endlich. Do druf hani lang gwartet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:not DL:isConditionFulfilled("npc_velius", "finally")
 		# translation: 
-		translation.tag:DL_Choice_TryOut
-		translation.en:Let's fight, shall we?
-		translation.de:Let's fight, shall we?
-		translation.ch:Let's fight, shall we?
+		translation.tag:DL_Choice_Finally
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_velius", "know_me")
+		# translation: 
+		translation.tag:DL_Choice_KnowMe
+		translation.en:I assume, you know me?
+		translation.de:Ich nehme mal an, du kennst mich?
+		translation.ch:Ich nimm mal ah, du kennsch mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_velius", "friends")
+		# translation: 
+		translation.tag:DL_Choice_Friends
+		translation.en:What did you do to the other mages?
+		translation.de:Was hast du mit den anderen Magiern gemacht?
+		translation.ch:Was hesch mit de andere Magie gmacht?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_velius", "murderer")
+		# translation: 
+		translation.tag:DL_Choice_Murderer
+		translation.en:You... just murdered the king?!
+		translation.de:Du... hast gerade den König ermordet?!
+		translation.ch:Du... hesch grad de König ermordet?!
 	]
 	[
 		# Link node, tag is next tag
@@ -33,31 +84,62 @@ npc.id:npc_velius
 	]
 }
 {1
-	# [2] NPC Node
-	tag:2
+	# [6] NPC Node
+	tag:6
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "finally")
 	# translation: 
-	translation.tag:DL_Velius_Finally
-	translation.en:Finally.
-	translation.de:Finally.
-	translation.ch:Finally.
+	translation.tag:DL_NPC_6
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:3
+		tag:-2
 	]
 }
 {1
 	# [3] NPC Node
 	tag:3
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 200)
+	trigger:DL:addConditionProgress("npc_velius", "know_me")
 	# translation: 
-	translation.tag:
+	translation.tag:DL_Velius_Finally
 	translation.en:
 	translation.de:
 	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "friends")
+	# translation: 
+	translation.tag:DL_NPC_4
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "murderer")
+	# translation: 
+	translation.tag:DL_NPC_5
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
