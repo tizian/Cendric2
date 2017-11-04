@@ -39,9 +39,19 @@ npc.id:npc_velius
 		condition:not DL:isConditionFulfilled("npc_velius", "finally")
 		# translation: 
 		translation.tag:DL_Choice_Finally
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.en:Ehm... You waited for what?
+		translation.de:Ähm... Auf was denn?
+		translation.ch:Ähm... Uf was denn?
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_velius", "murderer")
+		# translation: 
+		translation.tag:DL_Choice_Murderer
+		translation.en:You... just murdered the king?!
+		translation.de:Du... hast gerade den König ermordet?!
+		translation.ch:Du... hesch grad de König ermordet?!
 	]
 	[
 		# Link node, tag is next tag
@@ -65,13 +75,123 @@ npc.id:npc_velius
 	]
 	[
 		# Link node, tag is next tag
-		tag:5
-		condition:not DL:isConditionFulfilled("npc_velius", "murderer")
+		tag:9
+		condition:not DL:isConditionFulfilled("npc_velius", "mark")
 		# translation: 
-		translation.tag:DL_Choice_Murderer
-		translation.en:You... just murdered the king?!
-		translation.de:Du... hast gerade den König ermordet?!
-		translation.ch:Du... hesch grad de König ermordet?!
+		translation.tag:DL_Choice_Mark
+		translation.en:Is that your work? (Show the mark)
+		translation.de:Ist das dein Werk? (Das Mal zeigen)
+		translation.ch:Isch das dis Werk? (Es Zeiche zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:DL:isConditionFulfilled("npc_velius", "know_me") and not DL:isConditionFulfilled("npc_velius", "escape")
+		# translation: 
+		translation.tag:DL_Choice_Escape
+		translation.en:How exactly did I escape?
+		translation.de:Wie genau bin ich denn entkommen?
+		translation.ch:Wie bini denn gnau entcho?
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:isConditionFulfilled("npc_velius", "mark") and not DL:isConditionFulfilled("npc_velius", "track")
+		# translation: 
+		translation.tag:DL_Choice_Track
+		translation.en:So you could track me - why didn't you catch me earlier?
+		translation.de:Wenn du mich aufspüren konntest - wieso hast du mich nicht früher gefangen?
+		translation.ch:Wenn du mich hesch chöne ufspüre - weso hesch mi nid früener gfange?
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:not DL:isConditionFulfilled("npc_velius", "old_king")
+		# translation: 
+		translation.tag:DL_Choice_OldKing
+		translation.en:What did you do to the old king?
+		translation.de:Was hast du mit dem alten König gemacht?
+		translation.ch:Was hesch mitem alte König gmacht?
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "plan")
+		# translation: 
+		translation.tag:DL_Choice_Plan
+		translation.en:You don't need a king? What are your plans then?
+		translation.de:Du brauchst keinen König? Was sind denn deine Pläne?
+		translation.ch:Du bruchsch ken König? Wa sind denn dini Plän?
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:DL:isConditionFulfilled("npc_velius", "track") and not DL:isConditionFulfilled("npc_velius", "why_me")
+		# translation: 
+		translation.tag:DL_Choice_WhyMe
+		translation.en:Why do you need exactly me for your plans?
+		translation.de:Wieso brauchst du genau mich für deine Pläne?
+		translation.ch:Weso bruchsch du genau mich für dini Plän?
+	]
+	[
+		# Link node, tag is next tag
+		tag:29
+		condition:DL:isConditionFulfilled("npc_velius", "plan") and DL:isConditionFulfilled("npc_velius", "anti_magic") and not DL:isConditionFulfilled("npc_velius", "fight")
+		# translation: 
+		translation.tag:DL_Choice_FightStart
+		translation.en:What exactly are those anti-magic crystals?
+		translation.de:Was sind diese Antimagiekristalle genau?
+		translation.ch:Wa sind die Antimagiekristall genau?
+	]
+	[
+		# Link node, tag is next tag
+		tag:34
+		condition:DL:isConditionFulfilled("npc_velius", "plan") and not DL:isConditionFulfilled("npc_velius", "bitter")
+		# translation: 
+		translation.tag:DL_Choice_Bitter
+		translation.en:Not all magic is bad. Why do you hate it so much?
+		translation.de:Nicht alle Magie ist schlecht. Wieso hasst du sie so sehr?
+		translation.ch:Nid alli Magie isch schlecht. Weso hassisch si so sehr?
+	]
+	[
+		# Link node, tag is next tag
+		tag:37
+		condition:DL:isConditionFulfilled("npc_velius", "why_me") and not DL:isConditionFulfilled("npc_velius", "anti_magic")
+		# translation: 
+		translation.tag:DL_Choice_AntiMagic
+		translation.en:What did you steal from the elementalists' temple?
+		translation.de:Was hast du aus dem Tempel der Elementarmagier gestohlen?
+		translation.ch:Wa hesch usem Elementarmagiertempel klaut?
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		condition:DL:isConditionFulfilled("npc_velius", "why_me") and not DL:isConditionFulfilled("npc_velius", "creatures")
+		# translation: 
+		translation.tag:DL_Choice_Creatures
+		translation.en:So... those challenges weren't there to hinder me?
+		translation.de:Also... diese Hindernisse waren nicht da, um mich aufzuhalten?
+		translation.ch:Also... die Hindernis sind nid do gsi, zum mich ufhalte?
+	]
+	[
+		# Link node, tag is next tag
+		tag:43
+		condition:DL:isConditionFulfilled("npc_velius", "anti_magic") and not DL:isConditionFulfilled("npc_velius", "illusion")
+		# translation: 
+		translation.tag:DL_Choice_Illusion
+		translation.en:Five magic types? I thought there were only four...
+		translation.de:Fünf Magiearten? Ich dachte, es wären nur vier...
+		translation.ch:Füf Magiearte? Ich ha denkt, es sind nur vier...
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
+		condition:DL:isConditionFulfilled("npc_velius", "fight")
+		# translation: 
+		translation.tag:DL_Choice_Fight
+		translation.en:I've heard enough. Let's get this over with. [ATTACK VELIUS] 
+		translation.de:Ich habe genug gehört. Bringen wir's hinter uns. [VELIUS ANGREIFEN]
+		translation.ch:Ich ha gnueg ghört. Bringemer's hinter üs. [DE VELIUS AAGRIFE]
 	]
 	[
 		# Link node, tag is next tag
@@ -89,40 +209,10 @@ npc.id:npc_velius
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_velius", "finally")
 	# translation: 
-	translation.tag:DL_NPC_6
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [3] NPC Node
-	tag:3
-	# triggers: 
-	trigger:DL:addConditionProgress("npc_velius", "know_me")
-	# translation: 
 	translation.tag:DL_Velius_Finally
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [4] NPC Node
-	tag:4
-	# triggers: 
-	trigger:DL:addConditionProgress("npc_velius", "friends")
-	# translation: 
-	translation.tag:DL_NPC_4
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.en:For you. To fall directly into my trap. (Grins)
+	translation.de:Auf dich. Dass du direkt in meine Falle läufst. (Grinst)
+	translation.ch:Uf dich. Dass du direkt i mini Falle laufsch. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -134,12 +224,723 @@ npc.id:npc_velius
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_velius", "murderer")
 	# translation: 
-	translation.tag:DL_NPC_5
+	translation.tag:DL_Velius_Murderer
+	translation.en:Hn. He was useless. Also, he nearly eliminated my most precious subject -
+	translation.de:Hn. Er war nutzlos. Auch hat er beinahe mein wertvollstes Subjekt eliminiert -
+	translation.ch:Hn. Er isch nutzlos gsi. Au hett er fast mis wertvollst Subjekt eliminiert -
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Murderer2
+	translation.en:You.
+	translation.de:Dich.
+	translation.ch:Dich.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Murderer3
+	translation.en:But now, that I got you... there's no need for a king anymore.
+	translation.de:Aber jetzt, wo ich dich habe... braucht es keinen König mehr.
+	translation.ch:Aber jetz, wo ich dich ha... bruchts ken König me.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "know_me")
+	# translation: 
+	translation.tag:DL_Velius_KnowMe
+	translation.en:Yes, I do. The subject that escaped.
+	translation.de:Ja, dem ist so. Das Subjekt, das entkommen ist.
+	translation.ch:Ja, das isch so. Es Subjekt, wo entcho isch.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_KnowMe2
+	translation.en:But you've been never really free. I always knew exactly where you were and what you did.
+	translation.de:Aber du warst niemals wirklich frei. Ich wusste immer genau, wo du warst und was du getan hast.
+	translation.ch:Aber du bisch nie würkli frei gsi. Ich ha immer gnau gwüsst, wo du bisch und wa du machsch.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_KnowMe3
+	translation.en:My curse has fulfilled its purpose.
+	translation.de:Mein Fluch hat seinen Zweck erfüllt.
+	translation.ch:Min Fluech het sin Zweck erfüllt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "friends")
+	# translation: 
+	translation.tag:DL_Velius_Friends
+	translation.en:Most of them didn't survive it. The ones who did, went insane.
+	translation.de:Die meisten haben es nicht überlebt. Diejenigen, die es geschafft haben, sind durchgedreht.
+	translation.ch:Di meiste hends nid überlebt. Die, wos gschafft hend, sind duredrüllt.
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Friends2
+	translation.en:But after all these experiments, I finally know what I need.
+	translation.de:Aber nach all diesen Experimenten weiss ich endlich, was ich brauche.
+	translation.ch:Aber noch all dene Experiment weissi endlich, wani brucht.
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Friends3
+	translation.en:Mages with a strong affinity to a magic type. The three I got now are perfect.
+	translation.de:Magier mit einer starken Affinität zu einer Magieart. Die drei, ich ich jetzt habe, sind perfekt.
+	translation.ch:Magier mit enere starche Affinität zunere Magierart. Die drei, woni ez ha, sind perfekt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "mark")
+	# translation: 
+	translation.tag:DL_Velius_Mark
+	translation.en:(Smiles) Of course it is.
+	translation.de:(Lächelt) Natürlich ist es das.
+	translation.ch:(Lächlet) Natürli isches das.
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Mark2
+	translation.en:It made my subjects easier to track - the few, that managed to escape.
+	translation.de:Meine Subjekte waren damit einfacher aufzuspüren - die wenigen, denen die Flucht gelang.
+	translation.ch:Mini Subjekt hani demit eifacher chöne ufspüre - di wenige, wo entcho sind.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "escape")
+	# translation: 
+	translation.tag:DL_Velius_Escape
+	translation.en:Well, you really surprised me.
+	translation.de:Nun, du hast mich wirklich überrascht.
+	translation.ch:Ja, du hesch mi würkli überrascht.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Escape2
+	translation.en:I extracted your magic the same way as I did with many other mages before.
+	translation.de:Ich habe deine Magie auf die selbe Art extrahiert, wie auch schon bei vielen anderen Magiern zuvor.
+	translation.ch:Ich ha dini Magie uf di gliich Art extrahiert, we au scho mit vilne andere Magiere vorene.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Escape3
+	translation.en:But somehow, it didn't work as expected.
+	translation.de:Aber es hat irgendwie nicht wie erwartet funktioniert.
+	translation.ch:Aber es het irgendwie nid we erwartet funktioniert.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Escape4
+	translation.en:You managed to disappear before my very eyes. 
+	translation.de:Du hast es geschafft, direkt vor meinen Augen zu verschwinden.
+	translation.ch:Du heschs gschafft, direkt vor mine Auge z'verschwinde.
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Escape5
+	translation.en:But now, here you are...
+	translation.de:Aber jetzt bist du ja hier...
+	translation.ch:Aber jetz bisch ja do...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "track")
+	# translation: 
+	translation.tag:DL_Velius_Track
+	translation.en:You weren't ready. Your magic wasn't ready.
+	translation.de:Du warst nicht bereit. Deine Magie war nicht bereit.
+	translation.ch:Du bisch nid parat gsi. Dini Magie isch nid parat gsi.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Track2
+	translation.en:Also, as you've lost your memory, you've never been a threat to my secrets.
+	translation.de:Und da du dein Gedächtnis verloren hast, warst du niemals eine Bedrohung für meine Geheimnisse.
+	translation.ch:Und well du dis Gedächtnis verlore hesch, bisch nie e Bedrohig für mini Gheimnis gsi.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "old_king")
+	# translation: 
+	translation.tag:DL_Velius_OldKing
+	translation.en:Hn. The old king. I thought he'd be a suitable subject for the divine magic.
+	translation.de:Hn. Der alte König. Ich hätte gedacht, er wäre ein geeignetes Subjekt für die heilige Magie.
+	translation.ch:Hn. De alt König. Ich ha denkt, er seg es geignets Subjekt für di heilig Magie.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_OldKing2
+	translation.en:But I was wrong. He wasn't strong enough. He didn't make it.
+	translation.de:Aber da lag ich falsch. Er war nicht stark genug. Er hat es nicht geschafft.
+	translation.ch:Aber do hani mi g'irrt. Er isch nid starch gnueg gsi. Er hets nid gschafft.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "plan")
+	# translation: 
+	translation.tag:DL_Velius_Plan
+	translation.en:You see what's happening in this world, right?
+	translation.de:Dir ist bewusst, was in dieser Welt passiert, ja?
+	translation.ch:Dir isch bewusst, wa i dere Welt passiert, gell?
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Plan2
+	translation.en:Mages are dominating the commoners. Just because you are born without magic, you're inferior.
+	translation.de:Die Magier beherrschen die Gewöhnlichen. Nur weil jemand ohne Magie geboren wurde, ist er weniger wert.
+	translation.ch:D'Magier beherrsched di Gwöhnliche. Nur well öpper ohni Magie gebore worde isch, ischer weniger wert.
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Plan3
+	translation.en:But soon, this age will be history. All magic will perish from this world. FOREVER!
+	translation.de:Aber bald wird dieses Zeitalter Geschichte sein. Alle Magie wird aus dieser Welt verschwinden. FÜR IMMER!
+	translation.ch:Aber bald wird da Ziitalter verbi si. Alli Magie wird us dere Welt verschwinde. FÜR IMMER!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "why_me")
+	# translation: 
+	translation.tag:DL_Velius_WhyMe
+	translation.en:I need affine mages from all magic types. Elementalists are very rare.
+	translation.de:Ich brauche affine Magier von allen Magietypen. Elementarmagier sind sehr selten.
+	translation.ch:Ich bruch affini Magier vo allne Magietype. Elementarmagier sind sehr selte.
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_WhyMe2
+	translation.en:As I first caught you, you were very weak. Too weak for my purposes.
+	translation.de:Als ich dich zuerst gefangen habe, warst du sehr schwach. Zu schwach für meine Zwecke.
+	translation.ch:Wo ich dich zersch gfange ha, bisch sehr schwach gsi. Zu schwach für mini Zweck.
+	[
+		# Link node, tag is next tag
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_WhyMe3
+	translation.en:I needed a full-fledged elementalist. Only such a mage could overcome the challenges I put in your way.
+	translation.de:Ich brauchte einen vollwertigen Elementarmagier. Nur so ein Magier konnte die Hindernisse überwinden, die ich dir in den Weg gestellt habe.
+	translation.ch:Ich ha en vollwertige Elementarmagier brucht. Nur so en Magier het die Hindernis chöne überwinde, woni der in Weg gstellt ha.
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_WhyMe4
+	translation.en:You mastered the elements and found me. That's proof enough that your magic is strong enough now.
+	translation.de:Du hast die Elemente gemeistert und mich gefunden. Das ist Beweis genug, dass deine Magie nun stark genug ist.
+	translation.ch:Du hesch d'Element gmeisteret und mich gfunde. Da isch Bewiis gnueg, dass dini Magie ez starch gnueg isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "fight")
+	# translation: 
+	translation.tag:DL_Velius_FightStart
+	translation.en:Condensed anti-magic. The one I'm planning to create now will be powerful enough to take the magic from every mage in this world.
+	translation.de:Kondensierte Antimagie. Derjenige, den ich jetzt erschaffen werde, wird stark genug sein, die Magie jedes Magiers in dieser Welt zu nehmen.
+	translation.ch:Kondensierti Antimagie. De, woni ez erschaffe wird, wird mächtig gnueg si, zum alli Magie vo jedem Magier i dere Welt z'ne.
+	[
+		# Link node, tag is next tag
+		tag:46
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_FightStart2
+	translation.en:I'm going to create a better world for everyone. You understand why I need your magic for that, right?
+	translation.de:Ich werde eine bessere Welt für alle erschaffen. Du verstehst, wieso ich deine Magie dafür brauche, ja?
+	translation.ch:Ich wird e besseri Welt für alli erschaffe. Du verstosch, weso ich dini Magie für das bruch, gell?
+	[
+		# Link node, tag is next tag
+		tag:47
+	]
+}
+{2
+	# [47] Choice Node
+	tag:47
+	[
+		# Link node, tag is next tag
+		tag:48
+		# translation: 
+		translation.tag:DL_Choice_KillMe
+		translation.en:No. If that means you're going to kill me...
+		translation.de:Nein. Wenn das bedeutet, dass du mich dafür töten musst...
+		translation.ch:Nei. Wenn das bedütet, dass du mich defür töte muesch...
+	]
+	[
+		# Link node, tag is next tag
+		tag:49
+		# translation: 
+		translation.tag:DL_Choice_YoureRight
+		translation.en:Well, I kinda understand you. But it's still not the right thing to do.
+		translation.de:Ich verstehe dich ja ein bisschen. Aber es ist nicht der richtige Weg.
+		translation.ch:Ich verstand di jo es bitzli. Aber es isch nid de richtig Weg.
+	]
+	[
+		# Link node, tag is next tag
+		tag:51
+		# translation: 
+		translation.tag:DL_Choice_YoureVeryRight
+		translation.en:Yes. Magic only brings destruction. Just look at you.
+		translation.de:Ja. Magie bringt nur Zerstörung. Du bist selbst das beste Beispiel.
+		translation.ch:Ja. Magie bring nur Zerstörig. Du bisch s'best Bispiil defür.
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_KillMe
+	translation.en:Mages survive the process of annihilating their magic with anti-magic, but not extracting it, I'm sorry.
+	translation.de:Magier überleben den Prozess, wenn man ihre Magie mit Antimagie auslöscht, aber nicht, wenn man sie extrahiert. Tut mir leid.
+	translation.ch:Magier überlebed de Prozess, wennme ihri Magie mit Antimagie uslöscht, aber nid, wenme si extrahiert. Tuet mer leid.
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_KillMe2
+	translation.en:It's for a greater cause. I'll make it quick if you don't struggle.
+	translation.de:Es ist für eine grössere Sache. Es wird kurz und schmerzlos sein, wenn du dich nicht wehrst.
+	translation.ch:Es isch für e grösseri Sach. Es wird churz und schmerzlos si, wennd dich nid wehrsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_YoureRight
+	translation.en:That's your opinion. But it's worth nothing.
+	translation.de:Das ist deine Meinung. Die ist aber sowieso nicht viel wert.
+	translation.ch:Da isch dini Meinig. Die isch aber eh nid viel wert.
+	[
+		# Link node, tag is next tag
+		tag:52
+	]
+}
+{1
+	# [52] NPC Node
+	tag:52
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_YoureRight2
+	translation.en:You won't have anyone to tell it anymore.
+	translation.de:Du wirst sie nämlich niemandem mehr erzählen können.
+	translation.ch:Du wirsch si nämli niemertem me verzelle chöne.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_YoureVeryRight
+	translation.en:The same goes for you. No one should be this powerful. It only brings pain.
+	translation.de:Dasselbe gilt auch für dich. Niemand sollte so mächtig sein. Es bringt nur Schmerz.
+	translation.ch:Es glich gilt au für dich. Niemert söt so mächtig si. Es bringt nur Schmerz.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "bitter")
+	# translation: 
+	translation.tag:DL_Velius_Bitter
+	translation.en:You're right. Magic is not bad, but what people do with it is.
+	translation.de:Du hast recht. Magie ist nicht schlecht, aber was die Leute mit ihr anstellen, schon.
+	translation.ch:Du hesch recht. Magie isch nid schlecht, aber was d'Lüt mit ihre astelled, scho.
+	[
+		# Link node, tag is next tag
+		tag:35
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Bitter2
+	translation.en:My parents weren't mages. They suffered a lot from the oppression of the clerics.
+	translation.de:Meine Eltern waren keine Magier. Sie haben sehr unter der Unterdrückung der Kleriker gelitten.
+	translation.ch:Mini Eltere sind ke Magier gsi. Si hend sehr unter de Unterdrückig vode Kleriker glitte.
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Bitter3
+	translation.en:I had to find a way to take away this power from all mages. And I did.
+	translation.de:Ich musste einen Weg finden, diese Macht den Magiern zu nehmen. Und das habe ich jetzt.
+	translation.ch:Ich ha en Weg finde möse, die Macht de Magier wegzne. Und das hani ez.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [37] NPC Node
+	tag:37
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "anti_magic")
+	# translation: 
+	translation.tag:DL_Velius_AntiMagic
+	translation.en:I needed more information on anti-magic to develop the perfect anti-magic crystal.
+	translation.de:Ich brauchte mehr Information über Antimagie, um den perfekten Antimagiekristall zu entwickeln.
+	translation.ch:Ich ha me Informatione über Antimagie brucht, zum de perfekt Antimagiekristall z'entwickle.
+	[
+		# Link node, tag is next tag
+		tag:38
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_AntiMagic2
+	translation.en:Now I got it. Inverting and combining magic from affine mages from all five magic types will result in the perfect crystal.
+	translation.de:Jetzt habe ich es. Wenn ich die Magie von affinen Magiern von allen Magietypen invertiere und kombiniere, kann ich den Kristall damit erschaffen.
+	translation.ch:Jetz hanis. Weni d'Magie vo affine Magier vo allne füf Magietype kombinier und invertier, chani de perfekt Kristall erschaffe.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "creatures")
+	# translation: 
+	translation.tag:DL_Velius_Creatures
+	translation.en:They were there to test you. Khajag. Alastor. Who do you think summoned them?
+	translation.de:Sie waren da, um dich zu testen. Khajag. Alastor. Was dachtest du, wer sie erschaffen hat?
+	translation.ch:Si sind do gsi, zum dich teste. Khajag. Alastor. Wa hesch denn denkt, wer si erschaffe het?
+	[
+		# Link node, tag is next tag
+		tag:40
+	]
+}
+{2
+	# [40] Choice Node
+	tag:40
+	[
+		# Link node, tag is next tag
+		tag:41
+		# translation: 
+		translation.tag:DL_Choice_NotYou
+		translation.en:Well, certainly not someone as weak as you.
+		translation.de:Nun, sicher keiner, der so schwach ist wie du.
+		translation.ch:Naja, sicher kene, wo so nüt druf het we du.
+	]
+	[
+		# Link node, tag is next tag
+		tag:42
+		# translation: 
+		translation.tag:DL_Choice_YouDid
+		translation.en:Okay, now, when I think about it...
+		translation.de:Okay, jetzt, wo ich so drüber nachdenke...
+		translation.ch:Jo ez, woni so drüber nodenk...
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_NotYou
+	translation.en:Oh. You'll see...
+	translation.de:Oh. Warte mal schön ab...
+	translation.ch:Oh. Wart mal schön ab...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_YouDid
+	translation.en:They were great creatures, weren't they. Holding back weaklings and letting only the best mages pass...
+	translation.de:Grossartige Kreaturen, nicht wahr. Sie haben die Schwächlinge aufgehalten und Magier wie dich durchgelassen...
+	translation.ch:Grossartigi Kreature, gell. Si hend Schwächling ufghalte und Magier we dich dureglo...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "illusion")
+	# translation: 
+	translation.tag:DL_Velius_Illusion
+	translation.en:Magic is a spectrum, like colours. The magic type I call Illusion was discovered by myself recently.
+	translation.de:Magie ist ein Spektrum, wie Farben. Die Magieart, die ich Illusion getauft habe, wurde erst kürzlich von mir selbst entdeckt.
+	translation.ch:Magie isch es Spektrum, we Farbe. D'Magieart, woni Illusion tauft ha, isch erst chürzlich vo mir entdeckt worde.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Illusion2
+	translation.en:A very powerful type of magic. The power of controlling and deceiving people shouldn't be misused.
+	translation.de:Eine sehr mächtige Art von Magie. Die Macht, Leute zu kontrollieren und zu täuschen, sollte nicht in falsche Hände fallen.
+	translation.ch:E sehr mächtigi Art vo Magie. D'Macht, Lüüt z'kontrolliere und z'tüsche, söt nid i falschi Händ falle.
+	[
+		# Link node, tag is next tag
+		tag:45
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Illusion3
+	translation.en:That's why I kept it a secret.
+	translation.de:Deshalb habe ich dieses Geheimnis gehütet.
+	translation.ch:Drum hani das Gheimnis ghüetet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_Fight
+	translation.en:As you wish. Your sacrifice won't be in vain.
+	translation.de:Wie du willst. Dein Opfer wird nicht vergebens sein.
+	translation.ch:Wed wetsch. Dis Opfer wird nid vergäbens sii.
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 200)
+	# translation: 
+	translation.tag:
 	translation.en:
 	translation.de:
 	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }

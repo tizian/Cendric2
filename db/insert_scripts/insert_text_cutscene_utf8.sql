@@ -59,7 +59,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Nearly', 'cutscene','Your miserable efforts nearly destroyed my plans.','Deine erbärmlichen Bemühungen haben fast meine Pläne zerstört.','Dini erbärmliche Bemüehige hend fast mini Plän zerstört.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Now', 'cutscene','But in the end, everything worked out.','Aber am Ende hat alles geklappt.','Aber am End het alles klappt.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Need', 'cutscene','I don''t need you anymore.','Dich brauche ich nicht mehr.','Dich bruchi nümme.', '?');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Please', 'cutscene','Please, n...','Bitte, n...','Bitte, n...', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Die', 'cutscene','Die.','Stirb.','Stirb.', '?');
 
 
