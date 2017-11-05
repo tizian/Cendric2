@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "Misc/icon.h"
 
-sf::RenderWindow* g_renderWindow;
+sf::RenderTexture* g_renderTexture;
 
 Game::Game() {
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -44,7 +44,7 @@ void Game::reloadWindow() {
 	conf.isWindowReload = false;
 
 	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
-	g_renderWindow = &m_mainWindow;
+	g_renderTexture = &m_renderTexture;
 }
 
 void Game::run() {

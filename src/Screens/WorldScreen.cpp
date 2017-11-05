@@ -312,10 +312,7 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 
 		std::string file = getDocumentsPath(GlobalResource::SCREENSHOT_FOLDER) + std::string(buff) + ".png";
 
-		sf::Texture tex;
-		tex.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-		tex.update(*g_renderWindow);
-		tex.copyToImage().saveToFile(file);
+		g_renderTexture->getTexture().copyToImage().saveToFile(file);
 
 		std::string logString = "Saved screenshot under \"" + file + "\".";
 		g_logger->logInfo("WorldScreen", logString);

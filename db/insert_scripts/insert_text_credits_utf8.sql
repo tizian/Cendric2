@@ -146,7 +146,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome
+Kwon, Jerome, Peter
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
@@ -335,7 +335,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome
+Kwon, Jerome, Peter
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
@@ -521,7 +521,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome
+Kwon, Jerome, Peter
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild
