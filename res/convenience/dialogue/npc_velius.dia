@@ -55,6 +55,16 @@ npc.id:npc_velius
 	]
 	[
 		# Link node, tag is next tag
+		tag:53
+		condition:DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "eyes")
+		# translation: 
+		translation.tag:DL_Choice_Eyes
+		translation.en:What's the matter with the kings's eyes?
+		translation.de:Was ist eigentlich mit den Augen des Königs los?
+		translation.ch:Wa isch eigentlich mit de Auge vom König los?
+	]
+	[
+		# Link node, tag is next tag
 		tag:3
 		condition:not DL:isConditionFulfilled("npc_velius", "know_me")
 		# translation: 
@@ -225,9 +235,9 @@ npc.id:npc_velius
 	trigger:DL:addConditionProgress("npc_velius", "murderer")
 	# translation: 
 	translation.tag:DL_Velius_Murderer
-	translation.en:Hn. He was useless. Also, he nearly eliminated my most precious subject -
-	translation.de:Hn. Er war nutzlos. Auch hat er beinahe mein wertvollstes Subjekt eliminiert -
-	translation.ch:Hn. Er isch nutzlos gsi. Au hett er fast mis wertvollst Subjekt eliminiert -
+	translation.en:No. He's just sleeping. But, he nearly eliminated my most precious subject -
+	translation.de:Nein. Er schläft nur. Aber er hat beinahe mein wertvollstes Subjekt eliminiert -
+	translation.ch:Nei. Er schloft bloss. Aber er hett fast mis wertvollst Subjekt eliminiert -
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -256,6 +266,21 @@ npc.id:npc_velius
 	translation.en:But now, that I got you... there's no need for a king anymore.
 	translation.de:Aber jetzt, wo ich dich habe... braucht es keinen König mehr.
 	translation.ch:Aber jetz, wo ich dich ha... bruchts ken König me.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "eyes")
+	# translation: 
+	translation.tag:DL_Velius_Eyes
+	translation.en:I couldn't hide that, right. He's been under my control for too long.
+	translation.de:Das konnte ich nicht verbergen, was. Er ist schon zu lange unter meiner Kontrolle.
+	translation.ch:Das hani nid verberge chöne, he. Er isch scho z'lang unter minere Kontrolle.
 	[
 		# Link node, tag is next tag
 		tag:-2

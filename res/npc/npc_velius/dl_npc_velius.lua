@@ -23,6 +23,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_velius", "murderer")) then 
 		DL:addChoice(5, "DL_Choice_Murderer") -- You... just murdered the king?!
 	end
+	if (DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "eyes")) then 
+		DL:addChoice(53, "DL_Choice_Eyes") -- What's the matter with the kings's eyes?
+	end
 	if (not DL:isConditionFulfilled("npc_velius", "know_me")) then 
 		DL:addChoice(3, "DL_Choice_KnowMe") -- I assume, you know me?
 	end
@@ -78,7 +81,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_velius", "murderer")) then 
 
-		DL:createNPCNode(5, 7, "DL_Velius_Murderer") -- Hn. He was useless. Also, he nearly eliminated my most precious subject -
+		DL:createNPCNode(5, 7, "DL_Velius_Murderer") -- No. He's just sleeping. But, he nearly eliminated my most precious subject -
 		DL:addConditionProgress("npc_velius", "murderer")
 		DL:addNode()
 
@@ -88,6 +91,14 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(8, -2, "DL_Velius_Murderer3") -- But now, that I got you... there's no need for a king anymore.
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "eyes")) then 
+
+		DL:createNPCNode(53, -2, "DL_Velius_Eyes") -- I couldn't hide that, right. He's been under my control for too long.
+		DL:addConditionProgress("npc_velius", "eyes")
 		DL:addNode()
 
 	end
