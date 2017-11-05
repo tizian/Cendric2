@@ -80,3 +80,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ve
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius','Boss: Velius','Boss: Velius');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('windyplateau','location','Windy Plateau','Windige Hochebene','Windigi Hochebeni');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('testlevel','location','Test Level','Testlevel','Testlevel');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('peterslevel','location','Peter''s Hell','Peter''s Hölle','Em Peter sini Höll');
