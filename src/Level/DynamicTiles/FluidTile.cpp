@@ -258,6 +258,7 @@ void FluidTile::render(sf::RenderTarget& target) {
 }
 
 void FluidTile::onHit(Spell* spell) {
+	if (spell->isAttachedToMob()) return;
 	auto id = spell->getSpellID();
 
 	int index = static_cast<int>(std::floor((spell->getPosition().x - m_x) / TILE_SIZE));
@@ -280,7 +281,7 @@ void FluidTile::onHit(Spell* spell) {
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
 	if (m_data.isDeadly) {
-		mob->setDead();
+ 		mob->setDead();
 	}
 
 	if (m_data.isFreezing && m_timeUntilDamage == sf::Time::Zero) {

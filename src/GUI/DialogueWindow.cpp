@@ -324,7 +324,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 		m_chosenOption = std::max(m_chosenOption - 1, 0);
 		DialogueOption& option = m_options[m_chosenOption];
 		m_timeSinceTick = sf::Time::Zero;
-		if (option.getPosition().y < TOP) {
+		if (option.getPosition().y < TOP + SCROLL_WINDOW_TOP) {
 			m_scrollBar->scroll(-1);
 		}
 		return;
@@ -334,7 +334,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
 		DialogueOption& option = m_options[m_chosenOption];
 		m_timeSinceTick = sf::Time::Zero;
-		if (option.getPosition().y + option.getSize().y > TOP + HEIGHT) {
+		if (option.getPosition().y + option.getSize().y > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) {
 			m_scrollBar->scroll(1);
 		}
 		return;

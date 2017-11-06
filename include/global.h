@@ -98,17 +98,17 @@ inline int round_int(float r) {
 }
 
 inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
-	return !(rect2.left + Epsilon > rect1.left + rect1.width
-		|| rect1.left + Epsilon > rect2.left + rect2.width
-		|| rect2.top + Epsilon > rect1.top + rect1.height
-		|| rect1.top + Epsilon > rect2.top + rect2.height);
+	return !(rect2.left + Epsilon >= rect1.left + rect1.width
+		|| rect1.left + Epsilon >= rect2.left + rect2.width
+		|| rect2.top + Epsilon >= rect1.top + rect1.height
+		|| rect1.top + Epsilon >= rect2.top + rect2.height);
 }
 
 inline bool fastIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
-	return !(rect2.left > rect1.left + rect1.width
-		|| rect1.left > rect2.left + rect2.width
-		|| rect2.top > rect1.top + rect1.height
-		|| rect1.top > rect2.top + rect2.height);
+	return !(rect2.left >= rect1.left + rect1.width
+		|| rect1.left >= rect2.left + rect2.width
+		|| rect2.top >= rect1.top + rect1.height
+		|| rect1.top >= rect2.top + rect2.height);
 }
 
 inline std::string removeDigits(const std::string& s) {
@@ -142,7 +142,7 @@ inline void updateTime(sf::Time& time, const sf::Time& frameTime) {
 }
 
 // versioning
-#define CENDRIC_VERSION_NR "0.6.3 - Peter"
+#define CENDRIC_VERSION_NR "0.7.0 BETA - WEEK 1"
 
 // max frame time (in seconds)
 #define MAX_FRAME_TIME 0.05f

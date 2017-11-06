@@ -1218,7 +1218,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="247" x="2200" y="650" width="25" height="12.5">
+  <object id="247" x="2150" y="600" width="25" height="12.5">
    <properties>
     <property name="level entry" value="res/level/peterslevel/peterslevel.tmx,1500,1260"/>
     <property name="persistent" value=""/>
@@ -1230,7 +1230,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="255" x="2212.5" y="737.5" width="25" height="12.5">
+  <object id="255" x="2200" y="600" width="25" height="12.5">
    <properties>
     <property name="level entry" value="res/level/ppuzzle01/ppuzzle01.tmx,1500,1260"/>
     <property name="persistent" value=""/>
