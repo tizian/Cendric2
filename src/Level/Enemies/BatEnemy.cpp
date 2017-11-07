@@ -35,7 +35,7 @@ void BatEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.damage = 5;
+	chopSpell.damage = 10;
 	chopSpell.damagePerSecond = 4;
 	chopSpell.duration = sf::seconds(3.f);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);

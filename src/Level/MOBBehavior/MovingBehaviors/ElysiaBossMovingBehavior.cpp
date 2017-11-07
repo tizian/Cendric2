@@ -241,6 +241,9 @@ void ElysiaBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	else if (m_boss->getBossState() == ElysiaBossState::ThunderstormUp || m_boss->getBossState() == ElysiaBossState::Thunderstorm) {
 		newState = GameObjectState::Casting3;
 	}
+	else if (m_boss->getBossState() == ElysiaBossState::Nosedive) {
+		newState = GameObjectState::Fighting;
+	}
 	else if (m_fightAnimationTime > sf::Time::Zero) {
 		newState = m_fightAnimationState;
 	}
