@@ -5,12 +5,11 @@
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Damaging, DamagingTile)
 
-const std::string  DamagingTile::SHATTER_SOUND = "res/sound/mob/yashaadd_death.ogg";
+const std::string DamagingTile::SHATTER_SOUND = "res/sound/mob/yashaadd_death.ogg";
+const float DamagingTile::DAMAGE_RADIUS = 20.f;
 
 bool DamagingTile::init(const LevelTileProperties& properties) {
-	setPositionOffset(sf::Vector2f(5.f, 5.f));
-	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 10.f, TILE_SIZE_F - 10.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
 
 	m_isDivine = contains(properties, std::string("divine"));
@@ -44,6 +43,22 @@ void DamagingTile::loadAnimation(int skinNr) {
 	// initial values
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
+
+	// debug circle
+	m_debugCircle.setFillColor(COLOR_TRANSPARENT);
+	m_debugCircle.setOutlineColor(COLOR_BAD);
+	m_debugCircle.setOutlineThickness(2.f);
+	m_debugCircle.setRadius(DAMAGE_RADIUS);
+	m_debugCircle.setOrigin(sf::Vector2f(DAMAGE_RADIUS, DAMAGE_RADIUS));
+	float circleRadius = DAMAGE_RADIUS + (m_boundingBox.width * 0.5f - DAMAGE_RADIUS);
+	m_circleOffset = sf::Vector2f(circleRadius, circleRadius);
+}
+
+void DamagingTile::renderAfterForeground(sf::RenderTarget& target) {
+	LevelDynamicTile::renderAfterForeground(target);
+	if (m_isDebugRendering) {
+		target.draw(m_debugCircle);
+	}
 }
 
 void DamagingTile::update(const sf::Time& frameTime) {
@@ -56,7 +71,17 @@ void DamagingTile::update(const sf::Time& frameTime) {
 	}
 }
 
+void DamagingTile::setPosition(const sf::Vector2f& position) {
+	LevelDynamicTile::setPosition(position);
+	m_debugCircle.setPosition(position + m_circleOffset);
+}
+
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
+	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
+	if (!fastIntersect(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
+		return;
+	}
+
 	if (!m_isDivine) {
 		mob->setDead();
 		return;

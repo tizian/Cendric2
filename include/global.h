@@ -111,6 +111,16 @@ inline bool fastIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2
 		|| rect1.top >= rect2.top + rect2.height);
 }
 
+inline bool fastIntersect(const sf::FloatRect& bb, const sf::Vector2f& center, float radius) {
+	sf::Vector2f pc = center;
+	if (pc.x > bb.left + bb.width) pc.x = bb.left + bb.width;
+	if (pc.x < bb.left) pc.x = bb.left;
+	if (pc.y > bb.top + bb.height) pc.y = bb.top + bb.height;
+	if (pc.y < bb.top) pc.y = bb.top;
+
+	return dist(pc, center) < radius;
+}
+
 inline std::string removeDigits(const std::string& s) {
 	std::string removed = s;
 	removed.erase(std::remove_if(removed.begin(), removed.end(), [](char c) {return isdigit(c); }), removed.end());

@@ -159,16 +159,7 @@ void SwingingTile::renderAfterForeground(sf::RenderTarget& target) {
 void SwingingTile::onHit(LevelMovableGameObject* mob) {
 	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
 
-	// check AABB circle collision
-	auto const& bb = *mob->getBoundingBox();
-	auto const& pt = m_debugCircle.getPosition();
-	sf::Vector2f pc = pt;
-	if (pc.x > bb.left + bb.width) pc.x = bb.left + bb.width;
-	if (pc.x < bb.left) pc.x = bb.left;
-	if (pc.y > bb.top + bb.height) pc.y = bb.top + bb.height;
-	if (pc.y < bb.top) pc.y = bb.top;
-
-	if (dist(pc, pt) < DAMAGE_RADIUS) {
+	if (fastIntersect(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
 		mob->setDead();
 	}
 }
