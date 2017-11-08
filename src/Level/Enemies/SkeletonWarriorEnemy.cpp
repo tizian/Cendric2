@@ -35,7 +35,7 @@ void SkeletonWarriorEnemy::loadAttributes() {
 
 void SkeletonWarriorEnemy::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 40;
+	chopSpell.damage = 50;
 	chopSpell.duration = sf::seconds(2.f);
 	chopSpell.damagePerSecond = 10;
 	chopSpell.activeDuration = sf::milliseconds(300);

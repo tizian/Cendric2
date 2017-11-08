@@ -131,7 +131,6 @@ npc.id:npc_harek
 	[
 		# Link node, tag is next tag
 		tag:16
-		condition:DL:isQuestState("ice_armor", "completed")
 		# translation: 
 		translation.tag:DL_Choice_Craft
 		translation.en:Could you craft something for me?

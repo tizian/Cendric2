@@ -36,7 +36,8 @@ void OptionsScreen::execOnEnter() {
 	// language
 	m_languageSelector = new ArrowSelector();
 	m_languageSelector->setLabelText("Language");
-	for (int language = 1; language < static_cast<int>(Language::MAX); ++language) {
+	// TODO [BETA] replace with Language::MAX again.
+	for (int language = 1; language < static_cast<int>(Language::LANG_ES); ++language) {
 		m_languageSelector->addOption(EnumNames::getLanguageName(static_cast<Language>(language)));
 	}
 	m_languageSelector->setOptionIndex(static_cast<int>(g_resourceManager->getConfiguration().language) - 1);

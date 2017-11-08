@@ -228,6 +228,10 @@ int Enemy::getMentalStrength() const {
 	return 0;
 }
 
+void Enemy::setAlwaysUpdate() {
+	m_isAlwaysUpdate = true;
+}
+
 EnemyState Enemy::getEnemyState() const {
 	return m_enemyState;
 }

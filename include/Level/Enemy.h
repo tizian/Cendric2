@@ -75,7 +75,8 @@ public:
 	void switchLever();
 
 	GameObjectType getConfiguredType() const override;
-	
+
+	void setAlwaysUpdate();
 	EnemyState getEnemyState() const;
 	// a level, ranges from 0 to 4. An enemy can only be feared / stunned / resurrected, if the level of its spell is high enough.
 	// default is 0. A enemy with level 4 can never be feared / stunned / controlled or affected in any other way!!

@@ -82,3 +82,17 @@ void MirrorTile::setRotation(float rotation) {
 std::string MirrorTile::getSpritePath() const {
 	return "res/texture/level_dynamic_tiles/spritesheet_tiles_mirror.png";
 }
+
+//////////// Mirror Ray ///////////////
+
+MirrorRay::MirrorRay(LevelScreen* levelScreen) {
+	m_screen = levelScreen;
+}
+
+void MirrorRay::update(const sf::Time& frameTime) {
+
+}
+
+void MirrorRay::render(sf::RenderTarget& target) {
+
+}

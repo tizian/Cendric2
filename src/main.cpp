@@ -7,12 +7,12 @@
 #include "TextProvider.h"
 
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
-// #define EXTERNAL_DOCUMENTS_FOLDER
+#define EXTERNAL_DOCUMENTS_FOLDER
 
 // Resolve .app package internal resource path for mac builds
 // #define APPLE_APP_BUILD
 
-#define DEBUG
+//#define DEBUG
 #define BETA
 
 #ifdef _WIN32

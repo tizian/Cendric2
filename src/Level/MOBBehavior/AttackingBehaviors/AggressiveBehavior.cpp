@@ -21,6 +21,9 @@ void AggressiveBehavior::updateAggro() {
 	if (m_enemy->getEnemyState() == EnemyState::Idle || m_enemy->getEnemyState() == EnemyState::Waiting) {
 		m_currentTarget = nullptr;
 	}
+	if (m_currentTarget) {
+		m_enemy->setAlwaysUpdate();
+	}
 	if (m_currentTarget || m_enemy->getEnemyState() != EnemyState::Idle) return;
 
 	// search for new target

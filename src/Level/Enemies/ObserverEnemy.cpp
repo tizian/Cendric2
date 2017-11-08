@@ -105,7 +105,7 @@ sf::Time ObserverEnemy::getConfiguredWaitingTime() const {
 }
 
 sf::Time ObserverEnemy::getConfiguredChasingTime() const {
-	return sf::seconds(static_cast<float>(rand() % 10 + 5));
+	return sf::seconds(static_cast<float>(rand() % 4 + 4));
 }
 
 void ObserverEnemy::loadAnimation(int skinNr) {

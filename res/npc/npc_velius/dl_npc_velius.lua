@@ -277,7 +277,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(35, 36, "DL_Velius_Bitter2") -- My parents weren't mages. They suffered a lot from the oppression of the clerics.
+		DL:createNPCNode(35, 36, "DL_Velius_Bitter2") -- I was born into a family of commoners. I know what it feels like to be treated like dirt.
 		DL:addNode()
 
 
@@ -342,8 +342,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(28, -1, "") -- 
-		DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 200)
+		DL:createNPCNode(28, -1, "DL_Velius_Beta") -- (To be continued...)
 		DL:addNode()
 
 	end

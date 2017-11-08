@@ -11,7 +11,7 @@ enum class SwingingTileMode {
 
 class SwingingTile final : public LevelDynamicTile, public LeverDependentTile {
 public:
-	SwingingTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
+	SwingingTile(LevelScreen* levelScreen);
 	~SwingingTile();
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;

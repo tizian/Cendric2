@@ -1,14 +1,14 @@
 # a magical number that stops you from modifying the saved game 
-hash:92118514
+hash:2633653183
 # time played, in seconds
-time.played:9144
-savegame.name:Quicksave
-savegame.date:1510171636
+time.played:9102
+savegame.name:40_inina_sewers
+savegame.date:1510171594
 level.id:res/level/crystalcrypt/crystalcrypt.tmx
 level.position:1910.000000,1610.000000
 is.in.level:0
-map.id:res/map/gandria/gandria.tmx
-map.position:195.091141,2581.596191
+map.id:res/map/gandriasewers/gandriasewers.tmx
+map.position:313.051819,1131.912354
 forced.map.id:
 forced.map.position:3465.000000,2260.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
@@ -191,7 +191,7 @@ chests.looted:res/level/well/well.tmx
 chests.looted:res/level/windyplateau/windyplateau.tmx,252
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/gandria/gandria.tmx,308,966.000000,1160.000000,311,1416.000000,1960.000000,313,366.000000,2610.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,319,2616.000000,2960.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000,322,3466.000000,2310.000000
-waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,308,116.000000,210.000000,309,316.000000,810.000000,310,1166.000000,1210.000000,311,1816.000000,1210.000000
+waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,308,116.000000,210.000000,310,1166.000000,1210.000000,311,1816.000000,1210.000000
 waypoints.unlocked:res/map/marshland/marshland.tmx,291,1366.000000,210.000000,292,766.000000,410.000000,295,1616.000000,1710.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,231,2416.000000,510.000000,232,2866.000000,960.000000,233,1116.000000,710.000000,234,866.000000,1660.000000,235,2016.000000,1860.000000,236,2816.000000,2510.000000,237,2166.000000,2760.000000,238,1116.000000,2760.000000,239,3366.000000,3060.000000,254,3166.000000,1485.000000
 # modifiers unlocked:
@@ -252,8 +252,8 @@ doors.open:res/level/well/well.tmx
 doors.open:res/level/windyplateau/windyplateau.tmx
 # tiles explored in world:
 tiles.explored:res/map/meadows/meadows.tmx,70,70,  а?ь€Г?   ь€€с  А€«€€€  р€с€€€  юь€€€ ј€€€€  р€«€€€  ь€с€€€  €ш€€€ ј€€€€  р€г€€€  ьь€€€?  €€€€€ а€√€€€€ ь€р€€€€ €?ь€€€€ ј€€€€€? ш€√€€€€а€€р€€€€ь€?ь€€€€А€€€€€€?а€€Г€€€€ш€€ј€€€€ ю€? ј€€?А€€ р€€?а€€ ь€€ш€€  ю€€ю€? А€€€А€€€ш€€?а€€€?€€€ш€€€€€€€ю€€€€€€€А€€€€€€€?а€€€€€€€ш€€€€€€€ю€€€€€€€А€€€€€€€?а€€€€€€€ш€€€€€€€ю€г€€€€€А€А€€€€?а€ь€€€€ш€Г€€р€ юр€€П А€ь€р? а€€€ю ш€Ѕ€А€ ю?р€€г€А€€э€€щ а€€€€€ю ш€€€€€€ ю€€€€€€А€€€€€€ а€€€€€€ ш€€€€€€ ю€€€€€€€ь€€€€€€€њ€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ а€€€€€€ ј€€€€€€ а€€€€€€  ш€€€€   ј€€€€     €€€    А€€?     ,0000
-tiles.explored:res/map/gandria/gandria.tmx,80,70,                                                                                                                                                                                     ь        ю€        €€       €€       €€       €€       €€       €€       €€       €€       ю€       ь€       ь€       ю€       €€       €€       €€€       €€€?      €€€      €€€€      €€€€      €€€€   ь €€€€   ю €€€€   € ю€€€   € ь€€€   €  ш€€   €А?ь€€ш€€€€€€ь€€€€€€€€€€?€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€«€€€€€€€€√€€€€€€€€√€€€€€ю?€√€€€€€р€√€€€€€?  €Г€€€€€  €€€€€€   €ю€€    € а€     € а€     € а€     ю  ј     ,
-tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,€€  €€  €€  €€  €€  €€  €€  €€  €€  €€  €€   €   €   €   €   €   € €€€З€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ч€г€,
+tiles.explored:res/map/gandria/gandria.tmx,80,70,                                                                                                                                                                                     ь        ю€        €€       €€       €€       €€       €€       €€       €€       €€       ю€       ь€       ь€       ю€       €€       €€       €€€       €€€?      €€€      €€€€      €€€€      €€€€   ь €€€€   ю €€€€   € ю€€€   € ь€€€   €  ш€€   €А?ь€€ш€ь€€€€ь€€€€€€€€€€?€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€«€€€€€€€€√€€€€€€€€√€€€€€ю?€√€€€€€р€√€€€€€?  €Г€€€€€  €€€€€€   €ю€€    € а€     € а€     € а€     ю  ј     ,
+tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,€€  €€  €€  €€  €€  €€  €€  €€  €€  €€  €€   €                          €шуЗ€€ь€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ч€г€,
 tiles.explored:res/map/marshland/marshland.tmx,50,40,  ь€   ш€   €€  ј€€  А€€€  €€€  ь€€  р€€  ј€€€  €€€  ь€€  р€   ј€€    €    ш    ј?                                                                           А?     €    ю?    ш€   а€   А€?    ю€    ш€   а€   А€?    ю€    р€   А€ ,
 # quest states:
 quest.state:a_new_trace,2
@@ -306,7 +306,6 @@ quest.progress.condition:zeff_returns,guards_convinced
 # quest descriptions unlocked:
 quest.progress.description:a_new_trace,1
 quest.progress.description:element_master,1,2,3
-quest.progress.description:further_investigation,1
 quest.progress.description:gates_of_gandria,1
 quest.progress.description:join_a_guild,4
 quest.progress.description:monster_problem,1
@@ -328,7 +327,6 @@ progress.condition:npc_helena,old_things,q_ship,sold_things,talked
 progress.condition:npc_helena2,talked,who_are_you
 progress.condition:npc_ingrid,meat_given,who_am_i,who_are_you
 progress.condition:npc_inina,aura,farmers,hi,learned_light,mage,mark,mark_getrid,mark_whatis,mark_whowould,missing_people,power_weakened,shrine,what_doing,whats_reward,where_light,where_search
-progress.condition:npc_inina2,talked
 progress.condition:npc_innkeeper,asked_for_feudal_fire,bought_feudal_fire,first_rumor,right_name,second_rumor
 progress.condition:npc_ivo,gandria,merchant,sheep_asked,who_are_you
 progress.condition:npc_jack,elysia,who_are_you,why_not_clerics

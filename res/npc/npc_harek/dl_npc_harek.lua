@@ -43,9 +43,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")) then 
 		DL:addChoice(14, "DL_Choice_GotIronOre") -- I got the iron ore for you.
 	end
-	if (DL:isQuestState("ice_armor", "completed")) then 
-		DL:addChoice(16, "DL_Choice_Craft") -- Could you craft something for me?
-	end
+	DL:addChoice(16, "DL_Choice_Craft") -- Could you craft something for me?
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -142,7 +140,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isQuestState("ice_armor", "completed")) then 
+
 
 		DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials and some iron ore?
 		DL:addNode()
@@ -382,7 +380,5 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 		end
-
-	end
 
 end

@@ -5,6 +5,12 @@
 
 class LevelMainCharacter;
 class InteractComponent;
+class ParticleComponent;
+
+namespace particles {
+	class LineSpawner;
+	class AngledVelocityGenerator;
+}
 
 class MirrorTile final : public LevelDynamicTile {
 public:
@@ -32,5 +38,15 @@ private:
 };
 
 class MirrorRay final : public GameObject {
-	
+public:
+	explicit MirrorRay(LevelScreen* levelScreen);
+	~MirrorRay() {};
+
+	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
+
+	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
+
+private:
+	LevelScreen* m_screen;
 };

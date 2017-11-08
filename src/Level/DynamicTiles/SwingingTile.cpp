@@ -7,6 +7,10 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Swinging, SwingingTile)
 
 const float SwingingTile::DAMAGE_RADIUS = 25.f;
 
+SwingingTile::SwingingTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
+	m_isAlwaysUpdate = true;
+}
+
 SwingingTile::~SwingingTile() {
 	delete m_texture;
 }

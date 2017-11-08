@@ -781,9 +781,9 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Bitter2
-	translation.en:My parents weren't mages. They suffered a lot from the oppression of the clerics.
-	translation.de:Meine Eltern waren keine Magier. Sie haben sehr unter der Unterdrückung der Kleriker gelitten.
-	translation.ch:Mini Eltere sind ke Magier gsi. Si hend sehr unter de Unterdrückig vode Kleriker glitte.
+	translation.en:I was born into a family of commoners. I know what it feels like to be treated like dirt.
+	translation.de:Ich wurde in eine Familie von Gewöhnlichen geboren. Ich weiss, wie es sich anfühlt, wie Dreck behandelt zu werden.
+	translation.ch:Ich bi inere Familie vo Gwöhnliche gebore worde. Ich weiss, we's sich afühlt, we Dreck behandlet z'werde.
 	[
 		# Link node, tag is next tag
 		tag:36
@@ -958,12 +958,11 @@ npc.id:npc_velius
 	# [28] NPC Node
 	tag:28
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 200)
 	# translation: 
-	translation.tag:
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Velius_Beta
+	translation.en:(To be continued...)
+	translation.de:(Fortsetzung folgt...)
+	translation.ch:(Fortsetzig folgt...)
 	[
 		# Link node, tag is next tag
 		tag:-1
