@@ -7,7 +7,7 @@
 #include "TextProvider.h"
 
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
-#define EXTERNAL_DOCUMENTS_FOLDER
+// #define EXTERNAL_DOCUMENTS_FOLDER
 
 // Resolve .app package internal resource path for mac builds
 // #define APPLE_APP_BUILD
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 	time_t timeNow = time(NULL);
 	tm now;
 	tm* nowTemp = gmtime(&timeNow);
-	memcpy(&now, nowTemp, sizeof(now));
+	std::memcpy(&now, nowTemp, sizeof(now));
 
 	if (nowTemp->tm_year >= 117) { // 2017
 		if (nowTemp->tm_mon >= 10) { // november
