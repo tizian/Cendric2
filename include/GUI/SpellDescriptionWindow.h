@@ -16,7 +16,7 @@ public:
 
 	// sets the spell ID and modifiers for the window and reloads everything.
 	// the attributes should be the attributes of the core with the equipped items
-	void reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData* bean);
+	void reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData& bean);
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
 

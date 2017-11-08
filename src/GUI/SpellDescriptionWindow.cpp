@@ -33,14 +33,14 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 	m_coloredText.setColor(COLOR_LIGHT_PURPLE);
 }
 
-void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData* attributes) {
+void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData& attributes) {
 	SpellData bean = SpellData::getSpellData(id);
 	std::string strengthName;
 	int strengthValue;
 
 	SpellCreator* creator = SpellData::getSpellCreator(bean, modifiers, nullptr);
 	bean = creator->getSpellData();
-	creator->updateDamageAndHeal(bean, attributes, false);
+	creator->updateDamageAndHeal(bean, &attributes, false);
 	strengthName = creator->getStrengthModifierName();
 	strengthValue = creator->getStrengthModifierValue();
 

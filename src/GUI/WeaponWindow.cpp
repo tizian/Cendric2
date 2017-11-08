@@ -99,7 +99,7 @@ void WeaponWindow::reloadSpellDesc() {
 			modifiers.push_back(it.getModifier());
 		}
 	}
-	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, &m_core->getTotalAttributes());
+	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, m_core->getTotalAttributes());
 	m_spellDesc->show();
 }
 
