@@ -5,6 +5,7 @@
 #include "InputController.h"
 #include "Logger.h"
 #include "TextProvider.h"
+#include <cstring>
 
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
 // #define EXTERNAL_DOCUMENTS_FOLDER
@@ -29,7 +30,6 @@ std::string g_documentsPath = "";
 int main(int argc, char* argv[]) {
 
 #ifdef BETA
-#include <cstring>
 	time_t timeNow = time(NULL);
 	tm now;
 	tm* nowTemp = gmtime(&timeNow);
