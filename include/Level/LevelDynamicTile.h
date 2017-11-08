@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "World/AnimatedGameObject.h"
-#include "ResourceManager.h"
 #include "Structs/LevelDynamicTileData.h"
 
 class Spell;
@@ -30,7 +29,7 @@ public:
 	// the render method of level dynamic tiles gets called twice per game loop
 	// this is to seperate the water tiles which are rendered after the game objects
 	// from the other tiles.
-	virtual void render(sf::RenderTarget& target) override;
+	void render(sf::RenderTarget& target) override;
 
 	// sets the position offset for a dynamic tile. DON'T use that for collidable dynamic tiles.
 	void setPositionOffset(const sf::Vector2f& offset);

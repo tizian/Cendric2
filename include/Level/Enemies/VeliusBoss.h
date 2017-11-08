@@ -3,8 +3,18 @@
 #include "global.h"
 #include "Level/Boss.h"
 #include "Level/Level.h"
-#include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
+
+enum VeliusBossState {
+	AttackIllusion,
+	ExtractDivine,
+	AttackDivine,
+	ExtractNecromancy,
+	AttackNecromancy,
+	ExtractTwilight,
+	AttackTwilight,
+	ExtractElemental
+};
 
 class VeliusBoss final : public Boss {
 public:

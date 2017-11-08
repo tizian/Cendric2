@@ -9,7 +9,7 @@ class InteractComponent;
 
 class LeverTile final : public LevelDynamicTile {
 public:
-	LeverTile(LevelScreen* levelScreen);
+	explicit LeverTile(LevelScreen* levelScreen);
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
