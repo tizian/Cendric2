@@ -29,6 +29,7 @@ std::string g_documentsPath = "";
 int main(int argc, char* argv[]) {
 
 #ifdef BETA
+#include <cstring>
 	time_t timeNow = time(NULL);
 	tm now;
 	tm* nowTemp = gmtime(&timeNow);
