@@ -34,7 +34,7 @@ loadDialogue = function(DL)
 		DL:addChoice(16, "DL_Choice_Mages") -- Have you seen some mages passing through here?
 	end
 	if (not DL:isConditionFulfilled("npc_rana", "trade")) then 
-		DL:addChoice(4, "DL_Choice_UnlockTrade") -- Dou you sell something?
+		DL:addChoice(4, "DL_Choice_UnlockTrade") -- Do you sell something?
 	end
 	if (DL:isConditionFulfilled("npc_rana", "trade")) then 
 		DL:addChoice(3, "DL_Choice_Trade") -- Show me your wares.
@@ -100,7 +100,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_yasha", "unfriendly")) then 
 
-			DL:createNPCNode(14, -2, "DL_Rana_BefriendedYasha") -- Oh, really? Very interesting news. We won't do her any harm of course, she's like a goddess for this valley.  
+			DL:createNPCNode(14, -2, "DL_Rana_BefriendedYasha") -- Oh, really? Very interesting news. We won't do her any harm of course, she's like a goddess for this valley.
 			DL:addNode()
 
 		end

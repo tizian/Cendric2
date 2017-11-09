@@ -251,7 +251,7 @@ npc.id:npc_robert2
 	# translation: 
 	translation.tag:DL_Robert_Crypt3
 	translation.en:But I really need this stone! I can't get away without it.
-	translation.de:Aber ich brauche diesen  Stein wirklich! Ohne ihn komme ich nicht weg von hier.
+	translation.de:Aber ich brauche diesen Stein wirklich! Ohne ihn komme ich nicht weg von hier.
 	translation.ch:Aber ich bruch de Stei würkli! Ohni ihn chumi nid weg vo do.
 	[
 		# Link node, tag is next tag
@@ -323,7 +323,7 @@ npc.id:npc_robert2
 	trigger:DL:changeQuestState("teleport_robert", "started")
 	# translation: 
 	translation.tag:DL_Robert_StartRobertQuest
-	translation.en:Maybe you're lucky. I'll waith here.
+	translation.en:Maybe you're lucky. I'll wait here.
 	translation.de:Vielleicht hast du ja Glück. Ich warte hier.
 	translation.ch:Vilicht hesch ja Glück. Ich warte do.
 	[

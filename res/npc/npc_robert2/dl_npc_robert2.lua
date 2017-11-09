@@ -125,7 +125,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_robert2", "teleport_quest") and DL:isQuestState("teleport_robert", "void")) then 
 
-		DL:createNPCNode(14, -2, "DL_Robert_StartRobertQuest") -- Maybe you're lucky. I'll waith here.
+		DL:createNPCNode(14, -2, "DL_Robert_StartRobertQuest") -- Maybe you're lucky. I'll wait here.
 		DL:changeQuestState("teleport_robert", "started")
 		DL:addNode()
 

@@ -271,7 +271,7 @@ npc.id:npc_graham
 	translation.tag:DL_Graham_GotDulcimer
 	translation.en:Oooooh! My dulcimer! (Graham takes it and strokes it tenderly)
 	translation.de:Oooooh! Meine Dulcimer! (Graham nimt sie und streicht liebevoll darüber)
-	translation.ch:Oooooh! Mini Dulcimer! (De Graham  nimmt si und stricht liebevoll drüber)
+	translation.ch:Oooooh! Mini Dulcimer! (De Graham nimmt si und stricht liebevoll drüber)
 	[
 		# Link node, tag is next tag
 		tag:7

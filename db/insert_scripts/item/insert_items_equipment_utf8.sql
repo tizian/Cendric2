@@ -54,7 +54,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Cairn Armour
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item', 'Cairn Armour','Cairn-Rüstung','Cairn-Rüschtig');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste  vo Steimännli Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste vo Steimännli Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_cairnarmor', 'eq_body', 700, 500, 220);
 INSERT INTO item_attribute (item_id, dmg_ice, res_ice, max_health, res_physical, res_fire) values ('eq_cairnarmor', 5, 200, 45, 50, -100);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnarmor', 'res/texture/equipment/body/spritesheet_body_cairnarmor.png', 'res/texture/equipment/body/spritesheet_map_body_cairnarmor.png');
