@@ -831,7 +831,6 @@
   <object id="67" gid="1113" x="1950" y="1300" width="50" height="50"/>
   <object id="68" gid="1110" x="2750" y="600" width="50" height="50"/>
   <object id="69" gid="1107" x="2750" y="850" width="50" height="50"/>
-  <object id="150" gid="1128" x="250" y="725" width="50" height="50"/>
   <object id="157" gid="1109" x="850" y="210" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="trigger">
