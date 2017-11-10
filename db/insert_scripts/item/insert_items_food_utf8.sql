@@ -51,7 +51,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Cave Berries
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item', 'Cave Berries','Höhlenbeeren','Höhlebeeri');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet, but its pip is poisonous.','Süss aber der Kern ist giftig.','Süess aber de Chern isch giftig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_caveberry', 'item_desc', 'Sweet, but its pip is poisonous.','Süss, aber der Kern ist giftig.','Süess, aber de Chern isch giftig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_caveberry', 'consumable', 500, 0, 3);
 INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_shadow, res_light) values ('fo_caveberry', -1, 6, 5, 50);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_caveberry', 20);

@@ -249,7 +249,7 @@ npc.id:npc_helena
 	# translation: 
 	translation.tag:DL_Helena_SoldThings
 	translation.en:Oh, I don't remember. But I've only sold some robes and hats anyway.
-	translation.de:Oh, an die erinnere ich mich nich mehr. Aber ich habe sowieso nur ein paar Roben und Hüte loswreden können.
+	translation.de:Oh, an die erinnere ich mich nich mehr. Aber ich habe sowieso nur ein paar Roben und Hüte loswerden können.
 	translation.ch:Oh, a die erinnere ich mich nüm. Aber ich ha sowieso nur es paar Robe und Hüet loswerde chöne.
 	[
 		# Link node, tag is next tag
