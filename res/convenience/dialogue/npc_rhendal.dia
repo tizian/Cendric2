@@ -939,7 +939,7 @@ npc.id:npc_rhendal
 	translation.tag:DL_Rhendal_BrokenBridge5
 	translation.en:Use your ice magic to freeze the river and get to the other side.
 	translation.de:Nutze deine Eismagie, um den Fluss zu gefrieren und auf die andere Seite zu gelangen.
-	translation.ch:Bruch dini Iismagie, zum de Fluss gführe und uf di ander Siite z'go.
+	translation.ch:Bruch dini Iismagie, zum de Fluss gfrühre und uf di ander Siite z'go.
 	[
 		# Link node, tag is next tag
 		tag:52

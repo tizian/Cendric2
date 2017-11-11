@@ -11,7 +11,7 @@ I hope I''ll find a way out of this cave...
 
 -- Paladin Marcus','Wer das auch immer liest: Nehmt Euch in Acht!
 
-Diese Höhlen sind gspickt mit Fallen, ich habe es nur mit viel Glück da hin geschafft, wo ich jetzt bin. Die fünf Hebel werden Euch töten wenn Ihr den falschen zieht. Benutzt den letzten als erstes und den ersten als letztes und berührt keinen der anderen.
+Diese Höhlen sind gespickt mit Fallen, ich habe es nur mit viel Glück da hin geschafft, wo ich jetzt bin. Die fünf Hebel werden Euch töten wenn Ihr den falschen zieht. Benutzt den Letzten als erstes und den Ersten als letztes und berührt keinen der anderen.
 
 Ich hoffe, ich komme irgendwie wieder aus diesen Höhlen hinaus...
 

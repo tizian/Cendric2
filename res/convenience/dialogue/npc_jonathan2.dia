@@ -142,7 +142,7 @@ npc.id:npc_jonathan2
 	# translation: 
 	translation.tag:DL_Jonathan_House
 	translation.en:Yeah that's true. But I had to.
-	translation.de:Ja das stimmt. Aber ich msste.
+	translation.de:Ja das stimmt. Aber ich musste.
 	translation.ch:Jo das stimmt. Aber ich han möse.
 	[
 		# Link node, tag is next tag
