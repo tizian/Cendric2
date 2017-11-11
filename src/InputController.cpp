@@ -197,6 +197,10 @@ const std::string& InputController::getReadText() const {
 	return m_readText;
 }
 
+void InputController::cropReadText(int maxLength) {
+	m_readText = m_readText.substr(0, maxLength);
+}
+
 void InputController::readUnicode(sf::Uint32 character) {
 	if (!m_isReadText || !m_isWindowFocused
 		|| character == '\t'

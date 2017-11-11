@@ -19,6 +19,7 @@ public:
 	void startReadingText();
 	void stopReadingText();
 	const std::string& getReadText() const;
+	void cropReadText(int maxLength);
 	void readUnicode(sf::Uint32 character);
 	void setLastPressedKey(sf::Keyboard::Key key);
 

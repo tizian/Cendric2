@@ -1,9 +1,9 @@
 #include "GUI/NewSaveGameForm.h"
-
-using namespace std;
+#include "GUI/GUIConstants.h"
 
 // determines the distance of the message text and the buttons from border
 const float DIST_FROM_BORDER = 10.f;
+const int MAX_NAME_LENGTH = 25;
 
 NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_window = new Window(box, GUIOrnamentStyle::NONE);
@@ -21,11 +21,10 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	setPosition(sf::Vector2f(box.left, box.top));
 
 	// message
-	int characterSize = 16;
 	m_message = BitmapText(
-		g_textProvider->getCroppedText("MessageNewSaveGame", characterSize, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
+		g_textProvider->getCroppedText("MessageNewSaveGame", GUIConstants::CHARACTER_SIZE_L, static_cast<int>(m_window->getSize().x - (2 * DIST_FROM_BORDER))));
 	m_message.setColor(COLOR_WHITE);
-	m_message.setCharacterSize(characterSize);
+	m_message.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	// calculate position
 	m_message.setPosition(sf::Vector2f(DIST_FROM_BORDER, DIST_FROM_BORDER) + getPosition());
 
@@ -59,9 +58,10 @@ const std::string& NewSaveGameForm::getSavegameName() const {
 }
 
 void NewSaveGameForm::update(const sf::Time& frameTime) {
+	g_inputController->cropReadText(MAX_NAME_LENGTH);
 	m_savegameName = g_inputController->getReadText();
 	m_savegameNameText.setString(m_savegameName);
-	m_okButton->setEnabled(m_savegameName.size() < 25 && m_savegameName.size() > 0);
+	m_okButton->setEnabled(m_savegameName.size() < MAX_NAME_LENGTH && m_savegameName.size() > 0);
 	m_okButton->update(frameTime);
 	m_cancelButton->update(frameTime);
 
