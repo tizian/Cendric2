@@ -54,9 +54,10 @@ bool WardenEnemy::isMainCharInRange() {
 	auto const& bb = *m_mainChar->getBoundingBox();
 	auto const& circle = m_circleSpawner->center;
 
-	float deltaX = circle.x - std::max(bb.left, std::min(circle.x, bb.left + bb.width));;
-	float deltaY = circle.y - std::max(bb.top, std::min(circle.y, bb.top + bb.top));;
-	return (deltaX * deltaX + deltaY * deltaY) < (m_observedRange * m_observedRange);
+	float deltaX = circle.x - std::max(bb.left, std::min(circle.x, bb.left + bb.width));
+	float deltaY = circle.y - std::max(bb.top, std::min(circle.y, bb.top + bb.height));
+	bool inRange = (deltaX * deltaX + deltaY * deltaY) < (m_observedRange * m_observedRange);
+	return inRange;
 }
 
 void WardenEnemy::loadAttributes() {
