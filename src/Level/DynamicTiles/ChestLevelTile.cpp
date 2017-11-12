@@ -10,6 +10,8 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Chest, ChestLevelTile)
 
 using namespace luabridge;
 
+const float ChestLevelTile::PICKUP_RANGE = 80.f;
+
 ChestLevelTile::ChestLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Chest"), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);

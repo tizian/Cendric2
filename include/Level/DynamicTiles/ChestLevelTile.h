@@ -36,7 +36,7 @@ private:
 	LightComponent* m_lightComponent = nullptr;
 
 	// the chest can only be looted if the main char is in this range
-	const float PICKUP_RANGE = 100.f;
+	static const float PICKUP_RANGE;
 	LootWindow* m_lootWindow = nullptr;
 	bool m_showLootWindow = false;
 
