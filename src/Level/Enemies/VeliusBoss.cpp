@@ -42,92 +42,65 @@ void VeliusBoss::loadSpells() {
 
 	m_spellManager->addSpell(projectile);
 
-	// these are the shadow projectiles
-	projectile = SpellData::getSpellData(SpellID::Projectile);
-	projectile.damageType = DamageType::Shadow;
-	projectile.skinNr = 1;
-	projectile.damage = 15;
-	projectile.damagePerSecond = 4;
-	projectile.count = 3;
-	projectile.cooldown = sf::seconds(5.f);
-	projectile.isBlocking = true;
-	projectile.fightingTime = sf::seconds(1.f);
-	projectile.fightAnimation = GameObjectState::Fighting;
-	projectile.castingTime = sf::seconds(1.f);
-	projectile.castingAnimation = GameObjectState::Casting2;
-	projectile.speed = 400;
-
-	m_spellManager->addSpell(projectile);
-
 	m_spellManager->setCurrentSpell(0); // stun
 	m_spellManager->setGlobalCooldown(sf::seconds(3.f));
 }
 
 void VeliusBoss::handleAttackInput() {
-	m_spellManager->setCurrentSpell(rand() % 2);
+	// todo
+	if (m_isRayActive) return;
+	m_isRayActive = true;
 
-	if (getCurrentTarget() != nullptr)
-		m_spellManager->executeCurrentSpell(getCurrentTarget());
 }
 
 void VeliusBoss::loadAnimation(int skinNr) {
-	int size = 120;
+	int width = 120;
+	int height = 150;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
-	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 115.f));
+	setSpriteOffset(sf::Vector2f(-50.f, -35.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
+	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
+	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(17 * size, 0, size, size));
+	deadAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(16 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
-	Animation* castingAnimation = new Animation(sf::seconds(0.2f));
+	Animation* castingAnimation = new Animation(sf::seconds(0.1f));
 	castingAnimation->setSpriteSheet(tex);
-	for (int i = 13; i < 16; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
-	}
+	castingAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
 	castingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
-
-	Animation* casting2Animation = new Animation(sf::seconds(0.2f));
-	casting2Animation->setSpriteSheet(tex);
-	for (int i = 10; i < 13; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * size, 0, size, size));
-	}
-	casting2Animation->setLooped(false);
-
-	addAnimation(GameObjectState::Casting2, casting2Animation);
 
 	// initial values
 	setState(GameObjectState::Idle);

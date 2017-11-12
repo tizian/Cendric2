@@ -33,4 +33,7 @@ protected:
 	void loadAttributes() override;
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+private:
+	bool m_isRayActive = false;
 };

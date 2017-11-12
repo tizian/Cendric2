@@ -343,6 +343,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(28, -1, "DL_Velius_Beta") -- (To be continued...)
+		DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 400)
 		DL:addNode()
 
 	end

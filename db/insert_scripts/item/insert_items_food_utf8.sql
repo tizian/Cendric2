@@ -103,7 +103,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item', 'Milk', 'Milch', 'Milch');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_milk', 'item_desc', 'Milk is good for your bones.', 'Milch ist gut für die Knochen.', 'Milch isch guet für d''Chnoche.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_milk', 'consumable', 500, 50, 6);
-INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical, res_physical) values ('fo_milk', 2, 3, 5, 8, 50);
+INSERT INTO item_attribute (item_id, health_regeneration, critical, dmg_ice, dmg_physical, res_physical) values ('fo_milk', 2, 3, 4, 7, 50);
 INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_milk', 20, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_milk', -7, -20, 35, 35);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_milk', 1, 350, 150, 50, 100);
@@ -224,7 +224,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_egg', 'item', 'Egg','Ei','Ei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_egg', 'item_desc', 'Can be used as a cooking ingredient.','Kann als Kochzutat verwendet werden.','Chame zum choche bruche.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_egg', 'consumable', 500, 650, 2);
-INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_egg', 2, 10);
+INSERT INTO item_attribute (item_id, health_regeneration, dmg_physical) values ('fo_egg', 2, 8);
 INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_egg', 5, 1, 'fo_omelette');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_egg', -18, -31, 15, 19);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_egg', 1, 500, 300, 50, 50);

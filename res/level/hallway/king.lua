@@ -6,6 +6,7 @@ state = 0
 update = function(B, W)
     if (state == 0) then
         B:say("King1", 3)
+        B:switchLever()
         B:setMovingTarget(710,200)
         B:wait(2)
         state = 1

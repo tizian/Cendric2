@@ -5,10 +5,10 @@
 
 class LevelMainCharacter;
 class InteractComponent;
-class ParticleComponent;
 
 namespace particles {
 	class LineSpawner;
+	class ParticleSystem;
 	class AngledVelocityGenerator;
 }
 
@@ -48,5 +48,12 @@ public:
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
 
 private:
+	void recalculateRays();
+
+private:
 	LevelScreen* m_screen;
+
+	std::vector<particles::ParticleSystem*> m_rays;
+	std::vector<particles::LineSpawner*> m_lineSpawners;
+	std::vector<particles::AngledVelocityGenerator*> m_lineVelGens;
 };
