@@ -24,6 +24,9 @@ GargoyleEnemy::GargoyleEnemy(const Level* level, Screen* screen) :
 }
 
 void GargoyleEnemy::update(const sf::Time& frameTime) {
+	if (m_isSummoned && m_isDead) {
+		setDisposed();
+	}
 	updateTime(m_attackWaitTime, frameTime);
 	Enemy::update(frameTime);
 }
@@ -32,8 +35,7 @@ void GargoyleEnemy::setSummoned(int strength, int count, const sf::Time& ttl) {
 	m_isSummoned = true;
 	m_spellStrength = strength;
 	m_spellCount = count;
-	loadSpells();
-	loadAnimation(m_spellStrength - 1);
+	load(m_spellStrength - 1);
 	setAlly(ttl);
 }
 
