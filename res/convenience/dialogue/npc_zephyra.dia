@@ -90,7 +90,7 @@ npc.id:npc_zephyra
 		# translation: 
 		translation.tag:DL_Choice_WhoMages
 		translation.en:How did those mages look like?
-		translation.de:Wie haben diese Magier ausgsehen?
+		translation.de:Wie haben diese Magier ausgesehen?
 		translation.ch:Wie hend die Magier usgse?
 	]
 	[
