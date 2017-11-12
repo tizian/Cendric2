@@ -17,7 +17,8 @@ public:
 	void update(sf::Time frameTime);
 	void addSpell(const SpellData& spell);
 	void addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers);
-	void setCurrentSpell(int spellNr);
+	// returns whether it succeeded
+	bool setCurrentSpell(int spellNr);
 	// sets the current spell to spellNr and, if it doesn't need a target, executes it.
 	void setAndExecuteSpell(int spellNr);
 	// triggers the spell creator & executes the current spell if it are not on cooldown

@@ -13,7 +13,7 @@
 // Resolve .app package internal resource path for mac builds
 // #define APPLE_APP_BUILD
 
-//#define DEBUG
+#define DEBUG
 #define BETA
 
 #ifdef _WIN32

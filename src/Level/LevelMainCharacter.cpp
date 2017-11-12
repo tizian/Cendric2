@@ -234,7 +234,9 @@ void LevelMainCharacter::loadWeapon() {
 		}
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
-	m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell));
+	if (!m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell))) {
+		m_spellManager->setCurrentSpell(0);
+	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
 		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();

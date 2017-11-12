@@ -93,23 +93,23 @@ void SpellManager::update(sf::Time frameTime) {
 }
 
 void SpellManager::setAndExecuteSpell(int spellNr) {
-	setCurrentSpell(spellNr);
-	if (m_currentSpell == -1) return;
+	if (!setCurrentSpell(spellNr)) return;
 	if (!(m_spellMap.at(m_currentSpell)->getSpellData().needsTarget) && m_currentSpell == spellNr) {
 		executeCurrentSpell(sf::Vector2f());
 	}
 }
 
-void SpellManager::setCurrentSpell(int spellNr) {
+bool SpellManager::setCurrentSpell(int spellNr) {
 	if (spellNr < -1 || spellNr + 1 > static_cast<int>(m_spellMap.size())) {
-		g_logger->logWarning("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
+		g_logger->logInfo("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
 		m_currentSpell = -1;
-		return;
+		return false;
 	}
 	m_currentSpell = spellNr;
 	if (m_spellSelection != nullptr) {
 		m_spellSelection->selectSlot(spellNr);
 	}
+	return true;
 }
 
 std::vector<SpellCreator*>& SpellManager::getSpellMap() {
