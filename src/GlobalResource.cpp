@@ -90,6 +90,7 @@ const std::string GlobalResource::TEX_GUI_SLOT_MODIFIER = "res/texture/gui/slot_
 const std::string GlobalResource::TEX_GUI_SLOT_MODIFIER_SELECTED = "res/texture/gui/slot_modifier_selected.png";
 const std::string GlobalResource::TEX_GUI_SLOT_SPELL = "res/texture/gui/slot_spell.png";
 const std::string GlobalResource::TEX_GUI_SLOT_SPELL_SELECTED = "res/texture/gui/slot_spell_selected.png";
+const std::string GlobalResource::TEX_GUI_SLOT_SPELL_LOCKED = "res/texture/gui/slot_spell_locked.png";
 const std::string GlobalResource::TEX_GUI_SLOT_SPELL_GEM = "res/texture/gui/slot_spell_gem.png";
 const std::string GlobalResource::TEX_GUI_SLOT_HIGHLIGHT = "res/texture/gui/slot_highlight.png";
 const std::string GlobalResource::TEX_GUI_SLOT_PROGRESS_LOG = "res/texture/gui/slot_progress_log.png";

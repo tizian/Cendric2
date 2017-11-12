@@ -68,6 +68,11 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 			return false;
 		}
 	}
+	if (m_levelData.isMagicLocked) {
+		for (int type = static_cast<int>(SpellType::VOID) + 1; type < static_cast<int>(SpellType::MAX); type++) {
+			setMagicLocked(static_cast<SpellType>(type));
+		}
+	}
 
 	// adjust weather
 	if (const WeatherData* weather = m_screen->getCharacterCore()->getWeather(id)) {
@@ -320,4 +325,16 @@ void Level::executeBossEnding(bool win) {
 	else {
 		m_bossLevel->executeOnLose();
 	}
+}
+
+void Level::setMagicLocked(SpellType type) {
+	m_lockedMagicTypes.insert(type);
+}
+
+bool Level::isMagicLocked(SpellType type) {
+	return contains(m_lockedMagicTypes, type);
+}
+
+const std::set<SpellType>& Level::getLockedMagic() const {
+	return m_lockedMagicTypes;
 }

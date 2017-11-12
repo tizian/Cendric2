@@ -51,6 +51,11 @@ public:
 	// executes the boss ending, either win=true or else if the player loses.
 	void executeBossEnding(bool win);
 
+	// handling of locked magic types
+	void setMagicLocked(SpellType type);
+	bool isMagicLocked(SpellType type);
+	const std::set<SpellType>& getLockedMagic() const;
+
 private:
 	void loadCamera();
 
@@ -70,4 +75,5 @@ private:
 
 	std::set<LevelDynamicTileID> m_avoidableTiles;
 	std::set<LevelDynamicTileID> m_evilTiles;
+	std::set<SpellType> m_lockedMagicTypes;
 };

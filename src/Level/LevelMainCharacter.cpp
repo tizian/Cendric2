@@ -133,6 +133,10 @@ void LevelMainCharacter::handleAttackInput() {
 	// update current spell
 	for (const auto& it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first)) {
+			auto spell = m_spellManager->getSpell(it.second);
+			if (spell && contains(m_level->getLockedMagic(), spell->spellType)) {
+				continue;
+			}
 			if (m_isQuickcast) {
 				m_spellManager->setCurrentSpell(it.second);
 				m_core->setWeaponSpell(it.first);
@@ -166,7 +170,7 @@ void LevelMainCharacter::updateHealthRegeneration(const sf::Time& frameTime) {
 
 void LevelMainCharacter::checkInvisibilityLevel() {
 	if (m_invisibilityLevel > 0 && 
-		m_spellManager->getSpellMap()[m_spellManager->getSelectedSpell()]->getSpellData().spellType != SpellType::Twilight) {
+		m_spellManager->getSelectedSpell()->spellType != SpellType::Twilight) {
 		setInvisibilityLevel(0);
 	}
 }
@@ -242,8 +246,15 @@ void LevelMainCharacter::loadWeapon() {
 		}
 		m_spellManager->addSpell(newBean, spellModifiers);
 	}
+
 	if (!m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell))) {
 		m_spellManager->setCurrentSpell(0);
+	}
+	else {
+		auto currentSpell = m_spellManager->getSelectedSpell();
+		if (currentSpell && contains(m_level->getLockedMagic(), currentSpell->spellType)) {
+			m_spellManager->setCurrentSpell(0); // 0 is always chop and save
+		}
 	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {

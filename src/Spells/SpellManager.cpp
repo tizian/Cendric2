@@ -1,8 +1,6 @@
 #include "Spells/SpellManager.h"
 #include "GUI/SpellSelection.h"
 
-using namespace std;
-
 SpellManager::SpellManager(LevelMovableGameObject* owner) {
 	m_currentSpell = -1;
 	m_owner = owner;
@@ -17,8 +15,23 @@ void SpellManager::clearSpells() {
 	m_coolDownMap.clear();
 }
 
-int SpellManager::getSelectedSpell() {
+int SpellManager::getSelectedSpellID() const {
 	return m_currentSpell;
+}
+
+SpellData* SpellManager::getSelectedSpell() const {
+	return getSpell(m_currentSpell);
+}
+
+SpellData* SpellManager::getSpell(int spellId) const {
+	if (spellId < 0 || spellId > static_cast<int>(m_spellMap.size())) {
+		return nullptr;
+	}
+	return &m_spellMap.at(spellId)->getSpellData();
+}
+
+LevelMovableGameObject* SpellManager::getOwner() const {
+	return m_owner;
 }
 
 void SpellManager::setSpellSelection(SpellSelection* selection) {
@@ -58,7 +71,7 @@ bool SpellManager::executeCurrentSpell(T target, bool force) {
 	}
 
 	// spell has been cast. set cooldown.
-  	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
+	sf::Time cooldown = m_spellMap[m_currentSpell]->getSpellData().cooldown * m_owner->getAttributes()->cooldownMultiplier;
 	if (m_spellSelection &&  m_spellMap[m_currentSpell]->getSpellData().attachedToMob) {
 		cooldown = std::max(m_spellMap[m_currentSpell]->getSpellData().activeDuration, cooldown);
 	}
@@ -101,7 +114,12 @@ void SpellManager::setAndExecuteSpell(int spellNr) {
 
 bool SpellManager::setCurrentSpell(int spellNr) {
 	if (spellNr < -1 || spellNr + 1 > static_cast<int>(m_spellMap.size())) {
-		g_logger->logInfo("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + to_string(spellNr));
+		g_logger->logInfo("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + std::to_string(spellNr));
+		m_currentSpell = -1;
+		return false;
+	}
+	if (m_spellSelection != nullptr && m_spellSelection->getSlots()[spellNr].isLocked()) {
+		g_logger->logInfo("SpellManager::setCurrentSpell", "This spell is locked. Spell nr: " + std::to_string(spellNr));
 		m_currentSpell = -1;
 		return false;
 	}

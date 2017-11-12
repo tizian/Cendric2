@@ -41,7 +41,11 @@ public:
 	// sets the global cooldown, it is initially zero
 	void setGlobalCooldown(const sf::Time& cooldown);
 
-	int getSelectedSpell();
+	int getSelectedSpellID() const;
+	SpellData* getSelectedSpell() const;
+	SpellData* getSpell(int spellId) const;
+
+	LevelMovableGameObject* getOwner() const;
 
 private:
 	template <typename T>

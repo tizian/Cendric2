@@ -3,8 +3,6 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const float SpellSlot::SIZE = 86.f;
 const float SpellSlot::ICON_OFFSET = 18.f;
 const float SpellSlot::GEM_SIZE = 10.f;
@@ -76,9 +74,11 @@ void SpellSlot::initSpellSlot() {
 		m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS);
 	}
 
-	m_cooldownRect.
-		setSize(ICON_SIZE, ICON_SIZE);
+	m_cooldownRect.setSize(ICON_SIZE, ICON_SIZE);
 	m_cooldownRect.setFillColor(sf::Color(200, 200, 200, 128));
+
+	m_lockedRect.setSize(sf::Vector2f(SIZE, SIZE));
+	m_lockedRect.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL_LOCKED));
 
 	for (int i = 0; i < 4; ++i) {
 		sf::RectangleShape gem;
@@ -143,6 +143,7 @@ void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
 	sf::Vector2f positionOffset(SpellSlot::ICON_SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, SpellSlot::ICON_SIZE + 18.f);
 	m_inputKey.setPosition(pos + positionOffset);
+	m_lockedRect.setPosition(pos.x - getConfiguredIconOffset(), pos.y - getConfiguredIconOffset());
 	m_cooldownRect.setPosition(pos);
 	m_gems[0].setPosition(pos + sf::Vector2f(20.f, -12.f));
 	m_gems[1].setPosition(pos + sf::Vector2f(-12.f, 20.f));
@@ -160,6 +161,9 @@ void SpellSlot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_borderRect);
 	for (auto& gem : m_gems)
 		renderTarget.draw(gem);
+	if (m_isLocked) {
+		renderTarget.draw(m_lockedRect);
+	}
 	renderTarget.draw(m_inputKey);
 }
 
@@ -196,8 +200,18 @@ void SpellSlot::update(const sf::Time& frameTime) {
 	Slot::update(frameTime);
 }
 
+void SpellSlot::setLocked(bool isLocked) {
+	if (m_isEmpty) return;
+	m_isLocked = isLocked;
+	m_iconRect.setFillColor(m_isLocked ? COLOR_TRANS_WHITE : COLOR_WHITE);
+}
+
+bool SpellSlot::isLocked() const {
+	return m_isLocked;
+}
+
 void SpellSlot::select() {
-	if (m_isSelected || m_isEmpty) return;
+	if (m_isSelected || m_isEmpty || m_isLocked) return;
 	Slot::select();
 	m_inputKey.setColor(COLOR_BAD);
 }

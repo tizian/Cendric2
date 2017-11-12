@@ -31,11 +31,15 @@ public:
 	void select() override;
 	void deselect() override;
 
+	void setLocked(bool isLocked);
+	bool isLocked() const;
+
 	inline void setNr(int nr) { m_nr = nr; }
 	
 	inline SpellType getSpellType() const { return m_spellType; }
 	inline SpellID getSpellID() const { return m_spellID; }
 	inline int getNr() const { return m_nr; }
+	inline Key getKey() const { return m_inputKeyID; }
 
 	inline float getConfiguredSize() const override { return SIZE; }
 	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
@@ -48,6 +52,7 @@ private:
 	void initSpellSlot();
 
 	bool m_isChopSlot = false;
+	bool m_isLocked = false;
 	int m_nr = -1;
 
 	sf::Time m_cooldown;
@@ -57,6 +62,7 @@ private:
 	Key m_inputKeyID;
 
 	CooldownRectangleShape m_cooldownRect;
+	sf::RectangleShape m_lockedRect;
 	BitmapText m_inputKey;
 	std::vector<sf::RectangleShape> m_gems;
 

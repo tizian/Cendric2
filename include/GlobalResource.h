@@ -102,6 +102,7 @@ public:
 	static const std::string TEX_GUI_SLOT_MODIFIER_SELECTED;
 	static const std::string TEX_GUI_SLOT_SPELL;
 	static const std::string TEX_GUI_SLOT_SPELL_SELECTED;
+	static const std::string TEX_GUI_SLOT_SPELL_LOCKED;
 	static const std::string TEX_GUI_SLOT_SPELL_GEM;
 	static const std::string TEX_GUI_SLOT_HIGHLIGHT;
 	static const std::string TEX_GUI_SLOT_PROGRESS_LOG;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="105" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="1746">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="105" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="1747">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/ppuzzle01/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
+  <property name="lock_magic" value=""/>
   <property name="musicpath" value="res/music/lava.ogg"/>
   <property name="tilesetpath" value="res/level/ppuzzle01/tileset_level_ppuzzle01.png"/>
  </properties>
@@ -1371,7 +1372,6 @@
   <object id="1744" gid="848" x="1200" y="1700" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 1">
-  <object id="1534" gid="1073742738" x="1600" y="4550" width="50" height="50"/>
   <object id="1535" gid="836" x="1500" y="4450" width="50" height="50"/>
   <object id="1536" gid="836" x="1600" y="4300" width="50" height="50"/>
   <object id="1537" gid="836" x="1450" y="4150" width="50" height="50"/>
@@ -1379,6 +1379,7 @@
   <object id="1539" gid="836" x="1600" y="3850" width="50" height="50"/>
   <object id="1540" gid="836" x="1550" y="3600" width="50" height="50"/>
   <object id="1542" gid="836" x="1400" y="4150" width="50" height="50"/>
+  <object id="1746" gid="914" x="1600" y="4550" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 2">
   <object id="1575" gid="954" x="1950" y="2400" width="50" height="50"/>

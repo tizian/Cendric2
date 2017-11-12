@@ -21,4 +21,5 @@ struct LevelData final : WorldData {
 	int autoscrollerSpeed = 0;
 	bool isBossLevel = false;
 	bool isObserved = false;
+	bool isMagicLocked = false;
 };

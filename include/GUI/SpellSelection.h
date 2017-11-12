@@ -22,6 +22,9 @@ public:
 	void update(const sf::Time& frameTime);
 	void reload();
 
+	bool isSlotLocked(int spellNr) const;
+	std::vector<SpellSlot>& getSlots();
+
 private:
 	SpellManager* m_spellManager;
 	bool m_isVisible = true;

@@ -586,6 +586,9 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 		else if (name.compare("observed") == 0) {
 			data.isObserved = true;
 		}
+		else if (name.compare("lock_magic") == 0) {
+			data.isMagicLocked = true;
+		}
 		else if (name.compare("bosslevel") == 0) {
 			if (!readBosslevel(_property, data)) return false;
 		}
