@@ -905,7 +905,7 @@
   <object id="345" x="2000" y="1287.5" width="100" height="12.5"/>
   <object id="346" x="2187" y="1550" width="13" height="50"/>
   <object id="347" x="2250" y="1550" width="13" height="50"/>
-  <object id="349" x="937.5" y="1450" width="12.5" height="50"/>
+  <object id="349" x="937" y="1450" width="13" height="50"/>
   <object id="350" x="1000" y="1450" width="12.5" height="50"/>
   <object id="351" x="600" y="1200" width="10" height="150"/>
   <object id="352" x="3225" y="2350" width="25" height="140"/>
