@@ -576,7 +576,7 @@
 </data>
  </layer>
  <objectgroup name="enemy">
-  <object id="68" gid="1349" x="2350" y="1550" width="50" height="50"/>
+  <object id="68" gid="1349" x="2700" y="1550" width="50" height="50"/>
   <object id="86" gid="1352" x="1300" y="1300" width="50" height="50"/>
   <object id="87" gid="1352" x="3100" y="1000" width="50" height="50"/>
   <object id="88" gid="1364" x="600" y="250" width="50" height="50"/>

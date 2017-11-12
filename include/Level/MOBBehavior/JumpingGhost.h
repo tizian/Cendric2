@@ -22,7 +22,6 @@ struct GhostRecord final {
 class JumpingGhost final : public MovableGameObject {
 public:
 	JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, Screen* screen);
-	~JumpingGhost();
 
 	void update(const sf::Time& frameTime) override;
 	void checkCollisions(const sf::Vector2f& nextPosition);

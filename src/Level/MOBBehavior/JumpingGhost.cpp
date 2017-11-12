@@ -16,9 +16,6 @@ JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, 
 	}
 }
 
-JumpingGhost::~JumpingGhost() {
-}
-
 void JumpingGhost::update(const sf::Time& frameTime) {
 	if (m_record.collides) return;
 	setAcceleration(sf::Vector2f(m_aiRec.accelerationX, m_aiRec.accelerationGravity));
