@@ -29,6 +29,7 @@ public:
 	void toggleGodmode() override;
 
 	bool exitWorld() override;
+	void notifyCharacterInfoReload();
 	void notifyBackFromMenu() override;
 	void notifyBossKilled(const EnemyReward& reward);
 	void notifyItemEquip(const std::string& itemID, ItemType type) override;

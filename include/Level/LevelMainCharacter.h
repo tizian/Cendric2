@@ -78,6 +78,7 @@ private:
 	void loadAnimation();
 
 	void handleAttackInput();
+	void updateHealthRegeneration(const sf::Time& frameTime) override;
 
 	void loadComponents();
 	void updateDamagedOverlay();

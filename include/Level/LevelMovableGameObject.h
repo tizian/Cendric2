@@ -125,6 +125,7 @@ protected:
 
 	// attributes, include regeneration (hp) and all buffs & dots.
 	void updateAttributes(const sf::Time& frameTime);
+	virtual void updateHealthRegeneration(const sf::Time& frameTime);
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 
 	// the sprite path of this mob, used for resource loading

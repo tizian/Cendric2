@@ -73,6 +73,24 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	}
 
 	// health regeneration
+	updateHealthRegeneration(frameTime);
+
+	// update debuff attributes
+	for (size_t i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
+		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
+		m_dots[i].duration -= frameTime;
+		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
+		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType, true, false);
+		if (m_dots[i].duration <= sf::Time::Zero) {
+			m_dots.erase(m_dots.begin() + i);
+		}
+		else {
+			i++;
+		}
+	}
+}
+
+void LevelMovableGameObject::updateHealthRegeneration(const sf::Time& frameTime) {
 	m_timeSinceRegeneration += frameTime;
 	if (m_timeSinceRegeneration >= sf::seconds(1)) {
 		m_timeSinceRegeneration -= sf::seconds(1);
@@ -91,23 +109,12 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 			}
 		}
 
-
 		if (m_attributes.currentHealthPoints > m_attributes.maxHealthPoints) {
 			m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
 		}
-	}
 
-	// update debuff attributes
-	for (size_t i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
-		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
-		m_dots[i].duration -= frameTime;
-		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
-		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType, true, false);
-		if (m_dots[i].duration <= sf::Time::Zero) {
-			m_dots.erase(m_dots.begin() + i);
-		}
-		else {
-			i++;
+		if (m_attributes.currentHealthPoints <= 0) {
+			setDead();
 		}
 	}
 }

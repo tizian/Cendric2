@@ -156,6 +156,14 @@ void LevelMainCharacter::handleAttackInput() {
 	}
 }
 
+void LevelMainCharacter::updateHealthRegeneration(const sf::Time& frameTime) {
+	int oldHealth = m_attributes.currentHealthPoints;
+	LevelMovableGameObject::updateHealthRegeneration(frameTime);
+	if (oldHealth != m_attributes.currentHealthPoints) {
+		dynamic_cast<LevelScreen*>(m_screen)->notifyCharacterInfoReload();
+	}
+}
+
 void LevelMainCharacter::checkInvisibilityLevel() {
 	if (m_invisibilityLevel > 0 && 
 		m_spellManager->getSpellMap()[m_spellManager->getSelectedSpell()]->getSpellData().spellType != SpellType::Twilight) {

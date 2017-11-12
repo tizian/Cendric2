@@ -95,6 +95,10 @@ bool LevelScreen::exitWorld() {
 	return !m_isGameOver;
 }
 
+void LevelScreen::notifyCharacterInfoReload() {
+	m_interface->reloadCharacterInfo();
+}
+
 void LevelScreen::notifyBackFromMenu() {
 	m_mainChar->setQuickcast(g_resourceManager->getConfiguration().isQuickcast);
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
