@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="70" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="319">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="30" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="320">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/yashatemple/layer_inf.png,2.0,res/level/yashatemple/layer_2.png"/>
   <property name="dimming" value="0.4"/>
@@ -964,6 +964,7 @@
   </object>
   <object id="315" gid="849" x="200" y="750" width="50" height="50"/>
   <object id="318" gid="793" x="1750" y="600" width="50" height="50"/>
+  <object id="319" gid="851" x="1700" y="650" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 1">
   <object id="158" gid="994" x="2900" y="1300" width="50" height="50">
