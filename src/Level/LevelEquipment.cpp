@@ -159,6 +159,7 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 void LevelEquipment::lockAnimation(bool lock) {
 	m_isLocked = lock;
 	if (m_isLocked) {
+		updateAnimation();
 		loopCurrentAnimation(false);
 		m_animatedSprite.stop();
 	}
@@ -170,8 +171,13 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	GameObjectState newState = m_mainChar->getState();
+	updateAnimation();
+	checkAndSetPosition();
+	AnimatedGameObject::update(frameTime);
+}
 
+void LevelEquipment::updateAnimation() {
+	GameObjectState newState = m_mainChar->getState();
 	bool newFacingRight = m_mainChar->isFacingRight();
 	if (m_state != newState || newFacingRight != m_isFacingRight) {
 		m_state = newState;
@@ -181,9 +187,6 @@ void LevelEquipment::update(const sf::Time& frameTime) {
 		}
 		updateParticlesVisibility();
 	}
-	
-	checkAndSetPosition();
-	AnimatedGameObject::update(frameTime);
 }
 
 void LevelEquipment::checkAndSetPosition() {
