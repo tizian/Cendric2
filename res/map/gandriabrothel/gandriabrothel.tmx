@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" nextobjectid="196">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" nextobjectid="200">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -272,7 +272,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="collidable" width="25" height="17" visible="0">
+ <layer name="collidable" width="25" height="17">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -293,7 +293,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="collidable" visible="0">
+ <objectgroup name="collidable">
   <object id="172" x="365" y="248" width="85" height="32"/>
   <object id="174" x="50" y="245" width="85" height="32"/>
   <object id="175" x="915" y="250" width="170" height="32"/>
@@ -301,6 +301,8 @@
   <object id="177" x="775" y="370" width="26" height="61"/>
   <object id="178" x="561" y="646" width="27" height="27"/>
   <object id="179" x="662" y="646" width="24" height="27"/>
+  <object id="197" x="240" y="250" width="20" height="100"/>
+  <object id="199" x="440" y="250" width="10" height="100"/>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="126" x="600" y="820" width="50" height="30">
