@@ -9,6 +9,7 @@ FallingTile::FallingTile(LevelScreen* levelScreen) :
 	LevelDynamicTile(levelScreen),
 	MovableGameObject() {
 	setPositionOffset(sf::Vector2f(3.f, 3.f));
+	m_isAlwaysUpdate = true;
 }
 
 bool FallingTile::init(const LevelTileProperties& properties) {
