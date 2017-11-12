@@ -776,7 +776,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereThieves
 	translation.en:Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
 	translation.de:Magier die sich mit Dämmerungsmagie beschäftigen sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
-	translation.ch:Magier wo sich mit Dämmerigsmagie beschäftiged sind meistens eifach Dieb. Ich wür ide Kanalisation vo Gandria afange sueche.
+	translation.ch:Magier wo sich mit Dämmerigsmagie beschäftiged sind meistens eifach Diebe. Ich wür ide Kanalisation vo Gandria afange sueche.
 	[
 		# Link node, tag is next tag
 		tag:-2

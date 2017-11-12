@@ -2029,6 +2029,7 @@
   <object id="456" gid="916" x="2800" y="700" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 6">
+  <object id="499" gid="874" x="2750" y="1745" width="50" height="50"/>
   <object id="490" gid="854" x="2850" y="1650" width="50" height="50">
    <properties>
     <property name="angle" value="0"/>
@@ -2064,7 +2065,6 @@
     <property name="speed" value="150"/>
    </properties>
   </object>
-  <object id="499" gid="874" x="2750" y="1745" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 7">
   <object id="622" gid="994" x="950" y="750" width="50" height="50">
