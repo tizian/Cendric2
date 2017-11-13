@@ -457,7 +457,7 @@ npc.id:npc_steven
 	tag:24
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:28
 		# translation: 
 		translation.tag:DL_Choice_GiveHelmet
 		translation.en:
@@ -472,6 +472,22 @@ npc.id:npc_steven
 		translation.en:You wish.
 		translation.de:Hättest du wohl gern.
 		translation.ch:Hetsch wohl gern.
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:addReputationProgress("cleric", 5)
+	trigger:DL:removeItem("eq_stevenhelmet", 1)
+	# translation: 
+	translation.tag:DL_Steven_ThanksHelmet
+	translation.en:Hehe. Thank you.
+	translation.de:Hehe. Danke.
+	translation.ch:Hehe. Danke.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -519,7 +535,7 @@ npc.id:npc_steven
 	trigger:DL:addConditionProgress("default", "barracks_open")
 	trigger:DL:removeItem("eq_stevenhelmet", 1)
 	trigger:DL:addReputationProgress("cleric", 5)
-	trigger:e("stevens_helmet", "completed")
+	trigger:DL:changeQuestState("stevens_helmet", "completed")
 	# translation: 
 	translation.tag:DL_Steven_GotoLloyd
 	translation.en:Perfect. Here is your letter. You can now go and see Commander Lloyd.

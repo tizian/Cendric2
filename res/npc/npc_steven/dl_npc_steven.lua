@@ -167,8 +167,14 @@ loadDialogue = function(DL)
 
 
 		DL:createChoiceNode(24)
-		DL:addChoice(27, "DL_Choice_GiveHelmet") -- 
+		DL:addChoice(28, "DL_Choice_GiveHelmet") -- 
 		DL:addChoice(25, "DL_Choice_NoHelmet") -- You wish.
+		DL:addNode()
+
+
+		DL:createNPCNode(28, -1, "DL_Steven_ThanksHelmet") -- Hehe. Thank you.
+		DL:addReputationProgress("cleric", 5)
+		DL:removeItem("eq_stevenhelmet", 1)
 		DL:addNode()
 
 
@@ -178,11 +184,8 @@ loadDialogue = function(DL)
 
 
 		DL:createChoiceNode(26)
-		DL:addChoice(28, "DL_Choice_CommanderLloyd") -- It's "Commander" Lloyd.
-		DL:addChoice(28, "DL_Choice_DontDrinkMuch") -- Well, it's your fault if you drink too much.
-		DL:addNode()
-		
-		DL:createNPCNode(28, -1, "DL_Steven_GetOut") -- Just get out of my sight!
+		DL:addChoice(-1, "DL_Choice_CommanderLloyd") -- It's "Commander" Lloyd.
+		DL:addChoice(-1, "DL_Choice_DontDrinkMuch") -- Well, it's your fault if you drink too much.
 		DL:addNode()
 
 
