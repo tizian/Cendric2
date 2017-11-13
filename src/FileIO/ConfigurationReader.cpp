@@ -63,7 +63,7 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 				noError = readSmoothingOn(line, data);
 			}
 			else if (line.compare(0, strlen(AUTOTARGET_ON), string(AUTOTARGET_ON)) == 0) {
-				noError = readSmoothingOn(line, data);
+				noError = readAutotargetOn(line, data);
 			}
 			else if (line.compare(0, strlen(DISPLAYMODE), string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
