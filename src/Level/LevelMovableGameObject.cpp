@@ -30,11 +30,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 	m_level->collideWithDynamicTiles(this, *getBoundingBox());
 	m_spellManager->update(frameTime);
 
-	m_displayDamageNumbers = g_resourceManager->getConfiguration().isDisplayDamageNumbers;
-	if (m_displayDamageNumbers && m_damageNumbers) {
-		m_damageNumbers->update(frameTime);
-	}
-
+	updateDamageNumbers(frameTime);
 	MovableGameObject::update(frameTime);
 
 	if (!m_isDead) {
@@ -76,7 +72,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 	updateHealthRegeneration(frameTime);
 
 	// update debuff attributes
-	for (size_t i = 0; i < m_dots.size();/* don't increment here, we remove on the fly */) {
+	for (size_t i = 0; i < m_dots.size(); /* don't increment here, we remove on the fly */) {
 		int prevSecond = static_cast<int>(std::floor(m_dots[i].duration.asSeconds()));
 		m_dots[i].duration -= frameTime;
 		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
@@ -87,6 +83,13 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		else {
 			i++;
 		}
+	}
+}
+
+void LevelMovableGameObject::updateDamageNumbers(const sf::Time& frameTime) {
+	m_displayDamageNumbers = g_resourceManager->getConfiguration().isDisplayDamageNumbers;
+	if (m_displayDamageNumbers && m_damageNumbers) {
+		m_damageNumbers->update(frameTime);
 	}
 }
 

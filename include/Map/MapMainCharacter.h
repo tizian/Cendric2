@@ -4,8 +4,6 @@
 #include "Map/MapMovableGameObject.h"
 #include "World/MainCharacter.h"
 #include "Map.h"
-#include "InputController.h"
-#include "Screens/Screen.h"
 #include "CharacterCore.h"
 #include "GUI/DialogueWindow.h"
 
@@ -34,6 +32,7 @@ public:
 
 	float getConfiguredMaxVelocityX() const override;
 	GameObjectType getConfiguredType() const override;
+	const sf::Vector2f& getPreviousPosition() const;
 
 private:
 	std::string getSpritePath() const;
@@ -42,4 +41,5 @@ private:
 	// handle input and calculate the next position
 	void handleInput();
 	CharacterCore* m_core;
+	sf::Vector2f m_previousFramePosition;
 };

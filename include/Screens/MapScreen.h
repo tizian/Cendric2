@@ -47,7 +47,7 @@ private:
 private:
 	Map m_currentMap;
 	std::string m_mapID;
-	MapMainCharacter* m_mainChar;
+	MapMainCharacter* m_mainChar = nullptr;
 	DialogueWindow* m_dialogueWindow = nullptr;
 	CookingWindow* m_cookingWindow = nullptr;
 

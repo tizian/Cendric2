@@ -60,7 +60,7 @@ void MapScreen::loadSync() {
 
 void MapScreen::loadAsync() {
 	if (!(m_currentMap.load(m_mapID, this))) {
-		std::string errormsg = m_mapID + ": file corrupted!";
+		auto const errormsg = m_mapID + ": file corrupted!";
 		g_resourceManager->setError(ErrorID::Error_dataCorrupted, errormsg);
 		return;
 	}
@@ -135,7 +135,7 @@ MapMainCharacter* MapScreen::getMainCharacter() const {
 }
 
 bool MapScreen::exitWorld() {
-	m_characterCore->setMap(m_mainChar->getPosition(), m_currentMap.getID());
+	m_characterCore->setMap(m_mainChar->getPreviousPosition(), m_currentMap.getID());
 	return true;
 }
 

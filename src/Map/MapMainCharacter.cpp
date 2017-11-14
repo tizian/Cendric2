@@ -22,6 +22,7 @@ void MapMainCharacter::setCharacterCore(CharacterCore* core) {
 }
 
 void MapMainCharacter::update(const sf::Time& frameTime) {
+	m_previousFramePosition = getPosition();
 	handleInput();
 	sf::Vector2f nextPosition;
 	calculateNextPosition(frameTime, nextPosition);
@@ -38,15 +39,15 @@ void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
 	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
 	WorldCollisionQueryRecord rec;
 
-	bool isMovingY = nextPosition.y != bb.top;
-	bool isMovingX = nextPosition.x != bb.left;
-	bool isMovingRight = nextPosition.x > bb.left;
-	bool isMovingDown = nextPosition.y > bb.top;
+	auto const isMovingY = nextPosition.y != bb.top;
+	auto const isMovingX = nextPosition.x != bb.left;
+	auto const isMovingRight = nextPosition.x > bb.left;
+	auto const isMovingDown = nextPosition.y > bb.top;
 
 	if (!isMovingX && !isMovingY) return;
 
 	// should we use strategy 2: try y direction first, then x direction?
-	bool tryYfirst = false;
+	auto tryYfirst = false;
 	rec.boundingBox = nextBoundingBoxX;
 	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 	if (m_map->collides(rec)) {
@@ -227,6 +228,10 @@ void MapMainCharacter::boundVelocity(sf::Vector2f& vel) const {
 		normalize(vel);
 		vel *= getConfiguredMaxVelocityX();
 	}
+}
+
+const sf::Vector2f& MapMainCharacter::getPreviousPosition() const {
+	return m_previousFramePosition;
 }
 
 float MapMainCharacter::getConfiguredMaxVelocityX() const {
