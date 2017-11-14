@@ -24,7 +24,7 @@ SpellData* SpellManager::getSelectedSpell() const {
 }
 
 SpellData* SpellManager::getSpell(int spellId) const {
-	if (spellId < 0 || spellId > static_cast<int>(m_spellMap.size())) {
+	if (spellId < 0 || spellId > static_cast<int>(m_spellMap.size()) - 1) {
 		return nullptr;
 	}
 	return &m_spellMap.at(spellId)->getSpellData();
@@ -113,7 +113,7 @@ void SpellManager::setAndExecuteSpell(int spellNr) {
 }
 
 bool SpellManager::setCurrentSpell(int spellNr) {
-	if (spellNr < -1 || spellNr + 1 > static_cast<int>(m_spellMap.size())) {
+	if (spellNr < 0 || spellNr > static_cast<int>(m_spellMap.size())) {
 		g_logger->logInfo("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + std::to_string(spellNr));
 		m_currentSpell = -1;
 		return false;

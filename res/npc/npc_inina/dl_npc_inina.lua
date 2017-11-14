@@ -67,7 +67,11 @@ loadDialogue = function(DL)
 				DL:addChoice(4, "DL_Choice_Shrine") -- What kind of shrine is this?
 			end
 			if (not DL:isConditionFulfilled("npc_inina", "power_weakened")) then
-				DL:addChoice(5, "DL_Choice_PowerWeakened") -- What could possibly weaken its power?
+                if (not DL:isConditionFulfilled("boss", "BossKhajag")) then
+                    DL:addChoice(5, "DL_Choice_PowerWeakened") -- What could possibly weaken its power?
+                else
+                    DL:addChoice(90, "DL_Choice_PowerWeakened") -- What could possibly weaken its power?
+                end
 			end
 			if (DL:isConditionFulfilled("npc_inina", "power_weakened")) then
 				DL:addChoice(6, "DL_Choice_WhatDo") -- What did you do until now to find the cause?
@@ -80,6 +84,15 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createNPCNode(5, -2, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.			
+			DL:addConditionProgress("npc_inina", "power_weakened")
+			DL:gotoNode(3)
+			DL:addNode()
+            
+            DL:createNPCNode(90, 91, "DL_Inina_PowerWeakened") -- It seems like there is some magic around that is disturbing the divine magic of the shrine. We need to find the cause of this interfering magic.			
+			DL:addConditionProgress("npc_inina", "power_weakened")
+			DL:addNode()
+            
+            DL:createNPCNode(91, -2, "DL_Inina_PowerWeakenedNot") -- But... strange. I can't feel that aura anymore. Maybe something happened...
 			DL:addConditionProgress("npc_inina", "power_weakened")
 			DL:gotoNode(3)
 			DL:addNode()

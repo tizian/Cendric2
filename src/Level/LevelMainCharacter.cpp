@@ -133,6 +133,7 @@ void LevelMainCharacter::handleAttackInput() {
 	// update current spell
 	for (const auto& it : m_spellKeyMap) {
 		if (g_inputController->isKeyJustPressed(it.first)) {
+			if (it.second < 0) continue;
 			auto spell = m_spellManager->getSpell(it.second);
 			if (spell && contains(m_level->getLockedMagic(), spell->spellType)) {
 				continue;

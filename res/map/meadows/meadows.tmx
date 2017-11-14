@@ -1213,13 +1213,13 @@
   </object>
   <object id="193" x="1561.5" y="2265.5" width="85" height="45">
    <properties>
-    <property name="level entry" value="res/level/howlingcaverns/howlingcaverns.tmx,525,1200"/>
+    <property name="level entry" value="res/level/howlingcaverns/howlingcaverns.tmx,525,1210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="216" x="2803.5" y="2361.5" width="85" height="45">
    <properties>
-    <property name="level entry" value="res/level/howlingcaverns/howlingcaverns.tmx,3675,1150"/>
+    <property name="level entry" value="res/level/howlingcaverns/howlingcaverns.tmx,3675,1160"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

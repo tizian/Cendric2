@@ -34,3 +34,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 -- quest 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('silkweed_potion', 'quest_desc','I have to get a Silkweed from the elder''s garden and a corrupted stone from a Cairn Wraith (found on the windy plateau behind the crypt), so he can brew me a potion to get my memories back.','Ich soll im Garten des Dorfältesten nach Seidenkraut suchen und auf der windigen Ebene hinter der Krypta einen Stein eines Cairn Geistes holen, so dass er mir einen Trank brauen kann, der meine Erinnerungen zurück bringt.','Ich söll im Garte vom Dorfältiste nachme Sidechrütli sueche und uf de windige Ebeni hinter de Krypta en Stei vomne Steimännli Geist hole, so dass er mir es Tränkli braue chan wo mini Erinnerige zrugg bringt.','Debo buscar hierbaseda en el jardín del anciano para que él me prepare una poción que me ayude a recuperar mi memoria.');
+
+-- dialogue
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('DL_Inina_PowerWeakenedNot', 'dl_npc_inina','But... strange. I can''t feel that aura anymore. Maybe something happened...','Aber... seltsam. Ich kann diese Aura nicht mehr spüren. Vielleicht ist etwas passiert...','Aber... komisch. Ich cha die Aura nüme gspüre. Vilicht isch öppis passiert...', '?');
