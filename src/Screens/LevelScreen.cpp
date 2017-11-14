@@ -476,7 +476,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	}
 
 	m_isGameOver = true;
-	m_characterCore->increaseDeathCount();
+	m_characterCore->increaseDeathCount(m_levelID);
 	m_currentLevel.executeBossEnding(false);
 	addObject(ScreenOverlay::createGameOverScreenOverlay());
 	m_interface->hideAll();

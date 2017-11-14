@@ -180,7 +180,7 @@ public:
 	// notifies a steam achievement
 	void notifyAchievementUnlocked(const std::string& achievement);
 	// increase death count by one
-	void increaseDeathCount();
+	void increaseDeathCount(const std::string& level);
 
 protected:
 	// protected constructor for copying

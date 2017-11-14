@@ -61,6 +61,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ REPUTATION_PROGRESS,  &CharacterCoreReader::readReputationProgress });
 	m_readMap.insert({ WEATHER,  &CharacterCoreReader::readWeather });
 	m_readMap.insert({ DEATH_COUNT,  &CharacterCoreReader::readDeaths });
+	m_readMap.insert({ DEATH_LEVEL,  &CharacterCoreReader::readLevelDeaths });
 }
 
 bool CharacterCoreReader::readCharacterCore(const std::string& filename, CharacterCoreData& data, bool onlySaveGame) {
@@ -808,6 +809,23 @@ bool CharacterCoreReader::readChestsLooted(std::string& line, CharacterCoreData&
 	std::string id;
 	if (!readLevelStateLayer(line, layer, id)) return false;
 	data.chestsLooted.insert({ id, layer });
+	return true;
+}
+
+bool CharacterCoreReader::readLevelDeaths(std::string& line, CharacterCoreData& data) const {
+	std::string id;
+	int deaths = 0;
+	std::size_t pos = line.find(',');
+	if (pos == std::string::npos) {
+		id = line;
+	}
+	else {
+		id = line.substr(0, pos);
+		line = line.substr(pos + 1);
+		deaths = std::stoi(line);
+	}
+
+	data.levelDeaths.insert({ id, deaths });
 	return true;
 }
 

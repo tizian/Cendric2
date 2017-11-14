@@ -47,6 +47,7 @@ protected:
 	const char* REPUTATION_PROGRESS = "reputation.progress";
 	const char* WEATHER = "weather";
 	const char* DEATH_COUNT = "deaths";
+	const char* DEATH_LEVEL = "level.deaths";
 
 	// equipment & items
 	const char* GOLD = "gold";

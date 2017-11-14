@@ -210,6 +210,7 @@ void CharacterCore::initializeLevelMaps(const std::string& level) {
 	m_data.enemiesLooted.insert({ level, std::set<int>() });
 	m_data.itemsLooted.insert({ level, std::set<int>() });
 	m_data.chestsLooted.insert({ level, std::set<int>() });
+	m_data.levelDeaths.insert({ level, 0 });
 	m_data.triggersTriggered.insert({ level, std::set<int>() });
 	m_data.doorsOpen.insert({ level, std::set<int>() });
 }
@@ -862,6 +863,9 @@ void CharacterCore::notifyAchievementUnlocked(const std::string& achievement) {
 	m_achievementManager->unlockAchievement(achievement);
 }
 
-void CharacterCore::increaseDeathCount() {
+void CharacterCore::increaseDeathCount(const std::string& level) {
 	m_data.deaths++;
+	
+	if (!contains(m_data.levelDeaths, level)) return;
+	m_data.levelDeaths.at(level)++;
 }

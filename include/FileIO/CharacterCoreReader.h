@@ -52,6 +52,7 @@ private:
 	bool readLearnedHints(std::string& line, CharacterCoreData& data) const;
 	bool readWeather(std::string& line, CharacterCoreData& data) const;
 	bool readDeaths(std::string& line, CharacterCoreData& data) const;
+	bool readLevelDeaths(std::string& line, CharacterCoreData& data) const;
 
 	bool readLevelStateLayer(std::string& line, std::set<int>& layer, std::string& id) const;
 

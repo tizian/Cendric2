@@ -67,6 +67,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeHintsLearned(data));
 		toHash.append(writeWeather(data));
 		toHash.append(writeDeaths(data));
+		toHash.append(writeLevelDeaths(data));
 
 		savefile << writeAndHash(toHash, data);
 
@@ -363,6 +364,20 @@ std::string CharacterCoreWriter::writeGold(const CharacterCoreData& data) const 
 
 std::string CharacterCoreWriter::writeDeaths(const CharacterCoreData& data) const {
 	return std::string(DEATH_COUNT) + ":" + std::to_string(data.deaths) + "\n";
+}
+
+std::string CharacterCoreWriter::writeLevelDeaths(const CharacterCoreData& data) const {
+	std::string levelDeaths = "# deaths in level:\n";
+
+	for (auto& it : data.levelDeaths) {
+		std::string levelDeath = std::string(DEATH_LEVEL);
+		levelDeath.append(":");
+		levelDeath.append(it.first);
+		levelDeath.append("," + std::to_string(it.second));
+		levelDeath.append("\n");
+		levelDeaths.append(levelDeath);
+	}
+	return levelDeaths;
 }
 
 std::string CharacterCoreWriter::writeStoredGold(const CharacterCoreData& data) const {
