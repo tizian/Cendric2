@@ -42,4 +42,9 @@ private:
 	void onApply();
 	void checkSoundSlider();
 	void checkFPSSlider();
+
+	// volume handling
+	void updateMusicVolume();
+	int m_previousMusicVolume;
+	bool m_previousSoundOn;
 };

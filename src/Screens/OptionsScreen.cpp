@@ -16,6 +16,7 @@ void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
 	
+	updateMusicVolume();
 }
 
 void OptionsScreen::render(sf::RenderTarget& renderTarget) {
@@ -23,6 +24,18 @@ void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(*m_title);
 	renderObjects(GameObjectType::_Button, renderTarget);
 	renderTooltipText(renderTarget);
+}
+
+void OptionsScreen::updateMusicVolume() {
+	auto& config = g_resourceManager->getConfiguration();
+	if (m_volumeMusicSlider->getSliderPosition() != config.volumeMusic) {
+		config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
+		g_resourceManager->notifyVolumeChanged();
+	}
+	if (m_soundCheckbox->isChecked() != config.isSoundOn) {
+		config.isSoundOn = m_soundCheckbox->isChecked();
+		g_resourceManager->notifyVolumeChanged();
+	}
 }
 
 void OptionsScreen::execOnEnter() {
@@ -61,8 +74,9 @@ void OptionsScreen::execOnEnter() {
 
 	// sound	
 	m_soundCheckbox = new Checkbox();
+	m_previousSoundOn = g_resourceManager->getConfiguration().isSoundOn;
 	m_soundCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_soundCheckbox->setChecked(g_resourceManager->getConfiguration().isSoundOn);
+	m_soundCheckbox->setChecked(m_previousSoundOn);
 	m_soundCheckbox->setText("Sound");
 	m_soundCheckbox->setOnClick(std::bind(&OptionsScreen::checkSoundSlider, this));
 	addObject(m_soundCheckbox);
@@ -80,10 +94,11 @@ void OptionsScreen::execOnEnter() {
 	distFromTop = distFromTop + 100;
 
 	m_volumeMusicSlider = new Slider(0, 100);
+	m_previousMusicVolume = g_resourceManager->getConfiguration().volumeMusic;
 	volumeText = g_textProvider->getText("MusicVolume");
 	m_volumeMusicSlider->setTextRaw(volumeText);
 	m_volumeMusicSlider->setUnit("%");
-	m_volumeMusicSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeMusic);
+	m_volumeMusicSlider->setSliderPosition(m_previousMusicVolume);
 	m_volumeMusicSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	addObject(m_volumeMusicSlider);
 
@@ -183,6 +198,9 @@ void OptionsScreen::execOnExit() {
 }
 
 void OptionsScreen::onBack() {
+	g_resourceManager->getConfiguration().volumeMusic = m_previousMusicVolume;
+	g_resourceManager->getConfiguration().isSoundOn = m_previousSoundOn;
+	g_resourceManager->notifyVolumeChanged();
 	setNextScreen(new MenuScreen(m_characterCore));
 }
 
@@ -197,14 +215,10 @@ void OptionsScreen::onApply() {
 	screenChanged = screenChanged || config.maxFPS != m_maxFPSSlider->getSliderPosition();
 	Language language = static_cast<Language>(m_languageSelector->getChosenOptionIndex() + 1);
 	bool languageChanged = config.language != language;
-	bool soundOn = m_soundCheckbox->isChecked();
-	bool soundChanged = soundOn != config.isSoundOn;
-	soundChanged = soundChanged || config.volumeSound != m_volumeSoundSlider->getSliderPosition();
-	soundChanged = soundChanged || config.volumeMusic != m_volumeMusicSlider->getSliderPosition();
 
 	config.language = language;
 	config.displayMode = mode;
-	config.isSoundOn = soundOn;
+	config.isSoundOn = m_soundCheckbox->isChecked();
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
 	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
@@ -227,9 +241,7 @@ void OptionsScreen::onApply() {
 		setNextScreen(new OptionsScreen(getCharacterCore()));
 		m_screenManager->clearBackupScreen();
 	}
-	if (soundChanged) {
-		g_resourceManager->notifyVolumeChanged();
-	}
+	g_resourceManager->notifyVolumeChanged();
 }
 
 void OptionsScreen::checkSoundSlider() {
