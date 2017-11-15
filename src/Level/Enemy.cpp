@@ -405,7 +405,7 @@ void Enemy::setDisposed() {
 }
 
 void Enemy::setDead() {
-	if (m_isImmortal || m_mainChar->isDead()) return;
+	if (m_isDead || m_isImmortal || m_mainChar->isDead()) return;
 	LevelMovableGameObject::setDead();
 	m_buffBar->clear();
 

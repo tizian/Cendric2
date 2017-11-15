@@ -233,7 +233,7 @@ void LevelMovableGameObject::onHit(Spell* spell) {
 }
 
 void LevelMovableGameObject::setDead() {
-	if (m_isImmortal) return;
+	if (m_isImmortal || m_isDead) return;
 	// dispose the spells that this mob is an owner of and that are attached to it
 	// that's how magic works, I guess?
 	clearSpells(false);
