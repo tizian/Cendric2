@@ -63,6 +63,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	WorldCollisionQueryRecord rec;
+	rec.ignoreOnewayTiles = true;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
 	// should we use strategy 2: try y direction first, then x direction?
