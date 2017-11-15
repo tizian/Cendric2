@@ -43,3 +43,15 @@ struct WorldCollisionQueryRecord final {
 	bool collides = false;
 	bool noSafePos = false;
 };
+
+/* used to check a raycast */
+struct RaycastQueryRecord final {
+	// start pos of the ray
+	sf::Vector2f rayOrigin;
+	// direction of the ray
+	sf::Vector2f rayDirection;
+	// whether to include collidable dynamic tiles
+	bool ignoreDynamicTiles = false;
+	// the solution, where it hits
+	sf::Vector2f rayHit;
+};

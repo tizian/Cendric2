@@ -5,6 +5,8 @@
 #include "Level/Level.h"
 #include "Screens/Screen.h"
 
+class MirrorRay;
+
 enum VeliusBossState {
 	AttackIllusion,
 	ExtractDivine,
@@ -19,6 +21,10 @@ enum VeliusBossState {
 class VeliusBoss final : public Boss {
 public:
 	VeliusBoss(const Level* level, Screen* screen);
+	~VeliusBoss();
+
+	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override;
 
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Velius; }
 
@@ -35,5 +41,5 @@ protected:
 	void loadAnimation(int skinNr) override;
 
 private:
-	bool m_isRayActive = false;
+	MirrorRay* m_ray = nullptr;
 };

@@ -8,7 +8,7 @@ class InteractComponent;
 
 namespace particles {
 	class LineSpawner;
-	class ParticleSystem;
+	class TextureParticleSystem;
 	class AngledVelocityGenerator;
 }
 
@@ -37,23 +37,49 @@ private:
 	float m_currentRotation;
 };
 
+class Ray final {
+public:
+	explicit Ray(const Level* level);
+	~Ray();
+
+	// casts the ray using origin and direction and returns the end position
+	const sf::Vector2f& cast(const sf::Vector2f& origin, const sf::Vector2f& direction);
+	void update(const sf::Time& frameTime);
+	void render(sf::RenderTarget& target);
+
+private:
+	void loadParticleSystem();
+
+	particles::TextureParticleSystem* m_particleSystem = nullptr;
+	particles::LineSpawner* m_lineSpawner = nullptr;
+	particles::AngledVelocityGenerator* m_lineVelGen = nullptr;
+
+	sf::Vector2f m_startPos;
+	sf::Vector2f m_endPos;
+	sf::Vector2f m_direction;
+
+	const Level* m_level;
+	float m_currentAngle = 0.f;
+};
+
 class MirrorRay final : public GameObject {
 public:
 	explicit MirrorRay(LevelScreen* levelScreen);
-	~MirrorRay() {};
+	~MirrorRay();
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
+
+	void initRay(const sf::Vector2f& origin, const sf::Vector2f& direction);
 
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
 
 private:
 	void recalculateRays();
+	sf::Time m_recalculateCooldown;
 
 private:
 	LevelScreen* m_screen;
 
-	std::vector<particles::ParticleSystem*> m_rays;
-	std::vector<particles::LineSpawner*> m_lineSpawners;
-	std::vector<particles::AngledVelocityGenerator*> m_lineVelGens;
+	std::vector<Ray*> m_rays;
 };

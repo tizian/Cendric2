@@ -44,6 +44,8 @@ public:
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const;
 
+	void raycast(RaycastQueryRecord& rec) const;
+
 	const std::vector<GameObject*>* getMovableTiles() const;
 	const std::vector<GameObject*>* getDynamicTiles() const;
 	const LevelData* getWorldData() const override { return &m_levelData; };

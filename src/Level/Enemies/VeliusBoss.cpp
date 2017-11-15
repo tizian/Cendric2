@@ -3,6 +3,8 @@
 #include "Level/MOBBehavior/MovingBehaviors/VeliusBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Level/DynamicTiles/MirrorTile.h"
+#include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -12,6 +14,20 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
+}
+
+VeliusBoss::~VeliusBoss() {
+	delete m_ray;
+}
+
+void VeliusBoss::update(const sf::Time& frameTime) {
+	Boss::update(frameTime);
+	if (m_ray) m_ray->update(frameTime);
+}
+
+void VeliusBoss::render(sf::RenderTarget& target) {
+	Boss::render(target);
+	if (m_ray) m_ray->render(target);
 }
 
 void VeliusBoss::loadAttributes() {
@@ -48,9 +64,10 @@ void VeliusBoss::loadSpells() {
 
 void VeliusBoss::handleAttackInput() {
 	// todo
-	if (m_isRayActive) return;
-	m_isRayActive = true;
-
+	if (m_ray) return;
+	
+	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
+	m_ray->initRay(getPosition(), sf::Vector2f(1.f, 0.f));
 }
 
 void VeliusBoss::loadAnimation(int skinNr) {

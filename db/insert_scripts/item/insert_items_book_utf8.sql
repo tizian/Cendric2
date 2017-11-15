@@ -52,7 +52,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 
 Mages with an affinity to this type of magic are the only ones that are able to understand complex spells from the whole spectrum of magic, while the skills of mages with other affinities mostly concentrate on their domain.','Elementarmagie ist die Kunst, die Elemente der Natur zu kontrollieren. Es ist die erste Art von Magie, die entdeckt wurde und wird deshalb manchmal als Urmagie bezeichnet.
 
-Magier mit einer Affinität zu diesem Magietyp sind die Einzigen, die schwierige Zauber aus dem ganzen Spektrum der Magie erlernen können, während sich die Fähigkeiten anderer Magier hauptsächlich auf ihren Bereich beschränken.','Elementarmagie isch d''Kunst, d''Element vode Natur z''kontrollere. Es isch di erst Art vo Magie wo entdeckt worde isch und wird drum mengsmal als Urmagie bezeichnet.
+Magier mit einer Affinität zu diesem Magietyp sind die Einzigen, die schwierige Zauber aus dem ganzen Spektrum der Magie erlernen können, während sich die Fähigkeiten anderer Magier hauptsächlich auf ihren Bereich beschränken.','Elementarmagie isch d''Kunst, d''Element vode Natur z''kontrolliere. Es isch di erst Art vo Magie wo entdeckt worde isch und wird drum mengsmal als Urmagie bezeichnet.
 
 Magier mit enere Affinität zu dem Magietyp sind di Einzige, wo schwirigeri Zauber usem ganze Spektrum vode Magie chönd lerne, während sich d''Fähigkeite vo andere Magier hauptsächlich uf ire Bereich beschränked.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic2','document','Divine Magic','Heilige Magie','Heiligi Magie');

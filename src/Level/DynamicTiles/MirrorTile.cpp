@@ -2,6 +2,10 @@
 #include "Spells/Spell.h"
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Particles/ParticleSystem.h"
+#include "World/CustomParticleUpdaters.h"
+#include "Level/DynamicTiles/ParticleTile.h"
+#include "Screens/LevelScreen.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
@@ -83,16 +87,131 @@ std::string MirrorTile::getSpritePath() const {
 	return "res/texture/level_dynamic_tiles/spritesheet_tiles_mirror.png";
 }
 
+///////////// Ray /////////////////////
+
+Ray::Ray(const Level* level) {
+	m_level = level;
+}
+
+Ray::~Ray() {
+	delete m_particleSystem;
+}
+
+const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, const sf::Vector2f& direction) {
+	m_startPos = origin;
+	m_direction = direction;
+
+	RaycastQueryRecord rec;
+	rec.rayOrigin = origin;
+	rec.rayDirection = direction;
+
+	m_level->raycast(rec);
+	m_endPos = rec.rayHit;
+
+	loadParticleSystem();
+	return m_endPos;
+}
+
+void Ray::update(const sf::Time& frameTime) {
+	m_currentAngle += 20 * frameTime.asSeconds();
+	float phi = degToRad(static_cast<float>(m_currentAngle - 90));
+
+	m_direction.x = std::cos(phi);
+	m_direction.y = std::sin(phi);
+
+	cast(m_startPos, m_direction);
+
+	if (!m_particleSystem) return;
+
+	m_lineSpawner->point1 = m_startPos;
+	m_lineSpawner->point2 = m_endPos;
+	
+	auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
+	dir = dir / norm(dir);
+
+	m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
+	m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
+	m_particleSystem->update(frameTime);
+}
+
+void Ray::render(sf::RenderTarget& target) {
+	if (!m_particleSystem) return;
+	m_particleSystem->render(target);
+}
+
+void Ray::loadParticleSystem() {
+	delete m_particleSystem;
+
+	auto tex = g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_STAR);
+	tex->setSmooth(true);
+	m_particleSystem = new particles::TextureParticleSystem(200, tex);
+	m_particleSystem->additiveBlendMode = true;
+	m_particleSystem->emitRate = 400.f;
+
+	m_lineSpawner = new particles::LineSpawner();
+	m_particleSystem->addSpawner(m_lineSpawner);
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 10.f;
+	m_particleSystem->addGenerator(sizeGen);
+	
+	m_particleSystem->addGenerator(ParticleTile::getEmberColorGenerator("purple"));
+	
+	m_lineVelGen = new particles::AngledVelocityGenerator();
+	m_lineVelGen->minStartSpeed = 20.f;
+	m_lineVelGen->maxStartSpeed = 50.f;
+	m_lineVelGen->minAngle = -90.f;
+	m_lineVelGen->maxAngle = 90.f;
+	m_particleSystem->addGenerator(m_lineVelGen);
+	
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.4f;
+	timeGen->maxTime = 0.6f;
+	m_particleSystem->addGenerator(timeGen);
+	
+	m_particleSystem->addUpdater(new particles::EulerUpdater());
+	m_particleSystem->addUpdater<particles::TimeUpdater>();
+	m_particleSystem->addUpdater<particles::ColorUpdater>();
+}
+
 //////////// Mirror Ray ///////////////
 
 MirrorRay::MirrorRay(LevelScreen* levelScreen) {
 	m_screen = levelScreen;
 }
 
-void MirrorRay::update(const sf::Time& frameTime) {
+MirrorRay::~MirrorRay() {
+	CLEAR_VECTOR(m_rays);
+}
 
+void MirrorRay::update(const sf::Time& frameTime) {
+	updateTime(m_recalculateCooldown, frameTime);
+	if (m_recalculateCooldown == sf::Time::Zero) {
+		m_recalculateCooldown = sf::seconds(1.f);
+		recalculateRays();
+	}
+	for (auto ray : m_rays) {
+		ray->update(frameTime);
+	}
 }
 
 void MirrorRay::render(sf::RenderTarget& target) {
+	for (auto ray : m_rays) {
+		ray->render(target);
+	}
+}
 
+void MirrorRay::initRay(const sf::Vector2f& origin, const sf::Vector2f& direction) {
+	CLEAR_VECTOR(m_rays);
+
+	Ray* ray = new Ray(m_screen->getWorld());
+	ray->cast(origin, direction);
+	m_rays.push_back(ray);
+}
+
+void MirrorRay::recalculateRays() {
+	// TODO
 }

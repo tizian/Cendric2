@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 
 	if (nowTemp->tm_year >= 117) { // 2017
 		if (nowTemp->tm_mon >= 10) { // november
-			if (nowTemp->tm_mday >= 17) { // the 17th
+			if (nowTemp->tm_mday >= 24) { // the 24th
 				return 0;
 			}
 		}

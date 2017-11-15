@@ -293,6 +293,51 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 	return m_dynamicTiles;
 }
 
+void Level::raycast(RaycastQueryRecord& rec) const {
+	if (norm(rec.rayDirection) == 0) return;
+	normalize(rec.rayDirection);
+
+	// start at origin
+	int tileX = static_cast<int>(floor(rec.rayOrigin.x / TILE_SIZE_F));
+	int tileY = static_cast<int>(floor(rec.rayOrigin.y / TILE_SIZE_F));
+
+	rec.rayHit = rec.rayOrigin;
+
+	while (true) {
+		if (tileX >= static_cast<int>(m_worldData->collidableTilePositions.size()) || tileY < 0 || tileX < 0 || tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size())) {
+			break;
+		}
+		if (m_worldData->collidableTilePositions[tileY][tileX]) {
+			break;
+		}
+
+		// where does our ray hit?
+		float distX = abs(rec.rayDirection.x - (tileX * TILE_SIZE_F - rec.rayHit.x));
+		float distY = abs(rec.rayDirection.y - (tileY * TILE_SIZE_F - rec.rayHit.y));
+
+		if (distX == distY) {
+			// diagonal cast (very unlikely)
+			tileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
+			tileY = rec.rayDirection.y > 0 ? tileY + 1 : tileY - 1;
+
+			rec.rayHit.x = tileX * TILE_SIZE_F;
+			rec.rayHit.y = tileY * TILE_SIZE_F;
+		}
+		else if (distX > distY) {
+			// we will cross Y
+			tileY = rec.rayDirection.y > 0 ? tileY + 1 : tileY - 1;
+			rec.rayHit.x = rec.rayHit.x + rec.rayDirection.x * abs(tileY * TILE_SIZE_F - rec.rayHit.y);
+			rec.rayHit.y = tileY * TILE_SIZE_F;
+		}
+		else {
+			// we will cross X
+			tileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
+			rec.rayHit.y = rec.rayHit.y + rec.rayDirection.y * abs(tileX * TILE_SIZE_F - rec.rayHit.x);
+			rec.rayHit.x = tileX * TILE_SIZE_F;
+		}
+	}
+}
+
 void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const {
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
