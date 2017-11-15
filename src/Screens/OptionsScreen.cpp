@@ -15,6 +15,7 @@ void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 
 	updateObjects(GameObjectType::_Button, frameTime);
 	updateTooltipText(frameTime);
+	
 }
 
 void OptionsScreen::render(sf::RenderTarget& renderTarget) {

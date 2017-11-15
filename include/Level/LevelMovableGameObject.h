@@ -19,7 +19,7 @@ public:
 	LevelMovableGameObject(const Level* level);
 	virtual ~LevelMovableGameObject();
 
-	virtual void update(const sf::Time& frameTime) override;
+	void update(const sf::Time& frameTime) override;
 
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	
@@ -105,7 +105,6 @@ protected:
 
 	SpellManager* m_spellManager = nullptr;
 
-	bool m_displayDamageNumbers;
 	DamageNumbers* m_damageNumbers = nullptr;
 
 	// store attributes given by food. if their time runs out, they get removed from the total attributes.
@@ -127,7 +126,8 @@ protected:
 	void updateAttributes(const sf::Time& frameTime);
 	virtual void updateHealthRegeneration(const sf::Time& frameTime);
 	void updateDamageNumbers(const sf::Time& frameTime);
-	sf::Time m_timeSinceDamage = sf::Time::Zero;
+	int m_currentDotDamage = 0;
+	sf::Time m_timeSinceDotNumbers = sf::Time::Zero;
 	sf::Time m_timeSinceRegeneration = sf::Time::Zero;
 
 	// the sprite path of this mob, used for resource loading

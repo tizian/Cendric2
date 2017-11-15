@@ -41,7 +41,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 void LevelMovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 	MovableGameObject::renderAfterForeground(target);
-	if (m_displayDamageNumbers && m_damageNumbers) {
+	if (g_resourceManager->getConfiguration().isDisplayDamageNumbers && m_damageNumbers) {
 		m_damageNumbers->render(target);
 	}
 }
@@ -87,10 +87,19 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 }
 
 void LevelMovableGameObject::updateDamageNumbers(const sf::Time& frameTime) {
-	m_displayDamageNumbers = g_resourceManager->getConfiguration().isDisplayDamageNumbers;
-	if (m_displayDamageNumbers && m_damageNumbers) {
-		m_damageNumbers->update(frameTime);
+	if (!g_resourceManager->getConfiguration().isDisplayDamageNumbers || !m_damageNumbers) return;
+
+	updateTime(m_timeSinceDotNumbers, frameTime);
+	if (m_timeSinceDotNumbers == sf::Time::Zero) {
+		m_timeSinceDotNumbers = sf::seconds(1.f);
+		if (m_currentDotDamage > 0) {
+			m_damageNumbers->emitNumber(m_currentDotDamage, 
+				sf::Vector2f(getPosition().x + 0.5f * getSize().x, getSize().y), 
+				DamageNumberType::DamageOverTime, false);
+			m_currentDotDamage = 0;
+		}
 	}
+	m_damageNumbers->update(frameTime);
 }
 
 void LevelMovableGameObject::updateHealthRegeneration(const sf::Time& frameTime) {
@@ -163,7 +172,11 @@ void LevelMovableGameObject::addDamage(int damage_, DamageType damageType, bool 
 			m_damageNumbers->emitString(g_textProvider->getText("Immune"), sf::Vector2f(pos.x + 0.5f * size.x, pos.y), DamageNumberType::DamageOverTime);
 			return;
 		}
-		m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), overTime ? DamageNumberType::DamageOverTime : DamageNumberType::Damage, critical);
+		if (overTime) {
+			m_currentDotDamage += damage;
+		} else {
+			m_damageNumbers->emitNumber(damage, sf::Vector2f(pos.x + 0.5f * size.x, pos.y), DamageNumberType::Damage, critical);
+		}
 	}
 
 	m_attributes.currentHealthPoints = std::max(0, std::min(m_attributes.maxHealthPoints, m_attributes.currentHealthPoints - damage));
