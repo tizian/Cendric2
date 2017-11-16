@@ -36,7 +36,6 @@ private:
 	void checkForEnemies();
 	void updateRelativeVelocity(const sf::Time& frameTime) override;
 	std::string getSpritePath() const override;
-	sf::Vector2f m_pushAcceleration;
 	std::vector<GameObject*>* m_spellVec;
 	std::vector<LevelDynamicTile*> m_dynamicTileVec;
 	sf::FloatRect m_sailBoundingBox;

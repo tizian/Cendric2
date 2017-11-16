@@ -22,7 +22,6 @@ void DivineTorchTile::loadAnimation(int skinNr) {
 	bool isOn = skinNr % 2 == 0;
 	skinNr = skinNr / 2;
 	int height = TILE_SIZE;
-	int width = TILE_SIZE;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));

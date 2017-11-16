@@ -395,7 +395,6 @@ bool CharacterCore::isConditionFulfilled(const std::string& conditionType, const
 }
 
 bool CharacterCore::isConditionsFulfilled(const std::vector<Condition>& conditions) const {
-	bool fulfilled = true;
 	for (auto& cond : conditions) {
 		if (cond.negative) {
 			if (isConditionFulfilled(cond.type, cond.name)) return false;

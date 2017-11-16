@@ -28,8 +28,6 @@ protected:
 private:
 	void initializeResource(int skinNr);
 	std::string getSpritePath() const override;
-	// the object id in the dynamic chest tiles object layer.
-	int m_objectID = -1;
 	// the message that pops up if the main char has not the right tool
 	std::string m_noToolMessage;
 	// the tool that is used to loot this tile

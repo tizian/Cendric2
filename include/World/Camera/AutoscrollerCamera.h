@@ -16,6 +16,5 @@ public:
 
 private:
 	float m_autoscrollerSpeed = 0;
-	Screen* m_screen = nullptr;
 	sf::Vector2f m_levelSize;
 };

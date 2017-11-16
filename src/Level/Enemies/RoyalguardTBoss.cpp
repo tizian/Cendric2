@@ -124,7 +124,6 @@ void RoyalguardTBoss::updateBossState(const sf::Time& frameTime) {
 
 void RoyalguardTBoss::loadAnimation(int skinNr) {
 	int width = 120;
-	int wideWidth = 240;
 	int height = 150;
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
