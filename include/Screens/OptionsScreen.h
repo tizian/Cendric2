@@ -47,4 +47,5 @@ private:
 	void updateMusicVolume();
 	int m_previousMusicVolume;
 	bool m_previousSoundOn;
+	bool m_onBackPressed = false;
 };

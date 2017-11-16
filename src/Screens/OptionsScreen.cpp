@@ -27,6 +27,7 @@ void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 }
 
 void OptionsScreen::updateMusicVolume() {
+	if (m_onBackPressed) return;
 	auto& config = g_resourceManager->getConfiguration();
 	if (m_volumeMusicSlider->getSliderPosition() != config.volumeMusic) {
 		config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
@@ -198,6 +199,7 @@ void OptionsScreen::execOnExit() {
 }
 
 void OptionsScreen::onBack() {
+	m_onBackPressed = true;
 	g_resourceManager->getConfiguration().volumeMusic = m_previousMusicVolume;
 	g_resourceManager->getConfiguration().isSoundOn = m_previousSoundOn;
 	g_resourceManager->notifyVolumeChanged();
