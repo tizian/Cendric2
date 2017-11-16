@@ -13,6 +13,10 @@ SpellManager::~SpellManager() {
 void SpellManager::clearSpells() {
 	CLEAR_VECTOR(m_spellMap);
 	m_coolDownMap.clear();
+	m_currentSpell = -1;
+	if (m_spellSelection) {
+		m_spellSelection->reload();
+	}
 }
 
 int SpellManager::getSelectedSpellID() const {
@@ -55,10 +59,14 @@ void SpellManager::addSpell(const SpellData& spell) {
 void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers) {
 	m_spellMap.push_back(SpellData::getSpellCreator(spell, modifiers, m_owner));
 	m_coolDownMap.push_back(sf::Time::Zero);
+	if (m_spellSelection) {
+		m_spellSelection->reload();
+	}
 }
 
 template <typename T>
 bool SpellManager::executeCurrentSpell(T target, bool force) {
+	if (m_currentSpell < 0) return false;
 	if (!force) {
 		// check if execution is ready.
 		if (m_remainingGlobalCooldown.asMilliseconds() != 0) return false;
@@ -113,7 +121,7 @@ void SpellManager::setAndExecuteSpell(int spellNr) {
 }
 
 bool SpellManager::setCurrentSpell(int spellNr) {
-	if (spellNr < 0 || spellNr > static_cast<int>(m_spellMap.size())) {
+	if (spellNr < 0 || spellNr > static_cast<int>(m_spellMap.size() - 1)) {
 		g_logger->logInfo("SpellManager::setCurrentSpell", "A invalid spell is set as current spell. Spell nr: " + std::to_string(spellNr));
 		m_currentSpell = -1;
 		return false;

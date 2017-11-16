@@ -149,9 +149,6 @@ void LevelInterface::notifyReloadAttributes() {
 
 void LevelInterface::notifyReloadEquipment() {
 	m_character->reloadEquipment();
-	if (m_spellSelection) {
-		m_spellSelection->reload();
-	}
 	if (m_mainCharHealthBar) {
 		m_mainCharHealthBar->setAttributes(m_character->getAttributes());
 	}
@@ -159,8 +156,8 @@ void LevelInterface::notifyReloadEquipment() {
 
 void LevelInterface::notifyReloadWeapon() {
 	m_character->reloadWeapon();
-	if (m_spellSelection) {
-		m_spellSelection->reload();
+	if (m_mainCharHealthBar) {
+		m_mainCharHealthBar->setAttributes(m_character->getAttributes());
 	}
 }
 

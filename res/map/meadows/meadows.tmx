@@ -1266,7 +1266,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="256" x="2200" y="650" width="25" height="12.5">
+  <object id="256" x="2200" y="600" width="25" height="12.5">
    <properties>
     <property name="level entry" value="res/level/ppuzzle01/ppuzzle01.tmx,350,4760"/>
     <property name="persistent" value=""/>

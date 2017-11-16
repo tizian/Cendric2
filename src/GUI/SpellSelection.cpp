@@ -64,10 +64,10 @@ void SpellSelection::reload() {
 		m_spellSlots.push_back(slot);
 		offset += (SPELLSLOT_SPACING + SpellSlot::SIZE);
 	}
+	m_selectedSlot = 0;
 	if (!m_spellSlots.empty()) {
 		selectSlot(0);
 	}
-	m_selectedSlot = 0;
 }
 
 bool SpellSelection::isSlotLocked(int spellNr) const {
