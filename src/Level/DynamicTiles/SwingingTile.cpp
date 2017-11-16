@@ -61,7 +61,7 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	img.create(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE, COLOR_TRANSPARENT);
 
 	sf::Image fullImg;
-	fullImg.loadFromFile(getSpritePath());
+	fullImg.loadFromFile(getResourcePath(getSpritePath()));
 
 	sf::Image texImg;
 	texImg.create(TILE_SIZE * 3, 2 * TILE_SIZE, COLOR_TRANSPARENT);
