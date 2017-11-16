@@ -83,4 +83,5 @@ public:
 	static const int	NUMBER_COLUMNS_PER_SUBTILE;
 	
 	static const int	FREEZING_DAMAGE_PER_S;
+	static const int	TOP_OFFSET;
 };

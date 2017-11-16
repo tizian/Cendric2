@@ -13,6 +13,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Fluid, FluidTile)
 const float FluidTile::SURFACE_THICKNESS = 4.f;
 const int FluidTile::NUMBER_COLUMNS_PER_SUBTILE = 10;
 const int FluidTile::FREEZING_DAMAGE_PER_S = 10;
+const int FluidTile::TOP_OFFSET = 10;
 
 FluidTile::FluidTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_isRenderAfterObjects = true;
@@ -280,7 +281,7 @@ void FluidTile::onHit(Spell* spell) {
 }
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
-	if (m_data.isDeadly) {
+	if (m_data.isDeadly && mob->getBoundingBox()->top + mob->getBoundingBox()->height > getPosition().y + TOP_OFFSET) {
  		mob->setDead();
 	}
 
