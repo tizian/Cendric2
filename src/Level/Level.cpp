@@ -86,30 +86,6 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	loadCamera();
 
 	g_resourceManager->loadLevelResources();
-
-	// debug
-	for (int i = 0; i < m_levelData.mapSize.x; ++i) {
-		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
-		line[0].color = sf::Color::Red;
-		line[1].color = sf::Color::Red;
-
-		line[0].position = sf::Vector2f(TILE_SIZE_F * i, 0.f);
-		line[1].position = sf::Vector2f(TILE_SIZE_F * i, m_levelData.mapSize.y * TILE_SIZE_F);
-
-		m_grid.push_back(line);
-	}
-
-	for (int i = 0; i < m_levelData.mapSize.y; ++i) {
-		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
-		line[0].color = sf::Color::Red;
-		line[1].color = sf::Color::Red;
-
-		line[0].position = sf::Vector2f(0.f, TILE_SIZE_F * i);
-		line[1].position = sf::Vector2f(m_levelData.mapSize.x * TILE_SIZE_F, TILE_SIZE_F * i);
-
-		m_grid.push_back(line);
-	}
-
 	return true;
 }
 
@@ -159,17 +135,6 @@ void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderState
 void Level::update(const sf::Time& frameTime) {
 	World::update(frameTime);
 	m_camera->update(frameTime);
-	
-}
-
-void Level::drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const {
-	World::drawForeground(target, states);
-	for (auto const& c : m_debugCircles) {
-		target.draw(c);
-	}
-	for (auto const& v : m_grid) {
-		target.draw(v);
-	}
 }
 
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
@@ -341,25 +306,15 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 
 	rec.rayHit = rec.rayOrigin;
 	sf::Vector2f oldRayHit = rec.rayHit;
-	const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->clear();
 
 	while (true) {
-		sf::CircleShape c;
-		c.setRadius(3.f);
-		c.setFillColor(sf::Color::Red);
-		c.setPosition(rec.rayHit);
-		c.setOrigin(sf::Vector2f(3.f, 3.f));
-		const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->push_back(c);
-
 		// start at origin
 		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
 		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
-		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) || tileY < 0 || tileX < 0 || tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size())) {
-			rec.rayHit.x = xDir == 1 ? rec.rayHit.x : oldRayHit.x;
-			rec.rayHit.y = yDir == 1 ? rec.rayHit.y : oldRayHit.y;
-			break;
-		}
-		if (m_worldData->collidableTilePositions[tileY][tileX]) {
+		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) || 
+			tileY < 0 || tileX < 0 || 
+			tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size()) ||
+			m_worldData->collidableTilePositions[tileY][tileX]) {
 			rec.rayHit.x = xDir == 1 ? rec.rayHit.x : oldRayHit.x;
 			rec.rayHit.y = yDir == 1 ? rec.rayHit.y : oldRayHit.y;
 			break;

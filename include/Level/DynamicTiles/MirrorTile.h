@@ -58,8 +58,6 @@ private:
 	sf::Vector2f m_endPos;
 	sf::Vector2f m_direction;
 
-	sf::VertexArray m_line;
-
 	const Level* m_level;
 	float m_currentAngle = 0.f;
 };

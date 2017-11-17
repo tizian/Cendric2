@@ -30,7 +30,7 @@ public:
 	// draws the world. lighted foreground tilelayers
 	void drawLightedForeground(sf::RenderTarget& target, const sf::RenderStates& states) const;
 	// draws the world. foreground tilelayers
-	virtual void drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const;
+	void drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const;
 
 	const TileMap* getBackgroundTileMap() const; 
 	const TileMap* getLightedForegroundTileMap() const;

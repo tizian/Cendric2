@@ -92,9 +92,6 @@ std::string MirrorTile::getSpritePath() const {
 Ray::Ray(const Level* level) : m_line(sf::LinesStrip, 2) {
 	m_level = level;
 	loadParticleSystem();
-
-	m_line[0].color = sf::Color::Red;
-	m_line[1].color = sf::Color::Red;
 }
 
 Ray::~Ray() {
@@ -121,9 +118,6 @@ void Ray::update(const sf::Time& frameTime) {
 	m_direction.x = std::cos(m_currentAngle);
 	m_direction.y = std::sin(m_currentAngle);
 
-	m_line[0].position = m_startPos;
-	m_line[1].position = m_startPos + 100.f * m_direction;
-
 	cast(m_startPos, m_direction);
 
 	if (!m_particleSystem) return;
@@ -142,7 +136,6 @@ void Ray::update(const sf::Time& frameTime) {
 void Ray::render(sf::RenderTarget& target) {
 	if (!m_particleSystem) return;
 	m_particleSystem->render(target);
-	target.draw(m_line);
 }
 
 void Ray::loadParticleSystem() {

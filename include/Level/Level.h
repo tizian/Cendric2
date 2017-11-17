@@ -18,7 +18,6 @@ public:
 
 	// updates all tilemaps and the level camera
 	void update(const sf::Time& frameTime) override;
-	void drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const override;
 
 	// loads a .tmx file
 	bool load(const std::string& id, WorldScreen* screen) override;
@@ -79,7 +78,4 @@ private:
 	std::set<LevelDynamicTileID> m_avoidableTiles;
 	std::set<LevelDynamicTileID> m_evilTiles;
 	std::set<SpellType> m_lockedMagicTypes;
-
-	std::vector<sf::CircleShape> m_debugCircles;
-	std::vector<sf::VertexArray> m_grid;
 };
