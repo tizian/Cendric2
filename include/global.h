@@ -33,7 +33,7 @@ inline float radToDeg(float rad) {
 inline float degToRad(float deg) {
 	return deg * (M_PI / 180.f);
 }
- 
+
 inline float modAngle(float deg) {
 	deg = fmodf(deg, 360);
 	if (deg < 0)
@@ -83,6 +83,12 @@ inline sf::Vector2f normalized(const sf::Vector2f& v) {
 	sf::Vector2f n = v;
 	normalize(n);
 	return n;
+}
+
+inline float angle(const sf::Vector2f& v1, const sf::Vector2f& v2) {
+	float dot = v1.x * v1.y + v2.x * v2.y;
+	float det = v1.x * v2.y - v2.x * v1.y;
+	return std::atan2(det, dot);
 }
 
 inline float dist(const sf::Vector2f& v1, const sf::Vector2f& v2) {
@@ -145,7 +151,7 @@ inline bool contains(const std::vector<T>& c, T item) {
 // convenience method for updating time values 
 // The frame time is subtracted from the time but 
 // if the time falls below sf::Time::Zero, it is set to sf::Time::Zero.
-inline void updateTime(sf::Time& time, const sf::Time& frameTime) {	
+inline void updateTime(sf::Time& time, const sf::Time& frameTime) {
 	if (time == sf::Time::Zero) return;
 	time -= frameTime;
 	if (time < sf::Time::Zero) time = sf::Time::Zero;

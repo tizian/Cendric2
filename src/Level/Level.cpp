@@ -186,7 +186,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			calculateCollisionLocations(rec, tileBB);
 		}
 	}
-	
+
 	// MOB collision
 	if (!rec.ignoreMobs) {
 		collidesWithMobs(rec, false);
@@ -216,7 +216,7 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery
 	if (!(mob->isDead() || mob->isIgnoreDynamicTiles()) && epsIntersect(mobBB, rec.boundingBox)) {
 		calculateCollisionLocations(rec, mobBB);
 	}
-	
+
 	return rec.collides;
 }
 
@@ -297,43 +297,61 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 	if (norm(rec.rayDirection) == 0) return;
 	normalize(rec.rayDirection);
 
-	// start at origin
-	int tileX = static_cast<int>(floor(rec.rayOrigin.x / TILE_SIZE_F));
-	int tileY = static_cast<int>(floor(rec.rayOrigin.y / TILE_SIZE_F));
+	// first checks
+	bool ignoreX = rec.rayDirection.x == 0;
+	bool ignoreY = rec.rayDirection.y == 0;
+
+	float xDir = rec.rayDirection.x < 0 ? -1.f : 1.f;
+	float yDir = rec.rayDirection.y < 0 ? -1.f : 1.f;
 
 	rec.rayHit = rec.rayOrigin;
 
 	while (true) {
-		if (tileX >= static_cast<int>(m_worldData->collidableTilePositions.size()) || tileY < 0 || tileX < 0 || tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size())) {
+		// start at origin
+		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
+		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
+		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) || tileY < 0 || tileX < 0 || tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size())) {
 			break;
 		}
 		if (m_worldData->collidableTilePositions[tileY][tileX]) {
 			break;
 		}
 
-		// where does our ray hit?
-		float distX = abs(rec.rayDirection.x - (tileX * TILE_SIZE_F - rec.rayHit.x));
-		float distY = abs(rec.rayDirection.y - (tileY * TILE_SIZE_F - rec.rayHit.y));
-
-		if (distX == distY) {
-			// diagonal cast (very unlikely)
-			tileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
+		if (ignoreX) {
+			// only check Y
 			tileY = rec.rayDirection.y > 0 ? tileY + 1 : tileY - 1;
-
-			rec.rayHit.x = tileX * TILE_SIZE_F;
 			rec.rayHit.y = tileY * TILE_SIZE_F;
 		}
-		else if (distX > distY) {
-			// we will cross Y
-			tileY = rec.rayDirection.y > 0 ? tileY + 1 : tileY - 1;
-			rec.rayHit.x = rec.rayHit.x + rec.rayDirection.x * abs(tileY * TILE_SIZE_F - rec.rayHit.y);
-			rec.rayHit.y = tileY * TILE_SIZE_F;
+		else if (ignoreY) {
+			// only check X
+			tileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
+			rec.rayHit.x = tileX * TILE_SIZE_F;
 		}
 		else {
-			// we will cross X
-			tileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
-			rec.rayHit.y = rec.rayHit.y + rec.rayDirection.y * abs(tileX * TILE_SIZE_F - rec.rayHit.x);
-			rec.rayHit.x = tileX * TILE_SIZE_F;
+			// where does our ray hit?
+			int nextTileX = rec.rayDirection.x > 0 ? tileX + 1 : tileX - 1;
+			int nextTileY = rec.rayDirection.y > 0 ? tileY + 1 : tileY - 1;
+
+			float distX = std::abs(nextTileX * TILE_SIZE_F - rec.rayHit.x);
+			float distY = std::abs(nextTileY * TILE_SIZE_F - rec.rayHit.y);
+			float relDistX = distX / std::abs(rec.rayDirection.x);
+			float relDistY = distY / std::abs(rec.rayDirection.y);
+
+			if (relDistX == relDistY) {
+				// diagonal cast (very unlikely)
+				rec.rayHit.x = nextTileX * TILE_SIZE_F;
+				rec.rayHit.y = nextTileY * TILE_SIZE_F;
+			}
+			else if (relDistX > relDistY) {
+				// we will cross Y
+				rec.rayHit.x = rec.rayHit.x + xDir * distY * std::abs(std::sin(angle(rec.rayDirection, sf::Vector2f(0.f, yDir))));
+				rec.rayHit.y = nextTileY * TILE_SIZE_F;
+			}
+			else {
+				// we will cross X
+				rec.rayHit.y = rec.rayHit.y + yDir * distX * std::abs(std::sin(angle(rec.rayDirection, sf::Vector2f(xDir, 0.f))));
+				rec.rayHit.x = nextTileX * TILE_SIZE_F;
+			}
 		}
 	}
 }

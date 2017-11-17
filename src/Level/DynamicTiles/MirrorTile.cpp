@@ -91,6 +91,7 @@ std::string MirrorTile::getSpritePath() const {
 
 Ray::Ray(const Level* level) {
 	m_level = level;
+	loadParticleSystem();
 }
 
 Ray::~Ray() {
@@ -108,7 +109,6 @@ const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, const sf::Vector2f& di
 	m_level->raycast(rec);
 	m_endPos = rec.rayHit;
 
-	loadParticleSystem();
 	return m_endPos;
 }
 
