@@ -89,9 +89,12 @@ std::string MirrorTile::getSpritePath() const {
 
 ///////////// Ray /////////////////////
 
-Ray::Ray(const Level* level) {
+Ray::Ray(const Level* level) : m_line(sf::LinesStrip, 2) {
 	m_level = level;
 	loadParticleSystem();
+
+	m_line[0].color = sf::Color::Red;
+	m_line[1].color = sf::Color::Red;
 }
 
 Ray::~Ray() {
@@ -113,11 +116,13 @@ const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, const sf::Vector2f& di
 }
 
 void Ray::update(const sf::Time& frameTime) {
-	m_currentAngle += 20 * frameTime.asSeconds();
-	float phi = degToRad(static_cast<float>(m_currentAngle - 90));
+	m_currentAngle += frameTime.asSeconds();
 
-	m_direction.x = std::cos(phi);
-	m_direction.y = std::sin(phi);
+	m_direction.x = std::cos(m_currentAngle);
+	m_direction.y = std::sin(m_currentAngle);
+
+	m_line[0].position = m_startPos;
+	m_line[1].position = m_startPos + 100.f * m_direction;
 
 	cast(m_startPos, m_direction);
 
@@ -137,6 +142,7 @@ void Ray::update(const sf::Time& frameTime) {
 void Ray::render(sf::RenderTarget& target) {
 	if (!m_particleSystem) return;
 	m_particleSystem->render(target);
+	target.draw(m_line);
 }
 
 void Ray::loadParticleSystem() {
@@ -168,8 +174,8 @@ void Ray::loadParticleSystem() {
 	m_particleSystem->addGenerator(m_lineVelGen);
 	
 	auto timeGen = new particles::TimeGenerator();
-	timeGen->minTime = 0.4f;
-	timeGen->maxTime = 0.6f;
+	timeGen->minTime = 0.2f;
+	timeGen->maxTime = 0.4f;
 	m_particleSystem->addGenerator(timeGen);
 	
 	m_particleSystem->addUpdater(new particles::EulerUpdater());

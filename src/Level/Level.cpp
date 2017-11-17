@@ -86,6 +86,30 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	loadCamera();
 
 	g_resourceManager->loadLevelResources();
+
+	// debug
+	for (int i = 0; i < m_levelData.mapSize.x; ++i) {
+		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
+		line[0].color = sf::Color::Red;
+		line[1].color = sf::Color::Red;
+
+		line[0].position = sf::Vector2f(TILE_SIZE_F * i, 0.f);
+		line[1].position = sf::Vector2f(TILE_SIZE_F * i, m_levelData.mapSize.y * TILE_SIZE_F);
+
+		m_grid.push_back(line);
+	}
+
+	for (int i = 0; i < m_levelData.mapSize.y; ++i) {
+		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
+		line[0].color = sf::Color::Red;
+		line[1].color = sf::Color::Red;
+
+		line[0].position = sf::Vector2f(0.f, TILE_SIZE_F * i);
+		line[1].position = sf::Vector2f(m_levelData.mapSize.x * TILE_SIZE_F, TILE_SIZE_F * i);
+
+		m_grid.push_back(line);
+	}
+
 	return true;
 }
 
@@ -135,6 +159,17 @@ void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderState
 void Level::update(const sf::Time& frameTime) {
 	World::update(frameTime);
 	m_camera->update(frameTime);
+	
+}
+
+void Level::drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const {
+	World::drawForeground(target, states);
+	for (auto const& c : m_debugCircles) {
+		target.draw(c);
+	}
+	for (auto const& v : m_grid) {
+		target.draw(v);
+	}
 }
 
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
@@ -294,6 +329,9 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 }
 
 void Level::raycast(RaycastQueryRecord& rec) const {
+	float test1 = angle(normalized(sf::Vector2f(1.f, 1.f)), sf::Vector2f(0.f, 1.f));
+	float test2 = angle(sf::Vector2f(0.f, -1.f), sf::Vector2f(0.f, 1.f));
+
 	if (norm(rec.rayDirection) == 0) return;
 	normalize(rec.rayDirection);
 
@@ -305,8 +343,16 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 	float yDir = rec.rayDirection.y < 0 ? -1.f : 1.f;
 
 	rec.rayHit = rec.rayOrigin;
+	const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->clear();
 
 	while (true) {
+		sf::CircleShape c;
+		c.setRadius(3.f);
+		c.setFillColor(sf::Color::Red);
+		c.setPosition(rec.rayHit);
+		c.setOrigin(sf::Vector2f(3.f, 3.f));
+		const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->push_back(c);
+
 		// start at origin
 		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
 		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
@@ -337,19 +383,18 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 			float relDistX = distX / std::abs(rec.rayDirection.x);
 			float relDistY = distY / std::abs(rec.rayDirection.y);
 
-			if (relDistX == relDistY) {
-				// diagonal cast (very unlikely)
-				rec.rayHit.x = nextTileX * TILE_SIZE_F;
-				rec.rayHit.y = nextTileY * TILE_SIZE_F;
-			}
-			else if (relDistX > relDistY) {
+			if (relDistX > relDistY) {
 				// we will cross Y
-				rec.rayHit.x = rec.rayHit.x + xDir * distY * std::abs(std::sin(angle(rec.rayDirection, sf::Vector2f(0.f, yDir))));
+				float angles = std::abs(angle(rec.rayDirection, sf::Vector2f(0.f, yDir)));
+				float sinAngle = std::sin(angles);
+				rec.rayHit.x = rec.rayHit.x + xDir * distY * sinAngle;
 				rec.rayHit.y = nextTileY * TILE_SIZE_F;
 			}
 			else {
 				// we will cross X
-				rec.rayHit.y = rec.rayHit.y + yDir * distX * std::abs(std::sin(angle(rec.rayDirection, sf::Vector2f(xDir, 0.f))));
+				float angles = std::abs(angle(rec.rayDirection, sf::Vector2f(xDir, 0.f)));
+				float sinAngle = std::sin(angles);
+				rec.rayHit.y = rec.rayHit.y + yDir * distX * sinAngle;
 				rec.rayHit.x = nextTileX * TILE_SIZE_F;
 			}
 		}

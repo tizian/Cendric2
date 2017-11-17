@@ -86,8 +86,8 @@ inline sf::Vector2f normalized(const sf::Vector2f& v) {
 }
 
 inline float angle(const sf::Vector2f& v1, const sf::Vector2f& v2) {
-	float dot = v1.x * v1.y + v2.x * v2.y;
-	float det = v1.x * v2.y - v2.x * v1.y;
+	float dot = v1.x * v2.x + v1.y * v2.y;
+	float det = v1.x * v2.y - v1.y * v2.x;
 	return std::atan2(det, dot);
 }
 
