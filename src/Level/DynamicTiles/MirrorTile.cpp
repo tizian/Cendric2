@@ -152,7 +152,7 @@ void Ray::loadParticleSystem() {
 	tex->setSmooth(true);
 	m_particleSystem = new particles::TextureParticleSystem(200, tex);
 	m_particleSystem->additiveBlendMode = true;
-	m_particleSystem->emitRate = 400.f;
+	m_particleSystem->emitRate = 1000.f;
 
 	m_lineSpawner = new particles::LineSpawner();
 	m_particleSystem->addSpawner(m_lineSpawner);
@@ -174,8 +174,8 @@ void Ray::loadParticleSystem() {
 	m_particleSystem->addGenerator(m_lineVelGen);
 	
 	auto timeGen = new particles::TimeGenerator();
-	timeGen->minTime = 0.2f;
-	timeGen->maxTime = 0.4f;
+	timeGen->minTime = 0.1f;
+	timeGen->maxTime = 0.2f;
 	m_particleSystem->addGenerator(timeGen);
 	
 	m_particleSystem->addUpdater(new particles::EulerUpdater());

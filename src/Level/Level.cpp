@@ -329,9 +329,6 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 }
 
 void Level::raycast(RaycastQueryRecord& rec) const {
-	float test1 = angle(normalized(sf::Vector2f(1.f, 1.f)), sf::Vector2f(0.f, 1.f));
-	float test2 = angle(sf::Vector2f(0.f, -1.f), sf::Vector2f(0.f, 1.f));
-
 	if (norm(rec.rayDirection) == 0) return;
 	normalize(rec.rayDirection);
 
@@ -343,6 +340,7 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 	float yDir = rec.rayDirection.y < 0 ? -1.f : 1.f;
 
 	rec.rayHit = rec.rayOrigin;
+	sf::Vector2f oldRayHit = rec.rayHit;
 	const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->clear();
 
 	while (true) {
@@ -357,11 +355,17 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
 		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
 		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) || tileY < 0 || tileX < 0 || tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size())) {
+			rec.rayHit.x = xDir == 1 ? rec.rayHit.x : oldRayHit.x;
+			rec.rayHit.y = yDir == 1 ? rec.rayHit.y : oldRayHit.y;
 			break;
 		}
 		if (m_worldData->collidableTilePositions[tileY][tileX]) {
+			rec.rayHit.x = xDir == 1 ? rec.rayHit.x : oldRayHit.x;
+			rec.rayHit.y = yDir == 1 ? rec.rayHit.y : oldRayHit.y;
 			break;
 		}
+
+		oldRayHit = rec.rayHit;
 
 		if (ignoreX) {
 			// only check Y
@@ -386,15 +390,15 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 			if (relDistX > relDistY) {
 				// we will cross Y
 				float angles = std::abs(angle(rec.rayDirection, sf::Vector2f(0.f, yDir)));
-				float sinAngle = std::sin(angles);
-				rec.rayHit.x = rec.rayHit.x + xDir * distY * sinAngle;
+				float tanAngle = std::tan(angles);
+				rec.rayHit.x = rec.rayHit.x + xDir * distY * tanAngle;
 				rec.rayHit.y = nextTileY * TILE_SIZE_F;
 			}
 			else {
 				// we will cross X
 				float angles = std::abs(angle(rec.rayDirection, sf::Vector2f(xDir, 0.f)));
-				float sinAngle = std::sin(angles);
-				rec.rayHit.y = rec.rayHit.y + yDir * distX * sinAngle;
+				float tanAngle = std::tan(angles);
+				rec.rayHit.y = rec.rayHit.y + yDir * distX * tanAngle;
 				rec.rayHit.x = nextTileX * TILE_SIZE_F;
 			}
 		}

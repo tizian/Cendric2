@@ -26,7 +26,7 @@ void VeliusBoss::update(const sf::Time& frameTime) {
 }
 
 void VeliusBoss::render(sf::RenderTarget& target) {
-	Boss::render(target);
+	//Boss::render(target);
 	if (m_ray) m_ray->render(target);
 }
 
