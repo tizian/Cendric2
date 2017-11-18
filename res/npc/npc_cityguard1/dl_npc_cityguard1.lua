@@ -116,6 +116,8 @@ loadDialogue = function(DL)
 			if (DL:hasItem("qe_recommendationletter", 1)) then
 				DL:addChoice(37, "DL_Choice_TryLetter") -- You know, Inina trusts me. (Show letter)
 			end
+
+			DL:addChoice(-2, "DL_Choice_Nevermind") -- Nevermind...
 			DL:addNode()
 			
 			DL:createNPCNode(34, 38, "DL_Citguard_TryGold") -- (Smiles) You know how this works, don't you.

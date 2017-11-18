@@ -89,7 +89,7 @@ std::string MirrorTile::getSpritePath() const {
 
 ///////////// Ray /////////////////////
 
-Ray::Ray(const Level* level) : m_line(sf::LinesStrip, 2) {
+Ray::Ray(const Level* level) {
 	m_level = level;
 	loadParticleSystem();
 }
