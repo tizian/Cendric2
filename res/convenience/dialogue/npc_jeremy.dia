@@ -331,7 +331,7 @@ npc.id:npc_jeremy
 		# translation: 
 		translation.tag:DL_Choice_NotYourBuddy
 		translation.en:I'm not your buddy, guy.
-		translation.de:Ich bin dich dein Kumpel, Alter.
+		translation.de:Ich bin nicht dein Kumpel, Alter.
 		translation.ch:Ich bi nid din Kolleg, Alte.
 	]
 	[
