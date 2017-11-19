@@ -4,11 +4,10 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "World/CustomParticleUpdaters.h"
-#include "Level/DynamicTiles/ParticleTile.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 
-REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
+REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Mirror, MirrorTile)
 
 const float MirrorTile::ACTIVATE_RANGE = 80.f;
 const float MirrorTile::TICK_ANGLE = 15.f;
@@ -21,9 +20,16 @@ MirrorTile::MirrorTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen)
 	addComponent(m_interactComponent);
 }
 
+void MirrorTile::update(const sf::Time& frameTime) {
+	setState(GameObjectState::Inactive);
+	m_animatedSprite.setColor(COLOR_WHITE);
+	LevelDynamicTile::update(frameTime);
+}
+
 bool MirrorTile::init(const LevelTileProperties& properties) {
-	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setPositionOffset(sf::Vector2f(15.f, 15.f));
+	setSpriteOffset(sf::Vector2f(-15.f, -15.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
 
 	m_currentRotation = 0.f;
 	if (contains(properties, std::string("angle"))) {
@@ -41,10 +47,16 @@ void MirrorTile::loadAnimation(int skinNr) {
 	defaultAnimation->setSpriteSheet(tex);
 	defaultAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
-	addAnimation(GameObjectState::Active, defaultAnimation);
+	addAnimation(GameObjectState::Inactive, defaultAnimation);
+
+	Animation* activeAnimation = new Animation(sf::seconds(10.0f));
+	activeAnimation->setSpriteSheet(tex);
+	activeAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+
+	addAnimation(GameObjectState::Active, activeAnimation);
 
 	// initial values
-	setState(GameObjectState::Active);
+	setState(GameObjectState::Inactive);
 	playCurrentAnimation(false);
 
 	// set origin of animation to center
@@ -83,19 +95,39 @@ void MirrorTile::setRotation(float rotation) {
 	m_animatedSprite.setRotation(m_currentRotation);
 }
 
+void MirrorTile::setActive(bool active) {
+	setState(active ? GameObjectState::Active : GameObjectState::Inactive);
+}
+
+void MirrorTile::setColor(const sf::Color& color) {
+	m_animatedSprite.setColor(color);
+}
+
+float MirrorTile::getRotation() const {
+	return degToRad(m_currentRotation - 90.f);
+}
+
 std::string MirrorTile::getSpritePath() const {
 	return "res/texture/level_dynamic_tiles/spritesheet_tiles_mirror.png";
 }
 
 ///////////// Ray /////////////////////
 
-Ray::Ray(const Level* level) {
+Ray::Ray(const Level* level, const sf::Color& color) {
 	m_level = level;
+	m_color = color;
 	loadParticleSystem();
 }
 
 Ray::~Ray() {
 	delete m_particleSystem;
+}
+
+const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, float angle) {
+	sf::Vector2f dir;
+	dir.x = std::cos(angle);
+	dir.y = std::sin(angle);
+	return cast(origin, dir);
 }
 
 const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, const sf::Vector2f& direction) {
@@ -108,18 +140,17 @@ const sf::Vector2f& Ray::cast(const sf::Vector2f& origin, const sf::Vector2f& di
 
 	m_level->raycast(rec);
 	m_endPos = rec.rayHit;
+	m_mirrorTile = dynamic_cast<MirrorTile*>(rec.mirrorTile);
+
+	if (m_mirrorTile) {
+		m_mirrorTile->setActive(true);
+		m_mirrorTile->setColor(m_color);
+	}
 
 	return m_endPos;
 }
 
 void Ray::update(const sf::Time& frameTime) {
-	m_currentAngle += frameTime.asSeconds();
-
-	m_direction.x = std::cos(m_currentAngle);
-	m_direction.y = std::sin(m_currentAngle);
-
-	cast(m_startPos, m_direction);
-
 	if (!m_particleSystem) return;
 
 	m_lineSpawner->point1 = m_startPos;
@@ -136,6 +167,14 @@ void Ray::update(const sf::Time& frameTime) {
 void Ray::render(sf::RenderTarget& target) {
 	if (!m_particleSystem) return;
 	m_particleSystem->render(target);
+}
+
+MirrorTile* Ray::getMirrorTile() const {
+	return m_mirrorTile;
+}
+
+const sf::Color& Ray::getColor() const {
+	return m_color;
 }
 
 void Ray::loadParticleSystem() {
@@ -156,8 +195,13 @@ void Ray::loadParticleSystem() {
 	sizeGen->minEndSize = 10.f;
 	sizeGen->maxEndSize = 10.f;
 	m_particleSystem->addGenerator(sizeGen);
-	
-	m_particleSystem->addGenerator(ParticleTile::getEmberColorGenerator("purple"));
+
+	auto colGen = new particles::ColorGenerator();
+	colGen->minStartCol = m_color;
+	colGen->maxStartCol = m_color;
+	colGen->minEndCol = m_color;
+	colGen->maxEndCol = m_color;
+	m_particleSystem->addGenerator(colGen);
 	
 	m_lineVelGen = new particles::AngledVelocityGenerator();
 	m_lineVelGen->minStartSpeed = 20.f;
@@ -187,13 +231,27 @@ MirrorRay::~MirrorRay() {
 }
 
 void MirrorRay::update(const sf::Time& frameTime) {
-	updateTime(m_recalculateCooldown, frameTime);
-	if (m_recalculateCooldown == sf::Time::Zero) {
-		m_recalculateCooldown = sf::seconds(1.f);
-		recalculateRays();
-	}
-	for (auto ray : m_rays) {
+	if (m_rays.size() == 0) return;
+	m_rays[0]->cast(m_origin, m_direction);
+
+	for (size_t i = 0; i < m_rays.size();) {
+		auto ray = m_rays[i];
 		ray->update(frameTime);
+		if (!ray->getMirrorTile()) {
+			for (size_t j = i + 1; j < m_rays.size(); j++) {
+				delete m_rays[j];
+				m_rays.erase(m_rays.begin() + j);
+			}
+			break;
+		}
+
+		i++;
+		if (i >= m_rays.size()) {
+			// add ray
+			Ray* newRay = new Ray(m_screen->getWorld(), ray->getColor());
+			m_rays.push_back(newRay);
+		}
+		m_rays[i]->cast(ray->getMirrorTile()->getCenter(), ray->getMirrorTile()->getRotation());
 	}
 }
 
@@ -203,14 +261,12 @@ void MirrorRay::render(sf::RenderTarget& target) {
 	}
 }
 
-void MirrorRay::initRay(const sf::Vector2f& origin, const sf::Vector2f& direction) {
+void MirrorRay::initRay(const sf::Vector2f& origin, const sf::Vector2f& direction, const sf::Color& color) {
 	CLEAR_VECTOR(m_rays);
 
-	Ray* ray = new Ray(m_screen->getWorld());
-	ray->cast(origin, direction);
+	Ray* ray = new Ray(m_screen->getWorld(), color);
 	m_rays.push_back(ray);
-}
 
-void MirrorRay::recalculateRays() {
-	// TODO
+	m_origin = origin;
+	m_direction = direction;
 }

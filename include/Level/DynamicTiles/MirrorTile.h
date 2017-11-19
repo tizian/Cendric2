@@ -15,11 +15,18 @@ namespace particles {
 class MirrorTile final : public LevelDynamicTile {
 public:
 	explicit MirrorTile(LevelScreen* levelScreen);
+
+	void update(const sf::Time& frameTime) override;
+
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
 	void onRightClick() override;
 	void setRotation(float rotation);
+	void setActive(bool active);
+	void setColor(const sf::Color& color);
+	
+	float getRotation() const;
 
 	void switchLever();
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Mirror; }
@@ -39,13 +46,18 @@ private:
 
 class Ray final {
 public:
-	explicit Ray(const Level* level);
+	Ray(const Level* level, const sf::Color& color);
 	~Ray();
 
 	// casts the ray using origin and direction and returns the end position
 	const sf::Vector2f& cast(const sf::Vector2f& origin, const sf::Vector2f& direction);
+	const sf::Vector2f& cast(const sf::Vector2f& origin, float angle);
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& target);
+
+	const sf::Color& getColor() const;
+
+	MirrorTile* getMirrorTile() const;
 
 private:
 	void loadParticleSystem();
@@ -57,7 +69,9 @@ private:
 	sf::Vector2f m_startPos;
 	sf::Vector2f m_endPos;
 	sf::Vector2f m_direction;
+	sf::Color m_color;
 
+	MirrorTile* m_mirrorTile = nullptr;
 	const Level* m_level;
 	float m_currentAngle = 0.f;
 };
@@ -70,16 +84,14 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	void initRay(const sf::Vector2f& origin, const sf::Vector2f& direction);
+	void initRay(const sf::Vector2f& origin, const sf::Vector2f& direction, const sf::Color& color);
 
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
 
 private:
-	void recalculateRays();
-	sf::Time m_recalculateCooldown;
-
-private:
 	LevelScreen* m_screen;
+	sf::Vector2f m_origin;
+	sf::Vector2f m_direction;
 
 	std::vector<Ray*> m_rays;
 };

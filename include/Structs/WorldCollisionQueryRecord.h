@@ -54,4 +54,6 @@ struct RaycastQueryRecord final {
 	bool ignoreDynamicTiles = false;
 	// the solution, where it hits
 	sf::Vector2f rayHit;
+	// the mirror tile which it hits
+	GameObject* mirrorTile = nullptr;
 };

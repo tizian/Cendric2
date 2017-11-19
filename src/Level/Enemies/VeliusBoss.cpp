@@ -67,7 +67,7 @@ void VeliusBoss::handleAttackInput() {
 	if (m_ray) return;
 	
 	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
-	m_ray->initRay(getPosition(), sf::Vector2f(1.f, 0.f));
+	m_ray->initRay(getPosition(), sf::Vector2f(0.f, -1.f), COLOR_MEDIUM_PURPLE);
 }
 
 void VeliusBoss::loadAnimation(int skinNr) {

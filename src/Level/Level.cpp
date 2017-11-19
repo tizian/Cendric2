@@ -370,10 +370,20 @@ void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
 	sf::Vector2f intersection;
 	for (auto& it : *m_dynamicTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
-		if (!tile || !tile->isCollidable()) continue;
+		if (!tile) continue;
 
+		// check special mirror tiles
+		if (tile->getDynamicTileID() == LevelDynamicTileID::Mirror && tile->getGameObjectState() == GameObjectState::Inactive) {
+			if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
+				rec.rayHit = intersection;
+				rec.mirrorTile = tile;
+			}
+		}
+
+		if (!tile->isCollidable()) continue;
 		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
 			rec.rayHit = intersection;
+			rec.mirrorTile = nullptr;
 		}
 	}
 	for (auto& it : *m_movableTiles) {
@@ -382,6 +392,7 @@ void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
 
 		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
 			rec.rayHit = intersection;
+			rec.mirrorTile = nullptr;
 		}
 	}
 }
