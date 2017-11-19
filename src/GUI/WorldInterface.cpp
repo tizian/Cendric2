@@ -18,8 +18,8 @@ void WorldInterface::render(sf::RenderTarget& target) {
 	m_characterInfo->render(target);
 	m_spellbook->render(target);
 	m_questLog->render(target);
-	m_inventory->render(target);
 	m_quickSlotBar->render(target);
+	m_inventory->render(target);
 	m_mapOverlay->render(target);
 }
 

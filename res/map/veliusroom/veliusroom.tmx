@@ -2,6 +2,7 @@
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="195">
  <properties>
   <property name="dimming" value="0.5"/>
+  <property name="lock_teleport" value=""/>
   <property name="musicpath" value="res/music/castle.ogg"/>
   <property name="tilesetpath" value="res/map/veliusroom/tileset_map_veliusroom.png"/>
  </properties>

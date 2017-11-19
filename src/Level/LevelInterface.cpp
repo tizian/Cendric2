@@ -55,8 +55,6 @@ void LevelInterface::render(sf::RenderTarget& target) {
 
 void LevelInterface::renderAfterForeground(sf::RenderTarget& target) {
 	WorldInterface::renderAfterForeground(target);
-	
-	m_quickSlotBar->renderAfterForeground(target);
 	m_spellSelection->renderAfterForeground(target);
 }
 
