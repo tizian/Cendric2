@@ -300,6 +300,12 @@ particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::strin
 		colGen->minEndCol = sf::Color(255, 0, 0, 200);
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
 	}
+	else if (color.compare("orange") == 0) {
+		colGen->minStartCol = sf::Color(255, 150, 50, 100);
+		colGen->maxStartCol = sf::Color(255, 200, 120, 100);
+		colGen->minEndCol = sf::Color(255, 110, 80, 200);
+		colGen->maxEndCol = sf::Color(255, 180, 120, 200);
+	}
 	else if (color.compare("yellow") == 0) {
 		colGen->minStartCol = sf::Color(255, 235, 100, 100);
 		colGen->maxStartCol = sf::Color(255, 255, 150, 100);

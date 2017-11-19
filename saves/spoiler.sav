@@ -142,7 +142,10 @@ item.id:ke_sewerkey,1
 item.id:ke_smallsilver,1
 item.id:ke_syrahbasement,1
 item.id:ke_tavernbasement,1
-item.id:ke_tower,1
+item.id:ke_tower_1,1
+item.id:ke_tower_2,1
+item.id:ke_tower_3,1
+item.id:ke_tower_4,1
 item.id:ke_yashathief,1
 item.id:ke_test_2,1
 item.id:ke_test_3,1
@@ -203,6 +206,10 @@ item.id:qe_necrobook,1
 item.id:qe_portstone_bob,1
 item.id:qe_portstone_inactive,1
 item.id:qe_divinecandleholder,1
+item.id:qe_tower_1,1
+item.id:qe_tower_2,1
+item.id:qe_tower_3,1
+item.id:qe_tower_4,1
 item.id:qe_yashamask,1
 item.id:qe_yashaessence,1
 item.id:sp_divineshield,1

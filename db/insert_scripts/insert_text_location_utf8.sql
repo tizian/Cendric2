@@ -85,3 +85,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pp
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle02','location','Old Tower','Alter Turm','Alte Turm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle03','location','Old Tower','Alter Turm','Alte Turm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle04','location','Old Tower','Alter Turm','Alte Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('etozhideout','location','Etoz'' Hideout','Etoz'' Versteck','Em Etoz sis Versteck');

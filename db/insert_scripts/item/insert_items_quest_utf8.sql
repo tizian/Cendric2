@@ -4,6 +4,30 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_rope', 'item_desc', 'A strong coil of hemp rope.','Ein starkes Seil, aus Hanf gefertigt.','Es starchs Hanfseil.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_rope', 'quest', 50, 0, -1);
 
+-- Tower Key 1 (Part)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_1', 'item', 'Green Key Head','Grüner Schlüsselkopf','Grüene Schlüsselchopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_1', 'item_desc', 'A part of the key is missing.','Ein Teil des Schlüssels fehlt.','En Teil vom Schlüssel fehlt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_tower_1', 'quest', 300, 700, -1);
+
+-- Tower Key 2 (Part)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_2', 'item', 'Yellow Key Head','Gelber Schlüsselkopf','Gääle Schlüsselchopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_2', 'item_desc', 'A part of the key is missing.','Ein Teil des Schlüssels fehlt.','En Teil vom Schlüssel fehlt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_tower_2', 'quest', 350, 700, -1);
+
+-- Tower Key 3 (Part)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_3', 'item', 'Orange Key Head','Oranger Schlüsselkopf','Orange Schlüsselchopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_3', 'item_desc', 'A part of the key is missing.','Ein Teil des Schlüssels fehlt.','En Teil vom Schlüssel fehlt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_tower_3', 'quest', 400, 700, -1);
+
+-- Tower Key 4 (Part)
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_4', 'item', 'Red Key Head','Roter Schlüsselkopf','Rote Schlüsselchopf');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_4', 'item_desc', 'A part of the key is missing.','Ein Teil des Schlüssels fehlt.','En Teil vom Schlüssel fehlt.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_tower_4', 'quest', 450, 700, -1);
+
 -- Silkweed
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_silkweed', 'item', 'Silkweed','Seidenkraut','Sidechrütli');

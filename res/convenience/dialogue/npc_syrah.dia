@@ -469,7 +469,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_FavourQuestStart3
 	translation.en:I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
-	translation.de:Ich bin mir sicher dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen" werden meistens auf dem Scheiterhaufen verbrennt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
+	translation.de:Ich bin mir sicher dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen" werden meistens auf dem Scheiterhaufen verbrannt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
 	translation.ch:Ich bimer sicher, dass du die Blueme det finde chasch - Magier wo Magie "missbruched" werded meistens ufem Schiiterhufe verbrennt und wa au immer übrig bliibt wird i die Krypa verfrachtet.
 	[
 		# Link node, tag is next tag
