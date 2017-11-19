@@ -80,11 +80,13 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 		g_inputController->lockAction();
 		setPage(m_currentPage - 1);
 		setPosition(getPosition());
+		g_inputController->lockAction();
 	}
 	else if (g_inputController->isKeyJustPressed(Key::Right) || m_rightArrow->isClicked()) {
 		g_inputController->lockAction();
 		setPage(m_currentPage + 1);
 		setPosition(getPosition());
+		g_inputController->lockAction();
 	}
 
 	return true;
