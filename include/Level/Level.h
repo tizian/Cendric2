@@ -78,4 +78,8 @@ private:
 	std::set<LevelDynamicTileID> m_avoidableTiles;
 	std::set<LevelDynamicTileID> m_evilTiles;
 	std::set<SpellType> m_lockedMagicTypes;
+
+private:
+	void raycastWorld(RaycastQueryRecord& rec) const;
+	void raycastDynamicTiles(RaycastQueryRecord& rec) const;
 };

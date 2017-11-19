@@ -159,3 +159,61 @@ void World::setAmbientDimming(float dimming) const {
 void World::setLightDimming(float dimming) const {
 	m_worldData->weather.lightDimming = clamp(dimming, 0.f, 1.f);
 }
+
+bool World::lineBoxIntersection(const sf::Vector2f& p1, const sf::Vector2f& p2, const sf::FloatRect& bb, sf::Vector2f& intersection) {
+	// check the impossible things
+	if (p1.x < bb.left && p2.x < bb.left)
+		return false;
+	if (p1.x > bb.left + bb.width && p2.x > bb.left + bb.width)
+		return false;
+	if (p1.y < bb.top && p2.y < bb.top)
+		return false;
+	if (p1.y > bb.top + bb.height && p2.y > bb.top + bb.height)
+		return false;
+
+	// ray direction, no need to normalize
+	sf::Vector2f dir = p2 - p1;
+
+	// check the x lines of the box
+	bool intersects;
+	if (dir.x > 0.f) {
+		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top), sf::Vector2f(bb.left, bb.top + bb.height), p1, p2, intersection);
+	}
+	else {
+		intersects = lineIntersection(sf::Vector2f(bb.left + bb.width, bb.top), sf::Vector2f(bb.left + bb.width, bb.top + bb.height), p1, p2, intersection);
+	}
+
+	if (intersects) {
+		return true;
+	}
+
+	// now y
+	if (dir.y > 0.f) {
+		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top), sf::Vector2f(bb.left + bb.width, bb.top), p1, p2, intersection);
+	}
+	else {
+		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top + bb.height), sf::Vector2f(bb.left + bb.width, bb.top + bb.height), p1, p2, intersection);
+	}
+	return intersects;
+}
+
+bool World::lineIntersection(const sf::Vector2f& a1, const sf::Vector2f& a2, const sf::Vector2f& b1, const sf::Vector2f& b2, sf::Vector2f& intersection) {
+	sf::Vector2f b = a2 - a1;
+	sf::Vector2f d = b2 - b1;
+	float bDotDPerp = b.x * d.y - b.y * d.x;
+
+	if (bDotDPerp == 0)
+		return false;
+
+	sf::Vector2f c = b1 - a1;
+	float t = (c.x * d.y - c.y * d.x) / bDotDPerp;
+	if (t < 0 || t > 1)
+		return false;
+
+	float u = (c.x * b.y - c.y * b.x) / bDotDPerp;
+	if (u < 0 || u > 1)
+		return false;
+
+	intersection = a1 + t * b;
+	return true;
+}

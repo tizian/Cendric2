@@ -45,3 +45,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ya
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Yaslaw','enemy','Necromancer Yaslaw','Nekromant Yaslaw','Nekromant Yaslaw');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossRoyalguard','enemy','Royal Guard','Königswache','Königswach');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King','enemy','King Logan III','König Logan III','König Logan III');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BossVelius','enemy','Velius','Velius','Velius');

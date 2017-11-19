@@ -294,6 +294,12 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 }
 
 void Level::raycast(RaycastQueryRecord& rec) const {
+	raycastWorld(rec);
+	if (rec.ignoreDynamicTiles) return;
+	raycastDynamicTiles(rec);
+}
+
+void Level::raycastWorld(RaycastQueryRecord& rec) const {
 	if (norm(rec.rayDirection) == 0) return;
 	normalize(rec.rayDirection);
 
@@ -311,8 +317,8 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 		// start at origin
 		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
 		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
-		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) || 
-			tileY < 0 || tileX < 0 || 
+		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) ||
+			tileY < 0 || tileX < 0 ||
 			tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size()) ||
 			m_worldData->collidableTilePositions[tileY][tileX]) {
 			rec.rayHit.x = xDir == 1 ? rec.rayHit.x : oldRayHit.x;
@@ -356,6 +362,26 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 				rec.rayHit.y = rec.rayHit.y + yDir * distX * tanAngle;
 				rec.rayHit.x = nextTileX * TILE_SIZE_F;
 			}
+		}
+	}
+}
+
+void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
+	sf::Vector2f intersection;
+	for (auto& it : *m_dynamicTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		if (!tile || !tile->isCollidable()) continue;
+
+		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
+			rec.rayHit = intersection;
+		}
+	}
+	for (auto& it : *m_movableTiles) {
+		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
+		if (!tile || !tile->isCollidable()) continue;
+
+		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
+			rec.rayHit = intersection;
 		}
 	}
 }

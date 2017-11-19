@@ -81,3 +81,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('windyplateau','location','Windy Plateau','Windige Hochebene','Windigi Hochebeni');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('testlevel','location','Test Level','Testlevel','Testlevel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('peterslevel','location','Peter''s Hell','Peter''s Hölle','Em Peter sini Höll');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle01','location','Old Tower','Alter Turm','Alte Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle02','location','Old Tower','Alter Turm','Alte Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle03','location','Old Tower','Alter Turm','Alte Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle04','location','Old Tower','Alter Turm','Alte Turm');
