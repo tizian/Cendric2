@@ -24,6 +24,7 @@ private:
 	std::string writeDateSaved(const CharacterCoreData& data) const;
 
 	std::string writeIsInLevel(const CharacterCoreData& data) const;
+	std::string writeOverworldID(const CharacterCoreData& data) const;
 	std::string writeMapID(const CharacterCoreData& data) const;
 	std::string writeMapPosition(const CharacterCoreData& data) const;
 	std::string writeLevelID(const CharacterCoreData& data) const;

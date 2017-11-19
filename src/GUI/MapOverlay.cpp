@@ -38,7 +38,7 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 
 	reloadMaps();
 
-	const std::string mapName = m_screen->getCharacterCore()->getData().currentMap;
+	const std::string mapName = m_screen->getCharacterCore()->getData().lastOverworldMap;
 
 	setMap(mapName);
 	if (m_isLevel || m_currentMap == -1) {

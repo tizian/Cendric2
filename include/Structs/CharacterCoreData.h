@@ -24,6 +24,7 @@ struct CharacterCoreData final {
 	// position & progress
 	FractionID guild = FractionID::VOID;
 	bool isInLevel = false;
+	std::string lastOverworldMap;
 	std::string currentMap;
 	sf::Vector2f currentMapPosition;
 	std::string currentLevel;

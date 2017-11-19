@@ -54,6 +54,7 @@ public:
 	std::map<std::string, int>* getItems();
 	// an item was added or removed. if itemID equals "gold", gold is added or removed
 	void notifyItemChange(const std::string& itemID, int amount);
+	void setOverworld(const std::string& map);
 	// save the position and map id. also sets "isInLevel" = false
 	void setMap(const sf::Vector2f& position, const std::string& map);
 	// save the position and level id  also sets "isInLevel" = true

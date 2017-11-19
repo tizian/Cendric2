@@ -65,6 +65,11 @@ void MapScreen::loadAsync() {
 		return;
 	}
 
+	// set overworld
+	if (m_currentMap.getWorldData()->explorable) {
+		m_characterCore->setOverworld(m_mapID);
+	}
+
 	m_characterCore->initializeMapMaps(m_mapID);
 
 	m_mainChar = MapMainCharacterLoader::loadMainCharacter(this, &m_currentMap);

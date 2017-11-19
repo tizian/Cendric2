@@ -19,6 +19,7 @@ protected:
 
 	// position & progress
 	const char* IS_IN_LEVEL = "is.in.level";
+	const char* OVERWORLD_ID = "overworld.id";
 	const char* MAP_ID = "map.id";
 	const char* MAP_POSITION = "map.position";
 	const char* FORCED_MAP_ID = "forced.map.id";

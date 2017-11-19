@@ -31,6 +31,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeLevelID(data));
 		toHash.append(writeLevelPosition(data));
 		toHash.append(writeIsInLevel(data));
+		toHash.append(writeOverworldID(data));
 		toHash.append(writeMapID(data));
 		toHash.append(writeMapPosition(data));
 		toHash.append(writeForcedMapID(data));
@@ -99,6 +100,10 @@ std::string CharacterCoreWriter::writeSaveGameName(const CharacterCoreData& data
 
 std::string CharacterCoreWriter::writeDateSaved(const CharacterCoreData& data) const {
 	return std::string(DATE_SAVED) + ":" + std::to_string(data.dateSaved) + "\n";
+}
+
+std::string CharacterCoreWriter::writeOverworldID(const CharacterCoreData& data) const {
+	return std::string(OVERWORLD_ID) + ":" + data.lastOverworldMap + "\n";
 }
 
 std::string CharacterCoreWriter::writeMapID(const CharacterCoreData& data) const {

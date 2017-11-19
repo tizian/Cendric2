@@ -659,6 +659,10 @@ void CharacterCore::removeStoredItem(const std::string& item, int quantity) {
 	}
 }
 
+void CharacterCore::setOverworld(const std::string& map) {
+	m_data.lastOverworldMap = map;
+}
+
 void CharacterCore::setMap(const sf::Vector2f& position, const std::string& map) {
 	m_data.currentMap = map;
 	m_data.currentMapPosition = position;

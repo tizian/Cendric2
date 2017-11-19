@@ -24,6 +24,7 @@ private:
 	bool readSavegameDate(std::string& line, CharacterCoreData& data) const;
 
 	bool readIsInLevel(std::string& line, CharacterCoreData& data) const;
+	bool readOverworldID(std::string& line, CharacterCoreData& data) const;
 	bool readMapID(std::string& line, CharacterCoreData& data) const;
 	bool readMapPosition(std::string& line, CharacterCoreData& data) const;
 	bool readForcedMapID(std::string& line, CharacterCoreData& data) const;

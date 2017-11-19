@@ -17,6 +17,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ SAVE_GAME_NAME,  &CharacterCoreReader::readSavegameName });
 	m_readMap.insert({ DATE_SAVED,  &CharacterCoreReader::readSavegameDate });
 	m_readMap.insert({ ATTRIBUTES,  &CharacterCoreReader::readAttributes });
+	m_readMap.insert({ OVERWORLD_ID,  &CharacterCoreReader::readOverworldID });
 	m_readMap.insert({ MAP_ID,  &CharacterCoreReader::readMapID });
 	m_readMap.insert({ MAP_POSITION,  &CharacterCoreReader::readMapPosition });
 	m_readMap.insert({ FORCED_MAP_ID,  &CharacterCoreReader::readForcedMapID });
@@ -317,6 +318,11 @@ bool CharacterCoreReader::readGold(std::string& line, CharacterCoreData& data) c
 
 bool CharacterCoreReader::readStoredGold(std::string& line, CharacterCoreData& data) const {
 	return readPositiveInt(line, &data.storedGold);
+}
+
+bool CharacterCoreReader::readOverworldID(std::string& line, CharacterCoreData& data) const {
+	data.lastOverworldMap = line;
+	return true;
 }
 
 bool CharacterCoreReader::readMapID(std::string& line, CharacterCoreData& data) const {
