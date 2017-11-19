@@ -163,6 +163,7 @@ npc.id:npc_yasha
 	tag:3
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_yasha", "attacked")
+	trigger:DL:addConditionProgress("npc_yasha", "unfriendly")
 	# translation: 
 	translation.tag:DL_Yasha_Attack
 	translation.en:Well, prepare to die then.

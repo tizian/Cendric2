@@ -68,6 +68,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(3, 8, "DL_Yasha_Attack") -- Well, prepare to die then.
 		DL:addConditionProgress("npc_yasha", "attacked")
+		DL:addConditionProgress("npc_yasha", "unfriendly")
 		DL:addNode()
 
 
