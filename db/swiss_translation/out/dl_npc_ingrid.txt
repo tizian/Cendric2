@@ -1,0 +1,10 @@
+dl_npc_ingrid
+----------------------------------
+DL_Ingrid_TakesRawMeat:So lieb vo dir! Aber ich bi momentan grad na beschäftigt.
+DL_Ingrid_GoRoastMeat:Nimm das rohe Fleisch, brötle es über dem Füür da und brings mir denn wennd demit fertig bisch.
+DL_Ingrid_TakesRoastedMeat:Perfekt, danke vilmal. Du gsesch zimlich hungrig uus Bueb, nimm de Eintopf als Dank, er wird dich stärche.
+DL_Ingrid_IAmIngrid:Ich bi d''Ingrid, d''Chöchin vo dem bescheidene Dörfli und mun alli die hungerige Müüler stopfe. Und was führt dich da ane?
+DL_Ingrid_GivesMeat:Oh du arme, arme Bueb. Da, nimm das Stück Fleisch, das sött fürs erste mal helfe.
+DL_Ingrid_Location:Du hesch dich verloffe? Du bisch inmitte vode Weide vom Mittelland, im Königriich Admantris. Weso luegsch nid eifach uf dinere Charte, wod da mit dir umetreisch?
+DL_Ingrid_DontTrouble:Mach eifach ke Problem.
+DL_Ingrid_ElderLocation:Ah, du suechsch üsen Dorfältiste. Er lebt im Holzhuus wo ide Mitti vom Dorf stoht.

@@ -1,0 +1,16 @@
+dl_npc_rana
+----------------------------------
+DL_Rana_Hello:Hoi du! Du gsesch zimli verfrore us.
+DL_Rana_Hello2:Chum und sitz chli a üses Füürli zum dich ufwärme. Und weso redemer nid chli.
+DL_Rana_WhoAreYou:De Jason und ich sind Dämonejäger. Mir lueged, dass d''Dämone vo dem Tal do blibed und ke Problem mached.
+DL_Rana_WhoAreYou2:Mir jaged si au für Trophäe we Fell und Zää. Die chame zu schöne Rüstige verarbeite und d''Händler i Gandria chaufed si au gern.
+DL_Rana_Plans:Zimli guet. Mir hend es paar Chatzedämone und letzins sogar en Gargoyle gfunde.
+DL_Rana_Plans2:Aber di richtig fetti Beute würemer im Tempel im Norde finde.
+DL_Rana_Plans3:Blöderwiis sind d''Zauber wo ihn beschützed z''starch und mer chömed nid ie. Aber es git immer na gnueg Dämone ide Ruine ussedra.
+DL_Rana_Yasha:Jo, sicher. Si wacht übers Tal und mer würed ken Kampf mit ihre riskiere. Si schloft momentan sowieso.
+DL_Rana_KilledYasha:(D''Rana luegt dich entsetzt ah) Was? Das cha nid si. Und sogar wens stimmt, hetsch das nid söle mache.
+DL_Rana_KilledYasha2:Di andere Dämone werded ez viel aggressiver si. Naja, me Arbet für üs. (Süüfzet)
+DL_Rana_BefriendedYasha:Oh, würkli? Sehr interessanti Neuigkeite. Mir werded ihre natürli nüt mache, si isch we e Göttin für das Tal.
+DL_Rana_Mages:Hm, jo. Si sind z''vierte gsi und und sind zu dem alte Tempel im Norde gange.
+DL_Rana_Mages2:Mir hend ihne abote, si z''begleite, aber ihre Aführer isch sehr unfründlich gsi. Ich weiss nid obses gschafft hend.
+DL_Rana_UnlockTrade:Jo, ich ha es paar Trophäe und vorigi Rüstig, fallsd interessiert bisch.

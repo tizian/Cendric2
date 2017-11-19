@@ -4,6 +4,7 @@
 #include "ApplicationState.h"
 #include "Dialogue.h"
 #include "FileIO/InsertScriptParser.h"
+#include "FileIO/TranslationParser.h"
 
 #define NPC_PREFIX "npc_"
 
@@ -25,7 +26,8 @@ Toolbar::Toolbar(NodeWindow* nodeWindow) {
 	strcpy(m_dialogueFolder, G_CONF.dialogueFolder.c_str());
 	strcpy(m_dialogueID, NPC_PREFIX);
 
-	m_parser = new InsertScriptParser();
+	m_scriptParser = new InsertScriptParser();
+	m_translationParser = new TranslationParser();
 }
 
 Toolbar::~Toolbar() {
@@ -33,7 +35,7 @@ Toolbar::~Toolbar() {
 		delete[] m_folderSaves[i];
 	}
 	m_folderSaves.clear();
-	delete m_parser;
+	delete m_scriptParser;
 }
 
 void Toolbar::notifyNewDialogue() {
@@ -63,7 +65,8 @@ void Toolbar::update() {
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Parse")) {
-			m_parser->showParseMenu();
+			m_scriptParser->showParseMenu();
+			m_translationParser->showParseMenu();
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();

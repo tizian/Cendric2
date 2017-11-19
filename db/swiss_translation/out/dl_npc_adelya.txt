@@ -1,0 +1,4 @@
+dl_npc_adelya
+----------------------------------
+DL_Adelya_BeGone:Red nid mit mir! Gsesch nid dasi beschäftigt bin?
+DL_Adelya_Money:(D''Adelya huucht der es Küssli zue)

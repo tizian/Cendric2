@@ -1,0 +1,27 @@
+dl_npc_loganthird
+----------------------------------
+DL_Logan_Bow:... (De Logan isch glaub nid ganz do)
+DL_Logan_Highness:... (De Logan starrt a dir verbii)
+DL_Logan_Mark:... (De Logan treiht endli sin Chopf und luegt dich ah) Du derfsch rede.
+DL_Logan_Velius:Weso redsch nid selber mit ihm?
+DL_Logan_WhereVelius:(Zeigt uf dis Zeiche) Da sötsch wüsse.
+DL_Logan_Oookay:...
+DL_Logan_Eyes:Das goht dich nüt ah. Verschwend mini Ziit nid.
+DL_Logan_Father:Ihm gohts guet.
+DL_Logan_Father2:... (Em Logan sini Auge lüüchted plötzli uf) Nei, ischer nid. Bitte, hilf mir!
+DL_Logan_HowHelp:(De Logan ringt um Wort, fallt denn aber wieder zrugg i sin alte, abwesende Zuestand) ...
+DL_Logan_Young:... Nei. Hesch es Problem demit?
+DL_Logan_NotMyKing:En König wird nid gwählt.
+DL_Logan_MyKing:...
+DL_Logan_Outside:Weso sötti.
+DL_Logan_KingShouldKnow:Seg mer nid, was en König z''tue het.
+DL_Logan_BeautifulOutside:Isch mer egal.
+DL_Logan_NotOutside:...
+DL_Logan_Mage:... Jo.
+DL_Logan_KnowMe:... Nei.
+DL_Logan_WhatMark:Du sötsch das wüsse. Drum bisch ja do.
+DL_Logan_WhatMark2:Und es isch de Grund, weso du do *sterbe* wirsch.
+DL_Logan_BadDecision:Nei. Nur du und mini WACHE!
+DL_Logan_ForcedStay:Ich ha ez gnueg Froge beantwortet. Wache, töted ihn!
+DL_Logan_Afraid:Du... du hesch mini Wache tötet!
+DL_Logan_Afraid2:AAAAaaaaaaAAAAAH!

@@ -1,0 +1,24 @@
+dl_npc_steven
+----------------------------------
+DL_NPC_ANewFace:Und wider es neus Gsicht ide Stadt. Als hettemer nid scho gnueg Störefried da.
+DL_NPC_YouShouldKnowRules:Du sötsch d''Regle vo dere Stadt kenne, wend nid wetsch hinter Gitter cho.
+DL_choice_NoTime:Ich han grad ke Ziit für das.
+DL_NPC_Rules1:Zersch mal sött der klar si, dass de Orde vom Ewige Liecht da regiert - also halt dich besser a üsi Gsetz, susch wird das en nid sehr agnehme Ufenthalt für dich in Gandria.
+DL_NPC_Rules2:Benimm dich wend ines fremds Huus gasch - Mer gsehnd Diebe nid gern da. Di meiste Bürger hend Beobachter-Zauber, wo verhinderet, das öpper öppis chluppet.
+DL_NPC_Rules3:Und, zum Schluss: Mir gsehnds nid bsunders gern, wenn öpper mit Zauber hantiert, wo nid zude hoche heilige Schuel ghöred. Wennd bi Nekromantie verwütscht wirsch, chasch ufknöpft werde.
+DL_NPC_WhoAreYou:Ich bi de Steven, Paladin und Gsetzeshüeter vo Gandria, sozsege grad di recht Hand vom Kommandant Lloyd. Leg dich nid mit mir oder minere Stadt ah, verstande? 
+DL_choice_Understood:Verstande.
+DL_NPC_IKeepEyeOnYou:Dich wirdi im Aug phalte, Bürschtli.
+DL_NPC_DontTrouble:Ja dänn... Mach bloss ken Ärger!
+DL_Steven_Laughter:(De Steven nimmt de Brief und fangt denn völlig unkontrolliert ah lache.)
+DL_Steven_PieceOfPaper:Und du hesch würkli denkt, dass de Papierfetze dich zu ihm bringe wird? Da isch lächerlich.
+DL_Steven_Urgent:Natürlich. Aber es git au anderi dringendi Sache. So we da, wa du für mich erledige muesch, wend din Brief wider wetsch.
+DL_Steven_Inina:Schön für dich. Aber du chasch au nid mit ihre rede bis du e chlini Sach für mich erledigt hesch. Denn bechunsch au din Brief wieder.
+DL_Steven_Intimidate:Ah, du bisch en herte Siech, he. Aber ich mu din Brief glaub na bitz phalte - bis du so e Sach für mich erledigt hesch...
+DL_Steven_HelmetQuest:Ich ha letzt Nacht chli z''viel trunke und ha min Helm a paar komischi Gstalte ide Taverne verlore. Bimer zimli sicher dass si zude dreckige Diebesgilde ghöred.
+DL_Steven_HelmetQuest2:Ich bruch öpper wo nid usgseht als würer zum Orde ghöre, öpper we dich, womer min Helm wider holt. Wend das anebringsch, chasch din Papierfötzel wider ha.
+DL_Steven_GotHelmet:Sehr guet! Giben mir!
+DL_Steven_GivesLetter:Okay okay, da heschen wider. Du chasch ez vo mir us mitem Kommandant Lloyd rede. Und ez gimmer min Helm!
+DL_Steven_ThanksHelmet:Hehe. Danke.
+DL_Steven_Angry:Grr, du chliine... Dafür wirsch na zahle! Wenn de Lloyd devo ghört...
+DL_Steven_GotoLloyd:Perfekt. Da isch din Brief. Du chasch ez zum Kommandant Lloyd.

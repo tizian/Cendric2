@@ -1,0 +1,4 @@
+dl_npc_douglas
+----------------------------------
+DL_Douglas_Hi:Hey du! Du gsesch us, als chöntsch e neui Rüstig bruche! Chum und lueg si dir ah!
+DL_Douglas_Receiver:(Grinst) Da isch unbezahlbar.

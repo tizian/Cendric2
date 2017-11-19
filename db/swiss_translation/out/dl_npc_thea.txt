@@ -1,0 +1,17 @@
+dl_npc_thea
+----------------------------------
+DL_Thea_IAm:Ich heisse Thea... und du?
+DL_Thea_Nice:Freut mi au, dich z''kennelerne!
+DL_Thea_Pity:Schad, hetten gern erfahre.
+DL_Thea_WhatAmIDoing:Ich han es paar Sache vode Buure daane bringe möse und ha denkt, ich chönt ja eifach na chli bliibe.
+DL_Thea_VeryAlone:Ja, ich reise immer elei. Aber usserhalb vode Stadtmuure vo Gandria isches i letzter Ziit gföhrlich worde. Ich wür lieber öpper debii ha in Zuekunft.
+DL_Thea_WorkForFarmers:Ja, ich bi e Magd uf em Ivo sim Buurehof. Aber ich wür viel lieber ide Stadt Gandria Arbet finde. Dett isches wenigstens sicher.
+DL_Thea_Beast:Es Biescht schliicht umenand und es isch glaub zimli hungrig, well di meiste vo üsne Schöfli sind weg.
+DL_Thea_Beast2:Es hets bis jetz na niemert würkli gse, aber ich chönt schwöre dasi gest Nacht en riesige Schatte in nördlicher Richtig han verschwinde gse.
+DL_Thea_Beast3:Und am Morge het üs scho wider es Schöfli gfehlt.
+DL_Thea_Mages:Naja, di meiste vo ihne sind zimlich vernünftig. Immerhin führed si üses Königriich.
+DL_Thea_Mages2:Und ich denk würkli, dasmer ihne viel z''verdanke hend - De Buur Ivo het mer gseit, dass d''Magier früener sogar es Wätter kontrolliert hend, zum de Buure helfe.
+DL_Thea_Gandria:Es ischd Hauptstadt vo üsem Königriich. Wo de König lebt - und natürli all di wichtige Lüüt. Ach, ich wünscht, ich chönt au det wohne.
+DL_Thea_Syrah:Oh, würkli? Ich ha scho immer mit Chrütli und Tränk wele schaffe. Danke tusig!
+DL_Thea_Syrah2:Ich wirds em Ivo sege und denn so schnell we möglich nach Gandria reise.
+DL_Thea_Syrah3:Vergiss nid, mich denn i Gandria z''bsueche!

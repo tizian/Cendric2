@@ -1,0 +1,37 @@
+dl_npc_inina
+----------------------------------
+DL_Inina_Hey:Hallo, junge Magier. Ich bin d''Inina, Hohepriesterin vo de Kleriker. Wie chan ich dir helfe?
+DL_Inina_WhatDoing:Gsesch de Schrein do? Sini Chraft isch gschwächt. Mir sind do zum usefinde wieso.
+DL_Inina_Shrine:Es isch en Schrein vom Ewige Liecht. Magier und Gwöhnlichi chönd do ane cho zum Stärki und Friede im Gebet z''finde.
+DL_Inina_PowerWeakened:Es gseht so uus, als wür die heilig Magie vom Schrein dur e anderi Magie gstört werde. Mir mönd dem uf de Grund ga.
+DL_Inina_PowerWeakenedNot:Aber... komisch. Ich cha die Aura nüme gspüre. Vilicht isch öppis passiert...
+DL_Inina_WhatDo:Mir hend eine vo üsne Paladin i d''Höhli hinterem Schrein losgschickt. Aber bis jetzt ischer nonig zrugg cho.
+DL_Inina_MissingPaladin1:Ja, vielleicht chöntsch üs helfe. De Paladin womer i''d Höhli gschickt hend heisst Marcus.
+DL_Inina_MissingPaladin2:Er het min Ahänger mitgnoh. E speziells Schmuckstück wo heiligi Energie besitzt und im Dunkle lüüchtet. Er sött also liecht z''finde sii.
+DL_Inina_MissingPaladin3:Du söttsch besser au öppis mitneh, wo dir de Weg belüüchtet. Ich cha dich nid begeleite, well ich immerno probier, d''Magie vom Schrein z''lüütere.
+DL_Inina_Farmers:Es het paar Vorfäll geh vo Bürger, wo d''Stadt verloh hend ohne zrugg z''cho. Das Problem isch grad viel wichtiger als es paar vermissti Schöfli.
+DL_Inina_MissingPeople:Mir vermueted, dass d''Vorfäll mit dere komische magische Energie z''tue hend, womer do beobachted. Für das suechemer aber immerno Bewiis.
+DL_Inina_Mage:Es Ewig Liecht isch dir wohlgsonne. Du hesch e sehr spezielli Aura. (Runzlet d''Stirn) Allerdings... öppis stimmt nid mit dir. E komischi Chraft schiint dini Magie z''störe.
+DL_Inina_Aura:Nei, ich cha sie nur spüre. Es git nur sehr wenig Magier wo Auras chönd gseh, die Sehende. Leider ghöri do nid dezue.
+DL_Inina_WhereLight:Du bruchsch e Fackle. Ich ha keini debii, aber ich bi sicher, dass du ufem Buurehof eini chasch chaufe.
+DL_Inina_WhereSearch:Er isch nach Weste zunere Höhli gange.
+DL_Inina_WhatsInForMe:Ja guet, da du en Magier bisch, chan ich dir de Weg vom Ewige Liecht bibringe. Du bruchsch ab jetzt nie meh e Fackle.
+DL_Inina_FoundPaladin:Au nei. Da isch schrecklich. Ich sprich grad e Gebät für ihn. Er isch en guete Maa gsi. Danke, dass du min Ahänger zruggbrocht hesch.
+DL_Inina_FoundPaladin2:Mir mönd unbedingt usefinde was hinter all dem steckt.
+DL_Inina_LearnLight1:Jo, du hesch dich würdig erwiese, de Weg vom Ewige Liecht z''lerne.
+DL_Inina_LearnLight2:Zum e magisches Liecht z''erschaffe bruchsch zerscht e Waffe wo heiligi Magie cha fokussiere. Denn muesch die heilig Energie um dich ume bündle und zum lüüchte bringe.
+DL_Inina_LearnLight3:Nimm die Schriftrolle. Sie erklärt alles wa du wüsse söttsch.
+DL_Inina_NoTeach:Mir chönd nonig sege öb dis Herz rein isch. Du muesch zerscht bewiise, dass du üs hilfsch.
+DL_Inina_Mark:(Zuckt zeme) Bim Ewige Liecht! Da isch en Fluech, und de gseht nid guet uus, nei, gar nid...
+DL_Inina_WhatIsMark:Wenn ich mich nid irre, isches en Fluech wo dezue da isch, dich ufz''spüre.
+DL_Inina_MarkGetRid:Dörfi? (Legt en Finger ufs Zeiche und ziehten aber grad wider zrugg) Nei, so klappt das nid. Die Art vo Magie isch mir nid ganz ghüür.
+DL_Inina_MarkGetRid2:Wenn du das würkli loswerde wetsch, denn frög d''Alchemistin Syrah um Rot, wend nach Gandria chunsch. Si kennt sich mit so Flüech besser uus als ich.
+DL_Inina_MarkWhoWould:Naja, d''Paladin bruched e ähnlichi Technik zum Gfangeni markiere und ufspüre. Wenn du würkli nid weisch, weso du das hesch, denn hesch vilicht echt Problem.
+DL_Inina_FoundNote:Oh, merci. Mal luege... (Liest d''Notiz sorgfältig)
+DL_Inina_FoundNote2:Es schiint, als heb er probiert, über es Biest z''schriibe, wo Mensche i Wölf verwandlet? Vilicht isch weg dem Ding au di seltsam Aura da...
+DL_Inina_FoundNote3:Well du scho mal lebendig dur die Höhle cho bisch, bringsches vilicht au ane, das Biest z''finde und z''töte? Du hetsch mini ewig Dankbarkeit.. und ich wür der natürli au gnueg Gold ge defür.
+DL_Inina_BeastSlain:Ja, ich has scho gspürt. Di bös Magie, wo de Schrein verneblet het, isch weg.
+DL_Inina_BeastSlain2:Du hesch üs en grosse Gfalle gmacht. Da, nimm de Beutel mit Gold als Belohnig.
+DL_Inina_BeastSlain3:Ich bi ufs Höchste beiidruckt vo dine Fähigkeite, Magier. Du chöntsch en würdige Initiant fürd Kleriker sii. (Nimmt es Stück Papier und schriibt öppis druf)
+DL_Inina_BeastSlain4:Da, nimm das Empfehligsschriibe und brings zum Kommandant Lloyd, wennd ide Stadt bisch. Er isch de Ahführer vode Paladin.
+DL_Inina_BeastSlain5:Es Ewige Liecht söll dich führe.

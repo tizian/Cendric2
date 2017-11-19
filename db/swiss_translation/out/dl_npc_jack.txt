@@ -1,0 +1,15 @@
+dl_npc_jack
+----------------------------------
+DL_Jack_WhoAreYou:Ich bi de Jack. Normalerwiis wäri ja i mim Lüüchtturm und nid da i dem Puff.
+DL_Jack_WhoAreYou2:Aber i de chani nid zrugg solang das Viech det umeflügt.
+DL_Jack_Elysia:Es gseht us wenen riesige Vogel und tönt au we eine, sis Umegekreische chame schier nid ushalte.
+DL_Jack_Elysia2:Ich ha probiert, en mitere Bratpfanne z''verschüüche, aber er het si mer us de Hand grisse und verschluckt.
+DL_Jack_Elysia3:Isch chli schad um die guet Pfanne...
+DL_Jack_WhyNotClerics:Oh, das hani! Aber da hinterhältig Federviechli het sich nid wele zeige wo si go luege sind.
+DL_Jack_WhyNotClerics2:Jetzt glaubed si mer eifach nüm. Aber ich wet echt nid als Vogelfueter ende, drum hoffi er flügt bald wieder weg.
+DL_Jack_HelpJack:Würkli? Du würsch mer en grosse Gfalle mache!
+DL_Jack_HelpJack2:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse damit niemert ufgfresse wird.
+DL_Jack_HelpJack3:Oh und wend grad debi bisch, es wär würkli toll wend mer mini Pfanne zrugghole chöntsch.
+DL_Jack_ElysiaKilled:Du hesches würkli gschafft! Da isch mini guet alt Pfanne.
+DL_Jack_ElysiaKilled2:Jetzt wo das Federviech weg isch chani endlich wieder i min Turm zrugg.
+DL_Jack_ElysiaKilled3:Da, nimm''s Gold woni da ha wele usge, da bruchi ez nüm.

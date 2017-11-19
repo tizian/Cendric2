@@ -1,0 +1,13 @@
+dl_npc_citizen1
+----------------------------------
+DL_Citizen_WhereBlacksmith:Üse best Schmied isch de Harek. Du findschen im Handwerkerviertel, im Südweste vo Gandria.
+DL_Citizen_WhereAlchemist:Du suechsch d''Syrah. Ihres Huus isch ide Nöchi vom Handwerkerviertel, im südliche Teil vo Gandria.
+DL_Citizen_WhereTavern:S''"Gaschthuus zum Basilisk" isch zwüsche em Handwerkerviertel und em Hafe, ide Nöchi vom Marktplatz.
+DL_Citizen_WhereBarracks:D''Kaserne isch ide Nöchi vom Tor vode innere Stadtmuur, uf de andere Siite vom Fluss.
+DL_Citizen_WhereCathedral:D''Kathedrale isch im nördliche Teil vo Gandria, uf de andere Siite vom Fluss.
+DL_Citizen_WhereBrothel:Ehm... Es Bordell isch im Hafeviertel.
+DL_Citizen_AboutGandria:Gandria isch nid nur d''Hauptstadt vo Admantris sondern het au e wichtigi wirtschaftlichi Rolle als Hafestadt.
+DL_Citizen_AboutKing:Mir wüssed nid viel über üsen König, de Logan de Dritt. Er isch erst sit churzem ufem Thron.
+DL_Citizen_AboutMages:D''Magier regiered üsi Stadt. Di meiste Lüt ide Miliz beherrsched Magie und de König isch au scho immer en Magier gsi sowiit ich weiss.
+DL_Citizen_AboutMages2:Es isch nid eifach en Gwöhnliche z''sii inere Welt wo vo Magie regiert wird.
+DL_Citizen_AboutNecromany:Psht! Mir reded nid über das.

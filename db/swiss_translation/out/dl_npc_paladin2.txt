@@ -1,0 +1,7 @@
+dl_npc_paladin2
+----------------------------------
+DL_Paladin2_WhatIsIt:Wa isch?
+DL_Paladin2_AskHer:Ich ha ke Ziit zum plaudere. Gang und frög si selber. Aber zeig ihre chli Respekt, mir beobachted dich.
+DL_Paladin2_GuardingInina:Mir lueged, das üsi Hohepriesterin ihri Ufgab da erledige chan ohni dass si öpper stört.
+DL_Paladin1_Mage:Natürli. Me chan nid de Rang vomne Paladin ha wenme en Gwöhnliche isch.
+DL_Paladin2_WhereInina:Si isch ez selber id Höhle gange. Öpper mu usefinde, was das Biest ide Höhle so nöch vor de Stadt z''sueche gha het.

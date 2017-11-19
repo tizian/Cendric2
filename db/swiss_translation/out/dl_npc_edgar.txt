@@ -1,0 +1,15 @@
+dl_npc_edgar
+----------------------------------
+DL_Edgar_WhatDoWeHave:Ja lueg mal, wa hemmer denn da. Nomol so en Dieb wo vo üsne Beobachter-Zauber daane verfrachtet worde isch. Ich hoffe, du gnüssisch din Ufenthalt da. Hrhr.
+DL_Edgar_YourThings:Hesch würkli denkt, mer lönd emne Magier sini Waffe? Es einzig wod da bruchsch isch sowiso nur din Pickel.
+DL_Edgar_YourThings2:Aber dini alte Sache sind bi üs guet ufghobe. Du bechunsch si wider a dem Tag womer dich da entlönd.
+DL_Edgar_HowGetout:Du wirsch ide Mine schaffe möse bis dich freichaufe chasch. Gandria wird ke einzigi Münze für eu Schlufis zahle.
+DL_Edgar_WaterAndBread:Sicher, nimm das. Gwöhn dich besser dra, bechunsch für e langi Ziit nüt anders.
+DL_Edgar_HungryAgain:Du hesch dini Ration scho becho. Verpiss dich ez besser.
+DL_Edgar_Pickaxe:Da, nimm die Spitzhacke und bau Iseerz ide Mine ab. Da chaschmer denn verchaufe bis gnueg Gold hesch zum da usecho.
+DL_Edgar_Ironore:Danke. Da, din Lohn.
+DL_Edgar_NotEnoughGold:Du hesch nid gnueg Gold. Gang na bitz go schaffe.
+DL_Edgar_YoureReleased:Guet, da isch gnueg.
+DL_Edgar_YoureReleased2:Du chasch ez ga. Ich hoff eifach dasi dich da nie me gse mun.
+DL_Edgar_YoureReleased3:Du chasch dini alte Sache us de True ide Kaserne hole.
+DL_Edgar_AnotherPickaxe:Do. Ez gang go schaffe!

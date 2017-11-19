@@ -1,0 +1,32 @@
+dl_npc_harek
+----------------------------------
+DL_Harek_IAmSmith:Ja, und ich bi de best wod da finde wirsch. Han au grad paar Waffe und Rüstige im Aagebot falls interessiert bisch.
+DL_Harek_WhoAreYou2:Ich nim au spezielleri Sache in Uftrag, falls du mir d''Materialie defür bsorge chasch.
+DL_Harek_Thea:Dich?
+DL_Harek_Thea2:Hm. Nei. Das isch ke Arbet für es Meitli.
+DL_Harek_Thea3:Aber du chöntsch d''Syrah, d''Alchemistin, fröge. Si het en Lehrling gsuecht.
+DL_Harek_IceArmor:Natürli. Du gsesch we en Magier us, also chöntsch vermuetlich e Magie-infundierti Rüstig bruche.
+DL_Harek_IceArmor2:Aber ich ha grad zimli wenig Ressource. Zersch mal bruchi nämli öppis magisches...
+DL_Harek_NiceStone:Oh, da isch perfekt. Ich glaub, de chönti für de magisch Teil vode Rüstig bruche.
+DL_Harek_NiceStone2:Ich bruch allerdings au na chli Iseerz. Wend mer chli chöntsch bringe us de Mine vo Gandria, wird ich dir dini Rüstig sofort schmiede!
+DL_Harek_BrokenStaff:(Luegt sichs verbrochene Stück ah) Hm, das schiint mer es Stück vomne zimlich interessante Stab z''si. Wenn du mir all Stück devo bringe chasch, wirdin dir vilicht repariere chöne.
+DL_Harek_BrokenStaffComplete:Guet gmacht! Mal luege... (Nimmt es paar Werkzüg use und leit d''Stück uf de Amboss...)
+DL_Harek_BrokenStaffComplete2:... Und fertig. Da heschen!
+DL_Harek_SmithMagicArmor:Sehr guet. (De Harek nimmt d''''Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
+DL_Harek_SmithMagicArmor2:Da isch si. Prächtig, gell.
+DL_Harek_SmithMagicArmor3:Du chasch immer wider zu mir cho wend speziells Material findsch - Es isch interessant, demit z''schaffe.
+DL_Harek_Craft:Sicher, hesch denn speziells Material und chli Iseerz gfunde?
+DL_Harek_IceScarf:En ussergwöhnlich schöne Stei! Da drus chani wohrlich öppis schöns mache.
+DL_Harek_PearlSabre:Magischi Perle! Es isch lang her sit ich sonigi ide Händ gha ha... Die werded en prima Säbel ge.
+DL_Harek_LightningPike:D''Schwanzfedere vomne Sturmvogel? Es usgzeichnets Material für en magische Blitzspeer.
+DL_Harek_JanusGlaive:Hm, langsam frögi mi würkli woher du die Sache bechunsch wod mer bringsch.
+DL_Harek_JanusGlaive2:Ich cha die verbroche Waffe flicke, allerdings chani nur en Teil vo ihrere magische Chraft rette.
+DL_Harek_LavaArmor:Lavastei vomne Lava Geischt! Die gend e schöni, füürresistenti Rüstig.
+DL_Harek_CairnArmor:Magie-infundierti Stei vomne Cairn Geischt! Die gend e schöni, iisresistenti Rüstig.
+DL_Harek_FireGlaive:Riesigi dämonischi Fangzäh! Durchtränkt mit magischer Energie. Das git e mächtigi Waffe ab.
+DL_Harek_FireGlaive2:Mit sowas hani nonie gschaffet. Es würkli prächtigs Material.
+DL_Harek_PrismaStone:Hmm. Sehr interessant, würkli. Gseht mer ganz noch konzentrierter Magie us. Ich wür de Stei gratis schliffe.
+DL_Harek_PrismaStone2:Ich chönt de Stei so schliffe, daser ei Farb fokussiert, oder mer chönd au all Farbe lah,a ber si wäred weniger chräftig.
+DL_Harek_PrismaStone3:Weli Magieart oder Farb wetsch denn ha?
+DL_NPC_RingHereYouGo:Guet. Do, nimm.
+DL_NPC_RingThis:Guet. De Ring passt am beste zu dir.

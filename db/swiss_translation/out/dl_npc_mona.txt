@@ -1,0 +1,13 @@
+dl_npc_mona
+----------------------------------
+DL_Mona_Hi:Oh, en neue Gast. Willkomme ide Rote Perle.
+DL_Mona_Hi2:Wenn du Gold hesch und respektvoll mit mine Meitli umgasch, chasch da e sehr ussergwöhnlichi Ziit gnüsse. (Lächlet)
+DL_Mona_UpperFloor:Für e chliini Entschädigung mach ich dir das Törli uf und du chasch der d''Vorstellig aluege.
+DL_Mona_OpenGateNot:Du hesch nid gnueg Gold.
+DL_Mona_OpenGate:Sicher, viel Spass.
+DL_Mona_OnlyMeet:Denn muesch hald warte bis si wieder gönd. Wend uega wetsch muesch au zahle.
+DL_Mona_FunUnlock:Hmm... (d''Mona musteret dich) We alt bisch du?
+DL_Mona_AgeDontKnow:Hm. Ich denk mol, du bisch fasch volljöhrig. Ich seg mine Meitli, dass si chli sanft mit dir söled umgo. (Lächlet)
+DL_Mona_AgeEighteen:Hm. Guet, das chönt stimme. Also isches in Ornig. (Lächlet)
+DL_Mona_TwentyFive:Nei, sicher nid. Wennd nid gnueg alt bisch zum d''Wohret sege, bisch au nid gnueg alt für mini Meitli. Use mit dir.
+DL_Mona_HaveSomeFun:Guet. Gang zude Lola, sie warted scho uf dich. (Zwinkeret)

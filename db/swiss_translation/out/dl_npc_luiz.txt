@@ -1,0 +1,43 @@
+dl_npc_luiz
+----------------------------------
+DL_Luiz_FirstTalk:D''Syrah het also recht demit gha, dass sie dich da ane gschickt het.
+DL_Luiz_FirstTalk2:Du bisch trotzdem uf dim Weg blibe, au wend defür verboteni Magie hesch möse bruche.
+DL_Luiz_FirstTalk3:Wend also na me lerne wetsch, bisch i dene Halle willkomme.
+DL_Luiz_Forbidden:Naja, es söt natürli nid verbote si. Trotzdem werded immerna Magier ufghänkt wens mit Nekromantie verwütscht werded.
+DL_Luiz_Test:Ja - und du hesch bestande. Nekromantie isch nid eifach, ich bi beiidruckt.
+DL_Luiz_YouJoinedOtherGuild:Ich gse, du hesch dich scho entschide. We du wetsch.
+DL_Luiz_ForbiddenMagic:Mensche hend Angscht vor de Sache wo si nid kenned - genau so wi si Angst vor de Dunkelheit hend.
+DL_Luiz_ForbiddenMagic2:Aber wo Liecht isch sind au Schatte, me cha si nid eifach ignoriere. Aber me cha si erforsche und kennelerne, bis si eim nüme so fremd sind.
+DL_Luiz_WhoAreYou:Jo. Ich bi de Luiz, de Aführer vom Zirkel. Mir lueged, dass die verbannt Magie nid vergesse wird.
+DL_Luiz_Learn:Es freut mich, dass du meh lerne wetsch. 
+DL_Luiz_Learn2:Jede, wos bis i die Halle schafft, sött öppis lerne dörfe. Du chasch d''Bibliothek bruche und wend me Zauber lerne wetsch, chasch üs biitrette.
+DL_Luiz_WhatIfJoin:Du wirsch lerne, was Nekromantie so z''büüte het. Mir chönd dir mächtigi Zauber biibringe wenn du üs mit üsere Forschig hilfsch.
+DL_Luiz_OtherGuild:Do hani nüt degege. Jede söt das lerne chöne wo ihn interessiert.
+DL_Luiz_WantToJoin:Du möchtisch di verboteni Magie lerne und verschriibsch dich de Gheimnis vode Nekromantie?
+DL_Luiz_JoinNecromancers:Sehr guet. Willkomme im Zirkel, Novize. Uf das dis Wüsse immer wachse wird.
+DL_Luiz_FirstSpell:Ja, du derfsch lerne weme d''Lebensenergie vomne Gegner absuugt, Novize.
+DL_Luiz_NoSpellReputation:Da bisch nanig parat defür. Hilf üs mit üsne Forschige und du wirsch die Erfahrig becho wod bruchsch zum mit de mächtigere Zauber umga.
+DL_Luiz_LloydsPlan:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+DL_Luiz_LloydsPlan2:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+DL_Luiz_CathedralNecro:Obwohl d''Kleriker üses Versteck nid kenned, hends eis vo üsne Büecher über Nekromantie id Händ becho.
+DL_Luiz_CathedralNecro2:Es handlet sich debii aber um es zimli eigewilligs und gföhrlichs Buech drüber, we me Kreature us de Unterwelt beschwört.
+DL_Luiz_CathedralNecro3:Si hends i ihri Kathedrale brocht zums läutere, aber das wür no meh Schade arichte.
+DL_Luiz_CathedralNecro4:Gang und bring das Buech zrugg i üsi Bibliothek. Ich hoff eifach es isch nonig z''spat...
+DL_Luiz_FinishedCathedral:Guet gmacht. Ich wird''s i üsi Bibliothek zruggtue wos au aneghört.
+DL_Luiz_FinishedCathedral2:Ich fang langsam ah, dir z''traue. Ich denke, du hesch ez di nötig Erfahrig, zum lerne, weme di Tote erweckt...
+DL_Luiz_CompleteLloydsPlan:Das isch interessant, danke für de Bricht.
+DL_Luiz_CompleteLloydsPlan2:Aber ez machi mir chli Sorge um de Robert. Er isch nid vo sim letzte Usflug is Sumpfland zruggcho.
+DL_Luiz_CompleteLloydsPlan3:Bhalt es Aug offe und segmer, wener dir über de Weg laufe söt.
+DL_Luiz_NoMoreSpells:Nei, tuet mer leid, ich ha der alles zeigt woni weiss.
+DL_Luiz_NoMoreSpells2:Aber en guete Nekromant isch immer uf de Suechi nach neue Zauber. Es git meh det usse wemer kenned.
+DL_Luiz_YashaStart:Hm. Jo, ich han öppis für dich.
+DL_Luiz_YashaStart2:Es git en verfluechte Tempel im Hochland vo Admantris. En Nekromant namens Yaslaw het det vor langer Ziit en mächtige Dämon beschwore.
+DL_Luiz_YashaStart3:Blöderwiis ischer vo sinere eigene Kreatur gfange ghalte worde und isch nie wieder zruggcho.
+DL_Luiz_YashaStart4:Aber wamer us de alte Schrifte lese chönd, isch, daser immer e magischi Maske mit sich treit het wo ihm grossi Chräft verliehe het.
+DL_Luiz_YashaStart5:Er isch ez lang gnueg tot gsi. Find sini Überräschte im Tempel, lah dich vo ihm zu sinere Maske führe und bring si üs.
+DL_Luiz_KillYasha:Da muesch scho selber usefinde.
+DL_Luiz_WhereYasha:Sowiit ich weiss gits en Weg dur en Vulkan ide Marsche, südlich vo Gandria.
+DL_Luiz_YashaComplete:Und du hesch ihri Chräft au becho we ich gse. Ich bi würkli beidruckt.
+DL_Luiz_YashaComplete2:Bruch ihri Chräft gschiid, Nekromant.
+DL_Luiz_FoundVelius:Hm. Sehr interessant. Ich kenn en Magier namens Velius, er het mit mir vor langer Ziit studiert.
+DL_Luiz_FoundVelius2:Er... und Magier entführe... Ich weiss nid. Das passt nid zu ihm. Aber du sötsch i die Krypta go und me usefinde.

@@ -1,0 +1,40 @@
+dl_npc_vincent3
+----------------------------------
+DL_Vincent_Welcome:Du hesch also de Weg zu üs gfunde. Willkomme im Versteck vode Schatteläufer.
+DL_Vincent_CantJoin:Du hesch dini Entscheidig scho troffe. Was füre Verschwendig...
+DL_Vincent_WhoAreYou:Mir sind e Gilde wo sich mit Dämmerigsmagie beschäftigt und de Vorteil, wos üs bringt.
+DL_Vincent_WhoAreYou2:Du hesch ebe glaub e Affinität für die Magie, welld unglaublich schnell glernt hesch, weme en Dietrich beschwört.
+DL_Vincent_WhoAreYou3:Üs biiztrete chönt dini verborgene Talent fürebringe...
+DL_Vincent_WhyHiding:Dir isch scho klar wa i dere Stadt passiert? Magier wo kei "heiligi" Magie studiered sind nid so gern gse.
+DL_Vincent_WhyHiding2:Dämmerigs- und Elementarmagie werded aber toleriert, im Gegesatz zu Nekromantie. D''Paladin hend aber trotzdem nid gern wa mir mit üsere Magie so astelled.
+DL_Vincent_InformClerics:Bis d''Kleriker da unne wäred, wäred mir scho lang über alli Berge und du - also dini Leiche - wür ufem Abwasser triibe.
+DL_Vincent_WhoInGuild:Gse ich so us als würi dir das verzelle? Vilicht wend üs bitrittsch.
+DL_Vincent_OneGuild:Du würsch öppis verpasse. Aber das isch dini Wahl.
+DL_Vincent_WhatIfJoin:Du wirsch Dämmerigsmagie lerne und usserdem na riich werde.
+DL_Vincent_Join:Guet. Wetsch du en Brueder vode Schatteläufer werde, schwörsch dini Treui zude Gilde und lernsch d''Wäg vode Schatte?
+DL_Vincent_DeclareThief:Das wirsch nid bereue. Willkomme i üsere Gilde, Schatteläufer.
+DL_Vincent_FirstSpell:Ja, chani. Nimm die Schriftrolle und lern weme e tödlichi Falle beschwört.
+DL_Vincent_NoSpellReputation:Vilicht spöter. Zersch muesch üs mal zeige das au öppis chasch demit afange.
+DL_Vincent_NoMoreSpells:Nei, ich ha der alles biibrocht, wani weiss.
+DL_Vincent_NoMoreSpells2:Aber das will nid heisse dases det usse ke Dämmerigs-Zauber me git. Me mu si nur finde.
+DL_Vincent_LloydsPlan:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+DL_Vincent_LloydsPlan2:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+DL_Vincent_CathedralThief:D''Kleriker hend en grosse Fähler gmacht wo si es gföhrlichs Buech über Nekromantie hend wele banne.
+DL_Vincent_CathedralThief2:Es Buech lauft i ihrere Kathedrale Amok. Das isch allerdings e gueti Chance für üs.
+DL_Vincent_CathedralThief3:Während si abglenkt sind, söts es Chinderspiel si, di wertvolle Chärzeständer us ihrere Kathedrale z''chluppe.
+DL_Vincent_CathedralThief4:Bring üs die goldige Cherzeständer und ich wird der meh vo üsere Magie biibringe.
+DL_Vincent_CathedralFinished:Guet gmacht. Si denn z''neh wenn all andere abglenkt sind isch scho e saumässig gueti Idee gsi, gell.
+DL_Vincent_CathedralFinished2:Du hesch mer zeigt, dassd fähig bisch, üsi Magie z''bruuche. Nimm die Schriftrolle als Belohnig und lern, weme eis mit de Schatte wird.
+DL_Vincent_CompleteLloydsPlan:En "V.", he. (Grinst) Ich bis aber nid, das chani der sege. Danke für de Bricht.
+DL_Vincent_CompleteLloydsPlan2:Mir werded um einiges wachsamer sii. Ich mach mer bloss chli Sorge um de Koray, de Nuray ihre Brüeder.
+DL_Vincent_CompleteLloydsPlan3:Er isch letztins is Sumpfland gange. Verzell doch de Nuray devo, fallsen gse sötsch.
+DL_Vincent_YashaStart:Jo, ich han würkli eine für dich. Allerdings en zimli gföhrliche...
+DL_Vincent_YashaStart2:Los. Es git en verlassene Tempel im Hochland vo Admantris und me verzellt sich, en Dämon triibi det sis Unwese.
+DL_Vincent_YashaStart3:Aber mir hend au vomne mächtige magische Stei ghört, em "Donnerherz", wo det versteckt sii set.
+DL_Vincent_YashaStart4:Er isch wohrschinli ufs übelst bewacht vo Wächterzauber, wo dich instantan töted, wenn si dich gsehnd. Aber du, es lohnt sich!
+DL_Vincent_YashaStart5:Mit bitz Unsichtbarkeit sötsch scho irgendwie durecho. Viel Glück!
+DL_Vincent_YashaComplete:(Grinst) Ich hoff eifach, du hesch ke Problem becho, das z''hole.
+DL_Vincent_YashaComplete2:Ich ha scho immer gwüsst, dass us dir mal en guete Dieb - eh, Dämmerigsmagier wird. Vil Spass mit dine neue Fähigkeite.
+DL_Vincent_VeliusFound:Velius? Ich kenn en Magier namens Velius. Mer hend scho Gschäftli mitem gmacht.
+DL_Vincent_VeliusFound2:Er het emel Tränk wele... oder Grüchtli. Aber er isch ez echt nid so de Typ wo Lüüt entführt.
+DL_Vincent_VeliusFound3:Aber du sötsch definitiv dere Spur folge und id Krypta go. Viel Glück!

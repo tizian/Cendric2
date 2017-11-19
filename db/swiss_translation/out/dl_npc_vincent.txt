@@ -1,0 +1,18 @@
+dl_npc_vincent
+----------------------------------
+DL_Vincent_NothingToSay:...
+DL_Vincent_Stop:Hey du, psst! Ich gse, du hesch grad es Feudals Füür gholt. Hesch vor, es zum Älteste Rhendal z''bringe?
+DL_Vincent_NoneOfMyBusiness:Denksch? Naja, vilicht gahts mich öppis ah, vilicht au nid... chasch du ja nid wüsse.
+DL_Vincent_Disgruntled:(Grinst) Du weisch, dass du nid so mit Fremde rede sötsch? Du chöntsch Problem becho...
+DL_Vincent_Defected:Schad. Und du wetsch ganz sicher nid ghöre, wa ich z''sege han?
+DL_Vincent_YouAreLying:Interessant. Sehr interessant. Aber du muesch mer also ke Märli verzelle, ich weiss, was de Ältesti vorhet.
+DL_Vincent_RhendalIsDrinker:Hm, es isch nid es erst mol daser öpper schickt zum ihm e Fläsche z''kaufe. Er het dir verzellt, er bruchts für "alchemistischi Zweck", gell. Aber das isch e Lüg, er suuft eifach gern ab und zue eine.
+DL_Vincent_Interesting:Interessant. Aber ich mun der ez mal was sege.
+DL_Vincent_NoQuest:De Ältesti liebt de Schnaps. Wenn du en ihm eifach bringsch, nimmt er ihn gern. Sogar en Alchemist betrinkt sich gern ab und zue.
+DL_Vincent_Proposal:Und das isch zimli schlecht für d''Dorfbewohner. En bsoffnige Alchemist isch ken guete Alchemist. We wers, wenn mer em Älteste e chlini... Überraschig mached? (Lächlet)
+DL_Vincent_Defect:Ja guet, dini Entscheidig wird wohl immer di Richtig sii. Demfall bis spöter...
+DL_Vincent_ThePlan:Ich chönt öppis id Fläsche mische, wo de Fusel ungnüssbar macht. Das wird ihn vom Suufe abhalte... Wenigstens für es Ziitli.
+DL_Vincent_Cooperation:Sehr guet. (Macht d''Fläsche uf und tuet öppis dri) So, das söt lange. (Macht d''Fläsche wider zue) Chum wider zu mir wend das erledigt hesch. Ich zahl der denn öppis.
+DL_Vincent_DoYourDuty:Uf was wartisch na? Mach, wani der gseit han.
+DL_Vincent_GoodJob:Ich gse, du hesch dini Ufgab erledigt. Sehr guet. Du chöntsch na bruuchbar si.
+DL_Vincent_SeeYouLater:Bis spöter...

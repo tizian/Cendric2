@@ -4,6 +4,7 @@
 
 class NodeWindow;
 class InsertScriptParser;
+class TranslationParser;
 
 // main window toolbar
 class Toolbar final {
@@ -28,5 +29,6 @@ private:
 	NodeWindow* m_nodeWindow;
 	std::vector<const char*> m_folderSaves;
 
-	InsertScriptParser* m_parser;
+	InsertScriptParser* m_scriptParser;
+	TranslationParser* m_translationParser;
 };

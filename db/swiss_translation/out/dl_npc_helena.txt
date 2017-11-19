@@ -1,0 +1,14 @@
+dl_npc_helena
+----------------------------------
+DL_Helena_TellMe:Oh, ich weiss nid viel. Du bisch öppe vorme Monet da gsi, aber nid für sehr lang.
+DL_Helena_TellMe2:Du bisch zimli im Stress gsi, hesch nur dis Züg rasch da anebracht und bisch den wieder usegrennt welld öppis ufem Schiff vergässe hesch... Und denn bisch nümm uftaucht.
+DL_Helena_Ship:Ich nime ah, du bisch mit em Schiff agreist... Du sötsch das besser wüsse als ich.
+DL_Helena_Luggage:Naja... Zum ehrlich sii hani echt nid demit grechnet das du wider zrugg chunsch. Di meiste Sache hani verchauft... Aber es paar sind na ume.
+DL_Helena_Luggage2:Aber ich ha die Sache woni nid ha chöne verchaufe grad da under de Bar glageret.
+DL_Helena_Luggage3:Es isch din alte Rucksack... Er het nur na unbruchbari Sache drin. Natürli muesch defür d''Mieti vo dim Zimmer nid zahle.
+DL_Helena_KilledMercenaries:Naja... Ich hätt nid grad erwarted dass du si umbringsch, aber das isch au e Möglichkeit, si loszwerde. Dis Güggeli bechunsch natürlich...
+DL_Helena_SoldThings:Oh, a die erinnere ich mich nüm. Aber ich ha sowieso nur es paar Robe und Hüet loswerde chöne.
+DL_Helena_LeeroyChicken:Und jetz wesch au chli. Natürlich. Ich chan aber grad nid für dich choche.
+DL_Helena_LeeroyChicken2:Die Söldner wend eifach nid go, si vertriibed mir mini ganz Chundschaft. Wenn du ihne zeigsch, wo d''Türe isch, chochi es Güggeli für dich.
+DL_Helena_LeeroyMercenaries:Du hesch Glück. Ich wird der eis choche well du die üble Söldner losworde bisch wo mini Chunde verschüücht hend.
+DL_Helena_LeeroyMercenaries2:(D''Helena grilliert es Güggeli, es dufted vorzüglich) Do, für dich. En guete!

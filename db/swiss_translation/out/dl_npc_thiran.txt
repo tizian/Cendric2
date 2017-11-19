@@ -1,0 +1,6 @@
+dl_npc_thiran
+----------------------------------
+DL_Thiran_WhoAreYou:Ich bi de Thiran, de Rüstmeister vode Kleriker. Was chani für dich mache?
+DL_Thiran_NoTeaching:Nei, ich chan nur Lüt wo zum Orde ghöred öppis bibringe.
+DL_Thiran_YesTeachingFirst:Ja, well du de Weg vom Ewige Liecht igschlage hesch chani der sini Magie bibringe. Da, nimm die Schriftrolle und lern weme de Zorn vom Liecht entfesslet.
+DL_Thiran_NoFurtherSpell:Nonid. Ich cha der en negste Zauber zeige wennd chli für üs gschaffet hesch.

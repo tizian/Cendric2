@@ -1,0 +1,46 @@
+dl_npc_rhendal
+----------------------------------
+DL_Rhendal_Hello:Hallo, junge Ma. Was führt dich i mis bescheidene Heim?
+DL_Rhendal_EdmondSentYou:Ah, de Emond, üse begabti Jäger.
+DL_Rhendal_IngridSentYou:Ah, d''Ingrid, üsi begabt Chöchin.
+DL_Rhendal_WhatIsProblem:Was isch den dis Problem gnau?
+DL_Rhendal_Problem:Hm. Das tönt gar nid guet.
+DL_Rhendal_Problem2:Aber du chasch dich glücklich schätze, ich verstand chli was vo de Kunst vode Alchemie und kenn en Trank, wo dir hälfe chönt.
+DL_Rhendal_BringMe:Ich han di meiste Zuetate defür scho da.
+DL_Rhendal_BringMe2:Ich bruch aber no es paar frischi Blätter vomne Sidechrüütli und en magische Stei vomne Steimännli Geist.
+DL_Rhendal_BringMe3:Wenn du mer die bringsch, wirdi der de Trank braue.
+DL_Rhendal_FoundIngredients:Sehr guet. Ich bi grad mit de andere Vorbereitige fertig worde. Jetz tömmer no es Siidechrütli und de Stei dri...
+DL_Rhendal_FoundIngredients2:... und er isch fertig. Du chaschen jetz trinke.
+DL_Rhendal_DrinkBut:Nüt "aber"! Trink jetz.
+DL_Rhendal_WhereSilkweed:Ich züchte Siidechrütli i mim Garte, grad vor mim Hüsli.
+DL_Rhendal_WhereCairn:Normalerwiis ide Berge. Ich ha glaub es paar uf de windige Ebeni hinter de Krypta vo üsem Dorf gse.
+DL_Rhendal_TrustYou:Hesch denn en anderi Wahl?
+DL_Rhendal_Snowing:(Fröstlet) Was... Es schneit?
+DL_Rhendal_Snowing2:Denn bisch also en Elementarmagier? En Magier, wo d''Element kontrolliert?
+DL_Rhendal_Snowing3:Faszinierend! Was hesch denn i dinee Vision gse?
+DL_Rhendal_VisionDungeon:Hm. Nid alles, wa i dinere Vision erschiint, mu au wohr si. Wa hesch susch na gse?
+DL_Rhendal_VisionFlames:Vilicht enart Magie. Ich ha aber nonie was vo violetter Magie ghört.
+DL_Rhendal_VisionMark:Hmm, zeig mal... Interessant.
+DL_Rhendal_VisionMark2:Es schiint, als het d''Vision nid nur es paar Erinnerige zruggbrocht, sondern au das Zeiche zum Vorschi brocht.
+DL_Rhendal_SideEffect:Nei, de Siidechrütli-Trank hinterloht ke so Spure. Er deckt nur uf, was verborge gsi isch.
+DL_Rhendal_KnowAnythingMark:Ich kenns Symbol nid... es isch aber definitiv Magie, allerdings het si kei gueti Aura, nei, nei, gar nid...
+DL_Rhendal_KnowAnythingMark2:Ich nimm ah, es isch enart Fluech, und er wird stärcher.
+DL_Rhendal_KnowAnythingMark3:Du sötsch besser öppert finde, wo me drüber weiss we ich und en breche chan.
+DL_Rhendal_Mage:Magier chönd di magisch Energie kontrolliere, wo dur die Welt flüsst.
+DL_Rhendal_Mage2:Es isch es seltenigs Talent... nid all Lüüt vo Admantris chönd das.
+DL_Rhendal_YouMage:Nei. Ich bi "nur" en Alchemist. Ich bruch di magisch Energie wo i Pflanze drin isch, chan si selber aber nid kontrolliere.
+DL_Rhendal_Magic:Zersch mal bruchsch en Stab, wo magischi Energie fokussiere chan. 
+DL_Rhendal_Magic2:Ich züchte es magisches Wissdorn-Bäumli i mim Garte. Brich der en Ast devo ab und du wirsch ha was du bruchsch.
+DL_Rhendal_Magic3:Leg de Stab ah und mach dis Zauberbuech uf, zum din Iisball-Zauber uusrüste.
+DL_Rhendal_Job:Ja, für en Iismagier hani en Arbet.
+DL_Rhendal_Job2:Ich wird der me devo verzelle, wend en Stab mitme Iisball-Zauber usgrüstet hesch.
+DL_Rhendal_BrokenBridge:Perfekt, de Stab stoht der guet.
+DL_Rhendal_BrokenBridge2:Guet. Ich bruch en spezielle Schnaps für mini Tränk. De einzig, wonen braut, isch de Wirt vode Taverne im Weste.
+DL_Rhendal_BrokenBridge3:Es Problem isch aber, dass d''Brugg, wo das Dorf und d''Taverne verbindet, iigstürzt isch.
+DL_Rhendal_BrokenBridge4:Mir würded es Ziitli bruche, zum sie wieder ufbaue, aber ich bruch de Schnaps so schnell we mögli.
+DL_Rhendal_BrokenBridge5:Bruch dini Iismagie, zum de Fluss gfrühre und uf di ander Siite z''go.
+DL_Rhendal_BrokenBridge6:Frög de Wirt nochme "Feudale Füür". Do, das Gold sött gnueg si. Mach schnell!
+DL_Rhendal_GotSchnapps:Oh, perfekt, viele Dank. Du heschs also gschafft, de Fluss z''überquere. Hmm, würkli es speziells Getränk. Wetsch nid au chli?
+DL_Rhendal_GivesSchnapps:Ja, das isch di richtig Entscheidig. Da, nimm en Schluck.
+DL_Rhendal_NoSchnappsPity:Sehr schad. Du weisch ja nid, was der entgoht.
+DL_Rhendal_YouDrankSchnaps:Waaa? Oh du dumme Bueb. Du bisch würkli dumm wenes Brot, oder?

@@ -1,0 +1,4 @@
+dl_npc_waldemar
+----------------------------------
+DL_Waldemar_ANewFace:Ah, es neus Gsicht. Interessiert a es paar Rüschige?
+DL_Waldemar_Beak:E sehr nützlichi Maske wenme mit Süüche schafft. (Grinst)

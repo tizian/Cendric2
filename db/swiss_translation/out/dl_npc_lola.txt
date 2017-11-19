@@ -1,0 +1,4 @@
+dl_npc_lola
+----------------------------------
+DL_Lola_NotBought:Red zersch mit de Mona, wend chli Spass ha willsch, Herzige.
+DL_Lola_SexyBoy:Hoi, hübsche Bueb.

@@ -1,0 +1,29 @@
+dl_npc_vincent2
+----------------------------------
+DL_Vincent_NotTalked:Hey du, psst! Du gsesch us, als chöntsch chli Gold guet bruuche. Interessiert amne ... spezielle Job?
+DL_Vincent_DoYourDuty:Erinnerisch dich a die chliini Abmachig womer ide Taverne gmacht hend? Gang ez besser und mach dini Arbet.
+DL_NPC_TaskFulfilled:Oh, du bisches. Du hesch dini Ufgab offesichtlich erledigt. Sehr guet. Du chöntsch na bruuchbar si.
+DL_Vincent_FurtherJob:Interesse amne nöchste Job?
+DL_Vincent_YouAgainGood:Hey. Guet bisch du ide Stadt. Min Plan isch ufgange. Interesse amne wiitere Job?
+DL_Vincent_Disgruntled:Oh... du scho wieder. Weisch, ich het der en unschlagbar guete Job abote, wenn du nid so aggressiv gsi wärsch... Wennd e zweiti Chance wetsch, chosteds für dich chli me.
+DL_Vincent_NotCooperated:Ja lueg mal da. De Bueb wo nid interessiert gsi isch. Wie wärs mitere zweite Chance für en Job?
+DL_Vincent_ExplainDeal:(Lächlet und holt en goldige Schlüssel füre) Ich ha da sonen chliine Schlüssel. Er ghört zunere Schatzchiste. Ich chönten dir gä...
+DL_Vincent_TheCatch:Hehe, ich ha gwüsst, dass du das froge wirsch. Ja denn. Also die Schatzchiste ghört nid mir, wenmes gnau nimmt - si ghört em Dorfälteste Rhendal.
+DL_Vincent_KeyCost150:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 150 Goldstück, zum mini Müe kompensiere.
+DL_Vincent_Treasure:Aber ich wett nur, dass du mir en spezielle blaue Stei us de True holsch. De Rest chasch selber phalte.
+DL_Vincent_KeyCost100:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 100 Goldstück, zum mini Müe kompensiere.
+DL_Vincent_KeyCost50:Ich ha ihm de Schlüssel möse abluchse. Drum wer e chliini Entschädigung vo 50 Goldstück für de Schlüssel agmesse.
+DL_Vincent_KeyCost0:Erinnerisch dich an Schnaps, wod ihm gä hesch? Ich han es Schlofpulver dri ta. Ihm de Schlüssel abzluchse isch bubieifach gsi.
+DL_Vincent_StartElderQuest:E gueti Wahl. Da heschen.
+DL_Vincent_ChestIsObserved:D''Chischte isch imne Gheimruum vom Huus vom Älteste. Oh, und si wird wahrschinli vo Beobachter-Zauber bewacht. Pass also uf, dass die dich nid verwütsched.
+DL_Vincent_NotEnoughGold:Chum wider wend gnueg Gold hesch.
+DL_Vincent_Pity:Sehr schad.
+DL_Vincent_ObserverSpells:E hässlichi Form vode Magie. D''Lüt dönd die i iri Hüser demit niemert öppis chluppe cha. Aber die Zauber gsehnd au nid alles (grinst). Aber wenn si dich verwütsched, denn steckeds dich id Chiste... und da isch nid grad ahgnehm, da chani der sege. 
+DL_Vincent_OpenedTheChest:Hehe, ich ha gwüsst dases schaffsch. Aber ich wett de Stei gar nid... Chaschen phalte - als dini Belohnig.
+DL_Vincent_StealingFitsYou:Es schiint dir ja nid viel uszmache, d''Habseligkeite vo andere Lüt zne. Ich chönt dir bibringe wied no a wertvolleri Sache cho chasch.
+DL_Vincent_TeachUnlock:Natürlich. Lies eifach die Schriftrolle und ich chan dir na en wiitere Job abüte, fallsd immer na a Arbet i dem... Bereich interessiert bisch. (Grinst)
+DL_Vincent_SecondQuest:Guet. Damol staht chli me ufem Spiel. Mir wüssed, dass e gwüssi Magierin Syrah weiss, weme en Trank zemebraut, wo eim unsichbar macht.
+DL_Vincent_SecondQuest2:E zimli nützlichi Fähigkeit, gell. Es einzig Problem isch dass si üs umsverrecke nid sege wett wes gaht. Also blibt üs ke anderi Wahl als das Rezept halt eifach so z''ne.
+DL_Vincent_SecondQuest3:Es mun en Weg ge, in ihre Chäller z''cho, wenme en Abchürzig überd Kanalisation nimmt. Find de Weg und bring üs das Rezept. Wenn du das schaffsch, den chani der vilicht verzelle, wer "üs" überhaupt isch.
+DL_Vincent2_Disappointed:Hm. Ich ha der glaub umesuscht vertraut.
+DL_Vincent_SecondQuestDone:Sehr guet. Ich ha gwüsst, dass du Talent hesch. Falls du na me vo dere nützliche Magie lerne wetsch, nimm de Schlüssel und find d''Türe, woner ufmacht.

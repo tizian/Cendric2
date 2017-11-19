@@ -1,0 +1,12 @@
+dl_npc_lloyd2
+----------------------------------
+DL_Lloyd_WhatsGoingOn:Was - bim Ewige Liecht - lauft do eigentlich?
+DL_Lloyd_ReadLetter:(De Lloyd list de Brief) Hm, interessant. Danke, dass üs mit dem Problem gholfe hesch.
+DL_Lloyd_ReadLetter2:D''Inina het wele dass du de Kleriker biitrittsch, doch du hesch dich scho andersch entschide.
+DL_Lloyd_ReadLetter3:Si schriibt au dass si nomol dini Hilf bruucht, bim Sueche vo wiitere Hiiwis wo das Biescht hercho isch.
+DL_Lloyd_ReadLetter4:Aber zersch zrugg zu dem Lüüchtturm, was isch det passiert?
+DL_Lloyd_KillBird:Hm, de Jack het mer vo dem Monster verzellt, aber mir hends nie gse. Guet gmacht.
+DL_Lloyd_NothingImportant:Hmm. Das isch es zimlich ussergwöhnlichs Gwitter gsi. Aber wend meinsch...
+DL_Lloyd_YourJob:Du hesch also de Vogel erledigt vo dem de Jack üs verzellt het? Guet gmacht.
+DL_Lloyd_HurryUp:Trotzdem brucht d''Inina immer na dini Hilf bim Erforsche vo dene komische Höhle. Si isch ez scho zu lang weg.
+DL_Lloyd_HurryUp2:Ich wett dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!

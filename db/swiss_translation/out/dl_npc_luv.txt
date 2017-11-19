@@ -1,0 +1,13 @@
+dl_npc_luv
+----------------------------------
+DL_Luv_WhoAreYou:Ich bi de Luv, en Matros. Normalerwiis würi übers Meer segle statt do z''vergammle.
+DL_Luv_WhoAreYou2:Und wenn de Idiot Lee nid wär, würdi immer no mit minere Crew ufem Schiff si.
+DL_Luv_OtherSays:Ach jo, heter das? Du chaschem sege er het sich halt nid betrinke söle wo üses Schiff abgleit het.
+DL_Luv_SecondRant:Pha! Wener nid pennt het wo üse Kapitän d''Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
+DL_Luv_Thanks:Danke!
+DL_Luv_CalmDown:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
+DL_Luv_CalmDown2:Mir wüssed wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
+DL_Luv_CalmDown3:Aber zum übers Meer sägle brüchtemer en Kompass und niemert i dere verfluechte Stadt het eine.
+DL_Luv_HelpYou:Jo vilicht. Wenn du üs en funktionierende Kompass bringsch, gemmer der alles womer na hend.
+DL_Luv_QuestComplete:Super! Danke tusig, chas chuum erwarte wieder is Meer z''steche!
+DL_Luv_QuestComplete2:Do, nimm de Huufe magischi Perle womer gfunde hend, si sind do richtig viel wert.

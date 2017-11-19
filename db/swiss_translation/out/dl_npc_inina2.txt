@@ -1,0 +1,5 @@
+dl_npc_inina2
+----------------------------------
+DL_Inina_StrangePassage:Krass, gell? Die Höhle hend direkt id Kanalisation vo Gandria gführt, ohni dasmer öppis devo gwüsst hend.
+DL_Inina_StrangePassage2:Ich ha scho probiert dem Gang dete z''folge, aber er isch irgendwie blockiert worde.
+DL_Inina_StrangePassage3:Ich kenn ken Zauber wo die Blockade wegdrucke chönt. Vilicht glingts dir ja?

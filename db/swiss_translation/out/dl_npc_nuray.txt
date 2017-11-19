@@ -1,0 +1,10 @@
+dl_npc_nuray
+----------------------------------
+DL_Nuray_Congratulations:Du bisch also de neu da. Guet gmacht. De Vincent laht nid eifach jede bitrette.
+DL_Nuray_WhoAreYou:Ich bi d''Nuray und ich cha dir Rüstige verchaufe wend wetsch.
+DL_Nuray_Spells:Nei, ich bi ke Magierin. Ich bi di einzig i minere Familie wo ohni de... Fluech gebore worde isch.
+DL_Nuray_Spells2:Aber ich chum au ohni ganz guet z''schlag. (Zeigt uf iri Dölch)
+DL_Nuray_Leader:(Lächlet) Nei, mir hend nid würkli en "Aführer". Eifach Lüt wo me Ruef hend we anderi.
+DL_Nuray_Receiver:Du suechsch also en Hehler, he. Ich bis nid, aber du chasch ja mal mitem Douglas ufem Markt rede.
+DL_Nuray_Receiver2:Frög in eifach wevil sis Monokel chostet und er weiss was Sach isch.
+DL_Nuray_VeliusFound:Was?! Verdammti Magier! Gang und finden!
