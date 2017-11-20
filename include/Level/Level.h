@@ -82,4 +82,5 @@ private:
 private:
 	void raycastWorld(RaycastQueryRecord& rec) const;
 	void raycastDynamicTiles(RaycastQueryRecord& rec) const;
+	bool isTileCollidable(int x, int y) const;
 };

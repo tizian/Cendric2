@@ -87,40 +87,7 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 
 	g_resourceManager->loadLevelResources();
 
-	for (int i = 0; i < m_levelData.mapSize.x; ++i) {
-		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
-		line[0].color = sf::Color::Red;
-		line[1].color = sf::Color::Red;
-
-		line[0].position = sf::Vector2f(TILE_SIZE_F * i, 0.f);
-		line[1].position = sf::Vector2f(TILE_SIZE_F * i, m_levelData.mapSize.y * TILE_SIZE_F);
-
-		m_grid.push_back(line);
-
-	}
-
-	for (int i = 0; i < m_levelData.mapSize.y; ++i) {
-		sf::VertexArray line = sf::VertexArray(sf::LinesStrip, 2);
-		line[0].color = sf::Color::Red;
-		line[1].color = sf::Color::Red;
-
-		line[0].position = sf::Vector2f(0.f, TILE_SIZE_F * i);
-		line[1].position = sf::Vector2f(m_levelData.mapSize.x * TILE_SIZE_F, TILE_SIZE_F * i);
-
-		m_grid.push_back(line);
-	}
-
 	return true;
-}
-
-void Level::drawForeground(sf::RenderTarget& target, const sf::RenderStates& states) const {
-	World::drawForeground(target, states);
-	for (auto const& c : m_debugCircles) {
-		target.draw(c);
-	}
-	for (auto const& v : m_grid) {
-		target.draw(v);
-	}
 }
 
 void Level::loadForRenderTexture() {
@@ -333,13 +300,15 @@ void Level::raycast(RaycastQueryRecord& rec) const {
 	raycastDynamicTiles(rec);
 }
 
+
+
 void Level::raycastWorld(RaycastQueryRecord& rec) const {
 	if (norm(rec.rayDirection) == 0) return;
 	normalize(rec.rayDirection);
 
 	// first checks
-	bool ignoreX = rec.rayDirection.x == 0;
-	bool ignoreY = rec.rayDirection.y == 0;
+	bool ignoreX = std::abs(rec.rayDirection.x) < Epsilon;
+	bool ignoreY = std::abs(rec.rayDirection.y) < Epsilon;
 
 	float xDir = rec.rayDirection.x < 0 ? -1.f : 1.f;
 	float yDir = rec.rayDirection.y < 0 ? -1.f : 1.f;
@@ -347,24 +316,13 @@ void Level::raycastWorld(RaycastQueryRecord& rec) const {
 	rec.rayHit = rec.rayOrigin;
 	sf::Vector2f oldRayHit = rec.rayHit;
 
-	const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->clear();
-
 	while (true) {
-		sf::CircleShape c;
-		c.setRadius(3.f);
-		c.setFillColor(sf::Color::Red);
-		c.setPosition(rec.rayHit);
-		c.setOrigin(sf::Vector2f(3.f, 3.f));
-		const_cast<std::vector<sf::CircleShape>*>(&m_debugCircles)->push_back(c);
-
 		// start at origin
 		int tileX = static_cast<int>(floor(rec.rayHit.x / TILE_SIZE_F));
 		int tileY = static_cast<int>(floor(rec.rayHit.y / TILE_SIZE_F));
-		if (tileY >= static_cast<int>(m_worldData->collidableTilePositions.size()) ||
-			tileY < 0 || tileX < 0 ||
-			tileX >= static_cast<int>(m_worldData->collidableTilePositions[tileY].size()) ||
-			m_worldData->collidableTilePositions[tileY][tileX]) {
-			rec.rayHit = (xDir == -1 || yDir == -1) ? oldRayHit : rec.rayHit;
+		int potTileX = rec.rayHit.x == tileX * TILE_SIZE_F && !ignoreX && xDir == -1 ? tileX - 1 : tileX;
+		int potTileY = rec.rayHit.y == tileY * TILE_SIZE_F && !ignoreY && yDir == -1 ? tileY - 1 : tileY;
+		if (isTileCollidable(tileX, tileY) || isTileCollidable(potTileX, potTileY)) {
 			break;
 		}
 
@@ -382,22 +340,8 @@ void Level::raycastWorld(RaycastQueryRecord& rec) const {
 		}
 		else {
 			// where does our ray hit?
-			int nextTileX;
-			int nextTileY;
-
-			if (rec.rayDirection.x > 0) {
-				nextTileX = tileX + 1;
-			}
-			else {
-				nextTileX = rec.rayHit.x > tileX * TILE_SIZE_F ? tileX : tileX - 1;
-			}
-
-			if (rec.rayDirection.y > 0) {
-				nextTileY = tileY + 1;
-			}
-			else {
-				nextTileY = rec.rayHit.y > tileY * TILE_SIZE_F ? tileY : tileY - 1;
-			}
+			int nextTileX = rec.rayDirection.x > 0 ? tileX + 1 : rec.rayHit.x > tileX * TILE_SIZE_F ? tileX : tileX - 1;
+			int nextTileY = rec.rayDirection.y > 0 ? tileY + 1 : rec.rayHit.y > tileY * TILE_SIZE_F ? tileY : tileY - 1;
 
 			float distX = std::abs(nextTileX * TILE_SIZE_F - rec.rayHit.x);
 			float distY = std::abs(nextTileY * TILE_SIZE_F - rec.rayHit.y);
@@ -420,6 +364,13 @@ void Level::raycastWorld(RaycastQueryRecord& rec) const {
 			}
 		}
 	}
+}
+
+bool Level::isTileCollidable(int x, int y) const {
+	return (y >= static_cast<int>(m_worldData->collidableTilePositions.size()) ||
+		y < 0 || x < 0 ||
+		x >= static_cast<int>(m_worldData->collidableTilePositions[y].size()) ||
+		m_worldData->collidableTilePositions[y][x]);
 }
 
 void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
