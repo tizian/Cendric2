@@ -13,9 +13,9 @@ const float MirrorTile::ACTIVATE_RANGE = 80.f;
 const float MirrorTile::TICK_ANGLE = 15.f;
 
 MirrorTile::MirrorTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
-	m_interactComponent = new InteractComponent(g_textProvider->getText("Lever"), this, m_mainChar);
+	m_interactComponent = new InteractComponent(g_textProvider->getText("FocusCrystal"), this, m_mainChar);
 	m_interactComponent->setInteractRange(ACTIVATE_RANGE);
-	m_interactComponent->setInteractText("ToSwitch");
+	m_interactComponent->setInteractText("ToRotate");
 	m_interactComponent->setOnInteract(std::bind(&MirrorTile::switchLever, this));
 	addComponent(m_interactComponent);
 }
@@ -33,8 +33,12 @@ bool MirrorTile::init(const LevelTileProperties& properties) {
 
 	m_currentRotation = 0.f;
 	if (contains(properties, std::string("angle"))) {
-		m_currentRotation = static_cast<float>(std::stoi(properties.at(std::string("angle"))));
-		m_currentRotation = std::fmod(m_currentRotation, 360.f);
+		setRotation(static_cast<float>(std::stoi(properties.at(std::string("angle")))));
+	}
+
+	m_isLocked = contains(properties, std::string("locked"));
+	if (m_isLocked) {
+		m_interactComponent->setActive(false);
 	}
 
 	return true;
@@ -76,6 +80,7 @@ void MirrorTile::onHit(Spell* spell) {
 
 void MirrorTile::onRightClick() {
 	if (m_mainChar->isDead()) return;
+	if (m_isLocked) return;
 	// check if lever is in range
 	if (dist(m_mainChar->getCenter(), getCenter()) <= ACTIVATE_RANGE) {
 		switchLever();
@@ -87,6 +92,7 @@ void MirrorTile::onRightClick() {
 }
 
 void MirrorTile::switchLever() {
+	if (m_isLocked) return;
 	setRotation(m_currentRotation + TICK_ANGLE);
 }
 

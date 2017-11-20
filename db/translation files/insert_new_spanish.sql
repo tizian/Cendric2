@@ -22,6 +22,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotE
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLockedOneway','Cannot be opened from this side!','Kann von dieser Seite nicht geöffnet werden!','Cha vo dere Siite nid ufgmacht werde!','¡Está cerrado!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Healing Power','Heilkraft','Heilchraft','Sanar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FocusCrystal','Focusing Crystal','Fokus-Kristall','Fokus-Kristall','?');
 
 -- hints
 

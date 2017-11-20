@@ -5,7 +5,7 @@ time.played:27238
 savegame.name:Quicksave
 savegame.date:1510958080
 level.id:res/level/boss_velius/boss_velius.tmx
-level.position:100.000000,400.000000
+level.position:100.000000,300.000000
 is.in.level:1
 map.id:res/map/veliusroom/veliusroom.tmx
 map.position:602.001709,509.470581

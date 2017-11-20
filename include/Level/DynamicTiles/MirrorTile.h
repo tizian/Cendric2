@@ -42,6 +42,7 @@ private:
 
 	InteractComponent* m_interactComponent;
 	float m_currentRotation;
+	bool  m_isLocked;
 };
 
 class Ray final {

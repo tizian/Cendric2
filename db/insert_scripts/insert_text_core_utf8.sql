@@ -66,6 +66,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Fire
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FireResistance','Fire Resistance','Feuerresistenz','Füürresistenz','Resistencia al fuego');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FirstSpell','1. Spell','1. Zauber','1. Zauber','1. Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FourthSpell','4. Spell','4. Zauber','4. Zauber','4. Hechizo');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FocusCrystal','Focusing Crystal','Fokus-Kristall','Fokus-Kristall','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Fullscreen','Fullscreen','Vollbild','Vollbild','Pantalla completa');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GameSaved','Game saved','Spiel gespeichert','Spiel gspeicheret','Partida guardada');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gems','Gems','Edelsteine','Edelstei','Gemas');
@@ -274,6 +275,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToLo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToActivate','to activate','- aktivieren','zum aktiviere','para activar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToRead','to read','- lesen','zum läse','para leer');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSwitch','to toggle','- umschalten','zum drucke','para alternar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToRotate','to rotate','- drehen','zum trülle','para girar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSteal','to steal','- stehlen','zum chlaue','para robar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOpen','to open','- öffnen', 'zum ufmache','para abrir');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToMine','to mine','- abbauen', 'zum abbaue','para minar');
