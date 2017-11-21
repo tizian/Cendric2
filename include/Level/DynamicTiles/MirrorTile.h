@@ -5,6 +5,7 @@
 
 class LevelMainCharacter;
 class InteractComponent;
+class LightComponent;
 
 namespace particles {
 	class LineSpawner;
@@ -27,8 +28,8 @@ public:
 	void setColor(const sf::Color& color);
 	
 	float getRotation() const;
-
-	void switchLever();
+	bool isFinal() const;
+	
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Mirror; }
 
 private:
@@ -38,11 +39,17 @@ private:
 	// the mirror lever can only be used by hand if the main char is in this range.
 	// it is however always possible for a telekinesis spell to activate the lever if its projectile reaches the lever.
 	static const float ACTIVATE_RANGE;
-	static const float TICK_ANGLE;
+	static const float SPEED;
+
+	bool m_isRotating = false;
+	void handleRotation(const sf::Time& frameTime);
+	sf::Time m_timeSinceRotationStart;
 
 	InteractComponent* m_interactComponent;
+	LightComponent* m_lightComponent;
 	float m_currentRotation;
 	bool  m_isLocked;
+	bool  m_isFinal;
 };
 
 class Ray final {

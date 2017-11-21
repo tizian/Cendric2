@@ -10,6 +10,7 @@ public:
 
 	void load(std::string& filename, float distance);
 	void render(sf::RenderTarget& target, sf::RenderStates states) const;
+	void setColor(const sf::Color& color);
 	void dispose();
 
 	float getDistance() const;

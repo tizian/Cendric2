@@ -294,13 +294,17 @@ const std::vector<GameObject*>* Level::getDynamicTiles() const {
 	return m_dynamicTiles;
 }
 
+void Level::setBackgroundLayerColor(const sf::Color& color) const {
+	for (auto& bgLayer : m_levelData.backgroundLayers) {
+		const_cast<BackgroundLayer*>(&bgLayer)->setColor(color);
+	}
+}
+
 void Level::raycast(RaycastQueryRecord& rec) const {
 	raycastWorld(rec);
 	if (rec.ignoreDynamicTiles) return;
 	raycastDynamicTiles(rec);
 }
-
-
 
 void Level::raycastWorld(RaycastQueryRecord& rec) const {
 	if (norm(rec.rayDirection) == 0) return;
@@ -387,7 +391,7 @@ void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
 			}
 		}
 
-		if (!tile->isCollidable()) continue;
+		if (!tile->isCollidable() || tile->getDynamicTileID() == LevelDynamicTileID::Disappearing) continue;
 		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
 			rec.rayHit = intersection;
 			rec.mirrorTile = nullptr;

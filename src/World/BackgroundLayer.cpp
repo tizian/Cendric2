@@ -22,6 +22,10 @@ void BackgroundLayer::load(string& filename, float distance) {
 	}
 }
 
+void BackgroundLayer::setColor(const sf::Color& color) {
+	m_sprite.setColor(color);
+}
+
 void BackgroundLayer::render(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(m_sprite, states);
 }

@@ -4,26 +4,31 @@
 #include "GameObjectComponents/InteractComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "World/CustomParticleUpdaters.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Mirror, MirrorTile)
 
 const float MirrorTile::ACTIVATE_RANGE = 80.f;
-const float MirrorTile::TICK_ANGLE = 15.f;
+const float MirrorTile::SPEED = 60.f;
 
 MirrorTile::MirrorTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 	m_interactComponent = new InteractComponent(g_textProvider->getText("FocusCrystal"), this, m_mainChar);
 	m_interactComponent->setInteractRange(ACTIVATE_RANGE);
 	m_interactComponent->setInteractText("ToRotate");
-	m_interactComponent->setOnInteract(std::bind(&MirrorTile::switchLever, this));
+	m_interactComponent->setOnInteract(std::bind(&MirrorTile::onRightClick, this));
 	addComponent(m_interactComponent);
+
+	m_lightComponent = new LightComponent(LightData(sf::Vector2f(10.f, 10.f), TILE_SIZE_F, 0.8f), this);
+	addComponent(m_lightComponent);
 }
 
 void MirrorTile::update(const sf::Time& frameTime) {
 	setState(GameObjectState::Inactive);
 	m_animatedSprite.setColor(COLOR_WHITE);
 	LevelDynamicTile::update(frameTime);
+	handleRotation(frameTime);
 }
 
 bool MirrorTile::init(const LevelTileProperties& properties) {
@@ -36,8 +41,9 @@ bool MirrorTile::init(const LevelTileProperties& properties) {
 		setRotation(static_cast<float>(std::stoi(properties.at(std::string("angle")))));
 	}
 
-	m_isLocked = contains(properties, std::string("locked"));
-	if (m_isLocked) {
+	m_isFinal = contains(properties, std::string("final"));
+	m_isLocked = m_isFinal || contains(properties, std::string("locked"));
+	if (m_isLocked ) {
 		m_interactComponent->setActive(false);
 	}
 
@@ -68,14 +74,7 @@ void MirrorTile::loadAnimation(int skinNr) {
 }
 
 void MirrorTile::onHit(Spell* spell) {
-	switch (spell->getSpellID()) {
-	case SpellID::Telekinesis:
-		switchLever();
-		spell->setDisposed();
-		break;
-	default:
-		break;
-	}
+	// nop
 }
 
 void MirrorTile::onRightClick() {
@@ -83,7 +82,8 @@ void MirrorTile::onRightClick() {
 	if (m_isLocked) return;
 	// check if lever is in range
 	if (dist(m_mainChar->getCenter(), getCenter()) <= ACTIVATE_RANGE) {
-		switchLever();
+		m_isRotating = true;
+		m_timeSinceRotationStart = sf::Time::Zero;
 	}
 	else {
 		m_screen->setNegativeTooltip("OutOfRange");
@@ -91,9 +91,20 @@ void MirrorTile::onRightClick() {
 	g_inputController->lockAction();
 }
 
-void MirrorTile::switchLever() {
-	if (m_isLocked) return;
-	setRotation(m_currentRotation + TICK_ANGLE);
+void MirrorTile::handleRotation(const sf::Time& frameTime) {
+	if (!m_isRotating) return;
+	if (m_isLocked || dist(m_mainChar->getCenter(), getCenter()) > ACTIVATE_RANGE) {
+		m_isRotating = false;
+		return;
+	}
+	if (g_inputController->isKeyActive(Key::Interact) || g_inputController->isMousePressedRight()) {
+		float speed = m_timeSinceRotationStart > sf::seconds(0.3f) ? SPEED * 2 : SPEED;
+		setRotation(m_currentRotation + frameTime.asSeconds() * speed);
+		m_timeSinceRotationStart += frameTime;
+	}
+	else {
+		m_isRotating = false;
+	}
 }
 
 void MirrorTile::setRotation(float rotation) {
@@ -111,6 +122,10 @@ void MirrorTile::setColor(const sf::Color& color) {
 
 float MirrorTile::getRotation() const {
 	return degToRad(m_currentRotation - 90.f);
+}
+
+bool MirrorTile::isFinal() const {
+	return m_isFinal;
 }
 
 std::string MirrorTile::getSpritePath() const {
@@ -243,7 +258,7 @@ void MirrorRay::update(const sf::Time& frameTime) {
 	for (size_t i = 0; i < m_rays.size();) {
 		auto ray = m_rays[i];
 		ray->update(frameTime);
-		if (!ray->getMirrorTile()) {
+		if (!ray->getMirrorTile() || ray->getMirrorTile()->isFinal()) {
 			for (size_t j = i + 1; j < m_rays.size(); j++) {
 				delete m_rays[j];
 				m_rays.erase(m_rays.begin() + j);

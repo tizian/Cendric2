@@ -50,6 +50,8 @@ public:
 	const std::vector<GameObject*>* getDynamicTiles() const;
 	const LevelData* getWorldData() const override { return &m_levelData; };
 
+	void setBackgroundLayerColor(const sf::Color& color) const;
+
 	// executes the boss ending, either win=true or else if the player loses.
 	void executeBossEnding(bool win);
 
