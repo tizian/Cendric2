@@ -228,6 +228,7 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
 			nextBoundingBoxY.left = rec.safeLeft;
+
 		}
 		else {
 			nextBoundingBoxY.left = nextPosition.x;

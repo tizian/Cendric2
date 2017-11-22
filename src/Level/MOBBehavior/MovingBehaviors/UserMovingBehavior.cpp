@@ -26,9 +26,7 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	bool collidesX;
-	bool collidesY;
-	MovingBehavior::checkXYDirection(nextPosition, collidesX, collidesY);
+	MovingBehavior::checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
 }
 
 void UserMovingBehavior::stopClimbing() {

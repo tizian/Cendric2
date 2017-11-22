@@ -86,8 +86,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		m_jumpsBlindly = false;
 	}
 
-	bool collidesY;
-	checkXYDirection(nextPosition, m_collidesX, collidesY);
+	checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
 	const sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
 	if (m_mob->getLevel()->collidesWithEvilTiles(nextBoundingBox)) {
 		m_mob->setAccelerationX(0.f);
@@ -95,7 +94,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	m_jumps = false;
-	if (m_collidesX && m_isGrounded) {
+	if (m_isCollidingX && m_isGrounded) {
 		// would a jump work? 
 		doAIJump(true);
 		m_jumps = m_aiRecord.shouldJump;
@@ -106,7 +105,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_enemy->setAccelerationX(0.f);
 			m_enemy->setVelocityX(0.f);
 			m_enemy->setPositionX(oldPositionX);
-			m_collidesX = true; // it kind of collides. this is used for the enemy if it shall wait.
+			m_isCollidingX = true; // it kind of collides. this is used for the enemy if it shall wait.
 		}
 		else if (m_aiRecord.shouldJump && m_aiRecord.shouldWalk) {
 			// both would work. where is our target?
@@ -132,7 +131,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	// if the enemy collidesX but can't jump, it turns around and waits for a certain time.
-	if (m_collidesX && m_isGrounded && !m_jumps) {
+	if (m_isCollidingX && m_isGrounded && !m_jumps) {
 		m_enemy->setWaiting();
 		m_movingDirectionX = m_isFacingRight ? -1 : 1;
 	}

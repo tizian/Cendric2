@@ -31,7 +31,9 @@ void WolfBossMovingBehavior::execHandleMovementInput() {
 		m_movingDirectionX = m_chargeMovingDirection;
 	}
 
-	if (m_enemy->getState() == GameObjectState::Fighting3 || m_enemy->getState() == GameObjectState::Fighting2) {
+	auto s = m_enemy->getState();
+	if (s == GameObjectState::Fighting3 || s == GameObjectState::Fighting2 ||
+		s == GameObjectState::Casting2 || s == GameObjectState::Casting) {
 		m_nextIsFacingRight = (m_mainChar->getCenter().x > m_enemy->getCenter().x);
 	}
 }
@@ -39,12 +41,11 @@ void WolfBossMovingBehavior::execHandleMovementInput() {
 void WolfBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	float oldPositionX = m_enemy->getPosition().x;
 
-	bool collidesY;
-	MovingBehavior::checkXYDirection(nextPosition, m_collidesX, collidesY);
+	MovingBehavior::checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
 	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
 
 	m_jumps = false;
-	if (m_collidesX) {
+	if (m_isCollidingX) {
 		m_movingDirectionX = 0;
 		m_enemy->setAccelerationX(0.f);
 		m_enemy->setVelocityX(0.f);

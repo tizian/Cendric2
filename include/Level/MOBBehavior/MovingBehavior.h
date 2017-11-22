@@ -81,6 +81,8 @@ protected:
 	bool m_isBlockingSpell = false;
 	bool m_isEnabled = true;
 	bool m_isCollisionEnabled = true;
+	bool m_isCollidingX;
+	bool m_isCollidingY;
 	float m_gravity = 1000.f;
 	float m_walkAcceleration = 1500.f;
 	float m_configuredGravity = 1000.f;
