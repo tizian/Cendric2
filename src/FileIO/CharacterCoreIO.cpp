@@ -8,9 +8,9 @@
  * it's okay, you may cheat. 
  */
 
-#define A 54059 
-#define B 76963 
-#define FIRSTH 37 
+#define A 3423347 
+#define B 153589 
+#define FIRSTH 11
 
 std::string CharacterCoreIO::hashFile(const std::string& input) const { 
 	const char* cInput = input.c_str();

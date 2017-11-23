@@ -958,7 +958,6 @@ npc.id:npc_velius
 	# [28] NPC Node
 	tag:28
 	# triggers: 
-	trigger:DL:startLevel("res/level/boss_velius/boss_velius.tmx", 100, 300)
 	# translation: 
 	translation.tag:DL_Velius_Beta
 	translation.en:(To be continued...)
