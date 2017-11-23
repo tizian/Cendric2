@@ -22,12 +22,14 @@ void YashaBossMovingBehavior::execHandleMovementInput() {
 	switch (m_boss->m_bossState)
 	{
 	case YashaBossState::GotoExplosion:
+		resetMovementLock();
 		gotoTarget(YashaBoss::ROOM_MID, 10.f, true, true);
 		if (dist(m_enemy->getCenter(), YashaBoss::ROOM_MID) < 1.f) {
 			m_boss->startBossState(YashaBossState::Explosion);
 		}
 		break;
 	case YashaBossState::GotoStartCat:
+		resetMovementLock();
 		gotoTarget(YashaBoss::ROOM_MID, 10.f, true, true);
 		if (dist(m_enemy->getCenter(), YashaBoss::ROOM_MID) < 1.f) {
 			m_boss->startBossState(YashaBossState::StartCat);
@@ -41,6 +43,7 @@ void YashaBossMovingBehavior::execHandleMovementInput() {
 	case YashaBossState::Cat:
 		m_movingDirectionX = 0;
 		m_movingDirectionY = 0;
+		resetMovementLock();
 	default:
 		break;
 	}

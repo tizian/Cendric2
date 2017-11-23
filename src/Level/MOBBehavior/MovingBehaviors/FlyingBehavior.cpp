@@ -36,9 +36,8 @@ void FlyingBehavior::handleTrueAcceleration() {
 }
 
 void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	bool collidesX = false;
-	bool collidesY = false;
-
+	m_isCollidingX = false;
+	m_isCollidingY = false; 
 	const sf::FloatRect& bb = *m_mob->getBoundingBox();
 	const Level& level = *m_mob->getLevel();
 	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
@@ -81,8 +80,8 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on x axis
 		rec.boundingBox = nextBoundingBoxX;
 		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
-		collidesX = level.collides(rec);
-		if (collidesX) {
+		m_isCollidingX = level.collides(rec);
+		if (m_isCollidingX) {
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
@@ -96,8 +95,8 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		collidesY = level.collides(rec);
-		if (collidesY) {
+		m_isCollidingY = level.collides(rec);
+		if (m_isCollidingY) {
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
@@ -108,8 +107,8 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		// check for collision on y axis
 		rec.boundingBox = nextBoundingBoxY;
 		rec.collisionDirection = isMovingDown ? CollisionDirection::Down : CollisionDirection::Up;
-		collidesY = level.collides(rec);
-		if (collidesY) {
+		m_isCollidingY = level.collides(rec);
+		if (m_isCollidingY) {
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
@@ -124,8 +123,8 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.boundingBox = nextBoundingBoxX;
 		rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
 
-		collidesX = level.collides(rec);
-		if (collidesX) {
+		m_isCollidingX = level.collides(rec);
+		if (m_isCollidingX) {
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);

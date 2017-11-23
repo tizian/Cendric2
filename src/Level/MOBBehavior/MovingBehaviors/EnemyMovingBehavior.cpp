@@ -24,42 +24,84 @@ void EnemyMovingBehavior::handleMovementInput() {
 	handleTrueAcceleration();
 }
 
+void EnemyMovingBehavior::resetMovementLock() {
+	m_isMovingXLocked = false;
+	m_isMovingYLocked = false;
+}
+
 void EnemyMovingBehavior::gotoTarget(const sf::Vector2f& target, float approachingDistance, bool hold, bool exact) {
 	sf::Vector2f center = m_enemy->getCenter();
 
 	// the enemy tries to get near its target
-	if (target.x < center.x && std::abs(target.x - center.x) > approachingDistance) {
-		m_movingDirectionX = -1;
-	}
-	else if (target.x > center.x && std::abs(target.x - center.x) > approachingDistance) {
-		m_movingDirectionX = 1;
-	}
-	else {
-		m_movingDirectionX = 0;
-		if (hold) {
-			m_enemy->setVelocity(sf::Vector2f(0.f, m_enemy->getVelocity().y));
-			m_enemy->setAccelerationX(0.f);
+	if (!m_isMovingXLocked) {
+		if (target.x < center.x && std::abs(target.x - center.x) > approachingDistance) {
+			m_movingDirectionX = -1;
 		}
-		if (exact) {
-			m_enemy->setPositionX(target.x - (center.x - m_enemy->getPosition().x));
+		else if (target.x > center.x && std::abs(target.x - center.x) > approachingDistance) {
+			m_movingDirectionX = 1;
+		}
+		else {
+			m_movingDirectionX = 0;
+			if (hold) {
+				m_enemy->setVelocity(sf::Vector2f(0.f, m_enemy->getVelocity().y));
+				m_enemy->setAccelerationX(0.f);
+			}
+			if (exact) {
+				m_enemy->setPositionX(target.x - (center.x - m_enemy->getPosition().x));
+			}
 		}
 	}
 
-	if (target.y < center.y && std::abs(target.y - center.y) > approachingDistance) {
-		m_movingDirectionY = -1;
-	}
-	else if (target.y > center.y && std::abs(target.y - center.y) > approachingDistance) {
-		m_movingDirectionY = 1;
-	}
-	else {
-		m_movingDirectionY = 0;
-		if (hold && !m_isWalkingBehavior) {
-			m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
-			m_enemy->setAccelerationY(0.f);
+	if (!m_isMovingYLocked) {
+		if (target.y < center.y && std::abs(target.y - center.y) > approachingDistance) {
+			m_movingDirectionY = -1;
 		}
-		if (exact && !m_isWalkingBehavior) {
-			m_enemy->setPositionY(target.y - (center.y - m_enemy->getPosition().y));
+		else if (target.y > center.y && std::abs(target.y - center.y) > approachingDistance) {
+			m_movingDirectionY = 1;
 		}
+		else {
+			m_movingDirectionY = 0;
+			if (hold && !m_isWalkingBehavior) {
+				m_enemy->setVelocity(sf::Vector2f(m_enemy->getVelocity().x, 0.f));
+				m_enemy->setAccelerationY(0.f);
+			}
+			if (exact && !m_isWalkingBehavior) {
+				m_enemy->setPositionY(target.y - (center.y - m_enemy->getPosition().y));
+			}
+		}
+	}
+
+	// handle locks
+	if (m_isWalkingBehavior) return;
+
+	if (m_isCollidingY && !m_isMovingXLocked) {
+		if (m_isCollidingX) {
+			m_movingDirectionX = m_movingDirectionX == 1 ? -1 : 1;
+		}
+		else {
+			m_movingDirectionX = m_movingDirectionX = rand() % 2  == 0 ? -1 : 1;
+		}
+		m_isMovingXLocked = true;
+		return;
+	}
+
+	if (m_isCollidingX && !m_isMovingYLocked) {
+		if (m_isCollidingY) {
+			m_movingDirectionY = m_movingDirectionY == 1 ? -1 : 1;
+		}
+		else {
+			m_movingDirectionY = m_movingDirectionY = rand() % 2 == 0 ? -1 : 1;
+		}
+		m_isMovingYLocked = true;
+		return;
+	} 
+
+	if (!m_isCollidingX && m_isMovingYLocked) {
+		m_isMovingYLocked = false;
+	}
+
+	if (!m_isCollidingY && m_isMovingXLocked) {
+		m_isMovingXLocked = false;
 	}
 }
 

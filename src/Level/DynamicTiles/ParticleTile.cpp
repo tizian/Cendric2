@@ -255,10 +255,10 @@ particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::strin
 		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
 	}
 	else if (color.compare("red") == 0) {
-		colGen->minStartCol = sf::Color(255, 164, 160);
-		colGen->maxStartCol = sf::Color(255, 202, 180);
-		colGen->minEndCol = sf::Color(255, 229, 230, 0);
-		colGen->maxEndCol = sf::Color(255, 230, 240, 0);
+		colGen->minStartCol = sf::Color(255, 50, 50);
+		colGen->maxStartCol = sf::Color(255, 60, 60);
+		colGen->minEndCol = sf::Color(255, 100, 100, 0);
+		colGen->maxEndCol = sf::Color(255, 120, 120, 0);
 	}
 	else if (color.compare("blue") == 0) {
 		colGen->minStartCol = sf::Color(100, 100, 255);

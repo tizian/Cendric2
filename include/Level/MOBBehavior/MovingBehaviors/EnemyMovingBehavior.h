@@ -23,6 +23,7 @@ public:
 
 protected:
 	void gotoTarget(const sf::Vector2f& target, float approachingDistance, bool hold = false, bool exact = false);
+	void resetMovementLock();
 
 protected:
 	Enemy* m_enemy;
@@ -36,6 +37,9 @@ protected:
 	int m_movingDirectionY = 0;
 	// distinguish walking/flying
 	bool m_isWalkingBehavior = true;
+	// check whether we won't try to change this direction
+	bool m_isMovingXLocked = false;
+	bool m_isMovingYLocked = false;
 
 	virtual void execHandleMovementInput() = 0;
 	virtual void handleTrueAcceleration() = 0;
