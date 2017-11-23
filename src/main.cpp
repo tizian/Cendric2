@@ -13,8 +13,7 @@
 // Resolve .app package internal resource path for mac builds
 // #define APPLE_APP_BUILD
 
-#define DEBUG
-#define BETA
+// #define DEBUG
 
 #ifdef _WIN32
 #define _WIN32_WINNT 0x0500
@@ -28,22 +27,6 @@ std::string g_resourcePath = "";
 std::string g_documentsPath = "";
 
 int main(int argc, char* argv[]) {
-
-#ifdef BETA
-	time_t timeNow = time(NULL);
-	tm now;
-	tm* nowTemp = gmtime(&timeNow);
-	std::memcpy(&now, nowTemp, sizeof(now));
-
-	if (nowTemp->tm_year >= 117) { // 2017
-		if (nowTemp->tm_mon >= 10) { // november
-			if (nowTemp->tm_mday >= 30) { // the 30th
-				return 0;
-			}
-		}
-	}
-#endif // BETA
-
 
 // show console window in windows only when debug mode is enabled.
 #ifndef DEBUG
