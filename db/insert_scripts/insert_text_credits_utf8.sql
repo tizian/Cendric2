@@ -68,6 +68,10 @@ Haab
 
 "Cathedral Theme"
 
+"Zeff''s Theme"
+
+"Yasha'' Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -257,6 +261,10 @@ Haab
 
 "Cathedral Theme"
 
+"Zeff''s Theme"
+
+"Yasha'' Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -442,6 +450,10 @@ Haab
 "Crypt Keep"
 
 "Cathedral Theme"
+
+"Zeff''s Theme"
+
+"Yasha'' Theme"
 
 ---
 

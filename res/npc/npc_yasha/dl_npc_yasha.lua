@@ -54,13 +54,13 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")) then 
 
-			DL:createNPCNode(6, 7, "DL_Choice_PeacefulTalkNot") -- I've seen you stomping through my temple, opening my sacred urns and destroying the peaceful atmosphere.
+			DL:createNPCNode(6, 7, "DL_Yasha_PeacefulTalkNot") -- I've seen you stomping through my temple, opening my sacred urns and destroying the peaceful atmosphere.
 			DL:addConditionProgress("npc_yasha", "talk")
 			DL:addConditionProgress("npc_yasha", "unfriendly")
 			DL:addNode()
 
 
-			DL:createNPCNode(7, -2, "DL_Choice_PeacefulTalkNot2") -- You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
+			DL:createNPCNode(7, -2, "DL_Yasha_PeacefulTalkNot2") -- You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
 			DL:addNode()
 
 		end

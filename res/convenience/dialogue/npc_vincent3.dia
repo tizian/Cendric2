@@ -627,7 +627,7 @@ npc.id:npc_vincent3
 	tag:20
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Choice_CompleteLloydsPlan2
+	translation.tag:DL_Cendric_CompleteLloydsPlan
 	translation.en:... Some "V." is abducting mages. Lloyd is trying to find out who that is.
 	translation.de:... Ein gewisser "V." entführt Magier. Lloyd versucht herauszufinden, wer das ist.
 	translation.ch:... En gwüsse "V." entführt Magier. De Lloyd probiert usezfinde, wer das isch.

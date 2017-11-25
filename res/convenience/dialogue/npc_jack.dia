@@ -101,7 +101,7 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_Elysia
 	translation.en:It looks like a huge bird and is also sounding like one, its shrieks are unbearable.
-	translation.de:Es sieht aus wie ein riesiger Vogel und tönt auch wie einer, sein Gekreische ist nicht auszuhalten.
+	translation.de:Es sieht aus wie ein riesiger Vogel und klingt auch wie einer, sein Gekreische ist nicht auszuhalten.
 	translation.ch:Es gseht us wenen riesige Vogel und tönt au we eine, sis Umegekreische chame schier nid ushalte.
 	[
 		# Link node, tag is next tag

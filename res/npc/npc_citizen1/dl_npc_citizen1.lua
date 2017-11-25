@@ -39,7 +39,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_zeff", "zeff_gone")) then 
 
-		DL:createNPCNode(8, -2, "DL_Choice_ZeffHere") -- The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
+		DL:createNPCNode(8, -2, "DL_Citizen_ZeffHere") -- The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
 		DL:gotoNode(3)
 		DL:addNode()
 
@@ -47,7 +47,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_zeff", "zeff_gone")) then 
 
-		DL:createNPCNode(11, -2, "DL_Choice_ZeffGone") -- We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
+		DL:createNPCNode(11, -2, "DL_Citizen_ZeffGone") -- We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
 		DL:gotoNode(3)
 		DL:addNode()
 

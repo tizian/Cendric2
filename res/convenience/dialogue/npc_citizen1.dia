@@ -164,7 +164,7 @@ npc.id:npc_citizen1
 	# triggers: 
 	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_Choice_ZeffHere
+	translation.tag:DL_Citizen_ZeffHere
 	translation.en:The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
 	translation.de:Der Lederer Zeff hat seine Werkstatt im Handwerkerviertel. Obwohl er in einen Wolfsmenschen verwandelt wurde, beherrscht er sein Handwerk immer noch.
 	translation.ch:De Lederer Zeff het sini Werkstatt im Handwerkerviertel. Sini Fähigkeite hend nid unter sinere Verwandlig inen Wolfsmensch glitte.
@@ -179,7 +179,7 @@ npc.id:npc_citizen1
 	# triggers: 
 	trigger:DL:gotoNode(3)
 	# translation: 
-	translation.tag:DL_Choice_ZeffGone
+	translation.tag:DL_Citizen_ZeffGone
 	translation.en:We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
 	translation.de:Wir hatten mal einen Lederer in unserer Stadt, aber er ist verschwunden. Niemand weiss, was ihm zugestossen ist.
 	translation.ch:Mir hend mal en Lederer i üsere Stadt gha, aber er isch verschwunde. Niemert weiss, wa mit ihm passiert isch.

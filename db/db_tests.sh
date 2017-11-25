@@ -19,6 +19,15 @@ echo 'The following texts contain double spaces:'
 echo 
 ./SQLiteShell.exe game_data.db '.read db_tests/DT_double_spaces.sql'
 echo 
+echo '#########################'
+echo '#       DB TEST 3       #'
+echo '#     German Klingt     #'
+echo '#########################'
+echo
+echo 'The following texts contain tönt:'
+echo 
+./SQLiteShell.exe game_data.db '.read db_tests/DT_german_klingt.sql'
+echo 
 echo 
 echo 'Press any key to exit'
 read

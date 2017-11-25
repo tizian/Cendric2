@@ -256,7 +256,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
 
-			DL:createCendricNode(23, 32, "DL_Choice_CompleteLloydsPlan2") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
+			DL:createCendricNode(23, 32, "DL_Cendric_CompleteLloydsPlan") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
 			DL:addNode()
 
 

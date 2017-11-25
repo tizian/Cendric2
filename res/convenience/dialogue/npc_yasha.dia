@@ -135,7 +135,7 @@ npc.id:npc_yasha
 	trigger:DL:addConditionProgress("npc_yasha", "talk")
 	trigger:DL:addConditionProgress("npc_yasha", "unfriendly")
 	# translation: 
-	translation.tag:DL_Choice_PeacefulTalkNot
+	translation.tag:DL_Yasha_PeacefulTalkNot
 	translation.en:I've seen you stomping through my temple, opening my sacred urns and destroying the peaceful atmosphere.
 	translation.de:Ich habe dich durch meinen Tempel stampfen gesehen, wie du meine heiligen Urnen geöffnet und die friedliche Atmosphäre zerstört hast.
 	translation.ch:Ich ha dich dur min Tempel stampfe gse, we du mini Urne ufgmacht und di friedlich Atmosphäre zerstört hesch.
@@ -149,7 +149,7 @@ npc.id:npc_yasha
 	tag:7
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Choice_PeacefulTalkNot2
+	translation.tag:DL_Yasha_PeacefulTalkNot2
 	translation.en:You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
 	translation.de:Du bist genau so wertlos wie alle Menschen. Bevor ich deine erbärmliche Existenz beende, gewähre ich dir eine Frage. Wähl weise. 
 	translation.ch:Du bisch genau so wertlos we all Mensche. Bevor ich dini erbärmlich Existenz vernichte, gewähri dir na genau ei Frog. Wähl weise.

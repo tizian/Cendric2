@@ -88,8 +88,8 @@ npc.id:npc_jonathan3
 		# translation: 
 		translation.tag:DL_Choice_NoBook
 		translation.en:I've found a library but I still need some books for you.
-		translation.de:Ich habe eine Bibliothek gefunden, aber ich brauche noch ein paar Bücher für dich.
-		translation.ch:Ich hane Bibliothek gfunde, aber ich bruch no es paar Büecher für dich.
+		translation.de:Ich habe eine Bibliothek gefunden, aber ich brauche noch ein paar Bücher.
+		translation.ch:Ich hane Bibliothek gfunde, aber ich bruch no es paar Büecher.
 	]
 	[
 		# Link node, tag is next tag
