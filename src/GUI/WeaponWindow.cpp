@@ -15,7 +15,6 @@ void WeaponWindow::addCloseButton(const std::function<void()>& agent) {
 	m_window->addCloseButton(agent);
 }
 
-
 void WeaponWindow::notifyLevelReload() {
 	auto levelInterface = dynamic_cast<LevelInterface*>(m_interface);
 	if (!levelInterface) return;
@@ -254,6 +253,10 @@ void WeaponWindow::handleDragAndDrop() {
 				m_selectedSpellSlot->activate();
 			}
 		}
+		notifyModifierDrop(m_currentModifierClone);
+		notifySpellDrop(m_currentSpellClone);
+		highlightSpellSlots(SpellType::VOID, false);
+		highlightModifierSlots(SpellModifierType::VOID, false);
 		delete m_currentModifierClone;
 		delete m_currentSpellClone;
 		m_currentModifierClone = nullptr;
@@ -274,11 +277,13 @@ void WeaponWindow::handleDragAndDrop() {
 				m_currentModifierClone = new SlotClone(m_selectedModifierSlot);
 				m_currentModifierClone->setPosition(mousePos - sf::Vector2f(InventorySlot::SIZE / 2.f, InventorySlot::SIZE / 2.f));
 				m_selectedModifierSlot->deactivate();
+				highlightModifierSlots(m_selectedModifierSlot->getModifier().type, true);
 			}
 			else if (m_selectedSpellSlot != nullptr) {
 				m_currentSpellClone = new SlotClone(m_selectedSpellSlot);
 				m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
 				m_selectedSpellSlot->deactivate();
+				highlightSpellSlots(m_selectedSpellSlot->getSpellType(), true);
 			}
 		}
 	}

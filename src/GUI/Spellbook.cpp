@@ -52,13 +52,12 @@ void Spellbook::init() {
 
 Spellbook::~Spellbook() {
 	m_typeMap.clear();
+	clearAllSlots();
 	delete m_window;
 	delete m_weaponWindow;
-	m_weaponWindow = nullptr;
 	delete m_currentModifierClone;
 	delete m_currentSpellClone;
 	delete m_tabBar;
-	clearAllSlots();
 }
 
 void Spellbook::clearAllSlots() {
@@ -69,9 +68,7 @@ void Spellbook::clearAllSlots() {
 	m_divineSlots.clear();
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	if (m_weaponWindow != nullptr) {
-		m_weaponWindow->m_selectedSpellSlot = nullptr;
-	}
+	m_weaponWindow->m_selectedSpellSlot = nullptr;
 }
 
 void Spellbook::update(const sf::Time& frameTime) {
@@ -159,7 +156,7 @@ void Spellbook::deselectCurrentSlot() {
 
 void Spellbook::equipSpell(SpellSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
-	
+
 	m_weaponWindow->equipSpell(selectedSlot);
 }
 
