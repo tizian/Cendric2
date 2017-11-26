@@ -21,18 +21,14 @@ Isa
 Isa
 Tizian
 
-<<< Concept Art >>>
-Isa
-Tizian
-Brigitte
-Martin
-Markus
-Emi
-
 <<< Story >>>
 Isa
 Tizian
 Haab
+
+<<< Level & Map Design >>>
+Isa
+Peter
 
 <<< Music >>>
 
@@ -132,11 +128,16 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Level & Map Design >>>
-Isa
-
 <<< Quality Assurance >>>
 Tizian
+
+<<< Concept Art >>>
+Isa
+Tizian
+Brigitte
+Martin
+Markus
+Emi
 
 <<< Spanish Localization >>>
 Juan José Flores González
@@ -214,18 +215,14 @@ Isa
 Isa
 Tizian
 
-<<< Concept Art >>>
-Isa
-Tizian
-Brigitte
-Martin
-Markus
-Emi
-
 <<< Story >>>
 Isa
 Tizian
 Haab
+
+<<< Level & Karten Design >>>
+Isa
+Peter
 
 <<< Musik >>>
 
@@ -325,11 +322,16 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Level & Karten Design >>>
-Isa
-
 <<< Qualitätssicherung >>>
 Tizian
+
+<<< Concept Art >>>
+Isa
+Tizian
+Brigitte
+Martin
+Markus
+Emi
 
 <<< Spanische Übersetzungen >>>
 Juan José Flores González
@@ -404,18 +406,14 @@ Isa
 Isa
 Tizian
 
-<<< Concept Art >>>
-Isa
-Tizian
-Brigitte
-Martin
-Markus
-Emi
-
 <<< Gschicht >>>
 Isa
 Tizian
 Haab
+
+<<< Level & Chartä Design >>>
+Isa
+Peter
 
 <<< Musig >>>
 
@@ -515,11 +513,19 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Level & Chartä Design >>>
-Isa
-
 <<< Qualitätssicherig >>>
 Tizian
+
+<<< Concept Art >>>
+Isa
+Tizian
+Brigitte
+Martin
+Markus
+Emi
+
+<<< Schwiizerdütschi Übersetzige >>>
+Philippe Mercier - Sarganserländer Dialekt
 
 <<< Spanischi Übersetzige >>>
 Juan José Flores González
