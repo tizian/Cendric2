@@ -24,8 +24,6 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	m_isShiftable = skinNr == 0;
 
 	m_isCollidable = true;
-	std::string destructibleTileTex = "res/texture/level_dynamic_tiles/spritesheet_tiles_destructible.png";
-	g_resourceManager->loadTexture(destructibleTileTex, ResourceType::Level);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
@@ -48,13 +46,9 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(destructibleTileTex));
-	for (int i = 1; i < 5; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER,
-			TILE_SIZE,
-			TILE_SIZE));
+	crumblingAnimation->setSpriteSheet(tex);
+	for (int i = 5; i < 9; i++) {
+		crumblingAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 	crumblingAnimation->setLooped(false);
 	m_crumblingTime = crumblingAnimation->getAnimationTime();

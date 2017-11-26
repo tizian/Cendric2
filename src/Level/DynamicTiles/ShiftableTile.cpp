@@ -20,24 +20,18 @@ bool ShiftableTile::init(const LevelTileProperties& properties) {
 
 void ShiftableTile::loadAnimation(int skinNr) {
 	m_isCollidable = true;
-	std::string destructibleTileTex = "res/texture/level_dynamic_tiles/spritesheet_tiles_destructible.png";
-	g_resourceManager->loadTexture(destructibleTileTex, ResourceType::Level);
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* crumblingAnimation = new Animation();
-	crumblingAnimation->setSpriteSheet(g_resourceManager->getTexture(destructibleTileTex));
+	crumblingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER,
-			TILE_SIZE,
-			TILE_SIZE));
+		crumblingAnimation->addFrame(sf::IntRect(i * TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 	}
 	crumblingAnimation->setLooped(false);
 

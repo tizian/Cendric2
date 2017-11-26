@@ -14,6 +14,7 @@ UnstableTile::UnstableTile(LevelScreen* levelScreen) :
 
 bool UnstableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
+	setPositionOffset(sf::Vector2f(1.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 2.f, TILE_SIZE_F));
 
 	m_isInactive = contains(properties, std::string("inactive"));
@@ -26,25 +27,21 @@ void UnstableTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE , TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* tremblingAnimation = new Animation(sf::seconds(0.1f));
 	tremblingAnimation->setSpriteSheet(tex);
-	tremblingAnimation->addFrame(sf::IntRect(BORDER + 1 * (2 * BORDER + TILE_SIZE), BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
-	tremblingAnimation->addFrame(sf::IntRect(BORDER + 2 * (2 * BORDER + TILE_SIZE), BORDER + (skinNr * (TILE_SIZE + 2 * BORDER)), TILE_SIZE, TILE_SIZE));
+	tremblingAnimation->addFrame(sf::IntRect(1 * TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	tremblingAnimation->addFrame(sf::IntRect(2 * TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
 	addAnimation(GameObjectState::Trembling, tremblingAnimation);
 
 	Animation* crumblingAnimation = new Animation();
 	crumblingAnimation->setSpriteSheet(tex);
-	for (int i = 1; i < 5; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER,
-			TILE_SIZE,
-			TILE_SIZE));
+	for (int i = 3; i < 7; i++) {
+		crumblingAnimation->addFrame(sf::IntRect(i * TILE_SIZE, skinNr, TILE_SIZE, TILE_SIZE));
 	}
 	crumblingAnimation->setLooped(false);
 
