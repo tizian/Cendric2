@@ -37,6 +37,7 @@ void InvisibilitySpell::update(const sf::Time& frameTime) {
 void InvisibilitySpell::setDisposed() {
 	Spell::setDisposed();
 	m_mainChar->setInvisibilityLevel(0);
+	dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::Invisibility);
 }
 
 void InvisibilitySpell::render(sf::RenderTarget& target) {

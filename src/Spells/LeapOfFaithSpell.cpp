@@ -2,6 +2,7 @@
 #include "Level/MOBBehavior/MovingBehavior.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
+#include "Screens/LevelScreen.h"
 #include "GlobalResource.h"
 
 LeapOfFaithSpell::LeapOfFaithSpell(float gravityScale) : Spell() {
@@ -29,6 +30,9 @@ void LeapOfFaithSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 void LeapOfFaithSpell::setDisposed() {
 	Spell::setDisposed();
 	m_mob->getMovingBehavior()->setGravityScale(1.f);
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::LeapOfFaith);
+	}
 }
 
 void LeapOfFaithSpell::execOnHit(LevelMovableGameObject* target) {

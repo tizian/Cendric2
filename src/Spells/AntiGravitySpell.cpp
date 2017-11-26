@@ -1,4 +1,5 @@
 #include "Spells/AntiGravitySpell.h"
+#include "Screens/LevelScreen.h"
 
 AntiGravitySpell::AntiGravitySpell() : Spell() {
 }
@@ -24,6 +25,9 @@ void AntiGravitySpell::update(const sf::Time& frameTime) {
 void AntiGravitySpell::setDisposed() {
 	m_mob->flipGravity();
 	Spell::setDisposed();
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::AntiGravity);
+	}
 }
 
 bool AntiGravitySpell::getConfiguredRotateSprite() const {

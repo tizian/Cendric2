@@ -11,6 +11,7 @@ public:
 
 	bool getConfiguredRotateSprite() const override;
 	void execOnHit(LevelMovableGameObject* target) override;
+	void setDisposed() override;
 
 private:
 	AttributeData m_additionalResistance;

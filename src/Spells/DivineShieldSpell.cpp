@@ -1,5 +1,6 @@
 #include "Spells/DivineShieldSpell.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "Screens/LevelScreen.h"
 
 DivineShieldSpell::DivineShieldSpell(const AttributeData& additionalResistance) : Spell() {
 	m_additionalResistance = additionalResistance;
@@ -53,4 +54,11 @@ bool DivineShieldSpell::getConfiguredRotateSprite() const {
 
 void DivineShieldSpell::execOnHit(LevelMovableGameObject* target) {
 	// nop
+}
+
+void DivineShieldSpell::setDisposed() {
+	Spell::setDisposed();
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::DivineShield);
+	}
 }

@@ -35,5 +35,6 @@ enum class LevelDynamicTileID {
 	Swinging,
 	Boat,
 	Mirror,
+	AntiMagic,
 	MAX
 };

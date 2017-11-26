@@ -31,7 +31,7 @@ void VeliusBoss::render(sf::RenderTarget& target) {
 }
 
 void VeliusBoss::loadAttributes() {
-	m_attributes.setHealth(500);
+	m_attributes.setHealth(2000);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistanceLight = -20;
 	m_attributes.resistanceFire = 50;
@@ -101,7 +101,7 @@ void VeliusBoss::loadAnimation(int skinNr) {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect(12 * width, 0, width, height));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);

@@ -67,7 +67,7 @@ protected:
 	// the record is updated with this safe values
 	void calculateCollisionLocations(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const;
 
-protected:
+public:
 	// line direction from p1 to p2
 	static bool lineBoxIntersection(const sf::Vector2f& p1, const sf::Vector2f& p2, const sf::FloatRect& bb, sf::Vector2f& intersection);
 	static bool lineIntersection(const sf::Vector2f& a1, const sf::Vector2f& a2, const sf::Vector2f& b1, const sf::Vector2f& b2, sf::Vector2f& intersection);
