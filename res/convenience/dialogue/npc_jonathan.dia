@@ -173,8 +173,8 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Cendric_TellsTheStory
 	translation.en:(Cendric tells the story about losing his memory and getting here)
-	translation.de:(Cendric erzählt die Geschichte wie er sein Gedächnis verlor und hier gelandet ist)
-	translation.ch:(Cendric verzellt d'Gschicht we er sis Gedächnis verlore het und da glandet isch)
+	translation.de:(Cendric erzählt die Geschichte wie er sein Gedächtnis verlor und hier gelandet ist)
+	translation.ch:(Cendric verzellt d'Gschicht we er sis Gedächtnis verlore het und da glandet isch)
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -187,8 +187,8 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_Wow
 	translation.en:Wow... Losing the your whole memory is pretty unusual, even for a mage.
-	translation.de:Wow... Das ganze Gedächnis zu verlieren ist ziemlich ungewöhnlich, auch für einen Magier.
-	translation.ch:Wow... Es ganz Gedächnis z'verlüre isch zimli ungwöhnlich, au füren Magier.
+	translation.de:Wow... Das ganze Gedächtnis zu verlieren ist ziemlich ungewöhnlich, auch für einen Magier.
+	translation.ch:Wow... Es ganz Gedächtnis z'verlüre isch zimli ungwöhnlich, au füren Magier.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -310,7 +310,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_Affinity
 	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
-	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesammte Spektrum der Magie verstehen.
+	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesamte Spektrum der Magie verstehen.
 	translation.ch:Jede Magier wird mit enere gwüsse Affinität zumne Magietyp gebore. De bestimmt, weli Zauber er lerne chan. Mir Elementarmagier hend Glück - mir chönd es ganze Spektrum vode Magie verstah.
 	[
 		# Link node, tag is next tag
@@ -324,7 +324,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_NextStep
 	translation.en:Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone who is a bit more...
-	translation.de:Hm. Ich wusste, dass mir Cyrus einer seiner Studenten zur Unterstützung meiner Forschungen schicken würde. Aber um ehrlich zu sein, habe ich mit jemandem gerechnet, der etwas mehr...
+	translation.de:Hm. Ich wusste, dass mir Cyrus einen seiner Studenten zur Unterstützung meiner Forschungen schicken würde. Aber um ehrlich zu sein, habe ich mit jemandem gerechnet, der etwas mehr...
 	translation.ch:Hm. Ich ha scho gwüsst, dass de Cyrus mir eine vo sine Studente schicke wird. Aber zum ehrlich si, ich ha mit öpperem grechnet wo chli me... 
 	[
 		# Link node, tag is next tag
@@ -339,8 +339,8 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_NextStep2
 	translation.en:...qualified. Also, someone who lost his memory is suspicious. Before I let you in on my studies, you should first prove that you're a worthy elementalist.
-	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächnis verloren hat, ein bisschen verdächtig. Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
-	translation.ch:...qualifiziert isch. Usserdem isch öpper, wo sis Gedächnis verlore het, scho zimli verdächtig. Bevor ich dich i mini Forschige iweihe, muesch zersch bewiise, dass du en würdige Elementarmagier bisch.
+	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächtnis verloren hat, ein bisschen verdächtig. Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
+	translation.ch:...qualifiziert isch. Usserdem isch öpper, wo sis Gedächtnis verlore het, scho zimli verdächtig. Bevor ich dich i mini Forschige iweihe, muesch zersch bewiise, dass du en würdige Elementarmagier bisch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -632,8 +632,8 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhyRisky
 	translation.en:It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
-	translation.de:Es ist einfach so dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören. Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht dass du eine Ausnahme warst.
-	translation.ch:Es isch eifach so, dass ich i letzter Ziit immer me es Gfühl ha, dass öppert probiert, mini Arbet z'störe. Forschigsnotize und Lüt verschwinded plötzlich... Ich denk nid dass du e Usnahm gsi bisch.
+	translation.de:Es ist einfach so, dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören. Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht, dass du eine Ausnahme warst.
+	translation.ch:Es isch eifach so, dass ich i letzter Ziit immer me es Gfühl ha, dass öppert probiert, mini Arbet z'störe. Forschigsnotize und Lüt verschwinded plötzlich... Ich denk nid, dass du e Usnahm gsi bisch.
 	[
 		# Link node, tag is next tag
 		tag:33
@@ -646,7 +646,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhyRisky2
 	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
-	translation.de:Rausgehen scheint keine gute Idee für mich zu sein bis diese Stadt wieder normal ist.
+	translation.de:Rausgehen scheint keine gute Idee für mich zu sein, bis diese Stadt wieder normal ist.
 	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider chli normaler isch.
 	[
 		# Link node, tag is next tag
@@ -660,7 +660,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhatShouldIDo
 	translation.en:You'll have to learn another type of magic. There are - as far as I know - three mage guilds in Gandria, each focusing on another domain of magic.
-	translation.de:Du wirst eine neue Magieart lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezilisiert.
+	translation.de:Du wirst eine neue Magieart lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezialisiert.
 	translation.ch:Du wirsch e neui Magieart lerne möse. In Gandria gits - sowiit ich weiss - drü verschideni Magiergilde, vo dene sich jedi ufen andere Bereich vode Magie spezialisiert.
 	[
 		# Link node, tag is next tag
@@ -759,7 +759,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhereNecromancers
 	translation.en:They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
-	translation.de:Sie dürfen sich nicht öffentlich zeigen weil ihre Magie in Gandria verboten ist. Wenn ich dich wäre, würde ich die Alchemistin Syrah fragen, sie hat wahrscheinlich Kontakte.
+	translation.de:Sie dürfen sich nicht öffentlich zeigen, weil ihre Magie in Gandria verboten ist. Wenn ich du wäre, würde ich die Alchemistin Syrah fragen, sie hat wahrscheinlich Kontakte.
 	translation.ch:Si dörfed sich nid öffentlich zeige well iri Magie in Gandria verbote isch. Wenn ich dich wer würi aber mal d'Alchemistin Syrah fröge, si kennt da so Lüt.
 	[
 		# Link node, tag is next tag
@@ -775,7 +775,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhereThieves
 	translation.en:Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
-	translation.de:Magier die sich mit Dämmerungsmagie beschäftigen sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
+	translation.de:Magier, die sich mit Dämmerungsmagie beschäftigen, sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
 	translation.ch:Magier wo sich mit Dämmerigsmagie beschäftiged sind meistens eifach Diebe. Ich wür ide Kanalisation vo Gandria afange sueche.
 	[
 		# Link node, tag is next tag

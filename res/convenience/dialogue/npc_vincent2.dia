@@ -195,7 +195,7 @@ npc.id:npc_vincent2
 		# translation: 
 		translation.tag:DL_Choice_GimmeKey
 		translation.en:Give me that key, I'll do it.
-		translation.de:Gib mir diesen Schlüssel, ich machs.
+		translation.de:Gib mir diesen Schlüssel, ich mach's.
 		translation.ch:Gib mer de Schlüssel, ich machs.
 		translation.item.id:gold
 		translation.item.amount:50
@@ -540,7 +540,7 @@ npc.id:npc_vincent2
 	# translation: 
 	translation.tag:DL_Vincent_ChestIsObserved
 	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they won't catch you.
-	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zauber beschützt. Pass also auf, dass die dich nicht erwischen.
+	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zaubern beschützt. Pass also auf, dass die dich nicht erwischen.
 	translation.ch:D'Chischte isch imne Gheimruum vom Huus vom Älteste. Oh, und si wird wahrschinli vo Beobachter-Zauber bewacht. Pass also uf, dass die dich nid verwütsched.
 	[
 		# Link node, tag is next tag

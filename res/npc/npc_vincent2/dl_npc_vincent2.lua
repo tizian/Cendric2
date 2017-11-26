@@ -92,22 +92,22 @@ loadDialogue = function(DL)
 			DL:addChoice(3, "DL_Choice_WhatDeal") -- Tell me more about that job.
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and DL:hasItem("gold", 50)) then 
-		DL:addItemChoice(5, "DL_Choice_GimmeKey", "gold", 50) -- Give me that key, I'll do it.
+			DL:addItemChoice(5, "DL_Choice_GimmeKey", "gold", 50) -- Give me that key, I'll do it.
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_50") and not DL:hasItem("gold", 50)) then 
-		DL:addItemChoice(15, "DL_Choice_GimmeKey", "gold", 50) -- 
+			DL:addItemChoice(15, "DL_Choice_GimmeKey", "gold", 50) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and DL:hasItem("gold", 100)) then 
-		DL:addItemChoice(16, "DL_Choice_GimmeKey", "gold", 100) -- 
+			DL:addItemChoice(16, "DL_Choice_GimmeKey", "gold", 100) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_100") and not DL:hasItem("gold", 100)) then 
-		DL:addItemChoice(17, "DL_Choice_GimmeKey", "gold", 100) -- 
+			DL:addItemChoice(17, "DL_Choice_GimmeKey", "gold", 100) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and DL:hasItem("gold", 150)) then 
-		DL:addItemChoice(18, "DL_Choice_GimmeKey", "gold", 150) -- 
+			DL:addItemChoice(18, "DL_Choice_GimmeKey", "gold", 150) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and DL:isConditionFulfilled("npc_vincent2", "key_150") and not DL:hasItem("gold", 150)) then 
-		DL:addItemChoice(19, "DL_Choice_GimmeKey", "gold", 150) -- 
+			DL:addItemChoice(19, "DL_Choice_GimmeKey", "gold", 150) -- 
 		end
 		if (DL:isConditionFulfilled("npc_vincent2", "job_talked") and not (DL:isConditionFulfilled("npc_vincent2", "key_150") or DL:isConditionFulfilled("npc_vincent2", "key_100") or DL:isConditionFulfilled("npc_vincent2", "key_50")) ) then 
 			DL:addChoice(31, "DL_Choice_GimmeKey") -- 

@@ -133,7 +133,7 @@ npc.id:npc_luv
 	# translation: 
 	translation.tag:DL_Luv_SecondRant
 	translation.en:Pha! If he wouldn't have slept when our captain called our sailors back, we wouldn't have missed it either!
-	translation.de:Pha! Hätte er nicht geschlafen als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
+	translation.de:Pha! Hätte er nicht geschlafen, als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
 	translation.ch:Pha! Wener nid pennt het wo üse Kapitän d'Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
 	[
 		# Link node, tag is next tag
@@ -219,8 +219,8 @@ npc.id:npc_luv
 	# translation: 
 	translation.tag:DL_Luv_CalmDown2
 	translation.en:We know where our captain wanted to sail and we could buy a small boat here.
-	translation.de:Wir wissen wo unser Kapitän hinwollte und wir könnten hier auch ein kleines Boot kaufen.
-	translation.ch:Mir wüssed wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
+	translation.de:Wir wissen, wo unser Kapitän hinwollte und wir könnten hier auch ein kleines Boot kaufen.
+	translation.ch:Mir wüssed, wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
 	[
 		# Link node, tag is next tag
 		tag:10

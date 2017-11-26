@@ -141,244 +141,243 @@ loadDialogue = function(DL)
 	end
 
 
+	DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials and some iron ore?
+	DL:addNode()
 
-		DL:createNPCNode(16, 17, "DL_Harek_Craft") -- Sure, did you find some special materials and some iron ore?
+
+	DL:createChoiceNode(17)
+	if (DL:hasItem("mi_icecrystal", 1)) then 
+		DL:addCraftingChoice(18, "DL_Choice_IceScarf") -- eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
+	end
+	if (DL:hasItem("mi_pearlpile", 1)) then 
+		DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,75
+	end
+	if (DL:hasItem("mi_elysiatail", 1)) then 
+		DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,100
+	end
+	if (DL:hasItem("mi_janusglaive", 1)) then 
+		DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,100
+	end
+	if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
+		DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,110
+	end
+	if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
+		DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,110
+	end
+	if (DL:hasItem("mi_yashafangs", 1)) then 
+		DL:addCraftingChoice(26, "DL_Choice_FireGlaive") -- we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,130
+	end
+	if (DL:hasItem("mi_prismastone", 1)) then 
+		DL:addChoice(32, "DL_Choice_PrismaStone") -- I found this rainbow stone. Can you craft something from it?
+	end
+	DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
+	DL:addNode()
+
+	if (DL:hasItem("mi_icecrystal", 1)) then 
+
+		DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exeptionally beautiful stone! I can truly craft something magical from that.
+		DL:gotoNode(17)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("mi_pearlpile", 1)) then 
+
+		DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
+		DL:gotoNode(17)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("mi_elysiatail", 1)) then 
+
+		DL:createNPCNode(21, -2, "DL_Harek_LightningPike") -- The tail feathers of a storm bird? Great material for a magical lightning pike.
+		DL:gotoNode(17)
+		DL:addNode()
+
+	end
+
+	if (DL:hasItem("mi_janusglaive", 1)) then 
+
+		DL:createNPCNode(22, 23, "DL_Harek_JanusGlaive") -- Hm, I really start to wonder where you get this stuff from.
 		DL:addNode()
 
 
-		DL:createChoiceNode(17)
-		if (DL:hasItem("mi_icecrystal", 1)) then 
-			DL:addCraftingChoice(18, "DL_Choice_IceScarf") -- eq_icescarf,mi_icecrystal,1,mi_ironore,2,gold,40
-		end
-		if (DL:hasItem("mi_pearlpile", 1)) then 
-			DL:addCraftingChoice(20, "DL_Choice_PearlSabre") -- we_pearlsabre,mi_pearlpile,1,mi_ironore,3,gold,75
-		end
-		if (DL:hasItem("mi_elysiatail", 1)) then 
-			DL:addCraftingChoice(21, "DL_Choice_LightningPike") -- we_lightningpike,mi_elysiatail,1,mi_ironore,5,gold,100
-		end
-		if (DL:hasItem("mi_janusglaive", 1)) then 
-			DL:addCraftingChoice(22, "DL_Choice_JanusGlaive") -- we_janusglaive,mi_janusglaive,1,mi_ironore,4,gold,100
-		end
-		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
-			DL:addCraftingChoice(24, "DL_Choice_LavaArmor") -- eq_lavaarmor,mi_corrupt_stone_fire,3,mi_shinystone,1,mi_ironore,5,gold,110
-		end
-		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
-			DL:addCraftingChoice(25, "DL_Choice_CairnArmor") -- eq_cairnarmor,mi_corrupt_stone_ice,3,mi_shinystone,1,mi_ironore,5,gold,110
-		end
-		if (DL:hasItem("mi_yashafangs", 1)) then 
-			DL:addCraftingChoice(26, "DL_Choice_FireGlaive") -- we_fireglaive,mi_yashafangs,1,mi_shinystone,2,mi_ironore,4,gold,130
-		end
-		if (DL:hasItem("mi_prismastone", 1)) then 
-			DL:addChoice(32, "DL_Choice_PrismaStone") -- I found this rainbow stone. Can you craft something from it?
-		end
-		DL:addChoice(-2, "DL_Choice_NoMaterial") -- I'll come back later. [BACK]
+		DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon but I can only restore a part of its magical power.
+		DL:gotoNode(17)
 		DL:addNode()
 
-		if (DL:hasItem("mi_icecrystal", 1)) then 
+	end
 
-			DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exeptionally beautiful stone! I can truly craft something magical from that.
-			DL:gotoNode(17)
-			DL:addNode()
+	if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
 
-		end
+		DL:createNPCNode(24, -2, "DL_Harek_LavaArmor") -- Lava stones from a lava wraith! These will make a fine, fire-resistant armour.
+		DL:gotoNode(17)
+		DL:addNode()
 
-		if (DL:hasItem("mi_pearlpile", 1)) then 
+	end
 
-			DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
-			DL:gotoNode(17)
-			DL:addNode()
+	if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
 
-		end
+		DL:createNPCNode(25, -2, "DL_Harek_CairnArmor") -- Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
+		DL:gotoNode(17)
+		DL:addNode()
 
-		if (DL:hasItem("mi_elysiatail", 1)) then 
+	end
 
-			DL:createNPCNode(21, -2, "DL_Harek_LightningPike") -- The tail feathers of a storm bird? Great material for a magical lightning pike.
-			DL:gotoNode(17)
-			DL:addNode()
+	if (DL:hasItem("mi_yashafangs", 1)) then 
 
-		end
+		DL:createNPCNode(26, 27, "DL_Harek_FireGlaive") -- Huge demonic fangs! And just look at the magical power flowing through them. This will make a powerful weapon.
+		DL:addNode()
 
-		if (DL:hasItem("mi_janusglaive", 1)) then 
 
-			DL:createNPCNode(22, 23, "DL_Harek_JanusGlaive") -- Hm, I really start to wonder where you get this stuff from.
-			DL:addNode()
+		DL:createNPCNode(27, -2, "DL_Harek_FireGlaive2") -- I've never worked with something like this before. A truly amazing material.
+		DL:gotoNode(17)
+		DL:addNode()
 
+	end
 
-			DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon but I can only restore a part of its magical power.
-			DL:gotoNode(17)
-			DL:addNode()
+	if (DL:hasItem("mi_prismastone", 1)) then 
 
-		end
+		DL:createNPCNode(32, 33, "DL_Harek_PrismaStone") -- Hmm. Very interesting, indeed. It looks like condensed magic. I'll cut that stone for free.
+		DL:addNode()
 
-		if (DL:hasItem("mi_corrupt_stone_fire", 1)) then 
 
-			DL:createNPCNode(24, -2, "DL_Harek_LavaArmor") -- Lava stones from a lava wraith! These will make a fine, fire-resistant armour.
-			DL:gotoNode(17)
-			DL:addNode()
+		DL:createNPCNode(33, 34, "DL_Harek_PrismaStone2") -- I could cut the stone to focus one color or we could keep all colors, but they'll shine less.
+		DL:addNode()
 
-		end
 
-		if (DL:hasItem("mi_corrupt_stone_ice", 1)) then 
+		DL:createNPCNode(34, 35, "DL_Harek_PrismaStone3") -- Which magic types or colours do you prefer?
+		DL:addNode()
 
-			DL:createNPCNode(25, -2, "DL_Harek_CairnArmor") -- Magic-infused stones from a cairn wraith! These will make a fine, ice-resistant armour.
-			DL:gotoNode(17)
-			DL:addNode()
 
-		end
+		DL:createChoiceNode(35)
+		DL:addChoice(36, "DL_Choice_RingColor") -- Let me choose by colour.
+		DL:addChoice(37, "DL_Choice_RingMagic") -- Let me choose by magic type.
+		DL:addNode()
 
-		if (DL:hasItem("mi_yashafangs", 1)) then 
 
-			DL:createNPCNode(26, 27, "DL_Harek_FireGlaive") -- Huge demonic fangs! And just look at the magical power flowing through them. This will make a powerful weapon.
-			DL:addNode()
+		DL:createChoiceNode(36)
+		DL:addChoice(38, "DL_Choice_RingGreen") -- Green.
+		DL:addChoice(39, "DL_Choice_RingPurple") -- Purple.
+		DL:addChoice(40, "DL_Choice_RingYellow") -- Yellow.
+		DL:addChoice(41, "DL_Choice_RingOrange") -- Orange.
+		DL:addChoice(42, "DL_Choice_RingRed") -- Red.
+		DL:addChoice(43, "DL_Choice_RingCyan") -- Cyan.
+		DL:addChoice(45, "DL_Choice_RingBlue") -- Blue.
+		DL:addChoice(44, "DL_Choice_RingRainbow.") -- Give me all colours.
+		DL:addChoice(-2, "DL_Choice_ChooseLater") -- I'll choose later.
+		DL:addNode()
 
 
-			DL:createNPCNode(27, -2, "DL_Harek_FireGlaive2") -- I've never worked with something like this before. A truly amazing material.
-			DL:gotoNode(17)
-			DL:addNode()
+		DL:createNPCNode(38, -2, "DL_NPC_RingHereYouGo") -- Alright. Here you go.
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_green", 1)
+		DL:addNode()
 
-		end
 
-		if (DL:hasItem("mi_prismastone", 1)) then 
+		DL:createNPCNode(39, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_purple", 1)
+		DL:addNode()
 
-			DL:createNPCNode(32, 33, "DL_Harek_PrismaStone") -- Hmm. Very interesting, indeed. It looks like condensed magic. I'll cut that stone for free.
-			DL:addNode()
 
+		DL:createNPCNode(40, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_yellow", 1)
+		DL:addNode()
 
-			DL:createNPCNode(33, 34, "DL_Harek_PrismaStone2") -- I could cut the stone to focus one color or we could keep all colors, but they'll shine less.
-			DL:addNode()
 
+		DL:createNPCNode(41, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_orange", 1)
+		DL:addNode()
 
-			DL:createNPCNode(34, 35, "DL_Harek_PrismaStone3") -- Which magic types or colours do you prefer?
-			DL:addNode()
 
+		DL:createNPCNode(42, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_red", 1)
+		DL:addNode()
 
-			DL:createChoiceNode(35)
-			DL:addChoice(36, "DL_Choice_RingColor") -- Let me choose by colour.
-			DL:addChoice(37, "DL_Choice_RingMagic") -- Let me choose by magic type.
-			DL:addNode()
 
+		DL:createNPCNode(43, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_cyan", 1)
+		DL:addNode()
 
-			DL:createChoiceNode(36)
-			DL:addChoice(38, "DL_Choice_RingGreen") -- Green.
-			DL:addChoice(39, "DL_Choice_RingPurple") -- Purple.
-			DL:addChoice(40, "DL_Choice_RingYellow") -- Yellow.
-			DL:addChoice(41, "DL_Choice_RingOrange") -- Orange.
-			DL:addChoice(42, "DL_Choice_RingRed") -- Red.
-			DL:addChoice(43, "DL_Choice_RingCyan") -- Cyan.
-			DL:addChoice(45, "DL_Choice_RingBlue") -- Blue.
-			DL:addChoice(44, "DL_Choice_RingRainbow.") -- Give me all colours.
-			DL:addChoice(-2, "DL_Choice_ChooseLater") -- I'll choose later.
-			DL:addNode()
 
+		DL:createNPCNode(45, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_blue", 1)
+		DL:addNode()
 
-			DL:createNPCNode(38, -2, "DL_NPC_RingHereYouGo") -- Alright. Here you go.
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_green", 1)
-			DL:addNode()
 
+		DL:createNPCNode(44, -2, "DL_NPC_RingHereYouGo") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_rainbow", 1)
+		DL:addNode()
 
-			DL:createNPCNode(39, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_purple", 1)
-			DL:addNode()
 
+		DL:createChoiceNode(37)
+		DL:addChoice(46, "DL_Choice_RingHeal") -- I need something that improves my health.
+		DL:addChoice(47, "DL_Choice_RingHaste") -- I like fast and critical attacks.
+		DL:addChoice(48, "DL_Choice_RingDivine") -- I commited myself to the divine magic.
+		DL:addChoice(49, "DL_Choice_RingPhysical") -- I like to beat people without magic.
+		DL:addChoice(50, "DL_Choice_RingFire") -- I like to play with fire.
+		DL:addChoice(51, "DL_Choice_RingIce") -- Ice magic suits me.
+		DL:addChoice(52, "DL_Choice_RingShadow") -- Nothing beats shadow magic.
+		DL:addChoice(53, "DL_Choice_RingEverything") -- I like everything.
+		DL:addChoice(-2, "DL_Choice_ChooseLater") -- 
+		DL:addNode()
 
-			DL:createNPCNode(40, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_yellow", 1)
-			DL:addNode()
 
+		DL:createNPCNode(46, -2, "DL_NPC_RingThis") -- Alright. This ring should fit you best.
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_green", 1)
+		DL:addNode()
 
-			DL:createNPCNode(41, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_orange", 1)
-			DL:addNode()
 
+		DL:createNPCNode(47, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_purple", 1)
+		DL:addNode()
 
-			DL:createNPCNode(42, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_red", 1)
-			DL:addNode()
 
+		DL:createNPCNode(48, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_yellow", 1)
+		DL:addNode()
 
-			DL:createNPCNode(43, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_cyan", 1)
-			DL:addNode()
 
+		DL:createNPCNode(49, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_orange", 1)
+		DL:addNode()
 
-			DL:createNPCNode(45, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_blue", 1)
-			DL:addNode()
 
+		DL:createNPCNode(50, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_red", 1)
+		DL:addNode()
 
-			DL:createNPCNode(44, -2, "DL_NPC_RingHereYouGo") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_rainbow", 1)
-			DL:addNode()
 
+		DL:createNPCNode(51, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_cyan", 1)
+		DL:addNode()
 
-			DL:createChoiceNode(37)
-			DL:addChoice(46, "DL_Choice_RingHeal") -- I need something that improves my health.
-			DL:addChoice(47, "DL_Choice_RingHaste") -- I like fast and critical attacks.
-			DL:addChoice(48, "DL_Choice_RingDivine") -- I commited myself to the divine magic.
-			DL:addChoice(49, "DL_Choice_RingPhysical") -- I like to beat people without magic.
-			DL:addChoice(50, "DL_Choice_RingFire") -- I like to play with fire.
-			DL:addChoice(51, "DL_Choice_RingIce") -- Ice magic suits me.
-			DL:addChoice(52, "DL_Choice_RingShadow") -- Nothing beats shadow magic.
-			DL:addChoice(53, "DL_Choice_RingEverything") -- I like everything.
-			DL:addChoice(-2, "DL_Choice_ChooseLater") -- 
-			DL:addNode()
 
+		DL:createNPCNode(52, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_blue", 1)
+		DL:addNode()
 
-			DL:createNPCNode(46, -2, "DL_NPC_RingThis") -- Alright. This ring should fit you best.
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_green", 1)
-			DL:addNode()
 
+		DL:createNPCNode(53, -2, "DL_NPC_RingThis") -- 
+		DL:removeItem("mi_prismastone", 1)
+		DL:addItem("eq_sparkling_rainbow", 1)
+		DL:addNode()
 
-			DL:createNPCNode(47, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_purple", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(48, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_yellow", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(49, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_orange", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(50, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_red", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(51, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_cyan", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(52, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_blue", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(53, -2, "DL_NPC_RingThis") -- 
-			DL:removeItem("mi_prismastone", 1)
-			DL:addItem("eq_sparkling_rainbow", 1)
-			DL:addNode()
-
-		end
+	end
 
 end

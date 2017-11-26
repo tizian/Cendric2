@@ -28,7 +28,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_Greeting
 	translation.en:Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
-	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen. Ob Liebestrank oder Haarfarbe - es gibt fast nichts was ich nicht zusammenbrauen könnte.
+	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen. Ob Liebestrank oder Haarfarbe - es gibt fast nichts, was ich nicht zusammenbrauen könnte.
 	translation.ch:Ja hallo! Du gsesch us als chöntisch du paar Tränk vode berüemt-berüchtigte Alchemistin Syrah bruche. Ob Liebestrank oder Haarfarb - es git fast nüt woni nid chönt zememischle.
 	[
 		# Link node, tag is next tag
@@ -266,7 +266,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_Sewers
 	translation.en:Some houses have a basement with a connection to the sewers. I think there's also a door near the harbour that leads down.
-	translation.de:Ein paar Häuser haben in ihrem Keller eine Verbindung zur Kanalisation. Ich glaube, es gibt auch eine Türe in der Nähe des Hafens die dort runter führt.
+	translation.de:Ein paar Häuser haben in ihrem Keller eine Verbindung zur Kanalisation. Ich glaube, es gibt auch eine Türe in der Nähe des Hafens, die dort runter führt.
 	translation.ch:Es paar Hüser hend i ihrem Chäller e Verbindig zude Kanalisation. Ich glaub es git au e Türe ide Nöchi vom Hafe wo det abe führt.
 	[
 		# Link node, tag is next tag

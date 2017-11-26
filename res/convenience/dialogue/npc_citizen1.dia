@@ -305,7 +305,7 @@ npc.id:npc_citizen1
 	# translation: 
 	translation.tag:DL_Citizen_AboutGandria
 	translation.en:Gandria is not only the capital of Admantris, it plays also an important economic role as a port. 
-	translation.de:Gandria ist nicht nur die Hauptstadt von Admantris sondern hat auch eine bedeutende wirtschaftliche Rolle als Hafenstadt.
+	translation.de:Gandria ist nicht nur die Hauptstadt von Admantris, sondern hat auch eine bedeutende wirtschaftliche Rolle als Hafenstadt.
 	translation.ch:Gandria isch nid nur d'Hauptstadt vo Admantris sondern het au e wichtigi wirtschaftlichi Rolle als Hafestadt.
 	[
 		# Link node, tag is next tag

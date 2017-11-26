@@ -59,7 +59,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_WhoAreYou2
 	translation.en:I also take on more special jobs, if you can bring me the materials.
-	translation.de:Ich nehme auch speziellere Sachen in Auftrag, falls du mir die Materialen besorgen kannst.
+	translation.de:Ich nehme auch speziellere Sachen in Auftrag, falls du mir die Materialien besorgen kannst.
 	translation.ch:Ich nim au spezielleri Sache in Uftrag, falls du mir d'Materialie defür bsorge chasch.
 	[
 		# Link node, tag is next tag
@@ -392,7 +392,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_Craft
 	translation.en:Sure, did you find some special materials and some iron ore?
-	translation.de:Sicher, hast du spezielle Materialen und etwas Eisenerz gefunden?
+	translation.de:Sicher, hast du spezielle Materialien und etwas Eisenerz gefunden?
 	translation.ch:Sicher, hesch denn speziells Material und chli Iseerz gfunde?
 	[
 		# Link node, tag is next tag

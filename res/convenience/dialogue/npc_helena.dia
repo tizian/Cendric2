@@ -34,7 +34,7 @@ npc.id:npc_helena
 		# translation: 
 		translation.tag:DL_Choice_TellMe
 		translation.en:Okay, tell me what you know about me.
-		translation.de:Okay, sag mir was du über mich weisst.
+		translation.de:Okay, sag mir, was du über mich weisst.
 		translation.ch:Okay, seg mer wa du über mich weisch.
 	]
 	[
@@ -135,7 +135,7 @@ npc.id:npc_helena
 	# translation: 
 	translation.tag:DL_Helena_Luggage2
 	translation.en:But I've kept the things that I couldn't sell right here at the bar.
-	translation.de:Aber ich habe die Sachen die ich nicht verkaufen konnte hier unter der Theke gelagert.
+	translation.de:Aber ich habe die Sachen, die ich nicht verkaufen konnte, hier unter der Theke gelagert.
 	translation.ch:Aber ich ha die Sache woni nid ha chöne verchaufe grad da under de Bar glageret.
 	[
 		# Link node, tag is next tag
@@ -249,7 +249,7 @@ npc.id:npc_helena
 	# translation: 
 	translation.tag:DL_Helena_SoldThings
 	translation.en:Oh, I don't remember. But I've only sold some robes and hats anyway.
-	translation.de:Oh, an die erinnere ich mich nich mehr. Aber ich habe sowieso nur ein paar Roben und Hüte loswerden können.
+	translation.de:Oh, an die erinnere ich mich nicht mehr. Aber ich habe sowieso nur ein paar Roben und Hüte loswerden können.
 	translation.ch:Oh, a die erinnere ich mich nüm. Aber ich ha sowieso nur es paar Robe und Hüet loswerde chöne.
 	[
 		# Link node, tag is next tag

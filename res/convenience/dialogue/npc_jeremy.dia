@@ -95,7 +95,7 @@ npc.id:npc_jeremy
 	# translation: 
 	translation.tag:DL_Jeremy_Helmet
 	translation.en:Oh, you mean that pathetic paladin that gambled away everything he had? I'll have to disappoint you, we don't have that helmet anymore.
-	translation.de:Oh, du meinst diesen erbärmlichen Paladin der alles verspielt hat? Ich muss dich enttäuschen, diesen Helm haben wir nicht mehr.
+	translation.de:Oh, du meinst diesen erbärmlichen Paladin, der alles verspielt hat? Ich muss dich enttäuschen, diesen Helm haben wir nicht mehr.
 	translation.ch:Oh, du meinsch de erbärmlich Paladin wo alles verzockt het? Da muni di enttüsche, de Helm hämmer nümme.
 	[
 		# Link node, tag is next tag
