@@ -135,8 +135,8 @@ npc.id:npc_leeroy
 	# translation: 
 	translation.tag:DL_Leeroy_WhyStop2
 	translation.en:I'm just making sure nobody gets mauled before I've slain them.
-	translation.de:Ich schaue nur dass niemand zerfleischt wird bevor ich sie erledige.
-	translation.ch:Ich lueg nur das niemert zerfleischt wird bevor ich si bodige.
+	translation.de:Ich schaue nur, dass niemand zerfleischt wird, bevor ich sie erledige.
+	translation.ch:Ich lueg nur, dass niemert zerfleischt wird, bevor ich si bodige.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -149,7 +149,7 @@ npc.id:npc_leeroy
 	# translation: 
 	translation.tag:DL_Leeroy_WhoAreYou
 	translation.en:I'm Leeroy, former paladin of the Order. Lloyd fired me because I didn't follow his stupid orders.
-	translation.de:Ich bin Leeroy, ehemaliger Paladin des Ordens. Lloyd hat mich gefeuert weil ich seine dummen Befehle missachtet habe.
+	translation.de:Ich bin Leeroy, ehemaliger Paladin des Ordens. Lloyd hat mich gefeuert, weil ich seine dummen Befehle missachtet habe.
 	translation.ch:Ich bi de Leeroy, ehemalige Paladin vom Orde. De Lloyd het mi entloh well ich sini dumme Befehl missachtet ha.
 	[
 		# Link node, tag is next tag
@@ -179,7 +179,7 @@ npc.id:npc_leeroy
 	# translation: 
 	translation.tag:DL_Leeroy_NoDragons
 	translation.en:D'uh, that's because they're hiding! But they are just waiting for someone like you to feast on.
-	translation.de:Tz, das ist weil sie sich verstecken! Sie warten nur auf jemanden wie dich den sie verspeisen können.
+	translation.de:Tz, das ist, weil sie sich verstecken! Sie warten nur auf jemanden wie dich, den sie verspeisen können.
 	translation.ch:Tz, da isch well si sich verstecked! Si warted nur uf öpper we dich wo si zum Znacht ne chönd.
 	[
 		# Link node, tag is next tag

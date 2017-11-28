@@ -5,7 +5,7 @@
 void DialogueTool::run() {
 
 	// init window
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "Cendric Dialogue Tool");
+	sf::RenderWindow window(sf::VideoMode(1200, 720), "Cendric Dialogue Tool");
 	window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(window);
 

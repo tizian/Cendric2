@@ -378,7 +378,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_SmithMagicArmor3
 	translation.en:You can always come back to me if you find other special materials, I'd love working with them.
-	translation.de:Du kannst immer wieder zu mir kommen wenn du spezielles Material findest - Es ist interessant, es zu verarbeiten.
+	translation.de:Du kannst immer wieder zu mir kommen, wenn du spezielles Material findest - Es ist interessant, es zu verarbeiten.
 	translation.ch:Du chasch immer wider zu mir cho wend speziells Material findsch - Es isch interessant, demit z'schaffe.
 	[
 		# Link node, tag is next tag

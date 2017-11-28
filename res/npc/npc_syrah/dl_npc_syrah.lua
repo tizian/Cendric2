@@ -125,7 +125,7 @@ loadDialogue = function(DL)
 		DL:createChoiceNode(24)
 		DL:addChoice(25, "DL_Choice_OkayMark") -- Let's get this over with.
 		if (not DL:isConditionFulfilled("npc_syrah", "come_here")) then 
-			DL:addChoice(26, "DL_Choice_NotOkayMark") -- I'm not sure if this is a good idea.
+			DL:addChoice(26, "DL_Choice_NotOkayMark") -- I'm not sure whether this is a good idea.
 		end
 		DL:addNode()
 

@@ -144,7 +144,7 @@ npc.id:npc_syrah
 		# translation: 
 		translation.tag:DL_Choice_MarkQuestDone
 		translation.en:I got what you wanted. (Give ingredients)
-		translation.de:Ich habe was du brauchst. (Zutaten geben)
+		translation.de:Ich habe, was du brauchst. (Zutaten geben)
 		translation.ch:Ich han was du bruchsch. (Zuetate gä)
 	]
 	[
@@ -340,8 +340,8 @@ npc.id:npc_syrah
 		condition:not DL:isConditionFulfilled("npc_syrah", "come_here")
 		# translation: 
 		translation.tag:DL_Choice_NotOkayMark
-		translation.en:I'm not sure if this is a good idea.
-		translation.de:Ich weiss nicht ob das eine gute Idee ist.
+		translation.en:I'm not sure whether this is a good idea.
+		translation.de:Ich weiss nicht, ob das eine gute Idee ist.
 		translation.ch:Ich weiss nid ob da so e gueti Idee isch.
 	]
 }
@@ -410,7 +410,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_DoMeAFavour
 	translation.en:But now, as I've done you a favour, you should do me one too, I think.
-	translation.de:Aber jetzt wo ich dir einen Gefallen getan habe, solltest du mir auch einen machen.
+	translation.de:Aber jetzt, wo ich dir einen Gefallen getan habe, solltest du mir auch einen tun.
 	translation.ch:Aber jetz, woni dir en Gfalle gmacht ha, sötsch mer au eine mache.
 	[
 		# Link node, tag is next tag
@@ -455,7 +455,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_FavourQuestStart2
 	translation.en:I need a special flower, the cinderbloom, for one of my potions. It only grows on graves of people who have died in a fire. 
-	translation.de:Ich brauche eine spezielle Blume, die Aschenblüte, aus der Krypta dort. Sie wächst nur auf dem Grab von Leuten, die in einem Feuer umgekommen sind.
+	translation.de:Ich brauche eine spezielle Blume, die Aschenblüte, aus der Krypta dort. Sie wächst nur auf den Gräbern von Leuten, die in einem Feuer umgekommen sind.
 	translation.ch:Ich bruch e spezielli Blueme, d'Zündelblueme. Si wachst nur uf de Gräber vo Lüt, wo im Füür gstorbe sind.
 	[
 		# Link node, tag is next tag
@@ -469,7 +469,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_FavourQuestStart3
 	translation.en:I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
-	translation.de:Ich bin mir sicher dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen" werden meistens auf dem Scheiterhaufen verbrannt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
+	translation.de:Ich bin mir sicher, dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen", werden meistens auf dem Scheiterhaufen verbrannt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
 	translation.ch:Ich bimer sicher, dass du die Blueme det finde chasch - Magier wo Magie "missbruched" werded meistens ufem Schiiterhufe verbrennt und wa au immer übrig bliibt wird i die Krypa verfrachtet.
 	[
 		# Link node, tag is next tag

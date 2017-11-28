@@ -35,7 +35,7 @@ npc.id:npc_jeremy
 		# translation: 
 		translation.tag:DL_Choice_LeeroyChicken
 		translation.en:Helena wants you to leave her inn. Get out.
-		translation.de:Helena will, dass ihr ihre Taverne verlässt. Raus mit euch.
+		translation.de:Helena will, dass ihr ihre Taverne verlasst. Raus mit euch.
 		translation.ch:D'Helena wett eu nüm do ha. Ihr sötted besser go.
 	]
 	[

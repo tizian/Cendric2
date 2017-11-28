@@ -52,7 +52,7 @@ npc.id:npc_inina2
 	# translation: 
 	translation.tag:DL_Inina_StrangePassage3
 	translation.en:I don't know a spell that could push through this blockade. Maybe you could succeed?
-	translation.de:Ich kenne keinen Zauber der diese Blockade wegdrücken könnte. Vielleicht gelingt es dir ja?
+	translation.de:Ich kenne keinen Zauber, der diese Blockade wegdrücken könnte. Vielleicht gelingt es dir ja?
 	translation.ch:Ich kenn ken Zauber wo die Blockade wegdrucke chönt. Vilicht glingts dir ja?
 	[
 		# Link node, tag is next tag
