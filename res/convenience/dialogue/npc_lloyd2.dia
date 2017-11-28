@@ -220,7 +220,7 @@ npc.id:npc_lloyd2
 	# translation: 
 	translation.tag:DL_Lloyd_HurryUp
 	translation.en:Nevertheless, Inina still needs your help discovering the strange caverns. She's been away for too long now.
-	translation.de:Trotzdem braucht Inina immer noch deine Hilfe was das Erkunden dieser seltsamen Höhlen angeht. Sie ist jetzt schon zu lange weg.
+	translation.de:Trotzdem braucht Inina immer noch deine Hilfe, was das Erkunden dieser seltsamen Höhlen angeht. Sie ist jetzt schon zu lange weg.
 	translation.ch:Trotzdem brucht d'Inina immer na dini Hilf bim Erforsche vo dene komische Höhle. Si isch ez scho zu lang weg.
 	[
 		# Link node, tag is next tag
@@ -235,8 +235,8 @@ npc.id:npc_lloyd2
 	# translation: 
 	translation.tag:DL_Lloyd_HurryUp2
 	translation.en:I want you to immediately go back to the caverns and support her. That's not a request!
-	translation.de:Ich will dass du ohne weitere Abstecher zurück zu den Höhlen gehst und sie unterstützt. Das ist keine Bitte!
-	translation.ch:Ich wett dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
+	translation.de:Ich will, dass du ohne weitere Abstecher zurück zu den Höhlen gehst und sie unterstützt. Das ist keine Bitte!
+	translation.ch:Ich wett, dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
 	[
 		# Link node, tag is next tag
 		tag:-2

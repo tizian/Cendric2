@@ -43,8 +43,8 @@ npc.id:npc_lloyd3
 	# translation: 
 	translation.tag:DL_Lloyd_Talk2
 	translation.en:One of Inina's guards just returned and told me about that secret passage. But - much more urgent now - he returned without her! 
-	translation.de:Eine Wache von Inina ist gerade zurückgekehrt und hat mir von diesem geheimen Durchgang erzählt. Doch, viel wichtiger ist, dass er ohne sie zurückgekommen ist!
-	translation.ch:E Wach vode Inina isch gradd zruggcho und het mer vo dem gheime Durchgang verzellt. Aber, viel wichtiger isch, daser ohni si zruggcho isch!
+	translation.de:Eine Wache von Inina ist gerade zurückgekehrt und hat mir von diesem geheimen Durchgang erzählt. Doch viel wichtiger ist, dass er ohne sie zurückgekommen ist!
+	translation.ch:E Wach vode Inina isch gradd zruggcho und het mer vo dem gheime Durchgang verzellt. Aber viel wichtiger isch, daser ohni si zruggcho isch!
 	[
 		# Link node, tag is next tag
 		tag:3
