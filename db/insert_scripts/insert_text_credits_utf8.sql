@@ -68,6 +68,8 @@ Peter
 
 "Yasha'' Theme"
 
+"Lighthouse Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -91,8 +93,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
@@ -262,6 +262,8 @@ Peter
 
 "Yasha'' Theme"
 
+"Lighthouse Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -285,8 +287,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
@@ -451,7 +451,9 @@ Peter
 
 "Zeff''s Theme"
 
-"Yasha'' Theme"
+"Yasha''s Theme"
+
+"Lighthouse Theme"
 
 ---
 
@@ -476,8 +478,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
