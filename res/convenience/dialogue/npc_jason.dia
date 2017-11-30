@@ -70,7 +70,7 @@ npc.id:npc_jason
 		# translation: 
 		translation.tag:DL_Choice_YashaSword
 		translation.en:I found this sword in the temple in the North. Do you know what it is?
-		translation.de:Ich habe dieses Schwert im Tempel im Norden gefunden. Weisst du was es ist?
+		translation.de:Ich habe dieses Schwert im Tempel im Norden gefunden. Weisst du, was es ist?
 		translation.ch:Ich ha das Schwert im Tempel im Norde gfunde. Weisch du wases isch?
 	]
 	[

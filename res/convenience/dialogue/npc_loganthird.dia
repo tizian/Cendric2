@@ -308,7 +308,7 @@ npc.id:npc_loganthird
 	# translation: 
 	translation.tag:DL_Logan_Father2
 	translation.en:... (Logan's eyes suddenly light up) No, he isn't. Please help me!
-	translation.de:... (Logan's Augen leuchten plötzlich auf) Nein, ist er nicht. Bitte hilf mir!
+	translation.de:... (Logans Augen leuchten plötzlich auf) Nein, ist er nicht. Bitte hilf mir!
 	translation.ch:... (Em Logan sini Auge lüüchted plötzli uf) Nei, ischer nid. Bitte, hilf mir!
 	[
 		# Link node, tag is next tag

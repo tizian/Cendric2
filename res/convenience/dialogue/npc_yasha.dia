@@ -416,7 +416,7 @@ npc.id:npc_yasha
 	# translation: 
 	translation.tag:DL_Yasha_Reward
 	translation.en:Ahh. I see, your soul is pure and your magic is strong. 
-	translation.de:Ahh. Wie ich sehe ist deine Seele rein und deine Magie stark.
+	translation.de:Ahh. Wie ich sehe, ist deine Seele rein und deine Magie stark.
 	translation.ch:Ahh. We ich gse isch dini Seel rein und dini Magie starch.
 	[
 		# Link node, tag is next tag

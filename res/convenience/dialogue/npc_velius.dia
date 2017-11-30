@@ -365,7 +365,7 @@ npc.id:npc_velius
 	# translation: 
 	translation.tag:DL_Velius_Friends3
 	translation.en:Mages with a strong affinity to a magic type. The three I got now are perfect.
-	translation.de:Magier mit einer starken Affinität zu einer Magieart. Die drei, ich ich jetzt habe, sind perfekt.
+	translation.de:Magier mit einer starken Affinität zu einer Magieart. Die drei, die ich jetzt habe, sind perfekt.
 	translation.ch:Magier mit enere starche Affinität zunere Magierart. Die drei, woni ez ha, sind perfekt.
 	[
 		# Link node, tag is next tag

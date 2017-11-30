@@ -160,7 +160,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Yasha''s Claws
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Yasha''s Claws', 'Yasha''s Klauen','Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item','Yasha''s Claws', 'Yashas Klauen','Yasha''s Klaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle', 'eq_weapon', 600, 350, 270);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_fire, dmg_physical, dmg_light, critical, haste, dmg_ice, max_health) values ('we_doublesickle', 5, 5, 10, 5, 5, 10, 5, 10);
@@ -174,7 +174,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Yasha''s Claws (Fire)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item','Fiery Yasha''s Claws', 'Feurige Yasha''s Klauen','Füürigi Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item','Fiery Yasha''s Claws', 'Feurige Yashas Klauen','Füürigi Yasha''s Klaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_fire', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with fire.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Feuer verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_fire', 'eq_weapon', 750, 600, 440);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_doublesickle_fire', 20, 10, 20, 8, 30, 16);
@@ -188,7 +188,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Yasha''s Claws (Dark)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item','Dark Yasha''s Claws', 'Dunkle Yasha''s Klauen','Dunkli Yasha''s Klaue');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item','Dark Yasha''s Claws', 'Dunkle Yashas Klauen','Dunkli Yasha''s Klaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_doublesickle_dark', 'item_desc', 'The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with gargoyle dust.','Yasha hat mir diese Waffe überlassen nachdem ich sie im Kampf besiegt habe. Jason hat sie mit Gargoylestaub verstärkt.','D''Yasha het mer die Waffe ge nachdem ich si im Kampf besiegt ha. De Jason het si mit Gargoylestaub verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_doublesickle_dark', 'eq_weapon', 750, 650, 440);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_doublesickle_dark', 20, 10, 8, 30, 20, 16);
@@ -216,7 +216,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Jason's Glaive (Fire)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item', 'Jason''s Fiery Glaive','Jason''s Feurige Gleve','Jason''s Füürigi Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item', 'Jason''s Fiery Glaive','Jasons Feurige Gleve','Jason''s Füürigi Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_fire', 'eq_weapon', 750, 500, 430);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_jasonsglaive_fire', 15, 20, 15, 4, 40, 18);
@@ -230,7 +230,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Jason's Glaive (Dark)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item', 'Jason''s Dark Glaive','Jason''s Dunkle Gleve','Jason''s Dunkli Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item', 'Jason''s Dark Glaive','Jasons Dunkle Gleve','Jason''s Dunkli Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 430);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_jasonsglaive_dark', 15, 20, 4, 40, 15, 18);
@@ -245,7 +245,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Yasha's Glaive
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Yasha''s Glaive','Yasha''s Glaive','Yasha''s Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Yasha''s Glaive','Yashas Glaive','Yasha''s Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive', 'eq_weapon', 700, 200, 265);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_fire, dmg_physical, critical, haste, max_health) values ('we_fireglaive', 5, 10, 15, 5, 10, 5);
@@ -259,7 +259,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Yasha's Fiery Glaive
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item', 'Yasha''s Fiery Glaive','Yasha''s Feurige Glaive','Yasha''s Füürigi Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item', 'Yasha''s Fiery Glaive','Yashas Feurige Glaive','Yasha''s Füürigi Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_fire', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs, reinforced with fire.','Eine sehr mächtige Waffe, geschmiedet aus Yasha''s Fangzähnen und mit Feuer verstärkt.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha und mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_fire', 'eq_weapon', 750, 400, 430);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_fireglaive_fire', 20, 15, 20, 6, 20, 17);
@@ -273,7 +273,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Yasha's Dark Glaive
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item', 'Yasha''s Dark Glaive','Yasha''s Dunkle Glaive','Yasha''s Dunkli Gleve');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item', 'Yasha''s Dark Glaive','Yashas Dunkle Glaive','Yasha''s Dunkli Gleve');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive_dark', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs, reinforced with gargoyle dust.','Eine sehr mächtige Waffe, geschmiedet aus Yasha''s Fangzähnen und verstärkt mit Gargoylestaub.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha und verstärcht mit Gargoylestaub.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_fireglaive_dark', 'eq_weapon', 750, 450, 430);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_fireglaive_dark', 20, 15, 6, 20, 20, 17);
@@ -455,7 +455,7 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 
 -- Alastor's Sickles
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item', 'Alastor''s Sickles','Alastor''s Sicheln','Sichle vom Alastor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item', 'Alastor''s Sickles','Alastors Sicheln','Sichle vom Alastor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_janusglaive', 'item_desc', 'This weapon was once used against me, now it''s mine.','Diese Waffe wurde einst gegen mich verwendet, jetzt gehört sie mir.','Die Waffe isch mal gege mich brucht worde, jetz ghört si mir.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_janusglaive', 'eq_weapon', 650, 150, 200);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_janusglaive', 8, 5, 3, 10, 8, 1);
