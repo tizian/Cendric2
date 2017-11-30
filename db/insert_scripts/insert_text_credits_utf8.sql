@@ -139,9 +139,6 @@ Martin
 Markus
 Emi
 
-<<< Spanish Localization >>>
-Juan José Flores González
-
 <<< Proof Reading >>>
 Daniel Josephy Hernández
 
@@ -333,12 +330,6 @@ Martin
 Markus
 Emi
 
-<<< Spanische Übersetzungen >>>
-Juan José Flores González
-
-<<< Korrekturlesen >>>
-Daniel Josephy Hernández
-
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
@@ -525,13 +516,8 @@ Markus
 Emi
 
 <<< Schwiizerdütschi Übersetzige >>>
-Philippe Mercier - Sarganserländer Dialekt
+Philippe Mercier - Sarganserländer Dialekt (Rhendal)
 
-<<< Spanischi Übersetzige >>>
-Juan José Flores González
-
-<<< Korrekturläser >>>
-Daniel Josephy Hernández
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
