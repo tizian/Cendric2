@@ -517,6 +517,9 @@ Emi
 
 <<< Schwiizerdütschi Übersetzige >>>
 Philippe Mercier - Sarganserländer Dialekt (Rhendal)
+Said Tijani - Berner Dialekt (Lloyd)
+Sandro Holderegger - Luzerner Dialekt (Zeff)
+Ajdin Zutic - Luzerner Dialekt (Zeff)
 
 
 <<< Alpha Tester >>>

@@ -8,7 +8,7 @@ DL_Jack_Elysia3:Isch chli schad um die guet Pfanne...
 DL_Jack_WhyNotClerics:Oh, das hani! Aber da hinterhältig Federviechli het sich nid wele zeige wo si go luege sind.
 DL_Jack_WhyNotClerics2:Jetzt glaubed si mer eifach nüm. Aber ich wet echt nid als Vogelfueter ende, drum hoffi er flügt bald wieder weg.
 DL_Jack_HelpJack:Würkli? Du würsch mer en grosse Gfalle mache!
-DL_Jack_HelpJack2:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse damit niemert ufgfresse wird.
+DL_Jack_HelpJack2:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse so dass niemert ufgfresse wird.
 DL_Jack_HelpJack3:Oh und wend grad debi bisch, es wär würkli toll wend mer mini Pfanne zrugghole chöntsch.
 DL_Jack_ElysiaKilled:Du hesches würkli gschafft! Da isch mini guet alt Pfanne.
 DL_Jack_ElysiaKilled2:Jetzt wo das Federviech weg isch chani endlich wieder i min Turm zrugg.

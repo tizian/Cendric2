@@ -30,7 +30,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_Talk
 	translation.en:Here you are. I was looking for you.
 	translation.de:Da bist du also. Nach dir habe ich gerade gesucht.
-	translation.ch:Do bisch also. Noch dir hani grad gsuecht.
+	translation.ch:Da bisch auso. Nach dir hani grad gsuecht.
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -44,7 +44,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_Talk2
 	translation.en:One of Inina's guards just returned and told me about that secret passage. But - much more urgent now - he returned without her! 
 	translation.de:Eine Wache von Inina ist gerade zurückgekehrt und hat mir von diesem geheimen Durchgang erzählt. Doch viel wichtiger ist, dass er ohne sie zurückgekommen ist!
-	translation.ch:E Wach vode Inina isch gradd zruggcho und het mer vo dem gheime Durchgang verzellt. Aber viel wichtiger isch, daser ohni si zruggcho isch!
+	translation.ch:E Wächter vode Inina isch gadd zruggcho und het mer vo däm gheime Durchgang verzeut. Aber, viu wichtiger isch, daser ohni si zrügg isch cho!
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -58,7 +58,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_Talk3
 	translation.en:Inina was abducted whilst you explored the sewers. You shouldn't have left her alone!
 	translation.de:Inina wurde entführt, während du die Kanalisation erkundet hast. Du hättest sie nicht alleine lassen dürfen!
-	translation.ch:D'Inina isch entführt worde, während du d'Kanalisation erkundet hesch! Du hetsch si nid elei loh dörfe.
+	translation.ch:D'Inina isch entführt wordä, während du d'Kanalisation erkundät hesch! Du hätsch se nid dörfe elei la.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -96,7 +96,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_Paladin
 	translation.en:Yes, I'm well aware of this. He was knocked out by her abductors though.
 	translation.de:Ja, das ist mir bekannt. Er wurde jedoch von ihren Entführern bewusstlos geschlagen.
-	translation.ch:Ja, das ischmer bekannt. Er isch aber vo ihrne Entführer bewusstlos gschlage worde.
+	translation.ch:Iu, das ischmr bekannt. Är isch aber vo ihrne Entführer bewusstlos gschlage wordä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -110,7 +110,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_WhoAbducted
 	translation.en:I'd like to know that too. I already talked to the paladin who was accompanying her.
 	translation.de:Das würde ich auch gerne wissen. Ich habe bereits mit dem Paladin geredet, der sie begleitet hat.
-	translation.ch:Das würi au gern wüsse. Ich ha scho mitem Paladin gredt wo si begleitet het.
+	translation.ch:Äuä, das würdi ou gärn wüsse. Ig ha scho mitm Paladin gredet wo se begleitet het.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -124,7 +124,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_WhoAbducted2
 	translation.en:Before he was knocked out, he could see three hooded people.
 	translation.de:Bevor er bewusstlos geschlagen wurde, konnte er drei vermummte Gestalten erkennen.
-	translation.ch:Bevor er bewusstlos gschlage worde isch, heter drü vermummti Gstalte chöne erkenne.
+	translation.ch:Bevor är bewusstlos brätscht wordä isch, hetr drü vermummti Gstaute chöne erkennä.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -139,7 +139,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_WhoAbducted3
 	translation.en:I've recently heard that three mercenaries are currently in the Basilisk Inn - they are our primary suspects. Go and see if they're still there.
 	translation.de:Ich habe kürzlich vernommen, dass drei Söldner im Gasthaus zum Basilisken weilen - sie sind unsere Hauptverdächtigen. Geh und sieh nach, ob sie immer noch dort sind.
-	translation.ch:Ich ha chürzlich ghört, dass drei Söldner grad im Gasthuus zum Basilisk höcklet - si sind üsi Hauptverdächtige. Gang und lueg nah, obs immer na det sind.
+	translation.ch:Ig ha chürzläch ghört, dass drü Söudner grad im Gasthuus zum Basilisk hocke u eis näh - si si üsi Houptverdächtige. Gang ga luege, öbsi immer no dört si.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -153,7 +153,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_WhoAbducted4
 	translation.en:But be careful when questionning them - we don't want to cause a stir.
 	translation.de:Aber sei vorsichtig wenn du sie befragst - wir wollen kein grosses Aufsehen erregen.
-	translation.ch:Aber sig vorsichtig wend si befrögsch - mer wend kes grosses Tamtam mache.
+	translation.ch:Aber bis vorsichtig wese befragsch - mir wöi kes grosses Gliir mache.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -201,7 +201,7 @@ npc.id:npc_lloyd3
 	translation.tag:DL_Lloyd_WhyPaladin
 	translation.en:He's still not very well. Furthermore, they would certainly recognise him.
 	translation.de:Er ist noch nicht genesen. Ausserdem würden sie ihn erkennen.
-	translation.ch:Er isch nonid ganz uf de Bei. Usserdem würded si ihn erkenne.
+	translation.ch:Är isch nonid ganz uf de Bei. Usserdäm würdesine erkennä.
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -9,4 +9,4 @@ DL_Lloyd_KillBird:Hm, de Jack het mer vo dem Monster verzellt, aber mir hends ni
 DL_Lloyd_NothingImportant:Hmm. Das isch es zimlich ussergwöhnlichs Gwitter gsi. Aber wend meinsch...
 DL_Lloyd_YourJob:Du hesch also de Vogel erledigt vo dem de Jack üs verzellt het? Guet gmacht.
 DL_Lloyd_HurryUp:Trotzdem brucht d''Inina immer na dini Hilf bim Erforsche vo dene komische Höhle. Si isch ez scho zu lang weg.
-DL_Lloyd_HurryUp2:Ich wett dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
+DL_Lloyd_HurryUp2:Ich wett, dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
