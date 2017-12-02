@@ -21,9 +21,7 @@ public:
 	~SpellSlot();
 
 	void setPosition(const sf::Vector2f& pos) override;
-
 	void render(sf::RenderTarget& renderTarget) override;
-
 	void update(const sf::Time& frameTime) override;
 
 	void playAnimation(const sf::Time& cooldown);

@@ -125,8 +125,6 @@ void WeaponWindow::init() {
 	m_noSlotsText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_noSlotsText.setColor(COLOR_WHITE);
 	m_noSlotsText.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET, TOP + Spellbook::SPELL_OFFSET));
-
-	reload();
 }
 
 WeaponWindow::~WeaponWindow() {
@@ -283,7 +281,7 @@ void WeaponWindow::handleDragAndDrop() {
 				m_currentSpellClone = new SlotClone(m_selectedSpellSlot);
 				m_currentSpellClone->setPosition(mousePos - sf::Vector2f(SpellSlot::SIZE / 2.f, SpellSlot::SIZE / 2.f));
 				m_selectedSpellSlot->deactivate();
-				highlightSpellSlots(m_selectedSpellSlot->getSpellType(), true);
+				highlightSpellSlots(SpellData::getSpellData(m_selectedSpellSlot->getSpellID()).spellType, true);
 			}
 		}
 	}
@@ -380,7 +378,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
 	const SpellSlot* ss = static_cast<const SpellSlot*>(clone->getOriginalSlot());
-	SpellType type = ss->getSpellType();
+	SpellType type = SpellData::getSpellData(ss->getSpellID()).spellType;
 	for (auto& slot : m_weaponSlots) {
 		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) 
 			&& fastIntersect(*clone->getBoundingBox(), *slot.first.getBoundingBox())) 
@@ -423,7 +421,6 @@ void WeaponWindow::equipSpell(const SpellSlot* spellSlot) {
 }
 
 void WeaponWindow::show() {
-	reload();
 	m_isVisible = true;
 }
 

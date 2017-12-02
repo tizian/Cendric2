@@ -177,6 +177,7 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 }
 
 void LevelMainCharacter::loadWeapon() {
+	clearOwnSpells();
 	m_spellManager->clearSpells();
 	// chop is always set.
 	m_spellKeyMap.clear();
@@ -289,6 +290,17 @@ void LevelMainCharacter::reloadEquipment() {
 
 void LevelMainCharacter::reloadWeapon() {
 	loadWeapon();
+}
+
+void LevelMainCharacter::clearOwnSpells() {
+	for (auto go : *m_screen->getObjects(GameObjectType::_Spell)) {
+		auto spell = dynamic_cast<Spell*>(go);
+		if (!spell) continue;
+		
+		if (spell->getOwner() == this) {
+			spell->setDisposed();
+		}
+	}
 }
 
 void LevelMainCharacter::reloadAttributes() {
