@@ -29,7 +29,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_BeGone
 	translation.en:What are you doing here? You're disturbing the peace of the dead. Be gone!
 	translation.de:Was machst du hier? Du störst die Ruhe der Toten. Hinfort mit dir.
-	translation.ch:Was machsch du da? Du störsch d'Rueh vode Tote. Husch, furt mit dir!
+	translation.ch:Was machsch du do? Du störsch d'Rueh vo dä Tote. Abfaahrä!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -44,7 +44,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_Necromancers
 	translation.en:Be careful with this magic, boy...
 	translation.de:Pass auf mit dieser Magie, Junge...
-	translation.ch:Pass uf mit dere Magie, Bueb...
+	translation.ch:Uffbassä mit dere Magie, Bueb...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -101,7 +101,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_Syrah
 	translation.en:Ah, Syrah. (Morton stares at you) Why does she always hire guys like you. 
 	translation.de:Ah, Syrah. (Morton starrt dich an) Wieso heuert sie auch immer Typen wie dich für ihre Aufträge an.
-	translation.ch:Ah, d'Syrah. (De Morton starrt dich ah) Weso stellt si au immer so Type we dich ah.
+	translation.ch:Ah, d'Syrah. (Dr Morton starrt di aa) Wurumm stellt sie au immer so Type wie dich aa.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -116,7 +116,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_Syrah2
 	translation.en:(Sighs) You can go in. But hurry up and don't touch anything you don't need.
 	translation.de:(Seufzt) Du kannst rein. Aber beeil dich und fass nichts an, das du nicht brauchst.
-	translation.ch:(Süüfzet) Du chasch ie. Aber mach chli schnell und lang nüt ah wod nid bruchsch.
+	translation.ch:(Seufzt) Chasch iinä. Aber bressier und nüt aadööplä wod nid bruchsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -131,7 +131,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_GuysLikeMe
 	translation.en:Green no-goods. The last one she sent to the crypt has never gotten out again.
 	translation.de:Grünschnäblige Nichtsnutze. Der letzte, den sie hierher geschickt hat, ist nie wieder herausgekommen.
-	translation.ch:Grüenschnäbligi Nichtsnutz. De letzt, wo si da ane gschickt het, isch nie wider usecho.
+	translation.ch:Grienschnääbligi Nichtsnütz. Dr letscht, wo sie do ane gschickt het, isch nie me usecho.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -146,7 +146,7 @@ npc.id:npc_morton
 	translation.tag:DL_Morton_OtherGuy
 	translation.en:Yes, yes. Red hair, seemed to be as old as you and exactly as greenly. But no more chit-chat, I need to work.
 	translation.de:Ja, ja. Rotes Haar, war etwa so alt wie du und genau so naiv. Aber genug geredet, ich muss jetzt arbeiten.
-	translation.ch:Jo, jo. Roti Hoore, isch öppe so alt gsi we du und genau so naiv. Aber gnueg gschnorret, ich mun ez schaffe.
+	translation.ch:Jo, jo. Roti Hoor, isch öppä so alt gsi wie du und genau so naiv. Aber gnueg gschnuuret, ich mues jetzt schaffe.
 	[
 		# Link node, tag is next tag
 		tag:-1

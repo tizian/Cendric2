@@ -520,6 +520,8 @@ Philippe Mercier - Sarganserländer Dialekt (Rhendal)
 Said Tijani - Berner Dialekt (Lloyd)
 Sandro Holderegger - Luzerner Dialekt (Zeff)
 Ajdin Zutic - Luzerner Dialekt (Zeff)
+Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
+
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

@@ -3,6 +3,7 @@
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
 #include "World/DoorTile.h"
+#include "Level/DynamicTiles/LeverDependentTile.h"
 
 class DoorLevelTile final : public virtual LevelDynamicTile, public virtual DoorTile, public virtual LeverDependentTile {
 public:
@@ -17,6 +18,10 @@ public:
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Door; }
 	GameObjectType getConfiguredType() const override { return LevelDynamicTile::getConfiguredType(); }
 	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
+
+	void setInitialState(bool on) override;
+	void switchTile() override;
+	bool isSwitchable() const override;
 
 private:
 	std::string getSpritePath() const override;

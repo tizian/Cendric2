@@ -20,6 +20,8 @@ public:
 	void setEnabled(bool enabled) override;
 	void setJumpLock();
 
+	void flipGravity() override;
+
 private:
 	// makes it easier to jump
 	static const sf::Time JUMP_GRACE_TIME;
