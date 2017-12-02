@@ -1261,7 +1261,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light" visible="0">
+ <objectgroup name="light">
   <object id="124" x="733" y="1468" width="174" height="201">
    <ellipse/>
   </object>
@@ -1284,9 +1284,6 @@
    <properties>
     <property name="brightness" value="0.6"/>
    </properties>
-   <ellipse/>
-  </object>
-  <object id="151" x="1468.5" y="2568" width="189" height="242">
    <ellipse/>
   </object>
  </objectgroup>

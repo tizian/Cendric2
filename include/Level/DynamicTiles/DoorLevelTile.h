@@ -4,7 +4,7 @@
 #include "Level/LevelDynamicTile.h"
 #include "World/DoorTile.h"
 
-class DoorLevelTile final : public virtual LevelDynamicTile, public virtual DoorTile {
+class DoorLevelTile final : public virtual LevelDynamicTile, public virtual DoorTile, public virtual LeverDependentTile {
 public:
 	DoorLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {}
 	bool init(const LevelTileProperties& properties) override;

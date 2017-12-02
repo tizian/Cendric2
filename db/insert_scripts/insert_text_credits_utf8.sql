@@ -521,7 +521,6 @@ Said Tijani - Berner Dialekt (Lloyd)
 Sandro Holderegger - Luzerner Dialekt (Zeff)
 Ajdin Zutic - Luzerner Dialekt (Zeff)
 
-
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
