@@ -164,6 +164,7 @@ Pascal
 Nick
 Lord Heinrich
 Jerome
+Dave
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
@@ -352,6 +353,22 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
+
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+Dave
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
@@ -545,6 +562,22 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
+
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+Dave
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild
