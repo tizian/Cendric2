@@ -46,3 +46,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Jo
 J.','Komm zur Krypta von Gandria.
 J.','Chum zude Krypta vo Gandria.
 J.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignRandalf','sign','Don''t use too much oil when burning heretics!','Benutze nicht zuviel Öl beim Verbrennen von Ketzern!','Bruch nid z''viel Öl bim Verbenne vo Ketzer!');

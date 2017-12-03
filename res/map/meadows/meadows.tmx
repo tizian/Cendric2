@@ -147,8 +147,8 @@
  <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="1382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="1382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
   <data encoding="csv">
@@ -1211,7 +1211,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="218" x="2063.12" y="571" width="17.75" height="14">
+  <object id="218" x="2100" y="600" width="17.75" height="14">
    <properties>
     <property name="level entry" value="res/level/forest/forest.tmx,2180,3210"/>
     <property name="persistent" value=""/>
@@ -1251,12 +1251,6 @@
   <object id="253" x="3300" y="1425" width="50" height="36">
    <properties>
     <property name="level entry" value="res/level/crypt/crypt.tmx,1660,1910"/>
-    <property name="persistent" value=""/>
-   </properties>
-  </object>
-  <object id="256" x="2200" y="600" width="25" height="12.5">
-   <properties>
-    <property name="level entry" value="res/level/ppuzzle01/ppuzzle01.tmx,350,4760"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

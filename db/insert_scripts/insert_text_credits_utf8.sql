@@ -150,6 +150,21 @@ Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
 
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
 Pascal Josephy for the web support
@@ -521,7 +536,7 @@ Said Tijani - Berner Dialekt (Lloyd)
 Sandro Holderegger - Luzerner Dialekt (Zeff)
 Ajdin Zutic - Luzerner Dialekt (Zeff)
 Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
-
+Christian Brunner - Luzerner Dialekt (Wirt)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

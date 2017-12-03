@@ -184,6 +184,8 @@ public:
 	void notifyAchievementUnlocked(const std::string& achievement);
 	// increase death count by one
 	void increaseDeathCount(const std::string& level);
+	// marks the player as a cheater
+	void setHashInvalid();
 
 protected:
 	// protected constructor for copying

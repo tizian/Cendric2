@@ -873,3 +873,7 @@ void CharacterCore::increaseDeathCount(const std::string& level) {
 	if (!contains(m_data.levelDeaths, level)) return;
 	m_data.levelDeaths.at(level)++;
 }
+
+void CharacterCore::setHashInvalid() {
+	m_data.hashValid = false;
+}

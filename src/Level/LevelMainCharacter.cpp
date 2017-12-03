@@ -305,11 +305,11 @@ void LevelMainCharacter::clearOwnSpells() {
 
 void LevelMainCharacter::reloadAttributes() {
 	// reloading attributes won't heal you, my dear.
-	// it will even remove food
-	dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::VOID);
 	auto missingHealth = m_attributes.maxHealthPoints - m_attributes.currentHealthPoints;
 	m_attributes = m_core->getTotalAttributes();
 	m_attributes.currentHealthPoints = std::max(0, m_attributes.currentHealthPoints - missingHealth);
+	// add food again
+	m_attributes.addBean(m_foodAttributes.second);
 }
 
 void LevelMainCharacter::setInvisibilityLevel(int level) {
