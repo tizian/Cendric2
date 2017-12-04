@@ -107,6 +107,7 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 
 	m_interface->reloadInventory();
 	m_interface->reloadCharacterInfo();
+	m_interface->reloadSpellBook();
 }
 
 void WorldScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition) {
