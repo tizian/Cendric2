@@ -211,8 +211,7 @@ MovingBehavior* JeremyBoss::createMovingBehavior(bool asAlly) {
 }
 
 AttackingBehavior* JeremyBoss::createAttackingBehavior(bool asAlly) {
-	EnemyAttackingBehavior* behavior;
-	behavior = new AggressiveBehavior(this);
+	EnemyAttackingBehavior* behavior = new AggressiveBehavior(this);
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&JeremyBoss::handleAttackInput, this));
 	return behavior;

@@ -46,5 +46,6 @@ enum class EnemyID {
 	Boss_Royalguard_T,
 	King,
 	Boss_Velius,
+	VeliusVictim,
 	MAX
 };

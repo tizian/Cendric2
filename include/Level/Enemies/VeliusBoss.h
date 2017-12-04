@@ -42,4 +42,6 @@ protected:
 
 private:
 	MirrorRay* m_ray = nullptr;
+
+
 };

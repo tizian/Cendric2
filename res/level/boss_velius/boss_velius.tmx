@@ -319,5 +319,23 @@
  <objectgroup name="trigger"/>
  <objectgroup name="enemy">
   <object id="125" gid="1387" x="750" y="600" width="50" height="50"/>
+  <object id="160" gid="1388" x="750" y="600" width="50" height="50">
+	<properties>
+		<property name="skinnr" value="0"/>
+		<property name="name" value="Koray"/>
+	</properties>
+  </object>
+  <object id="161" gid="1388" x="750" y="600" width="50" height="50">
+	<properties>
+		<property name="skinnr" value="1"/>
+		<property name="name" value="Robert"/>
+	</properties>
+  </object>
+  <object id="162" gid="1388" x="750" y="600" width="50" height="50">
+	<properties>
+		<property name="skinnr" value="2"/>
+		<property name="name" value="Inina"/>
+	</properties>
+  </object>
  </objectgroup>
 </map>

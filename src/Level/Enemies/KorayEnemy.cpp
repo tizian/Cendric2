@@ -34,9 +34,7 @@ float KorayEnemy::getConfiguredDistanceToHPBar() const {
 	return 30.f;
 }
 
-void KorayEnemy::handleAttackInput() {
-	return;
-}
+void KorayEnemy::handleAttackInput() {}
 
 void KorayEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
