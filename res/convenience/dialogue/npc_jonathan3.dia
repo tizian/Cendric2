@@ -176,7 +176,7 @@ npc.id:npc_jonathan3
 	# translation: 
 	translation.tag:DL_Jonathan_WrongName
 	translation.en:Okay, let's try it... (Jonathan mumbles a spell) Hm. It didn't work.
-	translation.de:Okay, versuchen wirs... (Jonathan murmelt einen Zauber) Hm. Hat nicht funktioniert.
+	translation.de:Okay, versuchen wir's... (Jonathan murmelt einen Zauber) Hm. Hat nicht funktioniert.
 	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber) Hm. Het nid funktioniert.
 	[
 		# Link node, tag is next tag
@@ -190,7 +190,7 @@ npc.id:npc_jonathan3
 	# translation: 
 	translation.tag:DL_Jonathan_CorrectName
 	translation.en:Okay, let's try it... (Jonathan mumbles a spell)
-	translation.de:Okay, versuchen wirs... (Jonathan murmelt einen Zauber) 
+	translation.de:Okay, versuchen wir's... (Jonathan murmelt einen Zauber) 
 	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber)
 	[
 		# Link node, tag is next tag

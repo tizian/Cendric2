@@ -27,6 +27,7 @@ protected:
 	bool m_isOpen;
 	bool m_isInitialized = false;
 	bool m_isReloadNeeded = false;
+	bool m_isLeverDependent = false;
 	bool m_isConditionsFulfilled;
 	int m_strength = 0;
 	

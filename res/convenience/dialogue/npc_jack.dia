@@ -186,7 +186,7 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_WhyNotClerics
 	translation.en:Oh, I did! But that sneaky chicken wouldn't show up when they looked for it.
-	translation.de:Oh, das habe ich! Aber dieses hinterhältige Federvieh wollte sich nicht zeigen als sie es gesucht haben.
+	translation.de:Oh, das habe ich! Aber dieses hinterhältige Federvieh wollte sich nicht zeigen, als sie es gesucht haben.
 	translation.ch:Oh, das hani! Aber da hinterhältig Federviechli het sich nid wele zeige wo si go luege sind.
 	[
 		# Link node, tag is next tag
@@ -231,8 +231,8 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_HelpJack2
 	translation.en:Here, take the key to my lighthouse. I locked it to prevent people from getting eaten.
-	translation.de:Da, nimm den Schlüssel zu meinem Leuchtturm. Ich hatte ihn zugeschlossen damit niemand gefressen wird.
-	translation.ch:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse damit niemert ufgfresse wird.
+	translation.de:Da, nimm den Schlüssel zu meinem Leuchtturm. Ich hatte ihn zugeschlossen, damit niemand gefressen wird.
+	translation.ch:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse so dass niemert ufgfresse wird.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -246,7 +246,7 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_HelpJack3
 	translation.en:Oh, and while you're on it, it would be awesome if you could get me my frying pan back.
-	translation.de:Oh und wenn du schon dabei bist, es wäre toll wenn du mir meine Pfanne wiederbringen könntest.
+	translation.de:Oh und wenn du schon dabei bist, es wäre toll, wenn du mir meine Pfanne wiederbringen könntest.
 	translation.ch:Oh und wend grad debi bisch, es wär würkli toll wend mer mini Pfanne zrugghole chöntsch.
 	[
 		# Link node, tag is next tag
@@ -292,7 +292,7 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_ElysiaKilled3
 	translation.en:Here, take the gold I was going to spend here, I don't need it anymore.
-	translation.de:Hier, nimm das Gold dass ich hier ausgeben wollte, jetzt brauch ich's nicht mehr.
+	translation.de:Hier, nimm das Gold, das ich hier ausgeben wollte, jetzt brauch ich's nicht mehr.
 	translation.ch:Da, nimm's Gold woni da ha wele usge, da bruchi ez nüm.
 	[
 		# Link node, tag is next tag

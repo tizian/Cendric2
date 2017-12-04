@@ -32,6 +32,12 @@ bool ChestMapTile::init(const MapTileProperties& properties) {
 		addComponent(new LightComponent(m_lightData, this));
 	}
 
+	auto items = m_screen->getCharacterCore()->getStoredItems();
+	auto gold = m_screen->getCharacterCore()->getStoredGold();
+	if (m_isStoredItems && items.empty() && gold == 0) {
+		setDisposed();
+	}
+
 	return true;
 }
 
@@ -104,12 +110,12 @@ void ChestMapTile::loot() {
 	MapScreen* screen = dynamic_cast<MapScreen*>(m_screen);
 
 	if (m_isStoredItems) {
-		auto items = screen->getCharacterCore()->retrieveStoredItems();
+		auto items = screen->getCharacterCore()->getStoredItems();
 		for (auto& item : items) {
 			screen->notifyItemChange(item.first, item.second);
 		}
-		screen->notifyItemChange("gold", screen->getCharacterCore()->retrieveStoredGold());
-		
+		screen->notifyItemChange("gold", screen->getCharacterCore()->getStoredGold());
+		screen->getCharacterCore()->resetStoredItems();
 	}
 	else {
 		for (auto& item : m_lootableItems) {

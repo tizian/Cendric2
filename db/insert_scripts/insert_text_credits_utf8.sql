@@ -68,6 +68,8 @@ Peter
 
 "Yasha'' Theme"
 
+"Lighthouse Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -91,8 +93,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
@@ -139,9 +139,6 @@ Martin
 Markus
 Emi
 
-<<< Spanish Localization >>>
-Juan José Flores González
-
 <<< Proof Reading >>>
 Daniel Josephy Hernández
 
@@ -152,6 +149,22 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
+
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+Dave
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
@@ -262,6 +275,8 @@ Peter
 
 "Yasha'' Theme"
 
+"Lighthouse Theme"
+
 ---
 
 -- Susanne Aubert --
@@ -285,8 +300,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
@@ -333,12 +346,6 @@ Martin
 Markus
 Emi
 
-<<< Spanische Übersetzungen >>>
-Juan José Flores González
-
-<<< Korrekturlesen >>>
-Daniel Josephy Hernández
-
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
 Pascal Oberholzer, Daniel Josephy Hernández, 
@@ -346,6 +353,22 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
+
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+Dave
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
@@ -451,7 +474,9 @@ Peter
 
 "Zeff''s Theme"
 
-"Yasha'' Theme"
+"Yasha''s Theme"
+
+"Lighthouse Theme"
 
 ---
 
@@ -476,8 +501,6 @@ Peter
 "Khajag''s Theme"
 
 "Elysia''s Theme"
-
-"Lighthouse Theme"
 
 ---
 
@@ -525,13 +548,12 @@ Markus
 Emi
 
 <<< Schwiizerdütschi Übersetzige >>>
-Philippe Mercier - Sarganserländer Dialekt
-
-<<< Spanischi Übersetzige >>>
-Juan José Flores González
-
-<<< Korrekturläser >>>
-Daniel Josephy Hernández
+Philippe Mercier - Sarganserländer Dialekt (Rhendal)
+Said Tijani - Berner Dialekt (Lloyd)
+Sandro Holderegger - Luzerner Dialekt (Zeff)
+Ajdin Zutic - Luzerner Dialekt (Zeff)
+Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
+Christian Brunner - Luzerner Dialekt (Wirt)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
@@ -540,6 +562,22 @@ Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
 Kwon, Jerome, Peter
+
+<<< Beta Tester >>>
+Peter
+Randalf
+Martin
+Patrick
+Iris
+Tank
+Sebastian
+Lukas
+Ramón
+Pascal
+Nick
+Lord Heinrich
+Jerome
+Dave
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild

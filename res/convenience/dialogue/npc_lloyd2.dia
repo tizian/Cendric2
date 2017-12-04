@@ -38,7 +38,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_WhatsGoingOn
 	translation.en:By the Eternal Light! What's going on here?
 	translation.de:Beim Ewigen Licht! Was ist hier eigentlich los?
-	translation.ch:Was - bim Ewige Liecht - lauft do eigentlich?
+	translation.ch:Was - bim Ewigä Liächt - louft do eigentläch?
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -69,7 +69,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_ReadLetter
 	translation.en:(Lloyd reads the letter) Hm, interesting. Thank you for helping us with that problem.
 	translation.de:(Lloyd liest den Brief) Hm, interessant. Danke, dass du uns bei diesem Problem geholfen hast.
-	translation.ch:(De Lloyd list de Brief) Hm, interessant. Danke, dass üs mit dem Problem gholfe hesch.
+	translation.ch:(Dr Lloyd list dr Brief) Hm, interessant. Merci dass du üs mit däm Problem hesch ghufä.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -84,7 +84,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_ReadLetter2
 	translation.en:Inina wanted you to join the Clerics, but you've already made another decision.
 	translation.de:Inina wollte, dass du den Klerikern beitrittst, doch du hast dich bereits anders entschieden.
-	translation.ch:D'Inina het wele dass du de Kleriker biitrittsch, doch du hesch dich scho andersch entschide.
+	translation.ch:D'Inina het wöue dass du de Kleriker biträtisch, doch du hesch di scho angersch entschidä.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -100,7 +100,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_ReadLetter3
 	translation.en:She also wrote that she needs your help again, looking for hints that could help us find out where that beast came from.
 	translation.de:Sie schreibt auch dass sie nochmals deine Hilfe benötigt, beim Suchen von weiteren Hinweisen, wo diese Biest hergekommen ist.
-	translation.ch:Si schriibt au dass si nomol dini Hilf bruucht, bim Sueche vo wiitere Hiiwis wo das Biescht hercho isch.
+	translation.ch:Si schribt ou dass si nomou dini Hiuf bruucht, bim Sueche vo wiitere Hiiwisä wo das Viech härcho isch.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -115,7 +115,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_ReadLetter4
 	translation.en:But first, back to that lighthouse, what was going on there?
 	translation.de:Aber zuerst zurück zu diesem Leuchtturm, was ist dort passiert?
-	translation.ch:Aber zersch zrugg zu dem Lüüchtturm, was isch det passiert?
+	translation.ch:Aber zersch zrugg zu däm Lüüchtturm, was isch dört passiert?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -177,7 +177,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_KillBird
 	translation.en:Hm, Jack told me about that monster, but we've never seen it. Good job on hunting it down.
 	translation.de:Hm, Jack hat mir von diesem Monster erzählt, aber wir haben es nie gesehen. Gute Arbeit.
-	translation.ch:Hm, de Jack het mer vo dem Monster verzellt, aber mir hends nie gse. Guet gmacht.
+	translation.ch:Hm, de Jack het mir vo däm Monschter verzeut, aber mir heis nie gseh. Guet gmacht.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -192,7 +192,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_NothingImportant
 	translation.en:Hmm. It seemed to be a quite extraordinary thunderstorm. But if you say so...
 	translation.de:Hmm. Das war ein ziemlich aussergewöhnliches Gewitter. Aber wenn du meinst...
-	translation.ch:Hmm. Das isch es zimlich ussergwöhnlichs Gwitter gsi. Aber wend meinsch...
+	translation.ch:Hmm. Das isch es zimläch ussergwöhnlächs Gwitter gsi. Aber wede meinsch...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -207,7 +207,7 @@ npc.id:npc_lloyd2
 	translation.tag:DL_Lloyd_YourJob
 	translation.en:Which means that you've slain that bird Jack told us about? Good job on hunting it down.
 	translation.de:Du hast also diesen Vogel erledigt, von dem uns Jack erzählt hat? Gute Arbeit.
-	translation.ch:Du hesch also de Vogel erledigt vo dem de Jack üs verzellt het? Guet gmacht.
+	translation.ch:Du hesch auso dr Vogu erleit vo däm üs dr Jack verzeut het? Guet gmacht.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -220,8 +220,8 @@ npc.id:npc_lloyd2
 	# translation: 
 	translation.tag:DL_Lloyd_HurryUp
 	translation.en:Nevertheless, Inina still needs your help discovering the strange caverns. She's been away for too long now.
-	translation.de:Trotzdem braucht Inina immer noch deine Hilfe was das Erkunden dieser seltsamen Höhlen angeht. Sie ist jetzt schon zu lange weg.
-	translation.ch:Trotzdem brucht d'Inina immer na dini Hilf bim Erforsche vo dene komische Höhle. Si isch ez scho zu lang weg.
+	translation.de:Trotzdem braucht Inina immer noch deine Hilfe, was das Erkunden dieser seltsamen Höhlen angeht. Sie ist jetzt schon zu lange weg.
+	translation.ch:Trotzdäm brucht d'Inina immer no dini Hiuf bim Erforschä vode komischä Höhlinä. Si isch jetz scho zlang wäg.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -235,8 +235,8 @@ npc.id:npc_lloyd2
 	# translation: 
 	translation.tag:DL_Lloyd_HurryUp2
 	translation.en:I want you to immediately go back to the caverns and support her. That's not a request!
-	translation.de:Ich will dass du ohne weitere Abstecher zurück zu den Höhlen gehst und sie unterstützt. Das ist keine Bitte!
-	translation.ch:Ich wett dass du ohni wiiteri Abstecher zrugg id Höhlene gasch und si unterstützisch. Das isch kei Bitt!
+	translation.de:Ich will, dass du ohne weitere Abstecher zurück zu den Höhlen gehst und sie unterstützt. Das ist keine Bitte!
+	translation.ch:Ich möcht, dass du ohni wiiteri Abstächer zrugg id Höhlinä geisch und se ungerstützisch. Das isch ke Bitt!
 	[
 		# Link node, tag is next tag
 		tag:-2

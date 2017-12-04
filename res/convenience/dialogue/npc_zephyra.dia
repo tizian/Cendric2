@@ -148,7 +148,7 @@ npc.id:npc_zephyra
 	# translation: 
 	translation.tag:DL_Zephyra_WhoAreYou
 	translation.en:I'm Zephrya, hermit and shaman of Yasha.
-	translation.de:Ich bin Zephyra, Einsiedlerin und Yasha's Schamanin. 
+	translation.de:Ich bin Zephyra, Einsiedlerin und Yashas Schamanin. 
 	translation.ch:Ich bin d'Zephyra, Einsiedlerin und de Yasha ihri Schamanin.
 	[
 		# Link node, tag is next tag
@@ -287,7 +287,7 @@ npc.id:npc_zephyra
 	# translation: 
 	translation.tag:DL_Zephyra_WhoMages
 	translation.en:Hm. There was one women, fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
-	translation.de:Hm. Eine davon war eine Frau, helles Haar, ein weisses Kleid. Da war auch ein Junge, etwa so alt wie du, mit rotem, verstrubbelten Haaren.
+	translation.de:Hm. Eine davon war eine Frau, helles Haar, ein weisses Kleid. Da war auch ein Junge, etwa so alt wie du, mit roten, verstrubbelten Haaren.
 	translation.ch:Hm. Eini devo isch e Frau gsi, helli Hoor, es wisses Chleid. Es het au en Bueb debi gha, öppe so alt we du, roti, strubbeligi Hoore.
 	[
 		# Link node, tag is next tag

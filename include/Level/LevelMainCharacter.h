@@ -39,6 +39,7 @@ public:
 	void reloadEquipment();
 	void reloadAttributes();
 	void reloadWeapon();
+	void clearOwnSpells();
 
 	void setCharacterCore(CharacterCore* core);
 	void setInvisibilityLevel(int level);

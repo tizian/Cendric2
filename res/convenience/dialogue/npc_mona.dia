@@ -193,7 +193,7 @@ npc.id:npc_mona
 	# translation: 
 	translation.tag:DL_Mona_OnlyMeet
 	translation.en:Then you can wait until they leave again. If you go up there, you'll have to pay.
-	translation.de:Dann musst du warten bis sie wieder gehen. Wenn du nach oben willst, musst du zahlen.
+	translation.de:Dann musst du warten, bis sie wieder gehen. Wenn du nach oben willst, musst du zahlen.
 	translation.ch:Denn muesch hald warte bis si wieder gönd. Wend uega wetsch muesch au zahle.
 	[
 		# Link node, tag is next tag

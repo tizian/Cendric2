@@ -10,7 +10,7 @@ DL_Lloyd_FoundLetter:Interessant. Zeig mol.
 DL_Lloyd_FoundLetter2:Es schiint vo ihrem Uftraggeber z''sii. (Murmlet) Magier... Zeiche... Wer isch de "V."?
 DL_Lloyd_FoundLetter3:Do, nimmen wieder. Öppert verschleppt immerno Magier. D''Inina isch nid di einzig, wo vermisst wird.
 DL_Lloyd_FoundLetter4:Ich ha scho vo anderne Fäll ghört. Mer mönd öppis degege mache!
-DL_Lloyd_FoundLetter5:De Author vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
+DL_Lloyd_FoundLetter5:De Autor vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
 DL_Lloyd_FoundLetter6:Oh und wennd irgendwelchi Hiiwis vo wege de Inina findsch - verzell mer devo.
 DL_Lloyd_WhereSearch:Ich glaub er meint s''Hochland vo Admantris, westlich vom Sumpfland.
 DL_Lloyd_WhyWork:Admantris isch in Gfohr. Gandria isch in Gfohr. Und du bisch wahrschindli au in Gfohr. Weso sötsch mer nid helfe?

@@ -468,7 +468,12 @@
     <property name="gold" value="10"/>
    </properties>
   </object>
-  <object id="135" gid="767" x="248" y="495" width="50" height="50"/>
+  <object id="135" gid="767" x="250" y="500" width="50" height="50">
+   <properties>
+    <property name="fo_ham" value="1"/>
+    <property name="gold" value="5"/>
+   </properties>
+  </object>
   <object id="119" gid="821" x="2550" y="1250" width="50" height="50">
    <properties>
     <property name="text" value="NeedIce"/>

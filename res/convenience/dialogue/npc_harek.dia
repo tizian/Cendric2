@@ -522,7 +522,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_PearlSabre
 	translation.en:Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
-	translation.de:Magische Perlen! Es ist lange her seit ich solche in den Händen gehalten habe... Die werden einen hübschen Säbel abgeben.
+	translation.de:Magische Perlen! Es ist lange her, seit ich solche in den Händen gehalten habe... Die werden einen hübschen Säbel abgeben.
 	translation.ch:Magischi Perle! Es isch lang her sit ich sonigi ide Händ gha ha... Die werded en prima Säbel ge.
 	[
 		# Link node, tag is next tag
@@ -551,7 +551,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_JanusGlaive
 	translation.en:Hm, I really start to wonder where you get this stuff from.
-	translation.de:Hm, langsam frage ich mich wirklich woher du diese Dinge bekommst die du mir bringst.
+	translation.de:Hm, langsam frage ich mich wirklich, woher du diese Dinge bekommst, die du mir bringst.
 	translation.ch:Hm, langsam frögi mi würkli woher du die Sache bechunsch wod mer bringsch.
 	[
 		# Link node, tag is next tag

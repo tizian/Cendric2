@@ -570,7 +570,7 @@ npc.id:npc_lloyd
 	# translation: 
 	translation.tag:DL_Lloyd_YashaStart4
 	translation.en:There's an abadoned temple, guarded by a demon in the Highlands of Admantris. Find this temple and face its tests.
-	translation.de:Es gibt einen verlassenen Temel im Hochland von Admantris, der von einem Dämon bewacht wird. Du musst diesen Tempel finden und dich seinen Prüfungen stellen. 
+	translation.de:Es gibt einen verlassenen Tempel im Hochland von Admantris, der von einem Dämon bewacht wird. Du musst diesen Tempel finden und dich seinen Prüfungen stellen. 
 	translation.ch:Es git en verlassene Tempel im Hochland vo Admantris, wo vomne Dämon bewacht wird. Du muesch de Tempel finde und dich sine Prüefige stelle.
 	[
 		# Link node, tag is next tag
@@ -599,7 +599,7 @@ npc.id:npc_lloyd
 	# translation: 
 	translation.tag:DL_Lloyd_YashaStart6
 	translation.en:If your faith is strong, you won't only survive it, but also gain the power to never ever get stuck in a dark abyss again. 
-	translation.de:Wenn dein Glaube stark ist, wirst du es nicht nur überleben, sondern auch die Fähigkeit gewinnen, nie mehr in einem solchen dunkeln Abgrund festzustecken.
+	translation.de:Wenn dein Glaube stark ist, wirst du es nicht nur überleben, sondern auch die Fähigkeit gewinnen, nie mehr in einem solchen dunklen Abgrund festzustecken.
 	translation.ch:Wenn din Glaube starch isch, wirsches nid nur überlebe, sondern au d'Fähigkeit becho, nie me i somne dunkle Abgrund stecke z'bliibe.
 	[
 		# Link node, tag is next tag

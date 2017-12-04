@@ -224,7 +224,7 @@ npc.id:npc_rana
 		# translation: 
 		translation.tag:DL_Choice_BefriendedYasha
 		translation.en:She's not sleeping anymore, I made friends with her.
-		translation.de:Sie schläft nicht mehr, ich habe mit mit ihr angefreundet.
+		translation.de:Sie schläft nicht mehr, ich habe mich mit ihr angefreundet.
 		translation.ch:Si schloft nümme, ich bi ez ihre Kolleg.
 	]
 	[

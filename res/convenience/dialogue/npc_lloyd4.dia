@@ -47,7 +47,7 @@ npc.id:npc_lloyd4
 	# translation: 
 	translation.tag:DL_Lloyd_Hello2
 	translation.en:(Shocked) You killed them? I told you to interrogate them and to be careful! They were our only suspects!
-	translation.de:(Schockiert) Du hast sie getötet? Ich hab dir doch gesagt du sollst sie befragen, und zwar vorsichtig! Sie waren unsere einzigen Verdächtigen!
+	translation.de:(Schockiert) Du hast sie getötet? Ich hab dir doch gesagt, du sollst sie befragen, und zwar vorsichtig! Sie waren unsere einzigen Verdächtigen!
 	translation.ch:(Schockiert) Du hesch si killt? Ich ha der doch gseit du sölsch si befröge, und zwar vorsichthig! Si sind üsi einzige Verdächtige gsi!
 	[
 		# Link node, tag is next tag
@@ -129,7 +129,7 @@ npc.id:npc_lloyd4
 	# translation: 
 	translation.tag:DL_Lloyd_TheyAttacked
 	translation.en:Hrr. I'll believe you. But this was the last time I asked you to interrogate someone. Anyway, what should we do now?
-	translation.de:Hrr. Ich werde dir glauben. Aber das war das letzte mal, dass ich dich jemanden befragen lasse. Wie soll es denn jetzt weitergehen?
+	translation.de:Hrr. Ich werde dir glauben. Aber das war das letzte Mal, dass ich dich jemanden befragen lasse. Wie soll es denn jetzt weitergehen?
 	translation.ch:Hrr. Ich mue dir wohl glaube. Aber da isch s'letzt mal gsi woni dich öpper befroge lah. Egal, we sölls ez wiitergo?
 	[
 		# Link node, tag is next tag
@@ -256,8 +256,8 @@ npc.id:npc_lloyd4
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter5
 	translation.en:The letter's author is a certain "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
-	translation.de:Der Author des Briefs ist ein gewisser "V.", und er schreibt vom Hochland. Geh und finde heraus, ob es dort weitere Hinweise gibt. Währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
-	translation.ch:De Author vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
+	translation.de:Der Autor des Briefs ist ein gewisser "V.", und er schreibt vom Hochland. Geh und finde heraus, ob es dort weitere Hinweise gibt. Währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
+	translation.ch:De Autor vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
 	[
 		# Link node, tag is next tag
 		tag:-2

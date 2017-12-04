@@ -213,6 +213,7 @@ void WorldScreen::toggleGodmode() {
 	if (!g_resourceManager->getConfiguration().isGodmode) {
 		g_resourceManager->getConfiguration().isGodmode = true;
 		setTooltipText("GodmodeActivated", sf::Color::Magenta, true);
+		m_characterCore->setHashInvalid();
 	}
 	else {
 		g_resourceManager->getConfiguration().isGodmode = false;

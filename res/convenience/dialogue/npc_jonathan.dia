@@ -249,7 +249,7 @@ npc.id:npc_jonathan
 		# translation: 
 		translation.tag:DL_Choice_WhatShouldWeDo
 		translation.en:And what should we do now?
-		translation.de:Und was sollten wir jetzt tun?
+		translation.de:Und was sollen wir jetzt tun?
 		translation.ch:Und wa sölemer jetz mache?
 	]
 	[
@@ -1025,7 +1025,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_StartElementMaster
 	translation.en:I knew they would not make it easy for us. Like they really don't want to be found.
-	translation.de:Ich wusste sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden.
+	translation.de:Ich wusste, sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden.
 	translation.ch:Ich ha gwüsst si würdeds üs nid eifach mache. We wenn si gar nid gfunde werde wend.
 	[
 		# Link node, tag is next tag
@@ -1128,7 +1128,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhereSpells2
 	translation.en:I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.
-	translation.de:Ich habe gehört dass der Leuchtturmwächter Jack ein Problem mit einem Windmonster hat. Das könnte dir helfen, etwas über das Element zu lernen.
+	translation.de:Ich habe gehört, dass der Leuchtturmwächter Jack ein Problem mit einem Windmonster hat. Das könnte dir helfen, etwas über das Element zu lernen.
 	translation.ch:Ich ha ghört dass de Lüüchtturmwächter Jack es Problem mitme Windmonster het. Das chönt der helfe, öppis über Windmagie z'lerne.
 	[
 		# Link node, tag is next tag
@@ -1170,7 +1170,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_YouLearn2
 	translation.en:I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
-	translation.de:Ich bin mir ziemlich sicher dass ich beobachtet werde - Jemand folgte mir kürzlich auf dem Weg nach Hause.
+	translation.de:Ich bin mir ziemlich sicher, dass ich beobachtet werde - Jemand folgte mir kürzlich auf dem Weg nach Hause.
 	translation.ch:Ich bimer zimli sicher dassi beobachted wird - Öpper ischmer letzins ufem Weg hei nagloffe.
 	[
 		# Link node, tag is next tag
@@ -1185,7 +1185,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_YouLearn3
 	translation.en:And with all the people disappearing... No, no, I leave this to you.
-	translation.de:Und mit all den Leuten die verschwinden... Nein, nein, das überlass ich dir.
+	translation.de:Und mit all den Leuten, die verschwinden... Nein, nein, das überlass ich dir.
 	translation.ch:Und mit all dene Lüt wo verschwinded... Nei, nei, das überlahn ich dir.
 	[
 		# Link node, tag is next tag
@@ -1227,7 +1227,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_BirdSlain3
 	translation.en:The only mage in Gandria who knows some earth magic is a guy called Koray.
-	translation.de:Der einzige Magier in Gandria der sich mit Erdmagie auskennt ist ein Typ names Koray.
+	translation.de:Der einzige Magier in Gandria, der sich mit Erdmagie auskennt, ist ein Typ namens Koray.
 	translation.ch:De einzig Magier i Gandria wo sich chli mit Erdmagie uskennt isch en Typ namens Koray.
 	[
 		# Link node, tag is next tag

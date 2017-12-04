@@ -15,6 +15,8 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 		return true;
 	}
 
+	m_isLeverDependent = contains(properties, std::string("lever"));
+
 	m_isInitiallyCollidable = contains(properties, std::string("collidable"));
 	m_isOnewayLeft = contains(properties, std::string("oneway_left"));
 	m_isOnewayRight = contains(properties, std::string("oneway_right"));
@@ -23,16 +25,14 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_tileWidth = std::stoi(properties.at(std::string("width")));
 	if (m_tileWidth < 1 || m_tileWidth > 2) return false;
 
-	if (!contains(properties, std::string("strength"))) return false;
-	m_strength = std::stoi(properties.at(std::string("strength")));
-	if (m_strength < 0 || m_strength > 5) return false;
-
-	if (!contains(properties, std::string("strength"))) return false;
-	m_strength = std::stoi(properties.at(std::string("strength")));
+	m_strength = 0;
+	if (contains(properties, std::string("strength"))) {
+		m_strength = std::stoi(properties.at(std::string("strength")));
+	}
 	if (m_strength < 0 || m_strength > 5) return false;
 
 	initConditions(properties);
-	if (m_strength == 0 && !m_keyItemID.empty()) return false;
+	if (!m_isLeverDependent && m_strength == 0 && !m_keyItemID.empty()) return false;
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F));
@@ -42,6 +42,8 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&DoorLevelTile::onRightClick, this));
 	addComponent(m_interactComponent);
+
+	m_interactComponent->setActive(!m_isLeverDependent);
 	return true;
 }
 
@@ -74,7 +76,7 @@ void DoorLevelTile::update(const sf::Time& frameTime) {
 }
 
 void DoorLevelTile::onHit(Spell* spell) {
-	if (m_isOpen || spell->getSpellID() != SpellID::Unlock) {
+	if (m_isOpen || m_isLeverDependent || spell->getSpellID() != SpellID::Unlock) {
 		return;
 	}
 	
@@ -94,7 +96,7 @@ void DoorLevelTile::onHit(Spell* spell) {
 }
 
 void DoorLevelTile::onRightClick() {
-	if (m_isOpen) return;
+	if (m_isOpen || m_isLeverDependent) return;
 
 	// check if the door is in range
 	bool inRange = dist(m_mainChar->getCenter(), getCenter()) <= getOpenRange();
@@ -139,6 +141,22 @@ void DoorLevelTile::onRightClick() {
 			m_screen->setNegativeTooltip("IsLockedPicklock");
 		}
 	}
+}
+
+void DoorLevelTile::setInitialState(bool on) {
+	// nop
+}
+
+void DoorLevelTile::switchTile() {
+	if (!m_isLeverDependent || m_isOpen) {
+		return;
+	}
+
+	open();
+}
+
+bool DoorLevelTile::isSwitchable() const {
+	return true;
 }
 
 void DoorLevelTile::open() {

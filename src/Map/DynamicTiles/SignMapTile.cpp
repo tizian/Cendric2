@@ -56,6 +56,8 @@ bool SignMapTile::init(const MapTileProperties& properties) {
 		return false;
 	}
 
+	m_isBackground = contains(properties, std::string("bg"));
+
 	return true;
 }
 
@@ -99,5 +101,5 @@ void SignMapTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 }
 
 GameObjectType SignMapTile::getConfiguredType() const {
-	return GameObjectType::_ForegroundDynamicTile;
+	return m_isBackground ? GameObjectType::_DynamicTile : GameObjectType::_ForegroundDynamicTile;
 }

@@ -220,7 +220,7 @@ npc.id:npc_jeremy
 		# translation: 
 		translation.tag:DL_Choice_ConfrontDirect1
 		translation.en:We suspect you have something to do with her abduction.
-		translation.de:Wir vermuten ihr habt etwas mit ihrer Entführung zu tun.
+		translation.de:Wir vermuten, ihr habt etwas mit ihrer Entführung zu tun.
 		translation.ch:Mir glaubed ihr hend öppis mit ihrere Entführig z'tue.
 	]
 	[

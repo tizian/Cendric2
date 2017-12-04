@@ -174,14 +174,18 @@ public:
 	void setAutosave(bool value);
 	// stores all items in the inventory temporarily and leaves the player only with a pickaxe and prisoners clothes
 	void setCharacterJailed();
-	// returns a list with all stored items and clears the corresponding vector
-	std::map<std::string, int> retrieveStoredItems();
-	// returns a the stored gold and sets it to 0
-	int retrieveStoredGold();
+	// returns a map with all stored items
+	const std::map<std::string, int>& getStoredItems() const;
+	// returns a the stored gold
+	int getStoredGold() const;
+	// resets the stored items and gold
+	void resetStoredItems();
 	// notifies a steam achievement
 	void notifyAchievementUnlocked(const std::string& achievement);
 	// increase death count by one
 	void increaseDeathCount(const std::string& level);
+	// marks the player as a cheater
+	void setHashInvalid();
 
 protected:
 	// protected constructor for copying

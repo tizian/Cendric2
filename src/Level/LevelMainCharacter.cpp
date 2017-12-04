@@ -177,6 +177,7 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 }
 
 void LevelMainCharacter::loadWeapon() {
+	clearOwnSpells();
 	m_spellManager->clearSpells();
 	// chop is always set.
 	m_spellKeyMap.clear();
@@ -291,13 +292,24 @@ void LevelMainCharacter::reloadWeapon() {
 	loadWeapon();
 }
 
+void LevelMainCharacter::clearOwnSpells() {
+	for (auto go : *m_screen->getObjects(GameObjectType::_Spell)) {
+		auto spell = dynamic_cast<Spell*>(go);
+		if (!spell) continue;
+		
+		if (spell->getOwner() == this) {
+			spell->setDisposed();
+		}
+	}
+}
+
 void LevelMainCharacter::reloadAttributes() {
 	// reloading attributes won't heal you, my dear.
-	// it will even remove food
-	dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::VOID);
 	auto missingHealth = m_attributes.maxHealthPoints - m_attributes.currentHealthPoints;
 	m_attributes = m_core->getTotalAttributes();
 	m_attributes.currentHealthPoints = std::max(0, m_attributes.currentHealthPoints - missingHealth);
+	// add food again
+	m_attributes.addBean(m_foodAttributes.second);
 }
 
 void LevelMainCharacter::setInvisibilityLevel(int level) {

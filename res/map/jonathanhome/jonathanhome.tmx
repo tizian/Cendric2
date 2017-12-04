@@ -266,6 +266,7 @@
   </properties>
   <object id="181" gid="495" x="650" y="625" width="50" height="50">
    <properties>
+    <property name="bg" value=""/>
     <property name="text" value="JonathanGone"/>
    </properties>
   </object>

@@ -38,7 +38,7 @@ bool MovingTile::init(const LevelTileProperties& properties) {
 
 	if (!contains(properties, std::string("distance"))) return false;
 	int distance = std::stoi(properties.at(std::string("distance")));
-	if (distance < 0 || distance > 5000) return false;
+	if (distance < 0 || distance > 10000) return false;
 
 	m_isFreezable = !contains(properties, std::string("unfreezable"));
 	bool isFrozen = contains(properties, std::string("frozen"));

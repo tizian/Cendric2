@@ -244,7 +244,7 @@ npc.id:npc_jonathan2
 	# translation: 
 	translation.tag:DL_Jonathan_Map
 	translation.en:I still know where it lead. That's why I wanted to meet you here.
-	translation.de:Ich weiss immer noch wohin sie geführt hat. Deshalb wollte ich dich hier treffen.
+	translation.de:Ich weiss immer noch, wohin sie geführt hat. Deshalb wollte ich dich hier treffen.
 	translation.ch:Ich weiss immerno wo si anegführt het. Drum hani di au do treffe wele.
 	[
 		# Link node, tag is next tag
@@ -258,7 +258,7 @@ npc.id:npc_jonathan2
 	# translation: 
 	translation.tag:DL_Jonathan_Map2
 	translation.en:It lead to the Highlands of Admantris. And the key to get there was elemental magic.
-	translation.de:Sie hat ins Hochland von Admantris geführt. Und der Schlüssel, um dort hinzukommen war Elementarmagie.
+	translation.de:Sie hat ins Hochland von Admantris geführt. Und der Schlüssel, um dort hinzukommen, war Elementarmagie.
 	translation.ch:Si het is Hochland vo Admantris gführt. Und de Schlüssel zum det hicho isch Elementarmagie gsi.
 	[
 		# Link node, tag is next tag
@@ -316,7 +316,7 @@ npc.id:npc_jonathan2
 	# translation: 
 	translation.tag:DL_Jonathan_Element3
 	translation.en:Find the secret before those other mages do it.
-	translation.de:Finde das Geheimnis bevor diese anderen Magier es tun.
+	translation.de:Finde das Geheimnis, bevor diese anderen Magier es tun.
 	translation.ch:Finds Gheimnis bevors di andere Magier finded.
 	[
 		# Link node, tag is next tag

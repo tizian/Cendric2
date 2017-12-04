@@ -6,7 +6,7 @@ DL_Lee_OtherSays:Ach jo, heter das? Du chaschem sege er het sich halt nid betrin
 DL_Lee_SecondRant:Pha! Wener nid pennt het wo üse Kapitän d''Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
 DL_Lee_Thanks:Danke!
 DL_Lee_CalmDown:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
-DL_Lee_CalmDown2:Mir wüssed wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
+DL_Lee_CalmDown2:Mir wüssed, wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
 DL_Lee_CalmDown3:Aber zum übers Meer sägle brüchtemer en Kompass und niemert i dere verfluechte Stadt het eine.
 DL_Lee_HelpYou:Jo vilicht. Wenn du üs en funktionierende Kompass bringsch, gemmer der alles womer na hend.
 DL_Lee_QuestComplete:Super! Danke tusig, chas chuum erwarte wieder is Meer z''steche!

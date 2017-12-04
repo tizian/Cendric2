@@ -17,7 +17,7 @@ npc.id:npc_adelya
 	# translation: 
 	translation.tag:DL_Adelya_BeGone
 	translation.en:Don't talk to me! Can't you see I'm busy?
-	translation.de:Sprich mich nicht an! Siehst du nicht dass ich beschäftigt bin?
+	translation.de:Sprich mich nicht an! Siehst du nicht, dass ich beschäftigt bin?
 	translation.ch:Red nid mit mir! Gsesch nid dasi beschäftigt bin?
 	[
 		# Link node, tag is next tag

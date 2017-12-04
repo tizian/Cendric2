@@ -166,6 +166,14 @@ void UserMovingBehavior::setEnabled(bool enabled) {
 	}
 }
 
+void UserMovingBehavior::flipGravity() {
+	MovingBehavior::flipGravity();
+	// reset the gravity speed
+	if (std::abs(m_mob->getVelocity().y) > MIN_JUMP_VELOCITY) {
+		m_mainChar->setVelocityY(m_isFlippedGravity ? MIN_JUMP_VELOCITY : -MIN_JUMP_VELOCITY);
+	}
+}
+
 void UserMovingBehavior::setJumpLock() {
 	m_isJumpLocked = true;
 }

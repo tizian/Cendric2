@@ -6,7 +6,7 @@ DL_Inina_Shrine:Es isch en Schrein vom Ewige Liecht. Magier und Gwöhnlichi chö
 DL_Inina_PowerWeakened:Es gseht so uus, als wür die heilig Magie vom Schrein dur e anderi Magie gstört werde. Mir mönd dem uf de Grund ga.
 DL_Inina_PowerWeakenedNot:Aber... komisch. Ich cha die Aura nüme gspüre. Vilicht isch öppis passiert...
 DL_Inina_WhatDo:Mir hend eine vo üsne Paladin i d''Höhli hinterem Schrein losgschickt. Aber bis jetzt ischer nonig zrugg cho.
-DL_Inina_MissingPaladin1:Ja, vielleicht chöntsch üs helfe. De Paladin womer i''d Höhli gschickt hend heisst Marcus.
+DL_Inina_MissingPaladin1:Ja, vielleicht chöntsch üs helfe. De Paladin, womer i''d Höhli gschickt hend heisst Marcus.
 DL_Inina_MissingPaladin2:Er het min Ahänger mitgnoh. E speziells Schmuckstück wo heiligi Energie besitzt und im Dunkle lüüchtet. Er sött also liecht z''finde sii.
 DL_Inina_MissingPaladin3:Du söttsch besser au öppis mitneh, wo dir de Weg belüüchtet. Ich cha dich nid begeleite, well ich immerno probier, d''Magie vom Schrein z''lüütere.
 DL_Inina_Farmers:Es het paar Vorfäll geh vo Bürger, wo d''Stadt verloh hend ohne zrugg z''cho. Das Problem isch grad viel wichtiger als es paar vermissti Schöfli.

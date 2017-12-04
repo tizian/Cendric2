@@ -850,16 +850,17 @@ void CharacterCore::setCharacterJailed() {
 	delete spawn;
 }
 
-std::map<std::string, int> CharacterCore::retrieveStoredItems() {
-	std::map<std::string, int> storedItems = m_data.storedItems;
-	m_data.storedItems.clear();
-	return storedItems;
+const std::map<std::string, int>& CharacterCore::getStoredItems() const {
+	return m_data.storedItems;
 }
 
-int CharacterCore::retrieveStoredGold() {
-	int gold = m_data.storedGold;
+int CharacterCore::getStoredGold() const {
+	return m_data.storedGold;
+}
+
+void CharacterCore::resetStoredItems() {
 	m_data.storedGold = 0;
-	return gold;
+	m_data.storedItems.clear();
 }
 
 void CharacterCore::notifyAchievementUnlocked(const std::string& achievement) {
@@ -871,4 +872,8 @@ void CharacterCore::increaseDeathCount(const std::string& level) {
 	
 	if (!contains(m_data.levelDeaths, level)) return;
 	m_data.levelDeaths.at(level)++;
+}
+
+void CharacterCore::setHashInvalid() {
+	m_data.hashValid = false;
 }

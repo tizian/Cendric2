@@ -47,19 +47,19 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('bo
 Guardian of the Sewers','Boss: Alastor,
 Wächter der Kanalisation','Boss: Alastor, 
 Wächter vode Kanalisation');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('janusroom','location','Alastor''s Grave','Alastor''s Grab','Es Grab vom Alastor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('janusroom','location','Alastor''s Grave','Alastors Grab','Es Grab vom Alastor');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacrypt','location','Crypt of Gandria','Krypta von Gandria','Krypta vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_mercenaries','location','Boss: Mercenaries','Boss: Söldner','Boss: Söldner');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('highland','location','Highlands of Admantris','Hochland von Admantris','Hochland vo Admantris');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('swampforest','location','The Rainy Forest','Der Verregnete Wald','De Verregnet Wald');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ascent','location','The Ascent','Der Aufstieg','De Ufstiig');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriacastle','location','Castle of Gandria','Schloss von Gandria','Schloss vo Gandria');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashatemple','location','Yasha''s Temple','Yasha''s Tempel','Tempel vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashasanctuary','location','Yasha''s Sanctuary','Yasha''s Heiligtum','Heiligtum vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_cleric','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_thief','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_necro','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_death','location','Yasha''s Puzzle','Yasha''s Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashatemple','location','Yasha''s Temple','Yashas Tempel','Tempel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yashasanctuary','location','Yasha''s Sanctuary','Yashas Heiligtum','Heiligtum vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_cleric','location','Yasha''s Puzzle','Yashas Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_thief','location','Yasha''s Puzzle','Yashas Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_necro','location','Yasha''s Puzzle','Yashas Rätsel','Rätsel vode Yasha');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('yasha_death','location','Yasha''s Puzzle','Yashas Rätsel','Rätsel vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_yasha_good','location','Boss: Yasha,
 Guardian of the Temple','Boss: Yasha,
 Wächterin des Tempels','Boss: Yasha, 
@@ -80,9 +80,11 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ve
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('boss_velius','location','Boss: Velius','Boss: Velius','Boss: Velius');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('windyplateau','location','Windy Plateau','Windige Hochebene','Windigi Hochebeni');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('testlevel','location','Test Level','Testlevel','Testlevel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('peterslevel','location','Peter''s Hell','Peter''s Hölle','Em Peter sini Höll');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle01','location','Old Tower','Alter Turm','Alte Turm');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle02','location','Old Tower','Alter Turm','Alte Turm');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle03','location','Old Tower','Alter Turm','Alte Turm');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle04','location','Old Tower','Alter Turm','Alte Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('peterslevel','location','Peter''s Hell','Peters Hölle','Em Peter sini Höll');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle01','location','Mysterious Tower','Mysteriöser Turm','Mysteriöse Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle02','location','Mysterious Tower','Mysteriöser Turm','Mysteriöse Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle03','location','Mysterious Tower','Mysteriöser Turm','Mysteriöse Turm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle04','location','Mysterious Tower','Mysteriöser Turm','Mysteriöse Turm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('etozhideout','location','Etoz'' Hideout','Etoz'' Versteck','Em Etoz sis Versteck');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('island','location','Os','Os','Os');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('towerwalkway','location','Secret Passage','Geheimer Durchgang','Gheime Durchgang');

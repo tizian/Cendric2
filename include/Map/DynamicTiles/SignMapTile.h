@@ -29,6 +29,7 @@ private:
 private:
 	TooltipWindow m_tooltipWindow;
 	bool m_showTooltip;
+	bool m_isBackground;
 	sf::Time m_tooltipWindowTime = sf::Time::Zero;
 	InteractComponent* m_interactComponent;
 
