@@ -178,7 +178,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Note (Inina)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item', 'Inina''s Note','Inina''s Notiz','Inina''s Notiz');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item_desc', 'A suspicious note, found in the Temple of the Elementalists.','Eine verdächtige Notiz, gefunden im Tempel der Elementarmagier.','E verdächtigi Notiz, gfunde im Tempel vode Elementarmagier.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item_desc', 'A suspicious note, found in the Temple of Elementalists.','Eine verdächtige Notiz, gefunden im Tempel der Elementarmagier.','E verdächtigi Notiz, gfunde im Tempel vode Elementarmagier.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_noteinina', 0, 'NoteInina');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'missing_inina', 1);
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'find_velius', 3);

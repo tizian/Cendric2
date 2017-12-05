@@ -129,6 +129,7 @@ Little Robot Sound Factory
 pla1554alaska
 
 <<< Quality Assurance >>>
+Peter
 Tizian
 
 <<< Concept Art >>>
@@ -140,6 +141,7 @@ Markus
 Emi
 
 <<< Proof Reading >>>
+Tina
 Daniel Josephy Hernández
 
 <<< Alpha Tester >>>
@@ -148,7 +150,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome, Peter
+Kwon, Peter
 
 <<< Beta Tester >>>
 Peter
@@ -156,14 +158,14 @@ Randalf
 Martin
 Patrick
 Iris
-Tank
+Stefan ''Tank'' Schindler
 Sebastian
 Lukas
 Ramón
 Pascal
 Nick
 Lord Heinrich
-Jerome
+Jerry Ward
 Dave
 
 <<< Special Thanks >>>
@@ -336,6 +338,7 @@ Little Robot Sound Factory
 pla1554alaska
 
 <<< Qualitätssicherung >>>
+Peter
 Tizian
 
 <<< Concept Art >>>
@@ -352,7 +355,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome, Peter
+Kwon, Peter
 
 <<< Beta Tester >>>
 Peter
@@ -360,14 +363,14 @@ Randalf
 Martin
 Patrick
 Iris
-Tank
+Stefan ''Tank'' Schindler
 Sebastian
 Lukas
 Ramón
 Pascal
 Nick
 Lord Heinrich
-Jerome
+Jerry Ward
 Dave
 
 <<< Spezielles Dankeschön >>>
@@ -537,6 +540,7 @@ Little Robot Sound Factory
 pla1554alaska
 
 <<< Qualitätssicherig >>>
+Peter
 Tizian
 
 <<< Concept Art >>>
@@ -561,7 +565,7 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Jerome, Peter
+Kwon, Peter
 
 <<< Beta Tester >>>
 Peter
@@ -569,14 +573,14 @@ Randalf
 Martin
 Patrick
 Iris
-Tank
+Stefan ''Tank'' Schindler
 Sebastian
 Lukas
 Ramón
 Pascal
 Nick
 Lord Heinrich
-Jerome
+Jerry Ward
 Dave
 
 <<< Speziells Dankä >>>

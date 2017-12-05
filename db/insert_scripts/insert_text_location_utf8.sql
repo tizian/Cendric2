@@ -70,7 +70,7 @@ Wächterin des Tempels','Boss: Yasha,
 Wächterin vom Tempel');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('icecave','location','Piz Badus','Piz Badus','Piz Badus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('castlegarden','location','The Castle Gardens','Die Schlossgärten','De Schlossgarte');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ancienttemple','location','Temple of the
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ancienttemple','location','Temple of
 Elementalists','Tempel der
 Elementarmagier','Tempel vode
 Elementarmagier');
