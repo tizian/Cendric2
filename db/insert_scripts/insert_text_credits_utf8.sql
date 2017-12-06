@@ -165,6 +165,7 @@ Pascal
 Nick Kline
 Lord Heinrich
 Jerry Ward
+Fabian Fässler
 Dave
 
 <<< Special Thanks >>>
@@ -369,6 +370,7 @@ Pascal
 Nick Kline
 Lord Heinrich
 Jerry Ward
+Fabian Fässler
 Dave
 
 <<< Spezielles Dankeschön >>>
@@ -579,6 +581,7 @@ Pascal
 Nick Kline
 Lord Heinrich
 Jerry Ward
+Fabian Fässler
 Dave
 
 <<< Speziells Dankä >>>
