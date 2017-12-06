@@ -5,7 +5,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notemarcus', 0, 'NoteMarcus');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteMarcus', 'document', 'To whoever reads this: Beware!
 
-These caverns are full of traps, I only made it with a lot of luck to where I am now. The five levers are designed to kill you if you pull the wrong one. Use the last one first and the first one last and leave the others untouched.
+These caverns are full of traps, I only made it to where I am now with a lot of luck. The five levers are designed to kill you if you pull the wrong one. Use the last one first and the first one last, and leave the others untouched.
 
 I hope I''ll find a way out of this cave...
 
@@ -65,7 +65,7 @@ INSERT INTO item_document_page(item_id, page_nr, content) values ('do_eleletter'
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('EleLetter', 'document',
 'To the Novice Cendric
 
-The situation turned out to be more serious than we had previously expected. It is of crucial importance that you hand the map to the Elementalist Jonathan who lives in Gandria. Try to provide your best possible support in that matter.
+The situation turned out to be more serious than we previously expected. It is of crucial importance that you hand the map to the Elementalist Jonathan in Gandria. I need you to provide your best possible support in this matter.
 
 Signed
 Grand Magister Cyrus',
@@ -85,7 +85,7 @@ Grossmagister Cyrus');
 -- Wrinkled Map (Elementalists Map)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Wrinkled Map','Zerknitterte Karte','Verknittereti Charte');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'That''s definitely some kind of map, but the symbols and text are moving in a way that make it impossible to make sense of its content.','Das ist eindeutig eine Art Karte, aber die Symbole und der Text darauf bewegen sich so dass es unmöglich ist, etwas darauf zu erkennen.','Da isch definitiv e Art Charte aber d''Symbol und de Text druf beweged sich so dases unmöglich isch, öppis z''erkenne druf.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'That''s definitely some kind of map, but the symbols and text are moving in a way that makes it impossible to make sense of it.','Das ist eindeutig eine Art Karte, aber die Symbole und der Text darauf bewegen sich so dass es unmöglich ist, etwas darauf zu erkennen.','Da isch definitiv e Art Charte aber d''Symbol und de Text druf beweged sich so dases unmöglich isch, öppis z''erkenne druf.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elemap', 'document', 550, 400, -1);
 INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 0, 'res/texture/items/elemap.png');
 
@@ -99,7 +99,7 @@ INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_eld
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_elderdiary', 3, 'ElderDiaryTitle3', 'ElderDiaryContent3');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle', 'document', 'Diary', 'Tagebuch', 'Tagebuech');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle1', 'document', 'Day 212, 1103', 'Tag 212, 1103', 'Tag 212, 1103');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent1', 'document', 'My dear Elona has still not returned. It''s unusual that she stays in the Stone Garden for such a long time. Maybe she found a new place where rare herbs grow?', 'Meine teure Elona ist immer noch nicht zurück. Es ist ungewöhnlich, dass sie so lange im Steingarten bleibt. Vielleicht hat sie eine neue Stelle gefunden, an der seltene Kräuter wachsen?', 'Mini Elona isch immer nanig heicho. Es isch ungwöhnlich, das si so lang im Steigarte bliibt. Vilicht het si e neui Stell gfunde, wo seltenigi Krütli wachsed?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent1', 'document', 'My dear Elona has still not returned. It''s unusual for her to stay in the Stone Garden for such a long time. Maybe she found a new place where rare herbs grow?', 'Meine teure Elona ist immer noch nicht zurück. Es ist ungewöhnlich, dass sie so lange im Steingarten bleibt. Vielleicht hat sie eine neue Stelle gefunden, an der seltene Kräuter wachsen?', 'Mini Elona isch immer nanig heicho. Es isch ungwöhnlich, das si so lang im Steigarte bliibt. Vilicht het si e neui Stell gfunde, wo seltenigi Krütli wachsed?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle2', 'document', 'Day 214, 1103', 'Tag 214, 1103', 'Tag 214, 1103');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent2', 'document', 'I''m worried, even though she''s a good mage and can defend herself. I won''t wait any longer.
 
@@ -109,7 +109,7 @@ Morgen werde ich nach ihr suchen.', 'Ich mach mer Sorge, obwohl si e gueti Magie
 
 Morn wirdi nach ire sueche.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryTitle3', 'document', 'Day 218, 1103', 'Tag 218, 1103', 'Tag 218, 1103');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent3', 'document', 'I''m still not able to believe that my beloved Elona is gone. I''ve found pieces of her broken staff in the Stone Garden and tried to reassemble them, but it''s not complete. 
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ElderDiaryContent3', 'document', 'I still can''t believe that my beloved Elona is gone. I''ve found pieces of her broken staff in the Stone Garden and tried to reassemble them, but it''s not complete. 
 
 I can''t entomb her traditionally with her staff, but only with a part of it. I''m going to keep the magic stone from the staff here, in memory of her.', 'Ich kann es immer noch nicht fassen, dass meine geliebte Elona nicht mehr an meiner Seite ist. Ich habe Stücke von ihrem Stab im Steingarten gefunden und konnte ihn aber nicht wieder zusammensetzen, es fehlt ein Stück.
 
@@ -182,7 +182,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_noteinina', 0, 'NoteInina');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'missing_inina', 1);
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'find_velius', 3);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteInina', 'document', 'Anyone who reads this: I was abducted with two other mages by a mage called Velius. He used our magic to break into this temple. He talks about killing us to fuel his magical crystals. Please!
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoteInina', 'document', 'Anyone who reads this: A mage called Velius abducted me along with two other mages. He used our magic to break into this temple. He talks about killing us to fuel his magical crystals. Please!
 
 Crypt of Gandria!
 
@@ -202,14 +202,14 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Old Pergament
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item', 'Old Pergament','Altes Pergament','Alts Pergament');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item_desc', 'An old pergament from the library of the elementalists.','Ein altes Pergament aus der Bibliothek der Elementarmagier.','Es alts Pergament us de Bibliothek vode Elementarmagier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item_desc', 'An old pergament from the elementalists'' library .','Ein altes Pergament aus der Bibliothek der Elementarmagier.','Es alts Pergament us de Bibliothek vode Elementarmagier');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_antigravity', 1, 'AntiGravityTitle', 'AntiGravityContent');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityTitle', 'document', 'Antigravity', 'Antigravitation', 'Antigravitation');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityContent', 'document', 'Gravity is a mere form of elemental (earth) magic. Using its inversed form in an area will weaken it, objects will appear lighter.
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityContent', 'document', 'Gravity is merely a form of elemental (earth) magic. Using its inversed form in an area will weaken it, making objects appear lighter.
 
-If enough anti-energy is used, objects will float. Going even further, objects will be lifted into the sky. 
+If enough anti-energy is used, objects will levitate. Using even more, objects will be lifted into the sky. 
 
-Using it on a human should be avoided outside and only practised in buildings with a strong roof.','Gravitation ist eine einfache Form der Erd-Elementarmagie. Wenn man ihre invertierte Form in einem Bereich anwendet, wird sie geschwächt und Objekte werden leichter erscheinen.
+Using it on a human should be avoided outside and should only be practised in buildings with a strong roof.','Gravitation ist eine einfache Form der Erd-Elementarmagie. Wenn man ihre invertierte Form in einem Bereich anwendet, wird sie geschwächt und Objekte werden leichter erscheinen.
 
 Wenn genügend Antigravitation benutzt wird, werden Objekte schweben oder sich sogar in den Himmel bewegen.
 
@@ -226,7 +226,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Book about Anti Magic
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antimagic', 'item', 'Anti Magic','Antimagie','Antimagie');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antimagic', 'item_desc', 'An old book from the library of the elementalists.','Ein altes Buch aus der Bibliothek der Elementarmagier.','Es alts Buech us de Bibliothek vode Elementarmagier.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antimagic', 'item_desc', 'An old book from the elementalists'' library.','Ein altes Buch aus der Bibliothek der Elementarmagier.','Es alts Buech us de Bibliothek vode Elementarmagier.');
 INSERT INTO item_document_page(item_id, page_nr, title) values ('do_antimagic', 0, 'AntiMagicTitle');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_antimagic', 1, 'AntiMagicTitle1', 'AntiMagicContent1');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic', 2, 'AntiMagicContent2');
@@ -234,9 +234,9 @@ INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic'
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_antimagic', 4, 'AntiMagicContent4');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicTitle', 'document', 'Anti Magic', 'Antimagie', 'Antimagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicTitle1', 'document', 'The Magic Spectrum', 'Das Magiespektrum', 'Es Magiespektrum');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent1', 'document', 'Different types of magic exist, but all belong to the same energy. The first magic that was discovered was the elemental magic, but it can be split into other magic types, that cover a smaller, more specific part of the spectrum.
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent1', 'document', 'Different types of magic exists, but they all belong to the same energy. The first magic that was discovered was the elemental magic, but it can be split into multiple magic types, each category covering a smaller, more specific part of the spectrum.
 ', 'Verschiedene Arten von Magie existieren, doch alle gehören zu der selben Energie. Die erste Magie, die entdeckt wurde, war Elementarmagie. Sie kann in alle anderen Arten der Magie gespalten werden, die einen kleineren, spezifischen Teil des Spektrums.', 'Verschideni Arte vo Magie existiered, aber alli ghöred zude gliche Energie. Di erst Magie, wo entdeckt worde isch, isch d''Elementarmagie gsi. Si chan i alli andere Arte vode Magie gspalte werde, wo en chlinnere, spezifische Teil vom Spektrum abdecked.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent2', 'document', 'As all energy, magic can not be created or destroyed, it simply exists. However, very recent research has shown that a form of dark magic, also called anti magic, exists and can be used to eliminate the magic energy. This will not result in a loss of the energy, but in annihilation, transforming the magic energy into light and heat.
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiMagicContent2', 'document', 'As with all types of energy, magic can not be created or destroyed, it simply exists. However, very recent research has shown that a form of dark magic, also called anti magic, exists and can be used to eliminate the magic energy. This will not result in a loss of the energy, but in annihilation, transforming the magic energy into light and heat.
 
 Anti magic can be produced by
 ', 'Wie alle Energie kann Magie weder erschaffen noch zerstört werden, sie existiert einfach. Allerdings haben jüngste Forschungen gezeigt, dass eine Art dunkle Magie, sogenannte Antimagie, existiert und benutzt werden kann, um die magische Energie zu eliminieren. Bei diesem Prozess geht keine Energie verloren. Die magische Energie wird aber ausgelöscht und zu Wärme und Licht transformiert.
