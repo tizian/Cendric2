@@ -137,7 +137,6 @@ Isa
 Tizian
 Brigitte
 Martin
-Markus
 Emi
 
 <<< Proof Reading >>>
@@ -163,7 +162,7 @@ Sebastian
 Lukas
 Ramón
 Pascal
-Nick
+Nick Kline
 Lord Heinrich
 Jerry Ward
 Dave
@@ -346,7 +345,6 @@ Isa
 Tizian
 Brigitte
 Martin
-Markus
 Emi
 
 <<< Alpha Tester >>>
@@ -368,7 +366,7 @@ Sebastian
 Lukas
 Ramón
 Pascal
-Nick
+Nick Kline
 Lord Heinrich
 Jerry Ward
 Dave
@@ -548,7 +546,6 @@ Isa
 Tizian
 Brigitte
 Martin
-Markus
 Emi
 
 <<< Schwiizerdütschi Übersetzige >>>
@@ -558,6 +555,7 @@ Sandro Holderegger - Luzerner Dialekt (Zeff)
 Ajdin Zutic - Luzerner Dialekt (Zeff)
 Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
 Christian Brunner - Luzerner Dialekt (Wirt)
+Sandra Scherrer - Bündner Dialekt (Jonathan)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
@@ -578,7 +576,7 @@ Sebastian
 Lukas
 Ramón
 Pascal
-Nick
+Nick Kline
 Lord Heinrich
 Jerry Ward
 Dave

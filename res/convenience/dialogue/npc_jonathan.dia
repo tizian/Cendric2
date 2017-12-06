@@ -59,7 +59,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WalkIntoHouse
 	translation.en:Hey, what are you doing here? You can't just walk into other people's houses.
 	translation.de:Hey, was machst du hier? Du kannst nicht einfach in die Häuser anderer Leute reinspazieren.
-	translation.ch:Hey, was machsch du da? Du chasch nid eifach id Hüser vo fremde Lüt iespaziere!
+	translation.ch:He, was tuasch du do? Du kasch nid aifach ind Hüüser vu fremda Lüüt inalaufa!
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -95,7 +95,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_NoExcuNdse
 	translation.en:Well, that's not really an excuse. Why are you here?
 	translation.de:Na, das ist nicht wirklich eine Ausrede. Wieso bist du hier?
-	translation.ch:Ja guet, aber da isch nid würkli en Usred. Weso bisch da?
+	translation.ch:Jo guat, aber das isch nid würkli a Usred. Wieso bisch du do?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -109,7 +109,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhatDoYouWant
 	translation.en:What do you want from me then?
 	translation.de:Was willst du denn von mir?
-	translation.ch:Was wetsch denn vo mir?
+	translation.ch:Was wetsch denn vu miar?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -147,7 +147,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Letter
 	translation.en:(Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
 	translation.de:(Liest den Brief sorgfältig) Cyrus! Es ist gut, von ihm zu hören. Du kommst also von der Akademie? Ist dort alles in Ordnung? Und was hat Cyrus herausgefunden?
-	translation.ch:(List de Brief sorgfältig) Cyrus! Es isch guet, vo ihm z'ghöre. Du chunsch also vode Akademie? Was het de Cyrus denn usegfunde?
+	translation.ch:(Liist dr Briaf sorgfältig) Cyrus! As isch guat, vu ihm z'ghöra. Du kusch also vu dr Akademie? Was het dr Cyrus denn usagfunda?
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -188,7 +188,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Wow
 	translation.en:Wow... Losing the your whole memory is pretty unusual, even for a mage.
 	translation.de:Wow... Das ganze Gedächtnis zu verlieren ist ziemlich ungewöhnlich, auch für einen Magier.
-	translation.ch:Wow... Es ganz Gedächtnis z'verlüre isch zimli ungwöhnlich, au füren Magier.
+	translation.ch:Wow... Z ganza Gedächtnis z'verlüra isch ziemli ungwöhnlich, au füra Magier.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -203,7 +203,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Wow2
 	translation.en:And summoning an iceball is the only spell you remember, right? It's good you came here. We will solve this together.
 	translation.de:Und einen Eisball zu beschwören ist der einzige Zauber, an den du dich erinnerst, ja? Es ist gut, dass du zu mir gekommen bist. Wir werden das zusammen lösen.
-	translation.ch:Und en Iisball z'beschwöre isch de einzig Zauber wod na chasch, gell. Es isch guet bisch zu mir cho. Mir werded das zeme uflöse.
+	translation.ch:Und a Iisball z'beschwöra isch dr einzig Zauber wo no kasch, gäll. As isch guat, dass zu miar kho bisch. Miar wärdend das zäma uflösa.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -281,7 +281,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Academy
 	translation.en:The only academy in Admantris where elementalists are educated. It is situated on the other side of the sea. You have obviously studied there.
 	translation.de:Die einzige Akademie in Admantris, die Elementarmagier ausbildet. Sie befindet sich auf der anderen Seite des Meeres. Du hast offensichtlich dort studiert.
-	translation.ch:Di einzig Akademie in Admantris wo Elementarmagier usbildet. Si liit uf de andere Siite vom Meer. Du hesch offesichtlich det studiert.
+	translation.ch:Di einzig Akademie in Admantris wo Elementarmagier usbildet. Si liit uf dr andera Siita vom Meer. Du hesch offasichtlich det studiart.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -296,7 +296,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Elementalists
 	translation.en:Mages with an affinity to elemental magic. There are not too much left in Admantris, but I'm one of them... and you are - probably - too.
 	translation.de:Magier mit einer Affinität zur Elementarmagie. Es gibt nicht mehr viele davon in Admantris aber ich bin einer von ihnen... und du - wahrscheinlich - auch.
-	translation.ch:Magier mit enere Affinität zude Elementarmagie. Es git nüm so viel devo in Admantris, aber ich bi eine... und du - wahrschinli - au.
+	translation.ch:Magier mitara Affinität zur Elementarmagie. As git nüm so viel drvo in Admantris, aber i bin eina... und du - wohrschiinli - au.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -311,7 +311,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Affinity
 	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
 	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesamte Spektrum der Magie verstehen.
-	translation.ch:Jede Magier wird mit enere gwüsse Affinität zumne Magietyp gebore. De bestimmt, weli Zauber er lerne chan. Mir Elementarmagier hend Glück - mir chönd es ganze Spektrum vode Magie verstah.
+	translation.ch:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp gebora. Dä bestimmt, welli Zauber mr lerna kann. Miar Elementarmagier hend Glück - miar könnd z ganza Spektrum vur Magie verstoh.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -325,7 +325,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_NextStep
 	translation.en:Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone who is a bit more...
 	translation.de:Hm. Ich wusste, dass mir Cyrus einen seiner Studenten zur Unterstützung meiner Forschungen schicken würde. Aber um ehrlich zu sein, habe ich mit jemandem gerechnet, der etwas mehr...
-	translation.ch:Hm. Ich ha scho gwüsst, dass de Cyrus mir eine vo sine Studente schicke wird. Aber zum ehrlich si, ich ha mit öpperem grechnet wo chli me... 
+	translation.ch:Hm. I han schu gwüsst, dass dr Cyrus miar eina vu sina Studenta schicka wird. Aber um ehrlich zsii, i han mit öperem grächnet wo kli meh... 
 	[
 		# Link node, tag is next tag
 		tag:16
@@ -340,7 +340,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_NextStep2
 	translation.en:...qualified. Also, someone who lost his memory is suspicious. Before I let you in on my studies, you should first prove that you're a worthy elementalist.
 	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächtnis verloren hat, ein bisschen verdächtig. Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
-	translation.ch:...qualifiziert isch. Usserdem isch öpper, wo sis Gedächtnis verlore het, scho zimli verdächtig. Bevor ich dich i mini Forschige iweihe, muesch zersch bewiise, dass du en würdige Elementarmagier bisch.
+	translation.ch:...qualifiziert isch. Usserdem isch eina, wo sis Gedächtnis verlora het, schu huara verdächtig. Bevor i di in mini Forschiga iweiha, muasch zerscht bewiisa, dass du a würdiga Elementarmagier bisch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -354,7 +354,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_FireballQuest
 	translation.en:Every mage is able to learn how to summon an iceball, it's an easy spell. Controlling fire, on the other hand, is considered nearly impossible for mages without an elemental affinity.
 	translation.de:Jeder Magier kann lernen, wie man einen Eisball beschwört. Feuer zu kontrollieren ist für Magier ohne eine Affinität zur Elementarmagie aber fast unmöglich.
-	translation.ch:Jede Magier cha lerne, we me en Iisball beschwört. Füür z'kontrolliere isch aber für en Magier ohni Affinität zur Elementarmagie fascht unmöglich.
+	translation.ch:Jeda Magier kann lerna, wia ma a Iisball beschwört. Füür z'kontrolliera isch aber für a Magier ohni Affinität zur Elementarmagie fascht unmöglich.
 	[
 		# Link node, tag is next tag
 		tag:19
@@ -370,7 +370,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_FireballQuest2
 	translation.en:Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
 	translation.de:Ein paar Feuerratten aus der Kanalisation sind in mein Labor in meinem Keller eingedrungen. Finde heraus, wie du sie anlocken kannst und bringe mir die Essenzen des Feuers aus ihren Lungen. Wenn du zurück bist, werde ich sehen, ob ich dir beibringen kann, wie man einen Feuerball beschwört.
-	translation.ch:Es paar Füürratte us de Kanalisation sind i mis Labor i mim Chäller idrunge. Find use, wed si alocke chasch und bring mer d'Füüressenze us ihrne Lunge. Denn wirdi mal luege, obi der biibringe cha, weme en Füürball beschwört.
+	translation.ch:As paar Füürratta us dr Kanalisation sind in miis Labor i mim Käller iidrunga. Find usa, wia si alocka kasch und bring miar d'Füüressenza us ihrna Lungana. Denn wirdi mol luaga, ob i diar biibringa kann, wia ma a Füürball beschwört.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -419,7 +419,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_EssenceComplete
 	translation.en:Very good. Maybe you can still become a decent elementalist.
 	translation.de:Sehr gut. Vielleicht können wir doch noch einen anständigen Elementarmagier aus dir machen.
-	translation.ch:Sehr guet. Vilicht chömmer ja doch na en aständige Elementarmagier us dir mache.
+	translation.ch:Huara guat. Villicht kömmer jo doch no a aständiga Elementarmagier us diar macha.
 	[
 		# Link node, tag is next tag
 		tag:21
@@ -434,7 +434,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_EssenceComplete2
 	translation.en:Here, take this scroll and read it. Talk to me when you've learned the spell.
 	translation.de:Hier, nimm diese Schriftrolle und lies sie. Sprich wieder mit mir wenn du den Zauber erlernt hast.
-	translation.ch:Da, nimm die Schriftrolle und lies si. Red wider mit mir wend de Zauber glernt hesch.
+	translation.ch:Do, nimm dia Schriftrolla und lies si. Red wieder mit miar, wenn dr Zauber glernt hesch.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -448,7 +448,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball
 	translation.en:And you've already acquired its knowledge. I think we're ready to get started then.
 	translation.de:Und du hast ihr Wissen bereits erlangt. Ich denke, wir können nun anfangen.
-	translation.ch:Und du hesches au scho tscheggt. Ich denk, mer chönd denn grad afange.
+	translation.ch:Und du heschs au schu checkt. I denk, miar könnd denn grad afanga.
 	[
 		# Link node, tag is next tag
 		tag:23
@@ -462,7 +462,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball2
 	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
 	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Ich habe bereits herausgefunden, dass sie früher Zauber kannten, die weit mächtiger sind, als alle Elementarmagie, die wir heute kennen.
-	translation.ch:Ich forsche am alte, vergessene Wüsse vode erste Elementarmagier. Ich han scho usegfunde, das si früener viel mächtigeri Zauber kennt hend, als alli Elementarmagie, womer hüt so bruched.
+	translation.ch:I forscha am alta, vergessena Wüssa vu de ersta Elementarmagier. I han schu usagfunda, dass sie früaner viel mächtigeri Zauber kennt hend, als jeglichi Elementarmagie, wo mr hüt so brucht.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -476,7 +476,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball3
 	translation.en:I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
 	translation.de:Ich habe Beweise gefunden, dass es irgendwo in der Nähe der Stadt Gandria eine verlassene Stätte der ersten Elementarmagier gibt, deshalb arbeite ich hier.
-	translation.ch:Ich han Bewiis gfunde, dass es irgendwo ide Nöchi vo Gandria en verlassene Ort git wo di erste Elementarmagier gläbt hend, drum schaffi au da.
+	translation.ch:I han Bewiis gfunda, dasses irgendwo in dr Nöchi vu Gandria a verlassna Ort git, wo di erschta Elementarmagier glebt hend, drum schaff i au do.
 	[
 		# Link node, tag is next tag
 		tag:25
@@ -490,7 +490,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball4
 	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
 	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
-	translation.ch:Ich bi mer zimli sicher dass die Charte, wo de Cyrus mir gschickt het, de Schlüssel isch zum de Ort z'finde. Es git da aber es chlises Problem mit dere Charte...
+	translation.ch:I bi mr ziemli sicher dass dia Karta, wo dr Cyrus miar gschickt het, dr Schlüssel isch zum de Ort z'finda. As git do aber a klises Problem mit dera Karta...
 	[
 		# Link node, tag is next tag
 		tag:26
@@ -505,7 +505,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_LearnedFireball5
 	translation.en:To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
 	translation.de:Elementarmagie alleine reicht nicht, um sie zu entschlüsseln. Kombiniert mit einem anderen Typ der Magie müsste man den Schutzzauber aber brechen können.
-	translation.ch:Elementarmagie elei langt nid zum si entschlüssle. Zeme mit enere andere Magieart sötmes aber anebringe, de Schutzzauber z'breche.
+	translation.ch:Elementarmagie allai langet nid zum si entschlüssla. Zema mitera andera Magieart sött mrs aber anabringa, dr Schutzzauber z'brecha.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -574,7 +574,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_AnotherMage
 	translation.en:To be honest, I don't really trust any other mage in the city. The less people know about this map, the better.
 	translation.de:Um ehrlich zu sein traue ich keinem anderen Magier in der Stadt. Je weniger Leute von dieser Karte wissen, desto besser.
-	translation.ch:Zum ehrlich si trau ich kem andere Magier i dere Stadt. Je weniger Lüt vo dere Charte wüssed, desto besser.
+	translation.ch:Um ehrlich zsii trau i keinem andara Magier in dera Stadt. Je weniger Lüüt vu dera Karta wüssend, desto besser.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -589,7 +589,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhatAboutYou
 	translation.en:Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
 	translation.de:Obwohl wir Elementarmagier jede Magieart erlernen können, habe ich mich bisher nur mit Elementarmagie beschäftigt.
-	translation.ch:Obwohl mir Elementarmagier jedi Magieart lerne chönd, hani mich bis ez nur mit Elementarmagie beschäftigt.
+	translation.ch:Obwohl miar Elementarmagier jedi Magieart lerna könnd, hani mi bis ez nur mit Elementarmagie beschäftigt.
 	[
 		# Link node, tag is next tag
 		tag:30
@@ -603,7 +603,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhatAboutYou2
 	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citizens of Gandria. Someone like you.
 	translation.de:Und jetzt ist es zu riskant für mich, etwas neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
-	translation.ch:Und jetz isches zu riskant für mich zum öppis neus z'lerne. Nei, ich bruch öpper mitme unbekanntere Gsicht da in Gandria. Öppert we dich.
+	translation.ch:Und ez ischs z'riskant für mi, was neus z'lerna. Nai, i bruch öper mitma unbekanntera Gsicht do in Gandria. So öper wia di.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -618,7 +618,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_BreakingProtection
 	translation.en:You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
 	translation.de:Du meinst, es gibt einen guten Grund für diesen Zauber? Wenn es den gibt, werden wir es früh genug herausfinden.
-	translation.ch:Du meinsch, es git en guete Grund für de Zauber? Ja wens de git, denn findemer da scho gnueg früe use.
+	translation.ch:Du mainsch, as git a guata Grund für de Zauber? Jo wenns de git, denn findemer das schu gnuag früah usa.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -633,7 +633,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhyRisky
 	translation.en:It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
 	translation.de:Es ist einfach so, dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören. Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht, dass du eine Ausnahme warst.
-	translation.ch:Es isch eifach so, dass ich i letzter Ziit immer me es Gfühl ha, dass öppert probiert, mini Arbet z'störe. Forschigsnotize und Lüt verschwinded plötzlich... Ich denk nid, dass du e Usnahm gsi bisch.
+	translation.ch:As isch eifach so, dass i in letschter Ziit immer meh z'Gfühl han, dass aswer probiart, mini Arbet z'störa. Forschigsnotiza und Lüüt verschwindend ufs Mol... I denk nid, dass du a Usnahm gsi bisch.
 	[
 		# Link node, tag is next tag
 		tag:33
@@ -647,7 +647,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhyRisky2
 	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 	translation.de:Rausgehen scheint keine gute Idee für mich zu sein, bis diese Stadt wieder normal ist.
-	translation.ch:Usega isch glaub eifach ke gueti Idee für mich bis die Stadt wider chli normaler isch.
+	translation.ch:Usa goh isch glaub eifach kai guati Idee für mi, bis dia Stadt wieder kli normaler isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -661,7 +661,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhatShouldIDo
 	translation.en:You'll have to learn another type of magic. There are - as far as I know - three mage guilds in Gandria, each focusing on another domain of magic.
 	translation.de:Du wirst eine neue Magieart lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezialisiert.
-	translation.ch:Du wirsch e neui Magieart lerne möse. In Gandria gits - sowiit ich weiss - drü verschideni Magiergilde, vo dene sich jedi ufen andere Bereich vode Magie spezialisiert.
+	translation.ch:Du wirsch a neui Magieart lerna müassa. In Gandria gits - sowiit i weiss - drei verschideni Magiergildana, vo dena sich jedi uf a andera Bereich vur Magie spezialisiart.
 	[
 		# Link node, tag is next tag
 		tag:35
@@ -676,7 +676,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhatShouldIDo2
 	translation.en:I guess you already know one of the guilds: The clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
 	translation.de:Ich nehme an, du kennst bereits eine der Gilden: Die Kleriker. Es gibt aber auch Magier in dieser Stadt, die Nekromantie oder Dämmerungsmagie praktizieren, du musst sie nur finden.
-	translation.ch:Ich denke, du kensch scho eini vode Gilde: D'Kleriker. Es git aber au Magier i dere Stadt, wo Nekromantie oder Dämmerigsmagie praktiziered, du muesch si nur finde.
+	translation.ch:I denka, du kennsch schu eini vo dena Gildana: D'Kleriker. As git aber au Magier in dera Stadt, wo Nekromantie oder Dämmerigsmagie praktiziarend, du muasch si nur finda.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -744,7 +744,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_Light
 	translation.en:We can't decipher the map using some simple magic. You'll have to gain the trust of one of the three guilds in order to learn more advanced magic.
 	translation.de:Wir können die Karte nicht mit trivialer Magie entschlüsseln. Du musst eine der drei Gilden dazu bringen dir zu vertrauen, damit sie dir mächtigere Magie beibringen.
-	translation.ch:Mir chönd die Charte nid mit trivialer Magie entschlüssle. Du muesch eini vode drei Gildene dezue bringe dir z'vertraue, dass sie dir mächtigeri Magie biibringed.
+	translation.ch:Miar könnd dia Karta nid mit trivialer Magie entschlüssla. Du muasch eini vo dena drei Gildana drzua bringa diar z'vertraua, damit si diar mächtigeri Magie biibringend.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -760,7 +760,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereNecromancers
 	translation.en:They need to stay hidden because their magic is not allowed in Gandria. But if I were you, I'd ask the alchemist Syrah, she seems to know some people.
 	translation.de:Sie dürfen sich nicht öffentlich zeigen, weil ihre Magie in Gandria verboten ist. Wenn ich du wäre, würde ich die Alchemistin Syrah fragen, sie hat wahrscheinlich Kontakte.
-	translation.ch:Si dörfed sich nid öffentlich zeige well iri Magie in Gandria verbote isch. Wenn ich dich wer würi aber mal d'Alchemistin Syrah fröge, si kennt da so Lüt.
+	translation.ch:Si dörfend sich nid öffentlich zeiga, will ihri Magie in Gandria vrbota isch. Wenn i di wär, würi aber mol d'Alchemistin Syrah froga, si kennt da so Lüüt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -776,7 +776,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereThieves
 	translation.en:Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
 	translation.de:Magier, die sich mit Dämmerungsmagie beschäftigen, sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
-	translation.ch:Magier wo sich mit Dämmerigsmagie beschäftiged sind meistens eifach Diebe. Ich wür ide Kanalisation vo Gandria afange sueche.
+	translation.ch:Magier, wo sich mit Dämmerigsmagie beschäftigend, sind meistens eifach Dieba. I wür in dr Kanalisation vu Gandria afanga suacha.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -792,7 +792,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereClerics
 	translation.en:Try to gain the trust of their leader and convince them of your skills.
 	translation.de:Versuch, das Vertrauen ihres Anführers zu gewinnen und überzeug sie von deinen Fähigkeiten.
-	translation.ch:Probier, es Vertraue vo ihrem Aführer z'becho und zeig ihne wad so druf hesch.
+	translation.ch:Vrsuach, z'Vertraua vo ihrem Afüahrer z'kriaga und zeig ihna, was du so druff hesch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -850,7 +850,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_JoinedClerics
 	translation.en:Maybe the most reasonable choice...
 	translation.de:Wahrscheinlich die vernünftigste Wahl...
-	translation.ch:Wohrschindli di vernünftigst Wahl...
+	translation.ch:Wohrschiinli di vernünftigscht Wahl...
 	[
 		# Link node, tag is next tag
 		tag:46
@@ -864,7 +864,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_GoodJobGuild
 	translation.en:Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
 	translation.de:Gut, dass du eine Magiergilde gefunden hast. Ich konnte deine Karte bis jetzt nicht mit Elementarmagie entschlüsseln.
-	translation.ch:Guet, dass e Magiergilde gfunde hesch. Bis ez hanis nanig gschafft, dini Charte mit bloss Elementarmagie z'entschlüssle.
+	translation.ch:Guat, dass a Magiergilda gfunda hesch. Bis ez hanis nonid gschafft, dini Karta nur mit Elementarmagie z'entschlüssla.
 	[
 		# Link node, tag is next tag
 		tag:49
@@ -878,7 +878,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_CombinedSkillsDivine
 	translation.en:But combined with your divine magic, it could work.
 	translation.de:Aber zusammen mit deiner heiligen Magie könnte es funktionieren.
-	translation.ch:Aber zeme mit dinere heilige Magie chönts funktioniere.
+	translation.ch:Aber zema mit dinera heiliga Magie könnts funktioniera.
 	[
 		# Link node, tag is next tag
 		tag:52
@@ -909,7 +909,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_JoinedThieves
 	translation.en:The underground of Gandria, eh. Just don't try to steal MY things.
 	translation.de:Der Untergrund von Gandria, heh. Versuch einfach nicht, meine Sachen zu stehlen.
-	translation.ch:De Untergrund vo Gandria, he. Probier eifach nid, mini Sache z'chlaue.
+	translation.ch:Dr Untergrund vu Gandria, he. Probiar eifach nid, mini Sacha z'klaua.
 	[
 		# Link node, tag is next tag
 		tag:47
@@ -937,7 +937,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_CombinedSkillsTwilight
 	translation.en:But combined with your twilight magic, it could work.
 	translation.de:Aber zusammen mit deiner Zwielichtsmagie könnte es funktionieren.
-	translation.ch:Aber zeme mit dinere Dämmerigsmagie chönts funktioniere.
+	translation.ch:Aber zema mit dinera Dämmerigsmagie könnts funktioniera.
 	[
 		# Link node, tag is next tag
 		tag:53
@@ -968,7 +968,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_JoinedNecromancers
 	translation.en:I didn't expect you'd go there. An interesting choice, indeed.
 	translation.de:Ich hätte nicht erwartet, dass du dort hin gehst. Eine interessante Wahl.
-	translation.ch:Ich hätt nid erwartet, dass du det ane gasch. E interessanti Wahl.
+	translation.ch:I hätt nid erwartet, dass du det ana gohsch. A interessanti Wahl.
 	[
 		# Link node, tag is next tag
 		tag:48
@@ -996,7 +996,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_CombinedSkillsNecro
 	translation.en:But combined with your necromancy, it could work.
 	translation.de:Aber zusammen mit deiner Nekromantie könnte es funktionieren.
-	translation.ch:Aber zeme mit dinere Nekromantie chönts funktioniere.
+	translation.ch:Aber zema mit dinera Nekromantie könnts funktioniera.
 	[
 		# Link node, tag is next tag
 		tag:54
@@ -1026,7 +1026,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_StartElementMaster
 	translation.en:I knew they would not make it easy for us. Like they really don't want to be found.
 	translation.de:Ich wusste, sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden.
-	translation.ch:Ich ha gwüsst si würdeds üs nid eifach mache. We wenn si gar nid gfunde werde wend.
+	translation.ch:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend.
 	[
 		# Link node, tag is next tag
 		tag:55
@@ -1040,7 +1040,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_StartElementMaster2
 	translation.en:But we need to discover the secret they're hiding. Fire, Water, Air, Earth... You already know about the first two.
 	translation.de:Aber wir müssen das Geheimnis lüften, das sie vor uns verstecken. Wasser, Feuer, Luft, Erde... Die ersten zwei kennst du bereits.
-	translation.ch:Aber mir mönd s'Gheimnis lüfte wo si vor üs verstecked. Füür, Wasser, Luft, Erde... Di erste zwei kennsch scho.
+	translation.ch:Aber miar müand z'Gheimnis lüfta wo si vor üs versteckend. Füür, Wasser, Luft, Erda... Di ersta zwei kennsch schu.
 	[
 		# Link node, tag is next tag
 		tag:56
@@ -1055,7 +1055,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_StartElementMaster3
 	translation.en:You need to learn how to control air and earth then. Together, we will find them.
 	translation.de:Du musst also noch lernen, wie man Luft und Erde kontrolliert. Zusammen werden wir sie finden.
-	translation.ch:Du muesch also no lerne, weme Luft und Erde kontrolliert. Zeme werdemer si finde.
+	translation.ch:Du muasch also no lerna, wia ma Luft und Erda kontrolliart. Zema werdemr si finda.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1112,7 +1112,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereSpells
 	translation.en:No, I don't know much about air or earth spells. You need to find them yourself.
 	translation.de:Nein, ich weiss nicht viel über Luft- oder Erdzauber. Du musst sie selbst finden.
-	translation.ch:Nei, ich weiss nid viel über Luft- oder Erdzauber. Du muesch si selber finde.
+	translation.ch:Na-a, i weiss nid viel über Luft- oder Erdzauber. Du muasch si allai finda.
 	[
 		# Link node, tag is next tag
 		tag:62
@@ -1129,7 +1129,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereSpells2
 	translation.en:I've heard that the lighthouse keeper Jack has a problem with a wind-monster. That may help you with learning some wind magic.
 	translation.de:Ich habe gehört, dass der Leuchtturmwächter Jack ein Problem mit einem Windmonster hat. Das könnte dir helfen, etwas über das Element zu lernen.
-	translation.ch:Ich ha ghört dass de Lüüchtturmwächter Jack es Problem mitme Windmonster het. Das chönt der helfe, öppis über Windmagie z'lerne.
+	translation.ch:I han mitkriagt dass dr Lüüchtturmwächter Jack as Problem mitma Windmonster het. Das könnti dr helfa, öpis über Windmagie z'lerna.
 	[
 		# Link node, tag is next tag
 		tag:63
@@ -1143,7 +1143,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_WhereSpells3
 	translation.en:I assume you can find Jack in the brothel...
 	translation.de:Ich glaube, du kannst Jack im Bordell finden...
-	translation.ch:Ich glaub, du chasch de Jack im Bordell finde...
+	translation.ch:I denka, du kasch dr Jack im Bordell finda...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1157,7 +1157,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_YouLearn
 	translation.en:My focus are only fire spells. Also, I don't feel safe going out of my house anymore.
 	translation.de:Ich konzentriere mich nur auf Feuerzauber. Ausserdem fühle ich mich ausserhalb meines Hauses nicht mehr sicher.
-	translation.ch:Ich konzentrier mich nur uf Füürzauber. Usserdem fühli mi usse a mim Huus nümme sicher.
+	translation.ch:I konzentriar mi nur uf Füürzauber. Usserdem fühl i mi usserhalb vu mim Huus nüma sicher.
 	[
 		# Link node, tag is next tag
 		tag:60
@@ -1171,7 +1171,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_YouLearn2
 	translation.en:I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
 	translation.de:Ich bin mir ziemlich sicher, dass ich beobachtet werde - Jemand folgte mir kürzlich auf dem Weg nach Hause.
-	translation.ch:Ich bimer zimli sicher dassi beobachted wird - Öpper ischmer letzins ufem Weg hei nagloffe.
+	translation.ch:I bin mr huara sicher, dass ma mi beobachtet - As isch mr letschtens ufem Heiweg öper noh gloffa.
 	[
 		# Link node, tag is next tag
 		tag:61
@@ -1186,7 +1186,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_YouLearn3
 	translation.en:And with all the people disappearing... No, no, I leave this to you.
 	translation.de:Und mit all den Leuten, die verschwinden... Nein, nein, das überlass ich dir.
-	translation.ch:Und mit all dene Lüt wo verschwinded... Nei, nei, das überlahn ich dir.
+	translation.ch:Und mit all dena Lüüt wo verschwindend... Nai, na-a, das überlohn i diar.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1200,7 +1200,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_BirdSlain
 	translation.en:And you've managed to absorb its magical powers. Well done.
 	translation.de:Und du hast seine magische Kraft in dir aufgenommen. Gut gemacht.
-	translation.ch:Und du hesch sini magischi Chraft i dir ufgno. Guet gmacht.
+	translation.ch:Und du hesch sini magischi Kraft in diar ufgnoh. Guat gmacht.
 	[
 		# Link node, tag is next tag
 		tag:65
@@ -1214,7 +1214,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_BirdSlain2
 	translation.en:Now there's only one element left - earth.
 	translation.de:Jetzt bleibt nur noch ein Element übrig - Erde.
-	translation.ch:Ez bliibt nur no eis Element übrig - Erde.
+	translation.ch:Ez bliibt nur no eis Element übrig - Erda.
 	[
 		# Link node, tag is next tag
 		tag:66
@@ -1228,7 +1228,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_BirdSlain3
 	translation.en:The only mage in Gandria who knows some earth magic is a guy called Koray.
 	translation.de:Der einzige Magier in Gandria, der sich mit Erdmagie auskennt, ist ein Typ namens Koray.
-	translation.ch:De einzig Magier i Gandria wo sich chli mit Erdmagie uskennt isch en Typ namens Koray.
+	translation.ch:Dr einzig Magier in Gandria, wo sich a kli mit Erdmagie uskennt, isch a Typ namens Koray.
 	[
 		# Link node, tag is next tag
 		tag:67
@@ -1244,7 +1244,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Jonathan_BirdSlain4
 	translation.en:He went to the marshlands in the South of Gandria lately. Maybe he'll teach you what he knows.
 	translation.de:Er ging kürzlich in die Marschen im Süden von Gandria. Vielleicht bringt er dir ja sein Wissen bei.
-	translation.ch:Er isch letztins is Sumpfland im Süde vo Gandria gange. Vilicht bringter dir jo bi waner weiss.
+	translation.ch:Er isch letschtens ins Sumpfland im Süda vu Gandria ganga. Villicht bringtr diar jo bi was er weiss.
 	[
 		# Link node, tag is next tag
 		tag:-2
