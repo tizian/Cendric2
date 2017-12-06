@@ -18,8 +18,9 @@ JanusBoss::JanusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
-	g_resourceManager->loadSoundbuffer(JanusBoss::RED_SOUND, ResourceType::Level);
-	g_resourceManager->loadSoundbuffer(JanusBoss::BLUE_SOUND, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(RED_SOUND, ResourceType::Level);
+	g_resourceManager->loadSoundbuffer(BLUE_SOUND, ResourceType::Level);
+	m_hasFirstPhaseStarted = false;
 }
 
 JanusBoss::~JanusBoss() {
@@ -87,6 +88,7 @@ void JanusBoss::loadSpells() {
 void JanusBoss::update(const sf::Time& frameTime) {
 	loadTorches();
 	m_cloudPs->update(frameTime);
+	updateFirstPhase();
 	updateTime(m_timeUntilPhase, frameTime);
 	updateTorchStatus(frameTime);
 	Boss::update(frameTime);
@@ -96,6 +98,17 @@ void JanusBoss::render(sf::RenderTarget& target) {
 	m_cloudPs->render(target);
 	Boss::render(target);
 	m_mask.render(target);
+}
+
+void JanusBoss::updateFirstPhase() {
+	if (m_hasFirstPhaseStarted) return;
+
+	// a small but important piece of code to hinder people from one-cycling the boss
+	if (m_attributes.currentHealthPoints < 0.75f * m_attributes.maxHealthPoints) {
+		m_phase = TorchSpell1;
+		m_enemyMovingBehavior->resetMovingTarget();
+		m_hasFirstPhaseStarted = true;
+	}
 }
 
 void JanusBoss::handleAttackInput() {
@@ -117,14 +130,14 @@ void JanusBoss::handleAttackInput() {
 		for (auto t : m_blueTorchTiles) {
 			m_spellManager->executeCurrentSpell(t->getCenter(), true);
 		}
-		m_phase = JanusBossPhase::TorchSpell2;
+		m_phase = TorchSpell2;
 		m_hasLitTorches = false;
 		return;
 	case TorchSpell2:
 		if (!isReady()) return;
 
 		if (m_hasLitTorches) {
-			m_phase = JanusBossPhase::Chop;
+			m_phase = Chop;
 			setEvil(true);
 			return;
 		}
@@ -134,14 +147,14 @@ void JanusBoss::handleAttackInput() {
 			m_spellManager->executeCurrentSpell(t->getCenter(), true);
 		}
 		m_hasLitTorches = true;
-		return;
 	}
 }
 
 void JanusBoss::setEvil(bool evil) {
 	m_mask.setEvil(evil);
-	g_resourceManager->playSound(evil ? JanusBoss::RED_SOUND : JanusBoss::BLUE_SOUND);
+	g_resourceManager->playSound(evil ? RED_SOUND : BLUE_SOUND);
 	m_isInvincible = evil;
+	m_hasFirstPhaseStarted = true;
 }
 
 void JanusBoss::loadAnimation(int skinNr) {
@@ -243,7 +256,7 @@ void JanusBoss::loadTorches() {
 
 	m_redTorchTiles.clear();
 	m_blueTorchTiles.clear();
-	for (GameObject* obj : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+	for (GameObject* obj : *m_screen->getObjects(_DynamicTile)) {
 		if (TorchTile* t = dynamic_cast<TorchTile*>(obj)) {
 			if (t->getColor().compare("red") == 0) {
 				m_redTorchTiles.push_back(t);
@@ -259,7 +272,7 @@ void JanusBoss::loadTorches() {
 	m_torchesLoaded = true;
 
 	// initial values for janus
-	m_phase = JanusBossPhase::Vulnerable;
+	m_phase = Vulnerable;
 	m_timeUntilPhase = sf::seconds(3.f);
 	setEvil(false);
 }
@@ -307,7 +320,7 @@ void JanusBoss::updateTorchStatus(const sf::Time& frameTime) {
 		if (m_isBlueTorchesFine && m_isRedTorchesFine) {
 			setEvil(false);
 			// phase start
-			m_phase = JanusBossPhase::Vulnerable;
+			m_phase = Vulnerable;
 			m_timeUntilPhase = PHASE_TIME;
 			return;
 		}
@@ -316,12 +329,12 @@ void JanusBoss::updateTorchStatus(const sf::Time& frameTime) {
 	case Vulnerable:
 		if (m_timeUntilPhase == sf::Time::Zero) {
 			m_enemyMovingBehavior->setMovingTarget(static_cast<int>(m_torchSpellPosition.x), static_cast<int>(m_torchSpellPosition.y));
-			m_phase = JanusBossPhase::ToTorch;
+			m_phase = ToTorch;
 		}
 		break;
 	case ToTorch:
-		if (std::abs(getCenter().x - m_torchSpellPosition.x) < 10.f) {
-			m_phase = JanusBossPhase::TorchSpell1;
+		if (abs(getCenter().x - m_torchSpellPosition.x) < 10.f) {
+			m_phase = TorchSpell1;
 			m_enemyMovingBehavior->resetMovingTarget();
 		}
 		break;
