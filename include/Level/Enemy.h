@@ -88,12 +88,16 @@ public:
 	bool isAlly() const override;
 	// returns whether the enemy is a boss
 	bool isBoss() const;
+	// returns whether the enemy was already resurrected once
+	bool isResurrected() const;
 	// sets the waiting time to the configured waiting time
 	void setWaiting();
 	// sets the chasing time to the configured chasing time
 	void setChasing();
 	// sets the feared time to the configured feared time
 	void setFleeing();
+	// notifies this enemy that it has been resureccted
+	void setResurrected();
 	const LevelMovableGameObject* getCurrentTarget() const;
 
 	void setTargeted(bool targeted);
@@ -130,6 +134,7 @@ protected:
 	bool m_isUnique = false;
 	bool m_isBoss = false;
 	bool m_isLooted = false;
+	bool m_isResurrected = false;
 	bool m_isHPBarVisible = true;
 	bool m_isQuestRelevant = false; // marked as quest relevant
 

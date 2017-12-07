@@ -87,4 +87,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pp
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ppuzzle04','location','Mysterious Tower','Mysteriöser Turm','Mysteriöse Turm');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('etozhideout','location','Etoz'' Hideout','Etoz'' Versteck','Em Etoz sis Versteck');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('island','location','Os','Os','Os');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('towerwalkway','location','Secret Passage','Geheimer Durchgang','Gheime Durchgang');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('towerwalkway','location','The Road to Os','Der Weg nach Os','De Weg nach Os');

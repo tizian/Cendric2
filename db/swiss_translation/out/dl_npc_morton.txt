@@ -1,8 +1,8 @@
 dl_npc_morton
 ----------------------------------
-DL_Morton_BeGone:Was machsch du da? Du störsch d''Rueh vode Tote. Husch, furt mit dir!
-DL_Morton_Necromancers:Pass uf mit dere Magie, Bueb...
-DL_Morton_Syrah:Ah, d''Syrah. (De Morton starrt dich ah) Weso stellt si au immer so Type we dich ah.
-DL_Morton_Syrah2:(Süüfzet) Du chasch ie. Aber mach chli schnell und lang nüt ah wod nid bruchsch.
-DL_Morton_GuysLikeMe:Grüenschnäbligi Nichtsnutz. De letzt, wo si da ane gschickt het, isch nie wider usecho.
-DL_Morton_OtherGuy:Jo, jo. Roti Hoore, isch öppe so alt gsi we du und genau so naiv. Aber gnueg gschnorret, ich mun ez schaffe.
+DL_Morton_BeGone:Was machsch du do? Du störsch d''Rueh vo dä Tote. Abfaahrä!
+DL_Morton_Necromancers:Uffbassä mit dere Magie, Bueb...
+DL_Morton_Syrah:Ah, d''Syrah. (Dr Morton starrt di aa) Wurumm stellt sie au immer so Type wie dich aa.
+DL_Morton_Syrah2:(Seufzt) Chasch iinä. Aber bressier und nüt aadööplä wod nid bruchsch.
+DL_Morton_GuysLikeMe:Grienschnääbligi Nichtsnütz. Dr letscht, wo sie do ane gschickt het, isch nie me usecho.
+DL_Morton_OtherGuy:Jo, jo. Roti Hoor, isch öppä so alt gsi wie du und genau so naiv. Aber gnueg gschnuuret, ich mues jetzt schaffe.

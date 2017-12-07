@@ -84,6 +84,7 @@ public:
 	Item* getItem(const std::string& itemID);
 
 	const std::pair<ErrorID, std::string>* pollError() const;
+	bool toggleAutotarget();
 	ConfigurationData& getConfiguration();
 
 private:

@@ -1,0 +1,36 @@
+dl_npc_zeff
+----------------------------------
+DL_Zeff_SittingHere:Ech sitz da am Füür und hoffe, dass ech niemer verschlinge bevor de Fluech mich verschlingt.
+DL_Zeff_IAmWho:Ech be de Zeff.
+DL_Zeff_IAmWhat:(Chnurrt liislig) Ech gse scho, mini üsserlichi Erschinig fallt grad uf.
+DL_Zeff_IAmSuprised:Ech be überrascht, dass du de Muet hesch, mit mer z''rede. Die meiste Lüüt flüchtet voller Entsetze, wenn si mis Gsecht gsänd.
+DL_Zeff_ThankYouLooks:Danke. Du besch di ersti Person wo öppis nätts zu mer seid, sit ich ih das Monster verwandlet worde bin.
+DL_Zeff_IAmScary:(Laht sin Chopf hänge) Ja, das stimmt. Ich wünschmer werkli, ech wär nid ih das Monster verwandlet worde.
+DL_Zeff_YouShouldBe:Vellecht settisch aber. Ich chan zwar jetzt immerno wie en Mensch dänke, aber ech spür, dass ech mich bald ganz in es Monster verwandle werde.
+DL_Zeff_Werewolf:Du besch nonie werklich emene Werwolf begegnet, oder? En Werwolf chönt ned so mit der rede.
+DL_Zeff_WhyMonster:En schreckliche Fluech het mech troffe - und jetzt chani ned id Stadt Gandria zrugg.
+DL_Zeff_Craft:Sicher, wenn du es Fell für mech derbi hesch?
+DL_Zeff_FireRatFur:Es Fell vonere Fürratte, so rüdig. Es het d''Eigeschaft, dich vor Füür z''schütze.
+DL_Zeff_HelpCurse:Vellecht. Wenn du gnueg Muet hesch, chasch ja probiere, das Ding z''töte. Wemmer de Schöpfer vomene Fluech vernichtet, chamer so au meistens de Fluech selber bräche.
+DL_Zeff_HelpCurse2:D''Höhli, wo''s es sich versteckt isch direkt vor de Stadt. Aber pass huere uf und lah es ned ih dini Auge luege.
+DL_Zeff_CurseStronger:Ja. Am Aafang isch mir das Fell gwachse und nachhär hani Wolfsohre und -Auge becho. Denn isch de rüdigi Schwanz uftaucht und jetzt frog ich mich, wie lang ich no uf zwei Bei laufe chan.
+DL_Zeff_Curse:De Fluech, wo mich dezue zwingt, uszgse wene Monster. Und bald gsehni nid nur so uus, sondern denk au so.
+DL_Zeff_Hunting:Ech be us de Stadt gange zum go jage, damit ech min Fellvorrat hetti chönne ufstocke. Denn hani e Höhli voller Wölf entdeckt.
+DL_Zeff_Hunting2:Also bini inne gange, ide Hoffnig eine oder zwei mit mim "Kürschnermesser" (hebt sis Schwert ufe) z''erlege. Aber ech ben ned wiit cho.
+DL_Zeff_Hunting3:Denn isch das... Ding uftaucht. Ech ha ned viel gse, wells so dunkel gsi esch, aber es esch huere gross gsi. Mit eim lüüchtende Aug, wo es mich agstarrt het... und s Nöchste wo mech chan drah erinnere isch dasi vor de Höhli glege ben, bedeckt mit Fell.
+DL_Zeff_LivedGandria:Ja. Ech ha en herzigi chliini Lederwerkstatt in Gandria gha. (Schluchzt) Aber jetzt gsehts so us, als würdi die nie wieder gseh.
+DL_Zeff_BadGuards:D''Stadtwache werded mer ned glaube, was passiert esch. Si werded mich töte, wenn si mech gsähnd. Ech bliebe lieber da und stirb elei, ohni dasi öpper verletze.
+DL_Zeff_YouSuspect:Jaja... und nur weli wie en Wolf usgseh, beni grad din ersti Verdächtigi.
+DL_Zeff_YoureRight:ber weni ehrlich ben, hesch natürlich rächt. Ech han die Schöfli klaut. Aber ech cha au ned eifach id Taverne laufe und mer Fleisch chaufe, oder?
+DL_Zeff_ComeAndTry:Das isch de letzti Fähler, wo du jemals mache wersch.
+DL_Zeff_BadassSword:Ja, aber wenn ich Hunger han, chan ich mech nüme kontrolliere. Aber besser Schöfli als Mensche, gäll.
+DL_Zeff_HungryWolf:Wenn du mer eh chli Fleisch us de Taverne holsch, chani ufhöre, Schöfli z''risse, zumindest für es Zitli. Und nachene suechi mer en anderi Bühti, versproche.
+DL_Zeff_ThanksForMeat:Danke, das isch perfekt. Du chasch de Buure säge, dass s Biescht nümme uftauche werd. Und wend wetsch, chan ech der mit mine Ledererkünst hälfe, zumindest so lang, woni na gnueg Mensch bin.
+DL_Zeff_ShowMark:Hrr... (Starrt dis Mal ah) Ech han nonie so öppis we das gseh.
+DL_Zeff_ShowMark2:Aber ech find, du besch ja zimlich guet wegcho... Ech mein, lueg der mal mis Gsicht ah! Es härziges Tattoo cha doch chum schlimmer sii, als de Zwang, jedi Nacht es Schöfli z''hole.
+DL_Zeff_BeastSlain:Würklich? (Starrt uf sini Pfote) Ech gspür kein Unterschied.
+DL_Zeff_BeastSlain2:De Fluech esch aber i letzter Ziit au ned schlimmer worde. Vellecht esch d''Verwandlig eifach gstoppt worde.
+DL_Zeff_StayWolf:Es schiint so. Wenn ech en klare Chopf phalte chan, chani mer vellecht sogar met dere Gstalt aafründe. Aber wen ich drüber nachedenke, zrugg z''ga...
+DL_Zeff_ReturningHome:Ech fürchte, ech chume immer nonig ah de Wache verbii. Vellecht chöntisch du ehne verzelle, was passiert esch, und si dervo überzüüge, mech weder ihne z lah? Ech chönt der en u huere Huet afertige als Dank, wen ich  mini Werkstatt wieder han.
+DL_Zeff_IWillGoHome:Danke für die guete Neuigkeite! Ech chas chuum erwarte, mis hübsche Hüsli weder zgseh. Vergiss ned, mer in Gandria en Bsuech zmache, um dini Belohnig abhole.
+DL_Zeff_Wolfbonnet:Wolfsfell? Ech hoffe, das isch ned ergenden chranke Scherz. Aber guet, nimm die Chappe.

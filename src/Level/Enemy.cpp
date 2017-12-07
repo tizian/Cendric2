@@ -216,6 +216,10 @@ bool Enemy::isBoss() const {
 	return m_isBoss;
 }
 
+bool Enemy::isResurrected() const {
+	return m_isResurrected;
+}
+
 const LevelMovableGameObject* Enemy::getCurrentTarget() const {
 	return m_enemyAttackingBehavior->getCurrentTarget();
 }
@@ -253,6 +257,10 @@ void Enemy::setChasing() {
 void Enemy::setFleeing() {
 	m_fearedTime = getConfiguredFearedTime();
 	m_enemyState = EnemyState::Fleeing;
+}
+
+void Enemy::setResurrected() {
+	m_isResurrected = true;
 }
 
 void Enemy::setLoot(const std::map<std::string, int>& items, int gold) {

@@ -1,0 +1,16 @@
+dl_npc_innkeeper
+----------------------------------
+DL_Innkeeper_HereYouGo:Secher. Do, nemm.
+DL_Innkeeper_NotEnoughGold:Wenn du es Bier ha wetsch, muesches au chönne zahle.
+DL_Innkeeper_TakeItAnyway:Ja, ech glaub du hesch gnueg Gold zum mech trotzdem z''öberzüüge. Do, nemm.
+DL_Innkeeper_NoSchnapps:Ech cha mine Schnaps ned jedem dahergloffene Strolch verchaufe. Ond secher ned somne verlompte Bättler wie der.
+DL_Innkeeper_NotEnoughForSchnapps:Du hesch nid gnueg Gold für es edels Fläschli debi, tuet mer leid.
+DL_Innkeeper_NoRumor:Hm nö, ech han nüt Interessants me z''verzelle.
+DL_Innkeeper_SecondRumorP1:Zwoi Landwerte hend mer letschti verzellt, dass si regelmässig vomne Monster heimgsuecht werded und ehne ehri Schöfli chlaut.
+DL_Innkeeper_SecondRumorP2:Leider kömmert sich d''Miliz vo Gandria ned sonderlech um die seltsame Vorfäll.
+DL_Innkeeper_FirstRumorP1:Ech han ghört, dass de König vo Admantris abdankt het - zo Gunste vo sim Sohn, em Logan de Dretti.
+DL_Innkeeper_FirstRumorP2:Ech verstohs aber ned wörklech. De alt König esch eigentlech no zimli fit uf de Bei gsi. Und sine Sohn, naja, er het sis Gsicht em Volk ned allzu oft zeigt.
+DL_Innkeeper_WhatsTheName:Jo, mine Fusel esch berüemt, gau. So berüemt, dass du secher weisch, wiener heisst?
+DL_Innkeeper_ComeBackLater:Wer de Name ned weiss, bruchts au ned. Chom weder, wennd ne weisch.
+DL_Innkeeper_WrongName:Wetsch mech verarsche? Das tönt jo lächerlech. Ech cha mine edel Schnaps nur Lüüt verkaufe, wo wössed wener heisst.
+DL_Innkeeper_RightName:Sehr guet. Aber bis gwarnt, er treit sine Name ned vergäbe! Es brönnt d Seel, wener d''Kehle berüehrt. He he he...

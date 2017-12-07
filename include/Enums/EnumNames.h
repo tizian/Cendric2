@@ -394,6 +394,8 @@ public:
 			return "Screenshot";
 		case Key::BackToCheckpoint:
 			return "BackToCheckpoint";
+		case Key::ToggleAutotarget:
+			return "ToggleAutotarget";
 		}
 	}
 

@@ -1,0 +1,54 @@
+dl_npc_jonathan
+----------------------------------
+DL_Jonathan_WalkIntoHouse:He, was tuasch du do? Du kasch nid aifach ind Hüüser vu fremda Lüüt inalaufa!
+DL_Jonathan_NoExcuNdse:Jo guat, aber das isch nid würkli a Usred. Wieso bisch du do?
+DL_Jonathan_WhatDoYouWant:Was wetsch denn vu miar?
+DL_Jonathan_Letter:(Liist dr Briaf sorgfältig) Cyrus! As isch guat, vu ihm z''ghöra. Du kusch also vu dr Akademie? Was het dr Cyrus denn usagfunda?
+DL_Jonathan_Wow:Wow... Z ganza Gedächtnis z''verlüra isch ziemli ungwöhnlich, au füra Magier.
+DL_Jonathan_Wow2:Und a Iisball z''beschwöra isch dr einzig Zauber wo no kasch, gäll. As isch guat, dass zu miar kho bisch. Miar wärdend das zäma uflösa.
+DL_Jonathan_Academy:Di einzig Akademie in Admantris wo Elementarmagier usbildet. Si liit uf dr andera Siita vom Meer. Du hesch offasichtlich det studiart.
+DL_Jonathan_Elementalists:Magier mitara Affinität zur Elementarmagie. As git nüm so viel drvo in Admantris, aber i bin eina... und du - wohrschiinli - au.
+DL_Jonathan_Affinity:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp gebora. Dä bestimmt, welli Zauber mr lerna kann. Miar Elementarmagier hend Glück - miar könnd z ganza Spektrum vur Magie verstoh.
+DL_Jonathan_NextStep:Hm. I han schu gwüsst, dass dr Cyrus miar eina vu sina Studenta schicka wird. Aber um ehrlich zsii, i han mit öperem grächnet wo kli meh... 
+DL_Jonathan_NextStep2:...qualifiziert isch. Usserdem isch eina, wo sis Gedächtnis verlora het, schu huara verdächtig. Bevor i di in mini Forschiga iweiha, muasch zerscht bewiisa, dass du a würdiga Elementarmagier bisch.
+DL_Jonathan_FireballQuest:Jeda Magier kann lerna, wia ma a Iisball beschwört. Füür z''kontrolliera isch aber für a Magier ohni Affinität zur Elementarmagie fascht unmöglich.
+DL_Jonathan_FireballQuest2:As paar Füürratta us dr Kanalisation sind in miis Labor i mim Käller iidrunga. Find usa, wia si alocka kasch und bring miar d''Füüressenza us ihrna Lungana. Denn wirdi mol luaga, ob i diar biibringa kann, wia ma a Füürball beschwört.
+DL_Jonathan_EssenceComplete:Huara guat. Villicht kömmer jo doch no a aständiga Elementarmagier us diar macha.
+DL_Jonathan_EssenceComplete2:Do, nimm dia Schriftrolla und lies si. Red wieder mit miar, wenn dr Zauber glernt hesch.
+DL_Jonathan_LearnedFireball:Und du heschs au schu checkt. I denk, miar könnd denn grad afanga.
+DL_Jonathan_LearnedFireball2:I forscha am alta, vergessena Wüssa vu de ersta Elementarmagier. I han schu usagfunda, dass sie früaner viel mächtigeri Zauber kennt hend, als jeglichi Elementarmagie, wo mr hüt so brucht.
+DL_Jonathan_LearnedFireball3:I han Bewiis gfunda, dasses irgendwo in dr Nöchi vu Gandria a verlassna Ort git, wo di erschta Elementarmagier glebt hend, drum schaff i au do.
+DL_Jonathan_LearnedFireball4:I bi mr ziemli sicher dass dia Karta, wo dr Cyrus miar gschickt het, dr Schlüssel isch zum de Ort z''finda. As git do aber a klises Problem mit dera Karta...
+DL_Jonathan_LearnedFireball5:Elementarmagie allai langet nid zum si entschlüssla. Zema mitera andera Magieart sött mrs aber anabringa, dr Schutzzauber z''brecha.
+DL_Jonathan_AnotherMage:Um ehrlich zsii trau i keinem andara Magier in dera Stadt. Je weniger Lüüt vu dera Karta wüssend, desto besser.
+DL_Jonathan_WhatAboutYou:Obwohl miar Elementarmagier jedi Magieart lerna könnd, hani mi bis ez nur mit Elementarmagie beschäftigt.
+DL_Jonathan_WhatAboutYou2:Und ez ischs z''riskant für mi, was neus z''lerna. Nai, i bruch öper mitma unbekanntera Gsicht do in Gandria. So öper wia di.
+DL_Jonathan_BreakingProtection:Du mainsch, as git a guata Grund für de Zauber? Jo wenns de git, denn findemer das schu gnuag früah usa.
+DL_Jonathan_WhyRisky:As isch eifach so, dass i in letschter Ziit immer meh z''Gfühl han, dass aswer probiart, mini Arbet z''störa. Forschigsnotiza und Lüüt verschwindend ufs Mol... I denk nid, dass du a Usnahm gsi bisch.
+DL_Jonathan_WhyRisky2:Usa goh isch glaub eifach kai guati Idee für mi, bis dia Stadt wieder kli normaler isch.
+DL_Jonathan_WhatShouldIDo:Du wirsch a neui Magieart lerna müassa. In Gandria gits - sowiit i weiss - drei verschideni Magiergildana, vo dena sich jedi uf a andera Bereich vur Magie spezialisiart.
+DL_Jonathan_WhatShouldIDo2:I denka, du kennsch schu eini vo dena Gildana: D''Kleriker. As git aber au Magier in dera Stadt, wo Nekromantie oder Dämmerigsmagie praktiziarend, du muasch si nur finda.
+DL_Jonathan_Light:Miar könnd dia Karta nid mit trivialer Magie entschlüssla. Du muasch eini vo dena drei Gildana drzua bringa diar z''vertraua, damit si diar mächtigeri Magie biibringend.
+DL_Jonathan_WhereNecromancers:Si dörfend sich nid öffentlich zeiga, will ihri Magie in Gandria vrbota isch. Wenn i di wär, würi aber mol d''Alchemistin Syrah froga, si kennt da so Lüüt.
+DL_Jonathan_WhereThieves:Magier, wo sich mit Dämmerigsmagie beschäftigend, sind meistens eifach Dieba. I wür in dr Kanalisation vu Gandria afanga suacha.
+DL_Jonathan_WhereClerics:Vrsuach, z''Vertraua vo ihrem Afüahrer z''kriaga und zeig ihna, was du so druff hesch.
+DL_Jonathan_JoinedClerics:Wohrschiinli di vernünftigscht Wahl...
+DL_Jonathan_GoodJobGuild:Guat, dass a Magiergilda gfunda hesch. Bis ez hanis nonid gschafft, dini Karta nur mit Elementarmagie z''entschlüssla.
+DL_Jonathan_CombinedSkillsDivine:Aber zema mit dinera heiliga Magie könnts funktioniera.
+DL_Jonathan_JoinedThieves:Dr Untergrund vu Gandria, he. Probiar eifach nid, mini Sacha z''klaua.
+DL_Jonathan_CombinedSkillsTwilight:Aber zema mit dinera Dämmerigsmagie könnts funktioniera.
+DL_Jonathan_JoinedNecromancers:I hätt nid erwartet, dass du det ana gohsch. A interessanti Wahl.
+DL_Jonathan_CombinedSkillsNecro:Aber zema mit dinera Nekromantie könnts funktioniera.
+DL_Jonathan_StartElementMaster:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend.
+DL_Jonathan_StartElementMaster2:Aber miar müand z''Gheimnis lüfta wo si vor üs versteckend. Füür, Wasser, Luft, Erda... Di ersta zwei kennsch schu.
+DL_Jonathan_StartElementMaster3:Du muasch also no lerna, wia ma Luft und Erda kontrolliart. Zema werdemr si finda.
+DL_Jonathan_WhereSpells:Na-a, i weiss nid viel über Luft- oder Erdzauber. Du muasch si allai finda.
+DL_Jonathan_WhereSpells2:I han mitkriagt dass dr Lüüchtturmwächter Jack as Problem mitma Windmonster het. Das könnti dr helfa, öpis über Windmagie z''lerna.
+DL_Jonathan_WhereSpells3:I denka, du kasch dr Jack im Bordell finda...
+DL_Jonathan_YouLearn:I konzentriar mi nur uf Füürzauber. Usserdem fühl i mi usserhalb vu mim Huus nüma sicher.
+DL_Jonathan_YouLearn2:I bin mr huara sicher, dass ma mi beobachtet - As isch mr letschtens ufem Heiweg öper noh gloffa.
+DL_Jonathan_YouLearn3:Und mit all dena Lüüt wo verschwindend... Nai, na-a, das überlohn i diar.
+DL_Jonathan_BirdSlain:Und du hesch sini magischi Kraft in diar ufgnoh. Guat gmacht.
+DL_Jonathan_BirdSlain2:Ez bliibt nur no eis Element übrig - Erda.
+DL_Jonathan_BirdSlain3:Dr einzig Magier in Gandria, wo sich a kli mit Erdmagie uskennt, isch a Typ namens Koray.
+DL_Jonathan_BirdSlain4:Er isch letschtens ins Sumpfland im Süda vu Gandria ganga. Villicht bringtr diar jo bi was er weiss.

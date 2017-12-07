@@ -1,9 +1,9 @@
 dl_npc_lua
 ----------------------------------
-DL_Lua_Hello:Oh, hallo. Es isch zimli ungwöhnlich, en Magier mit sonere spezielle Aura z''treffe. Du bisch en Elementarmagier, gell?
-DL_Lua_Elementalist:Ich bin e Sehendi. (Lächlet gheimnisvoll)
-DL_Lua_Flirt:(Errötet) Oh, danke. We schad, mini Fähigkeite als Sehendi enthülled nur dini Aura, aber nid dini Gedanke.
-DL_Lua_Clairvoyant:Di meiste Magier spüred nur d''Chraft von Aurene. Lüt wi ich gsend aber ihri Farb - d''Affinität vom Magier zunere gwüsse Art vode Magie.
-DL_Lua_MyAura:Für mich erschiint si imne Füürrot. Würkli ussergwöhnlich schön zum aluege.
-DL_Lua_NoNecromancer:Eifach weli nid ihri Robe aha? Oke, weni ehrlich bi bini au nur da zum läse.
-DL_Lua_NoNecromancer2:Ich lieb die Bibliothek. So viel Wüsse wo vode Kleriker verbrennt werde wür, wenns d''Möglichkeit dezue hetted.
+DL_Lua_Hello:Oh, hallo. Es isch ziemlig ungwöhnlich ä Magier mit sonere speziellä Aura z''träffe. Du bisch ä Elementarmagier, gäll?
+DL_Lua_Elementalist:Ich bi ä Sehendi. (Lächlet gheimnisvoll)
+DL_Lua_Flirt:(Errötet) Oh, merci. Schad, mini Fähigkeite als Sehendi enthüllä nur dini Aura, aber nid dini Gedanggä.
+DL_Lua_Clairvoyant:Diä meischtä Magier gspüürä nur d''Kraft vo Aurenä. Lüt wiä ich gsehn aber ihri Farb - d''Affinität vom Magier zunere gwüsse Art vo Magie.
+DL_Lua_MyAura:Für mich erschiint sie imene Fyyrrot. Wirgglig ussergwöhnlig zum aaluege.
+DL_Lua_NoNecromancer:Nur willi nit ihri Robe aa ha? Jo wenni ehrlig bi bini au nur doo zum läse.
+DL_Lua_NoNecromancer2:Ich lieb die Bibliothek. So viel Wüssä wo vo dä Kleriker verbrennt wärde würd, wennsi d''Möglichkeit drzue hättä.

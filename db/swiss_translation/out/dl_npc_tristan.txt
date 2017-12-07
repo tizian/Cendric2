@@ -1,0 +1,13 @@
+dl_npc_tristan
+----------------------------------
+DL_Tristan_Merchant:Ja, du chasch da Fleisch, Chrüütli und au es paar anderi Sache chaufe, wend Gold hesch.
+DL_Tristan_Farmer:Er ghört immerna mim Vatter, em Ivo. Aber in es paar Jöhrli ghörter denn mir.
+DL_Tristan_SoundsGreat:Gell? Ich wird irgendwenn sehr riich si.
+DL_Tristan_Shepherd:Sig nid so frech. Du bisch doch nur iiversüchtig, well du nid au sonen riiche Vatter hesch we ich.
+DL_Tristan_Rude:We chasch du''s waage, mit mir so z''rede. So machsch der ke Kollege...
+DL_Tristan_Reward:Du hesch dich also um de Schöflidieb kümmeret? Ich bi beiidruckt.
+DL_Tristan_RudeReward:Du bisch wenigstens für öppis z''bruuche. De Ivo het e Belohnig vo 30 Goldstück uf de Chopf vom Dieb usgsetzt. Aber ich ha nid toll gfunde, we du vorene mit mir gredt hesch... 10 sind glaub gnueg für dich.
+DL_Tristan_NormalReward:Da, nimm das Gold. Und e Fackle, vilicht chasch si bruuche.
+DL_Tristan_ThiefSeen:Hm, nei. De Dieb isch nur im Dunkle uftaucht. Ich glaub aber nid, dases en Wolf gsi isch... well susch heti en Kadaver vomne grissene Schöfli gfunde.
+DL_Tristan_Bandits:Vilicht. Wenn du nach ihne suechsch, probiers nid ide Nöchi vode Stadt, suech lieber ide Wälder, det versteckeds sich ehnder.
+DL_Tristan_MonsterBanished:Toll. Und jetzt gang zum Ivo und verzellem vode guete Neuigkeite.

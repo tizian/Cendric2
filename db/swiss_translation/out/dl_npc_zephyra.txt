@@ -1,0 +1,20 @@
+dl_npc_zephyra
+----------------------------------
+DL_Zephyra_Hello:Chum jo nid nöcher! Es isch scho gnueg Schade agrichted worde. Gang wieder det ane wod hercho bisch!
+DL_Zephyra_WhatsTheMatter:Ich ha scho sit Ewigkeite niemert me da durecho gse. Und jetz chömeds plötzli in Schare und zerstöred das Heiligtum.
+DL_Zephyra_WhoAreYou:Ich bin d''Zephyra, Einsiedlerin und de Yasha ihri Schamanin.
+DL_Zephyra_DeadCat:Das isch ke toti Chatz, es isch es Dämonefell. Es git schön warm.
+DL_Zephyra_DemonSlayer:Nei, ich wür nie eim öppis atue. Si beschützed das Tal, weisch.
+DL_Zephyra_NiceCat:Wogs jo nid! Nur de Yasha ihri Schamane derfed de Choppfschmuck alege.
+DL_Zephyra_WhoYasha:D''Yasha isch e mächtigi Dämonin, wo über d''Gheimnis vo dem Tal wacht.
+DL_Zephyra_WhoYasha2:Si het vieli Johr lang gschlofe, aber die Tubelichöpf hend si gweckt. Ich hoff si büessed grad für ihri Dummheite.
+DL_Zephyra_WhoDroves:E Gruppe vo futzdumme Magier. Ich ha si devo abhalte wele, direkt is Verderbe z''renne, aber si hend nid g''lost.
+DL_Zephyra_WhoDroves2:Es sind immer die "Obentüürer", wo nach de grosse Schätz sueched, völlig respektlos. Unglaublich.
+DL_Zephyra_WhoMages:Hm. Eini devo isch e Frau gsi, helli Hoor, es wisses Chleid. Es het au en Bueb debi gha, öppe so alt we du, roti, strubbeligi Hoore.
+DL_Zephyra_WhoMages2:De dritt het dunkli Rastas gha... aber ihre Aführer het mer am meiste Angst gmacht.
+DL_Zephyra_WhoMages3:Gross, graui Hoore, en durchdringende Blick. Er isch de einzig gsi wo mitmer gredt het, di andere hend nid reagiert. Aber si sind vermuetlich eh all tot ez.
+DL_Zephyra_YashaDone:(D''Zephyra nickt) Grossargit. Danke vielmol für dini Hilf. Do, nimm de Trank mit dir. Er söll dir uf wiitere Wege helfe.
+DL_Zephyra_GottaGo:Ich gse, ich cha dich nid devo abhalte, iezgo. Aber, versprich mir eifach eis:
+DL_Zephyra_GottaGo2:Mach kein vode heilige Urne im Tempel uf, wenn dir dis Lebe lieb isch.
+DL_Zephyra_YashaOK:Ich ha ghofft, dass das sege würsch. Sig vorsichtig und de Dämon chönt dis Läbe verschone.
+DL_Zephyra_YashaNOK:Ich hoff de Dämon wird dini Seel verrisse.

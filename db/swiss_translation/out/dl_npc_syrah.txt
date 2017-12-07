@@ -1,29 +1,29 @@
 dl_npc_syrah
 ----------------------------------
-DL_Syrah_Greeting:Ja hallo! Du gsesch us als chöntisch du paar Tränk vode berüemt-berüchtigte Alchemistin Syrah bruche. Ob Liebestrank oder Haarfarb - es git fast nüt woni nid chönt zememischle.
-DL_Syrah_InvisRecipe:Oh hallo. Du, seg emal... Es fehlt es gwüsses Rezept us mim Chäller. Weisch du öppis über die Sach?
-DL_Syrah_IBroughtItBack:Wow, merci. Weisch, da bedüütet mer würkli viel. Ich frög gar nid erst, wed da becho hesch. (Zwinkeret)
+DL_Syrah_Greeting:Jo sali! Du gsesch us als chönntisch du es paar Tränk v dr berüemt-berüchtigte Alchemischtin Syrah bruuche. Ob Liebestrank oder Hoorfarb - es git fascht nüt woni nid chönt zämmämischlä.
+DL_Syrah_InvisRecipe:Oh hallo. Du, sag mol... Es fehlt es bestimmts Rezept us mim Käller. Weisch du öppis über die Sach?
+DL_Syrah_IBroughtItBack:Wow, merci. Weisch, das bedütet mr wirklig viel. Ich froog gar nid erscht, wied da übercho hesch. (Zwinkeret)
 DL_Syrah_IKnowNothing:Schad.
-DL_Syrah_Mark:(Syrah luegt s''Zeiche vorsichtig ah) Hm. Ich ha da Zeiche schomal gse. Ganz klar en Ufspür-Zauber. Aber eine vode stärchste woni je gseh han.
-DL_Syrah_Mark2:Da wird nid eifach. Aber wennd mer hilfsch zum d''Zuetate z''bsorge chani versueche, de Fluech z''enferne oder mindestens z''schwäche.
-DL_Syrah_Mark3:(D''Syrah zieht es grüens Buech us irem Regal und blätteret drin) Ich bruch nur es paar Chnoche, e chli Bluet vonere Fledermuus und es Herz vonere Füürratte. Ich denk da sötsch alles vode rüüdige Kreature ide Kanalisation vo Gandria becho.
-DL_Syrah_Sewers:Es paar Hüser hend i ihrem Chäller e Verbindig zude Kanalisation. Ich glaub es git au e Türe ide Nöchi vom Hafe wo det abe führt.
-DL_Syrah_MarkSeen:Hm, lah mich überlege. Da isch de komisch Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliche Zeiche gha. Es het aber niemert würkli verstande waner wet sege, er het nur komisches Zügs babbelet.
-DL_Syrah_MarkQuestDone:Ah, perfekt. Denn fömmer mal ah.
-DL_Syrah_MarkQuestDone2:(D''Syrah ordnet d''Chnoche kreisförmig ums Füürratteherz ah.) Chum.
-DL_Syrah_RelieveCurse:(D''Syrah packt dich am Arm und zieht dich in Kreis.)
-DL_Syrah_RelieveCurse2:(Si nimmts Bluet und lahts über s''Zeiche rinne während si öppis murmlet.)
-DL_Syrah_RelieveCurse3:Gsesch. Ich glaub es het funktioniert. Ich gspür nüm viel vo dere komische Magie.
-DL_Syrah_RelieveCurse4:Hm. Me gsehts immerna. Du sötsch de sueche, wo dir das ahto het. Und ez chasch ihn finde, bevor er s''tuet. (Gigglet)
-DL_Syrah_DoMeAFavour:Aber jetz, woni dir en Gfalle gmacht ha, sötsch mer au eine mache.
-DL_Syrah_NotOkayMark2:Ich probier doch nur, dir z''helfe! Du wetsch doch vo dem Fluech befreit si, oder? Ez chum.
-DL_Syrah_FavourQuestStart:Es git en Fridhof im Sumpfland direkt vor de Stadt, wo d''Lüt begrabe sind wo ide Stadt nid willkomme gsi sind - vor allem Verbrecher.
-DL_Syrah_FavourQuestStart2:Ich bruch e spezielli Blueme, d''Zündelblueme. Si wachst nur uf de Gräber vo Lüt, wo im Füür gstorbe sind.
-DL_Syrah_FavourQuestStart3:Ich bimer sicher, dass du die Blueme det finde chasch - Magier wo Magie "missbruched" werded meistens ufem Schiiterhufe verbrennt und wa au immer übrig bliibt wird i die Krypa verfrachtet.
-DL_Syrah_FavourQuestStart4:Oh, und wennd em Totegräber Morton begegne sötsch, segem eifach dass ich dich gschickt han, denn sötter dich ieloh.
-DL_Syrah_CompleteFavor:Danke tusig, da isch sehr lieb vo dir. Nimm na en Trank für dini Müe.
-DL_Syrah_NecromancersFound:Hihi. Schön, dass de Luiz und sini Crew gfunde hesch. Bhalts eifach für dich und du wirsch es paar würkli gueti neui Kollege ha.
-DL_Syrah_Thea:Kennsch dich denn mit Chrütli und Tränk us?
-DL_Syrah_Thea2:Ah okay. Jo, du chasch ihre sege, si cha do afange, solang si nid völlig tollpatschig isch.
+DL_Syrah_Mark:(Syrah luegt s''Zeiche vorsichtig ah) Hm. Ich ha das Zeiche schonemol gseh. Ganz klar e Uffspür-Zauber. Aber eine vode stärkschtä woni je gseh ha.
+DL_Syrah_Mark2:Das wird nid eifach. Aber wennd mr hilfsch d''Zuetate z''bsorge chani versueche, dr Fluech z''enferne oder mindestens z''schwäche.
+DL_Syrah_Mark3:(D''Syrah zieht es grüens Buech us ihrem Regal und blätteret drin) Ich bruch nur es paar Knoche, e glei weeneli Bluet vonere Fläädermuus und es Härz vonere Fyyrratte. I glaub das söttisch alles vo dä Viecher in dr Kanalisation vo Gandria becho.
+DL_Syrah_Sewers:Ä paar Hüüser hei in ihrem Käller e Verbindig zu dr Kanalisation. I glaub es git au e Düüre in dr Nöchi vom Hafe wo dört aabä füehrt.
+DL_Syrah_MarkSeen:Hm, loss mi überlegge. Do isch sone komische Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliichs Zeiche gha. Es het aber niemer wirklig verstande waser hett säge wölle, er het nur komisches Zügs blabberet.
+DL_Syrah_MarkQuestDone:Ah, perfekt. Denn föngemer mol ah.
+DL_Syrah_MarkQuestDone2:(D''Syrah ordnet d''''Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
+DL_Syrah_RelieveCurse:(D''Syrah packt di am Arm und zieht di in Kreis.)
+DL_Syrah_RelieveCurse2:(Sie nimmts Bluet und lohts über s''Zeiche rünne während sie öppis murmelet.)
+DL_Syrah_RelieveCurse3:Gsehsch. I glaub s''het klappt. I gspür nümm viel vo dere komische Magie.
+DL_Syrah_RelieveCurse4:Hm. Me gsehts immer no. Du söttsch dä sueche, wo dir das aadoo het. Und jetzt chaschen finde, bevor er s''macht. (Giigelet)
+DL_Syrah_DoMeAFavour:Aber jetz, woni dir ä Gfalle do ha, söttsch mr au eine due.
+DL_Syrah_NotOkayMark2:I brobier doch nummä, dir z''hälfe! Du willsch doch vo dem Fluech befreit si, oder? Jetzt chumm.
+DL_Syrah_FavourQuestStart:Es git ä Friedhof im Sumpfland diräkt vor dr Stadt, wo d''Lüt begrabe si wo in dr Stadt nid willkomme gsi si - vor allem Verbrächer.
+DL_Syrah_FavourQuestStart2:I bruch e speziells Bliemli, s''Zündelbliemli. Si waggst nur uf de Gräber vo Lüt, wo im Fyyr gstorbe si.
+DL_Syrah_FavourQuestStart3:I bimmer sicher, dassd s''Bliemli dört finde chasch - Magier wo Magie "missbruchä" wärde meistens ufem Schitterhuffe verbrennt und was immer übrig blibt wird in die Krypta verfrachtet.
+DL_Syrah_FavourQuestStart4:Oh, und wennd em Totegräber Morton begägne sötsch, sagem eifach dass ich di gschickt ha, denn sötter di iineloh.
+DL_Syrah_CompleteFavor:Merci vielmool, das isch sehr lieb vo dir. Nimm nonä Trank für dini Müeh.
+DL_Syrah_NecromancersFound:Hihi. Schön, dass dr Luiz und sini Crew gfunde hesch. Bhalts eifach für di und du wirsch es paar wirklig gueti neui Kollege ha.
+DL_Syrah_Thea:Kennsch di denn mit Krüttli und Tränk us?
+DL_Syrah_Thea2:Ah okay. Jo, du chasch ere sagä, si cha do aafoh, solang sie nid komplett tollpatschig isch.
 DL_Syrah_BrewSomething:Sicher, wennd d''Zuetate hesch?
-DL_Syrah_HereYouGo:Danke. Da, nimms.
+DL_Syrah_HereYouGo:Merci. Do, nimms.

@@ -1,0 +1,16 @@
+dl_npc_leeroy
+----------------------------------
+DL_Leeroy_Stop:Hey du, ken Schritt wiiter! Du chasch nid über die Brugg.
+DL_Leeroy_WhyStop:Du wirsches nid glaube, aber es het DRACHE uf dere Brugg.
+DL_Leeroy_WhyStop2:Ich lueg nur, dass niemert zerfleischt wird, bevor ich si bodige.
+DL_Leeroy_WhoAreYou:Ich bi de Leeroy, ehemalige Paladin vom Orde. De Lloyd het mi entloh well ich sini dumme Befehl missachtet ha.
+DL_Leeroy_WhoAreYou2:Si denked, si bruched mich nid, aber dene wirdis zeige! Ich wird die DRACHE abmurkse!
+DL_Leeroy_NoDragons:Tz, da isch well si sich verstecked! Si warted nur uf öpper we dich wo si zum Znacht ne chönd.
+DL_Leeroy_CrossBridge:Du chasch aber nid, well ich de sii wird wo die DRACHE killt.
+DL_Leeroy_CrossBridge2:Aber ich cha nid mitme leere Mage kämpfe - zersch bruchi es feins Güggeli.
+DL_Leeroy_CrossBridge3:Leider muni do d''Stellig halte. Ich chas eifach nid zuelah das en andere mini DRACHE chlaut.
+DL_Leeroy_LeeroyChicken:Das wär toll. Aber ich iss nur di beste Güggeli.
+DL_Leeroy_LeeroyChicken2:Kensch d''Wirtin Helena in Gandria? Ihres brötlet Spezial-Güggeli isch eifach unübertroffe. Bring mer das und ich kill die DRACHE für dich.
+DL_Leeroy_NotBright:Ich ha ken Schade, ich mach Schade!
+DL_Leeroy_ChickenDone:Und wieso het das so lang duuret? Ich wär schier verhungeret! (De Leeroy nimmts Güggeli und druckts schnell abe)
+DL_Leeroy_ChickenDone2:Aber jetz bini recht parat du. Jetzt gohts los!

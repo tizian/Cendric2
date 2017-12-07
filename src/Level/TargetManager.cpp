@@ -28,6 +28,12 @@ void TargetManager::update(const sf::Time& frameTime) {
 		setTargetEnemy(nullptr);
 	}
 
+	// check autotarget
+	if (g_inputController->isKeyJustPressed(Key::ToggleAutotarget)) {
+		bool autotarget = g_resourceManager->toggleAutotarget();
+		m_screen->setTooltipText(autotarget ? "AutotargetOn" : "AutotargetOff", sf::Color::Magenta, true);
+	}
+
 	if (g_inputController->isKeyJustPressed(Key::SwitchTarget)) {
 		// check which enemy is the next to target
 		Enemy* currentNearest = nullptr;

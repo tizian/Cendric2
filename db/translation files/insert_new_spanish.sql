@@ -23,6 +23,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('IsLo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Heal','Healing Power','Heilkraft','Heilchraft','Sanar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('FocusCrystal','Focusing Crystal','Fokus-Kristall','Fokus-Kristall','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToggleAutotarget','Toggle Autotarget','Automatisches Zielen an/aus','Automatisches Ziele aa/uus','Alternar ?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele an','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOff','Auto target off','Automatisches Zielen aus','Automatisches Ziele uus','?');
 
 -- hints
 

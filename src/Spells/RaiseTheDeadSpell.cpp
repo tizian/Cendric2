@@ -28,7 +28,7 @@ void RaiseTheDeadSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	if (!target->isDead() || target->isAlly()) return;
 	Enemy* enemy = dynamic_cast<Enemy*>(target);
-	if (enemy == nullptr) return;
+	if (enemy == nullptr || enemy->isResurrected()) return;
 	if (enemy->getMentalStrength() >= m_data.strength) {
 		m_screen->setNegativeTooltip("NotEnoughStrength");
 		setDisposed();
@@ -43,6 +43,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	attributes.damageShadow = m_data.damage;
 
 	// add an allied copy of that mob.
+	enemy->setResurrected();
 	Enemy* copy = ObjectFactory::Instance()->createEnemy(enemy->getEnemyID(), m_level, m_screen);
 	copy->load(0);
 	copy->setAlly(m_data.duration);

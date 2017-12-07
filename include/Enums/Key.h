@@ -30,5 +30,6 @@ enum class Key {
 	Screenshot,
 	Debug,
 	BackToCheckpoint,
+	ToggleAutotarget,
 	MAX
 };

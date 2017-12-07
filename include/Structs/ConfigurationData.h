@@ -63,7 +63,8 @@ std::map < Key, sf::Keyboard::Key >(
 	{ Key::SwitchTarget, sf::Keyboard::Tab },
 	{ Key::Screenshot, sf::Keyboard::F10 },
 	{ Key::Debug, sf::Keyboard::F11 },
-	{ Key::BackToCheckpoint, sf::Keyboard::B }
+	{ Key::BackToCheckpoint, sf::Keyboard::B },
+	{ Key::ToggleAutotarget, sf::Keyboard::P }
 });
 
 const struct ConfigurationData DEFAULT_CONFIGURATION =
@@ -107,7 +108,8 @@ const struct ConfigurationData DEFAULT_CONFIGURATION =
 	{ Key::SwitchTarget, sf::Keyboard::KeyCount },
 	{ Key::Screenshot, sf::Keyboard::KeyCount },
 	{ Key::Debug, sf::Keyboard::KeyCount },
-	{ Key::BackToCheckpoint, sf::Keyboard::KeyCount }
+	{ Key::BackToCheckpoint, sf::Keyboard::KeyCount },
+	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount }
 }),
 DisplayMode::Window,
 true,

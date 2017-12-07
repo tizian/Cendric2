@@ -5,6 +5,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Appl
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('And','and','und','und','y');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Armor','Armour','Rüstung','Rüschtig','Armadura');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele an','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOff','Auto target off','Automatisches Zielen aus','Automatisches Ziele uus','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back','Back','Zurück','Zrugg','Regresar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint','Regresar al punto de control');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMap','Leave level','Level verlassen','Usem Level gah','Salir del nivel');
@@ -243,6 +246,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Stre
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SwissGerman','Swiss German','Schweizerdeutsch','Schwiizerdüütsch','Alemán Suizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ThirdSpell','3. Spell','3. Zauber','3. Zauber','3. Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToggleTooltips','Toggle Tooltips','Tooltips anzeigen/verbergen','Tooltips zeige/verstecke','Alternar información de herramientas');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToggleAutotarget','Toggle Autotarget','Automatisches Zielen an/aus','Automatisches Ziele aa/uus','Alternar ?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Twilight','Twilight','Zwielicht','Dämmerig','Crepúsculo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Type','Type','Typ','Typ','Tipo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Unknown','Unknown','Unbekannt','Unbekannt','Desconocido');

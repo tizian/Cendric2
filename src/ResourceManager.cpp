@@ -377,6 +377,11 @@ ConfigurationData& ResourceManager::getConfiguration() {
 	return m_configuration;
 }
 
+bool ResourceManager::toggleAutotarget() {
+	m_configuration.isAutotarget = !m_configuration.isAutotarget;
+	return m_configuration.isAutotarget;
+}
+
 void ResourceManager::deleteLevelResources() {
 	for (auto& filename : m_levelResources) {
 		deleteResource(filename);
