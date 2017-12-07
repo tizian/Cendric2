@@ -70,7 +70,9 @@ private:
 	sf::Time m_timeUntilPhase;
 	static const sf::Time PHASE_TIME;
 	bool m_hasLitTorches;
-
+	bool m_hasFirstPhaseStarted;
+	
+	void updateFirstPhase();
 	void updateTorchStatus(const sf::Time& frameTime);
 	bool m_isBlueTorchesFine;
 	bool m_isRedTorchesFine;
