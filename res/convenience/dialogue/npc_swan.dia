@@ -1,0 +1,26 @@
+# dia file for dialogue for npc: npc_swan
+
+npc.id:npc_swan
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Swan_Aggressive
+	translation.en:(The swan hisses aggressively at you)
+	translation.de:(Der Schwan faucht dich aggressiv an)
+	translation.ch:(De Schwan faucht dich aggressiv ah)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

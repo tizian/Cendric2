@@ -5,7 +5,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Appl
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('And','and','und','und','y');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Armor','Armour','Rüstung','Rüschtig','Armadura');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele an','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele aa','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOff','Auto target off','Automatisches Zielen aus','Automatisches Ziele uus','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back','Back','Zurück','Zrugg','Regresar');

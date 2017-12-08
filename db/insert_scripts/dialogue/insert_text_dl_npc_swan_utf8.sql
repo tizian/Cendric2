@@ -1,0 +1,1 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Swan_Aggressive', 'dl_npc_swan', '(The swan hisses aggressively at you)', '(Der Schwan faucht dich aggressiv an)', '(De Schwan faucht dich aggressiv ah)');
