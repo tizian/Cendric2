@@ -70,3 +70,29 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ki
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King4', 'speech','Hahahahah!','Hahahahah!', 'Hahahahah!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King5', 'speech','Kill him!','Tötet ihn!', 'Töted ihn!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('King6', 'speech','How''s that possible?','Wie ist das möglich?', 'We isch das mögli?');
+
+-- Velius
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusStart', 'speech','It will be
+over soon.','Es wird bald
+vorbei sein.', 'Es wird bald
+verbii si.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusDeath', 'speech','No! It should not
+end like this...','Nein! Es sollte
+nicht so enden...', 'Nei! Es söt nid
+so ände...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusHit', 'speech','Aah!','Aah!', 'Aah!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusHaha', 'speech','Hahahah!','Hahahah!', 'Hahahah!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusKorayCall', 'speech','We''ll start with
+that thief.','Beginnen wir mit
+diesem Dieb.', 'Fangemer mit dem
+Dieb ah.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusKorayDead', 'speech','So weak...','So schwach...', 'So schwach...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusRobertCall', 'speech','You''re next!','Du bist dran!', 'Du bisch dra!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusRobertDead', 'speech','Hahahah!','Hahahah!', 'Hahahah!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIninaCall', 'speech','Come over here!','Komm her!', 'Chum da ane!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIninaDead', 'speech','What a good girl.','Was für ein braves Mädchen.', 'Sones bravs Meitli.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusCendricCall', 'speech','Prepare to die!','Mach dich bereit, zu sterben!', 'Mach dich parat, z''sterbe!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusCendricDead', 'speech','Finally!','Endlich!', 'Endlich!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion1', 'speech','We are... many!','Wir sind... viele!', 'Mir sind... vieli!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion2', 'speech','There''s no escape.','Es gibt kein Entkommen.', 'Es git keis Entcho.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion3', 'speech','Illusion!','Illusion!', 'Illusion!');

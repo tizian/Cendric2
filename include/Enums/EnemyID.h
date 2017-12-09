@@ -47,5 +47,6 @@ enum class EnemyID {
 	King,
 	Boss_Velius,
 	VeliusVictim,
+	VeliusClone,
 	MAX
 };

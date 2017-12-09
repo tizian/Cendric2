@@ -391,7 +391,7 @@ void Level::raycastDynamicTiles(RaycastQueryRecord& rec) const {
 			}
 		}
 
-		if (!tile->isCollidable() || tile->getDynamicTileID() == LevelDynamicTileID::Disappearing) continue;
+		if (!tile->isCollidable() || tile->isOneWay()) continue;
 		if (lineBoxIntersection(rec.rayOrigin, rec.rayHit, *tile->getBoundingBox(), intersection)) {
 			rec.rayHit = intersection;
 			rec.mirrorTile = nullptr;

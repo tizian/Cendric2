@@ -12,10 +12,9 @@ public:
 
 	void callToDie();
 	void execHandleMovementInput() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 
 private:
 	VeliusVictim* m_victim;
-	bool m_isCalled = false;
-	bool m_isAtAltar = false;
 	static const sf::Vector2f ALTAR_POS;
 };

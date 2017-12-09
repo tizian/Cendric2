@@ -11,6 +11,7 @@ the following skins are available:
 3: light fireball
 4: energy fireball (from cairns)
 5: janus' fireball
+6: velius' fireball
 */
 class FireBallSpell final : public Spell {
 public:

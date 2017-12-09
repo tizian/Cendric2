@@ -275,6 +275,7 @@ void WorldScreen::updateMonitoredQuestItems() {
 		if (data == nullptr) continue;
 
 		for (auto& item : data->collectibles) {
+			if (item.first.compare("gold") == 0) continue;
 			if (!contains(m_monitoredQuestItems, item.first)) {
 				m_monitoredQuestItems.insert({ item.first, std::set<std::string>() });
 			}
@@ -293,6 +294,7 @@ void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount
 		if (data == nullptr) continue;
 		for (auto& collectible : data->collectibles) {
 			if (itemID.compare(collectible.first) != 0) continue;
+			if (getCharacterCore()->getItems()->find(itemID) == getCharacterCore()->getItems()->end()) continue;
 			int currentItemAmount = getCharacterCore()->getItems()->at(itemID);
 			if (currentItemAmount - amount >= collectible.second) continue;
 			

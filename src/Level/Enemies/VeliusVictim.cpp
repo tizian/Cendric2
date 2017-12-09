@@ -20,6 +20,10 @@ void VeliusVictim::setDead() {
 	Enemy::setDead();
 }
 
+void VeliusVictim::callToDie() {
+
+}
+
 void VeliusVictim::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.calculateAttributes();
@@ -108,4 +112,3 @@ std::string VeliusVictim::getDeathSoundPath() const {
 		return "res/sound/mob/roy_death.ogg";
 	}
 }
-

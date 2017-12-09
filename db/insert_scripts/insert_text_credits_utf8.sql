@@ -558,6 +558,7 @@ Ajdin Zutic - Luzerner Dialekt (Zeff)
 Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
 Christian Brunner - Luzerner Dialekt (Wirt)
 Sandra Scherrer - Bündner Dialekt (Jonathan)
+Patrizia Drohmann - Bündner Dialekt (Jonathan)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
