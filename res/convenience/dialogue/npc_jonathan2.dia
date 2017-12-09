@@ -34,7 +34,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Hello
 	translation.en:Ah, finally. We need to talk.
 	translation.de:Ah, endlich. Wir müssen reden.
-	translation.ch:Ah, endlich. Mer mönd rede.
+	translation.ch:Ah, endlich. Miar müan reda.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -70,9 +70,9 @@ npc.id:npc_jonathan2
 	trigger:DL:addConditionProgress("npc_jonathan2", "matter")
 	# translation: 
 	translation.tag:DL_Jonathan_Whatup
-	translation.en:There's been a raid on my house, oh it was terrible.
-	translation.de:Mein Haus wurde überfallen, oh es war schrecklich.
-	translation.ch:Mis Huus isch überfalle worde, oh es isch schrecklich gsi.
+	translation.en:There's been a raid on my house, oh, it was terrible.
+	translation.de:Mein Haus wurde überfallen, oh, es war schrecklich.
+	translation.ch:Mis Huus isch überfalla worda, oh, es isch schrecklich gsi.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -86,7 +86,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Whatup2
 	translation.en:I first thought the clerics were responsible, because they told me they worked for the king.
 	translation.de:Zuerst dachte ich, die Kleriker würden dahinterstecken, weil sie mir gesagt haben, sie würden für den König arbeiten.
-	translation.ch:Ich ha zersch denkt, d'Kleriker würded dehinder stecke well si mir gseit hend si schaffed für de König.
+	translation.ch:I han zersch denkt, d'Kleriker würden dahinter stecka, will si miar gseit händ, si schaffen für da König.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -100,7 +100,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Whatup3
 	translation.en:But the clerics would not wear purple robes... Anyway, they searched through everything and stole our map.
 	translation.de:Aber die Kleriker würden keine violetten Roben tragen... Egal, sie haben alles durchsucht und unsere Karte gestohlen.
-	translation.ch:Aber d'Kleriker würed ke violetti Robe träge... Egal, si hend alles dursuecht und üsi Charte klaut.
+	translation.ch:Aber d'Kleriker würen kei violetti Roba träga... Egal, si händ alles dursuacht und üseri Karte klaut.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -114,7 +114,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Whatup4
 	translation.en:Finally, they tried to attack me - but I fought back and got away while their burning robes distracted them.
 	translation.de:Dann haben sie versucht, mich anzugreifen - aber ich habe mich gewehrt und bin geflüchtet, als sie durch ihre brennenden Roben abgelenkt waren.
-	translation.ch:Denn hends probiert, mich aazgriife - aber ich han mich gewehrt und bi gflüchtet wo si vo ihrne brennende Robe abglenkt gsi sind.
+	translation.ch:Denn häns probiart, mi azgriifa - aber i han mi gwehrt und bin gflüchtet wo si vu ihrna brennenda Roba abglenkt gsi sind.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -128,7 +128,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Whatup5
 	translation.en:I was afraid they'd come after you too. I'm glad they didn't get you yet.
 	translation.de:Ich fürchtete, sie wären auch hinter dir her. Ich bin froh, dass sie dich noch nicht erwischt haben.
-	translation.ch:Ich han Angst gha dass si au hinter dir her sind. Bin froh, dass si dich nanig verwütscht hend.
+	translation.ch:I han Angst gha dass si au hinter diar her sind. Bin froh, dass si di nonit verwütscht hän.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -143,7 +143,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_House
 	translation.en:Yeah that's true. But I had to.
 	translation.de:Ja das stimmt. Aber ich musste.
-	translation.ch:Jo das stimmt. Aber ich han möse.
+	translation.ch:Jo das stimmt. Aber i han müassa.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -201,7 +201,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_WhyAfterMe
 	translation.en:They were clearly looking for elementalists. They needed someone to help them follow the instructions on the map.
 	translation.de:Sie haben offensichtlich nach Elementarmagier gesucht. Sie brauchen jemanden, der den Anweisungen auf der Karte folgen kann.
-	translation.ch:Si hend offesichtlich noch Elementarmagier gsuecht. Si bruched öpper wo de Awiisige uf de Charte folge chan.
+	translation.ch:Si händ offasichtlich noch Elementarmagier gsuacht. Si bruchen öpper, wo da Awiisiga uf dr Karte folga kann.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -216,7 +216,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Describe
 	translation.en:There were two of them, mages in long, purple robes. They wielded some kind of purple magic, something I've never seen before.
 	translation.de:Sie waren zu zweit, Magier in langen, violetten Roben. Sie haben eine seltsame, violette Magie benutzt, die ich noch nie zuvor gesehen habe.
-	translation.ch:Si sind z'zweite gsi, Magier i lange, violette Robe. Si hend e violetti Magie brucht, öppis woni bis ez nanie gse han.
+	translation.ch:Si sind ds'zweite gsi, Magier in langa, violetta Roba. Si hän a violetti Magie brucht, öppis woni bis jetzt nonia gseh han.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -231,7 +231,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_WhyMap
 	translation.en:Maybe they knew more about it than we do... 
 	translation.de:Vielleicht wissen sie mehr davon als wir...
-	translation.ch:Vilicht wüsseds me devo we mir...
+	translation.ch:Vilicht wüssens meh davo als miar...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -245,7 +245,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Map
 	translation.en:I still know where it lead. That's why I wanted to meet you here.
 	translation.de:Ich weiss immer noch, wohin sie geführt hat. Deshalb wollte ich dich hier treffen.
-	translation.ch:Ich weiss immerno wo si anegführt het. Drum hani di au do treffe wele.
+	translation.ch:I weiss immerno wo si hera gfühart hät. Drum hani di au do treffa wella.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -259,7 +259,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Map2
 	translation.en:It lead to the Highlands of Admantris. And the key to get there was elemental magic.
 	translation.de:Sie hat ins Hochland von Admantris geführt. Und der Schlüssel, um dort hinzukommen, war Elementarmagie.
-	translation.ch:Si het is Hochland vo Admantris gführt. Und de Schlüssel zum det hicho isch Elementarmagie gsi.
+	translation.ch:Si hät ins Hochland vu Admantris gfühart. Und dr Schlüssel zum döt herakho isch Elementarmagie gsi.
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -288,7 +288,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Element
 	translation.en:That's awesome. You should be able to unveil the secret of the old elementalists then.
 	translation.de:Das ist toll. Du solltest das Geheimnis der alten Elementarmagier nun enthüllen können.
-	translation.ch:Das isch toll. Du sötsch es Gheimnis vode alte Elementarmagier ez enthülle chöne.
+	translation.ch:Das isch toll. Du söttisch ds Gheimnis vuda alte Elementarmagier jetzt enthülla könna.
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -302,7 +302,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Element2
 	translation.en:Follow the path to the highlands and find the temple of the ancients. 
 	translation.de:Folge dem Pfad ins Hochland und finde den Tempel der Ältesten.
-	translation.ch:Folg em Pfad is Hochland und find de Tempel vode Älteste.
+	translation.ch:Folg am Pfad ins Hochland und find dr Tempel vuda Ältesta.
 	[
 		# Link node, tag is next tag
 		tag:18
@@ -317,7 +317,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Element3
 	translation.en:Find the secret before those other mages do it.
 	translation.de:Finde das Geheimnis, bevor diese anderen Magier es tun.
-	translation.ch:Finds Gheimnis bevors di andere Magier finded.
+	translation.ch:Find ds Gheimnis bevors dia andera Magier finden.
 	[
 		# Link node, tag is next tag
 		tag:19
@@ -331,7 +331,7 @@ npc.id:npc_jonathan2
 	translation.tag:DL_Jonathan_Element4
 	translation.en:I'll do my best to keep them from following you. Hurry!
 	translation.de:Ich werde mein bestes geben, um sie davon abzuhalten, dir zu folgen. Beeil dich!
-	translation.ch:Ich wird mis beste gä zum si devo abhalte, dir z'folge. Mach schnell!
+	translation.ch:I werd mis besta geh zum si davo abhalta, diar ds'folga. Mach schnell!
 	[
 		# Link node, tag is next tag
 		tag:20

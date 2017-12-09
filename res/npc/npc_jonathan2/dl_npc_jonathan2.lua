@@ -29,7 +29,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, 5, "DL_Jonathan_Whatup") -- There's been a raid on my house, oh it was terrible.
+		DL:createNPCNode(3, 5, "DL_Jonathan_Whatup") -- There's been a raid on my house, oh, it was terrible.
 		DL:addConditionProgress("npc_jonathan2", "matter")
 		DL:addNode()
 

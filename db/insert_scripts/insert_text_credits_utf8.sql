@@ -559,6 +559,7 @@ Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
 Christian Brunner - Luzerner Dialekt (Wirt)
 Sandra Scherrer - Bündner Dialekt (Jonathan)
 Patrizia Drohmann - Bündner Dialekt (Jonathan)
+Gamerocker - Aargauer Dialekt (Rana, Jason)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

@@ -23,7 +23,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Hey
 	translation.en:You're back, perfect. I found the mages who robbed me and secretly followed them to this crypt.
 	translation.de:Du bist zurück, perfekt. Ich habe die Magier gefunden, die mich ausgeraubt haben, und bin ihnen bis zu dieser Krypta gefolgt.
-	translation.ch:Du bisch zrugg, perfekt. Ich ha die Magier gfunde, wo mich usgraubt hend, und bi ihne bis zu dere Krypta gfolgt.
+	translation.ch:Du bisch zruck, perfekt. I han dia Magier gfunda, wo mi usgraubt hän, und bin ihna bis zu dera Krypta gfolgt.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -38,7 +38,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Hey2
 	translation.en:But they locked it with a spell. I need the name of the mage who cast the spell to unlock it.
 	translation.de:Aber sie haben sie mit einem Zauber verschlossen. Ich brauche den Namen des Magiers, der den Zauber gewirkt hat, um das Tor aufzuschliessen.
-	translation.ch:Aber si hend si mitme Zauber verschlosse. Ich bruch de Name vom Magier, wos verzauberet het, zums wieder ufmache.
+	translation.ch:Aber si hän si mitema Zauber verschlossa. I brucha dr Nama vom Magier, wos verzauberet hät, zums wieder ofmacha.
 	[
 		# Link node, tag is next tag
 		tag:20
@@ -52,7 +52,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Hey3
 	translation.en:And you, did you find something interesting in the temple?
 	translation.de:Und du, hast du etwas Interessantes im Tempel gefunden?
-	translation.ch:Und du, hesch öppis interessants im Tempel gfunde?
+	translation.ch:Und du, häsch öppis interessants im Tempel gfunda?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -177,7 +177,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_WrongName
 	translation.en:Okay, let's try it... (Jonathan mumbles a spell) Hm. It didn't work.
 	translation.de:Okay, versuchen wir's... (Jonathan murmelt einen Zauber) Hm. Hat nicht funktioniert.
-	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber) Hm. Het nid funktioniert.
+	translation.ch:Okay, probiaremers... (Dr Jonathan murmlet an Zauber) Hm. Hät nit funktioniart.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -191,7 +191,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_CorrectName
 	translation.en:Okay, let's try it... (Jonathan mumbles a spell)
 	translation.de:Okay, versuchen wir's... (Jonathan murmelt einen Zauber) 
-	translation.ch:Okay, probieremers... (De Jonathan murmlet en Zauber)
+	translation.ch:Okay, probiaremers... (Dr Jonathan murmlet an Zauber)
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -206,7 +206,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_CorrectName2
 	translation.en:Yes. We did it! Now you can follow them.
 	translation.de:Ja, geschafft! Jetzt kannst du ihnen folgen.
-	translation.ch:Jo, gschafft! Jetz chasch ihne folge.
+	translation.ch:Jo, gschafft! Jetzt kasch ihna folga.
 	[
 		# Link node, tag is next tag
 		tag:19
@@ -293,7 +293,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Books
 	translation.en:Woah. Woah! (Jonathan skims the documents) 
 	translation.de:Woah. Woah! (Jonathan fliegt über die Dokumente)
-	translation.ch:Woah. Woah! (De Jonathan flügt über d'Dokument)
+	translation.ch:Woah. Woah! (Dr Jonathan flügt über d'Dokument)
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -308,7 +308,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Books2
 	translation.en:That's exactly what we were looking for. The old, forgotten anti-magic. Dangerous magic.
 	translation.de:Das ist genau, nach was wir gesucht haben. Die alte, vergessene Antimagie. Gefährliche Magie.
-	translation.ch:Das isch gnau das, noch dem mer gsuecht hend. Di alt, vergesse Antimagie. Gföhrlichi Magie.
+	translation.ch:Das isch genau das, noch däm mer gsuacht hän. Dia alt, vergessa Antimagie. Gföhrlichi Magie.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -322,7 +322,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Books3
 	translation.en:Even though some pages are missing in this book, I should return as fast as possible to the academy. Will you come with me?
 	translation.de:Obwohl hier einige Seiten in diesem Buch fehlen, sollte ich so schnell wie möglich zur Akademie zurück. Kommst du mit?
-	translation.ch:Obwohl do einigi Siite i dem Buech fähled, sötti so schnell we möglich zude Akademie zrugg. Chunsch mit?
+	translation.ch:Obwohl do einigi Siita i däm Buach fählen, sötti so schnell wia möglich zudr Akademie zruck. Kusch mit?
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -358,7 +358,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_Business
 	translation.en:You're right. You should follow those mages. Maybe you even find the missing pages. See you at the academy!
 	translation.de:Du hast recht. Du solltest diesen Magiern folgen. Vielleicht findest du sogar die fehlenden Seiten. Man sieht sich in der Akademie!
-	translation.ch:Du hesch recht. Du sötsch dene Magier folge. Vilicht findsch sogar die fehlende Siite. Me gseht sich ide Akademie!
+	translation.ch:Du häsch recht. Du söttisch dena Magier folga. Vilicht findisch sogar dia fehlenda Siita. Ma gseht sich in dr Akademie!
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -372,7 +372,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_LoveTo
 	translation.en:But you need to follow those mages, right? Maybe you even find the missing pages. Anyway, see you at the academy!
 	translation.de:Aber du musst diesen Magiern folgen, oder? Vielleicht findest du sogar die fehlenden Seiten. Auf jeden Fall sieht man sich in der Akademie!
-	translation.ch:Aber du muesch dene Magier folge, gell? Vilicht findsch sogar di fehlende Siite. Uf jedefall gseht me sich ide Akademie!
+	translation.ch:Aber du muasch dena Magier folga, gäll? Vilicht findisch sogar dia fehlenda Siita. Uf jedafall gseht ma sich in dr Akademie!
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -387,7 +387,7 @@ npc.id:npc_jonathan3
 	translation.tag:DL_Jonathan_NoBook
 	translation.en:Alright. I'll wait here then.
 	translation.de:Gut. Ich warte dann hier.
-	translation.ch:Guet. Ich warte denn do.
+	translation.ch:Guat. I warta denn do.
 	[
 		# Link node, tag is next tag
 		tag:-1

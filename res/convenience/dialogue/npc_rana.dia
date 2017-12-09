@@ -24,7 +24,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Hello
 	translation.en:Hello there! You look like you're freezing. 
 	translation.de:Hallo du! Du siehst ziemlich verfroren aus.
-	translation.ch:Hoi du! Du gsesch zimli verfrore us.
+	translation.ch:Hoi du! Du gsesch zemmli verfrore us.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -38,7 +38,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Hello2
 	translation.en:Come and sit at our fire to warm you up. And why not have a little chat.
 	translation.de:Komm und setz dich an unser Feuer um dich etwas aufzuwärmen. Und wieso reden wir nicht ein bisschen.
-	translation.ch:Chum und sitz chli a üses Füürli zum dich ufwärme. Und weso redemer nid chli.
+	translation.ch:Chom und sitz chli a euses Fürli zum dich ufwärme. Und wieso rede mer ned chli.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -126,7 +126,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_WhoAreYou
 	translation.en:Jason and I are demon hunters. We make sure that the demons of this valley stay here and don't make trouble.
 	translation.de:Jason und ich sind Dämonenjäger. Wir schauen, dass die Dämonen dieses Tals hier bleiben und keine Schwierigkeiten machen.
-	translation.ch:De Jason und ich sind Dämonejäger. Mir lueged, dass d'Dämone vo dem Tal do blibed und ke Problem mached.
+	translation.ch:De Jason und ich sind Dämonejäger. Mir luege, dass d'Dämone vo dem Tal do blibed und kei Problem möched.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -140,7 +140,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_WhoAreYou2
 	translation.en:We also hunt them for trophies like fur and teeth. They can be used to craft fine armour and the merchants in Gandria will buy them gladly.
 	translation.de:Wir jagen sie auch für Trophäen wie Felle und Zähne. Die kann man zu schönen Rüstungen verarbeiten und die Händler in Gandria kaufen sie gerne.
-	translation.ch:Mir jaged si au für Trophäe we Fell und Zää. Die chame zu schöne Rüstige verarbeite und d'Händler i Gandria chaufed si au gern.
+	translation.ch:Mir jaged sie au für Trophäene wie Fell und Zäh. Die chame zu schöne Rüstige verarbeite und d'Händler in Gandria chaufed sie au gern.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -155,7 +155,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Plans
 	translation.en:Pretty well. We found some cat demons and even a gargoyle lately.
 	translation.de:Ziemlich gut. Wir haben ein paar Katzendämonen und kürzlich sogar einen Gargoyle gefunden.
-	translation.ch:Zimli guet. Mir hend es paar Chatzedämone und letzins sogar en Gargoyle gfunde.
+	translation.ch:Zemmli guet. Mer händ es paar Chatzedämone und letsti sogar en Gargoyle gfunde.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -169,7 +169,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Plans2
 	translation.en:But the really fat booty would be in that temple in the North.
 	translation.de:Aber die richtig fette Beute würden wir im Tempel im Norden finden.
-	translation.ch:Aber di richtig fetti Beute würemer im Tempel im Norde finde.
+	translation.ch:Aber die richtig fetti Büti würde mer im Tempel im Norde finde.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -183,7 +183,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Plans3
 	translation.en:Unfortunately, the spells guarding it are too strong and we can't get in. But there are still a lot of demons left in the ruins surrounding it.
 	translation.de:Unglücklicherweise sind die Zauber, die ihn beschützen, zu stark und wir kommen nicht rein. Aber es gibt immer noch genügend Dämonen in den umliegenden Ruinen.
-	translation.ch:Blöderwiis sind d'Zauber wo ihn beschützed z'starch und mer chömed nid ie. Aber es git immer na gnueg Dämone ide Ruine ussedra.
+	translation.ch:Blöderwis sind d'Zauber wo ihn beschützend z'starch und mer chömed ned ine. Aber es git immer no gnueg Dämone ide Ruine ossedra.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -198,7 +198,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Yasha
 	translation.en:Yes, of course. She's guarding the valley and we wouldn't dare to fight with her. She's sleeping anyway at the moment.
 	translation.de:Ja, sicher. Sie wacht über das Tal und wir würden keinen Kampf mit ihr riskieren. Sie schläft momentan sowieso.
-	translation.ch:Jo, sicher. Si wacht übers Tal und mer würed ken Kampf mit ihre riskiere. Si schloft momentan sowieso.
+	translation.ch:Jo, sicher. Sie wacht übers Tal und mer würde kei Kampf mit ihre riskiere. Sie schloft momentan sowieso.
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -245,7 +245,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_KilledYasha
 	translation.en:(Rana looks shocked) What? This can't be. And if it's true, you shouldn't have. 
 	translation.de:(Rana sieht dich entsetzt an) Was? Das kann nicht sein. Und selbst wenn es war ist, hättest du das nicht tun sollen.
-	translation.ch:(D'Rana luegt dich entsetzt ah) Was? Das cha nid si. Und sogar wens stimmt, hetsch das nid söle mache.
+	translation.ch:(D'Rana luegt dich entsetzt a) Was? Das cha ned si. Und sogar wenns stimmt, hättisch das ned sölle mache.
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -259,7 +259,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_KilledYasha2
 	translation.en:The other demons will be far more aggressive now. More work for us I guess. (Sighs)
 	translation.de:Die anderen Dämonen werden jetzt viel aggressiver sein. Naja, mehr Arbeit für uns. (Seufzt)
-	translation.ch:Di andere Dämone werded ez viel aggressiver si. Naja, me Arbet für üs. (Süüfzet)
+	translation.ch:Di andere Dämone werde jetzt viel aggressiver si. Naja, meh Arbeit för eus. (Süfzget)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -273,7 +273,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_BefriendedYasha
 	translation.en:Oh, really? Very interesting news. We won't do her any harm of course, she's like a goddess for this valley.
 	translation.de:Oh, wirklich? Sehr interessante Neuigkeiten. Wir werden ihr natürlich nichts antun, sie ist wie eine Göttin für dieses Tal.
-	translation.ch:Oh, würkli? Sehr interessanti Neuigkeite. Mir werded ihre natürli nüt mache, si isch we e Göttin für das Tal.
+	translation.ch:Oh, wörkli? Sehr interessanti Neuigkeite. Mer werded ihre natürlich nüt mache, sie esch wie en Göttin für das Tal.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -288,7 +288,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Mages
 	translation.en:Hm, yes. There were four of them and they were heading for the old temple in the North.
 	translation.de:Hm, ja. Sie waren zu viert und sie gingen zum alten Tempel im Norden.
-	translation.ch:Hm, jo. Si sind z'vierte gsi und und sind zu dem alte Tempel im Norde gange.
+	translation.ch:Hm, jo. Sie sind z'vierte gsi und sind zu dem alte Tempel im Norde gange.
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -303,7 +303,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_Mages2
 	translation.en:We offered them to escort them but their leader was very unfriendly. I don't know whether they made it.
 	translation.de:Wir haben ihnen angeboten, sie zu begleiten, aber ihr Anführer war sehr unfreundlich. Ich weiss nicht, ob sie es geschafft haben.
-	translation.ch:Mir hend ihne abote, si z'begleite, aber ihre Aführer isch sehr unfründlich gsi. Ich weiss nid obses gschafft hend.
+	translation.ch:Mer händ ihne abote, sie z'begleite, aber ihre Aführer esch sehr unfröndlich gsi. Ich weiss ned öb sies gschafft händ.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -318,7 +318,7 @@ npc.id:npc_rana
 	translation.tag:DL_Rana_UnlockTrade
 	translation.en:Yes, I got some trophies and spare armour, if you're interested.
 	translation.de:Ja, ich habe ein paar Trophäen und Ersatzrüstung, falls du interessiert bist.
-	translation.ch:Jo, ich ha es paar Trophäe und vorigi Rüstig, fallsd interessiert bisch.
+	translation.ch:Jo, i han es paar Trophäene und vörigi Rüstige, falls du interessiert besch.
 	[
 		# Link node, tag is next tag
 		tag:-2
