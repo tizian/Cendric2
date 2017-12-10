@@ -361,6 +361,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
 	const ModifierSlot* ms = static_cast<const ModifierSlot*>(clone->getOriginalSlot());
 	SpellModifier modifier = ms->getModifier();
+	bool modifierPlaced = false;
 
 	for (auto& it : m_weaponSlots) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
@@ -369,8 +370,12 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot.getBoundingBox())) {
 				m_core->addModifier(ms->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
 				m_requireReload = true;
+				modifierPlaced = true;
 				break;
 			}
+		}
+		if (modifierPlaced) {
+			break;
 		}
 	}
 }
