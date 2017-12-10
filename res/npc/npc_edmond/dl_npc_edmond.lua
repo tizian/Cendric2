@@ -52,7 +52,7 @@ loadDialogue = function(DL)
             
                 DL:createChoiceNode(50)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?
-				DL:addChoice(-1, "DL_Choice_CU") --  See you later
+				DL:addChoice(-1, "DL_Choice_CU") --  Bye.
 				DL:addNode()
 				
 				DL:setRoot(50)
@@ -111,7 +111,7 @@ loadDialogue = function(DL)
 				DL:addChoice(40, "DL_Choice_YouHaveNeverSeenMe") -- So, you said you have never seen me before? 
 			end
 			
-			DL:addChoice(-1, "DL_Choice_CU") --  See you later
+			DL:addChoice(-1, "DL_Choice_CU") --  Bye
 			DL:addNode()
 		
 			if (not DL:isConditionFulfilled("npc_edmond", "talked_after_tutorial")) then 
@@ -154,7 +154,9 @@ loadDialogue = function(DL)
 			DL:addNode()
 			
 			DL:createChoiceNode(30)
-			DL:addChoice(31, "DL_Choice_WhereIsTheNest") -- Do you have an idea where I could start searching for the nest?  	
+            if (not DL:isQuestComplete("the_rats_nest")) then
+                DL:addChoice(31, "DL_Choice_WhereIsTheNest") -- Do you have an idea where I could start searching for the nest?  	
+            end
 			
 			if (DL:isQuestComplete("the_rats_nest")) then
 				DL:addChoice(32, "DL_Choice_IFoundIt") -- The rats won't bother you any more. 
