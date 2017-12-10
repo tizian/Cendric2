@@ -41,11 +41,12 @@ public:
 	// sets the global cooldown, it is initially zero
 	void setGlobalCooldown(const sf::Time& cooldown);
 	// sets the initial cooldown for a certain spell
-	void setInitialCooldown(const sf::Time& cooldown, int spellIndex);
+	void setInitialCooldown(const sf::Time& cooldown, SpellID id);
 
 	int getSelectedSpellID() const;
 	SpellData* getSelectedSpell() const;
 	SpellData* getSpell(int spellId) const;
+	sf::Time getCooldown(SpellID id);
 
 	LevelMovableGameObject* getOwner() const;
 
@@ -54,7 +55,7 @@ private:
 	bool executeCurrentSpell(T target, bool force);
 
 	int m_currentSpell;
-	std::vector<sf::Time> m_coolDownMap;
+	std::map<SpellID, sf::Time> m_coolDownMap;
 	std::vector<SpellCreator*> m_spellMap;
 	LevelMovableGameObject* m_owner;
 

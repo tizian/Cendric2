@@ -344,11 +344,10 @@ void VeliusBoss::loadSpells() {
 	spell.spellOffset = sf::Vector2f(10.f, 0.f);
 
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(2.f), 1);
+	m_spellManager->setInitialCooldown(sf::seconds(2.f), SpellID::FireBall);
 
 	spell.count = 1;
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 2);
 
 	// twilight spell
 	spell.skinNr = 7;
@@ -358,11 +357,9 @@ void VeliusBoss::loadSpells() {
 	spell.count = 2;
 
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(2.f), 3);
 
 	spell.count = 1;
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 4);
 
 	// initial boss state
 	setBossState(VeliusBossState::AttackIllusion);

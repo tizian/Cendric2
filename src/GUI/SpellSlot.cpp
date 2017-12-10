@@ -168,6 +168,7 @@ void SpellSlot::render(sf::RenderTarget& renderTarget) {
 }
 
 void SpellSlot::playAnimation(const sf::Time& cooldown) {
+	if (cooldown == sf::Time::Zero) return;
 	if (!m_isEmpty) {
 		m_cooldown = cooldown;
 		m_animationTime = sf::Time::Zero;

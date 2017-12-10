@@ -1,6 +1,7 @@
 #include "Spells/LightSpell.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
+#include "Screens/LevelScreen.h"
 #include "GlobalResource.h"
 
 void LightSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const sf::Vector2f& target) {
@@ -18,6 +19,13 @@ void LightSpell::update(const sf::Time& frameTime) {
 	setPosition(nextPosition);
 
 	Spell::update(frameTime);
+}
+
+void LightSpell::setDisposed() {
+	Spell::setDisposed();
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::Light);
+	}
 }
 
 void LightSpell::loadComponents() {

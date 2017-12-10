@@ -12,11 +12,17 @@ SpellManager::~SpellManager() {
 
 void SpellManager::clearSpells() {
 	CLEAR_VECTOR(m_spellMap);
-	m_coolDownMap.clear();
 	m_currentSpell = -1;
 	if (m_spellSelection) {
 		m_spellSelection->reload();
 	}
+}
+
+sf::Time SpellManager::getCooldown(SpellID id) {
+	if (!contains(m_coolDownMap, id)) {
+		return sf::Time::Zero;
+	}
+	return m_coolDownMap.at(id);
 }
 
 int SpellManager::getSelectedSpellID() const {
@@ -52,9 +58,8 @@ void SpellManager::setGlobalCooldown(const sf::Time& cooldown) {
 	m_globalCooldown = cooldown;
 }
 
-void SpellManager::setInitialCooldown(const sf::Time& cooldown, int spellIndex) {
-	if (spellIndex < 0 || spellIndex > static_cast<int>(m_coolDownMap.size() - 1)) return;
-	m_coolDownMap[spellIndex] = cooldown;
+void SpellManager::setInitialCooldown(const sf::Time& cooldown, SpellID id) {
+	m_coolDownMap[id] = cooldown;
 }
 
 void SpellManager::addSpell(const SpellData& spell) {
@@ -63,7 +68,9 @@ void SpellManager::addSpell(const SpellData& spell) {
 
 void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers) {
 	m_spellMap.push_back(SpellData::getSpellCreator(spell, modifiers, m_owner));
-	m_coolDownMap.push_back(sf::Time::Zero);
+	if (!contains(m_coolDownMap, spell.id)) {
+		m_coolDownMap.insert({ spell.id, sf::Time::Zero });
+	}
 	if (m_spellSelection) {
 		m_spellSelection->reload();
 	}
@@ -72,10 +79,11 @@ void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModif
 template <typename T>
 bool SpellManager::executeCurrentSpell(T target, bool force) {
 	if (m_currentSpell < 0) return false;
+	auto data = m_spellMap[m_currentSpell]->getSpellData();
 	if (!force) {
 		// check if execution is ready.
 		if (m_remainingGlobalCooldown.asMilliseconds() != 0) return false;
-		if (m_currentSpell == -1 || m_coolDownMap[m_currentSpell].asMilliseconds() != 0) return false;
+		if (m_currentSpell == -1 || m_coolDownMap[data.id].asMilliseconds() != 0) return false;
 		if (!m_owner->isReady()) return false;
 		for (auto& spellcreator : m_spellMap) {
 			if (!spellcreator->isReady())
@@ -88,7 +96,7 @@ bool SpellManager::executeCurrentSpell(T target, bool force) {
 	if (m_spellSelection &&  m_spellMap[m_currentSpell]->getSpellData().attachedToMob) {
 		cooldown = std::max(m_spellMap[m_currentSpell]->getSpellData().activeDuration, cooldown);
 	}
-	m_coolDownMap[m_currentSpell] = cooldown;
+	m_coolDownMap[data.id] = cooldown;
 	m_remainingGlobalCooldown = m_globalCooldown;
 	m_spellMap[m_currentSpell]->executeSpell(target);
 	if (m_spellSelection != nullptr) {
@@ -110,7 +118,7 @@ void SpellManager::update(sf::Time frameTime) {
 	updateTime(m_remainingGlobalCooldown, frameTime);
 	// update cooldown map
 	for (auto& it : m_coolDownMap) {
-		updateTime(it, frameTime);
+		updateTime(it.second, frameTime);
 	}
 	// update spellcreators
 	for (auto& it : m_spellMap) {

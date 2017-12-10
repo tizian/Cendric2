@@ -60,8 +60,10 @@ void SpellSelection::reload() {
 			WINDOW_HEIGHT - (SpellSlot::ICON_SIZE + SPELLSELECTION_OFFSET.y + SpellSlot::ICON_OFFSET)));
 		
 		slot.setLocked(contains(lockedMagic, slot.getSpellType()));
-		
+		slot.playAnimation(m_spellManager->getCooldown(it->getSpellData().id));
+
 		m_spellSlots.push_back(slot);
+
 		offset += (SPELLSLOT_SPACING + SpellSlot::SIZE);
 	}
 	m_selectedSlot = 0;

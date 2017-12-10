@@ -74,7 +74,7 @@ void VeliusBossClone::loadSpells() {
 	spell.spellOffset = sf::Vector2f(10.f, 0.f);
 
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 1);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), SpellID::FireBall);
 
 	spell.skinNr = 7;
 	spell.damageType = DamageType::Ice;
@@ -82,7 +82,6 @@ void VeliusBossClone::loadSpells() {
 	spell.duration = sf::seconds(1.f);
 
 	m_spellManager->addSpell(spell);
-	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 2);
 }
 
 void VeliusBossClone::handleAttackInput() {

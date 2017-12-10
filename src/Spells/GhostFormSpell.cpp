@@ -68,6 +68,10 @@ void GhostFormSpell::setDisposed() {
 	if (m_level->collides(rec)) {
 		m_mob->setDead();
 	}
+
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::GhostForm);
+	}
 }
 
 void GhostFormSpell::render(sf::RenderTarget& target) {
