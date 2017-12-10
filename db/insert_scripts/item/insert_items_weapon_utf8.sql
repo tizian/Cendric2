@@ -443,10 +443,10 @@ INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_ordermace', 1, 'divine', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_ordermace', 2, 'elemental', 1);
 
--- Walking Pole
+-- Walking Staff
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item','Walking Pole', 'Wanderstab','Wanderstock');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item_desc', 'A simple walking pole, it belonged to the hunter Edmond.','Ein einfacher Wanderstock, er gehörte dem Jäger Edmond.','En eifache Wanderstock, er het em Jäger Edmond ghört.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item','Walking Staff', 'Wanderstab','Wanderstock');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_walkingpole', 'item_desc', 'A simple walking staff, it belonged to the hunter Edmond.','Ein einfacher Wanderstock, er gehörte dem Jäger Edmond.','En eifache Wanderstock, er het em Jäger Edmond ghört.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('we_walkingpole', 'eq_weapon', 250, 100, 18);
 INSERT INTO item_attribute (item_id, max_health, dmg_physical) values ('we_walkingpole', 5, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_walkingpole', 'res/texture/equipment/weapon/spritesheet_weapon_walkingpole.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_walkingpole.png');
