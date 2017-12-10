@@ -126,6 +126,7 @@ void DisappearingTile::setPosition(const sf::Vector2f& pos) {
 }
 
 void DisappearingTile::onHit(Spell* spell) {
+	if (!m_isCollidable) return;
 	switch (spell->getSpellID()) {
 	case SpellID::Telekinesis:
 		spell->setDisposed();
