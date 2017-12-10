@@ -295,7 +295,7 @@ void LevelMainCharacter::reloadWeapon() {
 void LevelMainCharacter::clearOwnSpells() {
 	for (auto go : *m_screen->getObjects(GameObjectType::_Spell)) {
 		auto spell = dynamic_cast<Spell*>(go);
-		if (!spell) continue;
+		if (!spell || spell->isDisposed()) continue;
 		
 		if (spell->getOwner() == this) {
 			spell->setDisposed();
