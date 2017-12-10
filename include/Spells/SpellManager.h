@@ -40,6 +40,8 @@ public:
 
 	// sets the global cooldown, it is initially zero
 	void setGlobalCooldown(const sf::Time& cooldown);
+	// sets the initial cooldown for a certain spell
+	void setInitialCooldown(const sf::Time& cooldown, int spellIndex);
 
 	int getSelectedSpellID() const;
 	SpellData* getSelectedSpell() const;

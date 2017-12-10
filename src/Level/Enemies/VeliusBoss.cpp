@@ -1,15 +1,42 @@
 #include "Level/Enemies/VeliusBoss.h"
+#include "Level/Enemies/VeliusBossClone.h"
+#include "Level/Enemies/VeliusVictim.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/MOBBehavior/MovingBehaviors/VeliusBossMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/DynamicTiles/MirrorTile.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "GameObjectComponents/ParticleComponent.h"
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
+
+const sf::Color VeliusBoss::V_COLOR_ILLUSION = sf::Color(134, 63, 199);
+const sf::Color VeliusBoss::V_COLOR_TWILIGHT = sf::Color(72, 80, 199);
+const sf::Color VeliusBoss::V_COLOR_NECROMANCY = sf::Color(50, 199, 50);
+const sf::Color VeliusBoss::V_COLOR_DIVINE = sf::Color(240, 240, 100);
+const sf::Color VeliusBoss::V_COLOR_ELEMENTAL = sf::Color(244, 103, 50);
+
+const sf::Time VeliusBoss::BLOCKING_TIME = sf::seconds(3.f);
+const sf::Time VeliusBoss::BLOCKING_GRACE_TIME = sf::seconds(0.5f);
+
+const sf::Time VeliusBoss::SHACKLE_DURATION = sf::seconds(7.f);
+const sf::Time VeliusBoss::CALLING_TIME = sf::seconds(5.f);
+
+const sf::Time VeliusBoss::CLONE_TIMEOUT = sf::seconds(10.f);
+const std::vector<sf::Vector2f> VeliusBoss::CLONE_LOCATIONS = {
+	sf::Vector2f(110.f, 285.f),
+	sf::Vector2f(1210.f, 285.f),
+	sf::Vector2f(1060.f, 535.f),
+	sf::Vector2f(260.f, 535.f),
+	sf::Vector2f(360.f, 385.f),
+	sf::Vector2f(960.f, 385.f),
+	sf::Vector2f(810.f, 285.f),
+	sf::Vector2f(510.f, 285.f),
+};
 
 VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
@@ -34,108 +61,357 @@ void VeliusBoss::render(sf::RenderTarget& target) {
 
 void VeliusBoss::loadAttributes() {
 	m_attributes.setHealth(2000);
-	m_attributes.resistanceIce = -20;
-	m_attributes.resistanceLight = -20;
-	m_attributes.resistanceFire = 50;
-	m_attributes.resistanceShadow = 10000;
-	m_attributes.critical = 100;
+	m_attributes.resistancePhysical = -2000;
+	m_attributes.resistanceIce = -1000;
+	m_attributes.resistanceLight = -1000;
+	m_attributes.resistanceFire = -1000;
+	m_attributes.resistanceShadow = -1000;
+	m_attributes.critical = 30;
 	m_attributes.calculateAttributes();
 }
 
 void VeliusBoss::updateBossState(const sf::Time& frameTime) {
+	switch (m_bossState)
+	{
+	case AttackIllusion:
+		if (!m_isClones) {
+			updateBlocking(frameTime);
+			updateClonesStart(frameTime, 1750);
+			updateShackle(frameTime, 1500);
+		}
+		break;
+	case ExtractDivine:
+		break;
+	case AttackDivine:
+		break;
+	case ExtractNecromancy:
+		break;
+	case AttackNecromancy:
+		break;
+	case ExtractTwilight:
+		if (m_isCalling) {
+			updateTime(m_timeUntilCallingComplete, frameTime);
+			if (m_timeUntilCallingComplete == sf::Time::Zero) {
+				startExtraction(V_COLOR_TWILIGHT);
+			}
+		}
+		break;
+	case AttackTwilight:
+		break;
+	case ExtractElemental:
+		break;
+	default:
+		break;
+	}
+}
 
+void VeliusBoss::callToDie(const sf::Color& color) {
+	m_level->setBackgroundLayerColor(color);
+	m_isCalling = true;
+	m_timeUntilCallingComplete = CALLING_TIME;
+	setPosition(sf::Vector2f(800.f, 535.f));
+	setReady();
+	setFacingRight(false);
+	setState(GameObjectState::Broken);
+	setCurrentAnimation(getAnimation(m_state), true);
+
+	std::string calleeName = m_bossState == VeliusBossState::ExtractTwilight ? "Koray" :
+		m_bossState == VeliusBossState::ExtractNecromancy ? "Robert" : "Inina";
+
+	m_scriptedBehavior->say("Velius" + calleeName + "Call", 5);
+
+	VeliusVictim* callee = nullptr;
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		callee = dynamic_cast<VeliusVictim*>(go);
+		if (!callee) continue;
+		if (callee->getEnemyName().compare(calleeName) == 0) {
+			break;
+		}
+	}
+	
+	if (!callee) return;
+
+	callee->callToDie();
+}
+
+void VeliusBoss::startExtraction(const sf::Color& color) {
+	m_isCalling = false;
+	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
+	m_ray->initRay(sf::Vector2f(675.f, 599.f), sf::Vector2f(1.f, -0.25f), color);
+	setFacingRight(false);
+	setState(GameObjectState::Casting3);
+	setCurrentAnimation(getAnimation(m_state), true);
 }
 
 void VeliusBoss::setBossState(VeliusBossState state) {
 	delete m_ray;
 	m_ray = nullptr;
+	m_bossState = state;
 	switch (m_bossState)
 	{
 	case AttackIllusion:
-		m_level->setBackgroundLayerColor(COLOR_MEDIUM_PURPLE);
+		m_level->setBackgroundLayerColor(V_COLOR_ILLUSION);
+		m_isClonesDoneInPhase = false;
+		m_isShackling = false;
+		m_timeUntilClones = CLONE_TIMEOUT;
 		break;
+
 	case ExtractDivine:
 	{
-		m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
-		m_ray->initRay(sf::Vector2f(775.f, 600.f), sf::Vector2f(0.f, -1.f), COLOR_DIVINE);
-		m_level->setBackgroundLayerColor(COLOR_DIVINE);
+		callToDie(V_COLOR_DIVINE);
 		break;
 	}
 	case AttackDivine:
 		break;
 	case ExtractNecromancy:
 	{
-		m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
-		m_ray->initRay(sf::Vector2f(775.f, 600.f), sf::Vector2f(0.f, -1.f), COLOR_NECROMANCY);
-		m_level->setBackgroundLayerColor(COLOR_NECROMANCY);
+		callToDie(V_COLOR_NECROMANCY);
 		break;
 	}
 	case AttackNecromancy:
 		break;
 	case ExtractTwilight: 
 	{
-		m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
-		m_ray->initRay(sf::Vector2f(775.f, 600.f), sf::Vector2f(0.f, -1.f), COLOR_TWILIGHT);
-		m_level->setBackgroundLayerColor(COLOR_TWILIGHT);
+		callToDie(V_COLOR_TWILIGHT);
 		break;
 	}
 	case AttackTwilight:
 		break;
 	case ExtractElemental:
 	{
-		m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
-		m_ray->initRay(sf::Vector2f(775.f, 600.f), sf::Vector2f(0.f, -1.f), COLOR_ELEMENTAL);
-		m_level->setBackgroundLayerColor(COLOR_ELEMENTAL);
 		break;
 	}
 		break;
 	default:
 		break;
 	}
+}
 
+void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
+	if (!m_isShackling && m_attributes.currentHealthPoints < healthThreshold) {
+		m_isShackling = true;
+		setPosition(sf::Vector2f(650.f, 485.f));
+		setReady();
+		dynamic_cast<WalkingBehavior*>(m_movingBehavior)->stopAll();
+		m_scriptedBehavior->say("VeliusEnough", 5);
+		setBlocking();
+		m_spellManager->setCurrentSpell(0);
+		m_spellManager->executeCurrentSpell(m_mainChar);
+		m_timeUntilShackleDone = sf::seconds(5.5f);
+		return;
+	}
+
+	if (!m_isShackling) return;
 	
+	updateTime(m_timeUntilShackleDone, frameTime);
+	if (m_timeUntilShackleDone == sf::Time::Zero) {
+		m_isShackling = false;
+		setBossState(VeliusBossState::ExtractTwilight);
+	}
+}
+
+void VeliusBoss::clearClones() {
+	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		auto enemy = dynamic_cast<Enemy*>(go);
+		if (!enemy) continue;
+		if (enemy->getEnemyID() == EnemyID::VeliusClone) {
+			enemy->setDead();
+			enemy->setDisposed();
+		}
+	}
+	m_isClones = false;
+}
+
+void VeliusBoss::setupClones(int phase) {
+	clearBlocking();
+	m_timeUntilClones = CLONE_TIMEOUT;
+	m_isClonesDoneInPhase = true;
+	m_isClones = true;
+
+	int skinNr = phase;
+	int noLocations = static_cast<int>(CLONE_LOCATIONS.size());
+
+	// velius' position:
+	sf::Vector2f veliusPos = CLONE_LOCATIONS[rand() % noLocations];
+	setPosition(veliusPos);
+	m_mainChar->resetTarget();
+
+	// the clones' location
+	for (auto& loc : CLONE_LOCATIONS) {
+		if (loc.x == veliusPos.x && loc.y == veliusPos.y) continue;
+
+		auto clone = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::VeliusClone, loc, skinNr);
+		clone->setFacingRight(rand() % 2 == 0);
+	}
+}
+
+void VeliusBoss::updateClonesStart(const sf::Time& frameTime, int damageThreshold) {
+	if (m_isShackling) return;
+	updateTime(m_timeUntilClones, frameTime);
+	if (m_timeUntilClones == sf::Time::Zero || 
+		(!m_isClonesDoneInPhase && m_attributes.currentHealthPoints < damageThreshold)) {
+		switch (m_bossState)
+		{
+		case AttackIllusion:
+			setupClones(0);
+			break;
+		case AttackTwilight:
+			setupClones(1);
+			break;
+		case AttackNecromancy:
+			setupClones(2);
+			break;
+		case AttackDivine:
+			setupClones(3);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void VeliusBoss::updateBlocking(const sf::Time& frameTime) {
+	if (m_isIndefinitelyBlocking) return;
+
+	if (m_isBlocking) {
+		updateTime(m_blockingTime, frameTime);
+		if (m_blockingTime == sf::Time::Zero) {
+			clearBlocking();
+		}
+		return;
+	}
+
+	if (m_timeUntilBlocking > sf::Time::Zero) {
+		updateTime(m_timeUntilBlocking, frameTime);
+		if (m_timeUntilBlocking == sf::Time::Zero) {
+			m_blockingGraceTime = BLOCKING_GRACE_TIME;
+			m_blockingBubble->setEmitRate(400.f);
+		}
+		return;
+	}
+	
+	updateTime(m_blockingGraceTime, frameTime);
+	if (m_blockingGraceTime == sf::Time::Zero) {
+		m_isBlocking = true;
+		m_blockingTime = BLOCKING_TIME;
+	}
+}
+
+void VeliusBoss::setBlocking() {
+	m_isBlocking = true;
+	m_isIndefinitelyBlocking = true;
+	m_blockingBubble->setEmitRate(400.f);
+}
+
+void VeliusBoss::clearBlocking() {
+	m_isBlocking = false;
+	m_isIndefinitelyBlocking = false;
+	m_blockingBubble->setEmitRate(0.f);
+	m_timeUntilBlocking = sf::seconds(randomFloat(4.f, 8.f));
 }
 
 void VeliusBoss::loadSpells() {
+	// shackle spell
+	SpellData shackle;
+	shackle.id = SpellID::Shackle;
+	shackle.activeDuration = SHACKLE_DURATION;
+	shackle.duration = SHACKLE_DURATION + sf::seconds(5.f);
+	shackle.isBlocking = true;
+	shackle.castingTime = sf::seconds(0.5f);
+	shackle.castingAnimation = GameObjectState::Casting2;
+	shackle.fightingTime = sf::seconds(5.f);
+	shackle.fightAnimation = GameObjectState::Casting2;
+	shackle.cooldown = sf::seconds(0.f);
+	shackle.spritesheetPath = "res/texture/spells/spritesheet_spell_shackle.png";
+	shackle.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	shackle.spellOffset = sf::Vector2f(0.f, -40.f);
+	m_spellManager->addSpell(shackle);
+
 	// illusion spell
-	SpellData projectile = SpellData::getSpellData(SpellID::FireBall);
-	projectile.skinNr = 6;
-	projectile.damage = 25;
-	projectile.count = 3;
-	projectile.duration = sf::seconds(1.f);
-	projectile.cooldown = sf::seconds(5.f);
-	projectile.isBlocking = true;
-	projectile.fightingTime = sf::seconds(0.f);
-	projectile.castingTime = sf::seconds(0.45f);
-	projectile.castingAnimation = GameObjectState::Casting;
-	projectile.speed = 300;
+	SpellData spell = SpellData::getSpellData(SpellID::FireBall);
+	spell.skinNr = 6;
+	spell.damage = 30;
+	spell.count = 3;
+	spell.damageType = DamageType::Shadow;
+	spell.duration = sf::seconds(1.f);
+	spell.cooldown = sf::seconds(5.f);
+	spell.isBlocking = true;
+	spell.fightingTime = sf::seconds(0.f);
+	spell.castingTime = sf::seconds(0.45f);
+	spell.castingAnimation = GameObjectState::Casting;
+	spell.isDynamicTileEffect = false;
+	spell.speed = 300;
+	spell.spellOffset = sf::Vector2f(10.f, 0.f);
 
-	m_spellManager->addSpell(projectile);
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(2.f), 1);
 
-	m_spellManager->setGlobalCooldown(sf::seconds(3.f));
+	spell.count = 1;
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 2);
+
+	// twilight spell
+	spell.skinNr = 7;
+	spell.damageType = DamageType::Ice;
+	spell.isStunning = true;
+	spell.duration = sf::seconds(1.f);
+	spell.count = 2;
+
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(2.f), 3);
+
+	spell.count = 1;
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 4);
+
+	// initial boss state
+	setBossState(VeliusBossState::AttackIllusion);
 }
 
 void VeliusBoss::handleAttackInput() {
+	if (m_isShackling) return;
+
 	switch (m_bossState)
 	{
 	case AttackIllusion:
-		m_spellManager->setCurrentSpell(0); // illusion attack
+		m_spellManager->setCurrentSpell(m_isClones ? 2 : 1); 
+		break;
+	case AttackTwilight:
+		m_spellManager->setCurrentSpell(m_isClones ? 4 : 3);
+		break;
+	case AttackDivine:
+		break;
+	case AttackNecromancy:
 		break;
 	case ExtractDivine:
 	case ExtractNecromancy:
 	case ExtractTwilight:
 	case ExtractElemental:
 		return;
-	case AttackDivine:
-		break;
-	case AttackNecromancy:
-		break;
-	case AttackTwilight:
-		break;
 	default:
 		break;
 	}
 	m_spellManager->executeCurrentSpell(m_mainChar); // illusion attack
+}
+
+void VeliusBoss::onHit(Spell* spell) {
+	if (m_isDead) return;
+
+	if (m_isClones) {
+		clearClones();
+		setStunned(sf::seconds(1.f));
+	}
+
+	if (!m_isBlocking) {
+		Enemy::onHit(spell);
+		return;
+	}
+
+	if (!spell->isAttachedToMob()) {
+		// we'll send you right back!
+		spell->setOwner(this);
+		spell->reflect();
+	}
 }
 
 void VeliusBoss::loadAnimation(int skinNr) {
@@ -211,17 +487,14 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	// component: light
-	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width * 0.5f, 0.f),
-		sf::Vector2f(100.f, 100.f), 0.6f), this));
+	loadComponents();
 }
 
 MovingBehavior* VeliusBoss::createMovingBehavior(bool asAlly) {
 	WalkingBehavior* behavior;
 	behavior = new VeliusBossMovingBehavior(this);
 	behavior->setDistanceToAbyss(100.f);
-	behavior->setApproachingDistance(600.f);
+	behavior->setApproachingDistance(100.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityYUp(600.f);
 	behavior->setMaxVelocityX(200.f);
@@ -238,8 +511,69 @@ AttackingBehavior* VeliusBoss::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+void VeliusBoss::loadComponents() {
+	// component: light
+	addComponent(new LightComponent(LightData(
+		sf::Vector2f(getBoundingBox()->width * 0.5f, 0.f),
+		sf::Vector2f(100.f, 100.f), 0.6f), this));
+
+	loadBlockingParticles();
+}
+
+void VeliusBoss::loadBlockingParticles() {
+	// particles
+	ParticleComponentData data;
+	data.particleCount = 200;
+	data.isAdditiveBlendMode = true;
+	data.emitRate = 0.f;
+	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
+
+	// Generators
+	auto spawner = new particles::CircleSpawner();
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->radius = sf::Vector2f(60.f, 100.f);
+	data.spawner = spawner;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 15.f;
+	sizeGen->maxStartSize = 30.f;
+	sizeGen->minEndSize = 0.f;
+	sizeGen->maxEndSize = 2.f;
+	data.sizeGen = sizeGen;
+
+	auto colGen = new particles::ColorGenerator();
+	colGen->minStartCol = sf::Color(100, 40, 200, 200);
+	colGen->maxStartCol = sf::Color(150, 100, 255, 200);
+	colGen->minEndCol = sf::Color(0, 0, 0, 0);
+	colGen->maxEndCol = sf::Color(150, 100, 200, 0);
+	data.colorGen = colGen;
+
+	auto velGen = new particles::AngledVelocityGenerator();
+	velGen->minAngle = 0.f;
+	velGen->maxAngle = 360.f;
+	velGen->minStartSpeed = 1.f;
+	velGen->maxStartSpeed = 2.f;
+	data.velGen = velGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.5f;
+	timeGen->maxTime = 0.5f;
+	data.timeGen = timeGen;
+
+	m_blockingBubble = new ParticleComponent(data, this);
+	m_blockingBubble->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	addComponent(m_blockingBubble);
+
+	// init blocking
+	clearBlocking();
+}
+
 float VeliusBoss::getConfiguredDistanceToHPBar() const {
 	return 30.f;
+}
+
+bool VeliusBoss::isBlocked() const {
+	return m_isClones || m_isCalling || m_ray;
 }
 
 std::string VeliusBoss::getSpritePath() const {

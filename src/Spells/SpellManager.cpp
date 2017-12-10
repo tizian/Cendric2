@@ -52,6 +52,11 @@ void SpellManager::setGlobalCooldown(const sf::Time& cooldown) {
 	m_globalCooldown = cooldown;
 }
 
+void SpellManager::setInitialCooldown(const sf::Time& cooldown, int spellIndex) {
+	if (spellIndex < 0 || spellIndex > static_cast<int>(m_coolDownMap.size() - 1)) return;
+	m_coolDownMap[spellIndex] = cooldown;
+}
+
 void SpellManager::addSpell(const SpellData& spell) {
 	addSpell(spell, std::vector<SpellModifier>());
 }

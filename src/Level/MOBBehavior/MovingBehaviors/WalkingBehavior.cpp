@@ -172,6 +172,14 @@ float WalkingBehavior::getDistanceToAbyss() const {
 	return m_aiRecord.distanceToAbyss;
 }
 
+void WalkingBehavior::stopAll() {
+	EnemyMovingBehavior::stopAll();
+	m_isGrounded = true;
+	m_mob->setAcceleration(sf::Vector2f(0.f, getGravity()));
+	m_jumps = false;
+	m_jumpsBlindly = false;
+}
+
 void WalkingBehavior::makeRandomDecision() {
 	if (!m_isGrounded || m_walksBlindly || !isReady()) return;
 	m_movingDirectionX = rand() % 3 - 1;

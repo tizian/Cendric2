@@ -58,6 +58,7 @@ public:
 	void removeItems(const std::string& item, int quantity) const;
 	void setInputLock();
 	void setJumpLock();
+	void resetTarget();
 
 	bool isAlly() const override;
 	bool isReady() const override;

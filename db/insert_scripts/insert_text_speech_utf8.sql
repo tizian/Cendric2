@@ -93,6 +93,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ve
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIninaDead', 'speech','What a good girl.','Was für ein braves Mädchen.', 'Sones bravs Meitli.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusCendricCall', 'speech','Prepare to die!','Mach dich bereit, zu sterben!', 'Mach dich parat, z''sterbe!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusCendricDead', 'speech','Finally!','Endlich!', 'Endlich!');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion1', 'speech','We are... many!','Wir sind... viele!', 'Mir sind... vieli!');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion2', 'speech','There''s no escape.','Es gibt kein Entkommen.', 'Es git keis Entcho.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusIllusion3', 'speech','Illusion!','Illusion!', 'Illusion!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('VeliusEnough', 'speech','Enough!','Genug!', 'Gnueg!');

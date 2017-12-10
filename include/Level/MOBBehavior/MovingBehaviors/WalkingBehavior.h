@@ -21,6 +21,7 @@ public:
 	void setIgnoreDynamicTiles(bool value) override;
 
 	float getDistanceToAbyss() const;
+	void stopAll() override;
 
 protected:
 	AIWalkingQueryRecord m_aiRecord;

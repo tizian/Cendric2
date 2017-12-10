@@ -121,3 +121,9 @@ void EnemyMovingBehavior::resetMovingTarget() {
 	m_movingDirectionY = 0;
 	m_enemy->setVelocity(sf::Vector2f(0.f, 0.f));
 }
+
+void EnemyMovingBehavior::stopAll() {
+	m_movingDirectionX = 0;
+	m_movingDirectionY = 0;
+	m_enemy->setVelocity(sf::Vector2f(0.f, 0.f));
+}

@@ -4,6 +4,8 @@
 #include "Level/Level.h"
 #include "Screens/Screen.h"
 
+class ParticleComponent;
+
 // skins:
 // 0: koray
 // 1: robert
@@ -32,4 +34,12 @@ private:
 	void loadAttributes() override;
 	void loadSpells() override {};
 	void loadAnimation(int skinNr) override;
+
+	sf::Time m_timeUntilDamage;
+
+	void loadDeathParticles();
+	ParticleComponent* m_deathPc;
+
+	sf::Time m_fadingTime = sf::seconds(2.f);
+	sf::Time m_particleTime = sf::seconds(2.f);
 };

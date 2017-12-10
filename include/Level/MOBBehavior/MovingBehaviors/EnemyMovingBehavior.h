@@ -21,6 +21,9 @@ public:
 	void setMovingTarget(int x, int y);
 	void resetMovingTarget();
 
+	// stops all actions
+	virtual void stopAll();
+
 protected:
 	void gotoTarget(const sf::Vector2f& target, float approachingDistance, bool hold = false, bool exact = false);
 	void resetMovementLock();

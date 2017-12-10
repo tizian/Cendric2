@@ -12,6 +12,7 @@ the following skins are available:
 4: energy fireball (from cairns)
 5: janus' fireball
 6: velius' fireball
+7: an icy dagger skin
 */
 class FireBallSpell final : public Spell {
 public:

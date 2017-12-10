@@ -482,6 +482,10 @@ void LevelMainCharacter::setJumpLock() {
 	dynamic_cast<UserMovingBehavior*>(m_movingBehavior)->setJumpLock();
 }
 
+void LevelMainCharacter::resetTarget() {
+	m_targetManager->setTargetEnemy(nullptr);
+}
+
 void LevelMainCharacter::lootItem(const std::string& item, int quantity) const {
 	if (LevelScreen* levelScreen = dynamic_cast<LevelScreen*>(m_screen)) {
 		levelScreen->notifyItemChange(item, quantity);

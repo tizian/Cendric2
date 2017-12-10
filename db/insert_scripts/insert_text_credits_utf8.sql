@@ -70,6 +70,8 @@ Peter
 
 "Lighthouse Theme"
 
+"Pirates, Rum and Treasure"
+
 ---
 
 -- Susanne Aubert --
@@ -154,12 +156,12 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter
 Randalf
-Martin
+Martin Roesch
 Patrick
-Iris
+Iris Schmidt
 Stefan ''Tank'' Schindler
 Sebastian
-Lukas
+Lukas Dürrenberger
 Ramón
 Pascal
 Nick Kline
@@ -279,6 +281,8 @@ Peter
 
 "Lighthouse Theme"
 
+"Pirates, Rum and Treasure"
+
 ---
 
 -- Susanne Aubert --
@@ -341,6 +345,9 @@ pla1554alaska
 Peter
 Tizian
 
+<<< Korrekturleser >>>
+Iris Schmidt
+
 <<< Concept Art >>>
 Isa
 Tizian
@@ -359,12 +366,12 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter
 Randalf
-Martin
+Martin Roesch
 Patrick
-Iris
+Iris Schmidt
 Stefan ''Tank'' Schindler
 Sebastian
-Lukas
+Lukas Dürrenberger
 Ramón
 Pascal
 Nick Kline
@@ -481,6 +488,8 @@ Peter
 
 "Lighthouse Theme"
 
+"Pirates, Rum and Treasure"
+
 ---
 
 -- Susanne Aubert --
@@ -559,7 +568,7 @@ Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
 Christian Brunner - Luzerner Dialekt (Wirt)
 Sandra Scherrer - Bündner Dialekt (Jonathan)
 Patrizia Drohmann - Bündner Dialekt (Jonathan)
-Gamerocker - Aargauer Dialekt (Rana, Jason)
+Mitch aka Gamerocker - Aargauer Dialekt (Rana, Jason)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
@@ -572,12 +581,12 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter
 Randalf
-Martin
+Martin Roesch
 Patrick
-Iris
+Iris Schmidt
 Stefan ''Tank'' Schindler
 Sebastian
-Lukas
+Lukas Dürrenberger
 Ramón
 Pascal
 Nick Kline
@@ -588,7 +597,7 @@ Dave
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild
-Pascal Josephy für Web-Support
+Pascal Josephy für de Web-Support
 Mona für ihre Bordell-Support
 
 ---

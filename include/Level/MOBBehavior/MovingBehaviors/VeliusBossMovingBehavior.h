@@ -12,6 +12,7 @@ public:
 	~VeliusBossMovingBehavior() {};
 
 	void execHandleMovementInput() override;
+	void updateAnimation(const sf::Time& frameTime) override;
 
 private:
 	VeliusBoss* m_boss;

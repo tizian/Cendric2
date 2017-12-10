@@ -11,6 +11,7 @@
 #include "Spells/TargetingProjectileSpell.h"
 #include "Spells/BoomerangSpell.h"
 #include "Spells/ExplosionSpell.h"
+#include "Spells/ShackleSpell.h"
 #include "SpellCreators/DivineShieldSpellCreator.h"
 #include "SpellCreators/AureolaSpellCreator.h"
 #include "SpellCreators/FearSpellCreator.h"
@@ -220,6 +221,9 @@ SpellCreator* SpellData::getSpellCreator(const SpellData& data, const std::vecto
 		break;
 	case SpellID::Explosion:
 		creator = new DefaultSpellCreator<ExplosionSpell>(data, owner);
+		break;
+	case SpellID::Shackle:
+		creator = new DefaultSpellCreator<ShackleSpell>(data, owner);
 		break;
 	default:
 		return nullptr;

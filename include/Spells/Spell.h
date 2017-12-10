@@ -65,7 +65,7 @@ protected:
 	sf::Sound m_sound;
 	
 	const Level* m_level;
-	LevelMovableGameObject* m_mob; // owner, it will never hurt the owner or any other mob of the same type.
+	LevelMovableGameObject* m_mob = nullptr; // owner, it will never hurt the owner or any other mob of the same type.
 	
 	// enemy list from screen
 	std::vector<GameObject*>* m_enemies;

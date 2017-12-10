@@ -43,6 +43,7 @@ enum class SpellID {
 	RotatingProjectile,
 	TargetingProjectile,
 	Explosion,
+	Shackle,
 
 	MAX
 };

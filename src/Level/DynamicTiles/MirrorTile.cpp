@@ -178,10 +178,12 @@ void Ray::update(const sf::Time& frameTime) {
 	m_lineSpawner->point2 = m_endPos;
 	
 	auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
-	dir = dir / norm(dir);
+	auto length = norm(dir);
+	dir = dir / length;
 
 	m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
 	m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
+	m_particleSystem->emitRate = length * 1.5f;
 	m_particleSystem->update(frameTime);
 }
 

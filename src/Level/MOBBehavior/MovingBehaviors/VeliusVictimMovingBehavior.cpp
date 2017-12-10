@@ -1,7 +1,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/VeliusVictimMovingBehavior.h"
 #include "Level/Enemies/VeliusVictim.h"
 
-const sf::Vector2f VeliusVictimMovingBehavior::ALTAR_POS = sf::Vector2f(670.f, 600.f);
+const sf::Vector2f VeliusVictimMovingBehavior::ALTAR_POS = sf::Vector2f(655.f, 510.f);
 
 VeliusVictimMovingBehavior::VeliusVictimMovingBehavior(VeliusVictim* enemy) :
 	MovingBehavior(enemy),
@@ -13,15 +13,14 @@ VeliusVictimMovingBehavior::VeliusVictimMovingBehavior(VeliusVictim* enemy) :
 void VeliusVictimMovingBehavior::execHandleMovementInput() {
 	auto state = m_mob->getState();
 	if (state == GameObjectState::Inactive || state == GameObjectState::Broken) {
-		m_movingDirectionX = 0;
-		m_movingDirectionY = 0;
-		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
+		stopAll();
 		return;
 	}
 	
-	gotoTarget(ALTAR_POS, 10.f, true, true);
+	gotoTarget(ALTAR_POS, 2.f, true, true);
 
-	if (dist(ALTAR_POS, m_victim->getPosition()) < 10.f) {
+	if (dist(ALTAR_POS, m_victim->getCenter()) < 4.f) {
+		m_mob->setPosition(ALTAR_POS);
 		m_mob->setState(GameObjectState::Broken);
 	}
 }

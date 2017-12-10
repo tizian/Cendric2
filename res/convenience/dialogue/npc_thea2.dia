@@ -23,7 +23,7 @@ npc.id:npc_thea2
 	translation.tag:DL_Thea_Hey
 	translation.en:Oh, here you are! My apprenticeship is going really well so far.
 	translation.de:Oh, da bist du ja! Meine Lehre läuft wirklich gut bis jetzt.
-	translation.ch:Oh, da bisch ja! Mini Lehr lauft würkli guet bis ez.
+	translation.ch:Oh, da bisch ja! Mini Lehr louft würklech guet bis itz.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -39,7 +39,7 @@ npc.id:npc_thea2
 	translation.tag:DL_Thea_Hey2
 	translation.en:I wouldn't be here without you. Here, take this herb, it's very rare and might be useful for you. (Winks)
 	translation.de:Ohne dich wäre ich nicht hier. Da, nimm dieses Kraut, es ist sehr selten und könnte nützlich sein. (Zwinkert)
-	translation.ch:Ohni dich wäri nid do. Do, nimm das Chrütli, es isch sehr sälte und chönt nützlich si für dich. (Zwinkeret)
+	translation.ch:Ohni di wäri nid da. Hiä, nimm das Chrüttli, äs isch sehr säutä u chönnt nützlech für di sii. (Zwinkeret)
 	[
 		# Link node, tag is next tag
 		tag:-2

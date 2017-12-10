@@ -330,6 +330,7 @@ public:
 		case EnemyID::King:
 			return "King";
 		case EnemyID::Boss_Velius:
+		case EnemyID::VeliusClone:
 			return "BossVelius";
 		}
 	}

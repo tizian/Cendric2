@@ -2,6 +2,8 @@
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/InteractComponent.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/NeutralWalkingBehavior.h"
 #include "Screens/LevelScreen.h"
 #include "World/CustomParticleUpdaters.h"
 #include "Registrar.h"
@@ -14,13 +16,6 @@ VeliusBossClone::VeliusBossClone(const Level* level, Screen* screen) :
 	Enemy(level, screen) {
 }
 
-void VeliusBossClone::update(const sf::Time& frameTime) {
-	Enemy::update(frameTime);
-	if (m_isDead) return;
-
-	
-}
-
 void VeliusBossClone::setDead() {
 	Enemy::setDead();
 	setState(GameObjectState::Dead, true);
@@ -29,16 +24,70 @@ void VeliusBossClone::setDead() {
 	m_interactComponent->setInteractable(false);
 }
 
+void VeliusBossClone::onHit(Spell* spell) {
+	m_spellManager->setCurrentSpell(0);
+	m_spellManager->executeCurrentSpell(m_mainChar);
+
+	Enemy::onHit(spell);
+}
+
 void VeliusBossClone::loadAttributes() {
 	m_attributes.setHealth(1);
 	m_attributes.calculateAttributes();
 }
 
 void VeliusBossClone::loadSpells() {
+	// the pretty brutal spell that gets cast when a clone is shattered
+	SpellData projectile = SpellData::getSpellData(SpellID::TargetingProjectile);
+	projectile.cooldown = sf::seconds(0);
+	projectile.activeDuration = sf::seconds(10.f);
+	projectile.damageType = DamageType::Shadow;
+	projectile.damage = 40;
+	projectile.damagePerSecond = 5;
+	projectile.speed = 400;
+	projectile.count = 3;
+	projectile.skinNr = 1;
+	projectile.strength = 1;
+	projectile.isColliding = false;
+	projectile.isStunning = true;
+	projectile.duration = sf::seconds(2.f);
+	projectile.fightingTime = sf::seconds(0.f);
+	projectile.castingTime = sf::seconds(0.f);
 
+	m_spellManager->addSpell(projectile);
+
+	// the "default" spells
+
+	// illusion
+	SpellData spell = SpellData::getSpellData(SpellID::FireBall);
+	spell.skinNr = 6;
+	spell.damage = 30;
+	spell.count = 1;
+	spell.damageType = DamageType::Shadow;
+	spell.duration = sf::seconds(1.f);
+	spell.cooldown = sf::seconds(5.f);
+	spell.isBlocking = true;
+	spell.fightingTime = sf::seconds(0.f);
+	spell.castingTime = sf::seconds(0.45f);
+	spell.castingAnimation = GameObjectState::Casting;
+	spell.speed = 300;
+	spell.spellOffset = sf::Vector2f(10.f, 0.f);
+
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 1);
+
+	spell.skinNr = 7;
+	spell.damageType = DamageType::Ice;
+	spell.isStunning = true;
+	spell.duration = sf::seconds(1.f);
+
+	m_spellManager->addSpell(spell);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), 2);
 }
 
 void VeliusBossClone::handleAttackInput() {
+	m_spellManager->setCurrentSpell(m_skinNr + 1); 
+	m_spellManager->executeCurrentSpell(m_mainChar);
 }
 
 void VeliusBossClone::loadAnimation(int skinNr) {
@@ -71,10 +120,10 @@ void VeliusBossClone::loadAnimation(int skinNr) {
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * width, height, width, height));
-	deadAnimation->addFrame(sf::IntRect(11 * width, height, width, height));
-	deadAnimation->addFrame(sf::IntRect(12 * width, height, width, height));
-	deadAnimation->addFrame(sf::IntRect(13 * width, height, width, height));
+	for (int i = 10; i < 14; ++i) {
+		deadAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+	}
+	deadAnimation->addFrame(sf::IntRect(17 * width, height, width, height));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -100,11 +149,22 @@ void VeliusBossClone::loadAnimation(int skinNr) {
 }
 
 MovingBehavior* VeliusBossClone::createMovingBehavior(bool asAlly) {
-	return nullptr;
+	WalkingBehavior* behavior;
+	behavior = new NeutralWalkingBehavior(this);
+	behavior->setApproachingDistance(100.f);
+	behavior->setMaxVelocityYUp(0.f);
+	behavior->setMaxVelocityYDown(800.f);
+	behavior->setMaxVelocityX(0.f);
+	behavior->calculateJumpHeight();
+	return  behavior;
 }
 
 AttackingBehavior* VeliusBossClone::createAttackingBehavior(bool asAlly) {
-	return nullptr;
+	EnemyAttackingBehavior* behavior;
+	behavior = new AggressiveBehavior(this);
+	behavior->setAggroRange(10000.f);
+	behavior->setAttackInput(std::bind(&VeliusBossClone::handleAttackInput, this));
+	return behavior;
 }
 
 std::string VeliusBossClone::getSpritePath() const {
