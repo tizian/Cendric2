@@ -194,7 +194,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	// dynamic tiles
 	for (auto go : *lScreen->getObjects(GameObjectType::_DynamicTile)) {
 		if (auto dTile = dynamic_cast<LevelDynamicTile*>(go)) {
-			if (dTile->getDynamicTileID() == LevelDynamicTileID::Modifier) {
+			if (dTile->getDynamicTileID() == LevelDynamicTileID::Modifier && dTile->getGameObjectState() == GameObjectState::Active) {
 				drawOverlayTexture(img, dTile->getCenter() * scale, 0, 0);
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Door && dTile->isCollidable()) {

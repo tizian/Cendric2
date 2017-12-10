@@ -44,18 +44,18 @@ void ModifierTile::loadAnimation(int skinNr) {
 	m_animatedSprite.setColor(SpellModifier::getSpellModifierColor(m_modifier.type));
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GEMS);
-	Animation* idleAnimation = new Animation();
-	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(rect);
-	addAnimation(GameObjectState::Idle, idleAnimation);
+	Animation* activeAnimation = new Animation();
+	activeAnimation->setSpriteSheet(tex);
+	activeAnimation->addFrame(rect);
+	addAnimation(GameObjectState::Active, activeAnimation);
 
-	Animation* activatedAnimation = new Animation(sf::seconds(10.f));
-	activatedAnimation->setSpriteSheet(tex);
-	activatedAnimation->addFrame(sf::IntRect()); // idle
-	addAnimation(GameObjectState::Active, activatedAnimation);
+	Animation* inactiveAnimation = new Animation(sf::seconds(10.f));
+	inactiveAnimation->setSpriteSheet(tex);
+	inactiveAnimation->addFrame(sf::IntRect()); // idle
+	addAnimation(GameObjectState::Inactive, inactiveAnimation);
 
 	// initial values
-	m_state = GameObjectState::Idle;
+	m_state = GameObjectState::Active;
 	setCurrentAnimation(getAnimation(m_state), false);
 	playCurrentAnimation(true);
 }
@@ -63,7 +63,7 @@ void ModifierTile::loadAnimation(int skinNr) {
 void ModifierTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 
-	if (m_state == GameObjectState::Active) {
+	if (m_state == GameObjectState::Inactive) {
 		updateTime(m_particleTime, frameTime);
 		if (m_particleTime == sf::Time::Zero) {
 			setDisposed();
@@ -83,7 +83,7 @@ void ModifierTile::render(sf::RenderTarget& target) {
 }
 
 void ModifierTile::addModifier() {
-	m_state = GameObjectState::Active;
+	m_state = GameObjectState::Inactive;
 	setCurrentAnimation(getAnimation(m_state), false);
 
 	LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen());
@@ -92,7 +92,7 @@ void ModifierTile::addModifier() {
 }
 
 void ModifierTile::onHit(LevelMovableGameObject* mob) {
-	if (m_state == GameObjectState::Active) return;
+	if (m_state == GameObjectState::Inactive) return;
 	LevelMainCharacter* character = dynamic_cast<LevelMainCharacter*>(mob);
 	if (character) {
 		addModifier();
