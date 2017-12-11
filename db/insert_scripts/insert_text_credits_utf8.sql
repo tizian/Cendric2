@@ -569,6 +569,7 @@ Christian Brunner - Luzerner Dialekt (Wirt)
 Sandra Scherrer - Bündner Dialekt (Jonathan)
 Patrizia Drohmann - Bündner Dialekt (Jonathan)
 Mitch aka Gamerocker - Aargauer Dialekt (Rana, Jason)
+Talita Schär - Ämmitaler Dialekt (Thea)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
