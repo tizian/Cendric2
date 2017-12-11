@@ -845,7 +845,11 @@
   </object>
   <object id="268" gid="849" x="3150" y="800" width="50" height="50"/>
   <object id="269" gid="849" x="3350" y="800" width="50" height="50"/>
-  <object id="270" gid="793" x="3000" y="900" width="50" height="50"/>
+  <object id="270" gid="793" x="3000" y="900" width="50" height="50">
+   <properties>
+    <property name="mimic" value=""/>
+   </properties>
+  </object>
   <object id="271" gid="1038" x="2600" y="250" width="50" height="50">
    <properties>
     <property name="direction" value="135"/>

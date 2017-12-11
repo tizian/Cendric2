@@ -585,10 +585,10 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.speed = 200.f;
 	telekinesis.isDynamicTileEffect = true;
 	telekinesis.needsTarget = true;
-	telekinesis.range = 100;
+	telekinesis.range = 150;
 	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
 
-	telekinesis.rangeModifierAddition = 150.f;
+	telekinesis.rangeModifierAddition = 100.f;
 	telekinesis.reflectModifierAddition = 1;
 
 	return telekinesis;
