@@ -42,6 +42,7 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
+	m_veliusLevel = 1;
 }
 
 VeliusBoss::~VeliusBoss() {
@@ -60,7 +61,7 @@ void VeliusBoss::render(sf::RenderTarget& target) {
 }
 
 void VeliusBoss::loadAttributes() {
-	m_attributes.setHealth(2000);
+	m_attributes.setHealth(2500);
 	m_attributes.resistancePhysical = -2000;
 	m_attributes.resistanceIce = -1000;
 	m_attributes.resistanceLight = -1000;
@@ -76,17 +77,9 @@ void VeliusBoss::updateBossState(const sf::Time& frameTime) {
 	case AttackIllusion:
 		if (!m_isClones) {
 			updateBlocking(frameTime);
-			updateClonesStart(frameTime, 1750);
-			updateShackle(frameTime, 1500);
+			updateClonesStart(frameTime, 2250);
+			updateShackle(frameTime, 2000);
 		}
-		break;
-	case ExtractDivine:
-		break;
-	case AttackDivine:
-		break;
-	case ExtractNecromancy:
-		break;
-	case AttackNecromancy:
 		break;
 	case ExtractTwilight:
 		if (m_isCalling) {
@@ -95,8 +88,52 @@ void VeliusBoss::updateBossState(const sf::Time& frameTime) {
 				startExtraction(V_COLOR_TWILIGHT);
 			}
 		}
+		else {
+			updateExtraction();
+		}
 		break;
 	case AttackTwilight:
+		if (!m_isClones) {
+			updateBlocking(frameTime);
+			updateClonesStart(frameTime, 1750);
+			updateShackle(frameTime, 1500);
+		}
+		break;
+	case ExtractNecromancy:
+		if (m_isCalling) {
+			updateTime(m_timeUntilCallingComplete, frameTime);
+			if (m_timeUntilCallingComplete == sf::Time::Zero) {
+				startExtraction(V_COLOR_NECROMANCY);
+			}
+		}
+		else {
+			updateExtraction();
+		}
+		break;
+	case AttackNecromancy:
+		if (!m_isClones) {
+			updateBlocking(frameTime);
+			updateClonesStart(frameTime, 1250);
+			updateShackle(frameTime, 1000);
+		}
+		break;
+	case ExtractDivine:
+		if (m_isCalling) {
+			updateTime(m_timeUntilCallingComplete, frameTime);
+			if (m_timeUntilCallingComplete == sf::Time::Zero) {
+				startExtraction(V_COLOR_DIVINE);
+			}
+		}
+		else {
+			updateExtraction();
+		}
+		break;
+	case AttackDivine:
+		if (!m_isClones) {
+			updateBlocking(frameTime);
+			updateClonesStart(frameTime, 750);
+			updateShackle(frameTime, 500);
+		}
 		break;
 	case ExtractElemental:
 		break;
@@ -128,7 +165,7 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 			break;
 		}
 	}
-	
+
 	m_victim = callee;
 	if (!callee) return;
 
@@ -144,6 +181,27 @@ void VeliusBoss::startExtraction(const sf::Color& color) {
 	setCurrentAnimation(getAnimation(m_state), true);
 }
 
+void VeliusBoss::updateExtraction() {
+	bool victimDead = m_victim && m_victim->isDead();
+	bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
+
+	if (!victimDead && !veliusHit) return;
+
+	if (victimDead) {
+		m_scriptedBehavior->say("VeliusRobertDead", 5);
+		m_veliusLevel++;
+	}
+	else {
+		setStunned(sf::seconds(2.f));
+		m_victim->release();
+	}
+
+	delete m_ray;
+	m_ray = nullptr;
+	setState(GameObjectState::Idle);
+	setBossState(VeliusBossState::AttackTwilight);
+}
+
 void VeliusBoss::setBossState(VeliusBossState state) {
 	delete m_ray;
 	m_ray = nullptr;
@@ -152,9 +210,7 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 	{
 	case AttackIllusion:
 		m_level->setBackgroundLayerColor(V_COLOR_ILLUSION);
-		m_isClonesDoneInPhase = false;
-		m_isShackling = false;
-		m_timeUntilClones = CLONE_TIMEOUT;
+		startAttackPhase();
 		break;
 
 	case ExtractDivine:
@@ -171,21 +227,28 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 	}
 	case AttackNecromancy:
 		break;
-	case ExtractTwilight: 
+	case ExtractTwilight:
 	{
 		callToDie(V_COLOR_TWILIGHT);
 		break;
 	}
 	case AttackTwilight:
+		startAttackPhase();
 		break;
 	case ExtractElemental:
 	{
 		break;
 	}
-		break;
+	break;
 	default:
 		break;
 	}
+}
+
+void VeliusBoss::startAttackPhase() {
+	m_timeUntilClones = CLONE_TIMEOUT;
+	m_isClonesDoneInPhase = false;
+	m_isShackling = false;
 }
 
 void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
@@ -197,13 +260,13 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 		m_scriptedBehavior->say("VeliusEnough", 5);
 		setBlocking();
 		m_spellManager->setCurrentSpell(0);
-		m_spellManager->executeCurrentSpell(m_mainChar);
+		m_spellManager->executeCurrentSpell(m_mainChar, true);
 		m_timeUntilShackleDone = sf::seconds(5.5f);
 		return;
 	}
 
 	if (!m_isShackling) return;
-	
+
 	updateTime(m_timeUntilShackleDone, frameTime);
 	if (m_timeUntilShackleDone == sf::Time::Zero) {
 		m_isShackling = false;
@@ -249,7 +312,7 @@ void VeliusBoss::setupClones(int phase) {
 void VeliusBoss::updateClonesStart(const sf::Time& frameTime, int damageThreshold) {
 	if (m_isShackling) return;
 	updateTime(m_timeUntilClones, frameTime);
-	if (m_timeUntilClones == sf::Time::Zero || 
+	if (m_timeUntilClones == sf::Time::Zero ||
 		(!m_isClonesDoneInPhase && m_attributes.currentHealthPoints < damageThreshold)) {
 		switch (m_bossState)
 		{
@@ -290,7 +353,7 @@ void VeliusBoss::updateBlocking(const sf::Time& frameTime) {
 		}
 		return;
 	}
-	
+
 	updateTime(m_blockingGraceTime, frameTime);
 	if (m_blockingGraceTime == sf::Time::Zero) {
 		m_isBlocking = true;
@@ -372,7 +435,7 @@ void VeliusBoss::handleAttackInput() {
 	switch (m_bossState)
 	{
 	case AttackIllusion:
-		m_spellManager->setCurrentSpell(m_isClones ? 2 : 1); 
+		m_spellManager->setCurrentSpell(m_isClones ? 2 : 1);
 		break;
 	case AttackTwilight:
 		m_spellManager->setCurrentSpell(m_isClones ? 4 : 3);

@@ -196,6 +196,14 @@ MirrorTile* Ray::getMirrorTile() const {
 	return m_mirrorTile;
 }
 
+const sf::Vector2f& Ray::getStartPos() const {
+	return m_startPos;
+}
+
+const sf::Vector2f& Ray::getEndPos() const {
+	return m_endPos;
+}
+
 const sf::Color& Ray::getColor() const {
 	return m_color;
 }
@@ -292,4 +300,12 @@ void MirrorRay::initRay(const sf::Vector2f& origin, const sf::Vector2f& directio
 
 	m_origin = origin;
 	m_direction = direction;
+}
+
+bool MirrorRay::intersectsBox(const sf::FloatRect& boundingBox) {
+	if (m_rays.size() == 0) return false;
+
+	auto lastRay = m_rays[m_rays.size() - 1];
+	sf::Vector2f intersection;
+	return World::lineBoxIntersection(lastRay->getStartPos(), lastRay->getEndPos(), boundingBox, intersection);
 }

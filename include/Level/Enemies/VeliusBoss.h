@@ -52,6 +52,7 @@ private:
 	// boss state
 	void updateBossState(const sf::Time& frameTime);
 	void setBossState(VeliusBossState state);
+	void startAttackPhase();
 	VeliusBossState m_bossState;
 
 	// blocking
@@ -91,6 +92,7 @@ private:
 	static const sf::Time CALLING_TIME;
 	void callToDie(const sf::Color& color);
 	void startExtraction(const sf::Color& color);
+	void updateExtraction();
 	VeliusVictim* m_victim = nullptr;
 
 	// colors
@@ -99,4 +101,7 @@ private:
 	static const sf::Color V_COLOR_NECROMANCY;
 	static const sf::Color V_COLOR_DIVINE;
 	static const sf::Color V_COLOR_ELEMENTAL;
+
+	// velius' level
+	int m_veliusLevel;
 };

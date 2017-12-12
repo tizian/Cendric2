@@ -77,7 +77,7 @@ void SpellManager::addSpell(const SpellData& spell, const std::vector<SpellModif
 }
 
 template <typename T>
-bool SpellManager::executeCurrentSpell(T target, bool force) {
+bool SpellManager::_executeCurrentSpell(T target, bool force) {
 	if (m_currentSpell < 0) return false;
 	auto data = m_spellMap[m_currentSpell]->getSpellData();
 	if (!force) {
@@ -106,11 +106,11 @@ bool SpellManager::executeCurrentSpell(T target, bool force) {
 }
 
 bool SpellManager::executeCurrentSpell(const LevelMovableGameObject* target, bool force) {
-	return executeCurrentSpell<const LevelMovableGameObject*>(target, force);
+	return _executeCurrentSpell<const LevelMovableGameObject*>(target, force);
 }
 
 bool SpellManager::executeCurrentSpell(const sf::Vector2f& target, bool force) {
-	return executeCurrentSpell<const sf::Vector2f&>(target, force);
+	return _executeCurrentSpell<const sf::Vector2f&>(target, force);
 }
 
 void SpellManager::update(sf::Time frameTime) {

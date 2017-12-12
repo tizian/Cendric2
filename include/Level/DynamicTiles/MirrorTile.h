@@ -67,6 +67,9 @@ public:
 
 	MirrorTile* getMirrorTile() const;
 
+	const sf::Vector2f& getStartPos() const;
+	const sf::Vector2f& getEndPos() const;
+
 private:
 	void loadParticleSystem();
 
@@ -93,6 +96,7 @@ public:
 	void render(sf::RenderTarget& target) override;
 
 	void initRay(const sf::Vector2f& origin, const sf::Vector2f& direction, const sf::Color& color);
+	bool intersectsBox(const sf::FloatRect& boundingBox);
 
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
 

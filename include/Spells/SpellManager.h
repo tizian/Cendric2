@@ -52,7 +52,7 @@ public:
 
 private:
 	template <typename T>
-	bool executeCurrentSpell(T target, bool force);
+	bool _executeCurrentSpell(T target, bool force);
 
 	int m_currentSpell;
 	std::map<SpellID, sf::Time> m_coolDownMap;

@@ -55,6 +55,10 @@ void VeliusVictim::callToDie() {
 	dynamic_cast<VeliusVictimMovingBehavior*>(m_movingBehavior)->callToDie();
 }
 
+void VeliusVictim::release() {
+	dynamic_cast<VeliusVictimMovingBehavior*>(m_movingBehavior)->release();
+}
+
 void VeliusVictim::loadAttributes() {
 	m_attributes.setHealth(200);
 	m_attributes.calculateAttributes();

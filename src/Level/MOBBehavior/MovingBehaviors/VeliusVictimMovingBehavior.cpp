@@ -8,6 +8,9 @@ VeliusVictimMovingBehavior::VeliusVictimMovingBehavior(VeliusVictim* enemy) :
 	EnemyMovingBehavior(enemy),
 	WalkingBehavior(enemy) {
 	m_victim = enemy;
+
+	m_initialPos = m_victim->getCenter();
+	m_isReturning = false;
 }
 
 void VeliusVictimMovingBehavior::execHandleMovementInput() {
@@ -17,11 +20,22 @@ void VeliusVictimMovingBehavior::execHandleMovementInput() {
 		return;
 	}
 	
-	gotoTarget(ALTAR_POS, 2.f, true, true);
+	if (!m_isReturning) {
+		gotoTarget(ALTAR_POS, 2.f, true, true);
 
-	if (dist(ALTAR_POS, m_victim->getCenter()) < 4.f) {
-		m_mob->setPosition(ALTAR_POS);
-		m_mob->setState(GameObjectState::Broken);
+		if (dist(ALTAR_POS, m_victim->getCenter()) < 4.f) {
+			m_mob->setPosition(ALTAR_POS);
+			m_mob->setState(GameObjectState::Broken);
+		}
+	}
+	else {
+		gotoTarget(m_initialPos, 2.f, true, true);
+
+		if (dist(m_initialPos, m_victim->getCenter()) < 4.f) {
+			m_mob->setPosition(m_initialPos);
+			m_mob->setFacingRight(true);
+			m_mob->setState(GameObjectState::Inactive);
+		}
 	}
 }
 
@@ -51,4 +65,10 @@ void VeliusVictimMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 
 void VeliusVictimMovingBehavior::callToDie() {
 	m_mob->setState(GameObjectState::Idle);
+	m_isReturning = false;
+}
+
+void VeliusVictimMovingBehavior::release() {
+	m_mob->setState(GameObjectState::Idle);
+	m_isReturning = true;
 }

@@ -134,7 +134,7 @@ void ShackleSprite::gotoMainchar(GameObject* mainChar) {
 	float abs = norm(dir);
 	dir = dir / abs;
 	m_velocity = dir * SPEED * 2.f;
-	setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
+	setSpriteRotation(atan2(getVelocity().y, getVelocity().x) + M_PI * 0.5f);
 
 	if (fastIntersect(*mainChar->getBoundingBox(), m_boundingBox)) {
 		setDisposed();
