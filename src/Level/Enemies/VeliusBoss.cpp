@@ -129,6 +129,7 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 		}
 	}
 	
+	m_victim = callee;
 	if (!callee) return;
 
 	callee->callToDie();

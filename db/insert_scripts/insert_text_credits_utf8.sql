@@ -163,7 +163,7 @@ Stefan ''Tank'' Schindler
 Sebastian
 Lukas Dürrenberger
 Ramón
-Pascal
+Pascal ''Kylaine'' Thoma
 Nick Kline
 Lord Heinrich
 Jerry Ward
@@ -373,7 +373,7 @@ Stefan ''Tank'' Schindler
 Sebastian
 Lukas Dürrenberger
 Ramón
-Pascal
+Pascal ''Kylaine'' Thoma
 Nick Kline
 Lord Heinrich
 Jerry Ward
@@ -570,6 +570,7 @@ Sandra Scherrer - Bündner Dialekt (Jonathan)
 Patrizia Drohmann - Bündner Dialekt (Jonathan)
 Mitch aka Gamerocker - Aargauer Dialekt (Rana, Jason)
 Talita Schär - Ämmitaler Dialekt (Thea)
+Angelo Breda - Basler Dialekt (Luiz, Waldemar)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
@@ -589,7 +590,7 @@ Stefan ''Tank'' Schindler
 Sebastian
 Lukas Dürrenberger
 Ramón
-Pascal
+Pascal ''Kylaine'' Thoma
 Nick Kline
 Lord Heinrich
 Jerry Ward

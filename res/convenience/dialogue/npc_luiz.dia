@@ -39,7 +39,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FirstTalk
 	translation.en:Syrah was right about sending you here. 
 	translation.de:Syrah hatte also recht damit, dich hierherzuschicken.
-	translation.ch:D'Syrah het also recht demit gha, dass sie dich da ane gschickt het.
+	translation.ch:D'Syrah het also rächt drmit gha, dass sie dich do ane gschiggt het.
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -53,7 +53,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FirstTalk2
 	translation.en:Nothing kept you from following your way - not even using a forbidden spell.
 	translation.de:Du hast deinen Weg unbeirrt fortgesetzt, auch wenn du dafür verbotene Magie einsetzen musstest.
-	translation.ch:Du bisch trotzdem uf dim Weg blibe, au wend defür verboteni Magie hesch möse bruche.
+	translation.ch:Du bisch trotzdem uf dim Wäg blibe, au wennd drfür vrbotäni Magie hesch miesse bruche.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -67,7 +67,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FirstTalk3
 	translation.en:So, if you're eager to learn more, you're welcome in these halls. 
 	translation.de:Wenn du also noch mehr lernen willst, bist du in diesen Hallen willkommen.
-	translation.ch:Wend also na me lerne wetsch, bisch i dene Halle willkomme.
+	translation.ch:Wennd also no meh lerne willsch, bisch in denä Halle willkommä.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -103,7 +103,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_Forbidden
 	translation.en:Well, it shouldn't be. Still, mages hang when they are caught using necromancy.
 	translation.de:Nun, das sollte es natürlich nicht sein. Trotzdem werden noch immer Magier gehängt wenn sie beim ausüben von Nekromantie erwischt werden.
-	translation.ch:Naja, es söt natürli nid verbote si. Trotzdem werded immerna Magier ufghänkt wens mit Nekromantie verwütscht werded.
+	translation.ch:Naja, es sett natyyrligg nid vrbote syy. Trotzdäm wärde immerno Magier ufghänggt wenns mit Nekromantie vrwütscht wärde.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -117,7 +117,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_Test
 	translation.en:Yes - and you passed. Necromancy is not trivial, I'm impressed.
 	translation.de:Ja - und du hast bestanden. Nekromantie ist nicht einfach, ich bin beeindruckt.
-	translation.ch:Ja - und du hesch bestande. Nekromantie isch nid eifach, ich bi beiidruckt.
+	translation.ch:Jo - und du hesch bestande. Nekromantie isch nid eifach, i bi beiidruggt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -132,7 +132,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YouJoinedOtherGuild
 	translation.en:I see, you've already made your choice. Suit yourself.
 	translation.de:Ich sehe, du hast dich bereits entschieden. Wie du willst.
-	translation.ch:Ich gse, du hesch dich scho entschide. We du wetsch.
+	translation.ch:Ich seh, du hesch dich scho entschide. We du willsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -219,7 +219,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_ForbiddenMagic
 	translation.en:People are afraid of things they don't know - it's just like being afraid of the dark.
 	translation.de:Menschen fürchten sich vor Dingen, die sie nicht kennen - genau wie sie Angst vor der Dunkelheit haben.
-	translation.ch:Mensche hend Angscht vor de Sache wo si nid kenned - genau so wi si Angst vor de Dunkelheit hend.
+	translation.ch:Mensche hän Angscht vor de Sache wo si nid kennä - genau so, wie si Angscht vor dr Dunggelheit hän.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -234,7 +234,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_ForbiddenMagic2
 	translation.en:But where there is light, there is also shadow. One cannot just ignore them. But we can explore and study them until they are no longer alien.
 	translation.de:Aber wo Licht ist sind auch Schatten, man kann sie nicht einfach ignorieren. Man kann sie aber erforschen und kennen lernen, bis sie einem nicht mehr fremd sind.
-	translation.ch:Aber wo Liecht isch sind au Schatte, me cha si nid eifach ignoriere. Aber me cha si erforsche und kennelerne, bis si eim nüme so fremd sind.
+	translation.ch:Aber wo Liecht isch, sin au Schätte, me ka si nid eifach ignoriere. Aber me ka si erforsche und kenneleere, bis si eim nüm eso fremd sind.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -249,7 +249,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_WhoAreYou
 	translation.en:Yes. I'm Luiz, the leader of the circle. We make sure that this banned magic won't be forgotten.
 	translation.de:Ja. Ich bin Luiz, der Anführer des Zirkels. Wir stellen sicher, dass diese verbannte Magie nicht vergessen wird. 
-	translation.ch:Jo. Ich bi de Luiz, de Aführer vom Zirkel. Mir lueged, dass die verbannt Magie nid vergesse wird.
+	translation.ch:Jo. Ich bi dr Luiz, de Ahfüherer vom Zirkel. Mir luegä, dass die verbannti Magie nid vrgässe goht.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -263,7 +263,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_Learn
 	translation.en:I'm pleased to hear that you want to learn more.
 	translation.de:Es freut mich, dass du mehr lernen möchtest.
-	translation.ch:Es freut mich, dass du meh lerne wetsch. 
+	translation.ch:Es freut mi, dass du meh lerne willsch. 
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -278,7 +278,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_Learn2
 	translation.en:Everyone who makes it to these halls should be able to learn. You may use the library and if you want to learn more spells, you should consider joining us.
 	translation.de:Jeder, der es bis in diese Hallen schafft, sollte etwas lernen dürfen. Du kannst die Bibliothek benutzen und wenn du mehr Zauber lernen möchtest, kannst du uns beitreten.
-	translation.ch:Jede, wos bis i die Halle schafft, sött öppis lerne dörfe. Du chasch d'Bibliothek bruche und wend me Zauber lerne wetsch, chasch üs biitrette.
+	translation.ch:Jede, wos bis in die Halle schafft, setti öppis dörfe lerne. Du kasch d'Bibliothek bruche und wend meh Zauber lerne willsch, kasch uns byyträtte.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -293,7 +293,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_WhatIfJoin
 	translation.en:You will learn what necromancy has to offer. We can teach you powerful spells if you help us with our research.
 	translation.de:Du wirst lernen, was Nekromantie zu bieten hat. Wir können dir mächtige Zauber beibringen wenn du uns bei unserer Forschung unterstützt.
-	translation.ch:Du wirsch lerne, was Nekromantie so z'büüte het. Mir chönd dir mächtigi Zauber biibringe wenn du üs mit üsere Forschig hilfsch.
+	translation.ch:Du wirsch lerne, was Nekromantie so z'biete het. Mir könne dir mächtigi Zauber byybringe wenn du uns mit unsrer Forschig hilfsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -308,7 +308,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_OtherGuild
 	translation.en:I won't object. Everybody should be able to learn whatever they want to learn.
 	translation.de:Da habe ich nichts dagegen. Jeder sollte das lernen können, was ihn interessiert.
-	translation.ch:Do hani nüt degege. Jede söt das lerne chöne wo ihn interessiert.
+	translation.ch:Do hani nüt drgäge. Jede sett das lerne könne wo ihn interessiert.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -322,7 +322,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_WantToJoin
 	translation.en:You want to learn the forbidden magic and devote yourself to the mysteries of necromancy?
 	translation.de:Du möchtest die verbotene Magie erlernen und verschreibst dich den Geheimnissen der Nerkomantie?
-	translation.ch:Du möchtisch di verboteni Magie lerne und verschriibsch dich de Gheimnis vode Nekromantie?
+	translation.ch:Du möchtisch di verboteni Magie lerne und vrschryybsch di de Gheimnis vo dr Nekromantie?
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -365,7 +365,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_JoinNecromancers
 	translation.en:Very well. Welcome to the circle, novice. May your knowledge always grow.
 	translation.de:Sehr gut. Willkommen im Zirkel, Novize. Möge dein Wissen immer wachsen.
-	translation.ch:Sehr guet. Willkomme im Zirkel, Novize. Uf das dis Wüsse immer wachse wird.
+	translation.ch:So super. Willkomme im Zirkel, Novize. Uf das dis Wüsse immer wachse wird.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -514,7 +514,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FirstSpell
 	translation.en:Yes, you may learn how to drain the life energy from your enemies, novice. 
 	translation.de:Ja, du darfst erlernen wie man die Lebensenergie eines Gegners entzieht, Novize.
-	translation.ch:Ja, du derfsch lerne weme d'Lebensenergie vomne Gegner absuugt, Novize.
+	translation.ch:Jo, du derfsch lerne wieme d'Läbensenergie vomä Gegner absuggt, Novize.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -528,7 +528,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_NoSpellReputation
 	translation.en:You're not ready for that. Help us with our studies, and you will get the experience needed for more powerful spells.
 	translation.de:Du bist dazu noch nicht bereit. Hilf uns mit unseren Forschungen und du wirst die Erfahrung erlangen, die für die mächtigeren Zauber nötig ist.
-	translation.ch:Da bisch nanig parat defür. Hilf üs mit üsne Forschige und du wirsch die Erfahrig becho wod bruchsch zum mit de mächtigere Zauber umga.
+	translation.ch:Für das bisch noni parat. Hilf uns mit unsere Forschige und du wirsch die Erfahrig beko, wode bruchsch, zum mit de mächtigere Zauber umgo.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -542,7 +542,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_LloydsPlan
 	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
 	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
-	translation.ch:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+	translation.ch:Du kennsch dr Aführer vode Kleriker, dr Lloyd, gäll? Er het sich in letschter Zyt kli komisch benoh, es schiint als würd er eppis plane.
 	[
 		# Link node, tag is next tag
 		tag:25
@@ -557,7 +557,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
 	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
-	translation.ch:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+	translation.ch:Mir bruche öpper, wo mit ihm rede ka und vilicht sogar für ihn schafft. Falls du usefindisch, was er vor het, kum wider und verzell uns devo.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -571,7 +571,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CathedralNecro
 	translation.en:Although the clerics do not know our hideout, they managed to get their hands on one of our grimoires about necromancy.
 	translation.de:Obwohl die Kleriker unser Versteck nicht kennen, haben sie eins unserer Bücher über Nekromantie in die Hände bekommen.
-	translation.ch:Obwohl d'Kleriker üses Versteck nid kenned, hends eis vo üsne Büecher über Nekromantie id Händ becho.
+	translation.ch:Obwohl d'Kleriker unses Versteck nid kennä, hänsi eis vo unsne Biecher über Nekromantie ind Händ beko.
 	[
 		# Link node, tag is next tag
 		tag:27
@@ -585,7 +585,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CathedralNecro2
 	translation.en:The problem is, it was a particulary dangerous and headstrong book about summoning creatures from the underworld. 
 	translation.de:Es handelte sich dabei aber um ein ziemlich gefährliches und eigenwilliges Buch darüber, wie man Kreaturen aus der Unterwelt beschwört.
-	translation.ch:Es handlet sich debii aber um es zimli eigewilligs und gföhrlichs Buech drüber, we me Kreature us de Unterwelt beschwört.
+	translation.ch:Es handlet sich debyy aber um es zimmlig eigewilligs und gföhrligs Buech drüber, wie me Kreature us dr Unterwält beschwört.
 	[
 		# Link node, tag is next tag
 		tag:28
@@ -599,7 +599,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CathedralNecro3
 	translation.en:They've brought it into their cathedral to purify it, but this would do even more harm.
 	translation.de:Sie haben es in ihre Kathedrale gebracht, um es zu läutern, doch das würde noch mehr Schaden anrichten.
-	translation.ch:Si hends i ihri Kathedrale brocht zums läutere, aber das wür no meh Schade arichte.
+	translation.ch:Si häns in ihri Kathedrale brocht zums läutere, aber das würd no meh Schade arichte.
 	[
 		# Link node, tag is next tag
 		tag:29
@@ -614,7 +614,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CathedralNecro4
 	translation.en:Go and bring that book back to our library. I just hope it's not already too late.
 	translation.de:Geh und bring dieses Buch zurück in unsere Bibliothek. Ich hoffe einfach, es ist nicht schon zu spät...
-	translation.ch:Gang und bring das Buech zrugg i üsi Bibliothek. Ich hoff eifach es isch nonig z'spat...
+	translation.ch:Gang und bring das Buech zrugg in unseri Bibliothek. Ich hoff eifach, es isch nonig z'spot...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -629,7 +629,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FinishedCathedral
 	translation.en:Good job. I'll put it back into our library where it belongs.
 	translation.de:Gut gemacht. Ich werde es in unsere Bibliothek zurückstellen, wo es auch hingehört.
-	translation.ch:Guet gmacht. Ich wird's i üsi Bibliothek zruggtue wos au aneghört.
+	translation.ch:Guet gmacht. Ich wird's in unseri Bibliothek zruggtue wos au aneghört.
 	[
 		# Link node, tag is next tag
 		tag:31
@@ -646,7 +646,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FinishedCathedral2
 	translation.en:I'm slowly starting to trust you. I think you've gained the experience to learn how to raise the dead...
 	translation.de:Ich beginne langsam, dir zu vertrauen. Ich denke, du hast nun die nötige Erfahrung, um zu erlernen, wie man die Toten erweckt...
-	translation.ch:Ich fang langsam ah, dir z'traue. Ich denke, du hesch ez di nötig Erfahrig, zum lerne, weme di Tote erweckt...
+	translation.ch:Ich fang langsam ah, dir z'traue. Ich dängg, du hesch jetz die nötigi Erfahrig zum lerne, wieme die Tote erweggt...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -676,7 +676,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CompleteLloydsPlan
 	translation.en:That's interesting, thank you for the report.
 	translation.de:Das ist interessant, danke für den Bericht.
-	translation.ch:Das isch interessant, danke für de Bricht.
+	translation.ch:Das isch interessant, danke für dä Bricht.
 	[
 		# Link node, tag is next tag
 		tag:33
@@ -690,7 +690,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CompleteLloydsPlan2
 	translation.en:But now I'm a bit worried about our Robert. He didn't return from his last trip to the marshlands.
 	translation.de:Aber jetzt mache ich mir ein wenig Sorgen um unsern Robert. Er ist nicht von seinem letzten Ausflug ins Sumpfland zurückgekehrt.
-	translation.ch:Aber ez machi mir chli Sorge um de Robert. Er isch nid vo sim letzte Usflug is Sumpfland zruggcho.
+	translation.ch:Aber jetz machi mir kli Sorge ume Robert. Er isch nid vo sim letschte Usflug ins Sumpfland zruggko.
 	[
 		# Link node, tag is next tag
 		tag:34
@@ -705,7 +705,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_CompleteLloydsPlan3
 	translation.en:Keep an eye open and tell me if you see him.
 	translation.de:Halte ein Auge offen und sag mir, falls er dir über den Weg laufen sollte.
-	translation.ch:Bhalt es Aug offe und segmer, wener dir über de Weg laufe söt.
+	translation.ch:Bhalt es Aug offe und sagmer, wenn er dir übere Wäg laufe setti.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -720,7 +720,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_NoMoreSpells
 	translation.en:No, I'm sorry, I taught you everything I know.
 	translation.de:Nein, tut mir leid, ich habe dir alles beigebracht, was ich weiss.
-	translation.ch:Nei, tuet mer leid, ich ha der alles zeigt woni weiss.
+	translation.ch:Nei, tuet mr leid, i hader alles zeigt woni weiss.
 	[
 		# Link node, tag is next tag
 		tag:36
@@ -734,7 +734,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_NoMoreSpells2
 	translation.en:But a good necromancer is always searching for new spells. There is more out there than I know.
 	translation.de:Aber ein guter Nekromant ist immer auf der Suche nach neuen Zaubern. Es gibt mehr da draussen, als wir kennen.
-	translation.ch:Aber en guete Nekromant isch immer uf de Suechi nach neue Zauber. Es git meh det usse wemer kenned.
+	translation.ch:Aber ä guetä Nekromant isch immer uf dr Suechi nach neue Zauber. Es git meh dert usse als mr kennä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -748,7 +748,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaStart
 	translation.en:Hm. Indeed, I do have something for you.
 	translation.de:Hm. Ja, ich habe etwas für dich.
-	translation.ch:Hm. Jo, ich han öppis für dich.
+	translation.ch:Hm. Jo, ich ha öppis für dich.
 	[
 		# Link node, tag is next tag
 		tag:38
@@ -762,7 +762,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaStart2
 	translation.en:There's a cursed temple in the Highlands of Admantris. A necromancer called Yaslaw once summoned a powerful demon in there.
 	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Ein Nekromant namens Yaslaw hat dort vor langer Zeit einen mächtigen Dämonen beschworen.
-	translation.ch:Es git en verfluechte Tempel im Hochland vo Admantris. En Nekromant namens Yaslaw het det vor langer Ziit en mächtige Dämon beschwore.
+	translation.ch:Es git ä verfluechtä Tämpel im Hochland vo Admantris. Ä Nekromant namens Yaslaw het dert vor langer Zyyt ä mächtige Dämon beschwore.
 	[
 		# Link node, tag is next tag
 		tag:39
@@ -776,7 +776,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaStart3
 	translation.en:Unfortunately, he got captured by his own creature and never returned. 
 	translation.de:Unglücklicherweise wurde er von seiner eigenen Kreatur eingesperrt und kam nie zurück. 
-	translation.ch:Blöderwiis ischer vo sinere eigene Kreatur gfange ghalte worde und isch nie wieder zruggcho.
+	translation.ch:Blöderwyys ischer vo sinere eigene Kreatur gfange ghalte worde und isch nie wieder zruggko.
 	[
 		# Link node, tag is next tag
 		tag:43
@@ -790,7 +790,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaStart4
 	translation.en:But as far as we know from the old writings, he carried a magical mask with him that granted him great powers.
 	translation.de:Aber so weit wir aus den alten Schriften lesen können, hatte er stets eine magische Maske bei ihm, die ihm grosse Kräfte verliehen hat.
-	translation.ch:Aber wamer us de alte Schrifte lese chönd, isch, daser immer e magischi Maske mit sich treit het wo ihm grossi Chräft verliehe het.
+	translation.ch:Aber was me us de alte Schrifte läse könne, isch, dass er immer ä magischi Massge mit sich treit het wo ihm grossi Kräft geh het.
 	[
 		# Link node, tag is next tag
 		tag:44
@@ -805,7 +805,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaStart5
 	translation.en:He has been dead long enough. Find his remains in the temple, let him lead you to his mask and bring it to us.
 	translation.de:Er war nun lange genug tot. Finde seine Überreste im Tempel, lass ihn dich zu seiner Maske führen und bringe sie uns.
-	translation.ch:Er isch ez lang gnueg tot gsi. Find sini Überräschte im Tempel, lah dich vo ihm zu sinere Maske führe und bring si üs.
+	translation.ch:Er isch jetz lang gnue tot gsy. Find sini Überräschte im Tempel, lo di vo ihm zu sinere Massge füehre und bring si uns.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -820,7 +820,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_KillYasha
 	translation.en:You'll have to find out for yourself.
 	translation.de:Das musst du schon selbst herausfinden.
-	translation.ch:Da muesch scho selber usefinde.
+	translation.ch:Das muesch scho sälber usefinde.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -835,7 +835,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_WhereYasha
 	translation.en:As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
 	translation.de:So weit ich weiss gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
-	translation.ch:Sowiit ich weiss gits en Weg dur en Vulkan ide Marsche, südlich vo Gandria.
+	translation.ch:Sowit ich weiss gits ä Wäg dure Vulkan in de Marsche, syydlig vo Gandria.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -852,7 +852,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaComplete
 	translation.en:And you got his powers too as I can see. I'm really impressed, well done.
 	translation.de:Und du hast ihre Kräfte auch bekommen wie ich sehe. Ich bin beeindruckt.
-	translation.ch:Und du hesch ihri Chräft au becho we ich gse. Ich bi würkli beidruckt.
+	translation.ch:Und du hesch ihri Kräft au beko we ich gseh. Ich bi wyrgligg beidruggt.
 	[
 		# Link node, tag is next tag
 		tag:45
@@ -866,7 +866,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_YashaComplete2
 	translation.en:Use its powers wisely, necromancer.
 	translation.de:Gebrauche ihre Kraft weise, Nekromant.
-	translation.ch:Bruch ihri Chräft gschiid, Nekromant.
+	translation.ch:Bruch ihri Kräft gschyyd, Nekromant.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -895,7 +895,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FoundVelius
 	translation.en:Hm. Very interesting. I know a mage named Velius, he studied with me a long time ago.
 	translation.de:Hm. Sehr interessant. Ich kenne einen Magier namens Velius, er studierte mit mir vor langer Zeit.
-	translation.ch:Hm. Sehr interessant. Ich kenn en Magier namens Velius, er het mit mir vor langer Ziit studiert.
+	translation.ch:Hm. Sehr interessant. Ich kenn ä Magier namens Velius, er het mit mir vor langer Zyyt studiert.
 	[
 		# Link node, tag is next tag
 		tag:48
@@ -909,7 +909,7 @@ npc.id:npc_luiz
 	translation.tag:DL_Luiz_FoundVelius2
 	translation.en:He, abducting mages... I don't know. That doesn't fit him. But you should go into the crypt and find out more.
 	translation.de:Aber Magier entführen passt nicht zu ihm. Du solltest aber in die Krypta und mehr herausfinden.
-	translation.ch:Er... und Magier entführe... Ich weiss nid. Das passt nid zu ihm. Aber du sötsch i die Krypta go und me usefinde.
+	translation.ch:Er... und Magier entfiehre... Ich weiss nid. Das passt nid zu ihm. Aber du settsch in die Krypta goh und meh uusefindä.
 	[
 		# Link node, tag is next tag
 		tag:-2

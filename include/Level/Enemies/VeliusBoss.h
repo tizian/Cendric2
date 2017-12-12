@@ -8,6 +8,7 @@
 class MirrorRay;
 class ParticleComponent;
 class VeliusBossClone;
+class VeliusVictim;
 
 enum VeliusBossState {
 	AttackIllusion,
@@ -90,6 +91,7 @@ private:
 	static const sf::Time CALLING_TIME;
 	void callToDie(const sf::Color& color);
 	void startExtraction(const sf::Color& color);
+	VeliusVictim* m_victim = nullptr;
 
 	// colors
 	static const sf::Color V_COLOR_ILLUSION;

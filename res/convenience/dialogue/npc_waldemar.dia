@@ -24,7 +24,7 @@ npc.id:npc_waldemar
 	translation.tag:DL_Waldemar_ANewFace
 	translation.en:Ah, a new face. Interested in buying some armour?
 	translation.de:Ah, ein neues Gesicht. Interessiert an Rüstungen?
-	translation.ch:Ah, es neus Gsicht. Interessiert a es paar Rüschige?
+	translation.ch:Lueg au do, es neus Gsicht. Bisch interessiert an es paar Rüschtigä?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -71,7 +71,7 @@ npc.id:npc_waldemar
 	translation.tag:DL_Waldemar_Beak
 	translation.en:A very useful mask when dealing with little pests. (Grins)
 	translation.de:Eine sehr nützliche Maske wenn man mit Seuchen arbeitet. (Grinst)
-	translation.ch:E sehr nützlichi Maske wenme mit Süüche schafft. (Grinst)
+	translation.ch:E sehr e nytzligi Massge wemme mit Syyche schafft. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2
