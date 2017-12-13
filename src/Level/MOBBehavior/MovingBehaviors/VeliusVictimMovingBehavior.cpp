@@ -9,7 +9,6 @@ VeliusVictimMovingBehavior::VeliusVictimMovingBehavior(VeliusVictim* enemy) :
 	WalkingBehavior(enemy) {
 	m_victim = enemy;
 
-	m_initialPos = m_victim->getCenter();
 	m_isReturning = false;
 }
 
@@ -64,6 +63,7 @@ void VeliusVictimMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 }
 
 void VeliusVictimMovingBehavior::callToDie() {
+	m_initialPos = m_victim->getCenter();
 	m_mob->setState(GameObjectState::Idle);
 	m_isReturning = false;
 }

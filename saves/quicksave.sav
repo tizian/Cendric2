@@ -1,11 +1,11 @@
 # you shouldn't have modified that saved game 
 hash:0
 # time played, in seconds
-time.played:13952
+time.played:15194
 savegame.name:Quicksave
-savegame.date:1513196498
+savegame.date:1513198481
 level.id:res/level/ppuzzle04/ppuzzle04.tmx
-level.position:960.000000,3360.000000
+level.position:1210.000000,2660.000000
 is.in.level:1
 overworld.id:res/map/marshland/marshland.tmx
 map.id:res/map/island/island.tmx
@@ -431,11 +431,11 @@ weather:res/level/howlingcaverns/howlingcaverns.tmx,0.900000,
 weather:res/map/elderhome/elderhome.tmx,0.300000,
 weather:res/map/gandria/gandria.tmx,0.300000,
 weather:res/map/meadows/meadows.tmx,0.300000,
-deaths:41
+deaths:65
 # deaths in level:
 level.deaths:res/level/crystalcrypt/crystalcrypt.tmx,0
 level.deaths:res/level/ppuzzle01/ppuzzle01.tmx,0
 level.deaths:res/level/ppuzzle02/ppuzzle02.tmx,6
 level.deaths:res/level/ppuzzle03/ppuzzle03.tmx,18
-level.deaths:res/level/ppuzzle04/ppuzzle04.tmx,9
+level.deaths:res/level/ppuzzle04/ppuzzle04.tmx,33
 level.deaths:res/level/towerwalkway/towerwalkway.tmx,0

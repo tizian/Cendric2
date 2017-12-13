@@ -23,7 +23,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeFPSLimitOn(data);
 		configuration << writeFPSMax(data);
 		configuration << writeSmoothingOn(data);
-		configuration << writeDebugModeOn(data);
+		configuration << writeStopwatchOn(data);
 		configuration << writeDebugRenderingOn(data);
 
 		configuration.close();
@@ -78,10 +78,10 @@ std::string ConfigurationWriter::writeDamageNumbersOn(const ConfigurationData& d
 	return damageNumbersOn.append(string(DAMAGENUMBERS_ON) + ":" + (data.isDisplayDamageNumbers ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeDebugModeOn(const ConfigurationData& data) const {
-	string debugModeOn = "# 0 means debug mode is off, 1 means debug mode on\n";
-	debugModeOn += "# if the debug mode is on, the game will try to load a savegame 'debug.sav' directly into its level.\n";
-	return debugModeOn.append(string(DEBUGMODE_ON) + ":" + (data.isDebugMode ? "1" : "0") + "\n");
+std::string ConfigurationWriter::writeStopwatchOn(const ConfigurationData& data) const {
+	string stopwatchOn = "# 0 means stopwatch is off, 1 means stopwatch is on\n";
+	stopwatchOn += "# if the stopwatch is on, it will display a stopwatch inside the level.\n";
+	return stopwatchOn.append(string(STOPWATCH_ON) + ":" + (data.isDisplayStopwatch ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const {

@@ -9,6 +9,8 @@
 #include "GUI/Button.h"
 #include "GUI/YesOrNoForm.h"
 
+class Stopwatch;
+
 class LevelScreen final : public WorldScreen {
 public:
 	LevelScreen(const std::string& levelID, CharacterCore* core);
@@ -99,4 +101,7 @@ private:
 	void onResume();
 
 	void cleanUp();
+
+	// stopwatch handling
+	Stopwatch* m_stopwatch = nullptr;
 };

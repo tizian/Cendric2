@@ -32,7 +32,7 @@ private:
 	std::string writeAlternativeInputMap(const ConfigurationData& data) const;
 	std::string writeVSyncOn(const ConfigurationData& data) const;
 
-	std::string writeDebugModeOn(const ConfigurationData& data) const;
+	std::string writeStopwatchOn(const ConfigurationData& data) const;
 	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
 	std::string writeSmoothingOn(const ConfigurationData& data) const;
 };

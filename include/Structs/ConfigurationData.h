@@ -25,11 +25,11 @@ struct ConfigurationData final {
 	bool isQuickcast;
 	bool isAutotarget;
 	bool isSmoothing;
-	bool isDebugMode;
 	bool isDebugRendering;
 	bool isWindowReload;
 	bool isDisplayHints;
 	bool isDisplayDamageNumbers;
+	bool isDisplayStopwatch;
 	bool isGodmode;
 };
 
@@ -117,8 +117,8 @@ true,
 true,
 false,
 false,
+true,
+true,
 false,
-true,
-true,
 false,
 };

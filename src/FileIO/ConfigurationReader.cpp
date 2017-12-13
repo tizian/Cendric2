@@ -53,8 +53,8 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 			else if (line.compare(0, strlen(DAMAGENUMBERS_ON), string(DAMAGENUMBERS_ON)) == 0) {
 				noError = readDamageNumbersOn(line, data);
 			}
-			else if (line.compare(0, strlen(DEBUGMODE_ON), string(DEBUGMODE_ON)) == 0) {
-				noError = readDebugModeOn(line, data);
+			else if (line.compare(0, strlen(STOPWATCH_ON), string(STOPWATCH_ON)) == 0) {
+				noError = readStopwatchOn(line, data);
 			}
 			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0) {
 				noError = readDebugRenderingOn(line, data);
@@ -221,8 +221,8 @@ bool ConfigurationReader::readDamageNumbersOn(const std::string& line, Configura
 	return readBoolean(line, data.isDisplayDamageNumbers);
 }
 
-bool ConfigurationReader::readDebugModeOn(const std::string& line, ConfigurationData& data) const {
-	return readBoolean(line, data.isDebugMode);
+bool ConfigurationReader::readStopwatchOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isDisplayStopwatch);
 }
 
 bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const {

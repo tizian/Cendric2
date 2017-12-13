@@ -6,6 +6,7 @@
 #include "ObjectFactory.h"
 #include "GUI/BookWindow.h"
 #include "Level/LevelMainCharacterLoader.h"
+#include "GUI/Stopwatch.h"
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_levelID = levelID;
@@ -85,6 +86,12 @@ void LevelScreen::loadAsync() {
 
 	// adjust weather
 	loadWeather();
+
+	// if config says so, add the stopwatch
+	if (g_resourceManager->getConfiguration().isDisplayStopwatch) {
+		m_stopwatch = new Stopwatch();
+		addObject(m_stopwatch);
+	}
 }
 
 void LevelScreen::cleanUp() {

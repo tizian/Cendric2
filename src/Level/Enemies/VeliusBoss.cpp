@@ -270,7 +270,24 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 	updateTime(m_timeUntilShackleDone, frameTime);
 	if (m_timeUntilShackleDone == sf::Time::Zero) {
 		m_isShackling = false;
-		setBossState(VeliusBossState::ExtractTwilight);
+
+		switch (m_bossState)
+		{
+		case AttackIllusion:
+			setBossState(VeliusBossState::ExtractTwilight);
+			break;
+		case AttackTwilight:
+			setBossState(VeliusBossState::ExtractNecromancy);
+			break;
+		case AttackNecromancy:
+			setBossState(VeliusBossState::ExtractDivine);
+			break;
+		case AttackDivine:
+			setBossState(VeliusBossState::ExtractElemental);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
