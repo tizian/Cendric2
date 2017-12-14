@@ -43,6 +43,8 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	Enemy(level, screen),
 	Boss(level, screen) {
 	m_veliusLevel = 1;
+	m_bossState = AttackIllusion;
+	m_blockingBubble = nullptr;
 }
 
 VeliusBoss::~VeliusBoss() {
@@ -152,13 +154,13 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 	setState(GameObjectState::Broken);
 	setCurrentAnimation(getAnimation(m_state), true);
 
-	std::string calleeName = m_bossState == VeliusBossState::ExtractTwilight ? "Koray" :
-		m_bossState == VeliusBossState::ExtractNecromancy ? "Robert" : "Inina";
+	const std::string calleeName = m_bossState == ExtractTwilight ? "Koray" :
+		m_bossState == ExtractNecromancy ? "Robert" : "Inina";
 
 	m_scriptedBehavior->say("Velius" + calleeName + "Call", 5);
 
 	VeliusVictim* callee = nullptr;
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		callee = dynamic_cast<VeliusVictim*>(go);
 		if (!callee) continue;
 		if (callee->getEnemyName().compare(calleeName) == 0) {
@@ -199,7 +201,7 @@ void VeliusBoss::updateExtraction() {
 	delete m_ray;
 	m_ray = nullptr;
 	setState(GameObjectState::Idle);
-	setBossState(VeliusBossState::AttackTwilight);
+	setBossState(AttackTwilight);
 }
 
 void VeliusBoss::setBossState(VeliusBossState state) {
@@ -239,7 +241,6 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 	{
 		break;
 	}
-	break;
 	default:
 		break;
 	}
@@ -249,6 +250,14 @@ void VeliusBoss::startAttackPhase() {
 	m_timeUntilClones = CLONE_TIMEOUT;
 	m_isClonesDoneInPhase = false;
 	m_isShackling = false;
+}
+
+void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold) {
+	
+}
+
+void VeliusBoss::handleExtractPhase(const sf::Time& frameTime) {
+	
 }
 
 void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
@@ -274,16 +283,16 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 		switch (m_bossState)
 		{
 		case AttackIllusion:
-			setBossState(VeliusBossState::ExtractTwilight);
+			setBossState(ExtractTwilight);
 			break;
 		case AttackTwilight:
-			setBossState(VeliusBossState::ExtractNecromancy);
+			setBossState(ExtractNecromancy);
 			break;
 		case AttackNecromancy:
-			setBossState(VeliusBossState::ExtractDivine);
+			setBossState(ExtractDivine);
 			break;
 		case AttackDivine:
-			setBossState(VeliusBossState::ExtractElemental);
+			setBossState(ExtractElemental);
 			break;
 		default:
 			break;
@@ -292,7 +301,7 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 }
 
 void VeliusBoss::clearClones() {
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		auto enemy = dynamic_cast<Enemy*>(go);
 		if (!enemy) continue;
 		if (enemy->getEnemyID() == EnemyID::VeliusClone) {
@@ -443,7 +452,7 @@ void VeliusBoss::loadSpells() {
 	m_spellManager->addSpell(spell);
 
 	// initial boss state
-	setBossState(VeliusBossState::AttackIllusion);
+	setBossState(AttackIllusion);
 }
 
 void VeliusBoss::handleAttackInput() {

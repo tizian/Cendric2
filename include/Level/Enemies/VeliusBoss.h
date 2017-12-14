@@ -53,6 +53,8 @@ private:
 	void updateBossState(const sf::Time& frameTime);
 	void setBossState(VeliusBossState state);
 	void startAttackPhase();
+	void handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold);
+	void handleExtractPhase(const sf::Time& frameTime);
 	VeliusBossState m_bossState;
 
 	// blocking
