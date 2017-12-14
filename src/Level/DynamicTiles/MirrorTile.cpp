@@ -40,6 +40,7 @@ bool MirrorTile::init(const LevelTileProperties& properties) {
 	if (contains(properties, std::string("angle"))) {
 		setRotation(static_cast<float>(std::stoi(properties.at(std::string("angle")))));
 	}
+	m_initialRotation = m_currentRotation;
 
 	m_isFinal = contains(properties, std::string("final"));
 	m_isLocked = m_isFinal || contains(properties, std::string("locked"));
@@ -71,6 +72,10 @@ void MirrorTile::loadAnimation(int skinNr) {
 
 	// set origin of animation to center
 	m_animatedSprite.setOrigin(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f));
+}
+
+void MirrorTile::reset() {
+	setRotation(m_initialRotation);
 }
 
 void MirrorTile::onHit(Spell* spell) {

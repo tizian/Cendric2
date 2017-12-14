@@ -18,7 +18,8 @@ enum VeliusBossState {
 	AttackNecromancy,
 	ExtractTwilight,
 	AttackTwilight,
-	ExtractElemental
+	ExtractElemental,
+	Over
 };
 
 class VeliusBoss final : public Boss {
@@ -53,8 +54,9 @@ private:
 	void updateBossState(const sf::Time& frameTime);
 	void setBossState(VeliusBossState state);
 	void startAttackPhase();
+	void startLastPhase();
 	void handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold);
-	void handleExtractPhase(const sf::Time& frameTime);
+	void handleExtractPhase(const sf::Time& frameTime, const sf::Color& color);
 	VeliusBossState m_bossState;
 
 	// blocking
@@ -106,4 +108,11 @@ private:
 
 	// velius' level
 	int m_veliusLevel;
+
+	// puzzles
+	void setupTwilightPuzzle();
+	void setupNecromancyPuzzle();
+	void setupDivinePuzzle();
+	void clearPuzzleBlocks();
+	std::vector<GameObject*> m_puzzleBlocks;
 };

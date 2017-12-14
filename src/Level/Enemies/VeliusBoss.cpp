@@ -9,6 +9,7 @@
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "Screens/LevelScreen.h"
+#include "ObjectFactory.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -17,7 +18,7 @@ REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
 const sf::Color VeliusBoss::V_COLOR_ILLUSION = sf::Color(134, 63, 199);
 const sf::Color VeliusBoss::V_COLOR_TWILIGHT = sf::Color(72, 80, 199);
 const sf::Color VeliusBoss::V_COLOR_NECROMANCY = sf::Color(50, 199, 50);
-const sf::Color VeliusBoss::V_COLOR_DIVINE = sf::Color(240, 240, 100);
+const sf::Color VeliusBoss::V_COLOR_DIVINE = sf::Color(255, 255, 150);
 const sf::Color VeliusBoss::V_COLOR_ELEMENTAL = sf::Color(244, 103, 50);
 
 const sf::Time VeliusBoss::BLOCKING_TIME = sf::seconds(3.f);
@@ -77,70 +78,56 @@ void VeliusBoss::updateBossState(const sf::Time& frameTime) {
 	switch (m_bossState)
 	{
 	case AttackIllusion:
-		if (!m_isClones) {
-			updateBlocking(frameTime);
-			updateClonesStart(frameTime, 2250);
-			updateShackle(frameTime, 2000);
-		}
+		handleAttackPhase(frameTime, 2250, 2000);
 		break;
 	case ExtractTwilight:
-		if (m_isCalling) {
-			updateTime(m_timeUntilCallingComplete, frameTime);
-			if (m_timeUntilCallingComplete == sf::Time::Zero) {
-				startExtraction(V_COLOR_TWILIGHT);
-			}
-		}
-		else {
-			updateExtraction();
-		}
+		handleExtractPhase(frameTime, V_COLOR_TWILIGHT);
 		break;
 	case AttackTwilight:
-		if (!m_isClones) {
-			updateBlocking(frameTime);
-			updateClonesStart(frameTime, 1750);
-			updateShackle(frameTime, 1500);
-		}
+		handleAttackPhase(frameTime, 1750, 1500);
 		break;
 	case ExtractNecromancy:
-		if (m_isCalling) {
-			updateTime(m_timeUntilCallingComplete, frameTime);
-			if (m_timeUntilCallingComplete == sf::Time::Zero) {
-				startExtraction(V_COLOR_NECROMANCY);
-			}
-		}
-		else {
-			updateExtraction();
-		}
+		handleExtractPhase(frameTime, V_COLOR_NECROMANCY);
 		break;
 	case AttackNecromancy:
-		if (!m_isClones) {
-			updateBlocking(frameTime);
-			updateClonesStart(frameTime, 1250);
-			updateShackle(frameTime, 1000);
-		}
+		handleAttackPhase(frameTime, 1250, 1000);
 		break;
 	case ExtractDivine:
-		if (m_isCalling) {
-			updateTime(m_timeUntilCallingComplete, frameTime);
-			if (m_timeUntilCallingComplete == sf::Time::Zero) {
-				startExtraction(V_COLOR_DIVINE);
-			}
-		}
-		else {
-			updateExtraction();
-		}
+		handleExtractPhase(frameTime, V_COLOR_DIVINE);
 		break;
 	case AttackDivine:
-		if (!m_isClones) {
-			updateBlocking(frameTime);
-			updateClonesStart(frameTime, 750);
-			updateShackle(frameTime, 500);
-		}
+		handleAttackPhase(frameTime, 750, 500);
 		break;
-	case ExtractElemental:
+	case ExtractElemental: 
 		break;
 	default:
 		break;
+	}
+}
+
+void VeliusBoss::startAttackPhase() {
+	m_timeUntilClones = CLONE_TIMEOUT;
+	m_isClonesDoneInPhase = false;
+	m_isShackling = false;
+}
+
+void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extractThreshold) {
+	if (m_isClones) return;
+
+	updateBlocking(frameTime);
+	updateClonesStart(frameTime, shackleThreshold);
+	updateShackle(frameTime, extractThreshold);
+}
+
+void VeliusBoss::handleExtractPhase(const sf::Time& frameTime, const sf::Color& color) {
+	if (m_isCalling) {
+		updateTime(m_timeUntilCallingComplete, frameTime);
+		if (m_timeUntilCallingComplete == sf::Time::Zero) {
+			startExtraction(color);
+		}
+	}
+	else {
+		updateExtraction();
 	}
 }
 
@@ -175,6 +162,12 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 }
 
 void VeliusBoss::startExtraction(const sf::Color& color) {
+	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
+			mirrorTile->reset();
+		}
+	}
+
 	m_isCalling = false;
 	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
 	m_ray->initRay(sf::Vector2f(675.f, 599.f), sf::Vector2f(1.f, -0.25f), color);
@@ -183,14 +176,45 @@ void VeliusBoss::startExtraction(const sf::Color& color) {
 	setCurrentAnimation(getAnimation(m_state), true);
 }
 
+void VeliusBoss::startLastPhase() {
+	m_level->setBackgroundLayerColor(V_COLOR_ELEMENTAL);
+	setPosition(sf::Vector2f(800.f, 535.f));
+	setReady();
+	setFacingRight(true);
+	setState(GameObjectState::Broken);
+	setCurrentAnimation(getAnimation(m_state), true);
+
+	m_scriptedBehavior->say("VeliusCendricCall", 5);
+}
+
 void VeliusBoss::updateExtraction() {
 	bool victimDead = m_victim && m_victim->isDead();
 	bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
 
 	if (!victimDead && !veliusHit) return;
 
+	std::string veliusSpeech = "VeliusCendricDead";
+	VeliusBossState nextState = Over;
+	switch (m_bossState)
+	{
+	case ExtractTwilight:
+		veliusSpeech = "VeliusKorayDead";
+		nextState = AttackTwilight;
+		break;
+	case ExtractNecromancy:
+		veliusSpeech = "VeliusRobertDead";
+		nextState = AttackNecromancy;
+		break;
+	case ExtractDivine:
+		veliusSpeech = "VeliusIninaDead";
+		nextState = AttackDivine;
+		break;
+	default:
+		break;
+	}
+
 	if (victimDead) {
-		m_scriptedBehavior->say("VeliusRobertDead", 5);
+		m_scriptedBehavior->say(veliusSpeech, 5);
 		m_veliusLevel++;
 	}
 	else {
@@ -200,8 +224,9 @@ void VeliusBoss::updateExtraction() {
 
 	delete m_ray;
 	m_ray = nullptr;
+	clearPuzzleBlocks();
 	setState(GameObjectState::Idle);
-	setBossState(AttackTwilight);
+	setBossState(nextState);
 }
 
 void VeliusBoss::setBossState(VeliusBossState state) {
@@ -217,20 +242,19 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 
 	case ExtractDivine:
 	{
+		setupDivinePuzzle();
 		callToDie(V_COLOR_DIVINE);
 		break;
 	}
-	case AttackDivine:
-		break;
 	case ExtractNecromancy:
 	{
+		setupNecromancyPuzzle();
 		callToDie(V_COLOR_NECROMANCY);
 		break;
 	}
-	case AttackNecromancy:
-		break;
 	case ExtractTwilight:
 	{
+		setupTwilightPuzzle();
 		callToDie(V_COLOR_TWILIGHT);
 		break;
 	}
@@ -238,26 +262,10 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 		startAttackPhase();
 		break;
 	case ExtractElemental:
-	{
-		break;
-	}
+		startLastPhase();
 	default:
 		break;
 	}
-}
-
-void VeliusBoss::startAttackPhase() {
-	m_timeUntilClones = CLONE_TIMEOUT;
-	m_isClonesDoneInPhase = false;
-	m_isShackling = false;
-}
-
-void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold) {
-	
-}
-
-void VeliusBoss::handleExtractPhase(const sf::Time& frameTime) {
-	
 }
 
 void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
@@ -451,6 +459,42 @@ void VeliusBoss::loadSpells() {
 	spell.count = 1;
 	m_spellManager->addSpell(spell);
 
+	// necromancy spell
+	SpellData necro = SpellData::getSpellData(SpellID::Leech);
+	necro.damage = 30;
+	necro.count = 3;
+	necro.cooldown = sf::seconds(5.f);
+	necro.isBlocking = true;
+	necro.fightingTime = sf::seconds(0.f);
+	necro.castingTime = sf::seconds(0.45f);
+	necro.castingAnimation = GameObjectState::Casting;
+	necro.speed = 300;
+	necro.spellOffset = sf::Vector2f(10.f, 0.f);
+
+	m_spellManager->addSpell(necro);
+	m_spellManager->setInitialCooldown(sf::seconds(2.f), SpellID::Leech);
+
+	necro.count = 1;
+	m_spellManager->addSpell(necro);
+
+	// divine spell
+	SpellData divine = SpellData::getSpellData(SpellID::Aureola);
+	divine.damage = 30;
+	divine.count = 4;
+	divine.cooldown = sf::seconds(5.f);
+	divine.isBlocking = true;
+	divine.fightingTime = sf::seconds(0.f);
+	divine.castingTime = sf::seconds(0.45f);
+	divine.castingAnimation = GameObjectState::Casting;
+	divine.speed = 300;
+	divine.spellOffset = sf::Vector2f(10.f, 0.f);
+
+	m_spellManager->addSpell(divine);
+	m_spellManager->setInitialCooldown(sf::seconds(2.f), SpellID::Aureola);
+
+	divine.count = 2;
+	m_spellManager->addSpell(divine);
+
 	// initial boss state
 	setBossState(AttackIllusion);
 }
@@ -466,10 +510,13 @@ void VeliusBoss::handleAttackInput() {
 	case AttackTwilight:
 		m_spellManager->setCurrentSpell(m_isClones ? 4 : 3);
 		break;
-	case AttackDivine:
-		break;
 	case AttackNecromancy:
+		m_spellManager->setCurrentSpell(m_isClones ? 6 : 5);
 		break;
+	case AttackDivine:
+		m_spellManager->setCurrentSpell(m_isClones ? 8 : 7);
+		break;
+
 	case ExtractDivine:
 	case ExtractNecromancy:
 	case ExtractTwilight:
@@ -499,6 +546,79 @@ void VeliusBoss::onHit(Spell* spell) {
 		spell->setOwner(this);
 		spell->reflect();
 	}
+}
+
+void VeliusBoss::setupTwilightPuzzle() {
+	LevelTileProperties properties;
+
+	auto positions = {
+		sf::Vector2f(720.f, 350.f),
+		sf::Vector2f(600.f, 175.f),
+		sf::Vector2f(700.f, 175.f)
+	};
+		
+	for (auto pos : positions) {
+			LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
+			tile->init(properties);
+			tile->setPosition(pos);
+			tile->loadResources();
+			tile->loadAnimation(7);
+			tile->setPosition(pos);
+			tile->setDebugBoundingBox(COLOR_NEUTRAL);
+			m_screen->addObject(tile);
+			m_puzzleBlocks.push_back(tile);
+	}
+}
+
+void VeliusBoss::setupNecromancyPuzzle() {
+	LevelTileProperties properties;
+
+	auto positions = {
+		sf::Vector2f(720.f, 350.f),
+		sf::Vector2f(600.f, 175.f),
+		sf::Vector2f(700.f, 175.f)
+	};
+
+	for (auto pos : positions) {
+		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
+		tile->init(properties);
+		tile->setPosition(pos);
+		tile->loadResources();
+		tile->loadAnimation(7);
+		tile->setPosition(pos);
+		tile->setDebugBoundingBox(COLOR_NEUTRAL);
+		m_screen->addObject(tile);
+		m_puzzleBlocks.push_back(tile);
+	}
+}
+
+void VeliusBoss::setupDivinePuzzle() {
+	LevelTileProperties properties;
+
+	auto positions = {
+		sf::Vector2f(720.f, 350.f),
+		sf::Vector2f(600.f, 175.f),
+		sf::Vector2f(700.f, 175.f)
+	};
+
+	for (auto pos : positions) {
+		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
+		tile->init(properties);
+		tile->setPosition(pos);
+		tile->loadResources();
+		tile->loadAnimation(7);
+		tile->setPosition(pos);
+		tile->setDebugBoundingBox(COLOR_NEUTRAL);
+		m_screen->addObject(tile);
+		m_puzzleBlocks.push_back(tile);
+	}
+}
+
+void VeliusBoss::clearPuzzleBlocks() {
+	for (auto block : m_puzzleBlocks) {
+		block->setDisposed();
+	}
+	m_puzzleBlocks.clear();
 }
 
 void VeliusBoss::loadAnimation(int skinNr) {
@@ -651,7 +771,6 @@ void VeliusBoss::loadBlockingParticles() {
 	m_blockingBubble->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
 	addComponent(m_blockingBubble);
 
-	// init blocking
 	clearBlocking();
 }
 

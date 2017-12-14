@@ -15,7 +15,9 @@ void VeliusBossMovingBehavior::execHandleMovementInput() {
 		return;
 	}
 	
-	gotoTarget(m_mainChar->getCenter(), m_approachingDistance);
+	if (dist(m_mainChar->getCenter(), m_mob->getCenter()) > m_approachingDistance + 1.f) {
+		gotoTarget(m_mainChar->getCenter(), m_approachingDistance);
+	}
 }
 
 void VeliusBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {

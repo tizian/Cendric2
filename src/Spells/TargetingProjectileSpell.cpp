@@ -24,12 +24,16 @@ void TargetingProjectileSpell::init(const SpellData& data) {
 }
 
 void TargetingProjectileSpell::update(const sf::Time& frameTime) {
-	Spell::update(frameTime);
-
 	sf::Vector2f dir = m_mainChar->getCenter() - getPosition();
 	float abs = norm(dir);
 	dir = dir / abs;
-	m_acceleration = dir * (m_data.speed * m_data.strength);
+
+	float velNorm = norm(m_velocity);
+	auto absVel = m_velocity / velNorm;
+
+	m_velocity = velNorm * normalized(absVel + m_data.strength * 0.5f * dir);
+
+	Spell::update(frameTime);
 
 	setSpriteRotation(atan2(getVelocity().y, getVelocity().x));
 }

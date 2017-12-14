@@ -47,7 +47,7 @@ void VeliusBossClone::loadSpells() {
 	projectile.speed = 400;
 	projectile.count = 3;
 	projectile.skinNr = 1;
-	projectile.strength = 1;
+	projectile.strength = 4;
 	projectile.isColliding = false;
 	projectile.isStunning = true;
 	projectile.duration = sf::seconds(2.f);

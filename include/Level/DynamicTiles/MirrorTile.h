@@ -26,6 +26,7 @@ public:
 	void setRotation(float rotation);
 	void setActive(bool active);
 	void setColor(const sf::Color& color);
+	void reset();
 	
 	float getRotation() const;
 	bool isFinal() const;
@@ -44,6 +45,7 @@ private:
 	bool m_isRotating = false;
 	void handleRotation(const sf::Time& frameTime);
 	sf::Time m_timeSinceRotationStart;
+	float m_initialRotation;
 
 	InteractComponent* m_interactComponent;
 	LightComponent* m_lightComponent;

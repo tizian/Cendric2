@@ -571,6 +571,8 @@ Patrizia Drohmann - Bündner Dialekt (Jonathan)
 Mitch aka Gamerocker - Aargauer Dialekt (Rana, Jason)
 Talita Schär - Ämmitaler Dialekt (Thea)
 Angelo Breda - Basler Dialekt (Luiz, Waldemar)
+Michela Hof - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
+Sascha Bavaro - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

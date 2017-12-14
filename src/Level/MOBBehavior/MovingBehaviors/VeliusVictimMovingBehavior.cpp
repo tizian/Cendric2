@@ -31,7 +31,7 @@ void VeliusVictimMovingBehavior::execHandleMovementInput() {
 		gotoTarget(m_initialPos, 2.f, true, true);
 
 		if (dist(m_initialPos, m_victim->getCenter()) < 4.f) {
-			m_mob->setPosition(m_initialPos);
+			m_mob->setPosition(m_initialPos - sf::Vector2f(m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height) * 0.5f);
 			m_mob->setFacingRight(true);
 			m_mob->setState(GameObjectState::Inactive);
 		}
@@ -63,7 +63,7 @@ void VeliusVictimMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 }
 
 void VeliusVictimMovingBehavior::callToDie() {
-	m_initialPos = m_victim->getCenter();
+	m_initialPos = m_mob->getCenter();
 	m_mob->setState(GameObjectState::Idle);
 	m_isReturning = false;
 }
