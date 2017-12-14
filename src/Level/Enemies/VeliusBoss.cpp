@@ -98,7 +98,7 @@ void VeliusBoss::updateBossState(const sf::Time& frameTime) {
 	case AttackDivine:
 		handleAttackPhase(frameTime, 750, 500);
 		break;
-	case ExtractElemental: 
+	case ExtractElemental:
 		break;
 	default:
 		break;
@@ -225,6 +225,7 @@ void VeliusBoss::updateExtraction() {
 	delete m_ray;
 	m_ray = nullptr;
 	clearPuzzleBlocks();
+	clearBlocking();
 	setState(GameObjectState::Idle);
 	setBossState(nextState);
 }
@@ -463,6 +464,7 @@ void VeliusBoss::loadSpells() {
 	SpellData necro = SpellData::getSpellData(SpellID::Leech);
 	necro.damage = 30;
 	necro.count = 3;
+	necro.activeDuration = sf::seconds(7.f);
 	necro.cooldown = sf::seconds(5.f);
 	necro.isBlocking = true;
 	necro.fightingTime = sf::seconds(0.f);
@@ -488,6 +490,7 @@ void VeliusBoss::loadSpells() {
 	divine.castingAnimation = GameObjectState::Casting;
 	divine.speed = 300;
 	divine.spellOffset = sf::Vector2f(10.f, 0.f);
+	divine.range = 400;
 
 	m_spellManager->addSpell(divine);
 	m_spellManager->setInitialCooldown(sf::seconds(2.f), SpellID::Aureola);
@@ -549,58 +552,72 @@ void VeliusBoss::onHit(Spell* spell) {
 }
 
 void VeliusBoss::setupTwilightPuzzle() {
-	LevelTileProperties properties;
-
 	auto positions = {
 		sf::Vector2f(720.f, 350.f),
-		sf::Vector2f(600.f, 175.f),
-		sf::Vector2f(700.f, 175.f)
+		sf::Vector2f(600.f, 200.f),
+		sf::Vector2f(700.f, 200.f)
 	};
-		
-	for (auto pos : positions) {
-			LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
-			tile->init(properties);
-			tile->setPosition(pos);
-			tile->loadResources();
-			tile->loadAnimation(7);
-			tile->setPosition(pos);
-			tile->setDebugBoundingBox(COLOR_NEUTRAL);
-			m_screen->addObject(tile);
-			m_puzzleBlocks.push_back(tile);
-	}
+	setupBlocks(positions);
 }
 
 void VeliusBoss::setupNecromancyPuzzle() {
-	LevelTileProperties properties;
-
 	auto positions = {
-		sf::Vector2f(720.f, 350.f),
-		sf::Vector2f(600.f, 175.f),
-		sf::Vector2f(700.f, 175.f)
+		sf::Vector2f(720.f, 300.f),
+		sf::Vector2f(700.f, 200.f),
+		sf::Vector2f(600.f, 200.f),
+		sf::Vector2f(800.f, 450.f),
+		sf::Vector2f(850.f, 450.f),
+		sf::Vector2f(900.f, 500.f),
+		sf::Vector2f(900.f, 450.f),
+		sf::Vector2f(900.f, 550.f),
+		sf::Vector2f(900.f, 600.f),
+		sf::Vector2f(600.f, 100.f),
+		sf::Vector2f(400.f, 350.f),
+		sf::Vector2f(800.f, 200.f),
+		sf::Vector2f(1000.f, 200.f),
+		sf::Vector2f(950.f, 350.f),
+		sf::Vector2f(300.f, 350.f)
 	};
-
-	for (auto pos : positions) {
-		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
-		tile->init(properties);
-		tile->setPosition(pos);
-		tile->loadResources();
-		tile->loadAnimation(7);
-		tile->setPosition(pos);
-		tile->setDebugBoundingBox(COLOR_NEUTRAL);
-		m_screen->addObject(tile);
-		m_puzzleBlocks.push_back(tile);
-	}
+	setupBlocks(positions);
 }
 
 void VeliusBoss::setupDivinePuzzle() {
-	LevelTileProperties properties;
+	auto positions = {
+		sf::Vector2f(720.f, 287.5f),
+		sf::Vector2f(700.f, 200.f),
+		sf::Vector2f(600.f, 200.f),
+		sf::Vector2f(550.f, 550.f),
+		sf::Vector2f(800.f, 450.f),
+		sf::Vector2f(850.f, 450.f),
+		sf::Vector2f(900.f, 450.f),
+		sf::Vector2f(1000.f, 400.f),
+		sf::Vector2f(850.f, 350.f),
+		sf::Vector2f(1050.f, 250.f),
+		sf::Vector2f(550.f, 200.f),
+		sf::Vector2f(250.f, 225.f),
+		sf::Vector2f(400.f, 300.f),
+		sf::Vector2f(300.f, 400.f),
+		sf::Vector2f(350.f, 250.f),
+		sf::Vector2f(800.f, 100.f),
+		sf::Vector2f(800.f, 150.f),
+		sf::Vector2f(550.f, 325.f),
+		sf::Vector2f(450.f, 450.f)
+	};
 
+	setupBlocks(positions);
+}
+
+void VeliusBoss::setupElementalPuzzle() {
 	auto positions = {
 		sf::Vector2f(720.f, 350.f),
 		sf::Vector2f(600.f, 175.f),
 		sf::Vector2f(700.f, 175.f)
 	};
+	setupBlocks(positions);
+}
 
+void VeliusBoss::setupBlocks(const std::vector<sf::Vector2f>& positions) {
+	LevelTileProperties properties;
 	for (auto pos : positions) {
 		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
 		tile->init(properties);
@@ -725,6 +742,7 @@ void VeliusBoss::loadComponents() {
 		sf::Vector2f(100.f, 100.f), 0.6f), this));
 
 	loadBlockingParticles();
+	loadDeathParticles();
 }
 
 void VeliusBoss::loadBlockingParticles() {

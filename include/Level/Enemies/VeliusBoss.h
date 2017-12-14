@@ -113,6 +113,8 @@ private:
 	void setupTwilightPuzzle();
 	void setupNecromancyPuzzle();
 	void setupDivinePuzzle();
+	void setupElementalPuzzle();
+	void setupBlocks(const std::vector<sf::Vector2f>& positions);
 	void clearPuzzleBlocks();
 	std::vector<GameObject*> m_puzzleBlocks;
 };

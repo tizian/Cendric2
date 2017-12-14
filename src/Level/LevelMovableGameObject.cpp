@@ -209,12 +209,12 @@ void LevelMovableGameObject::addHeal(int heal, bool overTime, bool critical) {
 
 void LevelMovableGameObject::setFeared(const sf::Time& fearedTime) {
 	if (m_isDead) return;
-	m_fearedTime = fearedTime;
+	m_fearedTime = std::max(fearedTime, m_fearedTime);
 }
 
 void LevelMovableGameObject::setStunned(const sf::Time& stunnedTime) {
 	if (m_isDead) return;
-	m_stunnedTime = stunnedTime;
+	m_stunnedTime = std::max(stunnedTime, m_stunnedTime);
 }
 
 void LevelMovableGameObject::onHit(Spell* spell) {

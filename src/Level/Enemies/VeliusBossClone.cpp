@@ -82,6 +82,40 @@ void VeliusBossClone::loadSpells() {
 	spell.duration = sf::seconds(1.f);
 
 	m_spellManager->addSpell(spell);
+
+	// necromancy spell
+	SpellData necro = SpellData::getSpellData(SpellID::Leech);
+	necro.damage = 30;
+	necro.count = 1;
+	necro.activeDuration = sf::seconds(7.f);
+	necro.cooldown = sf::seconds(5.f);
+	necro.isBlocking = true;
+	necro.fightingTime = sf::seconds(0.f);
+	necro.castingTime = sf::seconds(0.45f);
+	necro.castingAnimation = GameObjectState::Casting;
+	necro.speed = 300;
+	necro.spellOffset = sf::Vector2f(10.f, 0.f);
+
+	m_spellManager->addSpell(necro);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), SpellID::Leech);
+
+	// divine spell
+	SpellData divine = SpellData::getSpellData(SpellID::Aureola);
+	divine.damage = 30;
+	divine.count = 2;
+	divine.cooldown = sf::seconds(5.f);
+	divine.isBlocking = true;
+	divine.fightingTime = sf::seconds(0.f);
+	divine.castingTime = sf::seconds(0.45f);
+	divine.castingAnimation = GameObjectState::Casting;
+	divine.speed = 300;
+	divine.spellOffset = sf::Vector2f(10.f, 0.f);
+	divine.range = 400;
+
+	m_spellManager->addSpell(divine);
+	m_spellManager->setInitialCooldown(sf::seconds(randomFloat(0.f, 5.f)), SpellID::Aureola);
+
+	m_spellManager->addSpell(spell);
 }
 
 void VeliusBossClone::handleAttackInput() {
