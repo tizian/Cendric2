@@ -76,7 +76,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_NotTalked
 	translation.en:Hey you, psst! You look like you could use some gold. Interested in a ... special job?
 	translation.de:Hey du, psst! Du siehst aus, als könntest du etwas Gold gut gebrauchen. Interessiert an einem ... speziellen Job?
-	translation.ch:Hey du, psst! Du gsesch us, als chöntsch chli Gold guet bruuche. Interessiert amne ... spezielle Job?
+	translation.ch:Hey du, psst! Du gsesch us, als chöntisch chli Gold guet bruuche. Interessiert amänä ... spezielle Job?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -90,7 +90,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_DoYourDuty
 	translation.en:You remember that little deal we had in the tavern? You'd better do your job soon.
 	translation.de:Erinnerst du dich an diese kleine Abmachung, die wir in der Taverne hatten? Du machst jetzt besser deine Arbeit.
-	translation.ch:Erinnerisch dich a die chliini Abmachig womer ide Taverne gmacht hend? Gang ez besser und mach dini Arbet.
+	translation.ch:Erinnerisch dich a die chli Abmachig womo ide Taverne gmacht hend? Gang ez besser und mach dini Arbet.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -107,7 +107,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_NPC_TaskFulfilled
 	translation.en:Oh, it's you. I know that you have carried out my task. Very good. You might be of use.
 	translation.de:Oh, du bist es. Deine Aufgabe hast du offensichtlich erfüllt. Sehr gut. Du könntest noch von Nutzen sein.
-	translation.ch:Oh, du bisches. Du hesch dini Ufgab offesichtlich erledigt. Sehr guet. Du chöntsch na bruuchbar si.
+	translation.ch:Oh, du bisches. Du häsch dini Ufgob offesichtlich erledigät. Sehr guet. Du chöntisch no bruuchbar si.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -122,7 +122,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_FurtherJob
 	translation.en:Interested in another job?
 	translation.de:Interesse an einem weiteren Job?
-	translation.ch:Interesse amne nöchste Job?
+	translation.ch:Interesse amänä nöchste Job?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -137,7 +137,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_YouAgainGood
 	translation.en:Hey. Good to see you here. My plan has worked out. Interested in another job?
 	translation.de:Hey. Schön, dich hier zu sehen. Mein Plan ist aufgegangen. Interesse an einem weiteren Job?
-	translation.ch:Hey. Guet bisch du ide Stadt. Min Plan isch ufgange. Interesse amne wiitere Job?
+	translation.ch:Hey. Guet bisch du ide Stadt. Min Plan isch ufgangä. Interesse amänä wiitere Job?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -153,7 +153,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_Disgruntled
 	translation.en:Oh... you again. Y'know, I'd offered you an awesome job, if you hadn't been so agressive. If you want another chance, it will cost you something.
 	translation.de:Oh... du schon wieder. Weisst du, ich hätte dir einen unschlagbar guten Job angeboten, wenn du nicht so aggressiv gewesen wärst... Wenn du eine zweite Chance willst, kostet es dich was.
-	translation.ch:Oh... du scho wieder. Weisch, ich het der en unschlagbar guete Job abote, wenn du nid so aggressiv gsi wärsch... Wennd e zweiti Chance wetsch, chosteds für dich chli me.
+	translation.ch:Oh... du scho wieder. Weisch, ich het der en unschlagbar guete Job abotä, wänn du nöd so aggressiv gsi wärsch... wännd e zweiti Chance wötsch, chosteds für dich chli me.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -169,7 +169,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_NotCooperated
 	translation.en:Oh look. The boy who wasn't interested. Maybe a second chance for a job, huh?
 	translation.de:Na sieh mal an. Der Junge, der nicht interessiert war. Wie wär's mit einer zweiten Chance für einen Job?
-	translation.ch:Ja lueg mal da. De Bueb wo nid interessiert gsi isch. Wie wärs mitere zweite Chance für en Job?
+	translation.ch:Jo lueg mol do. De Bueb wo nöd interessiert gsi isch. Wie wärs mitere zweite Chance für en Job?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -298,7 +298,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_ExplainDeal
 	translation.en:(Smiles and pulls out a golden key) I got this small key here. It belongs to a treasure chest. I could give it to you, if you want...
 	translation.de:(Lächelt und holt einen goldenen Schlüssel hervor) Ich habe diesen kleinen Schlüssel hier. Er gehört zu einer Schatzkiste. Ich könnte ihn dir geben...
-	translation.ch:(Lächlet und holt en goldige Schlüssel füre) Ich ha da sonen chliine Schlüssel. Er ghört zunere Schatzchiste. Ich chönten dir gä...
+	translation.ch:(Lächlet und holt en goldige Schlüssel füre) Ich ha do sonen munzige Schlüssel. Er ghört zunerä Schatzchiste. Ich chönten dir gä...
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -356,7 +356,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_TheCatch
 	translation.en:Hehe, I knew you would ask. Well, the treasure chest doesn't belong to me, so to speak - it belongs to the Elder Rhendal.
 	translation.de:Hehe, ich wusste, dass du das fragen würdest. Nungut. Die Schatzkiste gehört nicht mir, wenn man es genau nimmt - sie gehört dem Dorfältesten Rhendal.
-	translation.ch:Hehe, ich ha gwüsst, dass du das froge wirsch. Ja denn. Also die Schatzchiste ghört nid mir, wenmes gnau nimmt - si ghört em Dorfälteste Rhendal.
+	translation.ch:Hehe, ich ha gwüsst, dass du das froge wirsch. Jo denn. Also die Schatzchistä ghört nöd mir, wenmäs gnau nimmt - si ghört em Dorfälteste Rhendal.
 	[
 		# Link node, tag is next tag
 		tag:22
@@ -370,7 +370,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_KeyCost150
 	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
 	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 150 Goldstücke, als Ausgleich für meine Mühen.
-	translation.ch:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 150 Goldstück, zum mini Müe kompensiere.
+	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 150 Goldstück, zum mini Müe z'kompensiere.
 	[
 		# Link node, tag is next tag
 		tag:23
@@ -384,7 +384,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_Treasure
 	translation.en:But I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
 	translation.de:Aber ich will nur, dass du mir einen speziellen blauen Stein aus seiner Truhe holst. Den Rest darfst du behalten.
-	translation.ch:Aber ich wett nur, dass du mir en spezielle blaue Stei us de True holsch. De Rest chasch selber phalte.
+	translation.ch:Aber ich wött nur, dass du mir en spezielle blaue Stei us de Truä holsch. De Rest chasch selber phaltä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -412,7 +412,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_KeyCost100
 	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
 	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 100 Goldstücke, als Ausgleich für meine Mühen.
-	translation.ch:Ich ha ihm de Schlüssel abluchse möse, während er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das ke Problem gsi. Aber jetzt kosted dich das 100 Goldstück, zum mini Müe kompensiere.
+	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 100 Goldstück, zum mini Müe zkompensiere.
 	[
 		# Link node, tag is next tag
 		tag:25
@@ -454,7 +454,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_KeyCost50
 	translation.en:I had to steal the key from him. So, a small fee of 50 golden coins for the key would be a good compensation.
 	translation.de:Ich musste ihm den Schlüssel stehlen. Deshalb muss ich eine kleine Entschädigung von 50 Goldstücken für den Schlüssel verlangen.
-	translation.ch:Ich ha ihm de Schlüssel möse abluchse. Drum wer e chliini Entschädigung vo 50 Goldstück für de Schlüssel agmesse.
+	translation.ch:Ich ha ihm de Schlüssel möse chluppä. Drum wär e chliini Entschädigung vo 50 Goldstück für de Schlüssel agmesse.
 	[
 		# Link node, tag is next tag
 		tag:27
@@ -496,7 +496,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_KeyCost0
 	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
 	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Ich habe etwas Schlafpulver reingemixt... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
-	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä hesch? Ich han es Schlofpulver dri ta. Ihm de Schlüssel abzluchse isch bubieifach gsi.
+	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä häsch? Ich han es Schlofpulver dri tuä. Ihm de Schlüssel z'chluppä isch bubieifach gsi.
 	[
 		# Link node, tag is next tag
 		tag:29
@@ -526,7 +526,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_StartElderQuest
 	translation.en:A good choice. Here you go.
 	translation.de:Eine gute Wahl. Hier hast du ihn.
-	translation.ch:E gueti Wahl. Da heschen.
+	translation.ch:E gueti Wahl. Do häschn.
 	[
 		# Link node, tag is next tag
 		tag:30
@@ -541,7 +541,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_ChestIsObserved
 	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they won't catch you.
 	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zaubern beschützt. Pass also auf, dass die dich nicht erwischen.
-	translation.ch:D'Chischte isch imne Gheimruum vom Huus vom Älteste. Oh, und si wird wahrschinli vo Beobachter-Zauber bewacht. Pass also uf, dass die dich nid verwütsched.
+	translation.ch:D'Chischtä isch imäne Gheimruum vom Huus vom Älteste. Oh, und si wird wohrschindli vo Beobachter-Zaubor bewacht. Pass also uf, dass die dich nöd verwütsched.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -555,7 +555,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_NotEnoughGold
 	translation.en:Come back when you have enough gold.
 	translation.de:Komm wieder wenn du genug Gold hast.
-	translation.ch:Chum wider wend gnueg Gold hesch.
+	translation.ch:Chum wider wänd gnueg Gold häsch.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -740,7 +740,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_ObserverSpells
 	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
 	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann. Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
-	translation.ch:E hässlichi Form vode Magie. D'Lüt dönd die i iri Hüser demit niemert öppis chluppe cha. Aber die Zauber gsehnd au nid alles (grinst). Aber wenn si dich verwütsched, denn steckeds dich id Chiste... und da isch nid grad ahgnehm, da chani der sege. 
+	translation.ch:E hässlichi Form vode Magie. D'Lüt tüänd die i iri Hüser dämit niemert öppis chluppe cha. Aber die Zaubor gsehnd au nöd alles (grinst). Aber wänn si dich verwütsche tüend, dänn steckeds dich id Chistä... und da isch nöd dä hammo, da chani dir sägä. 
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -754,7 +754,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_OpenedTheChest
 	translation.en:Hehe, I knew you'd succeed. But I don't want that stone anyway, you can keep it as your reward.
 	translation.de:Hehe, ich wusste dass du es schaffen würdest. Aber ich will diesen Stein gar nicht, du kannst ihn behalten - als deine Belohnung.
-	translation.ch:Hehe, ich ha gwüsst dases schaffsch. Aber ich wett de Stei gar nid... Chaschen phalte - als dini Belohnig.
+	translation.ch:Hehe, ich ha gwüsst dases schaffsch. Aber ich wött de Stei gar nöd... Chaschän phalte - als dini Belohnig.
 	[
 		# Link node, tag is next tag
 		tag:38
@@ -770,7 +770,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_StealingFitsYou
 	translation.en:Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
 	translation.de:Es scheint dir ja nicht viel auszumachen, die Habseligkeiten anderer Leute zu nehmen. Ich könnte dir beibringen, wie du an noch wertvollere Dinge kommen kannst.
-	translation.ch:Es schiint dir ja nid viel uszmache, d'Habseligkeite vo andere Lüt zne. Ich chönt dir bibringe wied no a wertvolleri Sache cho chasch.
+	translation.ch:Es schiint dir jo nöd viel uszmache, d'Habseligkeite vo anderä Lüt znä. Ich chönt dir bibringe wied no a wärtvolleri Sache cho chasch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -808,7 +808,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_TeachUnlock
 	translation.en:Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
 	translation.de:Natürlich. Lies einfach diese Schriftrolle und ich kann dir einen weiteren Auftrag anbieten, falls du noch an Arbeit in diesem... Bereich interessiert bist. (Grinst)
-	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir na en wiitere Job abüte, fallsd immer na a Arbet i dem... Bereich interessiert bisch. (Grinst)
+	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir no en wiiterä Job azbütä, falls immer no a Arbät i dem... Bereich interessiert bisch. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -845,7 +845,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_SecondQuest
 	translation.en:Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
 	translation.de:Gut. Dieses Mal steht ein bisschen mehr auf dem Spiel. Wir wissen, dass eine gewisse Magierin Syrah weiss, wie man einen Trank braut, der einen unsichtbar macht.
-	translation.ch:Guet. Damol staht chli me ufem Spiel. Mir wüssed, dass e gwüssi Magierin Syrah weiss, weme en Trank zemebraut, wo eim unsichbar macht.
+	translation.ch:Guet. Damol stoht chli me ufem Spiel. Mir wüssed, dass e gwüssi Magierin Syrah weiss, wiemä en Trank zemebraut, wo eim unsichbar macht.
 	[
 		# Link node, tag is next tag
 		tag:43
@@ -859,7 +859,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_SecondQuest2
 	translation.en:A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
 	translation.de:Eine äusserst nützliche Fähligkeit, nicht wahr. Das einzige Problem ist, dass sie uns dieses Wissen vorenthalten will. Sie lässt uns also keine andere Wahl, wir müssen dieses Rezept ohne ihre Einwilligung nehmen. 
-	translation.ch:E zimli nützlichi Fähigkeit, gell. Es einzig Problem isch dass si üs umsverrecke nid sege wett wes gaht. Also blibt üs ke anderi Wahl als das Rezept halt eifach so z'ne.
+	translation.ch:E zimlich nützlichi Fähigkeit, gäll. S einzig Problem isch dass si üs umsverräcke nöd sege wött wies goht. Also blibt üs kei anderi Wahl als das Rezept halt eifach so z'nä.
 	[
 		# Link node, tag is next tag
 		tag:44
@@ -874,7 +874,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_SecondQuest3
 	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
 	translation.de:Es muss einen Weg geben, in ihren Keller zu kommen - wenn man eine Abkürzung über die Kanalisation nimmt. Finde diesen Weg und bring uns dieses Rezept. Wenn dir das gelingt, werde ich dir vielleicht erzählen, wer denn "uns" überhaupt ist.
-	translation.ch:Es mun en Weg ge, in ihre Chäller z'cho, wenme en Abchürzig überd Kanalisation nimmt. Find de Weg und bring üs das Rezept. Wenn du das schaffsch, den chani der vilicht verzelle, wer "üs" überhaupt isch.
+	translation.ch:Es muä en Weg gä, in ihren Chäller z'cho, wenmä ä Abchürzig überd Kanalisation nimmt. Find de Wäg und bring üs das Rezept. Wänn du das schaffsch, den chani dir vilicht verzellä, wär "üs" überhaupt isch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -931,7 +931,7 @@ npc.id:npc_vincent2
 	translation.tag:DL_Vincent_SecondQuestDone
 	translation.en:Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
 	translation.de:Sehr gut. Ich wusste, dass du Talent hast. Falls du noch mehr dieser nützlichen Zauber lernen willst, nimm diesen Schlüssel und finde die Tür, die er öffnet.
-	translation.ch:Sehr guet. Ich ha gwüsst, dass du Talent hesch. Falls du na me vo dere nützliche Magie lerne wetsch, nimm de Schlüssel und find d'Türe, woner ufmacht.
+	translation.ch:Sehr guet. Ich ha gwüsst, dass du Talent häsch. Falls du no me vo därä nützliche Magie lerne wotsch, nimm dä Schlüssel und find d'Türe, woner ufmacht.
 	[
 		# Link node, tag is next tag
 		tag:-1

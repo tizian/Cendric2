@@ -112,7 +112,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_WhatDoing
 	translation.en:I'm waiting... for someone like you maybe. 
 	translation.de:Ich warte... vielleicht auf jemanden wie dich.
-	translation.ch:Ich warte... vilicht uf öppert we dich.
+	translation.ch:Ich wartä... vilicht uf öppo wie dich.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -126,7 +126,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_WhatDoing2
 	translation.en:That paladin on the other side of the bridge was quite a weirdo.
 	translation.de:Dieser Paladin auf der anderen Seite der Brücke war ein ziemlicher Spinner.
-	translation.ch:De Paladin uf de andere Siite vode Brugg isch zimli dureknallt gsi.
+	translation.ch:De Paladin uf de anderä Siite vode Brugg isch zimli dureknallt gsi.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -155,7 +155,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Nuray
 	translation.en:Oh, she doesn't have to worry. Everything's fine here. 
 	translation.de:Oh, sie muss sich keine Sorgen machen. Es ist alles gut hier.
-	translation.ch:Oh, si mun sich ke Sorge mache. Do isch alles paletti.
+	translation.ch:Oh, si muän sich kei Sorgä mache. Do isch alles suppo.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -170,7 +170,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Nuray2
 	translation.en:I just got unfinished business here. After that, I'll return to Gandria.
 	translation.de:Ich muss hier nur noch etwas erledigen. Danach werde ich nach Gandria zurückkehren.
-	translation.ch:Ich mun da nur na was erledige. Nachene wirdi nach Gandria zrugg gah.
+	translation.ch:Ich muän do nur no was erledigä. Nochär würi noch Gandria zrugg goh.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -199,7 +199,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Business
 	translation.en:Yes, you look like someone who knows how to handle a weapon.
 	translation.de:Ja, du siehst aus wie jemand, der weiss, wie man mit einer Waffe umgeht.
-	translation.ch:Jo, du gsesch us we öpper wo weiss, weme mit enere Waffe umgaht.
+	translation.ch:Jo, du gsesch us wie öpper wo weiss, wieme mitärä Waffe umgoht.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -214,7 +214,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Business2
 	translation.en:I need an escort. Are you interested?
 	translation.de:Ich brauche Geleitschutz. Interessiert?
-	translation.ch:Ich bruche Geleitschutz. Interessiert?
+	translation.ch:Ich bruch Geleitschutz. Interessiert?
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -251,7 +251,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Interested
 	translation.en:Well, I lost a very precious necklace, the "Eye of the Moon". 
 	translation.de:Nun, ich habe eine sehr wertvolle Halskette verloren, das "Auge des Mondes".
-	translation.ch:Weisch, ich ha e sehr wertvolli Halschettle verlore, es "Mondaug".
+	translation.ch:Weisch, ich ha e sehr wertvolli Halschettä verlore, es "Mondaug".
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -265,7 +265,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Interested2
 	translation.en:I had to run away with it and jumped down from a small hill into the forest.
 	translation.de:Ich musste damit flüchten und bin von einem kleinen Hügel heruntergesprungen.
-	translation.ch:Ich ha möse demit flüchte und bi vomne chliine Hügeli abegumpet.
+	translation.ch:Ich ha möse demit flüchte und bi vomänä chliine Hügel abegumpät.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -279,7 +279,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Interested3
 	translation.en:Unfortunately, it got caught in the branches of a tree and I can't get near it alone.
 	translation.de:Unglücklicherweise hat es sich in den Ästen eines Baums verfangen und ich komm alleine nicht genügend nah ran.
-	translation.ch:Dummerwiis hets sich ide Äst vomne Baum verfange und ich chum elei nid gnueg nöch ane.
+	translation.ch:Dummerwiis häts sich ide Äst vomnä Baum verfange und ich chum elei nöd gnueg nöch ane.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -365,7 +365,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Telekinesis
 	translation.en:That's a type of earth magic, using the earths magnetism to move objects. Quite handy if you ask me.
 	translation.de:Das ist eine Art Erdmagie. Man benutzt den Erdmagnetismus, um entfernte Objekte zu bewegen. Ist ziemlich nützlich, glaub mir.
-	translation.ch:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z'bewege. Isch zimli nützli, weisch.
+	translation.ch:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z'bewege. Isch zimli nützlich, weisch.
 	[
 		# Link node, tag is next tag
 		tag:21
@@ -379,7 +379,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_Telekinesis2
 	translation.en:Actually, I'm affine to twilight magic, but this spell kind of complements my skills.
 	translation.de:Eigentlich bin ich zur Dämmerungsmagie affin, aber dieser Zauber ergänzt meine Fähigkeiten einfach gut.
-	translation.ch:Eigentli bini zude Dämmerigsmagie affin, aber de Zauber ergänzt mini Fähigkeite recht guet.
+	translation.ch:Eigentlich bini zude Dämmerigsmagie affin, aber de Zaubor ergänzt mini Fähigkeite recht guet.
 	[
 		# Link node, tag is next tag
 		tag:-2

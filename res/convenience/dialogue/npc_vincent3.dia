@@ -39,7 +39,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_Welcome
 	translation.en:So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
 	translation.de:Du hast also den Weg zu uns gefunden. Willkommen im Versteck der Schattenläufer.
-	translation.ch:Du hesch also de Weg zu üs gfunde. Willkomme im Versteck vode Schatteläufer.
+	translation.ch:Du häsch also dä Wäg zu üs gfundä. Willkomme im Versteck vodä Schatteläufer.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -54,7 +54,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CantJoin
 	translation.en:You've already made your decision. What a waste...
 	translation.de:Du hast deine Entscheidung bereits getroffen. Was für eine Verschwendung...
-	translation.ch:Du hesch dini Entscheidig scho troffe. Was füre Verschwendig...
+	translation.ch:Du häsch dini Entscheidig scho troffä. Was füre Verschwändig...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -151,7 +151,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhoAreYou
 	translation.en:We are a guild that focuses on twilight magic and the benefits it brings us.
 	translation.de:Wir sind eine Gilde, die sich mit Dämmerungsmagie beschäftigt und mit den Vorteilen, die sie uns bringt.
-	translation.ch:Mir sind e Gilde wo sich mit Dämmerigsmagie beschäftigt und de Vorteil, wos üs bringt.
+	translation.ch:Mir sind e Gildä wo sich mit Dämmerigsmagie beschäftigt und dä Vorteil, wos üs bringt.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -165,7 +165,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhoAreYou2
 	translation.en:You seem to have an affinity to this type of magic, as you've mastered the art of summoning a picklock incredibly fast.
 	translation.de:Du scheinst eine Affinität für diese Magie zu besitzen, da du unglaublich schnell gelernt hast, wie man einen Dietrich beschwört.
-	translation.ch:Du hesch ebe glaub e Affinität für die Magie, welld unglaublich schnell glernt hesch, weme en Dietrich beschwört.
+	translation.ch:Du häsch ebe glaub e Affinität für die Magie, welld unglaublich schnell glernt häsch, wieme en Dietrich beschwört.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -180,7 +180,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhoAreYou3
 	translation.en:Joining us could uncover your hidden talents...
 	translation.de:Uns beizutreten könnte deine verborgenen Talente zum Vorschein bringen...
-	translation.ch:Üs biiztrete chönt dini verborgene Talent fürebringe...
+	translation.ch:Üs biizträtä chönt dini verborgänä Talent fürebringe...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -193,8 +193,8 @@ npc.id:npc_vincent3
 	# translation: 
 	translation.tag:DL_Vincent_WhyHiding
 	translation.en:You see what's going on in this city, right? Mages who don't study "divine" magic are frowned upon.
-	translation.de:Dir ist schon klar was in dieser Stadt passiert? Magier die keine "heilige" Magie studieren, sind nicht gerne gesehen.
-	translation.ch:Dir isch scho klar wa i dere Stadt passiert? Magier wo kei "heiligi" Magie studiered sind nid so gern gse.
+	translation.de:Dir ist schon klar, was in dieser Stadt passiert? Magier die keine "heilige" Magie studieren, sind nicht gerne gesehen.
+	translation.ch:Isch dir eigentlich klar, was i däre Stadt passiert? Magier wo kei "heiligi" Magie studiered sind nöd so gärn gse.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -209,7 +209,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhyHiding2
 	translation.en:Twilight and elemental magic are tolerated though in contrast to necromancy - but still, the paladins don't like what we're doing with our magic.
 	translation.de:Dämmerungs- und Elementarmagie werden jedoch toleriert, im Gegensatz zu Nekromantie. Trotzdem mögen die Paladine nicht, was wir mit unserer Magie anstellen.
-	translation.ch:Dämmerigs- und Elementarmagie werded aber toleriert, im Gegesatz zu Nekromantie. D'Paladin hend aber trotzdem nid gern wa mir mit üsere Magie so astelled.
+	translation.ch:Dämmerigs- und Elementarmagie werdäd abo toleriert, im Gegesatz zu Nekromantie. D'Paladin hend abo trotzdäm nöd gern wa mir mit üsere Magie so astelläd.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -224,7 +224,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_InformClerics
 	translation.en:By the time the clerics would arrive here, we'd be gone and you - well, your body - would be floating around in the sewers.
 	translation.de:Bis die Kleriker hier unten wären, wären wir schon lange weg und du - beziehungsweise deine Leiche - würde in den Kanälen treiben.
-	translation.ch:Bis d'Kleriker da unne wäred, wäred mir scho lang über alli Berge und du - also dini Leiche - wür ufem Abwasser triibe.
+	translation.ch:Bis d'Kleriker do unnä sind, sind mir scho lang über alli Bärgä und du - also dini Leichä - wür ufem Abwasser triibe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -239,7 +239,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhoInGuild
 	translation.en:Do I look like I'm going to tell you that? Maybe if you'd join us.
 	translation.de:Sehe ich so aus als würde ich dir das erzählen? Vielleicht, wenn du uns beitrittst.
-	translation.ch:Gse ich so us als würi dir das verzelle? Vilicht wend üs bitrittsch.
+	translation.ch:Gse ich so us als wür i dir das verzellä? Vilicht wenn üs biträtte tuäsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -254,7 +254,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_OneGuild
 	translation.en:You'd be missing a great opportunity. But that's your choice.
 	translation.de:Du würdest etwas verpassen. Aber das ist deine Wahl.
-	translation.ch:Du würsch öppis verpasse. Aber das isch dini Wahl.
+	translation.ch:Du würsch öppis verpassä. Abo das isch dini Wahl.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -269,7 +269,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_WhatIfJoin
 	translation.en:You'll get to learn twilight magic and besides that, you're going to get rich.
 	translation.de:Du wirst Dämmerungsmagie lernen und nebenbei noch reich werden.
-	translation.ch:Du wirsch Dämmerigsmagie lerne und usserdem na riich werde.
+	translation.ch:Du wirsch Dämmerigsmagie lerne und usserdäm no huerä riich werdä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -283,7 +283,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_Join
 	translation.en:Good. You want to become a brother of the Shadow Stalkers, pledge your loyality to the guild and learn the ways of the shadows?
 	translation.de:Gut. Willst du ein Bruder der Schattenläufer werden, schwörst der Gilde deine Treue und lernst die Wege der Schatten? 
-	translation.ch:Guet. Wetsch du en Brueder vode Schatteläufer werde, schwörsch dini Treui zude Gilde und lernsch d'Wäg vode Schatte?
+	translation.ch:Guet. Wötsch du en Brüädo vodä Schatteläufer werdä, schwörsch dini Treui zudä Gildä und lernsch d'Wäg vodä Schatte?
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -326,7 +326,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_DeclareThief
 	translation.en:You won't regret this. Welcome in our guild, shadow stalker.
 	translation.de:Das wirst du nicht bereuen. Willkommen in unserer Gilde, Schattenläufer.
-	translation.ch:Das wirsch nid bereue. Willkomme i üsere Gilde, Schatteläufer.
+	translation.ch:Das wirsch du nöd bereue. Willkomme i üsere Gildä, Schatteläufer.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -455,7 +455,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_FirstSpell
 	translation.en:Yes, I will teach you. Take this scroll and learn how to summon a deadly trap.
 	translation.de:Ja, kann ich. Nimm diese Schriftrolle und lerne wie man eine tödliche Falle beschwört.
-	translation.ch:Ja, chani. Nimm die Schriftrolle und lern weme e tödlichi Falle beschwört.
+	translation.ch:Jo, chani. Nimm die Schriftrolle und lern wieme e tödlichi Falle beschwöre tuet.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -469,7 +469,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_NoSpellReputation
 	translation.en:Maybe later. First, you need to show us that you can handle this kind of magic.
 	translation.de:Vielleicht später. Erst musst du uns zeigen, dass du auch mit dieser Magie umgehen kannst.
-	translation.ch:Vilicht spöter. Zersch muesch üs mal zeige das au öppis chasch demit afange.
+	translation.ch:Vilicht spöto. Zersch muesch üs mol zeige, dass au öppis chasch dämit afangä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -484,7 +484,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_NoMoreSpells
 	translation.en:No, I've taught you everything I know.
 	translation.de:Nein, ich habe dir alles beigebracht, was ich weiss.
-	translation.ch:Nei, ich ha der alles biibrocht, wani weiss.
+	translation.ch:Nei, ich ha dir alles biibrocht, wani weiss.
 	[
 		# Link node, tag is next tag
 		tag:33
@@ -497,8 +497,8 @@ npc.id:npc_vincent3
 	# translation: 
 	translation.tag:DL_Vincent_NoMoreSpells2
 	translation.en:But that doesn't mean that there are no more twilight spells out there. They just need to be discovered.
-	translation.de:Aber das heisst nicht dass es da draussen keine weiteren Dämmerungs-Zauber mehr gibt. Man muss sie nur finden.
-	translation.ch:Aber das will nid heisse dases det usse ke Dämmerigs-Zauber me git. Me mu si nur finde.
+	translation.de:Aber das heisst nicht, dass es da draussen keine weiteren Dämmerungs-Zauber mehr gibt. Man muss sie nur finden.
+	translation.ch:Abo das will nöd heisse, dases döt usse ke Dämmerigs-Zaubo me git. Me muä si nur findä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -512,7 +512,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_LloydsPlan
 	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
 	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
-	translation.ch:Du kennsch de Aführer vode Kleriker, de Lloyd, gell? Er het sich i letzter Ziit komisch beno, es schiint als würer öppis plane.
+	translation.ch:Du kennsch dä Afühäro vodä Kleriker, dä Lloyd, gäll? Er hät sich i letschter Ziit komisch beno, es schiint als würor öppis plane.
 	[
 		# Link node, tag is next tag
 		tag:26
@@ -527,7 +527,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
 	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
-	translation.ch:Mir bruched öpper, wo mit ihm rede chan und vilicht sogar für ihn schafft. Fallsd usefindsch, was er vor het, chum wieder und verzell üs devo.
+	translation.ch:Mir bruched öppor, wo mit ihm redä chan und vilicht sogar für ihn schaffä tuet. Fallsd usefindsch, was er vor het, chum wiedär und verzell üs dävo.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -541,7 +541,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralThief
 	translation.en:The clerics have made a big mistake when they tried to exorcise a dangerous grimoire about necromancy.
 	translation.de:Die Kleriker haben einen grossen Fehler gemacht, als sie ein gefährliches Buch über Nekromantie bannen wollten.
-	translation.ch:D'Kleriker hend en grosse Fähler gmacht wo si es gföhrlichs Buech über Nekromantie hend wele banne.
+	translation.ch:D'Kleriker händ en grosse Fähler gmacht wo si es gföhrlichs Buech über Nekromantie hend wöle bannä.
 	[
 		# Link node, tag is next tag
 		tag:23
@@ -555,7 +555,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralThief2
 	translation.en:The book is running amok in their cathedral. A great opportunity for us though.
 	translation.de:Das Buch läuft in ihrer Kathedrale Amok. Das ist allerdings eine gute Chance für uns.
-	translation.ch:Es Buech lauft i ihrere Kathedrale Amok. Das isch allerdings e gueti Chance für üs.
+	translation.ch:Es Buech lauft i ihrerä Kathedrale Amok. Das isch allerdings e gueti Chance für üs.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -569,7 +569,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralThief3
 	translation.en:While they're distracted, it should be mere child's play to steal the precious candleholders from their cathedral.
 	translation.de:Während sie abgelenkt sind, sollte es ein Kinderspiel sein, die wertvollen Kerzenständer aus ihrer Kathedrale zu stehlen.
-	translation.ch:Während si abglenkt sind, söts es Chinderspiel si, di wertvolle Chärzeständer us ihrere Kathedrale z'chluppe.
+	translation.ch:Während si abglenkt sind, söts es Chindärspiel si, di wertvolle Chärzeständäo us ihrerä Kathedrale z'chluppä.
 	[
 		# Link node, tag is next tag
 		tag:25
@@ -584,7 +584,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralThief4
 	translation.en:Bring us those golden candleholders and I'll teach you more about our magic.
 	translation.de:Bring uns diese goldenen Kerzenständer und ich werde dich mehr über unsere Magie lehren.
-	translation.ch:Bring üs die goldige Cherzeständer und ich wird der meh vo üsere Magie biibringe.
+	translation.ch:Bring üs die goldige Cherzeständär und ich wird do meh vo üserä Magie biibringe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -600,7 +600,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralFinished
 	translation.en:Well done. Taking them when everyone else was distracted was a well-thought-out idea, wasn't it.
 	translation.de:Gut gemacht. Sie dann zu nehmen, während alle anderen abgelenkt waren, war eine gut durchdachte Idee, nicht wahr.
-	translation.ch:Guet gmacht. Si denn z'neh wenn all andere abglenkt sind isch scho e saumässig gueti Idee gsi, gell.
+	translation.ch:Guet gmacht. Si dänn z'neh wenn alli andäre abglenkt sind isch scho e saumässig gueti Idee gsi, gäll.
 	[
 		# Link node, tag is next tag
 		tag:28
@@ -616,7 +616,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CathedralFinished2
 	translation.en:You've shown me that you are able to use our magic. Take this scroll as a reward and learn how to be one with the shadows.
 	translation.de:Du hast mir gezeigt, dass du fähig bist, unsere Magie zu benutzen. Nimm diese Spruchrolle als Belohnung und lerne, wie man eins mit den Schatten wird.
-	translation.ch:Du hesch mer zeigt, dassd fähig bisch, üsi Magie z'bruuche. Nimm die Schriftrolle als Belohnig und lern, weme eis mit de Schatte wird.
+	translation.ch:Du häsch mo zeigt, dassd fähig bisch, üsi Magie z'bruuchä. Nimm die Schriftrolle als Belohnig und lärn, wieme eis mit dä Schattä wird.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -646,7 +646,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CompleteLloydsPlan
 	translation.en:Some "V.", eh. (Grins) Well, it's not me, I can assure you that. Thank you for the report.
 	translation.de:Ein "V.", he. (Grinst) Nun, ich bin es nicht, das kann ich dir sagen. Danke für den Bericht.
-	translation.ch:En "V.", he. (Grinst) Ich bis aber nid, das chani der sege. Danke für de Bricht.
+	translation.ch:En "V.", hä. (Grinst) Ich bis abo nöd, das chani dir sege. Danke für dä Bricht.
 	[
 		# Link node, tag is next tag
 		tag:30
@@ -660,7 +660,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CompleteLloydsPlan2
 	translation.en:We'll be a lot more vigilantly now. I'm only worried about Koray, Nuray's brother.
 	translation.de:Wir werden nun um einiges wachsamer sein. Ich mache mir nur Sorgen um Koray, Nuray's Bruder.
-	translation.ch:Mir werded um einiges wachsamer sii. Ich mach mer bloss chli Sorge um de Koray, de Nuray ihre Brüeder.
+	translation.ch:Mir werdäd um einiges wachsamer sii. Ich mach mo bloss chli Sorgä um dä Koray, dä Nuray ihre Brüedor.
 	[
 		# Link node, tag is next tag
 		tag:31
@@ -675,7 +675,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_CompleteLloydsPlan3
 	translation.en:He went to the marshlands recently. If you see him, tell Nuray.
 	translation.de:Er ist kürzlich ins Sumpfland gegangen. Berichte Nuray davon, falls du ihn sehen solltest.
-	translation.ch:Er isch letztins is Sumpfland gange. Verzell doch de Nuray devo, fallsen gse sötsch.
+	translation.ch:Er isch letschti is Sumpfland gangä. Verzell doch dä Nuray dävo, fallsen gse sötsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -689,7 +689,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaStart
 	translation.en:Yes, actually I do have one for you. A dangerous one, indeed...
 	translation.de:Ja, ich habe tatsächlich einen für dich. Allerdings ein ziemlich gefährlicher...
-	translation.ch:Jo, ich han würkli eine für dich. Allerdings en zimli gföhrliche...
+	translation.ch:Jo, ich han würkli eine für dich. Allerdings en zimli gföhrlichä...
 	[
 		# Link node, tag is next tag
 		tag:37
@@ -703,7 +703,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaStart2
 	translation.en:Listen. There's an abandoned temple in the Highlands of Admantris, and they say a demon is haunting it.
 	translation.de:Hör zu. Es gibt einen verlassenen Tempel im Hochland von Admantris und man erzählt sich, ein Dämon treibe dort sein Unwesen.
-	translation.ch:Los. Es git en verlassene Tempel im Hochland vo Admantris und me verzellt sich, en Dämon triibi det sis Unwese.
+	translation.ch:Los. Es git en verlassenä Tämpel im Hochland vo Admantris und mä verzellt sich, en Dämon tribt döt sis Unwese.
 	[
 		# Link node, tag is next tag
 		tag:38
@@ -717,7 +717,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaStart3
 	translation.en:But we also know of a powerful magical stone, the "heart of thunder", which is hidden there.
 	translation.de:Aber wir wissen auch von einem mächtigen magischen Stein, dem "Donnerherz", das dort versteckt sein soll.
-	translation.ch:Aber mir hend au vomne mächtige magische Stei ghört, em "Donnerherz", wo det versteckt sii set.
+	translation.ch:Abo mir hend au vomäne mächtigä magischä Stei ghört, em "Donnerhärz", wo döt versteckt sii sött.
 	[
 		# Link node, tag is next tag
 		tag:39
@@ -731,7 +731,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaStart4
 	translation.en:It is probably heavily guarded by warden spells that can kill you on sight. But the loot is worth it!
 	translation.de:Er ist wahrscheinlich schwer bewacht von Wächterzaubern, die dich sofort töten, wenn sie dich sehen. Doch die Beute lohnt sich!
-	translation.ch:Er isch wohrschinli ufs übelst bewacht vo Wächterzauber, wo dich instantan töted, wenn si dich gsehnd. Aber du, es lohnt sich!
+	translation.ch:Er isch wohrschinli ufs übelsti bewacht vo Wächterzaubor, wo dich sofort töted, wenn si dich gsehnd. Abo du, es lohnt sich!
 	[
 		# Link node, tag is next tag
 		tag:40
@@ -761,7 +761,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaComplete
 	translation.en:(Grins) Well, I hope you didn't get in trouble getting this one.
 	translation.de:(Grinst) Ich hoffe bloss, du bist nicht in Schwierigkeiten geraten, als du das holen musstest.
-	translation.ch:(Grinst) Ich hoff eifach, du hesch ke Problem becho, das z'hole.
+	translation.ch:(Grinst) Ich hoff eifach, du häsch kei Problem übercho, das z'holä.
 	[
 		# Link node, tag is next tag
 		tag:36
@@ -777,7 +777,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_YashaComplete2
 	translation.en:I always knew that you'd make great thief - eh, twilight mage. Enjoy your newly gained powers.
 	translation.de:Ich wusste schon immer, dass aus dir mal ein guter Dieb - eh, Dämmerungsmagier wird. Viel Spass mit deinen neuen Fähigkeiten.
-	translation.ch:Ich ha scho immer gwüsst, dass us dir mal en guete Dieb - eh, Dämmerigsmagier wird. Vil Spass mit dine neue Fähigkeite.
+	translation.ch:Ich ha scho immer gwüsst, dass us dir mol en hammo Dieb - äh, Dämmerigsmagier wird. Vil Spass mit dine neue Fähigkeite.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -806,7 +806,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_VeliusFound
 	translation.en:Velius? I know a mage named Velius. We did business with him. 
 	translation.de:Velius? Ich kenne einen Magier namens Velius. Wir haben schon Geschäfte mit ihm gemacht.
-	translation.ch:Velius? Ich kenn en Magier namens Velius. Mer hend scho Gschäftli mitem gmacht.
+	translation.ch:Velius? Ich kenn en Magior namens Velius. Mo hend scho Gschäftli mitem gmacht.
 	[
 		# Link node, tag is next tag
 		tag:43
@@ -820,7 +820,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_VeliusFound2
 	translation.en:He often wanted potions... or rumours. Still, he's not the kind of guy who abducts people.
 	translation.de:Er wollte meistens Tränke... oder Gerüchte. Aber er ist nicht so der Typ, um Leute zu entführen.
-	translation.ch:Er het emel Tränk wele... oder Grüchtli. Aber er isch ez echt nid so de Typ wo Lüüt entführt.
+	translation.ch:Er hät ämel Tränk wöle... odor Grüchtli. Abo er isch ez echt nöd so dä Typ wo Lüüt entfüerä tuet.
 	[
 		# Link node, tag is next tag
 		tag:44
@@ -834,7 +834,7 @@ npc.id:npc_vincent3
 	translation.tag:DL_Vincent_VeliusFound3
 	translation.en:But you should definitely follow the trace and go into that crypt. Good luck!
 	translation.de:Aber du solltest definitiv dieser Spur folgen und in die Krypta gehen. Viel Glück!
-	translation.ch:Aber du sötsch definitiv dere Spur folge und id Krypta go. Viel Glück!
+	translation.ch:Abo du sötsch definitiv däre Spur folge und id Krypta go. Viel Glück!
 	[
 		# Link node, tag is next tag
 		tag:-2
