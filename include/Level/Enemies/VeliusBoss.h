@@ -10,6 +10,11 @@ class ParticleComponent;
 class VeliusBossClone;
 class VeliusVictim;
 
+namespace particles {
+	class LineSpawner;
+	class AngledVelocityGenerator;
+}
+
 enum VeliusBossState {
 	AttackIllusion,
 	ExtractDivine,
@@ -55,6 +60,7 @@ private:
 	void setBossState(VeliusBossState state);
 	void startAttackPhase();
 	void startLastPhase();
+	void handleLastPhase(const sf::Time& frameTime);
 	void handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold);
 	void handleExtractPhase(const sf::Time& frameTime, const sf::Color& color);
 	VeliusBossState m_bossState;
@@ -98,6 +104,12 @@ private:
 	void startExtraction(const sf::Color& color);
 	void updateExtraction();
 	VeliusVictim* m_victim = nullptr;
+
+	// last phase
+	ParticleComponent* m_elementalPc;
+	particles::LineSpawner* m_elementalSpawner;
+	particles::AngledVelocityGenerator* m_elementalVelGen;
+	void loadElementalParticles();
 
 	// colors
 	static const sf::Color V_COLOR_ILLUSION;

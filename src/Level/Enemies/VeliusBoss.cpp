@@ -8,6 +8,7 @@
 #include "Level/DynamicTiles/MirrorTile.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
+#include "World/CustomParticleUpdaters.h"
 #include "Screens/LevelScreen.h"
 #include "ObjectFactory.h"
 #include "Registrar.h"
@@ -187,9 +188,33 @@ void VeliusBoss::startLastPhase() {
 	m_scriptedBehavior->say("VeliusCendricCall", 5);
 }
 
+void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
+	const bool victimDead = m_mainChar->isDead();
+	const bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
+
+
+	if (!victimDead && !veliusHit) return;
+
+	if (victimDead) {
+		m_scriptedBehavior->say("VeliusCendricDead", 5);
+		m_veliusLevel++;
+	}
+	else {
+		setStunned(sf::seconds(2.f));
+		m_victim->release();
+	}
+
+	delete m_ray;
+	m_ray = nullptr;
+	clearPuzzleBlocks();
+	clearBlocking();
+	setState(GameObjectState::Idle);
+	setBossState(Over);
+}
+
 void VeliusBoss::updateExtraction() {
-	bool victimDead = m_victim && m_victim->isDead();
-	bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
+	const bool victimDead = m_victim && m_victim->isDead();
+	const bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
 
 	if (!victimDead && !veliusHit) return;
 
@@ -609,9 +634,27 @@ void VeliusBoss::setupDivinePuzzle() {
 
 void VeliusBoss::setupElementalPuzzle() {
 	auto positions = {
-		sf::Vector2f(720.f, 350.f),
-		sf::Vector2f(600.f, 175.f),
-		sf::Vector2f(700.f, 175.f)
+		sf::Vector2f(575.f, 500.f),
+		sf::Vector2f(720.f, 500.f),
+		sf::Vector2f(575.f, 450.f),
+		sf::Vector2f(720.f, 250.f),
+		sf::Vector2f(720.f, 450.f),
+		sf::Vector2f(800.f, 450.f),
+		sf::Vector2f(850.f, 450.f),
+		sf::Vector2f(900.f, 450.f),
+		sf::Vector2f(900.f, 500.f),
+		sf::Vector2f(900.f, 600.f),
+		sf::Vector2f(1000.f, 450.f),
+		sf::Vector2f(1000.f, 350.f),
+		sf::Vector2f(875.f, 150.f),
+		sf::Vector2f(950.f, 300.f),
+		sf::Vector2f(800.f, 375.f),
+		sf::Vector2f(720.f, 200.f),
+		sf::Vector2f(500.f, 125.f),
+		sf::Vector2f(350.f, 300.f),
+		sf::Vector2f(425.f, 362.5f),
+		sf::Vector2f(575.f, 300.f),
+		sf::Vector2f(250.f, 350.f),
 	};
 	setupBlocks(positions);
 }
@@ -790,6 +833,49 @@ void VeliusBoss::loadBlockingParticles() {
 	addComponent(m_blockingBubble);
 
 	clearBlocking();
+}
+
+void VeliusBoss::loadElementalParticles() {
+	// line particles
+	ParticleComponentData data;
+	data.particleCount = 200;
+	data.emitRate = 400.f;
+	data.isAdditiveBlendMode = true;
+	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
+	data.particleTexture = &dynamic_cast<LevelScreen*>(getScreen())->getParticleBGRenderTexture();
+
+	// Generators
+	m_elementalSpawner = new particles::LineSpawner();
+	data.spawner = m_elementalSpawner;
+
+	auto sizeGen = new particles::SizeGenerator();
+	sizeGen->minStartSize = 10.f;
+	sizeGen->maxStartSize = 20.f;
+	sizeGen->minEndSize = 10.f;
+	sizeGen->maxEndSize = 10.f;
+	data.sizeGen = sizeGen;
+
+	auto colGen = new particles::ColorGenerator();
+	colGen->minStartCol = V_COLOR_ELEMENTAL;
+	colGen->maxStartCol = V_COLOR_ELEMENTAL;
+	colGen->minEndCol = V_COLOR_ELEMENTAL;
+	colGen->maxEndCol = V_COLOR_ELEMENTAL;
+
+	m_elementalVelGen = new particles::AngledVelocityGenerator();
+	m_elementalVelGen->minStartSpeed = 20.f;
+	m_elementalVelGen->maxStartSpeed = 50.f;
+	m_elementalVelGen->minAngle = -90.f;
+	m_elementalVelGen->maxAngle = 90.f;
+	data.velGen = m_elementalVelGen;
+
+	auto timeGen = new particles::TimeGenerator();
+	timeGen->minTime = 0.4f;
+	timeGen->maxTime = 0.6f;
+	data.timeGen = timeGen;
+
+	m_elementalPc = new ParticleComponent(data, this);
+	m_elementalPc->setVisible(false);
+	addComponent(m_elementalPc);
 }
 
 float VeliusBoss::getConfiguredDistanceToHPBar() const {

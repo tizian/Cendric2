@@ -1,9 +1,7 @@
 #include "Spells/ShackleSpell.h"
-#include "GlobalResource.h"
 #include "Level/LevelMainCharacter.h"
 #include "Level/Level.h"
 #include "GameObjectComponents/LightComponent.h"
-#include "GameObjectComponents/ParticleComponent.h"
 #include "World/CustomParticleUpdaters.h"
 #include "Screens/LevelScreen.h"
 #include "ObjectFactory.h"
@@ -40,6 +38,7 @@ void ShackleSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 
 void ShackleSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
+	setPosition(m_mainChar->getPosition() + sf::Vector2f(m_mainChar->getBoundingBox()->width * 0.5f, -40.f));
 	 
 	if (m_timeUntilShackleStart > sf::Time::Zero) {
 		updateTime(m_timeUntilShackleStart, frameTime);
