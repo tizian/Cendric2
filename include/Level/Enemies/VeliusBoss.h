@@ -59,8 +59,6 @@ private:
 	void updateBossState(const sf::Time& frameTime);
 	void setBossState(VeliusBossState state);
 	void startAttackPhase();
-	void startLastPhase();
-	void handleLastPhase(const sf::Time& frameTime);
 	void handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extracThreshold);
 	void handleExtractPhase(const sf::Time& frameTime, const sf::Color& color);
 	VeliusBossState m_bossState;
@@ -110,6 +108,9 @@ private:
 	particles::LineSpawner* m_elementalSpawner;
 	particles::AngledVelocityGenerator* m_elementalVelGen;
 	void loadElementalParticles();
+	void startLastPhase();
+	void handleLastPhase(const sf::Time& frameTime);
+	sf::Time m_hotDotTick;
 
 	// colors
 	static const sf::Color V_COLOR_ILLUSION;

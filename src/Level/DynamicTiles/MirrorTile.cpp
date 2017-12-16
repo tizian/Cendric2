@@ -32,9 +32,9 @@ void MirrorTile::update(const sf::Time& frameTime) {
 }
 
 bool MirrorTile::init(const LevelTileProperties& properties) {
-	setPositionOffset(sf::Vector2f(15.f, 15.f));
-	setSpriteOffset(sf::Vector2f(-15.f, -15.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, 20.f));
+	setPositionOffset(sf::Vector2f(10.f, 10.f));
+	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
+	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 30.f));
 
 	m_currentRotation = 0.f;
 	if (contains(properties, std::string("angle"))) {

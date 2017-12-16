@@ -72,6 +72,8 @@ Peter
 
 "Pirates, Rum and Treasure"
 
+"Broken Bridge"
+
 ---
 
 -- Susanne Aubert --
@@ -103,8 +105,6 @@ Peter
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 
@@ -283,6 +283,8 @@ Peter
 
 "Pirates, Rum and Treasure"
 
+"Broken Bridge"
+
 ---
 
 -- Susanne Aubert --
@@ -314,8 +316,6 @@ Peter
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 
@@ -490,6 +490,8 @@ Peter
 
 "Pirates, Rum and Treasure"
 
+"Broken Bridge"
+
 ---
 
 -- Susanne Aubert --
@@ -521,8 +523,6 @@ Peter
 "Young Heroes" (Rockfall Theme)
 
 "The Castle Beyond the Forest" (Cutscene)
-
-"Leaving Port" (Broken Bridge Theme)
 
 by Eric Matyas
 

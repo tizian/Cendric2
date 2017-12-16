@@ -66,11 +66,7 @@ void VeliusBoss::render(sf::RenderTarget& target) {
 
 void VeliusBoss::loadAttributes() {
 	m_attributes.setHealth(2500);
-	m_attributes.resistancePhysical = -2000;
-	m_attributes.resistanceIce = -1000;
-	m_attributes.resistanceLight = -1000;
-	m_attributes.resistanceFire = -1000;
-	m_attributes.resistanceShadow = -1000;
+	m_attributes.resistancePhysical = 200;
 	m_attributes.critical = 30;
 	m_attributes.calculateAttributes();
 }
@@ -100,6 +96,7 @@ void VeliusBoss::updateBossState(const sf::Time& frameTime) {
 		handleAttackPhase(frameTime, 750, 500);
 		break;
 	case ExtractElemental:
+		handleLastPhase(frameTime);
 		break;
 	default:
 		break;
@@ -186,18 +183,48 @@ void VeliusBoss::startLastPhase() {
 	setCurrentAnimation(getAnimation(m_state), true);
 
 	m_scriptedBehavior->say("VeliusCendricCall", 5);
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
+			mirrorTile->reset();
+		}
+	}
+
+	m_isCalling = false;
+	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
+	m_ray->initRay(sf::Vector2f(775.f, 575.f), sf::Vector2f(0.f, -1.f), V_COLOR_ELEMENTAL);
+	setFacingRight(false);
+	setState(GameObjectState::Casting3);
+	setCurrentAnimation(getAnimation(m_state), true);
+
+	m_elementalSpawner->point1 = sf::Vector2f(775.f, 575.f);
+	m_elementalPc->setVisible(true);
+
+	setupElementalPuzzle();
 }
 
 void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
+	m_elementalSpawner->point2 = m_mainChar->getCenter();
+	auto dir = m_elementalSpawner->point1 - m_elementalSpawner->point2;
+	dir = dir / norm(dir);
+
+	m_elementalVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
+	m_elementalVelGen->maxAngle = m_elementalVelGen->minAngle;
+
+	updateTime(m_hotDotTick, frameTime);
+
+	if (m_hotDotTick == sf::Time::Zero) {
+		m_hotDotTick = sf::seconds(1.f);
+		m_mainChar->addDamage(5, DamageType::Shadow, false, false);
+	}
+
 	const bool victimDead = m_mainChar->isDead();
 	const bool veliusHit = m_ray->intersectsBox(*getBoundingBox());
-
 
 	if (!victimDead && !veliusHit) return;
 
 	if (victimDead) {
 		m_scriptedBehavior->say("VeliusCendricDead", 5);
-		m_veliusLevel++;
 	}
 	else {
 		setStunned(sf::seconds(2.f));
@@ -206,6 +233,7 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 
 	delete m_ray;
 	m_ray = nullptr;
+	m_elementalPc->setVisible(false);
 	clearPuzzleBlocks();
 	clearBlocking();
 	setState(GameObjectState::Idle);
@@ -251,8 +279,15 @@ void VeliusBoss::updateExtraction() {
 	m_ray = nullptr;
 	clearPuzzleBlocks();
 	clearBlocking();
-	setState(GameObjectState::Idle);
+	
 	setBossState(nextState);
+
+	if (victimDead) {
+		setState(GameObjectState::Idle);
+	}
+	else {
+		setDead();
+	}
 }
 
 void VeliusBoss::setBossState(VeliusBossState state) {
@@ -302,7 +337,7 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 		dynamic_cast<WalkingBehavior*>(m_movingBehavior)->stopAll();
 		m_scriptedBehavior->say("VeliusEnough", 5);
 		setBlocking();
-		m_spellManager->setCurrentSpell(0);
+		m_spellManager->setCurrentSpell(m_bossState == AttackDivine ? 9 : 0);
 		m_spellManager->executeCurrentSpell(m_mainChar, true);
 		m_timeUntilShackleDone = sf::seconds(5.5f);
 		return;
@@ -522,6 +557,13 @@ void VeliusBoss::loadSpells() {
 
 	divine.count = 2;
 	m_spellManager->addSpell(divine);
+
+	// the last shackle spell for elemental is a bit different
+	// shackle spell
+	shackle.activeDuration = SHACKLE_DURATION;
+	shackle.duration = SHACKLE_DURATION;
+	shackle.strength = 2;
+	m_spellManager->addSpell(shackle);
 
 	// initial boss state
 	setBossState(AttackIllusion);
@@ -786,6 +828,7 @@ void VeliusBoss::loadComponents() {
 
 	loadBlockingParticles();
 	loadDeathParticles();
+	loadElementalParticles();
 }
 
 void VeliusBoss::loadBlockingParticles() {
@@ -860,6 +903,7 @@ void VeliusBoss::loadElementalParticles() {
 	colGen->maxStartCol = V_COLOR_ELEMENTAL;
 	colGen->minEndCol = V_COLOR_ELEMENTAL;
 	colGen->maxEndCol = V_COLOR_ELEMENTAL;
+	data.colorGen = colGen;
 
 	m_elementalVelGen = new particles::AngledVelocityGenerator();
 	m_elementalVelGen->minStartSpeed = 20.f;

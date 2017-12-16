@@ -50,7 +50,7 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 			// load sprites
 			for (int i = 0; i < 4; i++) {
 				ShackleSprite* sprite = new ShackleSprite();
-				sprite->load(i * M_PI * 0.5f, getCenter());
+				sprite->load(i * M_PI * 0.5f, m_mob->getCenter());
 				m_screen->addObject(sprite);
 				m_shackleSprites.push_back(sprite);
 			}
@@ -81,7 +81,12 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 
 		if (m_timeShackleIn == sf::Time::Zero) {
 			// spawn blocks and set main char
-			m_mainChar->setPosition(sf::Vector2f(1230.f, 560.f));
+			if (m_data.strength == 2) {
+				m_mainChar->setPosition(sf::Vector2f(660.f, 510.f));
+			}
+			else {
+				m_mainChar->setPosition(sf::Vector2f(1230.f, 560.f));
+			}
 			m_mainChar->setFacingRight(false);
 			LevelTileProperties properties;
 

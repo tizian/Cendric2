@@ -457,29 +457,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic block">
-  <object id="207" gid="338" x="575" y="550" width="50" height="50"/>
-  <object id="208" gid="338" x="720" y="550" width="50" height="50"/>
-  <object id="209" gid="338" x="575" y="500" width="50" height="50"/>
-  <object id="210" gid="338" x="720" y="300" width="50" height="50"/>
-  <object id="211" gid="338" x="720" y="500" width="50" height="50"/>
-  <object id="212" gid="338" x="800" y="500" width="50" height="50"/>
-  <object id="213" gid="338" x="850" y="500" width="50" height="50"/>
-  <object id="214" gid="338" x="900" y="500" width="50" height="50"/>
-  <object id="215" gid="338" x="900" y="550" width="50" height="50"/>
-  <object id="216" gid="338" x="900" y="650" width="50" height="50"/>
-  <object id="217" gid="338" x="1000" y="500" width="50" height="50"/>
-  <object id="218" gid="338" x="1000" y="400" width="50" height="50"/>
-  <object id="219" gid="338" x="875" y="200" width="50" height="50"/>
-  <object id="220" gid="338" x="950" y="350" width="50" height="50"/>
-  <object id="221" gid="338" x="800" y="425" width="50" height="50"/>
-  <object id="222" gid="338" x="720" y="250" width="50" height="50"/>
-  <object id="228" gid="338" x="500" y="175" width="50" height="50"/>
-  <object id="229" gid="338" x="350" y="350" width="50" height="50"/>
-  <object id="230" gid="338" x="425" y="412.5" width="50" height="50"/>
-  <object id="231" gid="338" x="575" y="350" width="50" height="50"/>
-  <object id="232" gid="338" x="250" y="400" width="50" height="50"/>
- </objectgroup>
  <objectgroup name="light" visible="0">
   <object id="159" x="575" y="200" width="200" height="150">
    <ellipse/>
