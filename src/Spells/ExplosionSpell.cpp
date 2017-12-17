@@ -4,6 +4,7 @@
 #include "GameObjectComponents/LightComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "World/CustomParticleUpdaters.h"
+#include "Level/Enemies/VeliusBoss.h"
 
 ExplosionSpell::ExplosionSpell() : Spell() {
 }
@@ -15,10 +16,21 @@ void ExplosionSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 	m_particleTime = sf::seconds(0.2f);
 	m_lightTime = bean.activeDuration;
 	m_iteration = 0;
+
+	if (m_data.strength == 0) {
+		DamageOverTimeData dot;
+		dot.damageType = m_data.damageType;
+		dot.duration = m_data.duration;
+		dot.damage = m_data.damagePerSecond;
+		m_mainChar->addDamageOverTime(dot);
+	}
+
+	m_data.damageType = DamageType::VOID;
 }
 
 void ExplosionSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
+
 	m_lc->setBrightness(m_data.activeDuration.asSeconds() / m_lightTime.asSeconds());
 
 	if (m_iteration == 3) return;
@@ -38,10 +50,12 @@ void ExplosionSpell::update(const sf::Time& frameTime) {
 			m_pc->setEmitRate(4000.f);
 			m_particleTime = sf::seconds(0.2f);
 			auto colGen = m_pc->getColorGenerator();
-			colGen->minStartCol = sf::Color(255, 200, 100, 255);
-			colGen->maxStartCol = sf::Color(255, 150, 100, 255);
-			colGen->minEndCol = sf::Color(200, 0, 0, 200);
-			colGen->maxEndCol = sf::Color(200, 100, 100, 200);
+			if (m_data.skinNr == 0) {
+				colGen->minStartCol = sf::Color(255, 200, 100, 255);
+				colGen->maxStartCol = sf::Color(255, 150, 100, 255);
+				colGen->minEndCol = sf::Color(200, 0, 0, 200);
+				colGen->maxEndCol = sf::Color(200, 100, 100, 200);
+			}
 			m_iteration = 2;
 			break;
 		}
@@ -73,6 +87,9 @@ void ExplosionSpell::loadComponents() {
 	auto posGen = new particles::DiskSpawner();
 	posGen->radius = 10.f;
 	data.spawner = posGen;
+	if (m_data.strength == 0) {
+		posGen->center = sf::Vector2f(675.f, 275.f);
+	}
 
 	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 300.f;
@@ -82,10 +99,35 @@ void ExplosionSpell::loadComponents() {
 	data.sizeGen = sizeGen;
 
 	auto colGen = new particles::ColorGenerator();
-	colGen->minStartCol = sf::Color(255, 100, 100, 255);
-	colGen->maxStartCol = sf::Color(255, 100, 100, 255);
-	colGen->minEndCol = sf::Color(255, 0, 0, 200);
-	colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+
+	switch (m_data.skinNr) {
+	case 0:
+	default:
+		colGen->minStartCol = sf::Color(255, 100, 100, 255);
+		colGen->maxStartCol = sf::Color(255, 100, 100, 255);
+		colGen->minEndCol = sf::Color(255, 0, 0, 200);
+		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
+		break;
+	case 1:
+		colGen->minStartCol = VeliusBoss::V_COLOR_TWILIGHT;
+		colGen->maxStartCol = VeliusBoss::V_COLOR_TWILIGHT;
+		colGen->minEndCol = VeliusBoss::V_COLOR_TWILIGHT;
+		colGen->maxEndCol = VeliusBoss::V_COLOR_TWILIGHT;
+		break;
+	case 2:
+		colGen->minStartCol = VeliusBoss::V_COLOR_NECROMANCY;
+		colGen->maxStartCol = VeliusBoss::V_COLOR_NECROMANCY;
+		colGen->minEndCol = VeliusBoss::V_COLOR_NECROMANCY;
+		colGen->maxEndCol = VeliusBoss::V_COLOR_NECROMANCY;
+		break;
+	case 3:
+		colGen->minStartCol = VeliusBoss::V_COLOR_DIVINE;
+		colGen->maxStartCol = VeliusBoss::V_COLOR_DIVINE;
+		colGen->minEndCol = VeliusBoss::V_COLOR_DIVINE;
+		colGen->maxEndCol = VeliusBoss::V_COLOR_DIVINE;
+		break;
+	}
+	
 	data.colorGen = colGen;
 
 	auto velGen = new particles::AngledVelocityGenerator();
@@ -104,7 +146,13 @@ void ExplosionSpell::loadComponents() {
 	m_pc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f));
 	m_pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
 	
-	m_pc->getParticleSystem()->addUpdater(new particles::CollidingUpdater(m_level));
-	m_pc->getParticleSystem()->addUpdater(new particles::KillingUpdater(m_mainChar));
+	if (m_data.strength > 0) {
+		m_pc->getParticleSystem()->addUpdater(new particles::CollidingUpdater(m_level));
+		m_pc->getParticleSystem()->addUpdater(new particles::KillingUpdater(m_mainChar));
+	}
+	else {
+		m_pc->setStatic(true);
+	}
+	
 	addComponent(m_pc);
 }

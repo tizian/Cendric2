@@ -267,6 +267,17 @@ void LevelMovableGameObject::clearSpells(bool clearAll) {
 			}
 		}
 	}
+
+	// also check the toAdd vector in the screen to avoid nullptrs.
+	for (auto& go : m_screen->getToAddObjects()) {
+		if (Spell* spell = dynamic_cast<Spell*>(go)) {
+			if (spell->getOwner() == this) {
+				spell->onOwnerDisposed();
+				if (clearAll)
+					spell->setDisposed();
+			}
+		}
+	}
 }
 
 void LevelMovableGameObject::registerSpellCreator(SpellCreator* creator) const {
@@ -362,7 +373,13 @@ void LevelMovableGameObject::flipGravity() {
 }
 
 void LevelMovableGameObject::setFacingRight(bool value) {
+	if (!m_movingBehavior) return;
 	m_movingBehavior->setFacingRight(value);
+}
+
+void LevelMovableGameObject::setCollisionTiltSuppressed() {
+	if (!m_movingBehavior) return;
+	m_movingBehavior->setCollisionTiltSuppressed();
 }
 
 GameObjectState LevelMovableGameObject::getState() const {

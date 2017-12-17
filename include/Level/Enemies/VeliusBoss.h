@@ -111,17 +111,7 @@ private:
 	void loadElementalParticles();
 	void startLastPhase();
 	void handleLastPhase(const sf::Time& frameTime);
-	sf::Time m_hotDotTick;
-
-	// colors
-	static const sf::Color V_COLOR_ILLUSION;
-	static const sf::Color V_COLOR_TWILIGHT;
-	static const sf::Color V_COLOR_NECROMANCY;
-	static const sf::Color V_COLOR_DIVINE;
-	static const sf::Color V_COLOR_ELEMENTAL;
-
-	// velius' level
-	int m_veliusLevel;
+	sf::Time m_dotTick;
 
 	// puzzles
 	void setupTwilightPuzzle();
@@ -131,4 +121,18 @@ private:
 	void setupBlocks(const std::vector<sf::Vector2f>& positions);
 	void clearPuzzleBlocks();
 	std::vector<GameObject*> m_puzzleBlocks;
+
+	// dead victims
+	bool m_isKorayDead = false;
+	bool m_isRobertDead = false;
+	bool m_isIninaDead = false;
+	void handleVeliusDead();
+
+public:
+	// colors
+	static const sf::Color V_COLOR_ILLUSION;
+	static const sf::Color V_COLOR_TWILIGHT;
+	static const sf::Color V_COLOR_NECROMANCY;
+	static const sf::Color V_COLOR_DIVINE;
+	static const sf::Color V_COLOR_ELEMENTAL;
 };

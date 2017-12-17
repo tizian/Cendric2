@@ -3,6 +3,11 @@
 velocity = 50
 
 loadRoutine = function(R, W)
+
+    if (W:isConditionFulfilled("boss", "BossVelius")) then
+        R:setDisposed()
+        return
+    end
 	
 	R:setTilePosition(20,12)
 	R:setReloadEnabled(false)

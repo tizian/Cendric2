@@ -53,6 +53,8 @@ public:
 	void flipGravity();
 	// forces a facing right value
 	void setFacingRight(bool value);
+	// suppresses collision tilt for the next frame
+	void setCollisionTiltSuppressed();
 	// clears spells owned by this mob
 	// argument true clears all spells
 	// argument false clears only the attached spells, as if the enemy died.

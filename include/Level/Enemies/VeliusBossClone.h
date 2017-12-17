@@ -28,10 +28,11 @@ public:
 
 private:
 	std::string getSpritePath() const override;
-	std::string getDeathSoundPath() const override;
 	void handleAttackInput();
 	void loadAttributes() override;
 
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
+
+	static const std::string SHATTER_SOUND;
 };

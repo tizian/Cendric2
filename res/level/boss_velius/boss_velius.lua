@@ -1,6 +1,6 @@
 onWin = function(W)
 	W:addConditionProgress("boss", "BossVelius")
-	W:setMap("res/map/veliusroom/veliusroom.tmx", 400, 400)
+	W:setMap("res/map/veliusroom/veliusroom.tmx", 645, 530)
 end
 	
 onLose = function(W)

@@ -11,6 +11,8 @@
 
 REGISTER_ENEMY(EnemyID::VeliusClone, VeliusBossClone)
 
+const std::string VeliusBossClone::SHATTER_SOUND = "res/sound/mob/yashaadd_death.ogg";
+
 VeliusBossClone::VeliusBossClone(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen) {
@@ -27,6 +29,7 @@ void VeliusBossClone::setDead() {
 void VeliusBossClone::onHit(Spell* spell) {
 	m_spellManager->setCurrentSpell(0);
 	m_spellManager->executeCurrentSpell(m_mainChar);
+	g_resourceManager->playSound(SHATTER_SOUND);
 
 	Enemy::onHit(spell);
 }
@@ -37,6 +40,8 @@ void VeliusBossClone::loadAttributes() {
 }
 
 void VeliusBossClone::loadSpells() {
+	g_resourceManager->loadSoundbuffer(SHATTER_SOUND, ResourceType::Level);
+
 	// the pretty brutal spell that gets cast when a clone is shattered
 	SpellData projectile = SpellData::getSpellData(SpellID::TargetingProjectile);
 	projectile.cooldown = sf::seconds(0);
@@ -47,7 +52,7 @@ void VeliusBossClone::loadSpells() {
 	projectile.speed = 400;
 	projectile.count = 3;
 	projectile.skinNr = 1;
-	projectile.strength = 4;
+	projectile.strength = 5;
 	projectile.isColliding = false;
 	projectile.isStunning = true;
 	projectile.duration = sf::seconds(2.f);
@@ -202,9 +207,5 @@ AttackingBehavior* VeliusBossClone::createAttackingBehavior(bool asAlly) {
 
 std::string VeliusBossClone::getSpritePath() const {
 	return "res/texture/bosses/spritesheet_boss_velius.png";
-}
-
-std::string VeliusBossClone::getDeathSoundPath() const {
-	return "res/sound/mob/yashaadd_death.ogg";
 }
 

@@ -30,6 +30,7 @@ public:
 
 	// gets the vector with the objects of type 'type'
 	std::vector<GameObject*>* getObjects(GameObjectType type);
+	std::vector<GameObject*>& getToAddObjects();
 
 	// getter for the tooltip text
 	const BitmapText* getTooltipText() const;

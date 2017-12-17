@@ -56,6 +56,8 @@ void YashaBoss::loadSpells() {
 	explosionSpell.activeDuration = sf::seconds(3.f);
 	explosionSpell.damagePerSecond = 0;
 	explosionSpell.damageType = DamageType::VOID;
+	explosionSpell.strength = 1;
+	explosionSpell.skinNr = 0;
 	explosionSpell.cooldown = sf::seconds(10.f);
 	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 	explosionSpell.spellOffset = sf::Vector2f(-25.f, -120.f);

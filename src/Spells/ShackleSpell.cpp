@@ -5,6 +5,7 @@
 #include "World/CustomParticleUpdaters.h"
 #include "Screens/LevelScreen.h"
 #include "ObjectFactory.h"
+#include "Level/MOBBehavior/MovingBehaviors/UserMovingBehavior.h"
 
 ShackleSpell::ShackleSpell() : Spell() {
 }
@@ -81,6 +82,8 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 
 		if (m_timeShackleIn == sf::Time::Zero) {
 			// spawn blocks and set main char
+			m_mainChar->setCollisionTiltSuppressed();
+			dynamic_cast<UserMovingBehavior*>(m_mainChar->getMovingBehavior())->stopAll();
 			if (m_data.strength == 2) {
 				m_mainChar->setPosition(sf::Vector2f(660.f, 510.f));
 			}

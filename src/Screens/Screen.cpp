@@ -40,13 +40,22 @@ void Screen::update(const sf::Time& frameTime) {
 	execUpdate(frameTime);
 	deleteDisposedObjects();
 	for (auto& obj : m_toAdd) {
-		m_objects[obj->getConfiguredType()].push_back(obj);
+		if (obj->isDisposed()) {
+			delete obj;
+		}
+		else {
+			m_objects[obj->getConfiguredType()].push_back(obj);
+		}
 	}
 	m_toAdd.clear();
 }
 
 std::vector<GameObject*>* Screen::getObjects(GameObjectType type) {
 	return &m_objects[type];
+}
+
+std::vector<GameObject*>& Screen::getToAddObjects() {
+	return m_toAdd;
 }
 
 void Screen::onEnter() {

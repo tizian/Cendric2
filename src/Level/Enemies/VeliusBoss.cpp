@@ -44,7 +44,6 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	Boss(level, screen) {
-	m_veliusLevel = 1;
 	m_bossState = AttackIllusion;
 	m_blockingBubble = nullptr;
 }
@@ -109,12 +108,12 @@ void VeliusBoss::startAttackPhase() {
 	m_isShackling = false;
 }
 
-void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int shackleThreshold, int extractThreshold) {
+void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int clonesThreshold, int shackleThreshold) {
 	if (m_isClones) return;
 
 	updateBlocking(frameTime);
-	updateClonesStart(frameTime, shackleThreshold);
-	updateShackle(frameTime, extractThreshold);
+	updateClonesStart(frameTime, clonesThreshold);
+	updateShackle(frameTime, shackleThreshold);
 }
 
 void VeliusBoss::handleExtractPhase(const sf::Time& frameTime, const sf::Color& color) {
@@ -202,11 +201,11 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 	m_elementalVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
 	m_elementalVelGen->maxAngle = m_elementalVelGen->minAngle;
 
-	updateTime(m_hotDotTick, frameTime);
+	updateTime(m_dotTick, frameTime);
 
-	if (m_hotDotTick == sf::Time::Zero) {
-		m_hotDotTick = sf::seconds(1.f);
-		m_mainChar->addDamage(5, DamageType::Shadow, false, false);
+	if (m_dotTick == sf::Time::Zero) {
+		m_dotTick = sf::seconds(1.f);
+		m_mainChar->addDamage(10, DamageType::Fire, false, false);
 	}
 
 	const bool victimDead = m_mainChar->isDead();
@@ -234,6 +233,19 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 	}
 	else {
 		setDead();
+		handleVeliusDead();
+	}
+}
+
+void VeliusBoss::handleVeliusDead() {
+	if (m_isKorayDead) {
+		m_screen->getCharacterCore()->setConditionFulfilled("npc_koray3", "dead");
+	}
+	if (m_isRobertDead) {
+		m_screen->getCharacterCore()->setConditionFulfilled("npc_rober4", "dead");
+	}
+	if (m_isIninaDead) {
+		m_screen->getCharacterCore()->setConditionFulfilled("npc_inina4", "dead");
 	}
 }
 
@@ -251,29 +263,42 @@ void VeliusBoss::updateExtraction() {
 
 	if (!victimDead && !veliusHit) return;
 
-	std::string veliusSpeech = "VeliusCendricDead";
-	VeliusBossState nextState = Over;
+	std::string veliusSpeech;
+	VeliusBossState nextState;
+	int explosionSpell;
 	switch (m_bossState)
 	{
 	case ExtractTwilight:
+	default:
 		veliusSpeech = "VeliusKorayDead";
 		nextState = AttackTwilight;
+		explosionSpell = 10;
+		if (victimDead) {
+			m_isKorayDead = true;
+		}
 		break;
 	case ExtractNecromancy:
 		veliusSpeech = "VeliusRobertDead";
 		nextState = AttackNecromancy;
+		explosionSpell = 11;
+		if (victimDead) {
+			m_isRobertDead = true;
+		}
 		break;
 	case ExtractDivine:
 		veliusSpeech = "VeliusIninaDead";
 		nextState = AttackDivine;
-		break;
-	default:
+		explosionSpell = 12;
+		if (victimDead) {
+			m_isIninaDead = true;
+		}
 		break;
 	}
 
 	if (victimDead) {
 		m_scriptedBehavior->say(veliusSpeech, 5);
-		m_veliusLevel++;
+		m_spellManager->setCurrentSpell(explosionSpell);
+		m_spellManager->executeCurrentSpell(m_mainChar, true);
 	}
 	else {
 		setStunned(sf::seconds(2.f));
@@ -387,18 +412,28 @@ void VeliusBoss::setupClones(int phase) {
 	m_isClones = true;
 
 	int skinNr = phase;
-	int noLocations = static_cast<int>(CLONE_LOCATIONS.size());
-
-	// velius' position:
-	sf::Vector2f veliusPos = CLONE_LOCATIONS[rand() % noLocations];
-	setPosition(veliusPos);
 	m_mainChar->resetTarget();
 
-	// the clones' location
-	for (auto& loc : CLONE_LOCATIONS) {
-		if (loc.x == veliusPos.x && loc.y == veliusPos.y) continue;
+	int clonesNumber = phase == 0 ? 3 : phase == 1 ? 5 : 7;
 
-		auto clone = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::VeliusClone, loc, skinNr);
+	int k = static_cast<int>(CLONE_LOCATIONS.size());
+
+	std::vector<int> indices;
+	for (int i = 0; i < k; ++i) {
+		indices.push_back(i);
+	}
+
+	for (int i = 0; i < clonesNumber; ++i) {
+		int r = rand() % (k - i);
+		sf::Vector2f location = CLONE_LOCATIONS[indices[r]];
+		indices.erase(indices.begin() + r);
+
+		if (i == 0) {
+			setPosition(location);
+			continue;
+		}
+
+		auto clone = dynamic_cast<LevelScreen*>(m_screen)->spawnEnemy(EnemyID::VeliusClone, location, skinNr);
 		clone->setFacingRight(rand() % 2 == 0);
 	}
 }
@@ -564,6 +599,35 @@ void VeliusBoss::loadSpells() {
 	shackle.strength = 2;
 	m_spellManager->addSpell(shackle);
 
+	// explosion and debuff
+	SpellData explosionSpell = SpellData::getSpellData(SpellID::WindGust);
+	explosionSpell.id = SpellID::Explosion;
+	explosionSpell.strength = 0;
+	explosionSpell.activeDuration = sf::seconds(3.f);
+	explosionSpell.duration = sf::seconds(999.f);
+	explosionSpell.cooldown = sf::seconds(0.f);
+	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	explosionSpell.fightingTime = sf::seconds(0.f);
+	explosionSpell.castingTime = sf::seconds(0.f);
+
+	// twilight explosion
+	explosionSpell.skinNr = 1;
+	explosionSpell.damagePerSecond = 4;
+	explosionSpell.damageType = DamageType::Ice;
+	m_spellManager->addSpell(explosionSpell);
+
+	// necromancy explosion
+	explosionSpell.skinNr = 2;
+	explosionSpell.damagePerSecond = 6;
+	explosionSpell.damageType = DamageType::Shadow;
+	m_spellManager->addSpell(explosionSpell);
+
+	// divine explosion
+	explosionSpell.skinNr = 3;
+	explosionSpell.damagePerSecond = 8;
+	explosionSpell.damageType = DamageType::Light;
+	m_spellManager->addSpell(explosionSpell);
+
 	// initial boss state
 	setBossState(AttackIllusion);
 }
@@ -620,6 +684,8 @@ void VeliusBoss::onHit(Spell* spell) {
 void VeliusBoss::setupTwilightPuzzle() {
 	auto positions = {
 		sf::Vector2f(720.f, 350.f),
+		sf::Vector2f(720.f, 400.f),
+		sf::Vector2f(720.f, 450.f),
 		sf::Vector2f(600.f, 200.f),
 		sf::Vector2f(700.f, 200.f)
 	};
@@ -649,14 +715,18 @@ void VeliusBoss::setupNecromancyPuzzle() {
 
 void VeliusBoss::setupDivinePuzzle() {
 	auto positions = {
-		sf::Vector2f(720.f, 287.5f),
+		sf::Vector2f(200.f, 300.f),
+		sf::Vector2f(720.f, 280.f),
+		sf::Vector2f(720.f, 330.f),
 		sf::Vector2f(700.f, 200.f),
 		sf::Vector2f(600.f, 200.f),
 		sf::Vector2f(550.f, 550.f),
 		sf::Vector2f(800.f, 450.f),
 		sf::Vector2f(850.f, 450.f),
 		sf::Vector2f(900.f, 450.f),
+		sf::Vector2f(1000.f, 350.f),
 		sf::Vector2f(1000.f, 400.f),
+		sf::Vector2f(1000.f, 450.f),
 		sf::Vector2f(850.f, 350.f),
 		sf::Vector2f(1050.f, 250.f),
 		sf::Vector2f(550.f, 200.f),
@@ -676,10 +746,13 @@ void VeliusBoss::setupDivinePuzzle() {
 void VeliusBoss::setupElementalPuzzle() {
 	auto positions = {
 		sf::Vector2f(575.f, 500.f),
-		sf::Vector2f(720.f, 500.f),
 		sf::Vector2f(575.f, 450.f),
-		sf::Vector2f(720.f, 270.f),
-		sf::Vector2f(720.f, 470.f),
+		sf::Vector2f(700.f, 130.f),
+		sf::Vector2f(720.f, 250.f),
+		sf::Vector2f(720.f, 450.f),
+		sf::Vector2f(720.f, 450.f),
+		sf::Vector2f(720.f, 500.f),
+		sf::Vector2f(720.f, 550.f),
 		sf::Vector2f(800.f, 450.f),
 		sf::Vector2f(850.f, 450.f),
 		sf::Vector2f(900.f, 450.f),
@@ -696,6 +769,7 @@ void VeliusBoss::setupElementalPuzzle() {
 		sf::Vector2f(425.f, 362.5f),
 		sf::Vector2f(575.f, 300.f),
 		sf::Vector2f(250.f, 350.f),
+		sf::Vector2f(300.f, 350.f)
 	};
 	setupBlocks(positions);
 }

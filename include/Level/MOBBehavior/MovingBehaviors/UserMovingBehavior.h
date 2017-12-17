@@ -21,6 +21,7 @@ public:
 	void setJumpLock();
 
 	void flipGravity() override;
+	void stopAll();
 
 private:
 	// makes it easier to jump

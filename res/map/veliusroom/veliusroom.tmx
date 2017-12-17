@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="195">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="198">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
@@ -80,8 +80,8 @@
  <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="26" height="18">
   <data encoding="csv">
@@ -321,6 +321,26 @@
     <property name="dialoguetexture" value="res/npc/npc_loganthird/npc_loganthird.png"/>
     <property name="id" value="npc_loganthird2"/>
     <property name="spritesheetpath" value="res/npc/npc_loganthird/spritesheet_npc_loganthird.png"/>
+   </properties>
+  </object>
+  <object id="195" gid="580" x="625" y="600" width="50" height="50">
+   <properties>
+    <property name="dialoguetexture" value="res/npc/npc_koray/koray.png"/>
+    <property name="id" value="npc_koray3"/>
+    <property name="spritesheetpath" value="res/npc/npc_koray/spritesheet_npc_koray.png"/>
+   </properties>
+  </object>
+  <object id="196" gid="539" x="575" y="550" width="50" height="50">
+   <properties>
+    <property name="dialoguetexture" value="res/npc/npc_inina/inina.png"/>
+    <property name="id" value="npc_inina4"/>
+    <property name="spritesheetpath" value="res/npc/npc_inina/spritesheet_npc_inina.png"/>
+   </properties>
+  </object>
+  <object id="197" gid="531" x="675" y="550" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_robert3"/>
+    <property name="spritesheetpath" value="res/npc/npc_robert/spritesheet_npc_robert.png"/>
    </properties>
   </object>
  </objectgroup>

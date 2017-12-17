@@ -98,6 +98,10 @@ void MovingBehavior::setFacingRight(bool value) {
 	m_nextIsFacingRight = value;
 }
 
+void  MovingBehavior::setCollisionTiltSuppressed() {
+	m_isCollisionTiltSuppressed = true;
+}
+
 void MovingBehavior::setReady() {
 	m_isBlockingSpell = false;
 	m_fightAnimationTime = sf::Time::Zero;

@@ -174,6 +174,11 @@ void UserMovingBehavior::flipGravity() {
 	}
 }
 
+void UserMovingBehavior::stopAll() {
+	m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
+	m_mob->setAcceleration(sf::Vector2f(0.f, getGravity()));
+}
+
 void UserMovingBehavior::setJumpLock() {
 	m_isJumpLocked = true;
 }

@@ -55,6 +55,7 @@ public:
 	sf::Time executeDefaultFightAnimation(bool isBlocking, int times = 1);
 	void setDefaultFightAnimation(const sf::Time& animationTime, GameObjectState animation);
 	virtual void setFacingRight(bool value);
+	void setCollisionTiltSuppressed();
 
 	float getGravity() const;
 	bool isGrounded() const;

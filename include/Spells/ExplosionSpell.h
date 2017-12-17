@@ -7,7 +7,15 @@
 class ParticleComponent;
 class LightComponent;
 
-// this spell is used by the boss: Yasha
+// this spell is used by the boss: Yasha and Velius
+// Yasha uses it with strength 1 while Velius has strength 0
+// Strength > 0 will kill the main char on collision
+
+// skins:
+// 0: Yasha's explosion
+// 1: Twilight explosion (velius)
+// 2: Necromancy explosion (velius)
+// 3: Divine explosion (velius)
 class ExplosionSpell final : public Spell {
 public:
 	ExplosionSpell();
