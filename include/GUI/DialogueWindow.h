@@ -66,6 +66,7 @@ private:
 
 	void calculateEntryPositions();
 	void updateScrolling(const sf::Time& frameTime);
+	sf::Texture* getCendricTexture();
 
 private:
 	std::vector<DialogueOption> m_options;

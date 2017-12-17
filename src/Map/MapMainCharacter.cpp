@@ -2,7 +2,8 @@
 #include "Map/DynamicTiles/DoorMapTile.h"
 #include "Screens/MapScreen.h"
 
-MapMainCharacter::MapMainCharacter(Map* map) : MapMovableGameObject(map) {
+MapMainCharacter::MapMainCharacter(Map* map, Screen* screen) : MapMovableGameObject(map) {
+	m_screen = screen;
 	load();
 
 	m_inputMap.insert({ Key::Left, sf::Vector2f(-1.f, 0.f) });
@@ -243,5 +244,8 @@ GameObjectType MapMainCharacter::getConfiguredType() const {
 }
 
 std::string MapMainCharacter::getSpritePath() const {
-	return "res/texture/cendric/spritesheet_cendric_map.png";
+	if (!m_screen->getCharacterCore()->isConditionFulfilled("boss", "BossVelius")) {
+		return "res/texture/cendric/spritesheet_cendric_map.png";
+	}
+	return "res/texture/cendric/spritesheet_cendric_map_end.png";
 }

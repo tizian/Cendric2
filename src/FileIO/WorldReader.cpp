@@ -545,6 +545,10 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
+				else if (name.compare("credits") == 0) {
+					TriggerContent content(TriggerContentType::Credits);
+					trigger.content.push_back(content);
+				}
 				else if (name.compare("persistent") == 0) {
 					trigger.isPersistent = true;
 				}

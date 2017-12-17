@@ -1,8 +1,8 @@
--- Routine for NPC "King Logan III" in Velius' Dungeon, when he's dead..
+-- Routine for NPC "King Logan III" in Velius' Dungeon, when he's "dead"..
 
 loadRoutine = function(R, W)
 
-    if (not W:isConditionFulfilled("npc_loganthird2","dead")) then
+    if (not W:isConditionFulfilled("npc_loganthird2","dead") or W:isConditionFulfilled("boss", "BossVelius")) then
         R:setDisposed()
         return
     end

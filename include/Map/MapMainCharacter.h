@@ -12,7 +12,7 @@ class MapScreen;
 // Cendric on the map
 class MapMainCharacter final : public MapMovableGameObject, public MainCharacter {
 public:
-	MapMainCharacter(Map* level);
+	MapMainCharacter(Map* level, Screen* screen);
 	~MapMainCharacter();
 
 	void load();

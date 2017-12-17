@@ -28,6 +28,7 @@ enum class TriggerContentType {
 	SetForcedMap,
 	AchievementUnlocked,
 	Music,
+	Credits,
 	MAX,
 };
 

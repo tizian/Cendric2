@@ -47,6 +47,7 @@ const std::string GlobalResource::TEX_GEMS = "res/texture/misc/spritesheet_gems.
 
 const std::string GlobalResource::TEX_MAPMARKERS = "res/texture/misc/spritesheet_mapmarkers.png";
 const std::string GlobalResource::TEX_DIALOGUE = "res/texture/cendric/cendric.png";
+const std::string GlobalResource::TEX_DIALOGUE_END = "res/texture/cendric/cendric_end.png";
 const std::string GlobalResource::TEX_COOKING = "res/texture/misc/sprite_cooking.png";
 const std::string GlobalResource::SOUND_TELEPORT = "res/sound/tile/teleport.ogg";
 

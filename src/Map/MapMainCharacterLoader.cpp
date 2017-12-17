@@ -4,7 +4,7 @@
 #include "World/Item.h"
 
 MapMainCharacter* MapMainCharacterLoader::loadMainCharacter(Screen* screen, Map* map) {
-	MapMainCharacter* mainChar = new MapMainCharacter(map);
+	MapMainCharacter* mainChar = new MapMainCharacter(map, screen);
 	screen->addObject(mainChar);
 	mainChar->load();
 	mainChar->setCharacterCore(screen->getCharacterCore());

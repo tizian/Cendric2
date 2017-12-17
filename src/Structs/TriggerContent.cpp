@@ -2,6 +2,7 @@
 #include "Screens/WorldScreen.h"
 #include "Screens/LoadingScreen.h"
 #include "Screens/CutsceneScreen.h"
+#include "Screens/CreditsScreen.h"
 
 void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
 	if (!content.isValid() || screen == nullptr) return;
@@ -91,6 +92,10 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		screen->notifyModifierLearned(type, -1);
 		break;
 	}
+	case TriggerContentType::Credits:
+		screen->exitWorld();
+		screen->setNextScreen(new CreditsScreen(screen->getCharacterCore()));
+		break;
 	default:
 		break;
 	}

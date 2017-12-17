@@ -28,7 +28,7 @@ const float DialogueWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
 DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
-	m_speakerSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE)));
+	m_speakerSprite.setTextureRect(sf::IntRect(0, 0, 250, 250));
 
 	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
@@ -108,7 +108,7 @@ void DialogueWindow::setNPCTalking(const std::string& text) {
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
+	m_speakerSprite.setTexture(*getCendricTexture());
 	m_speakerText->setString(CENDRIC_NAME);
 
 	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
@@ -131,7 +131,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<ChoiceTransla
 	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
-	m_speakerSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE));
+	m_speakerSprite.setTexture(*getCendricTexture());
 	m_speakerText->setString(CENDRIC_NAME);
 
 	for (size_t i = 0; i < choices.size(); ++i) {
@@ -364,6 +364,14 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 	}
 
 	renderTarget.draw(m_speakerSprite);
+}
+
+
+sf::Texture* DialogueWindow::getCendricTexture() {
+	if (!m_screen->getCharacterCore()->isConditionFulfilled("boss", "BossVelius")) {
+		return g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE);
+	}
+	return g_resourceManager->getTexture(GlobalResource::TEX_DIALOGUE_END);
 }
 
 // Dialogue Option

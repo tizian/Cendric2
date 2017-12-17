@@ -1,0 +1,3 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Logan_Over', 'dl_npc_loganthird4', 'Wh... What is this... The voice in my head... is gone?', 'W.. Was ist das... Die Stimme in meinem Kopf... ist weg?', 'W... Was isch das... D''Stimm im mim Chopf... isch weg?');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Over', 'dl_npc_loganthird4', 'It''s over.', 'Es ist vorbei.', 'Es isch verbii.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Logan_Over2', 'dl_npc_loganthird4', 'I... can''t believe it.', 'Ich... kann es einfach nicht glauben.', 'Ich... chas eifach nid glaube.');

@@ -1,0 +1,2 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Robert_YouDidIt', 'dl_npc_robert4', '(Robert is still shivering) You... you did it!', '(Robert zittert immer noch) Du... du hast es geschafft!', '(De Robert zitteret immer no) Du... du hesches gschafft!');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Robert_YouDidIt2', 'dl_npc_robert4', 'Maybe I underestimated you. Thank you...', 'Vielleicht habe ich dich unterschätzt. Danke...', 'Vilicht hani di unterschätzt. Danke...');

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="198">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="199">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
@@ -127,6 +127,31 @@
 0,0,0,0,0,0,0,0,0,0,0,0,364,364,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <layer name="BG v" width="26" height="18">
+  <properties>
+   <property name="not conditions" value="boss,BossVelius"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,380,380,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
  <layer name="BG 3" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -146,7 +171,7 @@
 0,0,0,477,108,0,0,306,307,0,0,0,0,0,0,0,0,466,0,0,0,0,478,0,0,0,
 0,0,0,0,0,0,0,0,0,0,236,0,0,0,0,236,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,245,0,0,245,0,259,209,210,209,210,259,0,245,0,0,245,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,379,381,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="BG 4" width="26" height="18">
@@ -234,7 +259,32 @@
 93,93,93,93,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,93,93,93,
 93,93,93,93,93,93,93,93,93,93,93,93,0,0,93,93,93,93,93,93,93,93,93,93,93,93,
 93,93,93,93,93,93,93,93,93,93,93,93,0,0,93,93,93,93,93,93,93,93,93,93,93,93,
-93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93
+93,93,93,93,93,93,93,93,93,93,93,93,0,0,93,93,93,93,93,93,93,93,93,93,93,93
+</data>
+ </layer>
+ <layer name="collidable v" width="26" height="18">
+  <properties>
+   <property name="not conditions" value="boss,BossVelius"/>
+  </properties>
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,93,93,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <objectgroup name="collidable">
@@ -295,7 +345,7 @@
   </object>
   <object id="182" gid="590" x="625" y="500" width="50" height="50">
    <properties>
-    <property name="id" value="npc_loganthird3"/>
+    <property name="id" value="npc_loganthird4"/>
    </properties>
   </object>
   <object id="167" gid="531" x="1000" y="300" width="50" height="50">
@@ -325,21 +375,22 @@
   </object>
   <object id="195" gid="580" x="625" y="600" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="res/npc/npc_koray/koray.png"/>
+    <property name="dialoguetexture" value="res/npc/npc_koray/npc_koray.png"/>
     <property name="id" value="npc_koray3"/>
     <property name="spritesheetpath" value="res/npc/npc_koray/spritesheet_npc_koray.png"/>
    </properties>
   </object>
   <object id="196" gid="539" x="575" y="550" width="50" height="50">
    <properties>
-    <property name="dialoguetexture" value="res/npc/npc_inina/inina.png"/>
+    <property name="dialoguetexture" value="res/npc/npc_inina/npc_inina.png"/>
     <property name="id" value="npc_inina4"/>
     <property name="spritesheetpath" value="res/npc/npc_inina/spritesheet_npc_inina.png"/>
    </properties>
   </object>
   <object id="197" gid="531" x="675" y="550" width="50" height="50">
    <properties>
-    <property name="id" value="npc_robert3"/>
+    <property name="dialoguetexture" value="res/npc/npc_robert/npc_robert.png"/>
+    <property name="id" value="npc_robert4"/>
     <property name="spritesheetpath" value="res/npc/npc_robert/spritesheet_npc_robert.png"/>
    </properties>
   </object>
@@ -348,6 +399,11 @@
   <object id="171" x="600" y="700" width="100" height="50">
    <properties>
     <property name="cutscene" value="velius"/>
+   </properties>
+  </object>
+  <object id="198" x="600" y="862.5" width="100" height="37.5">
+   <properties>
+    <property name="credits" value=""/>
    </properties>
   </object>
  </objectgroup>

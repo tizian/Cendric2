@@ -391,6 +391,7 @@ void ResourceManager::deleteLevelResources() {
 
 void ResourceManager::loadMapResources() {
 	loadTexture(GlobalResource::TEX_DIALOGUE, ResourceType::Map);
+	loadTexture(GlobalResource::TEX_DIALOGUE_END, ResourceType::Map);
 	loadTexture(GlobalResource::TEX_COOKING, ResourceType::Map);
 }
 

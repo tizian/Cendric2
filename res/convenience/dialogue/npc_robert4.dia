@@ -1,0 +1,59 @@
+# dia file for dialogue for npc: npc_robert4
+
+npc.id:npc_robert4
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_robert4", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_robert4", "talked")
+	# translation: 
+	translation.tag:DL_Robert_YouDidIt
+	translation.en:(Robert is still shivering) You... you did it!
+	translation.de:(Robert zittert immer noch) Du... du hast es geschafft!
+	translation.ch:(De Robert zitteret immer no) Du... du hesches gschafft!
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Robert_YouDidIt2
+	translation.en:Maybe I underestimated you. Thank you...
+	translation.de:Vielleicht habe ich dich unterschätzt. Danke...
+	translation.ch:Vilicht hani di unterschätzt. Danke...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

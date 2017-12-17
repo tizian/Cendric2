@@ -56,6 +56,7 @@ public:
 	// map resources
 	static const std::string TEX_MAPMARKERS;
 	static const std::string TEX_DIALOGUE;
+	static const std::string TEX_DIALOGUE_END;
 	static const std::string TEX_COOKING;
 	static const std::string SOUND_TELEPORT;
 
