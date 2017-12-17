@@ -102,6 +102,7 @@ private:
 	void startExtraction(const sf::Color& color);
 	void updateExtraction();
 	VeliusVictim* m_victim = nullptr;
+	void resetMirrorTiles();
 
 	// last phase
 	ParticleComponent* m_elementalPc;

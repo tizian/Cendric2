@@ -130,6 +130,8 @@ void VeliusBoss::handleExtractPhase(const sf::Time& frameTime, const sf::Color& 
 }
 
 void VeliusBoss::callToDie(const sf::Color& color) {
+	resetMirrorTiles();
+
 	m_level->setBackgroundLayerColor(color);
 	m_isCalling = true;
 	m_timeUntilCallingComplete = CALLING_TIME;
@@ -160,12 +162,6 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 }
 
 void VeliusBoss::startExtraction(const sf::Color& color) {
-	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
-		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
-			mirrorTile->reset();
-		}
-	}
-
 	m_isCalling = false;
 	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
 	m_ray->initRay(sf::Vector2f(675.f, 599.f), sf::Vector2f(1.f, -0.25f), color);
@@ -175,6 +171,7 @@ void VeliusBoss::startExtraction(const sf::Color& color) {
 }
 
 void VeliusBoss::startLastPhase() {
+	resetMirrorTiles();
 	m_level->setBackgroundLayerColor(V_COLOR_ELEMENTAL);
 	setPosition(sf::Vector2f(800.f, 535.f));
 	setReady();
@@ -183,12 +180,6 @@ void VeliusBoss::startLastPhase() {
 	setCurrentAnimation(getAnimation(m_state), true);
 
 	m_scriptedBehavior->say("VeliusCendricCall", 5);
-
-	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
-		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
-			mirrorTile->reset();
-		}
-	}
 
 	m_isCalling = false;
 	m_ray = new MirrorRay(dynamic_cast<LevelScreen*>(m_screen));
@@ -236,8 +227,22 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 	m_elementalPc->setVisible(false);
 	clearPuzzleBlocks();
 	clearBlocking();
-	setState(GameObjectState::Idle);
 	setBossState(Over);
+
+	if (victimDead) {
+		setState(GameObjectState::Idle);
+	}
+	else {
+		setDead();
+	}
+}
+
+void VeliusBoss::resetMirrorTiles() {
+	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
+			mirrorTile->reset();
+		}
+	}
 }
 
 void VeliusBoss::updateExtraction() {
@@ -279,15 +284,9 @@ void VeliusBoss::updateExtraction() {
 	m_ray = nullptr;
 	clearPuzzleBlocks();
 	clearBlocking();
-	
-	setBossState(nextState);
 
-	if (victimDead) {
-		setState(GameObjectState::Idle);
-	}
-	else {
-		setDead();
-	}
+	setBossState(nextState);
+	setState(GameObjectState::Idle);
 }
 
 void VeliusBoss::setBossState(VeliusBossState state) {
@@ -679,8 +678,8 @@ void VeliusBoss::setupElementalPuzzle() {
 		sf::Vector2f(575.f, 500.f),
 		sf::Vector2f(720.f, 500.f),
 		sf::Vector2f(575.f, 450.f),
-		sf::Vector2f(720.f, 250.f),
-		sf::Vector2f(720.f, 450.f),
+		sf::Vector2f(720.f, 270.f),
+		sf::Vector2f(720.f, 470.f),
 		sf::Vector2f(800.f, 450.f),
 		sf::Vector2f(850.f, 450.f),
 		sf::Vector2f(900.f, 450.f),
