@@ -4,7 +4,7 @@
   <property name="backgroundlayers" value="5.0,res/level/ppuzzle02/layer_5.png,3.0,res/level/ppuzzle02/layer_3.png"/>
   <property name="dimming" value="0.5"/>
   <property name="lock_magic" value=""/>
-  <property name="musicpath" value="res/music/lava.ogg"/>
+  <property name="musicpath" value="res/music/lighthouse.ogg"/>
   <property name="tilesetpath" value="res/level/ppuzzle02/tileset_level_ppuzzle02.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_ppuzzle02" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="1156" columns="34">

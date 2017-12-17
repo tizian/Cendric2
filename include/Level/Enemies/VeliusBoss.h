@@ -114,6 +114,7 @@ private:
 	sf::Time m_dotTick;
 
 	// puzzles
+	void loadPuzzleLevel();
 	void setupTwilightPuzzle();
 	void setupNecromancyPuzzle();
 	void setupDivinePuzzle();

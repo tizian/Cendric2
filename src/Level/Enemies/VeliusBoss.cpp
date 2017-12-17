@@ -13,6 +13,7 @@
 #include "ObjectFactory.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
+#include "FileIO/LevelReader.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
 
@@ -46,6 +47,8 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	Boss(level, screen) {
 	m_bossState = AttackIllusion;
 	m_blockingBubble = nullptr;
+
+	loadPuzzleLevel();
 }
 
 VeliusBoss::~VeliusBoss() {
@@ -994,6 +997,20 @@ void VeliusBoss::loadElementalParticles() {
 	m_elementalPc = new ParticleComponent(data, this);
 	m_elementalPc->setVisible(false);
 	addComponent(m_elementalPc);
+}
+
+void VeliusBoss::loadPuzzleLevel() {
+	LevelData data;
+	LevelReader reader;
+	if (!reader.readLevel("res/level/boss_velius/puzzle.tmx", data, m_screen->getCharacterCore())) {
+		return;
+	}
+
+	if (data.levers.size() != 4) {
+		return;
+	}
+
+
 }
 
 float VeliusBoss::getConfiguredDistanceToHPBar() const {
