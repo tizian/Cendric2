@@ -716,6 +716,7 @@ void VeliusBoss::setupNecromancyPuzzle() {
 void VeliusBoss::setupDivinePuzzle() {
 	auto positions = {
 		sf::Vector2f(200.f, 300.f),
+		sf::Vector2f(700.f, 130.f),
 		sf::Vector2f(720.f, 280.f),
 		sf::Vector2f(720.f, 330.f),
 		sf::Vector2f(700.f, 200.f),
