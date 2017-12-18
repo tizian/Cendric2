@@ -141,7 +141,7 @@ npc.id:npc_robert2
 	trigger:DL:addConditionProgress("npc_robert2", "cemetery")
 	# translation: 
 	translation.tag:DL_Robert_WhatDoing
-	translation.en:Hmm, nothing. But I strongly advise you not to go down into the crypt. It's spooky there. 
+	translation.en:Hmm, nothing. But I strongly advise you not to go down into the crypt. It's scary there. 
 	translation.de:Hmm, nichts. Aber ich würde dir davon abraten, in die Krypta hinunter zu gehen. Es spukt dort.
 	translation.ch:Hmm, nüt. Aber ich wür der devo abrote, id Krypta z'go. Es isch gruslig dete.
 	[
@@ -157,8 +157,8 @@ npc.id:npc_robert2
 	# translation: 
 	translation.tag:DL_Robert_WhoAreYou
 	translation.en:I'm Bob and I possess magical powers! Impressive, ain't it?
-	translation.de:Ich bin Bob und ich habe magische Kräfte! Beeindruckend, nicht.
-	translation.ch:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh.
+	translation.de:Ich bin Bob und ich habe magische Kräfte! Beeindruckend, nicht?
+	translation.ch:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh?
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -279,7 +279,7 @@ npc.id:npc_robert2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Robert_TeleportQuest2
-	translation.en:But if you manage to get my stone back... Well, I have an inactive teleport stone here.
+	translation.en:But if you manage retrieve my stone... Well, I have an inactive teleport stone here.
 	translation.de:Aber wenn es dir gelingt, meinen Stein zurückzuholen... Ich habe einen inaktiven Teleporstein hier.
 	translation.ch:Aber wens schaffsch, min Stei zrugg z'hole... Ich han en inaktive Stei do.
 	[
@@ -308,7 +308,7 @@ npc.id:npc_robert2
 	trigger:DL:addConditionProgress("npc_robert2", "afraid")
 	# translation: 
 	translation.tag:DL_Robert_Afraid
-	translation.en:I'm not afraid. Only cautious.
+	translation.en:I'm not afraid. Merely cautious.
 	translation.de:Ich habe keine Angst, bin nur vorsichtig.
 	translation.ch:Ich ha kei Schiss, bi nur vorsichtig.
 	[

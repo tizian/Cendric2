@@ -17,6 +17,7 @@ public:
 	MovingBehavior* createMovingBehavior(bool asAlly) override;
 	AttackingBehavior* createAttackingBehavior(bool asAlly) override;
 
+	void onHit(Spell* spell) override {};
 	void update(const sf::Time& frameTime) override;
 	void setDead() override;
 	void callToDie();

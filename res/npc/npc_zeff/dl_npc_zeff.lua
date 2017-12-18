@@ -71,13 +71,13 @@ loadDialogue = function(DL)
 		DL:createNPCNode(2, 3, "DL_Zeff_IAmWhat") -- (Growls quietly) I see, my outer appearance is striking. 
 		DL:addNode()
 		
-		DL:createNPCNode(3, 4, "DL_Zeff_IAmSuprised") -- I'm suprised you have the courage to talk to me. Most people I meet flee in terror when they see my face.
+		DL:createNPCNode(3, 4, "DL_Zeff_IAmSurprised") -- I'm surprised you have the courage to talk to me. Most people I meet flee in terror when they see my face.
 		DL:addConditionProgress("npc_zeff", "who_are_you")
 		DL:addNode()
 		
 		DL:createChoiceNode(4)
 		DL:addChoice(5, "DL_Choice_YouLookNice") -- I don't think you look terrifying.
-		DL:addChoice(6, "DL_Choice_YouLookTerrible") -- That's not suprising. You truly look scary.
+		DL:addChoice(6, "DL_Choice_YouLookTerrible") -- That's not surprising. You truly look scary.
 		DL:addChoice(7, "DL_Choice_IAmNotAfraid") -- I'm not afraid of you.
 		DL:addNode()
 		

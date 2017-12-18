@@ -85,10 +85,10 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 			m_mainChar->setCollisionTiltSuppressed();
 			dynamic_cast<UserMovingBehavior*>(m_mainChar->getMovingBehavior())->stopAll();
 			if (m_data.strength == 2) {
-				m_mainChar->setPosition(sf::Vector2f(660.f, 510.f));
+				m_mainChar->setPosition(sf::Vector2f(660.f, 509.f));
 			}
 			else {
-				m_mainChar->setPosition(sf::Vector2f(1230.f, 560.f));
+				m_mainChar->setPosition(sf::Vector2f(1230.f, 559.f));
 			}
 			m_mainChar->setFacingRight(false);
 			LevelTileProperties properties;

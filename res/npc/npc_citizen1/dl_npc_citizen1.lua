@@ -28,7 +28,7 @@ loadDialogue = function(DL)
 	DL:addNode()
 
 
-	DL:createNPCNode(6, -2, "DL_Citizen_WhereBlacksmith") -- Our best blacksmith is Harek. You can find him in the artisans district, in the southwest part of Gandria.
+	DL:createNPCNode(6, -2, "DL_Citizen_WhereBlacksmith") -- Our best blacksmith is Harek. You can find him in the artisans district, in the south-west part of Gandria.
 	DL:gotoNode(3)
 	DL:addNode()
 

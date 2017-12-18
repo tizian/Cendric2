@@ -28,6 +28,14 @@ echo 'The following texts contain tönt:'
 echo 
 ./SQLiteShell.exe game_data.db '.read db_tests/DT_german_klingt.sql'
 echo 
+echo '#########################'
+echo '#       DB TEST 4       #'
+echo '#     Common Typos      #'
+echo '#########################'
+echo
+echo 'The following texts contain compass direction lowercase, suprise or milita:'
+echo 
+./SQLiteShell.exe game_data.db '.read db_tests/DT_north_suprised_milita.sql'
 echo 
 echo 'Press any key to exit'
 read
