@@ -17,7 +17,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_rhendal", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Rhendal_Hello") -- Hello, young man. What brings you into my humble home?
+		DL:createNPCNode(1, 2, "DL_Rhendal_Hello") -- Hello, young man. What brings you to my humble home?
 		DL:addConditionProgress("npc_rhendal", "talked")
 		DL:addNode()
 
@@ -54,7 +54,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createCendricNode(6, 3, "DL_Cendric_Problem") -- I've awoken in some forest and I can't remember anything. I have no clue who I am and how I got there.
+		DL:createCendricNode(6, 3, "DL_Cendric_Problem") -- I woke up in some forest and I can't remember anything. I have no clue who I am and how I got there.
 		DL:addNode()
 
 
@@ -62,11 +62,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(8, 9, "DL_Rhendal_Problem2") -- But you're in luck, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
+		DL:createNPCNode(8, 9, "DL_Rhendal_Problem2") -- But you're in luck, I happen to be initiated in the art of alchemy and I know a potion that may help you.
 		DL:addNode()
 
 
-		DL:createNPCNode(9, 10, "DL_Rhendal_BringMe") -- I have most ingredients for it right here.
+		DL:createNPCNode(9, 10, "DL_Rhendal_BringMe") -- I have most of the ingredients for it right here.
 		DL:addNode()
 
 
@@ -74,7 +74,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(11, -2, "DL_Rhendal_BringMe3") -- If you could bring me those, I will brew the potion for you.
+		DL:createNPCNode(11, -2, "DL_Rhendal_BringMe3") -- If you can bring me those, I will brew the potion for you.
 		DL:changeQuestState("silkweed_potion", "started")
 		DL:addNode()
 
@@ -208,7 +208,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(32, 33, "DL_Rhendal_VisionMark2") -- It seems like the potion has not only brought you back some memories, but has also revealed this mark.
+		DL:createNPCNode(32, 33, "DL_Rhendal_VisionMark2") -- It seems like the potion has not only brought back some memories, but has also revealed this mark.
 		DL:addNode()
 
 
@@ -239,7 +239,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(43, -2, "DL_Rhendal_KnowAnythingMark3") -- You'd be better off with finding someone who knows more about it than me and can break it.
+		DL:createNPCNode(43, -2, "DL_Rhendal_KnowAnythingMark3") -- You'd be better off with finding someone who knows more about it than me, someone who can break the curse.
 		DL:addQuestDescription("the_mark", 1)
 		DL:addNode()
 
@@ -296,7 +296,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_rhendal", "magic") and not DL:isSpellEquipped(2)) then 
 
-		DL:createNPCNode(38, 45, "DL_Rhendal_Magic") -- First, you need a staff that is able to focus magical energy.
+		DL:createNPCNode(38, 45, "DL_Rhendal_Magic") -- First, you need a staff that is capable of focusing magical energy.
 		DL:addNode()
 
 
@@ -333,7 +333,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(49, 50, "DL_Rhendal_BrokenBridge3") -- The problem is now, that the bridge that connects this village and the tavern, is broken.
+		DL:createNPCNode(49, 50, "DL_Rhendal_BrokenBridge3") -- The problem is now, that the bridge that connects this village to the tavern, is broken.
 		DL:addNode()
 
 
@@ -397,7 +397,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("broken_bridge", "started") and not (DL:isQuestComplete("broken_bridge") or DL:hasItem("qe_spoiledfeudalfire", 1)) and DL:isConditionFulfilled("npc_innkeeper", "bought_feudal_fire")) then 
 
-		DL:createNPCNode(60, -1, "DL_Rhendal_YouDrankSchnaps") -- What? Oh you silly boy! You drank it yourself? You're not the sharpest knife in the drawer, are you?!
+		DL:createNPCNode(60, -1, "DL_Rhendal_YouDrankSchnaps") -- What? Oh you silly boy! You drank it yourself? You're not the sharpest tool in the shed, are you?!
 		DL:changeQuestState("broken_bridge", "failed")
 		DL:addNode()
 

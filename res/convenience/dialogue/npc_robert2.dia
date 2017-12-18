@@ -39,7 +39,7 @@ npc.id:npc_robert2
 		condition:not DL:isConditionFulfilled("npc_robert2", "cemetery")
 		# translation: 
 		translation.tag:DL_Choice_WhatDoing
-		translation.en:What are you doing on the cemetery?
+		translation.en:What are you doing in the cemetery?
 		translation.de:Was machst du auf dem Friedhof?
 		translation.ch:Was machsch du ufem Friedhof?
 	]
@@ -59,7 +59,7 @@ npc.id:npc_robert2
 		condition:not DL:isConditionFulfilled("npc_robert2", "from_here")
 		# translation: 
 		translation.tag:DL_Choice_FromHere
-		translation.en:Are you living here in this village?
+		translation.en:Do you live here in this village?
 		translation.de:Lebst du hier im Dorf?
 		translation.ch:Lebsch du do im Dorf?
 	]
@@ -79,7 +79,7 @@ npc.id:npc_robert2
 		condition:DL:isConditionFulfilled("npc_robert2", "crypt") and not DL:isConditionFulfilled("npc_robert2", "teleport_quest")
 		# translation: 
 		translation.tag:DL_Choice_TeleportQuest
-		translation.en:What's in for me if I help you get your stone back?
+		translation.en:What's in it for me if I help you get your stone back?
 		translation.de:Was springt für mich raus wenn ich dir helfe, den Stein zu holen?
 		translation.ch:Wa springt für mich use weni der hilf, de Stei z'hole?
 	]
@@ -156,7 +156,7 @@ npc.id:npc_robert2
 	trigger:DL:addConditionProgress("npc_robert2", "who_are_you")
 	# translation: 
 	translation.tag:DL_Robert_WhoAreYou
-	translation.en:I'm Bob and I possess magical powers! Impressive, ain't it.
+	translation.en:I'm Bob and I possess magical powers! Impressive, ain't it?
 	translation.de:Ich bin Bob und ich habe magische Kräfte! Beeindruckend, nicht.
 	translation.ch:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh.
 	[
@@ -354,7 +354,7 @@ npc.id:npc_robert2
 	trigger:DL:addItem("qe_portstone_inactive", 1)
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest2
-	translation.en:As promised, you get the inactive stone.
+	translation.en:As promised, here's the inactive stone.
 	translation.de:Wie versprochen, hier der inaktive Stein.
 	translation.ch:We versproche, do hesch de inaktiv Stei.
 	[
@@ -368,7 +368,7 @@ npc.id:npc_robert2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest3
-	translation.en:If you'd be a mage, you'd be able to infuse it with magic from a cairn wraith.
+	translation.en:If you were a mage, you'd be able to infuse it with magic from a cairn wraith.
 	translation.de:Wenn du ein Magier wärst, könntest du ihn mit der Magie eines Cairn Geistes aufladen.
 	translation.ch:Wennd en Magier wärsch, chöntschen mit de Magie vomne Steimännli Geischt uflade.
 	[
@@ -383,7 +383,7 @@ npc.id:npc_robert2
 	trigger:DL:changeQuestState("teleport_own", "started")
 	# translation: 
 	translation.tag:DL_Robert_FinishRobertQuest4
-	translation.en:I think I've just seen one coming to the windy plateau behind the crypt. 
+	translation.en:I think I just saw one going towards the windy plateau behind the crypt. 
 	translation.de:Ich glaube, ich habe gerade gesehen, wie einer auf die windige Ebene hinter der Krypta gestiegen ist.
 	translation.ch:Ich glaub, ich ha grad gse, we eine uf di windig Ebeni ide Krypta gstiege isch.
 	[

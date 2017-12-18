@@ -115,13 +115,13 @@ private:
 
 	// puzzles
 	void loadPuzzleLevel();
-	void setupTwilightPuzzle();
-	void setupNecromancyPuzzle();
-	void setupDivinePuzzle();
-	void setupElementalPuzzle();
-	void setupBlocks(const std::vector<sf::Vector2f>& positions);
+	void setupPuzzleBlocks();
 	void clearPuzzleBlocks();
 	std::vector<GameObject*> m_puzzleBlocks;
+	std::vector<LevelDynamicTileData> m_twilightPuzzle;
+	std::vector<LevelDynamicTileData> m_necromancerPuzzle;
+	std::vector<LevelDynamicTileData> m_divinePuzzle;
+	std::vector<LevelDynamicTileData> m_elementalPuzzle;
 
 	// dead victims
 	bool m_isKorayDead = false;

@@ -193,7 +193,7 @@ void VeliusBoss::startLastPhase() {
 	m_elementalSpawner->point1 = sf::Vector2f(775.f, 575.f);
 	m_elementalPc->setVisible(true);
 
-	setupElementalPuzzle();
+	setupPuzzleBlocks();
 }
 
 void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
@@ -330,19 +330,19 @@ void VeliusBoss::setBossState(VeliusBossState state) {
 
 	case ExtractDivine:
 	{
-		setupDivinePuzzle();
+		setupPuzzleBlocks();
 		callToDie(V_COLOR_DIVINE);
 		break;
 	}
 	case ExtractNecromancy:
 	{
-		setupNecromancyPuzzle();
+		setupPuzzleBlocks();
 		callToDie(V_COLOR_NECROMANCY);
 		break;
 	}
 	case ExtractTwilight:
 	{
-		setupTwilightPuzzle();
+		setupPuzzleBlocks();
 		callToDie(V_COLOR_TWILIGHT);
 		break;
 	}
@@ -684,109 +684,45 @@ void VeliusBoss::onHit(Spell* spell) {
 	}
 }
 
-void VeliusBoss::setupTwilightPuzzle() {
-	auto positions = {
-		sf::Vector2f(720.f, 350.f),
-		sf::Vector2f(720.f, 400.f),
-		sf::Vector2f(720.f, 450.f),
-		sf::Vector2f(600.f, 200.f),
-		sf::Vector2f(700.f, 200.f)
-	};
-	setupBlocks(positions);
-}
+void VeliusBoss::setupPuzzleBlocks() {
+	std::vector<LevelDynamicTileData>* puzzleBlocks = nullptr;
+	switch (m_bossState)
+	{
+	case ExtractTwilight:
+		puzzleBlocks = &m_twilightPuzzle;
+		break;
+	case ExtractNecromancy:
+		puzzleBlocks = &m_necromancerPuzzle;
+		break;
+	case ExtractDivine:
+		puzzleBlocks = &m_divinePuzzle;
+		break;
+	case ExtractElemental:
+		puzzleBlocks = &m_elementalPuzzle;
+		break;
+	default:
+		break;
+	}
 
-void VeliusBoss::setupNecromancyPuzzle() {
-	auto positions = {
-		sf::Vector2f(720.f, 300.f),
-		sf::Vector2f(700.f, 200.f),
-		sf::Vector2f(600.f, 200.f),
-		sf::Vector2f(800.f, 450.f),
-		sf::Vector2f(850.f, 450.f),
-		sf::Vector2f(900.f, 500.f),
-		sf::Vector2f(900.f, 450.f),
-		sf::Vector2f(900.f, 550.f),
-		sf::Vector2f(900.f, 600.f),
-		sf::Vector2f(600.f, 100.f),
-		sf::Vector2f(400.f, 350.f),
-		sf::Vector2f(800.f, 200.f),
-		sf::Vector2f(1000.f, 200.f),
-		sf::Vector2f(950.f, 350.f),
-		sf::Vector2f(300.f, 350.f)
-	};
-	setupBlocks(positions);
-}
+	for (auto& it : *puzzleBlocks) {
+		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(it.id, dynamic_cast<LevelScreen*>(m_screen));
+		if (tile == nullptr) {
+			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, id not registered:" + std::to_string(static_cast<int>(it.id)));
+			return;
+		}
 
-void VeliusBoss::setupDivinePuzzle() {
-	auto positions = {
-		sf::Vector2f(200.f, 300.f),
-		sf::Vector2f(700.f, 130.f),
-		sf::Vector2f(720.f, 280.f),
-		sf::Vector2f(720.f, 330.f),
-		sf::Vector2f(700.f, 200.f),
-		sf::Vector2f(600.f, 200.f),
-		sf::Vector2f(550.f, 550.f),
-		sf::Vector2f(800.f, 450.f),
-		sf::Vector2f(850.f, 450.f),
-		sf::Vector2f(900.f, 450.f),
-		sf::Vector2f(1000.f, 350.f),
-		sf::Vector2f(1000.f, 400.f),
-		sf::Vector2f(1000.f, 450.f),
-		sf::Vector2f(850.f, 350.f),
-		sf::Vector2f(1050.f, 250.f),
-		sf::Vector2f(550.f, 200.f),
-		sf::Vector2f(250.f, 225.f),
-		sf::Vector2f(400.f, 300.f),
-		sf::Vector2f(300.f, 400.f),
-		sf::Vector2f(350.f, 250.f),
-		sf::Vector2f(800.f, 100.f),
-		sf::Vector2f(800.f, 150.f),
-		sf::Vector2f(550.f, 325.f),
-		sf::Vector2f(450.f, 450.f)
-	};
-
-	setupBlocks(positions);
-}
-
-void VeliusBoss::setupElementalPuzzle() {
-	auto positions = {
-		sf::Vector2f(575.f, 500.f),
-		sf::Vector2f(575.f, 450.f),
-		sf::Vector2f(700.f, 130.f),
-		sf::Vector2f(720.f, 250.f),
-		sf::Vector2f(720.f, 450.f),
-		sf::Vector2f(720.f, 450.f),
-		sf::Vector2f(720.f, 500.f),
-		sf::Vector2f(720.f, 550.f),
-		sf::Vector2f(800.f, 450.f),
-		sf::Vector2f(850.f, 450.f),
-		sf::Vector2f(900.f, 450.f),
-		sf::Vector2f(900.f, 500.f),
-		sf::Vector2f(900.f, 600.f),
-		sf::Vector2f(1000.f, 450.f),
-		sf::Vector2f(1000.f, 350.f),
-		sf::Vector2f(875.f, 150.f),
-		sf::Vector2f(950.f, 300.f),
-		sf::Vector2f(800.f, 375.f),
-		sf::Vector2f(720.f, 200.f),
-		sf::Vector2f(500.f, 125.f),
-		sf::Vector2f(350.f, 300.f),
-		sf::Vector2f(425.f, 362.5f),
-		sf::Vector2f(575.f, 300.f),
-		sf::Vector2f(250.f, 350.f),
-		sf::Vector2f(300.f, 350.f)
-	};
-	setupBlocks(positions);
-}
-
-void VeliusBoss::setupBlocks(const std::vector<sf::Vector2f>& positions) {
-	LevelTileProperties properties;
-	for (auto pos : positions) {
-		LevelDynamicTile* tile = ObjectFactory::Instance()->createLevelDynamicTile(LevelDynamicTileID::SwitchableOn, dynamic_cast<LevelScreen*>(m_screen));
-		tile->init(properties);
-		tile->setPosition(pos);
+		tile->setObjectID(it.objectID);
+		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->loadResources();
-		tile->loadAnimation(7);
-		tile->setPosition(pos);
+		if (!tile->init(it.properties)) {
+			g_logger->logError("LevelLoader", "Dynamic tile was not loaded, initialization failed.");
+			delete tile;
+			continue;
+		}
+
+		tile->setPosition(it.position + tile->getPositionOffset());
+		tile->loadAnimation(it.skinNr);
+		tile->setPosition(it.position + tile->getPositionOffset());
 		tile->setDebugBoundingBox(COLOR_NEUTRAL);
 		m_screen->addObject(tile);
 		m_puzzleBlocks.push_back(tile);
@@ -1010,7 +946,10 @@ void VeliusBoss::loadPuzzleLevel() {
 		return;
 	}
 
-
+	m_twilightPuzzle = data.levers[0];
+	m_necromancerPuzzle = data.levers[1];
+	m_divinePuzzle = data.levers[2];
+	m_elementalPuzzle = data.levers[3];
 }
 
 float VeliusBoss::getConfiguredDistanceToHPBar() const {

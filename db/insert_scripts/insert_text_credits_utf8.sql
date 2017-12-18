@@ -6,12 +6,15 @@ Isa
 Isa
 Tizian
 
-<<< Programming >>>
+<<< Programming & Engine >>>
 Isa
+
+<<< Additional Programming >>>
 Tizian
 
 <<< Special Effects & Simulation >>>
 Tizian
+Isa
 
 <<< Interface Design >>>
 Tizian
@@ -29,6 +32,10 @@ Haab
 <<< Level & Map Design >>>
 Isa
 Peter
+
+<<< Quality Assurance >>>
+Peter
+Tizian
 
 <<< Music >>>
 
@@ -66,7 +73,7 @@ Peter
 
 "Zeff''s Theme"
 
-"Yasha'' Theme"
+"Yasha''s Theme"
 
 "Lighthouse Theme"
 
@@ -130,10 +137,6 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Quality Assurance >>>
-Peter
-Tizian
-
 <<< Concept Art >>>
 Isa
 Tizian
@@ -154,21 +157,12 @@ Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli,
 Kwon, Peter
 
 <<< Beta Tester >>>
-Peter
-Randalf
-Martin Roesch
-Patrick
-Iris Schmidt
-Stefan ''Tank'' Schindler
-Sebastian
-Lukas Dürrenberger
-Ramón
-Pascal ''Kylaine'' Thoma
-Nick Kline
-Lord Heinrich
-Jerry Ward
-Fabian Fässler
-Dave
+Peter, Randalf, Martin Roesch, Patrick,
+Iris Schmidt, Stefan ''Tank'' Schindler,
+Sebastian, Lukas Dürrenberger, Ramón,
+Pascal ''Kylaine'' Thoma, Nick Kline,
+Lord Heinrich, Jerry Ward, Fabian Fässler,
+Dave, Melanie Silk
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
@@ -217,12 +211,15 @@ Isa
 Isa
 Tizian
 
-<<< Programmierung >>>
+<<< Programmierung und Engine >>>
 Isa
+
+<<< Zusätzliche Programmierung >>>
 Tizian
 
 <<< Spezialeffekte & Simulation >>>
 Tizian
+Isa
 
 <<< Interface Design >>>
 Tizian
@@ -240,6 +237,10 @@ Haab
 <<< Level & Karten Design >>>
 Isa
 Peter
+
+<<< Qualitätssicherung >>>
+Peter
+Tizian
 
 <<< Musik >>>
 
@@ -277,7 +278,7 @@ Peter
 
 "Zeff''s Theme"
 
-"Yasha'' Theme"
+"Yasha''s Theme"
 
 "Lighthouse Theme"
 
@@ -341,10 +342,6 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Qualitätssicherung >>>
-Peter
-Tizian
-
 <<< Korrekturleser >>>
 Iris Schmidt
 
@@ -364,21 +361,12 @@ Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli,
 Kwon, Peter
 
 <<< Beta Tester >>>
-Peter
-Randalf
-Martin Roesch
-Patrick
-Iris Schmidt
-Stefan ''Tank'' Schindler
-Sebastian
-Lukas Dürrenberger
-Ramón
-Pascal ''Kylaine'' Thoma
-Nick Kline
-Lord Heinrich
-Jerry Ward
-Fabian Fässler
-Dave
+Peter, Randalf, Martin Roesch, Patrick,
+Iris Schmidt, Stefan ''Tank'' Schindler,
+Sebastian, Lukas Dürrenberger, Ramón,
+Pascal ''Kylaine'' Thoma, Nick Kline,
+Lord Heinrich, Jerry Ward, Fabian Fässler,
+Dave, Melanie Silk
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
@@ -424,12 +412,15 @@ Isa
 Isa
 Tizian
 
-<<< Programmierig >>>
+<<< Programmierig und Engine >>>
 Isa
+
+<<< Zuesätzlichi Programmierig >>>
 Tizian
 
 <<< Spezial Effekt & Simulation >>>
 Tizian
+Isa
 
 <<< Interface Design >>>
 Tizian
@@ -447,6 +438,10 @@ Haab
 <<< Level & Chartä Design >>>
 Isa
 Peter
+
+<<< Qualitätssicherig >>>
+Peter
+Tizian
 
 <<< Musig >>>
 
@@ -548,10 +543,6 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Qualitätssicherig >>>
-Peter
-Tizian
-
 <<< Concept Art >>>
 Isa
 Tizian
@@ -583,21 +574,12 @@ Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli,
 Kwon, Peter
 
 <<< Beta Tester >>>
-Peter
-Randalf
-Martin Roesch
-Patrick
-Iris Schmidt
-Stefan ''Tank'' Schindler
-Sebastian
-Lukas Dürrenberger
-Ramón
-Pascal ''Kylaine'' Thoma
-Nick Kline
-Lord Heinrich
-Jerry Ward
-Fabian Fässler
-Dave
+Peter, Randalf, Martin Roesch, Patrick,
+Iris Schmidt, Stefan ''Tank'' Schindler,
+Sebastian, Lukas Dürrenberger, Ramón,
+Pascal ''Kylaine'' Thoma, Nick Kline,
+Lord Heinrich, Jerry Ward, Fabian Fässler,
+Dave, Melanie Silk
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild

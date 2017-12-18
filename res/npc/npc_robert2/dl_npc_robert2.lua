@@ -18,19 +18,19 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(2)
 	if (not DL:isConditionFulfilled("npc_robert2", "cemetery")) then 
-		DL:addChoice(3, "DL_Choice_WhatDoing") -- What are you doing on the cemetery?
+		DL:addChoice(3, "DL_Choice_WhatDoing") -- What are you doing in the cemetery?
 	end
 	if (not DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
 		DL:addChoice(4, "DL_Choice_WhoAreYou") -- Who are you?
 	end
 	if (not DL:isConditionFulfilled("npc_robert2", "from_here")) then 
-		DL:addChoice(5, "DL_Choice_FromHere") -- Are you living here in this village?
+		DL:addChoice(5, "DL_Choice_FromHere") -- Do you live here in this village?
 	end
 	if (not DL:isConditionFulfilled("npc_robert2", "crypt") and DL:isConditionFulfilled("npc_robert2", "cemetery")) then 
 		DL:addChoice(6, "DL_Choice_Crypt") -- Have you been inside the crypt then?
 	end
 	if (DL:isConditionFulfilled("npc_robert2", "crypt") and not DL:isConditionFulfilled("npc_robert2", "teleport_quest")) then 
-		DL:addChoice(11, "DL_Choice_TeleportQuest") -- What's in for me if I help you get your stone back?
+		DL:addChoice(11, "DL_Choice_TeleportQuest") -- What's in it for me if I help you get your stone back?
 	end
 	if (DL:isConditionFulfilled("npc_robert2", "teleport_quest") and not DL:isConditionFulfilled("npc_robert2", "afraid") and not DL:isQuestState("teleport_robert", "completed")) then 
 		DL:addChoice(15, "DL_Choice_Afraid") -- Why are you so afraid of that skeleton?
@@ -59,7 +59,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_robert2", "who_are_you")) then 
 
-		DL:createNPCNode(4, 7, "DL_Robert_WhoAreYou") -- I'm Bob and I possess magical powers! Impressive, ain't it.
+		DL:createNPCNode(4, 7, "DL_Robert_WhoAreYou") -- I'm Bob and I possess magical powers! Impressive, ain't it?
 		DL:addConditionProgress("npc_robert2", "who_are_you")
 		DL:addNode()
 
@@ -139,16 +139,16 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(17, 18, "DL_Robert_FinishRobertQuest2") -- As promised, you get the inactive stone.
+		DL:createNPCNode(17, 18, "DL_Robert_FinishRobertQuest2") -- As promised, here's the inactive stone.
 		DL:addItem("qe_portstone_inactive", 1)
 		DL:addNode()
 
 
-		DL:createNPCNode(18, 19, "DL_Robert_FinishRobertQuest3") -- If you'd be a mage, you'd be able to infuse it with magic from a cairn wraith.
+		DL:createNPCNode(18, 19, "DL_Robert_FinishRobertQuest3") -- If you were a mage, you'd be able to infuse it with magic from a cairn wraith.
 		DL:addNode()
 
 
-		DL:createNPCNode(19, 20, "DL_Robert_FinishRobertQuest4") -- I think I've just seen one coming to the windy plateau behind the crypt. 
+		DL:createNPCNode(19, 20, "DL_Robert_FinishRobertQuest4") -- I think I just saw one going towards the windy plateau behind the crypt. 
 		DL:changeQuestState("teleport_own", "started")
 		DL:addNode()
 

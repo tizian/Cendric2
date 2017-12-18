@@ -42,7 +42,7 @@ npc.id:npc_rhendal
 	trigger:DL:addConditionProgress("npc_rhendal", "talked")
 	# translation: 
 	translation.tag:DL_Rhendal_Hello
-	translation.en:Hello, young man. What brings you into my humble home?
+	translation.en:Hello, young man. What brings you to my humble home?
 	translation.de:Hallo, junger Mann. Was führt dich in mein bescheidenes Heim?
 	translation.ch:Hallo, jungä Maa. Was füärt diäch in miis bescheidönä Heim?
 	[
@@ -131,7 +131,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Cendric_Problem
-	translation.en:I've awoken in some forest and I can't remember anything. I have no clue who I am and how I got there.
+	translation.en:I woke up in some forest and I can't remember anything. I have no clue who I am and how I got there.
 	translation.de:Ich bin in einem Wald aufgewacht und kann mich an nichts erinnern. Ich habe keine Ahnung wer ich bin und wie ich dort hin gekommen bin.
 	translation.ch:Ich bin imne Wald ufgwacht und cha mich a nüt erinnere. Ich han ken Plan wer ich bin und we ich döt hi cho bi.
 	[
@@ -159,7 +159,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_Problem2
-	translation.en:But you're in luck, I happen to be initiated in the art of alchemy and I know just the right potion that may help you.
+	translation.en:But you're in luck, I happen to be initiated in the art of alchemy and I know a potion that may help you.
 	translation.de:Aber du kannst dich glücklich schätzen, ich verstehe etwas von der Kunst der Alchemie und kenne einen Trank, der dir helfen könnte.
 	translation.ch:Aber du chasch diäch glücklich schätze, ich verstou ä bitz vudr Kunst vur Alchemie und kinnä ä Trangg, wodr hälfe chünt.
 	[
@@ -173,7 +173,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_BringMe
-	translation.en:I have most ingredients for it right here.
+	translation.en:I have most of the ingredients for it right here.
 	translation.de:Ich habe die meisten Zutaten dafür schon hier.
 	translation.ch:Ich ha di meischtä Zuätatä defür schu dou.
 	[
@@ -202,7 +202,7 @@ npc.id:npc_rhendal
 	trigger:DL:changeQuestState("silkweed_potion", "started")
 	# translation: 
 	translation.tag:DL_Rhendal_BringMe3
-	translation.en:If you could bring me those, I will brew the potion for you.
+	translation.en:If you can bring me those, I will brew the potion for you.
 	translation.de:Wenn du mir diese bringst, werde ich dir den Trank brauen.
 	translation.ch:Winn du miär där bringsch, würdr dr Trank braue.
 	[
@@ -563,7 +563,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_VisionMark2
-	translation.en:It seems like the potion has not only brought you back some memories, but has also revealed this mark.
+	translation.en:It seems like the potion has not only brought back some memories, but has also revealed this mark.
 	translation.de:Es scheint, als hätte die Vision nicht nur ein paar Erinnerungen zurückgebracht, sondern auch dieses Mal zum Vorschein gebracht.
 	translation.ch:Es schiint, als het d'Vision nid nur ä paar Erinnerige zruggbrocht, sondern au das Zeiche zum Vorschi brocht.
 	[
@@ -656,7 +656,7 @@ npc.id:npc_rhendal
 	trigger:DL:addQuestDescription("the_mark", 1)
 	# translation: 
 	translation.tag:DL_Rhendal_KnowAnythingMark3
-	translation.en:You'd be better off with finding someone who knows more about it than me and can break it.
+	translation.en:You'd be better off with finding someone who knows more about it than me, someone who can break the curse.
 	translation.de:Du solltest besser jemanden finden, der mehr darüber weiss als ich und ihn brechen kann.
 	translation.ch:Du sötsch besser öpprt gfindä, wo me drüber weiss als ich und nä brächä cha.
 	[
@@ -807,7 +807,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_Magic
-	translation.en:First, you need a staff that is able to focus magical energy.
+	translation.en:First, you need a staff that is capable of focusing magical energy.
 	translation.de:Zuerst brauchst du einen Stab, der magische Energie fokussieren kann.
 	translation.ch:Zersch mol bruchsch ä Staab, wo magischi Energie fokussiere cha.
 	[
@@ -908,7 +908,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_BrokenBridge3
-	translation.en:The problem is now, that the bridge that connects this village and the tavern, is broken.
+	translation.en:The problem is now, that the bridge that connects this village to the tavern, is broken.
 	translation.de:Das Problem hierbei ist, dass die Brücke, die das Dorf und die Taverne verbindet, eingestürzt ist.
 	translation.ch:Äs Problem isch aber, dass d'Brugg, wo das Dorf und d'Taverne verbindet, iigstürzt isch.
 	[
@@ -1078,7 +1078,7 @@ npc.id:npc_rhendal
 	trigger:DL:changeQuestState("broken_bridge", "failed")
 	# translation: 
 	translation.tag:DL_Rhendal_YouDrankSchnaps
-	translation.en:What? Oh you silly boy! You drank it yourself? You're not the sharpest knife in the drawer, are you?!
+	translation.en:What? Oh you silly boy! You drank it yourself? You're not the sharpest tool in the shed, are you?!
 	translation.de:Was? Oh du einfältiger Junge! Du bist wirklich nicht der Hellste, was?!
 	translation.ch:Waaas? Oh du dumme Bueb. Du bisch würggli dumm wie Brot, odr!?
 	[
