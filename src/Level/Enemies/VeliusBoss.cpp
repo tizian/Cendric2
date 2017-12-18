@@ -366,7 +366,7 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 		setBlocking();
 		m_spellManager->setCurrentSpell(m_bossState == AttackDivine ? 9 : 0);
 		m_spellManager->executeCurrentSpell(m_mainChar, true);
-		m_timeUntilShackleDone = sf::seconds(5.5f);
+		m_timeUntilShackleDone = sf::seconds(5.8f);
 		return;
 	}
 
@@ -511,7 +511,7 @@ void VeliusBoss::loadSpells() {
 	SpellData shackle;
 	shackle.id = SpellID::Shackle;
 	shackle.activeDuration = SHACKLE_DURATION;
-	shackle.duration = SHACKLE_DURATION + sf::seconds(5.f);
+	shackle.duration = SHACKLE_DURATION + sf::seconds(2.f);
 	shackle.isBlocking = true;
 	shackle.castingTime = sf::seconds(0.5f);
 	shackle.castingAnimation = GameObjectState::Casting2;

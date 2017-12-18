@@ -36,6 +36,7 @@ private:
 	sf::Time m_timeUntilShackleStart;
 	sf::Time m_timeShackleOut;
 	sf::Time m_timeShackleIn;
+	sf::Time m_timeShackleDark;
 	sf::Time m_timeShackleDone;
 
 	std::vector<ShackleSprite*> m_shackleSprites;

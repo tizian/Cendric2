@@ -21,7 +21,8 @@ void ShackleSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 	m_timeUntilShackleStart = sf::seconds(1.f);
 	m_timeShackleOut = sf::seconds(2.f);
 	m_timeShackleIn = sf::seconds(2.f);
-	m_timeShackleDone = sf::seconds(2.f);
+	m_timeShackleDark = sf::seconds(0.3f);
+	m_timeShackleDone = sf::seconds(1.7f);
 
 	setSpriteOffset(sf::Vector2f(-20.f, -20.f));
 
@@ -82,13 +83,12 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 
 		if (m_timeShackleIn == sf::Time::Zero) {
 			// spawn blocks and set main char
-			m_mainChar->setCollisionTiltSuppressed();
 			dynamic_cast<UserMovingBehavior*>(m_mainChar->getMovingBehavior())->stopAll();
 			if (m_data.strength == 2) {
-				m_mainChar->setPosition(sf::Vector2f(660.f, 509.f));
+				m_mainChar->setPosition(sf::Vector2f(660.f, 510.f));
 			}
 			else {
-				m_mainChar->setPosition(sf::Vector2f(1230.f, 559.f));
+				m_mainChar->setPosition(sf::Vector2f(1230.f, 560.f));
 			}
 			m_mainChar->setFacingRight(false);
 			LevelTileProperties properties;
@@ -105,6 +105,11 @@ void ShackleSpell::update(const sf::Time& frameTime) {
 				m_screen->addObject(tile);
 			}
 		}
+		return;
+	}
+
+	if (m_timeShackleDark > sf::Time::Zero) {
+		updateTime(m_timeShackleDark, frameTime);
 		return;
 	}
 
