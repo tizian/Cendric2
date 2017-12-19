@@ -13,4 +13,6 @@ SELECT text_id, text_type FROM text
         english LIKE '%supri%' OR
         english LIKE '%Supri%' OR
         english LIKE '%Milita%' OR
-        english LIKE '%milita%';
+        english LIKE '%milita%' OR
+        english LIKE '%Grimiore%' OR
+        english LIKE '%grimiore%';

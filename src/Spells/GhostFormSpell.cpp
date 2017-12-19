@@ -63,14 +63,14 @@ void GhostFormSpell::setDisposed() {
 	mb->setMaxXVelocityScale(1.f);
 	mb->setIgnoreDynamicTiles(false);
 
+	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::GhostForm);
+	}
+
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *m_mob->getBoundingBox();
 	if (m_level->collides(rec)) {
 		m_mob->setDead();
-	}
-
-	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
-		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::GhostForm);
 	}
 }
 
