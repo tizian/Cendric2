@@ -208,7 +208,7 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 
 	if (m_dotTick == sf::Time::Zero) {
 		m_dotTick = sf::seconds(1.f);
-		m_mainChar->addDamage(10, DamageType::Fire, false, false);
+		m_mainChar->addDamage(5, DamageType::Fire, false, false);
 	}
 
 	const bool victimDead = m_mainChar->isDead();

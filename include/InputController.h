@@ -52,6 +52,9 @@ public:
 	bool isScrolledUp() const;
 	bool isScrolledDown() const;
 
+	// is the main window focused?
+	bool isWindowFocused() const;
+
 	// locks further input actions in this frame.
 	void lockAction();
 	bool isActionLocked() const;

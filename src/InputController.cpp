@@ -23,9 +23,14 @@ bool InputController::isActionLocked() const {
 }
 
 void InputController::update(const sf::Time& frameTime) {
+	bool previousFocus = m_isWindowFocused;
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	m_isActionLocked = false;
 	m_lastPressedKey = sf::Keyboard::Unknown;
+
+	if (previousFocus != m_isWindowFocused) {
+		g_resourceManager->notifyVolumeChanged();
+	}
 
 	// update keys
 	for (auto& it : m_keyActiveMap) {
@@ -248,4 +253,8 @@ bool InputController::isScrolledDown() const {
 
 Cursor& InputController::getCursor() {
 	return m_cursor;
+}
+
+bool InputController::isWindowFocused() const {
+	return m_isWindowFocused;
 }

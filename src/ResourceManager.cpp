@@ -2,6 +2,7 @@
 #include "World/AnimatedSprite.h"
 #include "GlobalResource.h"
 #include "World/Item.h"
+#include "InputController.h"
 
 const size_t ResourceManager::SOUND_POOL_SIZE = 5;
 
@@ -360,8 +361,13 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 }
 
 void ResourceManager::notifyVolumeChanged() {
-	m_music.previousMusic->setVolume(0.f);
-	m_music.currentMusic->setVolume(!m_configuration.isSoundOn ? 0.f : static_cast<float>(m_configuration.volumeMusic));
+	bool soundOn = m_configuration.isSoundOn && g_inputController->isWindowFocused();
+	float currentVolume = static_cast<float>(m_configuration.volumeMusic);
+	float trueVolume = !soundOn ? 0.f : currentVolume;
+
+	float newScale = m_music.fadingTime / m_music.FADING_TIME;
+	m_music.previousMusic->setVolume(newScale * trueVolume);
+	m_music.currentMusic->setVolume((1.f - newScale) * trueVolume);
 }
 
 const std::pair<ErrorID, std::string>* ResourceManager::pollError() const {

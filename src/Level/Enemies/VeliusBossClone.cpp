@@ -27,9 +27,11 @@ void VeliusBossClone::setDead() {
 }
 
 void VeliusBossClone::onHit(Spell* spell) {
+	if (m_soundPlayed) return;
 	m_spellManager->setCurrentSpell(0);
 	m_spellManager->executeCurrentSpell(m_mainChar);
 	g_resourceManager->playSound(SHATTER_SOUND);
+	m_soundPlayed = true;
 
 	Enemy::onHit(spell);
 }

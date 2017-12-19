@@ -35,4 +35,5 @@ private:
 	void loadAnimation(int skinNr) override;
 
 	static const std::string SHATTER_SOUND;
+	bool m_soundPlayed = false;
 };
