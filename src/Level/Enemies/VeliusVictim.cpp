@@ -62,14 +62,14 @@ void VeliusVictim::release() {
 void VeliusVictim::loadAttributes() {
 	switch (m_skinNr) {
 	case 0:
-		m_attributes.setHealth(25);
+		m_attributes.setHealth(20);
 		break;
 	case 1:
-		m_attributes.setHealth(50);
+		m_attributes.setHealth(40);
 		break;
 	case 2:
 	default:
-		m_attributes.setHealth(80);
+		m_attributes.setHealth(60);
 	}
 	m_attributes.calculateAttributes();
 }

@@ -11,7 +11,7 @@ BookWindow::BookWindow(const Item& item) : Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, HEIGHT),
 	GUIOrnamentStyle::LARGE,
 	COLOR_LIGHT_BROWN, // back
-	COLOR_DARK_BROWN), // ornament 
+	COLOR_MEDIUM_BROWN), // ornament 
 	m_item(item) {
 	auto const pages = m_item.getBeans<ItemDocumentPageBean>();
 	assert(pages.size() > 0 && "A document has to have at least one page!");
@@ -25,10 +25,12 @@ BookWindow::BookWindow(const Item& item) : Window(
 
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
+	m_leftArrow->setDisabledColor(COLOR_MEDIUM_BROWN);
 	m_leftArrow->setMouseoverColor(COLOR_WHITE);
 
 	m_rightArrow = new ArrowButton(true);
 	m_rightArrow->setMainColor(COLOR_DARK_BROWN);
+	m_rightArrow->setDisabledColor(COLOR_MEDIUM_BROWN);
 	m_rightArrow->setMouseoverColor(COLOR_WHITE);
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);

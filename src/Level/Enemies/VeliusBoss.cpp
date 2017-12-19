@@ -245,7 +245,7 @@ void VeliusBoss::handleVeliusDead() {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_koray3", "dead");
 	}
 	if (m_isRobertDead) {
-		m_screen->getCharacterCore()->setConditionFulfilled("npc_rober4", "dead");
+		m_screen->getCharacterCore()->setConditionFulfilled("npc_robert4", "dead");
 	}
 	if (m_isIninaDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_inina4", "dead");
@@ -513,9 +513,7 @@ void VeliusBoss::loadSpells() {
 	shackle.activeDuration = SHACKLE_DURATION;
 	shackle.duration = SHACKLE_DURATION + sf::seconds(2.f);
 	shackle.isBlocking = true;
-	shackle.castingTime = sf::seconds(0.5f);
-	shackle.castingAnimation = GameObjectState::Casting2;
-	shackle.fightingTime = sf::seconds(5.f);
+	shackle.fightingTime = sf::seconds(5.8f);
 	shackle.fightAnimation = GameObjectState::Casting2;
 	shackle.cooldown = sf::seconds(0.f);
 	shackle.spritesheetPath = "res/texture/spells/spritesheet_spell_shackle.png";
