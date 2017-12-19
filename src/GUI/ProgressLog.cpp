@@ -171,8 +171,8 @@ void ProgressLog::setVisible(bool visible) {
 void ProgressLog::calculatePositions() {
 	if (m_logTexts.size() == 0) return;
 	while (m_logTexts.size() > MAX_ENTRIES) {
-		delete m_logTexts.at(m_logTexts.size() - 1);
-		m_logTexts.pop_back();
+		delete m_logTexts.at(0);
+		m_logTexts.erase(m_logTexts.begin());
 	}
 
 	float y = WINDOW_HEIGHT - m_yOffset;
