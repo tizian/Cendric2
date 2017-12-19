@@ -44,7 +44,7 @@ void MorgianaBoss::loadAttributes() {
 void MorgianaBoss::loadSpells() {
 	// the ultimate chop
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 80;
+	chopSpell.damage = 60;
 	chopSpell.damagePerSecond = 1;
 	chopSpell.cooldown = sf::seconds(3.f);
 	chopSpell.boundingBox = sf::FloatRect(0.f, 0.f, 60.f, 80.f);
