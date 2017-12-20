@@ -4,6 +4,7 @@ project(Cendric)
 
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
 option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
+option(CENDRIC_STEAM "Include steamworks API?" ON)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
     message(FATAL_ERROR
@@ -57,6 +58,10 @@ file(GLOB_RECURSE Cendric_FILES
 	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
 	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
 	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
+    if (CENDRIC_STEAM)
+        "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.h"
+        "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.cpp"
+    endif()
 )
 
 if (WIN32)
@@ -64,6 +69,10 @@ if (WIN32)
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/info.rc
 	)
+    if (CENDRIC_STEAM)
+        target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/win64/steam_api64.lib)
+    endif()
+
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	add_definitions("-DAPPLE_APP_BUILD")
 

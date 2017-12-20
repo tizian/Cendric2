@@ -5,6 +5,7 @@
 class AchievementManager final {
 public:
 	AchievementManager();
+	~AchievementManager();
 
 	void unlockAchievement(const std::string& achievement);
 
