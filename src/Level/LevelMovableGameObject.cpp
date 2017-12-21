@@ -41,7 +41,7 @@ void LevelMovableGameObject::update(const sf::Time& frameTime) {
 
 void LevelMovableGameObject::renderAfterForeground(sf::RenderTarget& target) {
 	MovableGameObject::renderAfterForeground(target);
-	if (g_resourceManager->getConfiguration().isDisplayDamageNumbers && m_damageNumbers) {
+	if (m_damageNumbers) {
 		m_damageNumbers->render(target);
 	}
 }
@@ -87,7 +87,7 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 }
 
 void LevelMovableGameObject::updateDamageNumbers(const sf::Time& frameTime) {
-	if (!g_resourceManager->getConfiguration().isDisplayDamageNumbers || !m_damageNumbers) return;
+	if (!m_damageNumbers) return;
 
 	updateTime(m_timeSinceDotNumbers, frameTime);
 	if (m_timeSinceDotNumbers == sf::Time::Zero) {

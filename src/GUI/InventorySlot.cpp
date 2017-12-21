@@ -1,10 +1,10 @@
 #include "GUI/InventorySlot.h"
-
 #include "GUI/Inventory.h"
+#include "GUI/GUIConstants.h"
+#include "Enums/EnumNames.h"
+
 #include "ResourceManager.h"
 #include "GlobalResource.h"
-
-using namespace std;
 
 const float InventorySlot::SIZE = 58.f;
 const float InventorySlot::ICON_OFFSET = 4.f;
@@ -74,7 +74,7 @@ void InventorySlot::render(sf::RenderTarget& renderTarget) {
 }
 
 void InventorySlot::setAmount(int amount) {
-	m_amountText.setString(amount < 0 ? "" : to_string(amount));
+	m_amountText.setString(amount < 0 ? "" : std::to_string(amount));
 	setPosition(getPosition());
 }
 

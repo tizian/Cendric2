@@ -8,13 +8,13 @@ targets =
 markers = {
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {100, 100}
-		step_type = "0"
+		position = {100, 100},
+		step = 0
 	},
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {100, 100}
-		step_type = "completed"
+		position = {100, 100},
+		step = -1
 	}
 }
 

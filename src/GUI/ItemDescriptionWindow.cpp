@@ -302,7 +302,7 @@ void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, fl
 	loadAttributes(item, core, currentOffset);
 	
 	addText(getGoldText(item, goldMultiplier), COLOR_WHITE, currentOffset);
-	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL, currentOffset);
+	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_BAD, currentOffset);
 	addText(getInteractionText(item, isSelling), COLOR_NEUTRAL, currentOffset);
 
 	float height = 2 * GUIConstants::TEXT_OFFSET + currentOffset.y;

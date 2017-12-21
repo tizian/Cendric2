@@ -39,5 +39,5 @@ std::string MerchantItemDescriptionWindow::getReputationText(const Item& item) c
 }
 
 std::string MerchantItemDescriptionWindow::getInteractionText(const Item& item, bool isSelling) const {
-	return m_isReputationReached ? "" : g_textProvider->getText("RightClickBuy");
+	return m_isReputationReached ? g_textProvider->getText("RightClickBuy") : "";
 }

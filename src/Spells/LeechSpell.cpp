@@ -90,8 +90,8 @@ void LeechSpell::update(const sf::Time& frameTime) {
 void LeechSpell::goReturn() {
 	m_isDisposed = false;
 	m_isReturning = true;
-	m_colorGenerator->minStartCol = sf::Color(31, 86, 28, 100);
-	m_colorGenerator->maxStartCol = sf::Color(44, 132, 57, 150);
+	m_colorGenerator->minStartCol = sf::Color(31, 86, 28, 200);
+	m_colorGenerator->maxStartCol = sf::Color(44, 132, 57, 250);
 	m_colorGenerator->minEndCol = sf::Color(0, 255, 0, 0);
 	m_colorGenerator->maxEndCol = sf::Color(200, 255, 200, 0);
 }

@@ -72,17 +72,16 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 		}
 	}
 
-	LuaRef markers = getGlobal(L, "steps");
-	if (steps.isTable()) {
-		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
-		LuaRef step = steps[i];
-		while (!step.isNil()) {
-			LuaRef texts = step["texts"];
-			LuaRef images = step["images"];
+	LuaRef markers = getGlobal(L, "markers");
+	if (markers.isTable()) {
+		int i = 1;
+		LuaRef marker = markers[i];
+		while (!marker.isNil()) {
+			LuaRef texts = marker["texts"];
+			LuaRef images = marker["images"];
 			if (!texts.isTable() || !images.isTable()) {
-				g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: step table not resolved, there must be one table for texts and one for images.");
-				return cutsceneData;
 			}
+			marker = markers[++i];
 		}
 	}
 

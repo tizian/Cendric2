@@ -98,8 +98,7 @@ CutsceneData CutsceneLoader::loadCutscene(const std::string& _cutsceneID) {
 
 				cutsceneStep.texts.push_back(cutsceneText);
 
-				++j;
-				text = texts[j];
+				text = texts[++j];
 			}
 
 			// resolve images
