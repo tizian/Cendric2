@@ -1,4 +1,6 @@
 #include "GUI/MerchantItemDescriptionWindow.h"
+#include "GUI/GUIConstants.h"
+#include "Enums/EnumNames.h"
 
 MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData& data)
 : ItemDescriptionWindow(), Window(
@@ -19,7 +21,7 @@ std::string MerchantItemDescriptionWindow::getGoldText(const Item& item, float g
 	std::string text;
 	text.append(g_textProvider->getText("Price"));
 	text.append(": ");
-	text.append(std::to_string((int)std::ceil(item.getValue() * goldMultiplier)));
+	text.append(std::to_string(static_cast<int>(std::ceil(item.getValue() * goldMultiplier))));
 	return text;
 }
 
@@ -36,6 +38,6 @@ std::string MerchantItemDescriptionWindow::getReputationText(const Item& item) c
 	return text;
 }
 
-std::string MerchantItemDescriptionWindow::getInteractionText(const Item& item) const {
-	return "";
+std::string MerchantItemDescriptionWindow::getInteractionText(const Item& item, bool isSelling) const {
+	return m_isReputationReached ? "" : g_textProvider->getText("RightClickBuy");
 }

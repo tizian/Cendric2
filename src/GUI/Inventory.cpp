@@ -51,7 +51,7 @@ void Inventory::init() {
 	m_selectedSlotId.first = "";
 	m_selectedSlotId.second = ItemType::VOID;
 	// init window
-	sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	const sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -107,7 +107,7 @@ void Inventory::init() {
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 
-	sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	const sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
@@ -601,18 +601,18 @@ void Inventory::showDocument(const Item* item) {
 	}
 }
 
-void Inventory::showDescription(const Item* item) {
+void Inventory::showDescription(const Item* item) const {
 	if (item == nullptr) return;
 	m_descriptionWindow->load(*item, m_core, m_merchantInterface ? 
-		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f);
+		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, m_merchantInterface);
 	m_descriptionWindow->show();
-	sf::Vector2f pos = sf::Vector2f(
+	auto const pos = sf::Vector2f(
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
 		m_window->getPosition().y);
 	m_descriptionWindow->setPosition(pos);
 }
 
-void Inventory::hideDescription() {
+void Inventory::hideDescription() const {
 	m_descriptionWindow->hide();
 }
 

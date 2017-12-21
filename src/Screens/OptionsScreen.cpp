@@ -51,7 +51,7 @@ void OptionsScreen::execOnEnter() {
 	// language
 	m_languageSelector = new ArrowSelector();
 	m_languageSelector->setLabelText("Language");
-	// TODO [BETA] replace with Language::MAX again.
+	// TODO [If Spanish is there] replace with Language::MAX again.
 	for (int language = 1; language < static_cast<int>(Language::LANG_ES); ++language) {
 		m_languageSelector->addOption(EnumNames::getLanguageName(static_cast<Language>(language)));
 	}

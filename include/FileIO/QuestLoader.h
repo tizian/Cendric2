@@ -1,15 +1,11 @@
 #pragma once
 
 #include "global.h"
-#include "Logger.h"
 #include "Structs/QuestData.h"
-
-#include "LuaBridge/LuaBridge.h"
 
 // static helper class to load lua files for quests
 class QuestLoader final {
-private:
-	QuestLoader() {}
+	QuestLoader() = default;
 public:
 	static QuestData loadQuest(const std::string& questID);
 

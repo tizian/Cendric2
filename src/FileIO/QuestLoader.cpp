@@ -1,4 +1,6 @@
 #include "FileIO/QuestLoader.h"
+#include "LuaBridge/LuaBridge.h"
+#include "Logger.h"
 
 using namespace luabridge;
 
@@ -67,6 +69,20 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 			questData.conditions.insert(element.cast<std::string>());
 			i++;
 			element = conditions[i];
+		}
+	}
+
+	LuaRef markers = getGlobal(L, "steps");
+	if (steps.isTable()) {
+		int i = 1; // in lua, the first element is 1, not 0. Like Eiffel haha.
+		LuaRef step = steps[i];
+		while (!step.isNil()) {
+			LuaRef texts = step["texts"];
+			LuaRef images = step["images"];
+			if (!texts.isTable() || !images.isTable()) {
+				g_logger->logError("CutsceneLoader", "Cutscene [" + filename + "]: step table not resolved, there must be one table for texts and one for images.");
+				return cutsceneData;
+			}
 		}
 	}
 

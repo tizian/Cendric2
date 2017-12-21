@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/InventorySlot.h"
@@ -114,8 +113,8 @@ private:
 	void handleLevelDrop();
 
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
-	void showDescription(const Item* item);
-	void hideDescription();
+	void showDescription(const Item* item) const;
+	void hideDescription() const;
 	void showDocument(const Item* item);
 	void convertItem(const Item* item);
 	void learnSpell(const Item* item);

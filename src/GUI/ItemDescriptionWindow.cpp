@@ -2,8 +2,10 @@
 #include <sstream>
 
 #include "GUI/ItemDescriptionWindow.h"
+#include "GUI/GUIConstants.h"
 #include "CharacterCore.h"
 #include "World/Item.h"
+#include "Enums/EnumNames.h"
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 const float ItemDescriptionWindow::ICON_OFFSET = 24 * 8.f;
@@ -48,10 +50,13 @@ std::string ItemDescriptionWindow::getReputationText(const Item& item) const {
 	return "";
 }
 
-std::string ItemDescriptionWindow::getInteractionText(const Item& item) const {
+std::string ItemDescriptionWindow::getInteractionText(const Item& item, bool isSelling) const {
 	std::string interactionText;
 
-	if (item.getType() == ItemType::Document) {
+	if (isSelling) {
+		interactionText = item.getValue() < 0 ? "" : g_textProvider->getText("RightClickSell");
+	}
+	else if (item.getType() == ItemType::Document) {
 		interactionText = g_textProvider->getText("RightClickRead");
 	}
 	else if (item.getType() == ItemType::Convertible) {
@@ -117,8 +122,8 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 	}
 
 	if (item.getType() == ItemType::Equipment_ring_1 || item.getType() == ItemType::Equipment_ring_2) {
-		auto const ring1 = core->getEquippedItem(ItemType::Equipment_ring_1);
-		auto const ring2 = core->getEquippedItem(ItemType::Equipment_ring_2);
+		auto& ring1 = core->getEquippedItem(ItemType::Equipment_ring_1);
+		auto& ring2 = core->getEquippedItem(ItemType::Equipment_ring_2);
 		if (!ring1.empty() && !ring2.empty()) {
 			compareDoubleAttributes(item, *g_resourceManager->getItem(ring1), *g_resourceManager->getItem(ring2), offset);
 			return;
@@ -133,7 +138,7 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 		}
 	}
 	else if (Item::isEquipmentType(item.getType())) {
-		auto const eqId = core->getEquippedItem(item.getType());
+		auto& eqId = core->getEquippedItem(item.getType());
 		if (!eqId.empty() && eqId.compare(item.getID()) != 0) {
 			compareAttributes(item, *g_resourceManager->getItem(eqId), offset);
 			return;
@@ -153,7 +158,7 @@ void ItemDescriptionWindow::loadWeaponAttributes(const Weapon& item, sf::Vector2
 
 	loadDefaultAttributes(item, offset);
 
-	if (item.getWeaponSlots().size() > 0) {
+	if (!item.getWeaponSlots().empty()) {
 		offset.y += GUIConstants::CHARACTER_SIZE_S;
 
 		addText("<<< " + g_textProvider->getText("SpellSlots") + " >>>",
@@ -237,7 +242,7 @@ void ItemDescriptionWindow::compareWeaponAttributes(const Weapon& item, const We
 
 	compareAttributes(item, comp, offset);
 
-	if (item.getWeaponSlots().size() > 0) {
+	if (!item.getWeaponSlots().empty()) {
 		offset.y += GUIConstants::CHARACTER_SIZE_S;
 
 		addText("<<< " + g_textProvider->getText("SpellSlots") + " >>>",
@@ -247,7 +252,7 @@ void ItemDescriptionWindow::compareWeaponAttributes(const Weapon& item, const We
 			std::string str;
 			str.append(g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)));
 			str.append(": ");
-			size_t numberSlots = it.spellModifiers.size();
+			auto const numberSlots = it.spellModifiers.size();
 			str.append(std::to_string(numberSlots));
 			str.append(" ");
 			if (numberSlots > 1) {
@@ -276,7 +281,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, float goldMultiplier) {
+void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, float goldMultiplier, bool isSelling) {
 	clearTexts();
 	int maxWidth = static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET);
 	sf::Vector2f currentOffset;
@@ -298,7 +303,7 @@ void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, fl
 	
 	addText(getGoldText(item, goldMultiplier), COLOR_WHITE, currentOffset);
 	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_NEUTRAL, currentOffset);
-	addText(getInteractionText(item), COLOR_NEUTRAL, currentOffset);
+	addText(getInteractionText(item, isSelling), COLOR_NEUTRAL, currentOffset);
 
 	float height = 2 * GUIConstants::TEXT_OFFSET + currentOffset.y;
 	setHeight(height);
