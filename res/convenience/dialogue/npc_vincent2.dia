@@ -738,7 +738,7 @@ npc.id:npc_vincent2
 	trigger:DL:addHint("ObserverSpell")
 	# translation: 
 	translation.tag:DL_Vincent_ObserverSpells
-	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
+	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. It won't be a nice experience, I can tell you that.
 	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann. Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
 	translation.ch:E hässlichi Form vode Magie. D'Lüt tüänd die i iri Hüser dämit niemert öppis chluppe cha. Aber die Zaubor gsehnd au nöd alles (grinst). Aber wänn si dich verwütsche tüend, dänn steckeds dich id Chistä... und da isch nöd dä hammo, da chani dir sägä. 
 	[
@@ -806,7 +806,7 @@ npc.id:npc_vincent2
 	trigger:DL:addConditionProgress("npc_vincent2", "second_quest")
 	# translation: 
 	translation.tag:DL_Vincent_TeachUnlock
-	translation.en:Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
+	translation.en:Of course. Just read this scroll and I can offer you more work in this... domain. (Grins) 
 	translation.de:Natürlich. Lies einfach diese Schriftrolle und ich kann dir einen weiteren Auftrag anbieten, falls du noch an Arbeit in diesem... Bereich interessiert bist. (Grinst)
 	translation.ch:Natürlich. Lies eifach die Schriftrolle und ich chan dir no en wiiterä Job azbütä, falls immer no a Arbät i dem... Bereich interessiert bisch. (Grinst)
 	[

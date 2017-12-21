@@ -73,7 +73,7 @@ npc.id:npc_lloyd3
 		condition:not DL:isConditionFulfilled("npc_lloyd3", "paladin")
 		# translation: 
 		translation.tag:DL_Choice_Paladin
-		translation.en:She wasn't alone, there was some paladin guarding her.
+		translation.en:She wasn't alone, there was a paladin guarding her.
 		translation.de:Sie war nicht alleine, sie wurde von einem Paladin bewacht.
 		translation.ch:Si isch nid allei gsi, en Paladin het si bewacht.
 	]
@@ -82,7 +82,7 @@ npc.id:npc_lloyd3
 		tag:6
 		# translation: 
 		translation.tag:DL_Choice_WhoAbducted
-		translation.en:Who abduced her?
+		translation.en:Who abducted her?
 		translation.de:Wer hat sie entführt?
 		translation.ch:Wer het si entführt?
 	]
@@ -151,7 +151,7 @@ npc.id:npc_lloyd3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lloyd_WhoAbducted4
-	translation.en:But be careful when questionning them - we don't want to cause a stir.
+	translation.en:But be careful when questioning them - we don't want to cause a stir.
 	translation.de:Aber sei vorsichtig wenn du sie befragst - wir wollen kein grosses Aufsehen erregen.
 	translation.ch:Aber bis vorsichtig wese befragsch - mir wöi kes grosses Gliir mache.
 	[

@@ -30,9 +30,9 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(4)
 		if (not DL:isConditionFulfilled("npc_lloyd3", "paladin")) then 
-			DL:addChoice(5, "DL_Choice_Paladin") -- She wasn't alone, there was some paladin guarding her.
+			DL:addChoice(5, "DL_Choice_Paladin") -- She wasn't alone, there was a paladin guarding her.
 		end
-		DL:addChoice(6, "DL_Choice_WhoAbducted") -- Who abduced her?
+		DL:addChoice(6, "DL_Choice_WhoAbducted") -- Who abducted her?
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_lloyd3", "paladin")) then 
@@ -57,7 +57,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(9, -2, "DL_Lloyd_WhoAbducted4") -- But be careful when questionning them - we don't want to cause a stir.
+		DL:createNPCNode(9, -2, "DL_Lloyd_WhoAbducted4") -- But be careful when questioning them - we don't want to cause a stir.
 		DL:addNode()
 
 	end

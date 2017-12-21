@@ -229,7 +229,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(28, 29, "DL_Luiz_CathedralNecro3") -- They've brought it into their cathedral to purify it, but this would do even more harm.
+			DL:createNPCNode(28, 29, "DL_Luiz_CathedralNecro3") -- They took it into their cathedral to purify it, but this would do even more harm.
 			DL:addNode()
 
 

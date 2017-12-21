@@ -363,7 +363,7 @@ npc.id:npc_koray
 	trigger:DL:addConditionProgress("npc_koray", "telekinesis")
 	# translation: 
 	translation.tag:DL_Koray_Telekinesis
-	translation.en:That's a type of earth magic, using the earths magnetism to move objects. Quite handy if you ask me.
+	translation.en:That's a type of earth magic, using the earth's magnetism to move objects. Quite handy if you ask me.
 	translation.de:Das ist eine Art Erdmagie. Man benutzt den Erdmagnetismus, um entfernte Objekte zu bewegen. Ist ziemlich nützlich, glaub mir.
 	translation.ch:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z'bewege. Isch zimli nützlich, weisch.
 	[

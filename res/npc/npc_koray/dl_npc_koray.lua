@@ -130,7 +130,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "telekinesis")) then 
 
-			DL:createNPCNode(19, 21, "DL_Koray_Telekinesis") -- That's a type of earth magic, using the earths magnetism to move objects. Quite handy if you ask me.
+			DL:createNPCNode(19, 21, "DL_Koray_Telekinesis") -- That's a type of earth magic, using the earth's magnetism to move objects. Quite handy if you ask me.
 			DL:addConditionProgress("npc_koray", "telekinesis")
 			DL:addNode()
 

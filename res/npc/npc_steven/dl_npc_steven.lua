@@ -25,7 +25,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(2)
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
-			DL:addChoice(5, "DL_Choice_ExplainRules") -- Explain me the rules of the city.
+			DL:addChoice(5, "DL_Choice_ExplainRules") -- Explain the rules of the city to me.
 		end
 		if (not DL:isConditionFulfilled("npc_steven", "who_are_you")) then 
 			DL:addChoice(6, "DL_Choice_WhoAreYou") -- Who are you?

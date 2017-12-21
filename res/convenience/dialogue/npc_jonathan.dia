@@ -488,7 +488,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball4
-	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
+	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's only one small problem with that map...
 	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
 	translation.ch:I bi mr ziemli sicher dass dia Karta, wo dr Cyrus miar gschickt het, dr Schlüssel isch zum de Ort z'finda. As git do aber a klises Problem mit dera Karta...
 	[
@@ -616,7 +616,7 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "break_protection")
 	# translation: 
 	translation.tag:DL_Jonathan_BreakingProtection
-	translation.en:You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
+	translation.en:You mean, is there a good reason for this spell? Well, if there is, we'll find out soon enough.
 	translation.de:Du meinst, es gibt einen guten Grund für diesen Zauber? Wenn es den gibt, werden wir es früh genug herausfinden.
 	translation.ch:Du mainsch, as git a guata Grund für de Zauber? Jo wenns de git, denn findemer das schu gnuag früah usa.
 	[
@@ -862,7 +862,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_GoodJobGuild
-	translation.en:Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+	translation.en:Well, good job on joining a mage guild. I wasn't able to decrypt your map with just elemental magic.
 	translation.de:Gut, dass du eine Magiergilde gefunden hast. Ich konnte deine Karte bis jetzt nicht mit Elementarmagie entschlüsseln.
 	translation.ch:Guat, dass a Magiergilda gfunda hesch. Bis ez hanis nonid gschafft, dini Karta nur mit Elementarmagie z'entschlüssla.
 	[

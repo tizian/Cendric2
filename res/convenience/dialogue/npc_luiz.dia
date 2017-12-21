@@ -597,7 +597,7 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_CathedralNecro3
-	translation.en:They've brought it into their cathedral to purify it, but this would do even more harm.
+	translation.en:They took it into their cathedral to purify it, but this would do even more harm.
 	translation.de:Sie haben es in ihre Kathedrale gebracht, um es zu läutern, doch das würde noch mehr Schaden anrichten.
 	translation.ch:Si häns in ihri Kathedrale brocht zums läutere, aber das würd no meh Schade arichte.
 	[

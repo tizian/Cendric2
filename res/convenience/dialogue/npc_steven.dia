@@ -58,7 +58,7 @@ npc.id:npc_steven
 		condition:not DL:isConditionFulfilled("npc_steven", "rules")
 		# translation: 
 		translation.tag:DL_Choice_ExplainRules
-		translation.en:Explain me the rules of the city.
+		translation.en:Explain the rules of the city to me.
 		translation.de:Erklär mir die Regeln der Stadt.
 		translation.ch:Erklär mer d'Regle vode Stadt.
 	]

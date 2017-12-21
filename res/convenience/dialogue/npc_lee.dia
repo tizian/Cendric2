@@ -132,7 +132,7 @@ npc.id:npc_lee
 	trigger:DL:addConditionProgress("npc_leeluv", "second_rant")
 	# translation: 
 	translation.tag:DL_Lee_SecondRant
-	translation.en:Pha! If he wouldn't have slept when our captain called our sailors back, we wouldn't have missed it either!
+	translation.en:Pha! If he hadn't have slept when our captain called our sailors back, we wouldn't have missed it either!
 	translation.de:Pha! Hätte er nicht geschlafen, als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
 	translation.ch:Pha! Wener nid pennt het wo üse Kapitän d'Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
 	[
@@ -204,7 +204,7 @@ npc.id:npc_lee
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lee_CalmDown
-	translation.en:Yes maybe you're right. This doesn't bring us anywhere.
+	translation.en:Yes maybe you're right. This doesn't get us anywhere.
 	translation.de:Ja vielleicht hast du recht. Das bringt uns auch nicht weiter.
 	translation.ch:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
 	[

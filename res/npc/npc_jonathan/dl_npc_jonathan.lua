@@ -192,7 +192,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lay there. But there's only one small problem with that map...
+			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's only one small problem with that map...
 			DL:addNode()
 
 
@@ -246,7 +246,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_jonathan", "break_protection")) then 
 
-			DL:createNPCNode(31, -2, "DL_Jonathan_BreakingProtection") -- You mean, there's a good reason for this spell? Well, if there is, we'll find out soon enough.
+			DL:createNPCNode(31, -2, "DL_Jonathan_BreakingProtection") -- You mean, is there a good reason for this spell? Well, if there is, we'll find out soon enough.
 			DL:addConditionProgress("npc_jonathan", "break_protection")
 			DL:addNode()
 
@@ -355,7 +355,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(46, 49, "DL_Jonathan_GoodJobGuild") -- Well, good job on joining a mage guid. I wasn't able to decrypt your map with just elemental magic.
+			DL:createNPCNode(46, 49, "DL_Jonathan_GoodJobGuild") -- Well, good job on joining a mage guild. I wasn't able to decrypt your map with just elemental magic.
 			DL:addNode()
 
 

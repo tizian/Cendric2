@@ -99,11 +99,11 @@ loadDialogue = function(DL)
 		end
 
 
-		DL:createNPCNode(12, 14, "DL_Jonathan_Map") -- I still know where it lead. That's why I wanted to meet you here.
+		DL:createNPCNode(12, 14, "DL_Jonathan_Map") -- I still know where it leads. That's why I wanted to meet you here.
 		DL:addNode()
 
 
-		DL:createNPCNode(14, 15, "DL_Jonathan_Map2") -- It lead to the Highlands of Admantris. And the key to get there was elemental magic.
+		DL:createNPCNode(14, 15, "DL_Jonathan_Map2") -- It leads to the Highlands of Admantris - and the key to get there was elemental magic.
 		DL:addNode()
 
 

@@ -275,6 +275,16 @@ INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_beer', 10
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_beer', -15, -10, 20, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_beer', 1, 600, 100, 50, 50);
 
+-- Rum
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rum', 'item', 'Rum', 'Rum', 'Rum');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rum', 'item_desc', 'A strong drink, matey!', 'Ein starkes Gesöff.', 'E starchs Gsöff.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_rum', 'consumable', 500, 700, 15);
+INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_ice, dmg_fire) values ('fo_rum', -5, 200, 200, 10);
+INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_rum', 15, 1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_rum', -15, -10, 20, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_rum', 1, 550, 400, 50, 50);
+
 -- Sausage
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_sausage', 'item', 'Sausage', 'Wurst', 'Wurscht');

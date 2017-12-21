@@ -56,7 +56,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_luv", "first_rant")) then 
 
-			DL:createNPCNode(6, -2, "DL_Lee_SecondRant") -- Pha! If he wouldn't have slept when our captain called our sailors back, we wouldn't have missed it either!
+			DL:createNPCNode(6, -2, "DL_Lee_SecondRant") -- Pha! If he hadn't have slept when our captain called our sailors back, we wouldn't have missed it either!
 			DL:addConditionProgress("npc_leeluv", "second_rant")
 			DL:addNode()
 
@@ -88,7 +88,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_leeluv", "calm_down")) then 
 
-		DL:createNPCNode(8, 9, "DL_Lee_CalmDown") -- Yes maybe you're right. This doesn't bring us anywhere.
+		DL:createNPCNode(8, 9, "DL_Lee_CalmDown") -- Yes maybe you're right. This doesn't get us anywhere.
 		DL:addNode()
 
 

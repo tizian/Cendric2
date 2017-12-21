@@ -3,6 +3,7 @@ wares =
 {
 	{"fo_beer", 20},
 	{"fo_wine", 7},
+	{"fo_rum", 3},
 	{"fo_milk", 3},
 	{"fo_bread", 10},
 	{"fo_cheese", 5},

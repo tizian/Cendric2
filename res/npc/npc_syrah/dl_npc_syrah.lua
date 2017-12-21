@@ -84,7 +84,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -2, "DL_Syrah_Mark3") -- (Syrah pulls a green book out of her shelf and browses in it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
+		DL:createNPCNode(5, -2, "DL_Syrah_Mark3") -- (Syrah pulls a green book out of her shelf and browses it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
 		DL:changeQuestState("questionable_method", "started")
 		DL:addNode()
 

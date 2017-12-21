@@ -298,7 +298,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_vincent2", "observer_spells")) then 
 
-			DL:createNPCNode(36, -2, "DL_Vincent_ObserverSpells") -- A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. And this won't be a nice experience, I can tell you that.
+			DL:createNPCNode(36, -2, "DL_Vincent_ObserverSpells") -- A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. It won't be a nice experience, I can tell you that.
 			DL:addConditionProgress("npc_vincent2", "observer_spells")
 			DL:addHint("ObserverSpell")
 			DL:addNode()
@@ -328,7 +328,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(40, -2, "DL_Vincent_TeachUnlock") -- Of course. Just read this scroll and I can offer your more work in this... domain. (Grins) 
+		DL:createNPCNode(40, -2, "DL_Vincent_TeachUnlock") -- Of course. Just read this scroll and I can offer you more work in this... domain. (Grins) 
 		DL:addItem("sp_unlock", 1)
 		DL:addConditionProgress("npc_vincent2", "second_quest")
 		DL:addNode()

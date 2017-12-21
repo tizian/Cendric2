@@ -243,7 +243,7 @@ npc.id:npc_jonathan2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_Map
-	translation.en:I still know where it lead. That's why I wanted to meet you here.
+	translation.en:I still know where it leads. That's why I wanted to meet you here.
 	translation.de:Ich weiss immer noch, wohin sie geführt hat. Deshalb wollte ich dich hier treffen.
 	translation.ch:I weiss immerno wo si hera gfühart hät. Drum hani di au do treffa wella.
 	[
@@ -257,9 +257,9 @@ npc.id:npc_jonathan2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_Map2
-	translation.en:It lead to the Highlands of Admantris. And the key to get there was elemental magic.
-	translation.de:Sie hat ins Hochland von Admantris geführt. Und der Schlüssel, um dort hinzukommen, war Elementarmagie.
-	translation.ch:Si hät ins Hochland vu Admantris gfühart. Und dr Schlüssel zum döt herakho isch Elementarmagie gsi.
+	translation.en:It leads to the Highlands of Admantris - and the key to get there was elemental magic.
+	translation.de:Sie hat ins Hochland von Admantris geführt - und der Schlüssel, um dort hinzukommen, war Elementarmagie.
+	translation.ch:Si hät ins Hochland vu Admantris gfühart - und dr Schlüssel zum döt herakho isch Elementarmagie gsi.
 	[
 		# Link node, tag is next tag
 		tag:15

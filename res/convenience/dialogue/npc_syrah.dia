@@ -250,7 +250,7 @@ npc.id:npc_syrah
 	trigger:DL:changeQuestState("questionable_method", "started")
 	# translation: 
 	translation.tag:DL_Syrah_Mark3
-	translation.en:(Syrah pulls a green book out of her shelf and browses in it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
+	translation.en:(Syrah pulls a green book out of her shelf and browses it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
 	translation.de:(Syrah zieht ein grünes Buch aus ihrem Regal und blättert darin) Ich brauche nur ein paar Knochen, ein wenig Blut einer Fledermaus und das Herz einer Feuerratte. Ich denke, das kannst du alles von den garstigen Kreaturen in der Kanalisation von Gandria bekommen.
 	translation.ch:(D'Syrah zieht es grüens Buech us ihrem Regal und blätteret drin) Ich bruch nur es paar Knoche, e glei weeneli Bluet vonere Fläädermuus und es Härz vonere Fyyrratte. I glaub das söttisch alles vo dä Viecher in dr Kanalisation vo Gandria becho.
 	[

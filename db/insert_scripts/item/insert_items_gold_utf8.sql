@@ -15,3 +15,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('go
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('go_onecoin', 'gold', 0, 0, 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('go_onecoin', -18, -42, 8, 8);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('go_onecoin', 1, 100, 0, 50, 50);
+
+-- Gold - Treasure
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('go_treasure', 'item', 'Treasure','Schatz','Schatz');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('go_treasure', 'gold', 0, 0, 50);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('go_treasure', -20, -10, 80, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('go_treasure', 1, 600, 400, 100, 50);
