@@ -50,8 +50,8 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 			else if (line.compare(0, strlen(HINTS_ON), string(HINTS_ON)) == 0) {
 				noError = readHintsOn(line, data);
 			}
-			else if (line.compare(0, strlen(DAMAGENUMBERS_ON), string(DAMAGENUMBERS_ON)) == 0) {
-				noError = readDamageNumbersOn(line, data);
+			else if (line.compare(0, strlen(QUESTMARKERS_ON), string(QUESTMARKERS_ON)) == 0) {
+				noError = readQuestmarkersOn(line, data);
 			}
 			else if (line.compare(0, strlen(STOPWATCH_ON), string(STOPWATCH_ON)) == 0) {
 				noError = readStopwatchOn(line, data);
@@ -217,8 +217,8 @@ bool ConfigurationReader::readHintsOn(const std::string& line, ConfigurationData
 	return readBoolean(line, data.isDisplayHints);
 }
 
-bool ConfigurationReader::readDamageNumbersOn(const std::string& line, ConfigurationData& data) const {
-	return readBoolean(line, data.isDisplayDamageNumbers);
+bool ConfigurationReader::readQuestmarkersOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isDisplayQuestMarkers);
 }
 
 bool ConfigurationReader::readStopwatchOn(const std::string& line, ConfigurationData& data) const {

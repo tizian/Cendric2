@@ -40,8 +40,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Dele
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DisplayMode','Display Mode','Anzeigemodus','Aazeigemodus','Modo de pantalla');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DialogueEnd','[END]','[ENDE]','[FERTIG]','[TERMINAR]');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DialogueTrade','[TRADE]','[HANDELN]','[HANDLE]','[COMERCIAR]');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DisplayDamageNumbers','Display Damage Numbers','Schadensszahlen anzeigen','Schadensszahle aazeige','Mostrar número de daños');
+
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DisplayHints','Display Hints','Tipps anzeigen','Tipps aazeige','Mostrar pistas');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DisplayQuestMarkers','Display Quest Markers','Questmarkierungen anzeigen','Questmarkierige aazeige','Mostrar ?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Divine','Divine','Heilig','Heilig','Divino');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Documents','Documents','Schriftstücke','Dokument','Documentos');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Done','Done','Erfüllt','Erfüllt','Terminada');
@@ -188,6 +189,8 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Refl
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reputation','Reputation','Ruf','Ruef','Reputación');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reset','Reset','Zurücksetzen','Zruggsetze','Reiniciar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Resume','Resume','Spiel fortsetzen','Zrugg zum Spiel','Continuar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickSell','Right click to sell','Rechtsklicken zum Verkaufen','Rechtsklicke zum verchaufe','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickBuy','Right click to buy','Rechtsklicken zum Kaufen','Rechtsklicke zum chaufe','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickLearn','Right click to learn','Rechtsklicken zum Lernen','Rechtsklicke zum lerne','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickRead','Right click to read','Rechtsklicken zum Lesen','Rechtsklicke zum läse','?');

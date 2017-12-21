@@ -1,11 +1,9 @@
 #pragma once
 
-#include "global.h"
-
 // some constants used by configuration reader & writer
 class ConfigurationIO {
 public:
-	virtual ~ConfigurationIO() {}
+	virtual ~ConfigurationIO() = default;
 protected:
 	const char* LANGUAGE = "language";
 	const char* DISPLAYMODE = "displaymode";
@@ -23,5 +21,5 @@ protected:
 	const char* DEBUGRENDERING_ON = "debugrendering.on";
 	const char* SMOOTHING_ON = "smoothing.on";
 	const char* HINTS_ON = "hints.on";
-	const char* DAMAGENUMBERS_ON = "damagenumbers.on";
+	const char* QUESTMARKERS_ON = "questmarkers.on";
 };

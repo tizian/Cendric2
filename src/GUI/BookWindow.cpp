@@ -26,18 +26,18 @@ BookWindow::BookWindow(const Item& item) : Window(
 	m_leftArrow = new ArrowButton(false);
 	m_leftArrow->setMainColor(COLOR_DARK_BROWN);
 	m_leftArrow->setDisabledColor(COLOR_MEDIUM_BROWN);
-	m_leftArrow->setMouseoverColor(COLOR_WHITE);
+	m_leftArrow->setMouseoverColor(COLOR_LIGHT_PURPLE);
 
 	m_rightArrow = new ArrowButton(true);
 	m_rightArrow->setMainColor(COLOR_DARK_BROWN);
 	m_rightArrow->setDisabledColor(COLOR_MEDIUM_BROWN);
-	m_rightArrow->setMouseoverColor(COLOR_WHITE);
+	m_rightArrow->setMouseoverColor(COLOR_LIGHT_PURPLE);
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_DARK_BROWN);
 
 	m_bookTitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
-	m_bookTitle.setColor(COLOR_DARK_BROWN);
+	m_bookTitle.setColor(COLOR_MEDIUM_BROWN);
 	m_bookTitle.setTextStyle(TextStyle::Shadowed);
 	m_bookTitle.setTextAlignment(TextAlignment::Center);
 

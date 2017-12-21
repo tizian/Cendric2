@@ -5,6 +5,9 @@ INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeActiva
 INSERT INTO text (text_id, english, german, swiss_german) values ('GodmodeDeactivated','Godmode deactivated','Godmode deaktiviert','Godmode deaktiviert');
 INSERT INTO text (text_id, english, german, swiss_german) values ('Keys','Keys','Schlüssel','Schlüssel');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SwitchTarget','Switch target','Ziel wechseln','Ziel ändere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('DisplayQuestMarkers','Display Quest Markers','Questmarkierungen anzeigen','Questmarkierige aazeige','Mostrar ?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickSell','Right click to sell','Rechtsklicken zum Verkaufen','Rechtsklicke zum verchaufe','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickBuy','Right click to buy','Rechtsklicken zum Kaufen','Rechtsklicke zum chaufe','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Guild','Guild','Gilde','Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoGuild','No Guild','Keine Gilde','Kei Gilde','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GuildJoned','Guild joined','Gilde beigetreten','Gilde biitrette','?');

@@ -1,4 +1,6 @@
 #include "FileIO/QuestLoader.h"
+#include "LuaBridge/LuaBridge.h"
+#include "Logger.h"
 
 using namespace luabridge;
 
@@ -67,6 +69,19 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 			questData.conditions.insert(element.cast<std::string>());
 			i++;
 			element = conditions[i];
+		}
+	}
+
+	LuaRef markers = getGlobal(L, "markers");
+	if (markers.isTable()) {
+		int i = 1;
+		LuaRef marker = markers[i];
+		while (!marker.isNil()) {
+			LuaRef texts = marker["texts"];
+			LuaRef images = marker["images"];
+			if (!texts.isTable() || !images.isTable()) {
+			}
+			marker = markers[++i];
 		}
 	}
 

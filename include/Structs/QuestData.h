@@ -2,6 +2,12 @@
 
 #include "global.h"
 
+struct QuestMarkerData final {
+	std::string mapId;
+	sf::Vector2f position;
+	int step = 0;
+};
+
 struct QuestData final {
 	std::string id;
 	bool isMainQuest = false;
@@ -14,4 +20,7 @@ struct QuestData final {
 	std::map<std::string, int> targets;
 	// which conditions must be fulfilled?
 	std::set<std::string> conditions;
+
+	// quest markers
+	std::vector<QuestMarkerData> questMarkers;
 };

@@ -5,7 +5,6 @@
 #include "GUI/MerchantWindow.h"
 #include "Structs/MerchantData.h"
 #include "Screens/WorldScreen.h"
-#include "GUI/Button.h"
 
 // the merchant interface, acting as a interface between dialogue and merchant actions
 class MerchantInterface final {

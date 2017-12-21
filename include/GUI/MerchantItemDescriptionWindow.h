@@ -14,7 +14,7 @@ public:
 protected:
 	std::string getGoldText(const Item& item, float goldMultiplier) const override;
 	std::string getReputationText(const Item& item) const override;
-	std::string getInteractionText(const Item& item) const override;
+	std::string getInteractionText(const Item& item, bool isSelling) const override;
 
 private:
 	FractionID m_fraction;
