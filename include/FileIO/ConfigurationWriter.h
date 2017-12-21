@@ -4,8 +4,6 @@
 #include <sstream>
 
 #include "global.h"
-#include "Logger.h"
-
 #include "Structs/ConfigurationData.h"
 #include "FileIO/ConfigurationIO.h"
 
@@ -24,7 +22,7 @@ private:
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
 	std::string writeAutotargetOn(const ConfigurationData& data) const;
 	std::string writeHintsOn(const ConfigurationData& data) const;
-	std::string writeDamageNumbersOn(const ConfigurationData& data) const;
+	std::string writeQuestmarkersOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
 	std::string writeDisplayMode(const ConfigurationData& data) const;

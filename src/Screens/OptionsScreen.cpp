@@ -135,12 +135,12 @@ void OptionsScreen::execOnEnter() {
 
 	distFromTop = distFromTop + 50;
 
-	// display damage numbers
-	m_displayDamageNumbersCheckbox = new Checkbox();
-	m_displayDamageNumbersCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	m_displayDamageNumbersCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayDamageNumbers);
-	m_displayDamageNumbersCheckbox->setText("DisplayDamageNumbers");
-	addObject(m_displayDamageNumbersCheckbox);
+	// display quest markers
+	m_displayQuestMarkersCheckbox = new Checkbox();
+	m_displayQuestMarkersCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_displayQuestMarkersCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayQuestMarkers);
+	m_displayQuestMarkersCheckbox->setText("DisplayQuestMarkers");
+	addObject(m_displayQuestMarkersCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -223,7 +223,7 @@ void OptionsScreen::onApply() {
 	config.isSoundOn = m_soundCheckbox->isChecked();
 	config.isQuickcast = m_quickCastCheckbox->isChecked();
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
-	config.isDisplayDamageNumbers = m_displayDamageNumbersCheckbox->isChecked();
+	config.isDisplayQuestMarkers = m_displayQuestMarkersCheckbox->isChecked();
 	config.isAutotarget = m_autotargetCheckbox->isChecked();
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();

@@ -28,7 +28,7 @@ struct ConfigurationData final {
 	bool isDebugRendering;
 	bool isWindowReload;
 	bool isDisplayHints;
-	bool isDisplayDamageNumbers;
+	bool isDisplayQuestMarkers;
 	bool isDisplayStopwatch;
 	bool isGodmode;
 };

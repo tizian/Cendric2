@@ -1,11 +1,10 @@
 #include "FileIO/ConfigurationWriter.h"
 #include "GlobalResource.h"
-
-using namespace std;
+#include "Logger.h"
 
 bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
-	std::string path = getDocumentsPath(GlobalResource::CONFIGURATION_PATH);
-	ofstream configuration(path, ios::trunc);
+	auto const path = getDocumentsPath(GlobalResource::CONFIGURATION_PATH);
+	std::ofstream configuration(path, std::ios::trunc);
 	if (configuration.is_open()) {
 		configuration << writeConfigurationHeader();
 		configuration << writeSoundOn(data);
@@ -16,7 +15,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeQuickcastOn(data);
 		configuration << writeAutotargetOn(data);
 		configuration << writeHintsOn(data);
-		configuration << writeDamageNumbersOn(data);
+		configuration << writeQuestmarkersOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeAlternativeInputMap(data);
 		configuration << writeVSyncOn(data);
@@ -49,107 +48,107 @@ std::string ConfigurationWriter::writeConfigurationHeader() const {
 }
 
 std::string ConfigurationWriter::writeSoundOn(const ConfigurationData& data) const {
-	string soundOn = "# 0 means sound off, 1 means sound on\n";
-	return soundOn.append(string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0") + "\n");
+	std::string soundOn = "# 0 means sound off, 1 means sound on\n";
+	return soundOn.append(std::string(SOUND_ON) + ":" + (data.isSoundOn ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeFPSLimitOn(const ConfigurationData& data) const {
-	string limitOn = "# 0 means fps limit off, 1 means fps limit on\n";
-	return limitOn.append(string(FPS_LIMIT_ON) + ":" + (data.isFPSLimited ? "1" : "0") + "\n");
+	std::string limitOn = "# 0 means fps limit off, 1 means fps limit on\n";
+	return limitOn.append(std::string(FPS_LIMIT_ON) + ":" + (data.isFPSLimited ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data) const {
-	string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
-	return quickcastOn.append(string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
+	std::string quickcastOn = "# 0 means quickcast off, 1 means quickcast on\n";
+	return quickcastOn.append(std::string(QUICKCAST_ON) + ":" + (data.isQuickcast ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeAutotargetOn(const ConfigurationData& data) const {
-	string autotargetOn = "# 0 means autotarget off, 1 means autotarget on\n";
-	return autotargetOn.append(string(AUTOTARGET_ON) + ":" + (data.isAutotarget ? "1" : "0") + "\n");
+	std::string autotargetOn = "# 0 means autotarget off, 1 means autotarget on\n";
+	return autotargetOn.append(std::string(AUTOTARGET_ON) + ":" + (data.isAutotarget ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeHintsOn(const ConfigurationData& data) const {
-	string hintsOn = "# 0 means hints are not displayed, 1 means they are\n";
-	return hintsOn.append(string(HINTS_ON) + ":" + (data.isDisplayHints ? "1" : "0") + "\n");
+	std::string hintsOn = "# 0 means hints are not displayed, 1 means they are\n";
+	return hintsOn.append(std::string(HINTS_ON) + ":" + (data.isDisplayHints ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeDamageNumbersOn(const ConfigurationData& data) const {
-	string damageNumbersOn = "# 0 means damage numbers are not displayed, 1 means they are\n";
-	return damageNumbersOn.append(string(DAMAGENUMBERS_ON) + ":" + (data.isDisplayDamageNumbers ? "1" : "0") + "\n");
+std::string ConfigurationWriter::writeQuestmarkersOn(const ConfigurationData& data) const {
+	std::string questmarkersOn = "# 0 means quest markers are not displayed, 1 means they are\n";
+	return questmarkersOn.append(std::string(QUESTMARKERS_ON) + ":" + (data.isDisplayQuestMarkers ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeStopwatchOn(const ConfigurationData& data) const {
-	string stopwatchOn = "# 0 means stopwatch is off, 1 means stopwatch is on\n";
+	std::string stopwatchOn = "# 0 means stopwatch is off, 1 means stopwatch is on\n";
 	stopwatchOn += "# if the stopwatch is on, it will display a stopwatch inside the level.\n";
-	return stopwatchOn.append(string(STOPWATCH_ON) + ":" + (data.isDisplayStopwatch ? "1" : "0") + "\n");
+	return stopwatchOn.append(std::string(STOPWATCH_ON) + ":" + (data.isDisplayStopwatch ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const {
-	string debugRenderingOn = "# 0 means debug rendering is off, 1 means debug rendering on\n";
+	std::string debugRenderingOn = "# 0 means debug rendering is off, 1 means debug rendering on\n";
 	debugRenderingOn += "# if the debug rendering is on, the game will display hitboxes and framerate.\n";
-	return debugRenderingOn.append(string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
+	return debugRenderingOn.append(std::string(DEBUGRENDERING_ON) + ":" + (data.isDebugRendering ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSmoothingOn(const ConfigurationData& data) const {
-	string smoothingOn = "# 0 means the resizing is handled with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
-	return smoothingOn.append(string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
+	std::string smoothingOn = "# 0 means the resizing is handled with Nearest Neighbor, 1 means with interpolation (smoothing)\n";
+	return smoothingOn.append(std::string(SMOOTHING_ON) + ":" + (data.isSmoothing ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolumeSound(const ConfigurationData& data) const {
-	string soundVolume = "# this is the sound volume (sound effects) in percent (0 - 100)\n";
-	return soundVolume.append(string(SOUND_VOLUME_SOUND) + ":" + to_string(data.volumeSound) + "\n");
+	std::string soundVolume = "# this is the sound volume (sound effects) in percent (0 - 100)\n";
+	return soundVolume.append(std::string(SOUND_VOLUME_SOUND) + ":" + std::to_string(data.volumeSound) + "\n");
 }
 
 std::string ConfigurationWriter::writeSoundVolumeMusic(const ConfigurationData& data) const {
-	string soundVolume = "# this is the sound volume (music) in percent (0 - 100)\n";
-	return soundVolume.append(string(SOUND_VOLUME_MUSIC) + ":" + to_string(data.volumeMusic) + "\n");
+	std::string soundVolume = "# this is the sound volume (music) in percent (0 - 100)\n";
+	return soundVolume.append(std::string(SOUND_VOLUME_MUSIC) + ":" + std::to_string(data.volumeMusic) + "\n");
 }
 
 std::string ConfigurationWriter::writeFPSMax(const ConfigurationData& data) const {
-	string fpsLimit = "# this is the fps limit (acceptable max fps values are 30 - 100)\n";
-	return fpsLimit.append(string(FPS_MAX) + ":" + to_string(data.maxFPS) + "\n");
+	std::string fpsLimit = "# this is the fps limit (acceptable max fps values are 30 - 100)\n";
+	return fpsLimit.append(std::string(FPS_MAX) + ":" + std::to_string(data.maxFPS) + "\n");
 }
 
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
-	string language = "# 1 for EN, 2 for DE, 3 for CH, 4 for ES\n";
-	return language.append(string(LANGUAGE) + ":" + to_string(static_cast<int>(data.language)) + "\n");
+	std::string language = "# 1 for EN, 2 for DE, 3 for CH, 4 for ES\n";
+	return language.append(std::string(LANGUAGE) + ":" + std::to_string(static_cast<int>(data.language)) + "\n");
 }
 
 std::string ConfigurationWriter::writeDisplayMode(const ConfigurationData& data) const {
-	string mode = "# 1 for Window, 2 for Fullscreen, 3 for Windowed Fullscreen\n";
-	return mode.append(string(DISPLAYMODE) + ":" + to_string(static_cast<int>(data.displayMode)) + "\n");
+	std::string mode = "# 1 for Window, 2 for Fullscreen, 3 for Windowed Fullscreen\n";
+	return mode.append(std::string(DISPLAYMODE) + ":" + std::to_string(static_cast<int>(data.displayMode)) + "\n");
 }
 
 std::string ConfigurationWriter::writeVSyncOn(const ConfigurationData& data) const {
-	string soundOn = "# 0 means vsync off, 1 means vsync on\n";
-	return soundOn.append(string(VSYNC_ON) + ":" + (data.isVSyncEnabled ? "1" : "0") + "\n");
+	std::string soundOn = "# 0 means vsync off, 1 means vsync on\n";
+	return soundOn.append(std::string(VSYNC_ON) + ":" + (data.isVSyncEnabled ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const {
-	string inputMap = "# the key input mapping.\n";
+	std::string inputMap = "# the key input mapping.\n";
 	inputMap.append("# for key map values (values before comma) guess which is which.\n");
 	inputMap.append("# for keyboard key values (values after comma) see SFML -> Keyboard.\n");
 
 	for (auto it : data.mainKeyMap) {
-		inputMap.append(string(MAIN_INPUT_MAPPING));
+		inputMap.append(std::string(MAIN_INPUT_MAPPING));
 		inputMap.append(":");
-		inputMap.append(to_string(static_cast<int>(it.first)));
+		inputMap.append(std::to_string(static_cast<int>(it.first)));
 		inputMap.append(",");
-		inputMap.append(to_string(static_cast<int>(it.second)));
+		inputMap.append(std::to_string(static_cast<int>(it.second)));
 		inputMap.append("\n");
 	}
 	return inputMap;
 }
 
 std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationData& data) const {
-	string inputMap = "# the alternative key input mapping.\n";
+	std::string inputMap = "# the alternative key input mapping.\n";
 
 	for (auto it : data.alternativeKeyMap) {
-		inputMap.append(string(ALTERNATIVE_INPUT_MAPPING));
+		inputMap.append(std::string(ALTERNATIVE_INPUT_MAPPING));
 		inputMap.append(":");
-		inputMap.append(to_string(static_cast<int>(it.first)));
+		inputMap.append(std::to_string(static_cast<int>(it.first)));
 		inputMap.append(",");
-		inputMap.append(to_string(static_cast<int>(it.second)));
+		inputMap.append(std::to_string(static_cast<int>(it.second)));
 		inputMap.append("\n");
 	}
 	return inputMap;

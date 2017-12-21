@@ -11,16 +11,16 @@
 #include <set>
 #include <map>
 #include <vector>
-#include <assert.h>
+#include <cassert>
 
 // versioning
-#define CENDRIC_VERSION_NR "0.8.0 - PUZZLE SANDBOX"
+#define CENDRIC_VERSION_NR "0.8.0"
 
 // Debug version
 #define DEBUG
 
 // For steam builds
-#define STEAM
+// #define STEAM
 
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
 // #define EXTERNAL_DOCUMENTS_FOLDER
