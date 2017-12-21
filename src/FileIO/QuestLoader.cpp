@@ -77,10 +77,29 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 		int i = 1;
 		LuaRef marker = markers[i];
 		while (!marker.isNil()) {
-			LuaRef texts = marker["texts"];
-			LuaRef images = marker["images"];
-			if (!texts.isTable() || !images.isTable()) {
+			LuaRef map = marker["map"];
+			LuaRef position = marker["position"];
+			LuaRef step = marker["step"];
+			if (!map.isString() || !step.isNumber() || !position.isTable()) {
+				g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved, map, position or step missing or wrong type.");
+				return questData;
 			}
+
+			LuaRef posX = position[1];
+			LuaRef posY = position[2];
+
+			if (!posX.isNumber() || !posY.isNumber()) {
+				g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved, position has wrong format.");
+				return questData;
+			}
+
+			QuestMarkerData data;
+			data.mapId = map.cast<std::string>();
+			data.step = step.cast<int>();
+			data.position.x = posX.cast<float>();
+			data.position.y = posY.cast<float>();
+
+			questData.questMarkers.push_back(data);
 			marker = markers[++i];
 		}
 	}

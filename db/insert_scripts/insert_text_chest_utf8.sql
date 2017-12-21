@@ -4,3 +4,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Cinderbloom','chest','Cinderbloom','Aschenblüte','Zündelblueme');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('StrangeEgg','chest','Strange Egg','Seltsames Ei','Komisches Ei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SacredUrn','chest','Sacred Urn','Heilige Urne','Heiligi Urne');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('MysteriousChest','chest','Mysterious Chest','Mysteriöse Truhe','Mysteriösi True');
