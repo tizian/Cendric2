@@ -1,16 +1,22 @@
 #include "Steam/SteamAchievements.h"
 
-SteamAchievements::SteamAchievements(Achievement_t* Achievements, int achievementCount):
- m_iAppID( 0 ),
- m_bInitialized( false ),
- m_CallbackUserStatsReceived( this, &SteamAchievements::OnUserStatsReceived ),
- m_CallbackUserStatsStored( this, &SteamAchievements::OnUserStatsStored ),
- m_CallbackAchievementStored( this, &SteamAchievements::OnAchievementStored )
+STEAM_CALLBACK(SteamAchievements, onUserStatsReceived, UserStatsReceived_t,
+	m_callbackUserStatsReceived);
+STEAM_CALLBACK(SteamAchievements, onUserStatsStored, UserStatsStored_t,
+	m_callbackUserStatsStored);
+STEAM_CALLBACK(SteamAchievements, onAchievementStored,
+	UserAchievementStored_t, m_callbackAchievementStored);
+
+SteamAchievements::SteamAchievements(AchievementData* Achievements, int achievementCount):
+ m_CallbackUserStatsReceived( this, &SteamAchievements::onUserStatsReceived ),
+ m_CallbackUserStatsStored( this, &SteamAchievements::onUserStatsStored ),
+ m_CallbackAchievementStored( this, &SteamAchievements::onAchievementStored )
 {
+	m_isInitialized = false;
      m_appID = SteamUtils()->GetAppID();
      m_achievements = Achievements;
      m_achievementCount = achievementCount;
-     RequestStats();
+     requestStats();
 }
 
 bool SteamAchievements::requestStats()
