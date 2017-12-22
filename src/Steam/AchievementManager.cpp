@@ -1,4 +1,4 @@
-#include "AchievementManager.h"
+#include "Steam/AchievementManager.h"
 
 #ifdef STEAM
 	#include "steam-sdk/public/steam/steam_api.h"
@@ -7,7 +7,12 @@
 
 AchievementManager::AchievementManager() {
 #ifdef STEAM
-	SteamAPI_Init();
+	const bool isSuccess = SteamAPI_Init();
+
+	if (isSuccess)
+	{
+		m_achievements = new SteamAchievements(g_Achievements, 4);
+	}
 #endif // STEAM
 }
 

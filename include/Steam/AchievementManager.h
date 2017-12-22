@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.h"
+#include "Steam/SteamAchievements.h"
 
 class AchievementManager final {
 public:
@@ -10,4 +11,5 @@ public:
 	void unlockAchievement(const std::string& achievement);
 
 private:
+	SteamAchievements* m_achievements = nullptr;
 };
