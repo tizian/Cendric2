@@ -3,7 +3,7 @@
 #include "Enums/EnumNames.h"
 
 MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData& data)
-: ItemDescriptionWindow(), Window(
+: Window(
 	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
