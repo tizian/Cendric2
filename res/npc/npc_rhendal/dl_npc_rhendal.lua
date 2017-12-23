@@ -333,7 +333,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(49, 50, "DL_Rhendal_BrokenBridge3") -- The problem is now, that the bridge that connects this village to the tavern, is broken.
+		DL:createNPCNode(49, 50, "DL_Rhendal_BrokenBridge3") -- Now, the problem is that the bridge that connects this village to the tavern is broken.
 		DL:addNode()
 
 

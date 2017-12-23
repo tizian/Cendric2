@@ -159,7 +159,7 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
-Sebastian, Lukas Dürrenberger, Ramón,
+Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
 Dave, Melanie Silk
@@ -363,7 +363,7 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
-Sebastian, Lukas Dürrenberger, Ramón,
+Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
 Dave, Melanie Silk
@@ -576,7 +576,7 @@ Kwon, Peter
 <<< Beta Tester >>>
 Peter, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
-Sebastian, Lukas Dürrenberger, Ramón,
+Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
 Dave, Melanie Silk

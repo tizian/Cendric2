@@ -19,6 +19,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(3, -2, "DL_Inina_Ok2") -- Thank you so much for saving me. I'll never forget this.
+		DL:changeQuestState("missing_inina", "completed")
 		DL:addNode()
 
 	end

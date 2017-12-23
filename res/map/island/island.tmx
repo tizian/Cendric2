@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="50" tileheight="50" nextobjectid="316">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="50" tileheight="50" nextobjectid="322">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="musicpath" value="res/music/pirates.ogg"/>
@@ -414,7 +414,49 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="dynamic" visible="0"/>
+ <objectgroup name="dynamic"/>
+ <objectgroup name="dynamic door 1" visible="0">
+  <properties>
+   <property name="conditions not" value="trigger,tower_1_done"/>
+  </properties>
+  <object id="317" gid="1103" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_tower_1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic door 2" visible="0">
+  <properties>
+   <property name="conditions" value="trigger_tower_1_done"/>
+   <property name="conditions not" value="trigger,tower_2_done"/>
+  </properties>
+  <object id="318" gid="1103" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_tower_2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic door 3" visible="0">
+  <properties>
+   <property name="conditions" value="trigger_tower_2_done"/>
+   <property name="conditions not" value="trigger,tower_3_done"/>
+  </properties>
+  <object id="320" gid="1103" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_tower_3"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="dynamic door 4">
+  <properties>
+   <property name="conditions" value="trigger_tower_3_done"/>
+  </properties>
+  <object id="321" gid="1103" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="key" value="ke_tower_4"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="collidable" visible="0">
   <object id="303" x="1050" y="500" width="12.5" height="200"/>
   <object id="304" x="1387.5" y="500" width="12.5" height="200"/>
@@ -426,6 +468,7 @@
  <objectgroup name="trigger">
   <object id="310" x="1200" y="587.5" width="50" height="25">
    <properties>
+    <property name="conditions" value="trigger,tower_3_done"/>
     <property name="level entry" value="res/level/ppuzzle04/ppuzzle04.tmx,350,4760"/>
     <property name="persistent" value=""/>
    </properties>
@@ -436,20 +479,25 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="313" x="1275" y="587.5" width="50" height="25">
+  <object id="313" x="1200" y="587.5" width="50" height="25">
    <properties>
+    <property name="conditions" value="trigger,tower_2_done"/>
+    <property name="conditions not" value="trigger,tower_3_done"/>
     <property name="level entry" value="res/level/ppuzzle03/ppuzzle03.tmx,350,4760"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="314" x="1062.5" y="587.5" width="50" height="25">
+  <object id="314" x="1200" y="587.5" width="50" height="25">
    <properties>
+    <property name="conditions not" value="trigger,tower_1_done"/>
     <property name="level entry" value="res/level/ppuzzle01/ppuzzle01.tmx,350,4760"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="315" x="1125" y="587.5" width="50" height="25">
+  <object id="315" x="1200" y="587.5" width="50" height="25">
    <properties>
+    <property name="conditions" value="trigger,tower_1_done"/>
+    <property name="conditions not" value="trigger,tower_2_done"/>
     <property name="level entry" value="res/level/ppuzzle02/ppuzzle02.tmx,350,4760"/>
     <property name="persistent" value=""/>
    </properties>

@@ -52,6 +52,7 @@ npc.id:npc_inina4
 	# [3] NPC Node
 	tag:3
 	# triggers: 
+	trigger:DL:changeQuestState("missing_inina", "completed")
 	# translation: 
 	translation.tag:DL_Inina_Ok2
 	translation.en:Thank you so much for saving me. I'll never forget this.

@@ -243,12 +243,15 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 void VeliusBoss::handleVeliusDead() {
 	if (m_isKorayDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_koray3", "dead");
+		m_screen->getCharacterCore()->setQuestState("missing_koray", QuestState::Failed);
 	}
 	if (m_isRobertDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_robert4", "dead");
+		m_screen->getCharacterCore()->setQuestState("missing_bob", QuestState::Failed);
 	}
 	if (m_isIninaDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_inina4", "dead");
+		m_screen->getCharacterCore()->setQuestState("missing_inina", QuestState::Failed);
 	}
 }
 

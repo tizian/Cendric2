@@ -7,4 +7,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ab
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('save_leeroy', 'quest_condition', 'Leeroy saved','Leeroy gerettet','De Leeroy grettet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('portstone_activated', 'quest_condition', 'Teleport stone activated','Teleportstein aktiviert','Teleportstei aktiviert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('leap_of_faith', 'quest_condition', 'Leap of faith survived','Glaubenssprung überlebt','Glaubenssprung überlebt');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('tower_climbed', 'quest_condition', 'Tower climbed','Turm erklommen','Turm uekletteret');
 

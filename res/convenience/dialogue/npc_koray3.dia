@@ -48,6 +48,7 @@ npc.id:npc_koray3
 	# [4] NPC Node
 	tag:4
 	# triggers: 
+	trigger:DL:changeQuestState("missing_koray", "completed")
 	# translation: 
 	translation.tag:DL_Koray_Fight3
 	translation.en:Good job. We're free again.

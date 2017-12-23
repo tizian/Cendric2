@@ -34,6 +34,7 @@ npc.id:npc_robert4
 	# [3] NPC Node
 	tag:3
 	# triggers: 
+	trigger:DL:changeQuestState("missing_bob", "completed")
 	# translation: 
 	translation.tag:DL_Robert_YouDidIt2
 	translation.en:Maybe I underestimated you. Thank you...

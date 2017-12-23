@@ -908,7 +908,7 @@ npc.id:npc_rhendal
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Rhendal_BrokenBridge3
-	translation.en:The problem is now, that the bridge that connects this village to the tavern, is broken.
+	translation.en:Now, the problem is that the bridge that connects this village to the tavern is broken.
 	translation.de:Das Problem hierbei ist, dass die Brücke, die das Dorf und die Taverne verbindet, eingestürzt ist.
 	translation.ch:Äs Problem isch aber, dass d'Brugg, wo das Dorf und d'Taverne verbindet, iigstürzt isch.
 	[

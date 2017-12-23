@@ -199,3 +199,28 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('theas_dream', 'quest_desc', 'Thea wants to find work in Gandria. If I ever get there, I could ask some craftspeople, if they need an apprentice.','Thea möchte Arbeit in Gandria finden. Wenn ich dort hinkomme, könnte ich ein paar Handwerker fragen, ob sie eine Lehrtochter brauchen.','D''Thea möcht Arbet in Gandria finde. Weni det anechum, chönti es paar Handwerker fröge, ob si e Lehrtochter bruched.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('theas_dream', 'quest_desc_1', 'The alchemist Syrah would take her.','Die Alchemistin Syrah würde sie nehmen.','D''Alchemistin Syrah wür si ne.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('theas_dream', 'quest_desc_2', 'Thea is going to Gandria.','Thea geht nach Gandria.','D''Thea goht nach Gandria.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_1','quest','The Tower Key','Der Turmschlüssel','De Turmschlüssel','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_1', 'quest_desc', 'Some strange cocky mage called Etoz wants me to get a part of a tower key from the sewers.','Ein seltsamer, eingebildeter Magier namens Etoz möchte, dass ich einen Teil eines Turmschlüssels aus der Kanalisation hole.','En komische, iibildete Magier namens Etoz wett, dasi en Teil vomne Turmschlüssel us de Kanalisation hole.', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_1', 'quest_desc_1', 'I should find the key part in the eastern part of the sewers.','Ich sollte den Schlüsselteil im östlichen Teil der Kanalisation finden.','Ich sött de Schlüsselteil im östliche Teil vode Kanalisation finde.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_2','quest','Another Tower Key','Noch ein Turmschlüssel','Nomol en Turmschlüssel','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_2', 'quest_desc', 'Etoz wants me to get another key from the sewers.','Etoz will noch einen Schlüssel aus der Kanalisation.','De Etoz wett namal en Schlüssel us de Kanalisation.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_3','quest','Another Tower Key?!','Noch ein Turmschlüssel?!','Nomol en Turmschlüssel?!','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_3', 'quest_desc', 'There''s a third key waiting in the Sewers. Etoz is crazy...','Es gibt noch einen Schlüssel in der Kanalisation. Etoz ist verrückt...','Es git namal en Schlüssel ide Kanalisation. De Etoz isch chli dure...', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_4','quest','The Last Tower Key','Der Letzte Turmschlüssel','De Letzt Turmschlüssel','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_key_4', 'quest_desc', 'I really hope this is the last one.','Ich hoffe wirklich, dass dieser der letzte ist.','Ich hoff würkli, dass de de letzt isch.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_1','quest','The Mysterious Tower','Der Mysteriöse Turm','De Mysteriös Turm','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_1', 'quest_desc', 'Etoz sent me to some mysterious tower on an island near the marshlands. I should climb to the top and find some chest.','Etoz hat mich zu einem mysteriösen Turm auf einer Insel in der Nähe des Sumpflands geschickt. Ich soll ihn erklimmen und eine Truhe finden.','De Etoz het mi zumne mysteriöse Turm ufere Insle ide Nöchi vom Sumpfland gschickt. Ich sölen erklimme und e True finde.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2','quest','The Tower, the Second!','Der Turm, zum Zweiten!','De Turm, zum Zweite!','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2', 'quest_desc', 'This was only the start. I need to go and climb the tower again.','Das war erst der Anfang. Ich muss nochmal auf den Turm.','Da isch erst de Afang gsi. Ich mu namal uf de Turm.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_3','quest','The Tower, the Third!','Der Turm, zum Dritte!','De Turm, zum Dritte!','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_3', 'quest_desc', 'Etoz seems to toy with me. Another tower challenge is waiting.','Etoz scheint mit mir zu spielen. Es wartet eine weitere Herausforderung auf dem Turm.','De Etoz spielt glaub mit mir. Es wartet e wiiteri Herusforderig ufem Turm.', '?');
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4','quest','The Tower, the Fourth!','Der Turm, zum Vierten!','De Turm, zum Vierte!','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4', 'quest_desc', 'Ah. Not again! When will this be over?','Ah, nicht nochmal! Wann ist das endlich vorbei?','Ah, nid nomol! Wenn isch das endli verbi?', '?');

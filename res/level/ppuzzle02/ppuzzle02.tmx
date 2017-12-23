@@ -1476,7 +1476,12 @@
     <property name="color" value="yellow"/>
    </properties>
   </object>
-  <object id="1763" gid="1161" x="950" y="850" width="50" height="50"/>
+  <object id="1763" gid="1161" x="950" y="850" width="50" height="50">
+   <properties>
+    <property name="luapath" value="res/level/ppuzzle02/chest.lua"/>
+    <property name="text" value="MysteriousChest"/>
+   </properties>
+  </object>
   <object id="1764" gid="1176" x="650" y="3650" width="50" height="50">
    <properties>
     <property name="color" value="yellow"/>

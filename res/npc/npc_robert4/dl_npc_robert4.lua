@@ -15,6 +15,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(3, -2, "DL_Robert_YouDidIt2") -- Maybe I underestimated you. Thank you...
+		DL:changeQuestState("missing_bob", "completed")
 		DL:addNode()
 
 	end
