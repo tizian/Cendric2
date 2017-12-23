@@ -1,9 +1,9 @@
 #include "Steam/AchievementManager.h"
 
 #ifdef STEAM
-	#include "steam-sdk/public/steam/steam_api.h"
-#endif // STEAM
-
+#include "Steam/CendricAchievements.h"
+#include "Steam/SteamAchievements.h"
+#endif
 
 AchievementManager::AchievementManager() {
 #ifdef STEAM
@@ -11,7 +11,7 @@ AchievementManager::AchievementManager() {
 
 	if (isSuccess)
 	{
-		m_achievements = new SteamAchievements(g_Achievements, 4);
+		m_achievements = new SteamAchievements(CendricAchievements, 28);
 	}
 #endif // STEAM
 }

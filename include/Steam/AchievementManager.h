@@ -1,7 +1,8 @@
 #pragma once
 
 #include "global.h"
-#include "Steam/SteamAchievements.h"
+
+class SteamAchievements;
 
 class AchievementManager final {
 public:

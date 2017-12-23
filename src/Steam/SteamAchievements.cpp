@@ -1,33 +1,30 @@
 #include "Steam/SteamAchievements.h"
+#include "Logger.h"
 
-STEAM_CALLBACK(SteamAchievements, onUserStatsReceived, UserStatsReceived_t,
-	m_callbackUserStatsReceived);
-STEAM_CALLBACK(SteamAchievements, onUserStatsStored, UserStatsStored_t,
-	m_callbackUserStatsStored);
-STEAM_CALLBACK(SteamAchievements, onAchievementStored,
-	UserAchievementStored_t, m_callbackAchievementStored);
-
-SteamAchievements::SteamAchievements(AchievementData* Achievements, int achievementCount):
- m_CallbackUserStatsReceived( this, &SteamAchievements::onUserStatsReceived ),
- m_CallbackUserStatsStored( this, &SteamAchievements::onUserStatsStored ),
- m_CallbackAchievementStored( this, &SteamAchievements::onAchievementStored )
+SteamAchievements::SteamAchievements(AchievementData* Achievements, int achievementCount) :
+	m_callbackUserStatsReceived(this, &SteamAchievements::onUserStatsReceived),
+	m_callbackUserStatsStored(this, &SteamAchievements::onUserStatsStored),
+	m_callbackAchievementStored(this, &SteamAchievements::onAchievementStored)
 {
 	m_isInitialized = false;
-     m_appID = SteamUtils()->GetAppID();
-     m_achievements = Achievements;
-     m_achievementCount = achievementCount;
-     requestStats();
+	m_appID = SteamUtils()->GetAppID();
+	m_achievements = Achievements;
+	m_achievementCount = achievementCount;
+	requestStats();
+}
+
+SteamAchievements::~SteamAchievements() {
 }
 
 bool SteamAchievements::requestStats()
 {
 	// Is Steam loaded? If not we can't get stats.
-	if ( nullptr == SteamUserStats() || nullptr == SteamUser() )
+	if (nullptr == SteamUserStats() || nullptr == SteamUser())
 	{
 		return false;
 	}
 	// Is the user logged on?  If not we can't get stats.
-	if ( !SteamUser()->BLoggedOn() )
+	if (!SteamUser()->BLoggedOn())
 	{
 		return false;
 	}
@@ -38,7 +35,7 @@ bool SteamAchievements::requestStats()
 bool SteamAchievements::setAchievement(const char* ID)
 {
 	// Have we received a call back from Steam yet?
-	if (m_bInitialized)
+	if (m_isInitialized)
 	{
 		SteamUserStats()->SetAchievement(ID);
 		return SteamUserStats()->StoreStats();
@@ -47,63 +44,59 @@ bool SteamAchievements::setAchievement(const char* ID)
 	return false;
 }
 
-void SteamAchievements::onUserStatsReceived( UserStatsReceived_t* pCallback )
+void SteamAchievements::onUserStatsReceived(UserStatsReceived_t* pCallback)
 {
 	// we may get callbacks for other games' stats arriving, ignore them
-	if ( m_iAppID == pCallback->m_nGameID )
+	if (m_appID == pCallback->m_nGameID)
 	{
-		if ( k_EResultOK == pCallback->m_eResult )
+		if (k_EResultOK == pCallback->m_eResult)
 		{
-			OutputDebugString("Received stats and achievements from Steam\n");
-			m_bInitialized = true;
+			g_logger->logInfo("SteamAchievements", "Received stats and achievements from Steam");
+			m_isInitialized = true;
 
 			// load achievements
-			for ( int iAch = 0; iAch < m_iNumAchievements; ++iAch )
+			for (int i = 0; i < m_achievementCount; ++i)
 			{
-				Achievement_t &ach = m_pAchievements[iAch];
+				AchievementData& achievement = m_achievements[i];
 
-				SteamUserStats()->GetAchievement(ach.m_pchAchievementID, &ach.m_bAchieved);
-				_snprintf( ach.m_rgchName, sizeof(ach.m_rgchName), "%s",
-					SteamUserStats()->GetAchievementDisplayAttribute(ach.m_pchAchievementID,
-					"name"));
-				_snprintf( ach.m_rgchDescription, sizeof(ach.m_rgchDescription), "%s",
-					SteamUserStats()->GetAchievementDisplayAttribute(ach.m_pchAchievementID,
-					"desc"));
+				SteamUserStats()->GetAchievement(achievement.m_AchievementIdString, &achievement.m_isAchieved);
+				_snprintf(achievement.m_name, sizeof(achievement.m_name), "%s",
+					SteamUserStats()->GetAchievementDisplayAttribute(achievement.m_AchievementIdString,
+						"name"));
+				_snprintf(achievement.m_description, sizeof(achievement.m_description), "%s",
+					SteamUserStats()->GetAchievementDisplayAttribute(achievement.m_AchievementIdString,
+						"desc"));
 			}
 		}
 		else
 		{
-			char buffer[128];
-			_snprintf( buffer, 128, "RequestStats - failed, %d\n", pCallback->m_eResult );
-			OutputDebugString( buffer );
+			g_logger->logError("SteamAchievements", "RequestStats - failed" + pCallback->m_eResult);
 		}
 	}
 }
 
-void SteamAchievements::onUserStatsStored(UserStatsStored_t* pCallback )
+void SteamAchievements::onUserStatsStored(UserStatsStored_t* pCallback)
 {
 	// we may get callbacks for other games' stats arriving, ignore them
-	if ( m_iAppID == pCallback->m_nGameID )
+	if (m_appID == pCallback->m_nGameID)
 	{
-		if ( k_EResultOK == pCallback->m_eResult )
+		if (k_EResultOK == pCallback->m_eResult)
 		{
-			OutputDebugString( "Stored stats for Steam\n" );
+			g_logger->logInfo("SteamAchievements", "Stored stats for Steam");
 		}
 		else
 		{
-			char buffer[128];
-			_snprintf( buffer, 128, "StatsStored - failed, %d\n", pCallback->m_eResult );
-			OutputDebugString( buffer );
+			g_logger->logError("SteamAchievements", "StatsStored - failed" + pCallback->m_eResult);
 		}
 	}
 }
 
-void SteamAchievements::onAchievementStored( UserAchievementStored_t *pCallback )
+void SteamAchievements::onAchievementStored(UserAchievementStored_t *pCallback)
 {
-     // we may get callbacks for other games' stats arriving, ignore them
-     if ( m_appId == pCallback->m_nGameID )
-     {
-          // TODO log that we stored an achievement for this game.
-     }
+	// we may get callbacks for other games' stats arriving, ignore them
+	if (m_appID == pCallback->m_nGameID)
+	{
+		g_logger->logInfo("SteamAchievements", "Achievement stored.");
+	}
 }
 
