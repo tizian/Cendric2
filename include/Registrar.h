@@ -15,9 +15,14 @@
     static Registrar registrar(ID, \
         [](MapScreen* m) -> MapDynamicTile* { return new TYPE(m);});
 
+#define REGISTER_ACHIEVEMENT(ID, TYPE) \
+    static Registrar registrar(ID, \
+        []() -> Achievement* { return new TYPE();});
+
 class Registrar final {
 public:
 	Registrar(EnemyID id, EnemyConstructor constructor);
 	Registrar(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
 	Registrar(MapDynamicTileID id, MapDynamicTileConstructor constructor);
+	Registrar(AchievementID id, AchievementConstructor constructor);
 };

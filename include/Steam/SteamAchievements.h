@@ -15,7 +15,7 @@ public:
 private:
 	void onUserStatsReceived(UserStatsReceived_t* pCallback);
 	void onUserStatsStored(UserStatsStored_t* pCallback);
-	void onAchievementStored(UserAchievementStored_t *pCallback);
+	void onAchievementStored(UserAchievementStored_t* pCallback);
 		
 private:
 	int64 m_appID; // Our current AppID

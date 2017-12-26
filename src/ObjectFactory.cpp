@@ -4,6 +4,7 @@
 #include "Spells/Spell.h"
 #include "Level/LevelDynamicTile.h"
 #include "Map/MapDynamicTile.h"
+#include "Steam/Achievement.h"
 
 ObjectFactory* ObjectFactory::Instance() {
 	static ObjectFactory factory;
@@ -49,3 +50,17 @@ MapDynamicTile* ObjectFactory::createMapDynamicTile(MapDynamicTileID id, MapScre
 	}
 	return instance;
 }
+
+void ObjectFactory::registerAchievement(AchievementID id, AchievementConstructor constructor) {
+	achievementRegistry.insert({ id, constructor });
+}
+
+Achievement* ObjectFactory::createAchievement(AchievementID id) {
+	Achievement* instance = nullptr;
+	const auto& it = achievementRegistry.find(id);
+	if (it != achievementRegistry.end()) {
+		instance = it->second();
+	}
+	return instance;
+}
+

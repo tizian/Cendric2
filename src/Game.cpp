@@ -1,5 +1,8 @@
 #include "Game.h"
 #include "Misc/icon.h"
+#ifdef STEAM
+#include "steam-sdk/public/steam/steam_api.h"
+#endif
 
 sf::RenderTexture* g_renderTexture;
 
@@ -87,6 +90,10 @@ void Game::run() {
 		}
 
 		// game updates
+#ifdef STEAM
+		SteamAPI_RunCallbacks();
+#endif // STEAM
+
 		m_screenManager->update(frameTime);
 		g_resourceManager->updateMusic(frameTime);
 		if (m_screenManager->isQuitRequested()) {

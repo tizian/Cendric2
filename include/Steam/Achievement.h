@@ -3,12 +3,15 @@
 #include "global.h"
 #include "Steam/CendricAchievements.h"
 
+class CharacterCore;
+
 class Achievement {
 public:
-    Achievement();
-    virtual ~Achievement();
+	Achievement() {}
+	virtual ~Achievement() {};
     
-    virtual void notify(const std::string& tag, const std::string& message) = 0;
+	virtual bool notify(const std::string& tag, const std::string& message) { return false; };
+	virtual bool notifyCore(const CharacterCore* core) { return false; }
     
 protected:
     AchievementData m_data;

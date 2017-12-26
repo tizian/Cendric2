@@ -58,6 +58,9 @@ struct CharacterCoreData final {
 	std::map<SpellType, std::set<SpellID>> spellsLearned;
 	std::map<SpellModifierType, int> modfiersLearned;
 
+	// achievement progress
+	std::vector<std::string> achievementsUnlocked;
+
 	// hints
 	std::vector<std::string> hintsLearned;
 

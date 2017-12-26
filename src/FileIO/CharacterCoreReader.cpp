@@ -58,6 +58,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ SPELL_LEARNED,  &CharacterCoreReader::readLearnedSpells });
 	m_readMap.insert({ MODIFIER_LEARNED,  &CharacterCoreReader::readLearnedModifiers });
 	m_readMap.insert({ HINT_LEARNED,  &CharacterCoreReader::readLearnedHints });
+	m_readMap.insert({ ACHIEVEMENT_UNLOCKED,  &CharacterCoreReader::readAchievementUnlocked });
 	m_readMap.insert({ GUILD,  &CharacterCoreReader::readGuild });
 	m_readMap.insert({ REPUTATION_PROGRESS,  &CharacterCoreReader::readReputationProgress });
 	m_readMap.insert({ WEATHER,  &CharacterCoreReader::readWeather });
@@ -686,6 +687,11 @@ bool CharacterCoreReader::readLearnedModifiers(std::string& line, CharacterCoreD
 
 bool CharacterCoreReader::readLearnedHints(std::string& line, CharacterCoreData& data) const {
 	data.hintsLearned.push_back(line);
+	return true;
+}
+
+bool CharacterCoreReader::readAchievementUnlocked(std::string& line, CharacterCoreData& data) const {
+	data.achievementsUnlocked.push_back(line);
 	return true;
 }
 

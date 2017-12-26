@@ -19,7 +19,7 @@ SteamAchievements::~SteamAchievements() {
 bool SteamAchievements::requestStats()
 {
 	// Is Steam loaded? If not we can't get stats.
-	if (nullptr == SteamUserStats() || nullptr == SteamUser())
+	if (!SteamUserStats() || !SteamUser())
 	{
 		return false;
 	}

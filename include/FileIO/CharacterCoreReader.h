@@ -51,6 +51,7 @@ private:
 	bool readLearnedSpells(std::string& line, CharacterCoreData& data) const;
 	bool readLearnedModifiers(std::string& line, CharacterCoreData& data) const;
 	bool readLearnedHints(std::string& line, CharacterCoreData& data) const;
+	bool readAchievementUnlocked(std::string& line, CharacterCoreData& data) const;
 	bool readWeather(std::string& line, CharacterCoreData& data) const;
 	bool readDeaths(std::string& line, CharacterCoreData& data) const;
 	bool readLevelDeaths(std::string& line, CharacterCoreData& data) const;

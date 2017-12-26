@@ -66,6 +66,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeSpellsLearned(data));
 		toHash.append(writeModifiersLearned(data));
 		toHash.append(writeHintsLearned(data));
+		toHash.append(writeAchievementsUnlocked(data));
 		toHash.append(writeWeather(data));
 		toHash.append(writeDeaths(data));
 		toHash.append(writeLevelDeaths(data));
@@ -416,6 +417,20 @@ std::string CharacterCoreWriter::writeHintsLearned(const CharacterCoreData& data
 	}
 
 	return hintList;
+}
+
+std::string CharacterCoreWriter::writeAchievementsUnlocked(const CharacterCoreData& data) const {
+	std::string achList = "# achievements unlocked:\n";
+
+	for (auto& it : data.achievementsUnlocked) {
+		std::string ach = std::string(ACHIEVEMENT_UNLOCKED);
+		ach.append(":");
+		ach.append(it);
+		ach.append("\n");
+		achList.append(ach);
+	}
+
+	return achList;
 }
 
 std::string CharacterCoreWriter::writeGuild(const CharacterCoreData& data) const {

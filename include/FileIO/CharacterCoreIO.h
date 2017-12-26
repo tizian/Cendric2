@@ -44,6 +44,7 @@ protected:
 	const char* SPELL_LEARNED = "spell.learned";
 	const char* MODIFIER_LEARNED = "modifier.learned";
 	const char* HINT_LEARNED = "hint.learned";
+	const char* ACHIEVEMENT_UNLOCKED = "achievement.unlocked";
 	const char* GUILD = "guild";
 	const char* REPUTATION_PROGRESS = "reputation.progress";
 	const char* WEATHER = "weather";

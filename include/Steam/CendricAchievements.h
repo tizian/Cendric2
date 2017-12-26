@@ -44,6 +44,8 @@ enum AchievementID
 	ACH_NECRONOMICON
 };
 
+#define ACHIEVEMENT_COUNT 28
+
 AchievementData CendricAchievements[] =
 {
 	_ACH_ID(ACH_SAVE_ZEFF, "ACH_SAVE_ZEFF" ),
