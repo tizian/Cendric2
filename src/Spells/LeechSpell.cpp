@@ -76,6 +76,7 @@ void LeechSpell::update(const sf::Time& frameTime) {
 		if (fastIntersect(*m_mob->getBoundingBox(), *getBoundingBox())) {
 			m_mob->addHeal(getHeal(), false, isCritical());
 			setDisposed();
+			return;
 		}
 	}
 

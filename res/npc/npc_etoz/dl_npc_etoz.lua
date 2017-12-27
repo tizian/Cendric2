@@ -216,7 +216,7 @@ loadDialogue = function(DL)
 
 
 			DL:createNPCNode(31, 32, "DL_Etoz_GotKey12") -- And it's done. Here, take it.
-			DL:addConditionProgress("ke_tower_1", "ke_tower_1")
+			DL:addItem("ke_tower_1", 1)
 			DL:addNode()
 
 

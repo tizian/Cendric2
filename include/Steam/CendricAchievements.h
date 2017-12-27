@@ -43,6 +43,9 @@ enum AchievementID
 	ACH_CANADIAN_LOOP,
 	ACH_CHICKEN_SHOCKER,
 	ACH_NECRONOMICON,
+	ACH_CRIMINAL,
+	ACH_PRISON_BREAK,
+	ACH_MINIMALIST,
 
 	MAX
 };
@@ -80,6 +83,9 @@ static std::map<AchievementID, std::string> AchievementNames = {
 	{ ACH_CANADIAN_LOOP, "ACH_CANADIAN_LOOP" },
 	{ ACH_CHICKEN_SHOCKER, "ACH_CHICKEN_SHOCKER" },
 	{ ACH_NECRONOMICON, "ACH_NECRONOMICON" },
+	{ ACH_CRIMINAL, "ACH_CRIMINAL" },
+	{ ACH_PRISON_BREAK, "ACH_PRISON_BREAK" },
+	{ ACH_MINIMALIST, "ACH_MINIMALIST" },
 };
 
 static std::string getAchievementName(AchievementID id) {

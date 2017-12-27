@@ -651,7 +651,7 @@
   </object>
   <object id="303" x="1750" y="800" width="100" height="50">
    <properties>
-    <property name="level entry" value="res/level/towerwalkway/towerwalkway.tmx,160,160"/>
+    <property name="level entry" value="res/level/towerwalkway/towerwalkway.tmx,135,160"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

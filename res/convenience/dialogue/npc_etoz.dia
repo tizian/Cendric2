@@ -434,7 +434,7 @@ npc.id:npc_etoz
 	translation.tag:DL_Etoz_StartKeyOne2
 	translation.en:That's half of a key opening a dangerous tower.
 	translation.de:Das ist die Hälfte eines Schlüssels, der einen gefährlichen Turm aufschliesst.
-	translation.ch:
+	translation.ch:Das isch d'Hälfti vomne Schlüssel, wo en gföhrliche Turm ufschlüsst.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -577,7 +577,7 @@ npc.id:npc_etoz
 	# [31] NPC Node
 	tag:31
 	# triggers: 
-	trigger:DL:addConditionProgress("ke_tower_1", "ke_tower_1")
+	trigger:DL:addItem("ke_tower_1", 1)
 	# translation: 
 	translation.tag:DL_Etoz_GotKey12
 	translation.en:And it's done. Here, take it.

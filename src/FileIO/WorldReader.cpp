@@ -268,7 +268,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					while (!conditions.empty()) {
 						if ((pos = conditions.find(",")) == std::string::npos) {
 							logError("Trigger conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
-							continue;
+							return false;
 						}
 
 						std::string conditionType = conditions.substr(0, pos);
@@ -879,7 +879,7 @@ bool WorldReader::layerConditionsFulfilled(tinyxml2::XMLElement* layer) const {
 		while (!conditions.empty()) {
 			if ((pos = conditions.find(",")) == std::string::npos) {
 				logError("Layer conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
-				continue;
+				return false;
 			}
 
 			std::string conditionType = conditions.substr(0, pos);

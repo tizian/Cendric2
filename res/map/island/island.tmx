@@ -417,7 +417,7 @@
  <objectgroup name="dynamic"/>
  <objectgroup name="dynamic door 1" visible="0">
   <properties>
-   <property name="conditions not" value="trigger,tower_1_done"/>
+   <property name="not conditions" value="trigger,tower_1_done"/>
   </properties>
   <object id="317" gid="1103" x="1200" y="650" width="50" height="50">
    <properties>
@@ -427,8 +427,8 @@
  </objectgroup>
  <objectgroup name="dynamic door 2" visible="0">
   <properties>
-   <property name="conditions" value="trigger_tower_1_done"/>
-   <property name="conditions not" value="trigger,tower_2_done"/>
+   <property name="conditions" value="trigger,tower_1_done"/>
+   <property name="not conditions" value="trigger,tower_2_done"/>
   </properties>
   <object id="318" gid="1103" x="1200" y="650" width="50" height="50">
    <properties>
@@ -438,8 +438,8 @@
  </objectgroup>
  <objectgroup name="dynamic door 3" visible="0">
   <properties>
-   <property name="conditions" value="trigger_tower_2_done"/>
-   <property name="conditions not" value="trigger,tower_3_done"/>
+   <property name="conditions" value="trigger,tower_2_done"/>
+   <property name="not conditions" value="trigger,tower_3_done"/>
   </properties>
   <object id="320" gid="1103" x="1200" y="650" width="50" height="50">
    <properties>
@@ -449,7 +449,7 @@
  </objectgroup>
  <objectgroup name="dynamic door 4">
   <properties>
-   <property name="conditions" value="trigger_tower_3_done"/>
+   <property name="conditions" value="trigger,tower_3_done"/>
   </properties>
   <object id="321" gid="1103" x="1200" y="650" width="50" height="50">
    <properties>
@@ -475,30 +475,30 @@
   </object>
   <object id="311" x="550" y="250" width="100" height="50">
    <properties>
-    <property name="level entry" value="res/level/towerwalkway/towerwalkway.tmx,5610,160"/>
+    <property name="level entry" value="res/level/towerwalkway/towerwalkway.tmx,5635,160"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="313" x="1200" y="587.5" width="50" height="25">
    <properties>
     <property name="conditions" value="trigger,tower_2_done"/>
-    <property name="conditions not" value="trigger,tower_3_done"/>
     <property name="level entry" value="res/level/ppuzzle03/ppuzzle03.tmx,350,4760"/>
+    <property name="not conditions" value="trigger,tower_3_done"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="314" x="1200" y="587.5" width="50" height="25">
    <properties>
-    <property name="conditions not" value="trigger,tower_1_done"/>
     <property name="level entry" value="res/level/ppuzzle01/ppuzzle01.tmx,350,4760"/>
+    <property name="not conditions" value="trigger,tower_1_done"/>
     <property name="persistent" value=""/>
    </properties>
   </object>
   <object id="315" x="1200" y="587.5" width="50" height="25">
    <properties>
     <property name="conditions" value="trigger,tower_1_done"/>
-    <property name="conditions not" value="trigger,tower_2_done"/>
     <property name="level entry" value="res/level/ppuzzle02/ppuzzle02.tmx,350,4760"/>
+    <property name="not conditions" value="trigger,tower_2_done"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

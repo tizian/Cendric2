@@ -4,7 +4,7 @@
 #include "Level/DynamicTiles/LadderTile.h"
 
 const sf::Time UserMovingBehavior::JUMP_GRACE_TIME = sf::milliseconds(100);
-const sf::Time UserMovingBehavior::CLIMB_STEP_TIME = sf::milliseconds(200);
+const sf::Time UserMovingBehavior::CLIMB_STEP_TIME = sf::milliseconds(150);
 const float UserMovingBehavior::MAX_JUMP_VELOCITY = 600.f;
 const float UserMovingBehavior::MIN_JUMP_VELOCITY = 200.f;
 
