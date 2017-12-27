@@ -25,4 +25,5 @@ public:
 	Registrar(LevelDynamicTileID id, LevelDynamicTileConstructor constructor);
 	Registrar(MapDynamicTileID id, MapDynamicTileConstructor constructor);
 	Registrar(AchievementID id, AchievementConstructor constructor);
+	Registrar(const std::vector<std::pair<AchievementID, AchievementConstructor>>& ids);
 };

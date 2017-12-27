@@ -86,7 +86,7 @@ static std::string getAchievementName(AchievementID id) {
 	auto it = AchievementNames.find(id);
 	if (it == AchievementNames.end()) return "";
 
-	return AchievementNames.at(id);
+	return (*it).second;
 }
 
 static AchievementData* createAchievementsArray() {

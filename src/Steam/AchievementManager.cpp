@@ -8,8 +8,9 @@
 #include "Steam/Achievement.h"
 #endif
 
-AchievementManager::AchievementManager(CharacterCore* core) {
-	m_characterCore = core;
+AchievementManager* g_achievementManager;
+
+AchievementManager::AchievementManager() {
 #ifdef STEAM
 	const bool isSuccess = SteamAPI_Init();
 
@@ -18,8 +19,6 @@ AchievementManager::AchievementManager(CharacterCore* core) {
 		m_cendricAchievements = createAchievementsArray();
 		m_steamAchievements = new SteamAchievements(m_cendricAchievements, static_cast<int>(AchievementID::MAX) - 1);
 	}
-
-	initAchievements();
 #endif // STEAM
 }
 
@@ -28,16 +27,20 @@ AchievementManager::~AchievementManager() {
 	SteamAPI_Shutdown();
 	delete m_steamAchievements;
 	delete m_cendricAchievements;
-
-	for (auto kv : m_achievements) {
-		delete kv.second;
-	}
-	m_achievements.clear();
+	
 #endif // STEAM
+	clearAchievements();
+}
+
+void AchievementManager::setCore(CharacterCore* core) {
+	m_characterCore = core;
+	initAchievements();
 }
 
 void AchievementManager::initAchievements() {
+	if (!m_characterCore) return;
 #ifdef STEAM
+	clearAchievements();
 	for (int i = static_cast<int>(AchievementID::VOID) + 1; i < static_cast<int>(AchievementID::MAX); ++i) {
 		auto achId = static_cast<AchievementID>(i);
 		auto achName = getAchievementName(achId);
@@ -60,7 +63,15 @@ void AchievementManager::initAchievements() {
 #endif
 }
 
+void AchievementManager::clearAchievements() {
+	for (auto kv : m_achievements) {
+		delete kv.second;
+	}
+	m_achievements.clear();
+}
+
 void AchievementManager::notifyAchievement(const std::string& achievement, const std::string& tag, const std::string& message) {
+	if (!m_characterCore) return;
 #ifdef STEAM
 	if (!contains(m_achievements, achievement)) return;
 
@@ -71,6 +82,7 @@ void AchievementManager::notifyAchievement(const std::string& achievement, const
 }
 
 void AchievementManager::notifyAchievementCore(const std::string& achievement) {
+	if (!m_characterCore) return;
 #ifdef STEAM
 	if (!contains(m_achievements, achievement)) return;
 
@@ -81,6 +93,7 @@ void AchievementManager::notifyAchievementCore(const std::string& achievement) {
 }
 
 void AchievementManager::unlockAchievement(const std::string& achievement) {
+	if (!m_characterCore) return;
 #ifdef STEAM
 	if (!m_steamAchievements) return;
 	if (!contains(m_achievements, achievement)) return;

@@ -9,8 +9,10 @@ struct AchievementData;
 
 class AchievementManager final {
 public:
-	AchievementManager(CharacterCore* core);
+	AchievementManager();
 	~AchievementManager();
+
+	void setCore(CharacterCore* core);
 
 	void notifyAchievement(const std::string& achievement, const std::string& tag, const std::string& message);
 	void notifyAchievementCore(const std::string& achievement);
@@ -18,6 +20,7 @@ public:
 
 private:
 	void initAchievements();
+	void clearAchievements();
 
 private:
 	CharacterCore* m_characterCore = nullptr;

@@ -180,8 +180,6 @@ public:
 	int getStoredGold() const;
 	// resets the stored items and gold
 	void resetStoredItems();
-	// notifies a steam achievement
-	void notifyAchievementUnlocked(const std::string& achievement);
 	// sets an achievement unlocked in the data.
 	void setAchievementUnlocked(const std::string& achievement);
 	// increase death count by one
@@ -210,7 +208,6 @@ private:
 	void removeStoredItem(const std::string& item, int quantity);
 
 private:
-	AchievementManager* m_achievementManager;
 	// base attributes plus the attributes of all currently equipped items
 	AttributeData m_totalAttributes;
 

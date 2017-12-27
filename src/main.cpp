@@ -3,6 +3,7 @@
 #include "DatabaseManager.h"
 #include "ResourceManager.h"
 #include "InputController.h"
+#include "Steam/AchievementManager.h"
 #include "Logger.h"
 #include "TextProvider.h"
 
@@ -45,11 +46,13 @@ int main(int argc, char* argv[]) {
 	g_resourceManager = new ResourceManager();
 	g_textProvider = new TextProvider();
 	g_inputController = new InputController();
+	g_achievementManager = new AchievementManager();
 
 	Game* game = new Game();
 	game->run();
 	delete game;
 
+	delete g_achievementManager;
 	delete g_resourceManager;
 	delete g_inputController;
 	delete g_textProvider;

@@ -14,6 +14,7 @@ class TextProvider;
 class ResourceManager;
 class InputController;
 class DatabaseManager;
+class AchievementManager;
 
 extern DatabaseManager* g_databaseManager;
 extern ResourceManager* g_resourceManager;
@@ -21,6 +22,7 @@ extern InputController* g_inputController;
 extern Logger* g_logger;
 extern TextProvider* g_textProvider;
 extern sf::RenderTexture* g_renderTexture;
+extern AchievementManager* g_achievementManager;
 
 extern std::string g_resourcePath;
 extern std::string g_documentsPath;

@@ -3,6 +3,7 @@
 #include "Screens/LoadingScreen.h"
 #include "Screens/CutsceneScreen.h"
 #include "Screens/CreditsScreen.h"
+#include "Steam/AchievementManager.h"
 
 void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* screen) {
 	if (!content.isValid() || screen == nullptr) return;
@@ -76,7 +77,7 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 		g_resourceManager->playMusic(content.s1);
 		break;
 	case TriggerContentType::AchievementUnlocked:
-		screen->getCharacterCore()->notifyAchievementUnlocked(content.s1);
+		g_achievementManager->unlockAchievement(content.s1);
 		break;
 	case TriggerContentType::LearnSpell: {
 		SpellID id = static_cast<SpellID>(content.i1);

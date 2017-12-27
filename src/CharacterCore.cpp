@@ -12,11 +12,9 @@ CharacterCore::CharacterCore() {
 	for (ItemType type = ItemType::Equipment_head; type <= ItemType::Equipment_back; type = static_cast<ItemType>((int)type + 1)) {
 		m_data.equippedItems.insert({ type, "" });
 	}
-	m_achievementManager = new AchievementManager(this);
 }
 
 CharacterCore::CharacterCore(const CharacterCoreData& data) {
-	m_achievementManager = new AchievementManager(this);
 	m_data = data;
 	m_stopwatch.restart();
 	loadWeapon();
@@ -31,7 +29,6 @@ CharacterCore* CharacterCore::createFromThis() {
 
 CharacterCore::~CharacterCore() {
 	delete m_weapon;
-	delete m_achievementManager;
 }
 
 bool CharacterCore::load(const std::string& fileName) {
@@ -572,7 +569,7 @@ std::map<std::string, int>* CharacterCore::getItems() {
 
 void CharacterCore::addGold(int gold) {
 	m_data.gold += std::max(gold, 0);
-	m_achievementManager->notifyAchievementCore("ACH_GOLD_1000");
+	g_achievementManager->notifyAchievementCore("ACH_GOLD_1000");
 }
 
 void CharacterCore::removeGold(int gold) {
@@ -862,10 +859,6 @@ int CharacterCore::getStoredGold() const {
 void CharacterCore::resetStoredItems() {
 	m_data.storedGold = 0;
 	m_data.storedItems.clear();
-}
-
-void CharacterCore::notifyAchievementUnlocked(const std::string& achievement) {
-	m_achievementManager->unlockAchievement(achievement);
 }
 
 void CharacterCore::setAchievementUnlocked(const std::string& achievement) {

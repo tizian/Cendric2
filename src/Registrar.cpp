@@ -15,3 +15,9 @@ Registrar::Registrar(MapDynamicTileID id, MapDynamicTileConstructor constructor)
 Registrar::Registrar(AchievementID id, AchievementConstructor constructor) {
 	ObjectFactory::Instance()->registerAchievement(id, constructor);
 }
+
+Registrar::Registrar(const std::vector<std::pair<AchievementID, AchievementConstructor>>& ids) {
+	for (auto pair : ids) {
+		ObjectFactory::Instance()->registerAchievement(pair.first, pair.second);
+	}
+}

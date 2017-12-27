@@ -4,6 +4,7 @@
 #include "World/Item.h"
 #include "World/Trigger.h"
 #include "World/DoorTile.h"
+#include "Steam/AchievementManager.h"
 
 const std::string WorldScreen::VERTEX_SHADER = \
 "void main()" \
@@ -37,6 +38,7 @@ static const std::string foregroundFragmentShader = \
 "}";
 
 WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
+	g_achievementManager->setCore(core);
 	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
