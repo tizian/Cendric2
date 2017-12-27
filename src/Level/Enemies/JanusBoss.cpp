@@ -333,7 +333,7 @@ void JanusBoss::updateTorchStatus(const sf::Time& frameTime) {
 		}
 		break;
 	case ToTorch:
-		if (abs(getCenter().x - m_torchSpellPosition.x) < 10.f) {
+		if (std::abs(getCenter().x - m_torchSpellPosition.x) < 10.f) {
 			m_phase = TorchSpell1;
 			m_enemyMovingBehavior->resetMovingTarget();
 		}
