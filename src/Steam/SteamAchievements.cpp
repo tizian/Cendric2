@@ -70,7 +70,7 @@ void SteamAchievements::onUserStatsReceived(UserStatsReceived_t* pCallback)
 		}
 		else
 		{
-			g_logger->logError("SteamAchievements", "RequestStats - failed" + pCallback->m_eResult);
+			g_logger->logError("SteamAchievements", "RequestStats - failed");
 		}
 	}
 }
@@ -86,7 +86,7 @@ void SteamAchievements::onUserStatsStored(UserStatsStored_t* pCallback)
 		}
 		else
 		{
-			g_logger->logError("SteamAchievements", "StatsStored - failed" + pCallback->m_eResult);
+			g_logger->logError("SteamAchievements", "StatsStored - failed");
 		}
 	}
 }
