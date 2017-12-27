@@ -691,7 +691,7 @@ bool CharacterCoreReader::readLearnedHints(std::string& line, CharacterCoreData&
 }
 
 bool CharacterCoreReader::readAchievementUnlocked(std::string& line, CharacterCoreData& data) const {
-	data.achievementsUnlocked.push_back(line);
+	data.achievementsUnlocked.insert(line);
 	return true;
 }
 

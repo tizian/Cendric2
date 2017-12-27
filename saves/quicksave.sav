@@ -16,7 +16,7 @@ forced.map.position:0.000000,0.000000
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:105,0,0,0,0,0,2,4,0,0,0,0,0,0
-gold:20
+gold:999
 # items in inventory:
 item.id:co_smallpouch,2
 item.id:do_bloodnotemarcus,1

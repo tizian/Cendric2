@@ -20,7 +20,7 @@
 #define DEBUG
 
 // For steam builds
- #define STEAM
+// #define STEAM
 
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
 // #define EXTERNAL_DOCUMENTS_FOLDER

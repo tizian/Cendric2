@@ -182,6 +182,8 @@ public:
 	void resetStoredItems();
 	// notifies a steam achievement
 	void notifyAchievementUnlocked(const std::string& achievement);
+	// sets an achievement unlocked in the data.
+	void setAchievementUnlocked(const std::string& achievement);
 	// increase death count by one
 	void increaseDeathCount(const std::string& level);
 	// marks the player as a cheater
