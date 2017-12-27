@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 #include "global.h"
 #include "Steam/AchievementData.h"
@@ -16,7 +16,7 @@ private:
 	void onUserStatsReceived(UserStatsReceived_t* pCallback);
 	void onUserStatsStored(UserStatsStored_t* pCallback);
 	void onAchievementStored(UserAchievementStored_t* pCallback);
-		
+
 private:
 	int64 m_appID; // Our current AppID
 	AchievementData* m_achievements; // Achievements data

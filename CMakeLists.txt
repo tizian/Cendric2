@@ -4,7 +4,7 @@ project(Cendric)
 
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
 option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
-option(CENDRIC_STEAM "Include steamworks API?" ON)
+option(CENDRIC_STEAM "Include steamworks API?" OFF)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
     message(FATAL_ERROR
@@ -80,6 +80,10 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/icon.icns
 	)
+
+    if (CENDRIC_STEAM)
+        target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib)
+    endif()
 else()
 	add_executable(Cendric
 		${Cendric_FILES}
@@ -97,7 +101,7 @@ set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
 target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)
 
-target_include_directories(Cendric PRIVATE 
+target_include_directories(Cendric PRIVATE
 	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
 	"${PROJECT_SOURCE_DIR}/ext"
 	"${PROJECT_SOURCE_DIR}/include"
@@ -120,7 +124,7 @@ if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
 	)
 
 	add_executable(SQLiteShell ${SQLiteShell_FILES})
-	
+
 endif()
 
 if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
@@ -135,10 +139,10 @@ if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
 	)
 
 	add_executable(DialogueTool ${DialogueTool_FILES})
-	
+
 	target_link_libraries(DialogueTool sfml-system sfml-graphics sfml-window)
-	
-	target_include_directories(DialogueTool PRIVATE 
+
+	target_include_directories(DialogueTool PRIVATE
 		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
 		"${PROJECT_SOURCE_DIR}/ext/imgui"
 		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
