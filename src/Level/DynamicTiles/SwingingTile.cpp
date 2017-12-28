@@ -18,7 +18,7 @@ SwingingTile::~SwingingTile() {
 
 bool SwingingTile::init(const LevelTileProperties& properties) {
 	if (!contains(properties, std::string("size"))) return false;
-	m_size = std::stof(properties.at(std::string("size")));
+	m_size = std::stoi(properties.at(std::string("size")));
 	if (m_size < 2 || m_size > 100) return false;
 	m_length = TILE_SIZE_F * m_size;
 

@@ -1547,7 +1547,7 @@
    <properties>
     <property name="angle" value="180"/>
     <property name="mode" value="round"/>
-    <property name="size" value="2.5"/>
+    <property name="size" value="1"/>
     <property name="speed" value="70"/>
    </properties>
   </object>

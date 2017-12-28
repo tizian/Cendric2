@@ -604,7 +604,7 @@ void Inventory::showDocument(const Item* item) {
 void Inventory::showDescription(const Item* item) const {
 	if (item == nullptr) return;
 	m_descriptionWindow->load(*item, m_core, m_merchantInterface ? 
-		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, m_merchantInterface);
+		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, m_merchantInterface != nullptr);
 	m_descriptionWindow->show();
 	auto const pos = sf::Vector2f(
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,
