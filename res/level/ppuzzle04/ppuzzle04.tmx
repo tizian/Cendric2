@@ -1546,6 +1546,7 @@
   <object id="1890" gid="1226" x="1200" y="1250" width="50" height="50">
    <properties>
     <property name="angle" value="180"/>
+    <property name="direction" value="ccw"/>
     <property name="mode" value="round"/>
     <property name="size" value="2"/>
     <property name="speed" value="70"/>
