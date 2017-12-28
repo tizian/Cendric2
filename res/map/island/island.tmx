@@ -2,7 +2,7 @@
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="50" tileheight="50" nextobjectid="322">
  <properties>
   <property name="dimming" value="0.6"/>
-  <property name="musicpath" value="res/music/pirates.ogg"/>
+  <property name="musicpath" value="res/music/brokenbridge.ogg"/>
   <property name="tilesetpath" value="res/map/island/tileset_map_island.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_island" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="988" columns="26">

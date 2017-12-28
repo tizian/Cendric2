@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="2.0,res/level/towerwalkway/layer_2.png"/>
   <property name="dimming" value="0.4"/>
-  <property name="musicpath" value="res/music/brokenbridge.ogg"/>
+  <property name="musicpath" value="res/music/pirates.ogg"/>
   <property name="tilesetpath" value="res/level/towerwalkway/tileset_level_towerwalkway.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_towerwalkway" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">
