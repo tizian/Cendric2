@@ -16,7 +16,7 @@ LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Scre
 	m_equipmentRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	m_particleBlendMode = sf::BlendMode(sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add,
-		sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add);
+		sf::BlendMode::SrcAlpha, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Add);
 }
 
 void LevelScreen::loadSync() {
