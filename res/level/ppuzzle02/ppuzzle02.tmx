@@ -1618,8 +1618,8 @@
   <object id="1732" gid="1208" x="1200" y="1100" width="50" height="50"/>
   <object id="1733" gid="1208" x="1200" y="1050" width="50" height="50"/>
   <object id="1734" gid="1208" x="1200" y="1000" width="50" height="50"/>
-  <object id="1735" gid="1208" x="1300" y="1200" width="50" height="50"/>
-  <object id="1736" gid="1208" x="1250" y="1050" width="50" height="50"/>
+  <object id="1735" gid="1208" x="1250" y="1200" width="50" height="50"/>
+  <object id="1736" gid="1208" x="1300" y="1050" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy"/>
  <objectgroup name="trigger">
