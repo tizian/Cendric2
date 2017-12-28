@@ -1,15 +1,15 @@
 # a magical number that stops you from modifying the saved game 
-hash:1627599154
+hash:336112122
 # time played, in seconds
-time.played:19880
-savegame.name:Quicksave
-savegame.date:1514494020
+time.played:20702
+savegame.name:70_tower_4
+savegame.date:1514495206
 level.id:res/level/ppuzzle04/ppuzzle04.tmx
-level.position:1210.000000,2660.000000
+level.position:350.000000,4760.000000
 is.in.level:1
 overworld.id:res/map/marshland/marshland.tmx
 map.id:res/map/island/island.tmx
-map.position:1232.000000,615.440308
+map.position:1215.000000,614.986023
 forced.map.id:
 forced.map.position:2260.000000,300.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
@@ -249,7 +249,7 @@ chests.looted:res/level/jonathanslab/jonathanslab.tmx,140
 chests.looted:res/level/ppuzzle01/ppuzzle01.tmx,1763
 chests.looted:res/level/ppuzzle02/ppuzzle02.tmx,1763
 chests.looted:res/level/ppuzzle03/ppuzzle03.tmx,1763
-chests.looted:res/level/ppuzzle04/ppuzzle04.tmx
+chests.looted:res/level/ppuzzle04/ppuzzle04.tmx,1763
 chests.looted:res/level/ratcave/ratcave.tmx,10
 chests.looted:res/level/rockfall/rockfall.tmx
 chests.looted:res/level/smallcrypt/smallcrypt.tmx,35,43,57,58,59,60,61,62,63
@@ -264,6 +264,7 @@ chests.looted:res/level/windyplateau/windyplateau.tmx,252
 # waypoints unlocked in map:
 waypoints.unlocked:res/map/gandria/gandria.tmx,308,966.000000,1160.000000,309,2216.000000,1060.000000,310,2266.000000,410.000000,311,1416.000000,1960.000000,312,366.000000,2110.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,319,2616.000000,2960.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000,322,3466.000000,2310.000000,323,3266.000000,410.000000
 waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,309,316.000000,810.000000,310,1166.000000,1210.000000,311,1816.000000,1210.000000,312,1666.000000,760.000000,313,1316.000000,260.000000
+waypoints.unlocked:res/map/island/island.tmx
 waypoints.unlocked:res/map/marshland/marshland.tmx,291,1366.000000,210.000000,292,766.000000,410.000000,293,1216.000000,1010.000000,294,366.000000,1660.000000,295,1616.000000,1710.000000,305,1791.000000,935.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,231,2416.000000,510.000000,232,2866.000000,960.000000,233,1116.000000,710.000000,234,866.000000,1660.000000,235,2016.000000,1860.000000,236,2816.000000,2510.000000,237,2241.000000,2760.000000,238,1116.000000,2760.000000,239,3366.000000,3060.000000,254,3166.000000,1485.000000
 # modifiers unlocked:
@@ -427,6 +428,7 @@ quest.progress.condition:teleport_own,portstone_activated
 quest.progress.condition:tower_1,tower_climbed
 quest.progress.condition:tower_2,tower_climbed
 quest.progress.condition:tower_3,tower_climbed
+quest.progress.condition:tower_4,tower_climbed
 quest.progress.condition:who_am_i,information_gathered
 quest.progress.condition:zeff_returns,guards_convinced
 # quest descriptions unlocked:
@@ -487,7 +489,7 @@ progress.condition:npc_vincent2,job_talked,key_50,talked
 progress.condition:npc_waldemar,beak,talked
 progress.condition:npc_zeff,beast_slain,curse,curse_talked,gandria,leatherworker,mark_curse,sheep,what_are_you_doing,who_are_you,zeff_goes,zeff_gone
 progress.condition:npc_zeff3,talked
-progress.condition:trigger,swampbridge_open,tower_1_done,tower_2_done,tower_3_done,tutorial_started
+progress.condition:trigger,swampbridge_open,tower_1_done,tower_2_done,tower_3_done,tower_4_done,tutorial_started
 # guild:
 guild:necromancer
 # reputation progress:
@@ -536,7 +538,7 @@ weather:res/level/howlingcaverns/howlingcaverns.tmx,0.900000,
 weather:res/map/elderhome/elderhome.tmx,0.300000,
 weather:res/map/gandria/gandria.tmx,0.300000,
 weather:res/map/meadows/meadows.tmx,0.300000,
-deaths:139
+deaths:147
 # deaths in level:
 level.deaths:res/level/ascent/ascent.tmx,0
 level.deaths:res/level/boss_elysia/boss_elysia.tmx,1
@@ -562,7 +564,7 @@ level.deaths:res/level/jonathanslab/jonathanslab.tmx,1
 level.deaths:res/level/ppuzzle01/ppuzzle01.tmx,0
 level.deaths:res/level/ppuzzle02/ppuzzle02.tmx,2
 level.deaths:res/level/ppuzzle03/ppuzzle03.tmx,17
-level.deaths:res/level/ppuzzle04/ppuzzle04.tmx,63
+level.deaths:res/level/ppuzzle04/ppuzzle04.tmx,71
 level.deaths:res/level/ratcave/ratcave.tmx,0
 level.deaths:res/level/rockfall/rockfall.tmx,0
 level.deaths:res/level/smallcrypt/smallcrypt.tmx,5
