@@ -3,7 +3,7 @@
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/storeroom/layer_inf.png"/>
   <property name="dimming" value="0.5"/>
-  <property name="musicpath" value="res/music/lab_theme.ogg"/>
+  <property name="musicpath" value="res/music/prison.ogg"/>
   <property name="observed" value=""/>
   <property name="tilesetpath" value="res/level/storeroom/tileset_level_storeroom.png"/>
  </properties>

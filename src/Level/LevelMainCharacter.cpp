@@ -309,7 +309,9 @@ void LevelMainCharacter::reloadAttributes() {
 	m_attributes = m_core->getTotalAttributes();
 	m_attributes.currentHealthPoints = std::max(0, m_attributes.currentHealthPoints - missingHealth);
 	// add food again
-	m_attributes.addBean(m_foodAttributes.second);
+	if (isEating()) {
+		m_attributes.addBean(m_foodAttributes.second);
+	}
 }
 
 void LevelMainCharacter::setInvisibilityLevel(int level) {

@@ -24,12 +24,14 @@ public:
 	void onMouseOver() override;
 	void loot();
 	
+	bool isLootable() const;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Chest; }
 
 private:
 	std::string getSpritePath() const override;
 	void setLoot(const std::map<std::string, int>& items, int gold);
 	void unlock(bool soundOn);
+	bool m_isLootable;
 
 	InteractComponent* m_interactComponent = nullptr;
 	// The light will disappear (set invisible) on looted.

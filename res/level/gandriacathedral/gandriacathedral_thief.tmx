@@ -924,6 +924,7 @@
   </object>
   <object id="217" x="1562.5" y="12.5" width="2037.5" height="650">
    <properties>
+    <property name="forced" value=""/>
     <property name="music" value="res/music/cathedral_top.ogg"/>
     <property name="persistent" value=""/>
    </properties>

@@ -57,7 +57,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("tower_key_1", "void")) then 
 
 		DL:createChoiceNode(2)
-		if (not DL:isConditionFulfilled("npc_etoz", "who_are_you")) then 
+		if (not DL:isConditionFulfilled("npc_etoz", "who_are_you")DL:isConditionFulfilled("", "")) then 
 			DL:addChoice(10, "DL_Choice_WhoAreYou") -- Who are you?
 		end
 		if (not DL:isConditionFulfilled("npc_etoz", "questionable_method") and DL:isQuestState("questionable_method", "started")) then 
@@ -81,7 +81,7 @@ loadDialogue = function(DL)
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
-		if (not DL:isConditionFulfilled("npc_etoz", "who_are_you")) then 
+		if (not DL:isConditionFulfilled("npc_etoz", "who_are_you")DL:isConditionFulfilled("", "")) then 
 
 			DL:createNPCNode(10, 11, "DL_Etoz_WhoAreYou") -- It surprises me that you haven't heard of me yet.
 			DL:addConditionProgress("npc_etoz", "who_are_you")

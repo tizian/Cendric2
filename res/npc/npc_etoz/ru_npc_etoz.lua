@@ -4,6 +4,10 @@ velocity = 40
 
 loadRoutine = function(R, W)
 
+    if (not W:isConditionFulfilled("npc_etoz", "talked")) then
+        R:setTalkingActive(true)
+    end
+
 	R:setTilePosition(25,5)
 
     R:setFacingLeft()

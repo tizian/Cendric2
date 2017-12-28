@@ -245,7 +245,8 @@ void SpellCreator::updateDamageAndHeal(SpellData& bean, const AttributeData* att
 		bean.heal *= 2;
 	}
 
-	// divide damage and heal by count. Damage over time is not affected.
+	// divide damage and heal by count.
 	bean.damage = static_cast<int>(std::ceil(bean.damage / bean.count));
 	bean.heal = static_cast<int>(std::ceil(bean.heal / bean.count));
+	bean.damagePerSecond = static_cast<int>(std::ceil(bean.damagePerSecond / bean.count));
 }

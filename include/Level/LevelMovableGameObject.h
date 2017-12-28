@@ -47,6 +47,8 @@ public:
 	virtual void setStunned(const sf::Time& stunnedTime);
 	// cancels all blocking spells and fight animations and sets the state to idle
 	void setReady();
+	// clears all dots
+	virtual void clearDots();
 	// sets the mob invincible
 	void setInvincible(bool value);
 	// flips the gravity and the sprite

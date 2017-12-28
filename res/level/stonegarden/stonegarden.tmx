@@ -563,7 +563,7 @@
  <objectgroup name="lever 4">
   <object id="148" gid="853" x="4500" y="1100" width="50" height="50"/>
   <object id="149" gid="853" x="4700" y="1250" width="50" height="50"/>
-  <object id="150" gid="892" x="4300" y="1300" width="50" height="50"/>
+  <object id="150" gid="892" x="4297" y="1300" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 5">
   <object id="151" gid="892" x="3200" y="700" width="50" height="50"/>

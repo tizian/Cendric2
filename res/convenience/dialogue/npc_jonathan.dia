@@ -174,7 +174,7 @@ npc.id:npc_jonathan
 	translation.tag:DL_Cendric_TellsTheStory
 	translation.en:(Cendric tells the story about losing his memory and getting here)
 	translation.de:(Cendric erzählt die Geschichte wie er sein Gedächtnis verlor und hier gelandet ist)
-	translation.ch:(Cendric verzellt d'Gschicht we er sis Gedächtnis verlore het und da glandet isch)
+	translation.ch:(De Cendric verzellt d'Gschicht wie er sis Gedächtnis verlore het und da glandet isch)
 	[
 		# Link node, tag is next tag
 		tag:9

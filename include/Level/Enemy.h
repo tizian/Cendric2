@@ -56,6 +56,7 @@ public:
 	void setDead() override;
 	void setDisposed() override;
 	void setScriptedBehavior(const std::string& luaPath);
+	void clearDots() override;
 	void notifyKilled();
 	void notifyLooted();
 	bool isQuestRelevant();

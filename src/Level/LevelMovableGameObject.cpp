@@ -338,6 +338,10 @@ void LevelMovableGameObject::setReady() {
 	m_movingBehavior->setReady();
 }
 
+void LevelMovableGameObject::clearDots() {
+	m_dots.clear();
+}
+
 void LevelMovableGameObject::setInvincible(bool value) {
 	m_isInvincible = value;
 }
@@ -411,6 +415,8 @@ bool LevelMovableGameObject::isEating() const {
 }
 
 void LevelMovableGameObject::consumeFood(const sf::Time& duration, const AttributeData& attributes) {
+	if (duration <= sf::Time::Zero) return;
+
 	if (isEating()) {
 		// old food attributes have to be removed
 		m_attributes.removeBean(m_foodAttributes.second);

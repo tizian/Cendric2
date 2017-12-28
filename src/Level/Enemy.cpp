@@ -359,6 +359,11 @@ void Enemy::addDamageOverTime(DamageOverTimeData& data) {
 	LevelMovableGameObject::addDamageOverTime(data);
 }
 
+void Enemy::clearDots() {
+	LevelMovableGameObject::clearDots();
+	m_buffBar->clear();
+}
+
 void Enemy::onMouseOver() {
 	if (m_isLooted) return;
 	LevelMovableGameObject::onMouseOver();

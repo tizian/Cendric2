@@ -155,7 +155,7 @@ npc.id:npc_etoz
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:not DL:isConditionFulfilled("npc_etoz", "who_are_you")
+		condition:not DL:isConditionFulfilled("npc_etoz", "who_are_you")DL:isConditionFulfilled("", "")
 		# translation: 
 		translation.tag:DL_Choice_WhoAreYou
 		translation.en:Who are you?
@@ -170,7 +170,7 @@ npc.id:npc_etoz
 		translation.tag:DL_Choice_QuestionableMethod
 		translation.en:Have you seen any nasty creatures in the sewers?
 		translation.de:Hast du irgendwelche garstigen Kreaturen in der Kanalisation gesehen?
-		translation.ch:Hesch du so garstigi Kreature ide Kanalisation gse?
+		translation.ch:Hesch du so rüüdigi Kreature ide Kanalisation gse?
 	]
 	[
 		# Link node, tag is next tag

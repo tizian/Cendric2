@@ -17,6 +17,7 @@ ChestLevelTile::ChestLevelTile(LevelScreen* levelScreen) : LevelDynamicTile(leve
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
 	m_interactComponent->setInteractText("ToOpen");
 	m_interactComponent->setOnInteract(std::bind(&ChestLevelTile::onRightClick, this));
+	m_isLootable = true;
 	addComponent(m_interactComponent);
 }
 
@@ -46,7 +47,8 @@ bool ChestLevelTile::init(const LevelTileProperties& properties) {
 		m_interactComponent->setTooltipText(g_textProvider->getText(m_tooltipText, "chest"));
 	}
 	if (m_lightData.radius.x > 0.f) {
-		addComponent(new LightComponent(m_lightData, this));
+		m_lightComponent = new LightComponent(m_lightData, this);
+		addComponent(m_lightComponent);
 	}
 
 	loadLua();
@@ -175,6 +177,10 @@ void ChestLevelTile::unlock(bool soundOn) {
 	setState(GameObjectState::Unlocked);
 }
 
+bool ChestLevelTile::isLootable() const {
+	return m_isLootable;
+}
+
 void ChestLevelTile::loot() {
 	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
 	if (isObserved && dynamic_cast<LevelScreen*>(m_screen)->notifyObservers()) {
@@ -190,6 +196,7 @@ void ChestLevelTile::loot() {
 
 	m_screen->getCharacterCore()->setChestLooted(m_mainChar->getLevel()->getID(), m_objectID);
 	m_interactComponent->setInteractable(false);
+	m_isLootable = false;
 
 	if (m_lightComponent != nullptr) {
 		m_lightComponent->setVisible(false);
@@ -197,6 +204,8 @@ void ChestLevelTile::loot() {
 	if (!m_isPermanent) {
 		setDisposed();
 	}
+
+	dynamic_cast<LevelScreen*>(m_screen)->notifyLeveloverlayReload();
 }
 
 void ChestLevelTile::executeOnLoot() const {

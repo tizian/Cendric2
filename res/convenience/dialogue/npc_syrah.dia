@@ -237,7 +237,7 @@ npc.id:npc_syrah
 	translation.tag:DL_Syrah_Mark2
 	translation.en:That's not going to be easy. But if you help me to gather some ingredients, I think I can try to remove or at least weaken the curse.
 	translation.de:Das wird nicht einfach. Aber wenn du mir hilfst, die Zutaten zu besorgen, kann ich versuchen, den Fluch zu entfernen oder zumindest zu schwächen.
-	translation.ch:Das wird nid eifach. Aber wennd mr hilfsch d'Zuetate z'bsorge chani versueche, dr Fluech z'enferne oder mindestens z'schwäche.
+	translation.ch:Das wird nid eifach. Aber wennd mr hilfsch d'Zuetate z'bsorge chani versueche, dr Fluech z'entferne oder mindestens z'schwäche.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -316,7 +316,7 @@ npc.id:npc_syrah
 	translation.tag:DL_Syrah_MarkQuestDone2
 	translation.en:(Syrah places the bones in a circle around the fire rat's heart.) Come.
 	translation.de:(Syrah ordnet die Knochen kreisförmig um das Feuerrattenherz an.) Komm.
-	translation.ch:(D'Syrah ordnet d''Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
+	translation.ch:(D'Syrah ordnet d'Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
 	[
 		# Link node, tag is next tag
 		tag:24

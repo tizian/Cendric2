@@ -34,7 +34,7 @@ private:
 	void animateRound(const sf::Time& frametime);
 
 private:
-	int m_size;
+	float m_size;
 	int m_speed;
 	bool m_isInactive = false;
 	bool m_isClockwise = true;

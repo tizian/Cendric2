@@ -40,10 +40,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Le
 
 -- Koray
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayStart', 'speech','It''s stuck in this tree, I can already see it.','Es hat sich in diesem Baum verfangen, ich kann es schon sehen.', 'Es het sich i dem Baum verfange, ich gses scho.');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayStart2', 'speech','But how can we get up there?','Aber wie kommen wir da rauf?', 'Aber wie chömemer da ue?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayStart2', 'speech','But how can we get up there?','Aber wie kommen wir da rauf?', 'Aber wie chömemo da ue?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayPiranhas', 'speech','Great ice magic! But there are even more piranhas.','Solide Eismagie! Aber da hat''s noch mehr Piranhas.', 'Solidi Iismagie! Aber do hets na me Piranhas.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayTricky', 'speech','Now it''s getting tricky...','Jetzt wird''s knifflig...', 'Jetz wird''s knifflig...');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySoon', 'speech','We''re getting closer...','Bald haben wir''s.', 'Bald hemmers.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySoon', 'speech','We''re getting closer...','Bald haben wir''s.', 'Bald hemmos.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayLetMe', 'speech','Heh. Let me handle this.','Heh. Das werde ich übernehmen.', 'Heh. Das übernimm ich.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KorayThere', 'speech','There it is! Let''s get it.','Da ist es! Holen wir''s.', 'Do isches! Holemers.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('KoraySpell', 'speech','Perfect. Now a little bit of magic...', 'Perfekt. Jetzt ein wenig Magie...', 'Perfekt. Jetzt es bitzli Magie...');

@@ -4,6 +4,7 @@
 #include "Screens/WorldScreen.h"
 #include "Screens/LevelScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "Level/DynamicTiles/ChestLevelTile.h"
 #include "World/MainCharacter.h"
 #include "GlobalResource.h"
 #include "GUI/GUIConstants.h"
@@ -201,7 +202,10 @@ void MapOverlay::renderLevelOverlay(float scale) {
 				drawOverlayTexture(img, dTile->getCenter() * scale, 3, 0);
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Chest) {
-				drawOverlayTexture(img, dTile->getCenter() * scale, 1, 1);
+				auto chest = dynamic_cast<ChestLevelTile*>(dTile);
+				if (chest && chest->isLootable()) {
+					drawOverlayTexture(img, dTile->getCenter() * scale, 1, 1);
+				}
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Lever) {
 				drawOverlayTexture(img, dTile->getCenter() * scale, 3, 1);

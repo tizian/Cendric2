@@ -497,6 +497,7 @@ void VeliusBoss::updateBlocking(const sf::Time& frameTime) {
 }
 
 void VeliusBoss::setBlocking() {
+	clearDots();
 	m_isBlocking = true;
 	m_isIndefinitelyBlocking = true;
 	m_blockingBubble->setEmitRate(400.f);
