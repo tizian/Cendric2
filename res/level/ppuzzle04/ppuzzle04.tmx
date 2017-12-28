@@ -1376,7 +1376,7 @@
   </object>
   <object id="1817" gid="1226" x="1100" y="3250" width="50" height="50">
    <properties>
-    <property name="angle" value="180"/>
+    <property name="angle" value="190"/>
     <property name="mode" value="round"/>
     <property name="size" value="2"/>
     <property name="speed" value="60"/>
@@ -1388,7 +1388,7 @@
     <property name="angle" value="0"/>
     <property name="mode" value="round"/>
     <property name="size" value="3"/>
-    <property name="speed" value="100"/>
+    <property name="speed" value="60"/>
    </properties>
   </object>
   <object id="1820" gid="1223" x="1300" y="4850" width="50" height="50"/>
