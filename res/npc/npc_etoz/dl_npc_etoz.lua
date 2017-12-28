@@ -7,8 +7,28 @@ loadDialogue = function(DL)
 		DL:setRoot(2) 
 	elseif (DL:isQuestState("tower_1", "void")) then 
 		DL:setRoot(25) 
-	else 
+	elseif (not DL:isQuestState("tower_1", "completed")) then 
 		DL:setRoot(34) 
+	elseif (DL:isQuestState("tower_key_2", "void")) then 
+		DL:setRoot(45) 
+	elseif (DL:isQuestState("tower_2", "void")) then 
+		DL:setRoot(46) 
+	elseif (not DL:isQuestState("tower_2", "completed")) then 
+		DL:setRoot(47) 
+	elseif (DL:isQuestState("tower_key_3", "void")) then 
+		DL:setRoot(48) 
+	elseif (DL:isQuestState("tower_3", "void")) then 
+		DL:setRoot(49) 
+	elseif (not DL:isQuestState("tower_3", "completed")) then 
+		DL:setRoot(50) 
+	elseif (DL:isQuestState("tower_key_4", "void")) then 
+		DL:setRoot(51) 
+	elseif (DL:isQuestState("tower_4", "void")) then 
+		DL:setRoot(62) 
+	elseif (not DL:isQuestState("tower_4", "completed")) then 
+		DL:setRoot(63) 
+	else 
+		DL:setRoot(52) 
 	end 
 
 	if (not DL:isConditionFulfilled("npc_etoz", "talked")) then 
@@ -232,73 +252,269 @@ loadDialogue = function(DL)
 
 	end
 
+	if (not DL:isQuestState("tower_1", "completed")) then 
 
-	DL:createChoiceNode(34)
-	if (not DL:isConditionFulfilled("npc_etoz", "where_tower")) then 
-		DL:addChoice(35, "DL_Choice_WhereTower") -- Where is this tower?
+		DL:createChoiceNode(34)
+		if (not DL:isConditionFulfilled("npc_etoz", "where_tower")) then 
+			DL:addChoice(35, "DL_Choice_WhereTower") -- Where is this tower?
+		end
+		if (not DL:isConditionFulfilled("npc_etoz", "why_dont_you_go")) then 
+			DL:addChoice(37, "DL_Choice_WhyDontYouGo") -- Why don't you go there yourself?
+		end
+		if (not DL:isConditionFulfilled("npc_etoz", "tower_info")) then 
+			DL:addChoice(39, "DL_Choice_TowerInfo") -- Tell me more about this tower.
+		end
+		if (DL:isConditionFulfilled("npc_etoz", "tower_info") and not DL:isConditionFulfilled("npc_etoz", "anti_magic")) then 
+			DL:addChoice(43, "DL_Choice_AntiMagic") -- What exactly are "anti-magic crystals"?
+		end
+		if (DL:isQuestComplete("tower_1")) then 
+			DL:addChoice(36, "DL_Choice_FirstTowerClimbed") -- I climbed the tower. It was easy.
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_etoz", "where_tower")) then 
+
+			DL:createNPCNode(35, -2, "DL_Etoz_WhereTower") -- On a forgotten island to the East of the marshland. I hope you know how to swim. (Grins)
+			DL:addConditionProgress("npc_etoz", "where_tower")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "why_dont_you_go")) then 
+
+			DL:createNPCNode(37, 38, "DL_Etoz_WhyDontYouGo") -- I've been there countless times. It's getting boring, you know.
+			DL:addConditionProgress("npc_etoz", "why_dont_you_go")
+			DL:addNode()
+
+
+			DL:createNPCNode(38, -2, "DL_Etoz_WhyDontYouGo2") -- But you, you need to show me what you got. We'll see whether you make it.
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "tower_info")) then 
+
+			DL:createNPCNode(39, 40, "DL_Etoz_TowerInfo") -- The tower was built a long time ago by a mage who was nearly as powerful as me.
+			DL:addConditionProgress("npc_etoz", "tower_info")
+			DL:addNode()
+
+
+			DL:createNPCNode(40, 41, "DL_Etoz_TowerInfo2") -- He put anti-magic crystals in there to test the real willpower and agility of fellow mages.
+			DL:addNode()
+
+
+			DL:createNPCNode(41, 42, "DL_Etoz_TowerInfo3") -- As most mages rely only on their magic, it was an impossible task for many of them.
+			DL:addNode()
+
+
+			DL:createNPCNode(42, -2, "DL_Etoz_TowerInfo4") -- But the ones who did it - including myself of course - grew stronger than ever before...
+			DL:addNode()
+
+		end
+
+		if (DL:isConditionFulfilled("npc_etoz", "tower_info") and not DL:isConditionFulfilled("npc_etoz", "anti_magic")) then 
+
+			DL:createNPCNode(43, 44, "DL_Etoz_AntiMagic") -- Oh, you're so pathetic. I really have to explain everything.
+			DL:addConditionProgress("npc_etoz", "anti_magic")
+			DL:addNode()
+
+
+			DL:createNPCNode(44, -2, "DL_Etoz_AntiMagic2") -- Those crystals block your magic. You won't be able to use it there.
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestComplete("tower_1")) then 
+
+			DL:createNPCNode(36, -2, "DL_Etoz_FirstTowerClimbed") -- Well done.
+			DL:changeQuestState("tower_1", "completed")
+			DL:addNode()
+
+		end
+
 	end
-	if (not DL:isConditionFulfilled("npc_etoz", "why_dont_you_go")) then 
-		DL:addChoice(37, "DL_Choice_WhyDontYouGo") -- Why don't you go there yourself?
+
+	if (DL:isQuestState("tower_key_2", "void")) then 
+
+		DL:createChoiceNode(45)
+		DL:addChoice(53, "DL_Choice_GimmeKeyQuest") -- Gimme the key quest.
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(53, -2, "DL_Etoz_GimmeKeyQuest") -- Here.
+		DL:changeQuestState("tower_key_2", "started")
+		DL:addNode()
+
 	end
-	if (not DL:isConditionFulfilled("npc_etoz", "tower_info")) then 
-		DL:addChoice(39, "DL_Choice_TowerInfo") -- Tell me more about this tower.
+
+	if (DL:isQuestState("tower_2", "void")) then 
+
+		DL:createChoiceNode(46)
+		if (DL:isQuestComplete("tower_key_2")) then 
+			DL:addChoice(54, "DL_Choice_GotKey") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_key_2")) then 
+
+			DL:createNPCNode(54, 55, "DL_Etoz_GotKey2") -- Good.
+			DL:removeItem("qe_tower_2", 1)
+			DL:changeQuestState("tower_key_2", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(55, -2, "DL_Etoz_GotKey22") -- Here.
+			DL:addItem("ke_tower_2", 1)
+			DL:changeQuestState("tower_2", "started")
+			DL:addNode()
+
+		end
+
 	end
-	if (DL:isConditionFulfilled("npc_etoz", "tower_info") and not DL:isConditionFulfilled("npc_etoz", "anti_magic")) then 
-		DL:addChoice(43, "DL_Choice_AntiMagic") -- What exactly are "anti-magic crystals"?
+
+	if (not DL:isQuestState("tower_2", "completed")) then 
+
+		DL:createChoiceNode(47)
+		if (DL:isQuestComplete("tower_2")) then 
+			DL:addChoice(56, "DL_Choice_FirstTowerClimbed") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_2")) then 
+
+			DL:createNPCNode(56, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:changeQuestState("tower_2", "completed")
+			DL:addNode()
+
+		end
+
 	end
+
+	if (DL:isQuestState("tower_key_3", "void")) then 
+
+		DL:createChoiceNode(48)
+		DL:addChoice(57, "DL_Choice_GimmeKeyQuest") -- 
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(57, -2, "DL_Etoz_GimmeKeyQuest") -- 
+		DL:changeQuestState("tower_key_3", "started")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("tower_3", "void")) then 
+
+		DL:createChoiceNode(49)
+		if (DL:isQuestComplete("tower_key_3")) then 
+			DL:addChoice(58, "DL_Choice_GotKey") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_key_3")) then 
+
+			DL:createNPCNode(58, 59, "DL_Etoz_GotKey2") -- 
+			DL:removeItem("qe_tower_3", 1)
+			DL:changeQuestState("tower_key_3", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(59, -2, "DL_Etoz_GotKey22") -- 
+			DL:addItem("ke_tower_3", 1)
+			DL:changeQuestState("tower_3", "started")
+			DL:addNode()
+
+		end
+
+	end
+
+	if (not DL:isQuestState("tower_3", "completed")) then 
+
+		DL:createChoiceNode(50)
+		if (DL:isQuestComplete("tower_3")) then 
+			DL:addChoice(60, "DL_Choice_FirstTowerClimbed") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_3")) then 
+
+			DL:createNPCNode(60, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:changeQuestState("tower_3", "completed")
+			DL:addNode()
+
+		end
+
+	end
+
+	if (DL:isQuestState("tower_key_4", "void")) then 
+
+		DL:createChoiceNode(51)
+		DL:addChoice(61, "DL_Choice_GimmeKeyQuest") -- 
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(61, -2, "DL_Etoz_GimmeKeyQuest") -- 
+		DL:changeQuestState("tower_key_4", "started")
+		DL:addNode()
+
+	end
+
+	if (DL:isQuestState("tower_4", "void")) then 
+
+		DL:createChoiceNode(62)
+		if (DL:isQuestComplete("tower_key_4")) then 
+			DL:addChoice(64, "DL_Choice_GotKey") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_key_4")) then 
+
+			DL:createNPCNode(64, 65, "DL_Etoz_GotKey2") -- 
+			DL:removeItem("qe_tower_4", 1)
+			DL:changeQuestState("tower_key_4", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(65, -2, "DL_Etoz_GotKey22") -- 
+			DL:addItem("ke_tower_4", 1)
+			DL:changeQuestState("tower_4", "started")
+			DL:addNode()
+
+		end
+
+	end
+
+	if (not DL:isQuestState("tower_4", "completed")) then 
+
+		DL:createChoiceNode(63)
+		if (DL:isQuestComplete("tower_4")) then 
+			DL:addChoice(66, "DL_Choice_FirstTowerClimbed") -- 
+		end
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+		if (DL:isQuestComplete("tower_4")) then 
+
+			DL:createNPCNode(66, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:changeQuestState("tower_4", "completed")
+			DL:addNode()
+
+		end
+
+	end
+
+
+	DL:createChoiceNode(52)
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
-
-	if (not DL:isConditionFulfilled("npc_etoz", "where_tower")) then 
-
-		DL:createNPCNode(35, -2, "DL_Etoz_WhereTower") -- On a forgotten island to the East of the marshland. I hope you know how to swim. (Grins)
-		DL:addConditionProgress("npc_etoz", "where_tower")
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_etoz", "why_dont_you_go")) then 
-
-		DL:createNPCNode(37, 38, "DL_Etoz_WhyDontYouGo") -- I've been there countless times. It's getting boring, you know.
-		DL:addConditionProgress("npc_etoz", "why_dont_you_go")
-		DL:addNode()
-
-
-		DL:createNPCNode(38, -2, "DL_Etoz_WhyDontYouGo2") -- But you, you need to show me what you got. We'll see whether you make it.
-		DL:addNode()
-
-	end
-
-	if (not DL:isConditionFulfilled("npc_etoz", "tower_info")) then 
-
-		DL:createNPCNode(39, 40, "DL_Etoz_TowerInfo") -- The tower was built a long time ago by a mage who was nearly as powerful as me.
-		DL:addConditionProgress("npc_etoz", "tower_info")
-		DL:addNode()
-
-
-		DL:createNPCNode(40, 41, "DL_Etoz_TowerInfo2") -- He put anti-magic crystals in there to test the real willpower and agility of fellow mages.
-		DL:addNode()
-
-
-		DL:createNPCNode(41, 42, "DL_Etoz_TowerInfo3") -- As most mages rely only on their magic, it was an impossible task for many of them.
-		DL:addNode()
-
-
-		DL:createNPCNode(42, -2, "DL_Etoz_TowerInfo4") -- But the ones who did it - including myself of course - grew stronger than ever before...
-		DL:addNode()
-
-	end
-
-	if (DL:isConditionFulfilled("npc_etoz", "tower_info") and not DL:isConditionFulfilled("npc_etoz", "anti_magic")) then 
-
-		DL:createNPCNode(43, 44, "DL_Etoz_AntiMagic") -- Oh, you're so pathetic. I really have to explain everything.
-		DL:addConditionProgress("npc_etoz", "anti_magic")
-		DL:addNode()
-
-
-		DL:createNPCNode(44, -2, "DL_Etoz_AntiMagic2") -- Those crystals block your magic. You won't be able to use it there.
-		DL:addNode()
-
-	end
 
 end

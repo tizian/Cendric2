@@ -29,6 +29,20 @@
     </properties>
    </objectgroup>
   </tile>
+  <tile id="343">
+   <objectgroup draworder="index">
+    <properties>
+     <property name="light" value="40,40,60,60,0.3"/>
+    </properties>
+   </objectgroup>
+  </tile>
+  <tile id="344">
+   <objectgroup draworder="index">
+    <properties>
+     <property name="light" value="30,30,60,60,0.3"/>
+    </properties>
+   </objectgroup>
+  </tile>
   <tile id="465">
    <objectgroup draworder="index">
     <properties>

@@ -23,6 +23,56 @@ npc.id:npc_etoz
 	[
 		# Link node, tag is next tag
 		tag:34
+		condition:not DL:isQuestState("tower_1", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:45
+		condition:DL:isQuestState("tower_key_2", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:46
+		condition:DL:isQuestState("tower_2", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:47
+		condition:not DL:isQuestState("tower_2", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:48
+		condition:DL:isQuestState("tower_key_3", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:49
+		condition:DL:isQuestState("tower_3", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:50
+		condition:not DL:isQuestState("tower_3", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:51
+		condition:DL:isQuestState("tower_key_4", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:62
+		condition:DL:isQuestState("tower_4", "void")
+	]
+	[
+		# Link node, tag is next tag
+		tag:63
+		condition:not DL:isQuestState("tower_4", "completed")
+	]
+	[
+		# Link node, tag is next tag
+		tag:52
 	]
 }
 {1
@@ -662,6 +712,16 @@ npc.id:npc_etoz
 	]
 	[
 		# Link node, tag is next tag
+		tag:36
+		condition:DL:isQuestComplete("tower_1")
+		# translation: 
+		translation.tag:DL_Choice_FirstTowerClimbed
+		translation.en:I climbed the tower. It was easy.
+		translation.de:Ich bin auf den Turm geklettert. Es war einfach.
+		translation.ch:Ich bi uf de Turm kletteret. Isch eifach gsi.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -798,5 +858,423 @@ npc.id:npc_etoz
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	trigger:DL:changeQuestState("tower_1", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_FirstTowerClimbed
+	translation.en:Well done.
+	translation.de:Gut gemacht.
+	translation.ch:Guet gmacht.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [45] Choice Node
+	tag:45
+	[
+		# Link node, tag is next tag
+		tag:53
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyQuest
+		translation.en:Gimme the key quest.
+		translation.de:Schlüssel Quest!
+		translation.ch:Schlüssel Quest!
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:changeQuestState("tower_key_2", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GimmeKeyQuest
+	translation.en:Here.
+	translation.de:Hier.
+	translation.ch:Do.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [46] Choice Node
+	tag:46
+	[
+		# Link node, tag is next tag
+		tag:54
+		condition:DL:isQuestComplete("tower_key_2")
+		# translation: 
+		translation.tag:DL_Choice_GotKey
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [54] NPC Node
+	tag:54
+	# triggers: 
+	trigger:DL:removeItem("qe_tower_2", 1)
+	trigger:DL:changeQuestState("tower_key_2", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey2
+	translation.en:Good.
+	translation.de:Gut.
+	translation.ch:Guet.
+	[
+		# Link node, tag is next tag
+		tag:55
+	]
+}
+{1
+	# [55] NPC Node
+	tag:55
+	# triggers: 
+	trigger:DL:addItem("ke_tower_2", 1)
+	trigger:DL:changeQuestState("tower_2", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey22
+	translation.en:Here.
+	translation.de:Hier.
+	translation.ch:Do.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [47] Choice Node
+	tag:47
+	[
+		# Link node, tag is next tag
+		tag:56
+		condition:DL:isQuestComplete("tower_2")
+		# translation: 
+		translation.tag:DL_Choice_FirstTowerClimbed
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [56] NPC Node
+	tag:56
+	# triggers: 
+	trigger:DL:changeQuestState("tower_2", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_FirstTowerClimbed
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [48] Choice Node
+	tag:48
+	[
+		# Link node, tag is next tag
+		tag:57
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyQuest
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [57] NPC Node
+	tag:57
+	# triggers: 
+	trigger:DL:changeQuestState("tower_key_3", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GimmeKeyQuest
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [49] Choice Node
+	tag:49
+	[
+		# Link node, tag is next tag
+		tag:58
+		condition:DL:isQuestComplete("tower_key_3")
+		# translation: 
+		translation.tag:DL_Choice_GotKey
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [58] NPC Node
+	tag:58
+	# triggers: 
+	trigger:DL:removeItem("qe_tower_3", 1)
+	trigger:DL:changeQuestState("tower_key_3", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:59
+	]
+}
+{1
+	# [59] NPC Node
+	tag:59
+	# triggers: 
+	trigger:DL:addItem("ke_tower_3", 1)
+	trigger:DL:changeQuestState("tower_3", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey22
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [50] Choice Node
+	tag:50
+	[
+		# Link node, tag is next tag
+		tag:60
+		condition:DL:isQuestComplete("tower_3")
+		# translation: 
+		translation.tag:DL_Choice_FirstTowerClimbed
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [60] NPC Node
+	tag:60
+	# triggers: 
+	trigger:DL:changeQuestState("tower_3", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_FirstTowerClimbed
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [51] Choice Node
+	tag:51
+	[
+		# Link node, tag is next tag
+		tag:61
+		# translation: 
+		translation.tag:DL_Choice_GimmeKeyQuest
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [61] NPC Node
+	tag:61
+	# triggers: 
+	trigger:DL:changeQuestState("tower_key_4", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GimmeKeyQuest
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [62] Choice Node
+	tag:62
+	[
+		# Link node, tag is next tag
+		tag:64
+		condition:DL:isQuestComplete("tower_key_4")
+		# translation: 
+		translation.tag:DL_Choice_GotKey
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [64] NPC Node
+	tag:64
+	# triggers: 
+	trigger:DL:removeItem("qe_tower_4", 1)
+	trigger:DL:changeQuestState("tower_key_4", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:65
+	]
+}
+{1
+	# [65] NPC Node
+	tag:65
+	# triggers: 
+	trigger:DL:addItem("ke_tower_4", 1)
+	trigger:DL:changeQuestState("tower_4", "started")
+	# translation: 
+	translation.tag:DL_Etoz_GotKey22
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [63] Choice Node
+	tag:63
+	[
+		# Link node, tag is next tag
+		tag:66
+		condition:DL:isQuestComplete("tower_4")
+		# translation: 
+		translation.tag:DL_Choice_FirstTowerClimbed
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [66] NPC Node
+	tag:66
+	# triggers: 
+	trigger:DL:changeQuestState("tower_4", "completed")
+	# translation: 
+	translation.tag:DL_Etoz_FirstTowerClimbed
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [52] Choice Node
+	tag:52
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 }

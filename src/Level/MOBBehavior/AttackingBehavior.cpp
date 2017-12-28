@@ -9,7 +9,7 @@ AttackingBehavior::AttackingBehavior(LevelMovableGameObject* mob) {
 }
 
 void AttackingBehavior::handleAttackInput() {
-	if (m_mob->isDead() || (m_mob->getMovingBehavior() && !m_mob->getMovingBehavior()->isReady())) {
+	if (m_mob->isDead() || m_mob->isDisposed() || (m_mob->getMovingBehavior() && !m_mob->getMovingBehavior()->isReady())) {
 		return;
 	}
 	m_executeAttack();

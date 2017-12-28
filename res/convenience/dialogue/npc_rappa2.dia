@@ -1,0 +1,440 @@
+# dia file for dialogue for npc: npc_rappa2
+
+npc.id:npc_rappa2
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_rappa2", "mercenaries_quest") and not DL:isConditionFulfilled("npc_rappa2", "rap_ok") and not DL:isConditionFulfilled("npc_rappa2", "rap_nok")
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:not DL:isConditionFulfilled("npc_rappa2", "rap_ok") and not DL:isConditionFulfilled("npc_rappa2", "rap_nok") and not DL:isConditionFulfilled("boss", "BossMercenaries")
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:not DL:isConditionFulfilled("npc_rappa2", "rap_ok") and not DL:isConditionFulfilled("npc_rappa2", "rap_nok") and DL:isConditionFulfilled("boss", "BossMercenaries")
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_HeyYou
+		translation.en:
+		translation.de:
+		translation.ch:Hey, was tuesch du denn da, so ängstlich i dem Zimmer?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_ImAfraid
+	translation.en:
+	translation.de:
+	translation.ch:Gah weg, Angst haab, du hesch ken Schimmer - wege dene Söldner, da im Zimmer...
+	[
+		# Link node, tag is next tag
+		tag:3
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_ImAfraid2
+	translation.en:
+	translation.de:
+	translation.ch:... am End vom Gang, wird mer ez na Angst und Bang. Verschleppt und igsperrt bini vo ihne worde.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_Paranoia
+		translation.en:
+		translation.de:
+		translation.ch:Du liidisch wohl a Verfolgigswahn?
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		# translation: 
+		translation.tag:DL_Choice_Spoiled
+		translation.en:
+		translation.de:
+		translation.ch:Het das din Chopf so verdorbe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isConditionFulfilled("boss", "BossMercenaries")
+		# translation: 
+		translation.tag:DL_Choice_MercenariesDefeated
+		translation.en:
+		translation.de:
+		translation.ch:Die sind unterdesse scho gstorbe.
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa2", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_Paranoia
+	translation.en:
+	translation.de:
+	translation.ch:Du glaubsch mer nöd, obwohl i vor dir stahn, jetzt hau ab und gah mer us de Bahn.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Spoiled
+	translation.en:
+	translation.de:
+	translation.ch:Sie hend mi gfange, was füre Qual! Eus Gfangene kennzeichned, eus vier a de Zahl.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{3
+	# [8] Cendric Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_Spoiled
+	translation.en:
+	translation.de:
+	translation.ch:Kennzeichned öppe mit somne Mal?
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark
+	translation.en:
+	translation.de:
+	translation.ch:Ja, und nachher a eus experimentiert im Energiestrahl. Mer het ke Möglichkeit zum richtig verschwinde, will mit dem Mal chönd sie eim immer finde.
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark2
+	translation.en:
+	translation.de:
+	translation.ch:De einzig Grund dasi bi entcho, isch, dasi en Antimagiekristall ha mitgno.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark3
+	translation.en:
+	translation.de:
+	translation.ch:Aber jetzt sitzi da i de Falle, chasch mer die Söldner loswerde als chline Gfalle?
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{2
+	# [12] Choice Node
+	tag:12
+	[
+		# Link node, tag is next tag
+		tag:13
+		# translation: 
+		translation.tag:DL_Choice_NotHelp
+		translation.en:
+		translation.de:
+		translation.ch:Nei, ich wird ke Lüt los weg dim Verfolgigswahn.
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:not DL:isConditionFulfilled("boss", "BossMercenaries")
+		# translation: 
+		translation.tag:DL_Choice_Respect
+		translation.en:
+		translation.de:
+		translation.ch:Ja, au wenni vo dene drü scho Resepkt ha.
+	]
+	[
+		# Link node, tag is next tag
+		tag:15
+		condition:DL:isConditionFulfilled("boss", "BossMercenaries")
+		# translation: 
+		translation.tag:DL_Choice_MercenariesDead
+		translation.en:
+		translation.de:
+		translation.ch:D'Söldner sind nümme da.
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_13
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa2", "mercenaries_quest")
+	# translation: 
+	translation.tag:DL_Rappa_Respect
+	translation.en:
+	translation.de:
+	translation.ch:You gotta believe! Glaub dra!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_MercenariesDead
+	translation.en:
+	translation.de:
+	translation.ch:Demfall hesch si besiegt, nimmi ah.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{3
+	# [19] Cendric Node
+	tag:19
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_YouGottaBelieve
+	translation.en:
+	translation.de:
+	translation.ch:Ja! You gotta believe! Glaub dra!
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa2", "rap_ok")
+	# translation: 
+	translation.tag:DL_Rappa_MercenariesDone
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Spoiled
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{3
+	# [21] Cendric Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_Spoiled
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Mark4
+	translation.en:
+	translation.de:
+	translation.ch:Hesch du die Söldner scho besiegt gha?
+	[
+		# Link node, tag is next tag
+		tag:25
+	]
+}
+{3
+	# [25] Cendric Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_YouGottaBelieve
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa2", "rap_ok")
+	# translation: 
+	translation.tag:DL_Rappa_MercenariesDone
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_MercenariesWait
+	translation.en:
+	translation.de:
+	translation.ch:Ich wird da blibe, bis du die Söldner tuesch vertriebe.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa2", "rap_ok")
+	# translation: 
+	translation.tag:DL_Rappa_MercenariesDone
+	translation.en:
+	translation.de:
+	translation.ch:Danke vill mal! Min Weg isch jetzt frei. (De Rappa bricht uf mit emene Freudesschrei)  
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [17] Choice Node
+	tag:17
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

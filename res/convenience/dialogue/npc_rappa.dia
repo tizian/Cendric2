@@ -1,0 +1,388 @@
+# dia file for dialogue for npc: npc_rappa
+
+npc.id:npc_rappa
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_rappa", "stage1")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_rappa", "rap_ok") and not DL:isConditionFulfilled("npc_rappa", "rap_nok")
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		# translation: 
+		translation.tag:DL_Choice_Hey
+		translation.en:Excuse me...
+		translation.de:Hi!
+		translation.ch:Hey!
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "stage1")
+	# translation: 
+	translation.tag:DL_Rappa_StopIt
+	translation.en:Stop screaming, it hurts my ears, can't you see?
+	translation.de:Hör auf mit deinem Geschrei!
+	translation.ch:Hör uf mit dim Gschrey!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_ItWasLoud
+		translation.en:It was loud, I agree.
+		translation.de:Wenn du sagst, dass es so sei...
+		translation.ch:Okey...
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:And you are ...?
+		translation.de:Was ist denn dein Name ...?
+		translation.ch:Und du bisch ...?
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		# translation: 
+		translation.tag:DL_Choice_Bye
+		translation.en:Bye, I'll leave you alone.
+		translation.de:Tschüss, ich habe noch anderes zu tun.
+		translation.ch:Tschau, ich ha na anders ztue.
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_FinallyFree
+	translation.en:You can be lucky you're finally free!
+	translation.de:Sei froh, bist du endlich frei!
+	translation.ch:Sig froh, bisch endli frey!
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{2
+	# [6] Choice Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_YoureConfused
+		translation.en:Ehm... I'll leave - you seem to be confused...
+		translation.de:Ehm... Ich gehe - ich glaube, du bist verwirrt...
+		translation.ch:Ehm... Ich gang den mol - du bisch glaub verwirrt...
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_ISee
+		translation.en:You talk about screaming and being free, you're talking about...
+		translation.de:Du redest von Geschrei und frei sein, redest du von ...
+		translation.ch:Du redsch vo Gschrei und frei sii, redsch du vo ...
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_IKnowTheGame
+		translation.en:As free as I can be.
+		translation.de:Ja, aus den Gittern aus Blei.
+		translation.ch:Ja, us de Gitter us Bley.
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_YoureConfused
+	translation.en:Then go! You see, I'm not amused.
+	translation.de:Dann geh! Du - nicht ich - hast dich verirrt.
+	translation.ch:Denn gang doch! Du - nöd ich - hesch dich verirrt.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{2
+	# [8] Choice Node
+	tag:8
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_APlay
+		translation.en:... a play!
+		translation.de:... einem Theaterakt!
+		translation.ch:... emne Theaterakt!
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		# translation: 
+		translation.tag:DL_Choice_APrison
+		translation.en:... a prison?
+		translation.de:... einem Gefängnis?
+		translation.ch:... emne Gfängnis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:11
+		# translation: 
+		translation.tag:DL_Choice_ABird
+		translation.en:... a bird?
+		translation.de:... einem Papagei?
+		translation.ch:... emne Vögeli?
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_APlay
+	translation.en:Ah, you're too dumb. I'm not gonna stay!
+	translation.de:Hat's dir ins Hirn gekackt? Du verstehst es nicht, geh mir aus der Sicht.
+	translation.ch:Ah und da hesches verkackt. Du peilsches nöd, ich gang! Das wirdmer z'blöd.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_NPC_ImAfraid
+	translation.en:That reminds me of hell! I have to go - farewell!
+	translation.de:Du machst mir echt Schiss... Zeit, dass ich mich verpiss!
+	translation.ch:Du machschmer echt Schiss... S'wird Ziit, dassi mich verpiss.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_ABird
+	translation.en:The bird is a word! The most stupid thing I've ever heard - that's why I leave, nerd!
+	translation.de:Deine kuriosen Ideen sind einerlei - doch du verstehst es nicht, geh mir aus der Sicht!
+	translation.ch:Das müend dini Chopfbewohner si. Du peilsches nöd, ich gang - das wirdmer z'blöd!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{3
+	# [12] Cendric Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_IKnowTheGame
+	translation.en:See, I can talk in rhymes as well.
+	translation.de:Siehst du, du bist nicht der einzige, der das Spiel kennt.
+	translation.ch:Gsesch, Schund zemereime chani au.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_KnowTheGame
+	translation.en:Yes, you're a smart one, I can tell. But you remind me of a place I don't wanna be.
+	translation.de:Ich wusste, du bist intelligent. Aber dies ist mir jetzt einerlei, du erinnerst mich an Schmerz und Geschrei.
+	translation.ch:Ich ha gwüsst du bisch schlau. Aber das isch mer glich, well du erinnerisch mich.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_ok")
+	# translation: 
+	translation.tag:DL_Rappa_KnowTheGame2
+	translation.en:That scares me like hell - I'll leave, farewell!
+	translation.de:Das mag ich nicht, geh mir nun bitte aus der Sicht.
+	translation.ch:Das macht mer Schiss... Es wird Ziit, dasi mi verpiss.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_WhoAreYou
+	translation.en:Carrots, celery, meat... no fish on this bar?
+	translation.de:Karotten, Sellerie, Fleisch... wo ist der Fisch?
+	translation.ch:Rüebli, Sellerie, Fleisch... wo isch de Fisch?
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{2
+	# [15] Choice Node
+	tag:15
+	[
+		# Link node, tag is next tag
+		tag:17
+		# translation: 
+		translation.tag:DL_Choice_RappaConfused
+		translation.en:You seem to be a bit confused.
+		translation.de:Ich sehe, du bist ein wenig verwirrt.
+		translation.ch:Ich gse, du hesch en verwirrte Chopf.
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_CountStuff
+		translation.en:You're counting the stuff in the shelf?
+		translation.de:Du zählst die Sachen im Regal?
+		translation.ch:Du zellsch d'Sache im Regal?
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		# translation: 
+		translation.tag:DL_Choice_Bizarre
+		translation.en:Maybe there's something in that jar.
+		translation.de:Das hättest du wohl gerne auf dem Tisch.
+		translation.ch:Das hetsch wohl gern ufem Tisch.
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_RappaConfused
+	translation.en:I wanted to talk, but you refused.
+	translation.de:Ich wollte mit dir reden, doch du hast dich verirrt.
+	translation.ch:Ha nu wele rede, du arme Tropf.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_CountStuff
+	translation.en:You're dumb, leave me to myself.
+	translation.de:Deine Dummheit ist eine echte Qual.
+	translation.ch:Dini Dummheit isch e Qual.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_ok")
+	# translation: 
+	translation.tag:DL_Rappa_Bizarre
+	translation.en:I see, we're on par. Anyway, I miss some potato, I really really have to go.
+	translation.de:Ich sehe, das wirkt authentisch. Trotzdem musst du jetzt gehen, doch wir werden uns wiedersehen.
+	translation.ch:Ich gseh, dassd ez scho gschiider bisch. Trotzdem muesch ez ga und mich wieder eleini lah.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_rappa", "rap_nok")
+	# translation: 
+	translation.tag:DL_Rappa_Bye
+	translation.en:It's better like that, I should have known.
+	translation.de:Ah... endlich kann ich mich ausruhn.
+	translation.ch:Ah... endlich Rue.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Rappa_Shelf
+	translation.en:(Rappa seems to be ordering the stuff in the shelf)
+	translation.de:(Rappa scheint dabei zu sein, sein Regal in Ordnung zu bringen)
+	translation.ch:(De Rappa isch debii, sis Regal in Ornig z'bringe)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="151">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="152">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -30,8 +30,8 @@
  <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
   <data encoding="csv">
@@ -79,8 +79,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,172,0,0,0,0,0,255,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,191,221,222,0,185,186,0,0,332,333,0,0,
-0,0,0,0,0,293,0,0,0,0,255,0,0,0,240,241,0,204,205,0,0,0,0,0,0,
-0,0,0,0,0,0,0,98,0,99,274,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,293,0,0,0,0,0,0,0,0,240,241,0,204,205,0,0,0,0,0,0,
+0,0,0,0,0,0,0,98,0,99,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,23,0,117,290,118,0,0,272,66,207,66,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,274,0,0,0,0,0,0,0,85,226,85,0,0,0,243,244,0,301,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,202,0,0,0,0,
@@ -128,6 +128,11 @@
   <object id="149" gid="370" x="322" y="489" width="50" height="50">
    <properties>
     <property name="id" value="npc_andrew"/>
+   </properties>
+  </object>
+  <object id="151" gid="428" x="500" y="375" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_rappa"/>
    </properties>
   </object>
  </objectgroup>
