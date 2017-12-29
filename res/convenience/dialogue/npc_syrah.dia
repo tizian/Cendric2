@@ -189,6 +189,16 @@ npc.id:npc_syrah
 	]
 	[
 		# Link node, tag is next tag
+		tag:40
+		condition:not DL:isConditionFulfilled("npc_syrah", "sack")
+		# translation: 
+		translation.tag:DL_Choice_Sack
+		translation.en:Can I get some hair dye from you?
+		translation.de:Kann ich dann ein Haarfärbemittel haben?
+		translation.ch:Chani den es Hoorfärbemittel ha?
+	]
+	[
+		# Link node, tag is next tag
 		tag:8
 		# translation: 
 		translation.tag:DL_Choice_CanYouBrew
@@ -564,6 +574,36 @@ npc.id:npc_syrah
 	translation.en:Ah ok. Yes, you can tell her she can start here, as long as she's not totally clumsy.
 	translation.de:Ah okay. Ja, du kannst ihr sagen, sie kann hier beginnen, solange sie nicht völlig tollpatschig ist.
 	translation.ch:Ah okay. Jo, du chasch ere sagä, si cha do aafoh, solang sie nid komplett tollpatschig isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "sack")
+	# translation: 
+	translation.tag:DL_Syrah_Sack
+	translation.en:(Giggles) I was joking. But if you're so unhappy with your hair, I might have something for you.
+	translation.de:(Kichert) Ich habe gescherzt. Aber wenn du so unglücklich mit deinen Haaren bist, könnte ich etwas für dich haben.
+	translation.ch:(Gigglet) Ich hanen Witz gmacht. Aber wennd so unglücklich mit dine Hoore bisch, hani vilicht öppis für dich.
+	[
+		# Link node, tag is next tag
+		tag:41
+	]
+}
+{1
+	# [41] NPC Node
+	tag:41
+	# triggers: 
+	trigger:DL:addItem("eq_sack", 1)
+	# translation: 
+	translation.tag:DL_Syrah_Sack2
+	translation.en:Here, it'll solve your problem.
+	translation.de:Hier, er wird dein Problem lösen.
+	translation.ch:Do, er wird dis Problem löse.
 	[
 		# Link node, tag is next tag
 		tag:-2

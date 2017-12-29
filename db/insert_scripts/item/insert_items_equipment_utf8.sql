@@ -8,6 +8,14 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stevenhelmet', -10, -29, 31, 27);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_stevenhelmet', 1, 550, 100, 50, 100);
 
+-- Sack
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item', 'Sack','Sack','Sack');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item_desc', 'Syrah''s solution for my blonde hair.','Syrah''s Lösung für mein blondes Haar.','De Syrah ihri Lösig für mini blonde Haar.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sack', 'eq_head', 550, 700, 5);
+INSERT INTO item_attribute (item_id, dmg_physical, res_light, res_physical, res_ice, critical) values ('eq_sack', -5, 100, 5, 10, -5);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sack', 'res/texture/equipment/head/spritesheet_head_sack.png', 'res/texture/equipment/head/spritesheet_map_head_sack.png');
+
 -- Lava Crown
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item', 'Lava Crown','Lavakrone','Lava Chrone');

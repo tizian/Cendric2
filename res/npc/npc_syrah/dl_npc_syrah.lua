@@ -69,6 +69,9 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_syrah", "thea") and DL:isQuestState("theas_dream", "started")) then 
 		DL:addChoice(37, "DL_Choice_Thea") -- Are you looking for an apprentice?
 	end
+	if (not DL:isConditionFulfilled("npc_syrah", "sack")) then 
+		DL:addChoice(40, "DL_Choice_Sack") -- Can I get some hair dye from you?
+	end
 	DL:addChoice(8, "DL_Choice_CanYouBrew") -- Can you brew something for me?
 	DL:addChoice(11, "DL_Choice_Trade") -- Show me your potions.
 	DL:addChoice(-1, "") -- 
@@ -216,6 +219,19 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(39, -2, "DL_Syrah_Thea2") -- Ah ok. Yes, you can tell her she can start here, as long as she's not totally clumsy.
 		DL:addQuestDescription("theas_dream", 1)
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_syrah", "sack")) then 
+
+		DL:createNPCNode(40, 41, "DL_Syrah_Sack") -- (Giggles) I was joking. But if you're so unhappy with your hair, I might have something for you.
+		DL:addConditionProgress("npc_syrah", "sack")
+		DL:addNode()
+
+
+		DL:createNPCNode(41, -2, "DL_Syrah_Sack2") -- Here, it'll solve your problem.
+		DL:addItem("eq_sack", 1)
 		DL:addNode()
 
 	end
