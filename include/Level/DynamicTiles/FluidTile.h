@@ -51,6 +51,9 @@ public:
 
 private:
 	void checkForMovableTiles();
+	void doWaves(const sf::Time& frameTime);
+	int m_waveOffset = 1;
+	sf::Time m_waveOffsetTimeout;
 
 private:
 	FluidTileData m_data;

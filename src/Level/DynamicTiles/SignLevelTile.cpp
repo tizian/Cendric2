@@ -57,6 +57,10 @@ bool SignLevelTile::init(const LevelTileProperties& properties) {
 		return false;
 	}
 
+	if (contains(properties, std::string("name"))) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(properties.at("name"), "sign_name"));
+	}
+
 	return true;
 }
 

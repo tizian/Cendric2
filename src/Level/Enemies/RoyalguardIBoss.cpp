@@ -25,7 +25,9 @@ RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 void RoyalguardIBoss::loadAttributes() {
 	m_attributes.setHealth(500);
 	m_attributes.resistanceIce = -20;
-	m_attributes.resistancePhysical = 1000;
+	m_attributes.resistancePhysical = 100;
+	m_attributes.resistanceShadow = 100;
+	m_attributes.resistanceLight = 100;
 	m_attributes.resistanceFire = 10000;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
@@ -47,6 +49,15 @@ void RoyalguardIBoss::loadSpells() {
 
 void RoyalguardIBoss::handleAttackInput() {
 	// nop
+}
+
+void RoyalguardIBoss::addDamage(int damage, DamageType damageType, bool overTime, bool critical) {
+	if (damageType == DamageType::Fire) {
+		addHeal(damage, overTime, critical);
+		return;
+	}
+
+	RoyalguardBoss::addDamage(damage, damageType, overTime, critical);
 }
 
 void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {

@@ -511,6 +511,7 @@
   </object>
   <object id="24" gid="908" x="200" y="1650" width="50" height="50">
    <properties>
+    <property name="name" value="Tombstone"/>
     <property name="text" value="ElonaGrave"/>
    </properties>
   </object>

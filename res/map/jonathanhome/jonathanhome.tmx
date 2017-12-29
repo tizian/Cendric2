@@ -281,7 +281,7 @@
   </object>
   <object id="180" x="450" y="500" width="50" height="25">
    <properties>
-    <property name="level entry" value="res/level/jonathanslab/jonathanslab.tmx,2750,200"/>
+    <property name="level entry" value="res/level/jonathanslab/jonathanslab.tmx,2750,210"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

@@ -113,6 +113,7 @@ void FluidTile::loadAnimation(int skinNr) {
 }
 
 void FluidTile::update(const sf::Time& frameTime) {
+	doWaves(frameTime);
 	checkForMovableTiles();
 
 	float dt = frameTime.asSeconds();
@@ -246,6 +247,21 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 
 		g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, false, scale);
 	}
+}
+
+void FluidTile::doWaves(const sf::Time& frameTime) {
+	if (!m_data.isWavey) return;
+	updateTime(m_waveOffsetTimeout, frameTime);
+
+	if (m_waveOffsetTimeout > sf::Time::Zero) return;
+
+	m_waveOffsetTimeout = sf::seconds(0.02f);
+	m_waveOffset = (m_waveOffset + 1) % 20;
+
+	float velocity = 30.f * m_data.velocityScale;	// Apply global scale factor based on fluid parameters
+	
+	for (int i = m_waveOffset; i < m_nColumns; i += 20)
+	m_columns[i].velocity += velocity;
 }
 
 void FluidTile::render(sf::RenderTarget& target) {

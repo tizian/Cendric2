@@ -20,11 +20,23 @@ RoyalguardTBoss::RoyalguardTBoss(const Level* level, Screen* screen) :
 
 void RoyalguardTBoss::loadAttributes() {
 	m_attributes.setHealth(500);
-	m_attributes.resistanceFire = 0;
+	m_attributes.resistanceFire = -20;
 	m_attributes.resistancePhysical = 100;
+	m_attributes.resistancePhysical = 100;
+	m_attributes.resistanceShadow = 100;
+	m_attributes.resistanceLight = 100;
 	m_attributes.resistanceIce = 10000;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
+}
+
+void RoyalguardTBoss::addDamage(int damage, DamageType damageType, bool overTime, bool critical) {
+	if (damageType == DamageType::Ice) {
+		addHeal(damage, overTime, critical);
+		return;
+	}
+
+	RoyalguardBoss::addDamage(damage, damageType, overTime, critical);
 }
 
 void RoyalguardTBoss::loadSpells() {

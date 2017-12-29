@@ -11,6 +11,7 @@ enum class FluidTileType {
 	ShallowWater,
 	Poison,
 	FreezingWater,
+	WaveyWater,
 	MAX
 };
 
@@ -26,6 +27,7 @@ struct FluidTileData final {
 	bool isDeadly;
 	bool isFreezable;
 	bool isFreezing;
+	bool isWavey;
 	std::string soundPath;
 
 	static FluidTileData getData(int skinNr);
@@ -43,6 +45,7 @@ const FluidTileData WATER
 	false,
 	true,
 	false,
+	false,
 	"res/sound/tile/water_splash.ogg"
 };
 
@@ -58,6 +61,7 @@ const FluidTileData LAVA
 	true,
 	false,
 	false,
+	false,
 	""
 };
 
@@ -70,6 +74,7 @@ const FluidTileData SHALLOW_WATER
 	20.f,
 	0.5f,
 	sf::Color(20, 50, 100, 128),
+	false,
 	false,
 	false,
 	false,
@@ -88,6 +93,7 @@ const FluidTileData POISON
 	true,
 	true,
 	false,
+	false,
 	"res/sound/tile/water_splash.ogg"
 };
 
@@ -102,6 +108,23 @@ const FluidTileData FREEZING_WATER
 	sf::Color(50, 100, 150, 128),
 	false,
 	true,
+	true,
+	false,
+	"res/sound/tile/water_splash.ogg"
+};
+
+const FluidTileData WAVEY_WATER
+{
+	FluidTileType::Water,
+	1.0f,
+	0.0f,
+	1.0f,
+	40.f,
+	1.f,
+	sf::Color(20, 50, 100, 128),
+	false,
+	false,
+	false,
 	true,
 	"res/sound/tile/water_splash.ogg"
 };

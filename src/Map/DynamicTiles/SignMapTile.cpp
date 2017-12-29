@@ -56,6 +56,10 @@ bool SignMapTile::init(const MapTileProperties& properties) {
 		return false;
 	}
 
+	if (contains(properties, std::string("name"))) {
+		m_interactComponent->setTooltipText(g_textProvider->getText(properties.at("name"), "sign_name"));
+	}
+
 	m_isBackground = contains(properties, std::string("bg"));
 
 	return true;

@@ -7,6 +7,7 @@ class RoyalguardTBoss final : public virtual RoyalguardBoss {
 public:
 	RoyalguardTBoss(const Level* level, Screen* screen);
 
+	void addDamage(int damage, DamageType damageType, bool overTime, bool critical) override;
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Royalguard_T; }
 
 protected:

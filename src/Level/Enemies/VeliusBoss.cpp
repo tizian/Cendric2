@@ -216,14 +216,6 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 
 	if (!victimDead && !veliusHit) return;
 
-	if (victimDead) {
-		m_scriptedBehavior->say("VeliusCendricDead", 5);
-	}
-	else {
-		setStunned(sf::seconds(2.f));
-		m_victim->release();
-	}
-
 	delete m_ray;
 	m_ray = nullptr;
 	m_elementalPc->setVisible(false);
@@ -232,6 +224,7 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 	setBossState(Over);
 
 	if (victimDead) {
+		m_scriptedBehavior->say("VeliusCendricDead", 5);
 		setState(GameObjectState::Idle);
 	}
 	else {

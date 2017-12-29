@@ -45,6 +45,7 @@ void TelekinesisSpell::update(const sf::Time& frameTime) {
 }
 
 void TelekinesisSpell::checkCollisionsWithItems() {
+	if (!m_mob) return;
 	for (auto& it : *m_items) {
 		if (!it->isViewable()) continue;
 		if (fastIntersect(*it->getBoundingBox(), *getBoundingBox())) {
