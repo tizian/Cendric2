@@ -288,7 +288,7 @@ void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, fl
 
 	// load title
 	addText(g_textProvider->getCroppedText(item.getID(), "item", GUIConstants::CHARACTER_SIZE_M,
-		maxWidth), COLOR_WHITE, currentOffset, 1, GUIConstants::CHARACTER_SIZE_M);
+		maxWidth), item.getRarityColor(), currentOffset, 1, GUIConstants::CHARACTER_SIZE_M);
 
 	// load description
 	addText(g_textProvider->getCroppedText(item.getID(), "item_desc", GUIConstants::CHARACTER_SIZE_S,

@@ -71,13 +71,13 @@ Signed
 Grand Magister Cyrus',
 'An den Novizen Cendric
 
-Die Situation hat sich als ernster entpuppt als wir bisher angenommen hatten. Es ist von äusserster Wichtigkeit, dass du den Brief dem Elementarmagier Jonathan überbringst, der in Gandria lebt. Unterstütze ihn in dieser Sache so gut wie dir nur möglich ist.
+Die Situation hat sich als ernster entpuppt als wir bisher angenommen hatten. Es ist von äusserster Wichtigkeit, dass du die Karte dem Elementarmagier Jonathan überbringst, der in Gandria lebt. Unterstütze ihn in dieser Sache so gut wie dir nur möglich ist.
 
 Gezeichnet
 Grossmagister Cyrus',
 'A de Novize Cendric
 
-D''Situation isch ernster als mer bis jetzt agno hend. Es isch üsserst wichtig, dass du de Brief em Elementarmagier Jonathan bringsch wo in Gandria lebt. Unterstütz ihn i dere Sach so guet we dir möglich isch.
+D''Situation isch ernster als mer bis jetzt agno hend. Es isch üsserst wichtig, dass du d''Charte em Elementarmagier Jonathan bringsch wo in Gandria lebt. Unterstütz ihn i dere Sach so guet we dir möglich isch.
 
 Zeichnet
 Grossmagister Cyrus');
@@ -86,7 +86,7 @@ Grossmagister Cyrus');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item', 'Wrinkled Map','Zerknitterte Karte','Verknittereti Charte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_elemap', 'item_desc', 'That''s definitely some kind of map, but the symbols and text are moving in a way that makes it impossible to make sense of it.','Das ist eindeutig eine Art Karte, aber die Symbole und der Text darauf bewegen sich so dass es unmöglich ist, etwas darauf zu erkennen.','Da isch definitiv e Art Charte aber d''Symbol und de Text druf beweged sich so dases unmöglich isch, öppis z''erkenne druf.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elemap', 'document', 550, 400, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_elemap', 'document', 550, 400, -1, 1);
 INSERT INTO item_document_page(item_id, page_nr, texture_path) values ('do_elemap', 0, 'res/texture/items/elemap.png');
 
 -- Rhendal's Diary
@@ -116,7 +116,7 @@ I can''t entomb her traditionally with her staff, but only with a part of it. I'
 Ich kann sie also nicht mit ihrem Stab begraben, wie es die Tradition will, sondern nur mit einem Teil davon. Den magischen Stein des Stabs aber werde ich hier behalten, als Erinnerung an sie.','Ich chas immer nanig versta, dass mini gliebti Elona nüm bi mir isch. Ich han Stück vo ihrem Stab im Steigarte gfunde aber hanen nid wider chöne zemesetze, es fehlt es Stück.
 
 Ich cha si also nid mit ihrem Stab begrabe - wes Tradition wer - nur mitme Teil devo. De magisch Stei vom Stab wirdi aber bi mir phalte, als Erinnerig a si.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_elderdiary', 'document', 500, 500, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_elderdiary', 'document', 500, 500, -1, 1);
 
 -- Mysterious Letter (From velius to mercenaries)
 

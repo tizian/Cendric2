@@ -1,6 +1,6 @@
 -- Rhendal's Book about Magic
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_rhendalmagic', 'document', 500, 500, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('bo_rhendalmagic', 'document', 500, 500, -1, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_rhendalmagic', 0, 'BookRhendalMagic');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 1, 'TitleRhendalMagic1', 'ContentRhendalMagic1');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_rhendalmagic', 2, '', 'ContentRhendalMagic2');
@@ -40,7 +40,7 @@ Aber so interessant und nützlich d''Magie au sii mag, es git viel Lüüt, wo de
 
 -- Jonathans Book about Schools of Magic
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_schoolsofmagic', 'document', 500, 500, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('bo_schoolsofmagic', 'document', 500, 500, -1, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_schoolsofmagic', 0, 'BookSchoolsOfMagic');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 1, 'TitleSchoolsOfMagic1', 'ContentSchoolsOfMagic1');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('bo_schoolsofmagic', 2, 'TitleSchoolsOfMagic2', 'ContentSchoolsOfMagic2');
@@ -64,7 +64,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 
 -- Syrah's Book about Potions
 
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('bo_potions', 'document', 500, 500, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('bo_potions', 'document', 500, 500, -1, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('bo_potions', 0, 'BookPotions');
 INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('bo_potions', 1, 'TitleBookPotions1', 'ContentBookPotions1', 'center');
 INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('bo_potions', 2, 'TitleBookPotions2', 'ContentBookPotions2', 'center');

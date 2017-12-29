@@ -120,8 +120,8 @@ ItemBean* DatabaseManager::getItemBean(const std::string& item_id) const {
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 5) {
-			g_logger->logError("DatabaseManager::getItemBean", "number of returned columns must be 5");
+		if (cols != 6) {
+			g_logger->logError("DatabaseManager::getItemBean", "number of returned columns must be 6");
 			return bean;
 		}
 
@@ -132,6 +132,7 @@ ItemBean* DatabaseManager::getItemBean(const std::string& item_id) const {
 			bean->icon_location.x = sqlite3_column_int(statement, 2);
 			bean->icon_location.y = sqlite3_column_int(statement, 3);
 			bean->gold_value = sqlite3_column_int(statement, 4);
+			bean->rarity = sqlite3_column_int(statement, 5);
 		}
 
 		sqlite3_finalize(statement);

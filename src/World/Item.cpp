@@ -74,6 +74,15 @@ int Item::getValue() const {
 	return m_itemBean.gold_value;
 }
 
+
+int Item::getRarity() const {
+	return m_itemBean.rarity;
+}
+
+sf::Color Item::getRarityColor() const {
+	return Item::getRarityColor(m_itemBean.rarity);
+}
+
 const AttributeData& Item::getAttributes() const {
 	return m_attributeData;
 }
@@ -99,4 +108,21 @@ bool Item::isEquipmentType(ItemType type) {
 		type == ItemType::Equipment_ring_1 ||
 		type == ItemType::Equipment_ring_2 ||
 		type == ItemType::Equipment_weapon;
+}
+
+sf::Color Item::getRarityColor(int rarity) {
+	switch (rarity)
+	{
+	case 4:
+		return sf::Color(255, 50, 50); // legendary items are red (enhanced boss weapons)
+	case 3:
+		return sf::Color(170, 80, 255); // epic items are purple (boss weapons, t3)
+	case 2:
+		return sf::Color(20, 195, 255); // rare items (permanent items) and gear (t2)
+	case 1:
+		return sf::Color(20, 255, 20); // magical gear (t1) and quest / important items
+	case 0:
+	default:
+		return sf::Color::White; // default items
+	}
 }

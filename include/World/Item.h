@@ -48,8 +48,9 @@ public:
 	ItemType getType() const;
 	const sf::Vector2i& getIconTextureLocation() const;
 	const AttributeData& getAttributes() const;
-	// the items gold value
 	int getValue() const;
+	int getRarity() const;
+	sf::Color getRarityColor() const;
 
 	// returns the first bean of the given type
 	// returns nullptr if there's no bean of this type.
@@ -77,6 +78,7 @@ public:
 	const ItemCheck& getCheck() const;
 
 	static bool isEquipmentType(ItemType type);
+	static sf::Color getRarityColor(int rarity);
 
 protected:
 	std::vector<DatabaseBean*> m_beans;

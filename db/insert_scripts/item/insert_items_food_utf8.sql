@@ -82,7 +82,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_stormweed', 'item', 'Storm Weed', 'Sturmkraut', 'Sturm Chruut');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_stormweed', 'item_desc', 'Is only fully effective as a component of a potion.', 'Entfaltet seine volle Wirkung erst als Zutat eines Trankes.', 'Entfaltet sini voll Würkig erst als Zuetat vomne Trank.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_stormweed', 'consumable', 550, 150, 100);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('fo_stormweed', 'consumable', 550, 150, 100, 2);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_stormweed', 1);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_stormweed', 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_stormweed', 0, 0, 50, 50);

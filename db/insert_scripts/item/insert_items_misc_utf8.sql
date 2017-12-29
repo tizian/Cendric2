@@ -29,7 +29,7 @@ INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radiu
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item', 'Ice Crystal','Eiskristall','Iiskristall');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item_desc', 'An exeptionally beautiful crystal. Maybe someone could craft something from it.','Ein aussergewöhnlich schöner Kristall. Vielleicht könnte jemand etwas daraus anfertigen.','En ussergwöhnlich schöne Kristall. Vilicht chönt öpper öppis drus herstelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_icecrystal', 'misc', 600, 500, 40);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_icecrystal', 'misc', 600, 500, 40, 2);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_icecrystal', -3, -10, 44, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 1, 300, 300, 50, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 3, 350, 300, 50, 50);
@@ -40,7 +40,7 @@ INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radiu
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_elysiatail', 'item', 'Elysia''s Tail Feathers','Elysia''s Schwanzfedern','Schwanzfädere vode Elysia');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_elysiatail', 'item_desc', 'This tail was cut from the storm bird Elysia. Maybe someone could craft something from it.','Dieser Schwanz wurde dem Sturmvogel Elysia abgehackt. Vielleicht könnte jemand etwas daraus anfertigen.','De Schwanz isch em Sturmvogel Elysia abghackt worde. Vilicht chönt öpper öppis drus herstelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_elysiatail', 'misc', 650, 50, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_elysiatail', 'misc', 650, 50, -1, 3);
 
 -- Teeth of a Nekomata
 
@@ -58,7 +58,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item', 'Fur of a Fire Rat','Fell einer Feuerratte','Fell vonere Füürratte');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item_desc', 'This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour out of it.','Diese Fell ist aussergewöhnlich gut erhalten. Vielleicht kann es jemand zu einer Rüstung verarbeiten.','Da Fell isch ussergwöhnlich guet erhalte. Vilicht chan öpper da drus e Rüstig mache.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firerat_fur', 'misc', 200, 350, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_firerat_fur', 'misc', 200, 350, 20, 2);
 
 -- Fur of a Wolf
 
@@ -70,13 +70,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Gargoyle Dust','Gargoylestaub','Gargoylestaub');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_gargoyle_dust', 'misc', 350, 0, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_gargoyle_dust', 'misc', 350, 0, 20, 2);
 
 -- Nekomata Embers
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_ember', 'item', 'Nekomata Embers','Nekomata Funken','Nekomata Funke');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_neko_ember', 'item_desc', 'Magical embers from the fur of a Nekomata.','Magische Funken vom Fell einer Nekomata.','Magischi Funke vom Fell vonere Nekomata.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_neko_ember', 'misc', 800, 0, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_neko_ember', 'misc', 800, 0, 20, 2);
 
 -- Teeth
 
@@ -100,7 +100,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item', 'Heart of Khajag','Herz von Khajag','Herz vom Khajag');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firstguardianheart', 'item_desc', 'This gem is the only thing left from the giant wolf guardian of the howling caverns.','Dieses Juwel ist das Einzige, was vom riesigen Wächterwolf aus den Heulenden Höhlen noch übrig ist.','Da Juwel ischs Einzig, wo vom riesige Wächterwolf us de Hüülende Höhle übrig blibe isch.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_firstguardianheart', 'misc', 450, 350, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_firstguardianheart', 'misc', 450, 350, -1, 2);
 
 -- Stone
 
@@ -112,13 +112,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item', 'Corrupted Ice Stone','Verdorbener Eisstein','Verdorbene Iisstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_ice', 'item_desc', 'This stone has been corrupted by a Cairn Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Cairn Geist verdorben und ist nun mit magischen Kräften durchzogen.','De Stei isch voneme Steimännli Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_corrupt_stone_ice', 'misc', 300, 350, 20, 1);
 
 -- Corrupt stone (Fire)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item', 'Corrupted Fire Stone','Verdorbener Feuerstein','Verdorbene Füürstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_corrupt_stone_fire', 'item_desc', 'This stone has been corrupted by a Lava Wraith and is now infused with magical powers.','Dieser Stein wurde von einem Lava Geist verdorben und ist nun mit magischen Kräften durchzogen.','De Stei isch voneme Lava Geist verdorbe worde und isch jetzt vo magische Chräft durchzoge.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 20);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_corrupt_stone_fire', 'misc', 700, 0, 20, 1);
 
 -- Teleport Stone
 
@@ -130,13 +130,13 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item', 'Pile of Magical Pearls','Haufen Magischer Perlen','Es Hüüfli Magischi Perle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_pearlpile', 'item_desc', 'Maybe someone could use these pearls to craft something.','Vielleicht könnte jemand aus diesen Perlen etwas herstellen.','Vilicht chönt öpper us dene Perle öppis herstelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_pearlpile', 'misc', 300, 650, 50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_pearlpile', 'misc', 300, 650, 50, 2);
 
 -- Broken Sickles
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item', 'Broken Sickles','Zerbrochene Sicheln','Verbrocheni Sichle');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item_desc', 'The broken remains of Arastor''s weapon. Maybe someone could fix it.','Die zerbrochenen Überreste von Arastor''s Waffe. Vielleicht könnte sie jemand wieder zusammensetzen.','Di verbrochene Überreste vom Arastor sinere Waffe. Vilicht chönt si öppert wieder zemesetze.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_janusglaive', 'misc', 650, 200, 10);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_janusglaive', 'misc', 650, 200, 10, 3);
 
 -- Iron Ore
 
@@ -172,10 +172,10 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item', 'Yasha''s Fangs','Yasha''s Fangzähne','Fangzää vode Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_yashafangs', 'item_desc', 'The huge fangs of the demon Yasha. Maybe someone could craft something with it.','Die riesigen Fangzähne der Dämonin Yasha. Vielleicht könnte jemand etwas daraus herstellen.','Di riesige Fangzää vode Dämonin Yasha. Vilicht chönt öpper öppis drus herstelle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_yashafangs', 'misc', 750, 200, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_yashafangs', 'misc', 750, 200, -1, 3);
 
 -- Prisma Stone
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item', 'Prisma Stone','Prismastein','Prismastei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item_desc', 'It shines in all colors of the rainbow. The blacksmith Harek would certainly be interested in this material.','Er leuchtet in allen Farben des Regenbogens. Der Schmied Harek wäre sicherlich an diesem Material interessiert.','Er lüchtet i allne Farbe vom Rägeboge. De Schmied Harek wer sicher a dem Material interessiert.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_prismastone', 'misc', 800, 250, -1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_prismastone', 'misc', 800, 250, -1, 3);

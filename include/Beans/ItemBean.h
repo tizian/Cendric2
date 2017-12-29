@@ -9,6 +9,7 @@ struct ItemBean final : DatabaseBean {
 	ItemType item_type;
 	sf::Vector2i icon_location;
 	int gold_value;
+	int rarity;
 
 	static ItemType resolveItemType(const std::string& _item_type) {
 		if (_item_type.compare("consumable") == 0) {
