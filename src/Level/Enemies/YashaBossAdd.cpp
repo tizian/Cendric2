@@ -44,10 +44,10 @@ void YashaBossAdd::update(const sf::Time& frameTime) {
 		switch (m_skinNr) {
 		case 0:
 		default:
-			m_mainChar->addDamage(m_level * 5, DamageType::Fire, false, false);
+			m_mainChar->addDamage(m_level * 6, DamageType::Fire, false, false);
 			break;
 		case 1:
-			m_boss->addHeal(m_level * 5, false, false);
+			m_boss->addHeal(m_level * 10, false, false);
 			break;
 		case 2:
 			m_boss->setInvincible(true);

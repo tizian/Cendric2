@@ -787,6 +787,7 @@
   <object id="354" gid="2498" x="2050" y="400" width="50" height="50">
    <properties>
     <property name="bg" value=""/>
+    <property name="name" value="Tombstone"/>
     <property name="text" value="SignRandalf"/>
    </properties>
   </object>

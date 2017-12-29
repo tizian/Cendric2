@@ -36,7 +36,7 @@ void SkeletonMageEnemy::loadAttributes() {
 
 void SkeletonMageEnemy::loadSpells() {
 	SpellData leechSpell = SpellData::getSpellData(SpellID::Leech);
-	leechSpell.damage = 40;
+	leechSpell.damage = 60;
 	leechSpell.duration = sf::seconds(2.f);
 	leechSpell.count = 2;
 	leechSpell.cooldown = sf::milliseconds(3000);

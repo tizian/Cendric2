@@ -1,3 +1,7 @@
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Tombstone','sign_name','Tombstone','Grabstein','Grabstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Note','sign_name','Note','Notiz','Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Crystal','sign_name','Crystal','Kristall','Kristall');
+
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Inn','sign','Inn','Gasthof','Gasthof');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Gandria','sign','Gandria','Gandria','Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('NoSwimming','sign','No swimming','Nicht schwimmen','Nid schwümme');

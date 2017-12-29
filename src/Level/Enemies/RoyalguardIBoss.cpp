@@ -23,9 +23,9 @@ RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 }
 
 void RoyalguardIBoss::loadAttributes() {
-	m_attributes.setHealth(300);
+	m_attributes.setHealth(500);
 	m_attributes.resistanceIce = -20;
-	m_attributes.resistancePhysical = 100;
+	m_attributes.resistancePhysical = 1000;
 	m_attributes.resistanceFire = 10000;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();

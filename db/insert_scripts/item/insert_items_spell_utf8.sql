@@ -75,7 +75,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_antigravity', 'spell', 150, 400, -1, 3);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_antigravity', 6);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_antigravity', 'item','Scroll - Anti Gravity','Schriftrolle - Schwerkraft umkehren','Schriftrolle - Schwerchraft umchere', 'Pergamino - Antigravedad');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_antigravity', 'item_desc','Reverses gravity for Cendric for a certain duration.','Dreht Cendrics Schwerkraft für eine gewisse Zeit um.','Drüllt em Cendric sini Schwerchraft für e gwüssi Ziit um.','Invierte la gravedad de Cendric por cierto tiempo.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_antigravity', 'item_desc','Reverses gravity for Cendric.','Dreht Cendrics Schwerkraft um.','Drüllt em Cendric sini Schwerchraft um.','Invierte la gravedad de Cendric.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_antigravity', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_antigravity', 1, 150, 400, 50, 50);
 

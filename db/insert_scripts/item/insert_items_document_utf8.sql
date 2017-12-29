@@ -168,7 +168,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('No
 
 -- Bob','Irgendjemand... Hilf uns! Er zerstört alles.
 
--- Bob','Irgenöpper... Hilf üs! Er zerstört alles.
+-- Bob','Irgendöpper... Hilf üs! Er zerstört alles.
 
 -- Bob');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_notebob', 'document', 400, 400, -1);

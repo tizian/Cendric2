@@ -145,8 +145,8 @@
  <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="22">
   <data encoding="csv">
@@ -243,7 +243,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,100,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,24,0,73,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,47,0,96,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -356,7 +356,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="22">
+ <layer name="collidable" width="25" height="22" visible="0">
   <data encoding="csv">
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
@@ -492,7 +492,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="collidable">
+ <objectgroup name="collidable" visible="0">
   <object id="157" x="550" y="714" width="150" height="30"/>
   <object id="159" x="749" y="563" width="11" height="35"/>
   <object id="161" x="490" y="563" width="11" height="35"/>
