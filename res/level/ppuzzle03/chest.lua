@@ -3,6 +3,7 @@
 onLoot = function(W) 
 	W:addConditionProgress("trigger", "tower_3_done")
     W:addQuestProgress("tower_3", "tower_climbed")
+    W:unlockAchievement("ACH_ETOZ_3")
     W:startMap("res/map/island/island.tmx", 1215, 660)
 end
 

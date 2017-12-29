@@ -24,7 +24,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_Hello
 	translation.en:Don't come any closer! There's already enough damage done. Go home to where you belong!
 	translation.de:Komm ja nicht näher! Es wurde schon genügend Schaden angerichtet. Geh dorthin zurück, wo du herkommst!
-	translation.ch:Chum jo nid nöcher! Es isch scho gnueg Schade agrichted worde. Gang wieder det ane wod hercho bisch!
+	translation.ch:Chum ja nid necher! Es isch scho gnüeg Schade agrichted worde. Gang wieder da hi wond härcho bisch!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -133,7 +133,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhatsTheMatter
 	translation.en:I haven't seen anyone passing through here in ages. And suddenly, they are coming in droves and destroying this sanctuary. 
 	translation.de:Ich habe schon seit Ewigkeiten niemanden mehr hier durchkommen sehen. Und plötzlich kommen sie in Scharen und zerstören dieses Heiligtum.
-	translation.ch:Ich ha scho sit Ewigkeite niemert me da durecho gse. Und jetz chömeds plötzli in Schare und zerstöred das Heiligtum.
+	translation.ch:Ich hä scho sit Ewigkeite niemert me da durch gse cho. Und jetz chämendsch pletzli in Schare und zersterend das Heiligtum.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -149,7 +149,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoAreYou
 	translation.en:I'm Zephrya, hermit and shaman of Yasha.
 	translation.de:Ich bin Zephyra, Einsiedlerin und Yashas Schamanin. 
-	translation.ch:Ich bin d'Zephyra, Einsiedlerin und de Yasha ihri Schamanin.
+	translation.ch:Ich bin d'Zephyra, Einsiedlerin und vo der Yasha ihri Schamanin.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -164,7 +164,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_DeadCat
 	translation.en:That's no dead cat, it's a demon's fur. It's nice and warm.
 	translation.de:Das ist keine tote Katze, es ist ein Dämonenfell. Es ist schon warm.
-	translation.ch:Das isch ke toti Chatz, es isch es Dämonefell. Es git schön warm.
+	translation.ch:Das isch kei toti Chatz, es isch es Dämonefell. Es git schön warm.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -200,7 +200,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_DemonSlayer
 	translation.en:No, I would never hurt one. They're protecting this valley, you know.
 	translation.de:Nein, ich würde nie einem etwas zu leide tun. Sie beschützen unser Tal, weisst du.
-	translation.ch:Nei, ich wür nie eim öppis atue. Si beschützed das Tal, weisch.
+	translation.ch:Nei, ich würdi nie einem eppis atüe. Schi beschützend das Tal, weisch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -215,7 +215,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_NiceCat
 	translation.en:Don't you dare! Only Yasha's shamans are allowed to wear this headpiece.
 	translation.de:Wag es ja nicht! Nur Yasha's Schamanen dürfen diesen Kopfschmuck tragen.
-	translation.ch:Wogs jo nid! Nur de Yasha ihri Schamane derfed de Choppfschmuck alege.
+	translation.ch:Wagses ja nid! Nur der Yasha ihri Schamane derfend der Choppfschmuck alege.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -230,7 +230,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoYasha
 	translation.en:Yasha is a powerful demon who watches over the secrets of this valley.
 	translation.de:Yasha ist eine mächtige Dämonin, die über die Geheimnisse dieses Tals wacht.
-	translation.ch:D'Yasha isch e mächtigi Dämonin, wo über d'Gheimnis vo dem Tal wacht.
+	translation.ch:D'Yasha isch en mächtigi Dämonin, wo uber d'Gheimnis vo dem Tal wacht.
 	[
 		# Link node, tag is next tag
 		tag:11
@@ -244,7 +244,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoYasha2
 	translation.en:She's been sleeping for many years, but those yokels did wake her up. I hope they're paying right now for their foolishness.
 	translation.de:Sie hat viele Jahre lang geschlafen, aber diese Tölpel haben sie aufgeweckt. Ich hoffe, sie büssen gerade für ihre Dummheit.
-	translation.ch:Si het vieli Johr lang gschlofe, aber die Tubelichöpf hend si gweckt. Ich hoff si büessed grad für ihri Dummheite.
+	translation.ch:Schi het vieli Jahr lang gschlafe, aber die Tubla heind schi gweckt. Ich hoffe schi büessend grad fer ihresch Dummheit.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -259,7 +259,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoDroves
 	translation.en:A group of foolish mages. I wanted to keep their from heading straight for disaster, but they wouldn't listen.
 	translation.de:Eine Gruppe törichter Magier. Ich wollte sie davon abbringen, direkt ins Verderben zu rennen, aber sie wollten nicht hören.
-	translation.ch:E Gruppe vo futzdumme Magier. Ich ha si devo abhalte wele, direkt is Verderbe z'renne, aber si hend nid g'lost.
+	translation.ch:En Gruppe vo futzdumme Magier. Ich hä schi dervo wele abhalte, diräkt ins Verderbe z'renne, aber schi heind nid züeg'loset.
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -273,7 +273,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoDroves2
 	translation.en:It's always those "adventurers", looking for big treasure, without any respect. Unbelievable.
 	translation.de:Es sind immer diese "Abenteurer", die nach den grossen Schätzen suchen, ohne jedweden Respekt. Unglaublich.
-	translation.ch:Es sind immer die "Obentüürer", wo nach de grosse Schätz sueched, völlig respektlos. Unglaublich.
+	translation.ch:Es sind immer die "Obentüürer", wo nach de grosse Schätz süeched, vellig respektlos. Ungleublich.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -288,7 +288,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoMages
 	translation.en:Hm. There was one women, fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
 	translation.de:Hm. Eine davon war eine Frau, helles Haar, ein weisses Kleid. Da war auch ein Junge, etwa so alt wie du, mit roten, verstrubbelten Haaren.
-	translation.ch:Hm. Eini devo isch e Frau gsi, helli Hoor, es wisses Chleid. Es het au en Bueb debi gha, öppe so alt we du, roti, strubbeligi Hoore.
+	translation.ch:Hm. Eini vo denne isch en Freu gsi, hälli Haar, es wisses Chleid. Es het eu en Büeb derbi kä, appa so alt wie dü, roti, strubbeligi Haar.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -302,7 +302,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoMages2
 	translation.en:The third one had dark dreadlocks... but their leader frightened me the most.
 	translation.de:Der dritte hatte dunkle Dreads... aber ihr Anführer hat mir am meisten Angst eingejagt.
-	translation.ch:De dritt het dunkli Rastas gha... aber ihre Aführer het mer am meiste Angst gmacht.
+	translation.ch:Der dritti het dunkli Rastas kä... aber ihre Afiihrer het mier am meiste Angst gmacht.
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -317,7 +317,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_WhoMages3
 	translation.en:Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't react. But they're probably all dead now anyway.
 	translation.de:Gross, graues Haar, durchdringender Blick. Er war der einzige, der mit mir gesprochen hat, die anderen drei haben nicht reagiert. Aber sie sind nun alle sowieso tot. 
-	translation.ch:Gross, graui Hoore, en durchdringende Blick. Er isch de einzig gsi wo mitmer gredt het, di andere hend nid reagiert. Aber si sind vermuetlich eh all tot ez.
+	translation.ch:Gross, graui Haar, en durchdringende Blick. Är isch der einzig gsi wo mit mier gredet het, di andere heind nid reagiert. Aber schi sind vermüetlich eh all tot jetze.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -333,7 +333,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_YashaDone
 	translation.en:(Zephyra nods) Great. Thank you very much for your help. Take this potion with you, may it help you on your ways.
 	translation.de:(Zephyra nickt) Grossartig. Vielen Dank für deine Hilfe. Hier, nimm diesen Trank mit dir, möge er dir auf weiteren Wegen helfen.
-	translation.ch:(D'Zephyra nickt) Grossargit. Danke vielmol für dini Hilf. Do, nimm de Trank mit dir. Er söll dir uf wiitere Wege helfe.
+	translation.ch:(D'Zephyra nickt) Grossartig. Danke vielmal fer dini Hilf. Da, nimm der Trank mit dier. Är sell dier uf wiitere Wäge hälfe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -348,7 +348,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_GottaGo
 	translation.en:I see, I can't keep you from going in as well. But, just promise me one thing:
 	translation.de:Ich sehe schon, ich kann dich nicht davon abhalten, hineinzugehen. Aber, versprich mir eins:
-	translation.ch:Ich gse, ich cha dich nid devo abhalte, iezgo. Aber, versprich mir eifach eis:
+	translation.ch:Ich gse, ich cha dich nid dervo abhalte, iezga. Aber, versprich mier eifach eis:
 	[
 		# Link node, tag is next tag
 		tag:16
@@ -362,7 +362,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_GottaGo2
 	translation.en:Don't open any of the sacred urns in the temple, if your life means anything to you.
 	translation.de:Öffne keine der heiligen Urnen im Tempel, wenn dir dein Leben lieb ist.
-	translation.ch:Mach kein vode heilige Urne im Tempel uf, wenn dir dis Lebe lieb isch.
+	translation.ch:Mach keine vo denne heilige Urne im Tempel üf, wenn dier dis Läbe lieb isch.
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -399,7 +399,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_YashaOK
 	translation.en:I was hoping you'd say this. Be careful, and the demon may spare your life.
 	translation.de:Ich habe gehofft, du würdest das sagen. Sei vorsichtig, und der Dämon könnte dein Leben verschonen.
-	translation.ch:Ich ha ghofft, dass das sege würsch. Sig vorsichtig und de Dämon chönt dis Läbe verschone.
+	translation.ch:Ich ha ghofft, dass das säge würdisch. Si vorsichtig und der Dämon chenti dis Läbe verschone.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -413,7 +413,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_YashaNOK
 	translation.en:I hope the demon will rip your soul apart.
 	translation.de:Ich hoffe der Dämon wird deine Seele zerreissen.
-	translation.ch:Ich hoff de Dämon wird dini Seel verrisse.
+	translation.ch:Ich hoffe der Dämon wird dini Seel verrisse.
 	[
 		# Link node, tag is next tag
 		tag:-1

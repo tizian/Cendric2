@@ -11,11 +11,13 @@ static std::vector<std::pair<AchievementID, AchievementConstructor>> achievement
 	{ AchievementID::ACH_KILL_KHAJAG, ACH_CONST },
 	{ AchievementID::ACH_KILL_ELYSIA, ACH_CONST },
 	{ AchievementID::ACH_KILL_MERCENARIES, ACH_CONST },
-	{ AchievementID::ACH_KILL_ALASTOR, ACH_CONST },
+	{ AchievementID::ACH_KILL_JANUS, ACH_CONST },
 	{ AchievementID::ACH_FRIEND_YASHA, ACH_CONST },
 	{ AchievementID::ACH_KILL_YASHA, ACH_CONST },
 	{ AchievementID::ACH_KILL_ROYAL_GUARDS, ACH_CONST },
 	{ AchievementID::ACH_KILL_VELIUS, ACH_CONST },
+
+	{ AchievementID::ACH_CRIMINAL, ACH_CONST },
 
 	{ AchievementID::ACH_ETOZ_1, ACH_CONST },
 	{ AchievementID::ACH_ETOZ_2, ACH_CONST },
@@ -25,6 +27,9 @@ static std::vector<std::pair<AchievementID, AchievementConstructor>> achievement
 	{ AchievementID::ACH_CHICKEN_SHOCKER, ACH_CONST },
 	{ AchievementID::ACH_LEEROY, ACH_CONST },
 	{ AchievementID::ACH_TEARSTAFF, ACH_CONST },
+	{ AchievementID::ACH_SAVE_ALL_MAGES, ACH_CONST },
+	{ AchievementID::ACH_KILL_ALL_MAGES, ACH_CONST },
+	{ AchievementID::ACH_MERCENARY_ORDER, ACH_CONST },
 };
 
 static Registrar registrar(achievements);

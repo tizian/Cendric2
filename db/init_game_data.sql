@@ -45,6 +45,7 @@ CREATE TABLE item(
 	icon_left INTEGER NOT NULL DEFAULT 0,
 	icon_top INTEGER NOT NULL DEFAULT 0,
 	gold_value INTEGER NOT NULL,
+    rarity INTEGER NOT NULL DEFAULT 0 
 	PRIMARY KEY(item_id ASC)
 );
 

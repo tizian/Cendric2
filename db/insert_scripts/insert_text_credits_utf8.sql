@@ -564,6 +564,7 @@ Talita Schär - Ämmitaler Dialekt (Thea)
 Angelo Breda - Basler Dialekt (Luiz, Waldemar)
 Michela Hof - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 Sascha Bavaro - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
+Daniel Bootsibär - Walliser Dialekt (Zephyra)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

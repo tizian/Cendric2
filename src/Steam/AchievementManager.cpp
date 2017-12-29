@@ -89,7 +89,7 @@ void AchievementManager::notifyAchievementCore(const std::string& achievement) {
 
 void AchievementManager::unlockAchievement(const std::string& achievement) {
 	if (!m_characterCore) return;
-	if (!m_steamAchievements) return;
+	if (!m_characterCore->getData().hashValid) return;
 	if (!contains(m_achievements, achievement)) return;
 
 	auto it = m_achievements.find(achievement);
@@ -97,6 +97,7 @@ void AchievementManager::unlockAchievement(const std::string& achievement) {
 	m_achievements.erase(it);
 	m_characterCore->setAchievementUnlocked(achievement);
 #ifdef STEAM
-	m_steamAchievements->setAchievement(achievement.c_str());
+	if (m_steamAchievements)
+		m_steamAchievements->setAchievement(achievement.c_str());
 #endif // STEAM
 }

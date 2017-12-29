@@ -1,6 +1,7 @@
 onWin = function(W)
 	W:addConditionProgress("boss", "BossMercenaries")
     W:addQuestProgress("ininas_abduction", "abductors_found")
+    W:unlockAchievement("ACH_KILL_MERCENARIES")
 	W:setMap("res/map/gandriatavern/gandriatavern.tmx", 916, 465)
 end
 	

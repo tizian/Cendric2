@@ -155,7 +155,7 @@ npc.id:npc_etoz
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:not DL:isConditionFulfilled("npc_etoz", "who_are_you")DL:isConditionFulfilled("", "")
+		condition:not DL:isConditionFulfilled("npc_etoz", "who_are_you")
 		# translation: 
 		translation.tag:DL_Choice_WhoAreYou
 		translation.en:Who are you?
