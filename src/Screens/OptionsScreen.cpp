@@ -232,6 +232,9 @@ void OptionsScreen::onApply() {
 	config.volumeMusic = m_volumeMusicSlider->getSliderPosition();
 	config.volumeSound = m_volumeSoundSlider->getSliderPosition();
 
+	m_previousMusicVolume = config.volumeMusic;
+	m_previousSoundOn = config.isSoundOn;
+
 	ConfigurationWriter writer;
 	writer.saveToFile(config);
 	g_textProvider->reload();
