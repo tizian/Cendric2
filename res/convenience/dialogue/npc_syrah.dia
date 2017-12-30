@@ -195,7 +195,7 @@ npc.id:npc_syrah
 		translation.tag:DL_Choice_Sack
 		translation.en:Can I get some hair dye from you?
 		translation.de:Kann ich dann ein Haarfärbemittel haben?
-		translation.ch:Chani den es Hoorfärbemittel ha?
+		translation.ch:Chani denn es Hoorfärbemittel ha?
 	]
 	[
 		# Link node, tag is next tag

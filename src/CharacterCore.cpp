@@ -542,6 +542,9 @@ void CharacterCore::addReputation(FractionID fraction, int amount) {
 	}
 
 	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
+	g_achievementManager->notifyAchievementCore("ACH_CLERIC_REP_70");
+	g_achievementManager->notifyAchievementCore("ACH_NECRO_REP_70");
+	g_achievementManager->notifyAchievementCore("ACH_THIEF_REP_70");
 }
 
 void CharacterCore::setGuild(FractionID fraction) {
