@@ -47,9 +47,13 @@ void ProgressLog::render(sf::RenderTarget& renderTarget) {
 
 void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	std::string text = std::to_string(amount) + "x ";
-	text.append(itemID.compare("gold") == 0 ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
+	bool isGold = itemID.compare("gold") == 0;
+	text.append(isGold ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
 
-	auto item = g_resourceManager->getItem(itemID);
+	Item* item = nullptr;
+	if (!isGold) {
+		item = g_resourceManager->getItem(itemID);
+	}
 	auto color = item ? item->getRarityColor() : COLOR_WHITE;
 
 	m_logTexts.push_back(ProgressLogEntry::createItemEntry(text, amount < 0 ? COLOR_MEDIUM_GREY : color, itemID));

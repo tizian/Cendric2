@@ -258,7 +258,7 @@ void FluidTile::doWaves(const sf::Time& frameTime) {
 	m_waveOffsetTimeout = sf::seconds(0.02f);
 	m_waveOffset = (m_waveOffset + 1) % 20;
 
-	float velocity = 30.f * m_data.velocityScale;	// Apply global scale factor based on fluid parameters
+	float velocity = 20.f * m_data.velocityScale;	// Apply global scale factor based on fluid parameters
 	
 	for (int i = m_waveOffset; i < m_nColumns; i += 20)
 	m_columns[i].velocity += velocity;
