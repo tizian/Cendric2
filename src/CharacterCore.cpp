@@ -848,6 +848,10 @@ void CharacterCore::setCharacterJailed() {
 	addItem(spawn->weapon_id, 1);
 	equipItem(spawn->armor_id, ItemType::Equipment_body);
 	equipItem(spawn->weapon_id, ItemType::Equipment_weapon);
+
+	// achievement for getting arrested
+	g_achievementManager->unlockAchievement("ACH_CRIMINAL");
+
 	delete spawn;
 }
 
