@@ -29,6 +29,8 @@ void Game::reloadWindow() {
 	switch (displayMode) {
 	case DisplayMode::Fullscreen:
 		m_mainWindow.create(videoMode, CAPTION, sf::Style::Fullscreen);
+		m_mainWindow.setSize(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
+		m_mainWindow.setPosition(sf::Vector2i(0, 0));
 		break;
 	case DisplayMode::WindowedFullscreen:
 		m_mainWindow.create(videoMode, CAPTION, sf::Style::None);
