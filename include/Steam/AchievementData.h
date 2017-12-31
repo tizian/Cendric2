@@ -5,8 +5,8 @@ struct AchievementData
 {
 	int m_achievementIdInt;
 	const char* m_AchievementIdString;
-	char m_name[128];
-	char m_description[256];
-	bool m_isAchieved;
-	int m_iconImage;
+	char m_name[128] = "";
+	char m_description[256] = "";
+	bool m_isAchieved = false;
+	int m_iconImage = 0;
 };

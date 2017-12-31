@@ -107,7 +107,9 @@ static AchievementData* createAchievementsArray() {
 
 	for (int i = 0; i < achievementCount; ++i) {
 		auto achId = static_cast<AchievementID>(i + 1);
-		data[i] = AchievementData({ achId, getAchievementName(achId).c_str(), "", "", 0, 0 });
+		data[i] = AchievementData();
+		data[i].m_achievementIdInt = achId;
+		data[i].m_AchievementIdString = getAchievementName(achId).c_str();
 	}
 
 	return data;
