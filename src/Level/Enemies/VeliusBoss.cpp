@@ -69,6 +69,10 @@ void VeliusBoss::render(sf::RenderTarget& target) {
 void VeliusBoss::loadAttributes() {
 	m_attributes.setHealth(2500);
 	m_attributes.resistancePhysical = 200;
+	m_attributes.resistanceFire = 100;
+	m_attributes.resistanceIce = 100;
+	m_attributes.resistanceShadow = 100;
+	m_attributes.resistanceLight = 100;
 	m_attributes.critical = 30;
 	m_attributes.calculateAttributes();
 }

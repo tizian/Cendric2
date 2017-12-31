@@ -31,7 +31,7 @@ void TargetingProjectileSpell::update(const sf::Time& frameTime) {
 	float velNorm = norm(m_velocity);
 	auto absVel = m_velocity / velNorm;
 
-	m_velocity = velNorm * normalized(absVel + m_data.strength * 0.01f * dir);
+	m_velocity = velNorm * normalized(absVel + m_data.strength * 0.02f * dir);
 
 	Spell::update(frameTime);
 
