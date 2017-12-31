@@ -205,6 +205,10 @@ std::string FireRatEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_firerat.png";
 }
 
+std::string FireRatEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/rat_death.ogg";
+}
+
 void FireRatEnemy::loadComponents() {
 	// light
 	m_lightComponent = new LightComponent(LightData(

@@ -174,4 +174,6 @@ std::string ElysiaFledglingEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_elysiafledgling.png";
 }
 
-
+std::string ElysiaFledglingEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/seagull_death.ogg";
+}

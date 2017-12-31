@@ -9,8 +9,9 @@
 const float InventorySlot::SIZE = 58.f;
 const float InventorySlot::ICON_OFFSET = 4.f;
 
-InventorySlot::InventorySlot(const std::string& itemID, int amount) {
+InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquipmentOrigin) {
 	m_itemID = itemID;
+	m_isEquipmentOrigin = isEquipmentOrigin;
 
 	if (itemID.compare("gold") == 0) {
 		m_type = ItemType::Gold;

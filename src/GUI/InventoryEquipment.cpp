@@ -108,18 +108,21 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 
 void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (item == nullptr) return;
-	const InventorySlot* slot = static_cast<const InventorySlot* >(item->getOriginalSlot());
+	const InventorySlot* slot = static_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (!contains(m_slots, slot->getItemType())) return;
-	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
-		if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
-			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
-		}
-		else if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
-			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
-		}
+	const bool isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
+
+	if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
+		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 	}
-	else if (fastIntersect(*item->getBoundingBox(), *(m_slots.at(slot->getItemType()).getBoundingBox()))) {
+	else if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
+		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
+	}
+	else if (!isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(slot->getItemType()).getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
+	}
+	else if (slot->isEquipmentOrigin()) {
+		m_screen->notifyItemEquip("", slot->getItemType());
 	}
 }
 
@@ -169,7 +172,7 @@ void InventoryEquipment::reload() {
 			m_slots.insert({ it, InventorySlot(tex, texPos, it) });
 		}
 		else {
-			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it), -1) });
+			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it), -1, true) });
 		}
 		texPos.x += 50;
 		m_slots.at(it).setItemType(it);

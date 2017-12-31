@@ -738,9 +738,23 @@ npc.id:npc_vincent2
 	trigger:DL:addHint("ObserverSpell")
 	# translation: 
 	translation.tag:DL_Vincent_ObserverSpells
-	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something. But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. It won't be a nice experience, I can tell you that.
-	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann. Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
-	translation.ch:E hässlichi Form vode Magie. D'Lüt tüänd die i iri Hüser dämit niemert öppis chluppe cha. Aber die Zaubor gsehnd au nöd alles (grinst). Aber wänn si dich verwütsche tüend, dänn steckeds dich id Chistä... und da isch nöd dä hammo, da chani dir sägä. 
+	translation.en:A nasty form of magic. People place it in their homes so that thieves won't be able to steal something.
+	translation.de:Eine hässliche Form der Magie. Die Leute stellen sie in ihre Häuser, damit niemand etwas entwenden kann.
+	translation.ch:E hässlichi Form vode Magie. D'Lüt tüänd die i iri Hüser dämit niemert öppis chluppe cha.
+	[
+		# Link node, tag is next tag
+		tag:48
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_ObserverSpells2
+	translation.en:But they can't see everything... (grins). But if they see you stealing something, they will put you in jail. It won't be a nice experience, I can tell you that.
+	translation.de:Aber diese Zauber sehen auch nicht alles... (grinst) Aber wenn sie dich erwischen, kommst du ins Gefängnis, und das ist nicht gerade angenehm, kann ich dir sagen.
+	translation.ch:Aber die Zaubor gsehnd au nöd alles (grinst). Aber wänn si dich verwütsche tüend, dänn steckeds dich id Chistä... und da isch nöd dä hammo, da chani dir sägä. 
 	[
 		# Link node, tag is next tag
 		tag:-2

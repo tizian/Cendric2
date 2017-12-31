@@ -131,3 +131,7 @@ void RatEnemy::loadAnimation(int skinNr) {
 std::string RatEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_rat.png";
 }
+
+std::string RatEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/rat_death.ogg";
+}

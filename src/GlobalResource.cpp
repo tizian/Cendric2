@@ -111,6 +111,7 @@ const std::string GlobalResource::SOUND_GUI_PICKUP = "res/sound/item/pickup_gold
 const std::string GlobalResource::SOUND_GUI_DRINK = "res/sound/gui/drink.ogg";
 const std::string GlobalResource::SOUND_GUI_EAT = "res/sound/gui/eat.ogg";
 const std::string GlobalResource::SOUND_GUI_OPENWINDOW = "res/sound/gui/window_open.ogg";
+const std::string GlobalResource::SOUND_GUI_EQUIP = "res/sound/gui/equip.ogg";
 const std::string GlobalResource::SOUND_GUI_QUESTPROGRESS = "res/sound/gui/quest_progress.ogg";
 const std::string GlobalResource::SOUND_GUI_NEGATIVE = "res/sound/gui/negative.ogg";
 const std::string GlobalResource::SOUND_MISC_UNLOCK = "res/sound/tile/unlock.ogg";

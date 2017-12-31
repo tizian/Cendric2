@@ -6,6 +6,9 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Inventory', 'hint','Inventory','Inventar','Inventar','Inventario');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Inventory', 'hint_desc','to open the inventory.','um das Inventar zu öffnen.','zums Inventar ufmache.','para abrir el inventario.');
 
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint','Quickslots','Schnellwahl','Schnellwahl','Acceso rápido');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint_desc','Drag consumable items from the inventory to the quickslots to equip them.','Zieh Essens-Gegenstände aus dem Inventar in die Schnellwahl-Leiste, um sie auszurüsten.','Zieh Essens-Gegeständ usem Inventar id Schnellwahl-Leiste, zum si usrüste.','?');
+
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chop', 'hint','Attack (Chop)','Attackieren (Schlagen)','Attackiere (Haue)','Ataque (Pegar)');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Chop', 'hint_desc','or left click to chop with your weapon.','oder klicke um mit deiner Waffe zu schlagen.','oder klick zum mit dinere Waffe haue.','para pegar con el arma. También puedes hacer clic con el botón izquierdo del mouse, si ese ataque está seleccionado.');
 
@@ -44,7 +47,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Checkpoint', 'hint_desc','Activating a checkpoint will allow you to start again from its position when you die.','Wenn du einen Kontrollpunkt aktivierst, kannst du dich dorthin zurückversetzen, falls du stirbst.','Wenn du en Checkpoint aktiviersch chasch du vo det starte falls du verrecksch.','Activar un punto de control te permitirá empezar desde esa posición cuando mueras.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Modifier', 'hint','Magical gems','Magische Edelsteine','Magischi Edelstei','Gemas mágicas');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Modifier', 'hint_desc','Magical gems alter your spells. You can equip them outside of a level using your spellbook.','Magische Edelsteine verändern deine Zauber. Du kannst sie im Zauberbuch ausserhalb eines Levels ausrüsten.','Magischi Edelstei verändered dini Zauber. Du chasch si im Zauberbuech usserhalb vomne Level usrüste.','Las gemas mágicas modifican los hechizos. Las puedes equipar fuera del nivel usando el libro de hechizos.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Modifier', 'hint_desc','Magical gems alter your spells. You can equip them using your spellbook.','Magische Edelsteine verändern deine Zauber. Du kannst sie im Zauberbuch ausrüsten.','Magischi Edelstei verändered dini Zauber. Du chasch si im Zauberbuech usrüste.','Las gemas mágicas modifican los hechizos. Las puedes equipar usando el libro de hechizos.');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint','Waypoint','Wegpunkt','Wägpunkt','Coordenadas');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint_desc','to open the map and teleport to an active waypoint.','um die Karte zu öffnen und zu einem aktiven Wegpunkt zu teleportieren.','zum d''Charte ufmache und zumne aktive Wegpunkt z''teleportiere.','??');

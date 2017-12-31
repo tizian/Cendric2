@@ -143,3 +143,6 @@ std::string CrowEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_crow.png";
 }
 
+std::string CrowEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/crow_death.ogg";
+}

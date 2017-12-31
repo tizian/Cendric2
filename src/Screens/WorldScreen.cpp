@@ -107,6 +107,7 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 		getCharacterCore()->equipItem(item->getID(), item->getType());
 	}
 
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_EQUIP);
 	m_interface->reloadInventory();
 	m_interface->reloadCharacterInfo();
 	m_interface->reloadSpellBook();

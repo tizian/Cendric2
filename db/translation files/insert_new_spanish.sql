@@ -37,6 +37,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint','Remove buffs','Buffs entfernen','Buffs wegne','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('RemoveBuff', 'hint_desc','Use a right click on a spell buff to remove it.','Mit einem Rechtsklick auf einen Zauber-Buff kann man ihn entfernen.','Mitme Rechtsklick ufen Zauber-Buff chamen wegne.','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint_desc','to open the map and teleport to an active waypoint.','um die Karte zu öffnen und zu einem aktiven Wegpunkt zu teleportieren.','zum d''Charte ufmache und zumne aktive Wegpunkt z''teleportiere.','??');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint','Quickslots','Schnellwahl','Schnellwahl','Acceso rápido');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint_desc','Drag consumable items from the inventory to the quickslots to equip them.','Zieh Essens-Gegenstände aus dem Inventar in die Schnellwahl-Leiste, um sie auszurüsten.','Zieh Essens-Gegeständ usem Inventar id Schnellwahl-Leiste, zum si usrüste.','?');
 
 -- quest 
 

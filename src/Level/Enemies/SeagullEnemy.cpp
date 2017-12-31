@@ -144,4 +144,6 @@ std::string SeagullEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_seagull.png";
 }
 
-
+std::string SeagullEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/seagull_death.ogg";
+}
