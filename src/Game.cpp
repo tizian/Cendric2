@@ -24,10 +24,10 @@ Game::~Game() {
 
 void Game::reloadWindow() {
 	auto const displayMode = g_resourceManager->getConfiguration().displayMode;
-	auto const width = displayMode == DisplayMode::Window ? WINDOW_WIDTH : sf::VideoMode::getDesktopMode().width;
-	auto const height = displayMode == DisplayMode::Window ? WINDOW_HEIGHT : sf::VideoMode::getDesktopMode().height;
-	auto const videoMode = sf::VideoMode(width, height);
-	auto const scale = sf::Vector2f(width / static_cast<float>(WINDOW_WIDTH), height / static_cast<float>(WINDOW_HEIGHT));
+	auto const windowMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
+	auto const videoMode = displayMode == DisplayMode::Window ? windowMode : sf::VideoMode::getDesktopMode();
+
+	auto const scale = sf::Vector2f(videoMode.width / static_cast<float>(WINDOW_WIDTH), videoMode.height / static_cast<float>(WINDOW_HEIGHT));
 
 	m_mainSprite.setScale(scale);
 
