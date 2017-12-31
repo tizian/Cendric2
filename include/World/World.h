@@ -37,6 +37,7 @@ public:
 	const TileMap* getForegroundTileMap() const;
 
 	virtual bool collides(WorldCollisionQueryRecord& rec) const;
+	virtual bool isInsideWorldRect(const sf::FloatRect& boundingBox) const = 0;
 	bool collidesWithCollidableLayer(const sf::Vector2f& pos) const;
 	
 	// deletes the world resources

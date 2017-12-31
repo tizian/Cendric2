@@ -4,6 +4,8 @@
 #include "steam-sdk/public/steam/steam_api.h"
 #endif
 
+#define CAPTION "Cendric"
+
 sf::RenderTexture* g_renderTexture;
 
 Game::Game() {
@@ -21,18 +23,21 @@ Game::~Game() {
 }
 
 void Game::reloadWindow() {
-	switch (g_resourceManager->getConfiguration().displayMode) {
+	auto const displayMode = g_resourceManager->getConfiguration().displayMode;
+	auto const videoMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+
+	switch (displayMode) {
 	case DisplayMode::Fullscreen:
-		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Fullscreen);
+		m_mainWindow.create(videoMode, CAPTION, sf::Style::Fullscreen);
 		break;
 	case DisplayMode::WindowedFullscreen:
-		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::None);
+		m_mainWindow.create(videoMode, CAPTION, sf::Style::None);
 		m_mainWindow.setSize(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
 		m_mainWindow.setPosition(sf::Vector2i(0, 0));
 		break;
 	case DisplayMode::Window:
 	default:
-		m_mainWindow.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Cendric", sf::Style::Default);
+		m_mainWindow.create(videoMode, CAPTION, sf::Style::Default);
 	}
 
 	auto& conf = g_resourceManager->getConfiguration();

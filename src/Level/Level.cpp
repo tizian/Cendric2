@@ -138,11 +138,16 @@ void Level::update(const sf::Time& frameTime) {
 	m_camera->update(frameTime);
 }
 
+bool Level::isInsideWorldRect(const sf::FloatRect& boundingBox) const {
+	return !(boundingBox.top + boundingBox.height < m_levelData.mapRect.top || 
+		boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height);
+}
+
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	World::collides(rec);
 	// additional : check for collision with map rect (y axis)
 	// a game object in a level can go until we don't see it anymore on the y axis. (further than only map rect collision)
-	if (rec.boundingBox.top + rec.boundingBox.height < m_levelData.mapRect.top || rec.boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height) {
+	if (!isInsideWorldRect(rec.boundingBox)) {
 		if (rec.collisionDirection == CollisionDirection::Up) {
 			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.top - rec.boundingBox.height);
 		}

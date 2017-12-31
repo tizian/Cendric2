@@ -43,6 +43,7 @@ public:
 
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const;
+	bool isInsideWorldRect(const sf::FloatRect& boundingBox) const override;
 
 	void raycast(RaycastQueryRecord& rec) const;
 

@@ -49,7 +49,7 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool isMovingY = nextPosition.y != bb.top;
 	bool isMovingX = nextPosition.x != bb.left;
 	
-	if (level.collidesWithAvoidableTiles(nextBoundingBox)) {
+	if (level.collidesWithAvoidableTiles(nextBoundingBox) || !level.isInsideWorldRect(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		if (isMovingX) {

@@ -56,10 +56,15 @@ void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) con
 	target.setView(view);
 }
 
+bool Map::isInsideWorldRect(const sf::FloatRect& boundingBox) const {
+	return !(boundingBox.top < m_mapData.mapRect.top || 
+		boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height);
+}
+
 bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	World::collides(rec);
 	// additional : check for collision with map rect (y axis)
-	if (rec.boundingBox.top < m_mapData.mapRect.top || rec.boundingBox.top + rec.boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height) {
+	if (!isInsideWorldRect(rec.boundingBox)) {
 		if (rec.collisionDirection == CollisionDirection::Down) {
 			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.top + m_worldData->mapRect.height - rec.boundingBox.height);
 		}

@@ -19,6 +19,7 @@ public:
 	const MapData* getWorldData() const override { return &m_mapData; };
 	
 	// checks collision with the collidable grid of that map
+	bool isInsideWorldRect(const sf::FloatRect& boundingBox) const override;
 	bool collides(WorldCollisionQueryRecord& rec) const override;
 	void dispose() override;
 
