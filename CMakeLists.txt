@@ -88,6 +88,11 @@ else()
 	add_executable(Cendric
 		${Cendric_FILES}
 	)
+
+    # linux?
+    if (CENDRIC_STEAM)
+        target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/linux64/libsteam_api.so)
+    endif()
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
