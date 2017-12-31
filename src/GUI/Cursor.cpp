@@ -6,10 +6,13 @@
 Cursor::Cursor() {
 	m_cursorSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
 	setCursorSkin(CursorSkin::Pointer);
+	m_scale.x = 1.f;
+	m_scale.y = 1.f;
 }
 
 void Cursor::update(const sf::Time& frameTime) {
-	m_cursorSprite.setPosition(g_inputController->getDefaultViewMousePosition() - sf::Vector2f(12.f, 12.f));
+	auto pos = g_inputController->getDefaultViewMousePosition() - sf::Vector2f(12.f, 12.f);
+	m_cursorSprite.setPosition(sf::Vector2f(m_scale.x * pos.x, m_scale.y * pos.y));
 
 	if (m_timeUntilNextSkin == sf::Time::Zero) return;
 	updateTime(m_timeUntilNextSkin, frameTime);
@@ -20,6 +23,11 @@ void Cursor::update(const sf::Time& frameTime) {
 
 void Cursor::render(sf::RenderTarget& target) const {
 	target.draw(m_cursorSprite);
+}
+
+void Cursor::setScale(const sf::Vector2f& scale) {
+	m_scale = scale;
+	m_cursorSprite.setScale(scale);
 }
 
 void Cursor::setCursorSkin(CursorSkin skin) {

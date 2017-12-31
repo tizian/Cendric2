@@ -24,13 +24,16 @@ Game::~Game() {
 
 void Game::reloadWindow() {
 	auto const displayMode = g_resourceManager->getConfiguration().displayMode;
-	auto const videoMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, 32);
+	auto const width = displayMode == DisplayMode::Window ? WINDOW_WIDTH : sf::VideoMode::getDesktopMode().width;
+	auto const height = displayMode == DisplayMode::Window ? WINDOW_HEIGHT : sf::VideoMode::getDesktopMode().height;
+	auto const videoMode = sf::VideoMode(width, height, 32);
+	auto const scale = sf::Vector2f(width / static_cast<float>(WINDOW_WIDTH), height / static_cast<float>(WINDOW_HEIGHT));
+
+	m_mainSprite.setScale(scale);
 
 	switch (displayMode) {
 	case DisplayMode::Fullscreen:
 		m_mainWindow.create(videoMode, CAPTION, sf::Style::Fullscreen);
-		m_mainWindow.setSize(sf::Vector2u(sf::VideoMode::getDesktopMode().width, sf::VideoMode::getDesktopMode().height));
-		m_mainWindow.setPosition(sf::Vector2i(0, 0));
 		break;
 	case DisplayMode::WindowedFullscreen:
 		m_mainWindow.create(videoMode, CAPTION, sf::Style::None);

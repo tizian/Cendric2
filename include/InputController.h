@@ -94,6 +94,7 @@ private:
 
 	// current window size. Used for mouse position and dependent on resize events
 	sf::Vector2i m_windowSize;
+	sf::Vector2f m_windowScale;
 
 	// is the mouse inside our view? we only count mouse clicks if it is so!
 	bool m_isMouseInsideView;

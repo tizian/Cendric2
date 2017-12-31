@@ -52,8 +52,8 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update mouse positions
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
-	pos.x = pos.x * (static_cast<float>(WINDOW_WIDTH) / m_windowSize.x);
-	pos.y = pos.y * (static_cast<float>(WINDOW_HEIGHT) / m_windowSize.y);
+	pos.x = pos.x / m_windowScale.x;
+	pos.y = pos.y / m_windowScale.y;
 	sf::Vector2f view = sf::Vector2f(
 		m_renderTexture->getView().getCenter().x - m_renderTexture->getView().getSize().x * 0.5f,
 		m_renderTexture->getView().getCenter().y - m_renderTexture->getView().getSize().y * 0.5f);
@@ -90,6 +90,10 @@ void InputController::init() {
 void InputController::setCurrentWindowSize(int width, int height) {
 	m_windowSize.x = width;
 	m_windowSize.y = height;
+
+	m_windowScale.x = m_windowSize.x / static_cast<float>(WINDOW_WIDTH);
+	m_windowScale.y = m_windowSize.y / static_cast<float>(WINDOW_HEIGHT);
+	m_cursor.setScale(m_windowScale);
 }
 
 const sf::Vector2f& InputController::getMousePosition() const {

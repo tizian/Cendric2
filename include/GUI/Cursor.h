@@ -16,6 +16,7 @@ public:
 	void update(const sf::Time& frameTime);
 	void render(sf::RenderTarget& target) const;
 
+	void setScale(const sf::Vector2f& scale);
 	// cursor skins
 	void setCursorSkin(CursorSkin skin);
 	// param duration: for how long this cursor skin should be displayed
@@ -26,4 +27,5 @@ private:
 	sf::Sprite m_cursorSprite;
 	sf::Time m_timeUntilNextSkin;
 	CursorSkin m_nextSkin;
+	sf::Vector2f m_scale;
 };
