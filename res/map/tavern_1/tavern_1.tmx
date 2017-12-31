@@ -130,11 +130,6 @@
     <property name="id" value="npc_andrew"/>
    </properties>
   </object>
-  <object id="151" gid="428" x="500" y="375" width="50" height="50">
-   <properties>
-    <property name="id" value="npc_rappa"/>
-   </properties>
-  </object>
  </objectgroup>
  <layer name="LFG 1" width="25" height="15">
   <data encoding="csv">
