@@ -42,13 +42,13 @@ update = function(B, W)
         B:say("King2", 4)
         B:executeFightAnimation()
         B:switchLever()
-        B:wait(5)
+        B:wait(4)
         state = 6
         return
     end
     if (state == 6) then     
         B:setMovingTarget(1760,580)
-        B:wait(3)
+        B:wait(2)
         state = 7
         return
     end
@@ -67,7 +67,7 @@ update = function(B, W)
     end
     if (state == 9) then     
         B:setMovingTarget(1580,690)
-        B:wait(4)
+        B:wait(3)
         state = 10
         return
     end
@@ -107,7 +107,7 @@ update = function(B, W)
     end
     if (state == 15) then  
         B:say("King6", 10)
-        B:wait(10)
+        B:wait(9)
         state = 16
         return
     end

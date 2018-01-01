@@ -1,6 +1,6 @@
 -- Routine for NPC "King Logan III"
 
-velocity = 150
+velocity = 250
 
 loadRoutine = function(R, W)
 

@@ -343,6 +343,11 @@
     <property name="id" value="npc_velius"/>
    </properties>
   </object>
+  <object id="199" gid="590" x="625" y="500" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_loganthird3"/>
+   </properties>
+  </object>
   <object id="182" gid="590" x="625" y="500" width="50" height="50">
    <properties>
     <property name="id" value="npc_loganthird4"/>
@@ -392,11 +397,6 @@
     <property name="dialoguetexture" value="res/npc/npc_robert/npc_robert.png"/>
     <property name="id" value="npc_robert4"/>
     <property name="spritesheetpath" value="res/npc/npc_robert/spritesheet_npc_robert.png"/>
-   </properties>
-  </object>
-  <object id="199" gid="590" x="625" y="500" width="50" height="50">
-   <properties>
-    <property name="id" value="npc_loganthird3"/>
    </properties>
   </object>
  </objectgroup>
