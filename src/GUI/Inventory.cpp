@@ -393,7 +393,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	InventorySlot* selectedSlot = getSelectedSlot();
 	if (selectedSlot != nullptr) {
 		selectedSlot->select();
-		showDescription(selectedSlot->getItem());
+		showDescription(selectedSlot->getItem(), selectedSlot->isEquipmentOrigin());
 	}
 }
 
@@ -601,10 +601,10 @@ void Inventory::showDocument(const Item* item) {
 	}
 }
 
-void Inventory::showDescription(const Item* item) const {
+void Inventory::showDescription(const Item* item, bool isEquipmentOrigin) const {
 	if (item == nullptr) return;
 	m_descriptionWindow->load(*item, m_core, m_merchantInterface ? 
-		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, m_merchantInterface != nullptr);
+		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, !isEquipmentOrigin && m_merchantInterface != nullptr);
 	m_descriptionWindow->show();
 	auto const pos = sf::Vector2f(
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,

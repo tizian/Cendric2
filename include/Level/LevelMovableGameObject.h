@@ -78,6 +78,7 @@ public:
 	bool isImmortal() const;
 	bool isStunned() const;
 	bool isFeared() const;
+	bool isIgnoringCollision() const;
 	virtual bool isReady() const;
 	bool isEating() const;
 	GameObjectState getState() const;
@@ -105,6 +106,7 @@ protected:
 	bool m_isDead = false;
 	bool m_isImmortal = false; // this mob can't die (but takes damage)
 	bool m_isInvincible = false; // this mob won't take any damage
+	bool m_isIgnoringCollision = false; // this mob ignores all collision
 	const Level* m_level = nullptr;
 
 	SpellManager* m_spellManager = nullptr;

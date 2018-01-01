@@ -100,6 +100,7 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
 			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxX.left = rec.safeLeft;
 		}
 		else {
 			nextBoundingBoxY.left = nextPosition.x;
@@ -113,6 +114,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
+			nextBoundingBoxY.top = rec.safeTop;
+			nextBoundingBoxX.top = rec.safeTop;
 			
 			if (isFalling) {
 				m_record.collides = true;
@@ -130,6 +133,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
+			nextBoundingBoxY.top = rec.safeTop;
+			nextBoundingBoxX.top = rec.safeTop;
 			
 			if (isFalling) {
 				m_record.collides = true;
@@ -149,6 +154,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
+			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxX.left = rec.safeLeft;
 		}
 	}
 

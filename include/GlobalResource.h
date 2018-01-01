@@ -125,9 +125,14 @@ public:
 	static const std::string SOUND_GUI_EAT;
 	static const std::string SOUND_GUI_DRINK;
 	static const std::string SOUND_GUI_OPENWINDOW;
+	static const std::string SOUND_GUI_SPELL;
+	static const std::string SOUND_GUI_GEM;
 	static const std::string SOUND_GUI_EQUIP;
 	static const std::string SOUND_GUI_QUESTPROGRESS;
 	static const std::string SOUND_GUI_NEGATIVE;
+
+	static const std::string SOUND_LEARNED_SPELL;
+	static const std::string SOUND_LEARNED_GEM;
 
 	static const std::string SOUND_MISC_UNLOCK;
 

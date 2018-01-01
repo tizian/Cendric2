@@ -832,7 +832,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
-	shadowTrap.damagePerSecond = 8;
+	shadowTrap.damagePerSecond = 10;
 	shadowTrap.duration = sf::seconds(3);
 	shadowTrap.isStunning = true;
 	shadowTrap.ccStrength = 1;

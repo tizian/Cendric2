@@ -74,6 +74,9 @@ private:
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);
 
+	void removeModifier(const ModifierSlot& slot);
+	void removeSpell(const SpellSlot& slot);
+
 	ModifierSlot* m_selectedModifierSlot = nullptr;
 	SpellSlot* m_selectedSpellSlot = nullptr;
 

@@ -270,8 +270,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("hungry_wolf", "started") and DL:isQuestComplete("hungry_wolf")) then
 		
 		DL:createNPCNode(90, -2, "DL_Zeff_ThanksForMeat") -- Thank you, that's great. You can tell the farmers that the beast won't come again. And if you wish, I can help you out with my leatherworking skills, as long as I'm still human enough to craft something.
-		DL:removeItem("fo_rawmeat", 3)
-		DL:removeItem("fo_sausage", 2)
+		DL:removeItem("fo_sausage", 1)
 		DL:removeItem("fo_ham", 1)
 		DL:changeQuestState("hungry_wolf", "completed")
 		DL:addQuestProgress("monster_problem", "monster_banished")

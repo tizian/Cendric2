@@ -59,7 +59,7 @@ void MorgianaBoss::loadSpells() {
 	m_spellManager->addSpell(chopSpell);
 
 	// block
-	SpellData blockSpell = SpellData::getSpellData(SpellID::Chop);
+	SpellData blockSpell = SpellData::getSpellData(SpellID::Buff);
 	blockSpell.damage = 0;
 	blockSpell.damageType = DamageType::VOID;
 	blockSpell.isDynamicTileEffect = false;

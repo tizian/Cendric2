@@ -26,7 +26,7 @@ DragonWhelpEnemy::DragonWhelpEnemy(const Level* level, Screen* screen) :
 
 void DragonWhelpEnemy::loadAttributes() {
 	m_attributes.setHealth(50);
-	m_attributes.resistancePhysical = 50;
+	m_attributes.resistancePhysical = 150;
 	m_attributes.resistanceFire = 5000;
 	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();

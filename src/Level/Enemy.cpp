@@ -259,6 +259,13 @@ void Enemy::setFleeing() {
 	m_enemyState = EnemyState::Fleeing;
 }
 
+void Enemy::setIdle() {
+	m_fearedTime = sf::Time::Zero;
+	m_chasingTime = sf::Time::Zero;
+	m_waitingTime = sf::Time::Zero;
+	m_enemyState = EnemyState::Idle;
+}
+
 void Enemy::setResurrected() {
 	m_isResurrected = true;
 }

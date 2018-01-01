@@ -113,6 +113,11 @@ void MovingBehavior::setEnabled(bool enabled) {
 
 void MovingBehavior::setCollisionsEnabled(bool enabled) {
 	m_isCollisionEnabled = enabled;
+	
+	if (!enabled) {
+		m_isCollidingX = false;
+		m_isCollidingY = false;
+	}
 }
 
 void MovingBehavior::flipGravity() {

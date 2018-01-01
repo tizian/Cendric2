@@ -31,7 +31,7 @@ void WolfBoss::loadAttributes() {
 
 void WolfBoss::loadSpells() {
 	SpellData chopSpell = SpellData::getSpellData(SpellID::Chop);
-	chopSpell.damage = 50;
+	chopSpell.damage = 70;
 	chopSpell.activeDuration = sf::seconds(1000.f);
 	chopSpell.cooldown = sf::seconds(0.f);
 	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 140);
@@ -68,7 +68,7 @@ void WolfBoss::loadSpells() {
 
 	SpellData windgustSpell = SpellData::getSpellData(SpellID::WindGust);
 	windgustSpell.activeDuration = sf::seconds(1000.f);
-	windgustSpell.damagePerSecond = 8;
+	windgustSpell.damagePerSecond = 10;
 	windgustSpell.damageType = DamageType::Ice;
 	windgustSpell.cooldown = sf::seconds(0.f);
 	windgustSpell.boundingBox = sf::FloatRect(0, 0, 1200, 350);

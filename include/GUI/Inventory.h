@@ -113,7 +113,7 @@ private:
 	void handleLevelDrop();
 
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
-	void showDescription(const Item* item) const;
+	void showDescription(const Item* item, bool isEquipmentOrigin) const;
 	void hideDescription() const;
 	void showDocument(const Item* item);
 	void convertItem(const Item* item);

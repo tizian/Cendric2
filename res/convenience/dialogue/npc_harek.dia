@@ -329,6 +329,7 @@ npc.id:npc_harek
 	# triggers: 
 	trigger:DL:changeQuestState("broken_staff", "completed")
 	trigger:DL:addItem("we_tearstaff", 1)
+	trigger:DL:unlockAchievement("ACH_TEARSTAFF")
 	# translation: 
 	translation.tag:DL_Harek_BrokenStaffComplete2
 	translation.en:... And finished. Here you go!

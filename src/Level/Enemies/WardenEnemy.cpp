@@ -20,6 +20,7 @@ WardenEnemy::WardenEnemy(const Level* level, Screen* screen) :
 	m_isAlwaysUpdate = true;
 	m_isImmortal = true;
 	m_isHPBarVisible = false;
+	m_isIgnoringCollision = true;
 
 	m_debugCircle.setFillColor(COLOR_TRANSPARENT);
 	m_debugCircle.setOutlineColor(COLOR_BAD);

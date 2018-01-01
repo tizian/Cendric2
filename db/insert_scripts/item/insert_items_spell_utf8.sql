@@ -86,7 +86,7 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_summongargoyle', 16);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_summongargoyle', 'item','Scroll - Summon Gargoyle','Schriftrolle - Gargoyle Beschwören','Schriftrolle - Gargoyle Beschwöre', 'Pergamino - Convocación de gárgola');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_summongargoyle', 'item_desc','Cendric summons a mighty gargoyle that serves him and attacks enemies.','Cendric beschwört einen mächtigen Gargoyle, der Gegner attackiert.','De Cendric beschwört en mächtige Gargoyle wo Gegner aagrift.','Cendric convoca una poderosa gárgola a su servicio y ataca enemigos.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_summongargoyle', 0, -30, 50, 20);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_summongargoyle', 1, 500, 350, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_summongargoyle', 1, 150, 0, 50, 50);
 
 -- Aureola
 
@@ -104,5 +104,5 @@ INSERT INTO item_spell (item_id, spell_id) values ('sp_icyambush', 11);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_icyambush', 'item','Scroll - Icy Ambush','Schriftrolle - Eisiger Hinterhalt','Schriftrolle - Iischalte Hinterhalt', 'Pergamino - Emboscada helada');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_icyambush', 'item_desc','Cendric throws an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and teleports Cendric to its location.','Cendric wirft einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und Cendric an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.','De Cendric wirft en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. De Cendric wird ad Stell vom troffene Gegner teleportiert.','Cendric lanza una daga encantada que hace gran daño cuando golpea a un enemigo, aturde a este y a los enemigos al alcance y lo teletransporta a su ubicación.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_icyambush', 0, -30, 50, 20);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_icyambush', 1, 150, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_icyambush', 1, 500, 350, 50, 50);
 

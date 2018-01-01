@@ -2,7 +2,7 @@
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item', 'Ingrid''s Stew', 'Ingrids Eintopf', 'Ingrids Eintopf');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_ingridstew', 'item_desc', 'A delicious dish cooked by Ingrid. Simply irresistible!', 'Ein köstliches Gericht, gekocht von Ingrid. Einfach unwiderstehlich!', 'Es köstlichs Gricht, kocht vode Ingrid. Eifach unwiderstehlich!');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('pe_ingridstew', 'permanent', 350, 150, 20, 1);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('pe_ingridstew', 'permanent', 350, 150, 20, 2);
 INSERT INTO item_attribute (item_id, max_health) values ('pe_ingridstew', 5);
 
 -- Feudal Fire

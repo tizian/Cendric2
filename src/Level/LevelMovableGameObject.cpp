@@ -94,7 +94,7 @@ void LevelMovableGameObject::updateDamageNumbers(const sf::Time& frameTime) {
 		m_timeSinceDotNumbers = sf::seconds(1.f);
 		if (m_currentDotDamage > 0) {
 			m_damageNumbers->emitNumber(m_currentDotDamage, 
-				sf::Vector2f(getPosition().x + 0.5f * getSize().x, getSize().y), 
+				sf::Vector2f(getPosition().x + 0.5f * getSize().x, getPosition().y),
 				DamageNumberType::DamageOverTime, false);
 			m_currentDotDamage = 0;
 		}
@@ -328,6 +328,10 @@ bool LevelMovableGameObject::isStunned() const {
 
 bool LevelMovableGameObject::isFeared() const {
 	return m_fearedTime > sf::Time::Zero;
+}
+
+bool LevelMovableGameObject::isIgnoringCollision() const {
+	return m_isIgnoringCollision;
 }
 
 bool LevelMovableGameObject::isReady() const {

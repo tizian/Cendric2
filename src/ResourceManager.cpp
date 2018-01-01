@@ -116,8 +116,12 @@ void ResourceManager::init() {
 	loadSoundbuffer(GlobalResource::SOUND_GUI_DRINK, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_OPENWINDOW, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_EQUIP, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_GEM, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_GUI_SPELL, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_QUESTPROGRESS, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_GUI_NEGATIVE, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_LEARNED_GEM, ResourceType::Global);
+	loadSoundbuffer(GlobalResource::SOUND_LEARNED_SPELL, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_MISC_UNLOCK, ResourceType::Global);
 	loadSoundbuffer(GlobalResource::SOUND_TELEPORT, ResourceType::Global);
 

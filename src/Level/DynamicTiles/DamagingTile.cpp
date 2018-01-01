@@ -78,7 +78,7 @@ void DamagingTile::setPosition(const sf::Vector2f& position) {
 
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
 	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
-	if (!fastIntersect(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
+	if (!fastIntersectCircle(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
 		return;
 	}
 

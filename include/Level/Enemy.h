@@ -97,7 +97,9 @@ public:
 	void setChasing();
 	// sets the feared time to the configured feared time
 	void setFleeing();
-	// notifies this enemy that it has been resureccted
+	// sets the enemy state to idle (and all times to zero)
+	void setIdle();
+	// notifies this enemy that it has been resurrected
 	void setResurrected();
 	const LevelMovableGameObject* getCurrentTarget() const;
 

@@ -143,6 +143,7 @@ void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
 	
 	m_overlayQueue.clear();
+	g_resourceManager->playSound(GlobalResource::SOUND_LEARNED_SPELL);
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
 	m_interface->reloadSpellBook();
 	m_interface->hideAll();
@@ -154,6 +155,7 @@ void WorldScreen::notifyModifierLearned(SpellModifierType modifierType, int obje
 	SpellModifier modifier;
 	modifier.type = modifierType;
 	modifier.level = getCharacterCore()->getData().modfiersLearned.at(modifierType);
+	g_resourceManager->playSound(GlobalResource::SOUND_LEARNED_GEM);
 	addScreenOverlay(ScreenOverlay::createModifierLearnedScreenOverlay(modifier));
 	m_interface->reloadSpellBook();
 	m_interface->reloadLevelOverlay();

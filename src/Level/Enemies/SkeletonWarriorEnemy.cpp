@@ -44,6 +44,9 @@ void SkeletonWarriorEnemy::loadSpells() {
 	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 	chopSpell.castingTime = sf::milliseconds(300);
 	chopSpell.fightingTime = sf::milliseconds(300);
+	chopSpell.soundPaths.push_back("res/sound/weapon/swing1.ogg");
+	chopSpell.soundPaths.push_back("res/sound/weapon/swing2.ogg");
+	chopSpell.soundPaths.push_back("res/sound/weapon/swing3.ogg");
 	
 	m_spellManager->addSpell(chopSpell);
 

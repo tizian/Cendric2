@@ -99,7 +99,7 @@ inline bool fastIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2
 		|| rect1.top >= rect2.top + rect2.height);
 }
 
-inline bool fastIntersect(const sf::FloatRect& bb, const sf::Vector2f& center, float radius) {
+inline bool fastIntersectCircle(const sf::FloatRect& bb, const sf::Vector2f& center, float radius) {
 	sf::Vector2f pc = center;
 	if (pc.x > bb.left + bb.width) pc.x = bb.left + bb.width;
 	if (pc.x < bb.left) pc.x = bb.left;

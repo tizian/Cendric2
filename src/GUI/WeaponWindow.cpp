@@ -154,13 +154,11 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 		if (it.first.isMousedOver() && !m_hasDraggingStarted) {
 			selectSpellSlot(&it.first);
 			if (m_isModifiable && it.first.isDoubleClicked()) {
-				m_core->removeSpell(it.first.getNr());
-				m_requireReload = true;
+				removeSpell(it.first);
 				return;
 			}
 			if (m_isModifiable && it.first.isRightClicked()) {
-				m_core->removeSpell(it.first.getNr());
-				m_requireReload = true;
+				removeSpell(it.first);
 				return;
 			}
 		}
@@ -170,14 +168,12 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 			if (it2.isClicked()) {
 				selectModifierSlot(&it2);
 				if (m_isModifiable && it2.isDoubleClicked()) {
-					m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
-					m_requireReload = true;
+					removeModifier(it2);
 				}
 				return;
 			}
 			else if (m_isModifiable && it2.isRightClicked()) {
-				m_core->removeModifier(it2.getSpellSlotNr(), it2.getNr());
-				m_requireReload = true;
+				removeModifier(it2);
 				return;
 			}
 		}
@@ -230,13 +226,24 @@ void WeaponWindow::selectSpellSlot(SpellSlot* selectedSlot) {
 	reloadSpellDesc();
 }
 
+void WeaponWindow::removeModifier(const ModifierSlot& slot) {
+	m_core->removeModifier(slot.getSpellSlotNr(), slot.getNr());
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_GEM);
+	m_requireReload = true;
+}
+
+void WeaponWindow::removeSpell(const SpellSlot& slot) {
+	m_core->removeSpell(slot.getNr());
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_SPELL);
+	m_requireReload = true;
+}
+
 void WeaponWindow::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
 	if (!(g_inputController->isMousePressedLeft())) {
 		if (m_selectedModifierSlot != nullptr) {
 			if (m_currentModifierClone != nullptr && !fastIntersect(*m_currentModifierClone->getBoundingBox(), *m_selectedModifierSlot->getBoundingBox())) {
-				m_core->removeModifier(m_selectedModifierSlot->getSpellSlotNr(), m_selectedModifierSlot->getNr());
-				m_requireReload = true;
+				removeModifier(*m_selectedModifierSlot);
 			}
 			else {
 				m_selectedModifierSlot->activate();
@@ -244,8 +251,7 @@ void WeaponWindow::handleDragAndDrop() {
 		}
 		if (m_selectedSpellSlot != nullptr) {
 			if (m_currentSpellClone != nullptr && !fastIntersect(*m_currentSpellClone->getBoundingBox(), *m_selectedSpellSlot->getBoundingBox())) {
-				m_core->removeSpell(m_selectedSpellSlot->getNr());
-				m_requireReload = true;
+				removeSpell(*m_selectedSpellSlot);
 			}
 			else {
 				m_selectedSpellSlot->activate();
@@ -369,6 +375,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 		for (auto& modifierSlot : it.second) {
 			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot.getBoundingBox())) {
 				m_core->addModifier(ms->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
+				g_resourceManager->playSound(GlobalResource::SOUND_GUI_GEM);
 				m_requireReload = true;
 				modifierPlaced = true;
 				break;
@@ -389,6 +396,7 @@ void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 			&& fastIntersect(*clone->getBoundingBox(), *slot.first.getBoundingBox())) 
 		{
 			m_core->addSpell(ss->getSpellID(), slot.first.getNr());
+			g_resourceManager->playSound(GlobalResource::SOUND_GUI_SPELL);
 			m_requireReload = true;
 			break;
 		}

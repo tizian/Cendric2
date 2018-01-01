@@ -74,7 +74,7 @@ private:
 	// checks for collisions with those specific tiles
 	bool collidesWithSpecificTiles(const sf::FloatRect& boundingBox, const std::set<LevelDynamicTileID>& tiles) const;
 
-	Camera* m_camera;
+	Camera* m_camera = nullptr;
 	static const float CAMERA_WINDOW_WIDTH;
 	static const float CAMERA_WINDOW_HEIGHT;
 

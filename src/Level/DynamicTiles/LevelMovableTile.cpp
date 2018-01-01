@@ -49,7 +49,7 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 
 	for (auto enemy : *enemies) {
 		LevelMovableGameObject* mob = dynamic_cast<LevelMovableGameObject*>(enemy);
-		if (mob->getMovingParent() != getMovingParent() && !mob->isDead()) {
+		if (mob->getMovingParent() != getMovingParent() && !mob->isDead() && !mob->isIgnoringCollision()) {
 			const sf::FloatRect& mobBB = *mob->getBoundingBox();
 			if (epsIntersect(mobBB, newBoundingBoxX)) {
 				mob->setPositionX(mob->getPosition().x + posDiff.x);
