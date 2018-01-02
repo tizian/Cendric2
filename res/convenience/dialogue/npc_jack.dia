@@ -51,7 +51,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_WhoAreYou
 	translation.en:I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house here.
 	translation.de:Ich bin Jack. Normalerweise wär ich ja in meinem Leuchtturm und nicht hier bei den Dirnen.
-	translation.ch:Ich bi de Jack. Normalerwiis wäri ja i mim Lüüchtturm und nid da i dem Puff.
+	translation.ch:I bin dr Jack. Normalerwis wäri jo i mim Lüchtturm und ni do i däm Puff.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -65,7 +65,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_WhoAreYou2
 	translation.en:But I can't go back as long as that thing flies around there.
 	translation.de:Aber ich kann nicht zurück solange dieses Viech dort herumschwirrt.
-	translation.ch:Aber i de chani nid zrugg solang das Viech det umeflügt.
+	translation.ch:Aber i cha ni zrugg solang da Viech döt umaflügt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -102,7 +102,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_Elysia
 	translation.en:It looks like a huge bird and is also sounding like one, its shrieks are unbearable.
 	translation.de:Es sieht aus wie ein riesiger Vogel und klingt auch wie einer, sein Gekreische ist nicht auszuhalten.
-	translation.ch:Es gseht us wenen riesige Vogel und tönt au we eine, sis Umegekreische chame schier nid ushalte.
+	translation.ch:As gseht us wiana riesiga Vogel und tönt au wia eina, sis Umagekraische chama fast ni ushalta.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -116,7 +116,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_Elysia2
 	translation.en:I tried to shoo it away using my frying pan, but it just snatched it away from me and devoured it.
 	translation.de:Ich habe versucht, ihn mit meiner Bratpfanne zu verscheuchen, aber er hat sie mir entrissen und verschluckt.
-	translation.ch:Ich ha probiert, en mitere Bratpfanne z'verschüüche, aber er het si mer us de Hand grisse und verschluckt.
+	translation.ch:Ich ha probiart, ihn mitara Bratpfanna s'verschücha, aber är hät si miar us dr Hand grissa und verschluckt.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -130,7 +130,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_Elysia3
 	translation.en:It was a really good frying pan, what a shame...
 	translation.de:Schade um die gute Pfanne...
-	translation.ch:Isch chli schad um die guet Pfanne...
+	translation.ch:Isch chli schad um dia guat Pfanna...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -187,7 +187,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_WhyNotClerics
 	translation.en:Oh, I did! But that sneaky chicken wouldn't show up when they looked for it.
 	translation.de:Oh, das habe ich! Aber dieses hinterhältige Federvieh wollte sich nicht zeigen, als sie es gesucht haben.
-	translation.ch:Oh, das hani! Aber da hinterhältig Federviechli het sich nid wele zeige wo si go luege sind.
+	translation.ch:Oh, das hani! Aber da hinterhältigi Federviech hät sich ni wela zeiga wo si go luaga sind.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -202,7 +202,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_WhyNotClerics2
 	translation.en:Now they just won't believe me anymore. But I really don't want to end up as bird food, I just hope it will leave my lighthouse soon.
 	translation.de:Jetzt glauben sie mir einfach nicht mehr. Aber ich möchte wirklich nicht als Vogelfutter enden - hoffentlich macht er es sich nicht gemütlich in meinem Turm.
-	translation.ch:Jetzt glaubed si mer eifach nüm. Aber ich wet echt nid als Vogelfueter ende, drum hoffi er flügt bald wieder weg.
+	translation.ch:Jetzt glaubed si miar eifach nüma. Aber ich wet ächt nid als Vogelfuater enda, drum hoffi er flügt bald wieder weg.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -216,7 +216,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_HelpJack
 	translation.en:Really? You'd do me a big favour!
 	translation.de:Wirklich? Du würdest mir einen grossen Gefallen tun!
-	translation.ch:Würkli? Du würsch mer en grosse Gfalle mache!
+	translation.ch:Würkli? Du würsch miar a grossa Gfalla macha!
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -232,7 +232,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_HelpJack2
 	translation.en:Here, take the key to my lighthouse. I locked it to prevent people from getting eaten.
 	translation.de:Da, nimm den Schlüssel zu meinem Leuchtturm. Ich hatte ihn zugeschlossen, damit niemand gefressen wird.
-	translation.ch:Do, nimm de Schlüssel zu mim Lüüchtturm. Ich hanen abgschlosse so dass niemert ufgfresse wird.
+	translation.ch:Do, nimm da Schlüssel zu mim Lüchtturm. Ich hanen abgschlossa damit niamert ufgfressa wird.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -247,7 +247,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_HelpJack3
 	translation.en:Oh, and while you're on it, it would be awesome if you could get me my frying pan back.
 	translation.de:Oh und wenn du schon dabei bist, es wäre toll, wenn du mir meine Pfanne wiederbringen könntest.
-	translation.ch:Oh und wend grad debi bisch, es wär würkli toll wend mer mini Pfanne zrugghole chöntsch.
+	translation.ch:Oh und wen grad dabi bisch, es wär würkli hammer wend miar mini Pfanna zrugghola chasch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -262,7 +262,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_ElysiaKilled
 	translation.en:You really did it! That's my good old pan.
 	translation.de:Du hast es wirklich geschafft! Das ist meine gute alte Pfanne.
-	translation.ch:Du hesches würkli gschafft! Da isch mini guet alt Pfanne.
+	translation.ch:Du heschas würkli gschafft! Da isch mini guat alt Pfanna.
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -276,8 +276,8 @@ npc.id:npc_jack
 	# translation: 
 	translation.tag:DL_Jack_ElysiaKilled2
 	translation.en:Now that that chicken's gone, I can finally go back to my lighthouse.
-	translation.de:Jetzt wo dieses Federvieh weg ist kann ich endlich wieder in meinen Turm.
-	translation.ch:Jetzt wo das Federviech weg isch chani endlich wieder i min Turm zrugg.
+	translation.de:Jetzt, wo dieses Federvieh weg ist, kann ich endlich wieder in meinen Turm.
+	translation.ch:Jetzt, wo da Federviech weg isch, chani endlich wieder i min Turm zrugg.
 	[
 		# Link node, tag is next tag
 		tag:16
@@ -293,7 +293,7 @@ npc.id:npc_jack
 	translation.tag:DL_Jack_ElysiaKilled3
 	translation.en:Here, take the gold I was going to spend here, I don't need it anymore.
 	translation.de:Hier, nimm das Gold, das ich hier ausgeben wollte, jetzt brauch ich's nicht mehr.
-	translation.ch:Da, nimm's Gold woni da ha wele usge, da bruchi ez nüm.
+	translation.ch:Da, nimm's Gold woni do ha wela usge, do bruchi es nüma.
 	[
 		# Link node, tag is next tag
 		tag:-1

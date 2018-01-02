@@ -96,7 +96,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(10, -2, "DL_Lee_CalmDown3") -- But to sail over the sea, we'd need a compass and nobody in this damn city seems to have one.
+		DL:createNPCNode(10, -2, "DL_Lee_CalmDown3") -- But to sail over the sea, we'd need a compass and nobody in this damn city has one.
 		DL:addConditionProgress("npc_leeluv", "calm_down")
 		DL:addNode()
 

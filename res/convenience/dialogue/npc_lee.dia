@@ -57,7 +57,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_WhatDoing
 	translation.en:Yeah that's what I ask myself too. I'd rather be in mid ocean.
 	translation.de:Ja das frage ich mich auch. Ich wäre lieber mitten auf dem Meer.
-	translation.ch:Ja das frög ich mich au. Ich wär lieber ufem Meer grad.
+	translation.ch:Jo das frogi mi au. I wär liaber ufam Meer gra.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -71,7 +71,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_WhatDoing2
 	translation.en:But thanks to that fool Luv, we've missed our ship and and are stuck here.
 	translation.de:Aber dank diesem Trottel Luv haben wir unser Schiff verpasst und sitzen jetzt hier fest.
-	translation.ch:Aber dank dem Trottel Luv hend mer üses Schiff verpasst und sitzed ez do fest.
+	translation.ch:Aber dank däm Trottel Luv hend miar üses Schiff verpasst und sitzad jeza do fest.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -119,7 +119,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_OtherSays
 	translation.en:Oh yeah, did he? Well you can tell him that we would have made it if he wasn't drunk when our ship cast off.
 	translation.de:Ach ja, hat er das? Du kannst ihm sagen er hätte sich nicht betrinken sollen als unser Schiff abgelegt hat.
-	translation.ch:Ach jo, heter das? Du chaschem sege er het sich halt nid betrinke söle wo üses Schiff abgleit het.
+	translation.ch:Ach jo, häter das? Du chaschäm sega er het sich halt nid betrinka söla wo üses Schiff abglait het.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -134,7 +134,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_SecondRant
 	translation.en:Pha! If he hadn't have slept when our captain called our sailors back, we wouldn't have missed it either!
 	translation.de:Pha! Hätte er nicht geschlafen, als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
-	translation.ch:Pha! Wener nid pennt het wo üse Kapitän d'Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
+	translation.ch:Pha! Wener ni pennt het, wo üsa Kapitän d'Matrosa zrugg ufs Schiff gruefa hät, hetemärs au ni verpasst!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -149,7 +149,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_Thanks
 	translation.en:Thanks!
 	translation.de:Danke!
-	translation.ch:Danke!
+	translation.ch:Danka!
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -206,7 +206,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_CalmDown
 	translation.en:Yes maybe you're right. This doesn't get us anywhere.
 	translation.de:Ja vielleicht hast du recht. Das bringt uns auch nicht weiter.
-	translation.ch:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
+	translation.ch:Jo velicht hesch rächt. Da bringt üs au ni witer.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -220,7 +220,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_CalmDown2
 	translation.en:We know where our captain wanted to sail and we could buy a small boat here.
 	translation.de:Wir wissen, wo unser Kapitän hinwollte und wir könnten hier auch ein kleines Boot kaufen.
-	translation.ch:Mir wüssed, wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
+	translation.ch:Miar wüssad, wo üsa Kapitän heräwella het und miar chönted au as chlises Boot chaufe.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -233,9 +233,9 @@ npc.id:npc_lee
 	trigger:DL:addConditionProgress("npc_leeluv", "calm_down")
 	# translation: 
 	translation.tag:DL_Lee_CalmDown3
-	translation.en:But to sail over the sea, we'd need a compass and nobody in this damn city seems to have one.
-	translation.de:Doch um über das Meer zu segeln bräuchten wir einen Kompass und niemand in dieser verfluchten Stadt scheint einen zu haben.
-	translation.ch:Aber zum übers Meer sägle brüchtemer en Kompass und niemert i dere verfluechte Stadt het eine.
+	translation.en:But to sail over the sea, we'd need a compass and nobody in this damn city has one.
+	translation.de:Doch um über das Meer zu segeln bräuchten wir einen Kompass und niemand in dieser verfluchten Stadt hat einen.
+	translation.ch:Aber zum übers Meer sägla brüchtemer a Kompass und niamert i dera verfluachte Stadt het eina.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -250,7 +250,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_HelpYou
 	translation.en:Yes maybe. If you could get us a working compass, we'd give you all we have left.
 	translation.de:Ja vielleicht. Wenn du uns einen funktionierenden Kompass besorgen kannst, werden wir dir alles geben, was wir noch haben.
-	translation.ch:Jo vilicht. Wenn du üs en funktionierende Kompass bringsch, gemmer der alles womer na hend.
+	translation.ch:Jo velicht. Wenn du üs a funktionierenda Kompass bringsch, gänd miar diar alles wo mr hend.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -268,7 +268,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_QuestComplete
 	translation.en:Awesome! Thank you so much, I can't wait to set sails! 
 	translation.de:Grossartig! Danke vielmals, ich kann es kaum erwarten, wieder in die See zu stechen!
-	translation.ch:Super! Danke tusig, chas chuum erwarte wieder is Meer z'steche!
+	translation.ch:Super! Danka viel mol, chas chum erwarta wieder is Meer z'stecha!
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -283,7 +283,7 @@ npc.id:npc_lee
 	translation.tag:DL_Lee_QuestComplete2
 	translation.en:Here, take this pile of magical pearls we found, they are worth a lot here!
 	translation.de:Hier, nimm diesen Haufen magischer Perlen, die wir gefunden haben, sie sind hier eine Menge wert.
-	translation.ch:Do, nimm de Huufe magischi Perle womer gfunde hend, si sind do richtig viel wert.
+	translation.ch:Do, nimm de Hock magischi Perla womar gfunda hend, si sind do richtig viel wert.
 	[
 		# Link node, tag is next tag
 		tag:-2

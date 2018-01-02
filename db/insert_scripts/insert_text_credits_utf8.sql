@@ -565,6 +565,7 @@ Angelo Breda - Basler Dialekt (Luiz, Waldemar)
 Michela Hof - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 Sascha Bavaro - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 Daniel Boots - Walliser Dialekt (Zephyra)
+Alwin Klaas - Bündner Dialekt (Jack, Lee, Luv)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
