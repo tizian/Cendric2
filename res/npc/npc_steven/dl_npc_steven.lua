@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 			DL:addChoice(6, "DL_Choice_WhoAreYou") -- Who are you?
 		end
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
-			DL:addChoice(4, "DL_choice_NoTime") -- I don't have time for this.
+			DL:addChoice(4, "DL_Choice_NoTime") -- I don't have time for this.
 		end
 		if (DL:isConditionFulfilled("npc_steven", "who_are_you") and DL:hasItem("qe_recommendationletter", 1)) then 
 			DL:addChoice(12, "DL_Choice_Lloyd") -- I need to talk to some "Lloyd" here... (Show the letter)
@@ -69,7 +69,7 @@ loadDialogue = function(DL)
 
 
 			DL:createChoiceNode(7)
-			DL:addChoice(-2, "DL_choice_Understood") -- Understood.
+			DL:addChoice(-2, "DL_Choice_Understood") -- Understood.
 			DL:addChoice(-2, "DL_Choice_MaybeUnderstood") -- I'll try.
 			DL:addChoice(8, "DL_Choice_NotUnderstood") -- ... (Mischievous grin)
 			DL:addNode()

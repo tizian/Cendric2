@@ -49,7 +49,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Hi
 	translation.en:(Growls) Another mortal dares to trespass into my temple. Any last words?
 	translation.de:(Knurrt) Noch ein Sterblicher wagt es, in meinen Tempel einzudringen. Sprich deine letzten Worte. 
-	translation.ch:(Chnurrt) Nomol so en Sterbliche wogts, i min Tempel iezcho. Seg dini letzte Wort.
+	translation.ch:(Chnurrt) Numal so än Stärblichä wagts, in minä Tempel ichär z'chu. Säg dini letschtu Wort.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -82,7 +82,7 @@ npc.id:npc_yasha
 		# Link node, tag is next tag
 		tag:3
 		# translation: 
-		translation.tag:Choice_Yasha_Attack
+		translation.tag:DL_Choice_Yasha_Attack
 		translation.en:I'm not here to talk. [ATTACK]
 		translation.de:Ich bin nicht zum reden hier. [ANGREIFEN]
 		translation.ch:Ich bi nid zum rede do. [AAGRIFE]
@@ -91,7 +91,7 @@ npc.id:npc_yasha
 		# Link node, tag is next tag
 		tag:-1
 		# translation: 
-		translation.tag:DL_Yasha_End
+		translation.tag:DL_Choice_End
 		translation.en:(Back away slowly.)
 		translation.de:(Langsam zurückweichen.)
 		translation.ch:(Sich vorsichtig zruggzie.)
@@ -107,7 +107,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_YashaSanctuaryDone
 	translation.en:(Yasha stares at you) Hrr. You did traverse my temple without touching my sacred urns. No human did overcome the temptation of touching them before. 
 	translation.de:(Yasha starrt dich an) Hrr. Du hast meinen Tempel durchquert, ohne meine heiligen Urnen anzufassen. Kein Mensch hat dieser Versuchung je widerstanden.
-	translation.ch:(D'Yasha starrt dich ah) Hrr. Du hesch min Tempel durchquert ohni eini vo mine heilige Urne ahz'lange. Ken Mensch vor dir het je dere Versuechig widerstoh chöne.
+	translation.ch:(D'Yasha starrt dich ah) Hrr. Dü hesch minä Tempel durchquert ohni eini va minu heiligu Urnä ahz'grifu. Kei Mänsch vor diär het je der Värsüächig chännu widärstah.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -122,7 +122,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_YashaSanctuaryDone2
 	translation.en:I will answer all of your questions, human.
 	translation.de:Ich werde all deine Fragen beantworten, Mensch.
-	translation.ch:Ich wird all dini Froge beantworte, Mensch.
+	translation.ch:Ich wärdu alli dini Fragä beantwortu, Mänsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -138,7 +138,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_PeacefulTalkNot
 	translation.en:I've seen you stomping through my temple, opening my sacred urns and destroying the peaceful atmosphere.
 	translation.de:Ich habe dich durch meinen Tempel stampfen gesehen, wie du meine heiligen Urnen geöffnet und die friedliche Atmosphäre zerstört hast.
-	translation.ch:Ich ha dich dur min Tempel stampfe gse, we du mini Urne ufgmacht und di friedlich Atmosphäre zerstört hesch.
+	translation.ch:Ich ha dich durch minä Tempel gseh stapfu, wiä dü mini Urna üfgita und die friedlich Atmosphära zärstört hesch.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -152,7 +152,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_PeacefulTalkNot2
 	translation.en:You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
 	translation.de:Du bist genau so wertlos wie alle Menschen. Bevor ich deine erbärmliche Existenz beende, gewähre ich dir eine Frage. Wähl weise. 
-	translation.ch:Du bisch genau so wertlos we all Mensche. Bevor ich dini erbärmlich Existenz vernichte, gewähri dir na genau ei Frog. Wähl weise.
+	translation.ch:Dü bisch genau so wärtlos wiä alli Mänschu. Bevor ich dini erbärmlich Existänz vernichtu, gwähr ich diär nu genau ei Frag. Läs wäise üs.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -168,7 +168,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Attack
 	translation.en:Well, prepare to die then.
 	translation.de:Gut, dann mach dich bereit, zu sterben.
-	translation.ch:Guet, denn stirbsch halt eifach so.
+	translation.ch:Güät, de stirbsch halt eifach so.
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -282,7 +282,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_WhatGuarding
 	translation.en:I was guarding a key to a secret that should've never been revealed.
 	translation.de:Ich habe einen Schlüssel zu einem Geheimnis bewacht, das nie hätte gelüftet werden sollen.
-	translation.ch:Ich han en Schlüssel zumne Gheimnis bewacht, wo nie heti söle glüftet werde.
+	translation.ch:Ich ha än Schlussul zuma Gheimnis bewacht, wa niä hetti sellu glüftut wärdu.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -298,7 +298,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Mages
 	translation.en:A filthy thief and his henchmen. They outwit me with some magic not known to me. 
 	translation.de:Ein dreckiger Dieb und sein Gefolge. Sie haben mich mit mir unbekannter Magie ausgetrickst.
-	translation.ch:En dreckige Dieb und sis Gefolge. Si hend mich mit Magie überlischtet woni nid kennt ha.
+	translation.ch:Än dräckigä Dieb und schis Gfolg. Schi hent mich mit Magie ubärlischtut, wani nid kännt ha.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -314,7 +314,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_WhoSummoned
 	translation.en:A necromancer, a long time ago. As so many necromancers, he underestimated the powers he was playing with.
 	translation.de:Ein Nekromant, vor langer Zeit. Wie so viele Nekromanten hat der die Kräfte, mit denen er gespielt hat, unterschätzt.
-	translation.ch:En Nekromant, vor langer Ziit. We so vili Nekromante het er d'Chräft, mit dene er gspielt het, unterschätzt.
+	translation.ch:Än Nekromant, vor langer Ziit. Wiä so vill Nekromantä het är d'Chräft, mit denu wanär gspillt het, unärschätzt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -344,7 +344,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Key
 	translation.en:Grr. It got stolen. But the sword will find its way back to me.
 	translation.de:Grr. Es wurde gestohlen. Aber das Schwert wird seinen Weg zurück zu mir finden.
-	translation.ch:Grr. Es isch gstohle worde. Aber es Schwert wird sin Weg zrugg zu mir finde.
+	translation.ch:Grr. Äs isch gstohlu wordu. Abär das Schwert wird schinä Wäg zrug zu miär gfindu.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -359,7 +359,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_LetPass
 	translation.en:Hrrr. Yes, I will. But first you will have to prove that you're worthy. Fight me.
 	translation.de:Hrrr. Ja, werde ich. Aber zuerst musst du dich als würdig erweisen. Kämpfe mit mir.
-	translation.ch:Hrrr. Ja, derfsch. Aber zersch muesch dich als würdig erwiise. Kämpf mit mir.
+	translation.ch:Hrrr. Ja, tarfsch. Abär zersch müäsch dü dich als würdig erwiisu. Kämpf mit miär.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -388,7 +388,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_DieNow
 	translation.en:That's enough. Die now.
 	translation.de:Das ist genug. Stirb jetzt. 
-	translation.ch:Fertig luschtig. Stirb ez.
+	translation.ch:Fertig luschtig. Stirb jetz.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -417,7 +417,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Reward
 	translation.en:Ahh. I see, your soul is pure and your magic is strong. 
 	translation.de:Ahh. Wie ich sehe, ist deine Seele rein und deine Magie stark.
-	translation.ch:Ahh. We ich gse isch dini Seel rein und dini Magie starch.
+	translation.ch:Ahh. Wiä ich gseh, isch dini Seela rein und dini Magie starch.
 	[
 		# Link node, tag is next tag
 		tag:21
@@ -431,7 +431,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Reward2
 	translation.en:Maybe you're not as vile as the other humans I met. Maybe you can find that filthy thief and thwart his plans. 
 	translation.de:Vielleicht bist du nicht so wertlos wie die anderen Menschen, die ich getroffen habe. Vielleicht kannst du diesen dreckigen Dieb finden und seine Pläne durchkreuzen.
-	translation.ch:Vilicht bisch du nid so wertlos we di andere Mensche woni troffe ha. Vilicht chasch du de Dieb finde und sini Plän zerstöre.
+	translation.ch:Vilicht bisch dü nid so wärtlos wiä die andru Mänschä wani gitroffu ha. Vilicht chasch dü där Dieb gfindu und schini Plän zärstöru.
 	[
 		# Link node, tag is next tag
 		tag:22
@@ -448,7 +448,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Reward3
 	translation.en:Here, take this weapon and this pendant. May they help you reaching your goals.
 	translation.de:Hier, nimm diese Waffe und diesen Anhänger. Sie sollen dir helfen, deine Ziele zu erreichen.
-	translation.ch:Do, nimm die Waffe und de Schmuck. Si söled der helfe, dini Ziil z'erreiche.
+	translation.ch:Hiä, nimm die Waffä und der Schmuck. Schi sellund diär hälfu, dini Ziil z'ärreichu.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -484,7 +484,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_Sword
 	translation.en:Hrr. Where did you find that, human? That's my sword, it was stolen.
 	translation.de:Hrr. Wo hast du das gefunden, Mensch? Das ist mein Schwert, es wurde gestohlen.
-	translation.ch:Hrr. Wo hesch das gfunde, Mensch? Das isch mis Schwert, es isch klaut worde.
+	translation.ch:Hrr. Wa hesch das gfundu, Mänsch? Das isch miis Schwert, äs isch miär gstohlu wordu.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -511,7 +511,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound
 	translation.en:It's flame went out. That means it has been used to enter the temple's library. It's too late.
 	translation.de:Seine Flamme ist erloschen. Das heisst, es wurde benutzt, um die Bibliothek des Tempels zu betreten. Es ist zu spät.
-	translation.ch:Sini Flamme isch verlosche. Das heisst, es isch brucht worde zum d'Bibliothek im Tempel z'betrette. Es isch z'spot.
+	translation.ch:Schini Flamma isch ärlescht. Das heisst, äs isch gibrücht wordu fär die Bibliothek im Tempel z'beträttu. Äs isch z'spat.
 	[
 		# Link node, tag is next tag
 		tag:27
@@ -525,7 +525,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound2
 	translation.en:My only purpose was to keep intruders from finding the secrets of the library. I failed.
 	translation.de:Meine einzige Aufgabe war es, Eindringlinge davon abzuhalten, die Geheimnisse der Bibliothek zu finden. Ich habe versagt.
-	translation.ch:Mini einzig Ufgab isch gsi, Iidringling devo abzhalte, d'Gheimnis vode Bibliothek z'finde. Ich ha verseit.
+	translation.ch:Mini einzig Üfgab isch gsi, Ihdringlingä därfa abz'haltu, die Gheimnis fanär Bibliothek z'gfindu. Ich ha värseit.
 	[
 		# Link node, tag is next tag
 		tag:28
@@ -540,7 +540,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound3
 	translation.en:But you, you could find the thief for me and punish him. Give me that sword. (Yasha takes the sword and puts it on the ground)
 	translation.de:Aber du, du könntest den Dieb finden und ihn bestrafen. Gib mir dieses Schwert. (Yasha nimmt das Schwert und legt es auf den Boden)
-	translation.ch:Aber du, du chöntsch de Dieb finde und ihn bestrofe. Gib mer das Schwert. (D'Yasha nimmts Schwert und leits uf de Bode)
+	translation.ch:Abär dü, dü chänntisch där Dieb gfindu und inu bestrafu. Gib mär das Schwert. (D'Yasha nimmt z'Schwert und leit sus ufä Bodu.)
 	[
 		# Link node, tag is next tag
 		tag:29
@@ -554,7 +554,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound4
 	translation.en:(Yasha uses her fiery breath to reignite the sword)
 	translation.de:(Yasha braucht ihren feurigen Atem um das Schwert zu entzünden)
-	translation.ch:(D'Yasha brucht ihre füürig Schnuuf zums Schwert azünde)
+	translation.ch:(D'Yasha brücht ihru letscht Schnüüf fär z'Schwert z'emprännu.)
 	[
 		# Link node, tag is next tag
 		tag:30
@@ -570,7 +570,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_TempleFound5
 	translation.en:Here. Take it and avenge me.
 	translation.de:Hier. Nimm es und räche mich.
-	translation.ch:Do. Nimms und räch mich.
+	translation.ch:Hiä. Nimm das und räch mich.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -584,7 +584,7 @@ npc.id:npc_yasha
 	translation.tag:DL_Yasha_BeSafe
 	translation.en:Goodbye, and stay safe, human.
 	translation.de:Lebe wohl und pass auf dich auf, Mensch.
-	translation.ch:Leb wohl und pass uf dich uf, Mensch.
+	translation.ch:Läb wohl und pass uf dich üf, Mänsch.
 	[
 		# Link node, tag is next tag
 		tag:-1

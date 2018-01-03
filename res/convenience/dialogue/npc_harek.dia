@@ -350,7 +350,7 @@ npc.id:npc_harek
 	translation.tag:DL_Harek_SmithMagicArmor
 	translation.en:Very good. (Harek takes the ingredients and starts hammering on his anvil furiously...)
 	translation.de:Sehr gut. (Harek nimmt die Materialien und beginnt, wie wild auf seinem Amboss herumzuhämmern...)
-	translation.ch:Sehr guet. (De Harek nimmt d''Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
+	translation.ch:Sehr guet. (De Harek nimmt d'Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
 	[
 		# Link node, tag is next tag
 		tag:15

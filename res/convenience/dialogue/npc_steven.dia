@@ -29,7 +29,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_ANewFace
 	translation.en:And again, a new face in the city. As if we hadn't already enough troublemakers here. 
 	translation.de:Und wieder ein neues Gesicht in der Stadt. Als hätten wir nicht schon genug Störenfriede hier.
-	translation.ch:Und wider es neus Gsicht ide Stadt. Als hettemer nid scho gnueg Störefried da.
+	translation.ch:U widr äs nöis Gsicht ir Stadt. Aus hättmr nid scho gnue Störäfridä.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -43,7 +43,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_YouShouldKnowRules
 	translation.en:You should know the rules of the city, if you don't want to end up jailed.
 	translation.de:Du solltest die Regeln dieser Stadt kennen, wenn du nicht im Gefängnis landen willst. 
-	translation.ch:Du sötsch d'Regle vo dere Stadt kenne, wend nid wetsch hinter Gitter cho.
+	translation.ch:Du sötisch d'Reglä vodr Stadt kennä, wedä nid id Chischte wotsch cho.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -77,7 +77,7 @@ npc.id:npc_steven
 		tag:4
 		condition:not DL:isConditionFulfilled("npc_steven", "rules")
 		# translation: 
-		translation.tag:DL_choice_NoTime
+		translation.tag:DL_Choice_NoTime
 		translation.en:I don't have time for this.
 		translation.de:Ich habe keine Zeit für das.
 		translation.ch:Ich han grad ke Ziit für das.
@@ -111,7 +111,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_Rules1
 	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore, respect us and follow our orders as long as you're here, or it won't be a very pleasant stay in Gandria.
 	translation.de:Nun, zuerst solltest du wissen, dass der Orden des Ewigen Lichts hier regiert - also respektiere uns und unsere Gesetze, sonst wird das ein nicht sehr angenehmer Aufenthalt für dich in Gandria.
-	translation.ch:Zersch mal sött der klar si, dass de Orde vom Ewige Liecht da regiert - also halt dich besser a üsi Gsetz, susch wird das en nid sehr agnehme Ufenthalt für dich in Gandria.
+	translation.ch:Zersch sötter klar si, ds dr Ordä vom ewigä Liächt hie regiert - auso haut di besser a üsi Gsetz, süsch wird das ä unagnähme Ufenthaut für di z'Gandria. 
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -125,7 +125,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_Rules2
 	translation.en:Behave well if you go into a stranger's house - we don't like thieves here. Most citizens of Gandria use observer spells to avoid being robbed.
 	translation.de:Benimm dich wenn du ein fremdes Haus betrittst - Wir mögen keine Diebe hier. Die meisten Bürger hier haben Beobachter-Zauber, um Diebstähle zu verhindern.
-	translation.ch:Benimm dich wend ines fremds Huus gasch - Mer gsehnd Diebe nid gern da. Di meiste Bürger hend Beobachter-Zauber, wo verhinderet, das öpper öppis chluppet.
+	translation.ch:Benimm di wet ines Huus geisch - Mir gseh hie nid gärn Röiber. Die meischtä Bürger hei Beobachtigs-Zouber, wo vrhinderä, ds öpper öppis stibitzt.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -139,7 +139,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_Rules3
 	translation.en:And, last but not least, we don't really like seeing other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
-	translation.ch:Und, zum Schluss: Mir gsehnds nid bsunders gern, wenn öpper mit Zauber hantiert, wo nid zude hoche heilige Schuel ghöred. Wennd bi Nekromantie verwütscht wirsch, chasch ufknöpft werde.
+	translation.ch:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört. Wedä bir Nekromantie vrwütscht wirsch, chasch ghängt wärdä.
 	[
 		# Link node, tag is next tag
 		tag:11
@@ -169,7 +169,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_WhoAreYou
 	translation.en:I'm Steven, paladin and vigilante of Gandria and so to say directly the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
 	translation.de:Ich bin Steven, Paladin und Ordnungshüter von Gandria, sozusagen die rechte Hand von unserem Kommandanten, Lloyd. Leg dich nicht mit mir oder meiner Stadt an, verstanden?
-	translation.ch:Ich bi de Steven, Paladin und Gsetzeshüeter vo Gandria, sozsege grad di recht Hand vom Kommandant Lloyd. Leg dich nid mit mir oder minere Stadt ah, verstande? 
+	translation.ch:I bi dr Steven, Paladin und dr Tschugger vo Gandria, sozsägä die rächti Hang vom Kommandant Lloyd. Leg di nid mit mir odr mirä Stadt ah, vrstangä? 
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -182,7 +182,7 @@ npc.id:npc_steven
 		# Link node, tag is next tag
 		tag:-2
 		# translation: 
-		translation.tag:DL_choice_Understood
+		translation.tag:DL_Choice_Understood
 		translation.en:Understood.
 		translation.de:Verstanden.
 		translation.ch:Verstande.
@@ -214,7 +214,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_IKeepEyeOnYou
 	translation.en:I'll keep an eye on you, boy.
 	translation.de:Ich werde dich im Auge behalten, Junge.
-	translation.ch:Dich wirdi im Aug phalte, Bürschtli.
+	translation.ch:Giu, mir heidi im Oug, Bürschtli.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -228,7 +228,7 @@ npc.id:npc_steven
 	translation.tag:DL_NPC_DontTrouble
 	translation.en:Well then... Don't make trouble!
 	translation.de:Na dann... Mach bloss keinen Ärger!
-	translation.ch:Ja dänn... Mach bloss ken Ärger!
+	translation.ch:Ja dämfau.. Mach eifach ke Seich!
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -244,7 +244,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Laughter
 	translation.en:(Steven takes the letter and then starts laughing uncontrollably)
 	translation.de:(Steven nimmt den Brief und beginnt, unbeherrscht zu lachen)
-	translation.ch:(De Steven nimmt de Brief und fangt denn völlig unkontrolliert ah lache.)
+	translation.ch:(Dr Steven nimmt dr Brief und faht vöuig unkontrolliert a lachä)
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -258,7 +258,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_PieceOfPaper
 	translation.en:And you thought this piece of paper will bring you to him? That's truly ridiculous.
 	translation.de:Und du hast gedacht, dieser Papierfetzen wird dich zu ihm bringen? Das ist lächerlich.
-	translation.ch:Und du hesch würkli denkt, dass de Papierfetze dich zu ihm bringe wird? Da isch lächerlich.
+	translation.ch:U du hesch würklech dänkt, ds dr Papierfötzu di zu ihm füehrt? Ds isch ja lächerlech.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -303,7 +303,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Urgent
 	translation.en:Sure it is. But there are other urgent things too. Like what you'll have to do to get your letter back.
 	translation.de:Natürlich. Aber es gibt auch andere dringende Sachen. So wie das, was du für mich zu erledigen hast, wenn du deinen Brief wieder willst.
-	translation.ch:Natürlich. Aber es git au anderi dringendi Sache. So we da, wa du für mich erledige muesch, wend din Brief wider wetsch.
+	translation.ch:Abr äs git oh angeri pressanti Sachä. So wiä ds, wo du für mi muesch machä, wedä dr Brief widr zrügg wotsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -317,7 +317,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Inina
 	translation.en:Good for you. But you can't talk to her either until you've taken care of my tiny problem. Then you'll get your letter back.
 	translation.de:Schön für dich. Aber du kannst auch nicht mit ihr sprechen bis du eine kleine Sache für mich erledigt hast. Dann wirst du deinen Brief zurück kriegen.
-	translation.ch:Schön für dich. Aber du chasch au nid mit ihre rede bis du e chlini Sach für mich erledigt hesch. Denn bechunsch au din Brief wieder.
+	translation.ch:Schön für di. Abr du chasch oh nid mit ihrä plöiderlä bis du ä chlini Sach für mi erledigt hesch. De brchunsch di Brief oh widr.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -331,7 +331,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Intimidate
 	translation.en:Ah, you're a tough boy aren't you. But I think I'll have to keep your letter for a while - until you've taken care of some problem of mine...
 	translation.de:Ah, du bist ein harter Junge, nicht wahr. Aber ich glaube, ich muss deinen Brief noch ein bisschen behalten - bis du eine Sache für mich erledigt hast.
-	translation.ch:Ah, du bisch en herte Siech, he. Aber ich mu din Brief glaub na bitz phalte - bis du so e Sach für mich erledigt hesch...
+	translation.ch:Ah, du bisch ä hertä Chrieger, gäu. Aber i muess di Brief gloub no äs müü phautä - bis du so ä Sach für mi erledigt hesch... 
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -379,7 +379,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_HelmetQuest
 	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
 	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren. Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
-	translation.ch:Ich ha letzt Nacht chli z'viel trunke und ha min Helm a paar komischi Gstalte ide Taverne verlore. Bimer zimli sicher dass si zude dreckige Diebesgilde ghöred.
+	translation.ch:I ha letscht Nacht chly z'viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore. Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
 	[
 		# Link node, tag is next tag
 		tag:20
@@ -393,7 +393,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_HelmetQuest2
 	translation.en:I need someone that doesn't look like he belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
 	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
-	translation.ch:Ich bruch öpper wo nid usgseht als würer zum Orde ghöre, öpper we dich, womer min Helm wider holt. Wend das anebringsch, chasch din Papierfötzel wider ha.
+	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -407,7 +407,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_GotHelmet
 	translation.en:Very good! Give it to me!
 	translation.de:Sehr gut! Gib ihn mir!
-	translation.ch:Sehr guet! Giben mir!
+	translation.ch:Sehr guet! Gibnä mir!
 	[
 		# Link node, tag is next tag
 		tag:22
@@ -446,7 +446,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_GivesLetter
 	translation.en:Okay okay, here you go. You can speak with Commander Lloyd. And now give me my helmet!
 	translation.de:Okay okay, da hast du ihn wieder. Du kannst jetzt von mir aus mit Kommandant Lloyd sprechen. Und jetzt gib mir meinen Helm!
-	translation.ch:Okay okay, da heschen wider. Du chasch ez vo mir us mitem Kommandant Lloyd rede. Und ez gimmer min Helm!
+	translation.ch:Okee Oke, da heschnä widr. Du chasch ize vo mir us mitm Kommandant Lloyd redä. U iz gimer mi Heum!
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -484,7 +484,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_ThanksHelmet
 	translation.en:Hehe. Thank you.
 	translation.de:Hehe. Danke.
-	translation.ch:Hehe. Danke.
+	translation.ch:Hehe. Merci.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -499,7 +499,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Angry
 	translation.en:Grr, you little... You'll pay for this! If Lloyd hears about this...
 	translation.de:Grr, du kleiner... Dafür wirst du noch bezahlen! Wenn Lloyd davon erfährt...
-	translation.ch:Grr, du chliine... Dafür wirsch na zahle! Wenn de Lloyd devo ghört...
+	translation.ch:Grr, du chliinä... Drfür wirsch du büässä! Wedr Lloyd drvo ghört...
 	[
 		# Link node, tag is next tag
 		tag:26
@@ -540,7 +540,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_GotoLloyd
 	translation.en:Perfect. Here is your letter. You can now go and see Commander Lloyd.
 	translation.de:Perfekt. Hier ist dein Brief. Du kannst jetzt zu Kommandant Lloyd gehen.
-	translation.ch:Perfekt. Da isch din Brief. Du chasch ez zum Kommandant Lloyd.
+	translation.ch:Perfekt. Da isch di Brief. Du chasch iz zum Kommandant Lloyd.
 	[
 		# Link node, tag is next tag
 		tag:-1

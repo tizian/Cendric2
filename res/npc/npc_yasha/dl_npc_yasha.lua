@@ -34,8 +34,8 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")) then 
 			DL:addChoice(6, "DL_Choice_PeacefulTalk") -- 
 		end
-		DL:addChoice(3, "Choice_Yasha_Attack") -- I'm not here to talk. [ATTACK]
-		DL:addChoice(-1, "DL_Yasha_End") -- (Back away slowly.)
+		DL:addChoice(3, "DL_Choice_Yasha_Attack") -- I'm not here to talk. [ATTACK]
+		DL:addChoice(-1, "DL_Choice_End") -- (Back away slowly.)
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")) then 

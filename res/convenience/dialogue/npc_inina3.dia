@@ -18,7 +18,7 @@ npc.id:npc_inina3
 	translation.tag:DL_Inina_Void
 	translation.en:... (Inina stares into the void)
 	translation.de:... (Inina starrt ins Leere)
-	translation.ch:... (D'Inina starrt is Leeri)
+	translation.ch:... (D'Inina starrt iz Lääre)
 	[
 		# Link node, tag is next tag
 		tag:-1

@@ -566,6 +566,11 @@ Michela Hof - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 Sascha Bavaro - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
 Daniel Boots - Walliser Dialekt (Zephyra)
 Alwin Klaas - Bündner Dialekt (Jack, Lee, Luv)
+Mirjam Thomet - Berner Dialekt (Inina, Paladin, Steven)
+Jan Rohrbach - Berner Dialekt (Inina, Paladin, Steven)
+Alf Nussbaum - Berner Dialekt (Inina, Paladin, Steven)
+Sarah Schaller - Walliser Dialekt (Yasha)
+Désirée Aeberhard - Berner Dialekt (Stadtwache)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

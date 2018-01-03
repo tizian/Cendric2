@@ -42,7 +42,7 @@ npc.id:npc_inina4
 	translation.tag:DL_Inina_Ok
 	translation.en:Yes. We're no longer under his spell.
 	translation.de:Ja. Wir stehen nicht mehr unter seinem Zauber.
-	translation.ch:Jo. Mer stönd nümme unter sim Zauber.
+	translation.ch:Ja. Mer stöi nümme unger sim Zauber.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -57,7 +57,7 @@ npc.id:npc_inina4
 	translation.tag:DL_Inina_Ok2
 	translation.en:Thank you so much for saving me. I'll never forget this.
 	translation.de:Vielen Dank, dass du mich gerettet hast. Das werde ich dir nie vergessen.
-	translation.ch:Danke tusig, dassd mich grettet hesch. Das wirdi der nie vergässe.
+	translation.ch:Danke tusig, dassd mi grettet häsch. Das wirdi der nie vergässe.
 	[
 		# Link node, tag is next tag
 		tag:-2
