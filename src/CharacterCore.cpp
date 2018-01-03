@@ -515,6 +515,7 @@ void CharacterCore::learnModifier(SpellModifierType modifierType, const std::str
 		m_data.modfiersLearned.insert({ modifierType, 0 });
 	}
 	m_data.modfiersLearned[modifierType] = std::min(3, m_data.modfiersLearned[modifierType] + 1);
+	g_achievementManager->notifyAchievementCore("ACH_ALL_MODIFIERS");
 }
 
 void CharacterCore::learnHint(const std::string& hintKey) {
