@@ -17,10 +17,10 @@ public:
 	void setText(const std::string& text);
 	void setTextOffset(const sf::Vector2f& offset);
 	void setTextAlignment(TextAlignment alignment);
-
-	static const int MAX_WIDTH;
+	void setMaxWidth(int maxWidth);
 
 private:
 	BitmapText m_text;
 	sf::Vector2f m_textOffset;
+	int m_maxWidth;
 };

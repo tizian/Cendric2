@@ -119,7 +119,11 @@ void QuickSlot::reload() {
 			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
 			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
 
-		m_tooltipWindow.setText(g_textProvider->getText(m_itemID, "item"));
+		m_tooltipWindow.setMaxWidth(300);
+
+		auto tooltip = g_textProvider->getText(m_itemID, "item") + "\n\n";
+		AttributeData::appendAttributes(tooltip, item->getAttributes());
+		m_tooltipWindow.setText(tooltip);
 	}
 
 	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);
