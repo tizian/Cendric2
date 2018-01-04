@@ -81,11 +81,13 @@ Tizian
 
 "Broken Bridge"
 
+"The Temple of Elementalists"
+
+"The Meadows"
+
 ---
 
 -- Susanne Aubert --
-
-"The Meadows"
 
 "The Stone Garden"
 
@@ -286,11 +288,15 @@ Tizian
 
 "Broken Bridge"
 
+"The Temple of Elementalists"
+
+"The Meadows"
+
 ---
 
 -- Susanne Aubert --
 
-"The Meadows"
+"The Stone Garden"
 
 "The Stone Garden"
 
@@ -487,11 +493,15 @@ Tizian
 
 "Broken Bridge"
 
+"The Temple of Elementalists"
+
+"The Meadows"
+
 ---
 
 -- Susanne Aubert --
 
-"The Meadows"
+"The Stone Garden"
 
 "The Stone Garden"
 
