@@ -159,20 +159,19 @@ void LevelEquipment::setPosition(const sf::Vector2f& position) {
 void LevelEquipment::lockAnimation(bool lock) {
 	m_isLocked = lock;
 	if (m_isLocked) {
-		updateAnimation();
 		loopCurrentAnimation(false);
 		m_animatedSprite.stop();
 	}
 }
 
 void LevelEquipment::update(const sf::Time& frameTime) {
+	updateAnimation();
+	checkAndSetPosition();
+
 	if (m_isLocked) {
-		checkAndSetPosition();
 		return;
 	}
 
-	updateAnimation();
-	checkAndSetPosition();
 	AnimatedGameObject::update(frameTime);
 }
 

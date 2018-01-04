@@ -5,4 +5,4 @@
 class GemAchievement final : public Achievement {
 public:
     bool notifyCore(const CharacterCore* core) override;
-};A
+};
