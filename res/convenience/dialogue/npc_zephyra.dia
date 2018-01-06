@@ -215,7 +215,7 @@ npc.id:npc_zephyra
 	translation.tag:DL_Zephyra_NiceCat
 	translation.en:Don't you dare! Only Yasha's shamans are allowed to wear this headpiece.
 	translation.de:Wag es ja nicht! Nur Yasha's Schamanen dürfen diesen Kopfschmuck tragen.
-	translation.ch:Wagses ja nid! Nur der Yasha ihri Schamane derfend der Choppfschmuck alege.
+	translation.ch:Wagses ja nid! Nur der Yasha ihri Schamane derfend der Chopfschmuck alege.
 	[
 		# Link node, tag is next tag
 		tag:-2

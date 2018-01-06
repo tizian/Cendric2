@@ -266,7 +266,7 @@ npc.id:npc_yasha
 		# Link node, tag is next tag
 		tag:-1
 		# translation: 
-		translation.tag:DL_Yasha_End
+		translation.tag:DL_Choice_End
 		translation.en:
 		translation.de:
 		translation.ch:

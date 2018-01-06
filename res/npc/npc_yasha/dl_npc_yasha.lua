@@ -102,7 +102,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_yasha", "attackable")) then 
 			DL:addChoice(19, "DL_Choice_LetsFight") -- Alright, I'm ready to fight. [ATTACK]
 		end
-		DL:addChoice(-1, "DL_Yasha_End") -- 
+		DL:addChoice(-1, "DL_Choice_End") -- 
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_yasha", "what_guarding")) then 
