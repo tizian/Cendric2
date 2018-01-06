@@ -1,9 +1,9 @@
 ![cendric logo](images/logo.png)
 # Cendric - RPG Platformer
 
-*Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
+*Cendric* combines RPG and Platformer elements in one game, featuring both a sidescroller and top-down view. The player follows the story of a boy with no memory and discovers the magical but dangerous world of Admantris.
 
-# Development and Release
+## Development and Release
 
 The Steam page for Cendric is online: 
 http://store.steampowered.com/app/681460/Cendric/
