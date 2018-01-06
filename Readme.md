@@ -3,7 +3,14 @@
 
 *Cendric* is a 2D RPG Platformer game in which players explore a world by completing levels and quests.
 
-The game is currently in development. See http://en.sfml-dev.org/forums/index.php?topic=19740 for more information about its development process.
+# Development and Release
+
+The Steam page for Cendric is online: 
+http://store.steampowered.com/app/681460/Cendric/
+
+Release is planned for February/March 2018
+
+The game is currently still in development. See http://en.sfml-dev.org/forums/index.php?topic=19740 for more information about its development process.
 
 ## Screenshots
 
