@@ -308,6 +308,7 @@ loadDialogue = function(DL)
 	
 		DL:createNPCNode(120, -1, "DL_Zeff_IWillGoHome") -- Thank you for the great news. I can't wait to see my beautiful house again! Don't forget to visit me in Gandria to get your reward.
 		DL:changeQuestState("zeff_returns", "completed")
+        DL:unlockAchievement("ACH_SAVE_ZEFF")
 		DL:addConditionProgress("npc_zeff", "zeff_goes")
 		DL:addNode()
 		
