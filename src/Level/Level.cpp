@@ -53,6 +53,7 @@ void Level::loadAfterMainChar(MainCharacter* mainChar) {
 	LevelLoader loader;
 	loader.loadAfterMainChar(m_levelData, dynamic_cast<LevelScreen*>(m_screen), this);
 	dynamic_cast<LevelMainCharacter*>(mainChar)->setAutoscroller(dynamic_cast<AutoscrollerCamera*>(m_camera));
+	m_camera->setFocusCenter(mainChar->getCenter(), true);
 }
 
 bool Level::load(const std::string& id, WorldScreen* screen) {

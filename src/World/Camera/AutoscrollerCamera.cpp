@@ -4,6 +4,7 @@
 #include "Screens/Screen.h"
 
 void AutoscrollerCamera::update(const sf::Time& frameTime) {
+	m_currentFrameTime = frameTime;
 	if (g_inputController->isKeyActive(Key::Up)) {
 		m_cameraTop -= CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
@@ -29,15 +30,13 @@ void AutoscrollerCamera::setLevelSize(const sf::Vector2f& levelSize) {
 	m_levelSize = levelSize;
 }
 
-void AutoscrollerCamera::setFocusCenter(const sf::Vector2f& center) {
+void AutoscrollerCamera::setFocusCenter(const sf::Vector2f& center, bool setHard) {
 	// check vertically
 	if (center.y < m_cameraTop) {
-		m_cameraTop = center.y;
-		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
+		setCameraTop(center.y, setHard);
 	}
 	else if (center.y > m_cameraTop + m_cameraWindowHeight) {
-		m_cameraTop = center.y - m_cameraWindowHeight;
-		m_cameraCenter.y = m_cameraTop + (m_cameraWindowHeight / 2.f);
+		setCameraTop(center.y - m_cameraWindowHeight, setHard);
 	}
 
 	m_cameraLeft = std::min(m_levelSize.x - WINDOW_WIDTH, m_cameraLeft);

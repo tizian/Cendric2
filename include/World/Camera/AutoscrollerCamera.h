@@ -9,7 +9,7 @@ class AutoscrollerCamera : public Camera {
 public:
 	void update(const sf::Time& frameTime) override;
 	
-	void setFocusCenter(const sf::Vector2f& center) override;
+	void setFocusCenter(const sf::Vector2f& center, bool setHard) override;
 	void setAutoscrollerSpeed(int speed);
 	void setCameraCenterX(float x);
 	void setLevelSize(const sf::Vector2f& levelSize);
