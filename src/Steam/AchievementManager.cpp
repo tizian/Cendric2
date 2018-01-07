@@ -69,6 +69,11 @@ void AchievementManager::clearAchievements() {
 	m_achievements.clear();
 }
 
+void AchievementManager::notifyAchievement(AchievementID achievementId, const std::string& tag, const std::string& message) {
+	if (!contains(AchievementNames, achievementId)) return;
+	notifyAchievement(AchievementNames.at(achievementId), tag, message);
+}
+
 void AchievementManager::notifyAchievement(const std::string& achievement, const std::string& tag, const std::string& message) {
 	if (!m_characterCore) return;
 	if (!contains(m_achievements, achievement)) return;
@@ -78,6 +83,11 @@ void AchievementManager::notifyAchievement(const std::string& achievement, const
 	}
 }
 
+void AchievementManager::notifyAchievementCore(AchievementID achievementId) {
+	if (!contains(AchievementNames, achievementId)) return;
+	notifyAchievementCore(AchievementNames.at(achievementId));
+}
+
 void AchievementManager::notifyAchievementCore(const std::string& achievement) {
 	if (!m_characterCore) return;
 	if (!contains(m_achievements, achievement)) return;
@@ -85,6 +95,11 @@ void AchievementManager::notifyAchievementCore(const std::string& achievement) {
 	if (m_achievements.at(achievement)->notifyCore(m_characterCore)) {
 		unlockAchievement(achievement);
 	}
+}
+
+void AchievementManager::unlockAchievement(AchievementID achievementId) {
+	if (!contains(AchievementNames, achievementId)) return;
+	unlockAchievement(AchievementNames.at(achievementId));
 }
 
 void AchievementManager::unlockAchievement(const std::string& achievement) {

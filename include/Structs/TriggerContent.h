@@ -27,6 +27,7 @@ enum class TriggerContentType {
 	SetMap,
 	SetForcedMap,
 	AchievementUnlocked,
+	AchievementNotifyCore,
 	Music,
 	Credits,
 	MAX,
@@ -36,8 +37,8 @@ enum class TriggerContentType {
 // the trigger content type decides which of 
 // the attributes are used.
 struct TriggerContent final {
-	TriggerContent() : type(TriggerContentType::VOID) {};
-	TriggerContent(TriggerContentType type_) : type(type_) {};
+	TriggerContent() = default;
+	explicit TriggerContent(TriggerContentType type_) : type(type_) {};
 	TriggerContentType type = TriggerContentType::VOID;
 	std::string s1 = "";
 	std::string s2 = "";
@@ -61,7 +62,7 @@ struct TriggerContent final {
 	static TriggerContent removeItem(const std::string& itemID, int amount);
 	static TriggerContent addGold(int amount);
 	static TriggerContent removeGold(int amount);
-	static TriggerContent learnSpell(int spellID);
+	static TriggerContent learnSpell(int id);
 	static TriggerContent setGuild(const std::string& guild);
 	static TriggerContent startLevel(const std::string& levelID, int x, int y);
 	static TriggerContent startMap(const std::string& mapID, int x, int y);
@@ -70,6 +71,7 @@ struct TriggerContent final {
 	static TriggerContent setForcedMap(const std::string& mapID, int x, int y);
 	static TriggerContent startCutscene(const std::string& cutsceneID);
 	static TriggerContent unlockAchievement(const std::string& achievement);
+	static TriggerContent notifyAchievementCore(const std::string& achievement);
 	static TriggerContent setWeather(const std::string& worldId, const std::string& weather, int dimming);
 	static TriggerContent setMusic(const std::string& musicPath);
 };

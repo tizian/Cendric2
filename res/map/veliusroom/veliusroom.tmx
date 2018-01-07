@@ -408,6 +408,7 @@
   </object>
   <object id="198" x="600" y="862.5" width="100" height="37.5">
    <properties>
+    <property name="achievement core" value="ACH_NO_DEATH"/>
     <property name="credits" value=""/>
     <property name="persistent" value=""/>
    </properties>

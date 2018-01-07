@@ -824,6 +824,11 @@ bool CharacterCoreReader::readChestsLooted(std::string& line, CharacterCoreData&
 	return true;
 }
 
+bool CharacterCoreReader::readBooksRead(std::string& line, CharacterCoreData& data) const {
+	data.booksRead.insert(line);
+	return true;
+}
+
 bool CharacterCoreReader::readLevelDeaths(std::string& line, CharacterCoreData& data) const {
 	std::string id;
 	int deaths = 0;

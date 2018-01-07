@@ -35,8 +35,6 @@ void LevelScreen::loadAsync() {
 		return;
 	}
 
-	m_characterCore->initializeLevelMaps(m_levelID);
-
 	m_mainChar = LevelMainCharacterLoader::loadMainCharacter(this, &m_currentLevel);
 	m_currentLevel.loadAfterMainChar(m_mainChar);
 	LevelMainCharacterLoader::loadEquipment(this);

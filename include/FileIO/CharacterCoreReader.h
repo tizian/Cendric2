@@ -35,6 +35,7 @@ private:
 	bool readEnemiesLooted(std::string& line, CharacterCoreData& data) const;
 	bool readItemsLooted(std::string& line, CharacterCoreData& data) const;
 	bool readChestsLooted(std::string& line, CharacterCoreData& data) const;
+	bool readBooksRead(std::string& line, CharacterCoreData& data) const;
 	bool readWaypointsUnlocked(std::string& line, CharacterCoreData& data) const;
 	bool readModifiersUnlocked(std::string& line, CharacterCoreData& data) const;
 	bool readTriggersTriggered(std::string& line, CharacterCoreData& data) const;

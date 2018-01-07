@@ -53,6 +53,7 @@ public:
 	void setMap(const std::string& mapID, int x, int y) const;
 	void startCutscene(const std::string& cutsceneID) const;
 	void unlockAchievement(const std::string& achievement) const;
+	void notifyAchievementCore(const std::string& achievement) const;
 	void setWeather(const std::string& mapId, const std::string& weather, int dimming) const;
 
 	// this works only on a map

@@ -80,10 +80,6 @@ public:
 	void addPermanentAttributes(const AttributeData& attributes);
 	// getter for core part
 	const CharacterCoreData& getData() const;
-	// initializes three empty boolean maps (enemies killed, enemies looted and items looted) for a given level
-	void initializeLevelMaps(const std::string& level);
-	// initializes an empty boolean maps (waypoint unlocked) for a given map
-	void initializeMapMaps(const std::string& map);
 	// get explored tiles information
 	ExploredTiles& getExploredTiles();
 	// signal enemy kill
@@ -182,6 +178,8 @@ public:
 	void resetStoredItems();
 	// sets an achievement unlocked in the data.
 	void setAchievementUnlocked(const std::string& achievement);
+	// sets a book read in the data.
+	void setBookRead(const std::string& itemId);
 	// increase death count by one
 	void increaseDeathCount(const std::string& level);
 	// marks the player as a cheater

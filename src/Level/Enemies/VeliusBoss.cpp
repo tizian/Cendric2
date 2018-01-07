@@ -13,6 +13,7 @@
 #include "ObjectFactory.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
+#include "Steam/AchievementManager.h"
 #include "FileIO/LevelReader.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
@@ -238,6 +239,7 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 }
 
 void VeliusBoss::handleVeliusDead() {
+	// quests
 	if (m_isKorayDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_koray3", "dead");
 		m_screen->getCharacterCore()->setQuestState("missing_koray", QuestState::Failed);
@@ -249,6 +251,14 @@ void VeliusBoss::handleVeliusDead() {
 	if (m_isIninaDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_inina4", "dead");
 		m_screen->getCharacterCore()->setQuestState("missing_inina", QuestState::Failed);
+	}
+
+	// achievements
+	if (m_isKorayDead && m_isRobertDead && m_isIninaDead) {
+		g_achievementManager->unlockAchievement(ACH_KILL_ALL_MAGES);
+	}
+	if (!m_isKorayDead && !m_isRobertDead && !m_isIninaDead) {
+		g_achievementManager->unlockAchievement(ACH_SAVE_ALL_MAGES);
 	}
 }
 

@@ -60,6 +60,7 @@ struct CharacterCoreData final {
 
 	// achievement progress
 	std::set<std::string> achievementsUnlocked;
+	std::set<std::string> booksRead;
 
 	// hints
 	std::vector<std::string> hintsLearned;

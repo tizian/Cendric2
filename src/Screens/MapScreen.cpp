@@ -70,8 +70,6 @@ void MapScreen::loadAsync() {
 		m_characterCore->setOverworld(m_mapID);
 	}
 
-	m_characterCore->initializeMapMaps(m_mapID);
-
 	m_mainChar = MapMainCharacterLoader::loadMainCharacter(this, &m_currentMap);
 	m_currentMap.loadAfterMainChar(m_mainChar);
 	MapMainCharacterLoader::loadEquipment(this);
@@ -80,7 +78,7 @@ void MapScreen::loadAsync() {
 		ExploredTiles& tilesExplored = m_characterCore->getExploredTiles();
 		bool isContained = false;
 		for (auto& it : tilesExplored) {
-			if (it.first.compare(m_mapID) == 0) {
+			if (it.first == m_mapID) {
 				isContained = true;
 				break;
 			}

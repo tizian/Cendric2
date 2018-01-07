@@ -17,6 +17,7 @@ loadDialogue = function(DL)
 
 	DL:createNPCNode(2, 3, "DL_Leeroy_DidIt") -- I did it! See, I was not wrong about those DRAGONS after all.
 	DL:changeQuestState("save_leeroy", "completed")
+	DL:unlockAchievement("ACH_LEEROY")
 	DL:addNode()
 
 

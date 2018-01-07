@@ -224,6 +224,10 @@ void WorldCallback::unlockAchievement(const std::string& achievement) const {
 	TriggerContent::executeTrigger(TriggerContent::unlockAchievement(achievement), m_screen);
 }
 
+void WorldCallback::notifyAchievementCore(const std::string& achievement) const {
+	TriggerContent::executeTrigger(TriggerContent::notifyAchievementCore(achievement), m_screen);
+}
+
 void WorldCallback::setWeather(const std::string& mapId, const std::string& weather, int dimming) const {
 	TriggerContent::executeTrigger(TriggerContent::setWeather(mapId, weather, dimming), m_screen);
 }

@@ -384,6 +384,8 @@ void WorldScreen::setBook(const Item& document, bool isReopenInventory) {
 	m_bookWindow->addCloseButton([&]() {
 		m_bookWindowDisposed = true;
 	});
+
+	m_characterCore->setBookRead(document.getID());
 }
 
 void WorldScreen::handleBookWindow(const sf::Time& frameTime) {

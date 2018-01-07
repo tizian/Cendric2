@@ -50,6 +50,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeEnemiesLooted(data));
 		toHash.append(writeItemsLooted(data));
 		toHash.append(writeChestsLooted(data));
+		toHash.append(writeBooksRead(data));
 		toHash.append(writeWaypointsUnlocked(data));
 		toHash.append(writeModifiersUnlocked(data));
 		toHash.append(writeTriggersTriggered(data));
@@ -139,6 +140,7 @@ std::string CharacterCoreWriter::writeEnemiesKilled(const CharacterCoreData& dat
 	std::string enemiesKilled = "# enemies killed in level:\n";
 
 	for (auto& it : data.enemiesKilled) {
+		if (it.second.empty()) continue;
 		std::string enemyKilled = std::string(ENEMIES_KILLED);
 		enemyKilled.append(":");
 		enemyKilled.append(it.first);
@@ -155,6 +157,7 @@ std::string CharacterCoreWriter::writeEnemiesLooted(const CharacterCoreData& dat
 	std::string enemiesLooted = "# enemies looted in level:\n";
 
 	for (auto& it : data.enemiesLooted) {
+		if (it.second.empty()) continue;
 		std::string enemyLooted = std::string(ENEMIES_LOOTED);
 		enemyLooted.append(":");
 		enemyLooted.append(it.first);
@@ -171,6 +174,7 @@ std::string CharacterCoreWriter::writeItemsLooted(const CharacterCoreData& data)
 	std::string itemsLooted = "# items looted in level:\n";
 
 	for (auto& it : data.itemsLooted) {
+		if (it.second.empty()) continue;
 		std::string itemLooted = std::string(ITEMS_LOOTED);
 		itemLooted.append(":");
 		itemLooted.append(it.first);
@@ -187,6 +191,7 @@ std::string CharacterCoreWriter::writeWaypointsUnlocked(const CharacterCoreData&
 	std::string waypointsUnlocked = "# waypoints unlocked in map:\n";
 
 	for (auto& it : data.waypointsUnlocked) {
+		if (it.second.empty()) continue;
 		std::string waypointUnlocked = std::string(WAYPOINTS_UNLOCKED);
 		waypointUnlocked.append(":");
 		waypointUnlocked.append(it.first);
@@ -206,6 +211,7 @@ std::string CharacterCoreWriter::writeTriggersTriggered(const CharacterCoreData&
 	std::string triggersTriggered = "# triggers triggered in world:\n";
 
 	for (auto& it : data.triggersTriggered) {
+		if (it.second.empty()) continue;
 		std::string triggerTriggered = std::string(TRIGGERS_TRIGGERED);
 		triggerTriggered.append(":");
 		triggerTriggered.append(it.first);
@@ -222,6 +228,7 @@ std::string CharacterCoreWriter::writeDoorsOpen(const CharacterCoreData& data) c
 	std::string doorsOpen = "# doors open in world:\n";
 
 	for (auto& it : data.doorsOpen) {
+		if (it.second.empty()) continue;
 		std::string doorOpen = std::string(DOORS_OPEN);
 		doorOpen.append(":");
 		doorOpen.append(it.first);
@@ -278,6 +285,7 @@ std::string CharacterCoreWriter::writeChestsLooted(const CharacterCoreData& data
 	std::string chestsLooted = "# chests looted in level:\n";
 
 	for (auto& it : data.chestsLooted) {
+		if (it.second.empty()) continue;
 		std::string chestLooted = std::string(CHESTS_LOOTED);
 		chestLooted.append(":");
 		chestLooted.append(it.first);
@@ -326,6 +334,7 @@ std::string CharacterCoreWriter::writeModifiersUnlocked(const CharacterCoreData&
 	std::string modifiersUnlocked = "# modifiers unlocked:\n";
 
 	for (auto& it : data.modifiersUnlocked) {
+		if (it.second.empty()) continue;
 		std::string modifierUnlocked = std::string(MODIFIERS_UNLOCKED);
 		modifierUnlocked.append(":");
 		modifierUnlocked.append(it.first);
@@ -431,6 +440,20 @@ std::string CharacterCoreWriter::writeAchievementsUnlocked(const CharacterCoreDa
 	}
 
 	return achList;
+}
+
+std::string CharacterCoreWriter::writeBooksRead(const CharacterCoreData& data) const {
+	std::string bookList = "# books read:\n";
+
+	for (auto& it : data.booksRead) {
+		std::string ach = std::string(BOOKS_READ);
+		ach.append(":");
+		ach.append(it);
+		ach.append("\n");
+		bookList.append(ach);
+	}
+
+	return bookList;
 }
 
 std::string CharacterCoreWriter::writeGuild(const CharacterCoreData& data) const {

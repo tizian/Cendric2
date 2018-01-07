@@ -482,6 +482,18 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
+				else if (name.find("achievement core") != std::string::npos) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, achievemnet core value property not found.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::AchievementNotifyCore);
+					content.s1 = textAttr;
+
+					trigger.content.push_back(content);
+				}
 				else if (name.find("quest state") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {

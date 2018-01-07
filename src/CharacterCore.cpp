@@ -201,53 +201,36 @@ void CharacterCore::loadWeapon() {
 	}
 }
 
-void CharacterCore::initializeLevelMaps(const std::string& level) {
-	// if these entries for the given level already exist, an insert will do nothing.
-	m_data.enemiesKilled.insert({ level, std::set<int>() });
-	m_data.enemiesLooted.insert({ level, std::set<int>() });
-	m_data.itemsLooted.insert({ level, std::set<int>() });
-	m_data.chestsLooted.insert({ level, std::set<int>() });
-	m_data.levelDeaths.insert({ level, 0 });
-	m_data.triggersTriggered.insert({ level, std::set<int>() });
-	m_data.doorsOpen.insert({ level, std::set<int>() });
-}
-
-void CharacterCore::initializeMapMaps(const std::string& map) {
-	// if these entries for the given map already exist, an insert will do nothing.
-	m_data.waypointsUnlocked.insert({ map, std::map<int, sf::Vector2f>() });
-	m_data.triggersTriggered.insert({ map, std::set<int>() });
-}
-
 ExploredTiles& CharacterCore::getExploredTiles() {
 	return m_data.tilesExplored;
 }
 
 void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
-	m_data.enemiesKilled.at(level).insert(pos);
+	m_data.enemiesKilled[level].insert(pos);
 }
 
 void CharacterCore::setEnemyLooted(const std::string& level, int pos) {
-	m_data.enemiesLooted.at(level).insert(pos);
+	m_data.enemiesLooted[level].insert(pos);
 }
 
 void CharacterCore::setItemLooted(const std::string& level, int pos) {
-	m_data.itemsLooted.at(level).insert(pos);
+	m_data.itemsLooted[level].insert(pos);
 }
 
 void CharacterCore::setChestLooted(const std::string& level, int pos) {
-	m_data.chestsLooted.at(level).insert(pos);
+	m_data.chestsLooted[level].insert(pos);
 }
 
 void CharacterCore::setTriggerTriggered(const std::string& world, int objectID) {
-	m_data.triggersTriggered.at(world).insert(objectID);
+	m_data.triggersTriggered[world].insert(objectID);
 }
 
 void CharacterCore::setDoorOpen(const std::string& world, int objectID) {
-	m_data.doorsOpen.at(world).insert(objectID);
+	m_data.doorsOpen[world].insert(objectID);
 }
 
 void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
-	m_data.waypointsUnlocked.at(map).insert({ objectID, pos });
+	m_data.waypointsUnlocked[map].insert({ objectID, pos });
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
@@ -515,7 +498,7 @@ void CharacterCore::learnModifier(SpellModifierType modifierType, const std::str
 		m_data.modfiersLearned.insert({ modifierType, 0 });
 	}
 	m_data.modfiersLearned[modifierType] = std::min(3, m_data.modfiersLearned[modifierType] + 1);
-	g_achievementManager->notifyAchievementCore("ACH_ALL_MODIFIERS");
+	g_achievementManager->notifyAchievementCore(ACH_ALL_MODIFIERS);
 }
 
 void CharacterCore::learnHint(const std::string& hintKey) {
@@ -543,9 +526,9 @@ void CharacterCore::addReputation(FractionID fraction, int amount) {
 	}
 
 	m_data.reputationProgress.at(fraction) = std::min(100, m_data.reputationProgress.at(fraction) + amount);
-	g_achievementManager->notifyAchievementCore("ACH_CLERIC_REP_70");
-	g_achievementManager->notifyAchievementCore("ACH_NECRO_REP_70");
-	g_achievementManager->notifyAchievementCore("ACH_THIEF_REP_70");
+	g_achievementManager->notifyAchievementCore(ACH_CLERIC_REP_70);
+	g_achievementManager->notifyAchievementCore(ACH_NECRO_REP_70);
+	g_achievementManager->notifyAchievementCore(ACH_THIEF_REP_70);
 }
 
 void CharacterCore::setGuild(FractionID fraction) {
@@ -573,7 +556,7 @@ std::map<std::string, int>* CharacterCore::getItems() {
 
 void CharacterCore::addGold(int gold) {
 	m_data.gold += std::max(gold, 0);
-	g_achievementManager->notifyAchievementCore("ACH_GOLD_1000");
+	g_achievementManager->notifyAchievementCore(ACH_GOLD_1000);
 }
 
 void CharacterCore::removeGold(int gold) {
@@ -851,7 +834,7 @@ void CharacterCore::setCharacterJailed() {
 	equipItem(spawn->weapon_id, ItemType::Equipment_weapon);
 
 	// achievement for getting arrested
-	g_achievementManager->unlockAchievement("ACH_CRIMINAL");
+	g_achievementManager->unlockAchievement(ACH_CRIMINAL);
 
 	delete spawn;
 }
@@ -871,6 +854,10 @@ void CharacterCore::resetStoredItems() {
 
 void CharacterCore::setAchievementUnlocked(const std::string& achievement) {
 	m_data.achievementsUnlocked.insert(achievement);
+}
+
+void CharacterCore::setBookRead(const std::string& itemId) {
+	m_data.booksRead.insert(itemId);
 }
 
 void CharacterCore::increaseDeathCount(const std::string& level) {

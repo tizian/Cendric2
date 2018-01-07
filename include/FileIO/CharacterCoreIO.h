@@ -30,6 +30,7 @@ protected:
 	const char* ENEMIES_LOOTED = "enemies.looted";
 	const char* ITEMS_LOOTED = "items.looted";
 	const char* CHESTS_LOOTED = "chests.looted";
+	const char* BOOKS_READ = "books.read";
 	const char* MODIFIERS_UNLOCKED = "modifiers.unlocked";
 	const char* WAYPOINTS_UNLOCKED = "waypoints.unlocked";
 	const char* TRIGGERS_TRIGGERED = "triggers.triggered";

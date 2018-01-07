@@ -34,6 +34,7 @@ npc.id:npc_leeroy2
 	tag:2
 	# triggers: 
 	trigger:DL:changeQuestState("save_leeroy", "completed")
+	trigger:DL:unlockAchievement("ACH_LEEROY")
 	# translation: 
 	translation.tag:DL_Leeroy_DidIt
 	translation.en:I did it! See, I was not wrong about those DRAGONS after all.

@@ -79,6 +79,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	case TriggerContentType::AchievementUnlocked:
 		g_achievementManager->unlockAchievement(content.s1);
 		break;
+	case TriggerContentType::AchievementNotifyCore:
+		g_achievementManager->notifyAchievementCore(content.s1);
+		break;
 	case TriggerContentType::LearnSpell: {
 		SpellID id = static_cast<SpellID>(content.i1);
 		if (id <= SpellID::VOID || id >= SpellID::MAX) 
@@ -336,6 +339,16 @@ TriggerContent TriggerContent::unlockAchievement(const std::string& achievement)
 		return TriggerContent();
 	}
 	TriggerContent content(TriggerContentType::AchievementUnlocked);
+	content.s1 = achievement;
+	return content;
+}
+
+TriggerContent TriggerContent::notifyAchievementCore(const std::string& achievement) {
+	if (achievement.empty()) {
+		g_logger->logError("TriggerContent", "Achievement ID cannot be empty");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::AchievementNotifyCore);
 	content.s1 = achievement;
 	return content;
 }
