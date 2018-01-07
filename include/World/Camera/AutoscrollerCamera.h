@@ -11,7 +11,6 @@ public:
 	
 	void setFocusCenter(const sf::Vector2f& center, bool setHard) override;
 	void setAutoscrollerSpeed(int speed);
-	void setCameraCenterX(float x);
 	void setLevelSize(const sf::Vector2f& levelSize);
 
 private:

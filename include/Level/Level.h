@@ -62,7 +62,7 @@ public:
 	const std::set<SpellType>& getLockedMagic() const;
 
 private:
-	void loadCamera();
+	void loadCamera(LevelMainCharacter* mainChar);
 
 private:
 	// data loaded by the level loader

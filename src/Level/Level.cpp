@@ -20,20 +20,25 @@ Level::Level() : World() {
 	m_evilTiles.insert(LevelDynamicTileID::Damaging);
 }
 
-void Level::loadCamera() {
+void Level::loadCamera(LevelMainCharacter* mainChar) {
 	if (abs(m_levelData.autoscrollerSpeed) > 0) {
 		auto cam = new AutoscrollerCamera();
+		cam->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
+		cam->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
 		cam->setAutoscrollerSpeed(m_levelData.autoscrollerSpeed);
-		cam->setCameraCenterX(WINDOW_WIDTH * 0.4);
+		cam->setFocusCenter(mainChar->getCenter(), true);
+		cam->setCameraCenterX(WINDOW_WIDTH * 0.5f, true);
 		cam->setLevelSize(sf::Vector2f(m_levelData.mapSize.x * TILE_SIZE_F, m_levelData.mapSize.y * TILE_SIZE_F));
+		mainChar->setAutoscroller(cam);
 		m_camera = cam;
 	}
 	else {
 		auto cam = new SpeedupPullCamera();
+		cam->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
+		cam->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
+		cam->setFocusCenter(mainChar->getCenter(), true);
 		m_camera = cam;
 	}
-	m_camera->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
-	m_camera->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
 }
 
 Level::~Level() {
@@ -52,8 +57,7 @@ void Level::dispose() {
 void Level::loadAfterMainChar(MainCharacter* mainChar) {
 	LevelLoader loader;
 	loader.loadAfterMainChar(m_levelData, dynamic_cast<LevelScreen*>(m_screen), this);
-	dynamic_cast<LevelMainCharacter*>(mainChar)->setAutoscroller(dynamic_cast<AutoscrollerCamera*>(m_camera));
-	m_camera->setFocusCenter(mainChar->getCenter(), true);
+	loadCamera(dynamic_cast<LevelMainCharacter*>(mainChar));
 }
 
 bool Level::load(const std::string& id, WorldScreen* screen) {
@@ -84,7 +88,6 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	m_backgroundTileMap.load(m_levelData, m_levelData.backgroundTileLayers);
 	m_lightedForegroundTileMap.load(m_levelData, m_levelData.lightedForegroundTileLayers);
 	m_foregroundTileMap.load(m_levelData, m_levelData.foregroundTileLayers);
-	loadCamera();
 
 	g_resourceManager->loadLevelResources();
 

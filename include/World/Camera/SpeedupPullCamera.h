@@ -5,7 +5,5 @@
 
 class SpeedupPullCamera : public Camera {
 public:
-	void update(const sf::Time& frameTime) override;
-
 	void setFocusCenter(const sf::Vector2f& center, bool setHard) override;
 };
