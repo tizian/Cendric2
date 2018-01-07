@@ -22,9 +22,7 @@ Level::Level() : World() {
 
 void Level::loadCamera(LevelMainCharacter* mainChar) {
 	if (abs(m_levelData.autoscrollerSpeed) > 0) {
-		auto cam = new AutoscrollerCamera();
-		cam->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
-		cam->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
+		auto cam = new AutoscrollerCamera(CAMERA_WINDOW_WIDTH, CAMERA_WINDOW_HEIGHT);
 		cam->setAutoscrollerSpeed(m_levelData.autoscrollerSpeed);
 		cam->setFocusCenter(mainChar->getCenter(), true);
 		cam->setCameraCenterX(WINDOW_WIDTH * 0.5f, true);
@@ -33,12 +31,11 @@ void Level::loadCamera(LevelMainCharacter* mainChar) {
 		m_camera = cam;
 	}
 	else {
-		auto cam = new SpeedupPullCamera();
-		cam->setCameraWindowWidth(CAMERA_WINDOW_WIDTH);
-		cam->setCameraWindowHeight(CAMERA_WINDOW_HEIGHT);
+		auto cam = new SpeedupPullCamera(CAMERA_WINDOW_WIDTH, CAMERA_WINDOW_HEIGHT);
 		cam->setFocusCenter(mainChar->getCenter(), true);
 		m_camera = cam;
 	}
+	m_camera->setLevelMainCharacter(mainChar);
 }
 
 Level::~Level() {

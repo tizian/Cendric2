@@ -7,6 +7,7 @@ class Screen;
 
 class AutoscrollerCamera : public Camera {
 public:
+	AutoscrollerCamera(float width, float height) : Camera(width, height) {};
 	void update(const sf::Time& frameTime) override;
 	
 	void setFocusCenter(const sf::Vector2f& center, bool setHard) override;

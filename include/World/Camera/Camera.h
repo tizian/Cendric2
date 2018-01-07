@@ -2,14 +2,15 @@
 
 #include "global.h"
 
+class LevelMainCharacter;
+
 class Camera {
 public:
+	Camera(float width, float height);
 	virtual ~Camera() {}
 
 	virtual void update(const sf::Time& frameTime);
 
-	void setCameraWindowHeight(float height);
-	void setCameraWindowWidth(float width);
 	virtual void setFocusCenter(const sf::Vector2f& center, bool setHard = false);
 	const sf::Vector2f& getCameraCenter() const;
 
@@ -21,7 +22,10 @@ public:
 	void setCameraLeft(float cameraLeft, bool setHard);
 	void setCameraTop(float cameraTop, bool setHard);
 
+	void setLevelMainCharacter(LevelMainCharacter* mainChar);
+
 protected:
+	LevelMainCharacter* m_mainChar = nullptr;
 	sf::Vector2f m_currentFocusCenter;
 	sf::Vector2f m_cameraCenter;
 	float m_cameraLeft = 0;

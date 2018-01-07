@@ -1,20 +1,26 @@
 #include "World/Camera/Camera.h"
 #include "InputController.h"
+#include "Level/LevelMainCharacter.h"
 
 const float Camera::CAMERA_SPEED_PER_S = 200.f;
 const float Camera::CAMERA_LERP_SPEED = 5.f;
+
+Camera::Camera(float width, float height) {
+	m_cameraWindowWidth = width;
+	m_cameraWindowHeight = height;
+}
 
 void Camera::update(const sf::Time& frameTime) {
 	m_currentFrameTime = frameTime;
 	if (g_inputController->isKeyActive(Key::Up)) {
 		auto newCenterY = m_cameraCenter.y - CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		if (newCenterY > m_currentFocusCenter.y - m_cameraWindowHeight * 0.5f)
-			setCameraCenterY(newCenterY, false);
+			setCameraCenterY(newCenterY, !m_mainChar->isClimbing());
 	}
 	if (g_inputController->isKeyActive(Key::Down)) {
 		auto newCenterY = m_cameraCenter.y + CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		if (newCenterY < m_currentFocusCenter.y + m_cameraWindowHeight * 0.5f)
-			setCameraCenterY(newCenterY, false);
+			setCameraCenterY(newCenterY, !m_mainChar->isClimbing());
 	}
 }
 
@@ -27,20 +33,16 @@ const sf::Vector2f& Camera::getCameraCenter() const {
 	return m_cameraCenter;
 }
 
-void Camera::setCameraWindowHeight(float height) {
-	m_cameraWindowHeight = height;
-}
-
-void Camera::setCameraWindowWidth(float width) {
-	m_cameraWindowWidth = width;
-}
-
 void Camera::setCameraCenterX(float centerX, bool setHard) {
 	setCameraLeft(centerX - m_cameraWindowWidth * 0.5f, setHard);
 }
 
 void Camera::setCameraCenterY(float centerY, bool setHard) {
 	setCameraTop(centerY - m_cameraWindowHeight * 0.5f, setHard);
+}
+
+void Camera::setLevelMainCharacter(LevelMainCharacter* mainChar) {
+	m_mainChar = mainChar;
 }
 
 void Camera::setCameraTop(float cameraTop, bool setHard) {
