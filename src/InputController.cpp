@@ -52,8 +52,8 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update mouse positions
 	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
-	pos.x = pos.x / m_windowScale.x;
-	pos.y = pos.y / m_windowScale.y;
+	pos.x = pos.x / (m_windowScale.x * m_spriteScale.x);
+	pos.y = pos.y / (m_windowScale.y * m_spriteScale.y);
 	sf::Vector2f view = sf::Vector2f(
 		m_renderTexture->getView().getCenter().x - m_renderTexture->getView().getSize().x * 0.5f,
 		m_renderTexture->getView().getCenter().y - m_renderTexture->getView().getSize().y * 0.5f);
@@ -69,9 +69,10 @@ void InputController::update(const sf::Time& frameTime) {
 	m_cursor.update(frameTime);
 }
 
-void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* texture) {
+void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* texture, const sf::Vector2f& spriteScale) {
 	m_mainWindow = window;
 	m_renderTexture = texture;
+	m_spriteScale = spriteScale;
 	m_isWindowFocused = m_mainWindow->hasFocus();
 	setCurrentWindowSize(m_mainWindow->getSize().x, m_mainWindow->getSize().y);
 }
@@ -82,18 +83,12 @@ void InputController::init() {
 	}
 
 	m_keyJustPressedMap = m_keyActiveMap;
-
-	m_windowSize.x = WINDOW_WIDTH;
-	m_windowSize.y = WINDOW_HEIGHT;
 }
 
 void InputController::setCurrentWindowSize(int width, int height) {
-	m_windowSize.x = width;
-	m_windowSize.y = height;
-
-	m_windowScale.x = m_windowSize.x / static_cast<float>(WINDOW_WIDTH);
-	m_windowScale.y = m_windowSize.y / static_cast<float>(WINDOW_HEIGHT);
-	m_cursor.setScale(m_windowScale);
+	m_windowScale.x = (width / (static_cast<float>(WINDOW_WIDTH))) / m_spriteScale.x;
+	m_windowScale.y = (height / (static_cast<float>(WINDOW_HEIGHT))) / m_spriteScale.y;
+	m_cursor.setScale(m_spriteScale);
 }
 
 const sf::Vector2f& InputController::getMousePosition() const {

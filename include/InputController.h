@@ -12,7 +12,7 @@ public:
 	// refreshes the keymap
 	void update(const sf::Time& frameTime);
 
-	void setWindow(sf::RenderWindow* window, sf::RenderTexture* texture);
+	void setWindow(sf::RenderWindow* window, sf::RenderTexture* texture, const sf::Vector2f& spriteScale);
 	void setCurrentWindowSize(int width, int height);
 
 	// text input
@@ -92,9 +92,9 @@ private:
 
 	float m_mouseWheelScrollTicks = 0;
 
-	// current window size. Used for mouse position and dependent on resize events
-	sf::Vector2i m_windowSize;
+	// current window size (only used for fullscreen events). Used for mouse position and dependent on resize events
 	sf::Vector2f m_windowScale;
+	sf::Vector2f m_spriteScale;
 
 	// is the mouse inside our view? we only count mouse clicks if it is so!
 	bool m_isMouseInsideView;

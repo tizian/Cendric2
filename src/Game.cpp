@@ -54,7 +54,7 @@ void Game::reloadWindow() {
 
 	conf.isWindowReload = false;
 
-	g_inputController->setWindow(&m_mainWindow, &m_renderTexture);
+	g_inputController->setWindow(&m_mainWindow, &m_renderTexture, scale);
 	g_renderTexture = &m_renderTexture;
 }
 
