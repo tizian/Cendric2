@@ -1,4 +1,4 @@
--- Yasha Puzzle (Thief) Key
+-- Yasha Puzzle (Thief) Key, not in the all keys achievement
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_yashathief', 'key', 750, 250, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_yashathief', 'item', 'Blue Key','Blauer Schlüssel','Blaue Schlüssel');
@@ -29,18 +29,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower_4', 'key', 250, 700, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_4', 'item', 'Tower Key (4)','Turmschlüssel (4)','Turmschlüssel (4)');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_4', 'item_desc', 'Opens the fourth door of the old tower in the Marshlands.','Öffnet die vierte Tür des alten Turms im Sumpfland.','Macht di viert Türe im alte Turm im Sumpfland uf.');
-
--- Test Key 2
-
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_test_2', 'key', 100, 450, -1);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_2', 'item', 'Test Key 2','Test Schlüssel 2','Test Schlüssel 2');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_2', 'item_desc', 'A heavy iron key.','Ein schwerer Eisenschlüssel.','En schwere Iiseschlüssel.');
-
--- Test Key 3
-
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_test_3', 'key', 150, 450, -1);
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_3', 'item', 'Test Key 3','Test Schlüssel 3','Test Schlüssel 3');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_test_3', 'item_desc', 'A large brass key.','Ein grosser Messingschlüssel.','En grosse Messingschlüssel.');
 
 -- Small Silver Key
 

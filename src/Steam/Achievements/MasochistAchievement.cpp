@@ -5,5 +5,8 @@
 REGISTER_ACHIEVEMENT(AchievementID::ACH_MASOCHIST, MasochistAchievement)
 
 bool MasochistAchievement::notifyCore(const CharacterCore* core) {
-	return false;
+	auto const& items = core->getData().items;
+
+	return
+		contains(items, std::string("eq_lavaback"));
 }

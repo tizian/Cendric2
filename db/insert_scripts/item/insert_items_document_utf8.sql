@@ -255,3 +255,29 @@ Wiiteri Experiment sind verbotte worde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_antimagic', 'document', 800, 50, 50);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_antimagic', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_antimagic', 1, 100, 400, 50, 50);
+
+-- Arazath's Letter
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item', 'Arazath''s Letter','Arazaths Brief','Em Arazath sin Brief');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item_desc', 'This letter was in the last chest on top of the mysterious tower.','Dieser Brief war in der letzten Truhe auf dem mysteriösen Turm.','De Brief isch ide letzte True ufem  mysteriöse Turm gsi.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_arazathletter', 'document', 500, 300, -1);
+INSERT INTO item_document_page(item_id, page_nr, content) values ('do_arazathletter', 0, 'ArazathLetter');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ArazathLetter', 'document',
+'Dear Etoz:
+Finally, you have grown into the skillful little mage I always hoped you would become. You do not know how glad you have made your old Pa. This weapon is now yours. It has been passed from father to son for generations, but after your father slipped in the third tower I knew I had to break tradition and skip a generation. 
+
+If you had any accidents in the tower, pleace heal yourself with the potion I left in the chest. 
+
+- Arazath',
+'Lieber Etoz
+Endlich bist du ein fähiger junger Magier geworden, wie ich es immer erhofft habe. Du weisst nicht, wie froh du deinen alten Opa gemacht hast. Diese Waffe soll nun dir gehören. Sie wurde für Generationen von Vater zu Sohn weitergereicht, aber als dein Vater im dritten Turm ausgerutscht war, wusste ich, dass ich die Tradition brechen und eine Generation überspringen musste.
+
+Falls dir im Turm ein Unglück zugestossen ist, heile dich mit dem Trank, den ich in der Truhe gelassen habe.
+
+- Arazath',
+'Liebe Etoz
+Endlich bisch so en fähige junge Magier worde, we ich''s immer vo dir erhofft ha. Du weisch nid, we froh du din alte Opa gmacht hesch. Die Waffe söl ez dir ghöre. Si isch für Generatione vo Vatter zu Sohn wiitergä worde, aber wo din Vatter im dritte Turm usgrutscht isch, hani gwüsst, dasi die Tradition breche und e Generation überspringe mun.
+
+Falls der im Turm es Unglück passiert isch, heil dich mit dem Trank, woni der ide True glo ha.
+
+- Arazath');

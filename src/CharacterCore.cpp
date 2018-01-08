@@ -231,6 +231,7 @@ void CharacterCore::setDoorOpen(const std::string& world, int objectID) {
 
 void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
 	m_data.waypointsUnlocked[map].insert({ objectID, pos });
+	g_achievementManager->notifyAchievementCore(ACH_ALL_WAYPOINTS);
 }
 
 const QuestData* CharacterCore::getQuestData(const std::string& questID) const {
@@ -593,6 +594,9 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 	else {
 		m_data.items.insert({ item, quantity });
 	}
+
+	g_achievementManager->notifyAchievementCore(ACH_ALL_KEYS);
+	g_achievementManager->notifyAchievementCore(ACH_MASOCHIST);
 }
 
 void CharacterCore::removeItem(const std::string& item, int quantity) {
@@ -858,6 +862,7 @@ void CharacterCore::setAchievementUnlocked(const std::string& achievement) {
 
 void CharacterCore::setBookRead(const std::string& itemId) {
 	m_data.booksRead.insert(itemId);
+	g_achievementManager->notifyAchievementCore(ACH_ALL_BOOKS);
 }
 
 void CharacterCore::increaseDeathCount(const std::string& level) {

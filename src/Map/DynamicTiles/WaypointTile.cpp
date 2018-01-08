@@ -47,7 +47,7 @@ void WaypointTile::loadAnimation(int skinNr) {
 
 	// possibly activate waypoint tile if already unlocked.
 	const CharacterCoreData& coreData = m_screen->getCharacterCore()->getData();
-	if (contains(coreData.waypointsUnlocked.at(m_map->getID()), m_objectID))
+	if (contains(coreData.waypointsUnlocked, m_map->getID()) && contains(coreData.waypointsUnlocked.at(m_map->getID()), m_objectID))
 		setActive();
 }
 
