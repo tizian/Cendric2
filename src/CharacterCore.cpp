@@ -351,6 +351,10 @@ bool CharacterCore::isSpellEquipped(SpellID id) const {
 	return false;
 }
 
+bool CharacterCore::isWaypointUnlocked(const std::string& mapId, int objectId) const {
+	return contains(m_data.waypointsUnlocked, mapId) && contains(m_data.waypointsUnlocked.at(mapId), objectId);
+}
+
 bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
 	if (!contains(m_data.conditionProgress, conditionType)) {
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });
@@ -415,13 +419,13 @@ bool CharacterCore::isTriggerTriggered(const std::string& worldID, int objectID)
 int CharacterCore::getItemAmount(const std::string& itemID) const {
 	if (itemID.empty()) return 0;
 
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		return m_data.gold;
 	}
 
 	int foundAmount = 0;
 	for (auto& item : m_data.equippedItems) {
-		if (item.second.compare(itemID) == 0) {
+		if (item.second == itemID) {
 			foundAmount++;
 		}
 	}
@@ -435,7 +439,7 @@ int CharacterCore::getItemAmount(const std::string& itemID) const {
 int CharacterCore::getStoredItemAmount(const std::string& itemID) const {
 	if (itemID.empty()) return 0;
 
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		return m_data.storedGold;
 	}
 
@@ -460,7 +464,7 @@ bool CharacterCore::hasItem(const std::string& itemID, int amount) const {
 
 bool CharacterCore::isItemEquipped(const std::string& itemID) const {
 	for (auto& it : m_data.equippedItems) {
-		if (it.second.compare(itemID) == 0) {
+		if (it.second == itemID) {
 			return true;
 		}
 	}
@@ -567,7 +571,7 @@ void CharacterCore::removeGold(int gold) {
 void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	if (itemID.empty()) return;
 
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		if (amount < 0) {
 			removeGold(-amount);
 		}
@@ -617,7 +621,7 @@ void CharacterCore::removeItem(const std::string& item, int quantity) {
 	// also look for equipped items
 	if (quantityEreased < quantity) {
 		for (auto& eqItem : m_data.equippedItems) {
-			if (eqItem.second.compare(item) == 0) {
+			if (eqItem.second == item) {
 				eqItem.second.clear();
 				++quantityEreased;
 			}
@@ -867,7 +871,7 @@ void CharacterCore::setBookRead(const std::string& itemId) {
 
 void CharacterCore::increaseDeathCount(const std::string& level) {
 	m_data.deaths++;
-	
+
 	if (!contains(m_data.levelDeaths, level)) return;
 	m_data.levelDeaths.at(level)++;
 }
