@@ -254,8 +254,8 @@ std::string CharacterCoreWriter::writeTilesExplored(const CharacterCoreData& dat
 		tiles.append(std::to_string(it.second.first.y));
 		tiles.append(",");
 		CBits byte;
-		int iterations = static_cast<int>(std::floor(it.second.second.size() / 8.f) * 8);
-		int i = 0;
+		auto const iterations = static_cast<size_t>(std::floor(it.second.second.size() / 8.f) * 8);
+		size_t i = 0;
 
 		for (; i < iterations; i += 8) {
 			byte.bits.b0 = it.second.second[i + 0];
