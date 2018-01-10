@@ -55,6 +55,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("learnSpell", &DialogueLoader::learnSpell)
 		.addFunction("setGuild", &DialogueLoader::setGuild)
 		.addFunction("unlockAchievement", &DialogueLoader::unlockAchievement)
+		.addFunction("notifyAchievement", &DialogueLoader::notifyAchievement)
 		.addFunction("setWeather", &DialogueLoader::setWeather)
 		.addFunction("gotoNode", &DialogueLoader::gotoNode)
 		.addFunction("setRoot", &DialogueLoader::setRoot)
@@ -312,6 +313,15 @@ void DialogueLoader::unlockAchievement(const std::string& achievement) {
 		return;
 	}
 	TriggerContent content = TriggerContent::unlockAchievement(achievement);
+	if (content.isValid()) m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::notifyAchievement(const std::string& achievement, const std::string& message) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot start notifyAchievement: no node created.");
+		return;
+	}
+	TriggerContent content = TriggerContent::notifyAchievement(achievement, message);
 	if (content.isValid()) m_currentNode->content.push_back(content);
 }
 

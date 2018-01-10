@@ -69,16 +69,16 @@ void AchievementManager::clearAchievements() {
 	m_achievements.clear();
 }
 
-void AchievementManager::notifyAchievement(AchievementID achievementId, const std::string& tag, const std::string& message) {
+void AchievementManager::notifyAchievement(AchievementID achievementId, const std::string& message) {
 	if (!contains(AchievementNames, achievementId)) return;
-	notifyAchievement(AchievementNames.at(achievementId), tag, message);
+	notifyAchievement(AchievementNames.at(achievementId), message);
 }
 
-void AchievementManager::notifyAchievement(const std::string& achievement, const std::string& tag, const std::string& message) {
+void AchievementManager::notifyAchievement(const std::string& achievement, const std::string& message) {
 	if (!m_characterCore) return;
 	if (!contains(m_achievements, achievement)) return;
 
-	if (m_achievements.at(achievement)->notify(tag, message)) {
+	if (m_achievements.at(achievement)->notify(message)) {
 		unlockAchievement(achievement);
 	}
 }

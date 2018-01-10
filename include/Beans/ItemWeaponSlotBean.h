@@ -12,19 +12,19 @@ struct ItemWeaponSlotBean final : DatabaseBean {
 	int modifier_count;
 
 	static SpellType resolveSlotType(const std::string& _slot_type) {
-		if (_slot_type.compare("elemental") == 0) {
+		if (_slot_type == "elemental") {
 			return SpellType::Elemental;
 		} 
-		if (_slot_type.compare("divine") == 0) {
+		if (_slot_type == "divine") {
 			return SpellType::Divine;
 		}
-		if (_slot_type.compare("necromancy") == 0) {
+		if (_slot_type == "necromancy") {
 			return SpellType::Necromancy;
 		}
-		if (_slot_type.compare("twilight") == 0) {
+		if (_slot_type == "twilight") {
 			return SpellType::Twilight;
 		}
-		if (_slot_type.compare("meta") == 0) {
+		if (_slot_type == "meta") {
 			return SpellType::Meta;
 		}
 		return SpellType::VOID;

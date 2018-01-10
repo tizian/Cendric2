@@ -157,7 +157,7 @@ void VeliusBoss::callToDie(const sf::Color& color) {
 	for (auto go : *m_screen->getObjects(_Enemy)) {
 		callee = dynamic_cast<VeliusVictim*>(go);
 		if (!callee) continue;
-		if (callee->getEnemyName().compare(calleeName) == 0) {
+		if (callee->getEnemyName() == calleeName) {
 			break;
 		}
 	}

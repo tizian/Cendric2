@@ -100,7 +100,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					enemyData.questTargets.push_back(std::pair<std::string, std::string>(questID, questtargetText));
 					enemyData.isUnique = true;
 				}
-				else if (itemText.compare("questcondition") == 0) {
+				else if (itemText == "questcondition") {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, quest condition value attribute is empty.");
@@ -112,23 +112,23 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					enemyData.questCondition = std::pair<std::string, std::string>(questID, questcondition);
 					enemyData.isUnique = true;
 				}
-				else if (itemText.compare("unique") == 0) {
+				else if (itemText == "unique") {
 					enemyData.isUnique = true;
 				}
-				else if (itemText.compare("dead") == 0) {
+				else if (itemText == "dead") {
 					enemyData.isDead = true;
 				}
-				else if (itemText.compare("questrelevant") == 0) {
+				else if (itemText == "questrelevant") {
 					enemyData.isQuestRelevant = true;
 				}
-				else if (itemText.compare("skinnr") == 0) {
+				else if (itemText == "skinnr") {
 					int skinNr;
 					result = item->QueryIntAttribute("value", &skinNr);
 					XMLCheckResult(result);
 
 					enemyData.skinNr = skinNr;
 				}
-				else if (itemText.compare("luapath") == 0) {
+				else if (itemText == "luapath") {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, luapath value attribute is empty.");
@@ -137,7 +137,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 
 					enemyData.luaPath = textAttr;
 				}
-				else if (itemText.compare("name") == 0) {
+				else if (itemText == "name") {
 					textAttr = item->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, name value attribute is empty.");
@@ -151,7 +151,7 @@ bool LevelReader::readEnemies(tinyxml2::XMLElement* objectgroup, LevelData& data
 					result = item->QueryIntAttribute("value", &amount);
 					XMLCheckResult(result);
 
-					if (itemText.compare("gold") == 0) {
+					if (itemText == "gold") {
 						items.second += amount;
 					}
 					else {
@@ -486,7 +486,7 @@ bool LevelReader::readItemIDs(tinyxml2::XMLElement* _tile) {
 			return false;
 		}
 		std::string name = textAttr;
-		if (name.compare("id") != 0) {
+		if (name != "id") {
 			logError("XML file could not be read, wrong tile property (not \"id\").");
 			return false;
 		}
@@ -568,34 +568,34 @@ bool LevelReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_)
 			return false;
 		}
 		std::string name = textAttr;
-		if (name.compare("backgroundlayers") == 0) {
+		if (name == "backgroundlayers") {
 			if (!readBackgroundLayers(_property, data)) return false;
 		}
-		else if (name.compare("tilesetpath") == 0) {
+		else if (name == "tilesetpath") {
 			if (!readTilesetPath(_property, data)) return false;
 		}
-		else if (name.compare("musicpath") == 0) {
+		else if (name == "musicpath") {
 			if (!readMusicPath(_property, data)) return false;
 		}
-		else if (name.compare("dimming") == 0) {
+		else if (name == "dimming") {
 			if (!readDimming(_property, data)) return false;
 		}
-		else if (name.compare("weather") == 0) {
+		else if (name == "weather") {
 			if (!readWeather(_property, data)) return false;
 		}
-		else if (name.compare("observed") == 0) {
+		else if (name == "observed") {
 			data.isObserved = true;
 		}
-		else if (name.compare("lock_magic") == 0) {
+		else if (name == "lock_magic") {
 			data.isMagicLocked = true;
 		}
-		else if (name.compare("bosslevel") == 0) {
+		else if (name == "bosslevel") {
 			if (!readBosslevel(_property, data)) return false;
 		}
-		else if (name.compare("autoscroller") == 0) {
+		else if (name == "autoscroller") {
 			if (!readAutoscroller(_property, data)) return false;
 		}
-		else if (name.compare("lock_teleport") == 0) {
+		else if (name == "lock_teleport") {
 			data.isTeleportLocked = true;
 		}
 		else {

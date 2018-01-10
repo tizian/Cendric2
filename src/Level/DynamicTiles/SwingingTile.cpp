@@ -36,7 +36,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 	
 	if (!contains(properties, std::string("mode"))) return false;
 	auto mode = properties.at(std::string("mode"));
-	if (mode.compare("round") == 0) {
+	if (mode == "round") {
 		m_mode = SwingingTileMode::Round;
 	}
 	else {
@@ -45,7 +45,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 
 	if (contains(properties, std::string("direction"))) {
 		auto mode = properties.at(std::string("direction"));
-		m_isClockwise = mode.compare("ccw") != 0;
+		m_isClockwise = mode != "ccw";
 	}
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * TILE_SIZE_F * (m_size + 1), 2 * TILE_SIZE_F * (m_size + 1)));

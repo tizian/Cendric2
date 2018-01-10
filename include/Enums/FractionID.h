@@ -11,8 +11,8 @@ enum class FractionID {
 };
 
 inline static FractionID resolveFractionID(const std::string& id) {
-	if (id.compare("cleric") == 0) return FractionID::Cleric;
-	if (id.compare("necromancer") == 0) return FractionID::Necromancer;
-	if (id.compare("thief") == 0) return FractionID::Thief;
+	if (id == "cleric") return FractionID::Cleric;
+	if (id == "necromancer") return FractionID::Necromancer;
+	if (id == "thief") return FractionID::Thief;
 	return FractionID::VOID;
 }

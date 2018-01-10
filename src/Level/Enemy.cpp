@@ -488,7 +488,7 @@ bool Enemy::isQuestRelevant() {
 	}
 	if (m_isLooted) return false;
 	for (auto& it : m_reward.lootableItems) {
-		if (it.first.substr(0, 2).compare("qe") == 0) {
+		if (it.first.substr(0, 2) == "qe") {
 			return true;
 		}
 	}

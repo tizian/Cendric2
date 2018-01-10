@@ -21,22 +21,22 @@ struct SpellModifier final {
 	int level = 0;
 
 	static SpellModifierType resolveType(const std::string& name) {
-		 if (name.compare("duration") == 0) {
+		 if (name == "duration") {
 			return SpellModifierType::Duration;
 		}
-		else if (name.compare("count") == 0) {
+		else if (name == "count") {
 			return SpellModifierType::Count;
 		}
-		else if (name.compare("range") == 0) {
+		else if (name == "range") {
 			return SpellModifierType::Range;
 		}
-		else if (name.compare("reflect") == 0 || name.compare("reflection") == 0) {
+		else if (name == "reflect" || name == "reflection") {
 			return SpellModifierType::Reflect;
 		}
-		else if (name.compare("speed") == 0) {
+		else if (name == "speed") {
 			return SpellModifierType::Speed;
 		}
-		else if (name.compare("strength") == 0) {
+		else if (name == "strength") {
 			return SpellModifierType::Strength;
 		}
 		else {

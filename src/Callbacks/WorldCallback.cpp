@@ -49,6 +49,8 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("startCutscene", &WorldCallback::startCutscene)
 		.addFunction("setGuild", &WorldCallback::setGuild)
 		.addFunction("learnSpell", &WorldCallback::learnSpell)
+		.addFunction("notifyAchievement", &WorldCallback::notifyAchievement)
+		.addFunction("notifyAchievementCore", &WorldCallback::notifyAchievementCore)
 		.addFunction("unlockAchievement", &WorldCallback::unlockAchievement)
 		.addFunction("setWeather", &WorldCallback::setWeather)
 		// spawners
@@ -228,6 +230,10 @@ void WorldCallback::notifyAchievementCore(const std::string& achievement) const 
 	TriggerContent::executeTrigger(TriggerContent::notifyAchievementCore(achievement), m_screen);
 }
 
+void WorldCallback::notifyAchievement(const std::string& achievement, const std::string& message) const {
+	TriggerContent::executeTrigger(TriggerContent::notifyAchievement(achievement, message), m_screen);
+}
+
 void WorldCallback::setWeather(const std::string& mapId, const std::string& weather, int dimming) const {
 	TriggerContent::executeTrigger(TriggerContent::setWeather(mapId, weather, dimming), m_screen);
 }
@@ -295,7 +301,7 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 			}
 
 			std::string itemID = itemIDRef.cast<std::string>();
-			if (itemID.compare("gold") == 0) {
+			if (itemID == "gold") {
 				gold = amountRef.cast<int>();
 			}
 			else {

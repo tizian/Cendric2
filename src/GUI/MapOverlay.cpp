@@ -80,7 +80,7 @@ void MapOverlay::setMap(const std::string& mapID) {
 	int index = 0;
 
 	for (auto& it : m_maps) {
-		if (it->mapId.compare(mapID) == 0) {
+		if (it->mapId == mapID) {
 			setMapIndex(index);
 			break;
 		}
@@ -113,7 +113,7 @@ void MapOverlay::setMapIndex(int index) {
 	m_title.setString(worldName);
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
 
-	m_isOnCurrentMap = (m_screen->getWorldData()->id.compare(map->mapId) == 0);
+	m_isOnCurrentMap = (m_screen->getWorldData()->id == map->mapId);
 	m_currentMap = index;
 
 	reloadWaypoints();
@@ -122,7 +122,7 @@ void MapOverlay::setMapIndex(int index) {
 void MapOverlay::updateFogOfWar(MapOverlayData* map) {
 	if (map->isLevel) return;
 	for (auto& it : m_screen->getCharacterCore()->getExploredTiles()) {
-		if (it.first.compare(map->mapId) == 0) {
+		if (it.first == map->mapId) {
 			map->fogOfWarTileMap.updateFogOfWar(it.second.second);
 			break;
 		}
@@ -228,7 +228,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	// items
 	for (auto go : *lScreen->getObjects(GameObjectType::_LevelItem)) {
 		if (LevelItem* item = dynamic_cast<LevelItem*>(go)) {
-			if (item->getID().substr(0, 2).compare("qe") == 0) {
+			if (item->getID().substr(0, 2) == "qe") {
 				drawOverlayTexture(img, item->getCenter() * scale, 2, 0);
 			}
 			else {

@@ -15,8 +15,8 @@ public:
 
 	void setCore(CharacterCore* core);
 
-	void notifyAchievement(AchievementID achievementId, const std::string& tag, const std::string& message);
-	void notifyAchievement(const std::string& achievement, const std::string& tag, const std::string& message);
+	void notifyAchievement(AchievementID achievementId, const std::string& message);
+	void notifyAchievement(const std::string& achievement, const std::string& message);
 	void notifyAchievementCore(AchievementID achievementId);
 	void notifyAchievementCore(const std::string& achievement);
 	void unlockAchievement(const std::string& achievement);

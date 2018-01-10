@@ -348,6 +348,7 @@ npc.id:npc_jeremy
 	# [10] NPC Node
 	tag:10
 	# triggers: 
+	trigger:DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	# translation: 
 	translation.tag:DL_Jeremy_NotYourGuy
 	translation.en:I'm not your guy, friend.
@@ -384,6 +385,7 @@ npc.id:npc_jeremy
 	# [13] NPC Node
 	tag:13
 	# triggers: 
+	trigger:DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	# translation: 
 	translation.tag:DL_Choice_NotYourBuddy
 	translation.en:
@@ -420,6 +422,7 @@ npc.id:npc_jeremy
 	# [6] NPC Node
 	tag:6
 	# triggers: 
+	trigger:DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	# translation: 
 	translation.tag:DL_Choice_NotYourFriend
 	translation.en:

@@ -141,6 +141,7 @@ loadDialogue = function(DL)
 
 
 	DL:createNPCNode(10, 12, "DL_Jeremy_NotYourGuy") -- I'm not your guy, friend.
+	DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	DL:addNode()
 
 
@@ -151,6 +152,7 @@ loadDialogue = function(DL)
 
 
 	DL:createNPCNode(13, 4, "DL_Choice_NotYourBuddy") -- 
+	DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	DL:addNode()
 
 
@@ -161,6 +163,7 @@ loadDialogue = function(DL)
 
 
 	DL:createNPCNode(6, -2, "DL_Choice_NotYourFriend") -- 
+	DL:notifyAchievement("ACH_CANADIAN_LOOP", "loop")
 	DL:addNode()
 
 

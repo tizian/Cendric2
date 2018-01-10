@@ -13,7 +13,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 	m_itemID = itemID;
 	m_isEquipmentOrigin = isEquipmentOrigin;
 
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		m_type = ItemType::Gold;
 
 		m_iconTextureRect = sf::IntRect(0, 0, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));

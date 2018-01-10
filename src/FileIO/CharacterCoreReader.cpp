@@ -195,7 +195,7 @@ bool CharacterCoreReader::checkData(CharacterCoreData& data) const {
 }
 
 bool CharacterCoreReader::readHash(std::string& line, CharacterCoreData& data) const {
-	data.hashValid = line.compare(m_correctHash) == 0;
+	data.hashValid = line == m_correctHash;
 	return true;
 }
 

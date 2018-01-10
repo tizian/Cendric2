@@ -64,7 +64,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < LABELS.size(); ++i) {
-		if (LABELS[i].compare("") == 0) {
+		if (LABELS[i] == "") {
 			yOffset += dy * 0.8f;
 			continue;
 		}
@@ -341,7 +341,7 @@ void CharacterInfo::updateAttributes() {
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < attributes.size(); ++i) {
-		if (attributes[i].compare("") == 0) {
+		if (attributes[i] == "") {
 			yOffset += dy * 0.8f;
 			continue;
 		}
@@ -431,7 +431,7 @@ void CharacterInfo::updateHints() {
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
 		HintEntry& entry = m_hintEntries[i];
 		entry.deselect();
-		if (entry.getHintKey().compare(m_selectedHintKey) == 0) {
+		if (entry.getHintKey() == m_selectedHintKey) {
 			selectEntry(&entry);
 		}
 	}
@@ -467,7 +467,7 @@ void CharacterInfo::hide() {
 	std::string read = g_inputController->getReadText();
 	if (!read.empty()) {
 		read.pop_back();
-		if (GODMODE_CHEAT.compare(read) == 0) {
+		if (GODMODE_CHEAT == read) {
 			m_screen->toggleGodmode();
 		}
 	}

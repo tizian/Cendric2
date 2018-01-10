@@ -46,11 +46,12 @@ public:
 	void removeItem(const std::string& itemID, int amount);
 	void addGold(int amount);
 	void removeGold(int amount);
-	void learnSpell(int spellID);
+	void learnSpell(int id);
 	void setGuild(const std::string& guild);
 	void startLevel(const std::string& levelID, int x, int y);
 	void startMap(const std::string& mapID, int x, int y);
 	void startCutscene(const std::string& cutsceneID);
+	void notifyAchievement(const std::string& achievement, const std::string& message);
 	void unlockAchievement(const std::string& achievement);
 	void setWeather(const std::string& mapId, const std::string& weather, int dimming);
 

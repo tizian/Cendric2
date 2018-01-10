@@ -12,49 +12,49 @@ struct ItemBean final : DatabaseBean {
 	int rarity;
 
 	static ItemType resolveItemType(const std::string& _item_type) {
-		if (_item_type.compare("consumable") == 0) {
+		if (_item_type == "consumable") {
 			return ItemType::Consumable;
 		}
-		if (_item_type.compare("misc") == 0) {
+		if (_item_type == "misc") {
 			return ItemType::Misc;
 		}
-		if (_item_type.compare("gold") == 0) {
+		if (_item_type == "gold") {
 			return ItemType::Gold;
 		}
-		if (_item_type.compare("quest") == 0) {
+		if (_item_type == "quest") {
 			return ItemType::Quest;
 		}
-		if (_item_type.compare("document") == 0) {
+		if (_item_type == "document") {
 			return ItemType::Document;
 		}
-		if (_item_type.compare("eq_weapon") == 0) {
+		if (_item_type == "eq_weapon") {
 			return ItemType::Equipment_weapon;
 		}
-		if (_item_type.compare("eq_head") == 0) {
+		if (_item_type == "eq_head") {
 			return ItemType::Equipment_head;
 		}
-		if (_item_type.compare("eq_neck") == 0) {
+		if (_item_type == "eq_neck") {
 			return ItemType::Equipment_neck;
 		}
-		if (_item_type.compare("eq_body") == 0) {
+		if (_item_type == "eq_body") {
 			return ItemType::Equipment_body;
 		}
-		if (_item_type.compare("eq_back") == 0) {
+		if (_item_type == "eq_back") {
 			return ItemType::Equipment_back;
 		}
-		if (_item_type.compare("eq_ring") == 0) {
+		if (_item_type == "eq_ring") {
 			return ItemType::Equipment_ring_1;
 		}
-		if (_item_type.compare("permanent") == 0) {
+		if (_item_type == "permanent") {
 			return ItemType::Permanent;
 		}
-		if (_item_type.compare("convertible") == 0) {
+		if (_item_type == "convertible") {
 			return ItemType::Convertible;
 		}
-		if (_item_type.compare("spell") == 0) {
+		if (_item_type == "spell") {
 			return ItemType::Spell;
 		}
-		if (_item_type.compare("key") == 0) {
+		if (_item_type == "key") {
 			return ItemType::Key;
 		}
 		

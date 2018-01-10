@@ -266,7 +266,7 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 void MapScreen::updateFogOfWar() {
 	std::pair<sf::Vector2i, std::vector<bool>>* tilesExplored = nullptr;
 	for (auto& it : m_characterCore->getExploredTiles()) {
-		if (it.first.compare(m_mapID) == 0) {
+		if (it.first == m_mapID) {
 			tilesExplored = &it.second;
 		}
 	}

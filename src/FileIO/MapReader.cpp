@@ -31,25 +31,25 @@ bool MapReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data_) c
 			return false;
 		}
 		std::string name = textAttr;
-		if (name.compare("backgroundlayers") == 0) {
+		if (name == "backgroundlayers") {
 			if (!readBackgroundLayers(_property, data)) return false;
 		}
-		else if (name.compare("tilesetpath") == 0) {
+		else if (name == "tilesetpath") {
 			if (!readTilesetPath(_property, data)) return false;
 		}
-		else if (name.compare("musicpath") == 0) {
+		else if (name == "musicpath") {
 			if (!readMusicPath(_property, data)) return false;
 		}
-		else if (name.compare("dimming") == 0) {
+		else if (name == "dimming") {
 			if (!readDimming(_property, data)) return false;
 		}
-		else if (name.compare("weather") == 0) {
+		else if (name == "weather") {
 			if (!readWeather(_property, data)) return false;
 		}
-		else if (name.compare("explorable") == 0) {
+		else if (name == "explorable") {
 			data.explorable = true;
 		}
-		else if (name.compare("lock_teleport") == 0) {
+		else if (name == "lock_teleport") {
 			data.isTeleportLocked = true;
 		}
 		else {
@@ -342,7 +342,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 				}
 				std::string attrText = textAttr;
 
-				if (attrText.compare("id") == 0) {
+				if (attrText == "id") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -352,7 +352,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					npc.id = textAttr;
 					npc.calculateDefaultFromID();
 				}
-				else if (attrText.compare("dialogueid") == 0) {
+				else if (attrText == "dialogueid") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -361,7 +361,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.dialogueID = textAttr;
 				}
-				else if (attrText.compare("spritesheetpath") == 0) {
+				else if (attrText == "spritesheetpath") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -370,7 +370,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.spritesheetpath = textAttr;
 				}
-				else if (attrText.compare("routineid") == 0) {
+				else if (attrText == "routineid") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -379,7 +379,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.routineID = textAttr;
 				}
-				else if (attrText.compare("texttype") == 0) {
+				else if (attrText == "texttype") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -388,7 +388,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.textType = textAttr;
 				}
-				else if (attrText.compare("dialoguetexture") == 0) {
+				else if (attrText == "dialoguetexture") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -397,7 +397,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.dialoguetexture = textAttr;
 				}
-				else if (attrText.compare("light") == 0) {
+				else if (attrText == "light") {
 
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
@@ -412,7 +412,7 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 					}
 					npc.lightData = lightData;
 				}
-				else if (attrText.compare("boundingbox") == 0) {
+				else if (attrText == "boundingbox") {
 					textAttr = nullptr;
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {

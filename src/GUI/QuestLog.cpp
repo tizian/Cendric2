@@ -254,7 +254,7 @@ void QuestLog::reload() {
 
 	for (auto& it : mainQuests) {
 		m_stateMap[it.first]->push_back(QuestEntry(it.second, true));
-		if (it.second.compare(m_selectedQuestID) == 0 && m_currentTab != it.first) {
+		if (it.second == m_selectedQuestID && m_currentTab != it.first) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
 		}
@@ -262,7 +262,7 @@ void QuestLog::reload() {
 
 	for (auto& it : nonMainQuests) {
 		m_stateMap[it.first]->push_back(QuestEntry(it.second, false));
-		if (it.second.compare(m_selectedQuestID) == 0 && m_currentTab != it.first) {
+		if (it.second == m_selectedQuestID && m_currentTab != it.first) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
 		}
@@ -271,7 +271,7 @@ void QuestLog::reload() {
 	for (auto& it : m_stateMap) {
 		for (auto& it2 : *it.second) {
 			it2.deselect();
-			if (it2.getQuestID().compare(m_selectedQuestID) == 0) {
+			if (it2.getQuestID() == m_selectedQuestID) {
 				selectEntry(&it2);
 			}
 		}

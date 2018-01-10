@@ -17,7 +17,7 @@ bool ParticleTile::init(const LevelTileProperties& properties) {
 	m_isCollidable = false;
 
 	if (contains(properties, std::string("layer"))) {
-		m_isForegroundTile = properties.at("layer").compare("fg") == 0;
+		m_isForegroundTile = properties.at("layer") == "fg";
 	}
 
 	if (!contains(properties, std::string("color"))) {
@@ -214,19 +214,19 @@ sf::RenderTexture* ParticleTile::getParticleTexture() {
 particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
-	if (color.compare("green") == 0) {
+	if (color == "green") {
 		colGen->minStartCol = sf::Color(60, 110, 40);
 		colGen->maxStartCol = sf::Color(80, 100, 50);
 		colGen->minEndCol = sf::Color(60, 80, 40, 100);
 		colGen->maxEndCol = sf::Color(110, 140, 80, 100);
 	}
-	else if (color.compare("blue") == 0) {
+	else if (color == "blue") {
 		colGen->minStartCol = sf::Color(40, 60, 110);
 		colGen->maxStartCol = sf::Color(60, 80, 100);
 		colGen->minEndCol = sf::Color(50, 60, 80, 100);
 		colGen->maxEndCol = sf::Color(80, 110, 140, 100);
 	}
-	else if (color.compare("red") == 0) {
+	else if (color == "red") {
 		colGen->minStartCol = sf::Color(214, 64, 38);
 		colGen->maxStartCol = sf::Color(237, 102, 26);
 		colGen->minEndCol = sf::Color(163, 29, 6);
@@ -242,37 +242,37 @@ particles::ColorGenerator* ParticleTile::getWaterColorGenerator(const std::strin
 particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
-	if (color.compare("green") == 0) {
+	if (color == "green") {
 		colGen->minStartCol = sf::Color(110, 255, 100);
 		colGen->maxStartCol = sf::Color(110, 255, 100);
 		colGen->minEndCol = sf::Color(20, 200, 0, 200);
 		colGen->maxEndCol = sf::Color(20, 200, 0, 200);
 	}
-	else if (color.compare("purple") == 0) {
+	else if (color == "purple") {
 		colGen->minStartCol = sf::Color(190, 120, 180);
 		colGen->maxStartCol = sf::Color(200, 140, 190);
 		colGen->minEndCol = sf::Color(230, 140, 200, 200);
 		colGen->maxEndCol = sf::Color(255, 180, 230, 200);
 	}
-	else if (color.compare("red") == 0) {
+	else if (color == "red") {
 		colGen->minStartCol = sf::Color(255, 50, 50);
 		colGen->maxStartCol = sf::Color(255, 60, 60);
 		colGen->minEndCol = sf::Color(255, 100, 100, 0);
 		colGen->maxEndCol = sf::Color(255, 120, 120, 0);
 	}
-	else if (color.compare("orange") == 0) {
+	else if (color == "orange") {
 		colGen->minStartCol = sf::Color(255, 150, 50, 50);
 		colGen->maxStartCol = sf::Color(255, 200, 120, 50);
 		colGen->minEndCol = sf::Color(255, 110, 80, 0);
 		colGen->maxEndCol = sf::Color(255, 180, 120, 0);
 	}
-	else if (color.compare("blue") == 0) {
+	else if (color == "blue") {
 		colGen->minStartCol = sf::Color(100, 100, 255);
 		colGen->maxStartCol = sf::Color(150, 180, 255);
 		colGen->minEndCol = sf::Color(50, 60, 255, 100);
 		colGen->maxEndCol = sf::Color(80, 110, 255, 100);
 	}
-	else if (color.compare("yellow") == 0) {
+	else if (color == "yellow") {
 		colGen->minStartCol = sf::Color(255, 235, 100);
 		colGen->maxStartCol = sf::Color(255, 255, 200);
 		colGen->minEndCol = sf::Color(200, 200, 200, 200);
@@ -288,37 +288,37 @@ particles::ColorGenerator* ParticleTile::getEmberColorGenerator(const std::strin
 particles::ColorGenerator* ParticleTile::getFlameColorGenerator(const std::string& color) {
 	auto colGen = new particles::ColorGenerator();
 
-	if (color.compare("green") == 0) {
+	if (color == "green") {
 		colGen->minStartCol = sf::Color(110, 230, 100);
 		colGen->maxStartCol = sf::Color(110, 230, 100);
 		colGen->minEndCol = sf::Color(20, 150, 10, 200);
 		colGen->maxEndCol = sf::Color(20, 150, 10, 200);
 	}
-	else if (color.compare("blue") == 0) {
+	else if (color == "blue") {
 		colGen->minStartCol = sf::Color(100, 146, 186);
 		colGen->maxStartCol = sf::Color(100, 146, 186);
 		colGen->minEndCol = sf::Color(20, 83, 255, 200);
 		colGen->maxEndCol = sf::Color(20, 83, 255, 200);
 	}
-	else if (color.compare("red") == 0) {
+	else if (color == "red") {
 		colGen->minStartCol = sf::Color(255, 160, 64);
 		colGen->maxStartCol = sf::Color(255, 160, 64);
 		colGen->minEndCol = sf::Color(255, 0, 0, 200);
 		colGen->maxEndCol = sf::Color(255, 0, 0, 200);
 	}
-	else if (color.compare("orange") == 0) {
+	else if (color == "orange") {
 		colGen->minStartCol = sf::Color(255, 150, 50, 100);
 		colGen->maxStartCol = sf::Color(255, 200, 120, 100);
 		colGen->minEndCol = sf::Color(255, 110, 80, 200);
 		colGen->maxEndCol = sf::Color(255, 180, 120, 200);
 	}
-	else if (color.compare("yellow") == 0) {
+	else if (color == "yellow") {
 		colGen->minStartCol = sf::Color(255, 235, 100, 100);
 		colGen->maxStartCol = sf::Color(255, 255, 150, 100);
 		colGen->minEndCol = sf::Color(200, 200, 200, 50);
 		colGen->maxEndCol = sf::Color(255, 240, 220, 50);
 	}
-	else if (color.compare("purple") == 0) {
+	else if (color == "purple") {
 		colGen->minStartCol = sf::Color(171, 105, 243);
 		colGen->maxStartCol = sf::Color(171, 105, 243);
 		colGen->minEndCol = sf::Color(77, 54, 130, 200);

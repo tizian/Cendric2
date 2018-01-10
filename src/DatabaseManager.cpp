@@ -41,7 +41,7 @@ void DatabaseManager::init() {
 
 void DatabaseManager::checkError() const {
 	std::string error = sqlite3_errmsg(m_db);
-	if (error.compare("not an error") != 0) {
+	if (error != "not an error") {
 		g_logger->logError("DatabaseManager", error);
 	}
 }

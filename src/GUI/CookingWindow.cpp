@@ -71,7 +71,7 @@ void CookingWindow::reload() {
 			CookingOption option(item.first, food->cooked_item_id, item.second, nr);
 			option.deselect();
 			m_options.push_back(option);
-			if (option.getItemID().compare(m_oldItemID) == 0) {
+			if (option.getItemID() == m_oldItemID) {
 				m_chosenOption = nr;
 			}
 			nr++;

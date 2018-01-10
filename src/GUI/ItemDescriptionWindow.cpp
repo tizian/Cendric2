@@ -112,7 +112,7 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 	// check item type and maybe redirect
 	if (item.getType() == ItemType::Equipment_weapon && item.getCheck().isWeapon) {
 		auto const weapon = core->getWeapon();
-		if (weapon && weapon->getID().compare(item.getID()) != 0) {
+		if (weapon && weapon->getID() != item.getID()) {
 			compareWeaponAttributes(Weapon(item.getID()), *weapon, offset);
 		}
 		else {
@@ -139,7 +139,7 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 	}
 	else if (Item::isEquipmentType(item.getType())) {
 		auto& eqId = core->getEquippedItem(item.getType());
-		if (!eqId.empty() && eqId.compare(item.getID()) != 0) {
+		if (!eqId.empty() && eqId != item.getID()) {
 			compareAttributes(item, *g_resourceManager->getItem(eqId), offset);
 			return;
 		}

@@ -100,7 +100,7 @@ bool WorldReader::readLights(tinyxml2::XMLElement* objectgroup, WorldData& data)
 				}
 				std::string name = textAttr;
 
-				if (name.compare("brightness") == 0) {
+				if (name == "brightness") {
 					float brightness;
 					result = _property->QueryFloatAttribute("value", &brightness);
 					XMLCheckResult(result);
@@ -167,7 +167,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 				}
 				std::string name = textAttr;
 
-				if (name.compare("hint") == 0) {
+				if (name == "hint") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, hint value property not found.");
@@ -177,7 +177,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s1 = textAttr;
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("learn spell") == 0) {
+				else if (name == "learn spell") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, learn spell value property not found.");
@@ -187,7 +187,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i1 = std::atoi(textAttr);
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("condition progress") == 0) {
+				else if (name == "condition progress") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, condition progress value property not found.");
@@ -208,7 +208,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s2 = conditionProgress;
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("reputation progress") == 0) {
+				else if (name == "reputation progress") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, reputation progress value property not found.");
@@ -232,7 +232,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::stoi(reputationProgress);
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("questcondition progress") == 0) {
+				else if (name == "questcondition progress") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, questcondition progress value property not found.");
@@ -253,8 +253,8 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s2 = conditionProgress;
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("conditions") == 0 || name.compare("not conditions") == 0) {
-					bool isNotCondition = name.compare("not conditions") == 0;
+				else if (name == "conditions" || name == "not conditions") {
+					bool isNotCondition = name == "not conditions";
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, conditions / not conditions value property not found.");
@@ -291,7 +291,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 						trigger.conditions.push_back(cond);
 					}
 				}
-				else if (name.compare("map entry") == 0) {
+				else if (name == "map entry") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, map entry value property not found.");
@@ -320,7 +320,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("level entry") == 0) {
+				else if (name == "level entry") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, level entry value property not found.");
@@ -349,7 +349,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(mapEntry.c_str());
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("forced map") == 0) {
+				else if (name == "forced map") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, map entry value property not found.");
@@ -378,7 +378,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(forcedMap.c_str());
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("set map") == 0) {
+				else if (name == "set map") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, map entry value property not found.");
@@ -407,7 +407,7 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.i2 = std::atoi(map.c_str());
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("set level") == 0) {
+				else if (name == "set level") {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
 						logError("XML file could not be read, set level value property not found.");
@@ -557,17 +557,17 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("credits") == 0) {
+				else if (name == "credits") {
 					TriggerContent content(TriggerContentType::Credits);
 					trigger.content.push_back(content);
 				}
-				else if (name.compare("persistent") == 0) {
+				else if (name == "persistent") {
 					trigger.isPersistent = true;
 				}
-				else if (name.compare("forced") == 0) {
+				else if (name == "forced") {
 					trigger.isForced = true;
 				}
-				else if (name.compare("keyguarded") == 0) {
+				else if (name == "keyguarded") {
 					trigger.isKeyGuarded = true;
 				}
 				else {
@@ -776,7 +776,7 @@ bool WorldReader::readTileProperties(tinyxml2::XMLElement* map, WorldData& data)
 					}
 					std::string value = textAttr;
 
-					if (name.compare("light") == 0) {
+					if (name == "light") {
 						// read light
 						LightData lightData;
 						if (!LightData::resolveLightString(value, lightData)) return false;
@@ -808,7 +808,7 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 		return false;
 	}
 	std::string renderorder = textAttr;
-	if (renderorder.compare("right-down") != 0) {
+	if (renderorder != "right-down") {
 		logError("XML file could not be read, renderorder is not \"right-down\".");
 		return false;
 	}
@@ -821,7 +821,7 @@ bool WorldReader::readMapProperties(tinyxml2::XMLElement* map, WorldData& data) 
 		return false;
 	}
 	std::string orientation = textAttr;
-	if (orientation.compare("orthogonal") != 0) {
+	if (orientation != "orthogonal") {
 		logError("XML file could not be read, renderorder is not \"orthogonal\".");
 		return false;
 	}
@@ -870,10 +870,10 @@ bool WorldReader::layerConditionsFulfilled(tinyxml2::XMLElement* layer) const {
 
 		std::string name = textAttr;
 		bool isNotCondition = false;
-		if (name.compare("not conditions") == 0) {
+		if (name == "not conditions") {
 			isNotCondition = true;
 		}
-		else if (name.compare("conditions") != 0) {
+		else if (name != "conditions") {
 			_property = _property->NextSiblingElement("property");
 			continue;
 		}

@@ -47,7 +47,7 @@ void ProgressLog::render(sf::RenderTarget& renderTarget) {
 
 void ProgressLog::addItemProgress(const std::string& itemID, int amount) {
 	std::string text = std::to_string(amount) + "x ";
-	bool isGold = itemID.compare("gold") == 0;
+	bool isGold = itemID == "gold";
 	text.append(isGold ? g_textProvider->getText("Gold") : g_textProvider->getText(itemID, "item"));
 
 	Item* item = nullptr;
@@ -243,7 +243,7 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 	entry->m_text->setString(str);
 	entry->setAlpha(0.f);
 
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
 		entry->m_icon->setTextureRect(sf::IntRect(0, 0, 25, 25));
 		return entry;

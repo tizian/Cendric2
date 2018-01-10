@@ -79,6 +79,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	case TriggerContentType::AchievementUnlocked:
 		g_achievementManager->unlockAchievement(content.s1);
 		break;
+	case TriggerContentType::AchievementNotify:
+		g_achievementManager->notifyAchievement(content.s1, content.s2);
+		break;
 	case TriggerContentType::AchievementNotifyCore:
 		g_achievementManager->notifyAchievementCore(content.s1);
 		break;
@@ -340,6 +343,17 @@ TriggerContent TriggerContent::unlockAchievement(const std::string& achievement)
 	}
 	TriggerContent content(TriggerContentType::AchievementUnlocked);
 	content.s1 = achievement;
+	return content;
+}
+
+TriggerContent TriggerContent::notifyAchievement(const std::string& achievement, const std::string& message) {
+	if (achievement.empty() || message.empty()) {
+		g_logger->logError("TriggerContent", "Achievement ID and message cannot be empty");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::AchievementNotify);
+	content.s1 = achievement;
+	content.s2 = message;
 	return content;
 }
 

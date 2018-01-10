@@ -12,7 +12,7 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		delete m_ps;
 	}
 
-	if (data->weather.compare("rain") == 0) {
+	if (data->weather == "rain") {
 		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_RAIN));
 
 		m_ps->emitRate = 200.f;
@@ -32,7 +32,7 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		velGen->minStartSpeed = 400.f;
 		velGen->maxStartSpeed = 500.f;
 	}
-	else if (data->weather.compare("snow") == 0) {
+	else if (data->weather == "snow") {
 		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_SNOW));
 
 		m_ps->emitRate = 100.f;
@@ -49,7 +49,7 @@ void WeatherSystem::load(const WeatherData* data, bool isLevel) {
 		velGen->minStartSpeed = 100.f;
 		velGen->maxStartSpeed = 250.f;
 	}
-	else if (data->weather.compare("wind") == 0) {
+	else if (data->weather == "wind") {
 		m_ps = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_WIND));
 
 		m_ps->emitRate = 100.f;

@@ -10,6 +10,6 @@ public:
 	Achievement() {}
 	virtual ~Achievement() {};
     
-	virtual bool notify(const std::string& tag, const std::string& message) { return false; };
+	virtual bool notify(const std::string& message) { return false; };
 	virtual bool notifyCore(const CharacterCore* core) { return false; }
 };

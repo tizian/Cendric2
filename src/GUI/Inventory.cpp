@@ -203,7 +203,7 @@ void Inventory::deselectCurrentSlot() {
 }
 
 void Inventory::notifyChange(const std::string& itemID) {
-	if (itemID.compare("gold") == 0) {
+	if (itemID == "gold") {
 		reloadGold();
 		return;
 	}
@@ -221,7 +221,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	if (contains(*tab, item->getID())) {
 		if (!contains(m_core->getData().items, itemID)) {
 			// the item was removed. check if it is selected.
-			if (m_selectedSlotId.first.compare(item->getID()) == 0) {
+			if (m_selectedSlotId.first == item->getID()) {
 				deselectCurrentSlot();
 			}
 			tab->erase(item->getID());
@@ -385,7 +385,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	}
 
-	if (selectedSlotId.compare(m_selectedSlotId.first) == 0) return;
+	if (selectedSlotId == m_selectedSlotId.first) return;
 
 	deselectCurrentSlot();
 	m_selectedSlotId.first = selectedSlotId;

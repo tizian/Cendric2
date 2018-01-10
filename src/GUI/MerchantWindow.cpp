@@ -85,7 +85,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	if (contains(m_items, itemID)) {
 		if (!contains(m_interface->getMerchantData().wares, itemID)) {
 			// the item was removed. check if it is selected.
-			if (m_selectedSlotId.compare(itemID) == 0) {
+			if (m_selectedSlotId == itemID) {
 				deselectCurrentSlot();
 			}
 			m_items.erase(itemID);
@@ -138,7 +138,7 @@ void MerchantWindow::selectSlot(const std::string& selectedSlotId) {
 		return;
 	}
 	
-	if (selectedSlotId.compare(m_selectedSlotId) == 0) return;
+	if (selectedSlotId == m_selectedSlotId) return;
 
 	deselectCurrentSlot();
 	m_selectedSlotId = selectedSlotId;

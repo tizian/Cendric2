@@ -10,10 +10,10 @@ enum class TextAlignment {
 	Right
 };
 
-inline static TextAlignment resolveTextAlignment(const std::string& alignment) {
-	if (alignment.compare("left") == 0) return TextAlignment::Left;
-	if (alignment.compare("right") == 0) return TextAlignment::Right;
-	if (alignment.compare("center") == 0) return TextAlignment::Center;
+static TextAlignment resolveTextAlignment(const std::string& alignment) {
+	if (alignment == "left") return TextAlignment::Left;
+	if (alignment == "right") return TextAlignment::Right;
+	if (alignment == "center") return TextAlignment::Center;
 	return TextAlignment::Left;
 }
 
@@ -39,10 +39,10 @@ public:
 	const sf::Color& getColor() const;
 
 	void setCharacterSize(int size);
-	const int getCharacterSize() const;
+	int getCharacterSize() const;
 
 	void setLineSpacing(float spacing);
-	const float getLineSpacing() const;
+	float getLineSpacing() const;
 
 	void setTextAlignment(TextAlignment alignment);
 	TextAlignment getTextAlignment() const;

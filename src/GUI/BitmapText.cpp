@@ -2,7 +2,6 @@
 #include "GUI/BitmapFont.h"
 #include "ResourceManager.h"
 #include "GlobalResource.h"
-#include <iterator>
 #include <sstream>
 
 const char FIRST_CHAR = ' ';
@@ -81,7 +80,7 @@ void BitmapText::setCharacterSize(int size) {
 	init();
 }
 
-const int BitmapText::getCharacterSize() const {
+int BitmapText::getCharacterSize() const {
 	return m_characterSize;
 }
 
@@ -90,7 +89,7 @@ void BitmapText::setLineSpacing(float spacing) {
 	init();
 }
 
-const float BitmapText::getLineSpacing() const {
+float BitmapText::getLineSpacing() const {
 	return m_lineSpacing;
 }
 
@@ -175,7 +174,7 @@ void BitmapText::init() {
 			curX += TAB_TO_SPACES * dx;
 			continue;
 		}
-		else if (c == '\n') {
+		if (c == '\n') {
 			curY += dy * (m_lineSpacing + 1.f);
 			lineNumber++;
 			curX = 0.f;
