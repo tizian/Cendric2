@@ -7,6 +7,7 @@
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
+#include "Steam/AchievementManager.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Morgiana, MorgianaBoss)
 
@@ -130,6 +131,8 @@ void MorgianaBoss::setDead() {
 			rec.boundingBox.left += 20.f;
 		}
 	}
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_MERCENARY_ORDER, "morgiana");
 }
 
 void MorgianaBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {

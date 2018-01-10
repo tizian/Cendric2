@@ -5,7 +5,7 @@
 REGISTER_ACHIEVEMENT(AchievementID::ACH_CANADIAN_LOOP, CanadianLoopAchievement)
 
 bool CanadianLoopAchievement::notify(const std::string& message) {
-	if (message != "loop") return;	
+	if (message != "loop") return false;	
 	
 	return ++m_loopCount >= 10;
 }

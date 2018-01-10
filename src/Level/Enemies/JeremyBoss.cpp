@@ -10,6 +10,7 @@
 #include "GameObjectComponents/ParticleComponent.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
+#include "Steam/AchievementManager.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Jeremy, JeremyBoss)
 
@@ -49,6 +50,8 @@ void JeremyBoss::setDead() {
 			rec.boundingBox.left += 20.f;
 		}
 	}
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_MERCENARY_ORDER, "jeremy");
 }
 
 void JeremyBoss::loadAttributes() {
