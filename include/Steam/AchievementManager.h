@@ -19,8 +19,6 @@ public:
 	void notifyAchievement(const std::string& achievement, const std::string& message);
 	void notifyAchievementCore(AchievementID achievementId);
 	void notifyAchievementCore(const std::string& achievement);
-	void notifyAchievementScreen(AchievementID achievementId, const Screen* screen);
-	void notifyAchievementScreen(const std::string& achievement, const Screen* screen);
 	void unlockAchievement(const std::string& achievement);
 	void unlockAchievement(AchievementID achievementId);
 
