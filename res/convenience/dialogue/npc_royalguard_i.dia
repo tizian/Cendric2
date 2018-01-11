@@ -18,7 +18,7 @@ npc.id:npc_royalguard_i
 	translation.tag:DL_Royalguard_Trouble
 	translation.en:Don't make any trouble. We're watching you.
 	translation.de:Mach keinen Ärger. Wir beobachten dich.
-	translation.ch:Mach ken Scheiss. Mer beobachted dich.
+	translation.ch:Mach ke Seich. Mir gseh we öppis bosgisch.
 	[
 		# Link node, tag is next tag
 		tag:-1

@@ -485,12 +485,34 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 				else if (name.find("achievement core") != std::string::npos) {
 					textAttr = _property->Attribute("value");
 					if (textAttr == nullptr) {
-						logError("XML file could not be read, achievemnet core value property not found.");
+						logError("XML file could not be read, achievement core value property not found.");
 						return false;
 					}
 
 					TriggerContent content(TriggerContentType::AchievementNotifyCore);
 					content.s1 = textAttr;
+
+					trigger.content.push_back(content);
+				}
+				else if (name.find("achievement notify") != std::string::npos) {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, achievement notify value property not found.");
+						return false;
+					}
+
+					std::string achId = textAttr;
+
+					size_t pos = 0;
+					if ((pos = achId.find(",")) == std::string::npos) {
+						logError("XML file could not be read, achievment notify value must be two comma separated strings (achievement id, message)");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::AchievementNotify);
+					content.s1 = achId.substr(0, pos);
+					achId.erase(0, pos + 1);
+					content.s2 = achId;
 
 					trigger.content.push_back(content);
 				}

@@ -581,6 +581,7 @@ Jan Rohrbach - Berner Dialekt (Inina, Paladin, Steven)
 Alf Nussbaum - Berner Dialekt (Inina, Paladin, Steven)
 Sarah Schaller - Walliser Dialekt (Yasha)
 Désirée Aeberhard - Berner Dialekt (Stadtwache)
+David Minder - Berner Dialekt (Königswache)
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

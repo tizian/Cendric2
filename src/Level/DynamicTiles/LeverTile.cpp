@@ -3,6 +3,7 @@
 #include "Level/LevelMainCharacter.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Registrar.h"
+#include "Steam/AchievementManager.h"
 
 REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Lever, LeverTile)
 
@@ -115,6 +116,8 @@ void LeverTile::switchLever() {
 	for (auto& tile : m_dependentTiles) {
 		tile->switchTile();
 	}
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_MINIMALIST, "turn");
 }
 
 std::string LeverTile::getSpritePath() const {

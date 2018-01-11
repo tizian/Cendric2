@@ -28,6 +28,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ ENEMIES_LOOTED,  &CharacterCoreReader::readEnemiesLooted });
 	m_readMap.insert({ ITEMS_LOOTED,  &CharacterCoreReader::readItemsLooted });
 	m_readMap.insert({ CHESTS_LOOTED,  &CharacterCoreReader::readChestsLooted });
+	m_readMap.insert({ BOOKS_READ,  &CharacterCoreReader::readBooksRead });
 	m_readMap.insert({ WAYPOINTS_UNLOCKED,  &CharacterCoreReader::readWaypointsUnlocked });
 	m_readMap.insert({ MODIFIERS_UNLOCKED,  &CharacterCoreReader::readModifiersUnlocked });
 	m_readMap.insert({ TRIGGERS_TRIGGERED,  &CharacterCoreReader::readTriggersTriggered });

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="36" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="520">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="36" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="522">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/gandriacrypt/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
@@ -906,6 +906,18 @@
     <property name="oneway_left" value=""/>
     <property name="strength" value="5"/>
     <property name="width" value="1"/>
+   </properties>
+  </object>
+  <object id="520" x="600" y="850" width="250" height="100">
+   <properties>
+    <property name="achievement notify" value="ACH_MINIMALIST,start"/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="521" x="550" y="1112.5" width="350" height="237.5">
+   <properties>
+    <property name="achievement notify" value="ACH_MINIMALIST,end"/>
+    <property name="persistent" value=""/>
    </properties>
   </object>
  </objectgroup>

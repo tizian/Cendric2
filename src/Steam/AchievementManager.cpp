@@ -97,6 +97,20 @@ void AchievementManager::notifyAchievementCore(const std::string& achievement) {
 	}
 }
 
+void AchievementManager::notifyAchievementScreen(AchievementID achievementId, const Screen* screen) {
+	if (!contains(AchievementNames, achievementId)) return;
+	notifyAchievementScreen(AchievementNames.at(achievementId), screen);
+}
+
+void AchievementManager::notifyAchievementScreen(const std::string& achievement, const Screen* screen) {
+	if (!m_characterCore) return;
+	if (!contains(m_achievements, achievement)) return;
+
+	if (m_achievements.at(achievement)->notifyScreen(screen)) {
+		unlockAchievement(achievement);
+	}
+}
+
 void AchievementManager::unlockAchievement(AchievementID achievementId) {
 	if (!contains(AchievementNames, achievementId)) return;
 	unlockAchievement(AchievementNames.at(achievementId));

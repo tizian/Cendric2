@@ -24,7 +24,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Hey
 	translation.en:Hey you! How dare you to walk in here without permission!
 	translation.de:Hey du! Wie kannst du es wagen, hier einfach ohne Bewilligung hineinzuspazieren!
-	translation.ch:Hey du! We chasches woge, do eifach iez'spaziere ohni Bewilligung.
+	translation.ch:He du! Wiä chaschäs waagä, da eifach inä z'spazierä ohni ä Bewiuigung.
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -38,7 +38,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Hey2
 	translation.en:I really hope you have a good reason, otherwise I'll have to let you out immediately.
 	translation.de:Ich hoffe wirklich, du hast einen guten Grund. Sonst muss ich dich nämlich wieder hinausbefördern.
-	translation.ch:Ich hoff würkli, du heschen guete Grund. Susch muni di nämli wieder usebefördere.
+	translation.ch:Ig hoffä das würkläch, ä guetä Grund hesch. Süsch muessi di nämlech wider usegheiä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -86,7 +86,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Velius
 	translation.en:The royal highmage is very busy. He does not receive any visitors.
 	translation.de:Der königliche Hochmagier ist äusserst beschäftigt. Er empfängt keine Besucher.
-	translation.ch:De königlich Hochmagier isch üsserst beschäftigt. Er empfangt ke Bsuecher.
+	translation.ch:Dr königlech Hochmagier isch schampar beschäftiget. Är empfaht ke Bsuech.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -100,7 +100,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_King
 	translation.en:And why should our highness King Logan III waste his time talking to you?
 	translation.de:Und wieso sollte unsere Hoheit König Logan III seine Zeit mit dir verschwenden?
-	translation.ch:Und weso söt üseri Hoheit de König Logan III sini Ziit mit dir verschwende?
+	translation.ch:Und weso söu üsä König Logan III si Zit mit dir vergüdä?
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -158,7 +158,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Charming
 	translation.en:Well, I'm pretty sure he doesn't share this intention. Bugger off!
 	translation.de:Nun, ich bin mir ziemlich sicher, dass er diesen Wunsch nicht mit dir teilt. Schwirr ab.
-	translation.ch:Hm, ich bimer zimli sicher, daser de Wunsch nid mit dir teilt. Schwirr ab.
+	translation.ch:Hm, ig bi mir zimläch sicher, das är dä Wunsch nid mit dir teut. Fahr ab.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -174,7 +174,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_NoneBusiness
 	translation.en:Hn. Everyone could tell that. We don't just let everyone to the king. 
 	translation.de:Hn. Jeder könnte das sagen. Wir lassen nicht einfach jeden zum König.
-	translation.ch:Hn. Jeder chönt das sege. Mir lönd nid eifach jede zum König.
+	translation.ch:Hm... Jedä chönnt das verzöuä. Mir löh ni eifach jedä zum König.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -188,7 +188,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Mark
 	translation.en:If that's so... (he stares at your mark) ...you can have a very short audience.
 	translation.de:Wenn das so ist... (er starrt auf dein Mal) ...kannst du eine sehr kurze Audienz haben.
-	translation.ch:Wenn das so isch... (er starrt uf dis Zeiche) ...chasch e ganz churzi Audienz ha.
+	translation.ch:We das so isch... (er starrt uf dis Zeiche) ...chasch ä ganz churzi Audiänz ha.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -204,7 +204,7 @@ npc.id:npc_royalguard_t
 	translation.tag:DL_Royalguard_Mark2
 	translation.en:Follow me.
 	translation.de:Folge mir.
-	translation.ch:Folg mir.
+	translation.ch:Chumm mit.
 	[
 		# Link node, tag is next tag
 		tag:-1

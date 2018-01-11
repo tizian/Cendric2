@@ -50,6 +50,7 @@ enum AchievementID
 	ACH_KILL_ALL_MAGES,
 	ACH_SAVE_ALL_MAGES,
 	ACH_MERCENARY_ORDER,
+	ACH_SPEEDRUN,
 
 	MAX
 };
@@ -94,6 +95,7 @@ static std::map<AchievementID, std::string> AchievementNames = {
 	{ ACH_KILL_ALL_MAGES, "ACH_KILL_ALL_MAGES" },
 	{ ACH_SAVE_ALL_MAGES, "ACH_SAVE_ALL_MAGES" },
 	{ ACH_MERCENARY_ORDER, "ACH_MERCENARY_ORDER" },
+	{ ACH_SPEEDRUN, "ACH_SPEEDRUN" },
 };
 
 static std::string getAchievementName(AchievementID id) {

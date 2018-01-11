@@ -6,6 +6,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Screens/LevelScreen.h"
 #include "Level/DynamicTiles/DivineTorchTile.h"
+#include "Steam/AchievementManager.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::NecroticGrimoire, NecroticGrimoireEnemy)
@@ -112,6 +113,8 @@ void NecroticGrimoireEnemy::summonEnemy() {
 	enemy->setUnique(false);
 	enemy->setDebugBoundingBox(sf::Color::Magenta);
 	m_screen->addObject(enemy);
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_NECRONOMICON, "skeleton");
 }
 
 void NecroticGrimoireEnemy::loadAnimation(int skinNr) {
@@ -126,6 +129,8 @@ void NecroticGrimoireEnemy::setDead() {
 		torch->setTarget(nullptr);
 	}
 	m_torches.clear();
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_NECRONOMICON, "kill");
 }
 
 void NecroticGrimoireEnemy::loadTorches() {
