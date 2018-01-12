@@ -25,6 +25,7 @@ public:
 	EnemyID getEnemyID() const override { return EnemyID::Boss_Elysia; }
 	ElysiaBossState getBossState() const { return m_bossState; }
 	void setBossState(ElysiaBossState state) { m_bossState = state; }
+	void setDead() override;
 
 protected:
 	std::string getSpritePath() const override;

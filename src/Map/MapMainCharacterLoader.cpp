@@ -29,8 +29,8 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 	// the order of the ids in this vector determine the update and rendering order. 
 	std::vector<ItemType> equipmentOrder;
 
-	equipmentOrder.push_back(ItemType::Equipment_body);
 	equipmentOrder.push_back(ItemType::Equipment_head);
+	equipmentOrder.push_back(ItemType::Equipment_body);
 	equipmentOrder.push_back(ItemType::Equipment_back);
 	equipmentOrder.push_back(ItemType::Equipment_weapon);
 	equipmentOrder.push_back(ItemType::Equipment_neck);

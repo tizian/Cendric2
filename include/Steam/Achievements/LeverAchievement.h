@@ -7,5 +7,5 @@ public:
     bool notify(const std::string& message) override;
 private:
 	bool m_hasStarted = false;
-	bool m_currentTurns = 0;
+	int m_currentTurns = 0;
 };

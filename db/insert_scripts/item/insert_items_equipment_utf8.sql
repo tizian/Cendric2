@@ -16,6 +16,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, dmg_physical, res_light, res_physical, res_ice, critical) values ('eq_sack', -5, 100, 5, 10, -5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sack', 'res/texture/equipment/head/spritesheet_head_sack.png', 'res/texture/equipment/head/spritesheet_map_head_sack.png');
 
+-- Chicken Head
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_chicken', 'item', 'Chicken Mask','Hühnermaske','Hüehnermaske');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_chicken', 'item_desc', 'The chicken chaser''s penalty for chasing chicken.','Die Strafe des Hühnerschrecks für das Hühner Erschrecken.','D''Strof vom Hüehnli Schreck fürs Hüenli verschrecke.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_chicken', 'eq_head', 600, 700, 20);
+INSERT INTO item_attribute (item_id, dmg_physical, res_light, res_physical, res_ice, critical) values ('eq_chicken', 2, 30, 10, 10, 1);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_chicken', 'res/texture/equipment/head/spritesheet_head_chicken.png', 'res/texture/equipment/head/spritesheet_map_head_chicken.png');
+
 -- Lava Crown
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item', 'Lava Crown','Lavakrone','Lava Chrone');

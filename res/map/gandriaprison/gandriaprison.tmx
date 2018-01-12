@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="140">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="142">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/prison.ogg"/>
@@ -49,8 +49,8 @@
  <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
   <data encoding="csv">
@@ -83,7 +83,7 @@
 78,78,78,78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,78,78,78,78,
 78,78,78,97,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,78,78,78,78,
 78,78,78,97,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,78,78,78,78,
-78,78,78,78,86,86,89,86,0,86,85,86,0,86,85,86,0,86,89,86,172,78,78,78,78,
+78,78,78,78,86,86,89,86,0,86,85,86,0,86,89,86,0,86,89,86,172,78,78,78,78,
 78,78,78,97,71,0,0,72,0,87,0,65,0,64,0,96,0,103,0,65,172,78,78,78,78,
 78,78,78,97,90,136,0,91,0,0,0,84,0,83,0,0,0,0,0,84,172,78,78,78,78,
 195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,195,
@@ -142,7 +142,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,67,67,70,67,153,67,66,67,153,67,66,67,153,67,70,67,0,0,0,0,0,
+0,0,0,0,67,67,70,67,153,67,66,67,153,67,70,67,153,67,70,67,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -219,7 +219,7 @@
 77,77,77,77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,77,77,77,77,
 77,77,77,77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,77,77,77,77,
 77,77,77,77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,77,77,77,77,
-77,77,77,77,77,77,0,77,77,77,77,77,77,77,77,77,77,77,0,77,77,77,77,77,77,
+77,77,77,77,77,77,0,77,77,77,77,77,77,77,0,77,77,77,0,77,77,77,77,77,77,
 77,77,77,77,77,0,0,77,77,77,0,77,77,77,0,0,77,0,0,77,77,77,77,77,77,
 77,77,77,77,77,0,0,77,77,77,0,77,77,77,0,0,77,0,0,77,77,77,77,77,77,
 77,77,77,77,0,0,0,0,77,0,0,0,77,0,0,0,77,0,0,0,77,77,77,77,77,
@@ -240,6 +240,16 @@
   <object id="133" gid="387" x="302" y="595" width="50" height="50">
    <properties>
     <property name="id" value="npc_morris"/>
+   </properties>
+  </object>
+  <object id="140" gid="429" x="750" y="650" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_chickenchaser"/>
+   </properties>
+  </object>
+  <object id="141" gid="429" x="750" y="650" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_chickenchaser2"/>
    </properties>
   </object>
  </objectgroup>

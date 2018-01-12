@@ -1,0 +1,29 @@
+# dia file for dialogue for npc: npc_chickenchaser
+
+npc.id:npc_chickenchaser
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addItem("eq_chicken", 1)
+	trigger:DL:unlockAchievement("ACH_CHICKEN_SHOCKER")
+	trigger:DL:addConditionProgress("npc_chickenchaser", "dies")
+	# translation: 
+	translation.tag:DL_Chickenchaser_Ah
+	translation.en:Aaaaaaaaaah!
+	translation.de:Aaaaaaaaaah!
+	translation.ch:Aaaaaaaaaah!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

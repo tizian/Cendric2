@@ -60,3 +60,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_royalguard_t','npc','Royal Guard','Königswache','Königswach');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_etoz','npc','Etoz','Etoz','Etoz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_swan','npc','Havnesjefen','Havnesjefen','Havnesjefen');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_chickenchaser','npc','Chicken Chaser','Hühnerschreck','Hüehnli-Schreck');
