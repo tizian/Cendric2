@@ -4,6 +4,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/LightComponent.h"
+#include "Steam/AchievementManager.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Elysia, ElysiaBoss)
@@ -18,6 +19,8 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 	Boss(level, screen) {
 	
 	m_bossState = ElysiaBossState::Projectile;
+
+	g_achievementManager->notifyAchievement(AchievementID::ACH_BOOZE, "start");
 }
 
 void ElysiaBoss::loadAttributes() {
@@ -194,6 +197,11 @@ sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
 	}
 
 	return sf::seconds(0);
+}
+
+void ElysiaBoss::setDead() {
+	Boss::setDead();
+	g_achievementManager->notifyAchievement(AchievementID::ACH_BOOZE, "end");
 }
 
 std::string ElysiaBoss::getSpritePath() const {
