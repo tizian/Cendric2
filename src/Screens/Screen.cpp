@@ -105,10 +105,7 @@ void Screen::setAllButtonsEnabled(bool value) {
 
 void Screen::deleteAllObjects() {
 	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1)) {
-		for (std::vector<GameObject*>::iterator it = m_objects[t].begin(); it != m_objects[t].end(); /*don't increment here*/) {
-			delete (*it);
-			it = m_objects[t].erase(it);
-		}
+		deleteObjects(t);
 	}
 }
 

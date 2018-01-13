@@ -24,7 +24,7 @@ private:
 	bool m_isRendered = false;
 	sf::Sprite m_screenSprite;
 	sf::RectangleShape m_blackRect;
-	sf::Texture m_texture;
+	sf::Texture* m_texture = nullptr;
 
 	WorldScreen* m_worldToLoad = nullptr;
 

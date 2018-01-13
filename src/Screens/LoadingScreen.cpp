@@ -53,8 +53,11 @@ void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 }
 
 void LoadingScreen::execOnEnter() {
-	m_texture = sf::Texture(g_renderTexture->getTexture());
-	m_screenSprite.setTexture(m_texture);
+	g_renderTexture->setActive(true);
+	m_texture = new sf::Texture(g_renderTexture->getTexture());
+	m_screenSprite.setTexture(*m_texture);
 }
 
-void LoadingScreen::execOnExit() {}
+void LoadingScreen::execOnExit() {
+	delete m_texture;
+}
