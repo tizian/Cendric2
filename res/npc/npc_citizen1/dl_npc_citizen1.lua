@@ -28,18 +28,18 @@ loadDialogue = function(DL)
 	DL:addNode()
 
 
-	DL:createNPCNode(6, -2, "DL_Citizen_WhereBlacksmith") -- Our best blacksmith is Harek. You can find him in the artisans district, in the south-west part of Gandria.
+	DL:createNPCNode(6, -2, "DL_Citizen_WhereBlacksmith") -- Our best blacksmith is Harek. You can find him in the artisans' district, in the southwest part of Gandria.
 	DL:gotoNode(3)
 	DL:addNode()
 
 
-	DL:createNPCNode(9, -2, "DL_Citizen_WhereAlchemist") -- You're looking for Syrah. Her house is near the artisans district, in the southern part of Gandria.
+	DL:createNPCNode(9, -2, "DL_Citizen_WhereAlchemist") -- You're looking for Syrah. Her house is near the artisans' district, in the southern part of Gandria.
 	DL:gotoNode(3)
 	DL:addNode()
 
 	if (DL:isConditionFulfilled("npc_zeff", "zeff_gone")) then 
 
-		DL:createNPCNode(8, -2, "DL_Citizen_ZeffHere") -- The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
+		DL:createNPCNode(8, -2, "DL_Citizen_ZeffHere") -- The leatherworker Zeff has his workshop in the artisans' district. Although being transformed into a wolf-human, he's still knows his craft.
 		DL:gotoNode(3)
 		DL:addNode()
 
@@ -47,14 +47,14 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_zeff", "zeff_gone")) then 
 
-		DL:createNPCNode(11, -2, "DL_Citizen_ZeffGone") -- We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
+		DL:createNPCNode(11, -2, "DL_Citizen_ZeffGone") -- We used to have a leatherworker in our city, but he recently disappeared. Nobody knows what happened to him.
 		DL:gotoNode(3)
 		DL:addNode()
 
 	end
 
 
-	DL:createNPCNode(4, -2, "DL_Citizen_WhereTavern") -- The "Basilisk Inn" is in between the artisans district and the harbour, near the market square.
+	DL:createNPCNode(4, -2, "DL_Citizen_WhereTavern") -- The "Basilisk Inn" is in between the artisans' district and the harbour, near the market square.
 	DL:gotoNode(3)
 	DL:addNode()
 
@@ -83,7 +83,7 @@ loadDialogue = function(DL)
 	DL:addNode()
 
 
-	DL:createNPCNode(14, -2, "DL_Citizen_AboutGandria") -- Gandria is not only the capital of Admantris, it plays also an important economic role as a port. 
+	DL:createNPCNode(14, -2, "DL_Citizen_AboutGandria") -- Gandria is not only the capital of Admantris, it also plays an important economic role as a port. 
 	DL:gotoNode(2)
 	DL:addNode()
 

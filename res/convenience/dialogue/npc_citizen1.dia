@@ -135,7 +135,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(3)
 	# translation: 
 	translation.tag:DL_Citizen_WhereBlacksmith
-	translation.en:Our best blacksmith is Harek. You can find him in the artisans district, in the southwest part of Gandria.
+	translation.en:Our best blacksmith is Harek. You can find him in the artisans' district, in the southwest part of Gandria.
 	translation.de:Unser bester Schmied ist Harek. Du findest ihn im Handwerkerviertel, im südwestlichen Teil von Gandria.
 	translation.ch:Üse best Schmied isch de Harek. Du findschen im Handwerkerviertel, im Südweste vo Gandria.
 	[
@@ -150,7 +150,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(3)
 	# translation: 
 	translation.tag:DL_Citizen_WhereAlchemist
-	translation.en:You're looking for Syrah. Her house is near the artisans district, in the southern part of Gandria.
+	translation.en:You're looking for Syrah. Her house is near the artisans' district, in the southern part of Gandria.
 	translation.de:Du suchst Syrah. Ihr Haus ist in der Nähe des Handwerkerviertels, im südlichen Teil von Gandria.
 	translation.ch:Du suechsch d'Syrah. Ihres Huus isch ide Nöchi vom Handwerkerviertel, im südliche Teil vo Gandria.
 	[
@@ -165,7 +165,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(3)
 	# translation: 
 	translation.tag:DL_Citizen_ZeffHere
-	translation.en:The leatherworker Zeff has his workshop in the artisans district. Although being transformed into a wolf-human, he's still knows his craft.
+	translation.en:The leatherworker Zeff has his workshop in the artisans' district. Although being transformed into a wolf-human, he's still knows his craft.
 	translation.de:Der Lederer Zeff hat seine Werkstatt im Handwerkerviertel. Obwohl er in einen Wolfsmenschen verwandelt wurde, beherrscht er sein Handwerk immer noch.
 	translation.ch:De Lederer Zeff het sini Werkstatt im Handwerkerviertel. Sini Fähigkeite hend nid unter sinere Verwandlig inen Wolfsmensch glitte.
 	[
@@ -180,7 +180,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(3)
 	# translation: 
 	translation.tag:DL_Citizen_ZeffGone
-	translation.en:We had a leatherworker once in our city, but he disappeared. Nobody knows what happened to him.
+	translation.en:We used to have a leatherworker in our city, but he recently disappeared. Nobody knows what happened to him.
 	translation.de:Wir hatten mal einen Lederer in unserer Stadt, aber er ist verschwunden. Niemand weiss, was ihm zugestossen ist.
 	translation.ch:Mir hend mal en Lederer i üsere Stadt gha, aber er isch verschwunde. Niemert weiss, wa mit ihm passiert isch.
 	[
@@ -195,7 +195,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(3)
 	# translation: 
 	translation.tag:DL_Citizen_WhereTavern
-	translation.en:The "Basilisk Inn" is in between the artisans district and the harbour, near the market square.
+	translation.en:The "Basilisk Inn" is in between the artisans' district and the harbour, near the market square.
 	translation.de:Das "Gasthaus zum Basilisken" ist zwischen dem Handwerkerviertel und dem Hafen, in der Nähe des Marktplatzes.
 	translation.ch:S'"Gaschthuus zum Basilisk" isch zwüsche em Handwerkerviertel und em Hafe, ide Nöchi vom Marktplatz.
 	[
@@ -304,7 +304,7 @@ npc.id:npc_citizen1
 	trigger:DL:gotoNode(2)
 	# translation: 
 	translation.tag:DL_Citizen_AboutGandria
-	translation.en:Gandria is not only the capital of Admantris, it plays also an important economic role as a port. 
+	translation.en:Gandria is not only the capital of Admantris, it also plays an important economic role as a port. 
 	translation.de:Gandria ist nicht nur die Hauptstadt von Admantris, sondern hat auch eine bedeutende wirtschaftliche Rolle als Hafenstadt.
 	translation.ch:Gandria isch nid nur d'Hauptstadt vo Admantris sondern het au e wichtigi wirtschaftlichi Rolle als Hafestadt.
 	[
