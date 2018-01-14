@@ -63,12 +63,11 @@ void LevelLoader::loadDynamicTiles(LevelData& data, LevelScreen* screen) const {
 void LevelLoader::loadLevelItems(LevelData& data, LevelScreen* screen) const {
 	int x = 0;
 	int y = 0;
-	const CharacterCoreData& coreData = screen->getCharacterCore()->getData();
 
 	// calculate level positions and create them if they are not looted yet
 	for (size_t i = 0; i < data.levelItems.size(); ++i) {
 		auto& it = data.levelItems.at(i);
-		if (!it.empty() && !contains(coreData.itemsLooted.at(data.id), static_cast<int>(i))) {
+		if (!it.empty() && !screen->getCharacterCore()->isItemLooted(data.id, static_cast<int>(i))) {
 			sf::Vector2f position(x * TILE_SIZE_F, y * TILE_SIZE_F);
 			if (!g_resourceManager->getItem(it)) {
 				// unexpected error

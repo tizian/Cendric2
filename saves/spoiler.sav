@@ -261,6 +261,7 @@ item.id:we_torch,1
 item.id:we_walkingpole,1
 item.id:we_zeffssword,1
 item.id:we_leeroysword,1
+item.id:we_arazath,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:

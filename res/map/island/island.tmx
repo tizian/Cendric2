@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="50" tileheight="50" nextobjectid="322">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="25" tilewidth="50" tileheight="50" nextobjectid="323">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="musicpath" value="res/music/brokenbridge.ogg"/>
@@ -500,6 +500,15 @@
     <property name="level entry" value="res/level/ppuzzle02/ppuzzle02.tmx,350,4760"/>
     <property name="not conditions" value="trigger,tower_2_done"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="322" x="1200" y="650" width="50" height="50">
+   <properties>
+    <property name="add item" value="do_arazathletter,1"/>
+    <property name="add item 2" value="we_arazath,1"/>
+    <property name="add item 3" value="fo_ultimatehealingpotion,1"/>
+    <property name="conditions" value="trigger,tower_4_done"/>
+    <property name="forced" value=""/>
    </properties>
   </object>
  </objectgroup>

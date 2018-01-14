@@ -58,3 +58,10 @@ Chicken Chaser','GESUCHT
 Hühnerschreck','GSUECHT
 
 Hüehnli-Schreck');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Brothel1','sign','THE RED PEARL
+
+Come and enjoy!','DIE ROTE PERLE
+
+Echte Aufsteller!','DI ROT PERLE
+
+Echti Ufsteller!');

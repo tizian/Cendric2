@@ -327,8 +327,12 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestComplete("tower_1")) then 
 
-			DL:createNPCNode(36, -2, "DL_Etoz_FirstTowerClimbed") -- Well done.
+			DL:createNPCNode(36, 67, "DL_Etoz_FirstTowerClimbed") -- Well, that tower wasn't really a challenge - rather, a joke.
 			DL:changeQuestState("tower_1", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(67, -2, "DL_Etoz_FirstTowerClimbed2") -- The next tower is easy as well - but someone like you is still likely to fall and die.
 			DL:addNode()
 
 		end
@@ -338,12 +342,12 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("tower_key_2", "void")) then 
 
 		DL:createChoiceNode(45)
-		DL:addChoice(53, "DL_Choice_GimmeKeyQuest") -- Gimme the key quest.
+		DL:addChoice(53, "DL_Choice_SecondTowerKeyQuest") -- I won't fail. Where is the key to the second tower?
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 
-		DL:createNPCNode(53, -2, "DL_Etoz_GimmeKeyQuest") -- Here.
+		DL:createNPCNode(53, -2, "DL_Etoz_SecondTowerKeyQuest") -- Where the first one was, of course. Go and fetch it!
 		DL:changeQuestState("tower_key_2", "started")
 		DL:addNode()
 
@@ -355,20 +359,39 @@ loadDialogue = function(DL)
 		if (DL:isQuestComplete("tower_key_2")) then 
 			DL:addChoice(54, "DL_Choice_GotKey") -- 
 		end
+		if (not DL:isConditionFulfilled("npc_etoz", "chest_empty")) then 
+			DL:addChoice(69, "DL_Choice_ChestEmpty") -- The chest on the tower was empty...
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_key_2")) then 
 
-			DL:createNPCNode(54, 55, "DL_Etoz_GotKey2") -- Good.
+			DL:createNPCNode(54, 55, "DL_Etoz_GotSecondKey") -- Huh. Good. (Etoz takes the other part of the key out of his cloak)
 			DL:removeItem("qe_tower_2", 1)
 			DL:changeQuestState("tower_key_2", "completed")
 			DL:addNode()
 
 
-			DL:createNPCNode(55, -2, "DL_Etoz_GotKey22") -- Here.
+			DL:createNPCNode(55, 68, "DL_Etoz_GotSecondKey2") -- Here is the key to the second tower.
 			DL:addItem("ke_tower_2", 1)
 			DL:changeQuestState("tower_2", "started")
+			DL:addNode()
+
+
+			DL:createNPCNode(68, -2, "DL_Etoz_GotSecondKey3") -- Go back to Os and try. But don't come back crying if you fail.
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "chest_empty")) then 
+
+			DL:createNPCNode(69, 70, "DL_Etoz_ChestEmpty") -- It was - because you're not worthy of receiving loot.
+			DL:addConditionProgress("npc_etoz", "chest_empty")
+			DL:addNode()
+
+
+			DL:createNPCNode(70, -2, "DL_Etoz_ChestEmpty2") -- Maybe you'll be worthy... but it needs time.
 			DL:addNode()
 
 		end
@@ -379,14 +402,14 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(47)
 		if (DL:isQuestComplete("tower_2")) then 
-			DL:addChoice(56, "DL_Choice_FirstTowerClimbed") -- 
+			DL:addChoice(56, "DL_Choice_SecondTowerClimbed") -- I climbed the tower, but the chest was still empty.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_2")) then 
 
-			DL:createNPCNode(56, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:createNPCNode(56, -2, "DL_Etoz_SecondTowerClimbed") -- The chest won't be filled until the sky turns crimson.
 			DL:changeQuestState("tower_2", "completed")
 			DL:addNode()
 
@@ -397,12 +420,12 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("tower_key_3", "void")) then 
 
 		DL:createChoiceNode(48)
-		DL:addChoice(57, "DL_Choice_GimmeKeyQuest") -- 
+		DL:addChoice(57, "DL_Choice_GimmeKeyQuestThird") -- Should I get another key?
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 
-		DL:createNPCNode(57, -2, "DL_Etoz_GimmeKeyQuest") -- 
+		DL:createNPCNode(57, -2, "DL_Etoz_GimmeKeyQuestThird") -- Yes. How did you know? (Giggles)
 		DL:changeQuestState("tower_key_3", "started")
 		DL:addNode()
 
@@ -412,20 +435,20 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(49)
 		if (DL:isQuestComplete("tower_key_3")) then 
-			DL:addChoice(58, "DL_Choice_GotKey") -- 
+			DL:addChoice(58, "DL_Choice_GotThirdKey") -- I got your dumb key.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_key_3")) then 
 
-			DL:createNPCNode(58, 59, "DL_Etoz_GotKey2") -- 
+			DL:createNPCNode(58, 59, "DL_Etoz_GotThirdKey") -- Is someone getting annoyed? As I thought - no endurance.
 			DL:removeItem("qe_tower_3", 1)
 			DL:changeQuestState("tower_key_3", "completed")
 			DL:addNode()
 
 
-			DL:createNPCNode(59, -2, "DL_Etoz_GotKey22") -- 
+			DL:createNPCNode(59, -2, "DL_Etoz_GotThirdKey2") -- But if you want to try it anyway... here you go.
 			DL:addItem("ke_tower_3", 1)
 			DL:changeQuestState("tower_3", "started")
 			DL:addNode()
@@ -438,15 +461,26 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(50)
 		if (DL:isQuestComplete("tower_3")) then 
-			DL:addChoice(60, "DL_Choice_FirstTowerClimbed") -- 
+			DL:addChoice(60, "DL_Choice_ThirdTowerClimbed") -- I'm back... and I'm still alive.
+		end
+		if (not DL:isConditionFulfilled("npc_etoz", "games")) then 
+			DL:addChoice(71, "DL_Choice_Games") -- Are you playing games with me?
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_3")) then 
 
-			DL:createNPCNode(60, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:createNPCNode(60, -2, "DL_Etoz_ThirdTowerClimbed") -- No scratches? You're doing well for someone with no skill.
 			DL:changeQuestState("tower_3", "completed")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "games")) then 
+
+			DL:createNPCNode(71, -2, "DL_Etoz_Games") -- Me? No, I'm just giving you a chance to be as terrific as I am.
+			DL:addConditionProgress("npc_etoz", "games")
 			DL:addNode()
 
 		end
@@ -456,13 +490,17 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("tower_key_4", "void")) then 
 
 		DL:createChoiceNode(51)
-		DL:addChoice(61, "DL_Choice_GimmeKeyQuest") -- 
+		DL:addChoice(61, "DL_Choice_GimmeFourthKeyQuest") -- Will the next key be the last one?
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 
-		DL:createNPCNode(61, -2, "DL_Etoz_GimmeKeyQuest") -- 
+		DL:createNPCNode(61, 72, "DL_Etoz_GimmeFourthKeyQuest") -- Yes.
 		DL:changeQuestState("tower_key_4", "started")
+		DL:addNode()
+
+
+		DL:createNPCNode(72, -2, "DL_Etoz_GimmeFourthKeyQuest2") -- Now go and get me that last key.
 		DL:addNode()
 
 	end
@@ -471,22 +509,26 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(62)
 		if (DL:isQuestComplete("tower_key_4")) then 
-			DL:addChoice(64, "DL_Choice_GotKey") -- 
+			DL:addChoice(64, "DL_Choice_GotFourthKey") -- I found the last key part.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_key_4")) then 
 
-			DL:createNPCNode(64, 65, "DL_Etoz_GotKey2") -- 
+			DL:createNPCNode(64, 65, "DL_Etoz_GotFourthKey") -- Neat.
 			DL:removeItem("qe_tower_4", 1)
 			DL:changeQuestState("tower_key_4", "completed")
 			DL:addNode()
 
 
-			DL:createNPCNode(65, -2, "DL_Etoz_GotKey22") -- 
+			DL:createNPCNode(65, 73, "DL_Etoz_GotFourthKey2") -- Here you go. I don't expect you to come back.
 			DL:addItem("ke_tower_4", 1)
 			DL:changeQuestState("tower_4", "started")
+			DL:addNode()
+
+
+			DL:createNPCNode(73, -2, "DL_Etoz_GotFourthKey3") -- I mastered the fourth tower with my eyes closed - but you, you should get ready to meet your creator.
 			DL:addNode()
 
 		end
@@ -497,15 +539,43 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(63)
 		if (DL:isQuestComplete("tower_4")) then 
-			DL:addChoice(66, "DL_Choice_FirstTowerClimbed") -- 
+			DL:addChoice(66, "DL_Choice_FourthTowerClimbed") -- I was up there - but I guess you were not.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (DL:isQuestComplete("tower_4")) then 
 
-			DL:createNPCNode(66, -2, "DL_Etoz_FirstTowerClimbed") -- 
+			DL:createNPCNode(66, 74, "DL_Etoz_FourthTowerClimbed") -- Unbelievable! What did you find up there?
 			DL:changeQuestState("tower_4", "completed")
+			DL:addNode()
+
+
+			DL:createChoiceNode(74)
+			DL:addChoice(75, "DL_Choice_YouMustKnow") -- Aha? So you don't know it yourself?
+			if (DL:isQuestDescriptionUnlocked("tower_4", 1)) then 
+				DL:addChoice(77, "DL_Choice_YourGranda") -- Your old pa left something there for you...
+			end
+			DL:addChoice(78, "DL_Choice_NothingFound") -- Nothing. I found nothing.
+			DL:addNode()
+
+
+			DL:createNPCNode(75, 76, "DL_Etoz_YouMustKnow") -- Well... ehm... uh... the chest contains something different depending on who's opening it?
+			DL:addNode()
+
+
+			DL:createNPCNode(76, -2, "DL_Etoz_YouMustKnow2") -- Doesn't matter! Show me!
+			DL:addNode()
+
+			if (DL:isQuestDescriptionUnlocked("tower_4", 1)) then 
+
+				DL:createNPCNode(77, -2, "DL_Etoz_YourGranda") -- Did he? Show me!
+				DL:addNode()
+
+			end
+
+
+			DL:createNPCNode(78, -2, "DL_Etoz_NothingFound") -- No! That can't be true! You must have found something! Show me!
 			DL:addNode()
 
 		end
@@ -514,7 +584,125 @@ loadDialogue = function(DL)
 
 
 	DL:createChoiceNode(52)
-	DL:addChoice(-1, "") -- 
+	if (DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")) then 
+		DL:addChoice(79, "DL_Choice_ShowLegacy") -- I found your legacy. (Show sword and letter)
+	end
+	if (not DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")) then 
+		DL:addChoice(80, "DL_Choice_ShowSword") -- I found this. (Show sword and letter)
+	end
+	DL:addChoice(-1, "DL_Choice_Loser") -- See you later, loser.
 	DL:addNode()
+
+	if (DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")) then 
+
+		DL:createNPCNode(79, 81, "DL_Etoz_ShowLegacy") -- Whaaat? That's mine, give it to me!
+		DL:addNode()
+
+
+		DL:createChoiceNode(81)
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+			DL:addChoice(85, "DL_Choice_GiveSwordAsk") -- What do you give me in exchange?
+		end
+		if (DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")) then 
+			DL:addChoice(90, "DL_Choice_GiveSwordMoney") -- Give me the gold, I'll give you what I found.
+		end
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+			DL:addChoice(83, "DL_Choice_GiveSword") -- Sure. Take it. (Give sword and letter)
+		end
+		DL:addChoice(86, "DL_Choice_Never") -- You wish.
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+
+			DL:createNPCNode(85, -2, "DL_Etoz_GiveSwordAsk") -- Everything. Everything I have. A hundred golden coins. Just give me my stuff!
+			DL:gotoNode(81)
+			DL:addConditionProgress("npc_etoz", "ask_money")
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")) then 
+
+			DL:createNPCNode(90, -1, "DL_Etoz_GiveSwordMoney") -- Here... here! (Etoz hastily takes the sword and the letter from you)
+			DL:addConditionProgress("npc_etoz", "show_sword")
+			DL:removeItem("we_arazath", 1)
+			DL:removeItem("do_arazathletter", 1)
+			DL:addGold(100)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+
+			DL:createNPCNode(83, -1, "DL_Etoz_GiveSword") -- Huh... You're even dumber than I expected.
+			DL:addConditionProgress("npc_etoz", "show_sword")
+			DL:removeItem("we_arazath", 1)
+			DL:removeItem("do_arazathletter", 1)
+			DL:addNode()
+
+		end
+
+
+		DL:createNPCNode(86, -2, "DL_Etoz_Never") -- Grrrr. You will pay for this!
+		DL:addConditionProgress("npc_etoz", "show_sword")
+		DL:addNode()
+
+	end
+
+	if (not DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")) then 
+
+		DL:createNPCNode(80, 82, "DL_Etoz_ShowLegacy") -- 
+		DL:addNode()
+
+
+		DL:createChoiceNode(82)
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+			DL:addChoice(84, "DL_Choice_GiveSwordAsk") -- 
+		end
+		if (DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")) then 
+			DL:addChoice(89, "DL_Choice_GiveSwordMoney") -- 
+		end
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+			DL:addChoice(88, "DL_Choice_GiveSword") -- 
+		end
+		DL:addChoice(87, "DL_Choice_Never") -- 
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+
+			DL:createNPCNode(84, -2, "DL_Etoz_GiveSwordAsk") -- 
+			DL:gotoNode(82)
+			DL:addConditionProgress("npc_etoz", "ask_money")
+			DL:addNode()
+
+		end
+
+		if (DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")) then 
+
+			DL:createNPCNode(89, -1, "DL_Etoz_GiveSwordMoney") -- 
+			DL:addConditionProgress("npc_etoz", "show_sword")
+			DL:removeItem("we_arazath", 1)
+			DL:removeItem("do_arazathletter", 1)
+			DL:addGold(100)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
+
+			DL:createNPCNode(88, -1, "DL_Etoz_GiveSword") -- 
+			DL:addConditionProgress("npc_etoz", "show_sword")
+			DL:removeItem("we_arazath", 1)
+			DL:removeItem("do_arazathletter", 1)
+			DL:addNode()
+
+		end
+
+
+		DL:createNPCNode(87, -2, "DL_Etoz_Never") -- 
+		DL:addConditionProgress("npc_etoz", "show_sword")
+		DL:addNode()
+
+	end
 
 end

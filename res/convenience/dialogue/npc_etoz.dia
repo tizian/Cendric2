@@ -867,9 +867,23 @@ npc.id:npc_etoz
 	trigger:DL:changeQuestState("tower_1", "completed")
 	# translation: 
 	translation.tag:DL_Etoz_FirstTowerClimbed
-	translation.en:Well done.
-	translation.de:Gut gemacht.
-	translation.ch:Guet gmacht.
+	translation.en:Well, that tower wasn't really a challenge - rather, a joke.
+	translation.de:Nun, dieser Turm war ja auch nicht wirklich eine Herausforderung - ein Witz ist er.
+	translation.ch:Jo, de Turm isch ja au nid würkli e Herusforderig gsi - en Witz ischer.
+	[
+		# Link node, tag is next tag
+		tag:67
+	]
+}
+{1
+	# [67] NPC Node
+	tag:67
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_FirstTowerClimbed2
+	translation.en:The next tower is easy as well - but someone like you is still likely to fall and die.
+	translation.de:Der nächste Turm ist auch einfach - aber jemand wie du wird wahrscheinlich herunterfallen und sterben.
+	translation.ch:De nechst Turm isch au eifach - aber öpper wi du wird wohrschinli abegheie und verrecke.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -882,10 +896,10 @@ npc.id:npc_etoz
 		# Link node, tag is next tag
 		tag:53
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyQuest
-		translation.en:Gimme the key quest.
-		translation.de:Schlüssel Quest!
-		translation.ch:Schlüssel Quest!
+		translation.tag:DL_Choice_SecondTowerKeyQuest
+		translation.en:I won't fail. Where is the key to the second tower?
+		translation.de:Ich werde es schaffen. Wo ist der Schlüssel zum zweiten Turm?
+		translation.ch:Ich wird's schaffe. Wo isch de Schlüssel zum zweite Turm?
 	]
 	[
 		# Link node, tag is next tag
@@ -903,10 +917,10 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_key_2", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GimmeKeyQuest
-	translation.en:Here.
-	translation.de:Hier.
-	translation.ch:Do.
+	translation.tag:DL_Etoz_SecondTowerKeyQuest
+	translation.en:Where the first one was, of course. Go and fetch it!
+	translation.de:Wo der erste war, natürlich. Geh und hol ihn!
+	translation.ch:Wo de erscht gsi isch, natürli. Gang und holen!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -927,6 +941,16 @@ npc.id:npc_etoz
 	]
 	[
 		# Link node, tag is next tag
+		tag:69
+		condition:not DL:isConditionFulfilled("npc_etoz", "chest_empty")
+		# translation: 
+		translation.tag:DL_Choice_ChestEmpty
+		translation.en:The chest on the tower was empty...
+		translation.de:Die Truhe auf dem Turm war leer...
+		translation.ch:D'True ufem Turm isch leer gsi...
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -942,10 +966,10 @@ npc.id:npc_etoz
 	trigger:DL:removeItem("qe_tower_2", 1)
 	trigger:DL:changeQuestState("tower_key_2", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey2
-	translation.en:Good.
-	translation.de:Gut.
-	translation.ch:Guet.
+	translation.tag:DL_Etoz_GotSecondKey
+	translation.en:Huh. Good. (Etoz takes the other part of the key out of his cloak)
+	translation.de:Huh. Gut. (Etoz nimmt den anderen Teil des Schlüssels aus seinem Mantel)
+	translation.ch:Huh. Guet. (De Etoz nimmt de ander Teil vom Schlüssel us sim Mantel)
 	[
 		# Link node, tag is next tag
 		tag:55
@@ -958,10 +982,53 @@ npc.id:npc_etoz
 	trigger:DL:addItem("ke_tower_2", 1)
 	trigger:DL:changeQuestState("tower_2", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey22
-	translation.en:Here.
-	translation.de:Hier.
-	translation.ch:Do.
+	translation.tag:DL_Etoz_GotSecondKey2
+	translation.en:Here is the key to the second tower.
+	translation.de:Hier ist der Schlüssel zum zweiten Turm.
+	translation.ch:Do isch de Schlüssel zum zweite Turm.
+	[
+		# Link node, tag is next tag
+		tag:68
+	]
+}
+{1
+	# [68] NPC Node
+	tag:68
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_GotSecondKey3
+	translation.en:Go back to Os and try. But don't come back crying if you fail.
+	translation.de:Geh wieder nach Os und versuchs. Aber komm nicht weinend zurück wenn du scheiterst.
+	translation.ch:Gang wieder nach Os und probiers. Aber chum nid brüelend zrugg wend failsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [69] NPC Node
+	tag:69
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "chest_empty")
+	# translation: 
+	translation.tag:DL_Etoz_ChestEmpty
+	translation.en:It was - because you're not worthy of receiving loot.
+	translation.de:Sie war leer - weil du nicht würdig bist, etwas daraus zu nehmen.
+	translation.ch:Si isch leer gsi - well du nid würdig bisch zum öppis drus zne.
+	[
+		# Link node, tag is next tag
+		tag:70
+	]
+}
+{1
+	# [70] NPC Node
+	tag:70
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_ChestEmpty2
+	translation.en:Maybe you'll be worthy... but it needs time.
+	translation.de:Vielleicht wirst du einmal würdig sein... aber das braucht Zeit.
+	translation.ch:Vilicht wirsch ja mal würdig si... aber das brucht Ziit.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -975,10 +1042,10 @@ npc.id:npc_etoz
 		tag:56
 		condition:DL:isQuestComplete("tower_2")
 		# translation: 
-		translation.tag:DL_Choice_FirstTowerClimbed
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_SecondTowerClimbed
+		translation.en:I climbed the tower, but the chest was still empty.
+		translation.de:Ich bin auf den Turm gestiegen, aber die Truhe war immer noch leer.
+		translation.ch:Ich bi uf de Turm gstiege, aber d'True isch immerna leer gsi.
 	]
 	[
 		# Link node, tag is next tag
@@ -996,10 +1063,10 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_2", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_FirstTowerClimbed
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_SecondTowerClimbed
+	translation.en:The chest won't be filled until the sky turns crimson.
+	translation.de:Die Truhe wird nicht gefüllt sein, bis der Himmel blutrot wird.
+	translation.ch:D'True wird nid gfüllt si, bis de Himmel bluetrot wird.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1012,10 +1079,10 @@ npc.id:npc_etoz
 		# Link node, tag is next tag
 		tag:57
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyQuest
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_GimmeKeyQuestThird
+		translation.en:Should I get another key?
+		translation.de:Soll ich noch ein Schlüssel holen?
+		translation.ch:Söli namal en Schlüssel hole?
 	]
 	[
 		# Link node, tag is next tag
@@ -1033,10 +1100,10 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_key_3", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GimmeKeyQuest
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GimmeKeyQuestThird
+	translation.en:Yes. How did you know? (Giggles)
+	translation.de:Ja. Wie konntest du das bloss erraten? (Kichert)
+	translation.ch:Jo. We hesch das bloss verrate chöne? (Gigglet)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1050,10 +1117,10 @@ npc.id:npc_etoz
 		tag:58
 		condition:DL:isQuestComplete("tower_key_3")
 		# translation: 
-		translation.tag:DL_Choice_GotKey
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_GotThirdKey
+		translation.en:I got your dumb key.
+		translation.de:Ich habe deinen dummen Schlüssel.
+		translation.ch:Ich ha din dumme Schlüssel.
 	]
 	[
 		# Link node, tag is next tag
@@ -1072,10 +1139,10 @@ npc.id:npc_etoz
 	trigger:DL:removeItem("qe_tower_3", 1)
 	trigger:DL:changeQuestState("tower_key_3", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey2
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GotThirdKey
+	translation.en:Is someone getting annoyed? As I thought - no endurance.
+	translation.de:Ist da etwa jemand genervt? Wie ich gedacht habe - keine Ausdauer.
+	translation.ch:Isch do öppe öpper gnervt? We ich denkt ha - ke Usduur.
 	[
 		# Link node, tag is next tag
 		tag:59
@@ -1088,10 +1155,10 @@ npc.id:npc_etoz
 	trigger:DL:addItem("ke_tower_3", 1)
 	trigger:DL:changeQuestState("tower_3", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey22
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GotThirdKey2
+	translation.en:But if you want to try it anyway... here you go.
+	translation.de:Aber wenn du es trotzdem ausprobieren willst... hier, nimm.
+	translation.ch:Aber wennds  trotzdem usprobiere wetsch... do, nimm.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1105,10 +1172,20 @@ npc.id:npc_etoz
 		tag:60
 		condition:DL:isQuestComplete("tower_3")
 		# translation: 
-		translation.tag:DL_Choice_FirstTowerClimbed
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_ThirdTowerClimbed
+		translation.en:I'm back... and I'm still alive.
+		translation.de:Ich bin zurück... und ich lebe noch.
+		translation.ch:Ich bi zrugg... und ich leb na.
+	]
+	[
+		# Link node, tag is next tag
+		tag:71
+		condition:not DL:isConditionFulfilled("npc_etoz", "games")
+		# translation: 
+		translation.tag:DL_Choice_Games
+		translation.en:Are you playing games with me?
+		translation.de:Spielst du etwa Spielchen mit mir?
+		translation.ch:Spielsch du irgendwelchli Spiili mit mir oder was?
 	]
 	[
 		# Link node, tag is next tag
@@ -1126,10 +1203,25 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_3", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_FirstTowerClimbed
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_ThirdTowerClimbed
+	translation.en:No scratches? You're doing well for someone with no skill.
+	translation.de:Keine Kratzer? Du hältst dich gut für jemand, der eigentlich so unfähig ist.
+	translation.ch:Ke Chratzer? Du haltisch dich guet für öpper wo eigentlich so unfähig isch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [71] NPC Node
+	tag:71
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "games")
+	# translation: 
+	translation.tag:DL_Etoz_Games
+	translation.en:Me? No, I'm just giving you a chance to be as terrific as I am.
+	translation.de:Ich? Nein, ich gebe dir nur eine Chance, auch so grandios zu sein wie ich es bin.
+	translation.ch:Ich? Nei, ich gib der nur e Chance zum au so bombig z'si we ichs bin.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1142,10 +1234,10 @@ npc.id:npc_etoz
 		# Link node, tag is next tag
 		tag:61
 		# translation: 
-		translation.tag:DL_Choice_GimmeKeyQuest
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_GimmeFourthKeyQuest
+		translation.en:Will the next key be the last one?
+		translation.de:Wird der nächste Schlüssel der letzte sein?
+		translation.ch:Wird de next Schlüssel de letzt si?
 	]
 	[
 		# Link node, tag is next tag
@@ -1163,10 +1255,24 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_key_4", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GimmeKeyQuest
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GimmeFourthKeyQuest
+	translation.en:Yes.
+	translation.de:Ja.
+	translation.ch:Jo.
+	[
+		# Link node, tag is next tag
+		tag:72
+	]
+}
+{1
+	# [72] NPC Node
+	tag:72
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_GimmeFourthKeyQuest2
+	translation.en:Now go and get me that last key.
+	translation.de:Nun geh und hol mir diesen letzten Schlüssel.
+	translation.ch:Jetz gang und hol mer de letzt Schlüssel.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1180,10 +1286,10 @@ npc.id:npc_etoz
 		tag:64
 		condition:DL:isQuestComplete("tower_key_4")
 		# translation: 
-		translation.tag:DL_Choice_GotKey
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_GotFourthKey
+		translation.en:I found the last key part.
+		translation.de:Ich habe den letzten Schlüsselteil gefunden.
+		translation.ch:Ich ha de letzt Schlüsselteil gfunde.
 	]
 	[
 		# Link node, tag is next tag
@@ -1202,10 +1308,10 @@ npc.id:npc_etoz
 	trigger:DL:removeItem("qe_tower_4", 1)
 	trigger:DL:changeQuestState("tower_key_4", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey2
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GotFourthKey
+	translation.en:Neat.
+	translation.de:Prima.
+	translation.ch:Prima.
 	[
 		# Link node, tag is next tag
 		tag:65
@@ -1218,10 +1324,24 @@ npc.id:npc_etoz
 	trigger:DL:addItem("ke_tower_4", 1)
 	trigger:DL:changeQuestState("tower_4", "started")
 	# translation: 
-	translation.tag:DL_Etoz_GotKey22
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_GotFourthKey2
+	translation.en:Here you go. I don't expect you to come back.
+	translation.de:Hier, nimm. Ich erwarte nicht, dass du wieder kommst.
+	translation.ch:Do, nimm. Ich erwart aber nid, dassd wieder chunsch.
+	[
+		# Link node, tag is next tag
+		tag:73
+	]
+}
+{1
+	# [73] NPC Node
+	tag:73
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_GotFourthKey3
+	translation.en:I mastered the fourth tower with my eyes closed - but you, you should get ready to meet your creator.
+	translation.de:Ich habe den vierten Turm mit geschlossenen Augen gemeistert - aber du, schreib schon mal dein Testament.
+	translation.ch:Ich ha de viert Turm mit gschlossene Auge gschafft - aber du, du sötsch schomal dis Testament schribe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1235,10 +1355,10 @@ npc.id:npc_etoz
 		tag:66
 		condition:DL:isQuestComplete("tower_4")
 		# translation: 
-		translation.tag:DL_Choice_FirstTowerClimbed
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_FourthTowerClimbed
+		translation.en:I was up there - but I guess you were not.
+		translation.de:Ich war oben - aber ich nehme an, du warst es nicht.
+		translation.ch:Ich bi obe gsi - aber ich nimm ah, du nid.
 	]
 	[
 		# Link node, tag is next tag
@@ -1256,10 +1376,98 @@ npc.id:npc_etoz
 	# triggers: 
 	trigger:DL:changeQuestState("tower_4", "completed")
 	# translation: 
-	translation.tag:DL_Etoz_FirstTowerClimbed
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Etoz_FourthTowerClimbed
+	translation.en:Unbelievable! What did you find up there?
+	translation.de:Unglaublich! Was hast du da oben gefunden?
+	translation.ch:Unglaublich! Wa hesch denn da obe gfunde?
+	[
+		# Link node, tag is next tag
+		tag:74
+	]
+}
+{2
+	# [74] Choice Node
+	tag:74
+	[
+		# Link node, tag is next tag
+		tag:75
+		# translation: 
+		translation.tag:DL_Choice_YouMustKnow
+		translation.en:Aha? So you don't know it yourself?
+		translation.de:Aha? Du selbst weisst es also nicht?
+		translation.ch:Aha? Du selber weisches also nid?
+	]
+	[
+		# Link node, tag is next tag
+		tag:77
+		condition:DL:isQuestDescriptionUnlocked("tower_4", 1)
+		# translation: 
+		translation.tag:DL_Choice_YourGranda
+		translation.en:Your old pa left something there for you...
+		translation.de:Dein Grossvater hat dort etwas für dich zurückgelassen...
+		translation.ch:Din Grosspapi het det öppis für dich zruggglo...
+	]
+	[
+		# Link node, tag is next tag
+		tag:78
+		# translation: 
+		translation.tag:DL_Choice_NothingFound
+		translation.en:Nothing. I found nothing.
+		translation.de:Nichts. Ich habe nichts gefunden.
+		translation.ch:Nüt. Ich ha nüt gfunde.
+	]
+}
+{1
+	# [75] NPC Node
+	tag:75
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_YouMustKnow
+	translation.en:Well... ehm... uh... the chest contains something different depending on who's opening it?
+	translation.de:Nun... ähm... eh... die Truhe hat einen anderen Inhalt, wenn sie von jemand anderem geöffnet wird?
+	translation.ch:Ja... ähm... eh... d'True het en andere Inhalt, wenn si vo öpperem anderem ufgmacht wird?
+	[
+		# Link node, tag is next tag
+		tag:76
+	]
+}
+{1
+	# [76] NPC Node
+	tag:76
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_YouMustKnow2
+	translation.en:Doesn't matter! Show me!
+	translation.de:Ist ja auch egal! Zeigs mir!
+	translation.ch:Isch ja au egal! Zeigs mer!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [77] NPC Node
+	tag:77
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_YourGranda
+	translation.en:Did he? Show me!
+	translation.de:Achja? Zeigs mir!
+	translation.ch:Ahjo? Zeigs mer!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [78] NPC Node
+	tag:78
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_NothingFound
+	translation.en:No! That can't be true! You must have found something! Show me!
+	translation.de:Nein! Das kann nicht wahr sein! Du musst etwas gefunden haben! Zeigs mir!
+	translation.ch:Nei! Das cha nid sii! Du hesch sicher öppis gfunde! Zeigs mer!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1270,11 +1478,277 @@ npc.id:npc_etoz
 	tag:52
 	[
 		# Link node, tag is next tag
+		tag:79
+		condition:DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")
+		# translation: 
+		translation.tag:DL_Choice_ShowLegacy
+		translation.en:I found your legacy. (Show sword and letter)
+		translation.de:Ich habe dein Erbe gefunden. (Schwert und Brief zeigen)
+		translation.ch:Ich ha dis Erbe gfunde. (Schwert und Brief zeige)
+	]
+	[
+		# Link node, tag is next tag
+		tag:80
+		condition:not DL:isQuestDescriptionUnlocked("tower_4", 1) and not DL:isConditionFulfilled("npc_etoz", "show_sword")
+		# translation: 
+		translation.tag:DL_Choice_ShowSword
+		translation.en:I found this. (Show sword and letter)
+		translation.de:Ich habe das gefunden. (Schwert und Brief zeigen)
+		translation.ch:Ich ha das gfunde. (Schwert und Brief zeige)
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
-		translation.tag:
+		translation.tag:DL_Choice_Loser
+		translation.en:See you later, loser.
+		translation.de:Bis bald, du Pfeife.
+		translation.ch:Bis bald, du Lauch.
+	]
+}
+{1
+	# [79] NPC Node
+	tag:79
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_ShowLegacy
+	translation.en:Whaaat? That's mine, give it to me!
+	translation.de:Waaas? Das gehört mir, gibs mir!
+	translation.ch:Waaas? Das ghört mir, gibs mir!
+	[
+		# Link node, tag is next tag
+		tag:81
+	]
+}
+{2
+	# [81] Choice Node
+	tag:81
+	[
+		# Link node, tag is next tag
+		tag:85
+		condition:not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)
+		# translation: 
+		translation.tag:DL_Choice_GiveSwordAsk
+		translation.en:What do you give me in exchange?
+		translation.de:Was gibst du mir dafür?
+		translation.ch:Was gischmer defür?
+	]
+	[
+		# Link node, tag is next tag
+		tag:90
+		condition:DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")
+		# translation: 
+		translation.tag:DL_Choice_GiveSwordMoney
+		translation.en:Give me the gold, I'll give you what I found.
+		translation.de:Gib mir das Gold, ich gebe dir, was ich gefunden hab.
+		translation.ch:Gibmer's Gold, ich gib der, wani gfunde ha.
+	]
+	[
+		# Link node, tag is next tag
+		tag:83
+		condition:not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)
+		# translation: 
+		translation.tag:DL_Choice_GiveSword
+		translation.en:Sure. Take it. (Give sword and letter)
+		translation.de:Sicher. Hier, nimm es. (Schwert und Brief geben)
+		translation.ch:Sicher. Do, nimms. (Schwert und Brief ge)
+	]
+	[
+		# Link node, tag is next tag
+		tag:86
+		# translation: 
+		translation.tag:DL_Choice_Never
+		translation.en:You wish.
+		translation.de:Hättest du wohl gerne.
+		translation.ch:Hetsch wohl gern.
+	]
+}
+{1
+	# [85] NPC Node
+	tag:85
+	# triggers: 
+	trigger:DL:gotoNode(81)
+	trigger:DL:addConditionProgress("npc_etoz", "ask_money")
+	# translation: 
+	translation.tag:DL_Etoz_GiveSwordAsk
+	translation.en:Everything. Everything I have. A hundred golden coins. Just give me my stuff!
+	translation.de:Alles. Alles was ich hab. Hundert goldene Münzen. Gib mir einfach mein Zeugs!
+	translation.ch:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [90] NPC Node
+	tag:90
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:removeItem("we_arazath", 1)
+	trigger:DL:removeItem("do_arazathletter", 1)
+	trigger:DL:addGold(100)
+	# translation: 
+	translation.tag:DL_Etoz_GiveSwordMoney
+	translation.en:Here... here! (Etoz hastily takes the sword and the letter from you)
+	translation.de:Hier... hier! (Etoz reisst das Schwert und den Brief schnell an sich)
+	translation.ch:Do... do! (De Etoz riist es Schwert und de Brief schnell a sich)
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [83] NPC Node
+	tag:83
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:removeItem("we_arazath", 1)
+	trigger:DL:removeItem("do_arazathletter", 1)
+	# translation: 
+	translation.tag:DL_Etoz_GiveSword
+	translation.en:Huh... You're even dumber than I expected.
+	translation.de:Huh... Du bist sogar dümmer als ich erwartet habe.
+	translation.ch:Huh... Du bisch sogar dümmer als ich erwartet ha.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [86] NPC Node
+	tag:86
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	# translation: 
+	translation.tag:DL_Etoz_Never
+	translation.en:Grrrr. You will pay for this!
+	translation.de:Grrrr. Dafür wirst du bezahlen!
+	translation.ch:Grrrr! Dodefür wirsch na zahle!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [80] NPC Node
+	tag:80
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Etoz_ShowLegacy
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:82
+	]
+}
+{2
+	# [82] Choice Node
+	tag:82
+	[
+		# Link node, tag is next tag
+		tag:84
+		condition:not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)
+		# translation: 
+		translation.tag:DL_Choice_GiveSwordAsk
 		translation.en:
 		translation.de:
 		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:89
+		condition:DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")
+		# translation: 
+		translation.tag:DL_Choice_GiveSwordMoney
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:88
+		condition:not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)
+		# translation: 
+		translation.tag:DL_Choice_GiveSword
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:87
+		# translation: 
+		translation.tag:DL_Choice_Never
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [84] NPC Node
+	tag:84
+	# triggers: 
+	trigger:DL:gotoNode(82)
+	trigger:DL:addConditionProgress("npc_etoz", "ask_money")
+	# translation: 
+	translation.tag:DL_Etoz_GiveSwordAsk
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [89] NPC Node
+	tag:89
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:removeItem("we_arazath", 1)
+	trigger:DL:removeItem("do_arazathletter", 1)
+	trigger:DL:addGold(100)
+	# translation: 
+	translation.tag:DL_Etoz_GiveSwordMoney
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [88] NPC Node
+	tag:88
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:removeItem("we_arazath", 1)
+	trigger:DL:removeItem("do_arazathletter", 1)
+	# translation: 
+	translation.tag:DL_Etoz_GiveSword
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [87] NPC Node
+	tag:87
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	# translation: 
+	translation.tag:DL_Etoz_Never
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }

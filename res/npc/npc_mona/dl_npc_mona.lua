@@ -36,11 +36,11 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun_lock")) then 
 		DL:addChoice(11, "DL_Choice_FunUnlock") -- What if I... you know... wanna have some fun?
 	end
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)) then 
-		DL:addItemChoice(9, "DL_Choice_Fun", "gold", 100) -- I wanna have some fun.
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and DL:hasItem("gold", 100)) then 
+		DL:addChoice(9, "DL_Choice_Fun") -- I wanna have some fun.
 	end
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)) then 
-		DL:addItemChoice(10, "DL_Choice_Fun", "gold", 100) -- 
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)) then 
+		DL:addChoice(10, "DL_Choice_FunNoGold") -- I wanna have some fun. (100 Gold)
 	end
 	DL:addChoice(4, "DL_Choice_Trade") -- Can I get a drink here?
 	DL:addChoice(-1, "") -- 
@@ -107,16 +107,55 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)) then 
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and DL:hasItem("gold", 100)) then 
 
-		DL:createNPCNode(9, -2, "DL_Mona_HaveSomeFun") -- Alright. Go to Lola, she's already waiting for you. (Winks)
-		DL:removeGold(100)
-		DL:addConditionProgress("npc_mona", "fun")
+		DL:createNPCNode(9, 16, "DL_Mona_WhatLookingFor") -- Very well. What are you looking for?
 		DL:addNode()
+
+
+		DL:createChoiceNode(16)
+		if (not DL:isConditionFulfilled("npc_mona", "sex_romantic")) then 
+			DL:addItemChoice(17, "DL_Choice_SexRomantic", "gold", 100) -- Something romantic.
+		end
+		if (not DL:isConditionFulfilled("npc_mona", "sex_exotic")) then 
+			DL:addItemChoice(18, "DL_Choice_SexExotic", "gold", 100) -- Something exotic.
+		end
+		if (not DL:isConditionFulfilled("npc_mona", "sex_wild")) then 
+			DL:addItemChoice(19, "DL_Choice_SexWild", "gold", 100) -- Something wild.
+		end
+		DL:addChoice(-2, "DL_Choice_DontKnowLater") -- I don't know. I'll come back later. [BACK]
+		DL:addNode()
+
+		if (not DL:isConditionFulfilled("npc_mona", "sex_romantic")) then 
+
+			DL:createNPCNode(17, -2, "DL_Mona_SexRomantic") -- Alright. Then go to Lola, she's already waiting for you. (Winks)
+			DL:addConditionProgress("npc_mona", "sex_romantic")
+			DL:removeGold(100)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_mona", "sex_exotic")) then 
+
+			DL:createNPCNode(18, -2, "DL_Mona_SexExotic") -- Ah, then I have something for you. Go to Karma and she will show you.
+			DL:addConditionProgress("npc_mona", "sex_exotic")
+			DL:removeGold(100)
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_mona", "sex_wild")) then 
+
+			DL:createNPCNode(19, -2, "DL_Mona_SexWild") -- I'm sorry, but Adelya - our wild cat - is currently busy.
+			DL:gotoNode(16)
+			DL:addConditionProgress("npc_mona", "sex_wild")
+			DL:addNode()
+
+		end
 
 	end
 
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)) then 
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)) then 
 
 		DL:createNPCNode(10, -2, "DL_Mona_OpenGateNot") -- 
 		DL:addNode()

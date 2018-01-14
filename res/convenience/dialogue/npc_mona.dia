@@ -100,26 +100,22 @@ npc.id:npc_mona
 	[
 		# Link node, tag is next tag
 		tag:9
-		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and DL:hasItem("gold", 100)
+		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and DL:hasItem("gold", 100)
 		# translation: 
 		translation.tag:DL_Choice_Fun
 		translation.en:I wanna have some fun.
-		translation.de:Ich will mich amüsieren.
+		translation.de:Ich will mich amüsieren
 		translation.ch:Ich wett mich chli amüsiere.
-		translation.item.id:gold
-		translation.item.amount:100
 	]
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun") and not DL:hasItem("gold", 100)
+		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)
 		# translation: 
-		translation.tag:DL_Choice_Fun
-		translation.en:
-		translation.de:
-		translation.ch:
-		translation.item.id:gold
-		translation.item.amount:100
+		translation.tag:DL_Choice_FunNoGold
+		translation.en:I wanna have some fun. (100 Gold)
+		translation.de:Ich will mich amüsieren. (100 Gold)
+		translation.ch:Ich wett mich chli amüsiere. (100 Gold)
 	]
 	[
 		# Link node, tag is next tag
@@ -294,13 +290,108 @@ npc.id:npc_mona
 	# [9] NPC Node
 	tag:9
 	# triggers: 
-	trigger:DL:removeGold(100)
-	trigger:DL:addConditionProgress("npc_mona", "fun")
 	# translation: 
-	translation.tag:DL_Mona_HaveSomeFun
-	translation.en:Alright. Go to Lola, she's already waiting for you. (Winks)
-	translation.de:Gut. Geh zu Lola, sie wartet schon auf dich. (Zwinkert)
-	translation.ch:Guet. Gang zude Lola, sie warted scho uf dich. (Zwinkeret)
+	translation.tag:DL_Mona_WhatLookingFor
+	translation.en:Very well. What are you looking for?
+	translation.de:Gut, gut. Was suchst du denn?
+	translation.ch:Guet, guet. Was suechsch denn?
+	[
+		# Link node, tag is next tag
+		tag:16
+	]
+}
+{2
+	# [16] Choice Node
+	tag:16
+	[
+		# Link node, tag is next tag
+		tag:17
+		condition:not DL:isConditionFulfilled("npc_mona", "sex_romantic")
+		# translation: 
+		translation.tag:DL_Choice_SexRomantic
+		translation.en:Something romantic.
+		translation.de:Etwas romantisches.
+		translation.ch:Öppis romantischs.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:not DL:isConditionFulfilled("npc_mona", "sex_exotic")
+		# translation: 
+		translation.tag:DL_Choice_SexExotic
+		translation.en:Something exotic.
+		translation.de:Etwas exotisches.
+		translation.ch:Öppis exotischs.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:not DL:isConditionFulfilled("npc_mona", "sex_wild")
+		# translation: 
+		translation.tag:DL_Choice_SexWild
+		translation.en:Something wild.
+		translation.de:Etwas wildes.
+		translation.ch:Öppis wilds.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_DontKnowLater
+		translation.en:I don't know. I'll come back later. [BACK]
+		translation.de:Ich weiss nicht. Ich komme später wieder. [ZURÜCK]
+		translation.ch:Ich weiss nid. Ich chum spöter wider. [ZRUGG]
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "sex_romantic")
+	trigger:DL:removeGold(100)
+	# translation: 
+	translation.tag:DL_Mona_SexRomantic
+	translation.en:Alright. Then go to Lola, she's already waiting for you. (Winks)
+	translation.de:Gut. Dann geh zu Lola, sie wartet schon auf dich. (Zwinkert)
+	translation.ch:Guet. Denn gang zude Lola, si warted scho uf dich. (Zwinkeret)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_mona", "sex_exotic")
+	trigger:DL:removeGold(100)
+	# translation: 
+	translation.tag:DL_Mona_SexExotic
+	translation.en:Ah, then I have something for you. Go to Karma and she will show you.
+	translation.de:Ah, dann habe ich etwas für dich. Geh zu Karma und sie wird es dir zeigen.
+	translation.ch:Ah, denn hani öppis für dich. Gang zude Karma und si wirds der zeige.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:gotoNode(16)
+	trigger:DL:addConditionProgress("npc_mona", "sex_wild")
+	# translation: 
+	translation.tag:DL_Mona_SexWild
+	translation.en:I'm sorry, but Adelya - our wild cat - is currently busy.
+	translation.de:Tut mir leid, aber Adelya - unsere Wildkatze - ist gerade beschäftigt.
+	translation.ch:Tuet mer leid aber d'Adelya - üses wild Büsi - isch grad beschäftigt.
 	[
 		# Link node, tag is next tag
 		tag:-2

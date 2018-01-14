@@ -118,6 +118,8 @@ public:
 	bool isSpellEquipped(SpellID id) const;
 	// is a waypoint unlocked
 	bool isWaypointUnlocked(const std::string& mapId, int objectId) const;
+	// is a item looted
+	bool isItemLooted(const std::string& levelId, int position) const;
 	// set a condition fulfilled. Returns whether the operation was successful.
 	bool setConditionFulfilled(const std::string& conditionType, const std::string& condition);
 	// unlock a certain quest description. Returns whether the operation was successful.

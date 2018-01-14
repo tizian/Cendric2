@@ -355,6 +355,10 @@ bool CharacterCore::isWaypointUnlocked(const std::string& mapId, int objectId) c
 	return contains(m_data.waypointsUnlocked, mapId) && contains(m_data.waypointsUnlocked.at(mapId), objectId);
 }
 
+bool CharacterCore::isItemLooted(const std::string& levelId, int position) const {
+	return contains(m_data.itemsLooted, levelId) && contains(m_data.itemsLooted.at(levelId), position);
+}
+
 bool CharacterCore::setConditionFulfilled(const std::string& conditionType, const std::string& condition) {
 	if (!contains(m_data.conditionProgress, conditionType)) {
 		m_data.conditionProgress.insert({ conditionType, std::set<std::string>() });

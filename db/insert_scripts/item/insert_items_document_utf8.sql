@@ -262,6 +262,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item_desc', 'This letter was in the last chest on top of the mysterious tower.','Dieser Brief war in der letzten Truhe auf dem mysteriösen Turm.','De Brief isch ide letzte True ufem  mysteriöse Turm gsi.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_arazathletter', 'document', 500, 300, -1);
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_arazathletter', 0, 'ArazathLetter');
+INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_arazathletter', 'tower_4', 1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ArazathLetter', 'document',
 'Dear Etoz:
 Finally, you have grown into the skillful little mage I always hoped you would become. You do not know how glad you have made your old Pa. This weapon is now yours. It has been passed from father to son for generations, but after your father slipped in the third tower I knew I had to break tradition and skip a generation. 

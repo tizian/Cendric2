@@ -224,3 +224,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4','quest','The Tower, the Fourth!','Der Turm, zum Vierten!','De Turm, zum Vierte!','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4', 'quest_desc', 'Ah. Not again! When will this be over?','Ah, nicht nochmal! Wann ist das endlich vorbei?','Ah, nid nomol! Wenn isch das endli verbi?', '?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4', 'quest_desc_1', 'I found a letter from Etoz'' grandpa at the top of the tower. Etoz will certainly be interested.','Ich habe einen Brief von Etoz'' Grossvater oben auf dem Turm gefunden. Etoz möchte ihn sicher haben.','Ich han en Brief vom Etoz sim Grossvatter ufem Turm gfunde. De Etoz het sicher Interesse dra.', '?');
