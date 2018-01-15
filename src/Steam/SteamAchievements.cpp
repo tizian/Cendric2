@@ -1,6 +1,8 @@
 #include "Steam/SteamAchievements.h"
 #include "Logger.h"
 
+#ifdef STEAM
+
 SteamAchievements::SteamAchievements(AchievementData* Achievements, int achievementCount) :
 	m_callbackUserStatsReceived(this, &SteamAchievements::onUserStatsReceived),
 	m_callbackUserStatsStored(this, &SteamAchievements::onUserStatsStored),
@@ -99,4 +101,6 @@ void SteamAchievements::onAchievementStored(UserAchievementStored_t *pCallback)
 		g_logger->logInfo("SteamAchievements", "Achievement stored.");
 	}
 }
+
+#endif // STEAM
 

@@ -22,7 +22,7 @@ npc.id:npc_helena2
 	trigger:DL:addConditionProgress("npc_helena2", "talked")
 	# translation: 
 	translation.tag:DL_Helena_Hello
-	translation.en:Hey, hey you! You're back? I thought you'll never return and pay for your room.
+	translation.en:Hey, hey you! You're back? I thought you'd never return and pay for your room.
 	translation.de:Hey, hey du! Du bist zurück? Ich dachte, du würdest nicht mehr auftauchen und dein Zimmer bezahlen.
 	translation.ch:Hey, hey du! Du bisch zrugg? Ich ha denkt du würsch nümme uftauche und dis Zimmer zale.
 	[
@@ -100,7 +100,7 @@ npc.id:npc_helena2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Helena_ComeIn
-	translation.en:Yes, I do! But it's been a while. I thought you're already long gone.
+	translation.en:Yes, I do! But it's been a while. I thought you were long gone.
 	translation.de:Na klar! Aber es ist schon eine Weile her... Ich dachte, du wärst schon über alle Berge.
 	translation.ch:Natürlich! Aber es isch scho es Wiili her.. Ha denkt du bisch scho über alli Berge.
 	[
@@ -114,7 +114,7 @@ npc.id:npc_helena2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_NPC_ComeIn2
-	translation.en:So, why don't you come in and I tell you everything inside.
+	translation.en:So, why don't you come in and I'll tell you everything inside.
 	translation.de:Aber komm doch einfach rein und ich erzähl dir dann alles.
 	translation.ch:Aber chum doch eifach ie und ich verzell der denn alles.
 	[

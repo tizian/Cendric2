@@ -19,11 +19,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 3, "DL_Helena_TellMe") -- Oh, I don't know much. You've been here like a month ago, but only for a very short time.
+		DL:createNPCNode(2, 3, "DL_Helena_TellMe") -- Oh, I don't know much. You were here like a month ago, but only for a very short time.
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Helena_TellMe2") -- You were in quite a hurry, only left your luggage here and then you rushed out again to fetch something you forgot from the ship... And I've never seen you again.
+		DL:createNPCNode(3, -2, "DL_Helena_TellMe2") -- You were in quite a hurry, you just left your luggage here and then rushed out again to fetch something you forgot from the ship... And I never saw you again.
 		DL:addConditionProgress("npc_helena", "talked")
 		DL:addNode()
 
@@ -40,7 +40,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_helena", "q_ship")) then 
 
-			DL:createNPCNode(5, -2, "DL_Helena_Ship") -- I guess you've travelled by ship... You should know this better than me. 
+			DL:createNPCNode(5, -2, "DL_Helena_Ship") -- I just assumed you travelled by ship... You should know this better than me. 
 			DL:addConditionProgress("npc_helena", "q_ship")
 			DL:addNode()
 
@@ -51,7 +51,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(8, 9, "DL_Helena_Luggage2") -- But I've kept the things that I couldn't sell right here at the bar.
+		DL:createNPCNode(8, 9, "DL_Helena_Luggage2") -- I've kept the things that I couldn't sell right here at the bar.
 		DL:addNode()
 
 
@@ -79,7 +79,7 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(7)
 	if (not DL:isConditionFulfilled("npc_helena", "sold_things")) then 
-		DL:addChoice(11, "DL_Choice_SoldThings") -- Whom did you sell my stuff?
+		DL:addChoice(11, "DL_Choice_SoldThings") -- To whom did you sell my stuff?
 	end
 	if (not DL:isConditionFulfilled("npc_helena", "leeroy_chicken") and DL:isQuestState("leeroy_chicken", "started") and not DL:isConditionFulfilled("boss", "BossMercenaries")) then 
 		DL:addChoice(12, "DL_Choice_LeeroyChicken") -- I've heard of your famous special chicken...

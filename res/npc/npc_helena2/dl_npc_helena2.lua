@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_helena2", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Helena_Hello") -- Hey, hey you! You're back? I thought you'll never return and pay for your room.
+		DL:createNPCNode(1, -2, "DL_Helena_Hello") -- Hey, hey you! You're back? I thought you'd never return and pay for your room.
 		DL:addConditionProgress("npc_helena2", "talked")
 		DL:addNode()
 
@@ -46,11 +46,11 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_helena2", "who_are_you")) then 
 
-		DL:createNPCNode(5, 6, "DL_Helena_ComeIn") -- Yes, I do! But it's been a while. I thought you're already long gone.
+		DL:createNPCNode(5, 6, "DL_Helena_ComeIn") -- Yes, I do! But it's been a while. I thought you were long gone.
 		DL:addNode()
 
 
-		DL:createNPCNode(6, -1, "DL_NPC_ComeIn2") -- So, why don't you come in and I tell you everything inside.
+		DL:createNPCNode(6, -1, "DL_NPC_ComeIn2") -- So, why don't you come in and I'll tell you everything inside.
 		DL:addNode()
 
 	end
