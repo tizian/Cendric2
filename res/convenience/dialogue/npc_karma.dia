@@ -1,6 +1,6 @@
-# dia file for dialogue for npc: npc_lola
+# dia file for dialogue for npc: npc_karma
 
-npc.id:npc_lola
+npc.id:npc_karma
 
 {5
 	# [-1] Start Node
@@ -8,7 +8,7 @@ npc.id:npc_lola
 	[
 		# Link node, tag is next tag
 		tag:1
-		condition:not DL:isConditionFulfilled("npc_mona", "sex_romantic")
+		condition:not DL:isConditionFulfilled("npc_mona", "sex_exotic")
 	]
 	[
 		# Link node, tag is next tag
@@ -20,10 +20,10 @@ npc.id:npc_lola
 	tag:1
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Lola_NotBought
-	translation.en:Talk to Mona first if you want to have some fun, cutie.
-	translation.de:Sprich zuerst mit Mona, wenn du Spass haben willst, Süsser.
-	translation.ch:Red zersch mit de Mona, wend chli Spass ha willsch, Herzige.
+	translation.tag:DL_Karma_NotBought
+	translation.en:Go and ask Mona if you want to have an exciting time with me. (Winks)
+	translation.de:Geh und frage Mona, wenn du eine aufregende Zeit mit mir haben möchtest. (Zwinkert)
+	translation.ch:Gang und frög d'Mona, wennd e geili Ziit mit mer ha wetsch. (Zwinkeret)
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -35,7 +35,7 @@ npc.id:npc_lola
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:not DL:isConditionFulfilled("npc_lola", "sex_lola")
+		condition:not DL:isConditionFulfilled("npc_karma", "sex_karma")
 		# translation: 
 		translation.tag:DL_Choice_Hey
 		translation.en:Hey...
@@ -56,9 +56,9 @@ npc.id:npc_lola
 	# [3] NPC Node
 	tag:3
 	# triggers: 
-	trigger:DL:addConditionProgress("npc_lola", "sex_lola")
+	trigger:DL:addConditionProgress("npc_karma", "sex_karma")
 	# translation: 
-	translation.tag:DL_Lola_SexyBoy
+	translation.tag:DL_Karma_SexyBoy
 	translation.en:Hey, sexy boy.
 	translation.de:Hallo, hübscher Junge.
 	translation.ch:Hoi, hübsche Bueb.

@@ -1,0 +1,4 @@
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Karma_NotBought', 'dl_npc_karma', 'Go and ask Mona if you want to have an exciting time with me. (Winks)', 'Geh und frage Mona, wenn du eine aufregende Zeit mit mir haben möchtest. (Zwinkert)', 'Gang und frög d''Mona, wennd e geili Ziit mit mer ha wetsch. (Zwinkeret)');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Hey', 'dl_npc_karma', 'Hey...', 'Hey...', 'Hey...');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_End', 'dl_npc_karma', 'See you.', 'Bis bald.', 'Bis bald.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Karma_SexyBoy', 'dl_npc_karma', 'Hey, sexy boy.', 'Hallo, hübscher Junge.', 'Hoi, hübsche Bueb.');
