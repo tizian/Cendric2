@@ -30,6 +30,7 @@ item.id:do_noteinina,1
 item.id:do_antigravity,1
 item.id:do_antimagic,1
 item.id:do_arazathletter,1
+item.id:do_kamasutra,1
 item.id:eq_aquamarinering,1
 item.id:eq_bloodstone,1
 item.id:eq_back_divinet1,1
@@ -180,6 +181,7 @@ item.id:mi_dragonskull,1
 item.id:mi_janusglaive,1
 item.id:mi_portstone,1
 item.id:mi_yashafangs,1
+item.id:mi_rose,1
 item.id:pe_elixirfire,1
 item.id:pe_elixirice,1
 item.id:pe_elixirlight,1

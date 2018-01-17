@@ -6,6 +6,12 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_goldengoblet', -10, -10, 30, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_goldengoblet', 1, 50, 0, 50, 50);
 
+-- Rose
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_rose', 'item', 'Rose','Rose','Rose');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_rose', 'item_desc', 'I received this red rose as a gift from the beautiful Lola.','Diese rote Rose habe ich als Geschenk von der wunderschönen Lola erhalten.','Die rot Rose hani als Gschänk vode wunderschöne Lola becho.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_rose', 'misc', 100, 150, 10, 1);
+
 -- Silver Plate
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_silverplate', 'item', 'Silver Plate','Silberner Teller','Silbrige Teller');

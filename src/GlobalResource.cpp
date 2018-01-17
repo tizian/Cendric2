@@ -106,6 +106,7 @@ const std::string GlobalResource::TEX_GUI_STATS_ICONS = "res/texture/gui/stats_i
 const std::string GlobalResource::TEX_GUI_BUTTON_ROUND = "res/texture/gui/button_round.png";
 const std::string GlobalResource::TEX_GUI_BUTTON_ROUND_SELECTED  = "res/texture/gui/button_round_selected.png";
 const std::string GlobalResource::TEX_GUI_TAB_ICONS = "res/texture/gui/gui_tab_icons.png";
+const std::string GlobalResource::TEX_GUI_QUESTMARKERS = "res/texture/gui/questmarkers.png";
 const std::string GlobalResource::SOUND_GUI_MENUCURSOR = "res/sound/gui/menu_cursor.ogg";
 const std::string GlobalResource::SOUND_GUI_PICKUP = "res/sound/item/pickup_gold.ogg";
 const std::string GlobalResource::SOUND_GUI_DRINK = "res/sound/gui/drink.ogg";

@@ -16,6 +16,8 @@ class QuestDescriptionWindow;
 class ScrollBar;
 class ScrollHelper;
 
+// 
+
 // a quest entry in the quest log
 class QuestEntry final : public GameObject {
 public:

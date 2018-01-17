@@ -282,3 +282,14 @@ Endlich bisch so en fähige junge Magier worde, we ich''s immer vo dir erhofft h
 Falls der im Turm es Unglück passiert isch, heil dich mit dem Trank, woni der ide True glo ha.
 
 - Arazath');
+
+-- Kamasutra
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item', 'Kamasutra','Kamasutra', 'Kamasutra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kamasutra godess.','Ein Geschenk von Karma, der Kamasutra-Göttin.','Es Gschenk vode Karma, de Kamasutra-Göttin.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_kamasutra', 'document', 750, 300, 20, 1);
+INSERT INTO item_document_page(item_id, page_nr, title) values ('do_kamasutra', 0, 'BookKamasutra');
+INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('do_kamasutra', 1, 'TitleBookKamasutra1', 'ContentBookKamasutra1', 'center');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookKamasutra','document','Kamasutra','Kamasutra','Kamasutra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra1','document','Kamasutra','Kamasutra','Kamasutra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra1','document','Bla','Bla','Bla');

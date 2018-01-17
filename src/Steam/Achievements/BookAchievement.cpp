@@ -11,6 +11,7 @@ bool BookAchievement::notifyCore(const CharacterCore* core) {
 		contains(books, std::string("bo_rhendalmagic")) &&
 		contains(books, std::string("bo_schoolsofmagic")) &&
 		contains(books, std::string("bo_potions")) &&
+		contains(books, std::string("do_kamasutra")) &&
 		contains(books, std::string("do_elderdiary")) &&
 		contains(books, std::string("do_antimagic"));
 }
