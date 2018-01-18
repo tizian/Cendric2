@@ -8,12 +8,12 @@ targets =
 markers = {
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {100, 100},
+		position = {2950, 275},
 		step = 0
 	},
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {100, 100},
+		position = {325, 675},
 		step = -1
 	}
 }

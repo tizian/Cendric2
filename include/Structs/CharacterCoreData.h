@@ -50,6 +50,7 @@ struct CharacterCoreData final {
 	std::map<std::string, std::map<std::string, int>> questTargetProgress;
 	std::map<std::string, std::set<std::string>> questConditionProgress;
 	std::map<std::string, std::set<int>> questDescriptionProgress;
+	std::set<std::string> questsTracked;
 
 	// reputation progress
 	std::map<FractionID, int> reputationProgress;

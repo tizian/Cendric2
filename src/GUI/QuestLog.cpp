@@ -245,25 +245,9 @@ void QuestLog::reload() {
 		if (m_stateMap[it.second] == nullptr) continue;
 		const QuestData* data = m_core->getQuestData(it.first);
 		if (!data) continue;
-		if (data->isMainQuest) {
-			mainQuests.push_back(std::pair<QuestState, std::string>(it.second, it.first));
-		}
-		else {
-			nonMainQuests.push_back(std::pair<QuestState, std::string>(it.second, it.first));
-		}
-	}
 
-	for (auto& it : mainQuests) {
-		m_stateMap[it.first]->push_back(QuestEntry(it.second, true));
-		if (it.second == m_selectedQuestID && m_currentTab != it.first) {
-			// assure that an item that is not in the current tab can never be selected
-			hideDescription();
-		}
-	}
-
-	for (auto& it : nonMainQuests) {
-		m_stateMap[it.first]->push_back(QuestEntry(it.second, false));
-		if (it.second == m_selectedQuestID && m_currentTab != it.first) {
+		m_stateMap[it.second]->push_back(QuestEntry(it.first, *data));
+		if (it.first == m_selectedQuestID && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
 		}
@@ -289,12 +273,12 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID, bool isMainQuest) {
+QuestEntry::QuestEntry(const std::string& questID, const QuestData& data) {
 	m_questID = questID;
-	m_isMainQuest = isMainQuest;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	std::string questTitle = "> " + g_textProvider->getText(m_questID, "quest");
+	// TODO is active quest
+	std::string questTitle = true ? "  " : "> " + g_textProvider->getText(m_questID, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
@@ -312,10 +296,7 @@ void QuestEntry::update(const sf::Time& frameTime) {
 		m_name.setColor(COLOR_LIGHT_PURPLE);
 	}
 	else if (m_isSelected) {
-		m_name.setColor(COLOR_WHITE);
-	}
-	else {
-		m_name.setColor(m_isMainQuest ? sf::Color(220, 180, 180) : sf::Color(180, 180, 180));
+		m_name.setColor(m_isSelected ? COLOR_WHITE : sf::Color(180, 180, 180));
 	}
 }
 
@@ -359,4 +340,17 @@ void QuestEntry::deselect() {
 
 bool QuestEntry::isSelected() const {
 	return m_isSelected;
+}
+
+///////////////////////////////////////////////////
+//////////////// QUEST MARKER /////////////////////
+///////////////////////////////////////////////////
+
+LogQuestMarker::LogQuestMarker(const QuestData& questData, const CharacterCore* core) :
+	QuestMarker(questData, core) {
+	init();
+}
+
+void LogQuestMarker::init() {
+
 }

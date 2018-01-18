@@ -4,22 +4,29 @@
 #include "World/GameObject.h"
 #include "Structs/QuestData.h"
 
+class CharacterCore;
+class TooltipComponent;
+
 // a quest marker on a quest entry or on the minimap
-class QuestMarker final : public GameObject {
+class QuestMarker : public GameObject {
 public:
-	QuestMarker(const QuestData& questData);
+	QuestMarker(const QuestData& questData, const CharacterCore* core);
+	virtual ~QuestMarker() {}
 
 	void setPosition(const sf::Vector2f& pos) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	bool isActive();
+	bool isActive() const;
 	void setActive(bool active);
 	
 	static const float SIZE;
 
+protected:
+	QuestData m_questData;
+	const CharacterCore* m_characterCore;
+	TooltipComponent* m_tooltipComponent;
+
 private:
 	sf::Sprite m_sprite;
-	QuestData m_questData;
-
 	bool m_isActive;
 };

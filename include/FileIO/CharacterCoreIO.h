@@ -38,6 +38,7 @@ protected:
 	const char* TILES_EXPLORED = "tiles.explored";
 	const char* MERCHANT_STATE = "merchant.state";
 	const char* QUEST_STATE = "quest.state";
+	const char* QUEST_TRACKED = "quest.tracked";
 	const char* QUEST_PROGRESS_TARGET = "quest.progress.target";
 	const char* QUEST_PROGRESS_CONDITION = "quest.progress.condition";
 	const char* QUEST_PROGRESS_DESCRIPTION = "quest.progress.description";

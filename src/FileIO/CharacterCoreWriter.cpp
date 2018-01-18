@@ -57,6 +57,7 @@ bool CharacterCoreWriter::saveToFile(const std::string& filename, const Characte
 		toHash.append(writeDoorsOpen(data));
 		toHash.append(writeTilesExplored(data));
 		toHash.append(writeQuestStates(data));
+		toHash.append(writeQuestTracked(data));
 		toHash.append(writeQuestProgressTargets(data));
 		toHash.append(writeQuestProgressConditions(data));
 		toHash.append(writeQuestProgressDescription(data));
@@ -410,6 +411,18 @@ std::string CharacterCoreWriter::writeQuestStates(const CharacterCoreData& data)
 		quest.append(std::to_string(static_cast<int>(it.second)));
 		quest.append("\n");
 		quests.append(quest);
+	}
+	return quests;
+}
+
+std::string CharacterCoreWriter::writeQuestTracked(const CharacterCoreData& data) const {
+	std::string quests = "# quests tracked:\n";
+
+	for (auto& it : data.questsTracked) {
+		std::string quest = std::string(QUEST_TRACKED);
+		quest.append(":");
+		quest.append(it);
+		quest.append("\n");
 	}
 	return quests;
 }

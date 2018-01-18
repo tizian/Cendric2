@@ -41,8 +41,9 @@ private:
 	std::string writeTriggersTriggered(const CharacterCoreData& data) const;
 	std::string writeDoorsOpen(const CharacterCoreData& data) const;
 	std::string writeTilesExplored(const CharacterCoreData& data) const;
-	std::string writeQuestStates(const CharacterCoreData& data) const;
 	std::string writeMerchantStates(const CharacterCoreData& data) const;
+	std::string writeQuestStates(const CharacterCoreData& data) const;
+	std::string writeQuestTracked(const CharacterCoreData& data) const;
 	std::string writeQuestProgressTargets(const CharacterCoreData& data) const;
 	std::string writeQuestProgressConditions(const CharacterCoreData& data) const;
 	std::string writeQuestProgressDescription(const CharacterCoreData& data) const;

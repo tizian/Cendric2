@@ -35,6 +35,7 @@ void CharacterCoreReader::initReadMap() {
 	m_readMap.insert({ DOORS_OPEN,  &CharacterCoreReader::readDoorsOpen });
 	m_readMap.insert({ TILES_EXPLORED,  &CharacterCoreReader::readTilesExplored });
 	m_readMap.insert({ QUEST_STATE,  &CharacterCoreReader::readQuestStates });
+	m_readMap.insert({ QUEST_TRACKED,  &CharacterCoreReader::readQuestTracked });
 	m_readMap.insert({ QUEST_PROGRESS_TARGET,  &CharacterCoreReader::readQuestProgressTargets });
 	m_readMap.insert({ QUEST_PROGRESS_CONDITION,  &CharacterCoreReader::readQuestProgressConditions });
 	m_readMap.insert({ QUEST_PROGRESS_DESCRIPTION,  &CharacterCoreReader::readQuestProgressDescription });
@@ -487,6 +488,11 @@ bool CharacterCoreReader::readQuestStates(std::string& line, CharacterCoreData& 
 		return false;
 	}
 	data.questStates.insert({ questID, state });
+	return true;
+}
+
+bool CharacterCoreReader::readQuestTracked(std::string& line, CharacterCoreData& data) const {
+	data.questsTracked.insert(line);
 	return true;
 }
 

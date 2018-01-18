@@ -229,6 +229,14 @@ void CharacterCore::setDoorOpen(const std::string& world, int objectID) {
 	m_data.doorsOpen[world].insert(objectID);
 }
 
+void CharacterCore::setQuestTracked(const std::string& questID, bool isTracked) {
+	if (isTracked) {
+		m_data.questsTracked.insert(questID);
+	} else {
+		m_data.questsTracked.erase(questID);
+	}
+}
+
 void CharacterCore::setWaypointUnlocked(const std::string& map, int objectID, const sf::Vector2f& pos) {
 	m_data.waypointsUnlocked[map].insert({ objectID, pos });
 	g_achievementManager->notifyAchievementCore(ACH_ALL_WAYPOINTS);
@@ -329,6 +337,10 @@ bool CharacterCore::isQuestDescriptionUnlocked(const std::string& questID, int d
 		return false;
 	}
 	return contains(m_data.questDescriptionProgress.at(questID), description);
+}
+
+bool CharacterCore::isQuestTracked(const std::string& questID) const {
+	return contains(m_data.questsTracked, questID);
 }
 
 bool CharacterCore::isSpellLearned(SpellID id) const {

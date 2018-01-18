@@ -7,16 +7,26 @@
 #include "GUI/QuestDescriptionWindow.h"
 #include "GUI/TabBar.h"
 #include "GUI/SlicedSprite.h"
+#include "GUI/QuestMarker.h"
 #include "Enums/EnumNames.h"
 
 class QuestDescriptionWindow;
 class ScrollBar;
 class ScrollHelper;
 
+// a quest marker on the quest log
+class LogQuestMarker final : public QuestMarker {
+public:
+	LogQuestMarker(const QuestData& questData, const CharacterCore* core);
+
+private:
+	void init();
+};
+
 // a quest entry in the quest log
 class QuestEntry final : public GameObject {
 public:
-	QuestEntry(const std::string& questID, bool isMainQuest);
+	QuestEntry(const std::string& questID, const QuestData& data);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
@@ -34,7 +44,6 @@ private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
 	bool m_isMouseover = false;
-	bool m_isMainQuest;
 	BitmapText m_name;
 
 	std::string m_questID;

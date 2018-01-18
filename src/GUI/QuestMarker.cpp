@@ -2,14 +2,19 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 #include "CharacterCore.h"
+#include "GameObjectComponents/TooltipComponent.h"
 
 const float QuestMarker::SIZE = 16.f;
 
-QuestMarker::QuestMarker(const QuestData& questData) {
+QuestMarker::QuestMarker(const QuestData& questData, const CharacterCore* core) {
 	m_questData = questData;
+	m_characterCore = core;
 	
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
 	m_sprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
+
+	m_tooltipComponent = new TooltipComponent("", this);
+	addComponent(m_tooltipComponent);
 }
 
 void QuestMarker::render(sf::RenderTarget& renderTarget) {
@@ -22,7 +27,24 @@ void QuestMarker::setPosition(const sf::Vector2f& pos) {
 	m_sprite.setPosition(pos);
 }
 
+bool QuestMarker::isActive() const {
+	return m_isActive;
+}
+
 void QuestMarker::setActive(bool active) {
-	int x = m_questData.isMainQuest ? SIZE : 0;
-	m_sprite.setTextureRect(sf::IntRect(x, 0, SIZE, SIZE));
+	m_isActive = active;
+	int y = m_questData.isMainQuest ? 1 : 0;
+	int x;
+
+	if (!m_isActive) {
+		x = 0;
+	}
+	else if (m_characterCore->isQuestComplete(m_questData.id)) {
+		x = 3;
+	}
+	else {
+		x = 2;
+	}
+	
+	m_sprite.setTextureRect(sf::IntRect(x * SIZE, y * SIZE, SIZE, SIZE));
 }

@@ -96,6 +96,8 @@ public:
 	void setTriggerTriggered(const std::string& world, int objectID);
 	// signal door opened
 	void setDoorOpen(const std::string& world, int objectID);
+	// tracks or untracks a quest
+	void setQuestTracked(const std::string& questID, bool isTracked);
 	// getter for quest data. If there is none for that id, returns nullptr
 	const QuestData* getQuestData(const std::string& questID) const;
 	// getter for number of targets with name "name" killed for quest with id "questID"
@@ -112,6 +114,8 @@ public:
 	bool isQuestConditionFulfilled(const std::string& questID, const std::string& condition) const;
 	// is a quest description for a certain quest unlocked?
 	bool isQuestDescriptionUnlocked(const std::string& questID, int description) const;
+	// is a certain quest set as tracked?
+	bool isQuestTracked(const std::string& questID) const;
 	// is a spell learned?
 	bool isSpellLearned(SpellID id) const;
 	// is a spell equipped?

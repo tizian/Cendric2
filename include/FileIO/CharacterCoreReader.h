@@ -42,6 +42,7 @@ private:
 	bool readDoorsOpen(std::string& line, CharacterCoreData& data) const;
 	bool readTilesExplored(std::string& line, CharacterCoreData& data) const;
 	bool readQuestStates(std::string& line, CharacterCoreData& data) const;
+	bool readQuestTracked(std::string& line, CharacterCoreData& data) const;
 	bool readMerchantState(std::string& line, CharacterCoreData& data) const;
 	bool readQuestProgressTargets(std::string& line, CharacterCoreData& data) const;
 	bool readQuestProgressConditions(std::string& line, CharacterCoreData& data) const;
