@@ -3,6 +3,7 @@
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "GlobalResource.h"
+#include "Structs/QuestData.h"
 
 // <<< QUEST LOG >>>
 

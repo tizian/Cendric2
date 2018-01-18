@@ -2,12 +2,9 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
-#include "Structs/QuestData.h"
 #include "GUI/QuestDescriptionWindow.h"
-#include "GUI/Button.h"
 #include "GUI/TabBar.h"
 #include "GUI/SlicedSprite.h"
 #include "Enums/EnumNames.h"
@@ -15,8 +12,6 @@
 class QuestDescriptionWindow;
 class ScrollBar;
 class ScrollHelper;
-
-// 
 
 // a quest entry in the quest log
 class QuestEntry final : public GameObject {
