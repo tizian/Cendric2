@@ -246,7 +246,7 @@ void QuestLog::reload() {
 		const QuestData* data = m_core->getQuestData(it.first);
 		if (!data) continue;
 
-		m_stateMap[it.second]->push_back(QuestEntry(it.first, *data));
+		m_stateMap[it.second]->push_back(QuestEntry(*data, m_core, it.second == QuestState::Started));
 		if (it.first == m_selectedQuestID && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
@@ -273,12 +273,11 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const std::string& questID, const QuestData& data) {
-	m_questID = questID;
+QuestEntry::QuestEntry(const QuestData& data, const CharacterCore* core, bool isActiveQuest) {
+	m_data = data;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	// TODO is active quest
-	std::string questTitle = true ? "  " : "> " + g_textProvider->getText(m_questID, "quest");
+	std::string questTitle = isActiveQuest ? "  " : "> " + g_textProvider->getText(m_data.id, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
@@ -286,9 +285,26 @@ QuestEntry::QuestEntry(const std::string& questID, const QuestData& data) {
 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
+
+	setupQuestMarker(isActiveQuest, core);
+}
+
+QuestEntry::~QuestEntry() {
+	delete m_questMarker;
+}
+
+void QuestEntry::setupQuestMarker(bool isActiveQuest, const CharacterCore* core) {
+	if (!isActiveQuest) return;
+	delete m_questMarker;
+
+	m_questMarker = new LogQuestMarker(m_data, core);
 }
 
 void QuestEntry::update(const sf::Time& frameTime) {
+	if (m_questMarker) {
+		m_questMarker->update(frameTime);
+	}
+
 	m_isMouseover = false;
 	m_isClicked = false;
 	GameObject::update(frameTime);
@@ -301,16 +317,22 @@ void QuestEntry::update(const sf::Time& frameTime) {
 }
 
 const std::string& QuestEntry::getQuestID() const {
-	return m_questID;
+	return m_data.id;
 }
 
 void QuestEntry::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	m_name.setPosition(pos);
+	if (m_questMarker) {
+		m_questMarker->setPosition(pos);
+	}
 }
 
 void QuestEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
+	if (m_questMarker) {
+		m_questMarker->render(renderTarget);
+	}
 }
 
 void QuestEntry::onLeftJustPressed() {
@@ -351,6 +373,23 @@ LogQuestMarker::LogQuestMarker(const QuestData& questData, const CharacterCore* 
 	init();
 }
 
-void LogQuestMarker::init() {
+void LogQuestMarker::onLeftClick() {
+	if (!isActive()) {
+		setActive(true);
+		return;
+	}
+	jumpToQuest();
+}
 
+void LogQuestMarker::onRightClick() {
+	if (!isActive()) return;
+	setActive(false);
+}
+
+void LogQuestMarker::init() {
+	
+}
+
+void LogQuestMarker::jumpToQuest() {
+	
 }

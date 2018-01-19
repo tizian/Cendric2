@@ -19,14 +19,19 @@ class LogQuestMarker final : public QuestMarker {
 public:
 	LogQuestMarker(const QuestData& questData, const CharacterCore* core);
 
+	void onLeftClick() override;
+	void onRightClick() override;
+
 private:
 	void init();
+	void jumpToQuest();
 };
 
 // a quest entry in the quest log
 class QuestEntry final : public GameObject {
 public:
-	QuestEntry(const std::string& questID, const QuestData& data);
+	QuestEntry(const QuestData& data, const CharacterCore* core, bool isActiveQuest);
+	~QuestEntry();
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
@@ -41,12 +46,15 @@ public:
 	const std::string& getQuestID() const;
 
 private:
+	void setupQuestMarker(bool isActiveQuest, const CharacterCore* core);
+
 	bool m_isSelected = false;
 	bool m_isClicked = false;
 	bool m_isMouseover = false;
 	BitmapText m_name;
 
-	std::string m_questID;
+	QuestData m_data;
+	QuestMarker* m_questMarker = nullptr;
 };
 
 // the quest log, as displayed in a level or a map

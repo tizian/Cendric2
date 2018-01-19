@@ -17,7 +17,9 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 
 	bool isActive() const;
-	void setActive(bool active);
+	virtual void setActive(bool active);
+
+	GameObjectType getConfiguredType() const override { return GameObjectType::_Interface; }
 	
 	static const float SIZE;
 
