@@ -56,6 +56,9 @@ void LevelInterface::render(sf::RenderTarget& target) {
 
 void LevelInterface::renderAfterForeground(sf::RenderTarget& target) {
 	WorldInterface::renderAfterForeground(target);
+	
+	m_mainCharHealthBar->renderAfterForeground(target);
+	m_enemyHealthBar->renderAfterForeground(target);
 	m_spellSelection->renderAfterForeground(target);
 }
 

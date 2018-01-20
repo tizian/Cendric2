@@ -213,6 +213,12 @@ void QuestLog::render(sf::RenderTarget& target) {
 	}
 }
 
+void QuestLog::renderAfterForeground(sf::RenderTarget& target) {
+	for (auto& it : *(m_stateMap[m_currentTab])) {
+		(*it).renderAfterForeground(target);
+	}
+}
+
 void QuestLog::showDescription(const std::string& questID) {
 	m_descriptionWindow->reload(questID);
 	m_descriptionWindow->show();
@@ -277,7 +283,7 @@ QuestEntry::QuestEntry(const QuestData& data, const CharacterCore* core, bool is
 	m_data = data;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	std::string questTitle = isActiveQuest ? "  " : "> " + g_textProvider->getText(m_data.id, "quest");
+	std::string questTitle = (isActiveQuest ? "  " : "") + g_textProvider->getText(m_data.id, "quest");
 	if (questTitle.size() > QuestLog::MAX_ENTRY_LENGTH_CHARACTERS) {
 		questTitle = questTitle.substr(0, QuestLog::MAX_ENTRY_LENGTH_CHARACTERS - 3) + "...";
 	}
@@ -308,11 +314,11 @@ void QuestEntry::update(const sf::Time& frameTime) {
 	m_isMouseover = false;
 	m_isClicked = false;
 	GameObject::update(frameTime);
-	if (m_isMouseover) {
-		m_name.setColor(COLOR_LIGHT_PURPLE);
+	if (m_isSelected) {
+		m_name.setColor(COLOR_WHITE); 
 	}
-	else if (m_isSelected) {
-		m_name.setColor(m_isSelected ? COLOR_WHITE : sf::Color(180, 180, 180));
+	else {
+		m_name.setColor(m_isMouseover ? COLOR_LIGHT_PURPLE : sf::Color(180, 180, 180));
 	}
 }
 
@@ -335,6 +341,14 @@ void QuestEntry::render(sf::RenderTarget& renderTarget) {
 	}
 }
 
+void QuestEntry::renderAfterForeground(sf::RenderTarget& renderTarget) {
+	GameObject::renderAfterForeground(renderTarget);
+	if (m_questMarker) {
+		m_questMarker->renderAfterForeground(renderTarget);
+	}
+}
+
+
 void QuestEntry::onLeftJustPressed() {
 	g_inputController->lockAction();
 	m_isClicked = true;
@@ -344,7 +358,7 @@ void QuestEntry::onMouseOver() {
 	m_isMouseover = true;
 }
 
-bool QuestEntry::isClicked() {
+bool QuestEntry::isClicked() const {
 	return m_isClicked;
 }
 

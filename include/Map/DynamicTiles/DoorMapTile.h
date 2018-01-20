@@ -2,8 +2,6 @@
 
 #include "global.h"
 #include "Map/MapDynamicTile.h"
-#include "GUI/TooltipWindow.h"
-#include "Structs/Condition.h"
 #include "World/DoorTile.h"
 
 // a door

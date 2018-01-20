@@ -36,6 +36,7 @@ public:
 	~QuestEntry();
 
 	void render(sf::RenderTarget& renderTarget) override;
+	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
@@ -43,7 +44,7 @@ public:
 	void onMouseOver() override;
 	void select();
 	void deselect();
-	bool isClicked();
+	bool isClicked() const;
 	bool isSelected() const;
 	const std::string& getQuestID() const;
 
@@ -72,6 +73,7 @@ public:
 	bool isVisible() const;
 
 	void render(sf::RenderTarget& target);
+	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
 	// reloads the quests, depending on the core

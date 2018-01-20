@@ -26,6 +26,7 @@ void WorldInterface::render(sf::RenderTarget& target) {
 void WorldInterface::renderAfterForeground(sf::RenderTarget& target) {
 	target.setView(target.getDefaultView());
 	m_inventory->renderAfterForeground(target);
+	m_questLog->renderAfterForeground(target);
 	m_quickSlotBar->renderAfterForeground(target);
 }
 
