@@ -19,6 +19,8 @@ class LogQuestMarker final : public QuestMarker {
 public:
 	LogQuestMarker(const QuestData& questData, const CharacterCore* core);
 
+	void setActive(bool active) override;
+
 	void onLeftClick() override;
 	void onRightClick() override;
 
@@ -102,9 +104,9 @@ private:
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper *m_scrollHelper = nullptr;
 
-	std::vector<QuestEntry> m_startedQuests;
-	std::vector<QuestEntry> m_completedQuests;
-	std::vector<QuestEntry> m_failedQuests;
+	std::vector<QuestEntry*> m_startedQuests;
+	std::vector<QuestEntry*> m_completedQuests;
+	std::vector<QuestEntry*> m_failedQuests;
 
 	QuestState m_currentTab;
 	QuestEntry* m_selectedEntry = nullptr;
@@ -117,7 +119,7 @@ private:
 	void showDescription(const std::string& questID);
 	void hideDescription();
 
-	std::map<QuestState, std::vector<QuestEntry>*> m_stateMap;
+	std::map<QuestState, std::vector<QuestEntry*>*> m_stateMap;
 
 	static const int ENTRY_COUNT;
 	static const float MAX_ENTRY_LENGTH;

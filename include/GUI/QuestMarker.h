@@ -21,7 +21,7 @@ public:
 
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Interface; }
 	
-	static const float SIZE;
+	static const int SIZE;
 
 protected:
 	QuestData m_questData;

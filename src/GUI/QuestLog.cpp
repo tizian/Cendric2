@@ -4,6 +4,7 @@
 #include "GUI/ScrollHelper.h"
 #include "GlobalResource.h"
 #include "Structs/QuestData.h"
+#include "GameObjectComponents/TooltipComponent.h"
 
 // <<< QUEST LOG >>>
 
@@ -67,10 +68,10 @@ void QuestLog::init() {
 	float height = BUTTON_SIZE.y;
 	float x = LEFT + 0.5f * (WIDTH - width);
 	float y = TOP + GUIConstants::GUI_TABS_TOP;
-	
+
 	m_tabBar = new TabBar(sf::FloatRect(x, y, width, height), nTabs);
 	for (int i = 0; i < nTabs; ++i) {
-		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName((QuestState)(i+1)));
+		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName((QuestState)(i + 1)));
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 
@@ -105,9 +106,9 @@ QuestLog::~QuestLog() {
 }
 
 void QuestLog::clearAllEntries() {
-	m_completedQuests.clear();
-	m_failedQuests.clear();
-	m_startedQuests.clear();
+	CLEAR_VECTOR(m_completedQuests);
+	CLEAR_VECTOR(m_failedQuests);
+	CLEAR_VECTOR(m_startedQuests);
 	m_selectedEntry = nullptr;
 }
 
@@ -118,12 +119,12 @@ void QuestLog::update(const sf::Time& frameTime) {
 
 	// check whether an entry was selected
 	for (auto& it : *(m_stateMap[m_currentTab])) {
-		sf::Vector2f pos = it.getPosition();
+		sf::Vector2f pos = (*it).getPosition();
 		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
 			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		it.update(frameTime);
-		if (it.isClicked()) {
-			selectEntry(&it);
+		(*it).update(frameTime);
+		if ((*it).isClicked()) {
+			selectEntry(it);
 			return;
 		}
 	}
@@ -141,7 +142,7 @@ void QuestLog::update(const sf::Time& frameTime) {
 }
 
 void QuestLog::calculateEntryPositions() {
-	std::vector<QuestEntry>* entries = m_stateMap[m_currentTab];
+	std::vector<QuestEntry*>* entries = m_stateMap[m_currentTab];
 
 	int rows = static_cast<int>(entries->size());
 	int steps = rows - ENTRY_COUNT + 1;
@@ -167,9 +168,9 @@ void QuestLog::calculateEntryPositions() {
 	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
 	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
 
-	for (auto& it : *entries) {
-		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		it.setPosition(sf::Vector2f(xOffset, yOffset));
+	for (auto it : *entries) {
+		(*it).setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
+		(*it).setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}
 }
@@ -196,8 +197,7 @@ void QuestLog::render(sf::RenderTarget& target) {
 	m_window->render(target);
 	target.draw(m_title);
 	for (auto& it : *(m_stateMap[m_currentTab])) {
-		it.render(m_scrollHelper->texture);
-		// it.renderAfterForeground(target); // uncomment for debug box
+		(*it).render(m_scrollHelper->texture);
 	}
 	m_scrollHelper->render(target);
 
@@ -246,7 +246,7 @@ void QuestLog::reload() {
 		const QuestData* data = m_core->getQuestData(it.first);
 		if (!data) continue;
 
-		m_stateMap[it.second]->push_back(QuestEntry(*data, m_core, it.second == QuestState::Started));
+		m_stateMap[it.second]->push_back(new QuestEntry(*data, m_core, it.second == QuestState::Started));
 		if (it.first == m_selectedQuestID && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
@@ -255,9 +255,9 @@ void QuestLog::reload() {
 
 	for (auto& it : m_stateMap) {
 		for (auto& it2 : *it.second) {
-			it2.deselect();
-			if (it2.getQuestID() == m_selectedQuestID) {
-				selectEntry(&it2);
+			(*it2).deselect();
+			if ((*it2).getQuestID() == m_selectedQuestID) {
+				selectEntry(it2);
 			}
 		}
 	}
@@ -386,10 +386,21 @@ void LogQuestMarker::onRightClick() {
 	setActive(false);
 }
 
+void LogQuestMarker::setActive(bool active) {
+	QuestMarker::setActive(active);
+
+	if (isActive()) {
+		m_tooltipComponent->setTooltipText(g_textProvider->getText("LogQuestMarkerActive"));
+	}
+	else {
+		m_tooltipComponent->setTooltipText(g_textProvider->getText("LogQuestMarkerInactive"));
+	}
+}
+
 void LogQuestMarker::init() {
-	
+	setActive(m_characterCore->isQuestTracked(m_questData.id));
 }
 
 void LogQuestMarker::jumpToQuest() {
-	
+
 }

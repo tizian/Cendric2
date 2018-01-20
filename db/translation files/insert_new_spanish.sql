@@ -29,6 +29,11 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Focu
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToggleAutotarget','Toggle Autotarget','Automatisches Zielen an/aus','Automatisches Ziele aa/uus','Alternar ?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele aa','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOff','Auto target off','Automatisches Zielen aus','Automatisches Ziele uus','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerActive','Left click to show on map
+Right click to deactivate tracking','Linksklick um auf Karte anzuzeigen
+Rechtsklick um zu deaktivieren','Linksklick zum uf de Charte zeige
+Rechtsklick zum deaktiviere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerInactive','Left click activate tracking','Linksklick um Questverfolgung zu aktivieren','Linksklick zum Questverfolgig aktiviere','?');
 
 -- hints
 

@@ -178,6 +178,11 @@ Ungespeicherter Fortschritt geht verloren.','Neus Spiel starte?
 Ungspeicherete Fortschritt isch futsch.','¿Iniciar nueva partida?
 Todo proceso sin guardar se perderá.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestItems','Quest Items','Questgegenstände','Questgegeständ','Objetos de misión');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerActive','Left click to show on map
+Right click to deactivate tracking','Linksklick um auf Karte anzuzeigen
+Rechtsklick um zu deaktivieren','Linksklick zum uf de Charte zeige
+Rechtsklick zum deaktiviere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerInactive','Left click activate tracking','Linksklick um Questverfolgung zu aktivieren','Linksklick zum Questverfolgig aktiviere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Quickcast','Quickcast','Schnellzaubern','Schnellzaubere','Conjuración rápida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Quickload','Quick Load','Schnell Laden','Schnell Lade','Cargado rápido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Quicksave','Quick Save','Schnell Speichern','Schnell Speichere','Guardado rápido');
