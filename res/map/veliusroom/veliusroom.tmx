@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="200">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="201">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
@@ -397,6 +397,11 @@
     <property name="dialoguetexture" value="res/npc/npc_robert/npc_robert.png"/>
     <property name="id" value="npc_robert4"/>
     <property name="spritesheetpath" value="res/npc/npc_robert/spritesheet_npc_robert.png"/>
+   </properties>
+  </object>
+  <object id="200" gid="599" x="625" y="862.5" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_zeff4"/>
    </properties>
   </object>
  </objectgroup>

@@ -1,0 +1,45 @@
+# dia file for dialogue for npc: npc_zeff4
+
+npc.id:npc_zeff4
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_zeff4", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff4", "talked")
+	# translation: 
+	translation.tag:DL_Zeff_Na
+	translation.en:Hn.
+	translation.de:Na?
+	translation.ch:Na?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}

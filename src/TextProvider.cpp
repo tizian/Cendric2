@@ -3,8 +3,6 @@
 #include "DatabaseManager.h"
 #include "GUI/BitmapText.h"
 
-using namespace std;
-
 TextProvider* g_textProvider;
 
 const int TextProvider::TAB_TO_SPACES = 4;
@@ -16,8 +14,6 @@ TextProvider::TextProvider() {
 void TextProvider::reload() {
 	setLanguage(g_resourceManager->getConfiguration().language);
 }
-
-
 
 std::string TextProvider::getText(const std::string& key) {
 	return getText(key, "core");
@@ -90,14 +86,14 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 	while (static_cast<int>(uncroppedText.size()) * characterSize > maxWidth) {
 		// check for forced newlines
 		size_t found = uncroppedText.find("\n");
-		if (found != string::npos && found < maxLineChars && found++ != string::npos) {
+		if (found != std::string::npos && found < maxLineChars && found++ != std::string::npos) {
 			text.append(uncroppedText.substr(0, found));
 			uncroppedText = uncroppedText.substr(found);
 			continue;
 		}
 		// check if we need to crop a whole word
 		found = uncroppedText.find(" ");
-		if (found == string::npos || (found != string::npos && found > maxLineChars)) {
+		if (found == std::string::npos || (found != std::string::npos && found > maxLineChars)) {
 			text.append(uncroppedText.substr(0, maxLineChars));
 			text.append("\n");
 			uncroppedText = uncroppedText.substr(maxLineChars);
@@ -107,12 +103,12 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 		size_t space = maxLineChars;
 		while (true) {
 			found = uncroppedText.find(" ");
-			if (found != string::npos && found++ < space) {
+			if (found != std::string::npos && found++ < space) {
 				text.append(uncroppedText.substr(0, found));
 				uncroppedText = uncroppedText.substr(found);
 				space = space - static_cast<int>(found);
 			}
-			else if (found == string::npos || space >= found) {
+			else if (found == std::string::npos || space >= found) {
 				text.append(uncroppedText.substr(0, space));
 				text.append("\n");
 				uncroppedText = uncroppedText.substr(space);
