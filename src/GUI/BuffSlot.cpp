@@ -3,18 +3,15 @@
 #include "Spells/Spell.h"
 #include "Enums/EnumNames.h"
 #include "ScreenOverlays/TextureScreenOverlay.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
 #include "GlobalResource.h"
-
-using namespace std;
 
 const float BuffSlot::MARGIN = 4.f;
 const float BuffSlot::SIZE = 50.f + 2 * MARGIN;
 const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
-const sf::Vector2f TEXT_OFFSET = sf::Vector2f(10.f, 10.f);
-
-BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) : m_tooltipWindow(Window(sf::FloatRect(), GUIOrnamentStyle::NONE, sf::Color(0, 0, 0, 100), COLOR_WHITE)) {
+BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
 	setDebugBoundingBox(COLOR_BAD);
 	m_buffType = type;
@@ -52,7 +49,11 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	m_back.setFillColor(COLOR_TRANS_GREY);
 
 	m_durationText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	
+	m_tooltipComponent = new TooltipWindowComponent("", this);
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(SIZE + 2.f, 0.f));
+	m_tooltipComponent->setMaxWidth(200.f);
+	addComponent(m_tooltipComponent);
 }
 
 void BuffSlot::setPosition(const sf::Vector2f& pos) {
@@ -60,8 +61,6 @@ void BuffSlot::setPosition(const sf::Vector2f& pos) {
 	m_inside.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
 	m_back.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
 	m_durationText.setPosition(pos + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
-	m_tooltipWindow.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f));
-	m_tooltipText.setPosition(pos + sf::Vector2f(SIZE + 2.f, 0.f) + TEXT_OFFSET);
 	GameObject::setPosition(pos);
 }
 
@@ -75,20 +74,8 @@ void BuffSlot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_durationText);
 }
 
-void BuffSlot::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	GameObject::renderAfterForeground(renderTarget);
-	if (m_tooltipTime > sf::Time::Zero) {
-		m_tooltipWindow.render(renderTarget);
-		renderTarget.draw(m_tooltipText);
-	}
-}
-
 SpellID BuffSlot::getSpellID() const {
 	return m_ownerSpell == nullptr ? SpellID::VOID : m_ownerSpell->getSpellID();
-}
-
-void BuffSlot::onMouseOver() {
-	m_tooltipTime = sf::seconds(0.1f);
 }
 
 void BuffSlot::onRightClick() {
@@ -102,7 +89,6 @@ void BuffSlot::update(const sf::Time& frameTime) {
 	if (m_duration >= sf::Time::Zero) {
 		updateTime(m_duration, frameTime);
 	}
-	updateTime(m_tooltipTime, frameTime);
 	if (m_duration == sf::Time::Zero) setDisposed();
 	if (m_duration >= sf::Time::Zero) {
 		updateTime(m_timeUntilFlash, frameTime);
@@ -114,7 +100,7 @@ void BuffSlot::update(const sf::Time& frameTime) {
 
 	// update duration text
 	if (m_duration >= sf::Time::Zero) {
-		m_durationText.setString(to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
+		m_durationText.setString(std::to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
 		m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
 	}
 	GameObject::update(frameTime);
@@ -149,9 +135,7 @@ void BuffSlot::setSpellAttributes(Spell* owner, const AttributeData& attributes)
 	tooltip.append(g_textProvider->getText(EnumNames::getSpellIDName(m_ownerSpell->getSpellID())) + "\n\n");
 	AttributeData::appendAttributes(tooltip, attributes);
 
-	m_tooltipText.setString(tooltip);
-	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
-	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
+	m_tooltipComponent->setTooltipText(tooltip);
 }
 
 void BuffSlot::setFoodAttributes(const std::string& item_id, const AttributeData& attributes) {
@@ -161,9 +145,7 @@ void BuffSlot::setFoodAttributes(const std::string& item_id, const AttributeData
 	tooltip.append(g_textProvider->getText(item_id, "item") + "\n\n");
 	AttributeData::appendAttributes(tooltip, attributes);
 
-	m_tooltipText.setString(tooltip);
-	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
-	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
+	m_tooltipComponent->setTooltipText(tooltip);
 }
 
 void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
@@ -192,7 +174,5 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 		tooltip.append(g_textProvider->getText("DamagePerSecond") + ": " + std::to_string(data.damage));
 	}
 
-	m_tooltipText.setString(tooltip);
-	m_tooltipWindow.setWidth(2 * TEXT_OFFSET.x + m_tooltipText.getLocalBounds().width);
-	m_tooltipWindow.setHeight(2 * TEXT_OFFSET.y + m_tooltipText.getLocalBounds().height);
+	m_tooltipComponent->setTooltipText(tooltip);
 }

@@ -13,6 +13,26 @@ npc.id:npc_karma
 	[
 		# Link node, tag is next tag
 		tag:2
+		condition:not DL:isConditionFulfilled("npc_karma", "kamasutra")
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:not DL:isConditionFulfilled("npc_karma", "started")
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_karma", "sex")
+	]
+	[
+		# Link node, tag is next tag
+		tag:34
+		condition:not DL:isConditionFulfilled("npc_karma", "after_sex")
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
 	]
 }
 {1
@@ -35,7 +55,7 @@ npc.id:npc_karma
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:not DL:isConditionFulfilled("npc_karma", "sex_karma")
+		condition:not DL:isConditionFulfilled("npc_karma", "kamasutra")
 		# translation: 
 		translation.tag:DL_Choice_Hey
 		translation.en:Hey...
@@ -56,14 +76,593 @@ npc.id:npc_karma
 	# [3] NPC Node
 	tag:3
 	# triggers: 
-	trigger:DL:addConditionProgress("npc_karma", "sex_karma")
+	trigger:DL:addConditionProgress("npc_karma", "kamasutra")
 	# translation: 
-	translation.tag:DL_Karma_SexyBoy
-	translation.en:Hey, sexy boy.
-	translation.de:Hallo, hübscher Junge.
-	translation.ch:Hoi, hübsche Bueb.
+	translation.tag:DL_Karma_Kamasutra
+	translation.en:Hello, cutie. You're here to learn something about the art of Kama Sutra, I suppose?
+	translation.de:Hallo, hübscher Junge. Du bist hier, um etwas über die Kunst des Kama Sutra zu lernen, nehme ich an?
+	translation.ch:Hoi, hübsche Bueb. Du bisch do, zum öppis über d'Kunst vom Kama Sutra z'lerne, nimi ah?
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [7] Choice Node
+	tag:7
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_KamasutraTellMe
+		translation.en:Kama Sutra? Tell me more about it.
+		translation.de:Kama Sutra? Erzähl mir mehr davon.
+		translation.ch:Kama Sutra? Verzell mer me devo.
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_NotLearnPractice
+		translation.en:I'm not here to learn - I want to practice!
+		translation.de:Ich bin nicht hier, um zu lernen - Ich will praktizieren!
+		translation.ch:Ich bi nid do zum lerne - Ich will praktiziere!
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_WrongRoom
+		translation.en:Oh... I must be in the wrong room. 
+		translation.de:Oh... Ich hab mich wohl im Zimmer geirrt.
+		translation.ch:Oh... Ich ha mich glaub im Zimmer g'irrt.
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_karma", "started")
+	trigger:DL:gotoNode(5)
+	# translation: 
+	translation.tag:DL_Karma_KamasutraTellMe
+	translation.en:Of course. Listen carefully.
+	translation.de:Natürlich. Hör gut zu.
+	translation.ch:Natürli. Pass guet uf.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_karma", "started")
+	# translation: 
+	translation.tag:DL_Karma_NotLearnPractice
+	translation.en:Patience, young lad! You cannot just jump to the last chapter without knowing the others.
+	translation.de:Geduld, junger Mann! Du kannst nicht gleich zum letzten Kapitel springen, ohne die anderen zu kennen.
+	translation.ch:Geduld, junge Burscht! Du chasch nid grad zum letzte Kapitel springe, ohni di andere z'kenne.
+	[
+		# Link node, tag is next tag
+		tag:19
+	]
+}
+{2
+	# [19] Choice Node
+	tag:19
+	[
+		# Link node, tag is next tag
+		tag:20
+		# translation: 
+		translation.tag:DL_Choice_IKnowEverything
+		translation.en:I know the other chapters!
+		translation.de:Ich kenne di anderen Kapitel!
+		translation.ch:Ich kenn di andere Kapitel!
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		# translation: 
+		translation.tag:DL_Choice_IKnowNothing
+		translation.en:Okay, tell me more about it, then.
+		translation.de:Okay, dann erzähl mir mehr davon.
+		translation.ch:Okay, denn verzell mer halt me devo.
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:gotoNode(18)
+	# translation: 
+	translation.tag:DL_Karma_IKnowEverything
+	translation.en:If you say so, you surely can answer me three questions to my satisfaction...
+	translation.de:Wenn das so ist, kannst du mir sicher drei Fragen zu meiner Zufriedenheit beantworten...
+	translation.ch:Wenn das so isch, chaschmer sicher drei Froge zu minere Zfriedeheit beantworte...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	trigger:DL:gotoNode(5)
+	# translation: 
+	translation.tag:DL_Karma_KamasutraTellMe
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [4] Choice Node
+	tag:4
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_ExplainKamasutra
+		translation.en:Explain the art of Kama Sutra to me.
+		translation.de:Erklär mir die Kunst des Kama Sutra.
+		translation.ch:Erklär mer d'Kunst vom Kama Sutra.
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		# translation: 
+		translation.tag:DL_Choice_GoQuestions
+		translation.en:I'm ready for your questions.
+		translation.de:Ich bin bereit für deine Fragen.
+		translation.ch:Ich bi parat für dini Froge.
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra
+	translation.en:Good. The Kamasutra consists of seven parts. It's a guide to the art of love.
+	translation.de:Gut. Das Kamasutra besteht aus sieben Teilen. Es ist ein Leitfaden zur Liebeskunst.
+	translation.ch:Guet. Es Kamasutra bestoht us sibe Teil. Es isch ein Leitfade zude Liebeskunst.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{2
+	# [6] Choice Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:10
+		# translation: 
+		translation.tag:DL_Choice_GoOn
+		translation.en:(Go on...)
+		translation.de:(Weiter...)
+		translation.ch:(Wiiter...)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_HeardEnough
+		translation.en:I've heard enough.
+		translation.de:Ich habe genug gehört.
+		translation.ch:Ich ha gnueg ghört.
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra2
+	translation.en:The most famous chapter focuses on sexual union, but this is only a fifth of the book.
+	translation.de:Das berühmteste Kapitel befasst sich mit der sexuellen Vereinigung, aber das macht nur etwa ein Fünftel des Buchs aus.
+	translation.ch:Es berüemtist Kapitel befasst sich mit de sexuelle Vereinigung, aber das macht nur öppe en Foiftel vom Buech us.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{2
+	# [11] Choice Node
+	tag:11
+	[
+		# Link node, tag is next tag
+		tag:12
+		# translation: 
+		translation.tag:DL_Choice_GoOn
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_HeardEnough
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra3
+	translation.en:The book also covers the theory of love and describes what triggers desire and how to improve one's own physical attraction.
+	translation.de:Das Buch beschreibt auch die Theorie der Liebe und erklärt, was Verlangen hervorruft und wie man die eigene sexuelle Attraktivität steigern kann.
+	translation.ch:Es Buech beschriibt au d'Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget sexuell Attraktivität steigere cha.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{2
+	# [13] Choice Node
+	tag:13
+	[
+		# Link node, tag is next tag
+		tag:14
+		# translation: 
+		translation.tag:DL_Choice_GoOn
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_HeardEnough
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra4
+	translation.en:In addition to the common arts of dancing, drawing, singing, massaging and hairdressing; magical tricks or how to teach a parrot to speak also impress a vis-à-vis.
+	translation.de:Neben den bekannteren Künsten wie Tanzen, Malen, Singen, Massieren und Frisieren; imponieren auch Zaubertricks oder wie man einem Papagei das Sprechen beibringt.
+	translation.ch:Nebed de bekanntere Künst we Tanze, Zeichne, Singe, Massiere und Frisiere; imponiered au Zaubertricks und weme weiss, weme emne Papagei es rede biibringt.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{2
+	# [15] Choice Node
+	tag:15
+	[
+		# Link node, tag is next tag
+		tag:16
+		# translation: 
+		translation.tag:DL_Choice_GoOn
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:-2
+		# translation: 
+		translation.tag:DL_Choice_HeardEnough
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra5
+	translation.en:There's also a short introduction on love practices like "Milk and Water" or "Sesame and Rice".
+	translation.de:Es gibt auch eine kleine Einführung über Liebespraktiken wie "Milch und Wasser" oder "Sesam und Reis".
+	translation.ch:Es git au e chliini Iiführig über Liebespraktike wie "Milch und Wasser" oder "Sesam und Riis".
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:gotoNode(18)
+	# translation: 
+	translation.tag:DL_Karma_ExplainKamasutra6
+	translation.en:This was now a short summary. To check whether you were attentive, I got some questions for you.
+	translation.de:Dies war jetzt eine kurze Zusammenfassung. Um zu sehen, ob du auch aufgepasst hast, hab ich ein paar Testfragen an dich.
+	translation.ch:Das isch ez e chliini Zemefassig gsi. Zum gse, obd au ufpasst hesch, hani es paar Testfroge für dich.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_FirstQuestion
+	translation.en:What is "Milk and Water"?
+	translation.de:Was ist "Milch und Wasser"?
+	translation.ch:Was isch "Milch und Wasser"?
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{2
+	# [22] Choice Node
+	tag:22
+	[
+		# Link node, tag is next tag
+		tag:23
+		# translation: 
+		translation.tag:DL_Choice_FirstQuestion1
+		translation.en:Something to drink.
+		translation.de:Etwas zu trinken.
+		translation.ch:Öppis zum trinke.
+	]
+	[
+		# Link node, tag is next tag
+		tag:24
+		# translation: 
+		translation.tag:DL_Choice_FirstQuestion2
+		translation.en:A love practice.
+		translation.de:Eine Liebespraktik.
+		translation.ch:E Liebespraktik.
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_FirstQuestion3
+		translation.en:Ingredients for a love potion.
+		translation.de:Zutaten für einen Liebestrank.
+		translation.ch:Zuetate für en Liebestrank.
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_WrongQuestion1
+	translation.en:You must be tired. Come again when you're able to concentrate!
+	translation.de:Du bist wohl etwas müde. Komm wieder, wenn du dich konzentrieren kannst!
+	translation.ch:Du bisch glaub chli müed. Chum  wider, wenn di konzentriere chasch!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_CorrectQuestion1
+	translation.en:Good. You passed the first test. Now on to the second question: What's the Kama Sutra about?
+	translation.de:Gut. Du hast den ersten Test bestanden. Nun zur zweiten Frage: Was beinhaltet das Kama Sutra?
+	translation.ch:Guet. Du hesch de erst Test bestande. Jetz zur zweite Frog: Was beinhaltet es Kama Sutra?
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{2
+	# [26] Choice Node
+	tag:26
+	[
+		# Link node, tag is next tag
+		tag:27
+		# translation: 
+		translation.tag:DL_Choice_SecondQuestion1
+		translation.en:It is a book that describes sexual practices with nice pictures.
+		translation.de:Es ist ein Buch, das sexuelle Praktiken mit hübschen Bildern illustriert.
+		translation.ch:Es isches Buech, wo sexuelli Praktike mit hübsche Bildli illustriert.
+	]
+	[
+		# Link node, tag is next tag
+		tag:28
+		# translation: 
+		translation.tag:DL_Choice_SecondQuestion2
+		translation.en:A seven-piece guide about the art of love.
+		translation.de:Ein siebenteiliger Leitfaden über die Liebeskunst.
+		translation.ch:En sibeteilige Leitfade überd Liebeskunst.
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_WrongQuestion2
+	translation.en:No, even if that's what most people believe, it's not.
+	translation.de:Nein, auch wenn das die meisten Leute glauben, ist es nicht so.
+	translation.ch:Nei, au wenn das di meiste Lüt glaubed, isches nid so.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_CorrectQuestion2
+	translation.en:Good. And now my last question: What can be mastered to improve one's sexual attractiveness?
+	translation.de:Gut. Und jetzt meine letzte Frage: Was kann gemeistert werden, um die eigene sexuelle Attraktivität zu steigern?
+	translation.ch:Guet. Und ez mini letzt Frog: Was chan gmeisteret werde, zum di eiget sexuell Attraktivität z'steigere?
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{2
+	# [29] Choice Node
+	tag:29
+	[
+		# Link node, tag is next tag
+		tag:30
+		# translation: 
+		translation.tag:DL_Choice_ThirdQuestion1
+		translation.en:Magical tricks and how to teach a parrot to speak.
+		translation.de:Zaubertricks und wie man einem Papagei das Sprechen beibringt.
+		translation.ch:Zaubertrickli und weme emne Papagei es Rede biibringt.
+	]
+	[
+		# Link node, tag is next tag
+		tag:31
+		# translation: 
+		translation.tag:DL_Choice_ThirdQuestion2
+		translation.en:Looking as beautiful as me with my blonde hair.
+		translation.de:So schön auszusehen wie ich mit meinem blonden Haar.
+		translation.ch:So schön uszgse we ich mit mine blonde Haar.
+	]
+	[
+		# Link node, tag is next tag
+		tag:32
+		# translation: 
+		translation.tag:DL_Choice_ThirdQuestion3
+		translation.en:Knowing different sex positions.
+		translation.de:Verschiedene Sexpositionen zu kennen.
+		translation.ch:Verschideni Sexpositione z'kenne.
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ThirdQuestion1
+	translation.en:Very good. As you now know some basics of the Kama Sutra, we can now try out "Milk and Water".
+	translation.de:Sehr gut. Da du jetzt einige Grundlagen des Kama Sutra kennst, machen wir jetzt "Milch und Wasser".
+	translation.ch:Sehr guet. Well du ez es paar Grundlage vom Kama Sutra kennsch, machemer ez "Milch und Wasser".
+	[
+		# Link node, tag is next tag
+		tag:33
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	trigger:DL:startCutscene("sex_karma")
+	trigger:DL:addConditionProgress("npc_karma", "sex")
+	# translation: 
+	translation.tag:
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ThirdQuestion2
+	translation.en:(Sighs) No... looks are not everything.
+	translation.de:(Seufzt) Nein... das Aussehen ist nicht alles.
+	translation.ch:(Süüfzet) Nei... es Ussehe isch nid alles.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_ThirdQuestion3
+	translation.en:You should have listened more carefully.
+	translation.de:Du solltest besser zugehört haben.
+	translation.ch:Du hetsch söle besser ufpasse.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_WrongQuestion1
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_karma", "after_sex")
+	# translation: 
+	translation.tag:DL_Karma_SexDone
+	translation.en:Wow. That was incredible. What's the theory without the practice, eh. (Smiles)
+	translation.de:Wow. Das war unglaublich. Was ist die Theorie schon ohne die Praxis, he. (Lächelt)
+	translation.ch:Wow. Da isch unglaublich gsi. Wa isch d'Theorie scho ohni d'Praxis, he. (Lächlet)
+	[
+		# Link node, tag is next tag
+		tag:36
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	trigger:DL:addItem("do_kamasutra", 1)
+	# translation: 
+	translation.tag:DL_Karma_SexDone2
+	translation.en:Here, take this book as a gift. It will show you how to get even better.
+	translation.de:Hier, nimm dieses Buch als ein Geschenk. Es wird dir zeigen, wie du noch besser wirst.
+	translation.ch:Do, nimm das Buech als es Gschenk. Es wird der zeige, wed sogar na besser wirsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Karma_AfterSex
+	translation.en:See you later, honey. 
+	translation.de:Bis später, Schätzchen.
+	translation.ch:Bis spöter, Schätzli.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }

@@ -7,7 +7,6 @@
 HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	m_isInputInDefaultView = true;
 	m_boundingBox.height = BAR_HEIGHT;
-	setDebugBoundingBox(sf::Color::Yellow);
 	sf::Vector2f initialPosition;
 
 	if (style == HealthBarStyle::MainCharacter) {
@@ -62,7 +61,6 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	m_shrinkTime = sf::Time::Zero;
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
-	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.5f * m_boundingBox.width, BAR_HEIGHT + 10.f));
 	m_tooltipComponent->setTextAlignment(TextAlignment::Center);
 	addComponent(m_tooltipComponent);
 
@@ -74,6 +72,7 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	setName("");
 
 	setPosition(initialPosition);
+	setDebugBoundingBox(sf::Color::Yellow);
 }
 
 HealthBar::~HealthBar() {
@@ -123,7 +122,6 @@ void HealthBar::setPosition(const sf::Vector2f& pos) {
 	auto const bounds = m_name.getBounds();
 	m_name.setPosition(pos + sf::Vector2f(0.5f * (m_boundingBox.width - bounds.width), BAR_HEIGHT + 10.f));
 }
-
 
 void HealthBar::update(const sf::Time& frameTime) {
 	if (m_attributes == nullptr) return;
@@ -184,4 +182,5 @@ void HealthBar::update(const sf::Time& frameTime) {
 
 	// Update tooltip
 	m_tooltipComponent->setTooltipText(std::to_string(m_currentHP) + "/" + std::to_string(m_attributes->maxHealthPoints));
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.5f * (m_boundingBox.width - m_tooltipComponent->getWidth()), BAR_HEIGHT + 10.f));
 }

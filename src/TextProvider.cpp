@@ -112,6 +112,12 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 				uncroppedText = uncroppedText.substr(found);
 				space = space - static_cast<int>(found);
 			}
+			else if (found == string::npos || space >= found) {
+				text.append(uncroppedText.substr(0, space));
+				text.append("\n");
+				uncroppedText = uncroppedText.substr(space);
+				break;
+			}
 			else {
 				text.append("\n");
 				break;
