@@ -53,7 +53,7 @@ void TextProvider::replaceItemVariables(std::string& text) {
 	while (varPos != std::string::npos) {
 		text.append(remainingText.substr(0, varPos));
 		remainingText = remainingText.substr(varPos + 1);
-		varPos = remainingText.find('$'); 
+		varPos = remainingText.find('$');
 		if (varPos == std::string::npos) {
 			g_logger->logError("TextProvider", "missing closing $ of item id to parse.");
 			break;
@@ -107,17 +107,14 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 				text.append(uncroppedText.substr(0, found));
 				uncroppedText = uncroppedText.substr(found);
 				space = space - static_cast<int>(found);
+				continue;
 			}
 			else if (found == std::string::npos || space >= found) {
 				text.append(uncroppedText.substr(0, space));
-				text.append("\n");
 				uncroppedText = uncroppedText.substr(space);
-				break;
 			}
-			else {
-				text.append("\n");
-				break;
-			}
+			text.append("\n");
+			break;
 		}
 	}
 	return text.append(uncroppedText);

@@ -1,5 +1,6 @@
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehaviorCallback.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
 #include "CharacterCore.h"
 #include "Level/Enemy.h"
 #include "Screens/WorldScreen.h"
@@ -107,6 +108,18 @@ void ScriptedBehaviorCallback::executeFightAnimation() {
 	}
 	else {
 		m_enemy->executeDefaultFightAnimation(true);
+	}
+}
+
+void ScriptedBehaviorCallback::setReplaceDistance(int distance) {
+	if (m_isRoutineFunction || distance < 100) {
+		return;
+	}
+	else {
+		auto allyBehavior = dynamic_cast<AllyWalkingBehavior*>(m_enemy->getMovingBehavior());
+		if (allyBehavior) {
+			allyBehavior->setReplaceDistance(static_cast<float>(distance));
+		}
 	}
 }
 

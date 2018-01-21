@@ -85,6 +85,8 @@ Tizian
 
 "The Meadows"
 
+"The Royal Guards"
+
 ---
 
 -- Susanne Aubert --
@@ -168,8 +170,11 @@ Dave, Melanie Silk
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
-Pascal Josephy for the web support
+Lukas for the SFML support
+Achpile for the Linux support
 Mona for her brothel support
+Pascal Josephy for the web support
+
 
 ---
 
@@ -292,6 +297,8 @@ Tizian
 
 "The Meadows"
 
+"The Royal Guards"
+
 ---
 
 -- Susanne Aubert --
@@ -376,8 +383,10 @@ Dave, Melanie Silk
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
-Pascal Josephy für den Web-Support
+Lukas für den SFML-Support
+Achpile für den Linux-Support
 Mona für ihren Bordell-Support
+Pascal Josephy für den Web-Support
 
 ---
 
@@ -497,6 +506,8 @@ Tizian
 
 "The Meadows"
 
+"The Royal Guards"
+
 ---
 
 -- Susanne Aubert --
@@ -602,8 +613,11 @@ Dave, Melanie Silk
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild
-Pascal Josephy für de Web-Support
+Lukas für sin SFML-Support
+Achpile für de Linux-Support
 Mona für ihre Bordell-Support
+Pascal Josephy für de Web-Support
+
 
 ---
 

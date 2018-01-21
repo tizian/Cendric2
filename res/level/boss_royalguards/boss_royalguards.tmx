@@ -4,7 +4,7 @@
   <property name="backgroundlayers" value="-1.0,res/level/boss_royalguards/layer_inf.png,2.0,res/level/boss_royalguards/layer_2.png"/>
   <property name="bosslevel" value="res/level/boss_royalguards/boss_royalguards.lua"/>
   <property name="dimming" value="0.5"/>
-  <property name="musicpath" value="res/music/mercenaries.ogg"/>
+  <property name="musicpath" value="res/music/boss_royalguards.ogg"/>
   <property name="tilesetpath" value="res/level/boss_royalguards/tileset_level_boss_royalguards.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_boss_royalguards" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">

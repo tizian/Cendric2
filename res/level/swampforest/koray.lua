@@ -85,6 +85,7 @@ update = function(B, W)
         W:addQuestProgress("element_master", "master_earth")
         W:changeQuestState("help_koray", "completed")
         W:addConditionProgress("npc_koray", "level_stop")
+        B:setReplaceDistance(10000)
         B:wait(5)
         speechBubbleState = 13
         return

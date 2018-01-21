@@ -13,6 +13,11 @@ npc.id:npc_zeff4
 	[
 		# Link node, tag is next tag
 		tag:2
+		condition:not DL:isConditionFulfilled("npc_zeff4", "done")
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
 	]
 }
 {1
@@ -22,9 +27,9 @@ npc.id:npc_zeff4
 	trigger:DL:addConditionProgress("npc_zeff4", "talked")
 	# translation: 
 	translation.tag:DL_Zeff_Na
-	translation.en:Hn.
-	translation.de:Na?
-	translation.ch:Na?
+	translation.en:I knew you would be successful!
+	translation.de:Ich wusste, du würdest es schaffen!
+	translation.ch:Ich ha gwüsst, dases schaffsch!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -35,11 +40,116 @@ npc.id:npc_zeff4
 	tag:2
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:4
 		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_LookingGood
+		translation.en:You're looking good.
+		translation.de:Du siehst gut aus.
+		translation.ch:Gsesch guet us.
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		# translation: 
+		translation.tag:DL_Choice_CurseBroken
+		translation.en:The curse is finally broken.
+		translation.de:Der Fluch wurde endlich gebrochen.
+		translation.ch:De Fluech isch endli broche.
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff4", "done")
+	# translation: 
+	translation.tag:DL_Zeff_WhoAreYou
+	translation.en:Don't you recognize me? I'm Zeff. A little less fur, but still Zeff.
+	translation.de:Erkennst du mich nicht? Ich bin Zeff. Ein bisschen weniger Fell, aber immer noch Zeff.
+	translation.ch:Erkennsch mi denn nid? Ich bi de Zeff. Es bitz weniger Fell, aber immer no de Zeff.
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Zeff_WhoAreYou2
+	translation.en:The curse is finally broken. Thank you, young mage.
+	translation.de:Der Fluch ist endlich gebrochen. Danke, junger Magier.
+	translation.ch:De Fluech isch endli broche. Danke, junge Magier.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff4", "done")
+	# translation: 
+	translation.tag:DL_Zeff_LookingGood
+	translation.en:Yeh, right? A little less fur, but I'm happy to be back.
+	translation.de:Ja, definitiv. Ein bisschen weniger Fell, aber ich bin froh, bin ich wieder zurück.
+	translation.ch:Jo, gell. Es bitz weniger Fell, aber ich bi froh, dasi wider zrugg bi.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Zeff_WhoAreYou2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_zeff4", "done")
+	# translation: 
+	translation.tag:DL_Zeff_CurseBroken
+	translation.en:It truly is. Thank you, young mage. I'll never forget you.
+	translation.de:Das ist wahr. Vielen Dank, junger Magier. Ich werde dich niemals vergessen.
+	translation.ch:Isch so. Danke tusig, junge Magier. Ich wird di nie vergesse.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Zeff_Thanks
+	translation.en:Thank you!
+	translation.de:Danke!
+	translation.ch:Danke!
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }

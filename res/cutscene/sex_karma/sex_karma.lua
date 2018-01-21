@@ -13,7 +13,16 @@ steps = {
 	},
 	{
 		texts = {
-			{str="", time=2}
+			{str="Karma1", time=2, centered=true}
+		},
+		images = {
+			{path="black.png", vel=0, angle=0},
+		},
+		fadetime=1.0
+	},
+    {
+		texts = {
+			{str="Karma2", time=2, centered=true}
 		},
 		images = {
 			{path="black.png", vel=0, angle=0},

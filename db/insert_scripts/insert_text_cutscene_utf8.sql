@@ -61,6 +61,17 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Need', 'cutscene','But I got no use for you right now.','Aber für dich habe ich gerade keine Verwendung.','Aber für dich hani grad ke Verwendig.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Die', 'cutscene','You better sleep now.','Du schläfst jetzt besser.','Du schlofsch ez besser', '?');
 
+-- Sex with Karma
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Karma1', 'cutscene','"That leg goes... where?"','"Dieses Bein kommt... wo hin?','"Da Bei chunt.... wo hi?"', '- ? -');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Karma2', 'cutscene','(You didn''t even know
+that''s possible)','(Du wusstest nicht mal,
+dass das möglich ist.)','(Du hesch nid mal gwüsst,
+dass das mögli isch.)', '- ? -');
+
+-- Sex with Lola
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Lola1', 'cutscene','...','...','...', '- ? -');
 
 
 

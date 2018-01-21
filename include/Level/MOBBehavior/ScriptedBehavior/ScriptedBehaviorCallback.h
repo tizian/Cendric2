@@ -48,6 +48,8 @@ public:
 	void executeFightAnimation();
 	// executes a registered spell at a certain target (in pixels)
 	void executeSpell(int spell, int x, int y);
+	// sets the replace distance of an allied mob
+	void setReplaceDistance(int distance);
 	// switches the nearest lever
 	void switchLever();
 	// change animation to facing right
