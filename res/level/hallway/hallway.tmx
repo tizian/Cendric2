@@ -4,7 +4,7 @@
   <property name="autoscroller" value="50"/>
   <property name="backgroundlayers" value="-1.0,res/level/hallway/layer_inf.png"/>
   <property name="dimming" value="0.2"/>
-  <property name="musicpath" value="res/music/castle.ogg"/>
+  <property name="musicpath" value="res/music/boss_royalguards.ogg"/>
   <property name="tilesetpath" value="res/level/hallway/tileset_level_hallway.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_hallway" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">

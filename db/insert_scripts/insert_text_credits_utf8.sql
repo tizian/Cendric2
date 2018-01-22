@@ -593,6 +593,8 @@ Alf Nussbaum - Berner Dialekt (Inina, Paladin, Steven)
 Sarah Schaller - Walliser Dialekt (Yasha)
 Désirée Aeberhard - Berner Dialekt (Stadtwache)
 David Minder - Berner Dialekt (Königswache)
+Vangelis Al-Sghir - Zürcher Dialekt (Mona)
+Patrick Haab - Zürcher Dialekt (Karma)
 Isa Roesch - Schaffhuser Dialekt (De Rest)
 
 <<< Alpha Tester >>>
