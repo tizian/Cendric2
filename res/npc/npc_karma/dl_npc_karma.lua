@@ -83,6 +83,7 @@ loadDialogue = function(DL)
 		DL:createChoiceNode(4)
 		DL:addChoice(5, "DL_Choice_ExplainKamasutra") -- Explain the art of Kama Sutra to me.
 		DL:addChoice(18, "DL_Choice_GoQuestions") -- I'm ready for your questions.
+		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 

@@ -10,4 +10,7 @@ DL_Mona_FunUnlock:Hmm... (d''Mona musteret dich) We alt bisch du?
 DL_Mona_AgeDontKnow:Hm. Ich denk mol, du bisch fasch volljöhrig. Ich seg mine Meitli, dass si chli sanft mit dir söled umgo. (Lächlet)
 DL_Mona_AgeEighteen:Hm. Guet, das chönt stimme. Also isches in Ornig. (Lächlet)
 DL_Mona_TwentyFive:Nei, sicher nid. Wennd nid gnueg alt bisch zum d''Wohret sege, bisch au nid gnueg alt für mini Meitli. Use mit dir.
-DL_Mona_HaveSomeFun:Guet. Gang zude Lola, sie warted scho uf dich. (Zwinkeret)
+DL_Mona_WhatLookingFor:Guet, guet. Was suechsch denn?
+DL_Mona_SexRomantic:Guet. Denn gang zude Lola, si warted scho uf dich. (Zwinkeret)
+DL_Mona_SexExotic:Ah, denn hani öppis für dich. Gang zude Karma und si wirds der zeige.
+DL_Mona_SexWild:Tuet mer leid aber d''Adelya - üses wild Büsi - isch grad beschäftigt.

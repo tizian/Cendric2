@@ -1,18 +1,18 @@
 dl_npc_koray
 ----------------------------------
-DL_Koray_WhatDoing:Ich warte... vilicht uf öppert we dich.
-DL_Koray_WhatDoing2:De Paladin uf de andere Siite vode Brugg isch zimli dureknallt gsi.
+DL_Koray_WhatDoing:Ich wartä... vilicht uf öppo wie dich.
+DL_Koray_WhatDoing2:De Paladin uf de anderä Siite vode Brugg isch zimli dureknallt gsi.
 DL_Koray_WhatDoing3:Aber du... du chöntsches sii.
-DL_Koray_Nuray:Oh, si mun sich ke Sorge mache. Do isch alles paletti.
-DL_Koray_Nuray2:Ich mun da nur na was erledige. Nachene wirdi nach Gandria zrugg gah.
+DL_Koray_Nuray:Oh, si muän sich kei Sorgä mache. Do isch alles suppo.
+DL_Koray_Nuray2:Ich muän do nur no was erledigä. Nochär würi noch Gandria zrugg goh.
 DL_Koray_Earth:Vilicht... (lächlet)
-DL_Koray_Business:Jo, du gsesch us we öpper wo weiss, weme mit enere Waffe umgaht.
-DL_Koray_Business2:Ich bruche Geleitschutz. Interessiert?
-DL_Koray_Interested:Weisch, ich ha e sehr wertvolli Halschettle verlore, es "Mondaug".
-DL_Koray_Interested2:Ich ha möse demit flüchte und bi vomne chliine Hügeli abegumpet.
-DL_Koray_Interested3:Dummerwiis hets sich ide Äst vomne Baum verfange und ich chum elei nid gnueg nöch ane.
+DL_Koray_Business:Jo, du gsesch us wie öpper wo weiss, wieme mitärä Waffe umgoht.
+DL_Koray_Business2:Ich bruch Geleitschutz. Interessiert?
+DL_Koray_Interested:Weisch, ich ha e sehr wertvolli Halschettä verlore, es "Mondaug".
+DL_Koray_Interested2:Ich ha möse demit flüchte und bi vomänä chliine Hügel abegumpät.
+DL_Koray_Interested3:Dummerwiis häts sich ide Äst vomnä Baum verfange und ich chum elei nöd gnueg nöch ane.
 DL_Koray_Interested4:Aber wenn du mich id Nöchi vo dem Baum bringe chöntsch, chöntis mit Telekinese abehole.
-DL_Koray_Telekinesis:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z''bewege. Isch zimli nützli, weisch.
-DL_Koray_Telekinesis2:Eigentli bini zude Dämmerigsmagie affin, aber de Zauber ergänzt mini Fähigkeite recht guet.
+DL_Koray_Telekinesis:Das isch e Art Erdmagie. Me brucht es Magnetfeld vode Erde zum Sache wo wiit weg sind z''bewege. Isch zimli nützlich, weisch.
+DL_Koray_Telekinesis2:Eigentlich bini zude Dämmerigsmagie affin, aber de Zaubor ergänzt mini Fähigkeite recht guet.
 DL_Koray_StartQuest:Guet. Chum mit.
 DL_Koray_GoIn:Gömmer.

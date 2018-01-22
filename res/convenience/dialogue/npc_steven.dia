@@ -27,7 +27,7 @@ npc.id:npc_steven
 	trigger:DL:addConditionProgress("npc_steven", "talked")
 	# translation: 
 	translation.tag:DL_NPC_ANewFace
-	translation.en:And again, a new face in the city. As if we hadn't already enough troublemakers here. 
+	translation.en:And again, a new face in the city. As if we hadn't enough troublemakers here already. 
 	translation.de:Und wieder ein neues Gesicht in der Stadt. Als hätten wir nicht schon genug Störenfriede hier.
 	translation.ch:U widr äs nöis Gsicht ir Stadt. Aus hättmr nid scho gnue Störäfridä.
 	[
@@ -109,7 +109,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_NPC_Rules1
-	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore, respect us and follow our orders as long as you're here, or it won't be a very pleasant stay in Gandria.
+	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
 	translation.de:Nun, zuerst solltest du wissen, dass der Orden des Ewigen Lichts hier regiert - also respektiere uns und unsere Gesetze, sonst wird das ein nicht sehr angenehmer Aufenthalt für dich in Gandria.
 	translation.ch:Zersch sötter klar si, ds dr Ordä vom ewigä Liächt hie regiert - auso haut di besser a üsi Gsetz, süsch wird das ä unagnähme Ufenthaut für di z'Gandria. 
 	[
@@ -137,7 +137,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_NPC_Rules3
-	translation.en:And, last but not least, we don't really like seeing other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
+	translation.en:And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
 	translation.ch:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört. Wedä bir Nekromantie vrwütscht wirsch, chasch ghängt wärdä.
 	[
@@ -167,7 +167,7 @@ npc.id:npc_steven
 	trigger:DL:addConditionProgress("npc_steven", "who_are_you")
 	# translation: 
 	translation.tag:DL_NPC_WhoAreYou
-	translation.en:I'm Steven, paladin and vigilante of Gandria and so to say directly the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
+	translation.en:I'm Steven, paladin and vigilante of Gandria. I am, so to speak, the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
 	translation.de:Ich bin Steven, Paladin und Ordnungshüter von Gandria, sozusagen die rechte Hand von unserem Kommandanten, Lloyd. Leg dich nicht mit mir oder meiner Stadt an, verstanden?
 	translation.ch:I bi dr Steven, Paladin und dr Tschugger vo Gandria, sozsägä die rächti Hang vom Kommandant Lloyd. Leg di nid mit mir odr mirä Stadt ah, vrstangä? 
 	[
@@ -315,7 +315,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_Inina
-	translation.en:Good for you. But you can't talk to her either until you've taken care of my tiny problem. Then you'll get your letter back.
+	translation.en:Good for you. But you can't talk to her either until you've taken care of my little problem. Then you'll get your letter back.
 	translation.de:Schön für dich. Aber du kannst auch nicht mit ihr sprechen bis du eine kleine Sache für mich erledigt hast. Dann wirst du deinen Brief zurück kriegen.
 	translation.ch:Schön für di. Abr du chasch oh nid mit ihrä plöiderlä bis du ä chlini Sach für mi erledigt hesch. De brchunsch di Brief oh widr.
 	[
@@ -391,7 +391,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_HelmetQuest2
-	translation.en:I need someone that doesn't look like he belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
 	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
 	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
 	[

@@ -1,37 +1,37 @@
 dl_npc_inina
 ----------------------------------
-DL_Inina_Hey:Hallo, junge Magier. Ich bin d''Inina, Hohepriesterin vo de Kleriker. Wie chan ich dir helfe?
-DL_Inina_WhatDoing:Gsesch de Schrein do? Sini Chraft isch gschwächt. Mir sind do zum usefinde wieso.
-DL_Inina_Shrine:Es isch en Schrein vom Ewige Liecht. Magier und Gwöhnlichi chönd do ane cho zum Stärki und Friede im Gebet z''finde.
-DL_Inina_PowerWeakened:Es gseht so uus, als wür die heilig Magie vom Schrein dur e anderi Magie gstört werde. Mir mönd dem uf de Grund ga.
-DL_Inina_PowerWeakenedNot:Aber... komisch. Ich cha die Aura nüme gspüre. Vilicht isch öppis passiert...
-DL_Inina_WhatDo:Mir hend eine vo üsne Paladin i d''Höhli hinterem Schrein losgschickt. Aber bis jetzt ischer nonig zrugg cho.
-DL_Inina_MissingPaladin1:Ja, vielleicht chöntsch üs helfe. De Paladin, womer i''d Höhli gschickt hend heisst Marcus.
-DL_Inina_MissingPaladin2:Er het min Ahänger mitgnoh. E speziells Schmuckstück wo heiligi Energie besitzt und im Dunkle lüüchtet. Er sött also liecht z''finde sii.
-DL_Inina_MissingPaladin3:Du söttsch besser au öppis mitneh, wo dir de Weg belüüchtet. Ich cha dich nid begeleite, well ich immerno probier, d''Magie vom Schrein z''lüütere.
-DL_Inina_Farmers:Es het paar Vorfäll geh vo Bürger, wo d''Stadt verloh hend ohne zrugg z''cho. Das Problem isch grad viel wichtiger als es paar vermissti Schöfli.
-DL_Inina_MissingPeople:Mir vermueted, dass d''Vorfäll mit dere komische magische Energie z''tue hend, womer do beobachted. Für das suechemer aber immerno Bewiis.
-DL_Inina_Mage:Es Ewig Liecht isch dir wohlgsonne. Du hesch e sehr spezielli Aura. (Runzlet d''Stirn) Allerdings... öppis stimmt nid mit dir. E komischi Chraft schiint dini Magie z''störe.
-DL_Inina_Aura:Nei, ich cha sie nur spüre. Es git nur sehr wenig Magier wo Auras chönd gseh, die Sehende. Leider ghöri do nid dezue.
-DL_Inina_WhereLight:Du bruchsch e Fackle. Ich ha keini debii, aber ich bi sicher, dass du ufem Buurehof eini chasch chaufe.
-DL_Inina_WhereSearch:Er isch nach Weste zunere Höhli gange.
-DL_Inina_WhatsInForMe:Ja guet, da du en Magier bisch, chan ich dir de Weg vom Ewige Liecht bibringe. Du bruchsch ab jetzt nie meh e Fackle.
-DL_Inina_FoundPaladin:Au nei. Da isch schrecklich. Ich sprich grad e Gebät für ihn. Er isch en guete Maa gsi. Danke, dass du min Ahänger zruggbrocht hesch.
-DL_Inina_FoundPaladin2:Mir mönd unbedingt usefinde was hinter all dem steckt.
-DL_Inina_LearnLight1:Jo, du hesch dich würdig erwiese, de Weg vom Ewige Liecht z''lerne.
-DL_Inina_LearnLight2:Zum e magisches Liecht z''erschaffe bruchsch zerscht e Waffe wo heiligi Magie cha fokussiere. Denn muesch die heilig Energie um dich ume bündle und zum lüüchte bringe.
-DL_Inina_LearnLight3:Nimm die Schriftrolle. Sie erklärt alles wa du wüsse söttsch.
-DL_Inina_NoTeach:Mir chönd nonig sege öb dis Herz rein isch. Du muesch zerscht bewiise, dass du üs hilfsch.
-DL_Inina_Mark:(Zuckt zeme) Bim Ewige Liecht! Da isch en Fluech, und de gseht nid guet uus, nei, gar nid...
-DL_Inina_WhatIsMark:Wenn ich mich nid irre, isches en Fluech wo dezue da isch, dich ufz''spüre.
-DL_Inina_MarkGetRid:Dörfi? (Legt en Finger ufs Zeiche und ziehten aber grad wider zrugg) Nei, so klappt das nid. Die Art vo Magie isch mir nid ganz ghüür.
-DL_Inina_MarkGetRid2:Wenn du das würkli loswerde wetsch, denn frög d''Alchemistin Syrah um Rot, wend nach Gandria chunsch. Si kennt sich mit so Flüech besser uus als ich.
-DL_Inina_MarkWhoWould:Naja, d''Paladin bruched e ähnlichi Technik zum Gfangeni markiere und ufspüre. Wenn du würkli nid weisch, weso du das hesch, denn hesch vilicht echt Problem.
-DL_Inina_FoundNote:Oh, merci. Mal luege... (Liest d''Notiz sorgfältig)
-DL_Inina_FoundNote2:Es schiint, als heb er probiert, über es Biest z''schriibe, wo Mensche i Wölf verwandlet? Vilicht isch weg dem Ding au di seltsam Aura da...
-DL_Inina_FoundNote3:Well du scho mal lebendig dur die Höhle cho bisch, bringsches vilicht au ane, das Biest z''finde und z''töte? Du hetsch mini ewig Dankbarkeit.. und ich wür der natürli au gnueg Gold ge defür.
-DL_Inina_BeastSlain:Ja, ich has scho gspürt. Di bös Magie, wo de Schrein verneblet het, isch weg.
-DL_Inina_BeastSlain2:Du hesch üs en grosse Gfalle gmacht. Da, nimm de Beutel mit Gold als Belohnig.
-DL_Inina_BeastSlain3:Ich bi ufs Höchste beiidruckt vo dine Fähigkeite, Magier. Du chöntsch en würdige Initiant fürd Kleriker sii. (Nimmt es Stück Papier und schriibt öppis druf)
-DL_Inina_BeastSlain4:Da, nimm das Empfehligsschriibe und brings zum Kommandant Lloyd, wennd ide Stadt bisch. Er isch de Ahführer vode Paladin.
-DL_Inina_BeastSlain5:Es Ewige Liecht söll dich führe.
+DL_Inina_Hey:Tschou junge Magier. I bi d''Inina, Hohiprieschterin vode Kleriker. Wie chani dr häufä?
+DL_Inina_WhatDoing:Gsesch dä Schryn da? Sini Chraft isch gschwächt. Mir si da zum usefinge wieso.
+DL_Inina_Shrine:Äs isch ä Schryn vom ewigä Liecht. Magier u Normaustärblechi chöi da härä cho zum Sterchi u Fridä im Gebät z''fingä.
+DL_Inina_PowerWeakened:Es gseht so us, aus würd d''heilig Magie vom Schryn dür ä angeri Magie gstört wärdä. Mir müesse däm ufe Grund gah.
+DL_Inina_PowerWeakenedNot:Aber... komisch. I cha d''Aura nümme gspüre. Villäch isch öppis passiert...
+DL_Inina_WhatDo:Mir hei eini vü üsne Paladinä i d''Höhli hingerem Schryn gschickt. Aber bis iz ischsi no nid zrügg cho.
+DL_Inina_MissingPaladin1:Ja, villäch chaschnis häufä. Dr Paladin womer id Höhli gschickt hei heisst Marcus.
+DL_Inina_MissingPaladin2:Är het mi Ahänger mitgno. Äs spezieus Schmuckstück wo heilig Energie bsitzt und im Dunklä lüchtet. Är sött auso eifach z''finge si.
+DL_Inina_MissingPaladin3:Du söttisch besser öppis mitnäh, wodr dr Wäg belüchtet. I cha di nid begleite, wüu ig immer no probiere, d''Magie vom Schryn z''lüütere.
+DL_Inina_Farmers:Äs het äs paar Vorfäu gäh vo Bürger, wo d''Stadt vrlah hei u nie me si zrügg cho. Ds Problem isch gad viu wichtiger aus es paar vrmissti Schäfli.
+DL_Inina_MissingPeople:Mir vrmuete das die Vorfäu äuä mit dere komische magische Energie, womer hie beobachtä, z''düe het. Mir suechä aber immer no Bewiisä für ds.
+DL_Inina_Mage:Z ewigä Liecht isch güetig zudr. Du hesch ä sehr spezieui Aura. (Rundzelet d''Stirn) Auderdings... öppis stimmt mit dir nid. E komischi Chraft schint dini Magie z''störe.
+DL_Inina_Aura:Äuää, i cha sä nur gspüre. Äs git nur sehr wenigi Magier wo Auras chöi gseh, die Sehendä. Leider ghöri da nid drzue.
+DL_Inina_WhereLight:Du bruchsch ä Facklä. I ha leider keni drbi, aber bimr sicher, dass de bim Buur eini chasch choufe.
+DL_Inina_WhereSearch:Är isch i Westä zurä Höhli gangä.
+DL_Inina_WhatsInForMe:Ja auso, da du ä Magier bisch, chani dir dr Wäg vom Ewigä Liecht bibringä. Du bruchsch ab izä ke Facklä meh.
+DL_Inina_FoundPaladin:Ou Neei. Ds isch ja schlimm. I sprichä gad es Gebät für ihn. Är isch ä guetä Maa gsi. Oh, und merci, dasde mi Ahänger hesch zrüggbracht.
+DL_Inina_FoundPaladin2:Mir müesse unbedingt usefingä was drhinger steckt.
+DL_Inina_LearnLight1:Ja du hesch di würdig erwisä, dr Wäg vom ewigä Liecht z''leerä.
+DL_Inina_LearnLight2:Fürnäs magischs Liecht z''erschaffä bruchsch zersch ä Waffä wo heiligi Magie cha fokusierä. När muesch die heiligi Energie um di bündle und zum lüchtä bringe.
+DL_Inina_LearnLight3:Nimm die Schriftrouä. Si erklärtdr aues wodä muesch wüssä.
+DL_Inina_NoTeach:Mir chöi no nid sägä ob dis Härz rein isch. Du muesch zersch biwiisä, dass du üs hiufsch.
+DL_Inina_Mark:(Zuckt zämä) Bim Ewigä Liecht! Da isch ä Fluech und dä gseht nid guet us...
+DL_Inina_WhatIsMark:Weni mi nid irre, ischs ä Fluech, wo da isch für di ufzspüre.
+DL_Inina_MarkGetRid:Dörfi? (Legt ä Finger uf z Zeichä und ziehtnä gad widr zrügg) Nei, so klappt das nid. Die Art vo Magie isch mir nid ghüür.
+DL_Inina_MarkGetRid2:Wenn du ds wüklech wosch loswärdä, denn frag d''Alchemistin Syrah um Rot, wedä nach Gandria chunsch. Si kenntsäch mit so Flüech besser us aus ig.
+DL_Inina_MarkWhoWould:Naja, d''Paladin bruchä ä ähnlächi Technik für Gfangeni z''markiere und z''ufspürä. We du würklech nid weisch, wieso du ds hesch, de hesch äuä ächt es Problem.
+DL_Inina_FoundNote:Oh, merci. Mau luegä... (Liest d''Notiz sorgfäutig)
+DL_Inina_FoundNote2:Äs schiint, aus hät är probiert, über äs Biescht z''schribä, wo mönschä zu Wöuf vrwandlet. Villäch isch wäg däm Ding oh die komischi Aura da...
+DL_Inina_FoundNote3:Wüu du schomau lebändig dür die Höhli bisch cho, bringschs äuä oh härä, das Biescht z''fingä und z''tötä? Due hätsch mini ewigi Dankbarkeit... und I würddr natürlech oh gnue Gold gäh drfür.
+DL_Inina_BeastSlain:Ja, i has scho gspürt. Die bösi Magie, wo dr Schryn vrnäblet het, isch wäg.
+DL_Inina_BeastSlain2:Du hesch üs ä grosse Gfaue gmacht. Da, nimm dr Bütu mit Gold aus Belohnig.
+DL_Inina_BeastSlain3:I bi uf z höchschtä beiidruckt vo dinä Fähigkeitä, Magier. Du chönntsch ä würdige Initiant fürd Kleriker si. (Nimmt äs Stück Papier u schriibt öppis druf)
+DL_Inina_BeastSlain4:Da, nimm ds Empfähligsschribä u brings zum Kommandant Lloyd, wedä idr Stadt bisch. Är isch dr Ahführär vodä Paladin.
+DL_Inina_BeastSlain5:Ds Ewigä Liecht wird di füehre.

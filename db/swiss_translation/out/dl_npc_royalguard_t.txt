@@ -1,10 +1,10 @@
 dl_npc_royalguard_t
 ----------------------------------
-DL_Royalguard_Hey:Hey du! We chasches woge, do eifach iez''spaziere ohni Bewilligung.
-DL_Royalguard_Hey2:Ich hoff würkli, du heschen guete Grund. Susch muni di nämli wieder usebefördere.
-DL_Royalguard_Velius:De königlich Hochmagier isch üsserst beschäftigt. Er empfangt ke Bsuecher.
-DL_Royalguard_King:Und weso söt üseri Hoheit de König Logan III sini Ziit mit dir verschwende?
-DL_Royalguard_Charming:Hm, ich bimer zimli sicher, daser de Wunsch nid mit dir teilt. Schwirr ab.
-DL_Royalguard_NoneBusiness:Hn. Jeder chönt das sege. Mir lönd nid eifach jede zum König.
-DL_Royalguard_Mark:Wenn das so isch... (er starrt uf dis Zeiche) ...chasch e ganz churzi Audienz ha.
-DL_Royalguard_Mark2:Folg mir.
+DL_Royalguard_Hey:He du! Wiä chaschäs waagä, da eifach inä z''spazierä ohni ä Bewiuigung.
+DL_Royalguard_Hey2:Ig hoffä das würkläch, ä guetä Grund hesch. Süsch muessi di nämlech wider usegheiä.
+DL_Royalguard_Velius:Dr königlech Hochmagier isch schampar beschäftiget. Är empfaht ke Bsuech.
+DL_Royalguard_King:Und weso söu üsä König Logan III si Zit mit dir vergüdä?
+DL_Royalguard_Charming:Hm, ig bi mir zimläch sicher, das är dä Wunsch nid mit dir teut. Fahr ab.
+DL_Royalguard_NoneBusiness:Hm... Jedä chönnt das verzöuä. Mir löh ni eifach jedä zum König.
+DL_Royalguard_Mark:We das so isch... (er starrt uf dis Zeiche) ...chasch ä ganz churzi Audiänz ha.
+DL_Royalguard_Mark2:Chumm mit.

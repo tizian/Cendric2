@@ -1,3 +1,3 @@
 dl_npc_jack2
 ----------------------------------
-DL_Jack_BeautifulDay:En wunderschöne Tag für en alte Seebär, gell.
+DL_Jack_BeautifulDay:A wunderschöna Tag für a alta Seebär, gäll.

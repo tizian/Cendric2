@@ -3,7 +3,7 @@ dl_npc_zeff
 DL_Zeff_SittingHere:Ech sitz da am Füür und hoffe, dass ech niemer verschlinge bevor de Fluech mich verschlingt.
 DL_Zeff_IAmWho:Ech be de Zeff.
 DL_Zeff_IAmWhat:(Chnurrt liislig) Ech gse scho, mini üsserlichi Erschinig fallt grad uf.
-DL_Zeff_IAmSuprised:Ech be überrascht, dass du de Muet hesch, mit mer z''rede. Die meiste Lüüt flüchtet voller Entsetze, wenn si mis Gsecht gsänd.
+DL_Zeff_IAmSurprised:Ech be überrascht, dass du de Muet hesch, mit mer z''rede. Die meiste Lüüt flüchtet voller Entsetze, wenn si mis Gsecht gsänd.
 DL_Zeff_ThankYouLooks:Danke. Du besch di ersti Person wo öppis nätts zu mer seid, sit ich ih das Monster verwandlet worde bin.
 DL_Zeff_IAmScary:(Laht sin Chopf hänge) Ja, das stimmt. Ich wünschmer werkli, ech wär nid ih das Monster verwandlet worde.
 DL_Zeff_YouShouldBe:Vellecht settisch aber. Ich chan zwar jetzt immerno wie en Mensch dänke, aber ech spür, dass ech mich bald ganz in es Monster verwandle werde.
@@ -21,16 +21,16 @@ DL_Zeff_Hunting3:Denn isch das... Ding uftaucht. Ech ha ned viel gse, wells so d
 DL_Zeff_LivedGandria:Ja. Ech ha en herzigi chliini Lederwerkstatt in Gandria gha. (Schluchzt) Aber jetzt gsehts so us, als würdi die nie wieder gseh.
 DL_Zeff_BadGuards:D''Stadtwache werded mer ned glaube, was passiert esch. Si werded mich töte, wenn si mech gsähnd. Ech bliebe lieber da und stirb elei, ohni dasi öpper verletze.
 DL_Zeff_YouSuspect:Jaja... und nur weli wie en Wolf usgseh, beni grad din ersti Verdächtigi.
-DL_Zeff_YoureRight:ber weni ehrlich ben, hesch natürlich rächt. Ech han die Schöfli klaut. Aber ech cha au ned eifach id Taverne laufe und mer Fleisch chaufe, oder?
+DL_Zeff_YoureRight:Aber weni ehrlich ben, hesch natürlich rächt. Ech han die Schöfli klaut. Aber ech cha au ned eifach id Taverne laufe und mer Fleisch chaufe, oder?
 DL_Zeff_ComeAndTry:Das isch de letzti Fähler, wo du jemals mache wersch.
 DL_Zeff_BadassSword:Ja, aber wenn ich Hunger han, chan ich mech nüme kontrolliere. Aber besser Schöfli als Mensche, gäll.
-DL_Zeff_HungryWolf:Wenn du mer eh chli Fleisch us de Taverne holsch, chani ufhöre, Schöfli z''risse, zumindest für es Zitli. Und nachene suechi mer en anderi Bühti, versproche.
+DL_Zeff_HungryWolf:Wenn du mer en Schinke und e Wurst us de Taverne holsch, chani ufhöre, Schöfli z''risse, zumindest für es Zitli. Und nachene suechi mer en anderi Bühti, versproche.
 DL_Zeff_ThanksForMeat:Danke, das isch perfekt. Du chasch de Buure säge, dass s Biescht nümme uftauche werd. Und wend wetsch, chan ech der mit mine Ledererkünst hälfe, zumindest so lang, woni na gnueg Mensch bin.
 DL_Zeff_ShowMark:Hrr... (Starrt dis Mal ah) Ech han nonie so öppis we das gseh.
 DL_Zeff_ShowMark2:Aber ech find, du besch ja zimlich guet wegcho... Ech mein, lueg der mal mis Gsicht ah! Es härziges Tattoo cha doch chum schlimmer sii, als de Zwang, jedi Nacht es Schöfli z''hole.
 DL_Zeff_BeastSlain:Würklich? (Starrt uf sini Pfote) Ech gspür kein Unterschied.
 DL_Zeff_BeastSlain2:De Fluech esch aber i letzter Ziit au ned schlimmer worde. Vellecht esch d''Verwandlig eifach gstoppt worde.
 DL_Zeff_StayWolf:Es schiint so. Wenn ech en klare Chopf phalte chan, chani mer vellecht sogar met dere Gstalt aafründe. Aber wen ich drüber nachedenke, zrugg z''ga...
-DL_Zeff_ReturningHome:Ech fürchte, ech chume immer nonig ah de Wache verbii. Vellecht chöntisch du ehne verzelle, was passiert esch, und si dervo überzüüge, mech weder ihne z lah? Ech chönt der en u huere Huet afertige als Dank, wen ich  mini Werkstatt wieder han.
-DL_Zeff_IWillGoHome:Danke für die guete Neuigkeite! Ech chas chuum erwarte, mis hübsche Hüsli weder zgseh. Vergiss ned, mer in Gandria en Bsuech zmache, um dini Belohnig abhole.
+DL_Zeff_ReturningHome:Ech fürchte, ech chume immer nonig ah de Wache verbii. Vellecht chöntisch du ehne verzelle, was passiert esch, und si dervo überzüüge, mech weder ihne z lah? Ech chönt der en u huere Huet afertige als Dank, wen ich mini Werkstatt wieder han.
+DL_Zeff_IWillGoHome:Danke für die guete Neuigkeite! Ech chas chuum erwarte, mis hübsche Hüsli weder zgseh. Vergiss ned, mer in Gandria en Bsuech zmache, zum dini Belohnig abhole.
 DL_Zeff_Wolfbonnet:Wolfsfell? Ech hoffe, das isch ned ergenden chranke Scherz. Aber guet, nimm die Chappe.

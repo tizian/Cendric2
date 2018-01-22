@@ -105,7 +105,7 @@ npc.id:npc_vincent2
 	trigger:DL:addReputationProgress("thief", 10)
 	# translation: 
 	translation.tag:DL_NPC_TaskFulfilled
-	translation.en:Oh, it's you. I know that you have carried out my task. Very good. You might be of use.
+	translation.en:Oh, it's you. You have carried out my task. Very good. You might be of use.
 	translation.de:Oh, du bist es. Deine Aufgabe hast du offensichtlich erfüllt. Sehr gut. Du könntest noch von Nutzen sein.
 	translation.ch:Oh, du bisches. Du häsch dini Ufgob offesichtlich erledigät. Sehr guet. Du chöntisch no bruuchbar si.
 	[
@@ -151,7 +151,7 @@ npc.id:npc_vincent2
 	trigger:DL:addConditionProgress("npc_vincent2", "key_150")
 	# translation: 
 	translation.tag:DL_Vincent_Disgruntled
-	translation.en:Oh... you again. Y'know, I'd offered you an awesome job, if you hadn't been so agressive. If you want another chance, it will cost you something.
+	translation.en:Oh... you again. Y'know, I would have offered you an awesome job, if you hadn't been so aggressive. If you want another chance, it will cost you something.
 	translation.de:Oh... du schon wieder. Weisst du, ich hätte dir einen unschlagbar guten Job angeboten, wenn du nicht so aggressiv gewesen wärst... Wenn du eine zweite Chance willst, kostet es dich was.
 	translation.ch:Oh... du scho wieder. Weisch, ich het der en unschlagbar guete Job abotä, wänn du nöd so aggressiv gsi wärsch... wännd e zweiti Chance wötsch, chosteds für dich chli me.
 	[
@@ -313,9 +313,9 @@ npc.id:npc_vincent2
 		condition:DL:isConditionFulfilled("npc_vincent2", "key_150")
 		# translation: 
 		translation.tag:DL_Cendric_WhereCatch
-		translation.en:And where is the catch?
-		translation.de:Und wo ist der Haken an der Sache?
-		translation.ch:Und wo isch de Hooge ade Sach?
+		translation.en:And what is the catch?
+		translation.de:Und was ist der Haken an der Sache?
+		translation.ch:Und was isch de Hooge ade Sach?
 	]
 	[
 		# Link node, tag is next tag
@@ -368,7 +368,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost150
-	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
 	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 150 Goldstücke, als Ausgleich für meine Mühen.
 	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 150 Goldstück, zum mini Müe z'kompensiere.
 	[
@@ -382,7 +382,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_Treasure
-	translation.en:But I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
+	translation.en:I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
 	translation.de:Aber ich will nur, dass du mir einen speziellen blauen Stein aus seiner Truhe holst. Den Rest darfst du behalten.
 	translation.ch:Aber ich wött nur, dass du mir en spezielle blaue Stei us de Truä holsch. De Rest chasch selber phaltä.
 	[
@@ -410,7 +410,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost100
-	translation.en:I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
 	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 100 Goldstücke, als Ausgleich für meine Mühen.
 	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 100 Goldstück, zum mini Müe zkompensiere.
 	[
@@ -494,7 +494,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost0
-	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
+	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was mere child's play.
 	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Ich habe etwas Schlafpulver reingemixt... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
 	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä häsch? Ich han es Schlofpulver dri tuä. Ihm de Schlüssel z'chluppä isch bubieifach gsi.
 	[
@@ -539,7 +539,7 @@ npc.id:npc_vincent2
 	trigger:DL:changeQuestState("elder_chest", "started")
 	# translation: 
 	translation.tag:DL_Vincent_ChestIsObserved
-	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they won't catch you.
+	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
 	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zaubern beschützt. Pass also auf, dass die dich nicht erwischen.
 	translation.ch:D'Chischtä isch imäne Gheimruum vom Huus vom Älteste. Oh, und si wird wohrschindli vo Beobachter-Zaubor bewacht. Pass also uf, dass die dich nöd verwütsched.
 	[
@@ -857,7 +857,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest
-	translation.en:Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
+	translation.en:Good. This time, the stakes are a little bit higher. We know that the mage Syrah knows how to brew a potion that can render you invisible.
 	translation.de:Gut. Dieses Mal steht ein bisschen mehr auf dem Spiel. Wir wissen, dass eine gewisse Magierin Syrah weiss, wie man einen Trank braut, der einen unsichtbar macht.
 	translation.ch:Guet. Damol stoht chli me ufem Spiel. Mir wüssed, dass e gwüssi Magierin Syrah weiss, wiemä en Trank zemebraut, wo eim unsichbar macht.
 	[
@@ -871,7 +871,7 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest2
-	translation.en:A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+	translation.en:A very useful ability, isn't it? The only problem is, she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
 	translation.de:Eine äusserst nützliche Fähligkeit, nicht wahr. Das einzige Problem ist, dass sie uns dieses Wissen vorenthalten will. Sie lässt uns also keine andere Wahl, wir müssen dieses Rezept ohne ihre Einwilligung nehmen. 
 	translation.ch:E zimlich nützlichi Fähigkeit, gäll. S einzig Problem isch dass si üs umsverräcke nöd sege wött wies goht. Also blibt üs kei anderi Wahl als das Rezept halt eifach so z'nä.
 	[
@@ -886,7 +886,7 @@ npc.id:npc_vincent2
 	trigger:DL:changeQuestState("invis_recipe", "started")
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest3
-	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
+	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us. If you manage to do that, you might get to know what "us" really means.
 	translation.de:Es muss einen Weg geben, in ihren Keller zu kommen - wenn man eine Abkürzung über die Kanalisation nimmt. Finde diesen Weg und bring uns dieses Rezept. Wenn dir das gelingt, werde ich dir vielleicht erzählen, wer denn "uns" überhaupt ist.
 	translation.ch:Es muä en Weg gä, in ihren Chäller z'cho, wenmä ä Abchürzig überd Kanalisation nimmt. Find de Wäg und bring üs das Rezept. Wänn du das schaffsch, den chani dir vilicht verzellä, wär "üs" überhaupt isch.
 	[
@@ -943,7 +943,7 @@ npc.id:npc_vincent2
 	trigger:DL:addConditionProgress("default", "thieves_open")
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuestDone
-	translation.en:Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
+	translation.en:Very well. I knew you had talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
 	translation.de:Sehr gut. Ich wusste, dass du Talent hast. Falls du noch mehr dieser nützlichen Zauber lernen willst, nimm diesen Schlüssel und finde die Tür, die er öffnet.
 	translation.ch:Sehr guet. Ich ha gwüsst, dass du Talent häsch. Falls du no me vo därä nützliche Magie lerne wotsch, nimm dä Schlüssel und find d'Türe, woner ufmacht.
 	[

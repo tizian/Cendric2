@@ -11,7 +11,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_steven", "talked")) then 
 
-		DL:createNPCNode(1, 3, "DL_NPC_ANewFace") -- And again, a new face in the city. As if we hadn't already enough troublemakers here. 
+		DL:createNPCNode(1, 3, "DL_NPC_ANewFace") -- And again, a new face in the city. As if we hadn't enough troublemakers here already. 
 		DL:addConditionProgress("npc_steven", "talked")
 		DL:addNode()
 
@@ -43,7 +43,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
 
-			DL:createNPCNode(5, 9, "DL_NPC_Rules1") -- Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore, respect us and follow our orders as long as you're here, or it won't be a very pleasant stay in Gandria.
+			DL:createNPCNode(5, 9, "DL_NPC_Rules1") -- Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
 			DL:addNode()
 
 
@@ -51,7 +51,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(10, 11, "DL_NPC_Rules3") -- And, last but not least, we don't really like seeing other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
+			DL:createNPCNode(10, 11, "DL_NPC_Rules3") -- And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 			DL:addNode()
 
 
@@ -63,7 +63,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_steven", "who_are_you")) then 
 
-			DL:createNPCNode(6, 7, "DL_NPC_WhoAreYou") -- I'm Steven, paladin and vigilante of Gandria and so to say directly the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
+			DL:createNPCNode(6, 7, "DL_NPC_WhoAreYou") -- I'm Steven, paladin and vigilante of Gandria. I am, so to speak, the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
 			DL:addConditionProgress("npc_steven", "who_are_you")
 			DL:addNode()
 
@@ -110,7 +110,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(16, -2, "DL_Steven_Inina") -- Good for you. But you can't talk to her either until you've taken care of my tiny problem. Then you'll get your letter back.
+			DL:createNPCNode(16, -2, "DL_Steven_Inina") -- Good for you. But you can't talk to her either until you've taken care of my little problem. Then you'll get your letter back.
 			DL:addNode()
 
 
@@ -142,7 +142,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(20, -2, "DL_Steven_HelmetQuest2") -- I need someone that doesn't look like he belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+		DL:createNPCNode(20, -2, "DL_Steven_HelmetQuest2") -- I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
 		DL:addNode()
 
 	end

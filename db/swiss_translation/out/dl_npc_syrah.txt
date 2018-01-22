@@ -5,12 +5,12 @@ DL_Syrah_InvisRecipe:Oh hallo. Du, sag mol... Es fehlt es bestimmts Rezept us mi
 DL_Syrah_IBroughtItBack:Wow, merci. Weisch, das bedütet mr wirklig viel. Ich froog gar nid erscht, wied da übercho hesch. (Zwinkeret)
 DL_Syrah_IKnowNothing:Schad.
 DL_Syrah_Mark:(Syrah luegt s''Zeiche vorsichtig ah) Hm. Ich ha das Zeiche schonemol gseh. Ganz klar e Uffspür-Zauber. Aber eine vode stärkschtä woni je gseh ha.
-DL_Syrah_Mark2:Das wird nid eifach. Aber wennd mr hilfsch d''Zuetate z''bsorge chani versueche, dr Fluech z''enferne oder mindestens z''schwäche.
+DL_Syrah_Mark2:Das wird nid eifach. Aber wennd mr hilfsch d''Zuetate z''bsorge chani versueche, dr Fluech z''entferne oder mindestens z''schwäche.
 DL_Syrah_Mark3:(D''Syrah zieht es grüens Buech us ihrem Regal und blätteret drin) Ich bruch nur es paar Knoche, e glei weeneli Bluet vonere Fläädermuus und es Härz vonere Fyyrratte. I glaub das söttisch alles vo dä Viecher in dr Kanalisation vo Gandria becho.
 DL_Syrah_Sewers:Ä paar Hüüser hei in ihrem Käller e Verbindig zu dr Kanalisation. I glaub es git au e Düüre in dr Nöchi vom Hafe wo dört aabä füehrt.
 DL_Syrah_MarkSeen:Hm, loss mi überlegge. Do isch sone komische Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliichs Zeiche gha. Es het aber niemer wirklig verstande waser hett säge wölle, er het nur komisches Zügs blabberet.
 DL_Syrah_MarkQuestDone:Ah, perfekt. Denn föngemer mol ah.
-DL_Syrah_MarkQuestDone2:(D''Syrah ordnet d''''Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
+DL_Syrah_MarkQuestDone2:(D''Syrah ordnet d''Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
 DL_Syrah_RelieveCurse:(D''Syrah packt di am Arm und zieht di in Kreis.)
 DL_Syrah_RelieveCurse2:(Sie nimmts Bluet und lohts über s''Zeiche rünne während sie öppis murmelet.)
 DL_Syrah_RelieveCurse3:Gsehsch. I glaub s''het klappt. I gspür nümm viel vo dere komische Magie.
@@ -25,5 +25,7 @@ DL_Syrah_CompleteFavor:Merci vielmool, das isch sehr lieb vo dir. Nimm nonä Tra
 DL_Syrah_NecromancersFound:Hihi. Schön, dass dr Luiz und sini Crew gfunde hesch. Bhalts eifach für di und du wirsch es paar wirklig gueti neui Kollege ha.
 DL_Syrah_Thea:Kennsch di denn mit Krüttli und Tränk us?
 DL_Syrah_Thea2:Ah okay. Jo, du chasch ere sagä, si cha do aafoh, solang sie nid komplett tollpatschig isch.
+DL_Syrah_Sack:(Gigglet) Ich hanen Witz gmacht. Aber wennd so unglücklich mit dine Hoore bisch, hani vilicht öppis für dich.
+DL_Syrah_Sack2:Do, er wird dis Problem löse.
 DL_Syrah_BrewSomething:Sicher, wennd d''Zuetate hesch?
 DL_Syrah_HereYouGo:Merci. Do, nimms.

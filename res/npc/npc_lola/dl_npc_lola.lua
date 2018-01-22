@@ -195,7 +195,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_lola", "turn_on")) then 
 			DL:addChoice(36, "DL_Choice_TurnOn") -- What turns *you* on?
 		end
-		DL:addChoice(-2, "DL_Choice_Back") -- That's enough for now. [BACK]
+		DL:addChoice(-2, "DL_Choice_Back") -- [BACK]
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_lola", "room")) then 
@@ -211,6 +211,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(34, -2, "DL_Lola_Job") -- Most of the time, yes. But this is not something I'll do for my entire life.
 			DL:addConditionProgress("npc_lola", "job")
+			DL:gotoNode(32)
 			DL:addNode()
 
 		end
@@ -219,6 +220,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(35, -2, "DL_Lola_Attractive") -- Yes, of course! I love your hair.
 			DL:addConditionProgress("npc_lola", "attractive")
+			DL:gotoNode(32)
 			DL:addNode()
 
 		end
@@ -227,6 +229,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(36, -2, "DL_Lola_TurnOn") -- Many things. I really love when the guy enjoys it and I can see it.
 			DL:addConditionProgress("npc_lola", "turn_on")
+			DL:gotoNode(32)
 			DL:addNode()
 
 		end
@@ -257,7 +260,7 @@ loadDialogue = function(DL)
 	end
 
 
-	DL:createNPCNode(30, -2, "DL_Lola_End") -- Be safe, cutie.
+	DL:createNPCNode(30, -1, "DL_Lola_End") -- Be safe, cutie.
 	DL:addNode()
 
 end

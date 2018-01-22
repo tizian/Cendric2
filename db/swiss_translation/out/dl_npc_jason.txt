@@ -1,16 +1,16 @@
 dl_npc_jason
 ----------------------------------
-DL_Jason_Hello:Hm? Nur wel d''Rana gern viel reded heisst das nid, dasi das au mach. Halt dich churz.
-DL_Jason_JasonQuest:Hrm. Jo, chasch eigentlich. Ich ha e neui Waffe gfunde woni mit chli Gargoylestaub verstärche möcht.
-DL_Jason_JasonQuest2:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestaub bringsch, gibi der mini alt Gleve defür.
-DL_Jason_StartCrafting:Nei, chame so nid sege. Ich schaff nid mit Hammer und Amboss.
-DL_Jason_StartCrafting2:Aber ich bruch mageidurchtränkti Materialie - wie Gargoylestaub - zum dämonischi Waffe verstärche.
-DL_Jason_StartCrafting3:Wenn du e dämonische Waffe und e magisches Material hesch, chani si für dich au verstärche. Aber das wird nid billig, da chani der sege. (Grinst)
-DL_Jason_GargoyleDust:Oh? Was für Überraschig. Ich hett nie denkt, dass du si töte chasch.
-DL_Jason_GargoyleDust2:Yeah. Aber versproche isch versproche. Do, nimm mini alt Gleve. Es isch immerno e gueti Waffe.
-DL_Jason_YashaSword:Hm. Gseht us we es Füürschwert. Aber es isch usglöscht worde.
-DL_Jason_YashaSword2:Das isch es zimli starchs Schwert gsi. Wenn du mir di füürig Essenz vomne sehr starche Dämon bringsch, chanis der wieder azünde. Und chli Gold. Ich bruch Gold.
-DL_Jason_CompleteYashaSword:Guet. Denn luegemer mal... (De Jason nimmts Schwert und d''Essenz)
-DL_Jason_CompleteYashaSword2:(Nochdem er si kombiniert entzündet sichs Schwert mit enere Stichflamme us magischem Füür)
+DL_Jason_Hello:Hm? Nur well d''Rana gern vell redt heisst das ned, dass i das au mache. Halt dich churz.
+DL_Jason_JasonQuest:Hrm. Jo, chasch eigentlech. Ich ha e neui Waffe gfonde won i möcht mit chli Gargoylestaub verstärcke.
+DL_Jason_JasonQuest2:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestaub bringsch, geb i der mini alt Gleve defür.
+DL_Jason_StartCrafting:Nei, chame so ned säge. Ich schaffe ned mit Hammer und Amboss.
+DL_Jason_StartCrafting2:Aber ich bruch magiedurchtränkti Materialie - wie Gargoylestaub - zum dämonischi Waffene z verstärcke.
+DL_Jason_StartCrafting3:Wenn du en dämonischi Waffe und es magischs Material hesch, chan i sie für de au verstärcke. Aber das wird ned billig, das chan i dir säge. (Grinst)
+DL_Jason_GargoyleDust:Oh? Was für en Öberraschig. Ich hätt nie denkt, dass du sie chasch töte.
+DL_Jason_GargoyleDust2:Yeah. Aber versproche esch versproche. Do, nimm mini alt Gleve. Es esch immerno e gueti Waffe.
+DL_Jason_YashaSword:Hm. Gseht us wien es Fürschwert. Aber es esch usglöscht worde.
+DL_Jason_YashaSword2:Das esch es zemmli starcks Schwert gsi. Wenn du mir die fürig Essenz vomne sehr starcke Dämon bringsch, chan is dir wieder azünde. Und chli Gold. Ich bruche Gold.
+DL_Jason_CompleteYashaSword:Guet. Denn luege mer mol... (De Jason nimmts Schwert und d''Essenz)
+DL_Jason_CompleteYashaSword2:(Nachdem er sie kombiniert entzöndet sechs Schwert mit ere Stichflamme us magischem Für)
 DL_Jason_CompleteYashaSword3:Do, nimms.
 DL_Jason_HereYouGo:Do, nimm.

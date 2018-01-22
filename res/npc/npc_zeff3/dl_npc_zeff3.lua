@@ -32,7 +32,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_zeff3", "thea") and DL:isQuestState("theas_dream", "started")) then 
 
-		DL:createNPCNode(11, -2, "DL_Zeff_Thea") -- Hrr. No, I'm sorry, I prefer to work alone.
+		DL:createNPCNode(11, -2, "DL_Zeff_Thea") -- Hrr. No, I'm sorry. I prefer to work alone.
 		DL:addConditionProgress("npc_zeff3", "thea")
 		DL:addNode()
 

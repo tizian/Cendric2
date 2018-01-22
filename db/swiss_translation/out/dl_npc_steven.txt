@@ -1,24 +1,22 @@
 dl_npc_steven
 ----------------------------------
-DL_NPC_ANewFace:Und wider es neus Gsicht ide Stadt. Als hettemer nid scho gnueg Störefried da.
-DL_NPC_YouShouldKnowRules:Du sötsch d''Regle vo dere Stadt kenne, wend nid wetsch hinter Gitter cho.
-DL_choice_NoTime:Ich han grad ke Ziit für das.
-DL_NPC_Rules1:Zersch mal sött der klar si, dass de Orde vom Ewige Liecht da regiert - also halt dich besser a üsi Gsetz, susch wird das en nid sehr agnehme Ufenthalt für dich in Gandria.
-DL_NPC_Rules2:Benimm dich wend ines fremds Huus gasch - Mer gsehnd Diebe nid gern da. Di meiste Bürger hend Beobachter-Zauber, wo verhinderet, das öpper öppis chluppet.
-DL_NPC_Rules3:Und, zum Schluss: Mir gsehnds nid bsunders gern, wenn öpper mit Zauber hantiert, wo nid zude hoche heilige Schuel ghöred. Wennd bi Nekromantie verwütscht wirsch, chasch ufknöpft werde.
-DL_NPC_WhoAreYou:Ich bi de Steven, Paladin und Gsetzeshüeter vo Gandria, sozsege grad di recht Hand vom Kommandant Lloyd. Leg dich nid mit mir oder minere Stadt ah, verstande? 
-DL_choice_Understood:Verstande.
-DL_NPC_IKeepEyeOnYou:Dich wirdi im Aug phalte, Bürschtli.
-DL_NPC_DontTrouble:Ja dänn... Mach bloss ken Ärger!
-DL_Steven_Laughter:(De Steven nimmt de Brief und fangt denn völlig unkontrolliert ah lache.)
-DL_Steven_PieceOfPaper:Und du hesch würkli denkt, dass de Papierfetze dich zu ihm bringe wird? Da isch lächerlich.
-DL_Steven_Urgent:Natürlich. Aber es git au anderi dringendi Sache. So we da, wa du für mich erledige muesch, wend din Brief wider wetsch.
-DL_Steven_Inina:Schön für dich. Aber du chasch au nid mit ihre rede bis du e chlini Sach für mich erledigt hesch. Denn bechunsch au din Brief wieder.
-DL_Steven_Intimidate:Ah, du bisch en herte Siech, he. Aber ich mu din Brief glaub na bitz phalte - bis du so e Sach für mich erledigt hesch...
-DL_Steven_HelmetQuest:Ich ha letzt Nacht chli z''viel trunke und ha min Helm a paar komischi Gstalte ide Taverne verlore. Bimer zimli sicher dass si zude dreckige Diebesgilde ghöred.
-DL_Steven_HelmetQuest2:Ich bruch öpper wo nid usgseht als würer zum Orde ghöre, öpper we dich, womer min Helm wider holt. Wend das anebringsch, chasch din Papierfötzel wider ha.
-DL_Steven_GotHelmet:Sehr guet! Giben mir!
-DL_Steven_GivesLetter:Okay okay, da heschen wider. Du chasch ez vo mir us mitem Kommandant Lloyd rede. Und ez gimmer min Helm!
-DL_Steven_ThanksHelmet:Hehe. Danke.
-DL_Steven_Angry:Grr, du chliine... Dafür wirsch na zahle! Wenn de Lloyd devo ghört...
-DL_Steven_GotoLloyd:Perfekt. Da isch din Brief. Du chasch ez zum Kommandant Lloyd.
+DL_NPC_ANewFace:U widr äs nöis Gsicht ir Stadt. Aus hättmr nid scho gnue Störäfridä.
+DL_NPC_YouShouldKnowRules:Du sötisch d''Reglä vodr Stadt kennä, wedä nid id Chischte wotsch cho.
+DL_NPC_Rules1:Zersch sötter klar si, ds dr Ordä vom ewigä Liächt hie regiert - auso haut di besser a üsi Gsetz, süsch wird das ä unagnähme Ufenthaut für di z''Gandria. 
+DL_NPC_Rules2:Benimm di wet ines Huus geisch - Mir gseh hie nid gärn Röiber. Die meischtä Bürger hei Beobachtigs-Zouber, wo vrhinderä, ds öpper öppis stibitzt.
+DL_NPC_Rules3:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört. Wedä bir Nekromantie vrwütscht wirsch, chasch ghängt wärdä.
+DL_NPC_WhoAreYou:I bi dr Steven, Paladin und dr Tschugger vo Gandria, sozsägä die rächti Hang vom Kommandant Lloyd. Leg di nid mit mir odr mirä Stadt ah, vrstangä? 
+DL_NPC_IKeepEyeOnYou:Giu, mir heidi im Oug, Bürschtli.
+DL_NPC_DontTrouble:Ja dämfau.. Mach eifach ke Seich!
+DL_Steven_Laughter:(Dr Steven nimmt dr Brief und faht vöuig unkontrolliert a lachä)
+DL_Steven_PieceOfPaper:U du hesch würklech dänkt, ds dr Papierfötzu di zu ihm füehrt? Ds isch ja lächerlech.
+DL_Steven_Urgent:Abr äs git oh angeri pressanti Sachä. So wiä ds, wo du für mi muesch machä, wedä dr Brief widr zrügg wotsch.
+DL_Steven_Inina:Schön für di. Abr du chasch oh nid mit ihrä plöiderlä bis du ä chlini Sach für mi erledigt hesch. De brchunsch di Brief oh widr.
+DL_Steven_Intimidate:Ah, du bisch ä hertä Chrieger, gäu. Aber i muess di Brief gloub no äs müü phautä - bis du so ä Sach für mi erledigt hesch... 
+DL_Steven_HelmetQuest:I ha letscht Nacht chly z''viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore. Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
+DL_Steven_HelmetQuest2:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
+DL_Steven_GotHelmet:Sehr guet! Gibnä mir!
+DL_Steven_GivesLetter:Okee Oke, da heschnä widr. Du chasch ize vo mir us mitm Kommandant Lloyd redä. U iz gimer mi Heum!
+DL_Steven_ThanksHelmet:Hehe. Merci.
+DL_Steven_Angry:Grr, du chliinä... Drfür wirsch du büässä! Wedr Lloyd drvo ghört...
+DL_Steven_GotoLloyd:Perfekt. Da isch di Brief. Du chasch iz zum Kommandant Lloyd.

@@ -1,13 +1,13 @@
 dl_npc_lee
 ----------------------------------
-DL_Lee_WhatDoing:Ja das frög ich mich au. Ich wär lieber ufem Meer grad.
-DL_Lee_WhatDoing2:Aber dank dem Trottel Luv hend mer üses Schiff verpasst und sitzed ez do fest.
-DL_Lee_OtherSays:Ach jo, heter das? Du chaschem sege er het sich halt nid betrinke söle wo üses Schiff abgleit het.
-DL_Lee_SecondRant:Pha! Wener nid pennt het wo üse Kapitän d''Matrose zrugg ufs Schiff gruefe het, hetemers au nid verpasst!
-DL_Lee_Thanks:Danke!
-DL_Lee_CalmDown:Jo vilicht hesch recht. Da bringt üs au nid wiiter.
-DL_Lee_CalmDown2:Mir wüssed, wo üse Kapitän anewele het und mir chönted au es chlises Boot chaufe.
-DL_Lee_CalmDown3:Aber zum übers Meer sägle brüchtemer en Kompass und niemert i dere verfluechte Stadt het eine.
-DL_Lee_HelpYou:Jo vilicht. Wenn du üs en funktionierende Kompass bringsch, gemmer der alles womer na hend.
-DL_Lee_QuestComplete:Super! Danke tusig, chas chuum erwarte wieder is Meer z''steche!
-DL_Lee_QuestComplete2:Do, nimm de Huufe magischi Perle womer gfunde hend, si sind do richtig viel wert.
+DL_Lee_WhatDoing:Jo das frogi mi au. I wär liaber ufam Meer gra.
+DL_Lee_WhatDoing2:Aber dank däm Trottel Luv hend miar üses Schiff verpasst und sitzad jeza do fest.
+DL_Lee_OtherSays:Ach jo, häter das? Du chaschäm sega er het sich halt nid betrinka söla wo üses Schiff abglait het.
+DL_Lee_SecondRant:Pha! Wener ni pennt het, wo üsa Kapitän d''Matrosa zrugg ufs Schiff gruefa hät, hetemärs au ni verpasst!
+DL_Lee_Thanks:Danka!
+DL_Lee_CalmDown:Jo velicht hesch rächt. Da bringt üs au ni witer.
+DL_Lee_CalmDown2:Miar wüssad, wo üsa Kapitän heräwella het und miar chönted au as chlises Boot chaufe.
+DL_Lee_CalmDown3:Aber zum übers Meer sägla brüchtemer a Kompass und niamert i dera verfluachte Stadt het eina.
+DL_Lee_HelpYou:Jo velicht. Wenn du üs a funktionierenda Kompass bringsch, gänd miar diar alles wo mr hend.
+DL_Lee_QuestComplete:Super! Danka viel mol, chas chum erwarta wieder is Meer z''stecha!
+DL_Lee_QuestComplete2:Do, nimm de Hock magischi Perla womar gfunda hend, si sind do richtig viel wert.

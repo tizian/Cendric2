@@ -588,16 +588,16 @@ npc.id:npc_lola
 		translation.tag:DL_Choice_TurnOn
 		translation.en:What turns *you* on?
 		translation.de:Was macht *dich* heiss?
-		translation.ch:was macht *dich* heiss?
+		translation.ch:Was macht *dich* heiss?
 	]
 	[
 		# Link node, tag is next tag
 		tag:-2
 		# translation: 
 		translation.tag:DL_Choice_Back
-		translation.en:That's enough for now. [BACK]
-		translation.de:Das ist genug. [ZURÜCK]
-		translation.ch:Das war genug. [ZRUGG]
+		translation.en:[BACK]
+		translation.de:[ZURÜCK]
+		translation.ch:[ZRUGG]
 	]
 }
 {1
@@ -621,6 +621,7 @@ npc.id:npc_lola
 	tag:34
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lola", "job")
+	trigger:DL:gotoNode(32)
 	# translation: 
 	translation.tag:DL_Lola_Job
 	translation.en:Most of the time, yes. But this is not something I'll do for my entire life.
@@ -636,6 +637,7 @@ npc.id:npc_lola
 	tag:35
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lola", "attractive")
+	trigger:DL:gotoNode(32)
 	# translation: 
 	translation.tag:DL_Lola_Attractive
 	translation.en:Yes, of course! I love your hair.
@@ -651,6 +653,7 @@ npc.id:npc_lola
 	tag:36
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_lola", "turn_on")
+	trigger:DL:gotoNode(32)
 	# translation: 
 	translation.tag:DL_Lola_TurnOn
 	translation.en:Many things. I really love when the guy enjoys it and I can see it.
@@ -732,6 +735,6 @@ npc.id:npc_lola
 	translation.ch:Pass uf dich uf, Süesse.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }

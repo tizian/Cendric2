@@ -12,7 +12,7 @@ DL_Harek_NiceStone2:Ich bruch allerdings au na chli Iseerz. Wend mer chli chönt
 DL_Harek_BrokenStaff:(Luegt sichs verbrochene Stück ah) Hm, das schiint mer es Stück vomne zimlich interessante Stab z''si. Wenn du mir all Stück devo bringe chasch, wirdin dir vilicht repariere chöne.
 DL_Harek_BrokenStaffComplete:Guet gmacht! Mal luege... (Nimmt es paar Werkzüg use und leit d''Stück uf de Amboss...)
 DL_Harek_BrokenStaffComplete2:... Und fertig. Da heschen!
-DL_Harek_SmithMagicArmor:Sehr guet. (De Harek nimmt d''''Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
+DL_Harek_SmithMagicArmor:Sehr guet. (De Harek nimmt d''Zuetate und fangt ah we wild uf sim Amboss umezhämmere...)
 DL_Harek_SmithMagicArmor2:Da isch si. Prächtig, gell.
 DL_Harek_SmithMagicArmor3:Du chasch immer wider zu mir cho wend speziells Material findsch - Es isch interessant, demit z''schaffe.
 DL_Harek_Craft:Sicher, hesch denn speziells Material und chli Iseerz gfunde?

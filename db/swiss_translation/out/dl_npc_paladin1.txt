@@ -1,6 +1,6 @@
 dl_npc_paladin1
 ----------------------------------
-DL_Paladin1_Hm:(Grummlig) Hmmm?
-DL_Paladin1_IAm:Ich bin en Paladin vom Ewige Liecht und diene üserem Herrscher und König em Logan em Zweite.
-DL_Paladin1_Armor:Ja, gell? Aber du wirsch hart schaffe möse um a e sonigi z''cho, also denk besser gar nid dra.
-DL_Paladin1_PissedOff:We isches so, en chliine Nervchopf z''sii we du eine bisch?
+DL_Paladin1_Hm:(Grantig) Hmmm? 
+DL_Paladin1_IAm:I bi ä Paladin vom Ewigä Liecht u dienä üsm Herrscher u Chönig äm Logan dr Zwöit.
+DL_Paladin1_Armor:Ja, gäu? Abr du wirsch hert müesse chrampfä für zum so eini z''becho, auso dänk besser gar nid dra.
+DL_Paladin1_PissedOff:Wie isches ä so, ä chlyni Närväsagi z''si wie du eini bisch?

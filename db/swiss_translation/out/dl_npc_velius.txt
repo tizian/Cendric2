@@ -15,7 +15,7 @@ DL_Velius_Friends3:Magier mit enere starche Affinität zunere Magierart. Die dre
 DL_Velius_Mark:(Lächlet) Natürli isches das.
 DL_Velius_Mark2:Mini Subjekt hani demit eifacher chöne ufspüre - di wenige, wo entcho sind.
 DL_Velius_Escape:Ja, du hesch mi würkli überrascht.
-DL_Velius_Escape2:Ich ha dini Magie uf di gliich Art extrahiert, we au scho mit vilne andere Magiere vorene.
+DL_Velius_Escape2:Ich ha dini Magie uf di gliich Art extrahiert, we au scho bi vilne andere Magier vorene.
 DL_Velius_Escape3:Aber es het irgendwie nid we erwartet funktioniert.
 DL_Velius_Escape4:Du heschs gschafft, direkt vor mine Auge z''verschwinde.
 DL_Velius_Escape5:Aber jetz bisch ja do...
@@ -49,4 +49,3 @@ DL_Velius_Illusion:Magie isch es Spektrum, we Farbe. D''Magieart, woni Illusion 
 DL_Velius_Illusion2:E sehr mächtigi Art vo Magie. D''Macht, Lüüt z''kontrolliere und z''tüsche, söt nid i falschi Händ falle.
 DL_Velius_Illusion3:Drum hani das Gheimnis ghüetet.
 DL_Velius_Fight:Wed wetsch. Dis Opfer wird nid vergäbens sii.
-DL_Velius_Beta:(Fortsetzig folgt...)

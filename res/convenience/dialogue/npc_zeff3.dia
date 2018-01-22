@@ -93,7 +93,7 @@ npc.id:npc_zeff3
 	trigger:DL:addConditionProgress("npc_zeff3", "thea")
 	# translation: 
 	translation.tag:DL_Zeff_Thea
-	translation.en:Hrr. No, I'm sorry, I prefer to work alone.
+	translation.en:Hrr. No, I'm sorry. I prefer to work alone.
 	translation.de:Hrr. Nein, tut mir leid. Ich arbeite lieber alleine.
 	translation.ch:Hrr. Nei, tuetmer leid. Ech schaff lieber elei.
 	[

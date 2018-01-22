@@ -222,6 +222,15 @@ npc.id:npc_karma
 		translation.de:Ich bin bereit für deine Fragen.
 		translation.ch:Ich bi parat für dini Froge.
 	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
 }
 {1
 	# [5] NPC Node

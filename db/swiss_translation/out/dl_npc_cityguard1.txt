@@ -1,18 +1,18 @@
 dl_npc_cityguard1
 ----------------------------------
-DL_Citguard_Stop:HALT! D''Tor vo Gandria sind zue für Fremdi!
-DL_Citguard_IDontKnowYou:Ich kenn dich nid. Und mer chönd niemert id Stadt lah womer nid kenned.
-DL_Citguard_Eyeballing:(Muschteret dich) Ja. Vilicht kenni nid jede dreckig Strolch, wo sich im Hafeviertel umetriibt, aber ich wür jede erkenne, wo ide letzte Täg d''Stadt verlah het. Und du bisch kene devo.
-DL_Citguard_PeopleDisappearing:Es het es paar beunruhigendi Fäll gä vo Lüüt, wo d''Stadt verlah hend und nanig zrugg cho sind.
+DL_Citguard_Stop:HALT! D''Tor vo Gandria si zue für Frömdi!
+DL_Citguard_IDontKnowYou:I kennedi nid. U mir chöi kenä id Stadt lah womer nid kenne.
+DL_Citguard_Eyeballing:(Muschteret dich) Jo. Viläch kenni nid jede Fotzusiech, wo im Hafeviertu umelaueret, aber i würd jede erkenne, wo ide letschde Täg us dr Stadt use isch. U du bisch ufaufäu kene vo denä.
+DL_Citguard_PeopleDisappearing:Es het es paar beunruhigendi Fäu gä vo Lüt, wo us dr Stadt use si u noni ume cho si.
 DL_Citguard_GatesClosed:Mir mönd ane, dass da usse immerna öppis isch, wo dadefür verantwortlich isch. D''Tor bliibed zue, solang das Rätsel nanig glöst isch.
-DL_Citguard_Zeff:Hmm, lah mich mal nadenke... Ja, weni mich richtig erinnere, gits en Lederer namens Zeff wo in Gandria lebt. Aber er isch genau eine vo dene Lüüt, wo vermisst werded. Weso frögsch?
-DL_Citguard_Laughs:(Lachet) Ja, ja, sicher, es Monster. Und jetzt verzell de Seich öpperem, wo ihn glaubt. Verpiss dich jetz besser.
-DL_Citguard_WhatCurse:Hrmm... Und we wetsch mich dadevo überzüüge? Da chönt e Falle sii.
-DL_Citguard_TryGold:(Lächlet) Du weisch halt scho wes lauft, gell.
-DL_Citguard_TryCharm:Dis Wort bedüütet mer nüt, Fremde.
-DL_Citguard_Intimidate:Es hend scho vili probiert, mich iizschüchtere. Aber weisch, da gaht mer langsam am Arsch verbii.
-DL_Citguard_TryLetter:Hm, es Siegel vode Hohepriesterin Inina. Den muni der wohl oder übel glaube.
-DL_Citguard_LetZeffIn:Guet, ich wird de andere Wache devo verzelle. Chaschem sege er chön wider id Stadt cho.
-DL_Citguard_OnlyLloyd:Es heisst "Kommandant" Lloyd.
-DL_Citguard_WolfProblem:Ich hoff, da ischen schlechte Witz.
-DL_Citguard_LetCendricIn:(Luegt es Siegel ah) Aber wenn d''Inina dir de Brief überreicht het, den mömer dich wohl ielah.
+DL_Citguard_Zeff:Hmm, loh mi schnäu la überlegä... Ja, weni mi richtig ma bsinne, gits ä Läderer wo Zeff heisst u wo ds Gandria läbt. Aber är isch genau eine vo dene Lüt, wo vermisst wärde. Wäge meinsch?
+DL_Citguard_Laughs:(Lachet) Ja, ja, äuä scho es Monschter. U iz verzeu dä huere Seich öbberem wos gloubt. Fahr eifach ab u zwar gleitig.
+DL_Citguard_WhatCurse:Hrmm... U wi wosch mi dadrvo überzüge? Ds chönnt ä Faue sii.
+DL_Citguard_TryGold:(Lächlet) Du weisch haut scho wis louft, gäu.
+DL_Citguard_TryCharm:Dis Wort bedütet mer gar nüt, Frömdä.
+DL_Citguard_Intimidate:Es hei scho viu probiert mi iizschüchtere. Aber weisch, ds geitmer langsam ä so huere am Arsch verbi.
+DL_Citguard_TryLetter:Hm, es Sigu vor Hoheprieschterin Inina. De muesi dr äuä gloube, öbi wott oder nid.
+DL_Citguard_LetZeffIn:Auso, i verzeue dä angere Wache drvo. Chaschim säge är chöni ume wider id Stadt cho.
+DL_Citguard_OnlyLloyd:Es heisst de imfau "Kommandant" Lloyd.
+DL_Citguard_WolfProblem:I hoffe iz mau das isch ä schlächte Witz.
+DL_Citguard_LetCendricIn:(Luegt es Siegel ah) Aber we d''Inina dir dä Brief gä het, de müessemer di äuä inelah.

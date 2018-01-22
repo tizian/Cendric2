@@ -1,0 +1,70 @@
+dl_npc_etoz
+----------------------------------
+DL_Etoz_Hello:Hey du! Was het so es Milchbubi da unne ide Kanalisation z''sueche?
+DL_Etoz_YouMilksob:Hn. Du weisch glaub nid, mit wem du redsch.
+DL_Etoz_Unfriendly:Oh, ich bi nid unhöflich. Im Gegeteil - ich seg nur d''Woret.
+DL_Etoz_WhoAreYou:Es überrascht mi, dass nanüt vo mir ghört hesch.
+DL_Etoz_WhoAreYou2:(Striicht sini Hoor zrugg) Ich bi de Etoz, de mächtigst Magier wod je gse wirsch.
+DL_Etoz_QuestionableMethod:Jeh, eini stoht grad vor mir. (Giggelet)
+DL_Etoz_QuestionableMethod2:Aber wennd garstigi Kanalisationsratte und so suechsch, do hani es paar im südliche Teil vode Kanalisation gse.
+DL_Etoz_QuestionableMethod3:Aber du bruuchsch nid nur en Schlüssel, zum det anecho...
+DL_Etoz_QuestionableMethod4:Dir fehlts definitiv a allem, wos brucht, zum da unne überlebe.
+DL_Etoz_Sword:Das isch kes "komisches" Schwert, du Michi. Chasch eifach hoffe, dassd mer nie id Queri chunsch.
+DL_Etoz_Sword2:Da Schwert wers letzt, wod gse würsch.
+DL_Etoz_Powerful:Oh, wenn ich dir mini Abetür verzelle wür, würsch in Ehrfurcht erzittere.
+DL_Etoz_Powerful2:Ich ha unzähligi Finde besiegt, di schwirigste Zauber zauberet und die gföhrlichste Gebiet erkundet... die Gschichte wäred nüt für dini zarte Ohre.
+DL_Etoz_Challenge:Wie chasches du bloss woge, mini Fähigkeite aaz''zwiifle. Ich chönt dich mitme einzige Wort i Flamme ufgo lo.
+DL_Etoz_Challenge2:Aber ich verstand, dass dini unerfahrene Auge ken wohre Meister erchenne chönd. Damol wirdi der no verge.
+DL_Etoz_Challenge3:Hn. Du schinsch so schwach, so hilflos z''sii... dich z''bekämpfe wür nid mal Spass mache.
+DL_Etoz_NotWeak:(De Etoz hebt e Augebraue) Oh, würkli? Denn muesch ja en ganz herte Siech si!
+DL_Etoz_NotWeak2:Wie''s de Zuefall wett, würi da es Obetüür kenne wo genau richtig wär für so en herte Siech we dich.
+DL_Etoz_NotWeak3:Viel Gold und Ruhm wür di erwarte. Aber ich glaub, di würkli gföhrliche Jobs interessiered di gar nid...
+DL_Etoz_StartKeyOne:Wennd so druf beharrsch... (De Etoz nimmt ein Teil vomne Schlüssel us sim Mantel)
+DL_Etoz_StartKeyOne2:Das isch d''Hälfti vomne Schlüssel, wo en gföhrliche Turm ufschlüsst.
+DL_Etoz_StartKeyOne3:Wenn du würkli so hert bisch, hol de ander Teil vom Schlüssel und ich gib der min Teil.
+DL_Etoz_WhereKeyPart:Das usezfinde wer dini Ufgob gsi. Aber welld so hilflos und bemitleidenswert bisch, segis der.
+DL_Etoz_WhereKeyPart2:Es git en chline Ruum im Oste vode Kanalisation. Du wirschen det finde.
+DL_Etoz_WhereYourPart:Oh. Ich ha di höchste Berge möse erklimme, i di tüfste See tauche... ha mi möse dur Lava-Gruebe kämpfe und schrecklichi Viecher besiege.
+DL_Etoz_WhereYourPart2:Din Teil isch soviel eifacher z''hole. Sig froh.
+DL_Etoz_GotKey1:Eifach gsi, gell. Ez mömmern nur na zemesetze...
+DL_Etoz_GotKey12:Und fertig. Do, nimmen.
+DL_Etoz_GotKey13:Find de Turm woner ufmacht und zeigmer, wad füren grosse Bueb bisch.
+DL_Etoz_GotKey14:Erreich d''Chiste ganz obe ufem Turm und chum zumer zrugg, wennd überlebsch...
+DL_Etoz_WhereTower:Ufere vergessene Insle im Oste vom Sumpfland. Ich hoff, du chasch guet schwümme. (Grinst)
+DL_Etoz_WhyDontYouGo:Ich bi scho unzähligi Mol gsi. Es wird mer langsam langwiilig, weisch.
+DL_Etoz_WhyDontYouGo2:Aber du muesch mer no öppis bewiise. Mol luege, ob dus anebringsch.
+DL_Etoz_TowerInfo:De Turm isch vomne Magier errichtet worde, wo fasch so mächtig gsi isch, we ich.
+DL_Etoz_TowerInfo2:Er het Antimagiekristall igsetzt, zum die wohr Willenschraft und Gwandtheit vo anderne Magier z''teste.
+DL_Etoz_TowerInfo3:Well sich di meiste Magier immer nur uf ihri Magie verlönd, isches e unmöglichi Ufgab für vili Magier gsi.
+DL_Etoz_TowerInfo4:Aber die, wos gschafft hend - inklusive mir natürli - sind nochene stärcher gsi als je zuvor.
+DL_Etoz_AntiMagic:Oh, du bisch so erbärmlich. Dir mume würkli alles erkläre.
+DL_Etoz_AntiMagic2:Die Kristall blockiered dini Magie. Du chasch det inne nid zaubere.
+DL_Etoz_FirstTowerClimbed:Jo, de Turm isch ja au nid würkli e Herusforderig gsi - en Witz ischer.
+DL_Etoz_FirstTowerClimbed2:De nechst Turm isch au eifach - aber öpper wi du wird wohrschinli abegheie und verrecke.
+DL_Etoz_SecondTowerKeyQuest:Wo de erscht gsi isch, natürli. Gang und holen!
+DL_Etoz_GotSecondKey:Huh. Guet. (De Etoz nimmt de ander Teil vom Schlüssel us sim Mantel)
+DL_Etoz_GotSecondKey2:Do isch de Schlüssel zum zweite Turm.
+DL_Etoz_GotSecondKey3:Gang wieder nach Os und probiers. Aber chum nid brüelend zrugg wend failsch.
+DL_Etoz_ChestEmpty:Si isch leer gsi - well du nid würdig bisch zum öppis drus zne.
+DL_Etoz_ChestEmpty2:Vilicht wirsch ja mal würdig si... aber das brucht Ziit.
+DL_Etoz_SecondTowerClimbed:D''True wird nid gfüllt si, bis de Himmel bluetrot wird.
+DL_Etoz_GimmeKeyQuestThird:Jo. We hesch das bloss verrate chöne? (Gigglet)
+DL_Etoz_GotThirdKey:Isch do öppe öpper gnervt? We ich denkt ha - ke Usduur.
+DL_Etoz_GotThirdKey2:Aber wennds  trotzdem usprobiere wetsch... do, nimm.
+DL_Etoz_ThirdTowerClimbed:Ke Chratzer? Du haltisch dich guet für öpper wo eigentlich so unfähig isch.
+DL_Etoz_Games:Ich? Nei, ich gib der nur e Chance zum au so bombig z''si we ichs bin.
+DL_Etoz_GimmeFourthKeyQuest:Jo.
+DL_Etoz_GimmeFourthKeyQuest2:Jetz gang und hol mer de letzt Schlüssel.
+DL_Etoz_GotFourthKey:Prima.
+DL_Etoz_GotFourthKey2:Do, nimm. Ich erwart aber nid, dassd wieder chunsch.
+DL_Etoz_GotFourthKey3:Ich ha de viert Turm mit gschlossene Auge gschafft - aber du, du sötsch schomal dis Testament schribe.
+DL_Etoz_FourthTowerClimbed:Unglaublich! Wa hesch denn da obe gfunde?
+DL_Etoz_YouMustKnow:Ja... ähm... eh... d''True het en andere Inhalt, wenn si vo öpperem anderem ufgmacht wird?
+DL_Etoz_YouMustKnow2:Isch ja au egal! Zeigs mer!
+DL_Etoz_YourGranda:Ahjo? Zeigs mer!
+DL_Etoz_NothingFound:Nei! Das cha nid sii! Du hesch sicher öppis gfunde! Zeigs mer!
+DL_Etoz_ShowLegacy:Waaas? Das ghört mir, gibs mir!
+DL_Etoz_GiveSwordAsk:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg.
+DL_Etoz_GiveSwordMoney:Do... do! (De Etoz riist es Schwert und de Brief schnell a sich)
+DL_Etoz_GiveSword:Huh... Du bisch sogar dümmer als ich erwartet ha.
+DL_Etoz_Never:Grrrr! Dodefür wirsch na zahle!

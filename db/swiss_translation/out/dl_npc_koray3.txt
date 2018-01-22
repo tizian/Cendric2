@@ -1,0 +1,5 @@
+dl_npc_koray3
+----------------------------------
+DL_Koray_Fight:Jo, wa chame do sege.
+DL_Koray_Fight2:Das isch en würkli unglaubliche Kampf gsi.
+DL_Koray_Fight3:Guet gmacht. Mir sind wieder frei.

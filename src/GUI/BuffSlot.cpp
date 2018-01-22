@@ -52,7 +52,7 @@ BuffSlot::BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::
 	
 	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setWindowOffset(sf::Vector2f(SIZE + 2.f, 0.f));
-	m_tooltipComponent->setMaxWidth(200.f);
+	m_tooltipComponent->setMaxWidth(220.f);
 	addComponent(m_tooltipComponent);
 }
 

@@ -1,0 +1,3 @@
+dl_npc_chickenchaser
+----------------------------------
+DL_Chickenchaser_Ah:Aaaaaaaaaah!

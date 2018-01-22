@@ -93,7 +93,7 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 		}
 		// check if we need to crop a whole word
 		found = uncroppedText.find(" ");
-		if (found == std::string::npos || (found != std::string::npos && found > maxLineChars)) {
+		if (found == std::string::npos || (found != std::string::npos && found > maxLineChars - 1)) {
 			text.append(uncroppedText.substr(0, maxLineChars));
 			text.append("\n");
 			uncroppedText = uncroppedText.substr(maxLineChars);
@@ -107,14 +107,11 @@ std::string TextProvider::getCroppedString(const std::string& string, int charac
 				text.append(uncroppedText.substr(0, found));
 				uncroppedText = uncroppedText.substr(found);
 				space = space - static_cast<int>(found);
-				continue;
 			}
-			else if (found == std::string::npos || space >= found) {
-				text.append(uncroppedText.substr(0, space));
-				uncroppedText = uncroppedText.substr(space);
+			else {
+				text.append("\n");
+				break;
 			}
-			text.append("\n");
-			break;
 		}
 	}
 	return text.append(uncroppedText);

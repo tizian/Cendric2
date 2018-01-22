@@ -46,7 +46,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("spoiled_fire", "started") and DL:isConditionFulfilled("npc_rhendal", "spoiled_schnapps")) then 
 
-		DL:createNPCNode(10, 14, "DL_NPC_TaskFulfilled") -- Oh, it's you. I know that you have carried out my task. Very good. You might be of use.
+		DL:createNPCNode(10, 14, "DL_NPC_TaskFulfilled") -- Oh, it's you. You have carried out my task. Very good. You might be of use.
 		DL:changeQuestState("spoiled_fire", "completed")
 		DL:addGold(50)
 		DL:addReputationProgress("thief", 10)
@@ -69,7 +69,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_vincent2", "talked") and DL:isConditionFulfilled("npc_vincent", "disgruntled")) then 
 
-		DL:createNPCNode(12, -2, "DL_Vincent_Disgruntled") -- Oh... you again. Y'know, I'd offered you an awesome job, if you hadn't been so agressive. If you want another chance, it will cost you something.
+		DL:createNPCNode(12, -2, "DL_Vincent_Disgruntled") -- Oh... you again. Y'know, I would have offered you an awesome job, if you hadn't been so aggressive. If you want another chance, it will cost you something.
 		DL:addConditionProgress("npc_vincent2", "talked")
 		DL:addConditionProgress("npc_vincent2", "key_150")
 		DL:addNode()
@@ -125,7 +125,7 @@ loadDialogue = function(DL)
 
 			DL:createChoiceNode(4)
 			if (DL:isConditionFulfilled("npc_vincent2", "key_150")) then 
-				DL:addChoice(6, "DL_Cendric_WhereCatch") -- And where is the catch?
+				DL:addChoice(6, "DL_Cendric_WhereCatch") -- And what is the catch?
 			end
 			if (DL:isConditionFulfilled("npc_vincent2", "key_100")) then 
 				DL:addChoice(7, "DL_Cendric_WhereCatch") -- 
@@ -144,11 +144,11 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(22, 23, "DL_Vincent_KeyCost150") -- I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+				DL:createNPCNode(22, 23, "DL_Vincent_KeyCost150") -- I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
 				DL:addNode()
 
 
-				DL:createNPCNode(23, -2, "DL_Vincent_Treasure") -- But I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
+				DL:createNPCNode(23, -2, "DL_Vincent_Treasure") -- I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
 				DL:addNode()
 
 			end
@@ -159,7 +159,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(24, 25, "DL_Vincent_KeyCost100") -- I had to steal the key from him and it wasn't easy, because he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+				DL:createNPCNode(24, 25, "DL_Vincent_KeyCost100") -- I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
 				DL:addNode()
 
 
@@ -189,7 +189,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was a mere child's play.
+				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was mere child's play.
 				DL:addNode()
 
 
@@ -208,7 +208,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(30, -2, "DL_Vincent_ChestIsObserved") -- The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they won't catch you.
+			DL:createNPCNode(30, -2, "DL_Vincent_ChestIsObserved") -- The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
 			DL:changeQuestState("elder_chest", "started")
 			DL:addNode()
 
@@ -350,15 +350,15 @@ loadDialogue = function(DL)
 
 		if (DL:isSpellLearned(7)) then 
 
-			DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. We know that a certain mage Syrah knows how to brew a potion that can render you invisible.
+			DL:createNPCNode(42, 43, "DL_Vincent_SecondQuest") -- Good. This time, the stakes are a little bit higher. We know that the mage Syrah knows how to brew a potion that can render you invisible.
 			DL:addNode()
 
 
-			DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it. The only problem is, that she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+			DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it? The only problem is, she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
 			DL:addNode()
 
 
-			DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find this way and get that recipe for us. If you manage to do that, you'll maybe get to know what "us" really means.
+			DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us. If you manage to do that, you might get to know what "us" really means.
 			DL:changeQuestState("invis_recipe", "started")
 			DL:addNode()
 
@@ -384,7 +384,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("invis_recipe", "started") and DL:isQuestComplete("invis_recipe")) then 
 
-		DL:createNPCNode(46, -1, "DL_Vincent_SecondQuestDone") -- Very well. I knew you have talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
+		DL:createNPCNode(46, -1, "DL_Vincent_SecondQuestDone") -- Very well. I knew you had talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.
 		DL:changeQuestState("invis_recipe", "completed")
 		DL:removeItem("qe_invisrecipe", 1)
 		DL:addItem("ke_thiefguild", 1)
