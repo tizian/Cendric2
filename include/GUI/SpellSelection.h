@@ -23,13 +23,13 @@ public:
 	void reload();
 
 	bool isSlotLocked(int spellNr) const;
-	std::vector<SpellSlot>& getSlots();
+	std::vector<SpellSlot*>& getSlots();
 
 private:
 	SpellManager* m_spellManager;
 	bool m_isVisible = true;
 
-	std::vector<SpellSlot> m_spellSlots;
+	std::vector<SpellSlot*> m_spellSlots;
 
 	// as seen from the bottom left corner
 	const sf::Vector2f SPELLSELECTION_OFFSET = sf::Vector2f(10.f, 20.f);

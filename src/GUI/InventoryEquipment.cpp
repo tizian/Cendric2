@@ -35,7 +35,7 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 }
 
 InventoryEquipment::~InventoryEquipment() {
-	m_slots.clear();
+	CLEAR_MAP(m_slots);
 	delete m_window;
 }
 
@@ -48,7 +48,7 @@ void InventoryEquipment::setPosition(const sf::Vector2f& position) {
 
 	for (auto type : m_types) {
 		if (!contains(m_slots, type)) continue;
-		m_slots.at(type).setPosition(sf::Vector2f(xOffset, yOffset));
+		m_slots.at(type)->setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += InventorySlot::SIZE + MARGIN;
 	}
 }
@@ -58,8 +58,8 @@ void InventoryEquipment::update(const sf::Time& frameTime) {
 
 	// check whether an item was selected
 	for (auto& it : m_slots) {
-		it.second.update(frameTime);
-		if (m_isModifiable && (it.second.isRightClicked() || it.second.isDoubleClicked())) {
+		it.second->update(frameTime);
+		if (m_isModifiable && (it.second->isRightClicked() || it.second->isDoubleClicked())) {
 			// unequip item
 			m_screen->notifyItemEquip("", it.first);
 			break;
@@ -72,7 +72,7 @@ void InventoryEquipment::render(sf::RenderTarget& target) {
 
 	m_window->render(target);
 	for (auto& it : m_slots) {
-		it.second.render(target);
+		it.second->render(target);
 	}
 }
 
@@ -80,7 +80,7 @@ void InventoryEquipment::renderAfterForeground(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	for (auto& it : m_slots) {
-		it.second.renderAfterForeground(target);
+		it.second->renderAfterForeground(target);
 	}
 }
 
@@ -88,20 +88,20 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	if (!contains(m_slots, type)) return;
 	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
 		if (highlight) {
-			m_slots.at(ItemType::Equipment_ring_1).highlight();
-			m_slots.at(ItemType::Equipment_ring_2).highlight();
+			m_slots.at(ItemType::Equipment_ring_1)->highlight();
+			m_slots.at(ItemType::Equipment_ring_2)->highlight();
 		}
 		else {
-			m_slots.at(ItemType::Equipment_ring_1).unhighlight();
-			m_slots.at(ItemType::Equipment_ring_2).unhighlight();
+			m_slots.at(ItemType::Equipment_ring_1)->unhighlight();
+			m_slots.at(ItemType::Equipment_ring_2)->unhighlight();
 		}
 	}
 	else {
 		if (highlight) {
-			m_slots.at(type).highlight();
+			m_slots.at(type)->highlight();
 		}
 		else {
-			m_slots.at(type).unhighlight();
+			m_slots.at(type)->unhighlight();
 		}
 	}
 }
@@ -112,13 +112,13 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (!contains(m_slots, slot->getItemType())) return;
 	const bool isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
 
-	if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1).getBoundingBox()))) {
+	if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1)->getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 	}
-	else if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_2).getBoundingBox()))) {
+	else if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_2)->getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
 	}
-	else if (!isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(slot->getItemType()).getBoundingBox()))) {
+	else if (!isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(slot->getItemType())->getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
 	}
 	else if (slot->isEquipmentOrigin()) {
@@ -131,10 +131,10 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 
 	if (!contains(m_slots, slot->getItemType())) return;
 	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
-		if (m_slots.at(ItemType::Equipment_ring_1).isEmpty()) {
+		if (m_slots.at(ItemType::Equipment_ring_1)->isEmpty()) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 		}
-		else if (m_slots.at(ItemType::Equipment_ring_2).isEmpty()) {
+		else if (m_slots.at(ItemType::Equipment_ring_2)->isEmpty()) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
 		}
 		else {
@@ -148,8 +148,8 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 
 InventorySlot* InventoryEquipment::getSelectedSlot() {
 	for (auto& it : m_slots) {
-		if (it.second.isMousedOver()) {
-			return &it.second;
+		if (it.second->isMousedOver()) {
+			return it.second;
 		}
 	}
 	return nullptr;
@@ -157,7 +157,7 @@ InventorySlot* InventoryEquipment::getSelectedSlot() {
 
 InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
 	if (!contains(m_slots, type)) return nullptr;
-	return &m_slots.at(type);
+	return m_slots.at(type);
 }
 
 void InventoryEquipment::reload() {
@@ -168,14 +168,16 @@ void InventoryEquipment::reload() {
 	sf::Vector2i texPos(0, 0);
 
 	for (auto& it : m_types) {
+		if (contains(m_slots, it)) continue;
+
 		if (m_core->getEquippedItem(it).empty()) {
-			m_slots.insert({ it, InventorySlot(tex, texPos, it) });
+			m_slots.insert({ it, new InventorySlot(tex, texPos, it) });
 		}
 		else {
-			m_slots.insert({ it, InventorySlot(m_core->getEquippedItem(it), -1, true) });
+			m_slots.insert({ it, new InventorySlot(m_core->getEquippedItem(it), -1, true) });
 		}
 		texPos.x += 50;
-		m_slots.at(it).setItemType(it);
+		m_slots.at(it)->setItemType(it);
 	}
 
 	setPosition(m_position);

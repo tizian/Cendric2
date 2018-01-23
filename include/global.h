@@ -7,6 +7,7 @@
 #define NOP []() {}
 
 #define CLEAR_VECTOR(V) for (auto it : V) {delete it;}; V.clear();
+#define CLEAR_MAP(M) for (auto it : M) {delete it.second;}; M.clear();
 
 // extern objects
 class Logger;

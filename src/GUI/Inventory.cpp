@@ -173,12 +173,12 @@ Inventory::~Inventory() {
 }
 
 void Inventory::clearAllSlots() {
-	m_consumableItems.clear();
-	m_equipmentItems.clear();
-	m_questItems.clear();
-	m_documentItems.clear();
-	m_keyItems.clear();
-	m_miscItems.clear();
+	CLEAR_MAP(m_consumableItems);
+	CLEAR_MAP(m_equipmentItems);
+	CLEAR_MAP(m_questItems);
+	CLEAR_MAP(m_documentItems);
+	CLEAR_MAP(m_keyItems);
+	CLEAR_MAP(m_miscItems);
 	m_selectedSlotId.first = "";
 }
 
@@ -189,7 +189,7 @@ InventorySlot* Inventory::getSelectedSlot() const {
 	}
 	if (!contains(m_typeMap, m_currentTab)) return nullptr;
 	if (!contains(*m_typeMap.at(m_currentTab), m_selectedSlotId.first)) return nullptr;
-	return &m_typeMap.at(m_currentTab)->at(m_selectedSlotId.first);
+	return m_typeMap.at(m_currentTab)->at(m_selectedSlotId.first);
 }
 
 void Inventory::deselectCurrentSlot() {
@@ -215,7 +215,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 		m_equipment->reload();
 	}
 
-	std::map<std::string, InventorySlot>* tab = m_typeMap.at(item->getType());
+	std::map<std::string, InventorySlot*>* tab = m_typeMap.at(item->getType());
 
 	// search for the slot
 	if (contains(*tab, item->getID())) {
@@ -228,15 +228,15 @@ void Inventory::notifyChange(const std::string& itemID) {
 			calculateSlotPositions(*(m_typeMap.at(item->getType())));
 		}
 		else {
-			tab->at(item->getID()).setAmount(m_core->getData().items.at(itemID));
+			tab->at(item->getID())->setAmount(m_core->getData().items.at(itemID));
 		}
 		return;
 	}
 
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (!contains(m_core->getData().items, itemID)) return;
-
-	(*tab).insert({ item->getID(), InventorySlot(itemID, m_core->getData().items.at(itemID)) });
+	if (contains(*tab, itemID)) return;
+	(*tab).insert({ item->getID(), new InventorySlot(itemID, m_core->getData().items.at(itemID)) });
 
 	calculateSlotPositions(*tab);
 }
@@ -312,20 +312,20 @@ void Inventory::update(const sf::Time& frameTime) {
 
 	// check whether an item was selected
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		sf::Vector2f pos = it.second.getPosition();
+		sf::Vector2f pos = it.second->getPosition();
 		if (pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
 			pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		it.second.update(frameTime);
-		if (it.second.isMousedOver() && !m_hasDraggingStarted) {
-			selectSlot(it.second.getItemID(), ItemType::VOID);
-			if (it.second.isDoubleClicked()) {
-				handleLevelDoubleClick(&it.second);
-				handleMapDoubleClick(&it.second);
+		it.second->update(frameTime);
+		if (it.second->isMousedOver() && !m_hasDraggingStarted) {
+			selectSlot(it.second->getItemID(), ItemType::VOID);
+			if (it.second->isDoubleClicked()) {
+				handleLevelDoubleClick(it.second);
+				handleMapDoubleClick(it.second);
 				break;
 			}
-			if (it.second.isRightClicked()) {
-				handleLevelRightClick(&it.second);
-				handleMapRightClick(&it.second);
+			if (it.second->isRightClicked()) {
+				handleLevelRightClick(it.second);
+				handleMapRightClick(it.second);
 				break;
 			}
 		}
@@ -517,7 +517,7 @@ void Inventory::render(sf::RenderTarget& target) {
 	target.draw(m_selectedTabText);
 
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		it.second.render(m_scrollHelper->texture);
+		it.second->render(m_scrollHelper->texture);
 	}
 	m_scrollHelper->render(target);
 
@@ -541,7 +541,7 @@ void Inventory::render(sf::RenderTarget& target) {
 void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		it.second.renderAfterForeground(target);
+		it.second->renderAfterForeground(target);
 	}
 	m_equipment->renderAfterForeground(target);
 
@@ -680,7 +680,8 @@ void Inventory::reload() {
 	for (auto& itemData : m_core->getData().items) {
 		Item* item = g_resourceManager->getItem(itemData.first);
 		if (item == nullptr || !contains(m_typeMap, item->getType())) continue;
-		m_typeMap.at(item->getType())->insert({ item->getID(), InventorySlot(item->getID(), itemData.second) });
+		if (contains(*m_typeMap.at(item->getType()), item->getID())) continue;
+		m_typeMap.at(item->getType())->insert({ item->getID(), new InventorySlot(item->getID(), itemData.second) });
 	}
 
 	// reload equipment
@@ -689,7 +690,7 @@ void Inventory::reload() {
 	calculateSlotPositions(*(m_typeMap.at(m_currentTab)));
 }
 
-void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slots) {
+void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot*>& slots) {
 	float number = static_cast<float>(slots.size());
 	int rows = static_cast<int>(std::ceil(number / SLOT_COUNT_X));
 	int steps = rows - SLOT_COUNT_Y + 1;
@@ -719,7 +720,7 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot>& slo
 	int y = 1;
 	int x = 1;
 	for (auto& it : slots) {
-		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
+		it.second->setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
 			xOffset = xOffsetStart;

@@ -8,28 +8,28 @@ SpellSelection::SpellSelection(SpellManager* manager) {
 }
 
 SpellSelection::~SpellSelection() {
-	m_spellSlots.clear();
+	CLEAR_VECTOR(m_spellSlots);
 }
 
 void SpellSelection::activateSlot(int spellNr, const sf::Time& cooldown) {
 	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size()) - 1) return;
-	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
-	m_spellSlots[spellNr].playAnimation(cooldown);
+	if (m_spellSlots[m_selectedSlot]->getSpellID() == SpellID::VOID) return;
+	m_spellSlots[spellNr]->playAnimation(cooldown);
 }
 
 void SpellSelection::selectSlot(int spellNr) {
 	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size()) - 1) return;
-	if (m_spellSlots[m_selectedSlot].getSpellID() == SpellID::VOID) return;
-	m_spellSlots[m_selectedSlot].deselect();
-	m_spellSlots[spellNr].select();
+	if (m_spellSlots[m_selectedSlot]->getSpellID() == SpellID::VOID) return;
+	m_spellSlots[m_selectedSlot]->deselect();
+	m_spellSlots[spellNr]->select();
 	m_selectedSlot = spellNr;
 }
 
 void SpellSelection::update(const sf::Time& frametime) {
 	for (int i = 0; i < static_cast<int>(m_spellSlots.size()); i++) {
-		m_spellSlots[i].update(frametime);
-		if (m_spellSlots[i].isClicked() && !m_spellSlots[i].isLocked()) {
-			m_spellManager->getOwner()->getScreen()->getCharacterCore()->setWeaponSpell(m_spellSlots[i].getKey());
+		m_spellSlots[i]->update(frametime);
+		if (m_spellSlots[i]->isClicked() && !m_spellSlots[i]->isLocked()) {
+			m_spellManager->getOwner()->getScreen()->getCharacterCore()->setWeaponSpell(m_spellSlots[i]->getKey());
 			m_spellManager->setAndExecuteSpell(i);
 		}
 	}
@@ -37,15 +37,15 @@ void SpellSelection::update(const sf::Time& frametime) {
 
 void SpellSelection::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
-	for (auto& it : m_spellSlots) {
-		it.render(target);
+	for (auto it : m_spellSlots) {
+		it->render(target);
 	}
 }
 
 void SpellSelection::renderAfterForeground(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
-	for (auto& it : m_spellSlots) {
-		it.renderAfterForeground(target);
+	for (auto it : m_spellSlots) {
+		it->renderAfterForeground(target);
 	}
 }
 
@@ -54,13 +54,13 @@ void SpellSelection::reload() {
 	auto& lockedMagic = m_spellManager->getOwner()->getLevel()->getLockedMagic();
 	float offset = SpellSlot::ICON_OFFSET;
 	for (auto& it : m_spellManager->getSpellMap()) {
-		SpellSlot slot(it->getSpellData());
-		slot.setPosition(sf::Vector2f(
+		SpellSlot* slot = new SpellSlot(it->getSpellData());
+		slot->setPosition(sf::Vector2f(
 			SPELLSELECTION_OFFSET.x + offset,
 			WINDOW_HEIGHT - (SpellSlot::ICON_SIZE + SPELLSELECTION_OFFSET.y + SpellSlot::ICON_OFFSET)));
 		
-		slot.setLocked(contains(lockedMagic, slot.getSpellType()));
-		slot.playAnimation(m_spellManager->getCooldown(it->getSpellData().id));
+		slot->setLocked(contains(lockedMagic, slot->getSpellType()));
+		slot->playAnimation(m_spellManager->getCooldown(it->getSpellData().id));
 
 		m_spellSlots.push_back(slot);
 
@@ -76,10 +76,10 @@ bool SpellSelection::isSlotLocked(int spellNr) const {
 	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size())) {
 		return false;
 	}
-	return m_spellSlots.at(spellNr).isLocked();
+	return m_spellSlots.at(spellNr)->isLocked();
 }
 
-std::vector<SpellSlot>& SpellSelection::getSlots() {
+std::vector<SpellSlot*>& SpellSelection::getSlots() {
 	return m_spellSlots;
 }
 

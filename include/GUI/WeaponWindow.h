@@ -69,7 +69,7 @@ private:
 	BitmapText m_weaponName;
 	BitmapText m_noSlotsText;
 
-	std::vector<std::pair<SpellSlot, std::vector<ModifierSlot>>> m_weaponSlots;
+	std::vector<std::pair<SpellSlot*, std::vector<ModifierSlot*>>> m_weaponSlots;
 
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);

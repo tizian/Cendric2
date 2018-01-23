@@ -1,6 +1,8 @@
 #include "ScreenOverlays/EnemyDefeatedScreenOverlay.h"
 #include "ResourceManager.h"
 #include "GUI/GUIConstants.h"
+#include "GlobalResource.h"
+#include "TextProvider.h"
 
 const float YOFFSET = 0.5f * WINDOW_HEIGHT;
 const float COLUMN_MARGIN = 20.f;

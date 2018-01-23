@@ -58,7 +58,7 @@ private:
 
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
-	void calculateSlotPositions(std::map<std::string, InventorySlot>& slots);
+	void calculateSlotPositions(std::map<std::string, InventorySlot*>& slots);
 
 	Window* m_window;
 
@@ -74,12 +74,12 @@ private:
 
 	sf::Sprite m_goldSprite;
 
-	std::map<std::string, InventorySlot> m_equipmentItems;
-	std::map<std::string, InventorySlot> m_consumableItems;
-	std::map<std::string, InventorySlot> m_documentItems;
-	std::map<std::string, InventorySlot> m_questItems;
-	std::map<std::string, InventorySlot> m_keyItems;
-	std::map<std::string, InventorySlot> m_miscItems;
+	std::map<std::string, InventorySlot*> m_equipmentItems;
+	std::map<std::string, InventorySlot*> m_consumableItems;
+	std::map<std::string, InventorySlot*> m_documentItems;
+	std::map<std::string, InventorySlot*> m_questItems;
+	std::map<std::string, InventorySlot*> m_keyItems;
+	std::map<std::string, InventorySlot*> m_miscItems;
 
 	ItemType m_currentTab;
 	// first is the id, the second is VOID when it is no equiment slot and an Item Type when it is an equipment slot
@@ -137,5 +137,5 @@ private:
 
 	static const float INVENTORY_WIDTH;
 
-	std::map<ItemType, std::map<std::string, InventorySlot>*> m_typeMap;
+	std::map<ItemType, std::map<std::string, InventorySlot*>*> m_typeMap;
 };

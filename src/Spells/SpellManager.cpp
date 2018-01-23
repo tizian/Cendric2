@@ -139,7 +139,7 @@ bool SpellManager::setCurrentSpell(int spellNr) {
 		m_currentSpell = -1;
 		return false;
 	}
-	if (m_spellSelection != nullptr && m_spellSelection->getSlots()[spellNr].isLocked()) {
+	if (m_spellSelection != nullptr && m_spellSelection->getSlots()[spellNr]->isLocked()) {
 		g_logger->logInfo("SpellManager::setCurrentSpell", "This spell is locked. Spell nr: " + std::to_string(spellNr));
 		m_currentSpell = -1;
 		return false;

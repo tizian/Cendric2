@@ -2,6 +2,7 @@
 #include "GUI/Inventory.h"
 #include "GUI/GUIConstants.h"
 #include "Enums/EnumNames.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 #include "ResourceManager.h"
 #include "GlobalResource.h"
@@ -27,7 +28,9 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 		m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 	}
 
-	m_tooltipWindow.setText(g_textProvider->getText(itemID, "item"));
+	m_tooltipComponent = new TooltipWindowComponent("", this);
+	m_tooltipComponent->setTooltipText(g_textProvider->getText(itemID, "item"));
+	addComponent(m_tooltipComponent);
 
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
 
@@ -50,8 +53,11 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos,
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
-	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getItemTypeName(equipmentType)) + " (" 
+
+	m_tooltipComponent = new TooltipWindowComponent("", this);
+	m_tooltipComponent->setTooltipText(g_textProvider->getText(EnumNames::getItemTypeName(equipmentType)) + " ("
 		+ g_textProvider->getText("Empty") + ")");
+	addComponent(m_tooltipComponent);
 
 	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY);
 	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY_SELECTED);
@@ -77,6 +83,14 @@ void InventorySlot::render(sf::RenderTarget& renderTarget) {
 void InventorySlot::setAmount(int amount) {
 	m_amountText.setString(amount < 0 ? "" : std::to_string(amount));
 	setPosition(getPosition());
+}
+
+const std::string& InventorySlot::getItemID() const { 
+	return m_itemID; 
+}
+
+const Item* InventorySlot::getItem() const { 
+	return g_resourceManager->getItem(m_itemID); 
 }
 
 void InventorySlot::setAlpha(sf::Uint8 alpha) {

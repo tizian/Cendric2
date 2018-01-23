@@ -4,8 +4,7 @@
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "GlobalResource.h"
-
-using namespace std;
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 const float ModifierSlot::SIZE = 66.f;
 const float ModifierSlot::ICON_OFFSET = 8.f;
@@ -34,7 +33,7 @@ ModifierSlot::ModifierSlot(const SpellModifier& modifier) {
 
 void ModifierSlot::initTooltip() {
 	if (SpellModifierType::VOID == m_spellModifier.type) {
-		m_tooltipWindow.setText("(" + g_textProvider->getText("Empty") + ")");
+		m_tooltipComponent->setTooltipText("(" + g_textProvider->getText("Empty") + ")");
 		return;
 	}
 
@@ -46,8 +45,8 @@ void ModifierSlot::initTooltip() {
 
 	description.append(g_textProvider->getText("Level"));
 	description.append(": ");
-	description.append(to_string(m_spellModifier.level));
+	description.append(std::to_string(m_spellModifier.level));
 	description.append("\n");
 
-	m_tooltipWindow.setText(description);
+	m_tooltipComponent->setTooltipText(description);
 }

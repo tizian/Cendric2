@@ -18,8 +18,8 @@ public:
 
 	void setAmount(int amount);
 
-	inline const std::string& getItemID() const { return m_itemID; }
-	inline const Item* getItem() const { return g_resourceManager->getItem(m_itemID); }
+	const std::string& getItemID() const;
+	const Item* getItem() const;
 	bool isEquipmentOrigin() const { return m_isEquipmentOrigin; }
 
 	inline ItemType getItemType() const { return m_type; }

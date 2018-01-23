@@ -35,6 +35,9 @@ public:
 	static const float SIZE;
 	static const float ICON_OFFSET;
 
+protected:
+	void adjustTooltipOffset() override;
+
 private:
 	// consumes the item
 	void consume();

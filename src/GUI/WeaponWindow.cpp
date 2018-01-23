@@ -55,36 +55,36 @@ void WeaponWindow::reload() {
 	}
 	m_noSlotsText.setString("");
 	for (auto& it : m_weapon->getWeaponSlots()) {
-		SpellSlot spellSlot;
+		SpellSlot* spellSlot;
 		if (it.spellSlot.spellID == SpellID::VOID) {
-			spellSlot = SpellSlot(it.spellSlot.spellType);
+			spellSlot = new SpellSlot(it.spellSlot.spellType);
 		}
 		else {
-			spellSlot = SpellSlot(it.spellSlot.spellID, it.spellSlot.spellType == SpellType::Meta);
+			spellSlot = new SpellSlot(it.spellSlot.spellID, it.spellSlot.spellType == SpellType::Meta);
 		}
-		spellSlot.setPosition(sf::Vector2f(xOffset, yOffset));
-		spellSlot.setNr(slotNr);
+		spellSlot->setPosition(sf::Vector2f(xOffset, yOffset));
+		spellSlot->setNr(slotNr);
 		xOffset += SpellSlot::SIZE + MARGIN;
 
-		std::vector<ModifierSlot> modifiers;
+		std::vector<ModifierSlot*> modifiers;
 		for (auto& mod : it.spellModifiers) {
-			modifiers.push_back(ModifierSlot(mod));
+			modifiers.push_back(new ModifierSlot(mod));
 		}
 		for (size_t i = 0; i < modifiers.size(); ++i) {
-			auto& mod = modifiers[i];
-			mod.setPosition(sf::Vector2f(xOffset, yOffset));
-			mod.setSpellSlotNr(slotNr);
-			mod.setNr(static_cast<int>(i));
+			auto mod = modifiers[i];
+			mod->setPosition(sf::Vector2f(xOffset, yOffset));
+			mod->setSpellSlotNr(slotNr);
+			mod->setNr(static_cast<int>(i));
 			xOffset += ModifierSlot::SIZE + MARGIN;
 		}
 
 		yOffset += SpellSlot::SIZE + MARGIN;
 		xOffset = LEFT + GUIConstants::TEXT_OFFSET / 2.f + SpellSlot::ICON_OFFSET;
 		slotNr++;
-		m_weaponSlots.push_back(std::pair<SpellSlot, std::vector<ModifierSlot>>({ spellSlot, modifiers }));
+		m_weaponSlots.push_back(std::pair<SpellSlot*, std::vector<ModifierSlot*>>({ spellSlot, modifiers }));
 	}
 	if (m_selectedSpellSlot != nullptr && m_selectedSpellSlot->getNr() != -1 && static_cast<int>(m_weaponSlots.size()) > m_selectedSpellSlot->getNr()) {
-		m_weaponSlots.at(m_selectedSpellSlot->getNr()).first.select();
+		m_weaponSlots.at(m_selectedSpellSlot->getNr()).first->select();
 	}
 	else {
 		m_selectedSpellSlot = nullptr;
@@ -99,7 +99,7 @@ void WeaponWindow::reloadSpellDesc() {
 	std::vector<SpellModifier> modifiers;
 	if (m_selectedSpellSlot->getNr() != -1) {
 		for (auto& it : m_weaponSlots.at(m_selectedSpellSlot->getNr()).second) {
-			modifiers.push_back(it.getModifier());
+			modifiers.push_back(it->getModifier());
 		}
 	}
 	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, m_core->getTotalAttributes());
@@ -137,6 +137,13 @@ WeaponWindow::~WeaponWindow() {
 }
 
 void WeaponWindow::clearAllSlots() {
+	for (auto& it : m_weaponSlots) {
+		delete it.first;
+
+		for (auto it2 : it.second) {
+			delete it2;
+		}
+	}
 	m_weaponSlots.clear();
 	m_selectedModifierSlot = nullptr;
 	if (m_selectedSpellSlot == nullptr) {
@@ -150,30 +157,30 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 	if (m_requireReload) reload();
 
 	for (auto& it : m_weaponSlots) {
-		it.first.update(frameTime);
-		if (it.first.isMousedOver() && !m_hasDraggingStarted) {
-			selectSpellSlot(&it.first);
-			if (m_isModifiable && it.first.isDoubleClicked()) {
-				removeSpell(it.first);
+		it.first->update(frameTime);
+		if (it.first->isMousedOver() && !m_hasDraggingStarted) {
+			selectSpellSlot(it.first);
+			if (m_isModifiable && it.first->isDoubleClicked()) {
+				removeSpell(*it.first);
 				return;
 			}
-			if (m_isModifiable && it.first.isRightClicked()) {
-				removeSpell(it.first);
+			if (m_isModifiable && it.first->isRightClicked()) {
+				removeSpell(*it.first);
 				return;
 			}
 		}
 		
-		for (auto& it2 : it.second) {
-			it2.update(frameTime);
-			if (it2.isClicked()) {
-				selectModifierSlot(&it2);
-				if (m_isModifiable && it2.isDoubleClicked()) {
-					removeModifier(it2);
+		for (auto it2 : it.second) {
+			it2->update(frameTime);
+			if (it2->isClicked()) {
+				selectModifierSlot(it2);
+				if (m_isModifiable && it2->isDoubleClicked()) {
+					removeModifier(*it2);
 				}
 				return;
 			}
-			else if (m_isModifiable && it2.isRightClicked()) {
-				removeModifier(it2);
+			else if (m_isModifiable && it2->isRightClicked()) {
+				removeModifier(*it2);
 				return;
 			}
 		}
@@ -313,10 +320,10 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 	m_weaponSlot->render(target);
 
 	for (auto& it : m_weaponSlots) {
-		it.first.render(target);
-		it.first.renderAfterForeground(target);
-		for (auto& it2 : it.second) {
-			it2.render(target);
+		it.first->render(target);
+		it.first->renderAfterForeground(target);
+		for (auto it2 : it.second) {
+			it2->render(target);
 		}
 	}
 
@@ -328,20 +335,20 @@ void WeaponWindow::render(sf::RenderTarget& target) {
 	}
 
 	for (auto& it : m_weaponSlots) {
-		for (auto& it2 : it.second) {
-			it2.renderAfterForeground(target);
+		for (auto it2 : it.second) {
+			it2->renderAfterForeground(target);
 		}
 	}
 }
 
 void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight) {
 	for (auto& it : m_weaponSlots) {
-		if (!highlight || it.first.getSpellType() == SpellType::Meta || it.first.getSpellType() == type) {
+		if (!highlight || it.first->getSpellType() == SpellType::Meta || it.first->getSpellType() == type) {
 			if (highlight) {
-				it.first.highlight();
+				it.first->highlight();
 			}
 			else {
-				it.first.unhighlight();
+				it.first->unhighlight();
 			}
 		}
 	}
@@ -349,14 +356,14 @@ void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight) {
 
 void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight) {
 	for (auto& it : m_weaponSlots) {
-		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
+		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first->getSpellID());
 		if (!highlight || contains(allowedMods, type)) {
 			for (auto& it2 : it.second) {
 				if (highlight) {
-					it2.highlight();
+					it2->highlight();
 				}
 				else {
-					it2.unhighlight();
+					it2->unhighlight();
 				}
 			}
 		}
@@ -370,11 +377,11 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 	bool modifierPlaced = false;
 
 	for (auto& it : m_weaponSlots) {
-		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first.getSpellID());
+		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first->getSpellID());
 		if (!contains(allowedMods, modifier.type)) continue;
-		for (auto& modifierSlot : it.second) {
-			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot.getBoundingBox())) {
-				m_core->addModifier(ms->getModifier(), modifierSlot.getSpellSlotNr(), modifierSlot.getNr());
+		for (auto modifierSlot : it.second) {
+			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot->getBoundingBox())) {
+				m_core->addModifier(ms->getModifier(), modifierSlot->getSpellSlotNr(), modifierSlot->getNr());
 				g_resourceManager->playSound(GlobalResource::SOUND_GUI_GEM);
 				m_requireReload = true;
 				modifierPlaced = true;
@@ -392,10 +399,10 @@ void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	const SpellSlot* ss = static_cast<const SpellSlot*>(clone->getOriginalSlot());
 	SpellType type = SpellData::getSpellData(ss->getSpellID()).spellType;
 	for (auto& slot : m_weaponSlots) {
-		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) 
-			&& fastIntersect(*clone->getBoundingBox(), *slot.first.getBoundingBox())) 
+		if ((slot.first->getSpellType() == SpellType::Meta || type == slot.first->getSpellType())
+			&& fastIntersect(*clone->getBoundingBox(), *slot.first->getBoundingBox()))
 		{
-			m_core->addSpell(ss->getSpellID(), slot.first.getNr());
+			m_core->addSpell(ss->getSpellID(), slot.first->getNr());
 			g_resourceManager->playSound(GlobalResource::SOUND_GUI_SPELL);
 			m_requireReload = true;
 			break;
@@ -409,23 +416,23 @@ void WeaponWindow::equipSpell(const SpellSlot* spellSlot) {
 	bool isEquipped = false;
 	SpellType type = spellSlot->getSpellType();
 	for (auto& slot : m_weaponSlots) {
-		if (slot.first.getSpellID() == spellSlot->getSpellID()) {
+		if (slot.first->getSpellID() == spellSlot->getSpellID()) {
 			// spell already equipped.
 			return;
 		}
 	}
 	for (auto& slot : m_weaponSlots) {
-		if ((slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType())
-			&& slot.first.isEmpty()) {
-			m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+		if ((slot.first->getSpellType() == SpellType::Meta || type == slot.first->getSpellType())
+			&& slot.first->isEmpty()) {
+			m_core->addSpell(spellSlot->getSpellID(), slot.first->getNr());
 			isEquipped = true;
 			break;
 		}
 	}
 	if (!isEquipped) {
 		for (auto& slot : m_weaponSlots) {
-			if (slot.first.getSpellType() == SpellType::Meta || type == slot.first.getSpellType()) {
-				m_core->addSpell(spellSlot->getSpellID(), slot.first.getNr());
+			if (slot.first->getSpellType() == SpellType::Meta || type == slot.first->getSpellType()) {
+				m_core->addSpell(spellSlot->getSpellID(), slot.first->getNr());
 				break;
 			}
 		}

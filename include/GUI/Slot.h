@@ -4,12 +4,13 @@
 #include "World/GameObject.h"
 
 #include "GUI/BitmapText.h"
-#include "GUI/TooltipWindow.h"
+
+class TooltipWindowComponent;
 
 class Slot : virtual public GameObject {
 	friend class SlotClone;
 public:
-	Slot() {};
+	Slot();
 	virtual ~Slot() {};
 
 	void initSlot();
@@ -28,11 +29,9 @@ public:
 	virtual void update(const sf::Time& frameTime) override;
 
 	void render(sf::RenderTarget& renderTarget) override;
-	virtual void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 
 	virtual void onLeftJustPressed() override;
 	virtual void onRightClick() override;
-	virtual void onMouseOver() override;
 
 	inline bool isClicked() const { return m_isClicked; }
 	inline bool isRightClicked() const { return m_isRightClicked; }
@@ -71,8 +70,8 @@ protected:
 	const sf::Texture* m_borderTextureSelected = nullptr;
 	const sf::Texture* m_highlightTexture = nullptr;
 
-	bool m_showTooltip = false;
-	TooltipWindow m_tooltipWindow;
-
 	static const sf::Time DOUBLE_CLICK_TIME;
+
+	TooltipWindowComponent* m_tooltipComponent;
+	virtual void adjustTooltipOffset();
 };

@@ -46,7 +46,7 @@ private:
 	bool m_isModifiable = false;
 
 	std::vector<ItemType> m_types;
-	std::map<ItemType, InventorySlot> m_slots;
+	std::map<ItemType, InventorySlot*> m_slots;
 	sf::Vector2f m_position;
 
 	Window* m_window;

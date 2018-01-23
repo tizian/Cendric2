@@ -2,6 +2,7 @@
 #include "GUI/GUIConstants.h"
 #include "ResourceManager.h"
 #include "GlobalResource.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 const float SpellSlot::SIZE = 86.f;
 const float SpellSlot::ICON_OFFSET = 18.f;
@@ -19,7 +20,7 @@ SpellSlot::SpellSlot(SpellType type) {
 	m_isEmpty = true;
 
 	m_iconTextureRect = sf::IntRect(250, (static_cast<int>(m_spellType) - 1) * 50, 50, 50);
-	m_tooltipWindow.setText(
+	m_tooltipComponent->setTooltipText(
 		g_textProvider->getText("EmptySlot") + " (" + 
 		g_textProvider->getText(EnumNames::getSpellTypeName(type)) + ")");
 
@@ -34,7 +35,7 @@ SpellSlot::SpellSlot(SpellID id, bool isMeta) {
 	m_isChopSlot = (id == SpellID::Chop);
 	m_inputKeyID = Key::VOID;
 	m_isEmpty = false;
-	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getSpellIDName(id)));
+	m_tooltipComponent->setTooltipText(g_textProvider->getText(EnumNames::getSpellIDName(id)));
 
 	initSpellSlot();
 }
@@ -46,7 +47,7 @@ SpellSlot::SpellSlot(const SpellData& bean) {
 	m_isChopSlot = (bean.id == SpellID::Chop);
 	m_inputKeyID = bean.inputKey;
 	m_isEmpty = false;
-	m_tooltipWindow.setText(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
+	m_tooltipComponent->setTooltipText(g_textProvider->getText(EnumNames::getSpellIDName(bean.id)));
 
 	initSpellSlot();
 }

@@ -1,11 +1,14 @@
 #include "GUI/Slot.h"
-#include "GUI/TooltipWindow.h"
-
-using namespace std;
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 const float Slot::ICON_SIZE = 50.f;
 const float Slot::TOOLTIP_TOP = 10.f;
 const sf::Time Slot::DOUBLE_CLICK_TIME = sf::milliseconds(500);
+
+Slot::Slot() {
+	m_tooltipComponent = new TooltipWindowComponent("", this);
+	addComponent(m_tooltipComponent);
+}
 
 void Slot::initSlot() {
 	float size = getConfiguredSize();
@@ -32,13 +35,17 @@ void Slot::initSlot() {
 }
 
 void Slot::setPosition(const sf::Vector2f& pos) {
+	adjustTooltipOffset();
 	GameObject::setPosition(pos);
 	float iconOffset = getConfiguredIconOffset();
 	m_backgroundRect.setPosition(pos);
 	m_iconRect.setPosition(pos);
 	m_overlayRect.setPosition(pos);
 	m_borderRect.setPosition(pos.x - iconOffset, pos.y - iconOffset);
-	m_tooltipWindow.setPosition(sf::Vector2f(pos.x, pos.y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
+}
+
+void Slot::adjustTooltipOffset() {
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, -m_tooltipComponent->getHeight() - TOOLTIP_TOP));
 }
 
 void Slot::activate() {
@@ -97,19 +104,6 @@ void Slot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_iconRect);
 	renderTarget.draw(m_overlayRect);
 	renderTarget.draw(m_borderRect);
-}
-
-void Slot::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	GameObject::renderAfterForeground(renderTarget);
-	if (m_showTooltip) {
-		m_tooltipWindow.render(renderTarget);
-		m_showTooltip = false;
-	}
-}
-
-void Slot::onMouseOver() {
-	m_showTooltip = true;
-	m_isMousedOver = true;
 }
 
 void Slot::onLeftJustPressed() {

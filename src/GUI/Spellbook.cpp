@@ -61,11 +61,27 @@ Spellbook::~Spellbook() {
 }
 
 void Spellbook::clearAllSlots() {
-	m_modifierSlots.clear();
+	CLEAR_VECTOR(m_modifierSlots);
 	m_modifierTexts.clear();
+
+	for (auto it : m_necromancySlots) {
+		delete it.first;
+	}
 	m_necromancySlots.clear();
+
+	for (auto it : m_elementalSlots) {
+		delete it.first;
+	}
 	m_elementalSlots.clear();
+
+	for (auto it : m_divineSlots) {
+		delete it.first;
+	}
 	m_divineSlots.clear();
+
+	for (auto it : m_twilightSlots) {
+		delete it.first;
+	}
 	m_twilightSlots.clear();
 	m_selectedModifierSlot = nullptr;
 	m_weaponWindow->m_selectedSpellSlot = nullptr;
@@ -85,10 +101,10 @@ void Spellbook::update(const sf::Time& frameTime) {
 
 		if (m_currentTab == SpellType::VOID) {
 			// handle gems
-			for (auto& it : m_modifierSlots) {
-				it.update(frameTime);
-				if (it.isClicked()) {
-					selectModifierSlot(&it);
+			for (auto it : m_modifierSlots) {
+				it->update(frameTime);
+				if (it->isClicked()) {
+					selectModifierSlot(it);
 					return;
 				}
 			}
@@ -96,11 +112,11 @@ void Spellbook::update(const sf::Time& frameTime) {
 		else {
 			// handle spells
 			for (auto& it : *(m_typeMap[m_currentTab])) {
-				it.first.update(frameTime);
-				if (it.first.isMousedOver() && !m_hasDraggingStarted) {
-					selectSpellSlot(&it.first);
-					if (it.first.isDoubleClicked() && m_isModifiable) {
-						equipSpell(&it.first);
+				it.first->update(frameTime);
+				if (it.first->isMousedOver() && !m_hasDraggingStarted) {
+					selectSpellSlot(it.first);
+					if (it.first->isDoubleClicked() && m_isModifiable) {
+						equipSpell(it.first);
 					}
 					return;
 				}
@@ -231,8 +247,8 @@ void Spellbook::render(sf::RenderTarget& target) {
 		m_tabBar->render(target);
 
 		if (m_currentTab == SpellType::VOID) {
-			for (auto& it : m_modifierSlots) {
-				it.render(target);
+			for (auto it : m_modifierSlots) {
+				it->render(target);
 			}
 			for (auto& it : m_modifierTexts) {
 				target.draw(it);
@@ -240,8 +256,8 @@ void Spellbook::render(sf::RenderTarget& target) {
 		}
 		else {
 			for (auto& it : *m_typeMap[m_currentTab]) {
-				it.first.render(target);
-				it.first.renderAfterForeground(target);
+				it.first->render(target);
+				it.first->renderAfterForeground(target);
 				target.draw(it.second.first);
 				target.draw(it.second.second);
 			}
@@ -261,8 +277,8 @@ void Spellbook::render(sf::RenderTarget& target) {
 	}
 
 	if (m_currentTab == SpellType::VOID) {
-		for (auto& it : m_modifierSlots) {
-			it.renderAfterForeground(target);
+		for (auto it : m_modifierSlots) {
+			it->renderAfterForeground(target);
 		}
 	}
 }
@@ -378,8 +394,8 @@ void Spellbook::calculateModifierSlots() {
 			SpellModifier modifier;
 			modifier.level = i + 1;
 			modifier.type = it.first;
-			ModifierSlot slot(modifier);
-			slot.setPosition(sf::Vector2f(modifierXOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
+			ModifierSlot* slot = new ModifierSlot(modifier);
+			slot->setPosition(sf::Vector2f(modifierXOffset + (i * (ModifierSlot::SIZE + MARGIN)), yOffset));
 			m_modifierSlots.push_back(slot);
 		}
 		yOffset += ModifierSlot::SIZE + 6.f;
@@ -392,8 +408,8 @@ void Spellbook::calculateSpellSlots() {
 
 	for (auto& it : m_core->getData().spellsLearned) {
 		for (auto& it2 : it.second) {
-			SpellSlot slot = SpellSlot(it2);
-			slot.setPosition(sf::Vector2f(xOffset, yOffset));
+			SpellSlot* slot = new SpellSlot(it2);
+			slot->setPosition(sf::Vector2f(xOffset, yOffset));
 
 			BitmapText text;
 			text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -410,7 +426,7 @@ void Spellbook::calculateSpellSlots() {
 			textDesc.setPosition(sf::Vector2f(xOffset + SpellSlot::ICON_SIZE + SpellSlot::ICON_OFFSET + MARGIN, yOffset + GUIConstants::CHARACTER_SIZE_M + 4.f));
 
 			std::pair<BitmapText, BitmapText> texts = std::pair<BitmapText, BitmapText>(text, textDesc);
-			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot, std::pair<BitmapText, BitmapText>>(slot, texts));
+			m_typeMap.at(it.first)->push_back(std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>(slot, texts));
 			yOffset += SpellSlot::SIZE + MARGIN;
 		}
 

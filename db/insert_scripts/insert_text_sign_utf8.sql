@@ -65,3 +65,4 @@ Come and enjoy!','DIE ROTE PERLE
 Echte Aufsteller!','DI ROT PERLE
 
 Echti Ufsteller!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pirates','sign','Arrr!','Arrr!','Arrr!');

@@ -4,8 +4,7 @@
 #include "Screens/LevelScreen.h"
 #include "ResourceManager.h"
 #include "GlobalResource.h"
-
-using namespace std;
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 const float QuickSlot::SIZE = 58.f;
 const float QuickSlot::ICON_OFFSET = 4.f;
@@ -52,12 +51,16 @@ QuickSlot::QuickSlot(WorldInterface* _interface, const std::string& itemID, Key 
 
 void QuickSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
-	m_tooltipWindow.setPosition(sf::Vector2f(pos.x - m_tooltipWindow.getSize().x + ICON_SIZE, pos.y - m_tooltipWindow.getSize().y - TOOLTIP_TOP));
+	
 	sf::Vector2f positionOffset(QuickSlot::ICON_SIZE / 2.f - m_keyText.getLocalBounds().width / 2.f, QuickSlot::SIZE - QuickSlot::ICON_OFFSET / 2.f);
 	m_keyText.setPosition(pos + positionOffset);
 	m_amountText.setPosition(sf::Vector2f(
 		pos.x + ICON_SIZE - m_amountText.getLocalBounds().width,
 		pos.y + ICON_SIZE - m_amountText.getLocalBounds().height));
+}
+
+void QuickSlot::adjustTooltipOffset() {
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(m_tooltipComponent->getWidth() + ICON_SIZE, -m_tooltipComponent->getHeight() - TOOLTIP_TOP));
 }
 
 void QuickSlot::setItemID(const std::string& itemID) {
@@ -97,7 +100,7 @@ void QuickSlot::reload() {
 		m_keyText.setColor(COLOR_GREY);
 		m_amountText.setString("");
 		m_itemID = "";
-		m_tooltipWindow.setText("(" + g_textProvider->getText("Empty") + ")");
+		m_tooltipComponent->setTooltipText("(" + g_textProvider->getText("Empty") + ")");
 	}
 	else {
 		// the slot is filled
@@ -112,18 +115,18 @@ void QuickSlot::reload() {
 			static_cast<int>(ICON_SIZE),
 			static_cast<int>(ICON_SIZE)));
 
-		m_amountText.setString(to_string(amount));
+		m_amountText.setString(std::to_string(amount));
 		m_keyText.setColor(COLOR_WHITE);
 
 		m_amountText.setPosition(sf::Vector2f(
 			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
 			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
 
-		m_tooltipWindow.setMaxWidth(300);
+		m_tooltipComponent->setMaxWidth(300);
 
 		auto tooltip = g_textProvider->getText(m_itemID, "item") + "\n\n";
 		AttributeData::appendAttributes(tooltip, item->getAttributes());
-		m_tooltipWindow.setText(tooltip);
+		m_tooltipComponent->setTooltipText(tooltip);
 	}
 
 	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);
