@@ -5,7 +5,7 @@
 #include "GUI/BitmapText.h"
 #include "World/Item.h"
 
-class InventorySlot final : public Slot {
+class InventorySlot final : public virtual Slot {
 public:
 	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const std::string& itemID, int amount, bool isEquipmentOrigin = false);

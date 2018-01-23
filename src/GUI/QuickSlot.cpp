@@ -60,7 +60,7 @@ void QuickSlot::setPosition(const sf::Vector2f& pos) {
 }
 
 void QuickSlot::adjustTooltipOffset() {
-	m_tooltipComponent->setWindowOffset(sf::Vector2f(m_tooltipComponent->getWidth() + ICON_SIZE, -m_tooltipComponent->getHeight() - TOOLTIP_TOP));
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(-m_tooltipComponent->getWidth() + ICON_SIZE, -m_tooltipComponent->getHeight() - TOOLTIP_TOP));
 }
 
 void QuickSlot::setItemID(const std::string& itemID) {

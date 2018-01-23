@@ -9,7 +9,7 @@
 #include "ResourceManager.h"
 #include "Enums/EnumNames.h"
 
-class SpellSlot final : public Slot {
+class SpellSlot final : public virtual Slot {
 public:
 	// creates an empty spell slot with type "type"
 	SpellSlot(SpellType type = SpellType::VOID);

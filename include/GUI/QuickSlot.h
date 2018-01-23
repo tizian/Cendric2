@@ -11,7 +11,7 @@ class CharacterCore;
 class WorldInterface;
 class WorldScreen;
 
-class QuickSlot final : public Slot {
+class QuickSlot final : public virtual Slot {
 public:
 	// an empty slot is initialized with an empty itemID
 	QuickSlot(WorldInterface* _interface, const std::string& itemID, Key key);

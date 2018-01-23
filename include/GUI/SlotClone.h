@@ -16,7 +16,7 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& pos) override;
 
-	const Slot *getOriginalSlot() const;
+	const Slot* getOriginalSlot() const;
 
 private:
 	const Slot* m_original;

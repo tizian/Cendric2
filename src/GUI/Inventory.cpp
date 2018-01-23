@@ -399,7 +399,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 
 void Inventory::removeEquipmentItem() {
 	if (fastIntersect(*m_window->getBoundingBox(), *m_currentClone->getBoundingBox())) {
-		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
+		const InventorySlot* is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
 		m_core->equipItem("", is->getItemType());
 		reload();
 	}
@@ -444,9 +444,9 @@ void Inventory::handleMapDrop() {
 		m_mapInterface->highlightQuickslots(false);
 	}
 	else if (Item::isEquipmentType(type)) {
-		m_equipment->notifyEquipmentDrop(m_currentClone);
-		const InventorySlot *is = static_cast<const InventorySlot *>(m_currentClone->getOriginalSlot());
+		const InventorySlot* is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
 		m_equipment->highlightEquipmentSlot(is->getItemType(), false);
+		m_equipment->notifyEquipmentDrop(m_currentClone);
 	}
 }
 

@@ -125,6 +125,10 @@ void Slot::onRightClick() {
 	g_inputController->lockAction();
 }
 
+void Slot::onMouseOver() {
+	m_isMousedOver = true;
+}
+
 GameObjectType Slot::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }

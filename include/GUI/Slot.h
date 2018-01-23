@@ -32,6 +32,7 @@ public:
 
 	virtual void onLeftJustPressed() override;
 	virtual void onRightClick() override;
+	virtual void onMouseOver() override;
 
 	inline bool isClicked() const { return m_isClicked; }
 	inline bool isRightClicked() const { return m_isRightClicked; }

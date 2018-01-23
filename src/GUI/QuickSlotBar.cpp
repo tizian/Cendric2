@@ -54,7 +54,7 @@ void QuickSlotBar::update(const sf::Time& frameTime) {
 
 void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) {
 	if (item == nullptr) return;
-	const InventorySlot *is = static_cast<const InventorySlot *>(item->getOriginalSlot());
+	const InventorySlot* is = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (fastIntersect(*item->getBoundingBox(), *(m_quickSlot1->getBoundingBox()))) {
 		m_quickSlot1->setItemID(is->getItemID());
 		return;

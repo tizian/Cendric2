@@ -1,7 +1,5 @@
 #include "GUI/SlotClone.h" 
 
-using namespace std;
-
 SlotClone::SlotClone(const Slot* original) {
 	m_original = original;
 
@@ -26,7 +24,7 @@ GameObjectType SlotClone::getConfiguredType() const {
 	return GameObjectType::_Interface;
 }
 
-const Slot *SlotClone::getOriginalSlot() const {
+const Slot* SlotClone::getOriginalSlot() const {
 	return m_original;
 }
 

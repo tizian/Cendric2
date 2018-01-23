@@ -28,10 +28,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 		m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
 	}
 
-	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setTooltipText(g_textProvider->getText(itemID, "item"));
-	addComponent(m_tooltipComponent);
-
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_ITEMS);
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -54,10 +51,8 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos,
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
 
-	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setTooltipText(g_textProvider->getText(EnumNames::getItemTypeName(equipmentType)) + " ("
 		+ g_textProvider->getText("Empty") + ")");
-	addComponent(m_tooltipComponent);
 
 	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY);
 	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_INVENTORY_SELECTED);

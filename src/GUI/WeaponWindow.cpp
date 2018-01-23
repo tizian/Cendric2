@@ -372,7 +372,7 @@ void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight
 
 void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
-	const ModifierSlot* ms = static_cast<const ModifierSlot*>(clone->getOriginalSlot());
+	const ModifierSlot* ms = dynamic_cast<const ModifierSlot*>(clone->getOriginalSlot());
 	SpellModifier modifier = ms->getModifier();
 	bool modifierPlaced = false;
 
@@ -396,7 +396,7 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 
 void WeaponWindow::notifySpellDrop(SlotClone* clone) {
 	if (clone == nullptr) return;
-	const SpellSlot* ss = static_cast<const SpellSlot*>(clone->getOriginalSlot());
+	const SpellSlot* ss = dynamic_cast<const SpellSlot*>(clone->getOriginalSlot());
 	SpellType type = SpellData::getSpellData(ss->getSpellID()).spellType;
 	for (auto& slot : m_weaponSlots) {
 		if ((slot.first->getSpellType() == SpellType::Meta || type == slot.first->getSpellType())

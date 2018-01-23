@@ -108,7 +108,7 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 
 void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (item == nullptr) return;
-	const InventorySlot* slot = static_cast<const InventorySlot*>(item->getOriginalSlot());
+	const InventorySlot* slot = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (!contains(m_slots, slot->getItemType())) return;
 	const bool isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
 
@@ -147,7 +147,7 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot() {
-	for (auto& it : m_slots) {
+	for (auto it : m_slots) {
 		if (it.second->isMousedOver()) {
 			return it.second;
 		}
