@@ -3,7 +3,7 @@
 #include "global.h"
 #include "Level/Enemies/RoyalguardBoss.h"
 
-class RoyalguardTBoss final : public virtual RoyalguardBoss {
+class RoyalguardTBoss final : public RoyalguardBoss {
 public:
 	RoyalguardTBoss(const Level* level, Screen* screen);
 

@@ -7,7 +7,7 @@
 class CharacterCore;
 class ModifierDescriptionWindow;
 
-class ModifierSlot final : public virtual Slot {
+class ModifierSlot final : public Slot {
 public:
 	ModifierSlot(const SpellModifier& modifier);
 

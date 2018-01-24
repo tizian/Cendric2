@@ -6,7 +6,7 @@
 #include "GUI/TooltipWindow.h"
 
 // A game object component that holds a tooltip in a window
-class TooltipWindowComponent final : public virtual GameObjectComponent {
+class TooltipWindowComponent final : public GameObjectComponent {
 public:
 	TooltipWindowComponent(const std::string& tooltip, GameObject* parent);
 

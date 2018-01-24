@@ -11,7 +11,7 @@ namespace particles {
 	class AngledVelocityGenerator;
 }
 
-class RoyalguardIBoss final : public virtual RoyalguardBoss {
+class RoyalguardIBoss final : public RoyalguardBoss {
 public:
 	RoyalguardIBoss(const Level* level, Screen* screen);
 
