@@ -5,12 +5,12 @@
 #include "Structs/QuestData.h"
 
 class CharacterCore;
-class TooltipComponent;
+class TooltipWindowComponent;
 
 // a quest marker on a quest entry or on the minimap
 class QuestMarker : public GameObject {
 public:
-	QuestMarker(const QuestData& questData, const CharacterCore* core);
+	QuestMarker(const QuestData& questData, CharacterCore* core);
 	virtual ~QuestMarker() {}
 
 	void setPosition(const sf::Vector2f& pos) override;
@@ -25,8 +25,8 @@ public:
 
 protected:
 	QuestData m_questData;
-	const CharacterCore* m_characterCore;
-	TooltipComponent* m_tooltipComponent;
+	CharacterCore* m_characterCore;
+	TooltipWindowComponent* m_tooltipComponent;
 
 private:
 	sf::Sprite m_sprite;

@@ -90,6 +90,10 @@ void WorldInterface::reloadLevelOverlay() {
 	m_mapOverlay->notifyLevelOverlayReload();
 }
 
+void WorldInterface::jumpToQuestMarker(const std::string questId, const QuestMarkerData& data) {
+	m_mapOverlay->notifyJumpToQuest(questId, data);
+}
+
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }

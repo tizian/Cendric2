@@ -367,6 +367,15 @@ void MapOverlay::reloadWaypoints() {
 	}
 }
 
+void MapOverlay::reloadQuestMarkers() {
+
+}
+
+void MapOverlay::notifyJumpToQuest(const std::string questId, const QuestMarkerData& data) {
+	show();
+	setMap(data.mapId);
+}
+
 bool MapOverlay::isVisible() const {
 	return m_isVisible;
 }
@@ -397,6 +406,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 void MapOverlay::show() {
 	reloadWaypoints();
+	reloadQuestMarkers();
 	m_mapTabBar->show(m_currentMap);
 	m_isVisible = true;
 }

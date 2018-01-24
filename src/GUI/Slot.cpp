@@ -126,6 +126,7 @@ void Slot::onRightClick() {
 }
 
 void Slot::onMouseOver() {
+	GameObject::onMouseOver();
 	m_isMousedOver = true;
 }
 

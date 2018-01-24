@@ -3,6 +3,7 @@
 #include "global.h"
 #include "World/TileMap.h"
 #include "BitmapText.h"
+#include "Structs/QuestData.h"
 
 class WorldScreen;
 class MainCharacter;
@@ -63,8 +64,11 @@ public:
 	void update(const sf::Time& frameTime);
 
 	void reloadWaypoints();
+	void reloadQuestMarkers();
 	void reloadMaps();
+
 	void notifyLevelOverlayReload();
+	void notifyJumpToQuest(const std::string questId, const QuestMarkerData& data);
 
 	void setMap(const std::string& mapID);
 

@@ -2,11 +2,11 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 #include "CharacterCore.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
 
 const int QuestMarker::SIZE = 16;
 
-QuestMarker::QuestMarker(const QuestData& questData, const CharacterCore* core) {
+QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 	m_questData = questData;
 	m_characterCore = core;
 	m_isInputInDefaultView = true;
@@ -14,7 +14,8 @@ QuestMarker::QuestMarker(const QuestData& questData, const CharacterCore* core) 
 	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(SIZE), static_cast<float>(SIZE)));
 	m_sprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
 
-	m_tooltipComponent = new TooltipComponent("", this);
+	m_tooltipComponent = new TooltipWindowComponent("", this);
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, 20.f));
 	addComponent(m_tooltipComponent);
 }
 

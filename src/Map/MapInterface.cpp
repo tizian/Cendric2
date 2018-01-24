@@ -8,7 +8,7 @@ MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 	m_inventory = new Inventory(this);
 	m_characterInfo = new CharacterInfo(screen);
 	m_spellbook = new Spellbook(this, true);
-	m_questLog = new QuestLog(m_core);
+	m_questLog = new QuestLog(this);
 	m_mapOverlay = new MapOverlay(screen, m_mapSidebar);
 
 	m_quickSlotBar->hide();

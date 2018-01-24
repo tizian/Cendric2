@@ -2,9 +2,11 @@
 #include "GUI/QuestDescriptionWindow.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
+#include "GUI/WorldInterface.h"
 #include "GlobalResource.h"
 #include "Structs/QuestData.h"
-#include "GameObjectComponents/TooltipComponent.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
+#include "Screens/WorldScreen.h"
 
 // <<< QUEST LOG >>>
 
@@ -26,8 +28,9 @@ const sf::Vector2f QuestLog::BUTTON_SIZE = sf::Vector2f(SCROLL_WINDOW_WIDTH / 3.
 
 const float QuestLog::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y;
 
-QuestLog::QuestLog(CharacterCore* core) {
-	m_core = core;
+QuestLog::QuestLog(WorldInterface* interface) {
+	m_interface = interface;
+	m_core = m_interface->getCore();
 
 	init();
 }
@@ -252,7 +255,7 @@ void QuestLog::reload() {
 		const QuestData* data = m_core->getQuestData(it.first);
 		if (!data) continue;
 
-		m_stateMap[it.second]->push_back(new QuestEntry(*data, m_core, it.second == QuestState::Started));
+		m_stateMap[it.second]->push_back(new QuestEntry(*data, m_interface, it.second == QuestState::Started));
 		if (it.first == m_selectedQuestID && m_currentTab != it.second) {
 			// assure that an item that is not in the current tab can never be selected
 			hideDescription();
@@ -279,7 +282,7 @@ void QuestLog::hide() {
 
 // <<< QUEST ENTRY >>>
 
-QuestEntry::QuestEntry(const QuestData& data, const CharacterCore* core, bool isActiveQuest) {
+QuestEntry::QuestEntry(const QuestData& data, WorldInterface* interface, bool isActiveQuest) {
 	m_data = data;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
@@ -292,18 +295,18 @@ QuestEntry::QuestEntry(const QuestData& data, const CharacterCore* core, bool is
 	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
 	setInputInDefaultView(true);
 
-	setupQuestMarker(isActiveQuest, core);
+	setupQuestMarker(isActiveQuest, interface);
 }
 
 QuestEntry::~QuestEntry() {
 	delete m_questMarker;
 }
 
-void QuestEntry::setupQuestMarker(bool isActiveQuest, const CharacterCore* core) {
+void QuestEntry::setupQuestMarker(bool isActiveQuest, WorldInterface* interface) {
 	if (!isActiveQuest) return;
 	delete m_questMarker;
 
-	m_questMarker = new LogQuestMarker(m_data, core);
+	m_questMarker = new LogQuestMarker(m_data, interface);
 }
 
 void QuestEntry::update(const sf::Time& frameTime) {
@@ -382,8 +385,9 @@ bool QuestEntry::isSelected() const {
 //////////////// QUEST MARKER /////////////////////
 ///////////////////////////////////////////////////
 
-LogQuestMarker::LogQuestMarker(const QuestData& questData, const CharacterCore* core) :
-	QuestMarker(questData, core) {
+LogQuestMarker::LogQuestMarker(const QuestData& questData, WorldInterface* interface) :
+	QuestMarker(questData, interface->getScreen()->getCharacterCore()) {
+	m_interface = interface;
 	init();
 }
 
@@ -402,6 +406,7 @@ void LogQuestMarker::onRightClick() {
 
 void LogQuestMarker::setActive(bool active) {
 	QuestMarker::setActive(active);
+	m_characterCore->setQuestTracked(m_questData.id, active);
 
 	if (isActive()) {
 		m_tooltipComponent->setTooltipText(g_textProvider->getText("LogQuestMarkerActive"));
@@ -416,5 +421,6 @@ void LogQuestMarker::init() {
 }
 
 void LogQuestMarker::jumpToQuest() {
-
+	// Todo: use correct quest marker
+	m_interface->jumpToQuestMarker(m_questData.id, m_questData.questMarkers[0]);
 }

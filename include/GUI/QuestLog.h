@@ -13,11 +13,12 @@
 class QuestDescriptionWindow;
 class ScrollBar;
 class ScrollHelper;
+class WorldInterface;
 
 // a quest marker on the quest log
 class LogQuestMarker final : public QuestMarker {
 public:
-	LogQuestMarker(const QuestData& questData, const CharacterCore* core);
+	LogQuestMarker(const QuestData& questData, WorldInterface* interface);
 
 	void setActive(bool active) override;
 
@@ -27,12 +28,13 @@ public:
 private:
 	void init();
 	void jumpToQuest();
+	WorldInterface* m_interface;
 };
 
 // a quest entry in the quest log
 class QuestEntry final : public GameObject {
 public:
-	QuestEntry(const QuestData& data, const CharacterCore* core, bool isActiveQuest);
+	QuestEntry(const QuestData& data, WorldInterface* interface, bool isActiveQuest);
 	~QuestEntry();
 
 	void render(sf::RenderTarget& renderTarget) override;
@@ -49,7 +51,7 @@ public:
 	const std::string& getQuestID() const;
 
 private:
-	void setupQuestMarker(bool isActiveQuest, const CharacterCore* core);
+	void setupQuestMarker(bool isActiveQuest, WorldInterface* interface);
 
 	bool m_isSelected = false;
 	bool m_isClicked = false;
@@ -64,7 +66,7 @@ private:
 // it takes its information directly from the character core
 class QuestLog final {
 public:
-	QuestLog(CharacterCore* core);
+	QuestLog(WorldInterface* interface);
 	~QuestLog();
 
 	void show();
@@ -88,6 +90,7 @@ public:
 
 private:
 	CharacterCore* m_core;
+	WorldInterface* m_interface;
 
 	bool m_isVisible = false;
 
