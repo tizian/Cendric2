@@ -90,7 +90,7 @@ void WorldInterface::reloadLevelOverlay() {
 	m_mapOverlay->notifyLevelOverlayReload();
 }
 
-void WorldInterface::jumpToQuestMarker(const std::string questId, const QuestMarkerData& data) {
+void WorldInterface::jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data) {
 	m_mapOverlay->notifyJumpToQuest(questId, data);
 }
 

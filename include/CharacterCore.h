@@ -82,6 +82,8 @@ public:
 	const CharacterCoreData& getData() const;
 	// get explored tiles information
 	ExploredTiles& getExploredTiles();
+	// returns whether a map is already (partially) explored
+	bool isMapExplored(const std::string& mapId) const;
 	// signal enemy kill
 	void setEnemyKilled(const std::string& level, int pos);
 	// signal enemy looted

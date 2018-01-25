@@ -1,8 +1,6 @@
 #include "World/TileMap.h"
 #include "CharacterCore.h"
 
-using namespace std;
-
 bool TileMap::load(const WorldData& data, const std::vector<std::vector<int> >& layers) {
 	if (layers.empty()) return false;
 	m_tilesetPath = data.tileSetPath;

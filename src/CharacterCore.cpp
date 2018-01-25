@@ -205,6 +205,10 @@ ExploredTiles& CharacterCore::getExploredTiles() {
 	return m_data.tilesExplored;
 }
 
+bool CharacterCore::isMapExplored(const std::string& mapId) const {
+	return contains(m_data.tilesExplored, mapId);
+}
+
 void CharacterCore::setEnemyKilled(const std::string& level, int pos) {
 	m_data.enemiesKilled[level].insert(pos);
 }

@@ -34,6 +34,10 @@ Right click to deactivate tracking','Linksklick um auf Karte anzuzeigen
 Rechtsklick um zu deaktivieren','Linksklick zum uf de Charte zeige
 Rechtsklick zum deaktiviere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerInactive','Left click activate tracking','Linksklick um Questverfolgung zu aktivieren','Linksklick zum Questverfolgig aktiviere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQuestMarkerUnreachable','Not reachable!
+Right click to deactivate tracking','Nicht erreichbar!
+Rechtsklick um zu deaktivieren','Nid erreichbar!
+Rechtsklick zum deaktiviere','?');
 
 -- hints
 

@@ -404,11 +404,17 @@ void LogQuestMarker::onRightClick() {
 	setActive(false);
 }
 
-void LogQuestMarker::setActive(bool active) {
-	QuestMarker::setActive(active);
-	m_characterCore->setQuestTracked(m_questData.id, active);
+void LogQuestMarker::execSetActive() {
+	if (isActive() && getCurrentStepData(m_questData, m_characterCore).empty()) {
+		m_markerState = QuestMarkerState::Unreachable;
+	}
 
-	if (isActive()) {
+	m_characterCore->setQuestTracked(m_questData.id, isActive());
+
+	if (m_markerState == QuestMarkerState::Unreachable) {
+		m_tooltipComponent->setTooltipText(g_textProvider->getText("LogQuestMarkerUnreachable"));
+	}
+	else if (isActive()) {
 		m_tooltipComponent->setTooltipText(g_textProvider->getText("LogQuestMarkerActive"));
 	}
 	else {
@@ -421,6 +427,8 @@ void LogQuestMarker::init() {
 }
 
 void LogQuestMarker::jumpToQuest() {
-	// Todo: use correct quest marker
-	m_interface->jumpToQuestMarker(m_questData.id, m_questData.questMarkers[0]);
+	if (m_markerState == QuestMarkerState::Unreachable) return;
+
+	auto markers = getCurrentStepData(m_questData, m_characterCore);
+	m_interface->jumpToQuestMarker(m_questData.id, markers);
 }

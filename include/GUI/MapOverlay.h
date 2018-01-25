@@ -4,8 +4,10 @@
 #include "World/TileMap.h"
 #include "BitmapText.h"
 #include "Structs/QuestData.h"
+#include "GUI/QuestMarker.h"
 
 class WorldScreen;
+class WorldInterface;
 class MainCharacter;
 class MapOverlay;
 class Window;
@@ -45,6 +47,20 @@ private:
 	BitmapText m_tooltip;
 };
 
+// a quest marker on the map
+class MapQuestMarker final : public QuestMarker {
+public:
+	MapQuestMarker(const QuestData& questData, WorldInterface* interface);
+
+	void onLeftClick() override;
+
+private:
+	void init();
+	void jumpToQuest();
+
+	WorldInterface* m_interface;
+};
+
 // the map overlay, as displayed in a map
 // it takes its information from the corresponding world screen.
 class MapOverlay {
@@ -68,9 +84,10 @@ public:
 	void reloadMaps();
 
 	void notifyLevelOverlayReload();
-	void notifyJumpToQuest(const std::string questId, const QuestMarkerData& data);
+	void notifyJumpToQuest(const std::string& questId, const std::vector<QuestMarkerData>& data);
 
-	void setMap(const std::string& mapID);
+	// return whether map has been set
+	bool setMap(const std::string& mapID);
 
 	static std::string getMapSpriteFilename(const std::string& mapID);
 	static std::string getMapIconFilename(const std::string& mapID);
@@ -97,9 +114,11 @@ private:
 
 	sf::Sprite m_mainCharMarker;
 	sf::Image m_levelOverlayIcons;
-	std::vector<WaypointMarker*> m_waypoints;
 	sf::Sprite m_levelOverlaySprite;
 	sf::Texture m_levelOverlayTexture;
+
+	std::vector<WaypointMarker*> m_waypoints;
+	std::vector<MapQuestMarker*> m_questMarkers;
 
 	int m_currentMap = -1;
 	bool m_isVisible = false;

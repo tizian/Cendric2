@@ -49,6 +49,7 @@ MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
 
 MapOverlay::~MapOverlay() {
 	CLEAR_VECTOR(m_waypoints);
+	CLEAR_VECTOR(m_questMarkers);
 	CLEAR_VECTOR(m_maps);
 
 	delete m_window;
@@ -76,16 +77,18 @@ void MapOverlay::update(const sf::Time& frameTime) {
 	m_window->update(frameTime);
 }
 
-void MapOverlay::setMap(const std::string& mapID) {
+bool MapOverlay::setMap(const std::string& mapID) {
 	int index = 0;
 
 	for (auto& it : m_maps) {
 		if (it->mapId == mapID) {
 			setMapIndex(index);
-			break;
+			return true;
 		}
 		index++;
 	}
+
+	return false;
 }
 
 void MapOverlay::setMapIndex(int index) {
@@ -117,16 +120,14 @@ void MapOverlay::setMapIndex(int index) {
 	m_currentMap = index;
 
 	reloadWaypoints();
+	reloadQuestMarkers();
 }
 
 void MapOverlay::updateFogOfWar(MapOverlayData* map) {
 	if (map->isLevel) return;
-	for (auto& it : m_screen->getCharacterCore()->getExploredTiles()) {
-		if (it.first == map->mapId) {
-			map->fogOfWarTileMap.updateFogOfWar(it.second.second);
-			break;
-		}
-	}
+	if (!m_screen->getCharacterCore()->isMapExplored(map->mapId)) return;
+	auto const& currentMap = m_screen->getCharacterCore()->getExploredTiles().at(map->mapId);
+	map->fogOfWarTileMap.updateFogOfWar(currentMap.second);
 }
 
 float MapOverlay::getScale(const sf::Vector2f& mapSize) const {
@@ -371,9 +372,16 @@ void MapOverlay::reloadQuestMarkers() {
 
 }
 
-void MapOverlay::notifyJumpToQuest(const std::string questId, const QuestMarkerData& data) {
-	show();
-	setMap(data.mapId);
+void MapOverlay::notifyJumpToQuest(const std::string& questId, const std::vector<QuestMarkerData>& data) {
+	if (data.empty()) return;
+	
+	if (!setMap(data[0].mapId)) return;
+
+	m_mapTabBar->show(m_currentMap);
+	m_isVisible = true;
+
+	// for all quest markers with this id, use some "highlight"
+	//for (auto& marker : m_)
 }
 
 bool MapOverlay::isVisible() const {
@@ -518,4 +526,29 @@ GameObjectType WaypointMarker::getConfiguredType() const {
 	return _Interface;
 }
 
+
+///////////////////////////////////////////////////
+//////////////// QUEST MARKER /////////////////////
+///////////////////////////////////////////////////
+
+MapQuestMarker::MapQuestMarker(const QuestData& questData, WorldInterface* interface) :
+	QuestMarker(questData, interface->getScreen()->getCharacterCore()) {
+	m_interface = interface;
+	init();
+}
+
+void MapQuestMarker::onLeftClick() {
+	jumpToQuest();
+}
+
+void MapQuestMarker::init() {
+	
+}
+
+void MapQuestMarker::jumpToQuest() {
+	
+
+	auto markers = getCurrentStepData(m_questData, m_characterCore);
+	m_interface->jumpToQuestMarker(m_questData.id, markers);
+}
 

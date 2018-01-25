@@ -64,7 +64,7 @@ public:
 
 private:
 	void init();	// Set vertexArray data
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	sf::Texture *m_texture = nullptr;
 

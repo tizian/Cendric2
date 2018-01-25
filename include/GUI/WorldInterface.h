@@ -44,7 +44,7 @@ public:
 	// reload the level overlay
 	virtual void reloadLevelOverlay();
 	// opens the map overlay and jumps to a quest marker
-	void jumpToQuestMarker(const std::string questId, const QuestMarkerData& data);
+	void jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data);
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);

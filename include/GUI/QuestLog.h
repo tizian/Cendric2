@@ -20,14 +20,13 @@ class LogQuestMarker final : public QuestMarker {
 public:
 	LogQuestMarker(const QuestData& questData, WorldInterface* interface);
 
-	void setActive(bool active) override;
-
 	void onLeftClick() override;
 	void onRightClick() override;
 
 private:
 	void init();
 	void jumpToQuest();
+	void execSetActive() override;
 	WorldInterface* m_interface;
 };
 

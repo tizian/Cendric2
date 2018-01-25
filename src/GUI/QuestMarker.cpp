@@ -35,18 +35,49 @@ bool QuestMarker::isActive() const {
 
 void QuestMarker::setActive(bool active) {
 	m_isActive = active;
-	int y = m_questData.isMainQuest ? 1 : 0;
-	int x;
+	updateQuestMarkerState();
+	execSetActive();
+	auto const y = m_questData.isMainQuest ? 1 : 0;
+	auto const x = static_cast<int>(m_markerState);
+	m_sprite.setTextureRect(sf::IntRect(x * SIZE, y * SIZE, SIZE, SIZE));
+}
 
-	if (!m_isActive) {
-		x = 0;
-	}
-	else if (m_characterCore->isQuestComplete(m_questData.id)) {
-		x = 3;
+std::vector<QuestMarkerData> QuestMarker::getCurrentStepData(const QuestData& questData, CharacterCore* core)
+{
+	std::vector<QuestMarkerData> stepData;
+	int currentStep = 0;
+	if (core->isQuestComplete(questData.id)) {
+		currentStep = -1;
 	}
 	else {
-		x = 2;
+		// find the current step
+		while (true) {
+			if (!core->isQuestDescriptionUnlocked(questData.id, currentStep + 1)) {
+				break;
+			}
+			currentStep++;
+		}
 	}
 	
-	m_sprite.setTextureRect(sf::IntRect(x * SIZE, y * SIZE, SIZE, SIZE));
+	for (auto& data : questData.questMarkers)
+	{
+		if (data.step == currentStep && core->isMapExplored(data.mapId))
+		{
+			stepData.push_back(data);
+		}
+	}
+	return stepData;
+}
+
+void QuestMarker::updateQuestMarkerState() {
+	if (!m_isActive) {
+		m_markerState = QuestMarkerState::Inactive;
+		return;
+	}
+	if (m_characterCore->isQuestComplete(m_questData.id)) {
+		m_markerState = QuestMarkerState::Completed;
+	}
+	else {
+		m_markerState = QuestMarkerState::InProgress;
+	}
 }

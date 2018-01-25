@@ -7,6 +7,13 @@
 class CharacterCore;
 class TooltipWindowComponent;
 
+enum class QuestMarkerState {
+	Inactive,
+	Unreachable,
+	InProgress,
+	Completed,
+};
+
 // a quest marker on a quest entry or on the minimap
 class QuestMarker : public GameObject {
 public:
@@ -17,16 +24,23 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 
 	bool isActive() const;
-	virtual void setActive(bool active);
+	void setActive(bool active);
 
 	GameObjectType getConfiguredType() const override { return _Interface; }
 	
 	static const int SIZE;
 
+	static std::vector<QuestMarkerData> getCurrentStepData(const QuestData& data, CharacterCore* core);
+
 protected:
 	QuestData m_questData;
 	CharacterCore* m_characterCore;
 	TooltipWindowComponent* m_tooltipComponent;
+
+	QuestMarkerState m_markerState;
+
+	virtual void updateQuestMarkerState();
+	virtual void execSetActive() {};
 
 private:
 	sf::Sprite m_sprite;
