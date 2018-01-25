@@ -9,7 +9,7 @@ MapInterface::MapInterface(WorldScreen* screen) : WorldInterface(screen) {
 	m_characterInfo = new CharacterInfo(screen);
 	m_spellbook = new Spellbook(this, true);
 	m_questLog = new QuestLog(this);
-	m_mapOverlay = new MapOverlay(screen, m_mapSidebar);
+	m_mapOverlay = new MapOverlay(this, m_mapSidebar);
 
 	m_quickSlotBar->hide();
 }

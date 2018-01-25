@@ -15,7 +15,7 @@ m_character(character) {
 	m_quickSlotBar = new QuickSlotBar(this);
 	m_spellbook = new Spellbook(this, !level->getWorldData()->isBossLevel);
 	m_questLog = new QuestLog(this);
-	m_mapOverlay = new MapOverlay(m_screen, m_mapSidebar);
+	m_mapOverlay = new MapOverlay(this, m_mapSidebar);
 	m_buffBar = new BuffBar(this);
 	m_mainCharHealthBar = new HealthBar(character->getAttributes(), HealthBarStyle::MainCharacter);
 

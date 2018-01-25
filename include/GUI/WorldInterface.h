@@ -45,6 +45,8 @@ public:
 	virtual void reloadLevelOverlay();
 	// opens the map overlay and jumps to a quest marker
 	void jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data);
+	// opens the quest log and jumps to a quest
+	void jumpToQuestLog(const std::string questId);
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item);
@@ -83,6 +85,9 @@ protected:
 
 	template<typename G>
 	void updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type);
+
+	template<typename G>
+	void showGuiElement(G* guiElement, GUIElement type);
 
 	static Key getKeyFromGuiElement(GUIElement e);
 };

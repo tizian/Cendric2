@@ -272,6 +272,16 @@ void QuestLog::reload() {
 	}
 }
 
+void QuestLog::notifyJumpToQuest(const std::string& questId) {
+	for (auto entry : m_startedQuests)
+	{ 
+		if (entry->getQuestID() == questId) {
+			selectEntry(entry);
+			break;
+		}
+	}
+}
+
 void QuestLog::show() {
 	m_isVisible = true;
 }

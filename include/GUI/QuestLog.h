@@ -79,6 +79,8 @@ public:
 
 	// reloads the quests, depending on the core
 	void reload();
+	// opens the quest log and jumps to the quest with id "questId"
+	void notifyJumpToQuest(const std::string& questId);
 
 public:
 	static const int MAX_ENTRY_LENGTH_CHARACTERS;

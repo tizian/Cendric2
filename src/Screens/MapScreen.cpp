@@ -86,7 +86,7 @@ void MapScreen::loadAsync() {
 
 		if (!isContained) {
 			sf::Vector2i size = m_currentMap.getWorldData()->mapSize;
-			tilesExplored.push_back({ m_mapID, { size, std::vector<bool>(size.x * size.y, false)} });
+			tilesExplored.insert({ m_mapID, { size, std::vector<bool>(size.x * size.y, false)} });
 		}
 	}
 

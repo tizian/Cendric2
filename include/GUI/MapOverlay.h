@@ -50,14 +50,18 @@ private:
 // a quest marker on the map
 class MapQuestMarker final : public QuestMarker {
 public:
-	MapQuestMarker(const QuestData& questData, WorldInterface* interface);
+	MapQuestMarker(const QuestData& questData, const QuestMarkerData& markerData, WorldInterface* interface);
 
 	void onLeftClick() override;
+
+	void setTooltipTime(const sf::Time& time);
+	const std::string& getQuestId();
 
 private:
 	void init();
 	void jumpToQuest();
-
+	
+	QuestMarkerData m_markerData;
 	WorldInterface* m_interface;
 };
 
@@ -65,7 +69,7 @@ private:
 // it takes its information from the corresponding world screen.
 class MapOverlay {
 public:
-	MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar);
+	MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar);
 	~MapOverlay();
 
 	void show();
@@ -109,6 +113,7 @@ private:
 
 private:
 	WorldScreen* m_screen;
+	WorldInterface* m_interface;
 
 	std::vector<MapOverlayData*> m_maps;
 

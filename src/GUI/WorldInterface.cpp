@@ -91,7 +91,13 @@ void WorldInterface::reloadLevelOverlay() {
 }
 
 void WorldInterface::jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data) {
+	showGuiElement(m_mapOverlay, GUIElement::Map);
 	m_mapOverlay->notifyJumpToQuest(questId, data);
+}
+
+void WorldInterface::jumpToQuestLog(const std::string questId) {
+	showGuiElement(m_questLog, GUIElement::Journal);
+	m_questLog->notifyJumpToQuest(questId);
 }
 
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
@@ -107,13 +113,18 @@ void WorldInterface::highlightQuickslots(bool highlight) {
 }
 
 template<typename G>
+void WorldInterface::showGuiElement(G* guiElement, GUIElement type) {
+	hideAll();
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
+	guiElement->show();
+	m_guiSidebar->show(static_cast<int>(type));
+}
+
+template<typename G>
 void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type) {
 	if (g_inputController->isKeyJustPressed(getKeyFromGuiElement(type))) {
 		if (!guiElement->isVisible()) {
-			hideAll();
-			g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
-			guiElement->show();
-			m_guiSidebar->show(static_cast<int>(type));
+			showGuiElement(guiElement, type);
 		}
 		else {
 			guiElement->hide();
@@ -126,10 +137,7 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 		g_inputController->lockAction();
 	}
 	else if (!guiElement->isVisible() && m_guiSidebar->getActiveElement() == static_cast<int>(type)) {
-		hideAll();
-		g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
-		guiElement->show();
-		m_guiSidebar->show(static_cast<int>(type));
+		showGuiElement(guiElement, type);
 	}
 
 	guiElement->update(frameTime);

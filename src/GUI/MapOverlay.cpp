@@ -1,23 +1,26 @@
 #include "GUI/MapOverlay.h"
 #include "GUI/Window.h"
 #include "GUI/GUITabBar.h"
+#include "GUI/GUIConstants.h"
 #include "Screens/WorldScreen.h"
 #include "Screens/LevelScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
 #include "Level/DynamicTiles/ChestLevelTile.h"
 #include "World/MainCharacter.h"
-#include "GlobalResource.h"
-#include "GUI/GUIConstants.h"
-#include "Structs/LevelData.h"
 #include "World/Trigger.h"
+#include "GlobalResource.h"
+#include "GameObjectComponents/TooltipWindowComponent.h"
+#include "Structs/LevelData.h"
+
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
 const float MapOverlay::MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
 const float MapOverlay::MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
 
-MapOverlay::MapOverlay(WorldScreen* screen, GUITabBar* mapTabBar) {
-	m_screen = screen;
+MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar) {
+	m_interface = interface;
+	m_screen = interface->getScreen();
 	m_mapTabBar = mapTabBar;
 
 	m_levelOverlayIcons.loadFromFile(getResourcePath(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
@@ -70,8 +73,12 @@ void MapOverlay::update(const sf::Time& frameTime) {
 			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
 	}
 
-	for (auto& wp : m_waypoints) {
+	for (auto wp : m_waypoints) {
 		wp->update(frameTime);
+	}
+
+	for (auto qm : m_questMarkers) {
+		qm->update(frameTime);
 	}
 
 	m_window->update(frameTime);
@@ -369,19 +376,38 @@ void MapOverlay::reloadWaypoints() {
 }
 
 void MapOverlay::reloadQuestMarkers() {
+	CLEAR_VECTOR(m_questMarkers);
 
+	auto core = m_screen->getCharacterCore();
+	auto map = getCurrentMap();
+
+	for (auto questId : core->getData().questsTracked) {
+		auto questData = core->getQuestData(questId);
+
+		if (!questData) continue;
+
+		auto questMarkerDatas = QuestMarker::getCurrentStepData(*questData, core);
+		for (auto& markerData : questMarkerDatas) {
+			if (markerData.mapId != map->mapId) continue;
+			MapQuestMarker* marker = new MapQuestMarker(*questData, markerData, m_interface);
+			marker->setActive(true);
+			marker->setPosition(m_position + (markerData.position * map->scale) - sf::Vector2f(8.f, 8.f));
+			m_questMarkers.push_back(marker);
+		}
+	}
 }
 
 void MapOverlay::notifyJumpToQuest(const std::string& questId, const std::vector<QuestMarkerData>& data) {
 	if (data.empty()) return;
-	
 	if (!setMap(data[0].mapId)) return;
 
 	m_mapTabBar->show(m_currentMap);
-	m_isVisible = true;
 
-	// for all quest markers with this id, use some "highlight"
-	//for (auto& marker : m_)
+	for (auto qm : m_questMarkers) {
+		if (qm->getQuestId() == questId) {
+			qm->setTooltipTime(sf::seconds(2.f));
+		}
+	}
 }
 
 bool MapOverlay::isVisible() const {
@@ -404,12 +430,20 @@ void MapOverlay::render(sf::RenderTarget& target) {
 
 	m_window->render(target);
 
-	for (auto& wp : m_waypoints) {
+	for (auto wp : m_waypoints) {
 		wp->render(target);
+	}
+
+	for (auto qm : m_questMarkers) {
+		qm->render(target);
 	}
 
 	if (m_isOnCurrentMap)
 		target.draw(m_mainCharMarker);
+
+	for (auto qm : m_questMarkers) {
+		qm->renderAfterForeground(target);
+	}
 }
 
 void MapOverlay::show() {
@@ -531,8 +565,9 @@ GameObjectType WaypointMarker::getConfiguredType() const {
 //////////////// QUEST MARKER /////////////////////
 ///////////////////////////////////////////////////
 
-MapQuestMarker::MapQuestMarker(const QuestData& questData, WorldInterface* interface) :
+MapQuestMarker::MapQuestMarker(const QuestData& questData, const QuestMarkerData& markerData, WorldInterface* interface) :
 	QuestMarker(questData, interface->getScreen()->getCharacterCore()) {
+	m_markerData = markerData;
 	m_interface = interface;
 	init();
 }
@@ -542,13 +577,18 @@ void MapQuestMarker::onLeftClick() {
 }
 
 void MapQuestMarker::init() {
-	
+	m_tooltipComponent->setTooltipText(g_textProvider->getText(m_questData.id, "quest"));
+}
+
+void MapQuestMarker::setTooltipTime(const sf::Time& time) {
+	m_tooltipComponent->setCurrentTooltipTime(time);
+}
+
+const std::string& MapQuestMarker::getQuestId() {
+	return m_questData.id;
 }
 
 void MapQuestMarker::jumpToQuest() {
-	
-
-	auto markers = getCurrentStepData(m_questData, m_characterCore);
-	m_interface->jumpToQuestMarker(m_questData.id, markers);
+	m_interface->jumpToQuestLog(m_questData.id);
 }
 
