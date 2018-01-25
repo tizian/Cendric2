@@ -38,15 +38,15 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	}
 
 	if (!m_interface->isGuiOverlayVisible()) {
-		updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+		updateObjects(_ScreenOverlay, frameTime);
 	}
-	updateObjects(GameObjectType::_DynamicTile, frameTime);
-	updateObjects(GameObjectType::_ForegroundDynamicTile, frameTime);
-	updateObjects(GameObjectType::_MapMovableGameObject, frameTime);
-	depthSortObjects(GameObjectType::_MapMovableGameObject, true);
-	updateObjects(GameObjectType::_Equipment, frameTime);
-	updateObjects(GameObjectType::_Light, frameTime);
-	updateObjects(GameObjectType::_Overlay, frameTime);
+	updateObjects(_DynamicTile, frameTime);
+	updateObjects(_ForegroundDynamicTile, frameTime);
+	updateObjects(_MapMovableGameObject, frameTime);
+	depthSortObjects(_MapMovableGameObject, true);
+	updateObjects(_Equipment, frameTime);
+	updateObjects(_Light, frameTime);
+	updateObjects(_Overlay, frameTime);
 	updateTooltipText(frameTime);
 }
 
@@ -102,7 +102,7 @@ void MapScreen::execOnEnter() {
 
 void MapScreen::notifyConditionAdded(const Condition& condition) {
 	WorldScreen::notifyConditionAdded(condition);
-	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
+	for (auto& it : *getObjects(_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();
 		}
@@ -112,7 +112,7 @@ void MapScreen::notifyConditionAdded(const Condition& condition) {
 void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	WorldScreen::notifyItemEquip(itemID, type);
 	MapMainCharacterLoader::loadEquipment(this);
-	for (auto& it : *getObjects(GameObjectType::_MapMovableGameObject)) {
+	for (auto& it : *getObjects(_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();
 		}
@@ -195,17 +195,17 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	// Render map background etc. to window							(Normal map background rendered)
 	m_currentMap.setWorldView(renderTarget, focus);
 	m_currentMap.drawBackground(renderTarget, sf::RenderStates::Default);
-	renderObjects(GameObjectType::_DynamicTile, renderTarget);
-	renderObjects(GameObjectType::_MapMovableGameObject, renderTarget);
+	renderObjects(_DynamicTile, renderTarget);
+	renderObjects(_MapMovableGameObject, renderTarget);
 	m_currentMap.drawLightedForeground(renderTarget, sf::RenderStates::Default);
 	m_currentMap.drawForeground(renderTarget, sf::RenderStates::Default);
-	renderObjects(GameObjectType::_ForegroundDynamicTile, renderTarget);
+	renderObjects(_ForegroundDynamicTile, renderTarget);
 	sf::View adjustedView = renderTarget.getView();
 
 	// Render ambient light level + light sprites to extra buffer	(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(adjustedView);
-	renderObjects(GameObjectType::_Light, m_renderTexture);
+	renderObjects(_Light, m_renderTexture);
 	m_renderTexture.display();
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
@@ -217,18 +217,18 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(adjustedView);
-	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_ForegroundDynamicTile, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_MapMovableGameObject, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
+	renderObjectsAfterForeground(_DynamicTile, renderTarget);
+	renderObjectsAfterForeground(_ForegroundDynamicTile, renderTarget);
+	renderObjectsAfterForeground(_MapMovableGameObject, renderTarget);
+	renderObjectsAfterForeground(_Overlay, renderTarget);
 
 	m_weatherSystem->render(renderTarget);
 
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
-	WorldScreen::renderAfterForeground(renderTarget);
+	renderAfterForeground(renderTarget);
 	if (!isOverlayVisible()) {
-		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+		renderObjects(_ScreenOverlay, renderTarget);
 	}
 
 	if (m_dialogueWindow != nullptr) {
@@ -249,7 +249,7 @@ void MapScreen::handleCookingWindow(const sf::Time& frameTime) {
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Light, frameTime);
+	updateObjects(_Light, frameTime);
 }
 
 void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
@@ -260,7 +260,7 @@ void MapScreen::handleDialogueWindow(const sf::Time& frameTime) {
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Light, frameTime);
+	updateObjects(_Light, frameTime);
 }
 
 void MapScreen::updateFogOfWar() {
@@ -292,5 +292,5 @@ void MapScreen::updateFogOfWar() {
 }
 
 void MapScreen::renderEquipment(sf::RenderTarget& renderTarget) {
-	renderObjects(GameObjectType::_Equipment, renderTarget);
+	renderObjects(_Equipment, renderTarget);
 }

@@ -73,7 +73,7 @@ void LeverTile::onHit(Spell* spell) {
 }
 
 void LeverTile::onHit(LevelMovableGameObject* mob) {
-	if (!m_isGround || m_state == GameObjectState::On || mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
+	if (!m_isGround || m_state == GameObjectState::On || mob->getConfiguredType() != _LevelMainCharacter) return;
 	auto const& bb = *getBoundingBox();
 	auto const& mobBb = *mob->getBoundingBox();
 
@@ -117,7 +117,7 @@ void LeverTile::switchLever() {
 		tile->switchTile();
 	}
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_MINIMALIST, "turn");
+	g_achievementManager->notifyAchievement(ACH_MINIMALIST, "turn");
 }
 
 std::string LeverTile::getSpritePath() const {

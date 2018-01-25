@@ -162,7 +162,7 @@ void SwingingTile::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void SwingingTile::onHit(LevelMovableGameObject* mob) {
-	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
+	if (mob->getConfiguredType() != _LevelMainCharacter)  return;
 
 	if (fastIntersectCircle(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
 		mob->setDead();

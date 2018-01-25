@@ -95,8 +95,8 @@ void Level::loadForRenderTexture() {
 	LevelLoader loader;
 	loader.loadDynamicTiles(m_levelData, dynamic_cast<LevelScreen*>(m_screen));
 	loader.loadLights(m_levelData, dynamic_cast<LevelScreen*>(m_screen));
-	m_dynamicTiles = m_screen->getObjects(GameObjectType::_DynamicTile);
-	m_movableTiles = m_screen->getObjects(GameObjectType::_MovableTile);
+	m_dynamicTiles = m_screen->getObjects(_DynamicTile);
+	m_movableTiles = m_screen->getObjects(_MovableTile);
 }
 
 void Level::setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const {
@@ -206,8 +206,8 @@ bool Level::collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery
 	if (isInitialQuery) {
 		rec.collides = false;
 	}
-	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
-	auto mainChar = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
+	auto enemies = m_screen->getObjects(_Enemy);
+	auto mainChar = m_screen->getObjects(_LevelMainCharacter);
 
 	for (auto enemy : *enemies) {
 		const sf::FloatRect& mobBB = *enemy->getBoundingBox();

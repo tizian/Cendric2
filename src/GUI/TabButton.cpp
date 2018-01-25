@@ -155,7 +155,7 @@ bool TabButton::isClicked() const {
 }
 
 GameObjectType TabButton::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 void TabButton::setOnClick(const std::function<void()>& agent) {

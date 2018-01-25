@@ -150,7 +150,7 @@ sf::Time Enemy::getConfiguredChasingTime() const {
 }
 
 GameObjectType Enemy::getConfiguredType() const {
-	return GameObjectType::_Enemy;
+	return _Enemy;
 }
 
 void Enemy::clearReward() {
@@ -304,7 +304,7 @@ void Enemy::setQuestRelevant(bool relevant) {
 void Enemy::switchLever() {
 	LeverTile* nearest = nullptr;
 	float nearestDist = 10000.f;
-	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+	for (auto go : *m_screen->getObjects(_DynamicTile)) {
 		auto tile = dynamic_cast<LeverTile*>(go);
 		if (!tile) continue;
 		auto distance = dist(tile->getCenter(), getCenter());

@@ -230,7 +230,7 @@ bool Button::isVisible() const {
 }
 
 GameObjectType Button::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 void Button::setOnClick(const std::function<void()>& agent) {

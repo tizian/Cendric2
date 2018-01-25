@@ -34,5 +34,5 @@ void Stopwatch::restart() {
 }
 
 GameObjectType Stopwatch::getConfiguredType() const {
-	return GameObjectType::_Form;
+	return _Form;
 }

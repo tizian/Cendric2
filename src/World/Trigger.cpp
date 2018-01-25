@@ -72,7 +72,7 @@ void Trigger::render(sf::RenderTarget& renderTarget) {
 }
 
 GameObjectType Trigger::getConfiguredType() const {
-	return GameObjectType::_Overlay;
+	return _Overlay;
 }
 
 TriggerData& Trigger::getData() {

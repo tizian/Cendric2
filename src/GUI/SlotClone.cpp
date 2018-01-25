@@ -21,7 +21,7 @@ SlotClone::SlotClone(const Slot* original) {
 }
 
 GameObjectType SlotClone::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }
 
 const Slot* SlotClone::getOriginalSlot() const {

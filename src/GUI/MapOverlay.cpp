@@ -193,7 +193,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	/////////////////////////////////
 
 	// dynamic tiles
-	for (auto go : *lScreen->getObjects(GameObjectType::_DynamicTile)) {
+	for (auto go : *lScreen->getObjects(_DynamicTile)) {
 		if (auto dTile = dynamic_cast<LevelDynamicTile*>(go)) {
 			if (dTile->getDynamicTileID() == LevelDynamicTileID::Modifier && dTile->getGameObjectState() == GameObjectState::Active) {
 				drawOverlayTexture(img, dTile->getCenter() * scale, 0, 0);
@@ -217,7 +217,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	}
 
 	// triggers
-	for (auto go : *lScreen->getObjects(GameObjectType::_Overlay)) {
+	for (auto go : *lScreen->getObjects(_Overlay)) {
 		if (Trigger* trigger = dynamic_cast<Trigger*>(go)) {
 			if (trigger->getData().isKeyGuarded) {
 				drawOverlayTexture(img, trigger->getCenter() * scale, 1, 0);
@@ -226,7 +226,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	}
 
 	// items
-	for (auto go : *lScreen->getObjects(GameObjectType::_LevelItem)) {
+	for (auto go : *lScreen->getObjects(_LevelItem)) {
 		if (LevelItem* item = dynamic_cast<LevelItem*>(go)) {
 			if (item->getID().substr(0, 2) == "qe") {
 				drawOverlayTexture(img, item->getCenter() * scale, 2, 0);
@@ -238,7 +238,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	}
 
 	// enemies
-	for (auto go : *lScreen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *lScreen->getObjects(_Enemy)) {
 		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
 			if (enemy->isQuestRelevant()) {
 				drawOverlayTexture(img, enemy->getCenter() * scale, 2, 0);
@@ -515,7 +515,7 @@ void WaypointMarker::onLeftClick() {
 }
 
 GameObjectType WaypointMarker::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }
 
 

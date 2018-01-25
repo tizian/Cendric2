@@ -48,7 +48,7 @@ void LevelDynamicTile::render(sf::RenderTarget& target) {
 }
 
 GameObjectType LevelDynamicTile::getConfiguredType() const {
-	return GameObjectType::_DynamicTile;
+	return _DynamicTile;
 }
 
 const Level* LevelDynamicTile::getLevel() const {

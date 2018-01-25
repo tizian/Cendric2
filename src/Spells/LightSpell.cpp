@@ -23,7 +23,7 @@ void LightSpell::update(const sf::Time& frameTime) {
 
 void LightSpell::setDisposed() {
 	Spell::setDisposed();
-	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (m_mob->getConfiguredType() == _LevelMainCharacter) {
 		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::Light);
 	}
 }

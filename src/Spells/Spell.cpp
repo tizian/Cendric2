@@ -28,7 +28,7 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 	setDebugBoundingBox(COLOR_BAD);
 
 	m_screen = go->getScreen();
-	m_enemies = m_screen->getObjects(GameObjectType::_Enemy);
+	m_enemies = m_screen->getObjects(_Enemy);
 
 	m_mainChar = dynamic_cast<LevelScreen*>(m_screen)->getMainCharacter();
 	m_level = m_mainChar->getLevel();
@@ -273,7 +273,7 @@ const sf::Time& Spell::getDuration() const {
 }
 
 GameObjectType Spell::getConfiguredType() const {
-	return GameObjectType::_Spell;
+	return _Spell;
 }
 
 DamageType Spell::getDamageType() const {

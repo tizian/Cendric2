@@ -46,7 +46,7 @@ void WolfBoss::loadSpells() {
 	// transform spell sprite for cendric
 	g_resourceManager->loadTexture(TRANSFORM_SPRITEPATH, ResourceType::Level);
 	Animation* transformedAnimation = new Animation();
-	transformedAnimation->setSpriteSheet(g_resourceManager->getTexture(WolfBoss::TRANSFORM_SPRITEPATH));
+	transformedAnimation->setSpriteSheet(g_resourceManager->getTexture(TRANSFORM_SPRITEPATH));
 	transformedAnimation->addFrame(sf::IntRect(0, 0, 110, 120));
 	m_mainChar->addAnimation(GameObjectState::Broken, transformedAnimation);
 

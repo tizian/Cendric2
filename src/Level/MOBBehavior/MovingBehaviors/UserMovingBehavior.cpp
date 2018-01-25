@@ -26,7 +26,7 @@ void UserMovingBehavior::update(const sf::Time& frameTime) {
 }
 
 void UserMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
-	MovingBehavior::checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
+	checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
 }
 
 void UserMovingBehavior::stopClimbing() {
@@ -99,7 +99,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 }
 
 void UserMovingBehavior::checkLadders() {
-	for (auto& go : *(m_mob->getScreen()->getObjects(GameObjectType::_DynamicTile))) {
+	for (auto& go : *(m_mob->getScreen()->getObjects(_DynamicTile))) {
 		LadderTile* tile = dynamic_cast<LadderTile*>(go);
 		if (tile && tile->isViewable() &&
 			fastIntersect(*tile->getBoundingBox(), *m_mob->getBoundingBox())) {

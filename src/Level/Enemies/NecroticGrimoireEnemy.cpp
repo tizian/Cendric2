@@ -114,7 +114,7 @@ void NecroticGrimoireEnemy::summonEnemy() {
 	enemy->setDebugBoundingBox(sf::Color::Magenta);
 	m_screen->addObject(enemy);
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_NECRONOMICON, "skeleton");
+	g_achievementManager->notifyAchievement(ACH_NECRONOMICON, "skeleton");
 }
 
 void NecroticGrimoireEnemy::loadAnimation(int skinNr) {
@@ -130,11 +130,11 @@ void NecroticGrimoireEnemy::setDead() {
 	}
 	m_torches.clear();
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_NECRONOMICON, "kill");
+	g_achievementManager->notifyAchievement(ACH_NECRONOMICON, "kill");
 }
 
 void NecroticGrimoireEnemy::loadTorches() {
-	for (auto* go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+	for (auto* go : *m_screen->getObjects(_DynamicTile)) {
 		if (DivineTorchTile* tile = dynamic_cast<DivineTorchTile*>(go)) {
 			m_torches.push_back(tile);
 		}

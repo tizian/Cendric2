@@ -19,7 +19,7 @@ public:
 	bool isActive() const;
 	virtual void setActive(bool active);
 
-	GameObjectType getConfiguredType() const override { return GameObjectType::_Interface; }
+	GameObjectType getConfiguredType() const override { return _Interface; }
 	
 	static const int SIZE;
 

@@ -53,7 +53,7 @@ void DragonWhelpEnemy::update(const sf::Time& frameTime) {
 			if (fastIntersect(m_boundingBox, *m_mainChar->getBoundingBox())) {
 				setActive();
 			}
-			for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+			for (auto go : *m_screen->getObjects(_Enemy)) {
 				auto e = dynamic_cast<Enemy*>(go);
 				if (e->isAlly() && fastIntersect(m_boundingBox, *e->getBoundingBox())) {
 					setActive();

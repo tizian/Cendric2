@@ -85,5 +85,5 @@ void SignMapTile::onMouseOver() {
 }
 
 GameObjectType SignMapTile::getConfiguredType() const {
-	return m_isBackground ? GameObjectType::_DynamicTile : GameObjectType::_ForegroundDynamicTile;
+	return m_isBackground ? _DynamicTile : _ForegroundDynamicTile;
 }

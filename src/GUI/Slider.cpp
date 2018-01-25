@@ -178,7 +178,7 @@ bool Slider::isVisible() const {
 }
 
 GameObjectType Slider::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 // SLIDER KNOB
@@ -228,5 +228,5 @@ void SliderKnob::setPosition(const sf::Vector2f& pos) {
 }
 
 GameObjectType SliderKnob::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

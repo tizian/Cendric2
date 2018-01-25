@@ -370,7 +370,7 @@ void QuestEntry::select() {
 }
 
 GameObjectType QuestEntry::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }
 
 void QuestEntry::deselect() {

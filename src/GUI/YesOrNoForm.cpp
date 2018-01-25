@@ -69,5 +69,5 @@ void YesOrNoForm::setOnNoClicked(const std::function<void()>& agent) {
 }
 
 GameObjectType YesOrNoForm::getConfiguredType() const {
-	return GameObjectType::_Form;
+	return _Form;
 }

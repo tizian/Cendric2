@@ -32,7 +32,7 @@ void AggressiveBehavior::updateAggro() {
 	// search for new target
 	LevelMovableGameObject* nearest = nullptr;
 	float nearestDistance = 10000.f;
-	if (AttackingBehavior::isInAggroRange(m_mainChar, m_enemy, m_aggroRange)) {
+	if (isInAggroRange(m_mainChar, m_enemy, m_aggroRange)) {
 		nearest = m_mainChar;
 		nearestDistance = dist(m_mainChar->getCenter(), m_enemy->getCenter());
 	}

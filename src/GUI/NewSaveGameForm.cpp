@@ -85,5 +85,5 @@ void NewSaveGameForm::setOnCancelClicked(const std::function<void()>& agent) {
 }
 
 GameObjectType NewSaveGameForm::getConfiguredType() const {
-	return GameObjectType::_Form;
+	return _Form;
 }

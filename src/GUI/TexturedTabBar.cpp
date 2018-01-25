@@ -89,5 +89,5 @@ TexturedTabButton* TexturedTabBar::getTabButton(int index) {
 }
 
 GameObjectType TexturedTabBar::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

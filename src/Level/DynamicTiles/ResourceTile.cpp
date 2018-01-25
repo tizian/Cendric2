@@ -36,7 +36,7 @@ void ResourceTile::update(const sf::Time& frameTime) {
 	setState(GameObjectState::Broken);
 
 	// remove the current tool visualization 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+	for (auto go : *m_screen->getObjects(_Equipment)) {
 		LevelEquipment* levelEquipment = dynamic_cast<LevelEquipment*>(go);
 		if (levelEquipment != nullptr && levelEquipment->getItemType() == ItemType::Equipment_weapon) {
 			levelEquipment->setDisposed();
@@ -110,7 +110,7 @@ void ResourceTile::loot() {
 	m_pickCooldown = sf::Time::Zero;
 	m_lootTime = m_mainChar->executeDefaultFightAnimation(true, m_pickCount);
 	// remove the current weapon visualization 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+	for (auto go : *m_screen->getObjects(_Equipment)) {
 		LevelEquipment* levelEquipment = dynamic_cast<LevelEquipment*>(go);
 		if (levelEquipment != nullptr && levelEquipment->getItemType() == ItemType::Equipment_weapon) {
 			levelEquipment->setDisposed();

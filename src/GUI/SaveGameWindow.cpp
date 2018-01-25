@@ -400,7 +400,7 @@ void SaveGameEntry::select() {
 }
 
 GameObjectType SaveGameEntry::getConfiguredType() const {
-	return GameObjectType::_Undefined;
+	return _Undefined;
 }
 
 void SaveGameEntry::deselect() {

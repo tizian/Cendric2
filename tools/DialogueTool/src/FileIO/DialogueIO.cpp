@@ -462,7 +462,7 @@ bool DialogueIO::saveDialogue(const std::string& filePath, Dialogue& dialogue) {
 		dialogueFile << "# dia file for dialogue for npc: ";
 		dialogueFile << dialogue.getNpcID(); 
 		dialogueFile << "\n\n";
-		dialogueFile << DialogueIO::NPC_ID + ":" + dialogue.getNpcID();
+		dialogueFile << NPC_ID + ":" + dialogue.getNpcID();
 		dialogueFile << "\n\n";
 		// write node stack
 		std::string stack = "";

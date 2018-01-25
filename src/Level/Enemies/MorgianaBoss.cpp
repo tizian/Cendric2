@@ -119,7 +119,7 @@ void MorgianaBoss::setDead() {
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *getBoundingBox();
 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		if (auto* jeremy = dynamic_cast<JeremyBoss*>(go)) {
 			rec.boundingBox.left += 20.f;
 			jeremy->notifyMorgianaDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
@@ -132,7 +132,7 @@ void MorgianaBoss::setDead() {
 		}
 	}
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_MERCENARY_ORDER, "morgiana");
+	g_achievementManager->notifyAchievement(ACH_MERCENARY_ORDER, "morgiana");
 }
 
 void MorgianaBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {

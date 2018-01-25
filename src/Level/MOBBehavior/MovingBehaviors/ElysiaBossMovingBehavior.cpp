@@ -42,22 +42,22 @@ ElysiaBossMovingBehavior::~ElysiaBossMovingBehavior() {
 
 void ElysiaBossMovingBehavior::execHandleMovementInput() {
 	switch (m_boss->getBossState()) {
-	case ElysiaBossState::Projectile:
+	case Projectile:
 		handleProjectileMovement();
 		return;
-	case ElysiaBossState::PreThunderstorm:
+	case PreThunderstorm:
 		handlePreThunder();
 		return;
-	case ElysiaBossState::ThunderstormUp:
+	case ThunderstormUp:
 		handleThunderUp();
 		return;
-	case ElysiaBossState::PreNosedive:
+	case PreNosedive:
 		handleNosediveUp();
 		return;
-	case ElysiaBossState::Nosedive:
+	case Nosedive:
 		handleNosediveDown();
 		return;
-	case ElysiaBossState::Thunderstorm:
+	case Thunderstorm:
 		handleThunderstorm();
 		return;
 	default:
@@ -72,7 +72,7 @@ void ElysiaBossMovingBehavior::handleProjectileMovement() {
 	if (m_timeUntilTransition == sf::Time::Zero) {
 		if (rand() % 100 > m_thunderProbability) {
 			// nosedive
-			m_boss->setBossState(ElysiaBossState::PreNosedive);
+			m_boss->setBossState(PreNosedive);
 			m_isNoseRight = rand() % 2 == 0;
 			m_flyingTarget = m_isNoseRight ? m_noseTargetRight : m_noseTargetLeft;
 			m_maxVelocityX = 500;
@@ -81,7 +81,7 @@ void ElysiaBossMovingBehavior::handleProjectileMovement() {
 		}
 		else {
 			// thunderstorm
-			m_boss->setBossState(ElysiaBossState::PreThunderstorm);
+			m_boss->setBossState(PreThunderstorm);
 			m_flyingTarget = m_thunderBottom;
 			m_maxVelocityX = 300;
 			m_maxVelocityYUp = 300;
@@ -107,7 +107,7 @@ void ElysiaBossMovingBehavior::handleThunderstorm() {
 	}
 
 	if (m_timeUntilTransition == sf::Time::Zero) {
-		m_boss->setBossState(ElysiaBossState::Projectile);
+		m_boss->setBossState(Projectile);
 		m_timeUntilTransition = PROJECTILE_TIME;
 		m_maxVelocityX = 200;
 		m_maxVelocityYUp = 200;
@@ -140,7 +140,7 @@ void ElysiaBossMovingBehavior::handleNosediveDown() {
 	m_enemy->setPosition(newPos - m_bossBoxOffset);
 
 	if (dt >= 1.f) {
-		m_boss->setBossState(ElysiaBossState::Projectile);
+		m_boss->setBossState(Projectile);
 		m_boss->setCurrentAnimation(m_boss->getAnimation(GameObjectState::Flying));
 		setCollisionsEnabled(true);
 		m_timeUntilTransition = PROJECTILE_TIME;
@@ -160,7 +160,7 @@ void ElysiaBossMovingBehavior::handleNosediveUp() {
 	gotoTarget(m_flyingTarget, 10.f);
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 50.f) {
-		m_boss->setBossState(ElysiaBossState::Nosedive);
+		m_boss->setBossState(Nosedive);
 		m_boss->setCurrentAnimation(m_boss->getAnimation(GameObjectState::Fighting));
 		setCollisionsEnabled(false);
 
@@ -177,7 +177,7 @@ void ElysiaBossMovingBehavior::handleThunderUp() {
 	gotoTarget(m_flyingTarget, 10.f);
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 20.f) {
-		m_boss->setBossState(ElysiaBossState::Thunderstorm);
+		m_boss->setBossState(Thunderstorm);
 		m_timeUntilTransition = THUNDER_TIME;
 		m_timeUntilNextThunder = m_nextThunderTime;
 		m_enemy->setVelocity(sf::Vector2f());
@@ -205,7 +205,7 @@ void ElysiaBossMovingBehavior::handlePreThunder() {
 
 	if (dist(m_enemy->getCenter(), m_flyingTarget) < 50.f) {
 		m_boss->setPosition(m_flyingTarget - m_bossBoxOffset);
-		m_boss->setBossState(ElysiaBossState::ThunderstormUp);
+		m_boss->setBossState(ThunderstormUp);
 		m_flyingTarget = m_thunderTop;
 		m_maxVelocityX = 0;
 		m_maxVelocityYUp = 100;
@@ -238,10 +238,10 @@ void ElysiaBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	if (m_boss->isDead()) {
 		newState = GameObjectState::Dead;
 	}
-	else if (m_boss->getBossState() == ElysiaBossState::ThunderstormUp || m_boss->getBossState() == ElysiaBossState::Thunderstorm) {
+	else if (m_boss->getBossState() == ThunderstormUp || m_boss->getBossState() == Thunderstorm) {
 		newState = GameObjectState::Casting3;
 	}
-	else if (m_boss->getBossState() == ElysiaBossState::Nosedive) {
+	else if (m_boss->getBossState() == Nosedive) {
 		newState = GameObjectState::Fighting;
 	}
 	else if (m_fightAnimationTime > sf::Time::Zero) {

@@ -42,7 +42,7 @@ void Map::loadAfterMainChar(MainCharacter* character) {
 
 void Map::loadForRenderTexture() {
 	MapLoader::loadForRenderTexture(m_mapData, dynamic_cast<MapScreen*>(m_screen));
-	m_dynamicTiles = m_screen->getObjects(GameObjectType::_DynamicTile);
+	m_dynamicTiles = m_screen->getObjects(_DynamicTile);
 }
 
 void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) const {

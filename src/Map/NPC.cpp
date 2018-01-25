@@ -187,7 +187,7 @@ void NPC::turnToMainchar() {
 }
 
 GameObjectType NPC::getConfiguredType() const {
-	return GameObjectType::_MapMovableGameObject;
+	return _MapMovableGameObject;
 }
 
 const NPCData& NPC::getNPCData() const {

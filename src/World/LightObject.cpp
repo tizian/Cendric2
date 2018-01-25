@@ -26,7 +26,7 @@ void LightObject::init() {
 }
 
 GameObjectType LightObject::getConfiguredType() const {
-	return GameObjectType::_Light;
+	return _Light;
 }
 
 void LightObject::render(sf::RenderTarget& renderTarget) {

@@ -107,7 +107,7 @@ void BuffSlot::update(const sf::Time& frameTime) {
 }
 
 GameObjectType BuffSlot::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }
 
 void BuffSlot::setSpellAttributes(Spell* owner, const AttributeData& attributes) {
@@ -155,7 +155,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 
 	if (data.isFeared) {
 		tooltip.append(g_textProvider->getText("Feared") + "\n");
-		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(_ScreenOverlay)->empty()) {
 			TextureScreenOverlay* fearedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
 			fearedOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY_FEARED));
 			m_screen->addObject(fearedOverlay);
@@ -163,7 +163,7 @@ void BuffSlot::setDotAttributes(const DamageOverTimeData& data) {
 	}
 	else if (data.isStunned) {
 		tooltip.append(g_textProvider->getText("Stunned") + "\n");
-		if (m_duration > sf::Time::Zero && m_screen->getObjects(GameObjectType::_ScreenOverlay)->empty()) {
+		if (m_duration > sf::Time::Zero && m_screen->getObjects(_ScreenOverlay)->empty()) {
 			TextureScreenOverlay* stunnedOverlay = new TextureScreenOverlay(m_duration, sf::seconds(0.1f));
 			stunnedOverlay->setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY_STUNNED));
 			m_screen->addObject(stunnedOverlay);

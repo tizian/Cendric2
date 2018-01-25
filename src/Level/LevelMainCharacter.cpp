@@ -83,7 +83,7 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 	if (!isReady()) return;
 
 	m_targetManager->update(frameTime);
-	MainCharacter::handleInteraction();
+	handleInteraction();
 }
 
 void LevelMainCharacter::onHit(Spell* spell) {
@@ -116,10 +116,10 @@ void LevelMainCharacter::handleAttackInput() {
 
 	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
 	bool isEnemyTargeted = m_targetManager->getCurrentTargetEnemy() != nullptr;
-	CursorSkin cursorSkin = isEnemyTargeted ? CursorSkin::TargetInactive : CursorSkin::TargetActive;
+	CursorSkin cursorSkin = isEnemyTargeted ? TargetInactive : TargetActive;
 
 	if (isMousePressed) {
-		g_inputController->getCursor().setCursorSkin(CursorSkin::TargetHighlight, sf::seconds(0.2f), cursorSkin);
+		g_inputController->getCursor().setCursorSkin(TargetHighlight, sf::seconds(0.2f), cursorSkin);
 	}
 	else {
 		g_inputController->getCursor().setCursorSkin(cursorSkin);
@@ -278,7 +278,7 @@ void LevelMainCharacter::setCharacterCore(CharacterCore* core) {
 
 void LevelMainCharacter::reloadEquipment() {
 	// remove all equipment
-	for (auto go : *m_screen->getObjects(GameObjectType::_Equipment)) {
+	for (auto go : *m_screen->getObjects(_Equipment)) {
 		go->setDisposed();
 	}
 	// load new
@@ -293,7 +293,7 @@ void LevelMainCharacter::reloadWeapon() {
 }
 
 void LevelMainCharacter::clearOwnSpells() {
-	for (auto go : *m_screen->getObjects(GameObjectType::_Spell)) {
+	for (auto go : *m_screen->getObjects(_Spell)) {
 		auto spell = dynamic_cast<Spell*>(go);
 		if (!spell || spell->isDisposed()) continue;
 		
@@ -326,7 +326,7 @@ void LevelMainCharacter::setInvisibilityLevel(int level) {
 		setSpriteColor(sf::Color(255, 255, 255, 55 + level * 25), sf::seconds(1000));
 	}
 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		WardenEnemy* warden = dynamic_cast<WardenEnemy*>(go);
 		if (warden) {
 			warden->updateObservedRange();
@@ -455,7 +455,7 @@ TargetManager& LevelMainCharacter::getTargetManager() const {
 }
 
 GameObjectType LevelMainCharacter::getConfiguredType() const {
-	return GameObjectType::_LevelMainCharacter;
+	return _LevelMainCharacter;
 }
 
 std::string LevelMainCharacter::getSpritePath() const {
@@ -472,7 +472,7 @@ void LevelMainCharacter::setInputLock() {
 	m_animatedSprite.stop();
 	m_animatedSprite.setLooped(false);
 
-	auto gos = *m_screen->getObjects(GameObjectType::_Equipment);
+	auto gos = *m_screen->getObjects(_Equipment);
 	for (auto go : gos) {
 		LevelEquipment* le = dynamic_cast<LevelEquipment*>(go);
 		if (!le) continue;

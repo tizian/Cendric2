@@ -107,7 +107,7 @@ void YaslawEnemy::loadAnimation(int skinNr) {
 
 	// initializing a yaslaw will delete all other yaslaw so that only one yaslaw exists!!
 	std::string oldLuaPath;
-	for (auto it : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto it : *m_screen->getObjects(_Enemy)) {
 		Enemy* e = dynamic_cast<Enemy*>(it);
 		if (e->getEnemyID() == EnemyID::Yaslaw && e != this) {
 			if (e->getScriptedBehavior()) {

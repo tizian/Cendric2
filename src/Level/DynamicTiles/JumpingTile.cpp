@@ -85,7 +85,7 @@ void JumpingTile::loadAnimation(int skinNr) {
 
 void JumpingTile::onHit(LevelMovableGameObject* mob) {
 	if (m_damageCooldown > sf::Time::Zero) return;
-	if (mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (mob->getConfiguredType() == _LevelMainCharacter) {
 		mob->addDamageOverTime(m_damage);
 		m_damageCooldown = sf::seconds(3.f);
 	}

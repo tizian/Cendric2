@@ -58,7 +58,7 @@ void DivineShieldSpell::execOnHit(LevelMovableGameObject* target) {
 
 void DivineShieldSpell::setDisposed() {
 	Spell::setDisposed();
-	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (m_mob->getConfiguredType() == _LevelMainCharacter) {
 		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::DivineShield);
 	}
 }

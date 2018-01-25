@@ -18,9 +18,9 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 	Enemy(level, screen),
 	Boss(level, screen) {
 	
-	m_bossState = ElysiaBossState::Projectile;
+	m_bossState = Projectile;
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_BOOZE, "start");
+	g_achievementManager->notifyAchievement(ACH_BOOZE, "start");
 }
 
 void ElysiaBoss::loadAttributes() {
@@ -83,10 +83,10 @@ void ElysiaBoss::loadSpells() {
 
 void ElysiaBoss::handleAttackInput() {
 	switch (m_bossState) {
-	case ElysiaBossState::Projectile:
+	case Projectile:
 		m_spellManager->setCurrentSpell(rand() % 2); // stun or projectile
 		break;
-	case ElysiaBossState::Nosedive:
+	case Nosedive:
 		m_spellManager->setCurrentSpell(2); // chop
 		break;
 	default:
@@ -192,7 +192,7 @@ AttackingBehavior* ElysiaBoss::createAttackingBehavior(bool asAlly) {
 }
 
 sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
-	if (m_bossState == ElysiaBossState::Projectile) {
+	if (m_bossState == Projectile) {
 		return sf::seconds(1);
 	}
 
@@ -201,7 +201,7 @@ sf::Time ElysiaBoss::getConfiguredWaitingTime() const {
 
 void ElysiaBoss::setDead() {
 	Boss::setDead();
-	g_achievementManager->notifyAchievement(AchievementID::ACH_BOOZE, "end");
+	g_achievementManager->notifyAchievement(ACH_BOOZE, "end");
 }
 
 std::string ElysiaBoss::getSpritePath() const {

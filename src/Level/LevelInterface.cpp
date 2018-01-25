@@ -135,7 +135,7 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 	m_screen->notifyItemChange(item->getID(), -1);
 	m_quickSlotBar->reload();
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_BOOZE, item->getID());
+	g_achievementManager->notifyAchievement(ACH_BOOZE, item->getID());
 }
 
 void LevelInterface::reloadInventory(const std::string& changedItemID) {

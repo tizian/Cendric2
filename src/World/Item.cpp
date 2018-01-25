@@ -80,7 +80,7 @@ int Item::getRarity() const {
 }
 
 sf::Color Item::getRarityColor() const {
-	return Item::getRarityColor(m_itemBean.rarity);
+	return getRarityColor(m_itemBean.rarity);
 }
 
 const AttributeData& Item::getAttributes() const {

@@ -100,7 +100,7 @@ public:
 	void initRay(const sf::Vector2f& origin, const sf::Vector2f& direction, const sf::Color& color);
 	bool intersectsBox(const sf::FloatRect& boundingBox);
 
-	GameObjectType getConfiguredType() const override { return GameObjectType::_Undefined; }
+	GameObjectType getConfiguredType() const override { return _Undefined; }
 
 private:
 	LevelScreen* m_screen;

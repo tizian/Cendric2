@@ -5,7 +5,7 @@
 
 Cursor::Cursor() {
 	m_cursorSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
-	setCursorSkin(CursorSkin::Pointer);
+	setCursorSkin(Pointer);
 	m_scale.x = 1.f;
 	m_scale.y = 1.f;
 }

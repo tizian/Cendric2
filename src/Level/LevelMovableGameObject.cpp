@@ -247,7 +247,7 @@ void LevelMovableGameObject::setDead() {
 
 int LevelMovableGameObject::getActiveSpellCount() const {
 	int count = 0;
-	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
+	for (auto& go : *m_screen->getObjects(_Spell)) {
 		if (Spell* spell = dynamic_cast<Spell*>(go)) {
 			if (spell->getOwner() == this) {
 				++count;
@@ -258,7 +258,7 @@ int LevelMovableGameObject::getActiveSpellCount() const {
 }
 
 void LevelMovableGameObject::clearSpells(bool clearAll) {
-	for (auto& go : *m_screen->getObjects(GameObjectType::_Spell)) {
+	for (auto& go : *m_screen->getObjects(_Spell)) {
 		if (Spell* spell = dynamic_cast<Spell*>(go)) {
 			if (spell->getOwner() == this) {
 				spell->onOwnerDisposed();

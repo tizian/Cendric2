@@ -263,7 +263,7 @@ void VeliusBoss::handleVeliusDead() {
 }
 
 void VeliusBoss::resetMirrorTiles() {
-	for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+	for (auto go : *m_screen->getObjects(_DynamicTile)) {
 		if (auto mirrorTile = dynamic_cast<MirrorTile*>(go)) {
 			mirrorTile->reset();
 		}

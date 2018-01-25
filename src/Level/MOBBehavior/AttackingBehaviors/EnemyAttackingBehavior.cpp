@@ -4,7 +4,7 @@
 EnemyAttackingBehavior::EnemyAttackingBehavior(Enemy* enemy) : AttackingBehavior(enemy) {
 	m_enemy = enemy;
 
-	m_enemies = enemy->getScreen()->getObjects(GameObjectType::_Enemy);
+	m_enemies = enemy->getScreen()->getObjects(_Enemy);
 	m_currentTarget = nullptr;
 }
 

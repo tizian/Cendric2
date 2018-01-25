@@ -15,8 +15,8 @@ SplashScreen::SplashScreen() : Screen(nullptr) {
 	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 0.5f * (WINDOW_HEIGHT - scale * tex->getSize().y));
 
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
-	m_ps_right = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
-	m_ps_left = new particles::TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+	m_ps_right = new TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
+	m_ps_left = new TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
 	loadFireParticles(m_ps_left, sf::Vector2f(155.f, 330.f));
 	loadFireParticles(m_ps_right, sf::Vector2f(1130.f, 330.f));
 }
@@ -51,7 +51,7 @@ void SplashScreen::execUpdate(const sf::Time& frameTime) {
 		m_screenManager->requestQuit();
 		return;
 	}
-	updateObjects(GameObjectType::_Interface, frameTime);
+	updateObjects(_Interface, frameTime);
 	m_ps_left->update(frameTime);
 	m_ps_right->update(frameTime);
 }
@@ -63,7 +63,7 @@ void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	m_ps_right->render(renderTarget);
 	renderTarget.draw(m_screenSpriteForeground);
 	renderTarget.draw(m_logoSprite);
-	renderObjects(GameObjectType::_Interface, renderTarget);
+	renderObjects(_Interface, renderTarget);
 	renderTarget.draw(m_versionText);
 }
 
@@ -71,39 +71,39 @@ void SplashScreen::execOnExit() {
 	g_resourceManager->deleteUniqueResources(this);
 }
 
-void SplashScreen::loadFireParticles(particles::TextureParticleSystem* ps, const sf::Vector2f& center) {
+void SplashScreen::loadFireParticles(TextureParticleSystem* ps, const sf::Vector2f& center) {
 	ps->additiveBlendMode = true;
 	ps->emitRate = 70.f;
 
 	// Generators
-	auto spawner = ps->addSpawner<particles::BoxSpawner>();
+	auto spawner = ps->addSpawner<BoxSpawner>();
 	spawner->center = center;
 	spawner->size = sf::Vector2f(65.f, 0.f);
 
-	auto sizeGen = ps->addGenerator<particles::SizeGenerator>();
+	auto sizeGen = ps->addGenerator<SizeGenerator>();
 	sizeGen->minStartSize = 60.f;
 	sizeGen->maxStartSize = 100.f;
 	sizeGen->minEndSize = 40.f;
 	sizeGen->maxEndSize = 80.f;
 
-	auto colGen = ps->addGenerator<particles::ColorGenerator>();
+	auto colGen = ps->addGenerator<ColorGenerator>();
 	colGen->minStartCol = sf::Color(171, 105, 243);
 	colGen->maxStartCol = sf::Color(171, 105, 243);
 	colGen->minEndCol = sf::Color(77, 54, 130, 200);
 	colGen->maxEndCol = sf::Color(77, 54, 130, 200);
 
-	auto velGen = ps->addGenerator<particles::AimedVelocityGenerator>();
+	auto velGen = ps->addGenerator<AimedVelocityGenerator>();
 	velGen->goal = center - (sf::Vector2f(0.f, 200.f));
 	velGen->minStartSpeed = 60.f;
 	velGen->maxStartSpeed = 100.f;
 
-	auto timeGen = ps->addGenerator<particles::TimeGenerator>();
+	auto timeGen = ps->addGenerator<TimeGenerator>();
 	timeGen->minTime = 0.5f;
 	timeGen->maxTime = 1.8f;
 
 	// Updaters
-	ps->addUpdater<particles::TimeUpdater>();
-	ps->addUpdater<particles::ColorUpdater>();
-	ps->addUpdater<particles::EulerUpdater>();
-	ps->addUpdater<particles::SizeUpdater>();
+	ps->addUpdater<TimeUpdater>();
+	ps->addUpdater<ColorUpdater>();
+	ps->addUpdater<EulerUpdater>();
+	ps->addUpdater<SizeUpdater>();
 }

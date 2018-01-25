@@ -108,7 +108,7 @@ static std::string getAchievementName(AchievementID id) {
 }
 
 static AchievementData* createAchievementsArray() {
-	int achievementCount = static_cast<int>(AchievementID::MAX) - 1;
+	int achievementCount = static_cast<int>(MAX) - 1;
 	AchievementData* data = new AchievementData[achievementCount];
 
 	for (int i = 0; i < achievementCount; ++i) {

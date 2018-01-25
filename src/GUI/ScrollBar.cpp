@@ -178,7 +178,7 @@ void ScrollBar::setKnobTexture(sf::Texture* texture) {
 }
 
 GameObjectType ScrollBar::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 // SLIDER KNOB
@@ -232,5 +232,5 @@ void ScrollBarKnob::setTexture(sf::Texture* texture) {
 }
 
 GameObjectType ScrollBarKnob::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

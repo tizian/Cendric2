@@ -73,7 +73,7 @@ void LadderTile::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void LadderTile::onHit(LevelMovableGameObject* mob) {
-	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
+	if (mob->getConfiguredType() != _LevelMainCharacter)  return;
 	if (mob->getState() == GameObjectState::Climbing_1 || mob->getState() == GameObjectState::Climbing_2) return;
 	m_showSprite = true;
 

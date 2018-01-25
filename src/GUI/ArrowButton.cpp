@@ -72,7 +72,7 @@ void ArrowButton::setPosition(const sf::Vector2f& pos) {
 }
 
 GameObjectType ArrowButton::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 void ArrowButton::recalculateColor() {

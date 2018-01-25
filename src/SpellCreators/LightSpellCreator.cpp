@@ -25,7 +25,7 @@ void LightSpellCreator::addDurationModifier(int level) {
 
 void LightSpellCreator::removeOldSpell() {
 	// check if there is already such a spell active for this owner and if yes, remove it
-	std::vector<GameObject*>* spells = m_screen->getObjects(GameObjectType::_Spell);
+	std::vector<GameObject*>* spells = m_screen->getObjects(_Spell);
 	if (spells != nullptr) {
 		for (auto& spell_ : *spells) {
 			Spell* spell = dynamic_cast<Spell*>(spell_);

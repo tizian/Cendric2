@@ -343,7 +343,7 @@ void Spellbook::reload() {
 	int nTabs = static_cast<int>(m_tabTypes.size());
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
-	float x = GUIConstants::LEFT + 0.5f * (Spellbook::WIDTH - width);
+	float x = GUIConstants::LEFT + 0.5f * (WIDTH - width);
 	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
 	if (m_tabBar) {

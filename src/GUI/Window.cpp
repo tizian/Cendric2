@@ -140,5 +140,5 @@ void Window::setOrnamentColor(const sf::Color& color) {
 }
 
 GameObjectType Window::getConfiguredType() const {
-	return GameObjectType::_Window;
+	return _Window;
 }

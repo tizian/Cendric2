@@ -54,7 +54,7 @@ public:
 
 	void update(const sf::Time& frameTime) override;
 
-	GameObjectType getConfiguredType() const override { return GameObjectType::_Spell; }
+	GameObjectType getConfiguredType() const override { return _Spell; }
 
 private:
 	LevelMovableGameObject* m_mainChar;

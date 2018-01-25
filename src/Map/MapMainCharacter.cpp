@@ -30,7 +30,7 @@ void MapMainCharacter::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	updateAnimation(frameTime);
-	MainCharacter::handleInteraction();
+	handleInteraction();
 }
 
 void MapMainCharacter::checkCollisions(const sf::Vector2f& nextPosition) {
@@ -240,7 +240,7 @@ float MapMainCharacter::getConfiguredMaxVelocityX() const {
 }
 
 GameObjectType MapMainCharacter::getConfiguredType() const {
-	return GameObjectType::_MapMovableGameObject;
+	return _MapMovableGameObject;
 }
 
 std::string MapMainCharacter::getSpritePath() const {

@@ -28,7 +28,7 @@ public:
 	void setName(const std::string& name);
 	void setVisible(bool visible);
 
-	GameObjectType getConfiguredType() const override { return GameObjectType::_Interface; }
+	GameObjectType getConfiguredType() const override { return _Interface; }
 
 private:
 	const AttributeData* m_attributes;

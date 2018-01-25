@@ -471,7 +471,7 @@ void DialogueOption::select() {
 }
 
 GameObjectType DialogueOption::getConfiguredType() const {
-	return GameObjectType::_Undefined;
+	return _Undefined;
 }
 
 void DialogueOption::deselect() {

@@ -2,7 +2,7 @@
 #include "Level/Enemies/YashaBossAdd.h"
 
 void YashaRaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
-	if (target->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (target->getConfiguredType() == _LevelMainCharacter) {
 		setDisposed();
 		return;
 	}

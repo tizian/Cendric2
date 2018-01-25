@@ -131,5 +131,5 @@ void Slot::onMouseOver() {
 }
 
 GameObjectType Slot::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }

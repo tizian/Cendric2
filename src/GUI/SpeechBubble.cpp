@@ -63,7 +63,7 @@ void SpeechBubble::update(const sf::Time& frameTime) {
 }
 
 GameObjectType SpeechBubble::getConfiguredType() const {
-	return GameObjectType::_Overlay;
+	return _Overlay;
 }
 
 void SpeechBubble::show() {

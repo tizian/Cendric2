@@ -18,7 +18,7 @@ void CreditsScreen::execUpdate(const sf::Time& frameTime) {
 		onBack();
 		return;
 	}
-	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(_Button, frameTime);
 
 	if (m_credits->getPosition().y + m_credits->getLocalBounds().height > WINDOW_HEIGHT / 2.f) {
 		m_credits->setPosition(m_credits->getPosition() + 
@@ -31,7 +31,7 @@ void CreditsScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.draw(*m_credits);
 	renderTarget.draw(m_screenSprite);
 	renderTarget.draw(*m_title);
-	renderObjects(GameObjectType::_Button, renderTarget);
+	renderObjects(_Button, renderTarget);
 }
 
 void CreditsScreen::execOnEnter() {

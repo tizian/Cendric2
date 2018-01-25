@@ -12,7 +12,7 @@ LevelMovableTile::LevelMovableTile(LevelScreen* levelScreen) :
 }
 
 GameObjectType LevelMovableTile::getConfiguredType() const {
-	return GameObjectType::_MovableTile;
+	return _MovableTile;
 }
 
 void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
@@ -30,9 +30,9 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	newBoundingBoxY.left -= posDiff.x;
 
 	// check if we hit the other movable objects that do not have the same parent as us. we have precedence and shift other objects away.
-	auto mainChars = m_screen->getObjects(GameObjectType::_LevelMainCharacter);
-	auto enemies = m_screen->getObjects(GameObjectType::_Enemy);
-	auto movableTiles = m_screen->getObjects(GameObjectType::_MovableTile);
+	auto mainChars = m_screen->getObjects(_LevelMainCharacter);
+	auto enemies = m_screen->getObjects(_Enemy);
+	auto movableTiles = m_screen->getObjects(_MovableTile);
 
 	LevelMovableGameObject* mainChar = dynamic_cast<LevelMovableGameObject*>((*mainChars)[0]);
 	if (mainChar->getMovingParent() != getMovingParent() && !mainChar->isDead()) {

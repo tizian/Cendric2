@@ -46,8 +46,8 @@ void MenuScreen::execUpdate(const sf::Time& frameTime) {
 
 	updateTooltipText(frameTime);
 
-	updateObjects(GameObjectType::_Button, frameTime);
-	updateObjects(GameObjectType::_Form, frameTime);
+	updateObjects(_Button, frameTime);
+	updateObjects(_Form, frameTime);
 	m_ps_left->update(frameTime);
 	m_ps_right->update(frameTime);
 }
@@ -65,8 +65,8 @@ void MenuScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_screenSpriteForeground);
 	renderTarget.draw(m_versionText);
 	renderTarget.draw(m_logoSprite);
-	renderObjects(GameObjectType::_Button, renderTarget);
-	renderObjects(GameObjectType::_Form, renderTarget);
+	renderObjects(_Button, renderTarget);
+	renderObjects(_Form, renderTarget);
 	renderTooltipText(renderTarget);
 }
 

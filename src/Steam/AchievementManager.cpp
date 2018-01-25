@@ -41,7 +41,7 @@ void AchievementManager::initAchievements() {
 	if (!m_characterCore) return;
 
 	clearAchievements();
-	for (int i = static_cast<int>(AchievementID::VOID) + 1; i < static_cast<int>(AchievementID::MAX); ++i) {
+	for (int i = static_cast<int>(VOID) + 1; i < static_cast<int>(MAX); ++i) {
 		auto achId = static_cast<AchievementID>(i);
 		auto achName = getAchievementName(achId);
 

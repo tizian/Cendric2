@@ -24,7 +24,7 @@ const sf::Vector2f&  MapDynamicTile::getPositionOffset() const {
 }
 
 GameObjectType MapDynamicTile::getConfiguredType() const {
-	return GameObjectType::_DynamicTile;
+	return _DynamicTile;
 }
 
 void MapDynamicTile::onHit(MapMainCharacter* mob) {

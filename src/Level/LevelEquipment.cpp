@@ -218,5 +218,5 @@ ItemType LevelEquipment::getItemType() const {
 }
 
 GameObjectType LevelEquipment::getConfiguredType() const {
-	return GameObjectType::_Equipment;
+	return _Equipment;
 }

@@ -125,7 +125,7 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	}
 
 	// was this the last boss?
-	for (auto* go : *getObjects(GameObjectType::_Enemy)) {
+	for (auto* go : *getObjects(_Enemy)) {
 		if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
 			if (enemy->isBoss() && !enemy->isDead()) {
 				return;
@@ -200,13 +200,13 @@ void LevelScreen::execOnEnter() {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentLevel.getName(),
 		m_currentLevel.getWorldData()->isBossLevel,
 		m_currentLevel.getWorldData()->isObserved));
-	g_inputController->getCursor().setCursorSkin(CursorSkin::TargetActive);
+	g_inputController->getCursor().setCursorSkin(TargetActive);
 }
 
 void LevelScreen::execOnExit() {
 	WorldScreen::execOnExit();
 	cleanUp();
-	g_inputController->getCursor().setCursorSkin(CursorSkin::Pointer);
+	g_inputController->getCursor().setCursorSkin(Pointer);
 }
 
 void LevelScreen::addSpellBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr) {
@@ -236,7 +236,7 @@ void LevelScreen::removeTypedBuffs(SpellID id) {
 bool LevelScreen::notifyObservers() {
 	if (!m_currentLevel.getWorldData()->isObserved) return false;
 
-	for (auto go : *getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *getObjects(_Enemy)) {
 		ObserverEnemy* observer = dynamic_cast<ObserverEnemy*>(go);
 		if (!observer) continue;
 
@@ -293,8 +293,8 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 	handleBossDefeated(frameTime);
 	handleBackToCheckpoint();
 
-	updateObjects(GameObjectType::_Button, frameTime);
-	updateObjects(GameObjectType::_Form, frameTime);
+	updateObjects(_Button, frameTime);
+	updateObjects(_Form, frameTime);
 	updateTooltipText(frameTime);
 
 	if (!m_isPaused) {
@@ -302,27 +302,27 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		WorldScreen::execUpdate(frameTime);
 
 		// sort Movable Tiles
-		depthSortObjects(GameObjectType::_MovableTile, false);
+		depthSortObjects(_MovableTile, false);
 		// update objects first for relative velocity
-		updateObjectsFirst(GameObjectType::_MovableTile, frameTime);
-		updateObjectsFirst(GameObjectType::_LevelMainCharacter, frameTime);
-		updateObjectsFirst(GameObjectType::_Enemy, frameTime);
-		updateObjectsFirst(GameObjectType::_DynamicTile, frameTime);
-		updateObjectsFirst(GameObjectType::_Spell, frameTime);
+		updateObjectsFirst(_MovableTile, frameTime);
+		updateObjectsFirst(_LevelMainCharacter, frameTime);
+		updateObjectsFirst(_Enemy, frameTime);
+		updateObjectsFirst(_DynamicTile, frameTime);
+		updateObjectsFirst(_Spell, frameTime);
 		// and then normally
 		if (!m_interface->isGuiOverlayVisible()) {
-			updateObjects(GameObjectType::_ScreenOverlay, frameTime);
+			updateObjects(_ScreenOverlay, frameTime);
 		}
-		updateObjects(GameObjectType::_MovableTile, frameTime);
-		updateObjects(GameObjectType::_DynamicTile, frameTime);
-		updateObjects(GameObjectType::_Enemy, frameTime);
-		updateObjects(GameObjectType::_LevelMainCharacter, frameTime);
-		updateObjects(GameObjectType::_Equipment, frameTime);
-		updateObjects(GameObjectType::_Spell, frameTime);
-		updateObjects(GameObjectType::_Overlay, frameTime);
-		if (!m_isGameOver) updateObjects(GameObjectType::_LevelItem, frameTime);
+		updateObjects(_MovableTile, frameTime);
+		updateObjects(_DynamicTile, frameTime);
+		updateObjects(_Enemy, frameTime);
+		updateObjects(_LevelMainCharacter, frameTime);
+		updateObjects(_Equipment, frameTime);
+		updateObjects(_Spell, frameTime);
+		updateObjects(_Overlay, frameTime);
+		if (!m_isGameOver) updateObjects(_LevelItem, frameTime);
 
-		updateObjects(GameObjectType::_Light, frameTime);
+		updateObjects(_Light, frameTime);
 		m_currentLevel.update(frameTime);
 	}
 
@@ -372,31 +372,31 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_currentLevel.setWorldView(renderTarget, focus);
 	m_currentLevel.drawBackground(renderTarget, sf::RenderStates::Default);
 	sf::View oldView = renderTarget.getView();
-	renderObjects(GameObjectType::_DynamicTile, renderTarget);
-	renderObjects(GameObjectType::_MovableTile, renderTarget);
+	renderObjects(_DynamicTile, renderTarget);
+	renderObjects(_MovableTile, renderTarget);
 	flushTexture(renderTarget, m_particleBGRenderTexture, oldView, m_particleBlendMode);
-	renderObjects(GameObjectType::_LevelItem, renderTarget);
+	renderObjects(_LevelItem, renderTarget);
 
 	// the main character and the equipment are rendered on one texture
 	m_equipmentRenderTexture.setView(oldView);
-	renderObjects(GameObjectType::_LevelMainCharacter, m_equipmentRenderTexture);
-	renderObjects(GameObjectType::_Equipment, m_equipmentRenderTexture);
+	renderObjects(_LevelMainCharacter, m_equipmentRenderTexture);
+	renderObjects(_Equipment, m_equipmentRenderTexture);
 	m_sprite.setColor(m_equipmentColor);
 	flushTexture(renderTarget, m_equipmentRenderTexture, oldView, sf::BlendAlpha);
 	flushTexture(renderTarget, m_particleEQRenderTexture, oldView, m_particleBlendMode);
 	m_sprite.setColor(COLOR_WHITE);
 
-	renderObjects(GameObjectType::_Enemy, renderTarget);
-	renderObjects(GameObjectType::_Spell, renderTarget);
+	renderObjects(_Enemy, renderTarget);
+	renderObjects(_Spell, renderTarget);
 	flushTexture(renderTarget, m_particleFGRenderTexture, oldView, m_particleBlendMode);
 	m_currentLevel.drawLightedForeground(renderTarget, sf::RenderStates::Default);
-	renderObjects(GameObjectType::_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
+	renderObjects(_DynamicTile, renderTarget); // dynamic tiles get rendered twice, this one is for the fluid tiles.
 	m_currentLevel.drawForeground(renderTarget, sf::RenderStates::Default);
 
 	// Render light sprites to extra buffer							(Buffer contains light levels as grayscale colors)
 	m_renderTexture.clear();
 	m_renderTexture.setView(oldView);
-	renderObjects(GameObjectType::_Light, m_renderTexture);
+	renderObjects(_Light, m_renderTexture);
 	m_renderTexture.display();
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
@@ -408,32 +408,32 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);
-	renderObjects(GameObjectType::_Overlay, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Overlay, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_MovableTile, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_DynamicTile, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_LevelItem, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_LevelMainCharacter, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Equipment, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Enemy, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Spell, renderTarget);
-	renderObjectsAfterForeground(GameObjectType::_Light, renderTarget);
+	renderObjects(_Overlay, renderTarget);
+	renderObjectsAfterForeground(_Overlay, renderTarget);
+	renderObjectsAfterForeground(_MovableTile, renderTarget);
+	renderObjectsAfterForeground(_DynamicTile, renderTarget);
+	renderObjectsAfterForeground(_LevelItem, renderTarget);
+	renderObjectsAfterForeground(_LevelMainCharacter, renderTarget);
+	renderObjectsAfterForeground(_Equipment, renderTarget);
+	renderObjectsAfterForeground(_Enemy, renderTarget);
+	renderObjectsAfterForeground(_Spell, renderTarget);
+	renderObjectsAfterForeground(_Light, renderTarget);
 
 	m_weatherSystem->render(renderTarget);
 
 	renderTarget.setView(renderTarget.getDefaultView());
 	if (!m_interface->isGuiOverlayVisible()) {
-		renderObjects(GameObjectType::_ScreenOverlay, renderTarget);
+		renderObjects(_ScreenOverlay, renderTarget);
 	}
 	if (m_gamePausedOverlay) {
 		m_gamePausedOverlay->render(renderTarget);
 	}
 	renderTooltipText(renderTarget);
 	WorldScreen::render(renderTarget);
-	WorldScreen::renderAfterForeground(renderTarget);
+	renderAfterForeground(renderTarget);
 
-	renderObjects(GameObjectType::_Button, renderTarget);
-	renderObjects(GameObjectType::_Form, renderTarget);
+	renderObjects(_Button, renderTarget);
+	renderObjects(_Form, renderTarget);
 
 	renderTarget.setView(oldView);
 }

@@ -87,5 +87,5 @@ TabButton* TabBar::getTabButton(int index) {
 }
 
 GameObjectType TabBar::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

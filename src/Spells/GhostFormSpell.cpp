@@ -63,7 +63,7 @@ void GhostFormSpell::setDisposed() {
 	mb->setMaxXVelocityScale(1.f);
 	mb->setIgnoreDynamicTiles(false);
 
-	if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+	if (m_mob->getConfiguredType() == _LevelMainCharacter) {
 		dynamic_cast<LevelScreen*>(m_screen)->removeTypedBuffs(SpellID::GhostForm);
 	}
 
@@ -141,7 +141,7 @@ void GhostFormSpell::updateParticleSystemPosition() {
 }
 
 void GhostFormSpell::loadMask() {
-	if (m_mob->getConfiguredType() != GameObjectType::_LevelMainCharacter || m_mask != nullptr) return;
+	if (m_mob->getConfiguredType() != _LevelMainCharacter || m_mask != nullptr) return;
 
 	m_mask = new LevelEquipment(m_mainChar);
 	ItemEquipmentBean itemBean;

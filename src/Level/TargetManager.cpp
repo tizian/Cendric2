@@ -38,7 +38,7 @@ void TargetManager::update(const sf::Time& frameTime) {
 		// check which enemy is the next to target
 		Enemy* currentNearest = nullptr;
 		float currentDistance = TARGET_RANGE;
-		for (auto& go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+		for (auto& go : *m_screen->getObjects(_Enemy)) {
 			if (Enemy* enemy = dynamic_cast<Enemy*>(go)) {
 				if (enemy->isAlly() || enemy->isDead() || enemy->isDisposed()) continue;
 				float distance = dist(enemy->getCenter(), m_mainChar->getCenter());

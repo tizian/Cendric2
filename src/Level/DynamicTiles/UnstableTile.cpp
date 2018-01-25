@@ -105,7 +105,7 @@ void UnstableTile::onHit(Spell* spell) {
 
 void UnstableTile::onHit(LevelMovableGameObject* mob) {
 	if (m_isInactive || m_isFalling || m_state == GameObjectState::Crumbling) return;
-	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter) return;
+	if (mob->getConfiguredType() != _LevelMainCharacter) return;
 	m_wasCritical = true;
 	if (!m_isCritical) {
 		m_isCritical = true;

@@ -13,7 +13,7 @@ void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 		return;
 	}
 
-	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(_Button, frameTime);
 	updateTooltipText(frameTime);
 	
 	updateMusicVolume();
@@ -22,7 +22,7 @@ void OptionsScreen::execUpdate(const sf::Time& frameTime) {
 void OptionsScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_title);
-	renderObjects(GameObjectType::_Button, renderTarget);
+	renderObjects(_Button, renderTarget);
 	renderTooltipText(renderTarget);
 }
 

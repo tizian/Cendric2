@@ -19,7 +19,7 @@ void MapMainCharacterLoader::loadEquipment(Screen* screen) {
 	}
 
 	// make sure to clear all equipment pieces.
-	for (auto& go : *screen->getObjects(GameObjectType::_Equipment)) {
+	for (auto& go : *screen->getObjects(_Equipment)) {
 		go->setDisposed();
 	}
 

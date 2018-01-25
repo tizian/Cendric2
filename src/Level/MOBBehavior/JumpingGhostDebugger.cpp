@@ -38,5 +38,5 @@ void JumpingGhostDebugger::render(sf::RenderTarget& target) {
 }
 
 GameObjectType JumpingGhostDebugger::getConfiguredType() const {
-	return GameObjectType::_Overlay;
+	return _Overlay;
 }

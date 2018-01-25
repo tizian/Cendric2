@@ -10,7 +10,7 @@ void TelekinesisSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 
 	TelekinesisSpell* newSpell = new TelekinesisSpell();
 	newSpell->load(spellData, m_owner, target);
-	newSpell->setItemVector(m_screen->getObjects(GameObjectType::_LevelItem));
+	newSpell->setItemVector(m_screen->getObjects(_LevelItem));
 	m_screen->addObject(newSpell);
 }
 

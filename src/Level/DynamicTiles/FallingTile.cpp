@@ -37,7 +37,7 @@ void FallingTile::loadAnimation(int skinNr) {
 }
 
 void FallingTile::onHit(LevelMovableGameObject* mob) {
-	if (mob->getConfiguredType() == GameObjectType::_LevelMainCharacter)
+	if (mob->getConfiguredType() == _LevelMainCharacter)
 		mob->setDead();
 }
 

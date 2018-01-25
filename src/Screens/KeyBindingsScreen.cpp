@@ -71,7 +71,7 @@ void KeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 		}
 	}
 
-	updateObjects(GameObjectType::_Button, frameTime);
+	updateObjects(_Button, frameTime);
 	updateTooltipText(frameTime);
 
 	calculateEntryPositions();
@@ -128,7 +128,7 @@ void KeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 		it.second.first->render(m_scrollHelper->texture);
 	}
 
-	renderObjects(GameObjectType::_Button, renderTarget);
+	renderObjects(_Button, renderTarget);
 	renderTooltipText(renderTarget);
 
 	m_scrollHelper->render(renderTarget);

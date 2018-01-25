@@ -1,7 +1,7 @@
 #include "World/AnimatedTile.h"
 
 GameObjectType AnimatedTile::getConfiguredType() const {
-	return GameObjectType::_AnimatedTile;
+	return _AnimatedTile;
 }
 
 const AnimatedSprite& AnimatedTile::getAnimatedSprite() const {

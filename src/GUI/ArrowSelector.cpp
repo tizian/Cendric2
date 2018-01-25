@@ -111,5 +111,5 @@ bool ArrowSelector::isVisible() const {
 }
 
 GameObjectType ArrowSelector::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

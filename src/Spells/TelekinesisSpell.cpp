@@ -51,7 +51,7 @@ void TelekinesisSpell::checkCollisionsWithItems() {
 		if (fastIntersect(*it->getBoundingBox(), *getBoundingBox())) {
 			LevelItem* item = dynamic_cast<LevelItem*>(it);
 			if (item != nullptr) {
-				if (m_mob->getConfiguredType() == GameObjectType::_LevelMainCharacter) {
+				if (m_mob->getConfiguredType() == _LevelMainCharacter) {
 					item->pickup();
 				}
 				else {

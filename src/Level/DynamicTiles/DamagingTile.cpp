@@ -77,7 +77,7 @@ void DamagingTile::setPosition(const sf::Vector2f& position) {
 }
 
 void DamagingTile::onHit(LevelMovableGameObject* mob) {
-	if (mob->getConfiguredType() != GameObjectType::_LevelMainCharacter)  return;
+	if (mob->getConfiguredType() != _LevelMainCharacter)  return;
 	if (!fastIntersectCircle(*mob->getBoundingBox(), m_debugCircle.getPosition(), DAMAGE_RADIUS)) {
 		return;
 	}
@@ -90,7 +90,7 @@ void DamagingTile::onHit(LevelMovableGameObject* mob) {
 	if (m_isBroken) 
 		return;
 
-	auto gos = *m_screen->getObjects(GameObjectType::_Spell);
+	auto gos = *m_screen->getObjects(_Spell);
 	for (auto go : gos) {
 		Spell* spell = dynamic_cast<Spell*>(go);
 		if (spell && spell->getSpellID() == SpellID::DivineShield &&

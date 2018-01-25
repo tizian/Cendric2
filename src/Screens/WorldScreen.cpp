@@ -172,7 +172,7 @@ void WorldScreen::notifyConditionAdded(const Condition& condition) {
 	if (getCharacterCore()->setConditionFulfilled(condition.type, condition.name)) {
 		reloadTriggers();
 
-		for (auto& it : *getObjects(GameObjectType::_DynamicTile)) {
+		for (auto& it : *getObjects(_DynamicTile)) {
 			if (DoorTile* door = dynamic_cast<DoorTile*>(it)) {
 				door->notifyReloadNeeded();
 			}
@@ -208,7 +208,7 @@ void WorldScreen::notifyHintAdded(const std::string& hintKey) {
 }
 
 void WorldScreen::reloadTriggers() {
-	for (GameObject* go : *getObjects(GameObjectType::_Overlay)) {
+	for (GameObject* go : *getObjects(_Overlay)) {
 		Trigger* trigger = dynamic_cast<Trigger*>(go);
 		if (trigger == nullptr) continue;
 		reloadTrigger(trigger);
@@ -233,13 +233,13 @@ void WorldScreen::reloadTrigger(Trigger* trigger) const {
 
 void WorldScreen::updateOverlayQueue() {
 	if (m_overlayQueue.empty()) return;
-	if (!getObjects(GameObjectType::_ScreenOverlay)->empty()) return;
+	if (!getObjects(_ScreenOverlay)->empty()) return;
 	addObject(m_overlayQueue.at(0));
 	m_overlayQueue.erase(m_overlayQueue.begin());
 }
 
 void WorldScreen::clearOverlayQueue() {
-	for (auto go : *getObjects(GameObjectType::_ScreenOverlay)) {
+	for (auto go : *getObjects(_ScreenOverlay)) {
 		go->setDisposed();
 	}
 	for (auto& overlay : m_overlayQueue) {
@@ -400,7 +400,7 @@ void WorldScreen::handleBookWindow(const sf::Time& frameTime) {
 	}
 	updateProgressLog(frameTime);
 	updateTooltipText(frameTime);
-	updateObjects(GameObjectType::_Light, frameTime);
+	updateObjects(_Light, frameTime);
 }
 
 void WorldScreen::updateProgressLog(const sf::Time& frameTime) {

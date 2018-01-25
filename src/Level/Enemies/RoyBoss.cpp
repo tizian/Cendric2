@@ -83,7 +83,7 @@ void RoyBoss::setDead() {
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *getBoundingBox();
 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		if (auto* jeremy = dynamic_cast<JeremyBoss*>(go)) {
 			rec.boundingBox.left += 20.f;
 			jeremy->notifyRoyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
@@ -96,7 +96,7 @@ void RoyBoss::setDead() {
 		}
 	}
 
-	g_achievementManager->notifyAchievement(AchievementID::ACH_MERCENARY_ORDER, "roy");
+	g_achievementManager->notifyAchievement(ACH_MERCENARY_ORDER, "roy");
 }
 
 void RoyBoss::notifyJeremyDeath(const sf::Vector2f& newPos) {

@@ -203,6 +203,6 @@ const GhostRecord& JumpingGhost::getGhostRecord() const {
 }
 
 GameObjectType JumpingGhost::getConfiguredType() const {
-	return GameObjectType::_Undefined;
+	return _Undefined;
 }
 

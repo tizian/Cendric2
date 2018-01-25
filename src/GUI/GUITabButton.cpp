@@ -131,5 +131,5 @@ void GUITabButton::setOnClick(const std::function<void()>& agent) {
 }
 
 GameObjectType GUITabButton::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }

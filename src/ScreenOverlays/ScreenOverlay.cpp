@@ -123,7 +123,7 @@ void ScreenOverlay::repositionText() {
 }
 
 GameObjectType ScreenOverlay::getConfiguredType() const {
-	return GameObjectType::_ScreenOverlay;
+	return _ScreenOverlay;
 }
 
 ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questID, QuestState state) {

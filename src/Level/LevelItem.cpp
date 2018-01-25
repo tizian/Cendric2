@@ -97,7 +97,7 @@ void LevelItem::onRightClick() {
 }
 
 GameObjectType LevelItem::getConfiguredType() const {
-	return GameObjectType::_LevelItem;
+	return _LevelItem;
 }
 
 void LevelItem::setSpawnPosition(int spawnPosition) {

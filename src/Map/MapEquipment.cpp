@@ -35,5 +35,5 @@ void MapEquipment::setHasTexture() {
 }
 
 GameObjectType MapEquipment::getConfiguredType() const {
-	return GameObjectType::_Equipment;
+	return _Equipment;
 }

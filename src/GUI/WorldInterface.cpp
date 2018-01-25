@@ -49,7 +49,7 @@ void WorldInterface::hideAll() {
 	m_questLog->hide();
 	m_inventory->hide();
 	m_mapOverlay->hide();
-	for (auto go : *m_screen->getObjects(GameObjectType::_ScreenOverlay)) {
+	for (auto go : *m_screen->getObjects(_ScreenOverlay)) {
 		go->setDisposed();
 	}
 }

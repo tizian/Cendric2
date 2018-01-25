@@ -330,7 +330,7 @@ void CookingOption::select() {
 }
 
 GameObjectType CookingOption::getConfiguredType() const {
-	return GameObjectType::_Undefined;
+	return _Undefined;
 }
 
 void CookingOption::deselect() {

@@ -264,7 +264,7 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 		return;
 	}
 
-	luabridge::LuaRef param = luabridge::LuaRef::fromStack(state, 2);
+	LuaRef param = LuaRef::fromStack(state, 2);
 	if (!param.isTable()) {
 		g_logger->logError("WorldCallback", "spawnEnemy() has no table argument in luascript!");
 		return;

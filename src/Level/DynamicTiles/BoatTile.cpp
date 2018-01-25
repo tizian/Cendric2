@@ -11,7 +11,7 @@ BoatTile::BoatTile(LevelScreen* levelScreen) :
 	LevelMovableTile(levelScreen) {
 	m_movingParent = this;
 
-	m_spellVec = levelScreen->getObjects(GameObjectType::_Spell);
+	m_spellVec = levelScreen->getObjects(_Spell);
 	m_isInitialized = false;
 }
 
@@ -75,7 +75,7 @@ void BoatTile::destroy() {
 
 void BoatTile::update(const sf::Time& frameTime) {
 	if (!m_isInitialized) {
-		for (auto go : *m_screen->getObjects(GameObjectType::_DynamicTile)) {
+		for (auto go : *m_screen->getObjects(_DynamicTile)) {
 			if (auto dyn = dynamic_cast<LevelDynamicTile*>(go)) {
 				auto id = dyn->getDynamicTileID();
 				if (id == LevelDynamicTileID::Falling || id == LevelDynamicTileID::Damaging) {

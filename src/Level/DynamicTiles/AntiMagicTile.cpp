@@ -28,7 +28,7 @@ bool AntiMagicTile::init(const LevelTileProperties& properties) {
 void AntiMagicTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	sf::Vector2f intersection;
-	for (auto it : *m_screen->getObjects(GameObjectType::_Spell)) {
+	for (auto it : *m_screen->getObjects(_Spell)) {
 		if (it->getBoundingBox()->contains(m_startPos) || World::lineBoxIntersection(m_startPos, m_endPos, *it->getBoundingBox(), intersection)) {
 			it->setDisposed();
 		}

@@ -182,7 +182,7 @@ bool Checkbox::isChecked() const {
 }
 
 GameObjectType Checkbox::getConfiguredType() const {
-	return GameObjectType::_Button;
+	return _Button;
 }
 
 void Checkbox::setOnClick(const std::function<void()>& agent) {

@@ -25,11 +25,11 @@ void SaveGameScreen::execUpdate(const sf::Time& frameTime) {
 		onBack();
 		return;
 	}
-	updateObjects(GameObjectType::_Button, frameTime);
-	updateObjects(GameObjectType::_Form, frameTime);
+	updateObjects(_Button, frameTime);
+	updateObjects(_Form, frameTime);
 	updateTooltipText(frameTime);
 	m_saveGameWindow->update(frameTime);
-	if (!getObjects(GameObjectType::_Form)->empty()) return;
+	if (!getObjects(_Form)->empty()) return;
 	if (m_saveGameWindow->isChosen()) {
 		onSaveGame();
 	}
@@ -40,8 +40,8 @@ void SaveGameScreen::render(sf::RenderTarget &renderTarget) {
 	renderTarget.draw(*m_title);
 	renderTooltipText(renderTarget);
 	m_saveGameWindow->render(renderTarget);
-	renderObjects(GameObjectType::_Button, renderTarget);
-	renderObjects(GameObjectType::_Form, renderTarget);
+	renderObjects(_Button, renderTarget);
+	renderObjects(_Form, renderTarget);
 }
 
 void SaveGameScreen::execOnEnter() {

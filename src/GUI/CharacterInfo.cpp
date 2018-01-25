@@ -526,7 +526,7 @@ void HintEntry::select() {
 }
 
 GameObjectType HintEntry::getConfiguredType() const {
-	return GameObjectType::_Interface;
+	return _Interface;
 }
 
 void HintEntry::deselect() {

@@ -64,7 +64,7 @@ void RoyalguardBoss::setDead() {
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *getBoundingBox();
 
-	for (auto go : *m_screen->getObjects(GameObjectType::_Enemy)) {
+	for (auto go : *m_screen->getObjects(_Enemy)) {
 		if (auto other = dynamic_cast<RoyalguardBoss*>(go)) {
 			if (other == this) continue;
 			rec.boundingBox.left += 20.f;

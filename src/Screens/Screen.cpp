@@ -22,7 +22,7 @@ Screen::Screen(CharacterCore* core) {
 	m_characterCore = core;
 
 	m_objects = std::vector<std::vector<GameObject*>>();
-	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1)) {
+	for (GameObjectType t = _Undefined; t < _MAX; t = GameObjectType(t + 1)) {
 		std::vector<GameObject*> newVector;
 		m_objects.push_back(newVector);
 	}
@@ -80,7 +80,7 @@ void Screen::execOnExit() {
 }
 
 void Screen::deleteDisposedObjects() {
-	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1)) {
+	for (GameObjectType t = _Undefined; t < _MAX; t = GameObjectType(t + 1)) {
 		for (std::vector<GameObject*>::iterator it = m_objects[t].begin(); it != m_objects[t].end(); /*don't increment here*/) {
 			if ((*it)->isDisposed()) {
 				delete (*it);
@@ -94,7 +94,7 @@ void Screen::deleteDisposedObjects() {
 }
 
 void Screen::setAllButtonsEnabled(bool value) {
-	std::vector<GameObject*>* buttons = getObjects(GameObjectType::_Button);
+	std::vector<GameObject*>* buttons = getObjects(_Button);
 	for (auto it : *buttons) {
 		Button* button = dynamic_cast<Button*>(it);
 		if (button != nullptr) {
@@ -104,7 +104,7 @@ void Screen::setAllButtonsEnabled(bool value) {
 }
 
 void Screen::deleteAllObjects() {
-	for (GameObjectType t = GameObjectType::_Undefined; t < GameObjectType::_MAX; t = GameObjectType(t + 1)) {
+	for (GameObjectType t = _Undefined; t < _MAX; t = GameObjectType(t + 1)) {
 		deleteObjects(t);
 	}
 }

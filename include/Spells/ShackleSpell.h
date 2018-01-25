@@ -14,7 +14,7 @@ public:
 	void load(float angle, const sf::Vector2f& pos);
 	void gotoMainchar(GameObject* mainChar);
 
-	GameObjectType getConfiguredType() const override { return GameObjectType::_Spell; }
+	GameObjectType getConfiguredType() const override { return _Spell; }
 
 private:
 	static const float SPEED;
