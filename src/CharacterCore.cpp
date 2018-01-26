@@ -108,6 +108,12 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 		}
 		m_quests.insert({ newQuest.id, newQuest });
 		m_data.questStates.insert({ id, state });
+
+		// auto-activate quest tracking if this is configured
+		if (g_resourceManager->getConfiguration().isDisplayQuestMarkers) {
+			setQuestTracked(id, true);
+		}
+
 		return true;
 	}
 	if (state != QuestState::Started && contains(m_data.questStates, id)) {

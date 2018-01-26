@@ -4,7 +4,6 @@ targets =
 	{"Rat", 4}
 }
 
-
 markers = {
 	{
 		map = "res/map/meadows/meadows.tmx",
@@ -13,6 +12,7 @@ markers = {
 	},
 	{
 		map = "res/map/meadows/meadows.tmx",
+		npc = "npc_edmond",
 		position = {325, 675},
 		step = -1
 	}

@@ -61,7 +61,7 @@ std::vector<QuestMarkerData> QuestMarker::getCurrentStepData(const QuestData& qu
 	
 	for (auto& data : questData.questMarkers)
 	{
-		if (data.step == currentStep && core->isMapExplored(data.mapId))
+		if (data.step == currentStep && (data.mapId.empty() || core->isMapExplored(data.mapId)))
 		{
 			stepData.push_back(data);
 		}

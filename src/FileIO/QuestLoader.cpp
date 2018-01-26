@@ -78,26 +78,47 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 		LuaRef marker = markers[i];
 		while (!marker.isNil()) {
 			LuaRef map = marker["map"];
+			LuaRef npc = marker["npc"];
 			LuaRef position = marker["position"];
 			LuaRef step = marker["step"];
-			if (!map.isString() || !step.isNumber() || !position.isTable()) {
-				g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved, map, position or step missing or wrong type.");
+
+			// check legal states
+			if (!step.isNumber()) {
+				g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved step missing or wrong type.");
 				return questData;
 			}
-
-			LuaRef posX = position[1];
-			LuaRef posY = position[2];
-
-			if (!posX.isNumber() || !posY.isNumber()) {
-				g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved, position has wrong format.");
+			if (npc.isString() && (!map.isString() || !position.isTable())) {
+				g_logger->logError("QuestLoader", "Quest [" + filename + "]: if npc is given, provide map and position as well");
+				return questData;
+			}
+			if (!map.isString() && (npc.isString() || position.isTable())) {
+				g_logger->logError("QuestLoader", "Quest [" + filename + "]: if map is not given, don't provide position or npc");
 				return questData;
 			}
 
 			QuestMarkerData data;
-			data.mapId = map.cast<std::string>();
 			data.step = step.cast<int>();
-			data.position.x = posX.cast<float>();
-			data.position.y = posY.cast<float>();
+
+			if (position.isTable())
+			{
+				LuaRef posX = position[1];
+				LuaRef posY = position[2];
+				if (!posX.isNumber() || !posY.isNumber()) {
+					g_logger->logError("QuestLoader", "Quest [" + filename + "]: marker could not be resolved, position has wrong format.");
+					return questData;
+				}
+
+				data.position.x = posX.cast<float>();
+				data.position.y = posY.cast<float>();
+			}
+
+			if (map.isString()) {
+				data.mapId = map.cast<std::string>();
+			}
+
+			if (npc.isString()) {
+				data.npcId = npc.cast<std::string>();
+			}
 
 			questData.questMarkers.push_back(data);
 			marker = markers[++i];

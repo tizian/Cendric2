@@ -4,6 +4,7 @@
 
 struct QuestMarkerData final {
 	std::string mapId;
+	std::string npcId;
 	sf::Vector2f position;
 	int step = 0;
 };

@@ -5,13 +5,13 @@
 #include "Screens/WorldScreen.h"
 #include "Screens/LevelScreen.h"
 #include "Map/DynamicTiles/WaypointTile.h"
+#include "Map/NPC.h"
 #include "Level/DynamicTiles/ChestLevelTile.h"
 #include "World/MainCharacter.h"
 #include "World/Trigger.h"
 #include "GlobalResource.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
 #include "Structs/LevelData.h"
-
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -388,10 +388,32 @@ void MapOverlay::reloadQuestMarkers() {
 
 		auto questMarkerDatas = QuestMarker::getCurrentStepData(*questData, core);
 		for (auto& markerData : questMarkerDatas) {
-			if (markerData.mapId != map->mapId) continue;
+
+			sf::Vector2f markerPos = markerData.position;
+			if (markerData.mapId.empty()) {
+				// the marker position is the position of the main character
+				markerPos = m_screen->getMainCharacter()->getPosition();
+			}
+			else if (markerData.mapId != map->mapId) {
+				// this marker is not on this map.
+				continue;
+			} 
+			else if (markerData.mapId == m_screen->getWorld()->getID() && !markerData.npcId.empty()) {
+				// this marker is on the current map and references an npc on this map.
+				for (auto go : *m_screen->getObjects(_MapMovableGameObject))
+				{
+					auto const npc = dynamic_cast<NPC*>(go);
+					if (npc->getNPCData().id == markerData.npcId)
+					{
+						markerPos = npc->getPosition();
+						break;
+					}
+				}
+			}
+
 			MapQuestMarker* marker = new MapQuestMarker(*questData, markerData, m_interface);
 			marker->setActive(true);
-			marker->setPosition(m_position + (markerData.position * map->scale) - sf::Vector2f(8.f, 8.f));
+			marker->setPosition(m_position + (markerPos * map->scale) - sf::Vector2f(8.f, 8.f));
 			m_questMarkers.push_back(marker);
 		}
 	}
@@ -399,7 +421,16 @@ void MapOverlay::reloadQuestMarkers() {
 
 void MapOverlay::notifyJumpToQuest(const std::string& questId, const std::vector<QuestMarkerData>& data) {
 	if (data.empty()) return;
-	if (!setMap(data[0].mapId)) return;
+
+	if (data[0].mapId.empty()) {
+		// special case, this means that the main character is marked on the map.
+		// we set the current map now.
+		setMap(m_screen->getWorldData()->id);
+	} 
+	else {
+		// set the map that's referened in the quest marker.
+		if (!setMap(data[0].mapId)) return;
+	}
 
 	m_mapTabBar->show(m_currentMap);
 
@@ -434,12 +465,12 @@ void MapOverlay::render(sf::RenderTarget& target) {
 		wp->render(target);
 	}
 
+	if (m_isOnCurrentMap)
+		target.draw(m_mainCharMarker);
+
 	for (auto qm : m_questMarkers) {
 		qm->render(target);
 	}
-
-	if (m_isOnCurrentMap)
-		target.draw(m_mainCharMarker);
 
 	for (auto qm : m_questMarkers) {
 		qm->renderAfterForeground(target);

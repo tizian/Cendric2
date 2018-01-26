@@ -138,11 +138,11 @@ bool WorldCallback::isItemEquipped(const std::string& itemID) const {
 	return m_core->isItemEquipped(itemID);
 }
 
-bool WorldCallback::isSpellLearned(int spellID) {
+bool WorldCallback::isSpellLearned(int spellID) const {
 	return m_core->isSpellLearned(static_cast<SpellID>(spellID));
 }
 
-bool WorldCallback::isSpellEquipped(int spellID) {
+bool WorldCallback::isSpellEquipped(int spellID) const {
 	return m_core->isSpellEquipped(static_cast<SpellID>(spellID));
 }
 
@@ -300,7 +300,7 @@ void WorldCallback::spawnEnemy(lua_State* state) const {
 				return;
 			}
 
-			std::string itemID = itemIDRef.cast<std::string>();
+			auto const itemID = itemIDRef.cast<std::string>();
 			if (itemID == "gold") {
 				gold = amountRef.cast<int>();
 			}
