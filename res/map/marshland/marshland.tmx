@@ -668,7 +668,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc" visible="0">
+ <objectgroup name="npc">
   <object id="277" gid="2341" x="550" y="500" width="50" height="50">
    <properties>
     <property name="id" value="npc_morton"/>

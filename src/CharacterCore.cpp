@@ -285,6 +285,11 @@ bool CharacterCore::isQuestComplete(const std::string& questID) const {
 	}
 	QuestData data = m_quests.at(questID);
 
+	// check quest steps
+	if (!isQuestDescriptionUnlocked(questID, data.targetStep)) {
+		return false;
+	}
+
 	// check quest conditions
 	if (!data.conditions.empty()) {
 		if (!contains(m_data.questConditionProgress, questID))
@@ -343,6 +348,7 @@ bool CharacterCore::isQuestConditionFulfilled(const std::string& questID, const 
 }
 
 bool CharacterCore::isQuestDescriptionUnlocked(const std::string& questID, int description) const {
+	if (description <= 0) return true;
 	if (!contains(m_data.questDescriptionProgress, questID)) {
 		return false;
 	}

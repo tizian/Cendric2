@@ -19,7 +19,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(4, -1, "DL_Inina_StrangePassage3") -- I don't know a spell that could push through this blockade. Maybe you could succeed?
 		DL:addConditionProgress("npc_inina2", "talked")
-		DL:addQuestDescription("further_investigation", 1)
+		DL:addQuestDescription("further_investigation", 2)
 		DL:addNode()
 
 	end

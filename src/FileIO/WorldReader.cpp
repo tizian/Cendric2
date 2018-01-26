@@ -253,6 +253,27 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					content.s2 = conditionProgress;
 					trigger.content.push_back(content);
 				}
+				else if (name == "questdescription progress") {
+					textAttr = _property->Attribute("value");
+					if (textAttr == nullptr) {
+						logError("XML file could not be read, questdescription progress value property not found.");
+						return false;
+					}
+
+					std::string conditionProgress = textAttr;
+
+					size_t pos = 0;
+					if ((pos = conditionProgress.find(",")) == std::string::npos) {
+						logError("XML file could not be read, questdescription progress value must be two strings, seperated by a comma.");
+						return false;
+					}
+
+					TriggerContent content(TriggerContentType::QuestDescriptionProgress);
+					content.s1 = conditionProgress.substr(0, pos);
+					conditionProgress.erase(0, pos + 1);
+					content.i1 = std::stoi(conditionProgress);
+					trigger.content.push_back(content);
+				}
 				else if (name == "conditions" || name == "not conditions") {
 					bool isNotCondition = name == "not conditions";
 					textAttr = _property->Attribute("value");

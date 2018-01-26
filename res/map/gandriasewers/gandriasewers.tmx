@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="319">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="320">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="explorable" value=""/>
@@ -528,6 +528,12 @@
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,715,1700"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="319" x="50" y="1200" width="150" height="100">
+   <properties>
+    <property name="forced" value=""/>
+    <property name="questdescription progress" value="further_investigation,1"/>
    </properties>
   </object>
  </objectgroup>

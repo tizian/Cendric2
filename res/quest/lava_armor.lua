@@ -6,3 +6,18 @@ collectibles =
     {"gold", 100}
 }
 
+markers = {
+    {
+		map = "res/map/gandria/gandria.tmx",
+		position = {200, 2550},
+        npc = "npc_harek",
+		step = 0
+	},
+	{
+		map = "res/map/gandria/gandria.tmx",
+		position = {200, 2550},
+        npc = "npc_harek",
+		step = -1
+	}
+}
+

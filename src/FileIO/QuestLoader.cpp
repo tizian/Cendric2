@@ -72,6 +72,11 @@ QuestData QuestLoader::loadQuest(const std::string& questID) {
 		}
 	}
 
+	LuaRef targetStep = getGlobal(L, "targetStep");
+	if (targetStep.isNumber()) {
+		questData.targetStep = targetStep.cast<int>();
+	}
+
 	LuaRef markers = getGlobal(L, "markers");
 	if (markers.isTable()) {
 		int i = 1;

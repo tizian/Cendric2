@@ -21,6 +21,8 @@ struct QuestData final {
 	std::map<std::string, int> targets;
 	// which conditions must be fulfilled?
 	std::set<std::string> conditions;
+	// which step must be reached?
+	int targetStep = 0;
 
 	// quest markers
 	std::vector<QuestMarkerData> questMarkers;

@@ -48,7 +48,7 @@ npc.id:npc_inina2
 	tag:4
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_inina2", "talked")
-	trigger:DL:addQuestDescription("further_investigation", 1)
+	trigger:DL:addQuestDescription("further_investigation", 2)
 	# translation: 
 	translation.tag:DL_Inina_StrangePassage3
 	translation.en:I don't know a spell that could push through this blockade. Maybe you could succeed?

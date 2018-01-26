@@ -2245,7 +2245,8 @@
    <properties>
     <property name="condition progress" value="default,cryptdoor"/>
     <property name="forced" value=""/>
-    <property name="quest state" value="jonathan_knowledge,started"/>
+    <property name="quest state" value="element_secret,completed"/>
+    <property name="quest state 2" value="jonathan_knowledge,started"/>
    </properties>
   </object>
   <object id="773" x="700" y="2400" width="150" height="50">
