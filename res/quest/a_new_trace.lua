@@ -1,6 +1,6 @@
 main_quest = true
 
-targetStep = 1
+target_step = 1
 
 markers = {
 	{

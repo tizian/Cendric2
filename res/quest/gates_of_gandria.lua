@@ -1,7 +1,7 @@
 main_quest = true
 -- empty quest
 
-targetStep = 1
+target_step = 1
 
 markers = {
     {
