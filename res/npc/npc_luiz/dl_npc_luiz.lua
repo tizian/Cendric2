@@ -158,16 +158,16 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_luiz", "first_spell") and not DL:isSpellLearned("15")) then 
 			DL:addChoice(22, "DL_Choice_TeachMore") -- Can you teach me more spells?
 		end
-		if (DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan_necro", "void")) then 
 			DL:addChoice(24, "DL_Choice_HowCanIHelp") -- How can I help you?
 		end
-		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
+		if (not DL:isQuestState("lloyds_plan_necro", "void") and DL:isQuestState("cathedral_necro", "void")) then 
 			DL:addChoice(26, "DL_Choice_WhatElseHelp") -- What else can I do for you?
 		end
 		if (DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")) then 
 			DL:addChoice(30, "DL_Choice_FinishedCathedral") -- I got the necrotic grimoire.
 		end
-		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+		if (DL:isQuestState("lloyds_plan_necro", "started") and DL:isQuestComplete("lloyds_plan_necro")) then 
 			DL:addChoice(23, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
 		end
 		if (DL:isSpellLearned("15") and not DL:isConditionFulfilled("npc_luiz", "no_more_spells")) then 
@@ -207,19 +207,19 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan_necro", "void")) then 
 
 			DL:createNPCNode(24, 25, "DL_Luiz_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
 			DL:addNode()
 
 
 			DL:createNPCNode(25, -2, "DL_Luiz_LloydsPlan2") -- We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
-			DL:changeQuestState("lloyds_plan", "started")
+			DL:changeQuestState("lloyds_plan_necro", "started")
 			DL:addNode()
 
 		end
 
-		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")) then 
+		if (not DL:isQuestState("lloyds_plan_necro", "void") and DL:isQuestState("cathedral_necro", "void")) then 
 
 			DL:createNPCNode(26, 27, "DL_Luiz_CathedralNecro") -- Although the clerics do not know our hideout, they managed to get their hands on one of our grimoires about necromancy.
 			DL:addNode()
@@ -254,14 +254,14 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+		if (DL:isQuestState("lloyds_plan_necro", "started") and DL:isQuestComplete("lloyds_plan_necro")) then 
 
 			DL:createCendricNode(23, 32, "DL_Cendric_CompleteLloydsPlan") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
 			DL:addNode()
 
 
 			DL:createNPCNode(32, 33, "DL_Luiz_CompleteLloydsPlan") -- That's interesting, thank you for the report.
-			DL:changeQuestState("lloyds_plan", "completed")
+			DL:changeQuestState("lloyds_plan_necro", "completed")
 			DL:addReputationProgress("necromancer", 5)
 			DL:addNode()
 

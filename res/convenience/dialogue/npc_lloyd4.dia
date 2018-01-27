@@ -236,7 +236,8 @@ npc.id:npc_lloyd4
 	# [13] NPC Node
 	tag:13
 	# triggers: 
-	trigger:DL:addQuestProgress("lloyds_plan", "information_gathered")
+	trigger:DL:addQuestProgress("lloyds_plan_necro", "information_gathered")
+	trigger:DL:addQuestProgress("lloyds_plan_thief", "information_gathered")
 	trigger:DL:changeQuestState("ininas_abduction", "completed")
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter4

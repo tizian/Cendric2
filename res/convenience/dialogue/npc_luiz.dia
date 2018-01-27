@@ -397,7 +397,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:24
-		condition:DL:isQuestState("lloyds_plan", "void")
+		condition:DL:isQuestState("lloyds_plan_necro", "void")
 		# translation: 
 		translation.tag:DL_Choice_HowCanIHelp
 		translation.en:How can I help you?
@@ -407,7 +407,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:26
-		condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_necro", "void")
+		condition:not DL:isQuestState("lloyds_plan_necro", "void") and DL:isQuestState("cathedral_necro", "void")
 		# translation: 
 		translation.tag:DL_Choice_WhatElseHelp
 		translation.en:What else can I do for you?
@@ -427,7 +427,7 @@ npc.id:npc_luiz
 	[
 		# Link node, tag is next tag
 		tag:23
-		condition:DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")
+		condition:DL:isQuestState("lloyds_plan_necro", "started") and DL:isQuestComplete("lloyds_plan_necro")
 		# translation: 
 		translation.tag:DL_Choice_CompleteLloydsPlan
 		translation.en:I've talked to Lloyd...
@@ -552,7 +552,7 @@ npc.id:npc_luiz
 	# [25] NPC Node
 	tag:25
 	# triggers: 
-	trigger:DL:changeQuestState("lloyds_plan", "started")
+	trigger:DL:changeQuestState("lloyds_plan_necro", "started")
 	# translation: 
 	translation.tag:DL_Luiz_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
@@ -670,7 +670,7 @@ npc.id:npc_luiz
 	# [32] NPC Node
 	tag:32
 	# triggers: 
-	trigger:DL:changeQuestState("lloyds_plan", "completed")
+	trigger:DL:changeQuestState("lloyds_plan_necro", "completed")
 	trigger:DL:addReputationProgress("necromancer", 5)
 	# translation: 
 	translation.tag:DL_Luiz_CompleteLloydsPlan

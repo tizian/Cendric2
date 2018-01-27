@@ -400,10 +400,9 @@ void MapOverlay::reloadQuestMarkers() {
 			} 
 			else if (markerData.mapId == m_screen->getWorld()->getID() && !markerData.npcId.empty()) {
 				// this marker is on the current map and references an npc on this map.
-				for (auto go : *m_screen->getObjects(_MapMovableGameObject))
-				{
+				for (auto go : *m_screen->getObjects(_MapMovableGameObject)) {
 					auto const npc = dynamic_cast<NPC*>(go);
-					if (npc->getNPCData().id == markerData.npcId)
+					if (npc && npc->getNPCData().id == markerData.npcId)
 					{
 						markerPos = npc->getPosition();
 						break;

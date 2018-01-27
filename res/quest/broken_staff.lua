@@ -24,7 +24,7 @@ markers = {
 	{
 		map = "res/map/gandria/gandria.tmx",
 		position = {200, 2550},
-        npc = "npc_harek"
+        npc = "npc_harek",
 		step = -1
 	}
 }

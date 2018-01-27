@@ -79,7 +79,8 @@ loadDialogue = function(DL)
 
 
 			DL:createNPCNode(13, 14, "DL_Lloyd_FoundLetter4") -- I've heard from other cases. We must do something! 
-			DL:addQuestProgress("lloyds_plan", "information_gathered")
+			DL:addQuestProgress("lloyds_plan_thief", "information_gathered")
+			DL:addQuestProgress("lloyds_plan_necro", "information_gathered")
 			DL:changeQuestState("ininas_abduction", "completed")
 			DL:addNode()
 

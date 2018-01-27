@@ -7,7 +7,7 @@ collectibles =
 markers = {
     {
 		map = "res/map/highland/highland.tmx",
-		position = {1900, 650},
+		position = {1900, 600},
 		step = 0
 	},
 	{

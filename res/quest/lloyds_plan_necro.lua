@@ -1,20 +1,18 @@
 main_quest = true
 
-collectibles = 
-{
-	{"qe_leeroychicken", 1},
+conditions = {
+	"information_gathered",
 }
 
 markers = {
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {1425, 2525},
+		position = {675, 1175},
 		step = 0
 	},
 	{
 		map = "res/map/marshland/marshland.tmx",
-		position = {1375, 475},
-        npc = "npc_leeroy",
+		position = {1425, 1625},
 		step = -1
 	}
 }

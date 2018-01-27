@@ -368,7 +368,7 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:DL:isQuestState("lloyds_plan", "void")
+		condition:DL:isQuestState("lloyds_plan_thief", "void")
 		# translation: 
 		translation.tag:DL_Choice_HowCanIHelp
 		translation.en:How can I support you?
@@ -378,7 +378,7 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:22
-		condition:not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")
+		condition:not DL:isQuestState("lloyds_plan_thief", "void") and DL:isQuestState("cathedral_thief", "void")
 		# translation: 
 		translation.tag:DL_Choice_HowElseHelp
 		translation.en:What else can I do to demonstrate my skills?
@@ -398,7 +398,7 @@ npc.id:npc_vincent3
 	[
 		# Link node, tag is next tag
 		tag:20
-		condition:DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")
+		condition:DL:isQuestState("lloyds_plan_thief", "started") and DL:isQuestComplete("lloyds_plan_thief")
 		# translation: 
 		translation.tag:DL_Choice_CompleteLloydsPlan
 		translation.en:I've talked to Lloyd...
@@ -522,7 +522,7 @@ npc.id:npc_vincent3
 	# [26] NPC Node
 	tag:26
 	# triggers: 
-	trigger:DL:changeQuestState("lloyds_plan", "started")
+	trigger:DL:changeQuestState("lloyds_plan_thief", "started")
 	# translation: 
 	translation.tag:DL_Vincent_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
@@ -640,7 +640,7 @@ npc.id:npc_vincent3
 	# [29] NPC Node
 	tag:29
 	# triggers: 
-	trigger:DL:changeQuestState("lloyds_plan", "completed")
+	trigger:DL:changeQuestState("lloyds_plan_thief", "completed")
 	trigger:DL:addReputationProgress("thief", 5)
 	# translation: 
 	translation.tag:DL_Vincent_CompleteLloydsPlan

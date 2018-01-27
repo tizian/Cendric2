@@ -1,12 +1,13 @@
-collectibles = 
-{
-	{"qe_divinecandleholder", 3},
+main_quest = true
+
+conditions = {
+	"information_gathered",
 }
 
 markers = {
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {2225, 950},
+		position = {675, 1175},
 		step = 0
 	},
 	{
@@ -16,3 +17,4 @@ markers = {
 		step = -1
 	}
 }
+

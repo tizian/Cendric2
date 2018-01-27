@@ -154,16 +154,16 @@ loadDialogue = function(DL)
 		if (DL:isSpellLearned("10") and not DL:isConditionFulfilled("npc_vincent3", "no_more_spells")) then 
 			DL:addChoice(32, "DL_Choice_TeachMore") -- 
 		end
-		if (DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan_thief", "void")) then 
 			DL:addChoice(12, "DL_Choice_HowCanIHelp") -- How can I support you?
 		end
-		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+		if (not DL:isQuestState("lloyds_plan_thief", "void") and DL:isQuestState("cathedral_thief", "void")) then 
 			DL:addChoice(22, "DL_Choice_HowElseHelp") -- What else can I do to demonstrate my skills?
 		end
 		if (DL:isQuestState("cathedral_thief", "started") and DL:isQuestComplete("cathedral_thief")) then 
 			DL:addChoice(27, "DL_Choice_CathedralFinished") -- I got the candleholders.
 		end
-		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+		if (DL:isQuestState("lloyds_plan_thief", "started") and DL:isQuestComplete("lloyds_plan_thief")) then 
 			DL:addChoice(20, "DL_Choice_CompleteLloydsPlan") -- I've talked to Lloyd...
 		end
 		if (DL:isQuestState("cathedral_thief", "completed") and DL:isQuestState("yasha_thief", "void")) then 
@@ -206,19 +206,19 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isQuestState("lloyds_plan", "void")) then 
+		if (DL:isQuestState("lloyds_plan_thief", "void")) then 
 
 			DL:createNPCNode(12, 26, "DL_Vincent_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
 			DL:addNode()
 
 
 			DL:createNPCNode(26, -2, "DL_Vincent_LloydsPlan2") -- We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
-			DL:changeQuestState("lloyds_plan", "started")
+			DL:changeQuestState("lloyds_plan_thief", "started")
 			DL:addNode()
 
 		end
 
-		if (not DL:isQuestState("lloyds_plan", "void") and DL:isQuestState("cathedral_thief", "void")) then 
+		if (not DL:isQuestState("lloyds_plan_thief", "void") and DL:isQuestState("cathedral_thief", "void")) then 
 
 			DL:createNPCNode(22, 23, "DL_Vincent_CathedralThief") -- The clerics have made a big mistake when they tried to exorcise a dangerous grimoire about necromancy.
 			DL:addNode()
@@ -253,14 +253,14 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isQuestState("lloyds_plan", "started") and DL:isQuestComplete("lloyds_plan")) then 
+		if (DL:isQuestState("lloyds_plan_thief", "started") and DL:isQuestComplete("lloyds_plan_thief")) then 
 
 			DL:createCendricNode(20, 29, "DL_Cendric_CompleteLloydsPlan") -- ... Some "V." is abducting mages. Lloyd is trying to find out who that is.
 			DL:addNode()
 
 
 			DL:createNPCNode(29, 30, "DL_Vincent_CompleteLloydsPlan") -- Some "V.", eh. (Grins) Well, it's not me, I can assure you that. Thank you for the report.
-			DL:changeQuestState("lloyds_plan", "completed")
+			DL:changeQuestState("lloyds_plan_thief", "completed")
 			DL:addReputationProgress("thief", 5)
 			DL:addNode()
 
