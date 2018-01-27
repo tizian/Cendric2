@@ -69,7 +69,7 @@ MerchantWindow::~MerchantWindow() {
 }
 
 void MerchantWindow::clearAllSlots() {
-	m_items.clear();
+	CLEAR_MAP(m_items);
 	m_selectedSlotId = "";
 }
 
@@ -92,7 +92,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 			calculateSlotPositions();
 		}
 		else {
-			m_items.at(itemID).setAmount(m_interface->getMerchantData().wares.at(itemID));
+			m_items.at(itemID)->setAmount(m_interface->getMerchantData().wares.at(itemID));
 		}
 		return;
 	}
@@ -100,7 +100,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 	// the slot for that item has not been found. The slot is added with the current amount in the core
 	if (!contains(m_interface->getMerchantData().wares, itemID)) return;
 
-	m_items.insert({ itemID, InventorySlot(itemID, m_interface->getMerchantData().wares.at(itemID)) });
+	m_items.insert({ itemID, new InventorySlot(itemID, m_interface->getMerchantData().wares.at(itemID)) });
 
 	calculateSlotPositions();
 }
@@ -110,14 +110,14 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 
 	// check whether an item was selected
 	for (auto& slot : m_items) {
-		sf::Vector2f pos = slot.second.getPosition();
+		sf::Vector2f pos = slot.second->getPosition();
 		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
 			pos.y + InventorySlot::SIZE > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		slot.second.update(frameTime);
-		if (slot.second.isMousedOver()) {
-			selectSlot(slot.second.getItemID());
-			if (slot.second.isRightClicked()) {
-				m_interface->buyItem(slot.second.getItem());
+		slot.second->update(frameTime);
+		if (slot.second->isMousedOver()) {
+			selectSlot(slot.second->getItemID());
+			if (slot.second->isRightClicked()) {
+				m_interface->buyItem(slot.second->getItem());
 				break;
 			}
 		}
@@ -163,7 +163,7 @@ void MerchantWindow::deselectCurrentSlot() {
 InventorySlot* MerchantWindow::getSelectedSlot() {
 	if (m_selectedSlotId.empty()) return nullptr;
 	if (!contains(m_items, m_selectedSlotId)) return nullptr;
-	return &m_items.at(m_selectedSlotId);
+	return m_items.at(m_selectedSlotId);
 }
 
 void MerchantWindow::render(sf::RenderTarget& target) {
@@ -171,7 +171,7 @@ void MerchantWindow::render(sf::RenderTarget& target) {
 	target.draw(m_title);
 
 	for (auto& it : m_items) {
-		it.second.render(m_scrollHelper->texture);
+		it.second->render(m_scrollHelper->texture);
 	}
 	m_scrollHelper->render(target);
 
@@ -183,7 +183,7 @@ void MerchantWindow::render(sf::RenderTarget& target) {
 
 void MerchantWindow::renderAfterForeground(sf::RenderTarget& target) {
 	for (auto& it : m_items) {
-		it.second.renderAfterForeground(target);
+		it.second->renderAfterForeground(target);
 	}
 }
 
@@ -214,7 +214,7 @@ void MerchantWindow::reload() {
 			continue;
 		}
 		
-		m_items.insert({ it.first, InventorySlot(it.first, it.second) });
+		m_items.insert({ it.first, new InventorySlot(it.first, it.second) });
 	}
 }
 
@@ -248,7 +248,7 @@ void MerchantWindow::calculateSlotPositions() {
 	int y = 1;
 	int x = 1;
 	for (auto& it : m_items) {
-		it.second.setPosition(sf::Vector2f(xOffset, yOffset));
+		it.second->setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
 			xOffset = xOffsetStart;

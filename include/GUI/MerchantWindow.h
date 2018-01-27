@@ -49,7 +49,7 @@ private:
 	void deselectCurrentSlot();
 	InventorySlot* getSelectedSlot();
 
-	std::map<std::string, InventorySlot> m_items;
+	std::map<std::string, InventorySlot*> m_items;
 	MerchantItemDescriptionWindow* m_descriptionWindow = nullptr;
 
 	void showDescription(const Item* item);
