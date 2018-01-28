@@ -130,7 +130,7 @@ void ResourceManager::init() {
 
 	ConfigurationReader reader;
 	if (!reader.readConfiguration(m_configuration)) {
-		m_configuration = DEFAULT_CONFIGURATION;
+		m_configuration.resetToDefault();
 	}
 
 	// init sound pool

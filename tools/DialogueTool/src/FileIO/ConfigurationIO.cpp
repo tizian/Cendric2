@@ -12,7 +12,7 @@ const std::string ConfigurationIO::PARSE_IN = "parse.in";
 const std::string ConfigurationIO::PARSE_OUT = "parse.out";
 
 bool ConfigurationIO::loadConfiguration() {
-	Configuration data = DEFAULT_CONFIGURATION;
+	Configuration data;
 
 	std::string line;
 	std::ifstream configuration(CONFIGURATION_PATH);
@@ -53,7 +53,7 @@ bool ConfigurationIO::loadConfiguration() {
 	}
 	else {
 		ERROR("[Configuration]: Unable to open configuration file. Default configuration is used.");
-		g_state->setConfiguration(DEFAULT_CONFIGURATION);
+		g_state->setConfiguration(data);
 		return false;
 	}
 

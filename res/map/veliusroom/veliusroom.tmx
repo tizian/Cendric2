@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="201">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="202">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
@@ -414,8 +414,13 @@
   <object id="198" x="600" y="862.5" width="100" height="37.5">
    <properties>
     <property name="achievement core" value="ACH_NO_DEATH"/>
-    <property name="achievement core 2" value="ACH_SPEEDRUN"/>
     <property name="credits" value=""/>
+    <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="201" x="600" y="862.5" width="100" height="37.5">
+   <properties>
+    <property name="achievement core" value="ACH_SPEEDRUN"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

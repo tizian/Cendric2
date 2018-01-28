@@ -265,7 +265,7 @@ void KeyBindingsScreen::onApply() {
 }
 
 void KeyBindingsScreen::onUseDefault() {
-	m_selectedKeys = DEFAULT_KEYMAP;
+	m_selectedKeys = ConfigurationData::DEFAULT_KEYMAP;
 	reload();
 }
 

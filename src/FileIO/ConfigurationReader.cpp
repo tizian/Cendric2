@@ -1,71 +1,68 @@
 #include "FileIO/ConfigurationReader.h"
 #include "GlobalResource.h"
 
-
 #include <cstring>
 
-using namespace std;
+bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry) const {
+	data.resetToDefault();
 
-bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
-	data = DEFAULT_CONFIGURATION;
-
-	string line;
-	ifstream configuration(getDocumentsPath(GlobalResource::CONFIGURATION_PATH));
+	std::string line;
+	std::ifstream configuration(getDocumentsPath(GlobalResource::CONFIGURATION_PATH));
 	bool noError = true;
 	if (configuration.is_open()) {
 		while (getline(configuration, line)) {
 			if (line.empty() || line.compare(0, 1, "#") == 0) {
 				continue;
 			}
-			else if (line.compare(0, strlen(LANGUAGE), string(LANGUAGE)) == 0) {
+			else if (line.compare(0, strlen(LANGUAGE), std::string(LANGUAGE)) == 0) {
 				noError = readLanguage(line, data);
 			}
-			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), string(MAIN_INPUT_MAPPING)) == 0) {
+			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), std::string(MAIN_INPUT_MAPPING)) == 0) {
 				noError = readMainInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), string(ALTERNATIVE_INPUT_MAPPING)) == 0) {
+			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), std::string(ALTERNATIVE_INPUT_MAPPING)) == 0) {
 				noError = readAlternativeInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(VSYNC_ON), string(VSYNC_ON)) == 0) {
+			else if (line.compare(0, strlen(VSYNC_ON), std::string(VSYNC_ON)) == 0) {
 				noError = readVSyncOn(line, data);
 			}
-			else if (line.compare(0, strlen(FPS_LIMIT_ON), string(FPS_LIMIT_ON)) == 0) {
+			else if (line.compare(0, strlen(FPS_LIMIT_ON), std::string(FPS_LIMIT_ON)) == 0) {
 				noError = readFPSLimitOn(line, data);
 			}
-			else if (line.compare(0, strlen(FPS_MAX), string(FPS_MAX)) == 0) {
+			else if (line.compare(0, strlen(FPS_MAX), std::string(FPS_MAX)) == 0) {
 				noError = readFPSMax(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_ON), string(SOUND_ON)) == 0) {
+			else if (line.compare(0, strlen(SOUND_ON), std::string(SOUND_ON)) == 0) {
 				noError = readSoundOn(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_VOLUME_MUSIC), string(SOUND_VOLUME_MUSIC)) == 0) {
+			else if (line.compare(0, strlen(SOUND_VOLUME_MUSIC), std::string(SOUND_VOLUME_MUSIC)) == 0) {
 				noError = readSoundVolumeMusic(line, data);
 			}
-			else if (line.compare(0, strlen(SOUND_VOLUME_SOUND), string(SOUND_VOLUME_SOUND)) == 0) {
+			else if (line.compare(0, strlen(SOUND_VOLUME_SOUND), std::string(SOUND_VOLUME_SOUND)) == 0) {
 				noError = readSoundVolumeSound(line, data);
 			}
-			else if (line.compare(0, strlen(QUICKCAST_ON), string(QUICKCAST_ON)) == 0) {
+			else if (line.compare(0, strlen(QUICKCAST_ON), std::string(QUICKCAST_ON)) == 0) {
 				noError = readQuickcastOn(line, data);
 			}
-			else if (line.compare(0, strlen(HINTS_ON), string(HINTS_ON)) == 0) {
+			else if (line.compare(0, strlen(HINTS_ON), std::string(HINTS_ON)) == 0) {
 				noError = readHintsOn(line, data);
 			}
-			else if (line.compare(0, strlen(QUESTMARKERS_ON), string(QUESTMARKERS_ON)) == 0) {
+			else if (line.compare(0, strlen(QUESTMARKERS_ON), std::string(QUESTMARKERS_ON)) == 0) {
 				noError = readQuestmarkersOn(line, data);
 			}
-			else if (line.compare(0, strlen(STOPWATCH_ON), string(STOPWATCH_ON)) == 0) {
+			else if (line.compare(0, strlen(STOPWATCH_ON), std::string(STOPWATCH_ON)) == 0) {
 				noError = readStopwatchOn(line, data);
 			}
-			else if (line.compare(0, strlen(DEBUGRENDERING_ON), string(DEBUGRENDERING_ON)) == 0) {
+			else if (line.compare(0, strlen(DEBUGRENDERING_ON), std::string(DEBUGRENDERING_ON)) == 0) {
 				noError = readDebugRenderingOn(line, data);
 			}
-			else if (line.compare(0, strlen(SMOOTHING_ON), string(SMOOTHING_ON)) == 0) {
+			else if (line.compare(0, strlen(SMOOTHING_ON), std::string(SMOOTHING_ON)) == 0) {
 				noError = readSmoothingOn(line, data);
 			}
-			else if (line.compare(0, strlen(AUTOTARGET_ON), string(AUTOTARGET_ON)) == 0) {
+			else if (line.compare(0, strlen(AUTOTARGET_ON), std::string(AUTOTARGET_ON)) == 0) {
 				noError = readAutotargetOn(line, data);
 			}
-			else if (line.compare(0, strlen(DISPLAYMODE), string(DISPLAYMODE)) == 0) {
+			else if (line.compare(0, strlen(DISPLAYMODE), std::string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
 			}
 			else {
@@ -82,6 +79,29 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data) const {
 		}
 	}
 	else {
+		if (!retry) {
+			g_logger->logWarning("ConfigurationReader", "Unable to open configuration file. Default configuration is used.");
+			return false;
+		}
+
+		auto externalPath = getDocumentsPath(GlobalResource::CONFIGURATION_PATH);
+		auto internalPath = GlobalResource::CONFIGURATION_PATH;
+			
+		if (externalPath != internalPath) {
+			// try to copy config file over
+
+			std::ifstream  src(internalPath, std::ios::binary);
+			std::ofstream  dst(externalPath, std::ios::binary);
+
+			if (src.is_open() && dst.is_open()) {
+				dst << src.rdbuf();
+				g_logger->logInfo("ConfigurationReader", "Copying configuration file to external location.");
+				src.close();
+				dst.close();
+				return readConfiguration(data, false);
+			}
+		}
+
 		g_logger->logWarning("ConfigurationReader", "Unable to open configuration file. Default configuration is used.");
 		return false;
 	}
@@ -117,7 +137,7 @@ bool ConfigurationReader::checkConfigurationData(ConfigurationData& data) const 
 
 bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after language tag or no value after colon.");
 		return false;
 	}
@@ -132,7 +152,7 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 
 bool ConfigurationReader::readDisplayMode(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after display mode tag or no value after colon.");
 		return false;
 	}
@@ -147,7 +167,7 @@ bool ConfigurationReader::readDisplayMode(const std::string& line, Configuration
 
 bool ConfigurationReader::readVSyncOn(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after VSync on tag or no value after colon.");
 		return false;
 	}
@@ -158,7 +178,7 @@ bool ConfigurationReader::readVSyncOn(const std::string& line, ConfigurationData
 
 bool ConfigurationReader::readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after music volume tag or no value after colon");
 		return false;
 	}
@@ -173,7 +193,7 @@ bool ConfigurationReader::readSoundVolumeMusic(const std::string& line, Configur
 
 bool ConfigurationReader::readSoundVolumeSound(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after sound volume tag or no value after colon");
 		return false;
 	}
@@ -188,7 +208,7 @@ bool ConfigurationReader::readSoundVolumeSound(const std::string& line, Configur
 
 bool ConfigurationReader::readFPSMax(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after fps max tag or no value after colon");
 		return false;
 	}
@@ -239,7 +259,7 @@ bool ConfigurationReader::readAutotargetOn(const std::string& line, Configuratio
 
 bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
 		return false;
 	}
@@ -249,7 +269,7 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 		return false;
 	}
 	size_t comma = line.find(',');
-	if (comma == string::npos || line.length() < comma + 1) {
+	if (comma == std::string::npos || line.length() < comma + 1) {
 		g_logger->logError("ConfigurationReader", "No comma found after key integer (main input mapping tag) or no value after comma.");
 		return false;
 	}
@@ -264,7 +284,7 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 
 bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
 		return false;
 	}
@@ -274,7 +294,7 @@ bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, C
 		return false;
 	}
 	size_t comma = line.find(',');
-	if (comma == string::npos || line.length() < comma + 1) {
+	if (comma == std::string::npos || line.length() < comma + 1) {
 		g_logger->logError("ConfigurationReader", "No comma found after key integer (alternative input mapping tag) or no value after comma.");
 		return false;
 	}
@@ -289,7 +309,7 @@ bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, C
 
 bool ConfigurationReader::readBoolean(const std::string& line, bool& data) const {
 	size_t colon = line.find(':');
-	if (colon == string::npos || line.length() < colon + 1) {
+	if (colon == std::string::npos || line.length() < colon + 1) {
 		g_logger->logError("ConfigurationReader", "No colon found after smoothing on tag or no value after colon.");
 		return false;
 	}

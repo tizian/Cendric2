@@ -5,7 +5,32 @@
 #define XMLCheckResult(result) if (result != tinyxml2::XML_SUCCESS) {g_logger->logError("MapReader", "XML file could not be read, error: " + std::to_string(static_cast<int>(result))); return false; }
 #endif
 
-using namespace std;
+WorldReader::WorldReader() {
+	m_triggerProperties.insert({ "hint", &WorldReader::readHintTrigger });
+	m_triggerProperties.insert({ "learn spell", &WorldReader::readLearnSpellTrigger });
+	m_triggerProperties.insert({ "condition progress", &WorldReader::readConditionProgressTrigger });
+	m_triggerProperties.insert({ "reputation progress", &WorldReader::readReputationProgressTrigger });
+	m_triggerProperties.insert({ "questcondition progress", &WorldReader::readQuestConditionProgressTrigger });
+	m_triggerProperties.insert({ "questdescription progress", &WorldReader::readQuestDescriptionProgressTrigger });
+	m_triggerProperties.insert({ "conditions", &WorldReader::readYesConditionsTrigger });
+	m_triggerProperties.insert({ "not conditions", &WorldReader::readNotConditionsTrigger });
+	m_triggerProperties.insert({ "map entry", &WorldReader::readMapEntryTrigger });
+	m_triggerProperties.insert({ "level entry", &WorldReader::readLevelEntryTrigger });
+	m_triggerProperties.insert({ "forced map", &WorldReader::readForcedMapTrigger });
+	m_triggerProperties.insert({ "set map", &WorldReader::readSetMapTrigger });
+	m_triggerProperties.insert({ "set level", &WorldReader::readSetLevelTrigger });
+	m_triggerProperties.insert({ "weather", &WorldReader::readWeatherTrigger });
+	m_triggerProperties.insert({ "music", &WorldReader::readMusicTrigger });
+	m_triggerProperties.insert({ "achievement core", &WorldReader::readAchievementNotifyCoreTrigger });
+	m_triggerProperties.insert({ "achievement notify", &WorldReader::readAchievementNotifyTrigger });
+	m_triggerProperties.insert({ "quest state", &WorldReader::readQuestStateChangeTrigger });
+	m_triggerProperties.insert({ "add item", &WorldReader::readAddItemTrigger });
+	m_triggerProperties.insert({ "cutscene", &WorldReader::readCutsceneTrigger });
+	m_triggerProperties.insert({ "credits", &WorldReader::readCreditsTrigger });
+	m_triggerProperties.insert({ "forced", &WorldReader::readForcedTrigger });
+	m_triggerProperties.insert({ "keyguarded", &WorldReader::readKeyguardedTrigger });
+	m_triggerProperties.insert({ "persistent", &WorldReader::readPersistentTrigger });
+}
 
 void WorldReader::logError(const std::string& error) const {
 	g_logger->logError("WorldReader", "Error in world data : " + error);
@@ -165,458 +190,28 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 					logError("XML file could not be read, no property->name attribute found for trigger.");
 					return false;
 				}
+
 				std::string name = textAttr;
 
-				if (name == "hint") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-					TriggerContent content(TriggerContentType::Hint);
-					content.s1 = textAttr;
-					trigger.content.push_back(content);
+				textAttr = _property->Attribute("value");
+				if (textAttr == nullptr) {
+					logError("XML file could not be read, " + name  + " value property not found.");
+					return false;
 				}
-				else if (name == "learn spell") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, learn spell value property not found.");
-						return false;
-					}
-					TriggerContent content(TriggerContentType::LearnSpell);
-					content.i1 = std::atoi(textAttr);
-					trigger.content.push_back(content);
-				}
-				else if (name == "condition progress") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, condition progress value property not found.");
-						return false;
-					}
 
-					std::string conditionProgress = textAttr;
+				std::string value = textAttr;
 
-					size_t pos = 0;
-					if ((pos = conditionProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, condition progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::ConditionProgress);
-					content.s1 = conditionProgress.substr(0, pos);
-					conditionProgress.erase(0, pos + 1);
-					content.s2 = conditionProgress;
-					trigger.content.push_back(content);
-				}
-				else if (name == "reputation progress") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, reputation progress value property not found.");
-						return false;
-					}
-
-					std::string reputationProgress = textAttr;
-
-					size_t pos = 0;
-					if ((pos = reputationProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, reputation progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::ReputationProgress);
-					content.s1 = reputationProgress.substr(0, pos);
-					FractionID fractionID = resolveFractionID(content.s1);
-					if (fractionID == FractionID::VOID) return false;
-					content.i1 = static_cast<int>(fractionID);
-					reputationProgress.erase(0, pos + 1);
-					content.i2 = std::stoi(reputationProgress);
-					trigger.content.push_back(content);
-				}
-				else if (name == "questcondition progress") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, questcondition progress value property not found.");
-						return false;
-					}
-
-					std::string conditionProgress = textAttr;
-
-					size_t pos = 0;
-					if ((pos = conditionProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, questcondition progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::QuestConditionProgress);
-					content.s1 = conditionProgress.substr(0, pos);
-					conditionProgress.erase(0, pos + 1);
-					content.s2 = conditionProgress;
-					trigger.content.push_back(content);
-				}
-				else if (name == "questdescription progress") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, questdescription progress value property not found.");
-						return false;
-					}
-
-					std::string conditionProgress = textAttr;
-
-					size_t pos = 0;
-					if ((pos = conditionProgress.find(",")) == std::string::npos) {
-						logError("XML file could not be read, questdescription progress value must be two strings, seperated by a comma.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::QuestDescriptionProgress);
-					content.s1 = conditionProgress.substr(0, pos);
-					conditionProgress.erase(0, pos + 1);
-					content.i1 = std::stoi(conditionProgress);
-					trigger.content.push_back(content);
-				}
-				else if (name == "conditions" || name == "not conditions") {
-					bool isNotCondition = name == "not conditions";
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, conditions / not conditions value property not found.");
-						return false;
-					}
-
-					std::string conditions = textAttr;
-
-					size_t pos = 0;
-
-					while (!conditions.empty()) {
-						if ((pos = conditions.find(",")) == std::string::npos) {
-							logError("Trigger conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
-							return false;
-						}
-
-						std::string conditionType = conditions.substr(0, pos);
-						conditions.erase(0, pos + 1);
-						std::string conditionName;
-
-						if ((pos = conditions.find(",")) != std::string::npos) {
-							conditionName = conditions.substr(0, pos);
-							conditions.erase(0, pos + 1);
-						}
-						else {
-							conditionName = conditions;
-							conditions.clear();
-						}
-
-						Condition cond;
-						cond.negative = isNotCondition;
-						cond.name = conditionName;
-						cond.type = conditionType;
-						trigger.conditions.push_back(cond);
-					}
-				}
-				else if (name == "map entry") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, map entry value property not found.");
-						return false;
-					}
-
-					std::string mapEntry = textAttr;
-
-					size_t pos = 0;
-					if ((pos = mapEntry.find(",")) == std::string::npos) {
-						logError("XML file could not be read, map entry value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::MapEntry);
-					content.s1 = mapEntry.substr(0, pos);
-					mapEntry.erase(0, pos + 1);
-
-					if ((pos = mapEntry.find(",")) == std::string::npos) {
-						logError("XML file could not be read, map entry value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(mapEntry.substr(0, pos).c_str());
-					mapEntry.erase(0, pos + 1);
-
-					content.i2 = std::atoi(mapEntry.c_str());
-					trigger.content.push_back(content);
-				}
-				else if (name == "level entry") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, level entry value property not found.");
-						return false;
-					}
-
-					std::string mapEntry = textAttr;
-
-					size_t pos = 0;
-					if ((pos = mapEntry.find(",")) == std::string::npos) {
-						logError("XML file could not be read, level entry value must be a string (level id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::LevelEntry);
-					content.s1 = mapEntry.substr(0, pos);
-					mapEntry.erase(0, pos + 1);
-
-					if ((pos = mapEntry.find(",")) == std::string::npos) {
-						logError("XML file could not be read, level entry value must be a string (level id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(mapEntry.substr(0, pos).c_str());
-					mapEntry.erase(0, pos + 1);
-
-					content.i2 = std::atoi(mapEntry.c_str());
-					trigger.content.push_back(content);
-				}
-				else if (name == "forced map") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, map entry value property not found.");
-						return false;
-					}
-
-					std::string forcedMap = textAttr;
-
-					size_t pos = 0;
-					if ((pos = forcedMap.find(",")) == std::string::npos) {
-						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::SetForcedMap);
-					content.s1 = forcedMap.substr(0, pos);
-					forcedMap.erase(0, pos + 1);
-
-					if ((pos = forcedMap.find(",")) == std::string::npos) {
-						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(forcedMap.substr(0, pos).c_str());
-					forcedMap.erase(0, pos + 1);
-
-					content.i2 = std::atoi(forcedMap.c_str());
-					trigger.content.push_back(content);
-				}
-				else if (name == "set map") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, map entry value property not found.");
-						return false;
-					}
-
-					std::string map = textAttr;
-
-					size_t pos = 0;
-					if ((pos = map.find(",")) == std::string::npos) {
-						logError("XML file could not be read, forced map value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::SetMap);
-					content.s1 = map.substr(0, pos);
-					map.erase(0, pos + 1);
-
-					if ((pos = map.find(",")) == std::string::npos) {
-						logError("XML file could not be read, set map value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(map.substr(0, pos).c_str());
-					map.erase(0, pos + 1);
-
-					content.i2 = std::atoi(map.c_str());
-					trigger.content.push_back(content);
-				}
-				else if (name == "set level") {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, set level value property not found.");
-						return false;
-					}
-
-					std::string level = textAttr;
-
-					size_t pos = 0;
-					if ((pos = level.find(",")) == std::string::npos) {
-						logError("XML file could not be read, level value value must be a string (level id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::SetLevel);
-					content.s1 = level.substr(0, pos);
-					level.erase(0, pos + 1);
-
-					if ((pos = level.find(",")) == std::string::npos) {
-						logError("XML file could not be read, set map value must be a string (map id) and the x and y coords, seperated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(level.substr(0, pos).c_str());
-					level.erase(0, pos + 1);
-
-					content.i2 = std::atoi(level.c_str());
-					trigger.content.push_back(content);
-				}
-				else if (name.find("weather") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-
-					std::string weatherString = textAttr;
-
-					size_t pos = 0;
-					if ((pos = weatherString.find(",")) == std::string::npos) {
-						logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::Weather);
-					content.s1 = weatherString.substr(0, pos);
-					weatherString.erase(0, pos + 1);
-
-					if ((pos = weatherString.find(",")) == std::string::npos) {
-						logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
-						return false;
-					}
-					content.i1 = std::atoi(weatherString.substr(0, pos).c_str());
-					if (content.i1 < 0 || content.i2 > 100) {
-						logError("XML file could not be read, weather trigger dimming must be an int between 0 and 100");
-						return false;
-					}
-
-					weatherString.erase(0, pos + 1);
-					content.s2 = weatherString;
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("music") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::Music);
-					content.s1 = textAttr;
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("achievement core") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, achievement core value property not found.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::AchievementNotifyCore);
-					content.s1 = textAttr;
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("achievement notify") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, achievement notify value property not found.");
-						return false;
-					}
-
-					std::string achId = textAttr;
-
-					size_t pos = 0;
-					if ((pos = achId.find(",")) == std::string::npos) {
-						logError("XML file could not be read, achievment notify value must be two comma separated strings (achievement id, message)");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::AchievementNotify);
-					content.s1 = achId.substr(0, pos);
-					achId.erase(0, pos + 1);
-					content.s2 = achId;
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("quest state") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-
-					std::string questID = textAttr;
-
-					size_t pos = 0;
-					if ((pos = questID.find(",")) == std::string::npos) {
-						logError("XML file could not be read, quest state trigger value must be two comma separated strings (quest id, quest state)");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::QuestStateChange);
-					content.s1 = questID.substr(0, pos);
-					questID.erase(0, pos + 1);
-
-					QuestState state = resolveQuestState(questID);
-					if (state <= QuestState::VOID || state >= QuestState::MAX) {
-						logError("Quest State not resolved: " + std::to_string(static_cast<int>(state)));
-					}
-
-					content.i1 = static_cast<int>(state);
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("add item") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-
-					std::string item = textAttr;
-
-					size_t pos = 0;
-					if ((pos = item.find(",")) == std::string::npos) {
-						logError("XML file could not be read, add item trigger value must be two comma separated strings (item id, amount)");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::ItemChange);
-					content.s1 = item.substr(0, pos);
-					item.erase(0, pos + 1);
-
-					content.i1 = static_cast<int>(std::stoi(item));
-
-					trigger.content.push_back(content);
-				}
-				else if (name.find("cutscene") != std::string::npos) {
-					textAttr = _property->Attribute("value");
-					if (textAttr == nullptr) {
-						logError("XML file could not be read, hint value property not found.");
-						return false;
-					}
-
-					TriggerContent content(TriggerContentType::Cutscene);
-					content.s1 = textAttr;
-
-					trigger.content.push_back(content);
-				}
-				else if (name == "credits") {
-					TriggerContent content(TriggerContentType::Credits);
-					trigger.content.push_back(content);
-				}
-				else if (name == "persistent") {
-					trigger.isPersistent = true;
-				}
-				else if (name == "forced") {
-					trigger.isForced = true;
-				}
-				else if (name == "keyguarded") {
-					trigger.isKeyGuarded = true;
-				}
-				else {
+				auto entry = m_triggerProperties.find(name);
+				if (entry == m_triggerProperties.end()) {
 					logError("XML file could not be read, unknown property->name attribute found for trigger: " + name);
 					return false;
 				}
+				
+				if (!(*this.*(entry->second))(value, trigger)) {
+					logError("XML file could not be read, trigger property invalid\nname: " + name + "\nvalue: " + value);
+					return false;
+				}
+
 				_property = _property->NextSiblingElement("property");
 			}
 		}
@@ -971,7 +566,7 @@ void WorldReader::updateData(WorldData& data) const {
 	int x = 0;
 	int y = 0;
 
-	vector<bool> xLine;
+	std::vector<bool> xLine;
 
 	// calculate collidable tiles
 	for (std::vector<bool>::iterator it = data.collidableTiles.begin(); it != data.collidableTiles.end(); ++it) {
@@ -1021,4 +616,308 @@ void WorldReader::readLightsFromLayers(WorldData& data, std::vector<std::vector<
 			}
 		}
 	}
+}
+
+bool WorldReader::readHintTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::Hint);
+	content.s1 = value;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readLearnSpellTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::LearnSpell);
+	content.i1 = std::stoi(value);
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readConditionProgressTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string conditionProgress = value;
+
+	size_t pos = 0;
+	if ((pos = conditionProgress.find(",")) == std::string::npos) {
+		logError("XML file could not be read, condition progress value must be two strings, seperated by a comma.");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::ConditionProgress);
+	content.s1 = conditionProgress.substr(0, pos);
+	conditionProgress.erase(0, pos + 1);
+	content.s2 = conditionProgress;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readReputationProgressTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string reputationProgress = value;
+
+	size_t pos = 0;
+	if ((pos = reputationProgress.find(",")) == std::string::npos) {
+		logError("XML file could not be read, reputation progress value must be two strings, seperated by a comma.");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::ReputationProgress);
+	content.s1 = reputationProgress.substr(0, pos);
+	FractionID fractionID = resolveFractionID(content.s1);
+	if (fractionID == FractionID::VOID) return false;
+	content.i1 = static_cast<int>(fractionID);
+	reputationProgress.erase(0, pos + 1);
+	content.i2 = std::stoi(reputationProgress);
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readQuestConditionProgressTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string conditionProgress = value;
+
+	size_t pos = 0;
+	if ((pos = conditionProgress.find(",")) == std::string::npos) {
+		logError("XML file could not be read, questcondition progress value must be two strings, seperated by a comma.");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::QuestConditionProgress);
+	content.s1 = conditionProgress.substr(0, pos);
+	conditionProgress.erase(0, pos + 1);
+	content.s2 = conditionProgress;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readQuestDescriptionProgressTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string conditionProgress = value;
+
+	size_t pos = 0;
+	if ((pos = conditionProgress.find(",")) == std::string::npos) {
+		logError("XML file could not be read, questdescription progress value must be two strings, seperated by a comma.");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::QuestDescriptionProgress);
+	content.s1 = conditionProgress.substr(0, pos);
+	conditionProgress.erase(0, pos + 1);
+	content.i1 = std::stoi(conditionProgress);
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readConditionsTrigger(const std::string& value, TriggerData& trigger, bool isNotConditions) const {
+	std::string conditions = value;
+
+	size_t pos = 0;
+
+	while (!conditions.empty()) {
+		if ((pos = conditions.find(",")) == std::string::npos) {
+			logError("Trigger conditions could not be read, conditions must be two strings separated by a comma (conditionType,conditionName)*");
+			return false;
+		}
+
+		std::string conditionType = conditions.substr(0, pos);
+		conditions.erase(0, pos + 1);
+		std::string conditionName;
+
+		if ((pos = conditions.find(",")) != std::string::npos) {
+			conditionName = conditions.substr(0, pos);
+			conditions.erase(0, pos + 1);
+		}
+		else {
+			conditionName = conditions;
+			conditions.clear();
+		}
+
+		Condition cond;
+		cond.negative = isNotConditions;
+		cond.name = conditionName;
+		cond.type = conditionType;
+		trigger.conditions.push_back(cond);
+	}
+	return true;
+}
+
+bool WorldReader::readYesConditionsTrigger(const std::string& value, TriggerData& trigger) const {
+	return readConditionsTrigger(value, trigger, false);
+}
+
+bool WorldReader::readNotConditionsTrigger(const std::string& value, TriggerData& trigger) const {
+	return readConditionsTrigger(value, trigger, true);
+}
+
+bool WorldReader::readWorldEntryTrigger(const std::string& value, TriggerData& trigger, TriggerContentType type) const {
+	std::string worldEntry = value;
+
+	size_t pos = 0;
+	if ((pos = worldEntry.find(",")) == std::string::npos) {
+		logError("XML file could not be read, world entry value must be a string (world id) and the x and y coords, seperated by commas.");
+		return false;
+	}
+
+	TriggerContent content(type);
+	content.s1 = worldEntry.substr(0, pos);
+	worldEntry.erase(0, pos + 1);
+
+	if ((pos = worldEntry.find(",")) == std::string::npos) {
+		logError("XML file could not be read, world entry value must be a string (world id) and the x and y coords, seperated by commas.");
+		return false;
+	}
+	content.i1 = std::atoi(worldEntry.substr(0, pos).c_str());
+	worldEntry.erase(0, pos + 1);
+
+	content.i2 = std::atoi(worldEntry.c_str());
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readMapEntryTrigger(const std::string& value, TriggerData& trigger) const {
+	return readWorldEntryTrigger(value, trigger, TriggerContentType::MapEntry);
+}
+
+bool WorldReader::readLevelEntryTrigger(const std::string& value, TriggerData& trigger) const {
+	return readWorldEntryTrigger(value, trigger, TriggerContentType::LevelEntry);
+}
+
+bool WorldReader::readForcedMapTrigger(const std::string& value, TriggerData& trigger) const {
+	return readWorldEntryTrigger(value, trigger, TriggerContentType::SetForcedMap);
+}
+
+bool WorldReader::readSetMapTrigger(const std::string& value, TriggerData& trigger) const {
+	return readWorldEntryTrigger(value, trigger, TriggerContentType::SetMap);
+}
+
+bool WorldReader::readSetLevelTrigger(const std::string& value, TriggerData& trigger) const {
+	return readWorldEntryTrigger(value, trigger, TriggerContentType::SetLevel);
+}
+
+bool WorldReader::readWeatherTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string weatherString = value;
+
+	size_t pos = 0;
+	if ((pos = weatherString.find(",")) == std::string::npos) {
+		logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::Weather);
+	content.s1 = weatherString.substr(0, pos);
+	weatherString.erase(0, pos + 1);
+
+	if ((pos = weatherString.find(",")) == std::string::npos) {
+		logError("XML file could not be read, weather trigger value must be a string (world id) and the dimming (int between 0 and 100) and the weather (possibly empty), separated by commas.");
+		return false;
+	}
+	content.i1 = std::atoi(weatherString.substr(0, pos).c_str());
+	if (content.i1 < 0 || content.i2 > 100) {
+		logError("XML file could not be read, weather trigger dimming must be an int between 0 and 100");
+		return false;
+	}
+
+	weatherString.erase(0, pos + 1);
+	content.s2 = weatherString;
+
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readMusicTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::Music);
+	content.s1 = value;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readAchievementNotifyCoreTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::AchievementNotifyCore);
+	content.s1 = value;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readAchievementNotifyTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string achId = value;
+
+	size_t pos = 0;
+	if ((pos = achId.find(",")) == std::string::npos) {
+		logError("XML file could not be read, achievment notify value must be two comma separated strings (achievement id, message)");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::AchievementNotify);
+	content.s1 = achId.substr(0, pos);
+	achId.erase(0, pos + 1);
+	content.s2 = achId;
+
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readQuestStateChangeTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string questID = value;
+
+	size_t pos = 0;
+	if ((pos = questID.find(",")) == std::string::npos) {
+		logError("XML file could not be read, quest state trigger value must be two comma separated strings (quest id, quest state)");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::QuestStateChange);
+	content.s1 = questID.substr(0, pos);
+	questID.erase(0, pos + 1);
+
+	QuestState state = resolveQuestState(questID);
+	if (state <= QuestState::VOID || state >= QuestState::MAX) {
+		logError("Quest State not resolved: " + std::to_string(static_cast<int>(state)));
+	}
+
+	content.i1 = static_cast<int>(state);
+
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readAddItemTrigger(const std::string& value, TriggerData& trigger) const {
+	std::string item = value;
+
+	size_t pos = 0;
+	if ((pos = item.find(",")) == std::string::npos) {
+		logError("XML file could not be read, add item trigger value must be two comma separated strings (item id, amount)");
+		return false;
+	}
+
+	TriggerContent content(TriggerContentType::ItemChange);
+	content.s1 = item.substr(0, pos);
+	item.erase(0, pos + 1);
+
+	content.i1 = static_cast<int>(std::stoi(item));
+
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readCreditsTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::Credits);
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readCutsceneTrigger(const std::string& value, TriggerData& trigger) const {
+	TriggerContent content(TriggerContentType::Cutscene);
+	content.s1 = value;
+	trigger.content.push_back(content);
+	return true;
+}
+
+bool WorldReader::readForcedTrigger(const std::string& value, TriggerData& trigger) const {
+	trigger.isForced = true;
+	return true;
+}
+
+bool WorldReader::readKeyguardedTrigger(const std::string& value, TriggerData& trigger) const {
+	trigger.isKeyGuarded = true;
+	return true;
+}
+
+bool WorldReader::readPersistentTrigger(const std::string& value, TriggerData& trigger) const {
+	trigger.isPersistent = true;
+	return true;
 }

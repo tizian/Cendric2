@@ -9,6 +9,7 @@ class CharacterCore;
 
 class WorldReader {
 public:
+	WorldReader();
 	virtual ~WorldReader() {};
 
 protected:
@@ -43,6 +44,37 @@ protected:
 	const CharacterCore* m_core;
 	std::map<int, LightData> m_lightTiles;
 
+	typedef bool (WorldReader::*TriggerPropertyFunction)(const std::string&, TriggerData&) const;
+	std::map<std::string, TriggerPropertyFunction> m_triggerProperties;
+
 private:
 	void readLightsFromLayers(WorldData& data, std::vector<std::vector<int>>& layers) const;
+
+	bool readHintTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readLearnSpellTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readConditionProgressTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readReputationProgressTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readQuestConditionProgressTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readQuestDescriptionProgressTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readYesConditionsTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readNotConditionsTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readMapEntryTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readLevelEntryTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readForcedMapTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readSetMapTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readSetLevelTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readWeatherTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readMusicTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readAchievementNotifyCoreTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readAchievementNotifyTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readQuestStateChangeTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readAddItemTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readCreditsTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readCutsceneTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readForcedTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readKeyguardedTrigger(const std::string& value, TriggerData& trigger) const;
+	bool readPersistentTrigger(const std::string& value, TriggerData& trigger) const;
+
+	bool readConditionsTrigger(const std::string& value, TriggerData& trigger, bool isNotConditions) const;
+	bool readWorldEntryTrigger(const std::string& value, TriggerData& trigger, TriggerContentType type) const;
 };

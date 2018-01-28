@@ -8,17 +8,11 @@ class LogWindow;
 // describes the configuration that can be modified by the user via options.
 // it stores mainly paths.
 struct Configuration final {
-	std::string npcFolder;
-	std::string sqlFolder;
-	std::string dialogueFolder;
+	std::string npcFolder = "res/npc";
+	std::string sqlFolder = "db/insert_scripts/dialogue";
+	std::string dialogueFolder = "res/convenience/dialogue";
 	std::string parseFileIn;
 	std::string parseFileOut;
-};
-
-const struct Configuration DEFAULT_CONFIGURATION {
-	"res/npc",
-	"db/insert_scripts/dialogue",
-	"res/convenience/dialogue"
 };
 
 // current state of the application. It holds the configuration and the current dialogue.

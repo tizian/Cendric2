@@ -10,7 +10,7 @@
 // a reader to read a configuration file
 class ConfigurationReader final : public Reader, public ConfigurationIO {
 public:
-	bool readConfiguration(ConfigurationData& data) const;
+	bool readConfiguration(ConfigurationData& data, bool retry = true) const;
 	// checks a configuration, namely the key map, for duplicate entries.
 	bool checkConfigurationData(ConfigurationData& data) const;
 

@@ -9,116 +9,30 @@
 // describes the configuration that can be modified by the user.
 // it is loaded every time the game starts and stored in the resource manager.
 struct ConfigurationData final {
-	Language language;
-	bool isSoundOn;
-	// in percent
-	int volumeSound;
-	// in percent
-	int volumeMusic;
-	bool isVSyncEnabled;
-	bool isFPSLimited;
-	int maxFPS;
-	std::map<Key, sf::Keyboard::Key> mainKeyMap;
-	// important: the alternative key map can't be seen, saved or changed by the user.
-	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
-	DisplayMode displayMode;
-	bool isQuickcast;
-	bool isAutotarget;
-	bool isSmoothing;
-	bool isDebugRendering;
-	bool isWindowReload;
-	bool isDisplayHints;
-	bool isDisplayQuestMarkers;
-	bool isDisplayStopwatch;
-	bool isGodmode;
-};
+	Language language = Language::Lang_EN;
+	bool isSoundOn = true;
+	int volumeSound = 100;
+	int volumeMusic = 100;
+	bool isVSyncEnabled = true;
+	bool isFPSLimited = false;
+	int maxFPS = 60;
+	std::map<Key, sf::Keyboard::Key> mainKeyMap = DEFAULT_KEYMAP;
+	std::map<Key, sf::Keyboard::Key> alternativeKeyMap = ALTERNATIVE_KEYMAP;
+	DisplayMode displayMode = DisplayMode::Window;
+	bool isQuickcast = true;
+	bool isAutotarget = true;
+	bool isSmoothing = true;
+	bool isDisplayHints = true;
+	bool isDisplayQuestMarkers = true;
 
-const std::map < Key, sf::Keyboard::Key > DEFAULT_KEYMAP =
-std::map < Key, sf::Keyboard::Key >(
-{
-	{ Key::Escape, sf::Keyboard::Escape },
-	{ Key::Quickload, sf::Keyboard::F9 },
-	{ Key::Quicksave, sf::Keyboard::F5 },
-	{ Key::Inventory, sf::Keyboard::I },
-	{ Key::CharacterInfo, sf::Keyboard::C },
-	{ Key::Map, sf::Keyboard::M },
-	{ Key::Journal, sf::Keyboard::J },
-	{ Key::Spellbook, sf::Keyboard::K },
-	{ Key::Interact, sf::Keyboard::E },
-	{ Key::Confirm, sf::Keyboard::Return },
-	{ Key::Left, sf::Keyboard::A },
-	{ Key::Right, sf::Keyboard::D },
-	{ Key::Up, sf::Keyboard::W },
-	{ Key::Down, sf::Keyboard::S },
-	{ Key::Jump, sf::Keyboard::Space },
-	{ Key::Chop, sf::Keyboard::F },
-	{ Key::FirstSpell, sf::Keyboard::Num1 },
-	{ Key::SecondSpell, sf::Keyboard::Num2 },
-	{ Key::ThirdSpell, sf::Keyboard::Num3 },
-	{ Key::FourthSpell, sf::Keyboard::Num4 },
-	{ Key::FifthSpell, sf::Keyboard::Num5 },
-	{ Key::QuickSlot1, sf::Keyboard::Num6 },
-	{ Key::QuickSlot2, sf::Keyboard::Num7 },
-	{ Key::ToggleTooltips, sf::Keyboard::LAlt },
-	{ Key::SwitchTarget, sf::Keyboard::Tab },
-	{ Key::Screenshot, sf::Keyboard::F10 },
-	{ Key::Debug, sf::Keyboard::F11 },
-	{ Key::BackToCheckpoint, sf::Keyboard::B },
-	{ Key::ToggleAutotarget, sf::Keyboard::P }
-});
+	bool isDisplayStopwatch = false;
+	bool isGodmode = false;
+	bool isDebugRendering = false;
+	bool isWindowReload = false;
 
-const struct ConfigurationData DEFAULT_CONFIGURATION =
-{
-	Language::Lang_EN,
-	true,
-	100,
-	100,
-	true,
-	false,
-	60,
-	DEFAULT_KEYMAP,
-	std::map < Key, sf::Keyboard::Key >(
-	{
-	// assuming that it will never be "KeyCount" as input.
-	// the other option was sf::Keyboard::Unknown, but those'd be are all unhandled keys...
-	{ Key::Escape, sf::Keyboard::KeyCount },
-	{ Key::Quickload, sf::Keyboard::KeyCount },
-	{ Key::Quicksave, sf::Keyboard::KeyCount },
-	{ Key::Inventory, sf::Keyboard::KeyCount },
-	{ Key::CharacterInfo, sf::Keyboard::KeyCount },
-	{ Key::Map, sf::Keyboard::KeyCount },
-	{ Key::Journal, sf::Keyboard::KeyCount },
-	{ Key::Spellbook, sf::Keyboard::KeyCount },
-	{ Key::Interact, sf::Keyboard::KeyCount },
-	{ Key::Confirm, sf::Keyboard::KeyCount },
-	{ Key::Left, sf::Keyboard::Left },
-	{ Key::Right, sf::Keyboard::Right },
-	{ Key::Up, sf::Keyboard::Up },
-	{ Key::Down, sf::Keyboard::Down },
-	{ Key::Jump, sf::Keyboard::KeyCount },
-	{ Key::Chop, sf::Keyboard::KeyCount },
-	{ Key::FirstSpell, sf::Keyboard::Numpad1 },
-	{ Key::SecondSpell, sf::Keyboard::Numpad2 },
-	{ Key::ThirdSpell, sf::Keyboard::Numpad3 },
-	{ Key::FourthSpell, sf::Keyboard::Numpad4 },
-	{ Key::FifthSpell, sf::Keyboard::Numpad5 },
-	{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
-	{ Key::QuickSlot2, sf::Keyboard::Numpad7 },
-	{ Key::ToggleTooltips, sf::Keyboard::KeyCount },
-	{ Key::SwitchTarget, sf::Keyboard::KeyCount },
-	{ Key::Screenshot, sf::Keyboard::KeyCount },
-	{ Key::Debug, sf::Keyboard::KeyCount },
-	{ Key::BackToCheckpoint, sf::Keyboard::KeyCount },
-	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount }
-}),
-DisplayMode::Window,
-true,
-true,
-true,
-false,
-false,
-true,
-true,
-false,
-false,
+public:
+	void resetToDefault();
+
+	static const std::map<Key, sf::Keyboard::Key> DEFAULT_KEYMAP;
+	static const std::map<Key, sf::Keyboard::Key> ALTERNATIVE_KEYMAP;
 };
