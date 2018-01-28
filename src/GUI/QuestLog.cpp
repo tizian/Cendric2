@@ -343,7 +343,7 @@ void QuestEntry::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	m_name.setPosition(pos);
 	if (m_questMarker) {
-		m_questMarker->setPosition(pos);
+		m_questMarker->setPosition(pos + sf::Vector2f(0.f, -0.5f * (QuestMarker::SIZE - GUIConstants::CHARACTER_SIZE_M)));
 	}
 }
 
@@ -402,6 +402,7 @@ LogQuestMarker::LogQuestMarker(const QuestData& questData, WorldInterface* inter
 }
 
 void LogQuestMarker::onLeftClick() {
+	g_inputController->lockAction();
 	if (!isActive()) {
 		setActive(true);
 		return;
@@ -410,6 +411,7 @@ void LogQuestMarker::onLeftClick() {
 }
 
 void LogQuestMarker::onRightClick() {
+	g_inputController->lockAction();
 	if (!isActive()) return;
 	setActive(false);
 }

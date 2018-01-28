@@ -423,6 +423,7 @@ std::string CharacterCoreWriter::writeQuestTracked(const CharacterCoreData& data
 		quest.append(":");
 		quest.append(it);
 		quest.append("\n");
+		quests.append(quest);
 	}
 	return quests;
 }

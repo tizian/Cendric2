@@ -4,7 +4,7 @@
 #include "CharacterCore.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
 
-const int QuestMarker::SIZE = 16;
+const int QuestMarker::SIZE = 20;
 
 QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 	m_questData = questData;
@@ -15,7 +15,7 @@ QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 	m_sprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
-	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, 20.f));
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, SIZE + 4.f));
 	addComponent(m_tooltipComponent);
 }
 

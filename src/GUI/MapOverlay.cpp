@@ -73,12 +73,12 @@ void MapOverlay::update(const sf::Time& frameTime) {
 			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
 	}
 
-	for (auto wp : m_waypoints) {
-		wp->update(frameTime);
-	}
-
 	for (auto qm : m_questMarkers) {
 		qm->update(frameTime);
+	}
+
+	for (auto wp : m_waypoints) {
+		wp->update(frameTime);
 	}
 
 	m_window->update(frameTime);
@@ -412,7 +412,7 @@ void MapOverlay::reloadQuestMarkers() {
 
 			MapQuestMarker* marker = new MapQuestMarker(*questData, markerData, m_interface);
 			marker->setActive(true);
-			marker->setPosition(m_position + (markerPos * map->scale) - sf::Vector2f(8.f, 8.f));
+			marker->setPosition(m_position + (markerPos * map->scale) - sf::Vector2f(QuestMarker::SIZE * 0.5f, QuestMarker::SIZE * 0.5f));
 			m_questMarkers.push_back(marker);
 		}
 	}
@@ -565,6 +565,9 @@ void WaypointMarker::render(sf::RenderTarget& target) {
 }
 
 void WaypointMarker::onRightClick() {
+	if (g_inputController->isActionLocked()) return;
+	g_inputController->lockAction();
+
 	if (m_parent->isOnCurrentMap()) {
 		m_mainChar->setPosition(m_waypointPosition);
 	}
@@ -603,6 +606,8 @@ MapQuestMarker::MapQuestMarker(const QuestData& questData, const QuestMarkerData
 }
 
 void MapQuestMarker::onLeftClick() {
+	if (g_inputController->isActionLocked()) return;
+	g_inputController->lockAction();
 	jumpToQuest();
 }
 
