@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Test/CendricTests.h"
 #include "Misc/icon.h"
 #ifdef STEAM
 #include "steam-sdk/public/steam/steam_api.h"
@@ -153,4 +154,8 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {
 
 	target.draw(fpsText);
 	target.setView(oldView);
+}
+
+void Game::runTests() {
+	CendricTests::runTests();
 }

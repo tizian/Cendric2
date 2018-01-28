@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="178">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="179">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -56,8 +56,8 @@
  <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
   <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
   <data encoding="csv">
@@ -307,16 +307,22 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="171" x="400" y="647" width="100" height="50">
+  <object id="171" x="400" y="650" width="100" height="50">
    <properties>
+    <property name="forced" value=""/>
     <property name="weather" value="res/map/meadows/meadows.tmx,60,"/>
-    <property name="weather 2" value="res/map/gandria/gandria.tmx,60,"/>
    </properties>
   </object>
   <object id="172" x="600" y="450" width="50" height="30">
    <properties>
     <property name="level entry" value="res/level/storeroom/storeroom.tmx,710,210"/>
     <property name="persistent" value=""/>
+   </properties>
+  </object>
+  <object id="178" x="400" y="650" width="100" height="50">
+   <properties>
+    <property name="forced" value=""/>
+    <property name="weather" value="res/map/gandria/gandria.tmx,60,"/>
    </properties>
   </object>
  </objectgroup>

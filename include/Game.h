@@ -11,6 +11,7 @@ public:
 	~Game();
 
 	void run();
+	void runTests();
 
 private:
 	bool m_running;
