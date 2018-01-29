@@ -49,7 +49,6 @@ int main(int argc, char* argv[]) {
 	g_achievementManager = new AchievementManager();
 
 	Game* game = new Game();
-	//game->runTests();
 	game->run();
 	delete game;
 

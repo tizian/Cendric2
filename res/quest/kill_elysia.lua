@@ -13,7 +13,7 @@ collectibles =
 markers = {
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {2475, 2225},
+		position = {3475, 2225},
 		step = 0
 	},
 	{

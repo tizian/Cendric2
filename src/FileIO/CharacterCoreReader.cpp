@@ -953,6 +953,10 @@ bool CharacterCoreReader::readTilesExplored(std::string& line, CharacterCoreData
 		line.erase(0, 1);
 	}
 
+	while (tiles.size() < mapSize.x * mapSize.y) {
+		tiles.push_back(false);
+	}
+
 	data.tilesExplored.insert({ levelID, {mapSize, tiles} });
 	return true;
 }
