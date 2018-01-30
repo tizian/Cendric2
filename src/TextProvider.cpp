@@ -162,3 +162,14 @@ void TextProvider::setLanguage(Language lang) {
 	}
 }
 
+bool TextProvider::isTextTranslated(const std::string& key, const std::string& type) {
+	if (key.empty()) return true;
+
+	std::string query = "SELECT " + m_language + " FROM text WHERE text_id = '" + key + "' AND text_type = '" + type + "' LIMIT 1;";
+	ResultSet rs = g_databaseManager->query(query);
+	if (rs.empty() || rs[0].empty()) {
+		return false;
+	}
+	return true;
+}
+

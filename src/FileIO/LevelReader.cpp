@@ -16,7 +16,7 @@ void LevelReader::logError(const std::string& error) const {
 	g_logger->logError("LevelReader", "Error in level data : " + error);
 }
 
-bool LevelReader::readLevel(const std::string& fileName, LevelData& data, const CharacterCore* core) {
+bool LevelReader::readWorld(const std::string& fileName, LevelData& data, const CharacterCore* core) {
 	m_core = core;
 	tinyxml2::XMLDocument xmlDoc;
 	tinyxml2::XMLError result = xmlDoc.LoadFile(getResourcePath(fileName).c_str());

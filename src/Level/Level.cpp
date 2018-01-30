@@ -61,7 +61,7 @@ bool Level::load(const std::string& id, WorldScreen* screen) {
 	m_screen = screen;
 	LevelReader reader;
 	m_levelData.id = id;
-	if (!reader.readLevel(id, m_levelData, m_screen->getCharacterCore())) {
+	if (!reader.readWorld(id, m_levelData, m_screen->getCharacterCore())) {
 		return false;
 	}
 	if (m_levelData.isBossLevel) {

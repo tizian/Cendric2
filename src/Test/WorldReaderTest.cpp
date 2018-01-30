@@ -16,78 +16,49 @@ inline bool ends_with(const std::string& value, const std::string& ending) {
 	return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
 }
 
-bool WorldReaderTest::runTest() {
-	if (!loadMapFiles()) {
-		return false;
-	}
+TestResult WorldReaderTest::runTest() {
+	TestResult result;
+	result.testName = "WorldReaderTest";
 
-	if (!loadLevelFiles()) {
-		return false;
-	}
+	loadMapFiles(result);
+	loadLevelFiles(result);
 
-	return true;
+	return result;
 }
 
-bool WorldReaderTest::loadMapFiles() {
-	DIR* dir;
-	struct dirent* de;
-
-	dir = opendir("res/map");
-	bool noError = true;
-	
-	CharacterCore* core = new CharacterCore();
-	
-	core->loadNew();
-	
-	while (dir && noError) {
-		de = readdir(dir);
-		if (!de) break;
-		if (de->d_type == DT_DIR) {
-			if (de->d_name[0] == '.') continue;
-
-			auto worldPath = "res/map/" + std::string(de->d_name) + "/" + std::string(de->d_name) + ".tmx";
-
-			MapReader* reader = new MapReader();
-			MapData data;
-			g_logger->logInfo("[WorldReaderTest]", "Reading map: " + worldPath);
-			noError = reader->readMap(worldPath, data, core);
-			delete reader;
-
-			if (!noError) {
-				break;
-			}
-		}
-	}
-	closedir(dir);
-
-	delete core;
-
-	return noError;
+void WorldReaderTest::loadMapFiles(TestResult& result) {
+	loadWorldFiles<MapReader, MapData>(result, "map");
 }
 
-bool WorldReaderTest::loadLevelFiles() {
+void WorldReaderTest::loadLevelFiles(TestResult& result) {
+	loadWorldFiles<LevelReader, LevelData>(result, "level");
+}
+
+template<typename R, typename D>
+void WorldReaderTest::loadWorldFiles(TestResult& result, const std::string& type) {
 	DIR* dir;
 	DIR* innerDir;
 	struct dirent* de;
 	struct dirent* innerDe;
 
-	dir = opendir("res/level");
-	bool noError = true;
+	auto basepath = "res/" + type;
+
+	dir = opendir(basepath.c_str());
 
 	CharacterCore* core = new CharacterCore();
 	core->loadNew();
 
-	while (dir && noError) {
+	while (dir) {
 		de = readdir(dir);
 		if (!de) break;
 		if (de->d_type == DT_DIR) {
 			if (de->d_name[0] == '.') continue;
 
-			auto innerDirPath = "res/level/" + std::string(de->d_name);
+			auto innerDirPath = basepath + "/" + std::string(de->d_name);
 
-			DIR* innerDir = opendir(innerDirPath.c_str());
-			
-			while (innerDir && noError) {
+			innerDir = opendir(innerDirPath.c_str());
+
+			while (innerDir) {
 				innerDe = readdir(innerDir);
 				if (!innerDe) break;
 				if (innerDe->d_type == DT_DIR) {
@@ -98,29 +69,28 @@ bool WorldReaderTest::loadLevelFiles() {
 					continue;
 				}
 
-				auto worldPath = "res/level/" + std::string(de->d_name) + "/" + std::string(innerDe->d_name);
+				auto worldPath = innerDirPath + "/" + std::string(innerDe->d_name);
 
-				LevelReader* reader = new LevelReader();
-				LevelData data;
-				g_logger->logInfo("[WorldReaderTest]", "Reading level: " + worldPath);
-				noError = reader->readLevel(worldPath, data, core);
+				R* reader = new R();
+				D data;
+				g_logger->logInfo("[WorldReaderTest]", "Reading world: " + worldPath);
+				bool noError = reader->readWorld(worldPath, data, core);
 				delete reader;
 
-				if (!noError) {
-					break;
+				result.testsTotal++;
+				if (noError) {
+					result.testsSucceeded++;
+					g_logger->logInfo("[WorldReaderTest]", "World succeeded: " + worldPath);
+				}
+				else {
+					g_logger->logError("[WorldReaderTest]", "World corrupted: " + worldPath);
 				}
 			}
 
 			closedir(innerDir);
-
-			if (!noError) {
-				break;
-			}
 		}
 	}
 	closedir(dir);
 
 	delete core;
-
-	return noError;
 }

@@ -18,7 +18,7 @@ public:
 	LevelReader();
 	~LevelReader();
 
-	bool readLevel(const std::string& fileName, LevelData& data, const CharacterCore* core);
+	bool readWorld(const std::string& fileName, LevelData& data, const CharacterCore* core);
 
 private:
 	void logError(const std::string& error) const override;

@@ -10,7 +10,7 @@
 
 class MapReader final : public WorldReader {
 public:
-	bool readMap(const std::string& filename, MapData& data, const CharacterCore* core);
+	bool readWorld(const std::string& filename, MapData& data, const CharacterCore* core);
 
 private:
 	void logError(const std::string& error) const override;

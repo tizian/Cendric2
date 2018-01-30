@@ -9,4 +9,8 @@ private:
 
 public:
 	static void runTests();
+
+private:
+	template<typename T>
+	static void runTest();
 };

@@ -13,7 +13,7 @@ bool Map::load(const std::string& id, WorldScreen* screen) {
 	m_screen = screen;
 	MapReader reader;
 	m_mapData.id = id;
-	if (!reader.readMap(id.c_str(), m_mapData, m_screen->getCharacterCore())) {
+	if (!reader.readWorld(id.c_str(), m_mapData, m_screen->getCharacterCore())) {
 		return false;
 	}
 

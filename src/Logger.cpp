@@ -3,7 +3,7 @@
 Logger* g_logger;
 
 Logger::Logger() {
-	m_logLevel = LogLevel::Info;
+	m_logLevel = LogLevel::Warning;
 }
 
 void Logger::log(LogLevel level, const std::string& source, const std::string& message) const {

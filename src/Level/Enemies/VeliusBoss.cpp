@@ -947,7 +947,7 @@ void VeliusBoss::loadElementalParticles() {
 void VeliusBoss::loadPuzzleLevel() {
 	LevelData data;
 	LevelReader reader;
-	if (!reader.readLevel("res/level/boss_velius/puzzle.tmx", data, m_screen->getCharacterCore())) {
+	if (!reader.readWorld("res/level/boss_velius/puzzle.tmx", data, m_screen->getCharacterCore())) {
 		return;
 	}
 
