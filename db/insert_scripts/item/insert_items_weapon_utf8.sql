@@ -478,24 +478,25 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 -- Arazath's Sword
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item','Arazath''s Sword', 'Arazath''s Schwert','Arazath''s Schwert');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item_desc', '...','...','...');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_arazath', 'eq_weapon', 700, 400, -1, 4);
-INSERT INTO item_attribute (item_id, dmg_light, res_shadow, res_ice, dmg_fire) values ('we_arazath', 10, 50, 50, 30);
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_arazath', 'res/texture/equipment/weapon/spritesheet_weapon_firesword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_firesword.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_arazath', 700, 10, 40, 80, 10);
-INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('we_arazath', 40, 20, 1, 'res/texture/particles/flame.png', 5, 20, 55, 
-10, 20, 30, 40,
-255, 160, 64, 255,
-255, 160, 64, 255,
-255, 0, 0, 200,
-255, 0, 0, 200,
-60, -100,
-70, 100,
-0.4, 0.8);
-INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_arazath', 30, 30, 300, 400, 100, 120, 0.5);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 1, 'elemental', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 2, 'elemental', 2);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 3, 'elemental', 2);
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item','Bane of Existence', 'Ruin','Ruin');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item_desc', 'Etoz'' Heritage.','Etoz'' Erbe.','Em Etoz sis Erbe.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_arazath', 'eq_weapon', 650, 700, 400, 4);
+INSERT INTO item_attribute (item_id, dmg_light, dmg_physical, dmg_shadow, dmg_fire, dmg_ice, critical) values ('we_arazath', 5, 5, 5, 5, 5, 5);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_arazath', 'res/texture/equipment/weapon/spritesheet_weapon_arazathsword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_arazathsword.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_arazath', 500, 80, 80, -40, 10);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('we_arazath', 50, 10, 1, 'res/texture/particles/crystal.png', 20, -20, 105, 
+0, 5, 5, 10,
+0, 0, 0, 255,
+80, 0, 0, 255,
+200, 0, 0, 200,
+255, 200, 0, 200,
+120, -45,
+30, 40,
+3, 4);
+
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_arazath', 30, 30, 300, 400, 60, 80, 0.5);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 1, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 2, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 3, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 4, 'meta', 3);
-INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 5, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 5, 'meta', 3);

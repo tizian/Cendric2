@@ -1587,6 +1587,7 @@ npc.id:npc_etoz
 	trigger:DL:removeItem("we_arazath", 1)
 	trigger:DL:removeItem("do_arazathletter", 1)
 	trigger:DL:addGold(100)
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_GiveSwordMoney
 	translation.en:Here... here! (Etoz hastily takes the sword and the letter from you)
@@ -1604,6 +1605,7 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
 	trigger:DL:removeItem("we_arazath", 1)
 	trigger:DL:removeItem("do_arazathletter", 1)
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_GiveSword
 	translation.en:Huh... You're even dumber than I expected.
@@ -1619,6 +1621,7 @@ npc.id:npc_etoz
 	tag:86
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_Never
 	translation.en:Grrrr. You will pay for this!
@@ -1626,7 +1629,7 @@ npc.id:npc_etoz
 	translation.ch:Grrrr! Dodefür wirsch na zahle!
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
 {1
@@ -1710,6 +1713,7 @@ npc.id:npc_etoz
 	trigger:DL:removeItem("we_arazath", 1)
 	trigger:DL:removeItem("do_arazathletter", 1)
 	trigger:DL:addGold(100)
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_GiveSwordMoney
 	translation.en:
@@ -1727,6 +1731,7 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
 	trigger:DL:removeItem("we_arazath", 1)
 	trigger:DL:removeItem("do_arazathletter", 1)
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_GiveSword
 	translation.en:
@@ -1742,6 +1747,7 @@ npc.id:npc_etoz
 	tag:87
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_etoz", "show_sword")
+	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_Never
 	translation.en:
@@ -1749,6 +1755,6 @@ npc.id:npc_etoz
 	translation.ch:
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }

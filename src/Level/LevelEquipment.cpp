@@ -77,6 +77,8 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 	}
 
 	if (particles != nullptr) {
+		g_resourceManager->loadTexture(particles->texture_path, ResourceType::Level);
+
 		ParticleComponentData data;
 		data.particleCount = particles->particle_count;
 		data.emitRate = particles->emit_rate;

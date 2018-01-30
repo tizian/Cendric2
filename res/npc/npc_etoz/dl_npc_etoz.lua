@@ -628,6 +628,7 @@ loadDialogue = function(DL)
 			DL:removeItem("we_arazath", 1)
 			DL:removeItem("do_arazathletter", 1)
 			DL:addGold(100)
+			DL:addConditionProgress("npc_etoz", "going")
 			DL:addNode()
 
 		end
@@ -638,13 +639,15 @@ loadDialogue = function(DL)
 			DL:addConditionProgress("npc_etoz", "show_sword")
 			DL:removeItem("we_arazath", 1)
 			DL:removeItem("do_arazathletter", 1)
+			DL:addConditionProgress("npc_etoz", "going")
 			DL:addNode()
 
 		end
 
 
-		DL:createNPCNode(86, -2, "DL_Etoz_Never") -- Grrrr. You will pay for this!
+		DL:createNPCNode(86, -1, "DL_Etoz_Never") -- Grrrr. You will pay for this!
 		DL:addConditionProgress("npc_etoz", "show_sword")
+		DL:addConditionProgress("npc_etoz", "going")
 		DL:addNode()
 
 	end
@@ -684,6 +687,7 @@ loadDialogue = function(DL)
 			DL:removeItem("we_arazath", 1)
 			DL:removeItem("do_arazathletter", 1)
 			DL:addGold(100)
+			DL:addConditionProgress("npc_etoz", "going")
 			DL:addNode()
 
 		end
@@ -694,13 +698,15 @@ loadDialogue = function(DL)
 			DL:addConditionProgress("npc_etoz", "show_sword")
 			DL:removeItem("we_arazath", 1)
 			DL:removeItem("do_arazathletter", 1)
+			DL:addConditionProgress("npc_etoz", "going")
 			DL:addNode()
 
 		end
 
 
-		DL:createNPCNode(87, -2, "DL_Etoz_Never") -- 
+		DL:createNPCNode(87, -1, "DL_Etoz_Never") -- 
 		DL:addConditionProgress("npc_etoz", "show_sword")
+		DL:addConditionProgress("npc_etoz", "going")
 		DL:addNode()
 
 	end
