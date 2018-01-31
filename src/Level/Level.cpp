@@ -112,7 +112,7 @@ void Level::setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) co
 void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderStates& states, const sf::Vector2f& focus) const {
 	sf::View view;
 	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	m_camera->setFocusCenter(focus);
+	m_camera->setFocusCenter(focus, true);
 
 	// parallax background layers
 	for (auto& layer : m_levelData.backgroundLayers) {
