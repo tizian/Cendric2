@@ -35,6 +35,7 @@ npc.id:npc_vincent3
 	tag:1
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_vincent3", "talked")
+	trigger:DL:changeQuestState("rusty_key", "completed")
 	# translation: 
 	translation.tag:DL_Vincent_Welcome
 	translation.en:So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.

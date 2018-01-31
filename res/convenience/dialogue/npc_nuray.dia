@@ -126,6 +126,38 @@ npc.id:npc_nuray
 	]
 	[
 		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_nuray", "get_rich")
+		# translation: 
+		translation.tag:DL_Choice_WhereRich
+		translation.en:Do you know where I could get rich?
+		translation.de:Wo gibt's hier was zu holen?
+		translation.ch:Wo gits do öppis z'hole?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)
+		# translation: 
+		translation.tag:DL_Choice_PirateTreasure
+		translation.en:Here. Now tell me more about that treasure.
+		translation.de:Hier. Jetzt erzähl mir mehr über diesen Schatz.
+		translation.ch:Do. Jetz verzell mer me über de Schatz.
+		translation.item.id:gold
+		translation.item.amount:10
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")
+		# translation: 
+		translation.tag:DL_Choice_WhyTreasure
+		translation.en:If that treasure is so valuable, why didn't you get it by now?
+		translation.de:Wenn dieser Schatz so wertvoll ist, wieso hast du ihn nicht schon geholt?
+		translation.ch:Wenn de Schatz so wertvoll isch, weso heschen nid scho gholt?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -225,6 +257,95 @@ npc.id:npc_nuray
 	translation.en:What?! Damn mages! Go and find him!
 	translation.de:Was?! Verdammte Magier! Geh und finde ihn!
 	translation.ch:Was?! Verdammti Magier! Gang und finden!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_nuray", "get_rich")
+	# translation: 
+	translation.tag:DL_Nuray_WhereRich
+	translation.en:Not in this shithole, that's for sure.
+	translation.de:Sicher nicht hier in diesem Drecksloch.
+	translation.ch:Sicher nid do i dem Drecksloch.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Nuray_WhereRich2
+	translation.en:But for some golden coins, I could tell you where to find a real treasure.
+	translation.de:Aber für ein paar goldene Münzen könnte ich dir sagen, wo du einen richtigen Schatz findest.
+	translation.ch:Aber für es paar goldigi Münze chönti der sege, wo du en richtige Schatz findsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeGold(10)
+	# translation: 
+	translation.tag:DL_Nuray_PirateTreasure
+	translation.en:Hehe. Well, there are rumours of a pirate treasure, hidden somewhere near the beach of Gandria.
+	translation.de:Hehe. Nun, es gibt Gerüchte über einen Piratenschatz, der nahe der Küste von Gandria versteckt sein soll.
+	translation.ch:Hehe. Jo, es git Grüchtli über en Pirateschatz, wo ide Nöchi vode Küste vo Gandria söll versteckt si.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:changeQuestState("pirate_treasure", "started")
+	# translation: 
+	translation.tag:DL_Nuray_PirateTreasure2
+	translation.en:You could try to find it...
+	translation.de:Du könntest versuchen, ihn zu finden...
+	translation.ch:Du chöntsch versueche, ihn z'finde...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addQuestDescription("pirate_treasure", 1)
+	trigger:DL:addConditionProgress("npc_nuray", "why_treasure")
+	# translation: 
+	translation.tag:DL_Nuray_WhyTreasure
+	translation.en:They say, the treasure can only be found with wind magic, which was used by the pirates.
+	translation.de:Man sagt, der Schatz kann nur mit Windmagie gefunden werden - welche die Piraten beherrschten.
+	translation.ch:Me seit, de Schatz cha nur mit Windmagie gfunde werde, wo d'Pirate beherrscht hend.
+	[
+		# Link node, tag is next tag
+		tag:17
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Nuray_WhyTreasure2
+	translation.en:No one here is able to use wind magic - and it's only a legend.
+	translation.de:Niemand hier kann Windmagie benutzen - und es ist nur eine Legende.
+	translation.ch:Niemort do cha Windmagie bruche - und es isch eh nur e Legende.
 	[
 		# Link node, tag is next tag
 		tag:-2

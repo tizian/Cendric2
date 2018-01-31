@@ -17,6 +17,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(1, -2, "DL_Vincent_Welcome") -- So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
 		DL:addConditionProgress("npc_vincent3", "talked")
+		DL:changeQuestState("rusty_key", "completed")
 		DL:addNode()
 
 	end

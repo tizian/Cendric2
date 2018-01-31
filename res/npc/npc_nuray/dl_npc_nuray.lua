@@ -46,6 +46,15 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_nuray", "velius_found")) then 
 		DL:addChoice(11, "DL_Choice_VeliusFound") -- Your brother was abducted by some mage named Velius.
 	end
+	if (not DL:isConditionFulfilled("npc_nuray", "get_rich")) then 
+		DL:addChoice(12, "DL_Choice_WhereRich") -- Do you know where I could get rich?
+	end
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
+		DL:addItemChoice(14, "DL_Choice_PirateTreasure", "gold", 10) -- Here. Now tell me more about that treasure.
+	end
+	if (not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")) then 
+		DL:addChoice(16, "DL_Choice_WhyTreasure") -- If that treasure is so valuable, why didn't you get it by now?
+	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 
@@ -89,6 +98,44 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(11, -2, "DL_Nuray_VeliusFound") -- What?! Damn mages! Go and find him!
 		DL:addConditionProgress("npc_nuray","velius_found")
+		DL:addNode()
+
+	end
+
+	if (not DL:isConditionFulfilled("npc_nuray", "get_rich")) then 
+
+		DL:createNPCNode(12, 13, "DL_Nuray_WhereRich") -- Not in this shithole, that's for sure.
+		DL:addConditionProgress("npc_nuray", "get_rich")
+		DL:addNode()
+
+
+		DL:createNPCNode(13, -2, "DL_Nuray_WhereRich2") -- But for some golden coins, I could tell you where to find a real treasure.
+		DL:addNode()
+
+	end
+
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
+
+		DL:createNPCNode(14, 15, "DL_Nuray_PirateTreasure") -- Hehe. Well, there are rumours of a pirate treasure, hidden somewhere near the beach of Gandria.
+		DL:removeGold(10)
+		DL:addNode()
+
+
+		DL:createNPCNode(15, -2, "DL_Nuray_PirateTreasure2") -- You could try to find it...
+		DL:changeQuestState("pirate_treasure", "started")
+		DL:addNode()
+
+	end
+
+	if (not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")) then 
+
+		DL:createNPCNode(16, 17, "DL_Nuray_WhyTreasure") -- They say, the treasure can only be found with wind magic, which was used by the pirates.
+		DL:addQuestDescription("pirate_treasure", 1)
+		DL:addConditionProgress("npc_nuray", "why_treasure")
+		DL:addNode()
+
+
+		DL:createNPCNode(17, -2, "DL_Nuray_WhyTreasure2") -- No one here is able to use wind magic - and it's only a legend.
 		DL:addNode()
 
 	end

@@ -941,6 +941,7 @@ npc.id:npc_vincent2
 	trigger:DL:addItem("ke_thiefguild", 1)
 	trigger:DL:addReputationProgress("thief", 10)
 	trigger:DL:addConditionProgress("default", "thieves_open")
+	trigger:DL:changeQuestState("rusty_key", "started")
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuestDone
 	translation.en:Very well. I knew you had talent. Now, if you'd like to learn more of this useful magic, take this key and find the door it opens.

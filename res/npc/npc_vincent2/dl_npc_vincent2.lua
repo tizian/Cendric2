@@ -390,6 +390,7 @@ loadDialogue = function(DL)
 		DL:addItem("ke_thiefguild", 1)
 		DL:addReputationProgress("thief", 10)
 		DL:addConditionProgress("default", "thieves_open")
+		DL:changeQuestState("rusty_key", "started")
 		DL:addNode()
 
 	end

@@ -14,13 +14,11 @@ void Camera::update(const sf::Time& frameTime) {
 	m_currentFrameTime = frameTime;
 	if (g_inputController->isKeyActive(Key::Up)) {
 		auto newCenterY = m_cameraCenter.y - CAMERA_SPEED_PER_S * frameTime.asSeconds();
-		if (newCenterY > m_currentFocusCenter.y - m_cameraWindowHeight * 0.5f)
-			setCameraCenterY(newCenterY, !m_mainChar->isClimbing());
+		setCameraCenterY(newCenterY, true);
 	}
 	if (g_inputController->isKeyActive(Key::Down)) {
 		auto newCenterY = m_cameraCenter.y + CAMERA_SPEED_PER_S * frameTime.asSeconds();
-		if (newCenterY < m_currentFocusCenter.y + m_cameraWindowHeight * 0.5f)
-			setCameraCenterY(newCenterY, !m_mainChar->isClimbing());
+		setCameraCenterY(newCenterY, true);
 	}
 }
 
