@@ -6,7 +6,7 @@ steps = {
 	{
 		texts = {
 			{str="Elder:HereDrink", 	time=5},
-			{str="Elder:ItWillReveal", time=6}
+			{str="Elder:ItWillReveal", time=5}
 		},
 		images = {
 			{path="1_i_1.png", vel=0,  angle=0},

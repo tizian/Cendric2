@@ -69,7 +69,10 @@ if (WIN32)
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/info.rc
 	)
+    
+    # windows
     if (CENDRIC_STEAM)
+        target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/win64/steam_api64.lib)
     endif()
 
@@ -81,7 +84,9 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		${PROJECT_SOURCE_DIR}/res/icon.icns
 	)
 
+    # mac
     if (CENDRIC_STEAM)
+        target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib)
     endif()
 else()
@@ -89,8 +94,9 @@ else()
 		${Cendric_FILES}
 	)
 
-    # linux?
+    # linux
     if (CENDRIC_STEAM)
+        target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/linux64/libsteam_api.so)
     endif()
 endif()

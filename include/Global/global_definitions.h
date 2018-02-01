@@ -19,14 +19,14 @@
 // Debug version
 #define DEBUG
 
-// For steam builds
-// #define STEAM
-
 // Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
 // #define EXTERNAL_DOCUMENTS_FOLDER
 
 // Resolve .app package internal resource path for mac builds
 // #define APPLE_APP_BUILD
+
+// Steam builds
+// #define STEAM
 
 // max frame time (in seconds)
 #define MAX_FRAME_TIME 0.05f
