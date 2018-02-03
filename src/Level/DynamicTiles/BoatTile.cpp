@@ -97,7 +97,7 @@ void BoatTile::update(const sf::Time& frameTime) {
 
 	// update relative vel
 	m_relativeVelocity = m_velocity;
-}	
+}
 
 void BoatTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	// nop
@@ -142,4 +142,28 @@ void BoatTile::checkForWind() {
 	}
 	setAcceleration(sf::Vector2f(0.f, 0.f));
 	m_newState = GameObjectState::Idle;
+}
+
+void BoatTile::checkCollisions(const sf::Vector2f& nextPosition) {
+	float velNorm = norm(getVelocity()) / 20.f; // 20 fps max
+	const sf::FloatRect& bb = *getBoundingBox();
+	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
+
+	WorldCollisionQueryRecord rec;
+
+	rec.excludedGameObject = this;
+	rec.ignoreMobs = false;
+
+	bool isMovingRight = nextPosition.x > bb.left;
+
+	// check for collision on x axis
+	rec.boundingBox = nextBoundingBoxX;
+	rec.collisionDirection = isMovingRight ? CollisionDirection::Right : CollisionDirection::Left;
+	bool collidesX = m_level->collides(rec);
+
+	if (collidesX) {
+		setAccelerationX(0.f);
+		setVelocityX(0.f);
+		setPositionX(rec.safeLeft);
+	}
 }

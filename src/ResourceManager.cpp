@@ -303,7 +303,7 @@ void ResourceManager::playSound(const std::string& filename, bool loop, float sc
 }
 
 void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop, float scale) {
-	if (!m_configuration.isSoundOn || filename.empty()) return;
+	if (!m_configuration.isSoundOn || !g_inputController->isWindowFocused() || filename.empty()) return;
 	if (!contains(m_soundBuffers, filename)) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
 		return;
@@ -331,7 +331,7 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, c
 	float distance = dist(source, listener);
 	if (distance <= WINDOW_WIDTH) {
 		float scale = 1.f - distance / WINDOW_WIDTH;
-		g_resourceManager->playSound(sound, filename, force, loop, scale);
+		playSound(sound, filename, force, loop, scale);
 	}
 }
 

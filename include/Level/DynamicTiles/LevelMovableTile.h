@@ -21,5 +21,5 @@ public:
 protected:
 	bool collides(const sf::Vector2f& nextPos) const override;
 	void updateRelativeVelocity(const sf::Time& frameTime) override;
-	void checkCollisions(const sf::Vector2f& nextPosition);
+	virtual void checkCollisions(const sf::Vector2f& nextPosition);
 };

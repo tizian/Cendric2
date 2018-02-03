@@ -1238,7 +1238,7 @@
   <object id="2235" gid="889" x="4850" y="500" width="50" height="50"/>
   <object id="2236" gid="851" x="4450" y="300" width="50" height="50"/>
   <object id="2237" gid="851" x="4750" y="300" width="50" height="50"/>
-  <object id="2238" gid="815" x="4300" y="187.5" width="50" height="50"/>
+  <object id="2238" gid="815" x="4300" y="150" width="50" height="50"/>
   <object id="2239" gid="844" x="4100" y="700" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>

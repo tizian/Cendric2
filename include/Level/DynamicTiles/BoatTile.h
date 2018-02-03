@@ -34,6 +34,7 @@ protected:
 private:
 	void checkForWind();
 	void updateRelativeVelocity(const sf::Time& frameTime) override;
+	void checkCollisions(const sf::Vector2f& nextPosition) override;
 	std::string getSpritePath() const override;
 	std::vector<GameObject*>* m_spellVec;
 	sf::FloatRect m_sailBoundingBox;
