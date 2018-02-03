@@ -105,6 +105,7 @@ item.id:eq_stevenhelmet,1
 item.id:eq_sunring,1
 item.id:eq_swordpendant,1
 item.id:eq_travelhat,1
+item.id:eq_piratehat,1
 item.id:eq_betahead,1
 item.id:eq_wizardhatfire,1
 item.id:eq_wizardhatice,1
@@ -264,6 +265,7 @@ item.id:we_walkingpole,1
 item.id:we_zeffssword,1
 item.id:we_leeroysword,1
 item.id:we_arazath,1
+item.id:we_celestialclaws,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:

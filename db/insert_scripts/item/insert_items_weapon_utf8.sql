@@ -500,3 +500,28 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 3, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 4, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_arazath', 5, 'meta', 3);
+
+-- Claws of the Celestial Pirate
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_celestialclaws', 'item', 'Claws of the Celestial Pirate','Klauen des Himmelspiraten','Chlaue vom Himmelspirat');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_celestialclaws', 'item_desc', 'These claws belonged once to the wind pirates that sailed both the sea and the sky.','Diese Klauen gehörten einmal den Windpiraten, die auf den Meeren und den Wolken segelten.','Die Chlaue hend mal de Windpirate ghört, wo ufem Meer und uf de Wolke gsäglet sind.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_celestialclaws', 'eq_weapon', 700, 700, 150, 3);
+INSERT INTO item_attribute (item_id, dmg_ice, dmg_physical, critical, haste) values ('we_celestialclaws', 10, 10, 3, 20);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_celestialclaws', 'res/texture/equipment/weapon/spritesheet_weapon_celestialclaws.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_celestialclaws.png');
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_celestialclaws', 1000, 10, 45, 80, 4);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_celestialclaws', 1, 'elemental', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_celestialclaws', 2, 'meta', 3);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_celestialclaws', 3, 'meta', 2);
+INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_celestialclaws', 4, 'meta', 2);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_celestialclaws', -10, -10, 30, 40);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_celestialclaws', 1, 450, 450, 50, 50);
+INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_celestialclaws', 0, 0, 100, 150, 80, 100, 0.3);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('we_celestialclaws', 50, 15, 1, 'res/texture/particles/star.png', 40, 0, 80, 
+8, 12, 0, 0,
+100, 200, 255, 255,
+100, 255, 255, 255,
+200, 200, 255, 200,
+255, 255, 255, 200,
+0, -50,
+20, 50,
+2.0, 3.0, 0.0);

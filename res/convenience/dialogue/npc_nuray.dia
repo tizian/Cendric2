@@ -127,7 +127,7 @@ npc.id:npc_nuray
 	[
 		# Link node, tag is next tag
 		tag:12
-		condition:not DL:isConditionFulfilled("npc_nuray", "get_rich")
+		condition:not DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done")
 		# translation: 
 		translation.tag:DL_Choice_WhereRich
 		translation.en:Do you know where I could get rich?
@@ -137,7 +137,7 @@ npc.id:npc_nuray
 	[
 		# Link node, tag is next tag
 		tag:14
-		condition:DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)
+		condition:DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)
 		# translation: 
 		translation.tag:DL_Choice_PirateTreasure
 		translation.en:Here. Now tell me more about that treasure.

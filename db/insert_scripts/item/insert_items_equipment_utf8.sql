@@ -8,6 +8,16 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_stevenhelmet', -10, -29, 31, 27);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_stevenhelmet', 1, 550, 100, 50, 100);
 
+-- Captain's Hat
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_piratehat', 'item', 'Captain''s Hat','Kapitänshut','Huet vom Käpt''n');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_piratehat', 'item_desc', 'Arr!','Arr!','Arr!');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_piratehat', 'eq_head', 750, 700, 70, 2);
+INSERT INTO item_attribute (item_id, dmg_fire, max_health, dmg_physical, res_physical, res_light, critical) values ('eq_piratehat', 2, 8, 2, 10, 5, -2);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_piratehat', 'res/texture/equipment/head/spritesheet_head_piratehat.png', 'res/texture/equipment/head/spritesheet_map_head_piratehat.png');
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('eq_piratehat', -22, -33, 37, 18);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('eq_piratehat', 1, 500, 450, 100, 50);
+
 -- Sack
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item', 'Sack','Sack','Sack');

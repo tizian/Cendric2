@@ -12,7 +12,6 @@ BoatTile::BoatTile(LevelScreen* levelScreen) :
 	m_movingParent = this;
 
 	m_spellVec = levelScreen->getObjects(_Spell);
-	m_isInitialized = false;
 }
 
 BoatTile::~BoatTile() {
@@ -74,18 +73,6 @@ void BoatTile::destroy() {
 }
 
 void BoatTile::update(const sf::Time& frameTime) {
-	if (!m_isInitialized) {
-		for (auto go : *m_screen->getObjects(_DynamicTile)) {
-			if (auto dyn = dynamic_cast<LevelDynamicTile*>(go)) {
-				auto id = dyn->getDynamicTileID();
-				if (id == LevelDynamicTileID::Falling || id == LevelDynamicTileID::Damaging) {
-					m_dynamicTileVec.push_back(dyn);
-				}
-			}
-		}
-		m_isInitialized = true;
-	}
-
 	// update animation
 	if (m_acceleration.x != 0.f) {
 		m_newIsFacingRight = m_acceleration.x > 0.f;
@@ -101,7 +88,6 @@ void BoatTile::update(const sf::Time& frameTime) {
 	}
 	else {
 		checkForWind();
-		checkForEnemies();
 	}
 
 	sf::Vector2f nextPosition;
@@ -156,13 +142,4 @@ void BoatTile::checkForWind() {
 	}
 	setAcceleration(sf::Vector2f(0.f, 0.f));
 	m_newState = GameObjectState::Idle;
-}
-
-void BoatTile::checkForEnemies() {
-	for (auto const go : m_dynamicTileVec) {
-		if (fastIntersect(*go->getBoundingBox(), *getBoundingBox())) {
-			destroy();
-			return;
-		}
-	}
 }

@@ -46,10 +46,10 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("missing_koray", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and DL:isQuestDescriptionUnlocked("missing_koray",1) and not DL:isConditionFulfilled("npc_nuray", "velius_found")) then 
 		DL:addChoice(11, "DL_Choice_VeliusFound") -- Your brother was abducted by some mage named Velius.
 	end
-	if (not DL:isConditionFulfilled("npc_nuray", "get_rich")) then 
+	if (not DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done")) then 
 		DL:addChoice(12, "DL_Choice_WhereRich") -- Do you know where I could get rich?
 	end
-	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
 		DL:addItemChoice(14, "DL_Choice_PirateTreasure", "gold", 10) -- Here. Now tell me more about that treasure.
 	end
 	if (not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")) then 
@@ -102,7 +102,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (not DL:isConditionFulfilled("npc_nuray", "get_rich")) then 
+	if (not DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done")) then 
 
 		DL:createNPCNode(12, 13, "DL_Nuray_WhereRich") -- Not in this shithole, that's for sure.
 		DL:addConditionProgress("npc_nuray", "get_rich")
@@ -114,7 +114,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
 
 		DL:createNPCNode(14, 15, "DL_Nuray_PirateTreasure") -- Hehe. Well, there are rumours of a pirate treasure, hidden somewhere near the beach of Gandria.
 		DL:removeGold(10)
