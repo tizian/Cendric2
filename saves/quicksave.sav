@@ -1,22 +1,22 @@
 # a magical number that stops you from modifying the saved game 
-hash:4128000037
+hash:747445870
 # time played, in seconds
-time.played:18690
+time.played:14961
 savegame.name:Quicksave
-savegame.date:1517264224
-level.id:res/level/jacklighthouse/jacklighthouse.tmx
-level.position:1360.000000,1460.000000
-is.in.level:1
+savegame.date:1517755311
+level.id:res/level/well/well.tmx
+level.position:860.000000,760.000000
+is.in.level:0
 overworld.id:res/map/gandria/gandria.tmx
-map.id:res/map/gandria/gandria.tmx
-map.position:3465.137695,2225.109131
+map.id:res/map/gandriabrothel/gandriabrothel.tmx
+map.position:915.267944,428.336456
 forced.map.id:
 forced.map.position:0.000000,0.000000
 # in this order: maxHealthPoints, healthRegenerationPerS, haste, critical, 
 # damagePhysical, damageFire, damageIce, damageShadow, damageLight, 
 # resistancePhysical, resistanceFire, resistanceIce, resistanceShadow, resistanceIce. 
 attributes:105,0,0,0,0,0,0,0,0,0,0,0,0,0
-gold:323
+gold:221
 # items in inventory:
 item.id:co_shell,6
 item.id:co_smallpouch,3
@@ -25,12 +25,12 @@ item.id:do_elderdiary,1
 item.id:do_eleletter,1
 item.id:do_notemarcus,1
 item.id:eq_aquamarinering,1
-item.id:eq_body_twilightt1,1
 item.id:eq_bonering,1
-item.id:eq_icehat,1
-item.id:eq_ironring,1
+item.id:eq_icearmor,1
 item.id:eq_leatherarmor,1
+item.id:eq_rubyring,1
 item.id:eq_sack,1
+item.id:eq_stevenhelmet,1
 item.id:eq_travelhat,1
 item.id:eq_wolfbonnet,1
 item.id:fo_apple,13
@@ -43,11 +43,11 @@ item.id:fo_glowingshroom,19
 item.id:fo_greaterhealingpotion,2
 item.id:fo_ham,2
 item.id:fo_healingherb,6
-item.id:fo_lesserhealingpotion,15
+item.id:fo_lesserhealingpotion,16
 item.id:fo_mediumhealingpotion,3
 item.id:fo_milk,1
 item.id:fo_rawchicken,1
-item.id:fo_rawmeat,11
+item.id:fo_rawmeat,10
 item.id:fo_redhat,2
 item.id:fo_roastedmeat,26
 item.id:fo_stormweed,2
@@ -55,7 +55,6 @@ item.id:fo_water,5
 item.id:fo_windrose,1
 item.id:fo_wine,1
 item.id:ke_jonathanbasement,1
-item.id:ke_lighthouse,1
 item.id:ke_rhendal,1
 item.id:ke_sewerkey,1
 item.id:ke_smallsilver,1
@@ -65,7 +64,7 @@ item.id:ke_tower_1,1
 item.id:mi_candleholder,3
 item.id:mi_feather,2
 item.id:mi_goldengoblet,1
-item.id:mi_ironore,2
+item.id:mi_ironore,1
 item.id:mi_portstone,1
 item.id:mi_sextant,1
 item.id:mi_teeth,6
@@ -75,9 +74,9 @@ item.id:pe_elixirice,1
 item.id:qe_tower_2,1
 item.id:sp_shadowtrap,1
 item.id:we_claw,1
+item.id:we_firestaff,1
 item.id:we_hawthorn,1
 item.id:we_herbalistblade,1
-item.id:we_inconspicuousdagger,1
 item.id:we_ordermace,1
 item.id:we_pickaxe,2
 item.id:we_tearstaff,1
@@ -85,19 +84,18 @@ item.id:we_torch,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:
-equipped.spellslot:2,1,1,4,1
-equipped.spellslot:3,4,1,1,1
+equipped.spellslot:7
 # equipment:
 equipped.back:eq_fireratscarf
-equipped.body:eq_icearmor
-equipped.head:eq_stevenhelmet
+equipped.body:eq_body_twilightt1
+equipped.head:eq_icehat
 equipped.neck:
-equipped.ring1:eq_rubyring
+equipped.ring1:eq_ironring
 equipped.ring2:eq_ironring
-equipped.weapon:we_firestaff
+equipped.weapon:we_inconspicuousdagger
 # weapon configurations:
 weapon.configs:we_claw;3,4,1;2,1,1,4,1;12,6,1;
-weapon.configs:we_firestaff;2,1,1,4,1;3,4,1,1,1;
+weapon.configs:we_firestaff;
 weapon.configs:we_hawthorn;2;
 weapon.configs:we_inconspicuousdagger;7;
 weapon.configs:we_ordermace;17,2,1;2,1,1;
@@ -124,7 +122,6 @@ enemies.looted:res/level/eldergarden/eldergarden.tmx,88
 enemies.looted:res/level/gandriamines/gandriamines.tmx,101,102,103,106
 enemies.looted:res/level/gandriasewers/gandriasewers.tmx,26,52,53,54,55,57,58,59,60,62,64,66
 enemies.looted:res/level/howlingcaverns/howlingcaverns.tmx,29,30,31,32,33,34,42,43,44,45,46,47
-enemies.looted:res/level/jacklighthouse/jacklighthouse.tmx,150
 enemies.looted:res/level/jonathanslab/jonathanslab.tmx,123,124,130,131,134,136,139,141,143,144,145,146
 enemies.looted:res/level/ratcave/ratcave.tmx,1,2,4,5,6,7
 enemies.looted:res/level/rockfall/rockfall.tmx,74,75,78
@@ -140,7 +137,6 @@ items.looted:res/level/eldergarden/eldergarden.tmx,207,248,315,524,535,568,571,5
 items.looted:res/level/gandriamines/gandriamines.tmx,306,307,627,702,905,1010,1823,2708,2821,2922,3217,3303,3404,3520,3521,3524
 items.looted:res/level/gandriasewers/gandriasewers.tmx,223,238,264,265,267,268,286,290,293,311,320,396,402,615,841,844,859,860,861,1413,1426,1930
 items.looted:res/level/howlingcaverns/howlingcaverns.tmx,603,628,753,957,963,1116,1291,1294,1410,1545,1548,1706,1850,2012,2330,2332,2409,2425
-items.looted:res/level/jacklighthouse/jacklighthouse.tmx,2381,4413
 items.looted:res/level/jonathanslab/jonathanslab.tmx,149,163,199,404,451,597,598,604,777,869,915,1050,1197,1292,1593,1604
 items.looted:res/level/ratcave/ratcave.tmx,667,734,738,762,763,1076,1200,1229,1266,1302,1560,1720,1744,1758,1794,1798,1800
 items.looted:res/level/rockfall/rockfall.tmx,269,419,420,514,517,518,763,894,1006,1043
@@ -155,7 +151,6 @@ chests.looted:res/level/elderbackroom/elderbackroom.tmx,102
 chests.looted:res/level/etozhideout/etozhideout.tmx,178,179
 chests.looted:res/level/gandriasewers/gandriasewers.tmx,48
 chests.looted:res/level/howlingcaverns/howlingcaverns.tmx,24,38
-chests.looted:res/level/jacklighthouse/jacklighthouse.tmx,155
 chests.looted:res/level/jonathanslab/jonathanslab.tmx,140
 chests.looted:res/level/ratcave/ratcave.tmx,10
 chests.looted:res/level/smallcrypt/smallcrypt.tmx,35,43,60,63
@@ -163,7 +158,7 @@ chests.looted:res/level/stonegarden/stonegarden.tmx,134,135
 chests.looted:res/level/syrahbasement/syrahbasement.tmx,166
 # books read:
 # waypoints unlocked in map:
-waypoints.unlocked:res/map/gandria/gandria.tmx,308,966.000000,1160.000000,312,366.000000,2110.000000,313,366.000000,2610.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000,322,3466.000000,2310.000000
+waypoints.unlocked:res/map/gandria/gandria.tmx,308,966.000000,1160.000000,312,366.000000,2110.000000,313,366.000000,2610.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000
 waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,308,116.000000,210.000000,310,1166.000000,1210.000000,311,1816.000000,1210.000000,313,1316.000000,260.000000
 waypoints.unlocked:res/map/marshland/marshland.tmx,291,1366.000000,210.000000,292,766.000000,410.000000,295,1616.000000,1710.000000
 waypoints.unlocked:res/map/meadows/meadows.tmx,231,2416.000000,510.000000,232,2866.000000,960.000000,233,1116.000000,710.000000,234,866.000000,1660.000000,235,2016.000000,1860.000000,236,2816.000000,2510.000000,237,2241.000000,2760.000000,238,1116.000000,2760.000000,239,3366.000000,3060.000000,254,3166.000000,1485.000000
@@ -184,9 +179,10 @@ triggers.triggered:res/map/gandriatavern/gandriatavern.tmx,171
 triggers.triggered:res/map/meadows/meadows.tmx,130,230
 # doors open in world:
 # tiles explored in world:
-tiles.explored:res/map/gandria/gandria.tmx,80,70,,
-tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,,
-tiles.explored:res/map/meadows/meadows.tmx,70,70,,
+tiles.explored:res/map/gandria/gandria.tmx,80,70,                                                                                                                                                                           ï¿½        ï¿½ï¿½        ï¿½ï¿½       ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½      ï¿½ï¿½ï¿½       ï¿½ï¿½       ï¿½ï¿½       ï¿½ï¿½       ï¿½ï¿½       ï¿½ï¿½       ï¿½ï¿½      ï¿½ï¿½ï¿½?      ï¿½ï¿½ï¿½      ï¿½ïÿ¿ï¿½ï¿½  ü  ï¿½ï¿½ÿ¿½ï¿½   þï¿½ï¿½ï¿ÿï¿½?     ÿ¿½ï¿½ï¿½ïÿ¿     ï¿ÿï¿½ï¿½ï¿½ÿ¿½     ï¿ÿï¿½ï¿½ï¿½ÿ¿½     ï¿ýï¿½ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½?  ï¿½ï¿½ï¿½ï¿½ ï¿½  ï¿½ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½ï¿½     ï¿½ ï¿½ï¿½     ï¿½ ï¿½ï¿½     ï¿½  ï¿½     ,
+tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½                    ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,
+tiles.explored:res/map/marshland/marshland.tmx,50,40,  ï¿½ï¿½    ï¿½    ï¿½  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½?   ï¿½                                                                                 ï¿½?     ï¿½    ï¿½    ï¿½ï¿½    ï¿½ï¿½   ï¿½ï¿½    ï¿½    ï¿½ï¿½   ï¿½ï¿½   ï¿½ï¿½    ï¿½    ï¿½ï¿½    ï¿½ ,
+tiles.explored:res/map/meadows/meadows.tmx,70,70,  ï¿½?ï¿½ï¿½ï¿½?   ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½?ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½?ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½?ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½?ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ ï¿½ï¿½ï¿½?  ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½? ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½?  ï¿½?ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½?   ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½     ,0000
 # quest states:
 quest.state:a_new_trace,2
 quest.state:broken_bridge,3
@@ -204,7 +200,6 @@ quest.state:hungry_wolf,2
 quest.state:ice_armor,2
 quest.state:invis_recipe,2
 quest.state:join_a_guild,2
-quest.state:kill_elysia,1
 quest.state:lee_and_luv,1
 quest.state:leeroy_chicken,1
 quest.state:lloyds_plan_thief,1
@@ -238,7 +233,7 @@ quest.progress.condition:who_am_i,information_gathered
 quest.progress.condition:zeff_returns,guards_convinced
 # quest descriptions unlocked:
 quest.progress.description:a_new_trace,1
-quest.progress.description:element_master,1,2
+quest.progress.description:element_master,1
 quest.progress.description:gates_of_gandria,1
 quest.progress.description:join_a_guild,4
 quest.progress.description:monster_problem,1
@@ -247,7 +242,7 @@ quest.progress.description:theas_dream,1
 quest.progress.description:zeff_returns,1
 # conditions of a certain type fulfilled:
 progress.condition:boss,BossKhajag
-progress.condition:default,barracks_open,bridge_crossed,brothel_open,chapter3,elysia_intro,gandria_open,plateau_open,second_boss_open,teleport_stone,thief,thieves_open,tutorial_complete
+progress.condition:default,barracks_open,bridge_crossed,brothel_open,chapter3,gandria_open,plateau_open,second_boss_open,teleport_stone,thief,thieves_open,tutorial_complete
 progress.condition:npc_alonso,talked
 progress.condition:npc_andrew,bridge,mages,what_are_you_doing,who_are_you
 progress.condition:npc_cityguard,gates_closed,letin_zeff,stranger,talked,zeff
@@ -262,7 +257,6 @@ progress.condition:npc_ingrid,meat_given,who_am_i,who_are_you
 progress.condition:npc_inina,aura,farmers,hi,learned_light,mage,mark,mark_getrid,mark_whatis,missing_people,power_weakened,shrine,what_doing,whats_reward,where_light,where_search
 progress.condition:npc_innkeeper,asked_for_feudal_fire,bought_feudal_fire,first_rumor,right_name,second_rumor
 progress.condition:npc_ivo,gandria,merchant,sheep_asked,who_are_you
-progress.condition:npc_jack,elysia,who_are_you,why_not_clerics
 progress.condition:npc_jonathan,academy,affinity,another_mage,decipher_map,elementalist,prove_yourself,talked,what_about_you,where_spells,you_learn
 progress.condition:npc_lee,what_doing
 progress.condition:npc_leeluv,calm_down,second_rant
@@ -271,7 +265,7 @@ progress.condition:npc_lloyd,talked
 progress.condition:npc_lua,clairvoyant,flirt,my_aura,no_necromancer,talked
 progress.condition:npc_luiz,forbidden,learn,other_guild,talked,what_if_join,who_are_you
 progress.condition:npc_luv,first_rant,who_are_you
-progress.condition:npc_mona,gate_open,talked,upper_floor
+progress.condition:npc_mona,fun_unlock,gate_open,sex_exotic,talked,upper_floor
 progress.condition:npc_morton,crypt_open,guys_like_me,other_guy,talked
 progress.condition:npc_nuray,leader,spells,who_are_you
 progress.condition:npc_rhendal,job,mage,magic,mark,spoiled_schnapps,talked,talked_about_schnapps,vision,vision_flames,you_mage
@@ -302,7 +296,6 @@ merchant.state:npc_douglas,eq_aquamarinering,1,eq_bandana,1,eq_leatherarmor,1,eq
 merchant.state:npc_harek,eq_ironring,1,we_claw,1,we_pickaxe,1,we_rustysword,2,we_simplesword,1
 merchant.state:npc_helena,eq_aquamarinering,1,eq_rubyring,1,fo_apple,10,fo_beer,20,fo_bread,10,fo_cheese,5,fo_chicken,10,fo_fishsoup,5,fo_ham,7,fo_milk,3,fo_omelette,6,fo_roastedmeat,10,fo_rum,3,fo_sausage,5,fo_water,7,fo_wine,7
 merchant.state:npc_innkeeper,eq_ironring,1,eq_silvernecklace,1,fo_apple,5,fo_beer,10,fo_bread,3,fo_cheese,3,fo_ham,3,fo_rawmeat,5,fo_sausage,4,fo_wine,5
-merchant.state:npc_mona,fo_beer,20,fo_rum,5,fo_wine,10,pe_glassoffeudalfire,1
 merchant.state:npc_nuray,eq_back_twilightt1,1,eq_back_twilightt2,1,eq_back_twilightt3,1,eq_body_twilightt1,1,eq_body_twilightt2,1,eq_body_twilightt3,1,eq_head_twilightt1,1,eq_head_twilightt2,1,eq_head_twilightt3,1,fo_lesserhealingpotion,20,mi_silverplate,1,we_oathbreaker,1
 merchant.state:npc_syrah,fo_caveberry,2,fo_greaterhealingpotion,2,fo_healingherb,5,fo_lesserhealingpotion,3,fo_mediumhealingpotion,3,fo_physalis,2,fo_redhat,1,fo_stormweed,1,fo_water,10,fo_windrose,1,fo_wine,10,pe_elixirshadow,1,we_herbalistblade,1
 merchant.state:npc_thiran,eq_back_divinet1,1,eq_back_divinet2,1,eq_back_divinet3,1,eq_body_divinet1,1,eq_body_divinet2,1,eq_body_divinet3,1,eq_head_divinet1,1,eq_head_divinet2,1,eq_head_divinet3,1,fo_lesserhealingpotion,20,we_pikeoflight,1
@@ -345,9 +338,8 @@ weather:res/level/howlingcaverns/howlingcaverns.tmx,0.900000,
 weather:res/map/elderhome/elderhome.tmx,0.300000,
 weather:res/map/gandria/gandria.tmx,0.600000,
 weather:res/map/meadows/meadows.tmx,0.600000,
-deaths:17
+deaths:16
 # deaths in level:
-level.deaths:res/level/boss_elysia/boss_elysia.tmx,1
 level.deaths:res/level/boss_khajag/boss_khajag.tmx,1
 level.deaths:res/level/brokenbridge/brokenbridge.tmx,1
 level.deaths:res/level/crypt/crypt.tmx,0
@@ -358,7 +350,6 @@ level.deaths:res/level/etozhideout/etozhideout.tmx,0
 level.deaths:res/level/gandriamines/gandriamines.tmx,0
 level.deaths:res/level/gandriasewers/gandriasewers.tmx,4
 level.deaths:res/level/howlingcaverns/howlingcaverns.tmx,2
-level.deaths:res/level/jacklighthouse/jacklighthouse.tmx,0
 level.deaths:res/level/jonathanslab/jonathanslab.tmx,0
 level.deaths:res/level/ratcave/ratcave.tmx,1
 level.deaths:res/level/rockfall/rockfall.tmx,0

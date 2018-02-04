@@ -8,6 +8,7 @@
 #include "World/Item.h"
 #include "Structs/SpellData.h"
 #include "GUI/Hints.h"
+#include "GUI/GUIConstants.h"
 #include "GlobalResource.h"
 
 ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTime) : GameObject() {
@@ -21,12 +22,12 @@ ScreenOverlay::ScreenOverlay(const sf::Time& activeTime, const sf::Time& fadeTim
 void ScreenOverlay::load() {
 	m_scale = (m_fadeTime > sf::Time::Zero) ? 0.f : 1.f;
 	m_title.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
-	m_title.setCharacterSize(40);
+	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 	m_title.setTextStyle(TextStyle::Shadowed);
 	m_title.setTextAlignment(TextAlignment::Center);
 
 	m_subtitle.setColor(sf::Color(255, 255, 255, (m_fadeTime > sf::Time::Zero) ? 0 : 255));
-	m_subtitle.setCharacterSize(32);
+	m_subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 	m_subtitle.setTextStyle(TextStyle::Shadowed);
 	m_subtitle.setTextAlignment(TextAlignment::Center);
 
@@ -133,10 +134,11 @@ ScreenOverlay* ScreenOverlay::createQuestScreenOverlay(const std::string& questI
 	titleText.append(g_textProvider->getText(EnumNames::getQuestStateName(state)));
 	questScreenOverlay->setTitleColor(state == QuestState::Completed ? COLOR_GOOD : state == QuestState::Failed ? COLOR_BAD : COLOR_NEUTRAL);
 	questScreenOverlay->setTitleRaw(titleText);
-	questScreenOverlay->setTitleCharacterSize(32);
+	questScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
+	questScreenOverlay->setTextPosition(0.1f);
 
 	questScreenOverlay->setSubtitle(questID, "quest");
-	questScreenOverlay->setSubtitleCharacterSize(24);
+	questScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 
 	return questScreenOverlay;
 }
@@ -145,6 +147,7 @@ ScreenOverlay* ScreenOverlay::createLocationScreenOverlay(const std::string& loc
 	ScreenOverlay* locationScreenOverlay = new ScreenOverlay(sf::seconds(isBossLevel ? 2.f : 1.f), sf::seconds(isBossLevel ? 1.f : 0.5f));
 
 	locationScreenOverlay->setTitle(locationKey, "location");
+	locationScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
 	if (isObserved) {
 		std::string subtitle = "\n(" + g_textProvider->getText("Observed") + ")";
 		locationScreenOverlay->setSubtitleRaw(subtitle);
@@ -158,11 +161,11 @@ ScreenOverlay* ScreenOverlay::createSpellLearnedScreenOverlay(SpellID id) {
 	TextureScreenOverlay* spellScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	spellScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
-	spellScreenOverlay->setTitleCharacterSize(32);
+	spellScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 
 	spellScreenOverlay->setTitle("SpellLearned");
 
-	spellScreenOverlay->setSubtitleCharacterSize(32);
+	spellScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 	spellScreenOverlay->setSubtitle(EnumNames::getSpellIDName(id));
 
 	spellScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLICONS));
@@ -186,11 +189,11 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 	TextureScreenOverlay* modifierScreenOverlay = new TextureScreenOverlay(sf::seconds(3.f), sf::seconds(1.f));
 
 	modifierScreenOverlay->setTitleColor(COLOR_MEDIUM_PURPLE);
-	modifierScreenOverlay->setTitleCharacterSize(32);
+	modifierScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 
 	modifierScreenOverlay->setTitle("ModifierLearned");
 
-	modifierScreenOverlay->setSubtitleCharacterSize(24);
+	modifierScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 
 	std::string subtitle = g_textProvider->getText(EnumNames::getSpellModifierTypeName(modifier.type)) + " ";
 	subtitle.append(g_textProvider->getText("Level") + " " + std::to_string(modifier.level));
@@ -274,14 +277,14 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item* item)
 	TextureScreenOverlay* itemScreenOverlay = new TextureScreenOverlay(sf::seconds(2.f), sf::seconds(1.f));
 
 	itemScreenOverlay->setTitleColor(COLOR_GOOD);
-	itemScreenOverlay->setTitleCharacterSize(24);
+	itemScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 
 	std::string title = g_textProvider->getText(item->getID(), "item") + " ";
 	title.append(g_textProvider->getText("Consumed"));
 
 	itemScreenOverlay->setTitleRaw(title);
 
-	itemScreenOverlay->setSubtitleCharacterSize(16);
+	itemScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 
 	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50));
@@ -306,7 +309,7 @@ ScreenOverlay* ScreenOverlay::createHintScreenOverlay(const std::string& hintKey
 	int characterSize = 12;
 	hintScreenOverlay->setTitleColor(COLOR_GOOD);
 	hintScreenOverlay->setTitle("Hint");
-	hintScreenOverlay->setTitleCharacterSize(16);
+	hintScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
 
 	hintScreenOverlay->setSubtitleCharacterSize(characterSize);
 
@@ -343,11 +346,11 @@ ScreenOverlay* ScreenOverlay::createGuildJoinedScreenOverlay(FractionID id) {
 	guildScreenOverlay->setTextPosition(0.15f);
 
 	guildScreenOverlay->setTitleColor(COLOR_WHITE);
-	guildScreenOverlay->setTitleCharacterSize(32);
+	guildScreenOverlay->setTitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 
 	guildScreenOverlay->setTitle("GuildJoined");
 
-	guildScreenOverlay->setSubtitleCharacterSize(32);
+	guildScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 	guildScreenOverlay->setSubtitle(EnumNames::getFractionIDName(id));
 
 	guildScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUILD_BANNERS));

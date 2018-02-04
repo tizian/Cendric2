@@ -18,7 +18,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 3, "DL_Lloyd_Hello2") -- (Shocked) You killed them? I told you to interrogate them and to be careful! They were our only suspects!
+		DL:createNPCNode(2, 3, "DL_Lloyd_Hello2") -- (Shocked) You killed them? I told you to interrogate them, and to be careful! They were our only suspects!
 		DL:addNode()
 
 
@@ -42,7 +42,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(7, -2, "DL_Lloyd_TheyDeserved") -- Maybe they did. But it's not yours to decide about their fate. Anyway, what should we do now?
+		DL:createNPCNode(7, -2, "DL_Lloyd_TheyDeserved") -- Maybe they did, but it's not your job to decide their fate. Anyway, what should we do now?
 		DL:addNode()
 
 	end
@@ -51,7 +51,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(8)
 		if (DL:getGuild() ~= "cleric") then 
-			DL:addChoice(9, "DL_Choice_FoundLetter") -- I've found this letter in their pockets. (Give letter)
+			DL:addChoice(9, "DL_Choice_FoundLetter") -- I found this letter in their pockets. (Give letter)
 		end
 		if (DL:getGuild() == "cleric") then 
 			DL:addChoice(22, "DL_Choice_FoundLetter") -- 
@@ -78,14 +78,13 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(13, 14, "DL_Lloyd_FoundLetter4") -- I've heard from other cases. We must do something! 
-			DL:addQuestProgress("lloyds_plan_thief", "information_gathered")
-			DL:addQuestProgress("lloyds_plan_necro", "information_gathered")
+			DL:createNPCNode(13, 14, "DL_Lloyd_FoundLetter4") -- I've heard about other cases. We must do something! 
+			DL:addQuestProgress("lloyds_plan", "information_gathered")
 			DL:changeQuestState("ininas_abduction", "completed")
 			DL:addNode()
 
 
-			DL:createNPCNode(14, -2, "DL_Lloyd_FoundLetter5") -- The letter's author is a certain "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
+			DL:createNPCNode(14, -2, "DL_Lloyd_FoundLetter5") -- The letter's author is a "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
 			DL:changeQuestState("find_velius", "started")
 			DL:addNode()
 
@@ -122,7 +121,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(28, -2, "DL_Lloyd_FoundLetter6") -- Oh and still keep an eye open for any hints regarding Inina.
+			DL:createNPCNode(28, -2, "DL_Lloyd_FoundLetter6") -- Oh, and keep an eye open for any hints regarding Inina.
 			DL:changeQuestState("missing_inina", "started")
 			DL:addNode()
 
@@ -137,7 +136,7 @@ loadDialogue = function(DL)
 			DL:addChoice(16, "DL_Choice_WhereSearch") -- Where are those highlands?
 		end
 		if (not DL:isConditionFulfilled("npc_lloyd4", "why_work") and not DL:getGuild() == "cleric") then 
-			DL:addChoice(17, "DL_Choice_WhyWork") -- And why exactly should I still work for you?
+			DL:addChoice(17, "DL_Choice_WhyWork") -- And why exactly should I keep working for you?
 		end
 		DL:addChoice(21, "DL_Choice_Bye") -- I'll see what I can do.
 		DL:addNode()

@@ -3,7 +3,7 @@
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_light', 'spell', 300, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_light', 17);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_light', 'item', 'Scroll - Light','Schriftrolle - Licht','Schriftrolle - Liecht', 'Pergamino - Resplandor');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_light', 'item_desc', 'There shall be light!','Es werde Licht!','Chasch chli heller mache, bitte?', '¡Hágase la luz!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_light', 'item_desc', 'There shall be light!','Es werde Licht!','Es werde Licht!', '¡Hágase la luz!');
 
 -- Holy Fire
 

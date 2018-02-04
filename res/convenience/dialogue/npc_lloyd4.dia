@@ -46,7 +46,7 @@ npc.id:npc_lloyd4
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lloyd_Hello2
-	translation.en:(Shocked) You killed them? I told you to interrogate them and to be careful! They were our only suspects!
+	translation.en:(Shocked) You killed them? I told you to interrogate them, and to be careful! They were our only suspects!
 	translation.de:(Schockiert) Du hast sie getötet? Ich hab dir doch gesagt, du sollst sie befragen, und zwar vorsichtig! Sie waren unsere einzigen Verdächtigen!
 	translation.ch:(Schockiert) Du hesch si killt? Ich ha der doch gseit du sölsch si befröge, und zwar vorsichthig! Si sind üsi einzige Verdächtige gsi!
 	[
@@ -142,7 +142,7 @@ npc.id:npc_lloyd4
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lloyd_TheyDeserved
-	translation.en:Maybe they did. But it's not yours to decide about their fate. Anyway, what should we do now?
+	translation.en:Maybe they did, but it's not your job to decide their fate. Anyway, what should we do now?
 	translation.de:Vielleicht haben sie das. Dennoch solltest du nicht einfach über ihr Schicksal entscheiden. Nun, wie soll es jetzt weitergehen?
 	translation.ch:Vilicht hends das ja. Trotzdem chasch nid eifach über ihres Schicksal entscheide. Egal, we sölls ez wiitergo?
 	[
@@ -159,7 +159,7 @@ npc.id:npc_lloyd4
 		condition:DL:getGuild() ~= "cleric"
 		# translation: 
 		translation.tag:DL_Choice_FoundLetter
-		translation.en:I've found this letter in their pockets. (Give letter)
+		translation.en:I found this letter in their pockets. (Give letter)
 		translation.de:Ich habe diesen Brief in ihren Taschen gefunden. (Brief geben)
 		translation.ch:Ich ha de Brief i ihre Täsche gfunde. (Brief gä)
 	]
@@ -236,12 +236,11 @@ npc.id:npc_lloyd4
 	# [13] NPC Node
 	tag:13
 	# triggers: 
-	trigger:DL:addQuestProgress("lloyds_plan_necro", "information_gathered")
-	trigger:DL:addQuestProgress("lloyds_plan_thief", "information_gathered")
+	trigger:DL:addQuestProgress("lloyds_plan", "information_gathered")
 	trigger:DL:changeQuestState("ininas_abduction", "completed")
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter4
-	translation.en:I've heard from other cases. We must do something! 
+	translation.en:I've heard about other cases. We must do something! 
 	translation.de:Ich habe bereits von anderen Fällen gehört. Wir müssen etwas dagegen unternehmen!
 	translation.ch:Ich ha scho vo anderne Fäll ghört. Mer mönd öppis degege mache!
 	[
@@ -256,7 +255,7 @@ npc.id:npc_lloyd4
 	trigger:DL:changeQuestState("find_velius", "started")
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter5
-	translation.en:The letter's author is a certain "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
+	translation.en:The letter's author is a "V." and he mentions the highlands. Go and look for further clues there. Meanwhile I'm going to find out who that "V." is.
 	translation.de:Der Autor des Briefs ist ein gewisser "V.", und er schreibt vom Hochland. Geh und finde heraus, ob es dort weitere Hinweise gibt. Währenddessen bringe ich in Erfahrung, wer dieser "V." ist.
 	translation.ch:De Autor vom Brief isch en gwüsse "V." und er schriibt öppis vom Hochland. Gang und lueg, obs det wiiteri Hiwiis git. Währenddesse findi use, wer de "V." sii chönt.
 	[
@@ -360,7 +359,7 @@ npc.id:npc_lloyd4
 	trigger:DL:changeQuestState("missing_inina", "started")
 	# translation: 
 	translation.tag:DL_Lloyd_FoundLetter6
-	translation.en:Oh and still keep an eye open for any hints regarding Inina.
+	translation.en:Oh, and keep an eye open for any hints regarding Inina.
 	translation.de:Oh und falls du irgendwelche Hinweise siehst, was Inina betrifft... lass es mich wissen.
 	translation.ch:Oh und wennd irgendwelchi Hiiwis vo wege de Inina findsch - verzell mer devo.
 	[
@@ -387,7 +386,7 @@ npc.id:npc_lloyd4
 		condition:not DL:isConditionFulfilled("npc_lloyd4", "why_work") and not DL:getGuild() == "cleric"
 		# translation: 
 		translation.tag:DL_Choice_WhyWork
-		translation.en:And why exactly should I still work for you?
+		translation.en:And why exactly should I keep working for you?
 		translation.de:Und wieso genau soll ich noch für dich arbeiten?
 		translation.ch:Und weso gnau söli na für dich schaffe?
 	]

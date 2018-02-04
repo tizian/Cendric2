@@ -41,7 +41,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(7, -2, "DL_Lloyd_ReadLetter4") -- But first, back to that lighthouse, what was going on there?
+		DL:createNPCNode(7, -2, "DL_Lloyd_ReadLetter4") -- But first, back to that lighthouse; what was going on there?
 		DL:addConditionProgress("npc_lloyd2", "talked")
 		DL:addNode()
 
@@ -87,11 +87,11 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_lloyd2", "hurry_up")) then 
 
-		DL:createNPCNode(12, 14, "DL_Lloyd_HurryUp") -- Nevertheless, Inina still needs your help discovering the strange caverns. She's been away for too long now.
+		DL:createNPCNode(12, 14, "DL_Lloyd_HurryUp") -- Nevertheless, Inina still needs your help exploring the strange caverns. She's been away for too long now.
 		DL:addNode()
 
 
-		DL:createNPCNode(14, -2, "DL_Lloyd_HurryUp2") -- I want you to immediately go back to the caverns and support her. That's not a request!
+		DL:createNPCNode(14, -2, "DL_Lloyd_HurryUp2") -- I want you to immediately go back to the caverns and support her. That's an order, not a request!
 		DL:addConditionProgress("npc_lloyd2", "hurry_up")
 		DL:addNode()
 

@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 		DL:addChoice(6, "DL_Choice_Learn") -- 
 	end
 	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 100) then 
-		DL:addChoice(7, "DL_Choice_SecondSpell") -- Can you teach me more spells?
+		DL:addChoice(7, "DL_Choice_SecondSpell") -- Can you teach me some more spells?
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -58,7 +58,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 100) then 
 
-		DL:createNPCNode(7, -2, "DL_Thiran_NoFurtherSpell") -- Not yet. I'm going to teach you another spell when you've worked for us.
+		DL:createNPCNode(7, -2, "DL_Thiran_NoFurtherSpell") -- Not yet. I'm going to teach you another spell when you've done some work for us.
 		DL:addNode()
 
 	end

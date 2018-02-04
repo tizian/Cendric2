@@ -32,6 +32,7 @@ private:
 	sf::Time m_delayTimer;
 	sf::Time m_fadeInTimer;
 	sf::Time m_fadeOutTimer;
+	sf::Time m_skipTimer;
 
 	int m_currentStep = -1;
 	int m_currentText = -1;

@@ -47,7 +47,7 @@ float WindGustSpell::getPushAcceleration() const {
 
 void WindGustSpell::loadParticleSystem() {
 	ParticleComponentData data;
-	data.particleCount = static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 400.f * m_data.strength);
+	data.particleCount = static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 100.f * m_data.strength);
 	data.emitRate = getBoundingBox()->width / 5.f * m_data.strength;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
@@ -60,8 +60,8 @@ void WindGustSpell::loadParticleSystem() {
 	auto sizeGen = new particles::SizeGenerator();
 	sizeGen->minStartSize = 4.f;
 	sizeGen->maxStartSize = 12.f;
-	sizeGen->minEndSize = 0.f;
-	sizeGen->maxEndSize = 2.f;
+	sizeGen->minEndSize = 2.f;
+	sizeGen->maxEndSize = 4.f;
 	data.sizeGen = sizeGen;
 
 	auto colGen = new particles::ColorGenerator();
@@ -72,15 +72,15 @@ void WindGustSpell::loadParticleSystem() {
 	data.colorGen = colGen;
 
 	m_velGenerator = new particles::AngledVelocityGenerator();
-	m_velGenerator->minAngle = 90 + -20.f;
-	m_velGenerator->maxAngle = 90 + 20.f;
+	m_velGenerator->minAngle = 90 + -5.f;
+	m_velGenerator->maxAngle = 90 + 5.f;
 	m_velGenerator->minStartSpeed = m_pushAcceleration * 1.5f;
 	m_velGenerator->maxStartSpeed = m_pushAcceleration * 1.5f;
 	data.velGen = m_velGenerator;
 
 	auto timeGen =  new particles::TimeGenerator();
-	timeGen->minTime = getBoundingBox()->width / (m_velGenerator->maxStartSpeed * 3.f);
-	timeGen->maxTime = getBoundingBox()->width / m_velGenerator->maxStartSpeed;
+	timeGen->minTime = getBoundingBox()->width / (m_velGenerator->maxStartSpeed);
+	timeGen->maxTime = getBoundingBox()->width / m_velGenerator->minStartSpeed;
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);

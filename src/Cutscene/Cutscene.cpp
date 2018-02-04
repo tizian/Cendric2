@@ -6,6 +6,7 @@ const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(100.f, 40.f);
 
 Cutscene::Cutscene(std::string& id) {
 	m_data = CutsceneLoader::loadCutscene(id);
+	m_skipTimer = sf::seconds(1.f);
 
 	m_currentStep = -1;
 	if (m_data.id.empty()) return;
@@ -35,7 +36,9 @@ Cutscene::~Cutscene() {
 }
 
 void Cutscene::update(const sf::Time& frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Escape) || g_inputController->isSelected()) {
+	updateTime(m_skipTimer, frameTime);
+
+	if (m_skipTimer == sf::Time::Zero && (g_inputController->isKeyJustPressed(Key::Escape) || g_inputController->isSelected())) {
 		m_isNoStepsLeft = true;
 		return;
 	}

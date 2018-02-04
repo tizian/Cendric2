@@ -1,8 +1,6 @@
 #include "Screens/CutsceneScreen.h"
 #include "Screens/LoadingScreen.h"
 
-using namespace std;
-
 CutsceneScreen::CutsceneScreen(CharacterCore* core, const std::string& cutsceneID) : Screen(core) {
 	m_cutsceneID = cutsceneID;
 }

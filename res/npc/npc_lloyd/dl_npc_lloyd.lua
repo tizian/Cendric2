@@ -46,7 +46,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(1)
 		if (DL:isQuestState("clerics_recommendation", "started") and DL:isQuestComplete("clerics_recommendation")) then 
-			DL:addChoice(2, "DL_Choice_RecommendationQuest") -- I got this from Inina for you. (Give letter)
+			DL:addChoice(2, "DL_Choice_RecommendationQuest") -- I got this letter from Inina for you. (Give letter)
 		end
 		if (not DL:isConditionFulfilled("npc_lloyd", "want_cleric")) then 
 			DL:addChoice(7, "DL_Choice_IWantToJoin") -- I want to become a cleric.
@@ -86,7 +86,7 @@ loadDialogue = function(DL)
 
 	if (DL:getGuild() ~= "void" and not DL:isConditionFulfilled("npc_lloyd", "guild")) then 
 
-		DL:createNPCNode(19, -2, "DL_Lloyd_AnotherGuild") -- I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic for to do good.
+		DL:createNPCNode(19, -2, "DL_Lloyd_AnotherGuild") -- I'm sorry, but I see that you have already chosen another path. I still hope you'll use your magic to do good.
 		DL:addConditionProgress("npc_lloyd", "guild")
 		DL:addNode()
 
@@ -115,7 +115,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lloyd", "what_if_join")) then 
 
-			DL:createNPCNode(16, -2, "DL_Lloyd_WhatIfIJoin") -- You'll get to learn divine magic. Also, we'll give you a job that will bring you gold and honour.
+			DL:createNPCNode(16, -2, "DL_Lloyd_WhatIfIJoin") -- You'll learn divine magic. Also, we'll give you a job that will bring you gold and honour.
 			DL:addConditionProgress("npc_lloyd", "what_if_join")
 			DL:addNode()
 
@@ -126,7 +126,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(18, 13, "DL_Lloyd_JoinQuestion2") -- Promise to use your magic to heal and protect the innocent and to punish the ones who do not follow the path of the light.
+		DL:createNPCNode(18, 13, "DL_Lloyd_JoinQuestion2") -- Promise to use your magic to heal and protect the innocent, and to punish the ones who do not follow the path of the light.
 		DL:addNode()
 
 
@@ -178,7 +178,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(21, 22, "DL_Lloyd_CathedralCleric2") -- But the book seems to have its own will - we couldn't destroy it yet.
+			DL:createNPCNode(21, 22, "DL_Lloyd_CathedralCleric2") -- But the book seems to have its own will - we haven't been able to destroy it yet.
 			DL:addNode()
 
 
@@ -190,7 +190,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("cathedral_cleric", "started") and DL:isQuestComplete("cathedral_cleric")) then 
 
-			DL:createNPCNode(23, 24, "DL_Lloyd_CathedralFinished") -- Well done. It's twisted magic is no longer besmirching our cathedral.
+			DL:createNPCNode(23, 24, "DL_Lloyd_CathedralFinished") -- Well done. Its twisted magic is no longer besmirching our cathedral.
 			DL:addNode()
 
 
@@ -204,7 +204,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("cathedral_cleric", "completed") and DL:isQuestState("yasha_cleric", "void")) then 
 
-			DL:createNPCNode(25, 26, "DL_Lloyd_YashaStart") -- You've already done a lot for us and showed your skill with staff and magic.
+			DL:createNPCNode(25, 26, "DL_Lloyd_YashaStart") -- You've already done a lot for us. You have showed your skill with staff and magic.
 			DL:addNode()
 
 
@@ -216,7 +216,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(28, 29, "DL_Lloyd_YashaStart4") -- There's an abadoned temple, guarded by a demon in the Highlands of Admantris. Find this temple and face its tests.
+			DL:createNPCNode(28, 29, "DL_Lloyd_YashaStart4") -- There's an abandoned temple, guarded by a demon, in the Highlands of Admantris. Find this temple and face its tests.
 			DL:addNode()
 
 
@@ -224,7 +224,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(30, -2, "DL_Lloyd_YashaStart6") -- If your faith is strong, you won't only survive it, but also gain the power to never ever get stuck in a dark abyss again. 
+			DL:createNPCNode(30, -2, "DL_Lloyd_YashaStart6") -- If your faith is strong, you won't only survive it, but also gain the power to never get stuck in a dark abyss again. 
 			DL:changeQuestState("yasha_cleric", "started")
 			DL:addNode()
 
@@ -288,7 +288,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("find_velius", "started") and DL:isQuestDescriptionUnlocked("find_velius",3) and not DL:isConditionFulfilled("npc_lloyd", "velius_found")) then 
 
-		DL:createCendricNode(33, 34, "DL_Cendric_VeliusFound") -- That "V." is called Velius. He abducted some mages including Inina and I should go into the crypt of Gandria.
+		DL:createCendricNode(33, 34, "DL_Cendric_VeliusFound") -- That "V." is called Velius. He abducted some mages, including Inina! I should go into the crypt of Gandria after them.
 		DL:addNode()
 
 

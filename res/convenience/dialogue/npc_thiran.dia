@@ -90,7 +90,7 @@ npc.id:npc_thiran
 		condition:DL:isConditionFulfilled("npc_thiran", "first_spell") and DL:getReputation("cleric") < 100
 		# translation: 
 		translation.tag:DL_Choice_SecondSpell
-		translation.en:Can you teach me more spells?
+		translation.en:Can you teach me some more spells?
 		translation.de:Kannst du mir noch mehr Zauber beibringen?
 		translation.ch:Chasch mer na me Zauber bibringe?
 	]
@@ -148,7 +148,7 @@ npc.id:npc_thiran
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Thiran_NoFurtherSpell
-	translation.en:Not yet. I'm going to teach you another spell when you've worked for us.
+	translation.en:Not yet. I'm going to teach you another spell when you've done some work for us.
 	translation.de:Noch nicht. Ich werde dir einen weiteren Zauber beibringen, wenn du für uns gearbeitet hast.
 	translation.ch:Nonid. Ich cha der en negste Zauber zeige wennd chli für üs gschaffet hesch.
 	[

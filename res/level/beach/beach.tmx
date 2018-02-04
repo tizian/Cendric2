@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="110" height="35" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="2307">
  <properties>
-  <property name="backgroundlayers" value="2.0,res/level/beach/layer_2.png"/>
+  <property name="backgroundlayers" value="4.0,res/level/beach/layer_2.png,2.0,res/level/beach/layer_5.png"/>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/pirates.ogg"/>
   <property name="tilesetpath" value="res/level/beach/tileset_level_beach.png"/>

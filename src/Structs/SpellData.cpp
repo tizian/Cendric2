@@ -613,7 +613,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.ccStrength = 1;
 	windGust.strength = 1;
 
-	windGust.rangeModifierAddition = 50.f;
+	windGust.rangeModifierAddition = 40.f;
 	windGust.durationModifierAddition = sf::seconds(0.5f);
 
 	return windGust;
