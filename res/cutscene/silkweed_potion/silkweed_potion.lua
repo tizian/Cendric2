@@ -9,7 +9,6 @@ steps = {
 			{str="Elder:ItWillReveal", time=5}
 		},
 		images = {
-			{path="1_i_1.png", vel=0,  angle=0},
 			{path="1_i_2.png", vel=10, angle=90},
 			{path="1_i_3.png", vel=15, angle=90},
 		}
@@ -20,7 +19,6 @@ steps = {
 
 		},
 		images = {
-			{path="1_i_1.png", vel=0,  angle=0},
 			{path="1_i_2.png", vel=10, angle=270},
 			{path="2_i_3.png", vel=15, angle=270},
 		}

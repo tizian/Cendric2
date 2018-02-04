@@ -18,11 +18,14 @@ bool DisappearingTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
 	m_checkBoundingBox.width = TILE_SIZE_F + 2.f;
 	m_checkBoundingBox.height = TILE_SIZE_F + 2.f;
+
+	m_isInactive = contains(properties, std::string("inactive"));
+
 	return true;
 }
 
 void DisappearingTile::loadAnimation(int skinNr) {
-	m_isCollidable = true;
+	m_isCollidable = !m_isInactive;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// empty animation, this tile has a particle system
@@ -106,7 +109,7 @@ void DisappearingTile::respawn() {
 		return;
 	}
 
-	m_isCollidable = true;
+	m_isCollidable = !m_isInactive;
 	m_pc->setEmitRate(10.f);
 	dynamic_cast<particles::FadingColorUpdater*>(m_pc->getColorUpdater())->resetColor();
 	initForSkinNr();

@@ -31,6 +31,7 @@ private:
 	// when Cendric touches the tile, this time starts to run out
 	// its starting time is defined per skin
 	bool m_isTouched = false;
+	bool m_isInactive = false;
 	sf::Time m_criticalTime;
 	sf::Color m_skinColor;
 	int m_skinNr;
