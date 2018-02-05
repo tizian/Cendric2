@@ -49,7 +49,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(9, -2, "DL_Etoz_Unfriendly") -- Oh, I'm not ill-bred. On the contrary - I'm only telling the truth.
+		DL:createNPCNode(9, -2, "DL_Etoz_Unfriendly") -- Oh, I'm not ill-bred. On the contrary - I'm just being honest.
 		DL:addNode()
 
 	end
@@ -64,7 +64,7 @@ loadDialogue = function(DL)
 			DL:addChoice(3, "DL_Choice_QuestionableMethod") -- Have you seen any nasty creatures in the sewers?
 		end
 		if (not DL:isConditionFulfilled("npc_etoz", "sword")) then 
-			DL:addChoice(14, "DL_Choice_Sword") -- What is this strange sword you're carrying around?
+			DL:addChoice(14, "DL_Choice_Sword") -- What is this strange sword of yours?
 		end
 		if (DL:isConditionFulfilled("npc_etoz", "who_are_you") and  not DL:isConditionFulfilled("npc_etoz", "powerful")) then 
 			DL:addChoice(12, "DL_Choice_Powerful") -- And what exactly makes you this "powerful"?
@@ -127,7 +127,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_etoz", "who_are_you") and  not DL:isConditionFulfilled("npc_etoz", "powerful")) then 
 
-			DL:createNPCNode(12, 13, "DL_Etoz_Powerful") -- Oh, if I would tell you of my adventures, you would tremble in awe.
+			DL:createNPCNode(12, 13, "DL_Etoz_Powerful") -- Ah, if I would tell you of my adventures, you would tremble in awe.
 			DL:addConditionProgress("npc_etoz", "powerful")
 			DL:addNode()
 
@@ -139,12 +139,12 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_etoz", "powerful") and not DL:isConditionFulfilled("npc_etoz", "challenge")) then 
 
-			DL:createNPCNode(16, 17, "DL_Etoz_Challenge") -- How dare you doubt my skills. I could make you burst into flames with a single word.
+			DL:createNPCNode(16, 17, "DL_Etoz_Challenge") -- How dare you doubt my skills! I could make you burst into flames with a single word.
 			DL:addConditionProgress("npc_etoz", "challenge")
 			DL:addNode()
 
 
-			DL:createNPCNode(17, 18, "DL_Etoz_Challenge2") -- But I understand your inexperienced eyes can't recognise a true master. I'll forgive you for this one time.
+			DL:createNPCNode(17, 18, "DL_Etoz_Challenge2") -- But I understand your inexperienced eyes can't recognise a true master. I'll forgive you for that this one time.
 			DL:addNode()
 
 
@@ -160,11 +160,11 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(20, 21, "DL_Etoz_NotWeak2") -- It is by sheer coincidence that I know some adventure that would be a perfect fit for such a tough one like you.
+			DL:createNPCNode(20, 21, "DL_Etoz_NotWeak2") -- It is by sheer coincidence that I know of an adventure that would be a perfect fit for such a tough one like you.
 			DL:addNode()
 
 
-			DL:createNPCNode(21, -2, "DL_Etoz_NotWeak3") -- Lots of gold and glory awaiting you. But, I guess you're not interested in the real dangerous jobs...
+			DL:createNPCNode(21, -2, "DL_Etoz_NotWeak3") -- Lots of gold and glory await you. But, I guess you're not interested in the really dangerous jobs...
 			DL:addNode()
 
 		end
@@ -204,7 +204,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_etoz", "where_key_part") and not DL:hasItem("qe_tower_1", 1)) then 
 
-			DL:createNPCNode(26, 28, "DL_Etoz_WhereKeyPart") -- This would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.
+			DL:createNPCNode(26, 28, "DL_Etoz_WhereKeyPart") -- That would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.
 			DL:addConditionProgress("npc_etoz", "where_key_part")
 			DL:addQuestDescription("tower_1", 1)
 			DL:addNode()
@@ -240,12 +240,12 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(32, 33, "DL_Etoz_GotKey13") -- Find the old tower it opens and show me, what a big boy you are.
+			DL:createNPCNode(32, 33, "DL_Etoz_GotKey13") -- Find the old tower it opens and show me what a big boy you are.
 			DL:changeQuestState("tower_1", "started")
 			DL:addNode()
 
 
-			DL:createNPCNode(33, -2, "DL_Etoz_GotKey14") -- Reach the chest on top of the tower and come back to me if you survive...
+			DL:createNPCNode(33, -2, "DL_Etoz_GotKey14") -- Reach the chest at the top of the tower and come back to me if you survive...
 			DL:addNode()
 
 		end
@@ -268,14 +268,14 @@ loadDialogue = function(DL)
 			DL:addChoice(43, "DL_Choice_AntiMagic") -- What exactly are "anti-magic crystals"?
 		end
 		if (DL:isQuestComplete("tower_1")) then 
-			DL:addChoice(36, "DL_Choice_FirstTowerClimbed") -- I climbed the tower. It was easy.
+			DL:addChoice(36, "DL_Choice_FirstTowerClimbed") -- I climbed the tower. It was too easy.
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_etoz", "where_tower")) then 
 
-			DL:createNPCNode(35, -2, "DL_Etoz_WhereTower") -- On a forgotten island to the East of the marshland. I hope you know how to swim. (Grins)
+			DL:createNPCNode(35, -2, "DL_Etoz_WhereTower") -- On a forgotten island to the East of the marshlands. I hope you know how to swim. (Grins)
 			DL:addConditionProgress("npc_etoz", "where_tower")
 			DL:addNode()
 
@@ -308,7 +308,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(42, -2, "DL_Etoz_TowerInfo4") -- But the ones who did it - including myself of course - grew stronger than ever before...
+			DL:createNPCNode(42, -2, "DL_Etoz_TowerInfo4") -- But those who made it - including myself, of course - grew stronger than ever before...
 			DL:addNode()
 
 		end
@@ -360,7 +360,7 @@ loadDialogue = function(DL)
 			DL:addChoice(54, "DL_Choice_GotKey") -- 
 		end
 		if (not DL:isConditionFulfilled("npc_etoz", "chest_empty")) then 
-			DL:addChoice(69, "DL_Choice_ChestEmpty") -- The chest on the tower was empty...
+			DL:addChoice(69, "DL_Choice_ChestEmpty") -- The chest in the tower was empty...
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
@@ -391,7 +391,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(70, -2, "DL_Etoz_ChestEmpty2") -- Maybe you'll be worthy... but it needs time.
+			DL:createNPCNode(70, -2, "DL_Etoz_ChestEmpty2") -- Maybe you'll be worthy... but it takes time.
 			DL:addNode()
 
 		end
@@ -604,7 +604,7 @@ loadDialogue = function(DL)
 			DL:addChoice(85, "DL_Choice_GiveSwordAsk") -- What do you give me in exchange?
 		end
 		if (DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")) then 
-			DL:addChoice(90, "DL_Choice_GiveSwordMoney") -- Give me the gold, I'll give you what I found.
+			DL:addChoice(90, "DL_Choice_GiveSwordMoney") -- Give me the gold, and I'll give you what I found.
 		end
 		if (not DL:isConditionFulfilled("npc_etoz", "ask_money") and DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1)) then 
 			DL:addChoice(83, "DL_Choice_GiveSword") -- Sure. Take it. (Give sword and letter)
@@ -645,7 +645,7 @@ loadDialogue = function(DL)
 		end
 
 
-		DL:createNPCNode(86, -1, "DL_Etoz_Never") -- Grrrr. You will pay for this!
+		DL:createNPCNode(86, -1, "DL_Etoz_Never") -- Grrrr! You will pay for this!
 		DL:addConditionProgress("npc_etoz", "show_sword")
 		DL:addConditionProgress("npc_etoz", "going")
 		DL:addNode()

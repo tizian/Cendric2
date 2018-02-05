@@ -141,7 +141,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_Unfriendly
-	translation.en:Oh, I'm not ill-bred. On the contrary - I'm only telling the truth.
+	translation.en:Oh, I'm not ill-bred. On the contrary - I'm just being honest.
 	translation.de:Oh, ich bin nicht unhöflich. Im Gegenteil - ich sage bloss die Wahrheit.
 	translation.ch:Oh, ich bi nid unhöflich. Im Gegeteil - ich seg nur d'Woret.
 	[
@@ -178,7 +178,7 @@ npc.id:npc_etoz
 		condition:not DL:isConditionFulfilled("npc_etoz", "sword")
 		# translation: 
 		translation.tag:DL_Choice_Sword
-		translation.en:What is this strange sword you're carrying around?
+		translation.en:What is this strange sword of yours?
 		translation.de:Was ist dieses seltsame Schwert, das du mit dir herumträgst?
 		translation.ch:Wa isch da komisch Schwert, wod mit der umetreisch?
 	]
@@ -354,7 +354,7 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "powerful")
 	# translation: 
 	translation.tag:DL_Etoz_Powerful
-	translation.en:Oh, if I would tell you of my adventures, you would tremble in awe.
+	translation.en:Ah, if I would tell you of my adventures, you would tremble in awe.
 	translation.de:Oh, wenn ich dir meine Abenteuer erzählte, würdest du in Ehrfurcht erzittern.
 	translation.ch:Oh, wenn ich dir mini Abetür verzelle wür, würsch in Ehrfurcht erzittere.
 	[
@@ -383,9 +383,9 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "challenge")
 	# translation: 
 	translation.tag:DL_Etoz_Challenge
-	translation.en:How dare you doubt my skills. I could make you burst into flames with a single word.
-	translation.de:Wie kannst du es wagen, meine Fähigkeiten anzuzweifeln. Ich könnte dich mit einem einzigen Wort in Flammen aufgehen lassen.
-	translation.ch:Wie chasches du bloss woge, mini Fähigkeite aaz'zwiifle. Ich chönt dich mitme einzige Wort i Flamme ufgo lo.
+	translation.en:How dare you doubt my skills! I could make you burst into flames with a single word.
+	translation.de:Wie kannst du es wagen, meine Fähigkeiten anzuzweifeln! Ich könnte dich mit einem einzigen Wort in Flammen aufgehen lassen.
+	translation.ch:Wie chasches du bloss woge, mini Fähigkeite aaz'zwiifle! Ich chönt dich mitme einzige Wort i Flamme ufgo lo.
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -397,7 +397,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_Challenge2
-	translation.en:But I understand your inexperienced eyes can't recognise a true master. I'll forgive you for this one time.
+	translation.en:But I understand your inexperienced eyes can't recognise a true master. I'll forgive you for that this one time.
 	translation.de:Aber ich verstehe, dass deine unerfahrenen Augen keinen wahren Meister erkennen können. Dieses eine Mal werde ich dir noch vergeben.
 	translation.ch:Aber ich verstand, dass dini unerfahrene Auge ken wohre Meister erchenne chönd. Damol wirdi der no verge.
 	[
@@ -440,7 +440,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_NotWeak2
-	translation.en:It is by sheer coincidence that I know some adventure that would be a perfect fit for such a tough one like you.
+	translation.en:It is by sheer coincidence that I know of an adventure that would be a perfect fit for such a tough one like you.
 	translation.de:Wie es der Zufall will, wüsste ich da ein Abenteuer, das genau das richtige für einen so harten Jungen wie dich sein würde.
 	translation.ch:Wie's de Zuefall wett, würi da es Obetüür kenne wo genau richtig wär für so en herte Siech we dich.
 	[
@@ -454,7 +454,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_NotWeak3
-	translation.en:Lots of gold and glory awaiting you. But, I guess you're not interested in the real dangerous jobs...
+	translation.en:Lots of gold and glory await you. But, I guess you're not interested in the really dangerous jobs...
 	translation.de:Viel Gold und Ruhm würde dich erwarten. Aber ich nehme an, die wirklich gefährlichen Aufgaben interessieren dich nicht...
 	translation.ch:Viel Gold und Ruhm wür di erwarte. Aber ich glaub, di würkli gföhrliche Jobs interessiered di gar nid...
 	[
@@ -556,7 +556,7 @@ npc.id:npc_etoz
 	trigger:DL:addQuestDescription("tower_1", 1)
 	# translation: 
 	translation.tag:DL_Etoz_WhereKeyPart
-	translation.en:This would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.
+	translation.en:That would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.
 	translation.de:Das herauszufinden, wäre deine Aufgabe gewesen. Aber weil du so hilflos und bemitleidenswert bist, werde ich es dir sagen.
 	translation.ch:Das usezfinde wer dini Ufgob gsi. Aber welld so hilflos und bemitleidenswert bisch, segis der.
 	[
@@ -645,7 +645,7 @@ npc.id:npc_etoz
 	trigger:DL:changeQuestState("tower_1", "started")
 	# translation: 
 	translation.tag:DL_Etoz_GotKey13
-	translation.en:Find the old tower it opens and show me, what a big boy you are.
+	translation.en:Find the old tower it opens and show me what a big boy you are.
 	translation.de:Finde den Turm, den er öffnet, und zeige mir, was du für ein grosser Junge bist.
 	translation.ch:Find de Turm woner ufmacht und zeigmer, wad füren grosse Bueb bisch.
 	[
@@ -659,7 +659,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_GotKey14
-	translation.en:Reach the chest on top of the tower and come back to me if you survive...
+	translation.en:Reach the chest at the top of the tower and come back to me if you survive...
 	translation.de:Erreiche die Kiste ganz oben auf dem Turm und komm zu mir zurück, wenn du überleben solltest...
 	translation.ch:Erreich d'Chiste ganz obe ufem Turm und chum zumer zrugg, wennd überlebsch...
 	[
@@ -716,9 +716,9 @@ npc.id:npc_etoz
 		condition:DL:isQuestComplete("tower_1")
 		# translation: 
 		translation.tag:DL_Choice_FirstTowerClimbed
-		translation.en:I climbed the tower. It was easy.
-		translation.de:Ich bin auf den Turm geklettert. Es war einfach.
-		translation.ch:Ich bi uf de Turm kletteret. Isch eifach gsi.
+		translation.en:I climbed the tower. It was too easy.
+		translation.de:Ich bin auf den Turm geklettert. Es war zu einfach.
+		translation.ch:Ich bi uf de Turm kletteret. Isch bubi-eifach gsi.
 	]
 	[
 		# Link node, tag is next tag
@@ -737,7 +737,7 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "where_tower")
 	# translation: 
 	translation.tag:DL_Etoz_WhereTower
-	translation.en:On a forgotten island to the East of the marshland. I hope you know how to swim. (Grins)
+	translation.en:On a forgotten island to the East of the marshlands. I hope you know how to swim. (Grins)
 	translation.de:Auf einer vergessenen Insel im Osten des Sumpflands. Ich hoffe, du kannst gut schwimmen. (Grinst)
 	translation.ch:Ufere vergessene Insle im Oste vom Sumpfland. Ich hoff, du chasch guet schwümme. (Grinst)
 	[
@@ -823,7 +823,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_TowerInfo4
-	translation.en:But the ones who did it - including myself of course - grew stronger than ever before...
+	translation.en:But those who made it - including myself, of course - grew stronger than ever before...
 	translation.de:Aber diejenigen, die es geschafft haben - inklusive mir, natürlich - waren danach stärker als je zuvor.
 	translation.ch:Aber die, wos gschafft hend - inklusive mir natürli - sind nochene stärcher gsi als je zuvor.
 	[
@@ -945,7 +945,7 @@ npc.id:npc_etoz
 		condition:not DL:isConditionFulfilled("npc_etoz", "chest_empty")
 		# translation: 
 		translation.tag:DL_Choice_ChestEmpty
-		translation.en:The chest on the tower was empty...
+		translation.en:The chest in the tower was empty...
 		translation.de:Die Truhe auf dem Turm war leer...
 		translation.ch:D'True ufem Turm isch leer gsi...
 	]
@@ -1026,7 +1026,7 @@ npc.id:npc_etoz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Etoz_ChestEmpty2
-	translation.en:Maybe you'll be worthy... but it needs time.
+	translation.en:Maybe you'll be worthy... but it takes time.
 	translation.de:Vielleicht wirst du einmal würdig sein... aber das braucht Zeit.
 	translation.ch:Vilicht wirsch ja mal würdig si... aber das brucht Ziit.
 	[
@@ -1158,7 +1158,7 @@ npc.id:npc_etoz
 	translation.tag:DL_Etoz_GotThirdKey2
 	translation.en:But if you want to try it anyway... here you go.
 	translation.de:Aber wenn du es trotzdem ausprobieren willst... hier, nimm.
-	translation.ch:Aber wennds  trotzdem usprobiere wetsch... do, nimm.
+	translation.ch:Aber wennds trotzdem usprobiere wetsch... do, nimm.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1539,7 +1539,7 @@ npc.id:npc_etoz
 		condition:DL:hasItem("do_arazathletter", 1) and DL:hasItem("we_arazath", 1) and DL:isConditionFulfilled("npc_etoz", "ask_money")
 		# translation: 
 		translation.tag:DL_Choice_GiveSwordMoney
-		translation.en:Give me the gold, I'll give you what I found.
+		translation.en:Give me the gold, and I'll give you what I found.
 		translation.de:Gib mir das Gold, ich gebe dir, was ich gefunden hab.
 		translation.ch:Gibmer's Gold, ich gib der, wani gfunde ha.
 	]
@@ -1573,7 +1573,7 @@ npc.id:npc_etoz
 	translation.tag:DL_Etoz_GiveSwordAsk
 	translation.en:Everything. Everything I have. A hundred golden coins. Just give me my stuff!
 	translation.de:Alles. Alles was ich hab. Hundert goldene Münzen. Gib mir einfach mein Zeugs!
-	translation.ch:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg.
+	translation.ch:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -1624,8 +1624,8 @@ npc.id:npc_etoz
 	trigger:DL:addConditionProgress("npc_etoz", "going")
 	# translation: 
 	translation.tag:DL_Etoz_Never
-	translation.en:Grrrr. You will pay for this!
-	translation.de:Grrrr. Dafür wirst du bezahlen!
+	translation.en:Grrrr! You will pay for this!
+	translation.de:Grrrr! Dafür wirst du bezahlen!
 	translation.ch:Grrrr! Dodefür wirsch na zahle!
 	[
 		# Link node, tag is next tag
