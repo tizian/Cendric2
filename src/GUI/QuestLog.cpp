@@ -211,7 +211,7 @@ void QuestLog::render(sf::RenderTarget& target) {
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
 
-	if (m_stateMap[m_currentTab]->size() == 0) {
+	if (m_stateMap[m_currentTab]->empty()) {
 		target.draw(m_emptyText);
 	}
 }

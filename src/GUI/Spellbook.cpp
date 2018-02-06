@@ -330,7 +330,7 @@ void Spellbook::reload() {
 
 	// Setup tabs
 	m_tabTypes.clear();
-	if (m_core->getData().modfiersLearned.size() > 0) {
+	if (!m_core->getData().modfiersLearned.empty()) {
 		m_tabTypes.push_back(SpellType::VOID);	// SpellType::VOID for modifier tab
 	}
 	for (int i = static_cast<int>(SpellType::VOID) + 1; i < static_cast<int>(SpellType::Meta); ++i) {
@@ -373,7 +373,7 @@ void Spellbook::reload() {
 		}
 	}
 
-	if (m_tabTypes.size() > 0) {
+	if (!m_tabTypes.empty()) {
 		selectTab(m_tabTypes[0]);
 	}
 }

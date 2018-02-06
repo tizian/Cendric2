@@ -69,7 +69,7 @@ void SaveGameWindow::reload() {
 	m_isChosen = false;
 	loadSaves(m_entries);
 	
-	if (m_entries.size() > 0) {
+	if (!m_entries.empty()) {
 		m_chosenEntry = 0;
 		m_entries[m_chosenEntry]->select();
 	}
@@ -280,7 +280,7 @@ void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_scrollWindow);
 	m_scrollBar->render(renderTarget);
 
-	if (m_entries.size() == 0) {
+	if (m_entries.empty()) {
 		renderTarget.draw(m_emptyText);
 	}
 }

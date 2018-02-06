@@ -14,7 +14,7 @@ BookWindow::BookWindow(const Item& item) : Window(
 	COLOR_MEDIUM_BROWN), // ornament 
 	m_item(item) {
 	auto const pages = m_item.getBeans<ItemDocumentPageBean>();
-	assert(pages.size() > 0 && "A document has to have at least one page!");
+	assert(!pages.empty() && "A document has to have at least one page!");
 
 	// load resources
 	g_resourceManager->loadSoundbuffer(SOUND_PATH, ResourceType::Unique, this);

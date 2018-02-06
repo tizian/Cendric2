@@ -291,6 +291,8 @@ void WorldScreen::updateMonitoredQuestItems() {
 
 void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount) {
 	if (amount <= 0) return;
+	if (itemID == "gold") return;
+
 	const auto& it = m_monitoredQuestItems.find(itemID);
 	if (it == m_monitoredQuestItems.end()) return;
 
@@ -306,6 +308,11 @@ void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount
 			m_progressLog->addQuestItemCollected(questID, itemID, currentItemAmount, collectible.second);
 		}
 	}
+}
+
+bool WorldScreen::isItemMonitored(const std::string& itemId) const {
+	if (itemId == "gold") return false;
+	return contains(m_monitoredQuestItems, itemId);
 }
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {

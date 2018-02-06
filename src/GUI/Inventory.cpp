@@ -533,7 +533,7 @@ void Inventory::render(sf::RenderTarget& target) {
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
 
-	if (m_typeMap[m_currentTab]->size() == 0) {
+	if (m_typeMap[m_currentTab]->empty()) {
 		target.draw(m_emptyText);
 	}
 }

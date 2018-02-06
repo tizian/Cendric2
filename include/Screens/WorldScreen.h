@@ -86,6 +86,8 @@ public:
 	virtual void notifyBackFromMenu() = 0;
 	// add an overlay to the overlay queue they will be displayed within the next world screen
 	void addScreenOverlay(ScreenOverlay* overlay, bool force = false);
+	// whether an item is monitored
+	bool isItemMonitored(const std::string& itemId) const;
 
 protected:
 	// handle quicksave

@@ -176,7 +176,7 @@ void ProgressLog::setVisible(bool visible) {
 }
 
 void ProgressLog::calculatePositions() {
-	if (m_logTexts.size() == 0) return;
+	if (m_logTexts.empty()) return;
 	while (m_logTexts.size() > MAX_ENTRIES) {
 		delete m_logTexts.at(0);
 		m_logTexts.erase(m_logTexts.begin());

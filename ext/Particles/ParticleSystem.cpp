@@ -44,7 +44,7 @@ void ParticleSystem::emitWithRate(float dt) {
 }
 
 void ParticleSystem::emitParticles(int count) {
-	if (m_spawners.size() == 0) return;
+	if (m_spawners.empty()) return;
 
 	const int startId = m_particles->countAlive;
 	const int endId = std::min(startId + count, m_particles->count - 1);

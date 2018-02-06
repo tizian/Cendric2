@@ -127,7 +127,7 @@ void BitmapText::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 void BitmapText::init() {
 	m_font = getFont(m_style, m_characterSize);
-	if (m_string == "") {
+	if (m_string.empty()) {
 		m_vertices.clear();
 		m_bounds = m_vertices.getBounds();
 		return;

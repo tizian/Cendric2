@@ -130,7 +130,7 @@ void TranslationParser::doTranslationOutFor(const std::string& file) const {
 				}
 
 				line = line.substr(nextDelimiter + 1);
-				if (line.size() > 0 && line.at(0) == '\'') {
+				if (!line.empty() && line.at(0) == '\'') {
 					line = line.substr(1);
 				}
 				else {

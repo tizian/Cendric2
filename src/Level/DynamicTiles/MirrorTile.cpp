@@ -267,7 +267,7 @@ MirrorRay::~MirrorRay() {
 }
 
 void MirrorRay::update(const sf::Time& frameTime) {
-	if (m_rays.size() == 0) return;
+	if (m_rays.empty()) return;
 	m_rays[0]->cast(m_origin, m_direction);
 
 	for (size_t i = 0; i < m_rays.size();) {
@@ -308,7 +308,7 @@ void MirrorRay::initRay(const sf::Vector2f& origin, const sf::Vector2f& directio
 }
 
 bool MirrorRay::intersectsBox(const sf::FloatRect& boundingBox) {
-	if (m_rays.size() == 0) return false;
+	if (m_rays.empty()) return false;
 
 	auto lastRay = m_rays[m_rays.size() - 1];
 	sf::Vector2f intersection;

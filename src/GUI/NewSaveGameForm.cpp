@@ -61,7 +61,7 @@ void NewSaveGameForm::update(const sf::Time& frameTime) {
 	g_inputController->cropReadText(MAX_NAME_LENGTH);
 	m_savegameName = g_inputController->getReadText();
 	m_savegameNameText.setString(m_savegameName);
-	m_okButton->setEnabled(m_savegameName.size() < MAX_NAME_LENGTH && m_savegameName.size() > 0);
+	m_okButton->setEnabled(m_savegameName.size() < MAX_NAME_LENGTH && !m_savegameName.empty());
 	m_okButton->update(frameTime);
 	m_cancelButton->update(frameTime);
 

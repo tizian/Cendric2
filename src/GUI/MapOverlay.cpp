@@ -274,7 +274,7 @@ void MapOverlay::notifyLevelOverlayReload() {
 
 void MapOverlay::reloadLevelOverlay() {
 	if (!m_isLevel) return;
-	if (m_maps.size() == 0) {
+	if (m_maps.empty()) {
 		return;
 	}
 

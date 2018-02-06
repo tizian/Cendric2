@@ -64,7 +64,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < LABELS.size(); ++i) {
-		if (LABELS[i] == "") {
+		if (LABELS[i].empty()) {
 			yOffset += dy * 0.8f;
 			continue;
 		}
@@ -341,7 +341,7 @@ void CharacterInfo::updateAttributes() {
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < attributes.size(); ++i) {
-		if (attributes[i] == "") {
+		if (attributes[i].empty()) {
 			yOffset += dy * 0.8f;
 			continue;
 		}
