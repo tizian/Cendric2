@@ -26,6 +26,7 @@ public:
 
 	void setSpawnPosition(int spawnPosition);
 	const std::string& getID() const { return m_itemID; }
+	const ItemType getItemType() const { return m_itemType; }
 
 private:
 	LevelMainCharacter* m_mainChar;

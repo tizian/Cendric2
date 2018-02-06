@@ -236,7 +236,7 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	// items
 	for (auto go : *lScreen->getObjects(_LevelItem)) {
 		if (LevelItem* item = dynamic_cast<LevelItem*>(go)) {
-			if (item->getID().substr(0, 2) == "qe") {
+			if (item->getItemType() == ItemType::Quest || lScreen->isItemMonitored(item->getID())) {
 				drawOverlayTexture(img, item->getCenter() * scale, 2, 0);
 			}
 			else {
