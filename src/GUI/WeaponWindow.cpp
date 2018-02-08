@@ -83,12 +83,9 @@ void WeaponWindow::reload() {
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot*, std::vector<ModifierSlot*>>({ spellSlot, modifiers }));
 	}
-	if (m_selectedSpellSlot != nullptr && m_selectedSpellSlot->getNr() >= 0 && static_cast<int>(m_weaponSlots.size()) > m_selectedSpellSlot->getNr()) {
-		m_weaponSlots.at(m_selectedSpellSlot->getNr()).first->select();
-	}
-	else {
-		m_selectedSpellSlot = nullptr;
-		m_spellDesc->hide();
+	
+	if (m_previouslySelectedSpellSlot >= 0 && static_cast<int>(m_weaponSlots.size()) > m_previouslySelectedSpellSlot) {
+		selectSpellSlot(m_weaponSlots.at(m_previouslySelectedSpellSlot).first);
 	}
 
 	notifyLevelReload();
@@ -146,9 +143,8 @@ void WeaponWindow::clearAllSlots() {
 	}
 	m_weaponSlots.clear();
 	m_selectedModifierSlot = nullptr;
-	if (m_selectedSpellSlot == nullptr) {
-		m_spellDesc->hide();
-	}
+	m_selectedSpellSlot = nullptr;
+	m_spellDesc->hide();
 }
 
 void WeaponWindow::update(const sf::Time& frameTime) {
@@ -169,7 +165,7 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 				return;
 			}
 		}
-		
+
 		for (auto it2 : it.second) {
 			it2->update(frameTime);
 			if (it2->isClicked()) {

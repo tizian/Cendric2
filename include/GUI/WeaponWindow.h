@@ -79,6 +79,7 @@ private:
 
 	ModifierSlot* m_selectedModifierSlot = nullptr;
 	SpellSlot* m_selectedSpellSlot = nullptr;
+	int m_previouslySelectedSpellSlot = -1;
 
 	// used for drag & drop handling
 	SlotClone* m_currentModifierClone = nullptr;
