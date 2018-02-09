@@ -249,7 +249,7 @@ npc.id:npc_lola
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lola_LookingForLove
-	translation.en:Maybe you'll find it here. Depends on the kind of love you're looking for. (Smiles)
+	translation.en:Maybe you'll find it here. Depends on what kind of love you're looking for. (Smiles)
 	translation.de:Vielleicht findest du sie hier ja. Kommt auf die Art der Liebe an, die du suchst. (Lächelt)
 	translation.ch:Vilicht findsch si jo do. Chunt uf d'Art vode Liebi ah, wod suechsch. (Lächlet)
 	[
@@ -323,7 +323,7 @@ npc.id:npc_lola
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lola_Adventurer
-	translation.en:Hn. I love this kind of men.
+	translation.en:Hn. I love this kind of man.
 	translation.de:Hn. Ich liebe diese Art von Männern.
 	translation.ch:Hn. Ich lieb die Art vo Männer.
 	[
@@ -352,7 +352,7 @@ npc.id:npc_lola
 	trigger:DL:addConditionProgress("npc_lola", "question_3")
 	# translation: 
 	translation.tag:DL_Lola_FavGirl
-	translation.en:Okay, last question for you: What makes a girl attractive for you?
+	translation.en:Okay, last question for you: What makes a girl attractive to you?
 	translation.de:Okay, letzte Frage an dich: Was macht ein Mädchen für dich attraktiv?
 	translation.ch:Okay, letzti Frog a dich: Was macht e Frau für dich attraktiv?
 	[
@@ -624,7 +624,7 @@ npc.id:npc_lola
 	trigger:DL:gotoNode(32)
 	# translation: 
 	translation.tag:DL_Lola_Job
-	translation.en:Most of the time, yes. But this is not something I'll do for my entire life.
+	translation.en:Most of the time, yes. But this is not something I'll do my entire life.
 	translation.de:Die meiste Zeit schon. Aber das ist auch nicht etwas, mit dem ich mein ganzes Leben verbringen will.
 	translation.ch:Di meist Ziit scho. Aber es isch au nid öppis, mit dem ich mis ganz Lebe verbringe wett.
 	[

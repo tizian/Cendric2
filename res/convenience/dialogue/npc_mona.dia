@@ -36,7 +36,7 @@ npc.id:npc_mona
 	trigger:DL:addConditionProgress("npc_mona", "talked")
 	# translation: 
 	translation.tag:DL_Mona_Hi2
-	translation.en:If you got gold and are respectful to my girls, you can have an extraordinary time here. (Smiles)
+	translation.en:If you got gold and respect my girls, you can have an extraordinary time here. (Smiles)
 	translation.de:Wenn du Gold hast und respektvoll mit meinen Mädels umgehst, kannst du hier eine aussergewöhnliche Zeit geniessen. (Lächelt)
 	translation.ch:Wenn du Gold häsch und respäktvoll mit mine Mäitli umgasch, chasch da e sehr ussergwöhnlichi Ziit gnüsse. (Lächlet)
 	[
@@ -83,7 +83,7 @@ npc.id:npc_mona
 		condition:DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "only_meet") and not DL:isConditionFulfilled("npc_mona", "gate_open")
 		# translation: 
 		translation.tag:DL_Choice_OnlyMeet
-		translation.en:I only need to talk to someone briefly.
+		translation.en:I just need to have a quick chat with someone.
 		translation.de:Ich muss nur kurz mit jemandem sprechen.
 		translation.ch:Ich mu nur churz mit öpperem rede.
 	]
@@ -143,7 +143,7 @@ npc.id:npc_mona
 	trigger:DL:addConditionProgress("npc_mona", "upper_floor")
 	# translation: 
 	translation.tag:DL_Mona_UpperFloor
-	translation.en:I'll open the gate for you for a small compensation so you can enjoy the show.
+	translation.en:I'll open the gate for you - for a small compensation - so you can enjoy the show.
 	translation.de:Für eine kleine Entschädigung öffne ich dir die Türe und du kannst dir die Vorführung ansehen.
 	translation.ch:Für e chliini Entschädigung mach ich dir das Töörli uf und du chasch der d'Vorstellig aluege.
 	[
@@ -248,7 +248,7 @@ npc.id:npc_mona
 	trigger:DL:addConditionProgress("npc_mona", "fun_unlock")
 	# translation: 
 	translation.tag:DL_Mona_AgeDontKnow
-	translation.en:Hm. I guess you may nearly be of age. I tell my girls to be gentle with you. (Smiles)
+	translation.en:Hm. I guess you may nearly be of age. I'll tell my girls to be gentle with you. (Smiles)
 	translation.de:Hm. Ich denke mal, du bist fast volljährig. Ich sage meinen Mädchen, dass sie mit dir sanft umgehen sollen. (Lächelt) 
 	translation.ch:Hm. Ich denk mal, du bisch fascht volljährig. Ich säg mine Mäitli, dass si chli samft mit dir umgah söllet. (Lächlet)
 	[
@@ -278,9 +278,9 @@ npc.id:npc_mona
 	trigger:DL:addConditionProgress("npc_mona", "fun_lock")
 	# translation: 
 	translation.tag:DL_Mona_TwentyFive
-	translation.en:No, never. If you're not old enough to tell the truth, you're not old enough for my girls. Get out.
-	translation.de:Nein, niemals. Wenn du nicht genügend alt bist, die Wahrheit zu sagen, dann bist du auch nicht genügend alt für meine Mädchen. Raus mit dir.
-	translation.ch:Nei, sicher nöd. Wennd nöd gnueg alt bisch zum d'Wahrheit säge, bisch au nöd gnueg alt für mini Mäitli. Use mit dir.
+	translation.en:No way! If you're not old enough to tell the truth, you're not old enough for my girls. Get out!
+	translation.de:Nein, niemals. Wenn du nicht genügend alt bist, die Wahrheit zu sagen, dann bist du auch nicht genügend alt für meine Mädchen. Raus mit dir!
+	translation.ch:Nei, sicher nöd. Wennd nöd gnueg alt bisch zum d'Wahrheit säge, bisch au nöd gnueg alt für mini Mäitli. Use mit dir!
 	[
 		# Link node, tag is next tag
 		tag:-1

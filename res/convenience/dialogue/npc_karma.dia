@@ -41,7 +41,7 @@ npc.id:npc_karma
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Karma_NotBought
-	translation.en:Go and ask Mona if you want to have an exciting time with me. (Winks)
+	translation.en:Go and ask Mona if you want to have a good time with me. (Winks)
 	translation.de:Geh und frage Mona, wenn du eine aufregende Zeit mit mir haben möchtest. (Zwinkert)
 	translation.ch:Gang und frög d'Mona, wennd e geili Ziit mit mer ha wetsch. (Zwinkeret)
 	[
@@ -141,7 +141,7 @@ npc.id:npc_karma
 	trigger:DL:addConditionProgress("npc_karma", "started")
 	# translation: 
 	translation.tag:DL_Karma_NotLearnPractice
-	translation.en:Patience, young lad! You cannot just jump to the last chapter without knowing the others.
+	translation.en:Patience, young lad! You cannot just jump to the last chapter without reading the others.
 	translation.de:Geduld, junger Mann! Du kannst nicht gleich zum letzten Kapitel springen, ohne die anderen zu kennen.
 	translation.ch:Geduld, junge Burscht! Du chasch nid grad zum letzte Kapitel springe, ohni di andere z'kenne.
 	[
@@ -178,7 +178,7 @@ npc.id:npc_karma
 	trigger:DL:gotoNode(18)
 	# translation: 
 	translation.tag:DL_Karma_IKnowEverything
-	translation.en:If you say so, you surely can answer me three questions to my satisfaction...
+	translation.en:If it is so, you surely can answer three questions to my satisfaction...
 	translation.de:Wenn das so ist, kannst du mir sicher drei Fragen zu meiner Zufriedenheit beantworten...
 	translation.ch:Wenn das so isch, chaschmer sicher drei Froge zu minere Zfriedeheit beantworte...
 	[
@@ -310,7 +310,7 @@ npc.id:npc_karma
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Karma_ExplainKamasutra3
-	translation.en:The book also covers the theory of love and describes what triggers desire and how to improve one's own physical attraction.
+	translation.en:The book also covers the theory of love, and it describes what triggers desire and how to improve one's own physical attraction.
 	translation.de:Das Buch beschreibt auch die Theorie der Liebe und erklärt, was Verlangen hervorruft und wie man die eigene sexuelle Attraktivität steigern kann.
 	translation.ch:Es Buech beschriibt au d'Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget sexuell Attraktivität steigere cha.
 	[
@@ -397,7 +397,7 @@ npc.id:npc_karma
 	trigger:DL:gotoNode(18)
 	# translation: 
 	translation.tag:DL_Karma_ExplainKamasutra6
-	translation.en:This was now a short summary. To check whether you were attentive, I got some questions for you.
+	translation.en:This was a short summary. To check whether you were attentive, I got some questions for you.
 	translation.de:Dies war jetzt eine kurze Zusammenfassung. Um zu sehen, ob du auch aufgepasst hast, hab ich ein paar Testfragen an dich.
 	translation.ch:Das isch ez e chliini Zemefassig gsi. Zum gse, obd au ufpasst hesch, hani es paar Testfroge für dich.
 	[
@@ -506,7 +506,7 @@ npc.id:npc_karma
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Karma_WrongQuestion2
-	translation.en:No, even if that's what most people believe, it's not.
+	translation.en:No, even though that's what most people believe, it's not.
 	translation.de:Nein, auch wenn das die meisten Leute glauben, ist es nicht so.
 	translation.ch:Nei, au wenn das di meiste Lüt glaubed, isches nid so.
 	[
