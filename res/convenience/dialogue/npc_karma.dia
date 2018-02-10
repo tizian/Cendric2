@@ -310,9 +310,9 @@ npc.id:npc_karma
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Karma_ExplainKamasutra3
-	translation.en:The book also covers the theory of love, and it describes what triggers desire and how to improve one's own physical attraction.
-	translation.de:Das Buch beschreibt auch die Theorie der Liebe und erklärt, was Verlangen hervorruft und wie man die eigene sexuelle Attraktivität steigern kann.
-	translation.ch:Es Buech beschriibt au d'Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget sexuell Attraktivität steigere cha.
+	translation.en:The book also covers the theory of love, and it describes what triggers desire and how to improve one's own attraction.
+	translation.de:Das Buch beschreibt auch die Theorie der Liebe und erklärt, was Verlangen hervorruft und wie man die eigene Attraktivität steigern kann.
+	translation.ch:Es Buech beschriibt au d'Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget Attraktivität steigere cha.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -346,7 +346,7 @@ npc.id:npc_karma
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Karma_ExplainKamasutra4
-	translation.en:In addition to the common arts of dancing, drawing, singing, massaging and hairdressing; magical tricks or how to teach a parrot to speak also impress a vis-à-vis.
+	translation.en:In addition to the common arts of dancing, drawing, singing, massaging and hairdressing; magic tricks or how to teach a parrot to speak also can impress a vis-à-vis.
 	translation.de:Neben den bekannteren Künsten wie Tanzen, Malen, Singen, Massieren und Frisieren; imponieren auch Zaubertricks oder wie man einem Papagei das Sprechen beibringt.
 	translation.ch:Nebed de bekanntere Künst we Tanze, Zeichne, Singe, Massiere und Frisiere; imponiered au Zaubertricks und weme weiss, weme emne Papagei es rede biibringt.
 	[

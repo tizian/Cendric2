@@ -37,7 +37,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lola", "sex_lola")) then 
 
-			DL:createNPCNode(3, -2, "DL_Lola_SexyBoy") -- Hey, handsome. Why don't you come in and we talk a bit?
+			DL:createNPCNode(3, -2, "DL_Lola_SexyBoy") -- Hey, handsome. Why don't you come in and we and we'll have a little chat?
 			DL:addConditionProgress("npc_lola", "talk")
 			DL:addNode()
 
@@ -95,7 +95,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, -2, "DL_Lola_LookingForLove") -- Maybe you'll find it here. Depends on the kind of love you're looking for. (Smiles)
+		DL:createNPCNode(12, -2, "DL_Lola_LookingForLove") -- Maybe you'll find it here. Depends on what kind of love you're looking for. (Smiles)
 		DL:addNode()
 
 	end
@@ -118,7 +118,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, -2, "DL_Lola_Adventurer") -- Hn. I love this kind of men.
+		DL:createNPCNode(15, -2, "DL_Lola_Adventurer") -- Hn. I love these kind of men.
 		DL:addNode()
 
 
@@ -129,7 +129,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_lola", "question_3")) then 
 
-		DL:createNPCNode(17, 18, "DL_Lola_FavGirl") -- Okay, last question for you: What makes a girl attractive for you?
+		DL:createNPCNode(17, 18, "DL_Lola_FavGirl") -- Okay, last question for you: What makes a girl attractive to you?
 		DL:addConditionProgress("npc_lola", "question_3")
 		DL:addNode()
 
@@ -156,7 +156,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(22, -2, "DL_Lola_GirlDontCare") -- (Lola giggles) Yes, yes. We don't have guys here, there's too little demand.
+		DL:createNPCNode(22, -2, "DL_Lola_GirlDontCare") -- (Lola giggles) Yes, yes. We don't have guys here, the demand is too low.
 		DL:addNode()
 
 
@@ -200,7 +200,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lola", "room")) then 
 
-			DL:createNPCNode(33, -2, "DL_Lola_Room") -- It's the rose-room. Some guests always want to come here for a romantic time.
+			DL:createNPCNode(33, -2, "DL_Lola_Room") -- It's the rose-room. Some guests keep coming back here for a romantic time.
 			DL:addConditionProgress("npc_lola", "room")
 			DL:gotoNode(32)
 			DL:addNode()
@@ -209,7 +209,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lola", "job")) then 
 
-			DL:createNPCNode(34, -2, "DL_Lola_Job") -- Most of the time, yes. But this is not something I'll do for my entire life.
+			DL:createNPCNode(34, -2, "DL_Lola_Job") -- Most of the time, yes. But this is not something I'll do my entire life.
 			DL:addConditionProgress("npc_lola", "job")
 			DL:gotoNode(32)
 			DL:addNode()

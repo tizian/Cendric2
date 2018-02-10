@@ -89,7 +89,7 @@ npc.id:npc_lola
 	trigger:DL:addConditionProgress("npc_lola", "talk")
 	# translation: 
 	translation.tag:DL_Lola_SexyBoy
-	translation.en:Hey, handsome. Why don't you come in and we talk a bit?
+	translation.en:Hey, handsome. Why don't you come in and we and we'll have a little chat?
 	translation.de:Hallo, hübscher Junge. Wieso kommst du nicht rein und wir reden ein bisschen?
 	translation.ch:Hoi, hübsche Bueb. Weso chunsch nid ie und mer reded es bitz?
 	[
@@ -323,7 +323,7 @@ npc.id:npc_lola
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lola_Adventurer
-	translation.en:Hn. I love this kind of man.
+	translation.en:Hn. I love these kind of men.
 	translation.de:Hn. Ich liebe diese Art von Männern.
 	translation.ch:Hn. Ich lieb die Art vo Männer.
 	[
@@ -466,7 +466,7 @@ npc.id:npc_lola
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lola_GirlDontCare
-	translation.en:(Lola giggles) Yes, yes. We don't have guys here, there's too little demand.
+	translation.en:(Lola giggles) Yes, yes. We don't have guys here, the demand is too low.
 	translation.de:(Lola kichert) Ja, ja. Wir haben keine Jungs hier, es gibt zu wenig Nachfrage.
 	translation.ch:(D'Lola giggelet) Jo, jo. Mir hend ke Jungs do, es git z'wenig Nofrog.
 	[
@@ -608,7 +608,7 @@ npc.id:npc_lola
 	trigger:DL:gotoNode(32)
 	# translation: 
 	translation.tag:DL_Lola_Room
-	translation.en:It's the rose-room. Some guests always want to come here for a romantic time.
+	translation.en:It's the rose-room. Some guests keep coming back here for a romantic time.
 	translation.de:Es ist das Rosen-Zimmer. Einige Gäste kommen immer hierher für eine romantische Zeit.
 	translation.ch:Es isch es Rose-Zimmer. Einigi Gäscht chömed immer do ane für e romantischi Ziit.
 	[

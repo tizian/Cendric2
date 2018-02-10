@@ -13,7 +13,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Mona_Hi2") -- If you got gold and are respectful to my girls, you can have an extraordinary time here. (Smiles)
+		DL:createNPCNode(3, -2, "DL_Mona_Hi2") -- If you got gold and respect my girls, you can have an extraordinary time here. (Smiles)
 		DL:addConditionProgress("npc_mona", "talked")
 		DL:addNode()
 
@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 		DL:addChoice(8, "DL_Choice_OpenGate") -- 
 	end
 	if (DL:isConditionFulfilled("npc_mona", "upper_floor") and not DL:isConditionFulfilled("npc_mona", "only_meet") and not DL:isConditionFulfilled("npc_mona", "gate_open")) then 
-		DL:addChoice(7, "DL_Choice_OnlyMeet") -- I only need to talk to someone briefly.
+		DL:addChoice(7, "DL_Choice_OnlyMeet") -- I just need to have a quick chat with someone.
 	end
 	if (DL:isConditionFulfilled("npc_mona", "gate_open") and not DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:isConditionFulfilled("npc_mona", "fun_lock")) then 
 		DL:addChoice(11, "DL_Choice_FunUnlock") -- What if I... you know... wanna have some fun?
@@ -48,7 +48,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_mona", "upper_floor")) then 
 
-		DL:createNPCNode(5, -2, "DL_Mona_UpperFloor") -- I'll open the gate for you for a small compensation so you can enjoy the show.
+		DL:createNPCNode(5, -2, "DL_Mona_UpperFloor") -- I'll open the gate for you - for a small compensation - so you can enjoy the show.
 		DL:addConditionProgress("npc_mona", "upper_floor")
 		DL:addNode()
 
@@ -91,7 +91,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(13, -2, "DL_Mona_AgeDontKnow") -- Hm. I guess you may nearly be of age. I tell my girls to be gentle with you. (Smiles)
+		DL:createNPCNode(13, -2, "DL_Mona_AgeDontKnow") -- Hm. I guess you may nearly be of age. I'll tell my girls to be gentle with you. (Smiles)
 		DL:addConditionProgress("npc_mona", "fun_unlock")
 		DL:addNode()
 
@@ -101,7 +101,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, -1, "DL_Mona_TwentyFive") -- No, never. If you're not old enough to tell the truth, you're not old enough for my girls. Get out.
+		DL:createNPCNode(15, -1, "DL_Mona_TwentyFive") -- No way! If you're not old enough to tell the truth, you're not old enough for my girls. Get out!
 		DL:addConditionProgress("npc_mona", "fun_lock")
 		DL:addNode()
 

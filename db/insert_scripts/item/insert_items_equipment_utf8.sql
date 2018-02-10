@@ -657,8 +657,8 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_antimagicpendant', 'item', 'Anti-Magic Pendant','Antimagischer Anhänger','Antimagische Ahänger');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_antimagicpendant', 'item_desc', 'This crystal cancels most of the magic around it and "should" keep mages away.','Dieser Kristall löscht fast alle Magie um sich herum aus und "sollte" Magier fernhalten.','De Kristall löscht fascht all Magie um sich ume us und "sött" Magier fernhalte.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_antimagicpendant', 'eq_neck', 550, 300, 35, 1);
-INSERT INTO item_attribute (item_id, res_light, res_fire, res_ice, res_shadow, dmg_light, dmg_fire, dmg_shadow, dmg_ice) values ('eq_antimagicpendant', 150, 150, 150, 150, -50, -50, -50, -50);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_antimagicpendant', 'eq_neck', 800, 700, 25, 1);
+INSERT INTO item_attribute (item_id, res_light, res_fire, res_ice, res_shadow, dmg_light, dmg_fire, dmg_shadow, dmg_ice) values ('eq_antimagicpendant', 50, 50, 50, 50, -50, -50, -50, -50);
 
 -- Sparkling Green Ring
 

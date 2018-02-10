@@ -17,7 +17,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_mona", "sex_exotic")) then 
 
-		DL:createNPCNode(1, -1, "DL_Karma_NotBought") -- Go and ask Mona if you want to have an exciting time with me. (Winks)
+		DL:createNPCNode(1, -1, "DL_Karma_NotBought") -- Go and ask Mona if you want to have a good time with me. (Winks)
 		DL:addNode()
 
 	end
@@ -56,7 +56,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(9, 19, "DL_Karma_NotLearnPractice") -- Patience, young lad! You cannot just jump to the last chapter without knowing the others.
+		DL:createNPCNode(9, 19, "DL_Karma_NotLearnPractice") -- Patience, young lad! You cannot just jump to the last chapter without reading the others.
 		DL:addConditionProgress("npc_karma", "started")
 		DL:addNode()
 
@@ -67,7 +67,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(20, -2, "DL_Karma_IKnowEverything") -- If you say so, you surely can answer me three questions to my satisfaction...
+		DL:createNPCNode(20, -2, "DL_Karma_IKnowEverything") -- If it is so, you surely can answer three questions to my satisfaction...
 		DL:gotoNode(18)
 		DL:addNode()
 
@@ -107,7 +107,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, 13, "DL_Karma_ExplainKamasutra3") -- The book also covers the theory of love and describes what triggers desire and how to improve one's own physical attraction.
+		DL:createNPCNode(12, 13, "DL_Karma_ExplainKamasutra3") -- The book also covers the theory of love, and it describes what triggers desire and how to improve one's own attraction.
 		DL:addNode()
 
 
@@ -117,7 +117,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(14, 15, "DL_Karma_ExplainKamasutra4") -- In addition to the common arts of dancing, drawing, singing, massaging and hairdressing; magical tricks or how to teach a parrot to speak also impress a vis-à-vis.
+		DL:createNPCNode(14, 15, "DL_Karma_ExplainKamasutra4") -- In addition to the common arts of dancing, drawing, singing, massaging and hairdressing; magic tricks or how to teach a parrot to speak also can impress a vis-à-vis.
 		DL:addNode()
 
 
@@ -131,7 +131,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(17, -2, "DL_Karma_ExplainKamasutra6") -- This was now a short summary. To check whether you were attentive, I got some questions for you.
+		DL:createNPCNode(17, -2, "DL_Karma_ExplainKamasutra6") -- This was a short summary. To check whether you were attentive, I got some questions for you.
 		DL:gotoNode(18)
 		DL:addNode()
 
@@ -161,7 +161,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(27, -1, "DL_Karma_WrongQuestion2") -- No, even if that's what most people believe, it's not.
+		DL:createNPCNode(27, -1, "DL_Karma_WrongQuestion2") -- No, even though that's what most people believe, it's not.
 		DL:addNode()
 
 
