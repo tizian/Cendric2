@@ -278,8 +278,8 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 
 	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
 		int cols = sqlite3_column_count(statement);
-		if (cols != 35) {
-			g_logger->logError("DatabaseManager::getItemEquipmentParticleBean", "number of returned columns must be 35");
+		if (cols != 36) {
+			g_logger->logError("DatabaseManager::getItemEquipmentParticleBean", "number of returned columns must be 36");
 			return bean;
 		}
 
@@ -314,6 +314,7 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 			bean->color_end_max.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
 			bean->color_end_max.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
 			bean->color_end_max.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->goal_radius = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->goal_offset.x = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->goal_offset.y = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->speed_min = static_cast<float>(sqlite3_column_int(statement, col++));

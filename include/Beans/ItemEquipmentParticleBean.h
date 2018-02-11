@@ -20,6 +20,7 @@ struct ItemEquipmentParticleBean final : DatabaseBean {
     sf::Color color_start_max;
     sf::Color color_end_min;
     sf::Color color_end_max;
+	float goal_radius;
     sf::Vector2f goal_offset;
     float speed_min;
     float speed_max;

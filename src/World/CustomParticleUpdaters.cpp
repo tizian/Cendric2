@@ -51,6 +51,21 @@ namespace particles
 		m_isFading = false;
 	}
 
+	void AimedCircleVelocityGenerator::generate(ParticleData *data, int startId, int endId) {
+		for (int i = startId; i < endId; ++i) {
+			float phi = randomFloat(0.0f, M_PI * 2.0f);
+			float rho = randomFloat(0.0f, 1.0f);
+			float x = std::sqrt(rho) * std::cos(phi) * goalRadius;
+			float y = std::sqrt(rho) * std::sin(phi) * goalRadius;
+
+			sf::Vector2f dir = goal + sf::Vector2f(x, y) - data->pos[i];
+			float magnitude = std::sqrt(dir.x * dir.x + dir.y * dir.y);
+			dir /= magnitude;
+			float len = randomFloat(minStartSpeed, maxStartSpeed);
+			data->vel[i] = dir * len;
+		}
+	}
+
 	AttractingEulerUpdater::AttractingEulerUpdater(const sf::Vector2f* refPos, float fraction) {
 		assert(refPos);
 		m_refPos = refPos;

@@ -174,6 +174,7 @@ CREATE TABLE item_equipment_particle(
     color_end_max_g INTEGER NOT NULL,
     color_end_max_b INTEGER NOT NULL, 
     color_end_max_a INTEGER NOT NULL,
+    goal_radius INTEGER NOT NULL DEFAULT 0,
     goal_offset_x INTEGER NOT NULL,
     goal_offset_y INTEGER NOT NULL,
     speed_min INTEGER NOT NULL,

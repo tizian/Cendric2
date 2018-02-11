@@ -105,9 +105,10 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 		colGen->maxEndCol = particles->color_end_max;
 		data.colorGen = colGen;
 
-		auto velGen = new particles::AimedVelocityGenerator();
+		auto velGen = new particles::AimedCircleVelocityGenerator();
 		velGen->minStartSpeed = particles->speed_min;
 		velGen->maxStartSpeed = particles->speed_min;
+		velGen->goalRadius = particles->goal_radius;
 		data.velGen = velGen;
 
 		auto timeGen = new particles::TimeGenerator();

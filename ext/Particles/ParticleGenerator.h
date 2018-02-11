@@ -139,9 +139,9 @@ public:
 class AimedVelocityGenerator : public ParticleGenerator {
 public:
 	AimedVelocityGenerator() {}
-	~AimedVelocityGenerator() {}
+	virtual ~AimedVelocityGenerator() {}
 
-	void generate(ParticleData *data, int startId, int endId);
+	virtual void generate(ParticleData *data, int startId, int endId);
 
 public:
 	sf::Vector2f goal{ 0.f, 0.f };

@@ -37,6 +37,16 @@ namespace particles
 		bool m_isFading = false;
 	};
 
+	class AimedCircleVelocityGenerator : public AimedVelocityGenerator {
+	public:
+		AimedCircleVelocityGenerator() {}
+		~AimedCircleVelocityGenerator() {}
+
+		void generate(ParticleData *data, int startId, int endId) override;
+
+	public:
+		float goalRadius;
+	};
 
 	class AttractingEulerUpdater : public EulerUpdater {
 	public:

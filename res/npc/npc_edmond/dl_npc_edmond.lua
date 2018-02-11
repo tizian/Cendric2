@@ -16,7 +16,10 @@ loadDialogue = function(DL)
                 DL:createNPCNode(3, 5, "DL_Edmond_DangerousIs") -- There are creatures out here and, in addition, big rocks have fallen down from the hill in the east that are blocking our way back to the village.
 				DL:addNode()
 				
-				DL:createNPCNode(2, 4, "DL_Edmond_JustExploring") -- So, just exploring? It is unusual that I meet someone out here that I don't know. You are not a citizen of the village, otherwise I would have seen you before.
+				DL:createNPCNode(2, 60, "DL_Edmond_JustExploring") -- So, just exploring? It is unusual that I meet someone out here that I don't know.
+				DL:addNode()
+                
+                DL:createNPCNode(60, 4, "DL_Edmond_JustExploring2") -- You are not a citizen of the village, otherwise I would have seen you before.
 				DL:addNode()
 				
 				DL:createChoiceNode(4)
@@ -29,13 +32,19 @@ loadDialogue = function(DL)
 				DL:addChoice(7, "DL_Choice_WhatCanWeDo") --  What can we do about those rocks?
 				DL:addNode()
 				
-				DL:createNPCNode(6, 8, "DL_Edmond_TheVillage") -- A small village in the south. I'm a huntsman with the task of delivering meat to these people. You must have seen it as you've come here! 
+				DL:createNPCNode(6, 61, "DL_Edmond_TheVillage") -- A small village in the south. I'm a huntsman with the task of delivering meat to these people.
+				DL:addNode()
+                
+                DL:createNPCNode(61, 8, "DL_Edmond_TheVillage2") -- You must have seen it as you've come here! 
 				DL:addNode()
 				
 				DL:createCendricNode(8, 9, "DL_Cendric_Nope") -- I don't recall seeing it...
 				DL:addNode()
 				
-				DL:createNPCNode(9, 10, "DL_Edmond_WouldYouHelp") -- That seems strange to me. But anyway, we're trapped here as long as those rocks block our way out. Would you mind helping me? 
+				DL:createNPCNode(9, 62, "DL_Edmond_WouldYouHelp") -- That seems strange to me. But anyway, we're trapped here as long as those rocks block our way out.
+				DL:addNode()
+                
+                DL:createNPCNode(62, 10, "DL_Edmond_WouldYouHelp2") -- Would you mind helping me? 
 				DL:addNode()
 				
 				DL:createChoiceNode(10)
@@ -88,7 +97,10 @@ loadDialogue = function(DL)
 			DL:createNPCNode(11, -1, "DL_Edmond_YouWontHelp") -- It is not only my problem. Come back to me if you've changed your mind.
 			DL:addNode()
 						
-			DL:createNPCNode(12, -1, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable. Here, take my walking pole and equip it.
+			DL:createNPCNode(12, 63, "DL_Edmond_YouWillHelp") -- That's great! You could crush some rocks with your fists, but having a weapon is way more comfortable.
+			DL:addNode()
+            
+            DL:createNPCNode(63, -1, "DL_Edmond_YouWillHelp2") -- Here, take my walking pole and equip it.
             DL:addConditionProgress("npc_edmond","walking_pole")
 			DL:addItem("we_walkingpole", 1)
             DL:addHint("Inventory")
@@ -148,8 +160,11 @@ loadDialogue = function(DL)
 			DL:addItem("fo_rawmeat", 5)
 			DL:addNode()
 			
-			DL:createNPCNode(20, -1, "DL_Edmond_GivesRatQuest") -- Really? If you manage to find the nest and kill every rat in there, you will get a great reward. These rats really give me a headache. Here, take this potion, you'll need it.
+			DL:createNPCNode(20, 64, "DL_Edmond_GivesRatQuest") -- Really? If you manage to find the nest and kill every rat in there, you will get a great reward.
 			DL:changeQuestState("the_rats_nest", "started")
+			DL:addNode()
+            
+            DL:createNPCNode(64, -1, "DL_Edmond_GivesRatQuest2") -- These rats really give me a headache. Here, take this potion, you'll need it.
 			DL:addItem("fo_lesserhealingpotion", 1)
 			DL:addNode()
 			
@@ -166,8 +181,11 @@ loadDialogue = function(DL)
 			DL:createNPCNode(31, -1, "DL_Edmond_RatNestLocation") -- It seems like they're coming from the north, maybe you should start searching there.
 			DL:addNode()
 			
-			DL:createNPCNode(32, -1, "DL_Edmond_GivesReward") -- Wow, that's amazing! I didn't believe you could make it. Here, take all the gold I have with me. And you can keep my walking pole, of course. You really did me a favor. 
+			DL:createNPCNode(32, 65, "DL_Edmond_GivesReward") -- Wow, that's amazing! I didn't believe you could make it.
 			DL:changeQuestState("the_rats_nest", "completed")
+			DL:addNode()
+            
+            DL:createNPCNode(65, -1, "DL_Edmond_GivesReward2") -- Here, take all the gold I have with me. And you can keep my walking pole, of course. You really did me a favor. 
 			DL:addGold(13)
 			DL:addNode()
 			
@@ -186,7 +204,10 @@ loadDialogue = function(DL)
 			end
 			DL:addNode()
 			
-			DL:createNPCNode(42, -1, "DL_Edmond_TheWiseWillHelpYou") -- That's strange. Maybe you hit your head or you've drunken too much recently? I think the village elder can help you with your problem. You'll find him in his house in the middle of the village.
+			DL:createNPCNode(42, 66, "DL_Edmond_TheWiseWillHelpYou") -- That's strange. Maybe you hit your head or you've drunken too much recently?
+			DL:addNode()
+            
+            DL:createNPCNode(66, -1, "DL_Edmond_TheWiseWillHelpYou2") -- I think the village elder can help you with your problem. You'll find him in his house in the middle of the village.
 			DL:addConditionProgress("npc_edmond", "who_am_i")
 			DL:addQuestDescription("who_am_i", 1)
 			DL:addNode()
