@@ -90,6 +90,8 @@ bool CharacterCoreReader::readCharacterCore(const std::string& filename, Charact
 
 	saveFile.seekg(0, std::ios::beg);
 
+	data.hashValid = false;
+
 	while (!safeGetline(saveFile, line).eof()) {
 		if (line.empty() || line.at(0) == COMMENT_MARKER) continue;
 
