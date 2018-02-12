@@ -17,7 +17,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 4, "DL_Jack_WhoAreYou") -- I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house here.
+		DL:createNPCNode(2, 4, "DL_Jack_WhoAreYou") -- Hello, kid. I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house.
 		DL:addConditionProgress("npc_jack", "who_are_you")
 		DL:addNode()
 
@@ -35,7 +35,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, 7, "DL_Jack_Elysia") -- It looks like a huge bird and is also sounding like one, its shrieks are unbearable.
+		DL:createNPCNode(5, 7, "DL_Jack_Elysia") -- It looks like a huge bird. Sounds like one too, its shrieks are unbearable.
 		DL:addConditionProgress("npc_jack", "elysia")
 		DL:addNode()
 
@@ -81,7 +81,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, 13, "DL_Jack_HelpJack2") -- Here, take the key to my lighthouse. I locked it to prevent people from getting eaten.
+		DL:createNPCNode(12, 13, "DL_Jack_HelpJack2") -- Here, take the key to my lighthouse. I locked it to prevent people getting eaten.
 		DL:addItem("ke_lighthouse", 1)
 		DL:addQuestDescription("element_master", 2)
 		DL:addNode()

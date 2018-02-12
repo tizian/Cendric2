@@ -55,7 +55,7 @@ npc.id:npc_lee
 	trigger:DL:addConditionProgress("npc_lee", "what_doing")
 	# translation: 
 	translation.tag:DL_Lee_WhatDoing
-	translation.en:Yeah that's what I ask myself too. I'd rather be in mid ocean.
+	translation.en:Yeah that's what I ask myself too. I'd rather be in the middle of the ocean.
 	translation.de:Ja das frage ich mich auch. Ich wäre lieber mitten auf dem Meer.
 	translation.ch:Jo das frogi mi au. I wär liaber ufam Meer gra.
 	[
@@ -69,7 +69,7 @@ npc.id:npc_lee
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lee_WhatDoing2
-	translation.en:But thanks to that fool Luv, we've missed our ship and and are stuck here.
+	translation.en:But thanks to that fool Luv, we missed our ship and are stuck here.
 	translation.de:Aber dank diesem Trottel Luv haben wir unser Schiff verpasst und sitzen jetzt hier fest.
 	translation.ch:Aber dank däm Trottel Luv hend miar üses Schiff verpasst und sitzad jeza do fest.
 	[
@@ -132,7 +132,7 @@ npc.id:npc_lee
 	trigger:DL:addConditionProgress("npc_leeluv", "second_rant")
 	# translation: 
 	translation.tag:DL_Lee_SecondRant
-	translation.en:Pha! If he hadn't have slept when our captain called our sailors back, we wouldn't have missed it either!
+	translation.en:Pha! If he hadn't been sleeping when our captain called our sailors back, we wouldn't have missed it either!
 	translation.de:Pha! Hätte er nicht geschlafen, als unser Kapitän die Matrosen zurück aufs Schiff gerufen hat, hätten wir es auch nicht verpasst!
 	translation.ch:Pha! Wener ni pennt het, wo üsa Kapitän d'Matrosa zrugg ufs Schiff gruefa hät, hetemärs au ni verpasst!
 	[
@@ -204,9 +204,9 @@ npc.id:npc_lee
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lee_CalmDown
-	translation.en:Yes maybe you're right. This doesn't get us anywhere.
-	translation.de:Ja vielleicht hast du recht. Das bringt uns auch nicht weiter.
-	translation.ch:Jo velicht hesch rächt. Da bringt üs au ni witer.
+	translation.en:Yes, maybe you're right. This doesn't get us anywhere.
+	translation.de:Ja, vielleicht hast du recht. Das bringt uns auch nicht weiter.
+	translation.ch:Jo, velicht hesch rächt. Da bringt üs au ni witer.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -248,9 +248,9 @@ npc.id:npc_lee
 	trigger:DL:changeQuestState("lee_and_luv", "started")
 	# translation: 
 	translation.tag:DL_Lee_HelpYou
-	translation.en:Yes maybe. If you could get us a working compass, we'd give you all we have left.
-	translation.de:Ja vielleicht. Wenn du uns einen funktionierenden Kompass besorgen kannst, werden wir dir alles geben, was wir noch haben.
-	translation.ch:Jo velicht. Wenn du üs a funktionierenda Kompass bringsch, gänd miar diar alles wo mr hend.
+	translation.en:Yes, maybe. If you could get us a working compass, we'd give you all we have left.
+	translation.de:Ja, vielleicht. Wenn du uns einen funktionierenden Kompass besorgen kannst, werden wir dir alles geben, was wir noch haben.
+	translation.ch:Jo, velicht. Wenn du üs a funktionierenda Kompass bringsch, gänd miar diar alles wo mr hend.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -266,7 +266,7 @@ npc.id:npc_lee
 	trigger:DL:addConditionProgress("npc_luv", "thanks")
 	# translation: 
 	translation.tag:DL_Lee_QuestComplete
-	translation.en:Awesome! Thank you so much, I can't wait to set sails! 
+	translation.en:Awesome! Thank you so much, I can't wait to set sail! 
 	translation.de:Grossartig! Danke vielmals, ich kann es kaum erwarten, wieder in die See zu stechen!
 	translation.ch:Super! Danka viel mol, chas chum erwarta wieder is Meer z'stecha!
 	[
@@ -281,7 +281,7 @@ npc.id:npc_lee
 	trigger:DL:addItem("mi_pearlpile", 1)
 	# translation: 
 	translation.tag:DL_Lee_QuestComplete2
-	translation.en:Here, take this pile of magical pearls we found, they are worth a lot here!
+	translation.en:Here, take this pile of magical pearls we found. They are worth a lot here!
 	translation.de:Hier, nimm diesen Haufen magischer Perlen, die wir gefunden haben, sie sind hier eine Menge wert.
 	translation.ch:Do, nimm de Hock magischi Perla womar gfunda hend, si sind do richtig viel wert.
 	[

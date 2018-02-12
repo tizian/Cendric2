@@ -4,6 +4,12 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_rope', 'item_desc', 'A strong coil of hemp rope.','Ein starkes Seil, aus Hanf gefertigt.','Es starchs Hanfseil.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_rope', 'quest', 50, 0, -1);
 
+-- Anti-Magic Crystal
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item', 'Anti-Magic Crystal','Antimagischer Kristall','Antimagische Kristall');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item_desc', 'This strange crystal cancels magic. I shouldn''t keep it too long in my pocket.','Dieser seltsame Kristall löscht Magie aus. Ich sollte ihn nicht zu lange in meiner Tasche behalten.','De komisch Kristall löscht Magie us. Ich sötten nid z''lang i minere Täsche phalte.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_antimagiccrystal', 'quest', 0, 750, -1);
+
 -- Tower Key 1 (Part)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_tower_1', 'item', 'Green Key Head','Grüner Schlüsselkopf','Grüene Schlüsselchopf');

@@ -1,10 +1,10 @@
--- Routine for NPC "Rana" 
+-- Routine for NPC "Java" 
 
 velocity = 40
 
 loadRoutine = function(R, W)
 
-	if (W:isConditionFulfilled("npc_rana","talked")) then
+	if (W:isConditionFulfilled("npc_java","talked")) then
 		R:setTalkingActive(false)
 		R:setReloadEnabled(false)
 	else

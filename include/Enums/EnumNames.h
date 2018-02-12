@@ -611,4 +611,109 @@ public:
 			return "Pause";
 		}
 	}
+
+	static std::string getShortKeyboardKeyName(sf::Keyboard::Key key) {
+		switch (key) {
+		case sf::Keyboard::Unknown:
+			return "??";
+		case sf::Keyboard::Escape:
+			return "Esc";
+		case sf::Keyboard::LControl:
+			return "LCt";
+		case sf::Keyboard::LShift:
+			return "LSh";
+		case sf::Keyboard::LAlt:
+			return "LAl";
+		case sf::Keyboard::LSystem:
+			return "LSy";
+		case sf::Keyboard::RControl:
+			return "RCt";
+		case sf::Keyboard::RShift:
+			return "RSh";
+		case sf::Keyboard::RAlt:
+			return "RAl";
+		case sf::Keyboard::RSystem:
+			return "RSy";
+		case sf::Keyboard::Menu:
+			return "Men";
+		case sf::Keyboard::LBracket:
+			return "LBr";
+		case sf::Keyboard::RBracket:
+			return "RBr";
+		case sf::Keyboard::SemiColon:
+			return ";";
+		case sf::Keyboard::Comma:
+			return ",";
+		case sf::Keyboard::Period:
+			return ".";
+		case sf::Keyboard::Quote:
+			return "\"";
+		case sf::Keyboard::Slash:
+			return "/";
+		case sf::Keyboard::BackSlash:
+			return "\\";
+		case sf::Keyboard::Tilde:
+			return "~";
+		case sf::Keyboard::Equal:
+			return "=";
+		case sf::Keyboard::Dash:
+			return "-";
+		case sf::Keyboard::Space:
+			return "Spa";
+		case sf::Keyboard::Return:
+			return "Ret";
+		case sf::Keyboard::BackSpace:
+			return "<--";
+		case sf::Keyboard::PageUp:
+			return "PgU";
+		case sf::Keyboard::PageDown:
+			return "PgD";
+		case sf::Keyboard::Home:
+			return "Hom";
+		case sf::Keyboard::Insert:
+			return "In";
+		case sf::Keyboard::Delete:
+			return "Del";
+		case sf::Keyboard::Add:
+			return "Add";
+		case sf::Keyboard::Subtract:
+			return "Sub";
+		case sf::Keyboard::Multiply:
+			return "Mul";
+		case sf::Keyboard::Divide:
+			return "Div";
+		case sf::Keyboard::Left:
+			return "<-";
+		case sf::Keyboard::Right:
+			return "->";
+		case sf::Keyboard::Up:
+			return "Up";
+		case sf::Keyboard::Down:
+			return "Dwn";
+		case sf::Keyboard::Numpad0:
+			return "Nu0";
+		case sf::Keyboard::Numpad1:
+			return "Nu1";
+		case sf::Keyboard::Numpad2:
+			return "Nu2";
+		case sf::Keyboard::Numpad3:
+			return "Nu3";
+		case sf::Keyboard::Numpad4:
+			return "Nu4";
+		case sf::Keyboard::Numpad5:
+			return "Nu5";
+		case sf::Keyboard::Numpad6:
+			return "Nu6";
+		case sf::Keyboard::Numpad7:
+			return "Nu7";
+		case sf::Keyboard::Numpad8:
+			return "Nu8";
+		case sf::Keyboard::Numpad9:
+			return "Nu9";
+		case sf::Keyboard::Pause:
+			return "Pau";
+		}
+
+		return getKeyboardKeyName(key);
+	}
 };

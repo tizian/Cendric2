@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="261">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="70" height="70" tilewidth="50" tileheight="50" nextobjectid="262">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -144,10 +144,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="1312" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="1382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="1389" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="70" height="70">
@@ -894,44 +894,44 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="136" gid="1405" x="451.909" y="1657" width="50" height="50">
+  <object id="136" gid="1412" x="451.909" y="1657" width="50" height="50">
    <properties>
     <property name="text" value="Inn"/>
    </properties>
   </object>
-  <object id="227" gid="1405" x="2250" y="280" width="50" height="50">
+  <object id="227" gid="1412" x="2250" y="280" width="50" height="50">
    <properties>
     <property name="text" value="TurnBack"/>
    </properties>
   </object>
-  <object id="228" gid="1405" x="2301" y="377" width="50" height="50">
+  <object id="228" gid="1412" x="2301" y="377" width="50" height="50">
    <properties>
     <property name="text" value="Danger"/>
    </properties>
   </object>
-  <object id="225" gid="1386" x="3350" y="3000" width="50" height="50">
+  <object id="225" gid="1393" x="3350" y="3000" width="50" height="50">
    <properties>
     <property name="conditions" value="default,gandria_open"/>
    </properties>
   </object>
-  <object id="231" gid="1383" x="2400" y="550" width="50" height="50"/>
-  <object id="232" gid="1383" x="2850" y="1000" width="50" height="50"/>
-  <object id="233" gid="1383" x="1100" y="750" width="50" height="50"/>
-  <object id="234" gid="1383" x="850" y="1700" width="50" height="50"/>
-  <object id="235" gid="1383" x="2000" y="1900" width="50" height="50"/>
-  <object id="236" gid="1383" x="2800" y="2550" width="50" height="50"/>
-  <object id="237" gid="1383" x="2225" y="2800" width="50" height="50"/>
-  <object id="238" gid="1383" x="1100" y="2800" width="50" height="50"/>
-  <object id="239" gid="1383" x="3350" y="3100" width="50" height="50"/>
-  <object id="240" gid="1402" x="2350" y="1700" width="50" height="50"/>
-  <object id="241" gid="1382" x="1150" y="1050" width="50" height="50"/>
-  <object id="249" gid="1425" x="450" y="1687.5" width="50" height="50">
+  <object id="231" gid="1390" x="2400" y="550" width="50" height="50"/>
+  <object id="232" gid="1390" x="2850" y="1000" width="50" height="50"/>
+  <object id="233" gid="1390" x="1100" y="750" width="50" height="50"/>
+  <object id="234" gid="1390" x="850" y="1700" width="50" height="50"/>
+  <object id="235" gid="1390" x="2000" y="1900" width="50" height="50"/>
+  <object id="236" gid="1390" x="2800" y="2550" width="50" height="50"/>
+  <object id="237" gid="1390" x="2225" y="2800" width="50" height="50"/>
+  <object id="238" gid="1390" x="1100" y="2800" width="50" height="50"/>
+  <object id="239" gid="1390" x="3350" y="3100" width="50" height="50"/>
+  <object id="240" gid="1409" x="2350" y="1700" width="50" height="50"/>
+  <object id="241" gid="1389" x="1150" y="1050" width="50" height="50"/>
+  <object id="249" gid="1432" x="450" y="1687.5" width="50" height="50">
    <properties>
     <property name="text" value="Gandria"/>
    </properties>
   </object>
-  <object id="254" gid="1383" x="3150" y="1525" width="50" height="50"/>
-  <object id="258" gid="1405" x="1950" y="780" width="50" height="50">
+  <object id="254" gid="1390" x="3150" y="1525" width="50" height="50"/>
+  <object id="258" gid="1412" x="1950" y="780" width="50" height="50">
    <properties>
     <property name="hint" value="Journal"/>
    </properties>
@@ -1125,6 +1125,11 @@
   <object id="260" gid="1381" x="1800" y="600" width="50" height="50">
    <properties>
     <property name="id" value="npc_laslo"/>
+   </properties>
+  </object>
+  <object id="261" gid="1382" x="900" y="2900" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_runa"/>
    </properties>
   </object>
  </objectgroup>

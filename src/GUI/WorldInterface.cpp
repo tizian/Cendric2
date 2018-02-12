@@ -164,7 +164,7 @@ void WorldInterface::loadGuiSidebar() {
 
 	for (int i = 0; i < n; ++i) {
 		m_guiSidebar->setButtonTexture(i, tex, i * GUITabButton::ICON_SIZE);
-		m_guiSidebar->setButtonText(i, EnumNames::getKeyboardKeyName(
+		m_guiSidebar->setButtonText(i, EnumNames::getShortKeyboardKeyName(
 			g_resourceManager->getConfiguration().mainKeyMap[getKeyFromGuiElement(static_cast<GUIElement>(i))]));
 	}
 

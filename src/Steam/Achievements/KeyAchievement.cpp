@@ -21,5 +21,6 @@ bool KeyAchievement::notifyCore(const CharacterCore* core) {
 		contains(items, std::string("ke_sewerkey")) &&
 		contains(items, std::string("ke_lighthouse")) &&
 		contains(items, std::string("ke_forgottenpassage")) &&
-		contains(items, std::string("ke_cathedral"));
+		contains(items, std::string("ke_cathedral")) &&
+		contains(items, std::string("ke_tower"));
 }

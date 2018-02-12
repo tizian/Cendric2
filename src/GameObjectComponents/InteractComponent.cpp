@@ -49,7 +49,7 @@ void InteractComponent::interact() {
 
 void InteractComponent::setInteractText(const std::string& textKey) {
 	std::string interactString = "<";
-	interactString.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
+	interactString.append(EnumNames::getShortKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)));
 	interactString.append("> " + g_textProvider->getText(textKey));
 	m_interactText.setString(interactString);
 }

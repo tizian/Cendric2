@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="356">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="358">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -132,10 +132,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="2375" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="2382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="80" height="70">
@@ -731,50 +731,50 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="307" gid="2376" x="500" y="850" width="50" height="50"/>
-  <object id="308" gid="2376" x="950" y="1200" width="50" height="50"/>
-  <object id="309" gid="2376" x="2200" y="1100" width="50" height="50"/>
-  <object id="310" gid="2376" x="2250" y="450" width="50" height="50"/>
-  <object id="311" gid="2376" x="1400" y="2000" width="50" height="50"/>
-  <object id="312" gid="2376" x="350" y="2150" width="50" height="50"/>
-  <object id="313" gid="2376" x="350" y="2650" width="50" height="50"/>
-  <object id="314" gid="2376" x="200" y="3250" width="50" height="50"/>
-  <object id="315" gid="2376" x="950" y="3000" width="50" height="50"/>
-  <object id="316" gid="2376" x="1400" y="2650" width="50" height="50"/>
-  <object id="317" gid="2376" x="1900" y="2650" width="50" height="50"/>
-  <object id="318" gid="2376" x="1700" y="3200" width="50" height="50"/>
-  <object id="319" gid="2376" x="2600" y="3000" width="50" height="50"/>
-  <object id="320" gid="2376" x="2700" y="2650" width="50" height="50"/>
-  <object id="321" gid="2376" x="3550" y="2850" width="50" height="50"/>
-  <object id="322" gid="2376" x="3450" y="2350" width="50" height="50"/>
-  <object id="323" gid="2376" x="3250" y="450" width="50" height="50"/>
-  <object id="239" gid="2399" x="1900" y="2545" width="50" height="50">
+  <object id="307" gid="2383" x="500" y="850" width="50" height="50"/>
+  <object id="308" gid="2383" x="950" y="1200" width="50" height="50"/>
+  <object id="309" gid="2383" x="2200" y="1100" width="50" height="50"/>
+  <object id="310" gid="2383" x="2250" y="450" width="50" height="50"/>
+  <object id="311" gid="2383" x="1400" y="2000" width="50" height="50"/>
+  <object id="312" gid="2383" x="350" y="2150" width="50" height="50"/>
+  <object id="313" gid="2383" x="350" y="2650" width="50" height="50"/>
+  <object id="314" gid="2383" x="200" y="3250" width="50" height="50"/>
+  <object id="315" gid="2383" x="950" y="3000" width="50" height="50"/>
+  <object id="316" gid="2383" x="1400" y="2650" width="50" height="50"/>
+  <object id="317" gid="2383" x="1900" y="2650" width="50" height="50"/>
+  <object id="318" gid="2383" x="1700" y="3200" width="50" height="50"/>
+  <object id="319" gid="2383" x="2600" y="3000" width="50" height="50"/>
+  <object id="320" gid="2383" x="2700" y="2650" width="50" height="50"/>
+  <object id="321" gid="2383" x="3550" y="2850" width="50" height="50"/>
+  <object id="322" gid="2383" x="3450" y="2350" width="50" height="50"/>
+  <object id="323" gid="2383" x="3250" y="450" width="50" height="50"/>
+  <object id="239" gid="2406" x="1900" y="2545" width="50" height="50">
    <properties>
     <property name="conditions" value="npc_helena,old_things"/>
    </properties>
   </object>
-  <object id="264" gid="2379" x="2600" y="2950" width="50" height="50">
+  <object id="264" gid="2386" x="2600" y="2950" width="50" height="50">
    <properties>
     <property name="key" value="ke_sewerkey"/>
    </properties>
   </object>
-  <object id="277" gid="2419" x="3450" y="2250" width="50" height="50">
+  <object id="277" gid="2426" x="3450" y="2250" width="50" height="50">
    <properties>
     <property name="key" value="ke_lighthouse"/>
    </properties>
   </object>
-  <object id="291" gid="2399" x="2700" y="2540" width="50" height="50">
+  <object id="291" gid="2406" x="2700" y="2540" width="50" height="50">
    <properties>
     <property name="conditions" value="default,brothel_open"/>
    </properties>
   </object>
-  <object id="326" gid="2419" x="1300" y="1100" width="50" height="50">
+  <object id="326" gid="2426" x="1300" y="1100" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower"/>
    </properties>
   </object>
-  <object id="327" gid="2376" x="675" y="225" width="50" height="50"/>
-  <object id="354" gid="2498" x="2050" y="400" width="50" height="50">
+  <object id="327" gid="2383" x="675" y="225" width="50" height="50"/>
+  <object id="354" gid="2505" x="2050" y="400" width="50" height="50">
    <properties>
     <property name="bg" value=""/>
     <property name="name" value="Tombstone"/>
@@ -786,7 +786,7 @@
   <properties>
    <property name="conditions" value="default,cryptdoor"/>
   </properties>
-  <object id="337" gid="2419" x="2250" y="300" width="50" height="50">
+  <object id="337" gid="2426" x="2250" y="300" width="50" height="50">
    <properties>
     <property name="conditions" value="default,gandriacrypt_open"/>
    </properties>
@@ -1172,6 +1172,16 @@
     <property name="dialoguetexture" value="res/npc/npc_jonathan/npc_jonathan.png"/>
     <property name="id" value="npc_jonathan3"/>
     <property name="spritesheetpath" value="res/npc/npc_jonathan/spritesheet_npc_jonathan.png"/>
+   </properties>
+  </object>
+  <object id="356" gid="2376" x="400" y="3050" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_cynthia"/>
+   </properties>
+  </object>
+  <object id="357" gid="2377" x="450" y="3000" width="50" height="50">
+   <properties>
+    <property name="id" value="npc_bjarne"/>
    </properties>
   </object>
  </objectgroup>

@@ -22,12 +22,12 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_lee", "what_doing")) then 
 
-			DL:createNPCNode(2, 3, "DL_Lee_WhatDoing") -- Yeah that's what I ask myself too. I'd rather be in mid ocean.
+			DL:createNPCNode(2, 3, "DL_Lee_WhatDoing") -- Yeah that's what I ask myself too. I'd rather be in the middle of the ocean.
 			DL:addConditionProgress("npc_lee", "what_doing")
 			DL:addNode()
 
 
-			DL:createNPCNode(3, -2, "DL_Lee_WhatDoing2") -- But thanks to that fool Luv, we've missed our ship and and are stuck here.
+			DL:createNPCNode(3, -2, "DL_Lee_WhatDoing2") -- But thanks to that fool Luv, we missed our ship and are stuck here.
 			DL:addNode()
 
 		end
@@ -56,7 +56,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_luv", "first_rant")) then 
 
-			DL:createNPCNode(6, -2, "DL_Lee_SecondRant") -- Pha! If he hadn't have slept when our captain called our sailors back, we wouldn't have missed it either!
+			DL:createNPCNode(6, -2, "DL_Lee_SecondRant") -- Pha! If he hadn't been sleeping when our captain called our sailors back, we wouldn't have missed it either!
 			DL:addConditionProgress("npc_leeluv", "second_rant")
 			DL:addNode()
 
@@ -88,7 +88,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_leeluv", "calm_down")) then 
 
-		DL:createNPCNode(8, 9, "DL_Lee_CalmDown") -- Yes maybe you're right. This doesn't get us anywhere.
+		DL:createNPCNode(8, 9, "DL_Lee_CalmDown") -- Yes, maybe you're right. This doesn't get us anywhere.
 		DL:addNode()
 
 
@@ -104,7 +104,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_leeluv", "calm_down") and DL:isQuestState("lee_and_luv", "void")) then 
 
-		DL:createNPCNode(11, -2, "DL_Lee_HelpYou") -- Yes maybe. If you could get us a working compass, we'd give you all we have left.
+		DL:createNPCNode(11, -2, "DL_Lee_HelpYou") -- Yes, maybe. If you could get us a working compass, we'd give you all we have left.
 		DL:changeQuestState("lee_and_luv", "started")
 		DL:addNode()
 
@@ -112,7 +112,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("lee_and_luv", "started") and DL:isQuestComplete("lee_and_luv")) then 
 
-		DL:createNPCNode(12, 13, "DL_Lee_QuestComplete") -- Awesome! Thank you so much, I can't wait to set sails! 
+		DL:createNPCNode(12, 13, "DL_Lee_QuestComplete") -- Awesome! Thank you so much, I can't wait to set sail! 
 		DL:changeQuestState("lee_and_luv", "completed")
 		DL:addConditionProgress("npc_leeluv", "gone")
 		DL:removeItem("qe_compass", 1)
@@ -120,7 +120,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(13, -2, "DL_Lee_QuestComplete2") -- Here, take this pile of magical pearls we found, they are worth a lot here!
+		DL:createNPCNode(13, -2, "DL_Lee_QuestComplete2") -- Here, take this pile of magical pearls we found. They are worth a lot here!
 		DL:addItem("mi_pearlpile", 1)
 		DL:addNode()
 

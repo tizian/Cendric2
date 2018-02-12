@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="50" tileheight="50" backgroundcolor="#1f1f1f" nextobjectid="164">
  <properties>
-  <property name="backgroundlayers" value="-1.0,res/level/howlingcaverns/layer_inf.png,5.0,res/level/howlingcaverns/layer_5.png"/>
+  <property name="backgroundlayers" value="-1.0,res/level/howlingcaverns/layer_inf.png,5.0,res/level/howlingcaverns/layer_5.png,2.0,res/level/howlingcaverns/layer_2.png"/>
   <property name="dimming" value="1.0"/>
   <property name="musicpath" value="res/music/howlingcaverns.ogg"/>
   <property name="tilesetpath" value="res/level/howlingcaverns/tileset_level_howlingcaverns.png"/>

@@ -543,28 +543,28 @@
   </object>
   <object id="82" gid="549" x="1500" y="500" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="83" gid="549" x="1050" y="500" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="84" gid="549" x="550" y="500" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="85" gid="549" x="250" y="200" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
   <object id="86" gid="549" x="50" y="200" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
     <property name="layer" value="bg"/>
    </properties>
   </object>
@@ -614,27 +614,27 @@
   </object>
   <object id="105" gid="613" x="150" y="100" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="106" gid="613" x="150" y="650" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="107" gid="613" x="800" y="400" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="108" gid="613" x="1300" y="350" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="109" gid="613" x="1800" y="350" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="110" gid="613" x="2400" y="750" width="50" height="50">

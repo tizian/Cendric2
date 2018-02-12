@@ -62,4 +62,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_swan','npc','Havnesjefen','Havnesjefen','Havnesjefen');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_chickenchaser','npc','Chicken Chaser','Hühnerschreck','Hüehnli-Schreck');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_karma','npc','Karma','Karma','Karma');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_runa','Runa','Runa','Runa','Runa');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_runa','npc','Runa','Runa','Runa');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_cynthia','npc','Cynthia','Cynthia','Cynthia');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_bjarne','npc','Bjarne','Bjarne','Bjarne');

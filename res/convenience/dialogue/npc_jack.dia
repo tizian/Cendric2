@@ -49,9 +49,9 @@ npc.id:npc_jack
 	trigger:DL:addConditionProgress("npc_jack", "who_are_you")
 	# translation: 
 	translation.tag:DL_Jack_WhoAreYou
-	translation.en:I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house here.
-	translation.de:Ich bin Jack. Normalerweise wär ich ja in meinem Leuchtturm und nicht hier bei den Dirnen.
-	translation.ch:I bin dr Jack. Normalerwis wäri jo i mim Lüchtturm und ni do i däm Puff.
+	translation.en:Hello, kid. I'm Jack. Usually I'd sit in my lighthouse instead of this bawdy house.
+	translation.de:Hallo, Jungchen. Ich bin Jack. Normalerweise wär ich ja in meinem Leuchtturm und nicht hier bei den Dirnen.
+	translation.ch:Hoi Jungchen. I bin dr Jack. Normalerwis wäri jo i mim Lüchtturm und ni do i däm Puff.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -100,7 +100,7 @@ npc.id:npc_jack
 	trigger:DL:addConditionProgress("npc_jack", "elysia")
 	# translation: 
 	translation.tag:DL_Jack_Elysia
-	translation.en:It looks like a huge bird and is also sounding like one, its shrieks are unbearable.
+	translation.en:It looks like a huge bird. Sounds like one too, its shrieks are unbearable.
 	translation.de:Es sieht aus wie ein riesiger Vogel und klingt auch wie einer, sein Gekreische ist nicht auszuhalten.
 	translation.ch:As gseht us wiana riesiga Vogel und tönt au wia eina, sis Umagekraische chama fast ni ushalta.
 	[
@@ -230,7 +230,7 @@ npc.id:npc_jack
 	trigger:DL:addQuestDescription("element_master", 2)
 	# translation: 
 	translation.tag:DL_Jack_HelpJack2
-	translation.en:Here, take the key to my lighthouse. I locked it to prevent people from getting eaten.
+	translation.en:Here, take the key to my lighthouse. I locked it to prevent people getting eaten.
 	translation.de:Da, nimm den Schlüssel zu meinem Leuchtturm. Ich hatte ihn zugeschlossen, damit niemand gefressen wird.
 	translation.ch:Do, nimm da Schlüssel zu mim Lüchtturm. Ich hanen abgschlossa damit niamert ufgfressa wird.
 	[
