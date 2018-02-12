@@ -9,6 +9,9 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item', 'Anti-Magic Crystal','Antimagischer Kristall','Antimagische Kristall');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item_desc', 'This strange crystal cancels magic. I shouldn''t keep it too long in my pocket.','Dieser seltsame Kristall löscht Magie aus. Ich sollte ihn nicht zu lange in meiner Tasche behalten.','De komisch Kristall löscht Magie us. Ich sötten nid z''lang i minere Täsche phalte.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_antimagiccrystal', 'quest', 0, 750, -1);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_antimagiccrystal', -15, 0, 20, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_antimagiccrystal', 1, 600, 350, 50, 50);
+INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y) values ('qe_antimagiccrystal', 25, 35, 150, 200);
 
 -- Tower Key 1 (Part)
 

@@ -219,6 +219,7 @@ item.id:qe_tower_3,1
 item.id:qe_tower_4,1
 item.id:qe_yashamask,1
 item.id:qe_yashaessence,1
+item.id:qe_antimagiccrystal,1
 item.id:sp_divineshield,1
 item.id:sp_fear,1
 item.id:sp_fireball,1
@@ -268,6 +269,7 @@ item.id:we_zeffssword,1
 item.id:we_leeroysword,1
 item.id:we_arazath,1
 item.id:we_celestialclaws,1
+item.id:we_silversword,1
 stored.gold:0
 # stored items:
 # weapon slots. it is always: spell ID+, (modifier type, level)*:

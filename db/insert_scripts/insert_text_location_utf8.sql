@@ -89,3 +89,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('et
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('island','location','Os','Os','Os');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('towerwalkway','location','Oseana Passage','Der Weg nach Os','De Weg nach Os');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('beach','location','Pirate Beach','Piratenküste','Pirateküste');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriatower','location','Tower of Gandria','Turm von Gandria','Turm vo Gandria');

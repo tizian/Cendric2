@@ -1411,6 +1411,7 @@
     <property name="eq_ironring" value="1"/>
     <property name="eq_rubyring" value="1"/>
     <property name="gold" value="45"/>
+    <property name="strength" value="2"/>
    </properties>
   </object>
   <object id="2265" gid="829" x="4125" y="1600" width="50" height="50">
@@ -1606,7 +1607,7 @@
   <object id="2305" gid="1346" x="4000" y="1350" width="50" height="50"/>
   <object id="2306" gid="1353" x="250" y="500" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup name="trigger" visible="0">
   <object id="1944" x="425" y="1250" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
