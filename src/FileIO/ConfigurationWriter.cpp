@@ -22,7 +22,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeFPSLimitOn(data);
 		configuration << writeFPSMax(data);
 		configuration << writeSmoothingOn(data);
-		configuration << writeStopwatchOn(data);
+		configuration << writeMultithreadingOn(data);
 		configuration << writeDebugRenderingOn(data);
 
 		configuration.close();
@@ -77,10 +77,9 @@ std::string ConfigurationWriter::writeQuestmarkersOn(const ConfigurationData& da
 	return questmarkersOn.append(std::string(QUESTMARKERS_ON) + ":" + (data.isDisplayQuestMarkers ? "1" : "0") + "\n");
 }
 
-std::string ConfigurationWriter::writeStopwatchOn(const ConfigurationData& data) const {
-	std::string stopwatchOn = "# 0 means stopwatch is off, 1 means stopwatch is on\n";
-	stopwatchOn += "# if the stopwatch is on, it will display a stopwatch inside the level.\n";
-	return stopwatchOn.append(std::string(STOPWATCH_ON) + ":" + (data.isDisplayStopwatch ? "1" : "0") + "\n");
+std::string ConfigurationWriter::writeMultithreadingOn(const ConfigurationData& data) const {
+	std::string multithreadingOn = "# 0 means multithreaded loading is off, 1 means multithreaded loading is on\n";
+	return multithreadingOn.append(std::string(MULTITHREADING_ON) + ":" + (data.isMultithreading ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const {

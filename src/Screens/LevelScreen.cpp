@@ -84,12 +84,6 @@ void LevelScreen::loadAsync() {
 
 	// adjust weather
 	loadWeather();
-
-	// if config says so, add the stopwatch
-	if (g_resourceManager->getConfiguration().isDisplayStopwatch) {
-		m_stopwatch = new Stopwatch();
-		addObject(m_stopwatch);
-	}
 }
 
 void LevelScreen::cleanUp() {

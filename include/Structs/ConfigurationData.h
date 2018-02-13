@@ -25,7 +25,7 @@ struct ConfigurationData final {
 	bool isDisplayHints = true;
 	bool isDisplayQuestMarkers = true;
 
-	bool isDisplayStopwatch = false;
+	bool isMultithreading = false;
 	bool isGodmode = false;
 	bool isDebugRendering = false;
 	bool isWindowReload = false;

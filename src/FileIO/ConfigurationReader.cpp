@@ -50,8 +50,8 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(QUESTMARKERS_ON), std::string(QUESTMARKERS_ON)) == 0) {
 				noError = readQuestmarkersOn(line, data);
 			}
-			else if (line.compare(0, strlen(STOPWATCH_ON), std::string(STOPWATCH_ON)) == 0) {
-				noError = readStopwatchOn(line, data);
+			else if (line.compare(0, strlen(MULTITHREADING_ON), std::string(MULTITHREADING_ON)) == 0) {
+				noError = readMultithreadingOn(line, data);
 			}
 			else if (line.compare(0, strlen(DEBUGRENDERING_ON), std::string(DEBUGRENDERING_ON)) == 0) {
 				noError = readDebugRenderingOn(line, data);
@@ -241,8 +241,8 @@ bool ConfigurationReader::readQuestmarkersOn(const std::string& line, Configurat
 	return readBoolean(line, data.isDisplayQuestMarkers);
 }
 
-bool ConfigurationReader::readStopwatchOn(const std::string& line, ConfigurationData& data) const {
-	return readBoolean(line, data.isDisplayStopwatch);
+bool ConfigurationReader::readMultithreadingOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isMultithreading);
 }
 
 bool ConfigurationReader::readDebugRenderingOn(const std::string& line, ConfigurationData& data) const {

@@ -17,7 +17,7 @@ protected:
 	const char* ALTERNATIVE_INPUT_MAPPING = "input.alternative.key";
 	const char* QUICKCAST_ON = "quickcast.on";
 	const char* AUTOTARGET_ON = "autotarget.on";
-	const char* STOPWATCH_ON = "stopwatch.on";
+	const char* MULTITHREADING_ON = "multithreading.on";
 	const char* DEBUGRENDERING_ON = "debugrendering.on";
 	const char* SMOOTHING_ON = "smoothing.on";
 	const char* HINTS_ON = "hints.on";

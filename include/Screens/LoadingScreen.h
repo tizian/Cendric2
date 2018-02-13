@@ -29,6 +29,6 @@ private:
 	WorldScreen* m_worldToLoad = nullptr;
 
 	std::atomic<bool> m_threadDone;
-	std::thread* m_thread;
+	std::thread* m_thread = nullptr;
 	sf::Time m_timeToBlack;
 };

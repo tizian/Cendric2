@@ -343,10 +343,12 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 		quicksave();
 	}
 
+#ifdef DEBUG
 	if (g_inputController->isKeyJustPressed(Key::Debug)) {
 		ConfigurationData& config = g_resourceManager->getConfiguration();
 		config.isDebugRendering = !config.isDebugRendering;
 	}
+#endif // DEBUG
 }
 
 void WorldScreen::addScreenOverlay(ScreenOverlay* overlay, bool force) {

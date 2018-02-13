@@ -16,7 +16,7 @@ void ConfigurationData::resetToDefault() {
 	isSmoothing = true;
 	isDisplayHints = true;
 	isDisplayQuestMarkers = true;
-	isDisplayStopwatch = false;
+	isMultithreading = false;
 	isGodmode = false;
 	isDebugRendering = false;
 	isWindowReload = false;

@@ -31,7 +31,7 @@ private:
 	bool readHintsOn(const std::string& line, ConfigurationData& data) const;
 	bool readQuestmarkersOn(const std::string& line, ConfigurationData& data) const;
 
-	bool readStopwatchOn(const std::string& line, ConfigurationData& data) const;
+	bool readMultithreadingOn(const std::string& line, ConfigurationData& data) const;
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
 	bool readSmoothingOn(const std::string& line, ConfigurationData& data) const;
 	bool readAutotargetOn(const std::string& line, ConfigurationData& data) const;

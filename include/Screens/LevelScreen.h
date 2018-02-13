@@ -101,7 +101,4 @@ private:
 	void onResume();
 
 	void cleanUp();
-
-	// stopwatch handling
-	Stopwatch* m_stopwatch = nullptr;
 };
