@@ -9,7 +9,7 @@ void CendricTests::runTests() {
 }
 
 template<typename T>
-static void CendricTests::runTest() {
+void CendricTests::runTest() {
 	T wlTest;
 	TestResult tr = wlTest.runTest();
 
