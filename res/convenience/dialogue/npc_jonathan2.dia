@@ -70,9 +70,9 @@ npc.id:npc_jonathan2
 	trigger:DL:addConditionProgress("npc_jonathan2", "matter")
 	# translation: 
 	translation.tag:DL_Jonathan_Whatup
-	translation.en:There's been a raid on my house, oh, it was terrible.
-	translation.de:Mein Haus wurde überfallen, oh, es war schrecklich.
-	translation.ch:Mis Huus isch überfalla worda, oh, es isch schrecklich gsi.
+	translation.en:There's been a raid on my house. Oh, it was terrible!
+	translation.de:Mein Haus wurde überfallen. Oh, es war schrecklich!
+	translation.ch:Mis Huus isch überfalla worda. Oh, es isch schrecklich gsi!
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -214,7 +214,7 @@ npc.id:npc_jonathan2
 	trigger:DL:addConditionProgress("npc_jonathan2", "describe")
 	# translation: 
 	translation.tag:DL_Jonathan_Describe
-	translation.en:There were two of them, mages in long, purple robes. They wielded some kind of purple magic, something I've never seen before.
+	translation.en:There were two of them; mages in long, purple robes. They wielded some kind of purple magic, something I've never seen before.
 	translation.de:Sie waren zu zweit, Magier in langen, violetten Roben. Sie haben eine seltsame, violette Magie benutzt, die ich noch nie zuvor gesehen habe.
 	translation.ch:Si sind ds'zweite gsi, Magier in langa, violetta Roba. Si hän a violetti Magie brucht, öppis woni bis jetzt nonia gseh han.
 	[

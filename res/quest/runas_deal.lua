@@ -1,6 +1,9 @@
-main_quest = false
-
 target_step = 1
+
+collectibles = 
+{
+	{"eq_antimagicpendant", 1},
+}
 
 markers = {
     {

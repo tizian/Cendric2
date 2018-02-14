@@ -29,7 +29,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, 5, "DL_Jonathan_Whatup") -- There's been a raid on my house, oh, it was terrible.
+		DL:createNPCNode(3, 5, "DL_Jonathan_Whatup") -- There's been a raid on my house. Oh, it was terrible!
 		DL:addConditionProgress("npc_jonathan2", "matter")
 		DL:addNode()
 
@@ -84,7 +84,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_jonathan2", "describe")) then 
 
-			DL:createNPCNode(11, -2, "DL_Jonathan_Describe") -- There were two of them, mages in long, purple robes. They wielded some kind of purple magic, something I've never seen before.
+			DL:createNPCNode(11, -2, "DL_Jonathan_Describe") -- There were two of them; mages in long, purple robes. They wielded some kind of purple magic, something I've never seen before.
 			DL:addConditionProgress("npc_jonathan2", "describe")
 			DL:addNode()
 

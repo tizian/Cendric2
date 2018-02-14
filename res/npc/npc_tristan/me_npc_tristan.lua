@@ -9,6 +9,7 @@ wares =
 	{"fo_egg", 2},
 	{"fo_ham", 3},
 	{"fo_healingherb", 5},
+    {"fo_physalis", 10},
 	{"we_torch", 1},
 }
 

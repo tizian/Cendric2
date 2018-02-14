@@ -1,0 +1,641 @@
+# dia file for dialogue for npc: npc_runa
+
+npc.id:npc_runa
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_runa", "hi")
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:not DL:isConditionFulfilled("npc_runa", "evil_mage")
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_runa", "hi")
+		# translation: 
+		translation.tag:DL_Choice_Hi
+		translation.en:Hi.
+		translation.de:Hey.
+		translation.ch:Hey.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "hi")
+	# translation: 
+	translation.tag:DL_Runa_Hi
+	translation.en:Oh, hello there! If you want to buy something from our farm, talk to my son Tristan.
+	translation.de:Oh, hallo! Wenn du hier bist, um etwas von unserem Bauernhof zu kaufen, rede mit meinem Sohn, Tristan.
+	translation.ch:Oh, hoi! Wennd do bisch, zum öppis vo üsem Buurehof z'chaufe, gang und red mit mim Sohn, em Tristan.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [3] Choice Node
+	tag:3
+	[
+		# Link node, tag is next tag
+		tag:4
+		condition:not DL:isConditionFulfilled("npc_runa", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Who are you?
+		translation.de:Wer bist du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+		condition:not DL:isConditionFulfilled("npc_runa", "job")
+		# translation: 
+		translation.tag:DL_Choice_Job
+		translation.en:Do you have a job for me?
+		translation.de:Hast du Arbeit für mich?
+		translation.ch:Hesch Arbet für mich?
+	]
+	[
+		# Link node, tag is next tag
+		tag:12
+		condition:not DL:isConditionFulfilled("npc_runa", "sheep_done") and DL:isQuestState("monster_problem", "completed")
+		# translation: 
+		translation.tag:DL_Choice_SheepDone
+		translation.en:I took care of the sheep thief.
+		translation.de:Ich hab mich um den Schafsdieb gekümmert.
+		translation.ch:Ich ha mi um de Schöflidieb kümmeret.
+	]
+	[
+		# Link node, tag is next tag
+		tag:13
+		condition:DL:isConditionFulfilled("npc_runa", "job") and not DL:isConditionFulfilled("npc_runa", "runas_deal")
+		# translation: 
+		translation.tag:DL_Choice_Delivery
+		translation.en:Tell me more about that delivery.
+		translation.de:Erzähl mir mehr von dieser Lieferung.
+		translation.ch:Verzell mer me vo dere Lieferig.
+	]
+	[
+		# Link node, tag is next tag
+		tag:17
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void")
+		# translation: 
+		translation.tag:DL_Choice_RunasDealStart
+		translation.en:Okay, give me the Physalis, I'll take them to Bjarne.
+		translation.de:Okay, gib mir die Physalis, ich werde sie Bjarne bringen.
+		translation.ch:Okay, gib mer die Physalis, ich wird si em Bjarne bringe.
+	]
+	[
+		# Link node, tag is next tag
+		tag:16
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "who_bjarne")
+		# translation: 
+		translation.tag:DL_Choice_WhoBjarne
+		translation.en:Who is that "Bjarne"?
+		translation.de:Wer ist dieser "Bjarne"?
+		translation.ch:Wer isch de "Bjarne"?
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "paladins")
+		# translation: 
+		translation.tag:DL_Choice_Paladins
+		translation.en:What is your problem with the paladins?
+		translation.de:Was habt ihr denn für Probleme mit den Paladinen?
+		translation.ch:Wa hender denn für Problem mit de Paladin?
+	]
+	[
+		# Link node, tag is next tag
+		tag:18
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "who_mage")
+		# translation: 
+		translation.tag:DL_Choice_WhoMage
+		translation.en:Is this Bjarne a mage?
+		translation.de:Ist dieser Bjarne ein Magier?
+		translation.ch:Isch de Bjarne en Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "pendant")
+		# translation: 
+		translation.tag:DL_Choice_Pendant
+		translation.en:What is this "precious pendant" exactly?
+		translation.de:Was ist denn dieser "wertvoller Anhänger" genau?
+		translation.ch:Wa isch denn de "wertvoll Ahänger" genau?
+	]
+	[
+		# Link node, tag is next tag
+		tag:20
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "physalis")
+		# translation: 
+		translation.tag:DL_Choice_Physalis
+		translation.en:What exactly are "Physalis"?
+		translation.de:Was genau sind "Physalis"?
+		translation.ch:Was genau sind die "Physalis"?
+	]
+	[
+		# Link node, tag is next tag
+		tag:22
+		condition:DL:isConditionFulfilled("npc_runa", "pendant") and not DL:isConditionFulfilled("npc_runa", "why_protect")
+		# translation: 
+		translation.tag:DL_Choice_WhyProtect
+		translation.en:Why do you need protection against magic?
+		translation.de:Wieso brauchst du Schutz gegen Magie?
+		translation.ch:Weso bruchsch du Schutz gege Magie?
+	]
+	[
+		# Link node, tag is next tag
+		tag:26
+		condition:DL:isConditionFulfilled("npc_runa", "why_protect") and not DL:isConditionFulfilled("npc_runa", "paranoid")
+		# translation: 
+		translation.tag:DL_Choice_Paranoid
+		translation.en:I think, you're a bit too paranoid...
+		translation.de:Ich glaube, du bist ein bisschen paranoid...
+		translation.ch:Ich glaub, du bisch bitz paranoid...
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
+		condition:DL:isQuestState("runas_deal", "started") and DL:isQuestComplete("runas_deal")
+		# translation: 
+		translation.tag:DL_Choice_GotPendant
+		translation.en:I got your pendant. Here.
+		translation.de:Ich habe deinen Anhänger. Hier.
+		translation.ch:Ich ha din Ahänger. Do.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "who_are_you")
+	# translation: 
+	translation.tag:DL_Runa_WhoAreYou
+	translation.en:I'm Runa and I'm working as a farmer here. From time to time, I also help out in the River Inn.
+	translation.de:Ich bin Runa und ich arbeite als Bäuerin hier. Manchmal helfe ich auch in der Taverne am Fluss etwas aus.
+	translation.ch:Ich bi d'Runa und ich schaff als Büürin do. Mengsmol hilfi au ide Taverne am Fluss chli uus. 
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_WhoAreYou2
+	translation.en:And you? Are you just running around and ask everyone who they are?
+	translation.de:Und du? Rennst du einfach hier rum und fragst jeden, wer er sei?
+	translation.ch:Und du? Rennsch du eifach do chli ume und frögsch jede, wer er seg?
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{2
+	# [6] Choice Node
+	tag:6
+	[
+		# Link node, tag is next tag
+		tag:7
+		# translation: 
+		translation.tag:DL_Choice_AskEveryoneYes
+		translation.en:Yes...
+		translation.de:Ja...
+		translation.ch:Jo...
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		# translation: 
+		translation.tag:DL_Choice_AskEveryoneNo
+		translation.en:No.
+		translation.de:Nein.
+		translation.ch:Nei.
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		# translation: 
+		translation.tag:DL_Choice_IJustWantedToTalk
+		translation.en:I just wanted to have a little chat.
+		translation.de:Ich wollte doch nur ein bisschen reden.
+		translation.ch:Ich ha doch nur chli rede wele.
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_AskEveryoneYes
+	translation.en:Ah... the youth of today... as if there wasn't enough other work to do.
+	translation.de:Ach... die Jugend von heute... als ob es nicht genügend andere Arbeit zu tun gäbe.
+	translation.ch:Ach... d'Jugend vo hüt... als obs nid gnueg anderi Arbet z'tue gäbt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_AskEveryoneNo
+	translation.en:You mean, I'm special? Hah, now I'm flattered.
+	translation.de:Dann bin ich also speziell? Da fühl ich mich ja gleich geschmeichelt.
+	translation.ch:Denn bini also speziell? Do fühli mi jo grad gschmeichlet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_IJustWantedToTalk
+	translation.en:Not everyone has time for a little chitchat. There's still so much work to be done!
+	translation.de:Nicht jeder hat Zeit für ein kleines Schwätzchen. Es gibt immer noch so viel Arbeit zu erledigen!
+	translation.ch:Nid jede het Ziit für es chlises Schwätzli. Es git immer no so viel Arbet z'erledige!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "job")
+	# translation: 
+	translation.tag:DL_Runa_Job
+	translation.en:Hm. We do have a problem with disappearing sheep. If you want to help, talk to my husband, Ivo.
+	translation.de:Hm. Wir haben ein Problem mit Schafen, die verschwinden. Wenn du uns hier helfen willst, sprich mit meinem Mann, Ivo.
+	translation.ch:Hm. Mir hend es Problem mit Schöfli, wo verschwindet. Wennd üs do helfe wetsch, red mitem Ivo, mim Ma.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_Job2
+	translation.en:Other than that, I could need some help with a delivery to Gandria. 
+	translation.de:Ausserdem könnte ich etwas Hilfe mit einer Lieferung nach Gandria gebrauchen.
+	translation.ch:Usserdem chönti chli Hilf mit enere Lieferig noch Gandria bruche.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "sheep_done")
+	# translation: 
+	translation.tag:DL_Runa_SheepDone
+	translation.en:Well done. I hope you already got your reward from Tristan.
+	translation.de:Gut gemacht. Ich hoffe, du hast dir deine Belohnung schon von Tristan geholt.
+	translation.ch:Guet gmacht. Ich hoff, du hesch der dini Belohnit scho vom Tristan gholt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_Delivery
+	translation.en:The last time I was in the market in Gandria, some guy called Bjarne bought all of my Physalis.
+	translation.de:Letztes Mal, als ich auf dem Markt in Gandria war, hat mir ein Typ namens Bjarne all meine Physalis abgekauft.
+	translation.ch:Letztmol, woni ufem Markt i Gandria gsi bi, het mer en Typ namens Bjarne all mini Physalis abkauft.
+	[
+		# Link node, tag is next tag
+		tag:14
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_Delivery2
+	translation.en:He then asked me to bring him even more - in exchange, he would give me a very precious pendant.
+	translation.de:Er wollte noch mehr davon - als Gegenleistung würde er mir einen sehr wertvollen Anhänger überlassen.
+	translation.ch:Er het sogar no me devo wele - als Gegeleistig würer mir denn en ganz wertvolle Ahänger gä.
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "runas_deal")
+	# translation: 
+	translation.tag:DL_Runa_Delivery3
+	translation.en:I would go myself... But at the moment, the situation with the paladins in Gandria is a bit tense.
+	translation.de:Ich würde ja selbst gehen... Aber momentan ist die Situation mit den Paladinen in Gandria etwas angespannt.
+	translation.ch:Ich wür jo selber go... Aber momentan isch d'Situation mit de Paladin in Gandria chli agspannt.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [17] NPC Node
+	tag:17
+	# triggers: 
+	trigger:DL:changeQuestState("runas_deal", "started")
+	trigger:DL:addItem("fo_physalis", 10)
+	# translation: 
+	translation.tag:DL_Runa_RunasDealStart
+	translation.en:Good! Here you go. Don't forget to bring me the pendant!
+	translation.de:Gut! Hier hast du sie. Vergiss nicht, mir den Anhänger zu bringen!
+	translation.ch:Guet! Do hesch si. Vergiss nid, mer de Ahänger z'bringe!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [16] NPC Node
+	tag:16
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "who_bjarne")
+	# translation: 
+	translation.tag:DL_Runa_WhoBjarne
+	translation.en:Hm. I don't really remember how he looked like. But he sure was handsome and likeable.
+	translation.de:Hm. Ich mag mich nicht wirklich daran erinnern, wie er ausgesehen hat. Aber er war ziemlich hübsch und sympathisch.
+	translation.ch:Hm. ich cha mich nid würkli dra erinnere, we er usgse het. Aber er isch zimli hübsch und sympathisch gsi.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "paladins")
+	# translation: 
+	translation.tag:DL_Runa_Paladins
+	translation.en:They should be there to protect us, but they only serve their "god" and not the people of Admantris.
+	translation.de:Sie sollten uns eigentlich beschützen, aber sie dienen nur ihrem "Gott" und nicht den Bürgern von Admantris.
+	translation.ch:Si sötted üs eigentlich beschütze, aber si diened nur ihrem "Gott" und nid de Lüt vo Admantris.
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{1
+	# [31] NPC Node
+	tag:31
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_Paladins2
+	translation.en:I really don't know who thought it would be a good idea to put them in charge.
+	translation.de:Ich weiss wirklich nicht, wer es für eine gute Idee gehalten hat, die unser Land führen zu lassen.
+	translation.ch:Ich weiss würkli nid, wer denkt het, es seg e gueti Idee, wenn die üses Land führed.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [18] NPC Node
+	tag:18
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "who_mage")
+	# translation: 
+	translation.tag:DL_Runa_WhoMage
+	translation.en:No, definitely not. I prefer not to talk to mages.
+	translation.de:Nein, definitiv nicht. Ich ziehe es vor, nicht mit Magiern zu sprechen.
+	translation.ch:Nei, definitiv nid. Ich zie's vor, nid mit Magier z'rede.
+	[
+		# Link node, tag is next tag
+		tag:23
+	]
+}
+{2
+	# [23] Choice Node
+	tag:23
+	[
+		# Link node, tag is next tag
+		tag:24
+		# translation: 
+		translation.tag:DL_Choice_TalkingMage
+		translation.en:But you're talking to one right now...
+		translation.de:Aber du redest gerade mit einem...
+		translation.ch:Aber du redsch grad mit eim...
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_WhyHate
+		translation.en:What is your problem with mages?
+		translation.de:Was hast du gegen Magier?
+		translation.ch:Wa hesch denn gege Magier?
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "evil_mage")
+	trigger:DL:changeQuestState("runas_deal", "failed")
+	# translation: 
+	translation.tag:DL_Runa_TalkingMage
+	translation.en:Whaaat?
+	translation.de:Waaaas?
+	translation.ch:Waaaas?
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_WhyHate
+	translation.en:Why would you even ask! They're elitist monsters, that's why.
+	translation.de:Was für eine Frage! Das sind alle elitäre Monster, mehr gibts dazu nicht zu sagen.
+	translation.ch:Was für e Frog! Das sind alli elitäri Monster, me gits do dezue nid z'sege.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "pendant")
+	# translation: 
+	translation.tag:DL_Runa_Pendant
+	translation.en:It's an anti-magic pendant. It protects from curses and other magic attacks. Exactly what I need!
+	translation.de:Es ist ein antimagischer Anhänger. Er schützt gegen Flüche und andere magische Attacken - genau, was ich brauche!
+	translation.ch:Es isch en antimagische Ahänger. Er schützt geg Flüech und anderi magischi Attackene - genau, wani bruch!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "physalis")
+	# translation: 
+	translation.tag:DL_Runa_Physalis
+	translation.en:It's a nightshade plant which we grow on our farm. It's pretty sweet, but eating too much can be poisonous.
+	translation.de:Ein Nachtschattengewächs, das auf unserem Bauernhof wächst. Es ist ziemlich süss, aber zuviel davon kann giftig sein.
+	translation.ch:Es Nachtschattegwächs, wo uf üsem Buurehof wachst. Es isch zimli süess, aber z'viel devo cha giftig si.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "why_protect")
+	# translation: 
+	translation.tag:DL_Runa_WhyProtect
+	translation.en:Because that's the only way we can stand a chance when they attack... you should better get a pendant, too.
+	translation.de:Weil das unsere einzige Überlebenschance ist, wenn sie uns angreifen... du solltest dir besser auch einen Anhänger zutun.
+	translation.ch:Well das üsi einzig Überlebenschance isch, wenn si üs agriifed... Du sötsch der besser au sonen Ahänger bsorge.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [26] NPC Node
+	tag:26
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_runa", "paranoid")
+	# translation: 
+	translation.tag:DL_Runa_Paranoid
+	translation.en:Paranoid? Me? Ha! Just wait, you'll see...
+	translation.de:Paranoid? Ich? Ha! Einfach mal abwarten, du wirst schon sehen...
+	translation.ch:Paranoid? Ich? Ha! Eifach mol abwarte, wirsch denn scho gse...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:removeItem("eq_antimagicpendant", 1)
+	# translation: 
+	translation.tag:DL_Runa_GotPendant
+	translation.en:Oooh! (Runa seizes the pendant)
+	translation.de:Oooh! (Runa reisst den Anhänger an sich)
+	translation.ch:Oooh! (D'Runa riist de Ahänger a sich)
+	[
+		# Link node, tag is next tag
+		tag:28
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:changeQuestState("runas_deal", "completed")
+	# translation: 
+	translation.tag:DL_Runa_GotPendant2
+	translation.en:Thank you so much! Now, I'm finally safe from this magic.
+	translation.de:Vielen Dank! Jetzt bin ich endlich sicher vor dieser Magie.
+	translation.ch:Tusig Dank! Jetz bini endli sicher vor dere Magie.
+	[
+		# Link node, tag is next tag
+		tag:29
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	trigger:DL:addItem("fo_physalis", 1)
+	trigger:DL:addItem("fo_cheese", 1)
+	trigger:DL:addItem("fo_milk", 1)
+	trigger:DL:addItem("fo_rawmeat", 2)
+	# translation: 
+	translation.tag:DL_Runa_GotPendant3
+	translation.en:Here, take these goods from our farm as your reward.
+	translation.de:Hier, nimm dieser Waren von unserem Hof als deine Belohnung.
+	translation.ch:Do, nimm die War vo üsem Hof als dini Belohnig.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Runa_EvilMage
+	translation.en:Be gone, filthy mage!
+	translation.de:Verschwinde von hier, dreckiger Magier!
+	translation.ch:Verschwind vo do, dreckige Magier!
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

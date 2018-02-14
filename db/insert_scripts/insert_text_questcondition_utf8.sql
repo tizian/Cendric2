@@ -8,4 +8,5 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('sa
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('portstone_activated', 'quest_condition', 'Teleport stone activated','Teleportstein aktiviert','Teleportstei aktiviert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('leap_of_faith', 'quest_condition', 'Leap of faith survived','Glaubenssprung überlebt','Glaubenssprung überlebt');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('tower_climbed', 'quest_condition', 'Tower climbed','Turm erklommen','Turm uekletteret');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('weaken_mark', 'quest_condition', 'Curse weakened','Fluch geschwächt','Fluech gschwächt');
 

@@ -94,6 +94,26 @@ npc.id:npc_steven
 	]
 	[
 		# Link node, tag is next tag
+		tag:29
+		condition:not DL:isQuestState("antimagic_crystal", "void") not DL:isConditionFulfilled("npc_steven", "key_stolen")
+		# translation: 
+		translation.tag:DL_Choice_StartKey
+		translation.en:(Start an attempt to steal Steven's tower key)
+		translation.de:(Starte einen Versuch, Steven's Turmschlüssel zu stehlen)
+		translation.ch:(En Versuech starte, em Steven sin Turmschlüssel z'chlaue)
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "key_buy_unlocked")
+		# translation: 
+		translation.tag:DL_Choice_UnlockKeyBuy
+		translation.en:I'm looking for an anti-magic crystal...
+		translation.de:Ich suche einen antimagischen Kristall...
+		translation.ch:Ich suech en antimagische Kristall...
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		condition:DL:isConditionFulfilled("npc_steven", "rules")
 		# translation: 
@@ -332,6 +352,107 @@ npc.id:npc_steven
 	translation.en:Ah, you're a tough boy aren't you. But I think I'll have to keep your letter for a while - until you've taken care of some problem of mine...
 	translation.de:Ah, du bist ein harter Junge, nicht wahr. Aber ich glaube, ich muss deinen Brief noch ein bisschen behalten - bis du eine Sache für mich erledigt hast.
 	translation.ch:Ah, du bisch ä hertä Chrieger, gäu. Aber i muess di Brief gloub no äs müü phautä - bis du so ä Sach für mi erledigt hesch... 
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [29] NPC Node
+	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_29
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [30] NPC Node
+	tag:30
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_UnlockKeyBuy
+	translation.en:You're lucky. Actually, I do have one here... but it's not cheap. Why do you need one anyway?
+	translation.de:Ja, wie es der Zufall will, hab ich einen hier... er ist aber nicht billig. Für was brauchst du ihn denn?
+	translation.ch:Ja, per Zuefau hani eine do... er isch aber nid biuig. U für was wetschne denn?
+	[
+		# Link node, tag is next tag
+		tag:31
+	]
+}
+{2
+	# [31] Choice Node
+	tag:31
+	[
+		# Link node, tag is next tag
+		tag:32
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:33
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:34
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_32
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [33] NPC Node
+	tag:33
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_33
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [34] NPC Node
+	tag:34
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_34
+	translation.en:
+	translation.de:
+	translation.ch:
 	[
 		# Link node, tag is next tag
 		tag:-2

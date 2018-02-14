@@ -5,7 +5,6 @@ loadDialogue = function(DL)
 	-- morris' coin toss.
 	math.randomseed(os.time())
 	local isWinUnfair = (math.random(0, 100) < 40)
-	local isWinFair = (math.random(0, 1) < 1)
 	local headNode = -1
 	local tailsNode = -1
 
@@ -211,25 +210,15 @@ loadDialogue = function(DL)
 		DL:createNPCNode(21, 26, "DL_Morris_HeadOrTails") -- 
 		DL:addNode()
 
-
 		DL:createChoiceNode(26)
 		DL:addChoice(28, "DL_Choice_Head") -- 
 		DL:addChoice(29, "DL_Choice_Tails") -- 
 		DL:addNode()
-		
-		if (isWinFair) then
-			headNode = 1001
-			tailsNode = 1004
-		else
-			headNode = 1002
-			tailsNode = 1003
-		end
 
-		DL:createNPCNode(28, headNode, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(28, 1001, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 
-
-		DL:createNPCNode(29, tailsNode, "DL_Morris_TossCoin") -- 
+		DL:createNPCNode(29, 1004, "DL_Morris_TossCoin") -- 
 		DL:addNode()
 		
 		--  winning head
@@ -241,18 +230,10 @@ loadDialogue = function(DL)
 		DL:createNPCNode(1005, -2, "DL_Morris_WinDagger2") -- You can't imagine what it took to sneak that in... Well, take good care of it.
 		DL:addNode()
 		
-		--  losing head
-		DL:createNPCNode(1002, -2, "DL_Morris_LoseHead") -- Tails! I'm so sorry, I'll have to keep your gold.
-		DL:addNode()
-		
 		--  winning tails
-		DL:createNPCNode(1004, 1005, "DL_Morris_WinTailsDagger") -- Tails! You win. I guess I have to leave you my beloved dagger then. Take good care of it.
+		DL:createNPCNode(1004, 1005, "DL_Morris_WinTailsDagger") -- Tails! You win. I guess I have to leave you my beloved dagger then.
 		DL:addConditionProgress("npc_morris", "dagger")
 		DL:addItem("we_enchanteddagger", 1)
-		DL:addNode()
-		
-		--  losing tails
-		DL:createNPCNode(1003, -2, "DL_Morris_LoseTails") -- Head! I'm so sorry, I'll have to keep your gold.
 		DL:addNode()
 
 	end

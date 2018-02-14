@@ -1180,12 +1180,12 @@
     <property name="spritesheetpath" value="res/npc/npc_jonathan/spritesheet_npc_jonathan.png"/>
    </properties>
   </object>
-  <object id="356" gid="2376" x="400" y="3000" width="50" height="50">
+  <object id="356" gid="2376" x="1700" y="2675" width="50" height="50">
    <properties>
     <property name="id" value="npc_cynthia"/>
    </properties>
   </object>
-  <object id="357" gid="2377" x="850" y="3000" width="50" height="50">
+  <object id="357" gid="2377" x="1175" y="3025" width="50" height="50">
    <properties>
     <property name="id" value="npc_bjarne"/>
    </properties>

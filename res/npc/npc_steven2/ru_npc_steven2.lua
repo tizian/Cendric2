@@ -6,16 +6,6 @@ loadRoutine = function(R, W)
 	
 		R:setDisposed()
 		return
-		
-	elseif (W:isQuestState("stevens_helmet", "completed")) then 
-	
-		R:setTalkingEnabled(false)
-	
-	else
-	
-		R:setTalkingEnabled(true)
-		
-	end 
 	
 	R:setTilePosition(5,9)
 	R:setReloadEnabled(true)

@@ -23,7 +23,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Jonathan_WalkIntoHouse") -- Hey, what are you doing here? You can't just walk into other people's houses.
+		DL:createNPCNode(1, 2, "DL_Jonathan_WalkIntoHouse") -- Hey, what are you doing here? You can't just walk into other people's houses!
 		DL:addConditionProgress("npc_jonathan", "talked")
 		DL:addNode()
 
@@ -54,7 +54,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestDescriptionUnlocked("a_new_trace",1) and DL:hasItem("do_eleletter", 1) and DL:hasItem("do_elemap", 1)) then 
 
-			DL:createNPCNode(6, 7, "DL_Jonathan_Letter") -- (Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
+			DL:createNPCNode(6, 7, "DL_Jonathan_Letter") -- (Reads the letter carefully) Cyrus! So good to hear from him! So, you're from the academy? How are things going there? And what did Cyrus find out?
 			DL:removeItem("do_elemap", 1)
 			DL:addNode()
 
@@ -68,7 +68,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(9, 10, "DL_Jonathan_Wow") -- Wow... Losing the your whole memory is pretty unusual, even for a mage.
+			DL:createNPCNode(9, 10, "DL_Jonathan_Wow") -- Wow... Losing your memory completely is pretty unusual, even for a mage.
 			DL:addNode()
 
 
@@ -111,7 +111,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_jonathan", "academy") and not DL:isConditionFulfilled("npc_jonathan", "elementalist")) then 
 
-			DL:createNPCNode(13, -2, "DL_Jonathan_Elementalists") -- Mages with an affinity to elemental magic. There are not too much left in Admantris, but I'm one of them... and you are - probably - too.
+			DL:createNPCNode(13, -2, "DL_Jonathan_Elementalists") -- Mages with an affinity to elemental magic. There are not too many left in Admantris, but I'm one of them... and you are - probably - too.
 			DL:addConditionProgress("npc_jonathan", "elementalist")
 			DL:addNode()
 
@@ -119,7 +119,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_jonathan", "elementalist") and not DL:isConditionFulfilled("npc_jonathan", "affinity")) then 
 
-			DL:createNPCNode(14, -2, "DL_Jonathan_Affinity") -- Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
+			DL:createNPCNode(14, -2, "DL_Jonathan_Affinity") -- Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn. Us elementalists are lucky - we are able to understand the whole spectrum of magic.
 			DL:addConditionProgress("npc_jonathan", "affinity")
 			DL:addNode()
 
@@ -127,7 +127,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_jonathan", "elementalist") and not DL:isConditionFulfilled("npc_jonathan", "prove_yourself")) then 
 
-			DL:createNPCNode(15, 16, "DL_Jonathan_NextStep") -- Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone who is a bit more...
+			DL:createNPCNode(15, 16, "DL_Jonathan_NextStep") -- Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone a bit more...
 			DL:addNode()
 
 
@@ -143,7 +143,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(19, -1, "DL_Jonathan_FireballQuest2") -- Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
+			DL:createNPCNode(19, -1, "DL_Jonathan_FireballQuest2") -- Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them out and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
 			DL:addItem("ke_jonathanbasement", 1)
 			DL:changeQuestState("essence_of_fire", "started")
 			DL:addNode()
@@ -155,8 +155,14 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_jonathan", "decipher_map")) then 
 
 		DL:createChoiceNode(17)
-		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and DL:isConditionFulfilled("default", "mark_weak")) then 
 			DL:addChoice(20, "DL_Choice_GotFireEssence") -- I got the essences of fire for you.
+		end
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and not DL:isConditionFulfilled("default", "mark_weak")) then 
+			DL:addChoice(68, "DL_Choice_GotFireEssence") -- 
+		end
+		if (not DL:isConditionFulfilled("npc_jonathan", "got_fireball") and DL:isQuestState("essence_of_fire", "completed") and DL:isConditionFulfilled("default", "mark_weak")) then 
+			DL:addChoice(71, "DL_Choice_IsMyAuraOk") -- My curse was weakened. Is it better now?
 		end
 		if (DL:isQuestState("essence_of_fire", "completed") and DL:isSpellLearned(3)) then 
 			DL:addChoice(22, "DL_Choice_LearntFireball") -- I've read the scroll.
@@ -164,7 +170,7 @@ loadDialogue = function(DL)
 		DL:addChoice(-1, "DL_Choice_CU") -- See you later.
 		DL:addNode()
 
-		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")) then 
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and DL:isConditionFulfilled("default", "mark_weak")) then 
 
 			DL:createNPCNode(20, 21, "DL_Jonathan_EssenceComplete") -- Very good. Maybe you can still become a decent elementalist.
 			DL:changeQuestState("essence_of_fire", "completed")
@@ -174,6 +180,39 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(21, -1, "DL_Jonathan_EssenceComplete2") -- Here, take this scroll and read it. Talk to me when you've learned the spell.
 			DL:addItem("sp_fireball", 1)
+			DL:addConditionProgress("npc_jonathan", "got_fireball")
+			DL:addNode()
+
+		end
+
+		if (DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and not DL:isConditionFulfilled("default", "mark_weak")) then 
+
+			DL:createNPCNode(68, 69, "DL_Jonathan_EssenceComplete") -- 
+			DL:changeQuestState("essence_of_fire", "completed")
+			DL:removeItem("qe_fireessence", 10)
+			DL:addNode()
+
+
+			DL:createNPCNode(69, 70, "DL_Jonathan_RemoveMark") -- But, what's this? A strange magical aura is surrounding you.
+			DL:addNode()
+
+
+			DL:createNPCNode(70, -2, "DL_Jonathan_RemoveMark2") -- Feels like an evil curse... I won't teach you how to summon a fireball until you got a healthy elemental aura again.
+			DL:changeQuestState("weaken_mark", "started")
+			DL:addNode()
+
+		end
+
+		if (not DL:isConditionFulfilled("npc_jonathan", "got_fireball") and DL:isQuestState("essence_of_fire", "completed") and DL:isConditionFulfilled("default", "mark_weak")) then 
+
+			DL:createNPCNode(71, 72, "DL_Jonathan_IsMyAuraOk") -- Yes. Much better.
+			DL:changeQuestState("weaken_mark", "completed")
+			DL:addNode()
+
+
+			DL:createNPCNode(72, -2, "DL_Jonathan_EssenceComplete2") -- 
+			DL:addItem("sp_fireball", 1)
+			DL:addConditionProgress("npc_jonathan", "got_fireball")
 			DL:addNode()
 
 		end
@@ -192,7 +231,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's only one small problem with that map...
+			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's one small problem with that map...
 			DL:addNode()
 
 
@@ -270,7 +309,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(35, -2, "DL_Jonathan_WhatShouldIDo2") -- I guess you already know one of the guilds: The clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+			DL:createNPCNode(35, -2, "DL_Jonathan_WhatShouldIDo2") -- I guess you already know one of the guilds: The clerics, who currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
 			DL:changeQuestState("join_a_guild", "started")
 			DL:addNode()
 
@@ -315,7 +354,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_jonathan", "where_thieves")) then 
 
-			DL:createNPCNode(39, -2, "DL_Jonathan_WhereThieves") -- Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
+			DL:createNPCNode(39, -2, "DL_Jonathan_WhereThieves") -- Mages who practice twilight magic are mostly considered thieves. I'd start searching in the sewers of Gandria.
 			DL:addConditionProgress("npc_jonathan", "where_thieves")
 			DL:addQuestDescription("join_a_guild", 2)
 			DL:addNode()
@@ -418,7 +457,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("element_master", "void")) then 
 
-		DL:createNPCNode(45, 55, "DL_Jonathan_StartElementMaster") -- I knew they would not make it easy for us. Like they really don't want to be found.
+		DL:createNPCNode(45, 55, "DL_Jonathan_StartElementMaster") -- I knew they would not make it easy for us. It's like they really don't want to be found...
 		DL:addNode()
 
 
@@ -470,7 +509,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(60, 61, "DL_Jonathan_YouLearn2") -- I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
+		DL:createNPCNode(60, 61, "DL_Jonathan_YouLearn2") -- I'm pretty sure I'm being watched - Recently, someone followed me home. 
 		DL:addNode()
 
 
@@ -494,7 +533,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(67, -2, "DL_Jonathan_BirdSlain4") -- He went to the marshlands in the South of Gandria lately. Maybe he'll teach you what he knows.
+		DL:createNPCNode(67, -2, "DL_Jonathan_BirdSlain4") -- He went to the marshlands in the South of Gandria recently. Maybe he'll teach you what he knows.
 		DL:addQuestDescription("element_master", 4)
 		DL:addConditionProgress("npc_jonathan", "bird_slain")
 		DL:addNode()

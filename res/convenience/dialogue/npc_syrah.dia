@@ -110,7 +110,7 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:3
-		condition:DL:isQuestState("the_mark", "started") and DL:isQuestState("questionable_method", "void")
+		condition:DL:isQuestState("the_mark", "started") and DL:isQuestState("antimagic_crystal", "void")
 		# translation: 
 		translation.tag:DL_Choice_Mark
 		translation.en:Can you remove this curse? (Show the mark)
@@ -130,12 +130,12 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:7
-		condition:not DL:isQuestState("questionable_method", "void") and not DL:isConditionFulfilled("npc_syrah", "mark_seen")
+		condition:DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")
 		# translation: 
-		translation.tag:DL_Choice_MarkSeen
-		translation.en:Where have you already seen this mark?
-		translation.de:Wo hast du dieses Mal schon mal gesehen? 
-		translation.ch:Wo hesch das Zeiche schomal gse?
+		translation.tag:DL_Choice_BrewQuestDone
+		translation.en:I got your ingredients. (Give ingredients)
+		translation.de:Ich habe deine Zutaten. (Zutaten geben)
+		translation.ch:Ich ha dini Zuetate. (Zuetate gä)
 	]
 	[
 		# Link node, tag is next tag
@@ -143,14 +143,14 @@ npc.id:npc_syrah
 		condition:(DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))
 		# translation: 
 		translation.tag:DL_Choice_MarkQuestDone
-		translation.en:I got what you wanted. (Give ingredients)
-		translation.de:Ich habe, was du brauchst. (Zutaten geben)
-		translation.ch:Ich han was du bruchsch. (Zuetate gä)
+		translation.en:I got what you wanted. (Give crystal)
+		translation.de:Ich habe, was du brauchst. (Kristall geben)
+		translation.ch:Ich han was du bruchsch. (Kristall gä)
 	]
 	[
 		# Link node, tag is next tag
 		tag:31
-		condition:DL:isQuestState("questionable_method", "completed") and DL:isQuestState("favor_for_a_favor", "void")
+		condition:DL:isQuestState("antimagic_crystal", "completed") and DL:isQuestState("favor_for_a_favor", "void")
 		# translation: 
 		translation.tag:DL_Choice_FavourQuestStart
 		translation.en:What kind of favour should that be?
@@ -200,11 +200,22 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:8
+		condition:DL:isQuestState("questionable_method", "completed")
 		# translation: 
 		translation.tag:DL_Choice_CanYouBrew
 		translation.en:Can you brew something for me?
 		translation.de:Kannst du mir etwas brauen?
 		translation.ch:Chaschmer öppis zemebraue?
+	]
+	[
+		# Link node, tag is next tag
+		tag:42
+		condition:DL:isQuestState("questionable_method", "void")
+		# translation: 
+		translation.tag:DL_Choice_CanYouBrew
+		translation.en:
+		translation.de:
+		translation.ch:
 	]
 	[
 		# Link node, tag is next tag
@@ -231,9 +242,9 @@ npc.id:npc_syrah
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Syrah_Mark
-	translation.en:(Syrah eyes the mark carefully) Hm. I've seen this mark before. Definitely a tracking curse. But it's one of the strongest I've ever seen.
-	translation.de:(Syrah betrachtet das Mal sorgfältig) Hm. Ich habe dieses Mal schon mal gesehen. Ganz klar ein Aufspür-Zauber. Aber einer der stärksten, die ich je gesehen habe.
-	translation.ch:(Syrah luegt s'Zeiche vorsichtig ah) Hm. Ich ha das Zeiche schonemol gseh. Ganz klar e Uffspür-Zauber. Aber eine vode stärkschtä woni je gseh ha.
+	translation.en:(Syrah eyes the mark carefully) Hm. Definitely a tracking curse. But it's one of the strongest I've ever seen.
+	translation.de:(Syrah betrachtet das Mal sorgfältig) Hm. Ganz klar ein Aufspür-Zauber. Aber einer der stärksten, die ich je gesehen habe.
+	translation.ch:(Syrah luegt s'Zeiche vorsichtig ah) Hm. Ganz klar e Uffspür-Zauber. Aber eine vode stärkschtä woni je gseh ha.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -245,9 +256,9 @@ npc.id:npc_syrah
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Syrah_Mark2
-	translation.en:That's not going to be easy. But if you help me to gather some ingredients, I think I can try to remove or at least weaken the curse.
-	translation.de:Das wird nicht einfach. Aber wenn du mir hilfst, die Zutaten zu besorgen, kann ich versuchen, den Fluch zu entfernen oder zumindest zu schwächen.
-	translation.ch:Das wird nid eifach. Aber wennd mr hilfsch d'Zuetate z'bsorge chani versueche, dr Fluech z'entferne oder mindestens z'schwäche.
+	translation.en:That's not going to be easy. If I had an anti-magic crystal, I could try to remove or at least weaken the curse.
+	translation.de:Das wird nicht einfach. Wenn ich einen antimagischen Kristall hätte, könnte ich versuchen, den Fluch zu entfernen oder zumindest zu schwächen.
+	translation.ch:Das wird nid eifach. Wenni en antimagische Kristall hett, chani versueche, dr Fluech z'entferne oder mindestens z'schwäche.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -257,12 +268,41 @@ npc.id:npc_syrah
 	# [5] NPC Node
 	tag:5
 	# triggers: 
-	trigger:DL:changeQuestState("questionable_method", "started")
+	trigger:DL:addQuestDescription("the_mark", 3)
 	# translation: 
 	translation.tag:DL_Syrah_Mark3
-	translation.en:(Syrah pulls a green book out of her shelf and browses it) I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
-	translation.de:(Syrah zieht ein grünes Buch aus ihrem Regal und blättert darin) Ich brauche nur ein paar Knochen, ein wenig Blut einer Fledermaus und das Herz einer Feuerratte. Ich denke, das kannst du alles von den garstigen Kreaturen in der Kanalisation von Gandria bekommen.
-	translation.ch:(D'Syrah zieht es grüens Buech us ihrem Regal und blätteret drin) Ich bruch nur es paar Knoche, e glei weeneli Bluet vonere Fläädermuus und es Härz vonere Fyyrratte. I glaub das söttisch alles vo dä Viecher in dr Kanalisation vo Gandria becho.
+	translation.en:But it's not easy to get such a crystal. I know that the clerics use them to restrain the magic of their prisoners.
+	translation.de:Aber es ist nicht einfach, an einen solchen Kristall zu kommen. Ich weiss, dass die Kleriker sie verwenden, um die Magie ihrer Gefangenen im Zaum zu halten.
+	translation.ch:Aber es isch nid eifach, a sonen Kristall z'cho. Ich weiss, dass d'Kleriker so Kristall bruched, zum d'Magie vo ihrne Gfangene im Zaum zhalte.
+	[
+		# Link node, tag is next tag
+		tag:46
+	]
+}
+{1
+	# [46] NPC Node
+	tag:46
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_Mark4
+	translation.en:I'm pretty sure they have one in their tower. Hm... but it is locked.
+	translation.de:Ich bin mir ziemlich sicher, dass sie einen in ihrem Turm haben. Hm... aber der ist verschlossen.
+	translation.ch:Ich bimer zimli sicher, dass si ein i ihrem Turm hend. Hm. Aber de isch vrschlosse.
+	[
+		# Link node, tag is next tag
+		tag:47
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	trigger:DL:changeQuestState("antimagic_crystal", "started")
+	# translation: 
+	translation.tag:DL_Syrah_Mark5
+	translation.en:You could try to steal the tower key from a paladin... or - if that's not your way of solving things - just buy a crystal.
+	translation.de:Du könntest versuchen, den Turmschlüssel von einem Paladin zu stehlen... oder - wenn das nicht deine Art ist, kannst du den Kristall vermutlich auch kaufen.
+	translation.ch:Du chöntsch probiere, de Turmschlüssel vomne Paladin z'chlaue... oder - wenn das nid so dini Art isch, chasch wahrschinli au en Kristall chaufe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -287,13 +327,16 @@ npc.id:npc_syrah
 	# [7] NPC Node
 	tag:7
 	# triggers: 
-	trigger:DL:addQuestDescription("the_mark", 3)
-	trigger:DL:addConditionProgress("npc_syrah", "mark_seen")
+	trigger:DL:changeQuestState("questionable_method", "completed")
+	trigger:DL:addReputationProgress("necromancer", 5)
+	trigger:DL:removeItem("qe_fireratheart", 1)
+	trigger:DL:removeItem("qe_batblood", 2)
+	trigger:DL:removeItem("qe_bone", 3)
 	# translation: 
-	translation.tag:DL_Syrah_MarkSeen
-	translation.en:Hm, let me think. There was this strange guy in the Basilisk Inn, he had the same or a similar mark. But no one could understand what he wanted to say, he only talked rubbish.
-	translation.de:Hm, lass mich nachdenken. Da war dieser komische Typ im Gasthaus zum Basilisken, der hatte ein ähnliches oder das gleiche Zeichen. Es hat ihn aber niemand wirklich verstanden, er hat nur sinnloses Geschwatz von sich gegeben.
-	translation.ch:Hm, loss mi überlegge. Do isch sone komische Typ im Gasthuus zum Basilisk gsi, de het es ähnlichs oder es gliichs Zeiche gha. Es het aber niemer wirklig verstande waser hett säge wölle, er het nur komisches Zügs blabberet.
+	translation.tag:DL_Syrah_BrewQuestDone
+	translation.en:Thank you so much, that's perfect! I'll brew potions for you now if you bring me some herbs.
+	translation.de:Vielen Dank, das ist perfekt! Ich werde dir nun Tränke brauen, wenn du mir Kräuter bringst.
+	translation.ch:Jä danke, das isch perfekt! Ich wirde der jetz Tränkli braue, wennd mer d'Chrütli drzue bringsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -303,11 +346,9 @@ npc.id:npc_syrah
 	# [22] NPC Node
 	tag:22
 	# triggers: 
-	trigger:DL:changeQuestState("questionable_method", "completed")
-	trigger:DL:addReputationProgress("necromancer", 10)
-	trigger:DL:removeItem("qe_fireratheart", 1)
-	trigger:DL:removeItem("qe_batblood", 2)
-	trigger:DL:removeItem("qe_bone", 3)
+	trigger:DL:changeQuestState("antimagic_crystal", "completed")
+	trigger:DL:addReputationProgress("necromancer", 5)
+	trigger:DL:removeItem("qe_antimagiccrystal", 1)
 	# translation: 
 	translation.tag:DL_Syrah_MarkQuestDone
 	translation.en:Ah, perfect. Now let's get started.
@@ -324,9 +365,9 @@ npc.id:npc_syrah
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Syrah_MarkQuestDone2
-	translation.en:(Syrah places the bones in a circle around the fire rat's heart.) Come.
-	translation.de:(Syrah ordnet die Knochen kreisförmig um das Feuerrattenherz an.) Komm.
-	translation.ch:(D'Syrah ordnet d'Knoche kreisförmig ums Fyyrrattehärz ah.) Chumm.
+	translation.en:(Syrah uses the crystal to draw a glowing circle on the floor) Come.
+	translation.de:(Syrah zeichnet mit dem Kristall ein glühender Kreis auf den Boden) Komm.
+	translation.ch:(D'Syrah zeichnet mitem Kristall en glüehende Chreis uf de Bode) Chumm.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -340,9 +381,9 @@ npc.id:npc_syrah
 		tag:25
 		# translation: 
 		translation.tag:DL_Choice_OkayMark
-		translation.en:Let's get this over with.
-		translation.de:Bringen wir's hinter uns.
-		translation.ch:Bringemers hinter üs.
+		translation.en:Okay...
+		translation.de:Okay...
+		translation.ch:Okay...
 	]
 	[
 		# Link node, tag is next tag
@@ -376,9 +417,9 @@ npc.id:npc_syrah
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Syrah_RelieveCurse2
-	translation.en:(She takes the blood and pours it over the mark, while murmuring some words.)
-	translation.de:(Sie nimmt das Blut und lässt es über das Mal rinnen, während sie ein paar Worte murmelt.)
-	translation.ch:(Sie nimmts Bluet und lohts über s'Zeiche rünne während sie öppis murmelet.)
+	translation.en:(She takes the crystal and presses it onto the mark, while murmuring some words.)
+	translation.de:(Sie nimmt den Kristall und drückt ihn auf das Mal, während sie ein paar Worte murmelt.)
+	translation.ch:(Sie nimmt de Kristall und druckt ihn ufs Zeiche, während sie öppis murmelet.)
 	[
 		# Link node, tag is next tag
 		tag:28
@@ -806,6 +847,63 @@ npc.id:npc_syrah
 	translation.en:
 	translation.de:
 	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [42] NPC Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_BrewQuestStart
+	translation.en:Hm. Yes, I could. For you, it's even free... if you do me a small favour.
+	translation.de:Hm. Ja, das könnte ich. Es wird dich nicht mal etwas kosten... wenn du mir einen kleinen Gefallen machst.
+	translation.ch:Hm. Jo, das chönti. Es wär denn sogar gratis für di... wennd mer en chliine Gfalle duesch.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{1
+	# [43] NPC Node
+	tag:43
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_BrewQuestStart
+	translation.en:I still need some ingredients for a potion that I wanted to brew.
+	translation.de:Mir fehlen noch ein paar Zutaten für einen Trank, den ich mir brauen wollte.
+	translation.ch:Mir fehled na paar Zuetate für es Tränkli woni mr ha wele braue.
+	[
+		# Link node, tag is next tag
+		tag:44
+	]
+}
+{1
+	# [44] NPC Node
+	tag:44
+	# triggers: 
+	trigger:DL:changeQuestState("questionable_method", "started")
+	# translation: 
+	translation.tag:DL_Syrah_BrewQuestStart3
+	translation.en:I only need some bones, some blood of a bat and the heart of a fire rat. I think you can gather all of this from the nasty creatures in the sewers.
+	translation.de:Ich brauche nur ein paar Knochen, ein wenig Blut einer Fledermaus und das Herz einer Feuerratte. Ich denke, das kannst du alles von den garstigen Kreaturen in der Kanalisation von Gandria bekommen.
+	translation.ch:Ich bruch nur es paar Knoche, e glei weeneli Bluet vonere Fläädermuus und es Härz vonere Fyyrratte. I glaub das söttisch alles vo dä Viecher in dr Kanalisation vo Gandria becho.
+	[
+		# Link node, tag is next tag
+		tag:45
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_BrewQuestStart4
+	translation.en:If you manage to get me that, I'll brew extraordinary potions from the herbs you bring me!
+	translation.de:Wenn du es schaffst, mir das zu holen, werde ich dir aussergewöhnliche Tränke aus den Kräutern brauen, die dur mir bringst.
+	translation.ch:Wenn du's schaffsch, mir das z'hole, wirdi der ussergwöhnlichi Tränkli us dene Chrüüter, wod mer bringsch, braue.
 	[
 		# Link node, tag is next tag
 		tag:-2

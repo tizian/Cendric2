@@ -286,10 +286,96 @@ Falls der im Turm es Unglück passiert isch, heil dich mit dem Trank, woni der i
 -- Kamasutra
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item', 'Kama Sutra','Kama Sutra', 'Kama Sutra');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kama Sutra godess.','Ein Geschenk von Karma, der Kama Sutra-Göttin.','Es Gschenk vode Karma, de Kama Sutra-Göttin.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kama Sutra godess. The best times of this book are long gone. Most of it is unreadable or washed out. Luckily, you can still decipher some pages.','Ein Geschenk von Karma, der Kama Sutra-Göttin. Das Buch hat seine besten Zeiten bereits hinter sich gelassen. Ein Grossteil des Buches ist unleserlich oder bereits verblasst. Glücklicherweise lassen sich einzelne Seiten entziffern.','Es Gschenk vode Karma, de Kama Sutra-Göttin. Das Buech het au scho besseri Zite gseh, vill isch unläserlich oder bereits verblasst. Glücklicherwiis lönd sich gwüssi Siite trotzdem entziffere.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_kamasutra', 'document', 750, 300, 20, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('do_kamasutra', 0, 'BookKamasutra');
-INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('do_kamasutra', 1, 'TitleBookKamasutra1', 'ContentBookKamasutra1', 'center');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookKamasutra','document','Kamasutra','Kamasutra','Kamasutra');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra1','document','Kamasutra','Kamasutra','Kamasutra');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra1','document','Bla','Bla','Bla');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 1, 'TitleBookKamasutra1', 'ContentBookKamasutra1');
+INSERT INTO item_document_page(item_id, page_nr, title, content, content_alignment) values ('do_kamasutra', 2, '', 'ContentBookKamasutra2', 'center');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 3, 'TitleBookKamasutra3', 'ContentBookKamasutra3');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 4, '', 'ContentBookKamasutra4');
+INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 5, 'TitleBookKamasutra5', 'ContentBookKamasutra5');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('BookKamasutra','document','Kama Sutra','Kama Sutra','Kama Sutra');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra1','document','Tongue-Twister','Zungenbrecher','Zungebrecher');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra1','document','Another way to enhance your personality is the repetition of tongue-twisters. If you repeat enough tongue-twisters your pronunciation gets better. Try to repeat the following tongue-twisters at least twenty times:','Eine weitere Art, seine Persönlichkeit zu veredeln, ist das wiederholte Aufsagen von Zungenbrechern. Dies hat den Effekt, dass die Aussprache des Mannes deutlicher wird. Versuche, folgende Sätze mindestens zwanzig Mal laut aufzusagen:','E witeri Art d''Persönlichkeit z''verfinere, isch s''Ufsägä vo Zungebrecher. Si sorged defür, dass d''Usprach vom Maa klarer wird. Versuech, folgendi Sätz mindestens zwänzg Mal luut ufzsäge:');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra2','document','I am a mother pheasant plucker. 
+I pluck mother pheasants. 
+I am the most pleasant mother pheasant plucker who ever plucked a mother pheasant.
+
+I slit the sheet, the sheet I slit and on the other slitted sheet I sit.','Fischers Fritz fischt frische Fische, frische Fische fischt Fischers Fritz.
+
+Im dichten Fichtendickicht wachsen dicke Fichten dicht an dicht.
+
+Hirsch heiss ich.','Fischers Fritz fischt frische Fische, frische Fische fischt Fischers Fritz.
+
+Im dichte Fichtedickicht wachsed dicki Fichte dicht an dicht.
+
+Hirsch heiss ich.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra3','document','Train a Parrot to Speak ','Einem Papagei die Sprache beibringen','Emne Papagei es Rede bibringe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra3','document','If a man is learning how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
+
+1. Speak to your parrot as often as possible. 
+2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes. 
+3. Repeat certain words in the context of an action. For example, say « Hello » when you first look at your parrot. 
+4. Reward your parrot, if it does what you expected it to do. 
+5. Don''t teach your parrot dirty words.
+6. If you are a true master, you will be able to teach your parrot to declare your love to your beloved.
+','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
+
+1. Sprich so oft es geht mit deinem Papagei.
+2. Der Papagei muss dich, während du mit ihm sprichst, auch beachten. Um dies zu erreichen, nimm den Vogel auf deine Augenhöhe und schau ihn an. 
+3. Wiederhole bestimmte Wörter im Zusammenhang mit bestimmten Aktionen.  Beim ersten Betrachten des Papageis "Hallo" sagen. 
+4. Belohn deinen Papagei, wenn er das gewünschte Verhalten zeigt. 
+5. Bring ihm keine unangebrachten Worte bei!
+6. Wenn du ein wahrer Meister bist, gelingt es dir auch, ihm ein Liebesgeständnis für deine Angebetete beizubringen. 
+','Wenn en Maa d Kunst erlernt, emene Papagei e Sprach bizbringe, verfienered er glichzitig sini Geduld. Es gitt verschiedni Pünkt womer bi dem Unterfange muen beachte: 
+
+1. Red so oft wie möglich mit dim Papagei.
+2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt. 
+3. Wiederhol gwüssi Wörter im Zemmehang mit gwüssne Aktione wo mit ihm machsch. Zum Bispiel chasch bim ufeneh vom Papagei immer "Sali" säge. 
+4. Belohn din Papagei, wenn er s gwünschte Verhalte zeigt. 
+5. Bring em kei bösi Wörter bi! 
+6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.
+');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra4','document','If a man is learning how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
+
+1. Speak to your parrot as often as possible. 
+2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes. 
+3. Repeat certain words in the context of an action. For example, say « Hello » when you first look at your parrot. 
+4. Reward your parrot, if it does what you expected it to do. 
+5. Don''t teach your parrot dirty words.
+6. If you are a true master, you will be able to teach your parrot to declare your love to your beloved.
+','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
+
+1. Sprich so oft es geht mit deinem Papagei.
+2. Der Papagei muss dich, während du mit ihm sprichst, auch beachten. Um dies zu erreichen, nimm den Vogel auf deine Augenhöhe und schau ihn an. 
+3. Wiederhole bestimmte Wörter im Zusammenhang mit bestimmten Aktionen.  Beim ersten Betrachten des Papageis "Hallo" sagen. 
+4. Belohn deinen Papagei, wenn er das gewünschte Verhalten zeigt. 
+5. Bring ihm keine unangebrachten Worte bei!
+6. Wenn du ein wahrer Meister bist, gelingt es dir auch, ihm ein Liebesgeständnis für deine Angebetete beizubringen. 
+','Wenn en Maa d Kunst erlernt, emene Papagei e Sprach bizbringe, verfienered er glichzitig sini Geduld. Es gitt verschiedni Pünkt womer bi dem Unterfange muen beachte: 
+
+1. Red so oft wie möglich mit dim Papagei.
+2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt. 
+3. Wiederhol gwüssi Wörter im Zemmehang mit gwüssne Aktione wo mit ihm machsch. Zum Bispiel chasch bim ufeneh vom Papagei immer "Sali" säge. 
+4. Belohn din Papagei, wenn er s gwünschte Verhalte zeigt. 
+5. Bring em kei bösi Wörter bi! 
+6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.
+');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra5','document','Love positions','Liebesstellungen','Liebesstellige');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra5','document','At the amorous play there are four embraces of love: "The Swinging Liane", "The Tree Climber", "Sesame and Rice" and "Milk and Water". To execute them correctly read the following descriptions:
+
+"The Tree Climber"
+Use one foot to stand on the foot of your lover and the other foot to...
+
+(Unfortunately, the rest of the text is unreadable.)
+','Beim Liebesspiel gibt es vier Umarmungen: "Das Lianenschlingen", "Das Baumklettern", "Sesam und Reis" und "Milch und Wasser". Für die korrekte Durchführung werden diese Umarmungen im Folgenden ausführlich beschrieben. 
+
+"Das Baumklettern"
+Wenn sie mit einem Fuss auf den Fuss ihres Liebhabers steht und mit dem anderen Fuss...
+
+(Leider sind die folgenden Zeilen unleserlich.)','Bim Liebesspiel gits vier Umarmige :"S Lianeschlinge" , "S Baumchlettere", "Sesam und Riis" und "Milch und Wasser". Das die richtig duregführt werded und ke Verletzige entstönd, werded sie da usführlich beschriebe. 
+
+"S''Baumchlettere"
+Wenn sie mit em Fuess uf em Fuess vom Liebhaber isch und mit em andere Fuess...
+
+(Leider sind die Zile so vergilbt, dass witerläsä unmöglich wird.)');

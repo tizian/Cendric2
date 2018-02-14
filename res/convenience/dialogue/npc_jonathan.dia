@@ -57,8 +57,8 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "talked")
 	# translation: 
 	translation.tag:DL_Jonathan_WalkIntoHouse
-	translation.en:Hey, what are you doing here? You can't just walk into other people's houses.
-	translation.de:Hey, was machst du hier? Du kannst nicht einfach in die Häuser anderer Leute reinspazieren.
+	translation.en:Hey, what are you doing here? You can't just walk into other people's houses!
+	translation.de:Hey, was machst du hier? Du kannst nicht einfach in die Häuser anderer Leute reinspazieren!
 	translation.ch:He, was tuasch du do? Du kasch nid aifach ind Hüüser vu fremda Lüüt inalaufa!
 	[
 		# Link node, tag is next tag
@@ -145,7 +145,7 @@ npc.id:npc_jonathan
 	trigger:DL:removeItem("do_elemap", 1)
 	# translation: 
 	translation.tag:DL_Jonathan_Letter
-	translation.en:(Reads the letter carefully) Cyrus! So good to hear from him. So, you're from the academy? How are things going there? And what did Cyrus find out?
+	translation.en:(Reads the letter carefully) Cyrus! So good to hear from him! So, you're from the academy? How are things going there? And what did Cyrus find out?
 	translation.de:(Liest den Brief sorgfältig) Cyrus! Es ist gut, von ihm zu hören. Du kommst also von der Akademie? Ist dort alles in Ordnung? Und was hat Cyrus herausgefunden?
 	translation.ch:(Liist dr Briaf sorgfältig) Cyrus! As isch guat, vu ihm z'ghöra. Du kusch also vu dr Akademie? Was het dr Cyrus denn usagfunda?
 	[
@@ -186,7 +186,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_Wow
-	translation.en:Wow... Losing the your whole memory is pretty unusual, even for a mage.
+	translation.en:Wow... Losing your memory completely is pretty unusual, even for a mage.
 	translation.de:Wow... Das ganze Gedächtnis zu verlieren ist ziemlich ungewöhnlich, auch für einen Magier.
 	translation.ch:Wow... Z ganza Gedächtnis z'verlüra isch ziemli ungwöhnlich, au füra Magier.
 	[
@@ -294,7 +294,7 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "elementalist")
 	# translation: 
 	translation.tag:DL_Jonathan_Elementalists
-	translation.en:Mages with an affinity to elemental magic. There are not too much left in Admantris, but I'm one of them... and you are - probably - too.
+	translation.en:Mages with an affinity to elemental magic. There are not too many left in Admantris, but I'm one of them... and you are - probably - too.
 	translation.de:Magier mit einer Affinität zur Elementarmagie. Es gibt nicht mehr viele davon in Admantris aber ich bin einer von ihnen... und du - wahrscheinlich - auch.
 	translation.ch:Magier mitara Affinität zur Elementarmagie. As git nüm so viel drvo in Admantris, aber i bin eina... und du - wohrschiinli - au.
 	[
@@ -309,7 +309,7 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "affinity")
 	# translation: 
 	translation.tag:DL_Jonathan_Affinity
-	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells he can learn. We elementalists are lucky - we are able to understand the whole spectrum of magic.
+	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn. Us elementalists are lucky - we are able to understand the whole spectrum of magic.
 	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesamte Spektrum der Magie verstehen.
 	translation.ch:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp gebora. Dä bestimmt, welli Zauber mr lerna kann. Miar Elementarmagier hend Glück - miar könnd z ganza Spektrum vur Magie verstoh.
 	[
@@ -323,7 +323,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_NextStep
-	translation.en:Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone who is a bit more...
+	translation.en:Hm. I knew that Cyrus was going to send me one of his students to support my research here. But to be honest, I hoped for someone a bit more...
 	translation.de:Hm. Ich wusste, dass mir Cyrus einen seiner Studenten zur Unterstützung meiner Forschungen schicken würde. Aber um ehrlich zu sein, habe ich mit jemandem gerechnet, der etwas mehr...
 	translation.ch:Hm. I han schu gwüsst, dass dr Cyrus miar eina vu sina Studenta schicka wird. Aber um ehrlich zsii, i han mit öperem grächnet wo kli meh... 
 	[
@@ -368,7 +368,7 @@ npc.id:npc_jonathan
 	trigger:DL:changeQuestState("essence_of_fire", "started")
 	# translation: 
 	translation.tag:DL_Jonathan_FireballQuest2
-	translation.en:Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
+	translation.en:Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them out and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
 	translation.de:Ein paar Feuerratten aus der Kanalisation sind in mein Labor in meinem Keller eingedrungen. Finde heraus, wie du sie anlocken kannst und bringe mir die Essenzen des Feuers aus ihren Lungen. Wenn du zurück bist, werde ich sehen, ob ich dir beibringen kann, wie man einen Feuerball beschwört.
 	translation.ch:As paar Füürratta us dr Kanalisation sind in miis Labor i mim Käller iidrunga. Find usa, wia si alocka kasch und bring miar d'Füüressenza us ihrna Lungana. Denn wirdi mol luaga, ob i diar biibringa kann, wia ma a Füürball beschwört.
 	[
@@ -382,12 +382,32 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:20
-		condition:DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire")
+		condition:DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and DL:isConditionFulfilled("default", "mark_weak")
 		# translation: 
 		translation.tag:DL_Choice_GotFireEssence
 		translation.en:I got the essences of fire for you.
 		translation.de:Ich habe die Essenzen des Feuers für dich.
 		translation.ch:Ich han d'Füüressenze für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:68
+		condition:DL:isQuestState("essence_of_fire", "started") and DL:isQuestComplete("essence_of_fire") and not DL:isConditionFulfilled("default", "mark_weak")
+		# translation: 
+		translation.tag:DL_Choice_GotFireEssence
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:71
+		condition:not DL:isConditionFulfilled("npc_jonathan", "got_fireball") and DL:isQuestState("essence_of_fire", "completed") and DL:isConditionFulfilled("default", "mark_weak")
+		# translation: 
+		translation.tag:DL_Choice_IsMyAuraOk
+		translation.en:My curse was weakened. Is it better now?
+		translation.de:Mein Fluch wurde geschwächt. Ist jetzt besser?
+		translation.ch:Min Fluech isch gschwächt worde. Isch ez besser?
 	]
 	[
 		# Link node, tag is next tag
@@ -430,6 +450,7 @@ npc.id:npc_jonathan
 	tag:21
 	# triggers: 
 	trigger:DL:addItem("sp_fireball", 1)
+	trigger:DL:addConditionProgress("npc_jonathan", "got_fireball")
 	# translation: 
 	translation.tag:DL_Jonathan_EssenceComplete2
 	translation.en:Here, take this scroll and read it. Talk to me when you've learned the spell.
@@ -438,6 +459,82 @@ npc.id:npc_jonathan
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [68] NPC Node
+	tag:68
+	# triggers: 
+	trigger:DL:changeQuestState("essence_of_fire", "completed")
+	trigger:DL:removeItem("qe_fireessence", 10)
+	# translation: 
+	translation.tag:DL_Jonathan_EssenceComplete
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:69
+	]
+}
+{1
+	# [69] NPC Node
+	tag:69
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_RemoveMark
+	translation.en:But, what's this? A strange magical aura is surrounding you.
+	translation.de:Aber, was ist das? Du hast wirklich eine seltsame magische Aura.
+	translation.ch:Aber, wa isch da? Du hesch würkli e komischi magischi Aura.
+	[
+		# Link node, tag is next tag
+		tag:70
+	]
+}
+{1
+	# [70] NPC Node
+	tag:70
+	# triggers: 
+	trigger:DL:changeQuestState("weaken_mark", "started")
+	# translation: 
+	translation.tag:DL_Jonathan_RemoveMark2
+	translation.en:Feels like an evil curse... I won't teach you how to summon a fireball until you got a healthy elemental aura again.
+	translation.de:Fühlt sich an wie ein böser Fluch...  Ich werde dir nicht beibringen, einen Feuerball zu beschwören, bis du wieder eine gesunde elementare Aura hast.
+	translation.ch:Fühlt sich a we en bösa Fluach... Ich wird der nid bibringa, weme en Füürball beschwört, bevor du nid wiedar e gsundi, elementari Aura hesch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [71] NPC Node
+	tag:71
+	# triggers: 
+	trigger:DL:changeQuestState("weaken_mark", "completed")
+	# translation: 
+	translation.tag:DL_Jonathan_IsMyAuraOk
+	translation.en:Yes. Much better.
+	translation.de:Ja. Viel besser.
+	translation.ch:Jo. Ez isch guat.
+	[
+		# Link node, tag is next tag
+		tag:72
+	]
+}
+{1
+	# [72] NPC Node
+	tag:72
+	# triggers: 
+	trigger:DL:addItem("sp_fireball", 1)
+	trigger:DL:addConditionProgress("npc_jonathan", "got_fireball")
+	# translation: 
+	translation.tag:DL_Jonathan_EssenceComplete2
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1
@@ -488,7 +585,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball4
-	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's only one small problem with that map...
+	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's one small problem with that map...
 	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
 	translation.ch:I bi mr ziemli sicher dass dia Karta, wo dr Cyrus miar gschickt het, dr Schlüssel isch zum de Ort z'finda. As git do aber a klises Problem mit dera Karta...
 	[
@@ -674,7 +771,7 @@ npc.id:npc_jonathan
 	trigger:DL:changeQuestState("join_a_guild", "started")
 	# translation: 
 	translation.tag:DL_Jonathan_WhatShouldIDo2
-	translation.en:I guess you already know one of the guilds: The clerics, which currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
+	translation.en:I guess you already know one of the guilds: The clerics, who currently rule this city. But there are mages who practice necromancy or twilight magic in this city, you just have to find them.
 	translation.de:Ich nehme an, du kennst bereits eine der Gilden: Die Kleriker. Es gibt aber auch Magier in dieser Stadt, die Nekromantie oder Dämmerungsmagie praktizieren, du musst sie nur finden.
 	translation.ch:I denka, du kennsch schu eini vo dena Gildana: D'Kleriker. As git aber au Magier in dera Stadt, wo Nekromantie oder Dämmerigsmagie praktiziarend, du muasch si nur finda.
 	[
@@ -774,7 +871,7 @@ npc.id:npc_jonathan
 	trigger:DL:addQuestDescription("join_a_guild", 2)
 	# translation: 
 	translation.tag:DL_Jonathan_WhereThieves
-	translation.en:Mages who practice twilight magic are mostly considered as thieves. I'd start searching in the sewers of Gandria.
+	translation.en:Mages who practice twilight magic are mostly considered thieves. I'd start searching in the sewers of Gandria.
 	translation.de:Magier, die sich mit Dämmerungsmagie beschäftigen, sind meistens einfach Diebe. Ich würde in der Kanalisation von Gandria mit der Suche beginnen.
 	translation.ch:Magier, wo sich mit Dämmerigsmagie beschäftigend, sind meistens eifach Dieba. I wür in dr Kanalisation vu Gandria afanga suacha.
 	[
@@ -1024,9 +1121,9 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_StartElementMaster
-	translation.en:I knew they would not make it easy for us. Like they really don't want to be found.
-	translation.de:Ich wusste, sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden.
-	translation.ch:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend.
+	translation.en:I knew they would not make it easy for us. It's like they really don't want to be found...
+	translation.de:Ich wusste, sie würden es uns nicht einfach machen. Als wollten sie nicht gefunden werden...
+	translation.ch:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend...
 	[
 		# Link node, tag is next tag
 		tag:55
@@ -1169,7 +1266,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_YouLearn2
-	translation.en:I'm pretty sure I'm being watched - Someone followed me lately on my way home. 
+	translation.en:I'm pretty sure I'm being watched - Recently, someone followed me home. 
 	translation.de:Ich bin mir ziemlich sicher, dass ich beobachtet werde - Jemand folgte mir kürzlich auf dem Weg nach Hause.
 	translation.ch:I bin mr huara sicher, dass ma mi beobachtet - As isch mr letschtens ufem Heiweg öper noh gloffa.
 	[
@@ -1242,7 +1339,7 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "bird_slain")
 	# translation: 
 	translation.tag:DL_Jonathan_BirdSlain4
-	translation.en:He went to the marshlands in the South of Gandria lately. Maybe he'll teach you what he knows.
+	translation.en:He went to the marshlands in the South of Gandria recently. Maybe he'll teach you what he knows.
 	translation.de:Er ging kürzlich in die Marschen im Süden von Gandria. Vielleicht bringt er dir ja sein Wissen bei.
 	translation.ch:Er isch letschtens ins Sumpfland im Süda vu Gandria ganga. Villicht bringtr diar jo bi was er weiss.
 	[
