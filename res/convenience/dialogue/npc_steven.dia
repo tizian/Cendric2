@@ -94,6 +94,28 @@ npc.id:npc_steven
 	]
 	[
 		# Link node, tag is next tag
+		tag:30
+		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")
+		# translation: 
+		translation.tag:DL_Choice_UnlockKeyBuy
+		translation.en:I'm looking for an anti-magic crystal...
+		translation.de:Ich suche einen antimagischen Kristall...
+		translation.ch:Ich suech en antimagische Kristall...
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+		condition:not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_BuyCrystal
+		translation.en:Sell me that crystal.
+		translation.de:Verkauf mir diesen Kristall.
+		translation.ch:Verchauf mer de Kristall.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
 		tag:29
 		condition:not DL:isQuestState("antimagic_crystal", "void") not DL:isConditionFulfilled("npc_steven", "key_stolen")
 		# translation: 
@@ -101,16 +123,6 @@ npc.id:npc_steven
 		translation.en:(Start an attempt to steal Steven's tower key)
 		translation.de:(Starte einen Versuch, Steven's Turmschlüssel zu stehlen)
 		translation.ch:(En Versuech starte, em Steven sin Turmschlüssel z'chlaue)
-	]
-	[
-		# Link node, tag is next tag
-		tag:30
-		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "key_buy_unlocked")
-		# translation: 
-		translation.tag:DL_Choice_UnlockKeyBuy
-		translation.en:I'm looking for an anti-magic crystal...
-		translation.de:Ich suche einen antimagischen Kristall...
-		translation.ch:Ich suech en antimagische Kristall...
 	]
 	[
 		# Link node, tag is next tag
@@ -358,20 +370,6 @@ npc.id:npc_steven
 	]
 }
 {1
-	# [29] NPC Node
-	tag:29
-	# triggers: 
-	# translation: 
-	translation.tag:DL_NPC_29
-	translation.en:
-	translation.de:
-	translation.ch:
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
 	# [30] NPC Node
 	tag:30
 	# triggers: 
@@ -392,36 +390,37 @@ npc.id:npc_steven
 		# Link node, tag is next tag
 		tag:32
 		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_CrystalForCurse
+		translation.en:I want to break a curse with it.
+		translation.de:Ich will damit einen Fluch brechen.
+		translation.ch:Ich wett demit en Fluech breche.
 	]
 	[
 		# Link node, tag is next tag
 		tag:33
 		# translation: 
-		translation.tag:DL_Choice_-2
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_CrystalProtection
+		translation.en:I need protection against necromancy.
+		translation.de:Ich muss mich gegen Nekromantie schützen.
+		translation.ch:Ich mu mi gege Nekromantie schütze.
 	]
 	[
 		# Link node, tag is next tag
 		tag:34
 		# translation: 
-		translation.tag:DL_Choice_-2
-		translation.en:
-		translation.de:
-		translation.ch:
+		translation.tag:DL_Choice_CrystalNoneOf
+		translation.en:That's none of your business.
+		translation.de:Das geht dich nichts an.
+		translation.ch:Das gaht di nüt ah.
 	]
 }
 {1
 	# [32] NPC Node
 	tag:32
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
 	# translation: 
-	translation.tag:DL_NPC_32
+	translation.tag:DL_Steven_CrystalBuyOk
 	translation.en:
 	translation.de:
 	translation.ch:
@@ -434,11 +433,12 @@ npc.id:npc_steven
 	# [33] NPC Node
 	tag:33
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
 	# translation: 
-	translation.tag:DL_NPC_33
-	translation.en:
-	translation.de:
-	translation.ch:
+	translation.tag:DL_Steven_CrystalBuyOk
+	translation.en:That's a good reason, indeed. If you want, I can sell one to you for 100 gold.
+	translation.de:Das ist wirklich ein guter Grund. Wenn du willst, kann ich dir einen für 100 Gold verkaufen.
+	translation.ch:Das isch würkli en guete Grund. Wennd wetsch, chani dir eine für 100 Gold verchaufe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -448,8 +448,122 @@ npc.id:npc_steven
 	# [34] NPC Node
 	tag:34
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "crystal_buy_lock")
 	# translation: 
-	translation.tag:DL_NPC_34
+	translation.tag:DL_Steven_CrystalBuyNOk
+	translation.en:Hmpf! I don't think I can sell you one then. Go ask someone else.
+	translation.de:Hmpf! Ich glaube nicht, dass ich dir einen verkaufen kann. Geh, und frag jemand anderen.
+	translation.ch:Hmpf! Ich glaub nid, dass ich dir eine verchaufe cha. Gang, und frög öpper andersch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [35] NPC Node
+	tag:35
+	# triggers: 
+	trigger:DL:removeGold(100)
+	trigger:DL:addItem("qe_antimagiccrystal", 1)
+	trigger:DL:addConditionProgress("npc_steven", "crystal_bought")
+	# translation: 
+	translation.tag:DL_Steven_BuyCrystal
+	translation.en:Hehehe. You made a really good deal today!
+	translation.de:Hehehe. Da hast du wirklich ein Schnäppchen gemacht!
+	translation.ch:Hehehe. Das isch ja würkli es Schnäppli gsi, gäu!
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{2
+	# [29] Choice Node
+	tag:29
+	[
+		# Link node, tag is next tag
+		tag:36
+		# translation: 
+		translation.tag:DL_Choice_StealBird
+		translation.en:Hey, look! A bird!
+		translation.de:Schau mal! Ein Vogel!
+		translation.ch:Lueg mal! En Vogel!
+	]
+	[
+		# Link node, tag is next tag
+		tag:38
+		# translation: 
+		translation.tag:DL_Choice_StealTellMe
+		translation.en:Tell me something about yourself.
+		translation.de:Erzähl mal was von dir.
+		translation.ch:Verzell mol chli öppis vo dir.
+	]
+	[
+		# Link node, tag is next tag
+		tag:39
+		# translation: 
+		translation.tag:DL_Choice_StealEternal
+		translation.en:So, what exactly is that "Eternal Light"?
+		translation.de:Was ist jetzt dieses "Ewige Licht" genau?
+		translation.ch:Was isch ez das "Ewig Liecht" genau?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [36] NPC Node
+	tag:36
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_StealBird
+	translation.en:Ehh... What? We're in the barracks here!
+	translation.de:Ehh... Was? Wir sind in der Kaserne hier!
+	translation.ch:Ehh... Was? Mer sind ide Kaserne do!
+	[
+		# Link node, tag is next tag
+		tag:37
+	]
+}
+{3
+	# [37] Cendric Node
+	tag:37
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:(Your attempt to steal the tower key failed)
+	translation.de:(Dein Versuch, den Turmschlüssel zu stehlen, schlug fehl)
+	translation.ch:(Din Versuech, de Turmschlüssel z'chlaue, het gfailt)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [38] NPC Node
+	tag:38
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_38
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [39] NPC Node
+	tag:39
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_39
 	translation.en:
 	translation.de:
 	translation.ch:

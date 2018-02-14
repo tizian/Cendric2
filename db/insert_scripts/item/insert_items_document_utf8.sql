@@ -314,53 +314,37 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Ti
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra3','document','If a man is learning how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
 
 1. Speak to your parrot as often as possible. 
-2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes. 
-3. Repeat certain words in the context of an action. For example, say « Hello » when you first look at your parrot. 
-4. Reward your parrot, if it does what you expected it to do. 
-5. Don''t teach your parrot dirty words.
-6. If you are a true master, you will be able to teach your parrot to declare your love to your beloved.
-','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
+
+2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes.','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
 
 1. Sprich so oft es geht mit deinem Papagei.
-2. Der Papagei muss dich, während du mit ihm sprichst, auch beachten. Um dies zu erreichen, nimm den Vogel auf deine Augenhöhe und schau ihn an. 
-3. Wiederhole bestimmte Wörter im Zusammenhang mit bestimmten Aktionen.  Beim ersten Betrachten des Papageis "Hallo" sagen. 
-4. Belohn deinen Papagei, wenn er das gewünschte Verhalten zeigt. 
-5. Bring ihm keine unangebrachten Worte bei!
-6. Wenn du ein wahrer Meister bist, gelingt es dir auch, ihm ein Liebesgeständnis für deine Angebetete beizubringen. 
-','Wenn en Maa d Kunst erlernt, emene Papagei e Sprach bizbringe, verfienered er glichzitig sini Geduld. Es gitt verschiedni Pünkt womer bi dem Unterfange muen beachte: 
+
+2. Der Papagei muss dich, während du mit ihm sprichst, auch beachten. Um dies zu erreichen, nimm den Vogel auf deine Augenhöhe und schau ihn an.','Wenn en Maa d Kunst erlernt, emene Papagei e Sprach bizbringe, verfienered er glichzitig sini Geduld. Es gitt verschiedni Pünkt womer bi dem Unterfange muen beachte: 
 
 1. Red so oft wie möglich mit dim Papagei.
-2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt. 
-3. Wiederhol gwüssi Wörter im Zemmehang mit gwüssne Aktione wo mit ihm machsch. Zum Bispiel chasch bim ufeneh vom Papagei immer "Sali" säge. 
-4. Belohn din Papagei, wenn er s gwünschte Verhalte zeigt. 
-5. Bring em kei bösi Wörter bi! 
-6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.
-');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra4','document','If a man is learning how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
 
-1. Speak to your parrot as often as possible. 
-2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes. 
-3. Repeat certain words in the context of an action. For example, say « Hello » when you first look at your parrot. 
+2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra4','document','3. Repeat certain words in the context of an action. For example, say "Hello" to greet your parrot.
+
 4. Reward your parrot, if it does what you expected it to do. 
+
 5. Don''t teach your parrot dirty words.
+
 6. If you are a true master, you will be able to teach your parrot to declare your love to your beloved.
-','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
+','3. Wiederhole bestimmte Wörter im Zusammenhang mit bestimmten Aktionen. Zum Beispiel: Zur Begrüssung "Hallo" sagen.
 
-1. Sprich so oft es geht mit deinem Papagei.
-2. Der Papagei muss dich, während du mit ihm sprichst, auch beachten. Um dies zu erreichen, nimm den Vogel auf deine Augenhöhe und schau ihn an. 
-3. Wiederhole bestimmte Wörter im Zusammenhang mit bestimmten Aktionen.  Beim ersten Betrachten des Papageis "Hallo" sagen. 
 4. Belohn deinen Papagei, wenn er das gewünschte Verhalten zeigt. 
-5. Bring ihm keine unangebrachten Worte bei!
-6. Wenn du ein wahrer Meister bist, gelingt es dir auch, ihm ein Liebesgeständnis für deine Angebetete beizubringen. 
-','Wenn en Maa d Kunst erlernt, emene Papagei e Sprach bizbringe, verfienered er glichzitig sini Geduld. Es gitt verschiedni Pünkt womer bi dem Unterfange muen beachte: 
 
-1. Red so oft wie möglich mit dim Papagei.
-2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt. 
-3. Wiederhol gwüssi Wörter im Zemmehang mit gwüssne Aktione wo mit ihm machsch. Zum Bispiel chasch bim ufeneh vom Papagei immer "Sali" säge. 
-4. Belohn din Papagei, wenn er s gwünschte Verhalte zeigt. 
-5. Bring em kei bösi Wörter bi! 
-6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.
-');
+5. Bring ihm keine unangebrachten Worte bei!
+
+6. Wenn du ein wahrer Meister bist, gelingt es dir auch, ihm ein Liebesgeständnis für deine Angebetete beizubringen. 
+','3. Wiederhol gwüssi Wörter im Zemmehang mit gwüssne Aktione wo mit ihm machsch. Zum Bispil chaschem zur Begrüessig immer "Sali" säge. 
+
+4. Belohn din Papagei, wenn er s gwünschte Verhalte zeigt.
+ 
+5. Bring em kei unanständigi Wörter bi! 
+
+6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra5','document','Love positions','Liebesstellungen','Liebesstellige');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra5','document','At the amorous play there are four embraces of love: "The Swinging Liane", "The Tree Climber", "Sesame and Rice" and "Milk and Water". To execute them correctly read the following descriptions:
 
