@@ -37,7 +37,7 @@ Pre-alpha builds are available for Windows x64, macOS and Ubuntu. However, feel 
 
 [Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.0_mac.zip) (macOS)
 
-[Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.0_ubuntu64.tar.gz) (Ubuntu x64)
+[Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.1_ubuntu64.tar.gz) (Ubuntu x64)
 
 
 A list of all builds is available [here](https://github.com/tizian/Cendric2/releases).
