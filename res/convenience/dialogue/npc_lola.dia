@@ -91,7 +91,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_SexyBoy
 	translation.en:Hey, handsome. Why don't you come in and we and we'll have a little chat?
 	translation.de:Hallo, hübscher Junge. Wieso kommst du nicht rein und wir reden ein bisschen?
-	translation.ch:Hoi, hübsche Bueb. Weso chunsch nid ie und mer reded es bitz?
+	translation.ch:Hoi, hübsche Bueb. Wieso chunsch nöd inne und mer redet es bitz?
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -148,7 +148,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_NoTalk
 	translation.en:You are in the wrong room then. Come back if you change your mind.
 	translation.de:Dann bist du im falschen Zimmer. Komm wieder, wenn du es dir anders überlegt hast.
-	translation.ch:Denn bisch im falsche Zimmer. Chum wieder, wens der andersch überleit hesch.
+	translation.ch:Denn bisch im faltsche Zimmer. Chum wieder, wänns der andersch überleit häsch.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -163,7 +163,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Angry
 	translation.en:Oh, it is. But love is not always about in-out-in-out, you know.
 	translation.de:Oh, das ist es auch. Aber bei der Liebe geht es nicht immer nur ums rein-raus-rein-raus, weisst du.
-	translation.ch:Oh, das isches au. Aber bide Liebi gahts nid immer ums ine-use-ine-use, weisch.
+	translation.ch:Oh, das ischs au. Aber bide Liebi gahts nöd immer ums ine-use-ine-use, wäisch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -178,7 +178,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_OkTalk
 	translation.en:Let's talk about you. Why are you here?
 	translation.de:Reden wir über dich. Wieso bist du hier?
-	translation.ch:Redemer über dich. Weso bisch du do?
+	translation.ch:Redemer über dich. Wieso bisch du da?
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -223,7 +223,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Curious
 	translation.en:Most of you are. I hope you'll enjoy your stay here. (Smiles)
 	translation.de:Das sind die meisten von euch hier. Ich hoffe, du geniesst deinen Aufenthalt hier. (Lächelt)
-	translation.ch:Das sind di meiste vo eu do. Ich hoff, du gnüssisch din Ufenthalt do. (Lächlet)
+	translation.ch:Das sind di meiste vo eu da. Ich hoffe, du gnüssisch din Ufenthalt bi öis. (Lächlet)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -251,7 +251,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_LookingForLove
 	translation.en:Maybe you'll find it here. Depends on what kind of love you're looking for. (Smiles)
 	translation.de:Vielleicht findest du sie hier ja. Kommt auf die Art der Liebe an, die du suchst. (Lächelt)
-	translation.ch:Vilicht findsch si jo do. Chunt uf d'Art vode Liebi ah, wod suechsch. (Lächlet)
+	translation.ch:Vilicht findsch si ja da. Chunt uf d'Art vode Liebi ah, wod suechsch. (Lächlet)
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -266,7 +266,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_SecondQuestion
 	translation.en:Now, another question. Who are you?
 	translation.de:Nun, eine andere Frage. Wer bist du?
-	translation.ch:Jetz, e anderi Frog. Wer bisch du?
+	translation.ch:Jetz, e anderi Fraag. Wer bisch du?
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -325,7 +325,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Adventurer
 	translation.en:Hn. I love these kind of men.
 	translation.de:Hn. Ich liebe diese Art von Männern.
-	translation.ch:Hn. Ich lieb die Art vo Männer.
+	translation.ch:Hm. Ich lieb die Art vo Manne.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -339,7 +339,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_NoOne
 	translation.en:Hm. I feel the same from time to time. But finding yourself is just part of life.
 	translation.de:Hm. Ich fühle mich ähnlich von Zeit zu Zeit. Aber sich selbst zu finden, gehört auch zum Leben.
-	translation.ch:Hm. ich fühl mich ähnlich vo Ziit zu Ziit. Aber sich selber z'finde, ghört au zum Lebe.
+	translation.ch:Hm. ich fühl mich ähnlich vo Ziit zu Ziit. Aber sich selber z'finde, ghört au zum Läbe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -354,7 +354,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_FavGirl
 	translation.en:Okay, last question for you: What makes a girl attractive to you?
 	translation.de:Okay, letzte Frage an dich: Was macht ein Mädchen für dich attraktiv?
-	translation.ch:Okay, letzti Frog a dich: Was macht e Frau für dich attraktiv?
+	translation.ch:Okay, letzti Fraag a dich: Was macht e Frau für dich attraktiv?
 	[
 		# Link node, tag is next tag
 		tag:18
@@ -426,7 +426,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_GirlAttractive
 	translation.en:Mhm. Important, but not everything.
 	translation.de:Mhm. Wichtig, aber ist auch nichit alles.
-	translation.ch:Mhm. Wichtig, aber isch au nid alles.
+	translation.ch:Mhm. Wichtig, aber isch au nöd alles.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -440,7 +440,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_GirlCook
 	translation.en:The way to a man's heart is through his stomach.
 	translation.de:Liebe geht durch den Magen.
-	translation.ch:Liebi goht dur de Mage.
+	translation.ch:Liebi gaht dur de Mage.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -454,7 +454,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_GirlSmart
 	translation.en:Very important for a long-lasting relationship.
 	translation.de:Das ist sehr wichtig für eine längere Beziehung.
-	translation.ch:Da isch sehr wichtig für e längeri Beziehig.
+	translation.ch:Das isch sehr wichtig für e längeri Beziehig.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -468,7 +468,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_GirlDontCare
 	translation.en:(Lola giggles) Yes, yes. We don't have guys here, the demand is too low.
 	translation.de:(Lola kichert) Ja, ja. Wir haben keine Jungs hier, es gibt zu wenig Nachfrage.
-	translation.ch:(D'Lola giggelet) Jo, jo. Mir hend ke Jungs do, es git z'wenig Nofrog.
+	translation.ch:(D'Lola giggelet) Jaja. Mir hend kei Type da, d'Nachfraag isch z'chlii.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -496,7 +496,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Gay
 	translation.en:Oh... really? Well, we can end this here then. I don't want to force you to anything.
 	translation.de:Oh... wirklich? Wir können das natürlich sofort beenden. Ich will dich nicht zu irgendwas zwingen.
-	translation.ch:Oh... würkli? Mir chönd das natürli sofort beende. Ich wett dich nid zu irgendwas zwinge.
+	translation.ch:Oh... würkli? Mir chönd das natürli sofort beende. Ich wett dich nöd zu öppisem zwinge.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -541,7 +541,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_QuestionsForYou
 	translation.en:Sure. What do you want to know?
 	translation.de:Sicher. Was willst du denn wissen?
-	translation.ch:Sicher. Was wetsch denn wüsse?
+	translation.ch:Sicher. Was wetsch dänn wüsse?
 	[
 		# Link node, tag is next tag
 		tag:32
@@ -610,7 +610,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Room
 	translation.en:It's the rose-room. Some guests keep coming back here for a romantic time.
 	translation.de:Es ist das Rosen-Zimmer. Einige Gäste kommen immer hierher für eine romantische Zeit.
-	translation.ch:Es isch es Rose-Zimmer. Einigi Gäscht chömed immer do ane für e romantischi Ziit.
+	translation.ch:Es isch es Rose-Zimmer. Einigi Gäscht chömmed immer da ane für e romantischi Ziit.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -626,7 +626,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Job
 	translation.en:Most of the time, yes. But this is not something I'll do my entire life.
 	translation.de:Die meiste Zeit schon. Aber das ist auch nicht etwas, mit dem ich mein ganzes Leben verbringen will.
-	translation.ch:Di meist Ziit scho. Aber es isch au nid öppis, mit dem ich mis ganz Lebe verbringe wett.
+	translation.ch:Di meischt Ziit scho. Aber es isch au nöd öppis, mit dem ich mis ganz Lebe verbringe wett.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -642,7 +642,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_Attractive
 	translation.en:Yes, of course! I love your hair.
 	translation.de:Ja, natürlich! Ich mag dein Haar.
-	translation.ch:Jo, natürli! Ich mag dini Hoor.
+	translation.ch:Ja, natürlich! Ich mag dis Haar.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -658,7 +658,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_TurnOn
 	translation.en:Many things. I really love when the guy enjoys it and I can see it.
 	translation.de:Oh, verschiedenes. Ich mag es wirklich, wenn der Mann Spass hat und es auch zeigt.
-	translation.ch:Oh, einiges. Ich mags würkli, wenn de Ma Spass het und's au zeigt.
+	translation.ch:Oh, einiges. Ich mags würkli, wenn de Maa Fröid het und's au zeigt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -672,7 +672,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_WantSex
 	translation.en:I won't make you wait any longer. (Lola pulls you closer...)
 	translation.de:Ich werde dich nicht länger warten lassen. (Lola zieht dich näher ran...)
-	translation.ch:Ich wird dich nüm länger warte la. (D'Lola zieht dich nöcher ane...)
+	translation.ch:Ich wird dich nüme länger warte laa. (D'Lola zieht dich nöcher ane...)
 	[
 		# Link node, tag is next tag
 		tag:28
@@ -718,7 +718,7 @@ npc.id:npc_lola
 	translation.tag:DL_Lola_AfterSex2
 	translation.en:Here, take this rose with you, as a souvenir. (Winks)
 	translation.de:Hier, nimm diese Rose mit dir, als Erinnerung. (Zwinkert)
-	translation.ch:Do, nimm die Rose mit, als Erinnerig. (Zwinkeret)
+	translation.ch:Da, nimm die Rose mit, als Erinnerig. (Zwinkeret)
 	[
 		# Link node, tag is next tag
 		tag:-2

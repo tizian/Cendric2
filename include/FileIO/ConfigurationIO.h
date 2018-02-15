@@ -22,4 +22,5 @@ protected:
 	const char* SMOOTHING_ON = "smoothing.on";
 	const char* HINTS_ON = "hints.on";
 	const char* QUESTMARKERS_ON = "questmarkers.on";
+	const char* LOG_LEVEL = "log.level";
 };

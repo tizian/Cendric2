@@ -148,9 +148,12 @@ Brigitte
 Martin
 Emi
 
-<<< Proof Reading >>>
-Tina
+<<< Proof Reading (English) >>>
+Tina Gullsvag
 Daniel Josephy Hernández
+
+<<< Proof Reading (German) >>>
+Iris Schmidt
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,
@@ -355,7 +358,11 @@ Mike Koenig
 Little Robot Sound Factory
 pla1554alaska
 
-<<< Korrekturleser >>>
+<<< Korrekturleser (Englisch) >>>
+Tina Gullsvag
+Daniel Josephy Hernández
+
+<<< Korrekturleser (Deutsch) >>>
 Iris Schmidt
 
 <<< Concept Art >>>
@@ -593,9 +600,17 @@ Alf Nussbaum - Berner Dialekt (Inina, Paladin, Steven)
 Sarah Schaller - Walliser Dialekt (Yasha)
 Désirée Aeberhard - Berner Dialekt (Stadtwache)
 David Minder - Berner Dialekt (Königswache)
-Vangelis Al-Sghir - Zürcher Dialekt (Mona)
+Vangelis Al-Sghir - Zürcher Dialekt (Mona, Lola)
 Patrick Haab - Zürcher Dialekt (Karma)
-Isa Roesch - Schaffhuser Dialekt (De Rest)
+Chris Rene Schlauri [ManaBar] - Basler Dialekt (Robert)
+Isa - Schaffhuser Dialekt (De Rest)
+
+<<< Korrekturleser (Englisch) >>>
+Tina Gullsvag
+Daniel Josephy Hernández
+
+<<< Korrekturleser (Düütsch) >>>
+Iris Schmidt
 
 <<< Alpha Tester >>>
 Tizian Zeltner, Patrick Haab, Lukas Dürrenberger,

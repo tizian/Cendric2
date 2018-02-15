@@ -65,6 +65,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(DISPLAYMODE), std::string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
 			}
+			else if (line.compare(0, strlen(LOG_LEVEL), std::string(LOG_LEVEL)) == 0) {
+				noError = readLogLevel(line, data);
+			}
 			else {
 				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file on line: " + line);
 				noError = false;
@@ -147,6 +150,21 @@ bool ConfigurationReader::readLanguage(const std::string& line, ConfigurationDat
 		return false;
 	}
 	data.language = language;
+	return true;
+}
+
+bool ConfigurationReader::readLogLevel(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == std::string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after log level tag or no value after colon.");
+		return false;
+	}
+	LogLevel logLevel = static_cast<LogLevel>(atoi(line.substr(colon + 1).c_str()));
+	if (logLevel < LogLevel::None || logLevel > LogLevel::Verbose) {
+		g_logger->logError("ConfigurationReader", "logLevel not recognized.");
+		return false;
+	}
+	data.logLevel = logLevel;
 	return true;
 }
 

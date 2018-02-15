@@ -24,7 +24,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Hello
 	translation.en:There's nothing to see here, just walk on.
 	translation.de:Hier gibt's nichts zu sehen, geh einfach weiter.
-	translation.ch:Do gits nüt z'gse, lauf eifach wiiter.
+	translation.ch:Do gits nüt z'gseh, lauf eifach witer.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -143,7 +143,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_WhatDoing
 	translation.en:Hmm, nothing. But I strongly advise you not to go down into the crypt. It's scary there. 
 	translation.de:Hmm, nichts. Aber ich würde dir davon abraten, in die Krypta hinunter zu gehen. Es spukt dort.
-	translation.ch:Hmm, nüt. Aber ich wür der devo abrote, id Krypta z'go. Es isch gruslig dete.
+	translation.ch:HHmmm, nüt. Aber ich würd dr dervo abroote, in d Krypta z'goh. Es isch gruselig dert.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -158,7 +158,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_WhoAreYou
 	translation.en:I'm Bob and I possess magical powers! Impressive, ain't it?
 	translation.de:Ich bin Bob und ich habe magische Kräfte! Beeindruckend, nicht?
-	translation.ch:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh?
+	translation.ch:Ich bin dr Bob und ich han magischi Kräft! Beihdruckend, odr?
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -194,7 +194,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_NotVeryImpressed
 	translation.en:Not many are able to wield magic here. You'd better show some respect.
 	translation.de:Nicht viele hier können Magie benutzen. Du solltest besser etwas Respekt zeigen.
-	translation.ch:Nid viel do chönd Magie bruche. Du sötsch besser chli Respekt zeige.
+	translation.ch:Nit viel do chönne Magie benutze. Du sötsch besser e chli Reschpäkt zeige.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -209,7 +209,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_LivingHere
 	translation.en:No, I'm not from here. I'm just passing through.
 	translation.de:Nein, ich bin nicht von hier. Nur auf der Durchreise.
-	translation.ch:Nei, ich bi nid vo do. Nur uf de Durchreis.
+	translation.ch:Nei, ich bi nit vo do, nur uf dr Durchreis.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -224,7 +224,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Crypt
 	translation.en:Hm. Yes. Listen, I was just trying out my powers... and then a little mistake happened. 
 	translation.de:Hm. Ja. Hör zu, ich wollte nur meine Kräfte ausprobieren und dann ist ein kleiner Unfall passiert.
-	translation.ch:Hm. Jo. Los, ich ha nur wele mini Chräft usprobiere und denn isch en chliine Unfall passiert.
+	translation.ch:Hm. Jä. Los, ich han nur welle mini Kräft usprobiere, und denne ich en chliine Unfall passiert.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -238,7 +238,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Crypt2
 	translation.en:A skeleton in the crypt suddenly started to move! I was so shocked that I ran out of the crypt and then I noticed that my teleport stone was missing. 
 	translation.de:Ein Skelett in der Krypta hat sich plötzlich bewegt! Ich war so geschockt, dass ich hinausgerannt bin. Doch dann habe ich bemerkt, dass ich meinen Teleportstein in der Krypta verloren habe.
-	translation.ch:E Skelett ide Krypta het sich plötzlich bewegt! Ich bi so gschockt gsi dasi us de Krypta grennt bi und denn hani gmerkt dasi min Teleportstei det verlore han.
+	translation.ch:Es Skelett i dr Krypta het sich plötzlich bewegt! Ich bi so gschockt gsi, dass i us de Krypta gsegglet bin und denn han ich gmerkt, das ich mi Teleportstei dert verlore ha.
 	[
 		# Link node, tag is next tag
 		tag:10
@@ -252,7 +252,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Crypt3
 	translation.en:But I really need this stone! I can't get away without it.
 	translation.de:Aber ich brauche diesen Stein wirklich! Ohne ihn komme ich nicht weg von hier.
-	translation.ch:Aber ich bruch de Stei würkli! Ohni ihn chumi nid weg vo do.
+	translation.ch:Abr ich bruuch dr Stei würklich! Ohni ihn chum ich nid wäg vo do.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -267,7 +267,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_TeleportQuest
 	translation.en:You? You look like a mere commoner. I don't think you can help me.
 	translation.de:Du? Du siehst aus wie ein Gewöhnlicher. Ich glaube nicht, dass du mir helfen kannst.
-	translation.ch:Du? Du gsesch us wenen Gwöhnliche. Ich glaub nid dasmer helfe chasch.
+	translation.ch:Du? Du gsehsch us wie e Gwöhnliche. Ich glaub nit, dass du mer chasch hälfe.
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -281,7 +281,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_TeleportQuest2
 	translation.en:But if you manage retrieve my stone... Well, I have an inactive teleport stone here.
 	translation.de:Aber wenn es dir gelingt, meinen Stein zurückzuholen... Ich habe einen inaktiven Teleporstein hier.
-	translation.ch:Aber wens schaffsch, min Stei zrugg z'hole... Ich han en inaktive Stei do.
+	translation.ch:Abr wenns schaffsch, min Stei zrugg z'hole... Ich ha en inaktive Stei do.
 	[
 		# Link node, tag is next tag
 		tag:13
@@ -295,7 +295,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_TeleportQuest3
 	translation.en:You could have it. It's worth a lot to mages, so you could sell it.
 	translation.de:Du könntest ihn haben. Er ist ziemlich wertvoll für Magier. Du könntest ihn verkaufen.
-	translation.ch:De chöntsch ha. Er isch zimli wertvoll für Magier. Du chöntschen ja verchaufe.
+	translation.ch:Dä chönntsch ha. Er isch zimlich wärtvoll für Magier. Du chönntsch en jo verkaufe.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -310,7 +310,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Afraid
 	translation.en:I'm not afraid. Merely cautious.
 	translation.de:Ich habe keine Angst, bin nur vorsichtig.
-	translation.ch:Ich ha kei Schiss, bi nur vorsichtig.
+	translation.ch:Ich ha kei Schiss, ich bi nur vorsichtig.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -325,7 +325,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_StartRobertQuest
 	translation.en:Maybe you're lucky. I'll wait here.
 	translation.de:Vielleicht hast du ja Glück. Ich warte hier.
-	translation.ch:Vilicht hesch ja Glück. Ich warte do.
+	translation.ch:Vilicht hesch jo Glück. Ich wart do.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -341,7 +341,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest
 	translation.en:Wow. How did you... Well, that doesn't matter now. Thanks.
 	translation.de:Wow. Wie hast du... Nun, das ist jetzt auch egal. Danke.
-	translation.ch:Wow. We hesch du... Eh, das isch ez au egal. Danke.
+	translation.ch:Wow. Wie hesch du... Ähm, das isch jetz au egal. Danke.
 	[
 		# Link node, tag is next tag
 		tag:17
@@ -356,7 +356,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest2
 	translation.en:As promised, here's the inactive stone.
 	translation.de:Wie versprochen, hier der inaktive Stein.
-	translation.ch:We versproche, do hesch de inaktiv Stei.
+	translation.ch:Wie versproche, do hesch dr inaktivi Stei.
 	[
 		# Link node, tag is next tag
 		tag:18
@@ -370,7 +370,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest3
 	translation.en:If you were a mage, you'd be able to infuse it with magic from a cairn wraith.
 	translation.de:Wenn du ein Magier wärst, könntest du ihn mit der Magie eines Cairn Geistes aufladen.
-	translation.ch:Wennd en Magier wärsch, chöntschen mit de Magie vomne Steimännli Geischt uflade.
+	translation.ch:Wenn de en Magier wärsch, chöntsch en mit de Magie vomene Steimännli Geischt uflaade.
 	[
 		# Link node, tag is next tag
 		tag:19
@@ -385,7 +385,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest4
 	translation.en:I think I just saw one going towards the windy plateau behind the crypt. 
 	translation.de:Ich glaube, ich habe gerade gesehen, wie einer auf die windige Ebene hinter der Krypta gestiegen ist.
-	translation.ch:Ich glaub, ich ha grad gse, we eine uf di windig Ebeni ide Krypta gstiege isch.
+	translation.ch:Ich glaub, ich han grad gseh, wie eine uf die windigi Ebeni hinder de Krypta gstiige isch.
 	[
 		# Link node, tag is next tag
 		tag:20
@@ -400,7 +400,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_FinishRobertQuest5
 	translation.en:Good luck with it. I'm off then. (Robert takes the stone and disappears)
 	translation.de:Viel Glück damit. Ich bin dann mal weg. (Robert nimmt den Stein und verschwindet)
-	translation.ch:Viel Glück demit. Ich bi denn mal weg. (De Robert nimmt de Stei und verschwindet)
+	translation.ch:Viel Glück demit. Ich bin denn mol wäg. (De Robert nimmt de Stei und verschwindet)
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -415,7 +415,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Cairn
 	translation.en:Hm... Maybe on the plateau behind the crypt.
 	translation.de:Hm... Vielleicht auf der Ebene hinter der Krypta.
-	translation.ch:Hm... Vilicht uf de Ebeni hinter de Krypta.
+	translation.ch:Hmm... Vilicht uf dr Ebeni hinter dr Krypta.
 	[
 		# Link node, tag is next tag
 		tag:22
@@ -429,7 +429,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Cairn2
 	translation.en:But you'd need to go through the crypt for that... (shivers)
 	translation.de:Aber du müsstest durch die Krypta gehen dafür... (schaudert)
-	translation.ch:Aber du möstisch dur d'Krypta go für das... (schauderet)
+	translation.ch:Abr du miestisch durch d'Krypta go defür... (schauderet)
 	[
 		# Link node, tag is next tag
 		tag:-2

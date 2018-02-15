@@ -33,4 +33,5 @@ private:
 	std::string writeMultithreadingOn(const ConfigurationData& data) const;
 	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
 	std::string writeSmoothingOn(const ConfigurationData& data) const;
+	std::string writeLogLevel(const ConfigurationData& data) const;
 };

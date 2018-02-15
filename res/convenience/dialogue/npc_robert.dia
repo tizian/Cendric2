@@ -24,7 +24,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_Congrats
 	translation.en:Oh, so you're the new one here! I hope we can be friends then.
 	translation.de:Oh, du bist also der Neue hier! Ich hoffe, wir können dann Freunde sein.
-	translation.ch:Oh, du bisch also de Neu da! Ich hoff, mir chönd Kollege si.
+	translation.ch:Oh, du bisch also de Neui do! Ich hoff, mir chönne Kollege si.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -72,7 +72,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_WhoAreYou
 	translation.en:I'm Robert, you can call me Bob. 
 	translation.de:Ich bin Robert, du kannst mich auch Bob nennen.
-	translation.ch:Ich bide Robert, du chaschmer au Bob sege.
+	translation.ch:Ich bi dr Robert, du chasch mr au Bob saage.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -86,7 +86,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_WhoAreYou2
 	translation.en:I'm new here, but already working like crazy to become a good Necromancer. Luiz says I have talent.
 	translation.de:Ich bin neu hier, aber strenge mich schon sehr an, ein guter Nekromant zu werden. Luiz sagt, ich hätte Talent.
-	translation.ch:Ich bi neu da aber ich streng mi also scho sehr ah zum en guete Nekromant z'werde. De Luiz seit zumindest, ich heb Talent.
+	translation.ch:Ich bin neu do, abr ich sträng mich also scho sehr ah um e guete Nekromant z'wärde. De Luiz seit zmindescht, ich han Talänt.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -122,7 +122,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_YouHaveTalent
 	translation.en:Thank you. I guess you could learn a lot too, maybe with a bit more time.
 	translation.de:Danke. Ich denke du könntest auch vieles lernen, vielleicht mit ein bisschen mehr Zeit.
-	translation.ch:Danke. Ich denk du chöntsch au viel lerne, vilicht mit chli me Ziit.
+	translation.ch:Danke. Ich dänk du chöntsch au viel lerne, vilicht mit echli me Zyyt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -136,7 +136,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_NoTalent
 	translation.en:Better than no one. Looking at you...
 	translation.de:Besser als niemand und ich sehe dich an...
-	translation.ch:Besser als niemert weni mer dich so alueg...
+	translation.ch:Besser als keine, wen mer dich so ahlueg...
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -151,7 +151,7 @@ npc.id:npc_robert
 	translation.tag:DL_Robert_HeyBob
 	translation.en:(Surprised) You, here? So you're a mage after all...
 	translation.de:(Überrascht) Du, hier? Du bist also doch ein Magier...
-	translation.ch:(Überrascht) Du, do inne? Du bisch also doch en Magier...
+	translation.ch:(Überrascht) Du, do inne? du bisch also doch e Magier...
 	[
 		# Link node, tag is next tag
 		tag:9

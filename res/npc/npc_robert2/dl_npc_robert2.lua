@@ -51,7 +51,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_robert2", "cemetery")) then 
 
-		DL:createNPCNode(3, -2, "DL_Robert_WhatDoing") -- Hmm, nothing. But I strongly advise you not to go down into the crypt. It's spooky there. 
+		DL:createNPCNode(3, -2, "DL_Robert_WhatDoing") -- Hmm, nothing. But I strongly advise you not to go down into the crypt. It's scary there. 
 		DL:addConditionProgress("npc_robert2", "cemetery")
 		DL:addNode()
 
@@ -106,7 +106,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, 13, "DL_Robert_TeleportQuest2") -- But if you manage to get my stone back... Well, I have an inactive teleport stone here.
+		DL:createNPCNode(12, 13, "DL_Robert_TeleportQuest2") -- But if you manage retrieve my stone... Well, I have an inactive teleport stone here.
 		DL:addNode()
 
 
@@ -117,7 +117,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_robert2", "teleport_quest") and not DL:isConditionFulfilled("npc_robert2", "afraid") and not DL:isQuestState("teleport_robert", "completed")) then 
 
-		DL:createNPCNode(15, -2, "DL_Robert_Afraid") -- I'm not afraid. Only cautious.
+		DL:createNPCNode(15, -2, "DL_Robert_Afraid") -- I'm not afraid. Merely cautious.
 		DL:addConditionProgress("npc_robert2", "afraid")
 		DL:addNode()
 

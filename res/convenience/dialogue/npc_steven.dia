@@ -530,9 +530,59 @@ npc.id:npc_steven
 		tag:37
 	]
 }
-{3
-	# [37] Cendric Node
+{2
+	# [37] Choice Node
 	tag:37
+	[
+		# Link node, tag is next tag
+		tag:40
+		# translation: 
+		translation.tag:DL_Choice_TryStealBird2
+		translation.en:But it just flew through that door!
+		translation.de:Aber er flog gerade durch diese Tür!
+		translation.ch:Aber er isch grad dur die Türe gfloge!
+	]
+	[
+		# Link node, tag is next tag
+		tag:41
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:(Try to steal Steven's tower key)
+		translation.de:(Versuch, Steven's Turmschlüssel zu stehlen)
+		translation.ch:(Probier, em Steven sin Schlüssel z'chlaue)
+	]
+}
+{1
+	# [40] NPC Node
+	tag:40
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_TryStealBird2
+	translation.en:Dude... are you kidding me?
+	translation.de:Alter... verarschst du mich etwa?
+	translation.ch:Alte... verarschisch du mich grad?
+	[
+		# Link node, tag is next tag
+		tag:42
+	]
+}
+{3
+	# [42] Cendric Node
+	tag:42
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [41] Cendric Node
+	tag:41
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Cendric_FailSteal
@@ -549,7 +599,196 @@ npc.id:npc_steven
 	tag:38
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_38
+	translation.tag:DL_Steven_StealTellMe
+	translation.en:Why would I... ah, nevermind. You must be an admirer of mine.
+	translation.de:Wieso sollte ich... ah, ja klar. Du musst wohl ein Bewunderer von mir sein.
+	translation.ch:Weso sötti... ah, isch klar. Du bisch dämfou e Fan vu mer.
+	[
+		# Link node, tag is next tag
+		tag:43
+	]
+}
+{2
+	# [43] Choice Node
+	tag:43
+	[
+		# Link node, tag is next tag
+		tag:45
+		# translation: 
+		translation.tag:DL_Choice_OfCourseYouAre
+		translation.en:Yes, of course!
+		translation.de:Ja, natürlich!
+		translation.ch:Jo, natürli!
+	]
+	[
+		# Link node, tag is next tag
+		tag:44
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [45] NPC Node
+	tag:45
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_StealTellMe2
+	translation.en:Hehe. Now, listen. I'm currently one of the mightiest paladins in Gandria. I'm sure, Lloyd will chose me as his successor!
+	translation.de:Hehe. Na, dann hör mal zu. Ich bin momentan einer der mächtigesten Paladine hier in Gandria. Ich bin mir sicher, dass Lloyd mich zu seinem Nachfolger bestimmen wird.
+	translation.ch:Hehe. Jo, denn los mau zue. I bi momentan eine vudr mächtigste Paladin i ganz Gandria. I gloube sogar, dass de Lloyd mi aus Nochfolger vonem bestimme wird.
+	[
+		# Link node, tag is next tag
+		tag:46
+	]
+}
+{2
+	# [46] Choice Node
+	tag:46
+	[
+		# Link node, tag is next tag
+		tag:47
+		# translation: 
+		translation.tag:DL_Choice_IThinkYouAre
+		translation.en:Yes, I fully understand.
+		translation.de:Ja, das glaub ich dir sofort.
+		translation.ch:Jo, das glaubi sofort.
+	]
+	[
+		# Link node, tag is next tag
+		tag:49
+		# translation: 
+		translation.tag:DL_Choice_IThinkYouNot
+		translation.en:You wish.
+		translation.de:Das glaubst du ja selbst nicht.
+		translation.ch:Das glaubsch jo selber nid.
+	]
+	[
+		# Link node, tag is next tag
+		tag:48
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [47] NPC Node
+	tag:47
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_IThinkYouAre
+	translation.en:Yes... The whole city will be under my command! (Laughs)
+	translation.de:Ja... Die ganze Stadt wird unter meinem Befehl stehen! (Lacht)
+	translation.ch:Jo... Di ganz Stadt wird unger mim Befeu sto! (Lacht)
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{2
+	# [50] Choice Node
+	tag:50
+	[
+		# Link node, tag is next tag
+		tag:51
+		# translation: 
+		translation.tag:DL_Choice_WholeCityWill
+		translation.en:Oh yes, it will!
+		translation.de:Oh ja, das wird sie!
+		translation.ch:Oh jo, das wird si!
+	]
+	[
+		# Link node, tag is next tag
+		tag:52
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_WholeCityWill
+	translation.en:Wait... you've never been that nice before...
+	translation.de:Warte... so nett warst du bisher nicht...
+	translation.ch:Wart... so nett bisch ez ämu nid gsi...
+	[
+		# Link node, tag is next tag
+		tag:53
+	]
+}
+{3
+	# [53] Cendric Node
+	tag:53
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [52] Cendric Node
+	tag:52
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "key_stolen")
+	trigger:DL:addItem("ke_tower", 1)
+	# translation: 
+	translation.tag:DL_Cendric_SucceedSteal
+	translation.en:(Your attempt to steal the tower key suceeded!)
+	translation.de:(Dein Versuch, den Turmschlüssel zu stehlen, hat funktioniert!)
+	translation.ch:(Din Versuech, de Turmschlüssel z'chlaue, het klappt!)
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_IThinkYouNot
+	translation.en:Hah! You'll see.
+	translation.de:Hah! Du wirst schon sehen.
+	translation.ch:Hah! Du wirsch scho gse.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{3
+	# [48] Cendric Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [44] Cendric Node
+	tag:44
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
 	translation.en:
 	translation.de:
 	translation.ch:
@@ -563,7 +802,173 @@ npc.id:npc_steven
 	tag:39
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_39
+	translation.tag:DL_Steven_StealEternal
+	translation.en:It's the purest form of energy - and our source of magic.
+	translation.de:Es ist die pureste Form der Energie - und unsere Quelle der Magie.
+	translation.ch:Es isch di purschti Form vor Energie - u üseri Queue vor Magie.
+	[
+		# Link node, tag is next tag
+		tag:54
+	]
+}
+{2
+	# [54] Choice Node
+	tag:54
+	[
+		# Link node, tag is next tag
+		tag:56
+		# translation: 
+		translation.tag:DL_Choice_GoOn
+		translation.en:(Go on...)
+		translation.de:(Weiter...)
+		translation.ch:(Wiiter...)
+	]
+	[
+		# Link node, tag is next tag
+		tag:55
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [56] NPC Node
+	tag:56
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_StealEternal2
+	translation.en:It's the only magic that has it's own will. It chooses its mages.
+	translation.de:Es ist die einzige Magie, die ihren eigenen Willen hat. Sie erwählt ihre Magier.
+	translation.ch:Es isch di einzig Magie, wo ihre eiget Wille het. Si erwählt ihri Magier.
+	[
+		# Link node, tag is next tag
+		tag:57
+	]
+}
+{2
+	# [57] Choice Node
+	tag:57
+	[
+		# Link node, tag is next tag
+		tag:59
+		# translation: 
+		translation.tag:DL_Choice_Unlucky
+		translation.en:And the ones who are not chosen, are just unlucky?
+		translation.de:Und diejenigen, die nicht erwählt wurden, hatten einfach Pech?
+		translation.ch:Und die, wo nid erwählt worde sind, hend eifach Pech?
+	]
+	[
+		# Link node, tag is next tag
+		tag:58
+		# translation: 
+		translation.tag:DL_Choice_TrySteal
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [59] NPC Node
+	tag:59
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_Unlucky
+	translation.en:They're unworthy, yes. But as long as you're a mage, you can still come back to the pure divine magic.
+	translation.de:Die sind unwürdig, ja. Aber solange man ein Magier ist, kann man trotzdem noch zur puren heiligen Magie zurückkehren.
+	translation.ch:Die si unwürig, jo. Aber solang me e Magier isch, chame trotzdem no zude pure heilige Magie zruggcho.
+	[
+		# Link node, tag is next tag
+		tag:60
+	]
+}
+{2
+	# [60] Choice Node
+	tag:60
+	[
+		# Link node, tag is next tag
+		tag:62
+		# translation: 
+		translation.tag:DL_Choice_HowDivine
+		translation.en:And how does that work?
+		translation.de:Und wie funktioniert das?
+		translation.ch:Und we funktioniert das?
+	]
+	[
+		# Link node, tag is next tag
+		tag:61
+		# translation: 
+		translation.tag:DL_Choice_-2
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [62] NPC Node
+	tag:62
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_HowDivine
+	translation.en:Hm... so many questions. Are you trying to distract me? 
+	translation.de:Hm... so viele Fragen. Versuchst du etwa, mich abzulenken?
+	translation.ch:Hm... so viu Froge. Versuechsch öppe, mi abzlenke?
+	[
+		# Link node, tag is next tag
+		tag:63
+	]
+}
+{3
+	# [63] Cendric Node
+	tag:63
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [61] Cendric Node
+	tag:61
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "key_stolen")
+	trigger:DL:addItem("ke_tower", 1)
+	# translation: 
+	translation.tag:DL_Cendric_SucceedSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [58] Cendric Node
+	tag:58
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
+	translation.en:
+	translation.de:
+	translation.ch:
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{3
+	# [55] Cendric Node
+	tag:55
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cendric_FailSteal
 	translation.en:
 	translation.de:
 	translation.ch:

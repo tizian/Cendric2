@@ -35,6 +35,8 @@ private:
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
 	bool readSmoothingOn(const std::string& line, ConfigurationData& data) const;
 	bool readAutotargetOn(const std::string& line, ConfigurationData& data) const;
+	 
+	bool readLogLevel(const std::string& line, ConfigurationData& data) const;
 
 private:
 	bool readBoolean(const std::string& line, bool& data) const;

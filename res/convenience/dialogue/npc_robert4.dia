@@ -24,7 +24,7 @@ npc.id:npc_robert4
 	translation.tag:DL_Robert_YouDidIt
 	translation.en:(Robert is still shivering) You... you did it!
 	translation.de:(Robert zittert immer noch) Du... du hast es geschafft!
-	translation.ch:(De Robert zitteret immer no) Du... du hesches gschafft!
+	translation.ch:(De Robert zitteret immer no) Du... du heschs gschafft!
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -39,7 +39,7 @@ npc.id:npc_robert4
 	translation.tag:DL_Robert_YouDidIt2
 	translation.en:Maybe I underestimated you. Thank you...
 	translation.de:Vielleicht habe ich dich unterschätzt. Danke...
-	translation.ch:Vilicht hani di unterschätzt. Danke...
+	translation.ch:Vilicht hani dich unterschätzt. Danke...
 	[
 		# Link node, tag is next tag
 		tag:-2

@@ -133,6 +133,8 @@ void ResourceManager::init() {
 		m_configuration.resetToDefault();
 	}
 
+	g_logger->setLogLevel(m_configuration.logLevel);
+
 	// init sound pool
 	for (int i = 0; i < SOUND_POOL_SIZE; ++i) {
 		m_soundPool.push_back(sf::Sound());

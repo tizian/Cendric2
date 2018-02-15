@@ -24,6 +24,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeSmoothingOn(data);
 		configuration << writeMultithreadingOn(data);
 		configuration << writeDebugRenderingOn(data);
+		configuration << writeLogLevel(data);
 
 		configuration.close();
 	}
@@ -111,6 +112,11 @@ std::string ConfigurationWriter::writeFPSMax(const ConfigurationData& data) cons
 std::string ConfigurationWriter::writeLanguage(const ConfigurationData& data) const {
 	std::string language = "# 1 for EN, 2 for DE, 3 for CH, 4 for ES\n";
 	return language.append(std::string(LANGUAGE) + ":" + std::to_string(static_cast<int>(data.language)) + "\n");
+}
+
+std::string ConfigurationWriter::writeLogLevel(const ConfigurationData& data) const {
+	std::string logLevel = "# 0 for None, 1 for Error, 2 for Warning, 3 for Info, 4 for Debug, 5 for Verbose\n";
+	return logLevel.append(std::string(LOG_LEVEL) + ":" + std::to_string(static_cast<int>(data.logLevel)) + "\n");
 }
 
 std::string ConfigurationWriter::writeDisplayMode(const ConfigurationData& data) const {

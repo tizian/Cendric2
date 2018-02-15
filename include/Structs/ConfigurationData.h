@@ -5,6 +5,7 @@
 #include "Enums/Language.h"
 #include "Enums/DisplayMode.h"
 #include "Enums/Key.h"
+#include "Enums/LogLevel.h"
 
 // describes the configuration that can be modified by the user.
 // it is loaded every time the game starts and stored in the resource manager.
@@ -29,6 +30,7 @@ struct ConfigurationData final {
 	bool isGodmode;
 	bool isDebugRendering;
 	bool isWindowReload;
+	LogLevel logLevel;
 
 public:
 	void resetToDefault();

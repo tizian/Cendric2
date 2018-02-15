@@ -20,6 +20,7 @@ void ConfigurationData::resetToDefault() {
 	isGodmode = false;
 	isDebugRendering = false;
 	isWindowReload = false;
+	logLevel = LogLevel::Error;
 }
 
 const std::map<Key, sf::Keyboard::Key> ConfigurationData::DEFAULT_KEYMAP =
