@@ -95,7 +95,7 @@ npc.id:npc_bjarne
 	translation.ch:Min Name isch Bjarne. Das sött lange.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
 {1
@@ -155,7 +155,7 @@ npc.id:npc_bjarne
 	translation.ch:Aber guet... do hesches. Du sötsch vorsichtig si demit...
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
 {1
@@ -185,7 +185,7 @@ npc.id:npc_bjarne
 	translation.ch:Well si Angst het vor ihne. 
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }
 {1
@@ -200,6 +200,6 @@ npc.id:npc_bjarne
 	translation.ch:Das sötsch wüsse.
 	[
 		# Link node, tag is next tag
-		tag:-2
+		tag:-1
 	]
 }

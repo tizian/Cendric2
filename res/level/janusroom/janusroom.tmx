@@ -478,27 +478,27 @@
   <object id="103" gid="593" x="1250" y="800" width="50" height="50"/>
   <object id="109" gid="613" x="500" y="650" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="110" gid="613" x="850" y="400" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="111" gid="613" x="1050" y="500" width="50" height="50">
    <properties>
-    <property name="color" value="red"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="112" gid="613" x="650" y="500" width="50" height="50">
    <properties>
-    <property name="color" value="red"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
   <object id="113" gid="613" x="1200" y="650" width="50" height="50">
    <properties>
-    <property name="color" value="blue"/>
+    <property name="color" value="purple"/>
    </properties>
   </object>
  </objectgroup>

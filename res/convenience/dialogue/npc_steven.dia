@@ -26,7 +26,7 @@ npc.id:npc_steven
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_steven", "talked")
 	# translation: 
-	translation.tag:DL_NPC_ANewFace
+	translation.tag:DL_Steven_ANewFace
 	translation.en:And again, a new face in the city. As if we hadn't enough troublemakers here already. 
 	translation.de:Und wieder ein neues Gesicht in der Stadt. Als hätten wir nicht schon genug Störenfriede hier.
 	translation.ch:U widr äs nöis Gsicht ir Stadt. Aus hättmr nid scho gnue Störäfridä.
@@ -40,7 +40,7 @@ npc.id:npc_steven
 	tag:3
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_YouShouldKnowRules
+	translation.tag:DL_Steven_YouShouldKnowRules
 	translation.en:You should know the rules of the city, if you don't want to end up jailed.
 	translation.de:Du solltest die Regeln dieser Stadt kennen, wenn du nicht im Gefängnis landen willst. 
 	translation.ch:Du sötisch d'Reglä vodr Stadt kennä, wedä nid id Chischte wotsch cho.
@@ -94,38 +94,6 @@ npc.id:npc_steven
 	]
 	[
 		# Link node, tag is next tag
-		tag:30
-		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")
-		# translation: 
-		translation.tag:DL_Choice_UnlockKeyBuy
-		translation.en:I'm looking for an anti-magic crystal...
-		translation.de:Ich suche einen antimagischen Kristall...
-		translation.ch:Ich suech en antimagische Kristall...
-	]
-	[
-		# Link node, tag is next tag
-		tag:35
-		condition:not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)
-		# translation: 
-		translation.tag:DL_Choice_BuyCrystal
-		translation.en:Sell me that crystal.
-		translation.de:Verkauf mir diesen Kristall.
-		translation.ch:Verchauf mer de Kristall.
-		translation.item.id:gold
-		translation.item.amount:100
-	]
-	[
-		# Link node, tag is next tag
-		tag:29
-		condition:not DL:isQuestState("antimagic_crystal", "void") not DL:isConditionFulfilled("npc_steven", "key_stolen")
-		# translation: 
-		translation.tag:DL_Choice_StartKey
-		translation.en:(Start an attempt to steal Steven's tower key)
-		translation.de:(Starte einen Versuch, Steven's Turmschlüssel zu stehlen)
-		translation.ch:(En Versuech starte, em Steven sin Turmschlüssel z'chlaue)
-	]
-	[
-		# Link node, tag is next tag
 		tag:-1
 		condition:DL:isConditionFulfilled("npc_steven", "rules")
 		# translation: 
@@ -140,7 +108,7 @@ npc.id:npc_steven
 	tag:5
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_Rules1
+	translation.tag:DL_Steven_Rules1
 	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
 	translation.de:Nun, zuerst solltest du wissen, dass der Orden des Ewigen Lichts hier regiert - also respektiere uns und unsere Gesetze, sonst wird das ein nicht sehr angenehmer Aufenthalt für dich in Gandria.
 	translation.ch:Zersch sötter klar si, ds dr Ordä vom ewigä Liächt hie regiert - auso haut di besser a üsi Gsetz, süsch wird das ä unagnähme Ufenthaut für di z'Gandria. 
@@ -154,7 +122,7 @@ npc.id:npc_steven
 	tag:9
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_Rules2
+	translation.tag:DL_Steven_Rules2
 	translation.en:Behave well if you go into a stranger's house - we don't like thieves here. Most citizens of Gandria use observer spells to avoid being robbed.
 	translation.de:Benimm dich wenn du ein fremdes Haus betrittst - Wir mögen keine Diebe hier. Die meisten Bürger hier haben Beobachter-Zauber, um Diebstähle zu verhindern.
 	translation.ch:Benimm di wet ines Huus geisch - Mir gseh hie nid gärn Röiber. Die meischtä Bürger hei Beobachtigs-Zouber, wo vrhinderä, ds öpper öppis stibitzt.
@@ -168,7 +136,7 @@ npc.id:npc_steven
 	tag:10
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_Rules3
+	translation.tag:DL_Steven_Rules3
 	translation.en:And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
 	translation.ch:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört. Wedä bir Nekromantie vrwütscht wirsch, chasch ghängt wärdä.
@@ -198,7 +166,7 @@ npc.id:npc_steven
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_steven", "who_are_you")
 	# translation: 
-	translation.tag:DL_NPC_WhoAreYou
+	translation.tag:DL_Steven_WhoAreYou
 	translation.en:I'm Steven, paladin and vigilante of Gandria. I am, so to speak, the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
 	translation.de:Ich bin Steven, Paladin und Ordnungshüter von Gandria, sozusagen die rechte Hand von unserem Kommandanten, Lloyd. Leg dich nicht mit mir oder meiner Stadt an, verstanden?
 	translation.ch:I bi dr Steven, Paladin und dr Tschugger vo Gandria, sozsägä die rächti Hang vom Kommandant Lloyd. Leg di nid mit mir odr mirä Stadt ah, vrstangä? 
@@ -243,7 +211,7 @@ npc.id:npc_steven
 	tag:8
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_IKeepEyeOnYou
+	translation.tag:DL_Steven_IKeepEyeOnYou
 	translation.en:I'll keep an eye on you, boy.
 	translation.de:Ich werde dich im Auge behalten, Junge.
 	translation.ch:Giu, mir heidi im Oug, Bürschtli.
@@ -257,7 +225,7 @@ npc.id:npc_steven
 	tag:4
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_DontTrouble
+	translation.tag:DL_Steven_DontTrouble
 	translation.en:Well then... Don't make trouble!
 	translation.de:Na dann... Mach bloss keinen Ärger!
 	translation.ch:Ja dämfau.. Mach eifach ke Seich!
@@ -367,6 +335,247 @@ npc.id:npc_steven
 	[
 		# Link node, tag is next tag
 		tag:-2
+	]
+}
+{2
+	# [18] Choice Node
+	tag:18
+	[
+		# Link node, tag is next tag
+		tag:19
+		condition:DL:isQuestState("stevens_helmet", "void")
+		# translation: 
+		translation.tag:DL_Choice_TellmeQuest
+		translation.en:(Sigh) Okay, what should I do for you?
+		translation.de:(Seufz) Okay, was soll ich für dich tun?
+		translation.ch:(Süüfz) Okay, wa söll ich für dich mache?
+	]
+	[
+		# Link node, tag is next tag
+		tag:21
+		condition:DL:isQuestState("stevens_helmet", "started") and DL:isQuestComplete("stevens_helmet")
+		# translation: 
+		translation.tag:DL_Choice_GotHelmet
+		translation.en:I got your helmet, now give me that letter back.
+		translation.de:Ich habe deinen Helm, gib mir jetzt meinen Brief wieder.
+		translation.ch:Ich ha din Helm, gibmer ez min Brief wider.
+	]
+	[
+		# Link node, tag is next tag
+		tag:30
+		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")
+		# translation: 
+		translation.tag:DL_Choice_UnlockKeyBuy
+		translation.en:I'm looking for an anti-magic crystal...
+		translation.de:Ich suche einen antimagischen Kristall...
+		translation.ch:Ich suech en antimagische Kristall...
+	]
+	[
+		# Link node, tag is next tag
+		tag:35
+		condition:not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)
+		# translation: 
+		translation.tag:DL_Choice_BuyCrystal
+		translation.en:Sell me that crystal.
+		translation.de:Verkauf mir diesen Kristall.
+		translation.ch:Verchauf mer de Kristall.
+		translation.item.id:gold
+		translation.item.amount:100
+	]
+	[
+		# Link node, tag is next tag
+		tag:29
+		condition:not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "key_stolen")
+		# translation: 
+		translation.tag:DL_Choice_StartKey
+		translation.en:(Start an attempt to steal Steven's tower key)
+		translation.de:(Starte einen Versuch, Steven's Turmschlüssel zu stehlen)
+		translation.ch:(En Versuech starte, em Steven sin Turmschlüssel z'chlaue)
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [19] NPC Node
+	tag:19
+	# triggers: 
+	trigger:DL:changeQuestState("stevens_helmet", "started")
+	# translation: 
+	translation.tag:DL_Steven_HelmetQuest
+	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
+	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren. Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
+	translation.ch:I ha letscht Nacht chly z'viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore. Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
+	[
+		# Link node, tag is next tag
+		tag:20
+	]
+}
+{1
+	# [20] NPC Node
+	tag:20
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_HelmetQuest2
+	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
+	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [21] NPC Node
+	tag:21
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_GotHelmet
+	translation.en:Very good! Give it to me!
+	translation.de:Sehr gut! Gib ihn mir!
+	translation.ch:Sehr guet! Gibnä mir!
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{2
+	# [22] Choice Node
+	tag:22
+	[
+		# Link node, tag is next tag
+		tag:23
+		# translation: 
+		translation.tag:DL_Choice_FirstLetter
+		translation.en:Give me the letter first.
+		translation.de:Gib mir zuerst den Brief.
+		translation.ch:Gibmer zersch de Brief.
+	]
+	[
+		# Link node, tag is next tag
+		tag:27
+		# translation: 
+		translation.tag:DL_Choice_GiveHelmet
+		translation.en:Okay, here you go.
+		translation.de:Okay, da hast du ihn.
+		translation.ch:Okay, da heschen.
+	]
+}
+{1
+	# [23] NPC Node
+	tag:23
+	# triggers: 
+	trigger:DL:addItem("qe_recommendationletter", 1)
+	trigger:DL:addConditionProgress("default", "barracks_open")
+	trigger:DL:changeQuestState("stevens_helmet", "completed")
+	# translation: 
+	translation.tag:DL_Steven_GivesLetter
+	translation.en:Okay okay, here you go. You can speak with Commander Lloyd. And now give me my helmet!
+	translation.de:Okay okay, da hast du ihn wieder. Du kannst jetzt von mir aus mit Kommandant Lloyd sprechen. Und jetzt gib mir meinen Helm!
+	translation.ch:Okee Oke, da heschnä widr. Du chasch ize vo mir us mitm Kommandant Lloyd redä. U iz gimer mi Heum!
+	[
+		# Link node, tag is next tag
+		tag:24
+	]
+}
+{2
+	# [24] Choice Node
+	tag:24
+	[
+		# Link node, tag is next tag
+		tag:28
+		# translation: 
+		translation.tag:DL_Choice_GiveHelmet
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+	[
+		# Link node, tag is next tag
+		tag:25
+		# translation: 
+		translation.tag:DL_Choice_NoHelmet
+		translation.en:You wish.
+		translation.de:Hättest du wohl gern.
+		translation.ch:Hetsch wohl gern.
+	]
+}
+{1
+	# [28] NPC Node
+	tag:28
+	# triggers: 
+	trigger:DL:addReputationProgress("cleric", 5)
+	trigger:DL:removeItem("eq_stevenhelmet", 1)
+	# translation: 
+	translation.tag:DL_Steven_ThanksHelmet
+	translation.en:Hehe. Thank you.
+	translation.de:Hehe. Danke.
+	translation.ch:Hehe. Merci.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [25] NPC Node
+	tag:25
+	# triggers: 
+	trigger:DL:addReputationProgress("thief", 5)
+	# translation: 
+	translation.tag:DL_Steven_Angry
+	translation.en:Grr, you little... You'll pay for this! If Lloyd hears about this...
+	translation.de:Grr, du kleiner... Dafür wirst du noch bezahlen! Wenn Lloyd davon erfährt...
+	translation.ch:Grr, du chliinä... Drfür wirsch du büässä! Wedr Lloyd drvo ghört...
+	[
+		# Link node, tag is next tag
+		tag:26
+	]
+}
+{2
+	# [26] Choice Node
+	tag:26
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_CommanderLloyd
+		translation.en:It's "Commander" Lloyd.
+		translation.de:Es heisst "Kommandant" Lloyd.
+		translation.ch:Es heisst "Kommandant" Lloyd.
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:DL_Choice_DontDrinkMuch
+		translation.en:Well, it's your fault if you drink too much.
+		translation.de:Es ist dein Fehler wenn du zu viel trinkst.
+		translation.ch:Es isch dis Problem wenn du zviel trinksch.
+	]
+}
+{1
+	# [27] NPC Node
+	tag:27
+	# triggers: 
+	trigger:DL:addItem("qe_recommendationletter", 1)
+	trigger:DL:addConditionProgress("default", "barracks_open")
+	trigger:DL:removeItem("eq_stevenhelmet", 1)
+	trigger:DL:addReputationProgress("cleric", 5)
+	trigger:DL:changeQuestState("stevens_helmet", "completed")
+	# translation: 
+	translation.tag:DL_Steven_GotoLloyd
+	translation.en:Perfect. Here is your letter. You can now go and see Commander Lloyd.
+	translation.de:Perfekt. Hier ist dein Brief. Du kannst jetzt zu Kommandant Lloyd gehen.
+	translation.ch:Perfekt. Da isch di Brief. Du chasch iz zum Kommandant Lloyd.
+	[
+		# Link node, tag is next tag
+		tag:-1
 	]
 }
 {1
@@ -877,7 +1086,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_Unlucky
 	translation.en:They're unworthy, yes. But as long as you're a mage, you can still come back to the pure divine magic.
 	translation.de:Die sind unwürdig, ja. Aber solange man ein Magier ist, kann man trotzdem noch zur puren heiligen Magie zurückkehren.
-	translation.ch:Die si unwürig, jo. Aber solang me e Magier isch, chame trotzdem no zude pure heilige Magie zruggcho.
+	translation.ch:Die si unwürig, jo. Aber solang me e Magier isch, chamä trotzdem no zudr purä heiligä Magie zruggcho.
 	[
 		# Link node, tag is next tag
 		tag:60
@@ -899,7 +1108,7 @@ npc.id:npc_steven
 		# Link node, tag is next tag
 		tag:61
 		# translation: 
-		translation.tag:DL_Choice_-2
+		translation.tag:DL_Choice_TrySteal
 		translation.en:
 		translation.de:
 		translation.ch:
@@ -913,7 +1122,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_HowDivine
 	translation.en:Hm... so many questions. Are you trying to distract me? 
 	translation.de:Hm... so viele Fragen. Versuchst du etwa, mich abzulenken?
-	translation.ch:Hm... so viu Froge. Versuechsch öppe, mi abzlenke?
+	translation.ch:Hm... so viu Frogä. Versuechsch öppä, mi abzlänkä?
 	[
 		# Link node, tag is next tag
 		tag:63
@@ -975,214 +1184,5 @@ npc.id:npc_steven
 	[
 		# Link node, tag is next tag
 		tag:-2
-	]
-}
-{2
-	# [18] Choice Node
-	tag:18
-	[
-		# Link node, tag is next tag
-		tag:19
-		condition:DL:isQuestState("stevens_helmet", "void")
-		# translation: 
-		translation.tag:DL_Choice_TellmeQuest
-		translation.en:(Sigh) Okay, what should I do for you?
-		translation.de:(Seufz) Okay, was soll ich für dich tun?
-		translation.ch:(Süüfz) Okay, wa söll ich für dich mache?
-	]
-	[
-		# Link node, tag is next tag
-		tag:21
-		condition:DL:isQuestState("stevens_helmet", "started") and DL:isQuestComplete("stevens_helmet")
-		# translation: 
-		translation.tag:DL_Choice_GotHelmet
-		translation.en:I got your helmet, now give me that letter back.
-		translation.de:Ich habe deinen Helm, gib mir jetzt meinen Brief wieder.
-		translation.ch:Ich ha din Helm, gibmer ez min Brief wider.
-	]
-	[
-		# Link node, tag is next tag
-		tag:-1
-		# translation: 
-		translation.tag:
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-}
-{1
-	# [19] NPC Node
-	tag:19
-	# triggers: 
-	trigger:DL:changeQuestState("stevens_helmet", "started")
-	# translation: 
-	translation.tag:DL_Steven_HelmetQuest
-	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
-	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren. Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
-	translation.ch:I ha letscht Nacht chly z'viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore. Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
-	[
-		# Link node, tag is next tag
-		tag:20
-	]
-}
-{1
-	# [20] NPC Node
-	tag:20
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Steven_HelmetQuest2
-	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
-	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
-	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
-	[
-		# Link node, tag is next tag
-		tag:-2
-	]
-}
-{1
-	# [21] NPC Node
-	tag:21
-	# triggers: 
-	# translation: 
-	translation.tag:DL_Steven_GotHelmet
-	translation.en:Very good! Give it to me!
-	translation.de:Sehr gut! Gib ihn mir!
-	translation.ch:Sehr guet! Gibnä mir!
-	[
-		# Link node, tag is next tag
-		tag:22
-	]
-}
-{2
-	# [22] Choice Node
-	tag:22
-	[
-		# Link node, tag is next tag
-		tag:23
-		# translation: 
-		translation.tag:DL_Choice_FirstLetter
-		translation.en:Give me the letter first.
-		translation.de:Gib mir zuerst den Brief.
-		translation.ch:Gibmer zersch de Brief.
-	]
-	[
-		# Link node, tag is next tag
-		tag:27
-		# translation: 
-		translation.tag:DL_Choice_GiveHelmet
-		translation.en:Okay, here you go.
-		translation.de:Okay, da hast du ihn.
-		translation.ch:Okay, da heschen.
-	]
-}
-{1
-	# [23] NPC Node
-	tag:23
-	# triggers: 
-	trigger:DL:addItem("qe_recommendationletter", 1)
-	trigger:DL:addConditionProgress("default", "barracks_open")
-	trigger:DL:changeQuestState("stevens_helmet", "completed")
-	# translation: 
-	translation.tag:DL_Steven_GivesLetter
-	translation.en:Okay okay, here you go. You can speak with Commander Lloyd. And now give me my helmet!
-	translation.de:Okay okay, da hast du ihn wieder. Du kannst jetzt von mir aus mit Kommandant Lloyd sprechen. Und jetzt gib mir meinen Helm!
-	translation.ch:Okee Oke, da heschnä widr. Du chasch ize vo mir us mitm Kommandant Lloyd redä. U iz gimer mi Heum!
-	[
-		# Link node, tag is next tag
-		tag:24
-	]
-}
-{2
-	# [24] Choice Node
-	tag:24
-	[
-		# Link node, tag is next tag
-		tag:28
-		# translation: 
-		translation.tag:DL_Choice_GiveHelmet
-		translation.en:
-		translation.de:
-		translation.ch:
-	]
-	[
-		# Link node, tag is next tag
-		tag:25
-		# translation: 
-		translation.tag:DL_Choice_NoHelmet
-		translation.en:You wish.
-		translation.de:Hättest du wohl gern.
-		translation.ch:Hetsch wohl gern.
-	]
-}
-{1
-	# [28] NPC Node
-	tag:28
-	# triggers: 
-	trigger:DL:addReputationProgress("cleric", 5)
-	trigger:DL:removeItem("eq_stevenhelmet", 1)
-	# translation: 
-	translation.tag:DL_Steven_ThanksHelmet
-	translation.en:Hehe. Thank you.
-	translation.de:Hehe. Danke.
-	translation.ch:Hehe. Merci.
-	[
-		# Link node, tag is next tag
-		tag:-1
-	]
-}
-{1
-	# [25] NPC Node
-	tag:25
-	# triggers: 
-	trigger:DL:addReputationProgress("thief", 5)
-	# translation: 
-	translation.tag:DL_Steven_Angry
-	translation.en:Grr, you little... You'll pay for this! If Lloyd hears about this...
-	translation.de:Grr, du kleiner... Dafür wirst du noch bezahlen! Wenn Lloyd davon erfährt...
-	translation.ch:Grr, du chliinä... Drfür wirsch du büässä! Wedr Lloyd drvo ghört...
-	[
-		# Link node, tag is next tag
-		tag:26
-	]
-}
-{2
-	# [26] Choice Node
-	tag:26
-	[
-		# Link node, tag is next tag
-		tag:-1
-		# translation: 
-		translation.tag:DL_Choice_CommanderLloyd
-		translation.en:It's "Commander" Lloyd.
-		translation.de:Es heisst "Kommandant" Lloyd.
-		translation.ch:Es heisst "Kommandant" Lloyd.
-	]
-	[
-		# Link node, tag is next tag
-		tag:-1
-		# translation: 
-		translation.tag:DL_Choice_DontDrinkMuch
-		translation.en:Well, it's your fault if you drink too much.
-		translation.de:Es ist dein Fehler wenn du zu viel trinkst.
-		translation.ch:Es isch dis Problem wenn du zviel trinksch.
-	]
-}
-{1
-	# [27] NPC Node
-	tag:27
-	# triggers: 
-	trigger:DL:addItem("qe_recommendationletter", 1)
-	trigger:DL:addConditionProgress("default", "barracks_open")
-	trigger:DL:removeItem("eq_stevenhelmet", 1)
-	trigger:DL:addReputationProgress("cleric", 5)
-	trigger:DL:changeQuestState("stevens_helmet", "completed")
-	# translation: 
-	translation.tag:DL_Steven_GotoLloyd
-	translation.en:Perfect. Here is your letter. You can now go and see Commander Lloyd.
-	translation.de:Perfekt. Hier ist dein Brief. Du kannst jetzt zu Kommandant Lloyd gehen.
-	translation.ch:Perfekt. Da isch di Brief. Du chasch iz zum Kommandant Lloyd.
-	[
-		# Link node, tag is next tag
-		tag:-1
 	]
 }

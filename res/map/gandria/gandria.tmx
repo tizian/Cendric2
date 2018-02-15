@@ -768,7 +768,7 @@
     <property name="conditions" value="default,brothel_open"/>
    </properties>
   </object>
-  <object id="326" gid="2426" x="1225" y="1100" width="50" height="50">
+  <object id="326" gid="2426" x="1300" y="1100" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower"/>
    </properties>

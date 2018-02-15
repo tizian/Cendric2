@@ -140,7 +140,7 @@ npc.id:npc_syrah
 	[
 		# Link node, tag is next tag
 		tag:48
-		condition:DL:isQuestState("antimagic_crystal", "started") and DL:hasItem("eq_antimagicpendant") and not DL:isConditionFulfilled("npc_syrah", "antimagic_pendant")
+		condition:DL:isQuestState("antimagic_crystal", "started") and DL:hasItem("eq_antimagicpendant", 1) and not DL:isConditionFulfilled("npc_syrah", "antimagic_pendant")
 		# translation: 
 		translation.tag:DL_Choice_AntimagicPendant
 		translation.en:I got this anti-magic pendant here, would this work?

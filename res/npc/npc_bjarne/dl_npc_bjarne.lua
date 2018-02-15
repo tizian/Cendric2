@@ -28,7 +28,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_bjarne", "who_are_you")) then 
 
-		DL:createNPCNode(2, -2, "DL_Bjarne_WhoAreYou") -- My name's Bjarne. That should be enough.
+		DL:createNPCNode(2, -1, "DL_Bjarne_WhoAreYou") -- My name's Bjarne. That should be enough.
 		DL:addConditionProgress("npc_bjarne", "who_are_you")
 		DL:addNode()
 
@@ -53,7 +53,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -2, "DL_Bjarne_RunasDeal3") -- But well... here you go. You should be careful with that...
+		DL:createNPCNode(5, -1, "DL_Bjarne_RunasDeal3") -- But well... here you go. You should be careful with that...
 		DL:addQuestDescription("runas_deal", 1)
 		DL:addItem("eq_antimagicpendant", 1)
 		DL:addNode()
@@ -70,7 +70,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestDescriptionUnlocked("runas_deal", 1) and not DL:isConditionFulfilled("npc_bjarne", "mages")) then 
 
-		DL:createNPCNode(7, -2, "DL_Bjarne_Mages") -- Because she's afraid of them.
+		DL:createNPCNode(7, -1, "DL_Bjarne_Mages") -- Because she's afraid of them.
 		DL:addConditionProgress("npc_bjarne", "mages")
 		DL:addNode()
 
@@ -78,7 +78,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestDescriptionUnlocked("runas_deal", 1) and not DL:isConditionFulfilled("npc_bjarne", "mage")) then 
 
-		DL:createNPCNode(8, -2, "DL_Bjarne_Mage") -- You should know that.
+		DL:createNPCNode(8, -1, "DL_Bjarne_Mage") -- You should know that.
 		DL:addConditionProgress("npc_bjarne", "mage")
 		DL:addNode()
 

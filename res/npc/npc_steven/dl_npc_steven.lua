@@ -11,12 +11,12 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_steven", "talked")) then 
 
-		DL:createNPCNode(1, 3, "DL_NPC_ANewFace") -- And again, a new face in the city. As if we hadn't enough troublemakers here already. 
+		DL:createNPCNode(1, 3, "DL_Steven_ANewFace") -- And again, a new face in the city. As if we hadn't enough troublemakers here already. 
 		DL:addConditionProgress("npc_steven", "talked")
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_NPC_YouShouldKnowRules") -- You should know the rules of the city, if you don't want to end up jailed.
+		DL:createNPCNode(3, -2, "DL_Steven_YouShouldKnowRules") -- You should know the rules of the city, if you don't want to end up jailed.
 		DL:addNode()
 
 	end
@@ -36,15 +36,6 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_steven", "who_are_you") and DL:hasItem("qe_recommendationletter", 1)) then 
 			DL:addChoice(12, "DL_Choice_Lloyd") -- I need to talk to some "Lloyd" here... (Show the letter)
 		end
-		if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")) then 
-			DL:addChoice(30, "DL_Choice_UnlockKeyBuy") -- I'm looking for an anti-magic crystal...
-		end
-		if (not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)) then 
-			DL:addItemChoice(35, "DL_Choice_BuyCrystal", "gold", 100) -- Sell me that crystal.
-		end
-		if (not DL:isQuestState("antimagic_crystal", "void") not DL:isConditionFulfilled("npc_steven", "key_stolen")) then 
-			DL:addChoice(29, "DL_Choice_StartKey") -- (Start an attempt to steal Steven's tower key)
-		end
 		if (DL:isConditionFulfilled("npc_steven", "rules")) then 
 			DL:addChoice(-1, "DL_Choice_CU") -- See you.
 		end
@@ -52,15 +43,15 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
 
-			DL:createNPCNode(5, 9, "DL_NPC_Rules1") -- Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
+			DL:createNPCNode(5, 9, "DL_Steven_Rules1") -- Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
 			DL:addNode()
 
 
-			DL:createNPCNode(9, 10, "DL_NPC_Rules2") -- Behave well if you go into a stranger's house - we don't like thieves here. Most citizens of Gandria use observer spells to avoid being robbed.
+			DL:createNPCNode(9, 10, "DL_Steven_Rules2") -- Behave well if you go into a stranger's house - we don't like thieves here. Most citizens of Gandria use observer spells to avoid being robbed.
 			DL:addNode()
 
 
-			DL:createNPCNode(10, 11, "DL_NPC_Rules3") -- And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
+			DL:createNPCNode(10, 11, "DL_Steven_Rules3") -- And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
 			DL:addNode()
 
 
@@ -72,7 +63,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_steven", "who_are_you")) then 
 
-			DL:createNPCNode(6, 7, "DL_NPC_WhoAreYou") -- I'm Steven, paladin and vigilante of Gandria. I am, so to speak, the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
+			DL:createNPCNode(6, 7, "DL_Steven_WhoAreYou") -- I'm Steven, paladin and vigilante of Gandria. I am, so to speak, the right hand of our Commander, Lloyd. Don't mess with me or my city, understood?
 			DL:addConditionProgress("npc_steven", "who_are_you")
 			DL:addNode()
 
@@ -84,14 +75,14 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(8, -1, "DL_NPC_IKeepEyeOnYou") -- I'll keep an eye on you, boy.
+			DL:createNPCNode(8, -1, "DL_Steven_IKeepEyeOnYou") -- I'll keep an eye on you, boy.
 			DL:addNode()
 
 		end
 
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
 
-			DL:createNPCNode(4, -1, "DL_NPC_DontTrouble") -- Well then... Don't make trouble!
+			DL:createNPCNode(4, -1, "DL_Steven_DontTrouble") -- Well then... Don't make trouble!
 			DL:addNode()
 
 		end
@@ -128,187 +119,6 @@ loadDialogue = function(DL)
 
 		end
 
-		if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")) then 
-
-			DL:createNPCNode(30, 31, "DL_Steven_UnlockKeyBuy") -- You're lucky. Actually, I do have one here... but it's not cheap. Why do you need one anyway?
-			DL:addNode()
-
-
-			DL:createChoiceNode(31)
-			DL:addChoice(32, "DL_Choice_CrystalForCurse") -- I want to break a curse with it.
-			DL:addChoice(33, "DL_Choice_CrystalProtection") -- I need protection against necromancy.
-			DL:addChoice(34, "DL_Choice_CrystalNoneOf") -- That's none of your business.
-			DL:addNode()
-
-
-			DL:createNPCNode(32, -2, "DL_Steven_CrystalBuyOk") -- 
-			DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
-			DL:addNode()
-
-
-			DL:createNPCNode(33, -2, "DL_Steven_CrystalBuyOk") -- That's a good reason, indeed. If you want, I can sell one to you for 100 gold.
-			DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
-			DL:addNode()
-
-
-			DL:createNPCNode(34, -2, "DL_Steven_CrystalBuyNOk") -- Hmpf! I don't think I can sell you one then. Go ask someone else.
-			DL:addConditionProgress("npc_steven", "crystal_buy_lock")
-			DL:addNode()
-
-		end
-
-		if (not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)) then 
-
-			DL:createNPCNode(35, -2, "DL_Steven_BuyCrystal") -- Hehehe. You made a really good deal today!
-			DL:removeGold(100)
-			DL:addItem("qe_antimagiccrystal", 1)
-			DL:addConditionProgress("npc_steven", "crystal_bought")
-			DL:addNode()
-
-		end
-
-		if (not DL:isQuestState("antimagic_crystal", "void") not DL:isConditionFulfilled("npc_steven", "key_stolen")) then 
-
-			DL:createChoiceNode(29)
-			DL:addChoice(36, "DL_Choice_StealBird") -- Hey, look! A bird!
-			DL:addChoice(38, "DL_Choice_StealTellMe") -- Tell me something about yourself.
-			DL:addChoice(39, "DL_Choice_StealEternal") -- So, what exactly is that "Eternal Light"?
-			DL:addChoice(-1, "") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(36, 37, "DL_Steven_StealBird") -- Ehh... What? We're in the barracks here!
-			DL:addNode()
-
-
-			DL:createChoiceNode(37)
-			DL:addChoice(40, "DL_Choice_TryStealBird2") -- But it just flew through that door!
-			DL:addChoice(41, "DL_Choice_TrySteal") -- (Try to steal Steven's tower key)
-			DL:addNode()
-
-
-			DL:createNPCNode(40, 42, "DL_Steven_TryStealBird2") -- Dude... are you kidding me?
-			DL:addNode()
-
-
-			DL:createCendricNode(42, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createCendricNode(41, -2, "DL_Cendric_FailSteal") -- (Your attempt to steal the tower key failed)
-			DL:addNode()
-
-
-			DL:createNPCNode(38, 43, "DL_Steven_StealTellMe") -- Why would I... ah, nevermind. You must be an admirer of mine.
-			DL:addNode()
-
-
-			DL:createChoiceNode(43)
-			DL:addChoice(45, "DL_Choice_OfCourseYouAre") -- Yes, of course!
-			DL:addChoice(44, "DL_Choice_TrySteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(45, 46, "DL_Steven_StealTellMe2") -- Hehe. Now, listen. I'm currently one of the mightiest paladins in Gandria. I'm sure, Lloyd will chose me as his successor!
-			DL:addNode()
-
-
-			DL:createChoiceNode(46)
-			DL:addChoice(47, "DL_Choice_IThinkYouAre") -- Yes, I fully understand.
-			DL:addChoice(49, "DL_Choice_IThinkYouNot") -- You wish.
-			DL:addChoice(48, "DL_Choice_TrySteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(47, 50, "DL_Steven_IThinkYouAre") -- Yes... The whole city will be under my command! (Laughs)
-			DL:addNode()
-
-
-			DL:createChoiceNode(50)
-			DL:addChoice(51, "DL_Choice_WholeCityWill") -- Oh yes, it will!
-			DL:addChoice(52, "DL_Choice_TrySteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(51, 53, "DL_Steven_WholeCityWill") -- Wait... you've never been that nice before...
-			DL:addNode()
-
-
-			DL:createCendricNode(53, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createCendricNode(52, -2, "DL_Cendric_SucceedSteal") -- (Your attempt to steal the tower key suceeded!)
-			DL:addConditionProgress("npc_steven", "key_stolen")
-			DL:addItem("ke_tower", 1)
-			DL:addNode()
-
-
-			DL:createNPCNode(49, -1, "DL_Steven_IThinkYouNot") -- Hah! You'll see.
-			DL:addNode()
-
-
-			DL:createCendricNode(48, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createCendricNode(44, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(39, 54, "DL_Steven_StealEternal") -- It's the purest form of energy - and our source of magic.
-			DL:addNode()
-
-
-			DL:createChoiceNode(54)
-			DL:addChoice(56, "DL_Choice_GoOn") -- (Go on...)
-			DL:addChoice(55, "DL_Choice_TrySteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(56, 57, "DL_Steven_StealEternal2") -- It's the only magic that has it's own will. It chooses its mages.
-			DL:addNode()
-
-
-			DL:createChoiceNode(57)
-			DL:addChoice(59, "DL_Choice_Unlucky") -- And the ones who are not chosen, are just unlucky?
-			DL:addChoice(58, "DL_Choice_TrySteal") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(59, 60, "DL_Steven_Unlucky") -- They're unworthy, yes. But as long as you're a mage, you can still come back to the pure divine magic.
-			DL:addNode()
-
-
-			DL:createChoiceNode(60)
-			DL:addChoice(62, "DL_Choice_HowDivine") -- And how does that work?
-			DL:addChoice(61, "DL_Choice_-2") -- 
-			DL:addNode()
-
-
-			DL:createNPCNode(62, 63, "DL_Steven_HowDivine") -- Hm... so many questions. Are you trying to distract me? 
-			DL:addNode()
-
-
-			DL:createCendricNode(63, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createCendricNode(61, -2, "DL_Cendric_SucceedSteal") -- 
-			DL:addConditionProgress("npc_steven", "key_stolen")
-			DL:addItem("ke_tower", 1)
-			DL:addNode()
-
-
-			DL:createCendricNode(58, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-
-			DL:createCendricNode(55, -2, "DL_Cendric_FailSteal") -- 
-			DL:addNode()
-
-		end
-
 		if (DL:isConditionFulfilled("npc_steven", "rules")) then 
 		end
 
@@ -321,6 +131,15 @@ loadDialogue = function(DL)
 	end
 	if (DL:isQuestState("stevens_helmet", "started") and DL:isQuestComplete("stevens_helmet")) then 
 		DL:addChoice(21, "DL_Choice_GotHelmet") -- I got your helmet, now give me that letter back.
+	end
+	if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")) then 
+		DL:addChoice(30, "DL_Choice_UnlockKeyBuy") -- I'm looking for an anti-magic crystal...
+	end
+	if (not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)) then 
+		DL:addItemChoice(35, "DL_Choice_BuyCrystal", "gold", 100) -- Sell me that crystal.
+	end
+	if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "key_stolen")) then 
+		DL:addChoice(29, "DL_Choice_StartKey") -- (Start an attempt to steal Steven's tower key)
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -385,6 +204,187 @@ loadDialogue = function(DL)
 		DL:removeItem("eq_stevenhelmet", 1)
 		DL:addReputationProgress("cleric", 5)
 		DL:changeQuestState("stevens_helmet", "completed")
+		DL:addNode()
+
+	end
+
+	if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_buy_lock")) then 
+
+		DL:createNPCNode(30, 31, "DL_Steven_UnlockKeyBuy") -- You're lucky. Actually, I do have one here... but it's not cheap. Why do you need one anyway?
+		DL:addNode()
+
+
+		DL:createChoiceNode(31)
+		DL:addChoice(32, "DL_Choice_CrystalForCurse") -- I want to break a curse with it.
+		DL:addChoice(33, "DL_Choice_CrystalProtection") -- I need protection against necromancy.
+		DL:addChoice(34, "DL_Choice_CrystalNoneOf") -- That's none of your business.
+		DL:addNode()
+
+
+		DL:createNPCNode(32, -2, "DL_Steven_CrystalBuyOk") -- 
+		DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
+		DL:addNode()
+
+
+		DL:createNPCNode(33, -2, "DL_Steven_CrystalBuyOk") -- That's a good reason, indeed. If you want, I can sell one to you for 100 gold.
+		DL:addConditionProgress("npc_steven", "crystal_buy_unlock")
+		DL:addNode()
+
+
+		DL:createNPCNode(34, -2, "DL_Steven_CrystalBuyNOk") -- Hmpf! I don't think I can sell you one then. Go ask someone else.
+		DL:addConditionProgress("npc_steven", "crystal_buy_lock")
+		DL:addNode()
+
+	end
+
+	if (not DL:isQuestState("antimagic_crystal", "void") and DL:isConditionFulfilled("npc_steven", "crystal_buy_unlock") and not DL:isConditionFulfilled("npc_steven", "crystal_bought") and DL:hasItem("gold", 100)) then 
+
+		DL:createNPCNode(35, -2, "DL_Steven_BuyCrystal") -- Hehehe. You made a really good deal today!
+		DL:removeGold(100)
+		DL:addItem("qe_antimagiccrystal", 1)
+		DL:addConditionProgress("npc_steven", "crystal_bought")
+		DL:addNode()
+
+	end
+
+	if (not DL:isQuestState("antimagic_crystal", "void") and not DL:isConditionFulfilled("npc_steven", "key_stolen")) then 
+
+		DL:createChoiceNode(29)
+		DL:addChoice(36, "DL_Choice_StealBird") -- Hey, look! A bird!
+		DL:addChoice(38, "DL_Choice_StealTellMe") -- Tell me something about yourself.
+		DL:addChoice(39, "DL_Choice_StealEternal") -- So, what exactly is that "Eternal Light"?
+		DL:addChoice(-1, "") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(36, 37, "DL_Steven_StealBird") -- Ehh... What? We're in the barracks here!
+		DL:addNode()
+
+
+		DL:createChoiceNode(37)
+		DL:addChoice(40, "DL_Choice_TryStealBird2") -- But it just flew through that door!
+		DL:addChoice(41, "DL_Choice_TrySteal") -- (Try to steal Steven's tower key)
+		DL:addNode()
+
+
+		DL:createNPCNode(40, 42, "DL_Steven_TryStealBird2") -- Dude... are you kidding me?
+		DL:addNode()
+
+
+		DL:createCendricNode(42, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createCendricNode(41, -2, "DL_Cendric_FailSteal") -- (Your attempt to steal the tower key failed)
+		DL:addNode()
+
+
+		DL:createNPCNode(38, 43, "DL_Steven_StealTellMe") -- Why would I... ah, nevermind. You must be an admirer of mine.
+		DL:addNode()
+
+
+		DL:createChoiceNode(43)
+		DL:addChoice(45, "DL_Choice_OfCourseYouAre") -- Yes, of course!
+		DL:addChoice(44, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(45, 46, "DL_Steven_StealTellMe2") -- Hehe. Now, listen. I'm currently one of the mightiest paladins in Gandria. I'm sure, Lloyd will chose me as his successor!
+		DL:addNode()
+
+
+		DL:createChoiceNode(46)
+		DL:addChoice(47, "DL_Choice_IThinkYouAre") -- Yes, I fully understand.
+		DL:addChoice(49, "DL_Choice_IThinkYouNot") -- You wish.
+		DL:addChoice(48, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(47, 50, "DL_Steven_IThinkYouAre") -- Yes... The whole city will be under my command! (Laughs)
+		DL:addNode()
+
+
+		DL:createChoiceNode(50)
+		DL:addChoice(51, "DL_Choice_WholeCityWill") -- Oh yes, it will!
+		DL:addChoice(52, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(51, 53, "DL_Steven_WholeCityWill") -- Wait... you've never been that nice before...
+		DL:addNode()
+
+
+		DL:createCendricNode(53, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createCendricNode(52, -2, "DL_Cendric_SucceedSteal") -- (Your attempt to steal the tower key suceeded!)
+		DL:addConditionProgress("npc_steven", "key_stolen")
+		DL:addItem("ke_tower", 1)
+		DL:addNode()
+
+
+		DL:createNPCNode(49, -1, "DL_Steven_IThinkYouNot") -- Hah! You'll see.
+		DL:addNode()
+
+
+		DL:createCendricNode(48, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createCendricNode(44, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(39, 54, "DL_Steven_StealEternal") -- It's the purest form of energy - and our source of magic.
+		DL:addNode()
+
+
+		DL:createChoiceNode(54)
+		DL:addChoice(56, "DL_Choice_GoOn") -- (Go on...)
+		DL:addChoice(55, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(56, 57, "DL_Steven_StealEternal2") -- It's the only magic that has it's own will. It chooses its mages.
+		DL:addNode()
+
+
+		DL:createChoiceNode(57)
+		DL:addChoice(59, "DL_Choice_Unlucky") -- And the ones who are not chosen, are just unlucky?
+		DL:addChoice(58, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(59, 60, "DL_Steven_Unlucky") -- They're unworthy, yes. But as long as you're a mage, you can still come back to the pure divine magic.
+		DL:addNode()
+
+
+		DL:createChoiceNode(60)
+		DL:addChoice(62, "DL_Choice_HowDivine") -- And how does that work?
+		DL:addChoice(61, "DL_Choice_TrySteal") -- 
+		DL:addNode()
+
+
+		DL:createNPCNode(62, 63, "DL_Steven_HowDivine") -- Hm... so many questions. Are you trying to distract me? 
+		DL:addNode()
+
+
+		DL:createCendricNode(63, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createCendricNode(61, -2, "DL_Cendric_SucceedSteal") -- 
+		DL:addConditionProgress("npc_steven", "key_stolen")
+		DL:addItem("ke_tower", 1)
+		DL:addNode()
+
+
+		DL:createCendricNode(58, -2, "DL_Cendric_FailSteal") -- 
+		DL:addNode()
+
+
+		DL:createCendricNode(55, -2, "DL_Cendric_FailSteal") -- 
 		DL:addNode()
 
 	end

@@ -6,6 +6,8 @@ loadRoutine = function(R, W)
 	
 		R:setDisposed()
 		return
+    
+    end
 	
 	R:setTilePosition(5,9)
 	R:setReloadEnabled(true)

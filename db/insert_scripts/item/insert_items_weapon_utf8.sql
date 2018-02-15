@@ -376,12 +376,12 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_silversword', 'item','Silver Sword', 'Silberschwert','Silberschwert');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_silversword', 'item_desc', 'A powerful silver sword, covered by spikes.','Ein mächtiges Silberschwert, verziert mit Stacheln.','Es mächtigs Silberschwert, verziert mit Stachle.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_silversword', 'eq_weapon', 200, 250, 80, 2);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_silversword', 'eq_weapon', 100, 750, 80, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_silversword', 6, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_silversword', 'res/texture/equipment/weapon/spritesheet_weapon_silversword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_silversword.png');
 INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_silversword', 700, 10, 40, 80, 6);
-INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_silversword', -25, -40, 25, 60);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_silversword', 1, 200, 150, 50, 100);
+INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_silversword', -15, -35, 20, 65);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_silversword', 1, 0, 450, 50, 100);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_silversword', 1, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_silversword', 2, 'meta', 2);
 

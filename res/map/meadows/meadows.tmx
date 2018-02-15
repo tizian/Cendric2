@@ -1122,11 +1122,6 @@
     <property name="id" value="npc_robert2"/>
    </properties>
   </object>
-  <object id="260" gid="1381" x="1800" y="600" width="50" height="50">
-   <properties>
-    <property name="id" value="npc_laslo"/>
-   </properties>
-  </object>
   <object id="261" gid="1382" x="900" y="2900" width="50" height="50">
    <properties>
     <property name="id" value="npc_runa"/>
