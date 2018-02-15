@@ -41,7 +41,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(8, 9, "DL_Cynthia_Mages2") -- Everything they can do, we can do eveb better.
+		DL:createNPCNode(8, 9, "DL_Cynthia_Mages2") -- Everything they can do, we can do even better.
 		DL:addNode()
 
 
