@@ -660,6 +660,13 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_antimagicpendant', 'eq_neck', 800, 700, 25, 1);
 INSERT INTO item_attribute (item_id, res_light, res_fire, res_ice, res_shadow, dmg_light, dmg_fire, dmg_shadow, dmg_ice) values ('eq_antimagicpendant', 50, 50, 50, 50, -50, -50, -50, -50);
 
+-- Magic Pendant
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_magicpendant', 'item', 'Anti-Magic Pendant','Antimagischer Anhänger','Antimagische Ahänger');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_magicpendant', 'item_desc', 'This pendant enhances all magic around it, not only my own...','Dieser Anhänger verstärkt alle Magie um sich herum, nicht nur meine eigene...','De Ahänger verstärcht all Magie um sich ume, nid nur mini eiget...');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_magicpendant', 'eq_neck', 50, 750, 25, 1);
+INSERT INTO item_attribute (item_id, res_light, res_fire, res_ice, res_shadow, dmg_light, dmg_fire, dmg_shadow, dmg_ice) values ('eq_magicpendant', -100, -100, -100, -100, 2, 2, 2, 2);
+
 -- Sparkling Green Ring
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_green', 'item', 'Sparkling Green Ring','Funkelnder Grüner Ring','Funkelnde Grüene Ring');

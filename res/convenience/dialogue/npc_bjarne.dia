@@ -1,0 +1,205 @@
+# dia file for dialogue for npc: npc_bjarne
+
+npc.id:npc_bjarne
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+	]
+}
+{2
+	# [1] Choice Node
+	tag:1
+	[
+		# Link node, tag is next tag
+		tag:2
+		condition:not DL:isConditionFulfilled("npc_bjarne", "who_are_you")
+		# translation: 
+		translation.tag:DL_Choice_WhoAreYou
+		translation.en:Wer bist du?
+		translation.de:Wer bisch du?
+		translation.ch:Wer bisch du?
+	]
+	[
+		# Link node, tag is next tag
+		tag:9
+		condition:DL:isConditionFulfilled("npc_bjarne", "who_are_you") and not DL:isConditionFulfilled("npc_bjarne", "talk")
+		# translation: 
+		translation.tag:DL_Choice_Talk
+		translation.en:You don't like to talk much?
+		translation.de:Du redest wohl nicht so gerne?
+		translation.ch:Du redsch nid so gern, he?
+	]
+	[
+		# Link node, tag is next tag
+		tag:3
+		condition:DL:isQuestState("runas_deal", "started") and not DL:isQuestDescriptionUnlocked("runas_deal", 1) and DL:hasItem("fo_physalis", 10)
+		# translation: 
+		translation.tag:DL_Choice_RunasDeal
+		translation.en:Runa sent me. I got some Physalis for you.
+		translation.de:Runa hat mich geschickt. Ich habe Physalis für dich.
+		translation.ch:D'Runa het mi gschickt. Ich ha Physalis für dich.
+	]
+	[
+		# Link node, tag is next tag
+		tag:6
+		condition:DL:isQuestDescriptionUnlocked("runas_deal", 1) and not DL:isConditionFulfilled("npc_bjarne", "physalis")
+		# translation: 
+		translation.tag:DL_Choice_Physalis
+		translation.en:What do you need that many Physalis for?
+		translation.de:Für was brauchst du so viele Physalis?
+		translation.ch:Für was bruchsch so viel Physalis?
+	]
+	[
+		# Link node, tag is next tag
+		tag:7
+		condition:DL:isQuestDescriptionUnlocked("runas_deal", 1) and not DL:isConditionFulfilled("npc_bjarne", "mages")
+		# translation: 
+		translation.tag:DL_Choice_Mages
+		translation.en:Why wouldn't Runa trust a mage?
+		translation.de:Wieso würde Runa keinem Magier vertrauen?
+		translation.ch:Weso wür d'Runa kem Magier vertraue?
+	]
+	[
+		# Link node, tag is next tag
+		tag:8
+		condition:DL:isQuestDescriptionUnlocked("runas_deal", 1) and not DL:isConditionFulfilled("npc_bjarne", "mage")
+		# translation: 
+		translation.tag:DL_Choice_Mage
+		translation.en:Aren't you a mage yourself?
+		translation.de:Bist du nicht selbst ein Magier?
+		translation.ch:Bisch du nid selber en Magier?
+	]
+	[
+		# Link node, tag is next tag
+		tag:-1
+		# translation: 
+		translation.tag:
+		translation.en:
+		translation.de:
+		translation.ch:
+	]
+}
+{1
+	# [2] NPC Node
+	tag:2
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_bjarne", "who_are_you")
+	# translation: 
+	translation.tag:DL_Bjarne_WhoAreYou
+	translation.en:My name's Bjarne. That should be enough.
+	translation.de:Mein Name ist Bjarne. Das sollte reichen.
+	translation.ch:Min Name isch Bjarne. Das sött lange.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_bjarne", "talk")
+	# translation: 
+	translation.tag:DL_Bjarne_Talk
+	translation.en:No.
+	translation.de:Nein.
+	translation.ch:Nei.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:removeItem("fo_physalis", 10)
+	# translation: 
+	translation.tag:DL_Bjarne_RunasDeal
+	translation.en:Hm. I didn't expect her to send someone else.
+	translation.de:Hm. Ich hätte nicht erwartet, dass sie jemand anderen schickt.
+	translation.ch:Hm. Ich hett nid erwartet, dass si öpper andersch schickt.
+	[
+		# Link node, tag is next tag
+		tag:4
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Bjarne_RunasDeal2
+	translation.en:Especially not a mage.
+	translation.de:Und ganz sicher keinen Magier.
+	translation.ch:Und ganz sicher ken Magier.
+	[
+		# Link node, tag is next tag
+		tag:5
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addQuestDescription("runas_deal", 1)
+	trigger:DL:addItem("eq_antimagicpendant", 1)
+	# translation: 
+	translation.tag:DL_Bjarne_RunasDeal3
+	translation.en:But well... here you go. You should be careful with that...
+	translation.de:Aber gut... Hier hast du es. Damit solltest du vorsichtig sein... 
+	translation.ch:Aber guet... do hesches. Du sötsch vorsichtig si demit...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_bjarne", "physalis")
+	# translation: 
+	translation.tag:DL_Bjarne_Physalis
+	translation.en:That's none of your business.
+	translation.de:Das geht dich nichts an.
+	translation.ch:Das goht di nüt ah.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_bjarne", "mages")
+	# translation: 
+	translation.tag:DL_Bjarne_Mages
+	translation.en:Because she's afraid of them.
+	translation.de:Weil sie sich vor ihnen fürchtet.
+	translation.ch:Well si Angst het vor ihne. 
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_bjarne", "mage")
+	# translation: 
+	translation.tag:DL_Bjarne_Mage
+	translation.en:You should know that.
+	translation.de:Das solltest du wissen.
+	translation.ch:Das sötsch wüsse.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}

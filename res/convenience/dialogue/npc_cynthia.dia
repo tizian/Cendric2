@@ -1,0 +1,180 @@
+# dia file for dialogue for npc: npc_cynthia
+
+npc.id:npc_cynthia
+
+{5
+	# [-1] Start Node
+	tag:-1
+	[
+		# Link node, tag is next tag
+		tag:1
+		condition:not DL:isConditionFulfilled("npc_cynthia", "talked")
+	]
+	[
+		# Link node, tag is next tag
+		tag:10
+	]
+}
+{1
+	# [1] NPC Node
+	tag:1
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cynthia_ChooseSide
+	translation.en:Whose side are you on, mages or commoners?
+	translation.de:Auf wessen Seite stehst du, Magier oder Gewöhnliche?
+	translation.ch:Uf welere Siite bisch, Magier oder Gwöhnlichi?
+	[
+		# Link node, tag is next tag
+		tag:2
+	]
+}
+{2
+	# [2] Choice Node
+	tag:2
+	[
+		# Link node, tag is next tag
+		tag:3
+		# translation: 
+		translation.tag:DL_Choice_Commoners
+		translation.en:Commoners.
+		translation.de:Gewöhnliche.
+		translation.ch:Gwöhnlichi.
+	]
+	[
+		# Link node, tag is next tag
+		tag:4
+		# translation: 
+		translation.tag:DL_Choice_Mages
+		translation.en:Mages.
+		translation.de:Magier.
+		translation.ch:Magier.
+	]
+	[
+		# Link node, tag is next tag
+		tag:5
+		condition:not DL:isConditionFulfilled("npc_cynthia", "side")
+		# translation: 
+		translation.tag:DL_Choice_WhySide
+		translation.en:Why do I have to choose a side?
+		translation.de:Weshalb muss ich eine Seite wählen?
+		translation.ch:Weso muni e Siite wähle?
+	]
+}
+{1
+	# [3] NPC Node
+	tag:3
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_cynthia", "talked")
+	# translation: 
+	translation.tag:DL_Cynthia_Commoners
+	translation.en:You're right. Magic is the root of all evil.
+	translation.de:Du hast recht. Magie ist die Wurzel alles Übels.
+	translation.ch:Du hesch recht. Magie isch d'Wurzle vo allem Übel.
+	[
+		# Link node, tag is next tag
+		tag:6
+	]
+}
+{1
+	# [6] NPC Node
+	tag:6
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cynthia_Commoners2
+	translation.en:Mages could kill you with a single word. Is that fair?
+	translation.de:Magier könnten dich mit einem einzigen Wort töten. Ist das gerecht?
+	translation.ch:Magier chönted dich mitme einzige Wort töte. Isch da fair?
+	[
+		# Link node, tag is next tag
+		tag:7
+	]
+}
+{1
+	# [7] NPC Node
+	tag:7
+	# triggers: 
+	trigger:DL:addItem("eq_antimagicpendant", 1)
+	# translation: 
+	translation.tag:DL_Cynthia_Commoners3
+	translation.en:Here, take this pendant, it will protect you against magic. Even against your own.
+	translation.de:Hier, nimm diesen Anhänger, er wird dich gegen Magie schützen. Sogar gegen deine eigene.
+	translation.ch:Do, nimm de Ahänger, er wird d i gege Magie schütze. Sogar gege dini eiget.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [4] NPC Node
+	tag:4
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_cynthia", "talked")
+	# translation: 
+	translation.tag:DL_Cynthia_Mages
+	translation.en:Yes, that's the only correct choice. We don't need the commoners anymore.
+	translation.de:Ja, das ist die einzig richtige Wahl. Wir brauchen die Magier nicht mehr.
+	translation.ch:Jo, das isch di einzig richtig Wahl. Mir bruched d'Magier nümm.
+	[
+		# Link node, tag is next tag
+		tag:8
+	]
+}
+{1
+	# [8] NPC Node
+	tag:8
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cynthia_Mages2
+	translation.en:Everything they can do, we can do eveb better.
+	translation.de:Alles was sie können, können wir noch besser.
+	translation.ch:Alles was si chönd, chömmer no besser.
+	[
+		# Link node, tag is next tag
+		tag:9
+	]
+}
+{1
+	# [9] NPC Node
+	tag:9
+	# triggers: 
+	trigger:DL:addItem("eq_magicpendant", 1)
+	# translation: 
+	translation.tag:DL_Cynthia_Mages3
+	translation.en:Here, take this pendant. It will enhance your magic.
+	translation.de:Hier, nimm diesen Anhänger. Er wird deine Magie verstärken.
+	translation.ch:Do, nimm de Ahänger. Er wird dini Magie verstärche.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}
+{1
+	# [5] NPC Node
+	tag:5
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_cynthia", "side")
+	# translation: 
+	translation.tag:DL_Cynthia_WhySide
+	translation.en:Because one day, there will only be one. So...
+	translation.de:Weil irgendwann wird es nur noch eine Seite geben. Also...
+	translation.ch:Well irgendwenn wirds nur no ei Siite gä. Also...
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Cynthia_Busy
+	translation.en:I really got other stuff to do. Leave me alone.
+	translation.de:Ich hab nun wirklich anderes zu tun. Lass mich in Ruhe.
+	translation.ch:Ich ha ez würkli anders ztue. Loh mi in Rue.
+	[
+		# Link node, tag is next tag
+		tag:-1
+	]
+}

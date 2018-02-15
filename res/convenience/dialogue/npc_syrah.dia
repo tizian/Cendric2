@@ -139,8 +139,18 @@ npc.id:npc_syrah
 	]
 	[
 		# Link node, tag is next tag
+		tag:48
+		condition:DL:isQuestState("antimagic_crystal", "started") and DL:hasItem("eq_antimagicpendant") and not DL:isConditionFulfilled("npc_syrah", "antimagic_pendant")
+		# translation: 
+		translation.tag:DL_Choice_AntimagicPendant
+		translation.en:I got this anti-magic pendant here, would this work?
+		translation.de:Ich habe diesen antimagischen Anhänger hier, würde das funktionieren?
+		translation.ch:Ich ha de antimagisch Ahänger do, wür das funktioniere?
+	]
+	[
+		# Link node, tag is next tag
 		tag:22
-		condition:(DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))
+		condition:(DL:isQuestState("antimagic_crystal", "started") and DL:isQuestComplete("antimagic_crystal")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))
 		# translation: 
 		translation.tag:DL_Choice_MarkQuestDone
 		translation.en:I got what you wanted. (Give crystal)
@@ -337,6 +347,35 @@ npc.id:npc_syrah
 	translation.en:Thank you so much, that's perfect! I'll brew potions for you now if you bring me some herbs.
 	translation.de:Vielen Dank, das ist perfekt! Ich werde dir nun Tränke brauen, wenn du mir Kräuter bringst.
 	translation.ch:Jä danke, das isch perfekt! Ich wirde der jetz Tränkli braue, wennd mer d'Chrütli drzue bringsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [48] NPC Node
+	tag:48
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_AntimagicPendant
+	translation.en:That's an interesting pendant you got there. It's strong, but not strong enough to remove your curse, I'm afraid.
+	translation.de:Das ist ein interessanter Anhänger, den du da hast. Er ist mächtig, aber es reicht nicht, um deinen Fluch aufzuheben.
+	translation.ch:Das isch en interessante Ahänger, wod da hesch. Er isch mächtig, aber nid mächtig gnueg, zum din Fluech ufhebe.
+	[
+		# Link node, tag is next tag
+		tag:49
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_syrah", "antimagic_pendant")
+	# translation: 
+	translation.tag:DL_Syrah_AntimagicPendant2
+	translation.en:We need a bigger crystal.
+	translation.de:Wir brauchen einen grösseren Kristall.
+	translation.ch:Mer bruched en grössere Kristall.
 	[
 		# Link node, tag is next tag
 		tag:-2

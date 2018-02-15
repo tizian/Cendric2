@@ -54,7 +54,10 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) then 
 		DL:addChoice(7, "DL_Choice_BrewQuestDone") -- I got your ingredients. (Give ingredients)
 	end
-	if ((DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
+	if (DL:isQuestState("antimagic_crystal", "started") and DL:hasItem("eq_antimagicpendant") and not DL:isConditionFulfilled("npc_syrah", "antimagic_pendant")) then 
+		DL:addChoice(48, "DL_Choice_AntimagicPendant") -- I got this anti-magic pendant here, would this work?
+	end
+	if ((DL:isQuestState("antimagic_crystal", "started") and DL:isQuestComplete("antimagic_crystal")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
 		DL:addChoice(22, "DL_Choice_MarkQuestDone") -- I got what you wanted. (Give crystal)
 	end
 	if (DL:isQuestState("antimagic_crystal", "completed") and DL:isQuestState("favor_for_a_favor", "void")) then 
@@ -127,7 +130,19 @@ loadDialogue = function(DL)
 
 	end
 
-	if ((DL:isQuestState("questionable_method", "started") and DL:isQuestComplete("questionable_method")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
+	if (DL:isQuestState("antimagic_crystal", "started") and DL:hasItem("eq_antimagicpendant") and not DL:isConditionFulfilled("npc_syrah", "antimagic_pendant")) then 
+
+		DL:createNPCNode(48, 49, "DL_Syrah_AntimagicPendant") -- That's an interesting pendant you got there. It's strong, but not strong enough to remove your curse, I'm afraid.
+		DL:addNode()
+
+
+		DL:createNPCNode(49, -2, "DL_Syrah_AntimagicPendant2") -- We need a bigger crystal.
+		DL:addConditionProgress("npc_syrah", "antimagic_pendant")
+		DL:addNode()
+
+	end
+
+	if ((DL:isQuestState("antimagic_crystal", "started") and DL:isQuestComplete("antimagic_crystal")) or (DL:isConditionFulfilled("npc_syrah", "helper1") and not DL:isConditionFulfilled("npc_syrah", "helper2"))) then 
 
 		DL:createNPCNode(22, 23, "DL_Syrah_MarkQuestDone") -- Ah, perfect. Now let's get started.
 		DL:changeQuestState("antimagic_crystal", "completed")

@@ -602,7 +602,7 @@ Désirée Aeberhard - Berner Dialekt (Stadtwache)
 David Minder - Berner Dialekt (Königswache)
 Vangelis Al-Sghir - Zürcher Dialekt (Mona, Lola)
 Patrick Haab - Zürcher Dialekt (Karma)
-Chris Rene Schlauri [ManaBar] - Basler Dialekt (Robert)
+Chris Ryter [ManaBar] - Basler Dialekt (Robert)
 Isa - Schaffhuser Dialekt (De Rest)
 
 <<< Korrekturleser (Englisch) >>>

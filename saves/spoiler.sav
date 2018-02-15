@@ -90,6 +90,7 @@ item.id:eq_rubynecklace,1
 item.id:eq_rubyring,1
 item.id:eq_holyring,1
 item.id:eq_antimagicpendant,1
+item.id:eq_magicpendant,1
 item.id:eq_sack,1
 item.id:eq_scalearmor,1
 item.id:eq_shadowcloak,1
