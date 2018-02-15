@@ -178,6 +178,7 @@ loadDialogue = function(DL)
 
 		DL:createNPCNode(29, 30, "DL_Syrah_RelieveCurse4") -- Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)
 		DL:addQuestDescription("the_mark", 4)
+		DL:addConditionProgress("default", "mark_weak")
 		DL:addNode()
 
 

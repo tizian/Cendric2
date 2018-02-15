@@ -22,7 +22,7 @@ npc.id:npc_clementia
 	trigger:DL:addConditionProgress("npc_clementia", "talked")
 	# translation: 
 	translation.tag:DL_Clementia_Hi
-	translation.en:Oh, hello there! If you're looking for the finest weapons here in Gandria, you're lucky - here they are!
+	translation.en:Oh, hello there! If you're looking for the finest weapons in Gandria, you're lucky; here they are!
 	translation.de:Oh, hallo! Wenn du nach den besten Waffen in Gandria suchst, hast du Glück - hier sind sie!
 	translation.ch:Oh, hallo du! Wenn du di bestä Waffe in Gandria suechsch hesch Glück - da sind si!
 	[

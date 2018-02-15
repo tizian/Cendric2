@@ -1,4 +1,4 @@
-INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhoAreYou', 'dl_npc_bjarne', 'Wer bist du?', 'Wer bisch du?', 'Wer bisch du?');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_WhoAreYou', 'dl_npc_bjarne', 'Who are you?', 'Wer bist du?', 'Wer bisch du?');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Talk', 'dl_npc_bjarne', 'You don''t like to talk much?', 'Du redest wohl nicht so gerne?', 'Du redsch nid so gern, he?');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_RunasDeal', 'dl_npc_bjarne', 'Runa sent me. I got some Physalis for you.', 'Runa hat mich geschickt. Ich habe Physalis für dich.', 'D''Runa het mi gschickt. Ich ha Physalis für dich.');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Choice_Physalis', 'dl_npc_bjarne', 'What do you need that many Physalis for?', 'Für was brauchst du so viele Physalis?', 'Für was bruchsch so viel Physalis?');

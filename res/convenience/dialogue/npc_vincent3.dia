@@ -38,7 +38,7 @@ npc.id:npc_vincent3
 	trigger:DL:changeQuestState("rusty_key", "completed")
 	# translation: 
 	translation.tag:DL_Vincent_Welcome
-	translation.en:So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
+	translation.en:So you finally found us. Welcome to the the hideout of the Shadow Stalkers.
 	translation.de:Du hast also den Weg zu uns gefunden. Willkommen im Versteck der Schattenläufer.
 	translation.ch:Du häsch also dä Wäg zu üs gfundä. Willkomme im Versteck vodä Schatteläufer.
 	[
@@ -208,7 +208,7 @@ npc.id:npc_vincent3
 	trigger:DL:addConditionProgress("npc_vincent3", "why_hiding")
 	# translation: 
 	translation.tag:DL_Vincent_WhyHiding2
-	translation.en:Twilight and elemental magic are tolerated though in contrast to necromancy - but still, the paladins don't like what we're doing with our magic.
+	translation.en:Twilight and elemental magic are tolerated though, in contrast to necromancy... But still; the paladins don't like what we're doing with our magic.
 	translation.de:Dämmerungs- und Elementarmagie werden jedoch toleriert, im Gegensatz zu Nekromantie. Trotzdem mögen die Paladine nicht, was wir mit unserer Magie anstellen.
 	translation.ch:Dämmerigs- und Elementarmagie werdäd abo toleriert, im Gegesatz zu Nekromantie. D'Paladin hend abo trotzdäm nöd gern wa mir mit üsere Magie so astelläd.
 	[
@@ -325,7 +325,7 @@ npc.id:npc_vincent3
 	trigger:DL:addQuestDescription("join_a_guild", 4)
 	# translation: 
 	translation.tag:DL_Vincent_DeclareThief
-	translation.en:You won't regret this. Welcome in our guild, shadow stalker.
+	translation.en:You won't regret this. Welcome to our guild, shadow stalker.
 	translation.de:Das wirst du nicht bereuen. Willkommen in unserer Gilde, Schattenläufer.
 	translation.ch:Das wirsch du nöd bereue. Willkomme i üsere Gildä, Schatteläufer.
 	[
@@ -511,7 +511,7 @@ npc.id:npc_vincent3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_LloydsPlan
-	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+	translation.en:You know the leader of the clerics, Lloyd, don't you? He's been acting strange lately, it seems like he's planning something.
 	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
 	translation.ch:Du kennsch dä Afühäro vodä Kleriker, dä Lloyd, gäll? Er hät sich i letschter Ziit komisch beno, es schiint als würor öppis plane.
 	[
@@ -659,9 +659,9 @@ npc.id:npc_vincent3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_CompleteLloydsPlan2
-	translation.en:We'll be a lot more vigilantly now. I'm only worried about Koray, Nuray's brother.
-	translation.de:Wir werden nun um einiges wachsamer sein. Ich mache mir nur Sorgen um Koray, Nuray's Bruder.
-	translation.ch:Mir werdäd um einiges wachsamer sii. Ich mach mo bloss chli Sorgä um dä Koray, dä Nuray ihre Brüedor.
+	translation.en:We'll be a lot more vigilant now. But I'm now really worried about Koray, Nuray's brother.
+	translation.de:Wir werden nun um einiges wachsamer sein. Aber ich mache mir nun wirklich Sorgen um Koray, Nuray's Bruder.
+	translation.ch:Mir werdäd um einiges wachsamer sii. Ich mach mo ez echt chli Sorgä um dä Koray, dä Nuray ihre Brüedor.
 	[
 		# Link node, tag is next tag
 		tag:31

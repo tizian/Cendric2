@@ -78,7 +78,7 @@ loadDialogue = function(DL)
 	DL:addChoice(14, "DL_Choice_AboutGandria") -- ... Gandria?
 	DL:addChoice(13, "DL_Choice_AboutKing") -- ... the king?
 	DL:addChoice(12, "DL_Choice_AboutMages") -- ... mages?
-	DL:addChoice(15, "DL_Choice_AboutNecromany") -- ... Necromancy?
+	DL:addChoice(15, "DL_Choice_AboutNecromany") -- ... necromancy?
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
 

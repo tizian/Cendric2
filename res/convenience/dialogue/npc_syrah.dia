@@ -483,6 +483,7 @@ npc.id:npc_syrah
 	tag:29
 	# triggers: 
 	trigger:DL:addQuestDescription("the_mark", 4)
+	trigger:DL:addConditionProgress("default", "mark_weak")
 	# translation: 
 	translation.tag:DL_Syrah_RelieveCurse4
 	translation.en:Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)

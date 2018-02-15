@@ -283,7 +283,7 @@ npc.id:npc_citizen1
 		tag:15
 		# translation: 
 		translation.tag:DL_Choice_AboutNecromany
-		translation.en:... Necromancy?
+		translation.en:... necromancy?
 		translation.de:... Nekromantie?
 		translation.ch:... Nekromantie?
 	]

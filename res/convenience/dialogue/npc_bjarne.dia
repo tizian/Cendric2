@@ -19,8 +19,8 @@ npc.id:npc_bjarne
 		condition:not DL:isConditionFulfilled("npc_bjarne", "who_are_you")
 		# translation: 
 		translation.tag:DL_Choice_WhoAreYou
-		translation.en:Wer bist du?
-		translation.de:Wer bisch du?
+		translation.en:Who are you?
+		translation.de:Wer bist du?
 		translation.ch:Wer bisch du?
 	]
 	[

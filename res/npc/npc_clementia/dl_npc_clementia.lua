@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_clementia", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Clementia_Hi") -- Oh, hello there! If you're looking for the finest weapons here in Gandria, you're lucky - here they are!
+		DL:createNPCNode(1, -2, "DL_Clementia_Hi") -- Oh, hello there! If you're looking for the finest weapons in Gandria, you're lucky; here they are!
 		DL:addConditionProgress("npc_clementia", "talked")
 		DL:addNode()
 

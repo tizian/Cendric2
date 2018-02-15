@@ -6,7 +6,7 @@ loadDialogue = function(DL)
 
 	DL:createChoiceNode(1)
 	if (not DL:isConditionFulfilled("npc_bjarne", "who_are_you")) then 
-		DL:addChoice(2, "DL_Choice_WhoAreYou") -- Wer bist du?
+		DL:addChoice(2, "DL_Choice_WhoAreYou") -- Who are you?
 	end
 	if (DL:isConditionFulfilled("npc_bjarne", "who_are_you") and not DL:isConditionFulfilled("npc_bjarne", "talk")) then 
 		DL:addChoice(9, "DL_Choice_Talk") -- You don't like to talk much?

@@ -15,7 +15,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_vincent3", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Vincent_Welcome") -- So you've finally found us. Welcome to the the hideout of the Shadow Stalkers.
+		DL:createNPCNode(1, -2, "DL_Vincent_Welcome") -- So you finally found us. Welcome to the the hideout of the Shadow Stalkers.
 		DL:addConditionProgress("npc_vincent3", "talked")
 		DL:changeQuestState("rusty_key", "completed")
 		DL:addNode()
@@ -79,7 +79,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(7, -2, "DL_Vincent_WhyHiding2") -- Twilight and elemental magic are tolerated though in contrast to necromancy - but still, the paladins don't like what we're doing with our magic.
+			DL:createNPCNode(7, -2, "DL_Vincent_WhyHiding2") -- Twilight and elemental magic are tolerated though, in contrast to necromancy... But still; the paladins don't like what we're doing with our magic.
 			DL:addConditionProgress("npc_vincent3", "why_hiding")
 			DL:addNode()
 
@@ -129,7 +129,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(15, -2, "DL_Vincent_DeclareThief") -- You won't regret this. Welcome in our guild, shadow stalker.
+			DL:createNPCNode(15, -2, "DL_Vincent_DeclareThief") -- You won't regret this. Welcome to our guild, shadow stalker.
 			DL:addConditionProgress("npc_vincent3", "guild")
 			DL:addConditionProgress("default", "thief")
 			DL:addReputationProgress("thief", 10)
@@ -209,7 +209,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("lloyds_plan_thief", "void")) then 
 
-			DL:createNPCNode(12, 26, "DL_Vincent_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+			DL:createNPCNode(12, 26, "DL_Vincent_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He's been acting strange lately, it seems like he's planning something.
 			DL:addNode()
 
 
@@ -266,7 +266,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(30, 31, "DL_Vincent_CompleteLloydsPlan2") -- We'll be a lot more vigilantly now. I'm only worried about Koray, Nuray's brother.
+			DL:createNPCNode(30, 31, "DL_Vincent_CompleteLloydsPlan2") -- We'll be a lot more vigilant now. But I'm now really worried about Koray, Nuray's brother.
 			DL:addNode()
 
 
