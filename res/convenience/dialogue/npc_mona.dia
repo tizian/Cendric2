@@ -110,7 +110,7 @@ npc.id:npc_mona
 	[
 		# Link node, tag is next tag
 		tag:10
-		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)
+		condition:DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100) and not (DL:isConditionFulfilled("npc_mona", "sex_exotic") and DL:isConditionFulfilled("npc_mona", "sex_romantic"))
 		# translation: 
 		translation.tag:DL_Choice_FunNoGold
 		translation.en:I wanna have some fun. (100 Gold)

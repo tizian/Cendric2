@@ -18,12 +18,14 @@ public:
 	void setTooltipText(const std::string& tooltip);
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void onParentMouseOver() override;
+	void setShowOnTooltipToggle(bool show);
 
 protected:
 	BitmapText m_tooltipText;
 	sf::Time m_tooltipTime = sf::Time::Zero;
 	AnimatedGameObject* m_animatedParent;
 	bool m_useInteractiveColor;
+	bool m_showOnTooltipToggle;
 	float m_tooltipHeight;
 
 	static const sf::Time TOOLTIP_TIME;

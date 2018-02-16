@@ -19,7 +19,7 @@ markers = {
 	},
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {2025, 1825},
+		position = {2025, 1725},
 		step = -1
 	}
 }

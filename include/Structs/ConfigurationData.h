@@ -30,6 +30,7 @@ struct ConfigurationData final {
 	bool isGodmode;
 	bool isDebugRendering;
 	bool isWindowReload;
+	bool isDisplayTime;
 	LogLevel logLevel;
 
 public:

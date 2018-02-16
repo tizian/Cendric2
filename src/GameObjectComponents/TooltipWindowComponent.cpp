@@ -40,6 +40,10 @@ void TooltipWindowComponent::setTooltipTime(const sf::Time& time) {
 	m_tooltipTime = time;
 }
 
+void TooltipWindowComponent::setShowOnTooltipToggle(bool show) {
+	m_showOnTooltipToggle = show;
+}
+
 void TooltipWindowComponent::setCurrentTooltipTime(const sf::Time& time) {
 	m_currentTooltipTime = time;
 }
@@ -65,6 +69,6 @@ float TooltipWindowComponent::getHeight() const {
 }
 
 bool TooltipWindowComponent::isShowingTooltip() const {
-	return g_inputController->isKeyActive(Key::ToggleTooltips) || 
+	return (m_showOnTooltipToggle && g_inputController->isKeyActive(Key::ToggleTooltips)) || 
 		m_showTooltip || m_currentTooltipTime > sf::Time::Zero;
 }

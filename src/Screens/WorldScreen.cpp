@@ -5,6 +5,7 @@
 #include "World/Trigger.h"
 #include "World/DoorTile.h"
 #include "Steam/AchievementManager.h"
+#include "GUI/Stopwatch.h"
 
 const std::string WorldScreen::VERTEX_SHADER = \
 "void main()" \
@@ -48,6 +49,10 @@ WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 	m_foregroundLayerShader.loadFromMemory(VERTEX_SHADER, foregroundFragmentShader);
 
 	setTooltipPositionTop(true);
+
+	if (g_resourceManager->getConfiguration().isDisplayTime) {
+		addObject(new Stopwatch(core));
+	}
 }
 
 WorldScreen::~WorldScreen() {

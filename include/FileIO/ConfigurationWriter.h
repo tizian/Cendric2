@@ -34,4 +34,5 @@ private:
 	std::string writeDebugRenderingOn(const ConfigurationData& data) const;
 	std::string writeSmoothingOn(const ConfigurationData& data) const;
 	std::string writeLogLevel(const ConfigurationData& data) const;
+	std::string writeIsDisplayTime(const ConfigurationData& data) const;
 };

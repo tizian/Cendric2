@@ -194,6 +194,8 @@ public:
 	void increaseDeathCount(const std::string& level);
 	// marks the player as a cheater
 	void setHashInvalid();
+	// returns the current time played
+	sf::Time getTimePlayed() const;
 
 protected:
 	// protected constructor for copying

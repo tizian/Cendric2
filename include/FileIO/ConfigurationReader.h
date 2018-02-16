@@ -37,6 +37,7 @@ private:
 	bool readAutotargetOn(const std::string& line, ConfigurationData& data) const;
 	 
 	bool readLogLevel(const std::string& line, ConfigurationData& data) const;
+	bool readIsDisplayTime(const std::string& line, ConfigurationData& data) const;
 
 private:
 	bool readBoolean(const std::string& line, bool& data) const;

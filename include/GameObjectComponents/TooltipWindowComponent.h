@@ -20,6 +20,7 @@ public:
 	void setTextAlignment(TextAlignment alignment);
 	void setTextOffset(const sf::Vector2f& offset);
 	void setTooltipText(const std::string& tooltip);
+	void setShowOnTooltipToggle(bool show);
 	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
 	void onParentMouseOver() override;
 
@@ -29,6 +30,7 @@ public:
 
 protected:
 	bool m_showTooltip = false;
+	bool m_showOnTooltipToggle = false;
 	TooltipWindow m_tooltipWindow;
 	sf::Time m_tooltipTime;
 	sf::Time m_currentTooltipTime;

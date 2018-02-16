@@ -39,7 +39,7 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and DL:hasItem("gold", 100)) then 
 		DL:addChoice(9, "DL_Choice_Fun") -- I wanna have some fun.
 	end
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)) then 
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100) and not (DL:isConditionFulfilled("npc_mona", "sex_exotic") and DL:isConditionFulfilled("npc_mona", "sex_romantic"))) then 
 		DL:addChoice(10, "DL_Choice_FunNoGold") -- I wanna have some fun. (100 Gold)
 	end
 	DL:addChoice(4, "DL_Choice_Trade") -- Can I get a drink here?
@@ -155,7 +155,7 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100)) then 
+	if (DL:isConditionFulfilled("npc_mona", "fun_unlock") and not DL:hasItem("gold", 100) and not (DL:isConditionFulfilled("npc_mona", "sex_exotic") and DL:isConditionFulfilled("npc_mona", "sex_romantic"))) then 
 
 		DL:createNPCNode(10, -2, "DL_Mona_OpenGateNot") -- 
 		DL:addNode()

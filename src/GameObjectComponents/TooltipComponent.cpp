@@ -6,6 +6,7 @@ const sf::Time TooltipComponent::TOOLTIP_TIME = sf::seconds(1.f);
 TooltipComponent::TooltipComponent(const std::string& tooltip, AnimatedGameObject* parent, bool useInteractiveColor) : GameObjectComponent(parent) {
 	m_animatedParent = parent;
 	m_useInteractiveColor = useInteractiveColor;
+	m_showOnTooltipToggle = false;
 
 	m_tooltipText.setString(tooltip);
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
@@ -47,7 +48,7 @@ void TooltipComponent::setTooltipText(const std::string& tooltip) {
 }
 
 void TooltipComponent::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	bool showTooltip = g_inputController->isKeyActive(Key::ToggleTooltips);
+	bool showTooltip = m_showOnTooltipToggle && g_inputController->isKeyActive(Key::ToggleTooltips);
 	if (showTooltip || m_tooltipTime > sf::Time::Zero) {
 		renderTarget.draw(m_tooltipText);
 	}
@@ -58,4 +59,8 @@ void TooltipComponent::onParentMouseOver() {
 		m_animatedParent->setSpriteColor(COLOR_INTERACTIVE, sf::milliseconds(100));
 	}
 	m_tooltipTime = TOOLTIP_TIME;
+}
+
+void TooltipComponent::setShowOnTooltipToggle(bool show) {
+	m_showOnTooltipToggle = show;
 }

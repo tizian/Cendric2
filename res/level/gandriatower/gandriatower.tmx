@@ -836,7 +836,7 @@
    </properties>
   </object>
   <object id="228" gid="889" x="150" y="1150" width="50" height="50"/>
-  <object id="234" gid="799" x="350" y="825" width="50" height="50"/>
+  <object id="234" gid="799" x="350" y="850" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 3">
   <object id="242" gid="918" x="1250" y="1400" width="50" height="50">

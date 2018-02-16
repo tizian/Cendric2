@@ -68,6 +68,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(LOG_LEVEL), std::string(LOG_LEVEL)) == 0) {
 				noError = readLogLevel(line, data);
 			}
+			else if (line.compare(0, strlen(DISPLAY_TIME), std::string(DISPLAY_TIME)) == 0) {
+				noError = readIsDisplayTime(line, data);
+			}
 			else {
 				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file on line: " + line);
 				noError = false;
@@ -273,6 +276,10 @@ bool ConfigurationReader::readSmoothingOn(const std::string& line, Configuration
 
 bool ConfigurationReader::readAutotargetOn(const std::string& line, ConfigurationData& data) const {
 	return readBoolean(line, data.isAutotarget);
+}
+
+bool ConfigurationReader::readIsDisplayTime(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isDisplayTime);
 }
 
 bool ConfigurationReader::readMainInputMapping(const std::string& line, ConfigurationData& data) const {

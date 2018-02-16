@@ -1,24 +1,28 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
+#include "Gui/Window.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
 #include "GUI/BitmapText.h"
 
+class CharacterCore;
+
 class Stopwatch final : public GameObject {
 public:
-	Stopwatch();
+	Stopwatch(const CharacterCore* core);
+	~Stopwatch();
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	
-	void restart();
-	
 	GameObjectType getConfiguredType() const override;
 
-protected:
+private:
+	void initBackgroundLayers();
+
+private:
 	BitmapText m_text;
-	sf::Time m_time;
-	sf::Clock m_stopwatch;
+	const CharacterCore* m_core;
+	Window* m_window = nullptr;
 };

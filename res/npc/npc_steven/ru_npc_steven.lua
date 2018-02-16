@@ -7,8 +7,8 @@ loadRoutine = function(R, W)
 		R:setTalkingActive(true) 
 		R:setLooped(false)
 		R:setReloadEnabled(true)
-		R:setTilePosition(4,61.7)
-		R:goToTile(4,63)
+		R:setTilePosition(4,62.7)
+		R:goToTile(4,64)
 
 	else 
 	

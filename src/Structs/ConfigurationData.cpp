@@ -20,6 +20,7 @@ void ConfigurationData::resetToDefault() {
 	isGodmode = false;
 	isDebugRendering = false;
 	isWindowReload = false;
+	isDisplayTime = false;
 	logLevel = LogLevel::Error;
 }
 

@@ -911,3 +911,7 @@ void CharacterCore::increaseDeathCount(const std::string& level) {
 void CharacterCore::setHashInvalid() {
 	m_data.hashValid = false;
 }
+
+sf::Time CharacterCore::getTimePlayed() const {
+	return m_data.timePlayed + m_stopwatch.getElapsedTime();
+}

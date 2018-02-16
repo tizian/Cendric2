@@ -24,6 +24,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeSmoothingOn(data);
 		configuration << writeMultithreadingOn(data);
 		configuration << writeDebugRenderingOn(data);
+		configuration << writeIsDisplayTime(data);
 		configuration << writeLogLevel(data);
 
 		configuration.close();
@@ -81,6 +82,11 @@ std::string ConfigurationWriter::writeQuestmarkersOn(const ConfigurationData& da
 std::string ConfigurationWriter::writeMultithreadingOn(const ConfigurationData& data) const {
 	std::string multithreadingOn = "# 0 means multithreaded loading is off, 1 means multithreaded loading is on\n";
 	return multithreadingOn.append(std::string(MULTITHREADING_ON) + ":" + (data.isMultithreading ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writeIsDisplayTime(const ConfigurationData& data) const {
+	std::string displayTime = "# 1 means the time played is displayed, 0 means it's not.\n";
+	return displayTime.append(std::string(DISPLAY_TIME) + ":" + (data.isDisplayTime ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeDebugRenderingOn(const ConfigurationData& data) const {

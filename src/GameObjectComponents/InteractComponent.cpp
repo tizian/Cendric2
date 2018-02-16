@@ -19,6 +19,8 @@ InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* pa
 	m_interactText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
 	setInteractText("ToInteract");
+
+	setShowOnTooltipToggle(true);
 }
 
 void InteractComponent::update(const sf::Time& frameTime) {

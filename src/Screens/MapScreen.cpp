@@ -27,6 +27,7 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	handleDialogueWindow(frameTime);
 	handleBookWindow(frameTime);
 	m_currentMap.update(frameTime);
+	updateObjects(_Form, frameTime);
 	if (isOverlayActive()) return;
 
 	WorldScreen::execUpdate(frameTime);
@@ -225,8 +226,11 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	m_weatherSystem->render(renderTarget);
 
 	renderTooltipText(renderTarget);
+	
 	WorldScreen::render(renderTarget); // this will set the view to the default view!
 	renderAfterForeground(renderTarget);
+	renderObjects(_Form, renderTarget);
+
 	if (!isOverlayVisible()) {
 		renderObjects(_ScreenOverlay, renderTarget);
 	}
