@@ -22,9 +22,9 @@ npc.id:npc_jason
 	trigger:DL:addConditionProgress("npc_jason", "talked")
 	# translation: 
 	translation.tag:DL_Jason_Hello
-	translation.en:Hm? Just because Rana loves to talk does not mean I do. Keep it short.
-	translation.de:Hm? Nur weil Rana gerne viel redet, heisst das nicht, dass ich das auch tue. Halte dich kurz.
-	translation.ch:Hm? Nur well d'Rana gern vell redt heisst das ned, dass i das au mache. Halt dich churz.
+	translation.en:Hm? Just because Jana loves to talk does not mean I do. Keep it short.
+	translation.de:Hm? Nur weil Jana gerne viel redet, heisst das nicht, dass ich das auch tue. Halte dich kurz.
+	translation.ch:Hm? Nur well d'Jana gern vell redt heisst das ned, dass i das au mache. Halt dich churz.
 	[
 		# Link node, tag is next tag
 		tag:-2

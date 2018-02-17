@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jason", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Jason_Hello") -- Hm? Just because Rana loves to talk does not mean I do. Keep it short.
+		DL:createNPCNode(1, -2, "DL_Jason_Hello") -- Hm? Just because Jana loves to talk does not mean I do. Keep it short.
 		DL:addConditionProgress("npc_jason", "talked")
 		DL:addNode()
 

@@ -1,4 +1,4 @@
--- lua script for merchand 'Java'
+-- lua script for merchand 'Jana'
 wares = 
 {
     {"eq_demonbody",1},

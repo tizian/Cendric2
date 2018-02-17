@@ -50,7 +50,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('np
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_yasha','npc','Yasha','Yasha','Yasha');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_zephyra','npc','Zephyra','Zephyra','Zephyra');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_lola','npc','Lola','Lola','Lola');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_rana','npc','Rana','Rana','Rana');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jana','npc','Jana','Jana','Jana');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_jason','npc','Jason','Jason','Jason');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_graham','npc','Graham Teawenth','Graham Teawenth','Graham Teawenth');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('npc_rappa','npc','Rappa','Rappa','Rappa');

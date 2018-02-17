@@ -8,6 +8,11 @@ npc.id:npc_velius
 	[
 		# Link node, tag is next tag
 		tag:1
+		condition:not DL:isConditionFulfilled("npc_velius", "talked") and not DL:isItemEquipped("we_arazath")
+	]
+	[
+		# Link node, tag is next tag
+		tag:54
 		condition:not DL:isConditionFulfilled("npc_velius", "talked")
 	]
 	[
@@ -21,10 +26,39 @@ npc.id:npc_velius
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_velius", "talked")
 	# translation: 
-	translation.tag:DL_NPC_Talked
+	translation.tag:DL_Velius_Talked
 	translation.en:Finally. I waited so long for this.
 	translation.de:Endlich. Darauf habe ich lange gewartet.
 	translation.ch:Endlich. Do druf hani lang gwartet.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [54] NPC Node
+	tag:54
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_velius", "talked")
+	# translation: 
+	translation.tag:DL_Velius_ArazathTalked
+	translation.en:Hm. Your sword looks familiar... but it won't save you now.
+	translation.de:Hm. Dein Schwert kommt mir bekannt vor... aber es wird dich jetzt auch nicht mehr retten.
+	translation.ch:Hm. Dis Schwert chuntmer bekannt vor... aber es wird di ez au nüm rette.
+	[
+		# Link node, tag is next tag
+		tag:55
+	]
+}
+{1
+	# [55] NPC Node
+	tag:55
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Velius_ArazathTalked2
+	translation.en:I've waited long - too long - for this.
+	translation.de:Ich habe lange, zu lange, auf diesen Moment gewartet.
+	translation.ch:Ich ha lang, zu lang, uf de Moment gwartet.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -321,9 +355,9 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_KnowMe3
-	translation.en:My curse has fulfilled its purpose.
-	translation.de:Mein Fluch hat seinen Zweck erfüllt.
-	translation.ch:Min Fluech het sin Zweck erfüllt.
+	translation.en:My curse has fulfilled its purpose. Weakening it didn't help you either.
+	translation.de:Mein Fluch hat seinen Zweck erfüllt. Ihn zu schwächen, hat dir auch nichts gebracht.
+	translation.ch:Min Fluech het sin Zweck erfüllt. Dasen gschwächt hesch, het der au nüt brocht.
 	[
 		# Link node, tag is next tag
 		tag:-2

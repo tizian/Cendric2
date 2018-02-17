@@ -104,7 +104,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(47, -2, "DL_Syrah_Mark5") -- You could try to steal the tower key from a paladin... or - if that's not your way of solving things - just buy a crystal.
+		DL:createNPCNode(47, -2, "DL_Syrah_Mark5") -- You could try to steal the tower key from a paladin... or - if that's not your way of solving problems - just buy a crystal.
 		DL:changeQuestState("antimagic_crystal", "started")
 		DL:addNode()
 

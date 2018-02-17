@@ -310,7 +310,7 @@ npc.id:npc_syrah
 	trigger:DL:changeQuestState("antimagic_crystal", "started")
 	# translation: 
 	translation.tag:DL_Syrah_Mark5
-	translation.en:You could try to steal the tower key from a paladin... or - if that's not your way of solving things - just buy a crystal.
+	translation.en:You could try to steal the tower key from a paladin... or - if that's not your way of solving problems - just buy a crystal.
 	translation.de:Du könntest versuchen, den Turmschlüssel von einem Paladin zu stehlen... oder - wenn das nicht deine Art ist, kannst du den Kristall vermutlich auch kaufen.
 	translation.ch:Du chöntsch probiere, de Turmschlüssel vomne Paladin z'chlaue... oder - wenn das nid so dini Art isch, chasch wahrschinli au en Kristall chaufe.
 	[

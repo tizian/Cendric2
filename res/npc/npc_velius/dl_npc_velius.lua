@@ -1,16 +1,30 @@
 -- Dialogue for NPC "npc_velius"
 loadDialogue = function(DL) 
 
-	if (not DL:isConditionFulfilled("npc_velius", "talked")) then 
+	if (not DL:isConditionFulfilled("npc_velius", "talked") and not DL:isItemEquipped("we_arazath")) then 
 		DL:setRoot(1) 
+	elseif (not DL:isConditionFulfilled("npc_velius", "talked")) then 
+		DL:setRoot(54) 
 	else 
 		DL:setRoot(2) 
 	end 
 
+	if (not DL:isConditionFulfilled("npc_velius", "talked") and not DL:isItemEquipped("we_arazath")) then 
+
+		DL:createNPCNode(1, -2, "DL_Velius_Talked") -- Finally. I waited so long for this.
+		DL:addConditionProgress("npc_velius", "talked")
+		DL:addNode()
+
+	end
+
 	if (not DL:isConditionFulfilled("npc_velius", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_NPC_Talked") -- Finally. I waited so long for this.
+		DL:createNPCNode(54, 55, "DL_Velius_ArazathTalked") -- Hm. Your sword looks familiar... but it won't save you now.
 		DL:addConditionProgress("npc_velius", "talked")
+		DL:addNode()
+
+
+		DL:createNPCNode(55, -2, "DL_Velius_ArazathTalked2") -- I've waited long - too long - for this.
 		DL:addNode()
 
 	end
@@ -114,7 +128,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(11, -2, "DL_Velius_KnowMe3") -- My curse has fulfilled its purpose.
+		DL:createNPCNode(11, -2, "DL_Velius_KnowMe3") -- My curse has fulfilled its purpose. Weakening it didn't help you either.
 		DL:addNode()
 
 	end

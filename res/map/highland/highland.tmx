@@ -412,10 +412,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="2305" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="2375" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="2382" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="50" height="50">
@@ -851,18 +851,18 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="317" gid="2376" x="600" y="750" width="50" height="50"/>
-  <object id="318" gid="2376" x="475" y="1850" width="50" height="50"/>
-  <object id="319" gid="2376" x="1850" y="2250" width="50" height="50"/>
-  <object id="320" gid="2376" x="1850" y="1500" width="50" height="50"/>
-  <object id="321" gid="2376" x="1875" y="800" width="50" height="50"/>
-  <object id="327" gid="2376" x="200" y="2012.5" width="50" height="50"/>
-  <object id="329" gid="2418" x="100" y="1975" width="50" height="50">
+  <object id="317" gid="2383" x="600" y="750" width="50" height="50"/>
+  <object id="318" gid="2383" x="475" y="1850" width="50" height="50"/>
+  <object id="319" gid="2383" x="1850" y="2250" width="50" height="50"/>
+  <object id="320" gid="2383" x="1850" y="1500" width="50" height="50"/>
+  <object id="321" gid="2383" x="1875" y="800" width="50" height="50"/>
+  <object id="327" gid="2383" x="200" y="2012.5" width="50" height="50"/>
+  <object id="329" gid="2425" x="100" y="1975" width="50" height="50">
    <properties>
     <property name="text" value="Pointless"/>
    </properties>
   </object>
-  <object id="331" gid="2375" x="425" y="1375" width="50" height="50"/>
+  <object id="331" gid="2382" x="425" y="1375" width="50" height="50"/>
  </objectgroup>
  <layer name="collidable" width="50" height="50">
   <data encoding="csv">
@@ -1040,7 +1040,7 @@
   </object>
   <object id="333" gid="2363" x="500" y="1400" width="50" height="50">
    <properties>
-    <property name="id" value="npc_rana"/>
+    <property name="id" value="npc_jana"/>
    </properties>
   </object>
  </objectgroup>

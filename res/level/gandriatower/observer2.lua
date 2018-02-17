@@ -1,10 +1,8 @@
--- Behavior for observer (2) in the level storeroom
+-- Behavior for observer (2) in the level gandriatower
 
 routine = function(O) 
-	O:gotoTile(26.5, 13.5)
-	O:gotoTile(23, 13.5)
-	O:gotoTile(23, 8.5)
-	O:gotoTile(25.5, 8.5)
-	O:gotoTile(23, 8.5)
-	O:gotoTile(23, 13.5)
+	O:wait(3)
+	O:gotoTile(3, 3)
+	O:wait(3)
+	O:gotoTile(18, 3)
 end
