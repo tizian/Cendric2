@@ -71,7 +71,7 @@ Signed
 Grand Magister Cyrus',
 'An den Novizen Cendric
 
-Die Situation hat sich als ernster entpuppt als wir bisher angenommen hatten. Es ist von äusserster Wichtigkeit, dass du die Karte dem Elementarmagier Jonathan überbringst, der in Gandria lebt. Unterstütze ihn in dieser Sache so gut wie dir nur möglich ist.
+Die Situation hat sich als ernster entpuppt, als wir bisher angenommen hatten. Es ist von äusserster Wichtigkeit, dass du die Karte dem Elementarmagier Jonathan überbringst, der in Gandria lebt. Unterstütze ihn in dieser Sache so gut wie dir nur möglich ist.
 
 Gezeichnet
 Grossmagister Cyrus',

@@ -11,7 +11,7 @@ markers = {
 	},
 	{
 		map = "res/map/gandria/gandria.tmx",
-		position = {675, 1175},
+		position = {550, 1175},
 		step = -1
 	}
 }

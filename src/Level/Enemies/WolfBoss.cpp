@@ -23,7 +23,7 @@ WolfBoss::WolfBoss(const Level* level, Screen* screen) :
 }
 
 void WolfBoss::loadAttributes() {
-	m_attributes.setHealth(250);
+	m_attributes.setHealth(200);
 	m_attributes.resistancePhysical = 100;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();

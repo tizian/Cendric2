@@ -113,8 +113,8 @@ npc.id:npc_cynthia
 	# translation: 
 	translation.tag:DL_Cynthia_Mages
 	translation.en:Yes, that's the only correct choice. We don't need the commoners anymore.
-	translation.de:Ja, das ist die einzig richtige Wahl. Wir brauchen die Magier nicht mehr.
-	translation.ch:Jo, das isch di einzig richtig Wahl. Mir bruched d'Magier nümm.
+	translation.de:Ja, das ist die einzig richtige Wahl. Wir brauchen die Gewöhnlichen nicht mehr.
+	translation.ch:Jo, das isch di einzig richtig Wahl. Mir bruched di Gwöhnliche nümm.
 	[
 		# Link node, tag is next tag
 		tag:8

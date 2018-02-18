@@ -163,7 +163,7 @@ npc.id:npc_lua
 	# translation: 
 	translation.tag:DL_Lua_NoNecromancer
 	translation.en:Just because I don't wear their robes? Well, to be honest, I just came here to read.
-	translation.de:Einfach weil ich nicht ihre Roben trage? Nun, um ehrlich zu sein, bin ich einfach zum lesen hergekommen.
+	translation.de:Einfach weil ich nicht ihre Roben trage? Nun, um ehrlich zu sein, bin ich einfach zum Lesen hergekommen.
 	translation.ch:Nur willi nit ihri Robe aa ha? Jo wenni ehrlig bi bini au nur doo zum läse.
 	[
 		# Link node, tag is next tag

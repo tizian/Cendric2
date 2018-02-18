@@ -102,7 +102,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_Forbidden
 	translation.en:Well, it shouldn't be. Still, mages hang when they are caught using necromancy.
-	translation.de:Nun, das sollte es natürlich nicht sein. Trotzdem werden noch immer Magier gehängt wenn sie beim ausüben von Nekromantie erwischt werden.
+	translation.de:Nun, das sollte es natürlich nicht sein. Trotzdem werden noch immer Magier gehängt, wenn sie beim Ausüben von Nekromantie erwischt werden.
 	translation.ch:Naja, es sett natyyrligg nid vrbote syy. Trotzdäm wärde immerno Magier ufghänggt wenns mit Nekromantie vrwütscht wärde.
 	[
 		# Link node, tag is next tag
@@ -292,8 +292,8 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_WhatIfJoin
 	translation.en:You will learn what necromancy has to offer. We can teach you powerful spells if you help us with our research.
-	translation.de:Du wirst lernen, was Nekromantie zu bieten hat. Wir können dir mächtige Zauber beibringen wenn du uns bei unserer Forschung unterstützt.
-	translation.ch:Du wirsch lerne, was Nekromantie so z'biete het. Mir könne dir mächtigi Zauber byybringe wenn du uns mit unsrer Forschig hilfsch.
+	translation.de:Du wirst lernen, was Nekromantie zu bieten hat. Wir können dir mächtige Zauber beibringen, wenn du uns bei unserer Forschung unterstützt.
+	translation.ch:Du wirsch lerne, was Nekromantie so z'biete het. Mir könne dir mächtigi Zauber byybringe, wenn du uns mit unsrer Forschig hilfsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -321,7 +321,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_WantToJoin
 	translation.en:You want to learn the forbidden magic and devote yourself to the mysteries of necromancy?
-	translation.de:Du möchtest die verbotene Magie erlernen und verschreibst dich den Geheimnissen der Nerkomantie?
+	translation.de:Du möchtest die verbotene Magie erlernen und verschreibst dich den Geheimnissen der Nekromantie?
 	translation.ch:Du möchtisch di verboteni Magie lerne und vrschryybsch di de Gheimnis vo dr Nekromantie?
 	[
 		# Link node, tag is next tag
@@ -513,8 +513,8 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_FirstSpell
 	translation.en:Yes, you may learn how to drain the life energy from your enemies, novice. 
-	translation.de:Ja, du darfst erlernen wie man die Lebensenergie eines Gegners entzieht, Novize.
-	translation.ch:Jo, du derfsch lerne wieme d'Läbensenergie vomä Gegner absuggt, Novize.
+	translation.de:Ja, du darfst erlernen, wie man die Lebensenergie eines Gegners entzieht, Novize.
+	translation.ch:Jo, du derfsch lerne, wieme d'Läbensenergie vomä Gegner absuggt, Novize.
 	[
 		# Link node, tag is next tag
 		tag:-2

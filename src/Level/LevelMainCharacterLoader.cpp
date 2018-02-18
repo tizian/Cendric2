@@ -23,8 +23,8 @@ void LevelMainCharacterLoader::loadEquipment(Screen* screen) {
 	std::vector<ItemType> equipmentOrder;
 
 	equipmentOrder.push_back(ItemType::Equipment_body);
-	equipmentOrder.push_back(ItemType::Equipment_head);
 	equipmentOrder.push_back(ItemType::Equipment_back);
+	equipmentOrder.push_back(ItemType::Equipment_head);
 	equipmentOrder.push_back(ItemType::Equipment_weapon);
 	equipmentOrder.push_back(ItemType::Equipment_neck);
 	equipmentOrder.push_back(ItemType::Equipment_ring_1);

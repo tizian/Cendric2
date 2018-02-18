@@ -28,7 +28,10 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriasewers','location','Sewers of Gandria','Kanalisation von Gandria','Kanalisation vo Gandria');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('syrahbasement','location','Syrah''s Basement','Syrah''s Keller','Chäller vode Syrah');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('marshland','location','The Marshland','Sumpfland','Sumpfland');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('smallcrypt','location','Crypt of the Outcast','Krypta der Ausgestossenen','Krypta vode Usgstossene');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('smallcrypt','location','Crypt
+of the Outcast','Krypta der
+Ausgestossenen','Krypta vode
+Usgstossene');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('necrohall','location','Halls of the Guardians','Halle der Wächter','Halle vode Wächter');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('storeroom','location','Storeroom','Vorratskammer','Vorrotschammere');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('forgottenpassage','location','The Forgotten Passage','Der Vergessene Durchgang','De Vergässeni Durchgang');

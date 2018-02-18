@@ -143,9 +143,17 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(19, -1, "DL_Jonathan_FireballQuest2") -- Some fire rats from the sewers recently invaded the laboratory in my basement. Find a way to lure them out and collect the essence of fire from their lungs. Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
+			DL:createNPCNode(19, 73, "DL_Jonathan_FireballQuest2") -- Some fire rats from the sewers recently invaded the laboratory in my basement.
 			DL:addItem("ke_jonathanbasement", 1)
+			DL:addNode()
+
+
+			DL:createNPCNode(73, 74, "DL_Jonathan_FireballQuest3") -- Find a way to lure them out and collect the essence of fire from their lungs.
 			DL:changeQuestState("essence_of_fire", "started")
+			DL:addNode()
+
+
+			DL:createNPCNode(74, -2, "DL_Jonathan_FireballQuest4") -- Come back to me when you're done and I'll see if you're able to learn how to summon a fireball.
 			DL:addNode()
 
 		end

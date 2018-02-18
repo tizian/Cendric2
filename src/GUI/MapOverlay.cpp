@@ -385,6 +385,7 @@ void MapOverlay::reloadQuestMarkers() {
 		auto questData = core->getQuestData(questId);
 
 		if (!questData) continue;
+		if (core->getQuestState(questData->id) != QuestState::Started) continue;
 
 		auto questMarkerDatas = QuestMarker::getCurrentStepData(*questData, core);
 		for (auto& markerData : questMarkerDatas) {

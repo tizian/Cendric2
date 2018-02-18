@@ -18,17 +18,17 @@ markers = {
 	},
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {975, 2875},
+		position = {975, 2700},
 		step = 2
 	},
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {975, 2875},
+		position = {975, 2700},
 		step = 3
 	},
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {975, 2875},
+		position = {525, 375},
 		step = 4
 	},
 	{

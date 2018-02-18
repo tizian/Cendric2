@@ -253,7 +253,7 @@ npc.id:npc_helena
 	translation.ch:Oh, a die erinnere ich mich nüm. Aber ich ha sowieso nur es paar Robe und Hüet loswerde chöne.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1

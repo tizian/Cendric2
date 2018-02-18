@@ -14,15 +14,15 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_icestaff', -10, -40, 40, 110);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_icestaff', 1, 350, 350, 50, 150);
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_icestaff', 30, 20, 100, 100, 80, 100, 0.3);
-INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max, attract_fraction) values ('we_icestaff', 50, 5, 1, 'res/texture/particles/star.png', 20, 20, -30, 
-5, 10, 0, 0,
-100, 110, 255, 255,
-100, 120, 255, 255,
-20, 200, 0, 200,
-20, 200, 0, 200,
-0, -50,
-40, 60,
-1.0, 2.0, 0.0);
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, goal_radius, speed_min, speed_max, time_min, time_max, attract_fraction) values ('we_icestaff', 50, 10, 0, 'res/texture/particles/snow.png', 50, 0, -30, 
+5, 10, 5, 10,
+255, 255, 255, 255,
+255, 255, 255, 255,
+255, 255, 255, 0,
+255, 255, 255, 0,
+0, 150, 200, 
+50, 100,
+4.0, 5.0, 0.0);
 
 -- Fire Staff
 
@@ -116,9 +116,9 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item','Iron Claw', 'Eisenklaue','Isechlaue');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_claw', 'item_desc', 'The curved sharp blades and its range create a terrible weapon.','Die gebogenen scharfen Klingen und ihre Reichweite machen sie zu einer fürchterlichen Waffe.','Di bogene scharfe Klinge und iri Riichwiiti mached si zunere fürchterliche Waffe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_claw', 'eq_weapon', 250, 250, 140, 2);
-INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, max_health, dmg_shadow) values ('we_claw', 8, 5, 10, 5);
+INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, max_health, dmg_shadow) values ('we_claw', 6, 5, 10, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_claw', 'res/texture/equipment/weapon/spritesheet_weapon_claw.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_claw.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_claw', 800, 10, 45, 80, 8);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_claw', 1000, 10, 45, 80, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 1, 'elemental', 1);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 2, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_claw', 3, 'necromancy', 3);
@@ -130,7 +130,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_enchanteddagger', 'eq_weapon', 550, 500, 100, 1);
 INSERT INTO item_attribute (item_id, critical, max_health) values ('we_enchanteddagger', 8, 6);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_enchanteddagger', 'res/texture/equipment/weapon/spritesheet_weapon_enchanteddagger.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_enchanteddagger.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_enchanteddagger', 500, 10, 35, 70, 6);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_enchanteddagger', 500, 10, 35, 70, 4);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_enchanteddagger', 1, 'elemental', 2);
 
 -- Inconspicuous Dagger
@@ -140,7 +140,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_inconspicuousdagger', 'eq_weapon', 600, 200, 110, 1);
 INSERT INTO item_attribute (item_id, dmg_physical, critical, max_health, dmg_shadow) values ('we_inconspicuousdagger', 1, 8, 6, 1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_inconspicuousdagger', 'res/texture/equipment/weapon/spritesheet_weapon_inconspicuousdagger.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_inconspicuousdagger.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_inconspicuousdagger', 500, 10, 30, 70, 6);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_inconspicuousdagger', 500, 10, 30, 70, 4);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_inconspicuousdagger', 1, 'twilight', 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_inconspicuousdagger', -14, -16, 17, 34);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('we_inconspicuousdagger', 1, 0, 200, 50, 50);
@@ -152,7 +152,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_herbalistblade', 'eq_weapon', 600, 300, 120, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, max_health, dmg_shadow) values ('we_herbalistblade', 2, 2, 7, 4, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_herbalistblade', 'res/texture/equipment/weapon/spritesheet_weapon_herbalistblade.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_herbalistblade.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_herbalistblade', 800, 10, 40, 70, 6);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_herbalistblade', 800, 10, 40, 70, 5);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 1, 'necromancy', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_herbalistblade', 2, 'elemental', 1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('we_herbalistblade', 0, 0, 39, 57);
@@ -165,7 +165,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_doublesickle', 'eq_weapon', 600, 350, 270, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_fire, dmg_physical, dmg_light, critical, haste, dmg_ice, max_health) values ('we_doublesickle', 5, 5, 10, 5, 5, 10, 5, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle', 'res/texture/equipment/weapon/spritesheet_weapon_doublesickle.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_doublesickle.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle', 350, 90, 80, -45, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle', 350, 90, 80, -45, 6);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle', 3, 'meta', 2);
@@ -179,7 +179,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_doublesickle_fire', 'eq_weapon', 750, 600, 440, 4);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_doublesickle_fire', 20, 10, 20, 8, 30, 16);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_fire', 'res/texture/equipment/weapon/spritesheet_weapon_doublesickle_fire.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_doublesickle_fire.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_fire', 350, 90, 80, -45, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_fire', 350, 90, 80, -45, 6);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_fire', 3, 'meta', 3);
@@ -193,7 +193,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_doublesickle_dark', 'eq_weapon', 750, 650, 440, 4);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_doublesickle_dark', 20, 10, 8, 30, 20, 16);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_doublesickle_dark', 'res/texture/equipment/weapon/spritesheet_weapon_doublesickle_dark.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_doublesickle_dark.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_dark', 350, 90, 80, -45, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_doublesickle_dark', 350, 90, 80, -45, 6);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_doublesickle_dark', 3, 'meta', 3);
@@ -207,7 +207,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 250, 3);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, haste, max_health, critical) values ('we_jasonsglaive', 20, 5, 20, 11, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 1, 'meta', 1);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 2, 'meta', 1);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive', 3, 'meta', 1);
@@ -221,7 +221,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive_fire', 'eq_weapon', 750, 500, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_jasonsglaive_fire', 15, 20, 15, 4, 40, 18);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_fire', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive_fire.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive_fire.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_fire', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_fire', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 1, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 2, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_fire', 3, 'meta', 2);
@@ -235,7 +235,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_jasonsglaive_dark', 15, 20, 4, 40, 15, 18);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive_dark.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive_dark.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_dark', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_jasonsglaive_dark', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 1, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 2, 'meta', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_jasonsglaive_dark', 3, 'meta', 2);
@@ -250,7 +250,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_fireglaive', 'eq_weapon', 700, 200, 265, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_fire, dmg_physical, critical, haste, max_health) values ('we_fireglaive', 5, 10, 15, 5, 10, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/texture/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 2, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive', 3, 'elemental', 2);
@@ -264,7 +264,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_fireglaive_fire', 'eq_weapon', 750, 400, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_fireglaive_fire', 20, 15, 20, 6, 20, 17);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_fire', 'res/texture/equipment/weapon/spritesheet_weapon_fireglaive_fire.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_fireglaive_fire.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_fire', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_fire', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_fire', 3, 'elemental', 3);
@@ -278,7 +278,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_fireglaive_dark', 'eq_weapon', 750, 450, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_fireglaive_dark', 20, 15, 6, 20, 20, 17);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive_dark', 'res/texture/equipment/weapon/spritesheet_weapon_fireglaive_dark.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_fireglaive_dark.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_dark', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_fireglaive_dark', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 2, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_fireglaive_dark', 3, 'elemental', 3);
@@ -303,7 +303,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_oathbreaker', 'eq_weapon', 150, 100, 400, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_oathbreaker', 10, 10, 12, 50, 10, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_oathbreaker', 'res/texture/equipment/weapon/spritesheet_weapon_oathbreaker.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_oathbreaker.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_oathbreaker', 350, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_oathbreaker', 350, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 1, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 2, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_oathbreaker', 3, 'twilight', 3);
@@ -392,7 +392,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_firesword', 'eq_weapon', 700, 400, -1, 4);
 INSERT INTO item_attribute (item_id, dmg_light, res_shadow, res_ice, dmg_fire) values ('we_firesword', 10, 50, 50, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword', 'res/texture/equipment/weapon/spritesheet_weapon_firesword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_firesword.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword', 700, 10, 40, 80, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword', 700, 10, 40, 80, 8);
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, speed_min, speed_max, time_min, time_max) values ('we_firesword', 40, 20, 1, 'res/texture/particles/flame.png', 5, 20, 55, 
 10, 20, 30, 40,
 255, 160, 64, 255,
@@ -416,7 +416,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_firesword_inactive', 'eq_weapon', 750, 350, -1, 3);
 INSERT INTO item_attribute (item_id, dmg_physical) values ('we_firesword_inactive', 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword_inactive', 'res/texture/equipment/weapon/spritesheet_weapon_firesword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_firesword.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword_inactive', 700, 10, 40, 80, 9);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_firesword_inactive', 700, 10, 40, 80, 7);
 INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_radius_x, light_radius_y, map_light_radius_x, map_light_radius_y, brightness) values ('we_firesword_inactive', 30, 30, 300, 400, 100, 120, 0.5);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 1, 'meta', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_firesword_inactive', 2, 'meta', 2);
@@ -452,7 +452,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_ordermace', 'eq_weapon', 400, 350, 90, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, heal, critical, max_health) values ('we_ordermace', 2, 3, 1, 2, 14);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_ordermace', 'res/texture/equipment/weapon/spritesheet_weapon_ordermace.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_ordermace.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_ordermace', 1000, 10, 35, 70, 6);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_offset_left, chop_rect_width, chop_rect_height, chop_damage) values ('we_ordermace', 1000, 10, 35, 70, 5);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_ordermace', 1, 'divine', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_ordermace', 2, 'elemental', 1);
 
@@ -473,7 +473,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_janusglaive', 'eq_weapon', 650, 150, 200, 3);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_janusglaive', 8, 5, 3, 10, 8, 1);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_janusglaive', 'res/texture/equipment/weapon/spritesheet_weapon_janusglaive.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_janusglaive.png');
-INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_janusglaive', 500, 80, 80, -40, 10);
+INSERT INTO item_weapon (item_id, chop_cooldown_ms, chop_rect_width, chop_rect_height, chop_offset_left, chop_damage) values ('we_janusglaive', 500, 80, 80, -40, 8);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 1, 'elemental', 3);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 2, 'elemental', 2);
 INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values ('we_janusglaive', 3, 'meta', 2);

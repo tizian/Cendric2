@@ -492,7 +492,7 @@
  </layer>
  <objectgroup name="dynamic">
   <object id="114" gid="531" x="1050" y="300" width="50" height="50"/>
-  <object id="115" gid="585" x="1050" y="150" width="50" height="50"/>
+  <object id="115" gid="585" x="1050" y="100" width="50" height="50"/>
   <object id="116" gid="551" x="350" y="450" width="50" height="50"/>
   <object id="117" gid="551" x="350" y="700" width="50" height="50"/>
   <object id="118" gid="551" x="350" y="950" width="50" height="50"/>

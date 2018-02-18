@@ -355,7 +355,7 @@ npc.id:npc_vincent2
 	# translation: 
 	translation.tag:DL_Vincent_TheCatch
 	translation.en:Hehe, I knew you would ask. Well, the treasure chest doesn't belong to me, so to speak - it belongs to the Elder Rhendal.
-	translation.de:Hehe, ich wusste, dass du das fragen würdest. Nungut. Die Schatzkiste gehört nicht mir, wenn man es genau nimmt - sie gehört dem Dorfältesten Rhendal.
+	translation.de:Hehe, ich wusste, dass du das fragen würdest. Nun gut. Die Schatzkiste gehört nicht mir, wenn man es genau nimmt - sie gehört dem Dorfältesten Rhendal.
 	translation.ch:Hehe, ich ha gwüsst, dass du das froge wirsch. Jo denn. Also die Schatzchistä ghört nöd mir, wenmäs gnau nimmt - si ghört em Dorfälteste Rhendal.
 	[
 		# Link node, tag is next tag

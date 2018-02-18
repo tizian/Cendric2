@@ -6,7 +6,7 @@ collectibles =
 markers = {
     {
 		map = "res/map/meadows/meadows.tmx",
-		position = {2025, 1825},
+		position = {2100, 1750},
 		step = 0
 	},
 	{

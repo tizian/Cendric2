@@ -717,9 +717,10 @@
     <property name="hint" value="Modifier"/>
    </properties>
   </object>
-  <object id="112" x="212" y="1475" width="75" height="66">
+  <object id="112" x="212.5" y="1475" width="75" height="66">
    <properties>
     <property name="condition progress" value="default,bridge_crossed"/>
+    <property name="forced" value=""/>
     <property name="weather" value="res/map/meadows/meadows.tmx,70,rain"/>
    </properties>
   </object>

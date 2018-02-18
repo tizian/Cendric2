@@ -484,6 +484,7 @@ npc.id:npc_syrah
 	# triggers: 
 	trigger:DL:addQuestDescription("the_mark", 4)
 	trigger:DL:addConditionProgress("default", "mark_weak")
+	trigger:DL:addQuestProgress("weaken_mark", "weaken_mark")
 	# translation: 
 	translation.tag:DL_Syrah_RelieveCurse4
 	translation.en:Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)
@@ -762,7 +763,7 @@ npc.id:npc_syrah
 		tag:16
 		# translation: 
 		translation.tag:DL_Choice_ElixirShadow
-		translation.en:pe_elixirshadow,fo_caveberry,1,fo_stormweed,1fo_wine,1
+		translation.en:pe_elixirshadow,fo_caveberry,1,fo_stormweed,1,fo_wine,1
 		translation.de:
 		translation.ch:
 		translation.crafting:1
@@ -911,7 +912,7 @@ npc.id:npc_syrah
 	tag:43
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Syrah_BrewQuestStart
+	translation.tag:DL_Syrah_BrewQuestStart2
 	translation.en:I still need some ingredients for a potion that I wanted to brew.
 	translation.de:Mir fehlen noch ein paar Zutaten für einen Trank, den ich mir brauen wollte.
 	translation.ch:Mir fehled na paar Zuetate für es Tränkli woni mr ha wele braue.

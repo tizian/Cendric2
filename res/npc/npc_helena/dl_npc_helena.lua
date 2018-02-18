@@ -93,7 +93,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_helena", "sold_things")) then 
 
-		DL:createNPCNode(11, -1, "DL_Helena_SoldThings") -- Oh, I don't remember. But I've only sold some robes and hats anyway.
+		DL:createNPCNode(11, -2, "DL_Helena_SoldThings") -- Oh, I don't remember. But I've only sold some robes and hats anyway.
 		DL:addConditionProgress("npc_helena", "sold_things")
 		DL:addNode()
 

@@ -179,6 +179,7 @@ loadDialogue = function(DL)
 		DL:createNPCNode(29, 30, "DL_Syrah_RelieveCurse4") -- Hm. It's still visible. You'll have to seek out who did this to you. But now you can find him before he finds you. (Giggles)
 		DL:addQuestDescription("the_mark", 4)
 		DL:addConditionProgress("default", "mark_weak")
+		DL:addQuestProgress("weaken_mark", "weaken_mark")
 		DL:addNode()
 
 
@@ -279,7 +280,7 @@ loadDialogue = function(DL)
 		DL:addCraftingChoice(13, "DL_Choice_GreaterHealingPotion") -- fo_greaterhealingpotion,fo_healingherb,3,fo_water,1
 		DL:addCraftingChoice(14, "DL_Choice_ElixirFire") -- pe_elixirfire,fo_redhat,1,fo_stormweed,1,fo_wine,1
 		DL:addCraftingChoice(15, "DL_Choice_ElixirLight") -- pe_elixirlight,fo_glowingshroom,1,fo_stormweed,1,fo_wine,1
-		DL:addCraftingChoice(16, "DL_Choice_ElixirShadow") -- pe_elixirshadow,fo_caveberry,1,fo_stormweed,1fo_wine,1
+		DL:addCraftingChoice(16, "DL_Choice_ElixirShadow") -- pe_elixirshadow,fo_caveberry,1,fo_stormweed,1,fo_wine,1
 		DL:addCraftingChoice(17, "DL_Choice_ElixirIce") -- pe_elixirice,fo_windrose,1,fo_stormweed,1,fo_wine,1
 		DL:addChoice(-2, "DL_Choice_ComeBackLater") -- I'll come back later [BACK]
 		DL:addNode()
@@ -327,7 +328,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(43, 44, "DL_Syrah_BrewQuestStart") -- I still need some ingredients for a potion that I wanted to brew.
+		DL:createNPCNode(43, 44, "DL_Syrah_BrewQuestStart2") -- I still need some ingredients for a potion that I wanted to brew.
 		DL:addNode()
 
 

@@ -377,8 +377,8 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjects(_Equipment, m_equipmentRenderTexture);
 	m_sprite.setColor(m_equipmentColor);
 	flushTexture(renderTarget, m_equipmentRenderTexture, oldView, sf::BlendAlpha);
-	flushTexture(renderTarget, m_particleEQRenderTexture, oldView, m_particleBlendMode);
 	m_sprite.setColor(COLOR_WHITE);
+	flushTexture(renderTarget, m_particleEQRenderTexture, oldView, m_particleBlendMode);
 
 	renderObjects(_Enemy, renderTarget);
 	renderObjects(_Spell, renderTarget);

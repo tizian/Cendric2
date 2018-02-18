@@ -4,6 +4,11 @@ velocity = 50
 
 loadRoutine = function(R, W)
 
+    if (W:isQuestComplete("element_master")) then
+        R:setDisposed()
+        return
+    end
+
     if (not W:isConditionFulfilled("npc_cynthia", "talked")) then 
 		R:setTalkingActive(true) 
 	end 

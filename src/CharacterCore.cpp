@@ -120,6 +120,7 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 		if (m_data.questStates[id] == state) {
 			return false;
 		}
+		setQuestTracked(id, false);
 		m_data.questStates[id] = state;
 		return true;
 	}

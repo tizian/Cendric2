@@ -7,7 +7,7 @@ conditions = {
 markers = {
     {
 		map = "res/map/gandria/gandria.tmx",
-		position = {525, 375},
+		position = {975, 2700},
 		step = 0
 	},
 	{

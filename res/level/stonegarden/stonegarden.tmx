@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="50" tileheight="50" backgroundcolor="#5a8e98" nextobjectid="229">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="50" tileheight="50" backgroundcolor="#5a8e98" nextobjectid="237">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/stonegarden/layer_inf.png,6.0,res/level/stonegarden/layer_6.png,3.0,res/level/stonegarden/layer_3.png"/>
   <property name="dimming" value="0.3"/>
@@ -493,13 +493,6 @@
   <object id="177" gid="723" x="150" y="900" width="50" height="50"/>
   <object id="178" gid="723" x="150" y="950" width="50" height="50"/>
   <object id="179" gid="723" x="150" y="1000" width="50" height="50"/>
-  <object id="180" gid="778" x="3100" y="100" width="50" height="50"/>
-  <object id="181" gid="778" x="3200" y="100" width="50" height="50"/>
-  <object id="182" gid="778" x="3250" y="100" width="50" height="50"/>
-  <object id="183" gid="778" x="3300" y="100" width="50" height="50"/>
-  <object id="184" gid="778" x="3350" y="100" width="50" height="50"/>
-  <object id="185" gid="778" x="3400" y="100" width="50" height="50"/>
-  <object id="186" gid="778" x="3450" y="100" width="50" height="50"/>
   <object id="187" gid="731" x="3700" y="450" width="50" height="50"/>
   <object id="188" gid="731" x="2500" y="600" width="50" height="50"/>
   <object id="189" gid="860" x="650" y="1350" width="50" height="50"/>
@@ -535,8 +528,10 @@
   <object id="226" gid="728" x="2200" y="1000" width="50" height="50"/>
   <object id="227" gid="768" x="2250" y="1000" width="50" height="50"/>
   <object id="228" gid="808" x="2300" y="1000" width="50" height="50"/>
+  <object id="235" gid="778" x="3300" y="100" width="50" height="50"/>
+  <object id="236" gid="778" x="3450" y="100" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 1">
+ <objectgroup name="lever 1" visible="0">
   <object id="110" gid="856" x="1150" y="1150" width="50" height="50">
    <properties>
     <property name="direction" value="-90"/>
@@ -548,7 +543,7 @@
   </object>
   <object id="112" gid="852" x="353" y="1272" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 2">
+ <objectgroup name="lever 2" visible="0">
   <object id="113" gid="856" x="3450" y="1150" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
@@ -560,31 +555,24 @@
   </object>
   <object id="114" gid="852" x="3809" y="1052" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 4">
+ <objectgroup name="lever 4" visible="0">
   <object id="148" gid="853" x="4500" y="1100" width="50" height="50"/>
   <object id="149" gid="853" x="4700" y="1250" width="50" height="50"/>
   <object id="150" gid="892" x="4297" y="1300" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 5">
   <object id="151" gid="892" x="3200" y="700" width="50" height="50"/>
-  <object id="152" gid="853" x="3100" y="450" width="50" height="50"/>
-  <object id="153" gid="853" x="3100" y="400" width="50" height="50"/>
-  <object id="154" gid="853" x="3100" y="350" width="50" height="50"/>
-  <object id="155" gid="853" x="3100" y="300" width="50" height="50"/>
-  <object id="156" gid="853" x="3100" y="250" width="50" height="50"/>
+  <object id="230" gid="853" x="3100" y="450" width="50" height="50"/>
+  <object id="231" gid="853" x="3100" y="400" width="50" height="50"/>
+  <object id="232" gid="853" x="3100" y="350" width="50" height="50"/>
+  <object id="233" gid="853" x="3100" y="300" width="50" height="50"/>
+  <object id="234" gid="853" x="3100" y="250" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 6">
   <object id="157" gid="892" x="3200" y="450" width="50" height="50"/>
-  <object id="158" gid="853" x="3150" y="300" width="50" height="50"/>
-  <object id="159" gid="853" x="3200" y="300" width="50" height="50"/>
-  <object id="160" gid="853" x="3250" y="300" width="50" height="50"/>
-  <object id="161" gid="853" x="3450" y="300" width="50" height="50"/>
   <object id="162" gid="853" x="3250" y="600" width="50" height="50"/>
   <object id="163" gid="853" x="3250" y="650" width="50" height="50"/>
   <object id="164" gid="853" x="3250" y="700" width="50" height="50"/>
-  <object id="165" gid="854" x="3300" y="300" width="50" height="50"/>
-  <object id="166" gid="854" x="3350" y="300" width="50" height="50"/>
-  <object id="167" gid="854" x="3400" y="300" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="enemy">
   <object id="126" gid="1283" x="2700" y="900" width="50" height="50"/>

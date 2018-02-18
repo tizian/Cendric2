@@ -10,7 +10,7 @@ void ConfigurationData::resetToDefault() {
 	maxFPS = 60;
 	mainKeyMap = DEFAULT_KEYMAP;
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
-	displayMode = DisplayMode::Window;
+	displayMode = DisplayMode::WindowedFullscreen;
 	isQuickcast = true;
 	isAutotarget = true;
 	isSmoothing = true;
