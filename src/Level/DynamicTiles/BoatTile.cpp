@@ -84,6 +84,7 @@ void BoatTile::update(const sf::Time& frameTime) {
 	}
 
 	if (m_state == GameObjectState::Broken) {
+		setVelocityX(0.f);
 		setAcceleration(sf::Vector2f(0.f, GRAVITY_ACCELERATION));
 	}
 	else {
@@ -165,5 +166,20 @@ void BoatTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		setAccelerationX(0.f);
 		setVelocityX(0.f);
 		setPositionX(rec.safeLeft);
+	}
+
+	if (m_state != GameObjectState::Broken) {
+		return;
+	}
+
+	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	rec.boundingBox = nextBoundingBoxY;
+	rec.collisionDirection = CollisionDirection::Down;
+	bool collidesY = m_level->collides(rec);
+
+	if (collidesY) {
+		setAccelerationY(0.f);
+		setVelocityY(0.f);
+		setPositionY(rec.safeTop);
 	}
 }

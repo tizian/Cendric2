@@ -21,6 +21,8 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		rec.boundingBox.top = newPos.y;
 		if (m_enemy->getLevel()->collides(rec)) return;
 		m_enemy->setPosition(newPos);
+		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
+		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
 		m_isCollisionTiltSuppressed = true;
 	}
 }
