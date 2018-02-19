@@ -103,8 +103,13 @@ void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {
 void Enemy::update(const sf::Time& frameTime) {
 	updateEnemyState(frameTime);
 	LevelMovableGameObject::update(frameTime);
-	if (m_scriptedBehavior != nullptr && !m_isDead) {
-		m_scriptedBehavior->update(frameTime);
+	if (m_scriptedBehavior != nullptr) {
+		if (!m_isDead) {
+			m_scriptedBehavior->update(frameTime);
+		}
+		else {
+			m_scriptedBehavior->updateSpeechBubble(frameTime);
+		}
 	}
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr) {
@@ -389,6 +394,11 @@ void Enemy::loot() {
 }
 
 void Enemy::onRightClick() {
+	if (!m_isDead && !isAlly() && m_isHPBarVisible) {
+		m_mainChar->getTargetManager().setTargetEnemy(this);
+		g_inputController->lockAction();
+	}
+
 	if (!m_interactComponent->isInteractable()) return;
 	if (m_isDead && !isAlly()) {
 		// check if the enemy body is in range
@@ -399,10 +409,6 @@ void Enemy::onRightClick() {
 			m_screen->setNegativeTooltip("OutOfRange");
 		}
 	}
-	else if (!m_isDead && !isAlly() && m_isHPBarVisible) {
-		m_mainChar->getTargetManager().setTargetEnemy(this);
-	}
-	g_inputController->lockAction();
 }
 
 void Enemy::setScriptedBehavior(const std::string& luaPath) {

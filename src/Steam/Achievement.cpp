@@ -27,8 +27,7 @@ static std::vector<std::pair<AchievementID, AchievementConstructor>> achievement
 	{ ACH_CHICKEN_SHOCKER, ACH_CONST },
 	{ ACH_CRIMINAL, ACH_CONST },
 	{ ACH_SAVE_ALL_MAGES, ACH_CONST },
-	{ ACH_KILL_ALL_MAGES, ACH_CONST },
-	{ ACH_MERCENARY_ORDER, ACH_CONST },
+	{ ACH_KILL_ALL_MAGES, ACH_CONST }
 };
 
 static Registrar registrar(achievements);
