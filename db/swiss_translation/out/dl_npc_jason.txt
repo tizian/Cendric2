@@ -1,6 +1,6 @@
 dl_npc_jason
 ----------------------------------
-DL_Jason_Hello:Hm? Nur well d''Rana gern vell redt heisst das ned, dass i das au mache. Halt dich churz.
+DL_Jason_Hello:Hm? Nur well d''Jana gern vell redt heisst das ned, dass i das au mache. Halt dich churz.
 DL_Jason_JasonQuest:Hrm. Jo, chasch eigentlech. Ich ha e neui Waffe gfonde won i möcht mit chli Gargoylestaub verstärcke.
 DL_Jason_JasonQuest2:Es paar Gargoyles lebed im alte Tempel im Norde. Wenn du mir chli Gargoylestaub bringsch, geb i der mini alt Gleve defür.
 DL_Jason_StartCrafting:Nei, chame so ned säge. Ich schaffe ned mit Hammer und Amboss.

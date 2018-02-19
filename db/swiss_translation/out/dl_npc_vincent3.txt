@@ -26,7 +26,7 @@ DL_Vincent_CathedralThief4:Bring üs die goldige Cherzeständär und ich wird do
 DL_Vincent_CathedralFinished:Guet gmacht. Si dänn z''neh wenn alli andäre abglenkt sind isch scho e saumässig gueti Idee gsi, gäll.
 DL_Vincent_CathedralFinished2:Du häsch mo zeigt, dassd fähig bisch, üsi Magie z''bruuchä. Nimm die Schriftrolle als Belohnig und lärn, wieme eis mit dä Schattä wird.
 DL_Vincent_CompleteLloydsPlan:En "V.", hä. (Grinst) Ich bis abo nöd, das chani dir sege. Danke für dä Bricht.
-DL_Vincent_CompleteLloydsPlan2:Mir werdäd um einiges wachsamer sii. Ich mach mo bloss chli Sorgä um dä Koray, dä Nuray ihre Brüedor.
+DL_Vincent_CompleteLloydsPlan2:Mir werdäd um einiges wachsamer sii. Ich mach mo ez echt chli Sorgä um dä Koray, dä Nuray ihre Brüedor.
 DL_Vincent_CompleteLloydsPlan3:Er isch letschti is Sumpfland gangä. Verzell doch dä Nuray dävo, fallsen gse sötsch.
 DL_Vincent_YashaStart:Jo, ich han würkli eine für dich. Allerdings en zimli gföhrlichä...
 DL_Vincent_YashaStart2:Los. Es git en verlassenä Tämpel im Hochland vo Admantris und mä verzellt sich, en Dämon tribt döt sis Unwese.

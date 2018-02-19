@@ -1,6 +1,6 @@
 dl_npc_jack
 ----------------------------------
-DL_Jack_WhoAreYou:I bin dr Jack. Normalerwis wäri jo i mim Lüchtturm und ni do i däm Puff.
+DL_Jack_WhoAreYou:Hoi Jungchen. I bin dr Jack. Normalerwis wäri jo i mim Lüchtturm und ni do i däm Puff.
 DL_Jack_WhoAreYou2:Aber i cha ni zrugg solang da Viech döt umaflügt.
 DL_Jack_Elysia:As gseht us wiana riesiga Vogel und tönt au wia eina, sis Umagekraische chama fast ni ushalta.
 DL_Jack_Elysia2:Ich ha probiart, ihn mitara Bratpfanna s''verschücha, aber är hät si miar us dr Hand grissa und verschluckt.

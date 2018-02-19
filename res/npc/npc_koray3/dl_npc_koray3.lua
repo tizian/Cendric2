@@ -18,7 +18,8 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(4, -2, "DL_Koray_Fight3") -- Good job. We're free again.
+		DL:createNPCNode(4, -2, "DL_Koray_Fight3") -- Good job! We're free again.
+		DL:changeQuestState("missing_koray", "completed")
 		DL:addNode()
 
 	end

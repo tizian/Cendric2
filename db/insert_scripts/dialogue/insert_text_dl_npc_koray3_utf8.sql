@@ -1,3 +1,3 @@
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Koray_Fight', 'dl_npc_koray3', 'Well, what can I say.', 'Nun, was kann ich bloss sagen.', 'Jo, wa chame do sege.');
 INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Koray_Fight2', 'dl_npc_koray3', 'This was a truly amazing fight.', 'Das war ein wirklich unglaublicher Kampf.', 'Das isch en würkli unglaubliche Kampf gsi.');
-INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Koray_Fight3', 'dl_npc_koray3', 'Good job. We''re free again.', 'Gut gemacht. Wir sind wieder frei.', 'Guet gmacht. Mir sind wieder frei.');
+INSERT INTO text(text_id, text_type, english, german, swiss_german) values ('DL_Koray_Fight3', 'dl_npc_koray3', 'Good job! We''re free again.', 'Gut gemacht! Wir sind wieder frei.', 'Guet gmacht! Mir sind wieder frei.');

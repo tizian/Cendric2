@@ -1,6 +1,8 @@
 dl_npc_velius
 ----------------------------------
-DL_NPC_Talked:Endlich. Do druf hani lang gwartet.
+DL_Velius_Talked:Endlich. Do druf hani lang gwartet.
+DL_Velius_ArazathTalked:Hm. Dis Schwert chuntmer bekannt vor... aber es wird di ez au nüm rette.
+DL_Velius_ArazathTalked2:Ich ha lang, zu lang, uf de Moment gwartet.
 DL_Velius_Finally:Uf dich. Dass du direkt i mini Falle laufsch. (Grinst)
 DL_Velius_Murderer:Nei. Er schloft bloss. Aber er hett fast mis wertvollst Subjekt eliminiert -
 DL_Velius_Murderer2:Dich.
@@ -8,14 +10,14 @@ DL_Velius_Murderer3:Aber jetz, wo ich dich ha... bruchts ken König me.
 DL_Velius_Eyes:Das hani nid verberge chöne, he. Er isch scho z''lang unter minere Kontrolle.
 DL_Velius_KnowMe:Ja, das isch so. Es Subjekt, wo entcho isch.
 DL_Velius_KnowMe2:Aber du bisch nie würkli frei gsi. Ich ha immer gnau gwüsst, wo du bisch und wa du machsch.
-DL_Velius_KnowMe3:Min Fluech het sin Zweck erfüllt.
+DL_Velius_KnowMe3:Min Fluech het sin Zweck erfüllt. Dasen gschwächt hesch, het der au nüt brocht.
 DL_Velius_Friends:Di meiste hends nid überlebt. Die, wos gschafft hend, sind duredrüllt.
 DL_Velius_Friends2:Aber noch all dene Experiment weissi endlich, wani brucht.
 DL_Velius_Friends3:Magier mit enere starche Affinität zunere Magierart. Die drei, woni ez ha, sind perfekt.
 DL_Velius_Mark:(Lächlet) Natürli isches das.
 DL_Velius_Mark2:Mini Subjekt hani demit eifacher chöne ufspüre - di wenige, wo entcho sind.
 DL_Velius_Escape:Ja, du hesch mi würkli überrascht.
-DL_Velius_Escape2:Ich ha dini Magie uf di gliich Art extrahiert, we au scho bi vilne andere Magier vorene.
+DL_Velius_Escape2:Ich ha dini Magie uf di gliich Art extrahiert, we au scho mit vilne andere Magiere vorene.
 DL_Velius_Escape3:Aber es het irgendwie nid we erwartet funktioniert.
 DL_Velius_Escape4:Du heschs gschafft, direkt vor mine Auge z''verschwinde.
 DL_Velius_Escape5:Aber jetz bisch ja do...

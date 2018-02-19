@@ -1,22 +1,22 @@
 dl_npc_robert2
 ----------------------------------
-DL_Robert_Hello:Do gits nüt z''gse, lauf eifach wiiter.
-DL_Robert_WhatDoing:Hmm, nüt. Aber ich wür der devo abrote, id Krypta z''go. Es isch gruslig dete.
-DL_Robert_WhoAreYou:Ich bi de Bob und ich ha magischi Chräft! Beidruckend, eh.
-DL_Robert_NotVeryImpressed:Nid viel do chönd Magie bruche. Du sötsch besser chli Respekt zeige.
-DL_Robert_LivingHere:Nei, ich bi nid vo do. Nur uf de Durchreis.
-DL_Robert_Crypt:Hm. Jo. Los, ich ha nur wele mini Chräft usprobiere und denn isch en chliine Unfall passiert.
-DL_Robert_Crypt2:E Skelett ide Krypta het sich plötzlich bewegt! Ich bi so gschockt gsi dasi us de Krypta grennt bi und denn hani gmerkt dasi min Teleportstei det verlore han.
-DL_Robert_Crypt3:Aber ich bruch de Stei würkli! Ohni ihn chumi nid weg vo do.
-DL_Robert_TeleportQuest:Du? Du gsesch us wenen Gwöhnliche. Ich glaub nid dasmer helfe chasch.
-DL_Robert_TeleportQuest2:Aber wens schaffsch, min Stei zrugg z''hole... Ich han en inaktive Stei do.
-DL_Robert_TeleportQuest3:De chöntsch ha. Er isch zimli wertvoll für Magier. Du chöntschen ja verchaufe.
-DL_Robert_Afraid:Ich ha kei Schiss, bi nur vorsichtig.
-DL_Robert_StartRobertQuest:Vilicht hesch ja Glück. Ich warte do.
-DL_Robert_FinishRobertQuest:Wow. We hesch du... Eh, das isch ez au egal. Danke.
-DL_Robert_FinishRobertQuest2:We versproche, do hesch de inaktiv Stei.
-DL_Robert_FinishRobertQuest3:Wennd en Magier wärsch, chöntschen mit de Magie vomne Steimännli Geischt uflade.
-DL_Robert_FinishRobertQuest4:Ich glaub, ich ha grad gse, we eine uf di windig Ebeni ide Krypta gstiege isch.
-DL_Robert_FinishRobertQuest5:Viel Glück demit. Ich bi denn mal weg. (De Robert nimmt de Stei und verschwindet)
-DL_Robert_Cairn:Hm... Vilicht uf de Ebeni hinter de Krypta.
-DL_Robert_Cairn2:Aber du möstisch dur d''Krypta go für das... (schauderet)
+DL_Robert_Hello:Do gits nüt z''gseh, lauf eifach witer.
+DL_Robert_WhatDoing:HHmmm, nüt. Aber ich würd dr dervo abroote, in d Krypta z''goh. Es isch gruselig dert.
+DL_Robert_WhoAreYou:Ich bin dr Bob und ich han magischi Kräft! Beihdruckend, odr?
+DL_Robert_NotVeryImpressed:Nit viel do chönne Magie benutze. Du sötsch besser e chli Reschpäkt zeige.
+DL_Robert_LivingHere:Nei, ich bi nit vo do, nur uf dr Durchreis.
+DL_Robert_Crypt:Hm. Jä. Los, ich han nur welle mini Kräft usprobiere, und denne ich en chliine Unfall passiert.
+DL_Robert_Crypt2:Es Skelett i dr Krypta het sich plötzlich bewegt! Ich bi so gschockt gsi, dass i us de Krypta gsegglet bin und denn han ich gmerkt, das ich mi Teleportstei dert verlore ha.
+DL_Robert_Crypt3:Abr ich bruuch dr Stei würklich! Ohni ihn chum ich nid wäg vo do.
+DL_Robert_TeleportQuest:Du? Du gsehsch us wie e Gwöhnliche. Ich glaub nit, dass du mer chasch hälfe.
+DL_Robert_TeleportQuest2:Abr wenns schaffsch, min Stei zrugg z''hole... Ich ha en inaktive Stei do.
+DL_Robert_TeleportQuest3:Dä chönntsch ha. Er isch zimlich wärtvoll für Magier. Du chönntsch en jo verkaufe.
+DL_Robert_Afraid:Ich ha kei Schiss, ich bi nur vorsichtig.
+DL_Robert_StartRobertQuest:Vilicht hesch jo Glück. Ich wart do.
+DL_Robert_FinishRobertQuest:Wow. Wie hesch du... Ähm, das isch jetz au egal. Danke.
+DL_Robert_FinishRobertQuest2:Wie versproche, do hesch dr inaktivi Stei.
+DL_Robert_FinishRobertQuest3:Wenn de en Magier wärsch, chöntsch en mit de Magie vomene Steimännli Geischt uflaade.
+DL_Robert_FinishRobertQuest4:Ich glaub, ich han grad gseh, wie eine uf die windigi Ebeni hinder de Krypta gstiige isch.
+DL_Robert_FinishRobertQuest5:Viel Glück demit. Ich bin denn mol wäg. (De Robert nimmt de Stei und verschwindet)
+DL_Robert_Cairn:Hmm... Vilicht uf dr Ebeni hinter dr Krypta.
+DL_Robert_Cairn2:Abr du miestisch durch d''Krypta go defür... (schauderet)

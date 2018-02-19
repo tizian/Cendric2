@@ -1,4 +1,4 @@
 dl_npc_robert4
 ----------------------------------
-DL_Robert_YouDidIt:(De Robert zitteret immer no) Du... du hesches gschafft!
-DL_Robert_YouDidIt2:Vilicht hani di unterschätzt. Danke...
+DL_Robert_YouDidIt:(De Robert zitteret immer no) Du... du heschs gschafft!
+DL_Robert_YouDidIt2:Vilicht hani dich unterschätzt. Danke...

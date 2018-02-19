@@ -51,9 +51,9 @@ npc.id:npc_koray3
 	trigger:DL:changeQuestState("missing_koray", "completed")
 	# translation: 
 	translation.tag:DL_Koray_Fight3
-	translation.en:Good job. We're free again.
-	translation.de:Gut gemacht. Wir sind wieder frei.
-	translation.ch:Guet gmacht. Mir sind wieder frei.
+	translation.en:Good job! We're free again.
+	translation.de:Gut gemacht! Wir sind wieder frei.
+	translation.ch:Guet gmacht! Mir sind wieder frei.
 	[
 		# Link node, tag is next tag
 		tag:-2

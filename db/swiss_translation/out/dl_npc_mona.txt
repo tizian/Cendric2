@@ -9,7 +9,7 @@ DL_Mona_OnlyMeet:Denn muesch halt warte bis sie wieder gönd. Wend ue ga wetsch,
 DL_Mona_FunUnlock:Hmm... (d''Mona musteret dich) Wie alt bisch du?
 DL_Mona_AgeDontKnow:Hm. Ich denk mal, du bisch fascht volljährig. Ich säg mine Mäitli, dass si chli samft mit dir umgah söllet. (Lächlet)
 DL_Mona_AgeEighteen:Hm. Guet, das chönt stimme. Also isches in Ornig. (Lächlet)
-DL_Mona_TwentyFive:Nei, sicher nöd. Wennd nöd gnueg alt bisch zum d''Wahrheit säge, bisch au nöd gnueg alt für mini Mäitli. Use mit dir.
+DL_Mona_TwentyFive:Nei, sicher nöd. Wennd nöd gnueg alt bisch zum d''Wahrheit säge, bisch au nöd gnueg alt für mini Mäitli. Use mit dir!
 DL_Mona_WhatLookingFor:Guet, guet. Was suechsch denn?
 DL_Mona_SexRomantic:Guet. Denn gaan zu de Lola, sie wartet scho uf dich. (Zwinkeret)
 DL_Mona_SexExotic:Ah, denn hani öppis für dich. Gaan zu de Karma und sie wirds der zeige.

@@ -13,7 +13,7 @@ DL_Etoz_Sword:Das isch kes "komisches" Schwert, du Michi. Chasch eifach hoffe, d
 DL_Etoz_Sword2:Da Schwert wers letzt, wod gse würsch.
 DL_Etoz_Powerful:Oh, wenn ich dir mini Abetür verzelle wür, würsch in Ehrfurcht erzittere.
 DL_Etoz_Powerful2:Ich ha unzähligi Finde besiegt, di schwirigste Zauber zauberet und die gföhrlichste Gebiet erkundet... die Gschichte wäred nüt für dini zarte Ohre.
-DL_Etoz_Challenge:Wie chasches du bloss woge, mini Fähigkeite aaz''zwiifle. Ich chönt dich mitme einzige Wort i Flamme ufgo lo.
+DL_Etoz_Challenge:Wie chasches du bloss woge, mini Fähigkeite aaz''zwiifle! Ich chönt dich mitme einzige Wort i Flamme ufgo lo.
 DL_Etoz_Challenge2:Aber ich verstand, dass dini unerfahrene Auge ken wohre Meister erchenne chönd. Damol wirdi der no verge.
 DL_Etoz_Challenge3:Hn. Du schinsch so schwach, so hilflos z''sii... dich z''bekämpfe wür nid mal Spass mache.
 DL_Etoz_NotWeak:(De Etoz hebt e Augebraue) Oh, würkli? Denn muesch ja en ganz herte Siech si!
@@ -50,7 +50,7 @@ DL_Etoz_ChestEmpty2:Vilicht wirsch ja mal würdig si... aber das brucht Ziit.
 DL_Etoz_SecondTowerClimbed:D''True wird nid gfüllt si, bis de Himmel bluetrot wird.
 DL_Etoz_GimmeKeyQuestThird:Jo. We hesch das bloss verrate chöne? (Gigglet)
 DL_Etoz_GotThirdKey:Isch do öppe öpper gnervt? We ich denkt ha - ke Usduur.
-DL_Etoz_GotThirdKey2:Aber wennds  trotzdem usprobiere wetsch... do, nimm.
+DL_Etoz_GotThirdKey2:Aber wennds trotzdem usprobiere wetsch... do, nimm.
 DL_Etoz_ThirdTowerClimbed:Ke Chratzer? Du haltisch dich guet für öpper wo eigentlich so unfähig isch.
 DL_Etoz_Games:Ich? Nei, ich gib der nur e Chance zum au so bombig z''si we ichs bin.
 DL_Etoz_GimmeFourthKeyQuest:Jo.
@@ -64,7 +64,7 @@ DL_Etoz_YouMustKnow2:Isch ja au egal! Zeigs mer!
 DL_Etoz_YourGranda:Ahjo? Zeigs mer!
 DL_Etoz_NothingFound:Nei! Das cha nid sii! Du hesch sicher öppis gfunde! Zeigs mer!
 DL_Etoz_ShowLegacy:Waaas? Das ghört mir, gibs mir!
-DL_Etoz_GiveSwordAsk:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg.
+DL_Etoz_GiveSwordAsk:Alles. Alles was ich han. Hundert goldigi Münze. Gib mer eifach mis Züg!
 DL_Etoz_GiveSwordMoney:Do... do! (De Etoz riist es Schwert und de Brief schnell a sich)
 DL_Etoz_GiveSword:Huh... Du bisch sogar dümmer als ich erwartet ha.
 DL_Etoz_Never:Grrrr! Dodefür wirsch na zahle!

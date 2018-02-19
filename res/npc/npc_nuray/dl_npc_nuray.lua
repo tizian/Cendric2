@@ -11,7 +11,7 @@ loadDialogue = function(DL)
 
 	if (DL:getGuild() == "thief" and not DL:isConditionFulfilled("npc_nuray", "congrats")) then 
 
-		DL:createNPCNode(1, -2, "DL_Nuray_Congratulations") -- So you're new here. Well done. Vincent won't let everyone join us.
+		DL:createNPCNode(1, -2, "DL_Nuray_Congratulations") -- So you're new here. Well done. Vincent won't let just anyone join us.
 		DL:addConditionProgress("npc_nuray", "congrats")
 		DL:addNode()
 
@@ -25,7 +25,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Nuray_WhoAreYou") -- I'm Nuray and I can sell you armour if you're interested.
+		DL:createNPCNode(3, -2, "DL_Nuray_WhoAreYou") -- I'm Nuray, and I can sell you armour if you're interested.
 		DL:addConditionProgress("npc_nuray", "who_are_you")
 		DL:addNode()
 
@@ -49,11 +49,11 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done")) then 
 		DL:addChoice(12, "DL_Choice_WhereRich") -- Do you know where I could get rich?
 	end
-	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 50)) then 
-		DL:addItemChoice(14, "DL_Choice_PirateTreasure", "gold", 50) -- Here. Now tell me more about that treasure.
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
+		DL:addItemChoice(14, "DL_Choice_PirateTreasure", "gold", 10) -- Here. Now tell me more about that treasure.
 	end
 	if (not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")) then 
-		DL:addChoice(16, "DL_Choice_WhyTreasure") -- If that treasure is so valuable, why didn't you get it by now?
+		DL:addChoice(16, "DL_Choice_WhyTreasure") -- If that treasure is so valuable, why haven't you got it by now?
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -114,10 +114,10 @@ loadDialogue = function(DL)
 
 	end
 
-	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 50)) then 
+	if (DL:isConditionFulfilled("npc_nuray", "get_rich") and not DL:isConditionFulfilled("npc_nuray", "pirate_done") and DL:isQuestState("pirate_treasure", "void") and DL:hasItem("gold", 10)) then 
 
 		DL:createNPCNode(14, 15, "DL_Nuray_PirateTreasure") -- Hehe. Well, there are rumours of a pirate treasure, hidden somewhere near the beach of Gandria.
-		DL:removeGold(50)
+		DL:removeGold(10)
 		DL:addNode()
 
 
@@ -129,7 +129,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")) then 
 
-		DL:createNPCNode(16, 17, "DL_Nuray_WhyTreasure") -- They say, the treasure can only be found with wind magic, which was used by the pirates.
+		DL:createNPCNode(16, 17, "DL_Nuray_WhyTreasure") -- They say the treasure can only be found with wind magic, which was what the pirates used.
 		DL:addQuestDescription("pirate_treasure", 1)
 		DL:addConditionProgress("npc_nuray", "why_treasure")
 		DL:addNode()

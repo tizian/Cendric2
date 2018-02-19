@@ -1,6 +1,6 @@
 dl_npc_paladin1
 ----------------------------------
 DL_Paladin1_Hm:(Grantig) Hmmm? 
-DL_Paladin1_IAm:I bi ä Paladin vom Ewigä Liecht u dienä üsm Herrscher u Chönig äm Logan dr Zwöit.
+DL_Paladin1_IAm:I bi ä Paladin vom Ewigä Liecht u dienä üsm Herrscher u Chönig äm Logan dr Dritt.
 DL_Paladin1_Armor:Ja, gäu? Abr du wirsch hert müesse chrampfä für zum so eini z''becho, auso dänk besser gar nid dra.
 DL_Paladin1_PissedOff:Wie isches ä so, ä chlyni Närväsagi z''si wie du eini bisch?

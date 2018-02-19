@@ -409,7 +409,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_GoIn
 	translation.en:Let's go.
 	translation.de:Los geht's.
-	translation.ch:Gömmer.
+	translation.ch:Gömmo.
 	[
 		# Link node, tag is next tag
 		tag:23

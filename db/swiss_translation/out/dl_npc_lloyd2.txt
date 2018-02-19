@@ -9,4 +9,4 @@ DL_Lloyd_KillBird:Hm, de Jack het mir vo däm Monschter verzeut, aber mir heis n
 DL_Lloyd_NothingImportant:Hmm. Das isch es zimläch ussergwöhnlächs Gwitter gsi. Aber wede meinsch...
 DL_Lloyd_YourJob:Du hesch auso dr Vogu erleit vo däm üs dr Jack verzeut het? Guet gmacht.
 DL_Lloyd_HurryUp:Trotzdäm brucht d''Inina immer no dini Hiuf bim Erforschä vode komischä Höhlinä. Si isch jetz scho zlang wäg.
-DL_Lloyd_HurryUp2:Ich möcht, dass du ohni wiiteri Abstächer zrugg id Höhlinä geisch und se ungerstützisch. Das isch ke Bitt!
+DL_Lloyd_HurryUp2:Ich möcht, dass du ohni wiiteri Abstächer zrugg id Höhlinä geisch und se ungerstützisch. Das isch e Befehl, ke Bitt!

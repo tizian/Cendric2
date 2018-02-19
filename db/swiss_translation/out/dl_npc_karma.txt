@@ -7,7 +7,7 @@ DL_Karma_NotLearnPractice:Geduld, junge Burscht! Du chasch nid grad zum letzte K
 DL_Karma_IKnowEverything:Wenn das so isch, chaschmer sicher drei Froge zu minere Zfriedeheit beantworte...
 DL_Karma_ExplainKamasutra:Guet. Es Kamasutra bestoht us sibe Teil. Es isch ein Leitfade zude Liebeskunst.
 DL_Karma_ExplainKamasutra2:Es berüemtist Kapitel befasst sich mit de sexuelle Vereinigung, aber das macht nur öppe en Foiftel vom Buech us.
-DL_Karma_ExplainKamasutra3:Es Buech beschriibt au d''Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget sexuell Attraktivität steigere cha.
+DL_Karma_ExplainKamasutra3:Es Buech beschriibt au d''Theorie vode Liebi und erchkärt, we Verlange entstoht und weme di eiget Attraktivität steigere cha.
 DL_Karma_ExplainKamasutra4:Nebed de bekanntere Künst we Tanze, Zeichne, Singe, Massiere und Frisiere; imponiered au Zaubertricks und weme weiss, weme emne Papagei es rede biibringt.
 DL_Karma_ExplainKamasutra5:Es git au e chliini Iiführig über Liebespraktike wie "Milch und Wasser" oder "Sesam und Riis".
 DL_Karma_ExplainKamasutra6:Das isch ez e chliini Zemefassig gsi. Zum gse, obd au ufpasst hesch, hani es paar Testfroge für dich.

@@ -12,9 +12,14 @@ DL_Jonathan_Affinity:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp ge
 DL_Jonathan_NextStep:Hm. I han schu gwüsst, dass dr Cyrus miar eina vu sina Studenta schicka wird. Aber um ehrlich zsii, i han mit öperem grächnet wo kli meh... 
 DL_Jonathan_NextStep2:...qualifiziert isch. Usserdem isch eina, wo sis Gedächtnis verlora het, schu huara verdächtig. Bevor i di in mini Forschiga iweiha, muasch zerscht bewiisa, dass du a würdiga Elementarmagier bisch.
 DL_Jonathan_FireballQuest:Jeda Magier kann lerna, wia ma a Iisball beschwört. Füür z''kontrolliera isch aber für a Magier ohni Affinität zur Elementarmagie fascht unmöglich.
-DL_Jonathan_FireballQuest2:As paar Füürratta us dr Kanalisation sind in miis Labor i mim Käller iidrunga. Find usa, wia si alocka kasch und bring miar d''Füüressenza us ihrna Lungana. Denn wirdi mol luaga, ob i diar biibringa kann, wia ma a Füürball beschwört.
+DL_Jonathan_FireballQuest2:As paar Füürratta us dr Kanalisation sind in miis Labor i mim Käller iidrunga.
+DL_Jonathan_FireballQuest3:Find usa, wia si alocka kasch und bring miar d''Füüressenza us ihrna Lungana.
+DL_Jonathan_FireballQuest4:Denn wirdi mol luaga, ob i diar biibringa kann, wia ma a Füürball beschwört.
 DL_Jonathan_EssenceComplete:Huara guat. Villicht kömmer jo doch no a aständiga Elementarmagier us diar macha.
 DL_Jonathan_EssenceComplete2:Do, nimm dia Schriftrolla und lies si. Red wieder mit miar, wenn dr Zauber glernt hesch.
+DL_Jonathan_RemoveMark:Aber, wa isch da? Du hesch würkli e komischi magischi Aura.
+DL_Jonathan_RemoveMark2:Fühlt sich a we en bösa Fluach... Ich wird der nid bibringa, weme en Füürball beschwört, bevor du nid wiedar e gsundi, elementari Aura hesch.
+DL_Jonathan_IsMyAuraOk:Jo. Ez isch guat.
 DL_Jonathan_LearnedFireball:Und du heschs au schu checkt. I denk, miar könnd denn grad afanga.
 DL_Jonathan_LearnedFireball2:I forscha am alta, vergessena Wüssa vu de ersta Elementarmagier. I han schu usagfunda, dass sie früaner viel mächtigeri Zauber kennt hend, als jeglichi Elementarmagie, wo mr hüt so brucht.
 DL_Jonathan_LearnedFireball3:I han Bewiis gfunda, dasses irgendwo in dr Nöchi vu Gandria a verlassna Ort git, wo di erschta Elementarmagier glebt hend, drum schaff i au do.
@@ -39,7 +44,7 @@ DL_Jonathan_JoinedThieves:Dr Untergrund vu Gandria, he. Probiar eifach nid, mini
 DL_Jonathan_CombinedSkillsTwilight:Aber zema mit dinera Dämmerigsmagie könnts funktioniera.
 DL_Jonathan_JoinedNecromancers:I hätt nid erwartet, dass du det ana gohsch. A interessanti Wahl.
 DL_Jonathan_CombinedSkillsNecro:Aber zema mit dinera Nekromantie könnts funktioniera.
-DL_Jonathan_StartElementMaster:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend.
+DL_Jonathan_StartElementMaster:I han schu gwüsst, si werdens üs nid eifach macha. Wia wenn si gar nid gfunda werda wend...
 DL_Jonathan_StartElementMaster2:Aber miar müand z''Gheimnis lüfta wo si vor üs versteckend. Füür, Wasser, Luft, Erda... Di ersta zwei kennsch schu.
 DL_Jonathan_StartElementMaster3:Du muasch also no lerna, wia ma Luft und Erda kontrolliart. Zema werdemr si finda.
 DL_Jonathan_WhereSpells:Na-a, i weiss nid viel über Luft- oder Erdzauber. Du muasch si allai finda.

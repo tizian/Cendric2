@@ -14,7 +14,7 @@ DL_Zeff_FireRatFur:Es Fell vonere Fürratte, so rüdig. Es het d''Eigeschaft, di
 DL_Zeff_HelpCurse:Vellecht. Wenn du gnueg Muet hesch, chasch ja probiere, das Ding z''töte. Wemmer de Schöpfer vomene Fluech vernichtet, chamer so au meistens de Fluech selber bräche.
 DL_Zeff_HelpCurse2:D''Höhli, wo''s es sich versteckt isch direkt vor de Stadt. Aber pass huere uf und lah es ned ih dini Auge luege.
 DL_Zeff_CurseStronger:Ja. Am Aafang isch mir das Fell gwachse und nachhär hani Wolfsohre und -Auge becho. Denn isch de rüdigi Schwanz uftaucht und jetzt frog ich mich, wie lang ich no uf zwei Bei laufe chan.
-DL_Zeff_Curse:De Fluech, wo mich dezue zwingt, uszgse wene Monster. Und bald gsehni nid nur so uus, sondern denk au so.
+DL_Zeff_Curse:De Fluech, wo mich dezue zwingt, uszgseh wie es Monster. Und bald gsehni ned nur so us, sondern denk au so.
 DL_Zeff_Hunting:Ech be us de Stadt gange zum go jage, damit ech min Fellvorrat hetti chönne ufstocke. Denn hani e Höhli voller Wölf entdeckt.
 DL_Zeff_Hunting2:Also bini inne gange, ide Hoffnig eine oder zwei mit mim "Kürschnermesser" (hebt sis Schwert ufe) z''erlege. Aber ech ben ned wiit cho.
 DL_Zeff_Hunting3:Denn isch das... Ding uftaucht. Ech ha ned viel gse, wells so dunkel gsi esch, aber es esch huere gross gsi. Mit eim lüüchtende Aug, wo es mich agstarrt het... und s Nöchste wo mech chan drah erinnere isch dasi vor de Höhli glege ben, bedeckt mit Fell.

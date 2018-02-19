@@ -11,11 +11,11 @@ DL_Luiz_ForbiddenMagic2:Aber wo Liecht isch, sin au Schätte, me ka si nid eifac
 DL_Luiz_WhoAreYou:Jo. Ich bi dr Luiz, de Ahfüherer vom Zirkel. Mir luegä, dass die verbannti Magie nid vrgässe goht.
 DL_Luiz_Learn:Es freut mi, dass du meh lerne willsch. 
 DL_Luiz_Learn2:Jede, wos bis in die Halle schafft, setti öppis dörfe lerne. Du kasch d''Bibliothek bruche und wend meh Zauber lerne willsch, kasch uns byyträtte.
-DL_Luiz_WhatIfJoin:Du wirsch lerne, was Nekromantie so z''biete het. Mir könne dir mächtigi Zauber byybringe wenn du uns mit unsrer Forschig hilfsch.
+DL_Luiz_WhatIfJoin:Du wirsch lerne, was Nekromantie so z''biete het. Mir könne dir mächtigi Zauber byybringe, wenn du uns mit unsrer Forschig hilfsch.
 DL_Luiz_OtherGuild:Do hani nüt drgäge. Jede sett das lerne könne wo ihn interessiert.
 DL_Luiz_WantToJoin:Du möchtisch di verboteni Magie lerne und vrschryybsch di de Gheimnis vo dr Nekromantie?
 DL_Luiz_JoinNecromancers:So super. Willkomme im Zirkel, Novize. Uf das dis Wüsse immer wachse wird.
-DL_Luiz_FirstSpell:Jo, du derfsch lerne wieme d''Läbensenergie vomä Gegner absuggt, Novize.
+DL_Luiz_FirstSpell:Jo, du derfsch lerne, wieme d''Läbensenergie vomä Gegner absuggt, Novize.
 DL_Luiz_NoSpellReputation:Für das bisch noni parat. Hilf uns mit unsere Forschige und du wirsch die Erfahrig beko, wode bruchsch, zum mit de mächtigere Zauber umgo.
 DL_Luiz_LloydsPlan:Du kennsch dr Aführer vode Kleriker, dr Lloyd, gäll? Er het sich in letschter Zyt kli komisch benoh, es schiint als würd er eppis plane.
 DL_Luiz_LloydsPlan2:Mir bruche öpper, wo mit ihm rede ka und vilicht sogar für ihn schafft. Falls du usefindisch, was er vor het, kum wider und verzell uns devo.

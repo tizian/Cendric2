@@ -1,30 +1,30 @@
 dl_npc_lola
 ----------------------------------
 DL_Lola_NotBought:Red zersch mit de Mona, wend chli Spass ha willsch, Herzige.
-DL_Lola_SexyBoy:Hoi, hübsche Bueb. Weso chunsch nid ie und mer reded es bitz?
-DL_Lola_NoTalk:Denn bisch im falsche Zimmer. Chum wieder, wens der andersch überleit hesch.
-DL_Lola_Angry:Oh, das isches au. Aber bide Liebi gahts nid immer ums ine-use-ine-use, weisch.
-DL_Lola_OkTalk:Redemer über dich. Weso bisch du do?
-DL_Lola_Curious:Das sind di meiste vo eu do. Ich hoff, du gnüssisch din Ufenthalt do. (Lächlet)
+DL_Lola_SexyBoy:Hoi, hübsche Bueb. Wieso chunsch nöd inne und mer redet es bitz?
+DL_Lola_NoTalk:Denn bisch im faltsche Zimmer. Chum wieder, wänns der andersch überleit häsch.
+DL_Lola_Angry:Oh, das ischs au. Aber bide Liebi gahts nöd immer ums ine-use-ine-use, wäisch.
+DL_Lola_OkTalk:Redemer über dich. Wieso bisch du da?
+DL_Lola_Curious:Das sind di meiste vo eu da. Ich hoffe, du gnüssisch din Ufenthalt bi öis. (Lächlet)
 DL_Lola_IWasHorny:Du chunsch scho no uf dini Chöste, versproche. (Zwinkeret)
-DL_Lola_LookingForLove:Vilicht findsch si jo do. Chunt uf d''Art vode Liebi ah, wod suechsch. (Lächlet)
-DL_Lola_SecondQuestion:Jetz, e anderi Frog. Wer bisch du?
+DL_Lola_LookingForLove:Vilicht findsch si ja da. Chunt uf d''Art vode Liebi ah, wod suechsch. (Lächlet)
+DL_Lola_SecondQuestion:Jetz, e anderi Fraag. Wer bisch du?
 DL_Lola_NoneOfYourBusiness:Oh... okay.
-DL_Lola_Adventurer:Hn. Ich lieb die Art vo Männer.
-DL_Lola_NoOne:Hm. ich fühl mich ähnlich vo Ziit zu Ziit. Aber sich selber z''finde, ghört au zum Lebe.
-DL_Lola_FavGirl:Okay, letzti Frog a dich: Was macht e Frau für dich attraktiv?
-DL_Lola_GirlAttractive:Mhm. Wichtig, aber isch au nid alles.
-DL_Lola_GirlCook:Liebi goht dur de Mage.
-DL_Lola_GirlSmart:Da isch sehr wichtig für e längeri Beziehig.
-DL_Lola_GirlDontCare:(D''Lola giggelet) Jo, jo. Mir hend ke Jungs do, es git z''wenig Nofrog.
+DL_Lola_Adventurer:Hm. Ich lieb die Art vo Manne.
+DL_Lola_NoOne:Hm. ich fühl mich ähnlich vo Ziit zu Ziit. Aber sich selber z''finde, ghört au zum Läbe.
+DL_Lola_FavGirl:Okay, letzti Fraag a dich: Was macht e Frau für dich attraktiv?
+DL_Lola_GirlAttractive:Mhm. Wichtig, aber isch au nöd alles.
+DL_Lola_GirlCook:Liebi gaht dur de Mage.
+DL_Lola_GirlSmart:Das isch sehr wichtig für e längeri Beziehig.
+DL_Lola_GirlDontCare:(D''Lola giggelet) Jaja. Mir hend kei Type da, d''Nachfraag isch z''chlii.
 DL_Lola_GirlReallyDontCare:Schad.
-DL_Lola_Gay:Oh... würkli? Mir chönd das natürli sofort beende. Ich wett dich nid zu irgendwas zwinge.
-DL_Lola_QuestionsForYou:Sicher. Was wetsch denn wüsse?
-DL_Lola_Room:Es isch es Rose-Zimmer. Einigi Gäscht chömed immer do ane für e romantischi Ziit.
-DL_Lola_Job:Di meist Ziit scho. Aber es isch au nid öppis, mit dem ich mis ganz Lebe verbringe wett.
-DL_Lola_Attractive:Jo, natürli! Ich mag dini Hoor.
-DL_Lola_TurnOn:Oh, einiges. Ich mags würkli, wenn de Ma Spass het und''s au zeigt.
-DL_Lola_WantSex:Ich wird dich nüm länger warte la. (D''Lola zieht dich nöcher ane...)
+DL_Lola_Gay:Oh... würkli? Mir chönd das natürli sofort beende. Ich wett dich nöd zu öppisem zwinge.
+DL_Lola_QuestionsForYou:Sicher. Was wetsch dänn wüsse?
+DL_Lola_Room:Es isch es Rose-Zimmer. Einigi Gäscht chömmed immer da ane für e romantischi Ziit.
+DL_Lola_Job:Di meischt Ziit scho. Aber es isch au nöd öppis, mit dem ich mis ganz Lebe verbringe wett.
+DL_Lola_Attractive:Ja, natürlich! Ich mag dis Haar.
+DL_Lola_TurnOn:Oh, einiges. Ich mags würkli, wenn de Maa Fröid het und''s au zeigt.
+DL_Lola_WantSex:Ich wird dich nüme länger warte laa. (D''Lola zieht dich nöcher ane...)
 DL_Lola_AfterSex:Mhm... das isch guet gsi.
-DL_Lola_AfterSex2:Do, nimm die Rose mit, als Erinnerig. (Zwinkeret)
+DL_Lola_AfterSex2:Da, nimm die Rose mit, als Erinnerig. (Zwinkeret)
 DL_Lola_End:Pass uf dich uf, Süesse.

@@ -1,7 +1,7 @@
 dl_npc_jonathan2
 ----------------------------------
 DL_Jonathan_Hello:Ah, endlich. Miar müan reda.
-DL_Jonathan_Whatup:Mis Huus isch überfalla worda, oh, es isch schrecklich gsi.
+DL_Jonathan_Whatup:Mis Huus isch überfalla worda. Oh, es isch schrecklich gsi!
 DL_Jonathan_Whatup2:I han zersch denkt, d''Kleriker würden dahinter stecka, will si miar gseit händ, si schaffen für da König.
 DL_Jonathan_Whatup3:Aber d''Kleriker würen kei violetti Roba träga... Egal, si händ alles dursuacht und üseri Karte klaut.
 DL_Jonathan_Whatup4:Denn häns probiart, mi azgriifa - aber i han mi gwehrt und bin gflüchtet wo si vu ihrna brennenda Roba abglenkt gsi sind.

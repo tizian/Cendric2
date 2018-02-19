@@ -27,7 +27,7 @@ npc.id:npc_nuray
 	trigger:DL:addConditionProgress("npc_nuray", "congrats")
 	# translation: 
 	translation.tag:DL_Nuray_Congratulations
-	translation.en:So you're new here. Well done. Vincent won't let everyone join us.
+	translation.en:So you're new here. Well done. Vincent won't let just anyone join us.
 	translation.de:Du bist also der neue hier. Gut gemacht. Vincent lässt nicht einfach jeden beitreten.
 	translation.ch:Du bisch also dä neu do. Guet gmacht. De Vincent loht nid eifach jede biträttä.
 	[
@@ -64,7 +64,7 @@ npc.id:npc_nuray
 	trigger:DL:addConditionProgress("npc_nuray", "who_are_you")
 	# translation: 
 	translation.tag:DL_Nuray_WhoAreYou
-	translation.en:I'm Nuray and I can sell you armour if you're interested.
+	translation.en:I'm Nuray, and I can sell you armour if you're interested.
 	translation.de:Ich bin Nuray und ich kann dir Rüstungen verkaufen, wenn du möchtest.
 	translation.ch:Ich bi d'Nuray und ich tuä dir Rüstigä verchaufe wend wotsch.
 	[
@@ -152,7 +152,7 @@ npc.id:npc_nuray
 		condition:not DL:isQuestState("pirate_treasure", "void") and not DL:isConditionFulfilled("npc_nuray", "why_treasure")
 		# translation: 
 		translation.tag:DL_Choice_WhyTreasure
-		translation.en:If that treasure is so valuable, why didn't you get it by now?
+		translation.en:If that treasure is so valuable, why haven't you got it by now?
 		translation.de:Wenn dieser Schatz so wertvoll ist, wieso hast du ihn nicht schon geholt?
 		translation.ch:Wenn de Schatz so wertvoll isch, weso heschen nid scho gholt?
 	]
@@ -329,7 +329,7 @@ npc.id:npc_nuray
 	trigger:DL:addConditionProgress("npc_nuray", "why_treasure")
 	# translation: 
 	translation.tag:DL_Nuray_WhyTreasure
-	translation.en:They say, the treasure can only be found with wind magic, which was used by the pirates.
+	translation.en:They say the treasure can only be found with wind magic, which was what the pirates used.
 	translation.de:Man sagt, der Schatz kann nur mit Windmagie gefunden werden - welche die Piraten beherrschten.
 	translation.ch:Me seit, de Schatz cha nur mit Windmagie gfunde werde, wo d'Pirate beherrscht hend.
 	[

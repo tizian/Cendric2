@@ -1,8 +1,8 @@
 dl_npc_robert
 ----------------------------------
-DL_Robert_Congrats:Oh, du bisch also de Neu da! Ich hoff, mir chönd Kollege si.
-DL_Robert_WhoAreYou:Ich bide Robert, du chaschmer au Bob sege.
-DL_Robert_WhoAreYou2:Ich bi neu da aber ich streng mi also scho sehr ah zum en guete Nekromant z''werde. De Luiz seit zumindest, ich heb Talent.
-DL_Robert_YouHaveTalent:Danke. Ich denk du chöntsch au viel lerne, vilicht mit chli me Ziit.
-DL_Robert_NoTalent:Besser als niemert weni mer dich so alueg...
-DL_Robert_HeyBob:(Überrascht) Du, do inne? Du bisch also doch en Magier...
+DL_Robert_Congrats:Oh, du bisch also de Neui do! Ich hoff, mir chönne Kollege si.
+DL_Robert_WhoAreYou:Ich bi dr Robert, du chasch mr au Bob saage.
+DL_Robert_WhoAreYou2:Ich bin neu do, abr ich sträng mich also scho sehr ah um e guete Nekromant z''wärde. De Luiz seit zmindescht, ich han Talänt.
+DL_Robert_YouHaveTalent:Danke. Ich dänk du chöntsch au viel lerne, vilicht mit echli me Zyyt.
+DL_Robert_NoTalent:Besser als keine, wen mer dich so ahlueg...
+DL_Robert_HeyBob:(Überrascht) Du, do inne? du bisch also doch e Magier...

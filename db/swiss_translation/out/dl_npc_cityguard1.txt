@@ -4,7 +4,7 @@ DL_Citguard_Stop:HALT! D''Tor vo Gandria si zue für Frömdi!
 DL_Citguard_IDontKnowYou:I kennedi nid. U mir chöi kenä id Stadt lah womer nid kenne.
 DL_Citguard_Eyeballing:(Muschteret dich) Jo. Viläch kenni nid jede Fotzusiech, wo im Hafeviertu umelaueret, aber i würd jede erkenne, wo ide letschde Täg us dr Stadt use isch. U du bisch ufaufäu kene vo denä.
 DL_Citguard_PeopleDisappearing:Es het es paar beunruhigendi Fäu gä vo Lüt, wo us dr Stadt use si u noni ume cho si.
-DL_Citguard_GatesClosed:Mir mönd ane, dass da usse immerna öppis isch, wo dadefür verantwortlich isch. D''Tor bliibed zue, solang das Rätsel nanig glöst isch.
+DL_Citguard_GatesClosed:Mir müesse anäh, dass da usse immerno öppis isch, wo für das verantwortlech isch. D''Tor blibe zue, solang ds Rätsu noni glöst isch.
 DL_Citguard_Zeff:Hmm, loh mi schnäu la überlegä... Ja, weni mi richtig ma bsinne, gits ä Läderer wo Zeff heisst u wo ds Gandria läbt. Aber är isch genau eine vo dene Lüt, wo vermisst wärde. Wäge meinsch?
 DL_Citguard_Laughs:(Lachet) Ja, ja, äuä scho es Monschter. U iz verzeu dä huere Seich öbberem wos gloubt. Fahr eifach ab u zwar gleitig.
 DL_Citguard_WhatCurse:Hrmm... U wi wosch mi dadrvo überzüge? Ds chönnt ä Faue sii.
