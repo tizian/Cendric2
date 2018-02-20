@@ -69,7 +69,7 @@ loadDialogue = function(DL)
 	if (DL:isQuestState("jasons_glaive", "started") and DL:isQuestComplete("jasons_glaive")) then 
 
 		DL:createNPCNode(5, 6, "DL_Jason_GargoyleDust") -- Oh? What a surprise. I never thought you'd be able to kill them.
-		DL:removeItem("mi_gargoyledust", 3)
+		DL:removeItem("mi_gargoyle_dust", 3)
 		DL:addNode()
 
 
@@ -102,6 +102,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(16, 17, "DL_Jason_CompleteYashaSword2") -- (After combining them, the sword ignites into a flash of magic fire)
+		DL:addQuestDescription("yashas_sword", 1)
 		DL:addNode()
 
 

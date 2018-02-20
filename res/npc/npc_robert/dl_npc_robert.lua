@@ -39,7 +39,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(5)
 		DL:addChoice(6, "DL_Choice_YouHaveTalent") -- I'm sure you'll do great.
-		DL:addChoice(7, "DL_Choice_NoTalent") -- At least someone who thinks that way.
+		DL:addChoice(7, "DL_Choice_NoTalent") -- At least there's someone who thinks so.
 		DL:addNode()
 
 

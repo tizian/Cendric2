@@ -176,7 +176,7 @@ npc.id:npc_lua
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Lua_NoNecromancer2
-	translation.en:I love this library. So much knowledge that would be burned by the clerics if they got a chance...
+	translation.en:I love this library. So much knowledge that would be burned by the clerics if they got the chance...
 	translation.de:Ich liebe diese Bibliothek. So viel Wissen, welches von den Klerikern verbrannt werden würde, wenn es ihnen möglich wäre.
 	translation.ch:Ich lieb die Bibliothek. So viel Wüssä wo vo dä Kleriker verbrennt wärde würd, wennsi d'Möglichkeit drzue hättä.
 	[

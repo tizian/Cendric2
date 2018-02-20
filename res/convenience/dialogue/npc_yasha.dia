@@ -550,6 +550,7 @@ npc.id:npc_yasha
 	# [29] NPC Node
 	tag:29
 	# triggers: 
+	trigger:DL:addQuestDescription("yashas_sword", 1)
 	# translation: 
 	translation.tag:DL_Yasha_TempleFound4
 	translation.en:(Yasha uses her fiery breath to reignite the sword)

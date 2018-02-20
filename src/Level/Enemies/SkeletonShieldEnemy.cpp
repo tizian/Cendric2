@@ -174,3 +174,7 @@ std::string SkeletonShieldEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_skeletonshield.png";
 }
 
+std::string SkeletonShieldEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/skeleton_death.ogg";
+}
+

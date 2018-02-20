@@ -227,6 +227,7 @@ loadDialogue = function(DL)
 
 
 		DL:createNPCNode(29, 30, "DL_Yasha_TempleFound4") -- (Yasha uses her fiery breath to reignite the sword)
+		DL:addQuestDescription("yashas_sword", 1)
 		DL:addNode()
 
 

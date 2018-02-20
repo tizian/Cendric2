@@ -109,7 +109,7 @@ npc.id:npc_robert
 		tag:7
 		# translation: 
 		translation.tag:DL_Choice_NoTalent
-		translation.en:At least someone who thinks that way.
+		translation.en:At least there's someone who thinks so.
 		translation.de:Wenigstens denkt jemand so.
 		translation.ch:Wenigstens öpper, he.
 	]

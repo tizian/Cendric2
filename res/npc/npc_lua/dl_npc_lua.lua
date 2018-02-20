@@ -68,7 +68,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(9, -2, "DL_Lua_NoNecromancer2") -- I love this library. So much knowledge that would be burned by the clerics if they got a chance...
+		DL:createNPCNode(9, -2, "DL_Lua_NoNecromancer2") -- I love this library. So much knowledge that would be burned by the clerics if they got the chance...
 		DL:addNode()
 
 	end

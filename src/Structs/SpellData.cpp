@@ -847,6 +847,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	SpellData summonGargoyle;
 	summonGargoyle.id = SpellID::SummonGargoyle;
 	summonGargoyle.spellType = SpellType::Necromancy;
+	summonGargoyle.soundPaths = { "res/sound/tile/gargoyle.ogg" };
 	summonGargoyle.spritesheetPath = "res/texture/enemies/spritesheet_enemy_gargoyle.png";
 	summonGargoyle.iconTextureRect = sf::IntRect(200, 100, 50, 50);
 

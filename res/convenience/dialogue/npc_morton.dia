@@ -69,7 +69,7 @@ npc.id:npc_morton
 		condition:not DL:isConditionFulfilled("npc_morton", "guys_like_me") and DL:isConditionFulfilled("npc_morton", "crypt_open")
 		# translation: 
 		translation.tag:DL_Choice_GuysLikeMe
-		translation.en:What do you mean with "guys like me"?
+		translation.en:What do you mean by "guys like me"?
 		translation.de:Was meinst du mit "Typen wie mich"?
 		translation.ch:Was meinsch mit "Type wie ich"?
 	]
@@ -129,7 +129,7 @@ npc.id:npc_morton
 	trigger:DL:addConditionProgress("npc_morton", "guys_like_me")
 	# translation: 
 	translation.tag:DL_Morton_GuysLikeMe
-	translation.en:Green no-goods. The last one she sent to the crypt has never gotten out again.
+	translation.en:Green no-goods. The last one she sent to the crypt never got out again.
 	translation.de:Grünschnäblige Nichtsnutze. Der letzte, den sie hierher geschickt hat, ist nie wieder herausgekommen.
 	translation.ch:Grienschnääbligi Nichtsnütz. Dr letscht, wo sie do ane gschickt het, isch nie me usecho.
 	[
@@ -144,7 +144,7 @@ npc.id:npc_morton
 	trigger:DL:addConditionProgress("npc_morton", "other_guy")
 	# translation: 
 	translation.tag:DL_Morton_OtherGuy
-	translation.en:Yes, yes. Red hair, seemed to be as old as you and exactly as greenly. But no more chit-chat, I need to work.
+	translation.en:Yes, yes. Red hair, seemed to be about the same age as you. And exactly as green, too. But no more chit-chat, I need to work.
 	translation.de:Ja, ja. Rotes Haar, war etwa so alt wie du und genau so naiv. Aber genug geredet, ich muss jetzt arbeiten.
 	translation.ch:Jo, jo. Roti Hoor, isch öppä so alt gsi wie du und genau so naiv. Aber gnueg gschnuuret, ich mues jetzt schaffe.
 	[

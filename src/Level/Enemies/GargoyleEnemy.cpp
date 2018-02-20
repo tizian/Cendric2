@@ -199,3 +199,8 @@ std::string GargoyleEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_gargoyle.png";
 }
 
+std::string GargoyleEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/gargoyle_death.ogg";
+}
+
+

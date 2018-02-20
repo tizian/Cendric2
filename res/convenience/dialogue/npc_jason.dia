@@ -179,7 +179,7 @@ npc.id:npc_jason
 	# [5] NPC Node
 	tag:5
 	# triggers: 
-	trigger:DL:removeItem("mi_gargoyledust", 3)
+	trigger:DL:removeItem("mi_gargoyle_dust", 3)
 	# translation: 
 	translation.tag:DL_Jason_GargoyleDust
 	translation.en:Oh? What a surprise. I never thought you'd be able to kill them.
@@ -256,6 +256,7 @@ npc.id:npc_jason
 	# [16] NPC Node
 	tag:16
 	# triggers: 
+	trigger:DL:addQuestDescription("yashas_sword", 1)
 	# translation: 
 	translation.tag:DL_Jason_CompleteYashaSword2
 	translation.en:(After combining them, the sword ignites into a flash of magic fire)

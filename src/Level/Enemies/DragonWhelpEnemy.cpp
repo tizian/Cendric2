@@ -225,3 +225,6 @@ std::string DragonWhelpEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_dragonwhelp.png";
 }
 
+std::string DragonWhelpEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/dragon_death.ogg";
+}

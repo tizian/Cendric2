@@ -145,3 +145,7 @@ std::string SkeletonArcherEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_skeletonarcher.png";
 }
 
+std::string SkeletonArcherEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/skeleton_death.ogg";
+}
+

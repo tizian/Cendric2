@@ -338,7 +338,7 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, c
 }
 
 void ResourceManager::playMusic(const std::string& filename, bool looping) {
-	if (!m_configuration.isSoundOn || filename.empty()) return;
+	if (filename.empty()) return;
 	if (m_music.path == filename) return; // already playing
 	delete m_music.previousMusic;
 	m_music.previousMusic = m_music.currentMusic;

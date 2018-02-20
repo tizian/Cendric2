@@ -93,3 +93,4 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('is
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('towerwalkway','location','Oseana Passage','Der Weg nach Os','De Weg nach Os');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('beach','location','Pirate Beach','Piratenküste','Pirateküste');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('gandriatower','location','Tower of Gandria','Turm von Gandria','Turm vo Gandria');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('antimagiccave','location','Mysterious Cave','Mysteriöse Höhle','Mysteriösi Höhli');

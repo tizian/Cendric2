@@ -152,3 +152,6 @@ std::string SkeletonWarriorEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_skeletonwarrior.png";
 }
 
+std::string SkeletonWarriorEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/skeleton_death.ogg";
+}

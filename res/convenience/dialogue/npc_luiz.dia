@@ -37,7 +37,7 @@ npc.id:npc_luiz
 	trigger:DL:addConditionProgress("npc_luiz", "talked")
 	# translation: 
 	translation.tag:DL_Luiz_FirstTalk
-	translation.en:Syrah was right about sending you here. 
+	translation.en:Syrah was right to send you here. 
 	translation.de:Syrah hatte also recht damit, dich hierherzuschicken.
 	translation.ch:D'Syrah het also rächt drmit gha, dass sie dich do ane gschiggt het.
 	[
@@ -51,7 +51,7 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_FirstTalk2
-	translation.en:Nothing kept you from following your way - not even using a forbidden spell.
+	translation.en:Nothing kept you from following your path - not even using a forbidden spell.
 	translation.de:Du hast deinen Weg unbeirrt fortgesetzt, auch wenn du dafür verbotene Magie einsetzen musstest.
 	translation.ch:Du bisch trotzdem uf dim Wäg blibe, au wennd drfür vrbotäni Magie hesch miesse bruche.
 	[
@@ -540,7 +540,7 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_LloydsPlan
-	translation.en:You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+	translation.en:You know the leader of the clerics, Lloyd, don't you? He's been acting strangely lately, it seems like he's planning something.
 	translation.de:Du kennst den Anführer der Kleriker, Lloyd, nicht wahr? Er hat sich in letzter Zeit seltsam verhalten, es scheint als plane er etwas.
 	translation.ch:Du kennsch dr Aführer vode Kleriker, dr Lloyd, gäll? Er het sich in letschter Zyt kli komisch benoh, es schiint als würd er eppis plane.
 	[
@@ -583,8 +583,8 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_CathedralNecro2
-	translation.en:The problem is, it was a particulary dangerous and headstrong book about summoning creatures from the underworld. 
-	translation.de:Es handelte sich dabei aber um ein ziemlich gefährliches und eigenwilliges Buch darüber, wie man Kreaturen aus der Unterwelt beschwört.
+	translation.en:The problem is, it is a particulary dangerous and headstrong book about summoning creatures from the underworld. 
+	translation.de:Es handelt sich dabei aber um ein ziemlich gefährliches und eigenwilliges Buch darüber, wie man Kreaturen aus der Unterwelt beschwört.
 	translation.ch:Es handlet sich debyy aber um es zimmlig eigewilligs und gföhrligs Buech drüber, wie me Kreature us dr Unterwält beschwört.
 	[
 		# Link node, tag is next tag
@@ -612,7 +612,7 @@ npc.id:npc_luiz
 	trigger:DL:changeQuestState("cathedral_necro", "started")
 	# translation: 
 	translation.tag:DL_Luiz_CathedralNecro4
-	translation.en:Go and bring that book back to our library. I just hope it's not already too late.
+	translation.en:Bring that book back to our library. I just hope it's not too late...
 	translation.de:Geh und bring dieses Buch zurück in unsere Bibliothek. Ich hoffe einfach, es ist nicht schon zu spät...
 	translation.ch:Gang und bring das Buech zrugg in unseri Bibliothek. Ich hoff eifach, es isch nonig z'spot...
 	[
@@ -627,7 +627,7 @@ npc.id:npc_luiz
 	trigger:DL:removeItem("qe_necrobook", 1)
 	# translation: 
 	translation.tag:DL_Luiz_FinishedCathedral
-	translation.en:Good job. I'll put it back into our library where it belongs.
+	translation.en:Good job. I'll put it back in our library where it belongs.
 	translation.de:Gut gemacht. Ich werde es in unsere Bibliothek zurückstellen, wo es auch hingehört.
 	translation.ch:Guet gmacht. Ich wird's in unseri Bibliothek zruggtue wos au aneghört.
 	[
@@ -833,7 +833,7 @@ npc.id:npc_luiz
 	trigger:DL:addConditionProgress("npc_luiz", "where_yasha")
 	# translation: 
 	translation.tag:DL_Luiz_WhereYasha
-	translation.en:As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
+	translation.en:As far as I know, there's a path through a volcano in the Marshlands, to the South of Gandria.
 	translation.de:So weit ich weiss gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
 	translation.ch:Sowit ich weiss gits ä Wäg dure Vulkan in de Marsche, syydlig vo Gandria.
 	[
@@ -850,7 +850,7 @@ npc.id:npc_luiz
 	trigger:DL:addReputationProgress("necromancer", 10)
 	# translation: 
 	translation.tag:DL_Luiz_YashaComplete
-	translation.en:And you got his powers too as I can see. I'm really impressed, well done.
+	translation.en:And you got his powers too, I see. I'm really impressed, well done.
 	translation.de:Und du hast ihre Kräfte auch bekommen wie ich sehe. Ich bin beeindruckt.
 	translation.ch:Und du hesch ihri Kräft au beko we ich gseh. Ich bi wyrgligg beidruggt.
 	[
@@ -907,7 +907,7 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_FoundVelius2
-	translation.en:He, abducting mages... I don't know. That doesn't fit him. But you should go into the crypt and find out more.
+	translation.en:He, abducting mages... I don't know. That doesn't sound like him. But you should go into the crypt and find out more.
 	translation.de:Aber Magier entführen passt nicht zu ihm. Du solltest aber in die Krypta und mehr herausfinden.
 	translation.ch:Er... und Magier entfiehre... Ich weiss nid. Das passt nid zu ihm. Aber du settsch in die Krypta goh und meh uusefindä.
 	[

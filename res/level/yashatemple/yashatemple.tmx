@@ -1004,7 +1004,7 @@
     <property name="spikesbottom" value=""/>
    </properties>
   </object>
-  <object id="177" gid="794" x="1500" y="1000" width="50" height="50"/>
+  <object id="177" gid="794" x="1450" y="1000" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 3">
   <object id="212" gid="914" x="2250" y="1000" width="50" height="50"/>

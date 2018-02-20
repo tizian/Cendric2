@@ -31,7 +31,7 @@ loadDialogue = function(DL)
 		DL:addChoice(3, "DL_Choice_Syrah") -- Syrah sent me. I need to go into that crypt.
 	end
 	if (not DL:isConditionFulfilled("npc_morton", "guys_like_me") and DL:isConditionFulfilled("npc_morton", "crypt_open")) then 
-		DL:addChoice(6, "DL_Choice_GuysLikeMe") -- What do you mean with "guys like me"?
+		DL:addChoice(6, "DL_Choice_GuysLikeMe") -- What do you mean by "guys like me"?
 	end
 	if (not DL:isConditionFulfilled("npc_morton", "other_guy") and DL:isConditionFulfilled("npc_morton", "guys_like_me")) then 
 		DL:addChoice(7, "DL_Choice_OtherGuy") -- She's sent another guy?
@@ -53,7 +53,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_morton", "guys_like_me") and DL:isConditionFulfilled("npc_morton", "crypt_open")) then 
 
-		DL:createNPCNode(6, -2, "DL_Morton_GuysLikeMe") -- Green no-goods. The last one she sent to the crypt has never gotten out again.
+		DL:createNPCNode(6, -2, "DL_Morton_GuysLikeMe") -- Green no-goods. The last one she sent to the crypt never got out again.
 		DL:addConditionProgress("npc_morton", "guys_like_me")
 		DL:addNode()
 
@@ -61,7 +61,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_morton", "other_guy") and DL:isConditionFulfilled("npc_morton", "guys_like_me")) then 
 
-		DL:createNPCNode(7, -1, "DL_Morton_OtherGuy") -- Yes, yes. Red hair, seemed to be as old as you and exactly as greenly. But no more chit-chat, I need to work.
+		DL:createNPCNode(7, -1, "DL_Morton_OtherGuy") -- Yes, yes. Red hair, seemed to be about the same age as you. And exactly as green, too. But no more chit-chat, I need to work.
 		DL:addConditionProgress("npc_morton", "other_guy")
 		DL:addNode()
 
