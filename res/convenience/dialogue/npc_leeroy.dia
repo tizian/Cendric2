@@ -24,7 +24,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_Stop
 	translation.en:Hey you, stop right there! You can't cross that bridge.
 	translation.de:Hey du, keinen Schritt weiter! Du kannst nicht über diese Brücke.
-	translation.ch:Hey du, ken Schritt wiiter! Du chasch nid über die Brugg.
+	translation.ch:He du, ke Schritt wiiter! Du chasch nid über die Brügg.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -121,7 +121,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_WhyStop
 	translation.en:You won't believe it, but there are DRAGONS on this bridge.
 	translation.de:Du wirst es nicht glauben, aber es hat DRACHEN auf dieser Brücke.
-	translation.ch:Du wirsches nid glaube, aber es het DRACHE uf dere Brugg.
+	translation.ch:Du wirsch es chum gloube, aber es het DRACHE uf dere Brügg.
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -136,7 +136,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_WhyStop2
 	translation.en:I'm just making sure nobody gets mauled before I've slain them.
 	translation.de:Ich schaue nur, dass niemand zerfleischt wird, bevor ich sie erledige.
-	translation.ch:Ich lueg nur, dass niemert zerfleischt wird, bevor ich si bodige.
+	translation.ch:Ih sorge nur drfür, dass niemer zerfleischt wird, bevor ih die Viicher verdromme.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -150,7 +150,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_WhoAreYou
 	translation.en:I'm Leeroy, former paladin of the Order. Lloyd fired me because I didn't follow his stupid orders.
 	translation.de:Ich bin Leeroy, ehemaliger Paladin des Ordens. Lloyd hat mich gefeuert, weil ich seine dummen Befehle missachtet habe.
-	translation.ch:Ich bi de Leeroy, ehemalige Paladin vom Orde. De Lloyd het mi entloh well ich sini dumme Befehl missachtet ha.
+	translation.ch:Ih bi dr Leeroy, aube Paladin vom Orde gsi. Dr Lloyd het mi entlah, wüu ih sini blöde Befähu missachtet ha.
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -165,7 +165,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_WhoAreYou2
 	translation.en:They think they don't need me but I'll show them! I'm gonna slay those DRAGONS!
 	translation.de:Sie denken, sie kämen auch ohne mich klar, aber da haben sie sich geschnitten. Ich werde diese DRACHEN töten!
-	translation.ch:Si denked, si bruched mich nid, aber dene wirdis zeige! Ich wird die DRACHE abmurkse!
+	translation.ch:Si hei zgfüehu, si bruche mi nid, aber dene wirdis no zeige! Ih wirde die DRACHE eigehändig abmurggse!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -180,7 +180,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_NoDragons
 	translation.en:D'uh, that's because they're hiding! But they are just waiting for someone like you to feast on.
 	translation.de:Tz, das ist, weil sie sich verstecken! Sie warten nur auf jemanden wie dich, den sie verspeisen können.
-	translation.ch:Tz, da isch well si sich verstecked! Si warted nur uf öpper we dich wo si zum Znacht ne chönd.
+	translation.ch:Ha, das isch wüu si sech verstecke! Si warte nur uf öbber wie di wo si zum Znacht chöi habere.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -194,7 +194,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_CrossBridge
 	translation.en:You can't because if someone's going to slay those DRAGONS, that's gonna be me.
 	translation.de:Du kannst aber nicht, weil ich derjenige sein werde, der diese DRACHEN tötet.
-	translation.ch:Du chasch aber nid, well ich de sii wird wo die DRACHE killt.
+	translation.ch:Du chasch aber nid, wüu ih dä si wird wo dr DRACHE killt.
 	[
 		# Link node, tag is next tag
 		tag:9
@@ -208,7 +208,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_CrossBridge2
 	translation.en:But I can't fight with an empty stomach - I need some tasty chicken first.
 	translation.de:Aber ich kann nicht mit einem leeren Magen kämpfen - zuerst brauch ich ein leckeres Hühnchen.
-	translation.ch:Aber ich cha nid mitme leere Mage kämpfe - zersch bruchi es feins Güggeli.
+	translation.ch:Aber ih cha nid mit emne leere Mage schlegle - zersch bruchi es feins Güggeli.
 	[
 		# Link node, tag is next tag
 		tag:12
@@ -223,7 +223,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_CrossBridge3
 	translation.en:Unfortunately, I need to hold the line here. I can't let some other guy steal my DRAGONS.
 	translation.de:Leider muss ich hier die Stellung halten. Ich kann es nicht zulassen, dass ein anderer meine DRACHEN klaut.
-	translation.ch:Leider muni do d'Stellig halte. Ich chas eifach nid zuelah das en andere mini DRACHE chlaut.
+	translation.ch:Leider muessi hie d Steuig haute. Ih chas eifach nid zuelah, dass eh andere mi DRACHE mugget.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -237,7 +237,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_LeeroyChicken
 	translation.en:That would be great. But I only eat the finest chicken.
 	translation.de:Das wäre toll. Aber ich esse nur die besten Hühnchen.
-	translation.ch:Das wär toll. Aber ich iss nur di beste Güggeli.
+	translation.ch:Das wär ärdeguet. Aber ih habere nur die beste Güggeli.
 	[
 		# Link node, tag is next tag
 		tag:11
@@ -252,7 +252,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_LeeroyChicken2
 	translation.en:You know the innkeeper Helena in Gandria? Her special grilled chicken is second to none. Bring me one of those and I'll slay those DRAGONS for you.
 	translation.de:Kennst du die Wirtin Helena in Gandria? Ihr Brathühnchen Spezial ist unübertroffen. Bring mir so eins und ich töte diese DRACHEN für dich.
-	translation.ch:Kensch d'Wirtin Helena in Gandria? Ihres brötlet Spezial-Güggeli isch eifach unübertroffe. Bring mer das und ich kill die DRACHE für dich.
+	translation.ch:Kennsch d'Wirtin Helena z Gandria? Ihres brätlete Speziau-Güggeli isch eifach unübertroffe. Bring mr so eh Cheib und ih kille die DRACHE für di.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -267,7 +267,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_NotBright
 	translation.en:I prefer swords over knives, you know.
 	translation.de:Schwerter statt Wörter!
-	translation.ch:Ich ha ken Schade, ich mach Schade!
+	translation.ch:Ih ha kei Schade, ih mache Schade!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -283,7 +283,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_ChickenDone
 	translation.en:And why did it take you so long? I nearly starved! (Leeroy takes the chicken and devours it hastily)
 	translation.de:Und wieso hat das so lange gedauert? Ich wäre fast verhungert! (Leeroy nimmt das Hühnchen und verschlingt es hastig)
-	translation.ch:Und wieso het das so lang duuret? Ich wär schier verhungeret! (De Leeroy nimmts Güggeli und druckts schnell abe)
+	translation.ch:Und wieso isch das so cheibe lang gange? Ih wär schier verhungeret! (Dr Leeroy nimmts Güggeli und drückts schneu abe)
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -298,7 +298,7 @@ npc.id:npc_leeroy
 	translation.tag:DL_Leeroy_ChickenDone2
 	translation.en:But now I'm ready. Let's do this!
 	translation.de:Aber jetzt bin ich bereit. Los geht's!
-	translation.ch:Aber jetz bini recht parat du. Jetzt gohts los!
+	translation.ch:Jetzt bini auso scho fiu besser zwäg. Ab geits!
 	[
 		# Link node, tag is next tag
 		tag:16

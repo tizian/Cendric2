@@ -603,6 +603,7 @@ David Minder - Berner Dialekt (Königswache)
 Vangelis Al-Sghir - Zürcher Dialekt (Mona, Lola)
 Patrick Haab - Zürcher Dialekt (Karma)
 Chris Ryter [ManaBar] - Basler Dialekt (Robert)
+Ken Stump - Berner Dialekt (Leeroy)
 Isa - Schaffhuser Dialekt (De Rest)
 
 <<< Korrekturleser (Englisch) >>>

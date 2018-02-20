@@ -23,7 +23,7 @@ npc.id:npc_leeroy2
 	translation.tag:DL_Leeroy_Thanks
 	translation.en:Thank you.
 	translation.de:Danke.
-	translation.ch:Danke.
+	translation.ch:Mersi.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -39,7 +39,7 @@ npc.id:npc_leeroy2
 	translation.tag:DL_Leeroy_DidIt
 	translation.en:I did it! See, I was not wrong about those DRAGONS after all.
 	translation.de:Ich habe es geschafft! Mit diesen DRACHEN hatte ich also doch Recht.
-	translation.ch:Ich has gschafft! Ha, gsesch! Ha doch Recht gha mit dene DRACHE.
+	translation.ch:Ih has fertig bracht! Ha, hesch gseh?! Hani doch Rächt gha mit dene DRACHE.
 	[
 		# Link node, tag is next tag
 		tag:3
@@ -53,7 +53,7 @@ npc.id:npc_leeroy2
 	translation.tag:DL_Leeroy_DidIt2
 	translation.en:But what if they come back and you need to fight them all alone?
 	translation.de:Aber was, wenn sie zurückkommen und du musst ganz alleine gegen sie kämpfen?
-	translation.ch:Aber was isch wenn si zrugg chömed und du muesch ganz elei gege si kämpfe?
+	translation.ch:Aber was isch we si zrügg chöme und du muesch ganz ellei gägä die Viicher kämpfe?
 	[
 		# Link node, tag is next tag
 		tag:4
@@ -68,7 +68,7 @@ npc.id:npc_leeroy2
 	translation.tag:DL_Leeroy_DidIt3
 	translation.en:Here, you'd better take my sword. I don't need it anymore.
 	translation.de:Hier, nimm besser mein Schwert. Ich brauche es nicht mehr.
-	translation.ch:Do, nimm besser mis Schwert. Ich bruchs nümme.
+	translation.ch:Hie, nimm gschider mis Schwert. Ih bruches nümm.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -82,7 +82,7 @@ npc.id:npc_leeroy2
 	translation.tag:DL_Leeroy_DidIt4
 	translation.en:And now, I'm off to a new adventure! See ya.
 	translation.de:Und jetzt geht's auf zu neuen Abenteuern! Bis bald.
-	translation.ch:Und jetz gangi go neui Abentüür erlebe! Bis irgendwenn.
+	translation.ch:Und jetzt gahni neui Abetüür gah erläbe! Bis irgendeinisch.
 	[
 		# Link node, tag is next tag
 		tag:-1
