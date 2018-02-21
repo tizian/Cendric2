@@ -2,8 +2,8 @@
 steps = {
     {
 		texts = {
-			{str="Logan:Ah", time=3},
-            {str="Logan:Tried", time=5},
+			{str="Logan:Ah", time=2},
+            {str="Logan:Tried", time=6},
 		},
 		images = {
 			{path="1_1.png", vel=0, angle=0},

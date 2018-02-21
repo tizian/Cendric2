@@ -59,6 +59,7 @@ void RoyalguardTBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosi
 void RoyalguardTBossMovingBehavior::updateAnimation(const sf::Time& frameTime) {
 	GameObjectState newState = GameObjectState::Idle;
 	if (m_enemy->isDead()) {
+		m_gravity = 1000.f;
 		newState = GameObjectState::Dead;
 	}
 	else if (m_boss->getBossState() == RoyalguardBossState::ChargingStart) {

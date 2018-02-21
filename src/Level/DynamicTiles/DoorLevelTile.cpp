@@ -111,6 +111,7 @@ void DoorLevelTile::onRightClick() {
 		if ((m_isOnewayLeft && getCenter().x > m_mainChar->getCenter().x) ||
 			(m_isOnewayRight && getCenter().x < m_mainChar->getCenter().x)) {
 			m_screen->getCharacterCore()->setDoorOpen(dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->id, m_objectID);
+			g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 			open();
 		}
 		else {
@@ -119,6 +120,7 @@ void DoorLevelTile::onRightClick() {
 	}
 	else if (m_strength == 0) {
 		open();
+		g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	}
 	else if (!m_keyItemID.empty() && m_screen->getCharacterCore()->hasItem(m_keyItemID, 1)) {
 		open();
@@ -152,6 +154,7 @@ void DoorLevelTile::switchTile() {
 		return;
 	}
 
+	g_resourceManager->playSound(GlobalResource::SOUND_MISC_UNLOCK);
 	open();
 }
 
