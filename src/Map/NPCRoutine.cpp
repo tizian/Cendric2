@@ -89,7 +89,17 @@ void NPCRoutine::update(const sf::Time& frameTime) {
 				newVel.x = (distance.x > 0.f) ? m_velocity : -m_velocity;
 				newVel.y = (distance.y > 0.f) ? m_velocity : -m_velocity;
 			}
-			m_npc->setVelocity(newVel);
+			
+			sf::Vector2f newPos = m_npc->getPosition() + frameTime.asSeconds() * newVel;
+			sf::Vector2f newDistance = currentStep.goal - newPos;
+
+			if (norm(distance) <= norm(newDistance)) {
+				m_npc->setPosition(currentStep.goal);
+				m_npc->setVelocity(sf::Vector2f(0.f, 0.f));
+			}
+			else {
+				m_npc->setVelocity(newVel);
+			}
 		}
 	}
 

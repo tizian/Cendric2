@@ -129,6 +129,10 @@ private:
 	bool m_isIninaDead = false;
 	void handleVeliusDead();
 
+	// music
+	static const std::string MUSIC_BATTLE;
+	static const std::string MUSIC_PUZZLE;
+
 public:
 	// colors
 	static const sf::Color V_COLOR_ILLUSION;

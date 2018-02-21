@@ -65,6 +65,7 @@ public:
 	// the playing offset and looping are optional parameters.
 	void playMusic(const std::string& filename, bool looping = true);
 	void updateMusic(const sf::Time& frameTime);
+	void switchMusicTo(const std::string& filename);
 	void notifyVolumeChanged();
 
 	// loads a texture found at filename. If the resource type is Unique, the owner must be specified.

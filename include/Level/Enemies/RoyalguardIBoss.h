@@ -61,7 +61,9 @@ private:
 	void loadParticles();
 
 	static const sf::Time GRACE_TIME;
+	static const int FIRE_DAMAGE;
 	sf::Time m_graceTime;
+	sf::Time m_timeSinceHurt;
 
 	bool m_isTop;
 	particles::BoxSpawner* m_posGen;

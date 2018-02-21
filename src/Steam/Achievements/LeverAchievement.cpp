@@ -18,10 +18,10 @@ bool LeverAchievement::notify(const std::string& message) {
 	}
 
 	if (message == "end") {
-		m_hasStarted = false;
 		if (m_currentTurns == 14 && m_hasStarted) {
 			return true;
 		}
+		m_hasStarted = false;
 	}
 
 	return false;

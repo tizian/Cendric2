@@ -664,11 +664,6 @@
     <property name="strength" value="2"/>
    </properties>
   </object>
-  <object id="176" gid="542" x="1100" y="400" width="50" height="50">
-   <properties>
-    <property name="type" value="reflection"/>
-   </properties>
-  </object>
   <object id="153" gid="550" x="1350" y="1349" width="50" height="50">
    <properties>
     <property name="size" value="3"/>

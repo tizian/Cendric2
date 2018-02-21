@@ -23,7 +23,7 @@ RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 }
 
 void RoyalguardIBoss::loadAttributes() {
-	m_attributes.setHealth(500);
+	m_attributes.setHealth(400);
 	m_attributes.resistanceIce = -20;
 	m_attributes.resistancePhysical = 100;
 	m_attributes.resistanceShadow = 100;
@@ -335,6 +335,7 @@ std::string RoyalguardIBoss::getDeathSoundPath() const {
 /////////////////////
 
 const sf::Time RoyalguardFire::GRACE_TIME = sf::seconds(2.f);
+const int RoyalguardFire::FIRE_DAMAGE = 40;
 
 const sf::Vector2f RoyalguardFire::FIRE_POS_TOP = sf::Vector2f(650.f, 160.f);
 const sf::Vector2f RoyalguardFire::FIRE_POS_BOT = sf::Vector2f(650.f, 640.f);
@@ -359,6 +360,7 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 	GameObject::update(frameTime);
 	updateTime(m_graceTime, frameTime);
 	updateTime(m_ttl, frameTime);
+	updateTime(m_timeSinceHurt, frameTime);
 	if (m_ttl == sf::Time::Zero) {
 		setDisposed();
 		return;
@@ -369,8 +371,9 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 		m_posGen->size.x = m_boundingBox.width;
 		m_lightObject->setSize(sf::Vector2f(m_boundingBox.width * 1.5f, m_lightObject->getSize().y));
 	}
-	if (fastIntersect(*m_mainChar->getBoundingBox(), m_boundingBox)) {
-		m_mainChar->setDead();
+	if (m_timeSinceHurt == sf::Time::Zero && fastIntersect(*m_mainChar->getBoundingBox(), m_boundingBox)) {
+		m_mainChar->addDamage(FIRE_DAMAGE, DamageType::Fire, false, false);
+		m_timeSinceHurt = sf::seconds(1.f);
 	}
 }
 

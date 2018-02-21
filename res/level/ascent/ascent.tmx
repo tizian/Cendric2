@@ -1139,7 +1139,7 @@
   </object>
   <object id="201" gid="542" x="1450" y="1850" width="50" height="50">
    <properties>
-    <property name="type" value="speed"/>
+    <property name="type" value="strength"/>
    </properties>
   </object>
   <object id="202" gid="594" x="1000" y="1350" width="50" height="50"/>

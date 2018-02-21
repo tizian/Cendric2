@@ -18,6 +18,9 @@
 
 REGISTER_ENEMY(EnemyID::Boss_Velius, VeliusBoss)
 
+const std::string VeliusBoss::MUSIC_BATTLE = "res/music/velius_battle.ogg";
+const std::string VeliusBoss::MUSIC_PUZZLE = "res/music/velius_puzzle.ogg";
+
 const sf::Color VeliusBoss::V_COLOR_ILLUSION = sf::Color(134, 63, 199);
 const sf::Color VeliusBoss::V_COLOR_TWILIGHT = sf::Color(72, 80, 199);
 const sf::Color VeliusBoss::V_COLOR_NECROMANCY = sf::Color(50, 199, 50);
@@ -50,6 +53,11 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	m_blockingBubble = nullptr;
 
 	loadPuzzleLevel();
+
+	// make sure music is initialized correctly. All to 0, but playing.
+	g_resourceManager->playMusic(MUSIC_BATTLE);
+	g_resourceManager->playMusic(MUSIC_PUZZLE);
+	g_resourceManager->playMusic(MUSIC_BATTLE);
 }
 
 VeliusBoss::~VeliusBoss() {
@@ -114,6 +122,8 @@ void VeliusBoss::startAttackPhase() {
 	m_timeUntilClones = CLONE_TIMEOUT;
 	m_isClonesDoneInPhase = false;
 	m_isShackling = false;
+
+	g_resourceManager->switchMusicTo(MUSIC_BATTLE);
 }
 
 void VeliusBoss::handleAttackPhase(const sf::Time& frameTime, int clonesThreshold, int shackleThreshold) {
@@ -137,6 +147,8 @@ void VeliusBoss::handleExtractPhase(const sf::Time& frameTime, const sf::Color& 
 }
 
 void VeliusBoss::callToDie(const sf::Color& color) {
+	g_resourceManager->switchMusicTo(MUSIC_PUZZLE);
+
 	resetMirrorTiles();
 
 	m_level->setBackgroundLayerColor(color);

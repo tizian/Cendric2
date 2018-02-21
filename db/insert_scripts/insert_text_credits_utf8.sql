@@ -73,6 +73,8 @@ Tizian
 
 "Zeff''s Theme"
 
+"Alastor''s Theme"
+
 "Yasha''s Theme"
 
 "Lighthouse Theme"
@@ -86,6 +88,12 @@ Tizian
 "The Meadows"
 
 "The Royal Guards"
+
+"Run for your life!" (Hallway Theme)
+
+"Velius - Puzzle Theme"
+
+"Velius - Battle Theme"
 
 ---
 
@@ -288,6 +296,8 @@ Tizian
 
 "Zeff''s Theme"
 
+"Alastor''s Theme"
+
 "Yasha''s Theme"
 
 "Lighthouse Theme"
@@ -301,6 +311,12 @@ Tizian
 "The Meadows"
 
 "The Royal Guards"
+
+"Run for your life!" (Hallway Theme)
+
+"Velius - Puzzle Theme"
+
+"Velius - Battle Theme"
 
 ---
 
@@ -501,6 +517,8 @@ Tizian
 
 "Zeff''s Theme"
 
+"Alastor''s Theme"
+
 "Yasha''s Theme"
 
 "Lighthouse Theme"
@@ -514,6 +532,12 @@ Tizian
 "The Meadows"
 
 "The Royal Guards"
+
+"Run for your life!" (Hallway Theme)
+
+"Velius - Puzzle Theme"
+
+"Velius - Battle Theme"
 
 ---
 

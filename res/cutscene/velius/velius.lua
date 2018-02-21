@@ -4,12 +4,11 @@ steps = {
 		texts = {
 			{str="Logan:Ah", time=3},
             {str="Logan:Tried", time=5},
-            {str="Logan:But", time=5}
 		},
 		images = {
 			{path="1_1.png", vel=0, angle=0},
             {path="1_2.png", vel=15, angle=270},
-            {path="1_3.png", vel=70, angle=90},
+            {path="1_3.png", vel=100, angle=90},
             {path="1_4.png", vel=15, angle=270},
             {path="1_5.png", vel=0, angle=0},
             {path="1_6.png", vel=3, angle=0},

@@ -731,7 +731,7 @@
   </object>
   <object id="85" gid="797" x="2100" y="400" width="50" height="50">
    <properties>
-    <property name="type" value="strength"/>
+    <property name="type" value="reflection"/>
    </properties>
   </object>
   <object id="86" gid="793" x="2800" y="350" width="50" height="50"/>

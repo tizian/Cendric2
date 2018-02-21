@@ -19,7 +19,7 @@ RoyalguardTBoss::RoyalguardTBoss(const Level* level, Screen* screen) :
 }
 
 void RoyalguardTBoss::loadAttributes() {
-	m_attributes.setHealth(500);
+	m_attributes.setHealth(400);
 	m_attributes.resistanceFire = -20;
 	m_attributes.resistancePhysical = 100;
 	m_attributes.resistancePhysical = 100;

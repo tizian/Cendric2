@@ -5,7 +5,7 @@
 #include "Screens/LevelScreen.h"
 
 const sf::Vector2f RoyalguardBoss::WEAPON_ORIGIN = sf::Vector2f(56.f, 15.f);
-const sf::Time RoyalguardBoss::HEALING_TIME = sf::seconds(5.f);
+const sf::Time RoyalguardBoss::HEALING_TIME = sf::seconds(6.f);
 
 RoyalguardBoss::RoyalguardBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
@@ -48,7 +48,7 @@ void RoyalguardBoss::revive() {
 	if (!m_isDead) return;
 
 	m_isDead = false;
-	m_attributes.currentHealthPoints = m_attributes.maxHealthPoints;
+	m_attributes.currentHealthPoints = static_cast<int>(m_attributes.maxHealthPoints * 0.5f);
 }
 
 void RoyalguardBoss::setDead() {

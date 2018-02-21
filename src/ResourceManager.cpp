@@ -356,7 +356,25 @@ void ResourceManager::playMusic(const std::string& filename, bool looping) {
 	}
 }
 
+void ResourceManager::switchMusicTo(const std::string& filename) {
+	if (m_music.currentMusic == nullptr || m_music.previousMusic == nullptr) return;
+	if (m_music.path == filename) return;
+
+	m_music.fadingTime = m_music.FADING_TIME;
+	m_music.isFading = true;
+	m_music.path = filename;
+
+	auto currentMusic = m_music.currentMusic;
+	m_music.currentMusic = m_music.previousMusic;
+	m_music.previousMusic = currentMusic;
+}
+
 void ResourceManager::updateMusic(const sf::Time& frameTime) {
+	/*if (m_music.previousMusic && m_music.currentMusic) {
+		g_logger->logError("prev", std::to_string(m_music.previousMusic->getPlayingOffset().asSeconds()));
+		g_logger->logError("curr", std::to_string(m_music.currentMusic->getPlayingOffset().asSeconds()));
+	}*/
+
 	m_frameSounds.clear();
 	updateTime(m_music.fadingTime, frameTime);
 	if (!m_configuration.isSoundOn || !m_music.isFading) return;

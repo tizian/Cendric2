@@ -52,7 +52,6 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Ah', 'cutscene','Aaaah!','Aaaah!','Aaaah!', 'Aaaah!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:Tried', 'cutscene','I tried to stop him!','Ich habe versucht, ihn aufzuhalten!','Ich ha probiert, ihn ufz''halte!', '?');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Logan:But', 'cutscene','But, he...','Aber, er...','Aber, er...', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Enough', 'cutscene','Enough!','Genug!','Gnueg!', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Nearly', 'cutscene','Your miserable efforts nearly destroyed my plans.','Deine erbärmlichen Bemühungen haben fast meine Pläne zerstört.','Dini erbärmliche Bemüehige hend fast mini Plän zerstört.', '?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Velius:Now', 'cutscene','You should be glad he''s here.','Du solltest dich freuen, dass er hier ist.','Du sötsch di freue, daser do isch.', '?');
