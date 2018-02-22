@@ -12,7 +12,10 @@ SpellCreator::SpellCreator(const SpellData& spellData, LevelMovableGameObject* o
 
 	m_allowedModifiers = SpellData::getAllowedModifiers(spellData.id);
 	g_resourceManager->loadTexture(m_spellData.spritesheetPath, ResourceType::Level);
-	for (auto const& sound : m_spellData.soundPaths) {
+	for (auto const& sound : m_spellData.creatorSoundPaths) {
+		g_resourceManager->loadSoundbuffer(sound, ResourceType::Level);
+	}
+	for (auto const& sound : m_spellData.spellSoundPaths) {
 		g_resourceManager->loadSoundbuffer(sound, ResourceType::Level);
 	}
 }
@@ -56,6 +59,10 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 		return;
 	}
 
+	if (!m_spellData.creatorSoundPaths.empty()) {
+		g_resourceManager->playSound(m_spellData.creatorSoundPaths.at(rand() % m_spellData.creatorSoundPaths.size()));
+	}
+
 	execExecuteSpell(target);
 	m_owner->executeFightAnimation(m_spellData.fightingTime, m_spellData.fightAnimation, m_spellData.isBlocking);
 	m_isReady = true;
@@ -71,6 +78,10 @@ void SpellCreator::executeSpell(const LevelMovableGameObject* target) {
 		target->registerSpellCreator(this);
 		m_owner->executeFightAnimation(m_spellData.castingTime + sf::milliseconds(100), m_spellData.castingAnimation, m_spellData.isBlocking);
 		return;
+	}
+
+	if (!m_spellData.creatorSoundPaths.empty()) {
+		g_resourceManager->playSound(m_spellData.creatorSoundPaths.at(rand() % m_spellData.creatorSoundPaths.size()));
 	}
 
 	execExecuteSpell(target->getCenter());

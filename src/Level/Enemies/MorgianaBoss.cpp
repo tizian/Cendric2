@@ -54,8 +54,7 @@ void MorgianaBoss::loadSpells() {
 	chopSpell.fightAnimation = GameObjectState::Fighting;
 	chopSpell.castingTime = sf::seconds(0.6f);
 	chopSpell.castingAnimation = GameObjectState::Casting;
-	chopSpell.soundPaths.push_back("res/sound/mob/morgiana_hammer.ogg");
-	chopSpell.isSoundLooping = false;
+	chopSpell.creatorSoundPaths = { "res/sound/mob/morgiana_hammer.ogg" };
 
 	m_spellManager->addSpell(chopSpell);
 

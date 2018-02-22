@@ -20,10 +20,6 @@ void SummonGargoyleSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 		}
 	}
 
-	if (!m_spellData.soundPaths.empty()) {
-		g_resourceManager->playSound(m_spellData.soundPaths.at(rand() % m_spellData.soundPaths.size()));
-	}
-
 	GargoyleEnemy* gargoyle = new GargoyleEnemy(m_level, m_screen);
 	gargoyle->setSummoned(m_spellData.ccStrength, m_spellData.count, m_spellData.duration);
 	gargoyle->setPosition(m_owner->getPosition());

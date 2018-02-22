@@ -290,7 +290,7 @@ void MapOverlay::reloadMaps() {
 	int buttonIndex = 0;
 
 	// load level button
-	auto lScreen = dynamic_cast<LevelScreen*>(m_screen);
+	auto const lScreen = dynamic_cast<LevelScreen*>(m_screen);
 	m_isLevel = lScreen != nullptr && !lScreen->getWorldData()->isBossLevel;
 
 	if (m_isLevel) {

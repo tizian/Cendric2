@@ -85,14 +85,13 @@ void ParticleSystem::reset() {
 	m_particles->countAlive = 0;
 }
 
-
 /* PointParticleSystem */
 
 PointParticleSystem::PointParticleSystem(int maxCount) : ParticleSystem(maxCount) {
 	m_vertices = sf::VertexArray(sf::Points, maxCount);
 }
 
-void PointParticleSystem::render(sf::RenderTarget &renderTarget) {
+void PointParticleSystem::render(sf::RenderTarget& renderTarget) {
 	updateVertices();
 
 	sf::RenderStates states = sf::RenderStates::Default;

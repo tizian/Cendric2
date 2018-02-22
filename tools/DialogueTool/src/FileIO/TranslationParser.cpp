@@ -61,7 +61,7 @@ void TranslationParser::doTranslationOutFor(const std::string& file) const {
 			if (isStillOpen) {
 				while (true) {
 					// this is a multiline translation, append everything until the next single '
-					size_t nextDelimiter = line.find('\'');
+					auto const nextDelimiter = line.find('\'');
 					if (nextDelimiter == std::string::npos) {
 						currentTranslation.swissGerman.append(line);
 						currentTranslation.swissGerman.append("\n");

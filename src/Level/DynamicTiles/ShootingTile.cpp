@@ -76,7 +76,7 @@ void ShootingTile::loadSpells() {
 	m_spellData.isAlly = false;
 	g_resourceManager->loadTexture(m_spellData.spritesheetPath, ResourceType::Level);
 
-	for (auto const& sound : m_spellData.soundPaths) {
+	for (auto const& sound : m_spellData.creatorSoundPaths) {
 		g_resourceManager->loadSoundbuffer(sound, ResourceType::Level);
 	}
 }

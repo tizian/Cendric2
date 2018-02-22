@@ -3,7 +3,7 @@
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
-  <property name="musicpath" value="res/music/velius_puzzle.ogg"/>
+  <property name="musicpath" value="res/music/veliusroom.ogg"/>
   <property name="tilesetpath" value="res/map/veliusroom/tileset_map_veliusroom.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_map_veliusroom" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">

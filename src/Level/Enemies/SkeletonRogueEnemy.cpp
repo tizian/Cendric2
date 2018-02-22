@@ -43,9 +43,11 @@ void SkeletonRogueEnemy::loadSpells() {
 	chopSpell.spellOffset = sf::Vector2f(10.f, -10.f);
 	chopSpell.fightingTime = sf::milliseconds(4 * 70);
 	chopSpell.castingTime = sf::milliseconds(4 * 70);
-	chopSpell.soundPaths.push_back("res/sound/weapon/swing1.ogg");
-	chopSpell.soundPaths.push_back("res/sound/weapon/swing2.ogg");
-	chopSpell.soundPaths.push_back("res/sound/weapon/swing3.ogg");
+	chopSpell.creatorSoundPaths = {
+		"res/sound/weapon/swing1.ogg",
+		"res/sound/weapon/swing2.ogg",
+		"res/sound/weapon/swing3.ogg"
+	};
 	
 	m_spellManager->addSpell(chopSpell);
 

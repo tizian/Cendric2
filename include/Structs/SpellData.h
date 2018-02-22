@@ -18,8 +18,8 @@ struct SpellData final {
 	SpellID id = SpellID::VOID;
 	SpellType spellType = SpellType::VOID;
 	std::string spritesheetPath;
-	std::vector<std::string> soundPaths;
-	bool isSoundLooping = false;
+	std::vector<std::string> creatorSoundPaths;
+	std::vector<std::string> spellSoundPaths;
 	sf::IntRect iconTextureRect;
 	sf::Time cooldown = sf::seconds(1.f);
 	sf::FloatRect boundingBox;

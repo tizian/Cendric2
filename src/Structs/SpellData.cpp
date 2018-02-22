@@ -316,8 +316,7 @@ SpellData SpellData::getProjectileSpellData() {
 	SpellData projectile;
 	projectile.id = SpellID::Projectile;
 	projectile.spritesheetPath = "res/texture/spells/spritesheet_spell_projectile.png";
-	projectile.soundPaths.push_back("res/sound/spell/arrow.ogg");
-	projectile.isSoundLooping = false;
+	projectile.creatorSoundPaths = { "res/sound/spell/arrow.ogg" };
 
 	projectile.cooldown = sf::seconds(1);
 	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
@@ -417,7 +416,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.spritesheetPath = "res/texture/spells/spritesheet_spell_fireball.png";
-	fireBall.soundPaths.push_back("res/sound/spell/fireball.ogg");
+	fireBall.spellSoundPaths = { "res/sound/spell/fireball.ogg" };
 	fireBall.iconTextureRect = sf::IntRect(0, 0, 50, 50);
 
 	fireBall.cooldown = sf::seconds(1);
@@ -612,6 +611,7 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.damagePerSecond = 3;
 	windGust.ccStrength = 1;
 	windGust.strength = 1;
+	windGust.spellSoundPaths = { "res/sound/spell/windgust.ogg" };
 
 	windGust.rangeModifierAddition = 40.f;
 	windGust.durationModifierAddition = sf::seconds(0.5f);
@@ -822,8 +822,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.id = SpellID::ShadowTrap;
 	shadowTrap.spellType = SpellType::Twilight;
 	shadowTrap.spritesheetPath = "res/texture/spells/spritesheet_spell_shadowtrap.png";
-	shadowTrap.soundPaths.push_back("res/sound/spell/trap.ogg");
-	shadowTrap.isSoundLooping = false;
+	shadowTrap.creatorSoundPaths = { "res/sound/spell/trap.ogg" };
 	shadowTrap.iconTextureRect = sf::IntRect(50, 50, 50, 50);
 
 	shadowTrap.cooldown = sf::seconds(10);
@@ -847,7 +846,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	SpellData summonGargoyle;
 	summonGargoyle.id = SpellID::SummonGargoyle;
 	summonGargoyle.spellType = SpellType::Necromancy;
-	summonGargoyle.soundPaths = { "res/sound/tile/gargoyle.ogg" };
+	summonGargoyle.creatorSoundPaths = { "res/sound/tile/gargoyle.ogg" };
 	summonGargoyle.spritesheetPath = "res/texture/enemies/spritesheet_enemy_gargoyle.png";
 	summonGargoyle.iconTextureRect = sf::IntRect(200, 100, 50, 50);
 
