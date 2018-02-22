@@ -43,7 +43,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_runa", "job") and not DL:isConditionFulfilled("npc_runa", "runas_deal")) then 
 			DL:addChoice(13, "DL_Choice_Delivery") -- Tell me more about that delivery.
 		end
-		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void")) then 
+		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void") and not DL:isQuestComplete("element_master")) then 
 			DL:addChoice(17, "DL_Choice_RunasDealStart") -- Okay, give me the Physalis, I'll take them to Bjarne.
 		end
 		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "who_bjarne")) then 
@@ -140,7 +140,7 @@ loadDialogue = function(DL)
 
 		end
 
-		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void")) then 
+		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void") and not DL:isQuestComplete("element_master")) then 
 
 			DL:createNPCNode(17, -2, "DL_Runa_RunasDealStart") -- Good! Here you go. Don't forget to bring me the pendant!
 			DL:changeQuestState("runas_deal", "started")

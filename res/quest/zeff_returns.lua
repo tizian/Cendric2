@@ -6,7 +6,7 @@ conditions =
 markers = {
 	{
 		map = "res/map/meadows/meadows.tmx",
-		position = {1325, 3000},
+		position = {3325, 3025},
         npc = "npc_cityguard1",
 		step = 0
 	},

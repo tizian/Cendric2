@@ -116,6 +116,9 @@ loadDialogue = function(DL)
 			if (DL:hasItem("qe_recommendationletter", 1)) then
 				DL:addChoice(37, "DL_Choice_TryLetter") -- You know, Inina trusts me. (Show letter)
 			end
+            if (DL:isQuestComplete("clerics_recommendation")) then
+				DL:addChoice(60, "DL_Choice_TryLloyd") -- Lloyd trusts me. You better do, too.
+			end
 
 			DL:addChoice(-2, "DL_Choice_Nevermind") -- Nevermind...
 			DL:addNode()
@@ -136,7 +139,10 @@ loadDialogue = function(DL)
 			
 			DL:createNPCNode(37, 38, "DL_Citguard_TryLetter") -- Hm, the seal of the High Priestess Inina. I'll have to believe you, then.
 			DL:addNode()
-			
+            
+            DL:createNPCNode(60, 38, "DL_Citguard_TryLloyd") -- You've already talked to Commander Lloyd?
+			DL:addNode()
+            
 			DL:createNPCNode(38, -2, "DL_Citguard_LetZeffIn") -- Alright, I will inform the other guards. You can tell him it is safe to return to Gandria.
 			DL:addConditionProgress("npc_cityguard", "letin_zeff")
 			DL:addQuestDescription("zeff_returns", 1)

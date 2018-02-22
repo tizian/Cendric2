@@ -140,7 +140,7 @@ npc.id:npc_jeremy
 	trigger:DL:addQuestDescription("leeroy_chicken", 2)
 	# translation: 
 	translation.tag:DL_Jeremy_LeeroyChicken2
-	translation.en:You should have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
+	translation.en:You would have to have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
 	translation.de:Du solltest einen wirklich guten Grund für uns haben, wenn wir hier raus sollen - und den scheinst du nicht zu haben. Geh jetzt besser, Kleiner.
 	translation.ch:Du söttsch en würkli guete Grund für üs ha, dasmer vo do weg gönd - und de hesch definitiv nid. Gang ez besser, Chliine.
 	[
@@ -299,9 +299,9 @@ npc.id:npc_jeremy
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jeremy_AttackBoss
-	translation.en:(Sighs) You won't listen, eh. Roy, Morgiana! Let's teach him a lesson.
-	translation.de:(Seufzt) Du willst einfach nicht hören, was. Roy, Morgiana! Erteilen wir ihm eine Lektion.
-	translation.ch:(Süüfzt) Du begriifsches eifach nid, he. Roy, Morgiana! Zeigemer ihm wo de Bartli de Most holt!
+	translation.en:(Sighs) You won't listen, eh? Roy, Morgiana! Let's teach him a lesson.
+	translation.de:(Seufzt) Du willst einfach nicht hören, was? Roy, Morgiana! Erteilen wir ihm eine Lektion.
+	translation.ch:(Süüfzt) Du begriifsches eifach nid, he? Roy, Morgiana! Zeigemer ihm wo de Bartli de Most holt!
 	[
 		# Link node, tag is next tag
 		tag:24

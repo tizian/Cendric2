@@ -50,7 +50,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(15, -2, "DL_Jeremy_LeeroyChicken2") -- You should have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
+			DL:createNPCNode(15, -2, "DL_Jeremy_LeeroyChicken2") -- You would have to have a really good reason to make us leave - and you don't seem to have one. Get lost, kid.
 			DL:addConditionProgress("npc_jeremy", "leeroy_chicken")
 			DL:addQuestDescription("leeroy_chicken", 2)
 			DL:addNode()
@@ -121,7 +121,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_jeremy", "confront_inina2") and not DL:isConditionFulfilled("boss", "BossMercenaries")) then 
 
-			DL:createNPCNode(23, 24, "DL_Jeremy_AttackBoss") -- (Sighs) You won't listen, eh. Roy, Morgiana! Let's teach him a lesson.
+			DL:createNPCNode(23, 24, "DL_Jeremy_AttackBoss") -- (Sighs) You won't listen, eh? Roy, Morgiana! Let's teach him a lesson.
 			DL:addNode()
 
 

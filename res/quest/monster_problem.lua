@@ -11,8 +11,8 @@ markers = {
 	},
     {
 		map = "res/map/meadows/meadows.tmx",
-		position = {2250, 2650},
-        npc = "npc_inina",
+		position = {850, 3100},
+        npc = "npc_ivo",
 		step = -1
 	}
 }

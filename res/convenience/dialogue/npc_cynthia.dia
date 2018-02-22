@@ -21,9 +21,9 @@ npc.id:npc_cynthia
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Cynthia_ChooseSide
-	translation.en:Whose side are you on, mages or commoners?
-	translation.de:Auf wessen Seite stehst du, Magier oder Gewöhnliche?
-	translation.ch:Uf welere Siite bisch, Magier oder Gwöhnlichi?
+	translation.en:Whose side are you on? Mages or commoners?
+	translation.de:Auf wessen Seite stehst du? Magier oder Gewöhnliche?
+	translation.ch:Uf welere Siite bisch? Magier oder Gwöhnlichi?
 	[
 		# Link node, tag is next tag
 		tag:2
@@ -170,7 +170,7 @@ npc.id:npc_cynthia
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Cynthia_Busy
-	translation.en:I really got other stuff to do. Leave me alone.
+	translation.en:I really got other things to do. Leave me alone.
 	translation.de:Ich hab nun wirklich anderes zu tun. Lass mich in Ruhe.
 	translation.ch:Ich ha ez würkli anders ztue. Loh mi in Rue.
 	[

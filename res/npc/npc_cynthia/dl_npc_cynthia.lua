@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_cynthia", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Cynthia_ChooseSide") -- Whose side are you on, mages or commoners?
+		DL:createNPCNode(1, 2, "DL_Cynthia_ChooseSide") -- Whose side are you on? Mages or commoners?
 		DL:addNode()
 
 
@@ -60,7 +60,7 @@ loadDialogue = function(DL)
 	end
 
 
-	DL:createNPCNode(10, -1, "DL_Cynthia_Busy") -- I really got other stuff to do. Leave me alone.
+	DL:createNPCNode(10, -1, "DL_Cynthia_Busy") -- I really got other things to do. Leave me alone.
 	DL:addNode()
 
 end

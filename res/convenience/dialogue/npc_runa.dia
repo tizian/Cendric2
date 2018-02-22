@@ -104,7 +104,7 @@ npc.id:npc_runa
 	[
 		# Link node, tag is next tag
 		tag:17
-		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void")
+		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void") and not DL:isQuestComplete("element_master")
 		# translation: 
 		translation.tag:DL_Choice_RunasDealStart
 		translation.en:Okay, give me the Physalis, I'll take them to Bjarne.

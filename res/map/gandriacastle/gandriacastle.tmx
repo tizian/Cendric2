@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="159">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="161">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/castle.ogg"/>
@@ -71,11 +71,11 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="607" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="26" height="26">
   <data encoding="csv">
@@ -355,6 +355,8 @@
   <object id="154" x="1100" y="1000" width="50" height="75"/>
   <object id="155" x="912.5" y="300" width="25" height="50"/>
   <object id="156" x="1112.5" y="300" width="25" height="50"/>
+  <object id="159" x="965" y="350" width="20" height="37.5"/>
+  <object id="160" x="1062.5" y="350" width="20" height="37.5"/>
  </objectgroup>
  <objectgroup name="npc">
   <object id="143" gid="590" x="625" y="337.5" width="50" height="50">
@@ -391,24 +393,24 @@
   <properties>
    <property name="conditions" value="boss,BossRoyalguards"/>
   </properties>
-  <object id="157" gid="623" x="950" y="325" width="50" height="50">
+  <object id="157" gid="630" x="950" y="325" width="50" height="50">
    <properties>
     <property name="text" value="PointOfNoReturn"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="dynamic">
-  <object id="142" gid="644" x="1000" y="300" width="50" height="50">
+  <object id="142" gid="651" x="1000" y="300" width="50" height="50">
    <properties>
     <property name="conditions" value="default,hallway_open"/>
    </properties>
   </object>
-  <object id="144" gid="644" x="600" y="650" width="50" height="50">
+  <object id="144" gid="651" x="600" y="650" width="50" height="50">
    <properties>
     <property name="conditions" value="default,king_open"/>
    </properties>
   </object>
-  <object id="145" gid="644" x="650" y="650" width="50" height="50">
+  <object id="145" gid="651" x="650" y="650" width="50" height="50">
    <properties>
     <property name="conditions" value="default,king_open"/>
    </properties>

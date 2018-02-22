@@ -14,12 +14,14 @@
 REGISTER_ENEMY(EnemyID::Boss_Royalguard_I, RoyalguardIBoss)
 
 const sf::Time RoyalguardIBoss::FIRE_TIME = sf::seconds(10.f);
+const std::string RoyalguardIBoss::FIRE_SOUND = "res/sound/spell/fire_explosion.ogg";
 
 RoyalguardIBoss::RoyalguardIBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
 	Enemy(level, screen),
 	RoyalguardBoss(level, screen) {
 	loadBoss();
+	g_resourceManager->loadSoundbuffer(FIRE_SOUND, ResourceType::Level);
 }
 
 void RoyalguardIBoss::loadAttributes() {
@@ -64,6 +66,14 @@ void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {
 	if (m_isDead) return;
 	updateTime(m_stateTime, frameTime);
 	updateTime(m_fireTime, frameTime);
+	
+	if (m_fireSoundTime > sf::Time::Zero) {
+		updateTime(m_fireSoundTime, frameTime);
+		if (m_fireSoundTime == sf::Time::Zero) {
+			g_resourceManager->playSound(FIRE_SOUND, false, 0.6f);
+		}
+	}
+
 	if (m_stateTime > sf::Time::Zero) return;
 	switch (m_bossState)
 	{
@@ -80,6 +90,7 @@ void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {
 			auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
 			m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
 			m_lineVelGen->maxAngle = m_lineVelGen->minAngle;
+			m_fireSoundTime = sf::seconds(1.4f);
 		}
 		else {
 			m_bossState = RoyalguardBossState::FireballStart;
@@ -336,7 +347,6 @@ std::string RoyalguardIBoss::getDeathSoundPath() const {
 
 const sf::Time RoyalguardFire::GRACE_TIME = sf::seconds(2.f);
 const int RoyalguardFire::FIRE_DAMAGE = 40;
-const std::string RoyalguardFire::FIRE_SOUND = "res/sound/spell/fire_explosion.ogg";
 
 const sf::Vector2f RoyalguardFire::FIRE_POS_TOP = sf::Vector2f(650.f, 160.f);
 const sf::Vector2f RoyalguardFire::FIRE_POS_BOT = sf::Vector2f(650.f, 640.f);
@@ -353,9 +363,6 @@ RoyalguardFire::RoyalguardFire(bool isTop, LevelMovableGameObject* mainChar) {
 	m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x;
 	m_boundingBox.top = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).y - FIRE_EXTENTS.y * 0.5f;
 	m_graceTime = GRACE_TIME;
-
-	g_resourceManager->loadSoundbuffer(FIRE_SOUND, ResourceType::Level);
-	g_resourceManager->playSound(FIRE_SOUND);
 
 	loadParticles();
 }

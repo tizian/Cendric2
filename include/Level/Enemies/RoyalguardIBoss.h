@@ -41,8 +41,11 @@ private:
 	particles::LineSpawner* m_lineSpawner;
 	particles::AngledVelocityGenerator* m_lineVelGen;
 
+	static const std::string FIRE_SOUND;
+
 protected:
 	sf::Time m_fireTime;
+	sf::Time m_fireSoundTime;
 
 public:
 	static const sf::Time FIRE_TIME;
@@ -62,7 +65,6 @@ private:
 
 	static const sf::Time GRACE_TIME;
 	static const int FIRE_DAMAGE;
-	static const std::string FIRE_SOUND;
 
 	sf::Time m_graceTime;
 	sf::Time m_timeSinceHurt;

@@ -416,7 +416,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.id = SpellID::FireBall;
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.spritesheetPath = "res/texture/spells/spritesheet_spell_fireball.png";
-	fireBall.spellSoundPaths = { "res/sound/spell/fireball.ogg" };
+	fireBall.creatorSoundPaths = { "res/sound/spell/fireball.ogg" };
 	fireBall.iconTextureRect = sf::IntRect(0, 0, 50, 50);
 
 	fireBall.cooldown = sf::seconds(1);

@@ -4,7 +4,7 @@
   <property name="backgroundlayers" value="-1.0,res/level/boss_janus/layer_inf.png,3.0,res/level/boss_janus/layer_3.png,2.0,res/level/boss_janus/layer_2.png"/>
   <property name="bosslevel" value="res/level/boss_janus/boss_janus.lua"/>
   <property name="dimming" value="0.7"/>
-  <property name="musicpath" value="res/music/boss_khajag.ogg"/>
+  <property name="musicpath" value="res/music/boss_janus.ogg"/>
   <property name="tilesetpath" value="res/level/boss_janus/tileset_level_boss_janus.png"/>
  </properties>
  <tileset firstgid="1" name="tileset_level_boss_janus" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="529" columns="23">

@@ -120,6 +120,11 @@ bool CharacterCore::setQuestState(const std::string& id, QuestState state) {
 		if (m_data.questStates[id] == state) {
 			return false;
 		}
+
+		if (m_data.questStates[id] == QuestState::Completed && state == QuestState::Failed) {
+			return false;
+		}
+
 		setQuestTracked(id, false);
 		m_data.questStates[id] = state;
 		return true;
