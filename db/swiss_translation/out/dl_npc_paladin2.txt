@@ -1,7 +1,0 @@
-dl_npc_paladin2
-----------------------------------
-DL_Paladin2_WhatIsIt:Was isch?
-DL_Paladin2_AskHer:I ha ke Zyt zum schnurrä. Gang u frag si säuber. Abr zeig ihrä ä chly Respäkt, mir luegä uf di.
-DL_Paladin2_GuardingInina:Mir luegä, ds üsi Hohäpriestärä ihri Ufgab cha erledigä ohni dasä öpper stört.
-DL_Paladin1_Mage:Mi cha nid dr Rang vomne Paladin ha wemä ä Normaustärblächä isch.
-DL_Paladin2_WhereInina:Si isch id Höhli gangä. Öpper muess usefingä, was das Biescht i därä Höhli so nöch bir Stadt z''suechä gah het.
