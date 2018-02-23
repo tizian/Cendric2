@@ -1450,11 +1450,6 @@
     <property name="inactive" value=""/>
    </properties>
   </object>
-  <object id="341" gid="797" x="3350" y="175" width="50" height="50">
-   <properties>
-    <property name="type" value="count"/>
-   </properties>
-  </object>
   <object id="342" gid="1083" x="1600" y="1325" width="50" height="50">
    <properties>
     <property name="text" value="NeedElements"/>
@@ -1861,7 +1856,7 @@
     <property name="color" value="red"/>
    </properties>
   </object>
-  <object id="696" gid="789" x="2925" y="200" width="50" height="50">
+  <object id="696" gid="789" x="3350" y="250" width="50" height="50">
    <properties>
     <property name="fo_ultimatehealingpotion" value="1"/>
     <property name="gold" value="12"/>

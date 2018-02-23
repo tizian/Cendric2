@@ -94,6 +94,7 @@ item.id:eq_magicpendant,1
 item.id:eq_sack,1
 item.id:eq_scalearmor,1
 item.id:eq_shadowcloak,1
+item.id:eq_dragonskull,1
 item.id:eq_sparkling_green,1
 item.id:eq_sparkling_yellow,1
 item.id:eq_sparkling_orange,1

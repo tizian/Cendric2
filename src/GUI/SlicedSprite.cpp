@@ -91,7 +91,7 @@ void SlicedSprite::init() {
 	m_vertices.clear();
 
 	if (m_leftSlice + m_rightSlice > m_width || m_topSlice + m_bottomSlice > m_height) {
-		g_logger->logWarning("SlicedSprite::init()", "Slicing doesn't agree with width and height!");
+		// slicing doesn't agree with width and height!
 		return;
 	}
 

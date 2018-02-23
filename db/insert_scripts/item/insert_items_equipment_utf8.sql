@@ -248,20 +248,37 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) v
 INSERT INTO item_attribute (item_id, dmg_shadow, res_light, dmg_fire, dmg_physical, res_physical, critical, haste, max_health) values ('eq_nekomatahead', 3, 42, 3, 2, 10, 6, 10, 40);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_nekomatahead', 'res/texture/equipment/head/spritesheet_head_nekomata.png', 'res/texture/equipment/head/spritesheet_map_head_nekomata.png');
 
+-- Dragon Skull
+
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_dragonskull', 'item', 'Dragon Helmet','Drachenhelm','Drachehelm');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_dragonskull', 'item_desc', '...','...','...');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_dragonskull', 'eq_head', 150, 750, 100, 2);
+INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, res_physical, res_light, critical, haste) values ('eq_dragonskull', 5, 5, 50, 50, 3, 10);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_dragonskull', 'res/texture/equipment/head/spritesheet_head_dragonskull.png', 'res/texture/equipment/head/spritesheet_map_head_dragonskull.png');
+
 -- Shadow Cloak
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_shadowcloak', 'item', 'Shadow Cloak','Schattenumhang','Schatteumhang');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_shadowcloak', 'item_desc', 'A pliant piece of cloth.','Ein geschmeidiges Stück Stoff.','Es gschmeidigs Stück Stoff.');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_shadowcloak', 'eq_back', 50, 200, 0, 1);
-INSERT INTO item_attribute (item_id) values ('eq_shadowcloak');
-INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump) values ('eq_shadowcloak', 'res/texture/equipment/back/spritesheet_back_shadowcloak.png', 'res/texture/equipment/back/spritesheet_map_back_shadowcloak.png', 3);
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_shadowcloak', 'eq_back', 50, 200, 100, 3);
+INSERT INTO item_attribute (item_id, dmg_shadow, res_light, haste) values ('eq_shadowcloak', 10, 50, 15);
+INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_shadowcloak', '', 'res/texture/equipment/back/spritesheet_map_back_shadowcloak.png');
+INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, goal_radius, speed_min, speed_max, time_min, time_max, attract_fraction) values ('eq_shadowcloak', 60, 50, 0, 'res/texture/particles/cloud.png', 3, -7, 45, 
+5, 6, 15, 20,
+50, 50, 50, 255,
+50, 50, 50, 255,
+0, 0, 0, 50,
+0, 0, 0, 50,
+-10, 100, 10, 
+60, 80,
+1.0, 1.1, 1.0);
 
 -- Horned Scalemail
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item', 'Horned Scalemail','Gehörnter Schuppenpanzer','Ghörnte Schuppepanzer');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item_desc', '...','...','...');
-INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_scalearmor', 'eq_body', 100, 200, 0, 2);
-INSERT INTO item_attribute (item_id) values ('eq_scalearmor');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item_desc', 'Made from dragon scales, this armour provides excellent protection against all kind of attacks.','Diese aus Drachenschuppen gefertigte Rüstung bietet hervorragenden Schutz gegen alle Arten von Attacken.','Die us Dracheschuppe gmacht Rüstig git hervorragende Schutz gege all Arte vo Attacke.');
+INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_scalearmor', 'eq_body', 100, 200, 300, 2);
+INSERT INTO item_attribute (item_id, res_physical, res_fire, res_shadow, res_ice, res_physical, max_health) values ('eq_scalearmor', 100, 100, 100, 100, 100, 80);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_scalearmor', 'res/texture/equipment/body/spritesheet_body_scalearmor.png', 'res/texture/equipment/body/spritesheet_map_body_scalearmor.png');
 
 -- Necro T1 Back
