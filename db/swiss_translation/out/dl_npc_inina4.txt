@@ -1,4 +1,0 @@
-dl_npc_inina4
-----------------------------------
-DL_Inina_Ok:Ja. Mer stöi nümme unger sim Zauber.
-DL_Inina_Ok2:Danke tusig, dassd mi grettet häsch. Das wirdi der nie vergässe.

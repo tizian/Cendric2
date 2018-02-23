@@ -86,7 +86,8 @@ update = function(B, W)
         W:changeQuestState("help_koray", "completed")
         W:addConditionProgress("npc_koray", "level_stop")
         
-        if (W:isQuestState("runas_deal", "started")) then 
+		-- this quest automatically fails because now, Bjarne is gone and this quest cannot be completed anymore.
+        if (W:isQuestState("runas_deal", "started") and not W:isQuestDescriptionUnlocked("runas_deal", 1)) then 
             W:changeQuestState("runas_deal", "failed")
         end
         

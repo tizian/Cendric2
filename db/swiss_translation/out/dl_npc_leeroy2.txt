@@ -1,7 +1,0 @@
-dl_npc_leeroy2
-----------------------------------
-DL_Leeroy_Thanks:Danke.
-DL_Leeroy_DidIt:Ich has gschafft! Ha, gsesch! Ha doch Recht gha mit dene DRACHE.
-DL_Leeroy_DidIt2:Aber was isch wenn si zrugg chömed und du muesch ganz elei gege si kämpfe?
-DL_Leeroy_DidIt3:Do, nimm besser mis Schwert. Ich bruchs nümme.
-DL_Leeroy_DidIt4:Und jetz gangi go neui Abentüür erlebe! Bis irgendwenn.

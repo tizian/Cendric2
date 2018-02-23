@@ -1,3 +1,0 @@
-dl_npc_swan
-----------------------------------
-DL_Swan_Aggressive:(De Schwan faucht dich aggressiv ah)

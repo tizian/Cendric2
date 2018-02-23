@@ -1,8 +1,0 @@
-dl_npc_andrew
-----------------------------------
-DL_Andrew_IAm:Ich bi de Andrew... hicks! Freut mi.
-DL_Andrew_IAmDrinking:Hehe... dummi Frog... Ich trink esh paar Bierli, gnüssh die Siit da... Cha showiso nid srugg.
-DL_Andrew_BrokenBridge:D''Brugg ish futsch, weisch. D''Brugg is Dorf, wo mis Wiib d''Ingrid lebt. Aber das ..hicks!.. shtört mich gar nid so.
-DL_Andrew_ToVillage:Zrugg is Dorf, wo mis Wiib lebt, D''Ingrid. D''Brugg ish futsch, weisch. Aber das ..hicks!.. shtört mich gar nid so.
-DL_Andrew_IWontGoBack:Ja, würkli... aber es isch doch Ssssummer, das macht gar ke Sinn. Und, sssum ehrlich shi... hicks... findish na ganz gmüetlich da.
-DL_Andrew_Mages:En Huufe Gstörti, wend mi grad so frögsch... hicks! Ich bi ja zimli froh drüber, dash keine vo dene i üserem Dorf lebt.

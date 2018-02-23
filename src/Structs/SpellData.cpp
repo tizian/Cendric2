@@ -680,12 +680,12 @@ SpellData SpellData::getFlashSpellData() {
 	flash.activeDuration = sf::seconds(2.0);
 	flash.attachedToMob = true;
 	flash.damage = 10;
-	flash.range = 150.f;
+	flash.range = 200.f;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
 	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
 	flash.fightAnimation = GameObjectState::VOID;
 
-	flash.rangeModifierAddition = 100.f;
+	flash.rangeModifierAddition = 80.f;
 
 	return flash;
 }

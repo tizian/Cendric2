@@ -1,8 +1,0 @@
-dl_npc_zeff4
-----------------------------------
-DL_Zeff_Na:Ich ha gwüsst, dases schaffsch!
-DL_Zeff_WhoAreYou:Erkennsch mi denn nid? Ich bi de Zeff. Es bitz weniger Fell, aber immer no de Zeff.
-DL_Zeff_WhoAreYou2:De Fluech isch endli broche. Danke, junge Magier.
-DL_Zeff_LookingGood:Jo, gell. Es bitz weniger Fell, aber ich bi froh, dasi wider zrugg bi.
-DL_Zeff_CurseBroken:Isch so. Danke tusig, junge Magier. Ich wird di nie vergesse.
-DL_Zeff_Thanks:Danke!

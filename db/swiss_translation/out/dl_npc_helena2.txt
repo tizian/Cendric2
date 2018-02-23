@@ -1,7 +1,0 @@
-dl_npc_helena2
-----------------------------------
-DL_Helena_Hello:Hey, hey du! Du bisch zrugg? Ich ha denkt du würsch nümme uftauche und dis Zimmer zale.
-DL_Helena_Helena:Ich bi d''Helena, d''Wirtin vo dere Taverne. Mer sind üs schomal begegnet!
-DL_Helena_Room:Dis Zimmer i dem Gaschthuus?
-DL_Helena_ComeIn:Natürlich! Aber es isch scho es Wiili her.. Ha denkt du bisch scho über alli Berge.
-DL_NPC_ComeIn2:Aber chum doch eifach ie und ich verzell der denn alles.
