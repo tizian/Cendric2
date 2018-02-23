@@ -55,7 +55,6 @@ VeliusBoss::VeliusBoss(const Level* level, Screen* screen) :
 	loadPuzzleLevel();
 
 	// make sure music is initialized correctly. All to 0, but playing.
-	g_resourceManager->playMusic(MUSIC_BATTLE);
 	g_resourceManager->playMusic(MUSIC_PUZZLE);
 	g_resourceManager->playMusic(MUSIC_BATTLE);
 }

@@ -9,7 +9,7 @@ loadRoutine = function(R, W)
 		R:goToTile(28,49)
 		R:setDisposed()
 	else
-		R:setTalkingActive(true)
+		R:setTalkingActiveForce(true)
 		R:setReloadEnabled(true)
 		R:setTilePosition(28,51)
 		R:setFacingDown()

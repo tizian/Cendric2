@@ -14,7 +14,7 @@
 #include <cassert>
 
 // versioning
-#define CENDRIC_VERSION_NR "0.9.2-rc4"
+#define CENDRIC_VERSION_NR "0.9.2-rc5"
 
 // Debug version
 #define DEBUG
