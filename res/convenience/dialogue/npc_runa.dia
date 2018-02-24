@@ -52,7 +52,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Hi
 	translation.en:Oh, hello there! If you want to buy something from our farm, talk to my son Tristan.
 	translation.de:Oh, hallo! Wenn du hier bist, um etwas von unserem Bauernhof zu kaufen, rede mit meinem Sohn, Tristan.
-	translation.ch:Oh, hoi! Wennd do bisch, zum öppis vo üsem Buurehof z'chaufe, gang und red mit mim Sohn, em Tristan.
+	translation.ch:Oh, hoi! Wänn du da bisch, zum vo eus öpis vom Buurehof z'chaufä, gang und red mit mim Sohn, em Tristan.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -210,7 +210,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhoAreYou
 	translation.en:I'm Runa and I'm working as a farmer here. From time to time, I also help out in the River Inn.
 	translation.de:Ich bin Runa und ich arbeite als Bäuerin hier. Manchmal helfe ich auch in der Taverne am Fluss etwas aus.
-	translation.ch:Ich bi d'Runa und ich schaff als Büürin do. Mengsmol hilfi au ide Taverne am Fluss chli uus. 
+	translation.ch:Ich bin d'Runa und ich schaff da als Büürin. Mängisch hilf ich au i dä Taverne am Fluss chli us.
 	[
 		# Link node, tag is next tag
 		tag:5
@@ -224,7 +224,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhoAreYou2
 	translation.en:And you? Are you just running around and ask everyone who they are?
 	translation.de:Und du? Rennst du einfach hier rum und fragst jeden, wer er sei?
-	translation.ch:Und du? Rennsch du eifach do chli ume und frögsch jede, wer er seg?
+	translation.ch:Und du? Rännsch du da eifach chli ume und frögsch jede, wer er seig?
 	[
 		# Link node, tag is next tag
 		tag:6
@@ -269,7 +269,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_AskEveryoneYes
 	translation.en:Ah... the youth of today... as if there wasn't enough other work to do.
 	translation.de:Ach... die Jugend von heute... als ob es nicht genügend andere Arbeit zu tun gäbe.
-	translation.ch:Ach... d'Jugend vo hüt... als obs nid gnueg anderi Arbet z'tue gäbt.
+	translation.ch:Ach... d'Jugend vo hüt... als ob's nöd gnueg anderi Arbet gäbt z'machä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -283,7 +283,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_AskEveryoneNo
 	translation.en:You mean, I'm special? Hah, now I'm flattered.
 	translation.de:Dann bin ich also speziell? Da fühl ich mich ja gleich geschmeichelt.
-	translation.ch:Denn bini also speziell? Do fühli mi jo grad gschmeichlet.
+	translation.ch:Dänn bin ich also speziell? Da fühl ich mich ja grad gschmeichlet.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -297,7 +297,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_IJustWantedToTalk
 	translation.en:Not everyone has time for a little chitchat. There's still so much work to be done!
 	translation.de:Nicht jeder hat Zeit für ein kleines Schwätzchen. Es gibt immer noch so viel Arbeit zu erledigen!
-	translation.ch:Nid jede het Ziit für es chlises Schwätzli. Es git immer no so viel Arbet z'erledige!
+	translation.ch:Nöd jedä hät Ziit für es Schwätzli. Es git immer no so viel Arbet z'erledigä!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -312,7 +312,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Job
 	translation.en:Hm. We do have a problem with disappearing sheep. If you want to help, talk to my husband, Ivo.
 	translation.de:Hm. Wir haben ein Problem mit Schafen, die verschwinden. Wenn du uns hier helfen willst, sprich mit meinem Mann, Ivo.
-	translation.ch:Hm. Mir hend es Problem mit Schöfli, wo verschwindet. Wennd üs do helfe wetsch, red mitem Ivo, mim Ma.
+	translation.ch:Hm. Mir händ es Problem mit Schöfli, wo verschwindet. Wänn du eus hälfe wottsch, red mit em Ivo, min Ma.
 	[
 		# Link node, tag is next tag
 		tag:11
@@ -326,7 +326,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Job2
 	translation.en:Other than that, I could need some help with a delivery to Gandria. 
 	translation.de:Ausserdem könnte ich etwas Hilfe mit einer Lieferung nach Gandria gebrauchen.
-	translation.ch:Usserdem chönti chli Hilf mit enere Lieferig noch Gandria bruche.
+	translation.ch:Usserdem chönt ich echli Hilf mit erä Lieferig nach Gandria bruchä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -341,7 +341,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_SheepDone
 	translation.en:Well done. I hope you already got your reward from Tristan.
 	translation.de:Gut gemacht. Ich hoffe, du hast dir deine Belohnung schon von Tristan geholt.
-	translation.ch:Guet gmacht. Ich hoff, du hesch der dini Belohnit scho vom Tristan gholt.
+	translation.ch:Guet gmacht. Ich hoff, du häsch dir diini Belohnig scho vom Tristan gholt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -355,7 +355,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Delivery
 	translation.en:The last time I was in the market in Gandria, some guy called Bjarne bought all of my Physalis.
 	translation.de:Letztes Mal, als ich auf dem Markt in Gandria war, hat mir ein Typ namens Bjarne all meine Physalis abgekauft.
-	translation.ch:Letztmol, woni ufem Markt i Gandria gsi bi, het mer en Typ namens Bjarne all mini Physalis abkauft.
+	translation.ch:Letschtmal, wo ich ufem Märt in Gandria gsi bin, hät mir en Typ namens Bjarne all miini Physalis abkauft.
 	[
 		# Link node, tag is next tag
 		tag:14
@@ -369,7 +369,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Delivery2
 	translation.en:He then asked me to bring him even more - in exchange, he would give me a very precious pendant.
 	translation.de:Er wollte noch mehr davon - als Gegenleistung würde er mir einen sehr wertvollen Anhänger überlassen.
-	translation.ch:Er het sogar no me devo wele - als Gegeleistig würer mir denn en ganz wertvolle Ahänger gä.
+	translation.ch:Er hät sogar no meh vo dem wellä – als Gägeleistig würd er mir dänn en ganz wertvolle Ahänger geh.
 	[
 		# Link node, tag is next tag
 		tag:15
@@ -384,7 +384,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Delivery3
 	translation.en:I would go myself... But at the moment, the situation with the paladins in Gandria is a bit tense.
 	translation.de:Ich würde ja selbst gehen... Aber momentan ist die Situation mit den Paladinen in Gandria etwas angespannt.
-	translation.ch:Ich wür jo selber go... Aber momentan isch d'Situation mit de Paladin in Gandria chli agspannt.
+	translation.ch:Ich würd ja sälber gah... Aber momentan isch d'Situation mit dä Paladin in Gandria echli agspannt.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -400,7 +400,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_RunasDealStart
 	translation.en:Good! Here you go. Don't forget to bring me the pendant!
 	translation.de:Gut! Hier hast du sie. Vergiss nicht, mir den Anhänger zu bringen!
-	translation.ch:Guet! Do hesch si. Vergiss nid, mer de Ahänger z'bringe!
+	translation.ch:Guet! Da häsch sie. Vergiss nöd, mir dä Ahänger z’bringä!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -415,7 +415,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhoBjarne
 	translation.en:Hm. I don't really remember how he looked like. But he sure was handsome and likeable.
 	translation.de:Hm. Ich mag mich nicht wirklich daran erinnern, wie er ausgesehen hat. Aber er war ziemlich hübsch und sympathisch.
-	translation.ch:Hm. ich cha mich nid würkli dra erinnere, we er usgse het. Aber er isch zimli hübsch und sympathisch gsi.
+	translation.ch:Hm. Ich chan mich nöd würklich dra erinnerä, wie er usgseh hät. Aber er isch zimlich hübsch und sympathisch gsi.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -430,7 +430,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Paladins
 	translation.en:They should be there to protect us, but they only serve their "god" and not the people of Admantris.
 	translation.de:Sie sollten uns eigentlich beschützen, aber sie dienen nur ihrem "Gott" und nicht den Bürgern von Admantris.
-	translation.ch:Si sötted üs eigentlich beschütze, aber si diened nur ihrem "Gott" und nid de Lüt vo Admantris.
+	translation.ch:Sie söttet eus eigentlich beschützä, aber sie diened nur ihrem "Gott" und nöd dä Lüüt vo Admantris.
 	[
 		# Link node, tag is next tag
 		tag:31
@@ -444,7 +444,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Paladins2
 	translation.en:I really don't know who thought it would be a good idea to put them in charge.
 	translation.de:Ich weiss wirklich nicht, wer es für eine gute Idee gehalten hat, die unser Land führen zu lassen.
-	translation.ch:Ich weiss würkli nid, wer denkt het, es seg e gueti Idee, wenn die üses Land führed.
+	translation.ch:Ich weiss würklich nöd, wer dänkt hät, es seig e gueti Idee, wänn die euses Land füehred.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -459,7 +459,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhoMage
 	translation.en:No, definitely not. I prefer not to talk to mages.
 	translation.de:Nein, definitiv nicht. Ich ziehe es vor, nicht mit Magiern zu sprechen.
-	translation.ch:Nei, definitiv nid. Ich zie's vor, nid mit Magier z'rede.
+	translation.ch:Nei, definitiv nöd. Ich zieh's vor, nöd mit Magier z'redä.
 	[
 		# Link node, tag is next tag
 		tag:23
@@ -511,7 +511,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhyHate
 	translation.en:Why would you even ask! They're elitist monsters, that's why.
 	translation.de:Was für eine Frage! Das sind alle elitäre Monster, mehr gibts dazu nicht zu sagen.
-	translation.ch:Was für e Frog! Das sind alli elitäri Monster, me gits do dezue nid z'sege.
+	translation.ch:Was für ä Frag! Das sind alli elitäri Monster, meh gits da däzue nöd z'säge.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -526,7 +526,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Pendant
 	translation.en:It's an anti-magic pendant. It protects from curses and other magic attacks. Exactly what I need!
 	translation.de:Es ist ein antimagischer Anhänger. Er schützt gegen Flüche und andere magische Attacken - genau, was ich brauche!
-	translation.ch:Es isch en antimagische Ahänger. Er schützt geg Flüech und anderi magischi Attackene - genau, wani bruch!
+	translation.ch:Es isch en antimagische Ahänger. Er schützt gäge Flüech und anderi magischi Attackene – genau, was ich bruch!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -541,7 +541,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Physalis
 	translation.en:It's a nightshade plant which we grow on our farm. It's pretty sweet, but eating too much can be poisonous.
 	translation.de:Ein Nachtschattengewächs, das auf unserem Bauernhof wächst. Es ist ziemlich süss, aber zuviel davon kann giftig sein.
-	translation.ch:Es Nachtschattegwächs, wo uf üsem Buurehof wachst. Es isch zimli süess, aber z'viel devo cha giftig si.
+	translation.ch:Es Nachtschattägwächs, wo uf eusem Buurehof wachst. Es isch ziemlich süess, aber z'viel dävo chan giftig si.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -556,7 +556,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_WhyProtect
 	translation.en:Because that's the only way we can stand a chance when they attack... you should better get a pendant, too.
 	translation.de:Weil das unsere einzige Überlebenschance ist, wenn sie uns angreifen... du solltest dir besser auch einen Anhänger zutun.
-	translation.ch:Well das üsi einzig Überlebenschance isch, wenn si üs agriifed... Du sötsch der besser au sonen Ahänger bsorge.
+	translation.ch:Will das eusi einzigi Überläbenschance isch, wenn sie eus agriifed... Du söttsch dir besser au sonen Ahänger bsorgä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -571,7 +571,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_Paranoid
 	translation.en:Paranoid? Me? Ha! Just wait, you'll see...
 	translation.de:Paranoid? Ich? Ha! Einfach mal abwarten, du wirst schon sehen...
-	translation.ch:Paranoid? Ich? Ha! Eifach mol abwarte, wirsch denn scho gse...
+	translation.ch:Paranoid? Ich? Ha! Eifach mal abwartä, wirsch dänn scho gseh...
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -601,7 +601,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_GotPendant2
 	translation.en:Thank you so much! Now, I'm finally safe from this magic.
 	translation.de:Vielen Dank! Jetzt bin ich endlich sicher vor dieser Magie.
-	translation.ch:Tusig Dank! Jetz bini endli sicher vor dere Magie.
+	translation.ch:Tuusig Dank! Jetzt bin ich äntli sicher vor derä Magie.
 	[
 		# Link node, tag is next tag
 		tag:29
@@ -619,7 +619,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_GotPendant3
 	translation.en:Here, take these goods from our farm as your reward.
 	translation.de:Hier, nimm dieser Waren von unserem Hof als deine Belohnung.
-	translation.ch:Do, nimm die War vo üsem Hof als dini Belohnig.
+	translation.ch:Da, nimm die Waar vo eusem Hof als diini Belohnig.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -633,7 +633,7 @@ npc.id:npc_runa
 	translation.tag:DL_Runa_EvilMage
 	translation.en:Be gone, filthy mage!
 	translation.de:Verschwinde von hier, dreckiger Magier!
-	translation.ch:Verschwind vo do, dreckige Magier!
+	translation.ch:Verschwind vo da, dräckigä Magier!
 	[
 		# Link node, tag is next tag
 		tag:-1

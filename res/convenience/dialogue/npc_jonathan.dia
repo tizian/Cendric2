@@ -527,7 +527,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_RemoveMark2
 	translation.en:Feels like an evil curse... I won't teach you how to summon a fireball until you got a healthy elemental aura again.
-	translation.de:Fühlt sich an wie ein böser Fluch...  Ich werde dir nicht beibringen, einen Feuerball zu beschwören, bis du wieder eine gesunde elementare Aura hast.
+	translation.de:Fühlt sich an wie ein böser Fluch... Ich werde dir nicht beibringen, einen Feuerball zu beschwören, bis du wieder eine gesunde elementare Aura hast.
 	translation.ch:Fühlt sich a we en bösa Fluach... Ich wird der nid bibringa, weme en Füürball beschwört, bevor du nid wiedar e gsundi, elementari Aura hesch.
 	[
 		# Link node, tag is next tag

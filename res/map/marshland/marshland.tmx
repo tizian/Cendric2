@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="306">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" nextobjectid="308">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="explorable" value=""/>
@@ -597,12 +597,14 @@
   <object id="296" gid="2382" x="1650" y="400" width="50" height="50"/>
   <object id="305" gid="2383" x="1775" y="975" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="collidable" visible="0">
+ <objectgroup name="collidable">
   <object id="286" x="1130" y="1400" width="30" height="250"/>
   <object id="298" x="1175" y="1700" width="25" height="150"/>
   <object id="299" x="400" y="700" width="28" height="200"/>
   <object id="301" x="550" y="1200" width="28" height="300"/>
   <object id="304" x="1900" y="650" width="25" height="200"/>
+  <object id="306" x="1250" y="350" width="25" height="50"/>
+  <object id="307" x="1050" y="350" width="50" height="25"/>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="235" x="1350" y="80" width="50" height="30">

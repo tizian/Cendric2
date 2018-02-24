@@ -551,6 +551,7 @@
  <objectgroup name="dynamic">
   <object id="48" gid="534" x="150" y="250" width="50" height="50">
    <properties>
+    <property name="eq_bonering" value="1"/>
     <property name="gold" value="10"/>
     <property name="strength" value="1"/>
    </properties>

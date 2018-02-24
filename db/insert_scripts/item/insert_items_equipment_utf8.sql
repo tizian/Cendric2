@@ -251,7 +251,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Dragon Skull
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_dragonskull', 'item', 'Dragon Helmet','Drachenhelm','Drachehelm');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_dragonskull', 'item_desc', '...','...','...');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_dragonskull', 'item_desc', 'The skull of a small dragon can be quite fashionable.','Der Schädel eines kleinen Drachen kann ziemlich modisch sein.','De Schädel vomne chliine Drache cha zimli modisch si.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_dragonskull', 'eq_head', 150, 750, 100, 2);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, res_physical, res_light, critical, haste) values ('eq_dragonskull', 5, 5, 50, 50, 3, 10);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_dragonskull', 'res/texture/equipment/head/spritesheet_head_dragonskull.png', 'res/texture/equipment/head/spritesheet_map_head_dragonskull.png');

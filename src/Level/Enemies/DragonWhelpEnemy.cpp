@@ -25,10 +25,17 @@ DragonWhelpEnemy::DragonWhelpEnemy(const Level* level, Screen* screen) :
 }
 
 void DragonWhelpEnemy::loadAttributes() {
-	m_attributes.setHealth(50);
+	if (m_skinNr == 2 || m_skinNr == 3) {
+		// purple whelp
+		m_attributes.setHealth(100);
+	}
+	else {
+		// default whelp
+		m_attributes.setHealth(50);
+	}
+	m_attributes.critical = 10;
 	m_attributes.resistancePhysical = 150;
 	m_attributes.resistanceFire = 5000;
-	m_attributes.critical = 10;
 	m_attributes.calculateAttributes();
 }
 
@@ -42,6 +49,13 @@ void DragonWhelpEnemy::loadSpells() {
 	fireBallSpell.castingTime = sf::milliseconds(6 * 50);
 	fireBallSpell.fightingTime = sf::milliseconds(4 * 50);
 	fireBallSpell.count = 2;
+
+	if (m_skinNr == 2 || m_skinNr == 3) {
+		// purple whelp has purple fire
+		fireBallSpell.damage = 40;
+		fireBallSpell.skinNr = 2;
+		fireBallSpell.damageType = DamageType::Shadow;
+	}
 
 	m_spellManager->addSpell(fireBallSpell);
 	m_spellManager->setCurrentSpell(0);
@@ -99,7 +113,8 @@ AttackingBehavior* DragonWhelpEnemy::createAttackingBehavior(bool asAlly) {
 	else {
 		behavior = new AggressiveBehavior(this);
 	}
-	m_isEgg = !asAlly;
+	// an ally never spawns in an egg and also, only 0 and 2 are egged skins.
+	m_isEgg = !(asAlly || (m_skinNr == 1 || m_skinNr == 3));
 	behavior->setAggroRange(300.f);
 	behavior->setAttackInput(std::bind(&DragonWhelpEnemy::handleAttackInput, this));
 	return behavior;
@@ -153,6 +168,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 
 	int width = 70;
 	int height = 90;
+	skinNr = skinNr / 2; // because we always do have egged and hatched skins
 
 	Animation* flyingAnimation = new Animation(sf::milliseconds(50));
 	flyingAnimation->setSpriteSheet(tex);

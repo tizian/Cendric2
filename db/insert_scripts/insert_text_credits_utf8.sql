@@ -117,6 +117,10 @@ Tizian
 
 "Elysia''s Theme"
 
+"Forest Theme"
+
+"The Cathedral of Gandria"
+
 ---
 
 -- Eric Matyas --
@@ -138,6 +142,8 @@ www.soundimage.org
 ---
 
 -- Matthew Pablo --
+
+"Woodland Fantasy" (Tavern Theme)
 
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
@@ -324,8 +330,6 @@ Tizian
 
 "The Stone Garden"
 
-"The Stone Garden"
-
 "The Garden of the Elder"
 
 ---
@@ -341,6 +345,10 @@ Tizian
 "Khajag''s Theme"
 
 "Elysia''s Theme"
+
+"Forest Theme"
+
+"The Cathedral of Gandria"
 
 ---
 
@@ -363,6 +371,8 @@ www.soundimage.org
 ---
 
 -- Matthew Pablo --
+
+"Woodland Fantasy" (Tavern Theme)
 
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
@@ -545,8 +555,6 @@ Tizian
 
 "The Stone Garden"
 
-"The Stone Garden"
-
 "The Garden of the Elder"
 
 ---
@@ -562,6 +570,10 @@ Tizian
 "Khajag''s Theme"
 
 "Elysia''s Theme"
+
+"Forest Theme"
+
+"The Cathedral of Gandria"
 
 ---
 
@@ -584,6 +596,8 @@ www.soundimage.org
 ---
 
 -- Matthew Pablo --
+
+"Woodland Fantasy" (Tavern Theme)
 
 Featuring Music by Matthew Pablo
 http://www.matthewpablo.com
@@ -628,6 +642,7 @@ Vangelis Al-Sghir - Zürcher Dialekt (Mona, Lola)
 Patrick Haab - Zürcher Dialekt (Karma)
 Chris Ryter [ManaBar] - Basler Dialekt (Robert)
 Ken Stump - Berner Dialekt (Leeroy)
+Daniel Hofer - Zürcher Dialekt (Runa)
 Isa - Schaffhuser Dialekt (De Rest)
 
 <<< Korrekturleser (Englisch) >>>

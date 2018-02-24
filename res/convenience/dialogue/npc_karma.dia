@@ -458,7 +458,7 @@ npc.id:npc_karma
 	translation.tag:DL_Karma_WrongQuestion1
 	translation.en:You must be tired. Come again when you're able to concentrate!
 	translation.de:Du bist wohl etwas müde. Komm wieder, wenn du dich konzentrieren kannst!
-	translation.ch:Du bisch glaub chli müed. Chum  wider, wenn di konzentriere chasch!
+	translation.ch:Du bisch glaub chli müed. Chum wider, wenn di konzentriere chasch!
 	[
 		# Link node, tag is next tag
 		tag:-1

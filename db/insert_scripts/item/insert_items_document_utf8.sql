@@ -259,7 +259,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Arazath's Letter
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item', 'Arazath''s Letter','Arazaths Brief','Em Arazath sin Brief');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item_desc', 'This letter was in the last chest on top of the mysterious tower.','Dieser Brief war in der letzten Truhe auf dem mysteriösen Turm.','De Brief isch ide letzte True ufem  mysteriöse Turm gsi.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_arazathletter', 'item_desc', 'This letter was in the last chest on top of the mysterious tower.','Dieser Brief war in der letzten Truhe auf dem mysteriösen Turm.','De Brief isch ide letzte True ufem mysteriöse Turm gsi.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('do_arazathletter', 'document', 500, 300, -1);
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_arazathletter', 0, 'ArazathLetter');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_arazathletter', 'tower_4', 1);

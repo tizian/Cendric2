@@ -6,6 +6,10 @@
 #include "Screens/Screen.h"
 
 // A hatching dragon whelp
+// 0, red whelp, egg.
+// 1, red whelp, hatched.
+// 2, purple whelp, egg.
+// 3, purple whelp, hatched
 class DragonWhelpEnemy final : public Enemy {
 public:
 	DragonWhelpEnemy(const Level* level, Screen* screen);
