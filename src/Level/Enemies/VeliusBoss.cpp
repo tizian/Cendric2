@@ -251,6 +251,7 @@ void VeliusBoss::handleLastPhase(const sf::Time& frameTime) {
 
 void VeliusBoss::handleVeliusDead() {
 	// quests
+	m_screen->getCharacterCore()->setQuestState("the_mark", QuestState::Completed);
 	if (m_isKorayDead) {
 		m_screen->getCharacterCore()->setConditionFulfilled("npc_koray3", "dead");
 		m_screen->getCharacterCore()->setQuestState("missing_koray", QuestState::Failed);
@@ -385,9 +386,9 @@ void VeliusBoss::updateShackle(const sf::Time& frameTime, int healthThreshold) {
 		dynamic_cast<WalkingBehavior*>(m_movingBehavior)->stopAll();
 		m_scriptedBehavior->say("VeliusEnough", 5);
 		setBlocking();
-		m_spellManager->setCurrentSpell(m_bossState == AttackDivine ? 9 : 0);
+		m_spellManager->setCurrentSpell(m_bossState == AttackDivine ? 9 : 0); // shackle
 		m_spellManager->executeCurrentSpell(m_mainChar, true);
-		m_timeUntilShackleDone = sf::seconds(5.8f);
+		m_timeUntilShackleDone = sf::seconds(5.3f);
 		return;
 	}
 

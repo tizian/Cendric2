@@ -370,11 +370,6 @@ void ResourceManager::switchMusicTo(const std::string& filename) {
 }
 
 void ResourceManager::updateMusic(const sf::Time& frameTime) {
-	/*if (m_music.previousMusic && m_music.currentMusic) {
-		g_logger->logError("prev", std::to_string(m_music.previousMusic->getPlayingOffset().asSeconds()));
-		g_logger->logError("curr", std::to_string(m_music.currentMusic->getPlayingOffset().asSeconds()));
-	}*/
-
 	m_frameSounds.clear();
 	updateTime(m_music.fadingTime, frameTime);
 	if (!m_configuration.isSoundOn || !m_music.isFading) return;
@@ -385,6 +380,7 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 	m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
 	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
 }
+
 
 void ResourceManager::notifyVolumeChanged() {
 	bool soundOn = m_configuration.isSoundOn && g_inputController->isWindowFocused();

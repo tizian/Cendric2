@@ -74,10 +74,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="438" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="438" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="508" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="515" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="40" height="30">
@@ -390,24 +390,24 @@
 </data>
  </layer>
  <objectgroup name="dynamic">
-  <object id="308" gid="509" x="100" y="250" width="50" height="50"/>
-  <object id="309" gid="509" x="300" y="850" width="50" height="50"/>
-  <object id="310" gid="509" x="1150" y="1250" width="50" height="50"/>
-  <object id="311" gid="509" x="1800" y="1250" width="50" height="50"/>
-  <object id="312" gid="509" x="1650" y="800" width="50" height="50"/>
-  <object id="313" gid="509" x="1300" y="300" width="50" height="50"/>
-  <object id="314" gid="508" x="700" y="200" width="50" height="50"/>
-  <object id="287" gid="512" x="750" y="1150" width="50" height="50">
+  <object id="308" gid="516" x="100" y="250" width="50" height="50"/>
+  <object id="309" gid="516" x="300" y="850" width="50" height="50"/>
+  <object id="310" gid="516" x="1150" y="1250" width="50" height="50"/>
+  <object id="311" gid="516" x="1800" y="1250" width="50" height="50"/>
+  <object id="312" gid="516" x="1650" y="800" width="50" height="50"/>
+  <object id="313" gid="516" x="1300" y="300" width="50" height="50"/>
+  <object id="314" gid="515" x="700" y="200" width="50" height="50"/>
+  <object id="287" gid="519" x="750" y="1150" width="50" height="50">
    <properties>
     <property name="key" value="ke_syrahbasement"/>
    </properties>
   </object>
-  <object id="289" gid="512" x="150" y="700" width="50" height="50">
+  <object id="289" gid="519" x="150" y="700" width="50" height="50">
    <properties>
     <property name="conditions" value="default,second_boss_open"/>
    </properties>
   </object>
-  <object id="317" gid="552" x="950" y="700" width="50" height="50">
+  <object id="317" gid="559" x="950" y="700" width="50" height="50">
    <properties>
     <property name="key" value="ke_sewerkey"/>
    </properties>

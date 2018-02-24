@@ -287,16 +287,18 @@ equipped.weapon:we_firestaff
 # quickslot assignments:
 quickslot:1,
 quickslot:2,
-# enemies killed in level:
-enemies.killed:res/level/forest/forest.tmx
-enemies.killed:res/level/testleverlevel/testleverlevel.tmx
-# enemies looted in level:
-enemies.looted:res/level/forest/forest.tmx
-enemies.looted:res/level/testleverlevel/testleverlevel.tmx
-# items looted in level:
-items.looted:res/level/forest/forest.tmx
-items.looted:res/level/testleverlevel/testleverlevel.tmx
-# chests looted in level:
+# waypoints unlocked in map:
+waypoints.unlocked:res/map/gandria/gandria.tmx,307,516.000000,810.000000,308,966.000000,1160.000000,309,2216.000000,1060.000000,310,2266.000000,410.000000,311,1416.000000,1960.000000,312,366.000000,2110.000000,313,366.000000,2610.000000,314,216.000000,3210.000000,315,966.000000,2960.000000,316,1416.000000,2610.000000,317,1916.000000,2610.000000,318,1716.000000,3160.000000,319,2616.000000,2960.000000,320,2716.000000,2610.000000,321,3566.000000,2810.000000,322,3466.000000,2310.000000,323,3266.000000,410.000000,327,691.000000,185.000000
+waypoints.unlocked:res/map/gandriasewers/gandriasewers.tmx,308,116.000000,210.000000,309,316.000000,810.000000,310,1166.000000,1210.000000,311,1816.000000,1210.000000,312,1666.000000,760.000000,313,1316.000000,260.000000
+waypoints.unlocked:res/map/highland/highland.tmx,317,616.000000,710.000000,318,491.000000,1810.000000,319,1866.000000,2210.000000,320,1866.000000,1460.000000,321,1891.000000,760.000000,327,216.000000,1972.000000
+waypoints.unlocked:res/map/marshland/marshland.tmx,291,1366.000000,210.000000,292,766.000000,410.000000,293,1216.000000,1010.000000,294,366.000000,1660.000000,295,1616.000000,1710.000000,305,1791.000000,935.000000
+waypoints.unlocked:res/map/meadows/meadows.tmx,231,2416.000000,510.000000,232,2866.000000,960.000000,233,1116.000000,710.000000,234,866.000000,1660.000000,235,2016.000000,1860.000000,236,2816.000000,2510.000000,237,2241.000000,2760.000000,238,1116.000000,2760.000000,239,3366.000000,3060.000000,254,3166.000000,1485.000000
+# tiles explored in world:
+tiles.explored:res/map/gandria/gandria.tmx,80,70,0,
+tiles.explored:res/map/gandriasewers/gandriasewers.tmx,40,30,0,
+tiles.explored:res/map/highland/highland.tmx,50,50,0,
+tiles.explored:res/map/marshland/marshland.tmx,50,40,0,
+tiles.explored:res/map/meadows/meadows.tmx,70,70,0,
 # triggers triggered in world:
 triggers.triggered:res/map/meadows/meadows.tmx,107
 # quest states:
