@@ -93,7 +93,7 @@ npc.id:npc_velius
 		condition:DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "eyes")
 		# translation: 
 		translation.tag:DL_Choice_Eyes
-		translation.en:What's the matter with the kings's eyes?
+		translation.en:What's the matter with the king's eyes?
 		translation.de:Was ist eigentlich mit den Augen des Königs los?
 		translation.ch:Wa isch eigentlich mit de Auge vom König los?
 	]
@@ -399,7 +399,7 @@ npc.id:npc_velius
 	# translation: 
 	translation.tag:DL_Velius_Friends3
 	translation.en:Mages with a strong affinity to a magic type. The three I got now are perfect.
-	translation.de:Magier mit einer starken Affinität zu einer Magieart. Die drei, die ich jetzt habe, sind perfekt.
+	translation.de:Magier mit einer starken Affinität zu einer Magie-Art. Die drei, die ich jetzt habe, sind perfekt.
 	translation.ch:Magier mit enere starche Affinität zunere Magierart. Die drei, woni ez ha, sind perfekt.
 	[
 		# Link node, tag is next tag
@@ -457,7 +457,7 @@ npc.id:npc_velius
 	# translation: 
 	translation.tag:DL_Velius_Escape2
 	translation.en:I extracted your magic the same way as I did with many other mages before.
-	translation.de:Ich habe deine Magie auf die selbe Art extrahiert, wie auch schon bei vielen anderen Magiern zuvor.
+	translation.de:Ich habe deine Magie auf dieselbe Art extrahiert, wie auch schon bei vielen anderen Magiern zuvor.
 	translation.ch:Ich ha dini Magie uf di gliich Art extrahiert, we au scho mit vilne andere Magiere vorene.
 	[
 		# Link node, tag is next tag
@@ -939,7 +939,7 @@ npc.id:npc_velius
 	# translation: 
 	translation.tag:DL_Velius_Illusion
 	translation.en:Magic is a spectrum, like colours. The magic type I call Illusion was discovered by myself recently.
-	translation.de:Magie ist ein Spektrum, wie Farben. Die Magieart, die ich Illusion getauft habe, wurde erst kürzlich von mir selbst entdeckt.
+	translation.de:Magie ist ein Spektrum, wie Farben. Die Magie-Art, die ich Illusion getauft habe, wurde erst kürzlich von mir selbst entdeckt.
 	translation.ch:Magie isch es Spektrum, we Farbe. D'Magieart, woni Illusion tauft ha, isch erst chürzlich vo mir entdeckt worde.
 	[
 		# Link node, tag is next tag

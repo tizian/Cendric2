@@ -22,7 +22,7 @@ npc.id:npc_royalguard_t
 	trigger:DL:addConditionProgress("npc_royalguard_t", "talked")
 	# translation: 
 	translation.tag:DL_Royalguard_Hey
-	translation.en:Hey you! How dare you to walk in here without permission!
+	translation.en:Hey you! How dare you walk in here without permission!
 	translation.de:Hey du! Wie kannst du es wagen, hier einfach ohne Bewilligung hineinzuspazieren!
 	translation.ch:He du! Wiä chaschäs waagä, da eifach inä z'spazierä ohni ä Bewiuigung.
 	[
@@ -36,7 +36,7 @@ npc.id:npc_royalguard_t
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Royalguard_Hey2
-	translation.en:I really hope you have a good reason, otherwise I'll have to let you out immediately.
+	translation.en:I really hope you have a good reason, otherwise I'll have to throw you out immediately.
 	translation.de:Ich hoffe wirklich, du hast einen guten Grund. Sonst muss ich dich nämlich wieder hinausbefördern.
 	translation.ch:Ig hoffä das würkläch, ä guetä Grund hesch. Süsch muessi di nämlech wider usegheiä.
 	[
@@ -172,8 +172,8 @@ npc.id:npc_royalguard_t
 	trigger:DL:gotoNode(6)
 	# translation: 
 	translation.tag:DL_Royalguard_NoneBusiness
-	translation.en:Hn. Everyone could tell that. We don't just let everyone to the king. 
-	translation.de:Hn. Jeder könnte das sagen. Wir lassen nicht einfach jeden zum König.
+	translation.en:Hm. Everyone could say that. We don't just let anyone to the king. 
+	translation.de:Hm. Jeder könnte das sagen. Wir lassen nicht einfach jeden zum König.
 	translation.ch:Hm... Jedä chönnt das verzöuä. Mir löh ni eifach jedä zum König.
 	[
 		# Link node, tag is next tag

@@ -27,13 +27,13 @@ loadDialogue = function(DL)
 		DL:addChoice(5, "DL_Choice_DeadCat") -- Why are you wearing a dead cat on your head?
 	end
 	if (DL:isConditionFulfilled("npc_zephyra", "yasha") and not DL:isConditionFulfilled("npc_zephyra", "who_yasha")) then 
-		DL:addChoice(9, "DL_Choice_WhoYasha") -- Tell me more about that "Yasha".
+		DL:addChoice(9, "DL_Choice_WhoYasha") -- Tell me more about "Yasha".
 	end
 	if (DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
-		DL:addChoice(10, "DL_Choice_WhoDroves") -- Who did pass through here?
+		DL:addChoice(10, "DL_Choice_WhoDroves") -- Who passed through here?
 	end
 	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "mages")) then 
-		DL:addChoice(13, "DL_Choice_WhoMages") -- How did those mages look like?
+		DL:addChoice(13, "DL_Choice_WhoMages") -- What did those mages look like?
 	end
 	if (DL:isQuestState("yasha_sanctuary", "completed") and not DL:isConditionFulfilled("npc_zephyra", "yasha_completed")) then 
 		DL:addChoice(18, "DL_Choice_YashaDone") -- I talked to Yasha. She's pacified again.
@@ -76,7 +76,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(7, -2, "DL_Zephyra_DemonSlayer") -- No, I would never hurt one. They're protecting this valley, you know.
+		DL:createNPCNode(7, -2, "DL_Zephyra_DemonSlayer") -- No, I would never hurt one. They protect this valley, you know.
 		DL:addNode()
 
 
@@ -93,26 +93,26 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(11, -2, "DL_Zephyra_WhoYasha2") -- She's been sleeping for many years, but those yokels did wake her up. I hope they're paying right now for their foolishness.
+		DL:createNPCNode(11, -2, "DL_Zephyra_WhoYasha2") -- She's been sleeping for many years, but those yokels did wake her up. I hope they're paying dearly for their foolishness.
 		DL:addNode()
 
 	end
 
 	if (DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")) then 
 
-		DL:createNPCNode(10, 12, "DL_Zephyra_WhoDroves") -- A group of foolish mages. I wanted to keep their from heading straight for disaster, but they wouldn't listen.
+		DL:createNPCNode(10, 12, "DL_Zephyra_WhoDroves") -- A group of foolish mages. I tried to keep them from heading straight for disaster, but they wouldn't listen.
 		DL:addConditionProgress("npc_zephyra", "who_droves")
 		DL:addNode()
 
 
-		DL:createNPCNode(12, -2, "DL_Zephyra_WhoDroves2") -- It's always those "adventurers", looking for big treasure, without any respect. Unbelievable.
+		DL:createNPCNode(12, -2, "DL_Zephyra_WhoDroves2") -- It's always those "adventurers", looking for big treasure. They don't show any respect at all. Unbelievable!
 		DL:addNode()
 
 	end
 
 	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "mages")) then 
 
-		DL:createNPCNode(13, 14, "DL_Zephyra_WhoMages") -- Hm. There was one women, fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
+		DL:createNPCNode(13, 14, "DL_Zephyra_WhoMages") -- Hm. There was one woman; fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
 		DL:addConditionProgress("npc_zephyra", "mages")
 		DL:addNode()
 
@@ -121,7 +121,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, -2, "DL_Zephyra_WhoMages3") -- Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't react. But they're probably all dead now anyway.
+		DL:createNPCNode(15, -2, "DL_Zephyra_WhoMages3") -- Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't respond. They're probably all dead now...
 		DL:addQuestDescription("find_velius", 1)
 		DL:addNode()
 
@@ -129,7 +129,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("yasha_sanctuary", "completed") and not DL:isConditionFulfilled("npc_zephyra", "yasha_completed")) then 
 
-		DL:createNPCNode(18, -2, "DL_Zephyra_YashaDone") -- (Zephyra nods) Great. Thank you very much for your help. Take this potion with you, may it help you on your ways.
+		DL:createNPCNode(18, -2, "DL_Zephyra_YashaDone") -- (Zephyra nods) Great. Thank you very much for your help. Take this potion with you, may it help you on your journeys.
 		DL:addConditionProgress("npc_zephyra", "yasha_completed")
 		DL:addItem("fo_ultimatehealingpotion", 1)
 		DL:addNode()
@@ -138,7 +138,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "gotta_go")) then 
 
-		DL:createNPCNode(19, 16, "DL_Zephyra_GottaGo") -- I see, I can't keep you from going in as well. But, just promise me one thing:
+		DL:createNPCNode(19, 16, "DL_Zephyra_GottaGo") -- I see, I can't keep you from going in as well. Just promise me one thing:
 		DL:addConditionProgress("npc_zephyra", "gotta_go")
 		DL:addNode()
 
@@ -153,12 +153,12 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(20, -1, "DL_Zephyra_YashaOK") -- I was hoping you'd say this. Be careful, and the demon may spare your life.
+		DL:createNPCNode(20, -1, "DL_Zephyra_YashaOK") -- I was hoping you'd say that. Be careful, and the demon may spare your life.
 		DL:changeQuestState("yasha_sanctuary", "started")
 		DL:addNode()
 
 
-		DL:createNPCNode(21, -1, "DL_Zephyra_YashaNOK") -- I hope the demon will rip your soul apart.
+		DL:createNPCNode(21, -1, "DL_Zephyra_YashaNOK") -- I hope the demon will rip your soul apart!
 		DL:addNode()
 
 	end

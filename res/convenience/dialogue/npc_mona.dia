@@ -310,8 +310,8 @@ npc.id:npc_mona
 		# translation: 
 		translation.tag:DL_Choice_SexRomantic
 		translation.en:Something romantic.
-		translation.de:Etwas romantisches.
-		translation.ch:Öppis romantischs.
+		translation.de:Etwas Romantisches.
+		translation.ch:Öppis Romantischs.
 		translation.item.id:gold
 		translation.item.amount:100
 	]
@@ -322,8 +322,8 @@ npc.id:npc_mona
 		# translation: 
 		translation.tag:DL_Choice_SexExotic
 		translation.en:Something exotic.
-		translation.de:Etwas exotisches.
-		translation.ch:Öppis exotischs.
+		translation.de:Etwas Exotisches.
+		translation.ch:Öppis Exotischs.
 		translation.item.id:gold
 		translation.item.amount:100
 	]
@@ -334,8 +334,8 @@ npc.id:npc_mona
 		# translation: 
 		translation.tag:DL_Choice_SexWild
 		translation.en:Something wild.
-		translation.de:Etwas wildes.
-		translation.ch:Öppis wilds.
+		translation.de:Etwas Wildes.
+		translation.ch:Öppis Wilds.
 		translation.item.id:gold
 		translation.item.amount:100
 	]

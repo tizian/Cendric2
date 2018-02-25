@@ -60,7 +60,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_jonathanbasement', 'key', 300, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item', 'Basement Key','Kellerschlüssel','Chällerschlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathans house.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_jonathanbasement', 'item_desc', 'The key to the basement of Jonathan''s house.','Der Schlüssel zum Keller von Jonathans Haus.','De Schlüssel zum Chäller vom Huus vom Jonathan.');
 
 -- Basement Key (Key to the basement of Syrah's house)
 
@@ -88,7 +88,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_lighthouse', 'key', 600, 550, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item', 'Lighthouse Key','Leuchtturm-Schlüssel','Lüüchtturm-Schlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item_desc', 'The key to Jack''s Lighthouse.','Der Schlüssel von Jack''s Leuchtturm.','De Schlüssel vom Jack sim Lüüchtturm.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_lighthouse', 'item_desc', 'The key to Jack''s Lighthouse.','Der Schlüssel von Jacks Leuchtturm.','De Schlüssel vom Jack sim Lüüchtturm.');
 
 -- Ornate Key (Key to the forgotten passage)
 

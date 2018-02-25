@@ -27,7 +27,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(3, -2, "DL_Luv_WhoAreYou2") -- And if it wasn't for that idiot Lee, I would still be with our crew on our ship.
+			DL:createNPCNode(3, -2, "DL_Luv_WhoAreYou2") -- And if it wasn't for that idiot Lee, I would still be on the ship with our crew.
 			DL:addNode()
 
 		end

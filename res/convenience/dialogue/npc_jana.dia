@@ -36,7 +36,7 @@ npc.id:npc_jana
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jana_Hello2
-	translation.en:Come and sit at our fire to warm you up. And why not have a little chat.
+	translation.en:Come, sit down and warm yourself on our fire. And why not have a little chat.
 	translation.de:Komm und setz dich an unser Feuer um dich etwas aufzuwärmen. Und wieso reden wir nicht ein bisschen.
 	translation.ch:Chom und sitz chli a euses Fürli zum dich ufwärme. Und wieso rede mer ned chli.
 	[
@@ -64,7 +64,7 @@ npc.id:npc_jana
 		# translation: 
 		translation.tag:DL_Choice_Plans
 		translation.en:How's the hunt going?
-		translation.de:Wie läufts denn so mit der Jagd?
+		translation.de:Wie läuft's denn so mit der Jagd?
 		translation.ch:We laufts denn so mit de Jagd?
 	]
 	[
@@ -124,8 +124,8 @@ npc.id:npc_jana
 	trigger:DL:addConditionProgress("npc_jana", "who_are_you")
 	# translation: 
 	translation.tag:DL_Jana_WhoAreYou
-	translation.en:Jason and I are demon hunters. We make sure that the demons of this valley stay here and don't make trouble.
-	translation.de:Jason und ich sind Dämonenjäger. Wir schauen, dass die Dämonen dieses Tals hier bleiben und keine Schwierigkeiten machen.
+	translation.en:Jason and I are demon hunters. We make sure that the demons of this valley stay here and don't create any problems.
+	translation.de:Jason und ich sind Dämonenjäger. Wir schauen, dass die Dämonen dieses Tals hierbleiben und keine Schwierigkeiten machen.
 	translation.ch:De Jason und ich sind Dämonejäger. Mir luege, dass d'Dämone vo dem Tal do blibed und kei Problem möched.
 	[
 		# Link node, tag is next tag
@@ -138,7 +138,7 @@ npc.id:npc_jana
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jana_WhoAreYou2
-	translation.en:We also hunt them for trophies like fur and teeth. They can be used to craft fine armour and the merchants in Gandria will buy them gladly.
+	translation.en:We also hunt them for trophies like fur and teeth. They can be used to craft fine armour and the merchants in Gandria will gladly buy them.
 	translation.de:Wir jagen sie auch für Trophäen wie Felle und Zähne. Die kann man zu schönen Rüstungen verarbeiten und die Händler in Gandria kaufen sie gerne.
 	translation.ch:Mir jaged sie au für Trophäene wie Fell und Zäh. Die chame zu schöne Rüstige verarbeite und d'Händler in Gandria chaufed sie au gern.
 	[
@@ -153,7 +153,7 @@ npc.id:npc_jana
 	trigger:DL:addConditionProgress("npc_jana", "plans")
 	# translation: 
 	translation.tag:DL_Jana_Plans
-	translation.en:Pretty well. We found some cat demons and even a gargoyle lately.
+	translation.en:Pretty well. We found some cat demons and even a gargoyle recently.
 	translation.de:Ziemlich gut. Wir haben ein paar Katzendämonen und kürzlich sogar einen Gargoyle gefunden.
 	translation.ch:Zemmli guet. Mer händ es paar Chatzedämone und letsti sogar en Gargoyle gfunde.
 	[
@@ -196,7 +196,7 @@ npc.id:npc_jana
 	trigger:DL:addConditionProgress("npc_jana", "yasha")
 	# translation: 
 	translation.tag:DL_Jana_Yasha
-	translation.en:Yes, of course. She's guarding the valley and we wouldn't dare to fight with her. She's sleeping anyway at the moment.
+	translation.en:Yes, of course. She's guarding the valley. We wouldn't dare to fight her. Anyway, she's sleeping at the moment.
 	translation.de:Ja, sicher. Sie wacht über das Tal und wir würden keinen Kampf mit ihr riskieren. Sie schläft momentan sowieso.
 	translation.ch:Jo, sicher. Sie wacht übers Tal und mer würde kei Kampf mit ihre riskiere. Sie schloft momentan sowieso.
 	[
@@ -243,7 +243,7 @@ npc.id:npc_jana
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jana_KilledYasha
-	translation.en:(Jana looks shocked) What? This can't be. And if it's true, you shouldn't have. 
+	translation.en:(Jana looks shocked) What? This can't be! And if it's true; you shouldn't have! 
 	translation.de:(Jana sieht dich entsetzt an) Was? Das kann nicht sein. Und selbst wenn es war ist, hättest du das nicht tun sollen.
 	translation.ch:(D'Jana luegt dich entsetzt a) Was? Das cha ned si. Und sogar wenns stimmt, hättisch das ned sölle mache.
 	[
@@ -301,7 +301,7 @@ npc.id:npc_jana
 	trigger:DL:addQuestDescription("find_velius", 2)
 	# translation: 
 	translation.tag:DL_Jana_Mages2
-	translation.en:We offered them to escort them but their leader was very unfriendly. I don't know whether they made it.
+	translation.en:We offered to escort them, but their leader was very unfriendly. I don't know whether they made it.
 	translation.de:Wir haben ihnen angeboten, sie zu begleiten, aber ihr Anführer war sehr unfreundlich. Ich weiss nicht, ob sie es geschafft haben.
 	translation.ch:Mer händ ihne abote, sie z'begleite, aber ihre Aführer esch sehr unfröndlich gsi. Ich weiss ned öb sies gschafft händ.
 	[

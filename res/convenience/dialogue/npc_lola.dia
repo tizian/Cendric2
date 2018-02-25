@@ -425,7 +425,7 @@ npc.id:npc_lola
 	# translation: 
 	translation.tag:DL_Lola_GirlAttractive
 	translation.en:Mhm. Important, but not everything.
-	translation.de:Mhm. Wichtig, aber ist auch nichit alles.
+	translation.de:Mhm. Wichtig, aber ist auch nicht alles.
 	translation.ch:Mhm. Wichtig, aber isch au nöd alles.
 	[
 		# Link node, tag is next tag

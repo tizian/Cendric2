@@ -48,7 +48,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Spoiled Feudal Fire
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item', 'Feudal Fire (Spoiled)', 'Feudales Feuer (Verdorben)', 'Feudals Füür (Verdorbe)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item_desc', 'Vincent has mixed something in there. It doesn''t seem safe to drink anymore.', 'Vincent hat etwas hinein gemischt. Es ist vermutlich nicht mehr sicher, das zu trinken.', 'De Vincent het da öppis ine gmischlet. Es isch vermuetlich nümme sicher, das z''trinke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_spoiledfeudalfire', 'item_desc', 'Vincent has mixed something in there. It doesn''t seem safe to drink anymore.', 'Vincent hat etwas hineingemischt. Es ist vermutlich nicht mehr sicher, das zu trinken.', 'De Vincent het da öppis ine gmischlet. Es isch vermuetlich nümme sicher, das z''trinke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_spoiledfeudalfire', 'quest', 350, 250, -1);
 
 -- Proof of the Monster's Death
@@ -74,7 +74,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Broken Shaft (part 1 of the broken staff)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_brokenstaff1', 'item', 'Broken Shaft','Zerbrochener Schaft','Kabutte Schaft');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_brokenstaff1', 'item_desc', 'This shaft seems to be a part of something bigger. Maybe I can find someone who can repair it.','Dieser Schaft scheint ein Teil von etwas grösserem zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','De Schaft isch glaub en Teil vo öppis grösserem. Vilicht chani öpper finde, wo das flicke chan.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_brokenstaff1', 'item_desc', 'This shaft seems to be a part of something bigger. Maybe I can find someone who can repair it.','Dieser Schaft scheint ein Teil von etwas Grösserem zu sein. Vielleicht finde ich jemanden, der das reparieren kann.','De Schaft isch glaub en Teil vo öppis grösserem. Vilicht chani öpper finde, wo das flicke chan.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_brokenstaff1', 'quest', 450, 50, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_brokenstaff1', 0, -20, 50, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_brokenstaff1', 1, 300, 150, 50, 100);
@@ -126,14 +126,14 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Recipe: Invisibility Potion 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item', 'Recipe: Invisibility Potion','Rezept: Unsichtbarkeitstrank','Rezept: Unsichtbarkeitstrank');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item_desc', 'I stole this recipe from Syrah''s basement.','Dieses Rezept habe ich aus Syrah''s Keller entwendet.','Da Rezept hani us de Syrah ihrem Chäller klaut.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_invisrecipe', 'item_desc', 'I stole this recipe from Syrah''s basement.','Dieses Rezept habe ich aus Syrahs Keller entwendet.','Da Rezept hani us de Syrah ihrem Chäller klaut.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_invisrecipe', 'quest', 600, 0, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_invisrecipe', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_invisrecipe', 1, 150, 0, 50, 50);
 
 -- Graham's Dulcimer 
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item', 'Graham''s Dulcimer','Graham''s Dulcimer', 'Em Graham sini Dulcimer');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item', 'Graham''s Dulcimer','Grahams Dulcimer', 'Em Graham sini Dulcimer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_dulcimer', 'item_desc', 'What a beautiful instrument! It belongs to the bard Graham.','Was für ein schönes Instrument! Es gehört dem Barden Graham.','Was füres schöns Instrument! Es ghört em Bard Graham.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_dulcimer', 'quest', 800, 200, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_dulcimer', 0, 0, 50, 50);
@@ -142,13 +142,13 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Frying Pan
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item', 'Frying Pan','Bratpfanne','Bratpfanne');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item_desc', 'Jack''s beloved frying pan.','Jack''s geliebte Bratpfanne.', 'Em Jack sini gliebt Bratpfanne.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_jackpan', 'item_desc', 'Jack''s beloved frying pan.','Jacks geliebte Bratpfanne.', 'Em Jack sini gliebt Bratpfanne.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_jackpan', 'quest', 600, 650, -1);
 
 -- Helena's Special Chicken
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item', 'Helena''s Special Chicken','Helena''s Hühnchen Spezial','Helena''s Spezialgüggeli');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item_desc', 'Helena''s famous grilled chicken.','Helena''s berühmtes Brathühnchen.', 'De Helena ihres berüemt Güggeli.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item', 'Helena''s Special Chicken','Helenas Hühnchen Spezial','Helena''s Spezialgüggeli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_leeroychicken', 'item_desc', 'Helena''s famous grilled chicken.','Helenas berühmtes Brathühnchen.', 'De Helena ihres berüemt Güggeli.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_leeroychicken', 'quest', 650, 250, -1);
 
 -- Precious Candleholder
@@ -173,7 +173,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 -- Robert's Teleport Stone
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item', 'Robert''s Teleport Stone','Robert''s Teleportstein','Em Robert sin Teleportstei');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item', 'Robert''s Teleport Stone','Roberts Teleportstein','Em Robert sin Teleportstei');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_portstone_bob', 'item_desc', 'A magical teleport stone. I can''t use it as it''s bound to the mage Robert.','Ein magischer Teleportstein. Ich kann ihn nicht benutzen, da er an den Magier Robert gebunden ist.','En magische Teleportstei. Ich chanen nid bruche weler an Magier Robert bunde isch.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_portstone_bob', 'quest', 700, 300, -1);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_portstone_bob', -15, -35, 20, 15);

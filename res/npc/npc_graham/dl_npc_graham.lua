@@ -9,7 +9,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_graham", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Graham_Hey") -- Oh, hello! You really came from that creepy cave? You know that it's forbidden to go there?
+		DL:createNPCNode(1, -2, "DL_Graham_Hey") -- Oh, hello! You really came from that creepy cave? You know it's forbidden to go there, right?
 		DL:addConditionProgress("npc_graham", "talked")
 		DL:addNode()
 
@@ -21,7 +21,7 @@ loadDialogue = function(DL)
 		DL:addChoice(3, "DL_Choice_WhoAreYou") -- Who are you?
 	end
 	if (not DL:isConditionFulfilled("npc_graham", "forbidden_cave")) then 
-		DL:addChoice(4, "DL_Choice_ForbiddenCave") -- Why is it forbitten to go into that cave?
+		DL:addChoice(4, "DL_Choice_ForbiddenCave") -- Why is it forbidden to go into that cave?
 	end
 	if (DL:isConditionFulfilled("npc_graham", "who_are_you") and not DL:isConditionFulfilled("npc_graham", "king")) then 
 		DL:addChoice(12, "DL_Choice_King") -- A royal bard? So do you know the king?
@@ -33,7 +33,7 @@ loadDialogue = function(DL)
 		DL:addChoice(5, "DL_Choice_WhatDoing") -- What are you doing here?
 	end
 	if (DL:isQuestState("grahams_dulcimer", "started") and DL:isQuestComplete("grahams_dulcimer")) then 
-		DL:addChoice(6, "DL_Choice_GotDulcimer") -- I found your instrument. On a tree.
+		DL:addChoice(6, "DL_Choice_GotDulcimer") -- I found your instrument. In a tree.
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -69,7 +69,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(14, -2, "DL_Graham_King3") -- He doesn't seem interested in anything. Really weird kid. So I'm just sitting here in the gardens and play for the court.
+		DL:createNPCNode(14, -2, "DL_Graham_King3") -- He doesn't seem interested in anything. Really weird kid... So I'm just sitting here in the gardens, playing for the court.
 		DL:addNode()
 
 	end

@@ -192,7 +192,7 @@ npc.id:npc_loganthird
 		condition:DL:isConditionFulfilled("npc_loganthird", "velius")
 		# translation: 
 		translation.tag:DL_Choice_WhatMark
-		translation.en:What does this mark even mean?
+		translation.en:What does this mark mean?
 		translation.de:Was bedeutet dieses Mal überhaupt?
 		translation.ch:Was bedüüted das Zeiche überhaupt?
 	]
@@ -471,7 +471,7 @@ npc.id:npc_loganthird
 		tag:30
 		# translation: 
 		translation.tag:DL_Choice_NotOutside
-		translation.en:Yeah, you're right. The life outside is nothing for you.
+		translation.en:Yeah, you're right. The life outside is not something for you.
 		translation.de:Ja, du hast Recht. Das Leben da draussen ist nichts für dich.
 		translation.ch:Ja, hesch Recht. Es Lebe det usse isch nüt für dich.
 	]
@@ -482,7 +482,7 @@ npc.id:npc_loganthird
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Logan_KingShouldKnow
-	translation.en:Don't you tell me what a king should.
+	translation.en:Don't you tell me what a king should do.
 	translation.de:Sag mir nicht, was ein König zu tun hat.
 	translation.ch:Seg mer nid, was en König z'tue het.
 	[

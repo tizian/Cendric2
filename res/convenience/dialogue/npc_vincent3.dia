@@ -282,7 +282,7 @@ npc.id:npc_vincent3
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_Join
-	translation.en:Good. You want to become a brother of the Shadow Stalkers, pledge your loyality to the guild and learn the ways of the shadows?
+	translation.en:Good. You want to become a brother of the Shadow Stalkers, pledge your loyalty to the guild and learn the ways of the shadows?
 	translation.de:Gut. Willst du ein Bruder der Schattenläufer werden, schwörst der Gilde deine Treue und lernst die Wege der Schatten? 
 	translation.ch:Guet. Wötsch du en Brüädo vodä Schatteläufer werdä, schwörsch dini Treui zudä Gildä und lernsch d'Wäg vodä Schatte?
 	[
@@ -527,7 +527,7 @@ npc.id:npc_vincent3
 	# translation: 
 	translation.tag:DL_Vincent_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
-	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
+	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vorhat, komm wieder und berichte uns davon.
 	translation.ch:Mir bruched öppor, wo mit ihm redä chan und vilicht sogar für ihn schaffä tuet. Fallsd usefindsch, was er vor het, chum wiedär und verzell üs dävo.
 	[
 		# Link node, tag is next tag

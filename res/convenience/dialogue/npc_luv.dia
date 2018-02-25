@@ -87,8 +87,8 @@ npc.id:npc_luv
 		# translation: 
 		translation.tag:DL_Choice_FirstRant
 		translation.en:Your mate told me you're the one to blame.
-		translation.de:Dein Kumpel hat gesagt du seist Schuld an eurem Schlamassel.
-		translation.ch:Din Kolleg het gseit du segsch Schuld a eurem Schlamassel.
+		translation.de:Dein Kumpel hat gesagt, du seist schuld an eurem Schlamassel.
+		translation.ch:Din Kolleg het gseit, du segsch schuld a eurem Schlamassel.
 	]
 	[
 		# Link node, tag is next tag

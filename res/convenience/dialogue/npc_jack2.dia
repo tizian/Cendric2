@@ -16,7 +16,7 @@ npc.id:npc_jack2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jack_BeautifulDay
-	translation.en:It's a beautiful day for an old sea bear, ain't it.
+	translation.en:It's a beautiful day for an old sea bear, isn't it.
 	translation.de:Ein wunderschöner Tag für einen alten Seebären, nicht wahr.
 	translation.ch:A wunderschöna Tag für a alta Seebär, gäll.
 	[

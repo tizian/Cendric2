@@ -15,12 +15,12 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 3, "DL_Harek_IAmSmith") -- Yes, and I'm the best one around here. I have some weapons and armour here, if you're interested.
+		DL:createNPCNode(2, 3, "DL_Harek_IAmSmith") -- Yes, and I'm the best one around. I have some weapons and armour here, if you're interested.
 		DL:addConditionProgress("npc_harek", "talked")
 		DL:addNode()
 
 
-		DL:createNPCNode(3, -2, "DL_Harek_WhoAreYou2") -- I also take on more special jobs, if you can bring me the materials.
+		DL:createNPCNode(3, -2, "DL_Harek_WhoAreYou2") -- I also take on more unusual jobs, if you can bring me the materials.
 		DL:addNode()
 
 	end
@@ -82,7 +82,7 @@ loadDialogue = function(DL)
 
 
 		DL:createChoiceNode(8)
-		DL:addChoice(9, "DL_Choice_IHaveHeart") -- I got this special looking stone here... (Show Heart of Khajag)
+		DL:addChoice(9, "DL_Choice_IHaveHeart") -- I got this unusual stone here... (Show Heart of Khajag)
 		DL:addChoice(-2, "DL_Choice_IDontHaveMagic") -- Maybe later.
 		DL:addNode()
 
@@ -124,7 +124,7 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("ice_armor", "started") and DL:isQuestComplete("ice_armor")) then 
 
-		DL:createNPCNode(14, 15, "DL_Harek_SmithMagicArmor") -- Very good. (Harek takes the ingredients and starts hammering on his anvil furiously...)
+		DL:createNPCNode(14, 15, "DL_Harek_SmithMagicArmor") -- Very good. (Harek takes the ingredients and starts hammering furiously on his anvil...)
 		DL:removeItem("mi_firstguardianheart", 1)
 		DL:removeItem("mi_ironore", 10)
 		DL:addNode()
@@ -176,7 +176,7 @@ loadDialogue = function(DL)
 
 	if (DL:hasItem("mi_icecrystal", 1)) then 
 
-		DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exeptionally beautiful stone! I can truly craft something magical from that.
+		DL:createNPCNode(18, -2, "DL_Harek_IceScarf") -- An exceptionally beautiful stone! I can truly craft something magical from that.
 		DL:gotoNode(17)
 		DL:addNode()
 
@@ -184,7 +184,7 @@ loadDialogue = function(DL)
 
 	if (DL:hasItem("mi_pearlpile", 1)) then 
 
-		DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some of them in my hands... They'll make a fine sabre.
+		DL:createNPCNode(20, -2, "DL_Harek_PearlSabre") -- Magical pearls! It has been a long time since I've held some in my hands... They'll make a fine sabre.
 		DL:gotoNode(17)
 		DL:addNode()
 
@@ -204,7 +204,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon but I can only restore a part of its magical power.
+		DL:createNPCNode(23, -2, "DL_Harek_JanusGlaive2") -- I can fix this broken weapon, but I can only restore a part of its magical power.
 		DL:gotoNode(17)
 		DL:addNode()
 
@@ -240,15 +240,15 @@ loadDialogue = function(DL)
 
 	if (DL:hasItem("mi_prismastone", 1)) then 
 
-		DL:createNPCNode(32, 33, "DL_Harek_PrismaStone") -- Hmm. Very interesting, indeed. It looks like condensed magic. I'll cut that stone for free.
+		DL:createNPCNode(32, 33, "DL_Harek_PrismaStone") -- Hmm. Very interesting indeed. It looks like condensed magic. I'll cut that stone for free.
 		DL:addNode()
 
 
-		DL:createNPCNode(33, 34, "DL_Harek_PrismaStone2") -- I could cut the stone to focus one color or we could keep all colors, but they'll shine less.
+		DL:createNPCNode(33, 34, "DL_Harek_PrismaStone2") -- I could cut the stone to focus one colour... Or we could keep all colours, but then they'll shine less.
 		DL:addNode()
 
 
-		DL:createNPCNode(34, 35, "DL_Harek_PrismaStone3") -- Which magic types or colours do you prefer?
+		DL:createNPCNode(34, 35, "DL_Harek_PrismaStone3") -- Do you want to choose by magic types or by colours?
 		DL:addNode()
 
 
@@ -322,7 +322,7 @@ loadDialogue = function(DL)
 		DL:createChoiceNode(37)
 		DL:addChoice(46, "DL_Choice_RingHeal") -- I need something that improves my health.
 		DL:addChoice(47, "DL_Choice_RingHaste") -- I like fast and critical attacks.
-		DL:addChoice(48, "DL_Choice_RingDivine") -- I commited myself to the divine magic.
+		DL:addChoice(48, "DL_Choice_RingDivine") -- I committed myself to the divine magic.
 		DL:addChoice(49, "DL_Choice_RingPhysical") -- I like to beat people without magic.
 		DL:addChoice(50, "DL_Choice_RingFire") -- I like to play with fire.
 		DL:addChoice(51, "DL_Choice_RingIce") -- Ice magic suits me.

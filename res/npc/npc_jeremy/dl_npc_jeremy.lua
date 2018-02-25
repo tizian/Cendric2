@@ -86,7 +86,7 @@ loadDialogue = function(DL)
 
 				DL:createChoiceNode(20)
 				DL:addChoice(21, "DL_Choice_ConfrontDirect1") -- We suspect you have something to do with her abduction.
-				DL:addChoice(-1, "DL_Choice_Nevermind") -- Eh, nevermind...
+				DL:addChoice(-1, "DL_Choice_Nevermind") -- Eh, never mind...
 				DL:addNode()
 
 

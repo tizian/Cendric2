@@ -8,3 +8,4 @@ do
 	./SQLiteShell.exe game_data.db '.read '$f
 	echo 'read '$f
 done
+read 

@@ -55,7 +55,10 @@ loadDialogue = function(DL)
 		DL:addChoice(4, "DL_Choice_AreYouSure") -- Are you entirely sure that you don't recognize me?
 		DL:addNode()
 		
-		DL:createNPCNode(4, -2, "DL_Citguard_Eyeballing") -- (Eyeballs you) Yes. Maybe I don't know every filthy vagabond that lurks around at the waterfront, but I would certainly recognize anyone who has left the city in the last few days. And you're not one of them. 
+		DL:createNPCNode(4, 5, "DL_Citguard_Eyeballing") -- (Eyeballs you) Yes. Maybe I don't know every filthy vagabond that lurks around at the waterfront...
+		DL:addNode()
+		
+		DL:createNPCNode(5, -2, "DL_Citguard_Eyeballing2") -- But I would certainly recognize anyone who has left the city in the last few days. And you're not one of them. 
 		DL:addNode()
 		
 	end

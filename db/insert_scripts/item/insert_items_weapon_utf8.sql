@@ -37,7 +37,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Cendric's Staff
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_betastaff', 'item', 'Cendric''s Staff','Cendric''s Stab','Em Cendric sin Stab');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_betastaff', 'item', 'Cendric''s Staff','Cendrics Stab','Em Cendric sin Stab');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_betastaff', 'item_desc', 'Thanks!','Danke!', 'Merci!');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_betastaff', 'eq_weapon', 50, 700, 30, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_shadow, dmg_ice, dmg_fire, dmg_light, critical) values ('we_betastaff', 1, 1, 1, 1, 1, 1);
@@ -204,7 +204,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Jason's Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item', 'Jason''s Glaive','Jasons Gleve','Jasons Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item_desc', 'Demonhunter Jason''s old weapon.','Dämonenjäger Jason''s alte Waffe','Em Dämonejäger Jason sini alt Waffe.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive', 'item_desc', 'Demonhunter Jason''s old weapon.','Dämonenjäger Jasons alte Waffe','Em Dämonejäger Jason sini alt Waffe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive', 'eq_weapon', 300, 150, 250, 3);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, haste, max_health, critical) values ('we_jasonsglaive', 20, 5, 20, 11, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive.png');
@@ -218,7 +218,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Jason's Glaive (Fire)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item', 'Jason''s Fiery Glaive','Jasons Feurige Gleve','Jason''s Füürigi Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_fire', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jasons alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive_fire', 'eq_weapon', 750, 500, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_fire, dmg_physical, dmg_light, critical, haste, max_health) values ('we_jasonsglaive_fire', 15, 20, 15, 4, 40, 18);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_fire', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive_fire.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive_fire.png');
@@ -232,7 +232,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Jason's Glaive (Dark)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item', 'Jason''s Dark Glaive','Jasons Dunkle Gleve','Jason''s Dunkli Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jason''s alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jasons alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_jasonsglaive_dark', 15, 20, 4, 40, 15, 18);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive_dark.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive_dark.png');
@@ -247,7 +247,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Yasha's Glaive
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item', 'Yasha''s Glaive','Yashas Glaive','Yasha''s Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmieded aus Yasha''s Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_fireglaive', 'item_desc', 'A very powerful weapon, crafted from Yasha''s fangs.','Eine sehr mächtige Waffe, geschmiedet aus Yashas Fangzähnen.','E sehr mächtigi Waffe, gschmieded us de Fangzäh vode Yasha.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_fireglaive', 'eq_weapon', 700, 200, 265, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_fire, dmg_physical, critical, haste, max_health) values ('we_fireglaive', 5, 10, 15, 5, 10, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_fireglaive', 'res/texture/equipment/weapon/spritesheet_weapon_fireglaive.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_fireglaive.png');
@@ -300,7 +300,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Oathbreaker (Thief Weapon)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item', 'Oathbreaker','Eidbrecher','Eidbrecher');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item_desc', 'The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.','Die legendären Zwillingsdolche Eid und Brecher. Es wird erzählt, dass die zyanblauen Steine gefangene Seelen beherrbergen.','Di legendäre Zwillingsdolch Eid und Brecher. Me munklet dass ide zyanblaue Stei Seele gfange sind.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_oathbreaker', 'item_desc', 'The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.','Die legendären Zwillingsdolche Eid und Brecher. Es wird erzählt, dass die zyanblauen Steine gefangene Seelen beherbergen.','Di legendäre Zwillingsdolch Eid und Brecher. Me munklet dass ide zyanblaue Stei Seele gfange sind.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_oathbreaker', 'eq_weapon', 150, 100, 400, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_oathbreaker', 10, 10, 12, 50, 10, 4);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_oathbreaker', 'res/texture/equipment/weapon/spritesheet_weapon_oathbreaker.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_oathbreaker.png');
@@ -438,7 +438,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 
 -- Leeroy's Sword
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item', 'Leeroy''s Sword','Leeroy''s Schwert','Leeroy''s Schwertli');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item', 'Leeroy''s Sword','Leeroys Schwert','Leeroys Schwertli');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_leeroysword', 'item_desc', 'The sword of a legend... or merely a fool?','Das Schwert einer Legende... oder bloss eines Narren?','Es Schwert vonere Legende... oder eifach vomne Tubel?');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_leeroysword', 'eq_weapon', 650, 600, 170, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, critical, haste, max_health, res_fire) values ('we_leeroysword', 25, 10, 10, -50, -50);

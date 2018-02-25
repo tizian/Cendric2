@@ -309,9 +309,23 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "affinity")
 	# translation: 
 	translation.tag:DL_Jonathan_Affinity
-	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn. Us elementalists are lucky - we are able to understand the whole spectrum of magic.
-	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magietyp geboren. Dieser bestimmt, welche Zauber er erlernen kann. Wir Elementarmagier haben Glück - wir können das gesamte Spektrum der Magie verstehen.
-	translation.ch:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp gebora. Dä bestimmt, welli Zauber mr lerna kann. Miar Elementarmagier hend Glück - miar könnd z ganza Spektrum vur Magie verstoh.
+	translation.en:Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn.
+	translation.de:Jeder Magier wird mit einer gewissen Affinität zu einem Magie-Typ geboren. Dieser bestimmt, welche Zauber er erlernen kann.
+	translation.ch:Jeda Magier wird mitera gwüssa Affinität zuma Magietyp gebora. Dä bestimmt, welli Zauber mr lerna kann.
+	[
+		# Link node, tag is next tag
+		tag:75
+	]
+}
+{1
+	# [75] NPC Node
+	tag:75
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_Affinity2
+	translation.en:Us elementalists are lucky - we are able to understand the whole spectrum of magic.
+	translation.de:Wir Elementarmagier haben Glück - wir können das gesamte Spektrum der Magie verstehen.
+	translation.ch:Miar Elementarmagier hend Glück - miar könnd z ganza Spektrum vur Magie verstoh.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -338,9 +352,23 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "prove_yourself")
 	# translation: 
 	translation.tag:DL_Jonathan_NextStep2
-	translation.en:...qualified. Also, someone who lost his memory is suspicious. Before I let you in on my studies, you should first prove that you're a worthy elementalist.
-	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächtnis verloren hat, ein bisschen verdächtig. Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
-	translation.ch:...qualifiziert isch. Usserdem isch eina, wo sis Gedächtnis verlora het, schu huara verdächtig. Bevor i di in mini Forschiga iweiha, muasch zerscht bewiisa, dass du a würdiga Elementarmagier bisch.
+	translation.en:...qualified. Also, someone who lost his memory is suspicious.
+	translation.de:...qualifiziert ist. Ausserdem ist jemand, der sein Gedächtnis verloren hat, schon ein bisschen verdächtig.
+	translation.ch:...qualifiziert isch. Usserdem isch eina, wo sis Gedächtnis verlora het, schu huara verdächtig.
+	[
+		# Link node, tag is next tag
+		tag:76
+	]
+}
+{1
+	# [76] NPC Node
+	tag:76
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_NextStep3
+	translation.en:Before I let you in on my studies, you should first prove that you're a worthy elementalist.
+	translation.de:Bevor ich dich in meine Forschungen einweihe, musst du beweisen, dass du ein würdiger Elementarmagier bist.
+	translation.ch:Bevor i di in mini Forschiga iweiha, muasch zerscht bewiisa, dass du a würdiga Elementarmagier bisch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -585,9 +613,23 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_LearnedFireball2
-	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
-	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier. Ich habe bereits herausgefunden, dass sie früher Zauber kannten, die weit mächtiger sind, als alle Elementarmagie, die wir heute kennen.
-	translation.ch:I forscha am alta, vergessena Wüssa vu de ersta Elementarmagier. I han schu usagfunda, dass sie früaner viel mächtigeri Zauber kennt hend, als jeglichi Elementarmagie, wo mr hüt so brucht.
+	translation.en:My research focuses on the old, forgotten knowledge of the first elementalists.
+	translation.de:Ich forsche an dem alten, vergessenen Wissen der ersten Elementarmagier.
+	translation.ch:I forscha am alta, vergessena Wüssa vu de ersta Elementarmagier.
+	[
+		# Link node, tag is next tag
+		tag:77
+	]
+}
+{1
+	# [77] NPC Node
+	tag:77
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_LearnedFireball3
+	translation.en:I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
+	translation.de:Ich habe bereits herausgefunden, dass sie früher Zauber kannten, die weit mächtiger sind, als alle Elementarmagie, die wir heute kennen.
+	translation.ch:I han schu usagfunda, dass sie früaner viel mächtigeri Zauber kennt hend, als jeglichi Elementarmagie, wo mr hüt so brucht.
 	[
 		# Link node, tag is next tag
 		tag:24
@@ -598,7 +640,7 @@ npc.id:npc_jonathan
 	tag:24
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Jonathan_LearnedFireball3
+	translation.tag:DL_Jonathan_LearnedFireball4
 	translation.en:I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
 	translation.de:Ich habe Beweise gefunden, dass es irgendwo in der Nähe der Stadt Gandria eine verlassene Stätte der ersten Elementarmagier gibt, deshalb arbeite ich hier.
 	translation.ch:I han Bewiis gfunda, dasses irgendwo in dr Nöchi vu Gandria a verlassna Ort git, wo di erschta Elementarmagier glebt hend, drum schaff i au do.
@@ -612,9 +654,9 @@ npc.id:npc_jonathan
 	tag:25
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Jonathan_LearnedFireball4
+	translation.tag:DL_Jonathan_LearnedFireball5
 	translation.en:I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's one small problem with that map...
-	translation.de:Ich bin mir ziemlich sicher dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
+	translation.de:Ich bin mir ziemlich sicher, dass diese Karte, die Cyrus mir geschickt hat, der Schlüssel ist, um diesen Ort zu finden. Allerdings gibt es da ein kleines Problem mit dieser Karte...
 	translation.ch:I bi mr ziemli sicher dass dia Karta, wo dr Cyrus miar gschickt het, dr Schlüssel isch zum de Ort z'finda. As git do aber a klises Problem mit dera Karta...
 	[
 		# Link node, tag is next tag
@@ -627,7 +669,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_jonathan", "decipher_map")
 	# translation: 
-	translation.tag:DL_Jonathan_LearnedFireball5
+	translation.tag:DL_Jonathan_LearnedFireball6
 	translation.en:To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
 	translation.de:Elementarmagie alleine reicht nicht, um sie zu entschlüsseln. Kombiniert mit einem anderen Typ der Magie müsste man den Schutzzauber aber brechen können.
 	translation.ch:Elementarmagie allai langet nid zum si entschlüssla. Zema mitera andera Magieart sött mrs aber anabringa, dr Schutzzauber z'brecha.
@@ -713,7 +755,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhatAboutYou
 	translation.en:Although we elementalists can learn every type of magic, I've always focused my studies on elemental magic only. 
-	translation.de:Obwohl wir Elementarmagier jede Magieart erlernen können, habe ich mich bisher nur mit Elementarmagie beschäftigt.
+	translation.de:Obwohl wir Elementarmagier jede Magie-Art erlernen können, habe ich mich bisher nur mit Elementarmagie beschäftigt.
 	translation.ch:Obwohl miar Elementarmagier jedi Magieart lerna könnd, hani mi bis ez nur mit Elementarmagie beschäftigt.
 	[
 		# Link node, tag is next tag
@@ -727,7 +769,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhatAboutYou2
 	translation.en:And now, it's too risky for me to go and learn something new. No, I need someone with a face that is not yet known to the citizens of Gandria. Someone like you.
-	translation.de:Und jetzt ist es zu riskant für mich, etwas neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
+	translation.de:Und jetzt ist es zu riskant für mich, etwas Neues zu lernen. Nein, ich brauche jemanden, dessen Gesicht hier in Gandria nicht so bekannt ist. Jemanden wie dich.
 	translation.ch:Und ez ischs z'riskant für mi, was neus z'lerna. Nai, i bruch öper mitma unbekanntera Gsicht do in Gandria. So öper wia di.
 	[
 		# Link node, tag is next tag
@@ -756,9 +798,9 @@ npc.id:npc_jonathan
 	trigger:DL:addConditionProgress("npc_jonathan", "why_risky")
 	# translation: 
 	translation.tag:DL_Jonathan_WhyRisky
-	translation.en:It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
-	translation.de:Es ist einfach so, dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören. Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht, dass du eine Ausnahme warst.
-	translation.ch:As isch eifach so, dass i in letschter Ziit immer meh z'Gfühl han, dass aswer probiart, mini Arbet z'störa. Forschigsnotiza und Lüüt verschwindend ufs Mol... I denk nid, dass du a Usnahm gsi bisch.
+	translation.en:It's just because lately, I get the impression that someone tries to mess with my work.
+	translation.de:Es ist einfach so, dass ich in letzter Zeit immer mehr das Gefühl habe, dass jemand versucht, meine Arbeit zu stören.
+	translation.ch:As isch eifach so, dass i in letschter Ziit immer meh z'Gfühl han, dass aswer probiart, mini Arbet z'störa.
 	[
 		# Link node, tag is next tag
 		tag:33
@@ -770,6 +812,20 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_WhyRisky2
+	translation.en:Research notes and people disappear, I don't think you're an exception.
+	translation.de:Forschungsnotizen und Leute verschwinden plötzlich... Ich denke nicht, dass du eine Ausnahme warst.
+	translation.ch:Forschigsnotiza und Lüüt verschwindend ufs Mol... I denk nid, dass du a Usnahm gsi bisch.
+	[
+		# Link node, tag is next tag
+		tag:78
+	]
+}
+{1
+	# [78] NPC Node
+	tag:78
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_WhyRisky3
 	translation.en:It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 	translation.de:Rausgehen scheint keine gute Idee für mich zu sein, bis diese Stadt wieder normal ist.
 	translation.ch:Usa goh isch glaub eifach kai guati Idee für mi, bis dia Stadt wieder kli normaler isch.
@@ -785,7 +841,7 @@ npc.id:npc_jonathan
 	# translation: 
 	translation.tag:DL_Jonathan_WhatShouldIDo
 	translation.en:You'll have to learn another type of magic. There are - as far as I know - three mage guilds in Gandria, each focusing on another domain of magic.
-	translation.de:Du wirst eine neue Magieart lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezialisiert.
+	translation.de:Du wirst eine neue Magie-Art lernen müssen. In Gandria gibt es - soweit ich weiss - drei Magiergilden, von denen sich jede auf einen anderen Bereich der Magie spezialisiert.
 	translation.ch:Du wirsch a neui Magieart lerna müassa. In Gandria gits - sowiit i weiss - drei verschideni Magiergildana, vo dena sich jedi uf a andera Bereich vur Magie spezialisiart.
 	[
 		# Link node, tag is next tag

@@ -27,9 +27,23 @@ npc.id:npc_syrah
 	trigger:DL:addConditionProgress("npc_syrah", "talked")
 	# translation: 
 	translation.tag:DL_Syrah_Greeting
-	translation.en:Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
-	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen. Ob Liebestrank oder Haarfarbe - es gibt fast nichts, was ich nicht zusammenbrauen könnte.
-	translation.ch:Jo sali! Du gsesch us als chönntisch du es paar Tränk v dr berüemt-berüchtigte Alchemischtin Syrah bruuche. Ob Liebestrank oder Hoorfarb - es git fascht nüt woni nid chönt zämmämischlä.
+	translation.en:Well hello there! You look like you could use some potions made by the infamous alchemist Syrah.
+	translation.de:Na hallo! Du siehst aus als könntest du ein paar Tränke von der berühmt-berüchtigten Alchemistin Syrah gebrauchen.
+	translation.ch:Jo sali! Du gsesch us als chönntisch du es paar Tränk v dr berüemt-berüchtigte Alchemischtin Syrah bruuche.
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_Greeting2
+	translation.en:A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
+	translation.de:Ob Liebestrank oder Haarfarbe - es gibt fast nichts, was ich nicht zusammenbrauen könnte.
+	translation.ch:Ob Liebestrank oder Hoorfarb - es git fascht nüt woni nid chönt zämmämischlä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -560,9 +574,9 @@ npc.id:npc_syrah
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Syrah_FavourQuestStart3
-	translation.en:I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
-	translation.de:Ich bin mir sicher, dass du diese Blume dort finden kannst - Magier, die Magie "missbrauchen", werden meistens auf dem Scheiterhaufen verbrannt und was auch immer übrig bleibt, wird in diese Krypta geschafft.
-	translation.ch:I bimmer sicher, dassd s'Bliemli dört finde chasch - Magier wo Magie "missbruchä" wärde meistens ufem Schitterhuffe verbrennt und was immer übrig blibt wird in die Krypta verfrachtet.
+	translation.en:I'm sure that you can find that flower there...
+	translation.de:Ich bin mir sicher, dass du diese Blume dort finden kannst...
+	translation.ch:I bimmer sicher, dassd s'Bliemli dört finde chasch...
 	[
 		# Link node, tag is next tag
 		tag:34
@@ -575,12 +589,26 @@ npc.id:npc_syrah
 	trigger:DL:changeQuestState("favor_for_a_favor", "started")
 	# translation: 
 	translation.tag:DL_Syrah_FavourQuestStart4
+	translation.en:Mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
+	translation.de:Magier, die Magie "missbrauchen", werden meistens auf dem Scheiterhaufen verbrannt und was auch immer übrigbleibt, wird in diese Krypta geschafft.
+	translation.ch:Magier wo Magie "missbruchä" wärde meistens ufem Schitterhuffe verbrennt und was immer übrig blibt wird in die Krypta verfrachtet.
+	[
+		# Link node, tag is next tag
+		tag:51
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Syrah_FavourQuestStart5
 	translation.en:Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
-	translation.de:Oh, und wenn du dem Totengräber Morton begegnen solltest, sag ihm einfach, dass ich dich geschickt habe, und er wird dich hinein lassen.
+	translation.de:Oh, und wenn du dem Totengräber Morton begegnen solltest, sag ihm einfach, dass ich dich geschickt habe, und er wird dich hineinlassen.
 	translation.ch:Oh, und wennd em Totegräber Morton begägne sötsch, sagem eifach dass ich di gschickt ha, denn sötter di iineloh.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:-2
 	]
 }
 {1
@@ -943,7 +971,7 @@ npc.id:npc_syrah
 	# translation: 
 	translation.tag:DL_Syrah_BrewQuestStart4
 	translation.en:If you manage to get me that, I'll brew extraordinary potions from the herbs you bring me!
-	translation.de:Wenn du es schaffst, mir das zu holen, werde ich dir aussergewöhnliche Tränke aus den Kräutern brauen, die dur mir bringst.
+	translation.de:Wenn du es schaffst, mir das zu holen, werde ich dir aussergewöhnliche Tränke aus den Kräutern brauen, die du mir bringst.
 	translation.ch:Wenn du's schaffsch, mir das z'hole, wirdi der ussergwöhnlichi Tränkli us dene Chrüüter, wod mer bringsch, braue.
 	[
 		# Link node, tag is next tag

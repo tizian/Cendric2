@@ -34,7 +34,7 @@ INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radiu
 -- Ice Crystal
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item', 'Ice Crystal','Eiskristall','Iiskristall');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item_desc', 'An exeptionally beautiful crystal. Maybe someone could craft something from it.','Ein aussergewöhnlich schöner Kristall. Vielleicht könnte jemand etwas daraus anfertigen.','En ussergwöhnlich schöne Kristall. Vilicht chönt öpper öppis drus herstelle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_icecrystal', 'item_desc', 'An exceptionally beautiful crystal. Maybe someone could craft something from it.','Ein aussergewöhnlich schöner Kristall. Vielleicht könnte jemand etwas daraus anfertigen.','En ussergwöhnlich schöne Kristall. Vilicht chönt öpper öppis drus herstelle.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_icecrystal', 'misc', 600, 500, 40, 2);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_icecrystal', -3, -10, 44, 40);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_icecrystal', 1, 300, 300, 50, 50);
@@ -75,7 +75,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Pile of Gargoyle Dust
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item', 'Gargoyle Dust','Gargoylestaub','Gargoylestaub');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pityful pile of dust.','War einmal ein mächtiges Steimonster und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_gargoyle_dust', 'item_desc', 'Once a mighty stone monster, now a pitiful pile of dust.','War einmal ein mächtiges Steinmonster und ist jetzt nur noch ein trauriges Häufchen Staub.','Isch mal es mächtigs Steimonster gsi und isch ez nur na es elendiglichs Hüüfeli Staub.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_gargoyle_dust', 'misc', 350, 0, 20, 2);
 
 -- Nekomata Embers
@@ -147,7 +147,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) v
 -- Iron Ore
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item', 'Iron Ore','Eisenerz','Iseerz');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item_desc', 'A sought-after ingredient for smithing.','Eine begehrte Schmiedezutat.','E begehrti Schmiedezuetat.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_ironore', 'item_desc', 'A sought-after ingredient for blacksmithing.','Eine begehrte Schmiedezutat.','E begehrti Schmiedezuetat.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_ironore', 'misc', 200, 500, 0);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('mi_ironore', 0, -35, 30, 15);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('mi_ironore', 1, 500, 50, 50, 50);
@@ -183,5 +183,5 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) v
 -- Prisma Stone
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item', 'Prisma Stone','Prismastein','Prismastei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item_desc', 'It shines in all colors of the rainbow. The blacksmith Harek would certainly be interested in this material.','Er leuchtet in allen Farben des Regenbogens. Der Schmied Harek wäre sicherlich an diesem Material interessiert.','Er lüchtet i allne Farbe vom Rägeboge. De Schmied Harek wer sicher a dem Material interessiert.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_prismastone', 'item_desc', 'It shines in all colours of the rainbow. The blacksmith Harek would certainly be interested in this material.','Er leuchtet in allen Farben des Regenbogens. Der Schmied Harek wäre sicherlich an diesem Material interessiert.','Er lüchtet i allne Farbe vom Rägeboge. De Schmied Harek wer sicher a dem Material interessiert.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_prismastone', 'misc', 800, 250, -1, 3);

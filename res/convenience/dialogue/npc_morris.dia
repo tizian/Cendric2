@@ -108,7 +108,7 @@ npc.id:npc_morris
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Morris_Stole
-	translation.en:Yes, the observer spells can be trouble, I can tell from my own experience.
+	translation.en:Yes, the observer spells can be troublesome... I know that from my own experience.
 	translation.de:Ja, die Beobachter-Zauber können wirklich mühsam sein, musste ich auch schon erfahren.
 	translation.ch:Ja, d'Beobachter-Zauber chönd würkli müesam si, hani au scho möse erfahre.
 	[
@@ -122,7 +122,7 @@ npc.id:npc_morris
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Morris_Murdered
-	translation.en:Funny, you don't like someone that is capable of murdering people. But I'll watch my back. (Grins)
+	translation.en:Funny, you don't look like someone capable of murdering people. But I'll watch my back. (Grins)
 	translation.de:Lustig, du siehst nicht aus wie jemand, der Leute ermordet. Aber ich werde wohl besser auf meinen Rücken aufpassen. (Grinst)
 	translation.ch:Lustig, du gsesch nid us we öpper, wo Lüt killt. Aber ich pass glaub besser chli uf mit dir, he. (Grinst)
 	[
@@ -238,12 +238,26 @@ npc.id:npc_morris
 	trigger:DL:addConditionProgress("npc_morris", "game")
 	# translation: 
 	translation.tag:DL_Morris_GameRules
-	translation.en:It's pretty simple. See this coin? You bet a certain amount of gold on head or tails, I toss it. If you're correct with your guess, I double your gold. Otherwise, I keep it.
-	translation.de:Es ist ziemlich einfach. Siehst du diese Münze? Du setzt einen bestimmten Betrag auf Kopf oder Zahl. Dann werfe ich die Münze. Falls du gewinnst, verdopple ich dir deinen Einsatz. Falls nicht, behalte ich ihn. 
-	translation.ch:Es isch zimli eifach. Gsesch die Münze? Du setzisch en gwüsse Goldbetrag uf Chopf oder Zahl. Denn wirfi si und wend richtig grate hesch verdoppli din Isatz. Und wenn nid, phalti en.
+	translation.en:It's pretty simple. See this coin? You bet a certain amount of gold on heads or tails, I toss it.
+	translation.de:Es ist ziemlich einfach. Siehst du diese Münze? Du setzt einen bestimmten Betrag auf Kopf oder Zahl.
+	translation.ch:Es isch zimli eifach. Gsesch die Münze? Du setzisch en gwüsse Goldbetrag uf Chopf oder Zahl.
 	[
 		# Link node, tag is next tag
-		tag:-1
+		tag:32
+	]
+}
+{1
+	# [32] NPC Node
+	tag:32
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Morris_GameRules2
+	translation.en:If your guess is correct, I double your gold. Otherwise, I keep it.
+	translation.de:Dann werfe ich die Münze. Falls du gewinnst, verdopple ich dir deinen Einsatz. Falls nicht, behalte ich ihn. 
+	translation.ch:Denn wirfi si und wend richtig grate hesch verdoppli din Isatz. Und wenn nid, phalti en.
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {2
@@ -324,7 +338,7 @@ npc.id:npc_morris
 	trigger:DL:removeGold(20)
 	# translation: 
 	translation.tag:DL_Morris_HeadOrTails
-	translation.en:Fine. Head or tails?
+	translation.en:Fine. Heads or tails?
 	translation.de:Gut. Kopf oder Zahl?
 	translation.ch:Guet. Chopf oder Zahl?
 	[
@@ -340,7 +354,7 @@ npc.id:npc_morris
 		tag:17
 		# translation: 
 		translation.tag:DL_Choice_Head
-		translation.en:Head.
+		translation.en:Heads.
 		translation.de:Kopf.
 		translation.ch:Chopf.
 	]
@@ -518,7 +532,7 @@ npc.id:npc_morris
 	trigger:DL:removeGold(100)
 	# translation: 
 	translation.tag:DL_Morris_DaggerBet
-	translation.en:That's a really high bet. I don't have enough gold, but I put my dagger then, it's worth more than 100 gold.
+	translation.en:That's a really high bet. I don't have enough gold, but I put my dagger in then, it's worth more than 100 gold.
 	translation.de:Das ist ein ziemlich hoher Einsatz. Ich habe nicht genügend Gold, aber ich setze meinen Dolch dafür. Er ist mehr wert als 100 Gold.
 	translation.ch:Das isch en zimli hoche Isatz. Ich ha nid gnueg Gold, aber ich setz min Dolch. De isch me wert als 100 Gold.
 	[

@@ -491,7 +491,7 @@ npc.id:npc_luiz
 		# translation: 
 		translation.tag:DL_Choice_FoundVelius
 		translation.en:I found this letter from Bob... (show letter)
-		translation.de:Ich habe diesen Brief von Bob gefunde... (Brief zeigen)
+		translation.de:Ich habe diesen Brief von Bob gefunden... (Brief zeigen)
 		translation.ch:Ich ha de Brief vom Bob gfunde... (Brief zeige)
 	]
 	[
@@ -556,7 +556,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_LloydsPlan2
 	translation.en:We need someone who can talk to him and maybe even work for him. If you find out what he's up to, come back and report.
-	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vor hat, komm wieder und berichte uns davon.
+	translation.de:Wir brauchen jemanden, der mit ihm sprechen kann und vielleicht auch für ihn arbeitet. Falls du herausfindest, was er vorhat, komm wieder und berichte uns davon.
 	translation.ch:Mir bruche öpper, wo mit ihm rede ka und vilicht sogar für ihn schafft. Falls du usefindisch, was er vor het, kum wider und verzell uns devo.
 	[
 		# Link node, tag is next tag
@@ -583,7 +583,7 @@ npc.id:npc_luiz
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Luiz_CathedralNecro2
-	translation.en:The problem is, it is a particulary dangerous and headstrong book about summoning creatures from the underworld. 
+	translation.en:The problem is, it is a particularly dangerous and headstrong book about summoning creatures from the underworld. 
 	translation.de:Es handelt sich dabei aber um ein ziemlich gefährliches und eigenwilliges Buch darüber, wie man Kreaturen aus der Unterwelt beschwört.
 	translation.ch:Es handlet sich debyy aber um es zimmlig eigewilligs und gföhrligs Buech drüber, wie me Kreature us dr Unterwält beschwört.
 	[
@@ -761,7 +761,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_YashaStart2
 	translation.en:There's a cursed temple in the Highlands of Admantris. A necromancer called Yaslaw once summoned a powerful demon in there.
-	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Ein Nekromant namens Yaslaw hat dort vor langer Zeit einen mächtigen Dämonen beschworen.
+	translation.de:Es gibt einen verfluchten Tempel im Hochland von Admantris. Ein Nekromant namens Yaslaw hat dort vor langer Zeit einen mächtigen Dämon beschworen.
 	translation.ch:Es git ä verfluechtä Tämpel im Hochland vo Admantris. Ä Nekromant namens Yaslaw het dert vor langer Zyyt ä mächtige Dämon beschwore.
 	[
 		# Link node, tag is next tag
@@ -789,7 +789,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_YashaStart4
 	translation.en:But as far as we know from the old writings, he carried a magical mask with him that granted him great powers.
-	translation.de:Aber so weit wir aus den alten Schriften lesen können, hatte er stets eine magische Maske bei ihm, die ihm grosse Kräfte verliehen hat.
+	translation.de:Aber soweit wir aus den alten Schriften lesen können, hatte er stets eine magische Maske bei ihm, die ihm grosse Kräfte verliehen hat.
 	translation.ch:Aber was me us de alte Schrifte läse könne, isch, dass er immer ä magischi Massge mit sich treit het wo ihm grossi Kräft geh het.
 	[
 		# Link node, tag is next tag
@@ -834,7 +834,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_WhereYasha
 	translation.en:As far as I know, there's a path through a volcano in the Marshlands, to the South of Gandria.
-	translation.de:So weit ich weiss gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
+	translation.de:Soweit ich weiss, gibt es einen Weg durch einen Vulkan in den Marschen, südlich von Gandria.
 	translation.ch:Sowit ich weiss gits ä Wäg dure Vulkan in de Marsche, syydlig vo Gandria.
 	[
 		# Link node, tag is next tag

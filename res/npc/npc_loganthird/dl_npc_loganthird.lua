@@ -77,7 +77,7 @@ loadDialogue = function(DL)
 			DL:addChoice(12, "DL_Choice_KnowMe") -- Do you know me?
 		end
 		if (DL:isConditionFulfilled("npc_loganthird", "velius")) then 
-			DL:addChoice(13, "DL_Choice_WhatMark") -- What does this mark even mean?
+			DL:addChoice(13, "DL_Choice_WhatMark") -- What does this mark mean?
 		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
@@ -170,11 +170,11 @@ loadDialogue = function(DL)
 			DL:createChoiceNode(27)
 			DL:addChoice(28, "DL_Choice_KingShouldKnow") -- A king should know his people.
 			DL:addChoice(29, "DL_Choice_BeautifulOutside") -- It's beautiful outside!
-			DL:addChoice(30, "DL_Choice_NotOutside") -- Yeah, you're right. The life outside is nothing for you.
+			DL:addChoice(30, "DL_Choice_NotOutside") -- Yeah, you're right. The life outside is not something for you.
 			DL:addNode()
 
 
-			DL:createNPCNode(28, -2, "DL_Logan_KingShouldKnow") -- Don't you tell me what a king should.
+			DL:createNPCNode(28, -2, "DL_Logan_KingShouldKnow") -- Don't you tell me what a king should do.
 			DL:addNode()
 
 

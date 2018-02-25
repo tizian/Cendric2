@@ -15,12 +15,12 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_luiz", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Luiz_FirstTalk") -- Syrah was right about sending you here. 
+		DL:createNPCNode(1, 2, "DL_Luiz_FirstTalk") -- Syrah was right to send you here. 
 		DL:addConditionProgress("npc_luiz", "talked")
 		DL:addNode()
 
 
-		DL:createNPCNode(2, 3, "DL_Luiz_FirstTalk2") -- Nothing kept you from following your way - not even using a forbidden spell.
+		DL:createNPCNode(2, 3, "DL_Luiz_FirstTalk2") -- Nothing kept you from following your path - not even using a forbidden spell.
 		DL:addNode()
 
 
@@ -209,7 +209,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("lloyds_plan_necro", "void")) then 
 
-			DL:createNPCNode(24, 25, "DL_Luiz_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He was acting strangely lately, it seems like he's planning something.
+			DL:createNPCNode(24, 25, "DL_Luiz_LloydsPlan") -- You know the leader of the clerics, Lloyd, don't you? He's been acting strangely lately, it seems like he's planning something.
 			DL:addNode()
 
 
@@ -225,7 +225,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(27, 28, "DL_Luiz_CathedralNecro2") -- The problem is, it was a particulary dangerous and headstrong book about summoning creatures from the underworld. 
+			DL:createNPCNode(27, 28, "DL_Luiz_CathedralNecro2") -- The problem is, it is a particularly dangerous and headstrong book about summoning creatures from the underworld. 
 			DL:addNode()
 
 
@@ -233,7 +233,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(29, -2, "DL_Luiz_CathedralNecro4") -- Go and bring that book back to our library. I just hope it's not already too late.
+			DL:createNPCNode(29, -2, "DL_Luiz_CathedralNecro4") -- Bring that book back to our library. I just hope it's not too late...
 			DL:changeQuestState("cathedral_necro", "started")
 			DL:addNode()
 
@@ -241,7 +241,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("cathedral_necro", "started") and DL:isQuestComplete("cathedral_necro")) then 
 
-			DL:createNPCNode(30, 31, "DL_Luiz_FinishedCathedral") -- Good job. I'll put it back into our library where it belongs.
+			DL:createNPCNode(30, 31, "DL_Luiz_FinishedCathedral") -- Good job. I'll put it back in our library where it belongs.
 			DL:removeItem("qe_necrobook", 1)
 			DL:addNode()
 
@@ -322,7 +322,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_luiz", "where_yasha") and DL:isQuestState("yasha_necro", "started")) then 
 
-			DL:createNPCNode(41, -2, "DL_Luiz_WhereYasha") -- As far as I know, there's a way through a volcano in the Marshlands, to the South of Gandria.
+			DL:createNPCNode(41, -2, "DL_Luiz_WhereYasha") -- As far as I know, there's a path through a volcano in the Marshlands, to the South of Gandria.
 			DL:addConditionProgress("npc_luiz", "where_yasha")
 			DL:addNode()
 
@@ -330,7 +330,7 @@ loadDialogue = function(DL)
 
 		if (DL:isQuestState("yasha_necro", "started") and DL:isQuestComplete("yasha_necro")) then 
 
-			DL:createNPCNode(42, 45, "DL_Luiz_YashaComplete") -- And you got his powers too as I can see. I'm really impressed, well done.
+			DL:createNPCNode(42, 45, "DL_Luiz_YashaComplete") -- And you got his powers too, I see. I'm really impressed, well done.
 			DL:removeItem("qe_yashamask", 1)
 			DL:changeQuestState("yasha_necro", "completed")
 			DL:addReputationProgress("necromancer", 10)
@@ -353,7 +353,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(48, -2, "DL_Luiz_FoundVelius2") -- He, abducting mages... I don't know. That doesn't fit him. But you should go into the crypt and find out more.
+			DL:createNPCNode(48, -2, "DL_Luiz_FoundVelius2") -- He, abducting mages... I don't know. That doesn't sound like him. But you should go into the crypt and find out more.
 			DL:addNode()
 
 		end

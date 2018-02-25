@@ -130,7 +130,7 @@ npc.id:npc_morton
 	# translation: 
 	translation.tag:DL_Morton_GuysLikeMe
 	translation.en:Green no-goods. The last one she sent to the crypt never got out again.
-	translation.de:Grünschnäblige Nichtsnutze. Der letzte, den sie hierher geschickt hat, ist nie wieder herausgekommen.
+	translation.de:Grünschnäblige Nichtsnutze. Der letzte, den sie hierhergeschickt hat, ist nie wieder herausgekommen.
 	translation.ch:Grienschnääbligi Nichtsnütz. Dr letscht, wo sie do ane gschickt het, isch nie me usecho.
 	[
 		# Link node, tag is next tag

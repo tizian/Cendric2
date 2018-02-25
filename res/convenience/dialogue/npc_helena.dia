@@ -69,7 +69,7 @@ npc.id:npc_helena
 	# translation: 
 	translation.tag:DL_Helena_TellMe2
 	translation.en:You were in quite a hurry, you just left your luggage here and then rushed out again to fetch something you forgot from the ship... And I never saw you again.
-	translation.de:Du warst ziemlich im Stress, hast nur dein Gepäck hier gelassen und bist dann wieder hinausgestürmt, weil du noch etwas auf dem Schiff vergessen hattest... Und dann bist du nicht mehr aufgetaucht.
+	translation.de:Du warst ziemlich im Stress, hast nur dein Gepäck hiergelassen und bist dann wieder hinausgestürmt, weil du noch etwas auf dem Schiff vergessen hattest... Und dann bist du nicht mehr aufgetaucht.
 	translation.ch:Du bisch zimli im Stress gsi, hesch nur dis Züg rasch da anebracht und bisch den wieder usegrennt welld öppis ufem Schiff vergässe hesch... Und denn bisch nümm uftaucht.
 	[
 		# Link node, tag is next tag
@@ -121,7 +121,7 @@ npc.id:npc_helena
 	# translation: 
 	translation.tag:DL_Helena_Luggage
 	translation.en:Well... To be honest, I didn't reckon that you'd return. So I've sold most of it... But some things are still there.
-	translation.de:Nunja... Um ehrlich zu sein, ich habe wirklich nicht damit gerechnet, dass du wiederkommst. Deshalb habe ich das meiste verkauft. Aber ein paar Sachen sind immer noch da.
+	translation.de:Nun ja... Um ehrlich zu sein, ich habe wirklich nicht damit gerechnet, dass du wiederkommst. Deshalb habe ich das meiste verkauft. Aber ein paar Sachen sind immer noch da.
 	translation.ch:Naja... Zum ehrlich sii hani echt nid demit grechnet das du wider zrugg chunsch. Di meiste Sache hani verchauft... Aber es paar sind na ume.
 	[
 		# Link node, tag is next tag

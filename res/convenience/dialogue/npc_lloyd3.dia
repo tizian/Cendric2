@@ -152,8 +152,8 @@ npc.id:npc_lloyd3
 	# translation: 
 	translation.tag:DL_Lloyd_WhoAbducted4
 	translation.en:But be careful when questioning them - we don't want to cause a stir.
-	translation.de:Aber sei vorsichtig wenn du sie befragst - wir wollen kein grosses Aufsehen erregen.
-	translation.ch:Aber bis vorsichtig wese befragsch - mir wöi kes grosses Gliir mache.
+	translation.de:Aber sei vorsichtig, wenn du sie befragst - wir wollen kein grosses Aufsehen erregen.
+	translation.ch:Aber bis vorsichtig, wese befragsch - mir wöi kes grosses Gliir mache.
 	[
 		# Link node, tag is next tag
 		tag:-2

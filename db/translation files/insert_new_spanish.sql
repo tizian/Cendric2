@@ -48,6 +48,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Waypoint', 'hint_desc','to open the map and teleport to an active waypoint.','um die Karte zu öffnen und zu einem aktiven Wegpunkt zu teleportieren.','zum d''Charte ufmache und zumne aktive Wegpunkt z''teleportiere.','??');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint','Quickslots','Schnellwahl','Schnellwahl','Acceso rápido');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('Quickslots', 'hint_desc','Drag consumable items from the inventory to the quickslots to equip them.','Zieh Essens-Gegenstände aus dem Inventar in die Schnellwahl-Leiste, um sie auszurüsten.','Zieh Essens-Gegeständ usem Inventar id Schnellwahl-Leiste, zum si usrüste.','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('ObserverSpell', 'hint_desc','If you steal something while being watched by Observer-Spells, you will get arrested.','Wenn du etwas stiehlst, während dich ein Beobachter-Zauber sieht, kommst du ins Gefängnis.','Wennd öppis chlausch, während dich en Beobachter-Zauber gseht, chunsch is Gfängnis.','?');
 
 -- quest 
 

@@ -99,8 +99,8 @@ npc.id:npc_lloyd2
 	# translation: 
 	translation.tag:DL_Lloyd_ReadLetter3
 	translation.en:She also wrote that she needs your help again, looking for hints that could help us find out where that beast came from.
-	translation.de:Sie schreibt auch dass sie nochmals deine Hilfe benötigt, beim Suchen von weiteren Hinweisen, wo diese Biest hergekommen ist.
-	translation.ch:Si schribt ou dass si nomou dini Hiuf bruucht, bim Sueche vo wiitere Hiiwisä wo das Viech härcho isch.
+	translation.de:Sie schreibt auch, dass sie nochmals deine Hilfe benötigt, beim Suchen von weiteren Hinweisen, wo diese Biest hergekommen ist.
+	translation.ch:Si schribt ou, dass si nomou dini Hiuf bruucht, bim Sueche vo wiitere Hiiwisä wo das Viech härcho isch.
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -154,8 +154,8 @@ npc.id:npc_lloyd2
 		# translation: 
 		translation.tag:DL_Choice_NothingImportant
 		translation.en:Nothing of interest. I just enjoyed the thunderstorm.
-		translation.de:Nichts interessantes. Ich hatte nur ein wenig Spass mit dem Gewitter.
-		translation.ch:Nüt interessants. Ich ha nur chli Spass gha mitem Gwitter.
+		translation.de:Nichts Interessantes. Ich hatte nur ein wenig Spass mit dem Gewitter.
+		translation.ch:Nüt Interessants. Ich ha nur chli Spass gha mitem Gwitter.
 	]
 	[
 		# Link node, tag is next tag

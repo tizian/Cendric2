@@ -29,7 +29,7 @@ loadDialogue = function(DL)
 
 		DL:createChoiceNode(2)
 		if (not DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")) then 
-			DL:addChoice(4, "DL_Choice_PeacefulTalk") -- Can we have a peaceful talk, demon?
+			DL:addChoice(4, "DL_Choice_PeacefulTalk") -- Can we talk peacefully, demon?
 		end
 		if (DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")) then 
 			DL:addChoice(6, "DL_Choice_PeacefulTalk") -- 
@@ -46,7 +46,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(5, -2, "DL_Yasha_YashaSanctuaryDone2") -- I will answer all of your questions, human.
+			DL:createNPCNode(5, -2, "DL_Yasha_YashaSanctuaryDone2") -- I will answer your questions, human.
 			DL:changeQuestState("yasha_sanctuary", "completed")
 			DL:addNode()
 
@@ -60,7 +60,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(7, -2, "DL_Yasha_PeacefulTalkNot2") -- You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
+			DL:createNPCNode(7, -2, "DL_Yasha_PeacefulTalkNot2") -- You're of the same vile kind as all humans. Before I end your miserable existence, I grant you one question. Choose wisely. 
 			DL:addNode()
 
 		end
@@ -85,7 +85,7 @@ loadDialogue = function(DL)
 			DL:addChoice(10, "DL_Choice_WhatGuarding") -- What are you guarding?
 		end
 		if (not DL:isConditionFulfilled("npc_yasha", "mages")) then 
-			DL:addChoice(11, "DL_Choice_Mages") -- Who did pass through here before me?
+			DL:addChoice(11, "DL_Choice_Mages") -- Who passed through here before me?
 		end
 		if (not DL:isConditionFulfilled("npc_yasha", "who_summoned")) then 
 			DL:addChoice(12, "DL_Choice_WhoSummoned") -- Who summoned you?
@@ -94,7 +94,7 @@ loadDialogue = function(DL)
 			DL:addChoice(15, "DL_Choice_Secret") -- What's that secret?
 		end
 		if (DL:isConditionFulfilled("npc_yasha", "what_guarding") and not DL:isConditionFulfilled("npc_yasha", "key")) then 
-			DL:addChoice(16, "DL_Choice_Key") -- Where's that key you were guarding?
+			DL:addChoice(16, "DL_Choice_Key") -- Where's the key you were guarding?
 		end
 		if (DL:isConditionFulfilled("npc_yasha", "friendly") and not DL:isConditionFulfilled("npc_yasha", "attackable")) then 
 			DL:addChoice(18, "DL_Choice_LetPass") -- Will you let me pass through your temple?
@@ -107,7 +107,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_yasha", "what_guarding")) then 
 
-			DL:createNPCNode(10, -2, "DL_Yasha_WhatGuarding") -- I was guarding a key to a secret that should've never been revealed.
+			DL:createNPCNode(10, -2, "DL_Yasha_WhatGuarding") -- I was guarding a key to a secret that never should've been revealed.
 			DL:addConditionProgress("npc_yasha", "what_guarding")
 			DL:addConditionProgress("npc_yasha", "question")
 			DL:addNode()
@@ -116,7 +116,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_yasha", "mages")) then 
 
-			DL:createNPCNode(11, -2, "DL_Yasha_Mages") -- A filthy thief and his henchmen. They outwit me with some magic not known to me. 
+			DL:createNPCNode(11, -2, "DL_Yasha_Mages") -- A filthy thief and his henchmen. They outwitted me with some magic not known to me. 
 			DL:addConditionProgress("npc_yasha", "mages")
 			DL:addConditionProgress("npc_yasha", "question")
 			DL:addNode()
@@ -188,7 +188,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(22, -2, "DL_Yasha_Reward3") -- Here, take this weapon and this pendant. May they help you reaching your goals.
+		DL:createNPCNode(22, -2, "DL_Yasha_Reward3") -- Here, take this weapon and this pendant. May they help you reach your goals.
 		DL:addItem("eq_lifependant", 1)
 		DL:addItem("we_doublesickle", 1)
 		DL:addConditionProgress("npc_yasha", "reward")
@@ -213,7 +213,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(26, 27, "DL_Yasha_TempleFound") -- It's flame went out. That means it has been used to enter the temple's library. It's too late.
+		DL:createNPCNode(26, 27, "DL_Yasha_TempleFound") -- It's flame has gone out. That means it has been used to enter the temple's library. It's too late.
 		DL:addNode()
 
 

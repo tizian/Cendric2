@@ -9,12 +9,12 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_royalguard_t", "talked")) then 
 
-		DL:createNPCNode(1, 2, "DL_Royalguard_Hey") -- Hey you! How dare you to walk in here without permission!
+		DL:createNPCNode(1, 2, "DL_Royalguard_Hey") -- Hey you! How dare you walk in here without permission!
 		DL:addConditionProgress("npc_royalguard_t", "talked")
 		DL:addNode()
 
 
-		DL:createNPCNode(2, -2, "DL_Royalguard_Hey2") -- I really hope you have a good reason, otherwise I'll have to let you out immediately.
+		DL:createNPCNode(2, -2, "DL_Royalguard_Hey2") -- I really hope you have a good reason, otherwise I'll have to throw you out immediately.
 		DL:addNode()
 
 	end
@@ -66,7 +66,7 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_royalguard_t", "none_business")) then 
 
-			DL:createNPCNode(8, -2, "DL_Royalguard_NoneBusiness") -- Hn. Everyone could tell that. We don't just let everyone to the king. 
+			DL:createNPCNode(8, -2, "DL_Royalguard_NoneBusiness") -- Hm. Everyone could say that. We don't just let anyone to the king. 
 			DL:addConditionProgress("npc_royalguard_t", "none_business")
 			DL:gotoNode(6)
 			DL:addNode()

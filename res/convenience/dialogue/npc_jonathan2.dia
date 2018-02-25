@@ -168,7 +168,7 @@ npc.id:npc_jonathan2
 		condition:not DL:isConditionFulfilled("npc_jonathan2", "describe")
 		# translation: 
 		translation.tag:DL_Choice_Describe
-		translation.en:Can you desribe them?
+		translation.en:Can you describe them?
 		translation.de:Kannst du sie beschreiben?
 		translation.ch:Chasch si beschriibe?
 	]
@@ -330,7 +330,7 @@ npc.id:npc_jonathan2
 	# translation: 
 	translation.tag:DL_Jonathan_Element4
 	translation.en:I'll do my best to keep them from following you. Hurry!
-	translation.de:Ich werde mein bestes geben, um sie davon abzuhalten, dir zu folgen. Beeil dich!
+	translation.de:Ich werde mein Bestes geben, um sie davon abzuhalten, dir zu folgen. Beeil dich!
 	translation.ch:I werd mis besta geh zum si davo abhalta, diar ds'folga. Mach schnell!
 	[
 		# Link node, tag is next tag

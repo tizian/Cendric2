@@ -70,7 +70,10 @@ loadDialogue = function(DL)
 		
 		if (DL:isConditionFulfilled("npc_tristan", "rude")) then
 		
-			DL:createNPCNode(41, -2, "DL_Tristan_RudeReward") -- You're at least good for something. Ivo offered a reward of 30 gold to the person who'd get rid of the thief. But I don't like how you talked to me earlier... I guess 10 is enough.
+			DL:createNPCNode(41, 42, "DL_Tristan_RudeReward") -- You're at least good for something. Ivo offered a reward of 30 gold to the person who'd get rid of the thief.
+			DL:addNode()
+			
+			DL:createNPCNode(42, -2, "DL_Tristan_RudeReward2") -- But I don't like how you talked to me earlier... I guess 10 is enough.
 			DL:addGold(10)
 			DL:addNode()
 			

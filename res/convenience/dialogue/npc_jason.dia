@@ -198,7 +198,7 @@ npc.id:npc_jason
 	trigger:DL:addItem("we_jasonsglaive", 1)
 	# translation: 
 	translation.tag:DL_Jason_GargoyleDust2
-	translation.en:Yeah. But promise is promise. Here, take my old glaive. It's still a good weapon.
+	translation.en:Yeah. But a promise is a promise. Here, take my old glaive. It's still a good weapon.
 	translation.de:Yeah. Aber versprochen ist versprochen. Hier, nimm meine alte Gleve. Es ist immer noch eine gute Waffe.
 	translation.ch:Yeah. Aber versproche esch versproche. Do, nimm mini alt Gleve. Es esch immerno e gueti Waffe.
 	[
@@ -227,8 +227,8 @@ npc.id:npc_jason
 	trigger:DL:changeQuestState("yasha_sword", "started")
 	# translation: 
 	translation.tag:DL_Jason_YashaSword2
-	translation.en:That was a pretty powerful sword. If you can bring me the fiery essence of a very strong demon, I can reignite it for you. Oh and some gold, I need gold.
-	translation.de:Das war ein ziemlich starkes Schwert. Wenn du mir die feurige Essenz eines sehr starken Dämons bringst, kann ich es für dich wieder entzünden. Oh und etwas Gold. Ich brauche Gold.
+	translation.en:That was a pretty powerful sword. If you can bring me the fiery essence of a very strong demon, I can reignite it for you. And some gold, I need gold.
+	translation.de:Das war ein ziemlich starkes Schwert. Wenn du mir die feurige Essenz eines sehr starken Dämons bringst, kann ich es für dich wieder entzünden. Und etwas Gold. Ich brauche Gold.
 	translation.ch:Das esch es zemmli starcks Schwert gsi. Wenn du mir die fürig Essenz vomne sehr starcke Dämon bringsch, chan is dir wieder azünde. Und chli Gold. Ich bruche Gold.
 	[
 		# Link node, tag is next tag

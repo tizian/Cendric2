@@ -14,7 +14,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -2, "DL_Jana_Hello2") -- Come and sit at our fire to warm you up. And why not have a little chat.
+		DL:createNPCNode(5, -2, "DL_Jana_Hello2") -- Come, sit down and warm yourself on our fire. And why not have a little chat.
 		DL:addNode()
 
 	end
@@ -44,19 +44,19 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jana", "who_are_you")) then 
 
-		DL:createNPCNode(6, 7, "DL_Jana_WhoAreYou") -- Jason and I are demon hunters. We make sure that the demons of this valley stay here and don't make trouble.
+		DL:createNPCNode(6, 7, "DL_Jana_WhoAreYou") -- Jason and I are demon hunters. We make sure that the demons of this valley stay here and don't create any problems.
 		DL:addConditionProgress("npc_jana", "who_are_you")
 		DL:addNode()
 
 
-		DL:createNPCNode(7, -2, "DL_Jana_WhoAreYou2") -- We also hunt them for trophies like fur and teeth. They can be used to craft fine armour and the merchants in Gandria will buy them gladly.
+		DL:createNPCNode(7, -2, "DL_Jana_WhoAreYou2") -- We also hunt them for trophies like fur and teeth. They can be used to craft fine armour and the merchants in Gandria will gladly buy them.
 		DL:addNode()
 
 	end
 
 	if (DL:isConditionFulfilled("npc_jana", "who_are_you") and not DL:isConditionFulfilled("npc_jana", "plans")) then 
 
-		DL:createNPCNode(8, 9, "DL_Jana_Plans") -- Pretty well. We found some cat demons and even a gargoyle lately.
+		DL:createNPCNode(8, 9, "DL_Jana_Plans") -- Pretty well. We found some cat demons and even a gargoyle recently.
 		DL:addConditionProgress("npc_jana", "plans")
 		DL:addNode()
 
@@ -72,7 +72,7 @@ loadDialogue = function(DL)
 
 	if (DL:isConditionFulfilled("npc_jana", "who_are_you") and not DL:isConditionFulfilled("npc_jana", "yasha")) then 
 
-		DL:createNPCNode(11, 12, "DL_Jana_Yasha") -- Yes, of course. She's guarding the valley and we wouldn't dare to fight with her. She's sleeping anyway at the moment.
+		DL:createNPCNode(11, 12, "DL_Jana_Yasha") -- Yes, of course. She's guarding the valley. We wouldn't dare to fight her. Anyway, she's sleeping at the moment.
 		DL:addConditionProgress("npc_jana", "yasha")
 		DL:addNode()
 
@@ -89,7 +89,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_yasha", "unfriendly")) then 
 
-			DL:createNPCNode(13, 15, "DL_Jana_KilledYasha") -- (Jana looks shocked) What? This can't be. And if it's true, you shouldn't have. 
+			DL:createNPCNode(13, 15, "DL_Jana_KilledYasha") -- (Jana looks shocked) What? This can't be! And if it's true; you shouldn't have! 
 			DL:addNode()
 
 
@@ -114,7 +114,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(17, -2, "DL_Jana_Mages2") -- We offered them to escort them but their leader was very unfriendly. I don't know whether they made it.
+		DL:createNPCNode(17, -2, "DL_Jana_Mages2") -- We offered to escort them, but their leader was very unfriendly. I don't know whether they made it.
 		DL:addQuestDescription("find_velius", 2)
 		DL:addNode()
 

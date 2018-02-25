@@ -368,9 +368,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost150
-	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
-	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 150 Goldstücke, als Ausgleich für meine Mühen.
-	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 150 Goldstück, zum mini Müe z'kompensiere.
+	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake.
+	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen.
+	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi.
 	[
 		# Link node, tag is next tag
 		tag:23
@@ -381,10 +381,24 @@ npc.id:npc_vincent2
 	tag:23
 	# triggers: 
 	# translation: 
+	translation.tag:DL_Vincent_KeyCost150_2
+	translation.en:It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+	translation.de:Jetzt kostet er dich 150 Goldstücke, als Ausgleich für meine Mühen.
+	translation.ch:Aber jetzt chostät dich das 150 Goldstück, zum mini Müe z'kompensiere.
+	[
+		# Link node, tag is next tag
+		tag:49
+	]
+}
+{1
+	# [49] NPC Node
+	tag:49
+	# triggers: 
+	# translation: 
 	translation.tag:DL_Vincent_Treasure
 	translation.en:I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
-	translation.de:Aber ich will nur, dass du mir einen speziellen blauen Stein aus seiner Truhe holst. Den Rest darfst du behalten.
-	translation.ch:Aber ich wött nur, dass du mir en spezielle blaue Stei us de Truä holsch. De Rest chasch selber phaltä.
+	translation.de:Ich will nur, dass du mir einen speziellen blauen Stein aus seiner Truhe holst. Den Rest darfst du behalten.
+	translation.ch:Ich wött nur, dass du mir en spezielle blaue Stei us de Truä holsch. De Rest chasch selber phaltä.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -410,9 +424,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost100
-	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
-	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen. Jetzt kostet er dich 100 Goldstücke, als Ausgleich für meine Mühen.
-	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi. Aber jetzt chostät dich das 100 Goldstück, zum mini Müe zkompensiere.
+	translation.en:I had to steal the key from him. It wasn't easy, as he was fully awake.
+	translation.de:Ich musste ihm den Schlüssel entwenden, während er wach war - hättest du meinen ersten Auftrag ausgeführt, wäre das kein Problem gewesen.
+	translation.ch:Ich ha ihm de Schlüssel chluppä möse, wo er wach gsi isch. Hetsch min erste Uftrag erfüllt, wer das kei Problem gsi.
 	[
 		# Link node, tag is next tag
 		tag:25
@@ -423,7 +437,21 @@ npc.id:npc_vincent2
 	tag:25
 	# triggers: 
 	# translation: 
-	translation.tag:DL_Vincent_Treasure
+	translation.tag:DL_Vincent_KeyCost100_2
+	translation.en:It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+	translation.de:Jetzt kostet er dich 100 Goldstücke, als Ausgleich für meine Mühen.
+	translation.ch:Aber jetzt chostät dich das 100 Goldstück, zum mini Müe zkompensiere.
+	[
+		# Link node, tag is next tag
+		tag:50
+	]
+}
+{1
+	# [50] NPC Node
+	tag:50
+	# triggers: 
+	# translation: 
+	translation.tag:DL_NPC_50
 	translation.en:
 	translation.de:
 	translation.ch:
@@ -494,9 +522,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_KeyCost0
-	translation.en:You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was mere child's play.
-	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast? Ich habe etwas Schlafpulver reingemixt... ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
-	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä häsch? Ich han es Schlofpulver dri tuä. Ihm de Schlüssel z'chluppä isch bubieifach gsi.
+	translation.en:You remember the stuff I mixed into the schnapps you gave him?
+	translation.de:Erinnerst du dich an den Schnaps, den du ihm gegeben hast?
+	translation.ch:Erinnerisch dich an Schnaps, wod ihm gä häsch?
 	[
 		# Link node, tag is next tag
 		tag:29
@@ -505,6 +533,20 @@ npc.id:npc_vincent2
 {1
 	# [29] NPC Node
 	tag:29
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_KeyCost0_2
+	translation.en:It was a sleeping powder. Getting the key from him was mere child's play.
+	translation.de:Ich habe etwas Schlafpulver reingemixt. Ihm den Schlüssel zu entwenden war das reinste Kinderspiel.
+	translation.ch:Ich han es Schlofpulver dri tuä. Ihm de Schlüssel z'chluppä isch bubieifach gsi.
+	[
+		# Link node, tag is next tag
+		tag:52
+	]
+}
+{1
+	# [52] NPC Node
+	tag:52
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_Treasure
@@ -554,8 +596,8 @@ npc.id:npc_vincent2
 	# translation: 
 	translation.tag:DL_Vincent_NotEnoughGold
 	translation.en:Come back when you have enough gold.
-	translation.de:Komm wieder wenn du genug Gold hast.
-	translation.ch:Chum wider wänd gnueg Gold häsch.
+	translation.de:Komm wieder, wenn du genug Gold hast.
+	translation.ch:Chum wider, wänd gnueg Gold häsch.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -767,8 +809,8 @@ npc.id:npc_vincent2
 	# translation: 
 	translation.tag:DL_Vincent_OpenedTheChest
 	translation.en:Hehe, I knew you'd succeed. But I don't want that stone anyway, you can keep it as your reward.
-	translation.de:Hehe, ich wusste dass du es schaffen würdest. Aber ich will diesen Stein gar nicht, du kannst ihn behalten - als deine Belohnung.
-	translation.ch:Hehe, ich ha gwüsst dases schaffsch. Aber ich wött de Stei gar nöd... Chaschän phalte - als dini Belohnig.
+	translation.de:Hehe, ich wusste, dass du es schaffen würdest. Aber ich will diesen Stein gar nicht, du kannst ihn behalten - als deine Belohnung.
+	translation.ch:Hehe, ich ha gwüsst, dases schaffsch. Aber ich wött de Stei gar nöd... Chaschän phalte - als dini Belohnig.
 	[
 		# Link node, tag is next tag
 		tag:38
@@ -782,7 +824,7 @@ npc.id:npc_vincent2
 	trigger:DL:addReputationProgress("thief", 5)
 	# translation: 
 	translation.tag:DL_Vincent_StealingFitsYou
-	translation.en:Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
+	translation.en:Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuables.
 	translation.de:Es scheint dir ja nicht viel auszumachen, die Habseligkeiten anderer Leute zu nehmen. Ich könnte dir beibringen, wie du an noch wertvollere Dinge kommen kannst.
 	translation.ch:Es schiint dir jo nöd viel uszmache, d'Habseligkeite vo anderä Lüt znä. Ich chönt dir bibringe wied no a wärtvolleri Sache cho chasch.
 	[
@@ -871,9 +913,9 @@ npc.id:npc_vincent2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest2
-	translation.en:A very useful ability, isn't it? The only problem is, she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
-	translation.de:Eine äusserst nützliche Fähligkeit, nicht wahr. Das einzige Problem ist, dass sie uns dieses Wissen vorenthalten will. Sie lässt uns also keine andere Wahl, wir müssen dieses Rezept ohne ihre Einwilligung nehmen. 
-	translation.ch:E zimlich nützlichi Fähigkeit, gäll. S einzig Problem isch dass si üs umsverräcke nöd sege wött wies goht. Also blibt üs kei anderi Wahl als das Rezept halt eifach so z'nä.
+	translation.en:A very useful ability, isn't it? The only problem is, she won't tell us how it works.
+	translation.de:Eine äusserst nützliche Fähigkeit, nicht wahr. Das einzige Problem ist, dass sie uns dieses Wissen vorenthalten will.
+	translation.ch:E zimlich nützlichi Fähigkeit, gäll. S einzig Problem isch dass si üs umsverräcke nöd sege wött wies goht.
 	[
 		# Link node, tag is next tag
 		tag:44
@@ -883,12 +925,40 @@ npc.id:npc_vincent2
 	# [44] NPC Node
 	tag:44
 	# triggers: 
-	trigger:DL:changeQuestState("invis_recipe", "started")
 	# translation: 
 	translation.tag:DL_Vincent_SecondQuest3
-	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us. If you manage to do that, you might get to know what "us" really means.
-	translation.de:Es muss einen Weg geben, in ihren Keller zu kommen - wenn man eine Abkürzung über die Kanalisation nimmt. Finde diesen Weg und bring uns dieses Rezept. Wenn dir das gelingt, werde ich dir vielleicht erzählen, wer denn "uns" überhaupt ist.
-	translation.ch:Es muä en Weg gä, in ihren Chäller z'cho, wenmä ä Abchürzig überd Kanalisation nimmt. Find de Wäg und bring üs das Rezept. Wänn du das schaffsch, den chani dir vilicht verzellä, wär "üs" überhaupt isch.
+	translation.en:She leaves us no choice but to abstract the recipe from her.
+	translation.de:Sie lässt uns also keine andere Wahl, wir müssen dieses Rezept ohne ihre Einwilligung nehmen. 
+	translation.ch:Also blibt üs kei anderi Wahl als das Rezept halt eifach so z'nä.
+	[
+		# Link node, tag is next tag
+		tag:51
+	]
+}
+{1
+	# [51] NPC Node
+	tag:51
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_SecondQuest4
+	translation.en:There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us.
+	translation.de:Es muss einen Weg geben, in ihren Keller zu kommen - wenn man eine Abkürzung über die Kanalisation nimmt. Finde diesen Weg und bring uns dieses Rezept.
+	translation.ch:Es muä en Weg gä, in ihren Chäller z'cho, wenmä ä Abchürzig überd Kanalisation nimmt. Find de Wäg und bring üs das Rezept.
+	[
+		# Link node, tag is next tag
+		tag:53
+	]
+}
+{1
+	# [53] NPC Node
+	tag:53
+	# triggers: 
+	trigger:DL:changeQuestState("invis_recipe", "started")
+	# translation: 
+	translation.tag:DL_Vincent_SecondQuest5
+	translation.en:If you manage to do that, you might get to know what "us" really means.
+	translation.de:Wenn dir das gelingt, werde ich dir vielleicht erzählen, wer denn "uns" überhaupt ist.
+	translation.ch:Wänn du das schaffsch, den chani dir vilicht verzellä, wär "üs" überhaupt isch.
 	[
 		# Link node, tag is next tag
 		tag:-2

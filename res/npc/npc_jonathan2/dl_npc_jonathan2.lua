@@ -66,7 +66,7 @@ loadDialogue = function(DL)
 			DL:addChoice(10, "DL_Choice_WhyAfterMe") -- Why would they be after me?
 		end
 		if (not DL:isConditionFulfilled("npc_jonathan2", "describe")) then 
-			DL:addChoice(11, "DL_Choice_Describe") -- Can you desribe them?
+			DL:addChoice(11, "DL_Choice_Describe") -- Can you describe them?
 		end
 		if (not DL:isConditionFulfilled("npc_jonathan2", "why_map")) then 
 			DL:addChoice(13, "DL_Choice_WhyMap") -- Why did they steal the map?

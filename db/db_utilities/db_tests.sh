@@ -42,9 +42,9 @@ echo '#       DB TEST 5       #'
 echo '#     Translations      #'
 echo '#########################'
 echo
-echo 'The following items don''t have translations or translations which are empty, ? or ...:'
+echo 'The following dialogue texts are too long'
 echo 
-./../SQLiteShell.exe ../game_data.db '.read ../db_tests/DT_item_translations.sql'
+./../SQLiteShell.exe ../game_data.db '.read ../db_tests/DT_max_npc_text_length.sql'
 echo 
 echo '#########################'
 echo '#       DB TEST 5       #'

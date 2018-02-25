@@ -69,7 +69,7 @@ npc.id:npc_zephyra
 		condition:DL:isConditionFulfilled("npc_zephyra", "yasha") and not DL:isConditionFulfilled("npc_zephyra", "who_yasha")
 		# translation: 
 		translation.tag:DL_Choice_WhoYasha
-		translation.en:Tell me more about that "Yasha".
+		translation.en:Tell me more about "Yasha".
 		translation.de:Erzähl mir mehr von dieser "Yasha".
 		translation.ch:Verzell mer me vo dere "Yasha".
 	]
@@ -79,7 +79,7 @@ npc.id:npc_zephyra
 		condition:DL:isConditionFulfilled("npc_zephyra", "what_matter") and not DL:isConditionFulfilled("npc_zephyra", "who_droves")
 		# translation: 
 		translation.tag:DL_Choice_WhoDroves
-		translation.en:Who did pass through here?
+		translation.en:Who passed through here?
 		translation.de:Wer ist denn hier durchgekommen?
 		translation.ch:Wer isch denn da durecho?
 	]
@@ -89,7 +89,7 @@ npc.id:npc_zephyra
 		condition:DL:isConditionFulfilled("npc_zephyra", "who_droves") and not DL:isConditionFulfilled("npc_zephyra", "mages")
 		# translation: 
 		translation.tag:DL_Choice_WhoMages
-		translation.en:How did those mages look like?
+		translation.en:What did those mages look like?
 		translation.de:Wie haben diese Magier ausgesehen?
 		translation.ch:Wie hend die Magier usgse?
 	]
@@ -148,7 +148,7 @@ npc.id:npc_zephyra
 	# translation: 
 	translation.tag:DL_Zephyra_WhoAreYou
 	translation.en:I'm Zephrya, hermit and shaman of Yasha.
-	translation.de:Ich bin Zephyra, Einsiedlerin und Yashas Schamanin. 
+	translation.de:Ich bin Zephyra, Einsiedlerin und Yasha's Schamanin. 
 	translation.ch:Ich bin d'Zephyra, Einsiedlerin und vo der Yasha ihri Schamanin.
 	[
 		# Link node, tag is next tag
@@ -198,7 +198,7 @@ npc.id:npc_zephyra
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Zephyra_DemonSlayer
-	translation.en:No, I would never hurt one. They're protecting this valley, you know.
+	translation.en:No, I would never hurt one. They protect this valley, you know.
 	translation.de:Nein, ich würde nie einem etwas zu leide tun. Sie beschützen unser Tal, weisst du.
 	translation.ch:Nei, ich würdi nie einem eppis atüe. Schi beschützend das Tal, weisch.
 	[
@@ -242,7 +242,7 @@ npc.id:npc_zephyra
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Zephyra_WhoYasha2
-	translation.en:She's been sleeping for many years, but those yokels did wake her up. I hope they're paying right now for their foolishness.
+	translation.en:She's been sleeping for many years, but those yokels did wake her up. I hope they're paying dearly for their foolishness.
 	translation.de:Sie hat viele Jahre lang geschlafen, aber diese Tölpel haben sie aufgeweckt. Ich hoffe, sie büssen gerade für ihre Dummheit.
 	translation.ch:Schi het vieli Jahr lang gschlafe, aber die Tubla heind schi gweckt. Ich hoffe schi büessend grad fer ihresch Dummheit.
 	[
@@ -257,8 +257,8 @@ npc.id:npc_zephyra
 	trigger:DL:addConditionProgress("npc_zephyra", "who_droves")
 	# translation: 
 	translation.tag:DL_Zephyra_WhoDroves
-	translation.en:A group of foolish mages. I wanted to keep their from heading straight for disaster, but they wouldn't listen.
-	translation.de:Eine Gruppe törichter Magier. Ich wollte sie davon abbringen, direkt ins Verderben zu rennen, aber sie wollten nicht hören.
+	translation.en:A group of foolish mages. I tried to keep them from heading straight for disaster, but they wouldn't listen.
+	translation.de:Eine Gruppe törichter Magier. Ich habe versucht, sie davon abbringen, direkt ins Verderben zu rennen, aber sie wollten nicht hören.
 	translation.ch:En Gruppe vo futzdumme Magier. Ich hä schi dervo wele abhalte, diräkt ins Verderbe z'renne, aber schi heind nid züeg'loset.
 	[
 		# Link node, tag is next tag
@@ -271,7 +271,7 @@ npc.id:npc_zephyra
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Zephyra_WhoDroves2
-	translation.en:It's always those "adventurers", looking for big treasure, without any respect. Unbelievable.
+	translation.en:It's always those "adventurers", looking for big treasure. They don't show any respect at all. Unbelievable!
 	translation.de:Es sind immer diese "Abenteurer", die nach den grossen Schätzen suchen, ohne jedweden Respekt. Unglaublich.
 	translation.ch:Es sind immer die "Obentüürer", wo nach de grosse Schätz süeched, vellig respektlos. Ungleublich.
 	[
@@ -286,7 +286,7 @@ npc.id:npc_zephyra
 	trigger:DL:addConditionProgress("npc_zephyra", "mages")
 	# translation: 
 	translation.tag:DL_Zephyra_WhoMages
-	translation.en:Hm. There was one women, fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
+	translation.en:Hm. There was one woman; fair hair, white dress. One of them was a boy, about your age, with red shaggy hair.
 	translation.de:Hm. Eine davon war eine Frau, helles Haar, ein weisses Kleid. Da war auch ein Junge, etwa so alt wie du, mit roten, verstrubbelten Haaren.
 	translation.ch:Hm. Eini vo denne isch en Freu gsi, hälli Haar, es wisses Chleid. Es het eu en Büeb derbi kä, appa so alt wie dü, roti, strubbeligi Haar.
 	[
@@ -315,7 +315,7 @@ npc.id:npc_zephyra
 	trigger:DL:addQuestDescription("find_velius", 1)
 	# translation: 
 	translation.tag:DL_Zephyra_WhoMages3
-	translation.en:Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't react. But they're probably all dead now anyway.
+	translation.en:Tall, grey hair, piercing eyes. He was the only one that talked to me. The other three wouldn't respond. They're probably all dead now...
 	translation.de:Gross, graues Haar, durchdringender Blick. Er war der einzige, der mit mir gesprochen hat, die anderen drei haben nicht reagiert. Aber sie sind nun alle sowieso tot. 
 	translation.ch:Gross, graui Haar, en durchdringende Blick. Är isch der einzig gsi wo mit mier gredet het, di andere heind nid reagiert. Aber schi sind vermüetlich eh all tot jetze.
 	[
@@ -331,7 +331,7 @@ npc.id:npc_zephyra
 	trigger:DL:addItem("fo_ultimatehealingpotion", 1)
 	# translation: 
 	translation.tag:DL_Zephyra_YashaDone
-	translation.en:(Zephyra nods) Great. Thank you very much for your help. Take this potion with you, may it help you on your ways.
+	translation.en:(Zephyra nods) Great. Thank you very much for your help. Take this potion with you, may it help you on your journeys.
 	translation.de:(Zephyra nickt) Grossartig. Vielen Dank für deine Hilfe. Hier, nimm diesen Trank mit dir, möge er dir auf weiteren Wegen helfen.
 	translation.ch:(D'Zephyra nickt) Grossartig. Danke vielmal fer dini Hilf. Da, nimm der Trank mit dier. Är sell dier uf wiitere Wäge hälfe.
 	[
@@ -346,7 +346,7 @@ npc.id:npc_zephyra
 	trigger:DL:addConditionProgress("npc_zephyra", "gotta_go")
 	# translation: 
 	translation.tag:DL_Zephyra_GottaGo
-	translation.en:I see, I can't keep you from going in as well. But, just promise me one thing:
+	translation.en:I see, I can't keep you from going in as well. Just promise me one thing:
 	translation.de:Ich sehe schon, ich kann dich nicht davon abhalten, hineinzugehen. Aber, versprich mir eins:
 	translation.ch:Ich gse, ich cha dich nid dervo abhalte, iezga. Aber, versprich mier eifach eis:
 	[
@@ -397,7 +397,7 @@ npc.id:npc_zephyra
 	trigger:DL:changeQuestState("yasha_sanctuary", "started")
 	# translation: 
 	translation.tag:DL_Zephyra_YashaOK
-	translation.en:I was hoping you'd say this. Be careful, and the demon may spare your life.
+	translation.en:I was hoping you'd say that. Be careful, and the demon may spare your life.
 	translation.de:Ich habe gehofft, du würdest das sagen. Sei vorsichtig, und der Dämon könnte dein Leben verschonen.
 	translation.ch:Ich ha ghofft, dass das säge würdisch. Si vorsichtig und der Dämon chenti dis Läbe verschone.
 	[
@@ -411,7 +411,7 @@ npc.id:npc_zephyra
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Zephyra_YashaNOK
-	translation.en:I hope the demon will rip your soul apart.
+	translation.en:I hope the demon will rip your soul apart!
 	translation.de:Ich hoffe der Dämon wird deine Seele zerreissen.
 	translation.ch:Ich hoffe der Dämon wird dini Seel verrisse.
 	[

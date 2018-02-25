@@ -21,7 +21,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Sack
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item', 'Sack','Sack','Sack');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item_desc', 'Syrah''s solution for my blonde hair.','Syrah''s Lösung für mein blondes Haar.','De Syrah ihri Lösig für mini blonde Haar.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sack', 'item_desc', 'Syrah''s solution for my blonde hair.','Syrahs Lösung für mein blondes Haar.','De Syrah ihri Lösig für mini blonde Haar.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('eq_sack', 'eq_head', 550, 700, 5);
 INSERT INTO item_attribute (item_id, dmg_physical, res_light, res_physical, res_ice, critical) values ('eq_sack', -5, 100, 5, 10, -5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sack', 'res/texture/equipment/head/spritesheet_head_sack.png', 'res/texture/equipment/head/spritesheet_map_head_sack.png');
@@ -37,7 +37,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Lava Crown
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item', 'Lava Crown','Lavakrone','Lava Chrone');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item_desc', 'Keeping cool is required when wearing this hot headpiece.','Man muss einen kühlen Kopf bewahren wenn man dieses heisse Kopfstück trägt.','Me mun en chüele Chopf bewahre wenme das heisse Chopfstück treit.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_lavahead', 'item_desc', 'Keeping cool is required when wearing this hot headpiece.','Man muss einen kühlen Kopf bewahren, wenn man dieses heisse Kopfstück trägt.','Me mun en chüele Chopf bewahre, wenme das heisse Chopfstück treit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_lavahead', 'eq_head', 700, 50, 105, 2);
 INSERT INTO item_attribute (item_id, res_fire, res_ice, max_health, res_physical, dmg_fire) values ('eq_lavahead', 100, -50, 20, 20, 3);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_lavahead', 'res/texture/equipment/head/spritesheet_head_lavahead.png', 'res/texture/equipment/head/spritesheet_map_head_lavahead.png');
@@ -111,7 +111,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path, frames_jump
 
 -- Blue Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item', 'Blue Wizardhat','Blauer Spitzhut','Blaue Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item', 'Blue Wizard Hat','Blauer Spitzhut','Blaue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatice', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_wizardhatice', 'eq_head', 500, 100, 50, 1);
 INSERT INTO item_attribute (item_id, dmg_ice, max_health, res_physical, res_ice) values ('eq_wizardhatice', 4, 5, 10, 15);
@@ -121,7 +121,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Red Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item', 'Red Wizardhat','Roter Spitzhut','Rote Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item', 'Red Wizard Hat','Roter Spitzhut','Rote Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatfire', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_wizardhatfire', 'eq_head', 500, 150, 50, 1);
 INSERT INTO item_attribute (item_id, res_fire, max_health, res_physical, dmg_fire) values ('eq_wizardhatfire', 15, 5, 10, 4);
@@ -131,7 +131,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- White Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item', 'White Wizardhat','Weisser Spitzhut','Wiisse Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item', 'White Wizard Hat','Weisser Spitzhut','Wiisse Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatlight', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_wizardhatlight', 'eq_head', 500, 200, 50, 1);
 INSERT INTO item_attribute (item_id, dmg_light, res_light, max_health, res_physical) values ('eq_wizardhatlight', 4, 15, 5, 10);
@@ -141,7 +141,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Grey Wizard Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item', 'Grey Wizardhat','Grauer Spitzhut','Graue Magierhuet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item', 'Grey Wizard Hat','Grauer Spitzhut','Graue Magierhuet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_wizardhatshadow', 'item_desc', 'A perfect fit for a mage.','Perfekt für einen Magier.','Perfekt für en Magier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_wizardhatshadow', 'eq_head', 500, 250, 190, 1);
 INSERT INTO item_attribute (item_id, res_shadow, max_health, res_physical, dmg_shadow) values ('eq_wizardhatshadow', 15, 5, 10, 4);
@@ -169,7 +169,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Cendric's Hat
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_betahead', 'item', 'Cendric''s Hat','Cendric''s Hut','Em Cendric sin Huet');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_betahead', 'item', 'Cendric''s Hat','Cendrics Hut','Em Cendric sin Huet');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_betahead', 'item_desc', 'Thanks!','Danke!','Merci!');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_betahead', 'eq_head', 0, 700, 60, 2);
 INSERT INTO item_attribute (item_id, res_physical, res_ice, res_shadow, res_fire, res_light, max_health) values ('eq_betahead', 10, 10, 10, 10, 10, 5);
@@ -259,9 +259,9 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Shadow Cloak
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_shadowcloak', 'item', 'Shadow Cloak','Schattenumhang','Schatteumhang');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_shadowcloak', 'item_desc', 'A pliant piece of cloth.','Ein geschmeidiges Stück Stoff.','Es gschmeidigs Stück Stoff.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_shadowcloak', 'item_desc', 'Flowing shadows let you merge with the darkness.','Fliessende Schatten lassen dich mit der Dunkelheit eins werden.','Flüssendi Schatte lönd dich eis werde mit de Dunkelheit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_shadowcloak', 'eq_back', 50, 200, 100, 3);
-INSERT INTO item_attribute (item_id, dmg_shadow, res_light, haste) values ('eq_shadowcloak', 10, 50, 15);
+INSERT INTO item_attribute (item_id, dmg_shadow, dmg_light, res_light, haste) values ('eq_shadowcloak', 15, -5, 50, 15);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_shadowcloak', '', 'res/texture/equipment/back/spritesheet_map_back_shadowcloak.png');
 INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additive_blend_mode, texture_path, spawner_radius, spawner_offset_x, spawner_offset_y, size_start_min, size_start_max, size_end_min, size_end_max, color_start_min_r, color_start_min_g, color_start_min_b, color_start_min_a, color_start_max_r, color_start_max_g, color_start_max_b, color_start_max_a, color_end_min_r, color_end_min_g, color_end_min_b, color_end_min_a, color_end_max_r, color_end_max_g, color_end_max_b, color_end_max_a, goal_offset_x, goal_offset_y, goal_radius, speed_min, speed_max, time_min, time_max, attract_fraction, is_climb_hidden) values ('eq_shadowcloak', 60, 50, 0, 'res/texture/particles/cloud.png', 3, -7, 45, 
 5, 6, 15, 20,
@@ -412,7 +412,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 
 -- Divine T2 Body
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet2', 'item', 'Robes of the Order','Roben des Orden','Ordens-Robe');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet2', 'item', 'Robes of the Order','Roben des Ordens','Ordens-Robe');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_divinet2', 'item_desc', 'Worn by the priests of the order.','Wird von den Priestern des Ordens getragen.','Wird vode Priester vom Orde treit.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_body_divinet2', 'eq_body', 400, 600, 150, 2);
 INSERT INTO item_attribute (item_id, res_light, dmg_fire, dmg_light, heal, res_shadow, res_physical, critical, haste, max_health) values ('eq_body_divinet2', 10, 4, 4, 2, 10, 12, 4, 8, 20);
@@ -462,7 +462,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Twilight T2 Back
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt2', 'item', 'Cloak of the Marauder','Umhang des Plünderers','Plünderer-Umhang');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt2', 'item_desc', 'Mages wearing this kind of cloak are usually up to no good.','Magier, die diese Art von Umhang tragen sind haben meistens nichts gutes vor.','Magier, wo die Art vo Umhang träged, hend meistens nüt liebs im Sinn.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_back_twilightt2', 'item_desc', 'Mages wearing this kind of cloak are usually up to no good.','Magier, die diese Art von Umhang tragen sind haben meistens nichts Gutes vor.','Magier, wo die Art vo Umhang träged, hend meistens nüt liebs im Sinn.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_back_twilightt2', 'eq_back', 50, 600, 100, 2);
 INSERT INTO item_attribute (item_id, dmg_shadow, res_light, dmg_physical, res_shadow, res_physical, critical, haste, max_health) values ('eq_back_twilightt2', 2, 15, 2, 10, 3, 4, 6, 8);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_back_twilightt2', 'res/texture/equipment/back/spritesheet_back_twilightt2.png', 'res/texture/equipment/back/spritesheet_map_back_twilightt2.png');
@@ -478,7 +478,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Twilight T1 Body
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt1', 'item', 'Prowler Vest','Weste des Herumtreibers','Streuner-Weste');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt1', 'item_desc', 'A very light and confortable armour.','Eine sehr leichte und bequeme Rüstung.','E sehr liechti und bequemi Rüschtig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_twilightt1', 'item_desc', 'A very light and comfortable armour.','Eine sehr leichte und bequeme Rüstung.','E sehr liechti und bequemi Rüschtig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_body_twilightt1', 'eq_body', 200, 600, 75, 1);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, res_shadow, res_physical, critical, haste, max_health) values ('eq_body_twilightt1', 2, 2, 10, 10, 2, 5, 9);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_twilightt1', 'res/texture/equipment/body/spritesheet_body_twilightt1.png', 'res/texture/equipment/body/spritesheet_map_body_twilightt1.png');
@@ -502,7 +502,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Crown
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_crown', 'item', 'Crown','Krone','Chrone');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_crown', 'item_desc', 'Golden and shiny.','Golden und glänzig.','Goldig und glänzig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_crown', 'item_desc', 'Golden and shiny.','Golden und glänzend.','Goldig und glänzig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_crown', 'eq_head', 150, 200, 200, 2);
 INSERT INTO item_attribute (item_id, heal, res_shadow, res_physical, critical, haste, max_health) values ('eq_crown', 2, 30, 30, 10, 10, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_crown', 'res/texture/equipment/head/spritesheet_head_crown.png', 'res/texture/equipment/head/spritesheet_map_head_crown.png');
@@ -593,7 +593,7 @@ INSERT INTO item_attribute (item_id, dmg_light, heal, res_shadow, max_health) va
 -- Ring of the Sunblade
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item', 'Ring of the Sunblade','Ring der Sonnenklinge','Sunneklingering');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item_desc', 'Its spikes look terrifying.','Seine Stacheln sehen füchterlich aus.','Sini Stachle gsehnd fürchterlich us.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sunring', 'item_desc', 'Its spikes look terrifying.','Seine Stacheln sehen fürchterlich aus.','Sini Stachle gsehnd fürchterlich us.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_sunring', 'eq_ring', 750, 100, 70, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_light, critical, haste, max_health) values ('eq_sunring', 2, 2, 3, 10, 6);
 
@@ -742,7 +742,7 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 -- Sparkling Orange Ring
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_orange', 'item', 'Sparkling Orange Ring','Funkelnder Oranger Ring','Funkelnde Orange Ring');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_orange', 'item_desc', 'The orange stone reinforces the physical strenght of its wearer.','Der blaue Stein verstärkt die physische Stärke seines Trägers.','De blau Stei verstärcht di physisch Stärchi vo sim Träger.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_sparkling_orange', 'item_desc', 'The orange stone reinforces the physical strength of its wearer.','Der blaue Stein verstärkt die physische Stärke seines Trägers.','De blau Stei verstärcht di physisch Stärchi vo sim Träger.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_sparkling_orange', 'eq_ring', 800, 450, 200, 3);
 INSERT INTO item_attribute (item_id, dmg_physical, res_physical) values ('eq_sparkling_orange', 5, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_sparkling_orange', '', '');

@@ -297,7 +297,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_QuestionableMethod3
 	translation.en:But you'll need not only a key to go there...
-	translation.de:Aber du brauchst nicht nur einen Schlüssel, um dorthinzukommen...
+	translation.de:Aber du brauchst nicht nur einen Schlüssel, um dort hinzukommen...
 	translation.ch:Aber du bruuchsch nid nur en Schlüssel, zum det anecho...
 	[
 		# Link node, tag is next tag
@@ -586,7 +586,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_WhereYourPart
 	translation.en:Oh. I had to climb the highest mountains, dive into the deepest sea... cross lava pits and fight dangerous beasts...
-	translation.de:Oh. Ich musst die höhesten Berge erklimmen, in das tiefste Meer tauchen... musste mich durch Lava-Gruben schlagen und fürchterliche Biester besiegen.
+	translation.de:Oh. Ich musste die höchsten Berge erklimmen, in das tiefste Meer tauchen... musste mich durch Lava-Gruben schlagen und fürchterliche Biester besiegen.
 	translation.ch:Oh. Ich ha di höchste Berge möse erklimme, i di tüfste See tauche... ha mi möse dur Lava-Gruebe kämpfe und schrecklichi Viecher besiege.
 	[
 		# Link node, tag is next tag
@@ -839,7 +839,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_AntiMagic
 	translation.en:Oh, you're so pathetic. I really have to explain everything.
-	translation.de:Oh, du bist so erbärmich. Dir muss man wirklich alles erklären.
+	translation.de:Oh, du bist so erbärmlich. Dir muss man wirklich alles erklären.
 	translation.ch:Oh, du bisch so erbärmlich. Dir mume würkli alles erkläre.
 	[
 		# Link node, tag is next tag
@@ -998,7 +998,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_GotSecondKey3
 	translation.en:Go back to Os and try. But don't come back crying if you fail.
-	translation.de:Geh wieder nach Os und versuchs. Aber komm nicht weinend zurück wenn du scheiterst.
+	translation.de:Geh wieder nach Os und versuch's. Aber komm nicht weinend zurück, wenn du scheiterst.
 	translation.ch:Gang wieder nach Os und probiers. Aber chum nid brüelend zrugg wend failsch.
 	[
 		# Link node, tag is next tag
@@ -1326,7 +1326,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_GotFourthKey2
 	translation.en:Here you go. I don't expect you to come back.
-	translation.de:Hier, nimm. Ich erwarte nicht, dass du wieder kommst.
+	translation.de:Hier, nimm. Ich erwarte nicht, dass du wiederkommst.
 	translation.ch:Do, nimm. Ich erwart aber nid, dassd wieder chunsch.
 	[
 		# Link node, tag is next tag
@@ -1438,7 +1438,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_YouMustKnow2
 	translation.en:Doesn't matter! Show me!
-	translation.de:Ist ja auch egal! Zeigs mir!
+	translation.de:Ist ja auch egal! Zeig's mir!
 	translation.ch:Isch ja au egal! Zeigs mer!
 	[
 		# Link node, tag is next tag
@@ -1452,7 +1452,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_YourGranda
 	translation.en:Did he? Show me!
-	translation.de:Achja? Zeigs mir!
+	translation.de:Achja? Zeig's mir!
 	translation.ch:Ahjo? Zeigs mer!
 	[
 		# Link node, tag is next tag
@@ -1466,7 +1466,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_NothingFound
 	translation.en:No! That can't be true! You must have found something! Show me!
-	translation.de:Nein! Das kann nicht wahr sein! Du musst etwas gefunden haben! Zeigs mir!
+	translation.de:Nein! Das kann nicht wahr sein! Du musst etwas gefunden haben! Zeig's mir!
 	translation.ch:Nei! Das cha nid sii! Du hesch sicher öppis gfunde! Zeigs mer!
 	[
 		# Link node, tag is next tag
@@ -1513,7 +1513,7 @@ npc.id:npc_etoz
 	# translation: 
 	translation.tag:DL_Etoz_ShowLegacy
 	translation.en:Whaaat? That's mine, give it to me!
-	translation.de:Waaas? Das gehört mir, gibs mir!
+	translation.de:Waaas? Das gehört mir, gib's mir!
 	translation.ch:Waaas? Das ghört mir, gibs mir!
 	[
 		# Link node, tag is next tag

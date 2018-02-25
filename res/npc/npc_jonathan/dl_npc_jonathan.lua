@@ -119,8 +119,12 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_jonathan", "elementalist") and not DL:isConditionFulfilled("npc_jonathan", "affinity")) then 
 
-			DL:createNPCNode(14, -2, "DL_Jonathan_Affinity") -- Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn. Us elementalists are lucky - we are able to understand the whole spectrum of magic.
+			DL:createNPCNode(14, 75, "DL_Jonathan_Affinity") -- Each mage is born with a certain affinity to a type of magic. This affinity determines which spells they can learn.
 			DL:addConditionProgress("npc_jonathan", "affinity")
+			DL:addNode()
+
+
+			DL:createNPCNode(75, -2, "DL_Jonathan_Affinity2") -- Us elementalists are lucky - we are able to understand the whole spectrum of magic.
 			DL:addNode()
 
 		end
@@ -131,8 +135,12 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(16, -2, "DL_Jonathan_NextStep2") -- ...qualified. Also, someone who lost his memory is suspicious. Before I let you in on my studies, you should first prove that you're a worthy elementalist.
+			DL:createNPCNode(16, 76, "DL_Jonathan_NextStep2") -- ...qualified. Also, someone who lost his memory is suspicious.
 			DL:addConditionProgress("npc_jonathan", "prove_yourself")
+			DL:addNode()
+
+
+			DL:createNPCNode(76, -2, "DL_Jonathan_NextStep3") -- Before I let you in on my studies, you should first prove that you're a worthy elementalist.
 			DL:addNode()
 
 		end
@@ -231,19 +239,23 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(23, 24, "DL_Jonathan_LearnedFireball2") -- My research focuses on the old, forgotten knowledge of the first elementalists. I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
+			DL:createNPCNode(23, 77, "DL_Jonathan_LearnedFireball2") -- My research focuses on the old, forgotten knowledge of the first elementalists.
 			DL:addNode()
 
 
-			DL:createNPCNode(24, 25, "DL_Jonathan_LearnedFireball3") -- I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
+			DL:createNPCNode(77, 24, "DL_Jonathan_LearnedFireball3") -- I already know that they must have worked on spells that are way more powerful than any of the elemental magic that is known today. 
 			DL:addNode()
 
 
-			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball4") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's one small problem with that map...
+			DL:createNPCNode(24, 25, "DL_Jonathan_LearnedFireball4") -- I've found evidence that there's an abandoned site of the first Elementalists somewhere near Gandria, that's why I'm working here.
 			DL:addNode()
 
 
-			DL:createNPCNode(26, -2, "DL_Jonathan_LearnedFireball5") -- To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
+			DL:createNPCNode(25, 26, "DL_Jonathan_LearnedFireball5") -- I'm pretty sure that the map that Cyrus sent me is the key to find that location and solve the mysteries that lie there. But there's one small problem with that map...
+			DL:addNode()
+
+
+			DL:createNPCNode(26, -2, "DL_Jonathan_LearnedFireball6") -- To decipher it, elemental magic is not sufficient. But using elemental magic combined with the power of another type of magic, we should be able to break the protection spell.
 			DL:addConditionProgress("npc_jonathan", "decipher_map")
 			DL:addNode()
 
@@ -301,12 +313,16 @@ loadDialogue = function(DL)
 
 		if (not DL:isConditionFulfilled("npc_jonathan", "why_risky") and DL:isConditionFulfilled("npc_jonathan", "what_about_you")) then 
 
-			DL:createNPCNode(32, 33, "DL_Jonathan_WhyRisky") -- It's just because lately, I get the impression that someone tries to mess with my work. Research notes and people disappear, I don't think you're an exception.
+			DL:createNPCNode(32, 33, "DL_Jonathan_WhyRisky") -- It's just because lately, I get the impression that someone tries to mess with my work.
 			DL:addConditionProgress("npc_jonathan", "why_risky")
 			DL:addNode()
 
 
-			DL:createNPCNode(33, -2, "DL_Jonathan_WhyRisky2") -- It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
+			DL:createNPCNode(33, 78, "DL_Jonathan_WhyRisky2") -- Research notes and people disappear, I don't think you're an exception.
+			DL:addNode()
+
+
+			DL:createNPCNode(78, -2, "DL_Jonathan_WhyRisky3") -- It doesn't seem to be a good idea for me to go outside until this city has gone back to normal.
 			DL:addNode()
 
 		end

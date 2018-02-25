@@ -23,7 +23,7 @@ npc.id:npc_edgar
 	# translation: 
 	translation.tag:DL_Edgar_WhatDoWeHave
 	translation.en:Well, well, look at that. Another filthy thief, caught by our observer spells. I hope you enjoy your stay. He he he.
-	translation.de:Was haben wir denn hier. Noch so ein dreckiger Dieb, der von unseren Beobachter-Zaubern hierher gebracht wurde. Ich hoffe, du geniesst deinen Aufenthalt hier. Hrhr.
+	translation.de:Was haben wir denn hier. Noch so ein dreckiger Dieb, der von unseren Beobachter-Zaubern hierhergebracht wurde. Ich hoffe, du geniesst deinen Aufenthalt hier. Hrhr.
 	translation.ch:Ja lueg mal, wa hemmer denn da. Nomol so en Dieb wo vo üsne Beobachter-Zauber daane verfrachtet worde isch. Ich hoffe, du gnüssisch din Ufenthalt da. Hrhr.
 	[
 		# Link node, tag is next tag
@@ -59,9 +59,9 @@ npc.id:npc_edgar
 		condition:not DL:isConditionFulfilled("npc_edgar", "hungry")
 		# translation: 
 		translation.tag:DL_Choice_ImHungry
-		translation.en:I'm hungry, can I get something?
-		translation.de:Ich habe Hunger, krieg ich was?
-		translation.ch:Ich han Hunger, bechumi öppis?
+		translation.en:I'm hungry, can I get something to eat?
+		translation.de:Ich habe Hunger, krieg ich was zu essen?
+		translation.ch:Ich han Hunger, bechumi öppis zum esse?
 	]
 	[
 		# Link node, tag is next tag

@@ -90,8 +90,8 @@ npc.id:npc_koray
 		# translation: 
 		translation.tag:DL_Choice_StartQuest
 		translation.en:I'll escort you if you teach me your magic.
-		translation.de:Ich werde dir Geleitschutz geben wenn du mir deine Magie beibringst.
-		translation.ch:Ich wird der Geleitschutz ge wenn du mir dini Magie bibringsch.
+		translation.de:Ich werde dir Geleitschutz geben, wenn du mir deine Magie beibringst.
+		translation.ch:Ich wird der Geleitschutz ge, wenn du mir dini Magie bibringsch.
 	]
 	[
 		# Link node, tag is next tag
@@ -418,7 +418,7 @@ npc.id:npc_koray
 	# translation: 
 	translation.tag:DL_Koray_StoleEye
 	translation.en:"Stole" is such a harsh word. I'd rather say I found it. (Grins)
-	translation.de:"Gestohlen" ist so ein hartes Wort. Ich würde eher sagen, ich habs gefunden. (Grinst)
+	translation.de:"Gestohlen" ist so ein hartes Wort. Ich würde eher sagen, ich hab's gefunden. (Grinst)
 	translation.ch:"Klaut" isch so es herts Wort. Ich wür ehno sege, ich has gfunde. (Grinst)
 	[
 		# Link node, tag is next tag

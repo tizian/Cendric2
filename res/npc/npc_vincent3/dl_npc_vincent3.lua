@@ -119,7 +119,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_vincent3", "shadowstalkers")) then 
 
-			DL:createNPCNode(13, 14, "DL_Vincent_Join") -- Good. You want to become a brother of the Shadow Stalkers, pledge your loyality to the guild and learn the ways of the shadows?
+			DL:createNPCNode(13, 14, "DL_Vincent_Join") -- Good. You want to become a brother of the Shadow Stalkers, pledge your loyalty to the guild and learn the ways of the shadows?
 			DL:addNode()
 
 

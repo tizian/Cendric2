@@ -64,7 +64,7 @@ npc.id:npc_yasha
 		condition:not DL:isConditionFulfilled("npc_yasha", "urn_open") and not DL:isConditionFulfilled("npc_yasha", "talk")
 		# translation: 
 		translation.tag:DL_Choice_PeacefulTalk
-		translation.en:Can we have a peaceful talk, demon?
+		translation.en:Can we talk peacefully, demon?
 		translation.de:Können wir uns friedlich unterhalten, Dämon?
 		translation.ch:Chömmer üs friedlich unterhalte, Dämon?
 	]
@@ -84,8 +84,8 @@ npc.id:npc_yasha
 		# translation: 
 		translation.tag:DL_Choice_Yasha_Attack
 		translation.en:I'm not here to talk. [ATTACK]
-		translation.de:Ich bin nicht zum reden hier. [ANGREIFEN]
-		translation.ch:Ich bi nid zum rede do. [AAGRIFE]
+		translation.de:Ich bin nicht zum Reden hier. [ANGREIFEN]
+		translation.ch:Ich bi nid zum Rede do. [AAGRIFE]
 	]
 	[
 		# Link node, tag is next tag
@@ -120,9 +120,9 @@ npc.id:npc_yasha
 	trigger:DL:changeQuestState("yasha_sanctuary", "completed")
 	# translation: 
 	translation.tag:DL_Yasha_YashaSanctuaryDone2
-	translation.en:I will answer all of your questions, human.
-	translation.de:Ich werde all deine Fragen beantworten, Mensch.
-	translation.ch:Ich wärdu alli dini Fragä beantwortu, Mänsch.
+	translation.en:I will answer your questions, human.
+	translation.de:Ich werde deine Fragen beantworten, Mensch.
+	translation.ch:Ich wärdu dini Fragä beantwortu, Mänsch.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -150,7 +150,7 @@ npc.id:npc_yasha
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Yasha_PeacefulTalkNot2
-	translation.en:You're of the same vile kind as all humans. Before I crush your miserable existence, I grant you one question. Choose wisely. 
+	translation.en:You're of the same vile kind as all humans. Before I end your miserable existence, I grant you one question. Choose wisely. 
 	translation.de:Du bist genau so wertlos wie alle Menschen. Bevor ich deine erbärmliche Existenz beende, gewähre ich dir eine Frage. Wähl weise. 
 	translation.ch:Dü bisch genau so wärtlos wiä alli Mänschu. Bevor ich dini erbärmlich Existänz vernichtu, gwähr ich diär nu genau ei Frag. Läs wäise üs.
 	[
@@ -208,7 +208,7 @@ npc.id:npc_yasha
 		condition:not DL:isConditionFulfilled("npc_yasha", "mages")
 		# translation: 
 		translation.tag:DL_Choice_Mages
-		translation.en:Who did pass through here before me?
+		translation.en:Who passed through here before me?
 		translation.de:Wer ist hier vor mir durchgekommen?
 		translation.ch:Wer isch do vor mir durecho?
 	]
@@ -238,7 +238,7 @@ npc.id:npc_yasha
 		condition:DL:isConditionFulfilled("npc_yasha", "what_guarding") and not DL:isConditionFulfilled("npc_yasha", "key")
 		# translation: 
 		translation.tag:DL_Choice_Key
-		translation.en:Where's that key you were guarding?
+		translation.en:Where's the key you were guarding?
 		translation.de:Wo ist dieser Schlüssel, den du bewacht hast?
 		translation.ch:Wo isch de Schlüssel, wo du bewacht hesch?
 	]
@@ -280,7 +280,7 @@ npc.id:npc_yasha
 	trigger:DL:addConditionProgress("npc_yasha", "question")
 	# translation: 
 	translation.tag:DL_Yasha_WhatGuarding
-	translation.en:I was guarding a key to a secret that should've never been revealed.
+	translation.en:I was guarding a key to a secret that never should've been revealed.
 	translation.de:Ich habe einen Schlüssel zu einem Geheimnis bewacht, das nie hätte gelüftet werden sollen.
 	translation.ch:Ich ha än Schlussul zuma Gheimnis bewacht, wa niä hetti sellu glüftut wärdu.
 	[
@@ -296,7 +296,7 @@ npc.id:npc_yasha
 	trigger:DL:addConditionProgress("npc_yasha", "question")
 	# translation: 
 	translation.tag:DL_Yasha_Mages
-	translation.en:A filthy thief and his henchmen. They outwit me with some magic not known to me. 
+	translation.en:A filthy thief and his henchmen. They outwitted me with some magic not known to me. 
 	translation.de:Ein dreckiger Dieb und sein Gefolge. Sie haben mich mit mir unbekannter Magie ausgetrickst.
 	translation.ch:Än dräckigä Dieb und schis Gfolg. Schi hent mich mit Magie ubärlischtut, wani nid kännt ha.
 	[
@@ -446,7 +446,7 @@ npc.id:npc_yasha
 	trigger:DL:addConditionProgress("npc_yasha", "reward")
 	# translation: 
 	translation.tag:DL_Yasha_Reward3
-	translation.en:Here, take this weapon and this pendant. May they help you reaching your goals.
+	translation.en:Here, take this weapon and this pendant. May they help you reach your goals.
 	translation.de:Hier, nimm diese Waffe und diesen Anhänger. Sie sollen dir helfen, deine Ziele zu erreichen.
 	translation.ch:Hiä, nimm die Waffä und der Schmuck. Schi sellund diär hälfu, dini Ziil z'ärreichu.
 	[
@@ -509,7 +509,7 @@ npc.id:npc_yasha
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Yasha_TempleFound
-	translation.en:It's flame went out. That means it has been used to enter the temple's library. It's too late.
+	translation.en:It's flame has gone out. That means it has been used to enter the temple's library. It's too late.
 	translation.de:Seine Flamme ist erloschen. Das heisst, es wurde benutzt, um die Bibliothek des Tempels zu betreten. Es ist zu spät.
 	translation.ch:Schini Flamma isch ärlescht. Das heisst, äs isch gibrücht wordu fär die Bibliothek im Tempel z'beträttu. Äs isch z'spat.
 	[

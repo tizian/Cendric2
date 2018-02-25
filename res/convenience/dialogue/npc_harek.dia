@@ -233,7 +233,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_IceArmor2
 	translation.en:But I'm currently really short on material. First I'd need something that holds the magic...
-	translation.de:Aber ich habe momentan ziemlich wenig Ressourcen. Zuerst brauche ich etwas magisches dafür... Nur was?
+	translation.de:Aber ich habe momentan ziemlich wenig Ressourcen. Zuerst brauche ich etwas Magisches dafür... Nur was?
 	translation.ch:Aber ich ha grad zimli wenig Ressource. Zersch mal bruchi nämli öppis magisches...
 	[
 		# Link node, tag is next tag
@@ -508,7 +508,7 @@ npc.id:npc_harek
 	# translation: 
 	translation.tag:DL_Harek_IceScarf
 	translation.en:An exceptionally beautiful stone! I can truly craft something magical from that.
-	translation.de:Ein aussergewöhnlich schöner Stein! Daraus kann ich wahrlich etwas magisches herstellen.
+	translation.de:Ein aussergewöhnlich schöner Stein! Daraus kann ich wahrlich etwas Magisches herstellen.
 	translation.ch:En ussergwöhnlich schöne Stei! Da drus chani wohrlich öppis schöns mache.
 	[
 		# Link node, tag is next tag
@@ -653,7 +653,7 @@ npc.id:npc_harek
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Harek_PrismaStone2
-	translation.en:I could cut the stone to focus one color... Or we could keep all colors, but then they'll shine less.
+	translation.en:I could cut the stone to focus one colour... Or we could keep all colours, but then they'll shine less.
 	translation.de:Ich könnte den Stein so schleifen, dass er eine Farbe fokussiert, oder wir könnten alle Farben lassen, allerdings wären sie dann weniger kräftig.
 	translation.ch:Ich chönt de Stei so schliffe, daser ei Farb fokussiert, oder mer chönd au all Farbe lah,a ber si wäred weniger chräftig.
 	[
@@ -667,8 +667,8 @@ npc.id:npc_harek
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Harek_PrismaStone3
-	translation.en:Do you want to choose by magic types or by colors?
-	translation.de:Welche Magieart oder Farbe magst du denn haben?
+	translation.en:Do you want to choose by magic types or by colours?
+	translation.de:Welche Magie-Art oder Farbe magst du denn haben?
 	translation.ch:Weli Magieart oder Farb wetsch denn ha?
 	[
 		# Link node, tag is next tag
@@ -936,7 +936,7 @@ npc.id:npc_harek
 		tag:48
 		# translation: 
 		translation.tag:DL_Choice_RingDivine
-		translation.en:I commited myself to the divine magic.
+		translation.en:I committed myself to the divine magic.
 		translation.de:Ich habe mich der heiligen Magie verschrieben.
 		translation.ch:Ich ha mich de heilige Magie verschriebe.
 	]

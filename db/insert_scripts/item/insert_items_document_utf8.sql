@@ -11,7 +11,7 @@ I hope I''ll find a way out of this cave...
 
 -- Paladin Marcus','Wer das auch immer liest: Nehmt Euch in Acht!
 
-Diese Höhlen sind gespickt mit Fallen, ich habe es nur mit viel Glück da hin geschafft, wo ich jetzt bin. Die fünf Hebel werden Euch töten wenn Ihr den falschen zieht. Benutzt den Letzten als erstes und den Ersten als letztes und berührt keinen der anderen.
+Diese Höhlen sind gespickt mit Fallen, ich habe es nur mit viel Glück dahin geschafft, wo ich jetzt bin. Die fünf Hebel werden Euch töten, wenn Ihr den falschen zieht. Benutzt den Letzten als erstes und den Ersten als letztes und berührt keinen der anderen.
 
 Ich hoffe, ich komme irgendwie wieder aus diesen Höhlen hinaus...
 
@@ -113,7 +113,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('El
 
 I can''t entomb her traditionally with her staff, but only with a part of it. I''m going to keep the magic stone from the staff here, in memory of her.', 'Ich kann es immer noch nicht fassen, dass meine geliebte Elona nicht mehr an meiner Seite ist. Ich habe Stücke von ihrem Stab im Steingarten gefunden und konnte ihn aber nicht wieder zusammensetzen, es fehlt ein Stück.
 
-Ich kann sie also nicht mit ihrem Stab begraben, wie es die Tradition will, sondern nur mit einem Teil davon. Den magischen Stein des Stabs aber werde ich hier behalten, als Erinnerung an sie.','Ich chas immer nanig versta, dass mini gliebti Elona nüm bi mir isch. Ich han Stück vo ihrem Stab im Steigarte gfunde aber hanen nid wider chöne zemesetze, es fehlt es Stück.
+Ich kann sie also nicht mit ihrem Stab begraben, wie es die Tradition will, sondern nur mit einem Teil davon. Den magischen Stein des Stabs aber werde ich hierbehalten, als Erinnerung an sie.','Ich chas immer nanig versta, dass mini gliebti Elona nüm bi mir isch. Ich han Stück vo ihrem Stab im Steigarte gfunde aber hanen nid wider chöne zemesetze, es fehlt es Stück.
 
 Ich cha si also nid mit ihrem Stab begrabe - wes Tradition wer - nur mitme Teil devo. De magisch Stei vom Stab wirdi aber bi mir phalte, als Erinnerig a si.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_elderdiary', 'document', 500, 500, -1, 1);
@@ -143,7 +143,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 
 -- Note (Koray)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item', 'Koray''s Note','Koray''s Notiz','Koray''s Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item', 'Koray''s Note','Korays Notiz','Korays Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notekoray', 'item_desc', 'A suspicious note, found in the Ascent.','Eine verdächtige Notiz, gefunden im Aufstieg.','E verdächtigi Notiz, gfunde im Ufstiig.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notekoray', 0, 'NoteKoray');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notekoray', 'missing_koray', 3);
@@ -160,7 +160,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Note (Robert)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item', 'Bob''s Note','Bob''s Notiz','Bob''s Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item', 'Bob''s Note','Bobs Notiz','Bobs Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_notebob', 'item_desc', 'A suspicious note, found in Yasha''s Temple.','Eine verdächtige Notiz, gefunden in Yasha''s Tempel.','E verdächtigi Notiz, gfunde im Tempel vode Yasha.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_notebob', 0, 'NoteBob');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_notebob', 'missing_bob', 1);
@@ -177,7 +177,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Note (Inina)
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item', 'Inina''s Note','Inina''s Notiz','Inina''s Notiz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item', 'Inina''s Note','Ininas Notiz','Ininas Notiz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_noteinina', 'item_desc', 'A suspicious note, found in the Temple of Elementalists.','Eine verdächtige Notiz, gefunden im Tempel der Elementarmagier.','E verdächtigi Notiz, gfunde im Tempel vode Elementarmagier.');
 INSERT INTO item_document_page(item_id, page_nr, content) values ('do_noteinina', 0, 'NoteInina');
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_noteinina', 'missing_inina', 1);
@@ -199,10 +199,10 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('do_noteinina', -25, 0, 50, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('do_noteinina', 1, 450, 0, 100, 50);
 
--- Old Pergament
+-- Old Paper
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item', 'Old Pergament','Altes Pergament','Alts Pergament');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item_desc', 'An old pergament from the elementalists'' library .','Ein altes Pergament aus der Bibliothek der Elementarmagier.','Es alts Pergament us de Bibliothek vode Elementarmagier');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item', 'Old Paper','Altes Pergament','Alts Pergament');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_antigravity', 'item_desc', 'An old paper from the elementalists'' library .','Ein altes Pergament aus der Bibliothek der Elementarmagier.','Es alts Pergament us de Bibliothek vode Elementarmagier');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_antigravity', 1, 'AntiGravityTitle', 'AntiGravityContent');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityTitle', 'document', 'Antigravity', 'Antigravitation', 'Antigravitation');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('AntiGravityContent', 'document', 'Gravity is merely a form of elemental (earth) magic. Using its inversed form in an area will weaken it, making objects appear lighter.
@@ -265,9 +265,9 @@ INSERT INTO item_document_page(item_id, page_nr, content) values ('do_arazathlet
 INSERT INTO item_document_quest(item_id, quest_name, quest_desc) values ('do_arazathletter', 'tower_4', 1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ArazathLetter', 'document',
 'Dear Etoz:
-Finally, you have grown into the skillful little mage I always hoped you would become. You do not know how glad you have made your old Pa. This weapon is now yours. It has been passed from father to son for generations, but after your father slipped in the third tower I knew I had to break tradition and skip a generation. 
+Finally, you have grown into the skilful little mage I always hoped you would become. You do not know how glad you have made your old Pa. This weapon is now yours. It has been passed from father to son for generations, but after your father slipped in the third tower I knew I had to break tradition and skip a generation. 
 
-If you had any accidents in the tower, pleace heal yourself with the potion I left in the chest. 
+If you had any accidents in the tower, please heal yourself with the potion I left in the chest. 
 
 - Arazath',
 'Lieber Etoz
@@ -286,7 +286,7 @@ Falls der im Turm es Unglück passiert isch, heil dich mit dem Trank, woni der i
 -- Kamasutra
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item', 'Kama Sutra','Kama Sutra', 'Kama Sutra');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kama Sutra godess. The best times of this book are long gone. Most of it is unreadable or washed out. Luckily, you can still decipher some pages.','Ein Geschenk von Karma, der Kama Sutra-Göttin. Das Buch hat seine besten Zeiten bereits hinter sich gelassen. Ein Grossteil des Buches ist unleserlich oder bereits verblasst. Glücklicherweise lassen sich einzelne Seiten entziffern.','Es Gschenk vode Karma, de Kama Sutra-Göttin. Das Buech het au scho besseri Zite gseh, vill isch unläserlich oder bereits verblasst. Glücklicherwiis lönd sich gwüssi Siite trotzdem entziffere.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kama Sutra goddess. The best times of this book are long gone. Most of it is unreadable or washed out. Luckily, you can still decipher some pages.','Ein Geschenk von Karma, der Kama Sutra-Göttin. Das Buch hat seine besten Zeiten bereits hinter sich gelassen. Ein Grossteil des Buches ist unleserlich oder bereits verblasst. Glücklicherweise lassen sich einzelne Seiten entziffern.','Es Gschenk vode Karma, de Kama Sutra-Göttin. Das Buech het au scho besseri Zite gseh, vill isch unläserlich oder bereits verblasst. Glücklicherwiis lönd sich gwüssi Siite trotzdem entziffere.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_kamasutra', 'document', 750, 300, 20, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('do_kamasutra', 0, 'BookKamasutra');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 1, 'TitleBookKamasutra1', 'ContentBookKamasutra1');
@@ -346,7 +346,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 
 6. En wahre Meister schaffts au, am Papagei es Liebesgständnis für sini Abeteti bizbringe.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra5','document','Love positions','Liebesstellungen','Liebesstellige');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra5','document','At the amorous play there are four embraces of love: "The Swinging Liane", "The Tree Climber", "Sesame and Rice" and "Milk and Water". To execute them correctly read the following descriptions:
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra5','document','At the amorous play there are four embraces of love: "The Swinging Liana", "The Tree Climber", "Sesame and Rice" and "Milk and Water". To execute them correctly read the following descriptions:
 
 "The Tree Climber"
 Use one foot to stand on the foot of your lover and the other foot to...

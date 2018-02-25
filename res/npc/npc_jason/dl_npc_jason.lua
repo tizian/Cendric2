@@ -73,7 +73,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(6, -2, "DL_Jason_GargoyleDust2") -- Yeah. But promise is promise. Here, take my old glaive. It's still a good weapon.
+		DL:createNPCNode(6, -2, "DL_Jason_GargoyleDust2") -- Yeah. But a promise is a promise. Here, take my old glaive. It's still a good weapon.
 		DL:changeQuestState("jasons_glaive", "completed")
 		DL:addItem("we_jasonsglaive", 1)
 		DL:addNode()
@@ -86,7 +86,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(13, -2, "DL_Jason_YashaSword2") -- That was a pretty powerful sword. If you can bring me the fiery essence of a very strong demon, I can reignite it for you. Oh and some gold, I need gold.
+		DL:createNPCNode(13, -2, "DL_Jason_YashaSword2") -- That was a pretty powerful sword. If you can bring me the fiery essence of a very strong demon, I can reignite it for you. And some gold, I need gold.
 		DL:changeQuestState("yasha_sword", "started")
 		DL:addNode()
 

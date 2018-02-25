@@ -61,7 +61,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Wind Rose
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item', 'Wind Rose','Windrose','Windrose');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item_desc', 'A rare herb that grants incredible reflexes when eaten.','Ein seltenes Kraut das unglaubliche Reflexe gewährt wenn man es verzehrt.','Es seltenigs Chrütli wo eim unglaublichi Reflex git wenmes isst.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_windrose', 'item_desc', 'A rare herb that grants incredible reflexes when eaten.','Ein seltenes Kraut das unglaubliche Reflexe gewährt, wenn man es verzehrt.','Es seltenigs Chrütli wo eim unglaublichi Reflex git, wenmes isst.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_windrose', 'consumable', 550, 100, 20);
 INSERT INTO item_attribute (item_id, haste, critical) values ('fo_windrose', 50, 4);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_windrose', 15);
@@ -120,7 +120,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Glowing Shroom
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item', 'Glowing shroom','Leuchtpilz','Lüchtpilz');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item', 'Glowing Shroom','Leuchtpilz','Lüchtpilz');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_glowingshroom', 'item_desc', 'It still glows...','Er leuchtet immer noch...','Er lüchtet immer na...');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_glowingshroom', 'consumable', 150, 50, 2);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_light, res_shadow) values ('fo_glowingshroom', 1, 5, 50);

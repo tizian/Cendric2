@@ -37,7 +37,13 @@ loadDialogue = function(DL)
 				DL:createNPCNode(7, 10, "DL_Vincent_YouAreLying") -- Interesting. Very interesting. But you don't need to lie to me. I know what the Elder is up to.
 				DL:addNode()
 			
-				DL:createNPCNode(10, 11, "DL_Vincent_RhendalIsDrinker") -- Hm, It's not the first time he makes someone buy a bottle for him. He told you he's going to use it for "alchemistic purposes", ain't he. But that's a lie, he just likes getting drunk from time to time.
+				DL:createNPCNode(10, 30, "DL_Vincent_RhendalIsDrinker") -- Hm, It's not the first time he makes someone buy a bottle for him.
+				DL:addNode()
+				
+				DL:createNPCNode(30, 31, "DL_Vincent_RhendalIsDrinker2") -- He told you he's going to use it for "alchemistic purposes", didn't he.
+				DL:addNode()
+				
+				DL:createNPCNode(31, 11, "DL_Vincent_RhendalIsDrinker3") -- But that's a lie, he just likes getting drunk from time to time.
 				DL:addNode()
 			else
 				DL:createNPCNode(7, 10, "DL_Vincent_Interesting") -- Interesting. But I need to tell you something.

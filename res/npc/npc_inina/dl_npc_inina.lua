@@ -241,8 +241,11 @@ loadDialogue = function(DL)
 			DL:createNPCNode(71, 72, "DL_Inina_FoundNote2") -- It seems like he tried to write about a beast that transforms humans into wolves? Maybe that thing is also responsible for his strange aura here. 
 			DL:addNode()
 			
-			DL:createNPCNode(72, -2, "DL_Inina_FoundNote3") -- As you already got out of the cave alive, maybe you got a chance to hunt that beast down and slay it. I would offer you my undying gratitude and a great reward, of course.
+			DL:createNPCNode(72, 73, "DL_Inina_FoundNote3") -- As you already got out of the cave alive, maybe you got a chance to hunt that beast down and slay it.
 			DL:changeQuestState("cavern_beast", "started")
+			
+			DL:createNPCNode(73, -2, "DL_Inina_FoundNote4") -- I would offer you my undying gratitude and a great reward, of course.
+
 			DL:addNode()
 		
 		end

@@ -38,7 +38,7 @@ loadDialogue = function(DL)
 		DL:addChoice(5, "DL_Choice_Murderer") -- You... just murdered the king?!
 	end
 	if (DL:isConditionFulfilled("npc_velius", "murderer") and not DL:isConditionFulfilled("npc_velius", "eyes")) then 
-		DL:addChoice(53, "DL_Choice_Eyes") -- What's the matter with the kings's eyes?
+		DL:addChoice(53, "DL_Choice_Eyes") -- What's the matter with the king's eyes?
 	end
 	if (not DL:isConditionFulfilled("npc_velius", "know_me")) then 
 		DL:addChoice(3, "DL_Choice_KnowMe") -- I assume, you know me?

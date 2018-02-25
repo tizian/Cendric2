@@ -107,6 +107,7 @@ npc.id:npc_steven
 	# [5] NPC Node
 	tag:5
 	# triggers: 
+	trigger:DL:addConditionProgress("npc_steven", "rules")
 	# translation: 
 	translation.tag:DL_Steven_Rules1
 	translation.en:Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
@@ -137,19 +138,32 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_Rules3
-	translation.en:And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
-	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören. Wenn wir dich bei Nekromantie erwischen, kannst du aufgeknöpft werden.
-	translation.ch:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört. Wedä bir Nekromantie vrwütscht wirsch, chasch ghängt wärdä.
+	translation.en:And, last but not least: We don't like to see other spells than those which originate from the high divine art.
+	translation.de:Und, zum Schluss: Wir sehen es nicht sonderlich gerne, wenn jemand Zauber wirkt, die nicht zur hohen Kunst der heiligen Magie gehören.
+	translation.ch:U zum Schluss, Mir heis nid u huerä gärn, wenn öpper mit Zouber umäfiguretlät, wo nid zur höche heilige Schuu ghört.
 	[
 		# Link node, tag is next tag
 		tag:11
 	]
 }
-{3
-	# [11] Cendric Node
+{1
+	# [11] NPC Node
 	tag:11
 	# triggers: 
-	trigger:DL:addConditionProgress("npc_steven", "rules")
+	# translation: 
+	translation.tag:DL_Steven_Rules4
+	translation.en:You will hang for practicing Necromancy.
+	translation.de:Wenn wir dich bei Nekromantie erwischen, wirst du aufgeknüpft.
+	translation.ch:Wedä bir Nekromantie vrwütscht wirsch, wirsch ghängt.
+	[
+		# Link node, tag is next tag
+		tag:64
+	]
+}
+{3
+	# [64] Cendric Node
+	tag:64
+	# triggers: 
 	# translation: 
 	translation.tag:DL_Cendric_Okay
 	translation.en:Okay.
@@ -316,7 +330,7 @@ npc.id:npc_steven
 	# translation: 
 	translation.tag:DL_Steven_Inina
 	translation.en:Good for you. But you can't talk to her either until you've taken care of my little problem. Then you'll get your letter back.
-	translation.de:Schön für dich. Aber du kannst auch nicht mit ihr sprechen bis du eine kleine Sache für mich erledigt hast. Dann wirst du deinen Brief zurück kriegen.
+	translation.de:Schön für dich. Aber du kannst auch nicht mit ihr sprechen, bis du eine kleine Sache für mich erledigt hast. Dann wirst du deinen Brief zurückkriegen.
 	translation.ch:Schön für di. Abr du chasch oh nid mit ihrä plöiderlä bis du ä chlini Sach für mi erledigt hesch. De brchunsch di Brief oh widr.
 	[
 		# Link node, tag is next tag
@@ -409,9 +423,9 @@ npc.id:npc_steven
 	trigger:DL:changeQuestState("stevens_helmet", "started")
 	# translation: 
 	translation.tag:DL_Steven_HelmetQuest
-	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
-	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren. Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
-	translation.ch:I ha letscht Nacht chly z'viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore. Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
+	translation.en:I got a little bit drunk last night and lost my helmet to some shady guys in the tavern.
+	translation.de:Ich habe letzte Nacht ein bisschen über den Durst getrunken und meinen Helm an ein paar zwielichtige Gestalten in der Taverne verloren.
+	translation.ch:I ha letscht Nacht chly z'viu gsoffä u ha mi Heum a äs paar quirligi Sieche idr Tavernä vrlore.
 	[
 		# Link node, tag is next tag
 		tag:20
@@ -423,9 +437,37 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_HelmetQuest2
-	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
-	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt. Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
-	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout. We das härä bringsch, chasch di Papierfötzu widr ha.
+	translation.en:I'm pretty sure that they belong to the dirty thief guild.
+	translation.de:Ich bin mir ziemlich sicher, dass sie zur dreckigen Diebesgilde gehören.
+	translation.ch:Bimr fei echly ds die zu dä dräckige Röibergiudä ghörä.
+	[
+		# Link node, tag is next tag
+		tag:65
+	]
+}
+{1
+	# [65] NPC Node
+	tag:65
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_HelmetQuest3
+	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back.
+	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt.
+	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout.
+	[
+		# Link node, tag is next tag
+		tag:66
+	]
+}
+{1
+	# [66] NPC Node
+	tag:66
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Steven_HelmetQuest4
+	translation.en:If you succeed, I'll give you your piece of paper back.
+	translation.de:Wenn du es schaffst, gebe ich dir dein Stück Papier wieder.
+	translation.ch:We das härä bringsch, chasch di Papierfötzu widr ha.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -555,8 +597,8 @@ npc.id:npc_steven
 		# translation: 
 		translation.tag:DL_Choice_DontDrinkMuch
 		translation.en:Well, it's your fault if you drink too much.
-		translation.de:Es ist dein Fehler wenn du zu viel trinkst.
-		translation.ch:Es isch dis Problem wenn du zviel trinksch.
+		translation.de:Es ist dein Fehler, wenn du zu viel trinkst.
+		translation.ch:Es isch dis Problem, wenn du zviel suffsch.
 	]
 }
 {1
@@ -809,7 +851,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_StealTellMe
-	translation.en:Why would I... ah, nevermind. You must be an admirer of mine.
+	translation.en:Why would I... ah, never mind. You must be an admirer of mine.
 	translation.de:Wieso sollte ich... ah, ja klar. Du musst wohl ein Bewunderer von mir sein.
 	translation.ch:Weso sötti... ah, isch klar. Du bisch dämfou e Fan vu mer.
 	[
@@ -846,7 +888,7 @@ npc.id:npc_steven
 	# translation: 
 	translation.tag:DL_Steven_StealTellMe2
 	translation.en:Hehe. Now, listen. I'm currently one of the mightiest paladins in Gandria. I'm sure, Lloyd will chose me as his successor!
-	translation.de:Hehe. Na, dann hör mal zu. Ich bin momentan einer der mächtigesten Paladine hier in Gandria. Ich bin mir sicher, dass Lloyd mich zu seinem Nachfolger bestimmen wird.
+	translation.de:Hehe. Na, dann hör mal zu. Ich bin momentan einer der mächtigsten Paladine hier in Gandria. Ich bin mir sicher, dass Lloyd mich zu seinem Nachfolger bestimmen wird.
 	translation.ch:Hehe. Jo, denn los mau zue. I bi momentan eine vudr mächtigste Paladin i ganz Gandria. I gloube sogar, dass de Lloyd mi aus Nochfolger vonem bestimme wird.
 	[
 		# Link node, tag is next tag
@@ -956,7 +998,7 @@ npc.id:npc_steven
 	trigger:DL:addItem("ke_tower", 1)
 	# translation: 
 	translation.tag:DL_Cendric_SucceedSteal
-	translation.en:(Your attempt to steal the tower key suceeded!)
+	translation.en:(Your attempt to steal the tower key succeeded!)
 	translation.de:(Dein Versuch, den Turmschlüssel zu stehlen, hat funktioniert!)
 	translation.ch:(Din Versuech, de Turmschlüssel z'chlaue, het klappt!)
 	[
@@ -1013,7 +1055,7 @@ npc.id:npc_steven
 	# translation: 
 	translation.tag:DL_Steven_StealEternal
 	translation.en:It's the purest form of energy - and our source of magic.
-	translation.de:Es ist die pureste Form der Energie - und unsere Quelle der Magie.
+	translation.de:Es ist die purste Form der Energie - und unsere Quelle der Magie.
 	translation.ch:Es isch di purschti Form vor Energie - u üseri Queue vor Magie.
 	[
 		# Link node, tag is next tag

@@ -107,7 +107,7 @@ npc.id:npc_runa
 		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void") and not DL:isQuestComplete("element_master")
 		# translation: 
 		translation.tag:DL_Choice_RunasDealStart
-		translation.en:Okay, give me the Physalis, I'll take them to Bjarne.
+		translation.en:Okay, give me the Physalis; I'll take them to Bjarne.
 		translation.de:Okay, gib mir die Physalis, ich werde sie Bjarne bringen.
 		translation.ch:Okay, gib mer die Physalis, ich wird si em Bjarne bringe.
 	]
@@ -117,7 +117,7 @@ npc.id:npc_runa
 		condition:DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "who_bjarne")
 		# translation: 
 		translation.tag:DL_Choice_WhoBjarne
-		translation.en:Who is that "Bjarne"?
+		translation.en:Who is "Bjarne"?
 		translation.de:Wer ist dieser "Bjarne"?
 		translation.ch:Wer isch de "Bjarne"?
 	]
@@ -177,7 +177,7 @@ npc.id:npc_runa
 		condition:DL:isConditionFulfilled("npc_runa", "why_protect") and not DL:isConditionFulfilled("npc_runa", "paranoid")
 		# translation: 
 		translation.tag:DL_Choice_Paranoid
-		translation.en:I think, you're a bit too paranoid...
+		translation.en:I think you're a bit too paranoid...
 		translation.de:Ich glaube, du bist ein bisschen paranoid...
 		translation.ch:Ich glaub, du bisch bitz paranoid...
 	]
@@ -222,7 +222,7 @@ npc.id:npc_runa
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Runa_WhoAreYou2
-	translation.en:And you? Are you just running around and ask everyone who they are?
+	translation.en:And you? Are you just running around, asking everyone who they are?
 	translation.de:Und du? Rennst du einfach hier rum und fragst jeden, wer er sei?
 	translation.ch:Und du? Rännsch du da eifach chli ume und frögsch jede, wer er seig?
 	[
@@ -267,9 +267,9 @@ npc.id:npc_runa
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Runa_AskEveryoneYes
-	translation.en:Ah... the youth of today... as if there wasn't enough other work to do.
-	translation.de:Ach... die Jugend von heute... als ob es nicht genügend andere Arbeit zu tun gäbe.
-	translation.ch:Ach... d'Jugend vo hüt... als ob's nöd gnueg anderi Arbet gäbt z'machä.
+	translation.en:Ach... the youth of today... as if there wasn't enough work to do already!
+	translation.de:Ach... die Jugend von heute... als ob es nicht genügend andere Arbeit zu tun gäbe!
+	translation.ch:Ach... d'Jugend vo hüt... als ob's nöd gnueg anderi Arbet gäbt z'machä!
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -510,7 +510,7 @@ npc.id:npc_runa
 	# translation: 
 	translation.tag:DL_Runa_WhyHate
 	translation.en:Why would you even ask! They're elitist monsters, that's why.
-	translation.de:Was für eine Frage! Das sind alle elitäre Monster, mehr gibts dazu nicht zu sagen.
+	translation.de:Was für eine Frage! Das sind alle elitäre Monster, mehr gibt's dazu nicht zu sagen.
 	translation.ch:Was für ä Frag! Das sind alli elitäri Monster, meh gits da däzue nöd z'säge.
 	[
 		# Link node, tag is next tag
@@ -540,7 +540,7 @@ npc.id:npc_runa
 	# translation: 
 	translation.tag:DL_Runa_Physalis
 	translation.en:It's a nightshade plant which we grow on our farm. It's pretty sweet, but eating too much can be poisonous.
-	translation.de:Ein Nachtschattengewächs, das auf unserem Bauernhof wächst. Es ist ziemlich süss, aber zuviel davon kann giftig sein.
+	translation.de:Ein Nachtschattengewächs, das auf unserem Bauernhof wächst. Es ist ziemlich süss, aber zu viel davon kann giftig sein.
 	translation.ch:Es Nachtschattägwächs, wo uf eusem Buurehof wachst. Es isch ziemlich süess, aber z'viel dävo chan giftig si.
 	[
 		# Link node, tag is next tag
@@ -554,8 +554,8 @@ npc.id:npc_runa
 	trigger:DL:addConditionProgress("npc_runa", "why_protect")
 	# translation: 
 	translation.tag:DL_Runa_WhyProtect
-	translation.en:Because that's the only way we can stand a chance when they attack... you should better get a pendant, too.
-	translation.de:Weil das unsere einzige Überlebenschance ist, wenn sie uns angreifen... du solltest dir besser auch einen Anhänger zutun.
+	translation.en:Because that's the only way we can stand a chance when they attack... you better get a pendant, too.
+	translation.de:Weil das unsere einzige Überlebenschance ist, wenn sie uns angreifen... du solltest dir besser auch einen Anhänger zu tun.
 	translation.ch:Will das eusi einzigi Überläbenschance isch, wenn sie eus agriifed... Du söttsch dir besser au sonen Ahänger bsorgä.
 	[
 		# Link node, tag is next tag
@@ -599,9 +599,9 @@ npc.id:npc_runa
 	trigger:DL:changeQuestState("runas_deal", "completed")
 	# translation: 
 	translation.tag:DL_Runa_GotPendant2
-	translation.en:Thank you so much! Now, I'm finally safe from this magic.
-	translation.de:Vielen Dank! Jetzt bin ich endlich sicher vor dieser Magie.
-	translation.ch:Tuusig Dank! Jetzt bin ich äntli sicher vor derä Magie.
+	translation.en:Thank you so much! Now, I'm finally safe from this wretched magic.
+	translation.de:Vielen Dank! Jetzt bin ich endlich sicher vor dieser elenden Magie.
+	translation.ch:Tuusig Dank! Jetzt bin ich äntli sicher vor derä elendä Magie.
 	[
 		# Link node, tag is next tag
 		tag:29

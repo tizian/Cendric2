@@ -39,11 +39,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(4, -2, "DL_Morris_Stole") -- Yes, the observer spells can be trouble, I can tell from my own experience.
+		DL:createNPCNode(4, -2, "DL_Morris_Stole") -- Yes, the observer spells can be troublesome... I know that from my own experience.
 		DL:addNode()
 
 
-		DL:createNPCNode(5, -2, "DL_Morris_Murdered") -- Funny, you don't look like someone that is capable of murdering people. But I'll watch my back. (Grins)
+		DL:createNPCNode(5, -2, "DL_Morris_Murdered") -- Funny, you don't look like someone capable of murdering people. But I'll watch my back. (Grins)
 		DL:addNode()
 
 
@@ -82,8 +82,11 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, -2, "DL_Morris_GameRules") -- It's pretty simple. See this coin? You bet a certain amount of gold on head or tails, I toss it. If you're correct with your guess, I double your gold. Otherwise, I keep it.
+		DL:createNPCNode(12, 32, "DL_Morris_GameRules") -- It's pretty simple. See this coin? You bet a certain amount of gold on head or tails, I toss it.
 		DL:addConditionProgress("npc_morris", "rules")
+		DL:addNode()
+		
+		DL:createNPCNode(32, -2, "DL_Morris_GameRules2") -- If you're correct with your guess, I double your gold. Otherwise, I keep it.
 		DL:addNode()
 
 	end

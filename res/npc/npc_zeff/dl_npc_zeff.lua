@@ -139,8 +139,11 @@ loadDialogue = function(DL)
 	
 	if (DL:isConditionFulfilled("npc_zeff", "curse_talked") and not DL:isConditionFulfilled("npc_zeff", "curse_stronger")) then
 	
-		DL:createNPCNode(30, -2, "DL_Zeff_CurseStronger") -- Yes. In the beginning, this fur grew and shortly after that, I got wolf ears and eyes. Then this magnificent tail popped out and now I'm wondering for how long I can still walk on two legs.
+		DL:createNPCNode(30, 130, "DL_Zeff_CurseStronger") -- Yes. In the beginning, this fur grew and shortly after that, I got wolf ears and eyes.
 		DL:addConditionProgress("npc_zeff", "curse_stronger")
+		DL:addNode()
+		
+		DL:createNPCNode(130, -2, "DL_Zeff_CurseStronger2") -- Then this magnificent tail popped out and now I'm wondering for how long I can still walk on two legs.
 		DL:addNode()
 	
 	end
@@ -169,7 +172,10 @@ loadDialogue = function(DL)
 		DL:createNPCNode(35, 36, "DL_Zeff_Hunting2") -- So I entered that cave, hoping to get one or two of them with my "skinning knife" (holds up his sword). But I didn't get far.
 		DL:addNode()
 		
-		DL:createNPCNode(36, -2, "DL_Zeff_Hunting3") -- Then this... thing appeared. I couldn't see much, because it was dark in there, but it was huge. One glowing eye, staring at me... The next thing I remember is waking up at the entry of the cave, covered in fur.
+		DL:createNPCNode(36, 37, "DL_Zeff_Hunting3") -- Then this... thing appeared. I couldn't see much, because it was dark in there, but it was huge.
+		DL:addNode()
+		
+		DL:createNPCNode(37, -2, "DL_Zeff_Hunting4") -- One glowing eye, staring at me... The next thing I remember is waking up at the entry of the cave, covered in fur.
 		DL:addNode()
 		
 	end
@@ -260,8 +266,11 @@ loadDialogue = function(DL)
 		DL:createNPCNode(114, 115, "DL_Zeff_StayWolf") -- I guess so. If my mind keeps clear, I think I can even get to like that form. But when I think about returning home...
 		DL:addNode()
 		
-		DL:createNPCNode(115, -2, "DL_Zeff_ReturningHome") -- I'm afraid, I still can't get past the guards. Maybe you could try to tell them what happened and convince them to let me in? When I get my workshop back, I'm sure I could craft you a piece of armour as a reward.
+		DL:createNPCNode(115, 116, "DL_Zeff_ReturningHome") -- I'm afraid, I still can't get past the guards. Maybe you could try to tell them what happened and convince them to let me in?
 		DL:changeQuestState("zeffs_curse", "completed")
+		DL:addNode()
+		
+		DL:createNPCNode(116, -2, "DL_Zeff_ReturningHome2") -- When I get my workshop back, I'm sure I could craft you a piece of armour as a reward.
 		DL:changeQuestState("zeff_returns", "started")
 		DL:addNode()
 		
@@ -269,12 +278,15 @@ loadDialogue = function(DL)
 	
 	if (DL:isQuestState("hungry_wolf", "started") and DL:isQuestComplete("hungry_wolf")) then
 		
-		DL:createNPCNode(90, -2, "DL_Zeff_ThanksForMeat") -- Thank you, that's great. You can tell the farmers that the beast won't come again. And if you wish, I can help you out with my leatherworking skills, as long as I'm still human enough to craft something.
+		DL:createNPCNode(90, 91, "DL_Zeff_ThanksForMeat") -- Thank you, that's great. You can tell the farmers that the beast won't come again.
 		DL:removeItem("fo_sausage", 1)
 		DL:removeItem("fo_ham", 1)
 		DL:changeQuestState("hungry_wolf", "completed")
 		DL:addQuestProgress("monster_problem", "monster_banished")
 		DL:addConditionProgress("npc_zeff", "leatherworker")
+		DL:addNode()
+		
+		DL:createNPCNode(91, -2, "DL_Zeff_ThanksForMeat2") -- And if you wish, I can help you out with my leatherworking skills, as long as I'm still human enough to craft something.
 		DL:addNode()
 		
 	end

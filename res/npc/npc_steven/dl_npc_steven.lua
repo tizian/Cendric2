@@ -44,6 +44,7 @@ loadDialogue = function(DL)
 		if (not DL:isConditionFulfilled("npc_steven", "rules")) then 
 
 			DL:createNPCNode(5, 9, "DL_Steven_Rules1") -- Well, first, you should know that the Order of the Eternal Light is in charge here. Therefore; respect us and follow our orders, or you won't have a very pleasant stay in Gandria.
+			DL:addConditionProgress("npc_steven", "rules")
 			DL:addNode()
 
 
@@ -51,12 +52,15 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(10, 11, "DL_Steven_Rules3") -- And, last but not least: We don't like to see other spells than those which originate from the high divine art. You can hang for practicing Necromancy.
+			DL:createNPCNode(10, 11, "DL_Steven_Rules3") -- And, last but not least: We don't like to see other spells than those which originate from the high divine art.
 			DL:addNode()
 
 
-			DL:createCendricNode(11, -2, "DL_Cendric_Okay") -- Okay.
-			DL:addConditionProgress("npc_steven", "rules")
+			DL:createNPCNode(11, 64, "DL_Steven_Rules4") -- You will hang for practicing Necromancy.
+			DL:addNode()
+
+
+			DL:createCendricNode(64, -2, "DL_Cendric_Okay") -- Okay.
 			DL:addNode()
 
 		end
@@ -146,12 +150,20 @@ loadDialogue = function(DL)
 
 	if (DL:isQuestState("stevens_helmet", "void")) then 
 
-		DL:createNPCNode(19, 20, "DL_Steven_HelmetQuest") -- I got a little bit drunk last night and lost my helmet to some shady guys in the tavern. I'm pretty sure that they belong to the dirty thief guild.
+		DL:createNPCNode(19, 20, "DL_Steven_HelmetQuest") -- I got a little bit drunk last night and lost my helmet to some shady guys in the tavern.
 		DL:changeQuestState("stevens_helmet", "started")
 		DL:addNode()
 
 
-		DL:createNPCNode(20, -2, "DL_Steven_HelmetQuest2") -- I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back. If you succeed, I'll give you your piece of paper back.
+		DL:createNPCNode(20, 65, "DL_Steven_HelmetQuest2") -- I'm pretty sure that they belong to the dirty thief guild.
+		DL:addNode()
+
+
+		DL:createNPCNode(65, 66, "DL_Steven_HelmetQuest3") -- I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back.
+		DL:addNode()
+
+
+		DL:createNPCNode(66, -2, "DL_Steven_HelmetQuest4") -- If you succeed, I'll give you your piece of paper back.
 		DL:addNode()
 
 	end
@@ -279,7 +291,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(38, 43, "DL_Steven_StealTellMe") -- Why would I... ah, nevermind. You must be an admirer of mine.
+		DL:createNPCNode(38, 43, "DL_Steven_StealTellMe") -- Why would I... ah, never mind. You must be an admirer of mine.
 		DL:addNode()
 
 
@@ -318,7 +330,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createCendricNode(52, -2, "DL_Cendric_SucceedSteal") -- (Your attempt to steal the tower key suceeded!)
+		DL:createCendricNode(52, -2, "DL_Cendric_SucceedSteal") -- (Your attempt to steal the tower key succeeded!)
 		DL:addConditionProgress("npc_steven", "key_stolen")
 		DL:addItem("ke_tower", 1)
 		DL:addNode()

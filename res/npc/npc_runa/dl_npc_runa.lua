@@ -44,10 +44,10 @@ loadDialogue = function(DL)
 			DL:addChoice(13, "DL_Choice_Delivery") -- Tell me more about that delivery.
 		end
 		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and DL:isQuestState("runas_deal", "void") and not DL:isQuestComplete("element_master")) then 
-			DL:addChoice(17, "DL_Choice_RunasDealStart") -- Okay, give me the Physalis, I'll take them to Bjarne.
+			DL:addChoice(17, "DL_Choice_RunasDealStart") -- Okay, give me the Physalis; I'll take them to Bjarne.
 		end
 		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "who_bjarne")) then 
-			DL:addChoice(16, "DL_Choice_WhoBjarne") -- Who is that "Bjarne"?
+			DL:addChoice(16, "DL_Choice_WhoBjarne") -- Who is "Bjarne"?
 		end
 		if (DL:isConditionFulfilled("npc_runa", "runas_deal") and not DL:isConditionFulfilled("npc_runa", "paladins")) then 
 			DL:addChoice(30, "DL_Choice_Paladins") -- What is your problem with the paladins?
@@ -65,7 +65,7 @@ loadDialogue = function(DL)
 			DL:addChoice(22, "DL_Choice_WhyProtect") -- Why do you need protection against magic?
 		end
 		if (DL:isConditionFulfilled("npc_runa", "why_protect") and not DL:isConditionFulfilled("npc_runa", "paranoid")) then 
-			DL:addChoice(26, "DL_Choice_Paranoid") -- I think, you're a bit too paranoid...
+			DL:addChoice(26, "DL_Choice_Paranoid") -- I think you're a bit too paranoid...
 		end
 		if (DL:isQuestState("runas_deal", "started") and DL:isQuestComplete("runas_deal")) then 
 			DL:addChoice(27, "DL_Choice_GotPendant") -- I got your pendant. Here.
@@ -80,7 +80,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(5, 6, "DL_Runa_WhoAreYou2") -- And you? Are you just running around and ask everyone who they are?
+			DL:createNPCNode(5, 6, "DL_Runa_WhoAreYou2") -- And you? Are you just running around, asking everyone who they are?
 			DL:addNode()
 
 
@@ -91,7 +91,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(7, -2, "DL_Runa_AskEveryoneYes") -- Ah... the youth of today... as if there wasn't enough other work to do.
+			DL:createNPCNode(7, -2, "DL_Runa_AskEveryoneYes") -- Ach... the youth of today... as if there wasn't enough work to do already!
 			DL:addNode()
 
 
@@ -211,7 +211,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_runa", "pendant") and not DL:isConditionFulfilled("npc_runa", "why_protect")) then 
 
-			DL:createNPCNode(22, -2, "DL_Runa_WhyProtect") -- Because that's the only way we can stand a chance when they attack... you should better get a pendant, too.
+			DL:createNPCNode(22, -2, "DL_Runa_WhyProtect") -- Because that's the only way we can stand a chance when they attack... you better get a pendant, too.
 			DL:addConditionProgress("npc_runa", "why_protect")
 			DL:addNode()
 
@@ -232,7 +232,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(28, 29, "DL_Runa_GotPendant2") -- Thank you so much! Now, I'm finally safe from this magic.
+			DL:createNPCNode(28, 29, "DL_Runa_GotPendant2") -- Thank you so much! Now, I'm finally safe from this wretched magic.
 			DL:changeQuestState("runas_deal", "completed")
 			DL:addNode()
 

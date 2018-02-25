@@ -144,11 +144,15 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(22, 23, "DL_Vincent_KeyCost150") -- I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+				DL:createNPCNode(22, 23, "DL_Vincent_KeyCost150") -- I had to steal the key from him. It wasn't easy, as he was fully awake.
 				DL:addNode()
 
 
-				DL:createNPCNode(23, -2, "DL_Vincent_Treasure") -- I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
+				DL:createNPCNode(23, 49, "DL_Vincent_KeyCost150_2") -- It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 150 golden coins.
+				DL:addNode()
+
+
+				DL:createNPCNode(49, -2, "DL_Vincent_Treasure") -- I only want you to get a special blue stone from the Elder's chest for me. You can keep the rest for yourself.
 				DL:addNode()
 
 			end
@@ -159,11 +163,15 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(24, 25, "DL_Vincent_KeyCost100") -- I had to steal the key from him. It wasn't easy, as he was fully awake. It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+				DL:createNPCNode(24, 25, "DL_Vincent_KeyCost100") -- I had to steal the key from him. It wasn't easy, as he was fully awake.
 				DL:addNode()
 
 
-				DL:createNPCNode(25, -2, "DL_Vincent_Treasure") -- 
+				DL:createNPCNode(25, 50, "DL_Vincent_KeyCost100_2") -- It wouldn't have been a problem if you did what I told you before... Now, to compensate for my troubles, it will cost you 100 golden coins.
+				DL:addNode()
+
+
+				DL:createNPCNode(50, -2, "DL_NPC_50") -- 
 				DL:addNode()
 
 			end
@@ -189,11 +197,15 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the stuff I mixed into the schnapps you gave him? It was a sleeping powder. Getting the key from him was mere child's play.
+				DL:createNPCNode(28, 29, "DL_Vincent_KeyCost0") -- You remember the stuff I mixed into the schnapps you gave him?
 				DL:addNode()
 
 
-				DL:createNPCNode(29, -2, "DL_Vincent_Treasure") -- 
+				DL:createNPCNode(29, 52, "DL_Vincent_KeyCost0_2") -- It was a sleeping powder. Getting the key from him was mere child's play.
+				DL:addNode()
+
+
+				DL:createNPCNode(52, -2, "DL_Vincent_Treasure") -- 
 				DL:addNode()
 
 			end
@@ -315,7 +327,7 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(38, -2, "DL_Vincent_StealingFitsYou") -- Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuable things.
+			DL:createNPCNode(38, -2, "DL_Vincent_StealingFitsYou") -- Taking belongings from other people doesn't seem to be a big deal for you. I could teach you how to get to even more valuables.
 			DL:changeQuestState("elder_chest", "completed")
 			DL:addReputationProgress("thief", 5)
 			DL:addNode()
@@ -354,11 +366,19 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it? The only problem is, she won't tell us how it works. She leaves us no choice but to abstract the recipe from her.
+			DL:createNPCNode(43, 44, "DL_Vincent_SecondQuest2") -- A very useful ability, isn't it? The only problem is, she won't tell us how it works.
 			DL:addNode()
 
 
-			DL:createNPCNode(44, -2, "DL_Vincent_SecondQuest3") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us. If you manage to do that, you might get to know what "us" really means.
+			DL:createNPCNode(44, 51, "DL_Vincent_SecondQuest3") -- She leaves us no choice but to abstract the recipe from her.
+			DL:addNode()
+
+
+			DL:createNPCNode(51, 53, "DL_Vincent_SecondQuest4") -- There must be a way to get into her basement - by taking a shortcut through the sewers. Find that way and get the recipe for us.
+			DL:addNode()
+
+
+			DL:createNPCNode(53, -2, "DL_Vincent_SecondQuest5") -- If you manage to do that, you might get to know what "us" really means.
 			DL:changeQuestState("invis_recipe", "started")
 			DL:addNode()
 

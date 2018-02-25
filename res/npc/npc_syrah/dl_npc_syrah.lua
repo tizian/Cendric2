@@ -11,8 +11,12 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_syrah", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Syrah_Greeting") -- Well hello there! You look like you could use some potions made by the infamous alchemist Syrah. A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
+		DL:createNPCNode(1, 50, "DL_Syrah_Greeting") -- Well hello there! You look like you could use some potions made by the infamous alchemist Syrah.
 		DL:addConditionProgress("npc_syrah", "talked")
+		DL:addNode()
+
+
+		DL:createNPCNode(50, -2, "DL_Syrah_Greeting2") -- A love potion or a hair dye - there's nearly nothing I'm not capable of brewing.
 		DL:addNode()
 
 	end
@@ -208,12 +212,16 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(33, 34, "DL_Syrah_FavourQuestStart3") -- I'm sure that you can find that flower there - mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
+		DL:createNPCNode(33, 34, "DL_Syrah_FavourQuestStart3") -- I'm sure that you can find that flower there...
 		DL:addNode()
 
 
-		DL:createNPCNode(34, -1, "DL_Syrah_FavourQuestStart4") -- Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
+		DL:createNPCNode(34, 51, "DL_Syrah_FavourQuestStart4") -- Mages who "misuse" magic are often burnt at the stake and whatever remains will be taken to this crypt.
 		DL:changeQuestState("favor_for_a_favor", "started")
+		DL:addNode()
+
+
+		DL:createNPCNode(51, -2, "DL_Syrah_FavourQuestStart5") -- Oh, and if you happen to meet the grave digger Morton, he's a good friend of mine. Just tell him I sent you, and he'll let you in.
 		DL:addNode()
 
 	end
