@@ -255,6 +255,7 @@ loadDialogue = function(DL)
 		DL:removeGold(100)
 		DL:addItem("qe_antimagiccrystal", 1)
 		DL:addConditionProgress("npc_steven", "crystal_bought")
+		DL:addReputationProgress("cleric", 5)
 		DL:addNode()
 
 	end
@@ -333,6 +334,7 @@ loadDialogue = function(DL)
 		DL:createCendricNode(52, -2, "DL_Cendric_SucceedSteal") -- (Your attempt to steal the tower key succeeded!)
 		DL:addConditionProgress("npc_steven", "key_stolen")
 		DL:addItem("ke_tower", 1)
+		DL:addReputationProgress("thief", 5)
 		DL:addNode()
 
 
@@ -389,6 +391,7 @@ loadDialogue = function(DL)
 		DL:createCendricNode(61, -2, "DL_Cendric_SucceedSteal") -- 
 		DL:addConditionProgress("npc_steven", "key_stolen")
 		DL:addItem("ke_tower", 1)
+		DL:addReputationProgress("thief", 5)
 		DL:addNode()
 
 

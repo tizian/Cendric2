@@ -453,7 +453,7 @@ npc.id:npc_steven
 	translation.tag:DL_Steven_HelmetQuest3
 	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back.
 	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt.
-	translation.ch:I bruchä öpper vo wnid usgseht aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout.
+	translation.ch:I bruchä öpper wo nid usgseht, aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout.
 	[
 		# Link node, tag is next tag
 		tag:66
@@ -717,6 +717,7 @@ npc.id:npc_steven
 	trigger:DL:removeGold(100)
 	trigger:DL:addItem("qe_antimagiccrystal", 1)
 	trigger:DL:addConditionProgress("npc_steven", "crystal_bought")
+	trigger:DL:addReputationProgress("cleric", 5)
 	# translation: 
 	translation.tag:DL_Steven_BuyCrystal
 	translation.en:Hehehe. You made a really good deal today!
@@ -996,6 +997,7 @@ npc.id:npc_steven
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_steven", "key_stolen")
 	trigger:DL:addItem("ke_tower", 1)
+	trigger:DL:addReputationProgress("thief", 5)
 	# translation: 
 	translation.tag:DL_Cendric_SucceedSteal
 	translation.en:(Your attempt to steal the tower key succeeded!)
@@ -1190,6 +1192,7 @@ npc.id:npc_steven
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_steven", "key_stolen")
 	trigger:DL:addItem("ke_tower", 1)
+	trigger:DL:addReputationProgress("thief", 5)
 	# translation: 
 	translation.tag:DL_Cendric_SucceedSteal
 	translation.en:
