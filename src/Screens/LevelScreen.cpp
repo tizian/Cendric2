@@ -104,6 +104,8 @@ void LevelScreen::notifyBackFromMenu() {
 }
 
 void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
+	if (m_mainChar->isDead() || m_isGameOver) return;
+
 	m_bossRewards.lootableGold += reward.lootableGold;
 	for (auto& it : reward.lootableItems) {
 		if (!contains(m_bossRewards.lootableItems, it.first)) {

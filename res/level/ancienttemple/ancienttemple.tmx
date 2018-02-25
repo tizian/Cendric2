@@ -21,11 +21,9 @@
    </animation>
   </tile>
   <tile id="70">
-   <objectgroup draworder="index">
     <properties>
      <property name="light" value="10,25,100,150,0.6"/>
     </properties>
-   </objectgroup>
    <animation>
     <frame tileid="70" duration="100"/>
     <frame tileid="98" duration="100"/>
@@ -33,11 +31,9 @@
    </animation>
   </tile>
   <tile id="71">
-   <objectgroup draworder="index">
     <properties>
      <property name="light" value="40,30,100,150,0.5"/>
     </properties>
-   </objectgroup>
    <animation>
     <frame tileid="71" duration="100"/>
     <frame tileid="99" duration="100"/>
@@ -45,46 +41,46 @@
    </animation>
   </tile>
   <tile id="127">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,25,100,150,0.8"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="132">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,15,150,100,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="151">
-   <objectgroup draworder="index">
+ 
     <properties>
      <property name="light" value="25,25,100,100,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="152">
-   <objectgroup draworder="index">
+   
     <properties>
      <property name="light" value="25,25,100,100,0.2"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="168">
-   <objectgroup draworder="index">
+  
     <properties>
      <property name="light" value="25,25,150,150,0.6"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="170">
-   <objectgroup draworder="index">
+  
     <properties>
      <property name="light" value="25,25,150,150,0.6"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="177">
    <objectgroup draworder="index"/>
@@ -93,172 +89,172 @@
    <objectgroup draworder="index"/>
   </tile>
   <tile id="196">
-   <objectgroup draworder="index">
+   
     <properties>
      <property name="light" value="25,25,150,150,0.6"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="198">
-   <objectgroup draworder="index">
+ 
     <properties>
      <property name="light" value="25,25,150,150,0.6"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="229">
-   <objectgroup draworder="index">
+ 
     <properties>
      <property name="light" value="25,25,100,100,0.3"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="233">
-   <objectgroup draworder="index">
+  
     <properties>
      <property name="light" value="25,25,150,150,0.8"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="234">
-   <objectgroup draworder="index">
+  
     <properties>
      <property name="light" value="25,25,150,150,0.8"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="235">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,25,150,150,0.8"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="261">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,25,150,150,0.8"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="300">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,30,100,150,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="320">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,30,50,70,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="348">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,30,50,70,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="374">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,30,50,70,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="376">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,30,50,70,1.0"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="377">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="50,25,100,100,0.4"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="535">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="35,35,100,100,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="536">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="30,30,100,100,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="538">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="30,30,100,100,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="567">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="20,30,100,100,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="590">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="25,20,60,70,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="594">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="30,20,150,150,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="595">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="20,45,100,150,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="596">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="15,40,100,100,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="636">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="5,35,100,100,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="637">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="35,35,100,100,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="690">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="50,20,60,70,0.5"/>
     </properties>
-   </objectgroup>
+
   </tile>
  </tileset>
  <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">

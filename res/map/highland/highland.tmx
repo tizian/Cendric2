@@ -1028,7 +1028,7 @@
   </object>
   <object id="342" x="1100" y="150" width="100" height="50">
    <properties>
-    <property name="level entry" value="res/level/gemcave/gemcave.tmx,450,460"/>
+    <property name="level entry" value="res/level/gemcave/gemcave.tmx,435,460"/>
     <property name="persistent" value=""/>
    </properties>
   </object>

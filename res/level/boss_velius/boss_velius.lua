@@ -5,5 +5,5 @@ onWin = function(W)
 end
 	
 onLose = function(W)
-	W:setMap("res/map/veliusroom/veliusroom.tmx", 400, 400)
+	W:setMap("res/map/veliusroom/veliusroom.tmx", 570, 430)
 end

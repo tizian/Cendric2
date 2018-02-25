@@ -117,6 +117,26 @@ npc.id:npc_lua
 	]
 	[
 		# Link node, tag is next tag
+		tag:10
+		condition:DL:isQuestState("eye_of_the_moon", "void")
+		# translation: 
+		translation.tag:DL_Choice_EyeQuest
+		translation.en:Can I help you with something?
+		translation.de:Kann ich dir irgendwie helfen?
+		translation.ch:Chan ich dir irgendwie helfe?
+	]
+	[
+		# Link node, tag is next tag
+		tag:14
+		condition:DL:isQuestState("eye_of_the_moon", "started") and DL:isQuestComplete("eye_of_the_moon")
+		# translation: 
+		translation.tag:DL_Choice_GotEye
+		translation.en:I got your amulet.
+		translation.de:Ich habe dein Amulett.
+		translation.ch:Ich ha dis Amulett.
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -179,6 +199,96 @@ npc.id:npc_lua
 	translation.en:I love this library. So much knowledge that would be burned by the clerics if they got the chance...
 	translation.de:Ich liebe diese Bibliothek. So viel Wissen, welches von den Klerikern verbrannt werden würde, wenn es ihnen möglich wäre.
 	translation.ch:Ich lieb die Bibliothek. So viel Wüssä wo vo dä Kleriker verbrennt wärde würd, wennsi d'Möglichkeit drzue hättä.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [10] NPC Node
+	tag:10
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lua_EyeQuest
+	translation.en:Oh, that's so nice of you to ask. 
+	translation.de:Oh, lieb von dir, dass du fragst.
+	translation.ch:Oh, isch lieb, dassd fragsch.
+	[
+		# Link node, tag is next tag
+		tag:11
+	]
+}
+{1
+	# [11] NPC Node
+	tag:11
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lua_EyeQuest2
+	translation.en:My dear magical amulet, the "Eye of the Moon", got stolen.
+	translation.de:Mein geliebtes magisches Amulett, das "Auge des Mondes", wurde gestohlen.
+	translation.ch:Mis gliebt Amulet, es "Mondaug" isch gstoohle worde.
+	[
+		# Link node, tag is next tag
+		tag:12
+	]
+}
+{1
+	# [12] NPC Node
+	tag:12
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Lua_EyeQuest3
+	translation.en:Unfortunately, I don't have any clue where it could be.
+	translation.de:Leider habe ich keine Idee, wo es sein könnte.
+	translation.ch:Leider hani gar keni Ideä, wos si chenti.
+	[
+		# Link node, tag is next tag
+		tag:13
+	]
+}
+{1
+	# [13] NPC Node
+	tag:13
+	# triggers: 
+	trigger:DL:changeQuestState("eye_of_the_moon", "started")
+	# translation: 
+	translation.tag:DL_Lua_EyeQuest4
+	translation.en:But I would give you my gold and precious stones, if you happen to find it.
+	translation.de:Aber ich würde dir mein Gold und Edelsteine überlassen, wenn du es finden solltest.
+	translation.ch:Aber ich wür der mis Gold und Edelstei ge, wennds finde söttsch.
+	[
+		# Link node, tag is next tag
+		tag:-2
+	]
+}
+{1
+	# [14] NPC Node
+	tag:14
+	# triggers: 
+	trigger:DL:removeItem("eq_eyeofthemoon", 1)
+	# translation: 
+	translation.tag:DL_Lua_GotEye
+	translation.en:Wow, you really found it?
+	translation.de:Wow, du hast es wirklich gefunden?
+	translation.ch:Wow, du hesches würkli gfunde?
+	[
+		# Link node, tag is next tag
+		tag:15
+	]
+}
+{1
+	# [15] NPC Node
+	tag:15
+	# triggers: 
+	trigger:DL:changeQuestState("eye_of_the_moon", "completed")
+	trigger:DL:addItem("mi_shinystone", 3)
+	trigger:DL:addGold(50)
+	trigger:DL:addReputationProgress("necromancer", 5)
+	# translation: 
+	translation.tag:DL_Lua_GotEye2
+	translation.en:I really, really missed it. Thank you, my hero. Here, take your reward.
+	translation.de:Das habe ich wirklich sehr vermisst. Vielen Dank, mein Held. Hier, nimm deine Belohnung.
+	translation.ch:Das hani wirgglig sehr vrmisst. Danke, min Held. Da, nimm dini Belohnig.
 	[
 		# Link node, tag is next tag
 		tag:-2

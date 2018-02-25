@@ -99,9 +99,11 @@ MovingBehavior* DragonWhelpEnemy::createMovingBehavior(bool asAlly) {
 		behavior = new AggressiveFlyingBehavior(this);
 	}
 	behavior->setApproachingDistance(100.f);
-	behavior->setMaxVelocityYDown(0.f);
-	behavior->setMaxVelocityYUp(0.f);
-	behavior->setMaxVelocityX(0.f);
+
+	float velocity = (m_skinNr == 0 || m_skinNr == 2) ? 0.f : 100.f;
+	behavior->setMaxVelocityYDown(velocity);
+	behavior->setMaxVelocityYUp(velocity);
+	behavior->setMaxVelocityX(velocity);
 	return behavior;
 }
 
@@ -232,8 +234,15 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	addAnimation(GameObjectState::Hatching, hatchingAnimation);
 
 	// initial values
-	setState(GameObjectState::Inactive);
-	setCurrentAnimation(getAnimation(GameObjectState::Inactive), false, true);
+	if (m_skinNr == 1 || m_skinNr == 3) {
+		setState(GameObjectState::Idle);
+		setCurrentAnimation(getAnimation(GameObjectState::Idle));
+		
+	} else {
+		setState(GameObjectState::Inactive);
+		setCurrentAnimation(getAnimation(GameObjectState::Inactive), false, true);
+	}
+
 	playCurrentAnimation(true);
 }
 

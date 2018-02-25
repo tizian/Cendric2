@@ -239,9 +239,9 @@ npc.id:npc_graham
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Graham_WhatDoing3
-	translation.en:But what's a royal bard without his instrument? *sniff
-	translation.de:Aber was ist ein königlicher Barde ohne sein Instrument? *sniff
-	translation.ch:Aber was isch isch en königliche Bard ohni sis Instrument? *sniff
+	translation.en:But what's a royal bard without his instrument?
+	translation.de:Aber was ist ein königlicher Barde ohne sein Instrument?
+	translation.ch:Aber was isch isch en königliche Bard ohni sis Instrument?
 	[
 		# Link node, tag is next tag
 		tag:11

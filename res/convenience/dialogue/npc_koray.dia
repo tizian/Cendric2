@@ -95,6 +95,16 @@ npc.id:npc_koray
 	]
 	[
 		# Link node, tag is next tag
+		tag:24
+		condition:DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "mooneye") and DL:isQuestState("eye_of_the_moon", "started")
+		# translation: 
+		translation.tag:DL_Choice_StoleEye
+		translation.en:You stole that amulet, didn't you?
+		translation.de:Du hast dieses Amulett gestohlen, oder?
+		translation.ch:Du hesch das Amulett klaut, gell?
+	]
+	[
+		# Link node, tag is next tag
 		tag:-1
 		# translation: 
 		translation.tag:
@@ -398,6 +408,21 @@ npc.id:npc_koray
 	[
 		# Link node, tag is next tag
 		tag:-1
+	]
+}
+{1
+	# [24] NPC Node
+	tag:24
+	# triggers: 
+	trigger:DL:addConditionProgress("npc_koray", "mooneye")
+	# translation: 
+	translation.tag:DL_Koray_StoleEye
+	translation.en:"Stolen" is such a harsh word. I'd rather say I found it. (Grins)
+	translation.de:"Gestohlen" ist so ein hartes Wort. Ich würde eher sagen, ich habs gefunden. (Grinst)
+	translation.ch:"Gstohle" isch so es herts Wort. Ich wür ehno sege, ich has gfunde. (Grinst)
+	[
+		# Link node, tag is next tag
+		tag:-2
 	]
 }
 {1

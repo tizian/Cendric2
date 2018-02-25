@@ -50,18 +50,18 @@
    </properties>
   </tile>
   <tile id="566">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="30,30,100,100,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
   <tile id="595">
-   <objectgroup draworder="index">
+
     <properties>
      <property name="light" value="20,30,100,100,0.9"/>
     </properties>
-   </objectgroup>
+
   </tile>
  </tileset>
  <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">

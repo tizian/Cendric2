@@ -33,6 +33,9 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_koray", "telekinesis") and DL:isQuestState("help_koray", "void")) then 
 			DL:addChoice(20, "DL_Choice_StartQuest") -- I'll escort you if you teach me your magic.
 		end
+		if (DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "mooneye") and DL:isQuestState("eye_of_the_moon", "started")) then 
+			DL:addChoice(24, "DL_Choice_StoleEye") -- You stole that amulet, didn't you?
+		end
 		DL:addChoice(-1, "") -- 
 		DL:addNode()
 
@@ -144,6 +147,14 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(20, -1, "DL_Koray_StartQuest") -- Alright. Follow me.
 			DL:changeQuestState("help_koray", "started")
+			DL:addNode()
+
+		end
+
+		if (DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "mooneye") and DL:isQuestState("eye_of_the_moon", "started")) then 
+
+			DL:createNPCNode(24, -2, "DL_Koray_StoleEye") -- "Stolen" is such a harsh word. I'd rather say I found it. (Grins)
+			DL:addConditionProgress("npc_koray", "mooneye")
 			DL:addNode()
 
 		end

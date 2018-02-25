@@ -92,7 +92,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(10, 11, "DL_Graham_WhatDoing3") -- But what's a royal bard without his instrument? *sniff
+		DL:createNPCNode(10, 11, "DL_Graham_WhatDoing3") -- But what's a royal bard without his instrument?
 		DL:addNode()
 
 
