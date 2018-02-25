@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "GameObjectComponents/ParticleComponent.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 #include "GlobalResource.h"
 
@@ -120,6 +121,10 @@ void NekomataEnemy::handleAttackInput() {
 void NekomataEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 90.f, 60.f));
 	setSpriteOffset(sf::Vector2f(-20.f, -10.f));
+
+	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), sf::Vector2f(250.f, 150.f), 0.5f);
+	addComponent(new LightComponent(data, this));
+
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();

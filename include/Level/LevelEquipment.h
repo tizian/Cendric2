@@ -21,6 +21,7 @@ public:
 
 	void load(const ItemEquipmentBean* itemBean, ItemType type);
 	void loadComponents(const ItemEquipmentLightBean* light, const ItemEquipmentParticleBean* particles);
+	
 	void update(const sf::Time& frameTime) override;
 	
 	GameObjectType getConfiguredType() const override;
@@ -45,7 +46,9 @@ private:
 	void updateParticlesVisibility() const;
 	void checkAndSetPosition();
 	void updateAnimation();
+
 	bool m_isLocked = false;
+	bool m_isParticleClimbHidden = false;
 
 	static const int EQ_SIZE;
 };

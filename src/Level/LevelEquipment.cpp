@@ -120,6 +120,7 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 		auto eulerUpdater = new particles::AttractingEulerUpdater(&m_position, particles->attract_fraction);
 		data.eulerUpdater = eulerUpdater;
 
+		m_isParticleClimbHidden = particles->is_climb_hidden;
 		setParticleComponent(data, particles->spawner_offset, particles->goal_offset);
 	}
 
@@ -141,12 +142,9 @@ void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position
 
 void LevelEquipment::updateParticlesVisibility() const {
 	if (!m_particleComponent) return;
-	if (m_itemType != ItemType::Equipment_weapon) {
-		m_particleComponent->setVisible(m_state != GameObjectState::Dead);
-	}
-	else {
-		m_particleComponent->setVisible(!(m_state == GameObjectState::Dead || m_state == GameObjectState::Climbing_1 || m_state == GameObjectState::Climbing_2));
-	}
+
+	m_particleComponent->setVisible(!(m_state == GameObjectState::Dead || 
+		(m_isParticleClimbHidden && (m_state == GameObjectState::Climbing_1 || m_state == GameObjectState::Climbing_2))));
 }
 
 void LevelEquipment::setPosition(const sf::Vector2f& position) {

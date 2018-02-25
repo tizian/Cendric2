@@ -27,4 +27,5 @@ struct ItemEquipmentParticleBean final : DatabaseBean {
     float time_min;
     float time_max;
 	float attract_fraction;
+	bool is_climb_hidden;
 };

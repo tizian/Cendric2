@@ -404,7 +404,7 @@ npc.id:npc_koray
 	translation.tag:DL_Koray_StartQuest
 	translation.en:Alright. Follow me.
 	translation.de:Gut. Folge mir.
-	translation.ch:Guet. Chum mit.
+	translation.ch:Guet. Machemo so. Chum mit.
 	[
 		# Link node, tag is next tag
 		tag:-1
@@ -417,9 +417,9 @@ npc.id:npc_koray
 	trigger:DL:addConditionProgress("npc_koray", "mooneye")
 	# translation: 
 	translation.tag:DL_Koray_StoleEye
-	translation.en:"Stolen" is such a harsh word. I'd rather say I found it. (Grins)
+	translation.en:"Stole" is such a harsh word. I'd rather say I found it. (Grins)
 	translation.de:"Gestohlen" ist so ein hartes Wort. Ich würde eher sagen, ich habs gefunden. (Grinst)
-	translation.ch:"Gstohle" isch so es herts Wort. Ich wür ehno sege, ich has gfunde. (Grinst)
+	translation.ch:"Klaut" isch so es herts Wort. Ich wür ehno sege, ich has gfunde. (Grinst)
 	[
 		# Link node, tag is next tag
 		tag:-2

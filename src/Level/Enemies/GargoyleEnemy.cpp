@@ -4,6 +4,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Gargoyle, GargoyleEnemy)
@@ -141,6 +142,10 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	m_animations.clear();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 80.f));
 	setSpriteOffset(sf::Vector2f(-127.f, -42.f));
+
+	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), sf::Vector2f(250.f, 250.f), 0.3f);
+	addComponent(new LightComponent(data, this));
+
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();

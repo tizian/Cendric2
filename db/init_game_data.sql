@@ -182,6 +182,7 @@ CREATE TABLE item_equipment_particle(
     time_min DOUBLE NOT NULL,
     time_max DOUBLE NOT NULL,
     attract_fraction DOUBLE NOT NULL DEFAULT 1.0,
+    is_climb_hidden BOOLEAN NOT NULL DEFAULT FALSE,
   
 	PRIMARY KEY (item_id),
 	FOREIGN KEY (item_id) REFERENCES equipment(item_id)

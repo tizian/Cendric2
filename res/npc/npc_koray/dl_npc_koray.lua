@@ -153,7 +153,7 @@ loadDialogue = function(DL)
 
 		if (DL:isConditionFulfilled("npc_koray", "interested") and not DL:isConditionFulfilled("npc_koray", "mooneye") and DL:isQuestState("eye_of_the_moon", "started")) then 
 
-			DL:createNPCNode(24, -2, "DL_Koray_StoleEye") -- "Stolen" is such a harsh word. I'd rather say I found it. (Grins)
+			DL:createNPCNode(24, -2, "DL_Koray_StoleEye") -- "Stole" is such a harsh word. I'd rather say I found it. (Grins)
 			DL:addConditionProgress("npc_koray", "mooneye")
 			DL:addNode()
 

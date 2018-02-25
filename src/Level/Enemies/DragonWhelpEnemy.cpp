@@ -3,6 +3,7 @@
 #include "Level/MOBBehavior/MovingBehaviors/AllyFlyingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "GameObjectComponents/LightComponent.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Dragonwhelp, DragonWhelpEnemy)
@@ -17,6 +18,10 @@ void DragonWhelpEnemy::insertDefaultLoot(std::map<std::string, int>& loot, int& 
 
 void DragonWhelpEnemy::insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {
 	gold = rand() % 3 + 1;
+}
+
+float DragonWhelpEnemy::getConfiguredDistanceToHPBar() const {
+	return 30.f; 
 }
 
 DragonWhelpEnemy::DragonWhelpEnemy(const Level* level, Screen* screen) :
@@ -166,6 +171,10 @@ sf::Time DragonWhelpEnemy::getConfiguredChasingTime() const {
 void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
 	setSpriteOffset(sf::Vector2f(-15.f, -35.f));
+
+	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 150.f, 0.5f);
+	addComponent(new LightComponent(data, this));
+
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	int width = 70;
