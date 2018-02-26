@@ -151,8 +151,7 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	m_mainChar->setInvincible(true);
 }
 
-void LevelScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
-	WorldScreen::notifyItemEquip(itemID, type);
+void LevelScreen::notifyEquipmentReload() {
 	dynamic_cast<LevelInterface*>(m_interface)->notifyReloadEquipment();
 }
 
@@ -466,6 +465,7 @@ void LevelScreen::handleBackToCheckpoint() {
 void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	// handle game over
 	if (!m_isGameOver && !m_mainChar->isDead()) return;
+	if (m_isBossDefeated) return;
 	if (m_isGameOver) {
 		if (m_respawnWaitTime == sf::Time::Zero) return;
 		updateTime(m_respawnWaitTime, frameTime);

@@ -106,7 +106,10 @@ void LevelMovableGameObject::updateHealthRegeneration(const sf::Time& frameTime)
 	m_timeSinceRegeneration += frameTime;
 	if (m_timeSinceRegeneration >= sf::seconds(1)) {
 		m_timeSinceRegeneration -= sf::seconds(1);
-		m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
+		
+		if (!(m_isInvincible && m_attributes.healthRegenerationPerS < 0)) {
+			m_attributes.currentHealthPoints += m_attributes.healthRegenerationPerS;
+		}
 
 		if (m_damageNumbers) {
 			const sf::Vector2f& pos = getPosition();

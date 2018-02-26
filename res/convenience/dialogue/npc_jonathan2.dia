@@ -112,9 +112,9 @@ npc.id:npc_jonathan2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_Whatup4
-	translation.en:Finally, they tried to attack me - but I fought back and got away while their burning robes distracted them.
-	translation.de:Dann haben sie versucht, mich anzugreifen - aber ich habe mich gewehrt und bin geflüchtet, als sie durch ihre brennenden Roben abgelenkt waren.
-	translation.ch:Denn häns probiart, mi azgriifa - aber i han mi gwehrt und bin gflüchtet wo si vu ihrna brennenda Roba abglenkt gsi sind.
+	translation.en:I couldn't fight back at first, because they used a Physalis poison to bemuse me. How vile!
+	translation.de:Ich konnte mich zuerst nicht wehren, weil sie mich mit einem Physalis-Gift betäubt hatten. Ganz abscheulich!
+	translation.ch:I han mi zersch nid wehra chöna, well si mich mitemne Physalis-Gift betäubt hän. Ganz übal!
 	[
 		# Link node, tag is next tag
 		tag:8
@@ -126,6 +126,20 @@ npc.id:npc_jonathan2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_Whatup5
+	translation.en:But when they finally tried to kill me, I managed to recover and got away while their burning robes distracted them.
+	translation.de:Aber als sie dann versucht haben, mich zu töten, konnte ich mich aufrappeln und bin geflüchtet, als sie durch ihre brennenden Roben abgelenkt waren.
+	translation.ch:Aber wo si denn versuacht hän, mich z'töta, hani mi chöna uffrapple und bin gflüchtet wo si vu ihrna brennenda Roba abglenkt gsi sind.
+	[
+		# Link node, tag is next tag
+		tag:22
+	]
+}
+{1
+	# [22] NPC Node
+	tag:22
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Jonathan_Whatup6
 	translation.en:I was afraid they'd come after you too. I'm glad they didn't get you yet.
 	translation.de:Ich fürchtete, sie wären auch hinter dir her. Ich bin froh, dass sie dich noch nicht erwischt haben.
 	translation.ch:I han Angst gha dass si au hinter diar her sind. Bin froh, dass si di nonit verwütscht hän.

@@ -53,7 +53,8 @@ public:
 	// getter for items
 	std::map<std::string, int>* getItems();
 	// an item was added or removed. if itemID equals "gold", gold is added or removed
-	void notifyItemChange(const std::string& itemID, int amount);
+	// returns true iff an equipment item was removed
+	bool notifyItemChange(const std::string& itemID, int amount);
 	void setOverworld(const std::string& map);
 	// save the position and map id. also sets "isInLevel" = false
 	void setMap(const sf::Vector2f& position, const std::string& map);
@@ -66,7 +67,7 @@ public:
 	// sets the "in level" property of the character core data
 	void setInLevel(bool inLevel);
 	// equips an item at the given position and adds the former equipment part into the inventory. To deequip an item, use this method with an empty string as item id.
-	void equipItem(const std::string& item, ItemType type);
+	void equipItem(const std::string& item, ItemType type, bool keepOldItem = true);
 	// tries to remove the spell from slot nr "slotNr"
 	void removeSpell(int slotNr);
 	// tries to add the spell with id "id" to slot nr "slotNr"
@@ -211,7 +212,8 @@ private:
 	// adds item(s) to the data
 	void addItem(const std::string& item, int quantity);
 	// removes item(s) to the data
-	void removeItem(const std::string& item, int quantity);
+	// returns true if an equipment item was removed
+	bool removeItem(const std::string& item, int quantity);
 	// adds item(s) to the stored data
 	void addStoredItem(const std::string& item, int quantity);
 	// removes item(s) to the stored data

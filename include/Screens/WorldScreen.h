@@ -94,6 +94,8 @@ protected:
 	virtual void quicksave();
 	// handle quickload 
 	virtual void quickload();
+	// notifies a character equipment reload
+	virtual void notifyEquipmentReload() = 0;
 
 protected:
 	WorldInterface* m_interface = nullptr;

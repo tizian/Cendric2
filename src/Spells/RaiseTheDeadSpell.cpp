@@ -45,7 +45,7 @@ void RaiseTheDeadSpell::execOnHit(LevelMovableGameObject* target) {
 	// add an allied copy of that mob.
 	enemy->setResurrected();
 	Enemy* copy = ObjectFactory::Instance()->createEnemy(enemy->getEnemyID(), m_level, m_screen);
-	copy->load(0);
+	copy->load(enemy->getSkinNr());
 	copy->setAlly(m_data.duration);
 	copy->addAttributes(m_data.duration, attributes);
 	copy->setPosition(enemy->getPosition());

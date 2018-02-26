@@ -34,7 +34,6 @@ public:
 	void notifyCharacterInfoReload();
 	void notifyBackFromMenu() override;
 	void notifyBossKilled(const EnemyReward& reward);
-	void notifyItemEquip(const std::string& itemID, ItemType type) override;
 	void setEnemyForHealthBar(const Enemy* enemy);
 	void clearConsumedFood();
 	void notifyPermanentItemConsumed(const Item* item) override;
@@ -58,6 +57,7 @@ public:
 
 private:
 	void quicksave() override;
+	void notifyEquipmentReload() override;
 
 private:
 	Level m_currentLevel;

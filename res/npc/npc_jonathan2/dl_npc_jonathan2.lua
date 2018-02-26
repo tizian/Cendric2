@@ -42,11 +42,15 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(7, 8, "DL_Jonathan_Whatup4") -- Finally, they tried to attack me - but I fought back and got away while their burning robes distracted them.
+		DL:createNPCNode(7, 8, "DL_Jonathan_Whatup4") -- I couldn't fight back at first, because they used a Physalis poison to bemuse me. How vile!
 		DL:addNode()
 
 
-		DL:createNPCNode(8, -2, "DL_Jonathan_Whatup5") -- I was afraid they'd come after you too. I'm glad they didn't get you yet.
+		DL:createNPCNode(8, 22, "DL_Jonathan_Whatup5") -- But when they finally tried to kill me, I managed to recover and got away while their burning robes distracted them.
+		DL:addNode()
+
+
+		DL:createNPCNode(22, -2, "DL_Jonathan_Whatup6") -- I was afraid they'd come after you too. I'm glad they didn't get you yet.
 		DL:addNode()
 
 		if (not DL:isConditionFulfilled("npc_jonathan2", "house")) then 

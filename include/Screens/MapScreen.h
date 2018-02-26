@@ -22,6 +22,7 @@ public:
 	void execOnExit() override;
 	void notifyConditionAdded(const Condition& condition) override;
 	void notifyItemEquip(const std::string& itemID, ItemType type) override;
+	
 
 	const Map* getWorld() const override;
 	const MapData* getWorldData() const override;
@@ -41,6 +42,7 @@ private:
 	bool isOverlayActive() const;
 	bool isOverlayVisible() const;
 	void quicksave() override;
+	void notifyEquipmentReload();
 
 	void updateFogOfWar();
 

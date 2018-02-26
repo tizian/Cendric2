@@ -512,3 +512,7 @@ void Enemy::resetMovingTarget() {
 void Enemy::setTargeted(bool targeted) {
 	m_isTargetedEnemy = targeted;
 }
+
+int Enemy::getSkinNr() const {
+	return m_skinNr;
+}

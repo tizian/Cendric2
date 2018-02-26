@@ -10,6 +10,13 @@
 // 1, red whelp, hatched.
 // 2, purple whelp, egg.
 // 3, purple whelp, hatched
+
+enum class DragonWhelpState {
+	Egg,
+	Hatching,
+	Active
+};
+
 class DragonWhelpEnemy final : public Enemy {
 public:
 	DragonWhelpEnemy(const Level* level, Screen* screen);
@@ -39,9 +46,11 @@ protected:
 	// loads spells and adds them to the spell manager. default does nothing.
 	void loadSpells() override;
 	void loadAnimation(int skinNr) override;
-	void setActive();
 
-	bool m_isEgg;
+	DragonWhelpState m_dragonState;
+	void setHatching();
+	void setActive();
+	void setInactive();
 
 	sf::Time m_hatchingTime = sf::Time::Zero;
 };

@@ -161,3 +161,6 @@ std::string WispEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_wisp.png";
 }
 
+std::string WispEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/wisp_death.ogg";
+}

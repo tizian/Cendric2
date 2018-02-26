@@ -82,12 +82,18 @@ void WorldScreen::notifyItemChange(const std::string& itemID, int amount) {
 	if (amount > 0) {
 		g_resourceManager->playSound(GlobalResource::SOUND_GUI_PICKUP);
 	}
-	getCharacterCore()->notifyItemChange(itemID, amount);
+	bool equipmentItemRemoved = getCharacterCore()->notifyItemChange(itemID, amount);
 	m_progressLog->addItemProgress(itemID, amount);
 	m_interface->reloadInventory(itemID);
 	m_interface->reloadQuestLog();
 	m_interface->reloadCharacterInfo();
 	m_interface->reloadLevelOverlay();
+
+	if (equipmentItemRemoved) {
+		m_interface->reloadSpellBook();
+		notifyEquipmentReload();
+	}
+
 	checkMonitoredQuestItems(itemID, amount);
 }
 
@@ -116,6 +122,7 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	m_interface->reloadInventory();
 	m_interface->reloadCharacterInfo();
 	m_interface->reloadSpellBook();
+	notifyEquipmentReload();
 }
 
 void WorldScreen::notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition) {

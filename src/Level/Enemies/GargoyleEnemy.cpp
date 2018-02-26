@@ -156,7 +156,6 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
-	
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
@@ -165,7 +164,6 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
-	// TODO: create other animations
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
@@ -207,5 +205,3 @@ std::string GargoyleEnemy::getSpritePath() const {
 std::string GargoyleEnemy::getDeathSoundPath() const {
 	return "res/sound/mob/gargoyle_death.ogg";
 }
-
-

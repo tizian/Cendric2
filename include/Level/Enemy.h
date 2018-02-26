@@ -114,6 +114,7 @@ public:
 	virtual void insertRespawnLoot(std::map<std::string, int>& loot, int& gold) const {};
 
 	virtual EnemyID getEnemyID() const = 0;
+	int getSkinNr() const;
 	const std::string& getEnemyName() const;
 
 	const ScriptedBehavior* getScriptedBehavior() const { return m_scriptedBehavior; }

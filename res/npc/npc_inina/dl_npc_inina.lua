@@ -243,9 +243,9 @@ loadDialogue = function(DL)
 			
 			DL:createNPCNode(72, 73, "DL_Inina_FoundNote3") -- As you already got out of the cave alive, maybe you got a chance to hunt that beast down and slay it.
 			DL:changeQuestState("cavern_beast", "started")
+            DL:addNode()
 			
 			DL:createNPCNode(73, -2, "DL_Inina_FoundNote4") -- I would offer you my undying gratitude and a great reward, of course.
-
 			DL:addNode()
 		
 		end

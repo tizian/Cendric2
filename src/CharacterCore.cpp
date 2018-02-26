@@ -606,8 +606,8 @@ void CharacterCore::removeGold(int gold) {
 	m_data.gold -= std::min(m_data.gold, gold);
 }
 
-void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
-	if (itemID.empty()) return;
+bool CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
+	if (itemID.empty()) return false;
 
 	if (itemID == "gold") {
 		if (amount < 0) {
@@ -619,12 +619,14 @@ void CharacterCore::notifyItemChange(const std::string& itemID, int amount) {
 	}
 	else {
 		if (amount < 0) {
-			removeItem(itemID, -amount);
+			return removeItem(itemID, -amount);
 		}
 		else {
 			addItem(itemID, amount);
 		}
 	}
+
+	return false;
 }
 
 void CharacterCore::addItem(const std::string& item, int quantity) {
@@ -641,31 +643,35 @@ void CharacterCore::addItem(const std::string& item, int quantity) {
 	g_achievementManager->notifyAchievementCore(ACH_MASOCHIST);
 }
 
-void CharacterCore::removeItem(const std::string& item, int quantity) {
-	if (item.empty()) return;
-	int quantityEreased = 0;
+bool CharacterCore::removeItem(const std::string& item, int quantity) {
+	if (item.empty()) return false;
+	int quantityErased = 0;
+	bool equipmentItemRemoved = false;
 
 	if (contains(m_data.items, item)) {
 		m_data.items.at(item) = m_data.items.at(item) - quantity;
 		if (m_data.items.at(item) <= 0) {
-			quantityEreased = quantity + m_data.items.at(item);
+			quantityErased = quantity + m_data.items.at(item);
 			m_data.items.erase(item);
 		}
 		else {
-			quantityEreased = quantity;
+			quantityErased = quantity;
 		}
 	}
 
 	// also look for equipped items
-	if (quantityEreased < quantity) {
+	if (quantityErased < quantity) {
 		for (auto& eqItem : m_data.equippedItems) {
 			if (eqItem.second == item) {
-				eqItem.second.clear();
-				++quantityEreased;
+				equipItem("", eqItem.first, false);
+				++quantityErased;
+				equipmentItemRemoved = true;
 			}
-			if (quantityEreased == quantity) break;
+			if (quantityErased == quantity) break;
 		}
 	}
+
+	return equipmentItemRemoved;
 }
 
 void CharacterCore::addStoredItem(const std::string& item, int quantity) {
@@ -801,7 +807,7 @@ void CharacterCore::learnSpell(SpellID id) {
 	m_data.spellsLearned.at(type).insert(id);
 }
 
-void CharacterCore::equipItem(const std::string& item, ItemType type) {
+void CharacterCore::equipItem(const std::string& item, ItemType type, bool keepOldItem) {
 	if (!contains(m_data.equippedItems, type))
 		return;
 
@@ -827,7 +833,7 @@ void CharacterCore::equipItem(const std::string& item, ItemType type) {
 	}
 
 	removeItem(item, 1);
-	if (!oldItem.empty()) {
+	if (!oldItem.empty() && keepOldItem) {
 		addItem(oldItem, 1);
 	}
 
