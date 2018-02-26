@@ -24,7 +24,7 @@ ElysiaBoss::ElysiaBoss(const Level* level, Screen* screen) :
 }
 
 void ElysiaBoss::loadAttributes() {
-	m_attributes.setHealth(500);
+	m_attributes.setHealth(1); // TODO: 500
 	m_attributes.critical = 20;
 	m_attributes.resistanceFire = -10;
 	m_attributes.resistanceIce = 1000;

@@ -11,7 +11,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_velius", "talked") and not DL:isItemEquipped("we_arazath")) then 
 
-		DL:createNPCNode(1, -2, "DL_Velius_Talked") -- Finally. I waited so long for this.
+		DL:createNPCNode(1, -2, "DL_Velius_Talked") -- Finally. I've waited so long for this.
 		DL:addConditionProgress("npc_velius", "talked")
 		DL:addNode()
 
@@ -47,7 +47,7 @@ loadDialogue = function(DL)
 		DL:addChoice(4, "DL_Choice_Friends") -- What did you do to the other mages?
 	end
 	if (not DL:isConditionFulfilled("npc_velius", "mark")) then 
-		DL:addChoice(9, "DL_Choice_Mark") -- Is that your work? (Show the mark)
+		DL:addChoice(9, "DL_Choice_Mark") -- Is this your work? (Show the mark)
 	end
 	if (DL:isConditionFulfilled("npc_velius", "know_me") and not DL:isConditionFulfilled("npc_velius", "escape")) then 
 		DL:addChoice(12, "DL_Choice_Escape") -- How exactly did I escape?
@@ -80,7 +80,7 @@ loadDialogue = function(DL)
 		DL:addChoice(43, "DL_Choice_Illusion") -- Five magic types? I thought there were only four...
 	end
 	if (DL:isConditionFulfilled("npc_velius", "fight")) then 
-		DL:addChoice(27, "DL_Choice_Fight") -- I've heard enough. Let's get this over with. [ATTACK VELIUS] 
+		DL:addChoice(27, "DL_Choice_Fight") -- I've heard enough. Let's get this over with! [ATTACK VELIUS] 
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -95,7 +95,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_velius", "murderer")) then 
 
-		DL:createNPCNode(5, 7, "DL_Velius_Murderer") -- No. He's just sleeping. But, he nearly eliminated my most precious subject -
+		DL:createNPCNode(5, 7, "DL_Velius_Murderer") -- No. He's just sleeping. But, he nearly eliminated my most precious subject...
 		DL:addConditionProgress("npc_velius", "murderer")
 		DL:addNode()
 
@@ -124,7 +124,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(10, 11, "DL_Velius_KnowMe2") -- But you've been never really free. I always knew exactly where you were and what you did.
+		DL:createNPCNode(10, 11, "DL_Velius_KnowMe2") -- But you've never been really free. I always knew exactly where you were and what you did.
 		DL:addNode()
 
 
@@ -144,7 +144,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(24, -2, "DL_Velius_Friends3") -- Mages with a strong affinity to a magic type. The three I got now are perfect.
+		DL:createNPCNode(24, -2, "DL_Velius_Friends3") -- Mages with a strong affinity to a magic type. The three I have now are perfect.
 		DL:addNode()
 
 	end
@@ -156,7 +156,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(17, -2, "DL_Velius_Mark2") -- It made my subjects easier to track - the few, that managed to escape.
+		DL:createNPCNode(17, -2, "DL_Velius_Mark2") -- It made my subjects easier to track - the few that managed to escape, that is.
 		DL:addNode()
 
 	end
@@ -168,7 +168,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(13, 14, "DL_Velius_Escape2") -- I extracted your magic the same way as I did with many other mages before.
+		DL:createNPCNode(13, 14, "DL_Velius_Escape2") -- I extracted your magic, just as I did with many other mages before you.
 		DL:addNode()
 
 
@@ -176,7 +176,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(15, 16, "DL_Velius_Escape4") -- You managed to disappear before my very eyes. 
+		DL:createNPCNode(15, 16, "DL_Velius_Escape4") -- You managed to disappear before my very eyes.
 		DL:addNode()
 
 
@@ -192,7 +192,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(19, -2, "DL_Velius_Track2") -- Also, as you've lost your memory, you've never been a threat to my secrets.
+		DL:createNPCNode(19, -2, "DL_Velius_Track2") -- Anyway, as you've lost your memory, you've never been a threat to my secrets.
 		DL:addNode()
 
 	end
@@ -216,7 +216,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(25, 26, "DL_Velius_Plan2") -- Mages are dominating the commoners. Just because you are born without magic, you're inferior.
+		DL:createNPCNode(25, 26, "DL_Velius_Plan2") -- Mages are dominating the commoners. If you're a commoner, you are inferior. Just because you are born without magic!
 		DL:addNode()
 
 
@@ -232,7 +232,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(31, 32, "DL_Velius_WhyMe2") -- As I first caught you, you were very weak. Too weak for my purposes.
+		DL:createNPCNode(31, 32, "DL_Velius_WhyMe2") -- When I first caught you, you were very weak. Too weak for my purposes.
 		DL:addNode()
 
 
@@ -240,7 +240,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(33, -2, "DL_Velius_WhyMe4") -- You mastered the elements and found me. That's proof enough that your magic is strong enough now.
+		DL:createNPCNode(33, -2, "DL_Velius_WhyMe4") -- You mastered the elements and found me. That proves that your magic is strong enough now.
 		DL:addNode()
 
 	end
@@ -275,7 +275,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(52, -2, "DL_Velius_YoureRight2") -- You won't have anyone to tell it anymore.
+		DL:createNPCNode(52, -2, "DL_Velius_YoureRight2") -- You won't have anyone to tell it to anymore.
 		DL:addNode()
 
 
@@ -295,7 +295,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(36, -2, "DL_Velius_Bitter3") -- I had to find a way to take away this power from all mages. And I did.
+		DL:createNPCNode(36, -2, "DL_Velius_Bitter3") -- I had to find a way to take this power away from all mages. And I did.
 		DL:addNode()
 
 	end

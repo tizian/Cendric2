@@ -27,7 +27,7 @@ npc.id:npc_velius
 	trigger:DL:addConditionProgress("npc_velius", "talked")
 	# translation: 
 	translation.tag:DL_Velius_Talked
-	translation.en:Finally. I waited so long for this.
+	translation.en:Finally. I've waited so long for this.
 	translation.de:Endlich. Darauf habe ich lange gewartet.
 	translation.ch:Endlich. Do druf hani lang gwartet.
 	[
@@ -123,7 +123,7 @@ npc.id:npc_velius
 		condition:not DL:isConditionFulfilled("npc_velius", "mark")
 		# translation: 
 		translation.tag:DL_Choice_Mark
-		translation.en:Is that your work? (Show the mark)
+		translation.en:Is this your work? (Show the mark)
 		translation.de:Ist das dein Werk? (Das Mal zeigen)
 		translation.ch:Isch das dis Werk? (Es Zeiche zeige)
 	]
@@ -233,9 +233,9 @@ npc.id:npc_velius
 		condition:DL:isConditionFulfilled("npc_velius", "fight")
 		# translation: 
 		translation.tag:DL_Choice_Fight
-		translation.en:I've heard enough. Let's get this over with. [ATTACK VELIUS] 
-		translation.de:Ich habe genug gehört. Bringen wir's hinter uns. [VELIUS ANGREIFEN]
-		translation.ch:Ich ha gnueg ghört. Bringemer's hinter üs. [DE VELIUS AAGRIFE]
+		translation.en:I've heard enough. Let's get this over with! [ATTACK VELIUS] 
+		translation.de:Ich habe genug gehört. Bringen wir's hinter uns! [VELIUS ANGREIFEN]
+		translation.ch:Ich ha gnueg ghört. Bringemer's hinter üs! [DE VELIUS AAGRIFE]
 	]
 	[
 		# Link node, tag is next tag
@@ -269,9 +269,9 @@ npc.id:npc_velius
 	trigger:DL:addConditionProgress("npc_velius", "murderer")
 	# translation: 
 	translation.tag:DL_Velius_Murderer
-	translation.en:No. He's just sleeping. But, he nearly eliminated my most precious subject -
-	translation.de:Nein. Er schläft nur. Aber er hat beinahe mein wertvollstes Subjekt eliminiert -
-	translation.ch:Nei. Er schloft bloss. Aber er hett fast mis wertvollst Subjekt eliminiert -
+	translation.en:No. He's just sleeping. But, he nearly eliminated my most precious subject...
+	translation.de:Nein. Er schläft nur. Aber er hat beinahe mein wertvollstes Subjekt eliminiert...
+	translation.ch:Nei. Er schloft bloss. Aber er hett fast mis wertvollst Subjekt eliminiert...
 	[
 		# Link node, tag is next tag
 		tag:7
@@ -341,7 +341,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_KnowMe2
-	translation.en:But you've been never really free. I always knew exactly where you were and what you did.
+	translation.en:But you've never been really free. I always knew exactly where you were and what you did.
 	translation.de:Aber du warst niemals wirklich frei. Ich wusste immer genau, wo du warst und was du getan hast.
 	translation.ch:Aber du bisch nie würkli frei gsi. Ich ha immer gnau gwüsst, wo du bisch und wa du machsch.
 	[
@@ -398,7 +398,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Friends3
-	translation.en:Mages with a strong affinity to a magic type. The three I got now are perfect.
+	translation.en:Mages with a strong affinity to a magic type. The three I have now are perfect.
 	translation.de:Magier mit einer starken Affinität zu einer Magie-Art. Die drei, die ich jetzt habe, sind perfekt.
 	translation.ch:Magier mit enere starche Affinität zunere Magierart. Die drei, woni ez ha, sind perfekt.
 	[
@@ -427,7 +427,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Mark2
-	translation.en:It made my subjects easier to track - the few, that managed to escape.
+	translation.en:It made my subjects easier to track - the few that managed to escape, that is.
 	translation.de:Meine Subjekte waren damit einfacher aufzuspüren - die wenigen, denen die Flucht gelang.
 	translation.ch:Mini Subjekt hani demit eifacher chöne ufspüre - di wenige, wo entcho sind.
 	[
@@ -456,7 +456,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Escape2
-	translation.en:I extracted your magic the same way as I did with many other mages before.
+	translation.en:I extracted your magic, just as I did with many other mages before you.
 	translation.de:Ich habe deine Magie auf dieselbe Art extrahiert, wie auch schon bei vielen anderen Magiern zuvor.
 	translation.ch:Ich ha dini Magie uf di gliich Art extrahiert, we au scho mit vilne andere Magiere vorene.
 	[
@@ -484,7 +484,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Escape4
-	translation.en:You managed to disappear before my very eyes. 
+	translation.en:You managed to disappear before my very eyes.
 	translation.de:Du hast es geschafft, direkt vor meinen Augen zu verschwinden.
 	translation.ch:Du heschs gschafft, direkt vor mine Auge z'verschwinde.
 	[
@@ -527,7 +527,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Track2
-	translation.en:Also, as you've lost your memory, you've never been a threat to my secrets.
+	translation.en:Anyway, as you've lost your memory, you've never been a threat to my secrets.
 	translation.de:Und da du dein Gedächtnis verloren hast, warst du niemals eine Bedrohung für meine Geheimnisse.
 	translation.ch:Und well du dis Gedächtnis verlore hesch, bisch nie e Bedrohig für mini Gheimnis gsi.
 	[
@@ -585,9 +585,9 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Plan2
-	translation.en:Mages are dominating the commoners. Just because you are born without magic, you're inferior.
-	translation.de:Die Magier beherrschen die Gewöhnlichen. Nur weil jemand ohne Magie geboren wurde, ist er weniger wert.
-	translation.ch:D'Magier beherrsched di Gwöhnliche. Nur well öpper ohni Magie gebore worde isch, ischer weniger wert.
+	translation.en:Mages are dominating the commoners. If you're a commoner, you are inferior. Just because you are born without magic!
+	translation.de:Die Magier beherrschen die Gewöhnlichen. Nur weil jemand ohne Magie geboren wurde, ist er weniger wert!
+	translation.ch:D'Magier beherrsched di Gwöhnliche. Nur well öpper ohni Magie gebore worde isch, ischer weniger wert!
 	[
 		# Link node, tag is next tag
 		tag:26
@@ -628,7 +628,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_WhyMe2
-	translation.en:As I first caught you, you were very weak. Too weak for my purposes.
+	translation.en:When I first caught you, you were very weak. Too weak for my purposes.
 	translation.de:Als ich dich zuerst gefangen habe, warst du sehr schwach. Zu schwach für meine Zwecke.
 	translation.ch:Wo ich dich zersch gfange ha, bisch sehr schwach gsi. Zu schwach für mini Zweck.
 	[
@@ -656,7 +656,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_WhyMe4
-	translation.en:You mastered the elements and found me. That's proof enough that your magic is strong enough now.
+	translation.en:You mastered the elements and found me. That proves that your magic is strong enough now.
 	translation.de:Du hast die Elemente gemeistert und mich gefunden. Das ist Beweis genug, dass deine Magie nun stark genug ist.
 	translation.ch:Du hesch d'Element gmeisteret und mich gfunde. Da isch Bewiis gnueg, dass dini Magie ez starch gnueg isch.
 	[
@@ -772,7 +772,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_YoureRight2
-	translation.en:You won't have anyone to tell it anymore.
+	translation.en:You won't have anyone to tell it to anymore.
 	translation.de:Du wirst sie nämlich niemandem mehr erzählen können.
 	translation.ch:Du wirsch si nämli niemertem me verzelle chöne.
 	[
@@ -829,7 +829,7 @@ npc.id:npc_velius
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Velius_Bitter3
-	translation.en:I had to find a way to take away this power from all mages. And I did.
+	translation.en:I had to find a way to take this power away from all mages. And I did.
 	translation.de:Ich musste einen Weg finden, diese Macht den Magiern zu nehmen. Und das habe ich jetzt.
 	translation.ch:Ich ha en Weg finde möse, die Macht de Magier wegzne. Und das hani ez.
 	[

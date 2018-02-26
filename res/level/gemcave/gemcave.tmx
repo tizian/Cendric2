@@ -830,7 +830,7 @@
   <object id="2117" gid="793" x="1550" y="1200" width="50" height="50"/>
   <object id="2123" gid="791" x="450" y="1225" width="50" height="50"/>
   <object id="2124" gid="871" x="550" y="1262.5" width="50" height="50"/>
-  <object id="2127" gid="805" x="1500" y="1250" width="50" height="50">
+  <object id="2127" gid="805" x="1500" y="1249" width="50" height="50">
    <properties>
     <property name="size" value="4"/>
    </properties>

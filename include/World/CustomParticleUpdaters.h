@@ -2,7 +2,6 @@
 
 #include "Particles/ParticleSystem.h"
 #include "Particles/ParticleHelpers.h"
-#include "Enums/DamageType.h"
 
 class FluidTile;
 class LevelMovableGameObject;
@@ -42,7 +41,7 @@ namespace particles
 		AimedCircleVelocityGenerator() {}
 		~AimedCircleVelocityGenerator() {}
 
-		void generate(ParticleData *data, int startId, int endId) override;
+		void generate(ParticleData* data, int startId, int endId) override;
 
 	public:
 		float goalRadius;
@@ -53,7 +52,7 @@ namespace particles
 		AttractingEulerUpdater(const sf::Vector2f* refPos, float fraction = 1.f);
 		~AttractingEulerUpdater() {}
 
-		void update(ParticleData *data, float dt) override;
+		void update(ParticleData* data, float dt) override;
 
 	public:
 		const sf::Vector2f* m_refPos;
