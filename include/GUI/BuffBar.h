@@ -34,8 +34,7 @@ private:
 
 	// the buff slots for spells are seperated from the one for food.
 	// there can only be one food buff at a time.
-	std::vector<BuffSlot*> m_buffSlots;
-	BuffSlot* m_foodBuffSlot = nullptr;
+	std::map<int, BuffSlot*> m_buffSlots;
 
 	void calculateBuffPositions();
 

@@ -4,16 +4,21 @@
 #include "World/GameObject.h"
 
 #include "GUI/BitmapText.h"
-#include "ResourceManager.h"
 #include "Enums/SpellID.h"
 #include "Structs/AttributeData.h"
-#include "GUI/Window.h"
 #include "Structs/DamageOverTimeData.h"
 
+// all spell ids are also a buff type,
+// they are cast to int. That's why it starts at max.
 enum class BuffType {
-	Food,
-	Spell,
-	DamageOverTime
+	Food = static_cast<int>(SpellID::MAX),
+	PhysicalDamage,
+	ShadowDamage,
+	LightDamage,
+	FireDamage,
+	IceDamage,
+	Stun,
+	Fear
 };
 
 class Spell;
