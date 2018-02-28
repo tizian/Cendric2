@@ -54,7 +54,10 @@ void NekomataEnemy::loadSpells() {
 	shadowFireSpell.damageType = DamageType::Shadow;
 	shadowFireSpell.fightingTime = sf::milliseconds(6 * 60);
 	shadowFireSpell.range = 150.f;
-	shadowFireSpell.spellOffset = sf::Vector2f(-0.5f * shadowFireSpell.range, -0.5f * shadowFireSpell.range);
+	shadowFireSpell.boundingBox.height = 2 * shadowFireSpell.range;
+	shadowFireSpell.boundingBox.width = 2 * shadowFireSpell.range;
+	shadowFireSpell.spellOffset.x = -1 * shadowFireSpell.range;
+	shadowFireSpell.spellOffset.y = -1 * shadowFireSpell.range;
 
 	SpellData shadowFireBallSpell = SpellData::getSpellData(SpellID::FireBall);
 	shadowFireBallSpell.skinNr = 2;

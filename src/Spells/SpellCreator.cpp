@@ -49,7 +49,7 @@ void SpellCreator::update(const sf::Time& frametime) {
 
 void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	m_isReady = false;
-	if (!m_spellData.attachedToMob) {
+	if (!m_spellData.attachedToMob && norm(target) > 0.f) {
 		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 	}
 	if (m_spellData.castingTime > sf::Time::Zero) {

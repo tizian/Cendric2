@@ -123,7 +123,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Lock
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Map','Map','Karte','Charte','Mapa');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxFPS','Max. FPS','Max. FPS','Max. FPS','FPS máximos');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MaxHealthPoints','Max. Health','Max. Lebensenergie','Max. Lebensenergie','Salud máxima');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MessageNewSaveGame','Please enter the name for your new saved game (at most 24 characters).','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen).','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche).','Favor introduzca el nombre para su nueva partida guardada (máximo 24 caracteres).');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MessageNewSaveGame','Please enter the name for your new saved game (maximum 24 characters).','Bitte gib einen Namen ein für deinen neuen Speicherstand (höchstens 24 Zeichen).','Bitte gib en Name ih für din neue Speicherstand (höchstens 24 Zeiche).','Favor introduzca el nombre para su nueva partida guardada (máximo 24 caracteres).');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Meta','Meta','Meta','Meta','Meta');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Miscellaneous','Miscellaneous','Plunder','Grümpel','Otros');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt','Gema aprendida');
@@ -165,7 +165,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Phys
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PressAnyKey','<?>','<?>','<?>','<?>');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Price','Price','Preis','Priis','Precio');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Quest','Quest','Quest','Quest','Misión');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionDeleteSaveGame','Do you really want to delete this save game?','Willst du diesen Speicherstand wirklich löschen?','Wetsch de Speicherstand würkli lösche?','¿Realmente quieres eliminar la partida guardada?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionDeleteSaveGame','Do you really want to delete this save?','Willst du diesen Speicherstand wirklich löschen?','Wetsch de Speicherstand würkli lösche?','¿Realmente quieres eliminar la partida guardada?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('QuestionLoadGame','Load game?
 All unsaved progress will be lost.','Spiel laden?
 Ungespeicherter Fortschritt geht verloren.','Spiel lade?

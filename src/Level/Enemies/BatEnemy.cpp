@@ -50,14 +50,20 @@ MovingBehavior* BatEnemy::createMovingBehavior(bool asAlly) {
 	FlyingBehavior* behavior;
 	if (asAlly) {
 		behavior = new AllyFlyingBehavior(this);
+		behavior->setMaxVelocityYUp(100.f);
+		behavior->setMaxVelocityYDown(200.f);
+		behavior->setMaxVelocityX(100.f);
+		unlockAnimation();
+		setState(GameObjectState::Idle);
 	}
 	else {
 		behavior = new AggressiveFlyingBehavior(this);
+		behavior->setApproachingDistance(10.f);
+		behavior->setMaxVelocityYDown(0.f);
+		behavior->setMaxVelocityYUp(0.f);
+		behavior->setMaxVelocityX(0.f);
 	}
-	behavior->setApproachingDistance(10.f);
-	behavior->setMaxVelocityYDown(0.f);
-	behavior->setMaxVelocityYUp(0.f);
-	behavior->setMaxVelocityX(0.f);
+
 	return behavior;
 }
 

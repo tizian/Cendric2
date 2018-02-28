@@ -21,24 +21,35 @@ enum class BuffType {
 	Fear
 };
 
+enum class BuffSlotType {
+	Food,
+	Spell,
+	Dot,
+	Debuff
+};
+
 class Spell;
 class TooltipWindowComponent;
 
 class BuffSlot final : public GameObject {
 public:
-	BuffSlot(BuffType type, const sf::IntRect& textureLocation, const sf::Time& duration);
+	BuffSlot(BuffSlotType buffType, const sf::IntRect& textureLocation);
 
 	// sets the spell attributes used by the tooltip.
 	// can only be applied to BuffSlots of type "Spell"
-	void setSpellAttributes(Spell* owner, const AttributeData& attributes);
+	void setSpellAttributes(Spell* owner, const AttributeData& attributes, const sf::Time& duration);
 
 	// sets the food attributes used by the tooltip.
 	// can only be applied to BuffSlots of type "Food"
-	void setFoodAttributes(const std::string& item_id, const AttributeData& attributes);
+	void setFoodAttributes(const std::string& item_id, const AttributeData& attributes, const sf::Time& duration);
 
 	// sets the DOT attributes used by the tooltip.
+	// can only be applied to BuffSlots of type "Dot"
+	void setDotAttributes(const DamageOverTimeData& data, const sf::Time& duration);
+
+	// sets the debuff attributes used by the tooltip (stun and fear).
 	// can only be applied to BuffSlots of type "Debuff"
-	void setDotAttributes(const DamageOverTimeData& data);
+	void setDebuffAttributes(const DamageOverTimeData& data, const sf::Time& duration);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
@@ -52,16 +63,23 @@ public:
 	static const float SIZE;
 
 private:
+	
+
 	TooltipWindowComponent* m_tooltipComponent;
 	sf::Time m_duration;
 	Spell* m_ownerSpell = nullptr;
-	BuffType m_buffType;
+	BuffSlotType m_buffType;
 
 	sf::RectangleShape m_outside;
 	sf::RectangleShape m_back;
 	sf::RectangleShape m_inside;
 
 	BitmapText m_durationText;
+
+	std::vector<std::pair<sf::Time, int>> m_damageBeans;
+	void updateDamageBeans(const sf::Time& frameTime);
+	int m_currentDamage = 0;
+	DamageType m_damageType = DamageType::VOID;
 
 	// used for flashing
 	static const sf::Time FLASHING_TIME;

@@ -9,8 +9,7 @@ BuffBar::BuffBar(LevelInterface* _interface) {
 }
 
 BuffBar::~BuffBar() {
-	delete m_foodBuffSlot;
-	CLEAR_VECTOR(m_buffSlots);
+	CLEAR_MAP(m_buffSlots);
 }
 
 void BuffBar::show() {
@@ -22,53 +21,126 @@ void BuffBar::hide() {
 }
 
 void BuffBar::addSpellBuff(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr) {
-	BuffSlot* buff = new BuffSlot(BuffType::Spell, textureLocation, duration);
-	buff->setSpellAttributes(spell, attr);
-	m_buffSlots.push_back(buff);
+	BuffSlot* buff;
+	int spellId = static_cast<int>(spell->getSpellID());
+	if (contains(m_buffSlots, spellId)) {
+		buff = m_buffSlots.at(spellId);
+	}
+	else {
+		buff = new BuffSlot(BuffSlotType::Spell, textureLocation);
+		m_buffSlots.insert({spellId, buff });
+	}
+	
+	buff->setSpellAttributes(spell, attr, duration);
 	m_notifyInterface = true;
 	calculateBuffPositions();
 }
 
 void BuffBar::addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr) {
-	delete m_foodBuffSlot;
-	m_foodBuffSlot = new BuffSlot(BuffType::Food, textureLocation, duration);
-	m_foodBuffSlot->setFoodAttributes(itemID, attr);
+	BuffSlot* buff;
+	int buffType = static_cast<int>(BuffType::Food);
+	if (contains(m_buffSlots, buffType)) {
+		buff = m_buffSlots.at(buffType);
+	}
+	else {
+		buff = new BuffSlot(BuffSlotType::Food, textureLocation);
+		m_buffSlots.insert({ buffType, buff });
+	}
+	
+	buff->setFoodAttributes(itemID, attr, duration);
 	m_notifyInterface = true;
 	calculateBuffPositions();
 }
 
-void BuffBar::addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
-	BuffSlot* buff = new BuffSlot(BuffType::DamageOverTime, textureLocation, duration);
+void BuffBar::addDebuffBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
+	if (!data.isFeared || !data.isStunned) return;
+	
+	BuffSlot* buff;
+
+	int buffType = static_cast<int>(data.isFeared ? BuffType::Fear : BuffType::Stun);
+	if (contains(m_buffSlots, buffType)) {
+		buff = m_buffSlots.at(buffType);
+	}
+	else {
+		buff = new BuffSlot(BuffSlotType::Debuff, textureLocation);
+		m_buffSlots.insert({ buffType, buff });
+	}
+
 	buff->setScreen(m_interface->getScreen());
-	buff->setDotAttributes(data);
-	m_buffSlots.push_back(buff);
+	buff->setDebuffAttributes(data, duration);
+	m_notifyInterface = true;
+	calculateBuffPositions();
+}
+
+
+void BuffBar::addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
+	if (data.damageType <= DamageType::VOID || data.damageType >= DamageType::MAX) return;
+
+	BuffSlot* buff;
+	int buffType;
+
+	switch (data.damageType) {
+	case DamageType::Fire:
+		buffType = static_cast<int>(BuffType::FireDamage);
+		break;
+	case DamageType::Ice:
+		buffType = static_cast<int>(BuffType::IceDamage);
+		break;
+	case DamageType::Light:
+		buffType = static_cast<int>(BuffType::LightDamage);
+		break;
+	case DamageType::Shadow:
+		buffType = static_cast<int>(BuffType::ShadowDamage);
+		break;
+	case DamageType::Physical:
+	default:
+		buffType = static_cast<int>(BuffType::PhysicalDamage);
+		break;
+	}
+
+	if (contains(m_buffSlots, buffType)) {
+		buff = m_buffSlots.at(buffType);
+	}
+	else {
+		buff = new BuffSlot(BuffSlotType::Dot, textureLocation);
+		m_buffSlots.insert({ buffType, buff });
+	}
+	
+	buff->setScreen(m_interface->getScreen());
+	buff->setDotAttributes(data, duration);
 	m_notifyInterface = true;
 	calculateBuffPositions();
 }
 
 void BuffBar::removeTypedSpellBuffs(SpellID id) {
-	for (auto& slot : m_buffSlots) {
-		if (slot->getSpellID() == id) {
-			slot->setDisposed();
-		}
-	}
+	auto spellId = static_cast<int>(id);
+	if (!contains(m_buffSlots, spellId)) return;
+
+	auto& buff = m_buffSlots.at(spellId);
+	buff->setDisposed();
 }
 
 void BuffBar::removeFoodBuff() {
-	delete m_foodBuffSlot;
-	m_foodBuffSlot = nullptr;
+	auto id = static_cast<int>(BuffType::Food);
+	if (!contains(m_buffSlots, id)) return;
+
+	auto& buff = m_buffSlots.at(id);
+	buff->setDisposed();
 }
 
 void BuffBar::render(sf::RenderTarget& target) {
-	if (m_foodBuffSlot != nullptr) m_foodBuffSlot->render(target);
-	for (int i = 0; i < static_cast<int>(m_buffSlots.size()); i++) {
-		m_buffSlots.at(i)->render(target);
-		if (i >((m_foodBuffSlot == nullptr) ? MAX_SHOWABLE_BUFFSLOTS - 1 : MAX_SHOWABLE_BUFFSLOTS - 2)) break;
+	int i = 0;
+	for (auto& it : m_buffSlots) {
+		it.second->render(target);
+		i++;
+		if (i > MAX_SHOWABLE_BUFFSLOTS - 1) break;
 	}
-	if (m_foodBuffSlot != nullptr) m_foodBuffSlot->renderAfterForeground(target);
-	for (int i = 0; i < static_cast<int>(m_buffSlots.size()); i++) {
-		m_buffSlots.at(i)->renderAfterForeground(target);
-		if (i >((m_foodBuffSlot == nullptr) ? MAX_SHOWABLE_BUFFSLOTS - 1 : MAX_SHOWABLE_BUFFSLOTS - 2)) break;
+
+	i = 0;
+	for (auto& it : m_buffSlots) {
+		it.second->renderAfterForeground(target);
+		i++;
+		if (i > MAX_SHOWABLE_BUFFSLOTS - 1) break;
 	}
 }
 
@@ -77,20 +149,11 @@ void BuffBar::update(const sf::Time& frameTime) {
 		m_interface->notifyCharacterInfo();
 		m_notifyInterface = false;
 	}
-	if (m_foodBuffSlot != nullptr) {
-		m_foodBuffSlot->update(frameTime);
-		if (m_foodBuffSlot->isDisposed()) {
-			delete m_foodBuffSlot;
-			m_foodBuffSlot = nullptr;
-			m_notifyInterface = true;
-			calculateBuffPositions();
-		}
-	}
-
+	
 	for (auto it = m_buffSlots.begin(); it != m_buffSlots.end(); /*don't increment here*/) {
-		(*it)->update(frameTime);
-		if ((*it)->isDisposed()) {
-			delete (*it);
+		(*it).second->update(frameTime);
+		if ((*it).second->isDisposed()) {
+			delete (*it).second;
 			it = m_buffSlots.erase(it);
 			m_notifyInterface = true;
 			calculateBuffPositions();
@@ -102,15 +165,10 @@ void BuffBar::update(const sf::Time& frameTime) {
 }
 
 void BuffBar::calculateBuffPositions() {
-	// the foodbuff is always the first one (as seen from left)
 	sf::Vector2f offset = BUFFBAR_OFFSET;
 	float xOffset = BUFFSLOT_SPACING + BuffSlot::SIZE;
-	if (m_foodBuffSlot != nullptr) {
-		m_foodBuffSlot->setPosition(offset);
-		offset.x += xOffset;
-	}
 	for (auto& it : m_buffSlots) {
-		it->setPosition(offset);
+		it.second->setPosition(offset);
 		offset.x += xOffset;
 	}
 }

@@ -279,7 +279,7 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item', 'Horned Scalemail','Gehörnter Schuppenpanzer','Ghörnte Schuppepanzer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item_desc', 'Made from dragon scales, this armour provides excellent protection against all kind of attacks.','Diese aus Drachenschuppen gefertigte Rüstung bietet hervorragenden Schutz gegen alle Arten von Attacken.','Die us Dracheschuppe gmacht Rüstig git hervorragende Schutz gege all Arte vo Attacke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_scalearmor', 'eq_body', 100, 200, 300, 2);
-INSERT INTO item_attribute (item_id, res_physical, res_fire, res_shadow, res_ice, res_physical, max_health) values ('eq_scalearmor', 100, 100, 100, 100, 100, 80);
+INSERT INTO item_attribute (item_id, res_physical, res_fire, res_ice, res_shadow, res_light, res_physical, max_health) values ('eq_scalearmor', 100, 100, 100, 100, 100, 100, 80);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_scalearmor', 'res/texture/equipment/body/spritesheet_body_scalearmor.png', 'res/texture/equipment/body/spritesheet_map_body_scalearmor.png');
 
 -- Necro T1 Back

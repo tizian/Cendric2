@@ -18,6 +18,7 @@ public:
 
 	void addSpellBuff(const sf::IntRect& textureLocation, const sf::Time& duration, Spell* spell, const AttributeData& attr);
 	void addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const std::string& itemID, const AttributeData& attr);
+	void addDebuffBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	void addDotBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data);
 	// removes all buffs with the referenced spell id
 	void removeTypedSpellBuffs(SpellID id);

@@ -20,5 +20,7 @@ void HolyFireSpellCreator::addRangeModifier(int level) {
 	m_spellData.range += m_spellData.rangeModifierAddition * level;
 	m_spellData.boundingBox.height = 2 * m_spellData.range;
 	m_spellData.boundingBox.width = 2 * m_spellData.range;
+	m_spellData.spellOffset.x = -1 * m_spellData.range;
+	m_spellData.spellOffset.y = -1 * m_spellData.range;
 }
 

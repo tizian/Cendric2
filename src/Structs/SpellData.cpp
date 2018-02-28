@@ -727,7 +727,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.activeDuration = sf::seconds(3);
 	holyFire.attachedToMob = true;
 	holyFire.fightAnimation = GameObjectState::VOID;
-	holyFire.spellOffset = sf::Vector2f(-2 * holyFire.range, -2 * holyFire.range);
+	holyFire.spellOffset = sf::Vector2f(-1 * holyFire.range, -1 * holyFire.range);
 
 	holyFire.durationModifierAddition = sf::seconds(1);
 	holyFire.rangeModifierAddition = 50.f;
@@ -827,7 +827,7 @@ SpellData SpellData::getShadowTrapSpellData() {
 
 	shadowTrap.cooldown = sf::seconds(10);
 	shadowTrap.boundingBox = sf::FloatRect(0, 0, 25, 10);
-	shadowTrap.spellOffset = sf::Vector2f(10.f, 10.f);
+	shadowTrap.spellOffset = sf::Vector2f(-shadowTrap.boundingBox.width * 0.5f, 10.f);
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
