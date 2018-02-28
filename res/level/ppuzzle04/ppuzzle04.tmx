@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="41" height="100" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="1902">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="41" height="100" tilewidth="50" tileheight="50" backgroundcolor="#545454" nextobjectid="1905">
  <properties>
   <property name="backgroundlayers" value="5.0,res/level/ppuzzle04/layer_5.png,3.0,res/level/ppuzzle04/layer_3.png"/>
   <property name="dimming" value="0.5"/>
@@ -1399,7 +1399,6 @@
   <object id="1826" gid="1223" x="650" y="3450" width="50" height="50"/>
   <object id="1827" gid="1223" x="450" y="3350" width="50" height="50"/>
   <object id="1828" gid="1223" x="450" y="3400" width="50" height="50"/>
-  <object id="1829" gid="1223" x="300" y="3100" width="50" height="50"/>
   <object id="1830" gid="1223" x="450" y="3050" width="50" height="50"/>
   <object id="1831" gid="1301" x="500" y="3000" width="50" height="50"/>
   <object id="1832" gid="1157" x="600" y="2850" width="50" height="50"/>
@@ -1557,10 +1556,20 @@
   <object id="1893" gid="1220" x="900" y="1700" width="50" height="50"/>
   <object id="1894" gid="1223" x="650" y="3400" width="50" height="50"/>
   <object id="1896" gid="1223" x="950" y="2400" width="50" height="50"/>
-  <object id="1897" gid="1157" x="300" y="3100" width="50" height="50"/>
   <object id="1898" gid="1223" x="1300" y="4800" width="50" height="50"/>
   <object id="1899" gid="1223" x="1250" y="4850" width="50" height="50"/>
   <object id="1901" gid="1223" x="600" y="3000" width="50" height="50"/>
+  <object id="1902" gid="1223" x="300" y="3100" width="50" height="50"/>
+  <object id="1903" gid="1157" x="300" y="3100" width="50" height="50"/>
+  <object id="1904" gid="1226" x="1350" y="1050" width="50" height="50">
+   <properties>
+    <property name="angle" value="90"/>
+    <property name="direction" value="ccw"/>
+    <property name="mode" value="round"/>
+    <property name="size" value="2"/>
+    <property name="speed" value="70"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="dynamic deco">
   <object id="1755" gid="1216" x="450" y="4700" width="50" height="50">

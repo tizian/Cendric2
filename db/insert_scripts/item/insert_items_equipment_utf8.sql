@@ -80,7 +80,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Cairn Armour
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item', 'Cairn Armour','Cairn-Rüstung','Cairn-Rüschtig');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps protecting its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste vo Steimännli Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_cairnarmor', 'item_desc', 'Made from the remains of cairn wraiths, this armour helps to protect its wearer against ice magic.','Diese Rüstung wurde aus den Überresten von Cairn Geistern angefertigt und schützt ihren Träger vor Eismagie.','Die Rüschtig isch vode Überreste vo Steimännli Geischter gmacht worde und schützt ihre Träger vor Iismagie.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_cairnarmor', 'eq_body', 700, 500, 220, 2);
 INSERT INTO item_attribute (item_id, dmg_ice, res_ice, max_health, res_physical, res_fire) values ('eq_cairnarmor', 5, 200, 45, 50, -100);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_cairnarmor', 'res/texture/equipment/body/spritesheet_body_cairnarmor.png', 'res/texture/equipment/body/spritesheet_map_body_cairnarmor.png');
@@ -162,7 +162,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Travel Hat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_travelhat', 'item', 'Travel Hat','Reisehut','Reisehuet');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_travelhat', 'item_desc', 'This hat belonged to me once.','Dieser Hut gehörte einmal mir.','De Huet het mal mir ghört.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_travelhat', 'item_desc', 'My old travel hat.','Mein alter Reisehut.','Min alte Reisehuet.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_travelhat', 'eq_head', 0, 150, 45, 1);
 INSERT INTO item_attribute (item_id, dmg_ice, max_health, res_physical) values ('eq_travelhat', 2, 15, 20);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_travelhat', 'res/texture/equipment/head/spritesheet_head_travelhat.png', 'res/texture/equipment/head/spritesheet_map_head_travelhat.png');
@@ -271,13 +271,13 @@ INSERT INTO item_equipment_particle (item_id, particle_count, emit_rate, additiv
 0, 0, 0, 50,
 -10, 100, 10, 
 60, 80,
-1.0, 1.1, 0.9,
+1.0, 1.1, 1.0,
 1);
 
 -- Horned Scalemail
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item', 'Horned Scalemail','Gehörnter Schuppenpanzer','Ghörnte Schuppepanzer');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item_desc', 'Made from dragon scales, this armour provides excellent protection against all kind of attacks.','Diese aus Drachenschuppen gefertigte Rüstung bietet hervorragenden Schutz gegen alle Arten von Attacken.','Die us Dracheschuppe gmacht Rüstig git hervorragende Schutz gege all Arte vo Attacke.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_scalearmor', 'item_desc', 'Made from dragon scales, this armour provides excellent protection against all kinds of attacks.','Diese aus Drachenschuppen gefertigte Rüstung bietet hervorragenden Schutz gegen alle Arten von Attacken.','Die us Dracheschuppe gmacht Rüstig git hervorragende Schutz gege all Arte vo Attacke.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_scalearmor', 'eq_body', 100, 200, 300, 2);
 INSERT INTO item_attribute (item_id, res_physical, res_fire, res_ice, res_shadow, res_light, res_physical, max_health) values ('eq_scalearmor', 100, 100, 100, 100, 100, 100, 80);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_scalearmor', 'res/texture/equipment/body/spritesheet_body_scalearmor.png', 'res/texture/equipment/body/spritesheet_map_body_scalearmor.png');
@@ -325,7 +325,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Necro T3 Body
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item', 'Bone Vestments','Knochengewänder','Chnoche-Gwänder');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item_desc','Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear that piece of armour.','Nur diejenigen, die sich bei den Nekromanten von Admantris als würdig erwiesen haben, dürfen diese Rüstung tragen.','Nur die, wo sich bide Nekromante vo Admantris als würdig erwise hend, derfed die Rüschtig träge.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_body_necrot3', 'item_desc','Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear this piece of armour.','Nur diejenigen, die sich bei den Nekromanten von Admantris als würdig erwiesen haben, dürfen diese Rüstung tragen.','Nur die, wo sich bide Nekromante vo Admantris als würdig erwise hend, derfed die Rüschtig träge.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_body_necrot3', 'eq_body', 600, 600, 300, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, res_light, heal, res_shadow, res_physical, critical, haste, dmg_ice, max_health) values ('eq_body_necrot3', 8, 20, 2, 20, 30, 8, 8, 8, 60);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_body_necrot3', 'res/texture/equipment/body/spritesheet_body_necrot3.png', 'res/texture/equipment/body/spritesheet_map_body_necrot3.png');
@@ -616,7 +616,7 @@ INSERT INTO item_attribute (item_id, critical, max_health, res_fire) values ('eq
 -- Ruby Necklace
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubynecklace', 'item', 'Ruby Necklace','Rubinhalskette','Rubinhalschette');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubynecklace', 'item_desc', 'The ruby feels warm, as if it had been worn lately.','Der Rubin fühlt sich warm an, als wäre er kürzlich von jemandem getragen worden.','De Rubin fühlt sich warm ah, als wär er erst grad vo öpperem treit worde.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_rubynecklace', 'item_desc', 'The ruby feels warm, as if it has been worn lately.','Der Rubin fühlt sich warm an, als wäre er kürzlich von jemandem getragen worden.','De Rubin fühlt sich warm ah, als wär er erst grad vo öpperem treit worde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_rubynecklace', 'eq_neck', 550, 300, 35, 1);
 INSERT INTO item_attribute (item_id, critical, max_health, dmg_fire) values ('eq_rubynecklace', 1, 2, 5);
 

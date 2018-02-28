@@ -7,7 +7,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Anti-Magic Crystal
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item', 'Anti-Magic Crystal','Antimagischer Kristall','Antimagische Kristall');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item_desc', 'This strange crystal cancels magic. I shouldn''t keep it too long in my pocket.','Dieser seltsame Kristall löscht Magie aus. Ich sollte ihn nicht zu lange in meiner Tasche behalten.','De komisch Kristall löscht Magie us. Ich sötten nid z''lang i minere Täsche phalte.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_antimagiccrystal', 'item_desc', 'This strange crystal cancels magic. I shouldn''t keep it in my pocket for too long...','Dieser seltsame Kristall löscht Magie aus. Ich sollte ihn nicht zu lange in meiner Tasche behalten.','De komisch Kristall löscht Magie us. Ich sötten nid z''lang i minere Täsche phalte.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_antimagiccrystal', 'quest', 0, 750, 50);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('qe_antimagiccrystal', -15, 0, 20, 50);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('qe_antimagiccrystal', 1, 600, 350, 50, 50);
@@ -54,7 +54,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Proof of the Monster's Death
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_proofmonsterdeath', 'item', 'Proof of the Monster''s Death','Beweis für den Tod des Monsters','Bewiis für de Tod vom Monster');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_proofmonsterdeath', 'item_desc', 'The monster''s heart - A better proof that the enormous wolf was slain doesn''t exist.','Das Herz des Monsters - Es gibt keinen besseren Beweis für das Ableben des gigantischen Wolfs.','Es Härz vom Monster - Es git ken bessere Bewiis defür, dasi de riisig Wolf abgmurkst han.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_proofmonsterdeath', 'item_desc', 'The monster''s heart - Better proof that the enormous wolf was slain doesn''t exist.','Das Herz des Monsters - Es gibt keinen besseren Beweis für das Ableben des gigantischen Wolfs.','Es Härz vom Monster - Es git ken bessere Bewiis defür, dasi de riisig Wolf abgmurkst han.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_proofmonsterdeath', 'quest', 300, 300, -1);
 
 -- Letter of Recommendation
@@ -162,7 +162,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Necrotic Grimoire
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item', 'Necrotic Grimoire','Nekrotisches Zauberbuch','Nekrotischs Zauberbuech');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item_desc', 'I hope it won''t come to live again.','Ich hoffe, es erwacht nicht wieder zum Leben.', 'Ich hoff, es wird nid wieder lebendig.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('qe_necrobook', 'item_desc', 'I hope it won''t come to life again.','Ich hoffe, es erwacht nicht wieder zum Leben.', 'Ich hoff, es wird nid wieder lebendig.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('qe_necrobook', 'quest', 650, 350, -1);
 
 -- Inactive Teleport Stone

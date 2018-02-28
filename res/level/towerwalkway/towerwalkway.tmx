@@ -1434,7 +1434,7 @@
  <objectgroup name="enemy">
   <object id="1932" gid="1345" x="1300" y="2350" width="50" height="50"/>
   <object id="1933" gid="1345" x="2050" y="2050" width="50" height="50"/>
-  <object id="1934" gid="1345" x="3000" y="1850" width="50" height="50"/>
+  <object id="1934" gid="1345" x="3600" y="1800" width="50" height="50"/>
   <object id="1936" gid="1345" x="4300" y="2250" width="50" height="50"/>
   <object id="1937" gid="1345" x="200" y="1750" width="50" height="50"/>
   <object id="1939" gid="1345" x="5500" y="750" width="50" height="50"/>

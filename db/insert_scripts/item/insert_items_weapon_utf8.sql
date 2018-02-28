@@ -149,7 +149,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Herbalist's Blade
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_herbalistblade', 'item','Herbalist''s Blade', 'Klinge der Kräuterhexe','Krütlihäx-Klinge');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_herbalistblade', 'item_desc', 'This sickle could be used to collect herbs, but it makes also a fine weapon.','Diese Sichel könnte zum Kräutersammeln verwendet werden, aber sie gibt auch eine gute Waffe ab.','Die Sichle chöntme zum Krütli sammle bruche, aber si git au e gueti Waffe ab.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_herbalistblade', 'item_desc', 'This sickle could be used to collect herbs, but it also makes a fine weapon.','Diese Sichel könnte zum Kräutersammeln verwendet werden, aber sie gibt auch eine gute Waffe ab.','Die Sichle chöntme zum Krütli sammle bruche, aber si git au e gueti Waffe ab.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_herbalistblade', 'eq_weapon', 600, 300, 120, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, dmg_ice, critical, max_health, dmg_shadow) values ('we_herbalistblade', 2, 2, 7, 4, 2);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_herbalistblade', 'res/texture/equipment/weapon/spritesheet_weapon_herbalistblade.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_herbalistblade.png');
@@ -232,7 +232,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Jason's Glaive (Dark)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item', 'Jason''s Dark Glaive','Jasons Dunkle Gleve','Jason''s Dunkli Gleve');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with fire.','Dämonenjäger Jasons alte Waffe, mit Feuer verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Füür verstärcht.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_jasonsglaive_dark', 'item_desc', 'Demonhunter Jason''s old weapon, reinforced with gargoyle dust.','Dämonenjäger Jasons alte Waffe, mit Gargoylestaub verstärkt.','Em Dämonejäger Jason sini alt Waffe, mit Gargoylestaub verstärcht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_jasonsglaive_dark', 'eq_weapon', 750, 550, 430, 4);
 INSERT INTO item_attribute (item_id, dmg_shadow, dmg_physical, critical, haste, dmg_ice, max_health) values ('we_jasonsglaive_dark', 15, 20, 4, 40, 15, 18);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_jasonsglaive_dark', 'res/texture/equipment/weapon/spritesheet_weapon_jasonsglaive_dark.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_jasonsglaive_dark.png');
@@ -376,7 +376,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Silver Sword
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_silversword', 'item','Silver Sword', 'Silberschwert','Silberschwert');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_silversword', 'item_desc', 'A powerful silver sword, covered by spikes.','Ein mächtiges Silberschwert, verziert mit Stacheln.','Es mächtigs Silberschwert, verziert mit Stachle.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_silversword', 'item_desc', 'A powerful silver sword, covered in spikes.','Ein mächtiges Silberschwert, verziert mit Stacheln.','Es mächtigs Silberschwert, verziert mit Stachle.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_silversword', 'eq_weapon', 100, 750, 80, 2);
 INSERT INTO item_attribute (item_id, dmg_physical, critical) values ('we_silversword', 6, 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_silversword', 'res/texture/equipment/weapon/spritesheet_weapon_silversword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_silversword.png');
@@ -493,7 +493,7 @@ INSERT INTO item_equipment_light(item_id, light_offset_x, light_offset_y, light_
 
 -- Arazath's Sword
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item','Bane of Existence', 'Ruin','Ruin');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item','Bane of Existence', 'Der Zerstörer','De Zerstörer');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_arazath', 'item_desc', 'Etoz'' Heritage.','Etoz'' Erbe.','Em Etoz sis Erbe.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_arazath', 'eq_weapon', 650, 700, 400, 4);
 INSERT INTO item_attribute (item_id, dmg_light, dmg_physical, dmg_shadow, dmg_fire, dmg_ice, critical) values ('we_arazath', 5, 5, 5, 5, 5, 5);

@@ -8,7 +8,7 @@ INSERT INTO item_attribute (item_id, max_health) values ('pe_ingridstew', 5);
 -- Feudal Fire
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item', 'Feudal Fire', 'Feudales Feuer', 'Feudals Füür');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item_desc', 'A strong spirit, is used for alchemistic purposes.', 'Ziemlich hochprozentig, wird für alchemistische Zwecke verwendet.', 'Zimlich hochprozentig, wird für alchemistischi Zweck bruucht.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('pe_feudalfire', 'item_desc', 'A strong spirit, it''s used for alchemistic purposes.', 'Ziemlich hochprozentig, wird für alchemistische Zwecke verwendet.', 'Zimlich hochprozentig, wird für alchemistischi Zweck bruucht.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('pe_feudalfire', 'permanent', 350, 250, -1, 2);
 INSERT INTO item_attribute (item_id, res_fire) values ('pe_feudalfire', 5);
 

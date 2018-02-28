@@ -63,7 +63,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 -- Fur of a Fire Rat
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item', 'Fur of a Fire Rat','Fell einer Feuerratte','Fell vonere Füürratte');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item_desc', 'This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour out of it.','Diese Fell ist aussergewöhnlich gut erhalten. Vielleicht kann es jemand zu einer Rüstung verarbeiten.','Da Fell isch ussergwöhnlich guet erhalte. Vilicht chan öpper da drus e Rüstig mache.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_firerat_fur', 'item_desc', 'This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour.','Diese Fell ist aussergewöhnlich gut erhalten. Vielleicht kann es jemand zu einer Rüstung verarbeiten.','Da Fell isch ussergwöhnlich guet erhalte. Vilicht chan öpper da drus e Rüstig mache.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_firerat_fur', 'misc', 200, 350, 20, 2);
 
 -- Fur of a Wolf
@@ -129,7 +129,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) v
 -- Teleport Stone
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_portstone', 'item', 'Teleport Stone','Teleportstein','Teleportstei');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_portstone', 'item_desc', 'I am able to teleport to activated waypoints using this stone.','Mit diesem Stein kann ich mich zu aktivierten Wegpunkten teleportieren.','Mit dem Stei chani mich zu aktivierte Wegpunkt teleportiere.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_portstone', 'item_desc', 'I can teleport to activated waypoints using this stone.','Mit diesem Stein kann ich mich zu aktivierten Wegpunkten teleportieren.','Mit dem Stei chani mich zu aktivierte Wegpunkt teleportiere.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('mi_portstone', 'misc', 700, 150, -1);
 
 -- Pile of Magical Pearls
@@ -141,7 +141,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) v
 -- Broken Sickles
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item', 'Broken Sickles','Zerbrochene Sicheln','Verbrocheni Sichle');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item_desc', 'The broken remains of Arastor''s weapon. Maybe someone could fix it.','Die zerbrochenen Überreste von Arastor''s Waffe. Vielleicht könnte sie jemand wieder zusammensetzen.','Di verbrochene Überreste vom Arastor sinere Waffe. Vilicht chönt si öppert wieder zemesetze.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('mi_janusglaive', 'item_desc', 'The broken remains of Alastor''s weapon. Maybe someone could fix it.','Die zerbrochenen Überreste von Alastor''s Waffe. Vielleicht könnte sie jemand wieder zusammensetzen.','Di verbrochene Überreste vom Alastor sinere Waffe. Vilicht chönt si öppert wieder zemesetze.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('mi_janusglaive', 'misc', 650, 200, 10, 3);
 
 -- Iron Ore

@@ -46,7 +46,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_rhendal', 'key', 450, 500, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_rhendal', 'item', 'Rhendal''s Chest Key','Rhendals Truhenschlüssel','Em Rhendal sin Trueschlüssel');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_rhendal', 'item_desc', 'Vincent gave me this key. It belongs to the chest of the Elder.','Vincent hat mir diesen Schlüssel gegeben. Er passt in das Schloss der Truhe des Dorfältesten.','De Vincent het mer de Schlüssel gä. Er passt is Schloss vode True vom Dorfälteste.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_rhendal', 'item_desc', 'Vincent gave me this key. It''s for the chest of the Elder.','Vincent hat mir diesen Schlüssel gegeben. Er passt in das Schloss der Truhe des Dorfältesten.','De Vincent het mer de Schlüssel gä. Er passt is Schloss vode True vom Dorfälteste.');
 
 -- Storeroom Key (Key to the basement in the basilisk inn)
 

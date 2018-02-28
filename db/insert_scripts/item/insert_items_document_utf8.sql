@@ -286,7 +286,7 @@ Falls der im Turm es Unglück passiert isch, heil dich mit dem Trank, woni der i
 -- Kamasutra
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item', 'Kama Sutra','Kama Sutra', 'Kama Sutra');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from karma, the Kama Sutra goddess. The best times of this book are long gone. Most of it is unreadable or washed out. Luckily, you can still decipher some pages.','Ein Geschenk von Karma, der Kama Sutra-Göttin. Das Buch hat seine besten Zeiten bereits hinter sich gelassen. Ein Grossteil des Buches ist unleserlich oder bereits verblasst. Glücklicherweise lassen sich einzelne Seiten entziffern.','Es Gschenk vode Karma, de Kama Sutra-Göttin. Das Buech het au scho besseri Zite gseh, vill isch unläserlich oder bereits verblasst. Glücklicherwiis lönd sich gwüssi Siite trotzdem entziffere.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('do_kamasutra', 'item_desc', 'A gift from Karma, the Kama Sutra goddess. The best times of this book are long gone. Most of it is unreadable or washed out. Luckily, you can still decipher some pages.','Ein Geschenk von Karma, der Kama Sutra-Göttin. Das Buch hat seine besten Zeiten bereits hinter sich gelassen. Ein Grossteil des Buches ist unleserlich oder bereits verblasst. Glücklicherweise lassen sich einzelne Seiten entziffern.','Es Gschenk vode Karma, de Kama Sutra-Göttin. Das Buech het au scho besseri Zite gseh, vill isch unläserlich oder bereits verblasst. Glücklicherwiis lönd sich gwüssi Siite trotzdem entziffere.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('do_kamasutra', 'document', 750, 300, 20, 1);
 INSERT INTO item_document_page(item_id, page_nr, title) values ('do_kamasutra', 0, 'BookKamasutra');
 INSERT INTO item_document_page(item_id, page_nr, title, content) values ('do_kamasutra', 1, 'TitleBookKamasutra1', 'ContentBookKamasutra1');
@@ -311,11 +311,11 @@ Im dichte Fichtedickicht wachsed dicki Fichte dicht an dicht.
 
 Hirsch heiss ich.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleBookKamasutra3','document','Train a Parrot to Speak ','Einem Papagei die Sprache beibringen','Emne Papagei es Rede bibringe');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra3','document','If a man is learning how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra3','document','If a man learns how to train a parrot to speak, he also learns to be patient. If you want to train your parrot successfully, you need to follow those rules: 
 
 1. Speak to your parrot as often as possible. 
 
-2. You need to have the parrots attention when you speak. To get his attention, take the parrot on your hand in front of your eyes.','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
+2. You need to have the parrot''s attention when you speak. To get its attention, take the parrot in your hand, and keep it in front of your eyes.','Wenn ein Mann die Kunst erlernt, einem Papagei die Sprache beizubringen, übt er dabei ebenfalls seine Geduld. Um die Sprache erfolgreich beizubringen, sind folgende Punkte zu beachten:
 
 1. Sprich so oft es geht mit deinem Papagei.
 
@@ -326,7 +326,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Co
 2. Lueg das de Papagei dich während em rede au beachted. Das chamer guet erreiche i dem mer de Papagei uf sini Hand nimmt und ihn uf Augehöchi mit sich bringt.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentBookKamasutra4','document','3. Repeat certain words in the context of an action. For example, say "Hello" to greet your parrot.
 
-4. Reward your parrot, if it does what you expected it to do. 
+4. Reward your parrot if it does what you expect it to do. 
 
 5. Don''t teach your parrot dirty words.
 

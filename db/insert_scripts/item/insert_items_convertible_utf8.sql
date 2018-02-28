@@ -1,7 +1,7 @@
 -- Shell
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_shell', 'item', 'Shell','Muschel','Muschle');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_shell', 'item_desc', 'Can be opened and contains a pearl, if you''re lucky.','Mit etwas Glück findet man eine Perle darin.','Mit echli Glück hets da e Perle dinne.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('co_shell', 'item_desc', 'Can be opened. It may contain a pearl, if you''re lucky.','Mit etwas Glück findet man eine Perle darin.','Mit echli Glück hets da e Perle dinne.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('co_shell', 'convertible', 400, 200, 2);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('co_shell', 0, -30, 30, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('co_shell', 1, 350, 100, 50, 50);

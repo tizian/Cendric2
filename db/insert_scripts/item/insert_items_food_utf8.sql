@@ -71,7 +71,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 -- Devil's Berry
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item', 'Devil''s Berry', 'Teufelsbeere', 'Tüüfelsbeeri');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item_desc', 'Eating those will increase all resistances dramatically. But at a price...', 'Erhöht alle Resistenzen dramatisch... aber das hat seinen Preis.', 'Mit dem ischme ziemlich resistent gege alles... Aber das het sin Priis.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_devilberry', 'item_desc', 'Eating these will increase all resistances dramatically. But at a price...', 'Erhöht alle Resistenzen dramatisch... aber das hat seinen Preis.', 'Mit dem ischme ziemlich resistent gege alles... Aber das het sin Priis.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_devilberry', 'consumable', 100, 100, 4);
 INSERT INTO item_attribute (item_id, health_regeneration, res_physical, res_fire, res_ice, res_shadow, res_light) values ('fo_devilberry', -6, 100, 100, 100, 100, 100);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_devilberry', 20);
@@ -248,7 +248,7 @@ INSERT INTO item_food (item_id, food_duration_s, is_drink) values ('fo_fishsoup'
 -- Raw Fish
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item', 'Raw Fish', 'Roher Fisch', 'Rohe Fisch');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item_desc', 'I should cook this better first.', 'Den sollte ich wohl besser zuerst kochen.', 'Söttme glaub besser zersch choche.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_rawfish', 'item_desc', 'I should cook this first.', 'Den sollte ich wohl besser zuerst kochen.', 'Söttme glaub besser zersch choche.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_rawfish', 'consumable', 400, 0, 3);
 INSERT INTO item_attribute (item_id, health_regeneration, dmg_ice) values ('fo_rawfish', 5, 5);
 INSERT INTO item_food (item_id, food_duration_s, is_cookable, cooked_item_id) values ('fo_rawfish', 6, 1, 'fo_fishsoup');

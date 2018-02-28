@@ -205,10 +205,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="989" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="989" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="1059" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="1066" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="35" height="25">
@@ -419,7 +419,7 @@
   <properties>
    <property name="not conditions" value="trigger,tower_1_done"/>
   </properties>
-  <object id="317" gid="1103" x="1200" y="650" width="50" height="50">
+  <object id="317" gid="1110" x="1200" y="650" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower_1"/>
    </properties>
@@ -430,7 +430,7 @@
    <property name="conditions" value="trigger,tower_1_done"/>
    <property name="not conditions" value="trigger,tower_2_done"/>
   </properties>
-  <object id="318" gid="1103" x="1200" y="650" width="50" height="50">
+  <object id="318" gid="1110" x="1200" y="650" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower_2"/>
    </properties>
@@ -441,7 +441,7 @@
    <property name="conditions" value="trigger,tower_2_done"/>
    <property name="not conditions" value="trigger,tower_3_done"/>
   </properties>
-  <object id="320" gid="1103" x="1200" y="650" width="50" height="50">
+  <object id="320" gid="1110" x="1200" y="650" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower_3"/>
    </properties>
@@ -451,7 +451,7 @@
   <properties>
    <property name="conditions" value="trigger,tower_3_done"/>
   </properties>
-  <object id="321" gid="1103" x="1200" y="650" width="50" height="50">
+  <object id="321" gid="1110" x="1200" y="650" width="50" height="50">
    <properties>
     <property name="key" value="ke_tower_4"/>
    </properties>

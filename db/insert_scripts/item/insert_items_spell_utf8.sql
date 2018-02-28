@@ -10,21 +10,21 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_holyfire', 'spell', 300, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_holyfire', 18);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item', 'Scroll - Holy Fire','Schriftrolle - Heiliges Feuer','Schriftrolle - Heiligs Füür', 'Pergamino - Fuego divino');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item_desc', 'Summons a holy fire that burns enemies in range.','Beschwört ein heiliges Feuer, das Gegner in der Nähe verbrennt.','Beschwört es heiligs Füür wo Gegner ide Nöchi verbrennt.','Cendric convoca a un fuego divino que quema a enemigos al alcance.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_holyfire', 'item_desc', 'Summons a holy fire that burns enemies within range.','Beschwört ein heiliges Feuer, das Gegner in der Nähe verbrennt.','Beschwört es heiligs Füür wo Gegner ide Nöchi verbrennt.','Cendric convoca a un fuego divino que quema a enemigos al alcance.');
 
 -- Divine Shield
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_divineshield', 'spell', 300, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_divineshield', 19);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_divineshield', 'item', 'Scroll - Divine Shield','Schriftrolle - Göttlicher Schild','Schriftrolle - Göttlichs Schild', 'Pergamino - Escudo divino');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_divineshield', 'item_desc', 'Grants a shield that enhances your resistances and heals you once.','Umhüllt dich mit einem Schild, der dich einmalig heilt und für eine gewisse Dauer deine Resistenzen erhöht.','Umhüllt dich mitme Schild wo dich eimalig heilt und dini Resistenze für e gwüssi Ziit erhöht.','Otorga un escudo que aumenta la resistencia de Cendric y lo cura una vez.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_divineshield', 'item_desc', 'Grants a shield that enhances your resistances and heals you when you cast it.','Umhüllt dich mit einem Schild, der dich heilt und für eine gewisse Dauer deine Resistenzen erhöht.','Umhüllt dich mitme Schild wo dich heilt und dini Resistenze für e gwüssi Ziit erhöht.','Otorga un escudo que aumenta la resistencia de Cendric y lo cura.');
 
 -- Summon Picklock
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_unlock', 'spell', 200, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_unlock', 7);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_unlock', 'item','Scroll - Summon Picklock','Schriftrolle - Dietrich beschwören','Schriftrolle - Dietrich beschwöre', 'Pergamino - Convocación de ganzúa');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_unlock', 'item_desc','Summons a picklock that is able to unlock locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni Chischte knackt sofern de Zauber gnueg starch isch für die Chischte.', 'Convoca a una ganzúa que puede abrir cofres si es lo suficientemente fuerte para el cofre.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_unlock', 'item_desc','Summons a picklock that unlocks locked chests if its strength is big enough for the chest.','Beschwört einen Dietrich, der verschlossene Truhen knackt, sofern die Stärke des Zaubers ausreicht.','Beschwört en Dietrich ane wo e verschlosseni Chischte knackt sofern de Zauber gnueg starch isch für die Chischte.', 'Convoca a una ganzúa que puede abrir cofres si es lo suficientemente fuerte para el cofre.');
 
 -- Shadow Trap
 
@@ -38,14 +38,14 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_invisibility', 'spell', 200, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_invisibility', 9);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item','Scroll - Invisibility','Schriftrolle - Unsichtbarkeit','Schriftrolle - Unsichtbarkeit', 'Pergamino - Invisibilidad');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Renders you invisible for a certain duration for certain enemies','Du wirst unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Du wirsch unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_invisibility', 'item_desc','Renders you invisible to certain enemies, for a certain duration','Du wirst unsichtbar für eine gewisse Zeit und für gewisse Gegner.','Du wirsch unsichtbar für e gwüssi Ziit und gwüssi Gegner.','Hace invisible a Cendric ante algunos enemigos por cierto tiempo.');
 
 -- Fear
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_fear', 'spell', 250, 400, -1, 2);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_fear', 12);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fear', 'item','Scroll - Fear','Schriftrolle - Furcht','Schriftrolle - Angscht', 'Pergamino - Temor');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fear', 'item_desc','Enemies will flee in terror for a certain duration if the spell is strong enough.','Gegner fliehen für eine gewisse Zeit, allerdings nur, wenn der Zauber genug stark für sie ist.','Gegner flüchtet für e gwüssi Ziit, aber nur, wenn de Zauber gnueg starch isch für si.','Si el hechizo es suficientemente fuerte, los enemigos huirán aterrorizados por un lapso de tiempo.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_fear', 'item_desc','Enemies will flee in terror for a certain duration, if the spell is strong enough.','Gegner fliehen für eine gewisse Zeit, allerdings nur, wenn der Zauber genug stark für sie ist.','Gegner flüchtet für e gwüssi Ziit, aber nur, wenn de Zauber gnueg starch isch für si.','Si el hechizo es suficientemente fuerte, los enemigos huirán aterrorizados por un lapso de tiempo.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_fear', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_fear', 1, 150, 0, 50, 50);
 
@@ -102,7 +102,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('sp_icyambush', 'spell', 200, 400, -1, 3);
 INSERT INTO item_spell (item_id, spell_id) values ('sp_icyambush', 11);
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_icyambush', 'item','Scroll - Icy Ambush','Schriftrolle - Eisiger Hinterhalt','Schriftrolle - Iischalte Hinterhalt', 'Pergamino - Emboscada helada');
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_icyambush', 'item_desc','You throw an enchanted dagger that deals big damage when it hits an enemy, stuns it and enemies in range and teleports you to its location.','Du wirfst einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und dich an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.','Du wirfsch en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. Du wirsch ad Stell vom troffene Gegner teleportiert.','Cendric lanza una daga encantada que hace gran daño cuando golpea a un enemigo, aturde a este y a los enemigos al alcance y lo teletransporta a su ubicación.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('sp_icyambush', 'item_desc','You throw an enchanted dagger that deals high damage and stuns its target. The dagger teleports you to its location once it hits an enemy.','Du wirfst einen verzauberten Dolch, der eine grosse Menge Schaden verursacht, wenn er einen Gegner trifft und dich an dessen Stelle teleportiert. Gegner im Umkreis werden betäubt.','Du wirfsch en verzauberte Dolch wo viel Schade amne Gegner macht und Gegner im Umkreis betäubt. Du wirsch ad Stell vom troffene Gegner teleportiert.','Cendric lanza una daga encantada que hace gran daño cuando golpea a un enemigo, aturde a este y a los enemigos al alcance y lo teletransporta a su ubicación.');
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('sp_icyambush', 0, -30, 50, 20);
 INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('sp_icyambush', 1, 500, 350, 50, 50);
 

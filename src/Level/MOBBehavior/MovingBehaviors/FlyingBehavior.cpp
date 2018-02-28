@@ -22,6 +22,12 @@ void FlyingBehavior::handleDefaultAcceleration() {
 		return;
 	}
 
+	if (m_enemy->getEnemyState() == EnemyState::Stunned) {
+		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
+		stopAll();
+		return;
+	}
+
 	float newAccelerationX = m_mob->getAcceleration().x;
 	m_mob->setAcceleration(sf::Vector2f(newAccelerationX, 0.f));
 }
