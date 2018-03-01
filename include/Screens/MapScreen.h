@@ -42,7 +42,7 @@ private:
 	bool isOverlayActive() const;
 	bool isOverlayVisible() const;
 	void quicksave() override;
-	void notifyEquipmentReload();
+	void notifyEquipmentReload() override;
 
 	void updateFogOfWar();
 
