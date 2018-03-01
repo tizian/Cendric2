@@ -336,6 +336,7 @@ SpellData SpellData::getProjectileSpellData() {
 	projectile.duration = sf::seconds(3);
 	projectile.needsTarget = true;
 	projectile.isDynamicTileEffect = true;
+	projectile.isReflectable = true;
 	projectile.damage = 10;
 	projectile.speed = 600.f;
 
@@ -437,6 +438,7 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.duration = sf::seconds(3);
 	fireBall.needsTarget = true;
 	fireBall.isDynamicTileEffect = true;
+	fireBall.isReflectable = true;
 	fireBall.damage = 10;
 	fireBall.speed = 300.f;
 
@@ -452,7 +454,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.id = SpellID::IceBall;
 	iceBall.spellType = SpellType::Elemental;
 	iceBall.spritesheetPath = "res/texture/spells/spritesheet_spell_iceball.png";
-	iceBall.creatorSoundPaths = { "res/sound/spell/iceball.ogg" };
+	iceBall.spellSoundPaths = { "res/sound/spell/iceball.ogg" };
 	iceBall.iconTextureRect = sf::IntRect(50, 0, 50, 50);
 
 	iceBall.cooldown = sf::seconds(1);
@@ -462,6 +464,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.activeDuration = sf::seconds(5);
 	iceBall.isDynamicTileEffect = true;
 	iceBall.needsTarget = true;
+	iceBall.isReflectable = true;
 	iceBall.damage = 10;
 	iceBall.speed = 250.f;
 
@@ -548,6 +551,7 @@ SpellData SpellData::getFearSpellData() {
 	fear.id = SpellID::Fear;
 	fear.spellType = SpellType::Necromancy;
 	fear.spritesheetPath = "res/texture/spells/spritesheet_spell_fear.png";
+	fear.creatorSoundPaths = { "res/sound/spell/fear.ogg" };
 	fear.iconTextureRect = sf::IntRect(0, 100, 50, 50);
 
 	fear.cooldown = sf::seconds(3);
@@ -558,6 +562,7 @@ SpellData SpellData::getFearSpellData() {
 	fear.needsTarget = true;
 	fear.speed = 300.f;
 	fear.isFearing = true;
+	fear.isReflectable = true;
 	fear.ccStrength = 1;
 
 	fear.countModifierAddition = 1;
@@ -573,6 +578,7 @@ SpellData SpellData::getAntiGravitySpellData() {
 	antiGravity.id = SpellID::AntiGravity;
 	antiGravity.spellType = SpellType::Elemental;
 	antiGravity.iconTextureRect = sf::IntRect(200, 0, 50, 50);
+	antiGravity.creatorSoundPaths = { "res/sound/spell/antigravity.ogg" };
 
 	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
 	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
@@ -639,6 +645,7 @@ SpellData SpellData::getLeechSpellData() {
 	leech.id = SpellID::Leech;
 	leech.spellType = SpellType::Necromancy;
 	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
+	leech.spellSoundPaths = { "res/sound/spell/leech.ogg" };
 
 	leech.cooldown = sf::seconds(3);
 	leech.boundingBox = sf::FloatRect(0, 0, 10, 10);
@@ -646,6 +653,7 @@ SpellData SpellData::getLeechSpellData() {
 	leech.damageType = DamageType::Shadow;
 	leech.activeDuration = sf::seconds(5);
 	leech.needsTarget = true;
+	leech.isReflectable = true;
 	leech.damage = 10;
 	leech.heal = 5;
 	leech.speed = 150.f;
@@ -662,6 +670,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.id = SpellID::IcyAmbush;
 	icyAmbush.spellType = SpellType::Twilight;
 	icyAmbush.spritesheetPath = "res/texture/spells/spritesheet_spell_icyambush.png";
+	icyAmbush.creatorSoundPaths = { "res/sound/spell/icyambush.ogg" };
 	icyAmbush.iconTextureRect = sf::IntRect(200, 50, 50, 50);
 
 	icyAmbush.cooldown = sf::seconds(5);
@@ -761,6 +770,7 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 	leapOfFaith.id = SpellID::LeapOfFaith;
 	leapOfFaith.spellType = SpellType::Divine;
 	leapOfFaith.spritesheetPath = "res/texture/spells/spritesheet_spell_leapoffaith.png";
+	leapOfFaith.creatorSoundPaths = { "res/sound/spell/leapoffaith.ogg" };
 	leapOfFaith.iconTextureRect = sf::IntRect(150, 150, 50, 50);
 
 	leapOfFaith.cooldown = sf::seconds(30);
@@ -827,6 +837,7 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.spellType = SpellType::Necromancy;
 
 	ghostForm.spritesheetPath = "res/texture/spells/spritesheet_spell_ghost.png";
+	ghostForm.spellSoundPaths = { "res/sound/spell/ghostform.ogg" };
 	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
 	ghostForm.cooldown = sf::seconds(20);
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
@@ -896,6 +907,7 @@ SpellData SpellData::getRaiseTheDeadSpellData() {
 	raiseTheDead.spellType = SpellType::Necromancy;
 
 	raiseTheDead.spritesheetPath = "res/texture/spells/spritesheet_spell_raisethedead.png";
+	raiseTheDead.creatorSoundPaths = { "res/sound/spell/raisethedead.ogg" };
 	raiseTheDead.iconTextureRect = sf::IntRect(100, 100, 50, 50);
 	raiseTheDead.cooldown = sf::seconds(10);
 	raiseTheDead.boundingBox = sf::FloatRect(0, 0, 10, 10);

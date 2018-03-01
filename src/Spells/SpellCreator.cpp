@@ -43,6 +43,10 @@ void SpellCreator::update(const sf::Time& frametime) {
 			m_isReady = true;
 			m_futureTargets.clear();
 			m_target = nullptr;
+
+			if (!m_spellData.creatorSoundPaths.empty()) {
+				g_resourceManager->playSound(m_spellData.creatorSoundPaths.at(rand() % m_spellData.creatorSoundPaths.size()));
+			}
 		}
 	}
 }
@@ -52,6 +56,7 @@ void SpellCreator::executeSpell(const sf::Vector2f& target) {
 	if (!m_spellData.attachedToMob && norm(target) > 0.f) {
 		m_owner->setFacingRight(target.x - m_owner->getCenter().x > 0);
 	}
+	
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_futureTargets.push_back(target);
@@ -72,6 +77,7 @@ void SpellCreator::executeSpell(const LevelMovableGameObject* target) {
 	if (target == nullptr) return;
 	m_isReady = false;
 	m_owner->setFacingRight(target->getCenter().x - m_owner->getCenter().x > 0);
+	
 	if (m_spellData.castingTime > sf::Time::Zero) {
 		m_currentCastingTime = m_spellData.castingTime;
 		m_target = target;

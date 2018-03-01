@@ -24,7 +24,7 @@ loadRoutine = function(R, W)
     end
     
     if (not W:isConditionFulfilled("npc_robert2", "talked")) then
-        R:setTalkingActive(true)	
+        R:setTalkingActiveForce(true)	
     end
 
 end	

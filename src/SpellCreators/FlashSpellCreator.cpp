@@ -21,6 +21,7 @@ void FlashSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	}
 	// check if we are inside a dynamic tile and move backwards if so. 
 	// This is also used because we are one pixel inside the wall.
+	rec.ignoreDynamicTiles = false;
 	while (m_level->collides(rec)) {
 		newRange--;
 		rec.boundingBox.left = m_owner->isFacingRight() ? 

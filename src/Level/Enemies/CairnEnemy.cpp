@@ -159,3 +159,6 @@ std::string CairnEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_cairn.png";
 }
 
+std::string CairnEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/cairn_death.ogg";
+}

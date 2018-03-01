@@ -99,7 +99,7 @@ void DialogueTranslationTest::loadDialogueFiles(TestResult& result) {
 						g_logger->logInfo("[DialogueTranslationTest]", "EN Dialogue translations succeeded: " + filePath);
 					}
 					else {
-						g_logger->logError("[DialogueTranslationTest]", "EN Dialogue translations missing in: " + filePath);
+						g_logger->logError("[DialogueTranslationTest]", "EN Dialogue translations missing in: " + filePath + ": " + textKey);
 					}
 					result.testsTotal++;
 
@@ -110,7 +110,7 @@ void DialogueTranslationTest::loadDialogueFiles(TestResult& result) {
 						g_logger->logInfo("[DialogueTranslationTest]", "DE Dialogue translations succeeded: " + filePath);
 					}
 					else {
-						g_logger->logError("[DialogueTranslationTest]", "DE Dialogue translations missing in: " + filePath);
+						g_logger->logError("[DialogueTranslationTest]", "DE Dialogue translations missing in: " + filePath + ": " + textKey);
 					}
 					result.testsTotal++;
 
@@ -121,7 +121,7 @@ void DialogueTranslationTest::loadDialogueFiles(TestResult& result) {
 						g_logger->logInfo("[DialogueTranslationTest]", "CH Dialogue translations succeeded: " + filePath);
 					}
 					else {
-						g_logger->logError("[DialogueTranslationTest]", "CH Dialogue translations missing in: " + filePath);
+						g_logger->logError("[DialogueTranslationTest]", "CH Dialogue translations missing in: " + filePath + ": " + textKey);
 					}
 					result.testsTotal++;
 				}

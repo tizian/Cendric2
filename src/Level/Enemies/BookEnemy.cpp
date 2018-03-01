@@ -227,3 +227,7 @@ void BookEnemy::loadParticleSystem() {
 std::string BookEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_book.png";
 }
+
+std::string BookEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/book_death.ogg";
+}

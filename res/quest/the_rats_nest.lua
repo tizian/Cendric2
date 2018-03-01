@@ -13,7 +13,7 @@ markers = {
 	{
 		map = "res/map/meadows/meadows.tmx",
 		npc = "npc_edmond",
-		position = {325, 675},
+		position = {3025, 675},
 		step = -1
 	}
 }

@@ -101,6 +101,7 @@ private:
 	sf::Time m_fadingTime = sf::seconds(2.f);
 	sf::Time m_particleTime = sf::seconds(2.f);
 	sf::Time m_equipmentColoredTime = sf::Time::Zero;
+	bool m_needsAnimationReset = false;
 	bool m_isInputLock = false;
 	AutoscrollerCamera* m_autoscroller = nullptr;
 };

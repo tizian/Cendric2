@@ -49,7 +49,7 @@ protected:
 	// dynamic tile textures have a border (border width in pixel)
 	const int BORDER = 1;
 	const Level* m_level;
-	LevelMainCharacter* m_mainChar;
+	LevelMainCharacter* m_mainChar = nullptr;
 	bool m_isCollidable = false;
 	bool m_isStrictlyCollidable = false;
 	bool m_isOneWay = false;

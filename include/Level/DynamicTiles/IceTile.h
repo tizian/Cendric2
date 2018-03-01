@@ -10,9 +10,11 @@ public:
 	void update(const sf::Time& frameTime) override;
 	void loadAnimation(int skinNr) override;
 	void onHit(Spell* spell) override;
+	void setDisposed() override;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Ice; }
 
 private:
 	std::string getSpritePath() const override;
+	std::string getSoundPath() const override;
 	bool m_isFreezing;
 };

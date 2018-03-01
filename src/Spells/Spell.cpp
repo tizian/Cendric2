@@ -218,7 +218,7 @@ void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 }
 
 void Spell::reflect() {
-	if (isAttachedToMob()) return;
+	if (!isReflectable()) return;
 	setAcceleration(sf::Vector2f(0.f, 0.f));
 	setVelocityY(-getVelocity().y);
 	setVelocityX(-getVelocity().x);
@@ -297,6 +297,10 @@ bool Spell::isCritical() const {
 
 bool Spell::isAllied() const {
 	return m_data.isAlly;
+}
+
+bool Spell::isReflectable() const {
+	return m_data.isReflectable;
 }
 
 int Spell::getDamage() const {

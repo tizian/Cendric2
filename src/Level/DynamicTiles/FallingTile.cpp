@@ -77,6 +77,7 @@ void FallingTile::update(const sf::Time& frameTime) {
 		if (m_tileState == FallingTileState::Falling) {
 			m_tileState = FallingTileState::Waiting;
 			m_waitingTime = WAITING_TIME;
+			g_resourceManager->playSound(getSoundPath(), getCenter(), m_mainChar->getCenter());
 		}
 		else if (m_tileState == FallingTileState::Returning) {
 			m_tileState = FallingTileState::Idle;
@@ -130,4 +131,8 @@ void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 std::string FallingTile::getSpritePath() const {
 	return "res/texture/level_dynamic_tiles/spritesheet_tiles_falling.png";
+}
+
+std::string FallingTile::getSoundPath() const {
+	return "res/sound/tile/thwomp.ogg";
 }

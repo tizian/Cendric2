@@ -45,6 +45,11 @@ void AnimatedSprite::stop() {
 	setFrame(m_currentFrame);
 }
 
+void AnimatedSprite::gotoFirstFrame() {
+	m_currentFrame = 0;
+	setFrame(m_currentFrame);
+}
+
 void AnimatedSprite::setLooped(bool looped) {
 	m_isLooped = looped;
 }

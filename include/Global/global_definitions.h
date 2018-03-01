@@ -14,7 +14,7 @@
 #include <cassert>
 
 // versioning
-#define CENDRIC_VERSION_NR "0.9.2-rc9"
+#define CENDRIC_VERSION_NR "1.0.0"
 
 // Debug version
 //#define DEBUG
@@ -26,7 +26,7 @@
 // #define APPLE_APP_BUILD
 
 // Steam builds
-// #define STEAM
+#define STEAM
 
 // max frame time (in seconds)
 #define MAX_FRAME_TIME 0.05f

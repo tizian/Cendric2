@@ -119,7 +119,7 @@ loadDialogue = function(DL)
 			if (DL:hasItem("qe_recommendationletter", 1)) then
 				DL:addChoice(37, "DL_Choice_TryLetter") -- You know, Inina trusts me. (Show letter)
 			end
-            if (DL:isQuestComplete("clerics_recommendation")) then
+            if (DL:isQuestState("clerics_recommendation", "completed")) then
 				DL:addChoice(60, "DL_Choice_TryLloyd") -- Lloyd trusts me. You better do, too.
 			end
 

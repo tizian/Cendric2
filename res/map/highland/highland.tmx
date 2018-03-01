@@ -1034,7 +1034,7 @@
   </object>
  </objectgroup>
  <objectgroup name="npc">
-  <object id="293" gid="2359" x="1825" y="1450" width="50" height="50">
+  <object id="293" gid="2359" x="1825" y="1425" width="50" height="50">
    <properties>
     <property name="id" value="npc_zephyra"/>
    </properties>

@@ -451,7 +451,7 @@ npc.id:npc_vincent2
 	tag:50
 	# triggers: 
 	# translation: 
-	translation.tag:DL_NPC_50
+	translation.tag:DL_Vincent_Treasure
 	translation.en:
 	translation.de:
 	translation.ch:

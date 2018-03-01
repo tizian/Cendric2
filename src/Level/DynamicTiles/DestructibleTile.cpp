@@ -1,4 +1,5 @@
 #include "Level/DynamicTiles/DestructibleTile.h"
+#include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
 
@@ -56,7 +57,7 @@ void DestructibleTile::onHit(Spell* spell) {
 	case SpellID::Projectile:
 		if (m_state == GameObjectState::Idle) {
 			m_state = GameObjectState::Crumbling;
-			g_resourceManager->playSound(getSoundPath());
+			g_resourceManager->playSound(getSoundPath(), getCenter(), m_mainChar->getCenter());
 			setCurrentAnimation(getAnimation(m_state), false);
 			m_isCollidable = false;
 			spell->setDisposed();

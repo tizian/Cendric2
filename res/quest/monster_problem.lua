@@ -6,8 +6,15 @@ conditions =
 markers = {
     {
 		map = "res/map/meadows/meadows.tmx",
-		position = {2850, 2400},
+		position = {1125, 1025},
+        npc = "npc_zeff",
 		step = 0
+	},
+    {
+		map = "res/map/meadows/meadows.tmx",
+		position = {1125, 1025},
+        npc = "npc_zeff",
+		step = 1
 	},
     {
 		map = "res/map/meadows/meadows.tmx",

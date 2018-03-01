@@ -39,6 +39,7 @@ public:
 	virtual bool getConfiguredRotateSprite() const;
 	bool isCritical() const;
 	bool isAllied() const;
+	bool isReflectable() const;
 	int getDamage() const;
 	int getDamagePerSecond() const;
 	int getHeal() const;

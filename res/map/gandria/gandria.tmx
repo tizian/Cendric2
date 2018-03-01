@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="359">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="80" height="70" tilewidth="50" tileheight="50" nextobjectid="363">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="explorable" value=""/>
@@ -371,7 +371,7 @@
 0,0,1088,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,0,0,690,0,0,0,0,0,0,0,0,0,391,584,0,108,0,9,0,108,0,584,0,0,0,108,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1088,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,0,0,690,0,0,0,0,0,0,0,0,0,391,12,0,390,0,5,0,342,0,5,0,0,0,7,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1088,243,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,0,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,1088,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,347,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,6,0,108,0,108,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,1088,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,347,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,108,0,6,0,0,0,108,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,1088,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,0,0,690,0,0,0,0,0,0,0,0,0,0,484,0,486,489,488,488,488,488,488,488,488,488,488,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,347,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,197,0,0,0,0,0,0,0,0,0,0,0,0,0,0,688,0,0,0,0,690,0,0,0,0,0,0,0,0,0,11,392,0,108,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,534,535,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -781,6 +781,34 @@
     <property name="text" value="SignRandalf"/>
    </properties>
   </object>
+  <object id="359" gid="2505" x="1700" y="750" width="50" height="50">
+   <properties>
+    <property name="bg" value=""/>
+    <property name="name" value="Tombstone"/>
+    <property name="text" value="SignPascal"/>
+   </properties>
+  </object>
+  <object id="360" gid="2505" x="2350" y="400" width="50" height="50">
+   <properties>
+    <property name="bg" value=""/>
+    <property name="name" value="Tombstone"/>
+    <property name="text" value="SignIronbell"/>
+   </properties>
+  </object>
+  <object id="361" gid="2505" x="2150" y="500" width="50" height="50">
+   <properties>
+    <property name="bg" value=""/>
+    <property name="name" value="Tombstone"/>
+    <property name="text" value="SignPeter"/>
+   </properties>
+  </object>
+  <object id="362" gid="2505" x="1887.5" y="650" width="50" height="50">
+   <properties>
+    <property name="bg" value=""/>
+    <property name="name" value="Tombstone"/>
+    <property name="text" value="SignMatthew"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="dynamic cryptdoor">
   <properties>
@@ -792,7 +820,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="collidable" width="80" height="70">
+ <layer name="collidable" width="80" height="70" visible="0">
   <data encoding="csv">
 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 0,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,

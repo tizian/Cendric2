@@ -171,7 +171,7 @@ loadDialogue = function(DL)
 				DL:addNode()
 
 
-				DL:createNPCNode(50, -2, "DL_NPC_50") -- 
+				DL:createNPCNode(50, -2, "DL_Vincent_Treasure") -- 
 				DL:addNode()
 
 			end

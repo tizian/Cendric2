@@ -103,7 +103,7 @@ void MorgianaBoss::onHit(Spell* spell) {
 		return;
 	}
 
-	if (!spell->isAttachedToMob()) {
+	if (spell->isReflectable()) {
 		// we'll send you right back!
 		spell->setOwner(this);
 		spell->reflect();

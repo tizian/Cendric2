@@ -8,7 +8,7 @@ loadRoutine = function(R, W)
 		R:setTalkingActive(false)
 		R:setReloadEnabled(false)
 	else
-		R:setTalkingActive(true)
+		R:setTalkingActiveForce(true)
 		R:setReloadEnabled(true)
 	end
     

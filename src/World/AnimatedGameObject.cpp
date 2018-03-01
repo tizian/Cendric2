@@ -16,10 +16,6 @@ void AnimatedGameObject::setCurrentAnimation(const Animation* animation, bool is
 		m_isAnimationLocked = true;
 }
 
-void setRandomStartingFrame() {
-
-}
-
 void AnimatedGameObject::unlockAnimation() {
 	m_isAnimationLocked = false;
 }
@@ -86,6 +82,10 @@ void AnimatedGameObject::playCurrentAnimation(bool play) {
 	else {
 		m_animatedSprite.pause();
 	}
+}
+
+void resetCurrentAnimation() {
+
 }
 
 void AnimatedGameObject::loopCurrentAnimation(bool loop) {

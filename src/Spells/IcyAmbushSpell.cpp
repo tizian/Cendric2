@@ -33,6 +33,7 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject* target) {
 		m_mob->setPosition(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top));
 	}
 	else {
+		m_screen->setNegativeTooltip("NotTeleport");
 		g_logger->logInfo("IcyAmbushSpell", "Icy ambush port would stuck its owner. The port is not executed.");
 	}
 }

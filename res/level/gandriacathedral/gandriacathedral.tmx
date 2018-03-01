@@ -601,6 +601,7 @@
     <property name="collidable" value=""/>
     <property name="key" value="ke_cathedral"/>
     <property name="strength" value="3"/>
+    <property name="width" value="1"/>
    </properties>
   </object>
   <object id="106" gid="810" x="2900" y="550" width="50" height="50">

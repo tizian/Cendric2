@@ -39,6 +39,7 @@ public:
 	void play();
 	void pause();
 	void stop();
+	void gotoFirstFrame();
 
 	void setAnimation(const Animation* animation);
 	void setFrameTime(sf::Time time);

@@ -64,6 +64,11 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 	updateDamagedOverlay();
 	updateAutoscroller();
 
+	if (m_needsAnimationReset) {
+		m_animatedSprite.gotoFirstFrame();
+		m_needsAnimationReset = false;
+	}
+
 	// update the sprite color time
 	if (m_equipmentColoredTime > sf::Time::Zero) {
 		updateTime(m_equipmentColoredTime, frameTime);
@@ -283,7 +288,8 @@ void LevelMainCharacter::reloadEquipment() {
 	for (auto go : *m_screen->getObjects(_Equipment)) {
 		go->setDisposed();
 	}
-	// load new
+	// reset our animation & load equipment new
+	m_needsAnimationReset = true;
 	LevelMainCharacterLoader::loadEquipment(m_screen);
 
 	loadWeapon();

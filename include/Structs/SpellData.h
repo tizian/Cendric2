@@ -32,6 +32,7 @@ struct SpellData final {
 	bool needsTarget = false;
 	bool attachedToMob = false;
 	bool isDynamicTileEffect = false;
+	bool isReflectable = false;
 	bool isColliding = true;
 	bool isStunning = false;
 	bool isFearing = false;

@@ -38,6 +38,7 @@ void WispEnemy::loadAttributes() {
 
 void WispEnemy::loadSpells() {
 	SpellData shadowAureola = SpellData::getSpellData(SpellID::Aureola);
+	shadowAureola.creatorSoundPaths.clear();
 	shadowAureola.skinNr = m_skinNr + 1;
 	shadowAureola.damage = 5;
 	shadowAureola.isStunning = false;

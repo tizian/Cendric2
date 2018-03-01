@@ -61,10 +61,17 @@ void DivineShieldSpell::checkReflection() {
 		if (!spell) continue;
 		if (spell->isAttachedToMob() || spell->isAllied()) continue;
 		if (!fastIntersect(*getBoundingBox(), *spell->getBoundingBox())) continue;
+
+		if (spell->getSpellID() == SpellID::Aureola) {
+			spell->setDisposed();
+			m_reflectProjectilesCount--;
+		}
+		else if (spell->isReflectable()) {
+			spell->setOwner(m_mob);
+			spell->reflect();
+			m_reflectProjectilesCount--;
+		}
 		
-		spell->setOwner(m_mob);
-		spell->reflect();
-		m_reflectProjectilesCount--;
 		if (m_reflectProjectilesCount == 0) {
 			break;
 		}

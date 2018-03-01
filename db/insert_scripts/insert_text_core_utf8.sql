@@ -145,6 +145,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotE
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughStrength','The spell is not strong enough!','Der Zauber ist nicht genügend stark!','De Zauber isch nid gnueg starch!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughReputation','Not enough reputation!','Nicht genügend Ruf!','Nid gnueg Ruef!','¡No hay suficiente reputación!');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToGain','Nothing to gain there anymore.','Da ist nichts mehr zu holen.', 'Da gits nüt me z''hole.','Nada que minar.');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotTeleport','Unable to teleport!','Kann nicht teleportieren!','Cha nid teleportiere!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToSay','There''s nothing to talk about.','Es gibt nichts zu sagen.','Es git nüt zum rede.','No hay de qué hablar.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoWeapon','No weapon','Keine Waffe','Kei Waffe','Sin arma');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoSpells','No spells learned.','Keine Zauber gelernt.','Kei Zauber glernt.','Sin hechizos aprendidos.');

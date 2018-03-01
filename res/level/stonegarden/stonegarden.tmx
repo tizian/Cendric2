@@ -471,6 +471,7 @@
   <object id="135" gid="767" x="250" y="500" width="50" height="50">
    <properties>
     <property name="fo_ham" value="1"/>
+    <property name="fo_sausage" value="1"/>
     <property name="gold" value="5"/>
    </properties>
   </object>
@@ -583,8 +584,8 @@
    </properties>
   </object>
   <object id="218" gid="1284" x="3100" y="1400" width="50" height="50"/>
-  <object id="219" gid="1283" x="4350" y="950" width="50" height="50"/>
-  <object id="220" gid="1283" x="4550" y="400" width="50" height="50"/>
+  <object id="219" gid="1283" x="4350" y="970" width="50" height="50"/>
+  <object id="220" gid="1283" x="4550" y="420" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="trigger">
   <object id="87" x="4730" y="731" width="95" height="118.424">

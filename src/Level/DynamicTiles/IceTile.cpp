@@ -1,5 +1,6 @@
 #include "Level/DynamicTiles/IceTile.h"
 #include "Level/DynamicTiles/FluidTile.h"
+#include "Level/LevelMainCharacter.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
 
@@ -65,6 +66,15 @@ void IceTile::onHit(Spell* spell) {
 	}
 }
 
+void IceTile::setDisposed() {
+	LevelDynamicTile::setDisposed();
+	g_resourceManager->playSound(getSoundPath(), getCenter(), m_mainChar->getCenter());
+}
+
 std::string IceTile::getSpritePath() const {
 	return "res/texture/level_dynamic_tiles/spritesheet_tiles_ice.png";
+}
+
+std::string IceTile::getSoundPath() const {
+	return "res/sound/tile/ice.ogg";
 }

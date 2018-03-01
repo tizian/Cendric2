@@ -51,6 +51,28 @@ J.','Komm zur Krypta von Gandria.
 J.','Chum zude Krypta vo Gandria.
 J.');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignRandalf','sign','Don''t use too much oil when burning heretics!','Benutze nicht zu viel Öl beim Verbrennen von Ketzern!','Bruch nid z''viel Öl bim Verbenne vo Ketzer!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignPascal','sign','Subject 1153
+
+In the end he could break his chains and forge his own destiny.','Subjekt 1153
+
+Am Ende konnte er seine Fesseln brechen und sein eigenes Schicksal schmieden.','Subjekt 1153
+
+Am End heter sini Fessle bräche und sis eiget Schicksal schmiede chöne.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignPeter','sign','Kenny-Tom
+
+Here lies the best pig that ever lived.','Kenny-Tom
+
+Hier liegt das beste Schwein, das je gelebt hat.','Kenny-Tom
+
+Do liit es best Schwein wo je glebt het.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignIronbell','sign','Ironbell
+
+"If I only knew how much work this is..."','Ironbell
+
+"Hätt ich bloss gewusst, wie viel Arbeit das ist..."','Ironbell
+
+"Hetti bloss gwüsst, wevil Arbet das isch..."');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignMatthew','sign','"Write more and more: It makes the composer stronger, tough, better." - Hitoshi Sakimoto','"Schreib immer mehr: Es macht den Komponisten stärker, hart, besser." - Hitoshi Sakimoto','"Schriib immer me: Es macht de Komponist stärcher, härt, besser." - Hitoshi Sakimoto');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('SignChicken','sign','WANTED
 
 Chicken Chaser','GESUCHT

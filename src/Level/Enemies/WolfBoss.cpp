@@ -61,6 +61,7 @@ void WolfBoss::loadSpells() {
 	transformBeamSpell.castingTime = sf::seconds(2.f);
 	transformBeamSpell.castingAnimation = GameObjectState::Casting2;
 	transformBeamSpell.fightAnimation = GameObjectState::Fighting2;
+	transformBeamSpell.spellSoundPaths.clear();
 	transformBeamSpell.creatorSoundPaths = { "res/sound/spell/transformbeam.ogg" };
 
 	m_spellManager->addSpell(transformBeamSpell);
