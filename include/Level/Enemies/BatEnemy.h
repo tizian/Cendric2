@@ -26,6 +26,7 @@ public:
 	
 protected:
 	std::string getSpritePath() const override;
+	std::string getDeathSoundPath() const override;
 	void handleAttackInput();
 	// loads attributes and adds immune spells + enemies. all attributes are set to zero before that call. default does nothing.
 	void loadAttributes() override;

@@ -16,4 +16,6 @@ public:
 
 private:
 	void addStrengthModifier(int level) override;
+	void addRangeModifier(int level) override;
+	void addSpeedModifier(int level) override;
 };

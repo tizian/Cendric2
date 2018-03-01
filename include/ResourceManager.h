@@ -52,6 +52,7 @@ public:
 	void deleteItemResources();
 
 	void setError(ErrorID id, const std::string& description);
+	void lockSound(bool locked);
 
 	// plays a sound that is already loaded and applies the current configuration to it (sound on/off, volume) and starts it.
 	// the scale is the volume scale, has to range from 0 to 1.f.
@@ -110,6 +111,7 @@ private:
 	std::vector<sf::Sound> m_soundPool;
 	std::set<std::string> m_frameSounds;
 	size_t m_nextSoundIndex;
+	bool m_isSoundLocked = false;
 	static const size_t SOUND_POOL_SIZE;
 	// the current background music and its path
 	BackgroundMusic m_music;

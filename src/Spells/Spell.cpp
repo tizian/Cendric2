@@ -295,6 +295,10 @@ bool Spell::isCritical() const {
 	return m_data.critical;
 }
 
+bool Spell::isAllied() const {
+	return m_data.isAlly;
+}
+
 int Spell::getDamage() const {
 	return m_data.damage;
 }

@@ -57,6 +57,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::DivineShield:
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Reflect);
 		break;
 	case SpellID::Fear:
 		types.push_back(SpellModifierType::Count);
@@ -80,9 +81,13 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		types.push_back(SpellModifierType::Reflect);
 		types.push_back(SpellModifierType::Strength);
 		types.push_back(SpellModifierType::Duration);
+		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::Unlock:
 		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Reflect);
+		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::Light:
 		types.push_back(SpellModifierType::Range);
@@ -91,6 +96,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::Telekinesis:
 		types.push_back(SpellModifierType::Range);
 		types.push_back(SpellModifierType::Reflect);
+		types.push_back(SpellModifierType::Speed);
 		break;
 	case SpellID::Invisibility:
 		types.push_back(SpellModifierType::Strength);
@@ -98,6 +104,8 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 		break;
 	case SpellID::Flash:
 		types.push_back(SpellModifierType::Range);
+		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Duration);
 		break;
 	case SpellID::LeapOfFaith:
 		types.push_back(SpellModifierType::Duration);
@@ -111,6 +119,7 @@ std::vector<SpellModifierType> SpellData::getAllowedModifiers(SpellID id) {
 	case SpellID::ShadowTrap:
 		types.push_back(SpellModifierType::Duration);
 		types.push_back(SpellModifierType::Strength);
+		types.push_back(SpellModifierType::Count);
 		break;
 	case SpellID::RaiseTheDead:
 		types.push_back(SpellModifierType::Duration);
@@ -443,6 +452,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.id = SpellID::IceBall;
 	iceBall.spellType = SpellType::Elemental;
 	iceBall.spritesheetPath = "res/texture/spells/spritesheet_spell_iceball.png";
+	iceBall.creatorSoundPaths = { "res/sound/spell/iceball.ogg" };
 	iceBall.iconTextureRect = sf::IntRect(50, 0, 50, 50);
 
 	iceBall.cooldown = sf::seconds(1);
@@ -467,11 +477,12 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.id = SpellID::DivineShield;
 	divineShield.spellType = SpellType::Divine;
 	divineShield.spritesheetPath = "res/texture/spells/spritesheet_spell_divineshield.png";
+	divineShield.creatorSoundPaths = { "res/sound/spell/divineshield.ogg" };
 	divineShield.iconTextureRect = sf::IntRect(100, 150, 50, 50);
 
 	divineShield.cooldown = sf::seconds(20);
-	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 98);
-	divineShield.spellOffset = sf::Vector2f(-49.f, 0.f);
+	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 110);
+	divineShield.spellOffset = sf::Vector2f(-49.f, -12.f);
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
 	divineShield.heal = 10;
@@ -479,6 +490,7 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.fightAnimation = GameObjectState::VOID;
 
 	divineShield.durationModifierAddition = sf::seconds(2);
+	divineShield.reflectModifierAddition = 1;
 
 	return divineShield;
 }
@@ -504,6 +516,7 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.id = SpellID::Aureola;
 	aureola.spellType = SpellType::Divine;
 	aureola.spritesheetPath = "res/texture/spells/spritesheet_spell_aureola.png";
+	aureola.creatorSoundPaths = { "res/sound/spell/aureola.ogg" };
 	aureola.iconTextureRect = sf::IntRect(200, 150, 50, 50);
 
 	aureola.cooldown = sf::milliseconds(10000);
@@ -517,8 +530,8 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.duration = sf::seconds(1.f);
 	aureola.isStunning = true;
 	aureola.ccStrength = 1;
-	aureola.damage = 20;
-	aureola.heal = 20;
+	aureola.damage = 40;
+	aureola.heal = 40;
 	aureola.speed = 300.f;
 	aureola.range = 150.f;
 
@@ -578,6 +591,7 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.spellType = SpellType::Elemental;
 
 	telekinesis.spritesheetPath = "res/texture/spells/spritesheet_spell_telekinesis.png";
+	telekinesis.creatorSoundPaths = { "res/sound/spell/telekinesis.ogg" };
 	telekinesis.iconTextureRect = sf::IntRect(100, 0, 50, 50);
 	telekinesis.cooldown = sf::seconds(3);
 	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
@@ -588,6 +602,7 @@ SpellData SpellData::getTelekinesisSpellData() {
 	telekinesis.activeDuration = sf::seconds(telekinesis.range / telekinesis.speed);
 
 	telekinesis.rangeModifierAddition = 100.f;
+	telekinesis.speedModifierAddition = 100.f;
 	telekinesis.reflectModifierAddition = 1;
 
 	return telekinesis;
@@ -663,6 +678,7 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	
 	icyAmbush.reflectModifierAddition = 1;
 	icyAmbush.rangeModifierAddition = 200.f;
+	icyAmbush.speedModifierAddition = 100.f;
 	icyAmbush.durationModifierAddition = sf::seconds(0.5f);
 
 	return icyAmbush;
@@ -673,19 +689,24 @@ SpellData SpellData::getFlashSpellData() {
 	flash.id = SpellID::Flash;
 	flash.spellType = SpellType::Twilight;
 	flash.spritesheetPath = "res/texture/spells/spritesheet_spell_flash.png";
+	flash.creatorSoundPaths = { "res/sound/spell/flash.ogg" };
 	flash.iconTextureRect = sf::IntRect(150, 50, 50, 50);
 
 	flash.cooldown = sf::seconds(7);
 	flash.damageType = DamageType::Light;
 	flash.activeDuration = sf::seconds(2.0);
+	flash.duration = sf::seconds(0.5f);
 	flash.attachedToMob = true;
 	flash.damage = 10;
 	flash.range = 200.f;
+	flash.isStunning = true;
+	flash.ccStrength = 1;
 	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
 	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
 	flash.fightAnimation = GameObjectState::VOID;
 
 	flash.rangeModifierAddition = 80.f;
+	flash.durationModifierAddition = sf::seconds(0.5f);
 
 	return flash;
 }
@@ -761,15 +782,21 @@ SpellData SpellData::getUnlockSpellData() {
 	unlock.id = SpellID::Unlock;
 	unlock.spellType = SpellType::Twilight;
 	unlock.spritesheetPath = "res/texture/spells/spritesheet_spell_unlock.png";
+	unlock.creatorSoundPaths = { "res/sound/spell/lockpick.ogg" };
 	unlock.iconTextureRect = sf::IntRect(0, 50, 50, 50);
 
 	unlock.cooldown = sf::seconds(2);
 	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
-	unlock.activeDuration = sf::seconds(1);
 	unlock.needsTarget = true;
 	unlock.isDynamicTileEffect = true;
 	unlock.speed = 200.f;
 	unlock.strength = 1;
+	unlock.range = 100;
+	unlock.activeDuration = sf::seconds(unlock.range / unlock.speed);
+
+	unlock.rangeModifierAddition = 50.f;
+	unlock.speedModifierAddition = 100.f;
+	unlock.reflectModifierAddition = 1;
 
 	return unlock;
 }

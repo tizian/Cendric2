@@ -543,18 +543,18 @@
   </object>
  </objectgroup>
  <objectgroup name="enemy">
-  <object id="1" gid="1091" x="1650" y="550" width="50" height="50">
+  <object id="1" gid="1091" x="1650" y="570" width="50" height="50">
    <properties>
     <property name="gold" value="2"/>
     <property name="questtarget" value="the_rats_nest,FireRat"/>
    </properties>
   </object>
-  <object id="2" gid="1090" x="500" y="950" width="50" height="50">
+  <object id="2" gid="1090" x="500" y="970" width="50" height="50">
    <properties>
     <property name="questtarget" value="the_rats_nest,Rat"/>
    </properties>
   </object>
-  <object id="4" gid="1090" x="1050" y="1200" width="50" height="50">
+  <object id="4" gid="1090" x="1050" y="1220" width="50" height="50">
    <properties>
     <property name="questtarget" value="the_rats_nest,Rat"/>
    </properties>

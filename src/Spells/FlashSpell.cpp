@@ -64,6 +64,15 @@ void FlashSpell::execOnHit(LevelMovableGameObject* target) {
 	else {
 		m_data.damageType = DamageType::VOID;
 	}
+
+	if (Enemy* enemy = dynamic_cast<Enemy*>(target)) {
+		if (enemy->getMentalStrength() >= m_data.ccStrength) {
+			return;
+		}
+	}
+
+	if (m_data.isStunning)
+		target->setStunned(m_data.duration);
 }
 
 bool FlashSpell::getConfiguredRotateSprite() const {

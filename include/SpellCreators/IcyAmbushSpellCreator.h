@@ -15,4 +15,5 @@ public:
 private:
 	void addRangeModifier(int level) override;
 	void addDurationModifier(int level) override;
+	void addSpeedModifier(int level) override;
 };

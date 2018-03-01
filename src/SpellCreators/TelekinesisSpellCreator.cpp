@@ -18,3 +18,8 @@ void TelekinesisSpellCreator::addRangeModifier(int level) {
 	SpellCreator::addRangeModifier(level);
 	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
 }
+
+void TelekinesisSpellCreator::addSpeedModifier(int level) {
+	SpellCreator::addSpeedModifier(level);
+	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
+}

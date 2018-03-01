@@ -34,3 +34,7 @@ void FlashSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 	newSpell->load(spellData, m_owner, target);
 	m_screen->addObject(newSpell);
 }
+
+void FlashSpellCreator::addDurationModifier(int level) {
+	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
+}

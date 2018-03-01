@@ -21,3 +21,21 @@ void ShadowTrapSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 void ShadowTrapSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
 }
+
+void ShadowTrapSpellCreator::addCountModifier(int level) {
+	switch (level)
+	{
+	case 1:
+		m_spellData.cooldown = sf::seconds(8.f);
+		break;
+	case 2:
+		m_spellData.cooldown = sf::seconds(6.f);
+		break;
+	case 3:
+		m_spellData.cooldown = sf::seconds(4.f);
+		break;
+	default:
+		m_spellData.cooldown = sf::seconds(10.f);
+		break;
+	}
+}

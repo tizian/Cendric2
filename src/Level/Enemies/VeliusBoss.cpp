@@ -599,7 +599,8 @@ void VeliusBoss::loadSpells() {
 
 	// divine spell
 	SpellData divine = SpellData::getSpellData(SpellID::Aureola);
-	divine.damage = 30;
+	divine.damage = 40;
+	divine.heal = 20;
 	divine.count = 4;
 	divine.cooldown = sf::seconds(5.f);
 	divine.isBlocking = true;

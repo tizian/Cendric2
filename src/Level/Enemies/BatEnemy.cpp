@@ -193,3 +193,6 @@ std::string BatEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_bat.png";
 }
 
+std::string BatEnemy::getDeathSoundPath() const {
+	return "res/sound/mob/bat_death.ogg";
+}

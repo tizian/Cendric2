@@ -50,7 +50,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Bo
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('TitleSchoolsOfMagic1','document','Elemental Magic','Elementarmagie','Elementarmagie');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ContentSchoolsOfMagic1','document','Elemental magic is the art of controlling the elements of nature. It is the first type of magic that was discovered and it is therefore sometimes referred to as primal magic. 
 
-Mages with an affinity to this type of magic are the only ones that are able to understand complex spells from the whole spectrum of magic, while the skills of mages with other affinities mostly concentrate on their own domain of expertice.','Elementarmagie ist die Kunst, die Elemente der Natur zu kontrollieren. Es ist die erste Art von Magie, die entdeckt wurde und wird deshalb manchmal als Urmagie bezeichnet.
+Mages with an affinity to this type of magic are the only ones that are able to understand complex spells from the whole spectrum of magic, while the skills of mages with other affinities mostly concentrate on their own domain of expertise.','Elementarmagie ist die Kunst, die Elemente der Natur zu kontrollieren. Es ist die erste Art von Magie, die entdeckt wurde und wird deshalb manchmal als Urmagie bezeichnet.
 
 Magier mit einer Affinität zu diesem Magie-Typ sind die Einzigen, die schwierige Zauber aus dem ganzen Spektrum der Magie erlernen können, während sich die Fähigkeiten anderer Magier hauptsächlich auf ihren Bereich beschränken.','Elementarmagie isch d''Kunst, d''Element vode Natur z''kontrolliere. Es isch di erst Art vo Magie wo entdeckt worde isch und wird drum mengsmal als Urmagie bezeichnet.
 

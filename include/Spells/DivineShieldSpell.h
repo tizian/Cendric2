@@ -14,5 +14,8 @@ public:
 	void setDisposed() override;
 
 private:
+	void checkReflection();
+
 	AttributeData m_additionalResistance;
+	int m_reflectProjectilesCount = 0;
 };

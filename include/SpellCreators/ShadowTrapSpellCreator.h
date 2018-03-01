@@ -15,4 +15,5 @@ public:
 
 private:
 	void addDurationModifier(int level) override;
+	void addCountModifier(int level) override;
 };

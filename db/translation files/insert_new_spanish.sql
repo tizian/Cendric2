@@ -38,6 +38,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LogQ
 Right click to deactivate tracking','Nicht erreichbar!
 Rechtsklick um zu deaktivieren','Nid erreichbar!
 Rechtsklick zum deaktiviere','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellFlashDesc','Lets you dash forward with the speed of light to damage and stun enemies.','Lässt dich mit Lichtgeschwindigkeit vorwärts schiessen um Gegner zu betäuben und ihnen zu schaden.','Laht dich mit Liechtgschwindigkeit vorwärts schüsse zum Gegner betäube und Schade mache.','?');
 
 -- hints
 

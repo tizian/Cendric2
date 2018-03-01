@@ -8,9 +8,11 @@
 #include "World/Trigger.h"
 
 void LevelLoader::loadAfterMainChar(LevelData& data, LevelScreen* screen, Level* level) const {
+	g_resourceManager->lockSound(true);
 	loadEnemies(data, screen, level);
 	loadLevelItems(data, screen);
 	loadTriggers(data, screen);
+	g_resourceManager->lockSound(false);
 }
 
 void LevelLoader::loadDynamicTileData(std::vector<LevelDynamicTileData>& data, LevelScreen* screen) const {

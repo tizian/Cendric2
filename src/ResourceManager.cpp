@@ -293,6 +293,7 @@ void ResourceManager::deleteResource(const std::string& filename) {
 }
 
 void ResourceManager::playSound(const std::string& filename, bool loop, float scale) {
+	if (m_isSoundLocked) return;
 	if (!m_configuration.isSoundOn || filename.empty()) return;
 	if (contains(m_frameSounds, filename)) return;
 	m_frameSounds.insert(filename);
@@ -300,11 +301,11 @@ void ResourceManager::playSound(const std::string& filename, bool loop, float sc
 	sf::Sound& sound = m_soundPool[m_nextSoundIndex];
 	m_nextSoundIndex = (m_nextSoundIndex + 1) % SOUND_POOL_SIZE;
 
-
 	playSound(sound, filename, true, loop, scale);
 }
 
 void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, bool force, bool loop, float scale) {
+	if (m_isSoundLocked) return;
 	if (!m_configuration.isSoundOn || !g_inputController->isWindowFocused() || filename.empty()) return;
 	if (!contains(m_soundBuffers, filename)) {
 		g_logger->logError("ResourceManager", "Cannot play sound: '" + filename + "', sound not loaded!");
@@ -319,6 +320,10 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, b
 	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
 	sound.setLoop(loop);
 	sound.play();
+}
+
+void ResourceManager::lockSound(bool locked) {
+	m_isSoundLocked = locked;
 }
 
 void ResourceManager::playSound(const std::string& filename, const sf::Vector2f& source, const sf::Vector2f& listener, bool loop) {

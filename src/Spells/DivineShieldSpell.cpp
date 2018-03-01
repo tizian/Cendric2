@@ -31,6 +31,8 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 	m_mob->addAttributes(m_data.duration, m_additionalResistance);
 	m_mob->addHeal(getHeal(), false, isCritical());
 
+	m_reflectProjectilesCount = bean.reflectCount;
+
 	LightData lightData(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f), sf::Vector2f(100.f, 150.f), 0.2f);
 	addComponent(new LightComponent(lightData, this));
 }
@@ -40,11 +42,32 @@ void DivineShieldSpell::update(const sf::Time& frameTime) {
 	calculatePositionAccordingToMob(nextPosition, m_mob);
 	setPosition(nextPosition);
 
+	checkReflection();
+
 	MovableGameObject::update(frameTime);
 	updateTime(m_data.activeDuration, frameTime);
 
 	if (m_data.activeDuration.asMilliseconds() <= 0) {
 		setDisposed();
+	}
+}
+
+void DivineShieldSpell::checkReflection() {
+	if (m_reflectProjectilesCount <= 0) return;
+
+	for (auto go : *m_screen->getObjects(GameObjectType::_Spell))
+	{
+		auto spell = dynamic_cast<Spell*>(go);
+		if (!spell) continue;
+		if (spell->isAttachedToMob() || spell->isAllied()) continue;
+		if (!fastIntersect(*getBoundingBox(), *spell->getBoundingBox())) continue;
+		
+		spell->setOwner(m_mob);
+		spell->reflect();
+		m_reflectProjectilesCount--;
+		if (m_reflectProjectilesCount == 0) {
+			break;
+		}
 	}
 }
 

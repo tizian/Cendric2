@@ -22,6 +22,11 @@ void IcyAmbushSpellCreator::addRangeModifier(int level) {
 	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
 }
 
+void IcyAmbushSpellCreator::addSpeedModifier(int level) {
+	SpellCreator::addSpeedModifier(level);
+	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
+}
+
 void IcyAmbushSpellCreator::addDurationModifier(int level) {
 	m_spellData.duration += static_cast<float>(level) * m_spellData.durationModifierAddition;
 }

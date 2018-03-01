@@ -23,3 +23,13 @@ void UnlockSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 void UnlockSpellCreator::addStrengthModifier(int level) {
 	m_spellData.strength += level;
 }
+
+void UnlockSpellCreator::addRangeModifier(int level) {
+	SpellCreator::addRangeModifier(level);
+	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
+}
+
+void UnlockSpellCreator::addSpeedModifier(int level) {
+	SpellCreator::addSpeedModifier(level);
+	m_spellData.activeDuration = sf::seconds(m_spellData.range / m_spellData.speed);
+}
