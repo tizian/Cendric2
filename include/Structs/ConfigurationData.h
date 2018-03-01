@@ -19,7 +19,7 @@ struct ConfigurationData final {
 	int maxFPS;
 	std::map<Key, sf::Keyboard::Key> mainKeyMap;
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
-	DisplayMode displayMode = DisplayMode::Window;
+	DisplayMode displayMode;
 	bool isQuickcast;
 	bool isAutotarget;
 	bool isSmoothing;

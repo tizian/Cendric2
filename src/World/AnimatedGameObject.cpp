@@ -84,10 +84,6 @@ void AnimatedGameObject::playCurrentAnimation(bool play) {
 	}
 }
 
-void resetCurrentAnimation() {
-
-}
-
 void AnimatedGameObject::loopCurrentAnimation(bool loop) {
 	m_animatedSprite.setLooped(loop);
 }
