@@ -615,6 +615,7 @@ public:
 	static std::string getShortKeyboardKeyName(sf::Keyboard::Key key) {
 		switch (key) {
 		case sf::Keyboard::Unknown:
+		default:
 			return "??";
 		case sf::Keyboard::Escape:
 			return "Esc";

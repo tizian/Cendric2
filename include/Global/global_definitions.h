@@ -26,7 +26,7 @@
 // #define APPLE_APP_BUILD
 
 // Steam builds
-#define STEAM
+//#define STEAM
 
 // max frame time (in seconds)
 #define MAX_FRAME_TIME 0.05f
