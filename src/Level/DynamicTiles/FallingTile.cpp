@@ -77,7 +77,9 @@ void FallingTile::update(const sf::Time& frameTime) {
 		if (m_tileState == FallingTileState::Falling) {
 			m_tileState = FallingTileState::Waiting;
 			m_waitingTime = WAITING_TIME;
-			g_resourceManager->playSound(getSoundPath(), getCenter(), m_mainChar->getCenter());
+			if (abs(getPosition().y - m_initialHeight) > 0.5f * TILE_SIZE_F) {
+				g_resourceManager->playSound(getSoundPath(), getCenter(), m_mainChar->getCenter());
+			}
 		}
 		else if (m_tileState == FallingTileState::Returning) {
 			m_tileState = FallingTileState::Idle;
