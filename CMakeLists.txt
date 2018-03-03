@@ -5,6 +5,7 @@ project(Cendric)
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
 option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
 option(CENDRIC_STEAM "Include steamworks API?" OFF)
+option(CENDRIC_PREPARE_BUILD "Prepare a build? (Currently only used under macOS)" OFF)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
     message(FATAL_ERROR
@@ -65,36 +66,51 @@ file(GLOB_RECURSE Cendric_FILES
 )
 
 if (WIN32)
+    # Windows
+
 	add_executable(Cendric
 		${Cendric_FILES}
 		${PROJECT_SOURCE_DIR}/res/info.rc
 	)
-    
-    # windows
+
     if (CENDRIC_STEAM)
         target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/win64/steam_api64.lib)
     endif()
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    # macOS
+
 	add_definitions("-DAPPLE_APP_BUILD")
 
 	add_executable(Cendric MACOSX_BUNDLE
 		${Cendric_FILES}
-		${PROJECT_SOURCE_DIR}/res/icon.icns
+		${PROJECT_SOURCE_DIR}/res/macOS/icon.icns
 	)
+
+    if (CENDRIC_PREPARE_BUILD)
+        add_definitions("-DEXTERNAL_DOCUMENTS_FOLDER")
+    endif()
 
     # mac
     if (CENDRIC_STEAM)
-        target_compile_definitions(Cendric PRIVATE STEAM)
+        add_definitions("-DSTEAM")
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib)
+        file(COPY ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
+        file(COPY ${PROJECT_SOURCE_DIR}/res/macOS/steam_appid.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
     endif()
+
+    add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
+    target_include_directories(CendricApple PRIVATE "${PROJECT_SOURCE_DIR}/include")
+    set_target_properties(CendricApple PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+    target_link_libraries(Cendric CendricApple)
 else()
+    # Linux
+
 	add_executable(Cendric
 		${Cendric_FILES}
 	)
 
-    # linux
     if (CENDRIC_STEAM)
         target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/linux64/libsteam_api.so)
@@ -102,10 +118,7 @@ else()
 endif()
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-	add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
-	target_include_directories(CendricApple PRIVATE "${PROJECT_SOURCE_DIR}/include")
-	set_target_properties(CendricApple PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-	target_link_libraries(Cendric CendricApple)
+
 endif()
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
@@ -119,8 +132,8 @@ target_include_directories(Cendric PRIVATE
 )
 
 if (APPLE)
-	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/info.plist)
-	set_source_files_properties(res/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/macOS/info.plist)
+	set_source_files_properties(res/macOS/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 	file(COPY cendric.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
 	file(COPY db/game_data.db DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources/db)
 	file(COPY res DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
