@@ -459,3 +459,8 @@ bool Level::isMagicLocked(SpellType type) {
 const std::set<SpellType>& Level::getLockedMagic() const {
 	return m_lockedMagicTypes;
 }
+
+bool Level::collidesWithCamera(const sf::Vector2f& nextPos) const {
+	if (!m_camera) return false;
+	return m_camera->collides(nextPos);
+}

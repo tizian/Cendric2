@@ -40,6 +40,8 @@ public:
 	bool collidesWithMobs(WorldCollisionQueryRecord& rec, bool isInitialQuery = true) const;
 	// checks for collisions with movable tiles (moving platforms, shiftable blocks and unstable blocks)
 	bool collidesWithMovableTiles(WorldCollisionQueryRecord& rec) const;
+	// checks whether there's a collision with the camera (autoscroller)
+	bool collidesWithCamera(const sf::Vector2f& nextPos) const;
 
 	void collideWithDynamicTiles(Spell* spell, const sf::FloatRect& boundingBox) const;
 	void collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::FloatRect& boundingBox) const;
@@ -60,6 +62,8 @@ public:
 	void setMagicLocked(SpellType type);
 	bool isMagicLocked(SpellType type);
 	const std::set<SpellType>& getLockedMagic() const;
+
+	
 
 private:
 	void loadCamera(LevelMainCharacter* mainChar);

@@ -585,6 +585,10 @@ void LevelMainCharacter::loadComponents() {
 	addComponent(m_deathPc);
 }
 
+bool LevelMainCharacter::collides(const sf::Vector2f& nextPos) const {
+	return LevelMovableGameObject::collides(nextPos) || m_level->collidesWithCamera(nextPos);
+}
+
 int LevelMainCharacter::getSpellFromKey(Key key) {
 	switch (key) {
 	case Key::Chop:

@@ -18,6 +18,17 @@ void AutoscrollerCamera::setLevelSize(const sf::Vector2f& levelSize) {
 	m_levelSize = levelSize;
 }
 
+bool AutoscrollerCamera::collides(const sf::Vector2f& pos) const {
+	if (pos.x < getCameraLeft()) {
+		return true;
+	}
+	if (pos.x > getCameraLeft() + WINDOW_WIDTH - m_mainChar->getBoundingBox()->width) {
+		return true;
+	}
+
+	return false;
+}
+
 void AutoscrollerCamera::setFocusCenter(const sf::Vector2f& center, bool setHard) {
 	m_currentFocusCenter = center;
 	// check vertically

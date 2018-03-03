@@ -75,6 +75,8 @@ protected:
 	std::string getSpritePath() const override;
 	std::string getDeathSoundPath() const override;
 
+	bool collides(const sf::Vector2f& nextPos) const override;
+
 private:
 	void loadWeapon();		// character core must be set when loading the weapon.
 	void loadAnimation();

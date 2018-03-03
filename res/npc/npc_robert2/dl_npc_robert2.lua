@@ -106,7 +106,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(12, 13, "DL_Robert_TeleportQuest2") -- But if you manage retrieve my stone... Well, I have an inactive teleport stone here.
+		DL:createNPCNode(12, 13, "DL_Robert_TeleportQuest2") -- But if you manage to retrieve my stone... Well, I have an inactive teleport stone here.
 		DL:addNode()
 
 

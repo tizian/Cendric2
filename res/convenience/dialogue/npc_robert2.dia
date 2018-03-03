@@ -279,7 +279,7 @@ npc.id:npc_robert2
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Robert_TeleportQuest2
-	translation.en:But if you manage retrieve my stone... Well, I have an inactive teleport stone here.
+	translation.en:But if you manage to retrieve my stone... Well, I have an inactive teleport stone here.
 	translation.de:Aber wenn es dir gelingt, meinen Stein zurückzuholen... Ich habe einen inaktiven Teleportstein hier.
 	translation.ch:Abr wenns schaffsch, min Stei zrugg z'hole... Ich ha en inaktive Stei do.
 	[

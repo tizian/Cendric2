@@ -14,6 +14,8 @@ public:
 	void setAutoscrollerSpeed(int speed);
 	void setLevelSize(const sf::Vector2f& levelSize);
 
+	bool collides(const sf::Vector2f& nextPos) const override;
+
 private:
 	float m_autoscrollerSpeed = 0;
 	sf::Vector2f m_levelSize;

@@ -43,6 +43,10 @@ void Camera::setLevelMainCharacter(LevelMainCharacter* mainChar) {
 	m_mainChar = mainChar;
 }
 
+bool Camera::collides(const sf::Vector2f& nextPos) const {
+	return false;
+}
+
 void Camera::setCameraTop(float cameraTop, bool setHard) {
 	m_cameraTop = setHard ? cameraTop :
 		lerp(m_currentFrameTime.asSeconds() * CAMERA_LERP_SPEED, m_cameraTop, cameraTop);

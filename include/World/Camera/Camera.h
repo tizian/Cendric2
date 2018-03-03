@@ -24,6 +24,8 @@ public:
 
 	void setLevelMainCharacter(LevelMainCharacter* mainChar);
 
+	virtual bool collides(const sf::Vector2f& nextPos) const;
+
 protected:
 	LevelMainCharacter* m_mainChar = nullptr;
 	sf::Vector2f m_currentFocusCenter;
