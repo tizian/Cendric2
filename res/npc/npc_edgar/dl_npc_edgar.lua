@@ -1,4 +1,7 @@
 -- Dialogue for NPC "npc_edgar"
+
+requiredGold = 300
+
 loadDialogue = function(DL) 
 
 	if (not DL:isConditionFulfilled("npc_edgar", "talked")) then 
@@ -9,7 +12,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_edgar", "talked")) then 
 
-		DL:createNPCNode(1, -2, "DL_Edgar_WhatDoWeHave") -- Well, well, look at that. Another filthy thief, caught by our observer spells. I hope you enjoy your stay. He he he.
+		DL:createNPCNode(1, -2, "DL_Edgar_WhatDoWeHave") -- Well, well look at that. Another filthy thief, caught by our observer spells. I hope you enjoy your stay. He he he.
 		DL:addConditionProgress("npc_edgar", "talked")
 		DL:addNode()
 
@@ -24,7 +27,7 @@ loadDialogue = function(DL)
 		DL:addChoice(5, "DL_Choice_HowGetout") -- How can I get released?
 	end
 	if (not DL:isConditionFulfilled("npc_edgar", "hungry")) then 
-		DL:addChoice(6, "DL_Choice_ImHungry") -- I'm hungry, can I get something to eat?
+		DL:addChoice(6, "DL_Choice_ImHungry") -- I'm hungry.
 	end
 	if (DL:isConditionFulfilled("npc_edgar", "hungry") and not DL:isConditionFulfilled("npc_edgar", "hungry_again")) then 
 		DL:addChoice(7, "DL_Choice_ImStillHungry") -- I'm still hungry.
@@ -32,14 +35,17 @@ loadDialogue = function(DL)
 	if (DL:isConditionFulfilled("npc_edgar", "how_getout") and not DL:isConditionFulfilled("npc_edgar", "pickaxe")) then 
 		DL:addChoice(8, "DL_Choice_HowGold") -- How can I earn the gold to redeem myself?
 	end
-	if (hasItem("mi_ironore", 1)) then 
-		DL:addChoice(9, "DL_Choice_IronOre") -- I got some iron ore for you.
+	if (DL:getItemAmount("gold") < requiredGold and DL:hasItem("mi_ironore", 1)) then 
+		DL:addItemChoice(9, "DL_Choice_IronOre", "mi_ironore", DL:getItemAmount("mi_ironore")) -- I got some iron ore for you.
 	end
-	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and and not DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < 200)) then 
-		DL:addItemChoice(10, "DL_Choice_IHaveGold", "gold", 200) -- Please let me out.
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < requiredGold)) then 
+		DL:addItemChoice(10, "DL_Choice_IHaveGold", "gold", requiredGold) -- Please let me out.
 	end
-	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= 200)) then 
-		DL:addItemChoice(11, "DL_Choice_IHaveGold", "gold", 200) -- 
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= requiredGold)) then 
+		DL:addItemChoice(11, "DL_Choice_IHaveGold", "gold", requiredGold) -- 
+	end
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and not DL:hasItem("we_pickaxe", 1)) then 
+		DL:addChoice(15, "DL_Choice_AnotherPickaxe") -- I need another pickaxe...
 	end
 	DL:addChoice(-1, "") -- 
 	DL:addNode()
@@ -92,26 +98,47 @@ loadDialogue = function(DL)
 
 	end
 
-	if (hasItem("mi_ironore", 1)) then 
+	if (DL:getItemAmount("gold") < requiredGold and DL:hasItem("mi_ironore", 1)) then 
 
 		DL:createNPCNode(9, -2, "DL_Edgar_Ironore") -- Thank you. Here is your pay.
+		DL:removeItem("mi_ironore", DL:getItemAmount("mi_ironore"))
+		DL:addGold(math.min(requiredGold - DL:getItemAmount("gold"), DL:getItemAmount("mi_ironore") * 10))
 		DL:addNode()
 
 	end
 
-	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and and not DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < 200)) then 
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") < requiredGold)) then 
 
 		DL:createNPCNode(10, -2, "DL_Edgar_NotEnoughGold") -- You don't have enough gold. Go and work a bit more.
 		DL:addNode()
 
 	end
 
-	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= 200)) then 
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and (DL:getItemAmount("gold") >= requiredGold)) then 
 
-		DL:createNPCNode(11, -2, "DL_Edgar_YoureReleased") -- Okay, that's enough. You're free to go. I hope I won't see you here again.
-		DL:removeGold(200)
+		DL:createNPCNode(11, 12, "DL_Edgar_YoureReleased") -- Okay, that's enough.
+		DL:removeGold(requiredGold)
+		DL:addNode()
+		
+		DL:createNPCNode(12, 13, "DL_Edgar_YoureReleased2") -- You're free to go. I hope I won't see you here again.
+		DL:addNode()
+		
+		DL:createNPCNode(13, 14, "DL_Edgar_YoureReleased3") -- You can fetch your old belongings from the chest in the barracks.
+		DL:addNode()
+		
+		DL:createNPCNode(14, -1, "") -- 
+		DL:startMap("res/map/gandriabarracks/gandriabarracks.tmx", 265, 110)
 		DL:addNode()
 
+	end
+	
+	if (DL:isConditionFulfilled("npc_edgar", "pickaxe") and not DL:hasItem("we_pickaxe", 1)) then 
+
+		DL:createNPCNode(15, -1, "DL_Edgar_AnotherPickaxe") -- Here. Now go and work!
+		DL:addItem("we_pickaxe", 1)
+		DL:equipItem("we_pickaxe")
+		DL:addNode()
+		
 	end
 
 end
