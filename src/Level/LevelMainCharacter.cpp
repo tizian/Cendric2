@@ -381,7 +381,7 @@ void LevelMainCharacter::setFeared(const sf::Time& fearedTime) {
 	DamageOverTimeData data;
 	data.isFeared = true;
 	sf::IntRect textureLocation(250, 0, 50, 50);
-	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, fearedTime, data);
+	dynamic_cast<LevelScreen*>(m_screen)->addDebuffBuffToInterface(textureLocation, fearedTime, data);
 }
 
 void LevelMainCharacter::setStunned(const sf::Time& stunnedTime) {
@@ -390,7 +390,7 @@ void LevelMainCharacter::setStunned(const sf::Time& stunnedTime) {
 	DamageOverTimeData data;
 	data.isStunned = true;
 	sf::IntRect textureLocation(300, 0, 50, 50);
-	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, stunnedTime, data);
+	dynamic_cast<LevelScreen*>(m_screen)->addDebuffBuffToInterface(textureLocation, stunnedTime, data);
 }
 
 void LevelMainCharacter::addDamage(int damage, DamageType damageType, bool overTime, bool critical) {

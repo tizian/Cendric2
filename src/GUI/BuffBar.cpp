@@ -53,7 +53,7 @@ void BuffBar::addFoodBuff(const sf::IntRect& textureLocation, const sf::Time& du
 }
 
 void BuffBar::addDebuffBuff(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
-	if (!data.isFeared || !data.isStunned) return;
+	if (!data.isFeared && !data.isStunned) return;
 	
 	BuffSlot* buff;
 

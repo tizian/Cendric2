@@ -219,6 +219,11 @@ void LevelScreen::addDotBuffToInterface(const sf::IntRect& textureLocation, cons
 		addDotBuff(textureLocation, duration, data);
 }
 
+void LevelScreen::addDebuffBuffToInterface(const sf::IntRect& textureLocation, const sf::Time& duration, const DamageOverTimeData& data) {
+	dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().
+		addDebuffBuff(textureLocation, duration, data);
+}
+
 void LevelScreen::removeTypedBuffs(SpellID id) {
 	if (id == SpellID::VOID) {
 		dynamic_cast<LevelInterface*>(m_interface)->getBuffBar().removeFoodBuff();
