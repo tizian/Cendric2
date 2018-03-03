@@ -23,13 +23,13 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2016 Cendric</string>
+	<string>© 2018 Cendric</string>
 	<key>NSHighResolutionCapable</key>
 	<false/>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
