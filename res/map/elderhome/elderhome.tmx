@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="131">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="131">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -21,11 +21,11 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="100" columns="20">
-  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="260"/>
+ <tileset firstgid="439" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+  <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="15">
   <data encoding="csv">
@@ -72,9 +72,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,107,0,0,0,0,108,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,157,126,0,0,0,0,127,0,106,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,176,0,0,0,0,0,0,0,125,115,116,117,0,0,0,0,0,0,
-0,0,0,0,0,0,0,195,0,0,0,0,0,24,270,0,134,135,136,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,126,0,0,0,0,127,0,106,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,125,115,116,117,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,24,270,0,134,135,136,0,0,0,0,0,0,
 0,0,0,0,0,0,0,174,0,45,46,47,0,43,122,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,193,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,255,0,0,0,0,0,177,104,0,0,0,0,0,0,0,0,0,0,
@@ -246,7 +246,7 @@
   </object>
  </objectgroup>
  <objectgroup name="dynamic">
-  <object id="127" gid="434" x="550" y="360" width="50" height="50">
+  <object id="127" gid="441" x="550" y="360" width="50" height="50">
    <properties>
     <property name="id" value="bo_rhendalmagic"/>
    </properties>

@@ -220,8 +220,12 @@ loadDialogue = function(DL)
 			DL:addNode()
 
 
-			DL:createNPCNode(30, -2, "DL_Vincent_ChestIsObserved") -- The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
+			DL:createNPCNode(30, 54, "DL_Vincent_ChestIsObserved") -- The chest is in a secret room in the Elder's house, behind the wall to the West.
 			DL:changeQuestState("elder_chest", "started")
+			DL:addNode()
+
+
+			DL:createNPCNode(54, -2, "DL_Vincent_ChestIsObserved2") -- Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
 			DL:addNode()
 
 		end

@@ -159,7 +159,7 @@ loadDialogue = function(DL)
 		DL:addNode()
 
 
-		DL:createNPCNode(65, 66, "DL_Steven_HelmetQuest3") -- I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back.
+		DL:createNPCNode(65, 66, "DL_Steven_HelmetQuest3") -- I need someone that doesn't look like they belong to the order, someone like you, to get my helmet back.
 		DL:addNode()
 
 

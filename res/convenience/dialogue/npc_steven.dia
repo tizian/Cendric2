@@ -451,7 +451,7 @@ npc.id:npc_steven
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Steven_HelmetQuest3
-	translation.en:I need someone that doesn't look like they belongs to the order, someone like you, to get my helmet back.
+	translation.en:I need someone that doesn't look like they belong to the order, someone like you, to get my helmet back.
 	translation.de:Ich brauche jemanden der nicht aussieht, als gehöre er zum Orden, jemanden wie dich, der mir meinen Helm wiederbesorgt.
 	translation.ch:I bruchä öpper wo nid usgseht, aus würder zudä Ordä ghörä, öpper wie di, womr mi Heum widr hout.
 	[

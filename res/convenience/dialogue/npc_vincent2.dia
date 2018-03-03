@@ -581,9 +581,23 @@ npc.id:npc_vincent2
 	trigger:DL:changeQuestState("elder_chest", "started")
 	# translation: 
 	translation.tag:DL_Vincent_ChestIsObserved
-	translation.en:The chest is in a secret room in the Elder's house. Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
-	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten. Oh, und sie ist wahrscheinlich von Beobachter-Zaubern beschützt. Pass also auf, dass die dich nicht erwischen.
-	translation.ch:D'Chischtä isch imäne Gheimruum vom Huus vom Älteste. Oh, und si wird wohrschindli vo Beobachter-Zaubor bewacht. Pass also uf, dass die dich nöd verwütsched.
+	translation.en:The chest is in a secret room in the Elder's house, behind the wall to the West.
+	translation.de:Die Kiste ist in einem Geheimraum im Haus des Ältesten, hinter der westlichen Wand.
+	translation.ch:D'Chischtä isch imäne Gheimruum vom Huus vom Älteste, hinder de westliche Wand.
+	[
+		# Link node, tag is next tag
+		tag:54
+	]
+}
+{1
+	# [54] NPC Node
+	tag:54
+	# triggers: 
+	# translation: 
+	translation.tag:DL_Vincent_ChestIsObserved2
+	translation.en:Oh, and it's most likely guarded by observer spells. Just make sure that they don't catch you.
+	translation.de:Oh, und sie ist wahrscheinlich von Beobachter-Zaubern beschützt. Pass also auf, dass die dich nicht erwischen.
+	translation.ch:Oh, und si wird wohrschindli vo Beobachter-Zaubor bewacht. Pass also uf, dass die dich nöd verwütsched.
 	[
 		# Link node, tag is next tag
 		tag:-2
