@@ -16,7 +16,7 @@ REGISTER_ENEMY(EnemyID::Boss_Yasha, YashaBoss)
 
 const sf::Vector2f YashaBoss::ROOM_MID = sf::Vector2f(650.f, 600.f);
 const float YashaBoss::FADE_TIME = 2.f;
-const float YashaBoss::REVIVE_CD = 10.f;
+const float YashaBoss::REVIVE_CD = 12.f;
 const std::string YashaBoss::SPELL_TEX_PATH = "res/texture/spells/spritesheet_spell_raisethedead.png";
 
 const std::vector<sf::Vector2f> YashaBoss::ADD_LOCATIONS = { 
@@ -46,7 +46,8 @@ void YashaBoss::loadAttributes() {
 	m_attributes.setHealth(1200);
 	m_attributes.resistanceFire = 10000;
 	m_attributes.resistancePhysical = 50;
-	m_attributes.resistanceIce = -50;
+	m_attributes.resistanceIce = -100;
+	m_attributes.resistanceLight = -100;
 	m_attributes.critical = 0;
 	m_attributes.calculateAttributes();
 }
@@ -66,6 +67,7 @@ void YashaBoss::loadSpells() {
 	explosionSpell.castingTime = sf::seconds(2.f);
 	explosionSpell.castingAnimation = GameObjectState::Casting;
 	explosionSpell.fightAnimation = GameObjectState::Fighting;
+	explosionSpell.spellSoundPaths.clear();
 	explosionSpell.creatorSoundPaths = { "res/sound/spell/transformbeam.ogg" };
 
 	m_spellManager->addSpell(explosionSpell);

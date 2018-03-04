@@ -747,6 +747,7 @@ SpellData SpellData::getHolyFireSpellData() {
 	holyFire.id = SpellID::HolyFire;
 	holyFire.spellType = SpellType::Divine;
 	holyFire.iconTextureRect = sf::IntRect(50, 150, 50, 50);
+	holyFire.creatorSoundPaths = { "res/sound/spell/holyfire.ogg" };
 
 	holyFire.cooldown = sf::seconds(10);
 	holyFire.range = 100.f;
@@ -816,6 +817,7 @@ SpellData SpellData::getInvisibilitySpellData() {
 	invisibility.id = SpellID::Invisibility;
 	invisibility.spellType = SpellType::Twilight;
 	invisibility.iconTextureRect = sf::IntRect(100, 50, 50, 50);
+	invisibility.creatorSoundPaths = { "res/sound/spell/invisibility.ogg" };
 
 	invisibility.cooldown = sf::seconds(30);
 	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);

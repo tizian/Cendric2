@@ -71,7 +71,7 @@ void YashaBossAdd::setDead() {
 }
 
 void YashaBossAdd::revive() {
-	m_attributes.currentHealthPoints = 100;
+	m_attributes.currentHealthPoints = 60;
 	m_isDead = false;
 	setState(GameObjectState::Idle);
 	m_spellPc->setEmitRate(400.f);
@@ -85,6 +85,7 @@ void YashaBossAdd::setBoss(LevelMovableGameObject* boss) {
 
 void YashaBossAdd::loadAttributes() {
 	m_attributes.setHealth(60);
+	m_attributes.resistancePhysical = -100;
 	m_attributes.calculateAttributes();
 }
 
