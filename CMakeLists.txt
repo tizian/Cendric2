@@ -137,7 +137,6 @@ target_include_directories(Cendric PRIVATE
 if (APPLE)
 	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/macOS/info.plist)
 	set_source_files_properties(res/macOS/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-	file(COPY cendric.ini DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
 	file(COPY db/game_data.db DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources/db)
 	file(COPY res DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
 	file(COPY saves DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
