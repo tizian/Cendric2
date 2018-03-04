@@ -233,7 +233,7 @@ npc.id:npc_luiz
 	# translation: 
 	translation.tag:DL_Luiz_ForbiddenMagic2
 	translation.en:But where there is light, there is also shadow. One cannot just ignore them. But we can explore and study them until they are no longer alien.
-	translation.de:Aber wo Licht ist sind auch Schatten, man kann sie nicht einfach ignorieren. Man kann sie aber erforschen und kennen lernen, bis sie einem nicht mehr fremd sind.
+	translation.de:Aber wo Licht ist sind auch Schatten, man kann sie nicht einfach ignorieren. Man kann sie aber erforschen und kennenlernen, bis sie einem nicht mehr fremd sind.
 	translation.ch:Aber wo Liecht isch, sin au Schätte, me ka si nid eifach ignoriere. Aber me ka si erforsche und kenneleere, bis si eim nüm eso fremd sind.
 	[
 		# Link node, tag is next tag

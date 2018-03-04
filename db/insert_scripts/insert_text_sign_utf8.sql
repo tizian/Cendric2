@@ -88,3 +88,11 @@ Echte Aufsteller!','DI ROT PERLE
 
 Echti Ufsteller!');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Pirates','sign','Arrr!','Arrr!','Arrr!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Alastor1','sign','Torches are red, torches are blue.
+If they are blue, it will help you.','Fackeln sind rot, Fackeln sind blau.
+Sind sie blau, hilfts dir, genau!','Fackle sind rot, Fackle sind blau.
+Sind si blau, hilfts dir, genau!');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('Alastor2','sign','Torches are blue, torches are red.
+If they''re red, you''ll soon be dead.','Fackeln sind blau, Fackeln sind rot.
+Sind sie rot, bist du bald tot.','Fackle sind blau, Fackle sind rot.
+Sind si rot, bisch du bald tot.');
