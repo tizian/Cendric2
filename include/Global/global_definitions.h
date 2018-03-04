@@ -13,7 +13,7 @@
 #include <vector>
 #include <cassert>
 
-// Steam builds
+// Create steam version. Usually set via cmake.
 // #define STEAM
 
 // versioning
@@ -27,10 +27,12 @@
 // Debug version
 //#define DEBUG
 
-// Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system. (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac)
-#define EXTERNAL_DOCUMENTS_FOLDER
+/* Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system.
+   Usually set via cmake.
+   (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac) */
+// #define EXTERNAL_DOCUMENTS_FOLDER
 
-// Resolve .app package internal resource path for mac builds (usually set via CMakeLists.txt)
+// Resolve .app package internal resource path for mac builds. Usually set via cmake.
 // #define APPLE_APP_BUILD
 
 // max frame time (in seconds)

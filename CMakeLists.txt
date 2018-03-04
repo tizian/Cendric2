@@ -5,7 +5,8 @@ project(Cendric)
 option(CENDRIC_BUILD_SQLITE_SHELL "Build SQLite shell on Windows platform?" OFF)
 option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON)
 option(CENDRIC_STEAM "Include steamworks API?" OFF)
-option(CENDRIC_PREPARE_BUILD "Prepare a build? (Currently only used under macOS)" OFF)
+option(CENDRIC_EXTERNAL_DOCUMENT_FOLDER "Use external documents folder?" OFF)
+option(CENDRIC_GERMAN "Use German as default language?" OFF)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
     message(FATAL_ERROR
@@ -88,16 +89,14 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 		${PROJECT_SOURCE_DIR}/res/macOS/icon.icns
 	)
 
-    if (CENDRIC_PREPARE_BUILD)
-        add_definitions("-DEXTERNAL_DOCUMENTS_FOLDER")
-    endif()
-
     # mac
     if (CENDRIC_STEAM)
         add_definitions("-DSTEAM")
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib)
-        file(COPY ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
-        file(COPY ${PROJECT_SOURCE_DIR}/res/macOS/steam_appid.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
+        file(COPY ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib
+             DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
+        file(COPY ${PROJECT_SOURCE_DIR}/res/macOS/steam_appid.txt
+             DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
     endif()
 
     add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
@@ -117,8 +116,12 @@ else()
     endif()
 endif()
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if (CENDRIC_EXTERNAL_DOCUMENT_FOLDER)
+    add_definitions("-DEXTERNAL_DOCUMENTS_FOLDER")
+endif()
 
+if (CENDRIC_GERMAN)
+    add_definitions("-DGERMAN_DEFAULT_LANGUAGE")
 endif()
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")

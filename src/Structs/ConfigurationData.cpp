@@ -1,7 +1,11 @@
 #include "Structs/ConfigurationData.h"
 
 void ConfigurationData::resetToDefault() {
+#ifdef GERMAN_DEFAULT_LANGUAGE
+	language = Language::Lang_DE;
+#else
 	language = Language::Lang_EN;
+#endif
 	isSoundOn = true;
 	volumeSound = 100;
 	volumeMusic = 100;
