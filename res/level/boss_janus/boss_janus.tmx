@@ -608,12 +608,12 @@
     <property name="color" value="blue"/>
    </properties>
   </object>
-  <object id="121" gid="628" x="1450" y="550" width="50" height="50">
+  <object id="121" gid="628" x="1500" y="475" width="50" height="50">
    <properties>
     <property name="text" value="Alastor1"/>
    </properties>
   </object>
-  <object id="122" gid="628" x="1650" y="550" width="50" height="50">
+  <object id="122" gid="628" x="1500" y="400" width="50" height="50">
    <properties>
     <property name="text" value="Alastor2"/>
    </properties>
