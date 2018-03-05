@@ -229,7 +229,7 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2','quest','The Tower, the Second!','Der Turm, zum Zweiten!','De Turm, zum Zweite!','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2', 'quest_desc', 'This was only the start. I need to go and climb the tower again.','Das war erst der Anfang. Ich muss nochmal auf den Turm.','Da isch erst de Afang gsi. Ich mu namal uf de Turm.', '?');
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_3','quest','The Tower, the Third!','Der Turm, zum Dritte!','De Turm, zum Dritte!','?');
+INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_3','quest','The Tower, the Third!','Der Turm, zum Dritten!','De Turm, zum Dritte!','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_3', 'quest_desc', 'Etoz seems to toy with me. Another tower challenge is waiting.','Etoz scheint mit mir zu spielen. Es wartet eine weitere Herausforderung auf dem Turm.','De Etoz spielt glaub mit mir. Es wartet e wiiteri Herusforderig ufem Turm.', '?');
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_4','quest','The Tower, the Fourth!','Der Turm, zum Vierten!','De Turm, zum Vierte!','?');

@@ -529,7 +529,7 @@ loadDialogue = function(DL)
 
 	if (not DL:isConditionFulfilled("npc_jonathan", "you_learn")) then 
 
-		DL:createNPCNode(59, 60, "DL_Jonathan_YouLearn") -- My focus are only fire spells. Also, I don't feel safe going out of my house anymore.
+		DL:createNPCNode(59, 60, "DL_Jonathan_YouLearn") -- I only focus on fire spells. Also, I don't feel safe going out of my house anymore.
 		DL:addNode()
 
 

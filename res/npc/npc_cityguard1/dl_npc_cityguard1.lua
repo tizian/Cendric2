@@ -5,7 +5,7 @@ loadDialogue = function(DL)
 	if (not DL:isConditionFulfilled("npc_cityguard", "gates_closed")) then
 		DL:addChoice(10, "DL_Choice_WhyGatesClosed") -- Why are the gates closed?
 	end
-	if (not DL:isConditionFulfilled("npc_cityguard", "stranger")) then
+	if (not DL:isConditionFulfilled("npc_cityguard", "stranger") and not DL:isQuestState("gates_of_gandria", "completed")) then
 		DL:addChoice(2, "DL_Choice_Stranger") -- Do I look like a stranger to you?
 	end
 	if (DL:isConditionFulfilled("npc_cityguard", "gates_closed")) then

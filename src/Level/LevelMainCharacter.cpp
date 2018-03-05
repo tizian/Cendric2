@@ -51,11 +51,13 @@ void LevelMainCharacter::updateAutoscroller() {
 	if (m_isDead || !m_autoscroller) return;
 
 	auto pos = getPosition();
-	if (pos.x < m_autoscroller->getCameraLeft()) {
-		setPositionX(m_autoscroller->getCameraLeft());
+	auto minPos = std::min(m_autoscroller->getCameraLeft(), m_level->getWorldRect().width - WINDOW_WIDTH);
+	auto maxPos = m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width;
+	if (pos.x < minPos) {
+		setPositionX(minPos);
 	}
-	else if (pos.x > m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width) {
-		setPositionX(m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width);
+	else if (pos.x > maxPos) {
+		setPositionX(maxPos);
 	}
 }
 

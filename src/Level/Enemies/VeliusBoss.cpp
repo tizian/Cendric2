@@ -634,6 +634,7 @@ void VeliusBoss::loadSpells() {
 	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
 	explosionSpell.fightingTime = sf::seconds(0.f);
 	explosionSpell.castingTime = sf::seconds(0.f);
+	explosionSpell.spellSoundPaths.clear();
 
 	// twilight explosion
 	explosionSpell.skinNr = 1;

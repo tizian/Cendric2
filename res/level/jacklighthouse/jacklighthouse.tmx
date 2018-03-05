@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="80" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="298">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="80" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="299">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/jacklighthouse/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
@@ -1248,7 +1248,6 @@
   <object id="242" gid="846" x="1100" y="1900" width="50" height="50"/>
   <object id="243" gid="846" x="950" y="2750" width="50" height="50"/>
   <object id="244" gid="926" x="850" y="3150" width="50" height="50"/>
-  <object id="257" gid="868" x="2350" y="2900" width="50" height="50"/>
   <object id="258" gid="840" x="1050" y="3200" width="50" height="50"/>
   <object id="259" gid="840" x="1350" y="3200" width="50" height="50"/>
   <object id="260" gid="840" x="1650" y="3200" width="50" height="50"/>
@@ -1284,6 +1283,7 @@
   <object id="293" gid="828" x="2050" y="2150" width="50" height="50"/>
   <object id="295" gid="868" x="1800" y="1650" width="50" height="50"/>
   <object id="296" gid="788" x="900" y="1350" width="50" height="50"/>
+  <object id="298" gid="788" x="2350" y="2900" width="50" height="50"/>
  </objectgroup>
  <objectgroup name="lever 1">
   <object id="134" gid="794" x="1500" y="3050" width="50" height="50"/>

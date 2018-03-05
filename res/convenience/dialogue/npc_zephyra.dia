@@ -163,7 +163,7 @@ npc.id:npc_zephyra
 	# translation: 
 	translation.tag:DL_Zephyra_DeadCat
 	translation.en:That's no dead cat, it's a demon's fur. It's nice and warm.
-	translation.de:Das ist keine tote Katze, es ist ein Dämonenfell. Es ist schon warm.
+	translation.de:Das ist keine tote Katze, es ist ein Dämonenfell. Es ist schön warm.
 	translation.ch:Das isch kei toti Chatz, es isch es Dämonefell. Es git schön warm.
 	[
 		# Link node, tag is next tag

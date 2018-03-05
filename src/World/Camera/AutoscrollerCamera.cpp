@@ -19,7 +19,7 @@ void AutoscrollerCamera::setLevelSize(const sf::Vector2f& levelSize) {
 }
 
 bool AutoscrollerCamera::collides(const sf::Vector2f& pos) const {
-	if (pos.x < getCameraLeft()) {
+	if (pos.x < std::min(getCameraLeft(), m_levelSize.x - WINDOW_WIDTH)) {
 		return true;
 	}
 	if (pos.x > getCameraLeft() + WINDOW_WIDTH - m_mainChar->getBoundingBox()->width) {

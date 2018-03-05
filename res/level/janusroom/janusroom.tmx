@@ -597,7 +597,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="trigger" visible="0">
+ <objectgroup name="trigger">
   <object id="89" x="1550" y="500" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
@@ -614,6 +614,7 @@
   </object>
   <object id="92" x="350" y="450" width="550" height="350">
    <properties>
+    <property name="forced" value=""/>
     <property name="forced map" value="res/map/gandria/gandria.tmx,2260,300"/>
    </properties>
   </object>

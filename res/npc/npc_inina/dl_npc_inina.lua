@@ -30,7 +30,7 @@ loadDialogue = function(DL)
 		if (DL:isConditionFulfilled("npc_inina", "mage") and not DL:isConditionFulfilled("npc_inina", "mark")) then
 			DL:addChoice(60, "DL_Choice_Mark") -- Maybe *this* influences my magic? (Show the mark)
 		end
-		if (not DL:isConditionFulfilled("npc_inina", "farmers")) then
+		if (not DL:isConditionFulfilled("npc_inina", "farmers") and not DL:isConditionFulfilled("boss", "BossKhajag")) then
 			DL:addChoice(12, "DL_Choice_Farmers") -- Why do you oppress the farmers? They need your help.
 		end
 		if (DL:isConditionFulfilled("npc_inina", "farmers") and not DL:isConditionFulfilled("npc_inina", "missing_people")) then

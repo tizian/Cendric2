@@ -1336,7 +1336,7 @@ npc.id:npc_jonathan
 	# triggers: 
 	# translation: 
 	translation.tag:DL_Jonathan_YouLearn
-	translation.en:My focus are only fire spells. Also, I don't feel safe going out of my house anymore.
+	translation.en:I only focus on fire spells. Also, I don't feel safe going out of my house anymore.
 	translation.de:Ich konzentriere mich nur auf Feuerzauber. Ausserdem fühle ich mich ausserhalb meines Hauses nicht mehr sicher.
 	translation.ch:I konzentriar mi nur uf Füürzauber. Usserdem fühl i mi usserhalb vu mim Huus nüma sicher.
 	[
