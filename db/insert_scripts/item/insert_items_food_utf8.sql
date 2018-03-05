@@ -6,7 +6,7 @@ INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('
 INSERT INTO item_attribute (item_id, health_regeneration, haste) values ('fo_cheese', 4, 10);
 INSERT INTO item_food (item_id, food_duration_s) values ('fo_cheese', 10);
 INSERT INTO levelitem (item_id, sprite_offset_left, sprite_offset_top, bounding_box_width, bounding_box_height) values ('fo_cheese', -14, -28, 22, 22);
-INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_cheese', 1, 0, 0, 50, 50);
+INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_width, frame_height) values ('fo_cheese', 1, 0, 100, 50, 50);
 
 -- Bread
 
@@ -151,7 +151,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Medium Healing Potion
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item', 'Medium Healing Potion','Mittlere Heiltrank','Mittlere Heiltrank');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item', 'Medium Healing Potion','Mittlerer Heiltrank','Mittlere Heiltrank');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_mediumhealingpotion', 'item_desc', 'Heals most moderate injuries.','Heilt die meisten mittelschweren Verletzungen.','Heilt di meiste mittleschwere Verletzige.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_mediumhealingpotion', 'consumable', 250, 450, 20);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_mediumhealingpotion', 20);
