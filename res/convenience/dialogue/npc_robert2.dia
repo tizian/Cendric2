@@ -143,7 +143,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_WhatDoing
 	translation.en:Hmm, nothing. But I strongly advise you not to go down into the crypt. It's scary there. 
 	translation.de:Hmm, nichts. Aber ich würde dir davon abraten, in die Krypta hinunter zu gehen. Es spukt dort.
-	translation.ch:HHmmm, nüt. Aber ich würd dr dervo abroote, in d Krypta z'goh. Es isch gruselig dert.
+	translation.ch:Hmmm, nüt. Aber ich würd dr dervo abroote, in d Krypta z'goh. Es isch gruselig dert.
 	[
 		# Link node, tag is next tag
 		tag:-2
@@ -224,7 +224,7 @@ npc.id:npc_robert2
 	translation.tag:DL_Robert_Crypt
 	translation.en:Hm. Yes. Listen, I was just trying out my powers... and then a little mistake happened. 
 	translation.de:Hm. Ja. Hör zu, ich wollte nur meine Kräfte ausprobieren und dann ist ein kleiner Unfall passiert.
-	translation.ch:Hm. Jä. Los, ich han nur welle mini Kräft usprobiere, und denne ich en chliine Unfall passiert.
+	translation.ch:Hm. Jä. Los, ich han nur welle mini Kräft usprobiere, und denne isch en chliine Unfall passiert.
 	[
 		# Link node, tag is next tag
 		tag:9
