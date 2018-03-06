@@ -8,9 +8,7 @@
 The Steam page for Cendric is online: 
 http://store.steampowered.com/app/681460/Cendric/
 
-Release is planned for February/March 2018
-
-The game is currently still in development. See http://en.sfml-dev.org/forums/index.php?topic=19740 for more information about its development process.
+Cendric was released on the 2. March 2018.
 
 ## Screenshots
 
@@ -61,6 +59,8 @@ cmake ..
 * [TinyXML 2](http://www.grinninglizard.com/tinyxml2/index.html) : XML parsing
 
 ## License
+
+The code of this repository uses a MIT license.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Game assets (images, and fonts) found in the "res" folder are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>. Give attribution to Isa Roesch & Tizian Zeltner, if you're going to use them. 
 The sound and music files found in the said folder are licenced under a CC0 (public domain) or a CC by SA licence. See the game's credits for the attribution notice. 
