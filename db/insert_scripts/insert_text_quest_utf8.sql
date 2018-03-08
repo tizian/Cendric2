@@ -225,6 +225,8 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) va
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_1','quest','The Mysterious Tower','Der Mysteriöse Turm','De Mysteriös Turm','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_1', 'quest_desc', 'Etoz sent me to some mysterious tower on an island near the marshlands. I should climb to the top and find some chest.','Etoz hat mich zu einem mysteriösen Turm auf einer Insel in der Nähe des Sumpflands geschickt. Ich soll ihn erklimmen und eine Truhe finden.','De Etoz het mi zumne mysteriöse Turm ufere Insle ide Nöchi vom Sumpfland gschickt. Ich sölen erklimme und e True finde.', '?');
+-- this quest does not have an additional quest description, but it is to mitigate not found strings in old savegames.
+INSERT INTO text (text_id, text_type) values ('tower_1', 'quest_desc_1'); 
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2','quest','The Tower, the Second!','Der Turm, zum Zweiten!','De Turm, zum Zweite!','?');
 INSERT INTO text (text_id, text_type, english, german, swiss_german, spanish) values ('tower_2', 'quest_desc', 'This was only the start. I need to go and climb the tower again.','Das war erst der Anfang. Ich muss nochmal auf den Turm.','Da isch erst de Afang gsi. Ich mu namal uf de Turm.', '?');
