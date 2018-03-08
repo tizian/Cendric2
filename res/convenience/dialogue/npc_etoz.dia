@@ -553,7 +553,7 @@ npc.id:npc_etoz
 	tag:26
 	# triggers: 
 	trigger:DL:addConditionProgress("npc_etoz", "where_key_part")
-	trigger:DL:addQuestDescription("tower_1", 1)
+	trigger:DL:addQuestDescription("tower_key_1", 1)
 	# translation: 
 	translation.tag:DL_Etoz_WhereKeyPart
 	translation.en:That would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.

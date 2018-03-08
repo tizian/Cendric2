@@ -206,7 +206,7 @@ loadDialogue = function(DL)
 
 			DL:createNPCNode(26, 28, "DL_Etoz_WhereKeyPart") -- That would've been up to you to find out. But as you're so clueless and pitiful, I'll tell you.
 			DL:addConditionProgress("npc_etoz", "where_key_part")
-			DL:addQuestDescription("tower_1", 1)
+			DL:addQuestDescription("tower_key_1", 1)
 			DL:addNode()
 
 
