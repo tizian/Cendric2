@@ -213,6 +213,9 @@ void MapOverlay::renderLevelOverlay(float scale) {
 				auto chest = dynamic_cast<ChestLevelTile*>(dTile);
 				if (chest && chest->isLootable()) {
 					drawOverlayTexture(img, dTile->getCenter() * scale, 1, 1);
+					if (chest->isQuestRelevant()) {
+						drawOverlayTexture(img, dTile->getCenter() * scale, 2, 0);
+					}
 				}
 			}
 			else if (dTile->getDynamicTileID() == LevelDynamicTileID::Lever) {

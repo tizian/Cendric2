@@ -25,6 +25,7 @@ public:
 	void loot();
 	
 	bool isLootable() const;
+	bool isQuestRelevant() const;
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Chest; }
 
 private:

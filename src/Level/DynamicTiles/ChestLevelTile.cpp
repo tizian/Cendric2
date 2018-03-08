@@ -181,6 +181,15 @@ bool ChestLevelTile::isLootable() const {
 	return m_isLootable;
 }
 
+bool ChestLevelTile::isQuestRelevant() const {
+	for (auto& it : m_lootableItems) {
+		if (Item::isQuestRelevant(it.first) || dynamic_cast<LevelScreen*>(m_screen)->isItemMonitored(it.first)) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void ChestLevelTile::loot() {
 	bool isObserved = dynamic_cast<LevelScreen*>(m_screen)->getWorldData()->isObserved;
 	if (isObserved && dynamic_cast<LevelScreen*>(m_screen)->notifyObservers()) {
