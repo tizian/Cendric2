@@ -494,7 +494,7 @@ bool Enemy::isQuestRelevant() {
 	}
 	if (m_isLooted) return false;
 	for (auto& it : m_reward.lootableItems) {
-		if (it.first.substr(0, 2) == "qe" || dynamic_cast<LevelScreen*>(m_screen)->isItemMonitored(it.first)) {
+		if (Item::isQuestRelevant(it.first) || dynamic_cast<LevelScreen*>(m_screen)->isItemMonitored(it.first)) {
 			return true;
 		}
 	}

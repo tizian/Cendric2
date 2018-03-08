@@ -110,6 +110,10 @@ bool Item::isEquipmentType(ItemType type) {
 		type == ItemType::Equipment_weapon;
 }
 
+bool Item::isQuestRelevant(const std::string& itemId) {
+	return itemId.substr(0, 2) == "qe" || itemId.substr(0, 2) == "ke";
+}
+
 sf::Color Item::getRarityColor(int rarity) {
 	switch (rarity)
 	{

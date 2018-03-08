@@ -78,6 +78,7 @@ public:
 	const ItemCheck& getCheck() const;
 
 	static bool isEquipmentType(ItemType type);
+	static bool isQuestRelevant(const std::string& itemId);
 	static sf::Color getRarityColor(int rarity);
 
 protected:
