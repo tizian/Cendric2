@@ -412,7 +412,7 @@
   <object id="300" gid="1075" x="400" y="400" width="50" height="50"/>
   <object id="303" gid="1075" x="500" y="600" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever divine" visible="0">
+ <objectgroup name="lever divine">
   <object id="389" gid="1075" x="575" y="200" width="50" height="50"/>
   <object id="440" gid="1075" x="600" y="150" width="50" height="50"/>
   <object id="441" gid="1075" x="700" y="250" width="50" height="50"/>
@@ -425,7 +425,7 @@
   <object id="449" gid="1075" x="950" y="650" width="50" height="50"/>
   <object id="450" gid="1075" x="826" y="500" width="50" height="50"/>
   <object id="451" gid="1075" x="776" y="500" width="50" height="50"/>
-  <object id="452" gid="1075" x="975" y="337.5" width="50" height="50"/>
+  <object id="452" gid="1075" x="975" y="350" width="50" height="50"/>
   <object id="455" gid="1075" x="550" y="400" width="50" height="50"/>
   <object id="457" gid="1075" x="550" y="600" width="50" height="50"/>
   <object id="458" gid="1075" x="300" y="500" width="50" height="50"/>
@@ -438,7 +438,7 @@
   <object id="468" gid="1075" x="450" y="400" width="50" height="50"/>
   <object id="469" gid="1075" x="876" y="450" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever elemental">
+ <objectgroup name="lever elemental" visible="0">
   <object id="307" gid="1075" x="776" y="500" width="50" height="50"/>
   <object id="309" gid="1075" x="700" y="550" width="50" height="50"/>
   <object id="310" gid="1075" x="300" y="550" width="50" height="50"/>

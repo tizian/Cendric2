@@ -608,16 +608,6 @@
     <property name="color" value="blue"/>
    </properties>
   </object>
-  <object id="121" gid="628" x="1500" y="475" width="50" height="50">
-   <properties>
-    <property name="text" value="Alastor1"/>
-   </properties>
-  </object>
-  <object id="122" gid="628" x="1500" y="400" width="50" height="50">
-   <properties>
-    <property name="text" value="Alastor2"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup name="trigger"/>
  <objectgroup name="enemy">

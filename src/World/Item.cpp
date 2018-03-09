@@ -111,7 +111,8 @@ bool Item::isEquipmentType(ItemType type) {
 }
 
 bool Item::isQuestRelevant(const std::string& itemId) {
-	return itemId.substr(0, 2) == "qe" || itemId.substr(0, 2) == "ke";
+	auto substr = itemId.substr(0, 2);
+	return substr == "qe" || substr == "ke" || substr == "sp";
 }
 
 sf::Color Item::getRarityColor(int rarity) {
