@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Yasha's Fire Sword
+| image = Yasha's Fire Sword.png
+| type = Equipment (Weapon)
+| rarity = Legendary (4)
+| value = Unsalable
+| ID = we_firesword
+}}
+
+== Description ==
+
+''A holy relic from Yasha's Temple. It opens a gate in the Temple of the Ancients.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 8
+|-
+| [[Cooldown]]
+| 0.7s
+|-
+| [[Fire Damage]]
+| +30
+|-
+| [[Light Damage]]
+| +10
+|-
+| [[Ice Resistance]]
+| +50
+|-
+| [[Shadow Resistance]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

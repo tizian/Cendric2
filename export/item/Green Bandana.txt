@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Green Bandana
+| image = Green Bandana.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 25
+| ID = eq_bandana
+}}
+
+== Description ==
+
+''The cloth is a bit tattered but it can still be worn.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Armour]]
+| +10
+|-
+| [[Fire Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

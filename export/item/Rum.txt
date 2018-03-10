@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Rum
+| image = Rum.png
+| type = Consumable
+| rarity = Common (0)
+| value = 15
+| ID = fo_rum
+}}
+
+== Description ==
+
+''A strong drink, matey!''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 15s
+|-
+| [[Health Regeneration / s]]
+| -5
+|-
+| [[Fire Damage]]
+| +10
+|-
+| [[Armour]]
+| +200
+|-
+| [[Ice Resistance]]
+| +200
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

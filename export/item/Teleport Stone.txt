@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Teleport Stone
+| image = Teleport Stone.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = Unsalable
+| ID = mi_portstone
+}}
+
+== Description ==
+
+''I can teleport to activated waypoints using this stone.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

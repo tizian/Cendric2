@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Yasha's Essence
+| image = Yasha's Essence.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_yashaessence
+}}
+
+== Description ==
+
+''The fiery essence of the powerful demon Yasha.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

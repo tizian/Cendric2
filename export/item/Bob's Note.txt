@@ -1,0 +1,28 @@
+{{ItemInfobox
+| name = Bob's Note
+| image = Bob's Note.png
+| type = Document
+| rarity = Common (0)
+| value = Unsalable
+| ID = do_notebob
+}}
+
+== Description ==
+
+''A suspicious note, found in Yasha's Temple.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| Someone... help us! He's destroying everything.
+
+-- Bob
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

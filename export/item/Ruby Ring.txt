@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Ruby Ring
+| image = Ruby Ring.png
+| type = Equipment (Ring)
+| rarity = Uncommon (1)
+| value = 25
+| ID = eq_rubyring
+}}
+
+== Description ==
+
+''The small ruby sparkles.''
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

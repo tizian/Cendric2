@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Aquamarine Ring
+| image = Aquamarine Ring.png
+| type = Equipment (Ring)
+| rarity = Uncommon (1)
+| value = 25
+| ID = eq_aquamarinering
+}}
+
+== Description ==
+
+''There is a coldness radiating from its blue stone.''
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

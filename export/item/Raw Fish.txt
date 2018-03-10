@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Raw Fish
+| image = Raw Fish.png
+| type = Consumable
+| rarity = Common (0)
+| value = 3
+| ID = fo_rawfish
+}}
+
+== Description ==
+
+''I should cook this first.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 6s
+|-
+| [[Health Regeneration / s]]
+| +5
+|-
+| [[Ice Damage]]
+| +5
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

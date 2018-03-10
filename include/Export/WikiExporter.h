@@ -5,11 +5,8 @@
 /* exports stuff in the wiki format */
 class WikiExporter final {
 public:
-	WikiExporter();
-	~WikiExporter();
-
-	void exportItems();
+	static void exportWiki();
 
 private:
-
+	WikiExporter();
 };

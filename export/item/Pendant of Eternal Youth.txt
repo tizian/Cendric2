@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Pendant of Eternal Youth
+| image = Pendant of Eternal Youth.png
+| type = Equipment (Neck)
+| rarity = Epic (3)
+| value = 60
+| ID = eq_lifependant
+}}
+
+== Description ==
+
+''It is said that people wearing this magical pendant do not age.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +10
+|-
+| [[Health Regeneration / s]]
+| +1
+|}
+
+[[Category:Item]] [[Category:Equipment (Neck) Item]][[Category:Equipment]]
+

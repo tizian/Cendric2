@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Water bottle
+| image = Water bottle.png
+| type = Consumable
+| rarity = Common (0)
+| value = 2
+| ID = fo_water
+}}
+
+== Description ==
+
+''Fresh clear water.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 8s
+|-
+| [[Health Regeneration / s]]
+| +2
+|-
+| [[Ice Damage]]
+| +5
+|-
+| [[Fire Resistance]]
+| +80
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

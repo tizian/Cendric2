@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Nekomata Embers
+| image = Nekomata Embers.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = 20
+| ID = mi_neko_ember
+}}
+
+== Description ==
+
+''Magical embers from the fur of a Nekomata.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Yellow Key Head
+| image = Yellow Key Head.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_tower_2
+}}
+
+== Description ==
+
+''A part of the key is missing.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

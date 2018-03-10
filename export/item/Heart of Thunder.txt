@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Heart of Thunder
+| image = Heart of Thunder.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_thunderheart
+}}
+
+== Description ==
+
+''A precious stone which holds magical powers.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

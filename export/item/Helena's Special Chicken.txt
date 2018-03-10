@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Helena's Special Chicken
+| image = Helena's Special Chicken.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_leeroychicken
+}}
+
+== Description ==
+
+''Helena's famous grilled chicken.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

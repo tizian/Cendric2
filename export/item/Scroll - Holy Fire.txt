@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Holy Fire
+| image = Scroll - Holy Fire.png
+| type = Spell Scroll
+| rarity = Rare (2)
+| value = Unsalable
+| ID = sp_holyfire
+}}
+
+== Description ==
+
+''Summons a holy fire that burns enemies within range.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

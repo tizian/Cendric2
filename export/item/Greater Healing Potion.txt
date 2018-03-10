@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Greater Healing Potion
+| image = Greater Healing Potion.png
+| type = Consumable
+| rarity = Common (0)
+| value = 30
+| ID = fo_greaterhealingpotion
+}}
+
+== Description ==
+
+''Heals nearly everything.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 5s
+|-
+| [[Health Regeneration / s]]
+| +30
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

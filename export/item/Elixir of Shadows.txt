@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Elixir of Shadows
+| image = Elixir of Shadows.png
+| type = Permanent
+| rarity = Rare (2)
+| value = 150
+| ID = pe_elixirshadow
+}}
+
+== Description ==
+
+''Increases the shadow damage permanently.''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Circlet of the Enlighted
+| image = Circlet of the Enlighted.png
+| type = Equipment (Head)
+| rarity = Epic (3)
+| value = 180
+| ID = eq_head_divinet3
+}}
+
+== Description ==
+
+''The majestic wings give the wearer of this headpiece a sublime appearance.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +20
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +4
+|-
+| [[Healing Power]]
+| +3
+|-
+| [[Fire Damage]]
+| +4
+|-
+| [[Light Damage]]
+| +4
+|-
+| [[Armour]]
+| +30
+|-
+| [[Light Resistance]]
+| +14
+|-
+| [[Shadow Resistance]]
+| +13
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

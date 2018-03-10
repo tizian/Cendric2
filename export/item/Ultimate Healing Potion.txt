@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Ultimate Healing Potion
+| image = Ultimate Healing Potion.png
+| type = Consumable
+| rarity = Common (0)
+| value = 50
+| ID = fo_ultimatehealingpotion
+}}
+
+== Description ==
+
+''Ultimate healing power!''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 5s
+|-
+| [[Health Regeneration / s]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

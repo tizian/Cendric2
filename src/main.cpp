@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 	g_achievementManager = new AchievementManager();
 
 	Game* game = new Game();
-	game->run();
+	game->runWikiExport();
 	delete game;
 
 	delete g_achievementManager;

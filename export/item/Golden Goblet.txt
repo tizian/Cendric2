@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Golden Goblet
+| image = Golden Goblet.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 50
+| ID = mi_goldengoblet
+}}
+
+== Description ==
+
+''A golden goblet, some merchants might pay a lot for this.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

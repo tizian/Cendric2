@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Silver Sword
+| image = Silver Sword.png
+| type = Equipment (Weapon)
+| rarity = Rare (2)
+| value = 80
+| ID = we_silversword
+}}
+
+== Description ==
+
+''A powerful silver sword, covered in spikes.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 6
+|-
+| [[Cooldown]]
+| 0.7s
+|-
+| [[Critical]]
+| +5
+|-
+| [[Physical Damage]]
+| +6
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

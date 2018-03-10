@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Sextant
+| image = Sextant.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 100
+| ID = mi_sextant
+}}
+
+== Description ==
+
+''I have no clue how this thing works, but it seems to be made from massive gold.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

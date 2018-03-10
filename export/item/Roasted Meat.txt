@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Roasted Meat
+| image = Roasted Meat.png
+| type = Consumable
+| rarity = Common (0)
+| value = 4
+| ID = fo_roastedmeat
+}}
+
+== Description ==
+
+''A juicy piece of meat, seared, just as it should be.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +10
+|-
+| [[Physical Damage]]
+| +7
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

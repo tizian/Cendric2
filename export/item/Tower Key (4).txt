@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Tower Key (4)
+| image = Tower Key (4).png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_tower_4
+}}
+
+== Description ==
+
+''Opens the fourth door of the old tower in the Marshlands.''
+
+[[Category:Item]] [[Category:Key Item]]
+

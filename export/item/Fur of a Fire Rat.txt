@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Fur of a Fire Rat
+| image = Fur of a Fire Rat.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = 20
+| ID = mi_firerat_fur
+}}
+
+== Description ==
+
+''This fur is exceptionally well preserved. Maybe someone can use it to craft a piece of armour.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

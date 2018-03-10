@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Dark Yasha's Claws
+| image = Dark Yasha's Claws.png
+| type = Equipment (Weapon)
+| rarity = Legendary (4)
+| value = 440
+| ID = we_doublesickle_dark
+}}
+
+== Description ==
+
+''The demon Yasha gifted me this weapon after I defeated her in battle. Jason reinforced it with gargoyle dust.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 6
+|-
+| [[Cooldown]]
+| 0.3s
+|-
+| [[Health]]
+| +16
+|-
+| [[Haste]]
+| +30
+|-
+| [[Critical]]
+| +8
+|-
+| [[Physical Damage]]
+| +10
+|-
+| [[Ice Damage]]
+| +20
+|-
+| [[Shadow Damage]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

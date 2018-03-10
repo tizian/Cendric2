@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Bread
+| image = Bread.png
+| type = Consumable
+| rarity = Common (0)
+| value = 2
+| ID = fo_bread
+}}
+
+== Description ==
+
+''An ordinary loaf of bread.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 15s
+|-
+| [[Health Regeneration / s]]
+| +3
+|-
+| [[Armour]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

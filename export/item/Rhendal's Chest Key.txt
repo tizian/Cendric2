@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Rhendal's Chest Key
+| image = Rhendal's Chest Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_rhendal
+}}
+
+== Description ==
+
+''Vincent gave me this key. It's for the chest of the Elder.''
+
+[[Category:Item]] [[Category:Key Item]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Anti-Magic Crystal
+| image = Anti-Magic Crystal.png
+| type = Quest
+| rarity = Common (0)
+| value = 50
+| ID = qe_antimagiccrystal
+}}
+
+== Description ==
+
+''This strange crystal cancels magic. I shouldn't keep it in my pocket for too long...''
+
+[[Category:Item]] [[Category:Quest Item]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Ornate Key
+| image = Ornate Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_forgottenpassage
+}}
+
+== Description ==
+
+''I found this key in the forgotten passage in the sewers.''
+
+[[Category:Item]] [[Category:Key Item]]
+

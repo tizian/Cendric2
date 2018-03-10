@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Holy Ring
+| image = Holy Ring.png
+| type = Equipment (Ring)
+| rarity = Uncommon (1)
+| value = 28
+| ID = eq_holyring
+}}
+
+== Description ==
+
+''I found this shiny ring in the cathedral of Gandria.''
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Pearl
+| image = Pearl.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 20
+| ID = mi_pearl
+}}
+
+== Description ==
+
+''Can be found in some shells.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

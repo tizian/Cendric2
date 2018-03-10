@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Cendric's Staff
+| image = Cendric's Staff.png
+| type = Equipment (Weapon)
+| rarity = Rare (2)
+| value = 30
+| ID = we_betastaff
+}}
+
+== Description ==
+
+''Thanks!''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 4
+|-
+| [[Cooldown]]
+| 1.0s
+|-
+| [[Critical]]
+| +1
+|-
+| [[Physical Damage]]
+| +1
+|-
+| [[Fire Damage]]
+| +1
+|-
+| [[Ice Damage]]
+| +1
+|-
+| [[Light Damage]]
+| +1
+|-
+| [[Shadow Damage]]
+| +1
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

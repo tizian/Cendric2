@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Fangs of a Nekomata
+| image = Fangs of a Nekomata.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 10
+| ID = mi_neko_teeth
+}}
+
+== Description ==
+
+''It is rumoured that these enormous teeth have magical powers.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

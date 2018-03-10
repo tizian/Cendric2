@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Fear
+| image = Scroll - Fear.png
+| type = Spell Scroll
+| rarity = Rare (2)
+| value = Unsalable
+| ID = sp_fear
+}}
+
+== Description ==
+
+''Enemies will flee in terror for a certain duration, if the spell is strong enough.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

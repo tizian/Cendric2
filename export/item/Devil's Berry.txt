@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Devil's Berry
+| image = Devil's Berry.png
+| type = Consumable
+| rarity = Common (0)
+| value = 4
+| ID = fo_devilberry
+}}
+
+== Description ==
+
+''Eating these will increase all resistances dramatically. But at a price...''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 20s
+|-
+| [[Health Regeneration / s]]
+| -6
+|-
+| [[Armour]]
+| +100
+|-
+| [[Fire Resistance]]
+| +100
+|-
+| [[Ice Resistance]]
+| +100
+|-
+| [[Light Resistance]]
+| +100
+|-
+| [[Shadow Resistance]]
+| +100
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

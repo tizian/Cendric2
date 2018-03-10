@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Hunter's Hat
+| image = Hunter's Hat.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 80
+| ID = eq_huntershat
+}}
+
+== Description ==
+
+''A brown leather hat with a red feather. Protects its wearer from foul weather.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +3
+|-
+| [[Haste]]
+| +3
+|-
+| [[Critical]]
+| +2
+|-
+| [[Physical Damage]]
+| +3
+|-
+| [[Armour]]
+| +20
+|-
+| [[Light Resistance]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

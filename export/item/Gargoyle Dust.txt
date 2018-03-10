@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Gargoyle Dust
+| image = Gargoyle Dust.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = 20
+| ID = mi_gargoyle_dust
+}}
+
+== Description ==
+
+''Once a mighty stone monster, now a pitiful pile of dust.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Tower Key (3)
+| image = Tower Key (3).png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_tower_3
+}}
+
+== Description ==
+
+''Opens the third door of the old tower in the Marshlands.''
+
+[[Category:Item]] [[Category:Key Item]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Frying Pan
+| image = Frying Pan.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_jackpan
+}}
+
+== Description ==
+
+''Jack's beloved frying pan.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

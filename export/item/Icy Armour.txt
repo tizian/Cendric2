@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Icy Armour
+| image = Icy Armour.png
+| type = Equipment (Body)
+| rarity = Rare (2)
+| value = 155
+| ID = eq_icearmor
+}}
+
+== Description ==
+
+''Harek crafted this armour from the remains of Khajag.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +14
+|-
+| [[Critical]]
+| +2
+|-
+| [[Ice Damage]]
+| +5
+|-
+| [[Armour]]
+| +30
+|-
+| [[Fire Resistance]]
+| +20
+|-
+| [[Ice Resistance]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

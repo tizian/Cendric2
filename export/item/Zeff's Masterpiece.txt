@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Zeff's Masterpiece
+| image = Zeff's Masterpiece.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 40
+| ID = eq_icehat
+}}
+
+== Description ==
+
+''Zeff crafted this hat for me in return for saving him.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Ice Damage]]
+| +3
+|-
+| [[Armour]]
+| +10
+|-
+| [[Ice Resistance]]
+| +30
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

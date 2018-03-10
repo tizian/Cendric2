@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Tear Staff
+| image = Tear Staff.png
+| type = Equipment (Weapon)
+| rarity = Rare (2)
+| value = 75
+| ID = we_tearstaff
+}}
+
+== Description ==
+
+''A tear shaped aquamarine decorates the head of this staff.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 4
+|-
+| [[Cooldown]]
+| 1.0s
+|-
+| [[Health]]
+| +5
+|-
+| [[Ice Damage]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

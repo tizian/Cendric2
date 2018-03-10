@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Ingrid's Stew
+| image = Ingrid's Stew.png
+| type = Permanent
+| rarity = Rare (2)
+| value = 20
+| ID = pe_ingridstew
+}}
+
+== Description ==
+
+''A delicious dish cooked by Ingrid. Simply irresistible!''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

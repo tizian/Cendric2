@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Broken Sickles
+| image = Broken Sickles.png
+| type = Miscellaneous
+| rarity = Epic (3)
+| value = 10
+| ID = mi_janusglaive
+}}
+
+== Description ==
+
+''The broken remains of Alastor's weapon. Maybe someone could fix it.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

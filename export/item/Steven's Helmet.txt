@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Steven's Helmet
+| image = Steven's Helmet.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 50
+| ID = eq_stevenhelmet
+}}
+
+== Description ==
+
+''This helmet belongs to the paladin Steven.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +10
+|-
+| [[Light Damage]]
+| +2
+|-
+| [[Armour]]
+| +20
+|-
+| [[Fire Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

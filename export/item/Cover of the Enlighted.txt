@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Cover of the Enlighted
+| image = Cover of the Enlighted.png
+| type = Equipment (Back)
+| rarity = Epic (3)
+| value = 200
+| ID = eq_back_divinet3
+}}
+
+== Description ==
+
+''Worn by the high priests of the order.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +8
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +4
+|-
+| [[Healing Power]]
+| +2
+|-
+| [[Fire Damage]]
+| +4
+|-
+| [[Light Damage]]
+| +4
+|-
+| [[Armour]]
+| +20
+|-
+| [[Light Resistance]]
+| +37
+|-
+| [[Shadow Resistance]]
+| +37
+|}
+
+[[Category:Item]] [[Category:Equipment (Back) Item]][[Category:Equipment]]
+

@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Red Wizard Hat
+| image = Red Wizard Hat.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 50
+| ID = eq_wizardhatfire
+}}
+
+== Description ==
+
+''A perfect fit for a mage.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Fire Damage]]
+| +4
+|-
+| [[Armour]]
+| +10
+|-
+| [[Fire Resistance]]
+| +15
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

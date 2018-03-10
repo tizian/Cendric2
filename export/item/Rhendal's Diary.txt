@@ -1,0 +1,39 @@
+{{ItemInfobox
+| name = Rhendal's Diary
+| image = Rhendal's Diary.png
+| type = Document
+| rarity = Uncommon (1)
+| value = Unsalable
+| ID = do_elderdiary
+}}
+
+== Description ==
+
+''It is disrespectful to open a stranger's diary.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| Diary
+| 
+|-
+| Day 212, 1103
+| My dear Elona has still not returned. It's unusual for her to stay in the Stone Garden for such a long time. Maybe she found a new place where rare herbs grow?
+|-
+| Day 214, 1103
+| I'm worried, even though she's a good mage and can defend herself. I won't wait any longer.
+
+Tomorrow, I'll start searching for her.
+|-
+| Day 218, 1103
+| I still can't believe that my beloved Elona is gone. I've found pieces of her broken staff in the Stone Garden and tried to reassemble them, but it's not complete. 
+
+I can't entomb her traditionally with her staff, but only with a part of it. I'm going to keep the magic stone from the staff here, in memory of her.
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

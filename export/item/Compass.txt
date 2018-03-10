@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Compass
+| image = Compass.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_compass
+}}
+
+== Description ==
+
+''A golden compass. It still works.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

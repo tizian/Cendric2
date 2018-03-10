@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Walking Staff
+| image = Walking Staff.png
+| type = Equipment (Weapon)
+| rarity = Common (0)
+| value = 18
+| ID = we_walkingpole
+}}
+
+== Description ==
+
+''A simple walking staff, it belonged to the hunter Edmond.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 2
+|-
+| [[Cooldown]]
+| 0.8s
+|-
+| [[Health]]
+| +5
+|-
+| [[Physical Damage]]
+| +3
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

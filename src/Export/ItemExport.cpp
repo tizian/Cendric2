@@ -21,6 +21,17 @@ inline static std::string toStrMaxDecimals(float value, int decimals) {
 	return std::string(s.begin(), s.end());
 }
 
+static inline std::string getItemName(Item* item) {
+	auto name = g_textProvider->getText(item->getID(), "item");
+	if (name.substr(0, 4) == "(und") {
+		auto pages = item->getBeans<ItemDocumentPageBean>();
+		if (!pages.empty()) {
+			name = g_textProvider->getText(pages[0]->title, "document");
+		}
+	}
+	return name;
+}
+
 static inline std::string getTypeName(ItemType type) {
 	switch (type)
 	{
@@ -95,9 +106,9 @@ void ItemExport::exportItems() {
 void ItemExport::exportItem(Item* item) {
 	savePicture(item);
 
-	auto name = g_textProvider->getText(item->getID(), "item");
+	auto name = getItemName(item);
 
-	std::ofstream outfile(name + ".txt");
+	std::ofstream outfile(EXPORT_PATH + name + ".txt");
 	writeInfobox(item, outfile);
 	writeDescription(item, outfile);
 	writeAttributes(item, outfile);
@@ -113,19 +124,24 @@ void ItemExport::writeDescription(Item* item, std::ofstream& out) {
 	if (item->getType() == ItemType::Gold) {
 		// no real description
 		out << "== Description ==\n\n";
-		out << "A gold item, which results in " + std::to_string(item->getValue()) + " gold, when picked up.\n\n";
+		out << "A gold item, which results in " + std::to_string(item->getValue()) + " gold when picked up.\n\n";
 		return;
 	}
 
+
 	auto desc = g_textProvider->getText(item->getID(), "item_desc");
+	if (desc.substr(0, 4) == "(und") {
+		return;
+	}
 
 	out << "== Description ==\n\n";
 	out << "''" + desc + "''\n\n";
 }
 
 void ItemExport::writeAttributes(Item* item, std::ofstream& out) {
-	const ItemAttributeBean* a = item->getBean<ItemAttributeBean>();
-	if (!a) return;
+	if (!item->getCheck().isConsumable && !item->getCheck().isEquipment) {
+		return;
+	}
 
 	const ItemFoodBean* food = item->getBean<ItemFoodBean>();
 	auto& attr = item->getAttributes();
@@ -133,29 +149,28 @@ void ItemExport::writeAttributes(Item* item, std::ofstream& out) {
 	out << "== Attributes ==\n\n";
 
 	out << "{| class = \"wikitable\"\n";
-	out << "| -\n";
+	out << "|-\n";
 	out << "!Attribute\n";
 	out << "!Value\n";
-	out << "| -\n";
 
 	if (item->getType() == ItemType::Equipment_weapon && item->getCheck().isWeapon) {
 		auto weaponBean = item->getBean<ItemWeaponBean>();
+		out << "|-\n";
 		out << "| [[Weapon Damage]]\n";
 		out << "| " + std::to_string(weaponBean->chop_damage) + "\n";
-		out << "| -\n";
 
+		out << "|-\n";
 		out << "| [[Cooldown]]\n";
 		out << "| " + toStrMaxDecimals(weaponBean->chop_cooldown.asSeconds(), 1) + "s\n";
-		out << "| -\n";
 	}
 
 	if (food && food->food_duration > sf::Time::Zero) {
+		out << "|-\n";
 		out << "| [[Duration]]\n";
 		out << "| " + std::to_string(static_cast<int>(floor(food->food_duration.asSeconds()))) + "s\n";
 	}
 
 	for (auto& it : AttributeData::ATTR_MAP) {
-		out << "| -\n";
 		out << AttributeData::getAttributeTextWiki(it.first, it.second(attr));
 	}
 
@@ -166,7 +181,14 @@ void ItemExport::writeConvertible(Item* item, std::ofstream& out) {
 	const ItemConvertibleBean* c = item->getBean<ItemConvertibleBean>();
 	if (!c) return;
 
-	auto otherName = g_textProvider->getText(item->getID(), "item");
+	std::string otherName;
+
+	if (c->convertible_item_id == "gold") {
+		otherName = "Gold";
+	}
+	else {
+		otherName = getItemName(g_resourceManager->getItem(c->convertible_item_id));
+	}
 
 	out << "== Convertible ==\n\n";
 
@@ -180,34 +202,63 @@ void ItemExport::writeWeapon(Item* item, std::ofstream& out) {
 	}
 
 	out << "== Spell Slots ==\n\n";
-    
-    out << "{| class = \"wikitable\"\n";
-    out << "| -\n";
-    out << "!Magic Type\n";
-    out << "!Gem Slots\n";  
+
+	out << "{| class = \"wikitable\"\n";
+	out << "|-\n";
+	out << "!Magic Type\n";
+	out << "!Gem Slots\n";
 
 	for (auto& it : wep->getWeaponSlots()) {
-        out << "| -\n";
+		out << "|-\n";
 		out << "|[[" + g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)) + "]]\n";
-		out << "|\n" std::to_string(it.spellModifiers.size()) + "\n";
+		out << "|\n" + std::to_string(it.spellModifiers.size()) + "\n";
 	}
 
-    out << "|}\n\n";
+	out << "|}\n\n";
 }
 
 void ItemExport::writeDocument(Item* item, std::ofstream& out) {
+	auto const pages = item->getBeans<ItemDocumentPageBean>();
+	if (pages.empty()) {
+		return;
+	}
 
+	out << "== Document ==\n\n";
+
+	out << "{| class = \"wikitable\"\n";
+	out << "|-\n";
+	out << "!Title\n";
+	out << "!Content\n";
+
+	for (auto page : pages) {
+		out << "|-\n";
+		if (!page->title.empty()) {
+			out << "| " + g_textProvider->getText(page->title, "document") + "\n";
+		}
+		else {
+			out << "| \n";
+		}
+
+		if (!page->content.empty()) {
+			out << "| " + g_textProvider->getText(page->content, "document") + "\n";
+		}
+		else {
+			out << "| \n";
+		}
+	}
+
+	out << "|}\n\n";
 }
 
 void ItemExport::writeInfobox(Item* item, std::ofstream& out) {
-	auto name = g_textProvider->getText(item->getID(), "item");
+	auto name = getItemName(item);
 	auto typeName = getTypeName(item->getType());
 	auto rarity = getRarity(item->getRarity());
 	auto goldValue = item->getValue() < 0 ? "Unsalable" : std::to_string(item->getValue());
 
 	out << std::string("{{ItemInfobox\n") +
 		"| name = " + name + "\n" +
-		"| image = " + item->getID() + ".png\n" +
+		"| image = " + name + ".png\n" +
 		"| type = " + typeName + "\n" +
 		"| rarity = " + rarity + "\n" +
 		"| value = " + goldValue + "\n" +
@@ -218,9 +269,9 @@ void ItemExport::writeInfobox(Item* item, std::ofstream& out) {
 void ItemExport::writeCategories(Item* item, std::ofstream& out) {
 	out << "[[Category:Item]] ";
 
-	out << "[[Category:" + getTypeName(item->getType) + " Item]]";
+	out << "[[Category:" + getTypeName(item->getType()) + " Item]]";
 
-	if (item->isEquipmentType(item->getType)) {
+	if (item->isEquipmentType(item->getType())) {
 		out << "[[Category:Equipment]]";
 	}
 
@@ -235,6 +286,6 @@ void ItemExport::savePicture(Item* item) {
 	texImg.create(50, 50, COLOR_TRANSPARENT);
 	texImg.copy(fullImg, 0, 0, sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50));
 
-	auto name = g_textProvider->getText(item->getID(), "item");
+	auto name = getItemName(item);
 	texImg.saveToFile(EXPORT_PATH + name + ".png");
 }

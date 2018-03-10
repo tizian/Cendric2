@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Lesser Healing Potion
+| image = Lesser Healing Potion.png
+| type = Consumable
+| rarity = Common (0)
+| value = 10
+| ID = fo_lesserhealingpotion
+}}
+
+== Description ==
+
+''Heals small wounds and scratches.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 5s
+|-
+| [[Health Regeneration / s]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

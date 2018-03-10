@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Wind Rose
+| image = Wind Rose.png
+| type = Consumable
+| rarity = Common (0)
+| value = 20
+| ID = fo_windrose
+}}
+
+== Description ==
+
+''A rare herb that grants incredible reflexes when eaten.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 15s
+|-
+| [[Haste]]
+| +50
+|-
+| [[Critical]]
+| +4
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

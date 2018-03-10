@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Tunic of the Recruit
+| image = Tunic of the Recruit.png
+| type = Equipment (Body)
+| rarity = Uncommon (1)
+| value = 75
+| ID = eq_body_divinet1
+}}
+
+== Description ==
+
+''A light but noble armour.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +10
+|-
+| [[Haste]]
+| +4
+|-
+| [[Critical]]
+| +2
+|-
+| [[Healing Power]]
+| +1
+|-
+| [[Fire Damage]]
+| +2
+|-
+| [[Light Damage]]
+| +2
+|-
+| [[Armour]]
+| +6
+|-
+| [[Light Resistance]]
+| +5
+|-
+| [[Shadow Resistance]]
+| +5
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

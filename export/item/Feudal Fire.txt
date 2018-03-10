@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Feudal Fire
+| image = Feudal Fire.png
+| type = Permanent
+| rarity = Rare (2)
+| value = Unsalable
+| ID = pe_feudalfire
+}}
+
+== Description ==
+
+''A strong spirit, it's used for alchemistic purposes.''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

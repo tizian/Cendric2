@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Pile of Magical Pearls
+| image = Pile of Magical Pearls.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = 50
+| ID = mi_pearlpile
+}}
+
+== Description ==
+
+''Maybe someone could use these pearls to craft something.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

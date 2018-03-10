@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Novice's Cover
+| image = Novice's Cover.png
+| type = Equipment (Back)
+| rarity = Uncommon (1)
+| value = 50
+| ID = eq_back_necrot1
+}}
+
+== Description ==
+
+''A short decorative cape.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +3
+|-
+| [[Haste]]
+| +2
+|-
+| [[Critical]]
+| +1
+|-
+| [[Ice Damage]]
+| +1
+|-
+| [[Shadow Damage]]
+| +1
+|-
+| [[Armour]]
+| +5
+|-
+| [[Light Resistance]]
+| +10
+|-
+| [[Shadow Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Back) Item]][[Category:Equipment]]
+

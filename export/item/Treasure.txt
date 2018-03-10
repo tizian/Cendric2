@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Treasure
+| image = Treasure.png
+| type = Gold
+| rarity = Common (0)
+| value = 50
+| ID = go_treasure
+}}
+
+== Description ==
+
+A gold item, which results in 50 gold when picked up.
+
+[[Category:Item]] [[Category:Gold Item]]
+

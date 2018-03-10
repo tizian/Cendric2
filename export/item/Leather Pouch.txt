@@ -1,0 +1,19 @@
+{{ItemInfobox
+| name = Leather Pouch
+| image = Leather Pouch.png
+| type = Convertible
+| rarity = Common (0)
+| value = 20
+| ID = co_mediumpouch
+}}
+
+== Description ==
+
+''The pouch is filled with coins.''
+
+== Convertible ==
+
+This item can be converted to 20x [[Gold]] with a probability of 100%.
+
+[[Category:Item]] [[Category:Convertible Item]]
+

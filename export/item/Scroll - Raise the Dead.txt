@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Raise the Dead
+| image = Scroll - Raise the Dead.png
+| type = Spell Scroll
+| rarity = Rare (2)
+| value = Unsalable
+| ID = sp_raisethedead
+}}
+
+== Description ==
+
+''Raises fallen enemies that will fight for you for a certain duration, if the spell is strong enough.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

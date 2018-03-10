@@ -1,5 +1,6 @@
 #include "Export/WikiExporter.h"
+#include "Export/ItemExport.h"
 
-void WikiExporter::exportItems() {
-	// TODO
+void WikiExporter::exportWiki() {
+	ItemExport::exportItems();
 }

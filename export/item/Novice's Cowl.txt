@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Novice's Cowl
+| image = Novice's Cowl.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 45
+| ID = eq_head_necrot1
+}}
+
+== Description ==
+
+''Shields perfectly against any light.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +6
+|-
+| [[Haste]]
+| +4
+|-
+| [[Critical]]
+| +1
+|-
+| [[Ice Damage]]
+| +1
+|-
+| [[Shadow Damage]]
+| +1
+|-
+| [[Armour]]
+| +5
+|-
+| [[Light Resistance]]
+| +4
+|-
+| [[Shadow Resistance]]
+| +4
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

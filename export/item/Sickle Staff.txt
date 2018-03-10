@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Sickle Staff
+| image = Sickle Staff.png
+| type = Equipment (Weapon)
+| rarity = Epic (3)
+| value = 210
+| ID = we_sicklestaff
+}}
+
+== Description ==
+
+''The ruby gem glows and concentrates elemental energy.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 5
+|-
+| [[Cooldown]]
+| 1.0s
+|-
+| [[Health]]
+| +10
+|-
+| [[Physical Damage]]
+| +5
+|-
+| [[Fire Damage]]
+| +15
+|-
+| [[Ice Damage]]
+| +15
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

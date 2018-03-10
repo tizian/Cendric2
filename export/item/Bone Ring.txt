@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Bone Ring
+| image = Bone Ring.png
+| type = Equipment (Ring)
+| rarity = Uncommon (1)
+| value = 15
+| ID = eq_bonering
+}}
+
+== Description ==
+
+''Made from smoothed bones.''
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

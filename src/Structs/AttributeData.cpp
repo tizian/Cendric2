@@ -36,6 +36,7 @@ std::string AttributeData::getAttributeText(const std::string& name, int value, 
 std::string AttributeData::getAttributeTextWiki(const std::string& name, int value) {
 	if (value == 0) return "";
 	std::string s;
+	s.append("|-\n");
 	s.append("| [[" + g_textProvider->getText(name) + "]]\n");
 
 	std::string valText;

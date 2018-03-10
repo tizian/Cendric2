@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Torch
+| image = Torch.png
+| type = Equipment (Weapon)
+| rarity = Uncommon (1)
+| value = 40
+| ID = we_torch
+}}
+
+== Description ==
+
+''Lights the way.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 8
+|-
+| [[Cooldown]]
+| 0.6s
+|-
+| [[Physical Damage]]
+| +2
+|-
+| [[Fire Damage]]
+| +2
+|-
+| [[Ice Resistance]]
+| +40
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

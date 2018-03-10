@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Medium Healing Potion
+| image = Medium Healing Potion.png
+| type = Consumable
+| rarity = Common (0)
+| value = 20
+| ID = fo_mediumhealingpotion
+}}
+
+== Description ==
+
+''Heals most moderate injuries.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 5s
+|-
+| [[Health Regeneration / s]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

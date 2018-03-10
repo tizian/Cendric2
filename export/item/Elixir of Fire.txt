@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Elixir of Fire
+| image = Elixir of Fire.png
+| type = Permanent
+| rarity = Rare (2)
+| value = 150
+| ID = pe_elixirfire
+}}
+
+== Description ==
+
+''Increases the fire damage permanently.''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

@@ -12,6 +12,7 @@ public:
 
 	void run();
 	void runTests();
+	void runWikiExport();
 
 private:
 	bool m_running;

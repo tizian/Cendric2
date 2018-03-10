@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Organist's Key
+| image = Organist's Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_cathedral
+}}
+
+== Description ==
+
+''A small organ pipe. It must have belonged to the organist of the cathedral.''
+
+[[Category:Item]] [[Category:Key Item]]
+

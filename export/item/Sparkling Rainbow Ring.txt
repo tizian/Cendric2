@@ -1,0 +1,59 @@
+{{ItemInfobox
+| name = Sparkling Rainbow Ring
+| image = Sparkling Rainbow Ring.png
+| type = Equipment (Ring)
+| rarity = Epic (3)
+| value = 200
+| ID = eq_sparkling_rainbow
+}}
+
+== Description ==
+
+''To each his own, and I take everything.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Haste]]
+| +2
+|-
+| [[Physical Damage]]
+| +1
+|-
+| [[Fire Damage]]
+| +1
+|-
+| [[Ice Damage]]
+| +1
+|-
+| [[Light Damage]]
+| +1
+|-
+| [[Shadow Damage]]
+| +1
+|-
+| [[Armour]]
+| +2
+|-
+| [[Fire Resistance]]
+| +2
+|-
+| [[Ice Resistance]]
+| +2
+|-
+| [[Light Resistance]]
+| +2
+|-
+| [[Shadow Resistance]]
+| +2
+|}
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

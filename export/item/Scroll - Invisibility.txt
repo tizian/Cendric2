@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Invisibility
+| image = Scroll - Invisibility.png
+| type = Spell Scroll
+| rarity = Rare (2)
+| value = Unsalable
+| ID = sp_invisibility
+}}
+
+== Description ==
+
+''Renders you invisible to certain enemies, for a certain duration''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

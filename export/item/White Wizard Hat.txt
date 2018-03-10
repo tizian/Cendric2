@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = White Wizard Hat
+| image = White Wizard Hat.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 50
+| ID = eq_wizardhatlight
+}}
+
+== Description ==
+
+''A perfect fit for a mage.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Light Damage]]
+| +4
+|-
+| [[Armour]]
+| +10
+|-
+| [[Light Resistance]]
+| +15
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

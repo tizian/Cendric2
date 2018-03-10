@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Test/CendricTests.h"
+#include "Export/WikiExporter.h"
 #include "Misc/icon.h"
 #ifdef STEAM
 #include "steam-sdk/public/steam/steam_api.h"
@@ -158,4 +159,8 @@ void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {
 
 void Game::runTests() {
 	CendricTests::runTests();
+}
+
+void Game::runWikiExport() {
+	WikiExporter::exportWiki();
 }

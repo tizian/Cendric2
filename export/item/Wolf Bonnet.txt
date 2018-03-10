@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Wolf Bonnet
+| image = Wolf Bonnet.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 55
+| ID = eq_wolfbonnet
+}}
+
+== Description ==
+
+''Warm and cuddly. Crafted by the leatherworker Zeff.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Physical Damage]]
+| +2
+|-
+| [[Armour]]
+| +10
+|-
+| [[Ice Resistance]]
+| +20
+|-
+| [[Light Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

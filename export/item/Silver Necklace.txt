@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Silver Necklace
+| image = Silver Necklace.png
+| type = Equipment (Neck)
+| rarity = Uncommon (1)
+| value = 20
+| ID = eq_silvernecklace
+}}
+
+== Description ==
+
+''The small chain links shine.''
+
+[[Category:Item]] [[Category:Equipment (Neck) Item]][[Category:Equipment]]
+

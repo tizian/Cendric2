@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Pearl Sabre
+| image = Pearl Sabre.png
+| type = Equipment (Weapon)
+| rarity = Rare (2)
+| value = 150
+| ID = we_pearlsabre
+}}
+
+== Description ==
+
+''Its nacre blade shines dimly.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 6
+|-
+| [[Cooldown]]
+| 0.6s
+|-
+| [[Health]]
+| +14
+|-
+| [[Critical]]
+| +2
+|-
+| [[Physical Damage]]
+| +10
+|-
+| [[Ice Damage]]
+| +4
+|-
+| [[Light Damage]]
+| +4
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

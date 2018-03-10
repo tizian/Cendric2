@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Letter of Recommendation
+| image = Letter of Recommendation.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_recommendationletter
+}}
+
+== Description ==
+
+''A letter of recommendation from the High Priestess Inina. It is sealed.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

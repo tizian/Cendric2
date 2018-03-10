@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Silkweed
+| image = Silkweed.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_silkweed
+}}
+
+== Description ==
+
+''Will hopefully bring my memories back when brewed into a potion.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

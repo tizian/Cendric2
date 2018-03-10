@@ -1,0 +1,31 @@
+{{ItemInfobox
+| name = Mysterious Letter
+| image = Mysterious Letter.png
+| type = Document
+| rarity = Common (0)
+| value = Unsalable
+| ID = do_veliusletter
+}}
+
+== Description ==
+
+''The mercenaries carried this letter with them.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| If you keep bringing me miserable weaklings, your pay will be equally miserable!
+
+Only AFFINE mages. I still need all types, preferably elementalists. 
+
+And keep an eye out for the mark! Don't make me wait any longer - I need them as soon as I'm back from the highlands.
+ - V.
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

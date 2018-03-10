@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Iron Ring
+| image = Iron Ring.png
+| type = Equipment (Ring)
+| rarity = Uncommon (1)
+| value = 20
+| ID = eq_ironring
+}}
+
+== Description ==
+
+''Looks quite chunky.''
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

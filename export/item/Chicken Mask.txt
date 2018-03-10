@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Chicken Mask
+| image = Chicken Mask.png
+| type = Equipment (Head)
+| rarity = Common (0)
+| value = 20
+| ID = eq_chicken
+}}
+
+== Description ==
+
+''The chicken chaser's penalty for chasing chicken.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Critical]]
+| +1
+|-
+| [[Physical Damage]]
+| +2
+|-
+| [[Armour]]
+| +10
+|-
+| [[Ice Resistance]]
+| +10
+|-
+| [[Light Resistance]]
+| +30
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

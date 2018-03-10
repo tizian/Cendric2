@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Feather
+| image = Feather.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 4
+| ID = mi_feather
+}}
+
+== Description ==
+
+''This tail feather is long and well preserved.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

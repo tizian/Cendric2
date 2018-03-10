@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Beer
+| image = Beer.png
+| type = Consumable
+| rarity = Common (0)
+| value = 6
+| ID = fo_beer
+}}
+
+== Description ==
+
+''Should be consumed in moderation.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| -1
+|-
+| [[Physical Damage]]
+| +10
+|-
+| [[Armour]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

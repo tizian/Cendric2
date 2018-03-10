@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Anti Gravity
+| image = Scroll - Anti Gravity.png
+| type = Spell Scroll
+| rarity = Epic (3)
+| value = Unsalable
+| ID = sp_antigravity
+}}
+
+== Description ==
+
+''Reverses your gravity.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

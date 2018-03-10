@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Necrotic Grimoire
+| image = Necrotic Grimoire.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_necrobook
+}}
+
+== Description ==
+
+''I hope it won't come to life again.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

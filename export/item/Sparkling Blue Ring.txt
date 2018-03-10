@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Sparkling Blue Ring
+| image = Sparkling Blue Ring.png
+| type = Equipment (Ring)
+| rarity = Epic (3)
+| value = 200
+| ID = eq_sparkling_blue
+}}
+
+== Description ==
+
+''The blue stone reinforces the shadow magic of its wearer.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Shadow Damage]]
+| +5
+|-
+| [[Shadow Resistance]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Equipment (Ring) Item]][[Category:Equipment]]
+

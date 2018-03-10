@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Heart of Khajag
+| image = Heart of Khajag.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = Unsalable
+| ID = mi_firstguardianheart
+}}
+
+== Description ==
+
+''This gem is the only thing left from the giant wolf guardian of the howling caverns.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

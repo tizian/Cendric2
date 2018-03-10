@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Oathbreaker
+| image = Oathbreaker.png
+| type = Equipment (Weapon)
+| rarity = Epic (3)
+| value = 400
+| ID = we_oathbreaker
+}}
+
+== Description ==
+
+''The legendary twin-daggers Oath and Breaker. Some say that the cyan stones hold captured souls.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 8
+|-
+| [[Cooldown]]
+| 0.3s
+|-
+| [[Health]]
+| +4
+|-
+| [[Haste]]
+| +50
+|-
+| [[Critical]]
+| +12
+|-
+| [[Physical Damage]]
+| +10
+|-
+| [[Ice Damage]]
+| +10
+|-
+| [[Shadow Damage]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

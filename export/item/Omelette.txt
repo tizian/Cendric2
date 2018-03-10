@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Omelette
+| image = Omelette.png
+| type = Consumable
+| rarity = Common (0)
+| value = 3
+| ID = fo_omelette
+}}
+
+== Description ==
+
+''Delicious taste and strengthening effect.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +4
+|-
+| [[Physical Damage]]
+| +10
+|-
+| [[Armour]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

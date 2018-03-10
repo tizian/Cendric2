@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Candleholder
+| image = Candleholder.png
+| type = Miscellaneous
+| rarity = Common (0)
+| value = 40
+| ID = mi_candleholder
+}}
+
+== Description ==
+
+''Made of silver, must be worth something.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

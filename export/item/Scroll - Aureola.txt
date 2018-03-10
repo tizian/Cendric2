@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Aureola
+| image = Scroll - Aureola.png
+| type = Spell Scroll
+| rarity = Epic (3)
+| value = Unsalable
+| ID = sp_aureola
+}}
+
+== Description ==
+
+''Sends balls of light in all directions, if they hit an enemy they will return to you and heal you.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

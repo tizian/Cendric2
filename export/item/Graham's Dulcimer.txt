@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Graham's Dulcimer
+| image = Graham's Dulcimer.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_dulcimer
+}}
+
+== Description ==
+
+''What a beautiful instrument! It belongs to the bard Graham.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Nekomata Cloak
+| image = Nekomata Cloak.png
+| type = Equipment (Back)
+| rarity = Rare (2)
+| value = 145
+| ID = eq_nekomataback
+}}
+
+== Description ==
+
+''Both an experienced hunter and a skilled leatherworker are involved in the creation of such a cape.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +20
+|-
+| [[Haste]]
+| +10
+|-
+| [[Critical]]
+| +4
+|-
+| [[Physical Damage]]
+| +1
+|-
+| [[Fire Damage]]
+| +2
+|-
+| [[Shadow Damage]]
+| +2
+|-
+| [[Armour]]
+| +8
+|-
+| [[Light Resistance]]
+| +40
+|}
+
+[[Category:Item]] [[Category:Equipment (Back) Item]][[Category:Equipment]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Sewer Key
+| image = Sewer Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_sewerkey
+}}
+
+== Description ==
+
+''Opens certain doors in the sewers of Gandria.''
+
+[[Category:Item]] [[Category:Key Item]]
+

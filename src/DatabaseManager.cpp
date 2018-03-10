@@ -718,8 +718,14 @@ std::vector<std::string> DatabaseManager::getAllItemIds() const {
 		if (cols != 1) {
 			return allIds;
 		}
-		if (sqlite3_step(statement) == SQLITE_ROW) {
-			allIds.push_back(std::string((char*)sqlite3_column_text(statement, 0)));
+
+		while (true) {
+			if (sqlite3_step(statement) == SQLITE_ROW) {
+				allIds.push_back(std::string((char*)sqlite3_column_text(statement, 0)));
+			}
+			else {
+				break;
+			}
 		}
 
 		sqlite3_finalize(statement);

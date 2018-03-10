@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Glowing Shroom
+| image = Glowing Shroom.png
+| type = Consumable
+| rarity = Common (0)
+| value = 2
+| ID = fo_glowingshroom
+}}
+
+== Description ==
+
+''It still glows...''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 15s
+|-
+| [[Health Regeneration / s]]
+| +1
+|-
+| [[Light Damage]]
+| +5
+|-
+| [[Shadow Resistance]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

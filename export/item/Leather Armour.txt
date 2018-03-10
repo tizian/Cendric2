@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Leather Armour
+| image = Leather Armour.png
+| type = Equipment (Body)
+| rarity = Uncommon (1)
+| value = 45
+| ID = eq_leatherarmor
+}}
+
+== Description ==
+
+''The reinforced leather protects from attacks.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +10
+|-
+| [[Armour]]
+| +15
+|-
+| [[Fire Resistance]]
+| +10
+|-
+| [[Ice Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

@@ -1,0 +1,28 @@
+{{ItemInfobox
+| name = Koray's Note
+| image = Koray's Note.png
+| type = Document
+| rarity = Common (0)
+| value = Unsalable
+| ID = do_notekoray
+}}
+
+== Description ==
+
+''A suspicious note, found in the Ascent.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| Turn back. I don't know if I'll ever escape. Can't think properly.
+
+-- Koray
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

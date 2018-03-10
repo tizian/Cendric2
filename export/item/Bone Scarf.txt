@@ -1,0 +1,47 @@
+{{ItemInfobox
+| name = Bone Scarf
+| image = Bone Scarf.png
+| type = Equipment (Back)
+| rarity = Epic (3)
+| value = 200
+| ID = eq_back_necrot3
+}}
+
+== Description ==
+
+''This scarf is made from the tail of a monstrous scorpion.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +12
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +4
+|-
+| [[Ice Damage]]
+| +4
+|-
+| [[Shadow Damage]]
+| +4
+|-
+| [[Armour]]
+| +20
+|-
+| [[Light Resistance]]
+| +40
+|-
+| [[Shadow Resistance]]
+| +40
+|}
+
+[[Category:Item]] [[Category:Equipment (Back) Item]][[Category:Equipment]]
+

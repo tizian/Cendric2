@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Morgiana's Bloodstone
+| image = Morgiana's Bloodstone.png
+| type = Equipment (Neck)
+| rarity = Rare (2)
+| value = 60
+| ID = eq_bloodstone
+}}
+
+== Description ==
+
+''This amulet belonged to the mercenary Morgiana and gave her incredible stamina.''
+
+[[Category:Item]] [[Category:Equipment (Neck) Item]][[Category:Equipment]]
+

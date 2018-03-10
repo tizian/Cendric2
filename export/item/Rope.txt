@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Rope
+| image = Rope.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_rope
+}}
+
+== Description ==
+
+''A strong coil of hemp rope.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

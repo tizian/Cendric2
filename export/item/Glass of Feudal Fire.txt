@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Glass of Feudal Fire
+| image = Glass of Feudal Fire.png
+| type = Permanent
+| rarity = Uncommon (1)
+| value = 30
+| ID = pe_glassoffeudalfire
+}}
+
+== Description ==
+
+''A strong spirit.''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

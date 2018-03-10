@@ -1,0 +1,68 @@
+{{ItemInfobox
+| name = Magic Potions
+| image = Magic Potions.png
+| type = Document
+| rarity = Uncommon (1)
+| value = Unsalable
+| ID = bo_potions
+}}
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| Magic Potions
+| 
+|-
+| Healing Potions
+| Lesser Healing Potion 
+---
+1 Healing herb
+1 Water bottle
+
+
+Medium Healing Potion 
+---
+2 Healing herb
+1 Water bottle
+
+
+Greater Healing Potion
+---
+3 Healing herb
+1 Water bottle
+|-
+| Permanent Potions
+| Elixir of Fire
+---
+1 Red Hat
+1 Storm Weed
+1 Wine
+
+
+Elixir of Light
+---
+1 Glowing Shroom
+1 Storm Weed
+1 Wine
+
+
+Elixir of Shadows
+---
+1 Cave Berries
+1 Storm Weed
+1 Wine
+
+
+Elixir of Ice
+---
+1 Wind Rose
+1 Storm Weed
+1 Wine
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

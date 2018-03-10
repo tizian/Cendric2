@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Storm Weed
+| image = Storm Weed.png
+| type = Consumable
+| rarity = Rare (2)
+| value = 100
+| ID = fo_stormweed
+}}
+
+== Description ==
+
+''Is only fully effective as a component of a potion.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +1
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

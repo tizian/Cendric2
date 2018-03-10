@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Small Silver Key
+| image = Small Silver Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_smallsilver
+}}
+
+== Description ==
+
+''I found this key in the Elder's chest. It may belong to a casket.''
+
+[[Category:Item]] [[Category:Key Item]]
+

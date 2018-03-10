@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Yaslaw's Mask
+| image = Yaslaw's Mask.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_yashamask
+}}
+
+== Description ==
+
+''This mask granted the necromancer Yaslaw special powers.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

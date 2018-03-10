@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Crown
+| image = Crown.png
+| type = Equipment (Head)
+| rarity = Rare (2)
+| value = 200
+| ID = eq_crown
+}}
+
+== Description ==
+
+''Golden and shiny.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +30
+|-
+| [[Haste]]
+| +10
+|-
+| [[Critical]]
+| +10
+|-
+| [[Healing Power]]
+| +2
+|-
+| [[Armour]]
+| +30
+|-
+| [[Shadow Resistance]]
+| +30
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

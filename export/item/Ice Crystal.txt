@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Ice Crystal
+| image = Ice Crystal.png
+| type = Miscellaneous
+| rarity = Rare (2)
+| value = 40
+| ID = mi_icecrystal
+}}
+
+== Description ==
+
+''An exceptionally beautiful crystal. Maybe someone could craft something from it.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

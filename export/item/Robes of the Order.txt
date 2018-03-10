@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Robes of the Order
+| image = Robes of the Order.png
+| type = Equipment (Body)
+| rarity = Rare (2)
+| value = 150
+| ID = eq_body_divinet2
+}}
+
+== Description ==
+
+''Worn by the priests of the order.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +20
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +4
+|-
+| [[Healing Power]]
+| +2
+|-
+| [[Fire Damage]]
+| +4
+|-
+| [[Light Damage]]
+| +4
+|-
+| [[Armour]]
+| +12
+|-
+| [[Light Resistance]]
+| +10
+|-
+| [[Shadow Resistance]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Summon Gargoyle
+| image = Scroll - Summon Gargoyle.png
+| type = Spell Scroll
+| rarity = Epic (3)
+| value = Unsalable
+| ID = sp_summongargoyle
+}}
+
+== Description ==
+
+''Summons a mighty gargoyle that serves you and attacks enemies.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

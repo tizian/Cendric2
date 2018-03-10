@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Rusty Key
+| image = Rusty Key.png
+| type = Key
+| rarity = Common (0)
+| value = Unsalable
+| ID = ke_thiefguild
+}}
+
+== Description ==
+
+''This key is partly corroded.''
+
+[[Category:Item]] [[Category:Key Item]]
+

@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Raw Meat
+| image = Raw Meat.png
+| type = Consumable
+| rarity = Common (0)
+| value = 2
+| ID = fo_rawmeat
+}}
+
+== Description ==
+
+''Would taste better if it was roasted on a fire.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +5
+|-
+| [[Physical Damage]]
+| +5
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

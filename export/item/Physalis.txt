@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Physalis
+| image = Physalis.png
+| type = Consumable
+| rarity = Common (0)
+| value = 5
+| ID = fo_physalis
+}}
+
+== Description ==
+
+''Looks tasty.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 20s
+|-
+| [[Health Regeneration / s]]
+| -2
+|-
+| [[Physical Damage]]
+| +7
+|-
+| [[Light Damage]]
+| +7
+|-
+| [[Shadow Damage]]
+| +7
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Ice Staff
+| image = Ice Staff.png
+| type = Equipment (Weapon)
+| rarity = Rare (2)
+| value = 130
+| ID = we_icestaff
+}}
+
+== Description ==
+
+''Feels ice cold.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 4
+|-
+| [[Cooldown]]
+| 1.0s
+|-
+| [[Health]]
+| +10
+|-
+| [[Ice Damage]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

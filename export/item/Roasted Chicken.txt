@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Roasted Chicken
+| image = Roasted Chicken.png
+| type = Consumable
+| rarity = Common (0)
+| value = 3
+| ID = fo_chicken
+}}
+
+== Description ==
+
+''Crispy outside and tender inside.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +5
+|-
+| [[Haste]]
+| +10
+|-
+| [[Physical Damage]]
+| +3
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

@@ -1,0 +1,38 @@
+{{ItemInfobox
+| name = Sack
+| image = Sack.png
+| type = Equipment (Head)
+| rarity = Common (0)
+| value = 5
+| ID = eq_sack
+}}
+
+== Description ==
+
+''Syrah's solution for my blonde hair.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Critical]]
+| -5
+|-
+| [[Physical Damage]]
+| -5
+|-
+| [[Armour]]
+| +5
+|-
+| [[Ice Resistance]]
+| +10
+|-
+| [[Light Resistance]]
+| +100
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

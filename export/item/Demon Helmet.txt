@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Demon Helmet
+| image = Demon Helmet.png
+| type = Equipment (Head)
+| rarity = Rare (2)
+| value = 190
+| ID = eq_demonhead
+}}
+
+== Description ==
+
+''Helmet worn by demon hunters.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +40
+|-
+| [[Physical Damage]]
+| +4
+|-
+| [[Shadow Damage]]
+| +4
+|-
+| [[Armour]]
+| +50
+|-
+| [[Fire Resistance]]
+| +30
+|-
+| [[Shadow Resistance]]
+| +30
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

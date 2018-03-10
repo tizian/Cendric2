@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Icy Ambush
+| image = Scroll - Icy Ambush.png
+| type = Spell Scroll
+| rarity = Epic (3)
+| value = Unsalable
+| ID = sp_icyambush
+}}
+
+== Description ==
+
+''You throw an enchanted dagger that deals high damage and stuns its target. The dagger teleports you to its location once it hits an enemy.''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+

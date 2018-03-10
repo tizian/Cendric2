@@ -1,0 +1,29 @@
+{{ItemInfobox
+| name = Grey Cloth Armour
+| image = Grey Cloth Armour.png
+| type = Equipment (Body)
+| rarity = Common (0)
+| value = 6
+| ID = eq_defaultarmor
+}}
+
+== Description ==
+
+''I wore that piece of cloth when I lost my memory.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +1
+|-
+| [[Armour]]
+| +5
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

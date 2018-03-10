@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Jason's Glaive
+| image = Jason's Glaive.png
+| type = Equipment (Weapon)
+| rarity = Epic (3)
+| value = 250
+| ID = we_jasonsglaive
+}}
+
+== Description ==
+
+''Demonhunter Jason's old weapon.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 8
+|-
+| [[Cooldown]]
+| 0.5s
+|-
+| [[Health]]
+| +11
+|-
+| [[Haste]]
+| +20
+|-
+| [[Critical]]
+| +3
+|-
+| [[Physical Damage]]
+| +20
+|-
+| [[Ice Damage]]
+| +5
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Mask of the Marauder
+| image = Mask of the Marauder.png
+| type = Equipment (Head)
+| rarity = Rare (2)
+| value = 90
+| ID = eq_head_twilightt2
+}}
+
+== Description ==
+
+''Perfect if one doesn't want to be recognized.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +8
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +4
+|-
+| [[Physical Damage]]
+| +2
+|-
+| [[Shadow Damage]]
+| +2
+|-
+| [[Armour]]
+| +6
+|-
+| [[Shadow Resistance]]
+| +8
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

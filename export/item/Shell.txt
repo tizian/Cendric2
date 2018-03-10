@@ -1,0 +1,19 @@
+{{ItemInfobox
+| name = Shell
+| image = Shell.png
+| type = Convertible
+| rarity = Common (0)
+| value = 2
+| ID = co_shell
+}}
+
+== Description ==
+
+''Can be opened. It may contain a pearl, if you're lucky.''
+
+== Convertible ==
+
+This item can be converted to 1x [[Pearl]] with a probability of 30%.
+
+[[Category:Item]] [[Category:Convertible Item]]
+

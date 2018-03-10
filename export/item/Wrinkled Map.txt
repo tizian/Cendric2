@@ -1,0 +1,26 @@
+{{ItemInfobox
+| name = Wrinkled Map
+| image = Wrinkled Map.png
+| type = Document
+| rarity = Uncommon (1)
+| value = Unsalable
+| ID = do_elemap
+}}
+
+== Description ==
+
+''That's definitely some kind of map, but the symbols and text are moving in a way that makes it impossible to make sense of it.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| 
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

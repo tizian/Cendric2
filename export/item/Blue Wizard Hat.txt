@@ -1,0 +1,35 @@
+{{ItemInfobox
+| name = Blue Wizard Hat
+| image = Blue Wizard Hat.png
+| type = Equipment (Head)
+| rarity = Uncommon (1)
+| value = 50
+| ID = eq_wizardhatice
+}}
+
+== Description ==
+
+''A perfect fit for a mage.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +5
+|-
+| [[Ice Damage]]
+| +4
+|-
+| [[Armour]]
+| +10
+|-
+| [[Ice Resistance]]
+| +15
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

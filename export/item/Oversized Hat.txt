@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Oversized Hat
+| image = Oversized Hat.png
+| type = Equipment (Head)
+| rarity = Rare (2)
+| value = 190
+| ID = eq_oversizedhat
+}}
+
+== Description ==
+
+''This hat is way too big for me.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +20
+|-
+| [[Critical]]
+| +2
+|-
+| [[Fire Damage]]
+| +4
+|-
+| [[Ice Damage]]
+| +4
+|-
+| [[Shadow Damage]]
+| +5
+|-
+| [[Armour]]
+| +14
+|-
+| [[Fire Resistance]]
+| +10
+|-
+| [[Ice Resistance]]
+| +15
+|-
+| [[Light Resistance]]
+| +50
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

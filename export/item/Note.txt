@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Note
+| image = Note.png
+| type = Document
+| rarity = Common (0)
+| value = Unsalable
+| ID = do_notemarcus
+}}
+
+== Description ==
+
+''I've found this note nailed to a post in the Howling Caverns.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| To whoever reads this: Beware!
+
+These caverns are full of traps, I only made it to where I am now with a lot of luck. The five levers are designed to kill you if you pull the wrong one. Use the last one first and the first one last, and leave the others untouched.
+
+I hope I'll find a way out of this cave...
+
+-- Paladin Marcus
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

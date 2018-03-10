@@ -1,0 +1,50 @@
+{{ItemInfobox
+| name = Bone Vestments
+| image = Bone Vestments.png
+| type = Equipment (Body)
+| rarity = Epic (3)
+| value = 300
+| ID = eq_body_necrot3
+}}
+
+== Description ==
+
+''Only those who have proven themselves worthy to the necromancers of Admantris are allowed to wear this piece of armour.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +60
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +8
+|-
+| [[Healing Power]]
+| +2
+|-
+| [[Ice Damage]]
+| +8
+|-
+| [[Shadow Damage]]
+| +8
+|-
+| [[Armour]]
+| +30
+|-
+| [[Light Resistance]]
+| +20
+|-
+| [[Shadow Resistance]]
+| +20
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

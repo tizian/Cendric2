@@ -1,0 +1,41 @@
+{{ItemInfobox
+| name = Rafi's Hat
+| image = Rafi's Hat.png
+| type = Equipment (Head)
+| rarity = Common (0)
+| value = 50
+| ID = eq_rafishat
+}}
+
+== Description ==
+
+''What a strange hat...''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +4
+|-
+| [[Haste]]
+| -20
+|-
+| [[Critical]]
+| +10
+|-
+| [[Armour]]
+| +1
+|-
+| [[Fire Resistance]]
+| +2
+|-
+| [[Light Resistance]]
+| +3
+|}
+
+[[Category:Item]] [[Category:Equipment (Head) Item]][[Category:Equipment]]
+

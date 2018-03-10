@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Blood of a Bat
+| image = Blood of a Bat.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_batblood
+}}
+
+== Description ==
+
+''A small vial containing a few drops of blood.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

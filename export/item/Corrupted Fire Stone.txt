@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Corrupted Fire Stone
+| image = Corrupted Fire Stone.png
+| type = Miscellaneous
+| rarity = Uncommon (1)
+| value = 20
+| ID = mi_corrupt_stone_fire
+}}
+
+== Description ==
+
+''This stone has been corrupted by a Lava Wraith and is now infused with magical powers.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

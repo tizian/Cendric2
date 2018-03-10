@@ -1,0 +1,32 @@
+{{ItemInfobox
+| name = Sausage
+| image = Sausage.png
+| type = Consumable
+| rarity = Common (0)
+| value = 6
+| ID = fo_sausage
+}}
+
+== Description ==
+
+''Tasty.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Duration]]
+| 10s
+|-
+| [[Health Regeneration / s]]
+| +15
+|-
+| [[Physical Damage]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Consumable Item]]
+

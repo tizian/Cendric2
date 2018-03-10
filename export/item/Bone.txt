@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Bone
+| image = Bone.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_bone
+}}
+
+== Description ==
+
+''I really don't want to know what kind of bone it is.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

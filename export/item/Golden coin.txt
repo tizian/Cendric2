@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Golden coin
+| image = Golden coin.png
+| type = Gold
+| rarity = Common (0)
+| value = 1
+| ID = go_onecoin
+}}
+
+== Description ==
+
+A gold item, which results in 1 gold when picked up.
+
+[[Category:Item]] [[Category:Gold Item]]
+

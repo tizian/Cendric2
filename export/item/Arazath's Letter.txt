@@ -1,0 +1,31 @@
+{{ItemInfobox
+| name = Arazath's Letter
+| image = Arazath's Letter.png
+| type = Document
+| rarity = Common (0)
+| value = Unsalable
+| ID = do_arazathletter
+}}
+
+== Description ==
+
+''This letter was in the last chest on top of the mysterious tower.''
+
+== Document ==
+
+{| class = "wikitable"
+|-
+!Title
+!Content
+|-
+| 
+| Dear Etoz:
+Finally, you have grown into the skilful little mage I always hoped you would become. You do not know how glad you have made your old Pa. This weapon is now yours. It has been passed from father to son for generations, but after your father slipped in the third tower I knew I had to break tradition and skip a generation. 
+
+If you had any accidents in the tower, please heal yourself with the potion I left in the chest. 
+
+- Arazath
+|}
+
+[[Category:Item]] [[Category:Document Item]]
+

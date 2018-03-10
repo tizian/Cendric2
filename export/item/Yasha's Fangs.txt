@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Yasha's Fangs
+| image = Yasha's Fangs.png
+| type = Miscellaneous
+| rarity = Epic (3)
+| value = Unsalable
+| ID = mi_yashafangs
+}}
+
+== Description ==
+
+''The huge fangs of the demon Yasha. Maybe someone could craft something with it.''
+
+[[Category:Item]] [[Category:Miscellaneous Item]]
+

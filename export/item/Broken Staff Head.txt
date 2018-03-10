@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Broken Staff Head
+| image = Broken Staff Head.png
+| type = Quest
+| rarity = Common (0)
+| value = Unsalable
+| ID = qe_brokenstaff2
+}}
+
+== Description ==
+
+''Seems like a part of a staff. Maybe I can find someone who can repair it.''
+
+[[Category:Item]] [[Category:Quest Item]]
+

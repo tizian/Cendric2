@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Elixir of Light
+| image = Elixir of Light.png
+| type = Permanent
+| rarity = Rare (2)
+| value = 150
+| ID = pe_elixirlight
+}}
+
+== Description ==
+
+''Increases the light damage permanently.''
+
+[[Category:Item]] [[Category:Permanent Item]]
+

@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Marauder Jerkin
+| image = Marauder Jerkin.png
+| type = Equipment (Body)
+| rarity = Rare (2)
+| value = 150
+| ID = eq_body_twilightt2
+}}
+
+== Description ==
+
+''Be one with the shadows.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Health]]
+| +19
+|-
+| [[Haste]]
+| +8
+|-
+| [[Critical]]
+| +5
+|-
+| [[Physical Damage]]
+| +4
+|-
+| [[Shadow Damage]]
+| +4
+|-
+| [[Armour]]
+| +20
+|-
+| [[Shadow Resistance]]
+| +15
+|}
+
+[[Category:Item]] [[Category:Equipment (Body) Item]][[Category:Equipment]]
+

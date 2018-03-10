@@ -1,0 +1,44 @@
+{{ItemInfobox
+| name = Lightning Pike
+| image = Lightning Pike.png
+| type = Equipment (Weapon)
+| rarity = Epic (3)
+| value = 200
+| ID = we_lightningpike
+}}
+
+== Description ==
+
+''Made from the tail of a storm bird.''
+
+== Attributes ==
+
+{| class = "wikitable"
+|-
+!Attribute
+!Value
+|-
+| [[Weapon Damage]]
+| 6
+|-
+| [[Cooldown]]
+| 1.0s
+|-
+| [[Health]]
+| +9
+|-
+| [[Critical]]
+| +7
+|-
+| [[Physical Damage]]
+| +6
+|-
+| [[Fire Damage]]
+| +5
+|-
+| [[Light Damage]]
+| +10
+|}
+
+[[Category:Item]] [[Category:Equipment (Weapon) Item]][[Category:Equipment]]
+

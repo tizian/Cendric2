@@ -1,0 +1,15 @@
+{{ItemInfobox
+| name = Scroll - Light
+| image = Scroll - Light.png
+| type = Spell Scroll
+| rarity = Rare (2)
+| value = Unsalable
+| ID = sp_light
+}}
+
+== Description ==
+
+''There shall be light!''
+
+[[Category:Item]] [[Category:Spell Scroll Item]]
+
