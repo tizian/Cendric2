@@ -706,3 +706,25 @@ SpawnBean* DatabaseManager::getSpawnBean(const std::string& spawn_id) const {
 
 	return bean;
 }
+
+std::vector<std::string> DatabaseManager::getAllItemIds() const {
+	std::vector<std::string> allIds;
+
+	sqlite3_stmt* statement;
+	std::string query = "SELECT item_id FROM item;";
+
+	if (sqlite3_prepare_v2(m_db, query.c_str(), -1, &statement, 0) == SQLITE_OK) {
+		int cols = sqlite3_column_count(statement);
+		if (cols != 1) {
+			return allIds;
+		}
+		if (sqlite3_step(statement) == SQLITE_ROW) {
+			allIds.push_back(std::string((char*)sqlite3_column_text(statement, 0)));
+		}
+
+		sqlite3_finalize(statement);
+	}
+
+	checkError();
+	return allIds;
+}

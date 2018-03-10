@@ -33,6 +33,22 @@ std::string AttributeData::getAttributeText(const std::string& name, int value, 
 	return s;
 }
 
+std::string AttributeData::getAttributeTextWiki(const std::string& name, int value) {
+	if (value == 0) return "";
+	std::string s;
+	s.append("| [[" + g_textProvider->getText(name) + "]]\n");
+
+	std::string valText;
+	if (value >= 0) {
+		// these are boni on stats and should be signed
+		valText.append("+");
+	}
+	valText.append(std::to_string(value));
+
+	s.append("| " + valText + "\n");
+	return s;
+}
+
 std::string AttributeData::getItemDescriptionAttributeText(const std::string& name, int value, int& number) {
 	if (value == 0) return "";
 	number++;

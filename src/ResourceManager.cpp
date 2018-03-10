@@ -214,6 +214,10 @@ Item* ResourceManager::getItem(const std::string& itemID) {
 	return m_items.at(itemID);
 }
 
+std::vector<std::string> ResourceManager::getAllItemIds() const {
+	return g_databaseManager->getAllItemIds();
+}
+
 sf::Texture* ResourceManager::getTexture(const std::string& filename) const {
 	if (filename.empty()) return nullptr;
 	const auto& it = m_textures.find(filename);

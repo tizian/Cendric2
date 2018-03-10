@@ -84,6 +84,7 @@ public:
 	BitmapFont* getBitmapFont(const std::string& filename) const;
 	// be aware that this will return nullptr in case of an invalid item.
 	Item* getItem(const std::string& itemID);
+	std::vector<std::string> getAllItemIds() const;
 
 	const std::pair<ErrorID, std::string>* pollError() const;
 	bool toggleAutotarget();

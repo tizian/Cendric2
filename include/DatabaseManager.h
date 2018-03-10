@@ -35,6 +35,8 @@ public:
 	bool itemExists(const std::string& item_id) const;
 	SpawnBean* getSpawnBean(const std::string& spawn_id) const;
 
+	std::vector<std::string> getAllItemIds() const;
+
 private:
 	ItemAttributeBean* getItemAttributeBean(const std::string& item_id) const;
 	ItemBean* getItemBean(const std::string& item_id) const;
