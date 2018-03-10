@@ -2,9 +2,13 @@
 
 #include "global.h"
 #include "Steam/AchievementData.h"
+
+#ifdef STEAM
 #include "steam-sdk/public/steam/steam_api.h"
+#endif
 
 class SteamAchievements {
+#ifdef STEAM
 public:
 	SteamAchievements(AchievementData* achievements, int achievementCount);
 	~SteamAchievements();
@@ -26,4 +30,5 @@ private:
 	CCallback<SteamAchievements, UserStatsStored_t> m_callbackUserStatsStored;
 	CCallback<SteamAchievements, UserStatsReceived_t> m_callbackUserStatsReceived;
 	CCallback<SteamAchievements, UserAchievementStored_t> m_callbackAchievementStored;
+#endif
 };
