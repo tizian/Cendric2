@@ -131,7 +131,7 @@ INSERT INTO levelitem_light(item_id, light_offset_x, light_offset_y, light_radiu
 
 -- Healing Herb
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item', 'Healing herb','Heilpflanze','Heilpflanze');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item', 'Healing Herb','Heilpflanze','Heilpflanze');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_healingherb', 'item_desc', 'Heals wounds.','Heilt Wunden.','Heilt Wunde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_healingherb', 'consumable', 50, 50, 5);
 INSERT INTO item_attribute (item_id, health_regeneration) values ('fo_healingherb', 5);

@@ -11,7 +11,7 @@
 
 const std::string ItemExport::EXPORT_PATH = "export/item/";
 
-inline static std::string toStrMaxDecimals(float value, int decimals) {
+static inline std::string toStrMaxDecimals(float value, int decimals) {
 	std::ostringstream ss;
 	ss << std::fixed << std::setprecision(decimals) << value;
 	std::string s = ss.str();
@@ -30,6 +30,24 @@ static inline std::string getItemName(Item* item) {
 		}
 	}
 	return name;
+}
+
+static inline std::string getMagicName(SpellType type) {
+	switch (type)
+	{
+	case SpellType::Divine:
+		return "Divine Magic";
+	case  SpellType::Elemental:
+		return  "Elemental Magic";
+	case SpellType::Necromancy:
+		return "Necromancy";
+	case SpellType::Twilight:
+		return "Twilight Magic";
+	case SpellType::Meta:
+		return "Meta";
+	default:
+		return "";
+	}
 }
 
 static inline std::string getTypeName(ItemType type) {
@@ -128,7 +146,6 @@ void ItemExport::writeDescription(Item* item, std::ofstream& out) {
 		return;
 	}
 
-
 	auto desc = g_textProvider->getText(item->getID(), "item_desc");
 	if (desc.substr(0, 4) == "(und") {
 		return;
@@ -139,7 +156,7 @@ void ItemExport::writeDescription(Item* item, std::ofstream& out) {
 }
 
 void ItemExport::writeAttributes(Item* item, std::ofstream& out) {
-	if (!item->getCheck().isConsumable && !item->getCheck().isEquipment) {
+	if (!item->getCheck().isConsumable && !Item::isEquipmentType(item->getType()) && !(item->getType() == ItemType::Permanent)) {
 		return;
 	}
 
@@ -196,8 +213,13 @@ void ItemExport::writeConvertible(Item* item, std::ofstream& out) {
 }
 
 void ItemExport::writeWeapon(Item* item, std::ofstream& out) {
-	Weapon* wep = dynamic_cast<Weapon*>(item);
-	if (!wep || wep->getWeaponSlots().empty()) {
+	if (!(item->getType() == ItemType::Equipment_weapon) || !item->getCheck().isWeapon) {
+		return;
+	}
+
+	Weapon wep = Weapon(item->getID());
+
+	if (wep.getWeaponSlots().empty()) {
 		return;
 	}
 
@@ -208,9 +230,9 @@ void ItemExport::writeWeapon(Item* item, std::ofstream& out) {
 	out << "!Magic Type\n";
 	out << "!Gem Slots\n";
 
-	for (auto& it : wep->getWeaponSlots()) {
+	for (auto& it : wep.getWeaponSlots()) {
 		out << "|-\n";
-		out << "|[[" + g_textProvider->getText(EnumNames::getSpellTypeName(it.spellSlot.spellType)) + "]]\n";
+		out << "|[[" + getMagicName(it.spellSlot.spellType) + "]]\n";
 		out << "|\n" + std::to_string(it.spellModifiers.size()) + "\n";
 	}
 
@@ -285,7 +307,23 @@ void ItemExport::savePicture(Item* item) {
 	sf::Image texImg;
 	texImg.create(50, 50, COLOR_TRANSPARENT);
 	texImg.copy(fullImg, 0, 0, sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50));
+	
+	sf::Texture tex;
+	tex.create(50, 50);
+	tex.update(texImg);
+
+	sf::Sprite spriteTmp;
+	spriteTmp.setTexture(tex);
+	spriteTmp.setScale(sf::Vector2f(2.f, 2.f));
+
+	sf::RenderTexture rTex;
+	rTex.create(100, 100);
+
+	rTex.draw(spriteTmp);
+	rTex.display();
+
+	sf::Image newImg = rTex.getTexture().copyToImage();
 
 	auto name = getItemName(item);
-	texImg.saveToFile(EXPORT_PATH + name + ".png");
+	newImg.saveToFile(EXPORT_PATH + name + ".png");
 }

@@ -389,7 +389,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Fire Sword
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item','Yasha''s Fire Sword', 'Yasha''s Feuerschwert','Yasha''s Füürschwert');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple. It opens a gate in the Temple of the Ancients.','Ein heiliges Relikt aus Yasha''s Tempel. Es öffnet eine Pforte im Tempel der Ahnen.','Es heiligs Relikt us de Yasha ihrem Tempel. Es macht es Tor uf im Tempel vode Ahne.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword', 'item_desc', 'A holy relic from Yasha''s Temple. It opens a gate in the Temple of Elementalists.','Ein heiliges Relikt aus Yasha''s Tempel. Es öffnet eine Pforte im Tempel der Elementarmagier.','Es heiligs Relikt us de Yasha ihrem Tempel. Es macht es Tor uf im Tempel vode Elementarmagier.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_firesword', 'eq_weapon', 700, 400, -1, 4);
 INSERT INTO item_attribute (item_id, dmg_light, res_shadow, res_ice, dmg_fire) values ('we_firesword', 10, 50, 50, 30);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword', 'res/texture/equipment/weapon/spritesheet_weapon_firesword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_firesword.png');
