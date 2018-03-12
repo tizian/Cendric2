@@ -349,7 +349,7 @@ INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq
 -- Necro T3 Head
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item', 'Bone Mask','Knochenmaske','Chnoche-Maske');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item_desc', 'An indispensable utensil for a necromancer. Protects it''s wearer against pestilence.','Ein unverzichtbares Utensil für einen Nekromanten. Schützt ihren Träger gegen Seuchen.','Es unverzichtbars Teili für en Nekromant. Schützt ire Träger gege Süüchene.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('eq_head_necrot3', 'item_desc', 'An indispensable utensil for a necromancer. Protects its wearer against pestilence.','Ein unverzichtbares Utensil für einen Nekromanten. Schützt ihren Träger gegen Seuchen.','Es unverzichtbars Teili für en Nekromant. Schützt ire Träger gege Süüchene.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('eq_head_necrot3', 'eq_head', 100, 650, 180, 3);
 INSERT INTO item_attribute (item_id, dmg_shadow, res_light, heal, res_shadow, res_physical, critical, haste, dmg_ice, max_health) values ('eq_head_necrot3', 4, 14, 1, 15, 20, 4, 15, 4, 24);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('eq_head_necrot3', 'res/texture/equipment/head/spritesheet_head_necrot3.png', 'res/texture/equipment/head/spritesheet_map_head_necrot3.png');
