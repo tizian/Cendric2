@@ -469,19 +469,24 @@ void Inventory::handleLevelDrop() {
 	}
 }
 
+void Inventory::stopDragging() {
+	InventorySlot* selectedSlot = getSelectedSlot();
+	if (selectedSlot != nullptr) {
+		selectedSlot->activate();
+		handleLevelDrop();
+		handleMapDrop();
+	}
+	delete m_currentClone;
+	m_currentClone = nullptr;
+	m_hasDraggingStarted = false;
+	m_isDragging = false;
+}
+
 void Inventory::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
 	InventorySlot* selectedSlot = getSelectedSlot();
 	if (!(g_inputController->isMousePressedLeft())) {
-		if (selectedSlot != nullptr) {
-			selectedSlot->activate();
-			handleLevelDrop();
-			handleMapDrop();
-		}
-		delete m_currentClone;
-		m_currentClone = nullptr;
-		m_hasDraggingStarted = false;
-		m_isDragging = false;
+		stopDragging();
 		return;
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
@@ -737,6 +742,9 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot*>& sl
 void Inventory::show() {
 	m_isVisible = true;
 	m_equipment->show();
+	if (m_mapInterface != nullptr) {
+		m_mapInterface->showQuickslotBar(m_currentTab == ItemType::Consumable);
+	}
 }
 
 void Inventory::hide() {
@@ -749,11 +757,7 @@ void Inventory::hide() {
 	}
 	m_isVisible = false;
 	m_equipment->hide();
-	delete m_currentClone;
-	m_currentClone = nullptr;
-	m_isDragging = false;
-	m_hasDraggingStarted = false;
-
+	stopDragging();
 }
 
 void Inventory::startTrading(MerchantInterface* _interface) {

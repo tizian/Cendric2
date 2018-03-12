@@ -105,6 +105,7 @@ private:
 	const float DRAG_DISTANCE = 10.f;
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
+	void stopDragging();
 	
 	void removeEquipmentItem();
 	void handleMapDrag();

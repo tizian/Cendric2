@@ -17,7 +17,7 @@
 // #define STEAM
 
 // versioning
-#define CENDRIC_VERSION_NR_RAW "1.0.3"
+#define CENDRIC_VERSION_NR_RAW "1.0.4"
 #ifdef STEAM
     #define CENDRIC_VERSION_NR CENDRIC_VERSION_NR_RAW
 #else

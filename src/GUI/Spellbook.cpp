@@ -176,28 +176,32 @@ void Spellbook::equipSpell(SpellSlot* selectedSlot) {
 	m_weaponWindow->equipSpell(selectedSlot);
 }
 
+void Spellbook::stopDragging() {
+	if (m_selectedModifierSlot != nullptr) {
+		m_selectedModifierSlot->activate();
+	}
+	if (m_currentSpellClone != nullptr) {
+		const_cast<Slot*>(m_currentSpellClone->getOriginalSlot())->activate();
+	}
+	if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
+		m_weaponWindow->m_selectedSpellSlot->activate();
+	}
+	m_weaponWindow->notifyModifierDrop(m_currentModifierClone);
+	m_weaponWindow->notifySpellDrop(m_currentSpellClone);
+	m_weaponWindow->highlightSpellSlots(SpellType::VOID, false);
+	m_weaponWindow->highlightModifierSlots(SpellModifierType::VOID, false);
+	delete m_currentModifierClone;
+	delete m_currentSpellClone;
+	m_currentModifierClone = nullptr;
+	m_currentSpellClone = nullptr;
+	m_hasDraggingStarted = false;
+	m_isDragging = false;
+}
+
 void Spellbook::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
 	if (!(g_inputController->isMousePressedLeft())) {
-		if (m_selectedModifierSlot != nullptr) {
-			m_selectedModifierSlot->activate();
-		}
-		if (m_currentSpellClone != nullptr) {
-			const_cast<Slot*>(m_currentSpellClone->getOriginalSlot())->activate();
-		}
-		if (m_weaponWindow->m_selectedSpellSlot != nullptr) {
-			m_weaponWindow->m_selectedSpellSlot->activate();
-		}
-		m_weaponWindow->notifyModifierDrop(m_currentModifierClone);
-		m_weaponWindow->notifySpellDrop(m_currentSpellClone);
-		m_weaponWindow->highlightSpellSlots(SpellType::VOID, false);
-		m_weaponWindow->highlightModifierSlots(SpellModifierType::VOID, false);
-		delete m_currentModifierClone;
-		delete m_currentSpellClone;
-		m_currentModifierClone = nullptr;
-		m_currentSpellClone = nullptr;
-		m_hasDraggingStarted = false;
-		m_isDragging = false;
+		stopDragging();
 		return;
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
@@ -441,11 +445,5 @@ void Spellbook::show() {
 
 void Spellbook::hide() {
 	m_isVisible = false;
-	//m_weaponWindow->hide();
-	delete m_currentModifierClone;
-	m_currentModifierClone = nullptr;
-	delete m_currentSpellClone;
-	m_currentSpellClone = nullptr;
-	m_isDragging = false;
-	m_hasDraggingStarted = false;
+	stopDragging();
 }

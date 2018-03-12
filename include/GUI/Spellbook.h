@@ -84,6 +84,7 @@ private:
 	const float DRAG_DISTANCE = 10.f;
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
+	void stopDragging();
 
 	static const sf::Vector2f BUTTON_SIZE;
 	const float MARGIN = 5.f;

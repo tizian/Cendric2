@@ -241,35 +241,39 @@ void WeaponWindow::removeSpell(const SpellSlot& slot) {
 	m_requireReload = true;
 }
 
+void WeaponWindow::stopDragging() {
+	if (m_selectedModifierSlot != nullptr) {
+		if (m_currentModifierClone != nullptr && !fastIntersect(*m_currentModifierClone->getBoundingBox(), *m_selectedModifierSlot->getBoundingBox())) {
+			removeModifier(*m_selectedModifierSlot);
+		}
+		else {
+			m_selectedModifierSlot->activate();
+		}
+	}
+	if (m_selectedSpellSlot != nullptr) {
+		if (m_currentSpellClone != nullptr && !fastIntersect(*m_currentSpellClone->getBoundingBox(), *m_selectedSpellSlot->getBoundingBox())) {
+			removeSpell(*m_selectedSpellSlot);
+		}
+		else {
+			m_selectedSpellSlot->activate();
+		}
+	}
+	notifyModifierDrop(m_currentModifierClone);
+	notifySpellDrop(m_currentSpellClone);
+	highlightSpellSlots(SpellType::VOID, false);
+	highlightModifierSlots(SpellModifierType::VOID, false);
+	delete m_currentModifierClone;
+	delete m_currentSpellClone;
+	m_currentModifierClone = nullptr;
+	m_currentSpellClone = nullptr;
+	m_hasDraggingStarted = false;
+	m_isDragging = false;
+}
+
 void WeaponWindow::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
 	if (!(g_inputController->isMousePressedLeft())) {
-		if (m_selectedModifierSlot != nullptr) {
-			if (m_currentModifierClone != nullptr && !fastIntersect(*m_currentModifierClone->getBoundingBox(), *m_selectedModifierSlot->getBoundingBox())) {
-				removeModifier(*m_selectedModifierSlot);
-			}
-			else {
-				m_selectedModifierSlot->activate();
-			}
-		}
-		if (m_selectedSpellSlot != nullptr) {
-			if (m_currentSpellClone != nullptr && !fastIntersect(*m_currentSpellClone->getBoundingBox(), *m_selectedSpellSlot->getBoundingBox())) {
-				removeSpell(*m_selectedSpellSlot);
-			}
-			else {
-				m_selectedSpellSlot->activate();
-			}
-		}
-		notifyModifierDrop(m_currentModifierClone);
-		notifySpellDrop(m_currentSpellClone);
-		highlightSpellSlots(SpellType::VOID, false);
-		highlightModifierSlots(SpellModifierType::VOID, false);
-		delete m_currentModifierClone;
-		delete m_currentSpellClone;
-		m_currentModifierClone = nullptr;
-		m_currentSpellClone = nullptr;
-		m_hasDraggingStarted = false;
-		m_isDragging = false;
+		stopDragging();
 		return;
 	}
 	sf::Vector2f mousePos = g_inputController->getDefaultViewMousePosition();
@@ -442,11 +446,6 @@ void WeaponWindow::show() {
 
 void WeaponWindow::hide() {
 	m_isVisible = false;
-	delete m_currentModifierClone;
-	m_currentModifierClone = nullptr;
-	delete m_currentSpellClone;
-	m_currentSpellClone = nullptr;
-	m_isDragging = false;
-	m_hasDraggingStarted = false;
+	stopDragging();
 	m_spellDesc->hide();
 }

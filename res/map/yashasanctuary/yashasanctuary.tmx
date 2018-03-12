@@ -142,10 +142,10 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="530" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="600" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="607" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
  <layer name="BG 1" width="25" height="22">
@@ -297,11 +297,11 @@
 0,0,0,255,255,255,76,77,289,255,255,0,0,327,255,255,76,77,289,255,77,169,188,188,0,
 0,0,0,0,0,0,99,0,101,0,0,0,0,0,0,0,99,0,101,0,0,0,188,0,0,
 0,0,188,0,0,0,0,0,0,0,277,278,0,277,278,0,0,0,0,0,0,0,188,0,0,
-0,0,188,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,188,0,0,
-0,0,188,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,188,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+0,0,188,0,0,0,0,0,0,0,300,0,0,0,301,0,0,0,0,0,0,0,188,0,0,
+0,0,188,0,0,0,0,0,0,0,300,0,0,0,301,0,0,0,0,0,0,0,188,0,0,
+0,0,0,0,0,0,0,0,0,0,300,0,0,0,301,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,300,0,0,0,301,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,300,0,0,0,301,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
  <layer name="LFG 3" width="25" height="22">
@@ -481,12 +481,12 @@
   </object>
  </objectgroup>
  <objectgroup name="dynamic">
-  <object id="155" gid="604" x="850" y="800" width="50" height="50">
+  <object id="155" gid="611" x="850" y="800" width="50" height="50">
    <properties>
     <property name="conditions" value="boss,BossYasha"/>
    </properties>
   </object>
-  <object id="156" gid="604" x="350" y="800" width="50" height="50">
+  <object id="156" gid="611" x="350" y="800" width="50" height="50">
    <properties>
     <property name="conditions" value="boss,BossYasha"/>
    </properties>

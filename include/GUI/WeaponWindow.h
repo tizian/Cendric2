@@ -90,6 +90,7 @@ private:
 	const float DRAG_DISTANCE = 10.f;
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
+	void stopDragging();
 
 	const float MARGIN = 5.f; 
 
