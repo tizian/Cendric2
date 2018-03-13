@@ -115,7 +115,7 @@
 0,0,0,78,79,0,236,0,0,236,0,12,18,19,12,0,236,0,0,0,0,0,0,0,0,0,
 0,0,0,101,102,0,259,0,0,259,186,187,41,42,186,187,259,0,0,379,234,381,0,0,0,0,
 0,0,0,0,0,85,0,323,324,0,209,210,64,65,209,210,85,0,0,402,211,404,332,0,0,0,
-0,0,0,0,0,108,0,346,347,0,232,233,87,88,232,233,108,0,0,312,0,0,355,0,0,0,
+0,0,0,0,0,108,0,346,347,0,232,233,87,88,232,233,108,0,0,0,0,0,355,0,0,0,
 0,0,0,0,0,0,0,369,370,0,0,106,0,0,107,0,0,0,0,106,0,107,0,0,0,0,
 0,0,0,385,386,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,96,0,0,0,
 0,0,0,408,409,0,0,0,0,0,0,106,0,0,107,0,0,0,0,0,0,0,119,0,0,0,
@@ -386,16 +386,6 @@
    <properties>
     <property name="level entry" value="res/level/hallway/hallway.tmx,210,560"/>
     <property name="persistent" value=""/>
-   </properties>
-  </object>
- </objectgroup>
- <objectgroup name="dynamic guards">
-  <properties>
-   <property name="conditions" value="boss,BossRoyalguards"/>
-  </properties>
-  <object id="157" gid="630" x="950" y="325" width="50" height="50">
-   <properties>
-    <property name="text" value="PointOfNoReturn"/>
    </properties>
   </object>
  </objectgroup>

@@ -405,6 +405,17 @@ bool CharacterCore::setConditionFulfilled(const std::string& conditionType, cons
 	return ret.second;
 }
 
+void CharacterCore::removeConditionFulfilled(const std::string& conditionType, const std::string& condition) {
+	if (!contains(m_data.conditionProgress, conditionType)) {
+		return;
+	}
+	m_data.conditionProgress.at(conditionType).erase(condition);
+}
+
+void CharacterCore::removeConditionsFulfilled(const std::string& conditionType) {
+	m_data.conditionProgress.erase(conditionType);
+}
+
 bool CharacterCore::unlockQuestDescription(const std::string& questID, int descriptionID) {
 	if (!contains(m_data.questDescriptionProgress, questID)) {
 		m_data.questDescriptionProgress.insert({ questID, std::set<int>() });
@@ -930,4 +941,21 @@ void CharacterCore::setHashInvalid() {
 
 sf::Time CharacterCore::getTimePlayed() const {
 	return m_data.timePlayed + m_stopwatch.getElapsedTime();
+}
+
+void CharacterCore::timewarpToThrone() {
+	m_data.triggersTriggered.erase("res/map/veliusroom/veliusroom.tmx");
+
+	std::string markId = "the_mark";
+	if (contains(m_data.questStates, markId)) {
+		m_data.questStates[markId] = QuestState::Started;
+	}
+
+	removeConditionFulfilled("boss", "BossVelius");
+	removeConditionsFulfilled("npc_inina4");
+	removeConditionsFulfilled("npc_koray3");
+	removeConditionsFulfilled("npc_loganthird4");
+	removeConditionsFulfilled("npc_robert4");
+	removeConditionsFulfilled("npc_velius");
+	removeConditionsFulfilled("npc_zeff4");
 }

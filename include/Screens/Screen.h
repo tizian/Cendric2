@@ -54,6 +54,8 @@ public:
 	// this screen will be backed up and can be returned to by using screenManager->resume()
 	void setNextScreen(Screen* nextScreen, bool backupThis = false);
 	void setScreenManager(ScreenManager* screenManager);
+	// enables / disables all buttons on this screen
+	virtual void setAllButtonsEnabled(bool value);
 
 protected:
 	// the update part that is customized per screen
@@ -72,8 +74,6 @@ protected:
 	void renderObjects(GameObjectType type, sf::RenderTarget& renderTarget);
 	// render all objects after foreground of type 'type'
 	void renderObjectsAfterForeground(GameObjectType type, sf::RenderTarget& renderTarget);
-	// enables / disables all buttons on this screen
-	virtual void setAllButtonsEnabled(bool value);
 
 protected:
 	CharacterCore* m_characterCore = nullptr;

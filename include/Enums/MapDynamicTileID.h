@@ -9,5 +9,6 @@ enum class MapDynamicTileID {
 	Sign,
 	Door,
 	Chest,
+	Timewarp,
 	MAX
 };

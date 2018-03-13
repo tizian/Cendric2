@@ -425,6 +425,7 @@ void Enemy::setScriptedBehavior(const std::string& luaPath) {
 
 void Enemy::setDisposed() {
 	LevelMovableGameObject::setDisposed();
+	clearSpells(true);
 	if (m_isTargetedEnemy) {
 		m_mainChar->getTargetManager().setTargetEnemy(nullptr);
 	}

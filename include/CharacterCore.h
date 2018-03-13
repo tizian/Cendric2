@@ -198,6 +198,9 @@ public:
 	// returns the current time played
 	sf::Time getTimePlayed() const;
 
+	// this is a very specific function, for the timewarp
+	void timewarpToThrone();
+
 protected:
 	// protected constructor for copying
 	CharacterCore(const CharacterCoreData& data);
@@ -218,6 +221,10 @@ private:
 	void addStoredItem(const std::string& item, int quantity);
 	// removes item(s) to the stored data
 	void removeStoredItem(const std::string& item, int quantity);
+	// removes an already fulfilled condition
+	void removeConditionFulfilled(const std::string& conditionType, const std::string& condition);
+	// removes all conditions of type conditionType
+	void removeConditionsFulfilled(const std::string& conditionType);
 
 private:
 	// base attributes plus the attributes of all currently equipped items
