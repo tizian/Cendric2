@@ -30,6 +30,7 @@ enum class TriggerContentType {
 	AchievementNotify,
 	AchievementNotifyCore,
 	Music,
+	Sound,
 	Credits,
 	MAX,
 };
@@ -76,4 +77,5 @@ struct TriggerContent final {
 	static TriggerContent notifyAchievementCore(const std::string& achievement);
 	static TriggerContent setWeather(const std::string& worldId, const std::string& weather, int dimming);
 	static TriggerContent setMusic(const std::string& musicPath);
+	static TriggerContent playSound(const std::string& soundPath);
 };

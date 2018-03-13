@@ -323,9 +323,9 @@ npc.id:npc_robert2
 	trigger:DL:changeQuestState("teleport_robert", "started")
 	# translation: 
 	translation.tag:DL_Robert_StartRobertQuest
-	translation.en:Maybe you're lucky. I'll wait here.
-	translation.de:Vielleicht hast du ja Glück. Ich warte hier.
-	translation.ch:Vilicht hesch jo Glück. Ich wart do.
+	translation.en:Maybe you're lucky...
+	translation.de:Vielleicht hast du ja Glück...
+	translation.ch:Vilicht hesch jo Glück...
 	[
 		# Link node, tag is next tag
 		tag:-2

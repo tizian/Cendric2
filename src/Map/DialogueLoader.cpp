@@ -43,6 +43,7 @@ void DialogueLoader::loadDialogue() {
 		.addFunction("addQuestDescription", &DialogueLoader::addQuestDescription)
 		.addFunction("addConditionProgress", &DialogueLoader::addConditionProgress)
 		.addFunction("addReputationProgress", &DialogueLoader::addReputationProgress)
+		.addFunction("playSound", &DialogueLoader::playSound)
 		.addFunction("addHint", &DialogueLoader::addHint)
 		.addFunction("addItem", &DialogueLoader::addItem)
 		.addFunction("equipItem", &DialogueLoader::equipItem)
@@ -304,6 +305,15 @@ void DialogueLoader::startCutscene(const std::string& cutsceneID) {
 		return;
 	}
 	TriggerContent content = TriggerContent::startCutscene(cutsceneID);
+	if (content.isValid()) m_currentNode->content.push_back(content);
+}
+
+void DialogueLoader::playSound(const std::string& soundPath) {
+	if (m_currentNode == nullptr) {
+		g_logger->logError("DialogueLoader", "Cannot play sound: no node created.");
+		return;
+	}
+	TriggerContent content = TriggerContent::playSound(soundPath);
 	if (content.isValid()) m_currentNode->content.push_back(content);
 }
 

@@ -4,8 +4,15 @@ velocity = 30
 
 loadRoutine = function(R, W)
 
+    if (W:isConditionFulfilled("npc_robert2", "gone")) then
+        R:setDisposed()
+        return
+    end
+
     R:setReloadEnabled(true)
     if (W:isQuestState("teleport_robert", "completed")) then
+        W:playSound("res/sound/tile/teleport.ogg")
+        W:addConditionProgress("npc_robert2", "gone");
         R:setDisposed()
         return
     end

@@ -51,6 +51,7 @@ public:
 	void startMap(const std::string& mapID, int x, int y) const;
 	void setLevel(const std::string& levelID, int x, int y) const;
 	void setMap(const std::string& mapID, int x, int y) const;
+	void playSound(const std::string& soundPath) const;
 	void startCutscene(const std::string& cutsceneID) const;
 	void unlockAchievement(const std::string& achievement) const;
 	void notifyAchievement(const std::string& achievement, const std::string& message) const;

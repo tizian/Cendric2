@@ -76,6 +76,9 @@ void TriggerContent::executeTrigger(const TriggerContent& content, WorldScreen* 
 	case TriggerContentType::Music:
 		g_resourceManager->playMusic(content.s1);
 		break;
+	case TriggerContentType::Sound:
+		g_resourceManager->playSound(content.s1);
+		break;
 	case TriggerContentType::AchievementUnlocked:
 		g_achievementManager->unlockAchievement(content.s1);
 		break;
@@ -386,6 +389,16 @@ TriggerContent TriggerContent::setMusic(const std::string& musicPath) {
 	}
 	TriggerContent content(TriggerContentType::Music);
 	content.s1 = musicPath;
+	return content;
+}
+
+TriggerContent TriggerContent::playSound(const std::string& soundPath) {
+	if (soundPath.empty()) {
+		g_logger->logError("TriggerContent", "sound path cannot be empty");
+		return TriggerContent();
+	}
+	TriggerContent content(TriggerContentType::Sound);
+	content.s1 = soundPath;
 	return content;
 }
 

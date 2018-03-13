@@ -46,6 +46,7 @@ void WorldCallback::bindFunctions(lua_State* luaState) const {
 		.addFunction("startMap", &WorldCallback::startMap)
 		.addFunction("setLevel", &WorldCallback::setLevel)
 		.addFunction("setMap", &WorldCallback::setMap)
+		.addFunction("playSound", &WorldCallback::playSound)
 		.addFunction("startCutscene", &WorldCallback::startCutscene)
 		.addFunction("setGuild", &WorldCallback::setGuild)
 		.addFunction("learnSpell", &WorldCallback::learnSpell)
@@ -216,6 +217,10 @@ void WorldCallback::setLevel(const std::string& levelID, int x, int y) const {
 
 void WorldCallback::setMap(const std::string& mapID, int x, int y) const {
 	TriggerContent::executeTrigger(TriggerContent::setMap(mapID, x, y), m_screen);
+}
+
+void WorldCallback::playSound(const std::string& soundPath) const {
+	TriggerContent::executeTrigger(TriggerContent::playSound(soundPath), m_screen);
 }
 
 void WorldCallback::startCutscene(const std::string& cutsceneID) const {
