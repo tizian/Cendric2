@@ -16,25 +16,25 @@ INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower_1', 'key', 100, 700, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_1', 'item', 'Tower Key (1)','Turmschlüssel (1)','Turmschlüssel (1)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_1', 'item_desc', 'Opens the first door of the old tower in the Marshlands.','Öffnet die erste Tür des alten Turms im Sumpfland.','Macht di erst Türe im alte Turm im Sumpfland uf.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_1', 'item_desc', 'Opens the first door of the mysterious tower in Os.','Öffnet die erste Tür des mysteriösen Turms in Os.','Macht di erst Türe im mysteriöse Turm in Os uf.');
 
 -- Tower Key 2
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower_2', 'key', 150, 700, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_2', 'item', 'Tower Key (2)','Turmschlüssel (2)','Turmschlüssel (2)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_2', 'item_desc', 'Opens the second door of the old tower in the Marshlands.','Öffnet die zweite Tür des alten Turms im Sumpfland.','Macht di zweit Türe im alte Turm im Sumpfland uf.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_2', 'item_desc', 'Opens the second door of the mysterious tower in Os.','Öffnet die zweite Tür des mysteriösen Turms in Os.','Macht di zweit Türe im mysteriöse Turm in Os uf.');
 
 -- Tower Key 3
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower_3', 'key', 200, 700, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_3', 'item', 'Tower Key (3)','Turmschlüssel (3)','Turmschlüssel (3)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_3', 'item_desc', 'Opens the third door of the old tower in the Marshlands.','Öffnet die dritte Tür des alten Turms im Sumpfland.','Macht di dritt Türe im alte Turm im Sumpfland uf.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_3', 'item_desc', 'Opens the third door of the mysterious tower in Os.','Öffnet die dritte Tür des mysteriösen Turms in Os.','Macht di dritt Türe im mysteriöse Turm in Os uf.');
 
 -- Tower Key 4
 
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('ke_tower_4', 'key', 250, 700, -1);
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_4', 'item', 'Tower Key (4)','Turmschlüssel (4)','Turmschlüssel (4)');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_4', 'item_desc', 'Opens the fourth door of the old tower in the Marshlands.','Öffnet die vierte Tür des alten Turms im Sumpfland.','Macht di viert Türe im alte Turm im Sumpfland uf.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('ke_tower_4', 'item_desc', 'Opens the forth door of the mysterious tower in Os.','Öffnet die vierte Tür des mysteriösen Turms in Os.','Macht di viert Türe im mysteriöse Turm in Os uf.');
 
 -- Small Silver Key
 

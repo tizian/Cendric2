@@ -4,7 +4,7 @@ void ConfigurationData::resetToDefault() {
 #ifdef GERMAN_DEFAULT_LANGUAGE
 	language = Language::Lang_DE;
 #else
-	language = Language::Lang_EN;
+	language = Language::Lang_DE;
 #endif
 	isSoundOn = true;
 	volumeSound = 100;

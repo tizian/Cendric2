@@ -414,7 +414,7 @@ INSERT INTO item_weapon_slot(item_id, slot_nr, slot_type, modifier_count) values
 -- Fire Sword (Unkindled)
 
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item','Yasha''s Sword', 'Yasha''s Schwert','Yasha''s Schwert');
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item_desc', 'This sword was stolen from Yasha''s temple. I found it in the Temple of the Ancients, but it was snuffed out.','Dieses Schwert wurde aus Yasha''s Tempel entwendet. Ich habe es im Tempel der Ahnen gefunden, aber es wurde ausgelöscht.','Da Schwert isch usde Yasha ihrem Tempel klaut worde. Ich has im Tempel vode Ahne gfunde, aber es isch usglöscht worde.');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('we_firesword_inactive', 'item_desc', 'This sword was stolen from Yasha''s temple. I found it in the Temple of Elementalists, but it was snuffed out.','Dieses Schwert wurde aus Yasha''s Tempel entwendet. Ich habe es im Tempel der Elementarmagier gefunden, aber es wurde ausgelöscht.','Da Schwert isch usde Yasha ihrem Tempel klaut worde. Ich has im Tempel vode Elementarmagier gfunde, aber es isch usglöscht worde.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value, rarity) values ('we_firesword_inactive', 'eq_weapon', 750, 350, -1, 3);
 INSERT INTO item_attribute (item_id, dmg_physical) values ('we_firesword_inactive', 5);
 INSERT INTO item_equipment (item_id, texture_path, map_texture_path) values ('we_firesword_inactive', 'res/texture/equipment/weapon/spritesheet_weapon_firesword.png', 'res/texture/equipment/weapon/spritesheet_map_weapon_firesword.png');
