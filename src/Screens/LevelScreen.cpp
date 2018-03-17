@@ -460,7 +460,7 @@ void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
 }
 
 void LevelScreen::handleBackToCheckpoint() {
-	if (m_isBossDefeated) return;
+	if (m_isBossDefeated || m_isGameOver) return;
 
 	if (g_inputController->isKeyJustPressed(Key::BackToCheckpoint)) {
 		onBackToCheckpoint();
@@ -474,7 +474,7 @@ void LevelScreen::handleGameOver(const sf::Time& frameTime) {
 	if (m_isGameOver) {
 		if (m_respawnWaitTime == sf::Time::Zero) return;
 		updateTime(m_respawnWaitTime, frameTime);
-		if (m_respawnWaitTime == sf::Time::Zero) {
+		if (m_respawnWaitTime == sf::Time::Zero || g_inputController->isKeyJustPressed(Key::BackToCheckpoint)) {
 			dynamic_cast<LevelInterface*>(m_interface)->restoreConsumedFood();
 			onBackToCheckpoint();
 		}
