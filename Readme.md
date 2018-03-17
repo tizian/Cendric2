@@ -9,7 +9,7 @@ The Steam page for Cendric is online:
 http://store.steampowered.com/app/681460/Cendric/
 
 You can also get Cendric on itch.io:
-ironbell.itch.io/cendric
+https://ironbell.itch.io/cendric
 
 Cendric was released on the 2. March 2018.
 
@@ -19,6 +19,11 @@ The official Cendric wiki is hosted on Gamepedia:
 https://cendric.gamepedia.com
 
 Feel free to contribute!
+
+## Discord
+
+You can join our community discord server here:
+https://discord.gg/6mJARSJ
 
 ## Screenshots
 
