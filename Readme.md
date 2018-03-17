@@ -8,7 +8,17 @@
 The Steam page for Cendric is online: 
 http://store.steampowered.com/app/681460/Cendric/
 
+You can also get Cendric on itch.io:
+ironbell.itch.io/cendric
+
 Cendric was released on the 2. March 2018.
+
+## Wiki
+
+The official Cendric wiki is hosted on Gamepedia:
+https://cendric.gamepedia.com
+
+Feel free to contribute!
 
 ## Screenshots
 
@@ -29,13 +39,13 @@ Cendric moves through the world on a 2D map and interacts with NPCs to trade or 
 
 ## Current stable build
 
-Pre-alpha builds are available for Windows x64, macOS and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
+Latest release builds are available for Windows x64, macOS and Ubuntu. However, feel free to try and compile *Cendric* on any platform.
 
-[Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.0_win64.zip) (Windows x64)
+[Cendric v1.0.4](https://github.com/tizian/Cendric2/releases/download/v1.0.4/Cendric_v1.0.4_Windows.zip) (Windows x64)
 
-[Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.0_mac.zip) (macOS)
+[Cendric v1.0.4](https://github.com/tizian/Cendric2/releases/download/v1.0.4/Cendric_v1.0.4_MacOS.zip) (macOS)
 
-[Cendric v0.9.0](https://github.com/tizian/Cendric2/releases/download/v0.9.0/Cendric_v0.9.1_ubuntu64.tar.gz) (Ubuntu x64)
+[Cendric v1.0.4](https://github.com/tizian/Cendric2/releases/download/v1.0.4/Cendric_v1.0.4_Linux.tar.gz) (Ubuntu x64)
 
 
 A list of all builds is available [here](https://github.com/tizian/Cendric2/releases).
