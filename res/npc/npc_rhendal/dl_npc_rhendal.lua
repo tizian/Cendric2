@@ -86,8 +86,15 @@ loadDialogue = function(DL)
 		if (DL:isQuestComplete("silkweed_potion")) then 
 			DL:addChoice(15, "DL_Choice_FoundIngredients") -- I found the ingredients for the potion.
 		end
-		DL:addChoice(13, "DL_Choice_WhereSilkweed") -- Where can I find the silkweed?
-		DL:addChoice(14, "DL_Choice_WhereCairn") -- Where do cairn wraiths live?
+        
+        if (not DL:hasItem("qe_silkweed", 1)) then
+            DL:addChoice(13, "DL_Choice_WhereSilkweed") -- Where can I find the silkweed?
+        end    
+        
+        if (not DL:hasItem("mi_corrupt_stone_ice", 1)) then
+            DL:addChoice(14, "DL_Choice_WhereCairn") -- Where do cairn wraiths live?
+        end
+            
 		if (not DL:isConditionFulfilled("npc_rhendal", "trust_you")) then 
 			DL:addChoice(18, "DL_Choice_TrustYou") -- Why should I trust you? What if that potion is going to poison me?
 		end
