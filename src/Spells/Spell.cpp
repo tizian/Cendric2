@@ -45,7 +45,7 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 
 	// handle sound
 	if (!data.spellSoundPaths.empty()) {
-		g_resourceManager->playSound(m_sound, data.spellSoundPaths.at(rand() % data.spellSoundPaths.size()), getCenter(), m_mainChar->getPosition(), true, true);
+		g_resourceManager->playSound(m_sound, data.spellSoundPaths.at(rand() % data.spellSoundPaths.size()), getCenter(), m_mainChar->getPosition(), true, data.isSpellSoundLooping);
 	}
 
 	// if it is attached to mob, its velocity is ignored 

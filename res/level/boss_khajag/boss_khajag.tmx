@@ -318,7 +318,7 @@
 </data>
  </layer>
  <objectgroup name="enemy">
-  <object id="21" gid="1102" x="1100" y="750" width="50" height="50">
+  <object id="21" gid="1102" x="1100" y="850" width="50" height="50">
    <properties>
     <property name="fo_ham" value="2"/>
     <property name="gold" value="20"/>

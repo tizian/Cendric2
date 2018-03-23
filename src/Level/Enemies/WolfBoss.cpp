@@ -85,10 +85,6 @@ void WolfBoss::loadSpells() {
 }
 
 void WolfBoss::handleAttackInput() {
-	// Cendric is too far away to attack with any attack
-	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 400.f)
-		return;
-
 	if (getState() == GameObjectState::Fighting3 && std::abs(m_mainChar->getPosition().y - getPosition().y) < 100.f) {
 		// cendric has come down.
 		setReady();
@@ -104,7 +100,11 @@ void WolfBoss::handleAttackInput() {
 	if (std::abs(m_mainChar->getPosition().y - getPosition().y) > 100.f)
 		m_spellManager->setCurrentSpell(2); // windgust
 	else {
-		if (m_mainChar->isStunned() || std::abs(m_mainChar->getPosition().x - getPosition().x) > 1000.f) {
+		if (std::abs(m_mainChar->getPosition().x - getPosition().x) > 1000.f) {
+			m_spellManager->setCurrentSpell(0); // only charge
+		}
+		if (m_mainChar->isStunned()) {
+			m_spellManager->getSpell(0)->damage = 10000; // ten thousand!
 			m_spellManager->setCurrentSpell(0); // only charge
 		}
 		else {

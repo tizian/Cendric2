@@ -455,6 +455,7 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.spellType = SpellType::Elemental;
 	iceBall.spritesheetPath = "res/texture/spells/spritesheet_spell_iceball.png";
 	iceBall.spellSoundPaths = { "res/sound/spell/iceball.ogg" };
+	iceBall.isSpellSoundLooping = false;
 	iceBall.iconTextureRect = sf::IntRect(50, 0, 50, 50);
 
 	iceBall.cooldown = sf::seconds(1);
@@ -646,6 +647,7 @@ SpellData SpellData::getLeechSpellData() {
 	leech.spellType = SpellType::Necromancy;
 	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
 	leech.spellSoundPaths = { "res/sound/spell/leech.ogg" };
+	leech.isSpellSoundLooping = false;
 
 	leech.cooldown = sf::seconds(3);
 	leech.boundingBox = sf::FloatRect(0, 0, 10, 10);
@@ -840,6 +842,7 @@ SpellData SpellData::getGhostFormSpellData() {
 
 	ghostForm.spritesheetPath = "res/texture/spells/spritesheet_spell_ghost.png";
 	ghostForm.spellSoundPaths = { "res/sound/spell/ghostform.ogg" };
+	ghostForm.isSpellSoundLooping = false;
 	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
 	ghostForm.cooldown = sf::seconds(20);
 	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);

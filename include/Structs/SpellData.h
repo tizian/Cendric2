@@ -20,6 +20,7 @@ struct SpellData final {
 	std::string spritesheetPath;
 	std::vector<std::string> creatorSoundPaths;
 	std::vector<std::string> spellSoundPaths;
+	bool isSpellSoundLooping = true;
 	sf::IntRect iconTextureRect;
 	sf::Time cooldown = sf::seconds(1.f);
 	sf::FloatRect boundingBox;
