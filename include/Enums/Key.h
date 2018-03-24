@@ -31,5 +31,6 @@ enum class Key {
 	Debug,
 	BackToCheckpoint,
 	ToggleAutotarget,
+	Attack,
 	MAX
 };

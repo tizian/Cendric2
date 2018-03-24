@@ -19,13 +19,13 @@ struct ConfigurationData final {
 	int maxFPS;
 	std::map<Key, sf::Keyboard::Key> mainKeyMap;
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
+	std::map<Key, int> joystickKeyMap;
 	DisplayMode displayMode;
 	bool isQuickcast;
 	bool isAutotarget;
 	bool isSmoothing;
 	bool isDisplayHints;
 	bool isDisplayQuestMarkers;
-
 	bool isMultithreading;
 	bool isGodmode;
 	bool isDebugRendering; // whether or not the debug rendering can be toggled
@@ -39,4 +39,5 @@ public:
 
 	static const std::map<Key, sf::Keyboard::Key> DEFAULT_KEYMAP;
 	static const std::map<Key, sf::Keyboard::Key> ALTERNATIVE_KEYMAP;
+	static const std::map<Key, int> JOYSTICK_KEYMAP;
 };

@@ -25,7 +25,7 @@
 #endif
 
 // Debug version
-//#define DEBUG
+#define DEBUG
 
 /* Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system.
    Usually set via cmake.

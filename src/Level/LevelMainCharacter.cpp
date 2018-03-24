@@ -121,18 +121,18 @@ void LevelMainCharacter::handleAttackInput() {
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
-	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
+	bool isAttacking = g_inputController->isAttacking();
 	bool isEnemyTargeted = m_targetManager->getCurrentTargetEnemy() != nullptr;
 	CursorSkin cursorSkin = isEnemyTargeted ? TargetInactive : TargetActive;
 
-	if (isMousePressed) {
+	if (isAttacking) {
 		g_inputController->getCursor().setCursorSkin(TargetHighlight, sf::seconds(0.2f), cursorSkin);
 	}
 	else {
 		g_inputController->getCursor().setCursorSkin(cursorSkin);
 	}
 
-	sf::Vector2f target = !isMousePressed && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
+	sf::Vector2f target = !isAttacking && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		g_inputController->getMousePosition();
@@ -161,7 +161,7 @@ void LevelMainCharacter::handleAttackInput() {
 	}
 
 	// handle attack input
-	if (isMousePressed) {
+	if (isAttacking) {
 		m_spellManager->executeCurrentSpell(target);
 		g_inputController->lockAction();
 		checkInvisibilityLevel();

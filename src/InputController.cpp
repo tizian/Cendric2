@@ -6,6 +6,7 @@ InputController* g_inputController;
 InputController::InputController() {
 	m_mainKeyMap = &(g_resourceManager->getConfiguration().mainKeyMap);
 	m_alternativeKeyMap = &(g_resourceManager->getConfiguration().alternativeKeyMap);
+	m_joystickMap = &(g_resourceManager->getConfiguration().joystickKeyMap);
 	init();
 }
 
@@ -34,11 +35,45 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update keys
 	for (auto& it : m_keyActiveMap) {
-		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] &&
-			(isKeyPressed(m_mainKeyMap->at(it.first)) || isKeyPressed(m_alternativeKeyMap->at(it.first)));
-		m_keyActiveMap[it.first] = isKeyPressed(m_mainKeyMap->at(it.first)) || isKeyPressed(m_alternativeKeyMap->at(it.first));
+		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && isKeyPressed(it.first);
+		m_keyActiveMap[it.first] = isKeyPressed(it.first);
 	}
 
+	updateMouse();
+	updateJoysticks();
+
+	m_cursor.update(frameTime);
+}
+
+void InputController::updateJoysticks() {
+	const int axisThreshold = 50;
+
+	bool joystickLeft = sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -axisThreshold;
+	bool dpadLeft = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX) < -axisThreshold;
+	bool left = joystickLeft || dpadLeft;
+	m_isLeftJoystickLeftJustPressed = !m_isLeftJoystickLeftPressed && left;
+	m_isLeftJoystickLeftPressed = left;
+
+	bool joystickRight = sf::Joystick::getAxisPosition(0, sf::Joystick::X) > axisThreshold;
+	bool dpadRight = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX) > axisThreshold;
+	bool right = joystickRight || dpadRight;
+	m_isLeftJoystickRightJustPressed = !m_isLeftJoystickRightPressed && right;
+	m_isLeftJoystickRightPressed = right;
+
+	bool joystickUp = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -axisThreshold;
+	bool dpadUp = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) > axisThreshold;
+	bool up = joystickUp || dpadUp;
+	m_isLeftJoystickUpJustPressed = !m_isLeftJoystickUpPressed && up;
+	m_isLeftJoystickUpPressed = up;
+
+	bool joystickDown = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > axisThreshold;
+	bool dpadDown = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) < -axisThreshold;
+	bool down = joystickDown || dpadDown;
+	m_isLeftJoystickDownJustPressed = !m_isLeftJoystickDownPressed && down;
+	m_isLeftJoystickDownPressed = down;
+}
+
+void InputController::updateMouse() {
 	// update mouse clicks
 	m_isMouseClickedLeft = (m_isMousePressedLeft && !sf::Mouse::isButtonPressed(sf::Mouse::Left));
 	m_isMouseClickedRight = (m_isMousePressedRight && !sf::Mouse::isButtonPressed(sf::Mouse::Right));
@@ -62,11 +97,9 @@ void InputController::update(const sf::Time& frameTime) {
 		m_renderTexture->getDefaultView().getCenter().y - m_renderTexture->getView().getSize().y * 0.5f);
 	m_mousePosition = pos + view;
 	m_defaultViewMousePosition = pos + defaultview;
-	m_isMouseInsideView = 
-		pos.x >= 0.f && pos.x <= static_cast<float>(WINDOW_WIDTH) && 
+	m_isMouseInsideView =
+		pos.x >= 0.f && pos.x <= static_cast<float>(WINDOW_WIDTH) &&
 		pos.y >= 0.f && pos.y <= static_cast<float>(WINDOW_HEIGHT);
-
-	m_cursor.update(frameTime);
 }
 
 void InputController::setWindow(sf::RenderWindow* window, sf::RenderTexture* texture, const sf::Vector2f& spriteScale) {
@@ -231,6 +264,12 @@ void InputController::setMouseWheelScrollTicks(float deltaTicks) {
 	m_mouseWheelScrollTicks = deltaTicks;
 }
 
+bool InputController::isKeyPressed(Key key) const {
+	bool isKeyboardKeyPressed = isKeyPressed(m_mainKeyMap->at(key)) || isKeyPressed(m_alternativeKeyMap->at(key));
+	bool isGamepadKeyPressed = isJoystickButtonPressed(m_joystickMap->at(key));
+    return isKeyboardKeyPressed || isGamepadKeyPressed;
+}
+
 bool InputController::isKeyPressed(sf::Keyboard::Key key) const {
 	if (key >= sf::Keyboard::KeyCount || key <= sf::Keyboard::Unknown) {
 		return false;
@@ -238,16 +277,81 @@ bool InputController::isKeyPressed(sf::Keyboard::Key key) const {
 	return sf::Keyboard::isKeyPressed(key);
 }
 
+bool InputController::isJoystickButtonPressed(int button) const {
+	if (button < 0) {
+		return false;
+	}
+	return sf::Joystick::isButtonPressed(0, button);
+}
+
+bool InputController::isLeftJoystickUp() const {
+	return m_isLeftJoystickUpPressed;
+}
+
+bool InputController::isLeftJoystickDown() const {
+	return m_isLeftJoystickDownPressed;
+}
+
+bool InputController::isLeftJoystickLeft() const {
+	return m_isLeftJoystickLeftPressed;
+}
+
+bool InputController::isLeftJoystickRight() const {
+	return m_isLeftJoystickRightPressed;
+}
+
+bool InputController::isLeftJoystickJustUp() const {
+	return m_isLeftJoystickUpJustPressed;
+}
+
+bool InputController::isLeftJoystickJustDown() const {
+	return m_isLeftJoystickDownJustPressed;
+}
+
+bool InputController::isLeftJoystickJustLeft() const {
+	return m_isLeftJoystickLeftJustPressed;
+}
+
+bool InputController::isLeftJoystickJustRight() const {
+	return m_isLeftJoystickRightJustPressed;
+}
+
 bool InputController::isSelected() const {
 	return isKeyJustPressed(Key::Confirm) || isKeyJustPressed(Key::Jump) || isKeyJustPressed(Key::Interact);
 }
 
-bool InputController::isScrolledUp() const {
-	return isKeyJustPressed(Key::Up) || isMouseWheelScrolledUp();
+bool InputController::isJustUp() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyJustPressed(Key::Up) || isLeftJoystickJustUp();
 }
 
-bool InputController::isScrolledDown() const {
-	return isKeyJustPressed(Key::Down) || isMouseWheelScrolledDown();
+bool InputController::isJustDown() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyJustPressed(Key::Down) || isLeftJoystickJustDown();
+}
+
+bool InputController::isLeft() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyPressed(Key::Left) || isLeftJoystickLeft();
+}
+
+bool InputController::isRight() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyPressed(Key::Right) || isLeftJoystickRight();
+}
+
+bool InputController::isUp() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyPressed(Key::Up) || isLeftJoystickUp();
+}
+
+bool InputController::isDown() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyPressed(Key::Down) || isLeftJoystickDown();
+}
+
+bool InputController::isAttacking() const {
+	return g_inputController->isMouseJustPressedLeft() || isKeyJustPressed(Key::Attack);
 }
 
 Cursor& InputController::getCursor() {

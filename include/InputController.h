@@ -49,8 +49,13 @@ public:
 
 	// helper methods as their combination is often used
 	bool isSelected() const;
-	bool isScrolledUp() const;
-	bool isScrolledDown() const;
+	bool isLeft() const;
+	bool isRight() const;
+	bool isUp() const;
+	bool isDown() const;
+	bool isAttacking() const;
+	bool isJustDown() const;
+	bool isJustUp() const;
 
 	// is the main window focused?
 	bool isWindowFocused() const;
@@ -82,13 +87,25 @@ private:
 	// Mouse keys can't be set in this maps. Their functions are fixed
 	const std::map<Key, sf::Keyboard::Key>* m_mainKeyMap;
 	const std::map<Key, sf::Keyboard::Key>* m_alternativeKeyMap;
+	const std::map<Key, int>* m_joystickMap;
 
+	void updateMouse();
 	bool m_isMousePressedLeft = false;
 	bool m_isMousePressedRight = false;
 	bool m_isMouseJustPressedLeft = false;
 	bool m_isMouseJustPressedRight = false;
 	bool m_isMouseClickedLeft = false;
 	bool m_isMouseClickedRight = false;
+
+	void updateJoysticks();
+	bool m_isLeftJoystickLeftPressed = false;
+	bool m_isLeftJoystickLeftJustPressed = false;
+	bool m_isLeftJoystickRightPressed = false;
+	bool m_isLeftJoystickRightJustPressed = false;
+	bool m_isLeftJoystickUpPressed = false;
+	bool m_isLeftJoystickUpJustPressed = false;
+	bool m_isLeftJoystickDownPressed = false;
+	bool m_isLeftJoystickDownJustPressed = false;
 
 	float m_mouseWheelScrollTicks = 0;
 
@@ -109,7 +126,20 @@ private:
 	// the text read by the input controller while isReadText is true
 	std::string m_readText;
 
+	// keyboard
 	bool isKeyPressed(sf::Keyboard::Key key) const;
+	
+	// joystick
+	bool isKeyPressed(Key key) const;
+	bool isJoystickButtonPressed(int button) const;
+	bool isLeftJoystickUp() const;
+	bool isLeftJoystickDown() const;
+	bool isLeftJoystickLeft() const;
+	bool isLeftJoystickRight() const;
+	bool isLeftJoystickJustUp() const;
+	bool isLeftJoystickJustDown() const;
+	bool isLeftJoystickJustLeft() const;
+	bool isLeftJoystickJustRight() const;
 
 	sf::Keyboard::Key m_lastPressedKey = sf::Keyboard::Unknown;
 
