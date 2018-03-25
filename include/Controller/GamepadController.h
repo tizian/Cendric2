@@ -9,6 +9,8 @@ public:
 	virtual ~GamepadController() {};
 
 	void update(const sf::Time& frameTime);
+	
+	void notifyJoystickConnected();
 
 	bool isLeftJoystickUp() const;
 	bool isLeftJoystickDown() const;
@@ -24,6 +26,7 @@ protected:
 
 private:
 	const std::map<Key, int>* m_joystickMap;
+	int m_connectedJoystick;
 
 	bool isJoystickButtonPressed(int button) const;
 

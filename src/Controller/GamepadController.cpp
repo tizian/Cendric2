@@ -8,30 +8,31 @@ GamepadController::GamepadController() {
 }
 
 void GamepadController::update(const sf::Time& frameTime) {
+	if (m_connectedJoystick < 0) return;
 	updateLeftJoystick();
 }
 
 void GamepadController::updateLeftJoystick() {
-	bool joystickLeft = sf::Joystick::getAxisPosition(0, sf::Joystick::X) < -AXIS_THRESHOLD;
-	bool dpadLeft = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX) < -AXIS_THRESHOLD;
+	bool joystickLeft = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X) < -AXIS_THRESHOLD;
+	bool dpadLeft = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX) < -AXIS_THRESHOLD;
 	bool left = joystickLeft || dpadLeft;
 	m_isLeftJoystickLeftJustPressed = !m_isLeftJoystickLeftPressed && left;
 	m_isLeftJoystickLeftPressed = left;
 
-	bool joystickRight = sf::Joystick::getAxisPosition(0, sf::Joystick::X) > AXIS_THRESHOLD;
-	bool dpadRight = sf::Joystick::getAxisPosition(0, sf::Joystick::PovX) > AXIS_THRESHOLD;
+	bool joystickRight = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X) > AXIS_THRESHOLD;
+	bool dpadRight = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX) > AXIS_THRESHOLD;
 	bool right = joystickRight || dpadRight;
 	m_isLeftJoystickRightJustPressed = !m_isLeftJoystickRightPressed && right;
 	m_isLeftJoystickRightPressed = right;
 
-	bool joystickUp = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) < -AXIS_THRESHOLD;
-	bool dpadUp = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) > AXIS_THRESHOLD;
+	bool joystickUp = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y) < -AXIS_THRESHOLD;
+	bool dpadUp = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY) > AXIS_THRESHOLD;
 	bool up = joystickUp || dpadUp;
 	m_isLeftJoystickUpJustPressed = !m_isLeftJoystickUpPressed && up;
 	m_isLeftJoystickUpPressed = up;
 
-	bool joystickDown = sf::Joystick::getAxisPosition(0, sf::Joystick::Y) > AXIS_THRESHOLD;
-	bool dpadDown = sf::Joystick::getAxisPosition(0, sf::Joystick::PovY) < -AXIS_THRESHOLD;
+	bool joystickDown = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y) > AXIS_THRESHOLD;
+	bool dpadDown = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY) < -AXIS_THRESHOLD;
 	bool down = joystickDown || dpadDown;
 	m_isLeftJoystickDownJustPressed = !m_isLeftJoystickDownPressed && down;
 	m_isLeftJoystickDownPressed = down;
@@ -78,5 +79,15 @@ bool GamepadController::isLeftJoystickJustLeft() const {
 
 bool GamepadController::isLeftJoystickJustRight() const {
 	return m_isLeftJoystickRightJustPressed;
+}
+
+void GamepadController::notifyJoystickConnected() {
+	m_connectedJoystick = -1;
+	for (int i = 0; i < 8; i++) {
+		if (sf::Joystick::isConnected(i)) {
+			m_connectedJoystick = i;
+			break;
+		}
+	}
 }
 

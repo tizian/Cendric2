@@ -361,7 +361,6 @@ void QuestEntry::renderAfterForeground(sf::RenderTarget& renderTarget) {
 	}
 }
 
-
 void QuestEntry::onLeftJustPressed() {
 	g_inputController->lockAction();
 	m_isClicked = true;
