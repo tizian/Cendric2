@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 
 #include "Enums/GameObjectState.h"
 #include "Enums/GameObjectType.h"

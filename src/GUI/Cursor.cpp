@@ -1,7 +1,7 @@
 #include "GUI/Cursor.h"
 #include "GlobalResource.h"
 #include "ResourceManager.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 
 Cursor::Cursor() {
 	m_cursorSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));

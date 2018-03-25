@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Spells/Spell.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Structs/SpellModifier.h"
 #include "Spells/SpellCreator.h"
 

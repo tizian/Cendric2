@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/GUITabButton.h"

@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "ResourceManager.h"
 
 #include "GUI/Inventory.h"

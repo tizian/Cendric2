@@ -3,7 +3,7 @@
 #include "global.h"
 #include "LevelMovableGameObject.h"
 #include "Level.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Spells/SpellManager.h"
 #include "Screens/Screen.h"
 #include "CharacterCore.h"

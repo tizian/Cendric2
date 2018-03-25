@@ -1,5 +1,5 @@
 #include "World/Camera/Camera.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Level/LevelMainCharacter.h"
 
 const float Camera::CAMERA_SPEED_PER_S = 200.f;

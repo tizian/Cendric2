@@ -2,7 +2,7 @@
 #include "Game.h"
 #include "DatabaseManager.h"
 #include "ResourceManager.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Steam/AchievementManager.h"
 #include "Logger.h"
 #include "TextProvider.h"
