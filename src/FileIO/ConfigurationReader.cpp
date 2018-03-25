@@ -20,9 +20,6 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), std::string(MAIN_INPUT_MAPPING)) == 0) {
 				noError = readMainInputMapping(line, data);
 			}
-			else if (line.compare(0, strlen(ALTERNATIVE_INPUT_MAPPING), std::string(ALTERNATIVE_INPUT_MAPPING)) == 0) {
-				noError = readAlternativeInputMapping(line, data);
-			}
 			else if (line.compare(0, strlen(VSYNC_ON), std::string(VSYNC_ON)) == 0) {
 				noError = readVSyncOn(line, data);
 			}
@@ -72,8 +69,7 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 				noError = readIsDisplayTime(line, data);
 			}
 			else {
-				g_logger->logError("ConfigurationReader", "Unknown tag found in configuration file on line: " + line);
-				noError = false;
+				g_logger->logWarning("ConfigurationReader", "Unknown tag found in configuration file on line: " + line);
 			}
 			if (!noError) {
 				break;
@@ -304,31 +300,6 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 		return false;
 	}
 	data.mainKeyMap[key] = keyboardKey;
-	return true;
-}
-
-bool ConfigurationReader::readAlternativeInputMapping(const std::string& line, ConfigurationData& data) const {
-	size_t colon = line.find(':');
-	if (colon == std::string::npos || line.length() < colon + 1) {
-		g_logger->logError("ConfigurationReader", "No colon found after input mapping tag or no value after colon.");
-		return false;
-	}
-	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
-	if (key >= Key::MAX || key <= Key::VOID) {
-		g_logger->logError("ConfigurationReader", "Key id not recognized.");
-		return false;
-	}
-	size_t comma = line.find(',');
-	if (comma == std::string::npos || line.length() < comma + 1) {
-		g_logger->logError("ConfigurationReader", "No comma found after key integer (alternative input mapping tag) or no value after comma.");
-		return false;
-	}
-	sf::Keyboard::Key keyboardKey = static_cast<sf::Keyboard::Key>(atoi(line.substr(comma + 1).c_str()));
-	if (keyboardKey > sf::Keyboard::Key::KeyCount || keyboardKey <= sf::Keyboard::Key::Unknown) {
-		g_logger->logError("ConfigurationReader", "sf Keyboard Key id not recognized.");
-		return false;
-	}
-	data.alternativeKeyMap[key] = keyboardKey;
 	return true;
 }
 

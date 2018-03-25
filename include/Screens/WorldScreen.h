@@ -96,6 +96,8 @@ protected:
 	virtual void quickload();
 	// notifies a character equipment reload
 	virtual void notifyEquipmentReload() = 0;
+	// can be set to false if the interface should not be updated
+	bool m_updateInterface = true;
 
 protected:
 	WorldInterface* m_interface = nullptr;

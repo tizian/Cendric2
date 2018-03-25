@@ -32,7 +32,7 @@ void GameObject::setDebugBoundingBox(const sf::Color& debugColor) {
 }
 
 void GameObject::update(const sf::Time& frameTime) {
-	m_isDebugRendering = g_resourceManager->getConfiguration().isDebugRendering;
+	m_isDebugRendering = g_resourceManager->getConfiguration().isDebugRenderingOn;
 	
 	if (g_inputController->isMouseOver(&m_boundingBox, m_isInputInDefaultView)) {
 		onMouseOver();

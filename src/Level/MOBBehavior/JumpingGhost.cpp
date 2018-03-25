@@ -10,7 +10,7 @@ JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, 
 	m_boundingBox = m_aiRec.boundingBox;
 	setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
 	
-	if (g_resourceManager->getConfiguration().isDebugRendering) {
+	if (g_resourceManager->getConfiguration().isDebugRenderingOn) {
 		m_debugger = new JumpingGhostDebugger();
 		screen->addObject(m_debugger);
 	}

@@ -145,7 +145,9 @@ void LevelScreen::notifyBossKilled(const EnemyReward& reward) {
 	addScreenOverlay(ScreenOverlay::createEnemyDefeatedScreenOverlay(m_bossRewards.lootableItems, m_bossRewards.lootableGold), true);
 	m_currentLevel.executeBossEnding(true);
 
+	m_updateInterface = false;
 	m_interface->hideAll();
+
 	m_isBossDefeated = true;
 	m_mainChar->setInputLock();
 	m_mainChar->setInvincible(true);

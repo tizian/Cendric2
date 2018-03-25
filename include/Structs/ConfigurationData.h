@@ -28,7 +28,8 @@ struct ConfigurationData final {
 
 	bool isMultithreading;
 	bool isGodmode;
-	bool isDebugRendering;
+	bool isDebugRendering; // whether or not the debug rendering can be toggled
+	bool isDebugRenderingOn; // whether or not the debug rendering is toggled.
 	bool isWindowReload;
 	bool isDisplayTime;
 	LogLevel logLevel;

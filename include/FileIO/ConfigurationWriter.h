@@ -27,7 +27,6 @@ private:
 	std::string writeLanguage(const ConfigurationData& data) const;
 	std::string writeDisplayMode(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;
-	std::string writeAlternativeInputMap(const ConfigurationData& data) const;
 	std::string writeVSyncOn(const ConfigurationData& data) const;
 
 	std::string writeMultithreadingOn(const ConfigurationData& data) const;

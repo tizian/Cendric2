@@ -14,7 +14,6 @@ protected:
 	const char* SOUND_VOLUME_MUSIC = "sound.volume.music";
 	const char* SOUND_VOLUME_SOUND = "sound.volume.sound";
 	const char* MAIN_INPUT_MAPPING = "input.main.key";
-	const char* ALTERNATIVE_INPUT_MAPPING = "input.alternative.key";
 	const char* QUICKCAST_ON = "quickcast.on";
 	const char* AUTOTARGET_ON = "autotarget.on";
 	const char* MULTITHREADING_ON = "multithreading.on";

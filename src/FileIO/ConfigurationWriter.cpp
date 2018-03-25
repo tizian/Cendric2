@@ -17,7 +17,6 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeHintsOn(data);
 		configuration << writeQuestmarkersOn(data);
 		configuration << writeMainInputMap(data);
-		configuration << writeAlternativeInputMap(data);
 		configuration << writeVSyncOn(data);
 		configuration << writeFPSLimitOn(data);
 		configuration << writeFPSMax(data);
@@ -142,20 +141,6 @@ std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data
 
 	for (auto it : data.mainKeyMap) {
 		inputMap.append(std::string(MAIN_INPUT_MAPPING));
-		inputMap.append(":");
-		inputMap.append(std::to_string(static_cast<int>(it.first)));
-		inputMap.append(",");
-		inputMap.append(std::to_string(static_cast<int>(it.second)));
-		inputMap.append("\n");
-	}
-	return inputMap;
-}
-
-std::string ConfigurationWriter::writeAlternativeInputMap(const ConfigurationData& data) const {
-	std::string inputMap = "# the alternative key input mapping.\n";
-
-	for (auto it : data.alternativeKeyMap) {
-		inputMap.append(std::string(ALTERNATIVE_INPUT_MAPPING));
 		inputMap.append(":");
 		inputMap.append(std::to_string(static_cast<int>(it.first)));
 		inputMap.append(",");

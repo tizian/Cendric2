@@ -330,7 +330,10 @@ bool WorldScreen::isItemMonitored(const std::string& itemId) const {
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
 	
-	m_interface->update(frameTime);
+	if (m_updateInterface) {
+		m_interface->update(frameTime);
+	}
+	
 	m_progressLog->update(frameTime);
 
 	if (g_inputController->isKeyJustPressed(Key::Screenshot)) {
@@ -355,12 +358,10 @@ void WorldScreen::execUpdate(const sf::Time& frameTime) {
 		quicksave();
 	}
 
-#ifdef DEBUG
-	if (g_inputController->isKeyJustPressed(Key::Debug)) {
-		ConfigurationData& config = g_resourceManager->getConfiguration();
-		config.isDebugRendering = !config.isDebugRendering;
+	ConfigurationData& config = g_resourceManager->getConfiguration();
+	if (g_inputController->isKeyJustPressed(Key::Debug) && config.isDebugRendering) {
+		config.isDebugRenderingOn = !config.isDebugRenderingOn;
 	}
-#endif // DEBUG
 }
 
 void WorldScreen::addScreenOverlay(ScreenOverlay* overlay, bool force) {
