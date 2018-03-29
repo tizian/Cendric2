@@ -31,5 +31,5 @@ private:
 	std::map<Key, bool> m_keyActiveMap;
 	std::map<Key, bool> m_keyJustPressedMap;
 
-	bool isKeyPressed(Key key) const;
+	bool checkKeyActive(Key key) const;
 };

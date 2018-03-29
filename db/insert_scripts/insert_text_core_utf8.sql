@@ -138,6 +138,8 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Need
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('New','New','Neu','Neu','Nuevo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewGame','New Game','Neues Spiel','Neus Spiel','Nueva partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NewJournalEntry','New journal entry','Neuer Tagebucheintrag','Neue Tagebuechiitrag','Nueva entrada en el diario');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PreviousSpell','Previous Spell','Vorheriger Zauber','Vorherige Zauber','? Hechizo');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NextSpell','Next Spell','Nächster Zauber','Nexte Zauber','? Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('No','No','Nein','Nai','No');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NoQuicksaveExists','No quick save exists','Kein Schnelllade-Speicherstand existiert','Kein Schnelllade-Speicherstand existiert','No existe guardado rápido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NotEnoughGold','Not enough gold!','Nicht genügend Gold!','Nid gnueg Gold!','¡No hay suficiente oro!');

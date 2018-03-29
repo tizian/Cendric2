@@ -160,6 +160,19 @@ void LevelMainCharacter::handleAttackInput() {
 		}
 	}
 
+	// handle previous / next spell
+	if (!g_inputController->isActionLocked()) {
+		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
+			m_spellManager->setNextSpell();
+			g_inputController->lockAction();
+			
+		}
+		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
+			m_spellManager->setPreviousSpell();
+			g_inputController->lockAction();
+		}
+	}
+
 	// handle attack input
 	if (isAttacking) {
 		m_spellManager->executeCurrentSpell(target);
@@ -193,6 +206,7 @@ void LevelMainCharacter::loadWeapon() {
 	if (m_core == nullptr || m_core->getWeapon() == nullptr) {
 		g_logger->logWarning("LevelMainCharacter::loadWeapon", "character core is not set or weapon not found.");
 		m_spellManager->addSpell(SpellData::getSpellData(SpellID::Chop));
+		m_spellManager->setCurrentSpell(0);
 		return;
 	}
 
@@ -266,6 +280,12 @@ void LevelMainCharacter::loadWeapon() {
 		if (currentSpell && contains(m_level->getLockedMagic(), currentSpell->spellType)) {
 			m_spellManager->setCurrentSpell(0); // 0 is always chop and save
 		}
+	}
+	
+	// make sure a spell is always selected
+	auto currentSpell = m_spellManager->getSelectedSpell();
+	if (!currentSpell) {
+		m_spellManager->setCurrentSpell(0);
 	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {

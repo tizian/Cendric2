@@ -20,8 +20,8 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update keys
 	for (auto& it : m_keyActiveMap) {
-		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && isKeyPressed(it.first);
-		m_keyActiveMap[it.first] = isKeyPressed(it.first);
+		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && checkKeyActive(it.first);
+		m_keyActiveMap[it.first] = checkKeyActive(it.first);
 	}
 }
 
@@ -42,7 +42,7 @@ bool InputController::isKeyJustPressed(Key key) const {
 	return m_keyJustPressedMap.at(key);
 }
 
-bool InputController::isKeyPressed(Key key) const {
+bool InputController::checkKeyActive(Key key) const {
     return isKeyboardKeyPressed(key) || isJoystickButtonPressed(key);
 }
 
@@ -62,22 +62,22 @@ bool InputController::isJustDown() const {
 
 bool InputController::isLeft() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyPressed(Key::Left) || isLeftJoystickLeft();
+	return checkKeyActive(Key::Left) || isLeftJoystickLeft();
 }
 
 bool InputController::isRight() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyPressed(Key::Right) || isLeftJoystickRight();
+	return checkKeyActive(Key::Right) || isLeftJoystickRight();
 }
 
 bool InputController::isUp() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyPressed(Key::Up) || isLeftJoystickUp();
+	return checkKeyActive(Key::Up) || isLeftJoystickUp();
 }
 
 bool InputController::isDown() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyPressed(Key::Down) || isLeftJoystickDown();
+	return checkKeyActive(Key::Down) || isLeftJoystickDown();
 }
 
 bool InputController::isAttacking() const {

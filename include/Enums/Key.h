@@ -32,5 +32,53 @@ enum class Key {
 	BackToCheckpoint,
 	ToggleAutotarget,
 	Attack,
+	PreviousSpell,
+	NextSpell,
+	Menu,
 	MAX
+};
+
+static const std::vector<Key> KEYBOARD_KEYS = {
+	Key::Escape,
+	Key::Quicksave,
+	Key::Quickload,
+	Key::Inventory,
+	Key::Map,
+	Key::CharacterInfo,
+	Key::Journal,
+	Key::Spellbook,
+	Key::Interact,
+	Key::Confirm,
+	Key::Left,
+	Key::Right,
+	Key::Up,
+	Key::Down,
+	Key::Jump,
+	Key::Chop,
+	Key::FirstSpell,
+	Key::SecondSpell,
+	Key::ThirdSpell,
+	Key::FourthSpell,
+	Key::FifthSpell,
+	Key::QuickSlot1,
+	Key::QuickSlot2, 
+	Key::PreviousSpell,
+	Key::NextSpell,
+	Key::ToggleTooltips,
+	Key::SwitchTarget,
+	Key::Screenshot,
+	Key::Debug,
+	Key::BackToCheckpoint,
+	Key::ToggleAutotarget
+};
+
+static const std::vector<Key> GAMEPAD_KEYS = {
+	Key::Escape,
+	Key::Interact,
+	Key::Confirm,
+	Key::Jump,
+	Key::Attack,
+	Key::PreviousSpell,
+	Key::NextSpell,
+	Key::Menu
 };

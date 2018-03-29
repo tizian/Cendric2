@@ -39,7 +39,12 @@ void GamepadController::updateLeftJoystick() {
 }
 
 bool GamepadController::isJoystickButtonPressed(Key key) const {
-	return isJoystickButtonPressed(m_joystickMap->at(key));
+	auto const it = m_joystickMap->find(key);
+	if (it == m_joystickMap->end()) {
+		return false;
+	}
+
+	return isJoystickButtonPressed((*it).second);
 }
 
 bool GamepadController::isJoystickButtonPressed(int button) const {

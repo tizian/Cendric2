@@ -190,6 +190,7 @@ Dave, Melanie Silk
 Matt Sanz for his awesome title art
 Lukas for the SFML support
 Achpile for the Linux support
+MyroidTC for the Controller support
 Mona for her brothel support
 Pascal Josephy for the web support
 
@@ -420,6 +421,7 @@ Dave, Melanie Silk
 Matt Sanz für sein tolles Titelbild
 Lukas für den SFML-Support
 Achpile für den Linux-Support
+MyroidTC für den Controller-Support
 Mona für ihren Bordell-Support
 Pascal Josephy für den Web-Support
 
@@ -675,6 +677,7 @@ Dave, Melanie Silk
 Matt Sanz für sis toll Titelbild
 Lukas für sin SFML-Support
 Achpile für de Linux-Support
+MyroidTC für de Controller-Support
 Mona für ihre Bordell-Support
 Pascal Josephy für de Web-Support
 

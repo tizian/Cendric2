@@ -151,6 +151,20 @@ bool SpellManager::setCurrentSpell(int spellNr) {
 	return true;
 }
 
+void SpellManager::setNextSpell() {
+	auto newNr = m_currentSpell + 1;
+	if (newNr < static_cast<int>(m_spellMap.size())) {
+		setCurrentSpell(newNr);
+	}
+}
+
+void SpellManager::setPreviousSpell() {
+	auto newNr = m_currentSpell - 1;
+	if (newNr > -1) {
+		setCurrentSpell(newNr);
+	}
+}
+
 std::vector<SpellCreator*>& SpellManager::getSpellMap() {
 	return m_spellMap;
 }

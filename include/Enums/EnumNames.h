@@ -385,6 +385,10 @@ public:
 			return "Quickslot1";
 		case Key::QuickSlot2:
 			return "Quickslot2";
+		case Key::NextSpell:
+			return "NextSpell";
+		case Key::PreviousSpell:
+			return "PreviousSpell";
 		case Key::Up:
 			return "MoveUp";
 		case Key::ToggleTooltips:
@@ -615,6 +619,7 @@ public:
 	static std::string getShortKeyboardKeyName(sf::Keyboard::Key key) {
 		switch (key) {
 		case sf::Keyboard::Unknown:
+		case sf::Keyboard::KeyCount:
 			return "??";
 		case sf::Keyboard::Escape:
 			return "Esc";
