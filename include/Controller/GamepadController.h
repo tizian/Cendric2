@@ -12,6 +12,8 @@ public:
 	
 	void notifyJoystickConnected();
 
+	bool isJoystickConnected() const;
+
 	bool isLeftJoystickUp() const;
 	bool isLeftJoystickDown() const;
 	bool isLeftJoystickLeft() const;
@@ -21,12 +23,16 @@ public:
 	bool isLeftJoystickJustLeft() const;
 	bool isLeftJoystickJustRight() const;
 
+	sf::Vector2f getRightJoystickAxis() const;
+
 protected:
 	bool isJoystickButtonPressed(Key key) const;
 
 private:
 	const std::map<Key, int>* m_joystickMap;
+	
 	int m_connectedJoystick;
+	bool m_isXBoxController;
 
 	bool isJoystickButtonPressed(int button) const;
 

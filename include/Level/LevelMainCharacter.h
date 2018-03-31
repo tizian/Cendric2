@@ -81,6 +81,7 @@ private:
 	void loadWeapon();		// character core must be set when loading the weapon.
 	void loadAnimation();
 
+	sf::Vector2f getSelectedTarget();
 	void handleAttackInput();
 	void updateHealthRegeneration(const sf::Time& frameTime) override;
 
@@ -94,6 +95,8 @@ private:
 	ScreenOverlay* m_damagedScreenOverlay = nullptr;
 	TargetManager* m_targetManager;
 	
+	sf::Vector2f m_currentAimOffset;
+	static const float AIM_DISTANCE;
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;

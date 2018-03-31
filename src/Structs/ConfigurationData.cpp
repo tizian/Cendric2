@@ -107,5 +107,7 @@ const std::map<Key, int> ConfigurationData::JOYSTICK_KEYMAP =
 	{ Key::Interact, 2 }, // 2 is X / Right
 	{ Key::Confirm, 2 }, // 2 is X / Right
 	{ Key::Jump, 0 }, // 0 is A / Jump
-	{ Key::Attack, 1 } // 1 is B / Attack
+	{ Key::Attack, 1 }, // 1 is B / Attack
+	{ Key::PreviousSpell, 4 }, // 4 is left shoulder
+	{ Key::NextSpell, 5 } // 5 is right shoulder
 };

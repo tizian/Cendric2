@@ -8,8 +8,12 @@ GamepadController::GamepadController() {
 }
 
 void GamepadController::update(const sf::Time& frameTime) {
-	if (m_connectedJoystick < 0) return;
+	if (!isJoystickConnected()) return;
 	updateLeftJoystick();
+}
+
+bool GamepadController::isJoystickConnected() const {
+	return m_connectedJoystick > -1;
 }
 
 void GamepadController::updateLeftJoystick() {
@@ -86,11 +90,27 @@ bool GamepadController::isLeftJoystickJustRight() const {
 	return m_isLeftJoystickRightJustPressed;
 }
 
+sf::Vector2f GamepadController::getRightJoystickAxis() const {
+	sf::Vector2f axis;
+	if (m_isXBoxController) {
+		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U);
+		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R);
+	}
+	else {
+		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z);
+		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R);
+	}
+	
+	return axis;
+}
+
 void GamepadController::notifyJoystickConnected() {
 	m_connectedJoystick = -1;
 	for (int i = 0; i < 8; i++) {
 		if (sf::Joystick::isConnected(i)) {
 			m_connectedJoystick = i;
+			std::string name = sf::Joystick::getIdentification(i).name;
+			m_isXBoxController = name.find("Xbox") != std::string::npos;
 			break;
 		}
 	}

@@ -11,11 +11,14 @@
 #include "Level/LevelEquipment.h"
 #include "Level/LevelMainCharacterLoader.h"
 
+const float LevelMainCharacter::AIM_DISTANCE = 150.f;
+
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
 	m_targetManager = new TargetManager();
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
 	m_isAlwaysUpdate = true;
+	m_currentAimOffset = sf::Vector2f(-AIM_DISTANCE, 0);
 }
 
 LevelMainCharacter::~LevelMainCharacter() {
@@ -116,6 +119,19 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+sf::Vector2f LevelMainCharacter::getSelectedTarget() {
+	if (!g_inputController->isJoystickConnected()) {
+		return g_inputController->getMousePosition();
+	}
+
+	auto axis = g_inputController->getRightJoystickAxis();
+	if (norm(axis) > 50) {
+		m_currentAimOffset = AIM_DISTANCE * normalized(axis);
+	}
+
+	return getPosition() + sf::Vector2f(m_boundingBox.width * 0.5f, 0.f) + m_currentAimOffset;
+}
+
 void LevelMainCharacter::handleAttackInput() {
 	if (m_isInputLock || isClimbing()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
@@ -135,7 +151,7 @@ void LevelMainCharacter::handleAttackInput() {
 	sf::Vector2f target = !isAttacking && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
-		g_inputController->getMousePosition();
+		getSelectedTarget();
 
 	// update current spell
 	for (const auto& it : m_spellKeyMap) {
