@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Controller/BaseController.h"
+#include "Enums/GamepadAxis.h"
 
 class GamepadController : public virtual BaseController {
 public:
@@ -13,6 +14,7 @@ public:
 	void notifyJoystickConnected();
 
 	bool isJoystickConnected() const;
+	bool isXboxControllerConnected() const;
 
 	bool isLeftJoystickUp() const;
 	bool isLeftJoystickDown() const;
@@ -29,12 +31,15 @@ protected:
 	bool isJoystickButtonPressed(Key key) const;
 
 private:
-	const std::map<Key, int>* m_joystickMap;
-	
+	const std::map<Key, GamepadAxis>* m_joystickMap;
+
+	std::map<GamepadAxis, std::function<bool()>> m_axisMap;
+	void initAxisMap();
+
 	int m_connectedJoystick;
 	bool m_isXBoxController;
 
-	bool isJoystickButtonPressed(int button) const;
+	bool isJoystickAxisPressed(GamepadAxis axis) const;
 
 	void updateLeftJoystick();
 	bool m_isLeftJoystickLeftPressed = false;
@@ -47,4 +52,36 @@ private:
 	bool m_isLeftJoystickDownJustPressed = false;
 
 	static const int AXIS_THRESHOLD;
+
+	bool isDPadUp() const;
+	bool isDPadDown() const;
+	bool isDPadLeft() const;
+	bool isDPadRight() const;
+	bool isLeftStickUp() const;
+	bool isLeftStickDown() const;
+	bool isLeftStickLeft() const;
+	bool isLeftStickRight() const;
+	bool isRightStickUp() const;
+	bool isRightStickDown() const;
+	bool isRightStickLeft() const;
+	bool isRightStickRight() const;
+	bool isLeftTrigger() const;
+	bool isRightTrigger() const;
+	bool isSquare() const;
+	bool isCircle() const;
+	bool isTriangle() const;
+	bool isX() const;
+	bool isY() const;
+	bool isA() const;
+	bool isB() const;
+	bool isRightShoulder() const;
+	bool isLeftShoulder() const;
+	bool isSelect() const;
+	bool isStart() const;
+	bool isShare() const;
+	bool isLeftStickPush() const;
+	bool isRightStickPush() const;
+	bool isPSButton() const;
+	bool isTouchpad() const;
+	bool isOptions()const;
 };

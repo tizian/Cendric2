@@ -1,4 +1,5 @@
 #include "Structs/ConfigurationData.h"
+#include "Controller/InputController.h"
 
 void ConfigurationData::resetToDefault() {
 #ifdef GERMAN_DEFAULT_LANGUAGE
@@ -14,7 +15,9 @@ void ConfigurationData::resetToDefault() {
 	maxFPS = 60;
 	mainKeyMap = DEFAULT_KEYMAP;
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
-	joystickKeyMap = JOYSTICK_KEYMAP;
+	joystickKeyMap = !g_inputController || g_inputController->isXboxControllerConnected() ? 
+		JOYSTICK_KEYMAP_XBOX : 
+		JOYSTICK_KEYMAP_DS4;
 	displayMode = DisplayMode::Fullscreen;
 	isQuickcast = true;
 	isAutotarget = true;
@@ -101,13 +104,28 @@ const std::map<Key, sf::Keyboard::Key> ConfigurationData::ALTERNATIVE_KEYMAP =
 	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount },
 };
 
-const std::map<Key, int> ConfigurationData::JOYSTICK_KEYMAP =
+const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_XBOX =
 {
-	{ Key::Escape, 3 }, // 3 is Y / Up
-	{ Key::Interact, 2 }, // 2 is X / Right
-	{ Key::Confirm, 2 }, // 2 is X / Right
-	{ Key::Jump, 1 }, // 0 is A / Jump
-	{ Key::Attack, 0 }, // 1 is B / Attack
-	{ Key::PreviousSpell, 4 }, // 4 is left shoulder
-	{ Key::NextSpell, 5 } // 5 is right shoulder
+	{ Key::Escape, GamepadAxis::Y }, 
+	{ Key::Interact, GamepadAxis::X },
+	{ Key::Confirm, GamepadAxis::X }, 
+	{ Key::Jump, GamepadAxis::A },
+	{ Key::Attack, GamepadAxis::B },
+	{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
+	{ Key::NextSpell, GamepadAxis::RightShoulder },
+	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
+	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
+};
+
+const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_DS4 =
+{
+	{ Key::Escape, GamepadAxis::Triangle },
+	{ Key::Interact, GamepadAxis::Circle },
+	{ Key::Confirm, GamepadAxis::Circle },
+	{ Key::Jump, GamepadAxis::Square },
+	{ Key::Attack, GamepadAxis::X },
+	{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
+	{ Key::NextSpell, GamepadAxis::RightShoulder },
+	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
+	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
 };

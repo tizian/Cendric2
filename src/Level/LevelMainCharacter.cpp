@@ -10,15 +10,14 @@
 #include "World/Item.h"
 #include "Level/LevelEquipment.h"
 #include "Level/LevelMainCharacterLoader.h"
-
-const float LevelMainCharacter::AIM_DISTANCE = 150.f;
+#include "GUI/GamepadAimCursor.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
 	m_targetManager = new TargetManager();
+	
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
 	m_isAlwaysUpdate = true;
-	m_currentAimOffset = sf::Vector2f(-AIM_DISTANCE, 0);
 }
 
 LevelMainCharacter::~LevelMainCharacter() {
@@ -28,11 +27,13 @@ LevelMainCharacter::~LevelMainCharacter() {
 
 void LevelMainCharacter::load() {
 	m_targetManager->setMainCharacter(this);
+	
 	loadResources();
 	loadAnimation();
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
+	m_gamepadAimCursor = new GamepadAimCursor(this);
 
 	setGodmode(g_resourceManager->getConfiguration().isGodmode);
 }
@@ -124,12 +125,7 @@ sf::Vector2f LevelMainCharacter::getSelectedTarget() {
 		return g_inputController->getMousePosition();
 	}
 
-	auto axis = g_inputController->getRightJoystickAxis();
-	if (norm(axis) > 50) {
-		m_currentAimOffset = AIM_DISTANCE * normalized(axis);
-	}
-
-	return getPosition() + sf::Vector2f(m_boundingBox.width * 0.5f, 0.f) + m_currentAimOffset;
+	return m_gamepadAimCursor->getCurrentPosition();
 }
 
 void LevelMainCharacter::handleAttackInput() {

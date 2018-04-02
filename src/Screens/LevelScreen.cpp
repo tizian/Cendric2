@@ -322,6 +322,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		updateObjects(_Equipment, frameTime);
 		updateObjects(_Spell, frameTime);
 		updateObjects(_Overlay, frameTime);
+		updateObjects(_Interface, frameTime);
 		if (!m_isGameOver) updateObjects(_LevelItem, frameTime);
 
 		updateObjects(_Light, frameTime);
@@ -420,6 +421,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(_Enemy, renderTarget);
 	renderObjectsAfterForeground(_Spell, renderTarget);
 	renderObjectsAfterForeground(_Light, renderTarget);
+	renderObjectsAfterForeground(_Interface, renderTarget);
 
 	m_weatherSystem->render(renderTarget);
 

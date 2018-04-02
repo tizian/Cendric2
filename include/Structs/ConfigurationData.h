@@ -6,6 +6,7 @@
 #include "Enums/DisplayMode.h"
 #include "Enums/Key.h"
 #include "Enums/LogLevel.h"
+#include "Enums/GamepadAxis.h"
 
 // describes the configuration that can be modified by the user.
 // it is loaded every time the game starts and stored in the resource manager.
@@ -19,7 +20,7 @@ struct ConfigurationData final {
 	int maxFPS;
 	std::map<Key, sf::Keyboard::Key> mainKeyMap;
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
-	std::map<Key, int> joystickKeyMap;
+	std::map<Key, GamepadAxis> joystickKeyMap;
 	DisplayMode displayMode;
 	bool isQuickcast;
 	bool isAutotarget;
@@ -39,5 +40,6 @@ public:
 
 	static const std::map<Key, sf::Keyboard::Key> DEFAULT_KEYMAP;
 	static const std::map<Key, sf::Keyboard::Key> ALTERNATIVE_KEYMAP;
-	static const std::map<Key, int> JOYSTICK_KEYMAP;
+	static const std::map<Key, GamepadAxis> JOYSTICK_KEYMAP_XBOX;
+	static const std::map<Key, GamepadAxis> JOYSTICK_KEYMAP_DS4;
 };

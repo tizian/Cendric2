@@ -80,5 +80,7 @@ static const std::vector<Key> GAMEPAD_KEYS = {
 	Key::Attack,
 	Key::PreviousSpell,
 	Key::NextSpell,
+	Key::QuickSlot1,
+	Key::QuickSlot2,
 	Key::Menu
 };

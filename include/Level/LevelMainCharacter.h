@@ -12,6 +12,7 @@
 
 class ParticleComponent;
 class AutoscrollerCamera;
+class GamepadAimCursor;
 
 // Cendric in a level
 class LevelMainCharacter final : public LevelMovableGameObject, public MainCharacter {
@@ -94,9 +95,8 @@ private:
 	CharacterCore* m_core;
 	ScreenOverlay* m_damagedScreenOverlay = nullptr;
 	TargetManager* m_targetManager;
+	GamepadAimCursor* m_gamepadAimCursor = nullptr;
 	
-	sf::Vector2f m_currentAimOffset;
-	static const float AIM_DISTANCE;
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;
 	int m_invisibilityLevel = 0;
