@@ -50,6 +50,9 @@ bool GamepadController::isJoystickButtonPressed(Key key) const {
 }
 
 bool GamepadController::isJoystickAxisPressed(GamepadAxis axis) const {
+	if (!isJoystickConnected()) {
+		return false;
+	}
 	if (axis <= GamepadAxis::VOID || axis >= GamepadAxis::MAX) {
 		return false;
 	}

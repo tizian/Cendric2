@@ -16,6 +16,7 @@ GamepadAimCursor::GamepadAimCursor(LevelMainCharacter* character) {
 	m_isVisible = true;
 	m_isActive = false;
 	m_currentAimOffset = sf::Vector2f(AIM_DISTANCE, 0);
+	m_cursorSprite.setRotation(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90);
 
 	character->getScreen()->addObject(this);
 }

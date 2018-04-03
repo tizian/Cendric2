@@ -84,6 +84,7 @@ private:
 
 	sf::Vector2f getSelectedTarget();
 	void handleAttackInput();
+	void onSpellSelected();
 	void updateHealthRegeneration(const sf::Time& frameTime) override;
 
 	void loadComponents();

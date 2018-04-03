@@ -128,6 +128,14 @@ sf::Vector2f LevelMainCharacter::getSelectedTarget() {
 	return m_gamepadAimCursor->getCurrentPosition();
 }
 
+void LevelMainCharacter::onSpellSelected() {
+	g_inputController->lockAction();
+	auto spell = m_spellManager->getSelectedSpell();
+	if (!spell) return;
+
+	m_gamepadAimCursor->setVisible(spell->needsTarget);
+}
+
 void LevelMainCharacter::handleAttackInput() {
 	if (m_isInputLock || isClimbing()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
@@ -167,7 +175,7 @@ void LevelMainCharacter::handleAttackInput() {
 				m_spellManager->setAndExecuteSpell(it.second);
 				m_core->setWeaponSpell(it.first);
 			}
-			g_inputController->lockAction();
+			onSpellSelected();
 			return;
 		}
 	}
@@ -176,12 +184,11 @@ void LevelMainCharacter::handleAttackInput() {
 	if (!g_inputController->isActionLocked()) {
 		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
 			m_spellManager->setNextSpell();
-			g_inputController->lockAction();
-			
+			onSpellSelected();
 		}
 		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
 			m_spellManager->setPreviousSpell();
-			g_inputController->lockAction();
+			onSpellSelected();
 		}
 	}
 
@@ -219,6 +226,7 @@ void LevelMainCharacter::loadWeapon() {
 		g_logger->logWarning("LevelMainCharacter::loadWeapon", "character core is not set or weapon not found.");
 		m_spellManager->addSpell(SpellData::getSpellData(SpellID::Chop));
 		m_spellManager->setCurrentSpell(0);
+		onSpellSelected();
 		return;
 	}
 
@@ -286,11 +294,13 @@ void LevelMainCharacter::loadWeapon() {
 
 	if (!m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell))) {
 		m_spellManager->setCurrentSpell(0);
+		onSpellSelected();
 	}
 	else {
 		auto currentSpell = m_spellManager->getSelectedSpell();
 		if (currentSpell && contains(m_level->getLockedMagic(), currentSpell->spellType)) {
 			m_spellManager->setCurrentSpell(0); // 0 is always chop and save
+			onSpellSelected();
 		}
 	}
 	
@@ -298,6 +308,7 @@ void LevelMainCharacter::loadWeapon() {
 	auto currentSpell = m_spellManager->getSelectedSpell();
 	if (!currentSpell) {
 		m_spellManager->setCurrentSpell(0);
+		onSpellSelected();
 	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
