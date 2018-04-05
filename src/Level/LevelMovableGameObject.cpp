@@ -77,6 +77,11 @@ void LevelMovableGameObject::updateAttributes(const sf::Time& frameTime) {
 		m_dots[i].duration -= frameTime;
 		int thisSecond = std::max(-1, static_cast<int>(std::floor(m_dots[i].duration.asSeconds())));
 		addDamage(m_dots[i].damage * (prevSecond - thisSecond), m_dots[i].damageType, true, false);
+
+		if (m_isDead) {
+			break;
+		}
+
 		if (m_dots[i].duration <= sf::Time::Zero) {
 			m_dots.erase(m_dots.begin() + i);
 		}
@@ -92,7 +97,7 @@ void LevelMovableGameObject::updateDamageNumbers(const sf::Time& frameTime) {
 	updateTime(m_timeSinceDotNumbers, frameTime);
 	if (m_timeSinceDotNumbers == sf::Time::Zero) {
 		m_timeSinceDotNumbers = sf::seconds(1.f);
-		if (m_currentDotDamage > 0) {
+		if (m_currentDotDamage > 0 && !m_isDead) {
 			m_damageNumbers->emitNumber(m_currentDotDamage, 
 				sf::Vector2f(getPosition().x + 0.5f * getSize().x, getPosition().y),
 				DamageNumberType::DamageOverTime, false);
