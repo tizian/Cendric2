@@ -246,6 +246,8 @@ void LevelMovableGameObject::setDead() {
 	m_attributes.currentHealthPoints = 0;
 	m_isDead = true;
 	g_resourceManager->playSound(getDeathSoundPath());
+
+	m_dots.clear();
 }
 
 int LevelMovableGameObject::getActiveSpellCount() const {
