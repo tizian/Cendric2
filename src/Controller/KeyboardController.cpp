@@ -51,11 +51,12 @@ void KeyboardController::setLastPressedKey(sf::Keyboard::Key key) {
 
 bool KeyboardController::isKeyboardKeyPressed(Key key) const {
 	auto const it = m_mainKeyMap->find(key);
-	if (it == m_mainKeyMap->end()) {
+	auto const it2 = m_alternativeKeyMap->find(key);
+	if (it == m_mainKeyMap->end() || it2 == m_alternativeKeyMap->end()) {
 		return false;
 	}
 
-	return isKeyboardKeyPressed((*it).second) || isKeyboardKeyPressed(m_alternativeKeyMap->at(key));
+	return isKeyboardKeyPressed((*it).second) || isKeyboardKeyPressed((*it2).second);
 }
 
 bool KeyboardController::isKeyboardKeyPressed(sf::Keyboard::Key key) const {
