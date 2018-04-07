@@ -1,5 +1,6 @@
 #include "Screens/Screen.h"
 #include "GUI/Button.h"
+#include "GUI/ButtonGroup.h"
 #include "Screens/ScreenManager.h"
 #include "GUI/GUIConstants.h"
 
@@ -99,6 +100,11 @@ void Screen::setAllButtonsEnabled(bool value) {
 		Button* button = dynamic_cast<Button*>(it);
 		if (button != nullptr) {
 			button->setEnabled(value);
+			continue;
+		}
+		ButtonGroup* buttonGroup = dynamic_cast<ButtonGroup*>(it);
+		if (buttonGroup != nullptr) {
+			buttonGroup->setEnabled(value);
 		}
 	}
 }

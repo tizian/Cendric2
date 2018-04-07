@@ -130,10 +130,13 @@ sf::Vector2f LevelMainCharacter::getSelectedTarget() {
 
 void LevelMainCharacter::onSpellSelected() {
 	g_inputController->lockAction();
-	auto spell = m_spellManager->getSelectedSpell();
-	if (!spell) return;
+	notifyGamepadCursor();
+}
 
-	m_gamepadAimCursor->setVisible(spell->needsTarget);
+void LevelMainCharacter::notifyGamepadCursor() {
+	auto spell = m_spellManager->getSelectedSpell();
+	auto behavior = dynamic_cast<UserMovingBehavior*>(m_movingBehavior);
+	m_gamepadAimCursor->setVisible(spell && spell->needsTarget && (!behavior || !behavior->isClimbing()));
 }
 
 void LevelMainCharacter::handleAttackInput() {
@@ -294,13 +297,12 @@ void LevelMainCharacter::loadWeapon() {
 
 	if (!m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell))) {
 		m_spellManager->setCurrentSpell(0);
-		onSpellSelected();
+		
 	}
 	else {
 		auto currentSpell = m_spellManager->getSelectedSpell();
 		if (currentSpell && contains(m_level->getLockedMagic(), currentSpell->spellType)) {
 			m_spellManager->setCurrentSpell(0); // 0 is always chop and save
-			onSpellSelected();
 		}
 	}
 	
@@ -308,13 +310,14 @@ void LevelMainCharacter::loadWeapon() {
 	auto currentSpell = m_spellManager->getSelectedSpell();
 	if (!currentSpell) {
 		m_spellManager->setCurrentSpell(0);
-		onSpellSelected();
 	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
 		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
 		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
 	}
+
+	onSpellSelected();
 }
 
 void LevelMainCharacter::setAutoscroller(AutoscrollerCamera* camera) {

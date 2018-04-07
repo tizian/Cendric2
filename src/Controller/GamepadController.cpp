@@ -95,7 +95,7 @@ sf::Vector2f GamepadController::getRightJoystickAxis() const {
 	sf::Vector2f axis;
 	if (m_isXBoxController) {
 		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U);
-		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R);
+		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::V);
 	}
 	else {
 		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z);

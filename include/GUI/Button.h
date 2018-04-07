@@ -25,6 +25,7 @@ public:
 	void setSize(const sf::Vector2f& size) override;
 
 	void setOnClick(const std::function<void()>& agent);
+	void click();
 
 	// position will be set automatically as the center of the button.
 	// setting text using the text provider (translated)
@@ -49,11 +50,13 @@ public:
 	// a button can only be clicked if its enabled. also, the color is less opaque if it is disabled.
 	void setEnabled(bool enabled);
 	void setVisible(bool value);
+	void setSelected(bool selected);
 
 	void setBackgroundLayerColor(const sf::Color& color);
 	void setMainLayerColor(const sf::Color& color);
 	void setOrnamentLayerColor(const sf::Color& color);
 	void setMouseOverColor(const sf::Color& color);
+	void setSelectedColor(const sf::Color& color);
 	
 	sf::Color getBackgroundLayerColor() const;
 	sf::Color getMainLayerColor() const;
@@ -63,6 +66,7 @@ public:
 	bool isClicked() const;
 	bool isEnabled() const;
 	bool isVisible() const;
+	bool isSelected() const;
 	GameObjectType getConfiguredType() const override;
 
 protected:
@@ -71,6 +75,7 @@ protected:
 	bool m_isClicked = false;
 	bool m_isEnabled = true;
 	bool m_isVisible = true;
+	bool m_isSelected = false;
 	bool m_hasTexture = false;
 
 	sf::Vector2f m_positionDefault;
@@ -87,9 +92,12 @@ protected:
 	sf::Color m_mainLayerColor;
 	sf::Color m_ornamentLayerColor;
 	sf::Color m_mouseOverColor;
+	sf::Color m_selectedColor;
 	sf::Color m_textureLayerColor;
 
 	BitmapText m_text;
+
+	void updateColor();
 
 private:
 	std::function<void()> m_executeOnClick = [](){};

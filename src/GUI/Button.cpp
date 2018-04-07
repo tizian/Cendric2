@@ -6,8 +6,9 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	m_backLayerColor(COLOR_DARK_GREY),
 	m_mainLayerColor(COLOR_BLACK),
 	m_ornamentLayerColor(COLOR_WHITE),
-	m_mouseOverColor(COLOR_PURPLE) {
-	// using default values for constructor.
+	m_mouseOverColor(COLOR_PURPLE),
+	m_selectedColor(COLOR_MEDIUM_PURPLE) {
+
 	setBoundingBox(box);
 	setInputInDefaultView(true);
 
@@ -30,7 +31,7 @@ void Button::onLeftClick() {
 		m_ornamentLayer.move(0, 1);
 		m_text.move(0, 1);
 		m_textureLayer.move(0, 1);
-		m_mainLayer.setColor(m_mainLayerColor);
+		updateColor();
 		g_inputController->lockAction();
 	}
 }
@@ -44,16 +45,14 @@ void Button::onLeftJustPressed() {
 		m_ornamentLayer.move(0, 1);
 		m_text.move(0, 1);
 		m_textureLayer.move(0, 1);
-		m_mainLayer.setColor(m_mainLayerColor);
+		updateColor();
 		g_inputController->lockAction();
 	}
 }
 
 void Button::onMouseOver() {
 	m_isMouseOver = true;
-	if (m_isEnabled && !m_isPressed) {
-		m_mainLayer.setColor(m_mouseOverColor);
-	}
+	updateColor();
 }
 
 void Button::render(sf::RenderTarget& renderTarget) {
@@ -91,7 +90,7 @@ void Button::update(const sf::Time& frameTime) {
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true))) {
 		m_isMouseOver = false;
 		m_isPressed = false;
-		m_mainLayer.setColor(m_mainLayerColor);
+		updateColor();
 		setPosition(m_positionDefault);
 	}
 	if (!m_isPressed && m_isClicked) {
@@ -100,8 +99,7 @@ void Button::update(const sf::Time& frameTime) {
 	m_isClicked = false;
 	GameObject::update(frameTime);
 	if (m_isClicked) {
-		m_executeOnClick();
-		g_inputController->lockAction();
+		click();
 	}
 }
 
@@ -177,6 +175,10 @@ void Button::setMouseOverColor(const sf::Color& color) {
 	m_mouseOverColor = color;
 }
 
+void Button::setSelectedColor(const sf::Color& color) {
+	m_selectedColor = color;
+}
+
 void Button::setMainLayerColor(const sf::Color& color) {
 	m_mainLayer.setColor(color);
 	m_mainLayerColor = color;
@@ -217,6 +219,17 @@ void Button::setVisible(bool value) {
 	m_isVisible = value;
 }
 
+void Button::setSelected(bool selected) {
+	m_isSelected = selected;
+	updateColor();
+}
+
+void Button::updateColor() {
+	m_mainLayer.setColor(m_isMouseOver && !m_isPressed ?
+		m_mouseOverColor :
+		m_isSelected ? m_selectedColor : m_mainLayerColor);
+}
+
 bool Button::isClicked() const {
 	return m_isClicked;
 }
@@ -229,10 +242,19 @@ bool Button::isVisible() const {
 	return m_isVisible;
 }
 
+bool Button::isSelected() const {
+	return m_isSelected;
+}
+
 GameObjectType Button::getConfiguredType() const {
 	return _Button;
 }
 
 void Button::setOnClick(const std::function<void()>& agent) {
 	m_executeOnClick = agent;
+}
+
+void Button::click() {
+	m_executeOnClick();
+	g_inputController->lockAction();
 }

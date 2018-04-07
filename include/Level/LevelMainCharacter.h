@@ -60,6 +60,7 @@ public:
 	void setInputLock();
 	void setJumpLock();
 	void resetTarget();
+	void notifyGamepadCursor();
 
 	bool isAlly() const override;
 	bool isReady() const override;
