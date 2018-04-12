@@ -20,7 +20,7 @@ INSERT INTO levelitem_frame (item_id, frame_nr, frame_left, frame_top, frame_wid
 
 -- Water
 
-INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item', 'Water bottle','Wasserflasche','Wasserfläsche');
+INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item', 'Water Bottle','Wasserflasche','Wasserfläsche');
 INSERT INTO text (text_id, text_type, english, german, swiss_german) values ('fo_water', 'item_desc', 'Fresh clear water.','Frisches klares Wasser.','Frischs klars Wasser.');
 INSERT INTO item (item_id, item_type, icon_left, icon_top, gold_value) values ('fo_water', 'consumable', 100, 0, 2);
 INSERT INTO item_attribute (item_id, health_regeneration,  dmg_ice, res_fire) values ('fo_water', 2, 5, 80);
