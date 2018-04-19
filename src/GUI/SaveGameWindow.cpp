@@ -207,7 +207,7 @@ void SaveGameWindow::calculateEntryPositions() {
 }
 
 void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Up)) {
+	if (g_inputController->isJustUp()) {
 		m_chosenEntry = std::max(m_chosenEntry - 1, 0);
 		SaveGameEntry* entry = m_entries[m_chosenEntry];
 		if (entry->getPosition().y < TOP) {
@@ -217,7 +217,7 @@ void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 		return;
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Down)) {
+	if (g_inputController->isJustDown()) {
 		m_chosenEntry = std::min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
 		SaveGameEntry* entry = m_entries[m_chosenEntry];
 		if (entry->getPosition().y + entry->getSize().y > TOP + HEIGHT) {
@@ -228,7 +228,7 @@ void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 	}
 
 	if (m_upActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Up)) {
+		if (g_inputController->isUp()) {
 			m_upActiveTime += frameTime;
 		}
 		else {
@@ -238,7 +238,7 @@ void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
 	}
 
 	if (m_downActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Down)) {
+		if (g_inputController->isDown()) {
 			m_downActiveTime += frameTime;
 		}
 		else {

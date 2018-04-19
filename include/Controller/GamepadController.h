@@ -25,7 +25,9 @@ public:
 	bool isLeftJoystickJustLeft() const;
 	bool isLeftJoystickJustRight() const;
 
+
 	sf::Vector2f getRightJoystickAxis() const;
+	GamepadAxis getGamepadAxisForKey(Key key) const;
 
 protected:
 	bool isJoystickButtonPressed(Key key) const;

@@ -14,6 +14,7 @@ public:
 
 	bool isKeyActive(Key key) const;
 	bool isKeyJustPressed(Key key) const;
+	bool isJoystickButtonJustPressed(Key key) const;
 
 	// helper methods as their combination is often used
 	bool isSelected() const;
@@ -22,6 +23,8 @@ public:
 	bool isUp() const;
 	bool isDown() const;
 	bool isAttacking() const;
+	bool isJustLeft() const;
+	bool isJustRight() const;
 	bool isJustDown() const;
 	bool isJustUp() const;
 
@@ -30,6 +33,8 @@ private:
 
 	std::map<Key, bool> m_keyActiveMap;
 	std::map<Key, bool> m_keyJustPressedMap;
+	std::map<Key, bool> m_gamepadKeyActiveMap;
+	std::map<Key, bool> m_gamepadKeyJustPressedMap;
 
 	bool checkKeyActive(Key key) const;
 };

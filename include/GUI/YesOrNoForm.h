@@ -4,7 +4,7 @@
 #include "World/GameObject.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
-#include "GUI/Button.h"
+#include "GUI/ButtonGroup.h"
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 
@@ -30,6 +30,7 @@ public:
 private:
 	Window* m_window;
 	BitmapText m_message;
+	ButtonGroup* m_buttonGroup;
 	Button* m_yesButton;
 	Button* m_noButton;
 };

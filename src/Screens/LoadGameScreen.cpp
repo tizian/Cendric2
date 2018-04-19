@@ -54,16 +54,19 @@ void LoadGameScreen::execOnEnter() {
 	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&LoadGameScreen::onBack, this));
+	button->setGamepadKey(Key::Escape);
 	addObject(button);
 
 	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
+	m_deleteSaveGameButton->setGamepadKey(Key::Attack);
 	addObject(m_deleteSaveGameButton);
 
 	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_loadSaveGameButton->setText("Load");
 	m_loadSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onLoadSaveGame, this));
+	m_loadSaveGameButton->setGamepadKey(Key::Confirm);
 	addObject(m_loadSaveGameButton);
 
 	// savegame window

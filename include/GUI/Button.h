@@ -27,6 +27,8 @@ public:
 	void setOnClick(const std::function<void()>& agent);
 	void click();
 
+	void setGamepadKey(Key key);
+
 	// position will be set automatically as the center of the button.
 	// setting text using the text provider (translated)
 	void setText(const std::string& text, const sf::Color& color, int charSize);
@@ -78,9 +80,12 @@ protected:
 	bool m_isSelected = false;
 	bool m_hasTexture = false;
 
+	int m_characterSize;
+
 	sf::Vector2f m_positionDefault;
 	sf::Vector2f m_backLayerOffset;
 	sf::Vector2f m_textOffset;
+	sf::Vector2f m_keyTextOffset;
 	sf::Vector2f m_textureOffset;
 
 	SlicedSprite m_mainLayer;
@@ -96,8 +101,13 @@ protected:
 	sf::Color m_textureLayerColor;
 
 	BitmapText m_text;
+	BitmapText m_keyText;
 
 	void updateColor();
+	void reloadTextPosition();
+	bool hasGamepadKey() const;
+
+	Key m_gamepadKey = Key::VOID;
 
 private:
 	std::function<void()> m_executeOnClick = [](){};

@@ -105,6 +105,15 @@ sf::Vector2f GamepadController::getRightJoystickAxis() const {
 	return axis;
 }
 
+GamepadAxis GamepadController::getGamepadAxisForKey(Key key) const {
+	auto const it = m_joystickMap->find(key);
+	if (it == m_joystickMap->end()) {
+		return GamepadAxis::VOID;
+	}
+
+	return (*it).second;
+}
+
 void GamepadController::notifyJoystickConnected() {
 	m_connectedJoystick = -1;
 	for (int i = 0; i < 8; i++) {

@@ -10,6 +10,8 @@ InputController::InputController() {
 InputController::~InputController() {
 	m_keyActiveMap.clear();
 	m_keyJustPressedMap.clear();
+	m_gamepadKeyActiveMap.clear();
+	m_gamepadKeyJustPressedMap.clear();
 }
 
 void InputController::update(const sf::Time& frameTime) {
@@ -20,6 +22,8 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update keys
 	for (auto& it : m_keyActiveMap) {
+		m_gamepadKeyJustPressedMap[it.first] = !m_gamepadKeyActiveMap[it.first] && isJoystickButtonPressed(it.first);
+		m_gamepadKeyActiveMap[it.first] = isJoystickButtonPressed(it.first);
 		m_keyJustPressedMap[it.first] = !m_keyActiveMap[it.first] && checkKeyActive(it.first);
 		m_keyActiveMap[it.first] = checkKeyActive(it.first);
 	}
@@ -30,6 +34,8 @@ void InputController::init() {
 		m_keyActiveMap.insert({ static_cast<Key>(i), false });
 	}
 
+	m_keyJustPressedMap = m_keyActiveMap;
+	m_gamepadKeyActiveMap = m_keyActiveMap;
 	m_keyJustPressedMap = m_keyActiveMap;
 }
 
@@ -42,12 +48,27 @@ bool InputController::isKeyJustPressed(Key key) const {
 	return m_keyJustPressedMap.at(key);
 }
 
+bool InputController::isJoystickButtonJustPressed(Key key) const {
+	if (m_isActionLocked || !m_isWindowFocused) return false;
+	return m_gamepadKeyJustPressedMap.at(key);
+}
+
 bool InputController::checkKeyActive(Key key) const {
     return isKeyboardKeyPressed(key) || isJoystickButtonPressed(key);
 }
 
 bool InputController::isSelected() const {
 	return isKeyJustPressed(Key::Confirm) || isKeyJustPressed(Key::Jump) || isKeyJustPressed(Key::Interact);
+}
+
+bool InputController::isJustLeft() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyJustPressed(Key::Left) || isLeftJoystickJustLeft();
+}
+
+bool InputController::isJustRight() const {
+	if (!m_isWindowFocused) return false;
+	return isKeyJustPressed(Key::Right) || isLeftJoystickJustRight();
 }
 
 bool InputController::isJustUp() const {

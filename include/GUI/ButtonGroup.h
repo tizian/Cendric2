@@ -16,6 +16,7 @@ public:
 	void addButton(Button* button);
 
 	void setEnabled(bool value);
+	void setHorizontal(bool value);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -27,4 +28,6 @@ private:
 	void updateSelection();
 	void selectButton(int index);
 	int getNextEnabledButton(bool forward);
+
+	bool m_isHorizontal;
 };

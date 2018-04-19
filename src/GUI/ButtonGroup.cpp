@@ -5,6 +5,7 @@
 ButtonGroup::ButtonGroup() {
 	m_selectedButtonIndex = -1;
 	m_isEnabled = true;
+	m_isHorizontal = false;
 }
 
 ButtonGroup::~ButtonGroup() {
@@ -19,10 +20,11 @@ void ButtonGroup::render(sf::RenderTarget& renderTarget) {
 
 void ButtonGroup::update(const sf::Time& frameTime) {
 	if (!m_isEnabled) return;
-	updateSelection();
 	for (auto button : m_buttons) {
 		button->update(frameTime);
 	}
+
+	updateSelection();
 }
 
 void ButtonGroup::setEnabled(bool enabled) {
@@ -30,6 +32,10 @@ void ButtonGroup::setEnabled(bool enabled) {
 	for (auto button : m_buttons) {
 		button->setEnabled(enabled);
 	}
+}
+
+void ButtonGroup::setHorizontal(bool horizontal) {
+	m_isHorizontal = horizontal;
 }
 
 void ButtonGroup::addButton(Button* button) {
@@ -44,13 +50,24 @@ void ButtonGroup::updateSelection() {
 		return;
 	}
 
-	if (g_inputController->isJustUp()) {
-		selectButton(getNextEnabledButton(false));
+	if (m_isHorizontal) {
+		if (g_inputController->isJustLeft()) {
+			selectButton(getNextEnabledButton(false));
+		}
+		else if (g_inputController->isJustRight()) {
+			selectButton(getNextEnabledButton(true));
+		}
 	}
-	else if (g_inputController->isJustDown()) {
-		selectButton(getNextEnabledButton(true));
+	else {
+		if (g_inputController->isJustUp()) {
+			selectButton(getNextEnabledButton(false));
+		}
+		else if (g_inputController->isJustDown()) {
+			selectButton(getNextEnabledButton(true));
+		}
 	}
-	else if (g_inputController->isSelected()) {
+
+	if (g_inputController->isSelected()) {
 		m_buttons[m_selectedButtonIndex]->click();
 	}
 }

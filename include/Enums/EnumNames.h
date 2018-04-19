@@ -13,6 +13,7 @@
 #include "Enums/ItemType.h"
 #include "Enums/EnemyID.h"
 #include "Enums/DisplayMode.h"
+#include "Enums/GamepadAxis.h"
 
 // pure static class used to resolve enum names.
 class EnumNames final {
@@ -401,6 +402,77 @@ public:
 			return "BackToCheckpoint";
 		case Key::ToggleAutotarget:
 			return "ToggleAutotarget";
+		}
+	}
+
+	static std::string getGamepadAxisName(GamepadAxis axis) {
+		switch (axis)
+		{
+		default:
+		case GamepadAxis::VOID:
+			return "?";
+		case GamepadAxis::DPadUp:
+			return "DPadUp";
+		case GamepadAxis::DPadDown:
+			return "DPadDown";
+		case GamepadAxis::DPadLeft:
+			return "DPadLeft";
+		case GamepadAxis::DPadRight:
+			return "DPadRight";
+		case GamepadAxis::LeftStickUp:
+			return "LSUp";
+		case GamepadAxis::LeftStickDown:
+			return "LSDown";
+		case GamepadAxis::LeftStickLeft:
+			return "LSLeft";
+		case GamepadAxis::LeftStickRight:
+			return "LSRight";
+		case GamepadAxis::RightStickUp:
+			return "RSUp";
+		case GamepadAxis::RightStickDown:
+			return "RSDown";
+		case GamepadAxis::RightStickLeft:
+			return "RSLeft";
+		case GamepadAxis::RightStickRight:
+			return "RSRight";
+		case GamepadAxis::LeftTrigger:
+			return "LT";
+		case GamepadAxis::RightTrigger:
+			return "RT";
+		case GamepadAxis::Square:
+			return "¾";
+		case GamepadAxis::Circle:
+			return "O";
+		case GamepadAxis::Triangle:
+			return "½";
+		case GamepadAxis::A:
+			return "A";
+		case GamepadAxis::B:
+			return "B";
+		case GamepadAxis::X:
+			return "X";
+		case GamepadAxis::Y:
+			return "Y";
+		case GamepadAxis::Select:
+			return "Select";
+		case GamepadAxis::Start:
+			return "Start";
+		case GamepadAxis::Share:
+			return "Share";
+		case GamepadAxis::Options:
+			return "Options";
+		case GamepadAxis::PSButton:
+			return "PS";
+		case GamepadAxis::Touchpad:
+			return "Touch";
+		case GamepadAxis::LeftStickPush:
+			return "LPush";
+		case GamepadAxis::RightStickPush:
+			return "RPush";
+		case GamepadAxis::LeftShoulder:
+			return "LB";
+		case GamepadAxis::RightShoulder:
+			return "RB";
 		}
 	}
 

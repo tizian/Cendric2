@@ -1,5 +1,6 @@
 #include "GUI/Button.h"
 #include "GlobalResource.h"
+#include "Enums/EnumNames.h"
 
 Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	GameObject(),
@@ -21,6 +22,8 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
+
+	m_keyText.setColor(COLOR_PURPLE);
 }
 
 void Button::onLeftClick() {
@@ -61,6 +64,9 @@ void Button::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_mainLayer);
 	renderTarget.draw(m_ornamentLayer);
 	renderTarget.draw(m_text);
+	if (hasGamepadKey()) {
+		renderTarget.draw(m_keyText);
+	}
 	if (m_hasTexture) renderTarget.draw(m_textureLayer);
 }
 
@@ -70,6 +76,7 @@ void Button::setPosition(const sf::Vector2f& pos) {
 	m_backLayer.setPosition(pos + m_backLayerOffset);
 	m_ornamentLayer.setPosition(pos);
 	m_text.setPosition(pos + m_textOffset);
+	m_keyText.setPosition(pos + m_keyTextOffset);
 	m_textureLayer.setPosition(pos + m_textureOffset);
 	m_positionDefault = pos;
 }
@@ -85,7 +92,7 @@ void Button::setSize(const sf::Vector2f& size) {
 }
 
 void Button::update(const sf::Time& frameTime) {
-	if (!m_isVisible) return;
+	if (!m_isVisible || !m_isEnabled) return;
 
 	if (m_isMouseOver && !(g_inputController->isMouseOver(getBoundingBox(), true))) {
 		m_isMouseOver = false;
@@ -98,7 +105,7 @@ void Button::update(const sf::Time& frameTime) {
 	}
 	m_isClicked = false;
 	GameObject::update(frameTime);
-	if (m_isClicked) {
+	if (m_isClicked || hasGamepadKey() && g_inputController->isJoystickButtonJustPressed(m_gamepadKey)) {
 		click();
 	}
 }
@@ -156,10 +163,22 @@ void Button::setTextureColor(const sf::Color& color) {
 
 void Button::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
-	float xOffset = std::max((getBoundingBox()->width - m_text.getLocalBounds().width) / 2.f, 0.f);
-	float yOffset = std::max((getBoundingBox()->height - m_text.getLocalBounds().height) / 2.f, 0.f);
+	m_keyText.setCharacterSize(size);
+	m_characterSize = size;
+	reloadTextPosition();
+}
+
+void Button::reloadTextPosition() {
+	float textWidth = hasGamepadKey() ?
+		m_text.getLocalBounds().width + m_keyText.getLocalBounds().width :
+		m_text.getLocalBounds().width;
+
+	float xOffset = std::max((getBoundingBox()->width - textWidth) * 0.5f, 0.f);
+	float yOffset = std::max((getBoundingBox()->height - m_text.getLocalBounds().height) * 0.5f, 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 	m_text.setPosition(getPosition() + m_textOffset);
+	m_keyTextOffset = m_textOffset + sf::Vector2f(m_text.getLocalBounds().width, 0.f);
+	m_keyText.setPosition(getPosition() + m_keyTextOffset);
 }
 
 void Button::setBackgroundLayerColor(const sf::Color& color) {
@@ -254,7 +273,18 @@ void Button::setOnClick(const std::function<void()>& agent) {
 	m_executeOnClick = agent;
 }
 
+void Button::setGamepadKey(Key key) {
+	m_gamepadKey = key;
+	m_keyText.setString(" (" + EnumNames::getGamepadAxisName(g_inputController->getGamepadAxisForKey(key)) + ")");
+	reloadTextPosition();
+}
+
+bool Button::hasGamepadKey() const {
+	return m_gamepadKey != Key::VOID && g_inputController->isJoystickConnected();
+}
+
 void Button::click() {
+	m_isClicked = true;
 	m_executeOnClick();
 	g_inputController->lockAction();
 }
