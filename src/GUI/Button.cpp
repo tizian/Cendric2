@@ -23,7 +23,7 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	m_positionDefault = sf::Vector2f(box.left, box.top);
 	setPosition(m_positionDefault);
 
-	m_keyText.setColor(COLOR_PURPLE);
+	m_keyText.setColor(COLOR_LIGHT_PURPLE);
 }
 
 void Button::onLeftClick() {
