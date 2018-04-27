@@ -3,6 +3,7 @@
 #include "Screens/KeyBindingsScreen.h"
 #include "Screens/ScreenManager.h"
 #include "FileIO/ConfigurationWriter.h"
+#include "Enums/EnumNames.h"
 
 OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
 }

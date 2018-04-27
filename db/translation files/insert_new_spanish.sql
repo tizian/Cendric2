@@ -43,6 +43,8 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Time
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('TimeWarpText','This crystal will set yourself back in time. Continue?','Dieser Kristall wird dich in der Zeit zurückversetzen. Fortfahren?','De Kristall wird dich ide Ziit zruggversetze. Wetsch das?', '?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PreviousSpell','Previous Spell','Vorheriger Zauber','Vorherige Zauber','? Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NextSpell','Next Spell','Nächster Zauber','Nexte Zauber','? Hechizo');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Keyboard','Keyboard','Tastatur','Tastatur','??');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gamepad','Gamepad','Gamepad','Gamepad','??');
 
 -- hints
 
