@@ -31,10 +31,10 @@ Haab
 
 <<< Level & Map Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Quality Assurance >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Music >>>
@@ -176,10 +176,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
@@ -262,10 +262,10 @@ Haab
 
 <<< Level & Karten Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Qualitätssicherung >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Musik >>>
@@ -407,10 +407,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
@@ -489,10 +489,10 @@ Haab
 
 <<< Level & Chartä Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Qualitätssicherig >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Musig >>>
@@ -663,10 +663,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,

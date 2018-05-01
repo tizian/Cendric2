@@ -4,6 +4,7 @@
 #include "FileIO/ConfigurationWriter.h"
 #include "Screens/GamepadKeyBindingsScreen.h"
 #include "Screens/KeyboardKeyBindingsScreen.h"
+#include "GUI/ButtonGroup.h"
 
 KeyBindingsScreen::KeyBindingsScreen(CharacterCore* core) : Screen(core) {
 }
@@ -27,7 +28,9 @@ void KeyBindingsScreen::execOnEnter() {
 	const float marginY = WINDOW_HEIGHT - 80.f;
 	const float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
-
+	const float buttonX = (WINDOW_WIDTH - (2 * buttonWidth + buttonSpacing)) * 0.5f;
+	const float buttonY = WINDOW_HEIGHT * 0.5f - buttonHeight;
+	
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
@@ -36,20 +39,26 @@ void KeyBindingsScreen::execOnEnter() {
 	// back
 	auto button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
+	button->setGamepadKey(Key::Escape);
 	button->setOnClick(std::bind(&KeyBindingsScreen::onBack, this));
 	addObject(button);
 
+	ButtonGroup* buttonGroup = new ButtonGroup();
+	buttonGroup->setHorizontal(true);
+
 	// keyboard keybindings
-	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect(buttonX, buttonY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Keyboard");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onKeyboardKeyBindings, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	
 	// gamepad keybindings
-	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect(buttonX + buttonSpacing + buttonWidth, buttonY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Gamepad");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onGamepadKeyBindings, this));
-	addObject(button);
+	buttonGroup->addButton(button);
+
+	addObject(buttonGroup);
 }
 
 void KeyBindingsScreen::execOnExit() {
