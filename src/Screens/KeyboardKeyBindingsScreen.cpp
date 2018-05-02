@@ -48,7 +48,7 @@ void KeyboardKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 		setNextScreen(new OptionsScreen(m_characterCore));
 		return;
 	}
-	
+
 	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
 		reload();
 	}
@@ -58,17 +58,30 @@ void KeyboardKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 		}
 	}
 
+	m_keyButtonGroup->update(frameTime);
+
 	for (auto& it : m_keyButtons) {
 		Button* keyButton = m_keyButtons[it.first].first;
-		sf::Vector2f pos = keyButton->getPosition();
-		if (pos.y < TOP || pos.y + keyButton->getBoundingBox()->height > TOP + HEIGHT) continue;
 
-		keyButton->update(frameTime);
+		sf::Vector2f pos = keyButton->getPosition();
+		if (pos.y < TOP) {
+			if (!keyButton->isSelected()) {
+				continue;
+			}
+			m_scrollBar->scroll(-1);
+		}
+		else if (pos.y + keyButton->getBoundingBox()->height > TOP + HEIGHT) {
+			if (!keyButton->isSelected()) {
+				continue;
+			}
+			m_scrollBar->scroll(1);
+		}
 
 		if (keyButton->isClicked()) {
 			reload();
 			keyButton->setText("PressAnyKey");
 			m_selectedKey = it.first;
+			break;
 		}
 	}
 
@@ -116,6 +129,14 @@ void KeyboardKeyBindingsScreen::calculateEntryPositions() {
 
 		yOffset += delta;
 	}
+
+	sf::Vector2f pos = m_keyButtonGroup->getSelectedButton()->getPosition();
+	if (pos.y < TOP) {
+		m_keyButtonGroup->setNextButtonSelected(true);
+	}
+	else if (pos.y + m_keyButtonGroup->getSelectedButton()->getBoundingBox()->height > TOP + HEIGHT) {
+		m_keyButtonGroup->setNextButtonSelected(false);
+	}
 }
 
 void KeyboardKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
@@ -125,9 +146,7 @@ void KeyboardKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 	for (auto it : m_keyTexts) {
 		m_scrollHelper->texture.draw(*it.second);
 	}
-	for (auto it : m_keyButtons) {
-		it.second.first->render(m_scrollHelper->texture);
-	}
+	m_keyButtonGroup->render(m_scrollHelper->texture);
 
 	renderObjects(_Button, renderTarget);
 	renderTooltipText(renderTarget);
@@ -146,6 +165,8 @@ void KeyboardKeyBindingsScreen::execOnEnter() {
 
 	m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
 
+	m_keyButtonGroup = new ButtonGroup();
+
 	// init text and button objects once
 	for (auto& it : m_selectedKeys) {
 		if (contains(INVISIBLE_KEYS, it.first)) continue;
@@ -158,6 +179,8 @@ void KeyboardKeyBindingsScreen::execOnEnter() {
 		if (contains(UNMODIFIABLE_KEYS, it.first)) {
 			keyButton->setEnabled(false);
 		}
+
+		m_keyButtonGroup->addButton(keyButton);
 		m_keyButtons[it.first] = std::pair<Button*, sf::Keyboard::Key>(keyButton, it.second);
 	}
 
@@ -183,20 +206,24 @@ void KeyboardKeyBindingsScreen::execOnEnter() {
 	auto button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&KeyboardKeyBindingsScreen::onBack, this));
+	button->setGamepadKey(Key::Escape);
 	addObject(button);
 	// reset
 	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Reset");
 	button->setOnClick(std::bind(&KeyboardKeyBindingsScreen::onReset, this));
+	button->setGamepadKey(Key::PreviousSpell);
 	addObject(button);
 	// default values
 	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Default");
+	button->setGamepadKey(Key::NextSpell);
 	button->setOnClick(std::bind(&KeyboardKeyBindingsScreen::onUseDefault, this));
 	addObject(button);
 	// apply
 	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
+	button->setGamepadKey(Key::Attack);
 	button->setOnClick(std::bind(&KeyboardKeyBindingsScreen::onApply, this));
 	addObject(button);
 }
@@ -242,9 +269,7 @@ void KeyboardKeyBindingsScreen::execOnExit() {
 		delete it.second;
 	}
 	// delete buttons
-	for (auto it : m_keyButtons) {
-		delete it.second.first;
-	}
+	delete m_keyButtonGroup;
 	m_keyTexts.clear();
 	m_keyButtons.clear();
 	m_selectedKeys.clear();

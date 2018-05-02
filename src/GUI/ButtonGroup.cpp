@@ -45,6 +45,10 @@ void ButtonGroup::addButton(Button* button) {
 	}
 }
 
+Button* ButtonGroup::getSelectedButton() const {
+	return m_buttons[m_selectedButtonIndex];
+}
+
 void ButtonGroup::updateSelection() {
 	if (g_inputController->isActionLocked() || m_selectedButtonIndex == -1) {
 		return;
@@ -52,24 +56,28 @@ void ButtonGroup::updateSelection() {
 
 	if (m_isHorizontal) {
 		if (g_inputController->isJustLeft()) {
-			selectButton(getNextEnabledButton(false));
+			setNextButtonSelected(false);
 		}
 		else if (g_inputController->isJustRight()) {
-			selectButton(getNextEnabledButton(true));
+			setNextButtonSelected(true);
 		}
 	}
 	else {
 		if (g_inputController->isJustUp()) {
-			selectButton(getNextEnabledButton(false));
+			setNextButtonSelected(false);
 		}
 		else if (g_inputController->isJustDown()) {
-			selectButton(getNextEnabledButton(true));
+			setNextButtonSelected(true);
 		}
 	}
 
 	if (g_inputController->isSelected()) {
 		m_buttons[m_selectedButtonIndex]->click();
 	}
+}
+
+void ButtonGroup::setNextButtonSelected(bool forward) {
+	selectButton(getNextEnabledButton(forward));
 }
 
 int ButtonGroup::getNextEnabledButton(bool forward) {
