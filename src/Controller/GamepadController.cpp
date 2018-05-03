@@ -11,6 +11,7 @@ GamepadController::GamepadController() {
 
 void GamepadController::update(const sf::Time& frameTime) {
 	if (!isJoystickConnected()) return;
+	m_lastPressedAxis = GamepadAxis::VOID;
 	updateLeftJoystick();
 }
 
@@ -112,6 +113,18 @@ GamepadAxis GamepadController::getGamepadAxisForKey(Key key) const {
 	}
 
 	return (*it).second;
+}
+
+void GamepadController::setLastPressedGamepadAxis(sf::Joystick::Axis axis) {
+	// TODO
+}
+
+void GamepadController::setLastPressedGamepadButton(int button) {
+	// TODO
+}
+
+GamepadAxis GamepadController::getLastPressedAxis() const {
+	return m_lastPressedAxis;
 }
 
 void GamepadController::notifyJoystickConnected() {

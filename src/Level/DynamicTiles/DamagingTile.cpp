@@ -10,7 +10,10 @@ const float DamagingTile::DAMAGE_RADIUS = 20.f;
 
 bool DamagingTile::init(const LevelTileProperties& properties) {
 	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
-	addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
+	
+	if (!contains(properties, std::string("dark"))) {
+		addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
+	}
 
 	m_isDivine = contains(properties, std::string("divine"));
 

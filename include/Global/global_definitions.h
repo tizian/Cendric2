@@ -17,7 +17,7 @@
 // #define STEAM
 
 // versioning
-#define CENDRIC_VERSION_NR_RAW "1.0.5"
+#define CENDRIC_VERSION_NR_RAW "1.0.6"
 #define ENVIRONMENT "64bit"
 #ifdef STEAM
     #define CENDRIC_VERSION_NR CENDRIC_VERSION_NR_RAW " " ENVIRONMENT
@@ -31,7 +31,7 @@
 /* Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system.
    Usually set via cmake.
    (e.g. User/Documents/Cendric on Windows or ~/Library/Application Support/Cendric on Mac) */
-// #define EXTERNAL_DOCUMENTS_FOLDER
+//#define EXTERNAL_DOCUMENTS_FOLDER
 
 // Resolve .app package internal resource path for mac builds. Usually set via cmake.
 // #define APPLE_APP_BUILD

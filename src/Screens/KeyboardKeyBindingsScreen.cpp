@@ -195,7 +195,7 @@ void KeyboardKeyBindingsScreen::execOnEnter() {
 	sf::FloatRect scrollBox(LEFT, TOP, WIDTH, HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
-	const float buttonWidth = 200.f;
+	const float buttonWidth = 240.f;
 	const float buttonHeight = 50.f;
 	const float marginX = 60.f;
 	const float marginY = WINDOW_HEIGHT - 80.f;

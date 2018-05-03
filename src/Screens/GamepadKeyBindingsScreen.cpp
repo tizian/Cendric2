@@ -1,5 +1,6 @@
 #include "Screens/GamepadKeyBindingsScreen.h"
-#include "Screens/KeyBindingsScreen.h"
+#include "Screens/OptionsScreen.h"
+#include "Screens/MenuScreen.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
 #include "FileIO/ConfigurationWriter.h"
@@ -21,20 +22,19 @@ const std::set<Key> GamepadKeyBindingsScreen::INVISIBLE_KEYS = {
 	Key::Debug
 };
 
-const std::set<sf::Keyboard::Key> GamepadKeyBindingsScreen::RESERVED_KEYS = {
-	sf::Keyboard::Escape,
-	sf::Keyboard::Numpad1,
-	sf::Keyboard::Numpad2,
-	sf::Keyboard::Numpad3,
-	sf::Keyboard::Numpad4,
-	sf::Keyboard::Numpad5,
-	sf::Keyboard::Numpad6,
-	sf::Keyboard::Numpad7,
-	sf::Keyboard::Return,
-	sf::Keyboard::Up,
-	sf::Keyboard::Down,
-	sf::Keyboard::Left,
-	sf::Keyboard::Right,
+const std::set<GamepadAxis> GamepadKeyBindingsScreen::RESERVED_AXES = {
+	GamepadAxis::LeftStickDown,
+	GamepadAxis::LeftStickUp,
+	GamepadAxis::LeftStickRight,
+	GamepadAxis::LeftStickLeft,
+	GamepadAxis::RightStickDown,
+	GamepadAxis::RightStickUp,
+	GamepadAxis::RightStickRight,
+	GamepadAxis::RightStickLeft,
+	GamepadAxis::DPadDown,
+	GamepadAxis::DPadUp,
+	GamepadAxis::DPadRight,
+	GamepadAxis::DPadLeft,
 };
 
 GamepadKeyBindingsScreen::GamepadKeyBindingsScreen(CharacterCore* core) : Screen(core) {
@@ -44,30 +44,43 @@ void GamepadKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 	m_scrollBar->update(frameTime);
 
 	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
-		setNextScreen(new KeyBindingsScreen(m_characterCore));
+		setNextScreen(new OptionsScreen(m_characterCore));
 		return;
 	}
 
 	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
 		reload();
 	}
-	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedKey() != sf::Keyboard::Unknown) {
-		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedKey())) {
+	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedAxis() != GamepadAxis::VOID) {
+		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedAxis())) {
 			setNegativeTooltip("KeyReserved");
 		}
 	}
 
+	m_keyButtonGroup->update(frameTime);
+
 	for (auto& it : m_keyButtons) {
 		Button* keyButton = m_keyButtons[it.first].first;
-		sf::Vector2f pos = keyButton->getPosition();
-		if (pos.y < TOP || pos.y + keyButton->getBoundingBox()->height > TOP + HEIGHT) continue;
 
-		keyButton->update(frameTime);
+		sf::Vector2f pos = keyButton->getPosition();
+		if (pos.y < TOP) {
+			if (!keyButton->isSelected()) {
+				continue;
+			}
+			m_scrollBar->scroll(-1);
+		}
+		else if (pos.y + keyButton->getBoundingBox()->height > TOP + HEIGHT) {
+			if (!keyButton->isSelected()) {
+				continue;
+			}
+			m_scrollBar->scroll(1);
+		}
 
 		if (keyButton->isClicked()) {
 			reload();
 			keyButton->setText("PressAnyKey");
 			m_selectedKey = it.first;
+			break;
 		}
 	}
 
@@ -115,6 +128,14 @@ void GamepadKeyBindingsScreen::calculateEntryPositions() {
 
 		yOffset += delta;
 	}
+
+	sf::Vector2f pos = m_keyButtonGroup->getSelectedButton()->getPosition();
+	if (pos.y < TOP) {
+		m_keyButtonGroup->setNextButtonSelected(true);
+	}
+	else if (pos.y + m_keyButtonGroup->getSelectedButton()->getBoundingBox()->height > TOP + HEIGHT) {
+		m_keyButtonGroup->setNextButtonSelected(false);
+	}
 }
 
 void GamepadKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
@@ -124,9 +145,7 @@ void GamepadKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 	for (auto it : m_keyTexts) {
 		m_scrollHelper->texture.draw(*it.second);
 	}
-	for (auto it : m_keyButtons) {
-		it.second.first->render(m_scrollHelper->texture);
-	}
+	m_keyButtonGroup->render(m_scrollHelper->texture);
 
 	renderObjects(_Button, renderTarget);
 	renderTooltipText(renderTarget);
@@ -139,11 +158,13 @@ void GamepadKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 
 void GamepadKeyBindingsScreen::execOnEnter() {
 	// title
-	m_title = new BitmapText(g_textProvider->getText("Gamepad"), TextStyle::Shadowed);
+	m_title = new BitmapText(g_textProvider->getText("Keyboard"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
-	m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
+	m_selectedKeys = g_resourceManager->getConfiguration().joystickKeyMap;
+
+	m_keyButtonGroup = new ButtonGroup();
 
 	// init text and button objects once
 	for (auto& it : m_selectedKeys) {
@@ -153,11 +174,13 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 		m_keyTexts[it.first] = keyText;
 
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
-		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
+		keyButton->setTextRaw(EnumNames::getGamepadAxisName(it.second), 12);
 		if (contains(UNMODIFIABLE_KEYS, it.first)) {
 			keyButton->setEnabled(false);
 		}
-		m_keyButtons[it.first] = std::pair<Button*, sf::Keyboard::Key>(keyButton, it.second);
+
+		m_keyButtonGroup->addButton(keyButton);
+		m_keyButtons[it.first] = std::pair<Button*, GamepadAxis>(keyButton, it.second);
 	}
 
 	reload();
@@ -171,46 +194,49 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	sf::FloatRect scrollBox(LEFT, TOP, WIDTH, HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
-	const float buttonWidth = 200.f;
+	const float buttonWidth = 240.f;
 	const float buttonHeight = 50.f;
 	const float marginX = 60.f;
 	const float marginY = WINDOW_HEIGHT - 80.f;
 	const float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
 
-	Button* button;
 	// back
-	button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	auto button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onBack, this));
+	button->setGamepadKey(Key::Escape);
 	addObject(button);
 	// reset
 	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Reset");
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onReset, this));
+	button->setGamepadKey(Key::PreviousSpell);
 	addObject(button);
 	// default values
 	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Default");
+	button->setGamepadKey(Key::NextSpell);
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onUseDefault, this));
 	addObject(button);
 	// apply
 	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
+	button->setGamepadKey(Key::Attack);
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onApply, this));
 	addObject(button);
 }
 
-bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, sf::Keyboard::Key keyboardKey) {
-	if (contains(RESERVED_KEYS, keyboardKey)) {
+bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadAxis axis) {
+	if (contains(RESERVED_AXES, axis)) {
 		reload();
 		return false;
 	}
 
 	for (auto& it : m_selectedKeys) {
-		if (it.second == keyboardKey) it.second = sf::Keyboard::KeyCount;
+		if (it.second == axis) it.second = GamepadAxis::MAX;
 	}
-	m_selectedKeys[key] = keyboardKey;
+	m_selectedKeys[key] = axis;
 	reload();
 	return true;
 }
@@ -223,9 +249,9 @@ void GamepadKeyBindingsScreen::reload() {
 		if (contains(INVISIBLE_KEYS, it.first)) continue;
 
 		Button* keyButton = m_keyButtons[it.first].first;
-		keyButton->setTextRaw(EnumNames::getKeyboardKeyName(it.second), 12);
+		keyButton->setTextRaw(EnumNames::getGamepadAxisName(it.second), 12);
 
-		if (it.second == sf::Keyboard::KeyCount) {
+		if (it.second == GamepadAxis::MAX) {
 			keyButton->setTextColor(COLOR_BAD);
 		}
 
@@ -242,9 +268,7 @@ void GamepadKeyBindingsScreen::execOnExit() {
 		delete it.second;
 	}
 	// delete buttons
-	for (auto it : m_keyButtons) {
-		delete it.second.first;
-	}
+	delete m_keyButtonGroup;
 	m_keyTexts.clear();
 	m_keyButtons.clear();
 	m_selectedKeys.clear();
@@ -254,22 +278,25 @@ void GamepadKeyBindingsScreen::execOnExit() {
 }
 
 void GamepadKeyBindingsScreen::onBack() {
-	setNextScreen(new KeyBindingsScreen(m_characterCore));
+	setNextScreen(new MenuScreen(m_characterCore));
 }
 
 void GamepadKeyBindingsScreen::onApply() {
-	g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
+	g_resourceManager->getConfiguration().joystickKeyMap = m_selectedKeys;
 	ConfigurationWriter writer;
 	writer.saveToFile(g_resourceManager->getConfiguration());
 	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
 }
 
 void GamepadKeyBindingsScreen::onUseDefault() {
-	m_selectedKeys = ConfigurationData::DEFAULT_KEYMAP;
+	m_selectedKeys = g_inputController->isXboxControllerConnected() ?
+		ConfigurationData::JOYSTICK_KEYMAP_XBOX :
+		ConfigurationData::JOYSTICK_KEYMAP_DS4;
+	
 	reload();
 }
 
 void GamepadKeyBindingsScreen::onReset() {
-	m_selectedKeys = g_resourceManager->getConfiguration().mainKeyMap;
+	m_selectedKeys = g_resourceManager->getConfiguration().joystickKeyMap;
 	reload();
 }

@@ -131,6 +131,12 @@ void Game::pollEvents() {
 		else if (e.type == sf::Event::KeyPressed) {
 			g_inputController->setLastPressedKey(e.key.code);
 		}
+		else if (e.type == sf::Event::JoystickMoved) {
+			g_inputController->setLastPressedGamepadAxis(e.joystickMove.axis);
+		}
+		else if (e.type == sf::Event::JoystickButtonPressed) {
+			g_inputController->setLastPressedGamepadButton(e.joystickButton.button);
+		}
 		else if (e.type == sf::Event::MouseWheelScrolled) {
 			g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
 		}

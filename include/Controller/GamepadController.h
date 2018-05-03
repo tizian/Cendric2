@@ -25,12 +25,18 @@ public:
 	bool isLeftJoystickJustLeft() const;
 	bool isLeftJoystickJustRight() const;
 
-
 	sf::Vector2f getRightJoystickAxis() const;
 	GamepadAxis getGamepadAxisForKey(Key key) const;
+	
+	void setLastPressedGamepadAxis(sf::Joystick::Axis axis);
+	void setLastPressedGamepadButton(int button);
+
+	// returns the GamepadAxis that was pressed in the last frame. If none, returns GamepadAxis::VOID
+	GamepadAxis getLastPressedAxis() const;
 
 protected:
 	bool isJoystickButtonPressed(Key key) const;
+	
 
 private:
 	const std::map<Key, GamepadAxis>* m_joystickMap;
@@ -40,6 +46,8 @@ private:
 
 	int m_connectedJoystick;
 	bool m_isXBoxController;
+
+	GamepadAxis m_lastPressedAxis = GamepadAxis::VOID;
 
 	bool isJoystickAxisPressed(GamepadAxis axis) const;
 
