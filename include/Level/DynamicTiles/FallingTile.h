@@ -32,6 +32,7 @@ public:
 private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
+	bool isCurrentlyColliding(); 
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	const float GRAVITY_ACCELERATION = 1000.f;

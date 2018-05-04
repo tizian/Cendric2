@@ -402,6 +402,10 @@ public:
 			return "BackToCheckpoint";
 		case Key::ToggleAutotarget:
 			return "ToggleAutotarget";
+		case Key::Menu:
+			return "Menu";
+		case Key::Attack:
+			return "Attack";
 		}
 	}
 

@@ -28,15 +28,14 @@ public:
 	sf::Vector2f getRightJoystickAxis() const;
 	GamepadAxis getGamepadAxisForKey(Key key) const;
 	
-	void setLastPressedGamepadAxis(sf::Joystick::Axis axis);
-	void setLastPressedGamepadButton(int button);
+	void setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event);
+	void setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event);
 
 	// returns the GamepadAxis that was pressed in the last frame. If none, returns GamepadAxis::VOID
 	GamepadAxis getLastPressedAxis() const;
 
 protected:
 	bool isJoystickButtonPressed(Key key) const;
-	
 
 private:
 	const std::map<Key, GamepadAxis>* m_joystickMap;
@@ -94,4 +93,9 @@ private:
 	bool isPSButton() const;
 	bool isTouchpad() const;
 	bool isOptions()const;
+
+	GamepadAxis getLastPressedGamepadAxisXbox(sf::Joystick::Axis axis, bool isNegative);
+	GamepadAxis getLastPressedGamepadAxisDs4(sf::Joystick::Axis axis, bool isNegative);
+	GamepadAxis getLastPressedGamepadButtonXbox(int button);
+	GamepadAxis getLastPressedGamepadButtonDs4(int button);
 };

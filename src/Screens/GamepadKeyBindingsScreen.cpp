@@ -14,12 +14,9 @@ const float GamepadKeyBindingsScreen::TOP = 75.f;
 const float GamepadKeyBindingsScreen::LEFT = 0.5f * (WINDOW_WIDTH - WIDTH);
 
 const std::set<Key> GamepadKeyBindingsScreen::UNMODIFIABLE_KEYS = {
-	Key::Escape,
-	Key::Confirm
 };
 
 const std::set<Key> GamepadKeyBindingsScreen::INVISIBLE_KEYS = {
-	Key::Debug
 };
 
 const std::set<GamepadAxis> GamepadKeyBindingsScreen::RESERVED_AXES = {
@@ -41,6 +38,11 @@ GamepadKeyBindingsScreen::GamepadKeyBindingsScreen(CharacterCore* core) : Screen
 }
 
 void GamepadKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
+	if (m_lockInput) {
+		g_inputController->lockAction();
+		m_lockInput = false;
+	}
+
 	m_scrollBar->update(frameTime);
 
 	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -158,7 +160,7 @@ void GamepadKeyBindingsScreen::render(sf::RenderTarget &renderTarget) {
 
 void GamepadKeyBindingsScreen::execOnEnter() {
 	// title
-	m_title = new BitmapText(g_textProvider->getText("Keyboard"), TextStyle::Shadowed);
+	m_title = new BitmapText(g_textProvider->getText("Gamepad"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
@@ -237,6 +239,8 @@ bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadAxis axis) {
 		if (it.second == axis) it.second = GamepadAxis::MAX;
 	}
 	m_selectedKeys[key] = axis;
+	g_inputController->lockAction();
+	m_lockInput = true;
 	reload();
 	return true;
 }
@@ -244,7 +248,7 @@ bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadAxis axis) {
 void GamepadKeyBindingsScreen::reload() {
 	float distFromTop = 120.f;
 
-	// keyboard mappings
+	// gamepad mappings
 	for (auto& it : m_selectedKeys) {
 		if (contains(INVISIBLE_KEYS, it.first)) continue;
 

@@ -20,8 +20,12 @@ void ButtonGroup::render(sf::RenderTarget& renderTarget) {
 
 void ButtonGroup::update(const sf::Time& frameTime) {
 	if (!m_isEnabled) return;
-	for (auto button : m_buttons) {
-		button->update(frameTime);
+	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		m_buttons[i]->update(frameTime);
+
+		if (m_buttons[i]->isPressed()) {
+			selectButton(i);
+		}
 	}
 
 	updateSelection();

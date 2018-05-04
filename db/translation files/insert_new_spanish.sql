@@ -45,6 +45,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Prev
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NextSpell','Next Spell','Nächster Zauber','Nexte Zauber','? Hechizo');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Keyboard','Keyboard','Tastatur','Tastatur','??');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gamepad','Gamepad','Gamepad','Gamepad','??');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Attack','Attack','Angreifen','Aagriife','?');
 
 -- hints
 

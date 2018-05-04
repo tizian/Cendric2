@@ -40,6 +40,7 @@ private:
 	BitmapText* m_title = nullptr;
 
 	Key m_selectedKey = Key::VOID;
+	bool m_lockInput = false;
 
 	ButtonGroup* m_keyButtonGroup;
 	std::map<Key, std::pair<Button*, GamepadAxis>> m_keyButtons;

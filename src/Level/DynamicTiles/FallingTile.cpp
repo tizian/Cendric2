@@ -43,6 +43,11 @@ void FallingTile::onHit(LevelMovableGameObject* mob) {
 
 void FallingTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
+
+	if (isCurrentlyColliding()) {
+		return;
+	}
+
 	if (m_tileState == FallingTileState::Waiting) {
 		updateTime(m_waitingTime, frameTime);
 		if (m_waitingTime == sf::Time::Zero) {
@@ -97,6 +102,16 @@ void FallingTile::onHit(Spell* spell) {
 	default:
 		break;
 	}
+}
+
+bool FallingTile::isCurrentlyColliding() {
+	const sf::FloatRect& bb = *getBoundingBox();
+	WorldCollisionQueryRecord rec;
+	rec.excludedGameObject = this;
+	rec.boundingBox = *getBoundingBox();
+	rec.ignoreOnewayTiles = true;
+
+	return m_level->collides(rec);
 }
 
 void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {

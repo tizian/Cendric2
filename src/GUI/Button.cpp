@@ -253,6 +253,10 @@ bool Button::isClicked() const {
 	return m_isClicked;
 }
 
+bool Button::isPressed() const {
+	return m_isPressed;
+}
+
 bool Button::isEnabled() const {
 	return m_isEnabled;
 }

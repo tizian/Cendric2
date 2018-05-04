@@ -115,7 +115,7 @@ const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_XBOX =
 	{ Key::NextSpell, GamepadAxis::RightShoulder },
 	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
 	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
-	{ Key::Menu, GamepadAxis::Options },
+	{ Key::Menu, GamepadAxis::Start },
 };
 
 const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_DS4 =

@@ -4,6 +4,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Allo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Apply','Apply','Anwenden','Awende','Aplicar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('And','and','und','und','y');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Armor','Armour','Rüstung','Rüschtig','Armadura');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Attack','Attack','Angreifen','Aagriife','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Autotarget','Auto Target','Automatisches Zielen','Automatisches Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOn','Auto target on','Automatisches Zielen an','Automatisches Ziele aa','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AutotargetOff','Auto target off','Automatisches Zielen aus','Automatisches Ziele uus','?');
@@ -11,6 +12,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Back
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToCheckpoint','Back to checkpoint','Zurück zum Kontrollpunkt','Zrugg zum Checkpoint','Regresar al punto de control');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMap','Leave level','Level verlassen','Usem Level gah','Salir del nivel');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('BackToMenu','Menu','Menu','Menu','Menú');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Menu','Menu','Menu','Menu','Menú');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Book','Book','Buch','Buech','Libro');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Cancel','Cancel','Abbrechen','Abbreche','Cancelar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('CannotEquipInLevel','You cannot equip items inside a boss level!','Gegenstände können nicht in einem Bosslevel ausgerüstet werden!','Gegeständ chönd nid imne Bosslevel agleit werde!','¡No puede equipar objetos dentro del nivel boss!');

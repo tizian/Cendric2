@@ -115,12 +115,34 @@ GamepadAxis GamepadController::getGamepadAxisForKey(Key key) const {
 	return (*it).second;
 }
 
-void GamepadController::setLastPressedGamepadAxis(sf::Joystick::Axis axis) {
-	// TODO
+void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event) {
+	if (event.joystickId != m_connectedJoystick) {
+		return;
+	}
+
+	if (std::abs(event.position) < AXIS_THRESHOLD) {
+		return;
+	}
+
+	if (isXboxControllerConnected()) {
+		m_lastPressedAxis = getLastPressedGamepadAxisXbox(event.axis, event.position < 0);
+	}
+	else {
+		m_lastPressedAxis = getLastPressedGamepadAxisDs4(event.axis, event.position < 0);
+	}
 }
 
-void GamepadController::setLastPressedGamepadButton(int button) {
-	// TODO
+void GamepadController::setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event) {
+	if (event.joystickId != m_connectedJoystick) {
+		return;
+	}
+
+	if (isXboxControllerConnected()) {
+		m_lastPressedAxis = getLastPressedGamepadButtonXbox(event.button);
+	}
+	else {
+		m_lastPressedAxis = getLastPressedGamepadButtonDs4(event.button);
+	}
 }
 
 GamepadAxis GamepadController::getLastPressedAxis() const {
@@ -353,4 +375,114 @@ void GamepadController::initAxisMap() {
 	m_axisMap.insert({ GamepadAxis::Select, std::bind(&GamepadController::isSelect, this) });
 	m_axisMap.insert({ GamepadAxis::Start, std::bind(&GamepadController::isStart, this) });
 	m_axisMap.insert({ GamepadAxis::Touchpad, std::bind(&GamepadController::isTouchpad, this) });
+}
+
+GamepadAxis GamepadController::getLastPressedGamepadAxisXbox(sf::Joystick::Axis axis, bool isNegative) {
+	switch (axis)
+	{
+	case sf::Joystick::X:
+		return isNegative ? GamepadAxis::LeftStickLeft : GamepadAxis::LeftStickRight;
+	case sf::Joystick::Y:
+		return isNegative ? GamepadAxis::LeftStickUp : GamepadAxis::LeftStickDown;
+	case sf::Joystick::Z:
+		return isNegative ? GamepadAxis::RightTrigger : GamepadAxis::LeftTrigger;
+	case sf::Joystick::U:
+		return isNegative ? GamepadAxis::RightStickLeft : GamepadAxis::RightStickRight;
+	case sf::Joystick::V:
+		return isNegative ? GamepadAxis::RightStickUp : GamepadAxis::RightStickDown;
+	case sf::Joystick::PovX:
+		return isNegative ? GamepadAxis::DPadLeft : GamepadAxis::DPadRight;
+	case sf::Joystick::PovY:
+		return isNegative ? GamepadAxis::DPadUp : GamepadAxis::DPadDown;
+	default:
+		return GamepadAxis::VOID;
+	}
+}
+
+GamepadAxis GamepadController::getLastPressedGamepadAxisDs4(sf::Joystick::Axis axis, bool isNegative) {
+	switch (axis)
+	{
+	case sf::Joystick::X:
+		return isNegative ? GamepadAxis::LeftStickLeft : GamepadAxis::LeftStickRight;
+	case sf::Joystick::Y:
+		return isNegative ? GamepadAxis::LeftStickUp : GamepadAxis::LeftStickDown;
+	case sf::Joystick::Z:
+		return isNegative ? GamepadAxis::RightStickLeft : GamepadAxis::RightStickRight;
+	case sf::Joystick::R:
+		return isNegative ? GamepadAxis::RightStickUp : GamepadAxis::RightStickDown;
+	case sf::Joystick::U:
+		return GamepadAxis::RightTrigger;
+	case sf::Joystick::V:
+		return GamepadAxis::LeftTrigger;
+	case sf::Joystick::PovX:
+		return isNegative ? GamepadAxis::DPadLeft : GamepadAxis::DPadRight;
+	case sf::Joystick::PovY:
+		return isNegative ? GamepadAxis::DPadUp : GamepadAxis::DPadDown;
+	default:
+		return GamepadAxis::VOID;
+	}
+}
+
+GamepadAxis GamepadController::getLastPressedGamepadButtonXbox(int button) {
+	switch (button)
+	{
+	case 0: 
+		return GamepadAxis::A;
+	case 1:
+		return GamepadAxis::B;
+	case 2:
+		return GamepadAxis::X;
+	case 3:
+		return GamepadAxis::Y;
+	case 4:
+		return GamepadAxis::LeftShoulder;
+	case 5:
+		return GamepadAxis::RightShoulder;
+	case 6:
+		return GamepadAxis::Select;
+	case 7:
+		return GamepadAxis::Start;
+	case 8:
+		return GamepadAxis::LeftStickPush;
+	case 9:
+		return GamepadAxis::RightStickPush;
+	default:
+		return GamepadAxis::VOID;
+	}
+}
+
+GamepadAxis GamepadController::getLastPressedGamepadButtonDs4(int button) {
+	switch (button)
+	{
+	case 0:
+		return GamepadAxis::Square;
+	case 1:
+		return GamepadAxis::X;
+	case 2:
+		return GamepadAxis::Circle;
+	case 3:
+		return GamepadAxis::Triangle;
+	case 4:
+		return GamepadAxis::LeftShoulder;
+	case 5:
+		return GamepadAxis::RightShoulder;
+	case 6:
+		return GamepadAxis::LeftTrigger;
+	case 7:
+		return GamepadAxis::RightTrigger;
+	case 8:
+		return GamepadAxis::Share;
+	case 9:
+		return GamepadAxis::Options;
+	case 10:
+		return GamepadAxis::LeftStickPush;
+	case 11:
+		return GamepadAxis::RightStickPush;
+	case 12:
+		return GamepadAxis::PSButton;
+	case 13:
+		return GamepadAxis::Touchpad;
+	default:
+		return GamepadAxis::VOID;
+	}
 }

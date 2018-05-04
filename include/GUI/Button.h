@@ -66,6 +66,7 @@ public:
 	sf::Color getMouseOverColor() const;
 
 	bool isClicked() const;
+	bool isPressed() const;
 	bool isEnabled() const;
 	bool isVisible() const;
 	bool isSelected() const;
