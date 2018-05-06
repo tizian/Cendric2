@@ -29,12 +29,11 @@ void GamepadAimCursor::update(const sf::Time& frameTime) {
 
 	auto axis = g_inputController->getRightJoystickAxis();
 	if (norm(axis) > 20) {
-		m_currentAimOffset = AIM_DISTANCE * normalized(axis);
-		m_cursorSprite.setRotation(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90);
+		setRotation(axis);
 		setInUse(true);
 	}
 
-	m_currentPosition = m_mainChar->getPosition() + sf::Vector2f(m_mainChar->getBoundingBox()->width * 0.5f, 0.f) + m_currentAimOffset;
+	m_currentPosition = m_mainChar->getSpellPosition() + m_currentAimOffset;
 	m_cursorSprite.setPosition(m_currentPosition);
 
 	updateInUse(frameTime);
@@ -56,6 +55,11 @@ void GamepadAimCursor::updateInUse(const sf::Time& frameTime) {
 	if (m_inUseTime == sf::Time::Zero) {
 		setInUse(false);
 	}
+}
+
+void GamepadAimCursor::setRotation(const sf::Vector2f& axis) {
+	m_currentAimOffset = AIM_DISTANCE * normalized(axis);
+	m_cursorSprite.setRotation(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90);
 }
 
 void GamepadAimCursor::renderAfterForeground(sf::RenderTarget& target) {

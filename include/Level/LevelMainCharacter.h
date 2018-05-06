@@ -62,6 +62,7 @@ public:
 	bool isAlly() const override;
 	bool isReady() const override;
 	bool isClimbing() const;
+	sf::Vector2f getSpellPosition() const;
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;

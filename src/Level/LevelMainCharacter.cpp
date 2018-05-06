@@ -156,12 +156,16 @@ void LevelMainCharacter::handleAttackInput() {
 	}
 
 	bool useAutotarget = isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget &&
-		(m_gamepadAimCursor->isUseAutotarget() || !isAttacking);
+		(m_gamepadAimCursor->isUseAutotarget() || (!isAttacking && !g_inputController->isJoystickConnected()));
 
-	sf::Vector2f target = useAutotarget ?
-		// Target lock
-		m_targetManager->getCurrentTargetEnemy()->getCenter() :
-		getSelectedTarget();
+	sf::Vector2f target;
+	if (useAutotarget) {
+		target = m_targetManager->getCurrentTargetEnemy()->getCenter();
+		m_gamepadAimCursor->setRotation(target - getSpellPosition());
+	}
+	else {
+		target = getSelectedTarget();
+	}
 
 	// update current spell
 	for (const auto& it : m_spellKeyMap) {
@@ -219,6 +223,10 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 		m_spellManager->getSelectedSpell()->spellType != SpellType::Twilight) {
 		setInvisibilityLevel(0);
 	}
+}
+
+sf::Vector2f LevelMainCharacter::getSpellPosition() const {
+	return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top);
 }
 
 void LevelMainCharacter::loadWeapon() {

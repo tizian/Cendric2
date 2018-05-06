@@ -13,6 +13,7 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target) override;
 	
 	void setVisible(bool visible);
+	void setRotation(const sf::Vector2f& axis);
 
 	const sf::Vector2f& getCurrentPosition() const;
 
