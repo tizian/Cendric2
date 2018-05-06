@@ -17,6 +17,11 @@ public:
 	const sf::Vector2f& getCurrentPosition() const;
 
 	GameObjectType getConfiguredType() const override { return GameObjectType::_Interface; }
+	bool isUseAutotarget() const;
+
+private:
+	void setInUse(bool inUse);
+	void updateInUse(const sf::Time& frameTime);
 
 private:
 	LevelMainCharacter* m_mainChar;
@@ -24,6 +29,10 @@ private:
 
 	bool m_isVisible;
 	bool m_isActive;
+	bool m_isInUse;
+
+	sf::Time m_inUseTime;
+	static const sf::Time IN_USE_TIME;
 
 	sf::Vector2f m_currentPosition;
 	sf::Vector2f m_currentAimOffset;

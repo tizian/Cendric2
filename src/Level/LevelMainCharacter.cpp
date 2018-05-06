@@ -155,7 +155,10 @@ void LevelMainCharacter::handleAttackInput() {
 		g_inputController->getCursor().setCursorSkin(cursorSkin);
 	}
 
-	sf::Vector2f target = !isAttacking && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
+	bool useAutotarget = isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget &&
+		(m_gamepadAimCursor->isUseAutotarget() || !isAttacking);
+
+	sf::Vector2f target = useAutotarget ?
 		// Target lock
 		m_targetManager->getCurrentTargetEnemy()->getCenter() :
 		getSelectedTarget();
