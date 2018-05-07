@@ -77,6 +77,7 @@ void CheckpointTile::onRightClick() {
 
 void CheckpointTile::onLeftClick() {
 	if (m_state == GameObjectState::Active) return;
+	if (m_mainChar->isDead()) return;
 	
 	g_inputController->lockAction();
 	if (dist(m_mainChar->getCenter(), getCenter()) > ACTIVATE_RANGE) {
