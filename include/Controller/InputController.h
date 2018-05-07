@@ -31,10 +31,11 @@ public:
 private:
 	void init();
 
-	std::map<Key, bool> m_keyActiveMap;
-	std::map<Key, bool> m_keyJustPressedMap;
+	std::map<Key, bool> m_keyboardKeyActiveMap;
+	std::map<Key, bool> m_keyboardKeyJustPressedMap;
 	std::map<Key, bool> m_gamepadKeyActiveMap;
 	std::map<Key, bool> m_gamepadKeyJustPressedMap;
 
 	bool checkKeyActive(Key key) const;
+	bool checkKeyJustPressed(Key key) const;
 };

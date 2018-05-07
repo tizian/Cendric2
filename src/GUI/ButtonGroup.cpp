@@ -75,7 +75,7 @@ void ButtonGroup::updateSelection() {
 		}
 	}
 
-	if (g_inputController->isSelected()) {
+	if (g_inputController->isKeyJustPressed(Key::Confirm)) {
 		m_buttons[m_selectedButtonIndex]->click();
 	}
 }
