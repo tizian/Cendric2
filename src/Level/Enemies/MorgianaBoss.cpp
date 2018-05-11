@@ -103,6 +103,12 @@ void MorgianaBoss::onHit(Spell* spell) {
 		return;
 	}
 
+	auto isSpellRight = spell->getCenter().x > getCenter().x;
+	if (isSpellRight ^ isFacingRight()) {
+		Enemy::onHit(spell);
+		return;
+	}
+
 	if (spell->isReflectable()) {
 		// we'll send you right back!
 		spell->setOwner(this);
