@@ -2,7 +2,6 @@
 #include "Level/MOBBehavior/MovingBehaviors/EnemyMovingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/EnemyAttackingBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/NeutralBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Level/DynamicTiles/LeverTile.h"
 #include "Level/Level.h"
