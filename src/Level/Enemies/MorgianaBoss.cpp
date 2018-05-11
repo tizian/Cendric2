@@ -6,7 +6,6 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
 #include "Registrar.h"
-#include "GlobalResource.h"
 #include "Steam/AchievementManager.h"
 
 REGISTER_ENEMY(EnemyID::Boss_Morgiana, MorgianaBoss)
@@ -27,7 +26,6 @@ void MorgianaBoss::update(const sf::Time& frameTime) {
 	updateTime(m_blockingTime, frameTime);
 	if (m_blockingTime == sf::Time::Zero) {
 		m_isBlocking = false;
-		m_isInvincible = false;
 	}
 }
 
@@ -113,6 +111,10 @@ void MorgianaBoss::onHit(Spell* spell) {
 		// we'll send you right back!
 		spell->setOwner(this);
 		spell->reflect();
+	} else {
+		m_isInvincible = true;
+		Enemy::onHit(spell);
+		m_isInvincible = false;
 	}
 }
 
@@ -175,7 +177,6 @@ void MorgianaBoss::handleAttackInput() {
 		bool executed = m_spellManager->executeCurrentSpell(getCurrentTarget());
 		if (spell == 1 && executed) {
 			m_isBlocking = true;
-			m_isInvincible = true;
 			m_blockingTime = BLOCKING_TIME + sf::seconds(0.5f);
 		}
 	}
