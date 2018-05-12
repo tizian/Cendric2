@@ -7,8 +7,9 @@ option(CENDRIC_BUILD_DIALOGUE_TOOL "Build Dialogue Tool on Windows platform?" ON
 option(CENDRIC_STEAM "Include steamworks API?" OFF)
 option(CENDRIC_EXTERNAL_DOCUMENT_FOLDER "Use external documents folder?" OFF)
 option(CENDRIC_GERMAN "Use German as default language?" OFF)
+option(USE_SYSTEM_SFML "Use system SFML lib instead of internal" OFF)
 
-if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src)
+if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src AND NOT USE_SYSTEM_SFML)
     message(FATAL_ERROR
         "Seems like some of the required dependencies are missing. "
         "This can happen if you did not clone the project with the --recursive flag. "
@@ -28,7 +29,16 @@ if (APPLE)
 	option(SFML_BUILD_FRAMEWORKS "" ON)
 endif()
 
-add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+if (NOT USE_SYSTEM_SFML)
+	add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+else ()
+	find_package(SFML 2.5 COMPONENTS system window graphics audio)
+	if(NOT SFML_FOUND)
+		message(FATAL_ERROR
+			"System SFML package not found, you should set USE_SYSTEM_SFML to off"
+			)
+	endif()
+endif()
 
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
