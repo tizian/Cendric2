@@ -8,6 +8,7 @@ option(CENDRIC_STEAM "Include steamworks API?" OFF)
 option(CENDRIC_EXTERNAL_DOCUMENT_FOLDER "Use external documents folder?" OFF)
 option(CENDRIC_GERMAN "Use German as default language?" OFF)
 option(USE_SYSTEM_SFML "Use system SFML lib instead of internal" OFF)
+option(USE_SYSTEM_PATHS "Use system paths for loading ressources instead of local one" OFF)
 
 if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/ext/sfml/src AND NOT USE_SYSTEM_SFML)
     message(FATAL_ERROR
@@ -39,6 +40,10 @@ else ()
 			)
 	endif()
 endif()
+
+if (USE_SYSTEM_PATHS)
+	add_definitions ("-DUSE_SYSTEM_PATHS")
+endif()		
 
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
