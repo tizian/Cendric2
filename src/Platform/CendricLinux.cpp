@@ -34,9 +34,7 @@ std::string getExternalDocumentsPath() {
 }
 
 std::string getSystemResourcePath() {
-	std::string resultPath = "/usr/share/Cendric/";
-	//maybe do some more stuff?
-	return resultPath;
+	return RESDIR;
 }
 
 #endif
