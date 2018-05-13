@@ -13,6 +13,8 @@
 #include "Platform/CendricWin32.h"
 #elif __APPLE__
 #include "Platform/CendricApple.h"
+#elif __linux__
+#include "Platform/CendricLinux.h"
 #endif
 
 std::string g_resourcePath = "";
@@ -27,6 +29,7 @@ int main(int argc, char* argv[]) {
 		ShowWindow(hWnd, SW_HIDE);
 	#endif
 #endif
+	g_logger = new Logger();
 
 #ifdef EXTERNAL_DOCUMENTS_FOLDER
 	g_documentsPath = getExternalDocumentsPath();
@@ -40,8 +43,12 @@ int main(int argc, char* argv[]) {
 		#endif
 	#endif
 #endif
+#ifdef __linux__
+	#ifdef USE_SYSTEM_PATHS
+		g_resourcePath = getSystemResourcePath();
+	#endif
+#endif
 
-	g_logger = new Logger();
 	g_databaseManager = new DatabaseManager();
 	g_resourceManager = new ResourceManager();
 	g_textProvider = new TextProvider();
