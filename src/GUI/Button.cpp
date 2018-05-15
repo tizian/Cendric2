@@ -269,6 +269,10 @@ bool Button::isSelected() const {
 	return m_isSelected;
 }
 
+bool Button::isVisibleAndEnabled() const {
+	return m_isVisible && m_isEnabled;
+}
+
 GameObjectType Button::getConfiguredType() const {
 	return _Button;
 }

@@ -21,6 +21,10 @@ void ButtonGroup::render(sf::RenderTarget& renderTarget) {
 void ButtonGroup::update(const sf::Time& frameTime) {
 	if (!m_isEnabled) return;
 	for (size_t i = 0; i < m_buttons.size(); ++i) {
+		if (!m_buttons[i]->isVisibleAndEnabled()) {
+			continue;
+		}
+
 		m_buttons[i]->update(frameTime);
 
 		if (m_buttons[i]->isPressed()) {
@@ -75,7 +79,7 @@ void ButtonGroup::updateSelection() {
 		}
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Confirm)) {
+	if (m_buttons[m_selectedButtonIndex]->isVisibleAndEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
 		m_buttons[m_selectedButtonIndex]->click();
 	}
 }
@@ -87,14 +91,14 @@ void ButtonGroup::setNextButtonSelected(bool forward) {
 int ButtonGroup::getNextEnabledButton(bool forward) {
 	if (forward) {
 		for (int i = m_selectedButtonIndex + 1; i < static_cast<int>(m_buttons.size()); i++) {
-			if (m_buttons[i]->isEnabled()) {
+			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
 		}
 	}
 	else {
 		for (int i = m_selectedButtonIndex - 1; i > -1; i--) {
-			if (m_buttons[i]->isEnabled()) {
+			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
 		}

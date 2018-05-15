@@ -6,7 +6,7 @@
 #include "WorldScreen.h"
 #include "Level/LevelInterface.h"
 
-#include "GUI/Button.h"
+#include "GUI/ButtonGroup.h"
 #include "GUI/YesOrNoForm.h"
 
 class Stopwatch;

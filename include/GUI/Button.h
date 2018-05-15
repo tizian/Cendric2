@@ -70,6 +70,7 @@ public:
 	bool isEnabled() const;
 	bool isVisible() const;
 	bool isSelected() const;
+	bool isVisibleAndEnabled() const;
 	GameObjectType getConfiguredType() const override;
 
 protected:
