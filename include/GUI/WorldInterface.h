@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "Controller/InputController.h"
 #include "ResourceManager.h"
 
 #include "GUI/Inventory.h"
@@ -27,8 +26,8 @@ enum class GUIElement {
 // abstract class for an interface in level or map
 class WorldInterface {
 public:
-	WorldInterface(WorldScreen* screen);
-	virtual ~WorldInterface();
+	explicit WorldInterface(WorldScreen* screen);
+	virtual ~WorldInterface() = default;
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
 	// if the string is empty, it does a full reload (heavy operation, only us this when equipment or more than one item changed)
@@ -82,6 +81,7 @@ protected:
 	QuestLog* m_questLog = nullptr;
 	MapOverlay* m_mapOverlay = nullptr;
 	QuickSlotBar* m_quickSlotBar = nullptr;
+	GUIElement m_selectedElement = GUIElement::Character;
 
 	template<typename G>
 	void updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type);

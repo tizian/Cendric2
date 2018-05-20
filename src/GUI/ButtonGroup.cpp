@@ -57,6 +57,18 @@ ButtonInterface* ButtonGroup::getSelectedButton() const {
 	return m_buttons[m_selectedButtonIndex];
 }
 
+ButtonInterface* ButtonGroup::getButton(int i) const {
+	if (i < 0 || i > static_cast<int>(m_buttons.size()) - 1) {
+		return nullptr;
+	}
+
+	return m_buttons[i];
+}
+
+const std::vector<ButtonInterface*>& ButtonGroup::getButtons() const {
+	return m_buttons;
+}
+
 void ButtonGroup::updateSelection() {
 	if (g_inputController->isActionLocked() || m_selectedButtonIndex == -1) {
 		return;

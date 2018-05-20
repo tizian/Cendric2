@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "World/GameObject.h"
+#include "Button.h"
 
 class ButtonInterface;
 
@@ -19,7 +20,10 @@ public:
 	void setHorizontal(bool value);
 
 	void setNextButtonSelected(bool forward);
+
 	ButtonInterface* getSelectedButton() const;
+	ButtonInterface* getButton(int i) const;
+	const std::vector<ButtonInterface*>& getButtons() const;
 
 	GameObjectType getConfiguredType() const override;
 

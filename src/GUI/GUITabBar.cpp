@@ -2,7 +2,8 @@
 
 #include "GUI/WorldInterface.h"
 #include "GUI/GUIConstants.h"
-#include "GlobalResource.h"
+#include "GUI/GUITabButton.h"
+#include "GUI/ButtonGroup.h"
 
 const int GUITabBar::BUTTON_MARGIN = 24;
 const int GUITabBar::WIDTH = 80;
@@ -15,9 +16,7 @@ GUITabBar::GUITabBar(WorldInterface* _interface, int size) {
 
 GUITabBar::~GUITabBar() {
 	delete m_window;
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		delete m_buttons[i];
-	}
+	delete m_buttonGroup;
 }
 
 void GUITabBar::init() {
@@ -26,9 +25,11 @@ void GUITabBar::init() {
 	sf::FloatRect box(0, 0, static_cast<float>(WIDTH), height);
 	m_window = new Window(box, GUIOrnamentStyle::LARGE, GUIConstants::MAIN_COLOR, GUIConstants::ORNAMENT_COLOR);
 	
-	for (int i = 0; i < m_size; ++i) {
-		GUITabButton* button = new GUITabButton();
-		m_buttons.push_back(button);
+	m_buttonGroup = new ButtonGroup();
+
+	for (auto i = 0; i < m_size; ++i) {
+		auto const button = new GUITabButton();
+		m_buttonGroup->addButton(button);
 	}
 
 	setPosition(sf::Vector2f(0.f, 0.f));
@@ -40,28 +41,31 @@ void GUITabBar::setPosition(const sf::Vector2f& pos) {
 	sf::Vector2f buttonPos;
 	buttonPos.x = pos.x + 0.5f * (WIDTH - GUITabButton::SIZE);
 	buttonPos.y = pos.y + 2 * GUIConstants::TEXT_OFFSET;
-	for (int i = 0; i < m_size; ++i) {
-		m_buttons[i]->setPosition(buttonPos);
+	for (auto button : m_buttonGroup->getButtons()) {
+		button->setPosition(buttonPos);
 		buttonPos.y += GUITabButton::SIZE + BUTTON_MARGIN;
 	}
 }
 
 void GUITabBar::setButtonTexture(int index, const sf::Texture* tex, int x) {
-	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+	auto button = dynamic_cast<GUITabButton*>(m_buttonGroup->getButton(index));
+	if (!button) return;
 
-	m_buttons[index]->setTexture(tex, x);
+	button->setTexture(tex, x);
 }
 
 void GUITabBar::setButtonText(int index, const std::string& text) {
-	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+	auto button = dynamic_cast<GUITabButton*>(m_buttonGroup->getButton(index));
+	if (!button) return;
 
-	m_buttons[index]->setText(text);
+	button->setText(text);
 }
 
 void GUITabBar::setButtonOnClick(int index, const std::function<void()>& agent) {
-	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+	auto button = dynamic_cast<GUITabButton*>(m_buttonGroup->getButton(index));
+	if (!button) return;
 
-	m_buttons[index]->setOnClick(agent);
+	button->setOnClick(agent);
 }
 
 void GUITabBar::update(const sf::Time& frameTime) {
@@ -71,35 +75,35 @@ void GUITabBar::update(const sf::Time& frameTime) {
 		hide();
 	}
 
-	int nextActiveIndex = -1;
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		GUITabButton* tab = m_buttons[i];
+	auto nextSelectedIndex = -1;
+	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
+		auto tab = dynamic_cast<GUITabButton*>(m_buttonGroup->getButton(i));
 		tab->update(frameTime);
-		if (tab->isClicked() && !tab->isActive()) {
-			nextActiveIndex = static_cast<int>(i);
+		if (tab->isClicked() && !tab->isSelected()) {
+			nextSelectedIndex = static_cast<int>(i);
 		}
 	}
 
-	if (nextActiveIndex != -1) {
-		for (size_t i = 0; i < m_buttons.size(); ++i) {
-			m_buttons[i]->setActive(false);
+	if (nextSelectedIndex != -1) {
+		for (auto& button : m_buttonGroup->getButtons()) {
+			button->setSelected(false);
 		}
-		m_buttons[nextActiveIndex]->setActive(true);
+		m_buttonGroup->getButton(nextSelectedIndex)->setSelected(true);
 	}
 }
 
-void GUITabBar::setActiveElement(int index) {
-	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+void GUITabBar::setSelectedElement(int index) {
+	if (index < 0 || index > static_cast<int>(m_buttonGroup->getButtons().size()) - 1) return;
 
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		m_buttons[i]->setActive(false);
+	for (auto& button : m_buttonGroup->getButtons()) {
+		button->setSelected(false);
 	}
-	m_buttons[index]->setActive(true);
+	m_buttonGroup->getButton(index)->setSelected(true);
 }
 
-int GUITabBar::getActiveElement() const {
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		if (m_buttons[i]->isActive()) {
+int GUITabBar::getSelectedElement() const {
+	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
+		if (m_buttonGroup->getButton(i)->isSelected()) {
 			return static_cast<int>(i);
 		}
 	}
@@ -110,16 +114,14 @@ void GUITabBar::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		m_buttons[i]->render(target);
-	}
+	m_buttonGroup->render(target);
 }
 
 void GUITabBar::show(int index) {
-	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) return;
+	if (index < 0 || index > static_cast<int>(m_buttonGroup->getButtons().size()) - 1) return;
 
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		m_buttons[i]->setActive(i == index);
+	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
+		m_buttonGroup->getButton(i)->setSelected(static_cast<int>(i) == index);
 	}
 
 	show();
@@ -131,10 +133,6 @@ void GUITabBar::show() {
 
 void GUITabBar::hide() {
 	m_isVisible = false;
-
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
-		m_buttons[i]->setActive(false);
-	}
 }
 
 bool GUITabBar::isVisible() const {

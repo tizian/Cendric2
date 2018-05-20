@@ -1,11 +1,10 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
-#include "ResourceManager.h"
+#include "GUI/ButtonInterface.h"
 #include "GUI/BitmapText.h"
 
-class GUITabButton final : public GameObject {
+class GUITabButton final : public ButtonInterface {
 public:
 	GUITabButton();
 
@@ -17,14 +16,13 @@ public:
 
 	void setOnClick(const std::function<void()>& agent);
 	void setPosition(const sf::Vector2f& position) override;
-	void setActive(bool active);
 	void setTexture(const sf::Texture* tex, int x);
 	void setText(const std::string& text);
-	
-	bool isClicked() const;
-	bool isActive() const;
 
-	GameObjectType getConfiguredType() const override;
+	void click() override;
+
+protected:
+	void updateColor() override;
 
 public:
 	static const int ICON_SIZE;
@@ -32,11 +30,6 @@ public:
 	static const int OFFSET;
 
 protected:
-	bool m_isActive = false;
-	bool m_isMouseOver = false;
-	bool m_isPressed = false;
-	bool m_isClicked = false;
-
 	sf::Sprite m_border;
 	sf::Sprite m_icon;
 	sf::CircleShape m_background;
@@ -44,7 +37,7 @@ protected:
 	BitmapText m_inputKey;
 
 	sf::Color m_backgroundColor = COLOR_TRANS_BLACK;
-	sf::Color m_activeColor = COLOR_TRANS_GREY;
+	sf::Color m_selectedColor = COLOR_TRANS_GREY;
 	sf::Color m_highlightColor = COLOR_PURPLE;
 
 private:

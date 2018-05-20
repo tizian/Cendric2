@@ -8,12 +8,12 @@
 ///</summary>
 class ButtonInterface : public virtual GameObject {
 public:
-	virtual ~ButtonInterface() {}
+	virtual ~ButtonInterface() = default;
 
 	virtual void click() = 0;
 
 	virtual void setEnabled(bool enabled);
-	void setVisible(bool value);
+	void setVisible(bool visible);
 	void setSelected(bool selected);
 
 	bool isClicked() const;

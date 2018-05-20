@@ -1,13 +1,11 @@
 #include "GUI/WorldInterface.h"
+#include "GUI/GUITabButton.h"
 #include "Screens/WorldScreen.h"
 #include "GlobalResource.h"
 
 WorldInterface::WorldInterface(WorldScreen* screen) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
-}
-
-WorldInterface::~WorldInterface() {
 }
 
 void WorldInterface::render(sf::RenderTarget& target) {
@@ -47,7 +45,7 @@ void WorldInterface::update(const sf::Time& frameTime) {
 			hideAll();
 		}
 		else {
-			showGuiElement(static_cast<GUIElement>(m_guiSidebar->getActiveElement()));
+			showGuiElement(m_selectedElement);
 		}
 	}
 }
@@ -152,6 +150,7 @@ void WorldInterface::showGuiElement(G* guiElement, GUIElement type) {
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 	guiElement->show();
 	m_guiSidebar->show(static_cast<int>(type));
+	m_selectedElement = type;
 }
 
 template<typename G>
@@ -170,7 +169,7 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 		m_guiSidebar->hide();
 		g_inputController->lockAction();
 	}
-	else if (!guiElement->isVisible() && m_guiSidebar->getActiveElement() == static_cast<int>(type)) {
+	else if (!guiElement->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
 		showGuiElement(guiElement, type);
 	}
 

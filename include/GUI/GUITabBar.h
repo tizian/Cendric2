@@ -1,12 +1,11 @@
 #pragma once
 
 #include "global.h"
-#include "Controller/InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
-#include "GUI/GUITabButton.h"
 
 class WorldInterface;
+class ButtonGroup;
 
 class GUITabBar final {
 public:
@@ -26,9 +25,9 @@ public:
 	void setButtonTexture(int index, const sf::Texture* tex, int x);
 	void setButtonOnClick(int index, const std::function<void()>& agent);
 	void setButtonText(int index, const std::string& text);
-	void setActiveElement(int index);
+	void setSelectedElement(int index);
 
-	int getActiveElement() const;
+	int getSelectedElement() const;
 
 private:
 	WorldInterface* getInterface() const;
@@ -39,7 +38,7 @@ private:
 	int m_size = 0;
 
 	WorldInterface* m_worldInterface;
-	std::vector<GUITabButton*> m_buttons;
+	ButtonGroup* m_buttonGroup;
 	sf::Vector2f m_position;
 
 	Window* m_window = nullptr;
