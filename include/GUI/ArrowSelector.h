@@ -1,16 +1,16 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
+#include "GUI/ButtonInterface.h"
 #include "GUI/Button.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/ArrowButton.h"
 
 // An arrow selector gui element, where different elements can be chosen (one is always active)
-class ArrowSelector final : public GameObject {
+class ArrowSelector final : public ButtonInterface {
 public:
 	ArrowSelector();
 	
@@ -26,21 +26,14 @@ public:
 	void setLabelText(const std::string& labelKey);
 	void setLabelTextRaw(const std::string& label);
 
-	// a slider can only be slided if its enabled. also, its color is less opaque if it is disabled.
-	void setEnabled(bool enabled);
-	void setVisible(bool value);
-
-	bool isEnabled() const;
-	bool isVisible() const;
+	void setEnabled(bool enabled) override;
+	void click() override;
 
 	int getChosenOptionIndex() const;
 
-	GameObjectType getConfiguredType() const override;
-
 protected:
-	
-	bool m_isEnabled = true;
-	bool m_isVisible = true;
+	void updateColor() override;
+
 	int m_chosenOptionIndex = -1;
 
 	std::vector<std::string> m_options;

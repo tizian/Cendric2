@@ -88,6 +88,7 @@ protected:
 
 	template<typename G>
 	void showGuiElement(G* guiElement, GUIElement type);
+	void showGuiElement(GUIElement type);
 
 	static Key getKeyFromGuiElement(GUIElement e);
 };

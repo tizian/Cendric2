@@ -39,6 +39,17 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateGuiElement(frameTime, m_questLog, GUIElement::Journal);
 	updateGuiElement(frameTime, m_mapOverlay, GUIElement::Map);
 	m_quickSlotBar->update(frameTime);
+
+	if (g_inputController->isKeyJustPressed(Key::Menu)) {
+		g_inputController->lockAction();
+
+		if (m_guiSidebar->isVisible()) {
+			hideAll();
+		}
+		else {
+			showGuiElement(static_cast<GUIElement>(m_guiSidebar->getActiveElement()));
+		}
+	}
 }
 
 void WorldInterface::hideAll() {
@@ -110,6 +121,29 @@ void WorldInterface::equipConsumable(const std::string& itemID) {
 
 void WorldInterface::highlightQuickslots(bool highlight) {
 	m_quickSlotBar->highlightSlots(highlight);
+}
+
+void WorldInterface::showGuiElement(GUIElement type) {
+	switch (type) {
+	default:
+	case GUIElement::VOID:
+		return;
+	case GUIElement::Character:
+		 showGuiElement(m_characterInfo, type);
+		 return;
+	case GUIElement::Inventory:
+		showGuiElement(m_inventory, type);
+		return;
+	case GUIElement::Spellbook:
+		showGuiElement(m_spellbook, type);
+		return;
+	case GUIElement::Journal:
+		showGuiElement(m_questLog, type);
+		return;
+	case GUIElement::Map:
+		showGuiElement(m_mapOverlay, type);
+		return;
+	}
 }
 
 template<typename G>

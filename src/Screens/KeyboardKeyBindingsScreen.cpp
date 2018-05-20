@@ -3,6 +3,7 @@
 #include "Screens/MenuScreen.h"
 #include "GUI/ScrollBar.h"
 #include "GUI/ScrollHelper.h"
+#include "GUI/Button.h"
 #include "FileIO/ConfigurationWriter.h"
 #include "GlobalResource.h"
 

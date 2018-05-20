@@ -78,13 +78,13 @@ bool BookWindow::updateWindow(const sf::Time frameTime) {
 		return false;
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Left) || m_leftArrow->isClicked()) {
+	if (g_inputController->isJustLeft() || m_leftArrow->isClicked()) {
 		g_inputController->lockAction();
 		setPage(m_currentPage - 1);
 		setPosition(getPosition());
 		g_inputController->lockAction();
 	}
-	else if (g_inputController->isKeyJustPressed(Key::Right) || m_rightArrow->isClicked()) {
+	else if (g_inputController->isJustRight()|| m_rightArrow->isClicked()) {
 		g_inputController->lockAction();
 		setPage(m_currentPage + 1);
 		setPosition(getPosition());

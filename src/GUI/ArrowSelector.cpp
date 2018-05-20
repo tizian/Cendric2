@@ -1,7 +1,5 @@
 #include "GUI/ArrowSelector.h"
 
-using namespace std;
-
 ArrowSelector::ArrowSelector() : GameObject(),
 m_rightArrow(true),
 m_leftArrow(false),
@@ -57,6 +55,27 @@ void ArrowSelector::update(const sf::Time& frameTime) {
 	else if (m_rightArrow.isClicked()) {
 		setOptionIndex(m_chosenOptionIndex + 1);
 	}
+
+	if (m_isSelected) {
+		if (g_inputController->isJustLeft()) {
+			g_inputController->lockAction();
+			setOptionIndex(m_chosenOptionIndex - 1);
+		} 
+		if (g_inputController->isJustRight()) {
+			g_inputController->lockAction();
+			setOptionIndex(m_chosenOptionIndex + 1);
+		}
+	}
+}
+
+void ArrowSelector::updateColor() {
+	m_button.setMainLayerColor(m_isSelected ? COLOR_MEDIUM_PURPLE : COLOR_BLACK);
+	m_label.setColor(m_isSelected ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
+}
+
+void ArrowSelector::click() {
+	g_inputController->lockAction();
+	setOptionIndex((m_chosenOptionIndex + 1) % static_cast<int>(m_options.size()));
 }
 
 void ArrowSelector::addOption(const std::string& optionKey) {
@@ -93,23 +112,7 @@ void ArrowSelector::setLabelTextRaw(const std::string& text) {
 }
 
 void ArrowSelector::setEnabled(bool enabled) {
-	m_isEnabled = enabled;
+	ButtonInterface::setEnabled(enabled);
 	m_leftArrow.setEnabled(enabled && m_chosenOptionIndex > 0);
 	m_rightArrow.setEnabled(enabled && m_chosenOptionIndex + 1 < static_cast<int>(m_options.size()));
-}
-
-void ArrowSelector::setVisible(bool value) {
-	m_isVisible = value;
-}
-
-bool ArrowSelector::isEnabled() const {
-	return m_isEnabled;
-}
-
-bool ArrowSelector::isVisible() const {
-	return m_isVisible;
-}
-
-GameObjectType ArrowSelector::getConfiguredType() const {
-	return _Button;
 }

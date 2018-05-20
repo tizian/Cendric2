@@ -3,6 +3,7 @@
 #include "Screens/KeyBindingsScreen.h"
 #include "Screens/ScreenManager.h"
 #include "FileIO/ConfigurationWriter.h"
+#include "GUI/ButtonGroup.h"
 #include "Enums/EnumNames.h"
 
 OptionsScreen::OptionsScreen(CharacterCore* core) : Screen(core) {
@@ -49,6 +50,8 @@ void OptionsScreen::execOnEnter() {
 	float distFromTop = 150.f;
 	float distFromLeft = 150.f;
 
+	auto buttonGroup = new ButtonGroup();
+	
 	// language
 	m_languageSelector = new ArrowSelector();
 	m_languageSelector->setLabelText("Language");
@@ -58,7 +61,7 @@ void OptionsScreen::execOnEnter() {
 	}
 	m_languageSelector->setOptionIndex(static_cast<int>(g_resourceManager->getConfiguration().language) - 1);
 	m_languageSelector->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_languageSelector);
+	buttonGroup->addButton(m_languageSelector);
 
 	distFromTop = distFromTop + 75;
 
@@ -70,7 +73,7 @@ void OptionsScreen::execOnEnter() {
 	}
 	m_displayModeSelector->setOptionIndex(static_cast<int>(g_resourceManager->getConfiguration().displayMode) - 1);
 	m_displayModeSelector->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_displayModeSelector);
+	buttonGroup->addButton(m_displayModeSelector);
 
 	distFromTop = distFromTop + 120;
 
@@ -81,7 +84,7 @@ void OptionsScreen::execOnEnter() {
 	m_soundCheckbox->setChecked(m_previousSoundOn);
 	m_soundCheckbox->setText("Sound");
 	m_soundCheckbox->setOnClick(std::bind(&OptionsScreen::checkSoundSlider, this));
-	addObject(m_soundCheckbox);
+	buttonGroup->addButton(m_soundCheckbox);
 
 	distFromTop = distFromTop + 80;
 
@@ -91,7 +94,7 @@ void OptionsScreen::execOnEnter() {
 	m_volumeSoundSlider->setUnit("%");
 	m_volumeSoundSlider->setSliderPosition(g_resourceManager->getConfiguration().volumeSound);
 	m_volumeSoundSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_volumeSoundSlider);
+	buttonGroup->addButton(m_volumeSoundSlider);
 
 	distFromTop = distFromTop + 100;
 
@@ -102,7 +105,7 @@ void OptionsScreen::execOnEnter() {
 	m_volumeMusicSlider->setUnit("%");
 	m_volumeMusicSlider->setSliderPosition(m_previousMusicVolume);
 	m_volumeMusicSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_volumeMusicSlider);
+	buttonGroup->addButton(m_volumeMusicSlider);
 
 	checkSoundSlider();
 
@@ -114,7 +117,7 @@ void OptionsScreen::execOnEnter() {
 	m_quickCastCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_quickCastCheckbox->setChecked(g_resourceManager->getConfiguration().isQuickcast);
 	m_quickCastCheckbox->setText("Quickcast");
-	addObject(m_quickCastCheckbox);
+	buttonGroup->addButton(m_quickCastCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -123,7 +126,7 @@ void OptionsScreen::execOnEnter() {
 	m_autotargetCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_autotargetCheckbox->setChecked(g_resourceManager->getConfiguration().isAutotarget);
 	m_autotargetCheckbox->setText("Autotarget");
-	addObject(m_autotargetCheckbox);
+	buttonGroup->addButton(m_autotargetCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -132,7 +135,7 @@ void OptionsScreen::execOnEnter() {
 	m_displayHintsCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_displayHintsCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayHints);
 	m_displayHintsCheckbox->setText("DisplayHints");
-	addObject(m_displayHintsCheckbox);
+	buttonGroup->addButton(m_displayHintsCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -141,7 +144,7 @@ void OptionsScreen::execOnEnter() {
 	m_displayQuestMarkersCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_displayQuestMarkersCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayQuestMarkers);
 	m_displayQuestMarkersCheckbox->setText("DisplayQuestMarkers");
-	addObject(m_displayQuestMarkersCheckbox);
+	buttonGroup->addButton(m_displayQuestMarkersCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -150,7 +153,7 @@ void OptionsScreen::execOnEnter() {
 	m_smoothingCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_smoothingCheckbox->setChecked(g_resourceManager->getConfiguration().isSmoothing);
 	m_smoothingCheckbox->setText("Smoothing");
-	addObject(m_smoothingCheckbox);
+	buttonGroup->addButton(m_smoothingCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -159,7 +162,7 @@ void OptionsScreen::execOnEnter() {
 	m_vSyncCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	m_vSyncCheckbox->setChecked(g_resourceManager->getConfiguration().isVSyncEnabled);
 	m_vSyncCheckbox->setText("VSync");
-	addObject(m_vSyncCheckbox);
+	buttonGroup->addButton(m_vSyncCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -169,7 +172,7 @@ void OptionsScreen::execOnEnter() {
 	m_limitFPSCheckbox->setChecked(g_resourceManager->getConfiguration().isFPSLimited);
 	m_limitFPSCheckbox->setOnClick(std::bind(&OptionsScreen::checkFPSSlider, this));
 	m_limitFPSCheckbox->setText("LimitFPS");
-	addObject(m_limitFPSCheckbox);
+	buttonGroup->addButton(m_limitFPSCheckbox);
 
 	distFromTop = distFromTop + 80;
 
@@ -177,19 +180,23 @@ void OptionsScreen::execOnEnter() {
 	m_maxFPSSlider->setText("MaxFPS");
 	m_maxFPSSlider->setSliderPosition(g_resourceManager->getConfiguration().maxFPS);
 	m_maxFPSSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
-	addObject(m_maxFPSSlider);
+	buttonGroup->addButton(m_maxFPSSlider);
+
+	addObject(buttonGroup);
 
 	checkFPSSlider();
 
 	// back
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
+	button->setGamepadKey(Key::Escape);
 	button->setOnClick(std::bind(&OptionsScreen::onBack, this));
 	addObject(button);
 
 	// apply
 	button = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
+	button->setGamepadKey(Key::Attack);
 	button->setOnClick(std::bind(&OptionsScreen::onApply, this));
 	addObject(button);
 }

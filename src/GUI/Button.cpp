@@ -229,52 +229,15 @@ void Button::setOrnamentLayerTexture(sf::Texture* texture) {
 }
 
 void Button::setEnabled(bool enabled) {
-	m_isEnabled = enabled;
+	ButtonInterface::setEnabled(enabled);
 	m_text.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
 	m_textureLayer.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
-}
-
-void Button::setVisible(bool value) {
-	m_isVisible = value;
-}
-
-void Button::setSelected(bool selected) {
-	m_isSelected = selected;
-	updateColor();
 }
 
 void Button::updateColor() {
 	m_mainLayer.setColor(m_isMouseOver && !m_isPressed ?
 		m_mouseOverColor :
 		m_isSelected ? m_selectedColor : m_mainLayerColor);
-}
-
-bool Button::isClicked() const {
-	return m_isClicked;
-}
-
-bool Button::isPressed() const {
-	return m_isPressed;
-}
-
-bool Button::isEnabled() const {
-	return m_isEnabled;
-}
-
-bool Button::isVisible() const {
-	return m_isVisible;
-}
-
-bool Button::isSelected() const {
-	return m_isSelected;
-}
-
-bool Button::isVisibleAndEnabled() const {
-	return m_isVisible && m_isEnabled;
-}
-
-GameObjectType Button::getConfiguredType() const {
-	return _Button;
 }
 
 void Button::setOnClick(const std::function<void()>& agent) {

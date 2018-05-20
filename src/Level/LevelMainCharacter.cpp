@@ -136,13 +136,26 @@ void LevelMainCharacter::onSpellSelected() {
 void LevelMainCharacter::notifyGamepadCursor() {
 	auto spell = m_spellManager->getSelectedSpell();
 	auto behavior = dynamic_cast<UserMovingBehavior*>(m_movingBehavior);
-	m_gamepadAimCursor->setVisible(spell && spell->needsTarget && (!behavior || !behavior->isClimbing()));
+	m_gamepadAimCursor->setVisible(spell && spell->needsTarget);
 }
 
 void LevelMainCharacter::handleAttackInput() {
+	if (g_inputController->isActionLocked()) return;
+
+	// handle previous / next spell
+	if (!g_inputController->isActionLocked()) {
+		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
+			m_spellManager->setNextSpell();
+			onSpellSelected();
+		}
+		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
+			m_spellManager->setPreviousSpell();
+			onSpellSelected();
+		}
+	}
+
 	if (m_isInputLock || isClimbing()) return;
 	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
-	if (g_inputController->isActionLocked()) return;
 
 	bool isAttacking = g_inputController->isAttacking();
 	bool isEnemyTargeted = m_targetManager->getCurrentTargetEnemy() != nullptr;
@@ -190,18 +203,6 @@ void LevelMainCharacter::handleAttackInput() {
 		}
 	}
 
-	// handle previous / next spell
-	if (!g_inputController->isActionLocked()) {
-		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
-			m_spellManager->setNextSpell();
-			onSpellSelected();
-		}
-		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
-			m_spellManager->setPreviousSpell();
-			onSpellSelected();
-		}
-	}
-
 	// handle attack input
 	if (isAttacking) {
 		m_spellManager->executeCurrentSpell(target);
@@ -226,6 +227,10 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 }
 
 sf::Vector2f LevelMainCharacter::getSpellPosition() const {
+	if (isUpsideDown()) {
+		return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top + m_boundingBox.height);
+	}
+
 	return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top);
 }
 

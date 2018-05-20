@@ -28,6 +28,7 @@ const sf::Color COLOR_LIGHT_GREY =				sf::Color(200, 200, 200);
 const sf::Color COLOR_MEDIUM_GREY =				sf::Color(150, 150, 150);
 const sf::Color COLOR_GREY =					sf::Color(100, 100, 100);
 const sf::Color COLOR_DARK_GREY =				sf::Color(50, 50, 50);
+const sf::Color COLOR_BRIGHT_PURPLE =			sf::Color(220, 131, 255);
 const sf::Color COLOR_LIGHT_PURPLE =			sf::Color(197, 175, 206);
 const sf::Color COLOR_PURPLE =					sf::Color(91, 73, 133);
 const sf::Color COLOR_MEDIUM_PURPLE =			sf::Color(134, 63, 199);

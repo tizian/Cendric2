@@ -3,7 +3,7 @@
 #include "global.h"
 #include "World/GameObject.h"
 
-class Button;
+class ButtonInterface;
 
 class ButtonGroup final : public GameObject {
 public:
@@ -13,18 +13,18 @@ public:
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 
-	void addButton(Button* button);
+	void addButton(ButtonInterface* button);
 
 	void setEnabled(bool value);
 	void setHorizontal(bool value);
 
 	void setNextButtonSelected(bool forward);
-	Button* getSelectedButton() const;
+	ButtonInterface* getSelectedButton() const;
 
 	GameObjectType getConfiguredType() const override;
 
 private:
-	std::vector<Button*> m_buttons;
+	std::vector<ButtonInterface*> m_buttons;
 	bool m_isEnabled;
 
 	int m_selectedButtonIndex;

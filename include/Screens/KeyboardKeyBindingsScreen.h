@@ -11,6 +11,7 @@
 
 class ScrollBar;
 class ScrollHelper;
+class Button;
 
 class KeyboardKeyBindingsScreen final : public Screen {
 public:

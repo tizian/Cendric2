@@ -1,5 +1,5 @@
 #include "GUI/ButtonGroup.h"
-#include "GUI/Button.h"
+#include "GUI/ButtonInterface.h"
 #include "Controller/InputController.h"
 
 ButtonGroup::ButtonGroup() {
@@ -46,14 +46,14 @@ void ButtonGroup::setHorizontal(bool horizontal) {
 	m_isHorizontal = horizontal;
 }
 
-void ButtonGroup::addButton(Button* button) {
+void ButtonGroup::addButton(ButtonInterface* button) {
 	m_buttons.push_back(button);
 	if (m_selectedButtonIndex == -1) {
 		selectButton(0);
 	}
 }
 
-Button* ButtonGroup::getSelectedButton() const {
+ButtonInterface* ButtonGroup::getSelectedButton() const {
 	return m_buttons[m_selectedButtonIndex];
 }
 

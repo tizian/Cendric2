@@ -33,7 +33,6 @@ void UserMovingBehavior::stopClimbing() {
 	m_climbStepTime = sf::Time::Zero;
 	m_isClimbing = false;
 	m_currentLadder = nullptr;
-	m_mainChar->notifyGamepadCursor();
 }
 
 void UserMovingBehavior::startClimbing(GameObject* ladder, float yPos) {
@@ -44,7 +43,6 @@ void UserMovingBehavior::startClimbing(GameObject* ladder, float yPos) {
 	m_mob->setAccelerationY(0.f);
 	m_mob->setVelocityY(0.f);
 	g_inputController->lockAction();
-	m_mainChar->notifyGamepadCursor();
 }
 
 void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {

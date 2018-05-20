@@ -1,15 +1,15 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
+#include "GUI/ButtonInterface.h"
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
 // A simple checkbox 
-class Checkbox final : public GameObject {
+class Checkbox final : public ButtonInterface {
 public:
 	Checkbox();
 
@@ -34,29 +34,23 @@ public:
 	void setTextColor(const sf::Color& color);
 
 	void setOnClick(const std::function<void()>& agent);
-	// a checkbox can only be clicked if its enabled. also, the margin color is less opaque if it is disabled.
-	void setEnabled(bool enabled);
-	void setVisible(bool value);
+	void click() override;
+	
+	void setEnabled(bool enabled) override;
 	void setChecked(bool checked);
 	void setSymbolColor(const sf::Color& color);
 	void setBackgroundColor(const sf::Color& color);
 	void setMarginColor(const sf::Color& color);
 	void setMouseOverColor(const sf::Color& color);
-	
-	bool isEnabled() const;
-	bool isVisible() const;
+
 	bool isChecked() const;
-	GameObjectType getConfiguredType() const override;
 
 protected:
-	bool m_isMouseOver = false;
-	bool m_isPressed = false;
-	bool m_isEnabled = true;
-	bool m_isVisible = true;
 	bool m_isChecked = false;
 
 	void check();
 	void uncheck();
+	void updateColor() override;
 
 	SlicedSprite m_background;
 	SlicedSprite m_ornament;
