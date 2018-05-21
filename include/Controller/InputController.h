@@ -38,4 +38,9 @@ private:
 
 	bool checkKeyActive(Key key) const;
 	bool checkKeyJustPressed(Key key) const;
+
+	void updateMouseVisibility(const sf::Time& frameTime);
+	sf::Time m_mouseTimeout;
+	sf::Vector2f m_oldMousePosition;
+	static const sf::Time MOUSE_TIMEOUT;
 };

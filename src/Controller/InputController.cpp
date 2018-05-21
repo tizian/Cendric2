@@ -3,6 +3,8 @@
 
 InputController* g_inputController;
 
+const sf::Time InputController::MOUSE_TIMEOUT = sf::seconds(2.f);
+
 InputController::InputController() {
 	init();
 }
@@ -26,6 +28,30 @@ void InputController::update(const sf::Time& frameTime) {
 		m_gamepadKeyActiveMap[it.first] = isJoystickButtonPressed(it.first);
 		m_keyboardKeyJustPressedMap[it.first] = !m_keyboardKeyActiveMap[it.first] && isKeyboardKeyPressed(it.first);
 		m_keyboardKeyActiveMap[it.first] = isKeyboardKeyPressed(it.first);
+	}
+
+	updateMouseVisibility(frameTime);
+}
+
+void InputController::updateMouseVisibility(const sf::Time& frameTime) {
+	if (!isJoystickConnected()) {
+		if (!m_cursor.isVisible()) {
+			m_cursor.setVisible(true);
+		}
+		return;
+	}
+
+	auto newMousePos = getDefaultViewMousePosition();
+	auto const distance = dist(newMousePos, m_oldMousePosition) * frameTime.asSeconds();
+	m_oldMousePosition = newMousePos;
+	if (distance > 0.05f) {
+		m_cursor.setVisible(true);
+		m_mouseTimeout = MOUSE_TIMEOUT;
+	}
+
+	updateTime(m_mouseTimeout, frameTime);
+	if (m_mouseTimeout == sf::Time::Zero) {
+		m_cursor.setVisible(false);
 	}
 }
 

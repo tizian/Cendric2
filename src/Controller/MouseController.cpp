@@ -34,7 +34,7 @@ void MouseController::updateMouse() {
 
 	m_mousePosition = pos + view;
 	m_defaultViewMousePosition = pos + defaultview;
-	m_isMouseInsideView =
+	m_isMouseInsideView = m_cursor.isVisible() &&
 		pos.x >= 0.f && pos.x <= static_cast<float>(WINDOW_WIDTH) &&
 		pos.y >= 0.f && pos.y <= static_cast<float>(WINDOW_HEIGHT);
 }

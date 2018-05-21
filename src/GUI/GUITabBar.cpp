@@ -75,10 +75,11 @@ void GUITabBar::update(const sf::Time& frameTime) {
 		hide();
 	}
 
+	m_buttonGroup->update(frameTime);
+
 	auto nextSelectedIndex = -1;
 	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
 		auto tab = dynamic_cast<GUITabButton*>(m_buttonGroup->getButton(i));
-		tab->update(frameTime);
 		if (tab->isClicked() && !tab->isSelected()) {
 			nextSelectedIndex = static_cast<int>(i);
 		}

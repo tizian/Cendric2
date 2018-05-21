@@ -169,7 +169,7 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 		m_guiSidebar->hide();
 		g_inputController->lockAction();
 	}
-	else if (!guiElement->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
+	else if (!guiElement->isVisible() && m_guiSidebar->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
 		showGuiElement(guiElement, type);
 	}
 
