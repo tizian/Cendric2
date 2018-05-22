@@ -7,53 +7,93 @@ inline std::string getHintTitle(const std::string& hintKey) {
 	return g_textProvider->getText(hintKey, "hint");
 }
 
+inline std::string getKeyName(Key key) {
+	auto& mainMap = g_resourceManager->getConfiguration().mainKeyMap;
+	if (!g_inputController->isJoystickConnected() && contains(mainMap, key)) {
+		return EnumNames::getKeyboardKeyName(mainMap.at(key));
+	}
+
+	if (key == Key::Up) {
+		return g_textProvider->getText("Up");
+	}
+	if (key == Key::Down) {
+		return g_textProvider->getText("Down");
+	}
+	if (key == Key::Left) {
+		return g_textProvider->getText("Left");
+	}
+	if (key == Key::Right) {
+		return g_textProvider->getText("Right");
+	}
+
+	auto& keymap = g_resourceManager->getConfiguration().joystickKeyMap;
+
+	if (key == Key::Inventory ||
+		key == Key::CharacterInfo ||
+		key == Key::Journal ||
+		key == Key::Map ||
+		key == Key::Spellbook) {
+		return EnumNames::getGamepadAxisName(keymap.at(Key::Menu));
+	}
+
+	if (contains(keymap, key)) {
+		return EnumNames::getGamepadAxisName(keymap.at(key));
+	}
+	
+	if (contains(mainMap, key)) {
+		return EnumNames::getKeyboardKeyName(mainMap.at(key));
+	}
+
+	return std::string("?");
+}
+
 inline std::string getHintDescription(const std::string& hintKey) {
 	std::string hintText = (g_textProvider->getText("Press", "hint_desc")) + " ";
 
 	if (hintKey == "Inventory") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Inventory)) + " ");
+		hintText.append(getKeyName(Key::Inventory) + " ");
 	}
 	else if (hintKey == "Chop") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Chop)) + " ");
+		hintText.append(getKeyName(Key::Chop) + " ");
 	}
 	else if (hintKey == "Jump") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Jump)) + " ");
+		hintText.append(getKeyName(Key::Jump) + " ");
 	}
 	else if (hintKey == "Journal") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Journal)) + " ");
+		hintText.append(getKeyName(Key::Journal) + " ");
 	}
 	else if (hintKey == "Spellbook") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Spellbook)) + " ");
+		hintText.append(getKeyName(Key::Spellbook) + " ");
 	}
 	else if (hintKey == "CharacterInfo") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::CharacterInfo)) + " ");
+		hintText.append(getKeyName(Key::CharacterInfo) + " ");
 	}
 	else if (hintKey == "Map" || hintKey == "Waypoint") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Map)) + " ");
+		hintText.append(getKeyName(Key::Map) + " ");
 	}
 	else if (hintKey == "Pickup") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact)) + " ");
+		hintText.append(getKeyName(Key::Interact) + " ");
 	}
 	else if (hintKey == "Reload") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::BackToCheckpoint)) + " ");
+		hintText.append(getKeyName(Key::BackToCheckpoint) + " ");
 	}
 	else if (hintKey == "LeaveLevel") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
+		hintText.append(getKeyName(Key::Up) + " ");
 	}
 	else if (hintKey == "Scout") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + " ");
+		hintText.append(getKeyName(Key::Up) + " ");
 		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
+		hintText.append(getKeyName(Key::Down) + " ");
 	}
 	else if (hintKey == "Highlight") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::ToggleTooltips)) + " ");
+		hintText.append(getKeyName(Key::ToggleTooltips) + " ");
 	}
 	else if (hintKey == "MapMove") {
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Up)) + ", ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Left)) + ", ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Down)) + " ");
+		hintText.append(getKeyName(Key::Up) + ", ");
+		hintText.append(getKeyName(Key::Left) + ", ");
+		hintText.append(getKeyName(Key::Down) + " ");
 		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Right)) + " ");
+		hintText.append(getKeyName(Key::Right) + " ");
 	}
 	else {
 		hintText.clear();

@@ -307,5 +307,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Invi
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Fireplace','Fireplace','Kochstelle','Chochstell','Fogata');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]','[Nada que cocinar...]');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('LeverStuck','The lever is stuck!','Der Hebel ist verklemmt!','De Hebel isch verchlemmt!','¡La palanca está atorada!');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Used','Used ','Benutzt: ','Brucht: ','Usada ');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Used','Used','Benutzt: ','Brucht: ','Usada ');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Left','Left','Links','Links','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Right','Right','Rechts','Rächts','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Up','Up','Rauf','Ufe','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Down','Down','Runter','Abe','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('','','','','');
