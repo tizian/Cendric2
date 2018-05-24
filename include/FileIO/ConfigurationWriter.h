@@ -21,6 +21,7 @@ private:
 	std::string writeFPSLimitOn(const ConfigurationData& data) const;
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
 	std::string writeAutotargetOn(const ConfigurationData& data) const;
+	std::string writePauseInventoryOn(const ConfigurationData& data) const;
 	std::string writeHintsOn(const ConfigurationData& data) const;
 	std::string writeQuestmarkersOn(const ConfigurationData& data) const;
 

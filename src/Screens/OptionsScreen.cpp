@@ -45,9 +45,9 @@ void OptionsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 50.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 30.f));
 
-	float distFromTop = 150.f;
+	float distFromTop = 170.f;
 	float distFromLeft = 150.f;
 
 	auto buttonGroup = new ButtonGroup();
@@ -75,7 +75,7 @@ void OptionsScreen::execOnEnter() {
 	m_displayModeSelector->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	buttonGroup->addButton(m_displayModeSelector);
 
-	distFromTop = distFromTop + 120;
+	distFromTop = distFromTop + 135;
 
 	// sound	
 	m_soundCheckbox = new Checkbox();
@@ -86,7 +86,7 @@ void OptionsScreen::execOnEnter() {
 	m_soundCheckbox->setOnClick(std::bind(&OptionsScreen::checkSoundSlider, this));
 	buttonGroup->addButton(m_soundCheckbox);
 
-	distFromTop = distFromTop + 80;
+	distFromTop = distFromTop + 90;
 
 	m_volumeSoundSlider = new Slider(0, 100);
 	std::string volumeText = g_textProvider->getText("SoundVolume");
@@ -96,7 +96,7 @@ void OptionsScreen::execOnEnter() {
 	m_volumeSoundSlider->setPosition(sf::Vector2f(distFromLeft, distFromTop));
 	buttonGroup->addButton(m_volumeSoundSlider);
 
-	distFromTop = distFromTop + 100;
+	distFromTop = distFromTop + 80;
 
 	m_volumeMusicSlider = new Slider(0, 100);
 	m_previousMusicVolume = g_resourceManager->getConfiguration().volumeMusic;
@@ -109,7 +109,7 @@ void OptionsScreen::execOnEnter() {
 
 	checkSoundSlider();
 
-	distFromTop = 150.f;
+	distFromTop = 120.f;
 	distFromLeft = WINDOW_WIDTH / 2.f + 150.f;
 
 	// quickcast
@@ -145,6 +145,15 @@ void OptionsScreen::execOnEnter() {
 	m_displayQuestMarkersCheckbox->setChecked(g_resourceManager->getConfiguration().isDisplayQuestMarkers);
 	m_displayQuestMarkersCheckbox->setText("DisplayQuestMarkers");
 	buttonGroup->addButton(m_displayQuestMarkersCheckbox);
+
+	distFromTop = distFromTop + 50;
+
+	// pause while in inventory
+	m_pauseInventoryCheckbox = new Checkbox();
+	m_pauseInventoryCheckbox->setPosition(sf::Vector2f(distFromLeft, distFromTop));
+	m_pauseInventoryCheckbox->setChecked(g_resourceManager->getConfiguration().isPauseInventory);
+	m_pauseInventoryCheckbox->setText("PauseInventory");
+	buttonGroup->addButton(m_pauseInventoryCheckbox);
 
 	distFromTop = distFromTop + 50;
 
@@ -233,6 +242,7 @@ void OptionsScreen::onApply() {
 	config.isDisplayHints = m_displayHintsCheckbox->isChecked();
 	config.isDisplayQuestMarkers = m_displayQuestMarkersCheckbox->isChecked();
 	config.isAutotarget = m_autotargetCheckbox->isChecked();
+	config.isPauseInventory = m_pauseInventoryCheckbox->isChecked();
 	config.isSmoothing = m_smoothingCheckbox->isChecked();
 	config.isVSyncEnabled = m_vSyncCheckbox->isChecked();
 	config.isFPSLimited = m_limitFPSCheckbox->isChecked();

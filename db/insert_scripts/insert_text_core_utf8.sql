@@ -278,6 +278,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Wind
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('WindowedFullscreen','Full Window','Vollbild im Fenster','Vollbild im Fenster','Ventana completa');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Yes','Yes','Ja','Ja','Sí');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('VSync','Vsync','Vsync','Vsync','Sincronización vertical');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PauseInventory','Pause when in Inventory','Im Inventar pausieren','Im Inventar pausiere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('GhostArmor','Ghost Armour','Geisterrüstung','Geisterrüschtig','Armadura fantasma');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ScreenshotSaved','Screenshot saved','Bildschirmfoto gespeichert','Bildschirmföteli gspeicheret','Captura de pantalla guardada');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Sign','Sign','Schild','Schild','Letrero');

@@ -14,6 +14,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeDisplayMode(data);
 		configuration << writeQuickcastOn(data);
 		configuration << writeAutotargetOn(data);
+		configuration << writePauseInventoryOn(data);
 		configuration << writeHintsOn(data);
 		configuration << writeQuestmarkersOn(data);
 		configuration << writeMainInputMap(data);
@@ -66,6 +67,11 @@ std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data)
 std::string ConfigurationWriter::writeAutotargetOn(const ConfigurationData& data) const {
 	std::string autotargetOn = "# 0 means autotarget off, 1 means autotarget on\n";
 	return autotargetOn.append(std::string(AUTOTARGET_ON) + ":" + (data.isAutotarget ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writePauseInventoryOn(const ConfigurationData& data) const {
+	std::string pauseInventoryOn = "# 0 means not pause in inventory, 1 means pause in inventory\n";
+	return pauseInventoryOn.append(std::string(PAUSEINVENTORY_ON) + ":" + (data.isPauseInventory ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeHintsOn(const ConfigurationData& data) const {

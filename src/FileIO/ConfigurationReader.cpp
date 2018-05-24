@@ -59,6 +59,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(AUTOTARGET_ON), std::string(AUTOTARGET_ON)) == 0) {
 				noError = readAutotargetOn(line, data);
 			}
+			else if (line.compare(0, strlen(PAUSEINVENTORY_ON), std::string(PAUSEINVENTORY_ON)) == 0) {
+				noError = readPauseInventoryOn(line, data);
+			}
 			else if (line.compare(0, strlen(DISPLAYMODE), std::string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
 			}
@@ -272,6 +275,10 @@ bool ConfigurationReader::readSmoothingOn(const std::string& line, Configuration
 
 bool ConfigurationReader::readAutotargetOn(const std::string& line, ConfigurationData& data) const {
 	return readBoolean(line, data.isAutotarget);
+}
+
+bool ConfigurationReader::readPauseInventoryOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isPauseInventory);
 }
 
 bool ConfigurationReader::readIsDisplayTime(const std::string& line, ConfigurationData& data) const {

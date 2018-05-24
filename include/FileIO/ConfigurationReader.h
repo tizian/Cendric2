@@ -34,6 +34,7 @@ private:
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
 	bool readSmoothingOn(const std::string& line, ConfigurationData& data) const;
 	bool readAutotargetOn(const std::string& line, ConfigurationData& data) const;
+	bool readPauseInventoryOn(const std::string& line, ConfigurationData& data) const;
 	 
 	bool readLogLevel(const std::string& line, ConfigurationData& data) const;
 	bool readIsDisplayTime(const std::string& line, ConfigurationData& data) const;

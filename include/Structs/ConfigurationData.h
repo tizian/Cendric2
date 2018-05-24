@@ -27,6 +27,7 @@ struct ConfigurationData final {
 	bool isSmoothing;
 	bool isDisplayHints;
 	bool isDisplayQuestMarkers;
+	bool isPauseInventory;
 	bool isMultithreading;
 	bool isGodmode;
 	bool isDebugRendering; // whether or not the debug rendering can be toggled

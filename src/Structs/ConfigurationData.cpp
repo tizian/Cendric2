@@ -21,6 +21,7 @@ void ConfigurationData::resetToDefault() {
 	displayMode = DisplayMode::Fullscreen;
 	isQuickcast = true;
 	isAutotarget = true;
+	isPauseInventory = false;
 	isSmoothing = true;
 	isDisplayHints = true;
 	isDisplayQuestMarkers = true;

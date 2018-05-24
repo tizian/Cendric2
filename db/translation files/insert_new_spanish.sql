@@ -46,6 +46,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Next
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Keyboard','Keyboard','Tastatur','Tastatur','??');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gamepad','Gamepad','Gamepad','Gamepad','??');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Attack','Attack','Angreifen','Aagriife','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PauseInventory','Pause when in Inventory','Im Inventar pausieren','Im Inventar pausiere','?');
 
 -- hints
 
