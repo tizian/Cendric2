@@ -305,32 +305,39 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 
 	if (!m_isPaused) {
 		handleBookWindow(frameTime);
+
 		WorldScreen::execUpdate(frameTime);
 
-		// sort Movable Tiles
-		depthSortObjects(_MovableTile, false);
-		// update objects first for relative velocity
-		updateObjectsFirst(_MovableTile, frameTime);
-		updateObjectsFirst(_LevelMainCharacter, frameTime);
-		updateObjectsFirst(_Enemy, frameTime);
-		updateObjectsFirst(_DynamicTile, frameTime);
-		updateObjectsFirst(_Spell, frameTime);
-		// and then normally
-		if (!m_interface->isGuiOverlayVisible()) {
-			updateObjects(_ScreenOverlay, frameTime);
-		}
-		updateObjects(_MovableTile, frameTime);
-		updateObjects(_DynamicTile, frameTime);
-		updateObjects(_Enemy, frameTime);
-		updateObjects(_LevelMainCharacter, frameTime);
-		updateObjects(_Equipment, frameTime);
-		updateObjects(_Spell, frameTime);
-		updateObjects(_Overlay, frameTime);
-		updateObjects(_Interface, frameTime);
-		if (!m_isGameOver) updateObjects(_LevelItem, frameTime);
+		if (!isUpdateOnlyInterface()) {
+			// sort Movable Tiles
+			depthSortObjects(_MovableTile, false);
+			// update objects first for relative velocity
+			updateObjectsFirst(_MovableTile, frameTime);
+			updateObjectsFirst(_LevelMainCharacter, frameTime);
+			updateObjectsFirst(_Enemy, frameTime);
+			updateObjectsFirst(_DynamicTile, frameTime);
+			updateObjectsFirst(_Spell, frameTime);
 
-		updateObjects(_Light, frameTime);
-		m_currentLevel.update(frameTime);
+			// and then normally
+			if (!m_interface->isGuiOverlayVisible()) {
+				updateObjects(_ScreenOverlay, frameTime);
+			}
+
+			updateObjects(_MovableTile, frameTime);
+			updateObjects(_DynamicTile, frameTime);
+			updateObjects(_Enemy, frameTime);
+			updateObjects(_LevelMainCharacter, frameTime);
+			updateObjects(_Equipment, frameTime);
+			updateObjects(_Spell, frameTime);
+			updateObjects(_Overlay, frameTime);
+			updateObjects(_Interface, frameTime);
+			if (!m_isGameOver) {
+				updateObjects(_LevelItem, frameTime);
+			}
+
+			updateObjects(_Light, frameTime);
+			m_currentLevel.update(frameTime);
+		}
 	}
 
 	if (m_gamePausedOverlay) {

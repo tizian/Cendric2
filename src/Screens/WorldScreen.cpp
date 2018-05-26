@@ -327,6 +327,12 @@ bool WorldScreen::isItemMonitored(const std::string& itemId) const {
 	return contains(m_monitoredQuestItems, itemId);
 }
 
+bool WorldScreen::isUpdateOnlyInterface() const {
+	bool shouldPause = g_resourceManager->getConfiguration().isPauseInventory || g_inputController->isJoystickConnected();
+	bool isOverlay = m_interface->isGuiOverlayVisible();
+	return shouldPause && isOverlay;
+}
+
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
 	

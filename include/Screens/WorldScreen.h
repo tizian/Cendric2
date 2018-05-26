@@ -98,6 +98,8 @@ protected:
 	virtual void notifyEquipmentReload() = 0;
 	// can be set to false if the interface should not be updated
 	bool m_updateInterface = true;
+	// whether only to update the interface
+	bool isUpdateOnlyInterface() const;
 
 protected:
 	WorldInterface* m_interface = nullptr;

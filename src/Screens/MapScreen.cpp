@@ -41,13 +41,17 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (!m_interface->isGuiOverlayVisible()) {
 		updateObjects(_ScreenOverlay, frameTime);
 	}
-	updateObjects(_DynamicTile, frameTime);
-	updateObjects(_ForegroundDynamicTile, frameTime);
-	updateObjects(_MapMovableGameObject, frameTime);
-	depthSortObjects(_MapMovableGameObject, true);
-	updateObjects(_Equipment, frameTime);
-	updateObjects(_Light, frameTime);
-	updateObjects(_Overlay, frameTime);
+
+	if (!isUpdateOnlyInterface()) {
+		updateObjects(_DynamicTile, frameTime);
+		updateObjects(_ForegroundDynamicTile, frameTime);
+		updateObjects(_MapMovableGameObject, frameTime);
+		depthSortObjects(_MapMovableGameObject, true);
+		updateObjects(_Equipment, frameTime);
+		updateObjects(_Light, frameTime);
+		updateObjects(_Overlay, frameTime);
+	}
+	
 	updateTooltipText(frameTime);
 }
 
