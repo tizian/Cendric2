@@ -54,7 +54,12 @@ inline std::string getHintDescription(const std::string& hintKey) {
 		hintText.append(getKeyName(Key::Inventory) + " ");
 	}
 	else if (hintKey == "Chop") {
-		hintText.append(getKeyName(Key::Chop) + " ");
+		if (g_inputController->isJoystickConnected()) {
+			hintText.append(getKeyName(Key::Attack) + " ");
+		}
+		else {
+			hintText.append(getKeyName(Key::Chop) + " ");
+		}
 	}
 	else if (hintKey == "Jump") {
 		hintText.append(getKeyName(Key::Jump) + " ");

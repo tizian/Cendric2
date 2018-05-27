@@ -1,11 +1,12 @@
 #include "GUI/ButtonGroup.h"
 #include "GUI/ButtonInterface.h"
+#include "GUI/SelectableWindow.h"
 #include "Controller/InputController.h"
 
-ButtonGroup::ButtonGroup() {
+ButtonGroup::ButtonGroup(int width) {
 	m_selectedButtonIndex = -1;
+	m_width = width;
 	m_isEnabled = true;
-	m_isHorizontal = false;
 }
 
 ButtonGroup::~ButtonGroup() {
@@ -20,7 +21,7 @@ void ButtonGroup::render(sf::RenderTarget& renderTarget) {
 
 void ButtonGroup::update(const sf::Time& frameTime) {
 	if (!m_isEnabled) return;
-	for (size_t i = 0; i < m_buttons.size(); ++i) {
+	for (int i = 0; i < static_cast<int>(m_buttons.size()); ++i) {
 		if (!m_buttons[i]->isVisibleAndEnabled()) {
 			continue;
 		}
@@ -40,10 +41,6 @@ void ButtonGroup::setEnabled(bool enabled) {
 	for (auto button : m_buttons) {
 		button->setEnabled(enabled);
 	}
-}
-
-void ButtonGroup::setHorizontal(bool horizontal) {
-	m_isHorizontal = horizontal;
 }
 
 void ButtonGroup::addButton(ButtonInterface* button) {
@@ -74,42 +71,80 @@ void ButtonGroup::updateSelection() {
 		return;
 	}
 
-	if (m_isHorizontal) {
-		if (g_inputController->isJustLeft()) {
-			setNextButtonSelected(false);
-		}
-		else if (g_inputController->isJustRight()) {
-			setNextButtonSelected(true);
-		}
+	if (g_inputController->isJustLeft()) {
+		setNextButtonSelectedX(false);
 	}
-	else {
-		if (g_inputController->isJustUp()) {
-			setNextButtonSelected(false);
-		}
-		else if (g_inputController->isJustDown()) {
-			setNextButtonSelected(true);
-		}
+	else if (g_inputController->isJustRight()) {
+		setNextButtonSelectedX(true);
+	}
+	else if (g_inputController->isJustUp()) {
+		setNextButtonSelectedY(false);
+	}
+	else if (g_inputController->isJustDown()) {
+		setNextButtonSelectedY(true);
 	}
 
-	if (m_buttons[m_selectedButtonIndex]->isVisibleAndEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
-		m_buttons[m_selectedButtonIndex]->click();
+	auto button = m_buttons[m_selectedButtonIndex];
+	if (button->isVisibleAndEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
+		button->click();
 	}
 }
 
-void ButtonGroup::setNextButtonSelected(bool forward) {
-	selectButton(getNextEnabledButton(forward));
+void ButtonGroup::setNextButtonSelectedX(bool forward) {
+	selectButton(getNextEnabledButtonX(forward));
 }
 
-int ButtonGroup::getNextEnabledButton(bool forward) {
+void ButtonGroup::setNextButtonSelectedY(bool forward) {
+	selectButton(getNextEnabledButtonY(forward));
+}
+
+int ButtonGroup::getNextEnabledButtonX(bool forward) {
+	int x = getSelectedIndexX();
+	int y = getSelectedIndexY();
+
 	if (forward) {
-		for (int i = m_selectedButtonIndex + 1; i < static_cast<int>(m_buttons.size()); i++) {
+		if (x + 1 == m_width) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setLeftWindowSelected();
+			}
+		}
+
+		for (int i = y * m_width + x + 1; i < y * m_width + m_width; i++) {
 			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
 		}
 	}
 	else {
-		for (int i = m_selectedButtonIndex - 1; i > -1; i--) {
+		if (x == 0) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setRightWindowSelected();
+			}
+		}
+
+		for (int i = y * m_width + x - 1; i > y * m_width - 1; i--) {
+			if (m_buttons[i]->isVisibleAndEnabled()) {
+				return i;
+			}
+		}
+	}
+
+	return m_selectedButtonIndex;
+}
+
+int ButtonGroup::getNextEnabledButtonY(bool forward) {
+	int x = getSelectedIndexX();
+	int y = getSelectedIndexY();
+
+	if (forward) {
+		for (int i = (y + 1) * m_width; i < static_cast<int>(m_buttons.size()); i += m_width) {
+			if (m_buttons[i]->isVisibleAndEnabled()) {
+				return i;
+			}
+		}
+	}
+	else {
+		for (int i = (y - 1) * m_width; i > -1; i -= m_width) {
 			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
@@ -135,6 +170,26 @@ void ButtonGroup::selectButton(int index) {
 	m_selectedButtonIndex = index;
 	m_buttons[index]->setSelected(true);
 	g_inputController->lockAction();
+}
+
+void ButtonGroup::setSelectableWindow(SelectableWindow* window) {
+	m_selectableWindow = window;
+}
+
+int ButtonGroup::getSelectedIndexX() const {
+	if (m_selectedButtonIndex < 0 || m_width < 1) {
+		return -1;
+	}
+
+	return m_selectedButtonIndex % m_width;
+}
+
+int ButtonGroup::getSelectedIndexY() const {
+	if (m_selectedButtonIndex < 0 || m_width < 1) {
+		return -1;
+	}
+
+	return m_selectedButtonIndex / m_width;
 }
 
 GameObjectType ButtonGroup::getConfiguredType() const {

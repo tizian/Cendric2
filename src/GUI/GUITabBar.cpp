@@ -111,6 +111,10 @@ int GUITabBar::getSelectedElement() const {
 	return -1;
 }
 
+void GUITabBar::updateWindowSelected() {
+	m_buttonGroup->setEnabled(isWindowSelected());
+}
+
 void GUITabBar::render(sf::RenderTarget& target) {
 	if (!m_isVisible) return;
 

@@ -2,12 +2,12 @@
 
 #include "global.h"
 #include "ResourceManager.h"
-#include "Window.h"
+#include "GUI/SelectableWindow.h"
 
 class WorldInterface;
 class ButtonGroup;
 
-class GUITabBar final {
+class GUITabBar final : public SelectableWindow {
 public:
 	GUITabBar(WorldInterface* _interface, int size);
 	~GUITabBar();
@@ -31,6 +31,7 @@ public:
 
 private:
 	WorldInterface* getInterface() const;
+	void updateWindowSelected() override;
 	void init();
 
 private:
@@ -40,8 +41,6 @@ private:
 	WorldInterface* m_worldInterface;
 	ButtonGroup* m_buttonGroup;
 	sf::Vector2f m_position;
-
-	Window* m_window = nullptr;
 
 public:
 	static const int WIDTH;

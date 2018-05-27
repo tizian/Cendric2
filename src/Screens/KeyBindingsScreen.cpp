@@ -43,8 +43,7 @@ void KeyBindingsScreen::execOnEnter() {
 	button->setOnClick(std::bind(&KeyBindingsScreen::onBack, this));
 	addObject(button);
 
-	ButtonGroup* buttonGroup = new ButtonGroup();
-	buttonGroup->setHorizontal(true);
+	ButtonGroup* buttonGroup = new ButtonGroup(2);
 
 	// keyboard keybindings
 	button = new Button(sf::FloatRect(buttonX, buttonY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);

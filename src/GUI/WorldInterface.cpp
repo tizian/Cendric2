@@ -192,6 +192,7 @@ void WorldInterface::loadGuiSidebar() {
 	delete m_guiSidebar;
 	int n = 5;
 	m_guiSidebar = new GUITabBar(this, n);
+	m_guiSidebar->setWindowSelected(true);
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS);
 

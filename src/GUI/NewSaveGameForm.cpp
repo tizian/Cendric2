@@ -17,8 +17,7 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_okButton->setText("Okay");
 	m_cancelButton->setText("Cancel");
 
-	m_buttonGroup = new ButtonGroup();
-	m_buttonGroup->setHorizontal(true);
+	m_buttonGroup = new ButtonGroup(2);
 
 	m_buttonGroup->addButton(m_okButton);
 	m_buttonGroup->addButton(m_cancelButton);

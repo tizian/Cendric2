@@ -16,8 +16,7 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 	m_yesButton->setText("Yes");
 	m_noButton->setText("No");
 
-	m_buttonGroup = new ButtonGroup();
-	m_buttonGroup->setHorizontal(true);
+	m_buttonGroup = new ButtonGroup(2);
 
 	m_buttonGroup->addButton(m_yesButton);
 	m_buttonGroup->addButton(m_noButton);

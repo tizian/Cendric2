@@ -133,10 +133,10 @@ void KeyboardKeyBindingsScreen::calculateEntryPositions() {
 
 	sf::Vector2f pos = m_keyButtonGroup->getSelectedButton()->getPosition();
 	if (pos.y < TOP) {
-		m_keyButtonGroup->setNextButtonSelected(true);
+		m_keyButtonGroup->setNextButtonSelectedY(true);
 	}
 	else if (pos.y + m_keyButtonGroup->getSelectedButton()->getBoundingBox()->height > TOP + HEIGHT) {
-		m_keyButtonGroup->setNextButtonSelected(false);
+		m_keyButtonGroup->setNextButtonSelectedY(false);
 	}
 }
 
