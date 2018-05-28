@@ -24,7 +24,6 @@ public:
 	void setState(GameObjectState state, bool updateAnimation) override { AnimatedGameObject::setState(state, updateAnimation); }
 	void setState(GameObjectState state) override { AnimatedGameObject::setState(state); }
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
-	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Boat; }
 

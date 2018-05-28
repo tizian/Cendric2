@@ -356,7 +356,8 @@ void Spellbook::reload() {
 	}
 
 	if (nTabs > 0) {
-		m_tabBar = new TexturedTabBar(sf::FloatRect(x, y, width, height), nTabs);
+		m_tabBar = new TexturedTabBar();
+		m_tabBar->init(sf::FloatRect(x, y, width, height), nTabs);
 
 		for (int i = 0; i < nTabs; ++i) {
 			if (m_tabTypes[i] == SpellType::VOID) {

@@ -43,16 +43,16 @@ public:
 	// reload the level overlay
 	virtual void reloadLevelOverlay();
 	// opens the map overlay and jumps to a quest marker
-	void jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data);
+	void jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data);
 	// opens the quest log and jumps to a quest
-	void jumpToQuestLog(const std::string questId);
+	void jumpToQuestLog(const std::string& questId);
 
 	// an consumable item has been dropped. forward to quick slot bar
-	void notifyConsumableDrop(const SlotClone* item);
+	void notifyConsumableDrop(const SlotClone* item) const;
 	// an item should be equiped in quick slot bar. forward to quick slot bar
-	void equipConsumable(const std::string& itemID);
+	void equipConsumable(const std::string& itemID) const;
 	// highlight quickslots
-	void highlightQuickslots(bool highlight);
+	void highlightQuickslots(bool highlight) const;
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void renderAfterForeground(sf::RenderTarget& target);
@@ -89,6 +89,7 @@ protected:
 	template<typename G>
 	void showGuiElement(G* guiElement, GUIElement type);
 	void showGuiElement(GUIElement type);
+	void connectGuiElements(GUIElement type);
 
 	static Key getKeyFromGuiElement(GUIElement e);
 };

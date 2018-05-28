@@ -95,7 +95,8 @@ void Inventory::init() {
 	float width = nTabs * BUTTON_SIZE.x;
 	float height = BUTTON_SIZE.y;
 
-	m_tabBar = new TexturedTabBar(sf::FloatRect(0, 0, width, height), nTabs);
+	m_tabBar = new TexturedTabBar();
+	m_tabBar->init(sf::FloatRect(0, 0, width, height), nTabs);
 
 	int textureOffset = 0;
 	for (int i = 0; i < nTabs; ++i) {
@@ -281,6 +282,10 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 			m_equipment->equipItem(clicked);
 		}
 	}
+}
+
+void Inventory::updateWindowSelected() {
+	m_tabBar->setGamepadEnabled(isWindowSelected());
 }
 
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {

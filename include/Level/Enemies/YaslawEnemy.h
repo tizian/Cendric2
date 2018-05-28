@@ -3,8 +3,6 @@
 #include "global.h"
 #include "Level/Enemy.h"
 #include "Level/Level.h"
-#include "Spells/SpellManager.h"
-#include "Screens/Screen.h"
 #include "GameObjectComponents/LightComponent.h"
 
 class YaslawEnemy final : public Enemy {

@@ -24,7 +24,7 @@ protected:
 	Window* m_window = nullptr;
 
 private:
-	void updateWindowColor();
+	void updateWindowColor() const;
 
 	SelectableWindow* m_rightWindow = nullptr;
 	SelectableWindow* m_leftWindow = nullptr;

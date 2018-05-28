@@ -32,7 +32,7 @@ private:
 
 class MovingTile final : public LevelMovableTile, public LeverDependentTile, public MovingParent {
 public:
-	MovingTile(LevelScreen* levelScreen);
+	explicit MovingTile(LevelScreen* levelScreen);
 	~MovingTile();
 
 	bool init(const LevelTileProperties& properties) override;
@@ -50,7 +50,6 @@ public:
 
 	// those methods are overridden to resolve the MI diamond of death:
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableTile::updateFirst(frameTime); }
-	void setDebugBoundingBox(const sf::Color& debugColor) override { LevelMovableTile::setDebugBoundingBox(debugColor); }
 	void setState(GameObjectState state) override { LevelMovableTile::setState(state); }
 	GameObjectType getConfiguredType() const override { return LevelMovableTile::getConfiguredType(); }
 	LevelDynamicTileID getDynamicTileID() const override { return LevelDynamicTileID::Moving; }

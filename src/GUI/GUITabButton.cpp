@@ -16,7 +16,7 @@ GUITabButton::GUITabButton() {
 	
 	m_icon.setTextureRect(sf::IntRect(0, 0, ICON_SIZE, ICON_SIZE));
 
-	setDebugBoundingBox(sf::Color::Blue);
+	GameObject::setDebugBoundingBox(sf::Color::Blue);
 	setInputInDefaultView(true);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE - 2 * OFFSET, SIZE - 2 * OFFSET));
 	

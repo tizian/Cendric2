@@ -22,10 +22,10 @@ void TexturedTabButton::setTexture(const sf::Texture* tex, const sf::IntRect& te
 	m_texturedLayer.setTexture(tex);
 	m_texturedLayer.setTextureRect(textureRect);
 
-	const sf::FloatRect* bbox = getBoundingBox();
+	auto const bbox = getBoundingBox();
 
-	float height = std::min(bbox->height, static_cast<float>(textureRect.height));
-	float width = textureRect.width * (height / static_cast<float>(textureRect.height));
+	auto const height = std::min(bbox->height, static_cast<float>(textureRect.height));
+	auto const width = textureRect.width * (height / static_cast<float>(textureRect.height));
 	
 	m_texturedLayer.setSize(sf::Vector2f(width, height));
 	setPosition(getPosition() - sf::Vector2f(BOUNDING_BOX_OFFSET, BORDER_OFFSET));

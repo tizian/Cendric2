@@ -3,9 +3,8 @@
 #include "global.h"
 #include "Level/LevelMainCharacter.h"
 #include "Window.h"
-#include "GUI/GUIConstants.h"
 #include "GUI/TabBar.h"
-#include "Enums/EnumNames.h"
+#include "GUI/SelectableWindow.h"
 
 class HintDescriptionWindow;
 class ScrollBar;
@@ -39,7 +38,7 @@ private:
 // the character info, as displayed in a world
 // it is seperated in two parts, the reputation and the stats.
 // for the attributes, it takes them directly from the level main character (level) or the core (map)
-class CharacterInfo {
+class CharacterInfo : public SelectableWindow {
 public:
 	CharacterInfo(WorldScreen* screen, const AttributeData* attributes = nullptr);
 	~CharacterInfo();
@@ -60,11 +59,14 @@ private:
 	void updateReputation();
 	void updateHints();
 
-	void selectEntry(HintEntry* selectedEntry);
+	void selectEntry(HintEntry* entry);
 	void calculateEntryPositions();
 
 	void showDescription(const std::string& hintKey);
 	void hideDescription();
+
+protected:
+	void updateWindowSelected() override;
 
 public:
 	static const int MAX_ENTRY_LENGTH_CHARACTERS;
@@ -75,13 +77,18 @@ public:
 	static const float HEIGHT;
 
 private:
+	void updateEntries(const sf::Time& frameTime);
+	void updateSelection(const sf::Time& frameTIme);
+	void updateSelectableWindow();
+	void checkReload();
+
+private:
 	WorldScreen* m_screen;
 	const CharacterCore* m_core;
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;
 	bool m_isReloadNeeded = true;
 
-	Window* m_window = nullptr;
 	TabBar* m_tabBar;
 	BitmapText m_title;
 

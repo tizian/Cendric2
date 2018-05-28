@@ -16,8 +16,10 @@ public:
 	void update(const sf::Time& frameTime) override;
 
 	void addButton(ButtonInterface* button);
+	void selectButton(int index);
 
-	void setEnabled(bool value);
+	void setEnabled(bool enabled);
+	void setGamepadEnabled(bool enabled);
 
 	void setNextButtonSelectedX(bool forward);
 	void setNextButtonSelectedY(bool forward);
@@ -32,14 +34,13 @@ public:
 
 private:
 	std::vector<ButtonInterface*> m_buttons;
+
 	bool m_isEnabled;
-
+	bool m_isGamepadEnabled;
 	int m_width;
-
 	int m_selectedButtonIndex;
 
 	void updateSelection();
-	void selectButton(int i);
 	int getNextEnabledButtonX(bool forward);
 	int getNextEnabledButtonY(bool forward);
 

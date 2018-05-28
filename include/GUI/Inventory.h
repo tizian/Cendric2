@@ -1,6 +1,5 @@
 #pragma once
 
-#include "global.h"
 #include "CharacterCore.h"
 #include "ResourceManager.h"
 #include "Window.h"
@@ -8,6 +7,7 @@
 #include "GUI/ItemDescriptionWindow.h"
 #include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
+#include "GUI/SelectableWindow.h"
 
 class LevelInterface;
 class MapInterface;
@@ -19,7 +19,7 @@ class WorldInterface;
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
 // the inventory also shows item description and equipped items.
-class Inventory final {
+class Inventory final : public SelectableWindow {
 public:
 	Inventory(LevelInterface* _interface);
 	Inventory(MapInterface* _interface);
@@ -59,8 +59,6 @@ private:
 	void clearAllSlots();
 	// reorganizes the positions of the 'slots' vector
 	void calculateSlotPositions(std::map<std::string, InventorySlot*>& slots);
-
-	Window* m_window;
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
@@ -120,6 +118,10 @@ private:
 	void convertItem(const Item* item);
 	void learnSpell(const Item* item);
 
+protected:
+	void updateWindowSelected() override;
+
+private:
 	InventoryEquipment* m_equipment = nullptr;
 
 	static const int SLOT_COUNT_X;

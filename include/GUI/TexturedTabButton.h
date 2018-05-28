@@ -1,6 +1,5 @@
 #pragma once
 
-#include "global.h"
 #include "TabButton.h"
 
 class TexturedTabButton final : public TabButton {

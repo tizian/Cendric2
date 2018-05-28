@@ -7,6 +7,7 @@ ButtonGroup::ButtonGroup(int width) {
 	m_selectedButtonIndex = -1;
 	m_width = width;
 	m_isEnabled = true;
+	m_isGamepadEnabled = true;
 }
 
 ButtonGroup::~ButtonGroup() {
@@ -33,6 +34,7 @@ void ButtonGroup::update(const sf::Time& frameTime) {
 		}
 	}
 
+	if (!m_isGamepadEnabled) return;
 	updateSelection();
 }
 
@@ -41,6 +43,10 @@ void ButtonGroup::setEnabled(bool enabled) {
 	for (auto button : m_buttons) {
 		button->setEnabled(enabled);
 	}
+}
+
+void ButtonGroup::setGamepadEnabled(bool enabled) {
+	m_isGamepadEnabled = enabled;
 }
 
 void ButtonGroup::addButton(ButtonInterface* button) {
@@ -105,7 +111,7 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 	if (forward) {
 		if (x + 1 == m_width) {
 			if (m_selectableWindow) {
-				m_selectableWindow->setLeftWindowSelected();
+				m_selectableWindow->setRightWindowSelected();
 			}
 		}
 
@@ -118,7 +124,7 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 	else {
 		if (x == 0) {
 			if (m_selectableWindow) {
-				m_selectableWindow->setRightWindowSelected();
+				m_selectableWindow->setLeftWindowSelected();
 			}
 		}
 

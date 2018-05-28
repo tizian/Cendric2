@@ -66,15 +66,16 @@ void QuestLog::init() {
 	});
 
 	// init tabbar
-	int nTabs = 3;
-	float width = nTabs * BUTTON_SIZE.x;
-	float height = BUTTON_SIZE.y;
-	float x = LEFT + 0.5f * (WIDTH - width);
-	float y = TOP + GUIConstants::GUI_TABS_TOP;
+	const auto nTabs = 3;
+	const auto width = nTabs * BUTTON_SIZE.x;
+	const auto height = BUTTON_SIZE.y;
+	const auto x = LEFT + 0.5f * (WIDTH - width);
+	const auto y = TOP + GUIConstants::GUI_TABS_TOP;
 
-	m_tabBar = new TabBar(sf::FloatRect(x, y, width, height), nTabs);
-	for (int i = 0; i < nTabs; ++i) {
-		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName((QuestState)(i + 1)));
+	m_tabBar = new TabBar();
+	m_tabBar->init(sf::FloatRect(x, y, width, height), nTabs);
+	for (auto i = 0; i < nTabs; ++i) {
+		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName(static_cast<QuestState>(i + 1)));
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 

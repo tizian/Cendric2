@@ -1,7 +1,9 @@
 #include "World/MovableGameObject.h"
 #include "Level/DynamicTiles/MovingParent.h"
 
-MovableGameObject::MovableGameObject() : AnimatedGameObject() {
+MovableGameObject::MovableGameObject() {
+	m_debugInfo = new BitmapText();
+	m_debugInfo->setColor(COLOR_BAD);
 }
 
 void MovableGameObject::updateFirst(const sf::Time& frameTime) {
@@ -18,13 +20,6 @@ void MovableGameObject::update(const sf::Time& frameTime) {
 		m_debugInfo->setString("x: " + std::to_string(static_cast<int>(getPosition().x)) + " y: " + std::to_string(static_cast<int>(getPosition().y)));
 		m_debugInfo->setPosition(getPosition() + sf::Vector2f(0.f, -30.f));
 	}
-}
-
-void MovableGameObject::setDebugBoundingBox(const sf::Color& debugColor) {
-	GameObject::setDebugBoundingBox(debugColor);
-	delete m_debugInfo;
-	m_debugInfo = new BitmapText();
-	m_debugInfo->setColor(COLOR_BAD);
 }
 
 void MovableGameObject::renderAfterForeground(sf::RenderTarget& target) {

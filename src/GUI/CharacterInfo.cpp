@@ -111,7 +111,8 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	float x = GUIConstants::LEFT + 0.5f * (m_window->getSize().x - barWidth);
 	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
-	m_tabBar = new TabBar(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
+	m_tabBar = new TabBar();
+	m_tabBar->init(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
 	m_tabBar->getTabButton(0)->setText("Stats");
 	m_tabBar->getTabButton(1)->setText("Reputation");
 	m_tabBar->getTabButton(2)->setText("Hints");
@@ -145,6 +146,25 @@ bool CharacterInfo::isVisible() const {
 void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
+	updateEntries(frameTime);
+	updateSelection(frameTime);
+	updateSelectableWindow();
+	m_window->update(frameTime);
+	checkReload();
+}
+
+void CharacterInfo::updateSelectableWindow() {
+	if (!isWindowSelected()) {
+		return;
+	}
+
+	if (g_inputController->isJustLeft()) {
+		setLeftWindowSelected();
+	}
+}
+
+
+void CharacterInfo::updateEntries(const sf::Time& frameTime) {
 	m_scrollBar->update(frameTime);
 
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
@@ -160,7 +180,9 @@ void CharacterInfo::update(const sf::Time& frameTime) {
 		}
 	}
 
-	// check whether an entry was selected
+}
+
+void CharacterInfo::updateSelection(const sf::Time& frameTime) {
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
 		HintEntry& entry = m_hintEntries[i];
 		sf::Vector2f pos = entry.getPosition();
@@ -185,9 +207,13 @@ void CharacterInfo::update(const sf::Time& frameTime) {
 		m_scrollBar->setScrollPosition(0.f);
 	}
 
-	m_window->update(frameTime);
+}
 
-	if (!m_isReloadNeeded) return;
+void CharacterInfo::checkReload() {
+	if (!m_isReloadNeeded) {
+		return;
+	}
+
 	reload();
 	m_isReloadNeeded = false;
 
@@ -235,6 +261,10 @@ void CharacterInfo::showDescription(const std::string& hintKey) {
 void CharacterInfo::hideDescription() {
 	m_descriptionWindow->hide();
 	m_selectedHintKey = "";
+}
+
+void CharacterInfo::updateWindowSelected() {
+	m_tabBar->setGamepadEnabled(isWindowSelected());
 }
 
 void CharacterInfo::render(sf::RenderTarget& target) {

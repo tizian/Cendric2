@@ -26,6 +26,7 @@ void GUITabBar::init() {
 	m_window = new Window(box, GUIOrnamentStyle::LARGE, GUIConstants::MAIN_COLOR, GUIConstants::ORNAMENT_COLOR);
 	
 	m_buttonGroup = new ButtonGroup();
+	m_buttonGroup->setSelectableWindow(this);
 
 	for (auto i = 0; i < m_size; ++i) {
 		auto const button = new GUITabButton();
@@ -112,10 +113,10 @@ int GUITabBar::getSelectedElement() const {
 }
 
 void GUITabBar::updateWindowSelected() {
-	m_buttonGroup->setEnabled(isWindowSelected());
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 }
 
-void GUITabBar::render(sf::RenderTarget& target) {
+void GUITabBar::render(sf::RenderTarget& target) const {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
@@ -125,10 +126,7 @@ void GUITabBar::render(sf::RenderTarget& target) {
 void GUITabBar::show(int index) {
 	if (index < 0 || index > static_cast<int>(m_buttonGroup->getButtons().size()) - 1) return;
 
-	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
-		m_buttonGroup->getButton(i)->setSelected(static_cast<int>(i) == index);
-	}
-
+	m_buttonGroup->selectButton(index);
 	show();
 }
 

@@ -24,7 +24,6 @@ public:
 
 	void updateFirst(const sf::Time& frameTime) override { MapMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MapMovableGameObject::renderAfterForeground(target); }
-	void setDebugBoundingBox(const sf::Color& color) override { MapMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { MapMovableGameObject::setState(state); }
 	void setPosition(const sf::Vector2f& pos) override { MapMovableGameObject::setPosition(pos); }
 

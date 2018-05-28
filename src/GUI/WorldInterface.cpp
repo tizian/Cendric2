@@ -99,25 +99,25 @@ void WorldInterface::reloadLevelOverlay() {
 	m_mapOverlay->notifyLevelOverlayReload();
 }
 
-void WorldInterface::jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data) {
+void WorldInterface::jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data) {
 	showGuiElement(m_mapOverlay, GUIElement::Map);
 	m_mapOverlay->notifyJumpToQuest(questId, data);
 }
 
-void WorldInterface::jumpToQuestLog(const std::string questId) {
+void WorldInterface::jumpToQuestLog(const std::string& questId) {
 	showGuiElement(m_questLog, GUIElement::Journal);
 	m_questLog->notifyJumpToQuest(questId);
 }
 
-void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
+void WorldInterface::notifyConsumableDrop(const SlotClone* item) const {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
-void WorldInterface::equipConsumable(const std::string& itemID) {
+void WorldInterface::equipConsumable(const std::string& itemID) const {
 	m_quickSlotBar->equipConsumable(itemID);
 }
 
-void WorldInterface::highlightQuickslots(bool highlight) {
+void WorldInterface::highlightQuickslots(bool highlight) const {
 	m_quickSlotBar->highlightSlots(highlight);
 }
 
@@ -144,12 +144,40 @@ void WorldInterface::showGuiElement(GUIElement type) {
 	}
 }
 
+void WorldInterface::connectGuiElements(GUIElement type) {
+	m_characterInfo->setWindowSelected(false);
+	m_inventory->setWindowSelected(false);
+
+
+	m_guiSidebar->setLeftWindow(nullptr);
+	m_guiSidebar->setWindowSelected(true);
+
+	switch (type) {
+	default:
+	case GUIElement::VOID:
+		return;
+	case GUIElement::Character:
+		m_guiSidebar->setRightWindow(m_characterInfo);
+		return;
+	case GUIElement::Inventory:
+		m_guiSidebar->setRightWindow(m_inventory);
+		return;
+	case GUIElement::Spellbook:
+		return;
+	case GUIElement::Journal:
+		return;
+	case GUIElement::Map:
+		return;
+	}
+}
+
 template<typename G>
 void WorldInterface::showGuiElement(G* guiElement, GUIElement type) {
 	hideAll();
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 	guiElement->show();
 	m_guiSidebar->show(static_cast<int>(type));
+	connectGuiElements(type);
 	m_selectedElement = type;
 }
 

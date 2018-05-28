@@ -26,7 +26,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override { LevelMovableGameObject::setPosition(pos); }
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableGameObject::renderAfterForeground(target); }
-	void setDebugBoundingBox(const sf::Color& color) override { LevelMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { LevelMovableGameObject::setState(state); }
 	void setState(GameObjectState state, bool updateAnimation) override { LevelMovableGameObject::setState(state, updateAnimation); }
 	void setAutoscroller(AutoscrollerCamera* camera);

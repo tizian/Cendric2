@@ -18,7 +18,7 @@ public:
 
 	bool isVisible() const;
 
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target) const;
 	void update(const sf::Time& frameTime);
 
 	void setPosition(const sf::Vector2f& pos);
