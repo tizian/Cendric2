@@ -33,9 +33,15 @@ bool ButtonInterface::isSelected() const {
 	return m_isSelected;
 }
 
+bool ButtonInterface::isMousedOver() const {
+	return m_isMouseOver;
+}
+
 bool ButtonInterface::isVisibleAndEnabled() const {
 	return m_isVisible && m_isEnabled;
 }
+
+void ButtonInterface::notifyFirstSelection() {}
 
 GameObjectType ButtonInterface::getConfiguredType() const {
 	return _Button;

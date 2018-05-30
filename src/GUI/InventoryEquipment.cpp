@@ -5,18 +5,18 @@
 #include "Screens/LevelScreen.h"
 #include "GlobalResource.h"
 
-float MARGIN = 10.f;
-float YOFFSET = 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - 7 * InventorySlot::SIZE - 6 * MARGIN);
-float InventoryEquipment::WIDTH = 100.f;
+const float MARGIN = 10.f;
+const float YOFFSET = 0.5f * (GUIConstants::GUI_WINDOW_HEIGHT - 7 * InventorySlot::SIZE - 6 * MARGIN);
+const float InventoryEquipment::WIDTH = 100.f;
 
 InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
-	auto lScreen = dynamic_cast<LevelScreen*>(screen);
+	const auto lScreen = dynamic_cast<LevelScreen*>(screen);
 	m_isModifiable = !lScreen || !lScreen->getWorldData()->isBossLevel;
 
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	const sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANS_BLACK, // back
@@ -35,7 +35,7 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 }
 
 InventoryEquipment::~InventoryEquipment() {
-	CLEAR_MAP(m_slots);
+	delete m_buttonGroup;
 	delete m_window;
 }
 
@@ -43,8 +43,8 @@ void InventoryEquipment::setPosition(const sf::Vector2f& position) {
 	m_position = position;
 	m_window->setPosition(position);
 
-	float xOffset = position.x + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
-	float yOffset = position.y + YOFFSET + InventorySlot::ICON_OFFSET;
+	const auto xOffset = position.x + 0.5f * (WIDTH - InventorySlot::SIZE + 2 * InventorySlot::ICON_OFFSET);
+	auto yOffset = position.y + YOFFSET + InventorySlot::ICON_OFFSET;
 
 	for (auto type : m_types) {
 		if (!contains(m_slots, type)) continue;
@@ -53,27 +53,34 @@ void InventoryEquipment::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-void InventoryEquipment::update(const sf::Time& frameTime) {
+void InventoryEquipment::update(const sf::Time& frameTime) const {
 	if (!m_isVisible) return;
 
-	// check whether an item was selected
-	for (auto& it : m_slots) {
-		it.second->update(frameTime);
-		if (m_isModifiable && (it.second->isRightClicked() || it.second->isDoubleClicked())) {
-			// unequip item
-			m_screen->notifyItemEquip("", it.first);
+	m_buttonGroup->update(frameTime);
+
+	// check for mouseover
+	auto const& buttons = m_buttonGroup->getButtons();
+	for (auto i = 0; i < static_cast<int>(buttons.size()); ++i) {
+		if (buttons[i]->isMousedOver()) {
+			m_buttonGroup->selectButton(i);
 			break;
+		}
+	}
+
+	// check whether an item was de-equipped
+	if (m_isModifiable) {
+		const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
+		if (selectedButton && (selectedButton->isRightClicked() || selectedButton->isDoubleClicked())) {
+			m_screen->notifyItemEquip("", selectedButton->getItemType());
 		}
 	}
 }
 
-void InventoryEquipment::render(sf::RenderTarget& target) {
+void InventoryEquipment::render(sf::RenderTarget& target) const {
 	if (!m_isVisible) return;
 
 	m_window->render(target);
-	for (auto& it : m_slots) {
-		it.second->render(target);
-	}
+	m_buttonGroup->render(target);
 }
 
 void InventoryEquipment::renderAfterForeground(sf::RenderTarget& target) {
@@ -108,9 +115,9 @@ void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 
 void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (item == nullptr) return;
-	const InventorySlot* slot = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
+	auto const slot = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (!contains(m_slots, slot->getItemType())) return;
-	const bool isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
+	const auto isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
 
 	if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1)->getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
@@ -146,12 +153,12 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 	}
 }
 
-InventorySlot* InventoryEquipment::getSelectedSlot() {
-	for (auto it : m_slots) {
-		if (it.second->isMousedOver()) {
-			return it.second;
-		}
+InventorySlot* InventoryEquipment::getSelectedSlot() const {
+	const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());;
+	if ((selectedButton && selectedButton->isMousedOver()) || isWindowSelected()) {
+		return selectedButton;
 	}
+
 	return nullptr;
 }
 
@@ -161,6 +168,10 @@ InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
 }
 
 void InventoryEquipment::reload() {
+	delete m_buttonGroup;
+	m_buttonGroup = new ButtonGroup();
+	m_buttonGroup->setSelectableWindow(this);
+
 	m_slots.clear();
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS);
@@ -168,19 +179,26 @@ void InventoryEquipment::reload() {
 	sf::Vector2i texPos(0, 0);
 
 	for (auto& it : m_types) {
-		if (contains(m_slots, it)) continue;
 
 		if (m_core->getEquippedItem(it).empty()) {
-			m_slots.insert({ it, new InventorySlot(tex, texPos, it) });
+			const auto newSlot = new InventorySlot(tex, texPos, it);
+			m_buttonGroup->addButton(newSlot);
+			m_slots.insert({ it, newSlot });
 		}
 		else {
-			m_slots.insert({ it, new InventorySlot(m_core->getEquippedItem(it), -1, true) });
+			const auto newSlot = new InventorySlot(m_core->getEquippedItem(it), -1, true);
+			m_buttonGroup->addButton(newSlot);
+			m_slots.insert({ it, newSlot });
 		}
 		texPos.x += 50;
 		m_slots.at(it)->setItemType(it);
 	}
 
 	setPosition(m_position);
+}
+
+void InventoryEquipment::updateWindowSelected() {
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 }
 
 void InventoryEquipment::show() {

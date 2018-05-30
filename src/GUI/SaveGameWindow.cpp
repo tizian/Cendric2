@@ -72,7 +72,7 @@ void SaveGameWindow::reload() {
 	if (!m_entries.empty()) {
 		m_chosenEntry = 0;
 		m_entries[m_chosenEntry]->select();
-	}
+	} 
 
 	if (m_entries.size() < ENTRY_COUNT) {
 		m_scrollBar->setScrollPosition(0.f);
@@ -102,9 +102,9 @@ void SaveGameWindow::loadSaves(std::vector<SaveGameEntry*>& entries) {
 			g_logger->logWarning("SaveGameWindow", "There is a file of the wrong type in the savegame folder: " + std::string(de->d_name));
 			continue;
 		}
-		SaveGameEntry* entry = new SaveGameEntry();
-		std::string location = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::string(de->d_name);
-		if (!entry->load(location.c_str())) {
+		auto entry = new SaveGameEntry();
+		const auto location = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::string(de->d_name);
+		if (!entry->load(location)) {
 			g_logger->logError("SaveGameWindow", "Could not load savegame " + location);
 			continue;
 		}
@@ -118,7 +118,7 @@ void SaveGameWindow::loadSaves(std::vector<SaveGameEntry*>& entries) {
 }
 
 bool SaveGameWindow::isChosen() {
-	bool wasChosen = m_isChosen;
+	const auto wasChosen = m_isChosen;
 	m_isChosen = false;
 	return wasChosen;
 }
@@ -317,7 +317,7 @@ SaveGameEntry::SaveGameEntry() {
 bool SaveGameEntry::load(const std::string& filename) {
 	CharacterCoreReader reader;
 	CharacterCoreData data;
-	if (!reader.readCharacterCore(filename.c_str(), data, true)) {
+	if (!reader.readCharacterCore(filename, data, true)) {
 		g_logger->logError("SaveGameEntry", "Could not load data from file: " + std::string(filename));
 		return false;
 	}
@@ -390,7 +390,7 @@ void SaveGameEntry::onLeftClick() {
 }
 
 bool SaveGameEntry::isClicked() {
-	bool wasClicked = m_isClicked;
+	const auto wasClicked = m_isClicked;
 	m_isClicked = false;
 	return wasClicked;
 }

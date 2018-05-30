@@ -288,14 +288,14 @@ void Inventory::updateWindowSelected() {
 	m_tabBar->setGamepadEnabled(isWindowSelected());
 }
 
-void Inventory::handleMapDoubleClick(const InventorySlot* clicked) {
+void Inventory::handleMapDoubleClick(const InventorySlot* clicked) const {
 	if (m_mapInterface == nullptr || clicked == nullptr) return;
 
 	if (Item::isEquipmentType(clicked->getItemType())) 
 		m_equipment->equipItem(clicked);
 }
 
-void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) {
+void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) const {
 	if (m_levelInterface == nullptr || clicked == nullptr) return;
 
 	if (Item::isEquipmentType(clicked->getItemType())) {
@@ -775,4 +775,8 @@ void Inventory::stopTrading() {
 	m_merchantInterface = nullptr;
 	setPosition(sf::Vector2f(INVENTORY_LEFT, GUIConstants::TOP));
 	hide();
+}
+
+InventoryEquipment* Inventory::getEquipment() const {
+	return m_equipment;
 }

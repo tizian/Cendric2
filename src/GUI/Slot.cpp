@@ -11,7 +11,7 @@ Slot::Slot() {
 }
 
 void Slot::initSlot() {
-	float size = getConfiguredSize();
+	const auto size = getConfiguredSize();
 	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
@@ -37,7 +37,7 @@ void Slot::initSlot() {
 void Slot::setPosition(const sf::Vector2f& pos) {
 	adjustTooltipOffset();
 	GameObject::setPosition(pos);
-	float iconOffset = getConfiguredIconOffset();
+	const auto iconOffset = getConfiguredIconOffset();
 	m_backgroundRect.setPosition(pos);
 	m_iconRect.setPosition(pos);
 	m_overlayRect.setPosition(pos);
@@ -64,6 +64,20 @@ void Slot::deactivate() {
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 128));
 	m_borderRect.setTexture(m_borderTexture);
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
+}
+
+void Slot::click() {
+	select();
+}
+
+void Slot::updateColor() {
+	m_borderRect.setTexture(m_isSelected ? m_borderTextureSelected : m_borderTexture);
+	m_backgroundRect.setFillColor(m_isSelected && !m_isEmpty ? COLOR_TRANS_WHITE : COLOR_TRANS_GREY);
+	m_tooltipComponent->setCurrentTooltipTime(m_isSelected ? sf::seconds(2.f) : sf::Time::Zero);
+}
+
+void Slot::notifyFirstSelection() {
+	m_tooltipComponent->setCurrentTooltipTime(sf::Time::Zero);
 }
 
 void Slot::select() {
@@ -94,7 +108,7 @@ void Slot::update(const sf::Time& frameTime) {
 	m_isClicked = false;
 	m_isRightClicked = false;
 	m_isDoubleClicked = false;
-	m_isMousedOver = false;
+	m_isMouseOver = false;
 	updateTime(m_doubleClickTime, frameTime);
 	GameObject::update(frameTime);
 }
@@ -127,7 +141,7 @@ void Slot::onRightClick() {
 
 void Slot::onMouseOver() {
 	GameObject::onMouseOver();
-	m_isMousedOver = true;
+	m_isMouseOver = true;
 }
 
 GameObjectType Slot::getConfiguredType() const {

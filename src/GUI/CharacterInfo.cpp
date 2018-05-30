@@ -167,9 +167,9 @@ void CharacterInfo::updateSelectableWindow() {
 void CharacterInfo::updateEntries(const sf::Time& frameTime) {
 	m_scrollBar->update(frameTime);
 
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
+	for (int i = 0; i < static_cast<int>(m_hintEntries.size()); ++i) {
 		HintEntry& entry = m_hintEntries[i];
-		if (m_selectedEntry && m_selectedEntry->getHintKey() == entry.getHintKey()) {
+		if (m_selectedEntryId == i) {
 			entry.setColor(COLOR_WHITE);
 		}
 		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
@@ -179,10 +179,19 @@ void CharacterInfo::updateEntries(const sf::Time& frameTime) {
 			entry.setColor(COLOR_GREY);
 		}
 	}
-
 }
 
-void CharacterInfo::updateSelection(const sf::Time& frameTime) {
+void  CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
+	if (g_inputController->isJustDown()) {
+		selectEntry(m_selectedEntryId + 1);
+		return;
+	}
+
+	if (g_inputController->isJustUp()) {
+		selectEntry(m_selectedEntryId - 1);
+		return;
+	}
+
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
 		HintEntry& entry = m_hintEntries[i];
 		sf::Vector2f pos = entry.getPosition();
@@ -190,23 +199,28 @@ void CharacterInfo::updateSelection(const sf::Time& frameTime) {
 			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
 		entry.update(frameTime);
 		if (entry.isClicked()) {
-			selectEntry(&entry);
+			selectEntry(i);
 			return;
 		}
+	}
+}
+
+void CharacterInfo::updateSelection(const sf::Time& frameTime) {
+	if (m_tabBar->getActiveTabIndex() == 2) {
+		updateHintSelection(frameTime);
 	}
 
 	int lastIndex = m_tabBar->getActiveTabIndex();
 	m_tabBar->update(frameTime);
 	int newIndex = m_tabBar->getActiveTabIndex();
 	if (lastIndex != newIndex) {
-		hideDescription();
-		if (m_selectedEntry != nullptr) {
-			m_selectedEntry->deselect();
-			m_selectedEntry = nullptr;
+		if (newIndex == 2) {
+			showDescription(m_selectedHintKey);
 		}
-		m_scrollBar->setScrollPosition(0.f);
+		else {
+			hideDescription();
+		}
 	}
-
 }
 
 void CharacterInfo::checkReload() {
@@ -260,7 +274,6 @@ void CharacterInfo::showDescription(const std::string& hintKey) {
 
 void CharacterInfo::hideDescription() {
 	m_descriptionWindow->hide();
-	m_selectedHintKey = "";
 }
 
 void CharacterInfo::updateWindowSelected() {
@@ -399,7 +412,7 @@ void CharacterInfo::updateReputation() {
 	m_guild.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
-	
+
 	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILD_ICONS);
 	int texHeight = 100;
 	if (tex != nullptr)
@@ -450,48 +463,59 @@ void CharacterInfo::updateReputation() {
 
 void CharacterInfo::updateHints() {
 	m_hintEntries.clear();
-	m_selectedEntry = nullptr;
+	m_selectedEntryId = -1;
 
-	const std::vector<std::string>& hints = m_core->getData().hintsLearned;
+	const auto& hints = m_core->getData().hintsLearned;
 
-	for (size_t i = 0; i < hints.size(); ++i) {
-		m_hintEntries.push_back(HintEntry(hints[i]));
+	for (const auto& hint : hints) {
+		m_hintEntries.emplace_back(hint);
 	}
 
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
 		HintEntry& entry = m_hintEntries[i];
 		entry.deselect();
 		if (entry.getHintKey() == m_selectedHintKey) {
-			selectEntry(&entry);
+			selectEntry(static_cast<int>(i));
 		}
+	}
+
+	if (m_selectedEntryId < 0 && !m_hintEntries.empty()) {
+		selectEntry(0);
 	}
 }
 
-void CharacterInfo::selectEntry(HintEntry* entry) {
-	if (entry == nullptr) return;
-	if (entry == m_selectedEntry) return;
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
+void CharacterInfo::selectEntry(int id) {
+	if (id < 0 || id > static_cast<int>(m_hintEntries.size()) - 1) {
+		return;
 	}
-	m_selectedEntry = entry;
-	m_selectedEntry->select();
-	showDescription(m_selectedEntry->getHintKey());
-	m_selectedHintKey = m_selectedEntry->getHintKey();
+
+	if (id == m_selectedEntryId) {
+		return;
+	}
+
+	if (m_selectedEntryId > 0) {
+		m_hintEntries[m_selectedEntryId].deselect();
+	}
+
+	m_selectedEntryId = id;
+	auto& newEntry = m_hintEntries[m_selectedEntryId];
+	newEntry.select();
+	showDescription(newEntry.getHintKey());
+	m_selectedHintKey = newEntry.getHintKey();
 }
 
 void CharacterInfo::show() {
 	m_isVisible = true;
 	g_inputController->startReadingText();
+
+	if (m_tabBar->getActiveTabIndex() == 2) {
+		showDescription(m_selectedHintKey);
+	}
 }
 
 void CharacterInfo::hide() {
 	m_isVisible = false;
 	m_descriptionWindow->hide();
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
-		m_selectedEntry = nullptr;
-	}
-	m_scrollBar->setScrollPosition(0.f);
 
 	// handle GODMODE
 	std::string read = g_inputController->getReadText();
@@ -501,7 +525,7 @@ void CharacterInfo::hide() {
 			m_screen->toggleGodmode();
 		}
 	}
-	
+
 	g_inputController->stopReadingText();
 }
 

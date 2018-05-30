@@ -53,6 +53,7 @@ void ButtonGroup::addButton(ButtonInterface* button) {
 	m_buttons.push_back(button);
 	if (m_selectedButtonIndex == -1) {
 		selectButton(0);
+		m_buttons[0]->notifyFirstSelection();
 	}
 }
 
@@ -112,6 +113,7 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 		if (x + 1 == m_width) {
 			if (m_selectableWindow) {
 				m_selectableWindow->setRightWindowSelected();
+				g_inputController->lockAction();
 			}
 		}
 
@@ -125,6 +127,7 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 		if (x == 0) {
 			if (m_selectableWindow) {
 				m_selectableWindow->setLeftWindowSelected();
+				g_inputController->lockAction();
 			}
 		}
 
@@ -139,7 +142,6 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 }
 
 int ButtonGroup::getNextEnabledButtonY(bool forward) {
-	int x = getSelectedIndexX();
 	int y = getSelectedIndexY();
 
 	if (forward) {

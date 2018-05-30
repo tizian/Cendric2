@@ -1,7 +1,5 @@
 #include "GUI/HintDescriptionWindow.h"
 
-using namespace std;
-
 const float HintDescriptionWindow::WIDTH = 340.f;
 
 HintDescriptionWindow::HintDescriptionWindow(const CharacterCore* core) : Window(

@@ -43,6 +43,8 @@ public:
 	// reloads the inventory gold text
 	void reloadGold();
 
+	InventoryEquipment* getEquipment() const;
+
 private:
 	CharacterCore* m_core;
 	LevelInterface* m_levelInterface = nullptr;
@@ -91,8 +93,8 @@ private:
 	void handleMapRightClick(const InventorySlot* clicked);
 	void handleLevelRightClick(const InventorySlot* clicked);
 
-	void handleLevelDoubleClick(const InventorySlot* clicked);
-	void handleMapDoubleClick(const InventorySlot* clicked);
+	void handleLevelDoubleClick(const InventorySlot* clicked) const;
+	void handleMapDoubleClick(const InventorySlot* clicked) const;
 
 	// used for drag & drop handling
 	SlotClone* m_currentClone = nullptr;

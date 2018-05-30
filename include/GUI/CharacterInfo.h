@@ -59,7 +59,7 @@ private:
 	void updateReputation();
 	void updateHints();
 
-	void selectEntry(HintEntry* entry);
+	void selectEntry(int id);
 	void calculateEntryPositions();
 
 	void showDescription(const std::string& hintKey);
@@ -78,6 +78,7 @@ public:
 
 private:
 	void updateEntries(const sf::Time& frameTime);
+	void updateHintSelection(const sf::Time& time);
 	void updateSelection(const sf::Time& frameTIme);
 	void updateSelectableWindow();
 	void checkReload();
@@ -101,7 +102,7 @@ private:
 	std::vector<BitmapText> m_reputationTexts;
 
 	std::vector<HintEntry> m_hintEntries;
-	HintEntry* m_selectedEntry = nullptr;
+	int m_selectedEntryId = -1;
 	std::string m_selectedHintKey = "";
 
 	SlicedSprite m_scrollWindow;

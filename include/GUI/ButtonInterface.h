@@ -1,6 +1,5 @@
 #pragma once
 
-#include "global.h"
 #include "World/GameObject.h"
 
 ///<summary>
@@ -13,6 +12,7 @@ public:
 	virtual void click() = 0;
 
 	virtual void setEnabled(bool enabled);
+	virtual void notifyFirstSelection();
 	void setVisible(bool visible);
 	void setSelected(bool selected);
 
@@ -21,6 +21,7 @@ public:
 	bool isEnabled() const;
 	bool isVisible() const;
 	bool isSelected() const;
+	bool isMousedOver() const;
 	bool isVisibleAndEnabled() const;
 
 	GameObjectType getConfiguredType() const override;

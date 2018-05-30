@@ -4,19 +4,21 @@
 #include "World/GameObject.h"
 
 #include "GUI/BitmapText.h"
+#include "GUI/ButtonInterface.h"
 
 class TooltipWindowComponent;
 
-class Slot : virtual public GameObject {
+class Slot : virtual public GameObject, virtual public ButtonInterface {
 	friend class SlotClone;
 public:
 	Slot();
-	virtual ~Slot() {};
+	virtual ~Slot() = default;
 
 	void initSlot();
 
 	void setPosition(const sf::Vector2f& pos) override;
 
+	void click() override;
 	virtual void select();
 	virtual void deselect();
 
@@ -26,20 +28,17 @@ public:
 	void highlight();
 	void unhighlight();
 
-	virtual void update(const sf::Time& frameTime) override;
-
+	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& renderTarget) override;
 
-	virtual void onLeftJustPressed() override;
-	virtual void onRightClick() override;
-	virtual void onMouseOver() override;
+	void onLeftJustPressed() override;
+	void onRightClick() override;
+	void onMouseOver() override;
 
-	inline bool isClicked() const { return m_isClicked; }
-	inline bool isRightClicked() const { return m_isRightClicked; }
-	inline bool isDoubleClicked() const { return m_isDoubleClicked; }
-	inline bool isMousedOver() const { return m_isMousedOver; }
+	bool isRightClicked() const { return m_isRightClicked; }
+	bool isDoubleClicked() const { return m_isDoubleClicked; }
 
-	inline bool isEmpty() const { return m_isEmpty; }
+	bool isEmpty() const { return m_isEmpty; }
 
 	GameObjectType getConfiguredType() const override;
 
@@ -50,15 +49,14 @@ public:
 	static const float TOOLTIP_TOP;
 
 protected:
-	bool m_isClicked = false;
+	void updateColor() override;
+	void notifyFirstSelection() override;
+
 	bool m_isRightClicked = false;
-	bool m_isMousedOver = false;
-
-	bool m_isDoubleClicked = false;
-	sf::Time m_doubleClickTime = sf::Time::Zero;
-
 	bool m_isEmpty = false;
-	bool m_isSelected = false;
+	bool m_isDoubleClicked = false;
+
+	sf::Time m_doubleClickTime = sf::Time::Zero;
 
 	sf::RectangleShape m_backgroundRect;
 	sf::RectangleShape m_iconRect;
@@ -67,7 +65,7 @@ protected:
 
 	sf::IntRect m_iconTextureRect;
 	const sf::Texture* m_iconTexture = nullptr;
-	const sf::Texture* m_borderTexture = nullptr;			// TODO: Maybe use one single spritesheet for all "slot border" textures
+	const sf::Texture* m_borderTexture = nullptr;		
 	const sf::Texture* m_borderTextureSelected = nullptr;
 	const sf::Texture* m_highlightTexture = nullptr;
 

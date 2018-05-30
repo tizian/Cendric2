@@ -15,15 +15,15 @@ public:
 	void show();
 	void hide();
 
-	void highlightSlots(bool highlight);
+	void highlightSlots(bool highlight) const;
 
-	void render(sf::RenderTarget& target);
-	void renderAfterForeground(sf::RenderTarget& target);
-	void update(const sf::Time& frameTime);
+	void render(sf::RenderTarget& target) const;
+	void renderAfterForeground(sf::RenderTarget& target) const;
+	void update(const sf::Time& frameTime) const;
 
-	void notifyConsumableDrop(const SlotClone* item);
-	void equipConsumable(const std::string& itemID);
-	void reload();
+	void notifyConsumableDrop(const SlotClone* item) const;
+	void equipConsumable(const std::string& itemID) const;
+	void reload() const;
 
 private:
 	bool m_isVisible = true;

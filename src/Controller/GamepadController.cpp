@@ -7,7 +7,7 @@ const int GamepadController::AXIS_THRESHOLD = 50;
 GamepadController::GamepadController() {
 	m_joystickMap = &(g_resourceManager->getConfiguration().joystickKeyMap);
 	initAxisMap();
-}
+};
 
 void GamepadController::update(const sf::Time& frameTime) {
 	if (!isJoystickConnected()) return;
