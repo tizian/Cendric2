@@ -4,33 +4,18 @@
 #include "Window.h"
 
 #include "GUI/BitmapText.h"
-#include "GUI/SlicedSprite.h"
-
-class ScrollBar;
-class ScrollHelper;
+#include "GUI/ScrollWindow.h"
 
 // a save game entry in a save game window
-class SaveGameEntry final : public GameObject {
+class SaveGameEntry final : public ScrollEntry {
 public:
 	SaveGameEntry();
 
-	// loads data from the filename via a character core reader.
-	// returns true if successful, else false.
 	bool load(const std::string& filename);
 
 	void render(sf::RenderTarget& renderTarget) override;
-	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
-
-	void setColorSelected();
-	void setColorDeselected();
-	void setColorMouseover();
 	
-	void onLeftClick() override;
-	void select();
-	void deselect();
-	bool isClicked();
-	bool isSelected() const;
 	const std::string& getFilename() const;
 	const std::string& getSaveName() const;
 
@@ -38,11 +23,12 @@ public:
 		return (m_dateSavedNr > save.m_dateSavedNr);
 	}
 
+protected:
+	void updateColor() override;
+
 private:
 	void setColor(const sf::Color& color);
 
-	bool m_isSelected = false;
-	bool m_isClicked = false;
 	bool m_isHashValid = false;
 	BitmapText m_dateSaved;
 	BitmapText m_name;
@@ -54,14 +40,14 @@ private:
 
 // a window to show savegames in the saves/ folder. 
 // it is used inside the SaveGameScreen and the LoadGameScreen
-class SaveGameWindow {
+class SaveGameWindow : public ScrollWindow {
 public:
 	SaveGameWindow();
 	virtual ~SaveGameWindow();
 
 	void render(sf::RenderTarget& renderTarget);
 	void update(const sf::Time& frameTime);
-	// if this is true, the chosen file should be loaded. be aware that this "query" sets this bool to false again.
+
 	bool isChosen();
 	void reload();
 	void setEnabled(bool value);
@@ -69,35 +55,28 @@ public:
 	std::string getChosenSaveName() const;
 
 	// fills the given vector with saves and orders them (newest first)
-	static void loadSaves(std::vector<SaveGameEntry*>& entries);
-
-private:
-	void calculateEntryPositions();
-	void updateScrolling(const sf::Time& frameTime);
+	static void loadSaves(std::vector<ScrollEntry*>& entries);
 
 public:
 	static const float COLUMN_WIDTH;
 
+protected:
+	bool isEntryInvisible(const ScrollEntry* entry) const override;
+
+	int getEntryCount() override { return ENTRY_COUNT; }
+	float getLeft() override { return LEFT; }
+	float getTop() override { return TOP; }
+	float getWindowMargin() override { return WINDOW_MARGIN; }
+	float getWidth() override { return WIDTH; }
+
 private:
-	std::vector<SaveGameEntry*> m_entries;
-	int m_chosenEntry = 0;
+	std::vector<ScrollEntry*> m_saveGameEntries;
 	bool m_isChosen = false;
 	bool m_isEnabled = true;
 
 	BitmapText m_emptyText;
 
-	SlicedSprite m_scrollWindow;
-	ScrollBar* m_scrollBar = nullptr;
-	ScrollHelper *m_scrollHelper = nullptr;
-
-	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
-	sf::Time m_upActiveTime = sf::Time::Zero;
-	sf::Time m_downActiveTime = sf::Time::Zero;
-	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
-	sf::Time m_timeSinceTick = sf::Time::Zero;
-
 	static const int ENTRY_COUNT;
-
 	static const float WINDOW_MARGIN;
 	
 	static const float TOP;

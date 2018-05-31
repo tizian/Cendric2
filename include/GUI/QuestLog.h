@@ -69,9 +69,7 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	// reloads the quests, depending on the core
 	void reload();
-	// opens the quest log and jumps to the quest with id "questId"
 	void notifyJumpToQuest(const std::string& questId);
 
 public:
@@ -126,7 +124,6 @@ private:
 	static const float MAX_ENTRY_LENGTH;
 
 	static const float WINDOW_MARGIN;
-
 	static const sf::Vector2f BUTTON_SIZE;
 
 	static const float SCROLL_WINDOW_LEFT;

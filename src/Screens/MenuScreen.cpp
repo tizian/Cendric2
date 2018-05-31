@@ -156,13 +156,13 @@ void MenuScreen::execOnEnter() {
 void MenuScreen::loadNewestSave() {
 	if (m_characterCore != nullptr) return;
 	
-	std::vector<SaveGameEntry*> entries;
+	std::vector<ScrollEntry*> entries;
 	SaveGameWindow::loadSaves(entries);
 	if (entries.empty()) {
 		return;
 	}
 
-	std::string filename = entries.at(0)->getFilename();
+	std::string filename = static_cast<SaveGameEntry*>(entries.at(0))->getFilename();
 
 	for (auto& entry : entries) {
 		delete entry;
