@@ -118,7 +118,7 @@ void ScrollWindow::updateSelection(const sf::Time& frameTime) {
 		auto entry = (*m_entries)[i];
 		if (isEntryInvisible(entry)) continue;
 		entry->update(frameTime);
-		if (entry->isMouseover()) {
+		if (entry->isClicked()) {
 			selectEntry(i);
 			return;
 		}
@@ -131,6 +131,7 @@ void ScrollEntry::update(const sf::Time& frameTime) {
 	m_isMouseover = false;
 	m_isClicked = false;
 	GameObject::update(frameTime);
+	updateColor();
 }
 
 void ScrollEntry::onLeftJustPressed() {

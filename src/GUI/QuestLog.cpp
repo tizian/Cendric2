@@ -294,10 +294,20 @@ void QuestEntry::update(const sf::Time& frameTime) {
 	}
 
 	ScrollEntry::update(frameTime);
+
+	if (g_inputController->isSelected()) {
+		m_questMarker->onLeftClick();
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Jump)) {
+		m_questMarker->onRightClick();
+	}
 }
 
 void QuestEntry::updateColor() {
-	m_name.setColor(isSelected() ? COLOR_WHITE : sf::Color(180, 180, 180));
+	m_name.setColor(isSelected() ? COLOR_WHITE :
+		isMouseover() ? COLOR_LIGHT_PURPLE :
+		COLOR_MEDIUM_GREY);
 }
 
 const std::string& QuestEntry::getQuestID() const {

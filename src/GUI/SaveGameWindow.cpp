@@ -130,14 +130,13 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	m_scrollBar->update(frameTime);
+	const auto previouslySelectedId = m_selectedEntryId;
 
+	m_scrollBar->update(frameTime);
 	updateSelection(frameTime);
 
-	for (auto& entry : m_saveGameEntries) {
-		if (entry->isClicked()) {
-			m_isChosen = true;
-		}
+	if (m_saveGameEntries[previouslySelectedId]->isClicked()) {
+		m_isChosen = true;
 	}
 
 	if (g_inputController->isSelected()) {
@@ -246,6 +245,8 @@ void SaveGameEntry::setColor(const sf::Color& color) {
 void SaveGameEntry::updateColor() {
 	if (isSelected()) {
 		setColor(m_isHashValid ? COLOR_WHITE : COLOR_BAD);
+	} else if (isMouseover()) {
+		setColor(m_isHashValid ? COLOR_LIGHT_GREY : COLOR_ELEMENTAL);
 	} else {
 		setColor(m_isHashValid ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
 	}

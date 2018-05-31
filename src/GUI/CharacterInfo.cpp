@@ -50,6 +50,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
 	m_attributes = attributes;
+	m_entries = &m_hintEntries;
 
 	BitmapText name;
 	name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -137,6 +138,7 @@ CharacterInfo::~CharacterInfo() {
 	delete m_descriptionWindow;
 	delete m_scrollBar;
 	delete m_scrollHelper;
+	CLEAR_VECTOR(m_hintEntries);
 }
 
 bool CharacterInfo::isVisible() const {
@@ -146,10 +148,14 @@ bool CharacterInfo::isVisible() const {
 void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	updateEntries(frameTime);
-	updateSelection(frameTime);
+	m_scrollBar->update(frameTime);
+	updateTabBar(frameTime);
+	if (m_tabBar->getActiveTabIndex() == 2) {
+		updateSelection(frameTime);
+	}
 	updateSelectableWindow();
 	m_window->update(frameTime);
+	calculateEntryPositions();
 	checkReload();
 }
 
@@ -163,107 +169,13 @@ void CharacterInfo::updateSelectableWindow() {
 	}
 }
 
-void CharacterInfo::updateEntries(const sf::Time& frameTime) {
-	m_scrollBar->update(frameTime);
-
-	for (int i = 0; i < static_cast<int>(m_hintEntries.size()); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		if (m_selectedEntryId == i) {
-			entry.setColor(COLOR_WHITE);
-		}
-		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
-			entry.setColor(COLOR_LIGHT_PURPLE);
-		}
-		else {
-			entry.setColor(COLOR_GREY);
-		}
-	}
-}
-
-bool CharacterInfo::isEntryInvisible(const HintEntry& entry) {
-	auto const pos = entry.getPosition();
+bool CharacterInfo::isEntryInvisible(const ScrollEntry* entry) const {
+	auto const pos = entry->getPosition();
 	return pos.y < TOP + SCROLL_WINDOW_TOP ||
 		pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
 }
 
-void CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
-	calculateEntryPositions();
-
-	if (g_inputController->isJustDown()) {
-		selectEntry(m_selectedEntryId + 1);
-		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
-			m_scrollBar->scroll(1);
-		}
-		m_downActiveTime = frameTime;
-		return;
-	}
-
-	if (g_inputController->isJustUp()) {
-		selectEntry(m_selectedEntryId - 1);
-		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
-			m_scrollBar->scroll(-1);
-		}
-		m_upActiveTime = frameTime;
-		return;
-	}
-
-	if (m_upActiveTime > sf::Time::Zero) {
-		if (g_inputController->isUp()) {
-			m_upActiveTime += frameTime;
-		}
-		else {
-			m_upActiveTime = sf::Time::Zero;
-			return;
-		}
-	}
-
-	if (m_downActiveTime > sf::Time::Zero) {
-		if (g_inputController->isDown()) {
-			m_downActiveTime += frameTime;
-		}
-		else {
-			m_downActiveTime = sf::Time::Zero;
-			return;
-		}
-	}
-
-	m_timeSinceTick += frameTime;
-	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
-
-	if (m_upActiveTime > SCROLL_TIMEOUT) {
-		selectEntry(std::max(m_selectedEntryId - 1, 0));
-		m_timeSinceTick = sf::Time::Zero;
-		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
-			m_scrollBar->scroll(-1);
-		}
-		return;
-	}
-
-	if (m_downActiveTime > SCROLL_TIMEOUT) {
-		selectEntry(std::min(m_selectedEntryId + 1, static_cast<int>(m_hintEntries.size()) - 1));
-		m_timeSinceTick = sf::Time::Zero;
-		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
-			m_scrollBar->scroll(1);
-		}
-		return;
-	}
-
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		if (isEntryInvisible(entry) )
-		entry.update(frameTime);
-		if (entry.isClicked()) {
-			selectEntry(static_cast<int>(i));
-			return;
-		}
-	}
-}
-
-void CharacterInfo::updateSelection(const sf::Time& frameTime) {
-	if (m_tabBar->getActiveTabIndex() == 2) {
-		updateHintSelection(frameTime);
-	}
-
+void CharacterInfo::updateTabBar(const sf::Time& frameTime) {
 	int lastIndex = m_tabBar->getActiveTabIndex();
 	m_tabBar->update(frameTime);
 	int newIndex = m_tabBar->getActiveTabIndex();
@@ -284,41 +196,6 @@ void CharacterInfo::checkReload() {
 
 	reload();
 	m_isReloadNeeded = false;
-
-	calculateEntryPositions();
-}
-
-void CharacterInfo::calculateEntryPositions() {
-	int rows = static_cast<int>(m_hintEntries.size());
-	int steps = rows - ENTRY_COUNT + 1;
-
-	m_scrollBar->setDiscreteSteps(steps);
-
-	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
-
-	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
-	}
-
-	float animationTime = 0.1f;
-	float time = m_scrollBar->getScrollTime().asSeconds();
-	if (time >= animationTime) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-	}
-	float start = m_scrollHelper->lastOffset;
-	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
-	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
-
-	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
-
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		entry.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		entry.setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
-	}
 }
 
 void CharacterInfo::showDescription(const std::string& hintKey) {
@@ -360,8 +237,8 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 		}
 	}
 	else {
-		for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-			m_hintEntries[i].render(m_scrollHelper->texture);
+		for (auto entry : m_hintEntries) {
+			entry->render(m_scrollHelper->texture);
 		}
 		m_scrollHelper->render(target);
 
@@ -516,46 +393,26 @@ void CharacterInfo::updateReputation() {
 }
 
 void CharacterInfo::updateHints() {
-	m_hintEntries.clear();
+	CLEAR_VECTOR(m_hintEntries);
 	m_selectedEntryId = -1;
 
 	const auto& hints = m_core->getData().hintsLearned;
 
 	for (const auto& hint : hints) {
-		m_hintEntries.emplace_back(hint);
-	}
-
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		entry.deselect();
-		if (entry.getHintKey() == m_selectedHintKey) {
-			selectEntry(static_cast<int>(i));
+		const auto newEntry = new HintEntry(hint);
+		m_hintEntries.push_back(newEntry);
+		if (newEntry->getHintKey() == m_selectedHintKey) {
+			selectEntry(static_cast<int>(hints.size()) - 1);
 		}
 	}
 
-	if (m_selectedEntryId < 0 && !m_hintEntries.empty()) {
-		selectEntry(0);
-	}
+	selectEntry(0);
 }
 
-void CharacterInfo::selectEntry(int id) {
-	if (id < 0 || id > static_cast<int>(m_hintEntries.size()) - 1) {
-		return;
-	}
-
-	if (id == m_selectedEntryId) {
-		return;
-	}
-
-	if (m_selectedEntryId > 0) {
-		m_hintEntries[m_selectedEntryId].deselect();
-	}
-
-	m_selectedEntryId = id;
-	auto& newEntry = m_hintEntries[m_selectedEntryId];
-	newEntry.select();
-	showDescription(newEntry.getHintKey());
-	m_selectedHintKey = newEntry.getHintKey();
+void CharacterInfo::execEntrySelected(const ScrollEntry* entry) {
+	const auto hintEntry = dynamic_cast<const HintEntry*>(entry);
+	showDescription(hintEntry->getHintKey());
+	m_selectedHintKey = hintEntry->getHintKey();
 }
 
 void CharacterInfo::show() {
@@ -588,7 +445,6 @@ void CharacterInfo::hide() {
 HintEntry::HintEntry(const std::string& hintKey) {
 	m_hintKey = hintKey;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_name.setColor(COLOR_WHITE);
 
 	std::string hintTitle = "> " + g_textProvider->getText(hintKey, "hint");
 	if (hintTitle.size() > CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS) {
@@ -613,35 +469,12 @@ void HintEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
 }
 
-void HintEntry::onLeftJustPressed() {
-	g_inputController->lockAction();
-	m_isClicked = true;
-}
-
 void HintEntry::setColor(const sf::Color& color) {
 	m_name.setColor(color);
 }
 
-bool HintEntry::isClicked() {
-	const auto wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
-}
-
-void HintEntry::select() {
-	m_name.setColor(COLOR_WHITE);
-	m_isSelected = true;
-}
-
-GameObjectType HintEntry::getConfiguredType() const {
-	return _Interface;
-}
-
-void HintEntry::deselect() {
-	m_name.setColor(COLOR_GREY);
-	m_isSelected = false;
-}
-
-bool HintEntry::isSelected() const {
-	return m_isSelected;
+void HintEntry::updateColor() {
+	m_name.setColor(isSelected() ? COLOR_WHITE :
+		isMouseover() ? COLOR_LIGHT_PURPLE :
+		COLOR_MEDIUM_GREY);
 }

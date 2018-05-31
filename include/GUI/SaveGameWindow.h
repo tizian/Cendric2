@@ -12,7 +12,7 @@ public:
 	SaveGameEntry();
 
 	bool load(const std::string& filename);
-
+	
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& pos) override;
 	

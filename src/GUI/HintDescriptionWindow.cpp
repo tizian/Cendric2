@@ -1,4 +1,6 @@
 #include "GUI/HintDescriptionWindow.h"
+#include "GUI/GUIConstants.h"
+#include "GUI/Hints.h"
 
 const float HintDescriptionWindow::WIDTH = 340.f;
 
