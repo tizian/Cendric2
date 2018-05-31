@@ -154,7 +154,7 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot() const {
-	const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());;
+	const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
 	if ((selectedButton && selectedButton->isMousedOver()) || isWindowSelected()) {
 		return selectedButton;
 	}

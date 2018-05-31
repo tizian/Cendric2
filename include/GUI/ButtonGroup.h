@@ -27,6 +27,7 @@ public:
 	ButtonInterface* getSelectedButton() const;
 	ButtonInterface* getButton(int i) const;
 	const std::vector<ButtonInterface*>& getButtons() const;
+	void clearButtons(bool deleteButtons = true);
 
 	void setSelectableWindow(SelectableWindow* window);
 

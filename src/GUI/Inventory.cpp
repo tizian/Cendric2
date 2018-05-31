@@ -158,8 +158,6 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 		SCROLL_WINDOW_TOP + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.height)));
 
 	m_equipment->setPosition(position - sf::Vector2f(WINDOW_MARGIN + InventoryEquipment::WIDTH, 0.f));
-
-	calculateSlotPositions(*(m_typeMap.at(m_currentTab)));
 }
 
 Inventory::~Inventory() {
@@ -174,12 +172,19 @@ Inventory::~Inventory() {
 }
 
 void Inventory::clearAllSlots() {
+	if (m_buttonGroup) {
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+		m_buttonGroup = nullptr;
+	}
+
 	CLEAR_MAP(m_consumableItems);
 	CLEAR_MAP(m_equipmentItems);
 	CLEAR_MAP(m_questItems);
 	CLEAR_MAP(m_documentItems);
 	CLEAR_MAP(m_keyItems);
 	CLEAR_MAP(m_miscItems);
+
 	m_selectedSlotId.first = "";
 }
 
@@ -217,6 +222,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	}
 
 	std::map<std::string, InventorySlot*>* tab = m_typeMap.at(item->getType());
+	bool needsButtonGroupReload = false;
 
 	// search for the slot
 	if (contains(*tab, item->getID())) {
@@ -225,11 +231,12 @@ void Inventory::notifyChange(const std::string& itemID) {
 			if (m_selectedSlotId.first == item->getID()) {
 				deselectCurrentSlot();
 			}
+			needsButtonGroupReload = m_typeMap.at(m_currentTab) == m_typeMap.at(item->getType());
 			tab->erase(item->getID());
-			calculateSlotPositions(*(m_typeMap.at(item->getType())));
 		}
 		else {
 			tab->at(item->getID())->setAmount(m_core->getData().items.at(itemID));
+			
 		}
 		return;
 	}
@@ -238,8 +245,24 @@ void Inventory::notifyChange(const std::string& itemID) {
 	if (!contains(m_core->getData().items, itemID)) return;
 	if (contains(*tab, itemID)) return;
 	(*tab).insert({ item->getID(), new InventorySlot(itemID, m_core->getData().items.at(itemID)) });
+	needsButtonGroupReload = m_typeMap.at(m_currentTab) == m_typeMap.at(item->getType());
 
-	calculateSlotPositions(*tab);
+	if (needsButtonGroupReload) {
+		reloadButtonGroup();
+	}
+}
+
+void Inventory::reloadButtonGroup() {
+	if (m_buttonGroup) {
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+	}
+
+	m_buttonGroup = new ButtonGroup(SLOT_COUNT_X);
+	m_buttonGroup->setSelectableWindow(this);
+	for (auto& it : *m_typeMap.at(m_currentTab)) {
+		m_buttonGroup->addButton(it.second);
+	}
 }
 
 void Inventory::handleMapRightClick(const InventorySlot* clicked) {
@@ -286,6 +309,7 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 
 void Inventory::updateWindowSelected() {
 	m_tabBar->setGamepadEnabled(isWindowSelected());
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 }
 
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) const {
@@ -310,27 +334,35 @@ void Inventory::handleLevelDoubleClick(const InventorySlot* clicked) const {
 		m_levelInterface->equipConsumable(clicked->getItemID());
 }
 
+bool Inventory::isSlotInvisible(const InventorySlot* slot) {
+	const auto pos = slot->getPosition();
+	return pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
+		pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
+}
+
 void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	m_scrollBar->update(frameTime);
+	m_buttonGroup->update(frameTime);
 
 	// check whether an item was selected
-	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		sf::Vector2f pos = it.second->getPosition();
-		if (pos.y < GUIConstants::TOP + SCROLL_WINDOW_TOP ||
-			pos.y + InventorySlot::SIZE > GUIConstants::TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		it.second->update(frameTime);
-		if (it.second->isMousedOver() && !m_hasDraggingStarted) {
-			selectSlot(it.second->getItemID(), ItemType::VOID);
-			if (it.second->isDoubleClicked()) {
-				handleLevelDoubleClick(it.second);
-				handleMapDoubleClick(it.second);
+	for (auto it : m_buttonGroup->getButtons()) {
+		const auto slot = dynamic_cast<InventorySlot*>(it);
+		if (isSlotInvisible(slot)) continue;
+
+		const auto considerSlot = slot->isMousedOver() || (slot->isSelected() && isWindowSelected());
+		
+		if (considerSlot && !m_hasDraggingStarted) {
+			selectSlot(slot->getItemID(), ItemType::VOID);
+			if (slot->isDoubleClicked()) {
+				handleLevelDoubleClick(slot);
+				handleMapDoubleClick(slot);
 				break;
 			}
-			if (it.second->isRightClicked()) {
-				handleLevelRightClick(it.second);
-				handleMapRightClick(it.second);
+			if (slot->isRightClicked()) {
+				handleLevelRightClick(slot);
+				handleMapRightClick(slot);
 				break;
 			}
 		}
@@ -362,7 +394,7 @@ void Inventory::update(const sf::Time& frameTime) {
 		selectTab(type);
 	}
 
-	calculateSlotPositions(*(m_typeMap.at(type)));
+	calculateSlotPositions();
 
 	// update equipment part
 	m_equipment->update(frameTime);
@@ -404,13 +436,13 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 
 void Inventory::removeEquipmentItem() {
 	if (fastIntersect(*m_window->getBoundingBox(), *m_currentClone->getBoundingBox())) {
-		const InventorySlot* is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
+		const auto is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
 		m_core->equipItem("", is->getItemType());
 		reload();
 	}
 }
 
-void Inventory::handleMapDrag() {
+void Inventory::handleMapDrag() const {
 	if (m_mapInterface == nullptr) return;
 	InventorySlot* selectedSlot = getSelectedSlot();
 	if (selectedSlot == nullptr) return;
@@ -526,9 +558,7 @@ void Inventory::render(sf::RenderTarget& target) {
 	target.draw(m_goldSprite);
 	target.draw(m_selectedTabText);
 
-	for (auto& it : *(m_typeMap.at(m_currentTab))) {
-		it.second->render(m_scrollHelper->texture);
-	}
+	m_buttonGroup->render(m_scrollHelper->texture);
 	m_scrollHelper->render(target);
 
 	m_tabBar->render(target);
@@ -663,6 +693,8 @@ void Inventory::selectTab(ItemType type) {
 	if (m_mapInterface != nullptr) {
 		m_mapInterface->showQuickslotBar(type == ItemType::Consumable);
 	}
+
+	reloadButtonGroup();
 }
 
 void Inventory::reloadGold() {
@@ -696,12 +728,12 @@ void Inventory::reload() {
 
 	// reload equipment
 	m_equipment->reload();
-
-	calculateSlotPositions(*(m_typeMap.at(m_currentTab)));
+	reloadButtonGroup();
 }
 
-void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot*>& slots) {
-	float number = static_cast<float>(slots.size());
+void Inventory::calculateSlotPositions() {
+	auto const& buttons = m_buttonGroup->getButtons();
+	float number = static_cast<float>(buttons.size());
 	int rows = static_cast<int>(std::ceil(number / SLOT_COUNT_X));
 	int steps = rows - SLOT_COUNT_Y + 1;
 
@@ -729,8 +761,8 @@ void Inventory::calculateSlotPositions(std::map<std::string, InventorySlot*>& sl
 	float xOffset = xOffsetStart;
 	int y = 1;
 	int x = 1;
-	for (auto& it : slots) {
-		it.second->setPosition(sf::Vector2f(xOffset, yOffset));
+	for (auto button : buttons) {
+		button->setPosition(sf::Vector2f(xOffset, yOffset));
 		if (x + 1 > SLOT_COUNT_X) {
 			x = 1;
 			xOffset = xOffsetStart;

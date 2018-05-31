@@ -8,6 +8,7 @@
 #include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
 #include "GUI/SelectableWindow.h"
+#include "GUI/BitmapText.h"
 
 class LevelInterface;
 class MapInterface;
@@ -59,8 +60,8 @@ private:
 	void setPosition(const sf::Vector2f& position);
 
 	void clearAllSlots();
-	// reorganizes the positions of the 'slots' vector
-	void calculateSlotPositions(std::map<std::string, InventorySlot*>& slots);
+	void calculateSlotPositions();
+	static bool isSlotInvisible(const InventorySlot* slot);
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
@@ -80,11 +81,13 @@ private:
 	std::map<std::string, InventorySlot*> m_questItems;
 	std::map<std::string, InventorySlot*> m_keyItems;
 	std::map<std::string, InventorySlot*> m_miscItems;
+	ButtonGroup* m_buttonGroup = nullptr;
 
 	ItemType m_currentTab;
 	// first is the id, the second is VOID when it is no equiment slot and an Item Type when it is an equipment slot
 	std::pair<std::string, ItemType> m_selectedSlotId;
 	void selectTab(ItemType type);
+	void reloadButtonGroup();
 	// item type shall be VOID for not-equipment-slots
 	void selectSlot(const std::string& selectedSlotId, ItemType type);
 	void deselectCurrentSlot();
@@ -108,7 +111,7 @@ private:
 	void stopDragging();
 	
 	void removeEquipmentItem();
-	void handleMapDrag();
+	void handleMapDrag() const;
 	void handleLevelDrag();
 	void handleMapDrop();
 	void handleLevelDrop();

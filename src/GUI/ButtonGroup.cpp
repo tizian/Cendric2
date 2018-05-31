@@ -11,7 +11,15 @@ ButtonGroup::ButtonGroup(int width) {
 }
 
 ButtonGroup::~ButtonGroup() {
-	CLEAR_VECTOR(m_buttons);
+	clearButtons();
+}
+
+void ButtonGroup::clearButtons(bool deleteButtons) {
+	if (deleteButtons) {
+		CLEAR_VECTOR(m_buttons);
+	} else {
+		m_buttons.clear();
+	}
 }
 
 void ButtonGroup::render(sf::RenderTarget& renderTarget) {
@@ -143,16 +151,17 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 
 int ButtonGroup::getNextEnabledButtonY(bool forward) {
 	int y = getSelectedIndexY();
+	int x = getSelectedIndexX();
 
 	if (forward) {
-		for (int i = (y + 1) * m_width; i < static_cast<int>(m_buttons.size()); i += m_width) {
+		for (int i = (y + 1) * m_width + x; i < static_cast<int>(m_buttons.size()); i += m_width) {
 			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
 		}
 	}
 	else {
-		for (int i = (y - 1) * m_width; i > -1; i -= m_width) {
+		for (int i = (y - 1) * m_width + x; i > -1; i -= m_width) {
 			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
