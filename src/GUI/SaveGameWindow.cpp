@@ -133,7 +133,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 
 	m_scrollBar->update(frameTime);
 
-	int oldEntry = m_chosenEntry;
+	const auto oldEntry = m_chosenEntry;
 
 	updateScrolling(frameTime);
 
@@ -150,7 +150,7 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	}
 
 	for (size_t i = 0; i < m_entries.size(); ++i) {
-		sf::Vector2f pos = m_entries[i]->getPosition();
+		const auto pos = m_entries[i]->getPosition();
 		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
 		m_entries[i]->update(frameTime);
 		if (m_entries[i]->isClicked()) {

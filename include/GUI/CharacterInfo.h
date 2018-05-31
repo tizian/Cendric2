@@ -78,10 +78,17 @@ public:
 
 private:
 	void updateEntries(const sf::Time& frameTime);
-	void updateHintSelection(const sf::Time& time);
-	void updateSelection(const sf::Time& frameTIme);
+	void updateHintSelection(const sf::Time& frameTime);
+	void updateSelection(const sf::Time& frameTime);
 	void updateSelectableWindow();
 	void checkReload();
+	static bool isEntryInvisible(const HintEntry& entry);
+
+	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);
+	sf::Time m_upActiveTime = sf::Time::Zero;
+	sf::Time m_downActiveTime = sf::Time::Zero;
+	const sf::Time SCROLL_TICK_TIME = sf::milliseconds(70);
+	sf::Time m_timeSinceTick = sf::Time::Zero;
 
 private:
 	WorldScreen* m_screen;

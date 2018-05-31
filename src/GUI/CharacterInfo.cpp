@@ -181,25 +181,80 @@ void CharacterInfo::updateEntries(const sf::Time& frameTime) {
 	}
 }
 
-void  CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
+bool CharacterInfo::isEntryInvisible(const HintEntry& entry) {
+	auto const pos = entry.getPosition();
+	return pos.y < TOP + SCROLL_WINDOW_TOP ||
+		pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
+}
+
+void CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
+	calculateEntryPositions();
+
 	if (g_inputController->isJustDown()) {
 		selectEntry(m_selectedEntryId + 1);
+		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
+			m_scrollBar->scroll(1);
+		}
+		m_downActiveTime = frameTime;
 		return;
 	}
 
 	if (g_inputController->isJustUp()) {
 		selectEntry(m_selectedEntryId - 1);
+		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
+			m_scrollBar->scroll(-1);
+		}
+		m_upActiveTime = frameTime;
+		return;
+	}
+
+	if (m_upActiveTime > sf::Time::Zero) {
+		if (g_inputController->isUp()) {
+			m_upActiveTime += frameTime;
+		}
+		else {
+			m_upActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	if (m_downActiveTime > sf::Time::Zero) {
+		if (g_inputController->isDown()) {
+			m_downActiveTime += frameTime;
+		}
+		else {
+			m_downActiveTime = sf::Time::Zero;
+			return;
+		}
+	}
+
+	m_timeSinceTick += frameTime;
+	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
+
+	if (m_upActiveTime > SCROLL_TIMEOUT) {
+		m_selectedEntryId = std::max(m_selectedEntryId - 1, 0);
+		m_timeSinceTick = sf::Time::Zero;
+		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
+			m_scrollBar->scroll(-1);
+		}
+		return;
+	}
+
+	if (m_downActiveTime > SCROLL_TIMEOUT) {
+		m_selectedEntryId = std::min(m_selectedEntryId + 1, static_cast<int>(m_hintEntries.size()) - 1);
+		m_timeSinceTick = sf::Time::Zero;
+		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
+			m_scrollBar->scroll(1);
+		}
 		return;
 	}
 
 	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
 		HintEntry& entry = m_hintEntries[i];
-		sf::Vector2f pos = entry.getPosition();
-		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
-			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
+		if (isEntryInvisible(entry) )
 		entry.update(frameTime);
 		if (entry.isClicked()) {
-			selectEntry(i);
+			selectEntry(static_cast<int>(i));
 			return;
 		}
 	}
