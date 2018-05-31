@@ -31,6 +31,8 @@ const float QuestLog::SCROLL_WINDOW_TOP = GUIConstants::GUI_TABS_TOP + 2 * WINDO
 QuestLog::QuestLog(WorldInterface* interface) {
 	m_interface = interface;
 	m_core = m_interface->getCore();
+	m_currentTab = QuestState::Started;
+	m_entries = &m_startedQuests;
 
 	init();
 }
@@ -58,13 +60,6 @@ void QuestLog::init() {
 		WIDTH / 2 -
 		m_title.getLocalBounds().width / 2, m_title.getPosition().y);
 
-	// fill the helper map
-	m_stateMap.insert({
-		{ QuestState::Started, &m_startedQuests },
-		{ QuestState::Completed, &m_completedQuests },
-		{ QuestState::Failed, &m_failedQuests },
-	});
-
 	// init tabbar
 	const auto nTabs = 3;
 	const auto width = nTabs * BUTTON_SIZE.x;
@@ -86,13 +81,13 @@ void QuestLog::init() {
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	const sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("NoQuests"));
-	const sf::FloatRect bounds = m_emptyText.getBounds();
+	const auto bounds = m_emptyText.getBounds();
 	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
 
 	reload();
@@ -113,7 +108,7 @@ void QuestLog::clearAllEntries() {
 	CLEAR_VECTOR(m_completedQuests);
 	CLEAR_VECTOR(m_failedQuests);
 	CLEAR_VECTOR(m_startedQuests);
-	m_selectedEntry = nullptr;
+	m_selectedEntryId = -1;
 }
 
 void QuestLog::update(const sf::Time& frameTime) {
@@ -121,74 +116,41 @@ void QuestLog::update(const sf::Time& frameTime) {
 
 	m_scrollBar->update(frameTime);
 
-	// check whether an entry was selected
-	for (auto& it : *(m_stateMap[m_currentTab])) {
-		sf::Vector2f pos = (*it).getPosition();
-		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
-			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		(*it).update(frameTime);
-		if ((*it).isClicked()) {
-			selectEntry(it);
-			return;
-		}
-	}
-
-	m_tabBar->update(frameTime);
-	int activeIndex = m_tabBar->getActiveTabIndex();
-	QuestState state = (QuestState)(activeIndex + 1);
-	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != state) {
-		selectTab(state);
-	}
-
+	updateSelection(frameTime);
+	updateTabBar(frameTime);
 	calculateEntryPositions();
+	updateSelectableWindow();
 
 	m_window->update(frameTime);
 }
 
-void QuestLog::calculateEntryPositions() {
-	std::vector<QuestEntry*>* entries = m_stateMap[m_currentTab];
-
-	int rows = static_cast<int>(entries->size());
-	int steps = rows - ENTRY_COUNT + 1;
-
-	m_scrollBar->setDiscreteSteps(steps);
-
-	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
-
-	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
-	}
-
-	float animationTime = 0.1f;
-	float time = m_scrollBar->getScrollTime().asSeconds();
-	if (time >= animationTime) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-	}
-	float start = m_scrollHelper->lastOffset;
-	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
-	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
-
-	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
-
-	for (auto it : *entries) {
-		(*it).setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		(*it).setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
+void QuestLog::updateTabBar(const sf::Time& frameTime) {
+	m_tabBar->update(frameTime);
+	auto const activeIndex = m_tabBar->getActiveTabIndex();
+	auto const state = static_cast<QuestState>(activeIndex + 1);
+	if (m_tabBar->getTabButton(activeIndex)->isClicked() && m_currentTab != state) {
+		selectTab(state);
 	}
 }
 
-void QuestLog::selectEntry(QuestEntry* entry) {
-	if (entry == nullptr) return;
-	if (entry == m_selectedEntry) return;
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
+void QuestLog::updateSelectableWindow() {
+	if (!isWindowSelected()) {
+		return;
 	}
-	m_selectedEntry = entry;
-	m_selectedEntry->select();
-	showDescription(m_selectedEntry->getQuestID());
-	m_selectedQuestID = m_selectedEntry->getQuestID();
+
+	if (g_inputController->isJustLeft()) {
+		setLeftWindowSelected();
+	}
+}
+
+void QuestLog::updateWindowSelected() {
+	m_tabBar->setGamepadEnabled(isWindowSelected());
+}
+
+void QuestLog::execEntrySelected(const ScrollEntry* entry) {
+	const auto questEntry = dynamic_cast<const QuestEntry*>(entry);
+	showDescription(questEntry->getQuestID());
+	m_selectedQuestID = questEntry->getQuestID();
 }
 
 bool QuestLog::isVisible() const {
@@ -200,8 +162,8 @@ void QuestLog::render(sf::RenderTarget& target) {
 
 	m_window->render(target);
 	target.draw(m_title);
-	for (auto& it : *(m_stateMap[m_currentTab])) {
-		(*it).render(m_scrollHelper->texture);
+	for (auto entry : (*m_entries)) {
+		entry->render(m_scrollHelper->texture);
 	}
 	m_scrollHelper->render(target);
 
@@ -212,14 +174,14 @@ void QuestLog::render(sf::RenderTarget& target) {
 	target.draw(m_scrollWindow);
 	m_scrollBar->render(target);
 
-	if (m_stateMap[m_currentTab]->empty()) {
+	if ((*m_entries).empty()) {
 		target.draw(m_emptyText);
 	}
 }
 
 void QuestLog::renderAfterForeground(sf::RenderTarget& target) {
-	for (auto& it : *(m_stateMap[m_currentTab])) {
-		(*it).renderAfterForeground(target);
+	for (auto entry : (*m_entries)) {
+		entry->renderAfterForeground(target);
 	}
 }
 
@@ -235,11 +197,17 @@ void QuestLog::hideDescription() {
 
 void QuestLog::selectTab(QuestState state) {
 	hideDescription();
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
-		m_selectedEntry = nullptr;
+	if (m_selectedEntryId > -1) {
+		(*m_entries)[m_selectedEntryId]->deselect();
+		m_selectedEntryId = -1;
 	}
+
 	m_currentTab = state;
+	m_entries = state == QuestState::Failed ?
+		&m_failedQuests : state == QuestState::Completed ?
+		&m_completedQuests : &m_startedQuests;
+
+	selectEntry(0);
 
 	m_scrollBar->setScrollPosition(0.f);
 }
@@ -252,35 +220,34 @@ void QuestLog::reload() {
 	std::vector<std::pair<QuestState, std::string>> nonMainQuests;
 
 	for (auto& it : m_core->getData().questStates) {
-		if (m_stateMap[it.second] == nullptr) continue;
 		const QuestData* data = m_core->getQuestData(it.first);
 		if (!data) continue;
 
-		m_stateMap[it.second]->push_back(new QuestEntry(*data, m_interface, it.second == QuestState::Started));
-		if (it.first == m_selectedQuestID && m_currentTab != it.second) {
-			// assure that an item that is not in the current tab can never be selected
-			hideDescription();
-		}
+		auto entries = it.second == QuestState::Failed ?
+			&m_failedQuests : it.second == QuestState::Completed ?
+			&m_completedQuests : &m_startedQuests;
+
+		entries->push_back(new QuestEntry(*data, m_interface, it.second == QuestState::Started));
 	}
 
-	for (auto& it : m_stateMap) {
-		for (auto& it2 : *it.second) {
-			(*it2).deselect();
-			if ((*it2).getQuestID() == m_selectedQuestID) {
-				selectEntry(it2);
-			}
+	selectTab(m_currentTab);
+}
+
+void QuestLog::notifyJumpToQuest(const std::string& questId) {
+	selectTab(QuestState::Started);
+	for (auto i = 0; i < static_cast<int>(m_entries->size()); ++i)
+	{
+		if (dynamic_cast<QuestEntry*>((*m_entries)[i])->getQuestID() == questId) {
+			selectEntry(i);
+			break;
 		}
 	}
 }
 
-void QuestLog::notifyJumpToQuest(const std::string& questId) {
-	for (auto entry : m_startedQuests)
-	{ 
-		if (entry->getQuestID() == questId) {
-			selectEntry(entry);
-			break;
-		}
-	}
+bool QuestLog::isEntryInvisible(const ScrollEntry* entry) const {
+	const auto pos = entry->getPosition();
+	return pos.y < TOP + SCROLL_WINDOW_TOP ||
+		pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
 }
 
 void QuestLog::show() {
@@ -307,6 +274,7 @@ QuestEntry::QuestEntry(const QuestData& data, WorldInterface* interface, bool is
 	setInputInDefaultView(true);
 
 	setupQuestMarker(isActiveQuest, interface);
+	updateColor();
 }
 
 QuestEntry::~QuestEntry() {
@@ -325,15 +293,11 @@ void QuestEntry::update(const sf::Time& frameTime) {
 		m_questMarker->update(frameTime);
 	}
 
-	m_isMouseover = false;
-	m_isClicked = false;
-	GameObject::update(frameTime);
-	if (m_isSelected) {
-		m_name.setColor(COLOR_WHITE); 
-	}
-	else {
-		m_name.setColor(m_isMouseover ? COLOR_LIGHT_PURPLE : sf::Color(180, 180, 180));
-	}
+	ScrollEntry::update(frameTime);
+}
+
+void QuestEntry::updateColor() {
+	m_name.setColor(isSelected() ? COLOR_WHITE : sf::Color(180, 180, 180));
 }
 
 const std::string& QuestEntry::getQuestID() const {
@@ -341,7 +305,7 @@ const std::string& QuestEntry::getQuestID() const {
 }
 
 void QuestEntry::setPosition(const sf::Vector2f& pos) {
-	GameObject::setPosition(pos);
+	ScrollEntry::setPosition(pos);
 	m_name.setPosition(pos);
 	if (m_questMarker) {
 		m_questMarker->setPosition(pos + sf::Vector2f(0.f, -0.5f * (QuestMarker::SIZE - GUIConstants::CHARACTER_SIZE_M)));
@@ -356,39 +320,10 @@ void QuestEntry::render(sf::RenderTarget& renderTarget) {
 }
 
 void QuestEntry::renderAfterForeground(sf::RenderTarget& renderTarget) {
-	GameObject::renderAfterForeground(renderTarget);
+	ScrollEntry::renderAfterForeground(renderTarget);
 	if (m_questMarker) {
 		m_questMarker->renderAfterForeground(renderTarget);
 	}
-}
-
-void QuestEntry::onLeftJustPressed() {
-	g_inputController->lockAction();
-	m_isClicked = true;
-}
-
-void QuestEntry::onMouseOver() {
-	m_isMouseover = true;
-}
-
-bool QuestEntry::isClicked() const {
-	return m_isClicked;
-}
-
-void QuestEntry::select() {
-	m_isSelected = true;
-}
-
-GameObjectType QuestEntry::getConfiguredType() const {
-	return _Interface;
-}
-
-void QuestEntry::deselect() {
-	m_isSelected = false;
-}
-
-bool QuestEntry::isSelected() const {
-	return m_isSelected;
 }
 
 ///////////////////////////////////////////////////

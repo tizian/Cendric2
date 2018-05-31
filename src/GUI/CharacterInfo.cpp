@@ -163,7 +163,6 @@ void CharacterInfo::updateSelectableWindow() {
 	}
 }
 
-
 void CharacterInfo::updateEntries(const sf::Time& frameTime) {
 	m_scrollBar->update(frameTime);
 
@@ -232,7 +231,7 @@ void CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
 	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
 
 	if (m_upActiveTime > SCROLL_TIMEOUT) {
-		m_selectedEntryId = std::max(m_selectedEntryId - 1, 0);
+		selectEntry(std::max(m_selectedEntryId - 1, 0));
 		m_timeSinceTick = sf::Time::Zero;
 		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
 			m_scrollBar->scroll(-1);
@@ -241,7 +240,7 @@ void CharacterInfo::updateHintSelection(const sf::Time& frameTime) {
 	}
 
 	if (m_downActiveTime > SCROLL_TIMEOUT) {
-		m_selectedEntryId = std::min(m_selectedEntryId + 1, static_cast<int>(m_hintEntries.size()) - 1);
+		selectEntry(std::min(m_selectedEntryId + 1, static_cast<int>(m_hintEntries.size()) - 1));
 		m_timeSinceTick = sf::Time::Zero;
 		if (isEntryInvisible(m_hintEntries[m_selectedEntryId])) {
 			m_scrollBar->scroll(1);
@@ -420,7 +419,7 @@ void CharacterInfo::updateAttributes() {
 	attributes.push_back(std::to_string(currentAttributes.damageShadow));
 	attributes.push_back(std::to_string(currentAttributes.damageLight));
 
-	attributes.push_back("");
+	attributes.emplace_back("");
 
 	// resistance
 	attributes.push_back(std::to_string(currentAttributes.resistancePhysical));
@@ -624,7 +623,7 @@ void HintEntry::setColor(const sf::Color& color) {
 }
 
 bool HintEntry::isClicked() {
-	bool wasClicked = m_isClicked;
+	const auto wasClicked = m_isClicked;
 	m_isClicked = false;
 	return wasClicked;
 }

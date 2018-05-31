@@ -1,7 +1,5 @@
 #include "GUI/QuestDescriptionWindow.h"
 
-using namespace std;
-
 const float QuestDescriptionWindow::WIDTH = 340.f;
 
 QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Window(
@@ -89,7 +87,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		goal :
 			 m_core->getNumberOfTargetsKilled(questID, it.first);
 
-		target.append(to_string(progress) + "/" + to_string(goal));
+		target.append(std::to_string(progress) + "/" + std::to_string(goal));
 		target = g_textProvider->getCroppedString(target, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 		BitmapText targetText;
@@ -112,7 +110,7 @@ void QuestDescriptionWindow::reload(const std::string& questID) {
 		else if (contains(m_core->getData().items, it.first)) {
 			progress = m_core->getData().items.at(it.first);
 		}
-		collectible.append(to_string(progress) + "/" + to_string(goal));
+		collectible.append(std::to_string(progress) + "/" + std::to_string(goal));
 		collectible = g_textProvider->getCroppedString(collectible, GUIConstants::CHARACTER_SIZE_S, static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET));
 
 		BitmapText collectibleText;

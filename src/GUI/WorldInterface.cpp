@@ -148,7 +148,7 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 	m_characterInfo->setWindowSelected(false);
 	m_inventory->setWindowSelected(false);
 	m_inventory->getEquipment()->setWindowSelected(false);
-
+	m_questLog->setWindowSelected(false);
 
 	m_guiSidebar->setLeftWindow(nullptr);
 	m_guiSidebar->setWindowSelected(true);
@@ -167,6 +167,7 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 	case GUIElement::Spellbook:
 		return;
 	case GUIElement::Journal:
+		m_guiSidebar->setRightWindow(m_questLog);
 		return;
 	case GUIElement::Map:
 		return;
