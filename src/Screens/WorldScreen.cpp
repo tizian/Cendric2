@@ -328,7 +328,7 @@ bool WorldScreen::isItemMonitored(const std::string& itemId) const {
 }
 
 bool WorldScreen::isUpdateOnlyInterface() const {
-	bool shouldPause = g_resourceManager->getConfiguration().isPauseInventory || g_inputController->isJoystickConnected();
+	bool shouldPause = g_resourceManager->getConfiguration().isPauseInventory || g_inputController->isGamepadConnected();
 	bool isOverlay = m_interface->isGuiOverlayVisible();
 	return shouldPause && isOverlay;
 }

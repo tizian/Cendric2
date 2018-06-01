@@ -110,6 +110,12 @@ bool Item::isEquipmentType(ItemType type) {
 		type == ItemType::Equipment_weapon;
 }
 
+bool Item::isRingType(ItemType type) {
+	return
+		type == ItemType::Equipment_ring_1 ||
+		type == ItemType::Equipment_ring_2;
+}
+
 bool Item::isQuestRelevant(const std::string& itemId) {
 	auto substr = itemId.substr(0, 2);
 	return substr == "qe" || substr == "ke" || substr == "sp";

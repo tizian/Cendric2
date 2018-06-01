@@ -251,7 +251,7 @@ void Button::setGamepadKey(Key key) {
 }
 
 bool Button::hasGamepadKey() const {
-	return m_gamepadKey != Key::VOID && g_inputController->isJoystickConnected();
+	return m_gamepadKey != Key::VOID && g_inputController->isGamepadConnected();
 }
 
 void Button::click() {

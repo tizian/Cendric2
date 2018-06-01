@@ -38,6 +38,10 @@ std::string MerchantItemDescriptionWindow::getReputationText(const Item& item) c
 	return text;
 }
 
-std::string MerchantItemDescriptionWindow::getInteractionText(const Item& item, bool isSelling) const {
-	return m_isReputationReached ? g_textProvider->getText("RightClickBuy") : "";
+std::string MerchantItemDescriptionWindow::getInteractionTextKeyboard(const Item& item, const ItemDescriptionInfo& info) const {
+	return m_isReputationReached ? getKeyboardText("ToBuy") : "";
+}
+
+std::string MerchantItemDescriptionWindow::getInteractionTextGamepad(const Item& item, const ItemDescriptionInfo& info) const {
+	return m_isReputationReached ? getGamepadText("ToBuy", Key::Interact) : "";
 }

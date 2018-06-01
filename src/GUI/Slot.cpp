@@ -81,14 +81,14 @@ void Slot::notifyFirstSelection() {
 }
 
 void Slot::select() {
-	if (m_isEmpty) return;
+	if (m_isEmpty || m_isSelected) return;
 	m_isSelected = true;
 	m_borderRect.setTexture(m_borderTextureSelected);
 	m_backgroundRect.setFillColor(COLOR_TRANS_WHITE);
 }
 
 void Slot::deselect() {
-	if (m_isEmpty) return;
+	if (m_isEmpty || !m_isSelected) return;
 	m_isSelected = false;
 	m_borderRect.setTexture(m_borderTexture);
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);

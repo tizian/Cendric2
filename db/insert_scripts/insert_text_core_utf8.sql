@@ -205,11 +205,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Refl
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reputation','Reputation','Ruf','Ruef','Reputación');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Reset','Reset','Zurücksetzen','Zruggsetze','Reiniciar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Resume','Resume','Spiel fortsetzen','Zrugg zum Spiel','Continuar');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickSell','Right click to sell','Rechtsklicken zum Verkaufen','Rechtsklicke zum verchaufe','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickBuy','Right click to buy','Rechtsklicken zum Kaufen','Rechtsklicke zum chaufe','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickOpen','Right click to open','Rechtsklicken zum Öffnen','Rechtsklicke zum ufmache','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickLearn','Right click to learn','Rechtsklicken zum Lernen','Rechtsklicke zum lerne','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('RightClickRead','Right click to read','Rechtsklicken zum Lesen','Rechtsklicke zum läse','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('InteractRightClick','Right click','Rechtsklicken','Rechtsklicke','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Save','Save','Speichern','Speichere','Guardar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SaveGame','Save Game','Spiel speichern','Spiel speichere','Guardar partida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SavegameDeleted','Save game successfully deleted.','Speicherstand erfolgreich gelöscht.','Speicherstand isch glöscht.','Partida guardada eliminada satisfactoriamente.');
@@ -304,6 +300,15 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToRo
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSteal','to steal','- stehlen','zum chlaue','para robar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOpen','to open','- öffnen', 'zum ufmache','para abrir');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToMine','to mine','- abbauen', 'zum abbaue','para minar');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSell','to sell','- verkaufen','zum verchaufe','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToBuy','to buy','- kaufen','zum chaufe','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOpen','to open','- öffnen','zum ufmache','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToLearn','to learn','- lernen','zum lerne','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToConsume','to consume','- konsumieren','zum verbruche','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToUnequip','to unequip','- ablegen','zum wegne','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToEquip','to equip','- ausrüsten','zum usrüschte','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToEquipSlot1','to equip (Slot 1)','- ausrüsten (Slot 1)','zum usrüschte (Slot 1)','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToEquipSlot2','to equip (Slot 2)','- ausrüsten (Slot 2)','zum usrüschte (Slot 2)','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('InvisibilityLevel','Transparency','Transparenz','Transparenz','Transparencia');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Fireplace','Fireplace','Kochstelle','Chochstell','Fogata');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NothingToCook','[Nothing to cook...]','[Nichts zu kochen...]','[Es git nüt zum chochä...]','[Nada que cocinar...]');

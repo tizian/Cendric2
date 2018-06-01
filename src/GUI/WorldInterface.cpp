@@ -117,6 +117,10 @@ void WorldInterface::equipConsumable(const std::string& itemID) const {
 	m_quickSlotBar->equipConsumable(itemID);
 }
 
+void WorldInterface::equipConsumable(const std::string& itemID, int slotId) const {
+	m_quickSlotBar->equipConsumable(itemID, slotId);
+}
+
 void WorldInterface::highlightQuickslots(bool highlight) const {
 	m_quickSlotBar->highlightSlots(highlight);
 }
@@ -149,8 +153,9 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 	m_inventory->setWindowSelected(false);
 	m_inventory->getEquipment()->setWindowSelected(false);
 	m_questLog->setWindowSelected(false);
+	m_mapSidebar->setWindowSelected(false);
 
-	m_guiSidebar->setLeftWindow(nullptr);
+	m_guiSidebar->setRightWindow(nullptr);
 	m_guiSidebar->setWindowSelected(true);
 
 	switch (type) {
@@ -170,6 +175,8 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 		m_guiSidebar->setRightWindow(m_questLog);
 		return;
 	case GUIElement::Map:
+		m_guiSidebar->setRightWindow(m_mapOverlay);
+		m_mapOverlay->setRightWindow(m_mapSidebar);
 		return;
 	}
 }

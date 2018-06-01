@@ -35,9 +35,11 @@ public:
 	void highlightEquipmentSlot(ItemType type, bool highlight);
 	void notifyEquipmentDrop(const SlotClone* item);
 	void equipItem(const InventorySlot* slot);
+	void equipRing(const InventorySlot* slot, int slotId);
 
 protected:
 	void updateWindowSelected() override;
+	void updateButtonActions() const;
 
 public:
 	static const float WIDTH;

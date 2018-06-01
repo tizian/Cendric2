@@ -20,7 +20,7 @@ struct ConfigurationData final {
 	int maxFPS;
 	std::map<Key, sf::Keyboard::Key> mainKeyMap;
 	std::map<Key, sf::Keyboard::Key> alternativeKeyMap;
-	std::map<Key, GamepadAxis> joystickKeyMap;
+	std::map<Key, GamepadAxis> gamepadKeyMap;
 	DisplayMode displayMode;
 	bool isQuickcast;
 	bool isAutotarget;
@@ -41,6 +41,6 @@ public:
 
 	static const std::map<Key, sf::Keyboard::Key> DEFAULT_KEYMAP;
 	static const std::map<Key, sf::Keyboard::Key> ALTERNATIVE_KEYMAP;
-	static const std::map<Key, GamepadAxis> JOYSTICK_KEYMAP_XBOX;
-	static const std::map<Key, GamepadAxis> JOYSTICK_KEYMAP_DS4;
+	static const std::map<Key, GamepadAxis> GAMEPAD_KEYMAP_XBOX;
+	static const std::map<Key, GamepadAxis> GAMEPAD_KEYMAP_DS4;
 };

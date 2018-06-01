@@ -49,8 +49,10 @@ public:
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item) const;
-	// an item should be equiped in quick slot bar. forward to quick slot bar
+	// an item should be equipped in quick slot bar. forward to quick slot bar
 	void equipConsumable(const std::string& itemID) const;
+	// an item should be equipped in a specific slot in the quick slot bar.
+	void equipConsumable(const std::string& itemID, int slotId) const;
 	// highlight quickslots
 	void highlightQuickslots(bool highlight) const;
 

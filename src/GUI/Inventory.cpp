@@ -88,7 +88,7 @@ void Inventory::init() {
 		{ ItemType::Equipment_ring_1, &m_equipmentItems },
 		{ ItemType::Equipment_ring_2, &m_equipmentItems },
 		{ ItemType::Equipment_weapon, &m_equipmentItems },
-	});
+		});
 
 	// tabbar
 	int nTabs = 6;
@@ -130,13 +130,13 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 	m_position = position;
 	m_window->setPosition(position);
 
-	m_selectedTabText.setPosition(position + 
+	m_selectedTabText.setPosition(position +
 		sf::Vector2f(
-			0.5f * INVENTORY_WIDTH - 0.5f * m_selectedTabText.getLocalBounds().width, 
+			0.5f * INVENTORY_WIDTH - 0.5f * m_selectedTabText.getLocalBounds().width,
 			GUIConstants::TEXT_OFFSET));
 
 	m_goldText.setPosition(position + sf::Vector2f(
-		GUIConstants::TEXT_OFFSET, 
+		GUIConstants::TEXT_OFFSET,
 		GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 
 	sf::Vector2f pos = m_goldText.getPosition();
@@ -145,7 +145,7 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 	m_goldSprite.setPosition(pos);
 
 	m_tabBar->setPosition(position + sf::Vector2f(
-		0.5f * (INVENTORY_WIDTH - m_tabBar->getTabButtons().size() * BUTTON_SIZE.x), 
+		0.5f * (INVENTORY_WIDTH - m_tabBar->getTabButtons().size() * BUTTON_SIZE.x),
 		GUIConstants::GUI_TABS_TOP));
 
 	m_scrollWindow.setPosition(position + sf::Vector2f(SCROLL_WINDOW_LEFT, SCROLL_WINDOW_TOP));
@@ -236,7 +236,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 		}
 		else {
 			tab->at(item->getID())->setAmount(m_core->getData().items.at(itemID));
-			
+
 		}
 		return;
 	}
@@ -260,6 +260,8 @@ void Inventory::reloadButtonGroup() {
 
 	m_buttonGroup = new ButtonGroup(SLOT_COUNT_X);
 	m_buttonGroup->setSelectableWindow(this);
+	m_buttonGroup->setUpdateButtons(false);
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 	for (auto& it : *m_typeMap.at(m_currentTab)) {
 		m_buttonGroup->addButton(it.second);
 	}
@@ -307,6 +309,153 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 	}
 }
 
+void Inventory::updateButtonActionLevel(const InventorySlot* slot) {
+	if (!m_levelInterface) return;
+
+	if (g_inputController->isKeyJustPressed(Key::Interact)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+		if (Item::isEquipmentType(type)) {
+			if (m_levelInterface->isBossLevel()) {
+				m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+			}
+			else {
+				m_equipment->equipItem(slot);
+			}
+			return;
+		}
+
+		switch (type) {
+		case ItemType::Consumable:
+			m_levelInterface->consumeItem(slot->getItemID());
+			break;
+		case ItemType::Document:
+			showDocument(slot->getItem());
+			break;
+		case ItemType::Spell:
+			learnSpell(slot->getItem());
+			break;
+		case ItemType::Convertible:
+			convertItem(slot->getItem());
+			break;
+		case ItemType::Permanent:
+			dynamic_cast<WorldScreen*>(m_levelInterface->getScreen())->notifyPermanentItemConsumed(slot->getItem());
+			break;
+		default:
+			break;
+		}
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Attack)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+
+		if (type == ItemType::Consumable) {
+			m_levelInterface->equipConsumable(slot->getItemID(), 1);
+		}
+		else if (Item::isRingType(type)) {
+			if (m_levelInterface->isBossLevel()) {
+				m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+			}
+			else {
+				m_equipment->equipRing(slot, 1);
+			}
+		}
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Jump)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+
+		if (type == ItemType::Consumable) {
+			m_levelInterface->equipConsumable(slot->getItemID(), 2);
+		}
+		else if (Item::isRingType(type)) {
+			if (m_levelInterface->isBossLevel()) {
+				m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
+			}
+			else {
+				m_equipment->equipRing(slot, 2);
+			}
+		}
+		return;
+	}
+}
+
+void Inventory::updateButtonActionMap(const InventorySlot* slot) {
+	if (!m_mapInterface) return;
+
+	if (g_inputController->isKeyJustPressed(Key::Interact)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+		if (Item::isEquipmentType(type)) {
+			m_equipment->equipItem(slot);
+			return;
+		}
+
+		switch (type) {
+		case ItemType::Consumable:
+			m_mapInterface->getScreen()->setNegativeTooltip("CannotConsumeItemInMap");
+			break;
+		case ItemType::Document:
+			showDocument(slot->getItem());
+			break;
+		case ItemType::Spell:
+			learnSpell(slot->getItem());
+			break;
+		case ItemType::Convertible:
+			convertItem(slot->getItem());
+			break;
+		case ItemType::Permanent:
+			dynamic_cast<WorldScreen*>(m_mapInterface->getScreen())->notifyPermanentItemConsumed(slot->getItem());
+			break;
+		default:
+			break;
+		}
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Attack)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+
+		if (type == ItemType::Consumable) {
+			m_mapInterface->equipConsumable(slot->getItemID(), 1);
+		}
+		else if (Item::isRingType(type)) {
+			m_equipment->equipRing(slot, 1);
+		}
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Jump)) {
+		g_inputController->lockAction();
+		const auto type = slot->getItemType();
+
+		if (type == ItemType::Consumable) {
+			m_mapInterface->equipConsumable(slot->getItemID(), 2);
+		}
+		else if (Item::isRingType(type)) {
+			m_equipment->equipRing(slot, 2);
+		}
+		return;
+	}
+}
+
+void Inventory::updateButtonActions() {
+	if (!g_inputController->isGamepadConnected() || !isWindowSelected()) {
+		return;
+	}
+
+	const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
+	if (!selectedButton) return;
+
+	updateButtonActionMap(selectedButton);
+	updateButtonActionLevel(selectedButton);
+}
+
 void Inventory::updateWindowSelected() {
 	m_tabBar->setGamepadEnabled(isWindowSelected());
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
@@ -319,7 +468,7 @@ void Inventory::updateWindowSelected() {
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) const {
 	if (m_mapInterface == nullptr || clicked == nullptr) return;
 
-	if (Item::isEquipmentType(clicked->getItemType())) 
+	if (Item::isEquipmentType(clicked->getItemType()))
 		m_equipment->equipItem(clicked);
 }
 
@@ -354,8 +503,11 @@ void Inventory::update(const sf::Time& frameTime) {
 	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
 		const auto slot = dynamic_cast<InventorySlot*>(m_buttonGroup->getButton(i));
 
-		const auto considerSlot = !isSlotInvisible(slot) && slot->isMousedOver() || (slot->isSelected() && isWindowSelected());
-		
+		const auto considerSlot = (!isSlotInvisible(slot) && slot->isMousedOver()) || (slot->isSelected() && isWindowSelected());
+		if (!isSlotInvisible(slot) || considerSlot) {
+			slot->update(frameTime);
+		}
+
 		if (considerSlot && !m_hasDraggingStarted) {
 			selectSlot(slot->getItemID(), ItemType::VOID);
 			m_buttonGroup->selectButton(i);
@@ -363,7 +515,8 @@ void Inventory::update(const sf::Time& frameTime) {
 			if (isSlotInvisible(slot)) {
 				if (slot->getPosition().y < GUIConstants::TOP + SCROLL_WINDOW_TOP) {
 					m_scrollBar->scroll(-1);
-				} else {
+				}
+				else {
 					m_scrollBar->scroll(1);
 				}
 			}
@@ -419,6 +572,7 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 
 	handleDragAndDrop();
+	updateButtonActions();
 
 	m_window->update(frameTime);
 }
@@ -658,8 +812,15 @@ void Inventory::showDocument(const Item* item) {
 
 void Inventory::showDescription(const Item* item, bool isEquipmentOrigin) const {
 	if (item == nullptr) return;
-	m_descriptionWindow->load(*item, m_core, m_merchantInterface ? 
-		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, !isEquipmentOrigin && m_merchantInterface != nullptr);
+
+	auto info = ItemDescriptionInfo();
+	info.isEquipmentOrigin = isEquipmentOrigin;
+	info.isInBossLevel = m_levelInterface && m_levelInterface->isBossLevel();
+	info.isInLevel = m_levelInterface;
+	info.isSelling = !isEquipmentOrigin && m_merchantInterface;
+
+	m_descriptionWindow->load(*item, m_core, m_merchantInterface ?
+		m_merchantInterface->getMerchantData().receiver_multiplier : 1.f, info);
 	m_descriptionWindow->show();
 	auto const pos = sf::Vector2f(
 		m_window->getPosition().x + WINDOW_MARGIN + m_window->getSize().x,

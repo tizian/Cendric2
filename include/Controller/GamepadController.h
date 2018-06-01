@@ -11,9 +11,9 @@ public:
 
 	void update(const sf::Time& frameTime);
 	
-	void notifyJoystickConnected();
+	void notifyGamepadConnected();
 
-	bool isJoystickConnected() const;
+	bool isGamepadConnected() const;
 	bool isXboxControllerConnected() const;
 
 	bool isLeftJoystickUp() const;
@@ -35,7 +35,7 @@ public:
 	GamepadAxis getLastPressedAxis() const;
 
 protected:
-	bool isJoystickButtonPressed(Key key) const;
+	bool isGamepadButtonPressed(Key key) const;
 
 private:
 	const std::map<Key, GamepadAxis>* m_joystickMap;
@@ -48,7 +48,7 @@ private:
 
 	GamepadAxis m_lastPressedAxis = GamepadAxis::VOID;
 
-	bool isJoystickAxisPressed(GamepadAxis axis) const;
+	bool isGamepadAxisPressed(GamepadAxis axis) const;
 
 	void updateLeftJoystick();
 	bool m_isLeftJoystickLeftPressed = false;

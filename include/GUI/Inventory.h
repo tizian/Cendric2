@@ -39,9 +39,7 @@ public:
 	void startTrading(MerchantInterface* _interface);
 	void stopTrading();
 
-	// fully reloads the inventory text & items, depending on the core. Heavy operation! Better use notifyChange if only one item changed.
 	void reload();
-	// reloads the inventory gold text
 	void reloadGold();
 
 	InventoryEquipment* getEquipment() const;
@@ -125,6 +123,9 @@ private:
 
 protected:
 	void updateWindowSelected() override;
+	void updateButtonActions();
+	void updateButtonActionLevel(const InventorySlot* slot);
+	void updateButtonActionMap(const InventorySlot* slot);
 
 private:
 	InventoryEquipment* m_equipment = nullptr;

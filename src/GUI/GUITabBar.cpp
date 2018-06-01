@@ -76,7 +76,11 @@ void GUITabBar::update(const sf::Time& frameTime) {
 		hide();
 	}
 
+	auto* previousButton = m_buttonGroup->getSelectedButton();
+
 	m_buttonGroup->update(frameTime);
+
+	auto* currentButton = m_buttonGroup->getSelectedButton();
 
 	auto nextSelectedIndex = -1;
 	for (auto i = 0; i < m_buttonGroup->getButtons().size(); ++i) {
@@ -91,6 +95,8 @@ void GUITabBar::update(const sf::Time& frameTime) {
 			button->setSelected(false);
 		}
 		m_buttonGroup->getButton(nextSelectedIndex)->setSelected(true);
+	} else if (currentButton != previousButton) {
+		currentButton->click();
 	}
 }
 

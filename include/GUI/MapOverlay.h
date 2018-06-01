@@ -5,6 +5,7 @@
 #include "BitmapText.h"
 #include "Structs/QuestData.h"
 #include "GUI/QuestMarker.h"
+#include "GUI/SelectableWindow.h"
 
 class WorldScreen;
 class WorldInterface;
@@ -67,7 +68,7 @@ private:
 
 // the map overlay, as displayed in a map
 // it takes its information from the corresponding world screen.
-class MapOverlay {
+class MapOverlay final : public SelectableWindow {
 public:
 	MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar);
 	~MapOverlay();
@@ -105,6 +106,10 @@ private:
 	float getScale(const sf::Vector2f& mapSize) const;
 	void reloadLevelOverlay();
 
+protected:
+	void updateWindowSelected() override;
+	void updateSelectableWindow();
+
 private:
 	static const float TOP;
 	static const float LEFT;
@@ -136,6 +141,5 @@ private:
 
 	BitmapText m_title;
 
-	Window* m_window;
 	GUITabBar* m_mapTabBar;
 };

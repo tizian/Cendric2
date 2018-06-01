@@ -165,7 +165,7 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
 
-	m_selectedKeys = g_resourceManager->getConfiguration().joystickKeyMap;
+	m_selectedKeys = g_resourceManager->getConfiguration().gamepadKeyMap;
 
 	m_keyButtonGroup = new ButtonGroup();
 
@@ -287,7 +287,7 @@ void GamepadKeyBindingsScreen::onBack() {
 }
 
 void GamepadKeyBindingsScreen::onApply() {
-	g_resourceManager->getConfiguration().joystickKeyMap = m_selectedKeys;
+	g_resourceManager->getConfiguration().gamepadKeyMap = m_selectedKeys;
 	ConfigurationWriter writer;
 	writer.saveToFile(g_resourceManager->getConfiguration());
 	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
@@ -295,13 +295,13 @@ void GamepadKeyBindingsScreen::onApply() {
 
 void GamepadKeyBindingsScreen::onUseDefault() {
 	m_selectedKeys = g_inputController->isXboxControllerConnected() ?
-		ConfigurationData::JOYSTICK_KEYMAP_XBOX :
-		ConfigurationData::JOYSTICK_KEYMAP_DS4;
+		ConfigurationData::GAMEPAD_KEYMAP_XBOX :
+		ConfigurationData::GAMEPAD_KEYMAP_DS4;
 	
 	reload();
 }
 
 void GamepadKeyBindingsScreen::onReset() {
-	m_selectedKeys = g_resourceManager->getConfiguration().joystickKeyMap;
+	m_selectedKeys = g_resourceManager->getConfiguration().gamepadKeyMap;
 	reload();
 }

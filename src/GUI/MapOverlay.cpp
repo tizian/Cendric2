@@ -60,6 +60,7 @@ MapOverlay::~MapOverlay() {
 
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+	updateSelectableWindow();
 	auto* map = getCurrentMap();
 	if (map == nullptr) return;
 
@@ -82,6 +83,20 @@ void MapOverlay::update(const sf::Time& frameTime) {
 	}
 
 	m_window->update(frameTime);
+}
+
+void MapOverlay::updateSelectableWindow() {
+	if (!isWindowSelected()) {
+		return;
+	}
+
+	if (g_inputController->isJustLeft()) {
+		setLeftWindowSelected();
+	}
+
+	if (g_inputController->isJustRight()) {
+		setRightWindowSelected();
+	}
 }
 
 bool MapOverlay::setMap(const std::string& mapID) {
@@ -286,6 +301,10 @@ void MapOverlay::reloadLevelOverlay() {
 	m_maps[0]->map = m_levelOverlaySprite;
 	m_maps[0]->map.setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
 	m_needsLevelOverlayReload = false;
+}
+
+void MapOverlay::updateWindowSelected() {
+	// TODO
 }
 
 void MapOverlay::reloadMaps() {

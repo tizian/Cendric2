@@ -24,8 +24,8 @@ void InputController::update(const sf::Time& frameTime) {
 
 	// update keys
 	for (auto& it : m_keyboardKeyActiveMap) {
-		m_gamepadKeyJustPressedMap[it.first] = !m_gamepadKeyActiveMap[it.first] && isJoystickButtonPressed(it.first);
-		m_gamepadKeyActiveMap[it.first] = isJoystickButtonPressed(it.first);
+		m_gamepadKeyJustPressedMap[it.first] = !m_gamepadKeyActiveMap[it.first] && isGamepadButtonPressed(it.first);
+		m_gamepadKeyActiveMap[it.first] = isGamepadButtonPressed(it.first);
 		m_keyboardKeyJustPressedMap[it.first] = !m_keyboardKeyActiveMap[it.first] && isKeyboardKeyPressed(it.first);
 		m_keyboardKeyActiveMap[it.first] = isKeyboardKeyPressed(it.first);
 	}
@@ -34,7 +34,7 @@ void InputController::update(const sf::Time& frameTime) {
 }
 
 void InputController::updateMouseVisibility(const sf::Time& frameTime) {
-	if (!isJoystickConnected()) {
+	if (!isGamepadConnected()) {
 		if (!m_cursor.isVisible()) {
 			m_cursor.setVisible(true);
 		}

@@ -8,6 +8,7 @@ ButtonGroup::ButtonGroup(int width) {
 	m_width = width;
 	m_isEnabled = true;
 	m_isGamepadEnabled = true;
+	m_isUpdateButtons = true;
 }
 
 ButtonGroup::~ButtonGroup() {
@@ -17,7 +18,8 @@ ButtonGroup::~ButtonGroup() {
 void ButtonGroup::clearButtons(bool deleteButtons) {
 	if (deleteButtons) {
 		CLEAR_VECTOR(m_buttons);
-	} else {
+	}
+	else {
 		m_buttons.clear();
 	}
 }
@@ -35,7 +37,9 @@ void ButtonGroup::update(const sf::Time& frameTime) {
 			continue;
 		}
 
-		m_buttons[i]->update(frameTime);
+		if (m_isUpdateButtons) {
+			m_buttons[i]->update(frameTime);
+		}
 
 		if (m_buttons[i]->isPressed()) {
 			selectButton(i);
@@ -191,6 +195,10 @@ void ButtonGroup::selectButton(int index) {
 
 void ButtonGroup::setSelectableWindow(SelectableWindow* window) {
 	m_selectableWindow = window;
+}
+
+void ButtonGroup::setUpdateButtons(bool updateButtons) {
+	m_isUpdateButtons = updateButtons;
 }
 
 int ButtonGroup::getSelectedIndexX() const {

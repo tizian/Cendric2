@@ -23,6 +23,7 @@ public:
 
 	void notifyConsumableDrop(const SlotClone* item) const;
 	void equipConsumable(const std::string& itemID) const;
+	void equipConsumable(const std::string& itemID, int slotId) const;
 	void reload() const;
 
 private:

@@ -69,10 +69,24 @@ void InventoryEquipment::update(const sf::Time& frameTime) const {
 
 	// check whether an item was de-equipped
 	if (m_isModifiable) {
-		const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
-		if (selectedButton && (selectedButton->isRightClicked() || selectedButton->isDoubleClicked())) {
-			m_screen->notifyItemEquip("", selectedButton->getItemType());
-		}
+		updateButtonActions();
+	}
+}
+
+void InventoryEquipment::updateButtonActions() const {
+	const auto selectedButton = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
+	if (!selectedButton) return;
+
+	if (selectedButton->isRightClicked() || selectedButton->isDoubleClicked()) {
+		m_screen->notifyItemEquip("", selectedButton->getItemType());
+	}
+
+	if (!g_inputController->isGamepadConnected() || !isWindowSelected()) {
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Interact)) {
+		m_screen->notifyItemEquip("", selectedButton->getItemType());
 	}
 }
 
@@ -93,7 +107,7 @@ void InventoryEquipment::renderAfterForeground(sf::RenderTarget& target) {
 
 void InventoryEquipment::highlightEquipmentSlot(ItemType type, bool highlight) {
 	if (!contains(m_slots, type)) return;
-	if (type == ItemType::Equipment_ring_1 || type == ItemType::Equipment_ring_2) {
+	if (Item::isRingType(type)) {
 		if (highlight) {
 			m_slots.at(ItemType::Equipment_ring_1)->highlight();
 			m_slots.at(ItemType::Equipment_ring_2)->highlight();
@@ -117,7 +131,7 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 	if (item == nullptr) return;
 	auto const slot = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (!contains(m_slots, slot->getItemType())) return;
-	const auto isRing = slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2;
+	const auto isRing = Item::isRingType(slot->getItemType());
 
 	if (isRing && fastIntersect(*item->getBoundingBox(), *(m_slots.at(ItemType::Equipment_ring_1)->getBoundingBox()))) {
 		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
@@ -132,12 +146,24 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 		m_screen->notifyItemEquip("", slot->getItemType());
 	}
 }
+void InventoryEquipment::equipRing(const InventorySlot* slot, int slotId) {
+	if (slot == nullptr) return;
+
+	if (!Item::isRingType(slot->getItemType())) return;
+
+	if (slotId <= 1) {
+		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
+	}
+	else {
+		m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_2);
+	}
+}
 
 void InventoryEquipment::equipItem(const InventorySlot* slot) {
 	if (slot == nullptr) return;
 
 	if (!contains(m_slots, slot->getItemType())) return;
-	if (slot->getItemType() == ItemType::Equipment_ring_1 || slot->getItemType() == ItemType::Equipment_ring_2) {
+	if (Item::isRingType(slot->getItemType())) {
 		if (m_slots.at(ItemType::Equipment_ring_1)->isEmpty()) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
 		}
@@ -170,6 +196,7 @@ InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
 void InventoryEquipment::reload() {
 	delete m_buttonGroup;
 	m_buttonGroup = new ButtonGroup();
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 	m_buttonGroup->setSelectableWindow(this);
 
 	m_slots.clear();

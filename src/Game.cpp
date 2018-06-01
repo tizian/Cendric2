@@ -62,7 +62,7 @@ void Game::reloadWindow() {
 void Game::run() {
 	sf::Clock frameClock;
 	sf::Time frameTime = frameClock.restart();
-	g_inputController->notifyJoystickConnected();
+	g_inputController->notifyGamepadConnected();
 
 	while (m_running) {
 		// input
@@ -141,7 +141,7 @@ void Game::pollEvents() {
 			g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
 		}
 		else if (e.type == sf::Event::JoystickConnected || e.type == sf::Event::JoystickDisconnected) {
-			g_inputController->notifyJoystickConnected();
+			g_inputController->notifyGamepadConnected();
 		}
 	}
 }

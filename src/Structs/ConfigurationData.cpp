@@ -15,9 +15,9 @@ void ConfigurationData::resetToDefault() {
 	maxFPS = 60;
 	mainKeyMap = DEFAULT_KEYMAP;
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
-	joystickKeyMap = !g_inputController || g_inputController->isXboxControllerConnected() ? 
-		JOYSTICK_KEYMAP_XBOX : 
-		JOYSTICK_KEYMAP_DS4;
+	gamepadKeyMap = !g_inputController || g_inputController->isXboxControllerConnected() ? 
+		GAMEPAD_KEYMAP_XBOX : 
+		GAMEPAD_KEYMAP_DS4;
 	displayMode = DisplayMode::Fullscreen;
 	isQuickcast = true;
 	isAutotarget = true;
@@ -105,7 +105,7 @@ const std::map<Key, sf::Keyboard::Key> ConfigurationData::ALTERNATIVE_KEYMAP =
 	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount },
 };
 
-const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_XBOX =
+const std::map<Key, GamepadAxis> ConfigurationData::GAMEPAD_KEYMAP_XBOX =
 {
 	{ Key::Escape, GamepadAxis::Y }, 
 	{ Key::Interact, GamepadAxis::X },
@@ -119,7 +119,7 @@ const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_XBOX =
 	{ Key::Menu, GamepadAxis::Start },
 };
 
-const std::map<Key, GamepadAxis> ConfigurationData::JOYSTICK_KEYMAP_DS4 =
+const std::map<Key, GamepadAxis> ConfigurationData::GAMEPAD_KEYMAP_DS4 =
 {
 	{ Key::Escape, GamepadAxis::Triangle },
 	{ Key::Interact, GamepadAxis::Circle },

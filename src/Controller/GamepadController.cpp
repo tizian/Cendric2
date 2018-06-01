@@ -5,17 +5,17 @@
 const int GamepadController::AXIS_THRESHOLD = 50;
 
 GamepadController::GamepadController() {
-	m_joystickMap = &(g_resourceManager->getConfiguration().joystickKeyMap);
+	m_joystickMap = &(g_resourceManager->getConfiguration().gamepadKeyMap);
 	initAxisMap();
 };
 
 void GamepadController::update(const sf::Time& frameTime) {
-	if (!isJoystickConnected()) return;
+	if (!isGamepadConnected()) return;
 	m_lastPressedAxis = GamepadAxis::VOID;
 	updateLeftJoystick();
 }
 
-bool GamepadController::isJoystickConnected() const {
+bool GamepadController::isGamepadConnected() const {
 	return m_connectedJoystick > -1;
 }
 
@@ -41,17 +41,17 @@ void GamepadController::updateLeftJoystick() {
 	m_isLeftJoystickDownPressed = down;
 }
 
-bool GamepadController::isJoystickButtonPressed(Key key) const {
+bool GamepadController::isGamepadButtonPressed(Key key) const {
 	auto const it = m_joystickMap->find(key);
 	if (it == m_joystickMap->end()) {
 		return false;
 	}
 
-	return isJoystickAxisPressed((*it).second);
+	return isGamepadAxisPressed((*it).second);
 }
 
-bool GamepadController::isJoystickAxisPressed(GamepadAxis axis) const {
-	if (!isJoystickConnected()) {
+bool GamepadController::isGamepadAxisPressed(GamepadAxis axis) const {
+	if (!isGamepadConnected()) {
 		return false;
 	}
 	if (axis <= GamepadAxis::VOID || axis >= GamepadAxis::MAX) {
@@ -149,7 +149,7 @@ GamepadAxis GamepadController::getLastPressedAxis() const {
 	return m_lastPressedAxis;
 }
 
-void GamepadController::notifyJoystickConnected() {
+void GamepadController::notifyGamepadConnected() {
 	m_connectedJoystick = -1;
 	for (int i = 0; i < 8; i++) {
 		if (sf::Joystick::isConnected(i)) {

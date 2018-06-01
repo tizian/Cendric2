@@ -24,7 +24,7 @@ GamepadAimCursor::GamepadAimCursor(LevelMainCharacter* character) {
 }
 
 void GamepadAimCursor::update(const sf::Time& frameTime) {
-	m_isActive = g_inputController->isJoystickConnected();
+	m_isActive = g_inputController->isGamepadConnected();
 	if (!m_isVisible || !m_isActive) return;
 
 	auto axis = g_inputController->getRightJoystickAxis();

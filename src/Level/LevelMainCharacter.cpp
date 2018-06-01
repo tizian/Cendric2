@@ -121,7 +121,7 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 }
 
 sf::Vector2f LevelMainCharacter::getSelectedTarget() {
-	if (!g_inputController->isJoystickConnected()) {
+	if (!g_inputController->isGamepadConnected()) {
 		return g_inputController->getMousePosition();
 	}
 
@@ -169,7 +169,7 @@ void LevelMainCharacter::handleAttackInput() {
 	}
 
 	bool useAutotarget = isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget &&
-		(m_gamepadAimCursor->isUseAutotarget() || (!isAttacking && !g_inputController->isJoystickConnected()));
+		(m_gamepadAimCursor->isUseAutotarget() || (!isAttacking && !g_inputController->isGamepadConnected()));
 
 	sf::Vector2f target;
 	if (useAutotarget) {

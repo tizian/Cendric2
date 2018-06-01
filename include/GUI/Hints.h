@@ -9,7 +9,7 @@ inline std::string getHintTitle(const std::string& hintKey) {
 
 inline std::string getKeyName(Key key) {
 	auto& mainMap = g_resourceManager->getConfiguration().mainKeyMap;
-	if (!g_inputController->isJoystickConnected() && contains(mainMap, key)) {
+	if (!g_inputController->isGamepadConnected() && contains(mainMap, key)) {
 		return EnumNames::getKeyboardKeyName(mainMap.at(key));
 	}
 
@@ -26,7 +26,7 @@ inline std::string getKeyName(Key key) {
 		return g_textProvider->getText("Right");
 	}
 
-	auto& keymap = g_resourceManager->getConfiguration().joystickKeyMap;
+	auto& keymap = g_resourceManager->getConfiguration().gamepadKeyMap;
 
 	if (key == Key::Inventory ||
 		key == Key::CharacterInfo ||
@@ -54,7 +54,7 @@ inline std::string getHintDescription(const std::string& hintKey) {
 		hintText.append(getKeyName(Key::Inventory) + " ");
 	}
 	else if (hintKey == "Chop") {
-		if (g_inputController->isJoystickConnected()) {
+		if (g_inputController->isGamepadConnected()) {
 			hintText.append(getKeyName(Key::Attack) + " ");
 		}
 		else {

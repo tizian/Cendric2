@@ -30,6 +30,7 @@ public:
 	void clearButtons(bool deleteButtons = true);
 
 	void setSelectableWindow(SelectableWindow* window);
+	void setUpdateButtons(bool updateButtons);
 
 	GameObjectType getConfiguredType() const override;
 
@@ -38,6 +39,7 @@ private:
 
 	bool m_isEnabled;
 	bool m_isGamepadEnabled;
+	bool m_isUpdateButtons;
 	int m_width;
 	int m_selectedButtonIndex;
 

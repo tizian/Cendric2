@@ -189,8 +189,15 @@ void MerchantWindow::renderAfterForeground(sf::RenderTarget& target) {
 
 void MerchantWindow::showDescription(const Item* item) {
 	if (item == nullptr) return;
+
+	auto info = ItemDescriptionInfo();
+	info.isEquipmentOrigin = false;
+	info.isInBossLevel = false;
+	info.isInLevel = false;
+	info.isSelling = true;
+
 	m_descriptionWindow->setReputation(m_interface->getReputation(item), m_interface->isReputationReached(item));
-	m_descriptionWindow->load(*item, m_interface->getCore(), m_interface->getMerchantData().multiplier, true);
+	m_descriptionWindow->load(*item, m_interface->getCore(), m_interface->getMerchantData().multiplier, info);
 	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x - WINDOW_MARGIN - m_descriptionWindow->getSize().x,

@@ -55,6 +55,11 @@ void ScrollBar::setDiscreteSteps(int steps) {
 }
 
 void ScrollBar::scroll(int direction) {
+	if (direction == 0) {
+		setScrollPosition(0, false);
+		return;
+	}
+
 	if (m_discreteSteps >= 2) {
 		float delta = 1.f / (m_discreteSteps - 1);
 		setScrollPosition(m_scrollPosition + direction * delta, true);

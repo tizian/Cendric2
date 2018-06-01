@@ -52,8 +52,8 @@ void InteractComponent::interact() {
 void InteractComponent::setInteractText(const std::string& textKey) {
 	std::string interactString = "<";
 
-	std::string key = g_inputController->isJoystickConnected() ?
-		EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().joystickKeyMap.at(Key::Interact)) :
+	std::string key = g_inputController->isGamepadConnected() ?
+		EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap.at(Key::Interact)) :
 		EnumNames::getShortKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact));
 
 	interactString.append(key);
