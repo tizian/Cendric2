@@ -58,7 +58,7 @@ private:
 	void setPosition(const sf::Vector2f& position);
 
 	void clearAllSlots();
-	void calculateSlotPositions();
+	void calculateSlotPositions() const;
 	static bool isSlotInvisible(const InventorySlot* slot);
 
 	BitmapText m_goldText;
@@ -117,9 +117,9 @@ private:
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
 	void showDescription(const Item* item, bool isEquipmentOrigin) const;
 	void hideDescription() const;
-	void showDocument(const Item* item);
-	void convertItem(const Item* item);
-	void learnSpell(const Item* item);
+	void showDocument(const Item* item) const;
+	void convertItem(const Item* item) const;
+	void learnSpell(const Item* item) const;
 
 protected:
 	void updateWindowSelected() override;

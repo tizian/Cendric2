@@ -387,6 +387,14 @@ void Inventory::updateButtonActionLevel(const InventorySlot* slot) {
 void Inventory::updateButtonActionMap(const InventorySlot* slot) {
 	if (!m_mapInterface) return;
 
+	if (m_merchantInterface != nullptr) {
+		if (g_inputController->isKeyJustPressed(Key::Interact)) {
+			m_merchantInterface->sellItem(slot->getItem());
+			g_inputController->lockAction();
+		}
+		return;
+	}
+
 	if (g_inputController->isKeyJustPressed(Key::Interact)) {
 		g_inputController->lockAction();
 		const auto type = slot->getItemType();
@@ -757,7 +765,7 @@ void Inventory::renderAfterForeground(sf::RenderTarget& target) {
 	m_tabBar->renderAfterForeground(target);
 }
 
-void Inventory::convertItem(const Item* item) {
+void Inventory::convertItem(const Item* item) const {
 	if (item == nullptr || !item->getCheck().isConvertible) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
@@ -783,7 +791,7 @@ void Inventory::convertItem(const Item* item) {
 	}
 }
 
-void Inventory::learnSpell(const Item* item) {
+void Inventory::learnSpell(const Item* item) const {
 	if (item == nullptr || !item->getCheck().isSpell) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
@@ -793,7 +801,7 @@ void Inventory::learnSpell(const Item* item) {
 	worldScreen->notifySpellLearned(static_cast<SpellID>(bean->spell_id));
 }
 
-void Inventory::showDocument(const Item* item) {
+void Inventory::showDocument(const Item* item) const {
 	if (item == nullptr || !item->getCheck().isDocument) return;
 
 	WorldScreen* worldScreen = getInterface()->getScreen();
@@ -874,7 +882,7 @@ void Inventory::selectTab(ItemType type) {
 }
 
 void Inventory::reloadGold() {
-	std::string gold = "";
+	std::string gold;
 	gold.append(g_textProvider->getText("Gold"));
 	gold.append(": ");
 	gold.append(std::to_string(m_core->getData().gold));
@@ -907,7 +915,7 @@ void Inventory::reload() {
 	reloadButtonGroup();
 }
 
-void Inventory::calculateSlotPositions() {
+void Inventory::calculateSlotPositions() const {
 	auto const& buttons = m_buttonGroup->getButtons();
 	float number = static_cast<float>(buttons.size());
 	int rows = static_cast<int>(std::ceil(number / SLOT_COUNT_X));
