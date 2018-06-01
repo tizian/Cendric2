@@ -199,6 +199,10 @@ void InventoryEquipment::reload() {
 
 void InventoryEquipment::updateWindowSelected() {
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	if (isWindowSelected()) {
+		m_buttonGroup->getSelectedButton()->setSelected(true);
+	}
 }
 
 void InventoryEquipment::show() {

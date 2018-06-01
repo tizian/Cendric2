@@ -310,6 +310,10 @@ void Inventory::handleLevelRightClick(const InventorySlot* clicked) {
 void Inventory::updateWindowSelected() {
 	m_tabBar->setGamepadEnabled(isWindowSelected());
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	if (isWindowSelected()) {
+		m_buttonGroup->getSelectedButton()->setSelected(true);
+	}
 }
 
 void Inventory::handleMapDoubleClick(const InventorySlot* clicked) const {
@@ -347,14 +351,23 @@ void Inventory::update(const sf::Time& frameTime) {
 	m_buttonGroup->update(frameTime);
 
 	// check whether an item was selected
-	for (auto it : m_buttonGroup->getButtons()) {
-		const auto slot = dynamic_cast<InventorySlot*>(it);
-		if (isSlotInvisible(slot)) continue;
+	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
+		const auto slot = dynamic_cast<InventorySlot*>(m_buttonGroup->getButton(i));
 
-		const auto considerSlot = slot->isMousedOver() || (slot->isSelected() && isWindowSelected());
+		const auto considerSlot = !isSlotInvisible(slot) && slot->isMousedOver() || (slot->isSelected() && isWindowSelected());
 		
 		if (considerSlot && !m_hasDraggingStarted) {
 			selectSlot(slot->getItemID(), ItemType::VOID);
+			m_buttonGroup->selectButton(i);
+
+			if (isSlotInvisible(slot)) {
+				if (slot->getPosition().y < GUIConstants::TOP + SCROLL_WINDOW_TOP) {
+					m_scrollBar->scroll(-1);
+				} else {
+					m_scrollBar->scroll(1);
+				}
+			}
+
 			if (slot->isDoubleClicked()) {
 				handleLevelDoubleClick(slot);
 				handleMapDoubleClick(slot);
