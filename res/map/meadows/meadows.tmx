@@ -1141,7 +1141,7 @@
     <property name="persistent" value=""/>
    </properties>
   </object>
-  <object id="47" x="2308.5" y="876" width="39.5" height="66">
+  <object id="47" x="2275" y="875" width="100" height="112.5">
    <properties>
     <property name="conditions" value="trigger,tutorial_started"/>
     <property name="level entry" value="res/level/rockfall/rockfall.tmx,260,760"/>
