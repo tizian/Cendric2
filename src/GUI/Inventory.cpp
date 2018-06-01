@@ -444,7 +444,7 @@ void Inventory::handleMapDrop() {
 		m_mapInterface->highlightQuickslots(false);
 	}
 	else if (Item::isEquipmentType(type)) {
-		const InventorySlot* is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
+		auto const is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
 		m_equipment->highlightEquipmentSlot(is->getItemType(), false);
 		m_equipment->notifyEquipmentDrop(m_currentClone);
 	}
@@ -464,6 +464,8 @@ void Inventory::handleLevelDrop() {
 			m_levelInterface->getScreen()->setNegativeTooltip("CannotEquipInLevel");
 		}
 		else {
+			auto const is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
+			m_equipment->highlightEquipmentSlot(is->getItemType(), false);
 			m_equipment->notifyEquipmentDrop(m_currentClone);
 		}
 	}
