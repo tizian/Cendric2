@@ -41,7 +41,7 @@ public:
 	bool isEnemyHealthBarDisplayed();
 	// sets the whose healthbar should be displayed
 	void setEnemyForHealthBar(const Enemy* enemy);
-	// wether this is a boss level
+	// whether this is a boss level
 	bool isBossLevel() const;
 
 	void render(sf::RenderTarget& target) override;

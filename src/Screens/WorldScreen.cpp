@@ -119,7 +119,7 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	}
 
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_EQUIP);
-	m_interface->reloadInventory();
+	m_interface->reloadInventory(itemID);
 	m_interface->reloadCharacterInfo();
 	m_interface->reloadSpellBook();
 	notifyEquipmentReload();
@@ -422,7 +422,7 @@ void WorldScreen::handleBookWindow(const sf::Time& frameTime) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
 		if (m_isReopenInventory) {
-			m_interface->getInventory()->show();
+			m_interface->showInventory();
 			m_isReopenInventory = false;
 		}
 	}

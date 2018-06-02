@@ -77,9 +77,7 @@ void GUITabBar::update(const sf::Time& frameTime) {
 	}
 
 	auto* previousButton = m_buttonGroup->getSelectedButton();
-
 	m_buttonGroup->update(frameTime);
-
 	auto* currentButton = m_buttonGroup->getSelectedButton();
 
 	auto nextSelectedIndex = -1;

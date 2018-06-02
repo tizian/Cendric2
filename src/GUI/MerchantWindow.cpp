@@ -108,6 +108,7 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 
 	m_items.insert({ itemID, new InventorySlot(itemID, m_interface->getMerchantData().wares.at(itemID)) });
 
+	reloadButtonGroup();
 	calculateSlotPositions();
 }
 
@@ -135,7 +136,6 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 	}
 
 	updateButtonActions();
-
 	calculateSlotPositions();
 	
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -262,7 +262,7 @@ void MerchantWindow::updateWindowSelected() {
 
 void MerchantWindow::reloadButtonGroup() {
 	if (m_buttonGroup) {
-		m_buttonGroup->clearButtons();
+		m_buttonGroup->clearButtons(false);
 		delete m_buttonGroup;
 	}
 
@@ -270,6 +270,10 @@ void MerchantWindow::reloadButtonGroup() {
 	m_buttonGroup->setSelectableWindow(this);
 	m_buttonGroup->setUpdateButtons(false);
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	for (auto slot : m_items) {
+		m_buttonGroup->addButton(slot.second);
+	}
 }
 
 void MerchantWindow::reload() {
@@ -277,7 +281,7 @@ void MerchantWindow::reload() {
 
 	// reload items
 	clearAllSlots();
-	reloadButtonGroup();
+	
 	hideDescription();
 	for (auto& it : m_interface->getMerchantData().wares) {
 		if (!g_resourceManager->getItem(it.first)) {
@@ -285,10 +289,10 @@ void MerchantWindow::reload() {
 			continue;
 		}
 		
-		auto const newSlot = new InventorySlot(it.first, it.second);
-		m_items.insert({ it.first, newSlot });
-		m_buttonGroup->addButton(newSlot);
+		m_items.insert({ it.first, new InventorySlot(it.first, it.second) });
 	}
+
+	reloadButtonGroup();
 }
 
 void MerchantWindow::calculateSlotPositions() {

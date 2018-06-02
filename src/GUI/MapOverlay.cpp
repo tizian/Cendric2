@@ -86,7 +86,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 }
 
 void MapOverlay::updateSelectableWindow() {
-	if (!isWindowSelected()) {
+	if (!isWindowSelected() || g_inputController->isActionLocked()) {
 		return;
 	}
 

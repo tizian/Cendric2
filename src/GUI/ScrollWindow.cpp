@@ -55,6 +55,8 @@ void ScrollWindow::calculateEntryPositions() {
 }
 
 void ScrollWindow::updateSelection(const sf::Time& frameTime) {
+	if (m_selectedEntryId == -1) return;
+
 	if (g_inputController->isJustDown()) {
 		selectEntry(m_selectedEntryId + 1);
 		if (isEntryInvisible((*m_entries)[m_selectedEntryId])) {

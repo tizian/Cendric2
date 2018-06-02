@@ -471,7 +471,7 @@ void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
 	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
-		m_interface->getInventory()->show();
+		m_interface->showInventory();
 	}
 }
 

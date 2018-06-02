@@ -39,9 +39,6 @@ public:
 	void startTrading(MerchantInterface* _interface);
 	void stopTrading();
 
-	void reload();
-	void reloadGold();
-
 	InventoryEquipment* getEquipment() const;
 
 private:
@@ -56,6 +53,8 @@ private:
 
 	void init();
 	void setPosition(const sf::Vector2f& position);
+	void reload();
+	void reloadGold();
 
 	void clearAllSlots();
 	void calculateSlotPositions() const;

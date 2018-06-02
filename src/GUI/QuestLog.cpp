@@ -134,7 +134,7 @@ void QuestLog::updateTabBar(const sf::Time& frameTime) {
 }
 
 void QuestLog::updateSelectableWindow() {
-	if (!isWindowSelected()) {
+	if (!isWindowSelected() || g_inputController->isActionLocked()) {
 		return;
 	}
 

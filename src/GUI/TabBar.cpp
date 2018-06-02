@@ -60,9 +60,17 @@ void TabBar::update(const sf::Time& frameTime) {
 	if (nextActiveIndex == -1 && m_isGamepadEnabled) {
 		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
 			nextActiveIndex = std::min(static_cast<int>(m_tabButtons.size() - 1), m_activeTabIndex + 1);
+			if (nextActiveIndex != m_activeTabIndex) {
+				m_tabButtons[nextActiveIndex]->onLeftJustPressed();
+				m_tabButtons[nextActiveIndex]->onLeftClick();
+			}
 		}
 		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
 			nextActiveIndex = std::max(0, m_activeTabIndex - 1);
+			if (nextActiveIndex != m_activeTabIndex) {
+				m_tabButtons[nextActiveIndex]->onLeftJustPressed();
+				m_tabButtons[nextActiveIndex]->onLeftClick();
+			}
 		}
 	}
 

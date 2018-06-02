@@ -30,8 +30,7 @@ public:
 	virtual ~WorldInterface() = default;
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
-	// if the string is empty, it does a full reload (heavy operation, only us this when equipment or more than one item changed)
-	virtual void reloadInventory(const std::string& changeditemID = "");
+	virtual void reloadInventory(const std::string& changeditemID);
 	// reloads the quest log
 	virtual void reloadQuestLog();
 	// reload the character info
@@ -46,6 +45,8 @@ public:
 	void jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data);
 	// opens the quest log and jumps to a quest
 	void jumpToQuestLog(const std::string& questId);
+	// show inventory directly
+	void showInventory();
 
 	// an consumable item has been dropped. forward to quick slot bar
 	void notifyConsumableDrop(const SlotClone* item) const;

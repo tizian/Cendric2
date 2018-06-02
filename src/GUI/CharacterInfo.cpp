@@ -160,7 +160,7 @@ void CharacterInfo::update(const sf::Time& frameTime) {
 }
 
 void CharacterInfo::updateSelectableWindow() {
-	if (!isWindowSelected()) {
+	if (!isWindowSelected() || g_inputController->isActionLocked()) {
 		return;
 	}
 

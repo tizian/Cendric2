@@ -58,5 +58,5 @@ void SelectableWindow::setLeftWindowSelected() {
 }
 
 bool SelectableWindow::isWindowSelected() const {
-	return m_isWindowSelected;
+	return m_isWindowSelected && g_inputController->isGamepadConnected();
 }

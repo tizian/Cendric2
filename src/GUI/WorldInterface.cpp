@@ -72,10 +72,6 @@ bool WorldInterface::isGuiOverlayVisible() const {
 }
 
 void WorldInterface::reloadInventory(const std::string& changedItemID) {
-	if (changedItemID.empty()) {
-		m_inventory->reload();
-		return;
-	}
 	m_inventory->notifyChange(changedItemID);
 }
 
@@ -107,6 +103,10 @@ void WorldInterface::jumpToQuestMarker(const std::string& questId, const std::ve
 void WorldInterface::jumpToQuestLog(const std::string& questId) {
 	showGuiElement(m_questLog, GUIElement::Journal);
 	m_questLog->notifyJumpToQuest(questId);
+}
+
+void WorldInterface::showInventory() {
+	showGuiElement(m_inventory, GUIElement::Inventory);
 }
 
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) const {

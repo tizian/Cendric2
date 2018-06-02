@@ -222,7 +222,6 @@ void Inventory::notifyChange(const std::string& itemID) {
 	}
 
 	std::map<std::string, InventorySlot*>* tab = m_typeMap.at(item->getType());
-	bool needsButtonGroupReload = false;
 
 	// search for the slot
 	if (contains(*tab, item->getID())) {
@@ -231,12 +230,11 @@ void Inventory::notifyChange(const std::string& itemID) {
 			if (m_selectedSlotId.first == item->getID()) {
 				deselectCurrentSlot();
 			}
-			needsButtonGroupReload = m_typeMap.at(m_currentTab) == m_typeMap.at(item->getType());
 			tab->erase(item->getID());
+			reloadButtonGroup();
 		}
 		else {
 			tab->at(item->getID())->setAmount(m_core->getData().items.at(itemID));
-
 		}
 		return;
 	}
@@ -245,11 +243,7 @@ void Inventory::notifyChange(const std::string& itemID) {
 	if (!contains(m_core->getData().items, itemID)) return;
 	if (contains(*tab, itemID)) return;
 	(*tab).insert({ item->getID(), new InventorySlot(itemID, m_core->getData().items.at(itemID)) });
-	needsButtonGroupReload = m_typeMap.at(m_currentTab) == m_typeMap.at(item->getType());
-
-	if (needsButtonGroupReload) {
-		reloadButtonGroup();
-	}
+	reloadButtonGroup();
 }
 
 void Inventory::reloadButtonGroup() {
@@ -613,7 +607,7 @@ void Inventory::removeEquipmentItem() {
 	if (fastIntersect(*m_window->getBoundingBox(), *m_currentClone->getBoundingBox())) {
 		const auto is = dynamic_cast<const InventorySlot*>(m_currentClone->getOriginalSlot());
 		m_core->equipItem("", is->getItemType());
-		reload();
+		notifyChange(is->getItemID());
 	}
 }
 
