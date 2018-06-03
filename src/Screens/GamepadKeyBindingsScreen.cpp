@@ -239,7 +239,14 @@ bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadAxis axis) {
 	for (auto& it : m_selectedKeys) {
 		if (it.second == axis) it.second = GamepadAxis::MAX;
 	}
+
 	m_selectedKeys[key] = axis;
+
+	if (key == Key::Interact || key == Key::Confirm) {
+		m_selectedKeys[Key::Interact] = axis;
+		m_selectedKeys[Key::Confirm] = axis;
+	}
+
 	g_inputController->lockAction();
 	m_lockInput = true;
 	reload();
@@ -286,7 +293,21 @@ void GamepadKeyBindingsScreen::onBack() {
 	setNextScreen(new MenuScreen(m_characterCore));
 }
 
+bool GamepadKeyBindingsScreen::checkSet(Key key) {
+	if (m_selectedKeys[key] == GamepadAxis::MAX) {
+		setTooltipTextRaw(
+			g_textProvider->getText(EnumNames::getKeyName(key)) + " " + 
+			g_textProvider->getText("MustBeSet"), COLOR_GOOD, true);
+		return false;
+	}
+	return true;
+}
+
 void GamepadKeyBindingsScreen::onApply() {
+	if (!checkSet(Key::Confirm)) return;
+	if (!checkSet(Key::Escape)) return;
+	if (!checkSet(Key::Interact)) return;
+
 	g_resourceManager->getConfiguration().gamepadKeyMap = m_selectedKeys;
 	ConfigurationWriter writer;
 	writer.saveToFile(g_resourceManager->getConfiguration());

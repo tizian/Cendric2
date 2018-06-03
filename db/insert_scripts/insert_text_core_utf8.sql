@@ -136,6 +136,7 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Move
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveLeft','Move left','Nach links laufen','Links laufe','Ir a la izquierda');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveRight','Move right','Nach rechts bewegen','Rechts laufe','Ir a la derecha');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveUp','Move up','Nach oben bewegen','Uelaufe','Subir');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MustBeSet','must be set!','muss gesetzt sein!','mun gsetzt si!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Necromancy','Necromancy','Nekromantie','Nekromantie','Necromancia');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a pickaxe to mine ore.','Du brauchst eine Spitzhacke um Erz abzubauen.', 'Du bruchsch en Pickel zum Erz hacke.','Necesitas una piqueta para minar minerales.');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPortstone','You need a teleporter stone to teleport.','Du brauchst einen Teleportstein um dich zu teleportieren.', 'Du bruchsch en Teleportstei zum dich teleportiere.','?');

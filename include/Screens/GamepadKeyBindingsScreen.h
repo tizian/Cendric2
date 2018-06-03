@@ -36,6 +36,7 @@ private:
 	void onApply();
 	void onUseDefault();
 	void onReset();
+	bool checkSet(Key key);
 
 private:
 	BitmapText* m_title = nullptr;
