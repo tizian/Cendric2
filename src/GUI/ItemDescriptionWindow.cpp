@@ -143,7 +143,7 @@ std::string ItemDescriptionWindow::getKeyboardText(const std::string& textKey) {
 std::string ItemDescriptionWindow::getGamepadText(const std::string& textKey, Key key) {
 	auto const resolvedKey = EnumNames::getGamepadAxisName(
 		g_resourceManager->getConfiguration().gamepadKeyMap.at(key));
-	return resolvedKey + " " + g_textProvider->getText(textKey);
+	return "<" + resolvedKey + "> " + g_textProvider->getText(textKey);
 }
 
 void ItemDescriptionWindow::addIntComparision(int this_, int other) {

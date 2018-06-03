@@ -88,7 +88,7 @@ void WorldInterface::reloadSpellBook() {
 }
 
 void WorldInterface::reloadMapWaypoints() {
-	m_mapOverlay->reloadWaypoints();
+	m_mapOverlay->reloadMarkers();
 }
 
 void WorldInterface::reloadLevelOverlay() {
@@ -97,16 +97,23 @@ void WorldInterface::reloadLevelOverlay() {
 
 void WorldInterface::jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data) {
 	showGuiElement(m_mapOverlay, GUIElement::Map);
+	m_guiSidebar->setWindowSelected(false);
+	m_mapSidebar->setWindowSelected(false);
+	m_mapOverlay->setWindowSelected(true);
 	m_mapOverlay->notifyJumpToQuest(questId, data);
 }
 
 void WorldInterface::jumpToQuestLog(const std::string& questId) {
 	showGuiElement(m_questLog, GUIElement::Journal);
+	m_guiSidebar->setWindowSelected(false);
+	m_questLog->setWindowSelected(true);
 	m_questLog->notifyJumpToQuest(questId);
 }
 
 void WorldInterface::showInventory() {
 	showGuiElement(m_inventory, GUIElement::Inventory);
+	m_guiSidebar->setWindowSelected(false);
+	m_inventory->setWindowSelected(true);
 }
 
 void WorldInterface::notifyConsumableDrop(const SlotClone* item) const {
@@ -154,6 +161,7 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 	m_inventory->getEquipment()->setWindowSelected(false);
 	m_questLog->setWindowSelected(false);
 	m_mapSidebar->setWindowSelected(false);
+	m_mapOverlay->setWindowSelected(false);
 
 	m_guiSidebar->setRightWindow(nullptr);
 	m_guiSidebar->setWindowSelected(true);

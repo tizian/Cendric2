@@ -93,6 +93,7 @@ void QuestLog::init() {
 	reload();
 
 	selectTab(QuestState::Started);
+	calculateEntryPositions();
 }
 
 QuestLog::~QuestLog() {

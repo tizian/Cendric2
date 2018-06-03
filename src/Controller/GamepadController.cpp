@@ -92,6 +92,31 @@ bool GamepadController::isLeftJoystickJustRight() const {
 	return m_isLeftJoystickRightJustPressed;
 }
 
+sf::Vector2f GamepadController::getAnyJoystickAxis() const {
+	sf::Vector2f axis = getLeftJoystickAxis();
+	if (norm(axis) > AXIS_THRESHOLD) {
+		return axis;
+	}
+
+	return getRightJoystickAxis();
+}
+
+sf::Vector2f GamepadController::getDPadAxis() const {
+	sf::Vector2f axis;
+	axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX);
+	axis.y = -sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY);
+
+	return axis;
+}
+
+sf::Vector2f GamepadController::getLeftJoystickAxis() const {
+	sf::Vector2f axis;
+	axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X);
+	axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y);
+
+	return axis;
+}
+
 sf::Vector2f GamepadController::getRightJoystickAxis() const {
 	sf::Vector2f axis;
 	if (m_isXBoxController) {
@@ -102,7 +127,7 @@ sf::Vector2f GamepadController::getRightJoystickAxis() const {
 		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z);
 		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R);
 	}
-	
+
 	return axis;
 }
 
@@ -155,8 +180,8 @@ void GamepadController::notifyGamepadConnected() {
 		if (sf::Joystick::isConnected(i)) {
 			m_connectedJoystick = i;
 			auto productId = sf::Joystick::getIdentification(i).productId;
-			m_isXBoxController = 
-				productId == static_cast<int>(GamepadProductID::XBoxOne_A) || 
+			m_isXBoxController =
+				productId == static_cast<int>(GamepadProductID::XBoxOne_A) ||
 				productId == static_cast<int>(GamepadProductID::XBoxOne_B);
 			break;
 		}
@@ -426,7 +451,7 @@ GamepadAxis GamepadController::getLastPressedGamepadAxisDs4(sf::Joystick::Axis a
 GamepadAxis GamepadController::getLastPressedGamepadButtonXbox(int button) {
 	switch (button)
 	{
-	case 0: 
+	case 0:
 		return GamepadAxis::A;
 	case 1:
 		return GamepadAxis::B;

@@ -108,7 +108,25 @@ void WorldScreen::notifyItemConversion(const std::string& oldItemID, const std::
 	checkMonitoredQuestItems(newItemID, amount);
 }
 
+void WorldScreen::notifyItemUnequip(const std::string& oldItemId, ItemType type) {
+	if (oldItemId.empty() || !Item::isEquipmentType(type)) {
+		return;
+	}
+
+	getCharacterCore()->equipItem("", type);
+
+	g_resourceManager->playSound(GlobalResource::SOUND_GUI_EQUIP);
+	m_interface->reloadInventory(oldItemId);
+	m_interface->reloadCharacterInfo();
+	m_interface->reloadSpellBook();
+	notifyEquipmentReload();
+}
+
 void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
+	if (itemID.empty()) {
+		return;
+	}
+
 	if (type != ItemType::VOID) {
 		getCharacterCore()->equipItem(itemID, type);
 	}
@@ -153,7 +171,7 @@ void WorldScreen::notifyQuestStateChanged(const std::string& questID, QuestState
 
 void WorldScreen::notifySpellLearned(SpellID id) {
 	getCharacterCore()->learnSpell(id);
-	
+
 	m_overlayQueue.clear();
 	g_resourceManager->playSound(GlobalResource::SOUND_LEARNED_SPELL);
 	addScreenOverlay(ScreenOverlay::createSpellLearnedScreenOverlay(id));
@@ -263,7 +281,7 @@ void WorldScreen::clearOverlayQueue() {
 Inventory* WorldScreen::getInventory() {
 	if (m_interface == nullptr) return nullptr;
 	return m_interface->getInventory();
-} 
+}
 
 ProgressLog* WorldScreen::getProgressLog() {
 	return m_progressLog;
@@ -299,7 +317,7 @@ void WorldScreen::updateMonitoredQuestItems() {
 			m_monitoredQuestItems.at(item.first).insert(data->id);
 		}
 	}
-} 
+}
 
 void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount) {
 	if (amount <= 0) return;
@@ -316,7 +334,7 @@ void WorldScreen::checkMonitoredQuestItems(const std::string& itemID, int amount
 			if (getCharacterCore()->getItems()->find(itemID) == getCharacterCore()->getItems()->end()) continue;
 			int currentItemAmount = getCharacterCore()->getItems()->at(itemID);
 			if (currentItemAmount - amount >= collectible.second) continue;
-			
+
 			m_progressLog->addQuestItemCollected(questID, itemID, currentItemAmount, collectible.second);
 		}
 	}
@@ -335,11 +353,11 @@ bool WorldScreen::isUpdateOnlyInterface() const {
 
 void WorldScreen::execUpdate(const sf::Time& frameTime) {
 	updateOverlayQueue();
-	
+
 	if (m_updateInterface) {
 		m_interface->update(frameTime);
 	}
-	
+
 	m_progressLog->update(frameTime);
 
 	if (g_inputController->isKeyJustPressed(Key::Screenshot)) {

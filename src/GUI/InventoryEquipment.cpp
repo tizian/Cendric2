@@ -78,7 +78,7 @@ void InventoryEquipment::updateButtonActions() const {
 	if (!selectedButton) return;
 
 	if (selectedButton->isRightClicked() || selectedButton->isDoubleClicked()) {
-		m_screen->notifyItemEquip("", selectedButton->getItemType());
+		m_screen->notifyItemUnequip(selectedButton->getItemID(), selectedButton->getItemType());
 	}
 
 	if (!g_inputController->isGamepadConnected() || !isWindowSelected()) {
@@ -86,7 +86,7 @@ void InventoryEquipment::updateButtonActions() const {
 	}
 
 	if (g_inputController->isKeyJustPressed(Key::Interact)) {
-		m_screen->notifyItemEquip("", selectedButton->getItemType());
+		m_screen->notifyItemUnequip(selectedButton->getItemID(), selectedButton->getItemType());
 	}
 }
 
@@ -143,7 +143,7 @@ void InventoryEquipment::notifyEquipmentDrop(const SlotClone* item) {
 		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
 	}
 	else if (slot->isEquipmentOrigin()) {
-		m_screen->notifyItemEquip("", slot->getItemType());
+		m_screen->notifyItemUnequip(slot->getItemID(), slot->getItemType());
 	}
 }
 void InventoryEquipment::equipRing(const InventorySlot* slot, int slotId) {

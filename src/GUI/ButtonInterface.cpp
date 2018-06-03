@@ -41,8 +41,6 @@ bool ButtonInterface::isVisibleAndEnabled() const {
 	return m_isVisible && m_isEnabled;
 }
 
-void ButtonInterface::notifyFirstSelection() {}
-
 GameObjectType ButtonInterface::getConfiguredType() const {
 	return _Button;
 }

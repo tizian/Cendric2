@@ -15,7 +15,7 @@ enum class QuestMarkerState {
 };
 
 // a quest marker on a quest entry or on the minimap
-class QuestMarker : public GameObject {
+class QuestMarker : public virtual GameObject {
 public:
 	QuestMarker(const QuestData& questData, CharacterCore* core);
 	virtual ~QuestMarker() {}

@@ -302,9 +302,9 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOp
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToMine','to mine','- abbauen', 'zum abbaue','para minar');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToSell','to sell','- verkaufen','zum verchaufe','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToBuy','to buy','- kaufen','zum chaufe','?');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToOpen','to open','- öffnen','zum ufmache','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToLearn','to learn','- lernen','zum lerne','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToConsume','to consume','- konsumieren','zum verbruche','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToTeleport','to teleport','- teleportieren','zum teleportiere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToUnequip','to unequip','- ablegen','zum wegne','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToEquip','to equip','- ausrüsten','zum usrüschte','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ToEquipSlot1','to equip (Slot 1)','- ausrüsten (Slot 1)','zum usrüschte (Slot 1)','?');

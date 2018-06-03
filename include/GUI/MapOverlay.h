@@ -6,6 +6,8 @@
 #include "Structs/QuestData.h"
 #include "GUI/QuestMarker.h"
 #include "GUI/SelectableWindow.h"
+#include "GUI/ButtonInterface.h"
+#include "GUI/JoystickButtonGroup.h"
 
 class WorldScreen;
 class WorldInterface;
@@ -24,39 +26,56 @@ struct MapOverlayData final {
 	TileMap fogOfWarTileMap;
 };
 
-class WaypointMarker final : public AnimatedGameObject {
+class WaypointMarker final : public AnimatedGameObject, public ButtonInterface {
 public:
 	WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& waypointPosition, MapOverlay* parent);
 
 	void update(const sf::Time& frameTime) override;
 	void render(sf::RenderTarget& target) override;
 
-	void onMouseOver() override;
-	void onRightClick() override;
 	void onLeftClick() override;
+	void onMouseOver() override;
 
 	void setPosition(const sf::Vector2f& position) override;
 	void loadAnimation();
 
-	GameObjectType getConfiguredType() const override;
+	void click() override;
+
+	void setState(GameObjectState state) override { AnimatedGameObject::setState(state); }
+	GameObjectType getConfiguredType() const override { return ButtonInterface::getConfiguredType(); }
+
+protected:
+	void updateColor() override;
+	std::string getTooltipString() const;
 
 private:
 	MainCharacter* m_mainChar = nullptr;
 	MapOverlay* m_parent;
-	bool m_isMouseOver = false;
 	sf::Vector2f m_waypointPosition;
 	BitmapText m_tooltip;
 };
 
 // a quest marker on the map
-class MapQuestMarker final : public QuestMarker {
+class MapQuestMarker final : public QuestMarker, public ButtonInterface {
 public:
 	MapQuestMarker(const QuestData& questData, const QuestMarkerData& markerData, WorldInterface* interface);
 
+	void update(const sf::Time& frameTime) override;
+	void render(sf::RenderTarget& target) override { QuestMarker::render(target); }
+	void renderAfterForeground(sf::RenderTarget& target) override { QuestMarker::renderAfterForeground(target); }
+	void setPosition(const sf::Vector2f& position) override { QuestMarker::setPosition(position); }
+
 	void onLeftClick() override;
+	void onMouseOver() override;
 
 	void setTooltipTime(const sf::Time& time);
 	const std::string& getQuestId();
+	void click() override;
+
+	GameObjectType getConfiguredType() const override { return ButtonInterface::getConfiguredType(); }
+
+protected:
+	void updateColor() override;
 
 private:
 	void init();
@@ -84,9 +103,8 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	void reloadWaypoints();
-	void reloadQuestMarkers();
 	void reloadMaps();
+	void reloadMarkers();
 
 	void notifyLevelOverlayReload();
 	void notifyJumpToQuest(const std::string& questId, const std::vector<QuestMarkerData>& data);
@@ -98,6 +116,9 @@ public:
 	static std::string getMapIconFilename(const std::string& mapID);
 
 private:
+	void reloadWaypoints();
+	void reloadQuestMarkers();
+
 	void setMapIndex(int index);
 	void updateFogOfWar(MapOverlayData* map);
 	MapOverlayData* createMapOverlayData(const std::string& id, const sf::Vector2i& size, const sf::Sprite& sprite) const;
@@ -105,6 +126,7 @@ private:
 	void drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY);
 	float getScale(const sf::Vector2f& mapSize) const;
 	void reloadLevelOverlay();
+	void reloadButtonGroup();
 
 protected:
 	void updateWindowSelected() override;
@@ -129,6 +151,7 @@ private:
 
 	std::vector<WaypointMarker*> m_waypoints;
 	std::vector<MapQuestMarker*> m_questMarkers;
+	JoystickButtonGroup* m_buttonGroup = nullptr;
 
 	int m_currentMap = -1;
 	bool m_isVisible = false;

@@ -13,13 +13,13 @@ public:
 	void setLeftWindow(SelectableWindow* leftWindow);
 
 	void setWindowSelected(bool isSelected);
+	bool isWindowSelected() const;
 
 	void setRightWindowSelected();
 	void setLeftWindowSelected();
 
 protected:
 	virtual void updateWindowSelected() = 0;
-	bool isWindowSelected() const;
 
 	Window* m_window = nullptr;
 

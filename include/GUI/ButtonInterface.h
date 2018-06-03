@@ -12,7 +12,7 @@ public:
 	virtual void click() = 0;
 
 	virtual void setEnabled(bool enabled);
-	virtual void notifyFirstSelection();
+	virtual void notifyFirstSelection() {};
 	void setVisible(bool visible);
 	void setSelected(bool selected);
 

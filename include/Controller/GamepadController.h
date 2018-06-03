@@ -25,7 +25,10 @@ public:
 	bool isLeftJoystickJustLeft() const;
 	bool isLeftJoystickJustRight() const;
 
+	sf::Vector2f getAnyJoystickAxis() const;
 	sf::Vector2f getRightJoystickAxis() const;
+	sf::Vector2f getLeftJoystickAxis() const;
+	sf::Vector2f getDPadAxis() const;
 	GamepadAxis getGamepadAxisForKey(Key key) const;
 	
 	void setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event);
@@ -33,6 +36,8 @@ public:
 
 	// returns the GamepadAxis that was pressed in the last frame. If none, returns GamepadAxis::VOID
 	GamepadAxis getLastPressedAxis() const;
+
+	static const int AXIS_THRESHOLD;
 
 protected:
 	bool isGamepadButtonPressed(Key key) const;
@@ -59,8 +64,6 @@ private:
 	bool m_isLeftJoystickUpJustPressed = false;
 	bool m_isLeftJoystickDownPressed = false;
 	bool m_isLeftJoystickDownJustPressed = false;
-
-	static const int AXIS_THRESHOLD;
 
 	bool isDPadUp() const;
 	bool isDPadDown() const;
