@@ -36,7 +36,7 @@ void SelectableWindow::updateWindowColor() const {
 		return;
 	}
 
-	m_window->setOrnamentColor(m_isWindowSelected ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
+	m_window->setOrnamentColor(isWindowSelected() ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
 }
 
 void SelectableWindow::setRightWindowSelected() {

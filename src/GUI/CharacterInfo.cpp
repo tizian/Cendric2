@@ -400,6 +400,7 @@ void CharacterInfo::updateHints() {
 
 	for (const auto& hint : hints) {
 		const auto newEntry = new HintEntry(hint);
+		newEntry->deselect();
 		m_hintEntries.push_back(newEntry);
 		if (newEntry->getHintKey() == m_selectedHintKey) {
 			selectEntry(static_cast<int>(hints.size()) - 1);

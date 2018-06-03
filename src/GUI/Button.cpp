@@ -65,6 +65,7 @@ void Button::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_ornamentLayer);
 	renderTarget.draw(m_text);
 	if (hasGamepadKey()) {
+		reloadTextPosition();
 		renderTarget.draw(m_keyText);
 	}
 	if (m_hasTexture) renderTarget.draw(m_textureLayer);
