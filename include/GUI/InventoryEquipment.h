@@ -40,6 +40,7 @@ public:
 protected:
 	void updateWindowSelected() override;
 	void updateButtonActions() const;
+	void reloadButtonGroup();
 
 public:
 	static const float WIDTH;

@@ -208,7 +208,7 @@ void Inventory::deselectCurrentSlot() {
 	}
 }
 
-void Inventory::notifyChange(const std::string& itemID) {
+void Inventory::notifyChange(const std::string itemID) {
 	if (itemID == "gold") {
 		reloadGold();
 		return;
@@ -247,7 +247,9 @@ void Inventory::notifyChange(const std::string& itemID) {
 }
 
 void Inventory::reloadButtonGroup() {
+	int previouslySelectedId = 0;
 	if (m_buttonGroup) {
+		previouslySelectedId = m_buttonGroup->getSelectedButtonId();
 		m_buttonGroup->clearButtons(false);
 		delete m_buttonGroup;
 	}
@@ -256,9 +258,13 @@ void Inventory::reloadButtonGroup() {
 	m_buttonGroup->setSelectableWindow(this);
 	m_buttonGroup->setUpdateButtons(false);
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+	
 	for (auto& it : *m_typeMap.at(m_currentTab)) {
 		m_buttonGroup->addButton(it.second);
 	}
+
+	m_buttonGroup->selectButton(previouslySelectedId);
+
 }
 
 void Inventory::handleMapRightClick(const InventorySlot* clicked) {
@@ -505,7 +511,10 @@ void Inventory::update(const sf::Time& frameTime) {
 	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
 		const auto slot = dynamic_cast<InventorySlot*>(m_buttonGroup->getButton(i));
 
-		const auto considerSlot = (!isSlotInvisible(slot) && slot->isMousedOver()) || (slot->isSelected() && isWindowSelected());
+		const auto considerSlot = 
+			(!isSlotInvisible(slot) && slot->isMousedOver()) || 
+			(slot->isSelected() && isWindowSelected());
+
 		if (!isSlotInvisible(slot) || considerSlot) {
 			slot->update(frameTime);
 		}
@@ -585,7 +594,9 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		return;
 	}
 
-	if (g_inputController->isMouseJustPressedLeftRaw()) {
+	InventorySlot* selectedSlot = getSelectedSlot();
+
+	if (g_inputController->isMouseJustPressedLeftRaw() && selectedSlot->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
 		m_hasDraggingStarted = true;
 		m_isEquipmentSlotDragged = type != ItemType::VOID;
 		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
@@ -596,7 +607,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	deselectCurrentSlot();
 	m_selectedSlotId.first = selectedSlotId;
 	m_selectedSlotId.second = type;
-	InventorySlot* selectedSlot = getSelectedSlot();
+	selectedSlot = getSelectedSlot();
 	if (selectedSlot != nullptr) {
 		selectedSlot->select();
 		showDescription(selectedSlot->getItem(), selectedSlot->isEquipmentOrigin());
@@ -870,6 +881,10 @@ void Inventory::selectTab(ItemType type) {
 
 	if (m_mapInterface != nullptr) {
 		m_mapInterface->showQuickslotBar(type == ItemType::Consumable);
+	}
+
+	for (auto slot : *m_typeMap.at(m_currentTab)) {
+		slot.second->hideTooltip();
 	}
 
 	reloadButtonGroup();

@@ -73,6 +73,10 @@ ButtonInterface* ButtonGroup::getSelectedButton() const {
 	return m_buttons[m_selectedButtonIndex];
 }
 
+int ButtonGroup::getSelectedButtonId() const {
+	return m_selectedButtonIndex;
+}
+
 ButtonInterface* ButtonGroup::getButton(int i) const {
 	if (i < 0 || i > static_cast<int>(m_buttons.size()) - 1) {
 		return nullptr;

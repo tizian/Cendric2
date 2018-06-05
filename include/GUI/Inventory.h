@@ -35,7 +35,7 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	void notifyChange(const std::string& itemID);
+	void notifyChange(const std::string itemID);
 	void startTrading(MerchantInterface* _interface);
 	void stopTrading();
 
@@ -100,6 +100,7 @@ private:
 	SlotClone* m_currentClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isEquipmentSlotDragged = false;
+	bool m_isSelectedByButtonGroup = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.
 	const float DRAG_DISTANCE = 10.f;

@@ -261,7 +261,9 @@ void MerchantWindow::updateWindowSelected() {
 }
 
 void MerchantWindow::reloadButtonGroup() {
+	int previouslySelectedId = 0;
 	if (m_buttonGroup) {
+		previouslySelectedId = m_buttonGroup->getSelectedButtonId();
 		m_buttonGroup->clearButtons(false);
 		delete m_buttonGroup;
 	}
@@ -274,6 +276,8 @@ void MerchantWindow::reloadButtonGroup() {
 	for (auto slot : m_items) {
 		m_buttonGroup->addButton(slot.second);
 	}
+
+	m_buttonGroup->selectButton(previouslySelectedId);
 }
 
 void MerchantWindow::reload() {

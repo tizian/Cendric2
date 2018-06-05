@@ -62,7 +62,7 @@ protected:
 
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
-	ScrollHelper *m_scrollHelper = nullptr;
+	ScrollHelper* m_scrollHelper = nullptr;
 
 private:
 	const sf::Time SCROLL_TIMEOUT = sf::milliseconds(500);

@@ -88,6 +88,10 @@ const Item* InventorySlot::getItem() const {
 	return g_resourceManager->getItem(m_itemID); 
 }
 
+void InventorySlot::hideTooltip() {
+	m_tooltipComponent->setCurrentTooltipTime(sf::Time::Zero);
+}
+
 void InventorySlot::setAlpha(sf::Uint8 alpha) {
 	const sf::Color& ic = m_iconRect.getFillColor();
 	m_iconRect.setFillColor(sf::Color(ic.r, ic.g, ic.b, alpha));

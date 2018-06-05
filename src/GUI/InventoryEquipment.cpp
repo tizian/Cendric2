@@ -35,7 +35,12 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 }
 
 InventoryEquipment::~InventoryEquipment() {
-	delete m_buttonGroup;
+	if (m_buttonGroup) {
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+	}
+
+	CLEAR_MAP(m_slots);
 	delete m_window;
 }
 
@@ -193,13 +198,28 @@ InventorySlot* InventoryEquipment::getSelectedSlot(ItemType type) {
 	return m_slots.at(type);
 }
 
-void InventoryEquipment::reload() {
-	delete m_buttonGroup;
+void InventoryEquipment::reloadButtonGroup() {
+	int previouslySelectedId = 0;
+
+	if (m_buttonGroup) {
+		previouslySelectedId = m_buttonGroup->getSelectedButtonId();
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+	}
+	
 	m_buttonGroup = new ButtonGroup();
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 	m_buttonGroup->setSelectableWindow(this);
 
-	m_slots.clear();
+	for (auto type : m_types) {
+		m_buttonGroup->addButton(m_slots[type]);
+	}
+
+	m_buttonGroup->selectButton(previouslySelectedId);
+}
+
+void InventoryEquipment::reload() {
+	CLEAR_MAP(m_slots);
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_EQUIPMENTPLACEHOLDERS);
 
@@ -209,17 +229,17 @@ void InventoryEquipment::reload() {
 
 		if (m_core->getEquippedItem(it).empty()) {
 			const auto newSlot = new InventorySlot(tex, texPos, it);
-			m_buttonGroup->addButton(newSlot);
 			m_slots.insert({ it, newSlot });
 		}
 		else {
 			const auto newSlot = new InventorySlot(m_core->getEquippedItem(it), -1, true);
-			m_buttonGroup->addButton(newSlot);
 			m_slots.insert({ it, newSlot });
 		}
 		texPos.x += 50;
 		m_slots.at(it)->setItemType(it);
 	}
+
+	reloadButtonGroup();
 
 	setPosition(m_position);
 }

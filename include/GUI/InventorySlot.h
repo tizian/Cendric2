@@ -21,6 +21,7 @@ public:
 
 	ItemType getItemType() const { return m_type; }
 	void setItemType(ItemType type) { m_type = type; }
+	void hideTooltip();
 
 	float getConfiguredSize() const override { return SIZE; }
 	float getConfiguredIconOffset() const override { return ICON_OFFSET; }
