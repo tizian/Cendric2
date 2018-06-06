@@ -84,7 +84,7 @@ private:
 	// first is the id, the second is VOID when it is no equiment slot and an Item Type when it is an equipment slot
 	std::pair<std::string, ItemType> m_selectedSlotId;
 	void selectTab(ItemType type);
-	void reloadButtonGroup();
+	void reloadButtonGroup(bool keepSelectedButton = true);
 	// item type shall be VOID for not-equipment-slots
 	void selectSlot(const std::string& selectedSlotId, ItemType type);
 	void deselectCurrentSlot();

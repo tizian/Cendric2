@@ -246,7 +246,7 @@ void Inventory::notifyChange(const std::string itemID) {
 	reloadButtonGroup();
 }
 
-void Inventory::reloadButtonGroup() {
+void Inventory::reloadButtonGroup(bool keepSelectedButton) {
 	int previouslySelectedId = 0;
 	if (m_buttonGroup) {
 		previouslySelectedId = m_buttonGroup->getSelectedButtonId();
@@ -263,8 +263,9 @@ void Inventory::reloadButtonGroup() {
 		m_buttonGroup->addButton(it.second);
 	}
 
-	m_buttonGroup->selectButton(previouslySelectedId);
-
+	if (keepSelectedButton) {
+		m_buttonGroup->selectButton(previouslySelectedId);
+	}
 }
 
 void Inventory::handleMapRightClick(const InventorySlot* clicked) {
@@ -887,7 +888,7 @@ void Inventory::selectTab(ItemType type) {
 		slot.second->hideTooltip();
 	}
 
-	reloadButtonGroup();
+	reloadButtonGroup(false);
 }
 
 void Inventory::reloadGold() {
