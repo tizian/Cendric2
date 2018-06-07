@@ -3,7 +3,6 @@
 #include "global.h"
 #include "World/GameObject.h"
 
-#include "GUI/BitmapText.h"
 #include "GUI/ButtonInterface.h"
 
 class TooltipWindowComponent;

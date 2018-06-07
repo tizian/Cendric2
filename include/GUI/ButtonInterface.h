@@ -13,6 +13,7 @@ public:
 
 	virtual void setEnabled(bool enabled);
 	virtual void notifyFirstSelection() {};
+	virtual void notifySelection() {};
 	void setVisible(bool visible);
 	void setSelected(bool selected);
 

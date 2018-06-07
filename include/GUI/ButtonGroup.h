@@ -17,6 +17,7 @@ public:
 
 	void addButton(ButtonInterface* button);
 	void selectButton(int index);
+	void notifyButtonSelected(int index);
 
 	void setEnabled(bool enabled);
 	void setGamepadEnabled(bool enabled);

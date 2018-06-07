@@ -514,15 +514,17 @@ void Inventory::update(const sf::Time& frameTime) {
 
 		const auto considerSlot = 
 			(!isSlotInvisible(slot) && slot->isMousedOver()) || 
-			(slot->isSelected() && isWindowSelected());
+			(slot->isSelected() && isWindowSelected() && slot->isSelectedByButtonGroup());
 
 		if (!isSlotInvisible(slot) || considerSlot) {
 			slot->update(frameTime);
+		} else {
+			slot->hideTooltip();
 		}
 
 		if (considerSlot && !m_hasDraggingStarted) {
 			selectSlot(slot->getItemID(), ItemType::VOID);
-			m_buttonGroup->selectButton(i);
+			m_buttonGroup->notifyButtonSelected(i);
 
 			if (isSlotInvisible(slot)) {
 				if (slot->getPosition().y < GUIConstants::TOP + SCROLL_WINDOW_TOP) {
@@ -547,7 +549,7 @@ void Inventory::update(const sf::Time& frameTime) {
 	}
 
 	m_tabBar->update(frameTime);
-	int activeIndex = m_tabBar->getActiveTabIndex();
+	const auto activeIndex = m_tabBar->getActiveTabIndex();
 	ItemType type;
 	if (activeIndex == 0) {
 		type = ItemType::Equipment_weapon;
@@ -595,7 +597,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		return;
 	}
 
-	InventorySlot* selectedSlot = getSelectedSlot();
+	auto selectedSlot = getSelectedSlot();
 
 	if (g_inputController->isMouseJustPressedLeftRaw() && selectedSlot->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
 		m_hasDraggingStarted = true;

@@ -194,7 +194,16 @@ void ButtonGroup::selectButton(int index) {
 
 	m_selectedButtonIndex = index;
 	m_buttons[index]->setSelected(true);
+	m_buttons[m_selectedButtonIndex]->notifySelection();
 	g_inputController->lockAction();
+}
+
+void ButtonGroup::notifyButtonSelected(int index) {
+	if (index < 0 || index > static_cast<int>(m_buttons.size()) - 1) {
+		return;
+	}
+
+	m_selectedButtonIndex = index;
 }
 
 void ButtonGroup::setSelectableWindow(SelectableWindow* window) {
