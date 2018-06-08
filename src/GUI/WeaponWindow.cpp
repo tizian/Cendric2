@@ -189,6 +189,13 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 	m_window->update(frameTime);
 }
 
+void WeaponWindow::updateWindowSelected() {
+}
+
+void WeaponWindow::updateButtonActions() {
+
+}
+
 void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 

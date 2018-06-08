@@ -135,21 +135,25 @@ void ScrollBar::setPosition(const sf::Vector2f& pos) {
 
 void ScrollBar::update(const sf::Time& frameTime) {
 	m_time += frameTime;
+	m_isTouchedThisFrame = false;
 
 	if (!m_isVisible || !m_isEnabled) return;
 
 	if (m_window == nullptr || m_window->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
 		if (g_inputController->isMouseWheelScrolledUp()) {
 			scroll(-1);
+			m_isTouchedThisFrame = true;
 		}
 		else if (g_inputController->isMouseWheelScrolledDown()) {
 			scroll(1);
+			m_isTouchedThisFrame = true;
 		}
 	}
 
 	m_knob.update(frameTime);
 	if (m_knob.isPressed()) {
 		handleDragAndDrop();
+		m_isTouchedThisFrame = true;
 	}
 	GameObject::update(frameTime);
 }
@@ -168,6 +172,10 @@ bool ScrollBar::isEnabled() const {
 
 bool ScrollBar::isVisible() const {
 	return m_isVisible;
+}
+
+bool ScrollBar::isTouchedThisFrame() const {
+	return m_isTouchedThisFrame;
 }
 
 sf::Time ScrollBar::getScrollTime() const {

@@ -1,5 +1,6 @@
 #include "GUI/WorldInterface.h"
 #include "GUI/GUITabButton.h"
+#include "GUI/WeaponWindow.h"
 #include "Screens/WorldScreen.h"
 #include "GlobalResource.h"
 
@@ -162,6 +163,8 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 	m_questLog->setWindowSelected(false);
 	m_mapSidebar->setWindowSelected(false);
 	m_mapOverlay->setWindowSelected(false);
+	m_spellbook->setWindowSelected(false);
+	m_spellbook->getWeaponWindow()->setWindowSelected(false);
 
 	m_guiSidebar->setRightWindow(nullptr);
 	m_guiSidebar->setWindowSelected(true);
@@ -178,6 +181,8 @@ void WorldInterface::connectGuiElements(GUIElement type) {
 		m_inventory->getEquipment()->setRightWindow(m_inventory);
 		return;
 	case GUIElement::Spellbook:
+		m_guiSidebar->setRightWindow(m_spellbook);
+		m_spellbook->setRightWindow(m_spellbook->getWeaponWindow());
 		return;
 	case GUIElement::Journal:
 		m_guiSidebar->setRightWindow(m_questLog);

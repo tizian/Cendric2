@@ -75,6 +75,10 @@ void InventorySlot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_amountText);
 }
 
+void InventorySlot::setSelectedByButtonGroup(bool isSelected) {
+	m_isSelectedByButtonGroup = isSelected;
+}
+
 void InventorySlot::select() {
 	Slot::select();
 	m_isSelectedByButtonGroup = false;

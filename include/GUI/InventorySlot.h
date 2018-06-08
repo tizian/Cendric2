@@ -16,6 +16,7 @@ public:
 
 	void setAmount(int amount);
 	void setPosition(const sf::Vector2f& pos) override;
+	void setSelectedByButtonGroup(bool isSelected);
 
 	const std::string& getItemID() const;
 	const Item* getItem() const;

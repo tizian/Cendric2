@@ -506,6 +506,10 @@ void Inventory::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	m_scrollBar->update(frameTime);
+	if (m_scrollBar->isTouchedThisFrame()) {
+		dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton())->setSelectedByButtonGroup(false);
+	}
+
 	m_buttonGroup->update(frameTime);
 
 	// check whether an item was selected
@@ -605,8 +609,16 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		m_startMousePosition = g_inputController->getDefaultViewMousePosition();
 	}
 
-	if (selectedSlotId == m_selectedSlotId.first) return;
+	if (selectedSlotId == m_selectedSlotId.first) {
+		return;
+	}
 
+	if (dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton())->getItemID() == selectedSlotId) {
+		m_selectedSlotId.first = selectedSlotId;
+		m_selectedSlotId.second = type;
+		return;
+	}
+	    
 	deselectCurrentSlot();
 	m_selectedSlotId.first = selectedSlotId;
 	m_selectedSlotId.second = type;

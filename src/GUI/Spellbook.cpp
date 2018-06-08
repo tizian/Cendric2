@@ -132,6 +132,14 @@ void Spellbook::update(const sf::Time& frameTime) {
 	handleDragAndDrop();
 }
 
+void Spellbook::updateWindowSelected() {
+	m_tabBar->setGamepadEnabled(isWindowSelected());
+}
+
+void Spellbook::updateButtonActions() {
+
+}
+
 void Spellbook::selectModifierSlot(ModifierSlot* selectedSlot) {
 	if (selectedSlot == nullptr) return;
 
@@ -321,6 +329,10 @@ void Spellbook::selectTab(SpellType type) {
 	if (reload) {
 		m_weaponWindow->reload();
 	}
+}
+
+WeaponWindow* Spellbook::getWeaponWindow() const {
+	return m_weaponWindow;
 }
 
 void Spellbook::reload() {

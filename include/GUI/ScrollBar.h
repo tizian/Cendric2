@@ -61,6 +61,7 @@ public:
 
 	bool isEnabled() const;
 	bool isVisible() const;
+	bool isTouchedThisFrame() const;
 	float getScrollPosition() const;
 	int getDiscreteScrollPosition() const;
 
@@ -80,6 +81,7 @@ protected:
 	bool m_isPressed = false;
 	bool m_isEnabled = true;
 	bool m_isVisible = true;
+	bool m_isTouchedThisFrame = false;
 	float m_scrollPosition = 0.f;
 
 	// drag & drop handling

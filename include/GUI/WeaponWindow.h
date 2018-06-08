@@ -12,6 +12,7 @@
 #include "GUI/SpellDescriptionWindow.h"
 #include "World/Weapon.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/SelectableWindow.h"
 
 class SlotClone;
 class WorldInterface;
@@ -19,7 +20,7 @@ class WorldInterface;
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
 // is only modifiable when modifiable is true
-class WeaponWindow final {
+class WeaponWindow final : public SelectableWindow {
 	friend class Spellbook;
 public:
 	WeaponWindow(WorldInterface* _interface, bool modifiable);
@@ -49,6 +50,10 @@ public:
 	// reloads depending on the core and its weapon
 	void reload();
 
+protected:
+	void updateWindowSelected() override;
+	void updateButtonActions();
+
 private:
 	WorldInterface* m_interface;
 	CharacterCore* m_core;
@@ -62,7 +67,6 @@ private:
 	void clearAllSlots();
 	void notifyLevelReload();
 
-	Window* m_window = nullptr;
 	const Weapon* m_weapon;
 
 	InventorySlot* m_weaponSlot = nullptr;

@@ -9,6 +9,7 @@
 #include "GUI/TexturedTabBar.h"
 #include "GUI/ModifierSlot.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/SelectableWindow.h"
 
 class WeaponWindow;
 class SlotClone;
@@ -17,7 +18,7 @@ class WorldInterface;
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
 // it is only clickable when in a map.
-class Spellbook final {
+class Spellbook final : public SelectableWindow {
 public:
 	Spellbook(WorldInterface* _interface, bool modifiable);
 	~Spellbook();
@@ -30,11 +31,16 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	// reloads the spellbook spells & modifiers, depending on the core
 	void reload();
+
+	WeaponWindow* getWeaponWindow() const;
 
 	static float WIDTH;
 	static float SPELL_OFFSET;
+
+protected:
+	void updateWindowSelected() override;
+	void updateButtonActions();
 
 private:
 	CharacterCore* m_core;
@@ -45,7 +51,6 @@ private:
 	void init();
 	void clearAllSlots();
 
-	Window* m_window = nullptr;
 	WeaponWindow* m_weaponWindow = nullptr;
 
 	BitmapText m_selectedTabText;
