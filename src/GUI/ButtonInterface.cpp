@@ -37,6 +37,10 @@ bool ButtonInterface::isMousedOver() const {
 	return m_isMouseOver;
 }
 
+bool ButtonInterface::isActive() const {
+	return m_isActive;
+}
+
 bool ButtonInterface::isVisibleAndEnabled() const {
 	return m_isVisible && m_isEnabled;
 }

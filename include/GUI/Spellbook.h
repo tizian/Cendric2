@@ -10,6 +10,7 @@
 #include "GUI/ModifierSlot.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/SelectableWindow.h"
+#include "GUI/SpellButtonGroup.h"
 
 class WeaponWindow;
 class SlotClone;
@@ -34,13 +35,18 @@ public:
 	void reload();
 
 	WeaponWindow* getWeaponWindow() const;
+	bool isGamepadSelection() const;
+	void stopGamepadSelection();
+	void notifyGamepadSelected();
 
 	static float WIDTH;
 	static float SPELL_OFFSET;
 
 protected:
 	void updateWindowSelected() override;
+	void reloadButtonGroup();
 	void updateButtonActions();
+	void startGamepadSelection();
 
 private:
 	CharacterCore* m_core;
@@ -67,6 +73,8 @@ private:
 	std::vector<std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>> m_necromancySlots;
 	std::vector<std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>> m_divineSlots;
 
+	SpellButtonGroup* m_buttonGroup = nullptr;
+
 	void calculateModifierSlots();
 	void calculateSpellSlots();
 
@@ -90,6 +98,7 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 	void stopDragging();
+	bool m_isGamepadSelection = false;
 
 	static const sf::Vector2f BUTTON_SIZE;
 	const float MARGIN = 5.f;

@@ -18,6 +18,7 @@ public:
 	void addButton(ButtonInterface* button, int yIndex);
 	void selectButton(int yIndex, int xIndex);
 	void notifyButtonSelected(int yIndex, int xIndex);
+	void setWindowLock(bool isLocked);
 
 	void setEnabled(bool enabled);
 	void setGamepadEnabled(bool enabled);
@@ -36,6 +37,7 @@ private:
 
 	bool m_isEnabled;
 	bool m_isGamepadEnabled;
+	bool m_isWindowLock;
 	int m_selectedButtonIndexX;
 	int m_selectedButtonIndexY;
 

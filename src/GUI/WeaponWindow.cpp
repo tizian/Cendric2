@@ -1,14 +1,17 @@
 #include "GUI/WeaponWindow.h"
 #include "GUI/SlotClone.h"
+#include "GUI/Spellbook.h"
 #include "Level/LevelInterface.h"
 #include "ResourceManager.h"
 
-WeaponWindow::WeaponWindow(WorldInterface* _interface, bool modifiable) {
+WeaponWindow::WeaponWindow(WorldInterface* _interface, Spellbook* spellbook, bool modifiable) {
 	m_interface = _interface;
+	m_spellBook = spellbook;
 	m_core = m_interface->getCore();
 	m_isModifiable = modifiable;
 
 	init();
+	reloadButtonGroup();
 }
 
 void WeaponWindow::addCloseButton(const std::function<void()>& agent) {
@@ -51,6 +54,7 @@ void WeaponWindow::reload() {
 	if (m_weapon->getWeaponSlots().empty()) {
 		m_noSlotsText.setString(g_textProvider->getCroppedText("EquipWeapon", GUIConstants::CHARACTER_SIZE_M,
 			static_cast<int>(WIDTH - (GUIConstants::TEXT_OFFSET + SpellSlot::ICON_OFFSET))));
+		reloadButtonGroup();
 		return;
 	}
 	m_noSlotsText.setString("");
@@ -83,12 +87,29 @@ void WeaponWindow::reload() {
 		slotNr++;
 		m_weaponSlots.push_back(std::pair<SpellSlot*, std::vector<ModifierSlot*>>({ spellSlot, modifiers }));
 	}
-	
+
 	if (m_previouslySelectedSpellSlot >= 0 && static_cast<int>(m_weaponSlots.size()) > m_previouslySelectedSpellSlot) {
 		selectSpellSlot(m_weaponSlots.at(m_previouslySelectedSpellSlot).first);
 	}
 
 	notifyLevelReload();
+	reloadButtonGroup();
+}
+
+void WeaponWindow::reloadButtonGroup() {
+	delete m_buttonGroup;
+	m_buttonGroup = new SpellButtonGroup();
+	m_buttonGroup->setSelectableWindow(this);
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	int yIndex = -1;
+	for (auto& weaponSlots : m_weaponSlots) {
+		++yIndex;
+		m_buttonGroup->addButton(weaponSlots.first, yIndex);
+		for (auto modifierSlot : weaponSlots.second) {
+			m_buttonGroup->addButton(modifierSlot, yIndex);
+		}
+	}
 }
 
 void WeaponWindow::reloadSpellDesc() {
@@ -99,7 +120,16 @@ void WeaponWindow::reloadSpellDesc() {
 			modifiers.push_back(it->getModifier());
 		}
 	}
-	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, m_core->getTotalAttributes());
+
+	bool isWeaponOrigin = false;
+	for (auto& it : m_weaponSlots) {
+		if (it.first == m_selectedSpellSlot) {
+			isWeaponOrigin = true;
+			break;
+		}
+	}
+
+	m_spellDesc->reload(m_selectedSpellSlot->getSpellID(), modifiers, m_core->getTotalAttributes(), isWeaponOrigin);
 	m_spellDesc->show();
 }
 
@@ -131,6 +161,7 @@ WeaponWindow::~WeaponWindow() {
 	delete m_currentSpellClone;
 	delete m_weaponSlot;
 	delete m_spellDesc;
+	delete m_buttonGroup;
 }
 
 void WeaponWindow::clearAllSlots() {
@@ -145,44 +176,53 @@ void WeaponWindow::clearAllSlots() {
 	m_selectedModifierSlot = nullptr;
 	m_selectedSpellSlot = nullptr;
 	m_spellDesc->hide();
+
+	reloadButtonGroup();
 }
 
 void WeaponWindow::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
-	if (m_requireReload) reload();
+	if (m_requireReload) {
+		reload();
+	}
 
+	m_buttonGroup->update(frameTime);
+
+	auto yIndex = 0;
 	for (auto& it : m_weaponSlots) {
-		it.first->update(frameTime);
-		if (it.first->isMousedOver() && !m_hasDraggingStarted) {
+		if (it.first->isSelected() || (it.first->isMousedOver() && !m_hasDraggingStarted && !m_spellBook->isGamepadSelection())) {
 			selectSpellSlot(it.first);
-			if (m_isModifiable && it.first->isDoubleClicked()) {
+			m_buttonGroup->selectButton(yIndex, 0);
+			if (m_isModifiable && it.first->isDoubleClicked() && !m_spellBook->isGamepadSelection()) {
 				removeSpell(*it.first);
 				return;
 			}
-			if (m_isModifiable && it.first->isRightClicked()) {
+			if (m_isModifiable && it.first->isRightClicked() && !m_spellBook->isGamepadSelection()) {
 				removeSpell(*it.first);
 				return;
 			}
 		}
 
 		for (auto it2 : it.second) {
-			it2->update(frameTime);
 			if (it2->isClicked()) {
 				selectModifierSlot(it2);
-				if (m_isModifiable && it2->isDoubleClicked()) {
+				if (m_isModifiable && it2->isDoubleClicked() && !m_spellBook->isGamepadSelection()) {
 					removeModifier(*it2);
 				}
 				return;
 			}
-			else if (m_isModifiable && it2->isRightClicked()) {
+			else if (m_isModifiable && it2->isRightClicked() && !m_spellBook->isGamepadSelection()) {
 				removeModifier(*it2);
 				return;
 			}
 		}
+
+		yIndex++;
 	}
 
 	if (m_isModifiable) {
+		updateButtonActions();
 		handleDragAndDrop();
 	}
 
@@ -190,10 +230,50 @@ void WeaponWindow::update(const sf::Time& frameTime) {
 }
 
 void WeaponWindow::updateWindowSelected() {
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 }
 
 void WeaponWindow::updateButtonActions() {
+	if (!g_inputController->isGamepadConnected() || !isWindowSelected() || g_inputController->isActionLocked()) {
+		return;
+	}
 
+	if (m_spellBook->isGamepadSelection()) {
+		if (g_inputController->isKeyJustPressed(Key::Escape)) {
+			g_inputController->lockAction();
+
+			m_spellBook->stopGamepadSelection();
+			setLeftWindowSelected();
+		}
+
+		else if (g_inputController->isKeyJustPressed(Key::Interact)) {
+			g_inputController->lockAction();
+
+			m_spellBook->notifyGamepadSelected();
+			m_spellBook->stopGamepadSelection();
+			setLeftWindowSelected();
+		}
+		return;
+	}
+
+	auto selectedSlot = m_buttonGroup->getSelectedButton();
+	if (!selectedSlot) return;
+
+	if (g_inputController->isKeyJustPressed(Key::Interact)) {
+		g_inputController->lockAction();
+
+		auto spellSlot = dynamic_cast<SpellSlot*>(selectedSlot);
+		if (spellSlot) {
+			removeSpell(*spellSlot);
+			return;
+		}
+
+		auto modifierSlot = dynamic_cast<ModifierSlot*>(selectedSlot);
+		if (modifierSlot) {
+			removeModifier(*modifierSlot);
+			return;
+		}
+	}
 }
 
 void WeaponWindow::selectModifierSlot(ModifierSlot* selectedSlot) {
@@ -279,6 +359,7 @@ void WeaponWindow::stopDragging() {
 
 void WeaponWindow::handleDragAndDrop() {
 	if (!m_hasDraggingStarted) return;
+	if (m_spellBook->isGamepadSelection()) return;
 	if (!(g_inputController->isMousePressedLeft())) {
 		stopDragging();
 		return;
@@ -361,6 +442,25 @@ void WeaponWindow::highlightSpellSlots(SpellType type, bool highlight) {
 	}
 }
 
+void WeaponWindow::notifySpellSlotActivation(SpellType type) {
+	for (auto& it : m_weaponSlots) {
+		if (it.first->getSpellType() == SpellType::Meta || it.first->getSpellType() == type) {
+			it.first->activate();
+			it.first->deselect();
+		}
+		else {
+			it.first->deactivate();
+			it.first->deselect();
+		}
+		for (auto& it2 : it.second) {
+			it2->deactivate();
+			it2->deselect();
+		}
+	}
+
+	reloadButtonGroup();
+}
+
 void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight) {
 	for (auto& it : m_weaponSlots) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first->getSpellID());
@@ -377,17 +477,65 @@ void WeaponWindow::highlightModifierSlots(SpellModifierType type, bool highlight
 	}
 }
 
-void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
-	if (clone == nullptr) return;
+void WeaponWindow::notifyModifierSlotActivation(SpellModifierType type) {
+	for (auto& it : m_weaponSlots) {
+		it.first->deactivate();
+		it.first->deselect();
+		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first->getSpellID());
+		if (contains(allowedMods, type)) {
+			for (auto& it2 : it.second) {
+				it2->activate();
+				it2->deselect();
+			}
+		}
+		else {
+			for (auto& it2 : it.second) {
+				it2->deactivate();
+				it2->deselect();
+			}
+		}
+	}
+
+	reloadButtonGroup();
+}
+
+void WeaponWindow::activateAll() {
+	for (auto& it : m_weaponSlots) {
+		it.first->activate();
+		for (auto& it2 : it.second) {
+			it2->activate();
+		}
+	}
+
+	reloadButtonGroup();
+}
+
+void WeaponWindow::notifyModifierDrop(SlotClone* clone, bool onSelected) {
+	if (clone == nullptr) {
+		return;
+	}
+
 	const ModifierSlot* ms = dynamic_cast<const ModifierSlot*>(clone->getOriginalSlot());
+
+	if (ms == nullptr) {
+		return;
+	}
+
 	SpellModifier modifier = ms->getModifier();
 	bool modifierPlaced = false;
+
+	ModifierSlot* selectedSlot = nullptr;
+
+	if (onSelected) {
+		selectedSlot = dynamic_cast<ModifierSlot*>(m_buttonGroup->getSelectedButton());
+		if (!selectedSlot) return;
+	}
 
 	for (auto& it : m_weaponSlots) {
 		std::vector<SpellModifierType> allowedMods = SpellData::getAllowedModifiers(it.first->getSpellID());
 		if (!contains(allowedMods, modifier.type)) continue;
 		for (auto modifierSlot : it.second) {
-			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot->getBoundingBox())) {
+			if (fastIntersect(*clone->getBoundingBox(), *modifierSlot->getBoundingBox()) || modifierSlot == selectedSlot) {
 				m_core->addModifier(ms->getModifier(), modifierSlot->getSpellSlotNr(), modifierSlot->getNr());
 				g_resourceManager->playSound(GlobalResource::SOUND_GUI_GEM);
 				m_requireReload = true;
@@ -401,13 +549,32 @@ void WeaponWindow::notifyModifierDrop(SlotClone* clone) {
 	}
 }
 
-void WeaponWindow::notifySpellDrop(SlotClone* clone) {
-	if (clone == nullptr) return;
+void WeaponWindow::setWindowLock(bool isLocked) {
+	m_buttonGroup->setWindowLock(isLocked);
+}
+
+void WeaponWindow::notifySpellDrop(SlotClone* clone, bool onSelected) {
+	if (clone == nullptr) {
+		return;
+	}
+
 	const SpellSlot* ss = dynamic_cast<const SpellSlot*>(clone->getOriginalSlot());
+
+	if (ss == nullptr) {
+		return;
+	}
+
+	SpellSlot* selectedSlot = nullptr;
+
+	if (onSelected) {
+		selectedSlot = dynamic_cast<SpellSlot*>(m_buttonGroup->getSelectedButton());
+		if (!selectedSlot) return;
+	}
+
 	SpellType type = SpellData::getSpellData(ss->getSpellID()).spellType;
 	for (auto& slot : m_weaponSlots) {
 		if ((slot.first->getSpellType() == SpellType::Meta || type == slot.first->getSpellType())
-			&& fastIntersect(*clone->getBoundingBox(), *slot.first->getBoundingBox()))
+			&& (fastIntersect(*clone->getBoundingBox(), *slot.first->getBoundingBox()) || selectedSlot == slot.first))
 		{
 			m_core->addSpell(ss->getSpellID(), slot.first->getNr());
 			g_resourceManager->playSound(GlobalResource::SOUND_GUI_SPELL);

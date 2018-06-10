@@ -219,7 +219,7 @@ void SpellSlot::select() {
 }
 
 void SpellSlot::deselect() {
-	if (!m_isSelected || m_isEmpty) return;
+	if (!m_isSelected) return;
 	Slot::deselect();
 	m_inputKey.setColor(COLOR_WHITE);
 }

@@ -41,6 +41,12 @@ void InputController::updateMouseVisibility(const sf::Time& frameTime) {
 		return;
 	}
 
+	if (isMousePressedLeft() || isMousePressedRight()) {
+		m_cursor.setVisible(true);
+		m_mouseTimeout = MOUSE_TIMEOUT;
+		return;
+	}
+
 	auto newMousePos = getDefaultViewMousePosition();
 	auto const distance = dist(newMousePos, m_oldMousePosition) * frameTime.asSeconds();
 	m_oldMousePosition = newMousePos;

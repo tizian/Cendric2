@@ -49,6 +49,7 @@ void Slot::adjustTooltipOffset() {
 }
 
 void Slot::activate() {
+	m_isActive = true;
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 0));
 	if (m_isSelected) {
 		m_borderRect.setTexture(m_borderTextureSelected);
@@ -61,6 +62,7 @@ void Slot::activate() {
 }
 
 void Slot::deactivate() {
+	m_isActive = false;
 	m_overlayRect.setFillColor(sf::Color(0, 0, 0, 128));
 	m_borderRect.setTexture(m_borderTexture);
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
@@ -88,7 +90,7 @@ void Slot::select() {
 }
 
 void Slot::deselect() {
-	if (m_isEmpty || !m_isSelected) return;
+	if (!m_isSelected) return;
 	m_isSelected = false;
 	m_borderRect.setTexture(m_borderTexture);
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);

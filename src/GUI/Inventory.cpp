@@ -616,6 +616,7 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 	if (dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton())->getItemID() == selectedSlotId) {
 		m_selectedSlotId.first = selectedSlotId;
 		m_selectedSlotId.second = type;
+		showDescription(getSelectedSlot()->getItem(), getSelectedSlot()->isEquipmentOrigin());
 		return;
 	}
 	    

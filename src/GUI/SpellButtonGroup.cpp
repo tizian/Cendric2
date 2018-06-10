@@ -8,6 +8,7 @@ SpellButtonGroup::SpellButtonGroup() {
 	m_selectedButtonIndexY = -1;
 	m_isEnabled = true;
 	m_isGamepadEnabled = true;
+	m_isWindowLock = false;
 }
 
 SpellButtonGroup::~SpellButtonGroup() {
@@ -64,10 +65,11 @@ void SpellButtonGroup::addButton(ButtonInterface* button, int yIndex) {
 	}
 
 	m_buttons[yIndex].push_back(button);
-	
-	if (m_selectedButtonIndexX == -1) {
-		selectButton(yIndex, 0);
-		m_buttons[yIndex][0]->notifyFirstSelection();
+	int xIndex = static_cast<int>(m_buttons[yIndex].size()) - 1;
+
+	if (m_selectedButtonIndexX == -1 && m_buttons[yIndex][xIndex]->isActive()) {
+		selectButton(yIndex, xIndex);
+		m_buttons[yIndex][xIndex]->notifyFirstSelection();
 	}
 }
 
@@ -100,7 +102,23 @@ ButtonInterface* SpellButtonGroup::getButton(int yIndex, int xIndex) const {
 }
 
 void SpellButtonGroup::updateSelection() {
-	if (g_inputController->isActionLocked() || m_selectedButtonIndexX == -1) {
+	if (g_inputController->isActionLocked()) {
+		return;
+	}
+
+	if (m_selectedButtonIndexX == -1) {
+		if (g_inputController->isJustLeft() && !m_isWindowLock) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setLeftWindowSelected();
+				g_inputController->lockAction();
+			}
+		}
+		else if (g_inputController->isJustRight() && !m_isWindowLock) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setRightWindowSelected();
+				g_inputController->lockAction();
+			}
+		}
 		return;
 	}
 
@@ -118,7 +136,7 @@ void SpellButtonGroup::updateSelection() {
 	}
 
 	auto button = getSelectedButton();
-	if (button->isVisibleAndEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
+	if (button->isActive() && g_inputController->isKeyJustPressed(Key::Confirm)) {
 		button->click();
 	}
 }
@@ -136,28 +154,28 @@ int SpellButtonGroup::getNextEnabledButtonX(bool forward) {
 
 	if (forward) {
 		if (m_selectedButtonIndexX + 1 == static_cast<int>(buttonRow.size())) {
-			if (m_selectableWindow) {
+			if (m_selectableWindow && !m_isWindowLock) {
 				m_selectableWindow->setRightWindowSelected();
 				g_inputController->lockAction();
 			}
 		}
 
 		for (int i = m_selectedButtonIndexX + 1; i < static_cast<int>(buttonRow.size()); i++) {
-			if (buttonRow[i]->isVisibleAndEnabled()) {
+			if (buttonRow[i]->isActive()) {
 				return i;
 			}
 		}
 	}
 	else {
 		if (m_selectedButtonIndexX == 0) {
-			if (m_selectableWindow) {
+			if (m_selectableWindow && !m_isWindowLock) {
 				m_selectableWindow->setLeftWindowSelected();
 				g_inputController->lockAction();
 			}
 		}
 
 		for (int i = m_selectedButtonIndexX - 1; i > -1; i--) {
-			if (buttonRow[i]->isVisibleAndEnabled()) {
+			if (buttonRow[i]->isActive()) {
 				return i;
 			}
 		}
@@ -167,25 +185,21 @@ int SpellButtonGroup::getNextEnabledButtonX(bool forward) {
 }
 
 int SpellButtonGroup::getNextEnabledButtonY(bool forward) {
+	if (m_selectedButtonIndexX == -1) {
+		return -1;
+	}
+
 	if (forward) {
 		for (int i = m_selectedButtonIndexY + 1; i < static_cast<int>(m_buttons.size()); ++i) {
-			if (static_cast<int>(m_buttons[i].size()) > m_selectedButtonIndexX) {
+			if (static_cast<int>(m_buttons[i].size()) > m_selectedButtonIndexX && m_buttons[i][m_selectedButtonIndexX]->isActive()) {
 				return i;
-			}
-
-			if (static_cast<int>(m_buttons[i].size()) > 0) {
-				return 1;
 			}
 		}
 	}
 	else {
-		for (int i = m_selectedButtonIndexY - 1; i > -1; -i) {
-			if (static_cast<int>(m_buttons[i].size()) > m_selectedButtonIndexX) {
+		for (int i = m_selectedButtonIndexY - 1; i > -1; --i) {
+			if (static_cast<int>(m_buttons[i].size()) > m_selectedButtonIndexX && m_buttons[i][m_selectedButtonIndexX]->isActive()) {
 				return i;
-			}
-
-			if (static_cast<int>(m_buttons[i].size()) > 0) {
-				return 1;
 			}
 		}
 	}
@@ -228,6 +242,10 @@ void SpellButtonGroup::notifyButtonSelected(int yIndex, int xIndex) {
 
 	m_selectedButtonIndexY = yIndex;
 	m_selectedButtonIndexX = xIndex;
+}
+
+void SpellButtonGroup::setWindowLock(bool isLocked) {
+	m_isWindowLock = isLocked;
 }
 
 void SpellButtonGroup::setSelectableWindow(SelectableWindow* window) {

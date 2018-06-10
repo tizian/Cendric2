@@ -23,6 +23,7 @@ public:
 	bool isVisible() const;
 	bool isSelected() const;
 	bool isMousedOver() const;
+	bool isActive() const;
 	bool isVisibleAndEnabled() const;
 
 	GameObjectType getConfiguredType() const override;
@@ -36,4 +37,5 @@ protected:
 	bool m_isEnabled = true;
 	bool m_isVisible = true;
 	bool m_isSelected = false;
+	bool m_isActive = true;
 };

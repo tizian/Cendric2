@@ -13,9 +13,11 @@
 #include "World/Weapon.h"
 #include "GUI/GUIConstants.h"
 #include "GUI/SelectableWindow.h"
+#include "GUI/SpellButtonGroup.h"
 
 class SlotClone;
 class WorldInterface;
+class Spellbook;
 
 // weapon screen, describing a weapon and its equipped spells
 // is displayed and updated as a part of the Spellbook.
@@ -23,7 +25,7 @@ class WorldInterface;
 class WeaponWindow final : public SelectableWindow {
 	friend class Spellbook;
 public:
-	WeaponWindow(WorldInterface* _interface, bool modifiable);
+	WeaponWindow(WorldInterface* _interface, Spellbook* spellbook, bool modifiable);
 	~WeaponWindow();
 
 	void show();
@@ -39,13 +41,18 @@ public:
 	// highlights all slots that could take a spell modifier of this type.
 	// if highlight is false, unhighlights all modifier slots.
 	void highlightModifierSlots(SpellModifierType type, bool highlight);
-	void notifyModifierDrop(SlotClone* clone);
+	void notifyModifierSlotActivation(SpellModifierType type);
+	void notifyModifierDrop(SlotClone* clone, bool onSelected = false);
+	void setWindowLock(bool isLocked);
 
 	// highlights all slots that could take a spell of this type.
 	// if highlight is false, unhighlights all spell slots.
 	void highlightSpellSlots(SpellType type, bool highlight);
-	void notifySpellDrop(SlotClone* clone);
+	void notifySpellSlotActivation(SpellType type);
+	void notifySpellDrop(SlotClone* clone, bool onSelected = false);
 	void equipSpell(const SpellSlot* spellSlot);
+
+	void activateAll();
 
 	// reloads depending on the core and its weapon
 	void reload();
@@ -53,9 +60,11 @@ public:
 protected:
 	void updateWindowSelected() override;
 	void updateButtonActions();
+	void reloadButtonGroup();
 
 private:
 	WorldInterface* m_interface;
+	Spellbook* m_spellBook;
 	CharacterCore* m_core;
 	SpellDescriptionWindow* m_spellDesc = nullptr;
 	void reloadSpellDesc();
@@ -74,6 +83,7 @@ private:
 	BitmapText m_noSlotsText;
 
 	std::vector<std::pair<SpellSlot*, std::vector<ModifierSlot*>>> m_weaponSlots;
+	SpellButtonGroup* m_buttonGroup = nullptr;
 
 	void selectModifierSlot(ModifierSlot* selectedSlot);
 	void selectSpellSlot(SpellSlot* selectedSlot);

@@ -214,17 +214,20 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 			guiElement->hide();
 			m_guiSidebar->hide();
 		}
+		return;
 	}
-	else if (guiElement->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
-		guiElement->hide();
-		m_guiSidebar->hide();
-		g_inputController->lockAction();
-	}
-	else if (!guiElement->isVisible() && m_guiSidebar->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
+
+	if (!guiElement->isVisible() && m_guiSidebar->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
 		showGuiElement(guiElement, type);
 	}
 
 	guiElement->update(frameTime);
+
+	if (guiElement->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
+		guiElement->hide();
+		m_guiSidebar->hide();
+		g_inputController->lockAction();
+	}
 }
 
 CharacterCore* WorldInterface::getCore() const {

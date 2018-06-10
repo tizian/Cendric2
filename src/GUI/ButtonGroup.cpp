@@ -63,9 +63,10 @@ void ButtonGroup::setGamepadEnabled(bool enabled) {
 
 void ButtonGroup::addButton(ButtonInterface* button) {
 	m_buttons.push_back(button);
-	if (m_selectedButtonIndex == -1) {
-		selectButton(0);
-		m_buttons[0]->notifyFirstSelection();
+	int index = static_cast<int>(m_buttons.size()) - 1;
+	if (m_selectedButtonIndex == -1 && m_buttons[index]->isVisibleAndEnabled()) {
+		selectButton(index);
+		m_buttons[index]->notifyFirstSelection();
 	}
 }
 
@@ -90,7 +91,23 @@ const std::vector<ButtonInterface*>& ButtonGroup::getButtons() const {
 }
 
 void ButtonGroup::updateSelection() {
-	if (g_inputController->isActionLocked() || m_selectedButtonIndex == -1) {
+	if (g_inputController->isActionLocked()) {
+		return;
+	}
+
+	if (m_selectedButtonIndex == -1) {
+		if (g_inputController->isJustLeft()) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setLeftWindowSelected();
+				g_inputController->lockAction();
+			}
+		}
+		else if (g_inputController->isJustRight()) {
+			if (m_selectableWindow) {
+				m_selectableWindow->setRightWindowSelected();
+				g_inputController->lockAction();
+			}
+		}
 		return;
 	}
 
@@ -107,7 +124,7 @@ void ButtonGroup::updateSelection() {
 		setNextButtonSelectedY(true);
 	}
 
-	auto button = m_buttons[m_selectedButtonIndex];
+	auto button = getSelectedButton();
 	if (button->isVisibleAndEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
 		button->click();
 	}
@@ -167,6 +184,7 @@ int ButtonGroup::getNextEnabledButtonY(bool forward) {
 				return i;
 			}
 		}
+		return static_cast<int>(m_buttons.size()) - 1;
 	}
 	else {
 		for (int i = (y - 1) * m_width + x; i > -1; i -= m_width) {
