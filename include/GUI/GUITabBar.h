@@ -20,6 +20,7 @@ public:
 
 	void render(sf::RenderTarget& target) const;
 	void update(const sf::Time& frameTime);
+	void updateGamepadTexts();
 
 	void setPosition(const sf::Vector2f& pos);
 	void setButtonTexture(int index, const sf::Texture* tex, int x);

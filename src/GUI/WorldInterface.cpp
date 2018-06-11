@@ -256,6 +256,8 @@ void WorldInterface::loadGuiSidebar() {
 			g_resourceManager->getConfiguration().mainKeyMap[getKeyFromGuiElement(static_cast<GUIElement>(i))]));
 	}
 
+	m_guiSidebar->updateGamepadTexts();
+
 	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_guiSidebar->setPosition(sf::Vector2f(GUIConstants::LEFT_BAR,
 		0.5f * (WINDOW_HEIGHT - height)));
@@ -269,6 +271,7 @@ void WorldInterface::loadMapSidebar(bool isLevel) {
 	int n = static_cast<int>(tilesExplored.size());
 	int size = isLevel ? n + 1 : n;
 	m_mapSidebar = new GUITabBar(this, size);
+	m_mapSidebar->updateGamepadTexts();
 
 	int height = size * GUITabButton::SIZE + (size - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_mapSidebar->setPosition(sf::Vector2f(WINDOW_WIDTH - (GUIConstants::LEFT_BAR + GUITabBar::WIDTH),

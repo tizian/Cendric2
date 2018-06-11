@@ -607,6 +607,6 @@ void Spellbook::show() {
 
 void Spellbook::hide() {
 	m_isVisible = false;
-	stopDragging();
 	stopGamepadSelection();
+	stopDragging();
 }

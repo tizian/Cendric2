@@ -19,14 +19,17 @@ GUITabButton::GUITabButton() {
 	GameObject::setDebugBoundingBox(sf::Color::Blue);
 	setInputInDefaultView(true);
 	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE - 2 * OFFSET, SIZE - 2 * OFFSET));
-	
-	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ? 
-		GUIConstants::CHARACTER_SIZE_S :
-		GUIConstants::CHARACTER_SIZE_L);
 }
 
 void GUITabButton::setText(const std::string& text) {
 	m_inputKey.setString(text);
+
+	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
+		GUIConstants::CHARACTER_SIZE_S :
+		GUIConstants::CHARACTER_SIZE_L);
+
+	const sf::Vector2f positionOffset(0.5f * (SIZE - m_inputKey.getLocalBounds().width), SIZE + 2.f);
+	m_inputKey.setPosition(getPosition() + positionOffset);
 }
 
 void GUITabButton::click() {

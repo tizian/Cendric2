@@ -96,6 +96,32 @@ void GUITabBar::update(const sf::Time& frameTime) {
 	} else if (currentButton != previousButton) {
 		currentButton->click();
 	}
+
+	currentButton = m_buttonGroup->getSelectedButton();
+	if (currentButton != previousButton) {
+		updateGamepadTexts();
+	}
+}
+
+void GUITabBar::updateGamepadTexts() {
+	if (!g_inputController->isGamepadConnected()) {
+		return;
+	}
+
+	auto selectedId = m_buttonGroup->getSelectedButtonId();
+	auto size = static_cast<int>(m_buttonGroup->getButtons().size());
+
+	for (int i = 0; i < size; ++i) {
+		if (i == selectedId - 1) {
+			setButtonText(i, "¹");
+		}
+		else if (i == selectedId && selectedId != size - 1) {
+			setButtonText(i, "º");
+		}
+		else {
+			setButtonText(i, "");
+		}
+	}
 }
 
 void GUITabBar::setSelectedElement(int index) {
@@ -105,6 +131,7 @@ void GUITabBar::setSelectedElement(int index) {
 		button->setSelected(false);
 	}
 	m_buttonGroup->getButton(index)->setSelected(true);
+	updateGamepadTexts();
 }
 
 int GUITabBar::getSelectedElement() const {
@@ -131,6 +158,7 @@ void GUITabBar::show(int index) {
 	if (index < 0 || index > static_cast<int>(m_buttonGroup->getButtons().size()) - 1) return;
 
 	m_buttonGroup->selectButton(index);
+	updateGamepadTexts();
 	show();
 }
 
