@@ -3,6 +3,8 @@
 #include "GUI/SelectableWindow.h"
 #include "Controller/InputController.h"
 
+#include <limits.h>
+
 JoystickButtonGroup::JoystickButtonGroup() {
 	m_selectedButtonIndex = -1;
 	m_isGamepadEnabled = true;
