@@ -34,7 +34,7 @@ void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 }
 
 void TabBar::loadLeftRightText() {
-	if (!g_inputController->isSelected()) {
+	if (!g_inputController->isSelected() || !m_isGamepadEnabled) {
 		m_leftText.setString("");
 		m_rightText.setString("");
 		return;
