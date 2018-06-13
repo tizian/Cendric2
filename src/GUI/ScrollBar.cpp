@@ -55,6 +55,11 @@ void ScrollBar::setDiscreteSteps(int steps) {
 }
 
 void ScrollBar::scroll(int direction) {
+	if (direction == 0) {
+		setScrollPosition(0, false);
+		return;
+	}
+
 	if (m_discreteSteps >= 2) {
 		float delta = 1.f / (m_discreteSteps - 1);
 		setScrollPosition(m_scrollPosition + direction * delta, true);
@@ -130,21 +135,25 @@ void ScrollBar::setPosition(const sf::Vector2f& pos) {
 
 void ScrollBar::update(const sf::Time& frameTime) {
 	m_time += frameTime;
+	m_isTouchedThisFrame = false;
 
 	if (!m_isVisible || !m_isEnabled) return;
 
 	if (m_window == nullptr || m_window->getBoundingBox()->contains(g_inputController->getDefaultViewMousePosition())) {
 		if (g_inputController->isMouseWheelScrolledUp()) {
 			scroll(-1);
+			m_isTouchedThisFrame = true;
 		}
 		else if (g_inputController->isMouseWheelScrolledDown()) {
 			scroll(1);
+			m_isTouchedThisFrame = true;
 		}
 	}
 
 	m_knob.update(frameTime);
 	if (m_knob.isPressed()) {
 		handleDragAndDrop();
+		m_isTouchedThisFrame = true;
 	}
 	GameObject::update(frameTime);
 }
@@ -163,6 +172,10 @@ bool ScrollBar::isEnabled() const {
 
 bool ScrollBar::isVisible() const {
 	return m_isVisible;
+}
+
+bool ScrollBar::isTouchedThisFrame() const {
+	return m_isTouchedThisFrame;
 }
 
 sf::Time ScrollBar::getScrollTime() const {

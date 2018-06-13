@@ -13,11 +13,18 @@
 #include "Enums/ItemType.h"
 #include "Enums/EnemyID.h"
 #include "Enums/DisplayMode.h"
+#include "Enums/GamepadAxis.h"
 
 // pure static class used to resolve enum names.
 class EnumNames final {
 private:
 	EnumNames() {}
+
+	static std::string getUtf8(int i) {
+		const char combined[2] = { static_cast<char>(i), '\0' };
+		return std::string(combined);
+	}
+
 public:
 	static std::string getLanguageName(Language lang) {
 		switch (lang) {
@@ -385,6 +392,10 @@ public:
 			return "Quickslot1";
 		case Key::QuickSlot2:
 			return "Quickslot2";
+		case Key::NextSpell:
+			return "NextSpell";
+		case Key::PreviousSpell:
+			return "PreviousSpell";
 		case Key::Up:
 			return "MoveUp";
 		case Key::ToggleTooltips:
@@ -397,6 +408,83 @@ public:
 			return "BackToCheckpoint";
 		case Key::ToggleAutotarget:
 			return "ToggleAutotarget";
+		case Key::Menu:
+			return "Menu";
+		case Key::Attack:
+			return "Attack";
+		}
+	}
+
+	static std::string getGamepadAxisName(GamepadAxis axis) {
+		switch (axis)
+		{
+		default:
+		case GamepadAxis::VOID:
+			return "?";
+		case GamepadAxis::DPadUp:
+			return "DPadUp";
+		case GamepadAxis::DPadDown:
+			return "DPadDown";
+		case GamepadAxis::DPadLeft:
+			return "DPadLeft";
+		case GamepadAxis::DPadRight:
+			return "DPadRight";
+		case GamepadAxis::LeftStickUp:
+			return "LSUp";
+		case GamepadAxis::LeftStickDown:
+			return "LSDown";
+		case GamepadAxis::LeftStickLeft:
+			return "LSLeft";
+		case GamepadAxis::LeftStickRight:
+			return "LSRight";
+		case GamepadAxis::RightStickUp:
+			return "RSUp";
+		case GamepadAxis::RightStickDown:
+			return "RSDown";
+		case GamepadAxis::RightStickLeft:
+			return "RSLeft";
+		case GamepadAxis::RightStickRight:
+			return "RSRight";
+		case GamepadAxis::LeftTrigger:
+			return "LT";
+		case GamepadAxis::RightTrigger:
+			return "RT";
+		case GamepadAxis::Square:
+			// ¾
+			return getUtf8(0xbe);
+		case GamepadAxis::Circle:
+			return "O";
+		case GamepadAxis::Triangle:
+			// ½
+			return getUtf8(0xbd);
+		case GamepadAxis::A:
+			return "A";
+		case GamepadAxis::B:
+			return "B";
+		case GamepadAxis::X:
+			return "X";
+		case GamepadAxis::Y:
+			return "Y";
+		case GamepadAxis::Select:
+			return "Select";
+		case GamepadAxis::Start:
+			return "Start";
+		case GamepadAxis::Share:
+			return "Share";
+		case GamepadAxis::Options:
+			return "Options";
+		case GamepadAxis::PSButton:
+			return "PS";
+		case GamepadAxis::Touchpad:
+			return "Touch";
+		case GamepadAxis::LeftStickPush:
+			return "LPush";
+		case GamepadAxis::RightStickPush:
+			return "RPush";
+		case GamepadAxis::LeftShoulder:
+			return "LB";
+		case GamepadAxis::RightShoulder:
+			return "RB";
 		}
 	}
 
@@ -615,6 +703,7 @@ public:
 	static std::string getShortKeyboardKeyName(sf::Keyboard::Key key) {
 		switch (key) {
 		case sf::Keyboard::Unknown:
+		case sf::Keyboard::KeyCount:
 			return "??";
 		case sf::Keyboard::Escape:
 			return "Esc";
@@ -712,10 +801,35 @@ public:
 			return "Nu9";
 		case sf::Keyboard::Pause:
 			return "Pau";
-		default: 
+		default:
 			break;
 		}
 
 		return getKeyboardKeyName(key);
+	}
+
+	static std::string getArrowSymbolForKey(Key key)
+	{
+		switch (key)
+		{
+		default:
+			return "?";
+
+		case Key::Up:
+			// ¹
+			return getUtf8(0xb9);
+		
+		case Key::Down:
+			// º
+			return getUtf8(0xba);
+
+		case Key::Left:
+			// »
+			return getUtf8(0xbb);
+
+		case Key::Right:
+			// ¼
+			return getUtf8(0xbc);
+		}
 	}
 };

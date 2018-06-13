@@ -43,27 +43,30 @@ void LoadGameScreen::execOnEnter() {
 	m_title->setCharacterSize(24);
 	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().width) / 2.f, 25.f));
 
-	float buttonWidth = 200.f;
-	float buttonHeight = 50.f;
-	float marginX = 60.f;
-	float marginY = WINDOW_HEIGHT - 80.f;
-	float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
-	float buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
+	const auto buttonWidth = 200.f;
+	const auto buttonHeight = 50.f;
+	const auto marginX = 60.f;
+	const auto marginY = WINDOW_HEIGHT - 80.f;
+	const auto buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
+	const auto buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
 
 	// add buttons
 	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&LoadGameScreen::onBack, this));
+	button->setGamepadKey(Key::Escape);
 	addObject(button);
 
 	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
+	m_deleteSaveGameButton->setGamepadKey(Key::Attack);
 	addObject(m_deleteSaveGameButton);
 
 	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_loadSaveGameButton->setText("Load");
 	m_loadSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onLoadSaveGame, this));
+	m_loadSaveGameButton->setGamepadKey(Key::Confirm);
 	addObject(m_loadSaveGameButton);
 
 	// savegame window

@@ -52,14 +52,25 @@ SpellSlot::SpellSlot(const SpellData& bean) {
 	initSpellSlot();
 }
 
-void SpellSlot::initSpellSlot() {
-	m_inputKey.setString(m_inputKeyID != Key::VOID ?
-		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_inputKeyID]) :
-		"");
+void SpellSlot::setInputKeyText(const std::string& text) {
+	m_inputKey.setString(text);
 	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
 		GUIConstants::CHARACTER_SIZE_S :
 		GUIConstants::CHARACTER_SIZE_L);
 	m_inputKey.setColor(COLOR_WHITE);
+
+	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, ICON_SIZE + 18.f);
+	m_inputKey.setPosition(getPosition() + positionOffset);
+}
+
+void SpellSlot::setKeyboardInputText() {
+	setInputKeyText(m_inputKeyID != Key::VOID ?
+		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_inputKeyID]) :
+		"");
+}
+
+void SpellSlot::initSpellSlot() {
+	setKeyboardInputText();
 
 	m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL);
 	m_borderTextureSelected = g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLOT_SPELL_SELECTED);
@@ -219,7 +230,7 @@ void SpellSlot::select() {
 }
 
 void SpellSlot::deselect() {
-	if (!m_isSelected || m_isEmpty) return;
+	if (!m_isSelected) return;
 	Slot::deselect();
 	m_inputKey.setColor(COLOR_WHITE);
 }

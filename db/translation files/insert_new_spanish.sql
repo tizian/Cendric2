@@ -41,6 +41,12 @@ Rechtsklick zum deaktiviere','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellFlashDesc','Lets you dash forward with the speed of light to damage and stun enemies.','Lässt dich mit Lichtgeschwindigkeit vorwärts schiessen um Gegner zu betäuben und ihnen zu schaden.','Laht dich mit Liechtgschwindigkeit vorwärts schüsse zum Gegner betäube und Schade mache.','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('TimeWarp','Time-Warping Crystal','Zeitverschiebender Kristall','Ziitverschiebende Kristall', '?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('TimeWarpText','This crystal will set yourself back in time. Continue?','Dieser Kristall wird dich in der Zeit zurückversetzen. Fortfahren?','De Kristall wird dich ide Ziit zruggversetze. Wetsch das?', '?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PreviousSpell','Previous Spell','Vorheriger Zauber','Vorherige Zauber','? Hechizo');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NextSpell','Next Spell','Nächster Zauber','Nexte Zauber','? Hechizo');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Keyboard','Keyboard','Tastatur','Tastatur','??');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Gamepad','Gamepad','Gamepad','Gamepad','??');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Attack','Attack','Angreifen','Aagriife','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('PauseInventory','Pause when in Inventory','Im Inventar pausieren','Im Inventar pausiere','?');
 
 -- hints
 

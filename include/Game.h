@@ -21,6 +21,7 @@ private:
 	ScreenManager* m_screenManager = nullptr;
 
 	void reloadWindow();
+	void pollEvents();
 
 	// debug operations
 	std::list<float> m_fpsList;

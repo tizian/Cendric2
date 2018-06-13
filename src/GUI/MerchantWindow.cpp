@@ -69,6 +69,12 @@ MerchantWindow::~MerchantWindow() {
 }
 
 void MerchantWindow::clearAllSlots() {
+	if (m_buttonGroup) {
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+		m_buttonGroup = nullptr;
+	}
+
 	CLEAR_MAP(m_items);
 	m_selectedSlotId = "";
 }
@@ -102,27 +108,34 @@ void MerchantWindow::notifyChange(const std::string& itemID) {
 
 	m_items.insert({ itemID, new InventorySlot(itemID, m_interface->getMerchantData().wares.at(itemID)) });
 
+	reloadButtonGroup();
 	calculateSlotPositions();
+}
+
+bool MerchantWindow::isSlotInvisible(const InventorySlot* slot) {
+	const auto& pos = slot->getPosition();
+	return pos.y < TOP + SCROLL_WINDOW_TOP ||
+		pos.y + InventorySlot::SIZE > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
 }
 
 void MerchantWindow::update(const sf::Time& frameTime) {
 	m_scrollBar->update(frameTime);
 
+	m_buttonGroup->update(frameTime);
+
 	// check whether an item was selected
-	for (auto& slot : m_items) {
-		sf::Vector2f pos = slot.second->getPosition();
-		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
-			pos.y + InventorySlot::SIZE > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		slot.second->update(frameTime);
-		if (slot.second->isMousedOver()) {
-			selectSlot(slot.second->getItemID());
-			if (slot.second->isRightClicked()) {
-				m_interface->buyItem(slot.second->getItem());
-				break;
-			}
+	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
+		const auto slot = dynamic_cast<InventorySlot*>(m_buttonGroup->getButton(i));
+
+		if (isSlotInvisible(slot) && !slot->isSelected()) continue;
+		slot->update(frameTime);
+		if (slot->isMousedOver() || slot->isSelected()) {
+			selectSlot(slot->getItemID());
+			m_buttonGroup->selectButton(i);
 		}
 	}
 
+	updateButtonActions();
 	calculateSlotPositions();
 	
 	if (g_inputController->isKeyJustPressed(Key::Escape)) {
@@ -131,6 +144,36 @@ void MerchantWindow::update(const sf::Time& frameTime) {
 
 	m_window->update(frameTime);
 }
+
+void MerchantWindow::updateButtonActions() {
+	const auto slot = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
+	if (!slot) return;
+
+	if (isSlotInvisible(slot)) {
+		if (slot->getPosition().y < GUIConstants::TOP + SCROLL_WINDOW_TOP) {
+			m_scrollBar->scroll(-1);
+		}
+		else {
+			m_scrollBar->scroll(1);
+		}
+	}
+
+	if (slot->isRightClicked()) {
+		m_interface->buyItem(slot->getItem());
+		return;
+	}
+
+	if (!isWindowSelected() || !g_inputController->isGamepadConnected()) {
+		return;
+	}
+
+	if (g_inputController->isKeyJustPressed(Key::Interact)) {
+		g_inputController->lockAction();
+
+		m_interface->buyItem(slot->getItem());
+	}
+}
+
 
 void MerchantWindow::selectSlot(const std::string& selectedSlotId) {
 	if (selectedSlotId.empty()) {
@@ -189,8 +232,15 @@ void MerchantWindow::renderAfterForeground(sf::RenderTarget& target) {
 
 void MerchantWindow::showDescription(const Item* item) {
 	if (item == nullptr) return;
+
+	auto info = ItemDescriptionInfo();
+	info.isEquipmentOrigin = false;
+	info.isInBossLevel = false;
+	info.isInLevel = false;
+	info.isSelling = true;
+
 	m_descriptionWindow->setReputation(m_interface->getReputation(item), m_interface->isReputationReached(item));
-	m_descriptionWindow->load(*item, m_interface->getCore(), m_interface->getMerchantData().multiplier, true);
+	m_descriptionWindow->load(*item, m_interface->getCore(), m_interface->getMerchantData().multiplier, info);
 	m_descriptionWindow->show();
 	sf::Vector2f pos = sf::Vector2f(
 		m_window->getPosition().x - WINDOW_MARGIN - m_descriptionWindow->getSize().x,
@@ -202,11 +252,40 @@ void MerchantWindow::hideDescription() {
 	m_descriptionWindow->hide();
 }
 
+void MerchantWindow::updateWindowSelected() {
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	if (isWindowSelected()) {
+		m_buttonGroup->getSelectedButton()->setSelected(true);
+	}
+}
+
+void MerchantWindow::reloadButtonGroup() {
+	int previouslySelectedId = 0;
+	if (m_buttonGroup) {
+		previouslySelectedId = m_buttonGroup->getSelectedButtonId();
+		m_buttonGroup->clearButtons(false);
+		delete m_buttonGroup;
+	}
+
+	m_buttonGroup = new ButtonGroup(SLOT_COUNT_X);
+	m_buttonGroup->setSelectableWindow(this);
+	m_buttonGroup->setUpdateButtons(false);
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	for (auto slot : m_items) {
+		m_buttonGroup->addButton(slot.second);
+	}
+
+	m_buttonGroup->selectButton(previouslySelectedId);
+}
+
 void MerchantWindow::reload() {
 	m_scrollBar->scroll(0);
 
 	// reload items
 	clearAllSlots();
+	
 	hideDescription();
 	for (auto& it : m_interface->getMerchantData().wares) {
 		if (!g_resourceManager->getItem(it.first)) {
@@ -216,6 +295,8 @@ void MerchantWindow::reload() {
 		
 		m_items.insert({ it.first, new InventorySlot(it.first, it.second) });
 	}
+
+	reloadButtonGroup();
 }
 
 void MerchantWindow::calculateSlotPositions() {

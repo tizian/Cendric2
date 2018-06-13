@@ -2,44 +2,35 @@
 
 #include "global.h"
 #include "Level/LevelMainCharacter.h"
-#include "Window.h"
-#include "GUI/GUIConstants.h"
 #include "GUI/TabBar.h"
-#include "Enums/EnumNames.h"
+#include "GUI/SelectableWindow.h"
+#include "GUI/ScrollWindow.h"
 
 class HintDescriptionWindow;
-class ScrollBar;
-class ScrollHelper;
 class WorldScreen;
 
 // a hint entry in the hints tab
-class HintEntry final : public GameObject {
+class HintEntry final : public ScrollEntry {
 public:
 	HintEntry(const std::string& hintKey);
 
 	void render(sf::RenderTarget& renderTarget) override;
-	GameObjectType getConfiguredType() const override;
 	void setPosition(const sf::Vector2f& pos) override;
-	void onLeftJustPressed() override;
 	void setColor(const sf::Color& color);
-	void select();
-	void deselect();
-	bool isClicked();
-	bool isSelected() const;
 	const std::string& getHintKey() const;
 
-private:
-	bool m_isSelected = false;
-	bool m_isClicked = false;
-	BitmapText m_name;
+protected:
+	void updateColor() override;
 
+private:
+	BitmapText m_name;
 	std::string m_hintKey;
 };
 
 // the character info, as displayed in a world
 // it is seperated in two parts, the reputation and the stats.
 // for the attributes, it takes them directly from the level main character (level) or the core (map)
-class CharacterInfo {
+class CharacterInfo : public SelectableWindow, public ScrollWindow {
 public:
 	CharacterInfo(WorldScreen* screen, const AttributeData* attributes = nullptr);
 	~CharacterInfo();
@@ -60,11 +51,19 @@ private:
 	void updateReputation();
 	void updateHints();
 
-	void selectEntry(HintEntry* selectedEntry);
-	void calculateEntryPositions();
-
 	void showDescription(const std::string& hintKey);
 	void hideDescription();
+
+protected:
+	void updateWindowSelected() override;
+	bool isEntryInvisible(const ScrollEntry* entry) const override;
+	void execEntrySelected(const ScrollEntry* entry) override;
+
+	int getEntryCount() override { return ENTRY_COUNT; }
+	float getLeft() override { return LEFT + SCROLL_WINDOW_LEFT; }
+	float getTop() override { return TOP + SCROLL_WINDOW_TOP; }
+	float getWindowMargin() override { return WINDOW_MARGIN; }
+	float getWidth() override { return SCROLL_WINDOW_WIDTH; }
 
 public:
 	static const int MAX_ENTRY_LENGTH_CHARACTERS;
@@ -75,13 +74,17 @@ public:
 	static const float HEIGHT;
 
 private:
+	void updateTabBar(const sf::Time& frameTime);
+	void updateSelectableWindow();
+	void checkReload();
+
+private:
 	WorldScreen* m_screen;
 	const CharacterCore* m_core;
 	const AttributeData* m_attributes;
 	bool m_isVisible = false;
 	bool m_isReloadNeeded = true;
 
-	Window* m_window = nullptr;
 	TabBar* m_tabBar;
 	BitmapText m_title;
 
@@ -93,13 +96,8 @@ private:
 	sf::Sprite m_guildSprite;
 	std::vector<BitmapText> m_reputationTexts;
 
-	std::vector<HintEntry> m_hintEntries;
-	HintEntry* m_selectedEntry = nullptr;
+	std::vector<ScrollEntry*> m_hintEntries;
 	std::string m_selectedHintKey = "";
-
-	SlicedSprite m_scrollWindow;
-	ScrollBar* m_scrollBar = nullptr;
-	ScrollHelper* m_scrollHelper = nullptr;
 
 	HintDescriptionWindow* m_descriptionWindow = nullptr;
 

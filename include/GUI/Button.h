@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
+#include "GUI/ButtonInterface.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
@@ -10,7 +10,7 @@
 #include "GUI/OrnamentStyle.h"
 
 // A not so ugly button to click
-class Button final :  public GameObject {
+class Button final : public ButtonInterface {
 public:
 	Button(const sf::FloatRect& box, GUIOrnamentStyle style = GUIOrnamentStyle::NONE);
 
@@ -25,6 +25,9 @@ public:
 	void setSize(const sf::Vector2f& size) override;
 
 	void setOnClick(const std::function<void()>& agent);
+	void click() override;
+
+	void setGamepadKey(Key key);
 
 	// position will be set automatically as the center of the button.
 	// setting text using the text provider (translated)
@@ -47,35 +50,27 @@ public:
 	void setOrnamentLayerTexture(sf::Texture* texture);
 
 	// a button can only be clicked if its enabled. also, the color is less opaque if it is disabled.
-	void setEnabled(bool enabled);
-	void setVisible(bool value);
+	void setEnabled(bool enabled) override;
 
 	void setBackgroundLayerColor(const sf::Color& color);
 	void setMainLayerColor(const sf::Color& color);
 	void setOrnamentLayerColor(const sf::Color& color);
 	void setMouseOverColor(const sf::Color& color);
+	void setSelectedColor(const sf::Color& color);
 	
 	sf::Color getBackgroundLayerColor() const;
 	sf::Color getMainLayerColor() const;
 	sf::Color getOrnamentLayerColor() const;
 	sf::Color getMouseOverColor() const;
 
-	bool isClicked() const;
-	bool isEnabled() const;
-	bool isVisible() const;
-	GameObjectType getConfiguredType() const override;
-
 protected:
-	bool m_isMouseOver = false;
-	bool m_isPressed = false;
-	bool m_isClicked = false;
-	bool m_isEnabled = true;
-	bool m_isVisible = true;
-	bool m_hasTexture = false;
+	int m_characterSize;
+	bool m_hasTexture;
 
 	sf::Vector2f m_positionDefault;
 	sf::Vector2f m_backLayerOffset;
 	sf::Vector2f m_textOffset;
+	sf::Vector2f m_keyTextOffset;
 	sf::Vector2f m_textureOffset;
 
 	SlicedSprite m_mainLayer;
@@ -87,9 +82,17 @@ protected:
 	sf::Color m_mainLayerColor;
 	sf::Color m_ornamentLayerColor;
 	sf::Color m_mouseOverColor;
+	sf::Color m_selectedColor;
 	sf::Color m_textureLayerColor;
 
 	BitmapText m_text;
+	BitmapText m_keyText;
+
+	void updateColor() override;
+	void reloadTextPosition();
+	bool hasGamepadKey() const;
+
+	Key m_gamepadKey = Key::VOID;
 
 private:
 	std::function<void()> m_executeOnClick = [](){};

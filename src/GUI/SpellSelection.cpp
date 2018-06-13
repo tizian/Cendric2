@@ -23,6 +23,8 @@ void SpellSelection::selectSlot(int spellNr) {
 	m_spellSlots[m_selectedSlot]->deselect();
 	m_spellSlots[spellNr]->select();
 	m_selectedSlot = spellNr;
+
+	reloadGamepadTexts();
 }
 
 void SpellSelection::update(const sf::Time& frametime) {
@@ -50,7 +52,8 @@ void SpellSelection::renderAfterForeground(sf::RenderTarget& target) {
 }
 
 void SpellSelection::reload() {
-	m_spellSlots.clear();
+	CLEAR_VECTOR(m_spellSlots);
+
 	auto& lockedMagic = m_spellManager->getOwner()->getLevel()->getLockedMagic();
 	float offset = SpellSlot::ICON_OFFSET;
 	for (auto& it : m_spellManager->getSpellMap()) {
@@ -70,7 +73,38 @@ void SpellSelection::reload() {
 	if (!m_spellSlots.empty()) {
 		selectSlot(0);
 	}
+
+	reloadGamepadTexts();
 }
+
+void SpellSelection::reloadGamepadTexts() {
+	if (!g_inputController->isGamepadConnected()) {
+		for (auto slot : m_spellSlots) {
+			slot->setKeyboardInputText();
+		}
+
+		return;
+	}
+
+	for (auto i = 0; i < static_cast<int>(m_spellSlots.size()); ++i) {
+		if (i == m_selectedSlot - 1) {
+			m_spellSlots[i]->setInputKeyText(
+				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::PreviousSpell]));
+		}
+		else if (i == m_selectedSlot + 1) {
+			m_spellSlots[i]->setInputKeyText(
+				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::NextSpell]));
+		}
+		else if (i == m_selectedSlot) {
+			m_spellSlots[i]->setInputKeyText(
+				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::Attack]));
+		}
+		else {
+			m_spellSlots[i]->setInputKeyText("");
+		}
+	}
+}
+
 
 bool SpellSelection::isSlotLocked(int spellNr) const {
 	if (spellNr < 0 || spellNr > static_cast<int>(m_spellSlots.size())) {

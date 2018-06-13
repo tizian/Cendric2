@@ -41,30 +41,34 @@ void LevelScreen::loadAsync() {
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
 
+	auto buttonGroup = new ButtonGroup();
+
 	// load screen
 	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
 	m_resumeButton->setOnClick(std::bind(&LevelScreen::onResume, this));
-	addObject(m_resumeButton);
-
-	m_retryButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
-	m_retryButton->setText("BackToCheckpoint");
-	m_retryButton->setVisible(false);
-	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
-	addObject(m_retryButton);
-
-	m_backToMapButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
-	m_backToMapButton->setText("BackToMap");
-	m_backToMapButton->setVisible(false);
-	m_backToMapButton->setOnClick(std::bind(&LevelScreen::onBackToMap, this));
-	addObject(m_backToMapButton);
+	buttonGroup->addButton(m_resumeButton);
 
 	m_backToMenuButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
-	addObject(m_backToMenuButton);
+	buttonGroup->addButton(m_backToMenuButton);
+
+	m_retryButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_retryButton->setText("BackToCheckpoint");
+	m_retryButton->setVisible(false);
+	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
+	buttonGroup->addButton(m_retryButton);
+
+	m_backToMapButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_backToMapButton->setText("BackToMap");
+	m_backToMapButton->setVisible(false);
+	m_backToMapButton->setOnClick(std::bind(&LevelScreen::onBackToMap, this));
+	buttonGroup->addButton(m_backToMapButton);
+
+	addObject(buttonGroup);
 
 	// synchronize and center buttons
 	sf::Vector2f buttonSize(0.f, 50.f);
@@ -301,31 +305,39 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 
 	if (!m_isPaused) {
 		handleBookWindow(frameTime);
+
 		WorldScreen::execUpdate(frameTime);
 
-		// sort Movable Tiles
-		depthSortObjects(_MovableTile, false);
-		// update objects first for relative velocity
-		updateObjectsFirst(_MovableTile, frameTime);
-		updateObjectsFirst(_LevelMainCharacter, frameTime);
-		updateObjectsFirst(_Enemy, frameTime);
-		updateObjectsFirst(_DynamicTile, frameTime);
-		updateObjectsFirst(_Spell, frameTime);
-		// and then normally
-		if (!m_interface->isGuiOverlayVisible()) {
-			updateObjects(_ScreenOverlay, frameTime);
-		}
-		updateObjects(_MovableTile, frameTime);
-		updateObjects(_DynamicTile, frameTime);
-		updateObjects(_Enemy, frameTime);
-		updateObjects(_LevelMainCharacter, frameTime);
-		updateObjects(_Equipment, frameTime);
-		updateObjects(_Spell, frameTime);
-		updateObjects(_Overlay, frameTime);
-		if (!m_isGameOver) updateObjects(_LevelItem, frameTime);
+		if (!isUpdateOnlyInterface()) {
+			// sort Movable Tiles
+			depthSortObjects(_MovableTile, false);
+			// update objects first for relative velocity
+			updateObjectsFirst(_MovableTile, frameTime);
+			updateObjectsFirst(_LevelMainCharacter, frameTime);
+			updateObjectsFirst(_Enemy, frameTime);
+			updateObjectsFirst(_DynamicTile, frameTime);
+			updateObjectsFirst(_Spell, frameTime);
 
-		updateObjects(_Light, frameTime);
-		m_currentLevel.update(frameTime);
+			// and then normally
+			if (!m_interface->isGuiOverlayVisible()) {
+				updateObjects(_ScreenOverlay, frameTime);
+			}
+
+			updateObjects(_MovableTile, frameTime);
+			updateObjects(_DynamicTile, frameTime);
+			updateObjects(_Enemy, frameTime);
+			updateObjects(_LevelMainCharacter, frameTime);
+			updateObjects(_Equipment, frameTime);
+			updateObjects(_Spell, frameTime);
+			updateObjects(_Overlay, frameTime);
+			updateObjects(_Interface, frameTime);
+			if (!m_isGameOver) {
+				updateObjects(_LevelItem, frameTime);
+			}
+
+			updateObjects(_Light, frameTime);
+			m_currentLevel.update(frameTime);
+		}
 	}
 
 	if (m_gamePausedOverlay) {
@@ -347,6 +359,7 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		m_backToMenuButton->setVisible(m_isPaused);
 		m_backToMapButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
 		m_retryButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
+		g_inputController->lockAction();
 	}
 }
 
@@ -420,6 +433,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	renderObjectsAfterForeground(_Enemy, renderTarget);
 	renderObjectsAfterForeground(_Spell, renderTarget);
 	renderObjectsAfterForeground(_Light, renderTarget);
+	renderObjectsAfterForeground(_Interface, renderTarget);
 
 	m_weatherSystem->render(renderTarget);
 
@@ -457,7 +471,7 @@ void LevelScreen::handleBookWindow(const sf::Time& frameTime) {
 	if (!m_bookWindow->updateWindow(frameTime) || m_bookWindowDisposed) {
 		delete m_bookWindow;
 		m_bookWindow = nullptr;
-		m_interface->getInventory()->show();
+		m_interface->showInventory();
 	}
 }
 

@@ -2,7 +2,7 @@
 #include "World/AnimatedSprite.h"
 #include "GlobalResource.h"
 #include "World/Item.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 
 const size_t ResourceManager::SOUND_POOL_SIZE = 5;
 

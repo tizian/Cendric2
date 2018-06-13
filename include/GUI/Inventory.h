@@ -1,6 +1,5 @@
 #pragma once
 
-#include "global.h"
 #include "CharacterCore.h"
 #include "ResourceManager.h"
 #include "Window.h"
@@ -8,6 +7,8 @@
 #include "GUI/ItemDescriptionWindow.h"
 #include "GUI/TexturedTabBar.h"
 #include "GUI/InventoryEquipment.h"
+#include "GUI/SelectableWindow.h"
+#include "GUI/BitmapText.h"
 
 class LevelInterface;
 class MapInterface;
@@ -19,7 +20,7 @@ class WorldInterface;
 // the inventory, as displayed in a level or a map
 // it takes its information directly from the character core
 // the inventory also shows item description and equipped items.
-class Inventory final {
+class Inventory final : public SelectableWindow {
 public:
 	Inventory(LevelInterface* _interface);
 	Inventory(MapInterface* _interface);
@@ -34,14 +35,11 @@ public:
 	void renderAfterForeground(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	void notifyChange(const std::string& itemID);
+	void notifyChange(const std::string itemID);
 	void startTrading(MerchantInterface* _interface);
 	void stopTrading();
 
-	// fully reloads the inventory text & items, depending on the core. Heavy operation! Better use notifyChange if only one item changed.
-	void reload();
-	// reloads the inventory gold text
-	void reloadGold();
+	InventoryEquipment* getEquipment() const;
 
 private:
 	CharacterCore* m_core;
@@ -55,12 +53,12 @@ private:
 
 	void init();
 	void setPosition(const sf::Vector2f& position);
+	void reload();
+	void reloadGold();
 
 	void clearAllSlots();
-	// reorganizes the positions of the 'slots' vector
-	void calculateSlotPositions(std::map<std::string, InventorySlot*>& slots);
-
-	Window* m_window;
+	void calculateSlotPositions() const;
+	static bool isSlotInvisible(const InventorySlot* slot);
 
 	BitmapText m_goldText;
 	BitmapText m_selectedTabText;
@@ -80,11 +78,13 @@ private:
 	std::map<std::string, InventorySlot*> m_questItems;
 	std::map<std::string, InventorySlot*> m_keyItems;
 	std::map<std::string, InventorySlot*> m_miscItems;
+	ButtonGroup* m_buttonGroup = nullptr;
 
 	ItemType m_currentTab;
 	// first is the id, the second is VOID when it is no equiment slot and an Item Type when it is an equipment slot
 	std::pair<std::string, ItemType> m_selectedSlotId;
 	void selectTab(ItemType type);
+	void reloadButtonGroup(bool keepSelectedButton = true);
 	// item type shall be VOID for not-equipment-slots
 	void selectSlot(const std::string& selectedSlotId, ItemType type);
 	void deselectCurrentSlot();
@@ -93,13 +93,14 @@ private:
 	void handleMapRightClick(const InventorySlot* clicked);
 	void handleLevelRightClick(const InventorySlot* clicked);
 
-	void handleLevelDoubleClick(const InventorySlot* clicked);
-	void handleMapDoubleClick(const InventorySlot* clicked);
+	void handleLevelDoubleClick(const InventorySlot* clicked) const;
+	void handleMapDoubleClick(const InventorySlot* clicked) const;
 
 	// used for drag & drop handling
 	SlotClone* m_currentClone = nullptr;
 	bool m_hasDraggingStarted = false;
 	bool m_isEquipmentSlotDragged = false;
+	bool m_isSelectedByButtonGroup = false;
 	bool m_isDragging = false;
 	// the mouse has to move this distance while pressed to spawn a clone.
 	const float DRAG_DISTANCE = 10.f;
@@ -108,7 +109,7 @@ private:
 	void stopDragging();
 	
 	void removeEquipmentItem();
-	void handleMapDrag();
+	void handleMapDrag() const;
 	void handleLevelDrag();
 	void handleMapDrop();
 	void handleLevelDrop();
@@ -116,10 +117,17 @@ private:
 	ItemDescriptionWindow* m_descriptionWindow = nullptr;
 	void showDescription(const Item* item, bool isEquipmentOrigin) const;
 	void hideDescription() const;
-	void showDocument(const Item* item);
-	void convertItem(const Item* item);
-	void learnSpell(const Item* item);
+	void showDocument(const Item* item) const;
+	void convertItem(const Item* item) const;
+	void learnSpell(const Item* item) const;
 
+protected:
+	void updateWindowSelected() override;
+	void updateButtonActions();
+	void updateButtonActionLevel(const InventorySlot* slot);
+	void updateButtonActionMap(const InventorySlot* slot);
+
+private:
 	InventoryEquipment* m_equipment = nullptr;
 
 	static const int SLOT_COUNT_X;

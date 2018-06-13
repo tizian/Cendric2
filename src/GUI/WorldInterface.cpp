@@ -1,13 +1,12 @@
 #include "GUI/WorldInterface.h"
+#include "GUI/GUITabButton.h"
+#include "GUI/WeaponWindow.h"
 #include "Screens/WorldScreen.h"
 #include "GlobalResource.h"
 
 WorldInterface::WorldInterface(WorldScreen* screen) {
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
-}
-
-WorldInterface::~WorldInterface() {
 }
 
 void WorldInterface::render(sf::RenderTarget& target) {
@@ -39,6 +38,17 @@ void WorldInterface::update(const sf::Time& frameTime) {
 	updateGuiElement(frameTime, m_questLog, GUIElement::Journal);
 	updateGuiElement(frameTime, m_mapOverlay, GUIElement::Map);
 	m_quickSlotBar->update(frameTime);
+
+	if (g_inputController->isKeyJustPressed(Key::Menu)) {
+		g_inputController->lockAction();
+
+		if (m_guiSidebar->isVisible()) {
+			hideAll();
+		}
+		else {
+			showGuiElement(m_selectedElement);
+		}
+	}
 }
 
 void WorldInterface::hideAll() {
@@ -63,10 +73,6 @@ bool WorldInterface::isGuiOverlayVisible() const {
 }
 
 void WorldInterface::reloadInventory(const std::string& changedItemID) {
-	if (changedItemID.empty()) {
-		m_inventory->reload();
-		return;
-	}
 	m_inventory->notifyChange(changedItemID);
 }
 
@@ -83,33 +89,109 @@ void WorldInterface::reloadSpellBook() {
 }
 
 void WorldInterface::reloadMapWaypoints() {
-	m_mapOverlay->reloadWaypoints();
+	m_mapOverlay->reloadMarkers();
 }
 
 void WorldInterface::reloadLevelOverlay() {
 	m_mapOverlay->notifyLevelOverlayReload();
 }
 
-void WorldInterface::jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data) {
+void WorldInterface::jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data) {
 	showGuiElement(m_mapOverlay, GUIElement::Map);
+	m_guiSidebar->setWindowSelected(false);
+	m_mapSidebar->setWindowSelected(false);
+	m_mapOverlay->setWindowSelected(true);
 	m_mapOverlay->notifyJumpToQuest(questId, data);
 }
 
-void WorldInterface::jumpToQuestLog(const std::string questId) {
+void WorldInterface::jumpToQuestLog(const std::string& questId) {
 	showGuiElement(m_questLog, GUIElement::Journal);
+	m_guiSidebar->setWindowSelected(false);
+	m_questLog->setWindowSelected(true);
 	m_questLog->notifyJumpToQuest(questId);
 }
 
-void WorldInterface::notifyConsumableDrop(const SlotClone* item) {
+void WorldInterface::showInventory() {
+	showGuiElement(m_inventory, GUIElement::Inventory);
+	m_guiSidebar->setWindowSelected(false);
+	m_inventory->setWindowSelected(true);
+}
+
+void WorldInterface::notifyConsumableDrop(const SlotClone* item) const {
 	m_quickSlotBar->notifyConsumableDrop(item);
 }
 
-void WorldInterface::equipConsumable(const std::string& itemID) {
+void WorldInterface::equipConsumable(const std::string& itemID) const {
 	m_quickSlotBar->equipConsumable(itemID);
 }
 
-void WorldInterface::highlightQuickslots(bool highlight) {
+void WorldInterface::equipConsumable(const std::string& itemID, int slotId) const {
+	m_quickSlotBar->equipConsumable(itemID, slotId);
+}
+
+void WorldInterface::highlightQuickslots(bool highlight) const {
 	m_quickSlotBar->highlightSlots(highlight);
+}
+
+void WorldInterface::showGuiElement(GUIElement type) {
+	switch (type) {
+	default:
+	case GUIElement::VOID:
+		return;
+	case GUIElement::Character:
+		 showGuiElement(m_characterInfo, type);
+		 return;
+	case GUIElement::Inventory:
+		showGuiElement(m_inventory, type);
+		return;
+	case GUIElement::Spellbook:
+		showGuiElement(m_spellbook, type);
+		return;
+	case GUIElement::Journal:
+		showGuiElement(m_questLog, type);
+		return;
+	case GUIElement::Map:
+		showGuiElement(m_mapOverlay, type);
+		return;
+	}
+}
+
+void WorldInterface::connectGuiElements(GUIElement type) {
+	m_characterInfo->setWindowSelected(false);
+	m_inventory->setWindowSelected(false);
+	m_inventory->getEquipment()->setWindowSelected(false);
+	m_questLog->setWindowSelected(false);
+	m_mapSidebar->setWindowSelected(false);
+	m_mapOverlay->setWindowSelected(false);
+	m_spellbook->setWindowSelected(false);
+	m_spellbook->getWeaponWindow()->setWindowSelected(false);
+
+	m_guiSidebar->setRightWindow(nullptr);
+	m_guiSidebar->setWindowSelected(true);
+
+	switch (type) {
+	default:
+	case GUIElement::VOID:
+		return;
+	case GUIElement::Character:
+		m_guiSidebar->setRightWindow(m_characterInfo);
+		return;
+	case GUIElement::Inventory:
+		m_guiSidebar->setRightWindow(m_inventory->getEquipment());
+		m_inventory->getEquipment()->setRightWindow(m_inventory);
+		return;
+	case GUIElement::Spellbook:
+		m_guiSidebar->setRightWindow(m_spellbook);
+		m_spellbook->setRightWindow(m_spellbook->getWeaponWindow());
+		return;
+	case GUIElement::Journal:
+		m_guiSidebar->setRightWindow(m_questLog);
+		return;
+	case GUIElement::Map:
+		m_guiSidebar->setRightWindow(m_mapOverlay);
+		m_mapOverlay->setRightWindow(m_mapSidebar);
+		return;
+	}
 }
 
 template<typename G>
@@ -118,6 +200,8 @@ void WorldInterface::showGuiElement(G* guiElement, GUIElement type) {
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_OPENWINDOW);
 	guiElement->show();
 	m_guiSidebar->show(static_cast<int>(type));
+	connectGuiElements(type);
+	m_selectedElement = type;
 }
 
 template<typename G>
@@ -130,17 +214,20 @@ void WorldInterface::updateGuiElement(const sf::Time& frameTime, G* guiElement, 
 			guiElement->hide();
 			m_guiSidebar->hide();
 		}
+		return;
 	}
-	else if (guiElement->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
-		guiElement->hide();
-		m_guiSidebar->hide();
-		g_inputController->lockAction();
-	}
-	else if (!guiElement->isVisible() && m_guiSidebar->getActiveElement() == static_cast<int>(type)) {
+
+	if (!guiElement->isVisible() && m_guiSidebar->isVisible() && m_guiSidebar->getSelectedElement() == static_cast<int>(type)) {
 		showGuiElement(guiElement, type);
 	}
 
 	guiElement->update(frameTime);
+
+	if (guiElement->isVisible() && g_inputController->isKeyJustPressed(Key::Escape)) {
+		guiElement->hide();
+		m_guiSidebar->hide();
+		g_inputController->lockAction();
+	}
 }
 
 CharacterCore* WorldInterface::getCore() const {
@@ -159,6 +246,7 @@ void WorldInterface::loadGuiSidebar() {
 	delete m_guiSidebar;
 	int n = 5;
 	m_guiSidebar = new GUITabBar(this, n);
+	m_guiSidebar->setWindowSelected(true);
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ICONS);
 
@@ -167,6 +255,8 @@ void WorldInterface::loadGuiSidebar() {
 		m_guiSidebar->setButtonText(i, EnumNames::getShortKeyboardKeyName(
 			g_resourceManager->getConfiguration().mainKeyMap[getKeyFromGuiElement(static_cast<GUIElement>(i))]));
 	}
+
+	m_guiSidebar->updateGamepadTexts();
 
 	int height = n * GUITabButton::SIZE + (n - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_guiSidebar->setPosition(sf::Vector2f(GUIConstants::LEFT_BAR,
@@ -181,6 +271,7 @@ void WorldInterface::loadMapSidebar(bool isLevel) {
 	int n = static_cast<int>(tilesExplored.size());
 	int size = isLevel ? n + 1 : n;
 	m_mapSidebar = new GUITabBar(this, size);
+	m_mapSidebar->updateGamepadTexts();
 
 	int height = size * GUITabButton::SIZE + (size - 1) * GUITabBar::BUTTON_MARGIN + 4 * static_cast<int>(GUIConstants::TEXT_OFFSET);
 	m_mapSidebar->setPosition(sf::Vector2f(WINDOW_WIDTH - (GUIConstants::LEFT_BAR + GUITabBar::WIDTH),

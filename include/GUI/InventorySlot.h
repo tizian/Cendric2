@@ -7,27 +7,28 @@
 
 class InventorySlot final : public virtual Slot {
 public:
-	// constructor for filled slots. if amount is < 0, the amount text won't show.
 	InventorySlot(const std::string& itemID, int amount, bool isEquipmentOrigin = false);
-	// constructor for placeholder slots
 	InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType);
 
-	void setPosition(const sf::Vector2f& pos) override;
-
 	void render(sf::RenderTarget& renderTarget) override;
+	void select() override;
+	void notifySelection() override;
 
 	void setAmount(int amount);
+	void setPosition(const sf::Vector2f& pos) override;
+	void setSelectedByButtonGroup(bool isSelected);
 
 	const std::string& getItemID() const;
 	const Item* getItem() const;
 	bool isEquipmentOrigin() const { return m_isEquipmentOrigin; }
+	bool isSelectedByButtonGroup() const { return m_isSelectedByButtonGroup; }
 
-	inline ItemType getItemType() const { return m_type; }
-	inline void setItemType(ItemType type) { m_type = type; }
+	ItemType getItemType() const { return m_type; }
+	void setItemType(ItemType type) { m_type = type; }
+	void hideTooltip() const;
 
-	inline float getConfiguredSize() const override { return SIZE; }
-	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
-	
+	float getConfiguredSize() const override { return SIZE; }
+	float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
 	void setAlpha(sf::Uint8 alpha);
 
@@ -38,6 +39,7 @@ protected:
 	std::string m_itemID;
 	ItemType m_type = ItemType::VOID;
 	bool m_isEquipmentOrigin = false;
+	bool m_isSelectedByButtonGroup = false;
 
 	BitmapText m_amountText;
 };

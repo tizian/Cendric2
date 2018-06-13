@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Level/MOBBehavior/MovingBehavior.h"
 
 // A moving behavior for the level main character
@@ -22,6 +22,7 @@ public:
 
 	void flipGravity() override;
 	void stopAll();
+	bool isClimbing() const;
 
 private:
 	// makes it easier to jump

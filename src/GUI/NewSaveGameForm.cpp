@@ -17,6 +17,11 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_okButton->setText("Okay");
 	m_cancelButton->setText("Cancel");
 
+	m_buttonGroup = new ButtonGroup(2);
+
+	m_buttonGroup->addButton(m_okButton);
+	m_buttonGroup->addButton(m_cancelButton);
+
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
 
@@ -39,8 +44,7 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 
 NewSaveGameForm::~NewSaveGameForm() {
 	delete m_window;
-	delete m_okButton;
-	delete m_cancelButton;
+	delete m_buttonGroup;
 	g_inputController->stopReadingText();
 }
 
@@ -49,8 +53,7 @@ void NewSaveGameForm::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_message);
 	renderTarget.draw(m_savegameNameText);
 
-	m_okButton->render(renderTarget);
-	m_cancelButton->render(renderTarget);
+	m_buttonGroup->render(renderTarget);
 }
 
 const std::string& NewSaveGameForm::getSavegameName() const {
@@ -62,14 +65,8 @@ void NewSaveGameForm::update(const sf::Time& frameTime) {
 	m_savegameName = g_inputController->getReadText();
 	m_savegameNameText.setString(m_savegameName);
 	m_okButton->setEnabled(m_savegameName.size() < MAX_NAME_LENGTH && !m_savegameName.empty());
-	m_okButton->update(frameTime);
-	m_cancelButton->update(frameTime);
+	m_buttonGroup->update(frameTime);
 
-	if (m_okButton->isEnabled() && g_inputController->isKeyJustPressed(Key::Confirm)) {
-		m_executeOnOk();
-		g_inputController->lockAction();
-		setDisposed();
-	}
 	if (m_cancelButton->isClicked() || m_okButton->isClicked())  {
 		setDisposed();
 	}

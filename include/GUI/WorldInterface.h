@@ -2,7 +2,6 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "InputController.h"
 #include "ResourceManager.h"
 
 #include "GUI/Inventory.h"
@@ -27,12 +26,11 @@ enum class GUIElement {
 // abstract class for an interface in level or map
 class WorldInterface {
 public:
-	WorldInterface(WorldScreen* screen);
-	virtual ~WorldInterface();
+	explicit WorldInterface(WorldScreen* screen);
+	virtual ~WorldInterface() = default;
 
 	// reloads the inventory for the items that have changed. if the string equals "gold", reloads gold
-	// if the string is empty, it does a full reload (heavy operation, only us this when equipment or more than one item changed)
-	virtual void reloadInventory(const std::string& changeditemID = "");
+	virtual void reloadInventory(const std::string& changeditemID);
 	// reloads the quest log
 	virtual void reloadQuestLog();
 	// reload the character info
@@ -44,16 +42,20 @@ public:
 	// reload the level overlay
 	virtual void reloadLevelOverlay();
 	// opens the map overlay and jumps to a quest marker
-	void jumpToQuestMarker(const std::string questId, const std::vector<QuestMarkerData>& data);
+	void jumpToQuestMarker(const std::string& questId, const std::vector<QuestMarkerData>& data);
 	// opens the quest log and jumps to a quest
-	void jumpToQuestLog(const std::string questId);
+	void jumpToQuestLog(const std::string& questId);
+	// show inventory directly
+	void showInventory();
 
 	// an consumable item has been dropped. forward to quick slot bar
-	void notifyConsumableDrop(const SlotClone* item);
-	// an item should be equiped in quick slot bar. forward to quick slot bar
-	void equipConsumable(const std::string& itemID);
+	void notifyConsumableDrop(const SlotClone* item) const;
+	// an item should be equipped in quick slot bar. forward to quick slot bar
+	void equipConsumable(const std::string& itemID) const;
+	// an item should be equipped in a specific slot in the quick slot bar.
+	void equipConsumable(const std::string& itemID, int slotId) const;
 	// highlight quickslots
-	void highlightQuickslots(bool highlight);
+	void highlightQuickslots(bool highlight) const;
 
 	virtual void render(sf::RenderTarget& target);
 	virtual void renderAfterForeground(sf::RenderTarget& target);
@@ -82,12 +84,15 @@ protected:
 	QuestLog* m_questLog = nullptr;
 	MapOverlay* m_mapOverlay = nullptr;
 	QuickSlotBar* m_quickSlotBar = nullptr;
+	GUIElement m_selectedElement = GUIElement::Character;
 
 	template<typename G>
 	void updateGuiElement(const sf::Time& frameTime, G* guiElement, GUIElement type);
 
 	template<typename G>
 	void showGuiElement(G* guiElement, GUIElement type);
+	void showGuiElement(GUIElement type);
+	void connectGuiElements(GUIElement type);
 
 	static Key getKeyFromGuiElement(GUIElement e);
 };

@@ -6,6 +6,7 @@
 #include "GUI/Button.h"
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
+#include "GUI/ButtonGroup.h"
 
 // A form with two buttons on it, an ok and a cancel button.
 // additionally, it takes text input from the user for the savegame name.
@@ -30,6 +31,7 @@ private:
 	BitmapText m_message;
 	Button* m_okButton;
 	Button* m_cancelButton;
+	ButtonGroup* m_buttonGroup;
 
 	std::function<void()> m_executeOnOk = NOP;
 

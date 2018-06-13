@@ -7,12 +7,19 @@
 
 class CharacterCore;
 
+struct ItemDescriptionInfo {
+	bool isSelling = false;
+	bool isEquipmentOrigin = false;
+	bool isInLevel = false;
+	bool isInBossLevel = false;
+};
+
 class ItemDescriptionWindow : virtual public Window {
 public:
 	ItemDescriptionWindow();
 	virtual ~ItemDescriptionWindow();
 
-	void load(const Item& item, const CharacterCore* core, float goldMultiplier, bool isSelling);
+	void load(const Item& item, const CharacterCore* core, float goldMultiplier, const ItemDescriptionInfo& info);
 
 	void render(sf::RenderTarget& renderTarget) override;
 	void setPosition(const sf::Vector2f& position) override;
@@ -28,7 +35,12 @@ protected:
 	void clearTexts();
 	virtual std::string getGoldText(const Item& item, float goldMultiplier) const;
 	virtual std::string getReputationText(const Item& item) const;
-	virtual std::string getInteractionText(const Item& item, bool isSelling) const;
+	std::string getInteractionText(const Item& item, const ItemDescriptionInfo& info) const;
+	virtual std::string getInteractionTextGamepad(const Item& item, const ItemDescriptionInfo& info) const;
+	virtual std::string getInteractionTextKeyboard(const Item& item, const ItemDescriptionInfo& info) const;
+
+	static std::string getGamepadText(const std::string& textKey, Key key);
+	static std::string getKeyboardText(const std::string& textKey);
 
 	bool m_isReputationReached = false;
 

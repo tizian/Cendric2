@@ -3,15 +3,13 @@
 #include "global.h"
 #include "LevelMovableGameObject.h"
 #include "Level.h"
-#include "InputController.h"
-#include "Spells/SpellManager.h"
-#include "Screens/Screen.h"
 #include "CharacterCore.h"
 #include "World/MainCharacter.h"
 #include "TargetManager.h"
 
 class ParticleComponent;
 class AutoscrollerCamera;
+class GamepadAimCursor;
 
 // Cendric in a level
 class LevelMainCharacter final : public LevelMovableGameObject, public MainCharacter {
@@ -28,7 +26,6 @@ public:
 	void setPosition(const sf::Vector2f& pos) override { LevelMovableGameObject::setPosition(pos); }
 	void updateFirst(const sf::Time& frameTime) override { LevelMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { LevelMovableGameObject::renderAfterForeground(target); }
-	void setDebugBoundingBox(const sf::Color& color) override { LevelMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { LevelMovableGameObject::setState(state); }
 	void setState(GameObjectState state, bool updateAnimation) override { LevelMovableGameObject::setState(state, updateAnimation); }
 	void setAutoscroller(AutoscrollerCamera* camera);
@@ -59,10 +56,12 @@ public:
 	void setInputLock();
 	void setJumpLock();
 	void resetTarget();
+	void notifyGamepadCursor();
 
 	bool isAlly() const override;
 	bool isReady() const override;
 	bool isClimbing() const;
+	sf::Vector2f getSpellPosition() const;
 
 	// ranges from 0 to 4 and helps render the main char invisibile for certain enemies / reduce the aggro range
 	int getInvisibilityLevel() const;
@@ -81,7 +80,9 @@ private:
 	void loadWeapon();		// character core must be set when loading the weapon.
 	void loadAnimation();
 
+	sf::Vector2f getSelectedTarget();
 	void handleAttackInput();
+	void onSpellSelected();
 	void updateHealthRegeneration(const sf::Time& frameTime) override;
 
 	void loadComponents();
@@ -93,6 +94,7 @@ private:
 	CharacterCore* m_core;
 	ScreenOverlay* m_damagedScreenOverlay = nullptr;
 	TargetManager* m_targetManager;
+	GamepadAimCursor* m_gamepadAimCursor = nullptr;
 	
 	std::map<Key, int> m_spellKeyMap;
 	bool m_isQuickcast;

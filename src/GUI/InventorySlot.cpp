@@ -75,6 +75,19 @@ void InventorySlot::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_amountText);
 }
 
+void InventorySlot::setSelectedByButtonGroup(bool isSelected) {
+	m_isSelectedByButtonGroup = isSelected;
+}
+
+void InventorySlot::select() {
+	Slot::select();
+	m_isSelectedByButtonGroup = false;
+}
+
+void InventorySlot::notifySelection() {
+	m_isSelectedByButtonGroup = true;
+}
+
 void InventorySlot::setAmount(int amount) {
 	m_amountText.setString(amount < 0 ? "" : std::to_string(amount));
 	setPosition(getPosition());
@@ -86,6 +99,10 @@ const std::string& InventorySlot::getItemID() const {
 
 const Item* InventorySlot::getItem() const { 
 	return g_resourceManager->getItem(m_itemID); 
+}
+
+void InventorySlot::hideTooltip() const {
+	m_tooltipComponent->setCurrentTooltipTime(sf::Time::Zero);
 }
 
 void InventorySlot::setAlpha(sf::Uint8 alpha) {

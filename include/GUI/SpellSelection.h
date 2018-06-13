@@ -26,6 +26,8 @@ public:
 	std::vector<SpellSlot*>& getSlots();
 
 private:
+	void reloadGamepadTexts();
+
 	SpellManager* m_spellManager;
 	bool m_isVisible = true;
 

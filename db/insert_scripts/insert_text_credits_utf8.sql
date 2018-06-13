@@ -31,10 +31,10 @@ Haab
 
 <<< Level & Map Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Quality Assurance >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Music >>>
@@ -176,10 +176,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
@@ -190,6 +190,7 @@ Dave, Melanie Silk
 Matt Sanz for his awesome title art
 Lukas for the SFML support
 Achpile for the Linux support
+MyroidTC for the Controller support
 Mona for her brothel support
 Pascal Josephy for the web support
 
@@ -261,10 +262,10 @@ Haab
 
 <<< Level & Karten Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Qualitätssicherung >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Musik >>>
@@ -406,10 +407,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
@@ -420,6 +421,7 @@ Dave, Melanie Silk
 Matt Sanz für sein tolles Titelbild
 Lukas für den SFML-Support
 Achpile für den Linux-Support
+MyroidTC für den Controller-Support
 Mona für ihren Bordell-Support
 Pascal Josephy für den Web-Support
 
@@ -487,10 +489,10 @@ Haab
 
 <<< Level & Chartä Design >>>
 Isa
-Peter
+Peter Hatlestad
 
 <<< Qualitätssicherig >>>
-Peter
+Peter Hatlestad
 Tizian
 
 <<< Musig >>>
@@ -628,7 +630,7 @@ Roman Schaub - Basler Dialekt (Lua, Morton, Syrah)
 Christian Brunner - Luzerner Dialekt (Wirt)
 Sandra Scherrer - Bündner Dialekt (Jonathan)
 Patrizia Drohmann - Bündner Dialekt (Jonathan)
-Mitch aka Gamerocker - Aargauer Dialekt (Rana, Jason)
+Mitch aka Gamerocker - Aargauer Dialekt (Jana, Jason)
 Talita Schär - Ämmitaler Dialekt (Thea)
 Angelo Breda - Basler Dialekt (Luiz, Waldemar)
 Michela Hof - Thurgauer Dialekt (Vincent, Nuray, Koray, Douglas)
@@ -661,10 +663,10 @@ Pascal Oberholzer, Daniel Josephy Hernández,
 Martin Roesch, Andreas Roesch, Brigitte Roesch,
 Milan Bombsch, Rafael Häuselmann, Nick Pützer,
 Dani Saguer, Manwe, Niklas Munkes, Valta, Zusli, 
-Kwon, Peter
+Kwon, Peter Hatlestad
 
 <<< Beta Tester >>>
-Peter, Randalf, Martin Roesch, Patrick,
+Peter Hatlestad, Randalf, Martin Roesch, Patrick,
 Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
@@ -675,6 +677,7 @@ Dave, Melanie Silk
 Matt Sanz für sis toll Titelbild
 Lukas für sin SFML-Support
 Achpile für de Linux-Support
+MyroidTC für de Controller-Support
 Mona für ihre Bordell-Support
 Pascal Josephy für de Web-Support
 

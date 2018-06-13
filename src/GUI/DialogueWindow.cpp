@@ -277,7 +277,7 @@ void DialogueWindow::calculateEntryPositions() {
 }
 
 void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Up)) {
+	if (g_inputController->isJustUp()) {
 		m_chosenOption = std::max(m_chosenOption - 1, 0);
 		DialogueOption& option = m_options[m_chosenOption];
 		if (option.getPosition().y < TOP + SCROLL_WINDOW_TOP) {
@@ -287,7 +287,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 		return;
 	}
 
-	if (g_inputController->isKeyJustPressed(Key::Down)) {
+	if (g_inputController->isJustDown()) {
 		m_chosenOption = std::min(m_chosenOption + 1, static_cast<int>(m_options.size()) - 1);
 		DialogueOption& option = m_options[m_chosenOption];
 		if (option.getPosition().y + option.getSize().y > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) {
@@ -298,7 +298,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 	}
 
 	if (m_upActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Up)) {
+		if (g_inputController->isUp()) {
 			m_upActiveTime += frameTime;
 		}
 		else {
@@ -308,7 +308,7 @@ void DialogueWindow::updateScrolling(const sf::Time& frameTime) {
 	}
 
 	if (m_downActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Down)) {
+		if (g_inputController->isDown()) {
 			m_downActiveTime += frameTime;
 		}
 		else {

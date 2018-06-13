@@ -56,10 +56,12 @@ MapOverlay::~MapOverlay() {
 	CLEAR_VECTOR(m_maps);
 
 	delete m_window;
+	delete m_buttonGroup;
 }
 
 void MapOverlay::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
+	updateSelectableWindow();
 	auto* map = getCurrentMap();
 	if (map == nullptr) return;
 
@@ -81,7 +83,34 @@ void MapOverlay::update(const sf::Time& frameTime) {
 		wp->update(frameTime);
 	}
 
+	m_buttonGroup->update(frameTime);
+
+	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
+		if (m_buttonGroup->getButtons()[i]->isMousedOver()) {
+			m_buttonGroup->selectButton(i);
+			break;
+		}
+	}
+
 	m_window->update(frameTime);
+}
+
+void MapOverlay::updateSelectableWindow() {
+	if (!isWindowSelected() || g_inputController->isActionLocked()) {
+		return;
+	}
+
+	if (!m_buttonGroup->getButtons().empty()) {
+		return;
+	}
+
+	if (g_inputController->isJustLeft()) {
+		setLeftWindowSelected();
+	}
+
+	if (g_inputController->isJustRight()) {
+		setRightWindowSelected();
+	}
 }
 
 bool MapOverlay::setMap(const std::string& mapID) {
@@ -126,8 +155,7 @@ void MapOverlay::setMapIndex(int index) {
 	m_isOnCurrentMap = (m_screen->getWorldData()->id == map->mapId);
 	m_currentMap = index;
 
-	reloadWaypoints();
-	reloadQuestMarkers();
+	reloadMarkers();
 }
 
 void MapOverlay::updateFogOfWar(MapOverlayData* map) {
@@ -272,6 +300,24 @@ void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, i
 		sf::IntRect(posX * 25, posY * 25, 25, 25), true);
 }
 
+void MapOverlay::reloadButtonGroup() {
+	if (m_buttonGroup) {
+		delete m_buttonGroup;
+	}
+
+	m_buttonGroup = new JoystickButtonGroup();
+	m_buttonGroup->setSelectableWindow(this);
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	for (auto waypoint : m_waypoints) {
+		m_buttonGroup->addButton(waypoint);
+	}
+
+	for (auto marker : m_questMarkers) {
+		m_buttonGroup->addButton(marker);
+	}
+}
+
 void MapOverlay::notifyLevelOverlayReload() {
 	m_needsLevelOverlayReload = true;
 }
@@ -286,6 +332,14 @@ void MapOverlay::reloadLevelOverlay() {
 	m_maps[0]->map = m_levelOverlaySprite;
 	m_maps[0]->map.setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
 	m_needsLevelOverlayReload = false;
+}
+
+void MapOverlay::updateWindowSelected() {
+	m_buttonGroup->setGamepadEnabled(isWindowSelected());
+
+	if (isWindowSelected()) {
+		m_buttonGroup->notifyJoystickDown();
+	}
 }
 
 void MapOverlay::reloadMaps() {
@@ -352,6 +406,12 @@ WorldScreen* MapOverlay::getScreen() const {
 	return m_screen;
 }
 
+void MapOverlay::reloadMarkers() {
+	reloadWaypoints();
+	reloadQuestMarkers();
+	reloadButtonGroup();
+}
+
 void MapOverlay::reloadWaypoints() {
 	for (auto& wp : m_waypoints) {
 		delete wp;
@@ -402,7 +462,7 @@ void MapOverlay::reloadQuestMarkers() {
 			else if (markerData.mapId != map->mapId) {
 				// this marker is not on this map.
 				continue;
-			} 
+			}
 			else if (markerData.mapId == m_screen->getWorld()->getID() && !markerData.npcId.empty()) {
 				// this marker is on the current map and references an npc on this map.
 				for (auto go : *m_screen->getObjects(_MapMovableGameObject)) {
@@ -430,7 +490,7 @@ void MapOverlay::notifyJumpToQuest(const std::string& questId, const std::vector
 		// special case, this means that the main character is marked on the map.
 		// we set the current map now.
 		setMap(m_screen->getWorldData()->id);
-	} 
+	}
 	else {
 		// set the map that's referened in the quest marker.
 		if (!setMap(data[0].mapId)) return;
@@ -438,9 +498,10 @@ void MapOverlay::notifyJumpToQuest(const std::string& questId, const std::vector
 
 	m_mapTabBar->show(m_currentMap);
 
-	for (auto qm : m_questMarkers) {
-		if (qm->getQuestId() == questId) {
-			qm->setTooltipTime(sf::seconds(2.f));
+	for (int i = 0; i < static_cast<int>(m_buttonGroup->getButtons().size()); ++i) {
+		auto qm = dynamic_cast<MapQuestMarker*>(m_buttonGroup->getButtons()[i]);
+		if (qm && qm->getQuestId() == questId) {
+			m_buttonGroup->selectButton(i);
 		}
 	}
 }
@@ -482,8 +543,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 }
 
 void MapOverlay::show() {
-	reloadWaypoints();
-	reloadQuestMarkers();
+	reloadMarkers();
 	m_mapTabBar->show(m_currentMap);
 	m_isVisible = true;
 }
@@ -541,6 +601,17 @@ void WaypointMarker::loadAnimation() {
 
 	m_tooltip.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_tooltip.setTextStyle(TextStyle::Shadowed);
+	m_tooltip.setString(getTooltipString());
+}
+
+std::string WaypointMarker::getTooltipString() const {
+	if (!g_inputController->isGamepadConnected()) {
+		return g_textProvider->getText("InteractRightClick") + " " + g_textProvider->getText("ToTeleport");
+	}
+
+	auto const resolvedKey = EnumNames::getGamepadAxisName(
+		g_resourceManager->getConfiguration().gamepadKeyMap.at(Key::Confirm));
+	return "<" + resolvedKey + "> " + g_textProvider->getText("ToTeleport");
 }
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
@@ -550,27 +621,15 @@ void WaypointMarker::setPosition(const sf::Vector2f& position) {
 
 void WaypointMarker::onMouseOver() {
 	m_isMouseOver = true;
-	setState(GameObjectState::Active);
 }
 
-void WaypointMarker::update(const sf::Time& frameTime) {
-	bool wasMouseOver = m_isMouseOver;
-	m_isMouseOver = false;
-	AnimatedGameObject::update(frameTime);
-	if (wasMouseOver && !m_isMouseOver) {
-		setState(GameObjectState::Idle);
-	}
+void WaypointMarker::onLeftClick() {
+	click();
 }
 
-void WaypointMarker::render(sf::RenderTarget& target) {
-	AnimatedGameObject::render(target);
-	if (m_state == GameObjectState::Active) {
-		target.draw(m_tooltip);
-	}
-}
-
-void WaypointMarker::onRightClick() {
+void WaypointMarker::click() {
 	if (g_inputController->isActionLocked()) return;
+
 	g_inputController->lockAction();
 
 	if (m_parent->isOnCurrentMap()) {
@@ -590,14 +649,22 @@ void WaypointMarker::onRightClick() {
 	m_parent->hide();
 }
 
-void WaypointMarker::onLeftClick() {
-	onRightClick();
+void WaypointMarker::updateColor() {
 }
 
-GameObjectType WaypointMarker::getConfiguredType() const {
-	return _Interface;
+void WaypointMarker::update(const sf::Time& frameTime) {
+	m_isMouseOver = false;
+	AnimatedGameObject::update(frameTime);
+	bool activeState = m_isMouseOver || isSelected() && m_parent->isWindowSelected();
+	setState(activeState ? GameObjectState::Active : GameObjectState::Idle);
 }
 
+void WaypointMarker::render(sf::RenderTarget& target) {
+	AnimatedGameObject::render(target);
+	if (m_state == GameObjectState::Active) {
+		target.draw(m_tooltip);
+	}
+}
 
 ///////////////////////////////////////////////////
 //////////////// QUEST MARKER /////////////////////
@@ -610,10 +677,25 @@ MapQuestMarker::MapQuestMarker(const QuestData& questData, const QuestMarkerData
 	init();
 }
 
+void MapQuestMarker::update(const sf::Time& frameTime) {
+	QuestMarker::update(frameTime);
+	if (isSelected()) {
+		setTooltipTime(sf::seconds(0.1f));
+	}
+}
+
 void MapQuestMarker::onLeftClick() {
+	click();
+}
+
+void MapQuestMarker::click() {
 	if (g_inputController->isActionLocked()) return;
 	g_inputController->lockAction();
 	jumpToQuest();
+}
+
+void MapQuestMarker::onMouseOver() {
+	m_isMouseOver = true;
 }
 
 void MapQuestMarker::init() {
@@ -630,5 +712,8 @@ const std::string& MapQuestMarker::getQuestId() {
 
 void MapQuestMarker::jumpToQuest() {
 	m_interface->jumpToQuestLog(m_questData.id);
+}
+
+void MapQuestMarker::updateColor() {
 }
 

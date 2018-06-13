@@ -24,7 +24,6 @@ public:
 
 	void updateFirst(const sf::Time& frameTime) override { MapMovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MapMovableGameObject::renderAfterForeground(target); }
-	void setDebugBoundingBox(const sf::Color& color) override { MapMovableGameObject::setDebugBoundingBox(color); }
 	void setState(GameObjectState state) override { MapMovableGameObject::setState(state); }
 	void setPosition(const sf::Vector2f& pos) override { MapMovableGameObject::setPosition(pos); }
 
@@ -37,7 +36,6 @@ public:
 private:
 	std::string getSpritePath() const;
 	const float WALK_ACCELERATION = 1500.0f;
-	std::map<Key, sf::Vector2f> m_inputMap;
 	// handle input and calculate the next position
 	void handleInput();
 	CharacterCore* m_core;

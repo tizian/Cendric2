@@ -1,14 +1,13 @@
 #pragma once
 
 #include "global.h"
-#include "InputController.h"
 #include "ResourceManager.h"
-#include "Window.h"
-#include "GUI/GUITabButton.h"
+#include "GUI/SelectableWindow.h"
 
 class WorldInterface;
+class ButtonGroup;
 
-class GUITabBar final {
+class GUITabBar final : public SelectableWindow {
 public:
 	GUITabBar(WorldInterface* _interface, int size);
 	~GUITabBar();
@@ -19,19 +18,21 @@ public:
 
 	bool isVisible() const;
 
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target) const;
 	void update(const sf::Time& frameTime);
+	void updateGamepadTexts();
 
 	void setPosition(const sf::Vector2f& pos);
 	void setButtonTexture(int index, const sf::Texture* tex, int x);
 	void setButtonOnClick(int index, const std::function<void()>& agent);
 	void setButtonText(int index, const std::string& text);
-	void setActiveElement(int index);
+	void setSelectedElement(int index);
 
-	int getActiveElement() const;
+	int getSelectedElement() const;
 
 private:
 	WorldInterface* getInterface() const;
+	void updateWindowSelected() override;
 	void init();
 
 private:
@@ -39,10 +40,8 @@ private:
 	int m_size = 0;
 
 	WorldInterface* m_worldInterface;
-	std::vector<GUITabButton*> m_buttons;
+	ButtonGroup* m_buttonGroup;
 	sf::Vector2f m_position;
-
-	Window* m_window = nullptr;
 
 public:
 	static const int WIDTH;

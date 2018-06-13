@@ -50,7 +50,7 @@ void Trigger::update(const sf::Time& frameTime) {
 		m_isOnTrigger = false;
 	}
 	if (m_isOnTrigger) return;
-	if (m_data.isKeyGuarded && !g_inputController->isKeyJustPressed(Key::Up)) {
+	if (m_data.isKeyGuarded && !g_inputController->isJustUp()) {
 		return;
 	}
 	if (intersects) {

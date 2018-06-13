@@ -6,11 +6,6 @@ MapMainCharacter::MapMainCharacter(Map* map, Screen* screen) : MapMovableGameObj
 	m_screen = screen;
 	load();
 
-	m_inputMap.insert({ Key::Left, sf::Vector2f(-1.f, 0.f) });
-	m_inputMap.insert({ Key::Right, sf::Vector2f(1.f, 0.f) });
-	m_inputMap.insert({ Key::Down, sf::Vector2f(0.f, 1.f) });
-	m_inputMap.insert({ Key::Up, sf::Vector2f(0.f, -1.f) });
-
 	m_isAlwaysUpdate = true;
 }
 
@@ -123,11 +118,20 @@ void MapMainCharacter::render(sf::RenderTarget& target) {
 
 void MapMainCharacter::handleInput() {
 	sf::Vector2f currentAcceleration;
-	for (auto& it : m_inputMap) {
-		if (g_inputController->isKeyActive(it.first)) {
-			currentAcceleration += it.second;
-		}
+
+	if (g_inputController->isDown()) {
+		currentAcceleration += sf::Vector2f(0.f, 1.f);
 	}
+	if (g_inputController->isUp()) {
+		currentAcceleration += sf::Vector2f(0.f, -1.f);
+	}
+	if (g_inputController->isLeft()) {
+		currentAcceleration += sf::Vector2f(-1.f, 0.f);
+	}
+	if (g_inputController->isRight()) {
+		currentAcceleration += sf::Vector2f(1.f, 0.f);
+	}
+
 	currentAcceleration *= WALK_ACCELERATION;
 	setAcceleration(currentAcceleration);
 }

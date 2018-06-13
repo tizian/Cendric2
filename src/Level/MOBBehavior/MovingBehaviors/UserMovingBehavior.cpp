@@ -54,12 +54,13 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 			return;
 		}
 
+		bool up = g_inputController->isUp();
+		bool down = g_inputController->isDown();
 		// handle climb step timing
-		if (g_inputController->isKeyActive(Key::Up) || g_inputController->isKeyActive(Key::Down)) {
+		if (up || down) {
 			m_climbStepTime += frameTime;
 			if (m_climbStepTime >= CLIMB_STEP_TIME) {
 				m_climbStepTime = sf::Time::Zero;
-				bool up = g_inputController->isKeyActive(Key::Up);
 				float diffY = static_cast<float>(up ? -LadderTile::LADDER_STEP : LadderTile::LADDER_STEP);
 				
 				WorldCollisionQueryRecord rec;
@@ -92,7 +93,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 	}
 	else {
 		// check if a climbing just started
-		if (!(g_inputController->isKeyJustPressed(Key::Up) || g_inputController->isKeyJustPressed(Key::Down))) return;
+		if (!(g_inputController->isJustUp() || g_inputController->isJustDown())) return;
 
 		checkLadders();
 	}
@@ -135,11 +136,11 @@ void UserMovingBehavior::handleMovementInput() {
 	float newAccelerationX = m_mainChar->getAcceleration().x;
 	if (!m_mainChar->isFeared()) {
 
-		if (g_inputController->isKeyActive(Key::Left)) {
+		if (g_inputController->isLeft()) {
 			if (!m_isClimbing) m_nextIsFacingRight = false;
 			newAccelerationX -= m_isClimbing ? m_walkAcceleration * 0.2f : m_walkAcceleration;
 		}
-		if (g_inputController->isKeyActive(Key::Right)) {
+		if (g_inputController->isRight()) {
 			if (!m_isClimbing) m_nextIsFacingRight = true;
 			newAccelerationX += m_isClimbing ? m_walkAcceleration * 0.2f : m_walkAcceleration;
 		}
@@ -181,6 +182,10 @@ void UserMovingBehavior::stopAll() {
 
 void UserMovingBehavior::setJumpLock() {
 	m_isJumpLocked = true;
+}
+
+bool UserMovingBehavior::isClimbing() const {
+	return m_isClimbing;
 }
 
 void UserMovingBehavior::updateAnimation(const sf::Time& frameTime) {

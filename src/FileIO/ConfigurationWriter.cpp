@@ -14,9 +14,11 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeDisplayMode(data);
 		configuration << writeQuickcastOn(data);
 		configuration << writeAutotargetOn(data);
+		configuration << writePauseInventoryOn(data);
 		configuration << writeHintsOn(data);
 		configuration << writeQuestmarkersOn(data);
 		configuration << writeMainInputMap(data);
+		configuration << writeGamepadInputMap(data);
 		configuration << writeVSyncOn(data);
 		configuration << writeFPSLimitOn(data);
 		configuration << writeFPSMax(data);
@@ -66,6 +68,11 @@ std::string ConfigurationWriter::writeQuickcastOn(const ConfigurationData& data)
 std::string ConfigurationWriter::writeAutotargetOn(const ConfigurationData& data) const {
 	std::string autotargetOn = "# 0 means autotarget off, 1 means autotarget on\n";
 	return autotargetOn.append(std::string(AUTOTARGET_ON) + ":" + (data.isAutotarget ? "1" : "0") + "\n");
+}
+
+std::string ConfigurationWriter::writePauseInventoryOn(const ConfigurationData& data) const {
+	std::string pauseInventoryOn = "# 0 means not pause in inventory, 1 means pause in inventory\n";
+	return pauseInventoryOn.append(std::string(PAUSEINVENTORY_ON) + ":" + (data.isPauseInventory ? "1" : "0") + "\n");
 }
 
 std::string ConfigurationWriter::writeHintsOn(const ConfigurationData& data) const {
@@ -135,8 +142,8 @@ std::string ConfigurationWriter::writeVSyncOn(const ConfigurationData& data) con
 }
 
 std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data) const {
-	std::string inputMap = "# the key input mapping.\n";
-	inputMap.append("# for key map values (values before comma) guess which is which.\n");
+	std::string inputMap = "# the keyboard input mapping.\n";
+	inputMap.append("# for key map values (values before comma) check out github.\n");
 	inputMap.append("# for keyboard key values (values after comma) see SFML -> Keyboard.\n");
 
 	for (auto it : data.mainKeyMap) {
@@ -149,3 +156,20 @@ std::string ConfigurationWriter::writeMainInputMap(const ConfigurationData& data
 	}
 	return inputMap;
 }
+
+std::string ConfigurationWriter::writeGamepadInputMap(const ConfigurationData& data) const {
+	std::string inputMap = "# the gamepad input mapping.\n";
+	inputMap.append("# for key map values (values before comma) check out github.\n");
+	inputMap.append("# for gamepad axis values, check out github.\n");
+
+	for (auto it : data.gamepadKeyMap) {
+		inputMap.append(std::string(GAMEPAD_INPUT_MAPPING));
+		inputMap.append(":");
+		inputMap.append(std::to_string(static_cast<int>(it.first)));
+		inputMap.append(",");
+		inputMap.append(std::to_string(static_cast<int>(it.second)));
+		inputMap.append("\n");
+	}
+	return inputMap;
+}
+

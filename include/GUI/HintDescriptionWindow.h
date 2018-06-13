@@ -3,11 +3,8 @@
 #include "global.h"
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
-#include "TextProvider.h"
 #include "CharacterCore.h"
-#include "GUI/GUIConstants.h"
 #include "GUI/CharacterInfo.h"
-#include "GUI/Hints.h"
 
 class HintDescriptionWindow final : public Window {
 public:

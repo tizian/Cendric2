@@ -18,7 +18,6 @@ public:
 	void updateFirst(const sf::Time& frameTime) override { MovableGameObject::updateFirst(frameTime); }
 	void renderAfterForeground(sf::RenderTarget& target) override { MovableGameObject::renderAfterForeground(target); }
 	void render(sf::RenderTarget& target) override { LevelDynamicTile::render(target); }
-	void setDebugBoundingBox(const sf::Color& debugColor) override { MovableGameObject::setDebugBoundingBox(debugColor); }
 
 	bool init(const LevelTileProperties& properties) override;
 	void loadAnimation(int skinNr) override;
@@ -32,6 +31,7 @@ public:
 private:
 	std::string getSpritePath() const override;
 	std::string getSoundPath() const override;
+	bool isCurrentlyColliding(); 
 	void checkCollisions(const sf::Vector2f& nextPosition);
 
 	const float GRAVITY_ACCELERATION = 1000.f;

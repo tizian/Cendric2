@@ -20,6 +20,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			else if (line.compare(0, strlen(MAIN_INPUT_MAPPING), std::string(MAIN_INPUT_MAPPING)) == 0) {
 				noError = readMainInputMapping(line, data);
 			}
+			else if (line.compare(0, strlen(GAMEPAD_INPUT_MAPPING), std::string(GAMEPAD_INPUT_MAPPING)) == 0) {
+				noError = readGamepadInputMapping(line, data);
+			}
 			else if (line.compare(0, strlen(VSYNC_ON), std::string(VSYNC_ON)) == 0) {
 				noError = readVSyncOn(line, data);
 			}
@@ -58,6 +61,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			}
 			else if (line.compare(0, strlen(AUTOTARGET_ON), std::string(AUTOTARGET_ON)) == 0) {
 				noError = readAutotargetOn(line, data);
+			}
+			else if (line.compare(0, strlen(PAUSEINVENTORY_ON), std::string(PAUSEINVENTORY_ON)) == 0) {
+				noError = readPauseInventoryOn(line, data);
 			}
 			else if (line.compare(0, strlen(DISPLAYMODE), std::string(DISPLAYMODE)) == 0) {
 				noError = readDisplayMode(line, data);
@@ -274,6 +280,10 @@ bool ConfigurationReader::readAutotargetOn(const std::string& line, Configuratio
 	return readBoolean(line, data.isAutotarget);
 }
 
+bool ConfigurationReader::readPauseInventoryOn(const std::string& line, ConfigurationData& data) const {
+	return readBoolean(line, data.isPauseInventory);
+}
+
 bool ConfigurationReader::readIsDisplayTime(const std::string& line, ConfigurationData& data) const {
 	return readBoolean(line, data.isDisplayTime);
 }
@@ -300,6 +310,31 @@ bool ConfigurationReader::readMainInputMapping(const std::string& line, Configur
 		return false;
 	}
 	data.mainKeyMap[key] = keyboardKey;
+	return true;
+}
+
+bool ConfigurationReader::readGamepadInputMapping(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == std::string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after gamepad input mapping tag or no value after colon.");
+		return false;
+	}
+	Key key = static_cast<Key>(atoi(line.substr(colon + 1).c_str()));
+	if (key >= Key::MAX || key <= Key::VOID) {
+		g_logger->logError("ConfigurationReader", "Key id not recognized: " + std::to_string(static_cast<int>(key)));
+		return false;
+	}
+	size_t comma = line.find(',');
+	if (comma == std::string::npos || line.length() < comma + 1) {
+		g_logger->logError("ConfigurationReader", "No comma found after key integer (gamepad input mapping tag) or no value after comma.");
+		return false;
+	}
+	GamepadAxis axis = static_cast<GamepadAxis>(atoi(line.substr(comma + 1).c_str()));
+	if (axis > GamepadAxis::MAX || axis <= GamepadAxis::VOID) {
+		g_logger->logError("ConfigurationReader", "Gamepad axis not recognized: " + std::to_string(static_cast<int>(axis)));
+		return false;
+	}
+	data.gamepadKeyMap[key] = axis;
 	return true;
 }
 

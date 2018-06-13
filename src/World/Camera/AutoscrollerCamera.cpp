@@ -1,5 +1,5 @@
 #include "World/Camera/AutoscrollerCamera.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Level/LevelMainCharacter.h"
 #include "Screens/Screen.h"
 

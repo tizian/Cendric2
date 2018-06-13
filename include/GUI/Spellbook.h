@@ -2,13 +2,15 @@
 
 #include "global.h"
 #include "CharacterCore.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "ResourceManager.h"
 #include "Window.h"
 #include "GUI/SpellSlot.h"
 #include "GUI/TexturedTabBar.h"
 #include "GUI/ModifierSlot.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/SelectableWindow.h"
+#include "GUI/SpellButtonGroup.h"
 
 class WeaponWindow;
 class SlotClone;
@@ -17,7 +19,7 @@ class WorldInterface;
 // the spellbook, as displayed in a level or a map
 // it takes its information about learned spells and modifiers directly from the character core
 // it is only clickable when in a map.
-class Spellbook final {
+class Spellbook final : public SelectableWindow {
 public:
 	Spellbook(WorldInterface* _interface, bool modifiable);
 	~Spellbook();
@@ -30,11 +32,21 @@ public:
 	void render(sf::RenderTarget& target);
 	void update(const sf::Time& frameTime);
 
-	// reloads the spellbook spells & modifiers, depending on the core
 	void reload();
+
+	WeaponWindow* getWeaponWindow() const;
+	bool isGamepadSelection() const;
+	void stopGamepadSelection();
+	void notifyGamepadSelected();
 
 	static float WIDTH;
 	static float SPELL_OFFSET;
+
+protected:
+	void updateWindowSelected() override;
+	void reloadButtonGroup();
+	void updateButtonActions();
+	void startGamepadSelection();
 
 private:
 	CharacterCore* m_core;
@@ -45,7 +57,6 @@ private:
 	void init();
 	void clearAllSlots();
 
-	Window* m_window = nullptr;
 	WeaponWindow* m_weaponWindow = nullptr;
 
 	BitmapText m_selectedTabText;
@@ -61,6 +72,8 @@ private:
 	std::vector<std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>> m_twilightSlots;
 	std::vector<std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>> m_necromancySlots;
 	std::vector<std::pair<SpellSlot*, std::pair<BitmapText, BitmapText>>> m_divineSlots;
+
+	SpellButtonGroup* m_buttonGroup = nullptr;
 
 	void calculateModifierSlots();
 	void calculateSpellSlots();
@@ -85,6 +98,7 @@ private:
 	sf::Vector2f m_startMousePosition;
 	void handleDragAndDrop();
 	void stopDragging();
+	bool m_isGamepadSelection = false;
 
 	static const sf::Vector2f BUTTON_SIZE;
 	const float MARGIN = 5.f;

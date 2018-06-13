@@ -5,6 +5,7 @@
 #include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "Registrar.h"
+#include "Spells/SpellManager.h"
 
 REGISTER_ENEMY(EnemyID::Cairn, CairnEnemy)
 

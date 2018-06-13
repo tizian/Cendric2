@@ -1,7 +1,7 @@
 #pragma once
 
 #include "global.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 
 #include "Enums/GameObjectState.h"
 #include "Enums/GameObjectType.h"
@@ -12,7 +12,7 @@ class GameObjectComponent;
 // A game object with position, bounding box, game state that can be added to a screen.
 class GameObject {
 public:
-	GameObject() {}
+	GameObject() = default;
 	virtual ~GameObject();
 
 	// used to update objects before the real updates, called by the screens.
@@ -34,7 +34,7 @@ public:
 	virtual void onLeftJustPressed();
 
 	void setBoundingBox(const sf::FloatRect& rect);
-	virtual void setDebugBoundingBox(const sf::Color& debugColor);
+	void setDebugBoundingBox(const sf::Color& debugColor);
 	virtual void setSize(const sf::Vector2f& size);
 	virtual void setPosition(const sf::Vector2f& pos);
 	virtual void setPositionX(float posX);

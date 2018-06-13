@@ -62,32 +62,15 @@ void Game::reloadWindow() {
 void Game::run() {
 	sf::Clock frameClock;
 	sf::Time frameTime = frameClock.restart();
+	g_inputController->notifyGamepadConnected();
 
 	while (m_running) {
-		sf::Event e;
-
 		// input
 		g_inputController->update(frameTime);
 		
 		// don't count this loop into the frametime!
 		sf::Time deltaTime = frameClock.restart();
-		while (m_mainWindow.pollEvent(e)) {
-			if (e.type == sf::Event::Closed) {
-				m_screenManager->requestQuit();
-			}
-			else if (e.type == sf::Event::Resized) {
-				g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
-			}
-			else if (e.type == sf::Event::TextEntered) {
-				g_inputController->readUnicode(e.text.unicode);
-			}
-			else if (e.type == sf::Event::KeyPressed) {
-				g_inputController->setLastPressedKey(e.key.code);
-			}
-			else if (e.type == sf::Event::MouseWheelScrolled) {
-				g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
-			}
-		}
+		pollEvents();
 
 		frameClock.restart();
 		if (deltaTime.asSeconds() > MAX_FRAME_TIME) {
@@ -130,6 +113,37 @@ void Game::run() {
 	}
 
 	m_mainWindow.close();
+}
+
+void Game::pollEvents() {
+	sf::Event e;
+
+	while (m_mainWindow.pollEvent(e)) {
+		if (e.type == sf::Event::Closed) {
+			m_screenManager->requestQuit();
+		}
+		else if (e.type == sf::Event::Resized) {
+			g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
+		}
+		else if (e.type == sf::Event::TextEntered) {
+			g_inputController->readUnicode(e.text.unicode);
+		}
+		else if (e.type == sf::Event::KeyPressed) {
+			g_inputController->setLastPressedKey(e.key.code);
+		}
+		else if (e.type == sf::Event::JoystickMoved) {
+			g_inputController->setLastPressedGamepadAxis(e.joystickMove);
+		}
+		else if (e.type == sf::Event::JoystickButtonPressed) {
+			g_inputController->setLastPressedGamepadButton(e.joystickButton);
+		}
+		else if (e.type == sf::Event::MouseWheelScrolled) {
+			g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
+		}
+		else if (e.type == sf::Event::JoystickConnected || e.type == sf::Event::JoystickDisconnected) {
+			g_inputController->notifyGamepadConnected();
+		}
+	}
 }
 
 void Game::showFPSText(sf::RenderTarget& target, float frameTimeSeconds) {

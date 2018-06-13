@@ -30,12 +30,14 @@ inline bool ends_with(const std::string& value, const std::string& ending) {
 }
 
 struct sort_date {
-	bool operator() (const SaveGameEntry* save1, const SaveGameEntry* save2) {
-		return (*save1 > *save2);
+	bool operator() (const ScrollEntry* save1, const ScrollEntry* save2) {
+		return *dynamic_cast<const SaveGameEntry*>(save1) > *dynamic_cast<const SaveGameEntry*>(save2);
 	}
 };
 
 SaveGameWindow::SaveGameWindow() {
+	m_entries = &m_saveGameEntries;
+
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, WIDTH, HEIGHT);
 	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
 
@@ -58,40 +60,32 @@ SaveGameWindow::SaveGameWindow() {
 SaveGameWindow::~SaveGameWindow() {
 	delete m_scrollBar;
 	delete m_scrollHelper;
-
-	for (auto& entry : m_entries) {
-		delete entry;
-	}
-	m_entries.clear();
+	CLEAR_VECTOR(m_saveGameEntries);
 }
 
 void SaveGameWindow::reload() {
 	m_isChosen = false;
-	loadSaves(m_entries);
+	loadSaves(m_saveGameEntries);
 	
-	if (!m_entries.empty()) {
-		m_chosenEntry = 0;
-		m_entries[m_chosenEntry]->select();
-	}
+	if (!m_saveGameEntries.empty()) {
+		selectEntry(0);
+	} 
 
-	if (m_entries.size() < ENTRY_COUNT) {
+	if (m_saveGameEntries.size() < ENTRY_COUNT) {
 		m_scrollBar->setScrollPosition(0.f);
 	}
 }
 
-void SaveGameWindow::loadSaves(std::vector<SaveGameEntry*>& entries) {
+void SaveGameWindow::loadSaves(std::vector<ScrollEntry*>& entries) {
 	for (auto& entry : entries) {
 		delete entry;
 	}
 	entries.clear();
 
-	DIR* dir;
-	struct dirent* de;
-
-	dir = opendir((getDocumentsPath(GlobalResource::SAVEGAME_FOLDER)).c_str());
+	DIR * dir = opendir((getDocumentsPath(GlobalResource::SAVEGAME_FOLDER)).c_str());
 	int nr = 0;
 	while (dir) {
-		de = readdir(dir);
+		struct dirent * de = readdir(dir);
 		if (!de) break;
 		if (de->d_type == DT_DIR) {
 			// we don't consider directory folders
@@ -102,9 +96,9 @@ void SaveGameWindow::loadSaves(std::vector<SaveGameEntry*>& entries) {
 			g_logger->logWarning("SaveGameWindow", "There is a file of the wrong type in the savegame folder: " + std::string(de->d_name));
 			continue;
 		}
-		SaveGameEntry* entry = new SaveGameEntry();
-		std::string location = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::string(de->d_name);
-		if (!entry->load(location.c_str())) {
+		auto entry = new SaveGameEntry();
+		const auto location = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::string(de->d_name);
+		if (!entry->load(location)) {
 			g_logger->logError("SaveGameWindow", "Could not load savegame " + location);
 			continue;
 		}
@@ -118,55 +112,33 @@ void SaveGameWindow::loadSaves(std::vector<SaveGameEntry*>& entries) {
 }
 
 bool SaveGameWindow::isChosen() {
-	bool wasChosen = m_isChosen;
+	const auto wasChosen = m_isChosen;
 	m_isChosen = false;
 	return wasChosen;
+}
+
+bool SaveGameWindow::isEntryInvisible(const ScrollEntry* entry) const {
+	auto const pos = entry->getPosition();
+	return pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT;
 }
 
 void SaveGameWindow::update(const sf::Time& frameTime) {
 	if (!m_isEnabled) return;
 
-	if (m_entries.empty()) {
+	if (m_saveGameEntries.empty()) {
 		m_scrollBar->setEnabled(false);
 		return;
 	}
 
+	const auto previouslySelectedId = m_selectedEntryId;
+
 	m_scrollBar->update(frameTime);
+	updateSelection(frameTime);
 
-	int oldEntry = m_chosenEntry;
-
-	updateScrolling(frameTime);
-
-	for (size_t i = 0; i < m_entries.size(); ++i) {
-		if (i == static_cast<size_t>(m_chosenEntry)) {
-			m_entries[i]->setColorSelected();
-		}
-		else if (g_inputController->isMouseOver(m_entries[i]->getBoundingBox(), true)) {
-			m_entries[i]->setColorMouseover();
-		}
-		else {
-			m_entries[i]->setColorDeselected();
-		}
+	if (m_saveGameEntries[previouslySelectedId]->isClicked()) {
+		m_isChosen = true;
 	}
 
-	for (size_t i = 0; i < m_entries.size(); ++i) {
-		sf::Vector2f pos = m_entries[i]->getPosition();
-		if (pos.y < TOP || pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + HEIGHT) continue;
-		m_entries[i]->update(frameTime);
-		if (m_entries[i]->isClicked()) {
-			if (static_cast<int>(i) == m_chosenEntry) {
-				// a chosen option was clicked again
-				m_isChosen = true;
-			}
-			m_chosenEntry = static_cast<int>(i);
-		}
-	}
-
-	if (oldEntry != m_chosenEntry) {
-		m_entries[oldEntry]->deselect();
-		m_entries[m_chosenEntry]->select();
-		g_resourceManager->playSound(GlobalResource::SOUND_GUI_MENUCURSOR);
-	}
 	if (g_inputController->isSelected()) {
 		m_isChosen = true;
 	}
@@ -174,122 +146,26 @@ void SaveGameWindow::update(const sf::Time& frameTime) {
 	calculateEntryPositions();
 }
 
-void SaveGameWindow::calculateEntryPositions() {
-	int rows = static_cast<int>(m_entries.size());
-	int steps = rows - ENTRY_COUNT + 1;
-
-	m_scrollBar->setDiscreteSteps(steps);
-
-	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
-
-	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
-	}
-
-	float animationTime = 0.1f;
-	float time = m_scrollBar->getScrollTime().asSeconds();
-	if (time >= animationTime) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-	}
-	float start = m_scrollHelper->lastOffset;
-	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
-	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
-
-	float xOffset = LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset;
-
-	for (auto& it : m_entries) {
-		it->setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		it->setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
-	}
-}
-
-void SaveGameWindow::updateScrolling(const sf::Time& frameTime) {
-	if (g_inputController->isKeyJustPressed(Key::Up)) {
-		m_chosenEntry = std::max(m_chosenEntry - 1, 0);
-		SaveGameEntry* entry = m_entries[m_chosenEntry];
-		if (entry->getPosition().y < TOP) {
-			m_scrollBar->scroll(-1);
-		}
-		m_upActiveTime = frameTime;
-		return;
-	}
-
-	if (g_inputController->isKeyJustPressed(Key::Down)) {
-		m_chosenEntry = std::min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
-		SaveGameEntry* entry = m_entries[m_chosenEntry];
-		if (entry->getPosition().y + entry->getSize().y > TOP + HEIGHT) {
-			m_scrollBar->scroll(1);
-		}
-		m_downActiveTime = frameTime;
-		return;
-	}
-
-	if (m_upActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Up)) {
-			m_upActiveTime += frameTime;
-		}
-		else {
-			m_upActiveTime = sf::Time::Zero;
-			return;
-		}
-	}
-
-	if (m_downActiveTime > sf::Time::Zero) {
-		if (g_inputController->isKeyActive(Key::Down)) {
-			m_downActiveTime += frameTime;
-		}
-		else {
-			m_downActiveTime = sf::Time::Zero;
-			return;
-		}
-	}
-
-	m_timeSinceTick += frameTime;
-	if (m_timeSinceTick < SCROLL_TICK_TIME) return;
-
-	if (m_upActiveTime > SCROLL_TIMEOUT) {
-		m_chosenEntry = std::max(m_chosenEntry - 1, 0);
-		SaveGameEntry* entry = m_entries[m_chosenEntry];
-		m_timeSinceTick = sf::Time::Zero;
-		if (entry->getPosition().y < TOP) {
-			m_scrollBar->scroll(-1);
-		}
-		return;
-	}
-
-	if (m_downActiveTime > SCROLL_TIMEOUT) {
-		m_chosenEntry = std::min(m_chosenEntry + 1, static_cast<int>(m_entries.size()) - 1);
-		SaveGameEntry* entry = m_entries[m_chosenEntry];
-		m_timeSinceTick = sf::Time::Zero;
-		if (entry->getPosition().y + entry->getSize().y > TOP + HEIGHT) {
-			m_scrollBar->scroll(1);
-		}
-		return;
-	}
-}
-
 void SaveGameWindow::render(sf::RenderTarget& renderTarget) {
-	for (size_t i = 0; i < m_entries.size(); ++i) {
-		m_entries[i]->render(m_scrollHelper->texture);
+	for (auto& entry : m_saveGameEntries) {
+		entry->render(m_scrollHelper->texture);
 	}
+
 	m_scrollHelper->render(renderTarget);
 
 	renderTarget.draw(m_scrollWindow);
 	m_scrollBar->render(renderTarget);
 
-	if (m_entries.empty()) {
+	if (m_saveGameEntries.empty()) {
 		renderTarget.draw(m_emptyText);
 	}
 }
 
 std::string SaveGameWindow::getChosenFilename() const {
-	if (m_entries.empty()) {
+	if (m_saveGameEntries.empty()) {
 		return "";
 	}
-	return m_entries[m_chosenEntry]->getFilename();
+	return dynamic_cast<SaveGameEntry*>(m_saveGameEntries[m_selectedEntryId])->getFilename();
 }
 
 void SaveGameWindow::setEnabled(bool value) {
@@ -297,27 +173,26 @@ void SaveGameWindow::setEnabled(bool value) {
 }
 
 std::string SaveGameWindow::getChosenSaveName() const {
-	if (m_entries.empty()) {
+	if (m_saveGameEntries.empty()) {
 		return "";
 	}
-	return m_entries[m_chosenEntry]->getSaveName();
+	return dynamic_cast<SaveGameEntry*>(m_saveGameEntries[m_selectedEntryId])->getSaveName();
 }
 
 // <<< SaveGameEntry >>>
 
 SaveGameEntry::SaveGameEntry() {
 	m_dateSaved.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_dateSaved.setColor(COLOR_WHITE);
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_name.setColor(COLOR_WHITE);
 	m_timePlayed.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_timePlayed.setColor(COLOR_WHITE);
+
+	updateColor();
 }
 
 bool SaveGameEntry::load(const std::string& filename) {
 	CharacterCoreReader reader;
 	CharacterCoreData data;
-	if (!reader.readCharacterCore(filename.c_str(), data, true)) {
+	if (!reader.readCharacterCore(filename, data, true)) {
 		g_logger->logError("SaveGameEntry", "Could not load data from file: " + std::string(filename));
 		return false;
 	}
@@ -332,14 +207,14 @@ bool SaveGameEntry::load(const std::string& filename) {
 	m_name.setString(data.saveGameName);
 
 	// format time played
-	int secondsPlayed = static_cast<int>(data.timePlayed.asSeconds());
-	int hoursPlayed = secondsPlayed / 3600;
-	int minutesPlayed = (secondsPlayed / 60) % 60;
+	auto secondsPlayed = static_cast<int>(data.timePlayed.asSeconds());
+	const auto hoursPlayed = secondsPlayed / 3600;
+	const auto minutesPlayed = (secondsPlayed / 60) % 60;
 	secondsPlayed = (secondsPlayed % 60);
-	std::string stringHours = hoursPlayed > 0 ? std::to_string(hoursPlayed) + " h - " : "";
-	std::string stringMinutes = minutesPlayed > 0 ? std::to_string(minutesPlayed) + " m - " : "";
-	std::string stringSeconds = std::to_string(secondsPlayed) + " s";
-	std::string formattedTime = stringHours + stringMinutes + stringSeconds;
+	const auto stringHours = hoursPlayed > 0 ? std::to_string(hoursPlayed) + " h - " : "";
+	const auto stringMinutes = minutesPlayed > 0 ? std::to_string(minutesPlayed) + " m - " : "";
+	const auto stringSeconds = std::to_string(secondsPlayed) + " s";
+	const auto formattedTime = stringHours + stringMinutes + stringSeconds;
 	m_timePlayed.setString(formattedTime);
 
 	m_isHashValid = data.hashValid;
@@ -367,46 +242,18 @@ void SaveGameEntry::setColor(const sf::Color& color) {
 	m_dateSaved.setColor(color);
 }
 
-void SaveGameEntry::setColorSelected() {
-	setColor(m_isHashValid ? COLOR_WHITE : COLOR_BAD);
-}
-
-void SaveGameEntry::setColorDeselected() {
-	setColor(m_isHashValid ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
-}
-
-void SaveGameEntry::setColorMouseover() {
-	setColor(m_isHashValid ? COLOR_LIGHT_PURPLE : COLOR_ELEMENTAL);
+void SaveGameEntry::updateColor() {
+	if (isSelected()) {
+		setColor(m_isHashValid ? COLOR_WHITE : COLOR_BAD);
+	} else if (isMouseover()) {
+		setColor(m_isHashValid ? COLOR_LIGHT_GREY : COLOR_ELEMENTAL);
+	} else {
+		setColor(m_isHashValid ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
+	}
 }
 
 void SaveGameEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
 	renderTarget.draw(m_timePlayed);
 	renderTarget.draw(m_dateSaved);
-}
-
-void SaveGameEntry::onLeftClick() {
-	m_isClicked = true;
-}
-
-bool SaveGameEntry::isClicked() {
-	bool wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
-}
-
-void SaveGameEntry::select() {
-	m_isSelected = true;
-}
-
-GameObjectType SaveGameEntry::getConfiguredType() const {
-	return _Undefined;
-}
-
-void SaveGameEntry::deselect() {
-	m_isSelected = false;
-}
-
-bool SaveGameEntry::isSelected() const {
-	return m_isSelected;
 }

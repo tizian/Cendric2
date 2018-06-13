@@ -3,10 +3,10 @@
 #include "GUI/SlotClone.h"
 
 QuickSlotBar::QuickSlotBar(WorldInterface* _interface) {
-	m_quickSlot1 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot1, Key::QuickSlot1);
+	m_quickSlot1 = new QuickSlot(_interface, Key::QuickSlot1, _interface->getCore()->getData().quickSlot1);
 	m_quickSlot1->setPosition(QUICKSLOT_OFFSET);
 
-	m_quickSlot2 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot2, Key::QuickSlot2);
+	m_quickSlot2 = new QuickSlot(_interface, Key::QuickSlot2, _interface->getCore()->getData().quickSlot2);
 	m_quickSlot2->setPosition(QUICKSLOT_OFFSET + sf::Vector2f(QuickSlot::SIZE + QUICKSLOT_SPACING, 0.f));
 }
 
@@ -23,7 +23,7 @@ void QuickSlotBar::hide() {
 	m_isVisible = false;
 }
 
-void QuickSlotBar::highlightSlots(bool highlight) {
+void QuickSlotBar::highlightSlots(bool highlight) const {
 	if (highlight) {
 		m_quickSlot1->highlight();
 		m_quickSlot2->highlight();
@@ -34,27 +34,27 @@ void QuickSlotBar::highlightSlots(bool highlight) {
 	}
 }
 
-void QuickSlotBar::render(sf::RenderTarget& target) {
+void QuickSlotBar::render(sf::RenderTarget& target) const {
 	if (!m_isVisible) return;
 	m_quickSlot1->render(target);
 	m_quickSlot2->render(target);
 }
 
-void QuickSlotBar::renderAfterForeground(sf::RenderTarget& target) {
+void QuickSlotBar::renderAfterForeground(sf::RenderTarget& target) const {
 	if (!m_isVisible) return;
 	m_quickSlot1->renderAfterForeground(target);
 	m_quickSlot2->renderAfterForeground(target);
 }
 
-void QuickSlotBar::update(const sf::Time& frameTime) {
+void QuickSlotBar::update(const sf::Time& frameTime) const {
 	if (!m_isVisible) return;
 	m_quickSlot1->update(frameTime);
 	m_quickSlot2->update(frameTime);
 }
 
-void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) {
+void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) const {
 	if (item == nullptr) return;
-	const InventorySlot* is = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
+	const auto is = dynamic_cast<const InventorySlot*>(item->getOriginalSlot());
 	if (fastIntersect(*item->getBoundingBox(), *(m_quickSlot1->getBoundingBox()))) {
 		m_quickSlot1->setItemID(is->getItemID());
 		return;
@@ -65,7 +65,15 @@ void QuickSlotBar::notifyConsumableDrop(const SlotClone* item) {
 	}
 }
 
-void QuickSlotBar::equipConsumable(const std::string& itemID) {
+void QuickSlotBar::equipConsumable(const std::string& itemID, int slotId) const {
+	if (slotId <= 1) {
+		m_quickSlot1->setItemID(itemID);
+	} else {
+		m_quickSlot2->setItemID(itemID);
+	}
+}
+
+void QuickSlotBar::equipConsumable(const std::string& itemID) const {
 	if (m_quickSlot1->isEmpty()) {
 		m_quickSlot1->setItemID(itemID);
 	}
@@ -77,7 +85,7 @@ void QuickSlotBar::equipConsumable(const std::string& itemID) {
 	}
 }
 
-void QuickSlotBar::reload() {
+void QuickSlotBar::reload() const {
 	m_quickSlot1->reload();
 	m_quickSlot2->reload();
 }

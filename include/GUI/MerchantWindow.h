@@ -1,19 +1,19 @@
 #pragma once
 
 #include "global.h"
-#include "CharacterCore.h"
 #include "Window.h"
 #include "GUI/InventorySlot.h"
 #include "GUI/MerchantItemDescriptionWindow.h"
-#include "GUI/Button.h"
 #include "GUI/SlicedSprite.h"
+#include "GUI/SelectableWindow.h"
 
 class MerchantInterface;
 class ScrollBar;
 class ScrollHelper;
+class ButtonGroup;
 
 // the merchant window, operating on a merchant interface
-class MerchantWindow final {
+class MerchantWindow final : public SelectableWindow {
 public:
 	MerchantWindow(MerchantInterface* _interface);
 	~MerchantWindow();
@@ -32,12 +32,12 @@ private:
 
 	// reloads the merchant items, depending on the core
 	void reload();
+	void reloadButtonGroup();
 	void clearAllSlots();
 	void completeTrade();
 	// reorganizes the positions of the 'm_items' map
 	void calculateSlotPositions();
 
-	Window* m_window;
 	BitmapText m_title;
 
 	SlicedSprite m_scrollWindow;
@@ -54,6 +54,14 @@ private:
 
 	void showDescription(const Item* item);
 	void hideDescription();
+
+protected:
+	void updateWindowSelected() override;
+	void updateButtonActions();
+
+private:
+	ButtonGroup* m_buttonGroup = nullptr;
+	static bool isSlotInvisible(const InventorySlot* slot);
 
 	static const int SLOT_COUNT_X;
 	static const int SLOT_COUNT_Y;

@@ -41,13 +41,17 @@ void MapScreen::execUpdate(const sf::Time& frameTime) {
 	if (!m_interface->isGuiOverlayVisible()) {
 		updateObjects(_ScreenOverlay, frameTime);
 	}
-	updateObjects(_DynamicTile, frameTime);
-	updateObjects(_ForegroundDynamicTile, frameTime);
-	updateObjects(_MapMovableGameObject, frameTime);
-	depthSortObjects(_MapMovableGameObject, true);
-	updateObjects(_Equipment, frameTime);
-	updateObjects(_Light, frameTime);
-	updateObjects(_Overlay, frameTime);
+
+	if (!isUpdateOnlyInterface()) {
+		updateObjects(_DynamicTile, frameTime);
+		updateObjects(_ForegroundDynamicTile, frameTime);
+		updateObjects(_MapMovableGameObject, frameTime);
+		depthSortObjects(_MapMovableGameObject, true);
+		updateObjects(_Equipment, frameTime);
+		updateObjects(_Light, frameTime);
+		updateObjects(_Overlay, frameTime);
+	}
+	
 	updateTooltipText(frameTime);
 }
 
@@ -101,8 +105,7 @@ void MapScreen::execOnEnter() {
 	addObject(ScreenOverlay::createLocationScreenOverlay(m_currentMap.getName()));
 }
 
-void MapScreen::notifyConditionAdded(const Condition& condition) {
-	WorldScreen::notifyConditionAdded(condition);
+void MapScreen::notifyNpcReload() {
 	for (auto& it : *getObjects(_MapMovableGameObject)) {
 		if (NPC* npc = dynamic_cast<NPC*>(it)) {
 			npc->notifyReloadNeeded();
@@ -110,13 +113,19 @@ void MapScreen::notifyConditionAdded(const Condition& condition) {
 	}
 }
 
+void MapScreen::notifyConditionAdded(const Condition& condition) {
+	WorldScreen::notifyConditionAdded(condition);
+	notifyNpcReload();
+}
+
 void MapScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 	WorldScreen::notifyItemEquip(itemID, type);
-	for (auto& it : *getObjects(_MapMovableGameObject)) {
-		if (NPC* npc = dynamic_cast<NPC*>(it)) {
-			npc->notifyReloadNeeded();
-		}
-	}
+	notifyNpcReload();
+}
+
+void MapScreen::notifyItemUnequip(const std::string& itemID, ItemType type) {
+	WorldScreen::notifyItemUnequip(itemID, type);
+	notifyNpcReload();
 }
 
 void MapScreen::notifyEquipmentReload() {

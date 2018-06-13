@@ -32,15 +32,17 @@ public:
 	void setLocked(bool isLocked);
 	bool isLocked() const;
 
-	inline void setNr(int nr) { m_nr = nr; }
-	
-	inline SpellType getSpellType() const { return m_spellType; }
-	inline SpellID getSpellID() const { return m_spellID; }
-	inline int getNr() const { return m_nr; }
-	inline Key getKey() const { return m_inputKeyID; }
+	void setNr(int nr) { m_nr = nr; }
+	void setInputKeyText(const std::string& text);
+	void setKeyboardInputText();
 
-	inline float getConfiguredSize() const override { return SIZE; }
-	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
+	SpellType getSpellType() const { return m_spellType; }
+	SpellID getSpellID() const { return m_spellID; }
+	int getNr() const { return m_nr; }
+	Key getKey() const { return m_inputKeyID; }
+
+	float getConfiguredSize() const override { return SIZE; }
+	float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
 	static const float SIZE;
 	static const float ICON_OFFSET;

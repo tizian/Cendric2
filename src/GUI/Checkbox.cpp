@@ -1,8 +1,6 @@
 #include "GUI/Checkbox.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const float Checkbox::SIDE_LENGTH = 40.f;
 const float Checkbox::CENTER_SIZE = 30.f;
 
@@ -26,10 +24,14 @@ Checkbox::Checkbox() :
 void Checkbox::onLeftClick() {
 	if (m_isEnabled && m_isPressed) {
 		m_isPressed = false;
-		setChecked(!m_isChecked);
+		click();
 		m_executeOnClick();
 		g_inputController->lockAction();
 	}
+}
+
+void Checkbox::click() {
+	setChecked(!m_isChecked);
 }
 
 void Checkbox::setChecked(bool checked) {
@@ -156,7 +158,7 @@ void Checkbox::setCharacterSize(int size) {
 }
 
 void Checkbox::setEnabled(bool enabled) {
-	m_isEnabled = enabled;
+	ButtonInterface::setEnabled(enabled);
 	m_ornament.setColor(sf::Color(
 		m_ornament.getColor().r,
 		m_ornament.getColor().g,
@@ -165,24 +167,15 @@ void Checkbox::setEnabled(bool enabled) {
 	m_text.setColorAlpha(m_isEnabled ? 255 : 100);
 }
 
-void Checkbox::setVisible(bool value) {
-	m_isVisible = value;
-}
+void Checkbox::updateColor() {
+	m_text.setColor(m_isSelected ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
+	m_text.setColorAlpha(m_isEnabled ? 255 : 100);
 
-bool Checkbox::isEnabled() const {
-	return m_isEnabled;
-}
-
-bool Checkbox::isVisible() const {
-	return m_isVisible;
+	m_background.setColor(m_isSelected ? COLOR_MEDIUM_PURPLE : m_backgroundColor);
 }
 
 bool Checkbox::isChecked() const {
 	return m_isChecked;
-}
-
-GameObjectType Checkbox::getConfiguredType() const {
-	return _Button;
 }
 
 void Checkbox::setOnClick(const std::function<void()>& agent) {

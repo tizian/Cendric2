@@ -2,7 +2,7 @@
 
 #include "global.h"
 #include "Spells/Spell.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Structs/SpellModifier.h"
 #include "Spells/SpellCreator.h"
 
@@ -19,6 +19,8 @@ public:
 	void addSpell(const SpellData& spell, const std::vector<SpellModifier>& modifiers);
 	// returns whether it succeeded
 	bool setCurrentSpell(int spellNr);
+	void setNextSpell();
+	void setPreviousSpell();
 	// sets the current spell to spellNr and, if it doesn't need a target, executes it.
 	void setAndExecuteSpell(int spellNr);
 	// triggers the spell creator & executes the current spell if it are not on cooldown

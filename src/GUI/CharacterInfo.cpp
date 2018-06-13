@@ -50,6 +50,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	m_screen = screen;
 	m_core = screen->getCharacterCore();
 	m_attributes = attributes;
+	m_entries = &m_hintEntries;
 
 	BitmapText name;
 	name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -111,7 +112,8 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	float x = GUIConstants::LEFT + 0.5f * (m_window->getSize().x - barWidth);
 	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
-	m_tabBar = new TabBar(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
+	m_tabBar = new TabBar();
+	m_tabBar->init(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
 	m_tabBar->getTabButton(0)->setText("Stats");
 	m_tabBar->getTabButton(1)->setText("Reputation");
 	m_tabBar->getTabButton(2)->setText("Hints");
@@ -136,6 +138,7 @@ CharacterInfo::~CharacterInfo() {
 	delete m_descriptionWindow;
 	delete m_scrollBar;
 	delete m_scrollHelper;
+	CLEAR_VECTOR(m_hintEntries);
 }
 
 bool CharacterInfo::isVisible() const {
@@ -146,85 +149,53 @@ void CharacterInfo::update(const sf::Time& frameTime) {
 	if (!m_isVisible) return;
 
 	m_scrollBar->update(frameTime);
+	updateTabBar(frameTime);
+	if (m_tabBar->getActiveTabIndex() == 2) {
+		updateSelection(frameTime);
+	}
+	updateSelectableWindow();
+	m_window->update(frameTime);
+	calculateEntryPositions();
+	checkReload();
+}
 
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		if (m_selectedEntry && m_selectedEntry->getHintKey() == entry.getHintKey()) {
-			entry.setColor(COLOR_WHITE);
-		}
-		else if (g_inputController->isMouseOver(entry.getBoundingBox(), true)) {
-			entry.setColor(COLOR_LIGHT_PURPLE);
-		}
-		else {
-			entry.setColor(COLOR_GREY);
-		}
+void CharacterInfo::updateSelectableWindow() {
+	if (!isWindowSelected() || g_inputController->isActionLocked()) {
+		return;
 	}
 
-	// check whether an entry was selected
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		sf::Vector2f pos = entry.getPosition();
-		if (pos.y < TOP + SCROLL_WINDOW_TOP ||
-			pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT) continue;
-		entry.update(frameTime);
-		if (entry.isClicked()) {
-			selectEntry(&entry);
-			return;
-		}
+	if (g_inputController->isJustLeft()) {
+		setLeftWindowSelected();
 	}
+}
 
+bool CharacterInfo::isEntryInvisible(const ScrollEntry* entry) const {
+	auto const pos = entry->getPosition();
+	return pos.y < TOP + SCROLL_WINDOW_TOP ||
+		pos.y + GUIConstants::CHARACTER_SIZE_M > TOP + SCROLL_WINDOW_TOP + SCROLL_WINDOW_HEIGHT;
+}
+
+void CharacterInfo::updateTabBar(const sf::Time& frameTime) {
 	int lastIndex = m_tabBar->getActiveTabIndex();
 	m_tabBar->update(frameTime);
 	int newIndex = m_tabBar->getActiveTabIndex();
 	if (lastIndex != newIndex) {
-		hideDescription();
-		if (m_selectedEntry != nullptr) {
-			m_selectedEntry->deselect();
-			m_selectedEntry = nullptr;
+		if (newIndex == 2) {
+			showDescription(m_selectedHintKey);
 		}
-		m_scrollBar->setScrollPosition(0.f);
+		else {
+			hideDescription();
+		}
 	}
-
-	m_window->update(frameTime);
-
-	if (!m_isReloadNeeded) return;
-	reload();
-	m_isReloadNeeded = false;
-
-	calculateEntryPositions();
 }
 
-void CharacterInfo::calculateEntryPositions() {
-	int rows = static_cast<int>(m_hintEntries.size());
-	int steps = rows - ENTRY_COUNT + 1;
-
-	m_scrollBar->setDiscreteSteps(steps);
-
-	int scrollPos = m_scrollBar->getDiscreteScrollPosition();
-
-	if (2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M != m_scrollHelper->nextOffset) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-		m_scrollHelper->nextOffset = 2.f * scrollPos * GUIConstants::CHARACTER_SIZE_M;
+void CharacterInfo::checkReload() {
+	if (!m_isReloadNeeded) {
+		return;
 	}
 
-	float animationTime = 0.1f;
-	float time = m_scrollBar->getScrollTime().asSeconds();
-	if (time >= animationTime) {
-		m_scrollHelper->lastOffset = m_scrollHelper->nextOffset;
-	}
-	float start = m_scrollHelper->lastOffset;
-	float change = m_scrollHelper->nextOffset - m_scrollHelper->lastOffset;
-	float effectiveScrollOffset = easeInOutQuad(time, start, change, animationTime);
-
-	float xOffset = LEFT + SCROLL_WINDOW_LEFT + 2 * WINDOW_MARGIN;
-	float yOffset = TOP + SCROLL_WINDOW_TOP + WINDOW_MARGIN + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
-
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		entry.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		entry.setPosition(sf::Vector2f(xOffset, yOffset));
-		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
-	}
+	reload();
+	m_isReloadNeeded = false;
 }
 
 void CharacterInfo::showDescription(const std::string& hintKey) {
@@ -234,7 +205,10 @@ void CharacterInfo::showDescription(const std::string& hintKey) {
 
 void CharacterInfo::hideDescription() {
 	m_descriptionWindow->hide();
-	m_selectedHintKey = "";
+}
+
+void CharacterInfo::updateWindowSelected() {
+	m_tabBar->setGamepadEnabled(isWindowSelected());
 }
 
 void CharacterInfo::render(sf::RenderTarget& target) {
@@ -263,8 +237,8 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 		}
 	}
 	else {
-		for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-			m_hintEntries[i].render(m_scrollHelper->texture);
+		for (auto entry : m_hintEntries) {
+			entry->render(m_scrollHelper->texture);
 		}
 		m_scrollHelper->render(target);
 
@@ -322,7 +296,7 @@ void CharacterInfo::updateAttributes() {
 	attributes.push_back(std::to_string(currentAttributes.damageShadow));
 	attributes.push_back(std::to_string(currentAttributes.damageLight));
 
-	attributes.push_back("");
+	attributes.emplace_back("");
 
 	// resistance
 	attributes.push_back(std::to_string(currentAttributes.resistancePhysical));
@@ -369,7 +343,7 @@ void CharacterInfo::updateReputation() {
 	m_guild.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
-	
+
 	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILD_ICONS);
 	int texHeight = 100;
 	if (tex != nullptr)
@@ -419,49 +393,41 @@ void CharacterInfo::updateReputation() {
 }
 
 void CharacterInfo::updateHints() {
-	m_hintEntries.clear();
-	m_selectedEntry = nullptr;
+	CLEAR_VECTOR(m_hintEntries);
+	m_selectedEntryId = -1;
 
-	const std::vector<std::string>& hints = m_core->getData().hintsLearned;
+	const auto& hints = m_core->getData().hintsLearned;
 
-	for (size_t i = 0; i < hints.size(); ++i) {
-		m_hintEntries.push_back(HintEntry(hints[i]));
-	}
-
-	for (size_t i = 0; i < m_hintEntries.size(); ++i) {
-		HintEntry& entry = m_hintEntries[i];
-		entry.deselect();
-		if (entry.getHintKey() == m_selectedHintKey) {
-			selectEntry(&entry);
+	for (const auto& hint : hints) {
+		const auto newEntry = new HintEntry(hint);
+		newEntry->deselect();
+		m_hintEntries.push_back(newEntry);
+		if (newEntry->getHintKey() == m_selectedHintKey) {
+			selectEntry(static_cast<int>(hints.size()) - 1);
 		}
 	}
+
+	selectEntry(0);
 }
 
-void CharacterInfo::selectEntry(HintEntry* entry) {
-	if (entry == nullptr) return;
-	if (entry == m_selectedEntry) return;
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
-	}
-	m_selectedEntry = entry;
-	m_selectedEntry->select();
-	showDescription(m_selectedEntry->getHintKey());
-	m_selectedHintKey = m_selectedEntry->getHintKey();
+void CharacterInfo::execEntrySelected(const ScrollEntry* entry) {
+	const auto hintEntry = dynamic_cast<const HintEntry*>(entry);
+	showDescription(hintEntry->getHintKey());
+	m_selectedHintKey = hintEntry->getHintKey();
 }
 
 void CharacterInfo::show() {
 	m_isVisible = true;
 	g_inputController->startReadingText();
+
+	if (m_tabBar->getActiveTabIndex() == 2) {
+		showDescription(m_selectedHintKey);
+	}
 }
 
 void CharacterInfo::hide() {
 	m_isVisible = false;
 	m_descriptionWindow->hide();
-	if (m_selectedEntry != nullptr) {
-		m_selectedEntry->deselect();
-		m_selectedEntry = nullptr;
-	}
-	m_scrollBar->setScrollPosition(0.f);
 
 	// handle GODMODE
 	std::string read = g_inputController->getReadText();
@@ -471,7 +437,7 @@ void CharacterInfo::hide() {
 			m_screen->toggleGodmode();
 		}
 	}
-	
+
 	g_inputController->stopReadingText();
 }
 
@@ -480,7 +446,6 @@ void CharacterInfo::hide() {
 HintEntry::HintEntry(const std::string& hintKey) {
 	m_hintKey = hintKey;
 	m_name.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_name.setColor(COLOR_WHITE);
 
 	std::string hintTitle = "> " + g_textProvider->getText(hintKey, "hint");
 	if (hintTitle.size() > CharacterInfo::MAX_ENTRY_LENGTH_CHARACTERS) {
@@ -505,35 +470,12 @@ void HintEntry::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_name);
 }
 
-void HintEntry::onLeftJustPressed() {
-	g_inputController->lockAction();
-	m_isClicked = true;
-}
-
 void HintEntry::setColor(const sf::Color& color) {
 	m_name.setColor(color);
 }
 
-bool HintEntry::isClicked() {
-	bool wasClicked = m_isClicked;
-	m_isClicked = false;
-	return wasClicked;
-}
-
-void HintEntry::select() {
-	m_name.setColor(COLOR_WHITE);
-	m_isSelected = true;
-}
-
-GameObjectType HintEntry::getConfiguredType() const {
-	return _Interface;
-}
-
-void HintEntry::deselect() {
-	m_name.setColor(COLOR_GREY);
-	m_isSelected = false;
-}
-
-bool HintEntry::isSelected() const {
-	return m_isSelected;
+void HintEntry::updateColor() {
+	m_name.setColor(isSelected() ? COLOR_WHITE :
+		isMouseover() ? COLOR_LIGHT_PURPLE :
+		COLOR_MEDIUM_GREY);
 }

@@ -1,29 +1,14 @@
 #pragma once
 
-#include "global.h"
-#include "World/GameObject.h"
-#include "ResourceManager.h"
+#include "GUI/TabBar.h"
 #include "GUI/TexturedTabButton.h"
 
-class TexturedTabBar final : public GameObject {
+class TexturedTabBar final : public TabBar {
 public:
-	TexturedTabBar(const sf::FloatRect& box, int numberTabs);
-	~TexturedTabBar();
+	TexturedTabBar() = default;
+	~TexturedTabBar() = default;;
 
-	void render(sf::RenderTarget& renderTarget) override;
-	void renderAfterForeground(sf::RenderTarget& renderTarget) override;
-	void update(const sf::Time& frameTime) override;
-	void setPosition(const sf::Vector2f& position) override;
+	void init(const sf::FloatRect& box, int numberTabs) override;
 
-	int getActiveTabIndex() const;
-	const std::vector<TexturedTabButton*>& getTabButtons() const ;
-	TexturedTabButton* getTabButton(int index);
-
-	GameObjectType getConfiguredType() const override;
-
-private:
-	int m_activeTabIndex;
-	std::vector<TexturedTabButton*> m_tabButtons;
-	SlicedSprite m_activeOverlay;
-	float m_tabWidth;
+	TexturedTabButton* getTabButton(int index) const override;
 };

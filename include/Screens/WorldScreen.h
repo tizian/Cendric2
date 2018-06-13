@@ -41,6 +41,8 @@ public:
 	// notify item equip -> change in core, reload inventory and character info.
 	// if the second argument is not given (void, default), it gets determined in this method
 	virtual void notifyItemEquip(const std::string& itemID, ItemType type = ItemType::VOID);
+	// item unequip at this slot
+	virtual void notifyItemUnequip(const std::string& oldItemId, ItemType type);
 	// notify quest condition progress -> change in core, display text and reload quest log
 	void notifyQuestConditionFulfilled(const std::string& questID, const std::string& condition);
 	// notify quest target killed -> change in core, display text and reload quest log
@@ -88,6 +90,8 @@ public:
 	void addScreenOverlay(ScreenOverlay* overlay, bool force = false);
 	// whether an item is monitored
 	bool isItemMonitored(const std::string& itemId) const;
+	// whether only to update the interface
+	bool isUpdateOnlyInterface() const;
 
 protected:
 	// handle quicksave

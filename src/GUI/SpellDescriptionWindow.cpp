@@ -31,9 +31,12 @@ SpellDescriptionWindow::SpellDescriptionWindow() : Window(
 
 	m_coloredText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_coloredText.setColor(COLOR_LIGHT_PURPLE);
+
+	m_interactionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	m_interactionText.setColor(COLOR_NEUTRAL);
 }
 
-void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData& attributes) {
+void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>& modifiers, const AttributeData& attributes, bool isWeaponWindowOrigin) {
 	SpellData bean = SpellData::getSpellData(id);
 	std::string strengthName;
 	int strengthValue;
@@ -172,13 +175,23 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 		lines++;
 	}
 
+	// interaction text
+	std::string interactionText;
+	if (g_inputController->isGamepadConnected()) {
+		interactionText = isWeaponWindowOrigin ?
+			getGamepadText("ToUnequip", Key::Interact) :
+			getGamepadText("ToEquip", Key::Interact);
+	}
+
 	m_whiteText.setString(white);
 	m_coloredText.setString(colored);
+	m_interactionText.setString(interactionText);
 
 	float height = GUIConstants::TEXT_OFFSET;
 	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 	height += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
 	height += lines * GUIConstants::CHARACTER_SIZE_S + (lines - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_S;
+	height += interactionText.empty() ? 0 : m_interactionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
 	height += GUIConstants::TEXT_OFFSET;
 	
 	setHeight(height);
@@ -210,6 +223,7 @@ void SpellDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	m_whiteText.setPosition(pos);
 	m_coloredText.setPosition(pos);
+	m_interactionText.setPosition(sf::Vector2f(pos.x, m_boundingBox.top + m_boundingBox.height - 3 * GUIConstants::CHARACTER_SIZE_S));
 }
 
 void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
@@ -219,4 +233,11 @@ void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_descriptionText);
 	renderTarget.draw(m_whiteText);
 	renderTarget.draw(m_coloredText);
+	renderTarget.draw(m_interactionText);
+}
+
+std::string SpellDescriptionWindow::getGamepadText(const std::string& textKey, Key key) {
+	auto const resolvedKey = EnumNames::getGamepadAxisName(
+		g_resourceManager->getConfiguration().gamepadKeyMap.at(key));
+	return "<" + resolvedKey + "> " + g_textProvider->getText(textKey);
 }

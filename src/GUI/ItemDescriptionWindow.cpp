@@ -50,23 +50,100 @@ std::string ItemDescriptionWindow::getReputationText(const Item& item) const {
 	return "";
 }
 
-std::string ItemDescriptionWindow::getInteractionText(const Item& item, bool isSelling) const {
+std::string ItemDescriptionWindow::getInteractionTextGamepad(const Item& item, const ItemDescriptionInfo& info) const {
 	std::string interactionText;
+	const auto type = item.getType();
 
-	if (isSelling) {
-		interactionText = item.getValue() < 0 ? "" : g_textProvider->getText("RightClickSell");
+	if (info.isSelling) {
+		if (item.getValue() > 0) {
+			interactionText = getGamepadText("ToSell", Key::Interact);
+		}
 	}
-	else if (item.getType() == ItemType::Document) {
-		interactionText = g_textProvider->getText("RightClickRead");
+	else if (info.isEquipmentOrigin && !info.isInBossLevel) {
+		interactionText = getGamepadText("ToUnequip", Key::Interact);
 	}
-	else if (item.getType() == ItemType::Convertible) {
-		interactionText = g_textProvider->getText("RightClickOpen");
+	else if (!info.isInBossLevel && Item::isRingType(type)) {
+		interactionText = 
+			getGamepadText("ToEquip", Key::Interact) + "\n" +
+			getGamepadText("ToEquipSlot1", Key::Attack) + "\n" +
+			getGamepadText("ToEquipSlot2", Key::Jump);
 	}
-	else if (item.getType() == ItemType::Spell) {
-		interactionText = g_textProvider->getText("RightClickLearn");
+	else if (!info.isInBossLevel && Item::isEquipmentType(type)) {
+		interactionText = getGamepadText("ToEquip", Key::Interact);
+	}
+	else if (type == ItemType::Consumable) {
+		interactionText =
+			(info.isInLevel ?
+				"\n" + getGamepadText("ToConsume", Key::Interact) : "") +
+			getGamepadText("ToEquipSlot1", Key::Attack) + "\n" +
+			getGamepadText("ToEquipSlot2", Key::Jump);
+	}
+	else if (type == ItemType::Permanent) {
+		interactionText = getGamepadText("ToConsume", Key::Interact);
+	}
+	else if (type == ItemType::Document) {
+		interactionText = getGamepadText("ToRead", Key::Interact);
+	}
+	else if (type == ItemType::Convertible) {
+		interactionText = getGamepadText("ToOpen", Key::Interact);
+	}
+	else if (type == ItemType::Spell) {
+		interactionText = getGamepadText("ToLearn", Key::Interact);
 	}
 
 	return interactionText;
+}
+
+std::string ItemDescriptionWindow::getInteractionTextKeyboard(const Item& item, const ItemDescriptionInfo& info) const {
+	std::string interactionText;
+	const auto type = item.getType();
+
+	if (info.isSelling) {
+		if (item.getValue() > 0) {
+			interactionText = getKeyboardText("ToSell");
+		}
+	}
+	else if (info.isEquipmentOrigin && !info.isInBossLevel) {
+		interactionText = getKeyboardText("ToUnequip");
+	}
+	else if (!info.isInBossLevel && Item::isEquipmentType(type)) {
+		interactionText = getKeyboardText("ToEquip");
+	}
+	else if (type == ItemType::Consumable && info.isInLevel) {
+		interactionText = getKeyboardText("ToConsume");
+	}
+	else if (type == ItemType::Permanent) {
+		interactionText = getKeyboardText("ToConsume");
+	}
+	else if (type == ItemType::Document) {
+		interactionText = getKeyboardText("ToRead");
+	}
+	else if (type == ItemType::Convertible) {
+		interactionText = getKeyboardText("ToOpen");
+	}
+	else if (type == ItemType::Spell) {
+		interactionText = getKeyboardText("ToLearn");
+	}
+
+	return interactionText;
+}
+
+std::string ItemDescriptionWindow::getInteractionText(const Item& item, const ItemDescriptionInfo& info) const {
+	if (g_inputController->isGamepadConnected()) {
+		return getInteractionTextGamepad(item, info);
+	}
+
+	return getInteractionTextKeyboard(item, info);
+}
+
+std::string ItemDescriptionWindow::getKeyboardText(const std::string& textKey) {
+	return g_textProvider->getText("InteractRightClick") + " " + g_textProvider->getText(textKey);
+}
+
+std::string ItemDescriptionWindow::getGamepadText(const std::string& textKey, Key key) {
+	auto const resolvedKey = EnumNames::getGamepadAxisName(
+		g_resourceManager->getConfiguration().gamepadKeyMap.at(key));
+	return "<" + resolvedKey + "> " + g_textProvider->getText(textKey);
 }
 
 void ItemDescriptionWindow::addIntComparision(int this_, int other) {
@@ -75,7 +152,7 @@ void ItemDescriptionWindow::addIntComparision(int this_, int other) {
 	std::string text = " (" + ((diff > 0) ? std::string("+") : std::string("")) + std::to_string(diff) + ")";
 	sf::Vector2f offset = m_texts.at(m_texts.size() - 1)->getPositionOffset();
 	offset.x += m_texts.at(m_texts.size() - 1)->getSize().x;
-	
+
 	auto btext = new BitmapTextHolder(text, diff > 0 ? COLOR_GOOD : COLOR_BAD, offset);
 	m_texts.push_back(btext);
 }
@@ -121,7 +198,7 @@ void ItemDescriptionWindow::loadAttributes(const Item& item, const CharacterCore
 		return;
 	}
 
-	if (item.getType() == ItemType::Equipment_ring_1 || item.getType() == ItemType::Equipment_ring_2) {
+	if (Item::isRingType(item.getType())) {
 		auto& ring1 = core->getEquippedItem(ItemType::Equipment_ring_1);
 		auto& ring2 = core->getEquippedItem(ItemType::Equipment_ring_2);
 		if (!ring1.empty() && !ring2.empty()) {
@@ -177,7 +254,7 @@ void ItemDescriptionWindow::loadWeaponAttributes(const Weapon& item, sf::Vector2
 			else {
 				str.append(g_textProvider->getText("GemSocket"));
 			}
-			
+
 			addText(str, COLOR_LIGHT_PURPLE, offset);
 		}
 
@@ -281,7 +358,7 @@ void ItemDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	}
 }
 
-void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, float goldMultiplier, bool isSelling) {
+void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, float goldMultiplier, const ItemDescriptionInfo& info) {
 	clearTexts();
 	int maxWidth = static_cast<int>(WIDTH - 2 * GUIConstants::TEXT_OFFSET);
 	sf::Vector2f currentOffset;
@@ -300,10 +377,10 @@ void ItemDescriptionWindow::load(const Item& item, const CharacterCore* core, fl
 	}
 
 	loadAttributes(item, core, currentOffset);
-	
+
 	addText(getGoldText(item, goldMultiplier), COLOR_WHITE, currentOffset);
 	addText(getReputationText(item), m_isReputationReached ? COLOR_GOOD : COLOR_BAD, currentOffset);
-	addText(getInteractionText(item, isSelling), COLOR_NEUTRAL, currentOffset);
+	addText(getInteractionText(item, info), COLOR_NEUTRAL, currentOffset);
 
 	float height = 2 * GUIConstants::TEXT_OFFSET + currentOffset.y;
 	setHeight(height);

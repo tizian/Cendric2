@@ -1,8 +1,6 @@
 #include "Screens/SaveGameScreen.h"
 #include "Screens/MenuScreen.h"
 
-using namespace std;
-
 SaveGameScreen::SaveGameScreen(CharacterCore* core) : Screen(core) {
 	// precondition: character core can't be nullptr here.
 	assert(core != nullptr);
@@ -61,21 +59,25 @@ void SaveGameScreen::execOnEnter() {
 	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&SaveGameScreen::onBack, this));
+	button->setGamepadKey(Key::Escape);
 	addObject(button);
 
 	m_deleteSaveGameButton = new Button(sf::FloatRect(buttonWidth + buttonSpacing + marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&SaveGameScreen::onDeleteSaveGame, this));
+	m_deleteSaveGameButton->setGamepadKey(Key::Attack);
 	addObject(m_deleteSaveGameButton);
 
 	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	button->setText("New");
 	button->setOnClick(std::bind(&SaveGameScreen::onNewSaveGame, this));
+	button->setGamepadKey(Key::Jump);
 	addObject(button);
 
 	m_saveButton = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
 	m_saveButton->setText("Save");
 	m_saveButton->setOnClick(std::bind(&SaveGameScreen::onSaveGame, this));
+	m_saveButton->setGamepadKey(Key::Confirm);
 	addObject(m_saveButton);
 
 	// savegame window
@@ -128,16 +130,16 @@ void SaveGameScreen::onCancel() {
 }
 
 void SaveGameScreen::onYesNewSaveGame() {
-	string name = m_newSaveGameForm->getSavegameName();
-	string cleanedName = name;
+	std::string name = m_newSaveGameForm->getSavegameName();
+	std::string cleanedName = name;
 
-	string illegalChars = "\\/:?\"<>|*%.";
+	std::string illegalChars = "\\/:?\"<>|*%.";
 	for (auto& it : cleanedName) {
-		bool found = illegalChars.find(it) != string::npos;
+		bool found = illegalChars.find(it) != std::string::npos;
 		if (found) it = ' ';
 	}
 
-	std::string file = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + to_string(time(nullptr)) + cleanedName + ".sav";
+	std::string file = getDocumentsPath(GlobalResource::SAVEGAME_FOLDER) + std::to_string(time(nullptr)) + cleanedName + ".sav";
 
 	m_newSaveGameForm = nullptr;
 	if (m_characterCore->save(file, name)) {

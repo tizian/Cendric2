@@ -21,12 +21,14 @@ private:
 	std::string writeFPSLimitOn(const ConfigurationData& data) const;
 	std::string writeQuickcastOn(const ConfigurationData& data) const;
 	std::string writeAutotargetOn(const ConfigurationData& data) const;
+	std::string writePauseInventoryOn(const ConfigurationData& data) const;
 	std::string writeHintsOn(const ConfigurationData& data) const;
 	std::string writeQuestmarkersOn(const ConfigurationData& data) const;
 
 	std::string writeLanguage(const ConfigurationData& data) const;
 	std::string writeDisplayMode(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;
+	std::string writeGamepadInputMap(const ConfigurationData& data) const;
 	std::string writeVSyncOn(const ConfigurationData& data) const;
 
 	std::string writeMultithreadingOn(const ConfigurationData& data) const;

@@ -1,7 +1,5 @@
 #include "GUI/YesOrNoForm.h"
 
-using namespace std;
-
 // determines the distance of the message text and the buttons from border
 const float DIST_FROM_BORDER = 10.f;
 
@@ -18,27 +16,29 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 	m_yesButton->setText("Yes");
 	m_noButton->setText("No");
 
+	m_buttonGroup = new ButtonGroup(2);
+
+	m_buttonGroup->addButton(m_yesButton);
+	m_buttonGroup->addButton(m_noButton);
+
 	setBoundingBox(box);
 	setPosition(sf::Vector2f(box.left, box.top));
 }
 
 YesOrNoForm::~YesOrNoForm() {
 	delete m_window;
-	delete m_yesButton;
-	delete m_noButton;
+	delete m_buttonGroup;
 }
 
 void YesOrNoForm::render(sf::RenderTarget& renderTarget) {
 	m_window->render(renderTarget);
 	renderTarget.draw(m_message);
 
-	m_yesButton->render(renderTarget);
-	m_noButton->render(renderTarget);
+	m_buttonGroup->render(renderTarget);
 }
 
 void YesOrNoForm::update(const sf::Time& frameTime) {
-	m_yesButton->update(frameTime);
-	m_noButton->update(frameTime);
+	m_buttonGroup->update(frameTime);
 
 	if (m_yesButton->isClicked() || m_noButton->isClicked()) {
 		setDisposed();

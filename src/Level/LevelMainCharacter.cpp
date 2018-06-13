@@ -10,10 +10,12 @@
 #include "World/Item.h"
 #include "Level/LevelEquipment.h"
 #include "Level/LevelMainCharacterLoader.h"
+#include "GUI/GamepadAimCursor.h"
 
 LevelMainCharacter::LevelMainCharacter(Level* level) : LevelMovableGameObject(level) {
 	m_spellManager = new SpellManager(this);
 	m_targetManager = new TargetManager();
+	
 	m_isQuickcast = g_resourceManager->getConfiguration().isQuickcast;
 	m_isAlwaysUpdate = true;
 }
@@ -25,11 +27,13 @@ LevelMainCharacter::~LevelMainCharacter() {
 
 void LevelMainCharacter::load() {
 	m_targetManager->setMainCharacter(this);
+	
 	loadResources();
 	loadAnimation();
 	loadBehavior();
 
 	m_damageNumbers = new DamageNumbers(this->isAlly());
+	m_gamepadAimCursor = new GamepadAimCursor(this);
 
 	setGodmode(g_resourceManager->getConfiguration().isGodmode);
 }
@@ -105,7 +109,7 @@ MovingBehavior* LevelMainCharacter::createMovingBehavior(bool asAlly) {
 	behavior->setMaxVelocityYUp(800.f);
 	behavior->setMaxVelocityYDown(800.f);
 	behavior->setMaxVelocityX(200.f);
-	behavior->setDampingGroundPerS(0.999f);
+	behavior->setDampingGroundPerS(0.9999f);
 	behavior->setDampingAirPerS(0.9f);
 	return behavior;
 }
@@ -116,26 +120,65 @@ AttackingBehavior* LevelMainCharacter::createAttackingBehavior(bool asAlly) {
 	return behavior;
 }
 
+sf::Vector2f LevelMainCharacter::getSelectedTarget() {
+	if (!g_inputController->isGamepadConnected()) {
+		return g_inputController->getMousePosition();
+	}
+
+	return m_gamepadAimCursor->getCurrentPosition();
+}
+
+void LevelMainCharacter::onSpellSelected() {
+	g_inputController->lockAction();
+	notifyGamepadCursor();
+}
+
+void LevelMainCharacter::notifyGamepadCursor() {
+	auto spell = m_spellManager->getSelectedSpell();
+	auto behavior = dynamic_cast<UserMovingBehavior*>(m_movingBehavior);
+	m_gamepadAimCursor->setVisible(spell && spell->needsTarget);
+}
+
 void LevelMainCharacter::handleAttackInput() {
-	if (m_isInputLock || isClimbing()) return;
-	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
 	if (g_inputController->isActionLocked()) return;
 
-	bool isMousePressed = g_inputController->isMouseJustPressedLeft();
+	// handle previous / next spell
+	if (!g_inputController->isActionLocked()) {
+		if (g_inputController->isKeyJustPressed(Key::NextSpell)) {
+			m_spellManager->setNextSpell();
+			onSpellSelected();
+		}
+		else if (g_inputController->isKeyJustPressed(Key::PreviousSpell)) {
+			m_spellManager->setPreviousSpell();
+			onSpellSelected();
+		}
+	}
+
+	if (m_isInputLock || isClimbing()) return;
+	if (m_fearedTime > sf::Time::Zero || m_stunnedTime > sf::Time::Zero) return;
+
+	bool isAttacking = g_inputController->isAttacking();
 	bool isEnemyTargeted = m_targetManager->getCurrentTargetEnemy() != nullptr;
 	CursorSkin cursorSkin = isEnemyTargeted ? TargetInactive : TargetActive;
 
-	if (isMousePressed) {
+	if (isAttacking) {
 		g_inputController->getCursor().setCursorSkin(TargetHighlight, sf::seconds(0.2f), cursorSkin);
 	}
 	else {
 		g_inputController->getCursor().setCursorSkin(cursorSkin);
 	}
 
-	sf::Vector2f target = !isMousePressed && isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget ?
-		// Target lock
-		m_targetManager->getCurrentTargetEnemy()->getCenter() :
-		g_inputController->getMousePosition();
+	bool useAutotarget = isEnemyTargeted && g_resourceManager->getConfiguration().isAutotarget &&
+		(m_gamepadAimCursor->isUseAutotarget() || (!isAttacking && !g_inputController->isGamepadConnected()));
+
+	sf::Vector2f target;
+	if (useAutotarget) {
+		target = m_targetManager->getCurrentTargetEnemy()->getCenter();
+		m_gamepadAimCursor->setRotation(target - getSpellPosition());
+	}
+	else {
+		target = getSelectedTarget();
+	}
 
 	// update current spell
 	for (const auto& it : m_spellKeyMap) {
@@ -155,13 +198,13 @@ void LevelMainCharacter::handleAttackInput() {
 				m_spellManager->setAndExecuteSpell(it.second);
 				m_core->setWeaponSpell(it.first);
 			}
-			g_inputController->lockAction();
+			onSpellSelected();
 			return;
 		}
 	}
 
 	// handle attack input
-	if (isMousePressed) {
+	if (isAttacking) {
 		m_spellManager->executeCurrentSpell(target);
 		g_inputController->lockAction();
 		checkInvisibilityLevel();
@@ -183,6 +226,14 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 	}
 }
 
+sf::Vector2f LevelMainCharacter::getSpellPosition() const {
+	if (isUpsideDown()) {
+		return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top + m_boundingBox.height);
+	}
+
+	return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top);
+}
+
 void LevelMainCharacter::loadWeapon() {
 	clearOwnSpells();
 	m_spellManager->clearSpells();
@@ -193,6 +244,8 @@ void LevelMainCharacter::loadWeapon() {
 	if (m_core == nullptr || m_core->getWeapon() == nullptr) {
 		g_logger->logWarning("LevelMainCharacter::loadWeapon", "character core is not set or weapon not found.");
 		m_spellManager->addSpell(SpellData::getSpellData(SpellID::Chop));
+		m_spellManager->setCurrentSpell(0);
+		onSpellSelected();
 		return;
 	}
 
@@ -260,6 +313,7 @@ void LevelMainCharacter::loadWeapon() {
 
 	if (!m_spellManager->setCurrentSpell(getSpellFromKey(m_core->getData().weaponSpell))) {
 		m_spellManager->setCurrentSpell(0);
+		
 	}
 	else {
 		auto currentSpell = m_spellManager->getSelectedSpell();
@@ -267,11 +321,19 @@ void LevelMainCharacter::loadWeapon() {
 			m_spellManager->setCurrentSpell(0); // 0 is always chop and save
 		}
 	}
+	
+	// make sure a spell is always selected
+	auto currentSpell = m_spellManager->getSelectedSpell();
+	if (!currentSpell) {
+		m_spellManager->setCurrentSpell(0);
+	}
 
 	if (!m_spellManager->getSpellMap().empty() && m_movingBehavior != nullptr) {
 		const SpellData& spellData = m_spellManager->getSpellMap().at(0)->getSpellData();
 		m_movingBehavior->setDefaultFightAnimation(spellData.fightingTime, spellData.fightAnimation);
 	}
+
+	onSpellSelected();
 }
 
 void LevelMainCharacter::setAutoscroller(AutoscrollerCamera* camera) {

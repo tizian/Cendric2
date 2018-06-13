@@ -1,10 +1,10 @@
 #pragma once
 
 #include "global.h"
-#include "World/GameObject.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
 
+#include "GUI/ButtonInterface.h"
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 #include "GUI/GUIConstants.h"
@@ -15,7 +15,6 @@ public:
 
 	void onLeftJustPressed() override;
 	void onLeftClick() override;
-	void onMouseOver() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
 	void setPosition(const sf::Vector2f& pos) override;
@@ -34,7 +33,7 @@ private:
 };
 
 // A simple slider 
-class Slider final : public GameObject {
+class Slider final : public ButtonInterface {
 public:
 	Slider(int minPos, int maxPos);
 
@@ -42,6 +41,7 @@ public:
 	void onLeftClick() override;
 	void render(sf::RenderTarget& renderTarget) override;
 	void update(const sf::Time& frameTime) override;
+	void click() override;
 	void setPosition(const sf::Vector2f& pos) override;
 
 	// the text position will be set automatically to the right side of the checkbox.
@@ -53,29 +53,19 @@ public:
 	// Optionally set a unit that is displayed at the end of tht title
 	void setUnit(const std::string& unit);
 
-	// a slider can only be slided if its enabled. also, its color is less opaque if it is disabled.
-	void setEnabled(bool enabled);
-	void setVisible(bool value);
+	void setEnabled(bool enabled) override;
 	void setSliderPosition(int value);
 
-	bool isEnabled() const;
-	bool isVisible() const;
 	int getSliderPosition() const;
-	GameObjectType getConfiguredType() const override;
 
 protected:
-	bool m_isPressed = false;
-	bool m_isEnabled = true;
-	bool m_isVisible = true;
 	int m_sliderPosition = 0;
 	int m_minPosition = 0;
 	int m_maxPosition = 100;
 
-	// drag & drop handling
+	void updateColor() override;
 	void handleDragAndDrop();
-	// get the slider position from the current mouse position
 	int calculateSliderPosition(float mousePosX) const;
-	// setting the character size of the title, including repositioning
 	void setCharacterSize(int size);
 
 	sf::RectangleShape m_background;
@@ -83,6 +73,7 @@ protected:
 	SlicedSprite m_border;
 	SliderKnob m_knob;
 	sf::Vector2f m_textOffset;
+	sf::Time m_scrollTimeout;
 
 	std::string m_title;
 	std::string m_unit;

@@ -1,5 +1,5 @@
 #include "World/Camera/Camera.h"
-#include "InputController.h"
+#include "Controller/InputController.h"
 #include "Level/LevelMainCharacter.h"
 
 const float Camera::CAMERA_SPEED_PER_S = 200.f;
@@ -12,11 +12,11 @@ Camera::Camera(float width, float height) {
 
 void Camera::update(const sf::Time& frameTime) {
 	m_currentFrameTime = frameTime;
-	if (g_inputController->isKeyActive(Key::Up)) {
+	if (g_inputController->isUp()) {
 		auto newCenterY = m_cameraCenter.y - CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		setCameraCenterY(newCenterY, true);
 	}
-	if (g_inputController->isKeyActive(Key::Down)) {
+	if (g_inputController->isDown()) {
 		auto newCenterY = m_cameraCenter.y + CAMERA_SPEED_PER_S * frameTime.asSeconds();
 		setCameraCenterY(newCenterY, true);
 	}

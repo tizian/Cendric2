@@ -1,13 +1,11 @@
 #include "GUI/Slider.h"
 #include "GlobalResource.h"
 
-using namespace std;
-
 const float Slider::WIDTH = 300.f;
 const float Slider::HEIGHT = 20.f;
 const float Slider::BORDER_OFFSET = 7.f;
 
-Slider::Slider(int minPos, int maxPos) : GameObject() {
+Slider::Slider(int minPos, int maxPos) {
 	if (minPos < 0) minPos = 0;
 	if (maxPos < minPos) maxPos = minPos;
 	m_minPosition = minPos;
@@ -16,24 +14,24 @@ Slider::Slider(int minPos, int maxPos) : GameObject() {
 
 	m_background.setSize(sf::Vector2f(WIDTH, HEIGHT));
 	m_background.setFillColor(COLOR_BLACK);
-	
+
 	m_filler.setSize(sf::Vector2f(WIDTH, HEIGHT));
-	m_filler.setFillColor(COLOR_PURPLE);
 
 	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_SLIDER), COLOR_WHITE, 2.f * BORDER_OFFSET + WIDTH, 2.f * BORDER_OFFSET + HEIGHT);
 
 	m_minText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_minText.setString(to_string(m_minPosition));
+	m_minText.setString(std::to_string(m_minPosition));
 	m_maxText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_maxText.setString(to_string(m_maxPosition));
+	m_maxText.setString(std::to_string(m_maxPosition));
 
-	m_titleText.setColor(COLOR_WHITE);
 	setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	setBoundingBox(m_background.getGlobalBounds());
 	setInputInDefaultView(true);
 
 	m_unit = "";
+
+	updateColor();
 }
 
 int Slider::getSliderPosition() const {
@@ -61,7 +59,7 @@ void Slider::setSliderPosition(int pos) {
 	if (pos < m_minPosition) pos = m_minPosition;
 	if (pos > m_maxPosition) pos = m_maxPosition;
 
-	m_sliderPosition = pos ;
+	m_sliderPosition = pos;
 
 	// update knob
 	int length = m_maxPosition - m_minPosition;
@@ -98,6 +96,11 @@ void Slider::handleDragAndDrop() {
 	setSliderPosition(calculateSliderPosition(mousePos.x));
 }
 
+void Slider::updateColor() {
+	m_filler.setFillColor(m_isSelected ? COLOR_MEDIUM_PURPLE : COLOR_PURPLE);
+	m_titleText.setColor(m_isSelected ? COLOR_BRIGHT_PURPLE : COLOR_WHITE);
+}
+
 int Slider::calculateSliderPosition(float mousePosX) const {
 	float xOffset = mousePosX - getBoundingBox()->left;
 	// map the offset onto the values
@@ -111,10 +114,10 @@ void Slider::setPosition(const sf::Vector2f& pos) {
 	m_filler.setPosition(pos);
 	m_border.setPosition(sf::Vector2f(pos.x - BORDER_OFFSET, pos.y - BORDER_OFFSET));
 	m_minText.setPosition(sf::Vector2f(
-		pos.x, 
+		pos.x,
 		pos.y + HEIGHT + 10.f));
 	m_maxText.setPosition(sf::Vector2f(
-		pos.x + WIDTH - m_maxText.getLocalBounds().width, 
+		pos.x + WIDTH - m_maxText.getLocalBounds().width,
 		pos.y + HEIGHT + 10.f));
 	setSliderPosition(m_sliderPosition);
 }
@@ -126,7 +129,30 @@ void Slider::update(const sf::Time& frameTime) {
 	if (m_knob.isPressed()) {
 		handleDragAndDrop();
 	}
+
+	if (m_isSelected) {
+		updateTime(m_scrollTimeout, frameTime);
+		if (m_scrollTimeout == sf::Time::Zero && g_inputController->isLeft()) {
+			setSliderPosition(m_sliderPosition - 1);
+			m_scrollTimeout = sf::milliseconds(50);
+		} 
+		else if (m_scrollTimeout == sf::Time::Zero && g_inputController->isRight()) {
+			setSliderPosition(m_sliderPosition + 1);
+			m_scrollTimeout = sf::milliseconds(50);
+		}
+	}
+
 	GameObject::update(frameTime);
+}
+
+void Slider::click() {
+	int length = m_maxPosition - m_minPosition;
+	if (m_sliderPosition == m_maxPosition) {
+		setSliderPosition(m_minPosition);
+	}
+	else {
+		setSliderPosition(m_sliderPosition + static_cast<int>(length / 10.f));
+	}
 }
 
 void Slider::setText(const std::string& text) {
@@ -135,8 +161,8 @@ void Slider::setText(const std::string& text) {
 
 void Slider::setTextRaw(const std::string& text) {
 	m_title = text;
-	m_titleText = BitmapText(g_textProvider->getCroppedString(
-		m_title + ": " + to_string(m_sliderPosition) + m_unit, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH)));
+	m_titleText.setString(g_textProvider->getCroppedString(
+		m_title + ": " + std::to_string(m_sliderPosition) + m_unit, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(WIDTH)));
 
 	setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 }
@@ -154,7 +180,7 @@ void Slider::setCharacterSize(int size) {
 }
 
 void Slider::setEnabled(bool enabled) {
-	m_isEnabled = enabled;
+	ButtonInterface::setEnabled(enabled);
 	m_filler.setFillColor(sf::Color(
 		m_filler.getFillColor().r,
 		m_filler.getFillColor().g,
@@ -163,22 +189,6 @@ void Slider::setEnabled(bool enabled) {
 	m_titleText.setColorAlpha(m_isEnabled ? 255 : 100);
 	m_minText.setColorAlpha(m_isEnabled ? 255 : 100);
 	m_maxText.setColorAlpha(m_isEnabled ? 255 : 100);
-}
-
-void Slider::setVisible(bool value) {
-	m_isVisible = value;
-}
-
-bool Slider::isEnabled() const {
-	return m_isEnabled;
-}
-
-bool Slider::isVisible() const {
-	return m_isVisible;
-}
-
-GameObjectType Slider::getConfiguredType() const {
-	return _Button;
 }
 
 // SLIDER KNOB
@@ -205,10 +215,6 @@ void SliderKnob::onLeftClick() {
 
 bool SliderKnob::isPressed() const {
 	return m_isPressed;
-}
-
-void SliderKnob::onMouseOver() {
-
 }
 
 void SliderKnob::render(sf::RenderTarget& renderTarget) {

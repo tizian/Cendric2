@@ -28,6 +28,7 @@ extern const sf::Color COLOR_LIGHT_GREY;
 extern const sf::Color COLOR_MEDIUM_GREY;
 extern const sf::Color COLOR_GREY;
 extern const sf::Color COLOR_DARK_GREY;
+extern const sf::Color COLOR_BRIGHT_PURPLE;
 extern const sf::Color COLOR_LIGHT_PURPLE;
 extern const sf::Color COLOR_MEDIUM_PURPLE;
 extern const sf::Color COLOR_PURPLE;

@@ -1,4 +1,5 @@
 #include "Structs/ConfigurationData.h"
+#include "Controller/InputController.h"
 
 void ConfigurationData::resetToDefault() {
 #ifdef GERMAN_DEFAULT_LANGUAGE
@@ -14,9 +15,13 @@ void ConfigurationData::resetToDefault() {
 	maxFPS = 60;
 	mainKeyMap = DEFAULT_KEYMAP;
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
+	gamepadKeyMap = !g_inputController || g_inputController->isXboxControllerConnected() ? 
+		GAMEPAD_KEYMAP_XBOX : 
+		GAMEPAD_KEYMAP_DS4;
 	displayMode = DisplayMode::Fullscreen;
 	isQuickcast = true;
 	isAutotarget = true;
+	isPauseInventory = false;
 	isSmoothing = true;
 	isDisplayHints = true;
 	isDisplayQuestMarkers = true;
@@ -54,12 +59,14 @@ const std::map<Key, sf::Keyboard::Key> ConfigurationData::DEFAULT_KEYMAP =
 	{ Key::FifthSpell, sf::Keyboard::Num5 },
 	{ Key::QuickSlot1, sf::Keyboard::Num6 },
 	{ Key::QuickSlot2, sf::Keyboard::Num7 },
+	{ Key::PreviousSpell, sf::Keyboard::R },
+	{ Key::NextSpell, sf::Keyboard::T },
 	{ Key::ToggleTooltips, sf::Keyboard::LAlt },
 	{ Key::SwitchTarget, sf::Keyboard::Tab },
 	{ Key::Screenshot, sf::Keyboard::F10 },
 	{ Key::Debug, sf::Keyboard::F11 },
 	{ Key::BackToCheckpoint, sf::Keyboard::B },
-	{ Key::ToggleAutotarget, sf::Keyboard::P }
+	{ Key::ToggleAutotarget, sf::Keyboard::P },
 };
 
 const std::map<Key, sf::Keyboard::Key> ConfigurationData::ALTERNATIVE_KEYMAP =
@@ -81,17 +88,47 @@ const std::map<Key, sf::Keyboard::Key> ConfigurationData::ALTERNATIVE_KEYMAP =
 	{ Key::Down, sf::Keyboard::Down },
 	{ Key::Jump, sf::Keyboard::KeyCount },
 	{ Key::Chop, sf::Keyboard::KeyCount },
-	{ Key::FirstSpell, sf::Keyboard::KeyCount },
-	{ Key::SecondSpell, sf::Keyboard::KeyCount },
-	{ Key::ThirdSpell, sf::Keyboard::KeyCount },
-	{ Key::FourthSpell, sf::Keyboard::KeyCount },
-	{ Key::FifthSpell, sf::Keyboard::KeyCount },
-	{ Key::QuickSlot1, sf::Keyboard::KeyCount },
-	{ Key::QuickSlot2, sf::Keyboard::KeyCount },
+	{ Key::FirstSpell, sf::Keyboard::Numpad1 },
+	{ Key::SecondSpell, sf::Keyboard::Numpad2 },
+	{ Key::ThirdSpell, sf::Keyboard::Numpad3 },
+	{ Key::FourthSpell, sf::Keyboard::Numpad4 },
+	{ Key::FifthSpell, sf::Keyboard::Numpad5 },
+	{ Key::QuickSlot1, sf::Keyboard::Numpad6 },
+	{ Key::QuickSlot2, sf::Keyboard::Numpad7 },
+	{ Key::PreviousSpell, sf::Keyboard::KeyCount },
+	{ Key::NextSpell, sf::Keyboard::KeyCount },
 	{ Key::ToggleTooltips, sf::Keyboard::KeyCount },
 	{ Key::SwitchTarget, sf::Keyboard::KeyCount },
 	{ Key::Screenshot, sf::Keyboard::KeyCount },
 	{ Key::Debug, sf::Keyboard::KeyCount },
 	{ Key::BackToCheckpoint, sf::Keyboard::KeyCount },
-	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount }
+	{ Key::ToggleAutotarget, sf::Keyboard::KeyCount },
+};
+
+const std::map<Key, GamepadAxis> ConfigurationData::GAMEPAD_KEYMAP_XBOX =
+{
+	{ Key::Escape, GamepadAxis::Y }, 
+	{ Key::Interact, GamepadAxis::X },
+	{ Key::Confirm, GamepadAxis::X }, 
+	{ Key::Jump, GamepadAxis::A },
+	{ Key::Attack, GamepadAxis::B },
+	{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
+	{ Key::NextSpell, GamepadAxis::RightShoulder },
+	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
+	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
+	{ Key::Menu, GamepadAxis::Start },
+};
+
+const std::map<Key, GamepadAxis> ConfigurationData::GAMEPAD_KEYMAP_DS4 =
+{
+	{ Key::Escape, GamepadAxis::Triangle },
+	{ Key::Interact, GamepadAxis::Circle },
+	{ Key::Confirm, GamepadAxis::Circle },
+	{ Key::Jump, GamepadAxis::Square },
+	{ Key::Attack, GamepadAxis::X },
+	{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
+	{ Key::NextSpell, GamepadAxis::RightShoulder },
+	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
+	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
+	{ Key::Menu, GamepadAxis::PSButton },
 };

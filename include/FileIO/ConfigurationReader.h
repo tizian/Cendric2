@@ -18,6 +18,7 @@ private:
 	bool readLanguage(const std::string& line, ConfigurationData& data) const;
 	bool readDisplayMode(const std::string& line, ConfigurationData& data) const;
 	bool readMainInputMapping(const std::string& line, ConfigurationData& data) const;
+	bool readGamepadInputMapping(const std::string& line, ConfigurationData& data) const;
 
 	bool readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const;
 	bool readSoundVolumeSound(const std::string& line, ConfigurationData& data) const;
@@ -34,6 +35,7 @@ private:
 	bool readDebugRenderingOn(const std::string& line, ConfigurationData& data) const;
 	bool readSmoothingOn(const std::string& line, ConfigurationData& data) const;
 	bool readAutotargetOn(const std::string& line, ConfigurationData& data) const;
+	bool readPauseInventoryOn(const std::string& line, ConfigurationData& data) const;
 	 
 	bool readLogLevel(const std::string& line, ConfigurationData& data) const;
 	bool readIsDisplayTime(const std::string& line, ConfigurationData& data) const;

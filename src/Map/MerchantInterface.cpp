@@ -7,6 +7,10 @@ MerchantInterface::MerchantInterface(WorldScreen* screen, std::string merchantID
 	m_data = m_core->getMerchantData(merchantID);
 	m_merchantWindow = new MerchantWindow(this);
 	m_inventory = m_screen->getInventory();
+
+	m_inventory->setRightWindow(m_merchantWindow);
+	m_inventory->setLeftWindow(m_inventory->getEquipment());
+	m_inventory->setWindowSelected(true);
 	m_inventory->startTrading(this);
 }
 

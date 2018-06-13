@@ -8,6 +8,7 @@
 #include "Screens/ScreenManager.h"
 #include "Particles/ParticleSystem.h"
 #include "GUI/GUIConstants.h"
+#include "GUI/ButtonGroup.h"
 
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
 	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
@@ -96,25 +97,26 @@ void MenuScreen::execOnEnter() {
 	float addYOffset = 55.f;
 
 	// add buttons
+	ButtonGroup* buttonGroup = new ButtonGroup();
 	Button* button;
 	if (m_characterCore != nullptr) {
 		button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 		button->setText("Resume");
 		button->setOnClick(std::bind(&MenuScreen::onResume, this));
-		addObject(button);
+		buttonGroup->addButton(button);
 	}
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("NewGame");
 	button->setOnClick(std::bind(&MenuScreen::onNewGame, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("LoadGame");
 	button->setOnClick(std::bind(&MenuScreen::onLoadGame, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
@@ -122,43 +124,45 @@ void MenuScreen::execOnEnter() {
 	button->setEnabled(m_characterCore != nullptr && !m_characterCore->isAutosave());
 	button->setOnClick(std::bind(&MenuScreen::onSaveGame, this));
 	m_saveGameButton = button;
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Options");
 	button->setOnClick(std::bind(&MenuScreen::onOptions, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("KeyBindingsShort");
 	button->setOnClick(std::bind(&MenuScreen::onKeybindings, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Credits");
 	button->setOnClick(std::bind(&MenuScreen::onCredits, this));
-	addObject(button);
+	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
 	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
 	button->setText("Exit");
 	button->setOnClick(std::bind(&MenuScreen::onExit, this));
-	addObject(button);
+	buttonGroup->addButton(button);
+
+	addObject(buttonGroup);
 }
 
 void MenuScreen::loadNewestSave() {
 	if (m_characterCore != nullptr) return;
 	
-	std::vector<SaveGameEntry*> entries;
+	std::vector<ScrollEntry*> entries;
 	SaveGameWindow::loadSaves(entries);
 	if (entries.empty()) {
 		return;
 	}
 
-	std::string filename = entries.at(0)->getFilename();
+	std::string filename = static_cast<SaveGameEntry*>(entries.at(0))->getFilename();
 
 	for (auto& entry : entries) {
 		delete entry;

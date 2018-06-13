@@ -1,11 +1,11 @@
 #include "Level/Enemies/YaslawEnemy.h"
 #include "Level/LevelMainCharacter.h"
-#include "Level/MOBBehavior/MovingBehaviors/AggressiveWalkingBehavior.h"
 #include "Level/MOBBehavior/MovingBehaviors/AllyWalkingBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AggressiveBehavior.h"
 #include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
 #include "GameObjectComponents/InteractComponent.h"
 #include "Level/MOBBehavior/ScriptedBehavior/ScriptedBehavior.h"
+#include "Spells/SpellManager.h"
+#include "Screens/Screen.h"
 #include "Registrar.h"
 
 REGISTER_ENEMY(EnemyID::Yaslaw, YaslawEnemy)
@@ -150,8 +150,7 @@ MovingBehavior* YaslawEnemy::createMovingBehavior(bool asAlly) {
 }
 
 AttackingBehavior* YaslawEnemy::createAttackingBehavior(bool asAlly) {
-	EnemyAttackingBehavior* behavior;
-	behavior = new AllyBehavior(this);
+	EnemyAttackingBehavior* behavior = new AllyBehavior(this);
 	behavior->setAggroRange(800.f);
 	behavior->setAttackInput(std::bind(&YaslawEnemy::handleAttackInput, this));
 	return behavior;
@@ -160,4 +159,3 @@ AttackingBehavior* YaslawEnemy::createAttackingBehavior(bool asAlly) {
 std::string YaslawEnemy::getSpritePath() const {
 	return "res/texture/enemies/spritesheet_enemy_yaslaw.png";
 }
-

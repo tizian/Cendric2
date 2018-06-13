@@ -70,11 +70,13 @@ void LevelInterface::update(const sf::Time& frameTime) {
 		
 	WorldInterface::update(frameTime);
 
-	m_mainCharHealthBar->update(frameTime);
-	m_enemyHealthBar->update(frameTime);
+	if (!m_screen->isUpdateOnlyInterface()) {
+		m_mainCharHealthBar->update(frameTime);
+		m_enemyHealthBar->update(frameTime);
 
-	m_buffBar->update(frameTime);
-	m_spellSelection->update(frameTime);
+		m_buffBar->update(frameTime);
+		m_spellSelection->update(frameTime);
+	}
 }
 
 void LevelInterface::setEnemyForHealthBar(const Enemy* enemy) {

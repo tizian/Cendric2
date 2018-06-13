@@ -47,6 +47,7 @@ void CreditsScreen::execOnEnter() {
 	// add buttons
 	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
+	button->setGamepadKey(Key::Escape);
 	button->setOnClick(std::bind(&CreditsScreen::onBack, this));
 	addObject(button);
 
