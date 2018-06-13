@@ -17,7 +17,7 @@
 // #define STEAM
 
 // versioning
-#define CENDRIC_VERSION_NR_RAW "1.0.6"
+#define CENDRIC_VERSION_NR_RAW "1.1.0_beta"
 #define ENVIRONMENT "64bit"
 #ifdef STEAM
     #define CENDRIC_VERSION_NR CENDRIC_VERSION_NR_RAW " " ENVIRONMENT
