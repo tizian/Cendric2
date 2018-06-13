@@ -6,7 +6,7 @@
 class TexturedTabBar final : public TabBar {
 public:
 	TexturedTabBar() = default;
-	~TexturedTabBar() {};
+	~TexturedTabBar() = default;;
 
 	void init(const sf::FloatRect& box, int numberTabs) override;
 

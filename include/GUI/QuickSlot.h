@@ -4,7 +4,6 @@
 #include "Slot.h"
 
 #include "GUI/BitmapText.h"
-#include "World/Item.h"
 #include "Enums/EnumNames.h"
 
 class CharacterCore;
@@ -13,8 +12,8 @@ class WorldScreen;
 
 class QuickSlot final : public Slot {
 public:
-	// an empty slot is initialized with an empty itemID
-	QuickSlot(WorldInterface* _interface, const std::string& itemID, Key key);
+	// an empty slot is initialized with an empty itemId
+	QuickSlot(WorldInterface* _interface, Key key, const std::string& itemId);
 
 	void setPosition(const sf::Vector2f& pos) override;
 
@@ -29,8 +28,8 @@ public:
 	// reloads the slot, depending on the character core.
 	void reload();
 
-	inline float getConfiguredSize() const override { return SIZE; }
-	inline float getConfiguredIconOffset() const override { return ICON_OFFSET; }
+	float getConfiguredSize() const override { return SIZE; }
+	float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
 	static const float SIZE;
 	static const float ICON_OFFSET;
@@ -41,12 +40,13 @@ protected:
 private:
 	// consumes the item
 	void consume();
+	void reloadKey();
 
 	WorldScreen* m_screen = nullptr;
 	WorldInterface* m_interface = nullptr;
 	CharacterCore* m_core = nullptr;
 	std::string m_itemID = "";
-	Key m_key = Key::VOID;
+	Key m_key;
 
 	BitmapText m_amountText;
 	BitmapText m_keyText;

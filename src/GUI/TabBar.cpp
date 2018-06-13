@@ -1,5 +1,7 @@
 #include "GUI/TabBar.h"
 #include "GlobalResource.h"
+#include "Enums/EnumNames.h"
+#include "GUI/GUIConstants.h"
 
 TabBar::~TabBar() {
 	CLEAR_VECTOR(m_tabButtons)
@@ -22,7 +24,32 @@ void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, m_tabWidth, box.height);
 	setPosition(sf::Vector2f(box.left, box.top));
 
-	m_isGamepadEnabled = false;
+	m_leftText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_leftText.setColor(COLOR_BRIGHT_PURPLE);
+
+	m_rightText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_rightText.setColor(COLOR_BRIGHT_PURPLE);
+
+	setGamepadEnabled(false);
+}
+
+void TabBar::loadLeftRightText() {
+	if (!g_inputController->isSelected()) {
+		m_leftText.setString("");
+		m_rightText.setString("");
+		return;
+	}
+
+	auto const leftArrow = EnumNames::getArrowSymbolForKey(Key::Left);
+	auto const leftText = EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::PreviousSpell]);
+
+	auto const rightArrow = EnumNames::getArrowSymbolForKey(Key::Right);
+	auto const rightText = EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::NextSpell]);
+
+	m_leftText.setString(leftArrow + " " + leftText);
+	m_rightText.setString(rightText + " " + rightArrow);
+
+	setPosition(getPosition());
 }
 
 void TabBar::setPosition(const sf::Vector2f& position) {
@@ -31,6 +58,18 @@ void TabBar::setPosition(const sf::Vector2f& position) {
 	for (size_t i = 0; i < m_tabButtons.size(); ++i) {
 		m_tabButtons[i]->setPosition(position + sf::Vector2f(i * (m_tabWidth - TabButton::ALIGNMENT_OFFSET), 0.f));
 	}
+
+	const float gamepadTextoffset = GUIConstants::CHARACTER_SIZE_M + 10.f;
+
+	m_leftText.setPosition(position + sf::Vector2f(0, -gamepadTextoffset));
+
+	if (m_tabButtons.empty())
+	{
+		return;
+	}
+
+	auto const tabRight = m_tabButtons[static_cast<int>(m_tabButtons.size()) - 1]->getPosition() + sf::Vector2f(m_tabWidth, -gamepadTextoffset);
+	m_rightText.setPosition(tabRight - sf::Vector2f(m_rightText.getLocalBounds().width, 0));
 }
 
 void TabBar::render(sf::RenderTarget& renderTarget) {
@@ -38,6 +77,8 @@ void TabBar::render(sf::RenderTarget& renderTarget) {
 		tabButton->render(renderTarget);
 	}
 	renderTarget.draw(m_activeOverlay);
+	renderTarget.draw(m_leftText);
+	renderTarget.draw(m_rightText);
 }
 
 void TabBar::renderAfterForeground(sf::RenderTarget& renderTarget) {
@@ -91,6 +132,7 @@ void TabBar::update(const sf::Time& frameTime) {
 
 void TabBar::setGamepadEnabled(bool enabled) {
 	m_isGamepadEnabled = enabled;
+	loadLeftRightText();
 }
 
 int TabBar::getActiveTabIndex() const {

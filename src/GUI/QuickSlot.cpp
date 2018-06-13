@@ -9,25 +9,19 @@
 const float QuickSlot::SIZE = 58.f;
 const float QuickSlot::ICON_OFFSET = 4.f;
 
-QuickSlot::QuickSlot(WorldInterface* _interface, const std::string& itemID, Key key) {
+QuickSlot::QuickSlot(WorldInterface* _interface, Key key, const std::string& itemId) {
 	m_interface = _interface;
 	m_screen = _interface->getScreen();
 	m_core = _interface->getCore();
-	m_itemID = itemID;
 	m_key = key;
-
+	m_itemID = itemId;
+	
 	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
-
-	m_keyText.setString(key != Key::VOID ?
-		EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[key]) :
-		"");
-	m_keyText.setCharacterSize(16);
-	if (m_keyText.getLocalBounds().width > SIZE - 10.f) m_keyText.setCharacterSize(8);
 
 	m_backgroundRect.setSize(sf::Vector2f(ICON_SIZE, ICON_SIZE));
 	m_backgroundRect.setFillColor(COLOR_TRANS_GREY);
@@ -47,6 +41,26 @@ QuickSlot::QuickSlot(WorldInterface* _interface, const std::string& itemID, Key 
 	m_iconRect.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
 
 	reload();
+}
+
+void QuickSlot::reloadKey() {
+	std::string keyText;
+
+	if (g_inputController->isGamepadConnected()) {
+		keyText = contains(g_resourceManager->getConfiguration().gamepadKeyMap, m_key) ?
+			EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[m_key]) :
+			"";
+	} else {
+		keyText = contains(g_resourceManager->getConfiguration().mainKeyMap, m_key) ?
+			EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_key]) :
+			"";
+	}
+
+	m_keyText.setString(keyText);
+	m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	if (m_keyText.getLocalBounds().width > SIZE - 10.f) {
+		m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
+	}
 }
 
 void QuickSlot::setPosition(const sf::Vector2f& pos) {
@@ -130,6 +144,7 @@ void QuickSlot::reload() {
 	}
 
 	m_borderRect.setFillColor(m_isEmpty ? COLOR_MEDIUM_GREY : COLOR_WHITE);
+	reloadKey();
 	setPosition(getPosition());
 }
 

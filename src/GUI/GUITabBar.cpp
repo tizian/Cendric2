@@ -108,15 +108,15 @@ void GUITabBar::updateGamepadTexts() {
 		return;
 	}
 
-	auto selectedId = m_buttonGroup->getSelectedButtonId();
-	auto size = static_cast<int>(m_buttonGroup->getButtons().size());
+	const auto selectedId = m_buttonGroup->getSelectedButtonId();
+	const auto size = static_cast<int>(m_buttonGroup->getButtons().size());
 
-	for (int i = 0; i < size; ++i) {
+	for (auto i = 0; i < size; ++i) {
 		if (i == selectedId - 1) {
-			setButtonText(i, "¹");
+			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Down));
 		}
 		else if (i == selectedId && selectedId != size - 1) {
-			setButtonText(i, "º");
+			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Up));
 		}
 		else {
 			setButtonText(i, "");

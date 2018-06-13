@@ -29,4 +29,7 @@ protected:
 	bool m_isGamepadEnabled;
 	std::vector<TabButton*> m_tabButtons;
 	SlicedSprite m_activeOverlay;
+
+	BitmapText m_leftText;
+	BitmapText m_rightText;
 };

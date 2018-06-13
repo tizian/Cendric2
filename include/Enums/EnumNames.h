@@ -444,11 +444,19 @@ public:
 		case GamepadAxis::RightTrigger:
 			return "RT";
 		case GamepadAxis::Square:
-			return "¾";
+		{
+			// ¾
+			const char combined[2] = { 0xc2, 0xbe };
+			return std::string(combined);
+		}
 		case GamepadAxis::Circle:
 			return "O";
 		case GamepadAxis::Triangle:
-			return "½";
+		{
+			// ½
+			const char combined[2] = { 0xc2, 0xbd };
+			return std::string(combined);
+		}
 		case GamepadAxis::A:
 			return "A";
 		case GamepadAxis::B:
@@ -793,10 +801,47 @@ public:
 			return "Nu9";
 		case sf::Keyboard::Pause:
 			return "Pau";
-		default: 
+		default:
 			break;
 		}
 
 		return getKeyboardKeyName(key);
+	}
+
+	static std::string getArrowSymbolForKey(Key key)
+	{
+		switch (key)
+		{
+		default:
+			return "?";
+
+		case Key::Up:
+		{
+			// ¹
+			const char combined[2] = { 0xc2, 0xb9 };
+			return std::string(combined);
+		}
+
+		case Key::Down:
+		{
+			// º
+			const char combined[2] = { 0xc2, 0xba };
+			return std::string(combined);
+		}
+
+		case Key::Left:
+		{
+			// »
+			const char combined[2] = { 0xc2, 0xbb };
+			return std::string(combined);
+		}
+
+		case Key::Right:
+		{
+			// ¼
+			const char combined[2] = { 0xc2, 0xbc };
+			return std::string(combined);
+		}
+		}
 	}
 };
