@@ -24,6 +24,8 @@ public:
 	GameObjectType getConfiguredType() const override;
 
 protected:
+	void loadLeftRightText();
+
 	int m_activeTabIndex;
 	float m_tabWidth;
 	bool m_isGamepadEnabled;
