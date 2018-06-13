@@ -1,4 +1,5 @@
 #include "GUI/TexturedTabBar.h"
+#include "GUI/GUIConstants.h"
 #include "GlobalResource.h"
 
 void TexturedTabBar::init(const sf::FloatRect& box, int numberTabs) {
@@ -13,6 +14,12 @@ void TexturedTabBar::init(const sf::FloatRect& box, int numberTabs) {
 	m_tabButtons[0]->setActive(true);
 
 	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, m_tabWidth, box.height);
+
+	m_leftText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_leftText.setColor(COLOR_BRIGHT_PURPLE);
+
+	m_rightText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	m_rightText.setColor(COLOR_BRIGHT_PURPLE);
 
 	setPosition(sf::Vector2f(box.left, box.top));
 

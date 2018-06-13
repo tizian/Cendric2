@@ -34,7 +34,7 @@ void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 }
 
 void TabBar::loadLeftRightText() {
-	if (!g_inputController->isSelected() || !m_isGamepadEnabled) {
+	if (!g_inputController->isGamepadConnected() || !m_isGamepadEnabled) {
 		m_leftText.setString("");
 		m_rightText.setString("");
 		return;
@@ -59,17 +59,18 @@ void TabBar::setPosition(const sf::Vector2f& position) {
 		m_tabButtons[i]->setPosition(position + sf::Vector2f(i * (m_tabWidth - TabButton::ALIGNMENT_OFFSET), 0.f));
 	}
 
-	const float gamepadTextoffset = GUIConstants::CHARACTER_SIZE_M + 10.f;
+	const float gamepadTextoffsetY = GUIConstants::CHARACTER_SIZE_M + 3.f;
+	const float gamepadTextoffsetX = 5.f;
 
-	m_leftText.setPosition(position + sf::Vector2f(0, -gamepadTextoffset));
+	m_leftText.setPosition(position + sf::Vector2f(gamepadTextoffsetX, -gamepadTextoffsetY));
 
 	if (m_tabButtons.empty())
 	{
 		return;
 	}
 
-	auto const tabRight = m_tabButtons[static_cast<int>(m_tabButtons.size()) - 1]->getPosition() + sf::Vector2f(m_tabWidth, -gamepadTextoffset);
-	m_rightText.setPosition(tabRight - sf::Vector2f(m_rightText.getLocalBounds().width, 0));
+	auto const tabRight = m_tabButtons[static_cast<int>(m_tabButtons.size()) - 1]->getPosition().x - position.x + m_tabWidth - TabButton::ALIGNMENT_OFFSET;
+	m_rightText.setPosition(position + sf::Vector2f(tabRight - m_rightText.getLocalBounds().width - gamepadTextoffsetX, -gamepadTextoffsetY));
 }
 
 void TabBar::render(sf::RenderTarget& renderTarget) {

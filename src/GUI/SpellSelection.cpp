@@ -95,6 +95,10 @@ void SpellSelection::reloadGamepadTexts() {
 			m_spellSlots[i]->setInputKeyText(
 				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::NextSpell]));
 		}
+		else if (i == m_selectedSlot) {
+			m_spellSlots[i]->setInputKeyText(
+				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::Attack]));
+		}
 		else {
 			m_spellSlots[i]->setInputKeyText("");
 		}

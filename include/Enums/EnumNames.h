@@ -19,6 +19,12 @@
 class EnumNames final {
 private:
 	EnumNames() {}
+
+	static std::string getUtf8(int i) {
+		const char combined[2] = { static_cast<char>(i), '\0' };
+		return std::string(combined);
+	}
+
 public:
 	static std::string getLanguageName(Language lang) {
 		switch (lang) {
@@ -444,19 +450,13 @@ public:
 		case GamepadAxis::RightTrigger:
 			return "RT";
 		case GamepadAxis::Square:
-		{
 			// ¾
-			const char combined[2] = { 0xc2, 0xbe };
-			return std::string(combined);
-		}
+			return getUtf8(0xbe);
 		case GamepadAxis::Circle:
 			return "O";
 		case GamepadAxis::Triangle:
-		{
 			// ½
-			const char combined[2] = { 0xc2, 0xbd };
-			return std::string(combined);
-		}
+			return getUtf8(0xbd);
 		case GamepadAxis::A:
 			return "A";
 		case GamepadAxis::B:
@@ -816,32 +816,20 @@ public:
 			return "?";
 
 		case Key::Up:
-		{
 			// ¹
-			const char combined[2] = { 0xc2, 0xb9 };
-			return std::string(combined);
-		}
-
+			return getUtf8(0xb9);
+		
 		case Key::Down:
-		{
 			// º
-			const char combined[2] = { 0xc2, 0xba };
-			return std::string(combined);
-		}
+			return getUtf8(0xba);
 
 		case Key::Left:
-		{
 			// »
-			const char combined[2] = { 0xc2, 0xbb };
-			return std::string(combined);
-		}
+			return getUtf8(0xbb);
 
 		case Key::Right:
-		{
 			// ¼
-			const char combined[2] = { 0xc2, 0xbc };
-			return std::string(combined);
-		}
+			return getUtf8(0xbc);
 		}
 	}
 };

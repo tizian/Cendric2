@@ -3,10 +3,10 @@
 #include "GUI/SlotClone.h"
 
 QuickSlotBar::QuickSlotBar(WorldInterface* _interface) {
-	m_quickSlot1 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot1, Key::QuickSlot1);
+	m_quickSlot1 = new QuickSlot(_interface, Key::QuickSlot1, _interface->getCore()->getData().quickSlot1);
 	m_quickSlot1->setPosition(QUICKSLOT_OFFSET);
 
-	m_quickSlot2 = new QuickSlot(_interface, _interface->getCore()->getData().quickSlot2, Key::QuickSlot2);
+	m_quickSlot2 = new QuickSlot(_interface, Key::QuickSlot2, _interface->getCore()->getData().quickSlot2);
 	m_quickSlot2->setPosition(QUICKSLOT_OFFSET + sf::Vector2f(QuickSlot::SIZE + QUICKSLOT_SPACING, 0.f));
 }
 
