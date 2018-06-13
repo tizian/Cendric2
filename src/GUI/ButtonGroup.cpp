@@ -150,7 +150,7 @@ int ButtonGroup::getNextEnabledButtonX(bool forward) {
 			}
 		}
 
-		for (int i = y * m_width + x + 1; i < y * m_width + m_width; i++) {
+		for (int i = y * m_width + x + 1; i < std::min(y * m_width + m_width, static_cast<int>(m_buttons.size())); i++) {
 			if (m_buttons[i]->isVisibleAndEnabled()) {
 				return i;
 			}
