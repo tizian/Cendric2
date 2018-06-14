@@ -655,7 +655,7 @@ void WaypointMarker::updateColor() {
 void WaypointMarker::update(const sf::Time& frameTime) {
 	m_isMouseOver = false;
 	AnimatedGameObject::update(frameTime);
-	bool activeState = m_isMouseOver || isSelected() && m_parent->isWindowSelected();
+	bool activeState = m_isMouseOver || (isSelected() && m_parent->isWindowSelected());
 	setState(activeState ? GameObjectState::Active : GameObjectState::Idle);
 }
 

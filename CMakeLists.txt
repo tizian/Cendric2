@@ -43,7 +43,7 @@ endif()
 
 if (USE_SYSTEM_PATHS)
 	add_definitions ("-DUSE_SYSTEM_PATHS")
-endif()		
+endif()
 
 if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
@@ -193,15 +193,17 @@ if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
 
 endif()
 
-set(RESDIR "share/Cendric" CACHE STRING "Directory Game Ressources are installed to")
-set(BINDIR "bin" CACHE STRING "Directory Game Binary is installed to")
+if (!APPLE)
+    set(RESDIR "share/Cendric" CACHE STRING "Directory Game Ressources are installed to")
+    set(BINDIR "bin" CACHE STRING "Directory Game Binary is installed to")
 
-if (IS_ABSOLUTE "${RESDIR}")
-	add_definitions(-DRESDIR="${RESDIR}/")
-else()
-	add_definitions(-DRESDIR="${CMAKE_INSTALL_PREFIX}/${RESDIR}/")
+    if (IS_ABSOLUTE "${RESDIR}")
+    	add_definitions(-DRESDIR="${RESDIR}/")
+    else()
+    	add_definitions(-DRESDIR="${CMAKE_INSTALL_PREFIX}/${RESDIR}/")
+    endif()
+
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${RESDIR})
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/db" DESTINATION ${RESDIR})
+    install(TARGETS Cendric RUNTIME DESTINATION ${BINDIR})
 endif()
-
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${RESDIR})
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/db" DESTINATION ${RESDIR})
-install(TARGETS Cendric RUNTIME DESTINATION ${BINDIR})

@@ -106,7 +106,7 @@ void Button::update(const sf::Time& frameTime) {
 	}
 	m_isClicked = false;
 	GameObject::update(frameTime);
-	if (m_isClicked || hasGamepadKey() && g_inputController->isJoystickButtonJustPressed(m_gamepadKey)) {
+	if (m_isClicked || (hasGamepadKey() && g_inputController->isJoystickButtonJustPressed(m_gamepadKey))) {
 		click();
 	}
 }
@@ -148,7 +148,7 @@ void Button::setTexture(const sf::Texture* texture) {
 		return;
 	}
 	m_hasTexture = true;
-	
+
 	sf::Vector2f textureSize(static_cast<float>(texture->getSize().x), static_cast<float>(texture->getSize().y));
 	sf::Vector2f pos = getPosition();
 	sf::Vector2f size = getSize();
