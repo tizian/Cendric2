@@ -348,9 +348,7 @@ void GamepadController::notifyGamepadConnected() {
 				g_resourceManager->getConfiguration().reloadGamepadMapping(productId);
 			}
 
-			// TODO: should only be info.
-			g_logger->logError("GamepadController", "Gamepad Product ID: " + std::to_string(static_cast<int>(productId)));
-
+			g_logger->logInfo("GamepadController", "Gamepad Product ID: " + std::to_string(static_cast<int>(productId)));
 			break;
 		}
 	}

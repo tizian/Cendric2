@@ -17,7 +17,7 @@
 // #define STEAM
 
 // versioning
-#define CENDRIC_VERSION_NR_RAW "1.1.0beta1"
+#define CENDRIC_VERSION_NR_RAW "1.1.0beta2"
 #define ENVIRONMENT "64bit"
 #ifdef STEAM
     #define CENDRIC_VERSION_NR CENDRIC_VERSION_NR_RAW " " ENVIRONMENT
@@ -26,7 +26,7 @@
 #endif
 
 // Debug version
-//#define DEBUG
+#define DEBUG
 
 /* Create savegame and screenshot folders outside of the Cendric directory at locations determined by the operating system.
    Usually set via cmake.

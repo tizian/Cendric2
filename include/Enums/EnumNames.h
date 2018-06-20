@@ -466,6 +466,14 @@ public:
 			return "LT";
 		case GamepadAxis::RightTrigger:
 			return "RT";
+		case GamepadAxis::LeftButton1:
+			return "L1";
+		case GamepadAxis::RightButton1:
+			return "R1";
+		case GamepadAxis::LeftButton2:
+			return "L2";
+		case GamepadAxis::RightButton2:
+			return "R2";
 		case GamepadAxis::Square:
 			// ¾
 			return getUtf8(0xbe);

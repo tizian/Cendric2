@@ -41,34 +41,34 @@ void LevelScreen::loadAsync() {
 	m_progressLog = new ProgressLog(getCharacterCore());
 	m_progressLog->setYOffset(150.f);
 
-	auto buttonGroup = new ButtonGroup();
+	m_buttonGroup = new ButtonGroup();
 
 	// load screen
 	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
 	m_resumeButton->setOnClick(std::bind(&LevelScreen::onResume, this));
-	buttonGroup->addButton(m_resumeButton);
+	m_buttonGroup->addButton(m_resumeButton);
 
 	m_backToMenuButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
-	buttonGroup->addButton(m_backToMenuButton);
+	m_buttonGroup->addButton(m_backToMenuButton);
 
 	m_retryButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
 	m_retryButton->setVisible(false);
 	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
-	buttonGroup->addButton(m_retryButton);
+	m_buttonGroup->addButton(m_retryButton);
 
 	m_backToMapButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
 	m_backToMapButton->setText("BackToMap");
 	m_backToMapButton->setVisible(false);
 	m_backToMapButton->setOnClick(std::bind(&LevelScreen::onBackToMap, this));
-	buttonGroup->addButton(m_backToMapButton);
+	m_buttonGroup->addButton(m_backToMapButton);
 
-	addObject(buttonGroup);
+	addObject(m_buttonGroup);
 
 	// synchronize and center buttons
 	sf::Vector2f buttonSize(0.f, 50.f);
@@ -359,7 +359,12 @@ void LevelScreen::execUpdate(const sf::Time& frameTime) {
 		m_backToMenuButton->setVisible(m_isPaused);
 		m_backToMapButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
 		m_retryButton->setVisible(m_isPaused && !m_currentLevel.getWorldData()->isBossLevel);
+		
 		g_inputController->lockAction();
+
+		if (m_isPaused) {
+			m_buttonGroup->selectButton(0);
+		}
 	}
 }
 

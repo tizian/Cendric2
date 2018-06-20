@@ -18,7 +18,11 @@ void ConfigurationData::resetToDefault() {
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
 	gamepadProductId = GamepadController::getCurrentGamepadProductId();
 	gamepadKeyMap = GamepadMappings::getDefaultMappings(gamepadProductId);
+#ifdef DEBUG
+	displayMode = DisplayMode::Window;
+#else
 	displayMode = DisplayMode::Fullscreen;
+#endif
 	isQuickcast = true;
 	isAutotarget = true;
 	isPauseInventory = false;
@@ -27,11 +31,19 @@ void ConfigurationData::resetToDefault() {
 	isDisplayQuestMarkers = true;
 	isMultithreading = true;
 	isGodmode = false;
+#ifdef DEBUG
+	isDebugRendering = true;
+#else
 	isDebugRendering = false;
+#endif
 	isDebugRenderingOn = false;
 	isWindowReload = false;
 	isDisplayTime = false;
+#ifdef DEBUG
+	logLevel = LogLevel::Info;
+#else
 	logLevel = LogLevel::Error;
+#endif
 }
 
 void ConfigurationData::reloadGamepadMapping(GamepadProductID id) {

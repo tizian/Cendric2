@@ -76,6 +76,7 @@ private:
 	Button* m_backToMenuButton = nullptr;
 	Button* m_backToMapButton = nullptr;
 	Button* m_resumeButton = nullptr;
+	ButtonGroup* m_buttonGroup = nullptr;
 
 	ScreenOverlay* m_gamePausedOverlay = nullptr;
 

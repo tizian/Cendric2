@@ -74,8 +74,8 @@ std::string ItemDescriptionWindow::getInteractionTextGamepad(const Item& item, c
 	}
 	else if (type == ItemType::Consumable) {
 		interactionText =
-			(info.isInLevel ?
-				"\n" + getGamepadText("ToConsume", Key::Interact) : "") +
+			"\n" + (info.isInLevel ?
+				getGamepadText("ToConsume", Key::Interact) + "\n" : "") +
 			getGamepadText("ToEquipSlot1", Key::Attack) + "\n" +
 			getGamepadText("ToEquipSlot2", Key::Jump);
 	}
