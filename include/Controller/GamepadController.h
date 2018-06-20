@@ -12,9 +12,11 @@ public:
 	void update(const sf::Time& frameTime);
 	
 	void notifyGamepadConnected();
+	
 
 	bool isGamepadConnected() const;
 	bool isXboxControllerConnected() const;
+	static bool checkXboxControllerConnected();
 
 	bool isLeftJoystickUp() const;
 	bool isLeftJoystickDown() const;

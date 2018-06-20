@@ -188,6 +188,21 @@ void GamepadController::notifyGamepadConnected() {
 	}
 }
 
+bool GamepadController::checkXboxControllerConnected() {
+	bool isXbox = false;
+	for (int i = 0; i < 8; i++) {
+		if (sf::Joystick::isConnected(i)) {
+			auto productId = sf::Joystick::getIdentification(i).productId;
+			isXbox = 
+				productId == static_cast<int>(GamepadProductID::XBoxOne_A) ||
+				productId == static_cast<int>(GamepadProductID::XBoxOne_B);
+			break;
+		}
+	}
+
+	return  isXbox;
+}
+
 bool GamepadController::isDPadUp() const {
 	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY) > AXIS_THRESHOLD;
 }

@@ -184,7 +184,8 @@ Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
-Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko
+Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko,
+chui2ch
 
 <<< Special Thanks >>>
 Matt Sanz for his awesome title art
@@ -415,7 +416,8 @@ Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
-Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko
+Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko,
+chui2ch
 
 <<< Spezielles Dankeschön >>>
 Matt Sanz für sein tolles Titelbild
@@ -671,7 +673,8 @@ Iris Schmidt, Stefan ''Tank'' Schindler,
 Santasia, Lukas Dürrenberger, Ramón,
 Pascal ''Kylaine'' Thoma, Nick Kline,
 Lord Heinrich, Jerry Ward, Fabian Fässler,
-Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko
+Dave, Melanie Silk, Janek ''HardPenguin'' Krasoczko,
+chui2ch
 
 <<< Speziells Dankä >>>
 Matt Sanz für sis toll Titelbild

@@ -51,8 +51,8 @@ int main(int argc, char* argv[]) {
 
 	g_databaseManager = new DatabaseManager();
 	g_resourceManager = new ResourceManager();
-	g_textProvider = new TextProvider();
 	g_inputController = new InputController();
+	g_textProvider = new TextProvider();
 	g_achievementManager = new AchievementManager();
 
 	Game* game = new Game();

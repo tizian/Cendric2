@@ -15,7 +15,7 @@ void ConfigurationData::resetToDefault() {
 	maxFPS = 60;
 	mainKeyMap = DEFAULT_KEYMAP;
 	alternativeKeyMap = ALTERNATIVE_KEYMAP;
-	gamepadKeyMap = !g_inputController || g_inputController->isXboxControllerConnected() ? 
+	gamepadKeyMap = GamepadController::checkXboxControllerConnected() ? 
 		GAMEPAD_KEYMAP_XBOX : 
 		GAMEPAD_KEYMAP_DS4;
 	displayMode = DisplayMode::Fullscreen;
