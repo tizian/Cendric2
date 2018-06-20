@@ -4,6 +4,7 @@
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
+#include "Controller/GamepadMappings.h"
 
 InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar) : 
 	GameObjectComponent(parent), 
@@ -53,7 +54,7 @@ void InteractComponent::setInteractText(const std::string& textKey) {
 	std::string interactString = "<";
 
 	std::string key = g_inputController->isGamepadConnected() ?
-		EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap.at(Key::Interact)) :
+		GamepadMappings::getKeyName(Key::Interact) :
 		EnumNames::getShortKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap.at(Key::Interact));
 
 	interactString.append(key);

@@ -1,4 +1,5 @@
 #include "GUI/SpellSelection.h"
+#include "Controller/GamepadMappings.h"
 
 SpellSelection::SpellSelection(SpellManager* manager) {
 	m_spellManager = manager;
@@ -88,16 +89,13 @@ void SpellSelection::reloadGamepadTexts() {
 
 	for (auto i = 0; i < static_cast<int>(m_spellSlots.size()); ++i) {
 		if (i == m_selectedSlot - 1) {
-			m_spellSlots[i]->setInputKeyText(
-				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::PreviousSpell]));
+			m_spellSlots[i]->setInputKeyText(GamepadMappings::getKeyName(Key::PreviousSpell));
 		}
 		else if (i == m_selectedSlot + 1) {
-			m_spellSlots[i]->setInputKeyText(
-				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::NextSpell]));
+			m_spellSlots[i]->setInputKeyText(GamepadMappings::getKeyName(Key::NextSpell));
 		}
 		else if (i == m_selectedSlot) {
-			m_spellSlots[i]->setInputKeyText(
-				EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::Attack]));
+			m_spellSlots[i]->setInputKeyText(GamepadMappings::getKeyName(Key::Attack));
 		}
 		else {
 			m_spellSlots[i]->setInputKeyText("");

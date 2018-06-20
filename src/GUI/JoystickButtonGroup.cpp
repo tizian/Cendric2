@@ -57,7 +57,7 @@ void JoystickButtonGroup::updateSelection() {
 		return;
 	}
 
-	const auto axis = g_inputController->getAnyJoystickAxis();
+	const auto axis = g_inputController->getAnyMoveJoystickAxis();
 	if (norm(axis) < GamepadController::AXIS_THRESHOLD) {
 		m_isJoystickDown = false;
 		return;

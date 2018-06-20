@@ -1,6 +1,7 @@
 #include "GUI/Button.h"
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
+#include "Controller/GamepadMappings.h"
 
 Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	GameObject(),
@@ -247,7 +248,7 @@ void Button::setOnClick(const std::function<void()>& agent) {
 
 void Button::setGamepadKey(Key key) {
 	m_gamepadKey = key;
-	m_keyText.setString(" (" + EnumNames::getGamepadAxisName(g_inputController->getGamepadAxisForKey(key)) + ")");
+	m_keyText.setString(" (" + GamepadMappings::getKeyName(key) + ")");
 	reloadTextPosition();
 }
 

@@ -2,6 +2,7 @@
 
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
+#include "Controller/GamepadMappings.h"
 
 inline std::string getHintTitle(const std::string& hintKey) {
 	return g_textProvider->getText(hintKey, "hint");
@@ -13,16 +14,16 @@ inline std::string getKeyName(Key key) {
 		return EnumNames::getKeyboardKeyName(mainMap.at(key));
 	}
 
-	if (key == Key::Up) {
+	if (key == Key::Move_Up) {
 		return g_textProvider->getText("Up");
 	}
-	if (key == Key::Down) {
+	if (key == Key::Move_Down) {
 		return g_textProvider->getText("Down");
 	}
-	if (key == Key::Left) {
+	if (key == Key::Move_Left) {
 		return g_textProvider->getText("Left");
 	}
-	if (key == Key::Right) {
+	if (key == Key::Move_Right) {
 		return g_textProvider->getText("Right");
 	}
 
@@ -33,11 +34,11 @@ inline std::string getKeyName(Key key) {
 		key == Key::Journal ||
 		key == Key::Map ||
 		key == Key::Spellbook) {
-		return EnumNames::getGamepadAxisName(keymap.at(Key::Menu));
+		return GamepadMappings::getKeyName(Key::Menu);
 	}
 
 	if (contains(keymap, key)) {
-		return EnumNames::getGamepadAxisName(keymap.at(key));
+		return GamepadMappings::getKeyName(key);
 	}
 	
 	if (contains(mainMap, key)) {
@@ -83,22 +84,22 @@ inline std::string getHintDescription(const std::string& hintKey) {
 		hintText.append(getKeyName(Key::BackToCheckpoint) + " ");
 	}
 	else if (hintKey == "LeaveLevel") {
-		hintText.append(getKeyName(Key::Up) + " ");
+		hintText.append(getKeyName(Key::Move_Up) + " ");
 	}
 	else if (hintKey == "Scout") {
-		hintText.append(getKeyName(Key::Up) + " ");
+		hintText.append(getKeyName(Key::Move_Up) + " ");
 		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(getKeyName(Key::Down) + " ");
+		hintText.append(getKeyName(Key::Move_Down) + " ");
 	}
 	else if (hintKey == "Highlight") {
 		hintText.append(getKeyName(Key::ToggleTooltips) + " ");
 	}
 	else if (hintKey == "MapMove") {
-		hintText.append(getKeyName(Key::Up) + ", ");
-		hintText.append(getKeyName(Key::Left) + ", ");
-		hintText.append(getKeyName(Key::Down) + " ");
+		hintText.append(getKeyName(Key::Move_Up) + ", ");
+		hintText.append(getKeyName(Key::Move_Left) + ", ");
+		hintText.append(getKeyName(Key::Move_Down) + " ");
 		hintText.append(g_textProvider->getText("And") + " ");
-		hintText.append(getKeyName(Key::Right) + " ");
+		hintText.append(getKeyName(Key::Move_Right) + " ");
 	}
 	else {
 		hintText.clear();

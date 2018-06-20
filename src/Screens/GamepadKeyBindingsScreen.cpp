@@ -6,6 +6,7 @@
 #include "GUI/Button.h"
 #include "FileIO/ConfigurationWriter.h"
 #include "GlobalResource.h"
+#include "Controller/GamepadMappings.h"
 
 const float GamepadKeyBindingsScreen::WINDOW_MARGIN = 6.f;
 
@@ -13,27 +14,6 @@ const float GamepadKeyBindingsScreen::WIDTH = 944.f;
 const float GamepadKeyBindingsScreen::HEIGHT = 492.f;
 const float GamepadKeyBindingsScreen::TOP = 75.f;
 const float GamepadKeyBindingsScreen::LEFT = 0.5f * (WINDOW_WIDTH - WIDTH);
-
-const std::set<Key> GamepadKeyBindingsScreen::UNMODIFIABLE_KEYS = {
-};
-
-const std::set<Key> GamepadKeyBindingsScreen::INVISIBLE_KEYS = {
-};
-
-const std::set<GamepadAxis> GamepadKeyBindingsScreen::RESERVED_AXES = {
-	GamepadAxis::LeftStickDown,
-	GamepadAxis::LeftStickUp,
-	GamepadAxis::LeftStickRight,
-	GamepadAxis::LeftStickLeft,
-	GamepadAxis::RightStickDown,
-	GamepadAxis::RightStickUp,
-	GamepadAxis::RightStickRight,
-	GamepadAxis::RightStickLeft,
-	GamepadAxis::DPadDown,
-	GamepadAxis::DPadUp,
-	GamepadAxis::DPadRight,
-	GamepadAxis::DPadLeft,
-};
 
 GamepadKeyBindingsScreen::GamepadKeyBindingsScreen(CharacterCore* core) : Screen(core) {
 }
@@ -54,8 +34,8 @@ void GamepadKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 	if (m_selectedKey == Key::VOID && g_inputController->isKeyJustPressed(Key::Escape)) {
 		reload();
 	}
-	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedAxis() != GamepadAxis::VOID) {
-		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedAxis())) {
+	else if (m_selectedKey != Key::VOID && g_inputController->getLastPressedGamepadInput() != GamepadInput::VOID) {
+		if (!trySetKeyBinding(m_selectedKey, g_inputController->getLastPressedGamepadInput())) {
 			setNegativeTooltip("KeyReserved");
 		}
 	}
@@ -171,19 +151,15 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 
 	// init text and button objects once
 	for (auto& it : m_selectedKeys) {
-		if (contains(INVISIBLE_KEYS, it.first)) continue;
 		BitmapText* keyText = new BitmapText(g_textProvider->getText(EnumNames::getKeyName(it.first)));
 		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		m_keyTexts[it.first] = keyText;
 
 		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
-		keyButton->setTextRaw(EnumNames::getGamepadAxisName(it.second), 12);
-		if (contains(UNMODIFIABLE_KEYS, it.first)) {
-			keyButton->setEnabled(false);
-		}
+		keyButton->setTextRaw(EnumNames::getGamepadInputName(it.second), 12);
 
 		m_keyButtonGroup->addButton(keyButton);
-		m_keyButtons[it.first] = std::pair<Button*, GamepadAxis>(keyButton, it.second);
+		m_keyButtons[it.first] = std::pair<Button*, GamepadInput>(keyButton, it.second);
 	}
 
 	reload();
@@ -230,21 +206,16 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	addObject(button);
 }
 
-bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadAxis axis) {
-	if (contains(RESERVED_AXES, axis)) {
-		reload();
-		return false;
-	}
-
+bool GamepadKeyBindingsScreen::trySetKeyBinding(Key key, GamepadInput input) {
 	for (auto& it : m_selectedKeys) {
-		if (it.second == axis) it.second = GamepadAxis::MAX;
+		if (it.second == input) it.second = GamepadInput::MAX;
 	}
 
-	m_selectedKeys[key] = axis;
+	m_selectedKeys[key] = input;
 
 	if (key == Key::Interact || key == Key::Confirm) {
-		m_selectedKeys[Key::Interact] = axis;
-		m_selectedKeys[Key::Confirm] = axis;
+		m_selectedKeys[Key::Interact] = input;
+		m_selectedKeys[Key::Confirm] = input;
 	}
 
 	g_inputController->lockAction();
@@ -258,12 +229,10 @@ void GamepadKeyBindingsScreen::reload() {
 
 	// gamepad mappings
 	for (auto& it : m_selectedKeys) {
-		if (contains(INVISIBLE_KEYS, it.first)) continue;
-
 		Button* keyButton = m_keyButtons[it.first].first;
-		keyButton->setTextRaw(EnumNames::getGamepadAxisName(it.second), 12);
+		keyButton->setTextRaw(GamepadMappings::getKeyName(it.second), 12);
 
-		if (it.second == GamepadAxis::MAX) {
+		if (it.second == GamepadInput::MAX) {
 			keyButton->setTextColor(COLOR_BAD);
 		}
 
@@ -294,7 +263,7 @@ void GamepadKeyBindingsScreen::onBack() {
 }
 
 bool GamepadKeyBindingsScreen::checkSet(Key key) {
-	if (m_selectedKeys[key] == GamepadAxis::MAX) {
+	if (m_selectedKeys[key] == GamepadInput::MAX) {
 		setTooltipTextRaw(
 			g_textProvider->getText(EnumNames::getKeyName(key)) + " " + 
 			g_textProvider->getText("MustBeSet"), COLOR_GOOD, true);
@@ -315,10 +284,7 @@ void GamepadKeyBindingsScreen::onApply() {
 }
 
 void GamepadKeyBindingsScreen::onUseDefault() {
-	m_selectedKeys = g_inputController->isXboxControllerConnected() ?
-		ConfigurationData::GAMEPAD_KEYMAP_XBOX :
-		ConfigurationData::GAMEPAD_KEYMAP_DS4;
-	
+	m_selectedKeys = GamepadMappings::getDefaultMappings(GamepadController::getCurrentGamepadProductId());
 	reload();
 }
 

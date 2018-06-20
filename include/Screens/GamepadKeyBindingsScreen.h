@@ -27,7 +27,7 @@ private:
 	void reload();
 	// returns true if succeeded, false if not allowed
 	// it also reloads the key map if it was successful
-	bool trySetKeyBinding(Key key, GamepadAxis axis);
+	bool trySetKeyBinding(Key key, GamepadInput input);
 
 	void calculateEntryPositions();
 
@@ -45,19 +45,15 @@ private:
 	bool m_lockInput = false;
 
 	ButtonGroup* m_keyButtonGroup;
-	std::map<Key, std::pair<Button*, GamepadAxis>> m_keyButtons;
+	std::map<Key, std::pair<Button*, GamepadInput>> m_keyButtons;
 	std::map<Key, BitmapText*> m_keyTexts;
 
-	std::map<Key, GamepadAxis> m_selectedKeys;
+	std::map<Key, GamepadInput> m_selectedKeys;
 
 	// scrolling
 	SlicedSprite m_scrollWindow;
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper* m_scrollHelper = nullptr;
-
-	static const std::set<GamepadAxis> RESERVED_AXES;
-	static const std::set<Key> UNMODIFIABLE_KEYS;
-	static const std::set<Key> INVISIBLE_KEYS;
 
 	static const float WINDOW_MARGIN;
 

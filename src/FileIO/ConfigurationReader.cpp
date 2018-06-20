@@ -22,6 +22,9 @@ bool ConfigurationReader::readConfiguration(ConfigurationData& data, bool retry)
 			}
 			else if (line.compare(0, strlen(GAMEPAD_INPUT_MAPPING), std::string(GAMEPAD_INPUT_MAPPING)) == 0) {
 				noError = readGamepadInputMapping(line, data);
+			}	
+			else if (line.compare(0, strlen(GAMEPAD_PRODUCT_ID), std::string(GAMEPAD_PRODUCT_ID)) == 0) {
+				noError = readGamepadProductId(line, data);
 			}
 			else if (line.compare(0, strlen(VSYNC_ON), std::string(VSYNC_ON)) == 0) {
 				noError = readVSyncOn(line, data);
@@ -199,6 +202,21 @@ bool ConfigurationReader::readVSyncOn(const std::string& line, ConfigurationData
 	return true;
 }
 
+bool ConfigurationReader::readGamepadProductId(const std::string& line, ConfigurationData& data) const {
+	size_t colon = line.find(':');
+	if (colon == std::string::npos || line.length() < colon + 1) {
+		g_logger->logError("ConfigurationReader", "No colon found after gamepad product id tag or no value after colon");
+		return false;
+	}
+	int id = atoi(line.substr(colon + 1).c_str());
+	if (id > 10000 || id < 0) {
+		g_logger->logWarning("ConfigurationReader", "GamepadProductId has an invalid value, is left unchanged.");
+		return true;
+	}
+	data.gamepadProductId = static_cast<GamepadProductID>(id);
+	return true;
+}
+
 bool ConfigurationReader::readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const {
 	size_t colon = line.find(':');
 	if (colon == std::string::npos || line.length() < colon + 1) {
@@ -329,12 +347,12 @@ bool ConfigurationReader::readGamepadInputMapping(const std::string& line, Confi
 		g_logger->logError("ConfigurationReader", "No comma found after key integer (gamepad input mapping tag) or no value after comma.");
 		return false;
 	}
-	GamepadAxis axis = static_cast<GamepadAxis>(atoi(line.substr(comma + 1).c_str()));
-	if (axis > GamepadAxis::MAX || axis <= GamepadAxis::VOID) {
-		g_logger->logError("ConfigurationReader", "Gamepad axis not recognized: " + std::to_string(static_cast<int>(axis)));
+	GamepadInput input = static_cast<GamepadInput>(atoi(line.substr(comma + 1).c_str()));
+	if (input > GamepadInput::MAX || input <= GamepadInput::VOID) {
+		g_logger->logError("ConfigurationReader", "Gamepad input not recognized: " + std::to_string(static_cast<int>(input)));
 		return false;
 	}
-	data.gamepadKeyMap[key] = axis;
+	data.gamepadKeyMap[key] = input;
 	return true;
 }
 

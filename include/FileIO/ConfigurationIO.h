@@ -15,6 +15,7 @@ protected:
 	const char* SOUND_VOLUME_SOUND = "sound.volume.sound";
 	const char* MAIN_INPUT_MAPPING = "input.main.key";
 	const char* GAMEPAD_INPUT_MAPPING = "input.main.gamepad";
+	const char* GAMEPAD_PRODUCT_ID = "gamepad.product.id";
 	const char* QUICKCAST_ON = "quickcast.on";
 	const char* AUTOTARGET_ON = "autotarget.on";
 	const char* MULTITHREADING_ON = "multithreading.on";

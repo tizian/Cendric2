@@ -12,6 +12,7 @@
 #include "GlobalResource.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
 #include "Structs/LevelData.h"
+#include "Controller/GamepadMappings.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -609,8 +610,7 @@ std::string WaypointMarker::getTooltipString() const {
 		return g_textProvider->getText("InteractRightClick") + " " + g_textProvider->getText("ToTeleport");
 	}
 
-	auto const resolvedKey = EnumNames::getGamepadAxisName(
-		g_resourceManager->getConfiguration().gamepadKeyMap.at(Key::Confirm));
+	auto const resolvedKey = GamepadMappings::getKeyName(Key::Confirm);
 	return "<" + resolvedKey + "> " + g_textProvider->getText("ToTeleport");
 }
 

@@ -29,6 +29,7 @@ private:
 	std::string writeDisplayMode(const ConfigurationData& data) const;
 	std::string writeMainInputMap(const ConfigurationData& data) const;
 	std::string writeGamepadInputMap(const ConfigurationData& data) const;
+	std::string writeGamepadProductId(const ConfigurationData& data) const;
 	std::string writeVSyncOn(const ConfigurationData& data) const;
 
 	std::string writeMultithreadingOn(const ConfigurationData& data) const;

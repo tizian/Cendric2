@@ -19,6 +19,7 @@ bool ConfigurationWriter::saveToFile(const ConfigurationData& data) const {
 		configuration << writeQuestmarkersOn(data);
 		configuration << writeMainInputMap(data);
 		configuration << writeGamepadInputMap(data);
+		configuration << writeGamepadProductId(data);
 		configuration << writeVSyncOn(data);
 		configuration << writeFPSLimitOn(data);
 		configuration << writeFPSMax(data);
@@ -114,6 +115,11 @@ std::string ConfigurationWriter::writeSoundVolumeSound(const ConfigurationData& 
 std::string ConfigurationWriter::writeSoundVolumeMusic(const ConfigurationData& data) const {
 	std::string soundVolume = "# this is the sound volume (music) in percent (0 - 100)\n";
 	return soundVolume.append(std::string(SOUND_VOLUME_MUSIC) + ":" + std::to_string(data.volumeMusic) + "\n");
+}
+
+std::string ConfigurationWriter::writeGamepadProductId(const ConfigurationData& data) const {
+	std::string productId = "# this is the last connected gamepad product id\n";
+	return productId.append(std::string(GAMEPAD_PRODUCT_ID) + ":" + std::to_string(static_cast<int>(data.gamepadProductId)) + "\n");
 }
 
 std::string ConfigurationWriter::writeFPSMax(const ConfigurationData& data) const {

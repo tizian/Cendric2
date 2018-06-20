@@ -99,42 +99,42 @@ bool InputController::isSelected() const {
 
 bool InputController::isJustLeft() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyJustPressed(Key::Left) || isLeftJoystickJustLeft();
+	return isKeyJustPressed(Key::Move_Left) || isLeftJoystickJustLeft();
 }
 
 bool InputController::isJustRight() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyJustPressed(Key::Right) || isLeftJoystickJustRight();
+	return isKeyJustPressed(Key::Move_Right) || isLeftJoystickJustRight();
 }
 
 bool InputController::isJustUp() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyJustPressed(Key::Up) || isLeftJoystickJustUp();
+	return isKeyJustPressed(Key::Move_Up) || isLeftJoystickJustUp();
 }
 
 bool InputController::isJustDown() const {
 	if (!m_isWindowFocused) return false;
-	return isKeyJustPressed(Key::Down) || isLeftJoystickJustDown();
+	return isKeyJustPressed(Key::Move_Down) || isLeftJoystickJustDown();
 }
 
 bool InputController::isLeft() const {
 	if (!m_isWindowFocused) return false;
-	return checkKeyActive(Key::Left) || isLeftJoystickLeft();
+	return checkKeyActive(Key::Move_Left) || isLeftJoystickLeft();
 }
 
 bool InputController::isRight() const {
 	if (!m_isWindowFocused) return false;
-	return checkKeyActive(Key::Right) || isLeftJoystickRight();
+	return checkKeyActive(Key::Move_Right) || isLeftJoystickRight();
 }
 
 bool InputController::isUp() const {
 	if (!m_isWindowFocused) return false;
-	return checkKeyActive(Key::Up) || isLeftJoystickUp();
+	return checkKeyActive(Key::Move_Up) || isLeftJoystickUp();
 }
 
 bool InputController::isDown() const {
 	if (!m_isWindowFocused) return false;
-	return checkKeyActive(Key::Down) || isLeftJoystickDown();
+	return checkKeyActive(Key::Move_Down) || isLeftJoystickDown();
 }
 
 bool InputController::isAttacking() const {

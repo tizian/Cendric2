@@ -133,9 +133,17 @@ INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Misc
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('ModifierLearned','Gem learned','Edelstein erlernt','Edelstei glernt','Gema aprendida');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('SpellLearned','Spell learned','Zauber erlernt','Zauber glernt','Hechizo aprendido');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveDown','Move down','Nach unten bewegen','Abelaufe','Bajar');
-INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveLeft','Move left','Nach links laufen','Links laufe','Ir a la izquierda');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveLeft','Move left','Nach links bewegen','Links laufe','Ir a la izquierda');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveRight','Move right','Nach rechts bewegen','Rechts laufe','Ir a la derecha');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveUp','Move up','Nach oben bewegen','Uelaufe','Subir');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveDown2','Move down (2)','Nach unten bewegen (2)','Abelaufe (2)','Bajar (2)');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveLeft2','Move left (2)','Nach links laufen (2)','Links laufe (2)','Ir a la izquierda (2)');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveRight2','Move right (2)','Nach rechts bewegen (2)','Rechts laufe (2)','Ir a la derecha (2)');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MoveUp2','Move up (2)','Nach oben bewegen (2)','Uelaufe (2)','Subir (2)');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AimDown','Aim down','Nach unten zielen','Abe ziele','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AimLeft','Aim left','Nach links zielen','Links ziele','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AimRight','Aim right','Nach rechts zielen','Rechts ziele','?');
+INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('AimUp','Aim up','Nach oben zielen','Ue Ziele','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('MustBeSet','must be set!','muss gesetzt sein!','mun gsetzt si!','?');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('Necromancy','Necromancy','Nekromantie','Nekromantie','Necromancia');
 INSERT INTO text (text_id, english, german, swiss_german, spanish) values ('NeedPickaxe','You need a pickaxe to mine ore.','Du brauchst eine Spitzhacke um Erz abzubauen.', 'Du bruchsch en Pickel zum Erz hacke.','Necesitas una piqueta para minar minerales.');

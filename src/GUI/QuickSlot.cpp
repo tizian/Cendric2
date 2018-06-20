@@ -5,6 +5,7 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
+#include "Controller/GamepadMappings.h"
 
 const float QuickSlot::SIZE = 58.f;
 const float QuickSlot::ICON_OFFSET = 4.f;
@@ -47,9 +48,7 @@ void QuickSlot::reloadKey() {
 	std::string keyText;
 
 	if (g_inputController->isGamepadConnected()) {
-		keyText = contains(g_resourceManager->getConfiguration().gamepadKeyMap, m_key) ?
-			EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[m_key]) :
-			"";
+		keyText = GamepadMappings::getKeyName(m_key);
 	} else {
 		keyText = contains(g_resourceManager->getConfiguration().mainKeyMap, m_key) ?
 			EnumNames::getKeyboardKeyName(g_resourceManager->getConfiguration().mainKeyMap[m_key]) :

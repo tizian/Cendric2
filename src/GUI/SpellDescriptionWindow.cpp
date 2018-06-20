@@ -2,6 +2,7 @@
 
 #include "GUI/SpellDescriptionWindow.h"
 #include "Spells/SpellCreator.h"
+#include "Controller/GamepadMappings.h"
 
 const float SpellDescriptionWindow::WIDTH = 340.f;
 
@@ -237,7 +238,6 @@ void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {
 }
 
 std::string SpellDescriptionWindow::getGamepadText(const std::string& textKey, Key key) {
-	auto const resolvedKey = EnumNames::getGamepadAxisName(
-		g_resourceManager->getConfiguration().gamepadKeyMap.at(key));
+	auto const resolvedKey = GamepadMappings::getKeyName(key);
 	return "<" + resolvedKey + "> " + g_textProvider->getText(textKey);
 }

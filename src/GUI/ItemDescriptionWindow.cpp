@@ -6,6 +6,7 @@
 #include "CharacterCore.h"
 #include "World/Item.h"
 #include "Enums/EnumNames.h"
+#include "Controller/GamepadMappings.h"
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 const float ItemDescriptionWindow::ICON_OFFSET = 24 * 8.f;
@@ -141,8 +142,7 @@ std::string ItemDescriptionWindow::getKeyboardText(const std::string& textKey) {
 }
 
 std::string ItemDescriptionWindow::getGamepadText(const std::string& textKey, Key key) {
-	auto const resolvedKey = EnumNames::getGamepadAxisName(
-		g_resourceManager->getConfiguration().gamepadKeyMap.at(key));
+	auto const resolvedKey = GamepadMappings::getKeyName(key);
 	return "<" + resolvedKey + "> " + g_textProvider->getText(textKey);
 }
 

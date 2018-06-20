@@ -6,12 +6,11 @@ const int GamepadController::AXIS_THRESHOLD = 50;
 
 GamepadController::GamepadController() {
 	m_joystickMap = &(g_resourceManager->getConfiguration().gamepadKeyMap);
-	initAxisMap();
 };
 
 void GamepadController::update(const sf::Time& frameTime) {
 	if (!isGamepadConnected()) return;
-	m_lastPressedAxis = GamepadAxis::VOID;
+	m_lastPressedInput = GamepadInput::VOID;
 	updateLeftJoystick();
 }
 
@@ -19,24 +18,20 @@ bool GamepadController::isGamepadConnected() const {
 	return m_connectedJoystick > -1;
 }
 
-bool GamepadController::isXboxControllerConnected() const {
-	return m_isXBoxController;
-}
-
 void GamepadController::updateLeftJoystick() {
-	bool left = isLeftStickLeft() || isDPadLeft();
+	const auto left = isGamepadButtonPressed(Key::Move_Left) || isGamepadButtonPressed(Key::Move_Left2);
 	m_isLeftJoystickLeftJustPressed = !m_isLeftJoystickLeftPressed && left;
 	m_isLeftJoystickLeftPressed = left;
 
-	bool right = isLeftStickRight() || isDPadRight();
+	const auto right = isGamepadButtonPressed(Key::Move_Right) || isGamepadButtonPressed(Key::Move_Right2);
 	m_isLeftJoystickRightJustPressed = !m_isLeftJoystickRightPressed && right;
 	m_isLeftJoystickRightPressed = right;
 
-	bool up = isLeftStickUp() || isDPadUp();
+	const auto up = isGamepadButtonPressed(Key::Move_Up) || isGamepadButtonPressed(Key::Move_Up2);
 	m_isLeftJoystickUpJustPressed = !m_isLeftJoystickUpPressed && up;
 	m_isLeftJoystickUpPressed = up;
 
-	bool down = isLeftStickDown() || isDPadDown();
+	const auto down = isGamepadButtonPressed(Key::Move_Down) || isGamepadButtonPressed(Key::Move_Down2);
 	m_isLeftJoystickDownJustPressed = !m_isLeftJoystickDownPressed && down;
 	m_isLeftJoystickDownPressed = down;
 }
@@ -47,17 +42,156 @@ bool GamepadController::isGamepadButtonPressed(Key key) const {
 		return false;
 	}
 
-	return isGamepadAxisPressed((*it).second);
+	return isGamepadInputPressed((*it).second);
 }
 
-bool GamepadController::isGamepadAxisPressed(GamepadAxis axis) const {
+std::pair<sf::Joystick::Axis, bool> GamepadController::getAxisForInput(GamepadInput input)
+{
+	std::pair<sf::Joystick::Axis, bool> pair = { static_cast<sf::Joystick::Axis>(sf::Joystick::AxisCount), false };
+	switch (input)
+	{
+	case GamepadInput::Axis_X_Positive: 
+		pair.first = sf::Joystick::X;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_X_Negative:
+		pair.first = sf::Joystick::X;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_Y_Positive:
+		pair.first = sf::Joystick::Y;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_Y_Negative: 
+		pair.first = sf::Joystick::Y;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_Z_Positive: 
+		pair.first = sf::Joystick::Z;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_Z_Negative: 
+		pair.first = sf::Joystick::Z;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_R_Positive: 
+		pair.first = sf::Joystick::R;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_R_Negative: 
+		pair.first = sf::Joystick::R;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_U_Positive: 
+		pair.first = sf::Joystick::U;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_U_Negative: 
+		pair.first = sf::Joystick::U;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_V_Positive: 
+		pair.first = sf::Joystick::V;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_V_Negative: 
+		pair.first = sf::Joystick::V;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_PovX_Positive: 
+		pair.first = sf::Joystick::PovX;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_PovX_Negative: 
+		pair.first = sf::Joystick::PovX;
+		pair.second = false;
+		break;
+	case GamepadInput::Axis_PovY_Positive: 
+		pair.first = sf::Joystick::PovY;
+		pair.second = true;
+		break;
+	case GamepadInput::Axis_PovY_Negative: 
+		pair.first = sf::Joystick::PovY;
+		pair.second = false;
+		break;
+	default: break;
+	}
+
+	return pair;
+}
+
+bool GamepadController::isGamepadInputPressed(GamepadInput input) const {
 	if (!isGamepadConnected()) {
 		return false;
 	}
-	if (axis <= GamepadAxis::VOID || axis >= GamepadAxis::MAX) {
+
+	if (input <= GamepadInput::VOID || input >= GamepadInput::MAX) {
 		return false;
 	}
-	return m_axisMap.at(axis)();
+
+	switch (input) { 
+	default: return false;
+	case GamepadInput::Axis_X_Positive: return isAxisPositive(sf::Joystick::X);
+	case GamepadInput::Axis_X_Negative: return isAxisNegative(sf::Joystick::X);
+	case GamepadInput::Axis_Y_Positive: return isAxisPositive(sf::Joystick::Y);
+	case GamepadInput::Axis_Y_Negative: return isAxisNegative(sf::Joystick::Y);
+	case GamepadInput::Axis_Z_Positive: return isAxisPositive(sf::Joystick::Z);
+	case GamepadInput::Axis_Z_Negative: return isAxisNegative(sf::Joystick::Z);
+	case GamepadInput::Axis_R_Positive: return isAxisPositive(sf::Joystick::R);
+	case GamepadInput::Axis_R_Negative: return isAxisNegative(sf::Joystick::R);
+	case GamepadInput::Axis_U_Positive: return isAxisPositive(sf::Joystick::U);
+	case GamepadInput::Axis_U_Negative: return isAxisNegative(sf::Joystick::U);
+	case GamepadInput::Axis_V_Positive: return isAxisPositive(sf::Joystick::V);
+	case GamepadInput::Axis_V_Negative: return isAxisNegative(sf::Joystick::V);
+	case GamepadInput::Axis_PovX_Positive: return isAxisPositive(sf::Joystick::PovX);
+	case GamepadInput::Axis_PovX_Negative: return isAxisNegative(sf::Joystick::PovX);
+	case GamepadInput::Axis_PovY_Positive: return isAxisPositive(sf::Joystick::PovY);
+	case GamepadInput::Axis_PovY_Negative: return isAxisNegative(sf::Joystick::PovY);
+	case GamepadInput::Button_0: return isButtonPressed(0);
+	case GamepadInput::Button_1: return isButtonPressed(1);
+	case GamepadInput::Button_2: return isButtonPressed(2);
+	case GamepadInput::Button_3: return isButtonPressed(3);
+	case GamepadInput::Button_4: return isButtonPressed(4);
+	case GamepadInput::Button_5: return isButtonPressed(5);
+	case GamepadInput::Button_6: return isButtonPressed(6);
+	case GamepadInput::Button_7: return isButtonPressed(7);
+	case GamepadInput::Button_8: return isButtonPressed(8);
+	case GamepadInput::Button_9: return isButtonPressed(9);
+	case GamepadInput::Button_10: return isButtonPressed(10);
+	case GamepadInput::Button_11: return isButtonPressed(11);
+	case GamepadInput::Button_12: return isButtonPressed(12);
+	case GamepadInput::Button_13: return isButtonPressed(13);
+	case GamepadInput::Button_14: return isButtonPressed(14);
+	case GamepadInput::Button_15: return isButtonPressed(15);
+	case GamepadInput::Button_16: return isButtonPressed(16);
+	case GamepadInput::Button_17: return isButtonPressed(17);
+	case GamepadInput::Button_18: return isButtonPressed(18);
+	case GamepadInput::Button_19: return isButtonPressed(19);
+	case GamepadInput::Button_20: return isButtonPressed(20);
+	case GamepadInput::Button_21: return isButtonPressed(21);
+	case GamepadInput::Button_22: return isButtonPressed(22);
+	case GamepadInput::Button_23: return isButtonPressed(23);
+	case GamepadInput::Button_24: return isButtonPressed(24);
+	case GamepadInput::Button_25: return isButtonPressed(25);
+	case GamepadInput::Button_26: return isButtonPressed(26);
+	case GamepadInput::Button_27: return isButtonPressed(27);
+	case GamepadInput::Button_28: return isButtonPressed(28);
+	case GamepadInput::Button_29: return isButtonPressed(29);
+	case GamepadInput::Button_30: return isButtonPressed(30);
+	case GamepadInput::Button_31: return isButtonPressed(31);
+	}
+}
+
+bool GamepadController::isAxisNegative(sf::Joystick::Axis axis) const {
+	return sf::Joystick::getAxisPosition(m_connectedJoystick, axis) < -AXIS_THRESHOLD;
+}
+
+bool GamepadController::isAxisPositive(sf::Joystick::Axis axis) const {
+	return sf::Joystick::getAxisPosition(m_connectedJoystick, axis) > AXIS_THRESHOLD;
+}
+
+bool GamepadController::isButtonPressed(int button) const {
+	return sf::Joystick::isButtonPressed(m_connectedJoystick, button);
 }
 
 bool GamepadController::isLeftJoystickUp() const {
@@ -92,56 +226,48 @@ bool GamepadController::isLeftJoystickJustRight() const {
 	return m_isLeftJoystickRightJustPressed;
 }
 
-sf::Vector2f GamepadController::getAnyJoystickAxis() const {
-	sf::Vector2f axis = getLeftJoystickAxis();
+sf::Vector2f GamepadController::getAnyMoveJoystickAxis() const {
+	sf::Vector2f axis = getAxisPosition(Key::Move_Right, Key::Move_Down);
 	if (norm(axis) > AXIS_THRESHOLD) {
 		return axis;
 	}
 
-	return getRightJoystickAxis();
+	return getAxisPosition(Key::Move_Right2, Key::Move_Down2);
 }
 
-sf::Vector2f GamepadController::getDPadAxis() const {
-	sf::Vector2f axis;
-	axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX);
-	axis.y = -sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY);
-
-	return axis;
+sf::Vector2f GamepadController::getAimJoystickAxis() const {
+	return getAxisPosition(Key::Aim_Right, Key::Aim_Down);
 }
 
-sf::Vector2f GamepadController::getLeftJoystickAxis() const {
-	sf::Vector2f axis;
-	axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X);
-	axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y);
-
-	return axis;
-}
-
-sf::Vector2f GamepadController::getRightJoystickAxis() const {
-	sf::Vector2f axis;
-	if (m_isXBoxController) {
-		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U);
-		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::V);
-	}
-	else {
-		axis.x = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z);
-		axis.y = sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R);
+sf::Vector2f GamepadController::getAxisPosition(Key keyRight, Key keyDown) const {
+	if (!isGamepadConnected()) {
+		return {};
 	}
 
+	auto const xAxis = getAxisForInput(getGamepadInputForKey(keyRight));
+	auto const yAxis = getAxisForInput(getGamepadInputForKey(keyDown));
+
+	auto const signX = xAxis.second ? 1 : -1;
+	auto const signY = yAxis.second ? 1 : -1;
+
+	sf::Vector2f axis;
+	axis.x = signX * sf::Joystick::getAxisPosition(m_connectedJoystick, xAxis.first);
+	axis.y = signY * sf::Joystick::getAxisPosition(m_connectedJoystick, yAxis.first);
+
 	return axis;
 }
 
-GamepadAxis GamepadController::getGamepadAxisForKey(Key key) const {
+GamepadInput GamepadController::getGamepadInputForKey(Key key) const {
 	auto const it = m_joystickMap->find(key);
 	if (it == m_joystickMap->end()) {
-		return GamepadAxis::VOID;
+		return GamepadInput::VOID;
 	}
 
 	return (*it).second;
 }
 
 void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event) {
-	if (event.joystickId != m_connectedJoystick) {
+	if (static_cast<int>(event.joystickId) != m_connectedJoystick) {
 		return;
 	}
 
@@ -149,29 +275,66 @@ void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent e
 		return;
 	}
 
-	if (isXboxControllerConnected()) {
-		m_lastPressedAxis = getLastPressedGamepadAxisXbox(event.axis, event.position < 0);
-	}
-	else {
-		m_lastPressedAxis = getLastPressedGamepadAxisDs4(event.axis, event.position < 0);
+	const auto negative = event.position < 0;
+
+	switch (event.axis)
+	{
+	case sf::Joystick::X: m_lastPressedInput = negative ? GamepadInput::Axis_X_Negative : GamepadInput::Axis_X_Positive; break;
+	case sf::Joystick::Y: m_lastPressedInput = negative ? GamepadInput::Axis_Y_Negative : GamepadInput::Axis_Y_Positive; break;
+	case sf::Joystick::Z: m_lastPressedInput = negative ? GamepadInput::Axis_Z_Negative : GamepadInput::Axis_Z_Positive; break;
+	case sf::Joystick::R: m_lastPressedInput = negative ? GamepadInput::Axis_R_Negative : GamepadInput::Axis_R_Positive; break;
+	case sf::Joystick::U: m_lastPressedInput = negative ? GamepadInput::Axis_U_Negative : GamepadInput::Axis_U_Positive; break;
+	case sf::Joystick::V: m_lastPressedInput = negative ? GamepadInput::Axis_V_Negative : GamepadInput::Axis_V_Positive; break;
+	case sf::Joystick::PovX: m_lastPressedInput = negative ? GamepadInput::Axis_PovX_Negative : GamepadInput::Axis_PovX_Positive; break;
+	case sf::Joystick::PovY: m_lastPressedInput = negative ? GamepadInput::Axis_PovY_Negative : GamepadInput::Axis_PovY_Positive; break;
 	}
 }
 
 void GamepadController::setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event) {
-	if (event.joystickId != m_connectedJoystick) {
+	if (static_cast<int>(event.joystickId) != m_connectedJoystick) {
 		return;
 	}
 
-	if (isXboxControllerConnected()) {
-		m_lastPressedAxis = getLastPressedGamepadButtonXbox(event.button);
-	}
-	else {
-		m_lastPressedAxis = getLastPressedGamepadButtonDs4(event.button);
+	switch (event.button)
+	{
+	default: m_lastPressedInput = GamepadInput::VOID; break;
+	case 0: m_lastPressedInput = GamepadInput::Button_0; break;
+	case 1: m_lastPressedInput = GamepadInput::Button_1; break;
+	case 2: m_lastPressedInput = GamepadInput::Button_2; break;
+	case 3: m_lastPressedInput = GamepadInput::Button_3; break;
+	case 4: m_lastPressedInput = GamepadInput::Button_4; break;
+	case 5: m_lastPressedInput = GamepadInput::Button_5; break;
+	case 6: m_lastPressedInput = GamepadInput::Button_6; break;
+	case 7: m_lastPressedInput = GamepadInput::Button_7; break;
+	case 8: m_lastPressedInput = GamepadInput::Button_8; break;
+	case 9: m_lastPressedInput = GamepadInput::Button_9; break;
+	case 10: m_lastPressedInput = GamepadInput::Button_10; break;
+	case 11: m_lastPressedInput = GamepadInput::Button_11; break;
+	case 12: m_lastPressedInput = GamepadInput::Button_12; break;
+	case 13: m_lastPressedInput = GamepadInput::Button_13; break;
+	case 14: m_lastPressedInput = GamepadInput::Button_14; break;
+	case 15: m_lastPressedInput = GamepadInput::Button_15; break;
+	case 16: m_lastPressedInput = GamepadInput::Button_16; break;
+	case 17: m_lastPressedInput = GamepadInput::Button_17; break;
+	case 18: m_lastPressedInput = GamepadInput::Button_18; break;
+	case 19: m_lastPressedInput = GamepadInput::Button_19; break;
+	case 20: m_lastPressedInput = GamepadInput::Button_20; break;
+	case 21: m_lastPressedInput = GamepadInput::Button_21; break;
+	case 22: m_lastPressedInput = GamepadInput::Button_22; break;
+	case 23: m_lastPressedInput = GamepadInput::Button_23; break;
+	case 24: m_lastPressedInput = GamepadInput::Button_24; break;
+	case 25: m_lastPressedInput = GamepadInput::Button_25; break;
+	case 26: m_lastPressedInput = GamepadInput::Button_26; break;
+	case 27: m_lastPressedInput = GamepadInput::Button_27; break;
+	case 28: m_lastPressedInput = GamepadInput::Button_28; break;
+	case 29: m_lastPressedInput = GamepadInput::Button_29; break;
+	case 30: m_lastPressedInput = GamepadInput::Button_30; break;
+	case 31: m_lastPressedInput = GamepadInput::Button_31; break;
 	}
 }
 
-GamepadAxis GamepadController::getLastPressedAxis() const {
-	return m_lastPressedAxis;
+GamepadInput GamepadController::getLastPressedGamepadInput() const {
+	return m_lastPressedInput;
 }
 
 void GamepadController::notifyGamepadConnected() {
@@ -179,350 +342,29 @@ void GamepadController::notifyGamepadConnected() {
 	for (int i = 0; i < 8; i++) {
 		if (sf::Joystick::isConnected(i)) {
 			m_connectedJoystick = i;
-			auto productId = sf::Joystick::getIdentification(i).productId;
-			m_isXBoxController =
-				productId == static_cast<int>(GamepadProductID::XBoxOne_A) ||
-				productId == static_cast<int>(GamepadProductID::XBoxOne_B);
+			auto productId = static_cast<GamepadProductID>(sf::Joystick::getIdentification(i).productId);
+
+			if (productId != g_resourceManager->getConfiguration().gamepadProductId) {
+				g_resourceManager->getConfiguration().reloadGamepadMapping(productId);
+			}
+
+			// TODO: should only be info.
+			g_logger->logError("GamepadController", "Gamepad Product ID: " + std::to_string(static_cast<int>(productId)));
+
 			break;
 		}
 	}
 }
 
-bool GamepadController::checkXboxControllerConnected() {
-	bool isXbox = false;
+GamepadProductID GamepadController::getCurrentGamepadProductId() {
+	auto id = GamepadProductID::Unknown;
 	for (int i = 0; i < 8; i++) {
 		if (sf::Joystick::isConnected(i)) {
-			auto productId = sf::Joystick::getIdentification(i).productId;
-			isXbox = 
-				productId == static_cast<int>(GamepadProductID::XBoxOne_A) ||
-				productId == static_cast<int>(GamepadProductID::XBoxOne_B);
+			id = static_cast<GamepadProductID>(sf::Joystick::getIdentification(i).productId);
 			break;
 		}
 	}
 
-	return  isXbox;
+	return id;
 }
 
-bool GamepadController::isDPadUp() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isDPadDown() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovY) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isDPadLeft() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isDPadRight() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::PovX) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isLeftStickUp() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isLeftStickDown() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Y) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isLeftStickLeft() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isLeftStickRight() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::X) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isRightStickUp() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isRightStickDown() const {
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::R) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isRightStickLeft() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U) < -AXIS_THRESHOLD;
-	}
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z) < -AXIS_THRESHOLD;
-}
-
-bool GamepadController::isRightStickRight() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U) > AXIS_THRESHOLD;
-	}
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isLeftTrigger() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z) > AXIS_THRESHOLD;
-	}
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::V) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isRightTrigger() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::Z) < -AXIS_THRESHOLD;
-	}
-	return sf::Joystick::getAxisPosition(m_connectedJoystick, sf::Joystick::U) > AXIS_THRESHOLD;
-}
-
-bool GamepadController::isSquare() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 0);
-}
-
-bool GamepadController::isCircle() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 2);
-}
-
-bool GamepadController::isTriangle() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 3);
-}
-
-bool GamepadController::isX() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 2);
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 1);
-}
-
-bool GamepadController::isY() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 3);
-	}
-	return false;
-}
-
-bool GamepadController::isA() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 0);
-	}
-	return false;
-}
-
-bool GamepadController::isB() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 1);
-	}
-	return false;
-}
-
-bool GamepadController::isLeftShoulder() const {
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 4);
-}
-
-bool GamepadController::isRightShoulder() const {
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 5);
-}
-
-bool GamepadController::isSelect() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 6);
-	}
-	return false;
-}
-
-bool GamepadController::isStart() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 7);
-	}
-	return false;
-}
-
-bool GamepadController::isShare() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 8);
-}
-
-bool GamepadController::isOptions()const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 9);
-}
-
-bool GamepadController::isLeftStickPush() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 8);
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 10);
-}
-
-bool GamepadController::isRightStickPush() const {
-	if (m_isXBoxController) {
-		return sf::Joystick::isButtonPressed(m_connectedJoystick, 9);
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 11);
-}
-
-bool GamepadController::isPSButton() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 12);
-}
-
-bool GamepadController::isTouchpad() const {
-	if (m_isXBoxController) {
-		return false;
-	}
-	return sf::Joystick::isButtonPressed(m_connectedJoystick, 13);
-}
-
-void GamepadController::initAxisMap() {
-	m_axisMap.insert({ GamepadAxis::A, std::bind(&GamepadController::isA, this) });
-	m_axisMap.insert({ GamepadAxis::B, std::bind(&GamepadController::isB, this) });
-	m_axisMap.insert({ GamepadAxis::Y, std::bind(&GamepadController::isY, this) });
-	m_axisMap.insert({ GamepadAxis::X, std::bind(&GamepadController::isX, this) });
-	m_axisMap.insert({ GamepadAxis::Square, std::bind(&GamepadController::isSquare, this) });
-	m_axisMap.insert({ GamepadAxis::Triangle, std::bind(&GamepadController::isTriangle, this) });
-	m_axisMap.insert({ GamepadAxis::Circle, std::bind(&GamepadController::isCircle, this) });
-	m_axisMap.insert({ GamepadAxis::DPadDown, std::bind(&GamepadController::isDPadDown, this) });
-	m_axisMap.insert({ GamepadAxis::DPadLeft, std::bind(&GamepadController::isDPadLeft, this) });
-	m_axisMap.insert({ GamepadAxis::DPadRight, std::bind(&GamepadController::isDPadRight, this) });
-	m_axisMap.insert({ GamepadAxis::DPadUp, std::bind(&GamepadController::isDPadUp, this) });
-	m_axisMap.insert({ GamepadAxis::LeftStickUp, std::bind(&GamepadController::isLeftStickUp, this) });
-	m_axisMap.insert({ GamepadAxis::LeftStickDown, std::bind(&GamepadController::isLeftStickDown, this) });
-	m_axisMap.insert({ GamepadAxis::LeftStickLeft, std::bind(&GamepadController::isLeftStickLeft, this) });
-	m_axisMap.insert({ GamepadAxis::LeftStickRight, std::bind(&GamepadController::isLeftStickRight, this) });
-	m_axisMap.insert({ GamepadAxis::RightStickUp, std::bind(&GamepadController::isRightStickUp, this) });
-	m_axisMap.insert({ GamepadAxis::RightStickDown, std::bind(&GamepadController::isRightStickDown, this) });
-	m_axisMap.insert({ GamepadAxis::RightStickLeft, std::bind(&GamepadController::isRightStickLeft, this) });
-	m_axisMap.insert({ GamepadAxis::RightStickRight, std::bind(&GamepadController::isRightStickRight, this) });
-	m_axisMap.insert({ GamepadAxis::LeftShoulder, std::bind(&GamepadController::isLeftShoulder, this) });
-	m_axisMap.insert({ GamepadAxis::RightShoulder, std::bind(&GamepadController::isRightShoulder, this) });
-	m_axisMap.insert({ GamepadAxis::LeftStickPush, std::bind(&GamepadController::isLeftStickPush, this) });
-	m_axisMap.insert({ GamepadAxis::RightStickPush, std::bind(&GamepadController::isRightStickPush, this) });
-	m_axisMap.insert({ GamepadAxis::LeftTrigger, std::bind(&GamepadController::isLeftTrigger, this) });
-	m_axisMap.insert({ GamepadAxis::RightTrigger, std::bind(&GamepadController::isRightTrigger, this) });
-	m_axisMap.insert({ GamepadAxis::Options, std::bind(&GamepadController::isOptions, this) });
-	m_axisMap.insert({ GamepadAxis::PSButton, std::bind(&GamepadController::isPSButton, this) });
-	m_axisMap.insert({ GamepadAxis::Select, std::bind(&GamepadController::isSelect, this) });
-	m_axisMap.insert({ GamepadAxis::Start, std::bind(&GamepadController::isStart, this) });
-	m_axisMap.insert({ GamepadAxis::Touchpad, std::bind(&GamepadController::isTouchpad, this) });
-}
-
-GamepadAxis GamepadController::getLastPressedGamepadAxisXbox(sf::Joystick::Axis axis, bool isNegative) {
-	switch (axis)
-	{
-	case sf::Joystick::X:
-		return isNegative ? GamepadAxis::LeftStickLeft : GamepadAxis::LeftStickRight;
-	case sf::Joystick::Y:
-		return isNegative ? GamepadAxis::LeftStickUp : GamepadAxis::LeftStickDown;
-	case sf::Joystick::Z:
-		return isNegative ? GamepadAxis::RightTrigger : GamepadAxis::LeftTrigger;
-	case sf::Joystick::U:
-		return isNegative ? GamepadAxis::RightStickLeft : GamepadAxis::RightStickRight;
-	case sf::Joystick::V:
-		return isNegative ? GamepadAxis::RightStickUp : GamepadAxis::RightStickDown;
-	case sf::Joystick::PovX:
-		return isNegative ? GamepadAxis::DPadLeft : GamepadAxis::DPadRight;
-	case sf::Joystick::PovY:
-		return isNegative ? GamepadAxis::DPadUp : GamepadAxis::DPadDown;
-	default:
-		return GamepadAxis::VOID;
-	}
-}
-
-GamepadAxis GamepadController::getLastPressedGamepadAxisDs4(sf::Joystick::Axis axis, bool isNegative) {
-	switch (axis)
-	{
-	case sf::Joystick::X:
-		return isNegative ? GamepadAxis::LeftStickLeft : GamepadAxis::LeftStickRight;
-	case sf::Joystick::Y:
-		return isNegative ? GamepadAxis::LeftStickUp : GamepadAxis::LeftStickDown;
-	case sf::Joystick::Z:
-		return isNegative ? GamepadAxis::RightStickLeft : GamepadAxis::RightStickRight;
-	case sf::Joystick::R:
-		return isNegative ? GamepadAxis::RightStickUp : GamepadAxis::RightStickDown;
-	case sf::Joystick::U:
-		return GamepadAxis::RightTrigger;
-	case sf::Joystick::V:
-		return GamepadAxis::LeftTrigger;
-	case sf::Joystick::PovX:
-		return isNegative ? GamepadAxis::DPadLeft : GamepadAxis::DPadRight;
-	case sf::Joystick::PovY:
-		return isNegative ? GamepadAxis::DPadUp : GamepadAxis::DPadDown;
-	default:
-		return GamepadAxis::VOID;
-	}
-}
-
-GamepadAxis GamepadController::getLastPressedGamepadButtonXbox(int button) {
-	switch (button)
-	{
-	case 0:
-		return GamepadAxis::A;
-	case 1:
-		return GamepadAxis::B;
-	case 2:
-		return GamepadAxis::X;
-	case 3:
-		return GamepadAxis::Y;
-	case 4:
-		return GamepadAxis::LeftShoulder;
-	case 5:
-		return GamepadAxis::RightShoulder;
-	case 6:
-		return GamepadAxis::Select;
-	case 7:
-		return GamepadAxis::Start;
-	case 8:
-		return GamepadAxis::LeftStickPush;
-	case 9:
-		return GamepadAxis::RightStickPush;
-	default:
-		return GamepadAxis::VOID;
-	}
-}
-
-GamepadAxis GamepadController::getLastPressedGamepadButtonDs4(int button) {
-	switch (button)
-	{
-	case 0:
-		return GamepadAxis::Square;
-	case 1:
-		return GamepadAxis::X;
-	case 2:
-		return GamepadAxis::Circle;
-	case 3:
-		return GamepadAxis::Triangle;
-	case 4:
-		return GamepadAxis::LeftShoulder;
-	case 5:
-		return GamepadAxis::RightShoulder;
-	case 6:
-		return GamepadAxis::LeftTrigger;
-	case 7:
-		return GamepadAxis::RightTrigger;
-	case 8:
-		return GamepadAxis::Share;
-	case 9:
-		return GamepadAxis::Options;
-	case 10:
-		return GamepadAxis::LeftStickPush;
-	case 11:
-		return GamepadAxis::RightStickPush;
-	case 12:
-		return GamepadAxis::PSButton;
-	case 13:
-		return GamepadAxis::Touchpad;
-	default:
-		return GamepadAxis::VOID;
-	}
-}

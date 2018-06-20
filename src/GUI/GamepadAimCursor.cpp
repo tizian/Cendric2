@@ -27,7 +27,7 @@ void GamepadAimCursor::update(const sf::Time& frameTime) {
 	m_isActive = g_inputController->isGamepadConnected();
 	if (!m_isVisible || !m_isActive) return;
 
-	auto axis = g_inputController->getRightJoystickAxis();
+	auto axis = g_inputController->getAimJoystickAxis();
 	if (norm(axis) > 20) {
 		setRotation(axis);
 		setInUse(true);

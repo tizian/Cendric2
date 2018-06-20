@@ -19,6 +19,7 @@ private:
 	bool readDisplayMode(const std::string& line, ConfigurationData& data) const;
 	bool readMainInputMapping(const std::string& line, ConfigurationData& data) const;
 	bool readGamepadInputMapping(const std::string& line, ConfigurationData& data) const;
+	bool readGamepadProductId(const std::string& line, ConfigurationData& data) const;
 
 	bool readSoundVolumeMusic(const std::string& line, ConfigurationData& data) const;
 	bool readSoundVolumeSound(const std::string& line, ConfigurationData& data) const;

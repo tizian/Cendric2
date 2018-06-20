@@ -2,7 +2,8 @@
 
 #include "global.h"
 #include "Controller/BaseController.h"
-#include "Enums/GamepadAxis.h"
+#include "Enums/GamepadProductID.h"
+#include "Enums/GamepadInput.h"
 
 class GamepadController : public virtual BaseController {
 public:
@@ -12,11 +13,9 @@ public:
 	void update(const sf::Time& frameTime);
 	
 	void notifyGamepadConnected();
-	
 
 	bool isGamepadConnected() const;
-	bool isXboxControllerConnected() const;
-	static bool checkXboxControllerConnected();
+	static GamepadProductID getCurrentGamepadProductId();
 
 	bool isLeftJoystickUp() const;
 	bool isLeftJoystickDown() const;
@@ -27,17 +26,17 @@ public:
 	bool isLeftJoystickJustLeft() const;
 	bool isLeftJoystickJustRight() const;
 
-	sf::Vector2f getAnyJoystickAxis() const;
-	sf::Vector2f getRightJoystickAxis() const;
+	sf::Vector2f getAnyMoveJoystickAxis() const;
+	sf::Vector2f getAimJoystickAxis() const;
 	sf::Vector2f getLeftJoystickAxis() const;
 	sf::Vector2f getDPadAxis() const;
-	GamepadAxis getGamepadAxisForKey(Key key) const;
+	GamepadInput getGamepadInputForKey(Key key) const;
 	
 	void setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event);
 	void setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event);
 
-	// returns the GamepadAxis that was pressed in the last frame. If none, returns GamepadAxis::VOID
-	GamepadAxis getLastPressedAxis() const;
+	// returns the GamepadInput that was pressed in the last frame. If none, returns GamepadInput::VOID
+	GamepadInput getLastPressedGamepadInput() const;
 
 	static const int AXIS_THRESHOLD;
 
@@ -45,17 +44,17 @@ protected:
 	bool isGamepadButtonPressed(Key key) const;
 
 private:
-	const std::map<Key, GamepadAxis>* m_joystickMap;
-
-	std::map<GamepadAxis, std::function<bool()>> m_axisMap;
-	void initAxisMap();
+	const std::map<Key, GamepadInput>* m_joystickMap;
 
 	int m_connectedJoystick;
-	bool m_isXBoxController;
+	GamepadInput m_lastPressedInput = GamepadInput::VOID;
 
-	GamepadAxis m_lastPressedAxis = GamepadAxis::VOID;
-
-	bool isGamepadAxisPressed(GamepadAxis axis) const;
+	static std::pair<sf::Joystick::Axis, bool> getAxisForInput(GamepadInput input);
+	bool isGamepadInputPressed(GamepadInput input) const;
+	bool isAxisNegative(sf::Joystick::Axis axis) const;
+	bool isAxisPositive(sf::Joystick::Axis axis) const;
+	bool isButtonPressed(int button) const;
+	sf::Vector2f getAxisPosition(Key keyRight, Key keyDown) const;
 
 	void updateLeftJoystick();
 	bool m_isLeftJoystickLeftPressed = false;
@@ -66,41 +65,4 @@ private:
 	bool m_isLeftJoystickUpJustPressed = false;
 	bool m_isLeftJoystickDownPressed = false;
 	bool m_isLeftJoystickDownJustPressed = false;
-
-	bool isDPadUp() const;
-	bool isDPadDown() const;
-	bool isDPadLeft() const;
-	bool isDPadRight() const;
-	bool isLeftStickUp() const;
-	bool isLeftStickDown() const;
-	bool isLeftStickLeft() const;
-	bool isLeftStickRight() const;
-	bool isRightStickUp() const;
-	bool isRightStickDown() const;
-	bool isRightStickLeft() const;
-	bool isRightStickRight() const;
-	bool isLeftTrigger() const;
-	bool isRightTrigger() const;
-	bool isSquare() const;
-	bool isCircle() const;
-	bool isTriangle() const;
-	bool isX() const;
-	bool isY() const;
-	bool isA() const;
-	bool isB() const;
-	bool isRightShoulder() const;
-	bool isLeftShoulder() const;
-	bool isSelect() const;
-	bool isStart() const;
-	bool isShare() const;
-	bool isLeftStickPush() const;
-	bool isRightStickPush() const;
-	bool isPSButton() const;
-	bool isTouchpad() const;
-	bool isOptions()const;
-
-	GamepadAxis getLastPressedGamepadAxisXbox(sf::Joystick::Axis axis, bool isNegative);
-	GamepadAxis getLastPressedGamepadAxisDs4(sf::Joystick::Axis axis, bool isNegative);
-	GamepadAxis getLastPressedGamepadButtonXbox(int button);
-	GamepadAxis getLastPressedGamepadButtonDs4(int button);
 };

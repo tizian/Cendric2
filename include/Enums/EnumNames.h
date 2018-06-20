@@ -14,11 +14,12 @@
 #include "Enums/EnemyID.h"
 #include "Enums/DisplayMode.h"
 #include "Enums/GamepadAxis.h"
+#include "GamepadInput.h"
 
 // pure static class used to resolve enum names.
 class EnumNames final {
 private:
-	EnumNames() {}
+	EnumNames() = default;
 
 	static std::string getUtf8(int i) {
 		const char combined[2] = { static_cast<char>(i), '\0' };
@@ -350,7 +351,7 @@ public:
 			return "Unknown";
 		case Key::CharacterInfo:
 			return "CharacterInfo";
-		case Key::Down:
+		case Key::Move_Down:
 			return "MoveDown";
 		case Key::Escape:
 			return "Exit";
@@ -364,7 +365,7 @@ public:
 			return "Interact";
 		case Key::Jump:
 			return "Jump";
-		case Key::Left:
+		case Key::Move_Left:
 			return "MoveLeft";
 		case Key::Quickload:
 			return "Quickload";
@@ -374,7 +375,7 @@ public:
 			return "Journal";
 		case Key::Confirm:
 			return "Confirm";
-		case Key::Right:
+		case Key::Move_Right:
 			return "MoveRight";
 		case Key::Chop:
 			return "Chop";
@@ -396,7 +397,7 @@ public:
 			return "NextSpell";
 		case Key::PreviousSpell:
 			return "PreviousSpell";
-		case Key::Up:
+		case Key::Move_Up:
 			return "MoveUp";
 		case Key::ToggleTooltips:
 			return "ToggleTooltips";
@@ -412,6 +413,22 @@ public:
 			return "Menu";
 		case Key::Attack:
 			return "Attack";
+		case Key::Move_Right2:
+			return "MoveRight2";
+		case Key::Move_Down2:
+			return "MoveDown2";
+		case Key::Move_Left2:
+			return "MoveLeft2";
+		case Key::Move_Up2:
+			return "MoveUp2";
+		case Key::Aim_Right:
+			return "AimRight";
+		case Key::Aim_Down:
+			return "AimDown";
+		case Key::Aim_Left:
+			return "AimLeft";
+		case Key::Aim_Up:
+			return "AimUp";
 		}
 	}
 
@@ -485,6 +502,111 @@ public:
 			return "LB";
 		case GamepadAxis::RightShoulder:
 			return "RB";
+		}
+	}
+
+	static std::string getGamepadInputName(GamepadInput input) {
+		switch (input)
+		{
+		case GamepadInput::VOID: 
+		default:
+			return "?";
+		case GamepadInput::Axis_X_Positive: 
+			return "X+";
+		case GamepadInput::Axis_X_Negative: 
+			return "X-";
+		case GamepadInput::Axis_Y_Positive: 
+			return "Y+";
+		case GamepadInput::Axis_Y_Negative: 
+			return "Y-";
+		case GamepadInput::Axis_Z_Positive: 
+			return "Z+";
+		case GamepadInput::Axis_Z_Negative: 
+			return "Z-";
+		case GamepadInput::Axis_R_Positive: 
+			return "R+";
+		case GamepadInput::Axis_R_Negative: 
+			return "R-";
+		case GamepadInput::Axis_U_Positive: 
+			return "U+";
+		case GamepadInput::Axis_U_Negative: 
+			return "U-";
+		case GamepadInput::Axis_V_Positive: 
+			return "V+";
+		case GamepadInput::Axis_V_Negative: 
+			return "V-";
+		case GamepadInput::Axis_PovX_Positive: 
+			return "PX+";
+		case GamepadInput::Axis_PovX_Negative: 
+			return "PX-";
+		case GamepadInput::Axis_PovY_Positive: 
+			return "PY+";
+		case GamepadInput::Axis_PovY_Negative: 
+			return "PX-";
+		case GamepadInput::Button_0: 
+			return "B0";
+		case GamepadInput::Button_1: 
+			return "B1";
+		case GamepadInput::Button_2: 
+			return "B2";
+		case GamepadInput::Button_3: 
+			return "B3";
+		case GamepadInput::Button_4: 
+			return "B4";
+		case GamepadInput::Button_5: 
+			return "B5";
+		case GamepadInput::Button_6:
+			return "B6";
+		case GamepadInput::Button_7:
+			return "B7";
+		case GamepadInput::Button_8:
+			return "B8";
+		case GamepadInput::Button_9:
+			return "B9";;
+		case GamepadInput::Button_10:  
+			return "B10";
+		case GamepadInput::Button_11:  
+			return "B11";
+		case GamepadInput::Button_12:  
+			return "B12";
+		case GamepadInput::Button_13:  
+			return "B13";
+		case GamepadInput::Button_14:  
+			return "B14";
+		case GamepadInput::Button_15:  
+			return "B15";
+		case GamepadInput::Button_16:  
+			return "B16";
+		case GamepadInput::Button_17:  
+			return "B17";
+		case GamepadInput::Button_18:  
+			return "B18";
+		case GamepadInput::Button_19:  
+			return "B19";
+		case GamepadInput::Button_20:  
+			return "B20";
+		case GamepadInput::Button_21:  
+			return "B21";
+		case GamepadInput::Button_22:  
+			return "B22";
+		case GamepadInput::Button_23:  
+			return "B23";
+		case GamepadInput::Button_24:  
+			return "B24";
+		case GamepadInput::Button_25:  
+			return "B25";
+		case GamepadInput::Button_26:  
+			return "B26";
+		case GamepadInput::Button_27:  
+			return "B27";
+		case GamepadInput::Button_28:  
+			return "B28";
+		case GamepadInput::Button_29:  
+			return "B29";
+		case GamepadInput::Button_30:  
+			return "B30";
+		case GamepadInput::Button_31:  
+			return "B31";
 		}
 	}
 
@@ -815,19 +937,19 @@ public:
 		default:
 			return "?";
 
-		case Key::Up:
+		case Key::Move_Up:
 			// ¹
 			return getUtf8(0xb9);
 		
-		case Key::Down:
+		case Key::Move_Down:
 			// º
 			return getUtf8(0xba);
 
-		case Key::Left:
+		case Key::Move_Left:
 			// »
 			return getUtf8(0xbb);
 
-		case Key::Right:
+		case Key::Move_Right:
 			// ¼
 			return getUtf8(0xbc);
 		}

@@ -113,10 +113,10 @@ void GUITabBar::updateGamepadTexts() {
 
 	for (auto i = 0; i < size; ++i) {
 		if (i == selectedId - 1) {
-			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Up));
+			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Move_Up));
 		}
 		else if (i == selectedId && selectedId != size - 1) {
-			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Down));
+			setButtonText(i, EnumNames::getArrowSymbolForKey(Key::Move_Down));
 		}
 		else {
 			setButtonText(i, "");

@@ -2,6 +2,7 @@
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
+#include "Controller/GamepadMappings.h"
 
 TabBar::~TabBar() {
 	CLEAR_VECTOR(m_tabButtons)
@@ -40,11 +41,11 @@ void TabBar::loadLeftRightText() {
 		return;
 	}
 
-	auto const leftArrow = EnumNames::getArrowSymbolForKey(Key::Left);
-	auto const leftText = EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::PreviousSpell]);
+	auto const leftArrow = EnumNames::getArrowSymbolForKey(Key::Move_Left);
+	auto const leftText = GamepadMappings::getKeyName(Key::PreviousSpell);
 
-	auto const rightArrow = EnumNames::getArrowSymbolForKey(Key::Right);
-	auto const rightText = EnumNames::getGamepadAxisName(g_resourceManager->getConfiguration().gamepadKeyMap[Key::NextSpell]);
+	auto const rightArrow = EnumNames::getArrowSymbolForKey(Key::Move_Right);
+	auto const rightText = GamepadMappings::getKeyName(Key::NextSpell);
 
 	m_leftText.setString(leftArrow + " " + leftText);
 	m_rightText.setString(rightText + " " + rightArrow);
