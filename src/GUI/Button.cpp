@@ -1,4 +1,5 @@
 #include "GUI/Button.h"
+#include "GUI/GUIConstants.h"
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
 #include "Controller/GamepadMappings.h"
@@ -170,10 +171,29 @@ void Button::setCharacterSize(int size) {
 	reloadTextPosition();
 }
 
-void Button::reloadTextPosition() {
+float Button::checkCharacterSize(int charSize) {
 	float textWidth = hasGamepadKey() ?
 		m_text.getLocalBounds().width + m_keyText.getLocalBounds().width :
 		m_text.getLocalBounds().width;
+
+	if (textWidth + 10.f > getBoundingBox()->width && m_characterSize > charSize) {
+		m_text.setCharacterSize(charSize);
+		m_keyText.setCharacterSize(charSize);
+		m_characterSize = charSize;
+
+		textWidth = hasGamepadKey() ?
+			m_text.getLocalBounds().width + m_keyText.getLocalBounds().width :
+			m_text.getLocalBounds().width;
+	}
+
+	return textWidth;
+}
+
+void Button::reloadTextPosition() {
+	float textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_XL);
+	textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_L);
+	textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_M);
+	textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
 	float xOffset = std::max((getBoundingBox()->width - textWidth) * 0.5f, 0.f);
 	float yOffset = std::max((getBoundingBox()->height - m_text.getLocalBounds().height) * 0.5f, 0.f);

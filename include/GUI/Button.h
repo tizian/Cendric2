@@ -90,6 +90,7 @@ protected:
 
 	void updateColor() override;
 	void reloadTextPosition();
+	float checkCharacterSize(int charSize);
 	bool hasGamepadKey() const;
 
 	Key m_gamepadKey = Key::VOID;
