@@ -24,4 +24,10 @@ private:
 
 	static const input_map Ds4InputMap;
 	static const key_map Ds4KeyMap;
+
+	static const input_map Ds42InputMap;
+	static const key_map Ds42KeyMap;
+
+	static const input_map LogitechF310InputMap;
+	static const key_map LogitechF310KeyMap;
 };

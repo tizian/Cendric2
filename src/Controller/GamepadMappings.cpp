@@ -13,6 +13,12 @@ std::map<Key, GamepadInput> GamepadMappings::getDefaultMappings(GamepadProductID
 	case GamepadProductID::Dualshock4: 
 		return getMappings(Ds4KeyMap, Ds4InputMap);
 
+	case GamepadProductID::Dualshock4_2:
+		return getMappings(Ds42KeyMap, Ds42InputMap);
+
+	case GamepadProductID::Logitech_F310:
+		return getMappings(LogitechF310KeyMap, LogitechF310InputMap);
+
 	default:
 		return getUnknownMappings();
 	}
@@ -32,6 +38,19 @@ std::string GamepadMappings::getKeyName(GamepadInput input) {
 			return EnumNames::getGamepadAxisName(Ds4InputMap.at(input));
 		}
 		break;
+
+	case GamepadProductID::Dualshock4_2:
+		if (contains(Ds42InputMap, input)) {
+			return EnumNames::getGamepadAxisName(Ds42InputMap.at(input));
+		}
+		break;
+
+	case GamepadProductID::Logitech_F310:
+		if (contains(LogitechF310InputMap, input)) {
+			return EnumNames::getGamepadAxisName(LogitechF310InputMap.at(input));
+		}
+		break;
+
 	default:
 		break;
 	}
@@ -55,6 +74,19 @@ std::string GamepadMappings::getKeyName(Key key) {
 			return EnumNames::getGamepadAxisName(Ds4KeyMap.at(key));
 		}
 		break;
+
+	case GamepadProductID::Dualshock4_2:
+		if (contains(Ds42KeyMap, key)) {
+			return EnumNames::getGamepadAxisName(Ds42KeyMap.at(key));
+		}
+		break;
+
+	case GamepadProductID::Logitech_F310:
+		if (contains(LogitechF310KeyMap, key)) {
+			return EnumNames::getGamepadAxisName(LogitechF310KeyMap.at(key));
+		}
+		break;
+
 	default:
 		break;
 	}
@@ -193,13 +225,122 @@ const input_map GamepadMappings::Ds4InputMap =
 	{ GamepadInput::Button_7, GamepadAxis::RightButton2 },
 	{ GamepadInput::Button_8, GamepadAxis::Share },
 	{ GamepadInput::Button_9, GamepadAxis::Options },
-	{ GamepadInput::Button_10, GamepadAxis::LeftStickPush },
-	{ GamepadInput::Button_11, GamepadAxis::RightStickPush },
+	{ GamepadInput::Button_10, GamepadAxis::LeftButton3 },
+	{ GamepadInput::Button_11, GamepadAxis::RightButton3 },
 	{ GamepadInput::Button_12, GamepadAxis::PSButton },
 	{ GamepadInput::Button_13, GamepadAxis::Touchpad },
 };
 
-const std::map<Key, GamepadAxis> GamepadMappings::Ds4KeyMap =
+const input_map GamepadMappings::Ds42InputMap =
+{
+	{ GamepadInput::Axis_PovX_Negative, GamepadAxis::DPadLeft },
+	{ GamepadInput::Axis_PovX_Positive, GamepadAxis::DPadRight },
+	{ GamepadInput::Axis_PovY_Negative, GamepadAxis::DPadDown },
+	{ GamepadInput::Axis_PovY_Positive, GamepadAxis::DPadUp },
+	{ GamepadInput::Axis_X_Negative, GamepadAxis::LeftStickLeft },
+	{ GamepadInput::Axis_X_Positive, GamepadAxis::LeftStickRight },
+	{ GamepadInput::Axis_Y_Negative, GamepadAxis::LeftStickUp },
+	{ GamepadInput::Axis_Y_Positive, GamepadAxis::LeftStickDown },
+	{ GamepadInput::Axis_Z_Negative, GamepadAxis::RightStickLeft },
+	{ GamepadInput::Axis_Z_Positive, GamepadAxis::RightStickRight },
+	{ GamepadInput::Axis_R_Negative, GamepadAxis::RightStickUp },
+	{ GamepadInput::Axis_R_Positive, GamepadAxis::RightStickDown },
+	{ GamepadInput::Button_0, GamepadAxis::X },
+	{ GamepadInput::Button_1, GamepadAxis::Circle },
+	{ GamepadInput::Button_2, GamepadAxis::Triangle },
+	{ GamepadInput::Button_3, GamepadAxis::Square },
+	{ GamepadInput::Button_4, GamepadAxis::LeftShoulder },
+	{ GamepadInput::Button_5, GamepadAxis::RightShoulder },
+	{ GamepadInput::Button_6, GamepadAxis::LeftTrigger },
+	{ GamepadInput::Button_7, GamepadAxis::RightTrigger },
+	{ GamepadInput::Button_8, GamepadAxis::Share },
+	{ GamepadInput::Button_9, GamepadAxis::Options },
+	{ GamepadInput::Button_10, GamepadAxis::PSButton },
+	{ GamepadInput::Button_11, GamepadAxis::LeftButton3 },
+	{ GamepadInput::Button_12, GamepadAxis::RightButton3 }
+};
+
+const key_map GamepadMappings::Ds42KeyMap =
+{
+	{ Key::Move_Up, GamepadAxis::LeftStickUp },
+	{ Key::Move_Down, GamepadAxis::LeftStickDown },
+	{ Key::Move_Right, GamepadAxis::LeftStickRight },
+	{ Key::Move_Left, GamepadAxis::LeftStickLeft },
+	{ Key::Move_Up2, GamepadAxis::DPadUp },
+	{ Key::Move_Down2, GamepadAxis::DPadDown },
+	{ Key::Move_Right2, GamepadAxis::DPadRight },
+	{ Key::Move_Left2, GamepadAxis::DPadLeft },
+	{ Key::Aim_Up, GamepadAxis::RightStickUp },
+	{ Key::Aim_Down, GamepadAxis::RightStickDown },
+	{ Key::Aim_Right, GamepadAxis::RightStickRight },
+	{ Key::Aim_Left, GamepadAxis::RightStickLeft },
+	{ Key::Escape, GamepadAxis::Triangle },
+	{ Key::Interact, GamepadAxis::Square },
+	{ Key::Confirm, GamepadAxis::Square },
+	{ Key::Jump, GamepadAxis::X },
+	{ Key::Attack, GamepadAxis::Circle },
+	{ Key::PreviousSpell, GamepadAxis::LeftButton1 },
+	{ Key::NextSpell, GamepadAxis::RightButton1 },
+	{ Key::QuickSlot1, GamepadAxis::LeftButton2 },
+	{ Key::QuickSlot2, GamepadAxis::RightButton2 },
+	{ Key::Menu, GamepadAxis::Options },
+};
+
+const input_map GamepadMappings::LogitechF310InputMap =
+{
+	{ GamepadInput::Axis_PovX_Negative, GamepadAxis::DPadLeft },
+	{ GamepadInput::Axis_PovX_Positive, GamepadAxis::DPadRight },
+	{ GamepadInput::Axis_PovY_Negative, GamepadAxis::DPadDown },
+	{ GamepadInput::Axis_PovY_Positive, GamepadAxis::DPadUp },
+	{ GamepadInput::Axis_X_Negative, GamepadAxis::LeftStickLeft },
+	{ GamepadInput::Axis_X_Positive, GamepadAxis::LeftStickRight },
+	{ GamepadInput::Axis_Y_Negative, GamepadAxis::LeftStickUp },
+	{ GamepadInput::Axis_Y_Positive, GamepadAxis::LeftStickDown },
+	{ GamepadInput::Axis_Z_Negative, GamepadAxis::LeftTrigger },
+	{ GamepadInput::Axis_R_Negative, GamepadAxis::RightTrigger },
+	{ GamepadInput::Axis_V_Negative, GamepadAxis::RightStickUp },
+	{ GamepadInput::Axis_V_Positive, GamepadAxis::RightStickDown },
+	{ GamepadInput::Axis_U_Negative, GamepadAxis::RightStickLeft },
+	{ GamepadInput::Axis_U_Positive, GamepadAxis::RightStickRight },
+	{ GamepadInput::Button_0, GamepadAxis::A },
+	{ GamepadInput::Button_1, GamepadAxis::B },
+	{ GamepadInput::Button_2, GamepadAxis::X },
+	{ GamepadInput::Button_3, GamepadAxis::Y },
+	{ GamepadInput::Button_4, GamepadAxis::LeftShoulder },
+	{ GamepadInput::Button_5, GamepadAxis::RightShoulder },
+	{ GamepadInput::Button_6, GamepadAxis::Back },
+	{ GamepadInput::Button_7, GamepadAxis::Start },
+	{ GamepadInput::Button_8, GamepadAxis::LeftButton3 },
+	{ GamepadInput::Button_9, GamepadAxis::RightButton3 },
+};
+
+const key_map GamepadMappings::LogitechF310KeyMap =
+{
+	{ Key::Move_Up, GamepadAxis::LeftStickUp },
+	{ Key::Move_Down, GamepadAxis::LeftStickDown },
+	{ Key::Move_Right, GamepadAxis::LeftStickRight },
+	{ Key::Move_Left, GamepadAxis::LeftStickLeft },
+	{ Key::Move_Up2, GamepadAxis::DPadUp },
+	{ Key::Move_Down2, GamepadAxis::DPadDown },
+	{ Key::Move_Right2, GamepadAxis::DPadRight },
+	{ Key::Move_Left2, GamepadAxis::DPadLeft },
+	{ Key::Aim_Up, GamepadAxis::RightStickUp },
+	{ Key::Aim_Down, GamepadAxis::RightStickDown },
+	{ Key::Aim_Right, GamepadAxis::RightStickRight },
+	{ Key::Aim_Left, GamepadAxis::RightStickLeft },
+	{ Key::Escape, GamepadAxis::Y },
+	{ Key::Interact, GamepadAxis::X },
+	{ Key::Confirm, GamepadAxis::X },
+	{ Key::Jump, GamepadAxis::A },
+	{ Key::Attack, GamepadAxis::B },
+	{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
+	{ Key::NextSpell, GamepadAxis::RightShoulder },
+	{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
+	{ Key::QuickSlot2, GamepadAxis::RightTrigger },
+	{ Key::Menu, GamepadAxis::Start },
+};
+
+const key_map GamepadMappings::Ds4KeyMap =
 {
 	{ Key::Move_Up, GamepadAxis::LeftStickUp },
 	{ Key::Move_Down, GamepadAxis::LeftStickDown },

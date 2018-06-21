@@ -7,5 +7,7 @@ enum class GamepadProductID {
 	XboxOne_A = 721,
 	XboxOne_B = 767,
 	Dualshock4 = 1476,
-	WiiUPro = 6144
+	Dualshock4_2 = 2508,
+	WiiUPro = 6144,
+	Logitech_F310 = 49693
 };

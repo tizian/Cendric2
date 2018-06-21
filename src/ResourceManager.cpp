@@ -158,7 +158,6 @@ template<typename T> void ResourceManager::loadResource(std::map<std::string, T*
 	// search project's main directory
 	if (resource->loadFromFile(getResourcePath(filename))) {
 		holder[filename] = resource;
-		g_logger->logInfo("ResourceManager", getResourcePath(std::string(filename)) + ": loading " + typeName);
 
 		switch (type) {
 		case ResourceType::Unique:

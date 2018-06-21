@@ -2,11 +2,9 @@
 #include "GlobalResource.h"
 #include "GUI/Window.h"
 
-using namespace std;
-
 const float ScrollBar::WIDTH = 20.f;
 
-ScrollBar::ScrollBar(float height, const Window* window) : GameObject() {
+ScrollBar::ScrollBar(float height, const Window* window) {
 	m_window = window;
 	m_discreteSteps = 1;
 

@@ -474,6 +474,10 @@ public:
 			return "L2";
 		case GamepadAxis::RightButton2:
 			return "R2";
+		case GamepadAxis::LeftButton3:
+			return "L3";
+		case GamepadAxis::RightButton3:
+			return "R3";
 		case GamepadAxis::Square:
 			// ¾
 			return getUtf8(0xbe);
@@ -498,6 +502,10 @@ public:
 			return "Share";
 		case GamepadAxis::Options:
 			return "Options";
+		case GamepadAxis::Back:
+			return "Back";
+		case GamepadAxis::LogitechButton:
+			return "Logitech";
 		case GamepadAxis::PSButton:
 			return "PS";
 		case GamepadAxis::Touchpad:

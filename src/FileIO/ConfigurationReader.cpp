@@ -209,7 +209,7 @@ bool ConfigurationReader::readGamepadProductId(const std::string& line, Configur
 		return false;
 	}
 	int id = atoi(line.substr(colon + 1).c_str());
-	if (id > 10000 || id < 0) {
+	if (id < 0) {
 		g_logger->logWarning("ConfigurationReader", "GamepadProductId has an invalid value, is left unchanged.");
 		return true;
 	}
