@@ -6,7 +6,7 @@
 #include "CharacterCore.h"
 #include "World/Item.h"
 #include "Enums/EnumNames.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 const float ItemDescriptionWindow::WIDTH = 340.f;
 const float ItemDescriptionWindow::ICON_OFFSET = 24 * 8.f;

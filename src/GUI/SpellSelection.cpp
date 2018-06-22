@@ -1,5 +1,5 @@
 #include "GUI/SpellSelection.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 SpellSelection::SpellSelection(SpellManager* manager) {
 	m_spellManager = manager;

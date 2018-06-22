@@ -28,8 +28,6 @@ public:
 
 	sf::Vector2f getAnyMoveJoystickAxis() const;
 	sf::Vector2f getAimJoystickAxis() const;
-	sf::Vector2f getLeftJoystickAxis() const;
-	sf::Vector2f getDPadAxis() const;
 	GamepadInput getGamepadInputForKey(Key key) const;
 	
 	void setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event);

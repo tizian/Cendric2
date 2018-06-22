@@ -12,7 +12,7 @@
 #include "GlobalResource.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
 #include "Structs/LevelData.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;

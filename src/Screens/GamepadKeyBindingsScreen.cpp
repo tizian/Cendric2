@@ -6,7 +6,7 @@
 #include "GUI/Button.h"
 #include "FileIO/ConfigurationWriter.h"
 #include "GlobalResource.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 const float GamepadKeyBindingsScreen::WINDOW_MARGIN = 6.f;
 

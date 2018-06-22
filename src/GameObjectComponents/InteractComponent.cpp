@@ -4,7 +4,7 @@
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 InteractComponent::InteractComponent(std::string tooltip, AnimatedGameObject* parent, MainCharacter* mainChar) : 
 	GameObjectComponent(parent), 

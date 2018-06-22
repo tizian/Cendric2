@@ -2,7 +2,7 @@
 
 #include "TextProvider.h"
 #include "Enums/EnumNames.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 inline std::string getHintTitle(const std::string& hintKey) {
 	return g_textProvider->getText(hintKey, "hint");

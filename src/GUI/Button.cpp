@@ -2,10 +2,9 @@
 #include "GUI/GUIConstants.h"
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
-	GameObject(),
 	m_backLayerColor(COLOR_DARK_GREY),
 	m_mainLayerColor(COLOR_BLACK),
 	m_ornamentLayerColor(COLOR_WHITE),

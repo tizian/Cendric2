@@ -2,7 +2,7 @@
 #include "GlobalResource.h"
 #include "Enums/EnumNames.h"
 #include "GUI/GUIConstants.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 TabBar::~TabBar() {
 	CLEAR_VECTOR(m_tabButtons)

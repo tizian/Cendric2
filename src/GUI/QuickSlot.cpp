@@ -5,7 +5,7 @@
 #include "ResourceManager.h"
 #include "GlobalResource.h"
 #include "GameObjectComponents/TooltipWindowComponent.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 const float QuickSlot::SIZE = 58.f;
 const float QuickSlot::ICON_OFFSET = 4.f;

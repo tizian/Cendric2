@@ -2,7 +2,7 @@
 
 #include "GUI/SpellDescriptionWindow.h"
 #include "Spells/SpellCreator.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 
 const float SpellDescriptionWindow::WIDTH = 340.f;
 

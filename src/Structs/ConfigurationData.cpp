@@ -1,5 +1,5 @@
 #include "Structs/ConfigurationData.h"
-#include "Controller/GamepadMappings.h"
+#include "Controller/GamepadMappings/GamepadMappings.h"
 #include "Controller/GamepadController.h"
 
 void ConfigurationData::resetToDefault() {
