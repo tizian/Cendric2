@@ -168,6 +168,9 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 	if (slot == nullptr) return;
 
 	if (!contains(m_slots, slot->getItemType())) return;
+
+	m_screen->notifyItemUnequip(m_slots.at(slot->getItemType())->getItemID(), slot->getItemType());
+
 	if (Item::isRingType(slot->getItemType())) {
 		if (m_slots.at(ItemType::Equipment_ring_1)->isEmpty()) {
 			m_screen->notifyItemEquip(slot->getItemID(), ItemType::Equipment_ring_1);
@@ -182,6 +185,8 @@ void InventoryEquipment::equipItem(const InventorySlot* slot) {
 	else {
 		m_screen->notifyItemEquip(slot->getItemID(), slot->getItemType());
 	}
+
+
 }
 
 InventorySlot* InventoryEquipment::getSelectedSlot() const {

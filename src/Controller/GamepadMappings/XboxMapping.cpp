@@ -1,4 +1,4 @@
-#include "Controller/GamepadMappings/XboxOneMapping.h"
+#include "Controller/GamepadMappings/XboxMapping.h"
 
 static key_map KEY_MAP()
 {
@@ -59,4 +59,4 @@ static input_map INPUT_MAP() {
 	};
 }
 
-XboxOneMapping::XboxOneMapping() : GamepadMapping(INPUT_MAP(), KEY_MAP()) {}
+XboxMapping::XboxMapping() : GamepadMapping(INPUT_MAP(), KEY_MAP()) {}

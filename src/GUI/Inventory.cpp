@@ -469,7 +469,7 @@ void Inventory::updateWindowSelected() {
 	m_tabBar->setGamepadEnabled(isWindowSelected());
 	m_buttonGroup->setGamepadEnabled(isWindowSelected());
 
-	if (isWindowSelected()) {
+	if (isWindowSelected() && m_buttonGroup->getSelectedButton()) {
 		m_buttonGroup->getSelectedButton()->setSelected(true);
 	}
 }
@@ -613,7 +613,8 @@ void Inventory::selectSlot(const std::string& selectedSlotId, ItemType type) {
 		return;
 	}
 
-	if (dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton())->getItemID() == selectedSlotId) {
+	auto currentlySelectedSlot = dynamic_cast<InventorySlot*>(m_buttonGroup->getSelectedButton());
+	if (currentlySelectedSlot && currentlySelectedSlot->getItemID() == selectedSlotId) {
 		m_selectedSlotId.first = selectedSlotId;
 		m_selectedSlotId.second = type;
 		showDescription(getSelectedSlot()->getItem(), getSelectedSlot()->isEquipmentOrigin());

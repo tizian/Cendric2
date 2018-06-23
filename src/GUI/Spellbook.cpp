@@ -3,6 +3,7 @@
 #include "GUI/WorldInterface.h"
 #include "GUI/SlotClone.h"
 #include "GlobalResource.h"
+#include "Controller/InputController.h"
 
 float Spellbook::WIDTH = 420.f;
 float Spellbook::SPELL_OFFSET = 115.f;
@@ -150,6 +151,16 @@ void Spellbook::update(const sf::Time& frameTime) {
 			}
 		}
 	}
+	else if (isWindowSelected() && !g_inputController->isActionLocked()) {
+		if (g_inputController->isJustLeft()) {
+			setLeftWindowSelected();
+			g_inputController->lockAction();
+		}
+		if (g_inputController->isJustRight()) {
+			setRightWindowSelected();
+			g_inputController->lockAction();
+		}
+	}
 
 	// update weapon part
 	m_weaponWindow->update(frameTime);
@@ -171,6 +182,10 @@ void Spellbook::updateWindowSelected() {
 
 void Spellbook::updateButtonActions() {
 	if (!g_inputController->isGamepadConnected() || !isWindowSelected() || g_inputController->isActionLocked()) {
+		return;
+	}
+
+	if (!m_buttonGroup) {
 		return;
 	}
 

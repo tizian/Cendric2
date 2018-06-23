@@ -71,6 +71,10 @@ void ButtonGroup::addButton(ButtonInterface* button) {
 }
 
 ButtonInterface* ButtonGroup::getSelectedButton() const {
+	if (m_selectedButtonIndex == -1) {
+		return nullptr;
+	}
+
 	return m_buttons[m_selectedButtonIndex];
 }
 

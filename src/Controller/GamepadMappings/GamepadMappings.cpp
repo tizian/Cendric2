@@ -2,15 +2,17 @@
 #include "ResourceManager.h"
 
 #include "Controller/GamepadMappings/GamepadMappings.h"
-#include "Controller/GamepadMappings/XboxOneMapping.h"
+#include "Controller/GamepadMappings/XboxMapping.h"
 #include "Controller/GamepadMappings/LogitechF310Mapping.h"
 #include "Controller/GamepadMappings/DualShock42Mapping.h"
 #include "Controller/GamepadMappings/DualShock4Mapping.h"
 
 const std::map<GamepadProductID, GamepadMapping> GamepadMappings::MAPPINGS =
 {
-	{GamepadProductID::XboxOne_A, XboxOneMapping() },
-	{GamepadProductID::XboxOne_B, XboxOneMapping() },
+	{GamepadProductID::XboxOne_A, XboxMapping() },
+	{GamepadProductID::XboxOne_B, XboxMapping() },
+	{GamepadProductID::Xbox360, XboxMapping() },
+	{GamepadProductID::Xbox360_Wireless, XboxMapping() },
 	{GamepadProductID::DualShock4, DualShock4Mapping() },
 	{GamepadProductID::DualShock4_2, DualShock42Mapping() },
 	{GamepadProductID::Logitech_F310, LogitechF310Mapping() },
