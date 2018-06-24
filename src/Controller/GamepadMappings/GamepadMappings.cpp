@@ -44,15 +44,15 @@ std::string GamepadMappings::getKeyName(Key key) {
 	auto& keyMap = g_resourceManager->getConfiguration().gamepadKeyMap;
 	auto const id = g_resourceManager->getConfiguration().gamepadProductId;
 
-	if (contains(MAPPINGS, id)) {
-		auto const& map = MAPPINGS.at(id).getKeyMap();
-
-		if (contains(map, key)) {
-			return EnumNames::getGamepadAxisName(map.at(key));
-		}
-	}
-
 	if (contains(keyMap, key)) {
+		if (contains(MAPPINGS, id)) {
+			auto const& map = MAPPINGS.at(id).getInputMap();
+
+			if (contains(map, keyMap.at(key))) {
+				return EnumNames::getGamepadAxisName(map.at(keyMap.at(key)));
+			}
+		}
+
 		return EnumNames::getGamepadInputName(keyMap.at(key));
 	}
 
