@@ -1,4 +1,4 @@
-#include "Controller/GamepadMappings/XboxMapping.h"
+#include "Controller/GamepadMappings/XboxEliteMapping.h"
 
 static key_map KEY_MAP()
 {
@@ -21,8 +21,8 @@ static key_map KEY_MAP()
 		{ Key::Confirm, GamepadAxis::X },
 		{ Key::Jump, GamepadAxis::A },
 		{ Key::Attack, GamepadAxis::B },
-		{ Key::PreviousSpell, GamepadAxis::LeftShoulder },
-		{ Key::NextSpell, GamepadAxis::RightShoulder },
+		{ Key::PreviousSpell, GamepadAxis::LeftButton3 },
+		{ Key::NextSpell, GamepadAxis::RightButton3 },
 		{ Key::QuickSlot1, GamepadAxis::LeftTrigger },
 		{ Key::QuickSlot2, GamepadAxis::RightTrigger },
 		{ Key::Menu, GamepadAxis::Start },
@@ -40,8 +40,8 @@ static input_map INPUT_MAP() {
 		{ GamepadInput::Axis_X_Positive, GamepadAxis::LeftStickRight },
 		{ GamepadInput::Axis_Y_Negative, GamepadAxis::LeftStickUp },
 		{ GamepadInput::Axis_Y_Positive, GamepadAxis::LeftStickDown },
-		{ GamepadInput::Axis_Z_Negative, GamepadAxis::RightTrigger },
-		{ GamepadInput::Axis_Z_Positive, GamepadAxis::LeftTrigger },
+		{ GamepadInput::Axis_R_Negative, GamepadAxis::RightTrigger },
+		{ GamepadInput::Axis_Z_Negative, GamepadAxis::LeftTrigger },
 		{ GamepadInput::Axis_V_Negative, GamepadAxis::RightStickUp },
 		{ GamepadInput::Axis_V_Positive, GamepadAxis::RightStickDown },
 		{ GamepadInput::Axis_U_Negative, GamepadAxis::RightStickLeft },
@@ -54,9 +54,10 @@ static input_map INPUT_MAP() {
 		{ GamepadInput::Button_5, GamepadAxis::RightShoulder },
 		{ GamepadInput::Button_6, GamepadAxis::Back },
 		{ GamepadInput::Button_7, GamepadAxis::Start },
-		{ GamepadInput::Button_8, GamepadAxis::LeftStickPush },
-		{ GamepadInput::Button_9, GamepadAxis::RightStickPush },
+		{ GamepadInput::Button_8, GamepadAxis::XboxButton },
+		{ GamepadInput::Button_9, GamepadAxis::LeftButton3 },
+		{ GamepadInput::Button_10, GamepadAxis::RightButton3 },
 	};
 }
 
-XboxMapping::XboxMapping() : GamepadMapping(INPUT_MAP(), KEY_MAP()) {}
+XboxEliteMapping::XboxEliteMapping() : GamepadMapping(INPUT_MAP(), KEY_MAP()) {}

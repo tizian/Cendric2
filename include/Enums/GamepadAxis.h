@@ -41,5 +41,6 @@ enum class GamepadAxis {
 	RightStickPush,
 	LeftShoulder,
 	RightShoulder,
+	XboxButton,
 	MAX
 };

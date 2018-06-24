@@ -508,6 +508,8 @@ public:
 			return "Logitech";
 		case GamepadAxis::PSButton:
 			return "PS";
+		case GamepadAxis::XboxButton:
+			return "Xbox";
 		case GamepadAxis::Touchpad:
 			return "Touch";
 		case GamepadAxis::LeftStickPush:
