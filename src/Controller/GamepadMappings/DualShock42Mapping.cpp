@@ -33,8 +33,13 @@ static input_map INPUT_MAP() {
 	{
 		{ GamepadInput::Axis_PovX_Negative, GamepadAxis::DPadLeft },
 		{ GamepadInput::Axis_PovX_Positive, GamepadAxis::DPadRight },
+#ifdef __linux__ 
 		{ GamepadInput::Axis_PovY_Negative, GamepadAxis::DPadUp },
 		{ GamepadInput::Axis_PovY_Positive, GamepadAxis::DPadDown },
+#else
+		{ GamepadInput::Axis_PovY_Negative, GamepadAxis::DPadDown },
+		{ GamepadInput::Axis_PovY_Positive, GamepadAxis::DPadUp },
+#endif 
 		{ GamepadInput::Axis_X_Negative, GamepadAxis::LeftStickLeft },
 		{ GamepadInput::Axis_X_Positive, GamepadAxis::LeftStickRight },
 		{ GamepadInput::Axis_Y_Negative, GamepadAxis::LeftStickUp },
