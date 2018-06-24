@@ -43,10 +43,17 @@ static input_map INPUT_MAP() {
 		{ GamepadInput::Axis_U_Positive, GamepadAxis::RightStickRight },
 		{ GamepadInput::Axis_V_Negative, GamepadAxis::RightStickUp },
 		{ GamepadInput::Axis_V_Positive, GamepadAxis::RightStickDown },
+#ifdef __linux__ 
 		{ GamepadInput::Button_0, GamepadAxis::X },
 		{ GamepadInput::Button_1, GamepadAxis::Circle },
 		{ GamepadInput::Button_2, GamepadAxis::Triangle },
 		{ GamepadInput::Button_3, GamepadAxis::Square },
+#else
+		{ GamepadInput::Button_0, GamepadAxis::Square },
+		{ GamepadInput::Button_1, GamepadAxis::X },
+		{ GamepadInput::Button_2, GamepadAxis::Circle },
+		{ GamepadInput::Button_3, GamepadAxis::Triangle },
+#endif
 		{ GamepadInput::Button_4, GamepadAxis::LeftButton1 },
 		{ GamepadInput::Button_5, GamepadAxis::RightButton1 },
 		{ GamepadInput::Button_6, GamepadAxis::LeftButton2 },
