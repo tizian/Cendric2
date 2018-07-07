@@ -32,7 +32,8 @@ int main(int argc, char* argv[]) {
 	g_logger = new Logger();
 
 #ifdef EXTERNAL_DOCUMENTS_FOLDER
-	g_documentsPath = getExternalDocumentsPath();
+	std::ifstream infile("cendric_saves_here.ini");
+	g_documentsPath = infile.good() ? "" : getExternalDocumentsPath();
 #endif
 
 #ifdef __APPLE__
