@@ -193,7 +193,7 @@ if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
 
 endif()
 
-if (!APPLE)
+if (NOT APPLE)
     set(RESDIR "share/Cendric" CACHE STRING "Directory Game Ressources are installed to")
     set(BINDIR "bin" CACHE STRING "Directory Game Binary is installed to")
 
