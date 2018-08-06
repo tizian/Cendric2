@@ -127,17 +127,20 @@ void WorldScreen::notifyItemEquip(const std::string& itemID, ItemType type) {
 		return;
 	}
 
+	std::string oldItemId;
+
 	if (type != ItemType::VOID) {
-		getCharacterCore()->equipItem(itemID, type);
+		oldItemId = getCharacterCore()->equipItem(itemID, type);
 	}
 	else {
 		auto const item = g_resourceManager->getItem(itemID);
 		if (!item) return;
-		getCharacterCore()->equipItem(item->getID(), item->getType());
+		oldItemId = getCharacterCore()->equipItem(item->getID(), item->getType());
 	}
 
 	g_resourceManager->playSound(GlobalResource::SOUND_GUI_EQUIP);
 	m_interface->reloadInventory(itemID);
+	m_interface->reloadInventory(oldItemId);
 	m_interface->reloadCharacterInfo();
 	m_interface->reloadSpellBook();
 	notifyEquipmentReload();

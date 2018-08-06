@@ -822,9 +822,9 @@ void CharacterCore::learnSpell(SpellID id) {
 	m_data.spellsLearned.at(type).insert(id);
 }
 
-void CharacterCore::equipItem(const std::string& item, ItemType type, bool keepOldItem) {
+std::string CharacterCore::equipItem(const std::string& item, ItemType type, bool keepOldItem) {
 	if (!contains(m_data.equippedItems, type))
-		return;
+		return "";
 
 	std::string oldItem = m_data.equippedItems.at(type);
 	m_data.equippedItems.at(type) = item;
@@ -853,6 +853,7 @@ void CharacterCore::equipItem(const std::string& item, ItemType type, bool keepO
 	}
 
 	reloadAttributes();
+	return oldItem;
 }
 
 bool CharacterCore::isAutosave() {
