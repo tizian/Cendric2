@@ -1,0 +1,21 @@
+Cendric Spielanleitung
+----------------------
+Steuerung auf der Karte (Top-Down)
+- Laufen mit WASD oder Pfeiltasten
+- Interagieren (Sprechen, Lesen, Feuerstelle benutzen, etc.) mit E
+- Dialog-Optionen auswählen mit Pfeiltasten
+- Dialog-Option bestätigen mit Enter/Space oder E
+
+Steuerung im Level (Side-Scroller)
+- Laufen mit A und D oder Pfeiltasten
+- Angreifen (ausgewählter Zauber) mit linkem Mausklick oder mit F
+- Zauber auswählen mit 1-5
+- Interagieren (Gegenstand aufnehmen, Lesen, Hebel umschalten, etc.) mit E
+- Aus dem Level gehen mit W oder Pfeiltaste gegen oben 
+
+Steuerung auf der Oberfläche (Interface)
+- Inventar (Gegenstände ausrüsten) mit I
+- Mini-Karte mit M
+- Questlog/Tagebuch mit J
+- Charakter Info (Ruf, Statuswerte, Tipps) mit C
+- Zauberbuch (Zauber ausrüsten) mit K

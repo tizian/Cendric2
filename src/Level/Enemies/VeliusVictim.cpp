@@ -2,7 +2,7 @@
 #include "Screens/LevelScreen.h"
 #include "Registrar.h"
 #include "Level/MOBBehavior/MovingBehaviors/VeliusVictimMovingBehavior.h"
-#include "Level/MOBBehavior/AttackingBehaviors/AllyBehavior.h"
+#include "Level/MOBBehavior/AttackingBehaviors/AllyVoidBehavior.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "Level/DamageNumbers.h"
 
@@ -144,7 +144,7 @@ MovingBehavior* VeliusVictim::createMovingBehavior(bool asAlly) {
 
 AttackingBehavior* VeliusVictim::createAttackingBehavior(bool asAlly) {
 	EnemyAttackingBehavior* behavior;
-	behavior = new AllyBehavior(this);
+	behavior = new AllyVoidBehavior(this);
 	behavior->setAggroRange(10000.f);
 	behavior->setAttackInput(std::bind(&VeliusVictim::handleAttackInput, this));
 	return behavior;
