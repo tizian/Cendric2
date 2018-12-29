@@ -729,8 +729,8 @@ SpellData SpellData::getLightSpellData() {
 	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
 
 	light.cooldown = sf::seconds(60);
-	light.boundingBox = sf::FloatRect(0, 0, 1, 1);
-	light.spellOffset = sf::Vector2f(0.f, -60.f);
+	light.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	light.spellOffset = sf::Vector2f(-5.f, -60.f);
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
 	light.range = 400.f;

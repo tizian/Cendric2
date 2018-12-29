@@ -1,6 +1,6 @@
 #include "DialogueTool.h"
 #include "ApplicationState.h"
- 
+
 int main()
 {
 	g_state = new ApplicationState();

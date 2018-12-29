@@ -1,7 +1,6 @@
 #include "Level/DynamicTiles/AntiMagicTile.h"
 #include "Spells/Spell.h"
 #include "Registrar.h"
-#include "GameObjectComponents/InteractComponent.h"
 #include "GameObjectComponents/ParticleComponent.h"
 #include "GameObjectComponents/LightComponent.h"
 #include "World/CustomParticleUpdaters.h"
