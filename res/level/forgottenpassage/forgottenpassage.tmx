@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" backgroundcolor="#00007f" nextobjectid="228">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="50" height="40" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#00007f" nextlayerid="22" nextobjectid="228">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/forgottenpassage/layer_inf.png,3.0,res/level/forgottenpassage/layer_3.png,2.0,res/level/forgottenpassage/layer_2.png"/>
   <property name="dimming" value="0.5"/>
@@ -263,7 +263,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="50" height="40">
+ <layer id="1" name="BG 1" width="50" height="40">
   <data encoding="csv">
 100,0,157,0,0,0,157,0,103,0,0,106,323,0,157,157,0,42,43,325,0,73,74,75,42,43,73,74,74,74,75,42,43,73,74,75,0,325,0,0,323,0,103,0,157,324,157,0,0,100,
 0,0,157,0,0,0,157,0,103,0,0,106,346,0,157,157,0,42,43,348,0,73,74,75,42,43,73,74,74,74,75,42,43,73,74,75,0,348,0,0,346,0,103,0,157,347,157,0,0,0,
@@ -307,7 +307,7 @@
 77,77,77,77,77,77,77,77,77,77,78,0,0,0,0,0,0,76,77,77,77,77,77,78,0,0,0,0,0,0,0,0,76,77,77,77,77,77,78,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 2" width="50" height="40">
+ <layer id="2" name="BG 2" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,157,0,0,0,0,157,0,0,157,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,157,0,0,0,0,157,0,0,134,342,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,342,0,
@@ -351,7 +351,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,42,43,0,175,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="50" height="40">
+ <layer id="3" name="BG 3" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -395,7 +395,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="50" height="40">
+ <layer id="4" name="BG 4" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,261,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -439,7 +439,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="fluid" width="50" height="40">
+ <layer id="5" name="fluid" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -483,7 +483,7 @@
 652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652,652
 </data>
  </layer>
- <layer name="item" width="50" height="40">
+ <layer id="6" name="item" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -527,7 +527,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="50" height="40">
+ <layer id="7" name="LFG 1" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,157,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,157,0,0,0,0,0,0,0,0,0,0,
@@ -571,7 +571,7 @@
 54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="50" height="40">
+ <layer id="8" name="LFG 2" width="50" height="40">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -615,7 +615,7 @@
 54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54
 </data>
  </layer>
- <layer name="FG 1" width="50" height="40">
+ <layer id="9" name="FG 1" width="50" height="40">
   <data encoding="csv">
 78,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,76,
 78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76,
@@ -659,7 +659,7 @@
 78,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,54,76
 </data>
  </layer>
- <layer name="collidable" width="50" height="40">
+ <layer id="10" name="collidable" width="50" height="40">
   <data encoding="csv">
 264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,
 264,0,0,0,0,0,0,0,264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,264,0,0,0,0,0,0,264,
@@ -703,7 +703,7 @@
 264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264
 </data>
  </layer>
- <objectgroup name="lever 1">
+ <objectgroup id="11" name="lever 1">
   <object id="68" gid="539" x="1075" y="1725" width="50" height="50"/>
   <object id="69" gid="663" x="1500" y="1750" width="50" height="50">
    <properties>
@@ -715,20 +715,20 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 2">
+ <objectgroup id="12" name="lever 2">
   <object id="93" gid="660" x="2150" y="850" width="50" height="50"/>
   <object id="94" gid="659" x="2400" y="925" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 3">
+ <objectgroup id="13" name="lever 3">
   <object id="95" gid="699" x="1850" y="925" width="50" height="50"/>
   <object id="96" gid="660" x="2100" y="850" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 4">
+ <objectgroup id="14" name="lever 4">
   <object id="97" gid="660" x="500" y="500" width="50" height="50"/>
   <object id="98" gid="660" x="550" y="500" width="50" height="50"/>
   <object id="99" gid="699" x="450" y="200" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 5">
+ <objectgroup id="15" name="lever 5">
   <object id="100" gid="699" x="50" y="550" width="50" height="50"/>
   <object id="101" gid="660" x="350" y="700" width="50" height="50"/>
   <object id="102" gid="661" x="350" y="800" width="50" height="50"/>
@@ -736,12 +736,12 @@
   <object id="104" gid="661" x="200" y="800" width="50" height="50"/>
   <object id="105" gid="661" x="150" y="800" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 6">
+ <objectgroup id="16" name="lever 6">
   <object id="106" gid="699" x="450" y="400" width="50" height="50"/>
   <object id="107" gid="660" x="800" y="850" width="50" height="50"/>
   <object id="108" gid="660" x="850" y="850" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="dynamic">
+ <objectgroup id="17" name="dynamic">
   <object id="71" gid="663" x="2100" y="1100" width="50" height="50">
    <properties>
     <property name="direction" value="180"/>
@@ -993,7 +993,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="18" name="trigger">
   <object id="51" x="225" y="1700" width="100" height="100">
    <properties>
     <property name="keyguarded" value=""/>
@@ -1002,7 +1002,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger 2">
+ <objectgroup id="19" name="trigger 2">
   <properties>
    <property name="conditions" value="boss,BossJanus"/>
   </properties>
@@ -1014,7 +1014,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger 3">
+ <objectgroup id="20" name="trigger 3">
   <properties>
    <property name="not conditions" value="boss,BossJanus"/>
   </properties>
@@ -1026,7 +1026,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="21" name="enemy">
   <object id="83" gid="1090" x="900" y="1800" width="50" height="50"/>
   <object id="84" gid="1091" x="1650" y="1800" width="50" height="50"/>
   <object id="85" gid="1109" x="650" y="750" width="50" height="50"/>

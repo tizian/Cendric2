@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="158">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#000034" nextlayerid="15" nextobjectid="158">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/elderbackroom/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
@@ -184,7 +184,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="30" height="30">
+ <layer id="1" name="BG 1" width="30" height="30">
   <data encoding="csv">
 239,239,239,239,239,239,239,74,74,74,74,74,74,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,
 239,239,239,239,239,239,239,74,74,74,74,74,74,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,239,
@@ -218,7 +218,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77
 </data>
  </layer>
- <layer name="BG 2" width="30" height="30">
+ <layer id="2" name="BG 2" width="30" height="30">
   <data encoding="csv">
 78,0,0,0,0,106,175,176,0,0,0,0,177,178,106,0,0,107,108,78,0,0,0,0,0,83,0,107,108,76,
 78,0,0,0,0,106,175,176,0,0,0,0,177,178,106,0,0,107,108,78,0,0,0,0,0,106,0,107,108,76,
@@ -252,7 +252,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="30" height="30">
+ <layer id="3" name="BG 3" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -286,7 +286,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="30" height="30">
+ <layer id="4" name="BG 4" width="30" height="30">
   <data encoding="csv">
 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -320,7 +320,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 5" width="30" height="30">
+ <layer id="5" name="BG 5" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -354,7 +354,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="item" width="30" height="30">
+ <layer id="6" name="item" width="30" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -388,7 +388,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="30" height="30" visible="0">
+ <layer id="7" name="collidable" width="30" height="30" visible="0">
   <data encoding="csv">
 218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,
 218,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,0,218,
@@ -422,7 +422,7 @@
 218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218
 </data>
  </layer>
- <layer name="LFG 1" width="30" height="30">
+ <layer id="8" name="LFG 1" width="30" height="30">
   <data encoding="csv">
 0,0,0,100,100,100,100,100,0,0,0,0,0,100,100,100,100,100,100,100,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -456,7 +456,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="30" height="30" opacity="0.94">
+ <layer id="9" name="LFG 2" width="30" height="30" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -490,7 +490,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="10" name="dynamic">
   <object id="114" gid="531" x="1050" y="300" width="50" height="50"/>
   <object id="115" gid="585" x="1050" y="100" width="50" height="50"/>
   <object id="116" gid="551" x="350" y="450" width="50" height="50"/>
@@ -572,11 +572,11 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever">
+ <objectgroup id="11" name="lever">
   <object id="155" gid="660" x="1050" y="200" width="50" height="50"/>
   <object id="156" gid="659" x="900" y="100" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="12" name="trigger">
   <object id="87" x="1292" y="1167" width="65" height="130">
    <properties>
     <property name="keyguarded" value=""/>
@@ -585,7 +585,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy observer">
+ <objectgroup id="13" name="enemy observer">
   <properties>
    <property name="conditions" value="default,gandria_open"/>
   </properties>
@@ -605,7 +605,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="14" name="enemy">
   <object id="113" gid="1103" x="469" y="282" width="50" height="50">
    <properties>
     <property name="do_elderdiary" value="1"/>

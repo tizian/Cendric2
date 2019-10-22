@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="35" height="36" tilewidth="50" tileheight="50" backgroundcolor="#816ab3" nextobjectid="277">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="35" height="36" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#816ab3" nextlayerid="19" nextobjectid="277">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/gandriatower/layer_inf.png,3.0,res/level/gandriatower/layer_3.png"/>
   <property name="dimming" value="0.5"/>
@@ -169,11 +169,10 @@
    </properties>
   </tile>
   <tile id="55">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="co_shell"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="co_shell"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="56">
    <properties>
@@ -286,21 +285,19 @@
    </properties>
   </tile>
   <tile id="180">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="qe_antimagiccrystal"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="qe_antimagiccrystal"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="216">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="we_silversword"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="we_silversword"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
  </tileset>
- <layer name="BG 1" width="35" height="36">
+ <layer id="1" name="BG 1" width="35" height="36">
   <data encoding="csv">
 92,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,636,
 92,0,0,0,0,534,0,187,395,47,89,89,89,48,0,187,0,534,393,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,636,
@@ -340,7 +337,7 @@
 92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,319,0,0,0,0,0,0,0,0,0,0,0,319
 </data>
  </layer>
- <layer name="BG 2" width="35" height="36">
+ <layer id="2" name="BG 2" width="35" height="36">
   <data encoding="csv">
 92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,92,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 120,120,120,120,120,120,120,120,120,120,48,120,47,394,120,120,120,120,120,120,120,0,0,0,0,0,0,0,0,0,0,0,0,0,694,
@@ -380,7 +377,7 @@
 0,0,0,316,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,93,0,0,0,0,0,0,0,0,0,0,0,552
 </data>
  </layer>
- <layer name="BG 3" width="35" height="36">
+ <layer id="3" name="BG 3" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -420,7 +417,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="35" height="36">
+ <layer id="4" name="BG 4" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,93,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,91,93,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -460,7 +457,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 5" width="35" height="36">
+ <layer id="5" name="BG 5" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,316,0,0,0,0,0,0,0,0,0,315,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,315,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -500,7 +497,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="fluid" width="35" height="36">
+ <layer id="6" name="fluid" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -540,7 +537,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,787,787,787,787,787,787,787,787,787,787,787,0
 </data>
  </layer>
- <layer name="item" width="35" height="36">
+ <layer id="7" name="item" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -580,7 +577,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="35" height="36">
+ <layer id="8" name="LFG 1" width="35" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,542,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -620,7 +617,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="35" height="36" opacity="0.94">
+ <layer id="9" name="LFG 2" width="35" height="36" opacity="0.94">
   <data encoding="csv">
 0,93,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,93,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -660,7 +657,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="35" height="36">
+ <layer id="10" name="collidable" width="35" height="36">
   <data encoding="csv">
 319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,0,0,0,0,0,0,0,0,0,0,0,0,319,
 319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,0,0,0,0,0,0,0,0,0,0,0,0,319,
@@ -700,7 +697,7 @@
 319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,319,0,0,0,0,0,0,0,0,0,0,0,319
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="11" name="dynamic">
   <object id="198" gid="844" x="550" y="300" width="50" height="50">
    <properties>
     <property name="color" value="purple"/>
@@ -805,7 +802,7 @@
   </object>
   <object id="274" gid="828" x="450" y="950" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="12" name="enemy">
   <object id="269" gid="1345" x="350" y="1600" width="50" height="50"/>
   <object id="270" gid="1346" x="700" y="550" width="50" height="50"/>
   <object id="271" gid="1346" x="400" y="550" width="50" height="50"/>
@@ -817,13 +814,13 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 1">
+ <objectgroup id="13" name="lever 1">
   <object id="199" gid="915" x="1025" y="1500" width="50" height="50"/>
   <object id="200" gid="915" x="1025" y="1550" width="50" height="50"/>
   <object id="201" gid="915" x="1025" y="1600" width="50" height="50"/>
   <object id="211" gid="914" x="950" y="975" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 2">
+ <objectgroup id="14" name="lever 2">
   <object id="220" gid="915" x="200" y="1550" width="50" height="50"/>
   <object id="222" gid="914" x="208" y="1450" width="50" height="50"/>
   <object id="225" gid="918" x="350" y="1050" width="50" height="50">
@@ -839,7 +836,7 @@
   <object id="228" gid="889" x="150" y="1150" width="50" height="50"/>
   <object id="234" gid="799" x="350" y="850" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 3">
+ <objectgroup id="15" name="lever 3">
   <object id="242" gid="918" x="1250" y="1400" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
@@ -852,14 +849,14 @@
   </object>
   <object id="243" gid="954" x="1100" y="1200" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 4">
+ <objectgroup id="16" name="lever 4">
   <object id="261" gid="1034" x="550" y="500" width="50" height="50"/>
   <object id="262" gid="915" x="350" y="600" width="50" height="50"/>
   <object id="263" gid="915" x="700" y="400" width="50" height="50"/>
   <object id="264" gid="915" x="400" y="400" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="enemy"/>
- <objectgroup name="trigger">
+ <objectgroup id="17" name="enemy"/>
+ <objectgroup id="18" name="trigger">
   <object id="155" x="550" y="1500" width="50" height="100">
    <properties>
     <property name="keyguarded" value=""/>
