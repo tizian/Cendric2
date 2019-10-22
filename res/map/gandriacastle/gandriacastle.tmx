@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" nextobjectid="161">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="26" height="26" tilewidth="50" tileheight="50" infinite="0" nextlayerid="14" nextobjectid="161">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/castle.ogg"/>
@@ -77,7 +77,7 @@
  <tileset firstgid="607" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="26" height="26">
+ <layer id="1" name="BG 1" width="26" height="26">
   <data encoding="csv">
 189,189,185,189,189,189,94,94,189,189,94,94,189,94,94,94,94,94,94,94,94,94,94,185,0,0,
 70,212,208,212,212,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,208,70,0,
@@ -107,7 +107,7 @@
 258,258,258,258,258,258,258,258,258,258,258,258,188,188,258,258,258,258,258,258,258,258,258,258,258,0
 </data>
  </layer>
- <layer name="BG 2" width="26" height="26">
+ <layer id="2" name="BG 2" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,292,293,0,292,293,0,0,202,203,0,0,292,293,0,0,292,293,0,0,0,0,
 0,0,0,0,0,315,316,0,315,316,0,0,225,226,0,0,315,316,0,0,315,316,0,0,0,0,
@@ -137,7 +137,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="26" height="26">
+ <layer id="3" name="BG 3" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,358,0,0,0,0,
@@ -167,7 +167,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="26" height="26">
+ <layer id="4" name="BG 4" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -197,7 +197,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="26" height="26">
+ <layer id="5" name="LFG 1" width="26" height="26">
   <data encoding="csv">
 188,188,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,0,0,0,188,188,
 4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,94,0,0,0,188,188,
@@ -227,7 +227,7 @@
 188,188,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,188,188
 </data>
  </layer>
- <layer name="LFG 2" width="26" height="26">
+ <layer id="6" name="LFG 2" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,292,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,315,0,0,0,0,0,
@@ -257,7 +257,7 @@
 0,0,0,0,0,0,0,0,0,0,0,209,210,209,210,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 3" width="26" height="26">
+ <layer id="7" name="LFG 3" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -287,7 +287,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 4" width="26" height="26">
+ <layer id="8" name="LFG 4" width="26" height="26">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -317,7 +317,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="26" height="26" visible="0">
+ <layer id="9" name="collidable" width="26" height="26" visible="0">
   <data encoding="csv">
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
@@ -347,7 +347,7 @@
 93,93,93,93,93,93,93,93,93,93,93,93,0,0,93,93,93,93,93,93,93,93,93,93,93,93
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="10" name="collidable">
   <object id="148" x="1125" y="400" width="25" height="100"/>
   <object id="149" x="150" y="912.5" width="25" height="112.5"/>
   <object id="151" x="387.5" y="300" width="62.5" height="100"/>
@@ -358,7 +358,7 @@
   <object id="159" x="965" y="350" width="20" height="37.5"/>
   <object id="160" x="1062.5" y="350" width="20" height="37.5"/>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup id="11" name="npc">
   <object id="143" gid="590" x="625" y="337.5" width="50" height="50">
    <properties>
     <property name="id" value="npc_loganthird"/>
@@ -375,7 +375,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="12" name="trigger">
   <object id="128" x="600" y="1250" width="100" height="50">
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,515,760"/>
@@ -389,7 +389,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic">
+ <objectgroup id="13" name="dynamic">
   <object id="142" gid="651" x="1000" y="300" width="50" height="50">
    <properties>
     <property name="conditions" value="default,hallway_open"/>

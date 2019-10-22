@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="183">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="183">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -53,13 +53,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="439" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="25" height="15">
+ <layer id="1" name="BG 1" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,
 0,0,0,0,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,180,
@@ -78,7 +78,7 @@
 0,0,0,0,199,199,199,199,199,199,199,199,199,86,199,199,199,199,199,199,199,199,199,199,199
 </data>
  </layer>
- <layer name="BG 2" width="25" height="15">
+ <layer id="2" name="BG 2" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -97,7 +97,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="25" height="15">
+ <layer id="3" name="BG 3" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -116,7 +116,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="25" height="15">
+ <layer id="4" name="BG 4" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -135,14 +135,14 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="npc">
+ <objectgroup id="5" name="npc">
   <object id="167" gid="380" x="550" y="650" width="50" height="50">
    <properties>
     <property name="id" value="npc_jonathan"/>
    </properties>
   </object>
  </objectgroup>
- <layer name="LFG 1" width="25" height="15">
+ <layer id="6" name="LFG 1" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -161,7 +161,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="25" height="15">
+ <layer id="7" name="LFG 2" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -180,7 +180,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 1" width="25" height="15">
+ <layer id="8" name="FG 1" width="25" height="15">
   <data encoding="csv">
 4,4,4,4,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,64,
 4,4,4,4,64,64,64,64,64,64,64,6,0,5,64,64,64,64,64,64,64,64,64,64,64,
@@ -199,7 +199,7 @@
 4,4,4,4,64,64,64,64,0,0,0,0,0,0,0,0,0,64,64,64,64,64,64,64,64
 </data>
  </layer>
- <layer name="FG 2" width="25" height="15">
+ <layer id="9" name="FG 2" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -218,7 +218,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,77,0,79,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="15">
+ <layer id="10" name="collidable" width="25" height="15">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -237,7 +237,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="11" name="collidable">
   <object id="168" x="640" y="318" width="36" height="132"/>
   <object id="169" x="401" y="299" width="81" height="33"/>
   <object id="170" x="402" y="326" width="20" height="66"/>
@@ -248,23 +248,23 @@
   <object id="176" x="829" y="355" width="40" height="193"/>
   <object id="182" x="402" y="394" width="31" height="55"/>
  </objectgroup>
- <objectgroup name="dynamic">
-  <object id="152" gid="456" x="450" y="550" width="50" height="50">
+ <objectgroup id="12" name="dynamic">
+  <object id="152" gid="463" x="450" y="550" width="50" height="50">
    <properties>
     <property name="key" value="ke_jonathanbasement"/>
    </properties>
   </object>
-  <object id="177" gid="434" x="500" y="310" width="50" height="50">
+  <object id="177" gid="441" x="500" y="310" width="50" height="50">
    <properties>
     <property name="id" value="bo_schoolsofmagic"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic cryptdoor">
+ <objectgroup id="13" name="dynamic cryptdoor">
   <properties>
    <property name="conditions" value="default,cryptdoor"/>
   </properties>
-  <object id="181" gid="495" x="650" y="625" width="50" height="50">
+  <object id="181" gid="502" x="650" y="625" width="50" height="50">
    <properties>
     <property name="bg" value=""/>
     <property name="name" value="Note"/>
@@ -272,7 +272,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="14" name="trigger">
   <object id="126" x="650" y="719" width="51" height="29">
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,1915,2550"/>

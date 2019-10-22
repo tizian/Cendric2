@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" nextobjectid="320">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="50" tileheight="50" infinite="0" nextlayerid="18" nextobjectid="320">
  <properties>
   <property name="dimming" value="0.6"/>
   <property name="explorable" value=""/>
@@ -80,7 +80,7 @@
  <tileset firstgid="515" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="40" height="30">
+ <layer id="1" name="BG 1" width="40" height="30">
   <data encoding="csv">
 208,94,94,94,185,94,94,94,94,94,94,94,94,94,94,94,185,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,94,185,
 208,117,166,117,208,117,117,117,117,117,117,117,117,117,117,117,208,117,117,117,71,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,208,
@@ -114,7 +114,7 @@
 117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117,117
 </data>
  </layer>
- <layer name="BG 2" width="40" height="30">
+ <layer id="2" name="BG 2" width="40" height="30">
   <data encoding="csv">
 0,167,0,169,0,0,0,0,0,196,0,0,0,196,0,0,0,0,0,167,168,169,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,190,211,192,0,0,0,0,0,0,0,0,0,0,118,119,0,0,0,190,211,192,0,0,0,0,0,0,0,0,0,247,0,0,0,185,185,185,185,0,
@@ -148,7 +148,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="40" height="30">
+ <layer id="3" name="BG 3" width="40" height="30">
   <data encoding="csv">
 0,196,0,196,0,0,55,0,0,0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,55,0,0,0,0,
 0,0,0,0,0,49,50,124,0,0,0,125,0,0,0,0,0,0,316,0,214,0,317,0,0,316,0,0,317,0,0,0,49,50,124,0,0,0,0,0,
@@ -182,7 +182,7 @@
 55,0,0,0,0,0,0,81,0,0,0,0,0,0,55,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,81,0,0,0,0,55,0
 </data>
  </layer>
- <layer name="BG 4" width="40" height="30">
+ <layer id="4" name="BG 4" width="40" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,196,0,196,0,0,55,0,0,0,0,55,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -216,7 +216,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="40" height="30">
+ <layer id="5" name="LFG 1" width="40" height="30">
   <data encoding="csv">
 0,0,94,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,117,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,185,
 0,0,214,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,208,
@@ -250,7 +250,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="40" height="30">
+ <layer id="6" name="LFG 2" width="40" height="30">
   <data encoding="csv">
 0,0,168,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,168,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -284,7 +284,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 1" width="40" height="30">
+ <layer id="7" name="FG 1" width="40" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -318,7 +318,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 2" width="40" height="30">
+ <layer id="8" name="FG 2" width="40" height="30">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -352,7 +352,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG thieves" width="40" height="30">
+ <layer id="9" name="FG thieves" width="40" height="30">
   <properties>
    <property name="not conditions" value="default,thieves_open"/>
   </properties>
@@ -389,7 +389,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="10" name="dynamic">
   <object id="308" gid="516" x="100" y="250" width="50" height="50"/>
   <object id="309" gid="516" x="300" y="850" width="50" height="50"/>
   <object id="310" gid="516" x="1150" y="1250" width="50" height="50"/>
@@ -413,7 +413,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="collidable" width="40" height="30">
+ <layer id="11" name="collidable" width="40" height="30">
   <data encoding="csv">
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
 93,93,0,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,0,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
@@ -447,7 +447,7 @@
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="12" name="collidable">
   <object id="265" x="1550" y="800" width="15" height="50"/>
   <object id="266" x="1435" y="800" width="15" height="50"/>
   <object id="267" x="1550" y="1000" width="15" height="50"/>
@@ -469,7 +469,7 @@
   <object id="305" x="250" y="137" width="23" height="63"/>
   <object id="306" x="518" y="219" width="60" height="47"/>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="13" name="trigger">
   <object id="263" x="1800" y="1090" width="50" height="30">
    <properties>
     <property name="level entry" value="res/level/gandriasewers/gandriasewers.tmx,130,1260"/>
@@ -537,7 +537,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc thieves">
+ <objectgroup id="14" name="npc thieves">
   <properties>
    <property name="conditions" value="default,thieves_open"/>
   </properties>
@@ -554,14 +554,14 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup id="15" name="npc">
   <object id="315" gid="502" x="1300" y="300" width="50" height="50">
    <properties>
     <property name="id" value="npc_etoz"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="npc inina">
+ <objectgroup id="16" name="npc inina">
   <properties>
    <property name="conditions" value="default,second_boss_open"/>
    <property name="not conditions" value="boss,BossJanus"/>
@@ -583,7 +583,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup id="17" name="light">
   <object id="302" x="441" y="161" width="209" height="143">
    <ellipse/>
   </object>

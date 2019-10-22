@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" nextobjectid="152">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" infinite="0" nextlayerid="14" nextobjectid="152">
  <properties>
   <property name="dimming" value="0.4"/>
   <property name="musicpath" value="res/music/necromancers_theme.ogg"/>
@@ -88,13 +88,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="439" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="25" height="20">
+ <layer id="1" name="BG 1" width="25" height="20">
   <data encoding="csv">
 205,217,217,217,217,217,205,217,217,217,217,217,217,217,217,217,217,217,205,217,217,217,217,217,205,
 205,217,217,217,217,217,205,217,217,217,217,217,217,217,217,217,217,217,205,217,217,217,217,217,205,
@@ -118,7 +118,7 @@
 236,236,58,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236,236
 </data>
  </layer>
- <layer name="BG 2" width="25" height="20">
+ <layer id="2" name="BG 2" width="25" height="20">
   <data encoding="csv">
 244,297,296,244,295,295,244,244,244,244,244,311,244,311,244,244,244,244,244,297,295,244,295,297,244,
 0,316,315,0,315,315,0,0,0,0,0,330,0,330,0,0,0,0,0,315,316,0,315,316,0,
@@ -142,7 +142,7 @@
 0,0,83,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="25" height="20">
+ <layer id="3" name="BG 3" width="25" height="20">
   <data encoding="csv">
 0,202,204,0,202,204,0,0,0,0,0,0,0,0,0,0,0,0,0,202,204,0,202,204,0,
 0,221,223,0,221,223,0,0,0,0,0,218,219,220,0,0,0,0,0,221,223,0,221,223,0,
@@ -166,7 +166,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="25" height="20">
+ <layer id="4" name="BG 4" width="25" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -190,7 +190,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="25" height="20">
+ <layer id="5" name="LFG 1" width="25" height="20">
   <data encoding="csv">
 244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,244,
 0,0,0,0,0,183,0,145,0,0,0,0,217,0,0,0,0,183,0,145,0,0,0,0,0,
@@ -214,7 +214,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="25" height="20">
+ <layer id="6" name="LFG 2" width="25" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,219,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -238,7 +238,7 @@
 0,237,241,239,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 3" width="25" height="20">
+ <layer id="7" name="LFG 3" width="25" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -262,7 +262,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 4" width="25" height="20">
+ <layer id="8" name="LFG 4" width="25" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,145,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,183,0,
@@ -286,7 +286,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="20">
+ <layer id="9" name="collidable" width="25" height="20">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -310,14 +310,14 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="10" name="collidable">
   <object id="142" x="1100" y="300" width="100" height="38"/>
   <object id="149" x="965" y="750" width="62" height="25"/>
   <object id="150" x="420" y="150" width="60" height="25"/>
   <object id="151" x="770" y="150" width="60" height="25"/>
  </objectgroup>
- <objectgroup name="dynamic"/>
- <objectgroup name="npc">
+ <objectgroup id="11" name="dynamic"/>
+ <objectgroup id="12" name="npc">
   <object id="143" gid="363" x="400" y="800" width="50" height="50">
    <properties>
     <property name="id" value="npc_robert"/>
@@ -339,7 +339,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="13" name="trigger">
   <object id="128" x="100" y="850" width="50" height="50">
    <properties>
     <property name="level entry" value="res/level/smallcrypt/smallcrypt.tmx,2755,1260"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" nextobjectid="131">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="131">
  <properties>
   <property name="dimming" value="0.3"/>
   <property name="musicpath" value="res/music/house.ogg"/>
@@ -27,7 +27,7 @@
  <tileset firstgid="439" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="25" height="15">
+ <layer id="1" name="BG 1" width="25" height="15">
   <data encoding="csv">
 86,87,86,87,86,87,86,87,86,87,180,180,180,87,86,87,86,87,86,87,86,87,86,87,86,
 86,87,86,87,86,87,86,87,86,180,180,180,180,180,180,87,86,87,86,87,86,87,86,87,86,
@@ -46,7 +46,7 @@
 86,87,86,87,86,87,86,87,86,87,86,87,86,87,86,87,86,87,86,87,86,87,86,87,86
 </data>
  </layer>
- <layer name="BG 2" width="25" height="15">
+ <layer id="2" name="BG 2" width="25" height="15">
   <data encoding="csv">
 4,4,4,4,4,4,4,4,4,4,4,5,4,4,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,6,220,5,4,4,4,4,4,4,4,4,4,4,4,4,
@@ -65,7 +65,7 @@
 4,4,4,4,4,4,4,4,4,4,79,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 </data>
  </layer>
- <layer name="BG 3" width="25" height="15">
+ <layer id="3" name="BG 3" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -84,7 +84,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="25" height="15">
+ <layer id="4" name="BG 4" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -103,7 +103,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="25" height="15">
+ <layer id="5" name="LFG 1" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -122,7 +122,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="25" height="15">
+ <layer id="6" name="LFG 2" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -141,7 +141,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 1" width="25" height="15">
+ <layer id="7" name="FG 1" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -160,7 +160,7 @@
 0,0,0,0,0,0,4,4,4,4,0,4,4,4,4,4,4,4,4,4,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 2" width="25" height="15">
+ <layer id="8" name="FG 2" width="25" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -179,7 +179,7 @@
 0,0,0,0,0,0,0,0,0,78,0,80,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="25" height="15" visible="0">
+ <layer id="9" name="collidable" width="25" height="15" visible="0">
   <data encoding="csv">
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
 82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,82,
@@ -198,7 +198,7 @@
 82,82,82,82,82,82,82,82,82,82,0,82,82,82,82,82,82,82,82,82,82,82,82,82,82
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="10" name="collidable">
   <object id="114" x="707" y="655" width="34" height="40"/>
   <object id="115" x="808" y="655" width="34" height="37"/>
   <object id="116" x="851" y="608" width="55" height="39"/>
@@ -207,7 +207,7 @@
   <object id="129" x="761" y="297" width="26" height="29"/>
   <object id="130" x="701" y="292" width="43" height="106"/>
  </objectgroup>
- <objectgroup name="light" visible="0">
+ <objectgroup id="11" name="light" visible="0">
   <object id="120" x="271" y="293" width="209" height="183">
    <ellipse/>
   </object>
@@ -224,14 +224,14 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup id="12" name="npc">
   <object id="125" gid="366" x="549" y="446" width="50" height="50">
    <properties>
     <property name="id" value="npc_rhendal"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="13" name="trigger">
   <object id="126" x="503" y="722" width="45" height="27">
    <properties>
     <property name="map entry" value="res/map/meadows/meadows.tmx,2020,1830"/>
@@ -245,8 +245,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic">
-  <object id="127" gid="441" x="550" y="360" width="50" height="50">
+ <objectgroup id="14" name="dynamic">
+  <object id="127" gid="441" x="550" y="362.5" width="50" height="50">
    <properties>
     <property name="id" value="bo_rhendalmagic"/>
    </properties>
