@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" nextobjectid="202">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="25" height="17" tilewidth="50" tileheight="50" infinite="0" nextlayerid="14" nextobjectid="202">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="musicpath" value="res/music/tavern.ogg"/>
@@ -68,13 +68,13 @@
    </objectgroup>
   </tile>
  </tileset>
- <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="70" columns="7">
-  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="522"/>
+ <tileset firstgid="362" name="tileset_map_npcs" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="77" columns="7">
+  <image source="../../convenience/tilesets/tileset_map_npcs.png" width="364" height="574"/>
  </tileset>
- <tileset firstgid="432" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
+ <tileset firstgid="439" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="25" height="17">
+ <layer id="1" name="BG 1" width="25" height="17">
   <data encoding="csv">
 86,87,86,87,86,87,86,87,86,87,86,139,139,139,86,87,86,87,86,87,86,87,86,87,86,
 86,87,86,87,86,87,86,87,86,158,158,158,158,158,158,158,158,87,86,87,86,87,86,87,86,
@@ -95,7 +95,7 @@
 86,87,87,86,86,87,86,87,177,177,177,177,303,177,177,177,177,177,86,87,86,87,86,87,87
 </data>
  </layer>
- <layer name="BG 2" width="25" height="17">
+ <layer id="2" name="BG 2" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -116,7 +116,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,78,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="25" height="17">
+ <layer id="3" name="BG 3" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -137,7 +137,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="25" height="17">
+ <layer id="4" name="BG 4" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -158,7 +158,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="npc">
+ <objectgroup id="5" name="npc">
   <object id="189" gid="402" x="450" y="310" width="50" height="50">
    <properties>
     <property name="id" value="npc_jack"/>
@@ -185,7 +185,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="LFG 1" width="25" height="17">
+ <layer id="6" name="LFG 1" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -206,7 +206,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="25" height="17">
+ <layer id="7" name="LFG 2" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -227,7 +227,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 3" width="25" height="17">
+ <layer id="8" name="LFG 3" width="25" height="17">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -248,7 +248,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 1" width="25" height="17">
+ <layer id="9" name="FG 1" width="25" height="17">
   <data encoding="csv">
 4,4,4,4,4,4,4,4,4,4,4,6,0,5,4,4,4,4,4,4,4,4,4,4,4,
 4,4,4,4,4,4,4,4,4,4,6,0,0,0,5,4,4,4,4,4,4,4,4,4,4,
@@ -269,14 +269,14 @@
 4,4,4,4,4,4,4,4,0,0,0,77,0,79,0,0,0,4,4,4,4,4,4,4,4
 </data>
  </layer>
- <objectgroup name="dynamic">
-  <object id="194" gid="472" x="450" y="650" width="50" height="50"/>
-  <object id="190" gid="476" x="600" y="550" width="50" height="50">
+ <objectgroup id="10" name="dynamic">
+  <object id="194" gid="479" x="450" y="650" width="50" height="50"/>
+  <object id="190" gid="483" x="600" y="550" width="50" height="50">
    <properties>
     <property name="conditions" value="npc_mona,gate_open"/>
    </properties>
   </object>
-  <object id="200" gid="495" x="500" y="637.5" width="50" height="50">
+  <object id="200" gid="502" x="500" y="637.5" width="50" height="50">
    <properties>
     <property name="bg" value=""/>
     <property name="name" value="Note"/>
@@ -284,7 +284,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="collidable" width="25" height="17" visible="0">
+ <layer id="11" name="collidable" width="25" height="17" visible="0">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -305,7 +305,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="collidable" visible="0">
+ <objectgroup id="12" name="collidable" visible="0">
   <object id="172" x="365" y="248" width="85" height="32"/>
   <object id="174" x="50" y="245" width="85" height="32"/>
   <object id="175" x="915" y="250" width="170" height="32"/>
@@ -316,7 +316,7 @@
   <object id="197" x="240" y="250" width="20" height="100"/>
   <object id="199" x="440" y="250" width="10" height="100"/>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="13" name="trigger">
   <object id="126" x="600" y="820" width="50" height="30">
    <properties>
     <property name="map entry" value="res/map/gandria/gandria.tmx,2715,2550"/>
