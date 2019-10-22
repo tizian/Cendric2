@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="36" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="158">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="26" height="36" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#000034" nextlayerid="14" nextobjectid="158">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/well/layer_inf.png,1.5,res/level/well/layer_2.png"/>
   <property name="dimming" value="0.3"/>
@@ -218,7 +218,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="26" height="36">
+ <layer id="1" name="BG 1" width="26" height="36">
   <data encoding="csv">
 334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,149,0,0,0,0,334,
 334,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,272,249,0,0,0,334,
@@ -258,7 +258,7 @@
 189,189,189,189,189,443,444,445,446,447,448,449,450,451,77,77,77,77,77,77,77,77,77,77,77,77
 </data>
  </layer>
- <layer name="BG 2" width="26" height="36">
+ <layer id="2" name="BG 2" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,172,0,0,0,0,0,
@@ -298,7 +298,7 @@
 0,95,0,0,76,264,0,0,0,0,0,0,0,264,77,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="26" height="36">
+ <layer id="3" name="BG 3" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,326,0,0,0,
@@ -338,7 +338,7 @@
 0,0,0,0,0,78,0,0,0,0,0,0,0,76,75,51,0,0,50,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="26" height="36">
+ <layer id="4" name="BG 4" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -378,7 +378,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="fluid" width="26" height="36">
+ <layer id="5" name="fluid" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -418,7 +418,7 @@
 0,0,0,0,0,0,532,532,532,532,532,532,532,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="item" width="26" height="36">
+ <layer id="6" name="item" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -458,7 +458,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="26" height="36">
+ <layer id="7" name="LFG 1" width="26" height="36">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -498,7 +498,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="26" height="36" opacity="0.94">
+ <layer id="8" name="LFG 2" width="26" height="36" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -538,7 +538,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="26" height="36" visible="0">
+ <layer id="9" name="collidable" width="26" height="36" visible="0">
   <data encoding="csv">
 264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,264,
 264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,264,
@@ -578,7 +578,7 @@
 264,264,264,264,264,264,0,0,0,0,0,0,0,264,264,264,264,264,264,264,264,264,264,264,264,264
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="10" name="dynamic">
   <object id="150" gid="595" x="750" y="1350" width="50" height="50">
    <properties>
     <property name="key" value="ke_thiefguild"/>
@@ -587,7 +587,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="11" name="trigger">
   <object id="149" x="833" y="766" width="87" height="82">
    <properties>
     <property name="keyguarded" value=""/>
@@ -603,7 +603,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 1">
+ <objectgroup id="12" name="lever 1">
   <object id="151" gid="743" x="450" y="1500" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
@@ -615,7 +615,7 @@
   </object>
   <object id="152" gid="539" x="700" y="1400" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="13" name="enemy">
   <object id="154" gid="1108" x="800" y="1300" width="50" height="50"/>
   <object id="155" gid="1090" x="200" y="300" width="50" height="50"/>
  </objectgroup>

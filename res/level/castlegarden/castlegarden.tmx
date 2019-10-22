@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="28" tilewidth="50" tileheight="50" backgroundcolor="#44c6b3" nextobjectid="291">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="60" height="28" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#44c6b3" nextlayerid="19" nextobjectid="291">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/castlegarden/layer_inf.png,3.0,res/level/castlegarden/layer_3.png,1.5,res/level/castlegarden/layer_2.png"/>
   <property name="dimming" value="0.2"/>
@@ -9,88 +9,76 @@
  <tileset firstgid="1" name="tileset_level_castlegarden" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="784" columns="28">
   <image source="tileset_level_castlegarden.png" width="1500" height="1500"/>
   <tile id="141">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="50,30,100,150,0.8"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="50,30,100,150,0.8"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="315">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="25,30,100,150,0.8"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="25,30,100,150,0.8"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="343">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="35,35,100,100,0.5"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="35,35,100,100,0.5"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="344">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="30,30,100,100,0.5"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="30,30,100,100,0.5"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="465">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="30,30,100,100,0.9"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="30,30,100,100,0.9"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="494">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="20,30,100,100,0.9"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="20,30,100,100,0.9"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="506">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="25,20,60,70,0.5"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="25,20,60,70,0.5"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="512">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="25,25,100,100,0.3"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="25,25,100,100,0.3"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="521">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="30,20,150,150,0.9"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="30,20,150,150,0.9"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="522">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="20,45,100,150,0.9"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="20,45,100,150,0.9"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="523">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="15,40,100,100,0.9"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="15,40,100,100,0.9"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="541">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="25,30,100,150,0.8"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="25,30,100,150,0.8"/>
+   </properties>
+   <objectgroup draworder="index"/>
    <animation>
     <frame tileid="541" duration="100"/>
     <frame tileid="543" duration="100"/>
@@ -98,11 +86,10 @@
    </animation>
   </tile>
   <tile id="605">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="light" value="25,10,100,150,1.0"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="light" value="25,10,100,150,1.0"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
  </tileset>
  <tileset firstgid="785" name="tileset_level_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="560" columns="40">
@@ -174,11 +161,10 @@
    </properties>
   </tile>
   <tile id="33">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="fo_windrose"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="fo_windrose"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="48">
    <properties>
@@ -261,11 +247,10 @@
    </properties>
   </tile>
   <tile id="105">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="fo_redhat"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="fo_redhat"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="120">
    <properties>
@@ -288,21 +273,19 @@
    </properties>
   </tile>
   <tile id="129">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="fo_wine"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="fo_wine"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
   <tile id="179">
-   <objectgroup draworder="index">
-    <properties>
-     <property name="id" value="qe_dulcimer"/>
-    </properties>
-   </objectgroup>
+   <properties>
+    <property name="id" value="qe_dulcimer"/>
+   </properties>
+   <objectgroup draworder="index"/>
   </tile>
  </tileset>
- <layer name="BG Back" width="60" height="28">
+ <layer id="1" name="BG Back" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -334,7 +317,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 1" width="60" height="28">
+ <layer id="2" name="BG 1" width="60" height="28">
   <data encoding="csv">
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,0,0,0,0,0,0,0,0,0,0,0,0,0,730,731,0,0,0,0,0,0,198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
@@ -366,7 +349,7 @@
 61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61,61
 </data>
  </layer>
- <layer name="BG 2" width="60" height="28">
+ <layer id="3" name="BG 2" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,717,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -398,7 +381,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="60" height="28">
+ <layer id="4" name="BG 3" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,286,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 286,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,342,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,286,
@@ -430,7 +413,7 @@
 0,445,0,0,0,0,85,0,58,0,0,0,0,87,0,0,0,0,0,0,0,0,0,85,0,0,445,0,0,0,0,0,0,87,0,0,0,0,0,0,0,57,0,0,87,0,0,0,0,0,0,0,0,0,0,445,0,0,86,0
 </data>
  </layer>
- <layer name="BG 4" width="60" height="28">
+ <layer id="5" name="BG 4" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -462,7 +445,7 @@
 0,0,0,0,0,0,0,0,0,480,0,0,0,0,0,0,0,0,0,453,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,482,0,0,0,0,0,0,0,0,0,0,0,0,0,453,0,0,0,0,0,482,0,0
 </data>
  </layer>
- <layer name="fluid" width="60" height="28">
+ <layer id="6" name="fluid" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -494,7 +477,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="item" width="60" height="28">
+ <layer id="7" name="item" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -526,7 +509,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="60" height="28">
+ <layer id="8" name="LFG 1" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -558,7 +541,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="60" height="28" opacity="0.94">
+ <layer id="9" name="LFG 2" width="60" height="28" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,662,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,690,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -590,7 +573,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="FG 1" width="60" height="28">
+ <layer id="10" name="FG 1" width="60" height="28">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -622,7 +605,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="60" height="28">
+ <layer id="11" name="collidable" width="60" height="28">
   <data encoding="csv">
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
@@ -654,7 +637,7 @@
 113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="12" name="dynamic">
   <object id="161" gid="884" x="987.5" y="1112.5" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
@@ -768,7 +751,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 1">
+ <objectgroup id="13" name="lever 1">
   <object id="192" gid="915" x="550" y="700" width="50" height="50"/>
   <object id="193" gid="915" x="550" y="650" width="50" height="50"/>
   <object id="194" gid="915" x="550" y="600" width="50" height="50"/>
@@ -793,7 +776,7 @@
   <object id="288" gid="915" x="150" y="950" width="50" height="50"/>
   <object id="289" gid="915" x="200" y="950" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 2">
+ <objectgroup id="14" name="lever 2">
   <object id="242" gid="918" x="1350" y="450" width="50" height="50">
    <properties>
     <property name="direction" value="0"/>
@@ -806,18 +789,18 @@
   </object>
   <object id="246" gid="954" x="1645" y="500" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 3">
+ <objectgroup id="15" name="lever 3">
   <object id="244" gid="915" x="2000" y="450" width="50" height="50"/>
   <object id="245" gid="914" x="2105" y="300" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 4">
+ <objectgroup id="16" name="lever 4">
   <object id="268" gid="915" x="2800" y="600" width="50" height="50"/>
   <object id="269" gid="915" x="2850" y="600" width="50" height="50"/>
   <object id="270" gid="915" x="2900" y="600" width="50" height="50"/>
   <object id="271" gid="915" x="2400" y="350" width="50" height="50"/>
   <object id="272" gid="954" x="2195" y="650" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="17" name="trigger">
   <object id="149" x="200" y="1200" width="50" height="50">
    <properties>
     <property name="keyguarded" value=""/>
@@ -833,7 +816,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="18" name="enemy">
   <object id="278" gid="1348" x="2300" y="900" width="50" height="50"/>
   <object id="279" gid="1348" x="1200" y="200" width="50" height="50"/>
   <object id="280" gid="1348" x="1112.5" y="1100" width="50" height="50"/>

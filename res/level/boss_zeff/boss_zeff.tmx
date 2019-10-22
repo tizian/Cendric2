@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" nextobjectid="22">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="26" height="15" tilewidth="50" tileheight="50" infinite="0" nextlayerid="8" nextobjectid="22">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_zeff/layer_inf.png,2,res/level/boss_zeff/layer_2.png"/>
   <property name="bosslevel" value="res/level/boss_zeff/boss_zeff.lua"/>
@@ -35,7 +35,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="26" height="15">
+ <layer id="1" name="BG 1" width="26" height="15">
   <data encoding="csv">
 135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,135,
 135,10,11,11,12,10,11,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,135,
@@ -54,7 +54,7 @@
 81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81,81
 </data>
  </layer>
- <layer name="BG 2" width="26" height="15">
+ <layer id="2" name="BG 2" width="26" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,161,
@@ -73,7 +73,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="26" height="15">
+ <layer id="3" name="BG 3" width="26" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -92,7 +92,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="4" name="dynamic">
   <object id="21" gid="381" x="450" y="650" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
@@ -100,7 +100,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="FG 1" width="26" height="15">
+ <layer id="5" name="FG 1" width="26" height="15">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -119,7 +119,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="26" height="15">
+ <layer id="6" name="collidable" width="26" height="15">
   <data encoding="csv">
 77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,
 77,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,77,
@@ -138,7 +138,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77
 </data>
  </layer>
- <objectgroup name="enemy">
+ <objectgroup id="7" name="enemy">
   <object id="20" gid="933" x="650" y="600" width="50" height="50">
    <properties>
     <property name="fo_ham" value="1"/>

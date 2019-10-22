@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="60" height="80" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="299">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="60" height="80" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#aaaaaa" nextlayerid="23" nextobjectid="299">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/jacklighthouse/layer_inf.png"/>
   <property name="dimming" value="0.4"/>
@@ -203,7 +203,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="60" height="80">
+ <layer id="1" name="BG 1" width="60" height="80">
   <data encoding="csv">
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
@@ -287,7 +287,7 @@
 65,0,0,0,0,0,0,0,0,0,0,0,63,64,64,117,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,489,117,64,64,65,0,0,0,0,0,0,0,0,0,0,63
 </data>
  </layer>
- <layer name="BG 2" width="60" height="80">
+ <layer id="2" name="BG 2" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -371,7 +371,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,0,433,0,0,0,0,0,405,0,0,0,0,0,465,0,0,0,0,0,433,0,0,0,0,437,0,0,0,0,113,0,0,0,0,157,158,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="60" height="80">
+ <layer id="3" name="BG 3" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -455,7 +455,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,488,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,490,0,0,0,0,215,216,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="60" height="80">
+ <layer id="4" name="BG 4" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -539,7 +539,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,351,352,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 5" width="60" height="80">
+ <layer id="5" name="BG 5" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -623,7 +623,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="fluid" width="60" height="80">
+ <layer id="6" name="fluid" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -707,7 +707,7 @@
 787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,787,787,787,787,787,787,787,787,787,787,787,787,787,787
 </data>
  </layer>
- <layer name="collidable" width="60" height="80" visible="0">
+ <layer id="7" name="collidable" width="60" height="80" visible="0">
   <data encoding="csv">
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
@@ -791,7 +791,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,0,0,0,0,0,0,0,0,0,0,113
 </data>
  </layer>
- <layer name="item" width="60" height="80">
+ <layer id="8" name="item" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -875,7 +875,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="60" height="80">
+ <layer id="9" name="LFG 1" width="60" height="80">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -959,7 +959,7 @@
 0,0,355,356,0,0,0,435,0,0,355,356,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,327,328,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="60" height="80" opacity="0.94">
+ <layer id="10" name="LFG 2" width="60" height="80" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -1043,7 +1043,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,353,354,0,0,0,435,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic before boss">
+ <objectgroup id="11" name="dynamic before boss">
   <properties>
    <property name="not conditions" value="boss,BossElysia"/>
   </properties>
@@ -1089,7 +1089,7 @@
   <object id="186" gid="785" x="1950" y="1500" width="50" height="50"/>
   <object id="187" gid="785" x="1950" y="1550" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="dynamic after boss">
+ <objectgroup id="12" name="dynamic after boss">
   <properties>
    <property name="conditions" value="boss,BossElysia"/>
   </properties>
@@ -1124,7 +1124,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic">
+ <objectgroup id="13" name="dynamic">
   <object id="102" gid="801" x="375" y="3925" width="50" height="50">
    <properties>
     <property name="velocity" value="1000"/>
@@ -1285,7 +1285,7 @@
   <object id="296" gid="788" x="900" y="1350" width="50" height="50"/>
   <object id="298" gid="788" x="2350" y="2900" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="lever 1">
+ <objectgroup id="14" name="lever 1">
   <object id="134" gid="794" x="1500" y="3050" width="50" height="50"/>
   <object id="117" gid="918" x="1100" y="3000" width="50" height="50">
    <properties>
@@ -1297,7 +1297,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 2">
+ <objectgroup id="15" name="lever 2">
   <object id="136" gid="794" x="1450" y="1800" width="50" height="50"/>
   <object id="137" gid="918" x="1350" y="1650" width="50" height="50">
    <properties>
@@ -1316,7 +1316,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 3">
+ <objectgroup id="16" name="lever 3">
   <object id="139" gid="794" x="1500" y="1800" width="50" height="50"/>
   <object id="140" gid="918" x="1400" y="1650" width="50" height="50">
    <properties>
@@ -1335,7 +1335,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever 4">
+ <objectgroup id="17" name="lever 4">
   <object id="142" gid="794" x="1550" y="1800" width="50" height="50"/>
   <object id="143" gid="918" x="1450" y="1650" width="50" height="50">
    <properties>
@@ -1354,7 +1354,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger before boss intro">
+ <objectgroup id="18" name="trigger before boss intro">
   <properties>
    <property name="conditions not" value="default,elysia_intro"/>
   </properties>
@@ -1365,7 +1365,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger after boss intro">
+ <objectgroup id="19" name="trigger after boss intro">
   <properties>
    <property name="conditions" value="default,elysia_intro"/>
    <property name="not conditions" value="boss,BossElysia"/>
@@ -1378,7 +1378,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger after boss">
+ <objectgroup id="20" name="trigger after boss">
   <properties>
    <property name="conditions" value="boss,BossElysia"/>
   </properties>
@@ -1398,7 +1398,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="21" name="trigger">
   <object id="93" x="1475" y="3600" width="100" height="100">
    <properties>
     <property name="keyguarded" value=""/>
@@ -1407,7 +1407,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="22" name="enemy">
   <object id="123" gid="1345" x="900" y="3700" width="50" height="50"/>
   <object id="124" gid="1369" x="350" y="3400" width="50" height="50"/>
   <object id="125" gid="1369" x="2550" y="2800" width="50" height="50"/>
