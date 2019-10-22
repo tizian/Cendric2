@@ -584,6 +584,12 @@
   </object>
   <object id="108" gid="1352" x="2050" y="250" width="50" height="50"/>
   <object id="109" gid="1365" x="1850" y="550" width="50" height="50"/>
+  <object id="214" gid="1352" x="2400" y="300" width="50" height="50">
+   <properties>
+    <property name="gold" value="10"/>
+    <property name="skinnr" value="3"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="11" name="dynamic">
   <object id="90" gid="797" x="1850" y="200" width="50" height="50">
