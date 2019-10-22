@@ -32,6 +32,9 @@ void WispEnemy::loadAttributes() {
 	else if (m_skinNr == 1) {
 		m_attributes.resistanceFire = 10000;
 	}
+	else if (m_skinNr == 3) {
+		m_attributes.resistanceLight = 10000;
+	}
 	
 	m_attributes.calculateAttributes();
 }
