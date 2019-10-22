@@ -145,6 +145,11 @@ void LevelInterface::reloadInventory(const std::string& changedItemID) {
 	m_quickSlotBar->reload();
 }
 
+void LevelInterface::notifySpellsAndQuickslots() {
+	m_quickSlotBar->reload();
+	m_spellSelection->reload();
+}
+
 void LevelInterface::notifyCharacterInfo() {
 	m_characterInfo->notifyChange();
 }
