@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="195">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="30" height="35" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#aaaaaa" nextlayerid="10" nextobjectid="195">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_elysia/layer_inf.png,3.0,res/level/boss_elysia/layer_3.png"/>
   <property name="bosslevel" value="res/level/boss_elysia/boss_elysia.lua"/>
@@ -205,7 +205,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="30" height="35">
+ <layer id="1" name="BG 1" width="30" height="35">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -244,7 +244,7 @@
 0,0,0,0,0,0,485,486,487,0,0,486,486,486,0,486,0,486,486,486,0,0,486,486,487,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 2" width="30" height="35">
+ <layer id="2" name="BG 2" width="30" height="35">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -283,7 +283,7 @@
 0,0,0,0,0,0,0,0,458,458,458,100,125,99,458,378,458,100,125,99,458,458,458,106,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="30" height="35">
+ <layer id="3" name="BG 3" width="30" height="35">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -322,7 +322,7 @@
 0,0,0,0,0,0,520,0,0,0,0,0,126,0,0,0,0,0,126,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="30" height="35">
+ <layer id="4" name="BG 4" width="30" height="35">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -361,7 +361,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="5" name="dynamic">
   <object id="160" gid="804" x="500" y="1650" width="50" height="50">
    <properties>
     <property name="color" value="purple"/>
@@ -406,7 +406,7 @@
    </properties>
   </object>
  </objectgroup>
- <layer name="collidable" width="30" height="35" visible="0">
+ <layer id="6" name="collidable" width="30" height="35" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -445,7 +445,7 @@
 0,0,0,0,0,0,113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="30" height="35">
+ <layer id="7" name="LFG 1" width="30" height="35">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -484,7 +484,7 @@
 0,0,0,0,0,0,327,328,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="30" height="35" opacity="0.94">
+ <layer id="8" name="LFG 2" width="30" height="35" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -523,7 +523,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="enemy">
+ <objectgroup id="9" name="enemy">
   <object id="159" gid="1370" x="750" y="750" width="50" height="50">
    <properties>
     <property name="fo_egg" value="1"/>

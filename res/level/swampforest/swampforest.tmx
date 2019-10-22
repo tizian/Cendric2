@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="42" height="32" tilewidth="50" tileheight="50" backgroundcolor="#aaaaaa" nextobjectid="188">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="42" height="32" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#aaaaaa" nextlayerid="18" nextobjectid="188">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/swampforest/layer_inf.png,3.0,res/level/swampforest/layer_3.png,2.0,res/level/swampforest/layer_2.png"/>
   <property name="dimming" value="0.5"/>
@@ -224,7 +224,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG Back" width="42" height="32">
+ <layer id="1" name="BG Back" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -260,7 +260,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 1" width="42" height="32">
+ <layer id="2" name="BG 1" width="42" height="32">
   <data encoding="csv">
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
 198,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,198,
@@ -296,7 +296,7 @@
 64,64,64,65,0,0,0,0,0,0,0,0,0,0,0,63,64,65,0,0,0,0,0,0,63,64,65,0,0,0,0,0,0,63,64,64,64,64,64,64,64,64
 </data>
  </layer>
- <layer name="BG 2" width="42" height="32">
+ <layer id="3" name="BG 2" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -332,7 +332,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="42" height="32">
+ <layer id="4" name="BG 3" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -368,7 +368,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="42" height="32">
+ <layer id="5" name="BG 4" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -404,7 +404,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,433,434,0,0,0,433,434,0,0,357,358,0,0,0,0,0,0,0,0,0,424,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="fluid" width="42" height="32">
+ <layer id="6" name="fluid" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -440,7 +440,7 @@
 787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787,787
 </data>
  </layer>
- <layer name="item" width="42" height="32">
+ <layer id="7" name="item" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -476,7 +476,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="item mooneye" width="42" height="32">
+ <layer id="8" name="item mooneye" width="42" height="32">
   <properties>
    <property name="conditions" value="npc_koray,level_start"/>
    <property name="not conditions" value="npc_koray,level_stop"/>
@@ -516,7 +516,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="42" height="32">
+ <layer id="9" name="LFG 1" width="42" height="32">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -552,7 +552,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,355,356,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="42" height="32" opacity="0.94">
+ <layer id="10" name="LFG 2" width="42" height="32" opacity="0.94">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -588,7 +588,7 @@
 0,0,0,0,0,0,413,414,0,413,414,0,413,414,0,0,0,0,0,0,413,414,0,0,0,0,0,413,414,0,0,413,414,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="42" height="32">
+ <layer id="11" name="collidable" width="42" height="32">
   <data encoding="csv">
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
 113,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,113,
@@ -624,7 +624,7 @@
 113,113,113,113,0,0,0,0,0,0,0,0,0,0,0,113,113,113,0,0,0,0,0,0,113,113,113,0,0,0,0,0,0,113,113,113,113,113,113,113,113,113
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="12" name="dynamic">
   <object id="136" gid="801" x="1375" y="1600" width="50" height="50">
    <properties>
     <property name="velocity" value="1000"/>
@@ -688,7 +688,7 @@
   <object id="185" gid="799" x="1200" y="500" width="50" height="50"/>
   <object id="187" gid="788" x="2000" y="1150" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="dynamic koray">
+ <objectgroup id="13" name="dynamic koray">
   <properties>
    <property name="conditions" value="npc_koray,level_stop"/>
   </properties>
@@ -698,7 +698,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy koray">
+ <objectgroup id="14" name="enemy koray">
   <properties>
    <property name="conditions" value="npc_koray,level_start"/>
    <property name="not conditions" value="npc_koray,level_stop"/>
@@ -710,7 +710,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="enemy">
+ <objectgroup id="15" name="enemy">
   <object id="153" gid="1348" x="1450" y="1050" width="50" height="50"/>
   <object id="154" gid="1348" x="750" y="1000" width="50" height="50"/>
   <object id="155" gid="1348" x="450" y="450" width="50" height="50"/>
@@ -718,7 +718,7 @@
   <object id="157" gid="1352" x="1750" y="650" width="50" height="50"/>
   <object id="158" gid="1352" x="950" y="650" width="50" height="50"/>
  </objectgroup>
- <objectgroup name="light" visible="0">
+ <objectgroup id="16" name="light" visible="0">
   <object id="145" x="100" y="1400" width="400" height="100">
    <properties>
     <property name="brightness" value="0.2"/>
@@ -732,7 +732,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="17" name="trigger">
   <object id="134" x="1750" y="1200" width="100" height="100">
    <properties>
     <property name="keyguarded" value=""/>

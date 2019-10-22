@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" backgroundcolor="#000034" nextobjectid="190">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="26" height="20" tilewidth="50" tileheight="50" infinite="0" backgroundcolor="#000034" nextlayerid="11" nextobjectid="190">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_mercenaries/layer_inf.png"/>
   <property name="bosslevel" value="res/level/boss_mercenaries/boss_mercenaries.lua"/>
@@ -289,7 +289,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="26" height="20">
+ <layer id="1" name="BG 1" width="26" height="20">
   <data encoding="csv">
 74,75,214,73,74,75,0,0,0,0,214,0,0,0,0,214,0,157,0,0,73,74,75,214,73,74,
 74,75,214,73,74,75,0,0,0,0,214,0,0,0,0,214,0,0,0,0,73,74,75,214,73,74,
@@ -313,7 +313,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77
 </data>
  </layer>
- <layer name="BG 2" width="26" height="20">
+ <layer id="2" name="BG 2" width="26" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -337,7 +337,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="26" height="20">
+ <layer id="3" name="BG 3" width="26" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -361,7 +361,7 @@
 0,395,396,0,397,0,0,0,0,0,397,0,0,0,0,0,0,395,396,372,373,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="26" height="20">
+ <layer id="4" name="BG 4" width="26" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,339,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,342,0,0,0,0,0,0,
@@ -385,7 +385,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 5" width="26" height="20">
+ <layer id="5" name="BG 5" width="26" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -409,7 +409,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="6" name="dynamic">
   <object id="186" gid="549" x="400" y="200" width="50" height="50">
    <properties>
     <property name="color" value="red"/>
@@ -423,7 +423,7 @@
   <object id="188" gid="613" x="200" y="300" width="50" height="50"/>
   <object id="189" gid="613" x="1050" y="300" width="50" height="50"/>
  </objectgroup>
- <layer name="collidable" width="26" height="20">
+ <layer id="7" name="collidable" width="26" height="20">
   <data encoding="csv">
 264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,
 264,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,264,
@@ -447,7 +447,7 @@
 264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264,264
 </data>
  </layer>
- <layer name="LFG 1" width="26" height="20">
+ <layer id="8" name="LFG 1" width="26" height="20">
   <data encoding="csv">
 100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,
 0,0,0,0,0,0,0,0,157,0,0,0,0,0,0,0,0,157,0,0,0,0,0,0,0,0,
@@ -471,7 +471,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="26" height="20" opacity="0.94">
+ <layer id="9" name="LFG 2" width="26" height="20" opacity="0.94">
   <data encoding="csv">
 78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76,
 78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76,
@@ -495,7 +495,7 @@
 78,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76
 </data>
  </layer>
- <objectgroup name="enemy">
+ <objectgroup id="10" name="enemy">
   <object id="180" gid="1121" x="1000" y="450" width="50" height="50">
    <properties>
     <property name="do_veliusletter" value="1"/>

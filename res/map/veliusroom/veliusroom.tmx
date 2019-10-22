@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" nextobjectid="204">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="26" height="18" tilewidth="50" tileheight="50" infinite="0" nextlayerid="15" nextobjectid="204">
  <properties>
   <property name="dimming" value="0.5"/>
   <property name="lock_teleport" value=""/>
@@ -83,7 +83,7 @@
  <tileset firstgid="607" name="tileset_map_dynamic_tiles" tilewidth="50" tileheight="50" spacing="2" margin="1" tilecount="220" columns="20">
   <image source="../../convenience/tilesets/tileset_map_dynamic_tiles.png" width="1040" height="572"/>
  </tileset>
- <layer name="BG 1" width="26" height="18">
+ <layer id="1" name="BG 1" width="26" height="18">
   <data encoding="csv">
 4,4,208,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,189,208,4,4,
 4,4,208,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,212,208,4,4,
@@ -105,7 +105,7 @@
 4,4,258,258,258,258,258,258,258,258,258,258,382,384,258,258,258,258,258,258,258,258,258,258,4,4
 </data>
  </layer>
- <layer name="BG 2" width="26" height="18">
+ <layer id="2" name="BG 2" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,292,293,0,0,292,293,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,314,0,0,0,236,315,316,0,0,315,316,236,0,0,0,314,0,0,0,0,0,
@@ -127,7 +127,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,364,364,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG v" width="26" height="18">
+ <layer id="3" name="BG v" width="26" height="18">
   <properties>
    <property name="not conditions" value="boss,BossVelius"/>
   </properties>
@@ -152,7 +152,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,380,380,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 3" width="26" height="18">
+ <layer id="4" name="BG 3" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,245,0,0,0,245,0,0,0,0,74,75,0,0,0,0,245,0,0,0,245,0,0,0,
@@ -174,7 +174,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="26" height="18">
+ <layer id="5" name="BG 4" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -196,7 +196,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 1" width="26" height="18">
+ <layer id="6" name="LFG 1" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -218,7 +218,7 @@
 0,0,0,0,0,0,0,0,0,0,0,209,210,209,210,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="26" height="18">
+ <layer id="7" name="LFG 2" width="26" height="18">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -240,7 +240,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="26" height="18">
+ <layer id="8" name="collidable" width="26" height="18">
   <data encoding="csv">
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
 93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,93,
@@ -262,7 +262,7 @@
 93,93,93,93,93,93,93,93,93,93,93,93,0,0,93,93,93,93,93,93,93,93,93,93,93,93
 </data>
  </layer>
- <layer name="collidable v" width="26" height="18">
+ <layer id="9" name="collidable v" width="26" height="18">
   <properties>
    <property name="not conditions" value="boss,BossVelius"/>
   </properties>
@@ -287,7 +287,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,93,93,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="collidable">
+ <objectgroup id="10" name="collidable">
   <object id="184" x="620" y="200" width="60" height="19"/>
   <object id="186" x="149" y="349" width="29" height="71"/>
   <object id="187" x="178" y="349" width="49" height="23"/>
@@ -297,7 +297,7 @@
   <object id="194" x="466.667" y="200" width="18.6667" height="18.6667"/>
   <object id="203" x="1062.5" y="350" width="25" height="12.5"/>
  </objectgroup>
- <objectgroup name="light">
+ <objectgroup id="11" name="light">
   <object id="172" x="75" y="87.5" width="200" height="162.5">
    <ellipse/>
   </object>
@@ -338,7 +338,7 @@
    <ellipse/>
   </object>
  </objectgroup>
- <objectgroup name="npc">
+ <objectgroup id="12" name="npc">
   <object id="159" gid="591" x="625" y="450" width="50" height="50">
    <properties>
     <property name="id" value="npc_velius"/>
@@ -406,7 +406,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="trigger">
+ <objectgroup id="13" name="trigger">
   <object id="171" x="600" y="700" width="100" height="50">
    <properties>
     <property name="cutscene" value="velius"/>
@@ -426,7 +426,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="dynamic">
+ <objectgroup id="14" name="dynamic">
   <object id="160" gid="690" x="1100" y="537.5" width="50" height="50">
    <properties>
     <property name="name" value="Crystal"/>

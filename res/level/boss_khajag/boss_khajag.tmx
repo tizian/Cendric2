@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="50" tileheight="50" nextobjectid="40">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="40" height="20" tilewidth="50" tileheight="50" infinite="0" nextlayerid="11" nextobjectid="40">
  <properties>
   <property name="backgroundlayers" value="-1.0,res/level/boss_khajag/layer_inf.png"/>
   <property name="bosslevel" value="res/level/boss_khajag/boss_khajag.lua"/>
@@ -92,7 +92,7 @@
    </properties>
   </tile>
  </tileset>
- <layer name="BG 1" width="40" height="20">
+ <layer id="1" name="BG 1" width="40" height="20">
   <data encoding="csv">
 74,74,74,74,74,74,75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,76,77,77,77,77,77,
 74,74,74,74,74,74,75,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,50,51,52,0,0,76,77,77,77,77,77,
@@ -116,7 +116,7 @@
 77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77,77
 </data>
  </layer>
- <layer name="BG 2" width="40" height="20">
+ <layer id="2" name="BG 2" width="40" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -140,7 +140,7 @@
 0,0,149,0,0,0,0,0,0,148,0,0,0,0,0,0,149,0,0,0,0,0,0,0,149,0,0,0,0,0,0,0,0,0,0,0,0,149,0,0
 </data>
  </layer>
- <layer name="BG 3" width="40" height="20">
+ <layer id="3" name="BG 3" width="40" height="20">
   <data encoding="csv">
 144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 144,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -164,7 +164,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="BG 4" width="40" height="20">
+ <layer id="4" name="BG 4" width="40" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -188,7 +188,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup name="dynamic">
+ <objectgroup id="5" name="dynamic">
   <object id="28" gid="549" x="550" y="500" width="50" height="50">
    <properties>
     <property name="color" value="blue"/>
@@ -242,10 +242,10 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="lever">
+ <objectgroup id="6" name="lever">
   <object id="34" gid="699" x="50" y="850" width="50" height="50"/>
  </objectgroup>
- <layer name="LFG 1" width="40" height="20">
+ <layer id="7" name="LFG 1" width="40" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -269,7 +269,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="LFG 2" width="40" height="20">
+ <layer id="8" name="LFG 2" width="40" height="20">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,140,0,0,0,0,0,0,0,0,0,
@@ -293,7 +293,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="collidable" width="40" height="20">
+ <layer id="9" name="collidable" width="40" height="20">
   <data encoding="csv">
 351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,351,351,351,351,351,351,
 351,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,351,351,351,351,351,351,
@@ -317,7 +317,7 @@
 351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351,351
 </data>
  </layer>
- <objectgroup name="enemy">
+ <objectgroup id="10" name="enemy">
   <object id="21" gid="1102" x="1100" y="850" width="50" height="50">
    <properties>
     <property name="fo_ham" value="2"/>
