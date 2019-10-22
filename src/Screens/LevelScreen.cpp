@@ -103,6 +103,7 @@ void LevelScreen::notifyCharacterInfoReload() {
 }
 
 void LevelScreen::notifyBackFromMenu() {
+	dynamic_cast<LevelInterface*>(m_interface)->notifySpellsAndQuickslots();
 	m_mainChar->setQuickcast(g_resourceManager->getConfiguration().isQuickcast);
 	g_resourceManager->playMusic(m_currentLevel.getMusicPath());
 }

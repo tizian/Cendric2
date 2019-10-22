@@ -29,6 +29,8 @@ public:
 	void restoreConsumedFood();
 	// reloads inventory and quickslot bar
 	void reloadInventory(const std::string& changeditemID) override;
+	// notifies the quickslot bar
+	void notifySpellsAndQuickslots();
 	// notifies the character info
 	void notifyCharacterInfo();
 	// notifies that attributes have to be reloaded

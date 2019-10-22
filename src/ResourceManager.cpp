@@ -385,7 +385,6 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
 }
 
-
 void ResourceManager::notifyVolumeChanged() {
 	bool soundOn = m_configuration.isSoundOn && g_inputController->isWindowFocused();
 	float currentVolume = static_cast<float>(m_configuration.volumeMusic);

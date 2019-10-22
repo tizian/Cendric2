@@ -285,6 +285,7 @@ void KeyboardKeyBindingsScreen::onBack() {
 
 void KeyboardKeyBindingsScreen::onApply() {
 	g_resourceManager->getConfiguration().mainKeyMap = m_selectedKeys;
+
 	ConfigurationWriter writer;
 	writer.saveToFile(g_resourceManager->getConfiguration());
 	setTooltipText("ConfigurationSaved", COLOR_GOOD, true);
