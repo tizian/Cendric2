@@ -207,3 +207,16 @@ if (NOT APPLE)
     install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/db" DESTINATION ${RESDIR})
     install(TARGETS Cendric RUNTIME DESTINATION ${BINDIR})
 endif()
+
+# Find LibGamerzilla library
+if (NOT APPLE)
+    include(FindPkgConfig)
+    pkg_search_module(GAMERZILLA OPTIONAL gamerzilla)
+
+    if (GAMERZILLA_LIBRARIES)
+        message(STATUS "Gamerzilla found")
+        include_directories(${GAMERZILLA_INCLUDE_DIRS})
+        target_link_libraries(Cendric ${GAMERZILLA_LIBRARIES})
+        add_definitions(-DGAMERZILLA)
+    endif()
+endif()

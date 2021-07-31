@@ -1,0 +1,267 @@
+{
+	"shortname": "cendric",
+	"name": "Cendric",
+	"image": "gamerzilla/cendric.png",
+	"version": "1",
+	"trophy": [
+		{
+			"trophy_name": "Gold Hoarder",
+			"trophy_desc": "Possess 1000 gold",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/gold_hoarder1.png",
+			"falseimage": "gamerzilla/gold_hoarder0.png"
+		},
+		{
+			"trophy_name": "A Wolf in the City",
+			"trophy_desc": "Save Zeff",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/wolf_city1.png",
+			"falseimage": "gamerzilla/wolf_city0.png"
+		},
+		{
+			"trophy_name": "You Monster!",
+			"trophy_desc": "Kill Zeff",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/you_monster1.png",
+			"falseimage": "gamerzilla/you_monster0.png"
+		},
+		{
+			"trophy_name": "The One-Eyed Monster",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/one_eyed_monster1.png",
+			"falseimage": "gamerzilla/one_eyed_monster0.png"
+		},
+		{
+			"trophy_name": "The End of the Storm",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/end_storm1.png",
+			"falseimage": "gamerzilla/end_storm0.png"
+		},
+		{
+			"trophy_name": "Demon Friend",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/demon_friend1.png",
+			"falseimage": "gamerzilla/demon_friend0.png"
+		},
+		{
+			"trophy_name": "Demon Slayer",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/demon_slayer1.png",
+			"falseimage": "gamerzilla/demon_slayer0.png"
+		},
+		{
+			"trophy_name": "A Tale of Ice and Fire",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/tale_ice_fire1.png",
+			"falseimage": "gamerzilla/tale_ice_fire0.png"
+		},
+		{
+			"trophy_name": "Spellbreaker",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/spellbreaker1.png",
+			"falseimage": "gamerzilla/spellbreaker0.png"
+		},
+		{
+			"trophy_name": "High Cleric",
+			"trophy_desc": "Reach 70 reputation for the clerics fraction",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/high_cleric1.png",
+			"falseimage": "gamerzilla/high_cleric0.png"
+		},
+		{
+			"trophy_name": "Arch Necromancer",
+			"trophy_desc": "Reach 70 reputation for the necromancer fraction",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/arch_necromancer1.png",
+			"falseimage": "gamerzilla/arch_necromancer0.png"
+		},
+		{
+			"trophy_name": "Master of Shadows",
+			"trophy_desc": "Reach 70 reputation for the thieves fraction",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/master_shadows1.png",
+			"falseimage": "gamerzilla/master_shadows0.png"
+		},
+		{
+			"trophy_name": "Torches are red, torches are blue...",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/torches_red1.png",
+			"falseimage": "gamerzilla/torches_red0.png"
+		},
+		{
+			"trophy_name": "God",
+			"trophy_desc": "Play through the game and reach the credits without a single death",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/god1.png",
+			"falseimage": "gamerzilla/god0.png"
+		},
+		{
+			"trophy_name": "Gemstone Keeper",
+			"trophy_desc": "Unlock all modifier gems",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/gemstone_keeper1.png",
+			"falseimage": "gamerzilla/gemstone_keeper0.png"
+		},
+		{
+			"trophy_name": "Literate",
+			"trophy_desc": "Read all books",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/literate1.png",
+			"falseimage": "gamerzilla/literate0.png"
+		},
+		{
+			"trophy_name": "Globetrotter",
+			"trophy_desc": "Discover all waypoints",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/globetrotter1.png",
+			"falseimage": "gamerzilla/globetrotter0.png"
+		},
+		{
+			"trophy_name": "Keymaster",
+			"trophy_desc": "Get all keys",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/keymaster1.png",
+			"falseimage": "gamerzilla/keymaster0.png"
+		},
+		{
+			"trophy_name": "The Novice",
+			"trophy_desc": "Complete the first stage of the mysterious tower level",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/novice1.png",
+			"falseimage": "gamerzilla/novice0.png"
+		},
+		{
+			"trophy_name": "The Experienced",
+			"trophy_desc": "Complete the second stage of the mysterious tower level",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/experienced1.png",
+			"falseimage": "gamerzilla/experienced0.png"
+		},
+		{
+			"trophy_name": "The Master",
+			"trophy_desc": "Complete the third stage of the mysterious tower level",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/master1.png",
+			"falseimage": "gamerzilla/master0.png"
+		},
+		{
+			"trophy_name": "The Extremist",
+			"trophy_desc": "Complete the final stage of the mysterious tower level",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/extremist1.png",
+			"falseimage": "gamerzilla/extremist0.png"
+		},
+		{
+			"trophy_name": "Leeeeeroy!",
+			"trophy_desc": "Save Leeroy",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/leeroy1.png",
+			"falseimage": "gamerzilla/leeroy0.png"
+		},
+		{
+			"trophy_name": "The Sad Fate of Elona",
+			"trophy_desc": "Recover the tearstaff",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/sad_fate1.png",
+			"falseimage": "gamerzilla/sad_fate0.png"
+		},
+		{
+			"trophy_name": "I'm not your friend, buddy!",
+			"trophy_desc": "Loop with Jeremy 10 times",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/not_friend1.png",
+			"falseimage": "gamerzilla/not_friend0.png"
+		},
+		{
+			"trophy_name": "Chicken Chaser",
+			"trophy_desc": "Scare the chicken chaser in the prison",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/chicken_chaser1.png",
+			"falseimage": "gamerzilla/chicken_chaser0.png"
+		},
+		{
+			"trophy_name": "NecronomiCOME AT ME!",
+			"trophy_desc": "Let the necrotic grimoire summon at least 10 skeletons before opening the door and killing the book",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/necronomicome1.png",
+			"falseimage": "gamerzilla/necronomicome0.png"
+		},
+		{
+			"trophy_name": "Criminal",
+			"trophy_desc": "Get arrested",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/criminal1.png",
+			"falseimage": "gamerzilla/criminal0.png"
+		},
+		{
+			"trophy_name": "Prison Break",
+			"trophy_desc": "Escape the prison",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/prison_break1.png",
+			"falseimage": "gamerzilla/prison_break0.png"
+		},
+		{
+			"trophy_name": "Genius",
+			"trophy_desc": "Solve the lever puzzle in the Crypt of Gandria in 14 moves",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/genius1.png",
+			"falseimage": "gamerzilla/genius0.png"
+		},
+		{
+			"trophy_name": "Careless",
+			"trophy_desc": "Let all three mages die in the final fight",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/careless1.png",
+			"falseimage": "gamerzilla/careless0.png"
+		},
+		{
+			"trophy_name": "Leave No One Behind",
+			"trophy_desc": "Save all mages in the final fight",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/leave_no_one1.png",
+			"falseimage": "gamerzilla/leave_no_one0.png"
+		},
+		{
+			"trophy_name": "A Tough One",
+			"trophy_desc": "Kill the mercenaries in the following order: First Morgiana, then Roy, then Jeremy",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/tough_one1.png",
+			"falseimage": "gamerzilla/tough_one0.png"
+		},
+		{
+			"trophy_name": "The Gank Squad",
+			"trophy_desc": "",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/gank_squad1.png",
+			"falseimage": "gamerzilla/gank_squad0.png"
+		},
+		{
+			"trophy_name": "Masochist",
+			"trophy_desc": "Get the lava mantle from the ascent",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/masochist1.png",
+			"falseimage": "gamerzilla/masochist0.png"
+		},
+		{
+			"trophy_name": "No Time for Dialogues",
+			"trophy_desc": "Beat the game in under 3 hours",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/no_time1.png",
+			"falseimage": "gamerzilla/no_time0.png"
+		},
+		{
+			"trophy_name": "12 Step Program",
+			"trophy_desc": "Drink 12 alcoholic beverages while fighting Elysia and defeat her",
+			"max_progress": "0",
+			"trueimage": "gamerzilla/12_step1.png",
+			"falseimage": "gamerzilla/12_step0.png"
+		}
+	]
+}

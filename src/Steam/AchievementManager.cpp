@@ -7,6 +7,9 @@
 #ifdef STEAM
 #include "Steam/SteamAchievements.h"
 #endif
+#ifdef GAMERZILLA
+#include <gamerzilla.h>
+#endif
 
 AchievementManager* g_achievementManager;
 
@@ -20,6 +23,10 @@ AchievementManager::AchievementManager() {
 		m_steamAchievements = new SteamAchievements(m_cendricAchievements, static_cast<int>(AchievementID::MAX) - 1);
 	}
 #endif // STEAM
+#ifdef GAMERZILLA
+	GamerzillaStart(false, "gamerzillasave/");
+	m_gameId = GamerzillaSetGameFromFile("./gamerzilla/cendric.game", "./");
+#endif
 }
 
 AchievementManager::~AchievementManager() {
@@ -28,6 +35,9 @@ AchievementManager::~AchievementManager() {
 	delete m_steamAchievements;
 	
 #endif // STEAM
+#ifdef GAMERZILLA
+	GamerzillaQuit();
+#endif
 	clearAchievements();
 	delete m_cendricAchievements;
 }
@@ -41,6 +51,8 @@ void AchievementManager::initAchievements() {
 	if (!m_characterCore) return;
 
 	clearAchievements();
+	for (auto itr: m_characterCore->getData().achievementsUnlocked)
+		printf("%s\n", itr.c_str());
 	for (int i = static_cast<int>(VOID) + 1; i < static_cast<int>(MAX); ++i) {
 		auto achId = static_cast<AchievementID>(i);
 		auto achName = getAchievementName(achId);
@@ -111,8 +123,19 @@ void AchievementManager::unlockAchievement(const std::string& achievement) {
 	delete (*it).second;
 	m_achievements.erase(it);
 	m_characterCore->setAchievementUnlocked(achievement);
+	printf("%s\n", achievement.c_str());
 #ifdef STEAM
 	if (m_steamAchievements)
 		m_steamAchievements->setAchievement(achievement.c_str());
 #endif // STEAM
+#ifdef GAMERZILLA
+	for (int i = static_cast<int>(VOID) + 1; i < static_cast<int>(MAX); ++i) {
+		auto achId = static_cast<AchievementID>(i);
+		auto achName = getAchievementName(achId);
+		if (achName == achievement) {
+			GamerzillaSetTrophy(m_gameId, getAchievementGamerzilla(achId).c_str());
+			break;
+		}
+	}
+#endif
 }

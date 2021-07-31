@@ -29,6 +29,7 @@ private:
 private:
 	CharacterCore* m_characterCore = nullptr;
 	SteamAchievements* m_steamAchievements = nullptr;
+	int m_gameId = -1;
 	AchievementData* m_cendricAchievements = nullptr;
 	std::map<std::string, Achievement*> m_achievements;
 };
