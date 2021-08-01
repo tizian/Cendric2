@@ -27,22 +27,33 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 if (APPLE)
-	option(SFML_BUILD_FRAMEWORKS "" ON)
+    option(SFML_BUILD_FRAMEWORKS "" ON)
+
+    # add some default value for some additional macOS variable
+    if (NOT CMAKE_OSX_ARCHITECTURES)
+        set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "macOS architecture to build; 64-bit is expected" FORCE)
+    endif()
+    if (NOT CMAKE_OSX_SYSROOT)
+        # query the path to the default SDK
+        execute_process(COMMAND xcodebuild -sdk macosx -version Path
+                        COMMAND head -n 1
+                        COMMAND tr -d '\n'
+                        OUTPUT_VARIABLE CMAKE_OSX_SYSROOT
+                        ERROR_QUIET)
+    endif()
 endif()
 
 if (NOT USE_SYSTEM_SFML)
-	add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
+    add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml" EXCLUDE_FROM_ALL)
 else ()
-	find_package(SFML 2.5 COMPONENTS graphics window audio system)
-	if(NOT SFML_FOUND)
-		message(FATAL_ERROR
-			"System SFML package not found, you should set USE_SYSTEM_SFML to off"
-			)
-	endif()
+    find_package(SFML 2.5 COMPONENTS graphics window audio system)
+    if (NOT SFML_FOUND)
+        message(FATAL_ERROR    "System SFML package not found, you should set USE_SYSTEM_SFML to off")
+    endif()
 endif()
 
 if (USE_SYSTEM_PATHS)
-	add_definitions ("-DUSE_SYSTEM_PATHS")
+    add_definitions ("-DUSE_SYSTEM_PATHS")
 endif()
 
 if (MSVC)
@@ -52,29 +63,29 @@ endif()
 
 # enable modern c++ on clang or gcc
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+    endif()
+
     CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP14_FLAG)
     CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_CPP11_FLAG)
 
     if (HAS_CPP14_FLAG)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+        set(CMAKE_CXX_STANDARD 14)
     elseif (HAS_CPP11_FLAG)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+        set(CMAKE_CXX_STANDARD 11)
     else()
         message(FATAL_ERROR "Unsupported compiler. At least C++11 support is required.")
     endif()
-
-	if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-	endif()
 endif()
 
 file(GLOB_RECURSE Cendric_FILES
-	"${PROJECT_SOURCE_DIR}/include/*.h"
-	"${PROJECT_SOURCE_DIR}/src/*.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
-	"${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
-	"${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
-	"${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
+    "${PROJECT_SOURCE_DIR}/include/*.h"
+    "${PROJECT_SOURCE_DIR}/src/*.cpp"
+    "${PROJECT_SOURCE_DIR}/ext/Particles/*.cpp"
+    "${PROJECT_SOURCE_DIR}/ext/lua/src/*.c"
+    "${PROJECT_SOURCE_DIR}/ext/sqlite/sqlite3.c"
+    "${PROJECT_SOURCE_DIR}/ext/tinyxml2/*.cpp"
     if (CENDRIC_STEAM)
         "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.h"
         "${PROJECT_SOURCE_DIR}/ext/steam-sdk/public/steam/*.cpp"
@@ -82,48 +93,40 @@ file(GLOB_RECURSE Cendric_FILES
 )
 
 if (WIN32)
-    # Windows
-
-	add_executable(Cendric
-		${Cendric_FILES}
-		${PROJECT_SOURCE_DIR}/res/info.rc
-	)
+    add_executable(Cendric
+        ${Cendric_FILES}
+        ${PROJECT_SOURCE_DIR}/res/info.rc
+    )
 
     if (CENDRIC_STEAM)
         target_compile_definitions(Cendric PRIVATE STEAM)
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/win64/steam_api64.lib)
     endif()
+elseif (APPLE)
+    set(CMAKE_INSTALL_RPATH "@executable_path/../Frameworks")
 
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-    # macOS
+    add_definitions("-DAPPLE_APP_BUILD")
 
-	add_definitions("-DAPPLE_APP_BUILD")
+    add_executable(Cendric MACOSX_BUNDLE
+        ${Cendric_FILES}
+        ${PROJECT_SOURCE_DIR}/res/macOS/icon.icns
+    )
 
-	add_executable(Cendric MACOSX_BUNDLE
-		${Cendric_FILES}
-		${PROJECT_SOURCE_DIR}/res/macOS/icon.icns
-	)
-
-    # mac
     if (CENDRIC_STEAM)
         add_definitions("-DSTEAM")
         target_link_libraries(Cendric ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib)
-        file(COPY ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib
+        install(FILES ${PROJECT_SOURCE_DIR}/ext/steam-sdk/redistributable_bin/osx32/libsteam_api.dylib
              DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
-        file(COPY ${PROJECT_SOURCE_DIR}/res/macOS/steam_appid.txt
+        install(FILES ${PROJECT_SOURCE_DIR}/res/macOS/steam_appid.txt
              DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/MacOS)
     endif()
 
     add_library(CendricApple STATIC "${PROJECT_SOURCE_DIR}/src/Platform/CendricApple.mm")
     target_include_directories(CendricApple PRIVATE "${PROJECT_SOURCE_DIR}/include")
     set_target_properties(CendricApple PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
-    target_link_libraries(Cendric CendricApple)
+    target_link_libraries(Cendric CendricApple "-framework Cocoa" "-framework Foundation")
 else()
-    # Linux
-
-	add_executable(Cendric
-		${Cendric_FILES}
-	)
+    add_executable(Cendric ${Cendric_FILES})
 
     if (CENDRIC_STEAM)
         target_compile_definitions(Cendric PRIVATE STEAM)
@@ -139,76 +142,15 @@ if (CENDRIC_GERMAN)
     add_definitions("-DGERMAN_DEFAULT_LANGUAGE")
 endif()
 
-set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
+set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
 target_link_libraries(Cendric sfml-graphics sfml-window sfml-audio sfml-system)
 
 target_include_directories(Cendric PRIVATE
-	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
-	"${PROJECT_SOURCE_DIR}/ext"
-	"${PROJECT_SOURCE_DIR}/include"
+    "${PROJECT_SOURCE_DIR}/ext/sfml/include"
+    "${PROJECT_SOURCE_DIR}/ext"
+    "${PROJECT_SOURCE_DIR}/include"
 )
-
-if (APPLE)
-	set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/macOS/info.plist)
-	set_source_files_properties(res/macOS/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-	file(COPY db/game_data.db DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources/db)
-	file(COPY res DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
-	file(COPY saves DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Cendric.app/Contents/Resources)
-endif()
-
-if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
-
-	file(GLOB_RECURSE SQLiteShell_FILES
-		"${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
-		"${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
-	)
-
-	add_executable(SQLiteShell ${SQLiteShell_FILES})
-
-endif()
-
-if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
-
-	file(GLOB_RECURSE DialogueTool_FILES
-		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"
-		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
-		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
-		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
-		"${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
-		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
-	)
-
-	add_executable(DialogueTool ${DialogueTool_FILES})
-
-    find_package(OpenGL)
-
-	target_link_libraries(DialogueTool sfml-graphics sfml-window sfml-system OpenGL::GL)
-
-	target_include_directories(DialogueTool PRIVATE
-		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
-		"${PROJECT_SOURCE_DIR}/ext/imgui"
-		"${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
-		"${PROJECT_SOURCE_DIR}/ext"
-		"${PROJECT_SOURCE_DIR}/tools/DialogueTool/include"
-	)
-
-endif()
-
-if (NOT APPLE)
-    set(RESDIR "share/Cendric" CACHE STRING "Directory Game Ressources are installed to")
-    set(BINDIR "bin" CACHE STRING "Directory Game Binary is installed to")
-
-    if (IS_ABSOLUTE "${RESDIR}")
-    	add_definitions(-DRESDIR="${RESDIR}/")
-    else()
-    	add_definitions(-DRESDIR="${CMAKE_INSTALL_PREFIX}/${RESDIR}/")
-    endif()
-
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${RESDIR})
-    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/db" DESTINATION ${RESDIR})
-    install(TARGETS Cendric RUNTIME DESTINATION ${BINDIR})
-endif()
 
 # Find LibGamerzilla library
 if (NOT APPLE)
@@ -221,4 +163,68 @@ if (NOT APPLE)
         target_link_libraries(Cendric ${GAMERZILLA_LIBRARIES})
         add_definitions(-DGAMERZILLA)
     endif()
+endif()
+
+if (WIN32 AND CENDRIC_BUILD_SQLITE_SHELL)
+
+    file(GLOB_RECURSE SQLiteShell_FILES
+        "${PROJECT_SOURCE_DIR}/ext/sqlite/*.c"
+        "${PROJECT_SOURCE_DIR}/ext/sqlite/*.h"
+    )
+
+    add_executable(SQLiteShell ${SQLiteShell_FILES})
+
+endif()
+
+if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
+
+    file(GLOB_RECURSE DialogueTool_FILES
+        "${PROJECT_SOURCE_DIR}/tools/DialogueTool/include/*.h"
+        "${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
+    )
+
+    add_executable(DialogueTool ${DialogueTool_FILES})
+
+    find_package(OpenGL)
+
+    target_link_libraries(DialogueTool sfml-graphics sfml-window sfml-system OpenGL::GL)
+
+    target_include_directories(DialogueTool PRIVATE
+        "${PROJECT_SOURCE_DIR}/ext/sfml/include"
+        "${PROJECT_SOURCE_DIR}/ext/imgui"
+        "${PROJECT_SOURCE_DIR}/ext/imgui-sfml"
+        "${PROJECT_SOURCE_DIR}/ext"
+        "${PROJECT_SOURCE_DIR}/tools/DialogueTool/include"
+    )
+
+endif()
+
+if (APPLE)
+    set_target_properties(Cendric PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/res/macOS/info.plist)
+    set_source_files_properties(res/macOS/icon.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+    install(FILES ${PROJECT_SOURCE_DIR}/db/game_data.db DESTINATION ./Cendric.app/Contents/Resources/db)
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/res DESTINATION ./Cendric.app/Contents/Resources)
+    install(DIRECTORY ${PROJECT_SOURCE_DIR}/saves DESTINATION ./Cendric.app/Contents/Resources)
+
+    install(TARGETS Cendric BUNDLE DESTINATION .)
+    install(TARGETS sfml-graphics sfml-window sfml-audio sfml-system FRAMEWORK DESTINATION ./Cendric.app/Contents/Frameworks)
+    install(DIRECTORY ${FREETYPE_LIBRARY} ${FLAC_LIBRARY} ${VORBISENC_LIBRARY} ${VORBISFILE_LIBRARY} ${VORBIS_LIBRARY} ${OGG_LIBRARY} DESTINATION ./Cendric.app/Contents/Frameworks)
+else()
+    set(RESDIR "share/Cendric" CACHE STRING "Directory Game Ressources are installed to")
+    set(BINDIR "bin" CACHE STRING "Directory Game Binary is installed to")
+
+    if (IS_ABSOLUTE "${RESDIR}")
+        add_definitions(-DRESDIR="${RESDIR}/")
+    else()
+        add_definitions(-DRESDIR="${CMAKE_INSTALL_PREFIX}/${RESDIR}/")
+    endif()
+
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/res" DESTINATION ${RESDIR})
+    install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/db" DESTINATION ${RESDIR})
+    install(TARGETS Cendric RUNTIME DESTINATION ${BINDIR})
 endif()
