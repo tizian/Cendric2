@@ -23,7 +23,6 @@ echo "--------------------------"
 cd ../../../build
 cmake -DCENDRIC_STEAM=OFF -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON .. && make -j 7
 cd ${START_PATH}
-./add_libraries.sh ../../../build/Cendric.app ../../../ext ../../../build/ext
 
 zip -r -X "Cendric "${VERSION}" - Github.zip" ../../../build/Cendric.app/ >/dev/null
 
@@ -34,7 +33,6 @@ echo "--------------------------"
 cd ../../../build
 cmake -DCENDRIC_STEAM=ON -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON -DCENDRIC_GERMAN=OFF .. && make -j 7
 cd ${START_PATH}
-./add_libraries.sh ../../../build/Cendric.app ../../../ext ../../../build/ext
 
 zip -r -X "Cendric "${VERSION}" - Steam (EN).zip" ../../../build/Cendric.app/ >/dev/null
 
@@ -45,6 +43,5 @@ echo "--------------------------"
 cd ../../../build
 cmake -DCENDRIC_STEAM=ON -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON -DCENDRIC_GERMAN=ON .. && make -j 7
 cd ${START_PATH}
-./add_libraries.sh ../../../build/Cendric.app ../../../ext ../../../build/ext
 
 zip -r -X "Cendric "${VERSION}" - Steam (DE).zip" ../../../build/Cendric.app/ >/dev/null
