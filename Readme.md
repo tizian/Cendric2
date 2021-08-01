@@ -57,21 +57,36 @@ A list of all builds is available [here](https://github.com/tizian/Cendric2/rele
 
 ## How to compile
 
-The recommended way to compile the code is to use [**cmake**](https://cmake.org/), which automatically generates project files for your favourite IDE or build system:
+The recommended way to compile the code is to use [**CMake**](https://cmake.org/), which automatically generates project files for your favourite IDE or build system:
 ```
 git clone https://github.com/tizian/Cendric2.git --recursive
 cd Cendric2
 mkdir build
 cd build
 cmake ..
+cmake --build .
 ```
+
+### CMake Options
+
+| Variable                           | Type   | Default | Description                                                  |
+|------------------------------------|--------|---------|--------------------------------------------------------------|
+| `CENDRIC_BUILD_SQLITE_SHELL`       | Option | OFF     | Build SQLite shell on Windows platform?                      |
+| `CENDRIC_BUILD_DIALOGUE_TOOL`      | Option | ON      | Build Dialogue Tool on Windows platform?                     |
+| `CENDRIC_STEAM`                    | Option | OFF     | Include steamworks API?                                      |
+| `CENDRIC_EXTERNAL_DOCUMENT_FOLDER` | Option | OFF     | Use external documents folder?                               |
+| `CENDRIC_GERMAN`                   | Option | OFF     | Use German as default language?                              |
+| `USE_SYSTEM_SFML`                  | Option | OFF     | Use system SFML lib instead of internal                      |
+| `USE_SYSTEM_PATHS`                 | Option | OFF     | Use system paths for loading resources instead of local ones |
 
 ## Used Libraries
 
-* [SFML](http://www.sfml-dev.org/) : Window creation, rendering and sound
-* [SQLite](https://www.sqlite.org/) : Database for translations and items
-* [Lua](http://www.lua.org/work/) and [LuaBridge](https://github.com/vinniefalco/LuaBridge) : Scripting
-* [TinyXML 2](http://www.grinninglizard.com/tinyxml2/index.html) : XML parsing
+- [SFML](https://www.sfml-dev.org/) : Window creation, rendering and sound
+- [SQLite](https://www.sqlite.org/) : Database for translations and items
+- [Lua](https://www.lua.org/work/) and [LuaBridge](https://github.com/vinniefalco/LuaBridge) : Scripting
+- [TinyXML 2](http://www.grinninglizard.com/tinyxml2/index.html) : XML parsing
+- [Dear ImGui](https://github.com/ocornut/imgui) : GUI for the Dialogue Tool
+- [ImGui-SFML](https://github.com/eliasdaler/imgui-sfml) : Dear ImGui binding for SFML
 
 ## License
 
