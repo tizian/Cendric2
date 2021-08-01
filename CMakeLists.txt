@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.15)
 
 project(Cendric)
 
@@ -33,7 +33,7 @@ endif()
 if (NOT USE_SYSTEM_SFML)
 	add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml")
 else ()
-	find_package(SFML 2.5 COMPONENTS system window graphics audio)
+	find_package(SFML 2.5 COMPONENTS graphics window audio system)
 	if(NOT SFML_FOUND)
 		message(FATAL_ERROR
 			"System SFML package not found, you should set USE_SYSTEM_SFML to off"
@@ -141,7 +141,7 @@ endif()
 
 set (CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
-target_link_libraries(Cendric sfml-system sfml-window sfml-graphics sfml-audio)
+target_link_libraries(Cendric sfml-graphics sfml-window sfml-audio sfml-system)
 
 target_include_directories(Cendric PRIVATE
 	"${PROJECT_SOURCE_DIR}/ext/sfml/include"
@@ -181,7 +181,9 @@ if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
 
 	add_executable(DialogueTool ${DialogueTool_FILES})
 
-	target_link_libraries(DialogueTool sfml-system sfml-graphics sfml-window)
+    find_package(OpenGL)
+
+	target_link_libraries(DialogueTool sfml-graphics sfml-window sfml-system OpenGL::GL)
 
 	target_include_directories(DialogueTool PRIVATE
 		"${PROJECT_SOURCE_DIR}/ext/sfml/include"
