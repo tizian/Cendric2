@@ -22,10 +22,10 @@ void Window::init(const sf::FloatRect& box, GUIOrnamentStyle style) {
 	setBoundingBox(box);
 	m_isInputInDefaultView = true;
 
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backColor, box.width, box.height);
-	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentColor, box.width, box.height);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backColor, box.size.x, box.size.y);
+	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentColor, box.size.x, box.size.y);
 
-	setPosition(sf::Vector2f(box.left, box.top));
+	setPosition({box.position.x, box.position.y});
 }
 
 Window::~Window() {
@@ -33,7 +33,7 @@ Window::~Window() {
 }
 
 void Window::addCloseButton(const std::function<void()>& agent) {
-	m_closeButton = new Button(sf::FloatRect(0.f, 0.f, 33.f, 33.f), GUIOrnamentStyle::NONE);
+	m_closeButton = new Button(sf::FloatRect({0.f, 0.f}, {33.f, 33.f}), GUIOrnamentStyle::NONE);
 	m_closeButton->setOrnamentLayerTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_WINDOW_CLOSE_BUTTON));
 	m_closeButton->setOnClick(agent);
 	updateCloseButton();
@@ -109,7 +109,7 @@ void Window::setSize(const sf::Vector2f& size) {
 
 void Window::setHeight(float height) {
 	if (height < 0.f) return;
-	m_boundingBox.height = height;
+	m_boundingBox.size.y = height;
 	m_backLayer.setSize(getSize());
 	m_ornamentLayer.setSize(getSize());
 
@@ -118,7 +118,7 @@ void Window::setHeight(float height) {
 
 void Window::setWidth(float width) {
 	if (width < 0.f) return;
-	m_boundingBox.width = width;
+	m_boundingBox.size.x = width;
 	m_backLayer.setSize(getSize());
 	m_ornamentLayer.setSize(getSize());
 

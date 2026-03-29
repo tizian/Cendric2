@@ -21,9 +21,9 @@ public:
 	static void loadFireParticles(particles::TextureParticleSystem* ps, const sf::Vector2f& center);
 
 private:
-	sf::Sprite m_screenSpriteBackground;
-	sf::Sprite m_screenSpriteForeground;
-	sf::Sprite m_logoSprite;
+	std::optional<sf::Sprite> m_screenSpriteBackground;
+	std::optional<sf::Sprite> m_screenSpriteForeground;
+	std::optional<sf::Sprite> m_logoSprite;
 	BitmapText m_versionText;
 	
 	particles::TextureParticleSystem* m_ps_left = nullptr;

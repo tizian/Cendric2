@@ -33,7 +33,7 @@ Stopwatch::~Stopwatch() {
 void Stopwatch::initBackgroundLayers() {
 	auto size = sf::Vector2f(200.f, 30.f);
 	auto pos = sf::Vector2f((WINDOW_WIDTH - size.x) * 0.5f, WINDOW_HEIGHT - 38.f);
-	auto box = sf::FloatRect(pos.x, pos.y, size.x, size.y);
+	auto box = sf::FloatRect({pos.x, pos.y}, {size.x, size.y});
 
 	m_window = new Window(box,
 		GUIOrnamentStyle::NONE,
@@ -62,7 +62,7 @@ void Stopwatch::update(const sf::Time& frameTime) {
 	m_text.setString(formattedTime);
 
 	// center text
-	m_text.setPosition(sf::Vector2f((WINDOW_WIDTH - m_text.getBounds().width) * 0.5f, WINDOW_HEIGHT - 30.f));
+	m_text.setPosition({(WINDOW_WIDTH - m_text.getBounds().size.x) * 0.5f, WINDOW_HEIGHT - 30.f});
 }
 
 GameObjectType Stopwatch::getConfiguredType() const {

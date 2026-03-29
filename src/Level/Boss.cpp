@@ -17,7 +17,7 @@ void Boss::update(const sf::Time& frameTime) {
 		if (m_particleTime == sf::Time::Zero) {
 			m_deathPc->setEmitRate(0.f);
 		}
-		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
+		setSpriteColor(sf::Color(255, 255, 255, static_cast<std::uint8_t>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 	}
 }
 
@@ -66,7 +66,7 @@ void Boss::loadDeathParticles() {
 	data.timeGen = timeGen;
 
 	m_deathPc = new ParticleComponent(data, this);
-	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.8f));
+	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.8f));
 	m_deathPc->setVisible(false);
 	addComponent(m_deathPc);
 }

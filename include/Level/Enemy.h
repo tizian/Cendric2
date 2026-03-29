@@ -185,5 +185,5 @@ private:
 	bool m_isAlly = false;
 	// is this enemy currently targeted by the main character
 	bool m_isTargetedEnemy = false;
-	sf::Sprite m_targetSprite;
+	sf::Sprite* m_targetSprite;
 };

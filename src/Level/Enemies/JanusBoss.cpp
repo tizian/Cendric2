@@ -39,7 +39,7 @@ void JanusBoss::loadSpells() {
 	chopSpell.damage = 50;
 	chopSpell.activeDuration = sf::milliseconds(17 * 50);
 	chopSpell.cooldown = 2.f * chopSpell.activeDuration;
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 150, 150);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {150, 150});
 	chopSpell.spellOffset = sf::Vector2f(-75.f, 0.f);
 	chopSpell.fightingTime = chopSpell.activeDuration;
 
@@ -158,7 +158,7 @@ void JanusBoss::setEvil(bool evil) {
 }
 
 void JanusBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 150.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {60.f, 150.f}));
 	setSpriteOffset(sf::Vector2f(-70.f, -65.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	int width = 200;
@@ -167,10 +167,10 @@ void JanusBoss::loadAnimation(int skinNr) {
 	Animation* walkingAnimation = new Animation(sf::milliseconds(80));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 6; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	for (int i = 4; i > 1; --i) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
@@ -178,34 +178,34 @@ void JanusBoss::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation(sf::milliseconds(80));
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	for (int i = 4; i > 0; --i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	for (int i = 6; i < 11; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	for (int i = 10; i > 6; --i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(0, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({0, 0}, {width, height}));
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(50));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 4; i < 9; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 	for (int i = 7; i > 0; --i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 	for (int i = 0; i < 5; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -214,14 +214,14 @@ void JanusBoss::loadAnimation(int skinNr) {
 	Animation* castingFireAnimation = new Animation(sf::milliseconds(80));
 	castingFireAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 12; ++i) {
-		castingFireAnimation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+		castingFireAnimation->addFrame(sf::IntRect({i * width, 3 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting2, castingFireAnimation);
 
 	Animation* afterFireAnimation = new Animation();
 	afterFireAnimation->setSpriteSheet(tex);
-	afterFireAnimation->addFrame(sf::IntRect(11 * width, 3 * height, width, height));
+	afterFireAnimation->addFrame(sf::IntRect({11 * width, 3 * height}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting2, afterFireAnimation);
 
@@ -229,14 +229,14 @@ void JanusBoss::loadAnimation(int skinNr) {
 	Animation* castingIceAnimation = new Animation(sf::milliseconds(80));
 	castingIceAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 12; ++i) {
-		castingIceAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+		castingIceAnimation->addFrame(sf::IntRect({i * width, 2 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting3, castingIceAnimation);
 
 	Animation* afterIceAnimation = new Animation();
 	afterIceAnimation->setSpriteSheet(tex);
-	afterIceAnimation->addFrame(sf::IntRect(11 * width, 2 * height, width, height));
+	afterIceAnimation->addFrame(sf::IntRect({11 * width, 2 * height}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting3, afterIceAnimation);
 
@@ -247,7 +247,7 @@ void JanusBoss::loadAnimation(int skinNr) {
 	loadDeathParticles();
 	loadCloudParticles();
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.2f), sf::Vector2f(150.f, 200.f), 0.9f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.2f), sf::Vector2f(150.f, 200.f), 0.9f);
 	addComponent(new LightComponent(data, this));
 }
 
@@ -348,7 +348,7 @@ void JanusBoss::updateTorchStatus(const sf::Time& frameTime) {
 void JanusBoss::setPosition(const sf::Vector2f& pos) {
 	Boss::setPosition(pos);
 	m_mask.setPosition(pos + sf::Vector2f(isFacingRight() ? 10.f : 9.f, -5.f));
-	if (m_cloudSpawner) m_cloudSpawner->center = pos + sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height - 30.f);
+	if (m_cloudSpawner) m_cloudSpawner->center = pos + sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y - 30.f);
 }
 
 sf::Time JanusBoss::getConfiguredWaitingTime() const {
@@ -410,20 +410,24 @@ void JanusBoss::loadCloudParticles() {
 //// JANUS MASK //////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-JanusBossMask::JanusBossMask() {
+JanusBossMask::JanusBossMask() : m_sprite(nullptr) {
 	load();
 }
 
+JanusBossMask::~JanusBossMask() {
+	delete m_sprite;
+}
+
 void JanusBossMask::setPosition(const sf::Vector2f& pos) {
-	m_sprite.setPosition(pos);
+	m_sprite->setPosition(pos);
 }
 
 void JanusBossMask::setEvil(bool isEvil) {
-	m_sprite.setTextureRect(sf::IntRect(isEvil ? 0 : 41, 0, 41, 40));
+	m_sprite->setTextureRect(sf::IntRect({isEvil ? 0 : 41, 0}, {41, 40}));
 }
 
 void JanusBossMask::render(sf::RenderTarget& target) {
-	target.draw(m_sprite);
+	target.draw(*m_sprite);
 }
 
 void JanusBossMask::load() {
@@ -432,7 +436,7 @@ void JanusBossMask::load() {
 	sf::Texture* tex = g_resourceManager->getTexture(getSpritesheetPath());
 	if (tex == nullptr) return;
 
-	m_sprite.setTexture(*tex);
+	m_sprite = new sf::Sprite(*tex);
 	setEvil(true);
 }
 

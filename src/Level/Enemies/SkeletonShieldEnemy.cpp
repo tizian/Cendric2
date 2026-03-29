@@ -47,49 +47,49 @@ void SkeletonShieldEnemy::handleAttackInput() {
 		return;
 	}
 
-	float criticalX = getBoundingBox()->left + getBoundingBox()->width * 0.5f;
-	if ((isFacingRight() && mainCharBB.left > criticalX) ||
-		(!isFacingRight() && mainCharBB.left + mainCharBB.width * 0.5f < criticalX)) {
+	float criticalX = getBoundingBox()->position.x + getBoundingBox()->size.x * 0.5f;
+	if ((isFacingRight() && mainCharBB.position.x > criticalX) ||
+		(!isFacingRight() && mainCharBB.position.x + mainCharBB.size.x * 0.5f < criticalX)) {
 		m_mainChar->setDead();
 	}
 }
 
 void SkeletonShieldEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {40.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-40.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+		walkingAnimation->addFrame(sf::IntRect({i * 120, skinNr * 120}, {120, 120}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * 120, skinNr * 120, 120, 120));
+	idleAnimation->addFrame(sf::IntRect({8 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * 120, skinNr * 120, 120, 120));
+	jumpingAnimation->addFrame(sf::IntRect({9 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+		deadAnimation->addFrame(sf::IntRect({i * 120, skinNr * 120}, {120, 120}));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* hidingAnimation = new Animation();
 	hidingAnimation->setSpriteSheet(tex);
-	hidingAnimation->addFrame(sf::IntRect(15 * 120, skinNr * 120, 120, 120));
+	hidingAnimation->addFrame(sf::IntRect({15 * 120, skinNr * 120}, {120, 120}));
 	hidingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Hiding, hidingAnimation);

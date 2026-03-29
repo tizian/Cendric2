@@ -25,9 +25,9 @@ bool BoatTile::init(const LevelTileProperties& properties) {
 
 	setPositionOffset(sf::Vector2f(0.f, 3.5f * TILE_SIZE_F));
 	setSpriteOffset(sf::Vector2f(0.f, -3.5f * TILE_SIZE_F));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 3 * TILE_SIZE_F, TILE_SIZE_F));
-	m_sailBoundingBox = sf::FloatRect(0.f, 0.f, 3.f * TILE_SIZE_F, 3.f * TILE_SIZE_F);
-	m_sailDebugBox = sf::RectangleShape(sf::Vector2f(m_sailBoundingBox.width, m_sailBoundingBox.height));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {3 * TILE_SIZE_F, TILE_SIZE_F}));
+	m_sailBoundingBox = sf::FloatRect({0.f, 0.f}, {3.f * TILE_SIZE_F, 3.f * TILE_SIZE_F});
+	m_sailDebugBox = sf::RectangleShape(sf::Vector2f(m_sailBoundingBox.size.x, m_sailBoundingBox.size.y));
 	m_sailDebugBox.setOutlineThickness(1.f);
 	m_sailDebugBox.setFillColor(COLOR_TRANSPARENT);
 	m_sailDebugBox.setOutlineColor(COLOR_GOOD);
@@ -42,20 +42,20 @@ void BoatTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * height}, {width, height}));
 	idleAnimation->setLooped(false);
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation();
 	activatedAnimation->setSpriteSheet(tex);
-	activatedAnimation->addFrame(sf::IntRect(width, skinNr * height, width, height));
+	activatedAnimation->addFrame(sf::IntRect({width, skinNr * height}, {width, height}));
 	activatedAnimation->setLooped(false);
 	addAnimation(GameObjectState::Active, activatedAnimation);
 
 	Animation* brokenAnimation = new Animation();
 	brokenAnimation->setSpriteSheet(tex);
-	brokenAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	brokenAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
+	brokenAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	brokenAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
 	brokenAnimation->setLooped(false);
 	addAnimation(GameObjectState::Broken, brokenAnimation);
 
@@ -112,9 +112,9 @@ void BoatTile::renderAfterForeground(sf::RenderTarget& target) {
 
 void BoatTile::setPosition(const sf::Vector2f& position) {
 	LevelMovableTile::setPosition(position);
-	m_sailBoundingBox.left = position.x;
-	m_sailBoundingBox.top = position.y - TILE_SIZE_F * 3.f;
-	m_sailDebugBox.setPosition(sf::Vector2f(m_sailBoundingBox.left, m_sailBoundingBox.top));
+	m_sailBoundingBox.position.x = position.x;
+	m_sailBoundingBox.position.y = position.y - TILE_SIZE_F * 3.f;
+	m_sailDebugBox.setPosition(sf::Vector2f(m_sailBoundingBox.position.x, m_sailBoundingBox.position.y));
 }
 
 void BoatTile::calculateUnboundedVelocity(const sf::Time& frameTime, sf::Vector2f& nextVel) const {
@@ -148,14 +148,14 @@ void BoatTile::checkForWind() {
 void BoatTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	float velNorm = norm(getVelocity()) / 20.f; // 20 fps max
 	const sf::FloatRect& bb = *getBoundingBox();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
 
 	WorldCollisionQueryRecord rec;
 
 	rec.excludedGameObject = this;
 	rec.ignoreMobs = false;
 
-	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingRight = nextPosition.x > bb.position.x;
 
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;
@@ -172,7 +172,7 @@ void BoatTile::checkCollisions(const sf::Vector2f& nextPosition) {
 		return;
 	}
 
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 	rec.boundingBox = nextBoundingBoxY;
 	rec.collisionDirection = CollisionDirection::Down;
 	bool collidesY = m_level->collides(rec);

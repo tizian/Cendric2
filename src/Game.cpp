@@ -10,10 +10,10 @@
 sf::RenderTexture* g_renderTexture;
 
 Game::Game() {
-	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_renderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
 	reloadWindow();
 
-	m_mainSprite.setTexture(m_renderTexture.getTexture());
+	m_mainSprite->setTexture(m_renderTexture.getTexture());
 	
 	m_running = true;
 	m_screenManager = new ScreenManager(new SplashScreen());
@@ -25,30 +25,27 @@ Game::~Game() {
 
 void Game::reloadWindow() {
 	auto const displayMode = g_resourceManager->getConfiguration().displayMode;
-	auto const windowMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
+	auto const windowMode = sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT});
 	auto const videoMode = displayMode == DisplayMode::Window ? windowMode : sf::VideoMode::getDesktopMode();
 
-	auto const scale = sf::Vector2f(videoMode.width / static_cast<float>(WINDOW_WIDTH), videoMode.height / static_cast<float>(WINDOW_HEIGHT));
+	auto const scale = sf::Vector2f(videoMode.size.x / static_cast<float>(WINDOW_WIDTH), videoMode.size.y / static_cast<float>(WINDOW_HEIGHT));
 
-	m_mainSprite.setScale(scale);
+	m_mainSprite->setScale(scale);
 
 	switch (displayMode) {
 	case DisplayMode::Fullscreen:
-		m_mainWindow.create(videoMode, CAPTION, sf::Style::Fullscreen);
+		m_mainWindow.create(videoMode, CAPTION, sf::State::Fullscreen);
 		break;
 	case DisplayMode::WindowedFullscreen:
-		m_mainWindow.create(videoMode, CAPTION, sf::Style::None);
-		break;
 	case DisplayMode::Window:
 	default:
-		m_mainWindow.create(videoMode, CAPTION, sf::Style::Default);
+		m_mainWindow.create(videoMode, CAPTION);
 	}
 
 	auto& conf = g_resourceManager->getConfiguration();
 
 	m_mainWindow.setMouseCursorVisible(false); // Hide cursor
 	m_mainWindow.setVerticalSyncEnabled(conf.isVSyncEnabled);
-	m_mainWindow.setIcon(cendric_icon.width, cendric_icon.height, cendric_icon.pixel_data);
 	m_mainWindow.setFramerateLimit(conf.isFPSLimited ? conf.maxFPS : 0);
 
 	m_renderTexture.setSmooth(conf.isSmoothing);
@@ -107,7 +104,7 @@ void Game::run() {
 		}
 
 		m_renderTexture.display();
-		m_mainWindow.draw(m_mainSprite);
+		m_mainWindow.draw(*m_mainSprite);
 		g_inputController->getCursor().render(m_mainWindow);
 		m_mainWindow.display();
 	}
@@ -116,31 +113,29 @@ void Game::run() {
 }
 
 void Game::pollEvents() {
-	sf::Event e;
-
-	while (m_mainWindow.pollEvent(e)) {
-		if (e.type == sf::Event::Closed) {
+	while (const std::optional event = m_mainWindow.pollEvent()) {
+		if (event->is<sf::Event::Closed>()) {
 			m_screenManager->requestQuit();
 		}
-		else if (e.type == sf::Event::Resized) {
-			g_inputController->setCurrentWindowSize(e.size.width, e.size.height);
+		else if (const auto* resized = event->getIf<sf::Event::Resized>()) {
+			g_inputController->setCurrentWindowSize(resized->size.x, resized->size.y);
 		}
-		else if (e.type == sf::Event::TextEntered) {
-			g_inputController->readUnicode(e.text.unicode);
+		else if (const auto* textEntered = event->getIf<sf::Event::TextEntered>()) {
+			g_inputController->readUnicode(textEntered->unicode);
 		}
-		else if (e.type == sf::Event::KeyPressed) {
-			g_inputController->setLastPressedKey(e.key.code);
+		else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+			g_inputController->setLastPressedKey(keyPressed->code);
 		}
-		else if (e.type == sf::Event::JoystickMoved) {
-			g_inputController->setLastPressedGamepadAxis(e.joystickMove);
+		else if (const auto* joystickMoved = event->getIf<sf::Event::JoystickMoved>()) {
+			g_inputController->setLastPressedGamepadAxis(*joystickMoved);
 		}
-		else if (e.type == sf::Event::JoystickButtonPressed) {
-			g_inputController->setLastPressedGamepadButton(e.joystickButton);
+		else if (const auto* joystickButtonPressed = event->getIf<sf::Event::JoystickButtonPressed>()) {
+			g_inputController->setLastPressedGamepadButton(*joystickButtonPressed);
 		}
-		else if (e.type == sf::Event::MouseWheelScrolled) {
-			g_inputController->setMouseWheelScrollTicks(e.mouseWheelScroll.delta);
+		else if (const auto* mouseWheelScrolled = event->getIf<sf::Event::MouseWheelScrolled>()) {
+			g_inputController->setMouseWheelScrollTicks(mouseWheelScrolled->delta);
 		}
-		else if (e.type == sf::Event::JoystickConnected || e.type == sf::Event::JoystickDisconnected) {
+		else if (event->is<sf::Event::JoystickConnected>() || event->is<sf::Event::JoystickDisconnected>()) {
 			g_inputController->notifyGamepadConnected();
 		}
 	}

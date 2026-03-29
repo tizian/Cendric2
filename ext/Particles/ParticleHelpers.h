@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include <cstdint>
 
 namespace particles {
 
@@ -22,7 +23,7 @@ inline int randomInt(int low, int high) {
 }
 
 inline sf::Color randomColor(const sf::Color &low, const sf::Color &high) {
-	sf::Uint8 r, g, b, a;
+	std::uint8_t r, g, b, a;
 
 	if (high.r <= low.r) {
 		r = high.r;
@@ -71,10 +72,10 @@ inline float lerpFloat(float a, float b, float alpha) {
 }
 
 inline sf::Color lerpColor(const sf::Color &c1, const sf::Color &c2, float alpha) {
-	sf::Uint8 r = (sf::Uint8)(c1.r * (1.0f - alpha) + c2.r * alpha);
-	sf::Uint8 g = (sf::Uint8)(c1.g * (1.0f - alpha) + c2.g * alpha);
-	sf::Uint8 b = (sf::Uint8)(c1.b * (1.0f - alpha) + c2.b * alpha);
-	sf::Uint8 a = (sf::Uint8)(c1.a * (1.0f - alpha) + c2.a * alpha);
+	std::uint8_t r = static_cast<std::uint8_t>(c1.r * (1.0f - alpha) + c2.r * alpha);
+	std::uint8_t g = static_cast<std::uint8_t>(c1.g * (1.0f - alpha) + c2.g * alpha);
+	std::uint8_t b = static_cast<std::uint8_t>(c1.b * (1.0f - alpha) + c2.b * alpha);
+	std::uint8_t a = static_cast<std::uint8_t>(c1.a * (1.0f - alpha) + c2.a * alpha);
 
 	return sf::Color(r, g, b, a);
 }

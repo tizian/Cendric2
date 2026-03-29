@@ -8,7 +8,7 @@ CooldownRectangleShape::CooldownRectangleShape() {
 	m_triangleCount = 100;
 
 	m_color = COLOR_WHITE;
-	m_vertices = sf::VertexArray(sf::Triangles);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 
 	init();
 }
@@ -23,7 +23,7 @@ void CooldownRectangleShape::draw(sf::RenderTarget& target, sf::RenderStates sta
 	if (angleOffset == m_triangleCount) angleOffset = 0;
 	const sf::Vertex *ver = &m_vertices[3*angleOffset];
 
-	target.draw(ver, 3 * numTrianglesToDraw, sf::Triangles, states);
+	target.draw(ver, 3 * numTrianglesToDraw, sf::PrimitiveType::Triangles, states);
 }
 
 void CooldownRectangleShape::init() {
@@ -78,9 +78,9 @@ void CooldownRectangleShape::init() {
 			tp2 = tray(farT);
 		}
 		
-		m_vertices.append(sf::Vertex(bo, m_color, to));
-		m_vertices.append(sf::Vertex(bp1, m_color, tp1));
-		m_vertices.append(sf::Vertex(bp2, m_color, tp2));
+		m_vertices.append(sf::Vertex{{bo.x, bo.y}, m_color, {to.x, to.y}});
+		m_vertices.append(sf::Vertex{{bp1.x, bp1.y}, m_color, {tp1.x, tp1.y}});
+		m_vertices.append(sf::Vertex{{bp2.x, bp2.y}, m_color, {tp2.x, tp2.y}});
 
 		bp1 = bp2;
 		tp1 = tp2;

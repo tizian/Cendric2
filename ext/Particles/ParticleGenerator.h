@@ -175,7 +175,7 @@ public:
 	void generate(ParticleData *data, int startId, int endId);
 
 public:
-	sf::IntRect texCoords{ 0, 0, 1, 1 };
+	sf::IntRect texCoords{{ 0, 0 }, { 1, 1 }};
 };
 
 class TexCoordsRandomGenerator : public ParticleGenerator {

@@ -51,7 +51,7 @@ void Inventory::init() {
 	m_selectedSlotId.first = "";
 	m_selectedSlotId.second = ItemType::VOID;
 	// init window
-	const sf::FloatRect box(INVENTORY_LEFT, GUIConstants::TOP, INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	const sf::FloatRect box({INVENTORY_LEFT, GUIConstants::TOP}, {INVENTORY_WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -68,8 +68,8 @@ void Inventory::init() {
 	m_goldText.setColor(COLOR_WHITE);
 	m_goldText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
-	m_goldSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
-	m_goldSprite.setTextureRect(sf::IntRect(0, 0, 25, 25));
+	m_goldSprite->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
+	m_goldSprite->setTextureRect(sf::IntRect({0, 0}, {25, 25}));
 
 	// fill the helper map
 	m_typeMap.insert({
@@ -96,11 +96,11 @@ void Inventory::init() {
 	float height = BUTTON_SIZE.y;
 
 	m_tabBar = new TexturedTabBar();
-	m_tabBar->init(sf::FloatRect(0, 0, width, height), nTabs);
+	m_tabBar->init(sf::FloatRect({0, 0}, {width, height}), nTabs);
 
 	int textureOffset = 0;
 	for (int i = 0; i < nTabs; ++i) {
-		m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_INVENTORYTABS), sf::IntRect(textureOffset, 0, 50, 35));
+		m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_INVENTORYTABS), sf::IntRect({textureOffset, 0}, {50, 35}));
 		textureOffset += 50;
 	}
 
@@ -108,7 +108,7 @@ void Inventory::init() {
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 
-	const sf::FloatRect scrollBox(INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	const sf::FloatRect scrollBox({INVENTORY_LEFT + SCROLL_WINDOW_LEFT, GUIConstants::TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
@@ -132,7 +132,7 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 
 	m_selectedTabText.setPosition(position +
 		sf::Vector2f(
-			0.5f * INVENTORY_WIDTH - 0.5f * m_selectedTabText.getLocalBounds().width,
+			0.5f * INVENTORY_WIDTH - 0.5f * m_selectedTabText.getLocalBounds().size.x,
 			GUIConstants::TEXT_OFFSET));
 
 	m_goldText.setPosition(position + sf::Vector2f(
@@ -140,9 +140,9 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 		GUIConstants::GUI_WINDOW_HEIGHT - GUIConstants::TEXT_OFFSET - GUIConstants::CHARACTER_SIZE_S));
 
 	sf::Vector2f pos = m_goldText.getPosition();
-	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.x += m_goldText.getBounds().size.x + 0.2f * GUIConstants::TEXT_OFFSET;
 	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
-	m_goldSprite.setPosition(pos);
+	m_goldSprite->setPosition(pos);
 
 	m_tabBar->setPosition(position + sf::Vector2f(
 		0.5f * (INVENTORY_WIDTH - m_tabBar->getTabButtons().size() * BUTTON_SIZE.x),
@@ -154,8 +154,8 @@ void Inventory::setPosition(const sf::Vector2f& position) {
 
 	const sf::FloatRect bounds = m_emptyText.getBounds();
 	m_emptyText.setPosition(position + sf::Vector2f(
-		SCROLL_WINDOW_LEFT + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.width),
-		SCROLL_WINDOW_TOP + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.height)));
+		SCROLL_WINDOW_LEFT + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.size.x),
+		SCROLL_WINDOW_TOP + 0.5f * (SCROLL_WINDOW_WIDTH - bounds.size.y)));
 
 	m_equipment->setPosition(position - sf::Vector2f(WINDOW_MARGIN + InventoryEquipment::WIDTH, 0.f));
 }
@@ -754,7 +754,7 @@ void Inventory::render(sf::RenderTarget& target) {
 
 	m_window->render(target);
 	target.draw(m_goldText);
-	target.draw(m_goldSprite);
+	target.draw(*m_goldSprite);
 	target.draw(m_selectedTabText);
 
 	m_buttonGroup->render(m_scrollHelper->texture);
@@ -889,10 +889,10 @@ void Inventory::selectTab(ItemType type) {
 		break;
 	}
 	// center text
-	m_selectedTabText.setPosition(
+	m_selectedTabText.setPosition({
 		m_window->getPosition().x +
 		INVENTORY_WIDTH / 2 -
-		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
+		m_selectedTabText.getLocalBounds().size.x / 2, m_selectedTabText.getPosition().y});
 
 	m_scrollBar->setScrollPosition(0.f);
 
@@ -916,9 +916,9 @@ void Inventory::reloadGold() {
 	m_goldText.setString(gold);
 
 	sf::Vector2f pos = m_goldText.getPosition();
-	pos.x += m_goldText.getBounds().width + 0.2f * GUIConstants::TEXT_OFFSET;
+	pos.x += m_goldText.getBounds().size.x + 0.2f * GUIConstants::TEXT_OFFSET;
 	pos.y += 0.5f * GUIConstants::CHARACTER_SIZE_M - 13.f;
-	m_goldSprite.setPosition(pos);
+	m_goldSprite->setPosition(pos);
 }
 
 void Inventory::reload() {

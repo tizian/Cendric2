@@ -4,6 +4,7 @@
 #include "World/GameObject.h"
 #include "TextProvider.h"
 #include "ResourceManager.h"
+#include <optional>
 
 class ArrowButton final : public GameObject {
 public:
@@ -32,7 +33,7 @@ private:
 	bool m_isClicked = false;
 	bool m_isEnabled = false;
 
-	sf::Sprite m_arrow;
+	std::optional<sf::Sprite> m_arrow;
 
 	sf::Color m_mouseoverColor;
 	sf::Color m_mainColor;

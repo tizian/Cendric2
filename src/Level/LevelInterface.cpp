@@ -119,7 +119,7 @@ void LevelInterface::consumeItem(const std::string& itemID) {
 		food->food_duration,
 		item->getAttributes());
 	getBuffBar().addFoodBuff(
-		sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50),
+		sf::IntRect({item->getIconTextureLocation().x, item->getIconTextureLocation().y}, {50, 50}),
 		food->food_duration,
 		item->getID(),
 		item->getAttributes());

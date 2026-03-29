@@ -41,7 +41,7 @@ void LoadGameScreen::execOnEnter() {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("LoadGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().width) / 2.f, 25.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getBounds().size.x) / 2.f, 25.f));
 
 	const auto buttonWidth = 200.f;
 	const auto buttonHeight = 50.f;
@@ -51,19 +51,19 @@ void LoadGameScreen::execOnEnter() {
 	const auto buttonSpacing = (buttonSpaceWidth - 3 * buttonWidth) / 2.f;
 
 	// add buttons
-	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	Button* button = new Button(sf::FloatRect({marginX, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&LoadGameScreen::onBack, this));
 	button->setGamepadKey(Key::Escape);
 	addObject(button);
 
-	m_deleteSaveGameButton = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	m_deleteSaveGameButton = new Button(sf::FloatRect({marginX + buttonWidth + buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onDeleteSaveGame, this));
 	m_deleteSaveGameButton->setGamepadKey(Key::Attack);
 	addObject(m_deleteSaveGameButton);
 
-	m_loadSaveGameButton = new Button(sf::FloatRect(marginX + 2 * (buttonWidth + buttonSpacing), marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	m_loadSaveGameButton = new Button(sf::FloatRect({marginX + 2 * (buttonWidth + buttonSpacing), marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	m_loadSaveGameButton->setText("Load");
 	m_loadSaveGameButton->setOnClick(std::bind(&LoadGameScreen::onLoadSaveGame, this));
 	m_loadSaveGameButton->setGamepadKey(Key::Confirm);
@@ -120,7 +120,7 @@ void LoadGameScreen::onYesDeleteSaveGame() {
 void LoadGameScreen::onDeleteSaveGame() {
 	float width = 450;
 	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 	m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onYesDeleteSaveGame, this));
@@ -147,7 +147,7 @@ void LoadGameScreen::onLoadSaveGame() {
 		}
 		float width = 450;
 		float height = 200;
-		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+		m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 		m_yesOrNoForm->setMessage("QuestionLoadGame");
 		m_yesOrNoForm->setOnNoClicked(std::bind(&LoadGameScreen::onNo, this));
 		m_yesOrNoForm->setOnYesClicked(std::bind(&LoadGameScreen::onLoadGame, this));

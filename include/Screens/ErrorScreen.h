@@ -4,6 +4,8 @@
 #include "ResourceManager.h"
 #include "Screen.h"
 
+#include <optional>
+
 class ErrorScreen final : public Screen {
 public:
 	ErrorScreen(CharacterCore* core);
@@ -15,7 +17,7 @@ public:
 	void execOnExit() override;
 
 private:
-	sf::Sprite m_screenSprite;
+	std::optional<sf::Sprite> m_screenSprite;
 	BitmapText m_errorText;
 	std::string m_screenResource;
 };

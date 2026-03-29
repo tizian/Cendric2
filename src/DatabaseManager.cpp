@@ -298,22 +298,22 @@ ItemEquipmentParticleBean* DatabaseManager::getItemEquipmentParticleBean(const s
 			bean->size_start_max = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->size_end_min = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->size_end_max = static_cast<float>(sqlite3_column_int(statement, col++));
-			bean->color_start_min.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_min.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_min.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_min.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_max.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_max.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_max.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_start_max.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_min.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_min.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_min.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_min.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_max.r = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_max.g = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_max.b = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
-			bean->color_end_max.a = static_cast<sf::Uint8>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.r = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.g = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.b = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_min.a = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.r = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.g = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.b = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_start_max.a = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.r = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.g = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.b = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_min.a = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.r = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.g = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.b = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
+			bean->color_end_max.a = static_cast<std::uint8_t>(sqlite3_column_int(statement, col++));
 			bean->goal_radius = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->goal_offset.x = static_cast<float>(sqlite3_column_int(statement, col++));
 			bean->goal_offset.y = static_cast<float>(sqlite3_column_int(statement, col++));
@@ -411,10 +411,10 @@ ItemWeaponBean* DatabaseManager::getItemWeaponBean(const std::string& item_id) c
 			bean = new ItemWeaponBean();
 			bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
 			bean->chop_cooldown = sf::milliseconds(sqlite3_column_int(statement, 1));
-			bean->chop_rect.left = static_cast<float>(sqlite3_column_int(statement, 2));
-			bean->chop_rect.top = static_cast<float>(sqlite3_column_int(statement, 3));
-			bean->chop_rect.width = static_cast<float>(sqlite3_column_int(statement, 4));
-			bean->chop_rect.height = static_cast<float>(sqlite3_column_int(statement, 5));
+			bean->chop_rect.position.x = static_cast<float>(sqlite3_column_int(statement, 2));
+			bean->chop_rect.position.y = static_cast<float>(sqlite3_column_int(statement, 3));
+			bean->chop_rect.size.x = static_cast<float>(sqlite3_column_int(statement, 4));
+			bean->chop_rect.size.y = static_cast<float>(sqlite3_column_int(statement, 5));
 			bean->chop_damage = sqlite3_column_int(statement, 6);
 		}
 
@@ -600,10 +600,10 @@ LevelitemFrameBean* DatabaseManager::getLevelitemFrameBean(const std::string& it
 			bean = new LevelitemFrameBean();
 			bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
 			bean->frame_nr = sqlite3_column_int(statement, 1);
-			bean->texture_location.left = sqlite3_column_int(statement, 2);
-			bean->texture_location.top = sqlite3_column_int(statement, 3);
-			bean->texture_location.width = sqlite3_column_int(statement, 4);
-			bean->texture_location.height = sqlite3_column_int(statement, 5);
+			bean->texture_location.position.x = sqlite3_column_int(statement, 2);
+			bean->texture_location.position.y = sqlite3_column_int(statement, 3);
+			bean->texture_location.size.x = sqlite3_column_int(statement, 4);
+			bean->texture_location.size.y = sqlite3_column_int(statement, 5);
 		}
 
 		sqlite3_finalize(statement);
@@ -630,10 +630,10 @@ std::vector<DatabaseBean*> DatabaseManager::getLevelitemFrameBeans(const std::st
 				LevelitemFrameBean* bean = new LevelitemFrameBean();
 				bean->item_id = std::string((char*)sqlite3_column_text(statement, 0));
 				bean->frame_nr = sqlite3_column_int(statement, 1);
-				bean->texture_location.left = sqlite3_column_int(statement, 2);
-				bean->texture_location.top = sqlite3_column_int(statement, 3);
-				bean->texture_location.width = sqlite3_column_int(statement, 4);
-				bean->texture_location.height = sqlite3_column_int(statement, 5);
+				bean->texture_location.position.x = sqlite3_column_int(statement, 2);
+				bean->texture_location.position.y = sqlite3_column_int(statement, 3);
+				bean->texture_location.size.x = sqlite3_column_int(statement, 4);
+				bean->texture_location.size.y = sqlite3_column_int(statement, 5);
 				beans.push_back(bean);
 			}
 			else {

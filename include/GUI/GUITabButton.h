@@ -30,8 +30,8 @@ public:
 	static const int OFFSET;
 
 protected:
-	sf::Sprite m_border;
-	sf::Sprite m_icon;
+	std::optional<sf::Sprite> m_border;
+	std::optional<sf::Sprite> m_icon;
 	sf::CircleShape m_background;
 
 	BitmapText m_inputKey;

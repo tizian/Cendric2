@@ -26,8 +26,8 @@ void LightComponent::flipOffsetY(bool flipped) {
 void LightComponent::setPosition(const sf::Vector2f& pos) {
 	m_lightObject->setPosition(m_parent->getPosition() + 
 		sf::Vector2f(
-			m_isOffsetFlippedX ? -m_offset.x + m_parent->getBoundingBox()->width : m_offset.x,
-			m_isOffsetFlippedY ? -m_offset.y + m_parent->getBoundingBox()->height : m_offset.y));
+			m_isOffsetFlippedX ? -m_offset.x + m_parent->getBoundingBox()->size.x : m_offset.x,
+			m_isOffsetFlippedY ? -m_offset.y + m_parent->getBoundingBox()->size.y : m_offset.y));
 }
 
 void LightComponent::setSizeX(float sizeX) {

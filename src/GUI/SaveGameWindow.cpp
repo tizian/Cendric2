@@ -45,13 +45,13 @@ SaveGameWindow::SaveGameWindow() {
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("NoSaves"));
 	const sf::FloatRect bounds = m_emptyText.getBounds();
-	m_emptyText.setPosition(LEFT + 0.5f * (WIDTH - bounds.width), TOP + 0.5f * (HEIGHT - bounds.height));
+	m_emptyText.setPosition({LEFT + 0.5f * (WIDTH - bounds.size.x), TOP + 0.5f * (HEIGHT - bounds.size.y)});
 
 	// init scrolling
 	m_scrollBar = new ScrollBar(HEIGHT);
-	m_scrollBar->setPosition(sf::Vector2f(LEFT + WIDTH - ScrollBar::WIDTH, TOP));
+	m_scrollBar->setPosition({LEFT + WIDTH - ScrollBar::WIDTH, TOP});
 
-	sf::FloatRect scrollBox(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect scrollBox({LEFT, TOP}, {WIDTH, HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	reload();

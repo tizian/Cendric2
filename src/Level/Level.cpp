@@ -101,33 +101,33 @@ void Level::loadForRenderTexture() {
 
 void Level::setWorldView(sf::RenderTarget& target, const sf::Vector2f& focus) const {
 	sf::View view;
-	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
-	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y));
-	view.setCenter(camCenterX, camCenterY);
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.size.x - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x));
+	float camCenterY = std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.size.y - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y));
+	view.setCenter(sf::Vector2f(camCenterX, camCenterY));
 	target.setView(view);
 }
 
 void Level::drawBackgroundLayers(sf::RenderTarget& target, const sf::RenderStates& states, const sf::Vector2f& focus) const {
 	sf::View view;
-	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+	view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
 	m_camera->setFocusCenter(focus, true);
 
 	// parallax background layers
 	for (auto& layer : m_levelData.backgroundLayers) {
 		// handle case for layer at infinity
 		if (layer.getDistance() == -1.0f) {
-			view.setCenter(0.5f * WINDOW_WIDTH, 0.5f * WINDOW_HEIGHT);
+			view.setCenter(sf::Vector2f(0.5f * WINDOW_WIDTH, 0.5f * WINDOW_HEIGHT));
 			target.setView(view);
 		}
 		else {
 			float d = layer.getDistance();
 			float ominoeseOffsetX = (WINDOW_WIDTH / 2) - (1 / d) * (WINDOW_WIDTH / 2);
-			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.width - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
+			float viewCenterX = (std::max(WINDOW_WIDTH / 2.f, std::min(m_levelData.mapRect.size.x - WINDOW_WIDTH / 2.f, m_camera->getCameraCenter().x)) / d) + ominoeseOffsetX;
 			float ominoeseOffsetY = (WINDOW_HEIGHT / 2) - (1 / d) * (WINDOW_HEIGHT / 2);
-			float viewCenterY = (std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.height - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y)) / d) + ominoeseOffsetY;
-			view.setCenter(viewCenterX, viewCenterY);
+			float viewCenterY = (std::max(WINDOW_HEIGHT / 2.f, std::min(m_levelData.mapRect.size.y - WINDOW_HEIGHT / 2.f, m_camera->getCameraCenter().y)) / d) + ominoeseOffsetY;
+			view.setCenter(sf::Vector2f(viewCenterX, viewCenterY));
 			target.setView(view);
 		}
 		layer.render(target, states);
@@ -140,8 +140,8 @@ void Level::update(const sf::Time& frameTime) {
 }
 
 bool Level::isInsideWorldRect(const sf::FloatRect& boundingBox) const {
-	return !(boundingBox.top + boundingBox.height < m_levelData.mapRect.top || 
-		boundingBox.top > m_levelData.mapRect.top + m_levelData.mapRect.height);
+	return !(boundingBox.position.y + boundingBox.size.y < m_levelData.mapRect.position.y || 
+		boundingBox.position.y > m_levelData.mapRect.position.y + m_levelData.mapRect.size.y);
 }
 
 bool Level::collides(WorldCollisionQueryRecord& rec) const {
@@ -150,10 +150,10 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 	// a game object in a level can go until we don't see it anymore on the y axis. (further than only map rect collision)
 	if (!isInsideWorldRect(rec.boundingBox)) {
 		if (rec.collisionDirection == CollisionDirection::Up) {
-			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.top - rec.boundingBox.height);
+			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.position.y - rec.boundingBox.size.y);
 		}
 		if (rec.collisionDirection == CollisionDirection::Down) {
-			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.top + m_worldData->mapRect.height);
+			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.position.y + m_worldData->mapRect.size.y);
 		}
 		rec.collides = true;
 	}
@@ -168,7 +168,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
 			if (rec.excludedGameObject) {
 				auto recBB = rec.excludedGameObject->getBoundingBox();
-				if (recBB->top + recBB->height > tile->getPosition().y) continue;
+				if (recBB->position.y + recBB->size.y > tile->getPosition().y) continue;
 			}
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
@@ -184,7 +184,7 @@ bool Level::collides(WorldCollisionQueryRecord& rec) const {
 
 		if (tile->isOneWay()) {
 			if (rec.ignoreOnewayTiles || rec.collisionDirection != CollisionDirection::Down) continue;
-			if (rec.boundingBox.top + rec.boundingBox.height > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
+			if (rec.boundingBox.position.y + rec.boundingBox.size.y > tile->getPosition().y + 0.5f * TILE_SIZE_F) continue;
 		}
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (epsIntersect(tileBB, rec.boundingBox)) {
@@ -268,7 +268,7 @@ bool Level::collidesWithAvoidableTiles(const sf::FloatRect& boundingBox) const {
 }
 
 bool Level::collidesWithEvilTiles(const sf::FloatRect& boundingBox) const {
-	sf::FloatRect safeBB(boundingBox.left - 2, boundingBox.top - 2, boundingBox.width + 4, boundingBox.height + 4);
+	sf::FloatRect safeBB({boundingBox.position.x - 2, boundingBox.position.y - 2}, {boundingBox.size.x + 4, boundingBox.size.y + 4});
 	return collidesWithSpecificTiles(safeBB, m_evilTiles);
 }
 
@@ -423,11 +423,7 @@ void Level::collideWithDynamicTiles(LevelMovableGameObject* mob, const sf::Float
 		}
 	}
 
-	sf::FloatRect checkBB = boundingBox;
-	checkBB.top -= 1.f;
-	checkBB.left -= 1.f;
-	checkBB.width += 2.f;
-	checkBB.height += 2.f;
+	sf::FloatRect checkBB = sf::FloatRect({boundingBox.position.x - 1.f, boundingBox.position.y - 1.f}, {boundingBox.size.x + 2.f, boundingBox.size.y + 2.f});
 	for (auto& it : *m_movableTiles) {
 		LevelDynamicTile* tile = dynamic_cast<LevelDynamicTile*>(it);
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();

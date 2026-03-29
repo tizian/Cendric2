@@ -66,7 +66,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 				WorldCollisionQueryRecord rec;
 				rec.collisionDirection = up ? CollisionDirection::Up : CollisionDirection::Down;
 				rec.boundingBox = *(m_mob->getBoundingBox());
-				rec.boundingBox.top += diffY;
+				rec.boundingBox.position.y += diffY;
 				rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
 				rec.ignoreOnewayTiles = true;
 
@@ -77,7 +77,7 @@ void UserMovingBehavior::handleClimbing(const sf::Time& frameTime) {
 					return;
 				}
 
-				m_mob->setPositionY(rec.boundingBox.top);
+				m_mob->setPositionY(rec.boundingBox.position.y);
 				m_isClimbingStep1 = !m_isClimbingStep1;
 			}
 		}
@@ -109,7 +109,7 @@ void UserMovingBehavior::checkLadders() {
 
 			WorldCollisionQueryRecord rec;
 			rec.boundingBox = *(m_mob->getBoundingBox());
-			rec.boundingBox.top = climbingY;
+			rec.boundingBox.position.y = climbingY;
 			rec.ignoreDynamicTiles = m_mob->isIgnoreDynamicTiles();
 
 			if (m_mob->getLevel()->collides(rec)) {

@@ -89,10 +89,10 @@ void InteractComponent::setPosition(const sf::Vector2f& pos) {
 		TooltipComponent::setPosition(pos);
 	} else {
 		m_tooltipText.setPosition(pos + sf::Vector2f(
-			0.5f * (m_parent->getBoundingBox()->width - m_tooltipText.getLocalBounds().width),
+			0.5f * (m_parent->getBoundingBox()->size.x - m_tooltipText.getLocalBounds().size.x),
 			-m_tooltipHeight - GUIConstants::CHARACTER_SIZE_M));
 		m_interactText.setPosition(pos + sf::Vector2f(
-			0.5f * (m_parent->getBoundingBox()->width - m_interactText.getLocalBounds().width),
+			0.5f * (m_parent->getBoundingBox()->size.x - m_interactText.getLocalBounds().size.x),
 			-m_tooltipHeight));
 	}
 }

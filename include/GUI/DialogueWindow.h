@@ -39,7 +39,7 @@ private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
 	bool m_isSelectable = true;
-	sf::Text m_text;
+	std::optional<sf::Text> m_text;
 	ChoiceTranslation m_translation;
 };
 
@@ -77,14 +77,14 @@ private:
 	ScrollHelper *m_scrollHelper = nullptr;
 
 	NPC* m_npc;
-	sf::Sprite m_speakerSprite;
+	std::optional<sf::Sprite> m_speakerSprite;
 
 	std::string m_npcName;
 	std::string m_npcID;
 	std::string m_dialogueTextID;
 
 	Dialogue* m_dialogue = nullptr;
-	sf::Text* m_dialogueText = nullptr;
+	std::optional<sf::Text> m_dialogueText;
 	BitmapText* m_speakerText = nullptr;
 	MerchantInterface* m_merchantInterface = nullptr;
 

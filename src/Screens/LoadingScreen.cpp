@@ -9,7 +9,7 @@ LoadingScreen::LoadingScreen(CharacterCore* core) : Screen(core) {
 		core->replaceForcedMap();
 		m_worldToLoad = new MapScreen(core->getData().currentMap, getCharacterCore());
 	}
-	m_blackRect.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+	m_blackRect.setSize({WINDOW_WIDTH, WINDOW_HEIGHT});
 	m_timeToBlack = sf::seconds(0.5f);
 
 	m_blackRect.setFillColor(g_resourceManager->getConfiguration().isMultithreading ?
@@ -40,7 +40,7 @@ void LoadingScreen::execUpdate(const sf::Time& frameTime) {
 
 	if (!m_threadDone) {
 		updateTime(m_timeToBlack, frameTime);
-		m_blackRect.setFillColor(sf::Color(0, 0, 0, 255 - static_cast<sf::Uint8>(std::floor(m_timeToBlack.asMilliseconds() / 500.f * 255.f))));
+		m_blackRect.setFillColor(sf::Color(0, 0, 0, 255 - static_cast<std::uint8_t>(std::floor(m_timeToBlack.asMilliseconds() / 500.f * 255.f))));
 		return;
 	}
 
@@ -60,14 +60,14 @@ void LoadingScreen::loadAsync() const {
 
 void LoadingScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSprite);
+	if (m_screenSprite) renderTarget.draw(*m_screenSprite);
 	renderTarget.draw(m_blackRect);
 }
 
 void LoadingScreen::execOnEnter() {
 	g_renderTexture->setActive(true);
 	m_texture = new sf::Texture(g_renderTexture->getTexture());
-	m_screenSprite.setTexture(*m_texture);
+	m_screenSprite.emplace(*m_texture);
 }
 
 void LoadingScreen::execOnExit() {

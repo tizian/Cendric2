@@ -43,7 +43,7 @@ void RoyalguardTBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosi
 	float oldPositionX = m_enemy->getPosition().x;
 
 	checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	sf::FloatRect nextBoundingBox({nextPosition.x, nextPosition.y}, {m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y});
 
 	if (m_boss->getBossState() == RoyalguardBossState::Charging && (m_isCollidingX || m_isCollidingY)) {
 		m_movingDirectionX = 0;

@@ -17,7 +17,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 	if (itemID == "gold") {
 		m_type = ItemType::Gold;
 
-		m_iconTextureRect = sf::IntRect(0, 0, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+		m_iconTextureRect = sf::IntRect({0, 0}, {static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)});
 
 	} else {
 		Item* item = g_resourceManager->getItem(itemID);
@@ -25,7 +25,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 			return;
 		m_type = item->getType();
 
-		m_iconTextureRect = sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE));
+		m_iconTextureRect = sf::IntRect({item->getIconTextureLocation().x, item->getIconTextureLocation().y}, {static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)});
 	}
 
 	m_tooltipComponent->setTooltipText(g_textProvider->getText(itemID, "item"));
@@ -46,7 +46,7 @@ InventorySlot::InventorySlot(const std::string& itemID, int amount, bool isEquip
 InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos, ItemType equipmentType) {
 	m_itemID = "";
 	m_iconTexture = tex;
-	m_iconTextureRect = sf::IntRect(sf::IntRect(texPos.x, texPos.y, static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)));
+	m_iconTextureRect = sf::IntRect({texPos.x, texPos.y}, {static_cast<int>(ICON_SIZE), static_cast<int>(ICON_SIZE)});
 
 	m_amountText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_amountText.setColor(COLOR_WHITE);
@@ -66,8 +66,8 @@ InventorySlot::InventorySlot(const sf::Texture* tex, const sf::Vector2i& texPos,
 void InventorySlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
 	m_amountText.setPosition(sf::Vector2f(
-		pos.x + ICON_SIZE - m_amountText.getLocalBounds().width,
-		pos.y + ICON_SIZE - m_amountText.getLocalBounds().height));
+		pos.x + ICON_SIZE - m_amountText.getLocalBounds().size.x,
+		pos.y + ICON_SIZE - m_amountText.getLocalBounds().size.y));
 }
 
 void InventorySlot::render(sf::RenderTarget& renderTarget) {
@@ -105,7 +105,7 @@ void InventorySlot::hideTooltip() const {
 	m_tooltipComponent->setCurrentTooltipTime(sf::Time::Zero);
 }
 
-void InventorySlot::setAlpha(sf::Uint8 alpha) {
+void InventorySlot::setAlpha(std::uint8_t alpha) {
 	const sf::Color& ic = m_iconRect.getFillColor();
 	m_iconRect.setFillColor(sf::Color(ic.r, ic.g, ic.b, alpha));
 

@@ -23,9 +23,9 @@ Enemy::Enemy(const Level* level, Screen* screen) : LevelMovableGameObject(level)
 
 	m_buffBar = new EnemyBuffBar(this);
 
-	m_targetSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
-	m_targetSprite.setTextureRect(sf::IntRect(25, 0, 25, 25));
-	m_targetSprite.setOrigin(sf::Vector2f(12.f, 12.f));
+	m_targetSprite = new sf::Sprite(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
+	m_targetSprite->setTextureRect(sf::IntRect({25, 0}, {25, 25}));
+	m_targetSprite->setOrigin(sf::Vector2f(12.f, 12.f));
 }
 
 Enemy::~Enemy() {
@@ -91,7 +91,7 @@ void Enemy::renderAfterForeground(sf::RenderTarget& renderTarget) {
 		renderTarget.draw(m_hpBar);
 	}
 	if (m_isTargetedEnemy) {
-		renderTarget.draw(m_targetSprite);
+		renderTarget.draw(*m_targetSprite);
 	}
 	if (m_showLootWindow && m_lootWindow != nullptr) {
 		m_lootWindow->render(renderTarget);
@@ -112,18 +112,18 @@ void Enemy::update(const sf::Time& frameTime) {
 	}
 	updateHpBar();
 	if (m_showLootWindow && m_lootWindow != nullptr) {
-		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
+		sf::Vector2f pos(getBoundingBox()->position.x + getBoundingBox()->size.x, getBoundingBox()->position.y - m_lootWindow->getSize().y + 10.f);
 		m_lootWindow->setPosition(pos);
 	}
 	m_showLootWindow = m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips);
 	m_buffBar->update(frameTime);
-	m_targetSprite.setPosition(getBoundingBox()->left + 0.5f * getBoundingBox()->width, getBoundingBox()->top + 0.5f * getBoundingBox()->height);
+	m_targetSprite->setPosition(sf::Vector2f(getBoundingBox()->position.x + 0.5f * getBoundingBox()->size.x, getBoundingBox()->position.y + 0.5f * getBoundingBox()->size.y));
 }
 
 void Enemy::updateHpBar() {
 	if (!m_isHPBarVisible) return;
-	m_hpBar.setPosition(getBoundingBox()->left, getBoundingBox()->top - getConfiguredDistanceToHPBar());
-	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->width * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
+	m_hpBar.setPosition(sf::Vector2f(getBoundingBox()->position.x, getBoundingBox()->position.y - getConfiguredDistanceToHPBar()));
+	m_hpBar.setSize(sf::Vector2f(getBoundingBox()->size.x * (static_cast<float>(m_attributes.currentHealthPoints) / m_attributes.maxHealthPoints), HP_BAR_HEIGHT));
 }
 
 void Enemy::loadBehavior() {

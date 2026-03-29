@@ -10,18 +10,18 @@ void MouseController::update(const sf::Time& frameTime) {
 
 void MouseController::updateMouse() {
 	// update mouse clicks
-	m_isMouseClickedLeft = (m_isMousePressedLeft && !sf::Mouse::isButtonPressed(sf::Mouse::Left));
-	m_isMouseClickedRight = (m_isMousePressedRight && !sf::Mouse::isButtonPressed(sf::Mouse::Right));
-	m_isMouseJustPressedLeft = (!m_isMousePressedLeft && sf::Mouse::isButtonPressed(sf::Mouse::Left));
-	m_isMouseJustPressedRight = (!m_isMousePressedRight && sf::Mouse::isButtonPressed(sf::Mouse::Right));
-	m_isMousePressedLeft = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	m_isMousePressedRight = sf::Mouse::isButtonPressed(sf::Mouse::Right);
+	m_isMouseClickedLeft = (m_isMousePressedLeft && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Left));
+	m_isMouseClickedRight = (m_isMousePressedRight && !sf::Mouse::isButtonPressed(sf::Mouse::Button::Right));
+	m_isMouseJustPressedLeft = (!m_isMousePressedLeft && sf::Mouse::isButtonPressed(sf::Mouse::Button::Left));
+	m_isMouseJustPressedRight = (!m_isMousePressedRight && sf::Mouse::isButtonPressed(sf::Mouse::Button::Right));
+	m_isMousePressedLeft = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+	m_isMousePressedRight = sf::Mouse::isButtonPressed(sf::Mouse::Button::Right);
 
 	// update mouse wheel
 	m_mouseWheelScrollTicks = 0.f;
 
 	// update mouse positions
-	sf::Vector2f pos(sf::Mouse::getPosition((*m_mainWindow)));
+	sf::Vector2f pos(sf::Mouse::getPosition());
 	pos.x = pos.x / (m_windowScale.x * m_spriteScale.x);
 	pos.y = pos.y / (m_windowScale.y * m_spriteScale.y);
 

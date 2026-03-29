@@ -19,7 +19,7 @@ LeverTile::LeverTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScreen) {
 
 bool LeverTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	m_isGround = contains(properties, std::string("ground"));
 	m_isTelekinesisLocked = contains(properties, std::string("lock_telekinesis"));
@@ -34,20 +34,20 @@ void LeverTile::loadAnimation(int skinNr) {
 	Animation* onAnimation = new Animation(sf::seconds(10.0f));
 	onAnimation->setSpriteSheet(tex);
 	onAnimation->addFrame(sf::IntRect(
-		BORDER,
-		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-		TILE_SIZE,
-		TILE_SIZE));
+		{BORDER,
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE)},
+		{TILE_SIZE,
+		TILE_SIZE}));
 
 	addAnimation(GameObjectState::On, onAnimation);
 
 	Animation* offAnimation = new Animation(sf::seconds(10.0f));
 	offAnimation->setSpriteSheet(tex);
 	offAnimation->addFrame(sf::IntRect(
-		BORDER + (2 * BORDER + TILE_SIZE),
-		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-		TILE_SIZE,
-		TILE_SIZE));
+		{BORDER + (2 * BORDER + TILE_SIZE),
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE)},
+		{TILE_SIZE,
+		TILE_SIZE}));
 
 	addAnimation(GameObjectState::Off, offAnimation);
 
@@ -77,7 +77,7 @@ void LeverTile::onHit(LevelMovableGameObject* mob) {
 	auto const& bb = *getBoundingBox();
 	auto const& mobBb = *mob->getBoundingBox();
 
-	if (mobBb.top + mobBb.height > bb.top + 0.8f * bb.height)
+	if (mobBb.position.y + mobBb.size.y > bb.position.y + 0.8f * bb.size.y)
 		switchLever();
 }
 

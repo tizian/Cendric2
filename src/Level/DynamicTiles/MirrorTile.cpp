@@ -34,7 +34,7 @@ void MirrorTile::update(const sf::Time& frameTime) {
 bool MirrorTile::init(const LevelTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(10.f, 10.f));
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 30.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 30.f}));
 
 	m_currentRotation = 0.f;
 	if (contains(properties, std::string("angle"))) {
@@ -56,13 +56,13 @@ void MirrorTile::loadAnimation(int skinNr) {
 
 	Animation* defaultAnimation = new Animation(sf::seconds(10.0f));
 	defaultAnimation->setSpriteSheet(tex);
-	defaultAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	defaultAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Inactive, defaultAnimation);
 
 	Animation* activeAnimation = new Animation(sf::seconds(10.0f));
 	activeAnimation->setSpriteSheet(tex);
-	activeAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	activeAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
@@ -114,7 +114,7 @@ void MirrorTile::handleRotation(const sf::Time& frameTime) {
 
 void MirrorTile::setRotation(float rotation) {
 	m_currentRotation = std::fmod(rotation, 360.f);
-	m_animatedSprite.setRotation(m_currentRotation);
+	m_animatedSprite.setRotation(sf::degrees(m_currentRotation));
 }
 
 void MirrorTile::setActive(bool active) {

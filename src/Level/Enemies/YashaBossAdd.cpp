@@ -93,7 +93,7 @@ void YashaBossAdd::handleAttackInput() {
 }
 
 void YashaBossAdd::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 70.f, 125.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {70.f, 125.f}));
 	setSpriteOffset(sf::Vector2f(-116.f, -125.f));
 	const int width = 300;
 	const int height = 250;
@@ -102,14 +102,14 @@ void YashaBossAdd::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect((4 + skinNr) * width, height, width, height));
+	idleAnimation->addFrame(sf::IntRect({(4 + skinNr) * width, height}, {width, height}));
 	idleAnimation->setLooped(false);
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 7; i < 11; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		deadAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -143,7 +143,7 @@ void YashaBossAdd::loadComponents() {
 
 	// Generators
 	auto posGen = new particles::EllipseSpawner();
-	posGen->radius = sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.25f);
+	posGen->radius = sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.25f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -179,13 +179,13 @@ void YashaBossAdd::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, getBoundingBox()->height));
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, getBoundingBox()->size.y));
 	addComponent(m_pc);
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height),
-		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.height * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y),
+		sf::Vector2f(m_boundingBox.size.x * 2.f, m_boundingBox.size.y * 2.f), 0.6f), this));
 
 	loadLineParticles();
 }
@@ -236,7 +236,7 @@ void YashaBossAdd::loadLineParticles() {
 	data.timeGen = timeGen;
 
 	m_spellPc = new ParticleComponent(data, this);
-	m_spellPc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.f));
+	m_spellPc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0.f));
 	addComponent(m_spellPc);
 }
 

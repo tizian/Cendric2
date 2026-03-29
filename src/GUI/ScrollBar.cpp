@@ -92,7 +92,7 @@ void ScrollBar::setScrollPosition(float pos, bool animated) {
 
 	// update knob
 	float yPos = 0.5f * ScrollBarKnob::HEIGHT + m_scrollPosition * m_height;
-	m_knob.setPosition(sf::Vector2f(getBoundingBox()->left + 0.5f * WIDTH, getBoundingBox()->top + yPos));
+	m_knob.setPosition({getBoundingBox()->position.x + 0.5f * WIDTH, getBoundingBox()->position.y + yPos});
 }
 
 void ScrollBar::onLeftJustPressed() {
@@ -119,7 +119,7 @@ void ScrollBar::handleDragAndDrop() {
 
 float ScrollBar::calculateScrollPosition(float mousePosY) const {
 
-	float yOffset = mousePosY - getBoundingBox()->top - 0.5f * ScrollBarKnob::HEIGHT;
+	float yOffset = mousePosY - getBoundingBox()->position.y - 0.5f * ScrollBarKnob::HEIGHT;
 	// map the offset onto the values
 	return yOffset / m_height;
 }

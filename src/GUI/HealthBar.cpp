@@ -6,11 +6,11 @@
 
 HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	m_isInputInDefaultView = true;
-	m_boundingBox.height = BAR_HEIGHT;
+	m_boundingBox.size.y = BAR_HEIGHT;
 	sf::Vector2f initialPosition;
 
 	if (style == HealthBarStyle::MainCharacter) {
-		m_boundingBox.width = 300.f;
+		m_boundingBox.size.x = 300.f;
 		
 		m_borderOffsetX = 13.f;
 		m_borderOffsetY = 10.f;
@@ -20,24 +20,24 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 		initialPosition = sf::Vector2f(18.f, 18.f);
 	}
 	else if (style == HealthBarStyle::Enemy) {
-		m_boundingBox.width = 200.f;
+		m_boundingBox.size.x = 200.f;
 		
 		m_borderOffsetX = 8.f;
 		m_borderOffsetY = 6.f;
 
 		m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_ENEMY_BORDER);
 
-		initialPosition = sf::Vector2f(WINDOW_WIDTH - m_boundingBox.width - 2.f * 18.f, 18.f);
+		initialPosition = sf::Vector2f(WINDOW_WIDTH - m_boundingBox.size.x - 2.f * 18.f, 18.f);
 	}
 	else if (style == HealthBarStyle::Boss) {
-		m_boundingBox.width = 300.f;
+		m_boundingBox.size.x = 300.f;
 
 		m_borderOffsetX = 12.f;
 		m_borderOffsetY = 10.f;
 
 		m_borderTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_BOSS_BORDER);
 
-		initialPosition = sf::Vector2f(WINDOW_WIDTH - m_boundingBox.width - 2.f * 18.f, 18.f);
+		initialPosition = sf::Vector2f(WINDOW_WIDTH - m_boundingBox.size.x - 2.f * 18.f, 18.f);
 	}
 
 	m_barTexture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_HEALTHBAR_CONTENT);
@@ -49,7 +49,7 @@ HealthBar::HealthBar(const AttributeData* attributes, HealthBarStyle style) {
 	m_bar.setSize(sf::Vector2f(0.f, BAR_HEIGHT));
 
 	// init border
-	m_border.setSize(sf::Vector2f(m_boundingBox.width + 2.f * m_borderOffsetX, BAR_HEIGHT + 2.f * m_borderOffsetY));
+	m_border.setSize(sf::Vector2f(m_boundingBox.size.x + 2.f * m_borderOffsetX, BAR_HEIGHT + 2.f * m_borderOffsetY));
 	m_border.setTexture(m_borderTexture);
 
 	// init overlay
@@ -96,7 +96,7 @@ void HealthBar::setAttributes(const AttributeData* attributes) {
 }
 
 void HealthBar::setName(const std::string& name) {
-	m_name.setString(g_textProvider->getCroppedString(name, m_name.getCharacterSize(), static_cast<int>(m_boundingBox.width + 20.f)));
+	m_name.setString(g_textProvider->getCroppedString(name, m_name.getCharacterSize(), static_cast<int>(m_boundingBox.size.x + 20.f)));
 	setPosition(getPosition());
 }
 
@@ -120,7 +120,7 @@ void HealthBar::setPosition(const sf::Vector2f& pos) {
 	m_border.setPosition(pos - sf::Vector2f(m_borderOffsetX, m_borderOffsetY));
 	m_hitOverlay.setPosition(pos);
 	auto const bounds = m_name.getBounds();
-	m_name.setPosition(pos + sf::Vector2f(0.5f * (m_boundingBox.width - bounds.width), BAR_HEIGHT + 10.f));
+	m_name.setPosition(pos + sf::Vector2f(0.5f * (m_boundingBox.size.x - bounds.size.x), BAR_HEIGHT + 10.f));
 }
 
 void HealthBar::update(const sf::Time& frameTime) {
@@ -171,16 +171,16 @@ void HealthBar::update(const sf::Time& frameTime) {
 	}
 
 	// Set normal bar
-	float normalWidth = m_boundingBox.width * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
+	float normalWidth = m_boundingBox.size.x * (static_cast<float>(m_currentHP) / m_attributes->maxHealthPoints);
 	m_bar.setSize(sf::Vector2f(normalWidth, BAR_HEIGHT));
 
 	// Set overlay
-	float overlayX = m_boundingBox.left + normalWidth;
-	float overlayWidth = std::max(0.f, m_boundingBox.width * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
-	m_hitOverlay.setPosition(sf::Vector2f(overlayX, m_boundingBox.top));
+	float overlayX = m_boundingBox.position.x + normalWidth;
+	float overlayWidth = std::max(0.f, m_boundingBox.size.x * (static_cast<float>(m_overlayHP - m_currentHP) / m_attributes->maxHealthPoints));
+	m_hitOverlay.setPosition(sf::Vector2f(overlayX, m_boundingBox.position.y));
 	m_hitOverlay.setSize(sf::Vector2f(overlayWidth, BAR_HEIGHT));
 
 	// Update tooltip
 	m_tooltipComponent->setTooltipText(std::to_string(m_currentHP) + "/" + std::to_string(m_attributes->maxHealthPoints));
-	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.5f * (m_boundingBox.width - m_tooltipComponent->getWidth()), BAR_HEIGHT + 10.f));
+	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.5f * (m_boundingBox.size.x - m_tooltipComponent->getWidth()), BAR_HEIGHT + 10.f));
 }

@@ -17,7 +17,7 @@ QuickSlot::QuickSlot(WorldInterface* _interface, Key key, const std::string& ite
 	m_key = key;
 	m_itemID = itemId;
 	
-	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {ICON_SIZE, ICON_SIZE}));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
@@ -57,7 +57,7 @@ void QuickSlot::reloadKey() {
 
 	m_keyText.setString(keyText);
 	m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
-	if (m_keyText.getLocalBounds().width > SIZE - 10.f) {
+	if (m_keyText.getLocalBounds().size.x > SIZE - 10.f) {
 		m_keyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	}
 }
@@ -65,11 +65,10 @@ void QuickSlot::reloadKey() {
 void QuickSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
 	
-	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_keyText.getLocalBounds().width / 2.f, SIZE - ICON_OFFSET / 2.f);
+	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_keyText.getLocalBounds().size.x / 2.f, SIZE - ICON_OFFSET / 2.f);
 	m_keyText.setPosition(pos + positionOffset);
-	m_amountText.setPosition(sf::Vector2f(
-		pos.x + ICON_SIZE - m_amountText.getLocalBounds().width,
-		pos.y + ICON_SIZE - m_amountText.getLocalBounds().height));
+	m_amountText.setPosition({pos.x + ICON_SIZE - m_amountText.getLocalBounds().size.x,
+		pos.y + ICON_SIZE - m_amountText.getLocalBounds().size.y});
 }
 
 void QuickSlot::adjustTooltipOffset() {
@@ -109,7 +108,7 @@ void QuickSlot::reload() {
 	if (m_itemID.empty() || !contains(*m_core->getItems(), m_itemID)) {
 		// the slot is empty
 		m_isEmpty = true;
-		m_iconRect.setTextureRect(sf::IntRect(0, 0, 0, 0));
+		m_iconRect.setTextureRect(sf::IntRect({0, 0}, {0, 0}));
 		m_keyText.setColor(COLOR_GREY);
 		m_amountText.setString("");
 		m_itemID = "";
@@ -123,17 +122,16 @@ void QuickSlot::reload() {
 		int amount = m_core->getItems()->at(m_itemID);
 
 		m_iconRect.setTextureRect(sf::IntRect(
-			item->getIconTextureLocation().x,
-			item->getIconTextureLocation().y,
-			static_cast<int>(ICON_SIZE),
-			static_cast<int>(ICON_SIZE)));
+			{item->getIconTextureLocation().x,
+			item->getIconTextureLocation().y},
+			{static_cast<int>(ICON_SIZE),
+			static_cast<int>(ICON_SIZE)}));
 
 		m_amountText.setString(std::to_string(amount));
 		m_keyText.setColor(COLOR_WHITE);
 
-		m_amountText.setPosition(sf::Vector2f(
-			getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().width,
-			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().height));
+		m_amountText.setPosition({getPosition().x + ICON_SIZE - m_amountText.getLocalBounds().size.x,
+			getPosition().y + ICON_SIZE - m_amountText.getLocalBounds().size.y});
 
 		m_tooltipComponent->setMaxWidth(300);
 

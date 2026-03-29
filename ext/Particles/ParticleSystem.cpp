@@ -88,7 +88,7 @@ void ParticleSystem::reset() {
 /* PointParticleSystem */
 
 PointParticleSystem::PointParticleSystem(int maxCount) : ParticleSystem(maxCount) {
-	m_vertices = sf::VertexArray(sf::Points, maxCount);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Points, maxCount);
 }
 
 void PointParticleSystem::render(sf::RenderTarget& renderTarget) {
@@ -97,7 +97,7 @@ void PointParticleSystem::render(sf::RenderTarget& renderTarget) {
 	sf::RenderStates states = sf::RenderStates::Default;
 
 	const sf::Vertex *ver = &m_vertices[0];
-	renderTarget.draw(ver, m_particles->countAlive, sf::Points, states);
+	renderTarget.draw(ver, m_particles->countAlive, sf::PrimitiveType::Points, states);
 }
 
 void PointParticleSystem::updateVertices() {
@@ -111,7 +111,7 @@ void PointParticleSystem::updateVertices() {
 /* TextureParticleSystem */
 
 TextureParticleSystem::TextureParticleSystem(int maxCount, sf::Texture *texture) : ParticleSystem(maxCount), m_texture(texture) {
-	m_vertices = sf::VertexArray(sf::Quads, maxCount * 4);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip, maxCount * 4);
 
 	float x = static_cast<float>(m_texture->getSize().x);
 	float y = static_cast<float>(m_texture->getSize().y);
@@ -191,7 +191,7 @@ void TextureParticleSystem::render(sf::RenderTarget &renderTarget) {
 	states.texture = m_texture;
 
 	const sf::Vertex *ver = &m_vertices[0];
-	renderTarget.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
+	renderTarget.draw(ver, m_particles->countAlive * 4, sf::PrimitiveType::TriangleStrip, states);
 }
 
 
@@ -209,17 +209,17 @@ void SpriteSheetParticleSystem::render(sf::RenderTarget &renderTarget) {
 	states.texture = m_texture;
 
 	const sf::Vertex *ver = &m_vertices[0];
-	renderTarget.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
+	renderTarget.draw(ver, m_particles->countAlive * 4, sf::PrimitiveType::TriangleStrip, states);
 }
 
 void SpriteSheetParticleSystem::updateVertices() {
 	TextureParticleSystem::updateVertices();
 
 	for (int i = 0; i < m_particles->countAlive; ++i) {
-		float left = static_cast<float>(m_particles->texCoords[i].left);
-		float top = static_cast<float>(m_particles->texCoords[i].top);
-		float width = static_cast<float>(m_particles->texCoords[i].width);
-		float height = static_cast<float>(m_particles->texCoords[i].height);
+		float left = static_cast<float>(m_particles->texCoords[i].position.x);
+		float top = static_cast<float>(m_particles->texCoords[i].position.y);
+		float width = static_cast<float>(m_particles->texCoords[i].size.x);
+		float height = static_cast<float>(m_particles->texCoords[i].size.y);
 
 		m_vertices[4 * i + 0].texCoords = sf::Vector2f(left, top);
 		m_vertices[4 * i + 1].texCoords = sf::Vector2f(left + width, top);
@@ -258,8 +258,9 @@ const std::string fragmentShader = \
 MetaballParticleSystem::MetaballParticleSystem(int maxCount, sf::Texture *texture, int windowWidth, int windowHeight) : TextureParticleSystem(maxCount, texture) {
 	additiveBlendMode = true;
 	m_shader.setUniform("texture", sf::Shader::CurrentTexture);
-	m_shader.loadFromMemory(vertexShader, fragmentShader);
-	m_renderTexture.create(windowWidth, windowHeight);
+	[[maybe_unused]] bool shaderLoaded = m_shader.loadFromMemory(vertexShader, fragmentShader);
+	m_renderTexture.resize({static_cast<unsigned int>(windowWidth), static_cast<unsigned int>(windowHeight)});
+	m_sprite.emplace(m_renderTexture.getTexture());
 }
 
 void MetaballParticleSystem::render(sf::RenderTarget &renderTarget) {
@@ -277,15 +278,15 @@ void MetaballParticleSystem::render(sf::RenderTarget &renderTarget) {
 
 	m_renderTexture.setView(oldView);
 	m_renderTexture.clear(sf::Color(0, 0, 0, 0));
-	m_renderTexture.draw(ver, m_particles->countAlive * 4, sf::Quads, states);
+	m_renderTexture.draw(ver, m_particles->countAlive * 4, sf::PrimitiveType::TriangleStrip, states);
 	m_renderTexture.display();
-	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_sprite->setTexture(m_renderTexture.getTexture());
 	sf::Glsl::Vec4 colorVec = sf::Glsl::Vec4(color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
 	m_shader.setUniform("customColor", colorVec);
 	m_shader.setUniform("threshold", threshold);
 	
 	renderTarget.setView(defaultView);
-	renderTarget.draw(m_sprite, &m_shader);
+	renderTarget.draw(*m_sprite, &m_shader);
 	renderTarget.setView(oldView);
 }
 

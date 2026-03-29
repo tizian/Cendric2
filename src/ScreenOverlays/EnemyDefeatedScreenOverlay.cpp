@@ -15,22 +15,22 @@ EnemyDefeatedScreenOverlay::EnemyDefeatedScreenOverlay(const sf::Time& activeTim
 	ScreenOverlay(activeTime, fadeTime),
 	TextureScreenOverlay(activeTime, fadeTime) {
 	m_isPermanent = true;
-	m_background.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
+	setBackgroundTexture(g_resourceManager->getTexture(GlobalResource::TEX_SCREEN_OVERLAY));
 
 	const sf::Texture* text = g_resourceManager->getTexture(GlobalResource::TEX_TEXT_DEFEATED);
-	m_sprite.setTexture(*text);
-	m_sprite.setScale(sf::Vector2f(3.f, 3.f));
-	m_sprite.setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));
+	setSpriteTexture(text);
+	setSpriteScale({3.f, 3.f});
+	setSpritePosition({0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f});
 
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
-		m_sprite.setTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
+		setSpriteTextureRect(sf::IntRect({0, 0}, {static_cast<int>(text->getSize().x), 60}));
 	}
 	else if (language == Language::Lang_DE) {
-		m_sprite.setTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
+		setSpriteTextureRect(sf::IntRect({0, 60}, {static_cast<int>(text->getSize().x), 60}));
 	}
 	else if (language == Language::Lang_CH) {
-		m_sprite.setTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
+		setSpriteTextureRect(sf::IntRect({0, 120}, {static_cast<int>(text->getSize().x), 60}));
 	}
 }
 
@@ -46,8 +46,8 @@ EnemyDefeatedScreenOverlay::~EnemyDefeatedScreenOverlay() {
 void EnemyDefeatedScreenOverlay::update(const sf::Time& frameTime) {
 	TextureScreenOverlay::update(frameTime);
 	for (size_t i = 0; i < m_items.size(); ++i) {
-		m_items[i]->setAlpha((sf::Uint8)(m_scale * 255));
-		m_texts[i]->setColor(sf::Color(255, 255, 255, (sf::Uint8)(m_scale * 255)));
+		m_items[i]->setAlpha((std::uint8_t)(m_scale * 255));
+		m_texts[i]->setColor(sf::Color(255, 255, 255, (std::uint8_t)(m_scale * 255)));
 	}
 }
 
@@ -69,7 +69,7 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 	int i = 0;
 	for (auto& it : items) {
 		InventorySlot* slot = new InventorySlot(it.first, it.second);
-		slot->setPosition(sf::Vector2f(xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET));
+		slot->setPosition({xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET});
 		m_items.push_back(slot);
 
 		std::string str = g_textProvider->getText(it.first, "item");
@@ -79,8 +79,8 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
 		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		sf::FloatRect bbox = text->getLocalBounds();
-		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,
-				YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.height));
+		text->setPosition({xOffset + InventorySlot::SIZE + TEXT_MARGIN,
+				YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.size.y)});
 		m_texts.push_back(text);
 
 		xOffset += COLUMN_WIDTH + COLUMN_MARGIN;
@@ -89,7 +89,7 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 
 	if (gold > 0) {
 		InventorySlot* slot = new InventorySlot("gold", gold);
-		slot->setPosition(sf::Vector2f(xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET));
+		slot->setPosition({xOffset + InventorySlot::ICON_OFFSET, YOFFSET + InventorySlot::ICON_OFFSET});
 		m_items.push_back(slot);
 
 		std::string str = g_textProvider->getText("Gold");
@@ -99,13 +99,13 @@ void EnemyDefeatedScreenOverlay::setLoot(std::map<std::string, int>& items, int 
 		BitmapText* text = new BitmapText(croppedStr, TextStyle::Shadowed, TextAlignment::Left);
 		text->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		sf::FloatRect bbox = text->getLocalBounds();
-		text->setPosition(xOffset + InventorySlot::SIZE + TEXT_MARGIN,
-			YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.height));
+		text->setPosition({xOffset + InventorySlot::SIZE + TEXT_MARGIN,
+			YOFFSET + InventorySlot::ICON_OFFSET + 0.5f * (InventorySlot::SIZE - 2 * InventorySlot::ICON_OFFSET - bbox.size.y)});
 		m_texts.push_back(text);
 	}
 
 	for (size_t i = 0; i < m_items.size(); ++i) {
-		m_items[i]->setAlpha((sf::Uint8)(0));
+		m_items[i]->setAlpha((std::uint8_t)(0));
 		m_texts[i]->setColor(COLOR_TRANSPARENT);
 	}
 }

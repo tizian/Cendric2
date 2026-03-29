@@ -23,7 +23,7 @@ void VeliusVictimMovingBehavior::execHandleMovementInput() {
 		gotoTarget(ALTAR_POS, 2.f, true, true);
 
 		if (dist(ALTAR_POS, m_victim->getCenter()) < 4.f) {
-			m_mob->setPosition(ALTAR_POS - sf::Vector2f(m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height) * 0.5f);
+			m_mob->setPosition(ALTAR_POS - sf::Vector2f(m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y) * 0.5f);
 			m_mob->setState(GameObjectState::Broken);
 		}
 	}
@@ -31,7 +31,7 @@ void VeliusVictimMovingBehavior::execHandleMovementInput() {
 		gotoTarget(m_initialPos, 2.f, true, true);
 
 		if (dist(m_initialPos, m_victim->getCenter()) < 4.f) {
-			m_mob->setPosition(m_initialPos - sf::Vector2f(m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height) * 0.5f);
+			m_mob->setPosition(m_initialPos - sf::Vector2f(m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y) * 0.5f);
 			m_mob->setFacingRight(true);
 			m_mob->setState(GameObjectState::Inactive);
 		}

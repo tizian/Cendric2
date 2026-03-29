@@ -41,7 +41,7 @@ void LightSpell::loadComponents() {
 	
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -71,7 +71,7 @@ void LightSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(pc);
 }
 

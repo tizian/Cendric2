@@ -14,11 +14,11 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 	spellAnimation->setSpriteSheet(tex);
 
 	for (int i = 0; i < 8; i++) {
-		spellAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 120));
+		spellAnimation->addFrame(sf::IntRect({i * 120, 0}, {120, 120}));
 	}
 
 	for (int i = 7; i > -1; i--) {
-		spellAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 120));
+		spellAnimation->addFrame(sf::IntRect({i * 120, 0}, {120, 120}));
 	}
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -33,7 +33,7 @@ void DivineShieldSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 
 	m_reflectProjectilesCount = bean.reflectCount;
 
-	LightData lightData(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f), sf::Vector2f(100.f, 150.f), 0.2f);
+	LightData lightData(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.5f), sf::Vector2f(100.f, 150.f), 0.2f);
 	addComponent(new LightComponent(lightData, this));
 }
 

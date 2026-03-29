@@ -42,7 +42,7 @@ void NekomataEnemy::loadSpells() {
 	chopSpell.damage = 30;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 50);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {70, 50});
 	chopSpell.fightingTime = sf::milliseconds(12 * 60);
 	chopSpell.spellOffset = sf::Vector2f(20.f, 20.f);
 
@@ -54,8 +54,8 @@ void NekomataEnemy::loadSpells() {
 	shadowFireSpell.damageType = DamageType::Shadow;
 	shadowFireSpell.fightingTime = sf::milliseconds(6 * 60);
 	shadowFireSpell.range = 150.f;
-	shadowFireSpell.boundingBox.height = 2 * shadowFireSpell.range;
-	shadowFireSpell.boundingBox.width = 2 * shadowFireSpell.range;
+	shadowFireSpell.boundingBox.size.y = 2 * shadowFireSpell.range;
+	shadowFireSpell.boundingBox.size.x = 2 * shadowFireSpell.range;
 	shadowFireSpell.spellOffset.x = -1 * shadowFireSpell.range;
 	shadowFireSpell.spellOffset.y = -1 * shadowFireSpell.range;
 
@@ -122,10 +122,10 @@ void NekomataEnemy::handleAttackInput() {
 }
 
 void NekomataEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 90.f, 60.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {90.f, 60.f}));
 	setSpriteOffset(sf::Vector2f(-20.f, -10.f));
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), sf::Vector2f(250.f, 150.f), 0.5f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), sf::Vector2f(250.f, 150.f), 0.5f);
 	addComponent(new LightComponent(data, this));
 
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -134,7 +134,7 @@ void NekomataEnemy::loadAnimation(int skinNr) {
 	walkingAnimation->setSpriteSheet(tex);
 
 	for (int i = 0; i < 12; i++) {
-		walkingAnimation->addFrame(sf::IntRect(0, i * 70, 130, 70));
+		walkingAnimation->addFrame(sf::IntRect({0, i * 70}, {130, 70}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
@@ -143,28 +143,28 @@ void NekomataEnemy::loadAnimation(int skinNr) {
 	jumpingAnimation->setLooped(false);
 	jumpingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
-		jumpingAnimation->addFrame(sf::IntRect(130, i * 70, 130, 70));
+		jumpingAnimation->addFrame(sf::IntRect({130, i * 70}, {130, 70}));
 	}
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(260, 0, 130, 70));
+	idleAnimation->addFrame(sf::IntRect({260, 0}, {130, 70}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.06f));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; i++) {
-		fightingAnimation->addFrame(sf::IntRect(390, i * 70, 130, 70));
+		fightingAnimation->addFrame(sf::IntRect({390, i * 70}, {130, 70}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(520, 0, 130, 70));
+	deadAnimation->addFrame(sf::IntRect({520, 0}, {130, 70}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -187,8 +187,8 @@ void NekomataEnemy::loadComponents() {
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
 	
 	auto posGen = new particles::BoxSpawner();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	posGen->size = sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height);
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	posGen->size = sf::Vector2f(getBoundingBox()->size.x, getBoundingBox()->size.y);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -218,7 +218,7 @@ void NekomataEnemy::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(m_pc);
 }
 

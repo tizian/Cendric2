@@ -48,7 +48,7 @@ bool SwingingTile::init(const LevelTileProperties& properties) {
 		m_isClockwise = mode != "ccw";
 	}
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 2 * TILE_SIZE_F * (m_size + 1), 2 * TILE_SIZE_F * (m_size + 1)));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {2 * TILE_SIZE_F * (m_size + 1), 2 * TILE_SIZE_F * (m_size + 1)}));
 	setSpriteOffset(sf::Vector2f(TILE_SIZE_F * (m_size - 0.5f), TILE_SIZE_F * (m_size + 0.5f)));
 	setPositionOffset(sf::Vector2f(-TILE_SIZE_F * (m_size + 0.5f), -TILE_SIZE_F * (m_size + 0.5f)));
 
@@ -59,33 +59,33 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// a swinging tile creates its own texture out of several images.
 
 	sf::Image img;
-	img.create(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE, COLOR_TRANSPARENT);
+	img.resize({TILE_SIZE * 3, (m_size + 1) * TILE_SIZE});
 
 	sf::Image fullImg;
 	fullImg.loadFromFile(getResourcePath(getSpritePath()));
 
 	sf::Image texImg;
-	texImg.create(TILE_SIZE * 3, 2 * TILE_SIZE, COLOR_TRANSPARENT);
-	texImg.copy(fullImg, 0, 0, sf::IntRect(0, TILE_SIZE * 2 * skinNr, TILE_SIZE * 3, TILE_SIZE * 2));
+	texImg.resize({TILE_SIZE * 3, 2 * TILE_SIZE});
+	texImg.copy(fullImg, {0, 0}, sf::IntRect({0, TILE_SIZE * 2 * skinNr}, {TILE_SIZE * 3, TILE_SIZE * 2}));
 
 	int length = m_size;
 
 	// that's the part below, the blade
-	img.copy(texImg, 0, TILE_SIZE * length, sf::IntRect(0, TILE_SIZE, TILE_SIZE * 3, TILE_SIZE));
+	img.copy(texImg, {0, TILE_SIZE * length}, sf::IntRect({0, TILE_SIZE}, {TILE_SIZE * 3, TILE_SIZE}));
 	length--;
 
 	// that's the thing that holds on to the blade
-	img.copy(texImg, TILE_SIZE, TILE_SIZE * length, sf::IntRect(TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+	img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({TILE_SIZE, 0}, {TILE_SIZE, TILE_SIZE}));
 	length--;
 
 	// here comes the thingys in between, usually a chain.
 	while (length > 0) {
-		img.copy(texImg, TILE_SIZE, TILE_SIZE * length, sf::IntRect(TILE_SIZE * 2, 0, TILE_SIZE, TILE_SIZE));
+		img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({TILE_SIZE * 2, 0}, {TILE_SIZE, TILE_SIZE}));
 		length--;
 	}
 
 	// that's the uppermost thingy that holds to the ceiling.
-	img.copy(texImg, TILE_SIZE, TILE_SIZE * length, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+	img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({0, 0}, {TILE_SIZE, TILE_SIZE}));
 
 	// now convert to texture format
 	delete m_texture;
@@ -95,7 +95,7 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// and load the sprite
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(m_texture);
-	idleAnimation->addFrame(sf::IntRect(0, 0, img.getSize().x, img.getSize().y));
+	idleAnimation->addFrame(sf::IntRect({0, 0}, {img.getSize().x, img.getSize().y}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -124,7 +124,7 @@ void SwingingTile::update(const sf::Time& frametime) {
 	}
 
 	m_currentRotation = modAngle(m_currentRotation);
-	m_animatedSprite.setRotation(m_currentRotation + 180.f);
+	m_animatedSprite.setRotation(sf::degrees(m_currentRotation + 180.f));
 	m_debugCircle.setPosition(getHeadPosition());
 	LevelDynamicTile::update(frametime);
 }

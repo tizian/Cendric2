@@ -27,6 +27,6 @@ private:
 
 	// Arrow information
 	bool m_showSprite = false;
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 	sf::Time m_time;
 };

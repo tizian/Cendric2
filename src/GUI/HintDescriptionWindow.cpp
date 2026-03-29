@@ -5,7 +5,7 @@
 const float HintDescriptionWindow::WIDTH = 340.f;
 
 HintDescriptionWindow::HintDescriptionWindow(const CharacterCore* core) : Window(
-	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
+	sf::FloatRect({0.f, 0.f}, {WIDTH, WIDTH}),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
@@ -55,12 +55,12 @@ void HintDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	pos.y += GUIConstants::TEXT_OFFSET;
 	pos.x += GUIConstants::TEXT_OFFSET;
 
-	m_titleText.setPosition(position.x + ((WIDTH - m_titleText.getLocalBounds().width) / 2.f), pos.y);
-	pos.y += m_titleText.getLocalBounds().height + GUIConstants::TEXT_OFFSET;
+	m_titleText.setPosition({position.x + ((WIDTH - m_titleText.getLocalBounds().size.x) / 2.f), pos.y});
+	pos.y += m_titleText.getLocalBounds().size.y + GUIConstants::TEXT_OFFSET;
 
 	m_descriptionText.setPosition(pos);
 
-	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().height;
+	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().size.y;
 
 	setHeight(pos.y - position.y);
 }

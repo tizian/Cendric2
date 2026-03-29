@@ -13,7 +13,7 @@ ShiftableTile::ShiftableTile(LevelScreen* levelScreen) :
 bool ShiftableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-1.f, 0.f));
 	setPositionOffset(sf::Vector2f(1.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 2.f, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F - 2.f, TILE_SIZE_F}));
 
 	return true;
 }
@@ -24,14 +24,14 @@ void ShiftableTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* crumblingAnimation = new Animation();
 	crumblingAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(i * TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		crumblingAnimation->addFrame(sf::IntRect({i * TILE_SIZE, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 	crumblingAnimation->setLooped(false);
 
@@ -58,7 +58,7 @@ void ShiftableTile::update(const sf::Time& frameTime) {
 	checkCollisions(nextPosition);
 	MovableGameObject::update(frameTime);
 	m_pushAcceleration = 0.f;
-	if (m_boundingBox.top + m_boundingBox.height > (m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+	if (m_boundingBox.position.y + m_boundingBox.size.y > (m_level->getWorldRect().position.y + m_level->getWorldRect().size.y)) {
 		setDisposed();
 	}
 }

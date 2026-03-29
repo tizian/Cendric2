@@ -49,49 +49,49 @@ void YaslawEnemy::handleAttackInput() {
 }
 
 void YaslawEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+		walkingAnimation->addFrame(sf::IntRect({i * 120, skinNr * 120}, {120, 120}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * 120, skinNr * 120, 120, 120));
+	idleAnimation->addFrame(sf::IntRect({8 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * 120, skinNr * 120, 120, 120));
+	jumpingAnimation->addFrame(sf::IntRect({9 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * 120, skinNr * 120, 120, 120));
+	deadAnimation->addFrame(sf::IntRect({10 * 120, skinNr * 120}, {120, 120}));
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* fightingStartAnimation = new Animation();
 	fightingStartAnimation->setSpriteSheet(tex);
-	fightingStartAnimation->addFrame(sf::IntRect(11 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(12 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(13 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(14 * 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->addFrame(sf::IntRect({11 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({12 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({13 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({14 * 120, skinNr * 120}, {120, 120}));
 	fightingStartAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, fightingStartAnimation);
 
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(14 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->addFrame(sf::IntRect({14 * 120, skinNr * 120}, {120, 120}));
 	fightingStartAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);

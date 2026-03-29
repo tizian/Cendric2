@@ -11,14 +11,14 @@
 #include "GUI/ButtonGroup.h"
 
 MenuScreen::MenuScreen(CharacterCore* core) : Screen(core) {
-	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
-	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG)));
+	m_screenSpriteBackground.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG));
+	m_screenSpriteForeground.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG));
 
 	float scale = 4.f;
 	sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_LOGO);
-	m_logoSprite = sf::Sprite(*tex);
-	m_logoSprite.setScale(sf::Vector2f(scale, scale));
-	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 30.f);
+	m_logoSprite.emplace(*tex);
+	m_logoSprite->setScale(sf::Vector2f(scale, scale));
+	m_logoSprite->setPosition({0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 30.f});
 }
 
 MenuScreen::~MenuScreen() {
@@ -60,12 +60,12 @@ void MenuScreen::setAllButtonsEnabled(bool value) {
 
 void MenuScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSpriteBackground);
+	renderTarget.draw(*m_screenSpriteBackground);
 	m_ps_left->render(renderTarget);
 	m_ps_right->render(renderTarget);
-	renderTarget.draw(m_screenSpriteForeground);
+	renderTarget.draw(*m_screenSpriteForeground);
 	renderTarget.draw(m_versionText);
-	renderTarget.draw(m_logoSprite);
+	renderTarget.draw(*m_logoSprite);
 	renderObjects(_Button, renderTarget);
 	renderObjects(_Form, renderTarget);
 	renderTooltipText(renderTarget);
@@ -86,9 +86,8 @@ void MenuScreen::execOnEnter() {
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
-	m_versionText.setPosition(
-		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
-		WINDOW_HEIGHT - 18.f);
+	m_versionText.setPosition({(WINDOW_WIDTH - m_versionText.getLocalBounds().size.x) / 2,
+		WINDOW_HEIGHT - 18.f});
 
 	float buttonHeight = 50.f;
 	float buttonWidth = 300.f;
@@ -100,26 +99,26 @@ void MenuScreen::execOnEnter() {
 	ButtonGroup* buttonGroup = new ButtonGroup();
 	Button* button;
 	if (m_characterCore != nullptr) {
-		button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+		button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 		button->setText("Resume");
 		button->setOnClick(std::bind(&MenuScreen::onResume, this));
 		buttonGroup->addButton(button);
 	}
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("NewGame");
 	button->setOnClick(std::bind(&MenuScreen::onNewGame, this));
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("LoadGame");
 	button->setOnClick(std::bind(&MenuScreen::onLoadGame, this));
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("SaveGame");
 	button->setEnabled(m_characterCore != nullptr && !m_characterCore->isAutosave());
 	button->setOnClick(std::bind(&MenuScreen::onSaveGame, this));
@@ -127,25 +126,25 @@ void MenuScreen::execOnEnter() {
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("Options");
 	button->setOnClick(std::bind(&MenuScreen::onOptions, this));
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("KeyBindingsShort");
 	button->setOnClick(std::bind(&MenuScreen::onKeybindings, this));
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("Credits");
 	button->setOnClick(std::bind(&MenuScreen::onCredits, this));
 	buttonGroup->addButton(button);
 	yOffset += addYOffset;
 
-	button = new Button(sf::FloatRect(xOffset, yOffset, buttonWidth, buttonHeight), GUIOrnamentStyle::MEDIUM);
+	button = new Button(sf::FloatRect({xOffset, yOffset}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::MEDIUM);
 	button->setText("Exit");
 	button->setOnClick(std::bind(&MenuScreen::onExit, this));
 	buttonGroup->addButton(button);
@@ -218,7 +217,7 @@ void MenuScreen::onNewGame() {
 	else {
 		float width = 450;
 	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 		m_yesOrNoForm->setMessage("QuestionStartNewGame");
 		m_yesOrNoForm->setOnNoClicked(std::bind(&MenuScreen::onNo, this));
 		m_yesOrNoForm->setOnYesClicked(std::bind(&MenuScreen::onStartNewGame, this));

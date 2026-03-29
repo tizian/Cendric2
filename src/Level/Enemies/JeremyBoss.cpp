@@ -40,14 +40,14 @@ void JeremyBoss::setDead() {
 
 	for (auto go : *m_screen->getObjects(_Enemy)) {
 		if (auto* roy = dynamic_cast<RoyBoss*>(go)) {
-			rec.boundingBox.left += 20.f;
+			rec.boundingBox.position.x += 20.f;
 			roy->notifyJeremyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)));
-			rec.boundingBox.left -= 20.f;
+			rec.boundingBox.position.x -= 20.f;
 		}
 		if (auto* morgiana = dynamic_cast<MorgianaBoss*>(go)) {
-			rec.boundingBox.left -= 20.f;
+			rec.boundingBox.position.x -= 20.f;
 			morgiana->notifyJeremyDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(-20.f, 0.f)));
-			rec.boundingBox.left += 20.f;
+			rec.boundingBox.position.x += 20.f;
 		}
 	}
 
@@ -137,33 +137,33 @@ void JeremyBoss::handleAttackInput() {
 void JeremyBoss::loadAnimation(int skinNr) {
 	int size = 120;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		walkingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
+	idleAnimation->addFrame(sf::IntRect({8 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
+	jumpingAnimation->addFrame(sf::IntRect({9 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
+	deadAnimation->addFrame(sf::IntRect({10 * size, 0}, {size, size}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -171,7 +171,7 @@ void JeremyBoss::loadAnimation(int skinNr) {
 	Animation* castingAnimation = new Animation(sf::seconds(0.2f));
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 16; i < 19; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		castingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 	castingAnimation->setLooped(false);
 
@@ -179,7 +179,7 @@ void JeremyBoss::loadAnimation(int skinNr) {
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(19 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect({19 * size, 0}, {size, size}));
 	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -187,7 +187,7 @@ void JeremyBoss::loadAnimation(int skinNr) {
 	Animation* casting2Animation = new Animation(sf::seconds(0.2f));
 	casting2Animation->setSpriteSheet(tex);
 	for (int i = 11; i < 16; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * size, 0, size, size));
+		casting2Animation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 	casting2Animation->setLooped(false);
 

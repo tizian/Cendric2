@@ -109,42 +109,42 @@ sf::Time ObserverEnemy::getConfiguredChasingTime() const {
 }
 
 void ObserverEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 40.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 40.f}));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// Idle animation
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0 , 0, 50, 40));
+	idleAnimation->addFrame(sf::IntRect({0 , 0}, {50, 40}));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// Blinking animation
 	Animation* blinkingAnimation = new Animation();
 	blinkingAnimation->setSpriteSheet(tex);
-	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 40));
-	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 40));
-	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 40));
-	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 40));
-	blinkingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 40));
-	blinkingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 40));
+	blinkingAnimation->addFrame(sf::IntRect({7 * 50, 0}, {50, 40}));
+	blinkingAnimation->addFrame(sf::IntRect({8 * 50, 0}, {50, 40}));
+	blinkingAnimation->addFrame(sf::IntRect({9 * 50, 0}, {50, 40}));
+	blinkingAnimation->addFrame(sf::IntRect({9 * 50, 0}, {50, 40}));
+	blinkingAnimation->addFrame(sf::IntRect({8 * 50, 0}, {50, 40}));
+	blinkingAnimation->addFrame(sf::IntRect({7 * 50, 0}, {50, 40}));
 	addAnimation(GameObjectState::Blinking, blinkingAnimation);
 
 	// Looking Animation
 	Animation* lookingAnimation = new Animation();
 	lookingAnimation->setSpriteSheet(tex);
-	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(3 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({2 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({3 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({2 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 40}));
 	for (int i = 0; i < 4; ++i) {
-		lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 40));
+		lookingAnimation->addFrame(sf::IntRect({0 * 50, 0}, {50, 40}));
 	}
-	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 40));
-	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 40));
+	lookingAnimation->addFrame(sf::IntRect({4 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({5 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({6 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({5 * 50, 0}, {50, 40}));
+	lookingAnimation->addFrame(sf::IntRect({4 * 50, 0}, {50, 40}));
 	addAnimation(GameObjectState::Looking, lookingAnimation);
 
 	// initial values
@@ -159,19 +159,19 @@ void ObserverEnemy::setAnimationTextureY(int y) {
 	size_t animationSize = idleAnimation->getSize();
 	for (size_t frame = 0; frame < animationSize; ++frame) {
 		// oh no, a const cast? shame on me.
-		((sf::IntRect&)idleAnimation->getFrame(frame)).top = y;
+		((sf::IntRect&)idleAnimation->getFrame(frame)).position.y = y;
 	}
 
 	const Animation* blinkingAnimation = getAnimation(GameObjectState::Blinking);
 	animationSize = blinkingAnimation->getSize();
 	for (size_t frame = 0; frame < animationSize; ++frame) {
-		((sf::IntRect&)blinkingAnimation->getFrame(frame)).top = y;
+		((sf::IntRect&)blinkingAnimation->getFrame(frame)).position.y = y;
 	}
 
 	const Animation* lookingAnimation = getAnimation(GameObjectState::Looking);
 	animationSize = lookingAnimation->getSize();
 	for (size_t frame = 0; frame < animationSize; ++frame) {
-		((sf::IntRect&)lookingAnimation->getFrame(frame)).top = y;
+		((sf::IntRect&)lookingAnimation->getFrame(frame)).position.y = y;
 	}
 }
 

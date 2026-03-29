@@ -12,6 +12,7 @@
 #include <map>
 #include <vector>
 #include <cassert>
+#include <optional>
 
 // Create steam version. Usually set via cmake.
 // #define STEAM

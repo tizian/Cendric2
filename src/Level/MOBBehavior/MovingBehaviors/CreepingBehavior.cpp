@@ -14,8 +14,8 @@ CreepingBehavior::CreepingBehavior(Enemy* enemy) :
 	auto const& bb = *enemy->getBoundingBox();
 	m_horizontalSpriteOffset = enemy->getSpriteOffset();
 
-	float diffWidth = frameSize.width - bb.width;
-	float diffHeight = frameSize.height - bb.height;
+	float diffWidth = frameSize.size.x - bb.size.x;
+	float diffHeight = frameSize.size.y - bb.size.y;
 	m_verticalSpriteOffset = sf::Vector2f(
 		diffWidth - diffHeight,
 		diffHeight - diffWidth) + m_horizontalSpriteOffset;
@@ -66,7 +66,7 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	bool collidesX;
 	bool collidesY;
 	checkCreepingXYDirection(nextPosition, collidesX, collidesY);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	sf::FloatRect nextBoundingBox({nextPosition.x, nextPosition.y}, {m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y});
 	if (m_mob->getLevel()->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
 		m_mob->setVelocity(sf::Vector2f(0.f, 0.f));
@@ -81,12 +81,12 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		sf::Vector2f newPosition;
 		if (m_creepingDirection == CreepingDirection::Bottom) {
 			newPosition = m_mob->getPosition() + sf::Vector2f(
-				isCreepingRight ? (bb.width - bb.height) : 0.f,
-				bb.height - bb.width);
+				isCreepingRight ? (bb.size.x - bb.size.y) : 0.f,
+				bb.size.y - bb.size.x);
 		}
 		else {
 			newPosition = m_mob->getPosition() + sf::Vector2f(
-				isCreepingRight ? (bb.width - bb.height) : 0.f,
+				isCreepingRight ? (bb.size.x - bb.size.y) : 0.f,
 				0.f);
 		}
 		m_mob->setPosition(newPosition);
@@ -100,13 +100,13 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 		sf::Vector2f newPosition;
 		if (m_creepingDirection == CreepingDirection::Right) {
 			newPosition = m_mob->getPosition() + sf::Vector2f(
-				bb.width - bb.height,
-				isCreepingDown ? (bb.height - bb.width) : 0.f);
+				bb.size.x - bb.size.y,
+				isCreepingDown ? (bb.size.y - bb.size.x) : 0.f);
 		}
 		else {
 			newPosition = m_mob->getPosition() + sf::Vector2f(
 				0.f,
-				isCreepingDown ? (bb.height - bb.width) : 0.f);
+				isCreepingDown ? (bb.size.y - bb.size.x) : 0.f);
 		}
 		m_mob->setPosition(newPosition);
 		setCreepingDirection(isCreepingDown ? CreepingDirection::Bottom : CreepingDirection::Top);
@@ -116,20 +116,20 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// check if we should creep down or up a wall
 	if (isCreepingOnX() && m_movingDirectionX != 0 && m_isGrounded) {
 		bool isMovingRight = m_movingDirectionX > 0;
-		std::swap(nextBoundingBox.width, nextBoundingBox.height);
-		nextBoundingBox.left = isMovingRight ?
-			nextBoundingBox.left + 0.5f * nextBoundingBox.height :
-			nextBoundingBox.left + 0.5f * (nextBoundingBox.height - nextBoundingBox.width);
+		std::swap(nextBoundingBox.size.x, nextBoundingBox.size.y);
+		nextBoundingBox.position.x = isMovingRight ?
+			nextBoundingBox.position.x + 0.5f * nextBoundingBox.size.y :
+			nextBoundingBox.position.x + 0.5f * (nextBoundingBox.size.y - nextBoundingBox.size.x);
 
-		nextBoundingBox.top = m_creepingDirection == CreepingDirection::Bottom ?
-			nextBoundingBox.top - 0.5f * (nextBoundingBox.height - nextBoundingBox.width) :
-			nextBoundingBox.top - 0.5f * nextBoundingBox.height;
+		nextBoundingBox.position.y = m_creepingDirection == CreepingDirection::Bottom ?
+			nextBoundingBox.position.y - 0.5f * (nextBoundingBox.size.y - nextBoundingBox.size.x) :
+			nextBoundingBox.position.y - 0.5f * nextBoundingBox.size.y;
 
 		WorldCollisionQueryRecord rec;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 		rec.boundingBox = nextBoundingBox;
 		if (!m_mob->getLevel()->collides(rec)) {
-			m_mob->setPosition(sf::Vector2f(nextBoundingBox.left, nextBoundingBox.top));
+			m_mob->setPosition(sf::Vector2f(nextBoundingBox.position.x, nextBoundingBox.position.y));
 			m_movingDirectionY = m_creepingDirection == CreepingDirection::Bottom ? 1 : -1;
 			setCreepingDirection(isMovingRight ? CreepingDirection::Left : CreepingDirection::Right);
 		}
@@ -139,19 +139,19 @@ void CreepingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	// check if we should creep again on the x axis
 	if (!isCreepingOnX() && m_movingDirectionY != 0 && m_isGrounded) {
 		bool isMovingDown = m_movingDirectionY > 0;
-		nextBoundingBox.top = isMovingDown ?
-			nextBoundingBox.top + 0.5f * nextBoundingBox.height :
-			nextBoundingBox.top - 0.5f * nextBoundingBox.height;
+		nextBoundingBox.position.y = isMovingDown ?
+			nextBoundingBox.position.y + 0.5f * nextBoundingBox.size.y :
+			nextBoundingBox.position.y - 0.5f * nextBoundingBox.size.y;
 
-		nextBoundingBox.left = m_creepingDirection == CreepingDirection::Right ?
-			nextBoundingBox.left + 0.5f * nextBoundingBox.width :
-			nextBoundingBox.left - 0.5f * nextBoundingBox.width;
+		nextBoundingBox.position.x = m_creepingDirection == CreepingDirection::Right ?
+			nextBoundingBox.position.x + 0.5f * nextBoundingBox.size.x :
+			nextBoundingBox.position.x - 0.5f * nextBoundingBox.size.x;
 
 		WorldCollisionQueryRecord rec;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 		rec.boundingBox = nextBoundingBox;
 		if (!m_mob->getLevel()->collides(rec)) {
-			m_mob->setPosition(sf::Vector2f(nextBoundingBox.left, nextBoundingBox.top));
+			m_mob->setPosition(sf::Vector2f(nextBoundingBox.position.x, nextBoundingBox.position.y));
 			m_movingDirectionX = m_creepingDirection == CreepingDirection::Right ? 1 : -1;
 			setCreepingDirection(isMovingDown ? CreepingDirection::Top : CreepingDirection::Bottom);
 		}
@@ -165,14 +165,14 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 
 	const sf::FloatRect& bb = *m_mob->getBoundingBox();
 	const Level& level = *m_mob->getLevel();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingDown = nextPosition.y > bb.position.y;
+	bool isMovingRight = nextPosition.x > bb.position.x;
 	bool isFalling = isFallingDown(isMovingDown, isMovingRight);
 
 	// should we use strategy 2: try y direction first, then x direction?
@@ -197,10 +197,10 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
 		}
 		else {
-			nextBoundingBoxY.left = nextPosition.x;
+			nextBoundingBoxY.position.x = nextPosition.x;
 		}
 
 		// check for collision on y axis
@@ -233,10 +233,10 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 		}
 		else {
-			nextBoundingBoxX.top = nextPosition.y;
+			nextBoundingBoxX.position.y = nextPosition.y;
 		}
 
 		// check for collision on x axis
@@ -259,20 +259,20 @@ void CreepingBehavior::checkCreepingXYDirection(const sf::Vector2f& nextPosition
 		m_isGrounded = false;
 	}
 
-	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
-		(isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height)) {
+	if ((!isMovingDown && nextBoundingBoxY.position.y < -bb.size.y) ||
+		(isMovingDown && nextBoundingBoxY.position.y > level.getWorldRect().position.y + level.getWorldRect().size.y)) {
 		m_mob->setDead();
 	}
 
 	// check for wrong parent
 	if (MovingParent* mt = m_mob->getMovingParent()) {
 		if (m_creepingDirection == CreepingDirection::Bottom) {
-			if (mt->getBoundingBox()->top + Epsilon < m_mob->getBoundingBox()->top + m_mob->getBoundingBox()->height) {
+			if (mt->getBoundingBox()->position.y + Epsilon < m_mob->getBoundingBox()->position.y + m_mob->getBoundingBox()->size.y) {
 				m_mob->setMovingParent(nullptr);
 			}
 		}
 		else {
-			if (mt->getBoundingBox()->top + mt->getBoundingBox()->height > Epsilon + m_mob->getBoundingBox()->top) {
+			if (mt->getBoundingBox()->position.y + mt->getBoundingBox()->size.y > Epsilon + m_mob->getBoundingBox()->position.y) {
 				m_mob->setMovingParent(nullptr);
 			}
 		}
@@ -335,7 +335,7 @@ void CreepingBehavior::setCreepingDirection(CreepingDirection dir) {
 
 	// swap bounding box
 	auto newBB = *m_mob->getBoundingBox();
-	std::swap(newBB.width, newBB.height);
+	std::swap(newBB.size.x, newBB.size.y);
 	m_mob->setBoundingBox(newBB);
 
 	// adjust animation
@@ -345,20 +345,20 @@ void CreepingBehavior::setCreepingDirection(CreepingDirection dir) {
 	switch (m_creepingDirection) {
 	case CreepingDirection::Bottom:
 	default:
-		m_enemy->getAnimatedSprite().setRotation(0.f);
+		m_enemy->getAnimatedSprite().setRotation(sf::degrees(0.f));
 		m_enemy->getAnimatedSprite().setFlippedY(false);
 		break;
 	case CreepingDirection::Top:
-		m_enemy->getAnimatedSprite().setRotation(0.f);
+		m_enemy->getAnimatedSprite().setRotation(sf::degrees(0.f));
 		m_enemy->getAnimatedSprite().setFlippedY(true);
 		break;
 	case CreepingDirection::Left:
-		m_enemy->getAnimatedSprite().setRotation(90.f);
+		m_enemy->getAnimatedSprite().setRotation(sf::degrees(90.f));
 		m_enemy->getAnimatedSprite().setFlippedX(false);
 		m_enemy->getAnimatedSprite().setFlippedY(false);
 		break;
 	case CreepingDirection::Right:
-		m_enemy->getAnimatedSprite().setRotation(270.f);
+		m_enemy->getAnimatedSprite().setRotation(sf::degrees(270.f));
 		m_enemy->getAnimatedSprite().setFlippedX(false);
 		m_enemy->getAnimatedSprite().setFlippedY(false);
 		break;

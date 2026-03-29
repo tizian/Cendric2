@@ -60,7 +60,7 @@ public:
 	sf::Texture* getTexture() const;
 	const sf::Color getFillColor() const;
 
-	sf::FloatRect getLocalBounds() const { return { 0.f, 0.f, m_width, m_height }; }
+	sf::FloatRect getLocalBounds() const { return { { 0.f, 0.f }, { m_width, m_height } }; }
 
 private:
 	void init();	// Set vertexArray data

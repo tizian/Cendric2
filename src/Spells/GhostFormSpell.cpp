@@ -95,8 +95,8 @@ void GhostFormSpell::loadComponents(float startSpeed) {
 
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->height);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	spawner->size = sf::Vector2f(2.f, m_mob->getBoundingBox()->size.y);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -124,7 +124,7 @@ void GhostFormSpell::loadComponents(float startSpeed) {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
 	addComponent(pc);
 }

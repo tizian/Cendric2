@@ -8,7 +8,7 @@ void IcyAmbushSpell::load(const SpellData& bean, LevelMovableGameObject* mob, co
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, 30 * bean.skinNr, 40, 30));
+	spellAnimation->addFrame(sf::IntRect({0, 30 * bean.skinNr}, {40, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -27,10 +27,10 @@ void IcyAmbushSpell::execOnHit(LevelMovableGameObject* target) {
 	// check if port of owner is possible
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *(m_mob->getBoundingBox());
-	rec.boundingBox.left = target->getBoundingBox()->left + target->getBoundingBox()->width / 2.f - rec.boundingBox.width / 2.f;
-	rec.boundingBox.top = target->getBoundingBox()->top + (target->getBoundingBox()->height - rec.boundingBox.height);
+	rec.boundingBox.position.x = target->getBoundingBox()->position.x + target->getBoundingBox()->size.x / 2.f - rec.boundingBox.size.x / 2.f;
+	rec.boundingBox.position.y = target->getBoundingBox()->position.y + (target->getBoundingBox()->size.y - rec.boundingBox.size.y);
 	if (!m_level->collides(rec)) {
-		m_mob->setPosition(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top));
+		m_mob->setPosition(sf::Vector2f(rec.boundingBox.position.x, rec.boundingBox.position.y));
 	}
 	else {
 		m_screen->setNegativeTooltip("NotTeleport");
@@ -47,8 +47,8 @@ void IcyAmbushSpell::loadComponents() {
 
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -78,9 +78,9 @@ void IcyAmbushSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(pc);
 
-	LightData lightData(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 50.f, 0.5f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 50.f, 0.5f);
 	addComponent(new LightComponent(lightData, this));
 }

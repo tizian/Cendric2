@@ -5,7 +5,7 @@ void UnlockSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, 0, 30, 10));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {30, 10}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

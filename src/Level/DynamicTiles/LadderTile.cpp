@@ -14,7 +14,7 @@ bool LadderTile::init(const LevelTileProperties& properties) {
 
 	setSpriteOffset(sf::Vector2f(-10.f, -TILE_SIZE_F));
 	setPositionOffset(sf::Vector2f(10.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F * m_size));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F - 20.f, TILE_SIZE_F * m_size}));
 
 	return true;
 }
@@ -22,31 +22,30 @@ bool LadderTile::init(const LevelTileProperties& properties) {
 void LadderTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	
-	sf::Sprite sprite;
-	sprite.setTexture(*tex);
+	sf::Sprite sprite(*tex);
 
 	int length = std::max(1, m_size);
 	length++;
 	int tilepart = 2 - length % 3;
 
-	sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect({skinNr * TILE_SIZE, 0}, {TILE_SIZE, TILE_SIZE}));
 	m_sprites.push_back(sprite);
 	length--;
 
 	while (length > 1) {
-		sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, TILE_SIZE + tilepart * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		sprite.setTextureRect(sf::IntRect({skinNr * TILE_SIZE, TILE_SIZE + tilepart * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 		m_sprites.push_back(sprite);
 
 		tilepart = (tilepart + 1) % 3;
 		length--;
 	}
 
-	sprite.setTextureRect(sf::IntRect(skinNr * TILE_SIZE, 4 * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	sprite.setTextureRect(sf::IntRect({skinNr * TILE_SIZE, 4 * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	m_sprites.push_back(sprite);
 
 	// load arrow
 	const sf::Texture* texture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_LADDER_ARROW);
-	m_arrow.setTexture(*texture);
+	m_arrow->setTexture(*texture);
 }
 
 void LadderTile::update(const sf::Time& frametime) {
@@ -69,7 +68,7 @@ void LadderTile::render(sf::RenderTarget& target) {
 
 void LadderTile::renderAfterForeground(sf::RenderTarget& target) {
 	LevelDynamicTile::renderAfterForeground(target);
-	if (m_showSprite) target.draw(m_arrow);
+	if (m_showSprite) target.draw(*m_arrow);
 }
 
 void LadderTile::onHit(LevelMovableGameObject* mob) {
@@ -81,22 +80,22 @@ void LadderTile::onHit(LevelMovableGameObject* mob) {
 	float speed = 6.f;
 	float offset = 60.f + variance * std::cos(speed * m_time.asSeconds());
 	
-	float width = static_cast<float>(m_arrow.getTextureRect().width);
-	m_arrow.setPosition(m_mainChar->getPosition().x + 0.5f * (m_mainChar->getSize().x - width), m_mainChar->getPosition().y - offset);
+	float width = static_cast<float>(m_arrow->getTextureRect().size.x);
+	m_arrow->setPosition(sf::Vector2f(m_mainChar->getPosition().x + 0.5f * (m_mainChar->getSize().x - width), m_mainChar->getPosition().y - offset));
 }
 
 void LadderTile::setPosition(const sf::Vector2f& position) {
 	GameObject::setPosition(position);
 	float offset = 0.f;
 	for (auto& sprite : m_sprites) {
-		sprite.setPosition(getPosition().x + getSpriteOffset().x, getPosition().y + getSpriteOffset().y + offset);
+		sprite.setPosition(sf::Vector2f(getPosition().x + getSpriteOffset().x, getPosition().y + getSpriteOffset().y + offset));
 		offset += TILE_SIZE;
 	}
 }
 
 float LadderTile::getClimbingPositionY(GameObject* object) const {
-	float goHeight = object->getBoundingBox()->height;
-	float ladderBottom = getPosition().y + getBoundingBox()->height;
+	float goHeight = object->getBoundingBox()->size.y;
+	float ladderBottom = getPosition().y + getBoundingBox()->size.y;
 	float goBottom = std::round(object->getPosition().y + goHeight);
 
 	int goDiff = static_cast<int>(std::round(ladderBottom - goBottom));

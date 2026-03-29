@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include <optional>
 
 namespace particles {
 	class LineSpawner;
@@ -27,6 +28,6 @@ private:
 	sf::Vector2f m_startPos;
 	sf::Vector2f m_endPos;
 
-	sf::Sprite m_otherSprite;
+	std::optional<sf::Sprite> m_otherSprite;
 	particles::LineSpawner* m_lineSpawner = nullptr;
 };

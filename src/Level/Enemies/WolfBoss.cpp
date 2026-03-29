@@ -33,7 +33,7 @@ void WolfBoss::loadSpells() {
 	chopSpell.damage = 70;
 	chopSpell.activeDuration = sf::seconds(1000.f);
 	chopSpell.cooldown = sf::seconds(0.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 140);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {120, 140});
 	chopSpell.spellOffset = sf::Vector2f(-20.f, -50.f);
 	chopSpell.fightingTime = sf::seconds(1000.f);
 	chopSpell.castingTime = sf::seconds(1.f);
@@ -46,7 +46,7 @@ void WolfBoss::loadSpells() {
 	g_resourceManager->loadTexture(TRANSFORM_SPRITEPATH, ResourceType::Level);
 	Animation* transformedAnimation = new Animation();
 	transformedAnimation->setSpriteSheet(g_resourceManager->getTexture(TRANSFORM_SPRITEPATH));
-	transformedAnimation->addFrame(sf::IntRect(0, 0, 110, 120));
+	transformedAnimation->addFrame(sf::IntRect({0, 0}, {110, 120}));
 	m_mainChar->addAnimation(GameObjectState::Broken, transformedAnimation);
 
 	SpellData transformBeamSpell = SpellData::getSpellData(SpellID::WindGust);
@@ -55,7 +55,7 @@ void WolfBoss::loadSpells() {
 	transformBeamSpell.damagePerSecond = 0;
 	transformBeamSpell.damageType = DamageType::VOID;
 	transformBeamSpell.cooldown = sf::seconds(10.f);
-	transformBeamSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	transformBeamSpell.boundingBox = sf::FloatRect({0, 0}, {50, 50});
 	transformBeamSpell.spellOffset = sf::Vector2f(12.f, -120.f);
 	transformBeamSpell.fightingTime = sf::seconds(3.f);
 	transformBeamSpell.castingTime = sf::seconds(2.f);
@@ -71,7 +71,7 @@ void WolfBoss::loadSpells() {
 	windgustSpell.damagePerSecond = 10;
 	windgustSpell.damageType = DamageType::Ice;
 	windgustSpell.cooldown = sf::seconds(0.f);
-	windgustSpell.boundingBox = sf::FloatRect(0, 0, 1200, 350);
+	windgustSpell.boundingBox = sf::FloatRect({0, 0}, {1200, 350});
 	windgustSpell.spellOffset = sf::Vector2f(10.f, -250.f);
 	windgustSpell.fightingTime = sf::seconds(1000.f);
 	windgustSpell.castingTime = sf::seconds(1.f);
@@ -116,46 +116,46 @@ void WolfBoss::handleAttackInput() {
 }
 
 void WolfBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 200.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {200.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-50.f, -160.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.05f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 13; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 300, 0, 300, 250));
+		walkingAnimation->addFrame(sf::IntRect({i * 300, 0}, {300, 250}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(4 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(6 * 300, 250, 300, 250));
-	idleAnimation->addFrame(sf::IntRect(5 * 300, 250, 300, 250));
+	idleAnimation->addFrame(sf::IntRect({4 * 300, 250}, {300, 250}));
+	idleAnimation->addFrame(sf::IntRect({5 * 300, 250}, {300, 250}));
+	idleAnimation->addFrame(sf::IntRect({6 * 300, 250}, {300, 250}));
+	idleAnimation->addFrame(sf::IntRect({5 * 300, 250}, {300, 250}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(3 * 300, 250, 300, 250));
+	jumpingAnimation->addFrame(sf::IntRect({3 * 300, 250}, {300, 250}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(9 * 300, 750, 300, 250));
+	deadAnimation->addFrame(sf::IntRect({9 * 300, 750}, {300, 250}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// casting before charge attack
 	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
-	castingAnimation->addFrame(sf::IntRect(0 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(2 * 300, 250, 300, 250));
-	castingAnimation->addFrame(sf::IntRect(1 * 300, 250, 300, 250));
+	castingAnimation->addFrame(sf::IntRect({0 * 300, 250}, {300, 250}));
+	castingAnimation->addFrame(sf::IntRect({1 * 300, 250}, {300, 250}));
+	castingAnimation->addFrame(sf::IntRect({2 * 300, 250}, {300, 250}));
+	castingAnimation->addFrame(sf::IntRect({1 * 300, 250}, {300, 250}));
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
@@ -163,7 +163,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	Animation* casting2Animation = new Animation();
 	casting2Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 12; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
+		casting2Animation->addFrame(sf::IntRect({i * 300, 500}, {300, 250}));
 	}
 	casting2Animation->setLooped(false);
 
@@ -172,7 +172,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	// beam attack
 	Animation* beamAnimation = new Animation();
 	beamAnimation->setSpriteSheet(tex);
-	beamAnimation->addFrame(sf::IntRect(11 * 300, 500, 300, 250));
+	beamAnimation->addFrame(sf::IntRect({11 * 300, 500}, {300, 250}));
 
 	addAnimation(GameObjectState::Fighting2, beamAnimation);
 
@@ -180,7 +180,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	Animation* casting3Animation = new Animation();
 	casting3Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		casting3Animation->addFrame(sf::IntRect(i * 300, 500, 300, 250));
+		casting3Animation->addFrame(sf::IntRect({i * 300, 500}, {300, 250}));
 	}
 	casting3Animation->setLooped(false);
 
@@ -189,7 +189,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	// windgust attack
 	Animation* windgustAnimation = new Animation();
 	windgustAnimation->setSpriteSheet(tex);
-	windgustAnimation->addFrame(sf::IntRect(7 * 300, 250, 300, 250));
+	windgustAnimation->addFrame(sf::IntRect({7 * 300, 250}, {300, 250}));
 
 	addAnimation(GameObjectState::Fighting3, windgustAnimation);
 
@@ -197,7 +197,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	Animation* tripoverAnimation = new Animation();
 	tripoverAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 5; ++i) {
-		tripoverAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
+		tripoverAnimation->addFrame(sf::IntRect({i * 300, 750}, {300, 250}));
 	}
 	tripoverAnimation->setLooped(false);
 
@@ -206,10 +206,10 @@ void WolfBoss::loadAnimation(int skinNr) {
 	// laying
 	Animation* layingAnimation = new Animation();
 	layingAnimation->setSpriteSheet(tex);
-	layingAnimation->addFrame(sf::IntRect(4 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(6 * 300, 750, 300, 250));
-	layingAnimation->addFrame(sf::IntRect(5 * 300, 750, 300, 250));
+	layingAnimation->addFrame(sf::IntRect({4 * 300, 750}, {300, 250}));
+	layingAnimation->addFrame(sf::IntRect({5 * 300, 750}, {300, 250}));
+	layingAnimation->addFrame(sf::IntRect({6 * 300, 750}, {300, 250}));
+	layingAnimation->addFrame(sf::IntRect({5 * 300, 750}, {300, 250}));
 
 	addAnimation(GameObjectState::Laying, layingAnimation);
 
@@ -217,7 +217,7 @@ void WolfBoss::loadAnimation(int skinNr) {
 	Animation* standupAnimation = new Animation();
 	standupAnimation->setSpriteSheet(tex);
 	for (int i = 8; i < 11; ++i) {
-		standupAnimation->addFrame(sf::IntRect(i * 300, 750, 300, 250));
+		standupAnimation->addFrame(sf::IntRect({i * 300, 750}, {300, 250}));
 	}
 	standupAnimation->setLooped(false);
 

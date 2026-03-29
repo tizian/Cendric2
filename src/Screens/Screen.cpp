@@ -7,15 +7,15 @@
 #define VIEW_MARGIN 20.f;
 
 inline bool isInsideView(const sf::View& targetView, const sf::FloatRect& boundingBox) {
-	sf::FloatRect view(targetView.getCenter().x - targetView.getSize().x / 2.f,
-		targetView.getCenter().y - targetView.getSize().y / 2.f,
-		targetView.getSize().x,
-		targetView.getSize().y);
+	sf::FloatRect view({targetView.getCenter().x - targetView.getSize().x / 2.f,
+		targetView.getCenter().y - targetView.getSize().y / 2.f},
+		{targetView.getSize().x,
+		targetView.getSize().y});
 
-	view.left -= VIEW_MARGIN;
-	view.top -= VIEW_MARGIN;
-	view.width += 2 * VIEW_MARGIN;
-	view.height += 2 * VIEW_MARGIN;
+	view.position.x -= VIEW_MARGIN;
+	view.position.y -= VIEW_MARGIN;
+	view.size.x += 2 * VIEW_MARGIN;
+	view.size.y += 2 * VIEW_MARGIN;
 	return fastIntersect(view, boundingBox);
 }
 
@@ -136,13 +136,13 @@ void Screen::updateObjects(GameObjectType type, const sf::Time& frameTime) {
 }
 
 inline bool compareYCoordAsc(const GameObject* go1, const GameObject* go2) { 
-	return (go1->getPosition().y + go1->getBoundingBox()->height < 
-		go2->getPosition().y + go2->getBoundingBox()->height);
+	return (go1->getPosition().y + go1->getBoundingBox()->size.y < 
+		go2->getPosition().y + go2->getBoundingBox()->size.y);
 }
 
 inline bool compareYCoordDesc(const GameObject* go1, const GameObject* go2) {
-	return (go1->getPosition().y + go1->getBoundingBox()->height >
-		go2->getPosition().y + go2->getBoundingBox()->height);
+	return (go1->getPosition().y + go1->getBoundingBox()->size.y >
+		go2->getPosition().y + go2->getBoundingBox()->size.y);
 }
 
 void Screen::depthSortObjects(GameObjectType type, bool asc) {
@@ -182,7 +182,7 @@ void Screen::setTooltipTextRaw(const std::string& text, const sf::Color& color, 
 	m_tooltipText.setTextStyle(TextStyle::Shadowed);
 	m_tooltipText.setTextAlignment(TextAlignment::Center);
 	m_tooltipText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-	m_tooltipText.setPosition(std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().width) / 2.f), m_isTooltipTop ? 12.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().height - 12.f);
+	m_tooltipText.setPosition({std::max(0.f, (WINDOW_WIDTH - m_tooltipText.getLocalBounds().size.x) / 2.f), m_isTooltipTop ? 12.f : WINDOW_HEIGHT - m_tooltipText.getLocalBounds().size.y - 12.f});
 	m_tooltipText.setColor(color);
 	m_tooltipTime = sf::seconds(1.f + 0.06f * static_cast<float>(text.length()));
 }

@@ -21,7 +21,7 @@ void WindGustSpellCreator::execExecuteSpell(const sf::Vector2f& target) {
 }
 
 void WindGustSpellCreator::addRangeModifier(int level) {
-	m_spellData.boundingBox.width += m_spellData.rangeModifierAddition * level;
+	m_spellData.boundingBox.size.x += m_spellData.rangeModifierAddition * level;
 }
 
 void WindGustSpellCreator::addStrengthModifier(int level) {

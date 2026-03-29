@@ -41,7 +41,7 @@ void ElysiaFledglingEnemy::loadSpells() {
 	chopSpell.damage = 5;
 	chopSpell.damagePerSecond = 6;
 	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.boundingBox = sf::FloatRect({10, 0}, {30, 30});
 	chopSpell.fightingTime = sf::milliseconds(3 * 100);
 	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 
@@ -121,7 +121,7 @@ sf::Time ElysiaFledglingEnemy::getConfiguredChasingTime() const {
 }
 
 void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {60.f, 54.f}));
 	setSpriteOffset(sf::Vector2f(-5.f, -50.f));
 	int width = 70;
 	int height = 110;
@@ -130,7 +130,7 @@ void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		flyingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -138,7 +138,7 @@ void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for(int i = 0; i < 4; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -146,7 +146,7 @@ void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 4; i < 7; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -154,14 +154,14 @@ void ElysiaFledglingEnemy::loadAnimation(int skinNr) {
 	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(7 * width, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({7 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

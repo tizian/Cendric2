@@ -31,7 +31,7 @@ private:
 	bool m_isSelected = false;
 	bool m_isClicked = false;
 	std::string m_itemID;
-	sf::Text m_text;
+	std::optional<sf::Text> m_text;
 };
 
 class MapScreen;
@@ -62,7 +62,7 @@ private:
 	ScrollBar* m_scrollBar = nullptr;
 	ScrollHelper *m_scrollHelper = nullptr;
 
-	sf::Sprite m_cookingSprite;
+	std::optional<sf::Sprite> m_cookingSprite;
 	BitmapText m_title;
 	std::string m_oldItemID;
 	

@@ -10,7 +10,7 @@ void TelekinesisSpell::load(const SpellData& bean, LevelMovableGameObject* mob, 
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, 0, 40, 30));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {40, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -30,7 +30,7 @@ void TelekinesisSpell::update(const sf::Time& frameTime) {
 
 	// check collisions with dynamic tiles
 	if (m_data.isDynamicTileEffect) {
-		sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+		sf::FloatRect tmp({nextPosition.x, nextPosition.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
 		m_level->collideWithDynamicTiles(this, tmp);
 	}
 
@@ -77,8 +77,8 @@ void TelekinesisSpell::loadComponents() {
 
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -108,6 +108,6 @@ void TelekinesisSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(pc);
 }

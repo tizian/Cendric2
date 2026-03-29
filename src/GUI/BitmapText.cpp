@@ -12,7 +12,7 @@ const int NUM_GLYPHS_V = 14;
 const int TAB_TO_SPACES = 4;
 
 BitmapText::BitmapText() {
-	m_vertices = sf::VertexArray(sf::Quads);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
 	m_color = COLOR_WHITE;
 	m_style = TextStyle::Default;
 	m_characterSize = 8;
@@ -24,7 +24,7 @@ BitmapText::BitmapText() {
 BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment alignment) {
 	m_style = style;
 	m_string = string;
-	m_vertices = sf::VertexArray(sf::Quads);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.2f;
@@ -34,7 +34,7 @@ BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment
 
 BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_style = TextStyle::Default;
-	m_vertices = sf::VertexArray(sf::Quads);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
 	m_string = string;
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
@@ -66,7 +66,7 @@ void BitmapText::setColor(const sf::Color& color) {
 	init();	// TODO: could only replace vertex color attributes instead of all vertex data
 }
 
-void BitmapText::setColorAlpha(sf::Uint8 alpha) {
+void BitmapText::setColorAlpha(std::uint8_t alpha) {
 	m_color.a = alpha;
 	init();	// TODO: could only replace vertex color attributes instead of all vertex data
 }
@@ -198,10 +198,10 @@ void BitmapText::init() {
 		float u = (c % NUM_GLYPHS_U) * du;
 		float v = (c / NUM_GLYPHS_U) * dv;
 
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY), m_color, sf::Vector2f(u, v)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY), m_color, sf::Vector2f(u + du, v)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX + dx, curY + dy), m_color, sf::Vector2f(u + du, v + dv)));
-		m_vertices.append(sf::Vertex(sf::Vector2f(curX, curY + dy), m_color, sf::Vector2f(u, v + dv)));
+		m_vertices.append(sf::Vertex{{curX, curY}, m_color, {u, v}});
+		m_vertices.append(sf::Vertex{{curX + dx, curY}, m_color, {u + du, v}});
+		m_vertices.append(sf::Vertex{{curX + dx, curY + dy}, m_color, {u + du, v + dv}});
+		m_vertices.append(sf::Vertex{{curX, curY + dy}, m_color, {u, v + dv}});
 
 		curX += dx;
 	}

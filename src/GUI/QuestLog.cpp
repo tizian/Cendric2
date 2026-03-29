@@ -39,7 +39,7 @@ QuestLog::QuestLog(WorldInterface* interface) {
 
 void QuestLog::init() {
 	// init window
-	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	sf::FloatRect box({LEFT, TOP}, {WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -51,14 +51,11 @@ void QuestLog::init() {
 	m_descriptionWindow = new QuestDescriptionWindow(m_core);
 
 	// init text
-	m_title.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET));
+	m_title.setPosition({LEFT + GUIConstants::TEXT_OFFSET, TOP + GUIConstants::TEXT_OFFSET});
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setString(g_textProvider->getText("Journal"));
-	m_title.setPosition(
-		m_window->getPosition().x +
-		WIDTH / 2 -
-		m_title.getLocalBounds().width / 2, m_title.getPosition().y);
+	m_title.setPosition({m_window->getPosition().x + WIDTH / 2 - m_title.getLocalBounds().size.x / 2, m_title.getPosition().y});
 
 	// init tabbar
 	const auto nTabs = 3;
@@ -68,7 +65,7 @@ void QuestLog::init() {
 	const auto y = TOP + GUIConstants::GUI_TABS_TOP;
 
 	m_tabBar = new TabBar();
-	m_tabBar->init(sf::FloatRect(x, y, width, height), nTabs);
+	m_tabBar->init(sf::FloatRect({x, y}, {width, height}), nTabs);
 	for (auto i = 0; i < nTabs; ++i) {
 		m_tabBar->getTabButton(i)->setText(EnumNames::getQuestStateName(static_cast<QuestState>(i + 1)));
 		m_tabBar->getTabButton(i)->setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
@@ -81,14 +78,14 @@ void QuestLog::init() {
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	const sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	const sf::FloatRect scrollBox({LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	// init empty text
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("NoQuests"));
 	const auto bounds = m_emptyText.getBounds();
-	m_emptyText.setPosition(scrollBox.left + 0.5f * (scrollBox.width - bounds.width), scrollBox.top + 0.5f * (scrollBox.height - bounds.height));
+	m_emptyText.setPosition({scrollBox.position.x + 0.5f * (scrollBox.size.x - bounds.size.x), scrollBox.position.y + 0.5f * (scrollBox.size.y - bounds.size.y)});
 
 	reload();
 
@@ -271,7 +268,7 @@ QuestEntry::QuestEntry(const QuestData& data, WorldInterface* interface, bool is
 	}
 	m_name.setString(questTitle);
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {m_name.getLocalBounds().size.x, m_name.getLocalBounds().size.y}));
 	setInputInDefaultView(true);
 
 	setupQuestMarker(isActiveQuest, interface);

@@ -39,7 +39,7 @@ void SeagullEnemy::loadSpells() {
 	chopSpell.damage = 2;
 	chopSpell.damagePerSecond = 5;
 	chopSpell.duration = sf::seconds(2.f);
-	chopSpell.boundingBox = sf::FloatRect(10, 0, 30, 30);
+	chopSpell.boundingBox = sf::FloatRect({10, 0}, {30, 30});
 	chopSpell.fightingTime = sf::milliseconds(3 * 100);
 	chopSpell.spellOffset = sf::Vector2f(0.f, 0.f);
 
@@ -99,39 +99,39 @@ sf::Time SeagullEnemy::getConfiguredChasingTime() const {
 }
 
 void SeagullEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 54.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {60.f, 54.f}));
 	setSpriteOffset(sf::Vector2f(-5.f, -5.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
-	flyingAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
-	flyingAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
-	flyingAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
-	flyingAnimation->addFrame(sf::IntRect(210, 0, 70, 64));
+	flyingAnimation->addFrame(sf::IntRect({0, 0}, {70, 64}));
+	flyingAnimation->addFrame(sf::IntRect({70, 0}, {70, 64}));
+	flyingAnimation->addFrame(sf::IntRect({140, 0}, {70, 64}));
+	flyingAnimation->addFrame(sf::IntRect({210, 0}, {70, 64}));
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 0, 70, 64));
-	idleAnimation->addFrame(sf::IntRect(70, 0, 70, 64));
-	idleAnimation->addFrame(sf::IntRect(140, 0, 70, 64));
-	idleAnimation->addFrame(sf::IntRect(210, 0, 70, 64));
+	idleAnimation->addFrame(sf::IntRect({0, 0}, {70, 64}));
+	idleAnimation->addFrame(sf::IntRect({70, 0}, {70, 64}));
+	idleAnimation->addFrame(sf::IntRect({140, 0}, {70, 64}));
+	idleAnimation->addFrame(sf::IntRect({210, 0}, {70, 64}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(0, 64, 70, 64));
-	fightingAnimation->addFrame(sf::IntRect(70, 64, 70, 64));
-	fightingAnimation->addFrame(sf::IntRect(140, 64, 70, 64));
+	fightingAnimation->addFrame(sf::IntRect({0, 64}, {70, 64}));
+	fightingAnimation->addFrame(sf::IntRect({70, 64}, {70, 64}));
+	fightingAnimation->addFrame(sf::IntRect({140, 64}, {70, 64}));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(0, 128, 70, 64));
+	deadAnimation->addFrame(sf::IntRect({0, 128}, {70, 64}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 

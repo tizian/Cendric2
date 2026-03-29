@@ -73,7 +73,7 @@ void OozeEnemy::handleAttackInput() {
 }
 
 void OozeEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 30.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 30.f}));
 	setSpriteOffset(sf::Vector2f(-5.f, -20.f));
 	int width = 60;
 	int height = 50;
@@ -81,24 +81,24 @@ void OozeEnemy::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::milliseconds(200));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0 * width, height * skinNr, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, height * skinNr, width, height));
-	idleAnimation->addFrame(sf::IntRect(2 * width, height * skinNr, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, height * skinNr, width, height));
+	idleAnimation->addFrame(sf::IntRect({0 * width, height * skinNr}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, height * skinNr}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({2 * width, height * skinNr}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, height * skinNr}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* walkingAnimation = new Animation(sf::milliseconds(150));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 3; i < 9; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, height * skinNr, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, height * skinNr}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, height * skinNr, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, height * skinNr}, {width, height}));
 	jumpingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
@@ -106,7 +106,7 @@ void OozeEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 20; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * width, height * skinNr, width, height));
+		deadAnimation->addFrame(sf::IntRect({i * width, height * skinNr}, {width, height}));
 	}
 	deadAnimation->setLooped(false);
 

@@ -22,31 +22,31 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, ItemType type) {
 
 	int offset = 0;
 	for (int i = 0; i < eq.frames_walk; ++i) {
-		texturePositions[GameObjectState::Walking].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Walking].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_idle; ++i) {
-		texturePositions[GameObjectState::Idle].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Idle].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_jump; ++i) {
-		texturePositions[GameObjectState::Jumping].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Jumping].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_fight; ++i) {
-		texturePositions[GameObjectState::Fighting].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Fighting].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_climb1; ++i) {
-		texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Climbing_1].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 	for (int i = 0; i < eq.frames_climb2; ++i) {
-		texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect(offset * EQ_SIZE, 0, EQ_SIZE, EQ_SIZE));
+		texturePositions[GameObjectState::Climbing_2].push_back(sf::IntRect({offset * EQ_SIZE, 0}, {EQ_SIZE, EQ_SIZE}));
 		++offset;
 	}
 
-	setBoundingBox(sf::FloatRect(0, 0, static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE)));
+	setBoundingBox(sf::FloatRect({0, 0}, {static_cast<float>(EQ_SIZE), static_cast<float>(EQ_SIZE)}));
 
 	if (!eq.texture_path.empty()) {
 		g_resourceManager->loadTexture(eq.texture_path, ResourceType::Level);
@@ -72,7 +72,7 @@ void LevelEquipment::load(const ItemEquipmentBean* itemBean, ItemType type) {
 
 void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const ItemEquipmentParticleBean* particles) {
 	if (light != nullptr) {
-		LightData lightData(LightData(light->light_offset + sf::Vector2f(0.5f * getBoundingBox()->width, 0), light->light_radius, light->brightness));
+		LightData lightData(LightData(light->light_offset + sf::Vector2f(0.5f * getBoundingBox()->size.x, 0), light->light_radius, light->brightness));
 		setLightComponent(lightData);
 	}
 
@@ -129,12 +129,12 @@ void LevelEquipment::loadComponents(const ItemEquipmentLightBean* light, const I
 }
 
 void LevelEquipment::calculatePositionAccordingToMainChar(sf::Vector2f& position) const {
-	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->width / 2), m_mainChar->getPosition().y);
+	sf::Vector2f mainCharPosition(m_mainChar->getPosition().x + (m_mainChar->getBoundingBox()->size.x / 2), m_mainChar->getPosition().y);
 	sf::Vector2f offset(-60.f, -30.f);
 	if (!m_mainChar->isFacingRight())
-		offset.x = -offset.x - getBoundingBox()->width;
+		offset.x = -offset.x - getBoundingBox()->size.x;
 	if (m_mainChar->isUpsideDown())
-		offset.y = m_mainChar->getBoundingBox()->height - offset.y - getBoundingBox()->height;
+		offset.y = m_mainChar->getBoundingBox()->size.y - offset.y - getBoundingBox()->size.y;
 
 	position.x = (mainCharPosition + offset).x;
 	position.y = (mainCharPosition + offset).y;
@@ -209,8 +209,8 @@ void LevelEquipment::setLightComponent(const LightData& data) {
 void LevelEquipment::setParticleComponent(const ParticleComponentData& data, const sf::Vector2f& offset, const sf::Vector2f& goalOffset) {
 	delete m_particleComponent;
 	m_particleComponent = new ParticleComponent(data, this);
-	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0) + offset);
-	m_particleComponent->setGoalOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0) + goalOffset);
+	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0) + offset);
+	m_particleComponent->setGoalOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0) + goalOffset);
 	addComponent(m_particleComponent);
 }
 

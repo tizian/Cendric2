@@ -4,6 +4,7 @@
 #include "GUI/Window.h"
 #include "GUI/BitmapText.h"
 #include "GUI/ArrowButton.h"
+#include <optional>
 
 class MapScreen;
 
@@ -36,6 +37,6 @@ private:
 	int m_currentPage = -1;
 	void setPage(int index);
 
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 	bool m_showSprite = false;
 };

@@ -207,15 +207,15 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 
 	const sf::FloatRect& bb = *m_mob->getBoundingBox();
 	const Level& level = *m_mob->getLevel();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 	rec.excludedGameObject = m_mob;
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingDown = nextPosition.y > bb.position.y;
+	bool isMovingRight = nextPosition.x > bb.position.x;
 
 	// should we use strategy 2: try y direction first, then x direction?
 	bool tryYfirst = false;
@@ -236,11 +236,11 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 			m_mob->setAccelerationX(0.f);
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
 
 		}
 		else {
-			nextBoundingBoxY.left = nextPosition.x;
+			nextBoundingBoxY.position.x = nextPosition.x;
 		}
 
 		// check for collision on y axis
@@ -279,10 +279,10 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 		}
 		else {
-			nextBoundingBoxX.top = nextPosition.y;
+			nextBoundingBoxX.position.y = nextPosition.y;
 		}
 
 		// check for collision on x axis
@@ -300,20 +300,20 @@ void MovingBehavior::checkXYDirection(const sf::Vector2f& nextPosition, bool& co
 	if (std::abs(m_mob->getVelocity().y) > 0.f)
 		m_isGrounded = false;
 
-	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
-		(isMovingDown && nextBoundingBoxY.top > level.getWorldRect().top + level.getWorldRect().height)) {
+	if ((!isMovingDown && nextBoundingBoxY.position.y < -bb.size.y) ||
+		(isMovingDown && nextBoundingBoxY.position.y > level.getWorldRect().position.y + level.getWorldRect().size.y)) {
 		m_mob->setDead();
 	}
 
 	// check for wrong parent
 	if (MovingParent* mt = m_mob->getMovingParent()) {
 		if (!isUpsideDown()) {
-			if (mt->getBoundingBox()->top + Epsilon < m_mob->getBoundingBox()->top + m_mob->getBoundingBox()->height) {
+			if (mt->getBoundingBox()->position.y + Epsilon < m_mob->getBoundingBox()->position.y + m_mob->getBoundingBox()->size.y) {
 				m_mob->setMovingParent(nullptr);
 			}
 		}
 		else {
-			if (mt->getBoundingBox()->top + mt->getBoundingBox()->height > Epsilon + m_mob->getBoundingBox()->top) {
+			if (mt->getBoundingBox()->position.y + mt->getBoundingBox()->size.y > Epsilon + m_mob->getBoundingBox()->position.y) {
 				m_mob->setMovingParent(nullptr);
 			}
 		}

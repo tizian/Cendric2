@@ -3,7 +3,7 @@
 ArrowSelector::ArrowSelector() : GameObject(),
 m_rightArrow(true),
 m_leftArrow(false),
-m_button(sf::FloatRect(0.f, 0.f, 50.f, 50.f)) {
+m_button(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(50.f, 50.f))) {
 
 	m_label.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_button.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
@@ -28,15 +28,15 @@ void ArrowSelector::render(sf::RenderTarget& renderTarget) {
 void ArrowSelector::recalculatePosition() {
 	sf::Vector2f pos = getPosition();
 	m_button.setPosition(sf::Vector2f(pos.x + GUIConstants::LABEL_OFFSET, pos.y));
-	float buttonHalf = m_button.getBoundingBox()->height / 2.f;
+	float buttonHalf = m_button.getBoundingBox()->size.y / 2.f;
 	m_label.setPosition(sf::Vector2f(pos.x, pos.y +
-		buttonHalf - m_label.getLocalBounds().height / 2.f));
+		buttonHalf - m_label.getLocalBounds().size.y / 2.f));
 	m_leftArrow.setPosition(m_button.getPosition() + sf::Vector2f(
-		-GUIConstants::BUTTON_MARGIN - m_leftArrow.getBoundingBox()->width,
-		buttonHalf - m_leftArrow.getBoundingBox()->height / 2.f));
+		-GUIConstants::BUTTON_MARGIN - m_leftArrow.getBoundingBox()->size.x,
+		buttonHalf - m_leftArrow.getBoundingBox()->size.y / 2.f));
 	m_rightArrow.setPosition(m_button.getPosition() + sf::Vector2f(
-		GUIConstants::BUTTON_MARGIN + m_button.getBoundingBox()->width,
-		buttonHalf - m_rightArrow.getBoundingBox()->height / 2.f));
+		GUIConstants::BUTTON_MARGIN + m_button.getBoundingBox()->size.x,
+		buttonHalf - m_rightArrow.getBoundingBox()->size.y / 2.f));
 }
 
 void ArrowSelector::setPosition(const sf::Vector2f& pos) {
@@ -85,8 +85,8 @@ void ArrowSelector::addOption(const std::string& optionKey) {
 void ArrowSelector::addOptionRaw(const std::string& rawOption) {
 	m_options.push_back(rawOption);
 	float usedWidth = GUIConstants::CHARACTER_SIZE_M * static_cast<int>(rawOption.length()) + 30.f;
-	if (usedWidth > m_button.getBoundingBox()->width) {
-		m_button.setSize(sf::Vector2f(usedWidth, m_button.getBoundingBox()->height));
+	if (usedWidth > m_button.getBoundingBox()->size.x) {
+		m_button.setSize(sf::Vector2f(usedWidth, m_button.getBoundingBox()->size.y));
 		recalculatePosition();
 	}
 	if (m_chosenOptionIndex < 0) {
@@ -104,7 +104,7 @@ void ArrowSelector::setOptionIndex(int index) {
 
 void ArrowSelector::setLabelText(const std::string& text) {
 	setLabelTextRaw(g_textProvider->getCroppedText(text, GUIConstants::CHARACTER_SIZE_M, 
-		static_cast<int>(GUIConstants::LABEL_OFFSET - m_rightArrow.getBoundingBox()->width)));
+		static_cast<int>(GUIConstants::LABEL_OFFSET - m_rightArrow.getBoundingBox()->size.x)));
 }
 
 void ArrowSelector::setLabelTextRaw(const std::string& text) {

@@ -28,8 +28,8 @@ MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar) {
 
 	const World& map = *m_screen->getWorld();
 
-	m_mainCharMarker.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
-	m_mainCharMarker.setTextureRect(sf::IntRect(0, 25, 25, 25));
+	m_mainCharMarker->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
+	m_mainCharMarker->setTextureRect(sf::IntRect({0, 25}, {25, 25}));
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setTextStyle(TextStyle::Shadowed);
@@ -72,7 +72,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 
 	if (m_isOnCurrentMap) {
 		updateFogOfWar(map);
-		m_mainCharMarker.setPosition(m_position +
+		m_mainCharMarker->setPosition(m_position +
 			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
 	}
 
@@ -134,13 +134,13 @@ void MapOverlay::setMapIndex(int index) {
 	auto const& map = m_maps[index];
 
 	m_boundingBox = map->windowSize;
-	m_position.x = m_boundingBox.left;
-	m_position.y = m_boundingBox.top;
+	m_position.x = m_boundingBox.position.x;
+	m_position.y = m_boundingBox.position.y;
 
-	m_window->setSize(sf::Vector2f(m_boundingBox.width + 1.f, m_boundingBox.height + 1.f));
+	m_window->setSize(sf::Vector2f(m_boundingBox.size.x + 1.f, m_boundingBox.size.y + 1.f));
 	m_window->setPosition(sf::Vector2f(m_position.x - 1.f, m_position.y - 1.f));
 
-	map->map.setPosition(m_position);
+	map->map->setPosition(m_position);
 	map->fogOfWarTileMap.setPosition(m_position);
 	updateFogOfWar(map);
 
@@ -151,7 +151,7 @@ void MapOverlay::setMapIndex(int index) {
 		breakPos = worldName.find('\n');
 	}
 	m_title.setString(worldName);
-	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getBounds().width) / 2.f, m_boundingBox.top - 24.f));
+	m_title.setPosition({(WINDOW_WIDTH - m_title.getBounds().size.x) / 2.f, m_boundingBox.position.y - 24.f});
 
 	m_isOnCurrentMap = (m_screen->getWorldData()->id == map->mapId);
 	m_currentMap = index;
@@ -179,25 +179,25 @@ MapOverlayData* MapOverlay::createMapOverlayData(const std::string& id, const sf
 	data->map = sprite;
 
 	sf::Vector2f mapSize = sf::Vector2f(data->mapSize.x * TILE_SIZE_F, data->mapSize.y * TILE_SIZE_F);
-	sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map.getTextureRect().width), static_cast<float>(data->map.getTextureRect().height));
+	sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map->getTextureRect().size.x), static_cast<float>(data->map->getTextureRect().size.y));
 
 	// check out the limiting factor for our scale
 	if (data->mapSize.x / MAX_WIDTH > data->mapSize.y / MAX_HEIGHT) {
-		data->windowSize.width = MAX_WIDTH;
-		data->scale = data->windowSize.width / mapSize.x;
-		data->windowSize.height = data->scale * mapSize.y;
-		data->windowSize.left = LEFT;
-		data->windowSize.top = (WINDOW_HEIGHT - data->windowSize.height) / 2.f;
+		data->windowSize.size.x = MAX_WIDTH;
+		data->scale = data->windowSize.size.x / mapSize.x;
+		data->windowSize.size.y = data->scale * mapSize.y;
+		data->windowSize.position.x = LEFT;
+		data->windowSize.position.y = (WINDOW_HEIGHT - data->windowSize.size.y) / 2.f;
 	}
 	else {
-		data->windowSize.height = MAX_HEIGHT;
-		data->scale = data->windowSize.height / mapSize.y;
-		data->windowSize.width = data->scale * mapSize.x;
-		data->windowSize.top = TOP;
-		data->windowSize.left = (WINDOW_WIDTH - data->windowSize.width) / 2.f;
+		data->windowSize.size.y = MAX_HEIGHT;
+		data->scale = data->windowSize.size.y / mapSize.y;
+		data->windowSize.size.x = data->scale * mapSize.x;
+		data->windowSize.position.y = TOP;
+		data->windowSize.position.x = (WINDOW_WIDTH - data->windowSize.size.x) / 2.f;
 	}
 
-	data->map.setScale(data->windowSize.width / spriteSize.x, data->windowSize.height / spriteSize.y);
+	data->map->setScale({data->windowSize.size.x / spriteSize.x, data->windowSize.size.y / spriteSize.y});
 
 	return data;
 }
@@ -208,9 +208,8 @@ void MapOverlay::renderLevelOverlay(float scale) {
 
 	// background (white)
 	sf::Image img;
-	img.create(
-		static_cast<unsigned int>(std::round(lData->mapSize.x * TILE_SIZE_F * scale)),
-		static_cast<unsigned int>(std::round(lData->mapSize.y * TILE_SIZE_F * scale)), COLOR_BLACK);
+	img.resize({static_cast<unsigned int>(std::round(lData->mapSize.x * TILE_SIZE_F * scale)),
+		static_cast<unsigned int>(std::round(lData->mapSize.y * TILE_SIZE_F * scale))});
 
 	float pixelSize = TILE_SIZE_F * scale;
 
@@ -221,8 +220,8 @@ void MapOverlay::renderLevelOverlay(float scale) {
 			sf::Image img2;
 			unsigned int sizeX = static_cast<unsigned int>(std::round((i + 1) * pixelSize)) - static_cast<unsigned int>(std::round(i * pixelSize));
 			unsigned int sizeY = static_cast<unsigned int>(std::round((j + 1) * pixelSize)) - static_cast<unsigned int>(std::round(j * pixelSize));
-			img2.create(sizeX, sizeY, COLOR_TWILIGHT_INACTIVE);
-			img.copy(img2, static_cast<unsigned int>(std::round(i * pixelSize)), static_cast<unsigned int>(std::round(j * pixelSize)));
+			img2.resize({sizeX, sizeY}, COLOR_TWILIGHT_INACTIVE);
+			img.copy(img2, {static_cast<unsigned int>(std::round(i * pixelSize)), static_cast<unsigned int>(std::round(j * pixelSize))});
 		}
 	}
 
@@ -293,12 +292,12 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	m_levelOverlayTexture.loadFromImage(img);
 
 	// and save as sprite
-	m_levelOverlaySprite.setTexture(m_levelOverlayTexture, true);
+	(*m_levelOverlaySprite).setTexture(m_levelOverlayTexture, true);
 }
 
 void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY) {
-	image.copy(m_levelOverlayIcons, static_cast<unsigned int>(std::round(pos.x - 12.5)), static_cast<unsigned int>(std::round(pos.y - 12.5)),
-		sf::IntRect(posX * 25, posY * 25, 25, 25), true);
+	image.copy(m_levelOverlayIcons, {static_cast<unsigned int>(std::round(pos.x - 12.5)), static_cast<unsigned int>(std::round(pos.y - 12.5))},
+		sf::IntRect({posX * 25, posY * 25}, {25, 25}), true);
 }
 
 void MapOverlay::reloadButtonGroup() {
@@ -331,7 +330,7 @@ void MapOverlay::reloadLevelOverlay() {
 
 	renderLevelOverlay(m_maps[0]->scale);
 	m_maps[0]->map = m_levelOverlaySprite;
-	m_maps[0]->map.setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
+	(*m_maps[0]->map).setPosition({m_boundingBox.position.x, m_boundingBox.position.y});
 	m_needsLevelOverlayReload = false;
 }
 
@@ -358,7 +357,7 @@ void MapOverlay::reloadMaps() {
 			lScreen->getWorldData()->mapSize.y * TILE_SIZE_F);
 		renderLevelOverlay(getScale(mapSize));
 		MapOverlayData* data = createMapOverlayData(lScreen->getWorldData()->id, lScreen->getWorldData()->mapSize,
-			m_levelOverlaySprite);
+			*m_levelOverlaySprite);
 
 		m_maps.push_back(data);
 
@@ -385,7 +384,7 @@ void MapOverlay::reloadMaps() {
 			sf::Sprite(*g_resourceManager->getTexture(mapFilename)));
 
 		data->fogOfWarTileMap.initFogOfWar(data->mapSize);
-		data->fogOfWarTileMap.setScale(data->scale, data->scale);
+		data->fogOfWarTileMap.setScale({data->scale, data->scale});
 
 		// load buttons
 		sf::Texture* tex = g_resourceManager->getTexture(iconFilename);
@@ -520,7 +519,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	auto map = getCurrentMap();
 	if (map == nullptr) return;
 
-	target.draw(map->map);
+	target.draw(*map->map);
 	target.draw(map->fogOfWarTileMap);
 
 	target.draw(m_title);
@@ -532,7 +531,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	}
 
 	if (m_isOnCurrentMap)
-		target.draw(m_mainCharMarker);
+		target.draw(*m_mainCharMarker);
 
 	for (auto qm : m_questMarkers) {
 		qm->render(target);
@@ -578,21 +577,21 @@ WaypointMarker::WaypointMarker(MainCharacter* mainChar, const sf::Vector2f& wayp
 
 void WaypointMarker::loadAnimation() {
 	// load animations
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 25.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {25.f, 25.f}));
 
 	Animation* activeAnimation = new Animation();
 	activeAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
 	for (int i = 2; i < 6; i++)
-		activeAnimation->addFrame(sf::IntRect(i * 25, 0, 25, 25));
+		activeAnimation->addFrame(sf::IntRect({i * 25, 0}, {25, 25}));
 
 	for (int i = 5; i > 1; i--)
-		activeAnimation->addFrame(sf::IntRect(i * 25, 0, 25, 25));
+		activeAnimation->addFrame(sf::IntRect({i * 25, 0}, {25, 25}));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_MAPMARKERS));
-	idleAnimation->addFrame(sf::IntRect(25, 0, 25, 25));
+	idleAnimation->addFrame(sf::IntRect({25, 0}, {25, 25}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -616,7 +615,7 @@ std::string WaypointMarker::getTooltipString() const {
 
 void WaypointMarker::setPosition(const sf::Vector2f& position) {
 	AnimatedGameObject::setPosition(position);
-	m_tooltip.setPosition(position + sf::Vector2f(-0.5f * (m_tooltip.getBounds().width - m_boundingBox.width), -8.f));
+	m_tooltip.setPosition(position + sf::Vector2f(-0.5f * (m_tooltip.getBounds().size.x - m_boundingBox.size.x), -8.f));
 }
 
 void WaypointMarker::onMouseOver() {

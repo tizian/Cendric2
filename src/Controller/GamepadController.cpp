@@ -51,67 +51,67 @@ std::pair<sf::Joystick::Axis, bool> GamepadController::getAxisForInput(GamepadIn
 	switch (input)
 	{
 	case GamepadInput::Axis_X_Positive: 
-		pair.first = sf::Joystick::X;
+		pair.first = sf::Joystick::Axis::X;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_X_Negative:
-		pair.first = sf::Joystick::X;
+		pair.first = sf::Joystick::Axis::X;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_Y_Positive:
-		pair.first = sf::Joystick::Y;
+		pair.first = sf::Joystick::Axis::Y;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_Y_Negative: 
-		pair.first = sf::Joystick::Y;
+		pair.first = sf::Joystick::Axis::Y;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_Z_Positive: 
-		pair.first = sf::Joystick::Z;
+		pair.first = sf::Joystick::Axis::Z;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_Z_Negative: 
-		pair.first = sf::Joystick::Z;
+		pair.first = sf::Joystick::Axis::Z;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_R_Positive: 
-		pair.first = sf::Joystick::R;
+		pair.first = sf::Joystick::Axis::R;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_R_Negative: 
-		pair.first = sf::Joystick::R;
+		pair.first = sf::Joystick::Axis::R;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_U_Positive: 
-		pair.first = sf::Joystick::U;
+		pair.first = sf::Joystick::Axis::U;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_U_Negative: 
-		pair.first = sf::Joystick::U;
+		pair.first = sf::Joystick::Axis::U;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_V_Positive: 
-		pair.first = sf::Joystick::V;
+		pair.first = sf::Joystick::Axis::V;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_V_Negative: 
-		pair.first = sf::Joystick::V;
+		pair.first = sf::Joystick::Axis::V;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_PovX_Positive: 
-		pair.first = sf::Joystick::PovX;
+		pair.first = sf::Joystick::Axis::PovX;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_PovX_Negative: 
-		pair.first = sf::Joystick::PovX;
+		pair.first = sf::Joystick::Axis::PovX;
 		pair.second = false;
 		break;
 	case GamepadInput::Axis_PovY_Positive: 
-		pair.first = sf::Joystick::PovY;
+		pair.first = sf::Joystick::Axis::PovY;
 		pair.second = true;
 		break;
 	case GamepadInput::Axis_PovY_Negative: 
-		pair.first = sf::Joystick::PovY;
+		pair.first = sf::Joystick::Axis::PovY;
 		pair.second = false;
 		break;
 	default: break;
@@ -131,22 +131,22 @@ bool GamepadController::isGamepadInputPressed(GamepadInput input) const {
 
 	switch (input) { 
 	default: return false;
-	case GamepadInput::Axis_X_Positive: return isAxisPositive(sf::Joystick::X);
-	case GamepadInput::Axis_X_Negative: return isAxisNegative(sf::Joystick::X);
-	case GamepadInput::Axis_Y_Positive: return isAxisPositive(sf::Joystick::Y);
-	case GamepadInput::Axis_Y_Negative: return isAxisNegative(sf::Joystick::Y);
-	case GamepadInput::Axis_Z_Positive: return isAxisPositive(sf::Joystick::Z);
-	case GamepadInput::Axis_Z_Negative: return isAxisNegative(sf::Joystick::Z);
-	case GamepadInput::Axis_R_Positive: return isAxisPositive(sf::Joystick::R);
-	case GamepadInput::Axis_R_Negative: return isAxisNegative(sf::Joystick::R);
-	case GamepadInput::Axis_U_Positive: return isAxisPositive(sf::Joystick::U);
-	case GamepadInput::Axis_U_Negative: return isAxisNegative(sf::Joystick::U);
-	case GamepadInput::Axis_V_Positive: return isAxisPositive(sf::Joystick::V);
-	case GamepadInput::Axis_V_Negative: return isAxisNegative(sf::Joystick::V);
-	case GamepadInput::Axis_PovX_Positive: return isAxisPositive(sf::Joystick::PovX);
-	case GamepadInput::Axis_PovX_Negative: return isAxisNegative(sf::Joystick::PovX);
-	case GamepadInput::Axis_PovY_Positive: return isAxisPositive(sf::Joystick::PovY);
-	case GamepadInput::Axis_PovY_Negative: return isAxisNegative(sf::Joystick::PovY);
+	case GamepadInput::Axis_X_Positive: return isAxisPositive(sf::Joystick::Axis::X);
+	case GamepadInput::Axis_X_Negative: return isAxisNegative(sf::Joystick::Axis::X);
+	case GamepadInput::Axis_Y_Positive: return isAxisPositive(sf::Joystick::Axis::Y);
+	case GamepadInput::Axis_Y_Negative: return isAxisNegative(sf::Joystick::Axis::Y);
+	case GamepadInput::Axis_Z_Positive: return isAxisPositive(sf::Joystick::Axis::Z);
+	case GamepadInput::Axis_Z_Negative: return isAxisNegative(sf::Joystick::Axis::Z);
+	case GamepadInput::Axis_R_Positive: return isAxisPositive(sf::Joystick::Axis::R);
+	case GamepadInput::Axis_R_Negative: return isAxisNegative(sf::Joystick::Axis::R);
+	case GamepadInput::Axis_U_Positive: return isAxisPositive(sf::Joystick::Axis::U);
+	case GamepadInput::Axis_U_Negative: return isAxisNegative(sf::Joystick::Axis::U);
+	case GamepadInput::Axis_V_Positive: return isAxisPositive(sf::Joystick::Axis::V);
+	case GamepadInput::Axis_V_Negative: return isAxisNegative(sf::Joystick::Axis::V);
+	case GamepadInput::Axis_PovX_Positive: return isAxisPositive(sf::Joystick::Axis::PovX);
+	case GamepadInput::Axis_PovX_Negative: return isAxisNegative(sf::Joystick::Axis::PovX);
+	case GamepadInput::Axis_PovY_Positive: return isAxisPositive(sf::Joystick::Axis::PovY);
+	case GamepadInput::Axis_PovY_Negative: return isAxisNegative(sf::Joystick::Axis::PovY);
 	case GamepadInput::Button_0: return isButtonPressed(0);
 	case GamepadInput::Button_1: return isButtonPressed(1);
 	case GamepadInput::Button_2: return isButtonPressed(2);
@@ -266,7 +266,7 @@ GamepadInput GamepadController::getGamepadInputForKey(Key key) const {
 	return (*it).second;
 }
 
-void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event) {
+void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoved event) {
 	if (static_cast<int>(event.joystickId) != m_connectedJoystick) {
 		return;
 	}
@@ -279,18 +279,18 @@ void GamepadController::setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent e
 
 	switch (event.axis)
 	{
-	case sf::Joystick::X: m_lastPressedInput = negative ? GamepadInput::Axis_X_Negative : GamepadInput::Axis_X_Positive; break;
-	case sf::Joystick::Y: m_lastPressedInput = negative ? GamepadInput::Axis_Y_Negative : GamepadInput::Axis_Y_Positive; break;
-	case sf::Joystick::Z: m_lastPressedInput = negative ? GamepadInput::Axis_Z_Negative : GamepadInput::Axis_Z_Positive; break;
-	case sf::Joystick::R: m_lastPressedInput = negative ? GamepadInput::Axis_R_Negative : GamepadInput::Axis_R_Positive; break;
-	case sf::Joystick::U: m_lastPressedInput = negative ? GamepadInput::Axis_U_Negative : GamepadInput::Axis_U_Positive; break;
-	case sf::Joystick::V: m_lastPressedInput = negative ? GamepadInput::Axis_V_Negative : GamepadInput::Axis_V_Positive; break;
-	case sf::Joystick::PovX: m_lastPressedInput = negative ? GamepadInput::Axis_PovX_Negative : GamepadInput::Axis_PovX_Positive; break;
-	case sf::Joystick::PovY: m_lastPressedInput = negative ? GamepadInput::Axis_PovY_Negative : GamepadInput::Axis_PovY_Positive; break;
+	case sf::Joystick::Axis::X: m_lastPressedInput = negative ? GamepadInput::Axis_X_Negative : GamepadInput::Axis_X_Positive; break;
+	case sf::Joystick::Axis::Y: m_lastPressedInput = negative ? GamepadInput::Axis_Y_Negative : GamepadInput::Axis_Y_Positive; break;
+	case sf::Joystick::Axis::Z: m_lastPressedInput = negative ? GamepadInput::Axis_Z_Negative : GamepadInput::Axis_Z_Positive; break;
+	case sf::Joystick::Axis::R: m_lastPressedInput = negative ? GamepadInput::Axis_R_Negative : GamepadInput::Axis_R_Positive; break;
+	case sf::Joystick::Axis::U: m_lastPressedInput = negative ? GamepadInput::Axis_U_Negative : GamepadInput::Axis_U_Positive; break;
+	case sf::Joystick::Axis::V: m_lastPressedInput = negative ? GamepadInput::Axis_V_Negative : GamepadInput::Axis_V_Positive; break;
+	case sf::Joystick::Axis::PovX: m_lastPressedInput = negative ? GamepadInput::Axis_PovX_Negative : GamepadInput::Axis_PovX_Positive; break;
+	case sf::Joystick::Axis::PovY: m_lastPressedInput = negative ? GamepadInput::Axis_PovY_Negative : GamepadInput::Axis_PovY_Positive; break;
 	}
 }
 
-void GamepadController::setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event) {
+void GamepadController::setLastPressedGamepadButton(sf::Event::JoystickButtonPressed event) {
 	if (static_cast<int>(event.joystickId) != m_connectedJoystick) {
 		return;
 	}

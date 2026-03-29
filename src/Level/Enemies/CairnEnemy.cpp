@@ -73,7 +73,7 @@ void CairnEnemy::handleAttackInput() {
 }
 
 void CairnEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 88.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 88.f}));
 	setSpriteOffset(sf::Vector2f(-37.f, -32.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
@@ -83,14 +83,14 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	// Idle
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, skinNr * height}, {width, height}));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// Walking
 	Animation* walkingAnimation = new Animation(sf::seconds(0.12f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, skinNr * height}, {width, height}));
 	}
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
@@ -98,7 +98,7 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	Animation* castingAnimation = new Animation(sf::seconds(0.12f));
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 14; i < 21; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, skinNr * height}, {width, height}));
 	}
 	addAnimation(GameObjectState::Casting, castingAnimation);
 
@@ -106,7 +106,7 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 8; i < 14; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
+		deadAnimation->addFrame(sf::IntRect({i * width, skinNr * height}, {width, height}));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -114,7 +114,7 @@ void CairnEnemy::loadAnimation(int skinNr) {
 	// Jump (not used)
 	Animation* jumpingAnimation = new Animation(sf::seconds(0.12f));
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({8 * width, skinNr * height}, {width, height}));
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	// initial values

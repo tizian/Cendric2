@@ -8,10 +8,10 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
-	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
+	float buttonWidth = (box.size.x - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
 
-	m_yesButton = new Button(sf::FloatRect(box.left + DIST_FROM_BORDER, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
-	m_noButton = new Button(sf::FloatRect(box.left + buttonGap + DIST_FROM_BORDER + buttonWidth, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
+	m_yesButton = new Button(sf::FloatRect({box.position.x + DIST_FROM_BORDER, box.position.y + (box.size.y - (buttonHeight + DIST_FROM_BORDER))}, {buttonWidth, buttonHeight}));
+	m_noButton = new Button(sf::FloatRect({box.position.x + buttonGap + DIST_FROM_BORDER + buttonWidth, box.position.y + (box.size.y - (buttonHeight + DIST_FROM_BORDER))}, {buttonWidth, buttonHeight}));
 
 	m_yesButton->setText("Yes");
 	m_noButton->setText("No");
@@ -22,7 +22,7 @@ YesOrNoForm::YesOrNoForm(const sf::FloatRect& box) : GameObject() {
 	m_buttonGroup->addButton(m_noButton);
 
 	setBoundingBox(box);
-	setPosition(sf::Vector2f(box.left, box.top));
+	setPosition({box.position.x, box.position.y});
 }
 
 YesOrNoForm::~YesOrNoForm() {

@@ -38,14 +38,14 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 		calculatePositionAccordingToMob(absolutePosition, m_mob);
 	}
 	else {
-		absolutePosition = go->getCenter() - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f);
+		absolutePosition = go->getCenter() - sf::Vector2f(data.boundingBox.size.x / 2.f, data.boundingBox.size.y / 2.f);
 	}
 	
 	setPosition(absolutePosition);
 
 	// handle sound
 	if (!data.spellSoundPaths.empty()) {
-		g_resourceManager->playSound(m_sound, data.spellSoundPaths.at(rand() % data.spellSoundPaths.size()), getCenter(), m_mainChar->getPosition(), true, data.isSpellSoundLooping);
+		g_resourceManager->playSound(*m_sound, data.spellSoundPaths.at(rand() % data.spellSoundPaths.size()), getCenter(), m_mainChar->getPosition(), true, data.isSpellSoundLooping);
 	}
 
 	// if it is attached to mob, its velocity is ignored 
@@ -54,7 +54,7 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 		return;
 	}
 
-	sf::Vector2f trueDir = target - sf::Vector2f(data.boundingBox.width / 2.f, data.boundingBox.height / 2.f) - absolutePosition;
+	sf::Vector2f trueDir = target - sf::Vector2f(data.boundingBox.size.x / 2.f, data.boundingBox.size.y / 2.f) - absolutePosition;
 
 	// normalize dir
 	float len = sqrt(trueDir.x * trueDir.x + trueDir.y * trueDir.y);
@@ -78,7 +78,7 @@ void Spell::onOwnerDisposed() {
 }
 
 void Spell::setDisposed() {
-	m_sound.stop();
+	if (m_sound) m_sound->stop();
 	MovableGameObject::setDisposed();
 }
 
@@ -108,12 +108,12 @@ void Spell::calculatePositionAccordingToMob(sf::Vector2f& position, const LevelM
 		// owner could be dead and looted.
 		return;
 	}
-	sf::Vector2f mobPosition(mob->getPosition().x + (mob->getBoundingBox()->width / 2), mob->getPosition().y);
+	sf::Vector2f mobPosition(mob->getPosition().x + (mob->getBoundingBox()->size.x / 2), mob->getPosition().y);
 	sf::Vector2f offset = m_data.spellOffset;
 	if (!mob->isFacingRight())
-		offset.x = -offset.x - getBoundingBox()->width;
+		offset.x = -offset.x - getBoundingBox()->size.x;
 	if (mob->isUpsideDown()) {
-		offset.y = mob->getBoundingBox()->height - offset.y - getBoundingBox()->height;
+		offset.y = mob->getBoundingBox()->size.y - offset.y - getBoundingBox()->size.y;
 	}
 
 	position = mobPosition + offset;
@@ -139,7 +139,7 @@ void Spell::update(const sf::Time& frameTime) {
 
 	// check collisions with dynamic tiles
 	if (m_data.isDynamicTileEffect) {
-		sf::FloatRect tmp(nextPosition, sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height));
+		sf::FloatRect tmp({nextPosition.x, nextPosition.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
 		m_level->collideWithDynamicTiles(this, tmp);
 	}
 	
@@ -173,12 +173,12 @@ void Spell::setViewable(bool value) {
 
 void Spell::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (!m_data.isColliding) return;
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, getBoundingBox()->position.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
+	sf::FloatRect nextBoundingBoxY({getBoundingBox()->position.x, nextPosition.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
 	WorldCollisionQueryRecord rec;
 
-	bool isMovingY = nextPosition.y != getBoundingBox()->top;
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+	bool isMovingY = nextPosition.y != getBoundingBox()->position.y;
+	bool isMovingX = nextPosition.x != getBoundingBox()->position.x;
 	bool reflected = false;
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;

@@ -35,7 +35,7 @@ public:
 	const BitmapFont* getFont() const;
 
 	void setColor(const sf::Color& color);
-	void setColorAlpha(sf::Uint8 alpha);
+	void setColorAlpha(std::uint8_t alpha);
 	const sf::Color& getColor() const;
 
 	void setCharacterSize(int size);

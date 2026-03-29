@@ -8,17 +8,17 @@ const float GamepadAimCursor::AIM_DISTANCE = 100.f;
 const sf::Time GamepadAimCursor::IN_USE_TIME = sf::seconds(3.f);
 
 GamepadAimCursor::GamepadAimCursor(LevelMainCharacter* character) {
-	m_cursorSprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
+	m_cursorSprite->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR));
 	g_resourceManager->getTexture(GlobalResource::TEX_GUI_CURSOR)->setSmooth(true);
-	m_cursorSprite.setTextureRect(sf::IntRect(100, 0, 50, 40));
-	m_cursorSprite.setOrigin(sf::Vector2f(24.f, 22.f));
+	m_cursorSprite->setTextureRect(sf::IntRect({100, 0}, {50, 40}));
+	m_cursorSprite->setOrigin(sf::Vector2f(24.f, 22.f));
 	m_mainChar = character;
 	m_isAlwaysUpdate = true;
 	m_isVisible = true;
 	m_isActive = false;
 	setInUse(!g_resourceManager->getConfiguration().isAutotarget);
 	m_currentAimOffset = sf::Vector2f(AIM_DISTANCE, 0);
-	m_cursorSprite.setRotation(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90);
+	m_cursorSprite->setRotation(sf::degrees(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90));
 
 	character->getScreen()->addObject(this);
 }
@@ -34,7 +34,7 @@ void GamepadAimCursor::update(const sf::Time& frameTime) {
 	}
 
 	m_currentPosition = m_mainChar->getSpellPosition() + m_currentAimOffset;
-	m_cursorSprite.setPosition(m_currentPosition);
+	m_cursorSprite->setPosition(m_currentPosition);
 
 	updateInUse(frameTime);
 }
@@ -59,12 +59,12 @@ void GamepadAimCursor::updateInUse(const sf::Time& frameTime) {
 
 void GamepadAimCursor::setRotation(const sf::Vector2f& axis) {
 	m_currentAimOffset = AIM_DISTANCE * normalized(axis);
-	m_cursorSprite.setRotation(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90);
+	m_cursorSprite->setRotation(sf::degrees(radToDeg(atan2(m_currentAimOffset.y, m_currentAimOffset.x)) + 90));
 }
 
 void GamepadAimCursor::renderAfterForeground(sf::RenderTarget& target) {
 	if (!m_isVisible || !m_isActive) return;
-	target.draw(m_cursorSprite);
+	target.draw(*m_cursorSprite);
 }
 
 void GamepadAimCursor::setVisible(bool visible) {
@@ -76,7 +76,7 @@ void GamepadAimCursor::setInUse(bool inUse) {
 
 	auto unusedColor = sf::Color::White;
 	unusedColor.a = 100;
-	m_cursorSprite.setColor(inUse ? sf::Color::White : unusedColor);
+	m_cursorSprite->setColor(inUse ? sf::Color::White : unusedColor);
 
 	if (m_isInUse) {
 		m_inUseTime = IN_USE_TIME;

@@ -110,7 +110,7 @@ protected:
 
 	// For lighting
 	sf::RenderTexture m_renderTexture;
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 	sf::Shader m_lightLayerShader;
 	sf::Shader m_foregroundLayerShader;
 	static const std::string VERTEX_SHADER;

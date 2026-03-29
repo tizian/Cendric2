@@ -24,8 +24,8 @@ BookEnemy::BookEnemy(const Level* level, Screen* screen) :
 void BookEnemy::update(const sf::Time& frameTime) {
 	Enemy::update(frameTime);
 
-	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width / 2;
-	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height / 2;
+	m_particleSpawner->center.x = getPosition().x + getBoundingBox()->size.x / 2;
+	m_particleSpawner->center.y = getPosition().y + getBoundingBox()->size.y / 2;
 	m_ps->update(frameTime);
 }
 
@@ -122,7 +122,7 @@ sf::Time BookEnemy::getConfiguredChasingTime() const {
 }
 
 void BookEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 70.f, 50.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {70.f, 50.f}));
 	setSpriteOffset(sf::Vector2f(-20.f, -7.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
@@ -131,29 +131,29 @@ void BookEnemy::loadAnimation(int skinNr) {
 
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
-	flyingAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect({0 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect({0 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
+	deadAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -165,8 +165,8 @@ void BookEnemy::loadAnimation(int skinNr) {
 }
 
 void BookEnemy::setDead() {
-	m_boundingBox.width = 70.f;
-	m_boundingBox.height = 25.f;
+	m_boundingBox.size.x = 70.f;
+	m_boundingBox.size.y = 25.f;
 	setSpriteOffset(sf::Vector2f(-20.f, -12.f));
 
 	m_ps->emitParticles(10);
@@ -180,7 +180,7 @@ void BookEnemy::loadParticleSystem() {
 
 	// Generators
 	auto posGen = m_ps->addSpawner<particles::DiskSpawner>();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
 	posGen->radius = 30.f;
 	m_particleSpawner = posGen;
 
@@ -204,10 +204,10 @@ void BookEnemy::loadParticleSystem() {
 	timeGen->maxTime = 1.5f;
 
 	auto texCoordGen = m_ps->addGenerator<particles::TexCoordsRandomGenerator>();
-	texCoordGen->texCoords.push_back(sf::IntRect(0, 0, 8, 8));
-	texCoordGen->texCoords.push_back(sf::IntRect(8, 0, 8, 8));
-	texCoordGen->texCoords.push_back(sf::IntRect(16, 0, 8, 8));
-	texCoordGen->texCoords.push_back(sf::IntRect(24, 0, 8, 8));
+	texCoordGen->texCoords.push_back(sf::IntRect({0, 0}, {8, 8}));
+	texCoordGen->texCoords.push_back(sf::IntRect({8, 0}, {8, 8}));
+	texCoordGen->texCoords.push_back(sf::IntRect({16, 0}, {8, 8}));
+	texCoordGen->texCoords.push_back(sf::IntRect({24, 0}, {8, 8}));
 
 	auto rotGen = m_ps->addGenerator<particles::RotationGenerator>();
 	rotGen->minStartAngle = -90.f;

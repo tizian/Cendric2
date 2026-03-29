@@ -26,7 +26,7 @@ private:
 
 private:
 	LevelMainCharacter* m_mainChar;
-	sf::Sprite m_cursorSprite;
+	std::optional<sf::Sprite> m_cursorSprite;
 
 	bool m_isVisible;
 	bool m_isActive;

@@ -22,7 +22,7 @@ void BoomerangSpell::init(const SpellData& data) {
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 30, 90, 30));
+	spellAnimation->addFrame(sf::IntRect({0, data.skinNr * 30}, {90, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

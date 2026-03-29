@@ -57,10 +57,10 @@ void AnimatedSprite::setLooped(bool looped) {
 void AnimatedSprite::setFlippedX(bool flipped) {
 	m_isFlippedX = flipped;
 	if (flipped) {
-		setScale(-1.f, getScale().y);
+		setScale({-1.f, getScale().y});
 	}
 	else {
-		setScale(1.f, getScale().y);
+		setScale({1.f, getScale().y});
 	}
 
 }
@@ -68,20 +68,20 @@ void AnimatedSprite::setFlippedX(bool flipped) {
 void AnimatedSprite::setFlippedY(bool flipped) {
 	m_isFlippedY = flipped;
 	if (flipped) {
-		setScale(getScale().x, -1.f);
+		setScale({getScale().x, -1.f});
 	}
 	else {
-		setScale(getScale().x, 1.f);
+		setScale({getScale().x, 1.f});
 	}
 }
 
 void AnimatedSprite::reset() {
 	setColor(COLOR_WHITE);
-	setRotation(0.f);
+	setRotation(sf::degrees(0.f));
 	setFlippedX(false);
 	setFlippedY(false);
 	setScale(sf::Vector2f(1.f, 1.f));
-	setOrigin(0.f, 0.f);
+	setOrigin({0.f, 0.f});
 }
 
 void AnimatedSprite::setColor(const sf::Color& color) {
@@ -99,10 +99,10 @@ const Animation* AnimatedSprite::getAnimation() const {
 sf::FloatRect AnimatedSprite::getLocalBounds() const {
 	sf::IntRect rect = m_animation->getFrame(m_currentFrame);
 
-	float width = static_cast<float>(std::abs(rect.width));
-	float height = static_cast<float>(std::abs(rect.height));
+	float width = static_cast<float>(std::abs(rect.size.x));
+	float height = static_cast<float>(std::abs(rect.size.y));
 
-	return sf::FloatRect(0.f, 0.f, width, height);
+	return sf::FloatRect({0.f, 0.f}, {width, height});
 }
 
 sf::FloatRect AnimatedSprite::getGlobalBounds() const {
@@ -139,14 +139,14 @@ void AnimatedSprite::setFrame(size_t newFrame, bool resetTime) {
 		sf::IntRect rect = m_animation->getFrame(newFrame);
 
 		m_vertices[0].position = sf::Vector2f(0.f, 0.f);
-		m_vertices[1].position = sf::Vector2f(0.f, static_cast<float>(rect.height));
-		m_vertices[2].position = sf::Vector2f(static_cast<float>(rect.width), static_cast<float>(rect.height));
-		m_vertices[3].position = sf::Vector2f(static_cast<float>(rect.width), 0.f);
+		m_vertices[1].position = sf::Vector2f(0.f, static_cast<float>(rect.size.y));
+		m_vertices[2].position = sf::Vector2f(static_cast<float>(rect.size.x), static_cast<float>(rect.size.y));
+		m_vertices[3].position = sf::Vector2f(static_cast<float>(rect.size.x), 0.f);
 
-		float left = static_cast<float>(rect.left) + 0.0001f;
-		float right = left + static_cast<float>(rect.width);
-		float top = static_cast<float>(rect.top);
-		float bottom = top + static_cast<float>(rect.height);
+		float left = static_cast<float>(rect.position.x) + 0.0001f;
+		float right = left + static_cast<float>(rect.size.x);
+		float top = static_cast<float>(rect.position.y);
+		float bottom = top + static_cast<float>(rect.size.y);
 
 		m_vertices[0].texCoords = sf::Vector2f(left, top);
 		m_vertices[1].texCoords = sf::Vector2f(left, bottom);
@@ -193,6 +193,12 @@ void AnimatedSprite::draw(sf::RenderTarget& target, sf::RenderStates states) con
 	if (m_animation && m_texture) {
 		states.transform *= getTransform();
 		states.texture = m_texture;
-		target.draw(m_vertices, 4, sf::Quads, states);
+		sf::Vertex quad[] = {
+			m_vertices[0],
+			m_vertices[1],
+			m_vertices[3],
+			m_vertices[2]
+		};
+		target.draw(quad, 4, sf::PrimitiveType::TriangleStrip, states);
 	}
 }

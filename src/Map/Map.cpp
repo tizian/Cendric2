@@ -47,18 +47,18 @@ void Map::loadForRenderTexture() {
 
 void Map::setWorldView(sf::RenderTarget& target, const sf::Vector2f& center) const {
 	sf::View view;
-	view.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	view.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
+	view.setSize(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
+	view.setViewport(sf::FloatRect({0.f, 0.f}, {1.f, 1.f}));
 
-	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapData.mapRect.width - WINDOW_WIDTH / 2.f, center.x));
-	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapData.mapRect.height - (WINDOW_HEIGHT) / 2.f, center.y));
-	view.setCenter(camCenterX, camCenterY);
+	float camCenterX = std::max(WINDOW_WIDTH / 2.f, std::min(m_mapData.mapRect.size.x - WINDOW_WIDTH / 2.f, center.x));
+	float camCenterY = std::max((WINDOW_HEIGHT) / 2.f, std::min(m_mapData.mapRect.size.y - (WINDOW_HEIGHT) / 2.f, center.y));
+	view.setCenter(sf::Vector2f(camCenterX, camCenterY));
 	target.setView(view);
 }
 
 bool Map::isInsideWorldRect(const sf::FloatRect& boundingBox) const {
-	return !(boundingBox.top < m_mapData.mapRect.top || 
-		boundingBox.top + boundingBox.height > m_mapData.mapRect.top + m_mapData.mapRect.height);
+	return !(boundingBox.position.y < m_mapData.mapRect.position.y || 
+		boundingBox.position.y + boundingBox.size.y > m_mapData.mapRect.position.y + m_mapData.mapRect.size.y);
 }
 
 bool Map::collides(WorldCollisionQueryRecord& rec) const {
@@ -66,10 +66,10 @@ bool Map::collides(WorldCollisionQueryRecord& rec) const {
 	// additional : check for collision with map rect (y axis)
 	if (!isInsideWorldRect(rec.boundingBox)) {
 		if (rec.collisionDirection == CollisionDirection::Down) {
-			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.top + m_worldData->mapRect.height - rec.boundingBox.height);
+			rec.safeTop = std::min(rec.safeTop, m_worldData->mapRect.position.y + m_worldData->mapRect.size.y - rec.boundingBox.size.y);
 		}
 		if (rec.collisionDirection == CollisionDirection::Up) {
-			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.top);
+			rec.safeTop = std::max(rec.safeTop, m_worldData->mapRect.position.y);
 		}
 		rec.collides = true;
 	}

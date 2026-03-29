@@ -8,7 +8,7 @@ JumpingGhost::JumpingGhost(const AIWalkingQueryRecord& rec, const Level* level, 
 	m_aiRec = rec;
 
 	m_boundingBox = m_aiRec.boundingBox;
-	setPosition(sf::Vector2f(m_boundingBox.left, m_boundingBox.top));
+	setPosition(sf::Vector2f(m_boundingBox.position.x, m_boundingBox.position.y));
 	
 	if (g_resourceManager->getConfiguration().isDebugRenderingOn) {
 		m_debugger = new JumpingGhostDebugger();
@@ -42,12 +42,12 @@ float JumpingGhost::calculateJump() {
 				(m_record.direction == CollisionDirection::Up && m_aiRec.isFlippedGravity))) {
 				landingPosY = m_record.savePosY;
 				// is this position feasible?
-				if (!m_aiRec.isDropAlways && std::abs(landingPosY - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight - 5.f) {
+				if (!m_aiRec.isDropAlways && std::abs(landingPosY - m_aiRec.boundingBox.position.y) > m_aiRec.jumpHeight - 5.f) {
 					// not feasible, sorry.
 					return -1.f;
 				}
 				// does this position differ enough from the one we started?
-				if (dist(getPosition(), sf::Vector2f(m_aiRec.boundingBox.left, m_aiRec.boundingBox.top)) < TILE_SIZE_F * 0.5f) {
+				if (dist(getPosition(), sf::Vector2f(m_aiRec.boundingBox.position.x, m_aiRec.boundingBox.position.y)) < TILE_SIZE_F * 0.5f) {
 					return -1.f;
 				}
 				else if (m_debugger != nullptr) {
@@ -57,7 +57,7 @@ float JumpingGhost::calculateJump() {
 			// bad collision. 
 			break;
 		}
-		if (!m_aiRec.isDropAlways && std::abs(getPosition().y - m_aiRec.boundingBox.top) > m_aiRec.jumpHeight) {
+		if (!m_aiRec.isDropAlways && std::abs(getPosition().y - m_aiRec.boundingBox.position.y) > m_aiRec.jumpHeight) {
 			break;
 		}
 	}
@@ -69,15 +69,15 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	const sf::FloatRect& bb = *getBoundingBox();
 
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBox({nextPosition.x, nextPosition.y}, {bb.size.x, bb.size.y});
 
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = m_aiRec.ignoreDynamicTiles;
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingDown = nextPosition.y > bb.position.y;
+	bool isMovingRight = nextPosition.x > bb.position.x;
 	bool isFalling = m_aiRec.isFlippedGravity != isMovingDown;
 
 	// should we use strategy 2: try y direction first, then x direction?
@@ -99,11 +99,11 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
-			nextBoundingBoxX.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
+			nextBoundingBoxX.position.x = rec.safeLeft;
 		}
 		else {
-			nextBoundingBoxY.left = nextPosition.x;
+			nextBoundingBoxY.position.x = nextPosition.x;
 		}
 
 		// check for collision on y axis
@@ -114,8 +114,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
-			nextBoundingBoxY.top = rec.safeTop;
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxY.position.y = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 			
 			if (isFalling) {
 				m_record.collides = true;
@@ -133,8 +133,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
-			nextBoundingBoxY.top = rec.safeTop;
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxY.position.y = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 			
 			if (isFalling) {
 				m_record.collides = true;
@@ -143,7 +143,7 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			}
 		}
 		else {
-			nextBoundingBoxX.top = nextPosition.y;
+			nextBoundingBoxX.position.y = nextPosition.y;
 		}
 
 		// check for collision on x axis
@@ -154,13 +154,13 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
-			nextBoundingBoxX.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
+			nextBoundingBoxX.position.x = rec.safeLeft;
 		}
 	}
 
-	nextBoundingBox.left = nextBoundingBoxX.left;
-	nextBoundingBox.top = nextBoundingBoxY.top;
+	nextBoundingBox.position.x = nextBoundingBoxX.position.x;
+	nextBoundingBox.position.y = nextBoundingBoxY.position.y;
 	if (m_level->collidesWithAvoidableTiles(nextBoundingBox)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
@@ -169,8 +169,8 @@ void JumpingGhost::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	if (m_record.collides) return;
 
-	if ((!isMovingDown && nextBoundingBoxY.top < -bb.height) ||
-		(isMovingDown && nextBoundingBoxY.top > m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+	if ((!isMovingDown && nextBoundingBoxY.position.y < -bb.size.y) ||
+		(isMovingDown && nextBoundingBoxY.position.y > m_level->getWorldRect().position.y + m_level->getWorldRect().size.y)) {
 		m_record.collides = true;
 		m_record.evilTile = true;
 		return;

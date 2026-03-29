@@ -50,7 +50,7 @@ protected:
 	void loadHealingParticles();
 
 protected:
-	sf::Sprite m_weapon;
+	sf::Sprite* m_weapon;
 	sf::Vector2f m_weaponOffset;
 	bool m_isWeaponVisible = false;
 	bool m_isOtherDead = false;

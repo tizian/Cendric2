@@ -20,7 +20,7 @@ bool JumpingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-10.f, -10.f));
 	setPositionOffset(sf::Vector2f(10.f, 10.f));
 	m_initialPosition = getPosition();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F - 20.f, TILE_SIZE_F - 20.f}));
 	m_damage.damageType = DamageType::Physical;
 	m_damage.duration = sf::seconds(4.f);
 	m_damage.damage = 10;
@@ -58,7 +58,7 @@ void JumpingTile::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; ++i) {
-		idleAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		idleAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -151,12 +151,12 @@ void JumpingTile::onHit(Spell* spell) {
 
 void JumpingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *getBoundingBox();
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 	WorldCollisionQueryRecord rec;
 
 	rec.excludedGameObject = this;
 
-	bool isMovingDown = nextPosition.y > bb.top;
+	bool isMovingDown = nextPosition.y > bb.position.y;
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;

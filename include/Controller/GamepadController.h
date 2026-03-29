@@ -30,8 +30,8 @@ public:
 	sf::Vector2f getAimJoystickAxis() const;
 	GamepadInput getGamepadInputForKey(Key key) const;
 	
-	void setLastPressedGamepadAxis(sf::Event::JoystickMoveEvent event);
-	void setLastPressedGamepadButton(sf::Event::JoystickButtonEvent event);
+	void setLastPressedGamepadAxis(sf::Event::JoystickMoved event);
+	void setLastPressedGamepadButton(sf::Event::JoystickButtonPressed event);
 
 	// returns the GamepadInput that was pressed in the last frame. If none, returns GamepadInput::VOID
 	GamepadInput getLastPressedGamepadInput() const;

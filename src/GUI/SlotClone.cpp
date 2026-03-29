@@ -4,7 +4,7 @@ SlotClone::SlotClone(const Slot* original) {
 	m_original = original;
 
 	float size = original->getConfiguredSize();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, size, size));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {size, size}));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
@@ -31,8 +31,8 @@ const Slot* SlotClone::getOriginalSlot() const {
 void SlotClone::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	float iconOffset = m_original->getConfiguredIconOffset();
-	m_backgroundRect.setPosition(pos.x + iconOffset, pos.y + iconOffset);
-	m_iconRect.setPosition(pos.x + iconOffset, pos.y + iconOffset);
+	m_backgroundRect.setPosition({pos.x + iconOffset, pos.y + iconOffset});
+	m_iconRect.setPosition({pos.x + iconOffset, pos.y + iconOffset});
 	m_borderRect.setPosition(pos);
 }
 

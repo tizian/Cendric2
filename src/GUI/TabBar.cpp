@@ -10,9 +10,9 @@ TabBar::~TabBar() {
 
 void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 	m_tabButtons = std::vector<TabButton*>(numberTabs);
-	m_tabWidth = box.width / numberTabs + (numberTabs - 1) * TabButton::ALIGNMENT_OFFSET / numberTabs;
+	m_tabWidth = box.size.x / numberTabs + (numberTabs - 1) * TabButton::ALIGNMENT_OFFSET / numberTabs;
 	for (auto i = 0; i < numberTabs; ++i) {
-		const auto tab = new TabButton(sf::FloatRect(0, 0, m_tabWidth, box.height));
+		const auto tab = new TabButton(sf::FloatRect({0, 0}, {m_tabWidth, box.size.y}));
 		m_tabButtons[i] = tab;
 	}
 
@@ -22,8 +22,8 @@ void TabBar::init(const sf::FloatRect& box, int numberTabs) {
 	m_activeTabIndex = 0;
 	m_tabButtons[0]->setActive(true);
 
-	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, m_tabWidth, box.height);
-	setPosition(sf::Vector2f(box.left, box.top));
+	m_activeOverlay = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_ACTIVE), COLOR_WHITE, m_tabWidth, box.size.y);
+	setPosition({box.position.x, box.position.y});
 
 	m_leftText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_leftText.setColor(COLOR_BRIGHT_PURPLE);
@@ -71,7 +71,7 @@ void TabBar::setPosition(const sf::Vector2f& position) {
 	}
 
 	auto const tabRight = m_tabButtons[static_cast<int>(m_tabButtons.size()) - 1]->getPosition().x - position.x + m_tabWidth - TabButton::ALIGNMENT_OFFSET;
-	m_rightText.setPosition(position + sf::Vector2f(tabRight - m_rightText.getLocalBounds().width - gamepadTextoffsetX, -gamepadTextoffsetY));
+	m_rightText.setPosition({position.x + tabRight - m_rightText.getLocalBounds().size.x - gamepadTextoffsetX, position.y - gamepadTextoffsetY});
 }
 
 void TabBar::render(sf::RenderTarget& renderTarget) {
@@ -125,8 +125,8 @@ void TabBar::update(const sf::Time& frameTime) {
 		m_tabButtons[m_activeTabIndex]->setActive(true);
 
 		auto const bbox = getBoundingBox();
-		auto const x = bbox->left + m_activeTabIndex * (m_tabWidth - TabButton::ALIGNMENT_OFFSET);
-		m_activeOverlay.setPosition(x, bbox->top);
+		auto const x = bbox->position.x + m_activeTabIndex * (m_tabWidth - TabButton::ALIGNMENT_OFFSET);
+		m_activeOverlay.setPosition({x, bbox->position.y});
 	}
 
 	GameObject::update(frameTime);

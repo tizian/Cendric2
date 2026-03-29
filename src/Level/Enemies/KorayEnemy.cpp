@@ -37,7 +37,7 @@ float KorayEnemy::getConfiguredDistanceToHPBar() const {
 void KorayEnemy::handleAttackInput() {}
 
 void KorayEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	int size = 120;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -45,27 +45,27 @@ void KorayEnemy::loadAnimation(int skinNr) {
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		walkingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
+	idleAnimation->addFrame(sf::IntRect({8 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
+	jumpingAnimation->addFrame(sf::IntRect({9 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		castingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 	castingAnimation->setLooped(false);
 
@@ -74,14 +74,14 @@ void KorayEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 14; i > 9; --i) {
-		fightingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		fightingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 	fightingAnimation->setLooped(false);
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(14 * size, 0, size, size));
+	deadAnimation->addFrame(sf::IntRect({14 * size, 0}, {size, size}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);

@@ -47,14 +47,14 @@ float WindGustSpell::getPushAcceleration() const {
 
 void WindGustSpell::loadParticleSystem() {
 	ParticleComponentData data;
-	data.particleCount = static_cast<int>((getBoundingBox()->width * getBoundingBox()->height) / 100.f * m_data.strength);
-	data.emitRate = getBoundingBox()->width / 5.f * m_data.strength;
+	data.particleCount = static_cast<int>((getBoundingBox()->size.x * getBoundingBox()->size.y) / 100.f * m_data.strength);
+	data.emitRate = getBoundingBox()->size.x / 5.f * m_data.strength;
 	data.isAdditiveBlendMode = true;
 	data.texturePath = GlobalResource::TEX_PARTICLE_BLOB;
 	
 	// Generators
 	m_particleSpawner = new particles::BoxSpawner();
-	m_particleSpawner->size = sf::Vector2f(getBoundingBox()->width * 0.1f, getBoundingBox()->height * 0.5f);
+	m_particleSpawner->size = sf::Vector2f(getBoundingBox()->size.x * 0.1f, getBoundingBox()->size.y * 0.5f);
 	data.spawner = m_particleSpawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -79,8 +79,8 @@ void WindGustSpell::loadParticleSystem() {
 	data.velGen = m_velGenerator;
 
 	auto timeGen =  new particles::TimeGenerator();
-	timeGen->minTime = getBoundingBox()->width / (m_velGenerator->maxStartSpeed);
-	timeGen->maxTime = getBoundingBox()->width / m_velGenerator->minStartSpeed;
+	timeGen->minTime = getBoundingBox()->size.x / (m_velGenerator->maxStartSpeed);
+	timeGen->maxTime = getBoundingBox()->size.x / m_velGenerator->minStartSpeed;
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
@@ -94,14 +94,14 @@ void WindGustSpell::updateParticleSystemPosition() {
 		m_pushAcceleration = -m_absPushAcceleration;
 		m_velGenerator->minAngle = -90 + -20.f;
 		m_velGenerator->maxAngle = -90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width - getBoundingBox()->width * 0.1f;
-		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * 0.5f;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->size.x - getBoundingBox()->size.x * 0.1f;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->size.y * 0.5f;
 	}
 	else {
 		m_pushAcceleration = m_absPushAcceleration;
 		m_velGenerator->minAngle = 90 + -20.f;
 		m_velGenerator->maxAngle = 90 + 20.f;
-		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->width * 0.1f;
-		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->height * 0.5f;
+		m_particleSpawner->center.x = getPosition().x + getBoundingBox()->size.x * 0.1f;
+		m_particleSpawner->center.y = getPosition().y + getBoundingBox()->size.y * 0.5f;
 	}
 }

@@ -9,10 +9,10 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_window = new Window(box, GUIOrnamentStyle::NONE);
 	float buttonHeight = 50.f;
 	float buttonGap = 20.f;
-	float buttonWidth = (box.width - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
+	float buttonWidth = (box.size.x - (buttonGap + 2.f * DIST_FROM_BORDER)) / 2.f;
 
-	m_okButton = new Button(sf::FloatRect(box.left + DIST_FROM_BORDER, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
-	m_cancelButton = new Button(sf::FloatRect(box.left + buttonGap + DIST_FROM_BORDER + buttonWidth, box.top + (box.height - (buttonHeight + DIST_FROM_BORDER)), buttonWidth, buttonHeight));
+	m_okButton = new Button(sf::FloatRect({box.position.x + DIST_FROM_BORDER, box.position.y + (box.size.y - (buttonHeight + DIST_FROM_BORDER))}, {buttonWidth, buttonHeight}));
+	m_cancelButton = new Button(sf::FloatRect({box.position.x + buttonGap + DIST_FROM_BORDER + buttonWidth, box.position.y + (box.size.y - (buttonHeight + DIST_FROM_BORDER))}, {buttonWidth, buttonHeight}));
 
 	m_okButton->setText("Okay");
 	m_cancelButton->setText("Cancel");
@@ -23,7 +23,7 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_buttonGroup->addButton(m_cancelButton);
 
 	setBoundingBox(box);
-	setPosition(sf::Vector2f(box.left, box.top));
+	setPosition(sf::Vector2f(box.position.x, box.position.y));
 
 	// message
 	m_message = BitmapText(
@@ -37,7 +37,7 @@ NewSaveGameForm::NewSaveGameForm(const sf::FloatRect& box) : GameObject() {
 	m_savegameNameText.setString(m_savegameName);
 	m_savegameNameText.setColor(COLOR_LIGHT_PURPLE);
 	m_savegameNameText.setCharacterSize(16);
-	m_savegameNameText.setPosition(sf::Vector2f(2 * DIST_FROM_BORDER, box.height - (buttonHeight + DIST_FROM_BORDER + 50)) + getPosition());
+	m_savegameNameText.setPosition(sf::Vector2f(2 * DIST_FROM_BORDER, box.size.y - (buttonHeight + DIST_FROM_BORDER + 50)) + getPosition());
 
 	g_inputController->startReadingText();
 }

@@ -42,7 +42,7 @@ void WolfBossMovingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	float oldPositionX = m_enemy->getPosition().x;
 
 	checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
-	sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	sf::FloatRect nextBoundingBox({nextPosition.x, nextPosition.y}, {m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y});
 
 	m_jumps = false;
 	if (m_isCollidingX) {

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
+#include <optional>
 
 #include "Particles/ParticleGenerator.h"
 #include "Particles/ParticleSpawner.h"
@@ -210,9 +212,9 @@ public:
 	float threshold{ 0.5f };
 
 protected:
-	sf::RenderTexture m_renderTexture;
-	sf::Sprite m_sprite;
-	sf::Shader m_shader;
+ 	sf::RenderTexture m_renderTexture;
+ 	std::optional<sf::Sprite> m_sprite;
+ 	sf::Shader m_shader;
 };
 
 }

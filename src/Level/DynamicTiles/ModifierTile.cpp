@@ -31,7 +31,7 @@ bool ModifierTile::init(const LevelTileProperties& properties) {
 	m_modifier.level = std::min(3, contains(modifiersLearned, m_modifier.type) ? 
 		modifiersLearned.at(m_modifier.type) + 1 : 1);
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	loadComponents();
 
 	return true;
@@ -40,7 +40,7 @@ bool ModifierTile::init(const LevelTileProperties& properties) {
 void ModifierTile::loadAnimation(int skinNr) {
 	m_isCollidable = false;
 
-	sf::IntRect rect = sf::IntRect((m_modifier.level - 1) * 50, 50, 50, 50);
+	sf::IntRect rect = sf::IntRect({(m_modifier.level - 1) * 50, 50}, {50, 50});
 	m_animatedSprite.setColor(SpellModifier::getSpellModifierColor(m_modifier.type));
 
 	const sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_GEMS);
@@ -117,7 +117,7 @@ void ModifierTile::loadComponents() {
 	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
 	
 	auto posGen = new particles::PointSpawner();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -148,6 +148,6 @@ void ModifierTile::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(m_pc);
 }

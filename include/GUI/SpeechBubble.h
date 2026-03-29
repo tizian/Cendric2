@@ -8,6 +8,8 @@
 #include "GUI/BitmapText.h"
 #include "GUI/SlicedSprite.h"
 
+#include <optional>
+
 class LevelMovableGameObject;
 
 // a floating speech bubble for talking mobs in levels
@@ -37,7 +39,7 @@ private:
 	SlicedSprite m_mainLayer;
 	SlicedSprite m_ornamentLayer;
 
-	sf::Sprite m_pointer;
+	std::optional<sf::Sprite> m_pointer;
 
 	// The minimal size, when no text is set
 	static const float MIN_SIZE;

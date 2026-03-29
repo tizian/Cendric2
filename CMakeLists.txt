@@ -46,7 +46,7 @@ endif()
 if (NOT USE_SYSTEM_SFML)
     add_subdirectory("${PROJECT_SOURCE_DIR}/ext/sfml" EXCLUDE_FROM_ALL)
 else ()
-    find_package(SFML 2.5 COMPONENTS graphics window audio system)
+    find_package(SFML 3.0 COMPONENTS Graphics Window Audio System)
     if (NOT SFML_FOUND)
         message(FATAL_ERROR    "System SFML package not found, you should set USE_SYSTEM_SFML to off")
     endif()
@@ -67,10 +67,13 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
     endif()
 
+    CHECK_CXX_COMPILER_FLAG("-std=c++17" HAS_CPP17_FLAG)
     CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP14_FLAG)
     CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_CPP11_FLAG)
 
-    if (HAS_CPP14_FLAG)
+    if (HAS_CPP17_FLAG)
+        set(CMAKE_CXX_STANDARD 17)
+    elseif (HAS_CPP14_FLAG)
         set(CMAKE_CXX_STANDARD 14)
     elseif (HAS_CPP11_FLAG)
         set(CMAKE_CXX_STANDARD 11)
@@ -144,13 +147,18 @@ endif()
 
 set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_CXX_LINK_EXECUTABLE} -lpthread -ldl")
 
-target_link_libraries(Cendric sfml-graphics sfml-window sfml-audio sfml-system)
+target_link_libraries(Cendric SFML::Graphics SFML::Window SFML::Audio SFML::System)
 
 target_include_directories(Cendric PRIVATE
-    "${PROJECT_SOURCE_DIR}/ext/sfml/include"
     "${PROJECT_SOURCE_DIR}/ext"
     "${PROJECT_SOURCE_DIR}/include"
 )
+
+if (NOT USE_SYSTEM_SFML)
+    target_include_directories(Cendric PRIVATE
+        "${PROJECT_SOURCE_DIR}/ext/sfml/include"
+    )
+endif()
 
 # Find LibGamerzilla library
 if (NOT APPLE)

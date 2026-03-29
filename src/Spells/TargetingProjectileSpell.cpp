@@ -14,7 +14,7 @@ void TargetingProjectileSpell::init(const SpellData& data) {
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 39, 39, 39));
+	spellAnimation->addFrame(sf::IntRect({0, data.skinNr * 39}, {39, 39}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -40,7 +40,7 @@ void TargetingProjectileSpell::update(const sf::Time& frameTime) {
 
 void TargetingProjectileSpell::loadComponents() {
 	// light
-	LightData lightData(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 80.f, 0.5f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 80.f, 0.5f);
 	addComponent(new LightComponent(lightData, this));
 
 	// particles
@@ -52,8 +52,8 @@ void TargetingProjectileSpell::loadComponents() {
 	
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -83,6 +83,6 @@ void TargetingProjectileSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(pc);
 }

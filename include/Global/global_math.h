@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+
 #undef M_PI
 #define M_PI         3.14159265358979323846f
 #define M_TWOPI		 6.28318530717958647692f
@@ -86,25 +88,25 @@ inline int round_int(float r) {
 }
 
 inline bool epsIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
-	return !(rect2.left + Epsilon >= rect1.left + rect1.width
-		|| rect1.left + Epsilon >= rect2.left + rect2.width
-		|| rect2.top + Epsilon >= rect1.top + rect1.height
-		|| rect1.top + Epsilon >= rect2.top + rect2.height);
+	return !(rect2.position.x + Epsilon >= rect1.position.x + rect1.size.x
+		|| rect1.position.x + Epsilon >= rect2.position.x + rect2.size.x
+		|| rect2.position.y + Epsilon >= rect1.position.y + rect1.size.y
+		|| rect1.position.y + Epsilon >= rect2.position.y + rect2.size.y);
 }
 
 inline bool fastIntersect(const sf::FloatRect& rect1, const sf::FloatRect& rect2) {
-	return !(rect2.left >= rect1.left + rect1.width
-		|| rect1.left >= rect2.left + rect2.width
-		|| rect2.top >= rect1.top + rect1.height
-		|| rect1.top >= rect2.top + rect2.height);
+	return !(rect2.position.x >= rect1.position.x + rect1.size.x
+		|| rect1.position.x >= rect2.position.x + rect2.size.x
+		|| rect2.position.y >= rect1.position.y + rect1.size.y
+		|| rect1.position.y >= rect2.position.y + rect2.size.y);
 }
 
 inline bool fastIntersectCircle(const sf::FloatRect& bb, const sf::Vector2f& center, float radius) {
 	sf::Vector2f pc = center;
-	if (pc.x > bb.left + bb.width) pc.x = bb.left + bb.width;
-	if (pc.x < bb.left) pc.x = bb.left;
-	if (pc.y > bb.top + bb.height) pc.y = bb.top + bb.height;
-	if (pc.y < bb.top) pc.y = bb.top;
+	if (pc.x > bb.position.x + bb.size.x) pc.x = bb.position.x + bb.size.x;
+	if (pc.x < bb.position.x) pc.x = bb.position.x;
+	if (pc.y > bb.position.y + bb.size.y) pc.y = bb.position.y + bb.size.y;
+	if (pc.y < bb.position.y) pc.y = bb.position.y;
 
 	return dist(pc, center) < radius;
 }

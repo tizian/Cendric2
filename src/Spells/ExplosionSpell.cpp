@@ -73,7 +73,7 @@ bool ExplosionSpell::getConfiguredRotateSprite() const {
 
 void ExplosionSpell::loadComponents() {
 	// light
-	LightData lightData(sf::Vector2f(m_boundingBox.height * 0.5f, m_boundingBox.height * 0.5f), 1000.f, 1.f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.y * 0.5f, m_boundingBox.size.y * 0.5f), 1000.f, 1.f);
 	m_lc = new LightComponent(lightData, this);
 	addComponent(m_lc);
 
@@ -143,7 +143,7 @@ void ExplosionSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new  ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.5f));
 	m_pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
 	
 	if (m_data.strength > 0) {

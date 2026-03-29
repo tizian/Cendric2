@@ -137,7 +137,8 @@ void ResourceManager::init() {
 
 	// init sound pool
 	for (int i = 0; i < SOUND_POOL_SIZE; ++i) {
-		m_soundPool.push_back(sf::Sound());
+		sf::SoundBuffer buffer;
+		m_soundPool.emplace_back(std::in_place, buffer);
 	}
 	m_nextSoundIndex = 0;
 }
@@ -157,6 +158,48 @@ template<typename T> void ResourceManager::loadResource(std::map<std::string, T*
 
 	// search project's main directory
 	if (resource->loadFromFile(getResourcePath(filename))) {
+		holder[filename] = resource;
+
+		switch (type) {
+		case ResourceType::Unique:
+			m_resourceOwners[owner].push_back(filename);
+			break;
+
+		case ResourceType::Map:
+			m_mapResources.push_back(filename);
+			break;
+
+		case ResourceType::Level:
+			m_levelResources.push_back(filename);
+			break;
+
+		default:
+			break;
+		}
+	}
+	else {
+		g_logger->logError("ResourceManager", typeName + " could not be loaded from file: " + getResourcePath(std::string(filename)));
+		std::string tmp = typeName + " could not be loaded from file: " + getResourcePath(filename);
+		setError(ErrorID::Error_fileNotFound, tmp);
+	}
+}
+
+template<>
+void ResourceManager::loadResource<sf::Font>(std::map<std::string, sf::Font*>& holder, const std::string& typeName, const std::string& filename, ResourceType type, void* owner) {
+	if (filename.empty()) return;
+	if (contains(holder, filename)) {
+		return; // resource already loaded
+	}
+
+	if (type == ResourceType::Unique && owner == nullptr) {
+		g_logger->logError("ResourceManager", typeName + " could not be registered as unique, owner not set: " + getResourcePath(std::string(filename)));
+		return;
+	}
+
+	sf::Font* resource = new sf::Font();
+
+	// search project's main directory - Font uses openFromFile in SFML 3
+	if (resource->openFromFile(getResourcePath(filename))) {
 		holder[filename] = resource;
 
 		switch (type) {
@@ -297,7 +340,7 @@ void ResourceManager::playSound(const std::string& filename, bool loop, float sc
 	if (contains(m_frameSounds, filename)) return;
 	m_frameSounds.insert(filename);
 
-	sf::Sound& sound = m_soundPool[m_nextSoundIndex];
+	sf::Sound& sound = m_soundPool[m_nextSoundIndex].value();
 	m_nextSoundIndex = (m_nextSoundIndex + 1) % SOUND_POOL_SIZE;
 
 	playSound(sound, filename, true, loop, scale);
@@ -317,7 +360,7 @@ void ResourceManager::playSound(sf::Sound& sound, const std::string& filename, b
 	sound.setBuffer(*getSoundBuffer(filename));
 	scale = clamp(scale, 0.f, 1.f);
 	sound.setVolume(static_cast<float>(m_configuration.volumeSound) * scale);
-	sound.setLoop(loop);
+	sound.setLooping(loop);
 	sound.play();
 }
 
@@ -348,7 +391,7 @@ void ResourceManager::playMusic(const std::string& filename, bool looping) {
 	m_music.previousMusic = m_music.currentMusic;
 	m_music.currentMusic = new sf::Music();
 	if (m_music.currentMusic->openFromFile(getResourcePath(filename))) {
-		m_music.currentMusic->setLoop(looping);
+		m_music.currentMusic->setLooping(looping);
 		m_music.currentMusic->setVolume(0.f);
 		m_music.currentMusic->play();
 		m_music.fadingTime = m_music.FADING_TIME;

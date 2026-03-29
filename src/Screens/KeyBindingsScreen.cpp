@@ -34,10 +34,10 @@ void KeyBindingsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("KeyBindings"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
+	m_title->setPosition({(WINDOW_WIDTH - m_title->getLocalBounds().size.x) / 2.f, 25.f});
 
 	// back
-	auto button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	auto button = new Button(sf::FloatRect({marginX, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setGamepadKey(Key::Escape);
 	button->setOnClick(std::bind(&KeyBindingsScreen::onBack, this));
@@ -46,13 +46,13 @@ void KeyBindingsScreen::execOnEnter() {
 	ButtonGroup* buttonGroup = new ButtonGroup(2);
 
 	// keyboard keybindings
-	button = new Button(sf::FloatRect(buttonX, buttonY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({buttonX, buttonY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Keyboard");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onKeyboardKeyBindings, this));
 	buttonGroup->addButton(button);
 	
 	// gamepad keybindings
-	button = new Button(sf::FloatRect(buttonX + buttonSpacing + buttonWidth, buttonY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({buttonX + buttonSpacing + buttonWidth, buttonY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Gamepad");
 	button->setOnClick(std::bind(&KeyBindingsScreen::onGamepadKeyBindings, this));
 	buttonGroup->addButton(button);

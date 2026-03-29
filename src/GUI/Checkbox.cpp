@@ -152,7 +152,7 @@ void Checkbox::setTextRaw(const std::string& text) {
 void Checkbox::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
 	float xOffset = SIDE_LENGTH + 30.f;
-	float yOffset = SIDE_LENGTH / 2.f - m_text.getLocalBounds().height / 2.f;
+	float yOffset = SIDE_LENGTH / 2.f - m_text.getLocalBounds().size.y / 2.f;
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 	m_text.setPosition(getPosition() + m_textOffset);
 }

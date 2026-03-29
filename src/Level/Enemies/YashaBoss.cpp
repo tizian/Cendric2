@@ -61,7 +61,7 @@ void YashaBoss::loadSpells() {
 	explosionSpell.strength = 1;
 	explosionSpell.skinNr = 0;
 	explosionSpell.cooldown = sf::seconds(10.f);
-	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	explosionSpell.boundingBox = sf::FloatRect({0, 0}, {50, 50});
 	explosionSpell.spellOffset = sf::Vector2f(-25.f, -120.f);
 	explosionSpell.fightingTime = sf::seconds(3.f);
 	explosionSpell.castingTime = sf::seconds(2.f);
@@ -110,7 +110,7 @@ void YashaBoss::handleAttackInput() {
 }
 
 void YashaBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 100.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {100.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-100.f, -160.f));
 	const int width = 300;
 	const int height = 250;
@@ -119,7 +119,7 @@ void YashaBoss::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation(sf::seconds(0.08f));
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 13; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		flyingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -127,17 +127,17 @@ void YashaBoss::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
-	idleAnimation->addFrame(sf::IntRect(2 * width, height, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, height, width, height));
+	idleAnimation->addFrame(sf::IntRect({2 * width, height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, height}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 7; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, 2 * height}, {width, height}));
 	}
 	castingAnimation->setLooped(false);
 
@@ -145,7 +145,7 @@ void YashaBoss::loadAnimation(int skinNr) {
 
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(6 * width, 2 * height, width, height));
+	fightingAnimation->addFrame(sf::IntRect({6 * width, 2 * height}, {width, height}));
 	fightingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -153,7 +153,7 @@ void YashaBoss::loadAnimation(int skinNr) {
 	Animation* casting2Animation = new Animation(sf::seconds(0.08f));
 	casting2Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 5; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+		casting2Animation->addFrame(sf::IntRect({i * width, 3 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -161,7 +161,7 @@ void YashaBoss::loadAnimation(int skinNr) {
 	Animation* fighting2Animation = new Animation(sf::seconds(0.08f));
 	fighting2Animation->setSpriteSheet(tex);
 	for (int i = 5; i < 13; ++i) {
-		fighting2Animation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+		fighting2Animation->addFrame(sf::IntRect({i * width, 3 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Fighting2, fighting2Animation);
@@ -178,8 +178,8 @@ void YashaBoss::loadAnimation(int skinNr) {
 	m_timeUntilNextState = sf::seconds(6.f);
 
 	// init eyes
-	m_eyes.setTexture(*tex);
-	m_eyes.setTextureRect(sf::IntRect(7 * width, 2 * height, width, height));
+	m_eyes = new sf::Sprite(*tex);
+	m_eyes->setTextureRect(sf::IntRect({7 * width, 2 * height}, {width, height}));
 }
 
 MovingBehavior* YashaBoss::createMovingBehavior(bool asAlly) {
@@ -209,7 +209,7 @@ void YashaBoss::update(const sf::Time& frameTime) {
 
 void YashaBoss::renderAfterForeground(sf::RenderTarget& target) {
 	if (m_bossState == YashaBossState::StartCat || m_bossState == YashaBossState::Cat) {
-		target.draw(m_eyes);
+		target.draw(*m_eyes);
 	}
 	Boss::renderAfterForeground(target);
 }
@@ -347,11 +347,11 @@ void YashaBoss::updateFading(const sf::Time& frameTime) {
 void YashaBoss::setPosition(const sf::Vector2f& pos) {
 	Boss::setPosition(pos);
 	if (m_velGen) {
-		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - getBoundingBox()->height);
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - getBoundingBox()->size.y);
 	}
 	if (m_bossState == YashaBossState::StartCat || m_bossState == YashaBossState::Cat) {
-		m_eyes.setPosition(m_movingBehavior->isFacingRight() ? pos + m_spriteOffset : pos + m_spriteOffset + sf::Vector2f(300.f, 0.f));
-		m_eyes.setScale(m_movingBehavior->isFacingRight() ? 1.f : -1.f, m_eyes.getScale().y);
+		m_eyes->setPosition(m_movingBehavior->isFacingRight() ? pos + m_spriteOffset : pos + m_spriteOffset + sf::Vector2f(300.f, 0.f));
+		m_eyes->setScale(sf::Vector2f(m_movingBehavior->isFacingRight() ? 1.f : -1.f, m_eyes->getScale().y));
 	}
 }
 
@@ -373,7 +373,7 @@ void YashaBoss::loadComponents() {
 
 	// Generators
 	auto posGen = new particles::EllipseSpawner();
-	posGen->radius = sf::Vector2f(m_boundingBox.width, m_boundingBox.height * 0.25f);
+	posGen->radius = sf::Vector2f(m_boundingBox.size.x, m_boundingBox.size.y * 0.25f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -392,7 +392,7 @@ void YashaBoss::loadComponents() {
 	data.colorGen = colGen;
 
 	m_velGen = new particles::AimedVelocityGenerator();
-	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - 10.f);
 	m_velGen->minStartSpeed = 40.f;
 	m_velGen->maxStartSpeed = 80.f;
 	data.velGen = m_velGen;
@@ -403,12 +403,12 @@ void YashaBoss::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, getBoundingBox()->height));
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, getBoundingBox()->size.y));
 	addComponent(m_pc);
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height),
-		sf::Vector2f(m_boundingBox.width * 4.f, m_boundingBox.height * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->size.x, getBoundingBox()->size.y),
+		sf::Vector2f(m_boundingBox.size.x * 4.f, m_boundingBox.size.y * 2.f), 0.6f), this));
 }
 

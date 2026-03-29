@@ -13,7 +13,7 @@ ParticleTile::ParticleTile(LevelScreen* levelScreen) : LevelDynamicTile(levelScr
 }
 
 bool ParticleTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 50.f}));
 	m_isCollidable = false;
 
 	if (contains(properties, std::string("layer"))) {
@@ -43,7 +43,7 @@ void ParticleTile::update(const sf::Time& frameTime) {
 void ParticleTile::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	if (m_velGen) {
-		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - 10.f);
 	}
 }
 
@@ -100,7 +100,7 @@ void ParticleTile::loadWaterParticles() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height));
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0.8f * getBoundingBox()->size.y));
 	addComponent(m_pc);
 }
 
@@ -139,7 +139,7 @@ void ParticleTile::loadEmberParticles() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.8f * getBoundingBox()->height));
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0.8f * getBoundingBox()->size.y));
 	addComponent(m_pc);
 
 	// light
@@ -171,7 +171,7 @@ void ParticleTile::loadFlameParticles() {
 	data.colorGen = getFlameColorGenerator(m_color);
 
 	m_velGen = new particles::AimedVelocityGenerator();
-	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - 10.f);
 	m_velGen->minStartSpeed = 40.f;
 	m_velGen->maxStartSpeed = 80.f;
 	data.velGen = m_velGen;
@@ -182,7 +182,7 @@ void ParticleTile::loadFlameParticles() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height));
+	m_pc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0.5f * getBoundingBox()->size.y));
 	addComponent(m_pc);
 
 	// light

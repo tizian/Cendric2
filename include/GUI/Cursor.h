@@ -24,7 +24,7 @@ public:
 	bool isVisible() const;
 
 private:
-	sf::Sprite m_cursorSprite;
+	std::optional<sf::Sprite> m_cursorSprite;
 	sf::Time m_timeUntilNextSkin;
 	CursorSkin m_nextSkin;
 	sf::Vector2f m_scale;

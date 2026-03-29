@@ -15,65 +15,65 @@ void NPC::load(const NPCData& data) {
 	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetpath);
 	m_NPCdata = data;
 	setBoundingBox(data.boundingBox);
-	setSpriteOffset(sf::Vector2f(-data.boundingBox.left, -data.boundingBox.top));
+	setSpriteOffset(sf::Vector2f(-data.boundingBox.position.x, -data.boundingBox.position.y));
 
 	Animation* walkingAnimationDown = new Animation(sf::seconds(0.15f));
 	walkingAnimationDown->setSpriteSheet(tex);
-	walkingAnimationDown->addFrame(sf::IntRect(0, 0, 50, 50));
-	walkingAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
-	walkingAnimationDown->addFrame(sf::IntRect(100, 0, 50, 50));
-	walkingAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
+	walkingAnimationDown->addFrame(sf::IntRect({0, 0}, {50, 50}));
+	walkingAnimationDown->addFrame(sf::IntRect({50, 0}, {50, 50}));
+	walkingAnimationDown->addFrame(sf::IntRect({100, 0}, {50, 50}));
+	walkingAnimationDown->addFrame(sf::IntRect({50, 0}, {50, 50}));
 
 	addAnimation(GameObjectState::Walking_down, walkingAnimationDown);
 
 	Animation* walkingAnimationLeft = new Animation(sf::seconds(0.15f));
 	walkingAnimationLeft->setSpriteSheet(tex);
-	walkingAnimationLeft->addFrame(sf::IntRect(0, 50, 50, 50));
-	walkingAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
-	walkingAnimationLeft->addFrame(sf::IntRect(100, 50, 50, 50));
-	walkingAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
+	walkingAnimationLeft->addFrame(sf::IntRect({0, 50}, {50, 50}));
+	walkingAnimationLeft->addFrame(sf::IntRect({50, 50}, {50, 50}));
+	walkingAnimationLeft->addFrame(sf::IntRect({100, 50}, {50, 50}));
+	walkingAnimationLeft->addFrame(sf::IntRect({50, 50}, {50, 50}));
 
 	addAnimation(GameObjectState::Walking_left, walkingAnimationLeft);
 
 	Animation* walkingAnimationRight = new Animation(sf::seconds(0.15f));
 	walkingAnimationRight->setSpriteSheet(tex);
-	walkingAnimationRight->addFrame(sf::IntRect(0, 100, 50, 50));
-	walkingAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
-	walkingAnimationRight->addFrame(sf::IntRect(100, 100, 50, 50));
-	walkingAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
+	walkingAnimationRight->addFrame(sf::IntRect({0, 100}, {50, 50}));
+	walkingAnimationRight->addFrame(sf::IntRect({50, 100}, {50, 50}));
+	walkingAnimationRight->addFrame(sf::IntRect({100, 100}, {50, 50}));
+	walkingAnimationRight->addFrame(sf::IntRect({50, 100}, {50, 50}));
 
 	addAnimation(GameObjectState::Walking_right, walkingAnimationRight);
 
 	Animation* walkingAnimationUp = new Animation(sf::seconds(0.15f));
 	walkingAnimationUp->setSpriteSheet(tex);
-	walkingAnimationUp->addFrame(sf::IntRect(0, 150, 50, 50));
-	walkingAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
-	walkingAnimationUp->addFrame(sf::IntRect(100, 150, 50, 50));
-	walkingAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
+	walkingAnimationUp->addFrame(sf::IntRect({0, 150}, {50, 50}));
+	walkingAnimationUp->addFrame(sf::IntRect({50, 150}, {50, 50}));
+	walkingAnimationUp->addFrame(sf::IntRect({100, 150}, {50, 50}));
+	walkingAnimationUp->addFrame(sf::IntRect({50, 150}, {50, 50}));
 
 	addAnimation(GameObjectState::Walking_up, walkingAnimationUp);
 
 	Animation* idleAnimationDown = new Animation();
 	idleAnimationDown->setSpriteSheet(tex);
-	idleAnimationDown->addFrame(sf::IntRect(50, 0, 50, 50));
+	idleAnimationDown->addFrame(sf::IntRect({50, 0}, {50, 50}));
 
 	addAnimation(GameObjectState::Idle_down, idleAnimationDown);
 
 	Animation* idleAnimationLeft = new Animation();
 	idleAnimationLeft->setSpriteSheet(tex);
-	idleAnimationLeft->addFrame(sf::IntRect(50, 50, 50, 50));
+	idleAnimationLeft->addFrame(sf::IntRect({50, 50}, {50, 50}));
 
 	addAnimation(GameObjectState::Idle_left, idleAnimationLeft);
 
 	Animation* idleAnimationRight = new Animation();
 	idleAnimationRight->setSpriteSheet(tex);
-	idleAnimationRight->addFrame(sf::IntRect(50, 100, 50, 50));
+	idleAnimationRight->addFrame(sf::IntRect({50, 100}, {50, 50}));
 
 	addAnimation(GameObjectState::Idle_right, idleAnimationRight);
 
 	Animation* idleAnimationUp = new Animation();
 	idleAnimationUp->setSpriteSheet(tex);
-	idleAnimationUp->addFrame(sf::IntRect(50, 150, 50, 50));
+	idleAnimationUp->addFrame(sf::IntRect({50, 150}, {50, 50}));
 
 	addAnimation(GameObjectState::Idle_up, idleAnimationUp);
 

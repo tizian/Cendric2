@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ScreenOverlays/ScreenOverlay.h"
+#include <optional>
 
 /* A screen overlay that additionally supports up to two textures */
 class TextureScreenOverlay : public virtual ScreenOverlay {
@@ -24,6 +25,6 @@ public:
 	void setBackgroundScale(const sf::Vector2f& factors);
 
 protected:	
-	sf::Sprite m_sprite;
-	sf::Sprite m_background;
+	std::optional<sf::Sprite> m_sprite;
+	std::optional<sf::Sprite> m_background;
 };

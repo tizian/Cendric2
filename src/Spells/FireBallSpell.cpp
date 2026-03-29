@@ -8,7 +8,7 @@ void FireBallSpell::init(const SpellData& data) {
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		spellAnimation->addFrame(sf::IntRect(i * 50, data.skinNr * 50, 50, 50));
+		spellAnimation->addFrame(sf::IntRect({i * 50, data.skinNr * 50}, {50, 50}));
 	}
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -22,7 +22,7 @@ void FireBallSpell::load(const SpellData& data, LevelMovableGameObject* mob, con
 	init(data);
 	Spell::load(data, mob, target);
 
-	LightData lightData(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 80.f, 0.8f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 80.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
 }
 
@@ -30,6 +30,6 @@ void FireBallSpell::load(const SpellData& data, LevelDynamicTile* tile, const sf
 	init(data);
 	Spell::load(data, tile, target);
 
-	LightData lightData(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 80.f, 0.8f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 80.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
 }

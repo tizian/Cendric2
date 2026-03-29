@@ -309,7 +309,7 @@ SpellData SpellData::getChopSpellData() {
 	chop.id = SpellID::Chop;
 
 	chop.cooldown = sf::milliseconds(400);
-	chop.boundingBox = sf::FloatRect(0, 0, 40, 80);
+	chop.boundingBox = sf::FloatRect({0, 0}, {40, 80});
 	chop.damageType = DamageType::Physical;
 	chop.damage = 1;
 	chop.activeDuration = sf::milliseconds(320);
@@ -328,7 +328,7 @@ SpellData SpellData::getProjectileSpellData() {
 	projectile.creatorSoundPaths = { "res/sound/spell/arrow.ogg" };
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(5);
@@ -351,7 +351,7 @@ SpellData SpellData::getReturningProjectileSpellData() {
 	projectile.spritesheetPath = "res/texture/spells/spritesheet_spell_returningprojectile.png";
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 30, 20);
+	projectile.boundingBox = sf::FloatRect({0, 0}, {30, 20});
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(5);
@@ -371,7 +371,7 @@ SpellData SpellData::getRotatingProjectileData() {
 	projectile.spritesheetPath = "res/texture/spells/spritesheet_spell_rotating_projectile.png";
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 35, 35);
+	projectile.boundingBox = sf::FloatRect({0, 0}, {35, 35});
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(6);
@@ -389,7 +389,7 @@ SpellData SpellData::getTargetingProjectileData() {
 	projectile.spritesheetPath = "res/texture/spells/spritesheet_spell_targetingprojectile.png";
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 19, 19);
+	projectile.boundingBox = sf::FloatRect({0, 0}, {19, 19});
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(6);
@@ -407,7 +407,7 @@ SpellData SpellData::getBoomerangSpellData() {
 	projectile.spritesheetPath = "res/texture/spells/spritesheet_spell_boomerang.png";
 
 	projectile.cooldown = sf::seconds(1);
-	projectile.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	projectile.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	projectile.divergenceAngle = 0.2f;
 	projectile.damageType = DamageType::Physical;
 	projectile.activeDuration = sf::seconds(5);
@@ -427,10 +427,10 @@ SpellData SpellData::getFireBallSpellData() {
 	fireBall.spellType = SpellType::Elemental;
 	fireBall.spritesheetPath = "res/texture/spells/spritesheet_spell_fireball.png";
 	fireBall.creatorSoundPaths = { "res/sound/spell/fireball.ogg" };
-	fireBall.iconTextureRect = sf::IntRect(0, 0, 50, 50);
+	fireBall.iconTextureRect = sf::IntRect({0, 0}, {50, 50});
 
 	fireBall.cooldown = sf::seconds(1);
-	fireBall.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	fireBall.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	fireBall.divergenceAngle = 0.2f;
 	fireBall.damageType = DamageType::Fire;
 	fireBall.activeDuration = sf::seconds(5);
@@ -456,10 +456,10 @@ SpellData SpellData::getIceBallSpellData() {
 	iceBall.spritesheetPath = "res/texture/spells/spritesheet_spell_iceball.png";
 	iceBall.spellSoundPaths = { "res/sound/spell/iceball.ogg" };
 	iceBall.isSpellSoundLooping = false;
-	iceBall.iconTextureRect = sf::IntRect(50, 0, 50, 50);
+	iceBall.iconTextureRect = sf::IntRect({50, 0}, {50, 50});
 
 	iceBall.cooldown = sf::seconds(1);
-	iceBall.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	iceBall.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	iceBall.divergenceAngle = 0.2f;
 	iceBall.damageType = DamageType::Ice;
 	iceBall.activeDuration = sf::seconds(5);
@@ -482,10 +482,10 @@ SpellData SpellData::getDivineShieldSpellData() {
 	divineShield.spellType = SpellType::Divine;
 	divineShield.spritesheetPath = "res/texture/spells/spritesheet_spell_divineshield.png";
 	divineShield.creatorSoundPaths = { "res/sound/spell/divineshield.ogg" };
-	divineShield.iconTextureRect = sf::IntRect(100, 150, 50, 50);
+	divineShield.iconTextureRect = sf::IntRect({100, 150}, {50, 50});
 
 	divineShield.cooldown = sf::seconds(20);
-	divineShield.boundingBox = sf::FloatRect(0, 0, 98, 110);
+	divineShield.boundingBox = sf::FloatRect({0, 0}, {98, 110});
 	divineShield.spellOffset = sf::Vector2f(-49.f, -12.f);
 	divineShield.duration = sf::seconds(3);
 	divineShield.activeDuration = divineShield.duration;
@@ -505,7 +505,7 @@ SpellData SpellData::getBuffSpellData() {
 	buffSpell.spellType = SpellType::VOID;
 
 	buffSpell.cooldown = sf::milliseconds(10000);
-	buffSpell.boundingBox = sf::FloatRect(0, 0, 200, 200);
+	buffSpell.boundingBox = sf::FloatRect({0, 0}, {200, 200});
 	buffSpell.duration = sf::seconds(5.f);
 	buffSpell.activeDuration = sf::seconds(1.f);
 	buffSpell.damage = 20;
@@ -521,10 +521,10 @@ SpellData SpellData::getAureolaSpellData() {
 	aureola.spellType = SpellType::Divine;
 	aureola.spritesheetPath = "res/texture/spells/spritesheet_spell_aureola.png";
 	aureola.creatorSoundPaths = { "res/sound/spell/aureola.ogg" };
-	aureola.iconTextureRect = sf::IntRect(200, 150, 50, 50);
+	aureola.iconTextureRect = sf::IntRect({200, 150}, {50, 50});
 
 	aureola.cooldown = sf::milliseconds(10000);
-	aureola.boundingBox = sf::FloatRect(0, 0, 20, 20);
+	aureola.boundingBox = sf::FloatRect({0, 0}, {20, 20});
 	aureola.spellOffset = sf::Vector2f(0, 0);
 	aureola.count = 4;
 	aureola.divergenceAngle = 2 * M_PI / aureola.count;
@@ -553,10 +553,10 @@ SpellData SpellData::getFearSpellData() {
 	fear.spellType = SpellType::Necromancy;
 	fear.spritesheetPath = "res/texture/spells/spritesheet_spell_fear.png";
 	fear.creatorSoundPaths = { "res/sound/spell/fear.ogg" };
-	fear.iconTextureRect = sf::IntRect(0, 100, 50, 50);
+	fear.iconTextureRect = sf::IntRect({0, 100}, {50, 50});
 
 	fear.cooldown = sf::seconds(3);
-	fear.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	fear.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	fear.divergenceAngle = 0.2f;
 	fear.activeDuration = sf::seconds(5);
 	fear.duration = sf::seconds(2);
@@ -578,10 +578,10 @@ SpellData SpellData::getAntiGravitySpellData() {
 	SpellData antiGravity;
 	antiGravity.id = SpellID::AntiGravity;
 	antiGravity.spellType = SpellType::Elemental;
-	antiGravity.iconTextureRect = sf::IntRect(200, 0, 50, 50);
+	antiGravity.iconTextureRect = sf::IntRect({200, 0}, {50, 50});
 	antiGravity.creatorSoundPaths = { "res/sound/spell/antigravity.ogg" };
 
-	antiGravity.boundingBox = sf::FloatRect(0, 0, 98, 98);
+	antiGravity.boundingBox = sf::FloatRect({0, 0}, {98, 98});
 	antiGravity.spellOffset = sf::Vector2f(-49.f, 0.f);
 	antiGravity.cooldown = sf::seconds(2.f);
 	antiGravity.duration = sf::seconds(-1);
@@ -599,9 +599,9 @@ SpellData SpellData::getTelekinesisSpellData() {
 
 	telekinesis.spritesheetPath = "res/texture/spells/spritesheet_spell_telekinesis.png";
 	telekinesis.creatorSoundPaths = { "res/sound/spell/telekinesis.ogg" };
-	telekinesis.iconTextureRect = sf::IntRect(100, 0, 50, 50);
+	telekinesis.iconTextureRect = sf::IntRect({100, 0}, {50, 50});
 	telekinesis.cooldown = sf::seconds(3);
-	telekinesis.boundingBox = sf::FloatRect(0, 0, 20, 20);
+	telekinesis.boundingBox = sf::FloatRect({0, 0}, {20, 20});
 	telekinesis.speed = 200.f;
 	telekinesis.isDynamicTileEffect = true;
 	telekinesis.needsTarget = true;
@@ -620,10 +620,10 @@ SpellData SpellData::getWindGustSpellData() {
 	windGust.id = SpellID::WindGust;
 	windGust.spellType = SpellType::Elemental;
 
-	windGust.iconTextureRect = sf::IntRect(150, 0, 50, 50);
+	windGust.iconTextureRect = sf::IntRect({150, 0}, {50, 50});
 	windGust.cooldown = sf::seconds(3);
 	windGust.range = 105.f;
-	windGust.boundingBox = sf::FloatRect(0.f, 0.f, windGust.range, 60.f);
+	windGust.boundingBox = sf::FloatRect({0.f, 0.f}, {windGust.range, 60.f});
 	windGust.spellOffset = sf::Vector2f(10.f, 10.f);
 	windGust.duration = sf::seconds(1.f);
 	windGust.activeDuration = windGust.duration;
@@ -645,12 +645,12 @@ SpellData SpellData::getLeechSpellData() {
 	SpellData leech;
 	leech.id = SpellID::Leech;
 	leech.spellType = SpellType::Necromancy;
-	leech.iconTextureRect = sf::IntRect(50, 100, 50, 50);
+	leech.iconTextureRect = sf::IntRect({50, 100}, {50, 50});
 	leech.spellSoundPaths = { "res/sound/spell/leech.ogg" };
 	leech.isSpellSoundLooping = false;
 
 	leech.cooldown = sf::seconds(3);
-	leech.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	leech.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	leech.divergenceAngle = 0.2f;
 	leech.damageType = DamageType::Shadow;
 	leech.activeDuration = sf::seconds(5);
@@ -673,10 +673,10 @@ SpellData SpellData::getIcyAmbushSpellData() {
 	icyAmbush.spellType = SpellType::Twilight;
 	icyAmbush.spritesheetPath = "res/texture/spells/spritesheet_spell_icyambush.png";
 	icyAmbush.creatorSoundPaths = { "res/sound/spell/icyambush.ogg" };
-	icyAmbush.iconTextureRect = sf::IntRect(200, 50, 50, 50);
+	icyAmbush.iconTextureRect = sf::IntRect({200, 50}, {50, 50});
 
 	icyAmbush.cooldown = sf::seconds(5);
-	icyAmbush.boundingBox = sf::FloatRect(0, 0, 20, 20);
+	icyAmbush.boundingBox = sf::FloatRect({0, 0}, {20, 20});
 	icyAmbush.damageType = DamageType::Ice;
 	icyAmbush.range = 300.f;
 	icyAmbush.speed = 200.f;
@@ -701,7 +701,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.spellType = SpellType::Twilight;
 	flash.spritesheetPath = "res/texture/spells/spritesheet_spell_flash.png";
 	flash.creatorSoundPaths = { "res/sound/spell/flash.ogg" };
-	flash.iconTextureRect = sf::IntRect(150, 50, 50, 50);
+	flash.iconTextureRect = sf::IntRect({150, 50}, {50, 50});
 
 	flash.cooldown = sf::seconds(7);
 	flash.damageType = DamageType::Light;
@@ -712,7 +712,7 @@ SpellData SpellData::getFlashSpellData() {
 	flash.range = 200.f;
 	flash.isStunning = true;
 	flash.ccStrength = 1;
-	flash.boundingBox = sf::FloatRect(0, 0, 100, 120);
+	flash.boundingBox = sf::FloatRect({0, 0}, {100, 120});
 	flash.spellOffset = sf::Vector2f(-50.f, -20.f);
 	flash.fightAnimation = GameObjectState::VOID;
 
@@ -726,10 +726,10 @@ SpellData SpellData::getLightSpellData() {
 	SpellData light;
 	light.id = SpellID::Light;
 	light.spellType = SpellType::Divine;
-	light.iconTextureRect = sf::IntRect(0, 150, 50, 50);
+	light.iconTextureRect = sf::IntRect({0, 150}, {50, 50});
 
 	light.cooldown = sf::seconds(60);
-	light.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	light.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	light.spellOffset = sf::Vector2f(-5.f, -60.f);
 	light.duration = sf::seconds(60);
 	light.activeDuration = light.duration;
@@ -748,12 +748,12 @@ SpellData SpellData::getHolyFireSpellData() {
 	SpellData holyFire;
 	holyFire.id = SpellID::HolyFire;
 	holyFire.spellType = SpellType::Divine;
-	holyFire.iconTextureRect = sf::IntRect(50, 150, 50, 50);
+	holyFire.iconTextureRect = sf::IntRect({50, 150}, {50, 50});
 	holyFire.creatorSoundPaths = { "res/sound/spell/holyfire.ogg" };
 
 	holyFire.cooldown = sf::seconds(10);
 	holyFire.range = 100.f;
-	holyFire.boundingBox = sf::FloatRect(0, 0, 2 * holyFire.range, 2 * holyFire.range);
+	holyFire.boundingBox = sf::FloatRect({0, 0}, {2 * holyFire.range, 2 * holyFire.range});
 	holyFire.damagePerSecond = 5;
 	holyFire.damageType = DamageType::Light;
 	holyFire.duration = sf::seconds(2);
@@ -774,10 +774,10 @@ SpellData SpellData::getLeapOfFaithSpellData() {
 	leapOfFaith.spellType = SpellType::Divine;
 	leapOfFaith.spritesheetPath = "res/texture/spells/spritesheet_spell_leapoffaith.png";
 	leapOfFaith.creatorSoundPaths = { "res/sound/spell/leapoffaith.ogg" };
-	leapOfFaith.iconTextureRect = sf::IntRect(150, 150, 50, 50);
+	leapOfFaith.iconTextureRect = sf::IntRect({150, 150}, {50, 50});
 
 	leapOfFaith.cooldown = sf::seconds(30);
-	leapOfFaith.boundingBox = sf::FloatRect(0, 0, 80, 120);
+	leapOfFaith.boundingBox = sf::FloatRect({0, 0}, {80, 120});
 	leapOfFaith.spellOffset = sf::Vector2f(-40.f, -26.f);
 	leapOfFaith.duration = sf::seconds(10);
 	leapOfFaith.activeDuration = leapOfFaith.duration;
@@ -796,10 +796,10 @@ SpellData SpellData::getUnlockSpellData() {
 	unlock.spellType = SpellType::Twilight;
 	unlock.spritesheetPath = "res/texture/spells/spritesheet_spell_unlock.png";
 	unlock.creatorSoundPaths = { "res/sound/spell/lockpick.ogg" };
-	unlock.iconTextureRect = sf::IntRect(0, 50, 50, 50);
+	unlock.iconTextureRect = sf::IntRect({0, 50}, {50, 50});
 
 	unlock.cooldown = sf::seconds(2);
-	unlock.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	unlock.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	unlock.needsTarget = true;
 	unlock.isDynamicTileEffect = true;
 	unlock.speed = 200.f;
@@ -818,11 +818,11 @@ SpellData SpellData::getInvisibilitySpellData() {
 	SpellData invisibility;
 	invisibility.id = SpellID::Invisibility;
 	invisibility.spellType = SpellType::Twilight;
-	invisibility.iconTextureRect = sf::IntRect(100, 50, 50, 50);
+	invisibility.iconTextureRect = sf::IntRect({100, 50}, {50, 50});
 	invisibility.creatorSoundPaths = { "res/sound/spell/invisibility.ogg" };
 
 	invisibility.cooldown = sf::seconds(30);
-	invisibility.boundingBox = sf::FloatRect(0, 0, 1, 1);
+	invisibility.boundingBox = sf::FloatRect({0, 0}, {1, 1});
 	invisibility.spellOffset = sf::Vector2f(0.f, 80.f);
 	invisibility.activeDuration = sf::seconds(5);
 	invisibility.duration = invisibility.activeDuration;
@@ -843,9 +843,9 @@ SpellData SpellData::getGhostFormSpellData() {
 	ghostForm.spritesheetPath = "res/texture/spells/spritesheet_spell_ghost.png";
 	ghostForm.spellSoundPaths = { "res/sound/spell/ghostform.ogg" };
 	ghostForm.isSpellSoundLooping = false;
-	ghostForm.iconTextureRect = sf::IntRect(150, 100, 50, 50);
+	ghostForm.iconTextureRect = sf::IntRect({150, 100}, {50, 50});
 	ghostForm.cooldown = sf::seconds(20);
-	ghostForm.boundingBox = sf::FloatRect(0, 0, 30, 80);
+	ghostForm.boundingBox = sf::FloatRect({0, 0}, {30, 80});
 	ghostForm.spellOffset = sf::Vector2f(-20.f, 0.f);
 	ghostForm.activeDuration = sf::seconds(4);
 	ghostForm.duration = ghostForm.activeDuration;
@@ -866,11 +866,11 @@ SpellData SpellData::getShadowTrapSpellData() {
 	shadowTrap.spellType = SpellType::Twilight;
 	shadowTrap.spritesheetPath = "res/texture/spells/spritesheet_spell_shadowtrap.png";
 	shadowTrap.creatorSoundPaths = { "res/sound/spell/trap.ogg" };
-	shadowTrap.iconTextureRect = sf::IntRect(50, 50, 50, 50);
+	shadowTrap.iconTextureRect = sf::IntRect({50, 50}, {50, 50});
 
 	shadowTrap.cooldown = sf::seconds(10);
-	shadowTrap.boundingBox = sf::FloatRect(0, 0, 25, 10);
-	shadowTrap.spellOffset = sf::Vector2f(-shadowTrap.boundingBox.width * 0.5f, 10.f);
+	shadowTrap.boundingBox = sf::FloatRect({0, 0}, {25, 10});
+	shadowTrap.spellOffset = sf::Vector2f(-shadowTrap.boundingBox.size.x * 0.5f, 10.f);
 	shadowTrap.divergenceAngle = 0.2f;
 	shadowTrap.damageType = DamageType::Shadow;
 	shadowTrap.activeDuration = sf::seconds(15);
@@ -891,7 +891,7 @@ SpellData SpellData::getSummonGargoyleSpellData() {
 	summonGargoyle.spellType = SpellType::Necromancy;
 	summonGargoyle.creatorSoundPaths = { "res/sound/tile/gargoyle.ogg" };
 	summonGargoyle.spritesheetPath = "res/texture/enemies/spritesheet_enemy_gargoyle.png";
-	summonGargoyle.iconTextureRect = sf::IntRect(200, 100, 50, 50);
+	summonGargoyle.iconTextureRect = sf::IntRect({200, 100}, {50, 50});
 
 	summonGargoyle.cooldown = sf::seconds(30);
 	summonGargoyle.damageType = DamageType::Physical;
@@ -913,9 +913,9 @@ SpellData SpellData::getRaiseTheDeadSpellData() {
 
 	raiseTheDead.spritesheetPath = "res/texture/spells/spritesheet_spell_raisethedead.png";
 	raiseTheDead.creatorSoundPaths = { "res/sound/spell/raisethedead.ogg" };
-	raiseTheDead.iconTextureRect = sf::IntRect(100, 100, 50, 50);
+	raiseTheDead.iconTextureRect = sf::IntRect({100, 100}, {50, 50});
 	raiseTheDead.cooldown = sf::seconds(10);
-	raiseTheDead.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	raiseTheDead.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	raiseTheDead.speed = 200.f;
 	raiseTheDead.damage = 5;
 	raiseTheDead.duration = sf::seconds(30.f);

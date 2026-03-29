@@ -37,7 +37,7 @@ void WolfEnemy::loadSpells() {
 	chopSpell.damagePerSecond = 2;
 	chopSpell.activeDuration = sf::milliseconds(500);
 	chopSpell.cooldown = sf::milliseconds(2000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 70, 100);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {70, 100});
 	chopSpell.spellOffset = sf::Vector2f(0, 30);
 	chopSpell.fightingTime = sf::milliseconds(6 * 100);
 
@@ -71,33 +71,33 @@ void WolfEnemy::handleAttackInput() {
 
 void WolfEnemy::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 106.f, 55.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {106.f, 55.f}));
 	setSpriteOffset(sf::Vector2f(-17.f, -45.f));
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 140, 0, 140, 100));
+		walkingAnimation->addFrame(sf::IntRect({i * 140, 0}, {140, 100}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 100, 140, 100));
+	idleAnimation->addFrame(sf::IntRect({0, 100}, {140, 100}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(0, 200, 140, 100));
+	jumpingAnimation->addFrame(sf::IntRect({0, 200}, {140, 100}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* howlingAnimation = new Animation(sf::seconds(0.1f));
 	howlingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; ++i) {
-		howlingAnimation->addFrame(sf::IntRect(i * 140, 400, 140, 100));
+		howlingAnimation->addFrame(sf::IntRect({i * 140, 400}, {140, 100}));
 	}
 	howlingAnimation->setLooped(false);
 
@@ -106,10 +106,10 @@ void WolfEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 2; i < 5; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 140, 400, 140, 100));
+		fightingAnimation->addFrame(sf::IntRect({i * 140, 400}, {140, 100}));
 	}
 	for (int i = 4; i > 1; --i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 140, 400, 140, 100));
+		fightingAnimation->addFrame(sf::IntRect({i * 140, 400}, {140, 100}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -117,7 +117,7 @@ void WolfEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
-		deadAnimation->addFrame(sf::IntRect(i * 140, 300, 140, 100));
+		deadAnimation->addFrame(sf::IntRect({i * 140, 300}, {140, 100}));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);

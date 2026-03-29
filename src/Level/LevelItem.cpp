@@ -29,7 +29,7 @@ void LevelItem::load(const std::string& itemID, const sf::Vector2f& position) {
 	auto const levelItemBean = item.getBean<LevelitemBean>();
 	Animation* idleAnimation = new Animation(levelItemBean->frame_time);
 	setSpriteOffset(levelItemBean->sprite_offset);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, levelItemBean->bounding_box.x, levelItemBean->bounding_box.y));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {levelItemBean->bounding_box.x, levelItemBean->bounding_box.y}));
 	idleAnimation->setSpriteSheet(g_resourceManager->getTexture(GlobalResource::TEX_LEVELITEMS));
 	// add frames
 	auto frames = item.getBeans<LevelitemFrameBean>();

@@ -135,36 +135,36 @@ void VeliusBossClone::loadAnimation(int skinNr) {
 	int width = 120;
 	int height = 150;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 115.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {25.f, 115.f}));
 	setSpriteOffset(sf::Vector2f(-50.f, -35.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, height, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, height}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, height, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, height}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 14; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * width, height, width, height));
+		deadAnimation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
-	deadAnimation->addFrame(sf::IntRect(17 * width, height, width, height));
+	deadAnimation->addFrame(sf::IntRect({17 * width, height}, {width, height}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -172,9 +172,9 @@ void VeliusBossClone::loadAnimation(int skinNr) {
 	// the "throwning" spell
 	Animation* castingAnimation = new Animation(sf::seconds(0.15f));
 	castingAnimation->setSpriteSheet(tex);
-	castingAnimation->addFrame(sf::IntRect(14 * width, height, width, height));
-	castingAnimation->addFrame(sf::IntRect(15 * width, height, width, height));
-	castingAnimation->addFrame(sf::IntRect(16 * width, height, width, height));
+	castingAnimation->addFrame(sf::IntRect({14 * width, height}, {width, height}));
+	castingAnimation->addFrame(sf::IntRect({15 * width, height}, {width, height}));
+	castingAnimation->addFrame(sf::IntRect({16 * width, height}, {width, height}));
 	castingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
@@ -185,7 +185,7 @@ void VeliusBossClone::loadAnimation(int skinNr) {
 
 	// component: light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width * 0.5f, 0.f),
+		sf::Vector2f(getBoundingBox()->size.x * 0.5f, 0.f),
 		sf::Vector2f(100.f, 100.f), 0.6f), this));
 }
 

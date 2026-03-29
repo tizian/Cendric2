@@ -3,6 +3,7 @@
 #include "global.h"
 #include "World/GameObject.h"
 #include "Structs/QuestData.h"
+#include <optional>
 
 class CharacterCore;
 class TooltipWindowComponent;
@@ -43,6 +44,6 @@ protected:
 	virtual void execSetActive() {};
 
 private:
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 	bool m_isActive;
 };

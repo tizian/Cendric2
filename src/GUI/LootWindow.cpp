@@ -45,8 +45,8 @@ void LootWindow::setLoot(const std::map<string, int>& loot, int gold) {
 	m_lootText = new BitmapText(lootText);
 	m_lootText->setCharacterSize(8);
 	m_lootText->setPosition(getPosition() + TEXT_OFFSET);
-	setHeight(m_lootText->getLocalBounds().height + 18.f);
-	setWidth(m_lootText->getLocalBounds().width + 10.f);
+	setHeight(m_lootText->getLocalBounds().size.y + 18.f);
+	setWidth(m_lootText->getLocalBounds().size.x + 10.f);
 }
 
 void LootWindow::setPosition(const sf::Vector2f& position) {

@@ -20,7 +20,7 @@ CheckpointTile::CheckpointTile(LevelScreen* levelScreen) : LevelDynamicTile(leve
 
 bool CheckpointTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	m_isMimic = contains(properties, std::string("mimic"));
 
@@ -33,16 +33,16 @@ void CheckpointTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * 80, 80, 80));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * 80}, {80, 80}));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation(sf::seconds(0.2f));
 	activatedAnimation->setSpriteSheet(tex);
 	for (int i = 1; i < 5; i++) {
-		activatedAnimation->addFrame(sf::IntRect(i * 80, skinNr * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect({i * 80, skinNr * 80}, {80, 80}));
 	}
 	for (int i = 3; i > 0; i--) {
-		activatedAnimation->addFrame(sf::IntRect(i * 80, skinNr * 80, 80, 80));
+		activatedAnimation->addFrame(sf::IntRect({i * 80, skinNr * 80}, {80, 80}));
 	}
 	addAnimation(GameObjectState::Active, activatedAnimation);
 
@@ -93,11 +93,11 @@ void CheckpointTile::onLeftClick() {
 
 	WorldCollisionQueryRecord rec;
 	rec.boundingBox = *(m_mainChar->getBoundingBox());
-	rec.boundingBox.left = getBoundingBox()->left + getBoundingBox()->width / 2.f - rec.boundingBox.width / 2.f;
-	rec.boundingBox.top = getBoundingBox()->top + (getBoundingBox()->height - rec.boundingBox.height);
+	rec.boundingBox.position.x = getBoundingBox()->position.x + getBoundingBox()->size.x / 2.f - rec.boundingBox.size.x / 2.f;
+	rec.boundingBox.position.y = getBoundingBox()->position.y + (getBoundingBox()->size.y - rec.boundingBox.size.y);
 	if (!m_level->collides(rec)) {
 		if (LevelScreen* screen = dynamic_cast<LevelScreen*>(getScreen())) {
-			screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.left, rec.boundingBox.top), m_level->getID());
+			screen->getCharacterCore()->setLevel(sf::Vector2f(rec.boundingBox.position.x, rec.boundingBox.position.y), m_level->getID());
 			screen->getCharacterCore()->autosave();
 			screen->setTooltipText("CheckpointReached", COLOR_GOOD, true);
 			screen->clearConsumedFood();

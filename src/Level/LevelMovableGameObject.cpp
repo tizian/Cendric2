@@ -364,11 +364,11 @@ bool LevelMovableGameObject::collides(const sf::Vector2f& nextPos) const {
 	WorldCollisionQueryRecord rec;
 	rec.ignoreDynamicTiles = isIgnoreDynamicTiles();
 	sf::FloatRect nextBoundingBox = *getBoundingBox();
-	nextBoundingBox.left = nextPos.x;
-	nextBoundingBox.top = nextPos.y;
+	nextBoundingBox.position.x = nextPos.x;
+	nextBoundingBox.position.y = nextPos.y;
 	rec.boundingBox = nextBoundingBox;
 	auto bb = getBoundingBox();
-	rec.collisionDirection = bb->top < nextBoundingBox.top ? CollisionDirection::Down : CollisionDirection::Up;
+	rec.collisionDirection = bb->position.y < nextBoundingBox.position.y ? CollisionDirection::Down : CollisionDirection::Up;
 	return m_level->collides(rec);
 }
 

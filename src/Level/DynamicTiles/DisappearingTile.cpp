@@ -15,9 +15,9 @@ DisappearingTile::DisappearingTile(LevelScreen* levelScreen) :
 }
 
 bool DisappearingTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
-	m_checkBoundingBox.width = TILE_SIZE_F + 2.f;
-	m_checkBoundingBox.height = TILE_SIZE_F + 2.f;
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
+	m_checkBoundingBox.size.x = TILE_SIZE_F + 2.f;
+	m_checkBoundingBox.size.y = TILE_SIZE_F + 2.f;
 
 	m_isInactive = contains(properties, std::string("inactive"));
 
@@ -124,8 +124,8 @@ void DisappearingTile::checkForMainCharacter() {
 
 void DisappearingTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
-	m_checkBoundingBox.left = pos.x - 1.f;
-	m_checkBoundingBox.top = pos.y - 1.f;
+	m_checkBoundingBox.position.x = pos.x - 1.f;
+	m_checkBoundingBox.position.y = pos.y - 1.f;
 }
 
 void DisappearingTile::onHit(Spell* spell) {
@@ -186,7 +186,7 @@ void DisappearingTile::loadComponents() {
 
 	data.colorUpdater = new particles::FadingColorUpdater();
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	
 	addComponent(m_pc);
 

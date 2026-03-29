@@ -46,14 +46,14 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	m_isCollidingY = false; 
 	const sf::FloatRect& bb = *m_mob->getBoundingBox();
 	const Level& level = *m_mob->getLevel();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
-	sf::FloatRect nextBoundingBox(nextPosition.x , nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBox({nextPosition.x , nextPosition.y}, {bb.size.x, bb.size.y});
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
-	bool isMovingY = nextPosition.y != bb.top;
-	bool isMovingX = nextPosition.x != bb.left;
+	bool isMovingDown = nextPosition.y > bb.position.y;
+	bool isMovingRight = nextPosition.x > bb.position.x;
+	bool isMovingY = nextPosition.y != bb.position.y;
+	bool isMovingX = nextPosition.x != bb.position.x;
 	
 	if (level.collidesWithAvoidableTiles(nextBoundingBox) || !level.isInsideWorldRect(nextBoundingBox)) {
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));
@@ -92,10 +92,10 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setVelocityX(0.f);
 			m_mob->setPositionX(rec.safeLeft);
 			m_movingDirectionX = isMovingRight ? -1 : 1;
-			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
 		}
 		else {
-			nextBoundingBoxY.left = nextPosition.x;
+			nextBoundingBoxY.position.x = nextPosition.x;
 		}
 
 		// check for collision on y axis
@@ -118,11 +118,11 @@ void FlyingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 			m_mob->setAccelerationY(0.f);
 			m_mob->setVelocityY(0.f);
 			m_mob->setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 			m_movingDirectionY = isMovingDown ? -1 : 1;
 		}
 		else {
-			nextBoundingBoxX.top = nextPosition.y;
+			nextBoundingBoxX.position.y = nextPosition.y;
 		}
 
 		// check for collision on x axis

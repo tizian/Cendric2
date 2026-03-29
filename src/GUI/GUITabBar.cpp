@@ -22,7 +22,7 @@ GUITabBar::~GUITabBar() {
 void GUITabBar::init() {
 	float height = m_size * GUITabButton::SIZE + (m_size - 1) * BUTTON_MARGIN + 4 * GUIConstants::TEXT_OFFSET;
 	
-	sf::FloatRect box(0, 0, static_cast<float>(WIDTH), height);
+	sf::FloatRect box({0, 0}, {static_cast<float>(WIDTH), height});
 	m_window = new Window(box, GUIOrnamentStyle::LARGE, GUIConstants::MAIN_COLOR, GUIConstants::ORNAMENT_COLOR);
 	
 	m_buttonGroup = new ButtonGroup();

@@ -14,14 +14,14 @@ Button::Button(const sf::FloatRect& box, GUIOrnamentStyle style) :
 	setBoundingBox(box);
 	setInputInDefaultView(true);
 
-	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_mainLayerColor, box.width, box.height);
+	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_mainLayerColor, box.size.x, box.size.y);
 
-	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backLayerColor, box.width, box.height);
+	m_backLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), m_backLayerColor, box.size.x, box.size.y);
 	m_backLayerOffset = sf::Vector2f(0, 2);
 
-	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentLayerColor, box.width, box.height);
+	m_ornamentLayer = SlicedSprite(getOrnamentStyleTexture(style), m_ornamentLayerColor, box.size.x, box.size.y);
 
-	m_positionDefault = sf::Vector2f(box.left, box.top);
+	m_positionDefault = sf::Vector2f(box.position.x, box.position.y);
 	setPosition(m_positionDefault);
 
 	m_keyText.setColor(COLOR_LIGHT_PURPLE);
@@ -31,10 +31,10 @@ void Button::onLeftClick() {
 	if (m_isEnabled && m_isPressed) {
 		m_isClicked = true;
 		m_isPressed = false;
-		m_mainLayer.move(0, 1);
-		m_ornamentLayer.move(0, 1);
-		m_text.move(0, 1);
-		m_textureLayer.move(0, 1);
+		m_mainLayer.move({0, 1});
+		m_ornamentLayer.move({0, 1});
+		m_text.move({0, 1});
+		m_textureLayer->move({0, 1});
 		updateColor();
 		g_inputController->lockAction();
 	}
@@ -45,10 +45,10 @@ void Button::onLeftJustPressed() {
 		m_isPressed = true;
 		m_mainLayer.setPosition(m_positionDefault);
 		m_ornamentLayer.setPosition(m_positionDefault);
-		m_mainLayer.move(0, 1);
-		m_ornamentLayer.move(0, 1);
-		m_text.move(0, 1);
-		m_textureLayer.move(0, 1);
+		m_mainLayer.move({0, 1});
+		m_ornamentLayer.move({0, 1});
+		m_text.move({0, 1});
+		m_textureLayer->move({0, 1});
 		updateColor();
 		g_inputController->lockAction();
 	}
@@ -69,7 +69,7 @@ void Button::render(sf::RenderTarget& renderTarget) {
 		reloadTextPosition();
 		renderTarget.draw(m_keyText);
 	}
-	if (m_hasTexture) renderTarget.draw(m_textureLayer);
+	if (m_hasTexture) renderTarget.draw(*m_textureLayer);
 }
 
 void Button::setPosition(const sf::Vector2f& pos) {
@@ -79,7 +79,7 @@ void Button::setPosition(const sf::Vector2f& pos) {
 	m_ornamentLayer.setPosition(pos);
 	m_text.setPosition(pos + m_textOffset);
 	m_keyText.setPosition(pos + m_keyTextOffset);
-	m_textureLayer.setPosition(pos + m_textureOffset);
+	m_textureLayer->setPosition(pos + m_textureOffset);
 	m_positionDefault = pos;
 }
 
@@ -127,8 +127,8 @@ void Button::setText(const std::string& text, int charSize) {
 void Button::setTextRaw(const std::string& text, const sf::Color& color, int charSize) {
 	m_text = BitmapText(text);
 	float usedWidth = charSize * static_cast<int>(text.length()) + 30.f;
-	if (usedWidth > m_boundingBox.width) {
-		setSize(sf::Vector2f(usedWidth, m_boundingBox.height));
+	if (usedWidth > m_boundingBox.size.x) {
+		setSize(sf::Vector2f(usedWidth, m_boundingBox.size.y));
 	}
 
 	setTextColor(color);
@@ -154,13 +154,13 @@ void Button::setTexture(const sf::Texture* texture) {
 	sf::Vector2f pos = getPosition();
 	sf::Vector2f size = getSize();
 
-	m_textureLayer.setTexture(*texture);
+	m_textureLayer->setTexture(*texture);
 	m_textureOffset = 0.5f * (size - textureSize);
-	m_textureLayer.setPosition(pos + m_textureOffset);
+	m_textureLayer->setPosition(pos + m_textureOffset);
 }
 
 void Button::setTextureColor(const sf::Color& color) {
-	m_textureLayer.setColor(color);
+	m_textureLayer->setColor(color);
 }
 
 void Button::setCharacterSize(int size) {
@@ -172,17 +172,17 @@ void Button::setCharacterSize(int size) {
 
 float Button::checkCharacterSize(int charSize) {
 	float textWidth = hasGamepadKey() ?
-		m_text.getLocalBounds().width + m_keyText.getLocalBounds().width :
-		m_text.getLocalBounds().width;
+		m_text.getLocalBounds().size.x + m_keyText.getLocalBounds().size.x :
+		m_text.getLocalBounds().size.x;
 
-	if (textWidth + 10.f > getBoundingBox()->width && m_characterSize > charSize) {
+	if (textWidth + 10.f > getBoundingBox()->size.x && m_characterSize > charSize) {
 		m_text.setCharacterSize(charSize);
 		m_keyText.setCharacterSize(charSize);
 		m_characterSize = charSize;
 
 		textWidth = hasGamepadKey() ?
-			m_text.getLocalBounds().width + m_keyText.getLocalBounds().width :
-			m_text.getLocalBounds().width;
+			m_text.getLocalBounds().size.x + m_keyText.getLocalBounds().size.x :
+			m_text.getLocalBounds().size.x;
 	}
 
 	return textWidth;
@@ -194,11 +194,11 @@ void Button::reloadTextPosition() {
 	textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	textWidth = checkCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 
-	float xOffset = std::max((getBoundingBox()->width - textWidth) * 0.5f, 0.f);
-	float yOffset = std::max((getBoundingBox()->height - m_text.getLocalBounds().height) * 0.5f, 0.f);
+	float xOffset = std::max((getBoundingBox()->size.x - textWidth) * 0.5f, 0.f);
+	float yOffset = std::max((getBoundingBox()->size.y - m_text.getLocalBounds().size.y) * 0.5f, 0.f);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 	m_text.setPosition(getPosition() + m_textOffset);
-	m_keyTextOffset = m_textOffset + sf::Vector2f(m_text.getLocalBounds().width, 0.f);
+	m_keyTextOffset = m_textOffset + sf::Vector2f(m_text.getLocalBounds().size.x, 0.f);
 	m_keyText.setPosition(getPosition() + m_keyTextOffset);
 }
 
@@ -252,7 +252,7 @@ void Button::setOrnamentLayerTexture(sf::Texture* texture) {
 void Button::setEnabled(bool enabled) {
 	ButtonInterface::setEnabled(enabled);
 	m_text.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
-	m_textureLayer.setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
+	m_textureLayer->setColor(sf::Color(m_text.getColor().r, m_text.getColor().g, m_text.getColor().b, m_isEnabled ? 255 : 100));
 }
 
 void Button::updateColor() {

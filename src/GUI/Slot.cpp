@@ -12,7 +12,7 @@ Slot::Slot() {
 
 void Slot::initSlot() {
 	const auto size = getConfiguredSize();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, ICON_SIZE, ICON_SIZE));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {ICON_SIZE, ICON_SIZE}));
 	setDebugBoundingBox(COLOR_BAD);
 	setInputInDefaultView(true);
 
@@ -41,7 +41,7 @@ void Slot::setPosition(const sf::Vector2f& pos) {
 	m_backgroundRect.setPosition(pos);
 	m_iconRect.setPosition(pos);
 	m_overlayRect.setPosition(pos);
-	m_borderRect.setPosition(pos.x - iconOffset, pos.y - iconOffset);
+	m_borderRect.setPosition({pos.x - iconOffset, pos.y - iconOffset});
 }
 
 void Slot::adjustTooltipOffset() {

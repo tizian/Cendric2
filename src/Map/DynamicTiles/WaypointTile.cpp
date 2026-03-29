@@ -15,9 +15,9 @@ WaypointTile::WaypointTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 }
 
 bool WaypointTile::init(const MapTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f,
-		TILE_SIZE_F,
-		TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f},
+		{TILE_SIZE_F,
+		TILE_SIZE_F}));
 	
 	return true;
 }
@@ -27,17 +27,17 @@ void WaypointTile::loadAnimation(int skinNr) {
 	Animation* activeAnimation = new Animation();
 	activeAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 5; ++i) {
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 	for (int i = 4; i > -1; --i) {
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(250, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({250, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -90,8 +90,8 @@ void WaypointTile::setPosition(const sf::Vector2f& pos) {
 	// calculate port pos.
 	const sf::FloatRect& bb = *m_mainChar->getBoundingBox();
 	m_portPosition = sf::Vector2f(
-		getPosition().x + TILE_SIZE_F * 0.5f - bb.width * 0.5f,
-		getPosition().y - bb.height + TILE_SIZE_F * 0.5f
+		getPosition().x + TILE_SIZE_F * 0.5f - bb.size.x * 0.5f,
+		getPosition().y - bb.size.y + TILE_SIZE_F * 0.5f
 	);
 }
 

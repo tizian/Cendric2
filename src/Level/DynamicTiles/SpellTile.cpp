@@ -24,7 +24,7 @@ bool SpellTile::init(const LevelTileProperties& properties) {
 	m_spellID = static_cast<SpellID>(std::stoi(properties.at(std::string("spellid"))));
 	if (m_spellID <= SpellID::VOID || m_spellID >= SpellID::MAX) return false;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	loadComponents();
 	return true;
 }
@@ -35,7 +35,7 @@ void SpellTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* activatedAnimation = new Animation(sf::seconds(10.f));
@@ -163,7 +163,7 @@ void SpellTile::loadComponents() {
 	data.texturePath = GlobalResource::TEX_PARTICLE_STAR;
 
 	auto posGen = new particles::PointSpawner();
-	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	posGen->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -196,7 +196,7 @@ void SpellTile::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(m_pc);
 }
 

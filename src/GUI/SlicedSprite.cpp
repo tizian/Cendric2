@@ -8,7 +8,7 @@ SlicedSprite::SlicedSprite() {
 	m_rightSlice = 0;
 	m_topSlice = 0;
 	m_bottomSlice = 0;
-	m_vertices = sf::VertexArray(sf::Quads);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 	m_color = COLOR_WHITE;
 }
 
@@ -20,7 +20,7 @@ SlicedSprite::SlicedSprite(sf::Texture* tex, const sf::Color& color, float width
 	m_rightSlice = 0;
 	m_topSlice = 0;
 	m_bottomSlice = 0;
-	m_vertices = sf::VertexArray(sf::Quads);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 	m_color = color;
 
 	// For default behaviour, assume symmetric slicing
@@ -106,10 +106,14 @@ void SlicedSprite::init() {
 
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j]), m_color, sf::Vector2f(u[i], v[j])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j]), m_color, sf::Vector2f(u[i + 1], v[j])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i + 1], y[j + 1]), m_color, sf::Vector2f(u[i + 1], v[j + 1])));
-			m_vertices.append(sf::Vertex(sf::Vector2f(x[i], y[j + 1]), m_color, sf::Vector2f(u[i], v[j + 1])));
+			// Triangle 1: v0, v1, v3 (first triangle of the quad)
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i], y[j])}, m_color, {u[i], v[j]}});
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i + 1], y[j])}, m_color, {u[i + 1], v[j]}});
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i], y[j + 1])}, m_color, {u[i], v[j + 1]}});
+			// Triangle 2: v1, v2, v3 (second triangle of the quad)
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i + 1], y[j])}, m_color, {u[i + 1], v[j]}});
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i + 1], y[j + 1])}, m_color, {u[i + 1], v[j + 1]}});
+			m_vertices.append(sf::Vertex{{sf::Vector2f(x[i], y[j + 1])}, m_color, {u[i], v[j + 1]}});
 		}
 	}
 

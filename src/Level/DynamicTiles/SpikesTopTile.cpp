@@ -7,7 +7,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::SpikesTop, SpikesTopTile)
 bool SpikesTopTile::init(const LevelTileProperties& properties) {
 	setPositionOffset(sf::Vector2f(5.f, 40.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -40.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 40.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {40.f, 40.f}));
 
 	return true;
 }
@@ -17,7 +17,7 @@ void SpikesTopTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.0f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE * 2, TILE_SIZE, TILE_SIZE * 2));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE * 2}, {TILE_SIZE, TILE_SIZE * 2}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

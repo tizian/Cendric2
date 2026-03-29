@@ -4,7 +4,7 @@
 
 MerchantItemDescriptionWindow::MerchantItemDescriptionWindow(const MerchantData& data)
 : Window(
-	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
+	sf::FloatRect({0.f, 0.f}, {WIDTH, WIDTH}),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {

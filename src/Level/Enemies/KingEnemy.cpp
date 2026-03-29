@@ -30,7 +30,7 @@ void KingEnemy::handleAttackInput() {
 }
 
 void KingEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	int size = 120;
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -38,26 +38,26 @@ void KingEnemy::loadAnimation(int skinNr) {
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * size, 0, size, size));
+		walkingAnimation->addFrame(sf::IntRect({i * size, 0}, {size, size}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(10 * size, 0, size, size));
+	idleAnimation->addFrame(sf::IntRect({10 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * size, 0, size, size));
+	jumpingAnimation->addFrame(sf::IntRect({9 * size, 0}, {size, size}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(1.f));
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(8 * size, 0, size, size));
+	fightingAnimation->addFrame(sf::IntRect({8 * size, 0}, {size, size}));
 	fightingAnimation->setLooped(false);
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -67,8 +67,8 @@ void KingEnemy::loadAnimation(int skinNr) {
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width, 0.f),
-		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.width * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->size.x, 0.f),
+		sf::Vector2f(m_boundingBox.size.x * 2.f, m_boundingBox.size.x * 2.f), 0.6f), this));
 }
 
 MovingBehavior* KingEnemy::createMovingBehavior(bool asAlly) {

@@ -6,16 +6,16 @@ FloatTriangle::FloatTriangle(const sf::Vector2f& v1, const sf::Vector2f& v2, con
 	m_vertex3 = v3;
 
 	// calculate aabb
-	m_aabb.left = std::min(std::min(v1.x, v2.x), v3.x);
-	m_aabb.top = std::min(std::min(v1.y, v2.y), v3.y);
-	m_aabb.width = std::max(std::max(v1.x, v2.x), v3.x) - m_aabb.left;
-	m_aabb.height = std::max(std::max(v1.y, v2.y), v3.y) - m_aabb.top;
+	m_aabb.position.x = std::min(std::min(v1.x, v2.x), v3.x);
+	m_aabb.position.y = std::min(std::min(v1.y, v2.y), v3.y);
+	m_aabb.size.x = std::max(std::max(v1.x, v2.x), v3.x) - m_aabb.position.x;
+	m_aabb.size.y = std::max(std::max(v1.y, v2.y), v3.y) - m_aabb.position.y;
 }
 
 bool FloatTriangle::intersects(const sf::FloatRect& rect) const {
 	if (!fastIntersect(m_aabb, rect)) return false;
 
-	sf::Vector2f rectCenter(rect.left + 0.5f * rect.width, rect.top + 0.5f * rect.height);
+	sf::Vector2f rectCenter(rect.position.x + 0.5f * rect.size.x, rect.position.y + 0.5f * rect.size.y);
 	if (contains(rectCenter)) return true;
 
 	return
@@ -39,12 +39,12 @@ bool FloatTriangle::contains(const sf::Vector2f& point) const {
 }
 
 bool FloatTriangle::segmentRectangleIntersect(const sf::Vector2f& p1, const sf::Vector2f& p2, const sf::FloatRect& rect) const {
-	float right = rect.left + rect.width;
-	float bottom = rect.top + rect.height;
+	float right = rect.position.x + rect.size.x;
+	float bottom = rect.position.y + rect.size.y;
 
 	// Completely outside.
-	if ((p1.x <= rect.left && p2.x <= rect.left) 
-		|| (p1.y <= rect.top && p2.y <= rect.top) 
+	if ((p1.x <= rect.position.x && p2.x <= rect.position.x) 
+		|| (p1.y <= rect.position.y && p2.y <= rect.position.y) 
 		|| (p1.x >= right && p2.x >= right) 
 		|| (p1.y >= bottom && p2.y >= bottom))
 		return false;
@@ -56,17 +56,17 @@ bool FloatTriangle::segmentRectangleIntersect(const sf::Vector2f& p1, const sf::
 
 	float m = (p2.y - p1.y) / (p2.x - p1.x);
 
-	float y = m * (rect.left - p1.x) + p1.y;
-	if (y > rect.top && y < bottom) return true;
+	float y = m * (rect.position.x - p1.x) + p1.y;
+	if (y > rect.position.y && y < bottom) return true;
 
 	y = m * (right - p1.x) + p1.y;
-	if (y > rect.top && y < bottom) return true;
+	if (y > rect.position.y && y < bottom) return true;
 
-	float x = (rect.top - p1.y) / m + p1.x;
-	if (x > rect.left && x < right) return true;
+	float x = (rect.position.y - p1.y) / m + p1.x;
+	if (x > rect.position.x && x < right) return true;
 
 	x = (bottom - p1.y) / m + p1.x;
-	if (x > rect.left && x < right) return true;
+	if (x > rect.position.x && x < right) return true;
 
 	return false;
 }

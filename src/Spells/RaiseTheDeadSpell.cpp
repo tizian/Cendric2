@@ -10,7 +10,7 @@ void RaiseTheDeadSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
 	for (int i = 0; i < 16; ++i) {
-		spellAnimation->addFrame(sf::IntRect(i * 64, bean.skinNr * 64, 64, 64));
+		spellAnimation->addFrame(sf::IntRect({i * 64, bean.skinNr * 64}, {64, 64}));
 	}
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -21,7 +21,7 @@ void RaiseTheDeadSpell::load(const SpellData& bean, LevelMovableGameObject* mob,
 
 	Spell::load(bean, mob, target);
 
-	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 100.f, 0.6f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x / 2.f, m_boundingBox.size.y / 2.f), 100.f, 0.6f);
 	addComponent(new LightComponent(lightData, this));
 }
 

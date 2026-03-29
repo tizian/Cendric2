@@ -38,7 +38,7 @@ void ScreenOverlay::load() {
 
 	m_isAlwaysUpdate = true;
 	m_isInputInDefaultView = true;
-	setBoundingBox(sf::FloatRect(0.f, 0.f, WINDOW_WIDTH, WINDOW_HEIGHT));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {WINDOW_WIDTH, WINDOW_HEIGHT}));
 }
 
 void ScreenOverlay::update(const sf::Time& frameTime) {
@@ -63,8 +63,8 @@ void ScreenOverlay::update(const sf::Time& frameTime) {
 		return;
 	}
 
-	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(m_scale * 255)));
-	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (sf::Uint8)(m_scale * 255)));
+	m_title.setColor(sf::Color(tc.r, tc.g, tc.b, (std::uint8_t)(m_scale * 255)));
+	m_subtitle.setColor(sf::Color(stc.r, stc.g, stc.b, (std::uint8_t)(m_scale * 255)));
 }
 
 void ScreenOverlay::render(sf::RenderTarget& renderTarget) {
@@ -91,7 +91,7 @@ void ScreenOverlay::setTitleCharacterSize(int characterSize) {
 }
 
 void ScreenOverlay::setTitleColor(const sf::Color& color) {
-	m_title.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
+	m_title.setColor(sf::Color(color.r, color.g, color.b, (std::uint8_t)(m_scale * 255)));
 }
 
 void ScreenOverlay::setSubtitle(const std::string& textKey, const std::string& textType) {
@@ -109,7 +109,7 @@ void ScreenOverlay::setSubtitleCharacterSize(int characterSize) {
 }
 
 void ScreenOverlay::setSubtitleColor(const sf::Color& color) {
-	m_subtitle.setColor(sf::Color(color.r, color.g, color.b, (sf::Uint8)(m_scale * 255)));
+	m_subtitle.setColor(sf::Color(color.r, color.g, color.b, (std::uint8_t)(m_scale * 255)));
 }
 
 void ScreenOverlay::setTextPosition(float percentage) {
@@ -118,9 +118,9 @@ void ScreenOverlay::setTextPosition(float percentage) {
 
 void ScreenOverlay::repositionText() {
 	const sf::FloatRect& titleBounds = m_title.getLocalBounds();
-	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), m_textPositionPercentage * (WINDOW_HEIGHT - titleBounds.height));
+	m_title.setPosition({0.5f * (WINDOW_WIDTH - titleBounds.size.x), m_textPositionPercentage * (WINDOW_HEIGHT - titleBounds.size.y)});
 	const sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
-	m_subtitle.setPosition(0.5f * (WINDOW_WIDTH - subtitleBounds.width), m_title.getPosition().y + titleBounds.height + subtitleBounds.height);
+	m_subtitle.setPosition({0.5f * (WINDOW_WIDTH - subtitleBounds.size.x), m_title.getPosition().y + titleBounds.size.y + subtitleBounds.size.y});
 }
 
 GameObjectType ScreenOverlay::getConfiguredType() const {
@@ -200,7 +200,7 @@ ScreenOverlay* ScreenOverlay::createModifierLearnedScreenOverlay(const SpellModi
 	modifierScreenOverlay->setSubtitleRaw(subtitle);
 
 	modifierScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_GEMS));
-	modifierScreenOverlay->setSpriteTextureRect(sf::IntRect((modifier.level - 1) * 50, 50, 50, 50));
+	modifierScreenOverlay->setSpriteTextureRect(sf::IntRect({(modifier.level - 1) * 50, 50}, {50, 50}));
 	modifierScreenOverlay->setSpriteTextureColor(SpellModifier::getSpellModifierColor(modifier.type));
 
 	modifierScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
@@ -221,9 +221,9 @@ ScreenOverlay* ScreenOverlay::createGameOverScreenOverlay() {
 	gameOverScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
-		(static_cast<int>(language) - 1) * 60,
-		static_cast<int>(text->getSize().x), 60));
+	gameOverScreenOverlay->setSpriteTextureRect(sf::IntRect({0,
+		(static_cast<int>(language) - 1) * 60},
+		{static_cast<int>(text->getSize().x), 60}));
 
 	return gameOverScreenOverlay;
 }
@@ -241,13 +241,13 @@ ScreenOverlay* ScreenOverlay::createGamePausedScreenOverlay() {
 
 	Language language = g_resourceManager->getConfiguration().language;
 	if (language == Language::Lang_EN) {
-		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 0, static_cast<int>(text->getSize().x), 60));
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect({0, 0}, {static_cast<int>(text->getSize().x), 60}));
 	}
 	else if (language == Language::Lang_DE || language == Language::Lang_CH) {
-		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 60, static_cast<int>(text->getSize().x), 60));
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect({0, 60}, {static_cast<int>(text->getSize().x), 60}));
 	}
 	else if (language == Language::LANG_ES) {
-		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect(0, 120, static_cast<int>(text->getSize().x), 60));
+		gamePausedScreenOverlay->setSpriteTextureRect(sf::IntRect({0, 120}, {static_cast<int>(text->getSize().x), 60}));
 	}
 
 	return gamePausedScreenOverlay;
@@ -264,9 +264,9 @@ ScreenOverlay* ScreenOverlay::createEnemyDefeatedScreenOverlay(std::map<std::str
 	enemyDefeatedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 3.f * text->getSize().x), 200.f - 0.5f * 3.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
-		(static_cast<int>(language) - 1) * 60,
-		static_cast<int>(text->getSize().x), 60));
+	enemyDefeatedScreenOverlay->setSpriteTextureRect(sf::IntRect({0,
+		(static_cast<int>(language) - 1) * 60},
+		{static_cast<int>(text->getSize().x), 60}));
 
 	enemyDefeatedScreenOverlay->setLoot(items, gold);
 	return enemyDefeatedScreenOverlay;
@@ -287,7 +287,7 @@ ScreenOverlay* ScreenOverlay::createPermanentItemScreenOverlay(const Item* item)
 	itemScreenOverlay->setSubtitleCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 
 	itemScreenOverlay->setSpriteTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
-	itemScreenOverlay->setSpriteTextureRect(sf::IntRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50));
+	itemScreenOverlay->setSpriteTextureRect(sf::IntRect({item->getIconTextureLocation().x, item->getIconTextureLocation().y}, {50, 50}));
 
 	itemScreenOverlay->setSpriteScale(sf::Vector2f(2.f, 2.f));
 	itemScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 100), 0.5f * (WINDOW_HEIGHT - 100)));
@@ -333,9 +333,9 @@ ScreenOverlay* ScreenOverlay::createArrestedScreenOverlay() {
 	arrestedScreenOverlay->setSpritePosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - 4.f * text->getSize().x), 300.f - 0.5f * 4.f * 60.f));
 
 	Language language = g_resourceManager->getConfiguration().language;
-	arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect(0,
-		(static_cast<int>(language) - 1) * 60,
-		static_cast<int>(text->getSize().x), 60));
+	arrestedScreenOverlay->setSpriteTextureRect(sf::IntRect({0,
+		(static_cast<int>(language) - 1) * 60},
+		{static_cast<int>(text->getSize().x), 60}));
 
 	return arrestedScreenOverlay;
 }
@@ -365,7 +365,7 @@ ScreenOverlay* ScreenOverlay::createGuildJoinedScreenOverlay(FractionID id) {
 		guildScreenOverlay->setSubtitleColor(COLOR_TWILIGHT);
 	}
 
-	sf::IntRect texRect((static_cast<int>(id) - 1) * 146, 0, 146, 162);
+	sf::IntRect texRect({(static_cast<int>(id) - 1) * 146, 0}, {146, 162});
 	guildScreenOverlay->setSpriteTextureRect(texRect);
 
 	sf::Vector2f scale(2.f, 2.f);

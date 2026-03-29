@@ -9,20 +9,20 @@ LightObject::LightObject(const LightData& data) : GameObject() {
 
 void LightObject::init() {
 	m_sprite.setSize(sf::Vector2f(2.f, 2.f));
-	m_sprite.setOrigin(1.f, 1.f); // setting the origin to the center
-	m_sprite.setScale(2 * m_lightData.radius.x, 2 * m_lightData.radius.y);
-	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
+	m_sprite.setOrigin({1.f, 1.f}); // setting the origin to the center
+	m_sprite.setScale({2 * m_lightData.radius.x, 2 * m_lightData.radius.y});
+	m_sprite.setFillColor(sf::Color(255, 255, 255, static_cast<std::uint8_t>(255 * m_lightData.brightness)));
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LIGHT)->setSmooth(true);
 	m_sprite.setTexture(g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_LIGHT));
 	m_animationTimer = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {2.f * m_lightData.radius.x, 2.f * m_lightData.radius.y}));
 
 	setPosition(m_lightData.center);
 
 	float scaleX = m_lightData.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	float scaleY = m_lightData.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 
-	m_sprite.setScale(scaleX, scaleY);
+	m_sprite.setScale({scaleX, scaleY});
 }
 
 GameObjectType LightObject::getConfiguredType() const {
@@ -41,7 +41,7 @@ void LightObject::update(const sf::Time& frameTime) {
 	float scaleX = m_lightData.radius.x + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 	float scaleY = m_lightData.radius.y + AMPLITUDE * sin(FREQUENCY * m_animationTimer);
 
-	m_sprite.setScale(scaleX, scaleY);
+	m_sprite.setScale({scaleX, scaleY});
 }
 
 void LightObject::setPosition(const sf::Vector2f& pos) {
@@ -60,5 +60,5 @@ void LightObject::setVisible(bool value) {
 
 void LightObject::setBrightness(float brightness) {
 	m_lightData.brightness = clamp(brightness, 0.f, 1.f);
-	m_sprite.setFillColor(sf::Color(255, 255, 255, (sf::Uint8)(255 * m_lightData.brightness)));
+	m_sprite.setFillColor(sf::Color(255, 255, 255, static_cast<std::uint8_t>(255 * m_lightData.brightness)));
 }

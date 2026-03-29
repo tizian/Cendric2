@@ -10,7 +10,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::AntiMagic, AntiMagicTile)
 
 bool AntiMagicTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(10.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	if (!contains(properties, std::string("width"))) {
 		return false;
@@ -19,8 +19,8 @@ bool AntiMagicTile::init(const LevelTileProperties& properties) {
 	m_width = static_cast<float>(std::stoi(properties.at("width")));
 	loadParticleSystem();
 	auto& bb = *getBoundingBox();
-	addComponent(new LightComponent(LightData(sf::Vector2f(bb.width * 0.5f, bb.height * 0.5f), sf::Vector2f(150.f, 100.f), 0.8f), this));
-	addComponent(new LightComponent(LightData(sf::Vector2f(bb.width * 0.5f + m_width, bb.height * 0.5f), sf::Vector2f(150.f, 100.f), 0.8f), this));
+	addComponent(new LightComponent(LightData(sf::Vector2f(bb.size.x * 0.5f, bb.size.y * 0.5f), sf::Vector2f(150.f, 100.f), 0.8f), this));
+	addComponent(new LightComponent(LightData(sf::Vector2f(bb.size.x * 0.5f + m_width, bb.size.y * 0.5f), sf::Vector2f(150.f, 100.f), 0.8f), this));
 	return true;
 }
 
@@ -35,15 +35,15 @@ void AntiMagicTile::update(const sf::Time& frameTime) {
 }
 
 void AntiMagicTile::render(sf::RenderTarget& target) {
-	target.draw(m_otherSprite);
+	target.draw(*m_otherSprite);
 	LevelDynamicTile::render(target);
 }
 
 void AntiMagicTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
-	m_startPos = pos + sf::Vector2f(getBoundingBox()->width, getBoundingBox()->height * 0.5f);
+	m_startPos = pos + sf::Vector2f(getBoundingBox()->size.x, getBoundingBox()->size.y * 0.5f);
 	m_endPos = m_startPos + sf::Vector2f(m_width, 0.f);
-	m_otherSprite.setPosition(pos + sf::Vector2f(m_width + 2 * TILE_SIZE_F - 10.f, 0.f));
+	m_otherSprite->setPosition(pos + sf::Vector2f(m_width + 2 * TILE_SIZE_F - 10.f, 0.f));
 	if (m_lineSpawner) {
 		m_lineSpawner->point1 = m_startPos;
 		m_lineSpawner->point2 = m_endPos;
@@ -55,7 +55,7 @@ void AntiMagicTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	idleAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -64,9 +64,9 @@ void AntiMagicTile::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(false);
 
-	m_otherSprite.setTexture(*tex);
-	m_otherSprite.setTextureRect(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	m_otherSprite.setScale(sf::Vector2f(-1.f, 1.f));
+	m_otherSprite->setTexture(*tex);
+	m_otherSprite->setTextureRect(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	m_otherSprite->setScale({-1.f, 1.f});
 }
 
 std::string AntiMagicTile::getSpritePath() const {

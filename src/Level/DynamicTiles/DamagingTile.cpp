@@ -9,7 +9,7 @@ const std::string DamagingTile::SHATTER_SOUND = "res/sound/mob/yashaadd_death.og
 const float DamagingTile::DAMAGE_RADIUS = 20.f;
 
 bool DamagingTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	
 	if (!contains(properties, std::string("dark"))) {
 		addComponent(new LightComponent(LightData(sf::Vector2f(TILE_SIZE_F * 0.5f, TILE_SIZE_F * 0.5f), TILE_SIZE_F, 0.5f), this));
@@ -27,7 +27,7 @@ void DamagingTile::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation(sf::seconds(0.05f));
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		idleAnimation->addFrame(sf::IntRect({i * TILE_SIZE, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -36,7 +36,7 @@ void DamagingTile::loadAnimation(int skinNr) {
 		Animation* shatterAnimation = new Animation();
 		shatterAnimation->setSpriteSheet(tex);
 		for (int i = 0; i < 4; ++i) {
-			shatterAnimation->addFrame(sf::IntRect(4 * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+			shatterAnimation->addFrame(sf::IntRect({4 * TILE_SIZE, i * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 		}
 		shatterAnimation->setLooped(false);
 
@@ -53,7 +53,7 @@ void DamagingTile::loadAnimation(int skinNr) {
 	m_debugCircle.setOutlineThickness(2.f);
 	m_debugCircle.setRadius(DAMAGE_RADIUS);
 	m_debugCircle.setOrigin(sf::Vector2f(DAMAGE_RADIUS, DAMAGE_RADIUS));
-	float circleRadius = DAMAGE_RADIUS + (m_boundingBox.width * 0.5f - DAMAGE_RADIUS);
+	float circleRadius = DAMAGE_RADIUS + (m_boundingBox.size.x * 0.5f - DAMAGE_RADIUS);
 	m_circleOffset = sf::Vector2f(circleRadius, circleRadius);
 }
 

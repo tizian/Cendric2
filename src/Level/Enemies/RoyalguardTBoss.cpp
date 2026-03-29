@@ -46,7 +46,7 @@ void RoyalguardTBoss::loadSpells() {
 	swirl.cooldown = sf::seconds(0.9f);
 	swirl.fightingTime = sf::seconds(1.1f);
 	swirl.activeDuration = sf::seconds(1.f);
-	swirl.boundingBox = sf::FloatRect(0.f, 0.f, 120.f, 120.f);
+	swirl.boundingBox = sf::FloatRect({0.f, 0.f}, {120.f, 120.f});
 	swirl.spellOffset = sf::Vector2f(-45.f, -30.f);
 	swirl.fightAnimation = GameObjectState::Fighting;
 	swirl.isBlocking = true;
@@ -58,7 +58,7 @@ void RoyalguardTBoss::loadSpells() {
 	charge.damage = 40;
 	charge.cooldown = sf::seconds(1.f);
 	charge.activeDuration = sf::seconds(3.f);
-	charge.boundingBox = sf::FloatRect(0.f, 0.f, 40.f, 40.f);
+	charge.boundingBox = sf::FloatRect({0.f, 0.f}, {40.f, 40.f});
 	charge.spellOffset = sf::Vector2f(20.f, 10.f);
 
 	m_spellManager->addSpell(charge);
@@ -138,33 +138,33 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	int width = 120;
 	int height = 150;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -60.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({10 * width, 0}, {width, height}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -172,7 +172,7 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	// swirl
 	Animation* fighting1Animation = new Animation();
 	fighting1Animation->setSpriteSheet(tex);
-	fighting1Animation->addFrame(sf::IntRect(21 * width, 0, width, height));
+	fighting1Animation->addFrame(sf::IntRect({21 * width, 0}, {width, height}));
 	fighting1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting, fighting1Animation);
@@ -180,7 +180,7 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	// before charge
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
 	casting2Animation->setSpriteSheet(tex);
-	casting2Animation->addFrame(sf::IntRect(21 * width, 0, width, height));
+	casting2Animation->addFrame(sf::IntRect({21 * width, 0}, {width, height}));
 	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -188,7 +188,7 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	// charge
 	Animation* fighting2Animation = new Animation();
 	fighting2Animation->setSpriteSheet(tex);
-	fighting2Animation->addFrame(sf::IntRect(22 * width, 0, width, height));
+	fighting2Animation->addFrame(sf::IntRect({22 * width, 0}, {width, height}));
 	fighting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting2, fighting2Animation);
@@ -196,7 +196,7 @@ void RoyalguardTBoss::loadAnimation(int skinNr) {
 	// heal
 	Animation* fighting3Animation = new Animation(sf::seconds(0.1f));
 	fighting3Animation->setSpriteSheet(tex);
-	fighting3Animation->addFrame(sf::IntRect(20 * width, 0, width, height));
+	fighting3Animation->addFrame(sf::IntRect({20 * width, 0}, {width, height}));
 	fighting3Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting3, fighting3Animation);
@@ -251,15 +251,15 @@ void RoyalguardTBoss::loadParticles() {
 	data.timeGen = timeGen;
 
 	m_icePc = new ParticleComponent(data, this);
-	m_icePc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.6f, getBoundingBox()->height * 0.4f));
+	m_icePc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.6f, getBoundingBox()->size.y * 0.4f));
 	m_icePc->setVisible(false);
 	addComponent(m_icePc);
 	m_pcs.push_back(m_icePc);
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width, 0.f),
-		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.width * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->size.x, 0.f),
+		sf::Vector2f(m_boundingBox.size.x * 2.f, m_boundingBox.size.x * 2.f), 0.6f), this));
 }
 
 MovingBehavior* RoyalguardTBoss::createMovingBehavior(bool asAlly) {

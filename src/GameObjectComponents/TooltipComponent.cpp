@@ -34,7 +34,7 @@ void TooltipComponent::update(const sf::Time& frameTime) {
 
 void TooltipComponent::setPosition(const sf::Vector2f& pos) {
 	m_tooltipText.setPosition(pos + sf::Vector2f(
-		0.5f * (m_parent->getBoundingBox()->width - m_tooltipText.getLocalBounds().width), 
+		0.5f * (m_parent->getBoundingBox()->size.x - m_tooltipText.getLocalBounds().size.x), 
 		-m_tooltipHeight));
 }
 

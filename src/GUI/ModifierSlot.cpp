@@ -15,10 +15,10 @@ ModifierSlot::ModifierSlot(const SpellModifier& modifier) {
 	m_iconTexture = g_resourceManager->getTexture(GlobalResource::TEX_GEMS);
 	if (modifier.type == SpellModifierType::VOID) {
 		m_isEmpty = true;
-		m_iconTextureRect = sf::IntRect(0, 0, 50, 50);
+		m_iconTextureRect = sf::IntRect({0, 0}, {50, 50});
 	}
 	else {
-		m_iconTextureRect = sf::IntRect((modifier.level - 1) * 50, 50, 50, 50);
+		m_iconTextureRect = sf::IntRect({(modifier.level - 1) * 50, 50}, {50, 50});
 		m_iconRect.setFillColor(SpellModifier::getSpellModifierColor(modifier.type));
 	}
 

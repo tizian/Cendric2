@@ -35,7 +35,7 @@ bool ChestLevelTile::init(const LevelTileProperties& properties) {
 		return true;
 	}
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	setSpriteOffset(sf::Vector2f(-25.f, -50.f));
 
 	ChestTile::init(properties);
@@ -61,13 +61,13 @@ void ChestLevelTile::loadAnimation(int skinNr) {
 
 	Animation* closedAnimation = new Animation(sf::seconds(10.f));
 	closedAnimation->setSpriteSheet(tex);
-	closedAnimation->addFrame(sf::IntRect(0, skinNr * 2 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect({0, skinNr * 2 * TILE_SIZE}, {2 * TILE_SIZE, 2 * TILE_SIZE}));
 
 	addAnimation(GameObjectState::Locked, closedAnimation);
 
 	Animation* openAnimation = new Animation(sf::seconds(10.f));
 	openAnimation->setSpriteSheet(tex);
-	openAnimation->addFrame(sf::IntRect(2 * TILE_SIZE, skinNr * 2 * TILE_SIZE, 2 * TILE_SIZE, 2 * TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect({2 * TILE_SIZE, skinNr * 2 * TILE_SIZE}, {2 * TILE_SIZE, 2 * TILE_SIZE}));
 
 	addAnimation(GameObjectState::Unlocked, openAnimation);
 
@@ -149,7 +149,7 @@ void ChestLevelTile::renderAfterForeground(sf::RenderTarget& renderTarget) {
 void ChestLevelTile::update(const sf::Time& frameTime) {
 	LevelDynamicTile::update(frameTime);
 	if (m_showLootWindow && m_lootWindow != nullptr) {
-		sf::Vector2f pos(getBoundingBox()->left + getBoundingBox()->width, getBoundingBox()->top - m_lootWindow->getSize().y + 10.f);
+		sf::Vector2f pos(getBoundingBox()->position.x + getBoundingBox()->size.x, getBoundingBox()->position.y - m_lootWindow->getSize().y + 10.f);
 		m_lootWindow->setPosition(pos);
 	}
 	m_showLootWindow = m_interactComponent->isInteractable() && (m_showLootWindow || g_inputController->isKeyActive(Key::ToggleTooltips));

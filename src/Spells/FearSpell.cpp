@@ -9,8 +9,8 @@ void FearSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const s
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(tex);
-	spellAnimation->addFrame(sf::IntRect(0, 0, 30, 30));
-	spellAnimation->addFrame(sf::IntRect(30, 0, 30, 30));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {30, 30}));
+	spellAnimation->addFrame(sf::IntRect({30, 0}, {30, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

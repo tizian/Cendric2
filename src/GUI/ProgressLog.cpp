@@ -245,7 +245,7 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 
 	if (itemID == "gold") {
 		entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
-		entry->m_icon->setTextureRect(sf::IntRect(0, 0, 25, 25));
+		entry->m_icon->setTextureRect(sf::IntRect({0, 0}, {25, 25}));
 		return entry;
 	}
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_ITEMS));
@@ -253,7 +253,7 @@ ProgressLogEntry* ProgressLogEntry::createItemEntry(const std::string& str, cons
 	if (item == nullptr) {
 		return entry;
 	}
-	sf::IntRect textureRect(item->getIconTextureLocation().x, item->getIconTextureLocation().y, 50, 50);
+	sf::IntRect textureRect({item->getIconTextureLocation().x, item->getIconTextureLocation().y}, {50, 50});
 	entry->m_icon->setTextureRect(textureRect);
 
 	return entry;
@@ -267,7 +267,7 @@ ProgressLogEntry* ProgressLogEntry::createQuestEntry(const std::string& str, con
 	entry->setAlpha(0.f);
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
-	entry->m_icon->setTextureRect(sf::IntRect(25, 0, 25, 25));
+	entry->m_icon->setTextureRect(sf::IntRect({25, 0}, {25, 25}));
 
 	return entry;
 }
@@ -279,7 +279,7 @@ ProgressLogEntry* ProgressLogEntry::createReputationEntry(const std::string& str
 	entry->m_text->setString(str);
 
 	entry->m_icon->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_GUI_PROGRESSLOG_ICONS));
-	entry->m_icon->setTextureRect(sf::IntRect(50, 0, 25, 25));
+	entry->m_icon->setTextureRect(sf::IntRect({50, 0}, {25, 25}));
 
 	return entry;
 }
@@ -323,17 +323,17 @@ void ProgressLogEntry::render(sf::RenderTarget& renderTarget) {
 }
 
 void ProgressLogEntry::setPosition(const sf::Vector2f& position) {
-	float textHeight = m_text->getLocalBounds().height;
+	float textHeight = m_text->getLocalBounds().size.y;
 	m_border->setPosition(position);
-	m_text->setPosition(position.x + BORDER_SIZE + ICON_MARGIN, position.y + 0.5f * (BORDER_SIZE - textHeight));
+	m_text->setPosition({position.x + BORDER_SIZE + ICON_MARGIN, position.y + 0.5f * (BORDER_SIZE - textHeight)});
 
-	m_background->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
-	m_icon->setPosition(position.x + ICON_OFFSET, position.y + ICON_OFFSET);
+	m_background->setPosition({position.x + ICON_OFFSET, position.y + ICON_OFFSET});
+	m_icon->setPosition({position.x + ICON_OFFSET, position.y + ICON_OFFSET});
 }
 
 void ProgressLogEntry::setAlpha(float alpha) {
-	sf::Uint8 a = (sf::Uint8)(alpha * 255);
-	sf::Uint8 aBackground = (sf::Uint8)(COLOR_TRANS_GREY.a * alpha);
+	std::uint8_t a = (std::uint8_t)(alpha * 255);
+	std::uint8_t aBackground = (std::uint8_t)(COLOR_TRANS_GREY.a * alpha);
 
 	const sf::Color &tc = m_text->getColor();
 	m_text->setColor(sf::Color(tc.r, tc.g, tc.b, a));
@@ -353,7 +353,7 @@ sf::Time ProgressLogEntry::getScrollTime() const {
 }
 
 float ProgressLogEntry::getHeight() const {
-	float textHeight = m_text->getLocalBounds().height;
+	float textHeight = m_text->getLocalBounds().size.y;
 	if (textHeight > BORDER_SIZE) return textHeight;
 	else return BORDER_SIZE;
 }

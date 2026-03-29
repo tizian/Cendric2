@@ -48,8 +48,8 @@ void ScrollWindow::calculateEntryPositions() {
 	auto yOffset = getTop() + getWindowMargin() + GUIConstants::CHARACTER_SIZE_M - effectiveScrollOffset;
 
 	for (auto entry : (*m_entries)) {
-		entry->setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, getWidth() - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
-		entry->setPosition(sf::Vector2f(xOffset, yOffset));
+		entry->setBoundingBox(sf::FloatRect({xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M}, {getWidth() - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M}));
+		entry->setPosition({xOffset, yOffset});
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}
 }

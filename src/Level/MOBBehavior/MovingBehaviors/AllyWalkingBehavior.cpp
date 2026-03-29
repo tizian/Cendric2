@@ -13,12 +13,12 @@ void AllyWalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (m_enemy->isDead()) return;
 	EnemyState state = m_enemy->getEnemyState();
 	if (state != EnemyState::Chasing && !m_jumps && m_mainChar->getMovingBehavior()->isGrounded() && dist(m_mainChar->getPosition(), m_enemy->getPosition()) > m_replaceDistance) {
-		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->height - m_enemy->getBoundingBox()->height);
+		sf::Vector2f newPos(m_mainChar->getPosition().x, m_mainChar->getPosition().y + m_mainChar->getBoundingBox()->size.y - m_enemy->getBoundingBox()->size.y);
 		WorldCollisionQueryRecord rec;
 		rec.ignoreDynamicTiles = m_ignoreDynamicTiles;
 		rec.boundingBox = *m_enemy->getBoundingBox();
-		rec.boundingBox.left = newPos.x;
-		rec.boundingBox.top = newPos.y;
+		rec.boundingBox.position.x = newPos.x;
+		rec.boundingBox.position.y = newPos.y;
 		if (m_enemy->getLevel()->collides(rec)) return;
 		m_enemy->setPosition(newPos);
 		m_mob->setAcceleration(sf::Vector2f(0.f, 0.f));

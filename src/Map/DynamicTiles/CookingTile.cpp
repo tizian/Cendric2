@@ -22,9 +22,9 @@ CookingTile::CookingTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 }
 
 bool CookingTile::init(const MapTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 
-		TILE_SIZE_F, 
-		TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, 
+		{TILE_SIZE_F, 
+		TILE_SIZE_F}));
 	setSpriteOffset(sf::Vector2f(0.f, -50.f));
 
 	return true;
@@ -36,7 +36,7 @@ void CookingTile::loadAnimation(int skinNr) {
 	Animation* burningAnimation = new Animation(sf::seconds(0.15f));
 	burningAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		burningAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * textureHeight, TILE_SIZE, textureHeight));
+		burningAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * textureHeight}, {TILE_SIZE, textureHeight}));
 	}
 
 	addAnimation(GameObjectState::Burning, burningAnimation);

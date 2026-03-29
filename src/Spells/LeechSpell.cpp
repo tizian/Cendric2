@@ -14,7 +14,7 @@ void LeechSpell::load(const SpellData& bean, LevelMovableGameObject* mob, const 
 
 	m_absVel = std::sqrt(getVelocity().x * getVelocity().x + getVelocity().y * getVelocity().y);
 
-	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 80.f, 0.3f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x / 2.f, m_boundingBox.size.y / 2.f), 80.f, 0.3f);
 	addComponent(new LightComponent(lightData, this));
 }
 
@@ -111,8 +111,8 @@ void LeechSpell::loadComponents() {
 
 	// Generators
 	auto spawner = new particles::BoxSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
-	spawner->size = sf::Vector2f(getBoundingBox()->width, 0.f);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -142,6 +142,6 @@ void LeechSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	auto pc = new ParticleComponent(data, this);
-	pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(pc);
 }

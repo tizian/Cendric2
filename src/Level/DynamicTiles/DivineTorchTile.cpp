@@ -13,7 +13,7 @@ DivineTorchTile::DivineTorchTile(LevelScreen* levelScreen) : LevelDynamicTile(le
 bool DivineTorchTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 	setPositionOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	loadComponents();
 	return true;
 }
@@ -26,14 +26,14 @@ void DivineTorchTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * height, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * height}, {TILE_SIZE, TILE_SIZE}));
 	idleAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* burningAnimation = new Animation(sf::seconds(10.f));
 	burningAnimation->setSpriteSheet(tex);
-	burningAnimation->addFrame(sf::IntRect(0, skinNr * height, TILE_SIZE, TILE_SIZE));
+	burningAnimation->addFrame(sf::IntRect({0, skinNr * height}, {TILE_SIZE, TILE_SIZE}));
 	burningAnimation->setLooped(false);
 	
 	addAnimation(GameObjectState::Burning, burningAnimation);
@@ -103,7 +103,7 @@ void DivineTorchTile::loadComponents() {
 	data.particleTexture = &dynamic_cast<LevelScreen*>(m_screen)->getParticleBGRenderTexture();
 
 	auto spawner = new particles::BoxSpawner();
-	spawner->size = sf::Vector2f(getBoundingBox()->width * 0.2f, 0.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x * 0.2f, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -126,7 +126,7 @@ void DivineTorchTile::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, 0.f));
+	m_pc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, 0.f));
 	addComponent(m_pc);
 	setTarget(nullptr, true);
 }

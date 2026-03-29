@@ -92,7 +92,7 @@ void DamageNumbers::emitString(std::string str, const sf::Vector2f& position, Da
 	offset -= 1.5f * characterSize;
 
 	const sf::FloatRect& rect = data.text->getBounds();
-	sf::Vector2f startPosition = sf::Vector2f(position.x - 0.5f * rect.width, position.y + offset);
+	sf::Vector2f startPosition = sf::Vector2f(position.x - 0.5f * rect.size.x, position.y + offset);
 	data.text->setPosition(startPosition);
 	data.startPosition = startPosition.y;
 

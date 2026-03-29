@@ -17,8 +17,8 @@ void BitmapTextHolder::render(sf::RenderTarget& renderTarget) {
 void BitmapTextHolder::setCharacterSize(int characterSize) {
 	m_text.setCharacterSize(characterSize);
 
-	m_size.x = m_text.getLocalBounds().width;
-	m_size.y = m_text.getLocalBounds().height;
+	m_size.x = m_text.getLocalBounds().size.x;
+	m_size.y = m_text.getLocalBounds().size.y;
 }
 
 void BitmapTextHolder::setPosition(const sf::Vector2f& pos) {

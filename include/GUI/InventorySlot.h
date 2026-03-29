@@ -30,7 +30,7 @@ public:
 	float getConfiguredSize() const override { return SIZE; }
 	float getConfiguredIconOffset() const override { return ICON_OFFSET; }
 
-	void setAlpha(sf::Uint8 alpha);
+	void setAlpha(std::uint8_t alpha);
 
 	static const float SIZE;
 	static const float ICON_OFFSET;

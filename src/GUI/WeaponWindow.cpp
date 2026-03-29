@@ -39,7 +39,7 @@ void WeaponWindow::reload() {
 			static_cast<int>(WIDTH - (2 * GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE))));
 	}
 	m_weaponSlot->setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET, TOP + GUIConstants::TEXT_OFFSET + InventorySlot::ICON_OFFSET));
-	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + 0.5f * (InventorySlot::SIZE - m_weaponName.getBounds().height)));
+	m_weaponName.setPosition(sf::Vector2f(LEFT + GUIConstants::TEXT_OFFSET + 2.f * MARGIN + InventorySlot::SIZE, TOP + GUIConstants::TEXT_OFFSET + 0.5f * (InventorySlot::SIZE - m_weaponName.getBounds().size.y)));
 
 	clearAllSlots();
 
@@ -136,7 +136,7 @@ void WeaponWindow::reloadSpellDesc() {
 void WeaponWindow::init() {
 	// init window
 	delete m_window;
-	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	sf::FloatRect box({LEFT, TOP}, {WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,

@@ -57,11 +57,11 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	name.setColor(COLOR_WHITE);
 	name.setString("Placeholder");
 
-	sf::Sprite icon;
-	icon.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS));
+	std::optional<sf::Sprite> icon;
+	icon.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_CHARACTERINFO_ICONS));
 
 	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
-	float textHeight = name.getLocalBounds().height;
+	float textHeight = name.getLocalBounds().size.y;
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < LABELS.size(); ++i) {
@@ -70,19 +70,19 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 			continue;
 		}
 
-		name.setPosition(LEFT + 2 * GUIConstants::TEXT_OFFSET, yOffset);
+		name.setPosition({LEFT + 2 * GUIConstants::TEXT_OFFSET, yOffset});
 		name.setString(g_textProvider->getText(LABELS[i]) + ":");
 		m_nameTexts.push_back(name);
 
-		icon.setTextureRect(sf::IntRect(0, static_cast<int>(i) * 18, 18, 18));
-		icon.setPosition(sf::Vector2f(LEFT + WIDTH - 160.f, yOffset + 0.5f * (textHeight - 18)));
+		icon->setTextureRect(sf::IntRect({0, static_cast<int>(i) * 18}, {18, 18}));
+		icon->setPosition(sf::Vector2f(LEFT + WIDTH - 160.f, yOffset + 0.5f * (textHeight - 18)));
 		m_statIcons.push_back(icon);
 
 		yOffset += dy;
 	}
 
 	// init window
-	sf::FloatRect box(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect box({LEFT, TOP}, {WIDTH, HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -100,7 +100,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::FloatRect scrollBox({LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	reload();
@@ -113,7 +113,7 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	float y = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP;
 
 	m_tabBar = new TabBar();
-	m_tabBar->init(sf::FloatRect(x, y, barWidth, barHeight), nTabs);
+	m_tabBar->init(sf::FloatRect({x, y}, {barWidth, barHeight}), nTabs);
 	m_tabBar->getTabButton(0)->setText("Stats");
 	m_tabBar->getTabButton(1)->setText("Reputation");
 	m_tabBar->getTabButton(2)->setText("Hints");
@@ -126,10 +126,10 @@ CharacterInfo::CharacterInfo(WorldScreen* screen, const AttributeData* attribute
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setString(g_textProvider->getText("CharacterInfo"));
-	m_title.setPosition(
+	m_title.setPosition({
 		m_window->getPosition().x +
 		m_window->getSize().x / 2 -
-		m_title.getLocalBounds().width / 2, m_title.getPosition().y);
+		m_title.getLocalBounds().size.x / 2, m_title.getPosition().y});
 }
 
 CharacterInfo::~CharacterInfo() {
@@ -226,12 +226,12 @@ void CharacterInfo::render(sf::RenderTarget& target) {
 			target.draw(text);
 		}
 		for (auto& icon : m_statIcons) {
-			target.draw(icon);
+			target.draw(*icon);
 		}
 	}
 	else if (m_tabBar->getActiveTabIndex() == 1) {
 		target.draw(m_guild);
-		target.draw(m_guildSprite);
+		target.draw(*m_guildSprite);
 		for (auto& text : m_reputationTexts) {
 			target.draw(text);
 		}
@@ -311,7 +311,7 @@ void CharacterInfo::updateAttributes() {
 	attributeText.setString("Placeholder");
 
 	float yOffset = GUIConstants::TOP + GUIConstants::GUI_TABS_TOP + 2 * WINDOW_MARGIN + BUTTON_SIZE.y + GUIConstants::CHARACTER_SIZE_M;
-	float textHeight = attributeText.getLocalBounds().height;
+	float textHeight = attributeText.getLocalBounds().size.y;
 	float dy = textHeight + GUIConstants::CHARACTER_SIZE_M;
 
 	for (size_t i = 0; i < attributes.size(); ++i) {
@@ -320,7 +320,7 @@ void CharacterInfo::updateAttributes() {
 			continue;
 		}
 
-		attributeText.setPosition(LEFT + WIDTH - 136.f, yOffset);
+		attributeText.setPosition({LEFT + WIDTH - 136.f, yOffset});
 		attributeText.setString(attributes[i]);
 		m_attributeTexts.push_back(attributeText);
 
@@ -339,7 +339,7 @@ void CharacterInfo::updateReputation() {
 	currentGuild.append(": ");
 	currentGuild.append(g_textProvider->getText(EnumNames::getFractionIDName(m_core->getData().guild)));
 	m_guild.setString(currentGuild);
-	m_guild.setPosition(LEFT + (WIDTH - m_guild.getLocalBounds().width) * 0.5f, yOffset);
+	m_guild.setPosition({LEFT + (WIDTH - m_guild.getLocalBounds().size.x) * 0.5f, yOffset});
 	m_guild.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 
 	yOffset += 2 * GUIConstants::CHARACTER_SIZE_M;
@@ -347,13 +347,13 @@ void CharacterInfo::updateReputation() {
 	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILD_ICONS);
 	int texHeight = 100;
 	if (tex != nullptr)
-		m_guildSprite.setTexture(*tex);
-	m_guildSprite.setPosition(LEFT + (WIDTH - 100) * 0.5f, yOffset);
+		m_guildSprite->setTexture(*tex);
+	m_guildSprite->setPosition({LEFT + (WIDTH - 100) * 0.5f, yOffset});
 	if (m_core->getData().guild == FractionID::VOID) {
-		m_guildSprite.setTextureRect(sf::IntRect());
+		m_guildSprite->setTextureRect(sf::IntRect({0, 0}, {0, 0}));
 	}
 	else {
-		m_guildSprite.setTextureRect(sf::IntRect(texHeight * (static_cast<int>(m_core->getData().guild) - 1), 0, texHeight, texHeight));
+		m_guildSprite->setTextureRect(sf::IntRect({texHeight * (static_cast<int>(m_core->getData().guild) - 1), 0}, {texHeight, texHeight}));
 		yOffset += texHeight;
 	}
 
@@ -362,7 +362,7 @@ void CharacterInfo::updateReputation() {
 	if (m_core->getData().reputationProgress.empty()) {
 		BitmapText noRep;
 		noRep.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		noRep.setPosition(xOffset, yOffset);
+		noRep.setPosition({xOffset, yOffset});
 		noRep.setColor(COLOR_LIGHT_PURPLE);
 		noRep.setString(g_textProvider->getCroppedText("NoReputation", GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
 		m_reputationTexts.push_back(noRep);
@@ -373,22 +373,22 @@ void CharacterInfo::updateReputation() {
 		BitmapText title;
 		title.setString(g_textProvider->getText(EnumNames::getFractionIDName(rep.first)) + ": " + std::to_string(rep.second));
 		title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		title.setPosition(xOffset, yOffset);
+		title.setPosition({xOffset, yOffset});
 		title.setColor(COLOR_WHITE);
 		m_reputationTexts.push_back(title);
 
-		yOffset += title.getLocalBounds().height * (3 / 2.f);
+		yOffset += title.getLocalBounds().size.y * (3 / 2.f);
 
 		BitmapText subtitle;
 		std::string key = EnumNames::getFractionIDName(rep.first) + "_" +
 			(rep.second >= 75 ? "100" : rep.second >= 50 ? "75" : rep.second >= 25 ? "50" : "25");
 		subtitle.setString(g_textProvider->getCroppedText(key, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(m_window->getSize().x - 6 * GUIConstants::TEXT_OFFSET)));
 		subtitle.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
-		subtitle.setPosition(xOffset, yOffset);
+		subtitle.setPosition({xOffset, yOffset});
 		subtitle.setColor(COLOR_LIGHT_PURPLE);
 		m_reputationTexts.push_back(subtitle);
 
-		yOffset += subtitle.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_M;
+		yOffset += subtitle.getLocalBounds().size.y + 2 * GUIConstants::CHARACTER_SIZE_M;
 	}
 }
 
@@ -453,7 +453,7 @@ HintEntry::HintEntry(const std::string& hintKey) {
 	}
 	m_name.setString(hintTitle);
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_name.getLocalBounds().width, m_name.getLocalBounds().height));
+	setBoundingBox(sf::FloatRect({sf::Vector2f(0.f, 0.f)}, {sf::Vector2f(m_name.getLocalBounds().size.x, m_name.getLocalBounds().size.y)}));
 	setInputInDefaultView(true);
 }
 

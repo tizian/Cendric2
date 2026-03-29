@@ -17,8 +17,8 @@ bool WalkingBehavior::doAIJump(bool onlyJump) {
 	sf::FloatRect bb = *m_enemy->getBoundingBox();
 
 	if (!onlyJump) {
-		bb.left = m_isFacingRight ? bb.left + m_aiRecord.distanceToAbyss : bb.left - m_aiRecord.distanceToAbyss;
-		bb.top = m_isFlippedGravity ? bb.top - 1.f : bb.top + 1.f;
+		bb.position.x = m_isFacingRight ? bb.position.x + m_aiRecord.distanceToAbyss : bb.position.x - m_aiRecord.distanceToAbyss;
+		bb.position.y = m_isFlippedGravity ? bb.position.y - 1.f : bb.position.y + 1.f;
 
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = bb;
@@ -87,7 +87,7 @@ void WalkingBehavior::checkCollisions(const sf::Vector2f& nextPosition) {
 	}
 
 	checkXYDirection(nextPosition, m_isCollidingX, m_isCollidingY);
-	const sf::FloatRect nextBoundingBox(nextPosition.x, nextPosition.y, m_mob->getBoundingBox()->width, m_mob->getBoundingBox()->height);
+	const sf::FloatRect nextBoundingBox({nextPosition.x, nextPosition.y}, {m_mob->getBoundingBox()->size.x, m_mob->getBoundingBox()->size.y});
 	if (m_mob->getLevel()->collidesWithEvilTiles(nextBoundingBox)) {
 		m_mob->setAccelerationX(0.f);
 		m_mob->setVelocityX(0.f);

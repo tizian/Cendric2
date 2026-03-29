@@ -8,7 +8,7 @@ WindowScreenOverlay::WindowScreenOverlay(const sf::Time& activeTime, const sf::T
 	m_windowBackColor = sf::Color(0, 0, 0, 70);
 	m_windowOrnamentColor = COLOR_WHITE;
 
-	m_window = new Window(sf::FloatRect(), GUIOrnamentStyle::LARGE, m_windowBackColor, m_windowOrnamentColor);
+	m_window = new Window(sf::FloatRect({0.f, 0.f}, {0.f, 0.f}), GUIOrnamentStyle::LARGE, m_windowBackColor, m_windowOrnamentColor);
 
 	m_window->addCloseButton(std::bind(&WindowScreenOverlay::close, this));
 	update(sf::Time::Zero);
@@ -24,12 +24,12 @@ void WindowScreenOverlay::update(const sf::Time& frameTime) {
 		m_windowBackColor.r,
 		m_windowBackColor.g,
 		m_windowBackColor.b,
-		(sf::Uint8)(m_scale * m_windowBackColor.a)));
+		(std::uint8_t)(m_scale * m_windowBackColor.a)));
 	m_window->setOrnamentColor(sf::Color(
 		m_windowOrnamentColor.r,
 		m_windowOrnamentColor.g,
 		m_windowOrnamentColor.b,
-		(sf::Uint8)(m_scale * m_windowOrnamentColor.a)));
+		(std::uint8_t)(m_scale * m_windowOrnamentColor.a)));
 	m_window->update(frameTime);
 }
 
@@ -40,13 +40,13 @@ void WindowScreenOverlay::render(sf::RenderTarget& renderTarget) {
 
 void WindowScreenOverlay::repositionText() {
 	const sf::FloatRect& titleBounds = m_title.getLocalBounds();
-	m_title.setPosition(0.5f * (WINDOW_WIDTH - titleBounds.width), GUIConstants::TOP + TEXT_OFFSET.y);
+	m_title.setPosition({0.5f * (WINDOW_WIDTH - titleBounds.size.x), GUIConstants::TOP + TEXT_OFFSET.y});
 	const sf::FloatRect& subtitleBounds = m_subtitle.getLocalBounds();
-	m_subtitle.setPosition(0.5f * (WINDOW_WIDTH - subtitleBounds.width), m_title.getPosition().y + titleBounds.height + TEXT_OFFSET.y);
+	m_subtitle.setPosition({0.5f * (WINDOW_WIDTH - subtitleBounds.size.x), m_title.getPosition().y + titleBounds.size.y + TEXT_OFFSET.y});
 
 	m_window->setSize(sf::Vector2f(
-		2 * TEXT_OFFSET.x + std::max(titleBounds.width, subtitleBounds.width), 
-		3 * TEXT_OFFSET.y + titleBounds.height + subtitleBounds.height));
+		2 * TEXT_OFFSET.x + std::max(titleBounds.size.x, subtitleBounds.size.x), 
+		3 * TEXT_OFFSET.y + titleBounds.size.y + subtitleBounds.size.y));
 
 	m_window->setPosition(sf::Vector2f(0.5f * (WINDOW_WIDTH - m_window->getSize().x), GUIConstants::TOP));
 }

@@ -24,7 +24,7 @@ void VeliusVictim::update(const sf::Time& frameTime) {
 		if (m_particleTime == sf::Time::Zero) {
 			m_deathPc->setEmitRate(0.f);
 		}
-		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
+		setSpriteColor(sf::Color(255, 255, 255, static_cast<uint8_t>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 		if (m_fadingTime == sf::Time::Zero) {
 			setDisposed();
 		}
@@ -77,7 +77,7 @@ void VeliusVictim::loadAttributes() {
 void VeliusVictim::handleAttackInput() {}
 
 void VeliusVictim::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	int width = 120;
 	int height = 170;
@@ -86,38 +86,38 @@ void VeliusVictim::loadAnimation(int skinNr) {
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, skinNr * height, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, skinNr * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, skinNr * height, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* kneelingAnimation = new Animation();
 	kneelingAnimation->setSpriteSheet(tex);
-	kneelingAnimation->addFrame(sf::IntRect(10 * width, skinNr * height, width, height));
+	kneelingAnimation->addFrame(sf::IntRect({10 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Inactive, kneelingAnimation);
 
 	Animation* layingAnimation = new Animation();
 	layingAnimation->setSpriteSheet(tex);
-	layingAnimation->addFrame(sf::IntRect(11 * width, skinNr * height, width, height));
+	layingAnimation->addFrame(sf::IntRect({11 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Broken, layingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(11 * width, skinNr * height, width, height));
+	deadAnimation->addFrame(sf::IntRect({11 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -205,7 +205,7 @@ void VeliusVictim::loadDeathParticles() {
 	data.timeGen = timeGen;
 
 	m_deathPc = new ParticleComponent(data, this);
-	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.8f));
+	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.8f));
 	m_deathPc->setVisible(false);
 	addComponent(m_deathPc);
 }

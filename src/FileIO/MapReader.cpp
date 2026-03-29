@@ -108,10 +108,8 @@ bool MapReader::readCollidableObjectLayer(tinyxml2::XMLElement* objectgroup, Map
 			XMLCheckResult(result);
 
 			data.collidableRects.push_back(sf::FloatRect(
-				static_cast<float>(x),
-				static_cast<float>(y),
-				static_cast<float>(width),
-				static_cast<float>(height)));
+				sf::Vector2f(static_cast<float>(x), static_cast<float>(y)),
+				sf::Vector2f(static_cast<float>(width), static_cast<float>(height))));
 
 			object = object->NextSiblingElement("object");
 			continue;
@@ -423,15 +421,15 @@ bool MapReader::readNPCs(tinyxml2::XMLElement* objectgroup, MapData& data) const
 
 					size_t pos = 0;
 					if ((pos = bb.find(",")) == std::string::npos) return false;
-					npc.boundingBox.left = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					npc.boundingBox.position.x = static_cast<float>(std::stoi(bb.substr(0, pos)));
 					bb.erase(0, pos + 1);
 					if ((pos = bb.find(",")) == std::string::npos) return false;
-					npc.boundingBox.top = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					npc.boundingBox.position.y = static_cast<float>(std::stoi(bb.substr(0, pos)));
 					bb.erase(0, pos + 1);
 					if ((pos = bb.find(",")) == std::string::npos) return false;
-					npc.boundingBox.width = static_cast<float>(std::stoi(bb.substr(0, pos)));
+					npc.boundingBox.size.x = static_cast<float>(std::stoi(bb.substr(0, pos)));
 					bb.erase(0, pos + 1);
-					npc.boundingBox.height = static_cast<float>(std::stoi(bb));
+					npc.boundingBox.size.y = static_cast<float>(std::stoi(bb));
 				}
 
 				_property = _property->NextSiblingElement("property");
@@ -527,8 +525,8 @@ bool MapReader::readBackgroundTileLayer(const std::string& layer, MapData& data)
 		if (contains(m_tileColliderMap, tileID)) {
 			for (auto const& colliderRect : m_tileColliderMap.at(tileID)) {
 				sf::FloatRect collider = colliderRect;
-				collider.left += x * TILE_SIZE_F;
-				collider.top += y * TILE_SIZE_F;
+				collider.position.x += x * TILE_SIZE_F;
+				collider.position.y += y * TILE_SIZE_F;
 				data.collidableRects.push_back(collider);
 			}
 		}
@@ -577,19 +575,19 @@ bool MapReader::readCollidableTiles(tinyxml2::XMLElement* firstTile) {
 
 			result = collider->QueryIntAttribute("x", &res);
 			XMLCheckResult(result);
-			colliderRect.left = static_cast<float>(res);
+			colliderRect.position.x = static_cast<float>(res);
 
 			result = collider->QueryIntAttribute("y", &res);
 			XMLCheckResult(result);
-			colliderRect.top = static_cast<float>(res);
+			colliderRect.position.y = static_cast<float>(res);
 
 			result = collider->QueryIntAttribute("width", &res);
 			XMLCheckResult(result);
-			colliderRect.width = static_cast<float>(res);
+			colliderRect.size.x = static_cast<float>(res);
 
 			result = collider->QueryIntAttribute("height", &res);
 			XMLCheckResult(result);
-			colliderRect.height = static_cast<float>(res);
+			colliderRect.size.y = static_cast<float>(res);
 
 			m_tileColliderMap.at(tileID + 1).push_back(colliderRect);
 

@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Level/LevelDynamicTile.h"
+#include <optional>
 
 class LadderTile final : public LevelDynamicTile {
 public:
@@ -29,6 +30,6 @@ private:
 
 	// Arrow information
 	bool m_showSprite = false;
-	sf::Sprite m_arrow;
+	std::optional<sf::Sprite> m_arrow;
 	sf::Time m_time = sf::Time::Zero;
 };

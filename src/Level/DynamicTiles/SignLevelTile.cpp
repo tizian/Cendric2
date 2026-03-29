@@ -37,7 +37,7 @@ void SignLevelTile::update(const sf::Time& frameTime) {
 }
 
 bool SignLevelTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, 30.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, 30.f}));
 	setPositionOffset(sf::Vector2f(0.f, 10.f));
 	setSpriteOffset(sf::Vector2f(0.f, -10.f));
 
@@ -68,7 +68,7 @@ void SignLevelTile::loadAnimation(int skinNr) {
 	std::string path = getSpritePath();
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

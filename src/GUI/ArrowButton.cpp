@@ -2,12 +2,12 @@
 #include "GlobalResource.h"
 
 ArrowButton::ArrowButton(bool pointRight) : GameObject() {
-	m_arrow.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_ARROW));
+	m_arrow.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_ARROW));
 
 	// center origin
-	m_arrow.setOrigin(sf::Vector2f(m_arrow.getLocalBounds().width / 2.f, m_arrow.getLocalBounds().height / 2.f));
-	m_arrow.rotate(pointRight ? 90.f : -90.f);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_arrow.getLocalBounds().height, m_arrow.getLocalBounds().width));
+	m_arrow->setOrigin(sf::Vector2f(m_arrow->getLocalBounds().size.x / 2.f, m_arrow->getLocalBounds().size.y / 2.f));
+	m_arrow->rotate(pointRight ? sf::degrees(90.f) : sf::degrees(-90.f));
+	setBoundingBox(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(m_arrow->getLocalBounds().size.y, m_arrow->getLocalBounds().size.x)));
 
 	// default colors 
 	m_mainColor = COLOR_WHITE;
@@ -34,7 +34,7 @@ void ArrowButton::onMouseOver() {
 
 void ArrowButton::setEnabled(bool value) {
 	m_isEnabled = value;
-	m_arrow.setColor(m_isEnabled ? m_mainColor : m_disabledColor);
+	m_arrow->setColor(m_isEnabled ? m_mainColor : m_disabledColor);
 }
 
 void ArrowButton::setMouseoverColor(const sf::Color& color) {
@@ -53,7 +53,7 @@ void ArrowButton::setDisabledColor(const sf::Color& color) {
 }
 
 void ArrowButton::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_arrow);
+	renderTarget.draw(*m_arrow);
 }
 
 void ArrowButton::update(const sf::Time& frameTime) {
@@ -68,7 +68,7 @@ void ArrowButton::update(const sf::Time& frameTime) {
 
 void ArrowButton::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_arrow.setPosition(pos + 0.5f * getSize());
+	m_arrow->setPosition(pos + 0.5f * getSize());
 }
 
 GameObjectType ArrowButton::getConfiguredType() const {
@@ -76,5 +76,5 @@ GameObjectType ArrowButton::getConfiguredType() const {
 }
 
 void ArrowButton::recalculateColor() {
-	m_arrow.setColor(m_isMouseOver ? m_mouseoverColor : m_isEnabled ? m_mainColor : m_disabledColor);
+	m_arrow->setColor(m_isMouseOver ? m_mouseoverColor : m_isEnabled ? m_mainColor : m_disabledColor);
 }

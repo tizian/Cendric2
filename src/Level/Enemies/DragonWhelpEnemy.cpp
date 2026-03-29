@@ -196,10 +196,10 @@ sf::Time DragonWhelpEnemy::getConfiguredChasingTime() const {
 }
 
 void DragonWhelpEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 40.f, 30.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {40.f, 30.f}));
 	setSpriteOffset(sf::Vector2f(-15.f, -35.f));
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 150.f, 0.5f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 150.f, 0.5f);
 	addComponent(new LightComponent(data, this));
 
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -211,7 +211,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation(sf::milliseconds(50));
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 10; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr, width, height));
+		flyingAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -219,7 +219,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation(sf::milliseconds(50));
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 10; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -227,7 +227,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* castingAnimation = new Animation(sf::milliseconds(50));
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr + height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr + height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
@@ -235,7 +235,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation(sf::milliseconds(50));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 6; i < 10; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr + height, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr + height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
@@ -244,7 +244,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation(sf::milliseconds(80));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr + 2 * height, width, height));
+		deadAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr + 2 * height}, {width, height}));
 	}
 	deadAnimation->setLooped(false);
 
@@ -252,7 +252,7 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 
 	Animation* inactiveAnimation = new Animation(sf::seconds(10.f));
 	inactiveAnimation->setSpriteSheet(tex);
-	inactiveAnimation->addFrame(sf::IntRect(6 * width, (height * 4) * skinNr + 2 * height, width, height));
+	inactiveAnimation->addFrame(sf::IntRect({6 * width, (height * 4) * skinNr + 2 * height}, {width, height}));
 	inactiveAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Inactive, inactiveAnimation);
@@ -260,10 +260,10 @@ void DragonWhelpEnemy::loadAnimation(int skinNr) {
 	Animation* hatchingAnimation = new Animation(sf::milliseconds(50));
 	hatchingAnimation->setSpriteSheet(tex);
 	for (int i = 6; i < 10; ++i) {
-		hatchingAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr + 2 * height, width, height));
+		hatchingAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr + 2 * height}, {width, height}));
 	}
 	for (int i = 0; i < 10; ++i) {
-		hatchingAnimation->addFrame(sf::IntRect(i * width, (height * 4) * skinNr + 3 * height, width, height));
+		hatchingAnimation->addFrame(sf::IntRect({i * width, (height * 4) * skinNr + 3 * height}, {width, height}));
 	}
 	hatchingAnimation->setLooped(false);
 

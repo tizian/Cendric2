@@ -18,16 +18,16 @@ ErrorScreen::ErrorScreen(CharacterCore* core) : Screen(core) {
 		break;
 	}
 	g_resourceManager->loadTexture(m_screenResource, ResourceType::Unique, this);
-	m_screenSprite = sf::Sprite((*g_resourceManager->getTexture(m_screenResource)));
+	m_screenSprite.emplace((*g_resourceManager->getTexture(m_screenResource)));
 	m_errorText = BitmapText(g_resourceManager->pollError()->second);
 	m_errorText.setColor(COLOR_BAD);
-	m_errorText.setPosition(sf::Vector2f(64, 518));
+	m_errorText.setPosition({64, 518});
 	m_errorText.setCharacterSize(12);
 }
 
 void ErrorScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSprite);
+	if (m_screenSprite) renderTarget.draw(*m_screenSprite);
 	renderTarget.draw(m_errorText);
 }
 

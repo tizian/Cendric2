@@ -2,6 +2,7 @@
 
 #include <thread> 
 #include <atomic>
+#include <optional>
 
 #include "global.h"
 #include "ResourceManager.h"
@@ -22,7 +23,7 @@ private:
 	void loadAsync() const;
 
 	bool m_isRendered = false;
-	sf::Sprite m_screenSprite;
+	std::optional<sf::Sprite> m_screenSprite;
 	sf::RectangleShape m_blackRect;
 	sf::Texture* m_texture = nullptr;
 

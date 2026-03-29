@@ -140,10 +140,10 @@ sf::Time GargoyleEnemy::getConfiguredChasingTime() const {
 
 void GargoyleEnemy::loadAnimation(int skinNr) {
 	m_animations.clear();
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 80.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 80.f}));
 	setSpriteOffset(sf::Vector2f(-127.f, -42.f));
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), sf::Vector2f(250.f, 250.f), 0.3f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), sf::Vector2f(250.f, 250.f), 0.3f);
 	addComponent(new LightComponent(data, this));
 
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
@@ -151,7 +151,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		flyingAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+		flyingAnimation->addFrame(sf::IntRect({195 * i, 0}, {195, 180}));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -159,7 +159,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		idleAnimation->addFrame(sf::IntRect(195 * i, 0, 195, 180));
+		idleAnimation->addFrame(sf::IntRect({195 * i, 0}, {195, 180}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -167,7 +167,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 3; i++) {
-		fightingAnimation->addFrame(sf::IntRect(195 * i, 180, 195, 180));
+		fightingAnimation->addFrame(sf::IntRect({195 * i, 180}, {195, 180}));
 	}
 	fightingAnimation->setLooped(false);
 
@@ -176,7 +176,7 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 10; i++) {
-		deadAnimation->addFrame(sf::IntRect(195 * i, 360, 195, 180));
+		deadAnimation->addFrame(sf::IntRect({195 * i, 360}, {195, 180}));
 	}
 	deadAnimation->setLooped(false);
 
@@ -188,8 +188,8 @@ void GargoyleEnemy::loadAnimation(int skinNr) {
 }
 
 void GargoyleEnemy::setDead() {
-	m_boundingBox.width = 138.f;
-	m_boundingBox.height = 46.f;
+	m_boundingBox.size.x = 138.f;
+	m_boundingBox.size.y = 46.f;
 	setSpriteOffset(sf::Vector2f(-25.f, -133.f));
 	Enemy::setDead();
 }

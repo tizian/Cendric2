@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "Controller/BaseController.h"
+#include <cstdint>
 
 class KeyboardController : public virtual BaseController {
 public:
@@ -14,10 +15,10 @@ public:
 	void stopReadingText();
 	const std::string& getReadText() const;
 	void cropReadText(int maxLength);
-	void readUnicode(sf::Uint32 character);
+	void readUnicode(std::uint32_t character);
 	void setLastPressedKey(sf::Keyboard::Key key);
 
-	// returns the sf::Keyboard::Key that was pressed in the last frame. If none, returns sf::Keyboard::Unknown
+	// returns the sf::Keyboard::Key that was pressed in the last frame. If none, returns sf::Keyboard::Key::Unknown
 	sf::Keyboard::Key getLastPressedKey() const;
 
 protected:
@@ -35,5 +36,5 @@ private:
 	std::string m_readText;
 
 	// keyboard
-	sf::Keyboard::Key m_lastPressedKey = sf::Keyboard::Unknown;
+	sf::Keyboard::Key m_lastPressedKey = sf::Keyboard::Key::Unknown;
 };

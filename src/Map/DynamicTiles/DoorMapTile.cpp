@@ -37,7 +37,7 @@ void DoorMapTile::update(const sf::Time& frameTime) {
 }
 
 bool DoorMapTile::init(const MapTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	setPositionOffset(sf::Vector2f(0.f, 0.f));
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
 
@@ -50,13 +50,13 @@ void DoorMapTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* openAnimation = new Animation();
 	openAnimation->setSpriteSheet(tex);
-	openAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Open, openAnimation);
 
 	Animation* closedAnimation = new Animation();
 	closedAnimation->setSpriteSheet(tex);
-	closedAnimation->addFrame(sf::IntRect(TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect({TILE_SIZE, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Closed, closedAnimation);
 

@@ -8,7 +8,7 @@ static Registrar registrar2(LevelDynamicTileID::SwitchableOn, \
 
 bool SwitchableTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 	return true;
 }
 
@@ -23,20 +23,20 @@ void SwitchableTile::loadAnimation(int skinNr) {
 	Animation* onAnimation = new Animation(sf::seconds(10.0f));
 	onAnimation->setSpriteSheet(tex);
 	onAnimation->addFrame(sf::IntRect(
-		BORDER,
-		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-		TILE_SIZE,
-		TILE_SIZE));
+		{BORDER,
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE)},
+		{TILE_SIZE,
+		TILE_SIZE}));
 
 	addAnimation(GameObjectState::On, onAnimation);
 
 	Animation* offAnimation = new Animation(sf::seconds(10.0f));
 	offAnimation->setSpriteSheet(tex);
 	offAnimation->addFrame(sf::IntRect(
-		BORDER + (2 * BORDER + TILE_SIZE),
-		BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-		TILE_SIZE,
-		TILE_SIZE));
+		{BORDER + (2 * BORDER + TILE_SIZE),
+		BORDER + skinNr * (2 * BORDER + TILE_SIZE)},
+		{TILE_SIZE,
+		TILE_SIZE}));
 
 	addAnimation(GameObjectState::Off, offAnimation);
 

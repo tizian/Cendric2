@@ -7,13 +7,13 @@ const float TabButton::ALIGNMENT_OFFSET = 14.f;
 
 TabButton::TabButton(const sf::FloatRect& box) {
 	// using default values for constructor.
-	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_INACTIVE), COLOR_WHITE, box.width, box.height);
+	m_border = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_TAB_INACTIVE), COLOR_WHITE, box.size.x, box.size.y);
 
 	m_outerRect = box;
-	sf::FloatRect backgroundBox = sf::FloatRect(box.left + BORDER_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BORDER_OFFSET, box.height - 2.f * BORDER_OFFSET);
-	m_background.setSize(sf::Vector2f(backgroundBox.width, backgroundBox.height));
+	sf::FloatRect backgroundBox = sf::FloatRect({box.position.x + BORDER_OFFSET, box.position.y + BORDER_OFFSET}, {box.size.x - 2.f * BORDER_OFFSET, box.size.y - 2.f * BORDER_OFFSET});
+	m_background.setSize(sf::Vector2f(backgroundBox.size.x, backgroundBox.size.y));
 	m_background.setFillColor(m_backgroundColor);
-	sf::FloatRect boundingBox = sf::FloatRect(box.left + BOUNDING_BOX_OFFSET, box.top + BORDER_OFFSET, box.width - 2.f * BOUNDING_BOX_OFFSET, box.height - 2.f * BORDER_OFFSET);
+	sf::FloatRect boundingBox = sf::FloatRect({box.position.x + BOUNDING_BOX_OFFSET, box.position.y + BORDER_OFFSET}, {box.size.x - 2.f * BOUNDING_BOX_OFFSET, box.size.y - 2.f * BORDER_OFFSET});
 	setBoundingBox(boundingBox);
 	
 	setInputInDefaultView(true);
@@ -21,7 +21,7 @@ TabButton::TabButton(const sf::FloatRect& box) {
 
 	m_isActive = false;
 
-	setPosition(sf::Vector2f(box.left, box.top));
+	setPosition({box.position.x, box.position.y});
 }
 
 void TabButton::setPosition(const sf::Vector2f& position) {
@@ -31,12 +31,12 @@ void TabButton::setPosition(const sf::Vector2f& position) {
 	sf::Vector2f backgroundPos = sf::Vector2f(position.x + BORDER_OFFSET, position.y + BORDER_OFFSET);
 	m_background.setPosition(backgroundPos);
 
-	float width = m_text.getLocalBounds().width;
-	float height = m_text.getLocalBounds().height;
-	float x = getBoundingBox()->left + 0.5f * (getBoundingBox()->width - width);
-	float y = getBoundingBox()->top + 0.5f * (getBoundingBox()->height - height);
+	float width = m_text.getLocalBounds().size.x;
+	float height = m_text.getLocalBounds().size.y;
+	float x = getBoundingBox()->position.x + 0.5f * (getBoundingBox()->size.x - width);
+	float y = getBoundingBox()->position.y + 0.5f * (getBoundingBox()->size.y - height);
 
-	m_text.setPosition(sf::Vector2f(x, y));
+	m_text.setPosition({x, y});
 }
 
 void TabButton::setActive(bool active) {
@@ -130,12 +130,12 @@ void TabButton::setTextRaw(const std::string& text) {
 void TabButton::setCharacterSize(int size) {
 	m_text.setCharacterSize(size);
 
-	float width = m_text.getLocalBounds().width;
-	float height = m_text.getLocalBounds().height;
-	float x = getBoundingBox()->left + 0.5f * (getBoundingBox()->width - width);
-	float y = getBoundingBox()->top + 0.5f * (getBoundingBox()->height - height);
+	float width = m_text.getLocalBounds().size.x;
+	float height = m_text.getLocalBounds().size.y;
+	float x = getBoundingBox()->position.x + 0.5f * (getBoundingBox()->size.x - width);
+	float y = getBoundingBox()->position.y + 0.5f * (getBoundingBox()->size.y - height);
 
-	m_text.setPosition(sf::Vector2f(x, y));
+	m_text.setPosition({x, y});
 }
 
 void TabButton::setTextColor(const sf::Color& color) {

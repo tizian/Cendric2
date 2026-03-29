@@ -7,7 +7,7 @@ KeyboardController::KeyboardController() {
 }
 
 void KeyboardController::update(const sf::Time& frameTime) {
-	m_lastPressedKey = sf::Keyboard::Unknown;
+	m_lastPressedKey = sf::Keyboard::Key::Unknown;
 }
 
 sf::Keyboard::Key KeyboardController::getLastPressedKey() const {
@@ -32,7 +32,7 @@ void KeyboardController::cropReadText(int maxLength) {
 	m_readText = m_readText.substr(0, maxLength);
 }
 
-void KeyboardController::readUnicode(sf::Uint32 character) {
+void KeyboardController::readUnicode(std::uint32_t character) {
 	if (!m_isReadText || !m_isWindowFocused
 		|| character == '\t'
 		|| character == '\n'
@@ -60,7 +60,7 @@ bool KeyboardController::isKeyboardKeyPressed(Key key) const {
 }
 
 bool KeyboardController::isKeyboardKeyPressed(sf::Keyboard::Key key) const {
-	if (key >= sf::Keyboard::KeyCount || key <= sf::Keyboard::Unknown) {
+	if (static_cast<unsigned int>(key) >= sf::Keyboard::KeyCount || key <= sf::Keyboard::Key::Unknown) {
 		return false;
 	}
 

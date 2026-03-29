@@ -13,7 +13,7 @@ ShootingTile::ShootingTile(LevelScreen* levelScreen) :
 
 bool ShootingTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	m_isInactive = contains(properties, std::string("inactive"));
 	m_isInvincible = contains(properties, std::string("invincible"));
@@ -90,7 +90,7 @@ void ShootingTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -102,7 +102,7 @@ void ShootingTile::loadAnimation(int skinNr) {
 	default:
 		// the turning wheel
 		for (int i = 0; i < 4; ++i) {
-			activeAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+			activeAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 		}
 		break;
 	case 1:
@@ -110,16 +110,16 @@ void ShootingTile::loadAnimation(int skinNr) {
 	case 3:
 	case 4:
 		// fire flowers
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * 1, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * 0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * 2, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * 3, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 		activeAnimation->setLooped(false);
 		break;
 	case 5:
 	case 6:
 		// traps
-		activeAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+		activeAnimation->addFrame(sf::IntRect({TILE_SIZE * 0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 		activeAnimation->setLooped(false);
 		break;
 	}
@@ -128,13 +128,13 @@ void ShootingTile::loadAnimation(int skinNr) {
 
 	Animation* brokenAnimation = new Animation();
 	brokenAnimation->setSpriteSheet(tex);
-	brokenAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	brokenAnimation->addFrame(sf::IntRect({TILE_SIZE * 4, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Broken, brokenAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(TILE_SIZE * 5, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	deadAnimation->addFrame(sf::IntRect({TILE_SIZE * 5, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
@@ -199,8 +199,8 @@ void ShootingTile::executeSpells() {
 	{
 		ProjectileSpell* spell1 = new ProjectileSpell();
 		ProjectileSpell* spell2 = new ProjectileSpell();
-		spell1->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));
-		spell2->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
+		spell1->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->size.y / 2.f));
+		spell2->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->size.x, getPosition().y + getBoundingBox()->size.y / 2.f));
 		m_screen->addObject(spell1);
 		m_screen->addObject(spell2);
 		break;
@@ -208,42 +208,42 @@ void ShootingTile::executeSpells() {
 	case 1:
 	{
 		FireBallSpell* spell = new FireBallSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y));
 		m_screen->addObject(spell);
 		break;
 	}
 	case 2:
 	{
 		FireBallSpell* spell = new FireBallSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y));
 		m_screen->addObject(spell);
 		break;
 	}
 	case 3:
 	{
 		FireBallSpell* spell = new FireBallSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->size.x, getPosition().y + getBoundingBox()->size.y / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}
 	case 4:
 	{
 		FireBallSpell* spell = new FireBallSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->size.y / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}
 	case 5:
 	{
 		ProjectileSpell* spell = new ProjectileSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->width, getPosition().y + getBoundingBox()->height / 2.f));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x + getBoundingBox()->size.x, getPosition().y + getBoundingBox()->size.y / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}
 	case 6:
 	{
 		ProjectileSpell* spell = new ProjectileSpell();
-		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->height / 2.f));
+		spell->load(m_spellData, this, sf::Vector2f(getPosition().x, getPosition().y + getBoundingBox()->size.y / 2.f));
 		m_screen->addObject(spell);
 		break;
 	}

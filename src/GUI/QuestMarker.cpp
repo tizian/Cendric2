@@ -11,8 +11,8 @@ QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 	m_characterCore = core;
 	m_isInputInDefaultView = true;
 	
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(SIZE), static_cast<float>(SIZE)));
-	m_sprite.setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {static_cast<float>(SIZE), static_cast<float>(SIZE)}));
+	m_sprite->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, SIZE + 4.f));
@@ -21,12 +21,12 @@ QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 
 void QuestMarker::render(sf::RenderTarget& renderTarget) {
 	GameObject::render(renderTarget);
-	renderTarget.draw(m_sprite);
+	renderTarget.draw(*m_sprite);
 }
 
 void QuestMarker::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_sprite.setPosition(pos);
+	m_sprite->setPosition(pos);
 }
 
 bool QuestMarker::isActive() const {
@@ -39,7 +39,7 @@ void QuestMarker::setActive(bool active) {
 	execSetActive();
 	auto const y = m_questData.isMainQuest ? 1 : 0;
 	auto const x = static_cast<int>(m_markerState);
-	m_sprite.setTextureRect(sf::IntRect(x * SIZE, y * SIZE, SIZE, SIZE));
+	m_sprite->setTextureRect(sf::IntRect({x * SIZE, y * SIZE}, {SIZE, SIZE}));
 }
 
 std::vector<QuestMarkerData> QuestMarker::getCurrentStepData(const QuestData& questData, CharacterCore* core)

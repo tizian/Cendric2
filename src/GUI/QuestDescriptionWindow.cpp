@@ -3,7 +3,7 @@
 const float QuestDescriptionWindow::WIDTH = 340.f;
 
 QuestDescriptionWindow::QuestDescriptionWindow(const CharacterCore* core) : Window(
-	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
+	sf::FloatRect({0.f, 0.f}, {WIDTH, WIDTH}),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
@@ -162,29 +162,29 @@ void QuestDescriptionWindow::setPosition(const sf::Vector2f& position) {
 	pos.y += GUIConstants::TEXT_OFFSET;
 	pos.x += GUIConstants::TEXT_OFFSET;
 
-	m_titleText.setPosition(position.x + ((WIDTH - m_titleText.getLocalBounds().width) / 2.f), pos.y);
-	pos.y += m_titleText.getLocalBounds().height + GUIConstants::TEXT_OFFSET;
+	m_titleText.setPosition({position.x + ((WIDTH - m_titleText.getLocalBounds().size.x) / 2.f), pos.y});
+	pos.y += m_titleText.getLocalBounds().size.y + GUIConstants::TEXT_OFFSET;
 
 	m_descriptionText.setPosition(pos);
 
-	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().height;
+	pos.y += GUIConstants::TEXT_OFFSET + m_descriptionText.getLocalBounds().size.y;
 
 	if (!m_stateText.getString().empty()) {
-		m_stateText.setPosition(pos.x, pos.y);
-		pos.y += GUIConstants::TEXT_OFFSET + m_stateText.getLocalBounds().height;
+		m_stateText.setPosition({pos.x, pos.y});
+		pos.y += GUIConstants::TEXT_OFFSET + m_stateText.getLocalBounds().size.y;
 	}
 
 	for (auto& it : m_targetsTexts) {
-		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		it.setPosition({pos.x, pos.y});
+		pos.y += 2 * it.getBounds().size.y;
 	}
 	for (auto& it : m_collectiblesTexts) {
-		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		it.setPosition({pos.x, pos.y});
+		pos.y += 2 * it.getBounds().size.y;
 	}
 	for (auto& it : m_conditionTexts) {
-		it.setPosition(pos.x, pos.y);
-		pos.y += 2 * it.getBounds().height;
+		it.setPosition({pos.x, pos.y});
+		pos.y += 2 * it.getBounds().size.y;
 	}
 	pos.y += GUIConstants::TEXT_OFFSET;
 

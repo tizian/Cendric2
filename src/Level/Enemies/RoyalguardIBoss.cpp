@@ -85,7 +85,7 @@ void RoyalguardIBoss::updateBossState(const sf::Time& frameTime) {
 			m_stateTime = sf::seconds(2.f);
 			m_fireLinePc->reset();
 			m_fireLinePc->setVisible(true);
-			m_lineSpawner->point1 = getPosition() + sf::Vector2f(m_boundingBox.width * 0.5f, -20.f);
+			m_lineSpawner->point1 = getPosition() + sf::Vector2f(m_boundingBox.size.x * 0.5f, -20.f);
 			m_lineSpawner->point2 = m_isTopFire ? RoyalguardFire::FIRE_POS_TOP : RoyalguardFire::FIRE_POS_BOT;
 			auto dir = m_lineSpawner->point2 - m_lineSpawner->point1;
 			m_lineVelGen->minAngle = radToDeg(std::atan2(dir.y, dir.x)) + 90.f;
@@ -134,33 +134,33 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	int wideWidth = 240;
 	int height = 150;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -60.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(10 * width, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({10 * width, 0}, {width, height}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -168,11 +168,11 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	// chop down
 	Animation* casting1Animation = new Animation(sf::seconds(0.1f));
 	casting1Animation->setSpriteSheet(tex);
-	casting1Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
-	casting1Animation->addFrame(sf::IntRect(12 * width, 0, width, height));
-	casting1Animation->addFrame(sf::IntRect(13 * width, 0, wideWidth, height));
-	casting1Animation->addFrame(sf::IntRect(15 * width, 0, wideWidth, height));
-	casting1Animation->addFrame(sf::IntRect(17 * width, 0, wideWidth, height));
+	casting1Animation->addFrame(sf::IntRect({11 * width, 0}, {width, height}));
+	casting1Animation->addFrame(sf::IntRect({12 * width, 0}, {width, height}));
+	casting1Animation->addFrame(sf::IntRect({13 * width, 0}, {wideWidth, height}));
+	casting1Animation->addFrame(sf::IntRect({15 * width, 0}, {wideWidth, height}));
+	casting1Animation->addFrame(sf::IntRect({17 * width, 0}, {wideWidth, height}));
 	casting1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, casting1Animation);
@@ -180,11 +180,11 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	// chop up
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
 	casting2Animation->setSpriteSheet(tex);
-	casting2Animation->addFrame(sf::IntRect(17 * width, 0, wideWidth, height));
-	casting2Animation->addFrame(sf::IntRect(15 * width, 0, wideWidth, height));
-	casting2Animation->addFrame(sf::IntRect(13 * width, 0, wideWidth, height));
-	casting2Animation->addFrame(sf::IntRect(12 * width, 0, width, height));
-	casting2Animation->addFrame(sf::IntRect(11 * width, 0, width, height));
+	casting2Animation->addFrame(sf::IntRect({17 * width, 0}, {wideWidth, height}));
+	casting2Animation->addFrame(sf::IntRect({15 * width, 0}, {wideWidth, height}));
+	casting2Animation->addFrame(sf::IntRect({13 * width, 0}, {wideWidth, height}));
+	casting2Animation->addFrame(sf::IntRect({12 * width, 0}, {width, height}));
+	casting2Animation->addFrame(sf::IntRect({11 * width, 0}, {width, height}));
 	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -192,7 +192,7 @@ void RoyalguardIBoss::loadAnimation(int skinNr) {
 	// heal & cast fireball
 	Animation* fighting3Animation = new Animation(sf::seconds(0.1f));
 	fighting3Animation->setSpriteSheet(tex);
-	fighting3Animation->addFrame(sf::IntRect(20 * width, 0, width, height));
+	fighting3Animation->addFrame(sf::IntRect({20 * width, 0}, {width, height}));
 	fighting3Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Fighting3, fighting3Animation);
@@ -221,7 +221,7 @@ void RoyalguardIBoss::loadFireParticles() {
 
 	// Generators
 	auto posGen = new particles::CircleSpawner();
-	posGen->radius = sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.width * m_boundingBox.width * 0.5f);
+	posGen->radius = sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.x * m_boundingBox.size.x * 0.5f);
 	data.spawner = posGen;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -259,8 +259,8 @@ void RoyalguardIBoss::loadFireParticles() {
 
 	// light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width, 0.f),
-		sf::Vector2f(m_boundingBox.width * 2.f, m_boundingBox.width * 2.f), 0.6f), this));
+		sf::Vector2f(getBoundingBox()->size.x, 0.f),
+		sf::Vector2f(m_boundingBox.size.x * 2.f, m_boundingBox.size.x * 2.f), 0.6f), this));
 }
 
 void RoyalguardIBoss::loadFireLineParticles() {
@@ -302,7 +302,7 @@ void RoyalguardIBoss::loadFireLineParticles() {
 	data.timeGen = timeGen;
 
 	m_fireLinePc = new ParticleComponent(data, this);
-	m_fireLinePc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, -40.f));
+	m_fireLinePc->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, -40.f));
 	m_fireLinePc->setVisible(false);
 	addComponent(m_fireLinePc);
 	m_pcs.push_back(m_fireLinePc);
@@ -359,9 +359,9 @@ RoyalguardFire::RoyalguardFire(bool isTop, LevelMovableGameObject* mainChar) {
 	m_isTop = isTop;
 	m_ttl = RoyalguardIBoss::FIRE_TIME;
 
-	m_boundingBox.height = FIRE_EXTENTS.y;
-	m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x;
-	m_boundingBox.top = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).y - FIRE_EXTENTS.y * 0.5f;
+	m_boundingBox.size.y = FIRE_EXTENTS.y;
+	m_boundingBox.position.x = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x;
+	m_boundingBox.position.y = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).y - FIRE_EXTENTS.y * 0.5f;
 	m_graceTime = GRACE_TIME;
 
 	loadParticles();
@@ -377,10 +377,10 @@ void RoyalguardFire::update(const sf::Time& frameTime) {
 		return;
 	}
 	if (m_graceTime > sf::Time::Zero) {
-		m_boundingBox.width = (1.f - m_graceTime.asSeconds() / GRACE_TIME.asSeconds()) * FIRE_EXTENTS.x;
-		m_boundingBox.left = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x - m_boundingBox.width * 0.5f;
-		m_posGen->size.x = m_boundingBox.width;
-		m_lightObject->setSize(sf::Vector2f(m_boundingBox.width * 1.5f, m_lightObject->getSize().y));
+		m_boundingBox.size.x = (1.f - m_graceTime.asSeconds() / GRACE_TIME.asSeconds()) * FIRE_EXTENTS.x;
+		m_boundingBox.position.x = (m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT).x - m_boundingBox.size.x * 0.5f;
+		m_posGen->size.x = m_boundingBox.size.x;
+		m_lightObject->setSize(sf::Vector2f(m_boundingBox.size.x * 1.5f, m_lightObject->getSize().y));
 	}
 	if (m_timeSinceHurt == sf::Time::Zero && fastIntersect(*m_mainChar->getBoundingBox(), m_boundingBox)) {
 		m_mainChar->addDamage(FIRE_DAMAGE, DamageType::Fire, false, false);
@@ -437,6 +437,6 @@ void RoyalguardFire::loadParticles() {
 	// light
 	m_lightObject = new LightObject(LightData(
 		m_isTop ? FIRE_POS_TOP : FIRE_POS_BOT,
-		sf::Vector2f(20.f, m_boundingBox.height * 4.f), 1.0f));
+		sf::Vector2f(20.f, m_boundingBox.size.y * 4.f), 1.0f));
 	m_screen->addObject(m_lightObject);
 }

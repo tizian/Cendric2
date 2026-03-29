@@ -64,7 +64,7 @@ private:
 	std::vector<Enemy*> m_cats;
 	void spawnCats();
 	void checkRevive(const sf::Time& frameTime);
-	sf::Sprite m_eyes;
+	sf::Sprite* m_eyes;
 	int explosionCount = 0;
 
 private:

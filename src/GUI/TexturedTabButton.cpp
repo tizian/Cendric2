@@ -12,8 +12,8 @@ void TexturedTabButton::render(sf::RenderTarget& renderTarget) {
 void TexturedTabButton::setPosition(const sf::Vector2f& position) {
 	TabButton::setPosition(position);
 
-	float x = getBoundingBox()->left + 0.5f * (getBoundingBox()->width - m_texturedLayer.getSize().x);
-	float y = getBoundingBox()->top + 0.5f * (getBoundingBox()->height - m_texturedLayer.getSize().y);
+	float x = getBoundingBox()->position.x + 0.5f * (getBoundingBox()->size.x - m_texturedLayer.getSize().x);
+	float y = getBoundingBox()->position.y + 0.5f * (getBoundingBox()->size.y - m_texturedLayer.getSize().y);
 
 	m_texturedLayer.setPosition(sf::Vector2f(x, y));
 }
@@ -24,8 +24,8 @@ void TexturedTabButton::setTexture(const sf::Texture* tex, const sf::IntRect& te
 
 	auto const bbox = getBoundingBox();
 
-	auto const height = std::min(bbox->height, static_cast<float>(textureRect.height));
-	auto const width = textureRect.width * (height / static_cast<float>(textureRect.height));
+	auto const height = std::min(bbox->size.y, static_cast<float>(textureRect.size.y));
+	auto const width = textureRect.size.x * (height / static_cast<float>(textureRect.size.y));
 	
 	m_texturedLayer.setSize(sf::Vector2f(width, height));
 	setPosition(getPosition() - sf::Vector2f(BOUNDING_BOX_OFFSET, BORDER_OFFSET));

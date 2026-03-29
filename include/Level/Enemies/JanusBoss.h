@@ -12,6 +12,7 @@ class JanusBossMovingBehavior;
 class JanusBossMask final {
 public:
 	JanusBossMask();
+	~JanusBossMask();
 
 	void setPosition(const sf::Vector2f& pos);
 	void setEvil(bool isEvil);
@@ -22,7 +23,7 @@ private:
 	std::string getSpritesheetPath() const;
 
 private:
-	sf::Sprite m_sprite;
+	sf::Sprite* m_sprite;
 };
 
 enum JanusBossPhase {

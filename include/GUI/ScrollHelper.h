@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.h"
+#include <optional>
 
 class ScrollBar;
 
@@ -16,6 +17,6 @@ public:
 	float nextOffset;
 
 private:
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 	sf::FloatRect m_boundingBox;
 };

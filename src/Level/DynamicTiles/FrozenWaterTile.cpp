@@ -13,7 +13,7 @@ FrozenWaterTile::FrozenWaterTile(FluidTile* fluidTile, int fluidTileIndex) : Lev
 
 bool FrozenWaterTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(TILE_SIZE), TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {static_cast<float>(TILE_SIZE), TILE_SIZE_F}));
 	return true;
 }
 
@@ -23,7 +23,7 @@ void FrozenWaterTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(0.5f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(BORDER, BORDER, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({BORDER, BORDER}, {TILE_SIZE, TILE_SIZE}));
 	
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

@@ -40,7 +40,7 @@ bool FluidTile::init(const LevelTileProperties& properties) {
 	sf::Vector2i size;
 	size.x = std::stoi(sizeStr.substr(0, sizeStr.find(',')));
 	size.y = std::stoi(sizeStr.substr(sizeStr.find(',') + 1));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, static_cast<float>(size.x), static_cast<float>(size.y)));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {static_cast<float>(size.x), static_cast<float>(size.y)}));
 
 	return true;
 }
@@ -52,13 +52,13 @@ void FluidTile::loadAnimation(int skinNr) {
 	const sf::FloatRect* bb = getBoundingBox();
 	m_x = getPosition().x;
 	m_y = getPosition().y;
-	m_width = bb->width;
-	m_height = bb->height;
+	m_width = bb->size.x;
+	m_height = bb->size.y;
 
 	float dHeight = 50.f - m_data.height;
-	setBoundingBox(sf::FloatRect(m_x, m_y + dHeight, m_width, m_height - dHeight));
+	setBoundingBox(sf::FloatRect({m_x, m_y + dHeight}, {m_width, m_height - dHeight}));
 
-	m_nTiles = static_cast<int>(bb->width / TILE_SIZE);
+	m_nTiles = static_cast<int>(bb->size.x / TILE_SIZE);
 
 	m_nColumns = NUMBER_COLUMNS_PER_SUBTILE * m_nTiles;
 	m_columns = std::vector<FluidColumn>();
@@ -78,7 +78,7 @@ void FluidTile::loadAnimation(int skinNr) {
 
 	m_frozenTiles = std::vector<FrozenWaterTile*>(m_nTiles, nullptr);
 
-	m_vertexArray = sf::VertexArray(sf::Quads, 2 * 4 * (m_nColumns - 1));
+	m_vertexArray = sf::VertexArray(sf::PrimitiveType::Triangles, 2 * 4 * (m_nColumns - 1));
 
 	// Particle System
 	int maxNumberParticles = m_nTiles * 50;
@@ -226,7 +226,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	float waterHeight = getHeight(xPosition + 0.5f * width);
 	const sf::FloatRect* bb = getBoundingBox();
 
-	*m_emitterPosition = sf::Vector2f(xPosition + 0.5f * width, bb->top + bb->height - waterHeight);
+	*m_emitterPosition = sf::Vector2f(xPosition + 0.5f * width, bb->position.y + bb->size.y - waterHeight);
 	*m_emitterSize = sf::Vector2f(0.8f * width, 2.f);
 	*m_particleMinSpeed = 0.2f * particleVelocity;
 	*m_particleMaxSpeed = 1.0f * particleVelocity;
@@ -236,10 +236,11 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 
 	// Play sound
 	if (velocityNorm > 100.f && source) {
-		float distance = dist(sf::Vector2f(source->getBoundingBox()->left, source->getBoundingBox()->top), m_mainChar->getPosition());
+		float distance = dist(sf::Vector2f(source->getBoundingBox()->position.x, source->getBoundingBox()->position.y), m_mainChar->getPosition());
 		if (distance > WINDOW_WIDTH) return;
 		if (!contains(m_soundMap, source)) {
-			m_soundMap.insert({ source, new sf::Sound() });
+			auto* buffer = g_resourceManager->getSoundBuffer(m_data.soundPath);
+			m_soundMap.insert({ source, new sf::Sound(*buffer) });
 		}
 
 		float scale = 1.f - distance / WINDOW_WIDTH;
@@ -297,8 +298,8 @@ void FluidTile::onHit(Spell* spell) {
 }
 
 void FluidTile::onHit(LevelMovableGameObject* mob) {
-	if (m_data.isDeadly && mob->getBoundingBox()->top + mob->getBoundingBox()->height > getPosition().y + TOP_OFFSET) {
- 		mob->setDead();
+	if (m_data.isDeadly && mob->getBoundingBox()->position.y + mob->getBoundingBox()->size.y > getPosition().y + TOP_OFFSET) {
+  		mob->setDead();
 	}
 
 	if (m_data.isFreezing && m_timeUntilDamage == sf::Time::Zero) {
@@ -306,10 +307,10 @@ void FluidTile::onHit(LevelMovableGameObject* mob) {
 	}
 
 	// don't splash if the mob is deeper than one tile below the surface
-	if (mob->getBoundingBox()->top > getBoundingBox()->top + TILE_SIZE) return;
-	if (mob->getBoundingBox()->top + mob->getBoundingBox()->height < getBoundingBox()->top + 2.f) return;
+	if (mob->getBoundingBox()->position.y > getBoundingBox()->position.y + TILE_SIZE) return;
+	if (mob->getBoundingBox()->position.y + mob->getBoundingBox()->size.y < getBoundingBox()->position.y + 2.f) return;
 
-	splash(mob, mob->getBoundingBox()->left, mob->getBoundingBox()->width, mob->getVelocity(), 0.1f, 0.5f);
+	splash(mob, mob->getBoundingBox()->position.x, mob->getBoundingBox()->size.x, mob->getVelocity(), 0.1f, 0.5f);
 }
 
 void FluidTile::checkForMovableTiles() {
@@ -319,12 +320,12 @@ void FluidTile::checkForMovableTiles() {
 
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (fastIntersect(m_boundingBox, tileBB)) {
-			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+			if (tileBB.position.y > getBoundingBox()->position.y + TILE_SIZE) continue;
 
-			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));
+			int index = static_cast<int>(std::floor((tileBB.position.x - m_x) / TILE_SIZE));
 			if (isFrozen(index)) continue;
 
-			splash(tile, tileBB.left, tileBB.width, tile->getVelocity(), 0.1f, 0.5f);
+			splash(tile, tileBB.position.x, tileBB.size.x, tile->getVelocity(), 0.1f, 0.5f);
 		}
 	}
 	for (auto& it : *m_level->getDynamicTiles()) {
@@ -333,12 +334,12 @@ void FluidTile::checkForMovableTiles() {
 
 		const sf::FloatRect& tileBB = *tile->getBoundingBox();
 		if (fastIntersect(m_boundingBox, tileBB)) {
-			if (tileBB.top > getBoundingBox()->top + TILE_SIZE) continue;
+			if (tileBB.position.y > getBoundingBox()->position.y + TILE_SIZE) continue;
 
-			int index = static_cast<int>(std::floor((tileBB.left - m_x) / TILE_SIZE));
+			int index = static_cast<int>(std::floor((tileBB.position.x - m_x) / TILE_SIZE));
 			if (isFrozen(index)) continue;
 
-			splash(tile, tileBB.left, tileBB.width, tile->getVelocity(), 0.1f, 0.5f);
+			splash(tile, tileBB.position.x, tileBB.size.x, tile->getVelocity(), 0.1f, 0.5f);
 		}
 	}
 }
@@ -347,7 +348,7 @@ void FluidTile::freeze(int index) {
 	if (index >= 0 && index < m_nTiles) {
 		// check if this fluid tile can be frozen or if a mob is in the way
 		WorldCollisionQueryRecord rec;
-		rec.boundingBox = sf::FloatRect(m_x + index * TILE_SIZE, m_y, static_cast<float>(TILE_SIZE), TILE_SIZE_F);
+		rec.boundingBox = sf::FloatRect({m_x + index * TILE_SIZE, m_y}, {static_cast<float>(TILE_SIZE), TILE_SIZE_F});
 		if (m_level->collidesWithMobs(rec) || m_level->collidesWithMovableTiles(rec)) {
 			g_logger->logInfo("FluidTile::freeze", "Cannot freeze this tile as it would stuck a MOB or a movable tile!");
 			return;
@@ -363,7 +364,7 @@ void FluidTile::freeze(int index) {
 		frozenTile->init(LevelTileProperties());
 		frozenTile->setPosition(sf::Vector2f(m_x + index * TILE_SIZE, m_y));
 		const sf::FloatRect* bb = frozenTile->getBoundingBox();
-		frozenTile->setBoundingBox(sf::FloatRect(bb->left, bb->top, bb->width, bb->height - 35.f));	// ice tile is ca. 15 pixels thick
+		frozenTile->setBoundingBox(sf::FloatRect({bb->position.x, bb->position.y}, {bb->size.x, bb->size.y - 35.f}));	// ice tile is ca. 15 pixels thick
 		frozenTile->setDebugBoundingBox(COLOR_NEUTRAL);
 		frozenTile->loadResources();
 		frozenTile->loadAnimation(0);

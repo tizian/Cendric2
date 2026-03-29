@@ -8,7 +8,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Ice, IceTile)
 
 bool IceTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	m_isFreezing = contains(properties, std::string("freezing"));
 
@@ -42,10 +42,10 @@ void IceTile::loadAnimation(int skinNr) {
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 2; i++) {
 		idleAnimation->addFrame(sf::IntRect(
-			BORDER + i * (2 * BORDER + TILE_SIZE),
-			BORDER + skinNr * (2 * BORDER + TILE_SIZE),
-			TILE_SIZE,
-			TILE_SIZE));
+			{BORDER + i * (2 * BORDER + TILE_SIZE),
+			BORDER + skinNr * (2 * BORDER + TILE_SIZE)},
+			{TILE_SIZE,
+			TILE_SIZE}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);

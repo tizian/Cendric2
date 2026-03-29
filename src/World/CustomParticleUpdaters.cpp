@@ -17,7 +17,7 @@ namespace particles
 
 		for (int i = 0; i < endId; ++i) {
 			float y = fluidTile->getHeight(data->pos[i].x);
-			if (data->pos[i].y + 0.5f * data->size[i].y > bb->top + bb->height - y) {
+			if (data->pos[i].y + 0.5f * data->size[i].y > bb->position.y + bb->size.y - y) {
 				data->kill(i);
 				endId = data->countAlive;
 			}
@@ -36,7 +36,7 @@ namespace particles
 		for (int i = 0; i < endId; ++i) {
 			float a = data->time[i].z;
 			sf::Color col = lerpColor(data->startCol[i], data->endCol[i], a);
-			col.a = static_cast<sf::Uint8>(col.a * alphaScale);
+			col.a = static_cast<std::uint8_t>(col.a * alphaScale);
 			data->col[i] = col;
 		}
 	}

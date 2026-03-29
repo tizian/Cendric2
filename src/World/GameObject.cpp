@@ -59,8 +59,7 @@ void GameObject::update(const sf::Time& frameTime) {
 }
 
 void GameObject::setPosition(const sf::Vector2f& position) {
-	m_boundingBox.left = position.x;
-	m_boundingBox.top = position.y;
+	m_boundingBox.position = position;
 
 	m_debugBox.setPosition(position);
 	for (auto component : m_components) {
@@ -69,12 +68,12 @@ void GameObject::setPosition(const sf::Vector2f& position) {
 }
 
 void GameObject::setPositionX(const float posX) {
-	const sf::Vector2f newPosition(posX, m_boundingBox.top);
+	const sf::Vector2f newPosition(posX, m_boundingBox.position.y);
 	setPosition(newPosition);
 }
 
 void GameObject::setPositionY(const float posY) {
-	const sf::Vector2f newPosition(m_boundingBox.left, posY);
+	const sf::Vector2f newPosition(m_boundingBox.position.x, posY);
 	setPosition(newPosition);
 }
 
@@ -83,32 +82,31 @@ void GameObject::setState(GameObjectState state) {
 }
 
 void GameObject::setBoundingBox(const sf::FloatRect& rect) {
-	m_boundingBox.width = rect.width;
-	m_boundingBox.height = rect.height;
+	m_boundingBox.size = rect.size;
 
 	if (m_isDebugRendering) {
 		m_debugBox.setSize(getSize());
 	}
 
-	setPosition(sf::Vector2f(rect.left, rect.top));
+	setPosition(rect.position);
 }
 
 void GameObject::setSize(const sf::Vector2f& size) {
-	setBoundingBox(sf::FloatRect(m_boundingBox.left, m_boundingBox.top, size.x, size.y));
+	setBoundingBox(sf::FloatRect(m_boundingBox.position, size));
 }
 
 sf::Vector2f GameObject::getPosition() const {
-	return sf::Vector2f(m_boundingBox.left, m_boundingBox.top);
+	return m_boundingBox.position;
 }
 
 sf::Vector2f GameObject::getSize() const {
-	return sf::Vector2f(m_boundingBox.width, m_boundingBox.height);
+	return m_boundingBox.size;
 }
 
 sf::Vector2f GameObject::getCenter() const {
 	return sf::Vector2f(
-		m_boundingBox.left + (m_boundingBox.width / 2),
-		m_boundingBox.top + (m_boundingBox.height / 2));
+		m_boundingBox.position.x + (m_boundingBox.size.x / 2),
+		m_boundingBox.position.y + (m_boundingBox.size.y / 2));
 }
 
 const sf::FloatRect* GameObject::getBoundingBox() const {

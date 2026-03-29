@@ -27,7 +27,7 @@ MerchantWindow::MerchantWindow(MerchantInterface* _interface) {
 
 void MerchantWindow::init() {
 	// init window
-	sf::FloatRect box(LEFT, TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	sf::FloatRect box({LEFT, TOP}, {WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -42,10 +42,10 @@ void MerchantWindow::init() {
 	m_title.setColor(COLOR_WHITE);
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_title.setString(g_textProvider->getText(removeDigits(m_interface->getMerchantID()), "npc"));
-	m_title.setPosition(
+	m_title.setPosition({
 		m_window->getPosition().x +
 		WIDTH / 2 -
-		m_title.getLocalBounds().width / 2, m_window->getPosition().y + GUIConstants::TEXT_OFFSET);
+		m_title.getLocalBounds().size.x / 2, m_window->getPosition().y + GUIConstants::TEXT_OFFSET});
 
 	// scrolling
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
@@ -54,7 +54,7 @@ void MerchantWindow::init() {
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT, m_window);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::FloatRect scrollBox({LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	reload();

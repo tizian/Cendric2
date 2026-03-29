@@ -24,10 +24,10 @@ void LevelMovableTile::updateRelativeVelocity(const sf::Time& frameTime) {
 	if (posDiff.x == 0 && posDiff.y == 0) return;
 
 	sf::FloatRect newBoundingBoxX = m_boundingBox;
-	newBoundingBoxX.top -= posDiff.y;
+	newBoundingBoxX.position.y -= posDiff.y;
 
 	sf::FloatRect newBoundingBoxY = m_boundingBox;
-	newBoundingBoxY.left -= posDiff.x;
+	newBoundingBoxY.position.x -= posDiff.x;
 
 	// check if we hit the other movable objects that do not have the same parent as us. we have precedence and shift other objects away.
 	auto mainChars = m_screen->getObjects(_LevelMainCharacter);
@@ -82,8 +82,8 @@ bool LevelMovableTile::collides(const sf::Vector2f& nextPos) const {
 	WorldCollisionQueryRecord rec;
 	rec.excludedGameObject = const_cast<LevelMovableTile*>(this);
 	sf::FloatRect nextBoundingBox = *getBoundingBox();
-	nextBoundingBox.left = nextPos.x;
-	nextBoundingBox.top = nextPos.y;
+	nextBoundingBox.position.x = nextPos.x;
+	nextBoundingBox.position.y = nextPos.y;
 	rec.boundingBox = nextBoundingBox;
 	return m_level->collides(rec);
 }
@@ -92,15 +92,15 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	float velNorm = norm(getVelocity()) / 20.f; // 20 fps max
 	sf::Vector2f oldPosition = getPosition();
 	const sf::FloatRect& bb = *getBoundingBox();
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, bb.top, bb.width, bb.height);
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, bb.position.y}, {bb.size.x, bb.size.y});
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 	WorldCollisionQueryRecord rec;
 
 	rec.excludedGameObject = this;
 	rec.ignoreMobs = false;
 
-	bool isMovingDown = nextPosition.y > bb.top;
-	bool isMovingRight = nextPosition.x > bb.left;
+	bool isMovingDown = nextPosition.y > bb.position.y;
+	bool isMovingRight = nextPosition.x > bb.position.x;
 
 	// should we use strategy 2: try y direction first, then x direction?
 	bool tryYfirst = false;
@@ -122,10 +122,10 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationX(0.f);
 			setVelocityX(0.f);
 			setPositionX(rec.safeLeft);
-			nextBoundingBoxY.left = rec.safeLeft;
+			nextBoundingBoxY.position.x = rec.safeLeft;
 		}
 		else {
-			nextBoundingBoxY.left = nextPosition.x;
+			nextBoundingBoxY.position.x = nextPosition.x;
 		}
 
 		// check for collision on y axis
@@ -151,10 +151,10 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 			setAccelerationY(0.f);
 			setVelocityY(0.f);
 			setPositionY(rec.safeTop);
-			nextBoundingBoxX.top = rec.safeTop;
+			nextBoundingBoxX.position.y = rec.safeTop;
 		}
 		else {
-			nextBoundingBoxX.top = nextPosition.y;
+			nextBoundingBoxX.position.y = nextPosition.y;
 		}
 
 		// check for collision on x axis
@@ -171,7 +171,7 @@ void LevelMovableTile::checkCollisions(const sf::Vector2f& nextPosition) {
 
 	// check for wrong parent
 	if (MovingParent* mt = getMovingParent()) {
-		if (mt->getBoundingBox()->top + Epsilon < getBoundingBox()->top + getBoundingBox()->height) {
+		if (mt->getBoundingBox()->position.y + Epsilon < getBoundingBox()->position.y + getBoundingBox()->size.y) {
 			setMovingParent(nullptr);
 		}
 	}

@@ -55,8 +55,8 @@ void LevelMainCharacter::updateAutoscroller() {
 	if (m_isDead || !m_autoscroller) return;
 
 	auto pos = getPosition();
-	auto minPos = std::min(m_autoscroller->getCameraLeft(), m_level->getWorldRect().width - WINDOW_WIDTH);
-	auto maxPos = m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->width;
+	auto minPos = std::min(m_autoscroller->getCameraLeft(), m_level->getWorldRect().size.x - WINDOW_WIDTH);
+	auto maxPos = m_autoscroller->getCameraLeft() + WINDOW_WIDTH - getBoundingBox()->size.x;
 	if (pos.x < minPos) {
 		setPositionX(minPos);
 	}
@@ -89,7 +89,7 @@ void LevelMainCharacter::update(const sf::Time& frameTime) {
 		if (m_particleTime == sf::Time::Zero) {
 			m_deathPc->setEmitRate(0.f);
 		}
-		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
+		setSpriteColor(sf::Color(255, 255, 255, static_cast<uint8_t>(m_fadingTime.asSeconds() / 2.f * 255.f)), sf::seconds(1000));
 	}
 	if (!isReady()) return;
 
@@ -228,10 +228,10 @@ void LevelMainCharacter::checkInvisibilityLevel() {
 
 sf::Vector2f LevelMainCharacter::getSpellPosition() const {
 	if (isUpsideDown()) {
-		return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top + m_boundingBox.height);
+		return sf::Vector2f(m_boundingBox.position.x + m_boundingBox.size.x * 0.5f, m_boundingBox.position.y + m_boundingBox.size.y);
 	}
 
-	return sf::Vector2f(m_boundingBox.left + m_boundingBox.width * 0.5f, m_boundingBox.top);
+	return sf::Vector2f(m_boundingBox.position.x + m_boundingBox.size.x * 0.5f, m_boundingBox.position.y);
 }
 
 void LevelMainCharacter::loadWeapon() {
@@ -267,11 +267,11 @@ void LevelMainCharacter::loadWeapon() {
 		"res/sound/weapon/swing3.ogg"
 	};
 	chop.boundingBox = weaponBean->chop_rect;
-	chop.spellOffset.x = chop.boundingBox.left;
-	chop.spellOffset.y = chop.boundingBox.top;
+	chop.spellOffset.x = chop.boundingBox.position.x;
+	chop.spellOffset.y = chop.boundingBox.position.y;
 	chop.cooldown = weaponBean->chop_cooldown;
 	chop.damage = weaponBean->chop_damage;
-	chop.iconTextureRect = sf::IntRect(weapon->getIconTextureLocation().x, weapon->getIconTextureLocation().y, 50, 50);
+	chop.iconTextureRect = sf::IntRect({weapon->getIconTextureLocation().x, weapon->getIconTextureLocation().y}, {50, 50});
 	m_spellManager->addSpell(chop);
 
 	// handle other spells
@@ -434,7 +434,7 @@ void LevelMainCharacter::setGodmode(bool godmode) {
 
 void LevelMainCharacter::addDamageOverTime(DamageOverTimeData& data) {
 	if (m_isDead || data.damageType == DamageType::VOID) return;
-	sf::IntRect textureLocation((static_cast<int>(data.damageType) - 1) * 50, 0, 50, 50);
+	sf::IntRect textureLocation({(static_cast<int>(data.damageType) - 1) * 50, 0}, {50, 50});
 	dynamic_cast<LevelScreen*>(m_screen)->addDotBuffToInterface(textureLocation, data.duration, data);
 	LevelMovableGameObject::addDamageOverTime(data);
 }
@@ -444,7 +444,7 @@ void LevelMainCharacter::setFeared(const sf::Time& fearedTime) {
 	LevelMovableGameObject::setFeared(fearedTime);
 	DamageOverTimeData data;
 	data.isFeared = true;
-	sf::IntRect textureLocation(250, 0, 50, 50);
+	sf::IntRect textureLocation({250, 0}, {50, 50});
 	dynamic_cast<LevelScreen*>(m_screen)->addDebuffBuffToInterface(textureLocation, fearedTime, data);
 }
 
@@ -453,7 +453,7 @@ void LevelMainCharacter::setStunned(const sf::Time& stunnedTime) {
 	LevelMovableGameObject::setStunned(stunnedTime);
 	DamageOverTimeData data;
 	data.isStunned = true;
-	sf::IntRect textureLocation(300, 0, 50, 50);
+	sf::IntRect textureLocation({300, 0}, {50, 50});
 	dynamic_cast<LevelScreen*>(m_screen)->addDebuffBuffToInterface(textureLocation, stunnedTime, data);
 }
 
@@ -466,40 +466,40 @@ void LevelMainCharacter::addDamage(int damage, DamageType damageType, bool overT
 void LevelMainCharacter::loadAnimation() {
 	int width = 80;
 	int height = 120;
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-25.f, -30.f));
 	sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* climbing1Animation = new Animation();
 	climbing1Animation->setSpriteSheet(tex);
-	climbing1Animation->addFrame(sf::IntRect(14 * width, 0, width, height));
+	climbing1Animation->addFrame(sf::IntRect({14 * width, 0}, {width, height}));
 	climbing1Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_1, climbing1Animation);
 
 	Animation* climbing2Animation = new Animation();
 	climbing2Animation->setSpriteSheet(tex);
-	climbing2Animation->addFrame(sf::IntRect(15 * width, 0, width, height));
+	climbing2Animation->addFrame(sf::IntRect({15 * width, 0}, {width, height}));
 	climbing2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Climbing_2, climbing2Animation);
@@ -507,10 +507,10 @@ void LevelMainCharacter::loadAnimation() {
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 14; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		fightingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 	// duplicate last frame because of level equipment
-	fightingAnimation->addFrame(sf::IntRect(13 * width, 0, width, height));
+	fightingAnimation->addFrame(sf::IntRect({13 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -644,7 +644,7 @@ void LevelMainCharacter::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_deathPc = new ParticleComponent(data, this);
-	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.8f));
+	m_deathPc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.8f));
 	m_deathPc->setVisible(false);
 	addComponent(m_deathPc);
 }

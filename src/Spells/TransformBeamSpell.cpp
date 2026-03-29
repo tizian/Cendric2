@@ -49,7 +49,7 @@ bool TransformBeamSpell::getConfiguredRotateSprite() const {
 
 void TransformBeamSpell::loadComponents() {
 	// light
-	LightData lightData(sf::Vector2f(m_boundingBox.width / 2.f, m_boundingBox.height / 2.f), 200.f, 0.8f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.x / 2.f, m_boundingBox.size.y / 2.f), 200.f, 0.8f);
 	addComponent(new LightComponent(lightData, this));
 
 	// particles
@@ -93,7 +93,7 @@ void TransformBeamSpell::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new  ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, getBoundingBox()->height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, getBoundingBox()->size.y * 0.5f));
 	m_pc->getParticleSystem()->addGenerator<particles::DirectionDefinedRotationGenerator>();
 	addComponent(m_pc);
 }

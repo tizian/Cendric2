@@ -9,7 +9,7 @@ void ShadowTrapSpell::load(const SpellData& bean, LevelMovableGameObject* mob, c
 
 	Animation* spellAnimation = new Animation(sf::seconds(10.f));
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(bean.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, 0, 45, 30));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {45, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -56,7 +56,7 @@ void ShadowTrapSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	// a shadow trap is influenced by gravity and only falls in y direction,
 	// which simplificates the collisions.
 	WorldCollisionQueryRecord rec;
-	rec.boundingBox = sf::FloatRect(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	rec.boundingBox = sf::FloatRect({getBoundingBox()->position.x, nextPosition.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
 
 	// check for collision on y axis down
 	rec.collisionDirection = CollisionDirection::Down;

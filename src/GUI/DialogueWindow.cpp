@@ -27,15 +27,14 @@ const float DialogueWindow::SCROLL_WINDOW_LEFT = LEFT_OFFSET;
 const float DialogueWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float DialogueWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
-DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
-	m_speakerSprite.setTextureRect(sf::IntRect(0, 0, 250, 250));
+DialogueWindow::DialogueWindow() : Window(sf::FloatRect({LEFT, TOP}, {WIDTH, HEIGHT}), GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
+	m_speakerSprite->setTextureRect(sf::IntRect({0, 0}, {250, 250}));
 
 	m_speakerText = new BitmapText("");
 	m_speakerText->setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_speakerText->setColor(COLOR_LIGHT_PURPLE);
 
-	m_dialogueText = new sf::Text();
-	m_dialogueText->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_dialogueText.emplace(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_dialogueText->setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
 	m_dialogueText->setFillColor(COLOR_WHITE);
 
@@ -47,20 +46,19 @@ DialogueWindow::DialogueWindow() : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::FloatRect scrollBox({LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 }
 
 void DialogueWindow::setPosition(const sf::Vector2f& pos) {
 	Window::setPosition(pos);
-	m_speakerSprite.setPosition(sf::Vector2f(pos.x, pos.y - 250.f + HEIGHT));
+	m_speakerSprite->setPosition({pos.x, pos.y - 250.f + HEIGHT});
 	m_speakerText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + 3 * WINDOW_MARGIN));
-	m_dialogueText->setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + SCROLL_WINDOW_TOP));
+	m_dialogueText->setPosition({pos.x + LEFT_OFFSET, pos.y + SCROLL_WINDOW_TOP});
 }
 
 DialogueWindow::~DialogueWindow() {
 	delete m_merchantInterface;
-	delete m_dialogueText;
 	delete m_speakerText;
 	delete m_scrollBar;
 	delete m_scrollHelper;
@@ -97,24 +95,24 @@ void DialogueWindow::setNPC(NPC* npc) {
 
 void DialogueWindow::setNPCTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
+	m_speakerSprite->setTexture(*g_resourceManager->getTexture(m_npc->getNPCData().dialoguetexture));
 	m_speakerText->setString(m_npcName);
 
 	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
-	std::basic_string<sf::Uint32> utf32line;
+	std::basic_string<std::uint32_t> utf32line;
 	sf::Utf8::toUtf32(line.begin(), line.end(), std::back_inserter(utf32line));
-	m_dialogueText->setString(utf32line);
+	m_dialogueText->setString(sf::String::fromUtf32(utf32line.begin(), utf32line.end()));
 }
 
 void DialogueWindow::setCendricTalking(const std::string& text) {
 	m_options.clear();
-	m_speakerSprite.setTexture(*getCendricTexture());
+	m_speakerSprite->setTexture(*getCendricTexture());
 	m_speakerText->setString(CENDRIC_NAME);
 
 	std::string line = g_textProvider->getCroppedText(text, m_dialogueTextID, GUIConstants::CHARACTER_SIZE_M, static_cast<int>(TEXT_WIDTH), true);
-	std::basic_string<sf::Uint32> utf32line;
+	std::basic_string<std::uint32_t> utf32line;
 	sf::Utf8::toUtf32(line.begin(), line.end(), std::back_inserter(utf32line));
-	m_dialogueText->setString(utf32line);
+	m_dialogueText->setString(sf::String::fromUtf32(utf32line.begin(), utf32line.end()));
 }
 
 void DialogueWindow::setNPCTrading(const std::string& text) {
@@ -131,7 +129,7 @@ void DialogueWindow::setDialogueChoice(const std::vector<std::pair<ChoiceTransla
 	m_scrollBar->setScrollPosition(0.f);
 	m_options.clear();
 	m_dialogueText->setString("");
-	m_speakerSprite.setTexture(*getCendricTexture());
+	m_speakerSprite->setTexture(*getCendricTexture());
 	m_speakerText->setString(CENDRIC_NAME);
 
 	for (size_t i = 0; i < choices.size(); ++i) {
@@ -270,7 +268,7 @@ void DialogueWindow::calculateEntryPositions() {
 	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset - 0.5f * GUIConstants::CHARACTER_SIZE_M;
 
 	for (auto& it : m_options) {
-		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
+		it.setBoundingBox(sf::FloatRect({xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M}, {SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M}));
 		it.setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}
@@ -363,7 +361,7 @@ void DialogueWindow::render(sf::RenderTarget& renderTarget) {
 		m_merchantInterface->renderAfterForeground(renderTarget);
 	}
 
-	renderTarget.draw(m_speakerSprite);
+	renderTarget.draw(*m_speakerSprite);
 }
 
 
@@ -419,27 +417,27 @@ DialogueOption::DialogueOption(const ChoiceTranslation& trans, const std::string
 		break;
 	}
 
-	std::basic_string<sf::Uint32> utf32line;
+	std::basic_string<std::uint32_t> utf32line;
 	sf::Utf8::toUtf32(textString.begin(), textString.end(), std::back_inserter(utf32line));
 
-	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
-	m_text.setString(utf32line);
-	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
+	m_text.emplace(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_text->setString(sf::String::fromUtf32(utf32line.begin(), utf32line.end()));
+	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {m_text->getLocalBounds().size.x, 20.f}));
 	setInputInDefaultView(true);
 }
 
 void DialogueOption::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_text.setPosition(pos);
+	m_text->setPosition(pos);
 }
 
 void DialogueOption::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_text);
+	renderTarget.draw(*m_text);
 }
 
 void DialogueOption::setColor(const sf::Color& color) {
-	m_text.setFillColor(color);
+	m_text->setFillColor(color);
 }
 
 bool DialogueOption::executeCrafting() {
@@ -466,7 +464,7 @@ bool DialogueOption::isClicked() {
 }
 
 void DialogueOption::select() {
-	m_text.setFillColor(m_isSelectable ? COLOR_WHITE : COLOR_ELEMENTAL);
+	m_text->setFillColor(m_isSelectable ? COLOR_WHITE : COLOR_ELEMENTAL);
 	m_isSelected = true;
 }
 
@@ -475,7 +473,7 @@ GameObjectType DialogueOption::getConfiguredType() const {
 }
 
 void DialogueOption::deselect() {
-	m_text.setFillColor(m_isSelectable ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
+	m_text->setFillColor(m_isSelectable ? COLOR_GREY : COLOR_ELEMENTAL_INACTIVE);
 	m_isSelected = false;
 }
 

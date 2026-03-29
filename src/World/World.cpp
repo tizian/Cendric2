@@ -58,27 +58,27 @@ bool World::collidesWithCollidableLayer(const sf::Vector2f& pos) const {
 
 bool World::collides(WorldCollisionQueryRecord& rec) const {
 	rec.collides = false;
-	rec.safeLeft = rec.collisionDirection == CollisionDirection::Left ? 0.f : m_worldData->mapRect.width;
-	rec.safeTop = rec.collisionDirection == CollisionDirection::Up ? 0.f : m_worldData->mapRect.height;
+	rec.safeLeft = rec.collisionDirection == CollisionDirection::Left ? 0.f : m_worldData->mapRect.size.x;
+	rec.safeTop = rec.collisionDirection == CollisionDirection::Up ? 0.f : m_worldData->mapRect.size.y;
 	rec.movingParent = nullptr;
 	const sf::FloatRect& bb = rec.boundingBox;
 	// check for collision with map rect (x axis. y axis is not checked in levels, only in maps)
-	if (bb.left < m_worldData->mapRect.left || bb.left + bb.width > m_worldData->mapRect.left + m_worldData->mapRect.width) {
+	if (bb.position.x < m_worldData->mapRect.position.x || bb.position.x + bb.size.x > m_worldData->mapRect.position.x + m_worldData->mapRect.size.x) {
 		if (rec.collisionDirection == CollisionDirection::Right) {
-			rec.safeLeft = std::min(rec.safeLeft, m_worldData->mapRect.left + m_worldData->mapRect.width - bb.width);
+			rec.safeLeft = std::min(rec.safeLeft, m_worldData->mapRect.position.x + m_worldData->mapRect.size.x - bb.size.x);
 		}
 		if (rec.collisionDirection == CollisionDirection::Left) {
-			rec.safeLeft = std::max(rec.safeLeft, m_worldData->mapRect.left);
+			rec.safeLeft = std::max(rec.safeLeft, m_worldData->mapRect.position.x);
 		}
 		rec.collides = true;
 	}
 
 	// normalize bounding box values so they match our collision grid. Wondering about the next two lines? Me too. We just don't want to floor values that are exactly on the boundaries. But only those that are down and right.
-	int bottomY = static_cast<int>(floor((bb.top + bb.height) / TILE_SIZE_F) == (bb.top + bb.height) / TILE_SIZE_F ? (bb.top + bb.height) / TILE_SIZE_F - 1 : floor((bb.top + bb.height) / TILE_SIZE_F));
-	int rightX = static_cast<int>(floor((bb.left + bb.width) / TILE_SIZE_F) == (bb.left + bb.width) / TILE_SIZE_F ? (bb.left + bb.width) / TILE_SIZE_F - 1 : floor((bb.left + bb.width) / TILE_SIZE_F));
-	sf::Vector2i topLeft(static_cast<int>(floor(bb.left / TILE_SIZE_F)), static_cast<int>(floor(bb.top / TILE_SIZE_F)));
-	sf::Vector2i topRight(rightX, static_cast<int>(floor(bb.top / TILE_SIZE_F)));
-	sf::Vector2i bottomLeft(static_cast<int>(floor(bb.left / TILE_SIZE_F)), bottomY);
+	int bottomY = static_cast<int>(floor((bb.position.y + bb.size.y) / TILE_SIZE_F) == (bb.position.y + bb.size.y) / TILE_SIZE_F ? (bb.position.y + bb.size.y) / TILE_SIZE_F - 1 : floor((bb.position.y + bb.size.y) / TILE_SIZE_F));
+	int rightX = static_cast<int>(floor((bb.position.x + bb.size.x) / TILE_SIZE_F) == (bb.position.x + bb.size.x) / TILE_SIZE_F ? (bb.position.x + bb.size.x) / TILE_SIZE_F - 1 : floor((bb.position.x + bb.size.x) / TILE_SIZE_F));
+	sf::Vector2i topLeft(static_cast<int>(floor(bb.position.x / TILE_SIZE_F)), static_cast<int>(floor(bb.position.y / TILE_SIZE_F)));
+	sf::Vector2i topRight(rightX, static_cast<int>(floor(bb.position.y / TILE_SIZE_F)));
+	sf::Vector2i bottomLeft(static_cast<int>(floor(bb.position.x / TILE_SIZE_F)), bottomY);
 	sf::Vector2i bottomRight(rightX, bottomY);
 
 	// check level grid
@@ -90,7 +90,7 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 			}
 			if (m_worldData->collidableTilePositions[y][x]) {
 				if (rec.collisionDirection == CollisionDirection::Right) {
-					rec.safeLeft = std::min(rec.safeLeft, x * TILE_SIZE_F - bb.width);
+					rec.safeLeft = std::min(rec.safeLeft, x * TILE_SIZE_F - bb.size.x);
 				}
 				if (rec.collisionDirection == CollisionDirection::Left) {
 					rec.safeLeft = std::max(rec.safeLeft, (x + 1) * TILE_SIZE_F);
@@ -99,7 +99,7 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 					rec.safeTop = std::max(rec.safeTop, (y + 1) * TILE_SIZE_F);
 				}
 				if (rec.collisionDirection == CollisionDirection::Down) {
-					rec.safeTop = std::min(rec.safeTop, y * TILE_SIZE_F - bb.height);
+					rec.safeTop = std::min(rec.safeTop, y * TILE_SIZE_F - bb.size.y);
 				}
 				rec.collides = true;
 				break; // one collision with the world rec is sufficient? No? Do we have a really fat boss here? if yes, remove the break.
@@ -112,16 +112,16 @@ bool World::collides(WorldCollisionQueryRecord& rec) const {
 
 void World::calculateCollisionLocations(WorldCollisionQueryRecord& rec, const sf::FloatRect& bb) const {
 	if (rec.collisionDirection == CollisionDirection::Right) {
-		rec.safeLeft = std::min(rec.safeLeft, bb.left - rec.boundingBox.width);
+		rec.safeLeft = std::min(rec.safeLeft, bb.position.x - rec.boundingBox.size.x);
 	}
 	if (rec.collisionDirection == CollisionDirection::Left) {
-		rec.safeLeft = std::max(rec.safeLeft, bb.left + bb.width);
+		rec.safeLeft = std::max(rec.safeLeft, bb.position.x + bb.size.x);
 	}
 	if (rec.collisionDirection == CollisionDirection::Up) {
-		rec.safeTop = std::max(rec.safeTop, bb.top + bb.height);
+		rec.safeTop = std::max(rec.safeTop, bb.position.y + bb.size.y);
 	}
 	if (rec.collisionDirection == CollisionDirection::Down) {
-		rec.safeTop = std::min(rec.safeTop, bb.top - rec.boundingBox.height);
+		rec.safeTop = std::min(rec.safeTop, bb.position.y - rec.boundingBox.size.y);
 	}
 	rec.collides = true;
 }
@@ -162,13 +162,13 @@ void World::setLightDimming(float dimming) const {
 
 bool World::lineBoxIntersection(const sf::Vector2f& p1, const sf::Vector2f& p2, const sf::FloatRect& bb, sf::Vector2f& intersection) {
 	// check the impossible things
-	if (p1.x < bb.left && p2.x < bb.left)
+	if (p1.x < bb.position.x && p2.x < bb.position.x)
 		return false;
-	if (p1.x > bb.left + bb.width && p2.x > bb.left + bb.width)
+	if (p1.x > bb.position.x + bb.size.x && p2.x > bb.position.x + bb.size.x)
 		return false;
-	if (p1.y < bb.top && p2.y < bb.top)
+	if (p1.y < bb.position.y && p2.y < bb.position.y)
 		return false;
-	if (p1.y > bb.top + bb.height && p2.y > bb.top + bb.height)
+	if (p1.y > bb.position.y + bb.size.y && p2.y > bb.position.y + bb.size.y)
 		return false;
 
 	// ray direction, no need to normalize
@@ -177,10 +177,10 @@ bool World::lineBoxIntersection(const sf::Vector2f& p1, const sf::Vector2f& p2, 
 	// check the x lines of the box
 	bool intersects;
 	if (dir.x > 0.f) {
-		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top), sf::Vector2f(bb.left, bb.top + bb.height), p1, p2, intersection);
+		intersects = lineIntersection(sf::Vector2f(bb.position.x, bb.position.y), sf::Vector2f(bb.position.x, bb.position.y + bb.size.y), p1, p2, intersection);
 	}
 	else {
-		intersects = lineIntersection(sf::Vector2f(bb.left + bb.width, bb.top), sf::Vector2f(bb.left + bb.width, bb.top + bb.height), p1, p2, intersection);
+		intersects = lineIntersection(sf::Vector2f(bb.position.x + bb.size.x, bb.position.y), sf::Vector2f(bb.position.x + bb.size.x, bb.position.y + bb.size.y), p1, p2, intersection);
 	}
 
 	if (intersects) {
@@ -189,10 +189,10 @@ bool World::lineBoxIntersection(const sf::Vector2f& p1, const sf::Vector2f& p2, 
 
 	// now y
 	if (dir.y > 0.f) {
-		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top), sf::Vector2f(bb.left + bb.width, bb.top), p1, p2, intersection);
+		intersects = lineIntersection(sf::Vector2f(bb.position.x, bb.position.y), sf::Vector2f(bb.position.x + bb.size.x, bb.position.y), p1, p2, intersection);
 	}
 	else {
-		intersects = lineIntersection(sf::Vector2f(bb.left, bb.top + bb.height), sf::Vector2f(bb.left + bb.width, bb.top + bb.height), p1, p2, intersection);
+		intersects = lineIntersection(sf::Vector2f(bb.position.x, bb.position.y + bb.size.y), sf::Vector2f(bb.position.x + bb.size.x, bb.position.y + bb.size.y), p1, p2, intersection);
 	}
 	return intersects;
 }

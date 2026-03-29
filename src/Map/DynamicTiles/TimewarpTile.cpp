@@ -18,9 +18,9 @@ TimewarpTile::TimewarpTile(MapScreen* mapScreen) : MapDynamicTile(mapScreen) {
 }
 
 bool TimewarpTile::init(const MapTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f,
-		TILE_SIZE_F,
-		TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f},
+		{TILE_SIZE_F,
+		TILE_SIZE_F}));
 	
 	return true;
 }
@@ -30,7 +30,7 @@ void TimewarpTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -42,7 +42,7 @@ void TimewarpTile::loadAnimation(int skinNr) {
 void TimewarpTile::onInteract() {
 	float width = 450;
 	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 	m_yesOrNoForm->setMessage("TimeWarpText");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&TimewarpTile::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&TimewarpTile::activateTimewarp, this));

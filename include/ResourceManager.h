@@ -11,12 +11,12 @@
 
 #include "GUI/BitmapFont.h"
 
+#include <optional>
+
 class Item;
 
 struct BackgroundMusic final {
 	BackgroundMusic() {
-		currentMusic = new sf::Music();
-		previousMusic = new sf::Music();
 		fadingTime = sf::Time::Zero;
 		isFading = false;
 	}
@@ -107,8 +107,8 @@ private:
 	std::map<std::string, sf::Font*> m_fonts;
 	std::map<std::string, Item*> m_items;
 
-	// a pool with sound buffers
-	std::vector<sf::Sound> m_soundPool;
+	// a pool with sounds
+	std::vector<std::optional<sf::Sound>> m_soundPool;
 	std::set<std::string> m_frameSounds;
 	size_t m_nextSoundIndex;
 	bool m_isSoundLocked = false;

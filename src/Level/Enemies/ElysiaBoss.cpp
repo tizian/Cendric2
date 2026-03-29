@@ -70,7 +70,7 @@ void ElysiaBoss::loadSpells() {
 	chopSpell.damage = 80;
 	chopSpell.activeDuration = sf::seconds(1.5f);
 	chopSpell.cooldown = sf::seconds(4.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 80, 50);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {80, 50});
 	chopSpell.spellOffset = sf::Vector2f(-40.f, 0.f);
 	chopSpell.fightingTime = sf::seconds(0);
 
@@ -97,7 +97,7 @@ void ElysiaBoss::handleAttackInput() {
 }
 
 void ElysiaBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 80.f, 50.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {80.f, 50.f}));
 	setSpriteOffset(sf::Vector2f(-50.f, -50.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	int width = 180;
@@ -106,7 +106,7 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		flyingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -114,21 +114,21 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(0, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({0, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	// nose dive
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(6 * width, 0, width, height));
+	fightingAnimation->addFrame(sf::IntRect({6 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -136,7 +136,7 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	Animation* casting3Animation = new Animation();
 	casting3Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		casting3Animation->addFrame(sf::IntRect(i * width, height, width, height));
+		casting3Animation->addFrame(sf::IntRect({i * width, height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting3, casting3Animation);
@@ -145,10 +145,10 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	Animation* castingAnimation = new Animation();
 	castingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, 2 * height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, 2 * height}, {width, height}));
 	}
 	for (int i = 0; i < 6; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * width, 3 * height, width, height));
+		castingAnimation->addFrame(sf::IntRect({i * width, 3 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
@@ -157,7 +157,7 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 	Animation* casting2Animation = new Animation();
 	casting2Animation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * width, 4 * height, width, height));
+		casting2Animation->addFrame(sf::IntRect({i * width, 4 * height}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -168,7 +168,7 @@ void ElysiaBoss::loadAnimation(int skinNr) {
 
 	loadDeathParticles();
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 150.f, 0.5f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 150.f, 0.5f);
 	addComponent(new LightComponent(data, this));
 }
 

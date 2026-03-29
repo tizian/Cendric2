@@ -52,7 +52,7 @@ void GamepadKeyBindingsScreen::execUpdate(const sf::Time& frameTime) {
 			}
 			m_scrollBar->scroll(-1);
 		}
-		else if (pos.y + keyButton->getBoundingBox()->height > TOP + HEIGHT) {
+		else if (pos.y + keyButton->getBoundingBox()->size.y > TOP + HEIGHT) {
 			if (!keyButton->isSelected()) {
 				continue;
 			}
@@ -104,10 +104,10 @@ void GamepadKeyBindingsScreen::calculateEntryPositions() {
 	for (auto& it : m_keyButtons) {
 		BitmapText* keyText = m_keyTexts[it.first];
 		const sf::FloatRect& bbox = keyText->getBounds();
-		keyText->setPosition(sf::Vector2f(center - 4.f * WINDOW_MARGIN - bbox.width, yOffset + 10.f));
+		keyText->setPosition({center - 4.f * WINDOW_MARGIN - bbox.size.x, yOffset + 10.f});
 
 		Button* keyButton = m_keyButtons[it.first].first;
-		keyButton->setPosition(sf::Vector2f(center + 2.f * WINDOW_MARGIN, yOffset));
+		keyButton->setPosition({center + 2.f * WINDOW_MARGIN, yOffset});
 
 		yOffset += delta;
 	}
@@ -116,7 +116,7 @@ void GamepadKeyBindingsScreen::calculateEntryPositions() {
 	if (pos.y < TOP) {
 		m_keyButtonGroup->setNextButtonSelectedY(true);
 	}
-	else if (pos.y + m_keyButtonGroup->getSelectedButton()->getBoundingBox()->height > TOP + HEIGHT) {
+	else if (pos.y + m_keyButtonGroup->getSelectedButton()->getBoundingBox()->size.y > TOP + HEIGHT) {
 		m_keyButtonGroup->setNextButtonSelectedY(false);
 	}
 }
@@ -143,7 +143,7 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Gamepad"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
+	m_title->setPosition({(WINDOW_WIDTH - m_title->getLocalBounds().size.x) / 2.f, 25.f});
 
 	m_selectedKeys = g_resourceManager->getConfiguration().gamepadKeyMap;
 
@@ -155,7 +155,7 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 		keyText->setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 		m_keyTexts[it.first] = keyText;
 
-		Button* keyButton = new Button(sf::FloatRect(0.f, 0.f, 150.f, 30.f));
+		Button* keyButton = new Button(sf::FloatRect({0.f, 0.f}, {150.f, 30.f}));
 		keyButton->setTextRaw(EnumNames::getGamepadInputName(it.second), 12);
 
 		m_keyButtonGroup->addButton(keyButton);
@@ -165,12 +165,12 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	reload();
 
 	m_scrollWindow = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, WIDTH, HEIGHT);
-	m_scrollWindow.setPosition(sf::Vector2f(LEFT, TOP));
+	m_scrollWindow.setPosition({LEFT, TOP});
 
 	m_scrollBar = new ScrollBar(HEIGHT);
-	m_scrollBar->setPosition(sf::Vector2f(LEFT + WIDTH - ScrollBar::WIDTH, TOP));
+	m_scrollBar->setPosition({LEFT + WIDTH - ScrollBar::WIDTH, TOP});
 
-	sf::FloatRect scrollBox(LEFT, TOP, WIDTH, HEIGHT);
+	sf::FloatRect scrollBox({LEFT, TOP}, {WIDTH, HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	const float buttonWidth = 240.f;
@@ -181,25 +181,25 @@ void GamepadKeyBindingsScreen::execOnEnter() {
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
 
 	// back
-	auto button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	auto button = new Button(sf::FloatRect({marginX, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onBack, this));
 	button->setGamepadKey(Key::Escape);
 	addObject(button);
 	// reset
-	button = new Button(sf::FloatRect(marginX + buttonWidth + buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({marginX + buttonWidth + buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Reset");
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onReset, this));
 	button->setGamepadKey(Key::PreviousSpell);
 	addObject(button);
 	// default values
-	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Default");
 	button->setGamepadKey(Key::NextSpell);
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onUseDefault, this));
 	addObject(button);
 	// apply
-	button = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
 	button->setGamepadKey(Key::Attack);
 	button->setOnClick(std::bind(&GamepadKeyBindingsScreen::onApply, this));

@@ -15,8 +15,8 @@ TooltipWindow::TooltipWindow() : Window(
 void TooltipWindow::setText(const std::string& text) {
 	std::string cropped = g_textProvider->getCroppedString(text, GUIConstants::CHARACTER_SIZE_S, m_maxWidth);
 	m_text.setString(cropped);
-	setHeight(m_text.getLocalBounds().height + 2 * m_textOffset.y);
-	setWidth(m_text.getLocalBounds().width + 2 * m_textOffset.x);
+	setHeight(m_text.getLocalBounds().size.y + 2 * m_textOffset.y);
+	setWidth(m_text.getLocalBounds().size.x + 2 * m_textOffset.x);
 }
 
 void TooltipWindow::setPosition(const sf::Vector2f& position) {
@@ -31,8 +31,8 @@ void TooltipWindow::render(sf::RenderTarget& renderTarget) {
 
 void TooltipWindow::setTextOffset(const sf::Vector2f& offset) {
 	m_textOffset = offset;
-	setHeight(m_text.getLocalBounds().height + 2 * m_textOffset.y);
-	setWidth(m_text.getLocalBounds().width + 2 * m_textOffset.x);
+	setHeight(m_text.getLocalBounds().size.y + 2 * m_textOffset.y);
+	setWidth(m_text.getLocalBounds().size.x + 2 * m_textOffset.x);
 }
 
 void TooltipWindow::setTextAlignment(TextAlignment alignment) {

@@ -29,7 +29,7 @@ const struct NPCData DEFAULT_NPC =
 	-1,
 	"",
 	sf::Vector2f(0.f, 0.f),
-	sf::FloatRect(0.f, 0.f, 50.f, 50.f),
+	sf::FloatRect({0.f, 0.f}, {50.f, 50.f}),
 	"",
 	"",
 	LightData(),

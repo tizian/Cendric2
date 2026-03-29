@@ -36,7 +36,7 @@ void SignMapTile::update(const sf::Time& frameTime) {
 }
 
 bool SignMapTile::init(const MapTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, 20.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, 20.f}));
 	setPositionOffset(sf::Vector2f(0.f, 15.f));
 	setSpriteOffset(sf::Vector2f(0.f, -15.f));
 
@@ -67,7 +67,7 @@ void SignMapTile::loadAnimation(int skinNr) {
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 

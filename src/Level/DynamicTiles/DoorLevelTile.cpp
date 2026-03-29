@@ -35,7 +35,7 @@ bool DoorLevelTile::init(const LevelTileProperties& properties) {
 	if (!m_isLeverDependent && m_strength == 0 && !m_keyItemID.empty()) return false;
 
 	setSpriteOffset(sf::Vector2f(0.f, 0.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F * m_tileWidth, 3 * TILE_SIZE_F}));
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText("Door"), this, m_mainChar);
 	m_interactComponent->setInteractRange(getOpenRange());
@@ -53,13 +53,13 @@ void DoorLevelTile::loadAnimation(int skinNr) {
 
 	Animation* closedAnimation = new Animation();
 	closedAnimation->setSpriteSheet(tex);
-	closedAnimation->addFrame(sf::IntRect(0, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_tileWidth, 3 * TILE_SIZE));
+	closedAnimation->addFrame(sf::IntRect({0, skinNr * 3 * TILE_SIZE}, {TILE_SIZE * m_tileWidth, 3 * TILE_SIZE}));
 
 	addAnimation(GameObjectState::Closed, closedAnimation);
 
 	Animation* openAnimation = new Animation();
 	openAnimation->setSpriteSheet(tex);
-	openAnimation->addFrame(sf::IntRect(TILE_SIZE * m_tileWidth, skinNr * 3 * TILE_SIZE, TILE_SIZE * m_tileWidth, 3 * TILE_SIZE));
+	openAnimation->addFrame(sf::IntRect({TILE_SIZE * m_tileWidth, skinNr * 3 * TILE_SIZE}, {TILE_SIZE * m_tileWidth, 3 * TILE_SIZE}));
 
 	addAnimation(GameObjectState::Open, openAnimation);
 

@@ -21,9 +21,9 @@ ElysiaBossMovingBehavior::ElysiaBossMovingBehavior(ElysiaBoss* enemy) :
 	float noseTargetHeight = 700.f;
 	float thunderTop = 300.f;
 	float thunderBottom = 1050.f;
-	float levelWidth = m_enemy->getLevel()->getWorldRect().width;
-	float bbWidth = enemy->getBoundingBox()->width;
-	float bbHeight = enemy->getBoundingBox()->height;
+	float levelWidth = m_enemy->getLevel()->getWorldRect().size.x;
+	float bbWidth = enemy->getBoundingBox()->size.x;
+	float bbHeight = enemy->getBoundingBox()->size.y;
 	m_noseTargetLeft = sf::Vector2f(200.f, noseTargetHeight);
 	m_noseTargetRight = sf::Vector2f(levelWidth - 100.f - bbWidth, noseTargetHeight);
 	m_thunderTop = sf::Vector2f((levelWidth + TILE_SIZE_F) * 0.5f, thunderTop);
@@ -281,7 +281,7 @@ void ElysiaBossMovingBehavior::initTiles() {
 	m_cloudTiles.push_back(std::make_pair(nullptr, sf::Vector2f(posX + diffX, posY)));
 
 	// init damaging tile positions
-	int number = static_cast<int>(m_enemy->getLevel()->getWorldRect().width / TILE_SIZE_F * 0.5f);
+	int number = static_cast<int>(m_enemy->getLevel()->getWorldRect().size.x / TILE_SIZE_F * 0.5f);
 	posX = 0.f;
 	for (int i = 0; i < number; ++i) {
 		m_damagingTiles.push_back(std::make_pair(nullptr, posX));
@@ -289,6 +289,6 @@ void ElysiaBossMovingBehavior::initTiles() {
 	}
 
 	m_thunderStartY = posY + 3 * TILE_SIZE_F;
-	m_nextThunderTime = THUNDER_TIME / ((m_enemy->getLevel()->getWorldRect().height - m_thunderStartY - 200.f) / TILE_SIZE_F);
+	m_nextThunderTime = THUNDER_TIME / ((m_enemy->getLevel()->getWorldRect().size.y - m_thunderStartY - 200.f) / TILE_SIZE_F);
 }
 

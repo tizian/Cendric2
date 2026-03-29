@@ -64,7 +64,7 @@ void Slider::setSliderPosition(int pos) {
 	// update knob
 	int length = m_maxPosition - m_minPosition;
 	float xPos = (float)(m_sliderPosition - m_minPosition) / (float)length * WIDTH;
-	m_knob.setPosition(sf::Vector2f(getBoundingBox()->left + xPos, getBoundingBox()->top + HEIGHT / 2.f));
+	m_knob.setPosition({getBoundingBox()->position.x + xPos, getBoundingBox()->position.y + HEIGHT / 2.f});
 
 	// update filler
 	m_filler.setSize(sf::Vector2f(xPos, HEIGHT));
@@ -102,7 +102,7 @@ void Slider::updateColor() {
 }
 
 int Slider::calculateSliderPosition(float mousePosX) const {
-	float xOffset = mousePosX - getBoundingBox()->left;
+	float xOffset = mousePosX - getBoundingBox()->position.x;
 	// map the offset onto the values
 	int length = m_maxPosition - m_minPosition;
 	return static_cast<int>(length * xOffset / WIDTH) + m_minPosition;
@@ -112,13 +112,9 @@ void Slider::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
 	m_background.setPosition(pos);
 	m_filler.setPosition(pos);
-	m_border.setPosition(sf::Vector2f(pos.x - BORDER_OFFSET, pos.y - BORDER_OFFSET));
-	m_minText.setPosition(sf::Vector2f(
-		pos.x,
-		pos.y + HEIGHT + 10.f));
-	m_maxText.setPosition(sf::Vector2f(
-		pos.x + WIDTH - m_maxText.getLocalBounds().width,
-		pos.y + HEIGHT + 10.f));
+	m_border.setPosition({pos.x - BORDER_OFFSET, pos.y - BORDER_OFFSET});
+	m_minText.setPosition({pos.x, pos.y + HEIGHT + 10.f});
+	m_maxText.setPosition({pos.x + WIDTH - m_maxText.getLocalBounds().size.x, pos.y + HEIGHT + 10.f});
 	setSliderPosition(m_sliderPosition);
 }
 
@@ -173,8 +169,8 @@ void Slider::setUnit(const std::string& unit) {
 
 void Slider::setCharacterSize(int size) {
 	m_titleText.setCharacterSize(size);
-	float xOffset = WIDTH / 2.f - m_titleText.getLocalBounds().width / 2.f;
-	float yOffset = -(10.f + m_titleText.getLocalBounds().height);
+	float xOffset = WIDTH / 2.f - m_titleText.getLocalBounds().size.x / 2.f;
+	float yOffset = -(10.f + m_titleText.getLocalBounds().size.y);
 	m_textOffset = sf::Vector2f(xOffset, yOffset);
 	m_titleText.setPosition(getPosition() + m_textOffset);
 }

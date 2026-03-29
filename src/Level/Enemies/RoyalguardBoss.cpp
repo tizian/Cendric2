@@ -9,7 +9,8 @@ const sf::Time RoyalguardBoss::HEALING_TIME = sf::seconds(6.f);
 
 RoyalguardBoss::RoyalguardBoss(const Level* level, Screen* screen) :
 	LevelMovableGameObject(level),
-	Enemy(level, screen) {
+	Enemy(level, screen),
+	m_weapon(nullptr) {
 
 	m_isAlwaysUpdate = true;
 	m_isBoss = true;
@@ -41,7 +42,7 @@ void RoyalguardBoss::notifyOtherDeath(const sf::Vector2f& newPos, RoyalguardBoss
 	m_weaponRotateType = WeaponRotateType::Fixed;
 	getMovingBehavior()->setMaxVelocityX(200.f);
 	m_healingPc->setVisible(true);
-	m_weapon.setRotation(270.f); // up
+	m_weapon->setRotation(sf::degrees(270.f)); // up
 }
 
 void RoyalguardBoss::revive() {
@@ -67,9 +68,9 @@ void RoyalguardBoss::setDead() {
 	for (auto go : *m_screen->getObjects(_Enemy)) {
 		if (auto other = dynamic_cast<RoyalguardBoss*>(go)) {
 			if (other == this) continue;
-			rec.boundingBox.left += 20.f;
+			rec.boundingBox.position.x += 20.f;
 			other->notifyOtherDeath(getPosition() + (m_level->collides(rec) ? sf::Vector2f() : sf::Vector2f(20.f, 0.f)), this);
-			rec.boundingBox.left -= 20.f;
+			rec.boundingBox.position.x -= 20.f;
 			break;
 		}
 	}
@@ -89,7 +90,7 @@ void RoyalguardBoss::update(const sf::Time& frameTime) {
 void RoyalguardBoss::render(sf::RenderTarget& target) {
 	Enemy::render(target);
 	if (m_isWeaponVisible) {
-		target.draw(m_weapon);
+		target.draw(*m_weapon);
 	}
 }
 
@@ -98,8 +99,8 @@ void RoyalguardBoss::loadWeapon() {
 	auto tex = g_resourceManager->getTexture(getWeaponTexturePath());
 	if (!tex) return;
 	
-	m_weapon.setTexture(*tex);
-	m_weapon.setOrigin(WEAPON_ORIGIN);
+	m_weapon = new sf::Sprite(*tex);
+	m_weapon->setOrigin(WEAPON_ORIGIN);
 }
 
 void RoyalguardBoss::loadHealingParticles() {
@@ -112,7 +113,7 @@ void RoyalguardBoss::loadHealingParticles() {
 	data.isAdditiveBlendMode = true;
 
 	auto spawner = new particles::BoxSpawner();
-	spawner->size = sf::Vector2f(getBoundingBox()->width * 0.2f, 0.f);
+	spawner->size = sf::Vector2f(getBoundingBox()->size.x * 0.2f, 0.f);
 	data.spawner = spawner;
 
 	auto sizeGen = new particles::SizeGenerator();
@@ -142,27 +143,27 @@ void RoyalguardBoss::loadHealingParticles() {
 	data.velGen = velgen;
 
 	m_healingPc = new ParticleComponent(data, this);
-	m_healingPc->setOffset(sf::Vector2f(getBoundingBox()->width * 0.5f, -40.f));
+	m_healingPc->setOffset(sf::Vector2f(getBoundingBox()->size.x * 0.5f, -40.f));
 	m_healingPc->setVisible(false);
 	addComponent(m_healingPc);
 	m_pcs.push_back(m_healingPc);
 }
 
 void RoyalguardBoss::updateWeapon(const sf::Time& frameTime) {
-	sf::Vector2f offset = isFacingRight() ? m_weaponOffset : sf::Vector2f(m_boundingBox.width - m_weaponOffset.x, m_weaponOffset.y);
-	m_weapon.setPosition(getPosition() + offset);
+	sf::Vector2f offset = isFacingRight() ? m_weaponOffset : sf::Vector2f(m_boundingBox.size.x - m_weaponOffset.x, m_weaponOffset.y);
+	m_weapon->setPosition(getPosition() + offset);
 	switch (m_weaponRotateType)
 	{
 	case WeaponRotateType::ToMainChar: 
 	{
-		sf::Vector2f toMainChar = m_mainChar->getCenter() - m_weapon.getPosition();
-		m_weapon.setRotation(radToDeg(std::atan2(toMainChar.y, toMainChar.x)));
+		sf::Vector2f toMainChar = m_mainChar->getCenter() - m_weapon->getPosition();
+		m_weapon->setRotation(sf::radians(std::atan2(toMainChar.y, toMainChar.x)));
 		break;
 	}
 	case WeaponRotateType::Turn:
 	{
 		float rot = isFacingRight() ? 1000.f : -1000.f;
-		m_weapon.setRotation(m_weapon.getRotation() + frameTime.asSeconds() * rot);
+		m_weapon->setRotation(m_weapon->getRotation() + sf::degrees(frameTime.asSeconds() * rot));
 		break;
 	}
 		

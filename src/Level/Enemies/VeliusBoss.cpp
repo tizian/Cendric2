@@ -540,7 +540,7 @@ void VeliusBoss::loadSpells() {
 	shackle.fightAnimation = GameObjectState::Casting2;
 	shackle.cooldown = sf::seconds(0.f);
 	shackle.spritesheetPath = "res/texture/spells/spritesheet_spell_shackle.png";
-	shackle.boundingBox = sf::FloatRect(0, 0, 10, 10);
+	shackle.boundingBox = sf::FloatRect({0, 0}, {10, 10});
 	shackle.spellOffset = sf::Vector2f(0.f, -40.f);
 	m_spellManager->addSpell(shackle);
 
@@ -631,7 +631,7 @@ void VeliusBoss::loadSpells() {
 	explosionSpell.activeDuration = sf::seconds(3.f);
 	explosionSpell.duration = sf::seconds(999.f);
 	explosionSpell.cooldown = sf::seconds(0.f);
-	explosionSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	explosionSpell.boundingBox = sf::FloatRect({0, 0}, {50, 50});
 	explosionSpell.fightingTime = sf::seconds(0.f);
 	explosionSpell.castingTime = sf::seconds(0.f);
 	explosionSpell.spellSoundPaths.clear();
@@ -763,33 +763,33 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	int width = 120;
 	int height = 150;
 
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 25.f, 115.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {25.f, 115.f}));
 	setSpriteOffset(sf::Vector2f(-50.f, -35.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		walkingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * width, 0, width, height));
+	idleAnimation->addFrame(sf::IntRect({8 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * width, 0, width, height));
+	jumpingAnimation->addFrame(sf::IntRect({9 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(12 * width, 0, width, height));
+	deadAnimation->addFrame(sf::IntRect({12 * width, 0}, {width, height}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
@@ -797,9 +797,9 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	// the "throwning" spell
 	Animation* castingAnimation = new Animation(sf::seconds(0.15f));
 	castingAnimation->setSpriteSheet(tex);
-	castingAnimation->addFrame(sf::IntRect(14 * width, 0, width, height));
-	castingAnimation->addFrame(sf::IntRect(15 * width, 0, width, height));
-	castingAnimation->addFrame(sf::IntRect(16 * width, 0, width, height));
+	castingAnimation->addFrame(sf::IntRect({14 * width, 0}, {width, height}));
+	castingAnimation->addFrame(sf::IntRect({15 * width, 0}, {width, height}));
+	castingAnimation->addFrame(sf::IntRect({16 * width, 0}, {width, height}));
 	castingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
@@ -807,7 +807,7 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	// the shackle
 	Animation* casting2Animation = new Animation(sf::seconds(0.1f));
 	casting2Animation->setSpriteSheet(tex);
-	casting2Animation->addFrame(sf::IntRect(13 * width, 0, width, height));
+	casting2Animation->addFrame(sf::IntRect({13 * width, 0}, {width, height}));
 	casting2Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);
@@ -815,7 +815,7 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	// the crystal
 	Animation* casting3Animation = new Animation(sf::seconds(0.1f));
 	casting3Animation->setSpriteSheet(tex);
-	casting3Animation->addFrame(sf::IntRect(10 * width, 0, width, height));
+	casting3Animation->addFrame(sf::IntRect({10 * width, 0}, {width, height}));
 	casting3Animation->setLooped(false);
 
 	addAnimation(GameObjectState::Casting3, casting3Animation);
@@ -823,7 +823,7 @@ void VeliusBoss::loadAnimation(int skinNr) {
 	// the come at me, brah
 	Animation* comeAnimation = new Animation(sf::seconds(0.1f));
 	comeAnimation->setSpriteSheet(tex);
-	comeAnimation->addFrame(sf::IntRect(11 * width, 0, width, height));
+	comeAnimation->addFrame(sf::IntRect({11 * width, 0}, {width, height}));
 	comeAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Broken, comeAnimation);
@@ -859,7 +859,7 @@ AttackingBehavior* VeliusBoss::createAttackingBehavior(bool asAlly) {
 void VeliusBoss::loadComponents() {
 	// component: light
 	addComponent(new LightComponent(LightData(
-		sf::Vector2f(getBoundingBox()->width * 0.5f, 0.f),
+		sf::Vector2f(getBoundingBox()->size.x * 0.5f, 0.f),
 		sf::Vector2f(100.f, 100.f), 0.6f), this));
 
 	loadBlockingParticles();
@@ -877,7 +877,7 @@ void VeliusBoss::loadBlockingParticles() {
 
 	// Generators
 	auto spawner = new particles::CircleSpawner();
-	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	spawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
 	spawner->radius = sf::Vector2f(60.f, 100.f);
 	data.spawner = spawner;
 
@@ -908,7 +908,7 @@ void VeliusBoss::loadBlockingParticles() {
 	data.timeGen = timeGen;
 
 	m_blockingBubble = new ParticleComponent(data, this);
-	m_blockingBubble->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_blockingBubble->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(m_blockingBubble);
 
 	clearBlocking();

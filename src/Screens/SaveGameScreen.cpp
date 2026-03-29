@@ -46,7 +46,7 @@ void SaveGameScreen::execOnEnter() {
 	// text
 	m_title = new BitmapText(g_textProvider->getText("SaveGame"), TextStyle::Shadowed);
 	m_title->setCharacterSize(24);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 25.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().size.x) / 2.f, 25.f));
 
 	// add buttons
 	const float buttonWidth = 200.f;
@@ -56,25 +56,25 @@ void SaveGameScreen::execOnEnter() {
 	const float buttonSpaceWidth = WINDOW_WIDTH - 2 * marginX;
 	const float buttonSpacing = (buttonSpaceWidth - 4 * buttonWidth) / 3.f;
 
-	Button* button = new Button(sf::FloatRect(marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	Button* button = new Button(sf::FloatRect({marginX, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setOnClick(std::bind(&SaveGameScreen::onBack, this));
 	button->setGamepadKey(Key::Escape);
 	addObject(button);
 
-	m_deleteSaveGameButton = new Button(sf::FloatRect(buttonWidth + buttonSpacing + marginX, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	m_deleteSaveGameButton = new Button(sf::FloatRect({buttonWidth + buttonSpacing + marginX, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	m_deleteSaveGameButton->setText("Delete");
 	m_deleteSaveGameButton->setOnClick(std::bind(&SaveGameScreen::onDeleteSaveGame, this));
 	m_deleteSaveGameButton->setGamepadKey(Key::Attack);
 	addObject(m_deleteSaveGameButton);
 
-	button = new Button(sf::FloatRect(marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({marginX + 2 * buttonWidth + 2 * buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	button->setText("New");
 	button->setOnClick(std::bind(&SaveGameScreen::onNewSaveGame, this));
 	button->setGamepadKey(Key::Jump);
 	addObject(button);
 
-	m_saveButton = new Button(sf::FloatRect(marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY, buttonWidth, buttonHeight), GUIOrnamentStyle::SMALL);
+	m_saveButton = new Button(sf::FloatRect({marginX + 3 * buttonWidth + 3 * buttonSpacing, marginY}, {buttonWidth, buttonHeight}), GUIOrnamentStyle::SMALL);
 	m_saveButton->setText("Save");
 	m_saveButton->setOnClick(std::bind(&SaveGameScreen::onSaveGame, this));
 	m_saveButton->setGamepadKey(Key::Confirm);
@@ -161,7 +161,7 @@ void SaveGameScreen::onBack() {
 void SaveGameScreen::onDeleteSaveGame() {
 	float width = 450;
 	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 	m_yesOrNoForm->setMessage("QuestionDeleteSaveGame");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onYesDeleteSaveGame, this));
@@ -172,7 +172,7 @@ void SaveGameScreen::onDeleteSaveGame() {
 void SaveGameScreen::onNewSaveGame() {
 	float width = 450;
 	float height = 230;
-	m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_newSaveGameForm = new NewSaveGameForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 	m_newSaveGameForm->setOnOkClicked(std::bind(&SaveGameScreen::onYesNewSaveGame, this));
 	m_newSaveGameForm->setOnCancelClicked(std::bind(&SaveGameScreen::onCancel, this));
 	addObject(m_newSaveGameForm);
@@ -182,7 +182,7 @@ void SaveGameScreen::onNewSaveGame() {
 void SaveGameScreen::onSaveGame() {
 	float width = 450;
 	float height = 200;
-	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect(0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height), width, height));
+	m_yesOrNoForm = new YesOrNoForm(sf::FloatRect({0.5f * (WINDOW_WIDTH - width), 0.5f * (WINDOW_HEIGHT - height)}, {width, height}));
 	m_yesOrNoForm->setMessage("QuestionOverwriteSaveGame");
 	m_yesOrNoForm->setOnNoClicked(std::bind(&SaveGameScreen::onNo, this));
 	m_yesOrNoForm->setOnYesClicked(std::bind(&SaveGameScreen::onYesOverwriteSaveGame, this));

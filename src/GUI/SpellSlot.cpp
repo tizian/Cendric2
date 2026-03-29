@@ -19,7 +19,7 @@ SpellSlot::SpellSlot(SpellType type) {
 	m_inputKeyID = Key::VOID;
 	m_isEmpty = true;
 
-	m_iconTextureRect = sf::IntRect(250, (static_cast<int>(m_spellType) - 1) * 50, 50, 50);
+	m_iconTextureRect = sf::IntRect({250, (static_cast<int>(m_spellType) - 1) * 50}, {50, 50});
 	m_tooltipComponent->setTooltipText(
 		g_textProvider->getText("EmptySlot") + " (" + 
 		g_textProvider->getText(EnumNames::getSpellTypeName(type)) + ")");
@@ -54,12 +54,12 @@ SpellSlot::SpellSlot(const SpellData& bean) {
 
 void SpellSlot::setInputKeyText(const std::string& text) {
 	m_inputKey.setString(text);
-	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().width > SIZE - 10.f) ?
+	m_inputKey.setCharacterSize((m_inputKey.getLocalBounds().size.x > SIZE - 10.f) ?
 		GUIConstants::CHARACTER_SIZE_S :
 		GUIConstants::CHARACTER_SIZE_L);
 	m_inputKey.setColor(COLOR_WHITE);
 
-	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, ICON_SIZE + 18.f);
+	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_inputKey.getLocalBounds().size.x / 2.f, ICON_SIZE + 18.f);
 	m_inputKey.setPosition(getPosition() + positionOffset);
 }
 
@@ -153,9 +153,9 @@ void SpellSlot::initSpellSlot() {
 
 void SpellSlot::setPosition(const sf::Vector2f& pos) {
 	Slot::setPosition(pos);
-	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_inputKey.getLocalBounds().width / 2.f, ICON_SIZE + 18.f);
+	sf::Vector2f positionOffset(ICON_SIZE / 2.f - m_inputKey.getLocalBounds().size.x / 2.f, ICON_SIZE + 18.f);
 	m_inputKey.setPosition(pos + positionOffset);
-	m_lockedRect.setPosition(pos.x - getConfiguredIconOffset(), pos.y - getConfiguredIconOffset());
+	m_lockedRect.setPosition({pos.x - getConfiguredIconOffset(), pos.y - getConfiguredIconOffset()});
 	m_cooldownRect.setPosition(pos);
 	m_gems[0].setPosition(pos + sf::Vector2f(20.f, -12.f));
 	m_gems[1].setPosition(pos + sf::Vector2f(-12.f, 20.f));

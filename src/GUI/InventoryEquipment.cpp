@@ -16,7 +16,7 @@ InventoryEquipment::InventoryEquipment(WorldScreen* screen) {
 	m_isModifiable = !lScreen || !lScreen->getWorldData()->isBossLevel;
 
 	// init window
-	const sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	const sf::FloatRect box({GUIConstants::LEFT, GUIConstants::TOP}, {WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		COLOR_TRANS_BLACK, // back

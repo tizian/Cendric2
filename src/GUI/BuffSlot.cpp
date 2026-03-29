@@ -12,7 +12,7 @@ const sf::Time BuffSlot::FLASHING_TIME = sf::seconds(5);
 const sf::Time BuffSlot::FLASHING_INTERVAL = sf::seconds(0.5);
 
 BuffSlot::BuffSlot(BuffSlotType buffType, const sf::IntRect& textureLocation) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, SIZE, SIZE));
+	setBoundingBox(sf::FloatRect(sf::Vector2f(0.f, 0.f), sf::Vector2f(SIZE, SIZE)));
 	setDebugBoundingBox(COLOR_BAD);
 	m_buffType = buffType;
 	setInputInDefaultView(true);
@@ -58,7 +58,7 @@ void BuffSlot::setPosition(const sf::Vector2f& pos) {
 	m_outside.setPosition(pos);
 	m_inside.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
 	m_back.setPosition(pos + sf::Vector2f(MARGIN, MARGIN));
-	m_durationText.setPosition(pos + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
+	m_durationText.setPosition(pos + sf::Vector2f((SIZE - m_durationText.getLocalBounds().size.x) / 2.f, SIZE));
 	GameObject::setPosition(pos);
 }
 
@@ -99,7 +99,7 @@ void BuffSlot::update(const sf::Time& frameTime) {
 	// update duration text
 	if (m_duration >= sf::Time::Zero) {
 		m_durationText.setString(std::to_string(static_cast<int>(floor(m_duration.asSeconds()))) + "s");
-		m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().width) / 2.f, SIZE));
+		m_durationText.setPosition(getPosition() + sf::Vector2f((SIZE - m_durationText.getLocalBounds().size.x) / 2.f, SIZE));
 	}
 	GameObject::update(frameTime);
 }

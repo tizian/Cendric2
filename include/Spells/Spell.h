@@ -63,7 +63,7 @@ public:
 
 protected:
 	SpellData m_data;
-	sf::Sound m_sound;
+	std::optional<sf::Sound> m_sound;
 	
 	const Level* m_level;
 	LevelMovableGameObject* m_mob = nullptr; // owner, it will never hurt the owner or any other mob of the same type.

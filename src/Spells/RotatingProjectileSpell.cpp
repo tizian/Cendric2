@@ -26,7 +26,7 @@ void RotatingProjectileSpell::init(const SpellData& data) {
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 45, 45, 45));
+	spellAnimation->addFrame(sf::IntRect({0, data.skinNr * 45}, {45, 45}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 

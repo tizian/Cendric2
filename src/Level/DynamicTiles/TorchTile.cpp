@@ -18,7 +18,7 @@ TorchTile::~TorchTile() {
 bool TorchTile::init(const LevelTileProperties& properties) {
 	setSpriteOffset(sf::Vector2f(-15.f, -TILE_SIZE_F / 2.f));
 	setPositionOffset(sf::Vector2f(15.f, 0));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 20.f, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {20.f, TILE_SIZE_F}));
 
 	m_color = "red";
 	if (contains(properties, std::string("color"))) {
@@ -50,14 +50,14 @@ void TorchTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * textureHeight}, {TILE_SIZE, 2 * TILE_SIZE}));
 	idleAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* burningAnimation = new Animation();
 	burningAnimation->setSpriteSheet(tex);
-	burningAnimation->addFrame(sf::IntRect(0, skinNr * textureHeight, TILE_SIZE, 2 * TILE_SIZE));
+	burningAnimation->addFrame(sf::IntRect({0, skinNr * textureHeight}, {TILE_SIZE, 2 * TILE_SIZE}));
 	burningAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Burning, burningAnimation);
@@ -95,7 +95,7 @@ void TorchTile::loadComponents() {
 	data.colorGen = ParticleTile::getFlameColorGenerator(m_color);
 
 	m_velGen = new particles::AimedVelocityGenerator();
-	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - 10.f);
 	m_velGen->minStartSpeed = 20.f;
 	m_velGen->maxStartSpeed = 40.f;
 	data.velGen = m_velGen;
@@ -106,14 +106,14 @@ void TorchTile::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_particleComponent = new ParticleComponent(data, this);
-	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->width, 0.5f * getBoundingBox()->height));
+	m_particleComponent->setOffset(sf::Vector2f(0.5f * getBoundingBox()->size.x, 0.5f * getBoundingBox()->size.y));
 }
 
 void TorchTile::setPosition(const sf::Vector2f& pos) {
 	LevelDynamicTile::setPosition(pos);
 	if (m_velGen) {
 		m_particleComponent->setPosition(pos);
-		m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->width, getPosition().y - 10.f);
+	m_velGen->goal = sf::Vector2f(getPosition().x + 0.5f * getBoundingBox()->size.x, getPosition().y - 10.f);
 	}
 }
 

@@ -10,13 +10,13 @@
 
 LevelScreen::LevelScreen(const std::string& levelID, CharacterCore* core) : Screen(core), WorldScreen(core) {
 	m_levelID = levelID;
-	m_particleBGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-	m_particleFGRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-	m_particleEQRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
-	m_equipmentRenderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_particleBGRenderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
+	m_particleFGRenderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
+	m_particleEQRenderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
+	m_equipmentRenderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
 
-	m_particleBlendMode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha, sf::BlendMode::Equation::Add,
-		sf::BlendMode::SrcAlpha, sf::BlendMode::One, sf::BlendMode::Add);
+	m_particleBlendMode = sf::BlendMode(sf::BlendMode::Factor::One, sf::BlendMode::Factor::OneMinusSrcAlpha, sf::BlendMode::Equation::Add,
+		sf::BlendMode::Factor::SrcAlpha, sf::BlendMode::Factor::One, sf::BlendMode::Equation::Add);
 }
 
 void LevelScreen::loadSync() {
@@ -44,25 +44,25 @@ void LevelScreen::loadAsync() {
 	m_buttonGroup = new ButtonGroup();
 
 	// load screen
-	m_resumeButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_resumeButton = new Button(sf::FloatRect({0, 0}, {50, 50}), GUIOrnamentStyle::MEDIUM);
 	m_resumeButton->setText("Resume");
 	m_resumeButton->setVisible(false);
 	m_resumeButton->setOnClick(std::bind(&LevelScreen::onResume, this));
 	m_buttonGroup->addButton(m_resumeButton);
 
-	m_backToMenuButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_backToMenuButton = new Button(sf::FloatRect({0, 0}, {50, 50}), GUIOrnamentStyle::MEDIUM);
 	m_backToMenuButton->setText("BackToMenu");
 	m_backToMenuButton->setVisible(false);
 	m_backToMenuButton->setOnClick(std::bind(&LevelScreen::onBackToMenu, this));
 	m_buttonGroup->addButton(m_backToMenuButton);
 
-	m_retryButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_retryButton = new Button(sf::FloatRect({0, 0}, {50, 50}), GUIOrnamentStyle::MEDIUM);
 	m_retryButton->setText("BackToCheckpoint");
 	m_retryButton->setVisible(false);
 	m_retryButton->setOnClick(std::bind(&LevelScreen::onBackToCheckpoint, this));
 	m_buttonGroup->addButton(m_retryButton);
 
-	m_backToMapButton = new Button(sf::FloatRect(0, 0, 50, 50), GUIOrnamentStyle::MEDIUM);
+	m_backToMapButton = new Button(sf::FloatRect({0, 0}, {50, 50}), GUIOrnamentStyle::MEDIUM);
 	m_backToMapButton->setText("BackToMap");
 	m_backToMapButton->setVisible(false);
 	m_backToMapButton->setOnClick(std::bind(&LevelScreen::onBackToMap, this));
@@ -378,9 +378,9 @@ void LevelScreen::flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture
 	renderStates.blendMode = mode;
 
 	renderTexture.display();
-	m_sprite.setTexture(renderTexture.getTexture());
+	m_sprite->setTexture(renderTexture.getTexture());
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite, renderStates);
+	renderTarget.draw(*m_sprite, renderStates);
 	renderTarget.setView(oldView);
 	renderTexture.clear(sf::Color(0, 0, 0, 0));
 }
@@ -402,9 +402,9 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_equipmentRenderTexture.setView(oldView);
 	renderObjects(_LevelMainCharacter, m_equipmentRenderTexture);
 	renderObjects(_Equipment, m_equipmentRenderTexture);
-	m_sprite.setColor(m_equipmentColor);
+	m_sprite->setColor(m_equipmentColor);
 	flushTexture(renderTarget, m_equipmentRenderTexture, oldView, sf::BlendAlpha);
-	m_sprite.setColor(COLOR_WHITE);
+	m_sprite->setColor(COLOR_WHITE);
 	flushTexture(renderTarget, m_particleEQRenderTexture, oldView, m_particleBlendMode);
 
 	renderObjects(_Enemy, renderTarget);
@@ -421,11 +421,11 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_renderTexture.display();
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
-	m_sprite.setTexture(m_renderTexture.getTexture());
+	m_sprite->setTexture(m_renderTexture.getTexture());
 	m_lightLayerShader.setUniform("ambientLevel", m_currentLevel.getWeather().ambientDimming);
 	m_lightLayerShader.setUniform("lightDimming", m_currentLevel.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_sprite, &m_lightLayerShader);
+	renderTarget.draw(*m_sprite, &m_lightLayerShader);
 
 	// Render overlays on top of level; no light levels here		(GUI stuff on top of everything)
 	renderTarget.setView(oldView);

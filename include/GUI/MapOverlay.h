@@ -8,6 +8,7 @@
 #include "GUI/SelectableWindow.h"
 #include "GUI/ButtonInterface.h"
 #include "GUI/JoystickButtonGroup.h"
+#include <optional>
 
 class WorldScreen;
 class WorldInterface;
@@ -22,7 +23,7 @@ struct MapOverlayData final {
 	sf::FloatRect windowSize;
 	sf::Vector2i mapSize;
 	float scale;
-	sf::Sprite map;
+	std::optional<sf::Sprite> map;
 	TileMap fogOfWarTileMap;
 };
 
@@ -144,9 +145,9 @@ private:
 
 	std::vector<MapOverlayData*> m_maps;
 
-	sf::Sprite m_mainCharMarker;
+	std::optional<sf::Sprite> m_mainCharMarker;
 	sf::Image m_levelOverlayIcons;
-	sf::Sprite m_levelOverlaySprite;
+	std::optional<sf::Sprite> m_levelOverlaySprite;
 	sf::Texture m_levelOverlayTexture;
 
 	std::vector<WaypointMarker*> m_waypoints;

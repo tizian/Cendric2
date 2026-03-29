@@ -67,7 +67,7 @@ void ElysiaBossClone::loadSpells() {
 	chopSpell.damage = 0;
 	chopSpell.activeDuration = sf::seconds(0.1f);
 	chopSpell.cooldown = sf::seconds(0.1f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 180, 150);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {180, 150});
 	chopSpell.spellOffset = sf::Vector2f(-90.f, 0.f);
 	chopSpell.fightingTime = sf::seconds(0.2f);
 	chopSpell.fightAnimation = GameObjectState::Fighting;
@@ -84,7 +84,7 @@ void ElysiaBossClone::handleAttackInput() {
 }
 
 void ElysiaBossClone::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 80.f, 50.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {80.f, 50.f}));
 	setSpriteOffset(sf::Vector2f(-50.f, -50.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 	int width = 180;
@@ -93,7 +93,7 @@ void ElysiaBossClone::loadAnimation(int skinNr) {
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		flyingAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		flyingAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
@@ -101,7 +101,7 @@ void ElysiaBossClone::loadAnimation(int skinNr) {
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 6; ++i) {
-		idleAnimation->addFrame(sf::IntRect(i * width, 0, width, height));
+		idleAnimation->addFrame(sf::IntRect({i * width, 0}, {width, height}));
 	}
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
@@ -109,7 +109,7 @@ void ElysiaBossClone::loadAnimation(int skinNr) {
 	// nose dive
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(6 * width, 0, width, height));
+	fightingAnimation->addFrame(sf::IntRect({6 * width, 0}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
@@ -117,7 +117,7 @@ void ElysiaBossClone::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(true);
 
-	LightData data(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 150.f, 0.5f);
+	LightData data(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 150.f, 0.5f);
 	addComponent(new LightComponent(data, this));
 }
 

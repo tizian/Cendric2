@@ -38,7 +38,7 @@ void BatEnemy::loadSpells() {
 	chopSpell.damage = 10;
 	chopSpell.damagePerSecond = 4;
 	chopSpell.duration = sf::seconds(3.f);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 50, 50);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {50, 50});
 	chopSpell.spellOffset = sf::Vector2f(-25.f, 0.f);
 	chopSpell.fightingTime = sf::milliseconds(7 * 100);
 
@@ -124,7 +124,7 @@ sf::Time BatEnemy::getConfiguredChasingTime() const {
 }
 
 void BatEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 40.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 40.f}));
 	setSpriteOffset(sf::Vector2f(-15.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
@@ -133,50 +133,50 @@ void BatEnemy::loadAnimation(int skinNr) {
 
 	Animation* flyingAnimation = new Animation();
 	flyingAnimation->setSpriteSheet(tex);
-	flyingAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(4 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(5 * width, skinNr * height, width, height));
-	flyingAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	flyingAnimation->addFrame(sf::IntRect({0 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({4 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({5 * width, skinNr * height}, {width, height}));
+	flyingAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Flying, flyingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(2 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(3 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(4 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(5 * width, skinNr * height, width, height));
-	idleAnimation->addFrame(sf::IntRect(1 * width, skinNr * height, width, height));
+	idleAnimation->addFrame(sf::IntRect({0 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({2 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({3 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({4 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({5 * width, skinNr * height}, {width, height}));
+	idleAnimation->addFrame(sf::IntRect({1 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* fightingAnimation = new Animation();
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(8 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(9 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(10 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(11 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(9 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(10 * width, skinNr * height, width, height));
-	fightingAnimation->addFrame(sf::IntRect(11 * width, skinNr * height, width, height));
+	fightingAnimation->addFrame(sf::IntRect({8 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({9 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({10 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({11 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({9 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({10 * width, skinNr * height}, {width, height}));
+	fightingAnimation->addFrame(sf::IntRect({11 * width, skinNr * height}, {width, height}));
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 
 	Animation* deadAnimation = new Animation(sf::seconds(10.f));
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(7 * width, skinNr * height, width, height));
+	deadAnimation->addFrame(sf::IntRect({7 * width, skinNr * height}, {width, height}));
 	deadAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* hangingAnimation = new Animation(sf::seconds(10.f));
 	hangingAnimation->setSpriteSheet(tex);
-	hangingAnimation->addFrame(sf::IntRect(6 * width, skinNr * height, width, height));
+	hangingAnimation->addFrame(sf::IntRect({6 * width, skinNr * height}, {width, height}));
 	hangingAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Hanging, hangingAnimation);

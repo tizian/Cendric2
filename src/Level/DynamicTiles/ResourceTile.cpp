@@ -11,7 +11,7 @@ REGISTER_LEVEL_DYNAMIC_TILE(LevelDynamicTileID::Resource, ResourceTile)
 const std::string ResourceTile::PICK_SOUND_PATH = "res/sound/weapon/pickaxe.ogg";
 
 bool ResourceTile::init(const LevelTileProperties& properties) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F, TILE_SIZE_F));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F, TILE_SIZE_F}));
 
 	m_interactComponent = new InteractComponent(g_textProvider->getText(""), this, m_mainChar);
 	m_interactComponent->setInteractRange(PICKUP_RANGE);
@@ -62,13 +62,13 @@ void ResourceTile::loadAnimation(int skinNr) {
 
 	Animation* activeAnimation = new Animation(sf::seconds(10.f));
 	activeAnimation->setSpriteSheet(tex);
-	activeAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	activeAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Active, activeAnimation);
 
 	Animation* lootedAnimation = new Animation(sf::seconds(10.f));
 	lootedAnimation->setSpriteSheet(tex);
-	lootedAnimation->addFrame(sf::IntRect(TILE_SIZE, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	lootedAnimation->addFrame(sf::IntRect({TILE_SIZE, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Broken, lootedAnimation);
 

@@ -2,6 +2,7 @@
 
 #include "global.h"
 #include "ResourceManager.h"
+#include <optional>
 
 class BackgroundLayer final {
 public:
@@ -19,5 +20,5 @@ private:
 	// distance to camera. -1 means infinity.
 	float m_distance;
 	std::string m_fileName;
-	sf::Sprite m_sprite;
+	std::optional<sf::Sprite> m_sprite;
 };

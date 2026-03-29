@@ -39,7 +39,7 @@ void SkeletonRogueEnemy::loadSpells() {
 	chopSpell.damagePerSecond = 10;
 	chopSpell.activeDuration = sf::milliseconds(4 * 70);
 	chopSpell.cooldown = sf::milliseconds(1000);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 40, 90);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {40, 90});
 	chopSpell.spellOffset = sf::Vector2f(10.f, -10.f);
 	chopSpell.fightingTime = sf::milliseconds(4 * 70);
 	chopSpell.castingTime = sf::milliseconds(4 * 70);
@@ -61,53 +61,53 @@ void SkeletonRogueEnemy::handleAttackInput() {
 }
 
 void SkeletonRogueEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 30.f, 90.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {30.f, 90.f}));
 	setSpriteOffset(sf::Vector2f(-45.f, -30.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation();
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; ++i) {
-		walkingAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+		walkingAnimation->addFrame(sf::IntRect({i * 120, skinNr * 120}, {120, 120}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(8 * 120, skinNr * 120, 120, 120));
+	idleAnimation->addFrame(sf::IntRect({8 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(9 * 120, skinNr * 120, 120, 120));
+	jumpingAnimation->addFrame(sf::IntRect({9 * 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation(sf::milliseconds(70));
 	deadAnimation->setSpriteSheet(tex);
 	for (int i = 10; i < 15; ++i) {
-		deadAnimation->addFrame(sf::IntRect(i * 120, skinNr * 120, 120, 120));
+		deadAnimation->addFrame(sf::IntRect({i * 120, skinNr * 120}, {120, 120}));
 	}
 	deadAnimation->setLooped(false);
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* fightingStartAnimation = new Animation(sf::milliseconds(70));
 	fightingStartAnimation->setSpriteSheet(tex);
-	fightingStartAnimation->addFrame(sf::IntRect(15 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(16 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
-	fightingStartAnimation->addFrame(sf::IntRect(18* 120, skinNr * 120, 120, 120));
+	fightingStartAnimation->addFrame(sf::IntRect({15 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({16 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({17 * 120, skinNr * 120}, {120, 120}));
+	fightingStartAnimation->addFrame(sf::IntRect({18* 120, skinNr * 120}, {120, 120}));
 
 	addAnimation(GameObjectState::Casting, fightingStartAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::milliseconds(70));
 	fightingAnimation->setSpriteSheet(tex);
-	fightingAnimation->addFrame(sf::IntRect(18 * 120, skinNr * 120, 120, 120));
-	fightingAnimation->addFrame(sf::IntRect(17 * 120, skinNr * 120, 120, 120));
-	fightingAnimation->addFrame(sf::IntRect(19 * 120, skinNr * 120, 120, 120));
-	fightingAnimation->addFrame(sf::IntRect(20 * 120, skinNr * 120, 120, 120));
+	fightingAnimation->addFrame(sf::IntRect({18 * 120, skinNr * 120}, {120, 120}));
+	fightingAnimation->addFrame(sf::IntRect({17 * 120, skinNr * 120}, {120, 120}));
+	fightingAnimation->addFrame(sf::IntRect({19 * 120, skinNr * 120}, {120, 120}));
+	fightingAnimation->addFrame(sf::IntRect({20 * 120, skinNr * 120}, {120, 120}));
 	
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 

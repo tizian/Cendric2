@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <optional>
 
 #include "Screens/ScreenManager.h"
 #include "Screens/SplashScreen.h"
@@ -17,7 +18,7 @@ private:
 	bool m_running;
 	sf::RenderWindow m_mainWindow;
 	sf::RenderTexture m_renderTexture;
-	sf::Sprite m_mainSprite;
+	std::optional<sf::Sprite> m_mainSprite;
 	ScreenManager* m_screenManager = nullptr;
 
 	void reloadWindow();

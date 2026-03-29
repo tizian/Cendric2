@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <map>
 
 #include "Enums/Language.h"
 #include "Enums/DisplayMode.h"

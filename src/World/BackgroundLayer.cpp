@@ -18,16 +18,16 @@ void BackgroundLayer::load(string& filename, float distance) {
 	g_resourceManager->loadTexture(m_fileName, ResourceType::Unique, this);
 	const sf::Texture* tex = g_resourceManager->getTexture(m_fileName);
 	if (tex) {
-		m_sprite = sf::Sprite(*tex);
+		m_sprite.emplace(*tex);
 	}
 }
 
 void BackgroundLayer::setColor(const sf::Color& color) {
-	m_sprite.setColor(color);
+	m_sprite->setColor(color);
 }
 
 void BackgroundLayer::render(sf::RenderTarget& target, sf::RenderStates states) const {
-	target.draw(m_sprite, states);
+	target.draw(*m_sprite, states);
 }
 
 float BackgroundLayer::getDistance() const {

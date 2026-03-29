@@ -27,9 +27,9 @@ const float CookingWindow::SCROLL_WINDOW_LEFT = LEFT_OFFSET;
 const float CookingWindow::SCROLL_WINDOW_WIDTH = TEXT_WIDTH;
 const float CookingWindow::SCROLL_WINDOW_HEIGHT = 4 * WINDOW_MARGIN + OPTION_COUNT * GUIConstants::CHARACTER_SIZE_M + (OPTION_COUNT - 1) * GUIConstants::CHARACTER_SIZE_M;
 
-CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP, WIDTH, HEIGHT) , GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
+CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect({LEFT, TOP}, {WIDTH, HEIGHT}) , GUIOrnamentStyle::LARGE, sf::Color(0, 0, 0, 200), COLOR_WHITE) {
 	m_screen = screen;
-	m_cookingSprite = sf::Sprite(*(g_resourceManager->getTexture(GlobalResource::TEX_COOKING)));
+	m_cookingSprite.emplace(*(g_resourceManager->getTexture(GlobalResource::TEX_COOKING)));
 	m_title.setString(g_textProvider->getText("Fireplace"));
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setColor(COLOR_LIGHT_PURPLE);
@@ -42,7 +42,7 @@ CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP
 	m_scrollBar = new ScrollBar(SCROLL_WINDOW_HEIGHT);
 	m_scrollBar->setPosition(sf::Vector2f(LEFT + SCROLL_WINDOW_LEFT + SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, TOP + SCROLL_WINDOW_TOP));
 
-	sf::FloatRect scrollBox(LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP, SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT);
+	sf::FloatRect scrollBox({LEFT + SCROLL_WINDOW_LEFT, TOP + SCROLL_WINDOW_TOP}, {SCROLL_WINDOW_WIDTH, SCROLL_WINDOW_HEIGHT});
 	m_scrollHelper = new ScrollHelper(scrollBox);
 
 	reload();
@@ -50,7 +50,7 @@ CookingWindow::CookingWindow(MapScreen* screen) : Window(sf::FloatRect(LEFT, TOP
 
 void CookingWindow::setPosition(const sf::Vector2f& pos) {
 	Window::setPosition(pos); 
-	m_cookingSprite.setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
+	m_cookingSprite->setPosition(sf::Vector2f(pos.x, WINDOW_HEIGHT - 250.f));
 	m_title.setPosition(sf::Vector2f(pos.x + LEFT_OFFSET, pos.y + 3 * WINDOW_MARGIN));
 }
 
@@ -173,7 +173,7 @@ void CookingWindow::calculateEntryPositions() {
 	float yOffset = TOP + SCROLL_WINDOW_TOP + 2 * WINDOW_MARGIN - effectiveScrollOffset - 0.5f * GUIConstants::CHARACTER_SIZE_M;
 
 	for (auto& it : m_options) {
-		it.setBoundingBox(sf::FloatRect(xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M, SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M));
+		it.setBoundingBox(sf::FloatRect({xOffset, yOffset + 0.5f * GUIConstants::CHARACTER_SIZE_M}, {SCROLL_WINDOW_WIDTH - ScrollBar::WIDTH, 2.f * GUIConstants::CHARACTER_SIZE_M}));
 		it.setPosition(sf::Vector2f(xOffset, yOffset));
 		yOffset += 2.f * GUIConstants::CHARACTER_SIZE_M;
 	}
@@ -271,7 +271,7 @@ void CookingWindow::render(sf::RenderTarget& renderTarget) {
 	renderTarget.draw(m_scrollWindow);
 	m_scrollBar->render(renderTarget);
 
-	renderTarget.draw(m_cookingSprite);
+	renderTarget.draw(*m_cookingSprite);
 }
 
 // Cooking Option
@@ -291,27 +291,27 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 		text += " (" + g_textProvider->getText(itemID, "item", false, true) + " " + std::to_string(count)  + ")";
 	}
 
-	std::basic_string<sf::Uint32> utf32line;
+	std::basic_string<std::uint32_t> utf32line;
 	sf::Utf8::toUtf32(text.begin(), text.end(), std::back_inserter(utf32line));
-	m_text.setString(utf32line);
-	m_text.setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
-	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
-	m_text.setFillColor(COLOR_WHITE);
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_text.getLocalBounds().width, 20.f));
+	m_text->setString(sf::String::fromUtf32(utf32line.begin(), utf32line.end()));
+	m_text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
+	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
+	m_text->setFillColor(COLOR_WHITE);
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {m_text->getLocalBounds().size.x, 20.f}));
 	setInputInDefaultView(true);
 }
 
 void CookingOption::setPosition(const sf::Vector2f& pos) {
 	GameObject::setPosition(pos);
-	m_text.setPosition(pos);
+	m_text->setPosition(pos);
 }
 
 void CookingOption::render(sf::RenderTarget& renderTarget) {
-	renderTarget.draw(m_text);
+	renderTarget.draw(*m_text);
 }
 
 void CookingOption::setColor(const sf::Color& color) {
-	m_text.setFillColor(color);
+	m_text->setFillColor(color);
 }
 
 void CookingOption::onLeftClick() {
@@ -325,7 +325,7 @@ bool CookingOption::isClicked() {
 }
 
 void CookingOption::select() {
-	m_text.setFillColor(COLOR_WHITE);
+	m_text->setFillColor(COLOR_WHITE);
 	m_isSelected = true;
 }
 
@@ -334,7 +334,7 @@ GameObjectType CookingOption::getConfiguredType() const {
 }
 
 void CookingOption::deselect() {
-	m_text.setFillColor(COLOR_GREY);
+	m_text->setFillColor(COLOR_GREY);
 	m_isSelected = false;
 }
 

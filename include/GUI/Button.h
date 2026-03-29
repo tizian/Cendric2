@@ -76,7 +76,7 @@ protected:
 	SlicedSprite m_mainLayer;
 	SlicedSprite m_backLayer;
 	SlicedSprite m_ornamentLayer;
-	sf::Sprite m_textureLayer;
+	std::optional<sf::Sprite> m_textureLayer;
 
 	sf::Color m_backLayerColor;
 	sf::Color m_mainLayerColor;

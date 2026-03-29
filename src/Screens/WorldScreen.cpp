@@ -40,7 +40,7 @@ static const std::string foregroundFragmentShader = \
 
 WorldScreen::WorldScreen(CharacterCore* core) : Screen(core) {
 	g_achievementManager->setCore(core);
-	m_renderTexture.create(WINDOW_WIDTH, WINDOW_HEIGHT);
+	m_renderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
 
 	m_lightLayerShader.setUniform("texture", sf::Shader::CurrentTexture);
 	m_lightLayerShader.loadFromMemory(VERTEX_SHADER, lightFragmentShader);

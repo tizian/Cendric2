@@ -88,12 +88,12 @@ private:
 	TabBar* m_tabBar;
 	BitmapText m_title;
 
-	std::vector<sf::Sprite> m_statIcons;
+	std::vector<std::optional<sf::Sprite>> m_statIcons;
 	std::vector<BitmapText> m_nameTexts;
 	std::vector<BitmapText> m_attributeTexts;
 
 	BitmapText m_guild;
-	sf::Sprite m_guildSprite;
+	std::optional<sf::Sprite> m_guildSprite;
 	std::vector<BitmapText> m_reputationTexts;
 
 	std::vector<ScrollEntry*> m_hintEntries;

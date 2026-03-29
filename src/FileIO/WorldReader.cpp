@@ -174,10 +174,10 @@ bool WorldReader::readTriggers(tinyxml2::XMLElement* objectgroup, WorldData& dat
 		result = object->QueryIntAttribute("height", &height);
 		XMLCheckResult(result);
 
-		trigger.triggerRect.left = static_cast<float>(x);
-		trigger.triggerRect.top = static_cast<float>(y);
-		trigger.triggerRect.width = static_cast<float>(width);
-		trigger.triggerRect.height = static_cast<float>(height);
+		trigger.triggerRect.position.x = static_cast<float>(x);
+		trigger.triggerRect.position.y = static_cast<float>(y);
+		trigger.triggerRect.size.x = static_cast<float>(width);
+		trigger.triggerRect.size.y = static_cast<float>(height);
 
 		// trigger properties
 		tinyxml2::XMLElement* properties = object->FirstChildElement("properties");
@@ -584,10 +584,10 @@ void WorldReader::updateData(WorldData& data) const {
 	}
 
 	// calculate map rect
-	data.mapRect.left = 0;
-	data.mapRect.top = 0;
-	data.mapRect.height = TILE_SIZE_F * data.mapSize.y;
-	data.mapRect.width = TILE_SIZE_F * data.mapSize.x;
+	data.mapRect.position.x = 0;
+	data.mapRect.position.y = 0;
+	data.mapRect.size.y = TILE_SIZE_F * data.mapSize.y;
+	data.mapRect.size.x = TILE_SIZE_F * data.mapSize.x;
 
 	// calculate lights from tiles
 	readLightsFromLayers(data, data.backgroundTileLayers);

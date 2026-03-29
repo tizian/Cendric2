@@ -30,7 +30,7 @@ void ShackleSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 	const sf::Texture* tex = g_resourceManager->getTexture(data.spritesheetPath);
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(tex);
-	spellAnimation->addFrame(sf::IntRect(0, 50, 50, 50));
+	spellAnimation->addFrame(sf::IntRect({0, 50}, {50, 50}));
 	spellAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
@@ -40,12 +40,12 @@ void ShackleSpell::load(const SpellData& data, LevelMovableGameObject* mob, cons
 
 void ShackleSpell::update(const sf::Time& frameTime) {
 	Spell::update(frameTime);
-	setPosition(m_mainChar->getPosition() + sf::Vector2f(m_mainChar->getBoundingBox()->width * 0.5f, -40.f));
+	setPosition(m_mainChar->getPosition() + sf::Vector2f(m_mainChar->getBoundingBox()->size.x * 0.5f, -40.f));
 	 
 	if (m_timeUntilShackleStart > sf::Time::Zero) {
 		updateTime(m_timeUntilShackleStart, frameTime);
 		float brightness = (2.f - m_timeUntilShackleStart.asSeconds()) / 2.f;
-		setSpriteColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(brightness * 255)), sf::seconds(1.f));
+		setSpriteColor(sf::Color(255, 255, 255, static_cast<std::uint8_t>(brightness * 255)), sf::seconds(1.f));
 		m_lightComponent->setBrightness(brightness);
 
 		if (m_timeUntilShackleStart == sf::Time::Zero) {
@@ -132,7 +132,7 @@ bool ShackleSpell::getConfiguredRotateSprite() const {
 
 void ShackleSpell::loadComponents() {
 	// light
-	LightData lightData(sf::Vector2f(m_boundingBox.height * 0.5f, m_boundingBox.height * 0.5f), 200.f, 0.f);
+	LightData lightData(sf::Vector2f(m_boundingBox.size.y * 0.5f, m_boundingBox.size.y * 0.5f), 200.f, 0.f);
 	m_lightComponent = new LightComponent(lightData, this);
 	addComponent(m_lightComponent);
 }
@@ -155,12 +155,12 @@ void ShackleSprite::gotoMainchar(GameObject* mainChar) {
 
 void ShackleSprite::load(float angle, const sf::Vector2f& pos) {
 	m_isAlwaysUpdate = true;
-	m_boundingBox = sf::FloatRect(0.f, 0.f, 50.f, 50.f);
+	m_boundingBox = sf::FloatRect({0.f, 0.f}, {50.f, 50.f});
 
 	const sf::Texture* tex = g_resourceManager->getTexture("res/texture/spells/spritesheet_spell_shackle.png");
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(tex);
-	spellAnimation->addFrame(sf::IntRect(0, 0, 50, 50));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {50, 50}));
 	spellAnimation->setLooped(false);
 
 	addAnimation(GameObjectState::Idle, spellAnimation);

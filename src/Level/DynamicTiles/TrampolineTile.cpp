@@ -12,11 +12,11 @@ TrampolineTile::TrampolineTile(LevelScreen* levelScreen) :
 }
 
 bool TrampolineTile::init(const LevelTileProperties& properties) {
-	m_jumpingRegion.width = 40.f;
-	m_jumpingRegion.height = 2.f;
+	m_jumpingRegion.size.x = 40.f;
+	m_jumpingRegion.size.y = 2.f;
 	setPositionOffset(sf::Vector2f(5.f, 15.f));
 	setSpriteOffset(sf::Vector2f(-5.f, -15.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, m_jumpingRegion.width, 35.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {m_jumpingRegion.size.x, 35.f}));
 	return true;
 }
 
@@ -28,19 +28,19 @@ void TrampolineTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 3, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 2, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 1, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-	jumpingAnimation->addFrame(sf::IntRect(TILE_SIZE * 4, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 1, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 2, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 3, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 2, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 1, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
+	jumpingAnimation->addFrame(sf::IntRect({TILE_SIZE * 4, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	m_jumpingTime = jumpingAnimation->getAnimationTime();
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
@@ -48,7 +48,7 @@ void TrampolineTile::loadAnimation(int skinNr) {
 	Animation* crumblingAnimation = new Animation();
 	crumblingAnimation->setSpriteSheet(tex);
 	for (int i = 5; i < 9; i++) {
-		crumblingAnimation->addFrame(sf::IntRect(TILE_SIZE * i, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+			crumblingAnimation->addFrame(sf::IntRect({TILE_SIZE * i, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	}
 	crumblingAnimation->setLooped(false);
 	m_crumblingTime = crumblingAnimation->getAnimationTime();
@@ -63,8 +63,8 @@ void TrampolineTile::loadAnimation(int skinNr) {
 
 void TrampolineTile::setPosition(const sf::Vector2f& pos) {
 	LevelMovableTile::setPosition(pos);
-	m_jumpingRegion.left = pos.x;
-	m_jumpingRegion.top = pos.y - m_jumpingRegion.height;
+	m_jumpingRegion.position.x = pos.x;
+	m_jumpingRegion.position.y = pos.y - m_jumpingRegion.size.y;
 }
 
 void TrampolineTile::update(const sf::Time& frameTime) {
@@ -94,7 +94,7 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 	auto const& mbb = *m_mainChar->getBoundingBox();
 	if (m_state == GameObjectState::Idle &&  !m_mainChar->isDead() && !m_mainChar->isIgnoreDynamicTiles() && fastIntersect(mbb, m_jumpingRegion)) {
 		auto nextBB = mbb;
-		nextBB.top = m_jumpingRegion.top - nextBB.height - 10.f;
+		nextBB.position.y = m_jumpingRegion.position.y - nextBB.size.y - 10.f;
 		WorldCollisionQueryRecord rec;
 		rec.boundingBox = nextBB;
 		rec.ignoreDynamicTiles = m_mainChar->isIgnoreDynamicTiles();
@@ -103,14 +103,14 @@ void TrampolineTile::update(const sf::Time& frameTime) {
 			g_resourceManager->playSound(getSoundPath());
 			m_mainChar->setVelocityY(-800.f);
 			m_mainChar->setAccelerationY(0.f);
-			m_mainChar->setPositionY(nextBB.top);
+			m_mainChar->setPositionY(nextBB.position.y);
 			m_mainChar->setJumpLock();
 			setState(GameObjectState::Jumping);
 			m_jumpingTime = getAnimation(GameObjectState::Jumping)->getAnimationTime();
 		}
 	}
 
-	if (m_boundingBox.top + m_boundingBox.height > (m_level->getWorldRect().top + m_level->getWorldRect().height)) {
+	if (m_boundingBox.position.y + m_boundingBox.size.y > (m_level->getWorldRect().position.y + m_level->getWorldRect().size.y)) {
 		setDisposed();
 	}
 }

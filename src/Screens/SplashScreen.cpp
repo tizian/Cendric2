@@ -5,14 +5,14 @@
 using namespace particles;
 
 SplashScreen::SplashScreen() : Screen(nullptr) {
-	m_screenSpriteBackground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG)));
-	m_screenSpriteForeground = sf::Sprite((*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG)));
+	m_screenSpriteBackground.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_BG));
+	m_screenSpriteForeground.emplace(*g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_FG));
 
 	float scale = 5.f;
 	sf::Texture* tex = g_resourceManager->getTexture(GlobalResource::TEX_SPLASH_LOGO);
-	m_logoSprite = sf::Sprite(*tex);
-	m_logoSprite.setScale(sf::Vector2f(scale, scale));
-	m_logoSprite.setPosition(0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 0.5f * (WINDOW_HEIGHT - scale * tex->getSize().y));
+	m_logoSprite.emplace(*tex);
+	m_logoSprite->setScale(sf::Vector2f(scale, scale));
+	m_logoSprite->setPosition({0.5f * (WINDOW_WIDTH - scale * tex->getSize().x), 0.5f * (WINDOW_HEIGHT - scale * tex->getSize().y)});
 
 	g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME)->setSmooth(true);
 	m_ps_right = new TextureParticleSystem(1000, g_resourceManager->getTexture(GlobalResource::TEX_PARTICLE_FLAME));
@@ -31,9 +31,8 @@ void SplashScreen::execOnEnter() {
 	m_versionText.setString("Cendric v" + std::string(CENDRIC_VERSION_NR));
 	m_versionText.setCharacterSize(GUIConstants::CHARACTER_SIZE_S);
 	m_versionText.setColor(COLOR_WHITE);
-	m_versionText.setPosition(
-		(WINDOW_WIDTH - m_versionText.getLocalBounds().width) / 2,
-		WINDOW_HEIGHT - 18.f);
+	m_versionText.setPosition({(WINDOW_WIDTH - m_versionText.getLocalBounds().size.x) / 2,
+		WINDOW_HEIGHT - 18.f});
 
 	g_resourceManager->playMusic(GlobalResource::MUSIC_MAIN, false);
 }
@@ -58,11 +57,11 @@ void SplashScreen::execUpdate(const sf::Time& frameTime) {
 
 void SplashScreen::render(sf::RenderTarget& renderTarget) {
 	renderTarget.setView(renderTarget.getDefaultView());
-	renderTarget.draw(m_screenSpriteBackground);
+	renderTarget.draw(*m_screenSpriteBackground);
 	m_ps_left->render(renderTarget);
 	m_ps_right->render(renderTarget);
-	renderTarget.draw(m_screenSpriteForeground);
-	renderTarget.draw(m_logoSprite);
+	renderTarget.draw(*m_screenSpriteForeground);
+	renderTarget.draw(*m_logoSprite);
 	renderObjects(_Interface, renderTarget);
 	renderTarget.draw(m_versionText);
 }

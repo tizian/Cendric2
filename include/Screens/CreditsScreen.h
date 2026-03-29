@@ -5,6 +5,7 @@
 #include "Screen.h"
 
 #include "GUI/BitmapText.h"
+#include <optional>
 
 class CreditsScreen final : public Screen {
 public:
@@ -17,7 +18,7 @@ public:
 	void execOnExit() override;
 
 private:
-	sf::Sprite m_screenSprite;
+	std::optional<sf::Sprite> m_screenSprite;
 	BitmapText* m_title = nullptr;
 	BitmapText* m_credits = nullptr;
 

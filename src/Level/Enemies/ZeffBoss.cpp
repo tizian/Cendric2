@@ -27,7 +27,7 @@ void ZeffBoss::loadSpells() {
 	chopSpell.damage = 20;
 	chopSpell.activeDuration = sf::milliseconds(400);
 	chopSpell.cooldown = sf::milliseconds(400);
-	chopSpell.boundingBox = sf::FloatRect(0, 0, 120, 100);
+	chopSpell.boundingBox = sf::FloatRect({0, 0}, {120, 100});
 	chopSpell.spellOffset = sf::Vector2f(-60.f, 20.f);
 	chopSpell.fightingTime = sf::milliseconds(400);
 	
@@ -79,50 +79,50 @@ void ZeffBoss::handleAttackInput() {
 }
 
 void ZeffBoss::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 60.f, 120.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {60.f, 120.f}));
 	setSpriteOffset(sf::Vector2f(-30.f, -20.f));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	Animation* walkingAnimation = new Animation(sf::seconds(0.1f));
 	walkingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 8; i++) {
-		walkingAnimation->addFrame(sf::IntRect(i * 120, 0, 120, 140));
+		walkingAnimation->addFrame(sf::IntRect({i * 120, 0}, {120, 140}));
 	}
 
 	addAnimation(GameObjectState::Walking, walkingAnimation);
 
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, 140, 120, 140));
+	idleAnimation->addFrame(sf::IntRect({0, 140}, {120, 140}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 	
 	Animation* jumpingAnimation = new Animation();
 	jumpingAnimation->setSpriteSheet(tex);
-	jumpingAnimation->addFrame(sf::IntRect(120, 140, 120, 140));
+	jumpingAnimation->addFrame(sf::IntRect({120, 140}, {120, 140}));
 
 	addAnimation(GameObjectState::Jumping, jumpingAnimation);
 
 	Animation* deadAnimation = new Animation();
 	deadAnimation->setSpriteSheet(tex);
-	deadAnimation->addFrame(sf::IntRect(2 * 120, 140, 120, 140));
+	deadAnimation->addFrame(sf::IntRect({2 * 120, 140}, {120, 140}));
 
 	addAnimation(GameObjectState::Dead, deadAnimation);
 
 	Animation* fightingAnimation = new Animation(sf::seconds(0.1f));
 	fightingAnimation->setSpriteSheet(tex);
 	for (int i = 0; i < 4; ++i) {
-		fightingAnimation->addFrame(sf::IntRect(i * 120, 5 * 140, 120, 140));
+		fightingAnimation->addFrame(sf::IntRect({i * 120, 5 * 140}, {120, 140}));
 	}
 
 	addAnimation(GameObjectState::Fighting, fightingAnimation);
 	
 	Animation* fighting2Animation = new Animation(sf::seconds(0.1f));
 	fighting2Animation->setSpriteSheet(tex);
-	fighting2Animation->addFrame(sf::IntRect(0 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(1 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(2 * 120, 4 * 140, 120, 140));
-	fighting2Animation->addFrame(sf::IntRect(1 * 120, 4 * 140, 120, 140));
+	fighting2Animation->addFrame(sf::IntRect({0 * 120, 4 * 140}, {120, 140}));
+	fighting2Animation->addFrame(sf::IntRect({1 * 120, 4 * 140}, {120, 140}));
+	fighting2Animation->addFrame(sf::IntRect({2 * 120, 4 * 140}, {120, 140}));
+	fighting2Animation->addFrame(sf::IntRect({1 * 120, 4 * 140}, {120, 140}));
 
 	addAnimation(GameObjectState::Fighting2, fighting2Animation);
 
@@ -130,7 +130,7 @@ void ZeffBoss::loadAnimation(int skinNr) {
 	castingAnimation->setSpriteSheet(tex);
 	castingAnimation->setLooped(false);
 	for (int i = 0; i < 4; ++i) {
-		castingAnimation->addFrame(sf::IntRect(i * 120, 2 * 140, 120, 140));
+		castingAnimation->addFrame(sf::IntRect({i * 120, 2 * 140}, {120, 140}));
 	}
 
 	addAnimation(GameObjectState::Casting, castingAnimation);
@@ -139,7 +139,7 @@ void ZeffBoss::loadAnimation(int skinNr) {
 	casting2Animation->setSpriteSheet(tex);
 	casting2Animation->setLooped(false);
 	for (int i = 0; i < 4; ++i) {
-		casting2Animation->addFrame(sf::IntRect(i * 120, 3 * 140, 120, 140));
+		casting2Animation->addFrame(sf::IntRect({i * 120, 3 * 140}, {120, 140}));
 	}
 
 	addAnimation(GameObjectState::Casting2, casting2Animation);

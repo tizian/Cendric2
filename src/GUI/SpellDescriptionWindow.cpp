@@ -17,7 +17,7 @@ inline std::string toStrMaxDecimals(float value, int decimals) {
 }
 
 SpellDescriptionWindow::SpellDescriptionWindow() : Window(
-	sf::FloatRect(0.f, 0.f, WIDTH, WIDTH),
+	sf::FloatRect({0.f, 0.f}, {WIDTH, WIDTH}),
 	GUIOrnamentStyle::LARGE,
 	GUIConstants::MAIN_COLOR,
 	GUIConstants::ORNAMENT_COLOR) {
@@ -189,10 +189,10 @@ void SpellDescriptionWindow::reload(SpellID id, const std::vector<SpellModifier>
 	m_interactionText.setString(interactionText);
 
 	float height = GUIConstants::TEXT_OFFSET;
-	height += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
-	height += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
+	height += m_titleText.getLocalBounds().size.y + GUIConstants::CHARACTER_SIZE_S;
+	height += m_descriptionText.getLocalBounds().size.y + 2 * GUIConstants::CHARACTER_SIZE_S;
 	height += lines * GUIConstants::CHARACTER_SIZE_S + (lines - 1) * 0.5f * GUIConstants::CHARACTER_SIZE_S;
-	height += interactionText.empty() ? 0 : m_interactionText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	height += interactionText.empty() ? 0 : m_interactionText.getLocalBounds().size.y + GUIConstants::CHARACTER_SIZE_S;
 	height += GUIConstants::TEXT_OFFSET;
 	
 	setHeight(height);
@@ -216,15 +216,15 @@ void SpellDescriptionWindow::setPosition(const sf::Vector2f& position) {
 
 	m_titleText.setPosition(pos);
 
-	pos.y += m_titleText.getLocalBounds().height + GUIConstants::CHARACTER_SIZE_S;
+	pos.y += m_titleText.getLocalBounds().size.y + GUIConstants::CHARACTER_SIZE_S;
 
 	m_descriptionText.setPosition(pos);
 
-	pos.y += m_descriptionText.getLocalBounds().height + 2 * GUIConstants::CHARACTER_SIZE_S;
+	pos.y += m_descriptionText.getLocalBounds().size.y + 2 * GUIConstants::CHARACTER_SIZE_S;
 
 	m_whiteText.setPosition(pos);
 	m_coloredText.setPosition(pos);
-	m_interactionText.setPosition(sf::Vector2f(pos.x, m_boundingBox.top + m_boundingBox.height - 3 * GUIConstants::CHARACTER_SIZE_S));
+	m_interactionText.setPosition({pos.x, m_boundingBox.position.y + m_boundingBox.size.y - 3 * GUIConstants::CHARACTER_SIZE_S});
 }
 
 void SpellDescriptionWindow::render(sf::RenderTarget& renderTarget) {

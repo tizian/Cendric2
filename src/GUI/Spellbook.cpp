@@ -19,7 +19,7 @@ Spellbook::Spellbook(WorldInterface* _interface, bool modifiable) {
 
 void Spellbook::init() {
 	// init window
-	sf::FloatRect box(GUIConstants::LEFT, GUIConstants::TOP, WIDTH, GUIConstants::GUI_WINDOW_HEIGHT);
+	sf::FloatRect box({GUIConstants::LEFT, GUIConstants::TOP}, {WIDTH, GUIConstants::GUI_WINDOW_HEIGHT});
 	m_window = new Window(box,
 		GUIOrnamentStyle::LARGE,
 		GUIConstants::MAIN_COLOR,
@@ -46,7 +46,7 @@ void Spellbook::init() {
 	m_emptyText.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_emptyText.setString(g_textProvider->getText("NoSpells"));
 	const sf::FloatRect bounds = m_emptyText.getBounds();
-	m_emptyText.setPosition(box.left + 0.5f * (box.width - bounds.width), box.top + 0.5f * (box.height - bounds.height));
+	m_emptyText.setPosition({box.position.x + 0.5f * (box.size.x - bounds.size.x), box.position.y + 0.5f * (box.size.y - bounds.size.y)});
 
 	reload();
 }
@@ -446,10 +446,7 @@ void Spellbook::selectTab(SpellType type) {
 		break;
 	}
 	// center text
-	m_selectedTabText.setPosition(
-		m_window->getPosition().x +
-		WIDTH / 2 -
-		m_selectedTabText.getLocalBounds().width / 2, m_selectedTabText.getPosition().y);
+	m_selectedTabText.setPosition({m_window->getPosition().x + WIDTH / 2 - m_selectedTabText.getLocalBounds().size.x / 2, m_selectedTabText.getPosition().y});
 
 	if (reload) {
 		m_weaponWindow->reload();
@@ -496,23 +493,23 @@ void Spellbook::reload() {
 
 	if (nTabs > 0) {
 		m_tabBar = new TexturedTabBar();
-		m_tabBar->init(sf::FloatRect(x, y, width, height), nTabs);
+		m_tabBar->init(sf::FloatRect({x, y}, {width, height}), nTabs);
 
 		for (int i = 0; i < nTabs; ++i) {
 			if (m_tabTypes[i] == SpellType::VOID) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect(0, 0, 35, 35));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect({0, 0}, {35, 35}));
 			}
 			else if (m_tabTypes[i] == SpellType::Elemental) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect(35, 0, 35, 35));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect({35, 0}, {35, 35}));
 			}
 			else if (m_tabTypes[i] == SpellType::Divine) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect(140, 0, 35, 35));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect({140, 0}, {35, 35}));
 			}
 			else if (m_tabTypes[i] == SpellType::Necromancy) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect(105, 0, 35, 35));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect({105, 0}, {35, 35}));
 			}
 			else if (m_tabTypes[i] == SpellType::Twilight) {
-				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect(70, 0, 35, 35));
+				m_tabBar->getTabButton(i)->setTexture(g_resourceManager->getTexture(GlobalResource::TEX_SPELLBOOKTABS), sf::IntRect({70, 0}, {35, 35}));
 			}
 		}
 	}

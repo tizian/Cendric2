@@ -15,7 +15,7 @@ FallingTile::FallingTile(LevelScreen* levelScreen) :
 bool FallingTile::init(const LevelTileProperties& properties) {
 	m_initialHeight = getPosition().y + getPositionOffset().y;
 	setSpriteOffset(sf::Vector2f(-3.f, -3.f));
-	setBoundingBox(sf::FloatRect(0.f, 0.f, TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {TILE_SIZE_F - 6.f, TILE_SIZE_F - 6.f}));
 	m_tileState = FallingTileState::Idle;
 	
 	return true;
@@ -27,7 +27,7 @@ void FallingTile::loadAnimation(int skinNr) {
 
 	Animation* idleAnimation = new Animation(sf::seconds(10.f));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(0, skinNr * TILE_SIZE, TILE_SIZE, TILE_SIZE));
+	idleAnimation->addFrame(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
@@ -116,12 +116,12 @@ bool FallingTile::isCurrentlyColliding() {
 
 void FallingTile::checkCollisions(const sf::Vector2f& nextPosition) {
 	const sf::FloatRect& bb = *getBoundingBox();
-	sf::FloatRect nextBoundingBoxY(bb.left, nextPosition.y, bb.width, bb.height);
+	sf::FloatRect nextBoundingBoxY({bb.position.x, nextPosition.y}, {bb.size.x, bb.size.y});
 	WorldCollisionQueryRecord rec;
 
 	rec.excludedGameObject = this;
 
-	bool isMovingDown = nextPosition.y > bb.top;
+	bool isMovingDown = nextPosition.y > bb.position.y;
 
 	// check for collision on y axis
 	rec.boundingBox = nextBoundingBoxY;

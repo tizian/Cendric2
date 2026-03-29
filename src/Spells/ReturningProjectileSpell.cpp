@@ -12,7 +12,7 @@ void ReturningProjectileSpell::init(const SpellData& data) {
 
 	Animation* spellAnimation = new Animation();
 	spellAnimation->setSpriteSheet(g_resourceManager->getTexture(data.spritesheetPath));
-	spellAnimation->addFrame(sf::IntRect(0, data.skinNr * 30, 90, 30));
+	spellAnimation->addFrame(sf::IntRect({0, data.skinNr * 30}, {90, 30}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -41,13 +41,13 @@ void ReturningProjectileSpell::calculateUnboundedVelocity(const sf::Time& frameT
 void ReturningProjectileSpell::checkCollisions(const sf::Vector2f& nextPosition) {
 	if (m_isReturning) return;
 
-	sf::FloatRect nextBoundingBoxX(nextPosition.x, getBoundingBox()->top, getBoundingBox()->width, getBoundingBox()->height);
-	sf::FloatRect nextBoundingBoxY(getBoundingBox()->left, nextPosition.y, getBoundingBox()->width, getBoundingBox()->height);
+	sf::FloatRect nextBoundingBoxX({nextPosition.x, getBoundingBox()->position.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
+	sf::FloatRect nextBoundingBoxY({getBoundingBox()->position.x, nextPosition.y}, {getBoundingBox()->size.x, getBoundingBox()->size.y});
 	WorldCollisionQueryRecord rec;
 	rec.collisionDirection = CollisionDirection::Down;
 
-	bool isMovingY = nextPosition.y != getBoundingBox()->top;
-	bool isMovingX = nextPosition.x != getBoundingBox()->left;
+	bool isMovingY = nextPosition.y != getBoundingBox()->position.y;
+	bool isMovingX = nextPosition.x != getBoundingBox()->position.x;
 	bool reflected = false;
 	// check for collision on x axis
 	rec.boundingBox = nextBoundingBoxX;

@@ -55,8 +55,8 @@ bool WardenEnemy::isMainCharInRange() {
 	auto const& bb = *m_mainChar->getBoundingBox();
 	auto const& circle = m_circleSpawner->center;
 
-	float deltaX = circle.x - std::max(bb.left, std::min(circle.x, bb.left + bb.width));
-	float deltaY = circle.y - std::max(bb.top, std::min(circle.y, bb.top + bb.height));
+	float deltaX = circle.x - std::max(bb.position.x, std::min(circle.x, bb.position.x + bb.size.x));
+	float deltaY = circle.y - std::max(bb.position.y, std::min(circle.y, bb.position.y + bb.size.y));
 	bool inRange = (deltaX * deltaX + deltaY * deltaY) < (m_observedRange * m_observedRange);
 	return inRange;
 }
@@ -88,49 +88,49 @@ void WardenEnemy::updateObservedRange() {
 }
 
 void WardenEnemy::loadAnimation(int skinNr) {
-	setBoundingBox(sf::FloatRect(0.f, 0.f, 50.f, 50.f));
+	setBoundingBox(sf::FloatRect({0.f, 0.f}, {50.f, 50.f}));
 	const sf::Texture* tex = g_resourceManager->getTexture(getSpritePath());
 
 	// Idle animation
 	Animation* idleAnimation = new Animation(sf::milliseconds(150));
 	idleAnimation->setSpriteSheet(tex);
-	idleAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
-	idleAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 50));
-	idleAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
-	idleAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 50));
+	idleAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 50}));
+	idleAnimation->addFrame(sf::IntRect({0 * 50, 0}, {50, 50}));
+	idleAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 50}));
+	idleAnimation->addFrame(sf::IntRect({2 * 50, 0}, {50, 50}));
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
 	// Blinking animation
 	Animation* blinkingAnimation = new Animation(sf::milliseconds(150));
 	blinkingAnimation->setSpriteSheet(tex);
-	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 50));
-	blinkingAnimation->addFrame(sf::IntRect(10 * 50, 0, 50, 50));
-	blinkingAnimation->addFrame(sf::IntRect(11 * 50, 0, 50, 50));
-	blinkingAnimation->addFrame(sf::IntRect(11 * 50, 0, 50, 50));
-	blinkingAnimation->addFrame(sf::IntRect(10 * 50, 0, 50, 50));
-	blinkingAnimation->addFrame(sf::IntRect(9 * 50, 0, 50, 50));
+	blinkingAnimation->addFrame(sf::IntRect({9 * 50, 0}, {50, 50}));
+	blinkingAnimation->addFrame(sf::IntRect({10 * 50, 0}, {50, 50}));
+	blinkingAnimation->addFrame(sf::IntRect({11 * 50, 0}, {50, 50}));
+	blinkingAnimation->addFrame(sf::IntRect({11 * 50, 0}, {50, 50}));
+	blinkingAnimation->addFrame(sf::IntRect({10 * 50, 0}, {50, 50}));
+	blinkingAnimation->addFrame(sf::IntRect({9 * 50, 0}, {50, 50}));
 	addAnimation(GameObjectState::Blinking, blinkingAnimation);
 
 	// Looking Animation
 	Animation* lookingAnimation = new Animation(sf::milliseconds(150));
 	lookingAnimation->setSpriteSheet(tex);
-	lookingAnimation->addFrame(sf::IntRect(3 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(5 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(4 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(3 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect({3 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({4 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({5 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({4 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({3 * 50, 0}, {50, 50}));
 
-	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(0 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(2 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(1 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({0 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({2 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({1 * 50, 0}, {50, 50}));
 
-	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(8 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(7 * 50, 0, 50, 50));
-	lookingAnimation->addFrame(sf::IntRect(6 * 50, 0, 50, 50));
+	lookingAnimation->addFrame(sf::IntRect({6 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({7 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({8 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({7 * 50, 0}, {50, 50}));
+	lookingAnimation->addFrame(sf::IntRect({6 * 50, 0}, {50, 50}));
 	addAnimation(GameObjectState::Looking, lookingAnimation);
 
 	// initial values
@@ -143,7 +143,7 @@ void WardenEnemy::loadAnimation(int skinNr) {
 void WardenEnemy::loadComponents() {
 	// light
 	LightComponent* lightComponent = new LightComponent(LightData(
-		sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f), 250.f, 0.8f), this);
+		sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f), 250.f, 0.8f), this);
 	addComponent(lightComponent);
 
 	// particles
@@ -155,7 +155,7 @@ void WardenEnemy::loadComponents() {
 
 	// Generators
 	m_circleSpawner = new particles::CircleSpawner();
-	m_circleSpawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->width / 2.f, getPosition().y + getBoundingBox()->height / 2.f);
+	m_circleSpawner->center = sf::Vector2f(getPosition().x + getBoundingBox()->size.x / 2.f, getPosition().y + getBoundingBox()->size.y / 2.f);
 	m_circleSpawner->radius = sf::Vector2f(m_observedRange, m_observedRange);
 	data.spawner = m_circleSpawner;
 
@@ -186,7 +186,7 @@ void WardenEnemy::loadComponents() {
 	data.timeGen = timeGen;
 
 	m_pc = new ParticleComponent(data, this);
-	m_pc->setOffset(sf::Vector2f(m_boundingBox.width * 0.5f, m_boundingBox.height * 0.5f));
+	m_pc->setOffset(sf::Vector2f(m_boundingBox.size.x * 0.5f, m_boundingBox.size.y * 0.5f));
 	addComponent(m_pc);
 
 	updateObservedRange();

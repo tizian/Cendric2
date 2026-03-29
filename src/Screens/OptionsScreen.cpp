@@ -45,7 +45,7 @@ void OptionsScreen::execOnEnter() {
 	// title
 	m_title = new BitmapText(g_textProvider->getText("Options"), TextStyle::Shadowed);
 	m_title->setCharacterSize(GUIConstants::CHARACTER_SIZE_XXXL);
-	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().width) / 2.f, 30.f));
+	m_title->setPosition(sf::Vector2f((WINDOW_WIDTH - m_title->getLocalBounds().size.x) / 2.f, 30.f));
 
 	float distFromTop = 170.f;
 	float distFromLeft = 150.f;
@@ -196,14 +196,14 @@ void OptionsScreen::execOnEnter() {
 	checkFPSSlider();
 
 	// back
-	Button* button = new Button(sf::FloatRect(60, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
+	Button* button = new Button(sf::FloatRect({60, WINDOW_HEIGHT - 80}, {200, 50}), GUIOrnamentStyle::SMALL);
 	button->setText("Back");
 	button->setGamepadKey(Key::Escape);
 	button->setOnClick(std::bind(&OptionsScreen::onBack, this));
 	addObject(button);
 
 	// apply
-	button = new Button(sf::FloatRect(WINDOW_WIDTH - 260, WINDOW_HEIGHT - 80, 200, 50), GUIOrnamentStyle::SMALL);
+	button = new Button(sf::FloatRect({WINDOW_WIDTH - 260, WINDOW_HEIGHT - 80}, {200, 50}), GUIOrnamentStyle::SMALL);
 	button->setText("Apply");
 	button->setGamepadKey(Key::Attack);
 	button->setOnClick(std::bind(&OptionsScreen::onApply, this));

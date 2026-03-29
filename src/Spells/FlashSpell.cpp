@@ -12,8 +12,8 @@ void FlashSpell::load(const SpellData& data, LevelMovableGameObject* mob, const 
 	
 	Animation* spellAnimation = new Animation(sf::milliseconds(200));
 	spellAnimation->setSpriteSheet(tex);
-	spellAnimation->addFrame(sf::IntRect(0, 0, 120, 120));
-	spellAnimation->addFrame(sf::IntRect(120, 0, 120, 120));
+	spellAnimation->addFrame(sf::IntRect({0, 0}, {120, 120}));
+	spellAnimation->addFrame(sf::IntRect({120, 0}, {120, 120}));
 
 	addAnimation(GameObjectState::Idle, spellAnimation);
 
@@ -81,8 +81,8 @@ bool FlashSpell::getConfiguredRotateSprite() const {
 
 void FlashSpell::loadComponents() {
 	sf::Vector2f position(m_mob->getPosition());
-	position.x += (m_mob->getBoundingBox()->width / 2.f);
-	position.y += m_mob->getBoundingBox()->height - 20;
+	position.x += (m_mob->getBoundingBox()->size.x / 2.f);
+	position.y += m_mob->getBoundingBox()->size.y - 20;
 	position.x = m_isFlashingRight ? position.x - m_data.range : position.x + m_data.range;
 
 	ParticleComponentData data;

@@ -1,6 +1,7 @@
 #include "Cutscene/Cutscene.h"
 #include "GUI/GUIConstants.h"
 #include "World/GameObject.h"
+#include <optional>
 
 const sf::Vector2f Cutscene::TEXT_OFFSET = sf::Vector2f(100.f, 40.f);
 
@@ -75,11 +76,11 @@ void Cutscene::update(const sf::Time& frameTime) {
 	}
 
 	const sf::Color& tc = m_cutsceneText.getColor();
-	m_cutsceneText.setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
+	m_cutsceneText.setColor(sf::Color(tc.r, tc.g, tc.b, static_cast<std::uint8_t>(scale * 255)));
 
 	for (size_t i = 0; i < m_cutsceneImages.size(); ++i) {
 		const sf::Color& tc = m_cutsceneImages.at(i).getColor();
-		m_cutsceneImages.at(i).setColor(sf::Color(tc.r, tc.g, tc.b, (sf::Uint8)(scale * 255)));
+		m_cutsceneImages.at(i).setColor(sf::Color(tc.r, tc.g, tc.b, static_cast<std::uint8_t>(scale * 255)));
 	}
 }
 
@@ -105,13 +106,13 @@ void Cutscene::setNextText() {
 	if (text.centered) {
 		m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_XXL);
 		m_cutsceneText.setPosition(sf::Vector2f(
-			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width), 
-			0.5f * (WINDOW_HEIGHT - m_cutsceneText.getLocalBounds().height)));
+			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().size.x), 
+			0.5f * (WINDOW_HEIGHT - m_cutsceneText.getLocalBounds().size.y)));
 	}
 	else {
 		m_cutsceneText.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 		m_cutsceneText.setPosition(sf::Vector2f(
-			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().width), 
+			0.5f * (WINDOW_WIDTH - m_cutsceneText.getLocalBounds().size.x), 
 			TEXT_OFFSET.y));
 	}
 	
@@ -136,25 +137,25 @@ void Cutscene::setNextStep() {
 	m_cutsceneImages.clear();
 
 	for (auto& cutsceneImage : step.images) {
-		sf::Sprite sprite;
-		sprite.setTexture(*g_resourceManager->getTexture(cutsceneImage.imagePath));
+		std::optional<sf::Sprite> sprite;
+		sprite.emplace(*g_resourceManager->getTexture(cutsceneImage.imagePath));
 
 		if (cutsceneImage.velocity.x >= 0.f && cutsceneImage.velocity.y >= 0.f) {
-			sprite.setPosition(
-				WINDOW_WIDTH - sprite.getLocalBounds().width,
-				WINDOW_HEIGHT - sprite.getLocalBounds().height);
+			sprite->setPosition(sf::Vector2f(
+				WINDOW_WIDTH - sprite->getLocalBounds().size.x,
+				WINDOW_HEIGHT - sprite->getLocalBounds().size.y));
 		}
 		else if (cutsceneImage.velocity.x < 0.f && cutsceneImage.velocity.y >= 0.f) {
-			sprite.setPosition(0.f, WINDOW_HEIGHT - sprite.getLocalBounds().height);
+			sprite->setPosition(sf::Vector2f(0.f, WINDOW_HEIGHT - sprite->getLocalBounds().size.y));
 		}
 		else if (cutsceneImage.velocity.x >= 0.f && cutsceneImage.velocity.y < 0.f) {
-			sprite.setPosition(WINDOW_WIDTH - sprite.getLocalBounds().width, 0.f);
+			sprite->setPosition(sf::Vector2f(WINDOW_WIDTH - sprite->getLocalBounds().size.x, 0.f));
 		}
 		else {
-			sprite.setPosition(0.f, 0.f);
+			sprite->setPosition(sf::Vector2f(0.f, 0.f));
 		}
 
-		m_cutsceneImages.push_back(sprite);
+		m_cutsceneImages.push_back(*sprite);
 	}
 
 	m_fadeTime = step.fadeTime;
