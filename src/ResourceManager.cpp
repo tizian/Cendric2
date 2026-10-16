@@ -424,7 +424,8 @@ void ResourceManager::updateMusic(const sf::Time& frameTime) {
 		m_music.isFading = false;
 	}
 	float newScale = m_music.fadingTime / m_music.FADING_TIME;
-	m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
+	if (m_music.previousMusic)
+		m_music.previousMusic->setVolume(newScale * m_configuration.volumeMusic);
 	m_music.currentMusic->setVolume((1.f - newScale) * m_configuration.volumeMusic);
 }
 
@@ -434,7 +435,8 @@ void ResourceManager::notifyVolumeChanged() {
 	float trueVolume = !soundOn ? 0.f : currentVolume;
 
 	float newScale = m_music.fadingTime / m_music.FADING_TIME;
-	m_music.previousMusic->setVolume(newScale * trueVolume);
+	if (m_music.previousMusic)
+		m_music.previousMusic->setVolume(newScale * trueVolume);
 	m_music.currentMusic->setVolume((1.f - newScale) * trueVolume);
 }
 

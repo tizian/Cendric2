@@ -18,7 +18,7 @@ void ScrollHelper::setPosition(const sf::Vector2f& position) {
 
 void ScrollHelper::render(sf::RenderTarget& target) {
 	texture.display();
-	m_sprite->setTexture(texture.getTexture());
+	m_sprite = std::make_optional<sf::Sprite>(texture.getTexture());
 	target.draw(*m_sprite);
 	texture.clear(sf::Color(0, 0, 0, 0));
 }

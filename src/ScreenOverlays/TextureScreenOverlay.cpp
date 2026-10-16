@@ -23,7 +23,7 @@ void TextureScreenOverlay::render(sf::RenderTarget& renderTarget) {
 
 void TextureScreenOverlay::setSpriteTexture(const sf::Texture* texture) {
 	if (!m_sprite) m_sprite.emplace(*texture);
-	else m_sprite->setTexture(*texture);
+	else m_sprite = std::make_optional<sf::Sprite>(*texture);
 }
 
 void TextureScreenOverlay::setSpriteTextureRect(const sf::IntRect& rect) {

@@ -378,7 +378,7 @@ void LevelScreen::flushTexture(sf::RenderTarget& renderTarget, sf::RenderTexture
 	renderStates.blendMode = mode;
 
 	renderTexture.display();
-	m_sprite->setTexture(renderTexture.getTexture());
+	m_sprite = std::make_optional<sf::Sprite>(renderTexture.getTexture());
 	renderTarget.setView(renderTarget.getDefaultView());
 	renderTarget.draw(*m_sprite, renderStates);
 	renderTarget.setView(oldView);
@@ -421,7 +421,7 @@ void LevelScreen::render(sf::RenderTarget& renderTarget) {
 	m_renderTexture.display();
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
-	m_sprite->setTexture(m_renderTexture.getTexture());
+	m_sprite = std::make_optional<sf::Sprite>(m_renderTexture.getTexture());
 	m_lightLayerShader.setUniform("ambientLevel", m_currentLevel.getWeather().ambientDimming);
 	m_lightLayerShader.setUniform("lightDimming", m_currentLevel.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());
