@@ -69,7 +69,7 @@ void Button::render(sf::RenderTarget& renderTarget) {
 		reloadTextPosition();
 		renderTarget.draw(m_keyText);
 	}
-	if (m_hasTexture) renderTarget.draw(*m_textureLayer);
+	if (m_hasTexture && m_textureLayer.has_value()) renderTarget.draw(*m_textureLayer);
 }
 
 void Button::setPosition(const sf::Vector2f& pos) {
@@ -154,7 +154,7 @@ void Button::setTexture(const sf::Texture* texture) {
 	sf::Vector2f pos = getPosition();
 	sf::Vector2f size = getSize();
 
-	m_textureLayer->setTexture(*texture);
+	m_textureLayer = std::make_optional<sf::Sprite>(*texture);
 	m_textureOffset = 0.5f * (size - textureSize);
 	m_textureLayer->setPosition(pos + m_textureOffset);
 }

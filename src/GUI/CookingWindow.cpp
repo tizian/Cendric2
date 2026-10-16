@@ -293,8 +293,8 @@ CookingOption::CookingOption(const std::string& itemID, const std::string& cooke
 
 	std::basic_string<std::uint32_t> utf32line;
 	sf::Utf8::toUtf32(text.begin(), text.end(), std::back_inserter(utf32line));
+	m_text = std::make_optional<sf::Text>(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text->setString(sf::String::fromUtf32(utf32line.begin(), utf32line.end()));
-	m_text->setFont(*g_resourceManager->getFont(GlobalResource::FONT_TTF_DIALOGUE));
 	m_text->setCharacterSize(GUIConstants::CHARACTER_SIZE_DIALOGUE);
 	m_text->setFillColor(COLOR_WHITE);
 	setBoundingBox(sf::FloatRect({0.f, 0.f}, {m_text->getLocalBounds().size.x, 20.f}));

@@ -120,7 +120,7 @@ void BookWindow::setPage(int index) {
 
 	// handle texture
 	if (sf::Texture* tex = g_resourceManager->getTexture(page->texture_path)) {
-		m_sprite->setTexture(*tex, true);
+		m_sprite = std::make_optional<sf::Sprite>(*tex);
 		m_showSprite = true;
 	}
 	else {

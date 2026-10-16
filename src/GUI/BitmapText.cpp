@@ -12,7 +12,7 @@ const int NUM_GLYPHS_V = 14;
 const int TAB_TO_SPACES = 4;
 
 BitmapText::BitmapText() {
-	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 	m_color = COLOR_WHITE;
 	m_style = TextStyle::Default;
 	m_characterSize = 8;
@@ -24,7 +24,7 @@ BitmapText::BitmapText() {
 BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment alignment) {
 	m_style = style;
 	m_string = string;
-	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
 	m_lineSpacing = 0.2f;
@@ -34,7 +34,7 @@ BitmapText::BitmapText(const std::string& string, TextStyle style, TextAlignment
 
 BitmapText::BitmapText(const std::string& string, TextAlignment alignment) {
 	m_style = TextStyle::Default;
-	m_vertices = sf::VertexArray(sf::PrimitiveType::TriangleStrip);
+	m_vertices = sf::VertexArray(sf::PrimitiveType::Triangles);
 	m_string = string;
 	m_color = COLOR_WHITE;
 	m_characterSize = 8;
@@ -198,10 +198,23 @@ void BitmapText::init() {
 		float u = (c % NUM_GLYPHS_U) * du;
 		float v = (c / NUM_GLYPHS_U) * dv;
 
-		m_vertices.append(sf::Vertex{{curX, curY}, m_color, {u, v}});
-		m_vertices.append(sf::Vertex{{curX + dx, curY}, m_color, {u + du, v}});
-		m_vertices.append(sf::Vertex{{curX + dx, curY + dy}, m_color, {u + du, v + dv}});
-		m_vertices.append(sf::Vertex{{curX, curY + dy}, m_color, {u, v + dv}});
+		const float x0 = curX;
+		const float y0 = curY;
+		const float x1 = curX + dx;
+		const float y1 = curY + dy;
+
+		const float u0 = u;
+		const float v0 = v;
+		const float u1 = u + du;
+		const float v1 = v + dv;
+
+		m_vertices.append(sf::Vertex{{x0, y0}, m_color, {u0, v0}});
+		m_vertices.append(sf::Vertex{{x1, y0}, m_color, {u1, v0}});
+		m_vertices.append(sf::Vertex{{x1, y1}, m_color, {u1, v1}});
+
+		m_vertices.append(sf::Vertex{{x0, y0}, m_color, {u0, v0}});
+		m_vertices.append(sf::Vertex{{x1, y1}, m_color, {u1, v1}});
+		m_vertices.append(sf::Vertex{{x0, y1}, m_color, {u0, v1}});
 
 		curX += dx;
 	}

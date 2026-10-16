@@ -222,7 +222,7 @@ void MapScreen::render(sf::RenderTarget& renderTarget) {
 	m_renderTexture.display();
 
 	// Render extra buffer with light level shader to window		(Dimming level + lights added as transparent layer on top of map)
-	m_sprite->setTexture(m_renderTexture.getTexture());
+	m_sprite = std::make_optional<sf::Sprite>(m_renderTexture.getTexture());
 	m_lightLayerShader.setUniform("ambientLevel", m_currentMap.getWeather().ambientDimming);
 	m_lightLayerShader.setUniform("lightDimming", m_currentMap.getWeather().lightDimming);
 	renderTarget.setView(renderTarget.getDefaultView());

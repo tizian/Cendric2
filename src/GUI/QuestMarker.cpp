@@ -12,7 +12,7 @@ QuestMarker::QuestMarker(const QuestData& questData, CharacterCore* core) {
 	m_isInputInDefaultView = true;
 	
 	setBoundingBox(sf::FloatRect({0.f, 0.f}, {static_cast<float>(SIZE), static_cast<float>(SIZE)}));
-	m_sprite->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
+	m_sprite = std::make_optional<sf::Sprite>(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_QUESTMARKERS));
 
 	m_tooltipComponent = new TooltipWindowComponent("", this);
 	m_tooltipComponent->setWindowOffset(sf::Vector2f(0.f, SIZE + 4.f));

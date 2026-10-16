@@ -9,12 +9,11 @@ const int GUITabButton::OFFSET = 4;
 const int GUITabButton::SIZE = ICON_SIZE + 2 * OFFSET;
 
 GUITabButton::GUITabButton() {
-	m_border->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND));
+	m_border = std::make_optional<sf::Sprite>(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_BUTTON_ROUND));
 	
 	m_background.setRadius(0.5f * SIZE);
 	m_background.setFillColor(m_backgroundColor);
 	
-	m_icon->setTextureRect(sf::IntRect({0, 0}, {ICON_SIZE, ICON_SIZE}));
 
 	GameObject::setDebugBoundingBox(sf::Color::Blue);
 	setInputInDefaultView(true);
@@ -39,7 +38,8 @@ void GUITabButton::click() {
 
 void GUITabButton::setTexture(const sf::Texture* tex, int x) {
 	if (tex == nullptr) return;
-	m_icon->setTexture(*tex);
+	m_icon = std::make_optional<sf::Sprite>(*tex);
+	m_icon->setTextureRect(sf::IntRect({0, 0}, {ICON_SIZE, ICON_SIZE}));
 	auto rect = m_icon->getTextureRect();
 	rect.position.x = x;
 	m_icon->setTextureRect(rect);

@@ -13,7 +13,7 @@ SpeechBubble::SpeechBubble(LevelMovableGameObject* owner) : GameObject() {
 
 	m_mainLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ROUNDED_RECTANGLE), COLOR_TRANS_BLACK, m_boundingBox.size.x, m_boundingBox.size.y);
 	m_ornamentLayer = SlicedSprite(g_resourceManager->getTexture(GlobalResource::TEX_GUI_ORNAMENT_NONE), COLOR_WHITE, m_boundingBox.size.x, m_boundingBox.size.y);
-	m_pointer->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPEECHBUBBLE_POINTER));
+	m_pointer = std::make_optional<sf::Sprite>(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_SPEECHBUBBLE_POINTER));
 
 	m_text.setCharacterSize(GUIConstants::CHARACTER_SIZE_M);
 	m_text.setColor(COLOR_WHITE);
