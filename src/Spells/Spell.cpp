@@ -45,6 +45,8 @@ void Spell::initialize(const SpellData& data, GameObject* go, const sf::Vector2f
 
 	// handle sound
 	if (!data.spellSoundPaths.empty()) {
+		if (!m_sound)
+			m_sound = std::make_optional<sf::Sound>(m_dummyBuffer);
 		g_resourceManager->playSound(*m_sound, data.spellSoundPaths.at(rand() % data.spellSoundPaths.size()), getCenter(), m_mainChar->getPosition(), true, data.isSpellSoundLooping);
 	}
 

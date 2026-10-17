@@ -63,6 +63,8 @@ public:
 
 protected:
 	SpellData m_data;
+	// Allow us to initialize sound without a buffer ready
+	sf::SoundBuffer m_dummyBuffer;
 	std::optional<sf::Sound> m_sound;
 	
 	const Level* m_level;
