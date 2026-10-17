@@ -18,18 +18,13 @@ jobs:
     steps:
     - name: Install Linux Dependencies
       if: runner.os == 'Linux'
-      run: sudo apt-get update && sudo apt-get install libxrandr-dev libxcursor-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev
+      run: sudo apt-get update && sudo apt-get install libxrandr-dev libxcursor-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev
 
     - name: Checkout Code
       uses: actions/checkout@v2
       with:
         fetch-depth: 1
         submodules: recursive
-
-    - name: Patch SFML on Linux
-      if: runner.os == 'Linux'
-      shell: bash
-      run: curl https://github.com/SFML/SFML/commit/87aaa9e145659d6a8fc193ab8540cf847d4d0def.patch | git apply --directory=ext/sfml
 
     - name: Configure CMake
       shell: bash
