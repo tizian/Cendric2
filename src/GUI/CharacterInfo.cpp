@@ -346,8 +346,12 @@ void CharacterInfo::updateReputation() {
 
 	auto* tex = g_resourceManager->getTexture(GlobalResource::TEX_GUILD_ICONS);
 	int texHeight = 100;
-	if (tex != nullptr)
-		m_guildSprite->setTexture(*tex);
+	if (tex != nullptr) {
+		if (!m_guildSprite)
+			m_guildSprite = std::make_optional<sf::Sprite>(*tex);
+		else
+			m_guildSprite->setTexture(*tex);
+	}
 	m_guildSprite->setPosition({LEFT + (WIDTH - 100) * 0.5f, yOffset});
 	if (m_core->getData().guild == FractionID::VOID) {
 		m_guildSprite->setTextureRect(sf::IntRect({0, 0}, {0, 0}));
