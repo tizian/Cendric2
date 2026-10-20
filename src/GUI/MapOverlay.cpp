@@ -13,6 +13,7 @@
 #include "GameObjectComponents/TooltipWindowComponent.h"
 #include "Structs/LevelData.h"
 #include "Controller/GamepadMappings/GamepadMappings.h"
+#include <optional>
 
 const float MapOverlay::TOP = 30.f;
 const float MapOverlay::LEFT = GUIConstants::LEFT;
@@ -176,7 +177,7 @@ MapOverlayData* MapOverlay::createMapOverlayData(const std::string& id, const sf
 	MapOverlayData* data = new MapOverlayData();
 	data->mapId = id;
 	data->mapSize = size;
-	data->map = sprite;
+	data->map = std::make_optional<sf::Sprite>(sprite);
 
 	sf::Vector2f mapSize = sf::Vector2f(data->mapSize.x * TILE_SIZE_F, data->mapSize.y * TILE_SIZE_F);
 	sf::Vector2f spriteSize = sf::Vector2f(static_cast<float>(data->map->getTextureRect().size.x), static_cast<float>(data->map->getTextureRect().size.y));
@@ -292,7 +293,10 @@ void MapOverlay::renderLevelOverlay(float scale) {
 	m_levelOverlayTexture.loadFromImage(img);
 
 	// and save as sprite
-	(*m_levelOverlaySprite).setTexture(m_levelOverlayTexture, true);
+	if (!m_levelOverlaySprite)
+		m_levelOverlaySprite = std::make_optional<sf::Sprite>(m_levelOverlayTexture);
+	else
+		m_levelOverlaySprite->setTexture(m_levelOverlayTexture, true);
 }
 
 void MapOverlay::drawOverlayTexture(sf::Image& image, const sf::Vector2f& pos, int posX, int posY) {
