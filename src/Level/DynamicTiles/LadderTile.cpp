@@ -45,7 +45,10 @@ void LadderTile::loadAnimation(int skinNr) {
 
 	// load arrow
 	const sf::Texture* texture = g_resourceManager->getTexture(GlobalResource::TEX_GUI_LADDER_ARROW);
-	m_arrow->setTexture(*texture);
+	if (!m_arrow)
+		m_arrow = std::make_optional<sf::Sprite>(*texture);
+	else
+		m_arrow->setTexture(*texture);
 }
 
 void LadderTile::update(const sf::Time& frametime) {
