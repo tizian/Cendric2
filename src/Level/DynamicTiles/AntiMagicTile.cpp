@@ -64,7 +64,10 @@ void AntiMagicTile::loadAnimation(int skinNr) {
 	setState(GameObjectState::Idle);
 	playCurrentAnimation(false);
 
-	m_otherSprite->setTexture(*tex);
+	if (!m_otherSprite)
+		m_otherSprite = std::make_optional<sf::Sprite>(*tex);
+	else
+		m_otherSprite->setTexture(*tex);
 	m_otherSprite->setTextureRect(sf::IntRect({0, skinNr * TILE_SIZE}, {TILE_SIZE, TILE_SIZE}));
 	m_otherSprite->setScale({-1.f, 1.f});
 }
