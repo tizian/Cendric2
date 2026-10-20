@@ -27,6 +27,7 @@ if (NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 if (APPLE)
+	enable_language(OBJCXX)
     option(SFML_BUILD_FRAMEWORKS "" ON)
 
     # add some default value for some additional macOS variable
