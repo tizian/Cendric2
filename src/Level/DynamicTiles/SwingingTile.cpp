@@ -59,33 +59,33 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// a swinging tile creates its own texture out of several images.
 
 	sf::Image img;
-	img.resize({TILE_SIZE * 3, (m_size + 1) * TILE_SIZE});
+	img.resize(sf::Vector2u(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE));
 
 	sf::Image fullImg;
 	fullImg.loadFromFile(getResourcePath(getSpritePath()));
 
 	sf::Image texImg;
-	texImg.resize({TILE_SIZE * 3, 2 * TILE_SIZE});
-	texImg.copy(fullImg, {0, 0}, sf::IntRect({0, TILE_SIZE * 2 * skinNr}, {TILE_SIZE * 3, TILE_SIZE * 2}));
+	texImg.resize(sf::Vector2u(TILE_SIZE * 3, 2 * TILE_SIZE));
+	texImg.copy(fullImg, {0, 0}, sf::IntRect(sf::Vector2i(0, TILE_SIZE * 2 * skinNr), { TILE_SIZE * 3, (TILE_SIZE * 2)}));
 
 	int length = m_size;
 
 	// that's the part below, the blade
-	img.copy(texImg, {0, TILE_SIZE * length}, sf::IntRect({0, TILE_SIZE}, {TILE_SIZE * 3, TILE_SIZE}));
+	img.copy(texImg, sf::Vector2u(0, TILE_SIZE * length), sf::IntRect(sf::Vector2i(0, TILE_SIZE), { TILE_SIZE * 3, TILE_SIZE }));
 	length--;
 
 	// that's the thing that holds on to the blade
-	img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({TILE_SIZE, 0}, {TILE_SIZE, TILE_SIZE}));
+	img.copy(texImg, sf::Vector2u(TILE_SIZE, TILE_SIZE * length), sf::IntRect(sf::Vector2i(TILE_SIZE, 0), { TILE_SIZE, TILE_SIZE }));
 	length--;
 
 	// here comes the thingys in between, usually a chain.
 	while (length > 0) {
-		img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({TILE_SIZE * 2, 0}, {TILE_SIZE, TILE_SIZE}));
+		img.copy(texImg, sf::Vector2u(TILE_SIZE, TILE_SIZE * length), sf::IntRect(sf::Vector2i(TILE_SIZE * 2, 0), { TILE_SIZE, TILE_SIZE }));
 		length--;
 	}
 
 	// that's the uppermost thingy that holds to the ceiling.
-	img.copy(texImg, {TILE_SIZE, TILE_SIZE * length}, sf::IntRect({0, 0}, {TILE_SIZE, TILE_SIZE}));
+	img.copy(texImg, sf::Vector2u(TILE_SIZE, TILE_SIZE * length), sf::IntRect(sf::Vector2i(0, 0), { TILE_SIZE, TILE_SIZE }));
 
 	// now convert to texture format
 	delete m_texture;
@@ -95,7 +95,7 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// and load the sprite
 	Animation* idleAnimation = new Animation();
 	idleAnimation->setSpriteSheet(m_texture);
-	idleAnimation->addFrame(sf::IntRect({0, 0}, {img.getSize().x, img.getSize().y}));
+	idleAnimation->addFrame(sf::IntRect({0, 0}, sf::Vector2i(img.getSize().x, img.getSize().y)));
 
 	addAnimation(GameObjectState::Idle, idleAnimation);
 
