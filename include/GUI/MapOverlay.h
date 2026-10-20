@@ -145,7 +145,7 @@ private:
 
 	std::vector<MapOverlayData*> m_maps;
 
-	std::optional<sf::Sprite> m_mainCharMarker;
+	sf::Sprite m_mainCharMarker;
 	sf::Image m_levelOverlayIcons;
 	std::optional<sf::Sprite> m_levelOverlaySprite;
 	sf::Texture m_levelOverlayTexture;
