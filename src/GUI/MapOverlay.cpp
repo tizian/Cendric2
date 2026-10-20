@@ -19,7 +19,8 @@ const float MapOverlay::LEFT = GUIConstants::LEFT;
 const float MapOverlay::MAX_WIDTH = WINDOW_WIDTH - 2 * LEFT;
 const float MapOverlay::MAX_HEIGHT = WINDOW_HEIGHT - 2 * TOP;
 
-MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar) {
+MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar)
+	: m_mainCharMarker(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS)) {
 	m_interface = interface;
 	m_screen = interface->getScreen();
 	m_mapTabBar = mapTabBar;
@@ -28,8 +29,7 @@ MapOverlay::MapOverlay(WorldInterface* interface, GUITabBar* mapTabBar) {
 
 	const World& map = *m_screen->getWorld();
 
-	m_mainCharMarker->setTexture(*g_resourceManager->getTexture(GlobalResource::TEX_GUI_LEVELOVERLAY_ICONS));
-	m_mainCharMarker->setTextureRect(sf::IntRect({0, 25}, {25, 25}));
+	m_mainCharMarker.setTextureRect(sf::IntRect({0, 25}, {25, 25}));
 
 	m_title.setCharacterSize(GUIConstants::CHARACTER_SIZE_L);
 	m_title.setTextStyle(TextStyle::Shadowed);
@@ -72,7 +72,7 @@ void MapOverlay::update(const sf::Time& frameTime) {
 
 	if (m_isOnCurrentMap) {
 		updateFogOfWar(map);
-		m_mainCharMarker->setPosition(m_position +
+		m_mainCharMarker.setPosition(m_position +
 			m_screen->getMainCharacter()->getCenter() * map->scale - sf::Vector2f(12.5f, 12.5f));
 	}
 
@@ -531,7 +531,7 @@ void MapOverlay::render(sf::RenderTarget& target) {
 	}
 
 	if (m_isOnCurrentMap)
-		target.draw(*m_mainCharMarker);
+		target.draw(m_mainCharMarker);
 
 	for (auto qm : m_questMarkers) {
 		qm->render(target);
