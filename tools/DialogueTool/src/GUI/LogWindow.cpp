@@ -11,12 +11,12 @@ void LogWindow::addLog(const std::string& logMessage, const sf::Color& color) {
 void LogWindow::update() {
 	ImGui::Begin("Log");
 	for (auto& log : m_logs) {
-		ImGui::PushStyleColor(ImGuiCol_Text, log.second);
+		ImGui::PushStyleColor(ImGuiCol_Text, log.second.toInteger());
 		ImGui::TextWrapped(log.first.c_str());
 		ImGui::PopStyleColor();
 		ImGui::Spacing();
 	}
 	// scroll to bottom of window
-	ImGui::SetScrollHere(1.f);
+	ImGui::SetScrollHereY(1.f);
 	ImGui::End();
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "imgui.h"
-#include "imgui-sfml.h"
+#include "imgui-SFML.h"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Clock.hpp>
@@ -12,8 +12,6 @@
 #ifdef _WIN32
 	#include <direct.h>
 #endif
-
-#define IM_ARRAYSIZE(_ARR)  ((int)(sizeof(_ARR)/sizeof(*_ARR)))
 
 // extern objects
 class ApplicationState;

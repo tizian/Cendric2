@@ -5,7 +5,7 @@
 void DialogueTool::run() {
 
 	// init window
-	sf::RenderWindow window(sf::VideoMode(1200, 720), "Cendric Dialogue Tool");
+	sf::RenderWindow window(sf::VideoMode({ 1200, 720 }), "Cendric Dialogue Tool");
 	window.setVerticalSyncEnabled(true);
 	ImGui::SFML::Init(window);
 
@@ -16,16 +16,17 @@ void DialogueTool::run() {
 	sf::Clock deltaClock;
 	bool isRunning = true;
 	while (isRunning) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			ImGui::SFML::ProcessEvent(event);
+		while (const std::optional event  = window.pollEvent()) {
+			if (event) {
+				ImGui::SFML::ProcessEvent(window, *event);
 
-			if (event.type == sf::Event::Closed) {
-				isRunning = false;
+				if (event->is<sf::Event::Closed>()) {
+					isRunning = false;
+				}
 			}
 		}
 
-		ImGui::SFML::Update(deltaClock.restart());
+		ImGui::SFML::Update(window, deltaClock.restart());
 		
 		mainWindow.update();
 		window.clear(sf::Color(50, 50, 60));
