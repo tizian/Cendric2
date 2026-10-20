@@ -13,13 +13,12 @@ jobs:
         platform:
         - { name: Windows VS2019, os: windows-latest, flags: -DCENDRIC_BUILD_DIALOGUE_TOOL=ON }
         - { name: Linux GCC,      os: ubuntu-latest,  flags: -DCENDRIC_BUILD_DIALOGUE_TOOL=OFF }
-        - { name: MacOS XCode,    os: macos-latest,   flags: -DCENDRIC_BUILD_DIALOGUE_TOOL=OFF -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON }
+        - { name: MacOS XCode,    os: macos-latest,   flags: -DCENDRIC_BUILD_DIALOGUE_TOOL=OFF -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON -DBUILD_SHARED_LIBS=ON }
 
     steps:
     - name: Install Linux Dependencies
       if: runner.os == 'Linux'
-      run: sudo apt-get update && sudo apt-get install libxrandr-dev libxcursor-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev
-
+      run: sudo apt-get update && sudo apt-get install libxrandr-dev libxcursor-dev libudev-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev libfreetype-dev libxi-dev libmbedtls-dev libssh2-1-dev libharfbuzz-dev
     - name: Checkout Code
       uses: actions/checkout@v2
       with:
