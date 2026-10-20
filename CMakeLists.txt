@@ -191,6 +191,8 @@ if (WIN32 AND CENDRIC_BUILD_DIALOGUE_TOOL)
         "${PROJECT_SOURCE_DIR}/tools/DialogueTool/src/*.cpp"
         "${PROJECT_SOURCE_DIR}/ext/imgui/imgui.cpp"
         "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_draw.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_tables.cpp"
+        "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_widgets.cpp"
         "${PROJECT_SOURCE_DIR}/ext/imgui/imgui_demo.cpp"
         "${PROJECT_SOURCE_DIR}/ext/imgui-sfml/imgui-SFML.cpp"
     )
