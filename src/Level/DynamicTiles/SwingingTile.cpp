@@ -59,7 +59,7 @@ void SwingingTile::loadAnimation(const int skinNr) {
 	// a swinging tile creates its own texture out of several images.
 
 	sf::Image img;
-	img.resize(sf::Vector2u(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE));
+	img.resize(sf::Vector2u(TILE_SIZE * 3, (m_size + 1) * TILE_SIZE), sf::Color::Transparent);
 
 	sf::Image fullImg;
 	fullImg.loadFromFile(getResourcePath(getSpritePath()));
