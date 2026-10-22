@@ -11,12 +11,12 @@ sf::RenderTexture* g_renderTexture;
 
 Game::Game() {
 	m_renderTexture.resize({WINDOW_WIDTH, WINDOW_HEIGHT});
-	reloadWindow();
 
 	m_mainSprite = std::make_optional<sf::Sprite>(m_renderTexture.getTexture());
 	
 	m_running = true;
 	m_screenManager = new ScreenManager(new SplashScreen());
+	reloadWindow();
 }
 
 Game::~Game() {
