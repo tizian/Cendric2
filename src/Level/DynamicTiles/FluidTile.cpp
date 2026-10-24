@@ -238,7 +238,7 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 	if (velocityNorm > 100.f && source) {
 		float distance = dist(sf::Vector2f(source->getBoundingBox()->position.x, source->getBoundingBox()->position.y), m_mainChar->getPosition());
 		if (distance > WINDOW_WIDTH) return;
-		if (!contains(m_soundMap, source)) {
+		if (!contains(m_soundMap, source) && !m_data.soundPath.empty()) {
 			auto* buffer = g_resourceManager->getSoundBuffer(m_data.soundPath);
 			m_soundMap.insert({ source, new sf::Sound(*buffer) });
 		}
@@ -246,7 +246,8 @@ void FluidTile::splash(const MovableGameObject* source, float xPosition, float w
 		float scale = 1.f - distance / WINDOW_WIDTH;
 		scale /= 2.f;
 
-		g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, false, scale);
+		if (contains(m_soundMap, source))
+			g_resourceManager->playSound(*m_soundMap.at(source), m_data.soundPath, false, false, scale);
 	}
 }
 
